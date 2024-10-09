@@ -1,0 +1,21 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Corporation",
+  "name": "Thetis Medical Ltd",
+  "alternateName": "Thetis Medical",
+  "description": "Thetis Medical produce medical splints for Achilles Tendon Rupture.",
+  "url": "https://thetismedical.com/",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Birmingham",
+    "addressCountry": "UK",
+    "postalCode": "B12 0UP",
+    "streetAddress": "15 Leopold Street"
+  },
+  "logo": "https://thetismedical.com/images/dotty-logo.svg",
+  "sameAs": [
+    "https://www.linkedin.com/company/thetis-medical-ltd",
+    "https://www.instagram.com/thetismedical",
+    "https://www.facebook.com/thetismedical"
+  ]
+}

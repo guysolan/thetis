@@ -1,0 +1,210 @@
+---
+import Layout from '../layouts/Layout.astro'
+import SlideTitle from '@/components/SlideTitle.astro'
+import Slide from '@/components/Slide.astro'
+import BigLinks from '@/components/BigLinks.astro'
+import Quote from '@/components/Quote.astro'
+import EmailCTA from '@/components/CTA/EmailCTA.astro'
+import SizeChart from '@/components/SizeChart.astro'
+import NHSLogo from '@/assets/NHS_logo.svg'
+import Title from '../components/Title.astro'
+---
+
+<Layout
+    title="Trauma Splint for Torn Achilles Tendons"
+    description="An Achilles splint designed to replace plaster of paris casts in A&E / Emergency Rooms. It can save patients and doctors costs by saving time."
+    image="https://thetismedical.com/images/A&E.png"
+>
+    <main>
+        <Slide>
+            <BigLinks active="trauma" />
+            <h2 class="text-lg lg:text-xl text-center pb-4 lg:pb-8 lg:pt-4">
+                AVAILABLE TO HOSPITALS AND MEDICAL PROFESSIONALS.
+            </h2>
+            <div
+                class="flex my-8 gap-y-8 lg:gap-y-0 lg:gap-x-8 flex-col lg:flex-row items-center justify-center lg:items-start"
+            >
+                <img
+                    class="px-2 mb-8 lg:w-2/3"
+                    src="/images/A&E.png"
+                    alt="Night Splint Product Image"
+                />
+                <div
+                    class="lg:pt-4 text-center flex flex-col items-center justify-center lg:justify-start lg:items-start lg:text-left gap-y-8 lg:w-1/3"
+                >
+                    <Title>Achilles Tendon Rupture Trauma Splint</Title>
+
+                    <a
+                        href="./contact"
+                        class="explore landing order-trauma-product"
+                        >Order Now</a
+                    >
+                    <p class="font-normal text-lg lg:text-xl">
+                        Trusted by <img
+                            width="80"
+                            height="40"
+                            class="w-[66px] lg:w-[88px] ml-1 my-auto object-cover inline-flex"
+                            src="/images/NHS_logo.png"
+                            alt="NHS England Logo"
+                        />
+                    </p>
+                </div>
+            </div>
+        </Slide>
+    </main>
+    <br /><br />
+    <section class="slide col">
+        <div class="vid-wrap">
+            <div>
+                <iframe
+                    title="Trauma-Splint-Application"
+                    src="https://www.youtube.com/embed/t-MAXbiqQkU"
+                    frameborder="0"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    <br /><br />
+    <Slide
+        title="Intended Use"
+        paragraph="A modern and convenient splint for suspected Achilles rupture. The splint is applied in A&E/ER and does not require training to apply. It holds the foot plantar flexed until seen the patient is by a specialist."
+    />
+    <Slide id="testimonials" title="Testimonials">
+        <Quote
+            title="This splint saves patients and staff time. It also facilitates an efficient pathway for scanning and making decisions about treatment."
+            author="Musculo-Skeletal Radiologist, Past UKRCO Vice President and BSSR Council"
+        />
+    </Slide>
+
+    <Slide
+        id="problem"
+        title="Problem"
+        paragraph="Currently, patients who visit A&E with a query Achilles rupture are placed in a cast. This cast needs to be removed and reapplied if scanned."
+    />
+    <p class="px-8 text-md">Using a cast creates issues:</p>
+    <div class="bullet-wrap">
+        <div class="bullet-points">
+            <div class="boot-point">
+                <img src="/images/red-cross.svg" alt="Red-Cross" />
+                <p>5 layer application</p>
+            </div>
+            <div class="boot-point">
+                <img src="/images/red-cross.svg" alt="Red-Cross" />
+                <p>Difficult to apply</p>
+            </div>
+        </div>
+        <div class="bullet-points">
+            <div class="boot-point">
+                <img src="/images/red-cross.svg" alt="Red-Cross" />
+                <p>Staff need training</p>
+            </div>
+            <div class="boot-point">
+                <img src="/images/red-cross.svg" alt="Red-Cross" />
+                <p>Takes time to dry</p>
+            </div>
+        </div>
+    </div>
+    <Slide
+        id="Solution"
+        title="Solution (Patent Pending)"
+        paragraph="By using a comfortable, padded, plastic shell wrapped in crepe bandage, the process is transformed."
+    >
+        <div class="product-solution"></div>
+        <div class="bullet-wrap">
+            <div class="bullet-points">
+                <div class="boot-point">
+                    <img src="/images/green-tick.svg" alt="Green-Tick" />
+                    <p>2 layer application</p>
+                </div>
+                <div class="boot-point">
+                    <img src="/images/green-tick.svg" alt="Green-Tick" />
+                    <p>Easier to apply</p>
+                </div>
+            </div>
+            <div class="bullet-points">
+                <div class="boot-point">
+                    <img src="/images/green-tick.svg" alt="Green-Tick" />
+                    <p>No training needed</p>
+                </div>
+                <div class="boot-point">
+                    <img src="/images/green-tick.svg" alt="Green-Tick" />
+                    <p>Save patients time</p>
+                </div>
+            </div>
+        </div>
+    </Slide>
+
+    <Slide
+        title="Evidence"
+        paragraph="Evidence - The time taken to achieve both ultrasound scan and specialist review fell > 60%. All Thetis Trauma Splint patients reached their definitive treatment decisions within one week."
+    />
+    <div class="evidence-table">
+        <img src="/images/trauma-splint/Evidence-Table.svg" />
+    </div>
+    <EmailCTA
+        title="Sound Interesting?"
+        paragraph="Want to get a sample, speak to us or just learn more?"
+    />
+    <Slide title="Instructions">
+        <div class="trauma-instructions-wrap">
+            <div class="instruction-part">
+                <p class="trauma-instruction">
+                    1. Remove bandage clips (for use later) and position
+                    stockinette overhanging the toes.
+                </p>
+                <img
+                    src="/images/trauma-splint/stage-1.png"
+                    alt="Stage 1 of Trauma Splint Application"
+                />
+            </div>
+            <div class="instruction-part">
+                <p class="trauma-instruction">
+                    2. Keeping foot pointed down (tip-toes), position the splint
+                    to cover the shin and top of foot, but leave toes free.
+                </p>
+                <img
+                    src="/images/trauma-splint/stage-2.png"
+                    alt="Stage 2 of Trauma Splint Application"
+                />
+            </div>
+            <div class="instruction-part">
+                <p class="trauma-instruction">
+                    3. Fold the stockinette over at both ends.
+                </p>
+                <img
+                    src="/images/trauma-splint/stage-3.png"
+                    alt="Stage 3 of Trauma Splint Application"
+                />
+            </div>
+            <div class="instruction-part">
+                <p class="trauma-instruction">
+                    4. Wrap the crepe bandage firmly, but not too tight. Secure
+                    with the bandage clips provided.
+                </p>
+                <img
+                    src="/images/trauma-splint/stage-4.png"
+                    alt="Stage 4 of Trauma Splint Application"
+                />
+            </div>
+        </div>
+    </Slide>
+    <Slide title="Sizing">
+        <SizeChart />
+    </Slide>
+    <Slide title="Downloads">
+        <div class="downloads-wrap">
+            <div class="intro large download">
+                <a
+                    href="/images/documents/trauma-splint/trauma_splint_instructions.pdf"
+                    target="_blank">Trauma-Instructions.pdf</a
+                >
+            </div>
+            <div class="intro large download">
+                <a
+                    href="/images/documents/information-brochure-trauma-splint.pdf"
+                    target="_blank">Trauma Splint Brochure.pdf</a
+                >
+            </div>
+        </div>
+    </Slide>
+</Layout>

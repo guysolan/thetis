@@ -1,0 +1,46 @@
+---
+const sizes = {
+    EU: 42,
+    UK: 8,
+    'US Men': 9,
+    'US Women': 10.5,
+}
+---
+
+<div class="relative overflow-x-auto">
+    <table
+        class="w-full text-lg text-left border-2 border-black text-gray-500 dark:text-gray-400"
+    >
+        <thead
+            class="text-md text-white border-b uppercase bg-primary font-semibold"
+        >
+            <tr>
+                <th scope="col" class="px-6 py-3"> Location</th>
+                <th scope="col" class="px-6 py-3"> Small</th>
+                <th scope="col" class="px-6 py-3"> Large</th>
+            </tr>
+        </thead>
+        <tbody>
+            {
+                Object.entries(sizes).map(([key, val], i) => (
+                    <tr class="bg-white border-b-2 border-black">
+                        <th
+                            scope="row"
+                            class="px-6 py-4 font-semibold text-gray-800 whitespace-nowrap"
+                        >
+                            {key}
+                        </th>
+                        <td class="px-6 py-4 font-normal text-black">
+                            {' '}
+                            &lt; {val}
+                        </td>
+                        <td class="px-6 py-4 font-normal text-black">
+                            {' '}
+                            &ge; {val}
+                        </td>
+                    </tr>
+                ))
+            }
+        </tbody>
+    </table>
+</div>

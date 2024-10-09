@@ -1,0 +1,189 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { inputStyle } from '../components/form/Input.astro'
+---
+
+<Layout
+    title="Thetis Medical - Contact Us"
+    description="Place bulk orders and ask questions to Thetis Medical with their contact form."
+    image="https://thetismedical.com/images/icons/socials/achilles-drawing-image.png"
+    bodyClass="black-split"
+    hideFooter={true}
+    logoColor="white"
+>
+    <main data-barba="container" data-barba-namespace="home">
+        <div class="contact-wrap">
+            <div class="black-side">
+                <h1>Get in Touch</h1>
+                <ul>
+                    <li>Order splints</li>
+                    <li>Get some samples</li>
+                    <li>Restock your leaflets</li>
+                    <li>Ask a question</li>
+                    <li>Just say hi!</li>
+                </ul>
+                <h4>
+                    <a href="mailto:info@thetismedical.com"
+                        >info@thetismedical.com</a
+                    >
+                </h4>
+                <div class="socials contact">
+                    <a class="invert" href="https://twitter.com/ThetisMedical"
+                        ><img
+                            src="/images/icons/socials/social-media-twitter.svg"
+                            alt="Twitter Icon"
+                        /></a
+                    >
+                    <a
+                        class="invert"
+                        href="https://www.instagram.com/thetismedical/"
+                        ><img
+                            src="/images/icons/socials/social-media-insta.svg"
+                            alt="Instagram Icon"
+                        /></a
+                    >
+                    <a
+                        class="invert"
+                        href="https://www.facebook.com/thetismedical"
+                        ><img
+                            src="/images/icons/socials/social-media-facebook.svg"
+                            alt="Facebook Icon"
+                        /></a
+                    >
+                </div>
+                <p>&copy;Thetis Medical Ltd 2023</p>
+            </div>
+            <form
+                autocomplete="on"
+                action="https://formspree.io/f/mdobaqwr"
+                method="POST"
+                class="form pt-10"
+            >
+                <div class="form-wrap">
+                    <h2 class="text-3xl pt-4">Contact Us</h2>
+                    <p>Would you like to:</p>
+                    <div class="form-row checkbox">
+                        <div class="checkbox">
+                            <div class="checkbox-edge">
+                                <input
+                                    name="bulk-order"
+                                    checked
+                                    id="order-check"
+                                    type="checkbox"
+                                    class={inputStyle}
+                                />
+                            </div>
+                            <label for="order-check">Bulk Order / Restock</label
+                            >
+                        </div>
+                        <div class="checkbox">
+                            <div class="checkbox-edge">
+                                <input
+                                    name="ask-a-question"
+                                    id="ask-a-question"
+                                    type="checkbox"
+                                    class={inputStyle}
+                                />
+                            </div>
+                            <label for="ask-a-question">Ask a question</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input
+                                required
+                                name="name"
+                                type="text"
+                                placeholder="Name"
+                                class={inputStyle}
+                            />
+                        </div>
+                        <div class="form-group">
+                            <input
+                                name="company"
+                                type="text"
+                                placeholder="Company"
+                                class={inputStyle}
+                            />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input
+                                required
+                                name="email"
+                                type="email"
+                                placeholder="Email"
+                                class={inputStyle}
+                            />
+                        </div>
+                        <div class="form-group">
+                            <input
+                                name="phone"
+                                type="tel"
+                                placeholder="Phone"
+                                class={inputStyle}
+                            />
+                        </div>
+                    </div>
+                    <div class="order-wrap">
+                        <p>Enter quantities to get a quote by email:</p>
+                        <div class="form-row">
+                            <div class="form-group flex">
+                                <p>Night Splint</p>
+                                <input
+                                    name="night-splint-qty"
+                                    id="night-qty"
+                                    type="text"
+                                    placeholder="Qty"
+                                    class={inputStyle}
+                                />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group flex">
+                                <p>Trauma Splint</p>
+                                <input
+                                    name="trauma-splint-qty"
+                                    id="trauma-qty"
+                                    type="text"
+                                    placeholder="Qty"
+                                    class={inputStyle}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group message">
+                        <textarea
+                            name="message"
+                            cols="50"
+                            rows="3"
+                            maxlength="1000"
+                            class={inputStyle}
+                            placeholder="Message"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="checkbox news">
+                            <div class="checkbox-edge">
+                                <input
+                                    class={inputStyle}
+                                    name="opt-out"
+                                    type="checkbox"
+                                />
+                            </div>
+                            <label>Opt out of all newsletters.</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <button
+                            type="submit"
+                            value="send"
+                            class="explore contact-form-submit bg-primary"
+                            >Send</button
+                        >
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+</Layout>

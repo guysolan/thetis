@@ -1,0 +1,354 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Testimonial from '@/components/Testimonial.astro'
+import Slide from '@/components/Slide.astro'
+import BigLinks from '@/components/BigLinks.astro'
+import NightSplintSchema from '../schemas/NightSplintSchema.astro'
+import RedCross from '@/components/icons/RedCross.astro'
+import GreenTick from '@/components/icons/GreenTick.astro'
+import EmailCTA from '@/components/CTA/EmailCTA.astro'
+import DownloadList from '../components/DownloadList.astro'
+import Quote from '../components/Quote.astro'
+import ShopifyBuyButton from '../components/ShopifyBuyButton.astro'
+import SizeChart from '../components/SizeChart.astro'
+import StarRating from '../features/reviews/StarRating.tsx'
+import { buttonVariants } from '../components/ui/button'
+import WarningShipping from '../components/WarningShipping.astro'
+import Title from '../components/Title.astro'
+---
+
+<NightSplintSchema slot="head" />
+
+<Layout
+    title="Achilles Tendon Rupture Night Splint"
+    description="Thetis Medical's Achilles rupture night splint to make sleeping more pleasant and bearable. The brace straps to the leg to prevent further tendon injury."
+    image="https://thetismedical.com/images/green-shell.png"
+>
+    <main>
+        <section class="landing splint">
+            <BigLinks active="night" />
+            <h2 class="text-lg lg:text-xl text-center pb-4 lg:pb-8 lg:pt-4">
+                DESIGNED ALONGSIDE SURGEONS TO IMPROVE ACHILLES RUPTURE
+                RECOVERY.
+            </h2>
+            <div class="flex my-2 flex-col md:flex-row">
+                <img
+                    class="lg:w-7/12 lg:mr-4"
+                    src="/images/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg"
+                    alt="Night Splint Render"
+                />
+                <div
+                    class="mt-6 lg:mt-0 mx-auto w-[90%] flex flex-col gap-y-6 items-center text-center lg:items-start lg:text-left"
+                >
+                    <h1
+                        class="text-2xl lg:text-4xl font-semibold leading-[135%]"
+                    >
+                        Achilles Tendon Rupture Night Splint
+                    </h1>
+                    <StarRating />
+                    <ShopifyBuyButton />
+                </div>
+            </div>
+            <p class="splint-intro">
+                The ONLY splint for post Achilles rupture recovery. Aimed to
+                improve sleep and make recovery more comfortable.
+            </p>
+        </section>
+        <Slide
+            title="Intended Use"
+            paragraph="  Night-time splint to ensure the foot is kept in plantar flexion (foot pointed down) for the first 3 months after an Achilles tendon tear."
+        />
+        <Slide id="testimonials" title="Testimonials">
+            <Quote
+                title="Simply brilliant - and brilliantly simple"
+                author="Clinical Director, London Foot and Ankle Centre"
+            />
+            <div
+                class="flex items-center justify-center w-full px-4 mx-auto mt-8"
+            >
+                <h3>
+                    <a
+                        class={buttonVariants({ variant: 'link', size: 'lg' })}
+                        href="#more-reviews">More Testimonials</a
+                    >
+                </h3>
+            </div>
+        </Slide>
+        <Slide
+            id="problem"
+            title="Problem"
+            paragraph="Currently, patients wear a large, outdoor, orthopaedic boot, day and night, for the 10 week rehabillitation. This is analagous to wearing hiking boots for 10 weeks, and sleeping in them..."
+        >
+            <p class="intro large">Patients find these boots:</p>
+            <div class="bullet-wrap">
+                <div class="bullet-points">
+                    <div class="boot-point">
+                        <RedCross />
+                        <p>Hot</p>
+                    </div>
+                    <div class="boot-point">
+                        <RedCross />
+                        <p>Dirty</p>
+                    </div>
+                </div>
+                <div class="bullet-points">
+                    <div class="boot-point">
+                        <RedCross />
+                        <p>Uncomfortable</p>
+                    </div>
+                    <div class="boot-point">
+                        <RedCross />
+                        <p>Heavy</p>
+                    </div>
+                </div>
+            </div>
+        </Slide>
+
+        <!-- Statistics -->
+
+        <Slide
+            id="statistics"
+            title="Statistics"
+            paragraph=" 78% of patients found sleeping in the boot difficult and would therefore benefit from our night splint."
+        >
+            <div class="sleep-pie">
+                <img
+                    loading="lazy"
+                    class="pie"
+                    src="/images/sleeping-piechart-donut.svg"
+                    alt="Pie Chart of Patient's Sleep post Achilles Rupture"
+                />
+                <img
+                    loading="lazy"
+                    class="key"
+                    src="/images/sleeping-piechart-key.svg"
+                    alt="Pie Chart key of Patient's Sleep post Achilles Rupture"
+                />
+            </div>
+        </Slide>
+
+        <Slide
+            id="solution"
+            title="Solution (Patent Pending)"
+            paragraph="By sleeping and resting in a lightweight, comfort-focused splint, recovery becomes more bearable."
+        >
+            <div class="bullet-wrap">
+                <div class="bullet-points">
+                    <div class="boot-point">
+                        <GreenTick />
+                        <p>Cool</p>
+                    </div>
+                    <div class="boot-point">
+                        <GreenTick />
+                        <p>Contoured</p>
+                    </div>
+                </div>
+                <div class="bullet-points">
+                    <div class="boot-point">
+                        <GreenTick />
+                        <p>Lightweight</p>
+                    </div>
+                    <div class="boot-point">
+                        <GreenTick />
+                        <p>Slim-line</p>
+                    </div>
+                </div>
+            </div>
+        </Slide>
+
+        <EmailCTA
+            title="Sound Interesting?"
+            paragraph="Want to learn more? Enter your email below."
+        />
+
+        <!-- Instructions -->
+
+        <Slide title="Instructions">
+            <div class="warnings">
+                <h4>DO NOT STAND OR WALK IN THE SPLINT.</h4>
+                <h4>DO NOT OVERTIGHTEN THE STRAPS.</h4>
+            </div>
+            <div class="instructions-wrap">
+                <div class="instruction">
+                    <p>
+                        1. Point toes then place shell on leg. Ensure you cover
+                        foot but not toes. Fastening patch sits over ankle
+                        joint.
+                    </p>
+                    <img
+                        class="instruction-img"
+                        loading="lazy"
+                        src="/images/night-splint/instruction-1.svg"
+                        alt="instructions image 1"
+                    />
+                </div>
+                <div class="instruction">
+                    <p>
+                        2. Do up leg and foot straps firmly but not too tight.
+                    </p>
+                    <img
+                        class="instruction-img"
+                        loading="lazy"
+                        src="/images/night-splint/instruction-2.svg"
+                        alt="instructions image 2"
+                    />
+                </div>
+            </div>
+            <div class="instructions-wrap">
+                <div class="instruction">
+                    <p>3. Position heel in hole of the final (ankle) strap.</p>
+                    <img
+                        class="instruction-img"
+                        loading="lazy"
+                        src="/images/night-splint/instruction-3.svg"
+                        alt="instructions image 3"
+                    />
+                </div>
+                <div class="instruction">
+                    <p>4. Fasten firmly but not too tight.</p>
+                    <img
+                        class="instruction-img"
+                        loading="lazy"
+                        src="/images/night-splint/instruction-4.svg"
+                        alt="instructions image 4"
+                    />
+                </div>
+            </div>
+        </Slide>
+
+        <!-- Sizing -->
+
+        <Slide title="Sizing">
+            <div class="h-6"></div>
+            <SizeChart />
+        </Slide>
+
+        <!-- Downloads -->
+
+        <Slide title="Downloads">
+            <DownloadList
+                title="Information for Patients"
+                downloads={[
+                    {
+                        title: 'Night Splint Instructions.pdf',
+                        href: '/images/documents/screen-instructions-induvidual.pdf',
+                    },
+                    {
+                        title: 'Night Splint Information Brochure.pdf',
+                        href: '/images/documents/information-brochure-night-splint.pdf',
+                    },
+                ]}
+            />
+        </Slide>
+
+        <!-- Testimonials -->
+
+        <Slide title="Testimonials" id="testimonials">
+            <div id="more-reviews"></div>
+            <div class="space-y-8">
+                <Testimonial
+                    name="Andrew Lawrence"
+                    description="Team GB Basketball Player"
+                    image="andrew-lawrence.png"
+                >
+                    "I recently began using the Thetis Night Splint overnight.
+                    My regular boot is good for daily use but very heavy and
+                    uncomfortable to sleep in - the night splint has been
+                    revolutionary for me! It keeps my foot perfectly in place
+                    but without being bulky, meaning I can sleep more
+                    comfortably with no fear of hurting my Achilles tendon. I
+                    would highly recommend everyone and anyone to use this
+                    product during your recovery from Achilles rupture."
+                </Testimonial>
+                <Testimonial
+                    name="Olivia Blatch"
+                    description="Team GB Weightlifter"
+                    image="olivia-blatch.png"
+                >
+                    "The Thetis Night Splint is a lot slimmer and far more
+                    lightweight than the orthopaedic boot I was sleeping in. It
+                    allows me to move my leg more freely but still stops me from
+                    flexing my toes beyond a certain point, which is ideal
+                    whilst the tendon heals. The splint even comes in my
+                    favourite colour, so I was sold the minute I saw it!"
+                </Testimonial>
+                <Testimonial
+                    name="Mr James Davis"
+                    description="Past President of the British Orthopaedic Foot and Ankle Society"
+                    image="mr-james-davis.png"
+                >
+                    "When I tore my own Achilles tendon, the hardest part of the
+                    recovery was having to wear the hospital boot in bed at
+                    night for many weeks. My only option was to make myself a
+                    splint using plaster-cast materials and make-shift straps.
+                    It is fantastic that Thetis Medical have produced this
+                    night-splint. It is certain to improve the recovery
+                    experience for patients."
+                </Testimonial>
+            </div>
+        </Slide>
+
+        <Slide title="FAQs">
+            <div class="space-y-8">
+                <div class="space-y-2">
+                    <h4>Can you use the splint for Achilles tendonitis?</h4>
+                    <p>
+                        No, the splint is only used after rupture of the
+                        Achilles tendon. It is not suitable for broken bones,
+                        plantar fasciitis or Achilles tendonitis. The splint
+                        holds the foot pointed downwards, in a tip toe position,
+                        for tendon healing. For other conditions, like plantar
+                        fasciitis and Achilles tendonitis, there are different
+                        splints deliberately designed to do the opposite, and
+                        hold the foot up.
+                    </p>
+                </div>
+                <div class="space-y-2">
+                    <h4>Can you use the splint instead of a boot?</h4>
+                    <p>
+                        Yes, it is designed as an alternative - but ONLY for use
+                        when resting. You cannot walk or stand in the splint
+                        without crutches.
+                    </p>
+                </div>
+                <div class="space-y-2">
+                    <h4>Is the sizing accurate?</h4>
+                    <p>
+                        Yes, the sizing is accurate. Sizing is based on foot
+                        size, designed to ensure that the splint does not
+                        interfere with the toes.
+                    </p>
+                </div>
+            </div>
+        </Slide>
+    </main>
+</Layout>
+
+<script>
+    fetch('https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq')
+        .then((res) => res.json())
+        .then((response) => {
+            console.log('Country: ', response.country)
+            try {
+                // Check if on Night Splint Page
+                const shopify = document.getElementById(
+                    'shopify-buy-button-wrapper'
+                )
+                const amazon = document.getElementById(
+                    'amazon-buy-button-wrapper'
+                )
+
+                if (response.country === 'United Kingdom') {
+                    amazon?.remove()
+                } else {
+                    shopify?.remove()
+                }
+            } catch (error) {
+                // console.log(error)
+            }
+        })
+        .catch((reason: any) => {
+            console.log(reason)
+            // console.log('Request failed');
+        })
+</script>

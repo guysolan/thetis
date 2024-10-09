@@ -1,0 +1,62 @@
+---
+import { buttonVariants } from '../ui/button'
+import { cn } from '../../lib/utils'
+import { AmazonButton } from '../AmazonButton'
+
+interface Props {
+    title: string
+    paragraph: string[]
+    primaryHref: string
+    secondaryHref: string
+    primaryWords: string
+    secondaryWords: string
+    image: string
+    imageAlt: string
+    amazon: boolean
+}
+
+const {
+    title,
+    paragraph,
+    primaryHref,
+    secondaryHref,
+    primaryWords,
+    secondaryWords,
+    image,
+    imageAlt,
+    amazon,
+}: Props = Astro.props
+---
+
+<div class="w-full flex items-center justify-center">
+    <h2 class="text-xl font-semibold">{title}</h2>
+    <p id="px-8">
+        {paragraph}
+    </p>
+    <img
+        class="w-full"
+        id="night-splint-img"
+        src={image}
+        alt={imageAlt}
+        loading="lazy"
+    />
+    {
+        amazon ? (
+            <AmazonButton variant="default" size="md" client:load>
+                Shop
+            </AmazonButton>
+        ) : (
+            <a
+                href={primaryHref}
+                class={cn(buttonVariants({ size: 'md', variant: 'default' }))}
+            >
+                {primaryWords}
+            </a>
+        )
+    }
+    <a
+        href={secondaryHref}
+        class={cn(buttonVariants({ size: 'md', variant: 'outline' }))}
+        >{secondaryWords}</a
+    >
+</div>

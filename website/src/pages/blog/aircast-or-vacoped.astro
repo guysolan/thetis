@@ -1,0 +1,24 @@
+---
+import { page2md } from '../../api/notion.js'
+import { marked } from 'marked'
+
+const getPage = async () => {
+    return page2md('e7b4e4bfa49241d587bc80acf79d5062').then((page: any) => {
+        if (page?.articleBody?.parent) {
+            return marked?.parse(page?.articleBody?.parent)
+        }
+    })
+}
+const page = await getPage()
+import BlogLayout from '../../layouts/BlogLayout.astro'
+---
+
+<>
+    {
+        page && (
+            <BlogLayout details={page}>
+                <Fragment set:html={page} />
+            </BlogLayout>
+        )
+    }
+</>
