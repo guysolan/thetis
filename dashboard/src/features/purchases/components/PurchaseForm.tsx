@@ -21,14 +21,10 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from "@/components/ui/accordion";
+
 import { PartsTable } from "./PartsTable";
 import { calculatePartsSummary } from "../utils/partsSummaryCalculator";
+import { useProcessPurchase } from "../api/processPurchase";
 const purchaseItemSchema = z.object({
 	type: z.enum(["product", "part"]),
 	id: z.string().min(1, "Please select an item"),
@@ -36,8 +32,8 @@ const purchaseItemSchema = z.object({
 });
 
 const formSchema = z.object({
-	purchaseItems: z.array(purchaseItemSchema).min(1, "Add at least one item"),
-	partsSummary: z.array(
+	purchase_items: z.array(purchaseItemSchema).min(1, "Add at least one item"),
+	parts_summary: z.array(
 		z.object({
 			id: z.string(),
 			name: z.string(),
@@ -47,6 +43,8 @@ const formSchema = z.object({
 		}),
 	),
 });
+
+export type PurchaseFormData = z.infer<typeof formSchema>;
 
 interface PurchaseFormProps {
 	products: {
@@ -61,11 +59,12 @@ export const PurchaseForm: React.FC<PurchaseFormProps> = ({
 	products,
 	parts,
 }) => {
+	const { mutate: processPurchase } = useProcessPurchase();
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			purchaseItems: [{ type: "product", id: "", quantity: 1 }],
-			partsSummary: parts.map((part) => ({
+			purchase_items: [{ type: "product", id: "", quantity: 1 }],
+			parts_summary: parts.map((part) => ({
 				id: part.uuid,
 				name: part.name,
 				partsBefore: part.quantity,
@@ -77,35 +76,34 @@ export const PurchaseForm: React.FC<PurchaseFormProps> = ({
 
 	const { fields, append, remove } = useFieldArray({
 		control: form.control,
-		name: "purchaseItems",
+		name: "purchase_items",
 	});
 
 	// Use useWatch instead of form.watch
 	const purchaseItems = useWatch({
 		control: form.control,
-		name: "purchaseItems",
+		name: "purchase_items",
 	});
 
 	const partsSummary = useWatch({
 		control: form.control,
-		name: "partsSummary",
+		name: "parts_summary",
 	});
 
 	useEffect(() => {
-		console.log("Effect running, purchaseItems:", purchaseItems);
 		const newPartsSummary = calculatePartsSummary(
 			purchaseItems,
 			products,
 			parts,
 		);
 		console.log("New parts summary:", newPartsSummary);
-		form.setValue("partsSummary", newPartsSummary);
+		form.setValue("parts_summary", newPartsSummary);
 	}, [purchaseItems, products, parts]);
 
 	const partIsNegative = partsSummary.some((part) => part.partsAfter < 0);
 
 	const onSubmit = (data: z.infer<typeof formSchema>) => {
-		console.log(data);
+		processPurchase(data);
 	};
 
 	return (
@@ -116,7 +114,7 @@ export const PurchaseForm: React.FC<PurchaseFormProps> = ({
 						<div key={field.id} className="space-y-2 px-1">
 							<FormField
 								control={form.control}
-								name={`purchaseItems.${index}.type`}
+								name={`purchase_items.${index}.type`}
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Type</FormLabel>
@@ -140,11 +138,11 @@ export const PurchaseForm: React.FC<PurchaseFormProps> = ({
 							/>
 							<FormField
 								control={form.control}
-								name={`purchaseItems.${index}.id`}
+								name={`purchase_items.${index}.id`}
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>
-											{form.watch(`purchaseItems.${index}.type`) === "product"
+											{form.watch(`purchase_items.${index}.type`) === "product"
 												? "Product"
 												: "Part"}
 										</FormLabel>
@@ -156,7 +154,7 @@ export const PurchaseForm: React.FC<PurchaseFormProps> = ({
 												<SelectTrigger>
 													<SelectValue
 														placeholder={`Select ${
-															form.watch(`purchaseItems.${index}.type`) ===
+															form.watch(`purchase_items.${index}.type`) ===
 															"product"
 																? "product"
 																: "part"
@@ -165,7 +163,8 @@ export const PurchaseForm: React.FC<PurchaseFormProps> = ({
 												</SelectTrigger>
 											</FormControl>
 											<SelectContent>
-												{form.watch(`purchaseItems.${index}.type`) === "product"
+												{form.watch(`purchase_items.${index}.type`) ===
+												"product"
 													? products.map((product) => (
 															<SelectItem
 																key={product.uuid}
@@ -187,7 +186,7 @@ export const PurchaseForm: React.FC<PurchaseFormProps> = ({
 							/>
 							<FormField
 								control={form.control}
-								name={`purchaseItems.${index}.quantity`}
+								name={`purchase_items.${index}.quantity`}
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Quantity</FormLabel>

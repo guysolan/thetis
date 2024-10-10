@@ -21,6 +21,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { SaleSummary } from "./SaleSummary";
+import { useProcessSale } from "../api/processSale";
 
 const saleItemSchema = z.object({
 	id: z.string().min(1, "Product is required"),
@@ -28,41 +29,39 @@ const saleItemSchema = z.object({
 });
 
 const formSchema = z.object({
-	saleItems: z.array(saleItemSchema).min(1, "Add at least one product"),
+	sale_items: z.array(saleItemSchema).min(1, "Add at least one product"),
 });
 
+export type SaleFormData = z.infer<typeof formSchema>;
+
 interface SaleFormProps {
-	products: { id: string; name: string }[];
-	handleCreateSale: (data: z.infer<typeof formSchema>) => void;
+	defaultValues: { id: string; name: string }[];
 }
 
 export const SaleForm: React.FC<SaleFormProps> = ({
-	products,
-	handleCreateSale,
-}) => {
+	defaultValues,
+}: SaleFormProps) => {
+	const { mutate: createSale } = useProcessSale();
+
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			saleItems: [{ id: "", quantity: 1 }],
+			sale_items: [{ id: "", quantity: 1 }],
 		},
 	});
 
 	const { fields, append, remove } = useFieldArray({
 		control: form.control,
-		name: "saleItems",
+		name: "sale_items",
 	});
 
 	const saleItems = useWatch({
 		control: form.control,
-		name: "saleItems",
+		name: "sale_items",
 	});
 
-	useEffect(() => {
-		console.log("Sale items updated:", saleItems);
-	}, [saleItems]);
-
 	const onSubmit = (data: z.infer<typeof formSchema>) => {
-		handleCreateSale(data);
+		createSale(data);
 	};
 
 	return (
@@ -73,7 +72,7 @@ export const SaleForm: React.FC<SaleFormProps> = ({
 						<div key={field.id} className="gap-2 grid px-1">
 							<FormField
 								control={form.control}
-								name={`saleItems.${index}.id`}
+								name={`sale_items.${index}.id`}
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Product</FormLabel>
@@ -87,7 +86,7 @@ export const SaleForm: React.FC<SaleFormProps> = ({
 												</SelectTrigger>
 											</FormControl>
 											<SelectContent>
-												{products.map((product) => (
+												{defaultValues.map((product) => (
 													<SelectItem
 														key={product.id}
 														value={product.id.toString()}
@@ -103,7 +102,7 @@ export const SaleForm: React.FC<SaleFormProps> = ({
 							/>
 							<FormField
 								control={form.control}
-								name={`saleItems.${index}.quantity`}
+								name={`sale_items.${index}.quantity`}
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Quantity</FormLabel>
@@ -139,7 +138,7 @@ export const SaleForm: React.FC<SaleFormProps> = ({
 						Add Product
 					</Button>
 				</div>
-				<SaleSummary saleItems={saleItems} products={products} />
+				<SaleSummary saleItems={saleItems} products={defaultValues} />
 				<Button type="submit">Create Sale</Button>
 			</form>
 		</Form>

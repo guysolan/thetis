@@ -1,17 +1,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "../../../config/supabase";
+import { supabase } from "@/lib/supabase";
+import type { ProductFormData } from "../components/ProductForm";
+import { toast } from "sonner";
 
-type Product = {
-  id?: number;
-  name: string;
-  quantity: number;
-  price: number;
-};
-
-const upsertProduct = async (product: Product) => {
-  const { data, error } = await supabase
-    .from("products")
-    .upsert(product, { onConflict: "id" })
+const upsertProduct = async (product: ProductFormData) => {
+  const { data, error } = await supabase.rpc("upsert_product_with_parts", {
+    p_name: product.name,
+    p_price: product.price,
+    p_quantity: product.quantity,
+    p_product_parts: product.product_parts,
+    p_id: product.id ?? null,
+  })
     .select()
     .single();
 
@@ -24,8 +23,12 @@ export const useUpsertProduct = () => {
 
   return useMutation({
     mutationFn: upsertProduct,
+    onError: () => {
+      toast.error("Error updating product");
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["select-products"] });
+      queryClient.invalidateQueries({ queryKey: ["select-product-parts"] });
+      toast.success("Product updated successfully");
     },
   });
 };

@@ -12,18 +12,14 @@ import {
 import { useSelectSales } from "../../features/sales/api/selectSales";
 import { useSelectProducts } from "../../features/products/api/selectProducts";
 
-import { SaleForm } from "../../features/sales/component/SaleForm";
-import { ExistingSales } from "../../features/sales/component/ExistingSales";
+import { SaleForm } from "../../features/sales/components/SaleForm";
+import { ExistingSales } from "../../features/sales/components/ExistingSales";
 import { ScrollArea } from "../../components/ui/scroll-area";
 
 const SalesPage = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const { data: sales } = useSelectSales();
 	const { data: products } = useSelectProducts();
-
-	const handleCreateSale = (data) => {
-		console.log("Sale created:", data);
-	};
 
 	return (
 		<div className="p-4">
@@ -42,10 +38,7 @@ const SalesPage = () => {
 							</SheetDescription>
 						</SheetHeader>
 						<ScrollArea className="pr-2 h-[90vh]">
-							<SaleForm
-								products={products}
-								handleCreateSale={handleCreateSale}
-							/>
+							<SaleForm defaultValues={products} />
 						</ScrollArea>
 					</SheetContent>
 				</Sheet>

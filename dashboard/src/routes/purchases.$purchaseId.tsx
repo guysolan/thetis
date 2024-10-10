@@ -65,27 +65,19 @@ const PurchasesPage = () => {
 			</div>
 
 			<div className="mb-8">
-				<h2 className="mb-4 font-semibold text-xl">Parts</h2>
+				<h2 className="mb-4 font-semibold text-xl">Parts Required</h2>
 				<table className="w-full">
 					<thead>
 						<tr className="bg-gray-100">
 							<th className="p-2 text-left">Name</th>
-							<th className="text-right p-2">Price</th>
 							<th className="text-right p-2">Quantity</th>
-							<th className="text-right p-2">Total</th>
 						</tr>
 					</thead>
 					<tbody>
 						{purchase.purchase_parts.map((item) => (
 							<tr key={`${purchase.id}-${item.part.name}`}>
 								<td className="p-2">{item.part.name}</td>
-								<td className="text-right p-2">
-									${item.part.price.toFixed(2)}
-								</td>
-								<td className="text-right p-2">{item.quantity}</td>
-								<td className="text-right p-2">
-									${(item.part.price * item.quantity).toFixed(2)}
-								</td>
+								<td className="text-right p-2">{-item.quantity}</td>
 							</tr>
 						))}
 					</tbody>
@@ -94,15 +86,7 @@ const PurchasesPage = () => {
 
 			<div className="text-right">
 				<p className="font-bold text-xl">
-					Total Cost: $
-					{purchase.purchase_products.reduce(
-						(total, item) => total + item.product.price * item.quantity,
-						0,
-					) +
-						purchase.purchase_parts.reduce(
-							(total, item) => total + item.part.price * item.quantity,
-							0,
-						)}
+					Total Cost: ${Number(purchase.total_cost).toFixed(2)}
 				</p>
 			</div>
 		</div>

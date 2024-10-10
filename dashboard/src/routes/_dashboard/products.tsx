@@ -89,7 +89,15 @@ const ProductsPage = () => {
 										</SheetDescription>
 									</SheetHeader>
 									<ScrollArea className="h-[calc(100vh-10rem)]">
-										<ProductForm product={product} />
+										<ProductForm
+											defaultValues={{
+												...product,
+												product_parts: product.product_parts.map((pp) => ({
+													quantity: pp.quantity,
+													part_id: String(pp.part.id),
+												})),
+											}}
+										/>
 									</ScrollArea>
 								</SheetContent>
 							</Sheet>

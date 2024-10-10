@@ -3,7 +3,7 @@ import {
   useQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { supabase } from "../../../config/supabase";
+import { supabase } from "../../../lib/supabase";
 
 export const selectProducts = async () => {
   const { data, error } = await supabase.from("products").select("*");

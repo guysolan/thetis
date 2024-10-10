@@ -30,21 +30,25 @@ const formSchema = z.object({
 	product_parts: z.array(
 		z.object({
 			part_id: z.string().min(1, { message: "Part is required" }),
-			quantity: z.number().min(1, { message: "Quantity must be 1 or greater" }),
+			quantity: z.number().min(0, { message: "Quantity must be 1 or greater" }),
 		}),
 	),
+	id: z.number().optional(),
 });
 
-type ProductFormValues = z.infer<typeof formSchema>;
+export type ProductFormData = z.infer<typeof formSchema>;
 
-export function ProductForm({ product }: { product?: ProductFormValues }) {
+export function ProductForm({
+	defaultValues,
+}: { defaultValues?: ProductFormData }) {
+	console.log(defaultValues);
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const { mutateAsync: upsertProduct } = useUpsertProduct();
+	const { mutate: upsertProduct } = useUpsertProduct();
 	const { data: parts } = useSelectParts();
 
-	const form = useForm<ProductFormValues>({
+	const form = useForm<ProductFormData>({
 		resolver: zodResolver(formSchema),
-		defaultValues: product || {
+		defaultValues: defaultValues || {
 			name: "",
 			quantity: 0,
 			price: 0,
@@ -57,16 +61,8 @@ export function ProductForm({ product }: { product?: ProductFormValues }) {
 		name: "product_parts",
 	});
 
-	async function onSubmit(values: ProductFormValues) {
-		setIsSubmitting(true);
-		try {
-			await upsertProduct(values);
-			form.reset();
-		} catch (error) {
-			console.error("Failed to upsert product:", error);
-		} finally {
-			setIsSubmitting(false);
-		}
+	async function onSubmit(values: ProductFormData) {
+		upsertProduct(values);
 	}
 
 	return (

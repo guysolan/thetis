@@ -3,13 +3,12 @@ import {
   useQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { supabase } from "../../../lib/supabase";
-import { purchaseQueryString } from "./purchaseQueryString";
+import { supabase } from "../../lib/supabase";
 
 export const selectPurchaseById = async (id: string) => {
   const { data, error } = await supabase
     .from("purchases")
-    .select(purchaseQueryString)
+    .select("*")
     .eq("id", id)
     .single();
 

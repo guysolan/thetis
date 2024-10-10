@@ -17,25 +17,29 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { PartForm } from "../../features/parts/components/PartForm";
+import { useUpsertPart } from "../../features/parts/api/upsertPart";
 
 const PartsPage = () => {
 	const { data: parts } = useSelectParts();
-	const [editingPart, setEditingPart] = useState(null);
 
-	const handleEditSubmit = (e) => {
-		e.preventDefault();
-		// Handle the form submission here
-		// You would typically update the part in your database
-		setEditingPart(null);
-	};
+	const { mutate: upsertPart } = useUpsertPart();
 
 	return (
 		<Card className="w-full">
-			<CardHeader>
+			<CardHeader className="flex flex-row justify-between space-y-0 pb-4">
 				<CardTitle>Parts Inventory</CardTitle>
+				<Sheet>
+					<SheetTrigger asChild>
+						<Button variant="default">New Part</Button>
+					</SheetTrigger>
+					<SheetContent>
+						<SheetHeader>
+							<SheetTitle>New Part</SheetTitle>
+						</SheetHeader>
+						<PartForm onSubmit={upsertPart} />
+					</SheetContent>
+				</Sheet>
 			</CardHeader>
 			<CardContent>
 				<Table>
@@ -60,40 +64,13 @@ const PartsPage = () => {
 								<TableCell>
 									<Sheet>
 										<SheetTrigger asChild>
-											<Button
-												variant="outline"
-												onClick={() => setEditingPart(part)}
-											>
-												Edit
-											</Button>
+											<Button variant="outline">Edit</Button>
 										</SheetTrigger>
 										<SheetContent>
 											<SheetHeader>
 												<SheetTitle>Edit Part: {part.name}</SheetTitle>
 											</SheetHeader>
-											<form
-												onSubmit={handleEditSubmit}
-												className="space-y-4 mt-4"
-											>
-												<div>
-													<Label htmlFor="price">Price</Label>
-													<Input
-														id="price"
-														defaultValue={part.price}
-														type="number"
-														step="0.01"
-													/>
-												</div>
-												<div>
-													<Label htmlFor="quantity">Quantity</Label>
-													<Input
-														id="quantity"
-														defaultValue={part.quantity}
-														type="number"
-													/>
-												</div>
-												<Button type="submit">Save Changes</Button>
-											</form>
+											<PartForm onSubmit={upsertPart} defaultValues={part} />
 										</SheetContent>
 									</Sheet>
 								</TableCell>
