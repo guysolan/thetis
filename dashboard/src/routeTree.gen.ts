@@ -11,19 +11,27 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as PostsImport } from './routes/posts'
+import { Route as ProductsImport } from './routes/products'
+import { Route as PartsImport } from './routes/parts'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as IndexImport } from './routes/index'
-import { Route as PostsIndexImport } from './routes/posts.index'
-import { Route as PostsPostIdImport } from './routes/posts.$postId'
+import { Route as SalesIndexImport } from './routes/sales.index'
+import { Route as PurchasesIndexImport } from './routes/purchases.index'
+import { Route as SalesSaleIdImport } from './routes/sales.$saleId'
+import { Route as PurchasesPurchaseIdImport } from './routes/purchases.$purchaseId'
 import { Route as LayoutLayout2Import } from './routes/_layout/_layout-2'
 import { Route as LayoutLayout2LayoutBImport } from './routes/_layout/_layout-2/layout-b'
 import { Route as LayoutLayout2LayoutAImport } from './routes/_layout/_layout-2/layout-a'
 
 // Create/Update Routes
 
-const PostsRoute = PostsImport.update({
-  path: '/posts',
+const ProductsRoute = ProductsImport.update({
+  path: '/products',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PartsRoute = PartsImport.update({
+  path: '/parts',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -37,14 +45,24 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const PostsIndexRoute = PostsIndexImport.update({
-  path: '/',
-  getParentRoute: () => PostsRoute,
+const SalesIndexRoute = SalesIndexImport.update({
+  path: '/sales/',
+  getParentRoute: () => rootRoute,
 } as any)
 
-const PostsPostIdRoute = PostsPostIdImport.update({
-  path: '/$postId',
-  getParentRoute: () => PostsRoute,
+const PurchasesIndexRoute = PurchasesIndexImport.update({
+  path: '/purchases/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SalesSaleIdRoute = SalesSaleIdImport.update({
+  path: '/sales/$saleId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PurchasesPurchaseIdRoute = PurchasesPurchaseIdImport.update({
+  path: '/purchases/$purchaseId',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const LayoutLayout2Route = LayoutLayout2Import.update({
@@ -80,11 +98,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
     }
-    '/posts': {
-      id: '/posts'
-      path: '/posts'
-      fullPath: '/posts'
-      preLoaderRoute: typeof PostsImport
+    '/parts': {
+      id: '/parts'
+      path: '/parts'
+      fullPath: '/parts'
+      preLoaderRoute: typeof PartsImport
+      parentRoute: typeof rootRoute
+    }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsImport
       parentRoute: typeof rootRoute
     }
     '/_layout/_layout-2': {
@@ -94,19 +119,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutLayout2Import
       parentRoute: typeof LayoutImport
     }
-    '/posts/$postId': {
-      id: '/posts/$postId'
-      path: '/$postId'
-      fullPath: '/posts/$postId'
-      preLoaderRoute: typeof PostsPostIdImport
-      parentRoute: typeof PostsImport
+    '/purchases/$purchaseId': {
+      id: '/purchases/$purchaseId'
+      path: '/purchases/$purchaseId'
+      fullPath: '/purchases/$purchaseId'
+      preLoaderRoute: typeof PurchasesPurchaseIdImport
+      parentRoute: typeof rootRoute
     }
-    '/posts/': {
-      id: '/posts/'
-      path: '/'
-      fullPath: '/posts/'
-      preLoaderRoute: typeof PostsIndexImport
-      parentRoute: typeof PostsImport
+    '/sales/$saleId': {
+      id: '/sales/$saleId'
+      path: '/sales/$saleId'
+      fullPath: '/sales/$saleId'
+      preLoaderRoute: typeof SalesSaleIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/purchases/': {
+      id: '/purchases/'
+      path: '/purchases'
+      fullPath: '/purchases'
+      preLoaderRoute: typeof PurchasesIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/sales/': {
+      id: '/sales/'
+      path: '/sales'
+      fullPath: '/sales'
+      preLoaderRoute: typeof SalesIndexImport
+      parentRoute: typeof rootRoute
     }
     '/_layout/_layout-2/layout-a': {
       id: '/_layout/_layout-2/layout-a'
@@ -152,24 +191,15 @@ const LayoutRouteChildren: LayoutRouteChildren = {
 const LayoutRouteWithChildren =
   LayoutRoute._addFileChildren(LayoutRouteChildren)
 
-interface PostsRouteChildren {
-  PostsPostIdRoute: typeof PostsPostIdRoute
-  PostsIndexRoute: typeof PostsIndexRoute
-}
-
-const PostsRouteChildren: PostsRouteChildren = {
-  PostsPostIdRoute: PostsPostIdRoute,
-  PostsIndexRoute: PostsIndexRoute,
-}
-
-const PostsRouteWithChildren = PostsRoute._addFileChildren(PostsRouteChildren)
-
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof LayoutLayout2RouteWithChildren
-  '/posts': typeof PostsRouteWithChildren
-  '/posts/$postId': typeof PostsPostIdRoute
-  '/posts/': typeof PostsIndexRoute
+  '/parts': typeof PartsRoute
+  '/products': typeof ProductsRoute
+  '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
+  '/sales/$saleId': typeof SalesSaleIdRoute
+  '/purchases': typeof PurchasesIndexRoute
+  '/sales': typeof SalesIndexRoute
   '/layout-a': typeof LayoutLayout2LayoutARoute
   '/layout-b': typeof LayoutLayout2LayoutBRoute
 }
@@ -177,8 +207,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof LayoutLayout2RouteWithChildren
-  '/posts/$postId': typeof PostsPostIdRoute
-  '/posts': typeof PostsIndexRoute
+  '/parts': typeof PartsRoute
+  '/products': typeof ProductsRoute
+  '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
+  '/sales/$saleId': typeof SalesSaleIdRoute
+  '/purchases': typeof PurchasesIndexRoute
+  '/sales': typeof SalesIndexRoute
   '/layout-a': typeof LayoutLayout2LayoutARoute
   '/layout-b': typeof LayoutLayout2LayoutBRoute
 }
@@ -187,10 +221,13 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/_layout': typeof LayoutRouteWithChildren
-  '/posts': typeof PostsRouteWithChildren
+  '/parts': typeof PartsRoute
+  '/products': typeof ProductsRoute
   '/_layout/_layout-2': typeof LayoutLayout2RouteWithChildren
-  '/posts/$postId': typeof PostsPostIdRoute
-  '/posts/': typeof PostsIndexRoute
+  '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
+  '/sales/$saleId': typeof SalesSaleIdRoute
+  '/purchases/': typeof PurchasesIndexRoute
+  '/sales/': typeof SalesIndexRoute
   '/_layout/_layout-2/layout-a': typeof LayoutLayout2LayoutARoute
   '/_layout/_layout-2/layout-b': typeof LayoutLayout2LayoutBRoute
 }
@@ -200,21 +237,37 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | ''
-    | '/posts'
-    | '/posts/$postId'
-    | '/posts/'
+    | '/parts'
+    | '/products'
+    | '/purchases/$purchaseId'
+    | '/sales/$saleId'
+    | '/purchases'
+    | '/sales'
     | '/layout-a'
     | '/layout-b'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/posts/$postId' | '/posts' | '/layout-a' | '/layout-b'
+  to:
+    | '/'
+    | ''
+    | '/parts'
+    | '/products'
+    | '/purchases/$purchaseId'
+    | '/sales/$saleId'
+    | '/purchases'
+    | '/sales'
+    | '/layout-a'
+    | '/layout-b'
   id:
     | '__root__'
     | '/'
     | '/_layout'
-    | '/posts'
+    | '/parts'
+    | '/products'
     | '/_layout/_layout-2'
-    | '/posts/$postId'
-    | '/posts/'
+    | '/purchases/$purchaseId'
+    | '/sales/$saleId'
+    | '/purchases/'
+    | '/sales/'
     | '/_layout/_layout-2/layout-a'
     | '/_layout/_layout-2/layout-b'
   fileRoutesById: FileRoutesById
@@ -223,13 +276,23 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LayoutRoute: typeof LayoutRouteWithChildren
-  PostsRoute: typeof PostsRouteWithChildren
+  PartsRoute: typeof PartsRoute
+  ProductsRoute: typeof ProductsRoute
+  PurchasesPurchaseIdRoute: typeof PurchasesPurchaseIdRoute
+  SalesSaleIdRoute: typeof SalesSaleIdRoute
+  PurchasesIndexRoute: typeof PurchasesIndexRoute
+  SalesIndexRoute: typeof SalesIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LayoutRoute: LayoutRouteWithChildren,
-  PostsRoute: PostsRouteWithChildren,
+  PartsRoute: PartsRoute,
+  ProductsRoute: ProductsRoute,
+  PurchasesPurchaseIdRoute: PurchasesPurchaseIdRoute,
+  SalesSaleIdRoute: SalesSaleIdRoute,
+  PurchasesIndexRoute: PurchasesIndexRoute,
+  SalesIndexRoute: SalesIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -246,7 +309,12 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/_layout",
-        "/posts"
+        "/parts",
+        "/products",
+        "/purchases/$purchaseId",
+        "/sales/$saleId",
+        "/purchases/",
+        "/sales/"
       ]
     },
     "/": {
@@ -258,12 +326,11 @@ export const routeTree = rootRoute
         "/_layout/_layout-2"
       ]
     },
-    "/posts": {
-      "filePath": "posts.tsx",
-      "children": [
-        "/posts/$postId",
-        "/posts/"
-      ]
+    "/parts": {
+      "filePath": "parts.tsx"
+    },
+    "/products": {
+      "filePath": "products.tsx"
     },
     "/_layout/_layout-2": {
       "filePath": "_layout/_layout-2.tsx",
@@ -273,13 +340,17 @@ export const routeTree = rootRoute
         "/_layout/_layout-2/layout-b"
       ]
     },
-    "/posts/$postId": {
-      "filePath": "posts.$postId.tsx",
-      "parent": "/posts"
+    "/purchases/$purchaseId": {
+      "filePath": "purchases.$purchaseId.tsx"
     },
-    "/posts/": {
-      "filePath": "posts.index.tsx",
-      "parent": "/posts"
+    "/sales/$saleId": {
+      "filePath": "sales.$saleId.tsx"
+    },
+    "/purchases/": {
+      "filePath": "purchases.index.tsx"
+    },
+    "/sales/": {
+      "filePath": "sales.index.tsx"
     },
     "/_layout/_layout-2/layout-a": {
       "filePath": "_layout/_layout-2/layout-a.tsx",

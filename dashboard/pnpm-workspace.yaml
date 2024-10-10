@@ -1,5 +1,0 @@
-packages:
-  - 'packages/*'
-  - 'examples/react/*'
-  - 'e2e/react-router/*'
-  - 'e2e/start/*'

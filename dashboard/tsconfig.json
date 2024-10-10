@@ -3,7 +3,13 @@
     "strict": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "target": "ESNext",
-    "moduleResolution": "Bundler"
+    "target": "ES2022",
+    "moduleResolution": "Bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   }
 }
