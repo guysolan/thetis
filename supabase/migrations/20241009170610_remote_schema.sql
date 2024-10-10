@@ -72,6 +72,7 @@ ALTER TABLE "public"."products" OWNER TO "postgres";
 CREATE TABLE IF NOT EXISTS "public"."purchases"(
     "id" bigint GENERATED ALWAYS AS IDENTITY,
     "uuid" uuid DEFAULT gen_random_uuid() NOT NULL,
+    "total_cost" numeric(10, 2) NOT NULL,
     "quantity" integer NOT NULL,
     "purchase_date" timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
@@ -101,6 +102,7 @@ ALTER TABLE "public"."purchase_parts" OWNER TO "postgres";
 CREATE TABLE IF NOT EXISTS "public"."sales"(
     "id" bigint GENERATED ALWAYS AS IDENTITY,
     "uuid" uuid DEFAULT gen_random_uuid() NOT NULL,
+    "total_cost" numeric(10, 2) NOT NULL,
     "sale_date" timestamp with time zone DEFAULT now()
 );
 

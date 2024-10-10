@@ -176,10 +176,10 @@ WHERE
     name = 'Instruction Leaflet'), 1);
 
 -- Insert data into purchases
-INSERT INTO purchases(quantity, purchase_date)
-    VALUES (100, '2023-01-15 10:00:00'),
-(50, '2023-02-20 14:30:00'),
-(75, '2023-03-25 09:45:00');
+INSERT INTO purchases(quantity, purchase_date, total_cost)
+    VALUES (100, '2023-01-15 10:00:00', 1490.00),
+(50, '2023-02-20 14:30:00', 5230.00),
+(75, '2023-03-25 09:45:00', 75.50);
 
 -- Insert data into purchase_parts
 INSERT INTO purchase_parts(purchase_id, part_id, quantity)
@@ -262,4 +262,46 @@ INSERT INTO purchase_products(purchase_id, product_id, quantity)
     FROM products
 WHERE
     name = 'Achilles Tendon Rupture Night Splint - Large Right'), 30);
+
+-- Insert data into sales
+INSERT INTO sales(total_cost, sale_date)
+    VALUES (1235.39, '2023-04-10 14:30:00'),
+(2470.78, '2023-04-15 09:45:00'),
+(987.65, '2023-04-20 11:15:00');
+
+-- Insert data into sale_products
+INSERT INTO sale_products(sale_id, product_id, quantity, price)
+    VALUES ((
+            SELECT
+                id
+            FROM
+                sales
+            WHERE
+                sale_date = '2023-04-10 14:30:00'),(
+                SELECT
+                    id
+                FROM
+                    products
+                WHERE
+                    name = 'Achilles Tendon Rupture Night Splint - Large Left'), 10, 89.99),((
+            SELECT
+                id
+            FROM sales
+        WHERE
+            sale_date = '2023-04-15 09:45:00'),(
+        SELECT
+            id
+        FROM products
+    WHERE
+        name = 'Achilles Tendon Rupture Night Splint - Small Right'), 20, 79.99),((
+        SELECT
+            id
+        FROM sales
+    WHERE
+        sale_date = '2023-04-20 11:15:00'),(
+    SELECT
+        id
+    FROM products
+WHERE
+    name = 'Achilles Tendon Rupture Night Splint - Large Right'), 8, 89.99);
 

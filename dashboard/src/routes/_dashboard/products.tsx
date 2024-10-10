@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useSelectProductParts } from "../features/product-parts/selectProductParts";
+import { useSelectProductParts } from "../../features/product-parts/selectProductParts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
 	Table,
@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
-import { useUpsertProduct } from "../features/products/api/upsertProduct";
+import { useUpsertProduct } from "../../features/products/api/upsertProduct";
 import {
 	Sheet,
 	SheetContent,
@@ -22,9 +22,9 @@ import {
 	SheetFooter,
 	SheetDescription,
 	SheetClose,
-} from "../components/ui/sheet";
-import { ProductForm } from "../features/products/components/ProductForm";
-import { ScrollArea } from "../components/ui/scroll-area";
+} from "../../components/ui/sheet";
+import { ProductForm } from "../../features/products/components/ProductForm";
+import { ScrollArea } from "../../components/ui/scroll-area";
 
 const ProductsPage = () => {
 	const { data: products } = useSelectProductParts();
@@ -138,6 +138,6 @@ const ProductsPage = () => {
 	);
 };
 
-export const Route = createFileRoute("/products")({
+export const Route = createFileRoute("/_dashboard/products")({
 	component: ProductsPage,
 });

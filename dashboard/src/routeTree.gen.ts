@@ -11,48 +11,34 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as ProductsImport } from './routes/products'
-import { Route as PartsImport } from './routes/parts'
 import { Route as LayoutImport } from './routes/_layout'
-import { Route as IndexImport } from './routes/index'
-import { Route as SalesIndexImport } from './routes/sales.index'
-import { Route as PurchasesIndexImport } from './routes/purchases.index'
+import { Route as DashboardImport } from './routes/_dashboard'
+import { Route as DashboardIndexImport } from './routes/_dashboard/index'
 import { Route as SalesSaleIdImport } from './routes/sales.$saleId'
 import { Route as PurchasesPurchaseIdImport } from './routes/purchases.$purchaseId'
 import { Route as LayoutLayout2Import } from './routes/_layout/_layout-2'
+import { Route as DashboardSalesImport } from './routes/_dashboard/sales'
+import { Route as DashboardPurchasesImport } from './routes/_dashboard/purchases'
+import { Route as DashboardProductsImport } from './routes/_dashboard/products'
+import { Route as DashboardPartsImport } from './routes/_dashboard/parts'
 import { Route as LayoutLayout2LayoutBImport } from './routes/_layout/_layout-2/layout-b'
 import { Route as LayoutLayout2LayoutAImport } from './routes/_layout/_layout-2/layout-a'
 
 // Create/Update Routes
-
-const ProductsRoute = ProductsImport.update({
-  path: '/products',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PartsRoute = PartsImport.update({
-  path: '/parts',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const LayoutRoute = LayoutImport.update({
   id: '/_layout',
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
+const DashboardRoute = DashboardImport.update({
+  id: '/_dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardIndexRoute = DashboardIndexImport.update({
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const SalesIndexRoute = SalesIndexImport.update({
-  path: '/sales/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PurchasesIndexRoute = PurchasesIndexImport.update({
-  path: '/purchases/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => DashboardRoute,
 } as any)
 
 const SalesSaleIdRoute = SalesSaleIdImport.update({
@@ -70,6 +56,26 @@ const LayoutLayout2Route = LayoutLayout2Import.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
+const DashboardSalesRoute = DashboardSalesImport.update({
+  path: '/sales',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardPurchasesRoute = DashboardPurchasesImport.update({
+  path: '/purchases',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardProductsRoute = DashboardProductsImport.update({
+  path: '/products',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardPartsRoute = DashboardPartsImport.update({
+  path: '/parts',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
 const LayoutLayout2LayoutBRoute = LayoutLayout2LayoutBImport.update({
   path: '/layout-b',
   getParentRoute: () => LayoutLayout2Route,
@@ -84,11 +90,11 @@ const LayoutLayout2LayoutARoute = LayoutLayout2LayoutAImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+    '/_dashboard': {
+      id: '/_dashboard'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
     '/_layout': {
@@ -98,19 +104,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
     }
-    '/parts': {
-      id: '/parts'
+    '/_dashboard/parts': {
+      id: '/_dashboard/parts'
       path: '/parts'
       fullPath: '/parts'
-      preLoaderRoute: typeof PartsImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof DashboardPartsImport
+      parentRoute: typeof DashboardImport
     }
-    '/products': {
-      id: '/products'
+    '/_dashboard/products': {
+      id: '/_dashboard/products'
       path: '/products'
       fullPath: '/products'
-      preLoaderRoute: typeof ProductsImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof DashboardProductsImport
+      parentRoute: typeof DashboardImport
+    }
+    '/_dashboard/purchases': {
+      id: '/_dashboard/purchases'
+      path: '/purchases'
+      fullPath: '/purchases'
+      preLoaderRoute: typeof DashboardPurchasesImport
+      parentRoute: typeof DashboardImport
+    }
+    '/_dashboard/sales': {
+      id: '/_dashboard/sales'
+      path: '/sales'
+      fullPath: '/sales'
+      preLoaderRoute: typeof DashboardSalesImport
+      parentRoute: typeof DashboardImport
     }
     '/_layout/_layout-2': {
       id: '/_layout/_layout-2'
@@ -133,19 +153,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SalesSaleIdImport
       parentRoute: typeof rootRoute
     }
-    '/purchases/': {
-      id: '/purchases/'
-      path: '/purchases'
-      fullPath: '/purchases'
-      preLoaderRoute: typeof PurchasesIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/sales/': {
-      id: '/sales/'
-      path: '/sales'
-      fullPath: '/sales'
-      preLoaderRoute: typeof SalesIndexImport
-      parentRoute: typeof rootRoute
+    '/_dashboard/': {
+      id: '/_dashboard/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof DashboardIndexImport
+      parentRoute: typeof DashboardImport
     }
     '/_layout/_layout-2/layout-a': {
       id: '/_layout/_layout-2/layout-a'
@@ -165,6 +178,26 @@ declare module '@tanstack/react-router' {
 }
 
 // Create and export the route tree
+
+interface DashboardRouteChildren {
+  DashboardPartsRoute: typeof DashboardPartsRoute
+  DashboardProductsRoute: typeof DashboardProductsRoute
+  DashboardPurchasesRoute: typeof DashboardPurchasesRoute
+  DashboardSalesRoute: typeof DashboardSalesRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardPartsRoute: DashboardPartsRoute,
+  DashboardProductsRoute: DashboardProductsRoute,
+  DashboardPurchasesRoute: DashboardPurchasesRoute,
+  DashboardSalesRoute: DashboardSalesRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
 
 interface LayoutLayout2RouteChildren {
   LayoutLayout2LayoutARoute: typeof LayoutLayout2LayoutARoute
@@ -192,42 +225,43 @@ const LayoutRouteWithChildren =
   LayoutRoute._addFileChildren(LayoutRouteChildren)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '': typeof LayoutLayout2RouteWithChildren
-  '/parts': typeof PartsRoute
-  '/products': typeof ProductsRoute
+  '/parts': typeof DashboardPartsRoute
+  '/products': typeof DashboardProductsRoute
+  '/purchases': typeof DashboardPurchasesRoute
+  '/sales': typeof DashboardSalesRoute
   '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
   '/sales/$saleId': typeof SalesSaleIdRoute
-  '/purchases': typeof PurchasesIndexRoute
-  '/sales': typeof SalesIndexRoute
+  '/': typeof DashboardIndexRoute
   '/layout-a': typeof LayoutLayout2LayoutARoute
   '/layout-b': typeof LayoutLayout2LayoutBRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '': typeof LayoutLayout2RouteWithChildren
-  '/parts': typeof PartsRoute
-  '/products': typeof ProductsRoute
+  '/parts': typeof DashboardPartsRoute
+  '/products': typeof DashboardProductsRoute
+  '/purchases': typeof DashboardPurchasesRoute
+  '/sales': typeof DashboardSalesRoute
   '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
   '/sales/$saleId': typeof SalesSaleIdRoute
-  '/purchases': typeof PurchasesIndexRoute
-  '/sales': typeof SalesIndexRoute
+  '/': typeof DashboardIndexRoute
   '/layout-a': typeof LayoutLayout2LayoutARoute
   '/layout-b': typeof LayoutLayout2LayoutBRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
+  '/_dashboard': typeof DashboardRouteWithChildren
   '/_layout': typeof LayoutRouteWithChildren
-  '/parts': typeof PartsRoute
-  '/products': typeof ProductsRoute
+  '/_dashboard/parts': typeof DashboardPartsRoute
+  '/_dashboard/products': typeof DashboardProductsRoute
+  '/_dashboard/purchases': typeof DashboardPurchasesRoute
+  '/_dashboard/sales': typeof DashboardSalesRoute
   '/_layout/_layout-2': typeof LayoutLayout2RouteWithChildren
   '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
   '/sales/$saleId': typeof SalesSaleIdRoute
-  '/purchases/': typeof PurchasesIndexRoute
-  '/sales/': typeof SalesIndexRoute
+  '/_dashboard/': typeof DashboardIndexRoute
   '/_layout/_layout-2/layout-a': typeof LayoutLayout2LayoutARoute
   '/_layout/_layout-2/layout-b': typeof LayoutLayout2LayoutBRoute
 }
@@ -235,64 +269,57 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | ''
     | '/parts'
     | '/products'
-    | '/purchases/$purchaseId'
-    | '/sales/$saleId'
     | '/purchases'
     | '/sales'
+    | '/purchases/$purchaseId'
+    | '/sales/$saleId'
+    | '/'
     | '/layout-a'
     | '/layout-b'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | ''
     | '/parts'
     | '/products'
-    | '/purchases/$purchaseId'
-    | '/sales/$saleId'
     | '/purchases'
     | '/sales'
+    | '/purchases/$purchaseId'
+    | '/sales/$saleId'
+    | '/'
     | '/layout-a'
     | '/layout-b'
   id:
     | '__root__'
-    | '/'
+    | '/_dashboard'
     | '/_layout'
-    | '/parts'
-    | '/products'
+    | '/_dashboard/parts'
+    | '/_dashboard/products'
+    | '/_dashboard/purchases'
+    | '/_dashboard/sales'
     | '/_layout/_layout-2'
     | '/purchases/$purchaseId'
     | '/sales/$saleId'
-    | '/purchases/'
-    | '/sales/'
+    | '/_dashboard/'
     | '/_layout/_layout-2/layout-a'
     | '/_layout/_layout-2/layout-b'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
   LayoutRoute: typeof LayoutRouteWithChildren
-  PartsRoute: typeof PartsRoute
-  ProductsRoute: typeof ProductsRoute
   PurchasesPurchaseIdRoute: typeof PurchasesPurchaseIdRoute
   SalesSaleIdRoute: typeof SalesSaleIdRoute
-  PurchasesIndexRoute: typeof PurchasesIndexRoute
-  SalesIndexRoute: typeof SalesIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRouteWithChildren,
   LayoutRoute: LayoutRouteWithChildren,
-  PartsRoute: PartsRoute,
-  ProductsRoute: ProductsRoute,
   PurchasesPurchaseIdRoute: PurchasesPurchaseIdRoute,
   SalesSaleIdRoute: SalesSaleIdRoute,
-  PurchasesIndexRoute: PurchasesIndexRoute,
-  SalesIndexRoute: SalesIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -307,18 +334,21 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
+        "/_dashboard",
         "/_layout",
-        "/parts",
-        "/products",
         "/purchases/$purchaseId",
-        "/sales/$saleId",
-        "/purchases/",
-        "/sales/"
+        "/sales/$saleId"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
+    "/_dashboard": {
+      "filePath": "_dashboard.tsx",
+      "children": [
+        "/_dashboard/parts",
+        "/_dashboard/products",
+        "/_dashboard/purchases",
+        "/_dashboard/sales",
+        "/_dashboard/"
+      ]
     },
     "/_layout": {
       "filePath": "_layout.tsx",
@@ -326,11 +356,21 @@ export const routeTree = rootRoute
         "/_layout/_layout-2"
       ]
     },
-    "/parts": {
-      "filePath": "parts.tsx"
+    "/_dashboard/parts": {
+      "filePath": "_dashboard/parts.tsx",
+      "parent": "/_dashboard"
     },
-    "/products": {
-      "filePath": "products.tsx"
+    "/_dashboard/products": {
+      "filePath": "_dashboard/products.tsx",
+      "parent": "/_dashboard"
+    },
+    "/_dashboard/purchases": {
+      "filePath": "_dashboard/purchases.tsx",
+      "parent": "/_dashboard"
+    },
+    "/_dashboard/sales": {
+      "filePath": "_dashboard/sales.tsx",
+      "parent": "/_dashboard"
     },
     "/_layout/_layout-2": {
       "filePath": "_layout/_layout-2.tsx",
@@ -346,11 +386,9 @@ export const routeTree = rootRoute
     "/sales/$saleId": {
       "filePath": "sales.$saleId.tsx"
     },
-    "/purchases/": {
-      "filePath": "purchases.index.tsx"
-    },
-    "/sales/": {
-      "filePath": "sales.index.tsx"
+    "/_dashboard/": {
+      "filePath": "_dashboard/index.tsx",
+      "parent": "/_dashboard"
     },
     "/_layout/_layout-2/layout-a": {
       "filePath": "_layout/_layout-2/layout-a.tsx",

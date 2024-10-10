@@ -7,7 +7,7 @@ import { supabase } from "../../config/supabase";
 
 export const selectProductParts = async () => {
   const { data, error } = await supabase.from("products").select(
-    "*, product_parts(quantity, part:parts(name, price))",
+    "*, product_parts(quantity, part:parts(uuid, name, price))",
   );
 
   if (error) {
