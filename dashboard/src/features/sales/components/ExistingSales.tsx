@@ -69,15 +69,15 @@ export const ExistingSales: React.FC<ExistingSalesProps> = ({ sales }) => {
 											</TableRow>
 										</TableHeader>
 										<TableBody>
-											{sale.sale_products.map((item) => (
-												<TableRow key={`${sale.id}-${item.product.name}`}>
-													<TableCell>{item.product.name}</TableCell>
+											{sale.products.map((product) => (
+												<TableRow key={`${sale.id}-${product.product_name}`}>
+													<TableCell>{product.product_name}</TableCell>
 													<TableCell>
-														${item.product.price.toFixed(2)}
+														${product.price.toFixed(2)}
 													</TableCell>
-													<TableCell>{item.quantity}</TableCell>
+													<TableCell>{-product.quantity}</TableCell>
 													<TableCell>
-														${(item.product.price * item.quantity).toFixed(2)}
+														${(product.total).toFixed(2)}
 													</TableCell>
 												</TableRow>
 											))}

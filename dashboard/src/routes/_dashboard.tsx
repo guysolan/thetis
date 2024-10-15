@@ -77,7 +77,7 @@ function DashboardComponent() {
 					orientation="vertical"
 				/>
 				<Link
-					to="/parts"
+					to="/inventory"
 					className={cn(buttonVariants({ variant: "link" }))}
 					activeProps={{
 						className: "underline underline-offset-6",
@@ -86,13 +86,26 @@ function DashboardComponent() {
 					Inventory
 				</Link>
 				<Link
-					to="/products"
+					to="/shipments"
 					className={cn(buttonVariants({ variant: "link" }))}
 					activeProps={{
 						className: "underline underline-offset-6",
 					}}
 				>
 					Shipments
+				</Link>
+				<Separator
+					className="bg-neutral-600 w-[1px] h-6"
+					orientation="vertical"
+				/>
+				<Link
+					to="/settings"
+					className={cn(buttonVariants({ variant: "link" }))}
+					activeProps={{
+						className: "underline underline-offset-6",
+					}}
+				>
+					Settings
 				</Link>
 			</nav>
 			<hr />

@@ -54,7 +54,7 @@ const ProductsPage = () => {
 			{products.map((product) => (
 				<Card key={product.id} className="flex flex-col">
 					<CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
-						<CardTitle className="font-semibold text-lg truncate">
+						<CardTitle className="font-semibold text-lg text-wrap truncate">
 							{product.name}
 						</CardTitle>
 						<div className="flex space-x-2">

@@ -7,7 +7,7 @@ import { supabase } from "../../../lib/supabase";
 import { saleQueryString } from "./saleQueryString";
 
 export const selectSales = async () => {
-  const { data, error } = await supabase.from("sales").select(
+  const { data, error } = await supabase.from("sales_view").select(
     saleQueryString,
   );
 

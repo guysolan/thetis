@@ -9,17 +9,17 @@ import {
 	SheetTitle,
 	SheetDescription,
 } from "@/components/ui/sheet";
-import { useSelectPurchases } from "../../features/purchases/api/selectPurchases";
-import { useSelectProductParts } from "../../features/product-parts/selectProductParts";
-import { useSelectParts } from "../../features/parts/api/selectParts";
+import { useSelectPurchases } from "@/features/purchases/api/selectPurchases";
+import { useSelectProductParts } from "@/features/product-parts/selectProductParts";
+import { useSelectParts } from "@/features/parts/api/selectParts";
 import {
 	type PurchaseItem,
 	calculatePurchaseDetails,
-} from "../../features/purchases/utils/calculatePurchaseDetails";
-import { PurchaseForm } from "../../features/purchases/components/PurchaseForm";
-import { PurchaseSummary } from "../../features/purchases/components/PurchaseSummary";
-import { ExistingPurchases } from "../../features/purchases/components/ExistingPurchases";
-import { ScrollArea } from "../../components/ui/scroll-area";
+} from "@/features/purchases/utils/calculatePurchaseDetails";
+import { PurchaseForm } from "@/features/purchases/components/PurchaseForm";
+import { PurchaseSummary } from "@/features/purchases/components/PurchaseSummary";
+import { ExistingPurchases } from "@/features/purchases/components/ExistingPurchases";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const PurchasesPage = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +27,7 @@ const PurchasesPage = () => {
 		{ type: "product", id: "", quantity: 0 },
 	]);
 	const { data: purchases } = useSelectPurchases();
-	const { data: products } = useSelectProductParts();
+const { data: products } = useSelectProductParts();
 	const { data: parts } = useSelectParts();
 
 	return (
