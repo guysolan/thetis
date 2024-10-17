@@ -19,7 +19,7 @@ import { Route as PurchasesPurchaseIdImport } from './routes/purchases.$purchase
 import { Route as DashboardWarehousesImport } from './routes/_dashboard/warehouses'
 import { Route as DashboardSettingsImport } from './routes/_dashboard/settings'
 import { Route as DashboardOrdersImport } from './routes/_dashboard/orders'
-import { Route as DashboardItemsImport } from './ro./routes/_dashboard/warehouses
+import { Route as DashboardItemsImport } from './routes/_dashboard/items'
 
 // Create/Update Routes
 
