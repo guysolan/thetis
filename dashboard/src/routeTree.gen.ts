@@ -17,10 +17,8 @@ import { Route as DashboardIndexImport } from './routes/_dashboard/index'
 import { Route as SalesSaleIdImport } from './routes/sales.$saleId'
 import { Route as PurchasesPurchaseIdImport } from './routes/purchases.$purchaseId'
 import { Route as DashboardSettingsImport } from './routes/_dashboard/settings'
-import { Route as DashboardSalesImport } from './routes/_dashboard/sales'
-import { Route as DashboardPurchasesImport } from './routes/_dashboard/purchases'
-import { Route as DashboardProductsImport } from './routes/_dashboard/products'
-import { Route as DashboardPartsImport } from './routes/_dashboard/parts'
+import { Route as DashboardOrdersImport } from './routes/_dashboard/orders'
+import { Route as DashboardItemsImport } from './routes/_dashboard/items'
 import { Route as DashboardInventoryImport } from './routes/_dashboard/inventory'
 
 // Create/Update Routes
@@ -55,23 +53,13 @@ const DashboardSettingsRoute = DashboardSettingsImport.update({
   getParentRoute: () => DashboardRoute,
 } as any)
 
-const DashboardSalesRoute = DashboardSalesImport.update({
-  path: '/sales',
+const DashboardOrdersRoute = DashboardOrdersImport.update({
+  path: '/orders',
   getParentRoute: () => DashboardRoute,
 } as any)
 
-const DashboardPurchasesRoute = DashboardPurchasesImport.update({
-  path: '/purchases',
-  getParentRoute: () => DashboardRoute,
-} as any)
-
-const DashboardProductsRoute = DashboardProductsImport.update({
-  path: '/products',
-  getParentRoute: () => DashboardRoute,
-} as any)
-
-const DashboardPartsRoute = DashboardPartsImport.update({
-  path: '/parts',
+const DashboardItemsRoute = DashboardItemsImport.update({
+  path: '/items',
   getParentRoute: () => DashboardRoute,
 } as any)
 
@@ -105,32 +93,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardInventoryImport
       parentRoute: typeof DashboardImport
     }
-    '/_dashboard/parts': {
-      id: '/_dashboard/parts'
-      path: '/parts'
-      fullPath: '/parts'
-      preLoaderRoute: typeof DashboardPartsImport
+    '/_dashboard/items': {
+      id: '/_dashboard/items'
+      path: '/items'
+      fullPath: '/items'
+      preLoaderRoute: typeof DashboardItemsImport
       parentRoute: typeof DashboardImport
     }
-    '/_dashboard/products': {
-      id: '/_dashboard/products'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof DashboardProductsImport
-      parentRoute: typeof DashboardImport
-    }
-    '/_dashboard/purchases': {
-      id: '/_dashboard/purchases'
-      path: '/purchases'
-      fullPath: '/purchases'
-      preLoaderRoute: typeof DashboardPurchasesImport
-      parentRoute: typeof DashboardImport
-    }
-    '/_dashboard/sales': {
-      id: '/_dashboard/sales'
-      path: '/sales'
-      fullPath: '/sales'
-      preLoaderRoute: typeof DashboardSalesImport
+    '/_dashboard/orders': {
+      id: '/_dashboard/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof DashboardOrdersImport
       parentRoute: typeof DashboardImport
     }
     '/_dashboard/settings': {
@@ -168,20 +142,16 @@ declare module '@tanstack/react-router' {
 
 interface DashboardRouteChildren {
   DashboardInventoryRoute: typeof DashboardInventoryRoute
-  DashboardPartsRoute: typeof DashboardPartsRoute
-  DashboardProductsRoute: typeof DashboardProductsRoute
-  DashboardPurchasesRoute: typeof DashboardPurchasesRoute
-  DashboardSalesRoute: typeof DashboardSalesRoute
+  DashboardItemsRoute: typeof DashboardItemsRoute
+  DashboardOrdersRoute: typeof DashboardOrdersRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardInventoryRoute: DashboardInventoryRoute,
-  DashboardPartsRoute: DashboardPartsRoute,
-  DashboardProductsRoute: DashboardProductsRoute,
-  DashboardPurchasesRoute: DashboardPurchasesRoute,
-  DashboardSalesRoute: DashboardSalesRoute,
+  DashboardItemsRoute: DashboardItemsRoute,
+  DashboardOrdersRoute: DashboardOrdersRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
@@ -193,10 +163,8 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '': typeof LayoutRoute
   '/inventory': typeof DashboardInventoryRoute
-  '/parts': typeof DashboardPartsRoute
-  '/products': typeof DashboardProductsRoute
-  '/purchases': typeof DashboardPurchasesRoute
-  '/sales': typeof DashboardSalesRoute
+  '/items': typeof DashboardItemsRoute
+  '/orders': typeof DashboardOrdersRoute
   '/settings': typeof DashboardSettingsRoute
   '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
   '/sales/$saleId': typeof SalesSaleIdRoute
@@ -206,10 +174,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '': typeof LayoutRoute
   '/inventory': typeof DashboardInventoryRoute
-  '/parts': typeof DashboardPartsRoute
-  '/products': typeof DashboardProductsRoute
-  '/purchases': typeof DashboardPurchasesRoute
-  '/sales': typeof DashboardSalesRoute
+  '/items': typeof DashboardItemsRoute
+  '/orders': typeof DashboardOrdersRoute
   '/settings': typeof DashboardSettingsRoute
   '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
   '/sales/$saleId': typeof SalesSaleIdRoute
@@ -221,10 +187,8 @@ export interface FileRoutesById {
   '/_dashboard': typeof DashboardRouteWithChildren
   '/_layout': typeof LayoutRoute
   '/_dashboard/inventory': typeof DashboardInventoryRoute
-  '/_dashboard/parts': typeof DashboardPartsRoute
-  '/_dashboard/products': typeof DashboardProductsRoute
-  '/_dashboard/purchases': typeof DashboardPurchasesRoute
-  '/_dashboard/sales': typeof DashboardSalesRoute
+  '/_dashboard/items': typeof DashboardItemsRoute
+  '/_dashboard/orders': typeof DashboardOrdersRoute
   '/_dashboard/settings': typeof DashboardSettingsRoute
   '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
   '/sales/$saleId': typeof SalesSaleIdRoute
@@ -236,10 +200,8 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/inventory'
-    | '/parts'
-    | '/products'
-    | '/purchases'
-    | '/sales'
+    | '/items'
+    | '/orders'
     | '/settings'
     | '/purchases/$purchaseId'
     | '/sales/$saleId'
@@ -248,10 +210,8 @@ export interface FileRouteTypes {
   to:
     | ''
     | '/inventory'
-    | '/parts'
-    | '/products'
-    | '/purchases'
-    | '/sales'
+    | '/items'
+    | '/orders'
     | '/settings'
     | '/purchases/$purchaseId'
     | '/sales/$saleId'
@@ -261,10 +221,8 @@ export interface FileRouteTypes {
     | '/_dashboard'
     | '/_layout'
     | '/_dashboard/inventory'
-    | '/_dashboard/parts'
-    | '/_dashboard/products'
-    | '/_dashboard/purchases'
-    | '/_dashboard/sales'
+    | '/_dashboard/items'
+    | '/_dashboard/orders'
     | '/_dashboard/settings'
     | '/purchases/$purchaseId'
     | '/sales/$saleId'
@@ -308,10 +266,8 @@ export const routeTree = rootRoute
       "filePath": "_dashboard.tsx",
       "children": [
         "/_dashboard/inventory",
-        "/_dashboard/parts",
-        "/_dashboard/products",
-        "/_dashboard/purchases",
-        "/_dashboard/sales",
+        "/_dashboard/items",
+        "/_dashboard/orders",
         "/_dashboard/settings",
         "/_dashboard/"
       ]
@@ -323,20 +279,12 @@ export const routeTree = rootRoute
       "filePath": "_dashboard/inventory.tsx",
       "parent": "/_dashboard"
     },
-    "/_dashboard/parts": {
-      "filePath": "_dashboard/parts.tsx",
+    "/_dashboard/items": {
+      "filePath": "_dashboard/items.tsx",
       "parent": "/_dashboard"
     },
-    "/_dashboard/products": {
-      "filePath": "_dashboard/products.tsx",
-      "parent": "/_dashboard"
-    },
-    "/_dashboard/purchases": {
-      "filePath": "_dashboard/purchases.tsx",
-      "parent": "/_dashboard"
-    },
-    "/_dashboard/sales": {
-      "filePath": "_dashboard/sales.tsx",
+    "/_dashboard/orders": {
+      "filePath": "_dashboard/orders.tsx",
       "parent": "/_dashboard"
     },
     "/_dashboard/settings": {

@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
 	Link,
 	Outlet,
@@ -33,49 +32,24 @@ function DashboardComponent() {
 					orientation="vertical"
 				/>
 				<Link
-					to="/sales"
+					to="/orders"
 					className={cn(buttonVariants({ variant: "link" }))}
 					activeProps={{
 						className: "underline underline-offset-6",
 					}}
 				>
-					Sales
+					Orders
 				</Link>
 				<Link
-					to="/purchases"
+					to="/items"
 					className={cn(buttonVariants({ variant: "link" }))}
 					activeProps={{
 						className: "underline underline-offset-6",
 					}}
 				>
-					Purchases
+Items
 				</Link>
-				<Separator
-					className="bg-neutral-600 w-[1px] h-6"
-					orientation="vertical"
-				/>
-				<Link
-					to="/parts"
-					className={cn(buttonVariants({ variant: "link" }))}
-					activeProps={{
-						className: "underline underline-offset-6",
-					}}
-				>
-					Parts
-				</Link>
-				<Link
-					to="/products"
-					className={cn(buttonVariants({ variant: "link" }))}
-					activeProps={{
-						className: "underline underline-offset-6",
-					}}
-				>
-					Products
-				</Link>
-				<Separator
-					className="bg-neutral-600 w-[1px] h-6"
-					orientation="vertical"
-				/>
+			
 				<Link
 					to="/inventory"
 					className={cn(buttonVariants({ variant: "link" }))}
@@ -84,15 +58,6 @@ function DashboardComponent() {
 					}}
 				>
 					Inventory
-				</Link>
-				<Link
-					to="/shipments"
-					className={cn(buttonVariants({ variant: "link" }))}
-					activeProps={{
-						className: "underline underline-offset-6",
-					}}
-				>
-					Shipments
 				</Link>
 				<Separator
 					className="bg-neutral-600 w-[1px] h-6"

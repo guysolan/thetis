@@ -7,27 +7,27 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import {
-	type SaleItem,
-	calculateSaleDetails,
-} from "../utils/calculateSaleDetails";
+	type OrderItem,
+	calculateOrderDetails,
+} from "../utils/calculateOrderDetails";
 
-interface SaleSummaryProps {
-	saleItems: SaleItem[];
+interface OrderSummaryProps {
+	orderItems: OrderItem[];
 	products: any[];
 }
 
-export const SaleSummary: React.FC<SaleSummaryProps> = ({
-	saleItems,
+export const OrderSummary: React.FC<OrderSummaryProps> = ({
+	orderItems,
 	products,
 }) => {
-	const { totalCost, productsConsumed } = calculateSaleDetails(
-		saleItems,
+	const { totalCost, productsConsumed } = calculateOrderDetails(
+		orderItems,
 		products,
 	);
 
 	return (
 		<div className="mt-4 mb-4">
-			<h3 className="mb-2 font-semibold">Sale Summary:</h3>
+			<h3 className="mb-2 font-semibold">Order Summary:</h3>
 			<p>Total Cost: ${totalCost.toFixed(2)}</p>
 			<h4 className="mt-2 font-semibold">Products stock changes:</h4>
 			<Table>
@@ -36,7 +36,7 @@ export const SaleSummary: React.FC<SaleSummaryProps> = ({
 						<TableHead>Product Name</TableHead>
 						<TableHead>Previous Stock</TableHead>
 						<TableHead>Change</TableHead>
-						<TableHead>Remaining After Sale</TableHead>
+						<TableHead>Remaining After Order</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>

@@ -1,10 +1,10 @@
-export interface SaleItem {
+export interface OrderItem {
   id: string;
   quantity: number;
 }
 
-export const calculateSaleDetails = (
-  saleItems: SaleItem[],
+export const calculateOrderDetails = (
+  orderItems: OrderItem[],
   products: any[],
 ) => {
   let totalCost = 0;
@@ -16,7 +16,7 @@ export const calculateSaleDetails = (
     remainingStock: number;
   }[] = [];
 
-  for (const item of saleItems) {
+  for (const item of orderItems) {
     const selectedProduct = products.find(
       (p) => p.id.toString() === item.id,
     );

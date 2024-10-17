@@ -12,8 +12,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../../components/ui/select.js";
-import { useSelectWarehouses } from "../api/selectWarehouses.js";
+} from "../../../components/ui/select";
+import { useSelectWarehouses } from "../api/selectWarehouses";
 
 interface Props {
   name?: string;

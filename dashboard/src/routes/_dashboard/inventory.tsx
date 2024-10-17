@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Sheet from "@/components/Sheet";
+import { Card, CardContent, CardHeader, CardTitle,CardFooter } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -8,17 +9,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useSelectWarehouseProducts } from "@/features/inventory/api/selectWarehouseProducts";
+import { useSelectWarehouseItems } from "@/features/inventory/api/selectWarehouseItems";
 import { useSelectWarehouses } from '../../features/inventory/api/selectWarehouses';
-import { useSelectWarehouseParts } from '../../features/inventory/api/selectWarehouseParts';
 import { Badge } from '../../components/ui/badge';
+import { Button } from '../../components/ui/button';
+import { StockTakeForm } from '../../features/inventory/components/StockTakeForm';
 
-const ProductsPage = () => {
+const ItemsPage = () => {
     const {data:warehouses} = useSelectWarehouses();
-  const { data: warehouseProducts } =
-    useSelectWarehouseProducts();
-  const { data: warehouseParts } =
-    useSelectWarehouseParts();
+  const { data: warehouseItems } =
+    useSelectWarehouseItems();
+
   return (
     <section className="gap-4 grid lg:grid-cols-2 p-4">
       {warehouses?.map((warehouse: any) => (
@@ -40,37 +41,27 @@ const ProductsPage = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {warehouseParts?.filter(wp => wp.warehouse_id === warehouse.id).map((wp: any) => (
-                  <TableRow key={`part-${wp.part_id}`}>
+           
+                {warehouseItems?.filter(wp => wp.warehouse_id === warehouse.id).map((wp: any) => (
+                  <TableRow key={`item-${wp.item_id}`}>
                     <TableCell>
-                      <Badge variant="secondary">Part</Badge>
+                      <Badge className='capitalize' variant="default">{wp.item_type}</Badge>
                     </TableCell>
-                    <TableCell>{wp.part_name}</TableCell>
-                    <TableCell>${wp.part_price.toFixed(2)}</TableCell>
-                    <TableCell>{wp.part_quantity}</TableCell>
-                    <TableCell>${(wp.part_value).toFixed(2)}</TableCell>
+                    <TableCell>{wp.item_name}</TableCell>
+                    <TableCell>${wp.item_price.toFixed(2)}</TableCell>
+                    <TableCell>{wp.item_quantity}</TableCell>
+                    <TableCell>${(wp.item_value).toFixed(2)}</TableCell>
                   </TableRow>
                 ))}
-                {warehouseProducts?.filter(wp => wp.warehouse_id === warehouse.id).map((wp: any) => (
-                  <TableRow key={`product-${wp.product_id}`}>
-                    <TableCell>
-                      <Badge variant="default">Product</Badge>
-                    </TableCell>
-                    <TableCell>{wp.product_name}</TableCell>
-                    <TableCell>${wp.product_price.toFixed(2)}</TableCell>
-                    <TableCell>{wp.product_quantity}</TableCell>
-                    <TableCell>${(wp.product_value).toFixed(2)}</TableCell>
-                  </TableRow>
-                ))}
-                {(!warehouseParts?.some(wp => wp.warehouse_id === warehouse.id) && 
-                  !warehouseProducts?.some(wp => wp.warehouse_id === warehouse.id)) && (
-                  <TableRow>
-                    <TableCell colSpan={5}>No Items</TableCell>
-                  </TableRow>
-                )}
+               
               </TableBody>
             </Table>
           </CardContent>
+          <CardFooter>
+            <Sheet trigger={<Button>New Stocktake</Button>} title='New Stocktake' description={`Update the stock for warehouse ${warehouse.name}`}>
+            <StockTakeForm />
+            </Sheet>
+          </CardFooter>
         </Card>
       ))}
           </section>
@@ -78,5 +69,5 @@ const ProductsPage = () => {
 };
 
 export const Route = createFileRoute("/_dashboard/inventory")({
-  component: ProductsPage,
+  component: ItemsPage,
 });

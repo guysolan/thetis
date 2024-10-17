@@ -88,10 +88,10 @@ export function MobileNav() {
                             )}
                             href="/contact"
                         >
-                            Contact Sales
+                            Contact Orders
                         </a>
                     </SheetClose>
-                    <div className="flex gap-x-6 flex-wrap my-2">
+                    <div className="flex flex-wrap gap-x-6 my-2">
                         <Social mode="facebook" />
                         <Social mode="instagram" />
                         <Social mode="linkedin" />

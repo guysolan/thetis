@@ -20,48 +20,48 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { SaleSummary } from "./SaleSummary";
-import { useProcessSale } from "../api/processSale";
+import { OrderSummary } from "./OrderSummary";
+import { useProcessOrder } from "../api/processOrder";
 
-const saleItemSchema = z.object({
+const orderItemSchema = z.object({
 	id: z.string().min(1, "Product is required"),
 	quantity: z.number().min(1, "Quantity must be at least 1"),
 });
 
 const formSchema = z.object({
-	sale_items: z.array(saleItemSchema).min(1, "Add at least one product"),
+	order_items: z.array(orderItemSchema).min(1, "Add at least one product"),
 });
 
-export type SaleFormData = z.infer<typeof formSchema>;
+export type OrderFormData = z.infer<typeof formSchema>;
 
-interface SaleFormProps {
+interface OrderFormProps {
 	defaultValues: { id: string; name: string }[];
 }
 
-export const SaleForm: React.FC<SaleFormProps> = ({
+export const OrderForm: React.FC<OrderFormProps> = ({
 	defaultValues,
-}: SaleFormProps) => {
-	const { mutate: createSale } = useProcessSale();
+}: OrderFormProps) => {
+	const { mutate: createOrder } = useProcessOrder();
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			sale_items: [{ id: "", quantity: 1 }],
+			order_items: [{ id: "", quantity: 1 }],
 		},
 	});
 
 	const { fields, append, remove } = useFieldArray({
 		control: form.control,
-		name: "sale_items",
+		name: "order_items",
 	});
 
-	const saleItems = useWatch({
+	const orderItems = useWatch({
 		control: form.control,
-		name: "sale_items",
+		name: "order_items",
 	});
 
 	const onSubmit = (data: z.infer<typeof formSchema>) => {
-		createSale(data);
+		createOrder(data);
 	};
 
 	return (
@@ -72,7 +72,7 @@ export const SaleForm: React.FC<SaleFormProps> = ({
 						<div key={field.id} className="gap-2 grid px-1">
 							<FormField
 								control={form.control}
-								name={`sale_items.${index}.id`}
+								name={`order_items.${index}.id`}
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Product</FormLabel>
@@ -102,7 +102,7 @@ export const SaleForm: React.FC<SaleFormProps> = ({
 							/>
 							<FormField
 								control={form.control}
-								name={`sale_items.${index}.quantity`}
+								name={`order_items.${index}.quantity`}
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Quantity</FormLabel>
@@ -138,8 +138,8 @@ export const SaleForm: React.FC<SaleFormProps> = ({
 						Add Product
 					</Button>
 				</div>
-				<SaleSummary saleItems={saleItems} products={defaultValues} />
-				<Button type="submit">Create Sale</Button>
+				<OrderSummary orderItems={orderItems} products={defaultValues} />
+				<Button type="submit">Create Order</Button>
 			</form>
 		</Form>
 	);

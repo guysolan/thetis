@@ -4,17 +4,22 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-	"inline-flex items-center border-neutral-200 dark:border-neutral-800 px-2.5 py-0.5 border focus:ring-2 focus:ring-neutral-950 dark:focus:ring-neutral-300 focus:ring-offset-2 font-semibold text-xs transition-colors focus:outline-none",
+	"inline-flex items-center opacity-80 px-2.5 py-0.5 rounded-full focus:ring-2 focus:ring-neutral-950 dark:focus:ring-neutral-300 focus:ring-offset-2 font-normal text-xs uppercase transition-colors focus:outline-none hover:no-underline",
 	{
 		variants: {
 			variant: {
 				default:
-					"border-transparent bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/80 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/80",
+					"bg-neutral-900 text-neutral-50 dark:bg-neutral-200 dark:text-neutral-900",
 				secondary:
-					"border-transparent bg-neutral-100 text-neutral-900 hover:bg-neutral-100/80 dark:bg-neutral-800 dark:text-neutral-50 dark:hover:bg-neutral-800/80",
+					"bg-neutral-100 text-neutral-900 dark:bg-neutral-700 dark:text-neutral-100",
 				destructive:
-					"border-transparent bg-red-500 text-neutral-50 shadow hover:bg-red-500/80 dark:bg-red-900 dark:text-neutral-50 dark:hover:bg-red-900/80",
-				outline: "text-neutral-950 dark:text-neutral-50",
+					"bg-red-500 text-white dark:bg-red-700",
+				outline:
+					"border border-neutral-200 text-neutral-950 dark:border-neutral-800 dark:text-neutral-100",
+				success:
+					"bg-green-500 text-white dark:bg-green-700",
+				warning:
+					"bg-yellow-500 text-white dark:bg-yellow-700",
 			},
 		},
 		defaultVariants: {

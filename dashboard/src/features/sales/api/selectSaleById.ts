@@ -4,12 +4,12 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { supabase } from "../../../lib/supabase";
-import { saleQueryString } from "./saleQueryString";
+import { orderQueryString } from "./orderQueryString";
 
-export const selectSaleById = async (id: string) => {
+export const selectOrderById = async (id: string) => {
   const { data, error } = await supabase
-    .from("sales")
-    .select(saleQueryString)
+    .from("orders")
+    .select(orderQueryString)
     .eq("id", id)
     .single();
 
@@ -19,12 +19,12 @@ export const selectSaleById = async (id: string) => {
   return data;
 };
 
-export const selectSaleByIdQueryOptions = (id: string) => {
+export const selectOrderByIdQueryOptions = (id: string) => {
   return queryOptions({
-    queryKey: ["select-sale", id],
-    queryFn: () => selectSaleById(id),
+    queryKey: ["select-order", id],
+    queryFn: () => selectOrderById(id),
   });
 };
 
-export const useSelectSaleById = (id: string) =>
-  useSuspenseQuery(selectSaleByIdQueryOptions(id));
+export const useSelectOrderById = (id: string) =>
+  useSuspenseQuery(selectOrderByIdQueryOptions(id));

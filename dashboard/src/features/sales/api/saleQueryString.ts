@@ -1,1 +1,1 @@
-export const saleQueryString = "*";
+export const orderQueryString = "*";

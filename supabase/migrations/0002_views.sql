@@ -1,88 +1,133 @@
--- Create a view for product quantities in each warehouse
-CREATE OR REPLACE VIEW warehouse_products AS
+-- Create a view for item quantities in each warehouse
+CREATE OR REPLACE VIEW warehouse_items AS
 SELECT
     w.id AS warehouse_id,
     w.name AS warehouse_name,
-    p.id AS product_id,
-    p.name AS product_name,
-    p.price AS product_price,
-    COALESCE(SUM(pc.quantity_change), 0) AS product_quantity,
-    COALESCE(SUM(pc.quantity_change), 0) * p.price AS product_value
+    i.id AS item_id,
+    i.name AS item_name,
+    i.price AS item_price,
+    i.type AS item_type,
+    COALESCE(SUM(ic.quantity_change), 0) AS item_quantity,
+    COALESCE(SUM(ic.quantity_change), 0) * i.price AS item_value
 FROM
     warehouses w
-    CROSS JOIN products p
-    LEFT JOIN product_changes pc ON p.id = pc.product_id
-        AND w.id = pc.warehouse_id
+    CROSS JOIN items i
+    LEFT JOIN item_changes ic ON i.id = ic.item_id
+        AND w.id = ic.warehouse_id
 GROUP BY
     w.id,
     w.name,
-    p.id,
-    p.name,
-    p.price
+    i.id,
+    i.name,
+    i.price,
+    i.type
 HAVING
-    COALESCE(SUM(pc.quantity_change), 0) > 0;
-
--- Create a view for part quantities in each warehouse
-CREATE OR REPLACE VIEW warehouse_parts AS
-SELECT
-    w.id AS warehouse_id,
-    w.name AS warehouse_name,
-    p.id AS part_id,
-    p.name AS part_name,
-    p.price AS part_price,
-    COALESCE(SUM(pc.quantity_change), 0) AS part_quantity,
-    COALESCE(SUM(pc.quantity_change), 0) * p.price AS part_value
-FROM
-    warehouses w
-    CROSS JOIN parts p
-    LEFT JOIN part_changes pc ON p.id = pc.part_id
-        AND w.id = pc.warehouse_id
-GROUP BY
-    w.id,
-    w.name,
-    p.id,
-    p.name,
-    p.price
-HAVING
-    COALESCE(SUM(pc.quantity_change), 0) > 0;
+    COALESCE(SUM(ic.quantity_change), 0) > 0;
 
 -- Create a view for total inventory value per warehouse
 CREATE OR REPLACE VIEW warehouse_inventory_value AS
 SELECT
     w.id AS warehouse_id,
     w.name AS warehouse_name,
-    COALESCE(SUM(wp.product_value), 0) + COALESCE(SUM(wpa.part_value), 0) AS total_inventory_value
+    COALESCE(SUM(wi.item_value), 0) AS total_inventory_value
 FROM
     warehouses w
-    LEFT JOIN warehouse_products wp ON w.id = wp.warehouse_id
-    LEFT JOIN warehouse_parts wpa ON w.id = wpa.warehouse_id
+    LEFT JOIN warehouse_items wi ON w.id = wi.warehouse_id
 GROUP BY
     w.id,
     w.name;
 
--- Grant permissions for the new views
-GRANT SELECT ON warehouse_products TO anon, authenticated, service_role;
+-- Create a view for orders with total value and item details
+CREATE OR REPLACE VIEW orders_view AS
+SELECT
+    o.id AS order_id,
+    o.type AS order_type,
+    o.order_date,
+    o.carriage,
+    SUM(
+        CASE WHEN o.type = 'sale' THEN
+            -1 * oic.price * ic.quantity_change *(1 + COALESCE(oic.tax, 0))
+        ELSE
+            oic.price * ic.quantity_change *(1 + COALESCE(oic.tax, 0))
+        END) AS total_value,
+    jsonb_agg(jsonb_build_object('item_id', i.id, 'item_name', i.name, 'item_type', i.type, 'quantity', ic.quantity_change, 'price', oic.price, 'tax', oic.tax, 'total',(
+                CASE WHEN o.type = 'sale' THEN
+                    -1 * ic.quantity_change * oic.price *(1 + COALESCE(oic.tax, 0))
+                ELSE
+                    ic.quantity_change * oic.price *(1 + COALESCE(oic.tax, 0))
+                END))) AS items
+FROM
+    orders o
+    JOIN order_item_changes oic ON o.id = oic.order_id
+    JOIN item_changes ic ON oic.item_change_id = ic.id
+    JOIN items i ON ic.item_id = i.id
+GROUP BY
+    o.id,
+    o.type,
+    o.order_date,
+    o.carriage;
 
-GRANT SELECT ON warehouse_parts TO anon, authenticated, service_role;
+-- Grant permissions for the views
+GRANT SELECT ON warehouse_items TO anon, authenticated, service_role;
 
 GRANT SELECT ON warehouse_inventory_value TO anon, authenticated, service_role;
 
--- Create a view for sales with total value and product details
-CREATE OR REPLACE VIEW sales_view AS
-SELECT
-    s.id AS sale_id,
-    s.sale_date,
-    SUM(-1 * spc.price * pc.quantity_change *(1 + spc.tax)) AS total_value,
-    jsonb_agg(jsonb_build_object('product_id', p.id, 'product_name', p.name, 'quantity', pc.quantity_change, 'price', spc.price, 'tax', spc.tax, 'total',(-1 * pc.quantity_change * spc.price *(1 + spc.tax)))) AS products
-FROM
-    sales s
-    JOIN sale_product_changes spc ON s.id = spc.sale_id
-    JOIN product_changes pc ON spc.product_change_id = pc.id
-    JOIN products p ON pc.product_id = p.id
-GROUP BY
-    s.id,
-    s.sale_date;
+GRANT SELECT ON orders_view TO anon, authenticated, service_role;
 
--- Grant permissions for the new sales_view
-GRANT SELECT ON sales_view TO anon, authenticated, service_role;
+-- Create a view for total quantity of each item with totals by warehouse and overall
+CREATE OR REPLACE VIEW item_quantities AS
+WITH warehouse_quantities AS (
+    SELECT
+        i.id AS item_id,
+        i.name AS item_name,
+        w.name AS warehouse_name,
+        COALESCE(SUM(
+                CASE WHEN ic.warehouse_id = w.id THEN
+                    ic.quantity_change
+                ELSE
+                    0
+                END), 0) AS quantity
+    FROM
+        items i
+        CROSS JOIN warehouses w
+        LEFT JOIN item_changes ic ON i.id = ic.item_id
+    GROUP BY
+        i.id,
+        i.name,
+        w.name
+)
+SELECT
+    item_id,
+    item_name,
+    SUM(quantity) AS total_quantity,
+    jsonb_object_agg(warehouse_name, quantity) AS warehouse_quantities
+FROM
+    warehouse_quantities
+GROUP BY
+    item_id,
+    item_name;
+
+-- Grant permissions for the new view
+GRANT SELECT ON item_quantities TO anon, authenticated, service_role;
+
+-- Create a view for items with their components
+CREATE OR REPLACE VIEW items_view AS
+SELECT
+    i.id AS item_id,
+    i.name AS item_name,
+    i.price AS item_price,
+    i.type AS item_type,
+    COALESCE(jsonb_agg(jsonb_build_object('component_item_id', ic.component_item_id, 'component_name', ci.name, 'quantity', ic.quantity)) FILTER (WHERE ic.component_item_id IS NOT NULL), '[]'::jsonb) AS components
+FROM
+    items i
+    LEFT JOIN item_components ic ON i.id = ic.parent_item_id
+    LEFT JOIN items ci ON ic.component_item_id = ci.id
+GROUP BY
+    i.id,
+    i.name,
+    i.price,
+    i.type;
+
+-- Grant permissions for the new view
+GRANT SELECT ON items_view TO anon, authenticated, service_role;
 

@@ -13,12 +13,12 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 
-interface Sale {
+interface Order {
 	id: number;
 	uuid: string;
 	quantity: number;
-	sale_date: string;
-	sale_products: {
+	order_date: string;
+	order_products: {
 		product: {
 			name: string;
 			price: number;
@@ -27,25 +27,25 @@ interface Sale {
 	}[];
 }
 
-interface ExistingSalesProps {
-	sales: Sale[];
+interface ExistingOrdersProps {
+	orders: Order[];
 }
 
-export const ExistingSales: React.FC<ExistingSalesProps> = ({ sales }) => {
+export const ExistingOrders: React.FC<ExistingOrdersProps> = ({ orders }) => {
 	return (
 		<div className="mt-4">
-			<h2 className="mb-2 font-semibold text-xl">Existing Sales</h2>
+			<h2 className="mb-2 font-semibold text-xl">Existing Orders</h2>
 			<Accordion type="single" collapsible className="w-full">
-				{sales.map((sale) => (
-					<AccordionItem key={sale.id} value={`sale-${sale.id}`}>
+				{orders.map((order) => (
+					<AccordionItem key={order.id} value={`order-${order.id}`}>
 						<AccordionTrigger>
 							<div className="flex justify-between w-full">
 								<span>
-									Sale {sale.id} -{" "}
-									{new Date(sale.sale_date).toLocaleDateString()}
+									Order {order.id} -{" "}
+									{new Date(order.order_date).toLocaleDateString()}
 								</span>
 								<a
-									href={`/sales/${sale.id}`}
+									href={`/orders/${order.id}`}
 									target="_blank"
 									rel="noopener noreferrer"
 									onClick={(e) => e.stopPropagation()}
@@ -69,8 +69,8 @@ export const ExistingSales: React.FC<ExistingSalesProps> = ({ sales }) => {
 											</TableRow>
 										</TableHeader>
 										<TableBody>
-											{sale.products.map((product) => (
-												<TableRow key={`${sale.id}-${product.product_name}`}>
+											{order.products.map((product) => (
+												<TableRow key={`${order.id}-${product.product_name}`}>
 													<TableCell>{product.product_name}</TableCell>
 													<TableCell>
 														${product.price.toFixed(2)}

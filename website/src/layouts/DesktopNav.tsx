@@ -15,17 +15,17 @@ import { products } from '../data/products.ts';
                     <NavigationMenuItem>
                         <NavigationMenuTrigger>Products</NavigationMenuTrigger>
                         <NavigationMenuContent>
-                            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                            <ul className="gap-3 grid lg:grid-cols-[.75fr_1fr] p-6 md:w-[400px] lg:w-[500px]">
                                 <li className="row-span-3">
                                     <NavigationMenuLink asChild>
                                         <a
-                                            className="flex h-full w-full select-none flex-col justify-start rounded-md  bg-[url('/images/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg')] bg-opacity-50 bg-cover bg-center from-muted/50 to-muted p-4 no-underline outline-none focus:shadow-md"
+                                            className="flex flex-col justify-start bg-[url('/images/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg')] from-muted/50 to-muted bg-opacity-50 bg-cover bg-center focus:shadow-md p-4 rounded-md w-full h-full no-underline select-none outline-none"
                                             href="/night-splint"
                                         >
-                                            <div className="mb-2 text-lg font-medium text-white">
+                                            <div className="mb-2 font-medium text-lg text-white">
                                                 Night Splint
                                             </div>
-                                            <p className="text-sm leading-tight text-muted-foreground text-white">
+                                            <p className="text-muted-foreground text-sm text-white leading-tight">
                                                 Sleep comfortably while your
                                                 achilles rupture heals.
                                             </p>
@@ -43,7 +43,7 @@ import { products } from '../data/products.ts';
                                 ))}
 
                                 <ListItem href="/contact" title="Business">
-                                    Wholesale
+                                    Wholeorder
                                 </ListItem>
                             </ul>
                         </NavigationMenuContent>
@@ -53,7 +53,7 @@ import { products } from '../data/products.ts';
                             Patient Guides
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                            <ul className="grid w-[400px] gap-3 p-4 md:w-[550px] md:grid-cols-3 lg:w-[700px] ">
+                            <ul className="gap-3 grid md:grid-cols-3 p-4 w-[400px] md:w-[550px] lg:w-[700px]">
                                 {articles.map((article) => (
                                     <ListItem
                                         key={article.href}
@@ -64,7 +64,7 @@ import { products } from '../data/products.ts';
                                             {article.description}
                                         </p>
 
-                                        <div className="flex gap-x-1 pt-2 flex-wrap">
+                                        <div className="flex flex-wrap gap-x-1 pt-2">
                                             {article.tags.map((tag) => {
                                                 return (
                                                     <Badge
@@ -128,10 +128,10 @@ import { products } from '../data/products.ts';
                         )}
                         {...props}
                     >
-                        <div className="line-clamp-2 text-md font-medium leading-none">
+                        <div className="line-clamp-2 font-medium text-md leading-none">
                             {title}
                         </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        <p className="line-clamp-2 text-muted-foreground text-sm leading-snug">
                             {children}
                         </p>
                     </a>

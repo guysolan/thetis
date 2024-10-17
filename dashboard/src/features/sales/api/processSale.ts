@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
-import type { SaleFormData } from "../components/SaleForm";
+import type { OrderFormData } from "../components/OrderForm";
 
-const processSale = async (body: SaleFormData) => {
+const processOrder = async (body: OrderFormData) => {
   const { data, error } = await supabase.rpc(
-    "process_sale",
+    "process_order",
     {
-      p_sale_items: body.sale_items,
+      p_order_items: body.order_items,
     },
   )
     .select()
@@ -17,17 +17,17 @@ const processSale = async (body: SaleFormData) => {
   return data;
 };
 
-export const useProcessSale = () => {
+export const useProcessOrder = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: processSale,
+    mutationFn: processOrder,
     onError: () => {
-      toast.error("Error updating sale");
+      toast.error("Error updating order");
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["sale-parts"] });
-      toast.success("Sale updated successfully");
+      queryClient.invalidateQueries({ queryKey: ["order-parts"] });
+      toast.success("Order updated successfully");
     },
   });
 };

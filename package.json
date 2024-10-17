@@ -1,2 +1,6 @@
 {
+    "scripts":{
+        "reset":"supabase db reset",
+        "gen-types":"supabase gen types --lang=typescript --local > dashboard/src/database.types.ts"
+    }
 }
