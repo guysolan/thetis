@@ -51,13 +51,13 @@ Items
 				</Link>
 			
 				<Link
-					to="/inventory"
+					to="/warehouses"
 					className={cn(buttonVariants({ variant: "link" }))}
 					activeProps={{
 						className: "underline underline-offset-6",
 					}}
 				>
-					Inventory
+					Warehouses
 				</Link>
 				<Separator
 					className="bg-neutral-600 w-[1px] h-6"

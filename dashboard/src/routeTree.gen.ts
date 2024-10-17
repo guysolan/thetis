@@ -16,10 +16,10 @@ import { Route as DashboardImport } from './routes/_dashboard'
 import { Route as DashboardIndexImport } from './routes/_dashboard/index'
 import { Route as SalesSaleIdImport } from './routes/sales.$saleId'
 import { Route as PurchasesPurchaseIdImport } from './routes/purchases.$purchaseId'
+import { Route as DashboardWarehousesImport } from './routes/_dashboard/warehouses'
 import { Route as DashboardSettingsImport } from './routes/_dashboard/settings'
 import { Route as DashboardOrdersImport } from './routes/_dashboard/orders'
-import { Route as DashboardItemsImport } from './routes/_dashboard/items'
-import { Route as DashboardInventoryImport } from './routes/_dashboard/inventory'
+import { Route as DashboardItemsImport } from './ro./routes/_dashboard/warehouses
 
 // Create/Update Routes
 
@@ -48,6 +48,11 @@ const PurchasesPurchaseIdRoute = PurchasesPurchaseIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const DashboardWarehousesRoute = DashboardWarehousesImport.update({
+  path: '/warehouses',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
 const DashboardSettingsRoute = DashboardSettingsImport.update({
   path: '/settings',
   getParentRoute: () => DashboardRoute,
@@ -60,11 +65,6 @@ const DashboardOrdersRoute = DashboardOrdersImport.update({
 
 const DashboardItemsRoute = DashboardItemsImport.update({
   path: '/items',
-  getParentRoute: () => DashboardRoute,
-} as any)
-
-const DashboardInventoryRoute = DashboardInventoryImport.update({
-  path: '/inventory',
   getParentRoute: () => DashboardRoute,
 } as any)
 
@@ -86,13 +86,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
     }
-    '/_dashboard/inventory': {
-      id: '/_dashboard/inventory'
-      path: '/inventory'
-      fullPath: '/inventory'
-      preLoaderRoute: typeof DashboardInventoryImport
-      parentRoute: typeof DashboardImport
-    }
     '/_dashboard/items': {
       id: '/_dashboard/items'
       path: '/items'
@@ -112,6 +105,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof DashboardSettingsImport
+      parentRoute: typeof DashboardImport
+    }
+    '/_dashboard/warehouses': {
+      id: '/_dashboard/warehouses'
+      path: '/warehouses'
+      fullPath: '/warehouses'
+      preLoaderRoute: typeof DashboardWarehousesImport
       parentRoute: typeof DashboardImport
     }
     '/purchases/$purchaseId': {
@@ -141,18 +141,18 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface DashboardRouteChildren {
-  DashboardInventoryRoute: typeof DashboardInventoryRoute
   DashboardItemsRoute: typeof DashboardItemsRoute
   DashboardOrdersRoute: typeof DashboardOrdersRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardWarehousesRoute: typeof DashboardWarehousesRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
-  DashboardInventoryRoute: DashboardInventoryRoute,
   DashboardItemsRoute: DashboardItemsRoute,
   DashboardOrdersRoute: DashboardOrdersRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardWarehousesRoute: DashboardWarehousesRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
@@ -162,10 +162,10 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '': typeof LayoutRoute
-  '/inventory': typeof DashboardInventoryRoute
   '/items': typeof DashboardItemsRoute
   '/orders': typeof DashboardOrdersRoute
   '/settings': typeof DashboardSettingsRoute
+  '/warehouses': typeof DashboardWarehousesRoute
   '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
   '/sales/$saleId': typeof SalesSaleIdRoute
   '/': typeof DashboardIndexRoute
@@ -173,10 +173,10 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '': typeof LayoutRoute
-  '/inventory': typeof DashboardInventoryRoute
   '/items': typeof DashboardItemsRoute
   '/orders': typeof DashboardOrdersRoute
   '/settings': typeof DashboardSettingsRoute
+  '/warehouses': typeof DashboardWarehousesRoute
   '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
   '/sales/$saleId': typeof SalesSaleIdRoute
   '/': typeof DashboardIndexRoute
@@ -186,10 +186,10 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_dashboard': typeof DashboardRouteWithChildren
   '/_layout': typeof LayoutRoute
-  '/_dashboard/inventory': typeof DashboardInventoryRoute
   '/_dashboard/items': typeof DashboardItemsRoute
   '/_dashboard/orders': typeof DashboardOrdersRoute
   '/_dashboard/settings': typeof DashboardSettingsRoute
+  '/_dashboard/warehouses': typeof DashboardWarehousesRoute
   '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
   '/sales/$saleId': typeof SalesSaleIdRoute
   '/_dashboard/': typeof DashboardIndexRoute
@@ -199,20 +199,20 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
-    | '/inventory'
     | '/items'
     | '/orders'
     | '/settings'
+    | '/warehouses'
     | '/purchases/$purchaseId'
     | '/sales/$saleId'
     | '/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | ''
-    | '/inventory'
     | '/items'
     | '/orders'
     | '/settings'
+    | '/warehouses'
     | '/purchases/$purchaseId'
     | '/sales/$saleId'
     | '/'
@@ -220,10 +220,10 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_dashboard'
     | '/_layout'
-    | '/_dashboard/inventory'
     | '/_dashboard/items'
     | '/_dashboard/orders'
     | '/_dashboard/settings'
+    | '/_dashboard/warehouses'
     | '/purchases/$purchaseId'
     | '/sales/$saleId'
     | '/_dashboard/'
@@ -265,19 +265,15 @@ export const routeTree = rootRoute
     "/_dashboard": {
       "filePath": "_dashboard.tsx",
       "children": [
-        "/_dashboard/inventory",
         "/_dashboard/items",
         "/_dashboard/orders",
         "/_dashboard/settings",
+        "/_dashboard/warehouses",
         "/_dashboard/"
       ]
     },
     "/_layout": {
       "filePath": "_layout.tsx"
-    },
-    "/_dashboard/inventory": {
-      "filePath": "_dashboard/inventory.tsx",
-      "parent": "/_dashboard"
     },
     "/_dashboard/items": {
       "filePath": "_dashboard/items.tsx",
@@ -289,6 +285,10 @@ export const routeTree = rootRoute
     },
     "/_dashboard/settings": {
       "filePath": "_dashboard/settings.tsx",
+      "parent": "/_dashboard"
+    },
+    "/_dashboard/warehouses": {
+      "filePath": "_dashboard/warehouses.tsx",
       "parent": "/_dashboard"
     },
     "/purchases/$purchaseId": {
