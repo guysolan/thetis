@@ -18,7 +18,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import ItemComponentsForm from "../../features/items/components/ItemComponentsForm";
-import { Database } from "../../database.types";
 import { useSelectItemsView } from "../../features/items/api/selectItemsView";
 import DeleteItemDialog from "../../features/items/components/DeleteItemDialog";
 import { ItemForm } from "../../features/items/components/ItemForm";

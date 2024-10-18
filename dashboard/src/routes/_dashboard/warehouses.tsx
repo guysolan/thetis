@@ -15,11 +15,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useSelectWarehouseItems } from '@/features/inventory/api/selectWarehouseItems'
-import { useSelectWarehouses } from '../../features/inventory/api/selectWarehouses'
+import { useSelectWarehouseItems } from '@/features/warehouses/api/selectWarehouseItems'
+import { useSelectWarehouses } from '../../features/warehouses/api/selectWarehouses'
 import { Badge } from '../../components/ui/badge'
 import { Button } from '../../components/ui/button'
-import { StockTakeForm } from '../../features/inventory/components/StockTakeForm'
+import { StockTakeForm } from '../../features/warehouses/components/StockTakeForm'
 import PageTitle from '../../components/PageTitle'
 
 const ItemsPage = () => {

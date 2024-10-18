@@ -16,8 +16,9 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import { toast } from "sonner";
+
 import { useSelectItemsView } from "../api/selectItemsView";
+import { ItemComponentInsert } from '../types';
 
 const formSchema = z.object({
 	item_components: z.array(

@@ -2,9 +2,15 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import type { ItemFormData } from "../components/ItemComponentsForm";
 import { toast } from "sonner";
+import { ItemComponentInsert } from "../types";
 
-const upsertItemComponents = async (item: ItemFormData) => {
-  const { data, error } = await supabase.from("item_components").upsert(item)
+const upsertItemComponents = async (items: ItemComponentInsert[]) => {
+  const { error: deleteCurrentComponents } = await supabase.from(
+    "item_components",
+  ).delete().eq("parent_item_id", items[0].parent_item_id);
+
+  if (deleteCurrentComponents) throw deleteCurrentComponents;
+  const { data, error } = await supabase.from("item_components").upsert(items)
     .select();
 
   if (error) throw error;
