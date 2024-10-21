@@ -13,8 +13,6 @@ const currentYear = new Date().getFullYear()
 const currentMonth = new Date().getMonth() + 1 // Adding 1 because getMonth() returns 0-11
 
 const AmazonFinancialReports = () => {
-  const { data: reports } = useAmazonReports();
-  console.log(reports);
   const years = Array.from({ length: currentYear - 2021 }, (_, i) => currentYear - i)
 
 

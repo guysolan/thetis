@@ -22,7 +22,7 @@ export const selectAmazonReports = async (
         );
     }
 
-    return data;
+    return data as { date: string; flatFile: any; flatFileV2: any; xml: any }[];
 };
 
 export const selectAmazonReportsQueryOptions = (

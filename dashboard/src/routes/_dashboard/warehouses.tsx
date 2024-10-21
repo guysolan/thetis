@@ -63,7 +63,7 @@ const ItemsPage = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {warehouse.items?.map((wp: any) => (
+                  {(warehouse.items as any)?.map((wp: any) => (
                       <TableRow key={`item-${wp.item_id}`}>
                         <TableCell>
                           <Badge className="capitalize" variant="default">
@@ -81,7 +81,7 @@ const ItemsPage = () => {
               <Sheet
                 trigger={<Button>New Stocktake</Button>}
                 title="New Stocktake"
-                description={`Update the stock for warehouse ${warehouse.name}`}
+                description={`Update the stock for warehouse ${warehouse.warehouse_name}`}
               >
                 <StocktakeForm warehouseId={warehouse.warehouse_id} />
               </Sheet>

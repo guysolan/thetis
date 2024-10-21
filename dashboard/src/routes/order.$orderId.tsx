@@ -47,7 +47,7 @@ const OrdersPage = () => {
             </tr>
           </thead>
           <tbody>
-            {order.order_products.map((item) => (
+            {order.order_products.map((item: any) => (
               <tr key={`${order.id}-${item.product.name}`}>
                 <td className="p-2">{item.product.name}</td>
                 <td className="text-right p-2">
@@ -73,7 +73,7 @@ const OrdersPage = () => {
             </tr>
           </thead>
           <tbody>
-            {order.order_parts.map((item) => (
+            {order.order_parts.map((item: any) => (
               <tr key={`${order.id}-${item.part.name}`}>
                 <td className="p-2">{item.part.name}</td>
                 <td className="text-right p-2">{-item.quantity}</td>
@@ -91,7 +91,7 @@ const OrdersPage = () => {
     </div>
   )
 }
-export const Route = createFileRoute('/purchases/$purchaseId')({
+export const Route = createFileRoute('/order/$orderId')({
   component: OrdersPage,
   loader: async ({ context, params }) => {
     const order = await context.queryClient.ensureQueryData(

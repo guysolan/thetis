@@ -69,7 +69,7 @@ const AmazonFinancialReports = () => {
                                             reportId: settlement?.xml
                                                 .reportDocumentId,
                                         }}
-                                        search={settlement.xml}
+                                        search={(settlement as any).xml}
                                     >
                                         View XML
                                     </Link>

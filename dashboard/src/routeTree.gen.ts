@@ -15,8 +15,7 @@ import { Route as FinancesImport } from './routes/finances'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as DashboardImport } from './routes/_dashboard'
 import { Route as DashboardIndexImport } from './routes/_dashboard/index'
-import { Route as SalesSaleIdImport } from './routes/sales.$saleId'
-import { Route as PurchasesPurchaseIdImport } from './routes/purchases.$purchaseId'
+import { Route as OrderOrderIdImport } from './routes/order.$orderId'
 import { Route as DashboardWarehousesImport } from './routes/_dashboard/warehouses'
 import { Route as DashboardSettingsImport } from './routes/_dashboard/settings'
 import { Route as DashboardOrdersImport } from './routes/_dashboard/orders'
@@ -50,13 +49,8 @@ const DashboardIndexRoute = DashboardIndexImport.update({
   getParentRoute: () => DashboardRoute,
 } as any)
 
-const SalesSaleIdRoute = SalesSaleIdImport.update({
-  path: '/sales/$saleId',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PurchasesPurchaseIdRoute = PurchasesPurchaseIdImport.update({
-  path: '/purchases/$purchaseId',
+const OrderOrderIdRoute = OrderOrderIdImport.update({
+  path: '/order/$orderId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -167,18 +161,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardWarehousesImport
       parentRoute: typeof DashboardImport
     }
-    '/purchases/$purchaseId': {
-      id: '/purchases/$purchaseId'
-      path: '/purchases/$purchaseId'
-      fullPath: '/purchases/$purchaseId'
-      preLoaderRoute: typeof PurchasesPurchaseIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/sales/$saleId': {
-      id: '/sales/$saleId'
-      path: '/sales/$saleId'
-      fullPath: '/sales/$saleId'
-      preLoaderRoute: typeof SalesSaleIdImport
+    '/order/$orderId': {
+      id: '/order/$orderId'
+      path: '/order/$orderId'
+      fullPath: '/order/$orderId'
+      preLoaderRoute: typeof OrderOrderIdImport
       parentRoute: typeof rootRoute
     }
     '/_dashboard/': {
@@ -299,8 +286,7 @@ export interface FileRoutesByFullPath {
   '/orders': typeof DashboardOrdersRoute
   '/settings': typeof DashboardSettingsRoute
   '/warehouses': typeof DashboardWarehousesRoute
-  '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
-  '/sales/$saleId': typeof SalesSaleIdRoute
+  '/order/$orderId': typeof OrderOrderIdRoute
   '/': typeof DashboardIndexRoute
   '/finances/amazon': typeof FinancesAmazonIndexRoute
   '/finances/amazon/$year/$month': typeof FinancesAmazonYearMonthRoute
@@ -317,8 +303,7 @@ export interface FileRoutesByTo {
   '/orders': typeof DashboardOrdersRoute
   '/settings': typeof DashboardSettingsRoute
   '/warehouses': typeof DashboardWarehousesRoute
-  '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
-  '/sales/$saleId': typeof SalesSaleIdRoute
+  '/order/$orderId': typeof OrderOrderIdRoute
   '/': typeof DashboardIndexRoute
   '/finances/amazon': typeof FinancesAmazonIndexRoute
   '/finances/amazon/$year/$month': typeof FinancesAmazonYearMonthRoute
@@ -337,8 +322,7 @@ export interface FileRoutesById {
   '/_dashboard/orders': typeof DashboardOrdersRoute
   '/_dashboard/settings': typeof DashboardSettingsRoute
   '/_dashboard/warehouses': typeof DashboardWarehousesRoute
-  '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
-  '/sales/$saleId': typeof SalesSaleIdRoute
+  '/order/$orderId': typeof OrderOrderIdRoute
   '/_dashboard/': typeof DashboardIndexRoute
   '/finances/amazon/': typeof FinancesAmazonIndexRoute
   '/finances/amazon/$year/$month': typeof FinancesAmazonYearMonthRoute
@@ -357,8 +341,7 @@ export interface FileRouteTypes {
     | '/orders'
     | '/settings'
     | '/warehouses'
-    | '/purchases/$purchaseId'
-    | '/sales/$saleId'
+    | '/order/$orderId'
     | '/'
     | '/finances/amazon'
     | '/finances/amazon/$year/$month'
@@ -374,8 +357,7 @@ export interface FileRouteTypes {
     | '/orders'
     | '/settings'
     | '/warehouses'
-    | '/purchases/$purchaseId'
-    | '/sales/$saleId'
+    | '/order/$orderId'
     | '/'
     | '/finances/amazon'
     | '/finances/amazon/$year/$month'
@@ -392,8 +374,7 @@ export interface FileRouteTypes {
     | '/_dashboard/orders'
     | '/_dashboard/settings'
     | '/_dashboard/warehouses'
-    | '/purchases/$purchaseId'
-    | '/sales/$saleId'
+    | '/order/$orderId'
     | '/_dashboard/'
     | '/finances/amazon/'
     | '/finances/amazon/$year/$month'
@@ -408,16 +389,14 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRouteWithChildren
   LayoutRoute: typeof LayoutRoute
   FinancesRoute: typeof FinancesRouteWithChildren
-  PurchasesPurchaseIdRoute: typeof PurchasesPurchaseIdRoute
-  SalesSaleIdRoute: typeof SalesSaleIdRoute
+  OrderOrderIdRoute: typeof OrderOrderIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRouteWithChildren,
   LayoutRoute: LayoutRoute,
   FinancesRoute: FinancesRouteWithChildren,
-  PurchasesPurchaseIdRoute: PurchasesPurchaseIdRoute,
-  SalesSaleIdRoute: SalesSaleIdRoute,
+  OrderOrderIdRoute: OrderOrderIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -435,8 +414,7 @@ export const routeTree = rootRoute
         "/_dashboard",
         "/_layout",
         "/finances",
-        "/purchases/$purchaseId",
-        "/sales/$saleId"
+        "/order/$orderId"
       ]
     },
     "/_dashboard": {
@@ -478,11 +456,8 @@ export const routeTree = rootRoute
       "filePath": "_dashboard/warehouses.tsx",
       "parent": "/_dashboard"
     },
-    "/purchases/$purchaseId": {
-      "filePath": "purchases.$purchaseId.tsx"
-    },
-    "/sales/$saleId": {
-      "filePath": "sales.$saleId.tsx"
+    "/order/$orderId": {
+      "filePath": "order.$orderId.tsx"
     },
     "/_dashboard/": {
       "filePath": "_dashboard/index.tsx",

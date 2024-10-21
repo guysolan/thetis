@@ -6,27 +6,27 @@ import  OrderItems, { orderItemsSchema, OrderItem } from "@/components/OrderItem
 import { z } from "zod";
 import StocktakeDiscrepancy from './StocktakeDiscrepency';
 interface Props {
+	warehouseId: number|null;
 	orderItems?: OrderItem[];
-	warehouseId: number;
 }
 
 const stockTakeFormSchema = z.object({
-	order_items: orderItemsSchema,
-	warehouse_id: z.number(),
+	warehouse_id: z.number().optional(),
+	...orderItemsSchema.shape,
 });
 
 export type StocktakeFormT = z.infer<typeof stockTakeFormSchema>;
 
  const StocktakeForm = ({ warehouseId, orderItems }: Props) => {
-	const form = useForm<OrderItem>({
-		resolver: zodResolver(orderItemsSchema),
+	const form = useForm<StocktakeFormT>({
+		resolver: zodResolver(stockTakeFormSchema),
 		defaultValues: {
-			warehouse_id: warehouseId,
-			order_items: orderItems,
+			warehouse_id: warehouseId??undefined,
+			order_items: orderItems || [],
 		},
 	});
 
-	const onSubmit = (data: OrderItem) => {
+	const onSubmit = (data: StocktakeFormT) => {
 		console.log(data);
 	}
 	 

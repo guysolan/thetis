@@ -4,6 +4,7 @@
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "target": "ES2022",
+    "module": "es2022",
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "baseUrl": ".",

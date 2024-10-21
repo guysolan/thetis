@@ -14,7 +14,7 @@ const AmazonSettlementReport = () => {
       <Card>
         <CardHeader>
           <CardTitle>Settlement Report</CardTitle>
-          <CardDescription>{dayjs(search?.report?.dataStartTime).toString()}</CardDescription>
+          <CardDescription>{dayjs((search?.report as any)?.dataStartTime).toString()}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col space-y-4">
