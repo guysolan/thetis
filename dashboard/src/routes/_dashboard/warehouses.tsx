@@ -15,14 +15,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useSelectWarehouseItems } from "@/features/warehouses/api/selectWarehouseItems";
-import { useSelectWarehouses } from "../../features/warehouses/api/selectWarehouses";
-import { Badge } from "../../components/ui/badge";
-import { Button } from "../../components/ui/button";
-import PageTitle from "../../components/PageTitle";
-import { WarehouseForm } from "../../features/warehouses/components/WarehouseForm";
-import StocktakeForm from '../../features/warehouses/components/StocktakeForm';
-import AmazonWarehouses from '../../features/warehouses/components/AmazonWarehouses';
+import { useSelectWarehouses } from "@/features/warehouses/api/selectWarehouses";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import PageTitle from "@/components/PageTitle";
+import { WarehouseForm } from "@/features/warehouses/components/WarehouseForm";
+import StocktakeForm from '@/features/warehouses/components/StocktakeForm';
+import AmazonWarehouses from '@/features/warehouses/components/AmazonWarehouses';
 
 const ItemsPage = () => {
   const { data: warehousesView } = useSelectWarehouses();
