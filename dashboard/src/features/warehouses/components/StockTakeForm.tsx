@@ -1,36 +1,46 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import  OrderItems, { orderItemsSchema } from "@/components/OrderItems";
-
-const StockTakeFormSchema = z.object({
-    ...orderItemsSchema.shape
-});
-
-export type StockTakeFormT = z.infer<typeof StockTakeFormSchema>;
-
+import  OrderItems, { orderItemsSchema, OrderItem } from "@/components/OrderItems";
+import { z } from "zod";
+import StocktakeDiscrepancy from './StocktakeDiscrepency';
 interface Props {
-	defaultValues?: StockTakeFormT;
+	orderItems?: OrderItem[];
+	warehouseId: number;
 }
 
-export const StockTakeForm = ({ defaultValues }: Props) => {
-	const form = useForm<StockTakeFormT>({
-		resolver: zodResolver(StockTakeFormSchema),
-		defaultValues,
+const stockTakeFormSchema = z.object({
+	order_items: orderItemsSchema,
+	warehouse_id: z.number(),
+});
+
+export type StocktakeFormT = z.infer<typeof stockTakeFormSchema>;
+
+ const StocktakeForm = ({ warehouseId, orderItems }: Props) => {
+	const form = useForm<OrderItem>({
+		resolver: zodResolver(orderItemsSchema),
+		defaultValues: {
+			warehouse_id: warehouseId,
+			order_items: orderItems,
+		},
 	});
 
-	const onSubmit = (data: StockTakeFormT) => {
+	const onSubmit = (data: OrderItem) => {
 		console.log(data);
 	}
+	 
+	 console.log(form.getValues());
 
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-4 mt-4">
 			 	<OrderItems />
 				<Button type="submit">Save Changes</Button>
+				<StocktakeDiscrepancy />
 			</form>
 		</Form>
 	);
 };
+
+export default StocktakeForm;

@@ -4,11 +4,12 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
+import { WarehouseView } from "../types";
 
 export const selectWarehouses = async () => {
-  const { data, error } = await supabase.from("warehouses").select(
+  const { data, error } = await supabase.from("warehouses_view").select(
     `*`,
-  );
+  ).returns<WarehouseView[]>();
 
   if (error) {
     throw error;
@@ -18,7 +19,7 @@ export const selectWarehouses = async () => {
 
 export const selectWarehousesQueryOptions = () => {
   return queryOptions({
-    queryKey: ["select-warehouses"],
+    queryKey: ["select-warehouses-view"],
     queryFn: selectWarehouses,
   });
 };

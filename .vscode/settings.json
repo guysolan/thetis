@@ -2,9 +2,6 @@
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  "deno.enablePaths": [
-    "supabase/functions"
-  ],
   "deno.lint": true,
   "deno.unstable": [
     "bare-node-builtins",
@@ -20,5 +17,7 @@
     "fs",
     "http",
     "net"
-  ]
+  ],
+  "deno.enable": true,
+  "deno.importMap": "./supabase/functions/import_map.json"
 }

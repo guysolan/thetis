@@ -1,0 +1,21 @@
+{
+    "tasks": {
+        "reset": "supabase db reset",
+        "gen-types": "supabase gen types --lang=typescript --local > dashboard/src/database.types.ts",
+        "serve": "npx supabase functions serve --env-file ./supabase/.env.local"
+    },
+    "lib": [
+        {
+            "path": "dashboard",
+            "options": ["dom", "dom.iterable", "esnext"]
+        },
+        {
+            "path": "/supabase/functions",
+            "options": ["deno.ns", "deno.unstable"]
+        }
+    ],
+    "compilerOptions": {
+        "allowJs": true,
+        "strict": true
+    }
+}

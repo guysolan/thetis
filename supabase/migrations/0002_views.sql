@@ -131,3 +131,36 @@ GROUP BY
 -- Grant permissions for the new view
 GRANT SELECT ON items_view TO anon, authenticated, service_role;
 
+-- Create a view for warehouses with their items
+CREATE OR REPLACE VIEW warehouses_view AS
+SELECT
+    w.id AS warehouse_id,
+    w.name AS warehouse_name,
+    w.created_at AS warehouse_created_at,
+    COALESCE(jsonb_agg(
+            CASE WHEN i.id IS NOT NULL THEN
+                jsonb_build_object('item_id', i.id, 'item_name', i.name, 'item_price', i.price, 'item_type', i.type, 'item_quantity', ic.quantity_change, 'item_value', ic.quantity_change * i.price)
+            ELSE
+                NULL
+            END) FILTER (WHERE i.id IS NOT NULL), '[]'::jsonb) AS items
+FROM
+    warehouses w
+    LEFT JOIN (
+        SELECT
+            warehouse_id,
+            item_id,
+            SUM(quantity_change) AS quantity_change
+        FROM
+            item_changes
+        GROUP BY
+            warehouse_id,
+            item_id) ic ON w.id = ic.warehouse_id
+    LEFT JOIN items i ON ic.item_id = i.id
+GROUP BY
+    w.id,
+    w.name,
+    w.created_at;
+
+-- Grant permissions for the new view
+GRANT SELECT ON warehouses_view TO anon, authenticated, service_role;
+

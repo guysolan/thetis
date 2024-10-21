@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as FinancesImport } from './routes/finances'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as DashboardImport } from './routes/_dashboard'
 import { Route as DashboardIndexImport } from './routes/_dashboard/index'
@@ -20,8 +21,19 @@ import { Route as DashboardWarehousesImport } from './routes/_dashboard/warehous
 import { Route as DashboardSettingsImport } from './routes/_dashboard/settings'
 import { Route as DashboardOrdersImport } from './routes/_dashboard/orders'
 import { Route as DashboardItemsImport } from './routes/_dashboard/items'
+import { Route as FinancesAmazonIndexImport } from './routes/finances/amazon/index'
+import { Route as FinancesAmazonSettlementsIndexImport } from './routes/finances/amazon/settlements/index'
+import { Route as FinancesAmazonYearMonthImport } from './routes/finances/amazon/$year.$month'
+import { Route as FinancesAmazonSettlementsCountryCodeIndexImport } from './routes/finances/amazon/settlements/$countryCode/index'
+import { Route as FinancesAmazonSettlementsCountryCodeReportIdImport } from './routes/finances/amazon/settlements/$countryCode/$reportId'
+import { Route as FinancesAmazonSettlementsCountryCodeReportIdXmlImport } from './routes/finances/amazon/settlements/$countryCode/$reportId.xml'
 
 // Create/Update Routes
+
+const FinancesRoute = FinancesImport.update({
+  path: '/finances',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const LayoutRoute = LayoutImport.update({
   id: '/_layout',
@@ -68,6 +80,40 @@ const DashboardItemsRoute = DashboardItemsImport.update({
   getParentRoute: () => DashboardRoute,
 } as any)
 
+const FinancesAmazonIndexRoute = FinancesAmazonIndexImport.update({
+  path: '/amazon/',
+  getParentRoute: () => FinancesRoute,
+} as any)
+
+const FinancesAmazonSettlementsIndexRoute =
+  FinancesAmazonSettlementsIndexImport.update({
+    path: '/amazon/settlements/',
+    getParentRoute: () => FinancesRoute,
+  } as any)
+
+const FinancesAmazonYearMonthRoute = FinancesAmazonYearMonthImport.update({
+  path: '/amazon/$year/$month',
+  getParentRoute: () => FinancesRoute,
+} as any)
+
+const FinancesAmazonSettlementsCountryCodeIndexRoute =
+  FinancesAmazonSettlementsCountryCodeIndexImport.update({
+    path: '/amazon/settlements/$countryCode/',
+    getParentRoute: () => FinancesRoute,
+  } as any)
+
+const FinancesAmazonSettlementsCountryCodeReportIdRoute =
+  FinancesAmazonSettlementsCountryCodeReportIdImport.update({
+    path: '/amazon/settlements/$countryCode/$reportId',
+    getParentRoute: () => FinancesRoute,
+  } as any)
+
+const FinancesAmazonSettlementsCountryCodeReportIdXmlRoute =
+  FinancesAmazonSettlementsCountryCodeReportIdXmlImport.update({
+    path: '/xml',
+    getParentRoute: () => FinancesAmazonSettlementsCountryCodeReportIdRoute,
+  } as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -84,6 +130,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof LayoutImport
+      parentRoute: typeof rootRoute
+    }
+    '/finances': {
+      id: '/finances'
+      path: '/finances'
+      fullPath: '/finances'
+      preLoaderRoute: typeof FinancesImport
       parentRoute: typeof rootRoute
     }
     '/_dashboard/items': {
@@ -135,6 +188,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexImport
       parentRoute: typeof DashboardImport
     }
+    '/finances/amazon/': {
+      id: '/finances/amazon/'
+      path: '/amazon'
+      fullPath: '/finances/amazon'
+      preLoaderRoute: typeof FinancesAmazonIndexImport
+      parentRoute: typeof FinancesImport
+    }
+    '/finances/amazon/$year/$month': {
+      id: '/finances/amazon/$year/$month'
+      path: '/amazon/$year/$month'
+      fullPath: '/finances/amazon/$year/$month'
+      preLoaderRoute: typeof FinancesAmazonYearMonthImport
+      parentRoute: typeof FinancesImport
+    }
+    '/finances/amazon/settlements/': {
+      id: '/finances/amazon/settlements/'
+      path: '/amazon/settlements'
+      fullPath: '/finances/amazon/settlements'
+      preLoaderRoute: typeof FinancesAmazonSettlementsIndexImport
+      parentRoute: typeof FinancesImport
+    }
+    '/finances/amazon/settlements/$countryCode/$reportId': {
+      id: '/finances/amazon/settlements/$countryCode/$reportId'
+      path: '/amazon/settlements/$countryCode/$reportId'
+      fullPath: '/finances/amazon/settlements/$countryCode/$reportId'
+      preLoaderRoute: typeof FinancesAmazonSettlementsCountryCodeReportIdImport
+      parentRoute: typeof FinancesImport
+    }
+    '/finances/amazon/settlements/$countryCode/': {
+      id: '/finances/amazon/settlements/$countryCode/'
+      path: '/amazon/settlements/$countryCode'
+      fullPath: '/finances/amazon/settlements/$countryCode'
+      preLoaderRoute: typeof FinancesAmazonSettlementsCountryCodeIndexImport
+      parentRoute: typeof FinancesImport
+    }
+    '/finances/amazon/settlements/$countryCode/$reportId/xml': {
+      id: '/finances/amazon/settlements/$countryCode/$reportId/xml'
+      path: '/xml'
+      fullPath: '/finances/amazon/settlements/$countryCode/$reportId/xml'
+      preLoaderRoute: typeof FinancesAmazonSettlementsCountryCodeReportIdXmlImport
+      parentRoute: typeof FinancesAmazonSettlementsCountryCodeReportIdImport
+    }
   }
 }
 
@@ -160,8 +255,46 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface FinancesAmazonSettlementsCountryCodeReportIdRouteChildren {
+  FinancesAmazonSettlementsCountryCodeReportIdXmlRoute: typeof FinancesAmazonSettlementsCountryCodeReportIdXmlRoute
+}
+
+const FinancesAmazonSettlementsCountryCodeReportIdRouteChildren: FinancesAmazonSettlementsCountryCodeReportIdRouteChildren =
+  {
+    FinancesAmazonSettlementsCountryCodeReportIdXmlRoute:
+      FinancesAmazonSettlementsCountryCodeReportIdXmlRoute,
+  }
+
+const FinancesAmazonSettlementsCountryCodeReportIdRouteWithChildren =
+  FinancesAmazonSettlementsCountryCodeReportIdRoute._addFileChildren(
+    FinancesAmazonSettlementsCountryCodeReportIdRouteChildren,
+  )
+
+interface FinancesRouteChildren {
+  FinancesAmazonIndexRoute: typeof FinancesAmazonIndexRoute
+  FinancesAmazonYearMonthRoute: typeof FinancesAmazonYearMonthRoute
+  FinancesAmazonSettlementsIndexRoute: typeof FinancesAmazonSettlementsIndexRoute
+  FinancesAmazonSettlementsCountryCodeReportIdRoute: typeof FinancesAmazonSettlementsCountryCodeReportIdRouteWithChildren
+  FinancesAmazonSettlementsCountryCodeIndexRoute: typeof FinancesAmazonSettlementsCountryCodeIndexRoute
+}
+
+const FinancesRouteChildren: FinancesRouteChildren = {
+  FinancesAmazonIndexRoute: FinancesAmazonIndexRoute,
+  FinancesAmazonYearMonthRoute: FinancesAmazonYearMonthRoute,
+  FinancesAmazonSettlementsIndexRoute: FinancesAmazonSettlementsIndexRoute,
+  FinancesAmazonSettlementsCountryCodeReportIdRoute:
+    FinancesAmazonSettlementsCountryCodeReportIdRouteWithChildren,
+  FinancesAmazonSettlementsCountryCodeIndexRoute:
+    FinancesAmazonSettlementsCountryCodeIndexRoute,
+}
+
+const FinancesRouteWithChildren = FinancesRoute._addFileChildren(
+  FinancesRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '': typeof LayoutRoute
+  '/finances': typeof FinancesRouteWithChildren
   '/items': typeof DashboardItemsRoute
   '/orders': typeof DashboardOrdersRoute
   '/settings': typeof DashboardSettingsRoute
@@ -169,10 +302,17 @@ export interface FileRoutesByFullPath {
   '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
   '/sales/$saleId': typeof SalesSaleIdRoute
   '/': typeof DashboardIndexRoute
+  '/finances/amazon': typeof FinancesAmazonIndexRoute
+  '/finances/amazon/$year/$month': typeof FinancesAmazonYearMonthRoute
+  '/finances/amazon/settlements': typeof FinancesAmazonSettlementsIndexRoute
+  '/finances/amazon/settlements/$countryCode/$reportId': typeof FinancesAmazonSettlementsCountryCodeReportIdRouteWithChildren
+  '/finances/amazon/settlements/$countryCode': typeof FinancesAmazonSettlementsCountryCodeIndexRoute
+  '/finances/amazon/settlements/$countryCode/$reportId/xml': typeof FinancesAmazonSettlementsCountryCodeReportIdXmlRoute
 }
 
 export interface FileRoutesByTo {
   '': typeof LayoutRoute
+  '/finances': typeof FinancesRouteWithChildren
   '/items': typeof DashboardItemsRoute
   '/orders': typeof DashboardOrdersRoute
   '/settings': typeof DashboardSettingsRoute
@@ -180,12 +320,19 @@ export interface FileRoutesByTo {
   '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
   '/sales/$saleId': typeof SalesSaleIdRoute
   '/': typeof DashboardIndexRoute
+  '/finances/amazon': typeof FinancesAmazonIndexRoute
+  '/finances/amazon/$year/$month': typeof FinancesAmazonYearMonthRoute
+  '/finances/amazon/settlements': typeof FinancesAmazonSettlementsIndexRoute
+  '/finances/amazon/settlements/$countryCode/$reportId': typeof FinancesAmazonSettlementsCountryCodeReportIdRouteWithChildren
+  '/finances/amazon/settlements/$countryCode': typeof FinancesAmazonSettlementsCountryCodeIndexRoute
+  '/finances/amazon/settlements/$countryCode/$reportId/xml': typeof FinancesAmazonSettlementsCountryCodeReportIdXmlRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_dashboard': typeof DashboardRouteWithChildren
   '/_layout': typeof LayoutRoute
+  '/finances': typeof FinancesRouteWithChildren
   '/_dashboard/items': typeof DashboardItemsRoute
   '/_dashboard/orders': typeof DashboardOrdersRoute
   '/_dashboard/settings': typeof DashboardSettingsRoute
@@ -193,12 +340,19 @@ export interface FileRoutesById {
   '/purchases/$purchaseId': typeof PurchasesPurchaseIdRoute
   '/sales/$saleId': typeof SalesSaleIdRoute
   '/_dashboard/': typeof DashboardIndexRoute
+  '/finances/amazon/': typeof FinancesAmazonIndexRoute
+  '/finances/amazon/$year/$month': typeof FinancesAmazonYearMonthRoute
+  '/finances/amazon/settlements/': typeof FinancesAmazonSettlementsIndexRoute
+  '/finances/amazon/settlements/$countryCode/$reportId': typeof FinancesAmazonSettlementsCountryCodeReportIdRouteWithChildren
+  '/finances/amazon/settlements/$countryCode/': typeof FinancesAmazonSettlementsCountryCodeIndexRoute
+  '/finances/amazon/settlements/$countryCode/$reportId/xml': typeof FinancesAmazonSettlementsCountryCodeReportIdXmlRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
+    | '/finances'
     | '/items'
     | '/orders'
     | '/settings'
@@ -206,9 +360,16 @@ export interface FileRouteTypes {
     | '/purchases/$purchaseId'
     | '/sales/$saleId'
     | '/'
+    | '/finances/amazon'
+    | '/finances/amazon/$year/$month'
+    | '/finances/amazon/settlements'
+    | '/finances/amazon/settlements/$countryCode/$reportId'
+    | '/finances/amazon/settlements/$countryCode'
+    | '/finances/amazon/settlements/$countryCode/$reportId/xml'
   fileRoutesByTo: FileRoutesByTo
   to:
     | ''
+    | '/finances'
     | '/items'
     | '/orders'
     | '/settings'
@@ -216,10 +377,17 @@ export interface FileRouteTypes {
     | '/purchases/$purchaseId'
     | '/sales/$saleId'
     | '/'
+    | '/finances/amazon'
+    | '/finances/amazon/$year/$month'
+    | '/finances/amazon/settlements'
+    | '/finances/amazon/settlements/$countryCode/$reportId'
+    | '/finances/amazon/settlements/$countryCode'
+    | '/finances/amazon/settlements/$countryCode/$reportId/xml'
   id:
     | '__root__'
     | '/_dashboard'
     | '/_layout'
+    | '/finances'
     | '/_dashboard/items'
     | '/_dashboard/orders'
     | '/_dashboard/settings'
@@ -227,12 +395,19 @@ export interface FileRouteTypes {
     | '/purchases/$purchaseId'
     | '/sales/$saleId'
     | '/_dashboard/'
+    | '/finances/amazon/'
+    | '/finances/amazon/$year/$month'
+    | '/finances/amazon/settlements/'
+    | '/finances/amazon/settlements/$countryCode/$reportId'
+    | '/finances/amazon/settlements/$countryCode/'
+    | '/finances/amazon/settlements/$countryCode/$reportId/xml'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRouteWithChildren
   LayoutRoute: typeof LayoutRoute
+  FinancesRoute: typeof FinancesRouteWithChildren
   PurchasesPurchaseIdRoute: typeof PurchasesPurchaseIdRoute
   SalesSaleIdRoute: typeof SalesSaleIdRoute
 }
@@ -240,6 +415,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRouteWithChildren,
   LayoutRoute: LayoutRoute,
+  FinancesRoute: FinancesRouteWithChildren,
   PurchasesPurchaseIdRoute: PurchasesPurchaseIdRoute,
   SalesSaleIdRoute: SalesSaleIdRoute,
 }
@@ -258,6 +434,7 @@ export const routeTree = rootRoute
       "children": [
         "/_dashboard",
         "/_layout",
+        "/finances",
         "/purchases/$purchaseId",
         "/sales/$saleId"
       ]
@@ -274,6 +451,16 @@ export const routeTree = rootRoute
     },
     "/_layout": {
       "filePath": "_layout.tsx"
+    },
+    "/finances": {
+      "filePath": "finances.tsx",
+      "children": [
+        "/finances/amazon/",
+        "/finances/amazon/$year/$month",
+        "/finances/amazon/settlements/",
+        "/finances/amazon/settlements/$countryCode/$reportId",
+        "/finances/amazon/settlements/$countryCode/"
+      ]
     },
     "/_dashboard/items": {
       "filePath": "_dashboard/items.tsx",
@@ -300,6 +487,33 @@ export const routeTree = rootRoute
     "/_dashboard/": {
       "filePath": "_dashboard/index.tsx",
       "parent": "/_dashboard"
+    },
+    "/finances/amazon/": {
+      "filePath": "finances/amazon/index.tsx",
+      "parent": "/finances"
+    },
+    "/finances/amazon/$year/$month": {
+      "filePath": "finances/amazon/$year.$month.tsx",
+      "parent": "/finances"
+    },
+    "/finances/amazon/settlements/": {
+      "filePath": "finances/amazon/settlements/index.tsx",
+      "parent": "/finances"
+    },
+    "/finances/amazon/settlements/$countryCode/$reportId": {
+      "filePath": "finances/amazon/settlements/$countryCode/$reportId.tsx",
+      "parent": "/finances",
+      "children": [
+        "/finances/amazon/settlements/$countryCode/$reportId/xml"
+      ]
+    },
+    "/finances/amazon/settlements/$countryCode/": {
+      "filePath": "finances/amazon/settlements/$countryCode/index.tsx",
+      "parent": "/finances"
+    },
+    "/finances/amazon/settlements/$countryCode/$reportId/xml": {
+      "filePath": "finances/amazon/settlements/$countryCode/$reportId.xml.tsx",
+      "parent": "/finances/amazon/settlements/$countryCode/$reportId"
     }
   }
 }

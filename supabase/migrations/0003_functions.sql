@@ -158,3 +158,57 @@ BEGIN
 END;
 $function$;
 
+CREATE OR REPLACE FUNCTION public.stocktake(p_warehouse_id bigint, p_items jsonb)
+    RETURNS bigint
+    LANGUAGE plpgsql
+    AS $function$
+DECLARE
+    v_stocktake_id bigint;
+    v_item_change_id bigint;
+    v_current_quantity integer;
+    v_quantity_change integer;
+    v_item jsonb;
+    v_item_id bigint;
+    v_quantity integer;
+BEGIN
+    -- Input validation
+    IF p_warehouse_id IS NULL OR p_items IS NULL OR jsonb_array_length(p_items) = 0 THEN
+        RAISE EXCEPTION 'Warehouse ID and non-empty items array are required';
+    END IF;
+    -- Create new stocktake
+    INSERT INTO public.stocktakes(warehouse_id)
+        VALUES (p_warehouse_id)
+    RETURNING
+        id INTO v_stocktake_id;
+    -- Process each item in the array
+    FOR v_item IN
+    SELECT
+        *
+    FROM
+        jsonb_array_elements(p_items)
+        LOOP
+            v_item_id :=(v_item ->> 'item_id')::bigint;
+            v_quantity :=(v_item ->> 'quantity')::integer;
+            -- Get the current quantity of the item in the warehouse
+            SELECT
+                COALESCE(SUM(quantity_change), 0) INTO v_current_quantity
+            FROM
+                public.item_changes
+            WHERE
+                item_id = v_item_id
+                AND warehouse_id = p_warehouse_id;
+            -- Calculate the quantity change
+            v_quantity_change := v_quantity - v_current_quantity;
+            -- Create item change
+            INSERT INTO public.item_changes(item_id, quantity_change, warehouse_id)
+                VALUES (v_item_id, v_quantity_change, p_warehouse_id)
+            RETURNING
+                id INTO v_item_change_id;
+            -- Link item change to stocktake
+            INSERT INTO public.stocktake_item_changes(stocktake_id, item_change_id)
+                VALUES (v_stocktake_id, v_item_change_id);
+        END LOOP;
+    RETURN v_stocktake_id;
+END;
+$function$;
+

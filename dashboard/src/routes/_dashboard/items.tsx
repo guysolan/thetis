@@ -24,6 +24,7 @@ import { ItemForm } from "../../features/items/components/ItemForm";
 import { Badge } from "../../components/ui/badge";
 import PageTitle from "../../components/PageTitle";
 import { ItemView } from "../../features/items/types.ts";
+import { SheetFooter } from '../../components/ui/sheet.tsx';
 const ItemsPage = () => {
 	const { data: itemsView } = useSelectItemsView();
 
@@ -43,7 +44,7 @@ const ItemsPage = () => {
 			</PageTitle>
 
 			<section className="flex flex-col gap-4">
-				{itemsView.map((item: ItemView) => (
+				{itemsView.sort((a, b) => a.item_name.localeCompare(b.item_name)).map((item: ItemView) => (
 					<Card key={item.item_id} className="flex flex-col">
 						<Accordion type="single" collapsible>
 							<AccordionItem value={`item-${item.item_id}`}>
@@ -57,17 +58,20 @@ const ItemsPage = () => {
 									<div className="flex flex-row flex-shrink gap-2">
 										<Sheet
 											trigger={
-												<Button variant="default">
+												<Button variant="outline">
 													Edit
 												</Button>
 											}
 											title="Edit"
 										>
 											<ItemForm item={item} />
-										</Sheet>
-										<DeleteItemDialog
+											<SheetFooter>
+											<DeleteItemDialog
 											itemId={item.item_id as number}
-										/>
+												/>
+												</SheetFooter>
+										</Sheet>
+										
 									</div>
 								</CardHeader>
 								<AccordionContent>

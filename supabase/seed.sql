@@ -22,327 +22,90 @@ INSERT INTO items(name, price, type)
 
 -- Insert item components
 INSERT INTO item_components(parent_item_id, component_item_id, quantity)
-    VALUES
-        -- Achilles Tendon Rupture Night Splint in Bag - Large Left
-((
-                SELECT
-                    id
-                FROM
-                    items
-                WHERE
-                    name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
-                    AND type = 'product'),
-(
-                    SELECT
-                        id
-                    FROM
-                        items
-                    WHERE
-                        name = 'Instruction Leaflet'
-                        AND type = 'part'),
-                    1),
-((
-                SELECT
-                    id
-                FROM items
-            WHERE
-                name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
-                AND type = 'product'),(
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Storage Bag'
-            AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Webbing'
-        AND type = 'part'), 0.4),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Box Left Small'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Flier'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Elastic'
-        AND type = 'part'), 0.86),
-        -- Achilles Tendon Rupture Night Splint in Bag - Large Right
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Instruction Leaflet'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Storage Bag'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Webbing'
-        AND type = 'part'), 0.4),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Box Right Small'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Flier'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Elastic'
-        AND type = 'part'), 0.86),
-        -- Achilles Tendon Rupture Night Splint - Small Left
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint - Small Left'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Instruction Leaflet'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint - Small Left'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Storage Bag'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint - Small Left'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Webbing'
-        AND type = 'part'), 0.36),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint - Small Left'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Box Left Small'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint - Small Left'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Flier'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint - Small Left'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Elastic'
-        AND type = 'part'), 0.78),
-        -- Achilles Tendon Rupture Night Splint - Small Right
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint - Small Right'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Instruction Leaflet'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint - Small Right'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Storage Bag'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint - Small Right'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Webbing'
-        AND type = 'part'), 0.36),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint - Small Right'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Box Right Small'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint - Small Right'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Flier'
-        AND type = 'part'), 1),
-((
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint - Small Right'
-            AND type = 'product'),(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Elastic'
-        AND type = 'part'), 0.78);
+SELECT
+    p.id AS parent_item_id,
+    c.id AS component_item_id,
+    CASE WHEN p.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
+        AND c.name = 'Instruction Leaflet' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
+        AND c.name = 'Storage Bag' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
+        AND c.name = 'Webbing' THEN
+        0.4
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
+        AND c.name = 'Flier' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
+        AND c.name = 'Elastic' THEN
+        0.86
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
+        AND c.name = 'Instruction Leaflet' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
+        AND c.name = 'Storage Bag' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
+        AND c.name = 'Webbing' THEN
+        0.4
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
+        AND c.name = 'Flier' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
+        AND c.name = 'Elastic' THEN
+        0.86
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint - Small Left'
+        AND c.name = 'Instruction Leaflet' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint - Small Left'
+        AND c.name = 'Storage Bag' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint - Small Left'
+        AND c.name = 'Webbing' THEN
+        0.36
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint - Small Left'
+        AND c.name = 'Box Left Small' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint - Small Left'
+        AND c.name = 'Flier' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint - Small Left'
+        AND c.name = 'Elastic' THEN
+        0.78
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint - Small Right'
+        AND c.name = 'Instruction Leaflet' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint - Small Right'
+        AND c.name = 'Storage Bag' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint - Small Right'
+        AND c.name = 'Webbing' THEN
+        0.36
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint - Small Right'
+        AND c.name = 'Box Right Small' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint - Small Right'
+        AND c.name = 'Flier' THEN
+        1
+    WHEN p.name = 'Achilles Tendon Rupture Night Splint - Small Right'
+        AND c.name = 'Elastic' THEN
+        0.78
+    END AS quantity
+FROM
+    items p
+    CROSS JOIN items c
+WHERE
+    p.type = 'product'
+    AND c.type = 'part'
+    AND ((p.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
+            AND c.name IN ('Instruction Leaflet', 'Storage Bag', 'Webbing', 'Flier', 'Elastic'))
+        OR (p.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
+            AND c.name IN ('Instruction Leaflet', 'Storage Bag', 'Webbing', 'Flier', 'Elastic'))
+        OR (p.name = 'Achilles Tendon Rupture Night Splint - Small Left'
+            AND c.name IN ('Instruction Leaflet', 'Storage Bag', 'Webbing', 'Box Left Small', 'Flier', 'Elastic'))
+        OR (p.name = 'Achilles Tendon Rupture Night Splint - Small Right'
+            AND c.name IN ('Instruction Leaflet', 'Storage Bag', 'Webbing', 'Box Right Small', 'Flier', 'Elastic')));
 
 -- Insert orders
 INSERT INTO orders(type, order_date, carriage)
@@ -356,334 +119,136 @@ INSERT INTO orders(type, order_date, carriage)
 ('shipment', '2023-01-02 11:00:00', 25.00);
 
 -- Insert item changes for purchases
-INSERT INTO item_changes(item_id, quantity_change, warehouse_id, timestamp)
-    VALUES ((
-            SELECT
-                id
-            FROM
-                items
-            WHERE
-                name = 'Webbing'
-                AND type = 'part'),
-            200,
-            1,
-            '2023-01-15 10:00:00'),
-((
-        SELECT
-            id
-        FROM items
-        WHERE
-            name = 'Elastic'
-            AND type = 'part'), 300, 1, '2023-01-15 10:00:00'),
-((
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Storage Bag'
-        AND type = 'part'), 100, 1, '2023-02-20 14:30:00'),
-((
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Instruction Leaflet'
-        AND type = 'part'), 500, 1, '2023-03-25 09:45:00');
+INSERT INTO item_changes(item_id, quantity_change, warehouse_id)
+SELECT
+    i.id,
+    CASE WHEN i.name = 'Webbing' THEN
+        200
+    WHEN i.name = 'Elastic' THEN
+        300
+    WHEN i.name = 'Storage Bag' THEN
+        100
+    WHEN i.name = 'Instruction Leaflet' THEN
+        500
+    END,
+    1
+FROM
+    items i
+WHERE
+    i.type = 'part'
+    AND i.name IN ('Webbing', 'Elastic', 'Storage Bag', 'Instruction Leaflet');
 
 -- Link item changes to purchases
 INSERT INTO order_item_changes(order_id, item_change_id, price, tax)
-    VALUES ((
-            SELECT
-                id
-            FROM
-                orders
-            WHERE
-                type = 'purchase'
-                AND order_date = '2023-01-15 10:00:00'),
-(
-                SELECT
-                    id
-                FROM
-                    item_changes
-                WHERE
-                    item_id =(
-                        SELECT
-                            id
-                        FROM
-                            items
-                        WHERE
-                            name = 'Webbing'
-                            AND type = 'part')
-                        AND timestamp = '2023-01-15 10:00:00'),
-                    80.00,
-                    0.2),
-((
-                SELECT
-                    id
-                FROM orders
-            WHERE
-                type = 'purchase'
-                AND order_date = '2023-01-15 10:00:00'),(
-            SELECT
-                id
-            FROM item_changes
-        WHERE
-            item_id =(
-                SELECT
-                    id
-                FROM items
-            WHERE
-                name = 'Elastic'
-                AND type = 'part')
-        AND timestamp = '2023-01-15 10:00:00'), 216.00, 0.2),
-((
-            SELECT
-                id
-            FROM orders
-        WHERE
-            type = 'purchase'
-            AND order_date = '2023-02-20 14:30:00'),(
-        SELECT
-            id
-        FROM item_changes
-    WHERE
-        item_id =(
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Storage Bag'
-            AND type = 'part')
-        AND timestamp = '2023-02-20 14:30:00'), 111.00, 0.2),
-((
-        SELECT
-            id
-        FROM orders
-    WHERE
-        type = 'purchase'
-        AND order_date = '2023-03-25 09:45:00'),(
-    SELECT
-        id
-    FROM item_changes
+SELECT
+    o.id AS order_id,
+    ic.id AS item_change_id,
+    CASE WHEN i.name = 'Webbing' THEN
+        80.00
+    WHEN i.name = 'Elastic' THEN
+        216.00
+    WHEN i.name = 'Storage Bag' THEN
+        111.00
+    WHEN i.name = 'Instruction Leaflet' THEN
+        100.00
+    END AS price,
+    0.2 AS tax
+FROM
+    orders o
+    JOIN item_changes ic ON ic.warehouse_id = 1
+    JOIN items i ON i.id = ic.item_id
 WHERE
-    item_id =(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Instruction Leaflet'
-        AND type = 'part')
-AND timestamp = '2023-03-25 09:45:00'), 100.00, 0.2);
+    o.type = 'purchase'
+    AND ((o.order_date = '2023-01-15 10:00:00'
+            AND i.name IN ('Webbing', 'Elastic'))
+        OR (o.order_date = '2023-02-20 14:30:00'
+            AND i.name = 'Storage Bag')
+        OR (o.order_date = '2023-03-25 09:45:00'
+            AND i.name = 'Instruction Leaflet'));
 
 -- Insert item changes for sales (negative quantity change)
-INSERT INTO item_changes(item_id, quantity_change, warehouse_id, timestamp)
-    VALUES ((
-            SELECT
-                id
-            FROM
-                items
-            WHERE
-                name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
-                AND type = 'product'),
-            -10,
-            1,
-            '2023-04-10 14:30:00'),
-((
-        SELECT
-            id
-        FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint - Small Right'
-            AND type = 'product'), -20, 1, '2023-04-15 09:45:00'),
-((
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
-        AND type = 'product'), -8, 1, '2023-04-20 11:15:00');
+INSERT INTO item_changes(item_id, quantity_change, warehouse_id)
+SELECT
+    i.id,
+    CASE WHEN i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left' THEN
+        -10
+    WHEN i.name = 'Achilles Tendon Rupture Night Splint - Small Right' THEN
+        -20
+    WHEN i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right' THEN
+        -8
+    END,
+    1
+FROM
+    items i
+WHERE
+    i.type = 'product'
+    AND i.name IN ('Achilles Tendon Rupture Night Splint in Bag - Large Left', 'Achilles Tendon Rupture Night Splint - Small Right', 'Achilles Tendon Rupture Night Splint in Bag - Large Right');
 
 -- Link item changes to sales
 INSERT INTO order_item_changes(order_id, item_change_id, price, tax)
-    VALUES ((
-            SELECT
-                id
-            FROM
-                orders
-            WHERE
-                type = 'sale'
-                AND order_date = '2023-04-10 14:30:00'),
-(
-                SELECT
-                    id
-                FROM
-                    item_changes
-                WHERE
-                    item_id =(
-                        SELECT
-                            id
-                        FROM
-                            items
-                        WHERE
-                            name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
-                            AND type = 'product')
-                        AND timestamp = '2023-04-10 14:30:00'),
-                    899.90,
-                    0.2),
-((
-                SELECT
-                    id
-                FROM orders
-            WHERE
-                type = 'sale'
-                AND order_date = '2023-04-15 09:45:00'),(
-            SELECT
-                id
-            FROM item_changes
-        WHERE
-            item_id =(
-                SELECT
-                    id
-                FROM items
-            WHERE
-                name = 'Achilles Tendon Rupture Night Splint - Small Right'
-                AND type = 'product')
-        AND timestamp = '2023-04-15 09:45:00'), 1599.80, 0.2),
-((
-            SELECT
-                id
-            FROM orders
-        WHERE
-            type = 'sale'
-            AND order_date = '2023-04-20 11:15:00'),(
-        SELECT
-            id
-        FROM item_changes
-    WHERE
-        item_id =(
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
-            AND type = 'product')
-        AND timestamp = '2023-04-20 11:15:00'), 719.92, 0.2);
+SELECT
+    o.id AS order_id,
+    ic.id AS item_change_id,
+    CASE WHEN i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left' THEN
+        899.90
+    WHEN i.name = 'Achilles Tendon Rupture Night Splint - Small Right' THEN
+        1599.80
+    WHEN i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right' THEN
+        719.92
+    END AS price,
+    0.2 AS tax
+FROM
+    orders o
+    JOIN item_changes ic ON ic.warehouse_id = 1
+    JOIN items i ON i.id = ic.item_id
+WHERE
+    o.type = 'sale'
+    AND ((o.order_date = '2023-04-10 14:30:00'
+            AND i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left')
+        OR (o.order_date = '2023-04-15 09:45:00'
+            AND i.name = 'Achilles Tendon Rupture Night Splint - Small Right')
+        OR (o.order_date = '2023-04-20 11:15:00'
+            AND i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'));
 
 -- Insert item changes for shipments
-INSERT INTO item_changes(item_id, quantity_change, warehouse_id, timestamp)
-    VALUES ((
-            SELECT
-                id
-            FROM
-                items
-            WHERE
-                name = 'Instruction Leaflet'
-                AND type = 'part'),
-            5000,
-            1,
-            '2023-01-01 10:00:00'),
-((
-        SELECT
-            id
-        FROM items
-        WHERE
-            name = 'Storage Bag'
-            AND type = 'part'), 2400, 1, '2023-01-01 10:00:00'),
-((
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
-        AND type = 'product'), 50, 2, '2023-01-02 11:00:00'),
-((
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
-        AND type = 'product'), 50, 2, '2023-01-02 11:00:00');
+INSERT INTO item_changes(item_id, quantity_change, warehouse_id)
+SELECT
+    i.id,
+    CASE WHEN i.name = 'Instruction Leaflet' THEN
+        5000
+    WHEN i.name = 'Storage Bag' THEN
+        2400
+    WHEN i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left' THEN
+        50
+    WHEN i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right' THEN
+        50
+    END,
+    CASE WHEN i.type = 'part' THEN
+        1
+    WHEN i.type = 'product' THEN
+        2
+    END
+FROM
+    items i
+WHERE
+    i.name IN ('Instruction Leaflet', 'Storage Bag', 'Achilles Tendon Rupture Night Splint in Bag - Large Left', 'Achilles Tendon Rupture Night Splint in Bag - Large Right');
 
 -- Link item changes to shipments
 INSERT INTO order_item_changes(order_id, item_change_id)
-    VALUES ((
-            SELECT
-                id
-            FROM
-                orders
-            WHERE
-                type = 'shipment'
-                AND order_date = '2023-01-01 10:00:00'),
-(
-                SELECT
-                    id
-                FROM
-                    item_changes
-                WHERE
-                    item_id =(
-                        SELECT
-                            id
-                        FROM
-                            items
-                        WHERE
-                            name = 'Instruction Leaflet'
-                            AND type = 'part')
-                        AND timestamp = '2023-01-01 10:00:00')),
-((
-                SELECT
-                    id
-                FROM orders
-            WHERE
-                type = 'shipment'
-                AND order_date = '2023-01-01 10:00:00'),(
-            SELECT
-                id
-            FROM item_changes
-        WHERE
-            item_id =(
-                SELECT
-                    id
-                FROM items
-            WHERE
-                name = 'Storage Bag'
-                AND type = 'part')
-        AND timestamp = '2023-01-01 10:00:00')),
-((
-            SELECT
-                id
-            FROM orders
-        WHERE
-            type = 'shipment'
-            AND order_date = '2023-01-02 11:00:00'),(
-        SELECT
-            id
-        FROM item_changes
-    WHERE
-        item_id =(
-            SELECT
-                id
-            FROM items
-        WHERE
-            name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
-            AND type = 'product')
-        AND timestamp = '2023-01-02 11:00:00')),
-((
-        SELECT
-            id
-        FROM orders
-    WHERE
-        type = 'shipment'
-        AND order_date = '2023-01-02 11:00:00'),(
-    SELECT
-        id
-    FROM item_changes
+SELECT
+    o.id AS order_id,
+    ic.id AS item_change_id
+FROM
+    orders o
+    JOIN item_changes ic ON ((o.order_date = '2023-01-01 10:00:00'
+                AND ic.warehouse_id = 1)
+            OR (o.order_date = '2023-01-02 11:00:00'
+                AND ic.warehouse_id = 2))
+    JOIN items i ON i.id = ic.item_id
 WHERE
-    item_id =(
-        SELECT
-            id
-        FROM items
-    WHERE
-        name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
-        AND type = 'product')
-AND timestamp = '2023-01-02 11:00:00'));
+    o.type = 'shipment'
+    AND ((o.order_date = '2023-01-01 10:00:00'
+            AND i.name IN ('Instruction Leaflet', 'Storage Bag'))
+        OR (o.order_date = '2023-01-02 11:00:00'
+            AND i.name IN ('Achilles Tendon Rupture Night Splint in Bag - Large Left', 'Achilles Tendon Rupture Night Splint in Bag - Large Right')));
 

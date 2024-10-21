@@ -29,7 +29,7 @@ export const useUpsertWarehouse = () => {
       toast.success("Warehouse saved");
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["select-warehouses"] });
+      queryClient.invalidateQueries({ queryKey: ["select-warehouses-view"] });
     },
   });
 };

@@ -7,13 +7,11 @@ import Input from "@/components/Input";
 import { Form } from "@/components/ui/form";
 import { useUpsertWarehouse } from "../api/upsertWarehouse";
 
-import { WarehouseView } from "../types";
+import { WarehouseItem } from "../types";
 
 const warehouseFormSchema = z.object({
 	id: z.number().optional(),
-	price: z.number().positive(),
 	name: z.string().min(1, "Name required"),
-	type: z.enum(["product", "part"]),
 });
 
 export type WarehouseFormT = z.infer<typeof warehouseFormSchema>;
@@ -30,8 +28,6 @@ export const WarehouseForm = ({ warehouse }: Props) => {
 		defaultValues: {
 			id: warehouse?.warehouse_id ?? undefined,
 			name: warehouse?.warehouse_name ?? "",
-			price: warehouse?.warehouse_price ?? 0,
-			type: warehouse?.warehouse_type ?? "product",
 		},
 	});
 
@@ -46,16 +42,6 @@ export const WarehouseForm = ({ warehouse }: Props) => {
 				className="space-y-4 mt-4 p-1"
 			>
 				<Input label="Name" name="name" type="text" />
-				<Input label="Price" name="price" type="number" />
-				<Select
-					label="Type"
-					name="type"
-					options={[{ label: "Product", value: "product" }, {
-						label: "Part",
-						value: "part",
-					}]}
-				/>
-
 				<Button type="submit">Save Changes</Button>
 			</form>
 		</Form>

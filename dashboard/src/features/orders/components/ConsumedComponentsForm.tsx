@@ -36,34 +36,33 @@ const ConsumedComponentsForm = () => {
 
 		const updatedPartsSummary = (() => {
 			type ConsumedComponent = {
-				components_change: number;
+				quantity_change: number;
 				component_id: string;
+				component_name: string;
 			};
 			type ConsumedComponents = Record<string, ConsumedComponent>;
 			let consumedComponents: ConsumedComponents = {};
 
-			// Step 1: Calculate total change for each component
-
-			// Iterate through each order item
+			// Step 1: Calculate total change for each component across all order items
 			orderItems.forEach((orderItem: OrderItem) => {
-				// Find the corresponding product for the order item
 				const product = items?.find((p) =>
 					String(p.item_id) === String(orderItem.id)
 				);
 
 				if (product && product.components) {
-					// For each component of the product
 					product.components.forEach((component) => {
 						const componentId = String(component.component_item_id);
-						// Calculate the change (negative because it's consumed)
-						const change =
-							-(component.quantity * orderItem.quantity);
-						// Add the change to the existing value (or 0 if it's the first time)
-						consumedComponents[componentId] = {
-							components_change: change,
-							component_name: component.component_name,
-							component_id: component.component_item_id,
-						};
+						const change = -(component.quantity * orderItem.quantity);
+						
+						if (componentId in consumedComponents) {
+							consumedComponents[componentId].quantity_change += change;
+						} else {
+							consumedComponents[componentId] = {
+								quantity_change: change,
+								component_name: component.component_name,
+								component_id: component.component_item_id,
+							};
+						}
 					});
 				}
 			});
@@ -74,14 +73,13 @@ const ConsumedComponentsForm = () => {
 
 				return {
 					...component,
-					components_before: itemQuantity,
-					components_after: itemQuantity + component.components_change,
+					quantity_before: itemQuantity,
+					quantity_after: itemQuantity + component.quantity_change,
 				};
 			});
 
 			console.log("updatedPartsSummary", updatedPartsSummary);
 			return updatedPartsSummary;
-
 		})();
 
 		setValue("consumed_components", updatedPartsSummary);

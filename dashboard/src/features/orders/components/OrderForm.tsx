@@ -17,9 +17,9 @@ const formSchema = z.object({
 		z.object({
 			component_id: z.string(),
 			component_name: z.string(),
-			components_before: z.number(),
-			components_change: z.number(),
-			components_after: z.number(),
+			quantity_before: z.number(),
+			quantity_change: z.number(),
+			quantity_after: z.number(),
 		}),
 	),
 });
@@ -54,7 +54,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({ items }) => {
 		name: "consumed_components",
 	});
 
-	const partIsNegative = componentsSummary.some((part) => part.components_after < 0);
+	const partIsNegative = componentsSummary.some((part) => part.quantity_after < 0);
 
 	const onSubmit = async (data: z.infer<typeof formSchema>) => {
 		// use database function
