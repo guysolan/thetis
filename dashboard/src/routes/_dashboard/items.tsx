@@ -124,7 +124,7 @@ const ItemsPage = () => {
 												defaultValues={{
 													item_components: item
 														.components
-														?.map((ic) => ({
+														?.map((ic: any) => ({
 															quantity:
 																ic.quantity,
 															parent_item_id:
