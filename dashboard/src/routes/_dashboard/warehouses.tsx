@@ -20,7 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import PageTitle from "@/components/PageTitle";
 import { WarehouseForm } from "@/features/warehouses/components/WarehouseForm";
-import StocktakeForm from '@/features/warehouses/components/StocktakeForm';
+import StocktakeForm from '@/features/warehouses/components/StockForm';
 import AmazonWarehouses from '@/features/warehouses/components/AmazonWarehouses';
 
 const ItemsPage = () => {

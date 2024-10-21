@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import  OrderItems, { orderItemsSchema, OrderItem } from "@/components/OrderItems";
 import { z } from "zod";
-import StocktakeDiscrepancy from './StocktakeDiscrepency';
+import StocktakeDiscrepancy from './StockDiscrepency';
 interface Props {
 	warehouseId: number|null;
 	orderItems?: OrderItem[];
