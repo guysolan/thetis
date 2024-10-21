@@ -21,9 +21,7 @@ import { Badge } from "../../components/ui/badge";
 import { Button } from "../../components/ui/button";
 import PageTitle from "../../components/PageTitle";
 import { WarehouseForm } from "../../features/warehouses/components/WarehouseForm";
-import { WarehouseItem } from '../../features/warehouses/types';
-import StocktakeForm from "../../features/warehouses/components/StocktakeForm";
-import { useSellerCentralStock } from '../../features/amazon/api/selectAmazonInventory';
+import StocktakeForm from '../../features/warehouses/components/StocktakeForm';
 import AmazonWarehouses from '../../features/warehouses/components/AmazonWarehouses';
 
 const ItemsPage = () => {
