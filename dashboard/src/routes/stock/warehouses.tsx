@@ -1,12 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
-import Sheet from "@/components/Sheet";
+import { createFileRoute } from '@tanstack/react-router'
+import Sheet from '@/components/Sheet'
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card'
 import {
   Table,
   TableBody,
@@ -14,18 +14,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { useSelectWarehouses } from "@/features/warehouses/api/selectWarehouses";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import PageTitle from "@/components/PageTitle";
-import { WarehouseForm } from "@/features/warehouses/components/WarehouseForm";
-import StocktakeForm from '@/features/warehouses/components/StockForm';
-import AmazonWarehouses from '@/features/warehouses/components/AmazonWarehouses';
+} from '@/components/ui/table'
+import { useSelectWarehouses } from '@/features/warehouses/api/selectWarehouses'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import PageTitle from '@/components/PageTitle'
+import { WarehouseForm } from '@/features/warehouses/components/WarehouseForm'
+import StocktakeForm from '@/features/warehouses/components/StockForm'
+import AmazonWarehouses from '@/features/warehouses/components/AmazonWarehouses'
 
 const ItemsPage = () => {
-  const { data: warehousesView } = useSelectWarehouses();
-
+  const { data: warehousesView } = useSelectWarehouses()
 
   return (
     <>
@@ -46,7 +45,7 @@ const ItemsPage = () => {
                 {warehouse.warehouse_name}
               </CardTitle>
               <Sheet
-                trigger={<Button variant='outline'>Edit</Button>}
+                trigger={<Button variant="outline">Edit</Button>}
                 title={`Edit ${warehouse.warehouse_name}`}
                 description={`Edit the details for warehouse ${warehouse.warehouse_name}`}
               >
@@ -64,16 +63,16 @@ const ItemsPage = () => {
                 </TableHeader>
                 <TableBody>
                   {(warehouse.items as any)?.map((wp: any) => (
-                      <TableRow key={`item-${wp.item_id}`}>
-                        <TableCell>
-                          <Badge className="capitalize" variant="default">
-                            {wp.item_type}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>{wp.item_name}</TableCell>
-                        <TableCell>{wp.item_quantity}</TableCell>
-                      </TableRow>
-                    ))}
+                    <TableRow key={`item-${wp.item_id}`}>
+                      <TableCell>
+                        <Badge className="capitalize" variant="default">
+                          {wp.item_type}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>{wp.item_name}</TableCell>
+                      <TableCell>{wp.item_quantity}</TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </CardContent>
@@ -89,12 +88,11 @@ const ItemsPage = () => {
           </Card>
         ))}
       </section>
-        <AmazonWarehouses />
-
+      <AmazonWarehouses />
     </>
-  );
-};
+  )
+}
 
-export const Route = createFileRoute("/_dashboard/warehouses")({
+export const Route = createFileRoute('/stock/warehouses')({
   component: ItemsPage,
-});
+})

@@ -41,7 +41,7 @@ function DashboardComponent() {
 					Orders
 				</Link>
 				<Link
-					to="/items"
+					to="/stock/items"
 					className={cn(buttonVariants({ variant: "link" }))}
 					activeProps={{
 						className: "underline underline-offset-6",
@@ -51,7 +51,7 @@ Items
 				</Link>
 			
 				<Link
-					to="/warehouses"
+					to="/stock/warehouses"
 					className={cn(buttonVariants({ variant: "link" }))}
 					activeProps={{
 						className: "underline underline-offset-6",

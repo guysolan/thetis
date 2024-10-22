@@ -1,8 +1,10 @@
 {
     "tasks": {
+        "update-supabase": "brew install supabase/tap/supabase",
         "reset": "supabase db reset",
         "gen-types": "supabase gen types --lang=typescript --local > dashboard/src/database.types.ts",
-        "serve": "npx supabase functions serve --env-file ./supabase/.env.local"
+        "serve": "supabase functions serve --env-file ./supabase/.env.local",
+        "set-secrets": "supabase secrets set --env-file ./supabase/.env.prod"
     },
     "lib": [
         {
@@ -17,5 +19,8 @@
     "compilerOptions": {
         "allowJs": true,
         "strict": true
+    },
+    "imports": {
+        "@supabase/supabase-js": "jsr:@supabase/supabase-js@^2.45.6"
     }
 }
