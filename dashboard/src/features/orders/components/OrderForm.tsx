@@ -8,6 +8,7 @@ import OrderItems from "@/components/OrderItems";
 import ComponentsTableForm from "./ConsumedComponentsForm";
 
 import { orderItemSchema } from "@/components/OrderItems";
+import { ItemView } from '../../items/types';
 
 const formSchema = z.object({
 	from_warehouse_id: z.string().min(1, "Please select a warehouse"),
@@ -27,17 +28,7 @@ const formSchema = z.object({
 export type OrderFormData = z.infer<typeof formSchema>;
 
 interface OrderFormProps {
-	items: {
-		item_id: string;
-		item_name: string;
-		item_price: number;
-		item_type: string;
-		components: {
-			component_item_id: string;
-			component_name: string;
-			quantity: number;
-		}[];
-	}[];
+	items: ItemView[];
 }
 
 export const OrderForm: React.FC<OrderFormProps> = ({ items }) => {

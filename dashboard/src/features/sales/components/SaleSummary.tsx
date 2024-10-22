@@ -6,10 +6,8 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import {
-	type OrderItem,
-	calculateOrderDetails,
-} from "../utils/calculateOrderDetails";
+import { OrderItem } from '../../orders/types';
+import { calculateOrderDetails } from './ExistingSales';
 
 interface OrderSummaryProps {
 	orderItems: OrderItem[];
@@ -20,7 +18,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
 	orderItems,
 	products,
 }) => {
-	const { totalCost, productsConsumed } = calculateOrderDetails(
+	const { totalCost } = calculateOrderDetails(
 		orderItems,
 		products,
 	);

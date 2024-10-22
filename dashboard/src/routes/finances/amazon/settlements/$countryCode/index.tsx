@@ -65,7 +65,7 @@ const AmazonFinancialReports = () => {
                                     <Link
                                         to="/finances/amazon/settlements/$countryCode/$reportId/xml"
                                         params={{
-                                            countryCode,
+                                            countryCode: countryCode ,
                                             reportId: settlement?.xml
                                                 .reportDocumentId,
                                         }}

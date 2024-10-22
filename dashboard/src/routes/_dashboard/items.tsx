@@ -44,7 +44,7 @@ const ItemsPage = () => {
 			</PageTitle>
 
 			<section className="flex flex-col gap-4">
-				{itemsView.sort((a, b) => a.item_name.localeCompare(b.item_name)).map((item: ItemView) => (
+				{itemsView.map((item: ItemView) => (
 					<Card key={item.item_id} className="flex flex-col">
 						<Accordion type="single" collapsible>
 							<AccordionItem value={`item-${item.item_id}`}>

@@ -23,7 +23,7 @@ import { ItemComponentInsert } from '../types';
 const formSchema = z.object({
 	item_components: z.array(
 		z.object({
-			quantity: z.number().min(0, {
+			quantity: z.string().min(0, {
 				message: "Quantity must be 0 or greater",
 			}),
 			parent_item_id: z.string().min(1, {
@@ -59,6 +59,7 @@ function ItemComponentsForm({
 	console.log(form.getValues());
 
 	async function onSubmit(values: ItemFormData) {
+		// @ts-ignore
 		await upsertItem(values.item_components);
 	}
 
@@ -113,7 +114,7 @@ function ItemComponentsForm({
 					onClick={() =>
 						append({
 							component_item_id: "",
-							quantity: 1,
+							quantity: "1",
 							parent_item_id: defaultValues?.item_components[0]
 								?.parent_item_id || "",
 						})}

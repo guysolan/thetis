@@ -28,19 +28,19 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 			<Accordion type="single" collapsible className="w-full">
 				{orders.map((order) => (
 					<AccordionItem
-						key={order.id}
+						key={order.order_id}
 						value={`order-${order.order_id}-${order.order_type}-${order.order_date}`}
 					>
 						<AccordionTrigger className="flex-row-reverse gap-x-2">
 							<div className="flex justify-between w-full">
 								<span className="flex gap-2">
-									Order {order.id} -{" "}
-									{new Date(order.order_date)
+									Order {order.order_id} -{" "}
+									{new Date(order.order_date as string)
 										.toLocaleDateString()}
 									<Badge>{order.order_type}</Badge>
 								</span>
 								<a
-									href={`/orders/${order.id}`}
+									href={`/orders/${order.order_id}`}
 									target="_blank"
 									rel="noopener noreferrer"
 									onClick={(e) => e.stopPropagation()}
@@ -61,9 +61,9 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 									</TableRow>
 								</TableHeader>
 								<TableBody>
-									{order.items?.map((item: any) => (
+									{(order.items )?.map((item) => (
 										<TableRow
-											key={`${order.item_id}-${item.item_name}`}
+											key={`${item.item_id}-${item.item_name}`}
 										>
 											<TableCell>
 												{item.item_name}

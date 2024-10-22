@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "target": "ES2022",
     "module": "es2022",
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
+    "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [

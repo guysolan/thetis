@@ -44,7 +44,7 @@ const SelectWarehouse = (
             </FormControl>
             <SelectContent>
               {warehouses.map((w) => (
-                <SelectItem key={w.warehouse_id} value={w.warehouse_id.toString()}>
+                <SelectItem key={w.warehouse_id} value={w.warehouse_id?.toString() ?? ""}>
                   {w.warehouse_name}
                 </SelectItem>
               ))}

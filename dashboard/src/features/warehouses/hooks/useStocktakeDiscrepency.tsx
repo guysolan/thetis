@@ -32,7 +32,6 @@ export const useStocktakeDiscrepancy = () => {
 
       return {
         id: oi.id,
-        name: oi.item_name,
         quantity_before: itemQuantity,
         quantity_after: oi.quantity,
         quantity_change:  oi.quantity-itemQuantity,
