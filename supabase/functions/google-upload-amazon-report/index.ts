@@ -12,6 +12,7 @@ import { getAmazonReportById } from "../_shared/amazon/index.ts";
 import {
     generateAmazonReportContent,
 } from "../_shared/google/amazon-settlement-report.ts";
+import { doppio } from "../_shared/doppio/index.ts";
 
 Deno.serve(async (req) => {
     if (req.method === "OPTIONS") {
@@ -38,24 +39,13 @@ Deno.serve(async (req) => {
             }`,
         );
 
-        await shareFolderWithUserByPath(
-            "accounts",
-            "guy@thetismedical.com",
-        );
+        const fileName = `Amazon Settlement Report ${
+            summary.depositDate.split("T")[0]
+        }`;
 
-        const fileName =
-            `Amazon ${countryCode} Settlement ${summary.depositDate}`;
-
-        // Create the Google Doc in the specified folder
-        const { documentUrl: docUrl, documentId } = await createGoogleDoc(
-            fileName,
-            content,
-            folderId,
-        );
-
-        const { url: pdfUrl } = await convertGoogleDocToPDF(
-            documentId,
-            `${fileName}.pdf`,
+        // You might need to validate or process the request here
+        const { documentUrl: pdfUrl } = await doppio(
+            `https://dashboard.thetismedical.com/finances/settlements/${countryCode}/${reportId}`,
         );
 
         const { fileUrl: csvUrl } = await uploadCSVToGoogleDrive(
@@ -64,7 +54,7 @@ Deno.serve(async (req) => {
             folderId,
         );
 
-        return new Response(JSON.stringify({ pdfUrl, docUrl, csvUrl }), {
+        return new Response(JSON.stringify({ pdfUrl, csvUrl }), {
             headers: {
                 ...corsHeaders,
                 "Content-Type": "application/json",

@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import PageTitle from '../components/PageTitle'
 import { Banknote, Blend, Box, Factory, Pin, Printer, Recycle, ShoppingBag, ToyBrick, Truck, Warehouse } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
+import { Route as SettlementsRoute } from '@/routes/finances/amazon/settlements/index'
 
 const jobs = {
   stock: [
@@ -11,12 +12,14 @@ const jobs = {
       href: '/stock/orders',
       description: 'Buy, sell and ship orders.',
       icon: <ShoppingBag />,
+      external: false,
     },
       {
       name: 'Items',
       href: '/stock/items',
       description: 'Keep track of the items we buy and sell.',
       icon: <ToyBrick />,
+      external: false,
     },
           {
       name: 'Warehouses',
@@ -32,6 +35,7 @@ const jobs = {
       href: '/finances/amazon/settlements',
       description: 'Payouts from Amazon.',
       icon: <Banknote />,
+      external: false,
     },
      
   ],
@@ -41,6 +45,7 @@ const jobs = {
       href: 'https://stackry.com',
       description: 'Stackry unpack and return rejected splints in the US.',
       icon: <Recycle />,
+      external: true,
     },
   ],
   shipping: [
@@ -55,6 +60,7 @@ const jobs = {
       href: 'https://www.p4d.co.uk/',
       description: 'Pallets in the UK to ship parts to MPD.',
       icon: <Truck />,
+      external: true,
     },
   ],
   suppliers: [
@@ -69,18 +75,21 @@ const jobs = {
       href: 'https://www.stretchline.com/',
       description: 'Stretchline manufactures the elastic with silicone.',
       icon: <Blend />,
+      external: true,
     },
     {
       name: 'M Wright and Sons',
       href: 'https://www.mwright.co.uk/',
       description: 'Manufactures webbing.',
       icon: <Factory />,
+      external: true,
     },
     {
       name: 'Hello Print',
       href: 'https://www.helloprint.co.uk/',
       description: 'Prints the instructions, business cards and fliers.',
       icon: <Printer />,
+      external: true,
     },
   ],
 }
@@ -99,8 +108,8 @@ export const Route = createFileRoute('/')({
                   <Link
                     to={job.href}
                     className="flex items-center hover:bg-gray-100 p-3 border rounded-lg max-w-md text-sm transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={job.external ? "_blank" : '_self'}
+                    rel={job.external ? "noopener noreferrer" : ''}
                   >
                     <span className="mr-2">{job.icon}</span>
                     <div>

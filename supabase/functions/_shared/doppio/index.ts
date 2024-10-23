@@ -2,7 +2,7 @@ export const doppio = async (url: string) => {
     console.info(`Printing PDF from URL: ${url}`);
 
     // Retrieving the DOPPIO_API_TOKEN from environment variables
-    const doppioApiToken = Deno.env.get("_DOPPIO_API_TOKEN");
+    const doppioApiToken = Deno.env.get("DOPPIO_API_TOKEN");
     if (!doppioApiToken) {
         throw new Error(
             "_DOPPIO_API_TOKEN is not set in environment variables",
