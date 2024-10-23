@@ -6,6 +6,7 @@ import {
     selectAmazonReportsQueryOptions,
     useAmazonReports,
 } from "@/features/amazon/api/selectAmazonReports";
+import dayjs from 'dayjs';
 
 const AmazonFinancialReports = () => {
     const { countryCode } = Route.useParams();
@@ -17,7 +18,7 @@ const AmazonFinancialReports = () => {
                 Amazon Financial Reports
             </h1>
             <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                {Object.values(settlements).map((settlement) => (
+                {Object.values(settlements).sort((s)=>Number(dayjs(s.date).isBefore(dayjs(s.date)))).map((settlement) => (
                     <Card key={settlement?.date}>
                         <CardHeader>
                             <CardTitle>

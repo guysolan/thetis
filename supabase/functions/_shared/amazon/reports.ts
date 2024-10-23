@@ -120,8 +120,8 @@ export const groupReportsByStartDate = (
 };
 
 export async function getReportDocument(
-    reportId: string,
     countryCode: CountryCode,
+    reportId: string,
 ): Promise<string> {
     const marketplace = marketplaces.find((m) => m.country === countryCode);
 
@@ -210,14 +210,51 @@ export async function getReportDocumentAsXML(
     const documentContent = await getReportDocument(reportId, countryCode);
     return documentContent;
 }
+
+function parseAmazonDate(dateString: string): string {
+    try {
+        // Remove quotes and split the date and time
+        const [datePart, timePart] = dateString.replace(/"/g, "").split(" ");
+
+        // Split the date into day, month, year
+        const [day, month, year] = datePart.split(".");
+
+        // Combine into ISO format string (YYYY-MM-DDTHH:mm:ss.sssZ)
+        const isoString = `${year}-${month.padStart(2, "0")}-${
+            day.padStart(2, "0")
+        }T${timePart}`;
+
+        // Create Date object and return ISO string
+        return new Date(isoString).toISOString();
+    } catch (error) {
+        console.error(`Error parsing date: ${dateString}`, error);
+        return "Invalid Date";
+    }
+}
+
 export function summariseSettlementReport(report: any[]) {
-    const total = parseFloat(report[0]['"total-amount"'].replace('"', ""));
+    const settlementInfo = report[0];
+    const settlementStartDate = parseAmazonDate(
+        settlementInfo['"settlement-start-date"'],
+    );
+    const settlementEndDate = parseAmazonDate(
+        settlementInfo['"settlement-end-date"'],
+    );
+    const depositDate = parseAmazonDate(settlementInfo['"deposit-date"']);
+    const totalAmount = parseFloat(
+        settlementInfo['"total-amount"'].replace(/"/g, ""),
+    );
+    const currency = settlementInfo['"currency"'].replace(/"/g, "");
 
     const amountTypeSum: Record<string, number> = {};
+    const transactionTypes: Set<string> = new Set();
+    const marketplaces: Set<string> = new Set();
 
     for (const item of report) {
-        const amount = parseFloat(item['"amount"'].replace('"', ""));
+        const amount = parseFloat(item['"amount"'].replace(/"/g, ""));
         let amountType = item['"amount-type"'].replace(/"/g, "");
+        const transactionType = item['"transaction-type"'].replace(/"/g, "");
+        const marketplace = item['"marketplace-name"'].replace(/"/g, "");
 
         // Format specific amount types
         if (amountType.startsWith("FBA Customer Returns Fee")) {
@@ -226,8 +263,7 @@ export function summariseSettlementReport(report: any[]) {
             amountType = "Other Transaction";
         } else {
             // Remove any remaining parentheses and their contents
-            amountType = amountType.replace(/\s*\([^)]*\)/g, "");
-            amountType = amountType.trim();
+            amountType = amountType.replace(/\s*\([^)]*\)/g, "").trim();
         }
 
         if (amountTypeSum[amountType]) {
@@ -235,6 +271,9 @@ export function summariseSettlementReport(report: any[]) {
         } else {
             amountTypeSum[amountType] = amount;
         }
+
+        transactionTypes.add(transactionType);
+        marketplaces.add(marketplace);
     }
 
     const filteredAmountTypeSum = Object.fromEntries(
@@ -243,8 +282,34 @@ export function summariseSettlementReport(report: any[]) {
             .map(([key, value]) => [key, Number(value.toFixed(2))]),
     );
 
+    // Calculate summary values
+    const sales = filteredAmountTypeSum["ItemPrice"] || 0;
+    const refunds = filteredAmountTypeSum["Refund"] || 0;
+    const fees = Object.entries(filteredAmountTypeSum)
+        .filter(([key]) => key.includes("Fee") || key.includes("Commission"))
+        .reduce((sum, [, value]) => sum + value, 0);
+    const tax = filteredAmountTypeSum["Tax"] || 0;
+    const shipping = filteredAmountTypeSum["Shipping"] || 0;
+    const otherTransactions = filteredAmountTypeSum["Other Transaction"] || 0;
+
     return {
-        totalAmount: Number(total.toFixed(2)),
+        settlementId: settlementInfo['"settlement-id"'].replace(/"/g, ""),
+        settlementStartDate: settlementStartDate,
+        settlementEndDate: settlementEndDate,
+        depositDate: depositDate,
+        totalAmount: Number(totalAmount.toFixed(2)),
+        currency,
+        transactionTypes: Array.from(transactionTypes),
+        marketplaces: Array.from(marketplaces),
         amountTypeSum: filteredAmountTypeSum,
+        summary: {
+            sales,
+            refunds,
+            fees,
+            tax,
+            shipping,
+            otherTransactions,
+            netProceeds: Number(totalAmount.toFixed(2)),
+        },
     };
 }

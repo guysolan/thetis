@@ -13,14 +13,15 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as StockImport } from './routes/stock'
 import { Route as FinancesImport } from './routes/finances'
+import { Route as DocumentsImport } from './routes/documents'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as IndexImport } from './routes/index'
 import { Route as StockWarehousesImport } from './routes/stock/warehouses'
 import { Route as StockSettingsImport } from './routes/stock/settings'
 import { Route as StockOrdersImport } from './routes/stock/orders'
 import { Route as StockItemsImport } from './routes/stock/items'
-import { Route as OrderOrderIdImport } from './routes/order.$orderId'
 import { Route as FinancesAmazonIndexImport } from './routes/finances/amazon/index'
+import { Route as DocumentsOrderOrderIdImport } from './routes/documents/order.$orderId'
 import { Route as FinancesAmazonSettlementsIndexImport } from './routes/finances/amazon/settlements/index'
 import { Route as FinancesAmazonYearMonthImport } from './routes/finances/amazon/$year.$month'
 import { Route as FinancesAmazonSettlementsCountryCodeIndexImport } from './routes/finances/amazon/settlements/$countryCode/index'
@@ -36,6 +37,11 @@ const StockRoute = StockImport.update({
 
 const FinancesRoute = FinancesImport.update({
   path: '/finances',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DocumentsRoute = DocumentsImport.update({
+  path: '/documents',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -69,14 +75,14 @@ const StockItemsRoute = StockItemsImport.update({
   getParentRoute: () => StockRoute,
 } as any)
 
-const OrderOrderIdRoute = OrderOrderIdImport.update({
-  path: '/order/$orderId',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const FinancesAmazonIndexRoute = FinancesAmazonIndexImport.update({
   path: '/amazon/',
   getParentRoute: () => FinancesRoute,
+} as any)
+
+const DocumentsOrderOrderIdRoute = DocumentsOrderOrderIdImport.update({
+  path: '/order/$orderId',
+  getParentRoute: () => DocumentsRoute,
 } as any)
 
 const FinancesAmazonSettlementsIndexRoute =
@@ -126,6 +132,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
     }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsImport
+      parentRoute: typeof rootRoute
+    }
     '/finances': {
       id: '/finances'
       path: '/finances'
@@ -138,13 +151,6 @@ declare module '@tanstack/react-router' {
       path: '/stock'
       fullPath: '/stock'
       preLoaderRoute: typeof StockImport
-      parentRoute: typeof rootRoute
-    }
-    '/order/$orderId': {
-      id: '/order/$orderId'
-      path: '/order/$orderId'
-      fullPath: '/order/$orderId'
-      preLoaderRoute: typeof OrderOrderIdImport
       parentRoute: typeof rootRoute
     }
     '/stock/items': {
@@ -174,6 +180,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/stock/warehouses'
       preLoaderRoute: typeof StockWarehousesImport
       parentRoute: typeof StockImport
+    }
+    '/documents/order/$orderId': {
+      id: '/documents/order/$orderId'
+      path: '/order/$orderId'
+      fullPath: '/documents/order/$orderId'
+      preLoaderRoute: typeof DocumentsOrderOrderIdImport
+      parentRoute: typeof DocumentsImport
     }
     '/finances/amazon/': {
       id: '/finances/amazon/'
@@ -221,6 +234,18 @@ declare module '@tanstack/react-router' {
 }
 
 // Create and export the route tree
+
+interface DocumentsRouteChildren {
+  DocumentsOrderOrderIdRoute: typeof DocumentsOrderOrderIdRoute
+}
+
+const DocumentsRouteChildren: DocumentsRouteChildren = {
+  DocumentsOrderOrderIdRoute: DocumentsOrderOrderIdRoute,
+}
+
+const DocumentsRouteWithChildren = DocumentsRoute._addFileChildren(
+  DocumentsRouteChildren,
+)
 
 interface FinancesAmazonSettlementsCountryCodeReportIdRouteChildren {
   FinancesAmazonSettlementsCountryCodeReportIdXmlRoute: typeof FinancesAmazonSettlementsCountryCodeReportIdXmlRoute
@@ -278,13 +303,14 @@ const StockRouteWithChildren = StockRoute._addFileChildren(StockRouteChildren)
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof LayoutRoute
+  '/documents': typeof DocumentsRouteWithChildren
   '/finances': typeof FinancesRouteWithChildren
   '/stock': typeof StockRouteWithChildren
-  '/order/$orderId': typeof OrderOrderIdRoute
   '/stock/items': typeof StockItemsRoute
   '/stock/orders': typeof StockOrdersRoute
   '/stock/settings': typeof StockSettingsRoute
   '/stock/warehouses': typeof StockWarehousesRoute
+  '/documents/order/$orderId': typeof DocumentsOrderOrderIdRoute
   '/finances/amazon': typeof FinancesAmazonIndexRoute
   '/finances/amazon/$year/$month': typeof FinancesAmazonYearMonthRoute
   '/finances/amazon/settlements': typeof FinancesAmazonSettlementsIndexRoute
@@ -296,13 +322,14 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof LayoutRoute
+  '/documents': typeof DocumentsRouteWithChildren
   '/finances': typeof FinancesRouteWithChildren
   '/stock': typeof StockRouteWithChildren
-  '/order/$orderId': typeof OrderOrderIdRoute
   '/stock/items': typeof StockItemsRoute
   '/stock/orders': typeof StockOrdersRoute
   '/stock/settings': typeof StockSettingsRoute
   '/stock/warehouses': typeof StockWarehousesRoute
+  '/documents/order/$orderId': typeof DocumentsOrderOrderIdRoute
   '/finances/amazon': typeof FinancesAmazonIndexRoute
   '/finances/amazon/$year/$month': typeof FinancesAmazonYearMonthRoute
   '/finances/amazon/settlements': typeof FinancesAmazonSettlementsIndexRoute
@@ -315,13 +342,14 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/_layout': typeof LayoutRoute
+  '/documents': typeof DocumentsRouteWithChildren
   '/finances': typeof FinancesRouteWithChildren
   '/stock': typeof StockRouteWithChildren
-  '/order/$orderId': typeof OrderOrderIdRoute
   '/stock/items': typeof StockItemsRoute
   '/stock/orders': typeof StockOrdersRoute
   '/stock/settings': typeof StockSettingsRoute
   '/stock/warehouses': typeof StockWarehousesRoute
+  '/documents/order/$orderId': typeof DocumentsOrderOrderIdRoute
   '/finances/amazon/': typeof FinancesAmazonIndexRoute
   '/finances/amazon/$year/$month': typeof FinancesAmazonYearMonthRoute
   '/finances/amazon/settlements/': typeof FinancesAmazonSettlementsIndexRoute
@@ -335,13 +363,14 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | ''
+    | '/documents'
     | '/finances'
     | '/stock'
-    | '/order/$orderId'
     | '/stock/items'
     | '/stock/orders'
     | '/stock/settings'
     | '/stock/warehouses'
+    | '/documents/order/$orderId'
     | '/finances/amazon'
     | '/finances/amazon/$year/$month'
     | '/finances/amazon/settlements'
@@ -352,13 +381,14 @@ export interface FileRouteTypes {
   to:
     | '/'
     | ''
+    | '/documents'
     | '/finances'
     | '/stock'
-    | '/order/$orderId'
     | '/stock/items'
     | '/stock/orders'
     | '/stock/settings'
     | '/stock/warehouses'
+    | '/documents/order/$orderId'
     | '/finances/amazon'
     | '/finances/amazon/$year/$month'
     | '/finances/amazon/settlements'
@@ -369,13 +399,14 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_layout'
+    | '/documents'
     | '/finances'
     | '/stock'
-    | '/order/$orderId'
     | '/stock/items'
     | '/stock/orders'
     | '/stock/settings'
     | '/stock/warehouses'
+    | '/documents/order/$orderId'
     | '/finances/amazon/'
     | '/finances/amazon/$year/$month'
     | '/finances/amazon/settlements/'
@@ -388,17 +419,17 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LayoutRoute: typeof LayoutRoute
+  DocumentsRoute: typeof DocumentsRouteWithChildren
   FinancesRoute: typeof FinancesRouteWithChildren
   StockRoute: typeof StockRouteWithChildren
-  OrderOrderIdRoute: typeof OrderOrderIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LayoutRoute: LayoutRoute,
+  DocumentsRoute: DocumentsRouteWithChildren,
   FinancesRoute: FinancesRouteWithChildren,
   StockRoute: StockRouteWithChildren,
-  OrderOrderIdRoute: OrderOrderIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -415,9 +446,9 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/_layout",
+        "/documents",
         "/finances",
-        "/stock",
-        "/order/$orderId"
+        "/stock"
       ]
     },
     "/": {
@@ -425,6 +456,12 @@ export const routeTree = rootRoute
     },
     "/_layout": {
       "filePath": "_layout.tsx"
+    },
+    "/documents": {
+      "filePath": "documents.tsx",
+      "children": [
+        "/documents/order/$orderId"
+      ]
     },
     "/finances": {
       "filePath": "finances.tsx",
@@ -445,9 +482,6 @@ export const routeTree = rootRoute
         "/stock/warehouses"
       ]
     },
-    "/order/$orderId": {
-      "filePath": "order.$orderId.tsx"
-    },
     "/stock/items": {
       "filePath": "stock/items.tsx",
       "parent": "/stock"
@@ -463,6 +497,10 @@ export const routeTree = rootRoute
     "/stock/warehouses": {
       "filePath": "stock/warehouses.tsx",
       "parent": "/stock"
+    },
+    "/documents/order/$orderId": {
+      "filePath": "documents/order.$orderId.tsx",
+      "parent": "/documents"
     },
     "/finances/amazon/": {
       "filePath": "finances/amazon/index.tsx",

@@ -1,13 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
 import {
   selectOrderByIdQueryOptions,
-  useSelectOrderById,
-} from '../features/orders/api/selectOrderById'
+} from '@/features/orders/api/selectOrderById'
 
 const OrdersPage = () => {
   const { order } = Route.useLoaderData()
   return (
-    <div className="bg-white shadow-lg mx-auto p-8 max-w-4xl">
+    <>
       <h1 className="mb-6 font-bold text-3xl">Order Invoice</h1>
 
       <div className="gap-8 grid grid-cols-2 mb-8">
@@ -88,10 +87,10 @@ const OrdersPage = () => {
           Total Cost: ${Number(order.total_cost).toFixed(2)}
         </p>
       </div>
-    </div>
+    </>
   )
 }
-export const Route = createFileRoute('/order/$orderId')({
+export const Route = createFileRoute('/documents/order/$orderId')({
   component: OrdersPage,
   loader: async ({ context, params }) => {
     const order = await context.queryClient.ensureQueryData(

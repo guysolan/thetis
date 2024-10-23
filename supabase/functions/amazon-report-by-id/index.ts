@@ -1,9 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { corsHeaders } from "../_shared/cors.ts";
-import {
-    getReportDocumentAsCSV,
-    summariseSettlementReport,
-} from "../_shared/amazon/reports.ts";
+import { getAmazonReportById } from "../_shared/amazon/index.ts";
 
 Deno.serve(async (req) => {
     if (req.method === "OPTIONS") {
@@ -14,15 +11,12 @@ Deno.serve(async (req) => {
 
         const { reportId, countryCode } = body;
 
-        const csvData = await getReportDocumentAsCSV(
-            reportId,
+        const { report, summary } = await getAmazonReportById(
             countryCode,
+            reportId,
         );
 
-        // Convert CSV to JSON
-        const jsonData = csvToJson(csvData);
-
-        const summary = summariseSettlementReport(jsonData);
+        console.log(report);
 
         return new Response(JSON.stringify(summary), {
             headers: {
@@ -45,22 +39,3 @@ Deno.serve(async (req) => {
         );
     }
 });
-
-function csvToJson(csv: string): any[] {
-    const lines = csv.split("\n");
-    const headers = lines[0].split(",");
-    const result = [];
-
-    for (let i = 1; i < lines.length; i++) {
-        const obj: { [key: string]: string } = {};
-        const currentLine = lines[i].split(",");
-
-        for (let j = 0; j < headers.length; j++) {
-            obj[headers[j].trim()] = currentLine[j]?.trim() || "";
-        }
-
-        result.push(obj);
-    }
-
-    return result;
-}

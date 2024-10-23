@@ -17,7 +17,7 @@
         }
     ],
     "compilerOptions": {
-        "allowJs": true,
+        "allowJs": false,
         "strict": true
     },
     "imports": {
