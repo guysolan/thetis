@@ -211,36 +211,13 @@ export async function getReportDocumentAsXML(
     return documentContent;
 }
 
-function parseAmazonDate(dateString: string): string {
-    try {
-        // Remove quotes and split the date and time
-        const [datePart, timePart] = dateString.replace(/"/g, "").split(" ");
-
-        // Split the date into day, month, year
-        const [day, month, year] = datePart.split(".");
-
-        // Combine into ISO format string (YYYY-MM-DDTHH:mm:ss.sssZ)
-        const isoString = `${year}-${month.padStart(2, "0")}-${
-            day.padStart(2, "0")
-        }T${timePart}`;
-
-        // Create Date object and return ISO string
-        return new Date(isoString).toISOString();
-    } catch (error) {
-        console.error(`Error parsing date: ${dateString}`, error);
-        return "Invalid Date";
-    }
-}
-
 export function summariseSettlementReport(report: any[]) {
     const settlementInfo = report[0];
-    const settlementStartDate = parseAmazonDate(
-        settlementInfo['"settlement-start-date"'],
-    );
-    const settlementEndDate = parseAmazonDate(
-        settlementInfo['"settlement-end-date"'],
-    );
-    const depositDate = parseAmazonDate(settlementInfo['"deposit-date"']);
+    const settlementStartDate = settlementInfo['"settlement-start-date"'];
+
+    console.log("settlementStartDate:", settlementStartDate);
+    const settlementEndDate = settlementInfo['"settlement-end-date"'];
+    const depositDate = settlementInfo['"deposit-date"'];
     const totalAmount = parseFloat(
         settlementInfo['"total-amount"'].replace(/"/g, ""),
     );

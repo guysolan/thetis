@@ -7,12 +7,14 @@ import {
     googleAuth,
     shareFolderWithUserByPath,
     uploadCSVToGoogleDrive,
+    uploadFileToDrive,
 } from "../_shared/google/config.ts";
 import { getAmazonReportById } from "../_shared/amazon/index.ts";
 import {
     generateAmazonReportContent,
 } from "../_shared/google/amazon-settlement-report.ts";
 import { doppio } from "../_shared/doppio/index.ts";
+import { uploadFileFromUrl } from "../_shared/supabase/storage.ts";
 
 Deno.serve(async (req) => {
     if (req.method === "OPTIONS") {
@@ -44,8 +46,18 @@ Deno.serve(async (req) => {
         }`;
 
         // You might need to validate or process the request here
-        const { documentUrl: pdfUrl } = await doppio(
-            `https://dashboard.thetismedical.com/finances/settlements/${countryCode}/${reportId}`,
+        const pdf = await doppio(
+            `https://dashboard.thetismedical.com/finances/amazon/settlements/${countryCode}/${reportId}`,
+        );
+
+        console.log(pdf);
+
+        // Upload PDF to Supabase Storage
+        const pdfUrl = await uploadFileFromUrl(
+            pdf.documentUrl,
+            "amazon-reports",
+            `${countryCode}/${fileName}.pdf`,
+            "application/pdf",
         );
 
         const { fileUrl: csvUrl } = await uploadCSVToGoogleDrive(
@@ -54,13 +66,16 @@ Deno.serve(async (req) => {
             folderId,
         );
 
-        return new Response(JSON.stringify({ pdfUrl, csvUrl }), {
-            headers: {
-                ...corsHeaders,
-                "Content-Type": "application/json",
+        return new Response(
+            JSON.stringify({ pdf: pdfUrl, csv: csvUrl }),
+            {
+                headers: {
+                    ...corsHeaders,
+                    "Content-Type": "application/json",
+                },
+                status: 200,
             },
-            status: 200,
-        });
+        );
     } catch (e) {
         console.error("Error processing request:", e);
         return new Response(

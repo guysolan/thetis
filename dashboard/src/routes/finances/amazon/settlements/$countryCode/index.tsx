@@ -57,7 +57,6 @@ const AmazonFinancialReports = () => {
                                             reportId: settlement?.flatFileV2
                                                 .reportDocumentId,
                                         }}
-                                        search={settlement.xml}
                                     >
                                         Open Summary
                                     </Link>

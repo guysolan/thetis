@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import PageTitle from '../components/PageTitle'
-import { Banknote, Blend, Box, Factory, Pin, Printer, Recycle, ShoppingBag, ToyBrick, Truck, Warehouse } from 'lucide-react'
+import { Banknote, Blend, Box, ExternalLink, Factory, Pin, Printer, Recycle, ShoppingBag, ToyBrick, Truck, Warehouse } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { Route as SettlementsRoute } from '@/routes/finances/amazon/settlements/index'
 
@@ -113,7 +113,7 @@ export const Route = createFileRoute('/')({
                   >
                     <span className="mr-2">{job.icon}</span>
                     <div>
-                      <h3 className="font-semibold">{job.name}</h3>
+                      <h3 className="flex justify-between gap-2 w-full font-semibold">{job.name}{job.external && <ExternalLink className="w-4 h-4" />}</h3>
                       <p className="text-gray-600 text-sm">{job.description}</p>
                     </div>
                   </Link>

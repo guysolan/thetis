@@ -11,12 +11,10 @@ Deno.serve(async (req) => {
 
         const { reportId, countryCode } = body;
 
-        const { report, summary } = await getAmazonReportById(
+        const { summary } = await getAmazonReportById(
             countryCode,
             reportId,
         );
-
-        console.log(report);
 
         return new Response(JSON.stringify(summary), {
             headers: {

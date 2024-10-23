@@ -304,3 +304,40 @@ export async function convertGoogleDocToPDF(
         throw error;
     }
 }
+
+export async function uploadFileToDrive(
+    fileUrl: string,
+    fileName: string,
+    folderId: string,
+): Promise<{ driveUrl: string }> {
+    // Fetch the file content from the URL
+    const response = await fetch(fileUrl);
+    const fileContent = await response.arrayBuffer();
+
+    const auth = await googleAuth().getClient();
+    const drive = google.drive({ version: "v3", auth });
+    // Use the Google Drive API to upload the file
+    const file = await drive.files.create({
+        requestBody: {
+            name: fileName,
+            parents: [folderId],
+        },
+        media: {
+            mimeType: "application/pdf",
+            body: fileContent,
+        },
+    });
+
+    // Get the web view link of the uploaded file
+    const fileId = file.data.id;
+    await drive.permissions.create({
+        fileId: fileId,
+        requestBody: {
+            role: "reader",
+            type: "anyone",
+        },
+    });
+
+    const driveUrl = `https://drive.google.com/file/d/${fileId}/view`;
+    return { driveUrl: driveUrl };
+}

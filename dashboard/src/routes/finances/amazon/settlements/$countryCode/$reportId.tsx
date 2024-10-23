@@ -10,8 +10,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import AmazonReportById from "@/features/amazon/components/AmazonReportById";
-import { supabase } from "../../../../../lib/supabase";
-import { Button } from "../../../../../components/ui/button";
+import { supabase } from "@/lib/supabase";
+import { Button } from "@/components/ui/button";
 const AmazonSettlementReport = () => {
   const search = Route.useSearch();
   const { countryCode, reportId } = Route.useParams();
@@ -22,7 +22,7 @@ const AmazonSettlementReport = () => {
         <CardHeader>
           <CardTitle>Settlement Report</CardTitle>
           <CardDescription>
-            {dayjs((search?.report as any)?.dataStartTime).toString()}
+            Current Time: {dayjs().toString()}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -53,7 +53,4 @@ export const Route = createFileRoute(
   "/finances/amazon/settlements/$countryCode/$reportId",
 )({
   component: AmazonSettlementReport,
-  validateSearch: (search: Record<string, unknown>) => ({
-    report: search.report,
-  }),
 });
