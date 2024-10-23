@@ -51,12 +51,12 @@ const AmazonFinancialReports = () => {
                                 }
                                 <Button asChild>
                                     <Link
-                                        to="/finances/amazon/settlements/$countryCode/$reportId"
+                                        to="/finances/amazon/settlements/$countryCode/report"
                                         params={{
                                             countryCode,
-                                            reportId: settlement?.flatFileV2
-                                                .reportDocumentId,
                                         }}
+                                        search={{reportId:settlement?.flatFileV2
+                                                .reportDocumentId}}
                                     >
                                         Open Summary
                                     </Link>
