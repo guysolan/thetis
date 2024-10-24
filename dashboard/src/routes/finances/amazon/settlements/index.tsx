@@ -1,8 +1,14 @@
 import React from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FolderOpen } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { DollarSign, Euro, FolderArchive, FolderOpen } from "lucide-react";
 import { useDownloadFolder } from "@/features/amazon/api/useDownloadFolder";
 
 const AmazonFinancialReports = () => {
@@ -12,67 +18,51 @@ const AmazonFinancialReports = () => {
       <h1 className="mb-4 font-bold text-2xl">Amazon Financial Reports</h1>
 
       <div className="gap-4 grid grid-cols-1 md:grid-cols-2">
-        {["NA", "EUR"].map((country) => (
-          <Card key={country}>
+        {[{
+          countries: ["US", "MX", "CA"],
+          code: "NA",
+          name: "North America",
+          icon: <DollarSign size={32} />,
+        }, {
+          countries: ["IT", "GB", "DE", "SE", "FR"],
+          code: "EUR",
+          name: "Europe",
+          icon: <Euro size={32} />,
+        }].map((region) => (
+          <Card key={region.code}>
             <CardHeader>
-              <CardTitle>{country} Settlements</CardTitle>
+              <CardTitle className="flex justify-between items-center gap-2 w-full text-xl">
+                {region.name} Settlements
+                {region.icon}
+
+              </CardTitle>
             </CardHeader>
             <CardContent>
+          
+              <div className="flex flex-wrap gap-2">
+                {region.countries.map((country) => (
+                  <Button
+                    variant="outline"
+                    className="flex items-center gap-2"
+                    onClick={() => downloadFolder(country)}
+                  >
+                    <FolderArchive size={16} /> Download {country}
+                  </Button>
+                ))}
+              </div>
+            </CardContent>
+            <CardFooter>
               <Button asChild variant="default">
                 <Link
                   to="/finances/amazon/settlements/$region"
-                  params={{ region: country }}
+                  params={{ region: region.code }}
                 >
-                  {country} Reports
+                  Next
                 </Link>
               </Button>
-            </CardContent>
+            </CardFooter>
           </Card>
         ))}
-      </div>
-      <div className="flex flex-wrap gap-2 my-4">
-        <Button
-          variant="outline"
-          className="flex items-center gap-2"
-          onClick={() => downloadFolder("US")}
-        >
-          <FolderOpen size={16} /> Download US
-        </Button>
-        <Button
-          variant="outline"
-          className="flex items-center gap-2"
-          onClick={() => downloadFolder("CA")}
-        >
-          <FolderOpen size={16} /> Download US
-        </Button>
-        <Button
-          variant="outline"
-          className="flex items-center gap-2"
-          onClick={() => downloadFolder("GB")}
-        >
-          <FolderOpen size={16} /> Download GB
-        </Button>
-        <Button
-          variant="outline"
-          className="flex items-center gap-2"
-          onClick={() => downloadFolder("DE")}
-        >
-          <FolderOpen size={16} /> Download DE
-        </Button>
-        <Button
-          variant="outline"
-          className="flex items-center gap-2"
-          onClick={() => downloadFolder("IT")}
-        >
-          <FolderOpen size={16} /> Download IT
-        </Button>
-        <Button
-          variant="outline"
-          className="flex items-center gap-2"
-          onClick={() => downloadFolder("FR")}
-        >
-          <FolderOpen size={16} /> Download FR
-        </Button>
       </div>
     </div>
   );

@@ -10,11 +10,6 @@ import dayjs from "dayjs";
 import { AmazonReport } from "@/features/amazon/components/AmazonReportById";
 
 
-type ReportType =
-    | "GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2"
-    | "GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE"
-    | "GET_V2_SETTLEMENT_REPORT_DATA_XML";
-
 const AmazonFinancialReports = () => {
     const { countryCode, reportType } = Route.useParams();
     const {reports} = Route.useLoaderData();
