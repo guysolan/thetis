@@ -98,23 +98,23 @@ export const Route = createFileRoute('/')({
   component: () => (
     <section className="px-8 py-4">
       <PageTitle title="Home"></PageTitle>
-      <div className="gap-4 grid">
+      <div className="flex flex-col gap-4">
         {Object.entries(jobs).map(([category, jobList]) => (
-          <div key={category} className="space-y-2">
+          <div key={category} className="flex flex-col justify-start items-start space-y-2">
             <h2 className="font-bold text-xl capitalize">{category}</h2>
             <ul className="flex flex-wrap gap-4">
               {jobList.map((job) => (
                 <li key={job.name}>
                   <Link
                     to={job.href}
-                    className="flex items-center hover:bg-gray-100 p-3 border rounded-lg max-w-md text-sm transition-colors"
+                    className="flex items-center bg-white hover:bg-neutral-50 p-3 border rounded-lg max-w-md text-sm transition-colors"
                     target={job.external ? "_blank" : '_self'}
                     rel={job.external ? "noopener noreferrer" : ''}
                   >
                     <span className="mr-2">{job.icon}</span>
-                    <div>
-                      <h3 className="flex justify-between gap-2 w-full font-semibold">{job.name}{job.external && <ExternalLink className="w-4 h-4" />}</h3>
-                      <p className="text-gray-600 text-sm">{job.description}</p>
+                    <div >
+                      <h3 className="flex justify-between gap-4 w-full font-semibold text-md">{job.name}{job.external && <ExternalLink className="w-4 h-4" />}</h3>
+                      <p className="text-neutral-600 text-sm">{job.description}</p>
                     </div>
                   </Link>
                 </li>

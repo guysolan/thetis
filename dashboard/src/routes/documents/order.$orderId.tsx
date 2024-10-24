@@ -38,7 +38,7 @@ const OrdersPage = () => {
         <h2 className="mb-4 font-semibold text-xl">Products</h2>
         <table className="w-full">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-neutral-100">
               <th className="p-2 text-left">Name</th>
               <th className="text-right p-2">Price</th>
               <th className="text-right p-2">Quantity</th>
@@ -66,7 +66,7 @@ const OrdersPage = () => {
         <h2 className="mb-4 font-semibold text-xl">Parts Required</h2>
         <table className="w-full">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-neutral-100">
               <th className="p-2 text-left">Name</th>
               <th className="text-right p-2">Quantity</th>
             </tr>

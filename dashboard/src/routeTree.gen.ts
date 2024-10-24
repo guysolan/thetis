@@ -14,7 +14,6 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as StockImport } from './routes/stock'
 import { Route as FinancesImport } from './routes/finances'
 import { Route as DocumentsImport } from './routes/documents'
-import { Route as LayoutImport } from './routes/_layout'
 import { Route as IndexImport } from './routes/index'
 import { Route as StockWarehousesImport } from './routes/stock/warehouses'
 import { Route as StockSettingsImport } from './routes/stock/settings'
@@ -47,11 +46,6 @@ const FinancesRoute = FinancesImport.update({
 
 const DocumentsRoute = DocumentsImport.update({
   path: '/documents',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const LayoutRoute = LayoutImport.update({
-  id: '/_layout',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -158,13 +152,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/_layout': {
-      id: '/_layout'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
     }
     '/documents': {
@@ -375,7 +362,6 @@ const StockRouteWithChildren = StockRoute._addFileChildren(StockRouteChildren)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '': typeof LayoutRoute
   '/documents': typeof DocumentsRouteWithChildren
   '/finances': typeof FinancesRouteWithChildren
   '/stock': typeof StockRouteWithChildren
@@ -399,7 +385,6 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '': typeof LayoutRoute
   '/documents': typeof DocumentsRouteWithChildren
   '/finances': typeof FinancesRouteWithChildren
   '/stock': typeof StockRouteWithChildren
@@ -424,7 +409,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/_layout': typeof LayoutRoute
   '/documents': typeof DocumentsRouteWithChildren
   '/finances': typeof FinancesRouteWithChildren
   '/stock': typeof StockRouteWithChildren
@@ -450,7 +434,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | ''
     | '/documents'
     | '/finances'
     | '/stock'
@@ -473,7 +456,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | ''
     | '/documents'
     | '/finances'
     | '/stock'
@@ -496,7 +478,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/_layout'
     | '/documents'
     | '/finances'
     | '/stock'
@@ -521,7 +502,6 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  LayoutRoute: typeof LayoutRoute
   DocumentsRoute: typeof DocumentsRouteWithChildren
   FinancesRoute: typeof FinancesRouteWithChildren
   StockRoute: typeof StockRouteWithChildren
@@ -529,7 +509,6 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  LayoutRoute: LayoutRoute,
   DocumentsRoute: DocumentsRouteWithChildren,
   FinancesRoute: FinancesRouteWithChildren,
   StockRoute: StockRouteWithChildren,
@@ -548,7 +527,6 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/_layout",
         "/documents",
         "/finances",
         "/stock"
@@ -556,9 +534,6 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/_layout": {
-      "filePath": "_layout.tsx"
     },
     "/documents": {
       "filePath": "documents.tsx",

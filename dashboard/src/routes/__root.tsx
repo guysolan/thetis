@@ -23,12 +23,13 @@ export const Route = createRootRouteWithContext<{
 
 function RootComponent() {
 	return (
-		<>
+    <body className="flex flex-col justify-center items-center bg-slate-100 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] m-0 py-8 w-full min-h-screen font-raleway text-center text-slate-800">
+			
 			<Outlet />
 			<Toaster />
 
 			{/* <ReactQueryDevtools buttonPosition="top-right" /> */}
 			{/* <TanStackRouterDevtools position="bottom-right" /> */}
-		</>
+		</body>
 	);
 }
