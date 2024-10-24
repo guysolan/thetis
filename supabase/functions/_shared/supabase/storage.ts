@@ -24,7 +24,7 @@ export async function fetchFileContent(fileUrl: string): Promise<ArrayBuffer> {
 export async function uploadFileContent(
     bucketName: string,
     filePath: string,
-    fileContent: ArrayBuffer,
+    fileContent: ArrayBuffer | string,
     contentType: string,
 ) {
     const { data, error } = await supabase.storage
@@ -34,7 +34,10 @@ export async function uploadFileContent(
             upsert: true,
         });
 
-    if (error) throw error;
+    if (error) {
+        console.log(error);
+    }
+
     if (!data) throw new Error("Upload successful but no data returned");
 
     return data;

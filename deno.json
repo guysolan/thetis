@@ -5,7 +5,7 @@
         "deploy": "supabase functions deploy",
         "gen-types": "supabase gen types --lang=typescript --local > dashboard/src/database.types.ts",
         "serve": "supabase functions serve --env-file ./supabase/.env.local",
-        "set-secrets": "supabase secrets set --env-file ./supabase/.env.prod"
+        "secrets": "supabase secrets set --env-file ./supabase/.env.prod"
     },
     "lib": [
         {

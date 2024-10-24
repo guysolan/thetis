@@ -5,7 +5,7 @@ export const doppio = async (url: string) => {
     const doppioApiToken = Deno.env.get("DOPPIO_API_TOKEN");
     if (!doppioApiToken) {
         throw new Error(
-            "_DOPPIO_API_TOKEN is not set in environment variables",
+            "DOPPIO_API_TOKEN is not set in environment variables",
         );
     }
 
