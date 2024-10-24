@@ -16,7 +16,7 @@ Deno.serve(async () => {
 
         const { data: eurReports, error: eurReportsError } = await supabase
             .functions
-            .invoke("amazon-reports", { body: { region: "NA" } });
+            .invoke("amazon-reports", { body: { region: "EUR" } });
         if (eurReportsError) throw eurReportsError;
 
         const { data: reports } = await supabase.from("amazon_reports").select(
