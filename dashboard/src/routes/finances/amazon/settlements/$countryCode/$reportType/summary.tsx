@@ -1,6 +1,7 @@
 import React from 'react'
 import dayjs from 'dayjs'
 import { createFileRoute } from '@tanstack/react-router'
+
 import {
   Card,
   CardContent,
@@ -9,11 +10,13 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+
 import AmazonReportById from '@/features/amazon/components/AmazonReportById'
 import { supabase } from '@/lib/supabase'
 import { Button } from '@/components/ui/button'
 const AmazonSettlementReport = () => {
-  const { reportId } = Route.useSearch();
+  const { report } = Route.useSearch()
+  console.log(report)
   const { countryCode } = Route.useParams()
 
   return (
@@ -25,7 +28,7 @@ const AmazonSettlementReport = () => {
         </CardHeader>
         <CardContent>
           <div className="flex flex-col space-y-4">
-            <AmazonReportById countryCode={countryCode} reportId={reportId} />
+            <AmazonReportById countryCode={countryCode} report={report} />
           </div>
         </CardContent>
         <CardFooter>
@@ -34,8 +37,8 @@ const AmazonSettlementReport = () => {
             onClick={() =>
               supabase.functions.invoke('google-upload-amazon-report', {
                 body: {
-                  reportId,
                   countryCode,
+                  reportDocumentId: report?.reportDocumentId,
                 },
               })
             }
@@ -48,18 +51,15 @@ const AmazonSettlementReport = () => {
   )
 }
 
-type ReportSearch = {
-  reportId: string
-}
+import { ReportSearch } from '@/features/amazon/components/AmazonReportById'
 
 export const Route = createFileRoute(
-  '/finances/amazon/settlements/$countryCode/report',
+  '/finances/amazon/settlements/$countryCode/$reportType/summary',
 )({
   component: AmazonSettlementReport,
-validateSearch: (search: Record<string, unknown>): ReportSearch => {
-    // validate and parse the search params into a typed state
+  validateSearch: (search: Record<string, unknown>): ReportSearch => {
     return {
-      reportId: (search.reportId as string) || '',
+      report: (search.report as any) || '',
     }
   },
 })

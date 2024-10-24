@@ -7,135 +7,110 @@ type ReportType =
     | "GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE"
     | "GET_V2_SETTLEMENT_REPORT_DATA_XML";
 
-export async function getAllSettlementReports(
-    countryCode: CountryCode,
-    reportType: ReportType,
-) {
-    const marketplace = marketplaces.find((m) => m.country === countryCode);
-
-    if (!marketplace) {
-        throw new Error(
-            `Marketplace not found for country code: ${countryCode}`,
-        );
+const processMarketplaces = (marketplaces: string[], currency: string) => {
+    console.log(marketplaces, currency);
+    if (marketplaces.length && marketplaces[0]) {
+        console.log("marketplaces[0]");
+        return marketplaces[0];
+    } else if (marketplaces[1]) {
+        console.log("marketplaces[1]");
+        return marketplaces[1];
+    } else if (currency === "CAD") {
+        console.log("Amazon.ca");
+        return "Amazon.ca";
     }
+    return "";
+};
+
+const marketplaceToLocation = (marketplace: string) => {
+    switch (marketplace) {
+        case "Amazon.ca":
+            return "CA";
+        case "Amazon.de":
+            return "DE";
+        case "Amazon.es":
+            return "ES";
+        case "Amazon.fr":
+            return "FR";
+        case "Amazon.it":
+            return "IT";
+        case "Amazon.co.uk":
+            return "GB";
+        case "Amazon.in":
+            return "IN";
+        case "Amazon.jp":
+            return "JP";
+        case "Amazon.com":
+            return "US";
+        default:
+            return "UNKNOWN";
+    }
+};
+
+export async function getSettlementReportsByRegion(
+    region: "NA" | "EUR",
+) {
+    const selectedMarketplaces = marketplaces.filter((m) =>
+        m?.region === region
+    );
 
     const endpoint = "/reports/2021-06-30/reports";
-    const params: Record<string, string> = {
-        reportTypes: reportType,
-        marketplaceIds: marketplace.id,
-        // Optionally, you can specify other filters like processingStatuses or pageSize
+    const initialParams: Record<string, string> = {
+        reportTypes: "GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE",
     };
 
     let reports = [];
     let nextToken: string | undefined;
 
     do {
+        // Determine which query parameters to use for the API call
+        const queryParams = nextToken
+            ? { nextToken } // Use only the nextToken for subsequent requests
+            : initialParams; // Use initial parameters for the first request
+
+        // Call the API with the appropriate query parameters
         const response = await callSellingPartnerAPI(
-            marketplace.region as "NA" | "EUR",
+            region,
             endpoint,
             "GET",
-            nextToken ? { nextToken } : params,
+            queryParams,
         );
 
-        reports = reports.concat(response.reports);
+        // Add the received reports to our collection
+        reports = reports.concat(response?.reports);
+
+        // Update the nextToken for the next iteration
         nextToken = response.nextToken;
+
+        // The loop continues as long as there's a nextToken,
+        // indicating more pages of results are available
     } while (nextToken);
 
     return reports;
 }
 
 // Example usage
-export const getAllSettlementData = async () => {
-    const USReports = await getAllSettlementReports(
-        "US",
-        "GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2",
-    );
-    const UKReports = await getAllSettlementReports(
-        "UK",
-        "GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2",
-    );
-    // Process reports as needed
-    return {
-        "Amazon US": USReports,
-        "Amazon UK": UKReports,
-    };
-};
-
-// Example usage
-export const getSettlementDataByCountry = async (
+export const getAllSettlementDataByCountryAndReportType = async (
     countryCode: CountryCode,
+    reportType: ReportType,
 ) => {
-    const flatFile = await getAllSettlementReports(
+    const reports = await getAllSettlementReports(
         countryCode,
-        "GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE",
+        reportType,
     );
-    const flatFileV2 = await getAllSettlementReports(
-        countryCode,
-        "GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2",
-    );
-    const xml = await getAllSettlementReports(
-        countryCode,
-        "GET_V2_SETTLEMENT_REPORT_DATA_XML",
-    );
-    // Process reports as needed
-    return groupReportsByStartDate(flatFile, flatFileV2, xml);
-};
 
-export const groupReportsByStartDate = (
-    flatFile: any[],
-    flatFileV2: any[],
-    xml: any[],
-) => {
-    try {
-        const allReports = [...flatFile, ...flatFileV2, ...xml];
-
-        return allReports.reduce((grouped, report) => {
-            const { dataStartTime } = report;
-            // Format the startDate as YYYY-MM-DD
-            const dateKey = new Date(dataStartTime).toISOString().split("T")[0];
-
-            if (!grouped[dateKey]) {
-                grouped[dateKey] = {
-                    date: dateKey,
-                    flatFile: null,
-                    flatFileV2: null,
-                    xml: null,
-                };
-            }
-
-            if (flatFile.includes(report)) {
-                grouped[dateKey].flatFile = report;
-            } else if (flatFileV2.includes(report)) {
-                grouped[dateKey].flatFileV2 = report;
-            } else if (xml.includes(report)) {
-                grouped[dateKey].xml = report;
-            }
-
-            return grouped;
-        }, {});
-    } catch (error) {
-        console.error("Error grouping reports by start date:", error);
-        throw error;
-    }
+    return reports;
 };
 
 export async function getReportDocument(
-    countryCode: CountryCode,
+    region: "NA" | "EUR",
     reportId: string,
 ): Promise<string> {
-    const marketplace = marketplaces.find((m) => m.country === countryCode);
-
-    if (!marketplace) {
-        throw new Error(
-            `Marketplace not found for country code: ${countryCode}`,
-        );
-    }
-
     const endpoint = `/reports/2021-06-30/documents/${reportId}`;
 
     try {
         const response = await callSellingPartnerAPI(
-            marketplace.region as "NA" | "EUR",
+            region,
             endpoint,
             "GET",
         );
@@ -187,7 +162,7 @@ export function convertToCSV(
     for (let i = 1; i < lines.length; i++) {
         const values = lines[i].split(delimiter);
         const csvLine = values.map((value) =>
-            `"${value.trim().replace(/"/g, '""')}"`
+            `"${value.trim()?.replace(/"/g, "")}"`
         ).join(",");
         csvContent += csvLine + "\n";
     }
@@ -195,98 +170,171 @@ export function convertToCSV(
     return csvContent;
 }
 
-export async function getReportDocumentAsCSV(
-    reportId: string,
-    countryCode: CountryCode,
-): Promise<string> {
-    const documentContent = await getReportDocument(reportId, countryCode);
-    return convertToCSV(documentContent);
-}
-
-export async function getReportDocumentAsXML(
-    reportId: string,
-    countryCode: CountryCode,
-): Promise<string> {
-    const documentContent = await getReportDocument(reportId, countryCode);
-    return documentContent;
-}
-
 export function summariseSettlementReport(report: any[]) {
     const settlementInfo = report[0];
-    const settlementStartDate = settlementInfo['"settlement-start-date"'];
+    const [settlementStartDate, settlementEndDate, depositDate] = [
+        "settlement-start-date",
+        "settlement-end-date",
+        "deposit-date",
+    ]
+        .map((key) => settlementInfo[key]);
 
-    console.log("settlementStartDate:", settlementStartDate);
-    const settlementEndDate = settlementInfo['"settlement-end-date"'];
-    const depositDate = settlementInfo['"deposit-date"'];
     const totalAmount = parseFloat(
-        settlementInfo['"total-amount"'].replace(/"/g, ""),
+        settlementInfo["total-amount"] || "0",
     );
-    const currency = settlementInfo['"currency"'].replace(/"/g, "");
+    const currency = settlementInfo["currency"];
 
-    const amountTypeSum: Record<string, number> = {};
-    const transactionTypes: Set<string> = new Set();
-    const marketplaces: Set<string> = new Set();
+    const summary: Record<string, number> = {
+        sales: 0,
+        salesOther: 0,
+        salesProductCharges: 0,
+        salesShipping: 0,
+        refunds: 0,
+        refundedSales: 0,
+        refundedExpenses: 0,
+        expenses: 0,
+        expensedPromoRebates: 0,
+        expensedFbaFees: 0,
+        expensedCostOfAdvertising: 0,
+        expensedAmazonFees: 0,
+        accountReserveLevel: 0,
+        previousReserveAmount: 0,
+        other: 0,
+        FBAFulfilmentFee: 0,
+        Commission: 0,
+        netProceeds: Number(totalAmount.toFixed(2)),
+    };
+
+    const transactionTypes = new Set<string>();
+    const marketplaces = new Set<string>();
+    const feeTypes = new Set<string>();
+    const promotionTypes = new Set<string>();
+    const directPaymentTypes = new Set<string>();
 
     for (const item of report) {
-        const amount = parseFloat(item['"amount"'].replace(/"/g, ""));
-        let amountType = item['"amount-type"'].replace(/"/g, "");
-        const transactionType = item['"transaction-type"'].replace(/"/g, "");
-        const marketplace = item['"marketplace-name"'].replace(/"/g, "");
+        const amount = parseFloat(item["direct-payment-amount"] || "0") +
+            parseFloat(item["total-amount"] || "0") +
+            parseFloat(item["order-fee-amount"] || "0") +
+            parseFloat(item["other-amount"] || "0") +
+            parseFloat(item["order-amount"] || "0") +
+            parseFloat(item["order-fee-amount"] || "0") +
+            parseFloat(item["shipment-fee-amount"] || "0") +
+            parseFloat(item["item-related-fee-amount"] || "0") +
+            parseFloat(item["promotion-amount"] || "0") +
+            parseFloat(item["price-amount"] || "0");
 
-        // Format specific amount types
-        if (amountType.startsWith("FBA Customer Returns Fee")) {
-            amountType = "FBA Customer Returns Fee";
-        } else if (amountType === "other-transaction") {
-            amountType = "Other Transaction";
-        } else {
-            // Remove any remaining parentheses and their contents
-            amountType = amountType.replace(/\s*\([^)]*\)/g, "").trim();
+        const amountType = item["transaction-type"];
+        const priceType = item["price-type"];
+        const feeType = item["item-related-fee-type"];
+
+        switch (amountType) {
+            case "Order":
+                if (priceType === "Principal") {
+                    // TODO - Sales needs some extra handling beyond just productCharges but I don't know what
+                    summary.sales += amount;
+                    summary.salesProductCharges += amount;
+                } else if (priceType === "Shipping") {
+                    summary.sales += amount;
+                    summary.salesShipping += amount;
+                }
+                break;
+            case "Refund":
+                if (priceType === "Principal") {
+                    summary.refundedSales += amount;
+                }
+                summary.refunds += amount;
+                break;
+            case "RefundCommission":
+                summary.refunds += amount;
+                break;
+            case "RefundShipping":
+                summary.refundedSales += amount;
+                summary.refunds += amount;
+                break;
+            case "PromotionRebate":
+                summary.expenses += amount;
+                summary.promoRebates += amount;
+                break;
+
+            case "Current Reserve Amount":
+                summary.currentReserveAmount = amount;
+                break;
+            case "Previous Reserve Amount Balance":
+                summary.previousReserveAmount = amount;
+                break;
+            case "Liquidations":
+                summary.liquidations += amount;
+                break;
+            case "REVERSAL_REIMBURSEMENT":
+                summary.reversalReimbursements += amount;
+                break;
+            default:
+                console.log(
+                    `Unhandled transaction type: ${amountType} ${feeType} ${priceType} ${amount}`,
+                );
+                break;
         }
 
-        if (amountTypeSum[amountType]) {
-            amountTypeSum[amountType] += amount;
-        } else {
-            amountTypeSum[amountType] = amount;
-        }
-
-        transactionTypes.add(transactionType);
-        marketplaces.add(marketplace);
+        // Collect unique values
+        transactionTypes.add(item["transaction-type"]);
+        marketplaces.add(item["marketplace-name"]);
+        feeTypes.add(item["shipment-fee-type"]);
+        feeTypes.add(item["order-fee-type"]);
+        feeTypes.add(item["item-related-fee-type"]);
+        promotionTypes.add(item["promotion-type"]);
+        directPaymentTypes.add(item["direct-payment-type"]);
     }
 
-    const filteredAmountTypeSum = Object.fromEntries(
-        Object.entries(amountTypeSum)
-            .filter(([key, value]) => key !== "" && value !== null)
-            .map(([key, value]) => [key, Number(value.toFixed(2))]),
-    );
+    summary.expenses = summary.promoRebates + summary.fbaFees +
+        summary.costOfAdvertising + summary.amazonFees;
 
-    // Calculate summary values
-    const sales = filteredAmountTypeSum["ItemPrice"] || 0;
-    const refunds = filteredAmountTypeSum["Refund"] || 0;
-    const fees = Object.entries(filteredAmountTypeSum)
-        .filter(([key]) => key.includes("Fee") || key.includes("Commission"))
-        .reduce((sum, [, value]) => sum + value, 0);
-    const tax = filteredAmountTypeSum["Tax"] || 0;
-    const shipping = filteredAmountTypeSum["Shipping"] || 0;
-    const otherTransactions = filteredAmountTypeSum["Other Transaction"] || 0;
+    const marketplace = processMarketplaces(
+        Array.from(marketplaces),
+        currency,
+    );
+    const location = marketplaceToLocation(marketplace);
 
     return {
-        settlementId: settlementInfo['"settlement-id"'].replace(/"/g, ""),
-        settlementStartDate: settlementStartDate,
-        settlementEndDate: settlementEndDate,
-        depositDate: depositDate,
-        totalAmount: Number(totalAmount.toFixed(2)),
+        settlementId: settlementInfo["settlement-id"],
+        settlementStartDate,
+        settlementEndDate,
+        depositDate,
+        totalAmount: summary.netProceeds,
         currency,
-        transactionTypes: Array.from(transactionTypes),
-        marketplaces: Array.from(marketplaces),
-        amountTypeSum: filteredAmountTypeSum,
-        summary: {
-            sales,
-            refunds,
-            fees,
-            tax,
-            shipping,
-            otherTransactions,
-            netProceeds: Number(totalAmount.toFixed(2)),
+        marketplace,
+        location,
+        summary: Object.fromEntries(
+            Object.entries(summary).map((
+                [key, value],
+            ) => [key, Number(value.toFixed(2))]),
+        ),
+        metadata: {
+            transactionTypes: Array.from(transactionTypes),
+            marketplaces: Array.from(marketplaces),
+            feeTypes: Array.from(feeTypes),
+            promotionTypes: Array.from(promotionTypes),
+            directPaymentTypes: Array.from(directPaymentTypes),
         },
+        sampleData: report.slice(0, 5).map((item) => ({
+            orderId: item["order-id"],
+            merchantOrderId: item["merchant-order-id"],
+            adjustmentId: item["adjustment-id"],
+            shipmentId: item["shipment-id"],
+            fulfillmentId: item["fulfillment-id"],
+            postedDate: item["posted-date"],
+            orderItemCode: item["order-item-code"],
+            merchantOrderItemId: item["merchant-order-item-id"],
+            merchantAdjustmentItemId: item["merchant-adjustment-item-id"],
+            sku: item["sku"],
+            quantityPurchased: parseInt(item["quantity-purchased"] || "0"),
+            priceType: item["price-type"],
+            priceAmount: parseFloat(item["price-amount"] || "0"),
+            miscFeeAmount: parseFloat(item["misc-fee-amount"] || "0"),
+            otherFeeAmount: parseFloat(item["other-fee-amount"] || "0"),
+            otherFeeReasonDescription: item["other-fee-reason-description"],
+            promotionId: item["promotion-id"],
+            promotionAmount: parseFloat(item["promotion-amount"] || "0"),
+            otherAmount: parseFloat(item["other-amount"] || "0"),
+        })),
     };
 }

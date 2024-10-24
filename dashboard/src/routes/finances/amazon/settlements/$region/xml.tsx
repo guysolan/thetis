@@ -1,16 +1,17 @@
 import React from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { buttonVariants } from '@/components/ui/button'
 import XMLViewer from 'react-xml-viewer'
-import { useAmazonReportByIdAsXML } from '../../../../../features/amazon/api/downloadAmazonReportByIdAsXml'
+import { useAmazonReportByIdAsXML } from '@/features/amazon/api/downloadAmazonReportByIdAsXml'
+
 const AmazonSettlementReport = () => {
-  const { countryCode, reportId } = Route.useParams()
+  const { report } = Route.useSearch()
+  const { countryCode, reportType } = Route.useParams()
   const {
     data: xmlData,
     isLoading,
     error,
-  } = useAmazonReportByIdAsXML(reportId, countryCode)
+  } = useAmazonReportByIdAsXML(report.reportDocumentId, countryCode)
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error: {error.message}</div>
@@ -31,8 +32,15 @@ const AmazonSettlementReport = () => {
   )
 }
 
+import { ReportSearch } from '@/features/amazon/components/AmazonReportById'
+
 export const Route = createFileRoute(
-  '/finances/amazon/settlements/$countryCode/$reportId/xml',
+  '/finances/amazon/settlements/$countryCode/$reportType copy/xml',
 )({
   component: AmazonSettlementReport,
+  validateSearch: (search: Record<string, unknown>): ReportSearch => {
+    return {
+      report: (search.report as any) || '',
+    }
+  },
 })

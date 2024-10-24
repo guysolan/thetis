@@ -9,14 +9,14 @@ Deno.serve(async (req) => {
     try {
         const body = await req.json();
 
-        const { reportId, countryCode } = body;
+        const { reportId, region } = body;
 
-        const { summary } = await getAmazonReportById(
-            countryCode,
+        const res = await getAmazonReportById(
+            region,
             reportId,
         );
 
-        return new Response(JSON.stringify(summary), {
+        return new Response(JSON.stringify(res), {
             headers: {
                 ...corsHeaders,
                 "Content-Type": "application/json",

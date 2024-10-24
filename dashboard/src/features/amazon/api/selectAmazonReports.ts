@@ -1,14 +1,15 @@
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase"; // Adjust the import path as needed
+import type { AmazonReport } from "../components/AmazonReportById";
 
 export const selectAmazonReports = async (
-    countryCode: string,
+    region: string,
 ) => {
     const { data, error } = await supabase.functions.invoke(
         "amazon-reports",
         {
             body: {
-                countryCode,
+                region,
             },
         },
     );
@@ -22,20 +23,22 @@ export const selectAmazonReports = async (
         );
     }
 
-    return data as { date: string; flatFile: any; flatFileV2: any; xml: any }[];
+    return data as AmazonReport[];
 };
 
 export const selectAmazonReportsQueryOptions = (
-    countryCode: string,
+    region: string,
 ) => {
     return queryOptions({
-        queryKey: ["amazonReport", countryCode] as const,
-        queryFn: () => selectAmazonReports(countryCode),
+        queryKey: ["amazonReport", region] as const,
+        queryFn: () => selectAmazonReports(region),
     });
 };
 
 export const useAmazonReports = (
-    countryCode: string,
+    region: string,
 ) => {
-    return useSuspenseQuery(selectAmazonReportsQueryOptions(countryCode));
+    return useSuspenseQuery(
+        selectAmazonReportsQueryOptions(region),
+    );
 };

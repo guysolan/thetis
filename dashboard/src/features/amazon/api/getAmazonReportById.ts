@@ -1,16 +1,16 @@
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase"; // Adjust the import path as needed
-
+import type { AmazonReport } from "../components/AmazonReportById";
 export const selectAmazonReportById = async (
     reportId?: string,
-    countryCode?: string,
+    region?: string,
 ) => {
     const { data, error } = await supabase.functions.invoke(
         "amazon-report-by-id",
         {
             body: {
                 reportId,
-                countryCode,
+                region,
             },
         },
     );
@@ -19,24 +19,24 @@ export const selectAmazonReportById = async (
         throw error;
     }
 
-    return data;
+    return data as AmazonReport;
 };
 
 export const selectAmazonReportByIdQueryOptions = (
     reportId?: string,
-    countryCode?: string,
+    region?: string,
 ) => {
     return queryOptions({
-        queryKey: ["amazonReport", reportId, countryCode] as const,
-        queryFn: () => selectAmazonReportById(reportId, countryCode),
+        queryKey: ["amazonReport", reportId, region] as const,
+        queryFn: () => selectAmazonReportById(reportId, region),
     });
 };
 
 export const useAmazonReportById = (
     reportId?: string,
-    countryCode?: string,
+    region?: string,
 ) => {
     return useQuery(
-        selectAmazonReportByIdQueryOptions(reportId, countryCode),
+        selectAmazonReportByIdQueryOptions(reportId, region),
     );
 };

@@ -14,28 +14,11 @@ Deno.serve(async (req) => {
         const { reportId, countryCode } = body;
 
         const xmlData = await getReportDocumentAsXML(
-            reportId,
             countryCode,
+            reportId,
         );
 
         console.log(xmlData);
-
-        // Upload xml to Supabase Storage
-        // const xmlUpload = await uploadFile(
-        //     "amazon/uk/settlements",
-        //     `${reportId}.xml`,
-        //     xml,
-        // );
-
-        // // Upload XML to Supabase Storage
-        // const xmlUpload = await uploadFile(
-        //     "amazon/uk/settlements",
-        //     `${reportId}.xml`,
-        //     xml,
-        // );
-
-        // Declare the data variable
-        // const data = { xmlUrl: xmlUpload.path, xmlUrl: xmlUpload.path };
 
         return new Response(xmlData, {
             headers: {

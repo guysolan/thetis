@@ -8,15 +8,15 @@ const AmazonFinancialReports = () => {
     <div className="p-4">
       <h1 className="mb-4 font-bold text-2xl">Amazon Financial Reports</h1>
       <div className="gap-4 grid grid-cols-1 md:grid-cols-2">
-        {['UK', 'US', 'CA', 'DE'].map((country) => (
+        {['NA', 'EUR'].map((country) => (
           <Card key={country}>
             <CardHeader>
               <CardTitle>{country} Settlements</CardTitle>
             </CardHeader>
             <CardContent>
               <Button asChild variant="default">
-                <Link to={`/finances/amazon/settlements/${country}`}>
-                  View {country} Reports
+                <Link to='/finances/amazon/settlements/$region' params={{region:country}}>
+                  {country} Reports
                 </Link>
               </Button>
             </CardContent>
