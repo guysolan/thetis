@@ -27,10 +27,6 @@ import { Route as FinancesAmazonSettlementsRegionIndexImport } from './routes/fi
 import { Route as FinancesAmazonSettlementsRegionXmlImport } from './routes/finances/amazon/settlements/$region/xml'
 import { Route as FinancesAmazonSettlementsRegionSummaryImport } from './routes/finances/amazon/settlements/$region/summary'
 import { Route as FinancesAmazonSettlementsRegionReportImport } from './routes/finances/amazon/settlements/$region/report'
-import { Route as FinancesAmazonSettlementsCountryCodeReportTypeIndexImport } from './routes/finances/amazon/settlements/$countryCode/$reportType/index'
-import { Route as FinancesAmazonSettlementsCountryCodeReportTypeXmlImport } from './routes/finances/amazon/settlements/$countryCode/$reportType/xml'
-import { Route as FinancesAmazonSettlementsCountryCodeReportTypeTableImport } from './routes/finances/amazon/settlements/$countryCode/$reportType/table'
-import { Route as FinancesAmazonSettlementsCountryCodeReportTypeSummaryImport } from './routes/finances/amazon/settlements/$countryCode/$reportType/summary'
 
 // Create/Update Routes
 
@@ -116,30 +112,6 @@ const FinancesAmazonSettlementsRegionSummaryRoute =
 const FinancesAmazonSettlementsRegionReportRoute =
   FinancesAmazonSettlementsRegionReportImport.update({
     path: '/amazon/settlements/$region/report',
-    getParentRoute: () => FinancesRoute,
-  } as any)
-
-const FinancesAmazonSettlementsCountryCodeReportTypeIndexRoute =
-  FinancesAmazonSettlementsCountryCodeReportTypeIndexImport.update({
-    path: '/amazon/settlements/$countryCode/$reportType/',
-    getParentRoute: () => FinancesRoute,
-  } as any)
-
-const FinancesAmazonSettlementsCountryCodeReportTypeXmlRoute =
-  FinancesAmazonSettlementsCountryCodeReportTypeXmlImport.update({
-    path: '/amazon/settlements/$countryCode/$reportType/xml',
-    getParentRoute: () => FinancesRoute,
-  } as any)
-
-const FinancesAmazonSettlementsCountryCodeReportTypeTableRoute =
-  FinancesAmazonSettlementsCountryCodeReportTypeTableImport.update({
-    path: '/amazon/settlements/$countryCode/$reportType/table',
-    getParentRoute: () => FinancesRoute,
-  } as any)
-
-const FinancesAmazonSettlementsCountryCodeReportTypeSummaryRoute =
-  FinancesAmazonSettlementsCountryCodeReportTypeSummaryImport.update({
-    path: '/amazon/settlements/$countryCode/$reportType/summary',
     getParentRoute: () => FinancesRoute,
   } as any)
 
@@ -259,34 +231,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FinancesAmazonSettlementsRegionIndexImport
       parentRoute: typeof FinancesImport
     }
-    '/finances/amazon/settlements/$countryCode/$reportType/summary': {
-      id: '/finances/amazon/settlements/$countryCode/$reportType/summary'
-      path: '/amazon/settlements/$countryCode/$reportType/summary'
-      fullPath: '/finances/amazon/settlements/$countryCode/$reportType/summary'
-      preLoaderRoute: typeof FinancesAmazonSettlementsCountryCodeReportTypeSummaryImport
-      parentRoute: typeof FinancesImport
-    }
-    '/finances/amazon/settlements/$countryCode/$reportType/table': {
-      id: '/finances/amazon/settlements/$countryCode/$reportType/table'
-      path: '/amazon/settlements/$countryCode/$reportType/table'
-      fullPath: '/finances/amazon/settlements/$countryCode/$reportType/table'
-      preLoaderRoute: typeof FinancesAmazonSettlementsCountryCodeReportTypeTableImport
-      parentRoute: typeof FinancesImport
-    }
-    '/finances/amazon/settlements/$countryCode/$reportType/xml': {
-      id: '/finances/amazon/settlements/$countryCode/$reportType/xml'
-      path: '/amazon/settlements/$countryCode/$reportType/xml'
-      fullPath: '/finances/amazon/settlements/$countryCode/$reportType/xml'
-      preLoaderRoute: typeof FinancesAmazonSettlementsCountryCodeReportTypeXmlImport
-      parentRoute: typeof FinancesImport
-    }
-    '/finances/amazon/settlements/$countryCode/$reportType/': {
-      id: '/finances/amazon/settlements/$countryCode/$reportType/'
-      path: '/amazon/settlements/$countryCode/$reportType'
-      fullPath: '/finances/amazon/settlements/$countryCode/$reportType'
-      preLoaderRoute: typeof FinancesAmazonSettlementsCountryCodeReportTypeIndexImport
-      parentRoute: typeof FinancesImport
-    }
   }
 }
 
@@ -312,10 +256,6 @@ interface FinancesRouteChildren {
   FinancesAmazonSettlementsRegionSummaryRoute: typeof FinancesAmazonSettlementsRegionSummaryRoute
   FinancesAmazonSettlementsRegionXmlRoute: typeof FinancesAmazonSettlementsRegionXmlRoute
   FinancesAmazonSettlementsRegionIndexRoute: typeof FinancesAmazonSettlementsRegionIndexRoute
-  FinancesAmazonSettlementsCountryCodeReportTypeSummaryRoute: typeof FinancesAmazonSettlementsCountryCodeReportTypeSummaryRoute
-  FinancesAmazonSettlementsCountryCodeReportTypeTableRoute: typeof FinancesAmazonSettlementsCountryCodeReportTypeTableRoute
-  FinancesAmazonSettlementsCountryCodeReportTypeXmlRoute: typeof FinancesAmazonSettlementsCountryCodeReportTypeXmlRoute
-  FinancesAmazonSettlementsCountryCodeReportTypeIndexRoute: typeof FinancesAmazonSettlementsCountryCodeReportTypeIndexRoute
 }
 
 const FinancesRouteChildren: FinancesRouteChildren = {
@@ -330,14 +270,6 @@ const FinancesRouteChildren: FinancesRouteChildren = {
     FinancesAmazonSettlementsRegionXmlRoute,
   FinancesAmazonSettlementsRegionIndexRoute:
     FinancesAmazonSettlementsRegionIndexRoute,
-  FinancesAmazonSettlementsCountryCodeReportTypeSummaryRoute:
-    FinancesAmazonSettlementsCountryCodeReportTypeSummaryRoute,
-  FinancesAmazonSettlementsCountryCodeReportTypeTableRoute:
-    FinancesAmazonSettlementsCountryCodeReportTypeTableRoute,
-  FinancesAmazonSettlementsCountryCodeReportTypeXmlRoute:
-    FinancesAmazonSettlementsCountryCodeReportTypeXmlRoute,
-  FinancesAmazonSettlementsCountryCodeReportTypeIndexRoute:
-    FinancesAmazonSettlementsCountryCodeReportTypeIndexRoute,
 }
 
 const FinancesRouteWithChildren = FinancesRoute._addFileChildren(
@@ -377,10 +309,6 @@ export interface FileRoutesByFullPath {
   '/finances/amazon/settlements/$region/summary': typeof FinancesAmazonSettlementsRegionSummaryRoute
   '/finances/amazon/settlements/$region/xml': typeof FinancesAmazonSettlementsRegionXmlRoute
   '/finances/amazon/settlements/$region': typeof FinancesAmazonSettlementsRegionIndexRoute
-  '/finances/amazon/settlements/$countryCode/$reportType/summary': typeof FinancesAmazonSettlementsCountryCodeReportTypeSummaryRoute
-  '/finances/amazon/settlements/$countryCode/$reportType/table': typeof FinancesAmazonSettlementsCountryCodeReportTypeTableRoute
-  '/finances/amazon/settlements/$countryCode/$reportType/xml': typeof FinancesAmazonSettlementsCountryCodeReportTypeXmlRoute
-  '/finances/amazon/settlements/$countryCode/$reportType': typeof FinancesAmazonSettlementsCountryCodeReportTypeIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -400,10 +328,6 @@ export interface FileRoutesByTo {
   '/finances/amazon/settlements/$region/summary': typeof FinancesAmazonSettlementsRegionSummaryRoute
   '/finances/amazon/settlements/$region/xml': typeof FinancesAmazonSettlementsRegionXmlRoute
   '/finances/amazon/settlements/$region': typeof FinancesAmazonSettlementsRegionIndexRoute
-  '/finances/amazon/settlements/$countryCode/$reportType/summary': typeof FinancesAmazonSettlementsCountryCodeReportTypeSummaryRoute
-  '/finances/amazon/settlements/$countryCode/$reportType/table': typeof FinancesAmazonSettlementsCountryCodeReportTypeTableRoute
-  '/finances/amazon/settlements/$countryCode/$reportType/xml': typeof FinancesAmazonSettlementsCountryCodeReportTypeXmlRoute
-  '/finances/amazon/settlements/$countryCode/$reportType': typeof FinancesAmazonSettlementsCountryCodeReportTypeIndexRoute
 }
 
 export interface FileRoutesById {
@@ -424,10 +348,6 @@ export interface FileRoutesById {
   '/finances/amazon/settlements/$region/summary': typeof FinancesAmazonSettlementsRegionSummaryRoute
   '/finances/amazon/settlements/$region/xml': typeof FinancesAmazonSettlementsRegionXmlRoute
   '/finances/amazon/settlements/$region/': typeof FinancesAmazonSettlementsRegionIndexRoute
-  '/finances/amazon/settlements/$countryCode/$reportType/summary': typeof FinancesAmazonSettlementsCountryCodeReportTypeSummaryRoute
-  '/finances/amazon/settlements/$countryCode/$reportType/table': typeof FinancesAmazonSettlementsCountryCodeReportTypeTableRoute
-  '/finances/amazon/settlements/$countryCode/$reportType/xml': typeof FinancesAmazonSettlementsCountryCodeReportTypeXmlRoute
-  '/finances/amazon/settlements/$countryCode/$reportType/': typeof FinancesAmazonSettlementsCountryCodeReportTypeIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -449,10 +369,6 @@ export interface FileRouteTypes {
     | '/finances/amazon/settlements/$region/summary'
     | '/finances/amazon/settlements/$region/xml'
     | '/finances/amazon/settlements/$region'
-    | '/finances/amazon/settlements/$countryCode/$reportType/summary'
-    | '/finances/amazon/settlements/$countryCode/$reportType/table'
-    | '/finances/amazon/settlements/$countryCode/$reportType/xml'
-    | '/finances/amazon/settlements/$countryCode/$reportType'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -471,10 +387,6 @@ export interface FileRouteTypes {
     | '/finances/amazon/settlements/$region/summary'
     | '/finances/amazon/settlements/$region/xml'
     | '/finances/amazon/settlements/$region'
-    | '/finances/amazon/settlements/$countryCode/$reportType/summary'
-    | '/finances/amazon/settlements/$countryCode/$reportType/table'
-    | '/finances/amazon/settlements/$countryCode/$reportType/xml'
-    | '/finances/amazon/settlements/$countryCode/$reportType'
   id:
     | '__root__'
     | '/'
@@ -493,10 +405,6 @@ export interface FileRouteTypes {
     | '/finances/amazon/settlements/$region/summary'
     | '/finances/amazon/settlements/$region/xml'
     | '/finances/amazon/settlements/$region/'
-    | '/finances/amazon/settlements/$countryCode/$reportType/summary'
-    | '/finances/amazon/settlements/$countryCode/$reportType/table'
-    | '/finances/amazon/settlements/$countryCode/$reportType/xml'
-    | '/finances/amazon/settlements/$countryCode/$reportType/'
   fileRoutesById: FileRoutesById
 }
 
@@ -550,11 +458,7 @@ export const routeTree = rootRoute
         "/finances/amazon/settlements/$region/report",
         "/finances/amazon/settlements/$region/summary",
         "/finances/amazon/settlements/$region/xml",
-        "/finances/amazon/settlements/$region/",
-        "/finances/amazon/settlements/$countryCode/$reportType/summary",
-        "/finances/amazon/settlements/$countryCode/$reportType/table",
-        "/finances/amazon/settlements/$countryCode/$reportType/xml",
-        "/finances/amazon/settlements/$countryCode/$reportType/"
+        "/finances/amazon/settlements/$region/"
       ]
     },
     "/stock": {
@@ -612,22 +516,6 @@ export const routeTree = rootRoute
     },
     "/finances/amazon/settlements/$region/": {
       "filePath": "finances/amazon/settlements/$region/index.tsx",
-      "parent": "/finances"
-    },
-    "/finances/amazon/settlements/$countryCode/$reportType/summary": {
-      "filePath": "finances/amazon/settlements/$countryCode/$reportType/summary.tsx",
-      "parent": "/finances"
-    },
-    "/finances/amazon/settlements/$countryCode/$reportType/table": {
-      "filePath": "finances/amazon/settlements/$countryCode/$reportType/table.tsx",
-      "parent": "/finances"
-    },
-    "/finances/amazon/settlements/$countryCode/$reportType/xml": {
-      "filePath": "finances/amazon/settlements/$countryCode/$reportType/xml.tsx",
-      "parent": "/finances"
-    },
-    "/finances/amazon/settlements/$countryCode/$reportType/": {
-      "filePath": "finances/amazon/settlements/$countryCode/$reportType/index.tsx",
       "parent": "/finances"
     }
   }

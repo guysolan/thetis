@@ -50,10 +50,6 @@ const marketplaceToLocation = (marketplace: string) => {
 export async function getSettlementReportsByRegion(
     region: "NA" | "EUR",
 ) {
-    const selectedMarketplaces = marketplaces.filter((m) =>
-        m?.region === region
-    );
-
     const endpoint = "/reports/2021-06-30/reports";
     const initialParams: Record<string, string> = {
         reportTypes: "GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE",

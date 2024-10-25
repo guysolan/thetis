@@ -1,12 +1,8 @@
 import React from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { selectAmazonReportsQueryOptions } from "@/features/amazon/api/selectAmazonReports";
 import dayjs from "dayjs";
 import { AmazonReport } from "@/features/amazon/components/AmazonReportById";
-import { supabase } from "@/lib/supabase";
-import { useSaveAmazonReport } from '../../../../../features/amazon/api/saveAmazonReport';
 import AmazonSettlementCard from "@/features/amazon/components/AmazonSettlementCard";
 const AmazonFinancialReports = () => {
   const { region } = Route.useParams();

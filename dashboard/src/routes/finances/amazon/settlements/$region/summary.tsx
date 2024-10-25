@@ -16,7 +16,7 @@ const AmazonSettlementReport = () => {
   const { summary } = Route.useLoaderData()
 
   return (
-    <div className="p-4">
+    <div className="p-4 w-full max-w-[1000px]">
       <Card>
         <CardHeader>
           <CardTitle>Settlement Report</CardTitle>

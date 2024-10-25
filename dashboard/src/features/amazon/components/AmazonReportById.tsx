@@ -105,8 +105,8 @@ const AmazonReportById = ({ summary }: { summary: SummaryData }) => {
             <TableBody>
               {settlementDetails.map(({ label, value }) => (
                 <TableRow key={label}>
-                  <TableCell className="font-medium">{label}</TableCell>
-                  <TableCell>{value}</TableCell>
+                  <TableCell className="font-medium text-left">{label}</TableCell>
+                  <TableCell className="text-right">{value}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -129,7 +129,7 @@ const AmazonReportById = ({ summary }: { summary: SummaryData }) => {
             <TableBody>
               {financialSummary.map(({ label, value, indent }) => (
                 <TableRow key={label}>
-                  <TableCell className={`font-medium ${indent ? "pl-8" : ""}`}>
+                  <TableCell className={`text-left  ${indent ? "pl-8 font-light" : "font-medium"}`}>
                     {label}
                   </TableCell>
                   <TableCell className="text-right">
