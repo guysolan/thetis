@@ -1,20 +1,32 @@
 import React from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { useAmazonReports } from '../../../features/amazon/api/selectAmazonReports'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useAmazonReports } from '../../../../features/amazon/api/selectAmazonReports'
 
 const months = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ]
 
 const currentYear = new Date().getFullYear()
 const currentMonth = new Date().getMonth() + 1 // Adding 1 because getMonth() returns 0-11
 
 const AmazonFinancialReports = () => {
-  const years = Array.from({ length: currentYear - 2021 }, (_, i) => currentYear - i)
-
+  const years = Array.from(
+    { length: currentYear - 2021 },
+    (_, i) => currentYear - i,
+  )
 
   return (
     <div className="p-4">
@@ -33,7 +45,9 @@ const AmazonFinancialReports = () => {
                     <Button
                       asChild
                       variant="default"
-                      disabled={year === currentYear && index + 1 > currentMonth}
+                      disabled={
+                        year === currentYear && index + 1 > currentMonth
+                      }
                     >
                       <Link to={`/finances/amazon/${year}/${index + 1}`}>
                         Report
@@ -42,7 +56,9 @@ const AmazonFinancialReports = () => {
                     <Button
                       asChild
                       variant="secondary"
-                      disabled={year === currentYear && index + 1 > currentMonth}
+                      disabled={
+                        year === currentYear && index + 1 > currentMonth
+                      }
                     >
                       <Link to={`/finances/amazon/${year}/${index + 1}`}>
                         Transactions
@@ -59,6 +75,6 @@ const AmazonFinancialReports = () => {
   )
 }
 
-export const Route = createFileRoute('/finances/amazon/')({
-  component: AmazonFinancialReports
+export const Route = createFileRoute('/_apps/finances/amazon/')({
+  component: AmazonFinancialReports,
 })

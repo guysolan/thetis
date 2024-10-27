@@ -6,10 +6,10 @@ html {
   color-scheme: light dark;
 }
 * {
-  @apply border-gray-200 dark:border-gray-800;
+  @apply border-zinc-200 dark:border-zinc-800;
 }
 body {
-  @apply bg-gray-50 text-gray-950 dark:bg-gray-900 dark:text-gray-200;
+  @apply bg-zinc-50 text-zinc-950 dark:bg-zinc-900 dark:text-zinc-200;
 }
 
 @layer base {

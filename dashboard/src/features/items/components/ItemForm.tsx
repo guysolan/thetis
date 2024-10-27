@@ -59,6 +59,9 @@ export const ItemForm = ({ item }: Props) => {
 					options={[{ label: "Product", value: "product" }, {
 						label: "Part",
 						value: "part",
+					},{
+						label: "Service",
+						value: "service",
 					}]}
 				/>
 

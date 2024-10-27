@@ -29,7 +29,7 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
 const sheetVariants = cva(
-	"z-50 fixed gap-4 bg-white dark:bg-neutral-950 shadow-lg p-6 transition data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:duration-300 data-[state=open]:duration-500 ease-in-out",
+	"z-50 fixed gap-4 bg-white dark:bg-zinc-950 shadow-lg p-6 transition data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:duration-300 data-[state=open]:duration-500 ease-in-out",
 	{
 		variants: {
 			side: {
@@ -62,7 +62,7 @@ const SheetContent = React.forwardRef<
 			className={cn(sheetVariants({ side }), className)}
 			{...props}
 		>
-			<SheetPrimitive.Close className="top-4 right-4 absolute dark:data-[state=open]:bg-neutral-800 data-[state=open]:bg-neutral-100 opacity-70 hover:opacity-100 focus:ring-2 focus:ring-neutral-950 ring-offset-white transition-opacity focus:outline-none dark:focus:ring-neutral-300 focus:ring-offset-2 dark:ring-offset-neutral-950 disabled:pointer-events-none">
+			<SheetPrimitive.Close className="top-4 right-4 absolute dark:data-[state=open]:bg-zinc-800 data-[state=open]:bg-zinc-100 opacity-70 hover:opacity-100 focus:ring-2 focus:ring-zinc-950 ring-offset-white transition-opacity focus:outline-none dark:focus:ring-zinc-300 focus:ring-offset-2 dark:ring-offset-zinc-950 disabled:pointer-events-none">
 				<Cross2Icon className="w-4 h-4" />
 				<span className="sr-only">Close</span>
 			</SheetPrimitive.Close>
@@ -107,7 +107,7 @@ const SheetTitle = React.forwardRef<
 	<SheetPrimitive.Title
 		ref={ref}
 		className={cn(
-			"text-lg font-semibold text-neutral-950 dark:text-neutral-50",
+			"text-lg font-semibold text-zinc-950 dark:text-zinc-50",
 			className,
 		)}
 		{...props}
@@ -121,7 +121,7 @@ const SheetDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
 	<SheetPrimitive.Description
 		ref={ref}
-		className={cn("text-sm text-neutral-500 dark:text-neutral-400", className)}
+		className={cn("text-sm text-zinc-500 dark:text-zinc-400", className)}
 		{...props}
 	/>
 ));

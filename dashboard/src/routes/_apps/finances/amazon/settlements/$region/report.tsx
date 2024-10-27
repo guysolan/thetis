@@ -23,7 +23,7 @@ import {
   selectAmazonReportById,
   selectAmazonReportByIdQueryOptions,
   useAmazonReportById,
-} from '../../../../../features/amazon/api/getAmazonReportById'
+} from '../../../../../../features/amazon/api/getAmazonReportById'
 
 const AmazonSettlementReport = () => {
   const { region } = Route.useParams()
@@ -84,7 +84,7 @@ const AmazonSettlementReport = () => {
 import { ReportSearch } from '@/features/amazon/components/AmazonReportById'
 
 export const Route = createFileRoute(
-  '/finances/amazon/settlements/$region/report',
+  '/_apps/finances/amazon/settlements/$region/report',
 )({
   component: AmazonSettlementReport,
   validateSearch: (search: Record<string, unknown>): ReportSearch => {

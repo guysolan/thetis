@@ -9,7 +9,7 @@ export const selectOrderById = async (id: string) => {
   const { data, error } = await supabase
     .from("orders_view")
     .select("*")
-    .eq("id", id)
+    .eq("order_id", id)
     .single();
 
   if (error) {

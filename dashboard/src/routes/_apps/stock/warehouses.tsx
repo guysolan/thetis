@@ -15,16 +15,23 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useSelectWarehouses } from '@/features/warehouses/api/selectWarehouses'
+import {
+  selectWarehousesQueryOptions,
+  useSelectWarehouses,
+} from '@/features/warehouses/api/selectWarehouses'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import PageTitle from '@/components/PageTitle'
 import { WarehouseForm } from '@/features/warehouses/components/WarehouseForm'
 import StocktakeForm from '@/features/warehouses/components/StockForm'
 import AmazonWarehouses from '@/features/warehouses/components/AmazonWarehouses'
+import DeleteDialog from '../../../components/DeleteDialog'
+import useDeleteWarehouse from '../../../features/warehouses/api/deleteWarehouse'
 
 const ItemsPage = () => {
   const { data: warehousesView } = useSelectWarehouses()
+
+  const { mutate: deleteWarehouse } = useDeleteWarehouse()
 
   return (
     <>
@@ -48,6 +55,13 @@ const ItemsPage = () => {
                 trigger={<Button variant="outline">Edit</Button>}
                 title={`Edit ${warehouse.warehouse_name}`}
                 description={`Edit the details for warehouse ${warehouse.warehouse_name}`}
+                footer={
+                  <DeleteDialog
+                    deleteFunction={() =>
+                      deleteWarehouse(warehouse.warehouse_id as number)
+                    }
+                  />
+                }
               >
                 <WarehouseForm warehouse={warehouse} />
               </Sheet>
@@ -93,6 +107,9 @@ const ItemsPage = () => {
   )
 }
 
-export const Route = createFileRoute('/stock/warehouses')({
+export const Route = createFileRoute('/_apps/stock/warehouses')({
   component: ItemsPage,
+  loader: async ({ context }) => {
+    await context.queryClient.ensureQueryData(selectWarehousesQueryOptions())
+  },
 })

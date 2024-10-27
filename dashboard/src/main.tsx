@@ -2,14 +2,13 @@ import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { routeTree } from './routeTree.gen'
-
 const queryClient = new QueryClient()
 
 // Set up a Router instance
 const router = createRouter({
   routeTree,
   context: {
-    queryClient,
+    queryClient: queryClient,
   },
 });
 
@@ -19,6 +18,10 @@ declare module '@tanstack/react-router' {
     router: typeof router
   }
 }
+
+
+
+
 
 const rootElement = document.getElementById('app')!
 

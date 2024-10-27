@@ -10,12 +10,10 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { useDeleteItem } from "../api/deleteItem";
 
-type DeleteItemDialogProps = { itemId: number };
+type DeleteDialogProps = { deleteFunction: ()=>void };
 
-const DeleteItemDialog = ({ itemId }: DeleteItemDialogProps) => {
-    const { mutate: deleteItem } = useDeleteItem();
+const DeleteDialog = ({ deleteFunction }: DeleteDialogProps) => {
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
@@ -27,13 +25,13 @@ const DeleteItemDialog = ({ itemId }: DeleteItemDialogProps) => {
                         Are you absolutely sure?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                        This action cannot be undone and will delete the item
+                        This action cannot be undone and will delete the 
                         and any relations to products.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => deleteItem(itemId)}>
+                    <AlertDialogAction onClick={deleteFunction}>
                         Continue
                     </AlertDialogAction>
                 </AlertDialogFooter>
@@ -42,4 +40,4 @@ const DeleteItemDialog = ({ itemId }: DeleteItemDialogProps) => {
     );
 };
 
-export default DeleteItemDialog;
+export default DeleteDialog;

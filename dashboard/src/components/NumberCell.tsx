@@ -1,14 +1,21 @@
+import { cn } from '../lib/utils';
 import { TableCell } from "./ui/table";
 import { ReactNode } from "react";
 const NumberCell = (
-    { value, children }: { value: number; children?: ReactNode },
+    { value, children, className }: { value: number; children?: ReactNode, className?: string },
 ) => {
+
+    const formattedValue = (val: number) => {
+        if(typeof val !== "number") return 0;
+        if (Number.isInteger(val)) return val;
+        return value.toFixed(2);
+    }
     return (
         <TableCell
-            className={value < 0 ? "text-red-500" : ""}
+            className={cn(value < 0 ? "text-red-500" : "", className)}
         >
             {children&&children}
-            {Number.isInteger(value) ? value : value.toFixed(2)}
+            {formattedValue(value)}
         </TableCell>
     );
 };

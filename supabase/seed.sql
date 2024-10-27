@@ -21,10 +21,10 @@ INSERT INTO items(name, price, type)
 ('Achilles Tendon Rupture Night Splint - Small Right', 79.99, 'product');
 
 -- Insert item components
-INSERT INTO item_components(parent_item_id, component_item_id, quantity)
+INSERT INTO item_components(item_id, component_id, component_quantity)
 SELECT
-    p.id AS parent_item_id,
-    c.id AS component_item_id,
+    p.id AS item_id,
+    c.id AS component_id,
     CASE WHEN p.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
         AND c.name = 'Instruction Leaflet' THEN
         1
@@ -91,7 +91,7 @@ SELECT
     WHEN p.name = 'Achilles Tendon Rupture Night Splint - Small Right'
         AND c.name = 'Elastic' THEN
         0.78
-    END AS quantity
+    END AS component_quantity
 FROM
     items p
     CROSS JOIN items c
@@ -251,4 +251,79 @@ WHERE
             AND i.name IN ('Instruction Leaflet', 'Storage Bag'))
         OR (o.order_date = '2023-01-02 11:00:00'
             AND i.name IN ('Achilles Tendon Rupture Night Splint in Bag - Large Left', 'Achilles Tendon Rupture Night Splint in Bag - Large Right')));
+
+-- Insert service item
+INSERT INTO items(name, price, type)
+    VALUES ('Splint Assembly Service', 11.58, 'service');
+
+-- Get the ID of the newly inserted service item
+WITH service_item AS (
+    SELECT
+        id
+    FROM
+        items
+    WHERE
+        name = 'Splint Assembly Service'
+        AND type = 'service')
+    -- Insert item components for the service (assuming it's composed of labor only, no physical parts)
+    INSERT INTO item_components(item_id, component_id, component_quantity)
+    SELECT
+        p.id AS item_id,
+        s.id AS component_id,
+        1 AS component_quantity -- Assuming one unit of service is required for each product
+    FROM
+        items p
+    CROSS JOIN service_item s
+WHERE
+    p.type = 'product'
+    AND p.name LIKE 'Achilles Tendon Rupture Night Splint%';
+
+-- Add the service to existing orders (assuming it's part of the sales)
+WITH service_item AS (
+    SELECT
+        id
+    FROM
+        items
+    WHERE
+        name = 'Splint Assembly Service'
+        AND type = 'service')
+INSERT INTO item_changes(item_id, quantity_change, warehouse_id)
+SELECT
+    s.id,
+    - ic.quantity_change, -- Negative because it's a sale
+    ic.warehouse_id
+FROM
+    item_changes ic
+    JOIN items i ON i.id = ic.item_id
+    CROSS JOIN service_item s
+WHERE
+    i.type = 'product'
+    AND i.name LIKE 'Achilles Tendon Rupture Night Splint%'
+    AND ic.quantity_change < 0;
+
+-- Only for sales
+-- Link the new item changes to the existing sales orders
+WITH new_changes AS (
+    SELECT
+        ic.id AS item_change_id,
+        i.id AS product_id
+    FROM
+        item_changes ic
+        JOIN items i ON i.id = ic.item_id
+    WHERE
+        i.name = 'Splint Assembly Service')
+INSERT INTO order_item_changes(order_id, item_change_id, price, tax)
+SELECT
+    oic.order_id,
+    nc.item_change_id,
+    11.58 AS price, -- The price of the service
+    0.2 AS tax -- Assuming 20% tax rate
+FROM
+    order_item_changes oic
+    JOIN item_changes ic ON ic.id = oic.item_change_id
+    JOIN items i ON i.id = ic.item_id
+    JOIN new_changes nc ON nc.product_id = i.id
+WHERE
+    i.type = 'product'
+    AND i.name LIKE 'Achilles Tendon Rupture Night Splint%';
 

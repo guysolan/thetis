@@ -30,7 +30,7 @@ const OrdersPage = () => {
           {new Date(order.order_date).toLocaleDateString()}
         </p>
         <p>
-          <strong>Order Number:</strong> #{order.id.toString().padStart(4, '0')}
+          <strong>Order Number:</strong> #{order.order_id.toString().padStart(4, '0')}
         </p>
       </div>
 
@@ -38,7 +38,7 @@ const OrdersPage = () => {
         <h2 className="mb-4 font-semibold text-xl">Products</h2>
         <table className="w-full">
           <thead>
-            <tr className="bg-neutral-100">
+            <tr className="bg-zinc-100">
               <th className="p-2 text-left">Name</th>
               <th className="text-right p-2">Price</th>
               <th className="text-right p-2">Quantity</th>
@@ -46,36 +46,16 @@ const OrdersPage = () => {
             </tr>
           </thead>
           <tbody>
-            {order.order_products.map((item: any) => (
-              <tr key={`${order.id}-${item.product.name}`}>
-                <td className="p-2">{item.product.name}</td>
+            {order.items?.map((item: any) => (
+              <tr key={`${order.id}-${item.item_name}`}>
+                <td className="p-2">{item.item_name}</td>
                 <td className="text-right p-2">
-                  ${item.product.price.toFixed(2)}
+                  ${item.price.toFixed(2)}
                 </td>
                 <td className="text-right p-2">{item.quantity}</td>
                 <td className="text-right p-2">
-                  ${(item.product.price * item.quantity).toFixed(2)}
+                  ${(item.price * item.quantity).toFixed(2)}
                 </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="mb-8">
-        <h2 className="mb-4 font-semibold text-xl">Parts Required</h2>
-        <table className="w-full">
-          <thead>
-            <tr className="bg-neutral-100">
-              <th className="p-2 text-left">Name</th>
-              <th className="text-right p-2">Quantity</th>
-            </tr>
-          </thead>
-          <tbody>
-            {order.order_parts.map((item: any) => (
-              <tr key={`${order.id}-${item.part.name}`}>
-                <td className="p-2">{item.part.name}</td>
-                <td className="text-right p-2">{-item.quantity}</td>
               </tr>
             ))}
           </tbody>
@@ -84,13 +64,13 @@ const OrdersPage = () => {
 
       <div className="text-right">
         <p className="font-bold text-xl">
-          Total Cost: ${Number(order.total_cost).toFixed(2)}
+          Total Cost: ${Number(order.total_value).toFixed(2)}
         </p>
       </div>
     </>
   )
 }
-export const Route = createFileRoute('/documents/order/$orderId')({
+export const Route = createFileRoute('/documents/orders/$orderId')({
   component: OrdersPage,
   loader: async ({ context, params }) => {
     const order = await context.queryClient.ensureQueryData(

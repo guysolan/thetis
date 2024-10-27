@@ -36,7 +36,7 @@ const AmazonSettlementCard = (
                                 region: region,
                             }}
                             search={{ report: report }}
-                            className="flex justify-between items-center py-1 w-full text-neutral-700 hover:underline"
+                            className="flex justify-between items-center py-1 w-full text-zinc-700 hover:underline"
                         >
                             Open Summary <span className="ml-2">→</span>
                         </Link>
@@ -48,7 +48,7 @@ const AmazonSettlementCard = (
                                 region: region,
                             }}
                             search={{ report: report }}
-                            className="flex justify-between items-center py-1 w-full text-neutral-700 hover:underline"
+                            className="flex justify-between items-center py-1 w-full text-zinc-700 hover:underline"
                         
                         >
                             Open Table <span className="ml-2">→</span>

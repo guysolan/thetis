@@ -7,7 +7,7 @@ import { useSelectItemsView } from '@/features/items/api/selectItemsView'
 
 import { OrderForm } from '@/features/orders/components/OrderForm'
 import { OrderHistory } from '@/features/orders/components/OrderHistory'
-import PageTitle from '../../components/PageTitle'
+import PageTitle from '../../../components/PageTitle'
 
 const OrdersPage = () => {
   const { data: orders } = useSelectOrders()
@@ -30,6 +30,6 @@ const OrdersPage = () => {
   )
 }
 
-export const Route = createFileRoute('/stock/orders')({
+export const Route = createFileRoute('/_apps/stock/orders')({
   component: OrdersPage,
 })

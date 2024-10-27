@@ -5,7 +5,7 @@ import { type OrderItem } from "@/components/OrderItems";
 
 export const useStocktakeDiscrepancy = () => {
   const { data: warehouseItems } = useSelectWarehouseItems();
-  const { control } = useFormContext();
+  const { control, setValue } = useFormContext();
 
   const orderItems = useWatch({
     control,
@@ -26,7 +26,6 @@ export const useStocktakeDiscrepancy = () => {
 
     const stockTakeDiscrepancy = orderItems.map((oi: OrderItem) => {
         const warehouseItem = itemsInWarehouse.find((item) => String(item.item_id) === String(oi.id));
-        console.log('warehouseItem', warehouseItem);
         const itemQuantity = warehouseItem?.item_quantity || 0;
     
 
@@ -37,11 +36,10 @@ export const useStocktakeDiscrepancy = () => {
         quantity_change:  oi.quantity-itemQuantity,
       };
     });
-      
-      console.log(stockTakeDiscrepancy);
-        return stockTakeDiscrepancy;
-      
-      
+
+    setValue("change_quantity", stockTakeDiscrepancy.map((item) => ({quantity_change: Number(item.quantity_change), item_id: Number(item.id)})));
+    
+    return stockTakeDiscrepancy;
   }, [selectedFromWarehouse, warehouseItems, orderItems]);
 
   return stockTakeDiscrepancy;

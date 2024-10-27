@@ -7,7 +7,7 @@ import Input from "@/components/Input";
 import { Form } from "@/components/ui/form";
 import { useUpsertWarehouse } from "../api/upsertWarehouse";
 
-import { WarehouseItem, WarehouseView } from "../types";
+import { WarehouseView } from "../types";
 
 const warehouseFormSchema = z.object({
 	id: z.number().optional(),

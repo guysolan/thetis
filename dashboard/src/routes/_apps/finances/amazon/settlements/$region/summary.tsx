@@ -36,7 +36,7 @@ import { ReportSearch } from '@/features/amazon/components/AmazonReportById'
 import { selectAmazonReportByIdQueryOptions } from '@/features/amazon/api/getAmazonReportById'
 
 export const Route = createFileRoute(
-  '/finances/amazon/settlements/$region/summary',
+  '/_apps/finances/amazon/settlements/$region/summary',
 )({
   component: AmazonSettlementReport,
   validateSearch: (search: Record<string, unknown>): ReportSearch => {
@@ -44,10 +44,10 @@ export const Route = createFileRoute(
       report: (search.report as any) || '',
     }
   },
-   loaderDeps: (opts) => opts.search.report,
+  loaderDeps: (opts) => opts.search.report,
   loader: async ({ context, params, deps }) => {
     const report = deps
-    const document  = await context.queryClient.ensureQueryData(
+    const document = await context.queryClient.ensureQueryData(
       selectAmazonReportByIdQueryOptions(
         report.reportDocumentId,
         params.region,
@@ -55,7 +55,7 @@ export const Route = createFileRoute(
     )
     console.log(document)
     return {
-      summary:document.summary,
+      summary: document.summary,
     }
   },
 })

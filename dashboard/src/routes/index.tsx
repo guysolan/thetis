@@ -1,128 +1,59 @@
-import { createFileRoute } from '@tanstack/react-router'
-import PageTitle from '../components/PageTitle'
-import { Banknote, Blend, Box, ExternalLink, Factory, Pin, Printer, Recycle, ShoppingBag, ToyBrick, Truck, Warehouse } from 'lucide-react'
-import { Link } from '@tanstack/react-router'
-import { Route as SettlementsRoute } from '@/routes/finances/amazon/settlements/index'
+import { createFileRoute, ReactNode } from "@tanstack/react-router";
+import PageTitle from "../components/PageTitle";
+import {
+  ExternalLink
+} from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
-const jobs = {
-  stock: [
+import { jobs } from '../features/navigation/content';
+import Navigation from '../features/navigation/Navigation';
 
-     {
-      name: 'Orders',
-      href: '/stock/orders',
-      description: 'Buy, sell and ship orders.',
-      icon: <ShoppingBag />,
-      external: false,
-    },
-      {
-      name: 'Items',
-      href: '/stock/items',
-      description: 'Keep track of the items we buy and sell.',
-      icon: <ToyBrick />,
-      external: false,
-    },
-          {
-      name: 'Warehouses',
-      href: '/stock/warehouses',
-      description: 'Manage the warehouses.',
-      icon: <Warehouse />,
-    },
-  ],
-   finances: [
-
-     {
-      name: 'Settlements',
-      href: '/finances/amazon/settlements',
-      description: 'Payouts from Amazon.',
-      icon: <Banknote />,
-      external: false,
-    },
-     
-  ],
-  returns: [
-    {
-      name: 'Stackery',
-      href: 'https://stackry.com',
-      description: 'Stackry unpack and return rejected splints in the US.',
-      icon: <Recycle />,
-      external: true,
-    },
-  ],
-  shipping: [
-    {
-      name: 'UPS',
-      href: 'https://www.ups.com',
-      description: 'UPS is a package delivery and shipping company.',
-      icon: <Box />,
-    },
-    {
-      name: 'P4D',
-      href: 'https://www.p4d.co.uk/',
-      description: 'Pallets in the UK to ship parts to MPD.',
-      icon: <Truck />,
-      external: true,
-    },
-  ],
-  suppliers: [
-    {
-      name: 'MPD',
-      href: 'https://www.mpd.co.uk/',
-      description: 'MPD assembles the parts.',
-      icon: <Pin />,
-    },
-    {
-      name: 'Stretchline',
-      href: 'https://www.stretchline.com/',
-      description: 'Stretchline manufactures the elastic with silicone.',
-      icon: <Blend />,
-      external: true,
-    },
-    {
-      name: 'M Wright and Sons',
-      href: 'https://www.mwright.co.uk/',
-      description: 'Manufactures webbing.',
-      icon: <Factory />,
-      external: true,
-    },
-    {
-      name: 'Hello Print',
-      href: 'https://www.helloprint.co.uk/',
-      description: 'Prints the instructions, business cards and fliers.',
-      icon: <Printer />,
-      external: true,
-    },
-  ],
-}
-
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: () => (
-    <section className="px-8 py-4">
+    <section className="w-full">
+      <Navigation />
       <PageTitle title="Home"></PageTitle>
-      <div className="flex flex-col gap-4">
-        {Object.entries(jobs).map(([category, jobList]) => (
-          <div key={category} className="flex flex-col justify-start items-start space-y-2">
-            <h2 className="font-bold text-xl capitalize">{category}</h2>
-            <ul className="flex flex-wrap gap-4">
-              {jobList.map((job) => (
-                <li key={job.name}>
-                  <Link
-                    to={job.href}
-                    className="flex items-center bg-white hover:bg-neutral-50 p-3 border rounded-lg max-w-md text-sm transition-colors"
-                    target={job.external ? "_blank" : '_self'}
-                    rel={job.external ? "noopener noreferrer" : ''}
-                  >
-                    <span className="mr-2">{job.icon}</span>
-                    <div >
-                      <h3 className="flex justify-between gap-4 w-full font-semibold text-md">{job.name}{job.external && <ExternalLink className="w-4 h-4" />}</h3>
-                      <p className="text-neutral-600 text-sm">{job.description}</p>
-                    </div>
-                  </Link>
-                </li>
+      <div className="flex flex-col space-y-8">
+        {Object.entries(jobs).map(([category, jobData], index) => (
+          <div
+            key={category}
+            className="flex flex-col justify-start items-start"
+          >
+            <Link
+              to={jobData.href}
+              className="flex items-center mb-4 group"
+              target={jobData.external ? "_blank" : "_self"}
+              rel={jobData.external ? "noopener noreferrer" : ""}
+            >
+              <span className="flex justify-center items-center mr-2 w-8 h-8">
+                {jobData.icon}
+              </span>
+              <h2 className="font-bold text-2xl group-hover:underline capitalize">{category}</h2>
+              {jobData.external && <ExternalLink className="ml-2 w-4 h-4" />}
+            </Link>
+            <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full">
+              {jobData.pages && jobData.pages.map((page) => (
+                <Link
+                  key={page.name}
+                  to={page.href}
+                  className="flex items-center bg-white hover:bg-zinc-50 p-4 border rounded-lg transition-colors"
+                  target={page.external ? "_blank" : "_self"}
+                  rel={page.external ? "noopener noreferrer" : ""}
+                >
+                  <span className="flex justify-center items-center mr-4 w-12 h-12">
+                    {page.icon}
+                  </span>
+                  <div className="flex-grow">
+                    <h4 className="font-semibold text-md">{page.name}</h4>
+                    <p className="text-sm text-zinc-600">{page.description}</p>
+                  </div>
+                  {page.external && <ExternalLink className="ml-2 w-4 h-4" />}
+                </Link>
               ))}
-            </ul>
+            </div>
           </div>
         ))}
       </div>
     </section>
   ),
-})
+});

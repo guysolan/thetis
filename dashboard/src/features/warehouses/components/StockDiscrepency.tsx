@@ -23,8 +23,8 @@ export const StocktakeDiscrepancy: React.FC = () => {
         <TableRow>
           <TableHead>Name</TableHead>
           <TableHead>Before</TableHead>
-          <TableHead>After</TableHead>
           <TableHead>Change</TableHead>
+          <TableHead>After</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -32,8 +32,8 @@ export const StocktakeDiscrepancy: React.FC = () => {
           <TableRow key={item.id}>
             <TableCell>{itemsView?.find((i:ItemView) =>String(i.item_id) === String(item.id))?.item_name}</TableCell>
             <NumberCell value={item.quantity_before} />
-            <NumberCell value={item.quantity_after} />
             <NumberCell value={item.quantity_change} />
+            <NumberCell value={item.quantity_after} />
           </TableRow>
         ))}
       </TableBody>
