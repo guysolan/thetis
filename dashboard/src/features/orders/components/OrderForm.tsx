@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
 import SelectWarehouse from "../../warehouses/components/SelectWarehouse";
-import OrderItems from "@/components/OrderItems";
+import OrderItems from "@/features/orders/components/OrderItems";
 import ItemsTable from "./ItemsTable";
 import { ItemView } from "../../items/types";
 import Select from "@/components/Select";
@@ -86,7 +86,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({ items }) => {
 					/>
 					<SelectWarehouse
 						name="warehouse_id"
-						label="Use Items from:"
+						label="Warehouse"
 					/>
 
 					<Accordion

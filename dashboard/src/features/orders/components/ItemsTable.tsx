@@ -129,7 +129,7 @@ const ItemsTable = ({name}:ItemsTableProps) => {
                     type="button"
                     variant="secondary"
                     size="sm"
-                    onClick={() => append({ type: "product", id: "", quantity: 1 })}
+                    onClick={() => append({ item_type: "product", item_id: "", quantity_change: 1 })}
                 >
                     Add Product
                 </Button>
@@ -137,7 +137,7 @@ const ItemsTable = ({name}:ItemsTableProps) => {
                     type="button"
                     variant="secondary"
                     size="sm"
-                    onClick={() => append({ type: "part", id: "", quantity: 1 })}
+                    onClick={() => append({ item_type: "part", item_id: "", quantity_change: 1 })}
                 >
                     Add Part
                 </Button>

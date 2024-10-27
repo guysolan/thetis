@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useSelectWarehouseItems } from "../api/selectWarehouseItems";
-import { type OrderItem } from "@/components/OrderItems";
+import { type OrderItem } from "@/features/orders/components/OrderItems";
 
 export const useStocktakeDiscrepancy = () => {
   const { data: warehouseItems } = useSelectWarehouseItems();

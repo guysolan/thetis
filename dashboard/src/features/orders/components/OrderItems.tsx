@@ -1,4 +1,5 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
+import React from 'react';
 import {
     Table,
     TableBody,
@@ -11,11 +12,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView";
-import { z } from "zod";
 import Select from "@/components/Select";
 import Input from "@/components/Input";
-import { Input as InputUi } from "@/components/ui/input";
-import SelectItemType from "./SelectItem";
+import SelectItemType from "../../../components/SelectItem";
 
 const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
     const { data: items } = useSelectItemsView();
@@ -27,6 +26,25 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
         name: "order_items",
     });
 
+
+    const itemTotal = (index: number) => {
+        // Watch values individually
+        const item_price = form.watch(`order_items.${index}.item_price`);
+        const item_tax = form.watch(`order_items.${index}.item_tax`);
+        const quantity_change = form.watch(`order_items.${index}.quantity_change`);
+        
+        const price = Number(item_price);
+        const tax = Number(item_tax) + 1;
+        const quantity = Number(quantity_change);
+        const total = price * tax * quantity;
+        
+        if (showPrice) {
+            form.setValue(`order_items.${index}.item_total`, Number(total).toFixed(2));
+        }
+        
+        return Number(total).toFixed(2);
+    };
+  
     return (
         <>
             <Table>
@@ -91,17 +109,7 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
                             )}
                             {showPrice && (
                                 <TableCell>
-                                    {(Number(
-                                                form.watch(
-                                                    `order_items.${index}.item_price`,
-                                                ),
-                                            ) *
-                                            (1 +
-                                                Number(
-                                                    form.watch(
-                                                        `order_items.${index}.quantity_change`,
-                                                    ),
-                                                )) ?? 0).toFixed(2)}
+                                    {itemTotal(index)}
                                 </TableCell>
                             )}
                             <TableCell>
@@ -123,19 +131,14 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
                                     Total
                                 </TableCell>
                                 <TableCell>
-                                    {form.watch("order_items").reduce(
-                                        (acc, item) =>
-                                            acc +
-                                            (Number(item.quantity_change) *
-                                                Number(item.item_price)),
-                                        0,
-                                    )}
+                                    {/* TODO add a real order total */}
+                                    {'orderTotal'}
                                 </TableCell>
                             </TableRow>
                         )}
                 </TableBody>
             </Table>
-            <div className="flex gap-2">
+            <div className="flex gap-2 p-2">
                 <Button
                     type="button"
                     variant="secondary"
@@ -147,6 +150,7 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
                             quantity_change: 1,
                             item_price: 0,
                             item_tax: 0,
+                            item_total: "0.00",
                         })}
                 >
                     Add Product
@@ -162,6 +166,7 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
                             quantity_change: 1,
                             item_price: 0,
                             item_tax: 0,
+                            item_total: "0.00",
                         })}
                 >
                     Add Part

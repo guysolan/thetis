@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Control, UseFormSetValue, useWatch } from "react-hook-form";
 import { useSelectWarehouseItems } from "../../warehouses/api/selectWarehouseItems";
 import { useSelectItemsView } from "../../items/api/selectItemsView";
-import { ItemChange, OrderItem } from "../components/OrderForm";
+import { ItemChange, OrderItem } from "../schema";
 
 export const usePurchaseForm = (
     control: Control<any>,

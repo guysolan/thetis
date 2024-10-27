@@ -2,14 +2,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import OrderItems from "@/components/OrderItems";
+import OrderItems from "@/features/orders/components/OrderItems";
 import  {
 	OrderItem,
 	orderItemsSchema,
-} from "@/features/orders/components/OrderForm";
+} from "@/features/orders/schema";
 import { z } from "zod";
 import StocktakeDiscrepancy from "./StockDiscrepency";
-import { supabase } from "../../../lib/supabase";
 import useStocktake from '../api/stocktake';
 
 interface Props {
