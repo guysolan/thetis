@@ -327,3 +327,8 @@ WHERE
     i.type = 'product'
     AND i.name LIKE 'Achilles Tendon Rupture Night Splint%';
 
+INSERT INTO storage.buckets(id, name)
+    VALUES ('amazon-reports', 'amazon-reports')
+ON CONFLICT (id)
+    DO NOTHING;
+
