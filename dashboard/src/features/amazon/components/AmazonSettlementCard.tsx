@@ -18,7 +18,7 @@ import { useDownloadedAmazonReports } from "../api/selectDownloadedAmazonReports
 import { Check, FileCheck } from "lucide-react";
 import { Badge } from "../../../components/ui/badge";
 import { Separator } from "../../../components/ui/separator";
-import useDownloadFile from "../api/useDownloadFile";
+import {useDownloadFile} from "../api/useDownloadFile";
 
 const AmazonSettlementCard = (
     { region, report }: { region: string; report: AmazonReport },
@@ -77,23 +77,12 @@ const AmazonSettlementCard = (
                         <>
                             <Button
                                 variant="default"
-                                onClick={() => {
+                                onClick={() =>
                                     downloadFile(
-                                        `${downloaded.storage_path}.pdf`,
-                                    );
-                                }}
+                                        {path: downloaded.storage_path},
+                                    )}
                             >
-                                Download PDF
-                            </Button>
-                                    <Button
-                                variant="default"
-                                onClick={() => {
-                                    downloadFile(
-                                        `${downloaded.storage_path}.csv`,
-                                    );
-                                }}
-                            >
-                                Download CSV
+                                Download
                             </Button>
                         </>
                     )

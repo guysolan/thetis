@@ -12,7 +12,6 @@ export const Route = createFileRoute("/")({
   component: () => (
     <section className="w-full">
       <Navigation />
-      <PageTitle title="Home"></PageTitle>
       <div className="flex flex-col space-y-8">
         {Object.entries(jobs).map(([category, jobData], index) => (
           <div
