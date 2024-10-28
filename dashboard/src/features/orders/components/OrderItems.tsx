@@ -8,13 +8,12 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView";
 import Select from "@/components/Select";
 import Input from "@/components/Input";
-import SelectItemType from "../../../components/SelectItem";
+import SelectItemType from "@/components/SelectItem";
 
 const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
     const { data: items } = useSelectItemsView();

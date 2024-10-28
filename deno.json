@@ -6,7 +6,7 @@
         "gen-types": "supabase gen types --lang=typescript --local > dashboard/src/database.types.ts",
         "serve": "supabase functions serve --env-file ./supabase/.env.local",
         "secrets": "supabase secrets set --env-file ./supabase/.env.prod",
-        "diff-view": "supabase db diff -f \"$view\" --local"
+        "diff": "supabase db diff -f \"$view\" --local --schema public,auth,storage"
     },
     "lib": [
         {
