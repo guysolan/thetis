@@ -19,6 +19,7 @@ import { Check, FileCheck } from "lucide-react";
 import { Badge } from "../../../components/ui/badge";
 import { Separator } from "../../../components/ui/separator";
 import {useDownloadFile} from "../api/useDownloadFile";
+import SendPDFDialog from "./SendPDFDialog";
 
 const AmazonSettlementCard = (
     { region, report }: { region: string; report: AmazonReport },
@@ -84,6 +85,10 @@ const AmazonSettlementCard = (
                             >
                                 Download
                             </Button>
+                            <SendPDFDialog 
+                                path={downloaded.storage_path}
+                                reportDate={dayjs(report.dataEndTime).format("YYYY-MM-DD")}
+                            />
                         </>
                     )
                     : (
