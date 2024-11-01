@@ -25,6 +25,14 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
         name: "order_items",
     });
 
+    const getFilteredItemOptions = (itemType: string) => {
+        return items
+            .filter((item) => item.item_type === itemType)
+            .map((item) => ({
+                label: item.item_name,
+                value: String(item.item_id),
+            }));
+    };
 
     const itemTotal = (index: number) => {
         // Watch values individually
@@ -71,17 +79,9 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
                             <TableCell>
                                 <Select
                                     name={`order_items.${index}.item_id`}
-                                    options={items
-                                        .filter((item) =>
-                                            item.item_type ===
-                                                form.watch(
-                                                    `order_items.${index}.item_type`,
-                                                )
-                                        )
-                                        .map((item) => ({
-                                            label: item.item_name,
-                                            value: String(item.item_id),
-                                        }))}
+                                    options={getFilteredItemOptions(
+                                        form.watch(`order_items.${index}.item_type`)
+                                    )}
                                 />
                             </TableCell>
                             <TableCell>
@@ -95,6 +95,7 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
                                     <Input
                                         name={`order_items.${index}.item_price`}
                                         type="number"
+                                        step="0.01"
                                     />
                                 </TableCell>
                             )}
@@ -103,6 +104,7 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
                                     <Input
                                         name={`order_items.${index}.item_tax`}
                                         type="number"
+                                        step="0.01"
                                     />
                                 </TableCell>
                             )}
@@ -130,8 +132,9 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
                                     Total
                                 </TableCell>
                                 <TableCell>
-                                    {/* TODO add a real order total */}
-                                    {'orderTotal'}
+                                    {fields.reduce((sum, _, index) => 
+                                        sum + Number(itemTotal(index)), 0
+                                    ).toFixed(2)}
                                 </TableCell>
                             </TableRow>
                         )}

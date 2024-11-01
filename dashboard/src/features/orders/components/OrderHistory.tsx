@@ -54,7 +54,8 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 							<Table>
 								<TableHeader>
 									<TableRow>
-										<TableHead>Name</TableHead>
+										<TableHead>Item Name</TableHead>
+										<TableHead>Warehouse Name</TableHead>
 										<TableHead>Price</TableHead>
 										<TableHead>Quantity</TableHead>
 										<TableHead>Total</TableHead>
@@ -68,14 +69,17 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 											<TableCell>
 												{item.item_name}
 											</TableCell>
-											<TableCell>
-												${item.price?.toFixed(2)}
+												<TableCell>
+												{item.warehouse_name}
 											</TableCell>
 											<TableCell>
-												{item.quantity}
+												${item.price?.toFixed(2)??0.00}
 											</TableCell>
 											<TableCell>
-												${item.total?.toFixed(2)}
+												{order.order_type === "sale" ? item.quantity * -1 : item.quantity}
+											</TableCell>
+											<TableCell>
+												${item.total?.toFixed(2)??0.00}
 											</TableCell>
 										</TableRow>
 									))}

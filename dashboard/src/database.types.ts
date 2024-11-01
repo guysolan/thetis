@@ -34,26 +34,44 @@ export type Database = {
   }
   public: {
     Tables: {
+      amazon_reports: {
+        Row: {
+          created_at: string
+          id: number
+          report_id: string
+          storage_path: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          report_id: string
+          storage_path: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          report_id?: string
+          storage_path?: string
+        }
+        Relationships: []
+      }
       item_changes: {
         Row: {
           id: number
           item_id: number
           quantity_change: number
-          timestamp: string
           warehouse_id: number | null
         }
         Insert: {
           id?: number
           item_id: number
           quantity_change: number
-          timestamp?: string
           warehouse_id?: number | null
         }
         Update: {
           id?: number
           item_id?: number
           quantity_change?: number
-          timestamp?: string
           warehouse_id?: number | null
         }
         Relationships: [
@@ -117,73 +135,73 @@ export type Database = {
       }
       item_components: {
         Row: {
-          component_item_id: number
-          parent_item_id: number
-          quantity: number
+          component_id: number
+          component_quantity: number
+          item_id: number
         }
         Insert: {
-          component_item_id: number
-          parent_item_id: number
-          quantity: number
+          component_id: number
+          component_quantity: number
+          item_id: number
         }
         Update: {
-          component_item_id?: number
-          parent_item_id?: number
-          quantity?: number
+          component_id?: number
+          component_quantity?: number
+          item_id?: number
         }
         Relationships: [
           {
-            foreignKeyName: "item_components_component_item_id_fkey"
-            columns: ["component_item_id"]
+            foreignKeyName: "item_components_component_id_fkey"
+            columns: ["component_id"]
             isOneToOne: false
             referencedRelation: "item_quantities"
             referencedColumns: ["item_id"]
           },
           {
-            foreignKeyName: "item_components_component_item_id_fkey"
-            columns: ["component_item_id"]
+            foreignKeyName: "item_components_component_id_fkey"
+            columns: ["component_id"]
             isOneToOne: false
             referencedRelation: "items"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "item_components_component_item_id_fkey"
-            columns: ["component_item_id"]
+            foreignKeyName: "item_components_component_id_fkey"
+            columns: ["component_id"]
             isOneToOne: false
             referencedRelation: "items_view"
             referencedColumns: ["item_id"]
           },
           {
-            foreignKeyName: "item_components_component_item_id_fkey"
-            columns: ["component_item_id"]
+            foreignKeyName: "item_components_component_id_fkey"
+            columns: ["component_id"]
             isOneToOne: false
             referencedRelation: "warehouse_items"
             referencedColumns: ["item_id"]
           },
           {
-            foreignKeyName: "item_components_parent_item_id_fkey"
-            columns: ["parent_item_id"]
+            foreignKeyName: "item_components_item_id_fkey"
+            columns: ["item_id"]
             isOneToOne: false
             referencedRelation: "item_quantities"
             referencedColumns: ["item_id"]
           },
           {
-            foreignKeyName: "item_components_parent_item_id_fkey"
-            columns: ["parent_item_id"]
+            foreignKeyName: "item_components_item_id_fkey"
+            columns: ["item_id"]
             isOneToOne: false
             referencedRelation: "items"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "item_components_parent_item_id_fkey"
-            columns: ["parent_item_id"]
+            foreignKeyName: "item_components_item_id_fkey"
+            columns: ["item_id"]
             isOneToOne: false
             referencedRelation: "items_view"
             referencedColumns: ["item_id"]
           },
           {
-            foreignKeyName: "item_components_parent_item_id_fkey"
-            columns: ["parent_item_id"]
+            foreignKeyName: "item_components_item_id_fkey"
+            columns: ["item_id"]
             isOneToOne: false
             referencedRelation: "warehouse_items"
             referencedColumns: ["item_id"]
@@ -259,21 +277,98 @@ export type Database = {
           carriage: number
           id: number
           order_date: string
-          type: Database["public"]["Enums"]["order_type"]
+          order_type: Database["public"]["Enums"]["order_type"]
         }
         Insert: {
           carriage?: number
           id?: number
           order_date?: string
-          type: Database["public"]["Enums"]["order_type"]
+          order_type: Database["public"]["Enums"]["order_type"]
         }
         Update: {
           carriage?: number
           id?: number
           order_date?: string
-          type?: Database["public"]["Enums"]["order_type"]
+          order_type?: Database["public"]["Enums"]["order_type"]
         }
         Relationships: []
+      }
+      stocktake_item_changes: {
+        Row: {
+          item_change_id: number
+          stocktake_id: number
+        }
+        Insert: {
+          item_change_id: number
+          stocktake_id: number
+        }
+        Update: {
+          item_change_id?: number
+          stocktake_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stocktake_item_changes_item_change_id_fkey"
+            columns: ["item_change_id"]
+            isOneToOne: false
+            referencedRelation: "item_changes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stocktake_item_changes_stocktake_id_fkey"
+            columns: ["stocktake_id"]
+            isOneToOne: false
+            referencedRelation: "stocktakes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stocktakes: {
+        Row: {
+          id: number
+          timestamp: string
+          warehouse_id: number
+        }
+        Insert: {
+          id?: number
+          timestamp?: string
+          warehouse_id: number
+        }
+        Update: {
+          id?: number
+          timestamp?: string
+          warehouse_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stocktakes_warehouse_id_fkey"
+            columns: ["warehouse_id"]
+            isOneToOne: false
+            referencedRelation: "warehouse_inventory_value"
+            referencedColumns: ["warehouse_id"]
+          },
+          {
+            foreignKeyName: "stocktakes_warehouse_id_fkey"
+            columns: ["warehouse_id"]
+            isOneToOne: false
+            referencedRelation: "warehouse_items"
+            referencedColumns: ["warehouse_id"]
+          },
+          {
+            foreignKeyName: "stocktakes_warehouse_id_fkey"
+            columns: ["warehouse_id"]
+            isOneToOne: false
+            referencedRelation: "warehouses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stocktakes_warehouse_id_fkey"
+            columns: ["warehouse_id"]
+            isOneToOne: false
+            referencedRelation: "warehouses_view"
+            referencedColumns: ["warehouse_id"]
+          },
+        ]
       }
       warehouses: {
         Row: {
@@ -364,10 +459,88 @@ export type Database = {
         }
         Returns: number
       }
+      insert_item_changes: {
+        Args: {
+          in_data: Json
+        }
+        Returns: {
+          id: number
+          item_id: number
+          quantity_change: number
+          warehouse_id: number
+        }[]
+      }
+      insert_order: {
+        Args: {
+          in_order_type: string
+          in_order_items: Json
+        }
+        Returns: {
+          order_id: number
+          item_change_id: number
+          item_id: number
+          quantity_change: number
+          warehouse_id: number
+          item_price: number
+          item_tax: number
+        }[]
+      }
+      insert_order_item: {
+        Args: {
+          in_order_id: number
+          in_item_id: number
+          in_quantity_change: number
+          in_warehouse_id: number
+          in_item_price: number
+          in_item_tax: number
+        }
+        Returns: {
+          order_id: number
+          item_change_id: number
+          item_id: number
+          quantity_change: number
+          warehouse_id: number
+          item_price: number
+          item_tax: number
+        }[]
+      }
+      insert_order_items: {
+        Args: {
+          in_data: Json
+        }
+        Returns: {
+          order_id: number
+          item_change_id: number
+          item_id: number
+          quantity_change: number
+          warehouse_id: number
+          item_price: number
+          item_tax: number
+        }[]
+      }
+      insert_stocktake_changes: {
+        Args: {
+          data: Json
+        }
+        Returns: {
+          stocktake_id: number
+          item_change_id: number
+          item_id: number
+          quantity_change: number
+          warehouse_id: number
+        }[]
+      }
       process_order: {
         Args: {
           p_order_type: Database["public"]["Enums"]["order_type"]
           p_order_items: Json
+        }
+        Returns: number
+      }
+      stocktake: {
+        Args: {
+          p_warehouse_id: number
+          p_items: Json
         }
         Returns: number
       }
@@ -383,7 +556,7 @@ export type Database = {
       }
     }
     Enums: {
-      item_type: "product" | "part"
+      item_type: "product" | "part" | "service"
       order_type: "purchase" | "sale" | "shipment" | "stocktake"
     }
     CompositeTypes: {
@@ -472,5 +645,20 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof PublicSchema["CompositeTypes"]
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
+    ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
 

@@ -1,4 +1,3 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { corsHeaders } from "../_shared/cors.ts";
 import { supabase } from "../_shared/supabase/config.ts";
 import { resend } from "../_shared/resend/index.ts";
@@ -10,9 +9,17 @@ Deno.serve(async (req) => {
 
     try {
         const { path, to, subject } = await req.json();
+        console.log(path, to, subject);
 
         // Download PDF file from Supabase Storage
         const filePath = `${path}.pdf`;
+
+        const { data: signedUrl } = await supabase.storage
+            .from("amazon-reports")
+            .createSignedUrl(filePath, 60);
+
+        console.log(signedUrl);
+
         const { data, error } = await supabase.storage
             .from("amazon-reports")
             .download(filePath);
@@ -21,25 +28,30 @@ Deno.serve(async (req) => {
             throw new Error(`Error downloading ${filePath}: ${error.message}`);
         }
 
+        console.log(data);
+
         // Convert the downloaded file to base64
         const buffer = await data.arrayBuffer();
+        const uint8Array = new Uint8Array(buffer);
         const base64Content = btoa(
-            String.fromCharCode(...new Uint8Array(buffer)),
+            Array.from(uint8Array).map((byte) => String.fromCharCode(byte))
+                .join(""),
         );
 
         // Get filename from path
-        const filename = filePath.split("/").pop() || "report.pdf";
+        const filename = filePath.replace("/", " ");
+        console.log(`Filename ${filename}`);
 
         // Send email with PDF attachment using Resend
         const emailResponse = await resend({
             prefix: "reports",
             to: Array.isArray(to) ? to : [to],
-            subject: subject || "Amazon Settlement Report",
+            subject: subject || "Accounts: Amazon Settlement Report",
             html: `<p>Please find attached the Amazon settlement report.</p>`,
             attachments: [{
                 filename,
                 content: base64Content,
-                path: filePath,
+                path: signedUrl.signedUrl,
             }],
         });
 

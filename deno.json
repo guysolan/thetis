@@ -15,7 +15,7 @@
         },
         {
             "path": "/supabase/functions",
-            "options": ["deno.ns", "deno.unstable"]
+            "options": ["deno.ns", "deno.window", "deno.unstable"]
         }
     ],
     "compilerOptions": {

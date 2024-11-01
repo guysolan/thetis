@@ -17,9 +17,11 @@ export type OrderItem = z.infer<typeof orderItemSchema>;
 const itemChangeSchema = z.object({
     item_type: z.string(),
     item_id: z.string(),
-    item_name: z.string(),
-    quantity_change: z.number().optional(),
-    quantity_after: z.number().optional(),
+    item_name: z.string().optional(),
+    quantity_change: z.number().multipleOf(0.01).optional(),
+    item_price: z.number().multipleOf(0.01).optional(),
+    item_tax: z.number().multipleOf(0.01).optional(),
+    quantity_after: z.number().multipleOf(0.01).optional(),
 });
 
 export type ItemChange = z.infer<typeof itemChangeSchema>;
@@ -28,7 +30,7 @@ export type ItemChange = z.infer<typeof itemChangeSchema>;
 export const formSchema = z.object({
     warehouse_id: z.string().min(1, "Please select a warehouse"),
     order_type: z.enum(["purchase", "sale"]), // Add validation for order_type
-    order_items: z.array(orderItemSchema).min(1, "Add at least one item"),
+    order_items: z.array(orderItemSchema),
     produced_items: z.array(itemChangeSchema),
     consumed_items: z.array(itemChangeSchema),
     is_build: z.boolean().default(false),

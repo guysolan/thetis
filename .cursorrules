@@ -1,0 +1,6 @@
+Follow common PostgreSQL naming conventions:
+in_ for input parameters
+v_ for local variables
+t_ for temporary or table variables
+r_ for record variables (though v_ is also commonly used)
+out_ for output parameters when using OUT parameters

@@ -108,7 +108,7 @@ WHERE
             AND c.name IN ('Instruction Leaflet', 'Storage Bag', 'Webbing', 'Box Right Small', 'Flier', 'Elastic')));
 
 -- Insert orders
-INSERT INTO orders(type, order_date, carriage)
+INSERT INTO orders(order_type, order_date, carriage)
     VALUES ('purchase', '2023-01-15 10:00:00', 10.00),
 ('purchase', '2023-02-20 14:30:00', 15.00),
 ('purchase', '2023-03-25 09:45:00', 12.50),
@@ -158,7 +158,7 @@ FROM
     JOIN item_changes ic ON ic.warehouse_id = 1
     JOIN items i ON i.id = ic.item_id
 WHERE
-    o.type = 'purchase'
+    o.order_type = 'purchase'
     AND ((o.order_date = '2023-01-15 10:00:00'
             AND i.name IN ('Webbing', 'Elastic'))
         OR (o.order_date = '2023-02-20 14:30:00'
@@ -202,7 +202,7 @@ FROM
     JOIN item_changes ic ON ic.warehouse_id = 1
     JOIN items i ON i.id = ic.item_id
 WHERE
-    o.type = 'sale'
+    o.order_type = 'sale'
     AND ((o.order_date = '2023-04-10 14:30:00'
             AND i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left')
         OR (o.order_date = '2023-04-15 09:45:00'
@@ -246,7 +246,7 @@ FROM
                 AND ic.warehouse_id = 2))
     JOIN items i ON i.id = ic.item_id
 WHERE
-    o.type = 'shipment'
+    o.order_type = 'shipment'
     AND ((o.order_date = '2023-01-01 10:00:00'
             AND i.name IN ('Instruction Leaflet', 'Storage Bag'))
         OR (o.order_date = '2023-01-02 11:00:00'

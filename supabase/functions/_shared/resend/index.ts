@@ -22,7 +22,7 @@ export const resend = async (
             "Authorization": `Bearer ${RESEND_API_KEY}`,
         },
         body: JSON.stringify({
-            from: `Thetis ${prefix} <${prefix}@${RESEND_EMAIL_DOMAIN}`,
+            from: `${prefix}@${RESEND_EMAIL_DOMAIN}`,
             to: to,
             subject: subject,
             html: html,

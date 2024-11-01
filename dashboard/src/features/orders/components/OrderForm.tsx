@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useForm, useWatch } from "react-hook-form";
-import { useCallback, useMemo } from "react";
+import {  useMemo } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
@@ -18,6 +18,8 @@ import {
 import { usePurchaseForm } from "../hooks/usePurchaseForm";
 import { Switch } from "@/components/ui/switch";
 import { formSchema } from "../schema";
+import { useCreateOrder } from '../api/createOrder';
+
 interface OrderFormProps {
 	items: ItemView[];
 }
@@ -26,7 +28,11 @@ export const OrderForm: React.FC<OrderFormProps> = ({ items }) => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			order_items: [{ item_type: "product", item_id: "", quantity_change: 1 }],
+			order_items: [{
+				item_type: "product",
+				item_id: "",
+				quantity_change: 1,
+			}],
 			consumed_items: [],
 			produced_items: [], // Add missing default value
 			is_build: false,
@@ -42,20 +48,42 @@ export const OrderForm: React.FC<OrderFormProps> = ({ items }) => {
 	});
 
 	// Memoize expensive calculations
-	const partIsNegative = useMemo(() => 
-		itemsSummary.some((part) => part.quantity_after && part.quantity_after < 0),
-		[itemsSummary]
+	const partIsNegative = useMemo(
+		() =>
+			itemsSummary.some((part) =>
+				part.quantity_after && part.quantity_after < 0
+			),
+		[itemsSummary],
 	);
 
+	const { mutate: createOrder } = useCreateOrder();
+
 	// Extract form submission logic
-	const handleSubmit = useCallback(async (data: z.infer<typeof formSchema>) => {
-		try {
-			// Add error handling
-			// await createOrder(data);
-		} catch (error) {
-			console.error('Failed to create order:', error);
-		}
-	}, []);
+	const handleSubmit = async (formData: z.infer<typeof formSchema>) => {
+		const {
+			order_items,
+			consumed_items,
+			produced_items,
+			order_type,
+			warehouse_id,
+		} = formData;
+		const item_changes = [
+			...consumed_items,
+			...produced_items,
+			...order_items,
+		];
+		const item_changes_with_warehouse = item_changes.map((ic) => ({
+			item_id: ic.item_id,
+			quantity_change: order_type === "sale" ? -1 * Number(ic.quantity_change) : Number(ic.quantity_change),
+			item_price: ic?.item_price ?? 0,
+			item_tax: ic?.item_tax ?? 0,
+			warehouse_id: warehouse_id,
+		}));
+		await createOrder({
+			in_order_type: order_type,
+			in_order_items: item_changes_with_warehouse,
+		});
+	};
 
 	return (
 		<>
@@ -82,6 +110,12 @@ export const OrderForm: React.FC<OrderFormProps> = ({ items }) => {
 						options={[{ label: "Purchase", value: "purchase" }, {
 							label: "Sale",
 							value: "sale",
+						},{
+							label: "Shipment",
+							value: "shipment",
+						},{
+							label: "Stocktake",
+							value: "stocktake",
 						}]}
 					/>
 					<SelectWarehouse
@@ -122,7 +156,14 @@ export const OrderForm: React.FC<OrderFormProps> = ({ items }) => {
 						)}
 					</Accordion>
 
-					<Button disabled={partIsNegative} type="submit">
+					<Button
+						onClick={() => {
+							console.log(form.formState.errors);
+							console.log(form.getValues());
+						}}
+						disabled={partIsNegative}
+						type="submit"
+					>
 						Create Order
 					</Button>
 				</form>

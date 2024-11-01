@@ -12,8 +12,9 @@ type InputProps = {
     name: string;
     label?: string;
     type: "text" | "number" | "email" | "password";
+    step?: string;
 };
-const Input = ({ name, label, type }: InputProps) => {
+const Input = ({ name, label, type, step }: InputProps) => {
     const { control } = useFormContext();
 
     return (
@@ -28,6 +29,7 @@ const Input = ({ name, label, type }: InputProps) => {
                     <FormControl>
                         <InputWrap
                             type={type}
+                            step={step}
                             {...field}
                             onChange={(e) =>
                                 type === 'number' ? field.onChange(Number(e.target.value)) : field.onChange(e.target.value)}

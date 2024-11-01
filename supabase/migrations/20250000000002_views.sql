@@ -38,18 +38,26 @@ GROUP BY
     w.name;
 
 -- Create a view for orders with total value and item details
+-- This view aggregates order information including total value and itemized details
 CREATE OR REPLACE VIEW orders_view AS
 SELECT
+    -- Basic order information
     o.id AS order_id,
-    o.type AS order_type,
+    o.type AS order_type, -- Can be 'sale' or 'purchase'
     o.order_date,
-    o.carriage,
+    o.carriage, -- Shipping/delivery costs
+    -- Calculate total order value
+    -- For sales: negative value (money going out)
+    -- For purchases: positive value (money coming in)
+    -- Includes price * quantity * (1 + tax rate)
     SUM(
         CASE WHEN o.type = 'sale' THEN
             -1 * oic.price * ic.quantity_change *(1 + COALESCE(oic.tax, 0))
         ELSE
             oic.price * ic.quantity_change *(1 + COALESCE(oic.tax, 0))
         END) AS total_value,
+    -- Create a JSON array of all items in the order
+    -- Each item object contains: item details, quantity, price, tax, and total value
     jsonb_agg(jsonb_build_object('item_id', i.id, 'item_name', i.name, 'item_type', i.type, 'quantity', ic.quantity_change, 'price', oic.price, 'tax', oic.tax, 'total',(
                 CASE WHEN o.type = 'sale' THEN
                     -1 * ic.quantity_change * oic.price *(1 + COALESCE(oic.tax, 0))
@@ -58,8 +66,11 @@ SELECT
                 END))) AS items
 FROM
     orders o
+    -- Join with order_item_changes to get price and tax information
     JOIN order_item_changes oic ON o.id = oic.order_id
+    -- Join with item_changes to get quantity information
     JOIN item_changes ic ON oic.item_change_id = ic.id
+    -- Join with items to get item details
     JOIN items i ON ic.item_id = i.id
 GROUP BY
     o.id,

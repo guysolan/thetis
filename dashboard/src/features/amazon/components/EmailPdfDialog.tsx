@@ -1,8 +1,6 @@
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { useMutation } from "@tanstack/react-query"
-import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -22,61 +20,37 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-
+import { useEmailAmazonReport } from "../api/emailReport"
 // Form schema
 const emailFormSchema = z.object({
+  path: z.string(),
   to: z.string().email("Please enter a valid email address"),
+  subject: z.string(),
 })
 
-type EmailFormValues = z.infer<typeof emailFormSchema>
+export type EmailFormValue = z.infer<typeof emailFormSchema>
 
 interface EmailReportDialogProps {
   path: string
   reportDate: string
 }
 
-export function SendPDFDialog({ path, reportDate }: EmailReportDialogProps) {
+export function EailPdfDialog({ path, reportDate }: EmailReportDialogProps) {
   // Initialize form
-  const form = useForm<EmailFormValues>({
+  const form = useForm<EmailFormValue>({
     resolver: zodResolver(emailFormSchema),
     defaultValues: {
-      to: "",
+      path:path,  
+      to: "tzbnvg49jl@inbox.midday.ai",
+      subject: `Accounts: Amazon Settlement Report ${reportDate}`,
     },
   })
 
   // Email mutation
-  const { mutate: sendEmail, isPending } = useMutation({
-    mutationFn: async (values: EmailFormValues) => {
-      const response = await fetch("/api/resend-amazon-report", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          path,
-          to: values.to,
-          subject: `Accounts: Amazon Settlement Report ${reportDate}`,
-        }),
-      })
-      
-      if (!response.ok) {
-        throw new Error("Failed to send email")
-      }
-      
-      return response.json()
-    },
-    onSuccess: () => {
-      toast.success("Report sent successfully")
-      form.reset()
-    },
-    onError: (error) => {
-      toast.error("Failed to send report", {
-        description: error.message
-      })
-    },
-  })
+  const { mutate: sendEmail, isPending } = useEmailAmazonReport();
 
-  function onSubmit(data: EmailFormValues) {
+
+  function onSubmit(data: EmailFormValue) {
     sendEmail(data)
   }
 
@@ -108,7 +82,7 @@ export function SendPDFDialog({ path, reportDate }: EmailReportDialogProps) {
               )}
             />
             <DialogFooter>
-              <Button type="submit" disabled={isPending}>
+              <Button autoFocus type="submit" disabled={isPending}>
                 {isPending ? "Sending..." : "Send Report"}
               </Button>
             </DialogFooter>
@@ -119,4 +93,4 @@ export function SendPDFDialog({ path, reportDate }: EmailReportDialogProps) {
   )
 }
 
-export default SendPDFDialog;
+export default EailPdfDialog;

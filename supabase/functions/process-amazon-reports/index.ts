@@ -1,7 +1,9 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { corsHeaders } from "../_shared/cors.ts";
 import { supabase } from "../_shared/supabase/config.ts";
-import dayjs from "npm:dayjs";
+import dayjs from "dayjs";
+
+const MIDDAY_EMAIL = Deno.env.get("MIDDAY_EMAIL");
 
 Deno.serve(async () => {
     try {
@@ -12,8 +14,6 @@ Deno.serve(async () => {
             .invoke("amazon-reports", { body: { region: "NA" } });
         if (naReportsError) throw naReportsError;
 
-        console.log("naReports", naReports);
-
         const { data: eurReports, error: eurReportsError } = await supabase
             .functions
             .invoke("amazon-reports", { body: { region: "EUR" } });
@@ -23,16 +23,16 @@ Deno.serve(async () => {
             "*",
         );
 
-        const recentReports = reports.filter((r) =>
+        const recentReports = reports?.filter((r) =>
             dayjs(r.created_at).isAfter(dayjs().subtract(1, "month"))
         );
 
         const allReports = [...naReports, ...eurReports];
 
-        const remainingReports = allReports.filter(
+        const remainingReports = allReports?.filter(
             (report) =>
-                !recentReports.map((r) => r.report_id).includes(
-                    report.reportId,
+                !recentReports?.map((r) => r?.report_id).includes(
+                    report?.reportId,
                 ),
         );
 
@@ -44,25 +44,61 @@ Deno.serve(async () => {
             Remaining Reports: ${remainingReports.length}`,
         );
 
+        if (!reports?.length || !remainingReports?.length) {
+            return new Response(
+                JSON.stringify({
+                    message: `No reports to be saved`,
+                }),
+                {
+                    headers: {
+                        ...corsHeaders,
+                        "Content-Type": "application/json",
+                    },
+                    status: 200,
+                },
+            );
+        }
+
         const firstReport = remainingReports[0];
-        const region = naReports.filter((r) =>
-                r.reportId === firstReport.reportId
+        if (!firstReport?.reportId) {
+            throw new Error("Invalid report format - missing reportId");
+        }
+
+        const region = naReports?.filter((r) =>
+                r?.reportId === firstReport.reportId
             ).length > 0
             ? "NA"
             : "EUR";
 
-        const { data: savedReports, error: savedReportsError } = await supabase
+        const { data: savedReport, error: savedReportError } = await supabase
             .functions.invoke("save-amazon-report", {
                 body: {
-                    report: remainingReports[0],
+                    report: firstReport,
                     region: region,
                 },
             });
 
+        if (savedReportError) throw savedReportError;
+
+        console.log("savedReport", savedReport);
+
+        const { data: emailReport, error: emailReportError } = await supabase
+            .functions.invoke("email-amazon-report", {
+                body: {
+                    path: savedReport.db.storage_path,
+                    to: MIDDAY_EMAIL,
+                },
+            });
+
+        if (emailReportError) throw emailReportError;
+
+        console.log("emailReport", emailReport);
+
         return new Response(
             JSON.stringify({
                 message: `Saved report ${firstReport.reportId}`,
-                data: savedReports,
+                data: savedReport,
+                email: emailReport,
             }),
             {
                 headers: { ...corsHeaders, "Content-Type": "application/json" },

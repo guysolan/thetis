@@ -52,7 +52,7 @@ const ItemsTable = ({name}:ItemsTableProps) => {
         
         const currentQuantity = warehouseItem?.item_quantity || 0;
         const addedQuantity = producedItems?.find(i => String(i.item_id) === String(itemId))?.quantity_change || 0;
-        const quantityAfter = name==="produced_items" ? currentQuantity + addedQuantity : currentQuantity - addedQuantity;
+        const quantityAfter = currentQuantity + addedQuantity ;
         
         return {
             before: Number(currentQuantity),

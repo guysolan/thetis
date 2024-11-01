@@ -9,17 +9,15 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { selectAmazonReportsQueryOptions } from "@/features/amazon/api/selectAmazonReports";
 import dayjs from "dayjs";
 import { AmazonReport } from "@/features/amazon/components/AmazonReportById";
-import { supabase } from "@/lib/supabase";
 import { useSaveAmazonReport } from "@/features/amazon/api/saveAmazonReport";
 import { useDownloadedAmazonReports } from "../api/selectDownloadedAmazonReports";
 import { Check, FileCheck } from "lucide-react";
 import { Badge } from "../../../components/ui/badge";
 import { Separator } from "../../../components/ui/separator";
 import {useDownloadFile} from "../api/useDownloadFile";
-import SendPDFDialog from "./SendPDFDialog";
+import EmailPdfDialog from "./EmailPdfDialog";
 
 const AmazonSettlementCard = (
     { region, report }: { region: string; report: AmazonReport },
@@ -85,7 +83,7 @@ const AmazonSettlementCard = (
                             >
                                 Download
                             </Button>
-                            <SendPDFDialog 
+                            <EmailPdfDialog
                                 path={downloaded.storage_path}
                                 reportDate={dayjs(report.dataEndTime).format("YYYY-MM-DD")}
                             />
