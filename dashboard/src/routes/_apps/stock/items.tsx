@@ -75,9 +75,9 @@ const ItemsPage = () => {
                     </TableHeader>
                     <TableBody>
                       {item.components.map((c: any) => (
-                        <TableRow key={String(c.component_item_id)}>
+                        <TableRow key={String(c.component_id)}>
                           <TableCell>{c.component_name}</TableCell>
-                          <TableCell>{c.quantity}</TableCell>
+                          <TableCell>{c.component_quantity}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -101,7 +101,7 @@ const ItemsPage = () => {
                         item_components: item.components.map((ic: any) => ({
                           quantity: ic.quantity,
                           parent_item_id: String(item.item_id),
-                          component_item_id: String(ic.component_item_id),
+                          component_id: String(ic.component_id),
                         })),
                       }}
                     />

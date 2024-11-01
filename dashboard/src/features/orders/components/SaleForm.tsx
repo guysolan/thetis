@@ -52,7 +52,6 @@ const SaleForm = () => {
     const handleSubmit = async (formData: z.infer<typeof saleFormSchema>) => {
         const {
             order_items,
-            consumed_items,
             order_type,
             warehouse_id,
         } = formData;

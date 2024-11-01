@@ -14,14 +14,16 @@ import { useSelectWarehouseItems } from "@/features/warehouses/api/selectWarehou
 import Select from "@/components/Select";
 import Input from "@/components/Input";
 import NumberCell from "@/components/NumberCell";
-import SelectItemType from '@/components/SelectItem';
-
+import SelectItemType from "@/components/SelectItem";
 
 interface ItemsTableProps {
-    name: "produced_items" | "consumed_items";
+    name: "produced_items" | "consumed_items" | "from_items" | "to_items";
+    warehouse_name?: "warehouse_id" | "from_warehouse_id" | "to_warehouse_id";
 }
 
-const ItemsTable = ({name}:ItemsTableProps) => {
+const ItemsTable = (
+    { name, warehouse_name = "warehouse_id" }: ItemsTableProps,
+) => {
     const { data: items } = useSelectItemsView();
     const { data: warehouseItems } = useSelectWarehouseItems();
     const form = useFormContext();
@@ -33,7 +35,7 @@ const ItemsTable = ({name}:ItemsTableProps) => {
 
     const selectedWarehouse = useWatch({
         control: form.control,
-        name: "warehouse_id",
+        name: warehouse_name,
     });
 
     // Watch the produced items to calculate quantities
@@ -43,20 +45,25 @@ const ItemsTable = ({name}:ItemsTableProps) => {
     });
 
     const getItemQuantities = (itemId: string) => {
-        if (!selectedWarehouse || !warehouseItems) return { before: 0, after: 0 };
+        if (!selectedWarehouse || !warehouseItems) {
+            return { before: 0, after: 0 };
+        }
 
         const warehouseItem = warehouseItems.find(
-            w => String(w.warehouse_id) === String(selectedWarehouse) && 
-                String(w.item_id) === String(itemId)
+            (w) =>
+                String(w.warehouse_id) === String(selectedWarehouse) &&
+                String(w.item_id) === String(itemId),
         );
-        
+
         const currentQuantity = warehouseItem?.item_quantity ?? 0;
-        const addedQuantity = itemChanges?.find(i => String(i.item_id) === String(itemId))?.quantity_change || 0;
-        const quantityAfter = currentQuantity + addedQuantity ;
-        console.log(currentQuantity, addedQuantity, quantityAfter);
+        const addedQuantity =
+            itemChanges?.find((i) => String(i.item_id) === String(itemId))
+                ?.quantity_change || 0;
+        const quantityAfter = currentQuantity + addedQuantity;
+
         return {
             before: Number(currentQuantity),
-            after: Number(quantityAfter)
+            after: Number(quantityAfter),
         };
     };
 
@@ -77,7 +84,9 @@ const ItemsTable = ({name}:ItemsTableProps) => {
                 </TableHeader>
                 <TableBody>
                     {fields.map((field, index) => {
-                        const quantities = getItemQuantities(form.watch(`${name}.${index}.item_id`));
+                        const quantities = getItemQuantities(
+                            form.watch(`${name}.${index}.item_id`),
+                        );
                         return (
                             <TableRow key={field.id}>
                                 <TableCell>
@@ -89,12 +98,16 @@ const ItemsTable = ({name}:ItemsTableProps) => {
                                     <Select
                                         name={`${name}.${index}.item_id`}
                                         options={items
-                                            ?.filter(item => item.item_type === form.watch(`${name}.${index}.item_type`))
+                                            ?.filter((item) =>
+                                                item.item_type ===
+                                                    form.watch(
+                                                        `${name}.${index}.item_type`,
+                                                    )
+                                            )
                                             .map((item) => ({
                                                 label: item.item_name,
-                                                value: String(item.item_id)
-                                            })) || []
-                                        }
+                                                value: String(item.item_id),
+                                            })) || []}
                                     />
                                 </TableCell>
                                 <TableCell>
@@ -129,7 +142,12 @@ const ItemsTable = ({name}:ItemsTableProps) => {
                     type="button"
                     variant="secondary"
                     size="sm"
-                    onClick={() => append({ item_type: "product", item_id: "", quantity_change: 1 })}
+                    onClick={() =>
+                        append({
+                            item_type: "product",
+                            item_id: "",
+                            quantity_change: 1,
+                        })}
                 >
                     Add Product
                 </Button>
@@ -137,7 +155,12 @@ const ItemsTable = ({name}:ItemsTableProps) => {
                     type="button"
                     variant="secondary"
                     size="sm"
-                    onClick={() => append({ item_type: "part", item_id: "", quantity_change: 1 })}
+                    onClick={() =>
+                        append({
+                            item_type: "part",
+                            item_id: "",
+                            quantity_change: 1,
+                        })}
                 >
                     Add Part
                 </Button>
@@ -147,4 +170,3 @@ const ItemsTable = ({name}:ItemsTableProps) => {
 };
 
 export default ItemsTable;
-

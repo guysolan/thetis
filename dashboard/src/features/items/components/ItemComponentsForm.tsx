@@ -29,7 +29,7 @@ const formSchema = z.object({
 			parent_item_id: z.string().min(1, {
 				message: "Parent item is required",
 			}),
-			component_item_id: z.string().min(1, {
+			component_id: z.string().min(1, {
 				message: "Component item is required",
 			}),
 		}),

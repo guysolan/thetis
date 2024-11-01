@@ -14,7 +14,14 @@ export const orderItemsSchema = z.object({
 
 export type OrderItem = z.infer<typeof orderItemSchema>;
 
-const itemChangeSchema = z.object({
+const itemSchema = z.object({
+    item_id: z.string(),
+    item_name: z.string().optional(),
+    quantity_change: z.number().multipleOf(0.01).optional(),
+    quantity_after: z.number().multipleOf(0.01).optional(),
+    item_type: z.string(),
+});
+const pricedItemSchema = z.object({
     item_type: z.string(),
     item_id: z.string(),
     item_name: z.string().optional(),
@@ -24,14 +31,24 @@ const itemChangeSchema = z.object({
     quantity_after: z.number().multipleOf(0.01).optional(),
 });
 
-export type ItemChange = z.infer<typeof itemChangeSchema>;
+export type ItemChange = z.infer<typeof pricedItemSchema>;
 
 // Move schemas to a separate file: schemas.ts
 export const saleFormSchema = z.object({
     warehouse_id: z.string().min(1, "Please select a warehouse"),
     order_type: z.enum(["sale"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
-    consumed_items: z.array(itemChangeSchema),
+    consumed_items: z.array(pricedItemSchema),
+});
+
+// Move schemas to a separate file: schemas.ts
+export const shipmentFormSchema = z.object({
+    from_warehouse_id: z.string().min(1, "Please select a warehouse"),
+    to_warehouse_id: z.string().min(1, "Please select a warehouse").optional(),
+    order_type: z.enum(["shipment"]), // Add validation for order_type
+    order_items: z.array(orderItemSchema),
+    from_items: z.array(itemSchema),
+    to_items: z.array(itemSchema),
 });
 
 export const purchaseFormSchema = z.object({
@@ -45,10 +62,11 @@ export const buildFormSchema = z.object({
     warehouse_id: z.string().min(1, "Please select a warehouse"),
     order_type: z.enum(["purchase", "sale"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
-    produced_items: z.array(itemChangeSchema),
-    consumed_items: z.array(itemChangeSchema),
+    produced_items: z.array(pricedItemSchema),
+    consumed_items: z.array(pricedItemSchema),
 });
 
 export type SaleFormData = z.infer<typeof saleFormSchema>;
 export type PurchaseFormData = z.infer<typeof purchaseFormSchema>;
 export type BuildFormData = z.infer<typeof buildFormSchema>;
+export type ShipmentFormData = z.infer<typeof shipmentFormSchema>;

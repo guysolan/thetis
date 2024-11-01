@@ -6,7 +6,7 @@ import { cn } from "../../../lib/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../components/ui/select';
 
 const LockCard = (
-    { title, children }: { title: string; children: React.ReactNode },
+    { title, children }: { title: React.ReactNode; children: React.ReactNode },
 ) => {
     const [isLocked, setIsLocked] = React.useState(true);
     return (

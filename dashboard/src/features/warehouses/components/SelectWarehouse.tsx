@@ -20,7 +20,7 @@ interface Props {
   label?: string;
 }
 const SelectWarehouse = (
-  { name = "warehouse_id", label = "Warehouse" }: Props,
+  { name = "warehouse_id", label }: Props,
 ) => {
   const form = useFormContext();
   const { data: warehouses } = useSelectWarehouses();
@@ -30,9 +30,11 @@ const SelectWarehouse = (
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>
-            {label}
-          </FormLabel>
+          {label && (
+            <FormLabel>
+              {label}
+            </FormLabel>
+          )}
           <Select
             onValueChange={field.onChange}
             value={field.value}
@@ -44,7 +46,10 @@ const SelectWarehouse = (
             </FormControl>
             <SelectContent>
               {warehouses.map((w) => (
-                <SelectItem key={w.warehouse_id} value={w.warehouse_id?.toString() ?? ""}>
+                <SelectItem
+                  key={w.warehouse_id}
+                  value={w.warehouse_id?.toString() ?? ""}
+                >
                   {w.warehouse_name}
                 </SelectItem>
               ))}
