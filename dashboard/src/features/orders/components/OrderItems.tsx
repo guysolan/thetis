@@ -25,6 +25,23 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
         name: "order_items",
     });
 
+    React.useEffect(() => {
+        const subscription = form.watch((value, { name }) => {
+            if (name?.includes('.item_id') && items) {
+                const index = parseInt(name.split('.')[1]);
+                const selectedItemId = value.order_items?.[index]?.item_id;
+                const selectedItem = items.find(item => String(item.item_id) === selectedItemId);
+                
+                if (selectedItem) {
+                    form.setValue(`order_items.${index}.item_price`, selectedItem.item_price);
+                    form.setValue(`order_items.${index}.item_tax`, 0.2);
+                }
+            }
+        });
+
+        return () => subscription.unsubscribe();
+    }, [form, items]);
+
     const getFilteredItemOptions = (itemType: string) => {
         return items
             .filter((item) => item.item_type === itemType)
@@ -35,7 +52,6 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
     };
 
     const itemTotal = (index: number) => {
-        // Watch values individually
         const item_price = form.watch(`order_items.${index}.item_price`);
         const item_tax = form.watch(`order_items.${index}.item_tax`);
         const quantity_change = form.watch(`order_items.${index}.quantity_change`);
@@ -45,12 +61,10 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
         const quantity = Number(quantity_change);
         const total = price * tax * quantity;
         
-        if (showPrice) {
-            form.setValue(`order_items.${index}.item_total`, Number(total).toFixed(2));
-        }
-        
         return Number(total).toFixed(2);
     };
+
+    
   
     return (
         <>
@@ -151,7 +165,7 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
                             item_id: "",
                             quantity_change: 1,
                             item_price: 0,
-                            item_tax: 0,
+                            item_tax: 0.2,
                             item_total: "0.00",
                         })}
                 >
@@ -167,7 +181,7 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
                             item_id: "",
                             quantity_change: 1,
                             item_price: 0,
-                            item_tax: 0,
+                            item_tax: 0.2,
                             item_total: "0.00",
                         })}
                 >

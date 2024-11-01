@@ -7,7 +7,7 @@ import { Form } from "@/components/ui/form";
 import SelectWarehouse from "../../warehouses/components/SelectWarehouse";
 import OrderItems from "@/features/orders/components/OrderItems";
 import ItemsTable from "./ItemsTable";
-import { ItemView } from "../../items/types";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
     Accordion,
     AccordionContent,
@@ -15,17 +15,14 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 import { usePurchaseForm } from "../hooks/usePurchaseForm";
-import { Switch } from "@/components/ui/switch";
-import { formSchema } from "../schema";
+import { buildFormSchema } from "../schema";
 import { useCreateOrder } from "../api/createOrder";
+import { Lock } from "lucide-react";
+import LockCard from "./LockCard";
 
-interface OrderFormProps {
-    items: ItemView[];
-}
-
-export const OrderForm: React.FC<OrderFormProps> = ({ items }) => {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+const BuildForm = () => {
+    const form = useForm<z.infer<typeof buildFormSchema>>({
+        resolver: zodResolver(buildFormSchema),
         defaultValues: {
             order_items: [{
                 item_type: "product",
@@ -40,7 +37,12 @@ export const OrderForm: React.FC<OrderFormProps> = ({ items }) => {
 
     usePurchaseForm(form.control, form.setValue);
 
-    const itemsSummary = useWatch({
+    const warehouseId = useWatch({
+        control: form.control,
+        name: "warehouse_id",
+    });
+
+    const consumedItems = useWatch({
         control: form.control,
         name: "consumed_items",
     });
@@ -48,16 +50,16 @@ export const OrderForm: React.FC<OrderFormProps> = ({ items }) => {
     // Memoize expensive calculations
     const partIsNegative = useMemo(
         () =>
-            itemsSummary.some((part) =>
+            consumedItems.some((part) =>
                 part.quantity_after && part.quantity_after < 0
             ),
-        [itemsSummary],
+        [consumedItems],
     );
 
     const { mutate: createOrder } = useCreateOrder();
 
     // Extract form submission logic
-    const handleSubmit = async (formData: z.infer<typeof formSchema>) => {
+    const handleSubmit = async (formData: z.infer<typeof buildFormSchema>) => {
         const {
             order_items,
             consumed_items,
@@ -86,61 +88,48 @@ export const OrderForm: React.FC<OrderFormProps> = ({ items }) => {
     };
 
     return (
-        <>
-            <Form {...form}>
-                <form
-                    onSubmit={form.handleSubmit(handleSubmit)}
-                    className="flex flex-col space-y-4 px-1 pt-2 pr-4"
-                >
-                    <h2>Order</h2>
+        <Form {...form}>
+            <form
+                onSubmit={form.handleSubmit(handleSubmit)}
+                className="flex flex-col space-y-4 px-1 pt-2 pr-4"
+            >
+                <SelectWarehouse
+                    name="warehouse_id"
+                    label="Warehouse"
+                />
 
-                    <SelectWarehouse
-                        name="warehouse_id"
-                        label="Warehouse"
-                    />
-
-                    <Accordion
-                        type="multiple"
-                        defaultValue={["produced-items", "order-items"]}
-                    >
-                        <AccordionItem value="produced-items">
-                            <AccordionTrigger>
-                                Produced Items
-                            </AccordionTrigger>
-                            <AccordionContent>
+                {warehouseId && (
+                    <>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Produced Items</CardTitle>
+                            </CardHeader>
+                            <CardContent>
                                 <ItemsTable name="produced_items" />
-                            </AccordionContent>
-                        </AccordionItem>
-                        <AccordionItem value="order-items">
-                            <AccordionTrigger>Order Items</AccordionTrigger>
-                            <AccordionContent>
-                                <OrderItems showPrice={true} />
-                            </AccordionContent>
-                        </AccordionItem>
-                        <AccordionItem value="consumed-items">
-                            <AccordionTrigger>
-                                Consumed Items
-                            </AccordionTrigger>
-                            <AccordionContent>
-                                <ItemsTable name="consumed_items" />
-                                {/* <ItemQuantities items={itemsSummary} /> */}
-                            </AccordionContent>
-                        </AccordionItem>
-                    </Accordion>
+                            </CardContent>
+                        </Card>
+                        <LockCard title="Order Items">
+                            <OrderItems showPrice={true} />
+                        </LockCard>
+                        <LockCard title="Consumed Items">
+                            <ItemsTable name="consumed_items" />
+                        </LockCard>
+                    </>
+                )}
 
-                    <Button
-                        onClick={() => {
-                            console.log(form.formState.errors);
-                            console.log(form.getValues());
-                        }}
-                        disabled={partIsNegative}
-                        type="submit"
-                    >
-                        Create Order
-                    </Button>
-                </form>
-            </Form>
-            <hr className="my-4" />
-        </>
+                <Button
+                    onClick={() => {
+                        console.log(form.formState.errors);
+                        console.log(form.getValues());
+                    }}
+                    disabled={partIsNegative}
+                    type="submit"
+                >
+                    Create Order
+                </Button>
+            </form>
+        </Form>
     );
 };
+
+export default BuildForm;

@@ -37,7 +37,7 @@ const ItemsTable = ({name}:ItemsTableProps) => {
     });
 
     // Watch the produced items to calculate quantities
-    const producedItems = useWatch({
+    const itemChanges = useWatch({
         control: form.control,
         name: name,
     });
@@ -50,10 +50,10 @@ const ItemsTable = ({name}:ItemsTableProps) => {
                 String(w.item_id) === String(itemId)
         );
         
-        const currentQuantity = warehouseItem?.item_quantity || 0;
-        const addedQuantity = producedItems?.find(i => String(i.item_id) === String(itemId))?.quantity_change || 0;
+        const currentQuantity = warehouseItem?.item_quantity ?? 0;
+        const addedQuantity = itemChanges?.find(i => String(i.item_id) === String(itemId))?.quantity_change || 0;
         const quantityAfter = currentQuantity + addedQuantity ;
-        
+        console.log(currentQuantity, addedQuantity, quantityAfter);
         return {
             before: Number(currentQuantity),
             after: Number(quantityAfter)

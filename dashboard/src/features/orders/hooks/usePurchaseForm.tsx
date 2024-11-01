@@ -101,7 +101,7 @@ function processOrderItems(
                     (item) => String(item.item_id) === String(component.component_id),
                 );
 
-                if (existingConsumedItem) {
+                if (existingConsumedItem?.quantity_change) {
                     existingConsumedItem.quantity_change -= Number(requiredQuantity); // Keep decreasing
                 } else {
                     consumedItems.push({

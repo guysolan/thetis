@@ -27,13 +27,28 @@ const itemChangeSchema = z.object({
 export type ItemChange = z.infer<typeof itemChangeSchema>;
 
 // Move schemas to a separate file: schemas.ts
-export const formSchema = z.object({
+export const saleFormSchema = z.object({
+    warehouse_id: z.string().min(1, "Please select a warehouse"),
+    order_type: z.enum(["sale"]), // Add validation for order_type
+    order_items: z.array(orderItemSchema),
+    consumed_items: z.array(itemChangeSchema),
+});
+
+export const purchaseFormSchema = z.object({
+    warehouse_id: z.string().min(1, "Please select a warehouse"),
+    order_type: z.enum(["purchase"]), // Add validation for order_type
+    order_items: z.array(orderItemSchema),
+});
+
+// Move schemas to a separate file: schemas.ts
+export const buildFormSchema = z.object({
     warehouse_id: z.string().min(1, "Please select a warehouse"),
     order_type: z.enum(["purchase", "sale"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
     produced_items: z.array(itemChangeSchema),
     consumed_items: z.array(itemChangeSchema),
-    is_build: z.boolean().default(false),
 });
 
-export type OrderFormData = z.infer<typeof formSchema>;
+export type SaleFormData = z.infer<typeof saleFormSchema>;
+export type PurchaseFormData = z.infer<typeof purchaseFormSchema>;
+export type BuildFormData = z.infer<typeof buildFormSchema>;
