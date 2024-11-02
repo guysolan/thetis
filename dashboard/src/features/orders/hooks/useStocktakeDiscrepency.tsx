@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import { useSelectWarehouseItems } from "../api/selectWarehouseItems";
-import { type OrderItem } from "@/features/orders/components/OrderItems";
+import { useSelectWarehouseItems } from "../../warehouses/api/selectWarehouseItems";
 
 export const useStocktakeDiscrepancy = () => {
   const { data: warehouseItems } = useSelectWarehouseItems();
@@ -21,24 +20,32 @@ export const useStocktakeDiscrepancy = () => {
     if (!selectedFromWarehouse || !warehouseItems || !orderItems) return [];
 
     const itemsInWarehouse = warehouseItems.filter(
-      (w) => String(w.warehouse_id) === String(selectedFromWarehouse)
+      (w) => String(w.warehouse_id) === String(selectedFromWarehouse),
     );
 
-    const stockTakeDiscrepancy = orderItems.map((oi: OrderItem) => {
-        const warehouseItem = itemsInWarehouse.find((item) => String(item.item_id) === String(oi.id));
-        const itemQuantity = warehouseItem?.item_quantity || 0;
-    
+    const stockTakeDiscrepancy = orderItems.map((oi) => {
+      const warehouseItem = itemsInWarehouse.find((item) =>
+        String(item.item_id) === String(oi.item_id)
+      );
+
+      const itemQuantity = warehouseItem?.item_quantity ?? 0;
 
       return {
-        id: oi.id,
+        id: oi.item_id,
         quantity_before: itemQuantity,
-        quantity_after: oi.quantity,
-        quantity_change:  oi.quantity-itemQuantity,
+        quantity_after: oi.quantity_change,
+        quantity_change: oi.quantity_change - itemQuantity,
       };
     });
 
-    setValue("change_quantity", stockTakeDiscrepancy.map((item) => ({quantity_change: Number(item.quantity_change), item_id: Number(item.id)})));
-    
+    setValue(
+      "change_quantity",
+      stockTakeDiscrepancy.map((item) => ({
+        quantity_change: Number(item.quantity_change),
+        item_id: Number(item.id),
+      })),
+    );
+
     return stockTakeDiscrepancy;
   }, [selectedFromWarehouse, warehouseItems, orderItems]);
 

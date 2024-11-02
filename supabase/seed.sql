@@ -1,7 +1,7 @@
 -- Insert warehouses
 INSERT INTO warehouses(id, name)
     VALUES (1, 'My House'),
-(2, 'Amazon UK');
+(2, 'MPD');
 
 -- Insert items (parts)
 INSERT INTO items(name, price, type)

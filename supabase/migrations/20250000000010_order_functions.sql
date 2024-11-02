@@ -1,4 +1,13 @@
+-- Drop the old tables if they exist
+DROP TABLE IF EXISTS stocktake_item_changes;
+
+DROP TABLE IF EXISTS stocktakes;
+
 DROP FUNCTION IF EXISTS insert_item_changes(data jsonb);
+
+-- Add 'stocktake' to the order_type enum
+ALTER TYPE order_type
+    ADD VALUE IF NOT EXISTS 'stocktake';
 
 ALTER TABLE orders RENAME COLUMN type TO order_type;
 
