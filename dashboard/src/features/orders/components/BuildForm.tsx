@@ -68,6 +68,7 @@ const BuildForm = () => {
             consumed_items,
             produced_items,
             order_type,
+            order_date,
             warehouse_id,
         } = formData;
         const item_changes = [
@@ -94,6 +95,7 @@ const BuildForm = () => {
         }));
         await createOrder({
             in_order_type: order_type,
+            in_order_date: order_date,
             in_order_items: item_changes_with_warehouse,
         });
     };

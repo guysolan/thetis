@@ -35,6 +35,7 @@ const PurchaseForm = () => {
         const {
             order_items,
             order_type,
+            order_date,
             warehouse_id,
         } = formData;
 
@@ -47,6 +48,7 @@ const PurchaseForm = () => {
         }));
         await createOrder({
             in_order_type: order_type,
+            in_order_date: order_date.toISOString(),
             in_order_items: item_changes_with_warehouse,
         });
     };

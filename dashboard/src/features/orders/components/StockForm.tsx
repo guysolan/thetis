@@ -16,16 +16,7 @@ interface Props {
 	orderItems?: OrderItem[];
 }
 
-const changeQuantitySchema = z.array(
-	z.object({ quantity_change: z.coerce.number(), item_id: z.coerce.number() }),
-);
-
-const stockTakeFormSchema = z.object({
-	warehouse_id: z.coerce.number(),
-	order_type: z.enum(["stocktake"]),
-	...orderItemsSchema.shape,
-	change_quantity: changeQuantitySchema,
-});
+import { stockTakeFormSchema } from "../schema";
 
 export type StocktakeFormT = z.infer<typeof stockTakeFormSchema>;
 
@@ -53,7 +44,11 @@ const StocktakeForm = ({ warehouseId, orderItems }: Props) => {
 			item_price: 0,
 			item_tax: 0,
 		}));
-		order({ in_order_type: "stocktake", in_order_items: stocktakeChanges });
+		order({
+			in_order_type: "stocktake",
+			in_order_date: formData.order_date.toISOString(),
+			in_order_items: stocktakeChanges,
+		});
 	};
 
 	return (

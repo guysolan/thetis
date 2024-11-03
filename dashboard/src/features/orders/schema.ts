@@ -71,6 +71,21 @@ export const buildFormSchema = z.object({
     consumed_items: z.array(pricedItemSchema),
 });
 
+const changeQuantitySchema = z.array(
+    z.object({
+        quantity_change: z.coerce.number(),
+        item_id: z.coerce.number(),
+    }),
+);
+
+export const stockTakeFormSchema = z.object({
+    warehouse_id: z.coerce.number(),
+    order_type: z.enum(["stocktake"]),
+    ...orderItemsSchema.shape,
+    change_quantity: changeQuantitySchema,
+    order_date: z.date(),
+});
+
 export type SaleFormData = z.infer<typeof saleFormSchema>;
 export type PurchaseFormData = z.infer<typeof purchaseFormSchema>;
 export type BuildFormData = z.infer<typeof buildFormSchema>;

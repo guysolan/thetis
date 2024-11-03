@@ -60,6 +60,7 @@ const ShipmentForm = () => {
             from_warehouse_id,
             to_warehouse_id,
             to_items,
+            order_date,
         } = formData;
         const from_item_changes_with_warehouse = from_items.map((ic) => ({
             item_id: ic.item_id,
@@ -85,6 +86,7 @@ const ShipmentForm = () => {
 
         await createOrder({
             in_order_type: "shipment",
+            in_order_date: order_date.toISOString(),
             in_order_items: item_changes_with_warehouse,
         });
     };
