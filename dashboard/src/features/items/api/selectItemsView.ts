@@ -13,9 +13,11 @@ export const selectItemsView = async () => {
   return data;
 };
 
+export const selectItemsViewQueryKey = { queryKey: ["select-items-view"] };
+
 export const selectItemsViewQueryOptions = () => {
   return queryOptions({
-    queryKey: ["select-items-view"],
+    ...selectItemsViewQueryKey,
     queryFn: selectItemsView,
   });
 };

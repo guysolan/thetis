@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
+import { selectItemsViewQueryKey } from "./selectItemsView";
 
 const deleteItem = async (id: number) => {
   const { error } = await supabase
@@ -22,7 +23,7 @@ export const useDeleteItem = () => {
     },
     onSuccess: () => {
       toast.success("Item deleted successfully");
-      queryClient.invalidateQueries({ queryKey: ["select-items"] });
+      queryClient.invalidateQueries(selectItemsViewQueryKey);
     },
   });
 };
