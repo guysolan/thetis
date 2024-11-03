@@ -17,6 +17,7 @@ import { OrderView } from "../types";
 import { Separator } from "../../../components/ui/separator";
 import DeleteOrder from "./DeleteOrder";
 import { ExternalLink } from "lucide-react";
+import dayjs from "dayjs";
 
 interface ExistingOrdersProps {
 	orders: OrderView[];
@@ -34,14 +35,25 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 						key={order.order_id}
 						value={`order-${order.order_id}-${order.order_type}-${order.order_date}`}
 					>
-						<AccordionTrigger className="flex-row-reverse gap-x-2">
-							<div className="flex justify-between w-full">
-								<span className="flex gap-2 text-left">
-									Order {order.order_id} -{" "}
-									{new Date(order.order_date as string)
-										.toLocaleDateString()}
-									<Badge>{order.order_type}</Badge>
-								</span>
+						<AccordionTrigger className="flex-row-reverse gap-x-2 [&_h2]:hover:underline hover:no-underline">
+							<div className="flex justify-between items-start w-full">
+								<div className="flex flex-col gap-1 text-left">
+									<div className="flex flex-row items-center gap-2 font-medium text-lg">
+										<h2 className="underline-offset-2">Order {order.order_id}</h2>
+										<Badge variant="outline">
+											{order.order_type}
+										</Badge>
+									</div>
+								
+									<span className="font-light text-neutral-600 text-sm">
+										{dayjs(order.order_date as string)
+											.format("DD MMM YYYY")}
+									</span>
+										<span className="font-semibold text-neutral-800">
+										${order.total_value?.toFixed(2) ??
+											"0.00"}
+									</span>
+								</div>
 								<div className="flex items-center gap-2">
 									<a
 										href={`/orders/${order.order_id}`}
@@ -83,7 +95,9 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 								<TableBody>
 									{order.items.sort((a, b) =>
 										a.item_id - b.item_id
-									).filter((item) => Number(item?.price)!==0).map((
+									).filter((item) =>
+										Number(item?.price) !== 0
+									).map((
 										item,
 									) => (
 										<TableRow
