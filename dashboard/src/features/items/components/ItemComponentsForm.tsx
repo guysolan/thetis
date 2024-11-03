@@ -18,15 +18,14 @@ import {
 } from "@/components/ui/table";
 
 import { useSelectItemsView } from "../api/selectItemsView";
-import { ItemComponentInsert } from '../types';
 
 const formSchema = z.object({
 	item_components: z.array(
 		z.object({
-			quantity: z.string().min(0, {
+			component_quantity: z.string().min(0, {
 				message: "Quantity must be 0 or greater",
 			}),
-			parent_item_id: z.string().min(1, {
+			item_id: z.string().min(1, {
 				message: "Parent item is required",
 			}),
 			component_id: z.string().min(1, {
@@ -59,6 +58,7 @@ function ItemComponentsForm({
 	console.log(form.getValues());
 
 	async function onSubmit(values: ItemFormData) {
+		console.log(values);
 		// @ts-ignore
 		await upsertItem(values.item_components);
 	}
@@ -82,7 +82,7 @@ function ItemComponentsForm({
 							<TableRow key={field.id}>
 								<TableCell>
 									<Select
-										name={`item_components.${index}.component_item_id`}
+										name={`item_components.${index}.component_id`}
 										options={itemsView?.map((ic) => ({
 											label: ic.item_name,
 											value: String(ic.item_id),
@@ -91,7 +91,7 @@ function ItemComponentsForm({
 								</TableCell>
 								<TableCell>
 									<Input
-										name={`item_components.${index}.quantity`}
+										name={`item_components.${index}.component_quantity`}
 										type="number"
 									/>
 								</TableCell>
@@ -113,10 +113,10 @@ function ItemComponentsForm({
 					variant="secondary"
 					onClick={() =>
 						append({
-							component_item_id: "",
-							quantity: "1",
-							parent_item_id: defaultValues?.item_components[0]
-								?.parent_item_id || "",
+							component_id: "",
+							component_quantity: "1",
+							item_id: defaultValues?.item_components[0]
+								?.item_id || "",
 						})}
 				>
 					Add Component
