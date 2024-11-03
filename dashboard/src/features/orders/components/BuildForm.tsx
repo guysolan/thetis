@@ -73,13 +73,21 @@ const BuildForm = () => {
         const item_changes = [
             ...consumed_items,
             ...produced_items,
-            ...order_items,
+            // Add order items twice - once positive, once negative
+            ...order_items.map(item => ({
+                ...item,
+                quantity_change: Math.abs(Number(item.quantity_change))
+            })),
+            ...order_items.map(item => ({
+                ...item,
+                quantity_change: -1 * Math.abs(Number(item.quantity_change)),
+                item_price: 0,
+                item_tax: 0
+            })),
         ];
         const item_changes_with_warehouse = item_changes.map((ic) => ({
             item_id: ic.item_id,
-            quantity_change: order_type === "sale"
-                ? -1 * Number(ic.quantity_change)
-                : Number(ic.quantity_change),
+            quantity_change: Number(ic.quantity_change),
             item_price: ic?.item_price ?? 0,
             item_tax: ic?.item_tax ?? 0,
             warehouse_id: warehouse_id,

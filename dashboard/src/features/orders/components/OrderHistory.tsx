@@ -16,7 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { OrderView } from "../types";
 import { Separator } from "../../../components/ui/separator";
 import DeleteOrder from "./DeleteOrder";
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink } from "lucide-react";
 
 interface ExistingOrdersProps {
 	orders: OrderView[];
@@ -81,7 +81,11 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 									</TableRow>
 								</TableHeader>
 								<TableBody>
-									{order.items?.map((item) => (
+									{order.items.sort((a, b) =>
+										a.item_id - b.item_id
+									).filter((item) => Number(item?.price)!==0).map((
+										item,
+									) => (
 										<TableRow
 											className="text-left"
 											key={`${item.item_id}-${item.item_name}`}
