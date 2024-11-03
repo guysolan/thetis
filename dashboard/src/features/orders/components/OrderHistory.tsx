@@ -14,6 +14,9 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { OrderView } from "../types";
+import { Separator } from "../../../components/ui/separator";
+import DeleteOrder from "./DeleteOrder";
+import { ExternalLink } from 'lucide-react';
 
 interface ExistingOrdersProps {
 	orders: OrderView[];
@@ -33,25 +36,41 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 					>
 						<AccordionTrigger className="flex-row-reverse gap-x-2">
 							<div className="flex justify-between w-full">
-								<span className="flex gap-2">
+								<span className="flex gap-2 text-left">
 									Order {order.order_id} -{" "}
 									{new Date(order.order_date as string)
 										.toLocaleDateString()}
 									<Badge>{order.order_type}</Badge>
 								</span>
-								<a
-									href={`/orders/${order.order_id}`}
-									target="_blank"
-									rel="noopener noreferrer"
-									onClick={(e) => e.stopPropagation()}
-									className="text-blue-500 hover:underline"
-								>
-									Open in new tab
-								</a>
+								<div className="flex items-center gap-2">
+									<a
+										href={`/orders/${order.order_id}`}
+										target="_blank"
+										rel="noopener noreferrer"
+										onClick={(e) => e.stopPropagation()}
+										className="flex items-center gap-2 text-blue-500 hover:underline"
+									>
+										<span className="sr-only md:not-sr-only">
+											Open in new tab
+										</span>
+										<ExternalLink className="w-4 h-4" />
+									</a>
+									<Separator
+										orientation="vertical"
+										className="h-4"
+									/>
+									<div onClick={(e) => e.stopPropagation()}>
+										{/* Add this wrapper */}
+
+										<DeleteOrder
+											orderId={order.order_id as number}
+										/>
+									</div>
+								</div>
 							</div>
 						</AccordionTrigger>
 						<AccordionContent className="px-4">
-							<Table>
+							<Table className="text-left">
 								<TableHeader>
 									<TableRow>
 										<TableHead>Item Name</TableHead>
@@ -62,24 +81,29 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 									</TableRow>
 								</TableHeader>
 								<TableBody>
-									{(order.items )?.map((item) => (
+									{order.items?.map((item) => (
 										<TableRow
+											className="text-left"
 											key={`${item.item_id}-${item.item_name}`}
 										>
 											<TableCell>
 												{item.item_name}
 											</TableCell>
-												<TableCell>
+											<TableCell>
 												{item.warehouse_name}
 											</TableCell>
 											<TableCell>
-												${item.price?.toFixed(2)??0.00}
+												${item.price?.toFixed(2) ??
+													0.00}
 											</TableCell>
 											<TableCell>
-												{order.order_type === "sale" ? item.quantity * -1 : item.quantity}
+												{order.order_type === "sale"
+													? item.quantity * -1
+													: item.quantity}
 											</TableCell>
 											<TableCell>
-												${item.total?.toFixed(2)??0.00}
+												${item.total?.toFixed(2) ??
+													0.00}
 											</TableCell>
 										</TableRow>
 									))}
