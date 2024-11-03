@@ -10,7 +10,7 @@ import { useUpsertWarehouse } from "../api/upsertWarehouse";
 import { WarehouseView } from "../types";
 
 const warehouseFormSchema = z.object({
-	id: z.number().optional(),
+	id: z.coerce.number().optional(),
 	name: z.string().min(1, "Name required"),
 });
 

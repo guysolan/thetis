@@ -7,9 +7,10 @@ import Input from "@/components/Input";
 import { Form } from "@/components/ui/form";
 import { useUpsertItem } from "../api/upsertItem";
 import { ItemView } from "../types";
+
 const itemFormSchema = z.object({
-	id: z.number().optional(),
-	price: z.number().positive(),
+	id: z.coerce.number().optional(),
+	price: z.coerce.number().positive(),
 	name: z.string().min(1, "Name required"),
 	type: z.enum(["product", "part", "service"]),
 });

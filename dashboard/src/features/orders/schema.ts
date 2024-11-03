@@ -2,9 +2,9 @@ import { z } from "zod";
 
 export const orderItemSchema = z.object({
     item_id: z.string().min(1, "Please select an item"),
-    quantity_change: z.number().min(1, "Quantity must be at least 1"),
-    item_price: z.number().optional(),
-    item_tax: z.number().optional(),
+    quantity_change: z.coerce.number().min(1, "Quantity must be at least 1"),
+    item_price: z.coerce.number().optional(),
+    item_tax: z.coerce.number().optional(),
     item_type: z.enum(["product", "part", "service"]).optional(),
 });
 
@@ -17,18 +17,18 @@ export type OrderItem = z.infer<typeof orderItemSchema>;
 const itemSchema = z.object({
     item_id: z.string(),
     item_name: z.string().optional(),
-    quantity_change: z.number().multipleOf(0.01).optional(),
-    quantity_after: z.number().multipleOf(0.01).optional(),
+    quantity_change: z.coerce.number().multipleOf(0.01).optional(),
+    quantity_after: z.coerce.number().multipleOf(0.01).optional(),
     item_type: z.string(),
 });
 const pricedItemSchema = z.object({
     item_type: z.string(),
     item_id: z.string(),
     item_name: z.string().optional(),
-    quantity_change: z.number().multipleOf(0.01).optional(),
-    item_price: z.number().multipleOf(0.01).optional(),
-    item_tax: z.number().multipleOf(0.01).optional(),
-    quantity_after: z.number().multipleOf(0.01).optional(),
+    quantity_change: z.coerce.number().multipleOf(0.01).optional(),
+    item_price: z.coerce.number().multipleOf(0.01).optional(),
+    item_tax: z.coerce.number().multipleOf(0.01).optional(),
+    quantity_after: z.coerce.number().multipleOf(0.01).optional(),
 });
 
 export type ItemChange = z.infer<typeof pricedItemSchema>;

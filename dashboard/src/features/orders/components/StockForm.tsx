@@ -15,11 +15,11 @@ interface Props {
 }
 
 const changeQuantitySchema = z.array(
-	z.object({ quantity_change: z.number(), item_id: z.number() }),
+	z.object({ quantity_change: z.coerce.number(), item_id: z.coerce.number() }),
 );
 
 const stockTakeFormSchema = z.object({
-	warehouse_id: z.number(),
+	warehouse_id: z.coerce.number(),
 	order_type: z.enum(["stocktake"]),
 	...orderItemsSchema.shape,
 	change_quantity: changeQuantitySchema,

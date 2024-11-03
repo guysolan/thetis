@@ -22,7 +22,7 @@ import { useSelectItemsView } from "../api/selectItemsView";
 const formSchema = z.object({
 	item_components: z.array(
 		z.object({
-			component_quantity: z.string().min(0, {
+			component_quantity: z.coerce.number().min(0, {
 				message: "Quantity must be 0 or greater",
 			}),
 			item_id: z.string().min(1, {

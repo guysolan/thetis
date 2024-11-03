@@ -4,9 +4,9 @@ import { toast } from "sonner";
 
 export const deleteOrder = async (id: number) => {
     const { error } = await supabase
-        .from("orders")
-        .delete()
-        .eq("id", id);
+        .rpc("delete_order", {
+            in_order_id: id,
+        });
 
     if (error) {
         throw error;

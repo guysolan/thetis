@@ -103,7 +103,10 @@ const ItemsPage = () => {
                             </Button>
                             <Sheet
                               trigger={
-                                <Button className="justify-start gap-2 px-2" variant="ghost">
+                                <Button
+                                  className="justify-start gap-2 px-2"
+                                  variant="ghost"
+                                >
                                   <Edit size={20} />Edit
                                 </Button>
                               }
@@ -162,9 +165,7 @@ const ItemsPage = () => {
                           <ItemComponentsForm
                             defaultValues={{
                               item_components: item.components.map((ic) => ({
-                                component_quantity: String(
-                                  ic.component_quantity,
-                                ),
+                                component_quantity: (ic.component_quantity),
                                 item_id: String(item.item_id),
                                 component_id: String(ic.component_id),
                               })),
