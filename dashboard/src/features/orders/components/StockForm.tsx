@@ -9,6 +9,8 @@ import StocktakeDiscrepancy from "./StockDiscrepency";
 import useStocktake from "../../warehouses/api/stocktake";
 import { useCreateOrder } from "../api/createOrder";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import dayjs from 'dayjs';
+import DatePicker from '../../../components/DatePicker';
 interface Props {
 	warehouseId: number;
 	orderItems?: OrderItem[];
@@ -35,6 +37,7 @@ const StocktakeForm = ({ warehouseId, orderItems }: Props) => {
 			order_type: "stocktake",
 			order_items: orderItems || [],
 			change_quantity: [],
+			order_date: dayjs().toDate(),
 		},
 	});
 
@@ -59,6 +62,8 @@ const StocktakeForm = ({ warehouseId, orderItems }: Props) => {
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="flex flex-col space-y-4 mt-4"
 			>
+                <DatePicker name="order_date" label='Order Date' />
+
 				<Card>
 					<CardHeader>
 						<CardTitle>Stocktake</CardTitle>

@@ -8,6 +8,8 @@ import OrderItems from "@/features/orders/components/OrderItems";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { purchaseFormSchema } from "../schema";
 import { useCreateOrder } from "../api/createOrder";
+import dayjs from 'dayjs';
+import DatePicker from '../../../components/DatePicker';
 
 const PurchaseForm = () => {
     const form = useForm<z.infer<typeof purchaseFormSchema>>({
@@ -18,6 +20,8 @@ const PurchaseForm = () => {
                 item_id: "",
                 quantity_change: 1,
             }],
+            order_date: dayjs().toDate(),
+
             order_type: "purchase", // Add default order type
         },
     });
@@ -53,6 +57,8 @@ const PurchaseForm = () => {
                 onSubmit={form.handleSubmit(handleSubmit)}
                 className="flex flex-col space-y-4 px-1 pt-2 pr-4"
             >
+                <DatePicker name="order_date" label='Order Date' />
+
                 <SelectWarehouse
                     name="warehouse_id"
                     label="Warehouse"

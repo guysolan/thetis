@@ -38,6 +38,7 @@ export const saleFormSchema = z.object({
     warehouse_id: z.string().min(1, "Please select a warehouse"),
     order_type: z.enum(["sale"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
+    order_date: z.date(),
     consumed_items: z.array(pricedItemSchema),
 });
 
@@ -47,6 +48,8 @@ export const shipmentFormSchema = z.object({
     to_warehouse_id: z.string().min(1, "Please select a warehouse").optional(),
     order_type: z.enum(["shipment"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
+    order_date: z.date(),
+
     from_items: z.array(itemSchema),
     to_items: z.array(itemSchema),
 });
@@ -55,11 +58,13 @@ export const purchaseFormSchema = z.object({
     warehouse_id: z.string().min(1, "Please select a warehouse"),
     order_type: z.enum(["purchase"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
+    order_date: z.date(),
 });
 
 // Move schemas to a separate file: schemas.ts
 export const buildFormSchema = z.object({
     warehouse_id: z.string().min(1, "Please select a warehouse"),
+    order_date: z.date(),
     order_type: z.enum(["purchase", "sale"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
     produced_items: z.array(pricedItemSchema),

@@ -19,6 +19,8 @@ import { buildFormSchema } from "../schema";
 import { useCreateOrder } from "../api/createOrder";
 import { Lock } from "lucide-react";
 import LockCard from "./LockCard";
+import DatePicker from '../../../components/DatePicker';
+import dayjs from 'dayjs';
 
 const BuildForm = () => {
     const form = useForm<z.infer<typeof buildFormSchema>>({
@@ -29,6 +31,7 @@ const BuildForm = () => {
                 item_id: "",
                 quantity_change: 1,
             }],
+            order_date: dayjs().toDate(),
             consumed_items: [],
             produced_items: [], // Add missing default value
             order_type: "purchase", // Add default order type
@@ -93,10 +96,14 @@ const BuildForm = () => {
                 onSubmit={form.handleSubmit(handleSubmit)}
                 className="flex flex-col space-y-4 px-1 pt-2 pr-4"
             >
+                <DatePicker name="order_date" label='Order Date' />
+
+                
                 <SelectWarehouse
                     name="warehouse_id"
                     label="Warehouse"
                 />
+
 
                 {warehouseId && (
                     <>

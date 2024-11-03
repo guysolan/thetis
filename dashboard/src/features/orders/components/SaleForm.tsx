@@ -15,6 +15,8 @@ import { useCreateOrder } from "../api/createOrder";
 import { useSaleForm } from "../hooks/useSaleForm";
 import { Separator } from "../../../components/ui/separator";
 import LockCard from './LockCard';
+import dayjs from 'dayjs';
+import DatePicker from '../../../components/DatePicker';
 
 const SaleForm = () => {
     const form = useForm<z.infer<typeof saleFormSchema>>({
@@ -25,6 +27,8 @@ const SaleForm = () => {
                 item_id: "",
                 quantity_change: 1,
             }],
+            order_date: dayjs().toDate(),
+
             consumed_items: [],
             order_type: "sale", // Add default order type
         },
@@ -80,6 +84,8 @@ const SaleForm = () => {
                 onSubmit={form.handleSubmit(handleSubmit)}
                 className="flex flex-col space-y-4 px-1 pt-2 pr-4"
             >
+                <DatePicker name="order_date" label='Order Date' />
+
                 <SelectWarehouse
                     name="warehouse_id"
                     label="Warehouse"

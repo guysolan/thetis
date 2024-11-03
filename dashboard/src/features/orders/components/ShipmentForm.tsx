@@ -13,6 +13,8 @@ import { shipmentFormSchema } from "../schema";
 import { useCreateOrder } from "../api/createOrder";
 import { useShipmentForm } from "../hooks/useShipmentForm";
 import LockCard from "./LockCard";
+import dayjs from 'dayjs';
+import DatePicker from '../../../components/DatePicker';
 
 const ShipmentForm = () => {
     const form = useForm<z.infer<typeof shipmentFormSchema>>({
@@ -23,6 +25,8 @@ const ShipmentForm = () => {
                 item_id: "",
                 quantity_change: 1,
             }],
+            order_date: dayjs().toDate(),
+
             to_items: [],
             from_items: [],
             order_type: "shipment", // Add default order type
@@ -101,6 +105,8 @@ const ShipmentForm = () => {
                 onSubmit={form.handleSubmit(handleSubmit)}
                 className="flex flex-col space-y-4 px-1 pt-2 pr-4"
             >
+                <DatePicker name="order_date" label='Order Date' />
+
                 <SelectWarehouse
                     name="from_warehouse_id"
                     label="From Warehouse"
