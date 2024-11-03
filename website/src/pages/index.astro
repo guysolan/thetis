@@ -6,15 +6,18 @@ import ThetisSchema from '@/schemas/ThetisSchema.astro'
 import Slide from '@/components/Slide.astro'
 import HalfCTA from '@/components/CTA/HalfCTA.astro'
 import '@/styles/global.css'
+import { Testimonials } from '../components/testimonials/Testimonials'
 ---
 
 <ThetisSchema slot="head" />
+
 
 <Layout
     title="Thetis Medical - Achilles Splint Specialists"
     description="Medical device company specialising in splints for injured Achilles Tendons. We sell an Achilles Rupture Night Splint and a Trauma Splint."
     image="https://thetismedical.com/images/night-splint.png"
 >
+    
     <main class="flex flex-col mx-auto w-full">
         <section class="landing">
             <div class="landing-para">
@@ -22,7 +25,7 @@ import '@/styles/global.css'
                     <h1>Achilles Splint Specialists</h1>
                     <a
                         href="./contact"
-                        class="landing explore home get-in-touch"
+                        class="explore get-in-touch home landing"
                         >Get in Touch</a
                     >
                 </div>
@@ -51,9 +54,9 @@ import '@/styles/global.css'
             </div>
         </section>
         <Slide title="Products (Patent Pending)" id="products">
-            <div class="w-full flex flex-col lg:flex-row">
-                <div class="info col">
-                    <h2 class="text-xl my-4">Night Splint</h2>
+            <div class="flex lg:flex-row flex-col w-full">
+                <div class="col info">
+                    <h2 class="my-4 text-xl">Night Splint</h2>
                     <p id="night-splint-desc">
                         The ONLY splint for Achilles rupture. Brings improved
                         sleep and makes recovery more comfortable.
@@ -67,13 +70,13 @@ import '@/styles/global.css'
                     <a
                         href="https://thetismedical.myshopify.com/"
                         target="_blank"
-                        class="explore order-night-home"
+                        class="order-night-home explore"
                         id="order-night-home">Buy Now</a
                     >
                     <!-- <a
                         href="https://www.amazon.co.uk/dp/B09N58H79F?ref=myi_title_dp&th=1"
                         target="_blank"
-                        class="explore order-night-home"
+                        class="order-night-home explore"
                         id="order-night-home">Buy Now</a
                     > -->
                     <div class="learn-more">
@@ -82,8 +85,8 @@ import '@/styles/global.css'
                         </a>
                     </div>
                 </div>
-                <div class="info col">
-                    <h2 class="text-xl my-4">Trauma Splint</h2>
+                <div class="col info">
+                    <h2 class="my-4 text-xl">Trauma Splint</h2>
                     <p id="trauma-splint-desc">
                         A novel splint for hospitals to treat suspected Achilles
                         injury. Low cost and easy to apply.
@@ -94,7 +97,7 @@ import '@/styles/global.css'
                         alt="Trauma Splint Image"
                         loading="lazy"
                     />
-                    <a href="./contact" class="explore order-trauma-home"
+                    <a href="./contact" class="order-trauma-home explore"
                         >Order Now</a
                     >
                     <div class="learn-more">
@@ -107,8 +110,8 @@ import '@/styles/global.css'
         </Slide>
 
         <Slide title="Process" id="process">
-            <div class="info-wrap wholesale row">
-                <div class="info col">
+            <div class="info-wrap row wholesale">
+                <div class="col info">
                     <img
                         loading="lazy"
                         class="process-arrow"
@@ -128,7 +131,7 @@ import '@/styles/global.css'
                         wanted a solution.
                     </p>
                 </div>
-                <div class="info col">
+                <div class="col info">
                     <img
                         loading="lazy"
                         class="process-arrow"
@@ -146,7 +149,7 @@ import '@/styles/global.css'
                         refine the splint's shape and materials.
                     </p>
                 </div>
-                <div class="info col">
+                <div class="col info">
                     <img
                         loading="lazy"
                         class="process-arrow"
@@ -172,11 +175,11 @@ import '@/styles/global.css'
             title="Performance"
             paragraph="Results of the user focused study demonstrated the splint's performance:"
         >
-            <div class="info-wrap row fractions md:gap-x-4">
-                <div class="info col bg-primary/50 w-full !rounded-xl">
+            <div class="md:gap-x-4 fractions info-wrap row">
+                <div class="bg-primary/50 !rounded-xl w-full col info">
                     <div class="fraction-title">
                         <h3>Stability and Security</h3>
-                        <div class="fraction divider"></div>
+                        <div class="divider fraction"></div>
                     </div>
                     <img
                         loading="lazy"
@@ -185,10 +188,10 @@ import '@/styles/global.css'
                         alt="fraction 9.0/10 image"
                     />
                 </div>
-                <div class="info col bg-primary/50 w-full !rounded-xl">
+                <div class="bg-primary/50 !rounded-xl w-full col info">
                     <div class="fraction-title">
                         <h3>Ease of Application</h3>
-                        <div class="fraction divider"></div>
+                        <div class="divider fraction"></div>
                     </div>
                     <img
                         loading="lazy"
@@ -197,10 +200,10 @@ import '@/styles/global.css'
                         alt="fraction 8.6/10 image"
                     />
                 </div>
-                <div class="info col bg-primary/50 w-full !rounded-xl">
+                <div class="bg-primary/50 !rounded-xl w-full col info">
                     <div class="fraction-title">
                         <h3>Material<br />Comfort</h3>
-                        <div class="fraction divider"></div>
+                        <div class="divider fraction"></div>
                     </div>
                     <img
                         loading="lazy"
@@ -216,8 +219,8 @@ import '@/styles/global.css'
             title="Wholesale and Distribution"
             paragraph="Supply contracts are available to:"
         >
-            <div class="info-wrap wholesale row">
-                <div class="info col wholesale">
+            <div class="info-wrap row wholesale">
+                <div class="col info wholesale">
                     <img
                         loading="lazy"
                         src="/images/hospital.svg"
@@ -225,7 +228,7 @@ import '@/styles/global.css'
                     />
                     <h3>Hospitals</h3>
                 </div>
-                <div class="info col wholesale">
+                <div class="col info wholesale">
                     <img
                         loading="lazy"
                         src="/images/pharmacy.svg"
@@ -233,7 +236,7 @@ import '@/styles/global.css'
                     />
                     <h3>Pharmacies</h3>
                 </div>
-                <div class="info col wholesale">
+                <div class="col info wholesale">
                     <img
                         loading="lazy"
                         src="/images/insurance.svg"
@@ -243,7 +246,7 @@ import '@/styles/global.css'
                 </div>
             </div>
             <div class="preorder">
-                <a href="./contact" class="explore preorder order-wholesale"
+                <a href="./contact" class="order-wholesale explore preorder"
                     >Get a Quote</a
                 >
             </div>
@@ -258,7 +261,7 @@ import '@/styles/global.css'
                 <!-- <img class='uk-map' src="/images/GB-flag.svg" alt="GB-Flag"> -->
                 <img
                     loading="lazy"
-                    class="uk-map !max-h-[60vh] md:mt-4"
+                    class="md:mt-4 !max-h-[60vh] uk-map"
                     src="/images/UK.svg"
                     alt="UK Map of Sites"
                 />

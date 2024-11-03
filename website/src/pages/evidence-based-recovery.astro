@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import AchillesDrawing from '../assets/drawings/achilles-drawing.svg'
+import Image from 'astro/components/Image.astro'
 ---
 
 <Layout
@@ -17,12 +19,12 @@ import Layout from '../layouts/Layout.astro'
                     data.
                 </b>
                 <div class="go-to-subscribe">
-                    <a href="./contact" class="explore go-to-subscribe"
+                    <a href="./contact" class="go-to-subscribe explore"
                         >Get in Touch</a
                     >
                 </div>
             </div>
-            <img src="/images/achilles-drawing.svg" alt="achilles-drawing" />
+            <Image src={AchillesDrawing} alt="achilles-drawing" />
         </section>
         <div class="scroll">
             <a href="#products">
@@ -30,7 +32,7 @@ import Layout from '../layouts/Layout.astro'
             </a>
         </div>
         <section id="natural-healing" class="article-wrap">
-            <div class="slide-title faq evidence">
+            <div class="evidence faq slide-title">
                 <h2>
                     Surgery is not always required for Achilles Tendon Rupture
                 </h2>
@@ -55,12 +57,12 @@ import Layout from '../layouts/Layout.astro'
                     <a
                         href="https://online.boneandjoint.org.uk/doi/full/10.1302/0301-620X.97B4.35314"
                         target="_blank"
-                        class="article explore evidence">Read Article</a
+                        class="article evidence explore">Read Article</a
                     >
                 </div>
             </div>
             <section id="natural-healing" class="article-wrap">
-                <div class="slide-title faq evidence">
+                <div class="evidence faq slide-title">
                     <h2>
                         Platelet Rich Plasma (PRP) for fast and reliable
                         Achilles Rupture Recovery? Not yet.
@@ -95,7 +97,7 @@ import Layout from '../layouts/Layout.astro'
                         <a
                             href="https://online.boneandjoint.org.uk/doi/full/10.1302/0301-620X.104B11.BJJ-2022-0653.R1"
                             target="_blank"
-                            class="article explore evidence">Read Article</a
+                            class="article evidence explore">Read Article</a
                         >
                     </div>
                 </div>

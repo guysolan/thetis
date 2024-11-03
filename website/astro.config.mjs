@@ -39,9 +39,6 @@ export default defineConfig({
             applyBaseStyles: false,
         }),
     ],
-    experimental: {
-        assets: true,
-    },
     output: 'server',
     adapter: vercel(),
 })
