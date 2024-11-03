@@ -163,6 +163,7 @@ const ItemsPage = () => {
                           description={`Make changes to the ${item.item_name} details here. Click save when you're done.`}
                         >
                           <ItemComponentsForm
+                            itemId={item.item_id}
                             defaultValues={{
                               item_components: item.components.map((ic) => ({
                                 component_quantity: (ic.component_quantity),

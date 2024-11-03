@@ -38,8 +38,9 @@ const formSchema = z.object({
 export type ItemFormData = z.infer<typeof formSchema>;
 
 function ItemComponentsForm({
+	itemId,
 	defaultValues,
-}: { defaultValues?: ItemFormData }) {
+}: { itemId: number; defaultValues?: ItemFormData }) {
 	const { data: itemsView } = useSelectItemsView();
 	const { mutate: upsertItem } = useUpsertItemComponents();
 
@@ -115,8 +116,7 @@ function ItemComponentsForm({
 						append({
 							component_id: "",
 							component_quantity: "1",
-							item_id: defaultValues?.item_components[0]
-								?.item_id || "",
+							item_id: String(itemId),
 						})}
 				>
 					Add Component
