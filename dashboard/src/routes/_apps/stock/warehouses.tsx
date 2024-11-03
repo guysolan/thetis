@@ -76,9 +76,11 @@ const ItemsPage = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {(warehouse.items as any)?.map((wp: any) => (
-                    <TableRow key={`item-${wp.item_id}`}>
-                      <TableCell>
+                  {(warehouse.items as any)
+                    ?.filter((item: any) => item.item_quantity > 0)
+                    ?.map((wp: any) => (
+                      <TableRow key={`item-${wp.item_id}`}>
+                        <TableCell>
                         <Badge className="capitalize" variant="default">
                           {wp.item_type}
                         </Badge>
