@@ -6,20 +6,12 @@ import Select from "@/components/Select";
 import Input from "@/components/Input";
 import { Form } from "@/components/ui/form";
 import { useUpsertItem } from "../api/upsertItem";
-import { useSelectItemById } from "../api/selectItemById";
-import {
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from "@/components/ui/form";
 import { ItemView } from "../types";
 const itemFormSchema = z.object({
 	id: z.number().optional(),
 	price: z.number().positive(),
 	name: z.string().min(1, "Name required"),
-	type: z.enum(["product", "part"]),
+	type: z.enum(["product", "part", "service"]),
 });
 
 export type ItemFormT = z.infer<typeof itemFormSchema>;
