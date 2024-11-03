@@ -13,9 +13,11 @@ export const selectOrders = async () => {
   return data;
 };
 
+export const selectOrdersQueryKey = { queryKey: ["select-orders"] };
+
 export const selectOrdersQueryOptions = () => {
   return queryOptions({
-    queryKey: ["select-orders"],
+    ...selectOrdersQueryKey,
     queryFn: selectOrders,
   });
 };

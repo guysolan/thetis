@@ -1,14 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
-import { Database } from "../../../database.types";
-type InsertItem = Database["public"]["Tables"]["items"]["Insert"];
+import { InsertItem, ItemRow } from "../types";
 
-const upsertItem = async (item: InsertItem) => {
+export const upsertItem = async (item: InsertItem): Promise<ItemRow> => {
   const { data, error } = await supabase
     .from("items")
     .upsert(item)
-    .select();
+    .select().single();
 
   if (error) {
     throw error;
@@ -22,7 +21,7 @@ export const useUpsertItem = () => {
 
   return useMutation({
     mutationFn: async (item: InsertItem) => upsertItem(item),
-    onError: (error) => {
+    onError: () => {
       toast.error("Error saving item");
     },
     onSuccess: () => {

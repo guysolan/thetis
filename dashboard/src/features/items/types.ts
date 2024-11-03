@@ -1,4 +1,8 @@
 import { Database } from "../../database.types";
+export type Item = Database["public"]["Tables"]["items"];
+export type ItemRow = Item["Row"];
+export type InsertItem = Item["Insert"];
+
 export type ItemType = Database["public"]["Enums"]["item_type"];
 export type ItemView = Database["public"]["Views"]["items_view"]["Row"] & {
     item_id: number;

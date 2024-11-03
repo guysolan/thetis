@@ -9,15 +9,17 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
 
-type DeleteDialogProps = { deleteFunction: ()=>void };
+type DeleteDialogProps = {
+    deleteFunction: () => void;
+    trigger?: React.ReactNode;
+};
 
-const DeleteDialog = ({ deleteFunction }: DeleteDialogProps) => {
+const DeleteDialog = ({ deleteFunction, trigger }: DeleteDialogProps) => {
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <Button variant="destructive">Delete</Button>
+                {trigger}
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
@@ -25,13 +27,13 @@ const DeleteDialog = ({ deleteFunction }: DeleteDialogProps) => {
                         Are you absolutely sure?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                        This action cannot be undone and will delete the 
-                        and any relations to products.
+                        This action cannot be undone and will delete the and any
+                        relations to products.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={deleteFunction}>
+                    <AlertDialogAction variant="destructive" onClick={deleteFunction}>
                         Continue
                     </AlertDialogAction>
                 </AlertDialogFooter>

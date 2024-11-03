@@ -96,7 +96,7 @@ const ItemsPage = () => {
                 title="New Stocktake"
                 description={`Update the stock for warehouse ${warehouse.warehouse_name}`}
               >
-                <StocktakeForm warehouseId={warehouse.warehouse_id} />
+                <StocktakeForm warehouseId={warehouse.warehouse_id as number} />
               </Sheet>
             </CardFooter>
           </Card>
