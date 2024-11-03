@@ -62,9 +62,7 @@ const ItemsPage = () => {
                 </Sheet>
               </div>
             </CardHeader>
-            {item.item_type === 'product' &&
-              item.components &&
-              item.components.length > 0 && (
+            {item.item_type === 'product' &&(
                 <CardContent className="flex-grow">
                   <Table className="mt-4">
                     <TableHeader>
