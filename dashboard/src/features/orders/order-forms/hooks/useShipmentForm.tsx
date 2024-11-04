@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { Control, UseFormSetValue, useWatch } from "react-hook-form";
-import { useSelectWarehouseItems } from "../../warehouses/api/selectWarehouseItems";
-import { useSelectItemsView } from "../../items/api/selectItemsView";
+import { useSelectWarehouseItems } from "../../../warehouses/api/selectWarehouseItems";
+import { useSelectItemsView } from "../../../items/api/selectItemsView";
 import { ItemChange, OrderItem } from "../schema";
-import { ItemView } from "../../items/types";
+import { ItemView } from "../../../items/types";
 
-export const useSaleForm = (
+export const useShipmentForm = (
     control: Control<any>,
     setValue: UseFormSetValue<any>,
 ) => {
@@ -19,20 +19,20 @@ export const useSaleForm = (
         if (
             !orderItems?.length || !items
         ) {
-            setValue("consumed_items", []);
+            setValue("from_items", []);
             return;
         }
 
         // Calculate consumed items based on order items
-        const consumedItems = processOrderItems({
+        const { fromItems, toItems } = processOrderItems({
             orderItems,
             items,
         });
 
-        console.log(consumedItems);
+        console.log(fromItems);
 
-        // Update form with consumed items
-        setValue("consumed_items", consumedItems);
+        setValue("from_items", fromItems);
+        setValue("to_items", toItems);
     }, [orderItems, items, warehouseItems]);
 };
 
@@ -41,27 +41,36 @@ const processOrderItems = ({
     orderItems,
     items,
 }: {
-    orderItems:OrderItem[];
+    orderItems: OrderItem[];
     items: ItemView[];
-}) => {
-    if (!orderItems?.length) return [];
+}): { fromItems: ItemChange[]; toItems: ItemChange[] } => {
+    if (!orderItems?.length) return { fromItems: [], toItems: [] };
 
-    const consumedItems: ItemChange[] = [];
+    const fromItems: ItemChange[] = [];
+    const toItems: ItemChange[] = [];
 
     for (const orderItem of orderItems) {
         const item = items?.find(
             (w) => String(w.item_id) === String(orderItem.item_id),
         );
 
-        consumedItems.push({
+        fromItems.push({
             item_id: String(orderItem.item_id),
             item_name: item?.item_name,
             item_type: item?.item_type || "product",
             quantity_change: -Number(orderItem.quantity_change),
         });
+
+        toItems.push({
+            item_id: String(orderItem.item_id),
+            item_name: item?.item_name,
+            item_type: item?.item_type || "product",
+            quantity_change: Number(orderItem.quantity_change),
+        });
     }
 
-    console.log(consumedItems);
+    console.log(fromItems);
+    console.log(toItems);
 
-    return consumedItems;
+    return { fromItems, toItems };
 };

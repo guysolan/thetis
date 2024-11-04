@@ -1,6 +1,6 @@
 import React from "react";
 import { useStocktakeDiscrepancy } from "../hooks/useStocktakeDiscrepency";
-import NumberCell from '../../../components/NumberCell';
+import NumberCell from '../../../../components/NumberCell';
 
 import {
   Table,
@@ -9,9 +9,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../../components/ui/table";
-import { useSelectItemsView } from '../../items/api/selectItemsView';
-import { ItemView } from '../../items/types';
+} from "../../../../components/ui/table";
+import { useSelectItemsView } from '../../../items/api/selectItemsView';
+import { ItemView } from '../../../items/types';
 
 export const StocktakeDiscrepancy: React.FC = () => {
 	const {data: itemsView} = useSelectItemsView();

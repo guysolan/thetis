@@ -1,10 +1,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import PurchaseForm from './PurchaseForm';
-import SaleForm from './SaleForm';
-import BuildForm from './BuildForm';
+import PurchaseForm from '../order-forms/components/PurchaseForm';
+import SaleForm from '../order-forms/components/SaleForm';
+import BuildForm from '../order-forms/components/BuildForm';
 import { Banknote, Hammer, ShoppingCart, Truck } from 'lucide-react';
-import ShipmentForm from './ShipmentForm';
+import ShipmentForm from '../order-forms/components/ShipmentForm';
 
 export const OrderForm: React.FC = () => {
 	

@@ -14,7 +14,7 @@ import { useSelectWarehouseItems } from "@/features/warehouses/api/selectWarehou
 import Select from "@/components/Select";
 import Input from "@/components/Input";
 import NumberCell from "@/components/NumberCell";
-import SelectItemType from '../../../components/SelectItem';
+import SelectItemType from '../../../../components/SelectItem';
 
 const ProducedItems = () => {
     const { data: items } = useSelectItemsView();

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const orderItemSchema = z.object({
     item_id: z.string().min(1, "Please select an item"),
-    quantity_change: z.coerce.number().min(1, "Quantity must be at least 1"),
+    quantity_change: z.coerce.number().min(0, "Quantity must be at least 1"),
     item_price: z.coerce.number().optional(),
     item_tax: z.coerce.number().optional(),
     item_type: z.enum(["product", "part", "service"]).optional(),
@@ -65,7 +65,7 @@ export const purchaseFormSchema = z.object({
 export const buildFormSchema = z.object({
     warehouse_id: z.string().min(1, "Please select a warehouse"),
     order_date: z.date(),
-    order_type: z.enum(["purchase", "sale"]), // Add validation for order_type
+    order_type: z.enum(["build"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
     produced_items: z.array(pricedItemSchema),
     consumed_items: z.array(pricedItemSchema),

@@ -4,20 +4,13 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { OrderView } from "../types";
 import { Separator } from "../../../components/ui/separator";
 import DeleteOrder from "./DeleteOrder";
 import { ExternalLink } from "lucide-react";
 import dayjs from "dayjs";
+import OrderBreakdown from '../order-history/components/OrderBreakdown';
 
 interface ExistingOrdersProps {
 	orders: OrderView[];
@@ -82,51 +75,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 							</div>
 						</AccordionTrigger>
 						<AccordionContent className="px-4">
-							<Table className="text-left">
-								<TableHeader>
-									<TableRow>
-										<TableHead>Item Name</TableHead>
-										<TableHead>Warehouse Name</TableHead>
-										<TableHead>Price</TableHead>
-										<TableHead>Quantity</TableHead>
-										<TableHead>Total</TableHead>
-									</TableRow>
-								</TableHeader>
-								<TableBody>
-									{order.items.sort((a, b) =>
-										a.item_id - b.item_id
-									).filter((item) =>
-										Number(item?.price) !== 0
-									).map((
-										item,
-									) => (
-										<TableRow
-											className="text-left"
-											key={`${item.item_id}-${item.item_name}`}
-										>
-											<TableCell>
-												{item.item_name}
-											</TableCell>
-											<TableCell>
-												{item.warehouse_name}
-											</TableCell>
-											<TableCell>
-												${item.price?.toFixed(2) ??
-													0.00}
-											</TableCell>
-											<TableCell>
-												{order.order_type === "sale"
-													? item.quantity * -1
-													: item.quantity}
-											</TableCell>
-											<TableCell>
-												${item.total?.toFixed(2) ??
-													0.00}
-											</TableCell>
-										</TableRow>
-									))}
-								</TableBody>
-							</Table>
+							<OrderBreakdown order={order} />
 						</AccordionContent>
 					</AccordionItem>
 				))}

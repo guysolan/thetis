@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lock, Unlock } from "lucide-react";
-import OrderItems from "./OrderItems";
+import OrderItems from "../order-forms/components/OrderItems";
 import { cn } from "../../../lib/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../components/ui/select';
 

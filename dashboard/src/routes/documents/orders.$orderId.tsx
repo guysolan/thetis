@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import {
   selectOrderByIdQueryOptions,
-} from '@/features/orders/api/selectOrderById'
+} from '@/features/orders/order-history/api/selectOrderById'
 
 const OrdersPage = () => {
   const { order } = Route.useLoaderData()

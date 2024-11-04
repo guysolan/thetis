@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { Button } from '@/components/ui/button'
 import Sheet from '@/components/Sheet'
-import { useSelectOrders } from '@/features/orders/api/selectOrders'
+import { useSelectOrders } from '@/features/orders/order-history/api/selectOrders'
 import { useSelectItemsView } from '@/features/items/api/selectItemsView'
 
 import { OrderForm } from '@/features/orders/components/OrderForm'
