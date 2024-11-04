@@ -9,7 +9,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
+import { Trash, Copy } from "lucide-react";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView";
 import Select from "@/components/Select";
 import Input from "@/components/Input";
@@ -64,8 +64,11 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
         return Number(total).toFixed(2);
     };
 
-    
-  
+    const copyRow = (index: number) => {
+        const itemToCopy = form.getValues(`order_items.${index}`);
+        append({ ...itemToCopy });
+    };
+
     return (
         <>
             <Table>
@@ -128,14 +131,24 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
                                 </TableCell>
                             )}
                             <TableCell>
-                                <Button
-                                    type="button"
-                                    onClick={() => remove(index)}
-                                    variant="destructive"
-                                    className="px-2"
-                                >
-                                    <Trash size={20} />
-                                </Button>
+                                <div className="flex gap-2">
+                                    <Button
+                                        type="button"
+                                        onClick={() => copyRow(index)}
+                                        variant="secondary"
+                                        className="px-2"
+                                    >
+                                        <Copy size={20} />
+                                    </Button>
+                                    <Button
+                                        type="button"
+                                        onClick={() => remove(index)}
+                                        variant="destructive"
+                                        className="px-2"
+                                    >
+                                        <Trash size={20} />
+                                    </Button>
+                                </div>
                             </TableCell>
                         </TableRow>
                     ))}
