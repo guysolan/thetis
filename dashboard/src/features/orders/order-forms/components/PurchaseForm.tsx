@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
 import SelectWarehouse from "../../../warehouses/components/SelectWarehouse";
-import OrderItems from "@/features/orders/order-forms/components/OrderItems";
+import PriceItems from "@/features/orders/order-forms/components/PriceItems";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { purchaseFormSchema } from "../schema";
 import { useCreateOrder } from "../../api/createOrder";
@@ -71,7 +71,7 @@ const PurchaseForm = () => {
                                 <CardTitle>Order Items</CardTitle>
                             </CardHeader>
                             <CardContent>
-                <OrderItems showPrice={true} />
+                <PriceItems showPrice={true} />
                         
                             </CardContent>
                         </Card>

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import OrderItems from "@/features/orders/order-forms/components/OrderItems";
+import PriceItems from "@/features/orders/order-forms/components/PriceItems";
 import { OrderItem, orderItemsSchema } from "@/features/orders/order-forms/schema";
 import { z } from "zod";
 import StocktakeDiscrepancy from "./StockDiscrepency";
@@ -64,7 +64,7 @@ const StocktakeForm = ({ warehouseId, orderItems }: Props) => {
 						<CardTitle>Stocktake</CardTitle>
 					</CardHeader>
 					<CardContent>
-						<OrderItems />
+						<PriceItems />
 					</CardContent>
 				</Card>
 				<Button type="submit">Save Changes</Button>

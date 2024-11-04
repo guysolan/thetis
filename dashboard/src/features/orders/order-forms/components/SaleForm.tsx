@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form, FormLabel } from "@/components/ui/form";
 import SelectWarehouse from "../../../warehouses/components/SelectWarehouse";
-import OrderItems from "@/features/orders/order-forms/components/OrderItems";
-import ItemsTable from "./ItemsTable";
+import PriceItems from "@/features/orders/order-forms/components/PriceItems";
+import StockItems from "./StockItems";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { usePurchaseForm } from "../hooks/usePurchaseForm";
@@ -100,11 +100,11 @@ const SaleForm = () => {
                                 <CardTitle>Order Items</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <OrderItems showPrice={true} />
+                                <PriceItems showPrice={true} />
                             </CardContent>
                         </Card>
                         <LockCard title="Consumed Items">
-                            <ItemsTable name="consumed_items" />
+                            <StockItems name="consumed_items" />
                         </LockCard>
                         <Button
                             onClick={() => {

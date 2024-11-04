@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
 import SelectWarehouse from "../../../warehouses/components/SelectWarehouse";
-import OrderItems from "@/features/orders/order-forms/components/OrderItems";
-import ItemsTable from "./ItemsTable";
+import PriceItems from "@/features/orders/order-forms/components/PriceItems";
+import StockItems from "./StockItems";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
     Accordion,
@@ -122,14 +122,14 @@ const BuildForm = () => {
                                 <CardTitle>Produced Items</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <ItemsTable name="produced_items" />
+                                <StockItems name="produced_items" />
                             </CardContent>
                         </Card>
                         <LockCard title="Order Items">
-                            <OrderItems showPrice={true} />
+                            <PriceItems showPrice={true} />
                         </LockCard>
                         <LockCard title="Consumed Items">
-                            <ItemsTable name="consumed_items" />
+                            <StockItems name="consumed_items" />
                         </LockCard>
                     </>
                 )}

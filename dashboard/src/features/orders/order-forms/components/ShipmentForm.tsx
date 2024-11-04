@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
 import SelectWarehouse from "../../../warehouses/components/SelectWarehouse";
-import OrderItems from "@/features/orders/order-forms/components/OrderItems";
-import ItemsTable from "./ItemsTable";
+import PriceItems from "@/features/orders/order-forms/components/PriceItems";
+import StockItems from "./StockItems";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { shipmentFormSchema } from "../schema";
@@ -126,13 +126,13 @@ const ShipmentForm = () => {
                                 <CardTitle>Order Items</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <OrderItems showPrice={false} />
+                                <PriceItems showPrice={false} />
                             </CardContent>
                         </Card>
                         <LockCard
                             title={<SelectWarehouse name="from_warehouse_id" />}
                         >
-                            <ItemsTable
+                            <StockItems
                                 warehouse_name="from_warehouse_id"
                                 name="from_items"
                             />
@@ -143,7 +143,7 @@ const ShipmentForm = () => {
                                     <SelectWarehouse name="to_warehouse_id" />
                                 }
                             >
-                                <ItemsTable
+                                <StockItems
                                     name="to_items"
                                     warehouse_name="to_warehouse_id"
                                 />

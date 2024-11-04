@@ -15,7 +15,7 @@ import Select from "@/components/Select";
 import Input from "@/components/Input";
 import SelectItemType from "@/components/SelectItem";
 
-const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
+const PriceItems = ({ showPrice = false }: { showPrice?: boolean }) => {
     const { data: items } = useSelectItemsView();
 
     const form = useFormContext();
@@ -205,4 +205,4 @@ const OrderItems = ({ showPrice = false }: { showPrice?: boolean }) => {
     );
 };
 
-export default OrderItems;
+export default PriceItems;

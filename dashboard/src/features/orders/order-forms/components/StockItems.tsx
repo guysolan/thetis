@@ -8,7 +8,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
+import { Trash, Copy } from "lucide-react";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView";
 import { useSelectWarehouseItems } from "@/features/warehouses/api/selectWarehouseItems";
 import Select from "@/components/Select";
@@ -16,13 +16,13 @@ import Input from "@/components/Input";
 import NumberCell from "@/components/NumberCell";
 import SelectItemType from "@/components/SelectItem";
 
-interface ItemsTableProps {
+interface StockItemProps {
     name: "produced_items" | "consumed_items" | "from_items" | "to_items";
     warehouse_name?: "warehouse_id" | "from_warehouse_id" | "to_warehouse_id";
 }
 
-const ItemsTable = (
-    { name, warehouse_name = "warehouse_id" }: ItemsTableProps,
+const StockItems = (
+    { name, warehouse_name = "warehouse_id" }: StockItemProps,
 ) => {
     const { data: items } = useSelectItemsView();
     const { data: warehouseItems } = useSelectWarehouseItems();
@@ -67,6 +67,11 @@ const ItemsTable = (
         };
     };
 
+    const copyRow = (index: number) => {
+        const rowToCopy = form.getValues(`${name}.${index}`);
+        append({ ...rowToCopy });
+    };
+
     return (
         <>
             <Table>
@@ -78,7 +83,7 @@ const ItemsTable = (
                         <TableHead>Before</TableHead>
                         <TableHead>After</TableHead>
                         <TableHead>
-                            <span className="sr-only">Delete</span>
+                            <span className="sr-only">Actions</span>
                         </TableHead>
                     </TableRow>
                 </TableHeader>
@@ -123,14 +128,24 @@ const ItemsTable = (
                                     <NumberCell value={quantities.after} />
                                 </TableCell>
                                 <TableCell>
-                                    <Button
-                                        type="button"
-                                        onClick={() => remove(index)}
-                                        variant="destructive"
-                                        className="px-2"
-                                    >
-                                        <Trash size={20} />
-                                    </Button>
+                                    <div className="flex gap-2">
+                                        <Button
+                                            type="button"
+                                            onClick={() => copyRow(index)}
+                                            variant="secondary"
+                                            className="px-2"
+                                        >
+                                            <Copy size={20} />
+                                        </Button>
+                                        <Button
+                                            type="button"
+                                            onClick={() => remove(index)}
+                                            variant="destructive"
+                                            className="px-2"
+                                        >
+                                            <Trash size={20} />
+                                        </Button>
+                                    </div>
                                 </TableCell>
                             </TableRow>
                         );
@@ -169,4 +184,4 @@ const ItemsTable = (
     );
 };
 
-export default ItemsTable;
+export default StockItems;
