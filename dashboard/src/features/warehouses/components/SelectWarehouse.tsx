@@ -14,13 +14,16 @@ import {
   SelectValue,
 } from "../../../components/ui/select";
 import { useSelectWarehouses } from "../api/selectWarehouses";
+import { X } from "lucide-react";
+import { Button } from "../../../components/ui/button";
 
 interface Props {
   name?: string;
   label?: string;
+  isClearable?: boolean;
 }
 const SelectWarehouse = (
-  { name = "warehouse_id", label }: Props,
+  { name = "warehouse_id", label, isClearable }: Props,
 ) => {
   const form = useFormContext();
   const { data: warehouses } = useSelectWarehouses();
@@ -40,9 +43,23 @@ const SelectWarehouse = (
             value={field.value}
           >
             <FormControl>
-              <SelectTrigger>
-                <SelectValue placeholder="Select Warehouse" />
-              </SelectTrigger>
+              <div className="flex flex-row items-center gap-2">
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Warehouse" />
+                </SelectTrigger>
+               {isClearable&& <Button
+                  disabled={!field.value}
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    field.onChange(undefined);
+                  }}
+                  size="icon"
+                  variant="outline"
+                >
+                  <X size={20} />
+                </Button>}
+              </div>
             </FormControl>
             <SelectContent>
               {warehouses.map((w) => (

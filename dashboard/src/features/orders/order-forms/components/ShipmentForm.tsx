@@ -117,6 +117,7 @@ const ShipmentForm = () => {
                 <SelectWarehouse
                     name="to_warehouse_id"
                     label="To Warehouse"
+                    isClearable={true}
                 />
 
                 {fromWarehouseId && (
