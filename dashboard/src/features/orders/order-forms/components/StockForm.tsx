@@ -3,14 +3,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import PriceItems from "@/features/orders/order-forms/components/PriceItems";
-import { OrderItem, orderItemsSchema } from "@/features/orders/order-forms/schema";
+import { OrderItem } from "@/features/orders/order-forms/schema";
 import { z } from "zod";
 import StocktakeDiscrepancy from "./StockDiscrepency";
-import useStocktake from "../../../warehouses/api/stocktake";
 import { useCreateOrder } from "../../api/createOrder";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import dayjs from 'dayjs';
-import DatePicker from '../../../../components/DatePicker';
+import dayjs from "dayjs";
+import DatePicker from "@/components/DatePicker";
 interface Props {
 	warehouseId: number;
 	orderItems?: OrderItem[];
@@ -38,9 +37,9 @@ const StocktakeForm = ({ warehouseId, orderItems }: Props) => {
 
 	const onSubmit = async (formData: StocktakeFormT) => {
 		const stocktakeChanges = formData.change_quantity.map((item) => ({
-			item_id: Number(item.item_id),
+			item_id: (item.item_id),
 			quantity_change: Number(item.quantity_change),
-			warehouse_id: Number(formData.warehouse_id),
+			warehouse_id: (formData.warehouse_id),
 			item_price: 0,
 			item_tax: 0,
 		}));
@@ -57,7 +56,7 @@ const StocktakeForm = ({ warehouseId, orderItems }: Props) => {
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="flex flex-col space-y-4 mt-4"
 			>
-                <DatePicker name="order_date" label='Order Date' />
+				<DatePicker name="order_date" label="Order Date" />
 
 				<Card>
 					<CardHeader>

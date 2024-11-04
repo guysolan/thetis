@@ -49,7 +49,6 @@ export const shipmentFormSchema = z.object({
     order_type: z.enum(["shipment"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
     order_date: z.date(),
-
     from_items: z.array(itemSchema),
     to_items: z.array(itemSchema),
 });

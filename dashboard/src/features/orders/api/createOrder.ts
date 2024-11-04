@@ -2,7 +2,7 @@ import { toast } from "sonner";
 import { supabase } from "../../../lib/supabase";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-type OrderItemChange = {
+export type OrderItemChange = {
 	item_id: string;
 	quantity_change: number;
 	item_price: number;
