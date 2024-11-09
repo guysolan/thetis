@@ -22,5 +22,14 @@
   "deno.enablePaths": [
     "./supabase/functions/*"
   ],
-  "deno.importMap": "./supabase/functions/import_map.json"
+  "deno.importMap": "./supabase/functions/import_map.json",
+  "cSpell.words": [
+    "Edit",
+    "hookform",
+    "lucide",
+    "sonner",
+    "stocktake",
+    "supabase",
+    "tanstack"
+  ]
 }

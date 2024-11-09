@@ -293,83 +293,6 @@ export type Database = {
         }
         Relationships: []
       }
-      stocktake_item_changes: {
-        Row: {
-          item_change_id: number
-          stocktake_id: number
-        }
-        Insert: {
-          item_change_id: number
-          stocktake_id: number
-        }
-        Update: {
-          item_change_id?: number
-          stocktake_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "stocktake_item_changes_item_change_id_fkey"
-            columns: ["item_change_id"]
-            isOneToOne: false
-            referencedRelation: "item_changes"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "stocktake_item_changes_stocktake_id_fkey"
-            columns: ["stocktake_id"]
-            isOneToOne: false
-            referencedRelation: "stocktakes"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      stocktakes: {
-        Row: {
-          id: number
-          timestamp: string
-          warehouse_id: number
-        }
-        Insert: {
-          id?: number
-          timestamp?: string
-          warehouse_id: number
-        }
-        Update: {
-          id?: number
-          timestamp?: string
-          warehouse_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "stocktakes_warehouse_id_fkey"
-            columns: ["warehouse_id"]
-            isOneToOne: false
-            referencedRelation: "warehouse_inventory_value"
-            referencedColumns: ["warehouse_id"]
-          },
-          {
-            foreignKeyName: "stocktakes_warehouse_id_fkey"
-            columns: ["warehouse_id"]
-            isOneToOne: false
-            referencedRelation: "warehouse_items"
-            referencedColumns: ["warehouse_id"]
-          },
-          {
-            foreignKeyName: "stocktakes_warehouse_id_fkey"
-            columns: ["warehouse_id"]
-            isOneToOne: false
-            referencedRelation: "warehouses"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "stocktakes_warehouse_id_fkey"
-            columns: ["warehouse_id"]
-            isOneToOne: false
-            referencedRelation: "warehouses_view"
-            referencedColumns: ["warehouse_id"]
-          },
-        ]
-      }
       warehouses: {
         Row: {
           created_at: string
@@ -459,6 +382,12 @@ export type Database = {
         }
         Returns: number
       }
+      delete_order: {
+        Args: {
+          in_order_id: number
+        }
+        Returns: undefined
+      }
       insert_item_changes: {
         Args: {
           in_data: Json
@@ -473,6 +402,7 @@ export type Database = {
       insert_order: {
         Args: {
           in_order_type: string
+          in_order_date: string
           in_order_items: Json
         }
         Returns: {
@@ -485,25 +415,45 @@ export type Database = {
           item_tax: number
         }[]
       }
-      insert_order_item: {
-        Args: {
-          in_order_id: number
-          in_item_id: number
-          in_quantity_change: number
-          in_warehouse_id: number
-          in_item_price: number
-          in_item_tax: number
-        }
-        Returns: {
-          order_id: number
-          item_change_id: number
-          item_id: number
-          quantity_change: number
-          warehouse_id: number
-          item_price: number
-          item_tax: number
-        }[]
-      }
+      insert_order_item:
+        | {
+            Args: {
+              in_order_id: number
+              in_item_id: number
+              in_quantity_change: number
+              in_warehouse_id: number
+              in_item_price: number
+              in_item_tax: number
+            }
+            Returns: {
+              order_id: number
+              item_change_id: number
+              item_id: number
+              quantity_change: number
+              warehouse_id: number
+              item_price: number
+              item_tax: number
+            }[]
+          }
+        | {
+            Args: {
+              in_order_id: number
+              in_item_id: number
+              in_quantity_change: number
+              in_warehouse_id: number
+              in_item_price: number
+              in_item_tax: number
+            }
+            Returns: {
+              order_id: number
+              item_change_id: number
+              item_id: number
+              quantity_change: number
+              warehouse_id: number
+              item_price: number
+              item_tax: number
+            }[]
+          }
       insert_order_items: {
         Args: {
           in_data: Json
@@ -557,7 +507,7 @@ export type Database = {
     }
     Enums: {
       item_type: "product" | "part" | "service"
-      order_type: "purchase" | "sale" | "shipment" | "stocktake"
+      order_type: "purchase" | "sale" | "shipment" | "stocktake" | "build"
     }
     CompositeTypes: {
       [_ in never]: never

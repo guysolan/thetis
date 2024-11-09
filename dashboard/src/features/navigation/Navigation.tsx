@@ -50,11 +50,11 @@ const Navigation = () => {
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/">
-                <Home className="w-4 h-4" />
+                <Home size={20} />
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator>
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight size={20} />
             </BreadcrumbSeparator>
             {pathSegments.map((segment, index) => (
               <React.Fragment key={segment}>
@@ -69,7 +69,7 @@ const Navigation = () => {
                 </BreadcrumbItem>
                 {index < pathSegments.length - 1 && (
                   <BreadcrumbSeparator>
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight size={20} />
                   </BreadcrumbSeparator>
                 )}
               </React.Fragment>

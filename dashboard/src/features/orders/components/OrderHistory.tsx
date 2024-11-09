@@ -8,10 +8,20 @@ import { Badge } from "@/components/ui/badge";
 import { OrderView } from "../types";
 import { Separator } from "../../../components/ui/separator";
 import DeleteOrder from "./DeleteOrder";
-import { ExternalLink } from "lucide-react";
+import { Edit, ExternalLink, Trash, Trash2 } from "lucide-react";
 import dayjs from "dayjs";
-import OrderBreakdown from '../order-history/components/OrderBreakdown';
-
+import OrderBreakdown from "../order-history/components/OrderBreakdown";
+import Sheet from "../../../components/Sheet";
+import { OrderForm } from "./OrderForm";
+import EditOrderForm from "./EditOrderForm";
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "../../../components/ui/popover";
+import { Button } from "../../../components/ui/button";
+import { MoreVertical } from "lucide-react";
+import PopoverOption from "../../../components/PopoverOption";
 interface ExistingOrdersProps {
 	orders: OrderView[];
 }
@@ -32,17 +42,19 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 							<div className="flex justify-between items-start w-full">
 								<div className="flex flex-col gap-1 text-left">
 									<div className="flex flex-row items-center gap-2 font-medium text-lg">
-										<h2 className="underline-offset-2">Order {order.order_id}</h2>
+										<h2 className="underline-offset-2">
+											Order {order.order_id}
+										</h2>
 										<Badge variant="outline">
 											{order.order_type}
 										</Badge>
 									</div>
-								
+
 									<span className="font-light text-neutral-600 text-sm">
 										{dayjs(order.order_date as string)
 											.format("DD MMM YYYY")}
 									</span>
-										<span className="font-semibold text-neutral-800">
+									<span className="font-semibold text-neutral-800">
 										${order.total_value?.toFixed(2) ??
 											"0.00"}
 									</span>
@@ -58,19 +70,54 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 										<span className="sr-only md:not-sr-only">
 											Open in new tab
 										</span>
-										<ExternalLink className="w-4 h-4" />
+										<ExternalLink size={20} />
 									</a>
 									<Separator
 										orientation="vertical"
 										className="h-4"
 									/>
-									<div onClick={(e) => e.stopPropagation()}>
-										{/* Add this wrapper */}
+									<Popover>
+										<PopoverTrigger
+											onClick={(e) => e.stopPropagation()}
+											asChild
+										>
+											<Button variant="ghost" size="icon">
+												<MoreVertical size={20} />
+											</Button>
+										</PopoverTrigger>
+										<PopoverContent
+											align="end"
+											side="bottom"
+											className="flex flex-col gap-1 p-1"
+										>
+											<Sheet
+												trigger={
+													<PopoverOption>
+														<Edit size={20} />Edit
+													</PopoverOption>
+												}
+												title="Edit Order"
+											>
+												<EditOrderForm order={order} />
+											</Sheet>
+											<div
+												onClick={(e) =>
+													e.stopPropagation()}
+											>
+												{/* Add this wrapper */}
 
-										<DeleteOrder
-											orderId={order.order_id as number}
-										/>
-									</div>
+												<DeleteOrder
+													trigger={
+														<PopoverOption variant="destructive">
+															<Trash2  size={20}/>Delete
+														</PopoverOption>
+													}
+													orderId={order
+														.order_id as number}
+												/>
+											</div>
+										</PopoverContent>
+									</Popover>
 								</div>
 							</div>
 						</AccordionTrigger>

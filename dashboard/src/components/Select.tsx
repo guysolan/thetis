@@ -32,13 +32,13 @@ const Select = ({ name, label, options }: SelectProps) => {
                     </FormLabel>
                     <SelectWrap onValueChange={field.onChange} value={field.value}>
                         <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="capitalize" >
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>
                             {options.map((o) => (
-                                <SelectItem key={o.value} value={o.value}>
+                                <SelectItem className="capitalize" key={o.value} value={o.value}>
                                     {o.label}
                                 </SelectItem>
                             ))}

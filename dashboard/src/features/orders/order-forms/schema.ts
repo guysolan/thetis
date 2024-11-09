@@ -42,6 +42,12 @@ export const saleFormSchema = z.object({
     consumed_items: z.array(pricedItemSchema),
 });
 
+// Edit order Schema
+export const editOrderSchema = z.object({
+    order_type: z.enum(["sale", "shipment", "build", "purchase", "stocktake"]),
+    order_date: z.date(),
+});
+
 // Move schemas to a separate file: schemas.ts
 export const shipmentFormSchema = z.object({
     from_warehouse_id: z.string().min(1, "Please select a warehouse"),

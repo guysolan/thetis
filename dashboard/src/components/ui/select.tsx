@@ -128,7 +128,7 @@ const SelectItem = React.forwardRef<
 	>
 		<span className="right-2 absolute flex justify-center items-center w-3.5 h-3.5">
 			<SelectPrimitive.ItemIndicator>
-				<CheckIcon className="w-4 h-4" />
+				<CheckIcon size={20} />
 			</SelectPrimitive.ItemIndicator>
 		</span>
 		<SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>

@@ -11,21 +11,25 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Trash2 } from "lucide-react";
 import { useDeleteOrder } from "../api/deleteOrder";
+import { buttonVariants } from "../../../components/ui/button";
+import { cn } from "../../../lib/utils";
 
 interface DeleteOrderModalProps {
     orderId: number;
+    trigger: React.ReactNode;
 }
 
-const DeleteOrder: React.FC<DeleteOrderModalProps> = ({ orderId }) => {
+const DeleteOrder: React.FC<DeleteOrderModalProps> = ({ orderId, trigger }) => {
     const { mutate: deleteOrder } = useDeleteOrder();
 
     return (
-        <AlertDialog>
+        <AlertDialog >
             <AlertDialogTrigger
-                className="text-red-500 transition-all duration-300"
+                className='w-full'
+                asChild
                 onClick={(e) => e.stopPropagation()}
             >
-                <Trash2 className="w-4 h-4" />
+                {trigger}
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
