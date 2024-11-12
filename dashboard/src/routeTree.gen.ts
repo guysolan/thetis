@@ -10,288 +10,282 @@
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as DocumentsImport } from "./routes/documents";
-import { Route as AppsImport } from "./routes/_apps";
-import { Route as IndexImport } from "./routes/index";
-import { Route as AppsStockImport } from "./routes/_apps/stock";
-import { Route as AppsFinancesImport } from "./routes/_apps/finances";
-import { Route as AppsStockIndexImport } from "./routes/_apps/stock/index";
-import { Route as DocumentsOrdersOrderIdImport } from "./routes/documents/orders.$orderId";
-import { Route as AppsStockWarehousesImport } from "./routes/_apps/stock/warehouses";
-import { Route as AppsStockSettingsImport } from "./routes/_apps/stock/settings";
-import { Route as AppsStockOrdersImport } from "./routes/_apps/stock/orders";
-import { Route as AppsStockItemsImport } from "./routes/_apps/stock/items";
-import { Route as AppsFinancesAmazonIndexImport } from "./routes/_apps/finances/amazon/index";
-import { Route as AppsFinancesAccountsInstructionsImport } from "./routes/_apps/finances/accounts/instructions";
-import { Route as AppsFinancesAmazonSettlementsIndexImport } from "./routes/_apps/finances/amazon/settlements/index";
-import { Route as AppsFinancesAmazonYearMonthImport } from "./routes/_apps/finances/amazon/$year.$month";
-import { Route as AppsFinancesAmazonSettlementsRegionIndexImport } from "./routes/_apps/finances/amazon/settlements/$region/index";
-import { Route as AppsFinancesAmazonSettlementsRegionXmlImport } from "./routes/_apps/finances/amazon/settlements/$region/xml";
-import { Route as AppsFinancesAmazonSettlementsRegionSummaryImport } from "./routes/_apps/finances/amazon/settlements/$region/summary";
-import { Route as AppsFinancesAmazonSettlementsRegionReportImport } from "./routes/_apps/finances/amazon/settlements/$region/report";
+import { Route as rootRoute } from './routes/__root'
+import { Route as DocumentsImport } from './routes/documents'
+import { Route as AppsImport } from './routes/_apps'
+import { Route as IndexImport } from './routes/index'
+import { Route as AppsStockImport } from './routes/_apps/stock'
+import { Route as AppsFinancesImport } from './routes/_apps/finances'
+import { Route as AppsStockIndexImport } from './routes/_apps/stock/index'
+import { Route as DocumentsOrdersOrderIdImport } from './routes/documents/orders.$orderId'
+import { Route as AppsStockWarehousesImport } from './routes/_apps/stock/warehouses'
+import { Route as AppsStockSettingsImport } from './routes/_apps/stock/settings'
+import { Route as AppsStockOrdersImport } from './routes/_apps/stock/orders'
+import { Route as AppsStockItemsImport } from './routes/_apps/stock/items'
+import { Route as AppsFinancesAmazonIndexImport } from './routes/_apps/finances/amazon/index'
+import { Route as AppsFinancesAccountsInstructionsImport } from './routes/_apps/finances/accounts/instructions'
+import { Route as AppsFinancesAmazonSettlementsIndexImport } from './routes/_apps/finances/amazon/settlements/index'
+import { Route as AppsFinancesAmazonYearMonthImport } from './routes/_apps/finances/amazon/$year.$month'
+import { Route as AppsFinancesAmazonSettlementsRegionIndexImport } from './routes/_apps/finances/amazon/settlements/$region/index'
+import { Route as AppsFinancesAmazonSettlementsRegionXmlImport } from './routes/_apps/finances/amazon/settlements/$region/xml'
+import { Route as AppsFinancesAmazonSettlementsRegionSummaryImport } from './routes/_apps/finances/amazon/settlements/$region/summary'
+import { Route as AppsFinancesAmazonSettlementsRegionReportImport } from './routes/_apps/finances/amazon/settlements/$region/report'
 
 // Create/Update Routes
 
 const DocumentsRoute = DocumentsImport.update({
-  path: "/documents",
+  path: '/documents',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const AppsRoute = AppsImport.update({
-  id: "/_apps",
+  id: '/_apps',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const IndexRoute = IndexImport.update({
-  path: "/",
+  path: '/',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const AppsStockRoute = AppsStockImport.update({
-  path: "/stock",
+  path: '/stock',
   getParentRoute: () => AppsRoute,
-} as any);
+} as any)
 
 const AppsFinancesRoute = AppsFinancesImport.update({
-  path: "/finances",
+  path: '/finances',
   getParentRoute: () => AppsRoute,
-} as any);
+} as any)
 
 const AppsStockIndexRoute = AppsStockIndexImport.update({
-  path: "/",
+  path: '/',
   getParentRoute: () => AppsStockRoute,
-} as any);
+} as any)
 
 const DocumentsOrdersOrderIdRoute = DocumentsOrdersOrderIdImport.update({
-  path: "/orders/$orderId",
+  path: '/orders/$orderId',
   getParentRoute: () => DocumentsRoute,
-} as any);
+} as any)
 
 const AppsStockWarehousesRoute = AppsStockWarehousesImport.update({
-  path: "/warehouses",
+  path: '/warehouses',
   getParentRoute: () => AppsStockRoute,
-} as any);
+} as any)
 
 const AppsStockSettingsRoute = AppsStockSettingsImport.update({
-  path: "/settings",
+  path: '/settings',
   getParentRoute: () => AppsStockRoute,
-} as any);
+} as any)
 
 const AppsStockOrdersRoute = AppsStockOrdersImport.update({
-  path: "/orders",
+  path: '/orders',
   getParentRoute: () => AppsStockRoute,
-} as any);
+} as any)
 
 const AppsStockItemsRoute = AppsStockItemsImport.update({
-  path: "/items",
+  path: '/items',
   getParentRoute: () => AppsStockRoute,
-} as any);
+} as any)
 
 const AppsFinancesAmazonIndexRoute = AppsFinancesAmazonIndexImport.update({
-  path: "/amazon/",
+  path: '/amazon/',
   getParentRoute: () => AppsFinancesRoute,
-} as any);
+} as any)
 
 const AppsFinancesAccountsInstructionsRoute =
   AppsFinancesAccountsInstructionsImport.update({
-    path: "/accounts/instructions",
+    path: '/accounts/instructions',
     getParentRoute: () => AppsFinancesRoute,
-  } as any);
+  } as any)
 
 const AppsFinancesAmazonSettlementsIndexRoute =
   AppsFinancesAmazonSettlementsIndexImport.update({
-    path: "/amazon/settlements/",
+    path: '/amazon/settlements/',
     getParentRoute: () => AppsFinancesRoute,
-  } as any);
+  } as any)
 
-const AppsFinancesAmazonYearMonthRoute = AppsFinancesAmazonYearMonthImport
-  .update({
-    path: "/amazon/$year/$month",
+const AppsFinancesAmazonYearMonthRoute =
+  AppsFinancesAmazonYearMonthImport.update({
+    path: '/amazon/$year/$month',
     getParentRoute: () => AppsFinancesRoute,
-  } as any);
+  } as any)
 
 const AppsFinancesAmazonSettlementsRegionIndexRoute =
   AppsFinancesAmazonSettlementsRegionIndexImport.update({
-    path: "/amazon/settlements/$region/",
+    path: '/amazon/settlements/$region/',
     getParentRoute: () => AppsFinancesRoute,
-  } as any);
+  } as any)
 
 const AppsFinancesAmazonSettlementsRegionXmlRoute =
   AppsFinancesAmazonSettlementsRegionXmlImport.update({
-    path: "/amazon/settlements/$region/xml",
+    path: '/amazon/settlements/$region/xml',
     getParentRoute: () => AppsFinancesRoute,
-  } as any);
+  } as any)
 
 const AppsFinancesAmazonSettlementsRegionSummaryRoute =
   AppsFinancesAmazonSettlementsRegionSummaryImport.update({
-    path: "/amazon/settlements/$region/summary",
+    path: '/amazon/settlements/$region/summary',
     getParentRoute: () => AppsFinancesRoute,
-  } as any);
+  } as any)
 
 const AppsFinancesAmazonSettlementsRegionReportRoute =
   AppsFinancesAmazonSettlementsRegionReportImport.update({
-    path: "/amazon/settlements/$region/report",
+    path: '/amazon/settlements/$region/report',
     getParentRoute: () => AppsFinancesRoute,
-  } as any);
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/_apps": {
-      id: "/_apps";
-      path: "";
-      fullPath: "";
-      preLoaderRoute: typeof AppsImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/documents": {
-      id: "/documents";
-      path: "/documents";
-      fullPath: "/documents";
-      preLoaderRoute: typeof DocumentsImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/_apps/finances": {
-      id: "/_apps/finances";
-      path: "/finances";
-      fullPath: "/finances";
-      preLoaderRoute: typeof AppsFinancesImport;
-      parentRoute: typeof AppsImport;
-    };
-    "/_apps/stock": {
-      id: "/_apps/stock";
-      path: "/stock";
-      fullPath: "/stock";
-      preLoaderRoute: typeof AppsStockImport;
-      parentRoute: typeof AppsImport;
-    };
-    "/_apps/stock/items": {
-      id: "/_apps/stock/items";
-      path: "/items";
-      fullPath: "/stock/items";
-      preLoaderRoute: typeof AppsStockItemsImport;
-      parentRoute: typeof AppsStockImport;
-    };
-    "/_apps/stock/orders": {
-      id: "/_apps/stock/orders";
-      path: "/orders";
-      fullPath: "/stock/orders";
-      preLoaderRoute: typeof AppsStockOrdersImport;
-      parentRoute: typeof AppsStockImport;
-    };
-    "/_apps/stock/settings": {
-      id: "/_apps/stock/settings";
-      path: "/settings";
-      fullPath: "/stock/settings";
-      preLoaderRoute: typeof AppsStockSettingsImport;
-      parentRoute: typeof AppsStockImport;
-    };
-    "/_apps/stock/warehouses": {
-      id: "/_apps/stock/warehouses";
-      path: "/warehouses";
-      fullPath: "/stock/warehouses";
-      preLoaderRoute: typeof AppsStockWarehousesImport;
-      parentRoute: typeof AppsStockImport;
-    };
-    "/documents/orders/$orderId": {
-      id: "/documents/orders/$orderId";
-      path: "/orders/$orderId";
-      fullPath: "/documents/orders/$orderId";
-      preLoaderRoute: typeof DocumentsOrdersOrderIdImport;
-      parentRoute: typeof DocumentsImport;
-    };
-    "/_apps/stock/": {
-      id: "/_apps/stock/";
-      path: "/";
-      fullPath: "/stock/";
-      preLoaderRoute: typeof AppsStockIndexImport;
-      parentRoute: typeof AppsStockImport;
-    };
-    "/_apps/finances/accounts/instructions": {
-      id: "/_apps/finances/accounts/instructions";
-      path: "/accounts/instructions";
-      fullPath: "/finances/accounts/instructions";
-      preLoaderRoute: typeof AppsFinancesAccountsInstructionsImport;
-      parentRoute: typeof AppsFinancesImport;
-    };
-    "/_apps/finances/amazon/": {
-      id: "/_apps/finances/amazon/";
-      path: "/amazon";
-      fullPath: "/finances/amazon";
-      preLoaderRoute: typeof AppsFinancesAmazonIndexImport;
-      parentRoute: typeof AppsFinancesImport;
-    };
-    "/_apps/finances/amazon/$year/$month": {
-      id: "/_apps/finances/amazon/$year/$month";
-      path: "/amazon/$year/$month";
-      fullPath: "/finances/amazon/$year/$month";
-      preLoaderRoute: typeof AppsFinancesAmazonYearMonthImport;
-      parentRoute: typeof AppsFinancesImport;
-    };
-    "/_apps/finances/amazon/settlements/": {
-      id: "/_apps/finances/amazon/settlements/";
-      path: "/amazon/settlements";
-      fullPath: "/finances/amazon/settlements";
-      preLoaderRoute: typeof AppsFinancesAmazonSettlementsIndexImport;
-      parentRoute: typeof AppsFinancesImport;
-    };
-    "/_apps/finances/amazon/settlements/$region/report": {
-      id: "/_apps/finances/amazon/settlements/$region/report";
-      path: "/amazon/settlements/$region/report";
-      fullPath: "/finances/amazon/settlements/$region/report";
-      preLoaderRoute: typeof AppsFinancesAmazonSettlementsRegionReportImport;
-      parentRoute: typeof AppsFinancesImport;
-    };
-    "/_apps/finances/amazon/settlements/$region/summary": {
-      id: "/_apps/finances/amazon/settlements/$region/summary";
-      path: "/amazon/settlements/$region/summary";
-      fullPath: "/finances/amazon/settlements/$region/summary";
-      preLoaderRoute: typeof AppsFinancesAmazonSettlementsRegionSummaryImport;
-      parentRoute: typeof AppsFinancesImport;
-    };
-    "/_apps/finances/amazon/settlements/$region/xml": {
-      id: "/_apps/finances/amazon/settlements/$region/xml";
-      path: "/amazon/settlements/$region/xml";
-      fullPath: "/finances/amazon/settlements/$region/xml";
-      preLoaderRoute: typeof AppsFinancesAmazonSettlementsRegionXmlImport;
-      parentRoute: typeof AppsFinancesImport;
-    };
-    "/_apps/finances/amazon/settlements/$region/": {
-      id: "/_apps/finances/amazon/settlements/$region/";
-      path: "/amazon/settlements/$region";
-      fullPath: "/finances/amazon/settlements/$region";
-      preLoaderRoute: typeof AppsFinancesAmazonSettlementsRegionIndexImport;
-      parentRoute: typeof AppsFinancesImport;
-    };
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/_apps': {
+      id: '/_apps'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppsImport
+      parentRoute: typeof rootRoute
+    }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsImport
+      parentRoute: typeof rootRoute
+    }
+    '/_apps/finances': {
+      id: '/_apps/finances'
+      path: '/finances'
+      fullPath: '/finances'
+      preLoaderRoute: typeof AppsFinancesImport
+      parentRoute: typeof AppsImport
+    }
+    '/_apps/stock': {
+      id: '/_apps/stock'
+      path: '/stock'
+      fullPath: '/stock'
+      preLoaderRoute: typeof AppsStockImport
+      parentRoute: typeof AppsImport
+    }
+    '/_apps/stock/items': {
+      id: '/_apps/stock/items'
+      path: '/items'
+      fullPath: '/stock/items'
+      preLoaderRoute: typeof AppsStockItemsImport
+      parentRoute: typeof AppsStockImport
+    }
+    '/_apps/stock/orders': {
+      id: '/_apps/stock/orders'
+      path: '/orders'
+      fullPath: '/stock/orders'
+      preLoaderRoute: typeof AppsStockOrdersImport
+      parentRoute: typeof AppsStockImport
+    }
+    '/_apps/stock/settings': {
+      id: '/_apps/stock/settings'
+      path: '/settings'
+      fullPath: '/stock/settings'
+      preLoaderRoute: typeof AppsStockSettingsImport
+      parentRoute: typeof AppsStockImport
+    }
+    '/_apps/stock/warehouses': {
+      id: '/_apps/stock/warehouses'
+      path: '/warehouses'
+      fullPath: '/stock/warehouses'
+      preLoaderRoute: typeof AppsStockWarehousesImport
+      parentRoute: typeof AppsStockImport
+    }
+    '/documents/orders/$orderId': {
+      id: '/documents/orders/$orderId'
+      path: '/orders/$orderId'
+      fullPath: '/documents/orders/$orderId'
+      preLoaderRoute: typeof DocumentsOrdersOrderIdImport
+      parentRoute: typeof DocumentsImport
+    }
+    '/_apps/stock/': {
+      id: '/_apps/stock/'
+      path: '/'
+      fullPath: '/stock/'
+      preLoaderRoute: typeof AppsStockIndexImport
+      parentRoute: typeof AppsStockImport
+    }
+    '/_apps/finances/accounts/instructions': {
+      id: '/_apps/finances/accounts/instructions'
+      path: '/accounts/instructions'
+      fullPath: '/finances/accounts/instructions'
+      preLoaderRoute: typeof AppsFinancesAccountsInstructionsImport
+      parentRoute: typeof AppsFinancesImport
+    }
+    '/_apps/finances/amazon/': {
+      id: '/_apps/finances/amazon/'
+      path: '/amazon'
+      fullPath: '/finances/amazon'
+      preLoaderRoute: typeof AppsFinancesAmazonIndexImport
+      parentRoute: typeof AppsFinancesImport
+    }
+    '/_apps/finances/amazon/$year/$month': {
+      id: '/_apps/finances/amazon/$year/$month'
+      path: '/amazon/$year/$month'
+      fullPath: '/finances/amazon/$year/$month'
+      preLoaderRoute: typeof AppsFinancesAmazonYearMonthImport
+      parentRoute: typeof AppsFinancesImport
+    }
+    '/_apps/finances/amazon/settlements/': {
+      id: '/_apps/finances/amazon/settlements/'
+      path: '/amazon/settlements'
+      fullPath: '/finances/amazon/settlements'
+      preLoaderRoute: typeof AppsFinancesAmazonSettlementsIndexImport
+      parentRoute: typeof AppsFinancesImport
+    }
+    '/_apps/finances/amazon/settlements/$region/report': {
+      id: '/_apps/finances/amazon/settlements/$region/report'
+      path: '/amazon/settlements/$region/report'
+      fullPath: '/finances/amazon/settlements/$region/report'
+      preLoaderRoute: typeof AppsFinancesAmazonSettlementsRegionReportImport
+      parentRoute: typeof AppsFinancesImport
+    }
+    '/_apps/finances/amazon/settlements/$region/summary': {
+      id: '/_apps/finances/amazon/settlements/$region/summary'
+      path: '/amazon/settlements/$region/summary'
+      fullPath: '/finances/amazon/settlements/$region/summary'
+      preLoaderRoute: typeof AppsFinancesAmazonSettlementsRegionSummaryImport
+      parentRoute: typeof AppsFinancesImport
+    }
+    '/_apps/finances/amazon/settlements/$region/xml': {
+      id: '/_apps/finances/amazon/settlements/$region/xml'
+      path: '/amazon/settlements/$region/xml'
+      fullPath: '/finances/amazon/settlements/$region/xml'
+      preLoaderRoute: typeof AppsFinancesAmazonSettlementsRegionXmlImport
+      parentRoute: typeof AppsFinancesImport
+    }
+    '/_apps/finances/amazon/settlements/$region/': {
+      id: '/_apps/finances/amazon/settlements/$region/'
+      path: '/amazon/settlements/$region'
+      fullPath: '/finances/amazon/settlements/$region'
+      preLoaderRoute: typeof AppsFinancesAmazonSettlementsRegionIndexImport
+      parentRoute: typeof AppsFinancesImport
+    }
   }
 }
 
 // Create and export the route tree
 
 interface AppsFinancesRouteChildren {
-  AppsFinancesAccountsInstructionsRoute:
-    typeof AppsFinancesAccountsInstructionsRoute;
-  AppsFinancesAmazonIndexRoute: typeof AppsFinancesAmazonIndexRoute;
-  AppsFinancesAmazonYearMonthRoute: typeof AppsFinancesAmazonYearMonthRoute;
-  AppsFinancesAmazonSettlementsIndexRoute:
-    typeof AppsFinancesAmazonSettlementsIndexRoute;
-  AppsFinancesAmazonSettlementsRegionReportRoute:
-    typeof AppsFinancesAmazonSettlementsRegionReportRoute;
-  AppsFinancesAmazonSettlementsRegionSummaryRoute:
-    typeof AppsFinancesAmazonSettlementsRegionSummaryRoute;
-  AppsFinancesAmazonSettlementsRegionXmlRoute:
-    typeof AppsFinancesAmazonSettlementsRegionXmlRoute;
-  AppsFinancesAmazonSettlementsRegionIndexRoute:
-    typeof AppsFinancesAmazonSettlementsRegionIndexRoute;
+  AppsFinancesAccountsInstructionsRoute: typeof AppsFinancesAccountsInstructionsRoute
+  AppsFinancesAmazonIndexRoute: typeof AppsFinancesAmazonIndexRoute
+  AppsFinancesAmazonYearMonthRoute: typeof AppsFinancesAmazonYearMonthRoute
+  AppsFinancesAmazonSettlementsIndexRoute: typeof AppsFinancesAmazonSettlementsIndexRoute
+  AppsFinancesAmazonSettlementsRegionReportRoute: typeof AppsFinancesAmazonSettlementsRegionReportRoute
+  AppsFinancesAmazonSettlementsRegionSummaryRoute: typeof AppsFinancesAmazonSettlementsRegionSummaryRoute
+  AppsFinancesAmazonSettlementsRegionXmlRoute: typeof AppsFinancesAmazonSettlementsRegionXmlRoute
+  AppsFinancesAmazonSettlementsRegionIndexRoute: typeof AppsFinancesAmazonSettlementsRegionIndexRoute
 }
 
 const AppsFinancesRouteChildren: AppsFinancesRouteChildren = {
@@ -308,18 +302,18 @@ const AppsFinancesRouteChildren: AppsFinancesRouteChildren = {
     AppsFinancesAmazonSettlementsRegionXmlRoute,
   AppsFinancesAmazonSettlementsRegionIndexRoute:
     AppsFinancesAmazonSettlementsRegionIndexRoute,
-};
+}
 
 const AppsFinancesRouteWithChildren = AppsFinancesRoute._addFileChildren(
   AppsFinancesRouteChildren,
-);
+)
 
 interface AppsStockRouteChildren {
-  AppsStockItemsRoute: typeof AppsStockItemsRoute;
-  AppsStockOrdersRoute: typeof AppsStockOrdersRoute;
-  AppsStockSettingsRoute: typeof AppsStockSettingsRoute;
-  AppsStockWarehousesRoute: typeof AppsStockWarehousesRoute;
-  AppsStockIndexRoute: typeof AppsStockIndexRoute;
+  AppsStockItemsRoute: typeof AppsStockItemsRoute
+  AppsStockOrdersRoute: typeof AppsStockOrdersRoute
+  AppsStockSettingsRoute: typeof AppsStockSettingsRoute
+  AppsStockWarehousesRoute: typeof AppsStockWarehousesRoute
+  AppsStockIndexRoute: typeof AppsStockIndexRoute
 }
 
 const AppsStockRouteChildren: AppsStockRouteChildren = {
@@ -328,202 +322,183 @@ const AppsStockRouteChildren: AppsStockRouteChildren = {
   AppsStockSettingsRoute: AppsStockSettingsRoute,
   AppsStockWarehousesRoute: AppsStockWarehousesRoute,
   AppsStockIndexRoute: AppsStockIndexRoute,
-};
+}
 
 const AppsStockRouteWithChildren = AppsStockRoute._addFileChildren(
   AppsStockRouteChildren,
-);
+)
 
 interface AppsRouteChildren {
-  AppsFinancesRoute: typeof AppsFinancesRouteWithChildren;
-  AppsStockRoute: typeof AppsStockRouteWithChildren;
+  AppsFinancesRoute: typeof AppsFinancesRouteWithChildren
+  AppsStockRoute: typeof AppsStockRouteWithChildren
 }
 
 const AppsRouteChildren: AppsRouteChildren = {
   AppsFinancesRoute: AppsFinancesRouteWithChildren,
   AppsStockRoute: AppsStockRouteWithChildren,
-};
+}
 
-const AppsRouteWithChildren = AppsRoute._addFileChildren(AppsRouteChildren);
+const AppsRouteWithChildren = AppsRoute._addFileChildren(AppsRouteChildren)
 
 interface DocumentsRouteChildren {
-  DocumentsOrdersOrderIdRoute: typeof DocumentsOrdersOrderIdRoute;
+  DocumentsOrdersOrderIdRoute: typeof DocumentsOrdersOrderIdRoute
 }
 
 const DocumentsRouteChildren: DocumentsRouteChildren = {
   DocumentsOrdersOrderIdRoute: DocumentsOrdersOrderIdRoute,
-};
+}
 
 const DocumentsRouteWithChildren = DocumentsRoute._addFileChildren(
   DocumentsRouteChildren,
-);
+)
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "": typeof AppsRouteWithChildren;
-  "/documents": typeof DocumentsRouteWithChildren;
-  "/finances": typeof AppsFinancesRouteWithChildren;
-  "/stock": typeof AppsStockRouteWithChildren;
-  "/stock/items": typeof AppsStockItemsRoute;
-  "/stock/orders": typeof AppsStockOrdersRoute;
-  "/stock/settings": typeof AppsStockSettingsRoute;
-  "/stock/warehouses": typeof AppsStockWarehousesRoute;
-  "/documents/orders/$orderId": typeof DocumentsOrdersOrderIdRoute;
-  "/stock/": typeof AppsStockIndexRoute;
-  "/finances/accounts/instructions":
-    typeof AppsFinancesAccountsInstructionsRoute;
-  "/finances/amazon": typeof AppsFinancesAmazonIndexRoute;
-  "/finances/amazon/$year/$month": typeof AppsFinancesAmazonYearMonthRoute;
-  "/finances/amazon/settlements":
-    typeof AppsFinancesAmazonSettlementsIndexRoute;
-  "/finances/amazon/settlements/$region/report":
-    typeof AppsFinancesAmazonSettlementsRegionReportRoute;
-  "/finances/amazon/settlements/$region/summary":
-    typeof AppsFinancesAmazonSettlementsRegionSummaryRoute;
-  "/finances/amazon/settlements/$region/xml":
-    typeof AppsFinancesAmazonSettlementsRegionXmlRoute;
-  "/finances/amazon/settlements/$region":
-    typeof AppsFinancesAmazonSettlementsRegionIndexRoute;
+  '/': typeof IndexRoute
+  '': typeof AppsRouteWithChildren
+  '/documents': typeof DocumentsRouteWithChildren
+  '/finances': typeof AppsFinancesRouteWithChildren
+  '/stock': typeof AppsStockRouteWithChildren
+  '/stock/items': typeof AppsStockItemsRoute
+  '/stock/orders': typeof AppsStockOrdersRoute
+  '/stock/settings': typeof AppsStockSettingsRoute
+  '/stock/warehouses': typeof AppsStockWarehousesRoute
+  '/documents/orders/$orderId': typeof DocumentsOrdersOrderIdRoute
+  '/stock/': typeof AppsStockIndexRoute
+  '/finances/accounts/instructions': typeof AppsFinancesAccountsInstructionsRoute
+  '/finances/amazon': typeof AppsFinancesAmazonIndexRoute
+  '/finances/amazon/$year/$month': typeof AppsFinancesAmazonYearMonthRoute
+  '/finances/amazon/settlements': typeof AppsFinancesAmazonSettlementsIndexRoute
+  '/finances/amazon/settlements/$region/report': typeof AppsFinancesAmazonSettlementsRegionReportRoute
+  '/finances/amazon/settlements/$region/summary': typeof AppsFinancesAmazonSettlementsRegionSummaryRoute
+  '/finances/amazon/settlements/$region/xml': typeof AppsFinancesAmazonSettlementsRegionXmlRoute
+  '/finances/amazon/settlements/$region': typeof AppsFinancesAmazonSettlementsRegionIndexRoute
 }
 
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "": typeof AppsRouteWithChildren;
-  "/documents": typeof DocumentsRouteWithChildren;
-  "/finances": typeof AppsFinancesRouteWithChildren;
-  "/stock/items": typeof AppsStockItemsRoute;
-  "/stock/orders": typeof AppsStockOrdersRoute;
-  "/stock/settings": typeof AppsStockSettingsRoute;
-  "/stock/warehouses": typeof AppsStockWarehousesRoute;
-  "/documents/orders/$orderId": typeof DocumentsOrdersOrderIdRoute;
-  "/stock": typeof AppsStockIndexRoute;
-  "/finances/accounts/instructions":
-    typeof AppsFinancesAccountsInstructionsRoute;
-  "/finances/amazon": typeof AppsFinancesAmazonIndexRoute;
-  "/finances/amazon/$year/$month": typeof AppsFinancesAmazonYearMonthRoute;
-  "/finances/amazon/settlements":
-    typeof AppsFinancesAmazonSettlementsIndexRoute;
-  "/finances/amazon/settlements/$region/report":
-    typeof AppsFinancesAmazonSettlementsRegionReportRoute;
-  "/finances/amazon/settlements/$region/summary":
-    typeof AppsFinancesAmazonSettlementsRegionSummaryRoute;
-  "/finances/amazon/settlements/$region/xml":
-    typeof AppsFinancesAmazonSettlementsRegionXmlRoute;
-  "/finances/amazon/settlements/$region":
-    typeof AppsFinancesAmazonSettlementsRegionIndexRoute;
+  '/': typeof IndexRoute
+  '': typeof AppsRouteWithChildren
+  '/documents': typeof DocumentsRouteWithChildren
+  '/finances': typeof AppsFinancesRouteWithChildren
+  '/stock/items': typeof AppsStockItemsRoute
+  '/stock/orders': typeof AppsStockOrdersRoute
+  '/stock/settings': typeof AppsStockSettingsRoute
+  '/stock/warehouses': typeof AppsStockWarehousesRoute
+  '/documents/orders/$orderId': typeof DocumentsOrdersOrderIdRoute
+  '/stock': typeof AppsStockIndexRoute
+  '/finances/accounts/instructions': typeof AppsFinancesAccountsInstructionsRoute
+  '/finances/amazon': typeof AppsFinancesAmazonIndexRoute
+  '/finances/amazon/$year/$month': typeof AppsFinancesAmazonYearMonthRoute
+  '/finances/amazon/settlements': typeof AppsFinancesAmazonSettlementsIndexRoute
+  '/finances/amazon/settlements/$region/report': typeof AppsFinancesAmazonSettlementsRegionReportRoute
+  '/finances/amazon/settlements/$region/summary': typeof AppsFinancesAmazonSettlementsRegionSummaryRoute
+  '/finances/amazon/settlements/$region/xml': typeof AppsFinancesAmazonSettlementsRegionXmlRoute
+  '/finances/amazon/settlements/$region': typeof AppsFinancesAmazonSettlementsRegionIndexRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  "/": typeof IndexRoute;
-  "/_apps": typeof AppsRouteWithChildren;
-  "/documents": typeof DocumentsRouteWithChildren;
-  "/_apps/finances": typeof AppsFinancesRouteWithChildren;
-  "/_apps/stock": typeof AppsStockRouteWithChildren;
-  "/_apps/stock/items": typeof AppsStockItemsRoute;
-  "/_apps/stock/orders": typeof AppsStockOrdersRoute;
-  "/_apps/stock/settings": typeof AppsStockSettingsRoute;
-  "/_apps/stock/warehouses": typeof AppsStockWarehousesRoute;
-  "/documents/orders/$orderId": typeof DocumentsOrdersOrderIdRoute;
-  "/_apps/stock/": typeof AppsStockIndexRoute;
-  "/_apps/finances/accounts/instructions":
-    typeof AppsFinancesAccountsInstructionsRoute;
-  "/_apps/finances/amazon/": typeof AppsFinancesAmazonIndexRoute;
-  "/_apps/finances/amazon/$year/$month":
-    typeof AppsFinancesAmazonYearMonthRoute;
-  "/_apps/finances/amazon/settlements/":
-    typeof AppsFinancesAmazonSettlementsIndexRoute;
-  "/_apps/finances/amazon/settlements/$region/report":
-    typeof AppsFinancesAmazonSettlementsRegionReportRoute;
-  "/_apps/finances/amazon/settlements/$region/summary":
-    typeof AppsFinancesAmazonSettlementsRegionSummaryRoute;
-  "/_apps/finances/amazon/settlements/$region/xml":
-    typeof AppsFinancesAmazonSettlementsRegionXmlRoute;
-  "/_apps/finances/amazon/settlements/$region/":
-    typeof AppsFinancesAmazonSettlementsRegionIndexRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/_apps': typeof AppsRouteWithChildren
+  '/documents': typeof DocumentsRouteWithChildren
+  '/_apps/finances': typeof AppsFinancesRouteWithChildren
+  '/_apps/stock': typeof AppsStockRouteWithChildren
+  '/_apps/stock/items': typeof AppsStockItemsRoute
+  '/_apps/stock/orders': typeof AppsStockOrdersRoute
+  '/_apps/stock/settings': typeof AppsStockSettingsRoute
+  '/_apps/stock/warehouses': typeof AppsStockWarehousesRoute
+  '/documents/orders/$orderId': typeof DocumentsOrdersOrderIdRoute
+  '/_apps/stock/': typeof AppsStockIndexRoute
+  '/_apps/finances/accounts/instructions': typeof AppsFinancesAccountsInstructionsRoute
+  '/_apps/finances/amazon/': typeof AppsFinancesAmazonIndexRoute
+  '/_apps/finances/amazon/$year/$month': typeof AppsFinancesAmazonYearMonthRoute
+  '/_apps/finances/amazon/settlements/': typeof AppsFinancesAmazonSettlementsIndexRoute
+  '/_apps/finances/amazon/settlements/$region/report': typeof AppsFinancesAmazonSettlementsRegionReportRoute
+  '/_apps/finances/amazon/settlements/$region/summary': typeof AppsFinancesAmazonSettlementsRegionSummaryRoute
+  '/_apps/finances/amazon/settlements/$region/xml': typeof AppsFinancesAmazonSettlementsRegionXmlRoute
+  '/_apps/finances/amazon/settlements/$region/': typeof AppsFinancesAmazonSettlementsRegionIndexRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | "/"
-    | ""
-    | "/documents"
-    | "/finances"
-    | "/stock"
-    | "/stock/items"
-    | "/stock/orders"
-    | "/stock/settings"
-    | "/stock/warehouses"
-    | "/documents/orders/$orderId"
-    | "/stock/"
-    | "/finances/accounts/instructions"
-    | "/finances/amazon"
-    | "/finances/amazon/$year/$month"
-    | "/finances/amazon/settlements"
-    | "/finances/amazon/settlements/$region/report"
-    | "/finances/amazon/settlements/$region/summary"
-    | "/finances/amazon/settlements/$region/xml"
-    | "/finances/amazon/settlements/$region";
-  fileRoutesByTo: FileRoutesByTo;
+    | '/'
+    | ''
+    | '/documents'
+    | '/finances'
+    | '/stock'
+    | '/stock/items'
+    | '/stock/orders'
+    | '/stock/settings'
+    | '/stock/warehouses'
+    | '/documents/orders/$orderId'
+    | '/stock/'
+    | '/finances/accounts/instructions'
+    | '/finances/amazon'
+    | '/finances/amazon/$year/$month'
+    | '/finances/amazon/settlements'
+    | '/finances/amazon/settlements/$region/report'
+    | '/finances/amazon/settlements/$region/summary'
+    | '/finances/amazon/settlements/$region/xml'
+    | '/finances/amazon/settlements/$region'
+  fileRoutesByTo: FileRoutesByTo
   to:
-    | "/"
-    | ""
-    | "/documents"
-    | "/finances"
-    | "/stock/items"
-    | "/stock/orders"
-    | "/stock/settings"
-    | "/stock/warehouses"
-    | "/documents/orders/$orderId"
-    | "/stock"
-    | "/finances/accounts/instructions"
-    | "/finances/amazon"
-    | "/finances/amazon/$year/$month"
-    | "/finances/amazon/settlements"
-    | "/finances/amazon/settlements/$region/report"
-    | "/finances/amazon/settlements/$region/summary"
-    | "/finances/amazon/settlements/$region/xml"
-    | "/finances/amazon/settlements/$region";
+    | '/'
+    | ''
+    | '/documents'
+    | '/finances'
+    | '/stock/items'
+    | '/stock/orders'
+    | '/stock/settings'
+    | '/stock/warehouses'
+    | '/documents/orders/$orderId'
+    | '/stock'
+    | '/finances/accounts/instructions'
+    | '/finances/amazon'
+    | '/finances/amazon/$year/$month'
+    | '/finances/amazon/settlements'
+    | '/finances/amazon/settlements/$region/report'
+    | '/finances/amazon/settlements/$region/summary'
+    | '/finances/amazon/settlements/$region/xml'
+    | '/finances/amazon/settlements/$region'
   id:
-    | "__root__"
-    | "/"
-    | "/_apps"
-    | "/documents"
-    | "/_apps/finances"
-    | "/_apps/stock"
-    | "/_apps/stock/items"
-    | "/_apps/stock/orders"
-    | "/_apps/stock/settings"
-    | "/_apps/stock/warehouses"
-    | "/documents/orders/$orderId"
-    | "/_apps/stock/"
-    | "/_apps/finances/accounts/instructions"
-    | "/_apps/finances/amazon/"
-    | "/_apps/finances/amazon/$year/$month"
-    | "/_apps/finances/amazon/settlements/"
-    | "/_apps/finances/amazon/settlements/$region/report"
-    | "/_apps/finances/amazon/settlements/$region/summary"
-    | "/_apps/finances/amazon/settlements/$region/xml"
-    | "/_apps/finances/amazon/settlements/$region/";
-  fileRoutesById: FileRoutesById;
+    | '__root__'
+    | '/'
+    | '/_apps'
+    | '/documents'
+    | '/_apps/finances'
+    | '/_apps/stock'
+    | '/_apps/stock/items'
+    | '/_apps/stock/orders'
+    | '/_apps/stock/settings'
+    | '/_apps/stock/warehouses'
+    | '/documents/orders/$orderId'
+    | '/_apps/stock/'
+    | '/_apps/finances/accounts/instructions'
+    | '/_apps/finances/amazon/'
+    | '/_apps/finances/amazon/$year/$month'
+    | '/_apps/finances/amazon/settlements/'
+    | '/_apps/finances/amazon/settlements/$region/report'
+    | '/_apps/finances/amazon/settlements/$region/summary'
+    | '/_apps/finances/amazon/settlements/$region/xml'
+    | '/_apps/finances/amazon/settlements/$region/'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  AppsRoute: typeof AppsRouteWithChildren;
-  DocumentsRoute: typeof DocumentsRouteWithChildren;
+  IndexRoute: typeof IndexRoute
+  AppsRoute: typeof AppsRouteWithChildren
+  DocumentsRoute: typeof DocumentsRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppsRoute: AppsRouteWithChildren,
   DocumentsRoute: DocumentsRouteWithChildren,
-};
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
 

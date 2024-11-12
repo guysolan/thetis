@@ -3,7 +3,7 @@ import { supabase } from "../../../lib/supabase";
 import { toast } from "sonner";
 
 type Stocktake = {
-    warehouse_id: number;
+    stockpile_id: number;
     item_id: number;
     quantity_change: number;
 };
@@ -30,7 +30,7 @@ const useStocktake = () => {
         },
         onSettled: () => {
             queryClient.invalidateQueries({
-                queryKey: ["select-warehouses-view"],
+                queryKey: ["select-stockpiles"],
             });
         },
     });

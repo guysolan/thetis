@@ -7,7 +7,7 @@ export type OrderItemChange = {
 	quantity_change: number;
 	item_price: number;
 	item_tax: number;
-	warehouse_id: string;
+	stockpile_id: string;
 };
 
 type CreateOrderType = {
@@ -18,12 +18,12 @@ type CreateOrderType = {
 const createOrder = async (
 	order_type: string,
 	order_date: string,
-	item_changes_with_warehouse: OrderItemChange[],
+	item_changes_with_stockpile: OrderItemChange[],
 ) => {
 	const { data, error } = await supabase.rpc("insert_order", {
 		in_order_type: order_type,
 		in_order_date: order_date,
-		in_order_items: item_changes_with_warehouse,
+		in_order_items: item_changes_with_stockpile,
 	});
 	console.log(data, error);
 	if (error) throw error;

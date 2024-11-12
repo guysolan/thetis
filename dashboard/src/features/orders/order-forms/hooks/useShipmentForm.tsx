@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Control, UseFormSetValue, useWatch } from "react-hook-form";
-import { useSelectWarehouseItems } from "../../../warehouses/api/selectWarehouseItems";
+import { useSelectItemsByAddress } from "../../../stockpiles/api/selectItemsByAddress";
 import { useSelectItemsView } from "../../../items/api/selectItemsView";
 import { ItemChange, OrderItem } from "../schema";
 import { ItemView } from "../../../items/types";
@@ -10,7 +10,7 @@ export const useShipmentForm = (
     setValue: UseFormSetValue<any>,
 ) => {
     const { data: items } = useSelectItemsView();
-    const { data: warehouseItems } = useSelectWarehouseItems();
+    const { data: stockpileItems } = useSelectItemsByAddress();
 
     // Watch for changes in relevant form fields
     const orderItems = useWatch({ control, name: "order_items" });
@@ -33,7 +33,7 @@ export const useShipmentForm = (
 
         setValue("from_items", fromItems);
         setValue("to_items", toItems);
-    }, [orderItems, items, warehouseItems]);
+    }, [orderItems, items, stockpileItems]);
 };
 
 // Memoize the processing function

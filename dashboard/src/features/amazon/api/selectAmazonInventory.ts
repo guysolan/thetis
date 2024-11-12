@@ -1,7 +1,7 @@
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "../../../lib/supabase"; // Adjust the import path as needed
 
-interface WarehouseData {
+interface stockpileData {
     name: string;
     total: number;
     available: number;
@@ -9,10 +9,10 @@ interface WarehouseData {
 }
 
 interface AmazonInventory {
-    UsInventory: WarehouseData[];
-    CaInventory: WarehouseData[];
-    DeInventory: WarehouseData[];
-    UkInventory: WarehouseData[];
+    UsInventory: stockpileData[];
+    CaInventory: stockpileData[];
+    DeInventory: stockpileData[];
+    UkInventory: stockpileData[];
 }
 
 export const selectAmazonInventory = async (): Promise<

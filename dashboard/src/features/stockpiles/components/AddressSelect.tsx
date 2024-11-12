@@ -13,20 +13,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../../components/ui/select";
-import { useSelectWarehouses } from "../api/selectWarehouses";
 import { X } from "lucide-react";
 import { Button } from "../../../components/ui/button";
+import { useSelectAddresses } from '../api/selectAddresses';
 
 interface Props {
   name?: string;
   label?: string;
   isClearable?: boolean;
 }
-const SelectWarehouse = (
-  { name = "warehouse_id", label, isClearable }: Props,
+const AddressSelect = (
+  { name = "address_id", label, isClearable }: Props,
 ) => {
   const form = useFormContext();
-  const { data: warehouses } = useSelectWarehouses();
+  const { data: addresses } = useSelectAddresses();
   return (
     <FormField
       control={form.control}
@@ -45,7 +45,7 @@ const SelectWarehouse = (
             <FormControl>
               <div className="flex flex-row items-center gap-2">
                 <SelectTrigger>
-                  <SelectValue placeholder="Select Warehouse" />
+                  <SelectValue placeholder="Select address" />
                 </SelectTrigger>
                {isClearable&& <Button
                   disabled={!field.value}
@@ -62,12 +62,12 @@ const SelectWarehouse = (
               </div>
             </FormControl>
             <SelectContent>
-              {warehouses.map((w) => (
+              {addresses.map((w) => (
                 <SelectItem
-                  key={w.warehouse_id}
-                  value={w.warehouse_id?.toString() ?? ""}
+                  key={`address_${w.id}`}
+                  value={w.id?.toString() ?? ""}
                 >
-                  {w.warehouse_name}
+                  {w.name}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -79,4 +79,4 @@ const SelectWarehouse = (
   );
 };
 
-export default SelectWarehouse;
+export default AddressSelect;

@@ -4,22 +4,16 @@ import { useMemo } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
-import SelectWarehouse from "../../../warehouses/components/SelectWarehouse";
+import AddressSelect from "../../../stockpiles/components/AddressSelect";
 import PriceItems from "@/features/orders/order-forms/components/PriceItems";
 import StockItems from "./StockItems";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion";
+
 import { usePurchaseForm } from "../hooks/usePurchaseForm";
 import { buildFormSchema } from "../schema";
 import { useCreateOrder } from "../../api/createOrder";
-import { Lock } from "lucide-react";
 import LockCard from "../../components/LockCard";
-import DatePicker from '../../../../components/DatePicker';
+import DatePicker from '@/components/DatePicker';
 import dayjs from 'dayjs';
 
 const BuildForm = () => {
@@ -40,9 +34,9 @@ const BuildForm = () => {
 
     usePurchaseForm(form.control, form.setValue);
 
-    const warehouseId = useWatch({
+    const addressId = useWatch({
         control: form.control,
-        name: "warehouse_id",
+        name: "address_id",
     });
 
     const consumedItems = useWatch({
@@ -69,7 +63,7 @@ const BuildForm = () => {
             produced_items,
             order_type,
             order_date,
-            warehouse_id,
+            address_id,
         } = formData;
         const item_changes = [
             ...consumed_items,
@@ -86,17 +80,17 @@ const BuildForm = () => {
                 item_tax: 0
             })),
         ];
-        const item_changes_with_warehouse = item_changes.map((ic) => ({
+        const item_changes_with_address = item_changes.map((ic) => ({
             item_id: ic.item_id,
             quantity_change: Number(ic.quantity_change),
             item_price: ic?.item_price ?? 0,
             item_tax: ic?.item_tax ?? 0,
-            warehouse_id: warehouse_id,
+            address_id: address_id,
         }));
         await createOrder({
             in_order_type: order_type,
-            in_order_date: order_date,
-            in_order_items: item_changes_with_warehouse,
+            in_order_date: order_date.toISOString(),
+            in_order_items: item_changes_with_address,
         });
     };
 
@@ -109,13 +103,13 @@ const BuildForm = () => {
                 <DatePicker name="order_date" label='Order Date' />
 
                 
-                <SelectWarehouse
-                    name="warehouse_id"
-                    label="Warehouse"
+                <AddressSelect
+                    name="address_id"
+                    label="From Address"
                 />
 
 
-                {warehouseId && (
+                {addressId && (
                     <>
                         <Card>
                             <CardHeader>

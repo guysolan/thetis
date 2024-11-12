@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Control, UseFormSetValue, useWatch } from "react-hook-form";
-import { useSelectWarehouseItems } from "../../../warehouses/api/selectWarehouseItems";
+import { useSelectItemsByAddress } from "../../../stockpiles/api/selectItemsByAddress";
 import { useSelectItemsView } from "../../../items/api/selectItemsView";
 import { ItemChange, OrderItem } from "../schema";
 
@@ -9,32 +9,32 @@ export const usePurchaseForm = (
     setValue: UseFormSetValue<any>,
 ) => {
     const { data: items } = useSelectItemsView();
-    const { data: warehouseItems } = useSelectWarehouseItems();
+    const { data: addressItems } = useSelectItemsByAddress();
 
     // Watch for changes in relevant form fields
     const producedItems = useWatch({ control, name: "produced_items" });
-    const selectedWarehouse = useWatch({ control, name: "warehouse_id" });
+    const selectedAddress = useWatch({ control, name: "address_id" });
 
     useEffect(() => {
-        if (!producedItems || !items || !warehouseItems) return;
+        if (!producedItems || !items || !addressItems) return;
 
-        // If no warehouse is selected, treat all items as purchase items
-        if (!selectedWarehouse) {
+        // If no address is selected, treat all items as purchase items
+        if (!selectedAddress) {
             setValue("consumed_items", []);
             setValue("order_items", producedItems);
             return;
         }
 
-        // Get items available in selected warehouse
-        const warehouseStock = warehouseItems.filter(
-            (w) => String(w.warehouse_id) === String(selectedWarehouse),
+        // Get items available in selected address
+        const addressStock = addressItems.filter(
+            (w) => String(w.address_id) === String(selectedAddress),
         );
 
         // Calculate required quantities and check stock
         const { consumedItems, purchaseItems } = processOrderItems({
             producedItems,
             items,
-            warehouseStock,
+            addressStock,
         });
 
         console.log(purchaseItems);
@@ -42,17 +42,17 @@ export const usePurchaseForm = (
         // Update form with processed items
         setValue("consumed_items", consumedItems);
         setValue("order_items", purchaseItems);
-    }, [producedItems, items, warehouseItems, selectedWarehouse, setValue]);
+    }, [producedItems, items, addressItems, selectedAddress, setValue]);
 };
 
 interface ProcessOrderItemsParams {
     producedItems: ItemChange[];
     items: any[]; // Replace with proper type
-    warehouseStock: any[]; // Replace with proper type
+    addressStock: any[]; // Replace with proper type
 }
 
 function processOrderItems(
-    { producedItems, items, warehouseStock }: ProcessOrderItemsParams,
+    { producedItems, items, addressStock }: ProcessOrderItemsParams,
 ) {
     const consumedItems: ItemChange[] = [];
     const purchaseItems: OrderItem[] = [];
@@ -65,7 +65,7 @@ function processOrderItems(
 
         // Process each component of the product
         product.components.forEach((component) => {
-            const stockItem = warehouseStock.find(
+            const stockItem = addressStock.find(
                 (w) => String(w.item_id) === String(component.component_id),
             );
 

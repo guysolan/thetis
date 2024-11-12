@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import { useSelectWarehouseItems } from "../../../warehouses/api/selectWarehouseItems";
+import { useSelectItemsByAddress } from "@/features/stockpiles/api/selectItemsByAddress";
 
 export const useStocktakeDiscrepancy = () => {
-  const { data: warehouseItems } = useSelectWarehouseItems();
+  const { data: stockpileItems } = useSelectItemsByAddress();
   const { control, setValue } = useFormContext();
 
   const orderItems = useWatch({
@@ -11,24 +11,24 @@ export const useStocktakeDiscrepancy = () => {
     name: "order_items",
   });
 
-  const selectedFromWarehouse = useWatch({
+  const selectedFromStockpile = useWatch({
     control,
-    name: "warehouse_id",
+    name: "stockpile_id",
   });
 
   const stockTakeDiscrepancy = useMemo(() => {
-    if (!selectedFromWarehouse || !warehouseItems || !orderItems) return [];
+    if (!selectedFromStockpile || !stockpileItems || !orderItems) return [];
 
-    const itemsInWarehouse = warehouseItems.filter(
-      (w) => String(w.warehouse_id) === String(selectedFromWarehouse),
+    const itemsInStockpile = stockpileItems.filter(
+      (w) => String(w.stockpile_id) === String(selectedFromStockpile),
     );
 
     const stockTakeDiscrepancy = orderItems.map((oi) => {
-      const warehouseItem = itemsInWarehouse.find((item) =>
+      const stockpileItem = itemsInStockpile.find((item) =>
         String(item.item_id) === String(oi.item_id)
       );
 
-      const itemQuantity = warehouseItem?.item_quantity ?? 0;
+      const itemQuantity = stockpileItem?.item_quantity ?? 0;
 
       return {
         id: oi.item_id,
@@ -47,7 +47,7 @@ export const useStocktakeDiscrepancy = () => {
     );
 
     return stockTakeDiscrepancy;
-  }, [selectedFromWarehouse, warehouseItems, orderItems]);
+  }, [selectedFromStockpile, stockpileItems, orderItems]);
 
   return stockTakeDiscrepancy;
 };

@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import dayjs from "dayjs";
 import DatePicker from "@/components/DatePicker";
 interface Props {
-	warehouseId: number;
+	stockpileId: number;
 	orderItems?: OrderItem[];
 }
 
@@ -19,11 +19,11 @@ import { stockTakeFormSchema } from "../schema";
 
 export type StocktakeFormT = z.infer<typeof stockTakeFormSchema>;
 
-const StocktakeForm = ({ warehouseId, orderItems }: Props) => {
+const StocktakeForm = ({ stockpileId, orderItems }: Props) => {
 	const form = useForm<StocktakeFormT>({
 		resolver: zodResolver(stockTakeFormSchema),
 		defaultValues: {
-			warehouse_id: warehouseId,
+			stockpile_id: stockpileId,
 			order_type: "stocktake",
 			order_items: orderItems || [],
 			change_quantity: [],
@@ -39,7 +39,7 @@ const StocktakeForm = ({ warehouseId, orderItems }: Props) => {
 		const stocktakeChanges = formData.change_quantity.map((item) => ({
 			item_id: (item.item_id),
 			quantity_change: Number(item.quantity_change),
-			warehouse_id: (formData.warehouse_id),
+			stockpile_id: (formData.stockpile_id),
 			item_price: 0,
 			item_tax: 0,
 		}));

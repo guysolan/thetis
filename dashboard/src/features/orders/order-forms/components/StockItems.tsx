@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash, Copy } from "lucide-react";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView";
-import { useSelectWarehouseItems } from "@/features/warehouses/api/selectWarehouseItems";
+import { useSelectItemsByAddress } from "@/features/stockpiles/api/selectItemsByAddress";
 import Select from "@/components/Select";
 import Input from "@/components/Input";
 import NumberCell from "@/components/NumberCell";
@@ -18,14 +18,14 @@ import SelectItemType from "@/components/SelectItem";
 
 interface StockItemProps {
     name: "produced_items" | "consumed_items" | "from_items" | "to_items";
-    warehouse_name?: "warehouse_id" | "from_warehouse_id" | "to_warehouse_id";
+    address_name?: "address_id" | "from_address_id" | "to_address_id";
 }
 
 const StockItems = (
-    { name, warehouse_name = "warehouse_id" }: StockItemProps,
+    { name, address_name = "address_id" }: StockItemProps,
 ) => {
     const { data: items } = useSelectItemsView();
-    const { data: warehouseItems } = useSelectWarehouseItems();
+    const { data: stockpileItems } = useSelectItemsByAddress();
     const form = useFormContext();
 
     const { fields, append, remove } = useFieldArray({
@@ -33,9 +33,9 @@ const StockItems = (
         name: name,
     });
 
-    const selectedWarehouse = useWatch({
+    const selectedAddress = useWatch({
         control: form.control,
-        name: warehouse_name,
+        name: address_name,
     });
 
     // Watch the produced items to calculate quantities
@@ -45,17 +45,17 @@ const StockItems = (
     });
 
     const getItemQuantities = (itemId: string) => {
-        if (!selectedWarehouse || !warehouseItems) {
+        if (!selectedAddress || !stockpileItems) {
             return { before: 0, after: 0 };
         }
 
-        const warehouseItem = warehouseItems.find(
+        const stockpileItem = stockpileItems.find(
             (w) =>
-                String(w.warehouse_id) === String(selectedWarehouse) &&
+                String(w.address_id) === String(selectedAddress) &&
                 String(w.item_id) === String(itemId),
         );
 
-        const currentQuantity = warehouseItem?.item_quantity ?? 0;
+        const currentQuantity = stockpileItem?.item_quantity ?? 0;
         const addedQuantity =
             itemChanges?.find((i) => String(i.item_id) === String(itemId))
                 ?.quantity_change || 0;

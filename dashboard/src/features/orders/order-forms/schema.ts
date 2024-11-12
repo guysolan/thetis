@@ -35,7 +35,7 @@ export type ItemChange = z.infer<typeof pricedItemSchema>;
 
 // Move schemas to a separate file: schemas.ts
 export const saleFormSchema = z.object({
-    warehouse_id: z.string().min(1, "Please select a warehouse"),
+    address_id: z.string().min(1, "Please select a address"),
     order_type: z.enum(["sale"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
     order_date: z.date(),
@@ -50,8 +50,8 @@ export const editOrderSchema = z.object({
 
 // Move schemas to a separate file: schemas.ts
 export const shipmentFormSchema = z.object({
-    from_warehouse_id: z.string().min(1, "Please select a warehouse"),
-    to_warehouse_id: z.string().min(1, "Please select a warehouse").optional(),
+    from_address_id: z.string().min(1, "Please select a address"),
+    to_address_id: z.string().min(1, "Please select a address").optional(),
     order_type: z.enum(["shipment"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
     order_date: z.date(),
@@ -60,7 +60,7 @@ export const shipmentFormSchema = z.object({
 });
 
 export const purchaseFormSchema = z.object({
-    warehouse_id: z.string().min(1, "Please select a warehouse"),
+    address_id: z.string().min(1, "Please select a address"),
     order_type: z.enum(["purchase"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
     order_date: z.date(),
@@ -68,7 +68,7 @@ export const purchaseFormSchema = z.object({
 
 // Move schemas to a separate file: schemas.ts
 export const buildFormSchema = z.object({
-    warehouse_id: z.string().min(1, "Please select a warehouse"),
+    address_id: z.string().min(1, "Please select a address"),
     order_date: z.date(),
     order_type: z.enum(["build"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
@@ -84,7 +84,7 @@ const changeQuantitySchema = z.array(
 );
 
 export const stockTakeFormSchema = z.object({
-    warehouse_id: z.coerce.number(),
+    address_id: z.coerce.number(),
     order_type: z.enum(["stocktake"]),
     ...orderItemsSchema.shape,
     change_quantity: changeQuantitySchema,

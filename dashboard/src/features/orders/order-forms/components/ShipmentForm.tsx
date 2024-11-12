@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
-import SelectWarehouse from "../../../warehouses/components/SelectWarehouse";
+import AddressSelect from "@/features/stockpiles/components/AddressSelect";
 import PriceItems from "@/features/orders/order-forms/components/PriceItems";
 import StockItems from "./StockItems";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -57,48 +57,48 @@ const ShipmentForm = () => {
     ) => {
         const {
             from_items,
-            from_warehouse_id,
-            to_warehouse_id,
+            from_address_id,
+            to_address_id,
             to_items,
             order_date,
         } = formData;
-        const from_item_changes_with_warehouse = from_items.map((ic) => ({
+        const from_item_changes_with_address = from_items.map((ic) => ({
             item_id: ic.item_id,
             quantity_change: Number(ic.quantity_change),
             item_price: 0,
             item_tax: 0,
-            warehouse_id: from_warehouse_id,
+            address_id: from_address_id,
         }));
-        const to_item_changes_with_warehouse = to_warehouse_id
+        const to_item_changes_with_address = to_address_id
             ? to_items.map((ic) => ({
                 item_id: ic.item_id,
                 quantity_change: Number(ic.quantity_change),
                 item_price: 0,
                 item_tax: 0,
-                warehouse_id: to_warehouse_id,
+                address_id: to_address_id,
             }))
             : [];
 
-        const item_changes_with_warehouse = [
-            ...from_item_changes_with_warehouse,
-            ...to_item_changes_with_warehouse,
+        const item_changes_with_address = [
+            ...from_item_changes_with_address,
+            ...to_item_changes_with_address,
         ];
 
         await createOrder({
             in_order_type: "shipment",
             in_order_date: order_date.toISOString(),
-            in_order_items: item_changes_with_warehouse,
+            in_order_items: item_changes_with_address,
         });
     };
 
-    const fromWarehouseId = useWatch({
+    const fromAddressId = useWatch({
         control: form.control,
-        name: "from_warehouse_id",
+        name: "from_address_id",
     });
 
-    const toWarehouseId = useWatch({
+    const toAddressId = useWatch({
         control: form.control,
-        name: "to_warehouse_id",
+        name: "to_address_id",
     });
 
     return (
@@ -109,18 +109,18 @@ const ShipmentForm = () => {
             >
                 <DatePicker name="order_date" label='Order Date' />
 
-                <SelectWarehouse
-                    name="from_warehouse_id"
-                    label="From Warehouse"
+                <AddressSelect
+                    name="from_address_id"
+                    label="From Address"
                 />
 
-                <SelectWarehouse
-                    name="to_warehouse_id"
-                    label="To Warehouse"
+                <AddressSelect
+                    name="to_address_id"
+                    label="To Address"
                     isClearable={true}
                 />
 
-                {fromWarehouseId && (
+                {fromAddressId && (
                     <>
                         <Card>
                             <CardHeader>
@@ -131,22 +131,22 @@ const ShipmentForm = () => {
                             </CardContent>
                         </Card>
                         <LockCard
-                            title={<SelectWarehouse name="from_warehouse_id" />}
+                            title={<AddressSelect name="from_address_id" />}
                         >
                             <StockItems
-                                warehouse_name="from_warehouse_id"
+                                address_name="from_address_id"
                                 name="from_items"
                             />
                         </LockCard>
-                        {toWarehouseId && (
+                        {toAddressId && (
                             <LockCard
                                 title={
-                                    <SelectWarehouse name="to_warehouse_id" />
+                                    <AddressSelect name="to_address_id" />
                                 }
                             >
                                 <StockItems
                                     name="to_items"
-                                    warehouse_name="to_warehouse_id"
+                                    address_name="to_address_id"
                                 />
                             </LockCard>
                         )}

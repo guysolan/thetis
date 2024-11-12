@@ -4,6 +4,7 @@ import {
   Box,
   ExternalLink,
   Factory,
+  FactoryIcon,
   FileText,
   Pin,
   Printer,
@@ -11,7 +12,6 @@ import {
   ShoppingBag,
   ToyBrick,
   Truck,
-  Warehouse,
 } from "lucide-react";
 
 export const jobs = {
@@ -37,10 +37,10 @@ export const jobs = {
         external: false,
       },
       {
-        name: "Warehouses",
+        name: "addresses",
         href: "/stock/warehouses",
-        description: "Manage the warehouses.",
-        icon: <Warehouse />,
+        description: "Manage the Addresses.",
+        icon: <FactoryIcon />,
         external: false,
       },
     ],

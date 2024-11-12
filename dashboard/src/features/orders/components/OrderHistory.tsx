@@ -14,6 +14,7 @@ import OrderBreakdown from "../order-history/components/OrderBreakdown";
 import Sheet from "../../../components/Sheet";
 import { OrderForm } from "./OrderForm";
 import EditOrderForm from "./EditOrderForm";
+import { Link } from "@tanstack/react-router";
 import {
 	Popover,
 	PopoverContent,
@@ -60,10 +61,10 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 									</span>
 								</div>
 								<div className="flex items-center gap-2">
-									<a
-										href={`/orders/${order.order_id}`}
+									<Link
+										to="/documents/orders/$orderId"
+										params={{ orderId: order.order_id }}
 										target="_blank"
-										rel="noopener noreferrer"
 										onClick={(e) => e.stopPropagation()}
 										className="flex items-center gap-2 text-blue-500 hover:underline"
 									>
@@ -71,7 +72,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 											Open in new tab
 										</span>
 										<ExternalLink size={20} />
-									</a>
+									</Link>
 									<Separator
 										orientation="vertical"
 										className="h-4"
@@ -109,7 +110,9 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 												<DeleteOrder
 													trigger={
 														<PopoverOption variant="destructive">
-															<Trash2  size={20}/>Delete
+															<Trash2
+																size={20}
+															/>Delete
 														</PopoverOption>
 													}
 													orderId={order

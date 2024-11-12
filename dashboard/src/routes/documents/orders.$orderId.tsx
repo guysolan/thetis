@@ -1,10 +1,17 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
 import {
   selectOrderByIdQueryOptions,
-} from '@/features/orders/order-history/api/selectOrderById'
+} from "@/features/orders/order-history/api/selectOrderById";
+import BuildForm from "../../features/orders/order-forms/components/BuildForm";
+import BuildOrderDocument from '../../features/orders/order-documents/BuildOrderDocument';
 
 const OrdersPage = () => {
-  const { order } = Route.useLoaderData()
+  const { order } = Route.useLoaderData();
+
+  switch (order.order_type) {
+    case ("build"):
+      return <BuildOrderDocument order={order} />;
+  }
   return (
     <>
       <h1 className="mb-6 font-bold text-3xl">Order Invoice</h1>
@@ -26,11 +33,12 @@ const OrdersPage = () => {
 
       <div className="mb-8">
         <p>
-          <strong>Date:</strong>{' '}
+          <strong>Date:</strong>{" "}
           {new Date(order.order_date).toLocaleDateString()}
         </p>
         <p>
-          <strong>Order Number:</strong> #{order.order_id.toString().padStart(4, '0')}
+          <strong>Order Number:</strong>{" "}
+          #{order.order_id.toString().padStart(4, "0")}
         </p>
       </div>
 
@@ -50,11 +58,11 @@ const OrdersPage = () => {
               <tr key={`${order.id}-${item.item_name}`}>
                 <td className="p-2">{item.item_name}</td>
                 <td className="text-right p-2">
-                  ${item.price.toFixed(2)}
+                  ${item.price?.toFixed(2)}
                 </td>
                 <td className="text-right p-2">{item.quantity}</td>
                 <td className="text-right p-2">
-                  ${(item.price * item.quantity).toFixed(2)}
+                  ${(item.price * item.quantity)?.toFixed(2)}
                 </td>
               </tr>
             ))}
@@ -68,14 +76,14 @@ const OrdersPage = () => {
         </p>
       </div>
     </>
-  )
-}
-export const Route = createFileRoute('/documents/orders/$orderId')({
+  );
+};
+export const Route = createFileRoute("/documents/orders/$orderId")({
   component: OrdersPage,
   loader: async ({ context, params }) => {
     const order = await context.queryClient.ensureQueryData(
       selectOrderByIdQueryOptions(params.orderId),
-    )
-    return { order }
+    );
+    return { order };
   },
-})
+});

@@ -43,7 +43,7 @@ export const Route = createFileRoute('/_apps/stock/')({
                   <li>For products, enable editing of component parts</li>
                   <li>
                     Use the `item_quantities` view to show current stock levels
-                    across warehouses
+                    across stockpiles
                   </li>
                 </ul>
               </AccordionContent>
@@ -83,19 +83,19 @@ export const Route = createFileRoute('/_apps/stock/')({
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="warehouses">
+            <AccordionItem value="stockpiles">
               <AccordionTrigger>
-                3. Warehouses (/stock/warehouses)
+                3. stockpiles (/stock/stockpiles)
               </AccordionTrigger>
               <AccordionContent>
-                <p>The Warehouses page should:</p>
+                <p>The stockpiles page should:</p>
                 <ul className="space-y-2 pl-6 list-disc">
-                  <li>List all warehouses from the `warehouses_view`</li>
+                  <li>List all stockpiles from the `stockpiles`</li>
                   <li>
-                    Show warehouse details: name, creation date, and current
+                    Show stockpile details: name, creation date, and current
                     inventory
                   </li>
-                  <li>Allow adding new warehouses and editing existing ones</li>
+                  <li>Allow adding new stockpiles and editing existing ones</li>
                   <li>
                     Provide a way to initiate stocktakes, which should:
                     <ul className="space-y-1 mt-2 pl-6 list-circle">
@@ -108,14 +108,14 @@ export const Route = createFileRoute('/_apps/stock/')({
                         results
                       </li>
                       <li>
-                        Reflect changes in the `warehouse_items` and
-                        `warehouse_inventory_value` views
+                        Reflect changes in the `stockpile_items` and
+                        `stockpile_inventory_value` views
                       </li>
                     </ul>
                   </li>
                   <li>
-                    Display total inventory value for each warehouse using the
-                    `warehouse_inventory_value` view
+                    Display total inventory value for each stockpile using the
+                    `stockpile_inventory_value` view
                   </li>
                 </ul>
               </AccordionContent>

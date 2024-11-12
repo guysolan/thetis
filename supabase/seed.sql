@@ -1,7 +1,7 @@
--- Insert warehouses
-INSERT INTO warehouses(id, name)
-    VALUES (1, 'My House'),
-(2, 'MPD');
+-- Insert addresses
+INSERT INTO addresses(id, name, line_1, line_2, city, country, code, holds_stock)
+    VALUES (1, 'Park House', 'Stilemans', 'Hascombe Road', 'Godalming', 'United Kingdom', 'GU8 4AB', TRUE),
+(2, 'MPD', 'Unit 4', 'Commerce Business Centre, Commerce Close', 'Westbury', 'United Kingdom', 'BA13 4LS', TRUE);
 
 -- Insert items (parts)
 INSERT INTO items(name, price, type)
@@ -119,7 +119,7 @@ INSERT INTO orders(order_type, order_date, carriage)
 ('shipment', '2023-01-02 11:00:00', 25.00);
 
 -- Insert item changes for purchases
-INSERT INTO item_changes(item_id, quantity_change, warehouse_id)
+INSERT INTO item_changes(item_id, quantity_change, address_id)
 SELECT
     i.id,
     CASE WHEN i.name = 'Webbing' THEN
@@ -155,7 +155,7 @@ SELECT
     0.2 AS tax
 FROM
     orders o
-    JOIN item_changes ic ON ic.warehouse_id = 1
+    JOIN item_changes ic ON ic.address_id = 1
     JOIN items i ON i.id = ic.item_id
 WHERE
     o.order_type = 'purchase'
@@ -167,7 +167,7 @@ WHERE
             AND i.name = 'Instruction Leaflet'));
 
 -- Insert item changes for sales (negative quantity change)
-INSERT INTO item_changes(item_id, quantity_change, warehouse_id)
+INSERT INTO item_changes(item_id, quantity_change, address_id)
 SELECT
     i.id,
     CASE WHEN i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left' THEN
@@ -199,7 +199,7 @@ SELECT
     0.2 AS tax
 FROM
     orders o
-    JOIN item_changes ic ON ic.warehouse_id = 1
+    JOIN item_changes ic ON ic.address_id = 1
     JOIN items i ON i.id = ic.item_id
 WHERE
     o.order_type = 'sale'
@@ -211,7 +211,7 @@ WHERE
             AND i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'));
 
 -- Insert item changes for shipments
-INSERT INTO item_changes(item_id, quantity_change, warehouse_id)
+INSERT INTO item_changes(item_id, quantity_change, address_id)
 SELECT
     i.id,
     CASE WHEN i.name = 'Instruction Leaflet' THEN
@@ -241,9 +241,9 @@ SELECT
 FROM
     orders o
     JOIN item_changes ic ON ((o.order_date = '2023-01-01 10:00:00'
-                AND ic.warehouse_id = 1)
+                AND ic.address_id = 1)
             OR (o.order_date = '2023-01-02 11:00:00'
-                AND ic.warehouse_id = 2))
+                AND ic.address_id = 2))
     JOIN items i ON i.id = ic.item_id
 WHERE
     o.order_type = 'shipment'
@@ -287,11 +287,11 @@ WITH service_item AS (
     WHERE
         name = 'Splint Assembly Service'
         AND type = 'service')
-INSERT INTO item_changes(item_id, quantity_change, warehouse_id)
+INSERT INTO item_changes(item_id, quantity_change, address_id)
 SELECT
     s.id,
     - ic.quantity_change, -- Negative because it's a sale
-    ic.warehouse_id
+    ic.address_id
 FROM
     item_changes ic
     JOIN items i ON i.id = ic.item_id

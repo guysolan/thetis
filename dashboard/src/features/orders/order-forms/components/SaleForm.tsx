@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form, FormLabel } from "@/components/ui/form";
-import SelectWarehouse from "../../../warehouses/components/SelectWarehouse";
+import AddressSelect from "../../../stockpiles/components/AddressSelect";
 import PriceItems from "@/features/orders/order-forms/components/PriceItems";
 import StockItems from "./StockItems";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -58,26 +58,26 @@ const SaleForm = () => {
             order_items,
             order_type,
             order_date,
-            warehouse_id,
+            address_id,
         } = formData;
         const item_changes = [...order_items]
-        const item_changes_with_warehouse = item_changes.map((ic) => ({
+        const item_changes_with_address = item_changes.map((ic) => ({
             item_id: ic.item_id,
             quantity_change: -1 * Number(ic.quantity_change),
             item_price: ic?.item_price ?? 0,
             item_tax: ic?.item_tax ?? 0,
-            warehouse_id: warehouse_id,
+            address_id: address_id,
         }));
         await createOrder({
             in_order_type: order_type,
             in_order_date: order_date.toISOString(),
-            in_order_items: item_changes_with_warehouse,
+            in_order_items: item_changes_with_address,
         });
     };
 
-    const warehouseId = useWatch({
+    const addressId = useWatch({
         control: form.control,
-        name: "warehouse_id",
+        name: "address_id",
     });
 
     return (
@@ -88,12 +88,12 @@ const SaleForm = () => {
             >
                 <DatePicker name="order_date" label='Order Date' />
 
-                <SelectWarehouse
-                    name="warehouse_id"
-                    label="Warehouse"
+                <AddressSelect
+                    name="address_id"
+                    label="From Address"
                 />
 
-                {warehouseId && (
+                {addressId && (
                     <>
                         <Card>
                             <CardHeader>

@@ -16,54 +16,54 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import {
-  selectWarehousesQueryOptions,
-  useSelectWarehouses,
-} from '@/features/warehouses/api/selectWarehouses'
+  selectStockpilesQueryOptions,
+  useSelectStockpiles,
+} from '@/features/stockpiles/api/selectStockpiles'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import PageTitle from '@/components/PageTitle'
-import { WarehouseForm } from '@/features/warehouses/components/WarehouseForm'
+import { AddressForm } from '@/features/stockpiles/components/AddressForm'
 import StocktakeForm from '@/features/orders/order-forms/components/StockForm'
-import AmazonWarehouses from '@/features/warehouses/components/AmazonWarehouses'
-import DeleteDialog from '../../../components/DeleteDialog'
-import useDeleteWarehouse from '../../../features/warehouses/api/deleteWarehouse'
+import AmazonStock from '@/features/stockpiles/components/AmazonWarehouses'
+import DeleteDialog from '@/components/DeleteDialog'
+import useDeleteAddress from '@/features/stockpiles/api/deleteAddress'
 
 const ItemsPage = () => {
-  const { data: warehousesView } = useSelectWarehouses()
+  const { data: stockpilesView } = useSelectStockpiles()
 
-  const { mutate: deleteWarehouse } = useDeleteWarehouse()
+  const { mutate: deleteAddress } = useDeleteAddress()
 
   return (
     <>
-      <PageTitle title="Warehouses">
+      <PageTitle title="stockpiles">
         <Sheet
-          trigger={<Button>New Warehouse</Button>}
-          title="New Warehouse"
-          description="Enter the details for your new Warehouse."
+          trigger={<Button>New Stockpile</Button>}
+          title="New stockpile"
+          description="Enter the details for your new stockpile."
         >
-          <WarehouseForm warehouse={null} />
+          <AddressForm address={null} />
         </Sheet>
       </PageTitle>
       <section className="gap-4 grid lg:grid-cols-2 pt-4">
-        {warehousesView?.map((warehouse) => (
-          <Card key={warehouse.warehouse_id} className="flex flex-col">
+        {stockpilesView?.map((stockpile) => (
+          <Card key={stockpile.stockpile_id} className="flex flex-col">
             <CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
               <CardTitle className="font-semibold text-lg truncate">
-                {warehouse.warehouse_name}
+                {stockpile.stockpile_name}
               </CardTitle>
               <Sheet
                 trigger={<Button variant="outline">Edit</Button>}
-                title={`Edit ${warehouse.warehouse_name}`}
-                description={`Edit the details for warehouse ${warehouse.warehouse_name}`}
+                title={`Edit ${stockpile.stockpile_name}`}
+                description={`Edit the details for stockpile ${stockpile.stockpile_name}`}
                 footer={
                   <DeleteDialog
                     deleteFunction={() =>
-                      deleteWarehouse(warehouse.warehouse_id as number)
+                      deleteAddress(stockpile.stockpile_id as number)
                     }
                   />
                 }
               >
-                <WarehouseForm warehouse={warehouse} />
+                <AddressForm address={{id: stockpile.stockpile_id, name: stockpile.stockpile_name}} />
               </Sheet>
             </CardHeader>
             <CardContent className="flex-grow">
@@ -76,19 +76,19 @@ const ItemsPage = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {(warehouse.items as any)
+                  {(stockpile.items as any)
                     ?.filter((item: any) => item.item_quantity > 0)
                     ?.map((wp: any) => (
                       <TableRow key={`item-${wp.item_id}`}>
                         <TableCell>
-                        <Badge className="capitalize" variant="default">
-                          {wp.item_type}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>{wp.item_name}</TableCell>
-                      <TableCell>{wp.item_quantity}</TableCell>
-                    </TableRow>
-                  ))}
+                          <Badge className="capitalize" variant="default">
+                            {wp.item_type}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>{wp.item_name}</TableCell>
+                        <TableCell>{wp.item_quantity}</TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </CardContent>
@@ -96,15 +96,15 @@ const ItemsPage = () => {
               <Sheet
                 trigger={<Button>New Stocktake</Button>}
                 title="New Stocktake"
-                description={`Update the stock for warehouse ${warehouse.warehouse_name}`}
+                description={`Update the stock for stockpile ${stockpile.stockpile_name}`}
               >
-                <StocktakeForm warehouseId={warehouse.warehouse_id as number} />
+                <StocktakeForm stockpileId={stockpile.stockpile_id as number} />
               </Sheet>
             </CardFooter>
           </Card>
         ))}
       </section>
-      <AmazonWarehouses />
+      <AmazonStock />
     </>
   )
 }
@@ -112,6 +112,6 @@ const ItemsPage = () => {
 export const Route = createFileRoute('/_apps/stock/warehouses')({
   component: ItemsPage,
   loader: async ({ context }) => {
-    await context.queryClient.ensureQueryData(selectWarehousesQueryOptions())
+    await context.queryClient.ensureQueryData(selectStockpilesQueryOptions())
   },
 })

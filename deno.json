@@ -1,7 +1,7 @@
 {
     "tasks": {
         "update-supabase": "brew install supabase/tap/supabase",
-        "reset": "supabase db reset",
+        "reset": "supabase db reset && supabase gen types --lang=typescript --local > dashboard/src/database.types.ts",
         "deploy": "supabase functions deploy",
         "gen-types": "supabase gen types --lang=typescript --local > dashboard/src/database.types.ts",
         "serve": "supabase functions serve --env-file ./supabase/.env.local",

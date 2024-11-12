@@ -1,12 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAmazonInventory } from "../../amazon/api/selectAmazonInventory";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-const AmazonWarehouses = () => {
+const Amazonstockpiles = () => {
     const { data: allInventories } = useAmazonInventory();
 
     return (
         <div className="flex flex-col gap-4 py-4">
-            {Object.entries(allInventories).map(([key, warehouse]) => (
+            {Object.entries(allInventories).map(([key, stockpile]) => (
                 <Card key={key}>
                         <CardHeader>
                         <CardTitle>{key}</CardTitle>
@@ -22,7 +22,7 @@ const AmazonWarehouses = () => {
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {warehouse.map((w) => (
+                                {stockpile.map((w) => (
                                     <TableRow key={w.name}>
                                         <TableCell>{w.name}</TableCell>
                                         <TableCell>{w.total}</TableCell>
@@ -39,4 +39,4 @@ const AmazonWarehouses = () => {
     );
 };
 
-export default AmazonWarehouses;
+export default Amazonstockpiles;

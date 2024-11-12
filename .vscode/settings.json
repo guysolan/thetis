@@ -27,9 +27,12 @@
     "Edit",
     "hookform",
     "lucide",
+    "plpgsql",
+    "recordset",
     "sonner",
     "stocktake",
     "supabase",
-    "tanstack"
+    "tanstack",
+    "upsert"
   ]
 }

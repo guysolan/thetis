@@ -4,34 +4,34 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import Input from "@/components/Input";
 import { Form } from "@/components/ui/form";
-import { useUpsertWarehouse } from "../api/upsertWarehouse";
+import { useUpsertAddress } from "../api/upsertAddress";
 
-import { WarehouseView } from "../types";
+import { Address } from "../types";
 
-const warehouseFormSchema = z.object({
+const addressFormSchema = z.object({
 	id: z.coerce.number().optional(),
 	name: z.string().min(1, "Name required"),
 });
 
-export type WarehouseFormT = z.infer<typeof warehouseFormSchema>;
+export type addressFormT = z.infer<typeof addressFormSchema>;
 
 interface Props {
-	warehouse: WarehouseView | null;
+	address: Address['Row'] | null;
 }
 
-export const WarehouseForm = ({ warehouse }: Props) => {
-	const { mutate: upsertWarehouse } = useUpsertWarehouse();
+export const AddressForm = ({ address }: Props) => {
+	const { mutate: upsertAddress } = useUpsertAddress();
 
-	const form = useForm<WarehouseFormT>({
-		resolver: zodResolver(warehouseFormSchema),
+	const form = useForm<addressFormT>({
+		resolver: zodResolver(addressFormSchema),
 		defaultValues: {
-			id: warehouse?.warehouse_id ?? undefined,
-			name: warehouse?.warehouse_name ?? "",
+			id: address?.id ?? undefined,
+			name: address?.name ?? "",
 		},
 	});
 
-	const onSubmit = (data: WarehouseFormT) => {
-		upsertWarehouse(data);
+	const onSubmit = (data: addressFormT) => {
+		upsertAddress(data);
 	};
 
 	return (

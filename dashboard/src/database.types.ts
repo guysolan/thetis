@@ -34,6 +34,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      addresses: {
+        Row: {
+          city: string | null
+          code: string | null
+          country: string | null
+          created_at: string
+          holds_stock: boolean | null
+          id: number
+          is_active: boolean | null
+          line_1: string | null
+          line_2: string | null
+          name: string | null
+          region: string | null
+        }
+        Insert: {
+          city?: string | null
+          code?: string | null
+          country?: string | null
+          created_at?: string
+          holds_stock?: boolean | null
+          id?: number
+          is_active?: boolean | null
+          line_1?: string | null
+          line_2?: string | null
+          name?: string | null
+          region?: string | null
+        }
+        Update: {
+          city?: string | null
+          code?: string | null
+          country?: string | null
+          created_at?: string
+          holds_stock?: boolean | null
+          id?: number
+          is_active?: boolean | null
+          line_1?: string | null
+          line_2?: string | null
+          name?: string | null
+          region?: string | null
+        }
+        Relationships: []
+      }
       amazon_reports: {
         Row: {
           created_at: string
@@ -55,24 +97,99 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_addresses: {
+        Row: {
+          address_id: number
+          contact_id: number
+        }
+        Insert: {
+          address_id: number
+          contact_id: number
+        }
+        Update: {
+          address_id?: number
+          contact_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_addresses_address_id_fkey"
+            columns: ["address_id"]
+            isOneToOne: false
+            referencedRelation: "address_inventory_value"
+            referencedColumns: ["address_id"]
+          },
+          {
+            foreignKeyName: "contact_addresses_address_id_fkey"
+            columns: ["address_id"]
+            isOneToOne: false
+            referencedRelation: "addresses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_addresses_address_id_fkey"
+            columns: ["address_id"]
+            isOneToOne: false
+            referencedRelation: "items_by_address"
+            referencedColumns: ["address_id"]
+          },
+          {
+            foreignKeyName: "contact_addresses_address_id_fkey"
+            columns: ["address_id"]
+            isOneToOne: false
+            referencedRelation: "stockpiles"
+            referencedColumns: ["stockpile_id"]
+          },
+          {
+            foreignKeyName: "contact_addresses_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contacts: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: number
+          name: string
+          phone: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: number
+          name: string
+          phone?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: number
+          name?: string
+          phone?: string | null
+        }
+        Relationships: []
+      }
       item_changes: {
         Row: {
+          address_id: number | null
           id: number
           item_id: number
           quantity_change: number
-          warehouse_id: number | null
         }
         Insert: {
+          address_id?: number | null
           id?: number
           item_id: number
           quantity_change: number
-          warehouse_id?: number | null
         }
         Update: {
+          address_id?: number | null
           id?: number
           item_id?: number
           quantity_change?: number
-          warehouse_id?: number | null
         }
         Relationships: [
           {
@@ -93,43 +210,43 @@ export type Database = {
             foreignKeyName: "item_changes_item_id_fkey"
             columns: ["item_id"]
             isOneToOne: false
-            referencedRelation: "items_view"
+            referencedRelation: "items_by_address"
             referencedColumns: ["item_id"]
           },
           {
             foreignKeyName: "item_changes_item_id_fkey"
             columns: ["item_id"]
             isOneToOne: false
-            referencedRelation: "warehouse_items"
+            referencedRelation: "items_view"
             referencedColumns: ["item_id"]
           },
           {
             foreignKeyName: "item_changes_warehouse_id_fkey"
-            columns: ["warehouse_id"]
+            columns: ["address_id"]
             isOneToOne: false
-            referencedRelation: "warehouse_inventory_value"
-            referencedColumns: ["warehouse_id"]
+            referencedRelation: "address_inventory_value"
+            referencedColumns: ["address_id"]
           },
           {
             foreignKeyName: "item_changes_warehouse_id_fkey"
-            columns: ["warehouse_id"]
+            columns: ["address_id"]
             isOneToOne: false
-            referencedRelation: "warehouse_items"
-            referencedColumns: ["warehouse_id"]
-          },
-          {
-            foreignKeyName: "item_changes_warehouse_id_fkey"
-            columns: ["warehouse_id"]
-            isOneToOne: false
-            referencedRelation: "warehouses"
+            referencedRelation: "addresses"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "item_changes_warehouse_id_fkey"
-            columns: ["warehouse_id"]
+            columns: ["address_id"]
             isOneToOne: false
-            referencedRelation: "warehouses_view"
-            referencedColumns: ["warehouse_id"]
+            referencedRelation: "items_by_address"
+            referencedColumns: ["address_id"]
+          },
+          {
+            foreignKeyName: "item_changes_warehouse_id_fkey"
+            columns: ["address_id"]
+            isOneToOne: false
+            referencedRelation: "stockpiles"
+            referencedColumns: ["stockpile_id"]
           },
         ]
       }
@@ -168,14 +285,14 @@ export type Database = {
             foreignKeyName: "item_components_component_id_fkey"
             columns: ["component_id"]
             isOneToOne: false
-            referencedRelation: "items_view"
+            referencedRelation: "items_by_address"
             referencedColumns: ["item_id"]
           },
           {
             foreignKeyName: "item_components_component_id_fkey"
             columns: ["component_id"]
             isOneToOne: false
-            referencedRelation: "warehouse_items"
+            referencedRelation: "items_view"
             referencedColumns: ["item_id"]
           },
           {
@@ -196,14 +313,14 @@ export type Database = {
             foreignKeyName: "item_components_item_id_fkey"
             columns: ["item_id"]
             isOneToOne: false
-            referencedRelation: "items_view"
+            referencedRelation: "items_by_address"
             referencedColumns: ["item_id"]
           },
           {
             foreignKeyName: "item_components_item_id_fkey"
             columns: ["item_id"]
             isOneToOne: false
-            referencedRelation: "warehouse_items"
+            referencedRelation: "items_view"
             referencedColumns: ["item_id"]
           },
         ]
@@ -293,32 +410,35 @@ export type Database = {
         }
         Relationships: []
       }
-      warehouses: {
+    }
+    Views: {
+      address_inventory_value: {
         Row: {
-          created_at: string
-          id: number
-          name: string | null
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-          name?: string | null
-        }
-        Update: {
-          created_at?: string
-          id?: number
-          name?: string | null
+          address_id: number | null
+          address_name: string | null
+          total_inventory_value: number | null
         }
         Relationships: []
       }
-    }
-    Views: {
       item_quantities: {
         Row: {
           item_id: number | null
           item_name: string | null
           total_quantity: number | null
           warehouse_quantities: Json | null
+        }
+        Relationships: []
+      }
+      items_by_address: {
+        Row: {
+          address_id: number | null
+          address_name: string | null
+          item_id: number | null
+          item_name: string | null
+          item_price: number | null
+          item_quantity: number | null
+          item_type: Database["public"]["Enums"]["item_type"] | null
+          item_value: number | null
         }
         Relationships: []
       }
@@ -343,33 +463,12 @@ export type Database = {
         }
         Relationships: []
       }
-      warehouse_inventory_value: {
-        Row: {
-          total_inventory_value: number | null
-          warehouse_id: number | null
-          warehouse_name: string | null
-        }
-        Relationships: []
-      }
-      warehouse_items: {
-        Row: {
-          item_id: number | null
-          item_name: string | null
-          item_price: number | null
-          item_quantity: number | null
-          item_type: Database["public"]["Enums"]["item_type"] | null
-          item_value: number | null
-          warehouse_id: number | null
-          warehouse_name: string | null
-        }
-        Relationships: []
-      }
-      warehouses_view: {
+      stockpiles: {
         Row: {
           items: Json | null
-          warehouse_created_at: string | null
-          warehouse_id: number | null
-          warehouse_name: string | null
+          stockpile_created_at: string | null
+          stockpile_id: number | null
+          stockpile_name: string | null
         }
         Relationships: []
       }
@@ -396,7 +495,7 @@ export type Database = {
           id: number
           item_id: number
           quantity_change: number
-          warehouse_id: number
+          address_id: number
         }[]
       }
       insert_order: {
@@ -410,7 +509,7 @@ export type Database = {
           item_change_id: number
           item_id: number
           quantity_change: number
-          warehouse_id: number
+          address_id: number
           item_price: number
           item_tax: number
         }[]
@@ -421,7 +520,7 @@ export type Database = {
               in_order_id: number
               in_item_id: number
               in_quantity_change: number
-              in_warehouse_id: number
+              in_address_id: number
               in_item_price: number
               in_item_tax: number
             }
@@ -430,7 +529,7 @@ export type Database = {
               item_change_id: number
               item_id: number
               quantity_change: number
-              warehouse_id: number
+              address_id: number
               item_price: number
               item_tax: number
             }[]
@@ -463,7 +562,7 @@ export type Database = {
           item_change_id: number
           item_id: number
           quantity_change: number
-          warehouse_id: number
+          address_id: number
           item_price: number
           item_tax: number
         }[]

@@ -52,7 +52,7 @@ const ItemsPage = () => {
       </PageTitle>
 
       <Tabs defaultValue="all" className="w-full">
-        <TabsList>
+        <TabsList className='my-2'>
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="product">Products</TabsTrigger>
           <TabsTrigger value="part">Parts</TabsTrigger>

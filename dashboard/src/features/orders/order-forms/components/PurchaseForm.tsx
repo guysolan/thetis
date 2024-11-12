@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
-import SelectWarehouse from "../../../warehouses/components/SelectWarehouse";
+import AddressSelect from '../../../stockpiles/components/AddressSelect';
 import PriceItems from "@/features/orders/order-forms/components/PriceItems";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { purchaseFormSchema } from "../schema";
@@ -21,7 +21,6 @@ const PurchaseForm = () => {
                 quantity_change: 1,
             }],
             order_date: dayjs().toDate(),
-
             order_type: "purchase", // Add default order type
         },
     });
@@ -36,20 +35,20 @@ const PurchaseForm = () => {
             order_items,
             order_type,
             order_date,
-            warehouse_id,
+            address_id,
         } = formData;
 
-        const item_changes_with_warehouse = order_items.map((ic) => ({
+        const item_changes_with_address = order_items.map((ic) => ({
             item_id: ic.item_id,
             quantity_change: (ic.quantity_change),
             item_price: ic?.item_price ?? 0,
             item_tax: ic?.item_tax ?? 0,
-            warehouse_id: warehouse_id,
+            address_id: address_id,
         }));
         await createOrder({
             in_order_type: order_type,
             in_order_date: order_date.toISOString(),
-            in_order_items: item_changes_with_warehouse,
+            in_order_items: item_changes_with_address,
         });
     };
 
@@ -61,9 +60,9 @@ const PurchaseForm = () => {
             >
                 <DatePicker name="order_date" label='Order Date' />
 
-                <SelectWarehouse
-                    name="warehouse_id"
-                    label="Warehouse"
+                <AddressSelect
+                    name="address_id"
+                    label="From Address"
                 />
 
                        <Card>
