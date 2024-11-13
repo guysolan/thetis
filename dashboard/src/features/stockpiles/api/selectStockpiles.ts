@@ -17,9 +17,10 @@ export const selectStockpiles = async () => {
   return data;
 };
 
+export const selectStockpilesQueryKey = { queryKey: ["select-stockpiles"] };
 export const selectStockpilesQueryOptions = () => {
   return queryOptions({
-    queryKey: ["select-stockpiles"],
+    ...selectStockpilesQueryKey,
     queryFn: selectStockpiles,
   });
 };

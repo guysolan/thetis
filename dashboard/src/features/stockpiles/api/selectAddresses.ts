@@ -17,9 +17,11 @@ export const selectAddresses = async () => {
   return data;
 };
 
+export const selectAddressesQueryKey = { queryKey: ["select-addresses"] };
+
 export const selectAddressesQueryOptions = () => {
   return queryOptions({
-    queryKey: ["select-addresses"],
+    ...selectAddressesQueryKey,
     queryFn: selectAddresses,
   });
 };

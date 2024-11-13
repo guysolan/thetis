@@ -37,8 +37,8 @@ export const jobs = {
         external: false,
       },
       {
-        name: "addresses",
-        href: "/stock/warehouses",
+        name: "Addresses",
+        href: "/stock/addresses",
         description: "Manage the Addresses.",
         icon: <FactoryIcon />,
         external: false,

@@ -18,10 +18,10 @@ import { Route as AppsStockImport } from './routes/_apps/stock'
 import { Route as AppsFinancesImport } from './routes/_apps/finances'
 import { Route as AppsStockIndexImport } from './routes/_apps/stock/index'
 import { Route as DocumentsOrdersOrderIdImport } from './routes/documents/orders.$orderId'
-import { Route as AppsStockWarehousesImport } from './routes/_apps/stock/warehouses'
 import { Route as AppsStockSettingsImport } from './routes/_apps/stock/settings'
 import { Route as AppsStockOrdersImport } from './routes/_apps/stock/orders'
 import { Route as AppsStockItemsImport } from './routes/_apps/stock/items'
+import { Route as AppsStockAddressesImport } from './routes/_apps/stock/addresses'
 import { Route as AppsFinancesAmazonIndexImport } from './routes/_apps/finances/amazon/index'
 import { Route as AppsFinancesAccountsInstructionsImport } from './routes/_apps/finances/accounts/instructions'
 import { Route as AppsFinancesAmazonSettlementsIndexImport } from './routes/_apps/finances/amazon/settlements/index'
@@ -68,11 +68,6 @@ const DocumentsOrdersOrderIdRoute = DocumentsOrdersOrderIdImport.update({
   getParentRoute: () => DocumentsRoute,
 } as any)
 
-const AppsStockWarehousesRoute = AppsStockWarehousesImport.update({
-  path: '/warehouses',
-  getParentRoute: () => AppsStockRoute,
-} as any)
-
 const AppsStockSettingsRoute = AppsStockSettingsImport.update({
   path: '/settings',
   getParentRoute: () => AppsStockRoute,
@@ -85,6 +80,11 @@ const AppsStockOrdersRoute = AppsStockOrdersImport.update({
 
 const AppsStockItemsRoute = AppsStockItemsImport.update({
   path: '/items',
+  getParentRoute: () => AppsStockRoute,
+} as any)
+
+const AppsStockAddressesRoute = AppsStockAddressesImport.update({
+  path: '/addresses',
   getParentRoute: () => AppsStockRoute,
 } as any)
 
@@ -174,6 +174,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppsStockImport
       parentRoute: typeof AppsImport
     }
+    '/_apps/stock/addresses': {
+      id: '/_apps/stock/addresses'
+      path: '/addresses'
+      fullPath: '/stock/addresses'
+      preLoaderRoute: typeof AppsStockAddressesImport
+      parentRoute: typeof AppsStockImport
+    }
     '/_apps/stock/items': {
       id: '/_apps/stock/items'
       path: '/items'
@@ -193,13 +200,6 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/stock/settings'
       preLoaderRoute: typeof AppsStockSettingsImport
-      parentRoute: typeof AppsStockImport
-    }
-    '/_apps/stock/warehouses': {
-      id: '/_apps/stock/warehouses'
-      path: '/warehouses'
-      fullPath: '/stock/warehouses'
-      preLoaderRoute: typeof AppsStockWarehousesImport
       parentRoute: typeof AppsStockImport
     }
     '/documents/orders/$orderId': {
@@ -309,18 +309,18 @@ const AppsFinancesRouteWithChildren = AppsFinancesRoute._addFileChildren(
 )
 
 interface AppsStockRouteChildren {
+  AppsStockAddressesRoute: typeof AppsStockAddressesRoute
   AppsStockItemsRoute: typeof AppsStockItemsRoute
   AppsStockOrdersRoute: typeof AppsStockOrdersRoute
   AppsStockSettingsRoute: typeof AppsStockSettingsRoute
-  AppsStockWarehousesRoute: typeof AppsStockWarehousesRoute
   AppsStockIndexRoute: typeof AppsStockIndexRoute
 }
 
 const AppsStockRouteChildren: AppsStockRouteChildren = {
+  AppsStockAddressesRoute: AppsStockAddressesRoute,
   AppsStockItemsRoute: AppsStockItemsRoute,
   AppsStockOrdersRoute: AppsStockOrdersRoute,
   AppsStockSettingsRoute: AppsStockSettingsRoute,
-  AppsStockWarehousesRoute: AppsStockWarehousesRoute,
   AppsStockIndexRoute: AppsStockIndexRoute,
 }
 
@@ -358,10 +358,10 @@ export interface FileRoutesByFullPath {
   '/documents': typeof DocumentsRouteWithChildren
   '/finances': typeof AppsFinancesRouteWithChildren
   '/stock': typeof AppsStockRouteWithChildren
+  '/stock/addresses': typeof AppsStockAddressesRoute
   '/stock/items': typeof AppsStockItemsRoute
   '/stock/orders': typeof AppsStockOrdersRoute
   '/stock/settings': typeof AppsStockSettingsRoute
-  '/stock/warehouses': typeof AppsStockWarehousesRoute
   '/documents/orders/$orderId': typeof DocumentsOrdersOrderIdRoute
   '/stock/': typeof AppsStockIndexRoute
   '/finances/accounts/instructions': typeof AppsFinancesAccountsInstructionsRoute
@@ -379,10 +379,10 @@ export interface FileRoutesByTo {
   '': typeof AppsRouteWithChildren
   '/documents': typeof DocumentsRouteWithChildren
   '/finances': typeof AppsFinancesRouteWithChildren
+  '/stock/addresses': typeof AppsStockAddressesRoute
   '/stock/items': typeof AppsStockItemsRoute
   '/stock/orders': typeof AppsStockOrdersRoute
   '/stock/settings': typeof AppsStockSettingsRoute
-  '/stock/warehouses': typeof AppsStockWarehousesRoute
   '/documents/orders/$orderId': typeof DocumentsOrdersOrderIdRoute
   '/stock': typeof AppsStockIndexRoute
   '/finances/accounts/instructions': typeof AppsFinancesAccountsInstructionsRoute
@@ -402,10 +402,10 @@ export interface FileRoutesById {
   '/documents': typeof DocumentsRouteWithChildren
   '/_apps/finances': typeof AppsFinancesRouteWithChildren
   '/_apps/stock': typeof AppsStockRouteWithChildren
+  '/_apps/stock/addresses': typeof AppsStockAddressesRoute
   '/_apps/stock/items': typeof AppsStockItemsRoute
   '/_apps/stock/orders': typeof AppsStockOrdersRoute
   '/_apps/stock/settings': typeof AppsStockSettingsRoute
-  '/_apps/stock/warehouses': typeof AppsStockWarehousesRoute
   '/documents/orders/$orderId': typeof DocumentsOrdersOrderIdRoute
   '/_apps/stock/': typeof AppsStockIndexRoute
   '/_apps/finances/accounts/instructions': typeof AppsFinancesAccountsInstructionsRoute
@@ -426,10 +426,10 @@ export interface FileRouteTypes {
     | '/documents'
     | '/finances'
     | '/stock'
+    | '/stock/addresses'
     | '/stock/items'
     | '/stock/orders'
     | '/stock/settings'
-    | '/stock/warehouses'
     | '/documents/orders/$orderId'
     | '/stock/'
     | '/finances/accounts/instructions'
@@ -446,10 +446,10 @@ export interface FileRouteTypes {
     | ''
     | '/documents'
     | '/finances'
+    | '/stock/addresses'
     | '/stock/items'
     | '/stock/orders'
     | '/stock/settings'
-    | '/stock/warehouses'
     | '/documents/orders/$orderId'
     | '/stock'
     | '/finances/accounts/instructions'
@@ -467,10 +467,10 @@ export interface FileRouteTypes {
     | '/documents'
     | '/_apps/finances'
     | '/_apps/stock'
+    | '/_apps/stock/addresses'
     | '/_apps/stock/items'
     | '/_apps/stock/orders'
     | '/_apps/stock/settings'
-    | '/_apps/stock/warehouses'
     | '/documents/orders/$orderId'
     | '/_apps/stock/'
     | '/_apps/finances/accounts/instructions'
@@ -547,12 +547,16 @@ export const routeTree = rootRoute
       "filePath": "_apps/stock.tsx",
       "parent": "/_apps",
       "children": [
+        "/_apps/stock/addresses",
         "/_apps/stock/items",
         "/_apps/stock/orders",
         "/_apps/stock/settings",
-        "/_apps/stock/warehouses",
         "/_apps/stock/"
       ]
+    },
+    "/_apps/stock/addresses": {
+      "filePath": "_apps/stock/addresses.tsx",
+      "parent": "/_apps/stock"
     },
     "/_apps/stock/items": {
       "filePath": "_apps/stock/items.tsx",
@@ -564,10 +568,6 @@ export const routeTree = rootRoute
     },
     "/_apps/stock/settings": {
       "filePath": "_apps/stock/settings.tsx",
-      "parent": "/_apps/stock"
-    },
-    "/_apps/stock/warehouses": {
-      "filePath": "_apps/stock/warehouses.tsx",
       "parent": "/_apps/stock"
     },
     "/documents/orders/$orderId": {
