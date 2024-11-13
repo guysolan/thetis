@@ -61,7 +61,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 								<div className="flex items-center gap-2">
 									<Link
 										to="/documents/orders/$orderId"
-										params={{ orderId: order.order_id }}
+										params={{ orderId: String(order.order_id) }}
 										target="_blank"
 										onClick={(e) => e.stopPropagation()}
 										className="flex items-center gap-2 text-blue-500 hover:underline"
