@@ -6,7 +6,6 @@ import { selectAddressesQueryKey } from "./selectAddresses";
 import { selectStockpilesQueryKey } from "./selectStockpiles";
 
 const insertAddress = async (address: InsertAddress) => {
-
   const { data, error } = await supabase
     .from("addresses")
     .insert(address)

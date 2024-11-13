@@ -14,32 +14,23 @@ type CreateOrderType = {
 	in_order_type: string;
 	in_order_date: string;
 	in_order_items: OrderItemChange[];
+	in_from_address_id: string | null;
+	in_to_address_id: string | null;
 };
-const createOrder = async (
-	order_type: string,
-	order_date: string,
-	item_changes_with_stockpile: OrderItemChange[],
-) => {
-	const { data, error } = await supabase.rpc("insert_order", {
-		in_order_type: order_type,
-		in_order_date: order_date,
-		in_order_items: item_changes_with_stockpile,
-	});
-	console.log(data, error);
+const createOrder = async (orderData: CreateOrderType) => {
+	const { data: result, error } = await supabase.rpc(
+		"insert_order",
+		orderData,
+	);
+	console.log(result, error);
 	if (error) throw error;
-	return data;
+	return result;
 };
 
 export const useCreateOrder = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: (
-			data: CreateOrderType,
-		) => createOrder(
-			data.in_order_type,
-			data.in_order_date,
-			data.in_order_items,
-		),
+		mutationFn: createOrder,
 		onSuccess: () => {
 			toast.success("Order created successfully");
 		},

@@ -91,6 +91,8 @@ const BuildForm = () => {
             in_order_type: order_type,
             in_order_date: order_date.toISOString(),
             in_order_items: item_changes_with_address,
+            in_from_address_id: address_id,
+            in_to_address_id: null,
         });
     };
 

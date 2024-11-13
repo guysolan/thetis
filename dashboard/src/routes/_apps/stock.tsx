@@ -14,7 +14,7 @@ export const Route = createRootRouteWithContext<{
 function DashboardComponent() {
 	return (
 		<>
-			<section className="p-6 max-w-screen-2xl container">
+			<section className="p-2 lg:p-6 max-w-screen-2xl container">
 				<Outlet />
 			</section>
 		</>

@@ -14,7 +14,7 @@ import { useCreateOrder } from "../../api/createOrder";
 import { useShipmentForm } from "../hooks/useShipmentForm";
 import LockCard from "../../components/LockCard";
 import dayjs from 'dayjs';
-import DatePicker from '../../../../components/DatePicker';
+import DatePicker from '@/components/DatePicker';
 
 const ShipmentForm = () => {
     const form = useForm<z.infer<typeof shipmentFormSchema>>({
@@ -86,6 +86,8 @@ const ShipmentForm = () => {
 
         await createOrder({
             in_order_type: "shipment",
+            in_from_address_id: from_address_id,
+            in_to_address_id: to_address_id??null,
             in_order_date: order_date.toISOString(),
             in_order_items: item_changes_with_address,
         });

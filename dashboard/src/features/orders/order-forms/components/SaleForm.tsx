@@ -58,7 +58,8 @@ const SaleForm = () => {
             order_items,
             order_type,
             order_date,
-            address_id,
+            from_address_id,
+            to_address_id,
         } = formData;
         const item_changes = [...order_items]
         const item_changes_with_address = item_changes.map((ic) => ({
@@ -89,8 +90,12 @@ const SaleForm = () => {
                 <DatePicker name="order_date" label='Order Date' />
 
                 <AddressSelect
-                    name="address_id"
-                    label="From Address"
+                    name="from_address_id"
+                    label="Seller Address"
+                />
+                  <AddressSelect
+                    name="to_address_id"
+                    label="Buyer Address"
                 />
 
                 {addressId && (

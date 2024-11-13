@@ -18,16 +18,22 @@ const OrdersPage = () => {
 
       <div className="gap-8 grid grid-cols-2 mb-8">
         <div>
-          <h2 className="mb-2 font-semibold text-xl">Buyer</h2>
-          <p>Name: {order.buyer_name}</p>
-          <p>Address: {order.buyer_address}</p>
-          <p>Contact: {order.buyer_contact}</p>
+          <h2 className="mb-2 font-semibold text-xl">From</h2>
+          <p>{order.from_address.name}</p>
+          <p>{order.from_address.line_1}</p>
+          <p>{order.from_address.line_2}</p>
+          <p>{order.from_address.city}</p>
+          <p>{order.from_address.code}</p>
+          <p>{order.from_address.country}</p>
         </div>
         <div>
-          <h2 className="mb-2 font-semibold text-xl">Seller</h2>
-          <p>Name: {order.seller_name}</p>
-          <p>Address: {order.seller_address}</p>
-          <p>Contact: {order.seller_contact}</p>
+          <h2 className="mb-2 font-semibold text-xl">To</h2>
+          <p>{order.to_address.name}</p>
+          <p>{order.to_address.line_1}</p>
+          <p>{order.to_address.line_2}</p>
+          <p>{order.to_address.city}</p>
+          <p>{order.to_address.code}</p>
+          <p>{order.to_address.country}</p>
         </div>
       </div>
 

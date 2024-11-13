@@ -11,12 +11,14 @@ export const OrderForm: React.FC = () => {
 	return (
 		<>
 			<Tabs defaultValue="build">
-				<TabsList className="mt-4">
+				<div className='overflow-x-scroll'>
+				<TabsList className="">
 					<TabsTrigger className='flex flex-row gap-2' value="build"><Hammer size={16} />Build</TabsTrigger>
 					<TabsTrigger className='flex flex-row gap-2' value="purchase"><ShoppingCart size={16} />Purchase</TabsTrigger>
 					<TabsTrigger className='flex flex-row gap-2' value="sale"><Banknote size={16} />Sell</TabsTrigger>
 					<TabsTrigger className='flex flex-row gap-2' value="shipment"><Truck size={16} />Ship</TabsTrigger>
-				</TabsList>
+					</TabsList>
+					</div>
 				<TabsContent value="purchase"><PurchaseForm /></TabsContent>
 				<TabsContent value="sale"><SaleForm /></TabsContent>
 				<TabsContent value="build"><BuildForm /></TabsContent>

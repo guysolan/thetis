@@ -29,13 +29,13 @@ const OrdersPage = () => {
       <Tabs defaultValue="all" className="w-full">
         <TabsList className='my-2'>
           <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="sales">Sales</TabsTrigger>
+          <TabsTrigger value="sale">Sales</TabsTrigger>
           <TabsTrigger value="build">Builds</TabsTrigger>
           <TabsTrigger value="purchase">Purchase</TabsTrigger>
-          <TabsTrigger value="shipments">Shipments</TabsTrigger>
+          <TabsTrigger value="shipment">Shipments</TabsTrigger>
         </TabsList>
 
-        {["all", "sales", "build", "purchase", "shipments"].map((tabValue) => (
+        {["all", "sale", "build", "purchase", "shipment"].map((tabValue) => (
           <TabsContent key={tabValue} value={tabValue}>
             <OrderHistory 
               orders={orders?.filter(order => 

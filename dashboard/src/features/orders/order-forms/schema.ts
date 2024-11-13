@@ -35,7 +35,8 @@ export type ItemChange = z.infer<typeof pricedItemSchema>;
 
 // Move schemas to a separate file: schemas.ts
 export const saleFormSchema = z.object({
-    address_id: z.string().min(1, "Please select a address"),
+    from_address_id: z.string().min(1, "Please select a address"),
+    to_address_id: z.string().min(1, "Please select a address"),
     order_type: z.enum(["sale"]), // Add validation for order_type
     order_items: z.array(orderItemSchema),
     order_date: z.date(),
