@@ -31,9 +31,8 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 	orders,
 }) => {
 	return (
-		<div className="mt-4">
-			<h2 className="mb-2 font-semibold text-xl">Existing Orders</h2>
-			<Accordion type="single" collapsible className="w-full">
+
+		<Accordion type="single" collapsible className="w-full">
 				{orders.map((order) => (
 					<AccordionItem
 						key={order.order_id}
@@ -130,6 +129,5 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 					</AccordionItem>
 				))}
 			</Accordion>
-		</div>
 	);
 };
