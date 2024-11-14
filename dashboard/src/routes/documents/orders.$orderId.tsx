@@ -3,7 +3,9 @@ import {
   selectOrderByIdQueryOptions,
 } from "@/features/orders/order-history/api/selectOrderById";
 import BuildForm from "../../features/orders/order-forms/components/BuildForm";
-import BuildOrderDocument from '../../features/orders/order-documents/BuildOrderDocument';
+import BuildOrderDocument from "../../features/orders/order-documents/BuildOrderDocument";
+import SaleDocument from '../../features/orders/order-documents/SaleDocument';
+import CommercialInvoice from '../../features/orders/order-documents/CommercialInvoice';
 
 const OrdersPage = () => {
   const { order } = Route.useLoaderData();
@@ -11,6 +13,10 @@ const OrdersPage = () => {
   switch (order.order_type) {
     case ("build"):
       return <BuildOrderDocument order={order} />;
+    case ("sale"):
+      return <SaleDocument order={order} />
+        case ("shipment"):
+      return <CommercialInvoice order={order}/>
   }
   return (
     <>
@@ -55,6 +61,7 @@ const OrdersPage = () => {
             <tr className="bg-zinc-100">
               <th className="p-2 text-left">Name</th>
               <th className="text-right p-2">Price</th>
+              <th className="text-right p-2">Tax</th>
               <th className="text-right p-2">Quantity</th>
               <th className="text-right p-2">Total</th>
             </tr>
@@ -66,9 +73,10 @@ const OrdersPage = () => {
                 <td className="text-right p-2">
                   ${item.price?.toFixed(2)}
                 </td>
-                <td className="text-right p-2">{item.quantity}</td>
+                <td className="text-right p-2">{(item.tax) * 100}%</td>
+                <td className="text-right p-2">{Math.abs(item.quantity)}</td>
                 <td className="text-right p-2">
-                  ${(item.price * item.quantity)?.toFixed(2)}
+                  ${item.total?.toFixed(2)}
                 </td>
               </tr>
             ))}

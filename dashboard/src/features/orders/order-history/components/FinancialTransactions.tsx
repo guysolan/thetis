@@ -23,7 +23,8 @@ const FinancialTransactions = (
                     <TableHead>Item Name</TableHead>
                     <TableHead>Quantity</TableHead>
                     <TableHead>Price</TableHead>
-                    <TableHead>Total</TableHead>
+                    <TableHead>Tax</TableHead>
+                    <TableHead className='w-1/6'>Total</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -47,6 +48,10 @@ const FinancialTransactions = (
                         <TableCell>
                             ${item.price?.toFixed(2) ??
                                 0.00}
+                        </TableCell>
+                              <TableCell>
+                            {(item.tax*100)?.toFixed(0) ??
+                                0}%
                         </TableCell>
                      
                         <TableCell>

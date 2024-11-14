@@ -1,17 +1,28 @@
 import React from "react";
-interface Props {
+
+type Props = {
     title: string;
-    name: string;
-    address: string;
-    email: string;
-}
-const Company = ({ title,name, address, email }: Props) => {
+    company: {
+        id: number;
+        name: string;
+        tax_number: string;
+        company_number: string;
+    };
+};
+
+const Company = ({ title, company }: Props) => {
     return (
-        <div>
-            <h2 className="mb-2 font-semibold text-xl">{title}</h2>
-            <p>Name: {name}</p>
-            <p>Address: {address}</p>
-            <p>Contact: {email}</p>
+        <div className="mb-4 text-neutral-700 text-sm">
+            <h2 className="mb-4 font-semibold text-lg text-neutral-900">{title}</h2>
+            {company ? (
+                <>
+                    <p>{company.name}</p>
+                    <p>VAT: {company.tax_number}</p>
+                    <p>Company No: {company.company_number}</p>
+                </>
+            ) : (
+                <p>-</p>
+            )}
         </div>
     );
 };

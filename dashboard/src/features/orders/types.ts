@@ -1,5 +1,12 @@
 import { Database } from "@/database.types";
-
+export interface Address {
+    name: string;
+    line_1: string;
+    line_2: string;
+    city: string;
+    code: string;
+    country: string;
+}
 export type Order = Database["public"]["Tables"]["orders"];
 export type OrderRow = Order["Row"];
 export type OrderItem =
@@ -18,4 +25,6 @@ export type OrderView = Database["public"]["Views"]["orders_view"]["Row"] & {
     order_id: number;
     items: OrderItemInView[];
     order_type: OrderType;
+    from_address: Address;
+    to_address: Address;
 };

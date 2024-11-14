@@ -14,9 +14,9 @@ import { saleFormSchema } from "../schema";
 import { useCreateOrder } from "../../api/createOrder";
 import { useSaleForm } from "../hooks/useSaleForm";
 import { Separator } from "../../../../components/ui/separator";
-import LockCard from '../../components/LockCard';
-import dayjs from 'dayjs';
-import DatePicker from '../../../../components/DatePicker';
+import LockCard from "../../components/LockCard";
+import dayjs from "dayjs";
+import DatePicker from "../../../../components/DatePicker";
 
 const SaleForm = () => {
     const form = useForm<z.infer<typeof saleFormSchema>>({
@@ -61,24 +61,26 @@ const SaleForm = () => {
             from_address_id,
             to_address_id,
         } = formData;
-        const item_changes = [...order_items]
+        const item_changes = [...order_items];
         const item_changes_with_address = item_changes.map((ic) => ({
             item_id: ic.item_id,
             quantity_change: -1 * Number(ic.quantity_change),
             item_price: ic?.item_price ?? 0,
             item_tax: ic?.item_tax ?? 0,
-            address_id: address_id,
+            address_id: from_address_id,
         }));
         await createOrder({
             in_order_type: order_type,
             in_order_date: order_date.toISOString(),
             in_order_items: item_changes_with_address,
+            in_from_address_id: from_address_id,
+            in_to_address_id: to_address_id,
         });
     };
 
     const addressId = useWatch({
         control: form.control,
-        name: "address_id",
+        name: "from_address_id",
     });
 
     return (
@@ -87,13 +89,13 @@ const SaleForm = () => {
                 onSubmit={form.handleSubmit(handleSubmit)}
                 className="flex flex-col space-y-4 px-1 pt-2 pr-4"
             >
-                <DatePicker name="order_date" label='Order Date' />
+                <DatePicker name="order_date" label="Order Date" />
 
                 <AddressSelect
                     name="from_address_id"
                     label="Seller Address"
                 />
-                  <AddressSelect
+                <AddressSelect
                     name="to_address_id"
                     label="Buyer Address"
                 />
@@ -109,7 +111,7 @@ const SaleForm = () => {
                             </CardContent>
                         </Card>
                         <LockCard title="Consumed Items">
-                            <StockItems name="consumed_items" />
+                            <StockItems name="consumed_items" address_name='from_address_id' />
                         </LockCard>
                         <Button
                             onClick={() => {
