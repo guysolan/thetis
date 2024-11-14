@@ -97,6 +97,81 @@ export type Database = {
         }
         Relationships: []
       }
+      companies: {
+        Row: {
+          company_number: string | null
+          created_at: string
+          id: number
+          name: string
+          tax_number: string | null
+        }
+        Insert: {
+          company_number?: string | null
+          created_at?: string
+          id?: number
+          name: string
+          tax_number?: string | null
+        }
+        Update: {
+          company_number?: string | null
+          created_at?: string
+          id?: number
+          name?: string
+          tax_number?: string | null
+        }
+        Relationships: []
+      }
+      company_addresses: {
+        Row: {
+          address_id: number
+          company_id: number
+        }
+        Insert: {
+          address_id: number
+          company_id: number
+        }
+        Update: {
+          address_id?: number
+          company_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "company_addresses_address_id_fkey"
+            columns: ["address_id"]
+            isOneToOne: false
+            referencedRelation: "address_inventory_value"
+            referencedColumns: ["address_id"]
+          },
+          {
+            foreignKeyName: "company_addresses_address_id_fkey"
+            columns: ["address_id"]
+            isOneToOne: false
+            referencedRelation: "addresses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "company_addresses_address_id_fkey"
+            columns: ["address_id"]
+            isOneToOne: false
+            referencedRelation: "items_by_address"
+            referencedColumns: ["address_id"]
+          },
+          {
+            foreignKeyName: "company_addresses_address_id_fkey"
+            columns: ["address_id"]
+            isOneToOne: false
+            referencedRelation: "stockpiles"
+            referencedColumns: ["stockpile_id"]
+          },
+          {
+            foreignKeyName: "company_addresses_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_addresses: {
         Row: {
           address_id: number
@@ -327,22 +402,43 @@ export type Database = {
       }
       items: {
         Row: {
+          country_of_origin: string | null
+          depth: number | null
+          height: number | null
+          hs_code: number | null
           id: number
           name: string
           price: number
+          sku: string | null
           type: Database["public"]["Enums"]["item_type"]
+          weight: number | null
+          width: number | null
         }
         Insert: {
+          country_of_origin?: string | null
+          depth?: number | null
+          height?: number | null
+          hs_code?: number | null
           id?: number
           name: string
           price: number
+          sku?: string | null
           type: Database["public"]["Enums"]["item_type"]
+          weight?: number | null
+          width?: number | null
         }
         Update: {
+          country_of_origin?: string | null
+          depth?: number | null
+          height?: number | null
+          hs_code?: number | null
           id?: number
           name?: string
           price?: number
+          sku?: string | null
           type?: Database["public"]["Enums"]["item_type"]
+          weight?: number | null
+          width?: number | null
         }
         Relationships: []
       }
@@ -392,81 +488,163 @@ export type Database = {
       orders: {
         Row: {
           carriage: number
-          from_address_id: number | null
+          from_billing_address_id: number | null
+          from_company_id: number | null
+          from_shipping_address_id: number | null
           id: number
           order_date: string
           order_type: Database["public"]["Enums"]["order_type"]
-          to_address_id: number | null
+          to_billing_address_id: number | null
+          to_company_id: number | null
+          to_shipping_address_id: number | null
         }
         Insert: {
           carriage?: number
-          from_address_id?: number | null
+          from_billing_address_id?: number | null
+          from_company_id?: number | null
+          from_shipping_address_id?: number | null
           id?: number
           order_date?: string
           order_type: Database["public"]["Enums"]["order_type"]
-          to_address_id?: number | null
+          to_billing_address_id?: number | null
+          to_company_id?: number | null
+          to_shipping_address_id?: number | null
         }
         Update: {
           carriage?: number
-          from_address_id?: number | null
+          from_billing_address_id?: number | null
+          from_company_id?: number | null
+          from_shipping_address_id?: number | null
           id?: number
           order_date?: string
           order_type?: Database["public"]["Enums"]["order_type"]
-          to_address_id?: number | null
+          to_billing_address_id?: number | null
+          to_company_id?: number | null
+          to_shipping_address_id?: number | null
         }
         Relationships: [
           {
-            foreignKeyName: "orders_from_address_id_fkey"
-            columns: ["from_address_id"]
+            foreignKeyName: "orders_from_billing_address_id_fkey"
+            columns: ["from_billing_address_id"]
             isOneToOne: false
             referencedRelation: "address_inventory_value"
             referencedColumns: ["address_id"]
           },
           {
-            foreignKeyName: "orders_from_address_id_fkey"
-            columns: ["from_address_id"]
+            foreignKeyName: "orders_from_billing_address_id_fkey"
+            columns: ["from_billing_address_id"]
             isOneToOne: false
             referencedRelation: "addresses"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "orders_from_address_id_fkey"
-            columns: ["from_address_id"]
+            foreignKeyName: "orders_from_billing_address_id_fkey"
+            columns: ["from_billing_address_id"]
             isOneToOne: false
             referencedRelation: "items_by_address"
             referencedColumns: ["address_id"]
           },
           {
-            foreignKeyName: "orders_from_address_id_fkey"
-            columns: ["from_address_id"]
+            foreignKeyName: "orders_from_billing_address_id_fkey"
+            columns: ["from_billing_address_id"]
             isOneToOne: false
             referencedRelation: "stockpiles"
             referencedColumns: ["stockpile_id"]
           },
           {
-            foreignKeyName: "orders_to_address_id_fkey"
-            columns: ["to_address_id"]
+            foreignKeyName: "orders_from_company_id_fkey"
+            columns: ["from_company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orders_from_shipping_address_id_fkey"
+            columns: ["from_shipping_address_id"]
             isOneToOne: false
             referencedRelation: "address_inventory_value"
             referencedColumns: ["address_id"]
           },
           {
-            foreignKeyName: "orders_to_address_id_fkey"
-            columns: ["to_address_id"]
+            foreignKeyName: "orders_from_shipping_address_id_fkey"
+            columns: ["from_shipping_address_id"]
             isOneToOne: false
             referencedRelation: "addresses"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "orders_to_address_id_fkey"
-            columns: ["to_address_id"]
+            foreignKeyName: "orders_from_shipping_address_id_fkey"
+            columns: ["from_shipping_address_id"]
             isOneToOne: false
             referencedRelation: "items_by_address"
             referencedColumns: ["address_id"]
           },
           {
-            foreignKeyName: "orders_to_address_id_fkey"
-            columns: ["to_address_id"]
+            foreignKeyName: "orders_from_shipping_address_id_fkey"
+            columns: ["from_shipping_address_id"]
+            isOneToOne: false
+            referencedRelation: "stockpiles"
+            referencedColumns: ["stockpile_id"]
+          },
+          {
+            foreignKeyName: "orders_to_billing_address_id_fkey"
+            columns: ["to_billing_address_id"]
+            isOneToOne: false
+            referencedRelation: "address_inventory_value"
+            referencedColumns: ["address_id"]
+          },
+          {
+            foreignKeyName: "orders_to_billing_address_id_fkey"
+            columns: ["to_billing_address_id"]
+            isOneToOne: false
+            referencedRelation: "addresses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orders_to_billing_address_id_fkey"
+            columns: ["to_billing_address_id"]
+            isOneToOne: false
+            referencedRelation: "items_by_address"
+            referencedColumns: ["address_id"]
+          },
+          {
+            foreignKeyName: "orders_to_billing_address_id_fkey"
+            columns: ["to_billing_address_id"]
+            isOneToOne: false
+            referencedRelation: "stockpiles"
+            referencedColumns: ["stockpile_id"]
+          },
+          {
+            foreignKeyName: "orders_to_company_id_fkey"
+            columns: ["to_company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orders_to_shipping_address_id_fkey"
+            columns: ["to_shipping_address_id"]
+            isOneToOne: false
+            referencedRelation: "address_inventory_value"
+            referencedColumns: ["address_id"]
+          },
+          {
+            foreignKeyName: "orders_to_shipping_address_id_fkey"
+            columns: ["to_shipping_address_id"]
+            isOneToOne: false
+            referencedRelation: "addresses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orders_to_shipping_address_id_fkey"
+            columns: ["to_shipping_address_id"]
+            isOneToOne: false
+            referencedRelation: "items_by_address"
+            referencedColumns: ["address_id"]
+          },
+          {
+            foreignKeyName: "orders_to_shipping_address_id_fkey"
+            columns: ["to_shipping_address_id"]
             isOneToOne: false
             referencedRelation: "stockpiles"
             referencedColumns: ["stockpile_id"]
@@ -508,22 +686,33 @@ export type Database = {
       items_view: {
         Row: {
           components: Json | null
+          country_of_origin: string | null
+          depth: number | null
+          height: number | null
+          hs_code: number | null
           item_id: number | null
           item_name: string | null
           item_price: number | null
           item_type: Database["public"]["Enums"]["item_type"] | null
+          sku: string | null
+          weight: number | null
+          width: number | null
         }
         Relationships: []
       }
       orders_view: {
         Row: {
           carriage: number | null
-          from_address: Json | null
+          from_billing_address: Json | null
+          from_company: Json | null
+          from_shipping_address: Json | null
           items: Json | null
           order_date: string | null
           order_id: number | null
           order_type: Database["public"]["Enums"]["order_type"] | null
-          to_address: Json | null
+          to_billing_address: Json | null
+          to_company: Json | null
+          to_shipping_address: Json | null
           total_value: number | null
         }
         Relationships: []
@@ -568,8 +757,12 @@ export type Database = {
           in_order_type: string
           in_order_date: string
           in_order_items: Json
-          in_from_address_id?: number
-          in_to_address_id?: number
+          in_from_company_id?: number
+          in_to_company_id?: number
+          in_from_billing_address_id?: number
+          in_from_shipping_address_id?: number
+          in_to_billing_address_id?: number
+          in_to_shipping_address_id?: number
         }
         Returns: {
           order_id: number
@@ -672,7 +865,7 @@ export type Database = {
       }
     }
     Enums: {
-      item_type: "product" | "part" | "service"
+      item_type: "product" | "part" | "service" | "package"
       order_type: "purchase" | "sale" | "shipment" | "stocktake" | "build"
     }
     CompositeTypes: {

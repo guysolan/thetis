@@ -25,14 +25,22 @@
   "deno.importMap": "./supabase/functions/import_map.json",
   "cSpell.words": [
     "Edit",
+    "EORI",
+    "Godalming",
+    "Hascombe",
     "hookform",
+    "IBAN",
     "lucide",
     "plpgsql",
     "recordset",
+    "Revolut",
     "sonner",
+    "Stilemans",
     "stocktake",
     "supabase",
     "tanstack",
-    "upsert"
+    "to_address_id",
+    "upsert",
+    "Westbury"
   ]
 }
