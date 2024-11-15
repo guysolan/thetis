@@ -9,11 +9,6 @@ import {
 import Sheet from "@/components/Sheet.tsx";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover.tsx";
-import {
   Table,
   TableBody,
   TableCell,
@@ -23,24 +18,17 @@ import {
 } from "@/components/ui/table";
 
 import { Button } from "@/components/ui/button";
-import {
-  Copy,
-  DotSquare,
-  Edit,
-  MoreVertical,
-  Pencil,
-  Trash2,
-} from "lucide-react";
+import { Pencil } from "lucide-react";
 import ItemComponentsForm from "@/features/items/components/ItemComponentsForm.tsx";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView.ts";
-import DeleteDialog from "@/components/DeleteDialog.tsx";
 import { ItemForm } from "@/features/items/components/ItemForm.tsx";
 import { Badge } from "@/components/ui/badge.tsx";
 import PageTitle from "@/components/PageTitle.tsx";
 import { ItemView } from "@/features/items/types.ts";
-import { SheetClose, SheetFooter } from "@/components/ui/sheet.tsx";
 import { useDeleteItem } from "@/features/items/api/deleteItem.ts";
 import { useDuplicateItem } from "../../../features/items/api/duplicateItem";
+import ActionPopover from "@/components/ActionPopover";
+
 const ItemsPage = () => {
   const { data: itemsView } = useSelectItemsView();
   const { mutate: duplicateItem } = useDuplicateItem();
@@ -80,68 +68,27 @@ const ItemsPage = () => {
                         <CardTitle className="flex flex-row flex-wrap gap-4 font-semibold text-left text-lg text-wrap truncate">
                           {item.item_name}
                           <Badge>{item.item_type}</Badge>
-
                         </CardTitle>
                         <CardDescription>
                           ${Number(item.item_price ?? 0).toFixed(2)} per unit
                         </CardDescription>
-
                       </div>
                       <div className="flex flex-row flex-shrink gap-2">
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <Button variant="ghost" size="icon">
-                              <MoreVertical size={20} />
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent
-                            align="end"
-                            side="bottom"
-                            className="flex flex-col gap-1 p-1"
-                          >
-                            <Button
-                              className="justify-start gap-2 px-2"
-                              variant="ghost"
-                              onClick={() =>
-                                duplicateItem({
-                                  itemId: {
-                                    price: item.item_price,
-                                    name: item.item_name,
-                                    type: item.item_type!,
-                                  },
-                                  components: item.components,
-                                })}
-                            >
-                              <Copy size={20} />
-                              Duplicate
-                            </Button>
-                            <Sheet
-                              trigger={
-                                <Button
-                                  className="justify-start gap-2 px-2"
-                                  variant="ghost"
-                                >
-                                  <Edit size={20} />Edit
-                                </Button>
-                              }
-                              title="Edit"
-                            >
-                              <ItemForm item={item} />
-                            </Sheet>
-                            <DeleteDialog
-                              trigger={
-                                <Button
-                                  variant="ghost"
-                                  className="justify-start gap-2 px-2 text-red-500 hover:text-red-600"
-                                >
-                                  <Trash2 size={20} />Delete
-                                </Button>
-                              }
-                              deleteFunction={() =>
-                                deleteItem(item.item_id as number)}
-                            />
-                          </PopoverContent>
-                        </Popover>
+                        <ActionPopover
+                          title={item.item_name}
+                          editForm={<ItemForm item={item} />}
+                          deleteFunction={() =>
+                            deleteItem(item.item_id as number)}
+                          onDuplicate={() =>
+                            duplicateItem({
+                              itemId: {
+                                price: item.item_price,
+                                name: item.item_name,
+                                type: item.item_type!,
+                              },
+                              components: item.components,
+                            })}
+                        />
                       </div>
                     </CardHeader>
                     {["product", "package"].includes(item?.item_type ?? "") && (

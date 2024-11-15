@@ -1,11 +1,21 @@
-import { useMemo } from "react";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { Control, UseFormSetValue, useWatch } from "react-hook-form";
 import { useSelectItemsByAddress } from "@/features/stockpiles/api/selectItemsByAddress";
 
-export const useStocktakeDiscrepancy = () => {
-  const { data: stockpileItems } = useSelectItemsByAddress();
-  const { control, setValue } = useFormContext();
+interface StocktakeDiscrepancy {
+  id: string;
+  quantity_before: number;
+  quantity_after: number;
+  quantity_change: number;
+}
 
+export const useStocktakeDiscrepancy = (
+  control: Control<any>,
+  setValue: UseFormSetValue<any>,
+): StocktakeDiscrepancy[] => {
+  const { data: stockpileItems } = useSelectItemsByAddress();
+
+  // Watch for changes in relevant form fields
   const orderItems = useWatch({
     control,
     name: "order_items",
@@ -13,41 +23,71 @@ export const useStocktakeDiscrepancy = () => {
 
   const selectedFromStockpile = useWatch({
     control,
-    name: "stockpile_id",
+    name: "address_id",
   });
 
-  const stockTakeDiscrepancy = useMemo(() => {
-    if (!selectedFromStockpile || !stockpileItems || !orderItems) return [];
+  // Add state to store discrepancies
+  const [discrepancies, setDiscrepancies] = useState<StocktakeDiscrepancy[]>(
+    [],
+  );
 
-    const itemsInStockpile = stockpileItems.filter(
-      (w) => String(w.stockpile_id) === String(selectedFromStockpile),
-    );
+  useEffect(() => {
+    if (!selectedFromStockpile || !stockpileItems || !orderItems) {
+      setValue("change_quantity", []);
+      setDiscrepancies([]);
+      return;
+    }
 
-    const stockTakeDiscrepancy = orderItems.map((oi) => {
-      const stockpileItem = itemsInStockpile.find((item) =>
-        String(item.item_id) === String(oi.item_id)
-      );
+    // Calculate stocktake discrepancies
+    const newDiscrepancies = processStocktakeItems({
+      orderItems,
+      stockpileItems,
+      selectedFromStockpile,
+    }) || [];
 
-      const itemQuantity = stockpileItem?.item_quantity ?? 0;
+    setDiscrepancies(newDiscrepancies);
 
-      return {
-        id: oi.item_id,
-        quantity_before: itemQuantity,
-        quantity_after: oi.quantity_change,
-        quantity_change: oi.quantity_change - itemQuantity,
-      };
-    });
-
+    // Update form with change quantities
     setValue(
       "change_quantity",
-      stockTakeDiscrepancy.map((item) => ({
+      newDiscrepancies?.map((item) => ({
         quantity_change: Number(item.quantity_change),
         item_id: Number(item.id),
       })),
     );
+  }, [selectedFromStockpile, stockpileItems, orderItems, setValue]);
 
-    return stockTakeDiscrepancy;
-  }, [selectedFromStockpile, stockpileItems, orderItems]);
-
-  return stockTakeDiscrepancy;
+  return discrepancies;
 };
+
+interface ProcessStocktakeItemsParams {
+  orderItems: any[]; // Replace with proper type
+  stockpileItems: any[]; // Replace with proper type
+  selectedFromStockpile: string | number;
+}
+
+function processStocktakeItems({
+  orderItems,
+  stockpileItems,
+  selectedFromStockpile,
+}: ProcessStocktakeItemsParams): StocktakeDiscrepancy[] {
+  const itemsInStockpile = stockpileItems.filter(
+    (w) => String(w.address_id) === String(selectedFromStockpile),
+  );
+
+  return orderItems?.map((orderItem) => {
+    const stockpileItem = itemsInStockpile.find(
+      (item) => String(item.item_id) === String(orderItem.item_id),
+    );
+
+    const quantityBefore = stockpileItem?.item_quantity ?? 0;
+    const quantityAfter = Number(orderItem.quantity_change);
+
+    return {
+      id: orderItem.item_id,
+      quantity_before: quantityBefore,
+      quantity_after: quantityAfter,
+      quantity_change: quantityAfter - quantityBefore,
+    };
+  });
+}

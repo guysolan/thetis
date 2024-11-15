@@ -5,6 +5,7 @@ import { InsertAddress } from "../../stockpiles/types";
 import { selectAddressesQueryKey } from "../../stockpiles/api/selectAddresses";
 import { selectCompaniesQueryKey } from "./selectCompanies";
 import { insertUpsertAddress } from "../../stockpiles/api/addressMutation";
+import { selectStockpilesQueryKey } from "../../stockpiles/api/selectStockpiles";
 
 const insertUpsertCompanyAddress = async (
     { address, companyId, operation }: {
@@ -41,6 +42,7 @@ export const useCompanyAddressMutation = (operation: "insert" | "upsert") => {
         },
         onSettled: () => {
             queryClient.invalidateQueries(selectAddressesQueryKey);
+            queryClient.invalidateQueries(selectStockpilesQueryKey);
             queryClient.invalidateQueries(selectCompaniesQueryKey);
         },
     });

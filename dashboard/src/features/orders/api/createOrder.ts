@@ -1,6 +1,8 @@
 import { toast } from "sonner";
 import { supabase } from "../../../lib/supabase";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { selectOrdersQueryKey } from "../order-history/api/selectOrders";
+import { selectStockpilesQueryKey } from "../../stockpiles/api/selectStockpiles";
 
 export type OrderItemChange = {
 	item_id: string;
@@ -42,7 +44,8 @@ export const useCreateOrder = () => {
 			toast.error("Error creating order");
 		},
 		onSettled: () => {
-			queryClient.invalidateQueries({ queryKey: ["select-orders"] });
+			queryClient.invalidateQueries(selectOrdersQueryKey);
+			queryClient.invalidateQueries(selectStockpilesQueryKey);
 		},
 	});
 };

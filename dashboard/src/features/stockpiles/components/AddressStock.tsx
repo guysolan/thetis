@@ -23,6 +23,7 @@ import DeleteDialog from "@/components/DeleteDialog";
 import { useSelectStockpiles } from "../api/selectStockpiles";
 import StocktakeForm from "../../orders/order-forms/components/StockForm";
 import useDeleteAddress from "../api/deleteAddress";
+import ActionPopover from "@/components/ActionPopover";
 
 const AddressStock = () => {
     const { data: stockpiles } = useSelectStockpiles();
@@ -39,30 +40,24 @@ const AddressStock = () => {
                             <CardTitle className="font-semibold text-lg truncate">
                                 {stockpile.stockpile_name}
                             </CardTitle>
-                            <Sheet
-                                trigger={
-                                    <Button variant="outline">Edit</Button>
-                                }
-                                title={`Edit ${stockpile.stockpile_name}`}
+                            <ActionPopover
+                                title={stockpile.stockpile_name}
                                 description={`Edit the details for stockpile ${stockpile.stockpile_name}`}
-                                footer={
-                                    <DeleteDialog
-                                        deleteFunction={() =>
-                                            deleteAddress(
-                                                stockpile
-                                                    .stockpile_id as number,
-                                            )}
+                                editForm={
+                                    <AddressForm
+                                        operation="upsert"
+                                        address={{
+                                            id: stockpile
+                                                .stockpile_id as number,
+                                            name: stockpile.stockpile_name,
+                                        }}
                                     />
                                 }
-                            >
-                                <AddressForm
-                                    operation="upsert"
-                                    address={{
-                                        id: stockpile.stockpile_id as number,
-                                        name: stockpile.stockpile_name,
-                                    }}
-                                />
-                            </Sheet>
+                                deleteFunction={() =>
+                                    deleteAddress(
+                                        stockpile.stockpile_id as number,
+                                    )}
+                            />
                         </CardHeader>
                         <CardContent className="flex-grow">
                             <Table className="mt-4">

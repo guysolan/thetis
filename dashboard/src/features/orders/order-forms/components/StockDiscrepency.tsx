@@ -1,7 +1,5 @@
-import React from "react";
+import { Control, UseFormSetValue } from "react-hook-form";
 import { useStocktakeDiscrepancy } from "../hooks/useStocktakeDiscrepency";
-import NumberCell from '../../../../components/NumberCell';
-
 import {
   Table,
   TableBody,
@@ -9,31 +7,32 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../../../components/ui/table";
-import { useSelectItemsView } from '../../../items/api/selectItemsView';
-import { ItemView } from '../../../items/types';
+} from "@/components/ui/table";
+interface StocktakeDiscrepancyProps {
+  control: Control<any>;
+  setValue: UseFormSetValue<any>;
+}
 
-export const StocktakeDiscrepancy: React.FC = () => {
-	const {data: itemsView} = useSelectItemsView();
-  const stockTakeDiscrepancy = useStocktakeDiscrepancy();
+const StocktakeDiscrepancy = (
+  { control, setValue }: StocktakeDiscrepancyProps,
+) => {
+  const discrepancies = useStocktakeDiscrepancy(control, setValue);
 
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Name</TableHead>
           <TableHead>Before</TableHead>
-          <TableHead>Change</TableHead>
           <TableHead>After</TableHead>
+          <TableHead>Change</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {stockTakeDiscrepancy.map((item) => (
-          <TableRow key={item.id}>
-            <TableCell>{itemsView?.find((i:ItemView) =>String(i.item_id) === String(item.id))?.item_name}</TableCell>
-            <NumberCell value={item.quantity_before} />
-            <NumberCell value={item.quantity_change} />
-            <NumberCell value={item.quantity_after} />
+        {discrepancies.map((discrepancy) => (
+          <TableRow key={discrepancy.id}>
+            <TableCell>{discrepancy.quantity_before}</TableCell>
+            <TableCell>{discrepancy.quantity_after}</TableCell>
+            <TableCell>{discrepancy.quantity_change}</TableCell>
           </TableRow>
         ))}
       </TableBody>

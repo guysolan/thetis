@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { InsertAddress } from "../types";
 import { selectAddressesQueryKey } from "./selectAddresses";
 import { selectStockpilesQueryKey } from "./selectStockpiles";
+import { selectCompaniesQueryKey } from "../../companies/api/selectCompanies";
 
 export const insertAddress = async (address: InsertAddress) => {
   const { data, error } = await supabase
@@ -55,6 +56,7 @@ export const useAddressMutation = (operation: "insert" | "upsert") => {
     onSettled: () => {
       queryClient.invalidateQueries(selectAddressesQueryKey);
       queryClient.invalidateQueries(selectStockpilesQueryKey);
+      queryClient.invalidateQueries(selectCompaniesQueryKey);
     },
   });
 };

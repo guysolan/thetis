@@ -23,7 +23,7 @@ const StocktakeForm = ({ stockpileId, orderItems }: Props) => {
 	const form = useForm<StocktakeFormT>({
 		resolver: zodResolver(stockTakeFormSchema),
 		defaultValues: {
-			stockpile_id: stockpileId,
+			address_id: stockpileId,
 			order_type: "stocktake",
 			order_items: orderItems || [],
 			change_quantity: [],
@@ -33,20 +33,27 @@ const StocktakeForm = ({ stockpileId, orderItems }: Props) => {
 
 	console.log(form.getValues());
 
-	const { mutate: order } = useCreateOrder();
+	const { mutate: createOrder } = useCreateOrder();
 
 	const onSubmit = async (formData: StocktakeFormT) => {
-		const stocktakeChanges = formData.change_quantity.map((item) => ({
-			item_id: (item.item_id),
+		const item_changes = formData.change_quantity.map((item) => ({
+			item_id: String(item.item_id),
 			quantity_change: Number(item.quantity_change),
-			stockpile_id: (formData.stockpile_id),
 			item_price: 0,
 			item_tax: 0,
+			address_id: String(formData.address_id),
 		}));
-		order({
-			in_order_type: "stocktake",
+
+		await createOrder({
+			in_order_type: formData.order_type,
 			in_order_date: formData.order_date.toISOString(),
-			in_order_items: stocktakeChanges,
+			in_order_items: item_changes,
+			in_from_company_id: null,
+			in_to_company_id: null,
+			in_from_billing_address_id: null,
+			in_from_shipping_address_id: null,
+			in_to_billing_address_id: null,
+			in_to_shipping_address_id: null,
 		});
 	};
 
@@ -72,7 +79,10 @@ const StocktakeForm = ({ stockpileId, orderItems }: Props) => {
 						<CardTitle>Stock Discrepancy</CardTitle>
 					</CardHeader>
 					<CardContent>
-						<StocktakeDiscrepancy />
+						<StocktakeDiscrepancy
+							control={form.control}
+							setValue={form.setValue}
+						/>
 					</CardContent>
 				</Card>
 			</form>

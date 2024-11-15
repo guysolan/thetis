@@ -33,6 +33,13 @@ import { useSelectAddresses } from "../../../features/stockpiles/api/selectAddre
 import { SheetFooter } from "../../../components/ui/sheet";
 import AddressStock from "../../../features/stockpiles/components/AddressStock";
 import Companies from "../../../features/companies/components/Companies";
+import { Edit, MoreVertical, Trash2 } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import ActionPopover from "@/components/ActionPopover";
 
 const ItemsPage = () => {
   const { data: addresses } = useSelectAddresses();
@@ -76,30 +83,14 @@ const ItemsPage = () => {
                   <CardTitle className="font-semibold text-lg truncate">
                     {address.name}
                   </CardTitle>
-                  <Sheet
-                    trigger={<Button variant="outline">Edit</Button>}
-                    title={`Edit ${address.name}`}
-                    description={`Edit the details for ${address.name}`}
-                    footer={
-                      <DeleteDialog
-                        deleteFunction={() =>
-                          deleteAddress(address.id as number)}
-                      />
+                  <ActionPopover
+                    title={address.name}
+                    editForm={
+                      <AddressForm operation="upsert" address={address} />
                     }
-                  >
-                    <AddressForm
-                      operation="upsert"
-                      address={address}
-                    />
-
-                    <SheetFooter>
-                      <DeleteDialog
-                        trigger={<Button variant="destructive">Delete</Button>}
-                        deleteFunction={() =>
-                          deleteAddress(address.id as number)}
-                      />
-                    </SheetFooter>
-                  </Sheet>
+                    deleteFunction={() =>
+                      deleteAddress(address.id as number)}
+                  />
                 </CardHeader>
                 <CardContent>
                   <div className="text-muted-foreground text-sm">

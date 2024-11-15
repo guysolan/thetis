@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/table";
 import { AddressForm } from "../../stockpiles/components/AddressForm";
 import useDeleteAddress from "../../stockpiles/api/deleteAddress";
+import ActionPopover from "@/components/ActionPopover";
 
 const Companies = () => {
     const { data: companies = [] } = useSelectCompanies();
@@ -61,45 +62,11 @@ const Companies = () => {
                         <CardHeader className="flex flex-row justify-between items-center">
                             <CardTitle>{company.name}</CardTitle>
 
-                            <Popover>
-                                <PopoverTrigger asChild>
-                                    <Button variant="ghost" size="icon">
-                                        <MoreVertical className="w-4 h-4" />
-                                    </Button>
-                                </PopoverTrigger>
-                                <PopoverContent
-                                    align="end"
-                                    className="flex flex-col gap-1 p-1"
-                                >
-                                    <Sheet
-                                        trigger={
-                                            <Button
-                                                className="justify-start gap-2 px-2"
-                                                variant="ghost"
-                                            >
-                                                <Edit className="w-4 h-4" />Edit
-                                            </Button>
-                                        }
-                                        title="Edit Company"
-                                    >
-                                        <CompanyForm company={company} />
-                                    </Sheet>
-                                    <DeleteDialog
-                                        trigger={
-                                            <Button
-                                                variant="ghost"
-                                                className="justify-start gap-2 px-2 text-red-500 hover:text-red-600"
-                                            >
-                                                <Trash2 className="w-4 h-4" />Delete
-                                            </Button>
-                                        }
-                                        title="Delete Company"
-                                        description={`Are you sure you want to delete the company "${company.name}"?`}
-                                        onConfirm={() =>
-                                            deleteCompany(company.id)}
-                                    />
-                                </PopoverContent>
-                            </Popover>
+                            <ActionPopover
+                                title={company.name}
+                                editForm={<CompanyForm company={company} />}
+                                deleteFunction={() => deleteCompany(company.id)}
+                            />
                         </CardHeader>
                         <CardContent>
                             <div className="flex flex-col gap-4">
@@ -152,61 +119,21 @@ const Companies = () => {
                                                         : "No"}
                                                 </TableCell>
                                                 <TableCell>
-                                                    <Popover>
-                                                        <PopoverTrigger asChild>
-                                                            <Button
-                                                                variant="ghost"
-                                                                size="icon"
-                                                            >
-                                                                <MoreVertical
-                                                                    size={20}
-                                                                />
-                                                            </Button>
-                                                        </PopoverTrigger>
-                                                        <PopoverContent
-                                                            align="end"
-                                                            side="bottom"
-                                                            className="flex flex-col gap-1 p-1"
-                                                        >
-                                                            <Sheet
-                                                                trigger={
-                                                                    <Button
-                                                                        className="justify-start gap-2 px-2"
-                                                                        variant="ghost"
-                                                                    >
-                                                                        <Edit
-                                                                            size={20}
-                                                                        />Edit
-                                                                    </Button>
-                                                                }
-                                                                title="Edit Address"
-                                                            >
-                                                                <AddressForm
-                                                                    address={address}
-                                                                    operation="upsert"
-                                                                    companyId={company
-                                                                        .id}
-                                                                />
-                                                            </Sheet>
-                                                            <DeleteDialog
-                                                                trigger={
-                                                                    <Button
-                                                                        variant="ghost"
-                                                                        className="justify-start gap-2 px-2 text-red-500 hover:text-red-600"
-                                                                    >
-                                                                        <Trash2
-                                                                            size={20}
-                                                                        />Delete
-                                                                    </Button>
-                                                                }
-                                                                deleteFunction={() =>
-                                                                    deleteAddress(
-                                                                        address
-                                                                            .id,
-                                                                    )}
+                                                    <ActionPopover
+                                                        title="Address"
+                                                        editForm={
+                                                            <AddressForm
+                                                                address={address}
+                                                                operation="upsert"
+                                                                companyId={company
+                                                                    .id}
                                                             />
-                                                        </PopoverContent>
-                                                    </Popover>
+                                                        }
+                                                        deleteFunction={() =>
+                                                            deleteAddress(
+                                                                address.id,
+                                                            )}
+                                                    />
                                                 </TableCell>
                                             </TableRow>
                                         ))}
