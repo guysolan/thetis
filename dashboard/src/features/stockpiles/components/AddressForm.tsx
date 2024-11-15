@@ -100,7 +100,6 @@ export const AddressForm = ({ address, operation, companyId }: Props) => {
 				<Select
 					name="company_id"
 					label="Company"
-					disabled={companyId === undefined}
 					options={companies.map((company) => ({
 						value: company.id.toString(),
 						label: company.name,
