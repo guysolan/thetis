@@ -5,11 +5,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
 import AddressSelect from "@/features/stockpiles/components/AddressSelect";
-import PriceItems from "@/features/orders/order-forms/components/PriceItems";
 import StockItems from "./StockItems";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { OrderItemChange, shipmentFormSchema } from "../schema";
+import { shipmentFormSchema } from "../schema";
 import { useCreateOrder } from "../../api/createOrder";
 import { useShipmentForm } from "../hooks/useShipmentForm";
 import LockCard from "../../components/LockCard";
@@ -63,10 +62,14 @@ const ShipmentForm = () => {
     ) => {
         const fromItems = formData.from_items.map((item) => ({
             ...item,
+            item_price: null,
+            item_tax: null,
             address_id: formData.from_shipping_address_id,
         }));
         const toItems = formData.to_items.map((item) => ({
             ...item,
+            item_price: null,
+            item_tax: null,
             address_id: formData.to_shipping_address_id,
         }));
         const orderData = {
