@@ -3,7 +3,7 @@
         "update-supabase": "brew install supabase/tap/supabase",
         "reset": "supabase db reset && supabase gen types --lang=typescript --local > dashboard/src/database.types.ts",
         "deploy": "supabase functions deploy",
-        "push": "git add . && git commit -m \"${1:-update}\" && git push && supabase db push && supabase functions deploy",
+        "push": "git add . && git commit -m \"${1:-update}\" && git push && supabase db push",
         "gen-types": "supabase gen types --lang=typescript --local > dashboard/src/database.types.ts",
         "serve": "supabase functions serve --env-file ./supabase/.env.local",
         "secrets": "supabase secrets set --env-file ./supabase/.env.prod",
