@@ -25,12 +25,7 @@ export const selectAddressesQueryOptions = () => {
 export const useSelectAddresses = (companyId?: string) => {
   return useQuery({
     queryKey: ["addresses", companyId],
-    queryFn: async () => {
-      const response = await fetch(
-        `/api/addresses${companyId ? `?company_id=${companyId}` : ""}`,
-      );
-      return response.json();
-    },
+    queryFn: selectAddresses,
     enabled: !companyId || !!companyId,
   });
 };
