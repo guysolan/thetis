@@ -14,35 +14,46 @@ export const useShipmentForm = (
 
     // Watch for changes in relevant form fields
     const orderItems = useWatch({ control, name: "order_items" });
+    const fromShippingAddressId = useWatch({ 
+        control, 
+        name: "from_shipping_address_id" 
+    });
+    const toShippingAddressId = useWatch({ 
+        control, 
+        name: "to_shipping_address_id" 
+    });
 
     useEffect(() => {
-        if (
-            !orderItems?.length || !items
-        ) {
+        if (!orderItems?.length || !items || !fromShippingAddressId) {
             setValue("from_items", []);
+            setValue("to_items", []);
             return;
         }
 
-        // Calculate consumed items based on order items
+        // Get stock levels for the from address
+        const fromStockLevels = stockpileItems?.[fromShippingAddressId] || {};
+
+        // Calculate items based on order items
         const { fromItems, toItems } = processOrderItems({
             orderItems,
             items,
+            fromStockLevels,
         });
-
-        console.log(fromItems);
 
         setValue("from_items", fromItems);
         setValue("to_items", toItems);
-    }, [orderItems, items, stockpileItems]);
+    }, [orderItems, items, stockpileItems, fromShippingAddressId, toShippingAddressId]);
 };
 
-// Memoize the processing function
+// Updated processing function
 const processOrderItems = ({
     orderItems,
     items,
+    fromStockLevels,
 }: {
     orderItems: OrderItem[];
     items: ItemView[];
+    fromStockLevels: Record<string, number>;
 }): { fromItems: ItemChange[]; toItems: ItemChange[] } => {
     if (!orderItems?.length) return { fromItems: [], toItems: [] };
 

@@ -1,21 +1,31 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../../../lib/supabase";
+import { selectAddressesQueryKey } from "./selectAddresses";
+import { selectCompaniesQueryKey } from "../../companies/api/selectCompanies";
+import { toast } from "sonner";
 
-export const deleteStockpile = async (stockpileId: number) => {
-    const { data, error } = await supabase.from("stockpiles").delete()
-        .eq("id", stockpileId);
+export const deleteAddress = async (addressId: number) => {
+    const { data, error } = await supabase.from("addresses").delete()
+        .eq("id", addressId);
     if (error) throw error;
     return data;
 };
 
-const useDeleteStockpile = () => {
+const useDeleteAddress = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: deleteStockpile,
+        mutationFn: deleteAddress,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["select-stockpiles"] });
+            toast.success("Address deleted successfully");
+        },
+        onError: () => {
+            toast.error("Failed to delete address");
+        },
+        onSettled: () => {
+            queryClient.invalidateQueries(selectCompaniesQueryKey);
+            queryClient.invalidateQueries(selectAddressesQueryKey);
         },
     });
 };
 
-export default useDeleteStockpile;
+export default useDeleteAddress;

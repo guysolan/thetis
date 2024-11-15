@@ -1,8 +1,8 @@
 import React from "react";
-import { Address as AddressType } from "../types";
+import { AddressRow } from "../../stockpiles/types";
 type Props = {
     title: string;
-    address: AddressType;
+    address: AddressRow;
 };
 const Address = ({ title, address }: Props) => {
     return (

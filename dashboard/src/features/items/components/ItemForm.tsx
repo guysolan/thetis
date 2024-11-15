@@ -7,12 +7,13 @@ import Input from "@/components/Input";
 import { Form } from "@/components/ui/form";
 import { useUpsertItem } from "../api/upsertItem";
 import { ItemView } from "../types";
+import { itemTypes } from "../types";
 
 const itemFormSchema = z.object({
 	id: z.coerce.number().optional(),
 	price: z.coerce.number().positive(),
 	name: z.string().min(1, "Name required"),
-	type: z.enum(["product", "part", "service"]),
+	type: z.enum(itemTypes),
 });
 
 export type ItemFormT = z.infer<typeof itemFormSchema>;
@@ -49,13 +50,7 @@ export const ItemForm = ({ item }: Props) => {
 				<Select
 					label="Type"
 					name="type"
-					options={[{ label: "Product", value: "product" }, {
-						label: "Part",
-						value: "part",
-					},{
-						label: "Service",
-						value: "service",
-					}]}
+					options={itemTypes.map((type) => ({ label: type, value: type }))}
 				/>
 
 				<Button type="submit">Save Changes</Button>

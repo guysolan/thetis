@@ -30,12 +30,12 @@ import useDeleteAddress from "@/features/stockpiles/api/deleteAddress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useSelectAddresses } from "../../../features/stockpiles/api/selectAddresses";
-import { SheetFooter } from '../../../components/ui/sheet';
+import { SheetFooter } from "../../../components/ui/sheet";
+import AddressStock from "../../../features/stockpiles/components/AddressStock";
+import Companies from "../../../features/companies/components/Companies";
 
 const ItemsPage = () => {
   const { data: addresses } = useSelectAddresses();
-  const { data: stockpiles } = useSelectStockpiles();
-
   const { mutate: deleteAddress } = useDeleteAddress();
 
   return (
@@ -61,77 +61,7 @@ const ItemsPage = () => {
         </TabsList>
 
         <TabsContent value="stockpiles">
-          <ScrollArea className="h-[calc(100vh-12rem)]">
-            <section className="gap-4 grid lg:grid-cols-2 pt-4">
-              {stockpiles.map((stockpile) => (
-                <Card key={stockpile.stockpile_id} className="flex flex-col">
-                  <CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
-                    <CardTitle className="font-semibold text-lg truncate">
-                      {stockpile.stockpile_name}
-                    </CardTitle>
-                    <Sheet
-                      trigger={<Button variant="outline">Edit</Button>}
-                      title={`Edit ${stockpile.stockpile_name}`}
-                      description={`Edit the details for stockpile ${stockpile.stockpile_name}`}
-                      footer={
-                        <DeleteDialog
-                          deleteFunction={() =>
-                            deleteAddress(stockpile.stockpile_id as number)}
-                        />
-                      }
-                    >
-                      <AddressForm
-                        operation="upsert"
-                        address={{
-                          id: stockpile.stockpile_id,
-                          name: stockpile.stockpile_name,
-                        }}
-                      />
-                    </Sheet>
-                  </CardHeader>
-                  <CardContent className="flex-grow">
-                    <Table className="mt-4">
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>Type</TableHead>
-                          <TableHead>Item</TableHead>
-                          <TableHead>Quantity</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {(stockpile.items as any)
-                          ?.filter((item: any) =>
-                            item.item_quantity > 0
-                          )
-                          ?.map((wp: any) => (
-                            <TableRow key={`item-${wp.item_id}`}>
-                              <TableCell>
-                                <Badge className="capitalize" variant="default">
-                                  {wp.item_type}
-                                </Badge>
-                              </TableCell>
-                              <TableCell>{wp.item_name}</TableCell>
-                              <TableCell>{wp.item_quantity}</TableCell>
-                            </TableRow>
-                          ))}
-                      </TableBody>
-                    </Table>
-                  </CardContent>
-                  <CardFooter>
-                    <Sheet
-                      trigger={<Button>New Stocktake</Button>}
-                      title="New Stocktake"
-                      description={`Update the stock for stockpile ${stockpile.stockpile_name}`}
-                    >
-                      <StocktakeForm
-                        stockpileId={stockpile.stockpile_id as number}
-                      />
-                    </Sheet>
-                  </CardFooter>
-                </Card>
-              ))}
-            </section>
-          </ScrollArea>
+          <AddressStock />
         </TabsContent>
 
         <TabsContent value="amazon">
@@ -140,7 +70,7 @@ const ItemsPage = () => {
 
         <TabsContent value="all">
           <section className="gap-4 grid lg:grid-cols-2 pt-4">
-            {addresses.map((address) => (
+            {addresses?.map((address) => (
               <Card key={address.id} className="flex flex-col">
                 <CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
                   <CardTitle className="font-semibold text-lg truncate">
@@ -164,7 +94,7 @@ const ItemsPage = () => {
 
                     <SheetFooter>
                       <DeleteDialog
-                      trigger={<Button variant="destructive">Delete</Button>}
+                        trigger={<Button variant="destructive">Delete</Button>}
                         deleteFunction={() =>
                           deleteAddress(address.id as number)}
                       />

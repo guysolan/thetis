@@ -16,28 +16,54 @@ import {
 import { X } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { useSelectAddresses } from '../api/selectAddresses';
+import { useEffect } from 'react';
 
 interface Props {
   name?: string;
   label?: string;
   isClearable?: boolean;
+  companyId?: string;
+  copyFromField?: string;
 }
 const AddressSelect = (
-  { name = "address_id", label, isClearable }: Props,
+  { name = "address_id", label, isClearable, companyId, copyFromField }: Props,
 ) => {
   const form = useFormContext();
-  const { data: addresses } = useSelectAddresses();
+  const { data: addresses = [] } = useSelectAddresses(companyId);
+
+  // Auto-select if only one address
+  useEffect(() => {
+    if (addresses.length === 1) {
+      form.setValue(name, addresses[0].id.toString());
+    }
+  }, [addresses, form, name]);
+
+  const handleCopyFrom = () => {
+    if (copyFromField) {
+      const valueToCopy = form.getValues(copyFromField);
+      form.setValue(name, valueToCopy);
+    }
+  };
+
   return (
     <FormField
       control={form.control}
       name={name}
       render={({ field }) => (
         <FormItem>
-          {label && (
-            <FormLabel>
-              {label}
-            </FormLabel>
-          )}
+          <div className="flex justify-between items-center">
+            {label && <FormLabel>{label}</FormLabel>}
+            {copyFromField && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={handleCopyFrom}
+              >
+                Copy from Billing
+              </Button>
+            )}
+          </div>
           <Select
             onValueChange={field.onChange}
             value={field.value}

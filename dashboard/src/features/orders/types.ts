@@ -1,4 +1,5 @@
 import { Database } from "@/database.types";
+import { Company } from "../companies/types";
 export interface Address {
     name: string;
     line_1: string;
@@ -20,6 +21,7 @@ export type OrderItemInView = {
     "quantity": number;
     "item_name": string;
     "item_type": string;
+    address: Address;
 };
 export type OrderView = Database["public"]["Views"]["orders_view"]["Row"] & {
     order_id: number;
@@ -27,4 +29,6 @@ export type OrderView = Database["public"]["Views"]["orders_view"]["Row"] & {
     order_type: OrderType;
     from_address: Address;
     to_address: Address;
+    from_company: Company["Row"];
+    to_company: Company["Row"];
 };

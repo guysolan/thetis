@@ -9,12 +9,13 @@ import PriceItems from "@/features/orders/order-forms/components/PriceItems";
 import StockItems from "./StockItems";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { shipmentFormSchema } from "../schema";
+import { OrderItemChange, shipmentFormSchema } from "../schema";
 import { useCreateOrder } from "../../api/createOrder";
 import { useShipmentForm } from "../hooks/useShipmentForm";
 import LockCard from "../../components/LockCard";
 import dayjs from 'dayjs';
 import DatePicker from '@/components/DatePicker';
+import CompanyAddressSelect from '../../../companies/components/CompanyAddressSelect';
 
 const ShipmentForm = () => {
     const form = useForm<z.infer<typeof shipmentFormSchema>>({
@@ -52,32 +53,34 @@ const ShipmentForm = () => {
     const { mutate: createOrder } = useCreateOrder();
 
     // Extract form submission logic
-    const handleSubmit = async (
-        formData: z.infer<typeof shipmentFormSchema>,
-    ) => {
+    const handleSubmit = async (formData: z.infer<typeof shipmentFormSchema>) => {
         const {
             from_items,
-            from_address_id,
-            to_address_id,
+            from_company_id,
+            from_billing_address_id,
+            from_shipping_address_id,
+            to_company_id,
+            to_billing_address_id,
+            to_shipping_address_id,
             to_items,
-            order_date,
+            order_date
         } = formData;
+
         const from_item_changes_with_address = from_items.map((ic) => ({
             item_id: ic.item_id,
-            quantity_change: Number(ic.quantity_change),
+            quantity_change: Number(ic.quantity_change) * -1, // Negative for outgoing items
             item_price: 0,
             item_tax: 0,
-            address_id: from_address_id,
+            address_id: from_shipping_address_id,
         }));
-        const to_item_changes_with_address = to_address_id
-            ? to_items.map((ic) => ({
-                item_id: ic.item_id,
-                quantity_change: Number(ic.quantity_change),
-                item_price: 0,
-                item_tax: 0,
-                address_id: to_address_id,
-            }))
-            : [];
+
+        const to_item_changes_with_address = to_items.map((ic) => ({
+            item_id: ic.item_id,
+            quantity_change: Number(ic.quantity_change), // Positive for incoming items
+            item_price: 0,
+            item_tax: 0,
+            address_id: to_shipping_address_id,
+        }));
 
         const item_changes_with_address = [
             ...from_item_changes_with_address,
@@ -86,21 +89,25 @@ const ShipmentForm = () => {
 
         await createOrder({
             in_order_type: "shipment",
-            in_from_address_id: from_address_id,
-            in_to_address_id: to_address_id??null,
+            in_from_company_id: from_company_id,
+            in_to_company_id: to_company_id,
+            in_from_billing_address_id: from_billing_address_id,
+            in_from_shipping_address_id: from_shipping_address_id,
+            in_to_billing_address_id: to_billing_address_id,
+            in_to_shipping_address_id: to_shipping_address_id,
             in_order_date: order_date.toISOString(),
             in_order_items: item_changes_with_address,
         });
     };
 
-    const fromAddressId = useWatch({
+    const fromShippingAddressId = useWatch({
         control: form.control,
-        name: "from_address_id",
+        name: "from_shipping_address_id",
     });
 
-    const toAddressId = useWatch({
+    const toShippingAddressId = useWatch({
         control: form.control,
-        name: "to_address_id",
+        name: "to_shipping_address_id",
     });
 
     return (
@@ -111,18 +118,23 @@ const ShipmentForm = () => {
             >
                 <DatePicker name="order_date" label='Order Date' />
 
-                <AddressSelect
-                    name="from_address_id"
-                    label="From Address"
-                />
-
-                <AddressSelect
-                    name="to_address_id"
-                    label="To Address"
-                    isClearable={true}
-                />
-
-                {fromAddressId && (
+               <Card>
+                    <CardHeader>
+                        <CardTitle>Seller</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <CompanyAddressSelect direction="from" />
+                        </CardContent>
+                </Card>
+                  <Card>
+                    <CardHeader>
+                        <CardTitle>Buyer</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <CompanyAddressSelect direction="to" />
+                    </CardContent>
+                </Card>
+                {fromShippingAddressId && (
                     <>
                         <Card>
                             <CardHeader>
@@ -133,22 +145,22 @@ const ShipmentForm = () => {
                             </CardContent>
                         </Card>
                         <LockCard
-                            title={<AddressSelect name="from_address_id" />}
+                            title={<AddressSelect name="from_shipping_address_id" />}
                         >
                             <StockItems
-                                address_name="from_address_id"
+                                address_name="from_shipping_address_id"
                                 name="from_items"
                             />
                         </LockCard>
-                        {toAddressId && (
+                        {toShippingAddressId && (
                             <LockCard
                                 title={
-                                    <AddressSelect name="to_address_id" />
+                                    <AddressSelect name="to_shipping_address_id" />
                                 }
                             >
                                 <StockItems
                                     name="to_items"
-                                    address_name="to_address_id"
+                                    address_name="to_shipping_address_id"
                                 />
                             </LockCard>
                         )}

@@ -113,8 +113,8 @@ INSERT INTO items(name, price, type, hs_code, sku, country_of_origin)
 INSERT INTO items(name, price, type, height, width, depth, weight, sku, country_of_origin)
     VALUES ('Box of 50 Achilles Tendon Rupture Night Splints - Large Left', 4499.50, 'package', 60.00, 40.00, 35.00, 10.00, 'TM-ATRNS-LL-50', 'United Kingdom'),
 ('Box of 50 Achilles Tendon Rupture Night Splints - Large Right', 4499.50, 'package', 60.00, 40.00, 35.00, 10.00, 'TM-ATRNS-LR-50', 'United Kingdom'),
-('Box of 50 Achilles Tendon Rupture Night Splints - Small Left', 3999.50, 'package', 60.00, 40.00, 35.00, 5.00, 'TM-ATRNS-SL-50', 'United Kingdom'),
-('Box of 50 Achilles Tendon Rupture Night Splints - Small Right', 3999.50, 'package', 60.00, 40.00, 35.00, 5.00, 'TM-ATRNS-SR-50', 'United Kingdom');
+('Box of 25 Achilles Tendon Rupture Night Splints - Small Left', 1999.75, 'package', 60.00, 40.00, 35.00, 5.00, 'TM-ATRNS-SL-25', 'United Kingdom'),
+('Box of 25 Achilles Tendon Rupture Night Splints - Small Right', 1999.75, 'package', 60.00, 40.00, 35.00, 5.00, 'TM-ATRNS-SR-25', 'United Kingdom');
 
 -- Insert item components
 INSERT INTO item_components(item_id, component_id, component_quantity)
@@ -203,21 +203,25 @@ WHERE
         OR (p.name = 'Achilles Tendon Rupture Night Splint - Small Right'
             AND c.name IN ('Instruction Leaflet', 'Storage Bag', 'Webbing', 'Box Right Small', 'Flier', 'Elastic')));
 
--- Insert item components for packages (50 products per package)
+-- Insert item components for packages (50 products per package for large, 25 for small)
 INSERT INTO item_components(item_id, component_id, component_quantity)
 SELECT
     pkg.id AS item_id,
     prod.id AS component_id,
-    50 AS component_quantity
+    CASE WHEN pkg.sku LIKE '%50' THEN
+        50
+    WHEN pkg.sku LIKE '%25' THEN
+        25
+    END AS component_quantity
 FROM
     items pkg
     JOIN items prod ON ((pkg.sku = 'TM-ATRNS-LL-50'
                 AND prod.sku = 'TM-ATRNS-LL')
             OR (pkg.sku = 'TM-ATRNS-LR-50'
                 AND prod.sku = 'TM-ATRNS-LR')
-            OR (pkg.sku = 'TM-ATRNS-SL-50'
+            OR (pkg.sku = 'TM-ATRNS-SL-25'
                 AND prod.sku = 'TM-ATRNS-SL')
-            OR (pkg.sku = 'TM-ATRNS-SR-50'
+            OR (pkg.sku = 'TM-ATRNS-SR-25'
                 AND prod.sku = 'TM-ATRNS-SR'))
 WHERE
     pkg.type = 'package'

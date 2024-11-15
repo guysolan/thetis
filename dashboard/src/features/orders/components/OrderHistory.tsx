@@ -91,32 +91,28 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 										>
 											<Sheet
 												trigger={
-													<PopoverOption>
+													<Button
+														className="justify-start gap-2 px-2"
+														variant="ghost"
+													>
 														<Edit size={20} />Edit
-													</PopoverOption>
+													</Button>
 												}
 												title="Edit Order"
 											>
 												<EditOrderForm order={order} />
 											</Sheet>
-											<div
-												onClick={(e) =>
-													e.stopPropagation()}
-											>
-												{/* Add this wrapper */}
-
-												<DeleteOrder
-													trigger={
-														<PopoverOption variant="destructive">
-															<Trash2
-																size={20}
-															/>Delete
-														</PopoverOption>
-													}
-													orderId={order
-														.order_id as number}
-												/>
-											</div>
+											<DeleteOrder
+												trigger={
+													<Button
+														variant="ghost"
+														className="justify-start gap-2 px-2 text-red-500 hover:text-red-600"
+													>
+														<Trash2 size={20} />Delete
+													</Button>
+												}
+												orderId={order.order_id as number}
+											/>
 										</PopoverContent>
 									</Popover>
 								</div>

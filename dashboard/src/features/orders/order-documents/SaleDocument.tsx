@@ -17,9 +17,11 @@ const SaleDocument = ({ order }: { order: OrderView }) => {
             />
             <div className="gap-8 grid grid-cols-2 mb-8">
                 <Company
+                    title="Seller"
                     address={order.from_address}
                 />
                 <Company
+                    title="Buyer"
                     address={order.to_address}
                 />
             </div>

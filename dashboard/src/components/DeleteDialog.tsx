@@ -33,7 +33,10 @@ const DeleteDialog = ({ deleteFunction, trigger }: DeleteDialogProps) => {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction variant="destructive" onClick={deleteFunction}>
+                    <AlertDialogAction
+                        variant="destructive"
+                        onClick={deleteFunction}
+                    >
                         Continue
                     </AlertDialogAction>
                 </AlertDialogFooter>

@@ -1,4 +1,6 @@
 import { Database } from "../../database.types";
+export const itemTypes = ["product", "part", "service", "package"] as const;
+
 export type Item = Database["public"]["Tables"]["items"];
 export type ItemRow = Item["Row"];
 export type InsertItem = Item["Insert"];

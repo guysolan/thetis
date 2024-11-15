@@ -8,6 +8,8 @@ import OrderTotal from "./OrderTotal";
 import StockMovements from "../order-history/components/StockMovements";
 import FDADetails from "./FDADetails";
 import ExporterDetails from "./ExporterDetails";
+import type { CompanyRow } from "../../companies/types";
+import { AddressRow } from "../../stockpiles/types";
 
 const CommercialInvoice = ({ order }: { order: OrderView }) => {
     return (
@@ -21,29 +23,29 @@ const CommercialInvoice = ({ order }: { order: OrderView }) => {
                 <div>
                     <Company
                         title="Exporter"
-                        company={order.from_company}
+                        company={order.from_company as CompanyRow}
                     />
                     <Address
                         title="Shipping Address"
-                        address={order.from_shipping_address}
+                        address={order.from_shipping_address as AddressRow}
                     />
                     <Address
                         title="Billing Address"
-                        address={order.from_billing_address}
+                        address={order.from_billing_address as AddressRow}
                     />
                 </div>
                 <div>
                     <Company
                         title="Importer"
-                        company={order.to_company}
+                        company={order.to_company as CompanyRow}
                     />
                     <Address
                         title="Shipping Address"
-                        address={order.to_shipping_address}
+                        address={order.to_shipping_address as AddressRow}
                     />
                     <Address
                         title="Billing Address"
-                        address={order.to_billing_address}
+                        address={order.to_billing_address as AddressRow}
                     />
                 </div>
             </div>

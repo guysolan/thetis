@@ -7,15 +7,19 @@ export type OrderItemChange = {
 	quantity_change: number;
 	item_price: number;
 	item_tax: number;
-	stockpile_id: string;
+	address_id: string;
 };
 
 type CreateOrderType = {
 	in_order_type: string;
 	in_order_date: string;
 	in_order_items: OrderItemChange[];
-	in_from_address_id: string | null;
-	in_to_address_id: string | null;
+	in_from_company_id: string | null;
+	in_to_company_id: string | null;
+	in_from_billing_address_id: string | null;
+	in_from_shipping_address_id: string | null;
+	in_to_billing_address_id: string | null;
+	in_to_shipping_address_id: string | null;
 };
 const createOrder = async (orderData: CreateOrderType) => {
 	const { data: result, error } = await supabase.rpc(

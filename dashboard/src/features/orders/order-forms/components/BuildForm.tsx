@@ -4,19 +4,22 @@ import { useMemo } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
-import AddressSelect from "../../../stockpiles/components/AddressSelect";
 import PriceItems from "@/features/orders/order-forms/components/PriceItems";
 import StockItems from "./StockItems";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { usePurchaseForm } from "../hooks/usePurchaseForm";
 import { buildFormSchema } from "../schema";
 import { useCreateOrder } from "../../api/createOrder";
 import LockCard from "../../components/LockCard";
-import DatePicker from '@/components/DatePicker';
-import dayjs from 'dayjs';
+import DatePicker from "@/components/DatePicker";
+import dayjs from "dayjs";
+import CompanyAddressSelect from "@/features/companies/components/CompanyAddressSelect";
+import { useSelectItemsByAddress } from "@/features/stockpiles/api/selectItemsByAddress";
+import { useBuildForm } from '../hooks/useBuildForm';
 
 const BuildForm = () => {
+    const { data: stockpileItems } = useSelectItemsByAddress();
+
     const form = useForm<z.infer<typeof buildFormSchema>>({
         resolver: zodResolver(buildFormSchema),
         defaultValues: {
@@ -27,16 +30,19 @@ const BuildForm = () => {
             }],
             order_date: dayjs().toDate(),
             consumed_items: [],
-            produced_items: [], // Add missing default value
-            order_type: "build", // Add default order type
+            produced_items: [],
+            order_type: "build",
+            from_company_id: "",
+            from_billing_address_id: "",
+            from_shipping_address_id: "",
         },
     });
 
-    usePurchaseForm(form.control, form.setValue);
+    useBuildForm(form.control, form.setValue);
 
-    const addressId = useWatch({
+    const fromShippingAddressId = useWatch({
         control: form.control,
-        name: "address_id",
+        name: "from_shipping_address_id",
     });
 
     const consumedItems = useWatch({
@@ -47,10 +53,17 @@ const BuildForm = () => {
     // Memoize expensive calculations
     const partIsNegative = useMemo(
         () =>
-            consumedItems.some((part) =>
-                part.quantity_after && part.quantity_after < 0
-            ),
-        [consumedItems],
+            consumedItems?.some((part) => {
+                const stockpileItem = stockpileItems?.find(
+                    (w) =>
+                        String(w.address_id) === String(fromShippingAddressId) &&
+                        String(w.item_id) === String(part.item_id)
+                );
+                const currentQuantity = stockpileItem?.item_quantity ?? 0;
+                const quantityAfter = currentQuantity + (part.quantity_change || 0);
+                return quantityAfter < 0;
+            }),
+        [consumedItems, fromShippingAddressId, stockpileItems]
     );
 
     const { mutate: createOrder } = useCreateOrder();
@@ -63,36 +76,44 @@ const BuildForm = () => {
             produced_items,
             order_type,
             order_date,
-            address_id,
+            from_company_id,
+            from_billing_address_id,
+            from_shipping_address_id,
         } = formData;
+
         const item_changes = [
             ...consumed_items,
             ...produced_items,
-            // Add order items twice - once positive, once negative
-            ...order_items.map(item => ({
+            ...order_items.map((item) => ({
                 ...item,
-                quantity_change: Math.abs(Number(item.quantity_change))
+                quantity_change: Math.abs(Number(item.quantity_change)),
             })),
-            ...order_items.map(item => ({
+            ...order_items.map((item) => ({
                 ...item,
                 quantity_change: -1 * Math.abs(Number(item.quantity_change)),
                 item_price: 0,
-                item_tax: 0
+                item_tax: 0,
             })),
         ];
-        const item_changes_with_address = item_changes.map((ic) => ({
+
+        const item_changes_with_warehouse = item_changes.map((ic) => ({
             item_id: ic.item_id,
             quantity_change: Number(ic.quantity_change),
             item_price: ic?.item_price ?? 0,
             item_tax: ic?.item_tax ?? 0,
-            address_id: address_id,
+            address_id: from_shipping_address_id,
         }));
+
         await createOrder({
             in_order_type: order_type,
             in_order_date: order_date.toISOString(),
-            in_order_items: item_changes_with_address,
-            in_from_address_id: address_id,
-            in_to_address_id: null,
+            in_order_items: item_changes_with_warehouse,
+            in_from_company_id: from_company_id,
+            in_to_company_id: null,
+            in_from_billing_address_id: from_billing_address_id,
+            in_from_shipping_address_id: from_shipping_address_id,
+            in_to_billing_address_id: null,
+            in_to_shipping_address_id: null,
         });
     };
 
@@ -102,30 +123,25 @@ const BuildForm = () => {
                 onSubmit={form.handleSubmit(handleSubmit)}
                 className="flex flex-col space-y-4 px-1 pt-2 pr-4"
             >
-                <DatePicker name="order_date" label='Order Date' />
+                <DatePicker name="order_date" label="Order Date" />
 
-                
-                <AddressSelect
-                    name="address_id"
-                    label="From Address"
-                />
+                <CompanyAddressSelect direction="from" />
 
-
-                {addressId && (
+                {fromShippingAddressId && (
                     <>
                         <Card>
                             <CardHeader>
                                 <CardTitle>Produced Items</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <StockItems name="produced_items" />
+                                <StockItems name="produced_items" address_name="from_shipping_address_id" />
                             </CardContent>
                         </Card>
                         <LockCard title="Order Items">
                             <PriceItems showPrice={true} />
                         </LockCard>
                         <LockCard title="Consumed Items">
-                            <StockItems name="consumed_items" />
+                            <StockItems name="consumed_items" address_name="from_shipping_address_id" />
                         </LockCard>
                     </>
                 )}

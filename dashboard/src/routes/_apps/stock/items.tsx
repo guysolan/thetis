@@ -1,5 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Sheet from "@/components/Sheet.tsx";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -52,14 +58,15 @@ const ItemsPage = () => {
       </PageTitle>
 
       <Tabs defaultValue="all" className="w-full">
-        <TabsList className='my-2'>
+        <TabsList className="my-2">
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="product">Products</TabsTrigger>
           <TabsTrigger value="part">Parts</TabsTrigger>
           <TabsTrigger value="service">Services</TabsTrigger>
+          <TabsTrigger value="package">Packages</TabsTrigger>
         </TabsList>
 
-        {["all", "product", "part", "service"].map((tabValue) => (
+        {["all", "product", "part", "service", "package"].map((tabValue) => (
           <TabsContent key={tabValue} value={tabValue}>
             <section className="flex flex-col gap-4">
               {itemsView
@@ -69,10 +76,17 @@ const ItemsPage = () => {
                 .map((item: ItemView) => (
                   <Card key={item.item_id} className="flex flex-col">
                     <CardHeader className="flex flex-row justify-between items-center space-y-0">
-                      <CardTitle className="flex flex-wrap gap-4 font-semibold text-left text-lg text-wrap truncate">
-                        {item.item_name}
-                        <Badge>{item.item_type}</Badge>
-                      </CardTitle>
+                      <div className="flex flex-col flex-wrap gap-4">
+                        <CardTitle className="flex flex-row flex-wrap gap-4 font-semibold text-left text-lg text-wrap truncate">
+                          {item.item_name}
+                          <Badge>{item.item_type}</Badge>
+
+                        </CardTitle>
+                        <CardDescription>
+                          ${Number(item.item_price ?? 0).toFixed(2)} per unit
+                        </CardDescription>
+
+                      </div>
                       <div className="flex flex-row flex-shrink gap-2">
                         <Popover>
                           <PopoverTrigger asChild>
@@ -130,7 +144,7 @@ const ItemsPage = () => {
                         </Popover>
                       </div>
                     </CardHeader>
-                    {item.item_type === "product" && (
+                    {["product", "package"].includes(item?.item_type ?? "") && (
                       <CardContent className="flex-grow">
                         <Table className="mt-4">
                           <TableHeader>

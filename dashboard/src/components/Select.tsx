@@ -18,27 +18,36 @@ type SelectProps = {
     name: string;
     label?: string;
     options: { label: string; value: string }[];
+    disabled?: boolean;
 };
-const Select = ({ name, label, options }: SelectProps) => {
+const Select = ({ name, label, options, disabled }: SelectProps) => {
     const { control } = useFormContext();
     return (
         <FormField
             control={control}
             name={name}
-            render={({ field }) => (    
+            render={({ field }) => (
                 <FormItem>
                     <FormLabel className={label ? "not-sr-only" : "sr-only"}>
                         {label ?? name}
                     </FormLabel>
-                    <SelectWrap onValueChange={field.onChange} value={field.value}>
+                    <SelectWrap
+                        disabled={disabled}
+                        onValueChange={field.onChange}
+                        value={field.value}
+                    >
                         <FormControl>
-                            <SelectTrigger className="capitalize" >
+                            <SelectTrigger className="capitalize">
                                 <SelectValue placeholder="Select" />
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>
                             {options.map((o) => (
-                                <SelectItem className="capitalize" key={o.value} value={o.value}>
+                                <SelectItem
+                                    className="capitalize"
+                                    key={o.value}
+                                    value={o.value}
+                                >
                                     {o.label}
                                 </SelectItem>
                             ))}

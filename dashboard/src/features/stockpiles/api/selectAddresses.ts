@@ -1,10 +1,6 @@
-import {
-  queryOptions,
-  useQuery,
-  useSuspenseQuery,
-} from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
-import { Address, StockpileView } from "../types";
+import { Address } from "../types";
 
 export const selectAddresses = async () => {
   const { data, error } = await supabase.from("addresses").select(
@@ -26,5 +22,15 @@ export const selectAddressesQueryOptions = () => {
   });
 };
 
-export const useSelectAddresses = () =>
-  useSuspenseQuery(selectAddressesQueryOptions());
+export const useSelectAddresses = (companyId?: string) => {
+  return useQuery({
+    queryKey: ["addresses", companyId],
+    queryFn: async () => {
+      const response = await fetch(
+        `/api/addresses${companyId ? `?company_id=${companyId}` : ""}`,
+      );
+      return response.json();
+    },
+    enabled: !companyId || !!companyId,
+  });
+};

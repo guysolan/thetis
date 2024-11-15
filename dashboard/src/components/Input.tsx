@@ -11,10 +11,10 @@ import { useFormContext } from "react-hook-form";
 type InputProps = {
     name: string;
     label?: string;
-    type: "text" | "number" | "email" | "password";
+    type?: "text" | "number" | "email" | "password";
     step?: string;
 };
-const Input = ({ name, label, type, step }: InputProps) => {
+const Input = ({ name, label, type = "text", step }: InputProps) => {
     const { control } = useFormContext();
 
     return (
@@ -32,7 +32,9 @@ const Input = ({ name, label, type, step }: InputProps) => {
                             step={step}
                             {...field}
                             onChange={(e) =>
-                                type === 'number' ? field.onChange(Number(e.target.value)) : field.onChange(e.target.value)}
+                                type === "number"
+                                    ? field.onChange(Number(e.target.value))
+                                    : field.onChange(e.target.value)}
                         />
                     </FormControl>
                     <FormMessage />

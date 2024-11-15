@@ -2,17 +2,17 @@ import { useEffect } from "react";
 import { Control, UseFormSetValue, useWatch } from "react-hook-form";
 import { useSelectItemsByAddress } from "../../../stockpiles/api/selectItemsByAddress";
 import { useSelectItemsView } from "../../../items/api/selectItemsView";
-import { ItemChange, OrderItem, PurchaseFormData } from "../schema";
-import { ItemType, ItemView } from "../../../items/types";
+import { ItemChange, OrderItem } from "../schema";
 
-export const usePurchaseForm = (
-    control: Control<PurchaseFormData>,
-    setValue: UseFormSetValue<PurchaseFormData>,
+export const useBuildForm = (
+    control: Control<any>,
+    setValue: UseFormSetValue<any>,
 ) => {
     const { data: items } = useSelectItemsView();
     const { data: addressItems } = useSelectItemsByAddress();
 
-    const producedItems = useWatch({ control, name: "order_items" });
+    // Watch for changes in relevant form fields
+    const producedItems = useWatch({ control, name: "produced_items" });
     const selectedAddress = useWatch({
         control,
         name: "from_shipping_address_id",
@@ -21,49 +21,43 @@ export const usePurchaseForm = (
     useEffect(() => {
         if (!producedItems || !items || !addressItems) return;
 
+        // If no address is selected, treat all items as purchase items
         if (!selectedAddress) {
+            setValue("consumed_items", []);
             setValue("order_items", producedItems);
             return;
         }
 
+        // Get items available in selected address
         const addressStock = addressItems.filter(
-            (w) => String(w.address_id) === selectedAddress,
+            (w) => String(w.address_id) === String(selectedAddress),
         );
 
-        const purchaseItems = processOrderItems({
+        // Calculate required quantities and check stock
+        const { consumedItems, purchaseItems } = processOrderItems({
             producedItems,
-            // @ts-expect-error
             items,
             addressStock,
         });
 
+        console.log(purchaseItems);
+
+        // Update form with processed items
+        setValue("consumed_items", consumedItems);
         setValue("order_items", purchaseItems);
     }, [producedItems, items, addressItems, selectedAddress, setValue]);
 };
 
 interface ProcessOrderItemsParams {
-    producedItems: OrderItem[];
-    items: Array<{
-        item_id: string;
-        components?: Array<{
-            component_id: string;
-            component_name: string;
-            component_quantity: number;
-            component_type?: string;
-            component_price?: number;
-            component_tax?: number;
-        }>;
-    }>;
-    addressStock: Array<{
-        address_id: string;
-        item_id: string;
-        item_quantity: number;
-    }>;
+    producedItems: ItemChange[];
+    items: any[]; // Replace with proper type
+    addressStock: any[]; // Replace with proper type
 }
 
 function processOrderItems(
     { producedItems, items, addressStock }: ProcessOrderItemsParams,
-): OrderItem[] {
+) {
+    const consumedItems: ItemChange[] = [];
     const purchaseItems: OrderItem[] = [];
 
     producedItems.forEach((producedItem) => {
@@ -72,28 +66,32 @@ function processOrderItems(
         );
         if (!product || !product.components) return;
 
+        // Process each component of the product
         product.components.forEach((component) => {
             const stockItem = addressStock.find(
                 (w) => String(w.item_id) === String(component.component_id),
             );
 
+            // Calculate required quantity without toFixed to avoid string conversion
             const requiredQuantity = Number(component.component_quantity) *
                 Number(producedItem.quantity_change);
 
+            // Get current stock quantity
             const currentStock = stockItem?.item_quantity ?? 0;
 
             if (!stockItem || currentStock < requiredQuantity) {
+                // If we don't have enough stock, split between consumed and purchased
                 if (currentStock > 0) {
-                    purchaseItems.push({
+                    // Consume what we have
+                    consumedItems.push({
                         item_id: String(component.component_id),
+                        item_name: component.component_name,
+                        item_type: component?.component_type || "part",
                         quantity_change: -currentStock,
-                        item_price: component?.component_price || 0,
-                        item_tax: component?.component_tax || 0.2,
-                        item_type: (component?.component_type ||
-                            "part") as ItemType,
                     });
                 }
 
+                // Purchase what we're missing
                 const quantityToPurchase = requiredQuantity - currentStock;
                 const existingPurchaseItem = purchaseItems.find(
                     (item) =>
@@ -108,31 +106,31 @@ function processOrderItems(
                         quantity_change: quantityToPurchase,
                         item_price: component?.component_price || 0,
                         item_tax: component?.component_tax || 0.2,
-                        item_type:
-                            (component?.component_type || "part") as ItemType,
+                        item_type: component?.component_type || "part",
                     });
                 }
             } else {
-                const existingConsumedItem = purchaseItems.find(
+                // We have enough stock, just consume it
+                const existingConsumedItem = consumedItems.find(
                     (item) =>
                         String(item.item_id) === String(component.component_id),
                 );
 
                 if (existingConsumedItem) {
-                    existingConsumedItem.quantity_change -= requiredQuantity;
+                    existingConsumedItem.quantity_change =
+                        (existingConsumedItem.quantity_change ?? 0) -
+                        requiredQuantity;
                 } else {
-                    purchaseItems.push({
+                    consumedItems.push({
                         item_id: String(component.component_id),
+                        item_name: component.component_name,
+                        item_type: component?.component_type || "part",
                         quantity_change: -requiredQuantity,
-                        item_price: component?.component_price || 0,
-                        item_tax: component?.component_tax || 0.2,
-                        item_type:
-                            (component?.component_type || "part") as ItemType,
                     });
                 }
             }
         });
     });
 
-    return purchaseItems;
+    return { consumedItems, purchaseItems };
 }

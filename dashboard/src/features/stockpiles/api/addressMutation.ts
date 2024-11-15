@@ -5,7 +5,7 @@ import { InsertAddress } from "../types";
 import { selectAddressesQueryKey } from "./selectAddresses";
 import { selectStockpilesQueryKey } from "./selectStockpiles";
 
-const insertAddress = async (address: InsertAddress) => {
+export const insertAddress = async (address: InsertAddress) => {
   const { data, error } = await supabase
     .from("addresses")
     .insert(address)
@@ -18,7 +18,7 @@ const insertAddress = async (address: InsertAddress) => {
   return data;
 };
 
-const upsertAddress = async (address: InsertAddress) => {
+export const upsertAddress = async (address: InsertAddress) => {
   const { data, error } = await supabase
     .from("addresses")
     .upsert(address)
@@ -31,12 +31,21 @@ const upsertAddress = async (address: InsertAddress) => {
   return data;
 };
 
+export const insertUpsertAddress = async (
+  address: InsertAddress,
+  operation: "insert" | "upsert",
+) => {
+  return operation === "insert"
+    ? insertAddress(address)
+    : upsertAddress(address);
+};
+
 export const useAddressMutation = (operation: "insert" | "upsert") => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (address: InsertAddress) =>
-      operation === "insert" ? insertAddress(address) : upsertAddress(address),
+      insertUpsertAddress(address, operation),
     onError: (error) => {
       toast.error("Error saving address");
     },

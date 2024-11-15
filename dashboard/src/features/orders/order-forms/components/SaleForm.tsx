@@ -4,19 +4,17 @@ import { useMemo } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form, FormLabel } from "@/components/ui/form";
-import AddressSelect from "../../../stockpiles/components/AddressSelect";
 import PriceItems from "@/features/orders/order-forms/components/PriceItems";
 import StockItems from "./StockItems";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { usePurchaseForm } from "../hooks/usePurchaseForm";
 import { saleFormSchema } from "../schema";
 import { useCreateOrder } from "../../api/createOrder";
 import { useSaleForm } from "../hooks/useSaleForm";
-import { Separator } from "../../../../components/ui/separator";
 import LockCard from "../../components/LockCard";
 import dayjs from "dayjs";
 import DatePicker from "../../../../components/DatePicker";
+import CompanyAddressSelect from "../../../companies/components/CompanyAddressSelect";
 
 const SaleForm = () => {
     const form = useForm<z.infer<typeof saleFormSchema>>({
@@ -28,9 +26,14 @@ const SaleForm = () => {
                 quantity_change: 1,
             }],
             order_date: dayjs().toDate(),
-
             consumed_items: [],
-            order_type: "sale", // Add default order type
+            order_type: "sale",
+            from_company_id: "",
+            from_billing_address_id: "",
+            from_shipping_address_id: "",
+            to_company_id: "",
+            to_billing_address_id: "",
+            to_shipping_address_id: "",
         },
     });
 
@@ -58,29 +61,38 @@ const SaleForm = () => {
             order_items,
             order_type,
             order_date,
-            from_address_id,
-            to_address_id,
+            from_company_id,
+            to_company_id,
+            from_billing_address_id,
+            from_shipping_address_id,
+            to_billing_address_id,
+            to_shipping_address_id,
         } = formData;
-        const item_changes = [...order_items];
-        const item_changes_with_address = item_changes.map((ic) => ({
+
+        const item_changes_with_address = order_items.map((ic) => ({
             item_id: ic.item_id,
             quantity_change: -1 * Number(ic.quantity_change),
             item_price: ic?.item_price ?? 0,
             item_tax: ic?.item_tax ?? 0,
-            address_id: from_address_id,
+            address_id: from_shipping_address_id,
         }));
+
         await createOrder({
             in_order_type: order_type,
             in_order_date: order_date.toISOString(),
             in_order_items: item_changes_with_address,
-            in_from_address_id: from_address_id,
-            in_to_address_id: to_address_id,
+            in_from_company_id: from_company_id,
+            in_to_company_id: to_company_id,
+            in_from_billing_address_id: from_billing_address_id,
+            in_from_shipping_address_id: from_shipping_address_id,
+            in_to_billing_address_id: to_billing_address_id,
+            in_to_shipping_address_id: to_shipping_address_id,
         });
     };
 
-    const addressId = useWatch({
+    const fromShippingAddressId = useWatch({
         control: form.control,
-        name: "from_address_id",
+        name: "from_shipping_address_id",
     });
 
     return (
@@ -91,16 +103,24 @@ const SaleForm = () => {
             >
                 <DatePicker name="order_date" label="Order Date" />
 
-                <AddressSelect
-                    name="from_address_id"
-                    label="Seller Address"
-                />
-                <AddressSelect
-                    name="to_address_id"
-                    label="Buyer Address"
-                />
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Seller</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <CompanyAddressSelect direction="from" />
+                        </CardContent>
+                </Card>
+                  <Card>
+                    <CardHeader>
+                        <CardTitle>Buyer</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <CompanyAddressSelect direction="to" />
+                    </CardContent>
+                </Card>
 
-                {addressId && (
+                {fromShippingAddressId && (
                     <>
                         <Card>
                             <CardHeader>
@@ -111,7 +131,10 @@ const SaleForm = () => {
                             </CardContent>
                         </Card>
                         <LockCard title="Consumed Items">
-                            <StockItems name="consumed_items" address_name='from_address_id' />
+                            <StockItems
+                                name="consumed_items"
+                                address_name="from_shipping_address_id"
+                            />
                         </LockCard>
                         <Button
                             onClick={() => {

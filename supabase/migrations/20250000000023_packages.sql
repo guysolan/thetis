@@ -94,10 +94,10 @@ FROM
     LEFT JOIN addresses from_shipping_addr ON o.from_shipping_address_id = from_shipping_addr.id
     LEFT JOIN addresses to_billing_addr ON o.to_billing_address_id = to_billing_addr.id
     LEFT JOIN addresses to_shipping_addr ON o.to_shipping_address_id = to_shipping_addr.id
-    JOIN order_item_changes oic ON o.id = oic.order_id
-    JOIN item_changes ic ON oic.item_change_id = ic.id
-    JOIN items i ON ic.item_id = i.id
-    JOIN addresses a ON ic.address_id = a.id
+    LEFT JOIN order_item_changes oic ON o.id = oic.order_id
+    LEFT JOIN item_changes ic ON oic.item_change_id = ic.id
+    LEFT JOIN items i ON ic.item_id = i.id
+    LEFT JOIN addresses a ON ic.address_id = a.id
 GROUP BY
     o.id,
     o.order_type,

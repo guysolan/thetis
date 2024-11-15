@@ -14,15 +14,15 @@ import { useSelectItemsByAddress } from "@/features/stockpiles/api/selectItemsBy
 import Select from "@/components/Select";
 import Input from "@/components/Input";
 import NumberCell from "@/components/NumberCell";
-import SelectItemType from "@/components/SelectItem";
+import ItemTypeSelect from "@/components/ItemTypeSelect";
 
 interface StockItemProps {
     name: "produced_items" | "consumed_items" | "from_items" | "to_items";
-    address_name?: "address_id" | "from_address_id" | "to_address_id";
+    address_name?:  "to_shipping_address_id" | "from_shipping_address_id";
 }
 
 const StockItems = (
-    { name, address_name = "address_id" }: StockItemProps,
+    { name, address_name = "from_shipping_address_id" }: StockItemProps,
 ) => {
     const { data: items } = useSelectItemsView();
     const { data: stockpileItems } = useSelectItemsByAddress();
@@ -95,7 +95,7 @@ const StockItems = (
                         return (
                             <TableRow key={field.id}>
                                 <TableCell>
-                                    <SelectItemType
+                                    <ItemTypeSelect
                                         name={`${name}.${index}.item_type`}
                                     />
                                 </TableCell>

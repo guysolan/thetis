@@ -13,7 +13,7 @@ import { Trash, Copy } from "lucide-react";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView";
 import Select from "@/components/Select";
 import Input from "@/components/Input";
-import SelectItemType from "@/components/SelectItem";
+import ItemTypeSelect from '../../../../components/ItemTypeSelect';
 
 const PriceItems = ({ showPrice = false }: { showPrice?: boolean }) => {
     const { data: items } = useSelectItemsView();
@@ -89,7 +89,7 @@ const PriceItems = ({ showPrice = false }: { showPrice?: boolean }) => {
                     {fields.map((field, index) => (
                         <TableRow key={field.id}>
                             <TableCell>
-                                <SelectItemType
+                                <ItemTypeSelect
                                     name={`order_items.${index}.item_type`}
                                 />
                             </TableCell>

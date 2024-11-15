@@ -1,5 +1,3 @@
-"use client";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -10,6 +8,9 @@ import { useAddressMutation } from "../api/addressMutation";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import { Address } from "../types";
+import { useSelectCompanies } from "../../companies/api/selectCompanies";
+import { useCompanyAddressMutation } from "../../companies/api/companyAddressMutation";
+import Select from "@/components/Select";
 
 const addressFormSchema = z.object({
 	id: z.coerce.number().optional(),
@@ -22,17 +23,34 @@ const addressFormSchema = z.object({
 	country: z.string().min(1, "Country required"),
 	is_active: z.boolean().default(true),
 	holds_stock: z.boolean().default(false),
+	company_id: z.string().optional(),
 });
 
 export type addressFormT = z.infer<typeof addressFormSchema>;
 
 interface Props {
-	address: Address["Row"] | null;
+	companyId?: number;
+	address: Address["Row"] | null | {
+		id: number;
+		name: string | null;
+		line_1?: string | null;
+		line_2?: string | null;
+		city?: string | null;
+		region?: string | null;
+		code?: string | null;
+		country?: string | null;
+		is_active?: boolean | null;
+		holds_stock?: boolean | null;
+	};
 	operation: "insert" | "upsert";
 }
 
-export const AddressForm = ({ address, operation }: Props) => {
+export const AddressForm = ({ address, operation, companyId }: Props) => {
+	const { data: companies = [] } = useSelectCompanies();
 	const { mutate: upsertAddress } = useAddressMutation(operation);
+	const { mutate: upsertCompanyAddress } = useCompanyAddressMutation(
+		operation,
+	);
 
 	const form = useForm<addressFormT>({
 		resolver: zodResolver(addressFormSchema),
@@ -47,11 +65,30 @@ export const AddressForm = ({ address, operation }: Props) => {
 			country: address?.country ?? "",
 			is_active: address?.is_active ?? true,
 			holds_stock: address?.holds_stock ?? false,
+			company_id: companyId?.toString() ?? "",
 		},
 	});
 
 	const onSubmit = (data: addressFormT) => {
-		upsertAddress(data);
+		if (data.company_id) {
+			upsertCompanyAddress({
+				address: {
+					id: data.id,
+					name: data.name,
+					line_1: data.line_1,
+					line_2: data.line_2,
+					city: data.city,
+					region: data.region,
+					code: data.code,
+					country: data.country,
+					is_active: data.is_active,
+					holds_stock: data.holds_stock,
+				},
+				companyId: parseInt(data.company_id),
+			});
+		} else {
+			upsertAddress(data);
+		}
 	};
 
 	return (
@@ -60,6 +97,16 @@ export const AddressForm = ({ address, operation }: Props) => {
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="space-y-4 mt-4 p-1"
 			>
+				<Select
+					name="company_id"
+					label="Company"
+					disabled={companyId === undefined}
+					options={companies.map((company) => ({
+						value: company.id.toString(),
+						label: company.name,
+					}))}
+				/>
+
 				<Input label="Name" name="name" type="text" />
 				<Input label="Address Line 1" name="line_1" type="text" />
 				<Input

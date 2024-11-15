@@ -17,21 +17,20 @@ const FinancialTransactions = (
 ) => {
     return (
         <Table className="text-left">
-            <TableHeader
-            >
+            <TableHeader>
                 <TableRow>
                     <TableHead>Item Name</TableHead>
                     <TableHead>Quantity</TableHead>
                     <TableHead>Price</TableHead>
                     <TableHead>Tax</TableHead>
-                    <TableHead className='w-1/6'>Total</TableHead>
+                    <TableHead className="w-1/6">Total</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {orderItems.sort((a, b) => a.item_id - b.item_id).filter((
-                    item,
+                    item: OrderView["items"][number],
                 ) => Number(item?.price) !== 0).map((
-                    item,
+                    item: OrderView["items"][number],
                 ) => (
                     <TableRow
                         className="text-left"
@@ -40,7 +39,7 @@ const FinancialTransactions = (
                         <TableCell>
                             {item.item_name}
                         </TableCell>
-                           <TableCell>
+                        <TableCell>
                             {orderType === "sale"
                                 ? item.quantity * -1
                                 : item.quantity}
@@ -49,11 +48,11 @@ const FinancialTransactions = (
                             ${item.price?.toFixed(2) ??
                                 0.00}
                         </TableCell>
-                              <TableCell>
-                            {(item.tax*100)?.toFixed(0) ??
+                        <TableCell>
+                            {(item.tax * 100)?.toFixed(0) ??
                                 0}%
                         </TableCell>
-                     
+
                         <TableCell>
                             ${item.total?.toFixed(2) ??
                                 0.00}

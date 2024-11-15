@@ -3,13 +3,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
-import AddressSelect from '../../../stockpiles/components/AddressSelect';
+import AddressSelect from "../../../stockpiles/components/AddressSelect";
 import PriceItems from "@/features/orders/order-forms/components/PriceItems";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { purchaseFormSchema } from "../schema";
 import { useCreateOrder } from "../../api/createOrder";
-import dayjs from 'dayjs';
-import DatePicker from '../../../../components/DatePicker';
+import dayjs from "dayjs";
+import DatePicker from "../../../../components/DatePicker";
+import CompanyAddressSelect from "../../../companies/components/CompanyAddressSelect";
 
 const PurchaseForm = () => {
     const form = useForm<z.infer<typeof purchaseFormSchema>>({
@@ -19,36 +20,40 @@ const PurchaseForm = () => {
                 item_type: "product",
                 item_id: "",
                 quantity_change: 1,
+                item_price: 0,
+                item_tax: 0.2,
             }],
             order_date: dayjs().toDate(),
-            order_type: "purchase", // Add default order type
+            order_type: "purchase",
+            from_company_id: "",
+            from_billing_address_id: "",
+            from_shipping_address_id: "",
         },
     });
 
     const { mutate: createOrder } = useCreateOrder();
 
-    // Extract form submission logic
     const handleSubmit = async (
         formData: z.infer<typeof purchaseFormSchema>,
     ) => {
-        const {
-            order_items,
-            order_type,
-            order_date,
-            address_id,
-        } = formData;
-
-        const item_changes_with_address = order_items.map((ic) => ({
-            item_id: ic.item_id,
-            quantity_change: (ic.quantity_change),
-            item_price: ic?.item_price ?? 0,
-            item_tax: ic?.item_tax ?? 0,
-            address_id: address_id,
+        const item_changes = formData.order_items.map((item) => ({
+            item_id: item.item_id,
+            quantity_change: item.quantity_change,
+            item_price: item.item_price ?? 0,
+            item_tax: item.item_tax ?? 0.2,
+            address_id: formData.from_shipping_address_id,
         }));
+
         await createOrder({
-            in_order_type: order_type,
-            in_order_date: order_date.toISOString(),
-            in_order_items: item_changes_with_address,
+            in_order_type: formData.order_type,
+            in_order_date: formData.order_date.toISOString(),
+            in_order_items: item_changes,
+            in_from_company_id: formData.from_company_id,
+            in_from_billing_address_id: formData.from_billing_address_id,
+            in_from_shipping_address_id: formData.from_shipping_address_id,
+            in_to_company_id: null,
+            in_to_billing_address_id: null,
+            in_to_shipping_address_id: null,
         });
     };
 
@@ -58,23 +63,25 @@ const PurchaseForm = () => {
                 onSubmit={form.handleSubmit(handleSubmit)}
                 className="flex flex-col space-y-4 px-1 pt-2 pr-4"
             >
-                <DatePicker name="order_date" label='Order Date' />
+                <DatePicker name="order_date" label="Order Date" />
 
-                <AddressSelect
-                    name="address_id"
-                    label="From Address"
-                />
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Buyer</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <CompanyAddressSelect direction="to" />
+                    </CardContent>
+                </Card>
 
-                       <Card>
-                            <CardHeader>
-                                <CardTitle>Order Items</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                <PriceItems showPrice={true} />
-                        
-                            </CardContent>
-                        </Card>
-
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Order Items</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <PriceItems showPrice={true} />
+                    </CardContent>
+                </Card>
 
                 <Button
                     onClick={() => {
