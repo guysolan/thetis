@@ -18,7 +18,7 @@ const insertUpsertCompanyAddress = async (
 
     const { error: relationError } = await supabase
         .from("company_addresses")
-        .insert({
+        .upsert({
             company_id: companyId,
             address_id: addressData.id,
         });

@@ -1,44 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Sheet from "@/components/Sheet";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   selectStockpilesQueryOptions,
-  useSelectStockpiles,
 } from "@/features/stockpiles/api/selectStockpiles";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import PageTitle from "@/components/PageTitle";
-import { AddressForm } from "@/features/stockpiles/components/AddressForm";
-import StocktakeForm from "@/features/orders/order-forms/components/StockForm";
+import AddressForm from "@/features/stockpiles/components/AddressForm";
 import AmazonStock from "@/features/stockpiles/components/AmazonWarehouses";
-import DeleteDialog from "@/components/DeleteDialog";
 import useDeleteAddress from "@/features/stockpiles/api/deleteAddress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { useSelectAddresses } from "../../../features/stockpiles/api/selectAddresses";
-import { SheetFooter } from "../../../components/ui/sheet";
 import AddressStock from "../../../features/stockpiles/components/AddressStock";
-import Companies from "../../../features/companies/components/Companies";
-import { Edit, MoreVertical, Trash2 } from "lucide-react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import ActionPopover from "@/components/ActionPopover";
 
 const ItemsPage = () => {
@@ -84,7 +57,7 @@ const ItemsPage = () => {
                     {address.name}
                   </CardTitle>
                   <ActionPopover
-                    title={address.name}
+                    title={address.name ?? "Address"}
                     editForm={
                       <AddressForm operation="upsert" address={address} />
                     }

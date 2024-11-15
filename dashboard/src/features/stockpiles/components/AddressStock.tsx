@@ -7,23 +7,15 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Sheet from "@/components/Sheet";
-import { AddressForm } from "./AddressForm";
-import DeleteDialog from "@/components/DeleteDialog";
+import AddressForm from "./AddressForm";
 import { useSelectStockpiles } from "../api/selectStockpiles";
 import StocktakeForm from "../../orders/order-forms/components/StockForm";
 import useDeleteAddress from "../api/deleteAddress";
 import ActionPopover from "@/components/ActionPopover";
+import ItemsTable from "../../items/components/ItemsTable";
+import { ItemView } from "../../items/types";
 
 const AddressStock = () => {
     const { data: stockpiles } = useSelectStockpiles();
@@ -41,7 +33,8 @@ const AddressStock = () => {
                                 {stockpile.stockpile_name}
                             </CardTitle>
                             <ActionPopover
-                                title={stockpile.stockpile_name}
+                                title={stockpile.stockpile_name ??
+                                    "Name Missing"}
                                 description={`Edit the details for stockpile ${stockpile.stockpile_name}`}
                                 editForm={
                                     <AddressForm
@@ -60,41 +53,9 @@ const AddressStock = () => {
                             />
                         </CardHeader>
                         <CardContent className="flex-grow">
-                            <Table className="mt-4">
-                                <TableHeader>
-                                    <TableRow>
-                                        <TableHead>Type</TableHead>
-                                        <TableHead>Item</TableHead>
-                                        <TableHead>Quantity</TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {(stockpile.items as any)
-                                        ?.filter((item: any) =>
-                                            item.item_quantity > 0
-                                        )
-                                        ?.map((wp: any) => (
-                                            <TableRow
-                                                key={`item-${wp.item_id}`}
-                                            >
-                                                <TableCell>
-                                                    <Badge
-                                                        className="capitalize"
-                                                        variant="default"
-                                                    >
-                                                        {wp.item_type}
-                                                    </Badge>
-                                                </TableCell>
-                                                <TableCell>
-                                                    {wp.item_name}
-                                                </TableCell>
-                                                <TableCell>
-                                                    {wp.item_quantity}
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
-                                </TableBody>
-                            </Table>
+                            <ItemsTable
+                                items={stockpile.items as ItemView[]}
+                            />
                         </CardContent>
                         <CardFooter>
                             <Sheet

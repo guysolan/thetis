@@ -19,7 +19,7 @@ interface Props {
     company: any | null;
 }
 
-export const CompanyForm = ({ company }: Props) => {
+export default function CompanyForm({ company }: Props) {
     const { mutate: upsertCompany } = useCompanyMutation(
         company ? "upsert" : "insert",
     );
@@ -51,4 +51,4 @@ export const CompanyForm = ({ company }: Props) => {
             </form>
         </Form>
     );
-};
+}

@@ -45,7 +45,7 @@ interface Props {
 	operation: "insert" | "upsert";
 }
 
-export const AddressForm = ({ address, operation, companyId }: Props) => {
+export default function AddressForm({ address, operation, companyId }: Props) {
 	const { data: companies = [] } = useSelectCompanies();
 	const { mutate: upsertAddress } = useAddressMutation(operation);
 	const { mutate: upsertCompanyAddress } = useCompanyAddressMutation(
@@ -135,4 +135,4 @@ export const AddressForm = ({ address, operation, companyId }: Props) => {
 			</form>
 		</Form>
 	);
-};
+}

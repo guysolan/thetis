@@ -2,46 +2,22 @@ import { useSelectCompanies } from "../api/selectCompanies";
 import {
     Card,
     CardContent,
-    CardDescription,
     CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion";
+
 import { Button } from "@/components/ui/button";
-import { Edit, MoreVertical, Trash2 } from "lucide-react";
 import Sheet from "@/components/Sheet";
-import { CompanyForm } from "./CompanyForm";
-import CompanyAddressForm from "./CompanyAddressForm";
-import DeleteDialog from "@/components/DeleteDialog";
+import CompanyForm from "./CompanyForm";
 import { useDeleteCompany } from "../api/deleteCompany";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
-import { Separator } from "@/components/ui/separator";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-import { AddressForm } from "../../stockpiles/components/AddressForm";
-import useDeleteAddress from "../../stockpiles/api/deleteAddress";
+import AddressForm from "../../stockpiles/components/AddressForm";
 import ActionPopover from "@/components/ActionPopover";
+import AddressTable from "../../stockpiles/components/AddressTable";
 
 const Companies = () => {
     const { data: companies = [] } = useSelectCompanies();
     const { mutate: deleteCompany } = useDeleteCompany();
-    const { mutate: deleteAddress } = useDeleteAddress();
 
     return (
         <div className="flex flex-col gap-4">
@@ -70,75 +46,10 @@ const Companies = () => {
                         </CardHeader>
                         <CardContent>
                             <div className="flex flex-col gap-4">
-                                <Table>
-                                    <TableHeader>
-                                        <TableRow>
-                                            <TableHead>
-                                                Name
-                                            </TableHead>
-                                            <TableHead>
-                                                Address
-                                            </TableHead>
-                                            <TableHead>
-                                                City
-                                            </TableHead>
-                                            <TableHead>
-                                                Region
-                                            </TableHead>
-                                            <TableHead>
-                                                Stock
-                                            </TableHead>
-                                            <TableHead className="w-[100px]">
-                                                Actions
-                                            </TableHead>
-                                        </TableRow>
-                                    </TableHeader>
-                                    <TableBody>
-                                        {company.addresses?.map((
-                                            address,
-                                        ) => (
-                                            <TableRow
-                                                key={address.id}
-                                            >
-                                                <TableCell>
-                                                    {address.name}
-                                                </TableCell>
-                                                <TableCell>
-                                                    {address.line_1}
-                                                </TableCell>
-                                                <TableCell>
-                                                    {address.city}
-                                                </TableCell>
-                                                <TableCell>
-                                                    {address.region}
-                                                </TableCell>
-                                                <TableCell>
-                                                    {address
-                                                            .holds_stock
-                                                        ? "Yes"
-                                                        : "No"}
-                                                </TableCell>
-                                                <TableCell>
-                                                    <ActionPopover
-                                                        title="Address"
-                                                        editForm={
-                                                            <AddressForm
-                                                                address={address}
-                                                                operation="upsert"
-                                                                companyId={company
-                                                                    .id}
-                                                            />
-                                                        }
-                                                        deleteFunction={() =>
-                                                            deleteAddress(
-                                                                address.id,
-                                                            )}
-                                                    />
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
+                                <AddressTable
+                                    addresses={company.addresses}
+                                    companyId={company.id}
+                                />
                             </div>
                         </CardContent>
                         <CardFooter>

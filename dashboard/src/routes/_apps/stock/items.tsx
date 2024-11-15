@@ -8,15 +8,6 @@ import {
 } from "@/components/ui/card";
 import Sheet from "@/components/Sheet.tsx";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import ItemComponentsForm from "@/features/items/components/ItemComponentsForm.tsx";
@@ -28,6 +19,7 @@ import { ItemView } from "@/features/items/types.ts";
 import { useDeleteItem } from "@/features/items/api/deleteItem.ts";
 import { useDuplicateItem } from "../../../features/items/api/duplicateItem";
 import ActionPopover from "@/components/ActionPopover";
+import ComponentsTable from "../../../features/items/components/ComponentsTable";
 
 const ItemsPage = () => {
   const { data: itemsView } = useSelectItemsView();
@@ -82,10 +74,11 @@ const ItemsPage = () => {
                           onDuplicate={() =>
                             duplicateItem({
                               itemId: {
-                                price: item.item_price,
+                                price: item.item_price as number,
                                 name: item.item_name,
                                 type: item.item_type!,
                               },
+                              // @ts-ignore
                               components: item.components,
                             })}
                         />
@@ -93,22 +86,7 @@ const ItemsPage = () => {
                     </CardHeader>
                     {["product", "package"].includes(item?.item_type ?? "") && (
                       <CardContent className="flex-grow">
-                        <Table className="mt-4">
-                          <TableHeader>
-                            <TableRow>
-                              <TableHead>Component Name</TableHead>
-                              <TableHead>Quantity per Item</TableHead>
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {item.components.map((c: any) => (
-                              <TableRow key={String(c.component_id)}>
-                                <TableCell>{c.component_name}</TableCell>
-                                <TableCell>{c.component_quantity}</TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
+                        <ComponentsTable components={item.components} />
                         <Sheet
                           trigger={
                             <Button

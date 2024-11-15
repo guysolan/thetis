@@ -1,18 +1,15 @@
-import { useMemo, useState } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
-import { Button } from '@/components/ui/button'
-import Sheet from '@/components/Sheet'
-import { useSelectOrders } from '@/features/orders/order-history/api/selectOrders'
-import { useSelectItemsView } from '@/features/items/api/selectItemsView'
-import {Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { createFileRoute } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import Sheet from "@/components/Sheet";
+import { useSelectOrders } from "@/features/orders/order-history/api/selectOrders";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { OrderForm } from '@/features/orders/components/OrderForm'
-import { OrderHistory } from '@/features/orders/components/OrderHistory'
-import PageTitle from '../../../components/PageTitle'
+import { OrderForm } from "@/features/orders/components/OrderForm";
+import { OrderHistory } from "@/features/orders/components/OrderHistory";
+import PageTitle from "../../../components/PageTitle";
 
 const OrdersPage = () => {
-  const { data: orders } = useSelectOrders()
-  const { data: items } = useSelectItemsView()
+  const { data: orders } = useSelectOrders();
 
   return (
     <>
@@ -22,12 +19,12 @@ const OrdersPage = () => {
           title="Create Order"
           description="Enter the details for your new Order."
         >
-          <OrderForm items={items} />
+          <OrderForm />
         </Sheet>
       </PageTitle>
 
       <Tabs defaultValue="all" className="w-full">
-        <TabsList className='my-2'>
+        <TabsList className="my-2">
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="sale">Sales</TabsTrigger>
           <TabsTrigger value="build">Builds</TabsTrigger>
@@ -37,18 +34,18 @@ const OrdersPage = () => {
 
         {["all", "sale", "build", "purchase", "shipment"].map((tabValue) => (
           <TabsContent key={tabValue} value={tabValue}>
-            <OrderHistory 
-              orders={orders?.filter(order => 
+            <OrderHistory
+              orders={orders?.filter((order) =>
                 tabValue === "all" ? true : order.order_type === tabValue
-              )} 
+              )}
             />
           </TabsContent>
         ))}
       </Tabs>
     </>
-  )
-}
+  );
+};
 
-export const Route = createFileRoute('/_apps/stock/orders')({
+export const Route = createFileRoute("/_apps/stock/orders")({
   component: OrdersPage,
-})
+});

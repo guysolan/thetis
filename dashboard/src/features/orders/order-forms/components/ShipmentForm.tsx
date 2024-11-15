@@ -13,9 +13,9 @@ import { OrderItemChange, shipmentFormSchema } from "../schema";
 import { useCreateOrder } from "../../api/createOrder";
 import { useShipmentForm } from "../hooks/useShipmentForm";
 import LockCard from "../../components/LockCard";
-import dayjs from 'dayjs';
-import DatePicker from '@/components/DatePicker';
-import CompanyAddressSelect from '../../../companies/components/CompanyAddressSelect';
+import dayjs from "dayjs";
+import DatePicker from "@/components/DatePicker";
+import CompanyAddressSelect from "../../../companies/components/CompanyAddressSelect";
 
 const ShipmentForm = () => {
     const form = useForm<z.infer<typeof shipmentFormSchema>>({
@@ -53,7 +53,9 @@ const ShipmentForm = () => {
     const { mutate: createOrder } = useCreateOrder();
 
     // Extract form submission logic
-    const handleSubmit = async (formData: z.infer<typeof shipmentFormSchema>) => {
+    const handleSubmit = async (
+        formData: z.infer<typeof shipmentFormSchema>,
+    ) => {
         const {
             from_items,
             from_company_id,
@@ -63,7 +65,7 @@ const ShipmentForm = () => {
             to_billing_address_id,
             to_shipping_address_id,
             to_items,
-            order_date
+            order_date,
         } = formData;
 
         const from_item_changes_with_address = from_items.map((ic) => ({
@@ -116,19 +118,19 @@ const ShipmentForm = () => {
                 onSubmit={form.handleSubmit(handleSubmit)}
                 className="flex flex-col space-y-4 px-1 pt-2 pr-4"
             >
-                <DatePicker name="order_date" label='Order Date' />
+                <DatePicker name="order_date" label="Order Date" />
 
-               <Card>
+                <Card>
                     <CardHeader>
-                        <CardTitle>Seller</CardTitle>
+                        <CardTitle>From</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <CompanyAddressSelect direction="from" />
-                        </CardContent>
+                    </CardContent>
                 </Card>
-                  <Card>
+                <Card>
                     <CardHeader>
-                        <CardTitle>Buyer</CardTitle>
+                        <CardTitle>To</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <CompanyAddressSelect direction="to" />
@@ -145,7 +147,9 @@ const ShipmentForm = () => {
                             </CardContent>
                         </Card>
                         <LockCard
-                            title={<AddressSelect name="from_shipping_address_id" />}
+                            title={
+                                <AddressSelect name="from_shipping_address_id" />
+                            }
                         >
                             <StockItems
                                 address_name="from_shipping_address_id"
