@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import Sheet from "@/components/Sheet";
 import AddressForm from "./AddressForm";
 import { useSelectStockpiles } from "../api/selectStockpiles";
-import StocktakeForm from "../../orders/order-forms/components/StockForm";
+import StocktakeForm from "../../orders/features/order-forms/features/stocktake-form/StockForm";
 import useDeleteAddress from "../api/deleteAddress";
 import ActionPopover from "@/components/ActionPopover";
 import ItemsTable from "../../items/components/ItemsTable";

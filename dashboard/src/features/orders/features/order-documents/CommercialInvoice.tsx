@@ -5,7 +5,7 @@ import Address from "./Address";
 import OrderDescription from "./OrderDescription";
 import OrderTitle from "./OrderTitle";
 import OrderTotal from "./OrderTotal";
-import StockMovements from "../../order-history/components/StockMovements";
+import StockMovements from "../order-history/components/StockMovements";
 import FDADetails from "./FDADetails";
 import ExporterDetails from "./ExporterDetails";
 import type { CompanyRow } from "../../../companies/types";

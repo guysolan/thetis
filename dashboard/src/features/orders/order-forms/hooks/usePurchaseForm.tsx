@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Control, UseFormSetValue, useWatch } from "react-hook-form";
-import { useSelectItemsByAddress } from "../../../stockpiles/api/selectItemsByAddress";
-import { useSelectItemsView } from "../../../items/api/selectItemsView";
+import { useSelectItemsByAddress } from "../../../../stockpiles/api/selectItemsByAddress";
+import { useSelectItemsView } from "../../../../items/api/selectItemsView";
 import { ItemChange, OrderItem, PurchaseFormData } from "../schema";
-import { ItemType, ItemView } from "../../../items/types";
+import { ItemType, ItemView } from "../../../../items/types";
 
 export const usePurchaseForm = (
     control: Control<PurchaseFormData>,

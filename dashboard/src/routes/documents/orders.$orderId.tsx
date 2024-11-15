@@ -1,11 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  selectOrderByIdQueryOptions,
-} from "@/features/orders/order-history/api/selectOrderById";
-import BuildForm from "../../features/orders/order-forms/components/BuildForm";
-import BuildOrderDocument from "../../features/orders/order-documents/BuildOrderDocument";
-import SaleDocument from '../../features/orders/order-documents/SaleDocument';
-import CommercialInvoice from '../../features/orders/order-documents/CommercialInvoice';
+import { selectOrderByIdQueryOptions } from "../../features/orders/features/order-history/api/selectOrderById";
+import BuildOrderDocument from "../../features/orders/features/order-documents/BuildOrderDocument";
+import SaleDocument from "../../features/orders/features/order-documents/SaleDocument";
+import CommercialInvoice from "../../features/orders/features/order-documents/CommercialInvoice";
 
 const OrdersPage = () => {
   const { order } = Route.useLoaderData();
@@ -14,9 +11,9 @@ const OrdersPage = () => {
     case ("build"):
       return <BuildOrderDocument order={order} />;
     case ("sale"):
-      return <SaleDocument order={order} />
-        case ("shipment"):
-      return <CommercialInvoice order={order}/>
+      return <SaleDocument order={order} />;
+    case ("shipment"):
+      return <CommercialInvoice order={order} />;
   }
   return (
     <>

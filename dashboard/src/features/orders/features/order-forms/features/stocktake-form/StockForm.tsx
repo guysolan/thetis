@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import PriceItems from "@/features/orders/order-forms/components/PriceItems";
-import { OrderItem } from "@/features/orders/order-forms/schema";
+import PriceItems from "@/features/orders/features/order-forms/components/PriceItems";
+import { OrderItem } from "@/features/orders/features/order-forms/schema";
 import { z } from "zod";
-import StocktakeDiscrepancy from "./StockDiscrepency";
-import { useCreateOrder } from "../../../api/createOrder";
+import StocktakeDiscrepancy from "../../components/StockDiscrepency";
+import { useCreateOrder } from "../../../../api/createOrder";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import dayjs from "dayjs";
 import DatePicker from "@/components/DatePicker";
@@ -15,7 +15,7 @@ interface Props {
 	orderItems?: OrderItem[];
 }
 
-import { stockTakeFormSchema } from "../schema";
+import { stockTakeFormSchema } from "../../schema";
 
 export type StocktakeFormT = z.infer<typeof stockTakeFormSchema>;
 

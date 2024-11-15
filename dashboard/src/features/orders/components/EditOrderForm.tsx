@@ -6,7 +6,7 @@ import { Form } from "@/components/ui/form";
 
 import dayjs from "dayjs";
 import DatePicker from "@/components/DatePicker";
-import { editOrderSchema } from "../order-forms/schema";
+import { editOrderSchema } from "../features/order-forms/schema";
 import { OrderView } from "../types";
 import Select from "@/components/Select";
 import { useUpdateOrder } from '../api/updateOrder';

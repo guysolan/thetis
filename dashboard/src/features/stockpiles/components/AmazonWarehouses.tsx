@@ -1,14 +1,21 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAmazonInventory } from "../../amazon/api/selectAmazonInventory";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-const Amazonstockpiles = () => {
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+const AmazonStockpiles = () => {
     const { data: allInventories } = useAmazonInventory();
 
     return (
         <div className="flex flex-col gap-4 py-4">
             {Object.entries(allInventories).map(([key, stockpile]) => (
                 <Card key={key}>
-                        <CardHeader>
+                    <CardHeader>
                         <CardTitle>{key}</CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -39,4 +46,4 @@ const Amazonstockpiles = () => {
     );
 };
 
-export default Amazonstockpiles;
+export default AmazonStockpiles;

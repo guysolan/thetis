@@ -6,13 +6,13 @@ import {
     TableHead,
     TableRow,
 } from "@/components/ui/table";
-import { OrderView } from "../types";
+import { OrderView } from "../../types";
 
 const OrderTotal = ({ order }: { order: OrderView }) => {
     return (
         <Table>
             <TableBody>
-                <TableRow className='border-t'>
+                <TableRow className="border-t">
                     <TableHead>Carriage</TableHead>
                     <TableCell className="w-1/6 font-medium text-neutral-600">
                         ${`${

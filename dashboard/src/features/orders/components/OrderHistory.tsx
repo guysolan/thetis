@@ -7,21 +7,12 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { OrderView } from "../types";
 import { Separator } from "@/components/ui/separator";
-import DeleteOrder from "./DeleteOrder";
-import { Edit, ExternalLink, Trash, Trash2 } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import dayjs from "dayjs";
-import OrderBreakdown from "../order-history/components/OrderBreakdown";
-import Sheet from "@/components/Sheet";
+import OrderBreakdown from "../features/order-history/components/OrderBreakdown";
 import EditOrderForm from "./EditOrderForm";
 import { Link } from "@tanstack/react-router";
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-import { MoreVertical } from "lucide-react";
-import PopoverOption from "@/components/PopoverOption";
+
 import ActionPopover from "@/components/ActionPopover";
 import { useDeleteOrder } from "../api/deleteOrder";
 

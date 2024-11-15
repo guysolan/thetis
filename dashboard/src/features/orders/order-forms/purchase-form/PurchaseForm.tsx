@@ -3,14 +3,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
-import AddressSelect from "../../../stockpiles/components/AddressSelect";
+import AddressSelect from "../../../../stockpiles/components/AddressSelect";
 import PriceItems from "@/features/orders/order-forms/components/PriceItems";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { purchaseFormSchema } from "../schema";
-import { useCreateOrder } from "../../api/createOrder";
+import { useCreateOrder } from "../../../api/createOrder";
 import dayjs from "dayjs";
-import DatePicker from "../../../../components/DatePicker";
-import CompanyAddressSelect from "../../../companies/components/CompanyAddressSelect";
+import DatePicker from "../../../../../components/DatePicker";
+import CompanyAddressSelect from "../../../../companies/components/CompanyAddressSelect";
 
 const PurchaseForm = () => {
     const form = useForm<z.infer<typeof purchaseFormSchema>>({

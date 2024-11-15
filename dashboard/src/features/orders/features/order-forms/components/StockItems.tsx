@@ -1,4 +1,4 @@
-import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import {
     Table,
     TableBody,
@@ -8,64 +8,30 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Trash, Copy } from "lucide-react";
+import { Copy, Trash } from "lucide-react";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView";
-import { useSelectItemsByAddress } from "@/features/stockpiles/api/selectItemsByAddress";
 import Select from "@/components/Select";
 import Input from "@/components/Input";
 import NumberCell from "@/components/NumberCell";
 import ItemTypeSelect from "@/components/ItemTypeSelect";
+import { useStockQuantities } from "../hooks/useStockQuantities";
 
 interface StockItemProps {
     name: "produced_items" | "consumed_items" | "from_items" | "to_items";
-    address_name?:  "to_shipping_address_id" | "from_shipping_address_id";
+    address_name?: "to_shipping_address_id" | "from_shipping_address_id";
 }
 
 const StockItems = (
     { name, address_name = "from_shipping_address_id" }: StockItemProps,
 ) => {
     const { data: items } = useSelectItemsView();
-    const { data: stockpileItems } = useSelectItemsByAddress();
     const form = useFormContext();
 
     const { fields, append, remove } = useFieldArray({
-        control: form.control,
-        name: name,
+        name,
     });
 
-    const selectedAddress = useWatch({
-        control: form.control,
-        name: address_name,
-    });
-
-    // Watch the produced items to calculate quantities
-    const itemChanges = useWatch({
-        control: form.control,
-        name: name,
-    });
-
-    const getItemQuantities = (itemId: string) => {
-        if (!selectedAddress || !stockpileItems) {
-            return { before: 0, after: 0 };
-        }
-
-        const stockpileItem = stockpileItems.find(
-            (w) =>
-                String(w.address_id) === String(selectedAddress) &&
-                String(w.item_id) === String(itemId),
-        );
-
-        const currentQuantity = stockpileItem?.item_quantity ?? 0;
-        const addedQuantity =
-            itemChanges?.find((i) => String(i.item_id) === String(itemId))
-                ?.quantity_change || 0;
-        const quantityAfter = currentQuantity + addedQuantity;
-
-        return {
-            before: Number(currentQuantity),
-            after: Number(quantityAfter),
-        };
-    };
+    const { getItemQuantities } = useStockQuantities(name, address_name);
 
     const copyRow = (index: number) => {
         const rowToCopy = form.getValues(`${name}.${index}`);

@@ -74,7 +74,10 @@ export const purchaseFormSchema = z.object({
     from_company_id: z.string().min(1, "Company is required"),
     from_billing_address_id: z.string().min(1, "Billing address is required"),
     from_shipping_address_id: z.string().min(1, "Shipping address is required"),
-    order_type: z.enum(["purchase"]), // Add validation for order_type
+    to_company_id: z.string().min(1, "Company is required"),
+    to_billing_address_id: z.string().min(1, "Billing address is required"),
+    to_shipping_address_id: z.string().min(1, "Shipping address is required"),
+    order_type: z.enum(["purchase"]),
     order_items: z.array(orderItemSchema),
     order_date: z.date(),
 });

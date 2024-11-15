@@ -1,5 +1,5 @@
-import { Control, UseFormSetValue } from "react-hook-form";
-import { useStocktakeDiscrepancy } from "../hooks/useStocktakeDiscrepency";
+import { useFormContext } from "react-hook-form";
+import { useStocktakeDiscrepancy } from "../features/stocktake-form/useStocktakeDiscrepency";
 import {
   Table,
   TableBody,
@@ -8,14 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-interface StocktakeDiscrepancyProps {
-  control: Control<any>;
-  setValue: UseFormSetValue<any>;
-}
 
-const StocktakeDiscrepancy = (
-  { control, setValue }: StocktakeDiscrepancyProps,
-) => {
+const StocktakeDiscrepancy = () => {
+  const { control, setValue } = useFormContext();
   const discrepancies = useStocktakeDiscrepancy(control, setValue);
 
   return (

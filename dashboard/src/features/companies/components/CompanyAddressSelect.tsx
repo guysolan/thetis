@@ -20,19 +20,23 @@ const CompanyAddressSelect = ({ direction }: Props) => {
     // Get selected company's addresses
     const getAddressOptions = () => {
         const companyId = form.watch(getFieldName("company"));
-        const selectedCompany = companies?.find((c) => String(c.id) === companyId);
+        const selectedCompany = companies?.find((c) =>
+            String(c.id) === companyId
+        );
         const addresses = selectedCompany?.addresses || [];
-        
-        return addresses.map(addr => ({
+
+        return addresses.map((addr) => ({
             label: addr.name || addr.street,
-            value: String(addr.id)
+            value: String(addr.id),
         }));
     };
 
     // Auto-fill addresses when there's only one option
     useEffect(() => {
         const companyId = form.watch(getFieldName("company"));
-        const selectedCompany = companies?.find((c) => String(c.id) === companyId);
+        const selectedCompany = companies?.find((c) =>
+            String(c.id) === companyId
+        );
         const addresses = selectedCompany?.addresses || [];
 
         if (addresses.length === 1) {
@@ -47,7 +51,10 @@ const CompanyAddressSelect = ({ direction }: Props) => {
             <Select
                 label="Company"
                 name={getFieldName("company")}
-                options={(companies || []).map((c) => ({ label: c.name, value: String(c.id) }))}
+                options={(companies || []).map((c) => ({
+                    label: c.name,
+                    value: String(c.id),
+                }))}
             />
             <Select
                 label="Shipping Address"

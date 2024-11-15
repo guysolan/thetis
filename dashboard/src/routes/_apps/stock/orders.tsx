@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import Sheet from "@/components/Sheet";
-import { useSelectOrders } from "@/features/orders/order-history/api/selectOrders";
+import { useSelectOrders } from "@/features/orders/features/order-history/api/selectOrders";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { OrderForm } from "@/features/orders/components/OrderForm";
@@ -28,7 +28,7 @@ const OrdersPage = () => {
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="sale">Sales</TabsTrigger>
           <TabsTrigger value="build">Builds</TabsTrigger>
-          <TabsTrigger value="purchase">Purchase</TabsTrigger>
+          <TabsTrigger value="purchase">Purchases</TabsTrigger>
           <TabsTrigger value="shipment">Shipments</TabsTrigger>
         </TabsList>
 
