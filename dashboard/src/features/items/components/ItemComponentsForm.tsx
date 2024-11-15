@@ -115,7 +115,7 @@ function ItemComponentsForm({
 					onClick={() =>
 						append({
 							component_id: "",
-							component_quantity: "1",
+							component_quantity: 1,
 							item_id: String(itemId),
 						})}
 				>

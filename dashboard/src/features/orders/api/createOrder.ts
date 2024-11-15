@@ -3,12 +3,14 @@ import { supabase } from "../../../lib/supabase";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { selectOrdersQueryKey } from "../order-history/api/selectOrders";
 import { selectStockpilesQueryKey } from "../../stockpiles/api/selectStockpiles";
+import { ItemType } from "../../items/types";
 
 export type OrderItemChange = {
 	item_id: string;
 	quantity_change: number;
 	item_price: number;
 	item_tax: number;
+	item_type: ItemType;
 	address_id: string;
 };
 

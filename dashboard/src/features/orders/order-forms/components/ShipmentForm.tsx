@@ -16,6 +16,8 @@ import LockCard from "../../components/LockCard";
 import dayjs from "dayjs";
 import DatePicker from "@/components/DatePicker";
 import CompanyAddressSelect from "../../../companies/components/CompanyAddressSelect";
+import ShipmentItems from "./ShipmentItems";
+import PackageDialog from "../../../items/components/PackageDialog";
 
 const ShipmentForm = () => {
     const form = useForm<z.infer<typeof shipmentFormSchema>>({
@@ -25,12 +27,15 @@ const ShipmentForm = () => {
                 item_type: "product",
                 item_id: "",
                 quantity_change: 1,
+                height: 0,
+                width: 0,
+                depth: 0,
+                weight: 0,
             }],
             order_date: dayjs().toDate(),
-
+            order_type: "shipment",
             to_items: [],
             from_items: [],
-            order_type: "shipment", // Add default order type
         },
     });
 
@@ -56,50 +61,19 @@ const ShipmentForm = () => {
     const handleSubmit = async (
         formData: z.infer<typeof shipmentFormSchema>,
     ) => {
-        const {
-            from_items,
-            from_company_id,
-            from_billing_address_id,
-            from_shipping_address_id,
-            to_company_id,
-            to_billing_address_id,
-            to_shipping_address_id,
-            to_items,
-            order_date,
-        } = formData;
-
-        const from_item_changes_with_address = from_items.map((ic) => ({
-            item_id: ic.item_id,
-            quantity_change: Number(ic.quantity_change) * -1, // Negative for outgoing items
-            item_price: 0,
-            item_tax: 0,
-            address_id: from_shipping_address_id,
-        }));
-
-        const to_item_changes_with_address = to_items.map((ic) => ({
-            item_id: ic.item_id,
-            quantity_change: Number(ic.quantity_change), // Positive for incoming items
-            item_price: 0,
-            item_tax: 0,
-            address_id: to_shipping_address_id,
-        }));
-
-        const item_changes_with_address = [
-            ...from_item_changes_with_address,
-            ...to_item_changes_with_address,
-        ];
-
-        await createOrder({
+        const orderData = {
             in_order_type: "shipment",
-            in_from_company_id: from_company_id,
-            in_to_company_id: to_company_id,
-            in_from_billing_address_id: from_billing_address_id,
-            in_from_shipping_address_id: from_shipping_address_id,
-            in_to_billing_address_id: to_billing_address_id,
-            in_to_shipping_address_id: to_shipping_address_id,
-            in_order_date: order_date.toISOString(),
-            in_order_items: item_changes_with_address,
-        });
+            in_order_date: formData.order_date.toISOString(),
+            in_from_company_id: formData.from_company_id,
+            in_to_company_id: formData.to_company_id,
+            in_from_billing_address_id: formData.from_billing_address_id,
+            in_from_shipping_address_id: formData.from_shipping_address_id,
+            in_to_billing_address_id: formData.to_billing_address_id,
+            in_to_shipping_address_id: formData.to_shipping_address_id,
+            in_order_items: [...formData.from_items, ...formData.to_items],
+        };
+
+        await createOrder(orderData);
     };
 
     const fromShippingAddressId = useWatch({
@@ -139,11 +113,12 @@ const ShipmentForm = () => {
                 {fromShippingAddressId && (
                     <>
                         <Card>
-                            <CardHeader>
+                            <CardHeader className="flex flex-row justify-between">
                                 <CardTitle>Order Items</CardTitle>
+                                <PackageDialog />
                             </CardHeader>
                             <CardContent>
-                                <PriceItems showPrice={false} />
+                                <ShipmentItems />
                             </CardContent>
                         </Card>
                         <LockCard

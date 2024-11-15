@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { Control, UseFormSetValue, useWatch } from "react-hook-form";
 import { useSelectItemsByAddress } from "../../../stockpiles/api/selectItemsByAddress";
 import { useSelectItemsView } from "../../../items/api/selectItemsView";
-import { ItemChange, OrderItem } from "../schema";
+import { OrderItemChange } from "../../api/createOrder";
 import { ItemView } from "../../../items/types";
+import { OrderItem } from "../../types";
 
 export const useShipmentForm = (
     control: Control<any>,
@@ -12,76 +13,186 @@ export const useShipmentForm = (
     const { data: items } = useSelectItemsView();
     const { data: stockpileItems } = useSelectItemsByAddress();
 
-    // Watch for changes in relevant form fields
     const orderItems = useWatch({ control, name: "order_items" });
-    const fromShippingAddressId = useWatch({ 
-        control, 
-        name: "from_shipping_address_id" 
+    const fromShippingAddressId = useWatch({
+        control,
+        name: "from_shipping_address_id",
     });
-    const toShippingAddressId = useWatch({ 
-        control, 
-        name: "to_shipping_address_id" 
+    const toShippingAddressId = useWatch({
+        control,
+        name: "to_shipping_address_id",
     });
 
     useEffect(() => {
         if (!orderItems?.length || !items || !fromShippingAddressId) {
             setValue("from_items", []);
             setValue("to_items", []);
+            setValue("display_items", []);
             return;
         }
 
-        // Get stock levels for the from address
         const fromStockLevels = stockpileItems?.[fromShippingAddressId] || {};
 
-        // Calculate items based on order items
-        const { fromItems, toItems } = processOrderItems({
+        const { fromItems, toItems, displayItems } = processOrderItems({
             orderItems,
             items,
             fromStockLevels,
+            fromShippingAddressId,
+            toShippingAddressId,
         });
 
         setValue("from_items", fromItems);
         setValue("to_items", toItems);
-    }, [orderItems, items, stockpileItems, fromShippingAddressId, toShippingAddressId]);
+        setValue("display_items", displayItems);
+    }, [
+        orderItems,
+        items,
+        stockpileItems,
+        fromShippingAddressId,
+        toShippingAddressId,
+    ]);
 };
 
-// Updated processing function
+interface DisplayItem {
+    item_id: string;
+    item_name: string;
+    quantity_change: number;
+    quantity_after?: number;
+    item_type: string;
+}
+
 const processOrderItems = ({
     orderItems,
     items,
     fromStockLevels,
+    fromShippingAddressId,
+    toShippingAddressId,
 }: {
     orderItems: OrderItem[];
     items: ItemView[];
     fromStockLevels: Record<string, number>;
-}): { fromItems: ItemChange[]; toItems: ItemChange[] } => {
-    if (!orderItems?.length) return { fromItems: [], toItems: [] };
+    fromShippingAddressId: string;
+    toShippingAddressId: string;
+}) => {
+    if (!orderItems?.length) {
+        return { fromItems: [], toItems: [], displayItems: [] };
+    }
 
-    const fromItems: ItemChange[] = [];
-    const toItems: ItemChange[] = [];
+    const fromItems: OrderItemChange[] = [];
+    const toItems: OrderItemChange[] = [];
+    const displayItems: DisplayItem[] = [];
+    const processedComponents = new Map<string, number>();
 
     for (const orderItem of orderItems) {
         const item = items?.find(
             (w) => String(w.item_id) === String(orderItem.item_id),
         );
 
-        fromItems.push({
-            item_id: String(orderItem.item_id),
-            item_name: item?.item_name,
-            item_type: item?.item_type || "product",
-            quantity_change: -Number(orderItem.quantity_change),
-        });
+        if (!item) continue;
 
-        toItems.push({
-            item_id: String(orderItem.item_id),
-            item_name: item?.item_name,
-            item_type: item?.item_type || "product",
-            quantity_change: Number(orderItem.quantity_change),
-        });
+        if (item.item_type === "package") {
+            const packageChange = {
+                item_id: String(orderItem.item_id),
+                quantity_change: 1,
+                item_price: 0,
+                item_tax: 0,
+                item_type: orderItem.item_type,
+                address_id: String(fromShippingAddressId),
+                height: orderItem.height,
+                width: orderItem.width,
+                depth: orderItem.depth,
+                weight: orderItem.weight,
+            };
+
+            fromItems.push({
+                ...packageChange,
+                quantity_change: -1,
+            });
+
+            toItems.push({
+                ...packageChange,
+                address_id: String(toShippingAddressId),
+            });
+
+            if (item.components) {
+                for (const component of item.components) {
+                    const componentQuantity = component.component_quantity *
+                        Number(orderItem.quantity_change);
+                    const componentId = String(component.component_id);
+
+                    const currentTotal = processedComponents.get(componentId) ||
+                        0;
+                    processedComponents.set(
+                        componentId,
+                        currentTotal + componentQuantity,
+                    );
+
+                    const componentType = component.component_type;
+
+                    if (["package", "service"].includes(componentType)) {
+                        break;
+                    }
+
+                    fromItems.push({
+                        item_id: componentId,
+                        quantity_change: -componentQuantity,
+                        item_type: componentType,
+                        item_price: 0,
+                        item_tax: 0,
+                        address_id: String(fromShippingAddressId),
+                    });
+
+                    toItems.push({
+                        item_id: componentId,
+                        quantity_change: componentQuantity,
+                        item_type: componentType,
+                        item_price: 0,
+                        item_tax: 0,
+                        address_id: String(toShippingAddressId),
+                    });
+                }
+            }
+        } else {
+            const quantityChange = Number(orderItem.quantity_change);
+
+            fromItems.push({
+                item_id: String(orderItem.item_id),
+                quantity_change: -quantityChange,
+                item_price: 0,
+                item_tax: 0,
+                item_type: item.item_type,
+                address_id: String(fromShippingAddressId),
+            });
+
+            toItems.push({
+                item_id: String(orderItem.item_id),
+                quantity_change: quantityChange,
+                item_price: 0,
+                item_tax: 0,
+                item_type: item.item_type,
+                address_id: String(toShippingAddressId),
+            });
+
+            processedComponents.set(
+                String(orderItem.item_id),
+                (processedComponents.get(String(orderItem.item_id)) || 0) +
+                    quantityChange,
+            );
+        }
     }
 
-    console.log(fromItems);
-    console.log(toItems);
+    for (const [itemId, totalQuantity] of processedComponents.entries()) {
+        const item = items.find((w) => String(w.item_id) === itemId);
+        if (item) {
+            displayItems.push({
+                item_id: itemId,
+                item_name: item.item_name,
+                quantity_change: totalQuantity,
+                quantity_after: (fromStockLevels[itemId] || 0) - totalQuantity,
+                item_type: item.item_type,
+            });
+        }
+    }
 
-    return { fromItems, toItems };
+    return { fromItems, toItems, displayItems };
 };

@@ -20,6 +20,12 @@ import { useDeleteItem } from "@/features/items/api/deleteItem.ts";
 import { useDuplicateItem } from "../../../features/items/api/duplicateItem";
 import ActionPopover from "@/components/ActionPopover";
 import ComponentsTable from "../../../features/items/components/ComponentsTable";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const ItemsPage = () => {
   const { data: itemsView } = useSelectItemsView();
@@ -61,9 +67,12 @@ const ItemsPage = () => {
                           {item.item_name}
                           <Badge>{item.item_type}</Badge>
                         </CardTitle>
-                        <CardDescription>
-                          ${Number(item.item_price ?? 0).toFixed(2)} per unit
-                        </CardDescription>
+                        <div className="font-medium text-foreground text-lg">
+                          ${Number(item.item_price ?? 0).toFixed(2)}
+                          <span className="ml-1 text-muted-foreground text-sm">
+                            per unit
+                          </span>
+                        </div>
                       </div>
                       <div className="flex flex-row flex-shrink gap-2">
                         <ActionPopover
@@ -84,36 +93,95 @@ const ItemsPage = () => {
                         />
                       </div>
                     </CardHeader>
-                    {["product", "package"].includes(item?.item_type ?? "") && (
-                      <CardContent className="flex-grow">
-                        <ComponentsTable components={item.components} />
-                        <Sheet
-                          trigger={
-                            <Button
-                              size="lg"
-                              className="gap-x-2 mt-4 w-full"
-                              variant="secondary"
-                            >
-                              <Pencil size={16} />
-                              Edit Components
-                            </Button>
-                          }
-                          title={item.item_name}
-                          description={`Make changes to the ${item.item_name} details here. Click save when you're done.`}
+                    <CardContent>
+                      <Accordion type="single" collapsible>
+                        <AccordionItem
+                          value="specifications"
+                          className="border-0"
                         >
-                          <ItemComponentsForm
-                            itemId={item.item_id}
-                            defaultValues={{
-                              item_components: item.components.map((ic) => ({
-                                component_quantity: (ic.component_quantity),
-                                item_id: String(item.item_id),
-                                component_id: String(ic.component_id),
-                              })),
-                            }}
-                          />
-                        </Sheet>
-                      </CardContent>
-                    )}
+                          <AccordionTrigger className="py-2 text-sm hover:no-underline">
+                            Specifications
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <table className="w-full text-sm">
+                              <tbody className="divide-y">
+                                {item.sku && (
+                                  <tr>
+                                    <td className="py-2 text-muted-foreground">
+                                      SKU
+                                    </td>
+                                    <td className="py-2">{item.sku}</td>
+                                  </tr>
+                                )}
+                                {(item.height || item.width || item.depth) && (
+                                  <tr>
+                                    <td className="py-2 text-muted-foreground">
+                                      Dimensions
+                                    </td>
+                                    <td className="py-2">
+                                      {item.height}H × {item.width}W ×{" "}
+                                      {item.depth}D
+                                    </td>
+                                  </tr>
+                                )}
+                                {item.weight > 0 && (
+                                  <tr>
+                                    <td className="py-2 text-muted-foreground">
+                                      Weight
+                                    </td>
+                                    <td className="py-2">{item.weight} kg</td>
+                                  </tr>
+                                )}
+                                {item.country_of_origin && (
+                                  <tr>
+                                    <td className="py-2 text-muted-foreground">
+                                      Origin
+                                    </td>
+                                    <td className="py-2">
+                                      {item.country_of_origin}
+                                    </td>
+                                  </tr>
+                                )}
+                              </tbody>
+                            </table>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+
+                      {["product", "package"].includes(item?.item_type ?? "") &&
+                        (
+                          <>
+                            <ComponentsTable components={item.components} />
+                            <Sheet
+                              trigger={
+                                <Button
+                                  size="lg"
+                                  className="gap-x-2 mt-4 w-full"
+                                  variant="secondary"
+                                >
+                                  <Pencil size={16} />
+                                  Edit Components
+                                </Button>
+                              }
+                              title={item.item_name}
+                              description={`Make changes to the ${item.item_name} details here. Click save when you're done.`}
+                            >
+                              <ItemComponentsForm
+                                itemId={item.item_id}
+                                defaultValues={{
+                                  item_components: item.components.map((
+                                    ic,
+                                  ) => ({
+                                    component_quantity: (ic.component_quantity),
+                                    item_id: String(item.item_id),
+                                    component_id: String(ic.component_id),
+                                  })),
+                                }}
+                              />
+                            </Sheet>
+                          </>
+                        )}
+                    </CardContent>
                   </Card>
                 ))}
             </section>
