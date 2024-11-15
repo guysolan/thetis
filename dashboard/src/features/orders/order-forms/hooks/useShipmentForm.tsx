@@ -91,29 +91,6 @@ const processOrderItems = ({
         if (!item) continue;
 
         if (item.item_type === "package") {
-            const packageChange = {
-                item_id: String(orderItem.item_id),
-                quantity_change: 1,
-                item_price: 0,
-                item_tax: 0,
-                item_type: orderItem.item_type,
-                address_id: String(fromShippingAddressId),
-                height: orderItem.height,
-                width: orderItem.width,
-                depth: orderItem.depth,
-                weight: orderItem.weight,
-            };
-
-            fromItems.push({
-                ...packageChange,
-                quantity_change: -1,
-            });
-
-            toItems.push({
-                ...packageChange,
-                address_id: String(toShippingAddressId),
-            });
-
             if (item.components) {
                 for (const component of item.components) {
                     const componentQuantity = component.component_quantity *
@@ -130,7 +107,7 @@ const processOrderItems = ({
                     const componentType = component.component_type;
 
                     if (["package", "service"].includes(componentType)) {
-                        break;
+                        continue;
                     }
 
                     fromItems.push({

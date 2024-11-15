@@ -61,6 +61,14 @@ const ShipmentForm = () => {
     const handleSubmit = async (
         formData: z.infer<typeof shipmentFormSchema>,
     ) => {
+        const fromItems = formData.from_items.map((item) => ({
+            ...item,
+            address_id: formData.from_shipping_address_id,
+        }));
+        const toItems = formData.to_items.map((item) => ({
+            ...item,
+            address_id: formData.to_shipping_address_id,
+        }));
         const orderData = {
             in_order_type: "shipment",
             in_order_date: formData.order_date.toISOString(),
@@ -70,7 +78,7 @@ const ShipmentForm = () => {
             in_from_shipping_address_id: formData.from_shipping_address_id,
             in_to_billing_address_id: formData.to_billing_address_id,
             in_to_shipping_address_id: formData.to_shipping_address_id,
-            in_order_items: [...formData.from_items, ...formData.to_items],
+            in_order_items: [...fromItems, ...toItems],
         };
 
         await createOrder(orderData);
