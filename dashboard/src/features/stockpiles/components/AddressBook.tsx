@@ -51,9 +51,7 @@ const AddressBook = () => {
                         </div>
                     </CardContent>
                     <CardFooter>
-                        {address.companies.map((company) => (
-                            <Badge key={company.id}>{company.name}</Badge>
-                        ))}
+                        <Badge>{address.companies.name}</Badge>
                     </CardFooter>
                 </Card>
             ))}

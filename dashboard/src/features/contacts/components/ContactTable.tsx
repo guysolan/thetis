@@ -12,14 +12,11 @@ import { useDeleteContact } from "../api/deleteContact";
 import { Contact } from "../types";
 import { Badge } from "@/components/ui/badge";
 import { Company } from "../../companies/types";
+import { useSelectContacts } from "../api/selectContacts";
 
-type ContactCompany = Contact["Row"] & { companies: Company["Row"][] };
+const ContactTable = () => {
+    const { data: contacts = [] } = useSelectContacts();
 
-interface Props {
-    contacts: ContactCompany[];
-}
-
-const ContactTable = ({ contacts }: Props) => {
     const { mutate: deleteContact } = useDeleteContact();
 
     if (!contacts.length) {
@@ -44,9 +41,9 @@ const ContactTable = ({ contacts }: Props) => {
                         <TableCell>{contact.email}</TableCell>
                         <TableCell>{contact.phone}</TableCell>
                         <TableCell>
-                            {contact.companies?.map((company) => (
-                                <Badge key={company.id}>{company.name}</Badge>
-                            ))}
+                            <Badge key={contact.companies.id}>
+                                {contact.companies.name}
+                            </Badge>
                         </TableCell>
                         <TableCell>
                             <ActionPopover

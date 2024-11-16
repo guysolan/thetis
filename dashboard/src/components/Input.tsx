@@ -11,7 +11,7 @@ import { useFormContext } from "react-hook-form";
 type InputProps = {
     name: string;
     label?: string;
-    type?: "text" | "number" | "email" | "password";
+    type?: "text" | "number" | "email" | "password" | "tel";
     step?: string;
 };
 const Input = ({ name, label, type = "text", step }: InputProps) => {

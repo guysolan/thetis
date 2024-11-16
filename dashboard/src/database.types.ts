@@ -38,11 +38,14 @@ export type Database = {
         Row: {
           city: string | null
           code: string | null
+          company_id: number | null
           country: string | null
           created_at: string
           holds_stock: boolean | null
           id: number
           is_active: boolean | null
+          is_default_billing: boolean | null
+          is_default_shipping: boolean | null
           line_1: string | null
           line_2: string | null
           name: string | null
@@ -51,11 +54,14 @@ export type Database = {
         Insert: {
           city?: string | null
           code?: string | null
+          company_id?: number | null
           country?: string | null
           created_at?: string
           holds_stock?: boolean | null
           id?: number
           is_active?: boolean | null
+          is_default_billing?: boolean | null
+          is_default_shipping?: boolean | null
           line_1?: string | null
           line_2?: string | null
           name?: string | null
@@ -64,17 +70,28 @@ export type Database = {
         Update: {
           city?: string | null
           code?: string | null
+          company_id?: number | null
           country?: string | null
           created_at?: string
           holds_stock?: boolean | null
           id?: number
           is_active?: boolean | null
+          is_default_billing?: boolean | null
+          is_default_shipping?: boolean | null
           line_1?: string | null
           line_2?: string | null
           name?: string | null
           region?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "addresses_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       amazon_reports: {
         Row: {
@@ -121,119 +138,106 @@ export type Database = {
         }
         Relationships: []
       }
-      company_addresses: {
-        Row: {
-          address_id: number
-          company_id: number
-          is_default_billing: boolean | null
-          is_default_shipping: boolean | null
-        }
-        Insert: {
-          address_id: number
-          company_id: number
-          is_default_billing?: boolean | null
-          is_default_shipping?: boolean | null
-        }
-        Update: {
-          address_id?: number
-          company_id?: number
-          is_default_billing?: boolean | null
-          is_default_shipping?: boolean | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "company_addresses_address_id_fkey"
-            columns: ["address_id"]
-            isOneToOne: false
-            referencedRelation: "address_inventory_value"
-            referencedColumns: ["address_id"]
-          },
-          {
-            foreignKeyName: "company_addresses_address_id_fkey"
-            columns: ["address_id"]
-            isOneToOne: false
-            referencedRelation: "addresses"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "company_addresses_address_id_fkey"
-            columns: ["address_id"]
-            isOneToOne: false
-            referencedRelation: "items_by_address"
-            referencedColumns: ["address_id"]
-          },
-          {
-            foreignKeyName: "company_addresses_address_id_fkey"
-            columns: ["address_id"]
-            isOneToOne: false
-            referencedRelation: "stockpiles"
-            referencedColumns: ["stockpile_id"]
-          },
-          {
-            foreignKeyName: "company_addresses_company_id_fkey"
-            columns: ["company_id"]
-            isOneToOne: false
-            referencedRelation: "companies"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      company_contacts: {
+      company_users: {
         Row: {
           company_id: number
-          contact_id: number
-          is_default: boolean | null
+          is_admin: boolean | null
+          user_id: number
         }
         Insert: {
           company_id: number
-          contact_id: number
-          is_default?: boolean | null
+          is_admin?: boolean | null
+          user_id: number
         }
         Update: {
           company_id?: number
-          contact_id?: number
-          is_default?: boolean | null
+          is_admin?: boolean | null
+          user_id?: number
         }
         Relationships: [
           {
-            foreignKeyName: "company_contacts_company_id_fkey"
+            foreignKeyName: "company_users_company_id_fkey"
             columns: ["company_id"]
             isOneToOne: false
             referencedRelation: "companies"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "company_contacts_contact_id_fkey"
-            columns: ["contact_id"]
+            foreignKeyName: "company_users_user_id_fkey"
+            columns: ["user_id"]
             isOneToOne: false
-            referencedRelation: "contacts"
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]
       }
       contacts: {
         Row: {
+          company_id: number | null
           created_at: string
           email: string | null
           id: number
+          is_default: boolean | null
           name: string
           phone: string | null
         }
         Insert: {
+          company_id?: number | null
           created_at?: string
           email?: string | null
           id?: number
+          is_default?: boolean | null
           name: string
           phone?: string | null
         }
         Update: {
+          company_id?: number | null
           created_at?: string
           email?: string | null
           id?: number
+          is_default?: boolean | null
           name?: string
           phone?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "contacts_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      default_company: {
+        Row: {
+          company_id: number
+          user_id: number
+        }
+        Insert: {
+          company_id: number
+          user_id: number
+        }
+        Update: {
+          company_id?: number
+          user_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "default_company_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "default_company_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       item_changes: {
         Row: {
@@ -390,6 +394,7 @@ export type Database = {
       }
       items: {
         Row: {
+          company_id: number | null
           country_of_origin: string | null
           depth: number | null
           height: number | null
@@ -403,6 +408,7 @@ export type Database = {
           width: number | null
         }
         Insert: {
+          company_id?: number | null
           country_of_origin?: string | null
           depth?: number | null
           height?: number | null
@@ -416,6 +422,7 @@ export type Database = {
           width?: number | null
         }
         Update: {
+          company_id?: number | null
           country_of_origin?: string | null
           depth?: number | null
           height?: number | null
@@ -428,7 +435,15 @@ export type Database = {
           weight?: number | null
           width?: number | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "items_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       order_item_changes: {
         Row: {
@@ -476,6 +491,7 @@ export type Database = {
       orders: {
         Row: {
           carriage: number
+          company_id: number | null
           currency: Database["public"]["Enums"]["currency_type"]
           from_billing_address_id: number | null
           from_company_id: number | null
@@ -491,6 +507,7 @@ export type Database = {
         }
         Insert: {
           carriage?: number
+          company_id?: number | null
           currency?: Database["public"]["Enums"]["currency_type"]
           from_billing_address_id?: number | null
           from_company_id?: number | null
@@ -506,6 +523,7 @@ export type Database = {
         }
         Update: {
           carriage?: number
+          company_id?: number | null
           currency?: Database["public"]["Enums"]["currency_type"]
           from_billing_address_id?: number | null
           from_company_id?: number | null
@@ -520,6 +538,13 @@ export type Database = {
           to_shipping_address_id?: number | null
         }
         Relationships: [
+          {
+            foreignKeyName: "orders_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "orders_from_billing_address_id_fkey"
             columns: ["from_billing_address_id"]
@@ -662,6 +687,27 @@ export type Database = {
           },
         ]
       }
+      users: {
+        Row: {
+          created_at: string
+          id: number
+          updated_at: string
+          uuid: string
+        }
+        Insert: {
+          created_at?: string
+          id?: never
+          updated_at?: string
+          uuid?: string
+        }
+        Update: {
+          created_at?: string
+          id?: never
+          updated_at?: string
+          uuid?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       address_inventory_value: {
@@ -767,6 +813,33 @@ export type Database = {
         }[]
       }
       insert_order:
+        | {
+            Args: {
+              in_order_type: string
+              in_order_date: string
+              in_order_items: Json
+              in_company_id?: number
+              in_from_company_id?: number
+              in_to_company_id?: number
+              in_from_contact_id?: number
+              in_to_contact_id?: number
+              in_from_billing_address_id?: number
+              in_from_shipping_address_id?: number
+              in_to_billing_address_id?: number
+              in_to_shipping_address_id?: number
+              in_currency?: Database["public"]["Enums"]["currency_type"]
+              in_carriage?: number
+            }
+            Returns: {
+              order_id: number
+              item_change_id: number
+              item_id: number
+              quantity_change: number
+              address_id: number
+              item_price: number
+              item_tax: number
+            }[]
+          }
         | {
             Args: {
               in_order_type: string
@@ -886,27 +959,6 @@ export type Database = {
           p_order_items: Json
         }
         Returns: number
-      }
-      set_default_billing_address: {
-        Args: {
-          in_company_id: number
-          in_address_id: number
-        }
-        Returns: undefined
-      }
-      set_default_contact: {
-        Args: {
-          in_company_id: number
-          in_contact_id: number
-        }
-        Returns: undefined
-      }
-      set_default_shipping_address: {
-        Args: {
-          in_company_id: number
-          in_address_id: number
-        }
-        Returns: undefined
       }
       stocktake: {
         Args: {

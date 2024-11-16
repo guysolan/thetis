@@ -49,33 +49,26 @@ const Companies = () => {
     // Transform the nested data for CompanyAddressBook
     const getTransformedAddresses = (company: any) => {
         return company.addresses.map((addr: any) => ({
-            ...addr.address,
+            ...addr,
             is_default_shipping: addr.is_default_shipping,
             is_default_billing: addr.is_default_billing,
         }));
     };
 
-    // Transform the nested data for ContactTable
-    const getTransformedContacts = (company: any) => {
-        return company.contacts.map((cont: any) => ({
-            ...cont.contact,
-            is_default: cont.is_default,
-        }));
-    };
-
     return (
         <section className="flex flex-col gap-4">
-            {companies.map((company) => (
-                <Card key={company.id}>
+            {companies?.map((company) => (
+                <Card key={company?.id}>
                     <CardHeader className="flex flex-col gap-4">
                         <div className="flex flex-row justify-between items-start">
                             <div>
-                                <CardTitle>{company.name}</CardTitle>
+                                <CardTitle>{company?.name}</CardTitle>
                                 <div className="pt-2 text-sm">
                                     <p>
-                                        Company Number: {company.company_number}
+                                        Company Number:{" "}
+                                        {company?.company_number}
                                     </p>
-                                    <p>VAT Number: {company.vat_number}</p>
+                                    <p>VAT Number: {company?.vat_number}</p>
                                 </div>
                             </div>
                             <ActionPopover
@@ -106,11 +99,11 @@ const Companies = () => {
                                 <SelectContent>
                                     {company.contacts.map((cont) => (
                                         <SelectItem
-                                            key={cont.contact.id}
-                                            value={cont.contact.id
+                                            key={cont.id}
+                                            value={cont.id
                                                 .toString()}
                                         >
-                                            {cont.contact.name}
+                                            {cont?.name}
                                         </SelectItem>
                                     ))}
                                 </SelectContent>
@@ -123,7 +116,7 @@ const Companies = () => {
                             <Select
                                 value={company.addresses.find((a) =>
                                     a.is_default_shipping
-                                )?.address?.id?.toString()}
+                                )?.id?.toString()}
                                 onValueChange={(value) =>
                                     handleSetDefaultShipping(
                                         company.id,
@@ -136,11 +129,11 @@ const Companies = () => {
                                 <SelectContent>
                                     {company.addresses.map((addr) => (
                                         <SelectItem
-                                            key={addr.address.id}
-                                            value={addr.address.id
+                                            key={addr.id}
+                                            value={addr.id
                                                 .toString()}
                                         >
-                                            {addr.address.name}
+                                            {addr.name}
                                         </SelectItem>
                                     ))}
                                 </SelectContent>
@@ -154,7 +147,7 @@ const Companies = () => {
                             <Select
                                 value={company.addresses.find((a) =>
                                     a.is_default_billing
-                                )?.address?.id?.toString()}
+                                )?.id?.toString()}
                                 onValueChange={(value) =>
                                     handleSetDefaultBilling(
                                         company.id,
@@ -167,11 +160,11 @@ const Companies = () => {
                                 <SelectContent>
                                     {company.addresses.map((addr) => (
                                         <SelectItem
-                                            key={addr.address.id}
-                                            value={addr.address.id
+                                            key={addr.id}
+                                            value={addr.id
                                                 .toString()}
                                         >
-                                            {addr.address.name}
+                                            {addr.name}
                                         </SelectItem>
                                     ))}
                                 </SelectContent>
@@ -186,12 +179,12 @@ const Companies = () => {
                                 </Button>
                             }
                             title="New Address"
-                            description={`Add a new address for ${company.name}`}
+                            description={`Add a new address for ${company?.name}`}
                         >
                             <AddressForm
                                 address={null}
                                 operation="insert"
-                                companyId={company.id}
+                                companyId={company?.id}
                             />
                         </Sheet>
                         <Sheet
@@ -201,12 +194,12 @@ const Companies = () => {
                                 </Button>
                             }
                             title="New Contact"
-                            description={`Add a new contact for ${company.name}`}
+                            description={`Add a new contact for ${company?.name}`}
                         >
                             <CompanyContactForm
                                 contact={null}
                                 operation="insert"
-                                companyId={company.id}
+                                companyId={company?.id}
                             />
                         </Sheet>
                     </CardFooter>

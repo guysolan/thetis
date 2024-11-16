@@ -14,18 +14,12 @@ const insertUpsertCompanyAddress = async (
         companyId: number;
     },
 ) => {
-    const addressData = await insertUpsertAddress(address, operation);
+    const addressWithCompany = {
+        ...address,
+        company_id: companyId,
+    };
 
-    const { error: relationError } = await supabase
-        .from("company_addresses")
-        .upsert({
-            company_id: companyId,
-            address_id: addressData.id,
-        });
-
-    if (relationError) throw relationError;
-
-    return addressData;
+    return insertUpsertAddress(addressWithCompany, operation);
 };
 
 export const useCompanyAddressMutation = (operation: "insert" | "upsert") => {

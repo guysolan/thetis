@@ -12,8 +12,6 @@ import AddressBook from "@/features/stockpiles/components/AddressBook";
 import CompanyForm from "@/features/companies/components/CompanyForm";
 
 const DirectoryPage = () => {
-    const { data: contacts = [] } = useSelectContacts();
-
     return (
         <>
             <PageTitle title="Directory">
@@ -73,7 +71,7 @@ const DirectoryPage = () => {
                 </TabsContent>
 
                 <TabsContent value="contacts">
-                    <ContactTable contacts={contacts} />
+                    <ContactTable />
                 </TabsContent>
 
                 <TabsContent value="addresses">

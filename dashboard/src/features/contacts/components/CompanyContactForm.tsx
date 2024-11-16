@@ -41,7 +41,7 @@ export default function CompanyContactForm(
     });
 
     const onSubmit = (data: ContactFormData) => {
-        upsertContact({ contact: data, companyId: data.company_id });
+        upsertContact(data);
     };
 
     return (

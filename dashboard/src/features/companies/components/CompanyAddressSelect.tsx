@@ -6,6 +6,7 @@ import { useCompanyForm } from "../hooks/useCompanyForm";
 import { CompanySummaryView } from "./CompanySummaryView";
 import { CompanyAddressExpandedView } from "./CompanyAddressExpandedView";
 import { useCompanyAutoFill } from "../hooks/useCompanyAutoFill";
+import { CompanyRow } from "../types";
 
 interface Props {
     direction: "to" | "from";
@@ -28,6 +29,31 @@ const CompanyAddressSelect = ({
     } = useCompanyForm(direction);
 
     const companyId = form.watch(getFieldName("company"));
+    const selectedCompany = getSelectedCompany() as CompanyRow & {
+        addresses: Array<{
+            address: {
+                id: number;
+                name: string;
+                line_1: string;
+                line_2: string | null;
+                city: string;
+                region: string;
+                code: string;
+                country: string;
+            };
+            is_default_shipping: boolean;
+            is_default_billing: boolean;
+        }>;
+        contacts: Array<{
+            contact: {
+                id: number;
+                name: string;
+                email: string | null;
+                phone: string | null;
+            };
+            is_default: boolean;
+        }>;
+    };
 
     useCompanyAutoFill(companyId, getSelectedCompany, getFieldName, form);
 
@@ -61,7 +87,7 @@ const CompanyAddressSelect = ({
                     )
                     : (
                         <CompanySummaryView
-                            selectedCompany={getSelectedCompany()}
+                            selectedCompany={selectedCompany}
                             shippingAddress={getSelectedAddress("shipping")}
                             billingAddress={getSelectedAddress("billing")}
                             getContactOptions={getContactOptions}

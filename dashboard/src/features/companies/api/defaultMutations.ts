@@ -11,13 +11,21 @@ export const useSetDefaultShipping = () => {
         mutationFn: async (
             { companyId, addressId }: { companyId: number; addressId: number },
         ) => {
-            const { error } = await supabase.rpc(
-                "set_default_shipping_address",
-                {
-                    in_company_id: companyId,
-                    in_address_id: addressId,
-                },
-            );
+            // First, reset all shipping defaults for this company
+            const { error: resetError } = await supabase
+                .from("addresses")
+                .update({ is_default_shipping: false })
+                .eq("company_id", companyId);
+
+            if (resetError) throw resetError;
+
+            // Then set the new default
+            const { error } = await supabase
+                .from("addresses")
+                .update({ is_default_shipping: true })
+                .eq("id", addressId)
+                .eq("company_id", companyId);
+
             if (error) throw error;
         },
         onSuccess: () => {
@@ -37,13 +45,21 @@ export const useSetDefaultBilling = () => {
         mutationFn: async (
             { companyId, addressId }: { companyId: number; addressId: number },
         ) => {
-            const { error } = await supabase.rpc(
-                "set_default_billing_address",
-                {
-                    in_company_id: companyId,
-                    in_address_id: addressId,
-                },
-            );
+            // First, reset all billing defaults for this company
+            const { error: resetError } = await supabase
+                .from("addresses")
+                .update({ is_default_billing: false })
+                .eq("company_id", companyId);
+
+            if (resetError) throw resetError;
+
+            // Then set the new default
+            const { error } = await supabase
+                .from("addresses")
+                .update({ is_default_billing: true })
+                .eq("id", addressId)
+                .eq("company_id", companyId);
+
             if (error) throw error;
         },
         onSuccess: () => {
@@ -63,10 +79,21 @@ export const useSetDefaultContact = () => {
         mutationFn: async (
             { companyId, contactId }: { companyId: number; contactId: number },
         ) => {
-            const { error } = await supabase.rpc("set_default_contact", {
-                in_company_id: companyId,
-                in_contact_id: contactId,
-            });
+            // First, reset all contact defaults for this company
+            const { error: resetError } = await supabase
+                .from("contacts")
+                .update({ is_default: false })
+                .eq("company_id", companyId);
+
+            if (resetError) throw resetError;
+
+            // Then set the new default
+            const { error } = await supabase
+                .from("contacts")
+                .update({ is_default: true })
+                .eq("id", contactId)
+                .eq("company_id", companyId);
+
             if (error) throw error;
         },
         onSuccess: () => {

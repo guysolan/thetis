@@ -24,16 +24,14 @@ export const useCompanyForm = (direction: "to" | "from") => {
         const addresses = selectedCompany?.addresses || [];
 
         return addresses.map((addr) => ({
-            label: `${addr.address.line_1 ? `${addr.address.line_1}, ` : ""} ${
-                addr.address.line_2 ? `${addr.address.line_2}, ` : ""
-            } ${
-                addr.address.city
-                    ? `${addr.address.city}, `
-                    : "Unknown City"
-            } ${addr.address.state ? `${addr.address.state}, ` : ""} ${
-                addr.address.code ? `${addr.address.code}, ` : ""
-            } ${addr.address.country ?? "No Country"}`,
-            value: String(addr.address.id),
+            label: `${addr.line_1 ? `${addr.line_1}, ` : ""} ${
+                addr.line_2 ? `${addr.line_2}, ` : ""
+            } ${addr.city ? `${addr.city}, ` : "Unknown City"} ${
+                addr.state ? `${addr.state}, ` : ""
+            } ${addr.code ? `${addr.code}, ` : ""} ${
+                addr.country ?? "No Country"
+            }`,
+            value: String(addr.id),
         }));
     };
 
@@ -41,7 +39,7 @@ export const useCompanyForm = (direction: "to" | "from") => {
         const selectedCompany = getSelectedCompany();
         const addressId = form.watch(getFieldName(type));
         return selectedCompany?.addresses?.find(
-            (addr) => String(addr.address.id) === addressId,
+            (addr) => String(addr.id) === addressId,
         )?.address;
     };
 
@@ -50,8 +48,8 @@ export const useCompanyForm = (direction: "to" | "from") => {
         const contacts = selectedCompany?.contacts || [];
 
         return contacts.map((cont) => ({
-            label: cont.contact.name,
-            value: String(cont.contact.id),
+            label: cont.name,
+            value: String(cont.id),
         }));
     };
 
@@ -59,7 +57,7 @@ export const useCompanyForm = (direction: "to" | "from") => {
         const selectedCompany = getSelectedCompany();
         const contactId = form.watch(getFieldName("contact"));
         return selectedCompany?.contacts?.find(
-            (cont) => String(cont.contact.id) === contactId,
+            (cont) => String(cont.id) === contactId,
         )?.contact;
     };
 

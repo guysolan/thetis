@@ -3,8 +3,10 @@ import { useEffect } from "react";
 export const useCompanyAutoFill = (
     companyId: string,
     getSelectedCompany: () => any,
-    getFieldName: (type: "company" | "shipping" | "billing" | "contact") => string,
-    form: any
+    getFieldName: (
+        type: "company" | "shipping" | "billing" | "contact",
+    ) => string,
+    form: any,
 ) => {
     useEffect(() => {
         if (!companyId) return;
@@ -23,12 +25,12 @@ export const useCompanyAutoFill = (
         if (defaultShipping) {
             form.setValue(
                 getFieldName("shipping"),
-                String(defaultShipping.address.id),
+                String(defaultShipping.id),
             );
         } else if (addresses.length === 1) {
             form.setValue(
                 getFieldName("shipping"),
-                String(addresses[0].address.id),
+                String(addresses[0].id),
             );
         }
 
@@ -37,12 +39,12 @@ export const useCompanyAutoFill = (
         if (defaultBilling) {
             form.setValue(
                 getFieldName("billing"),
-                String(defaultBilling.address.id),
+                String(defaultBilling.id),
             );
         } else if (addresses.length === 1) {
             form.setValue(
                 getFieldName("billing"),
-                String(addresses[0].address.id),
+                String(addresses[0].id),
             );
         }
 
@@ -51,12 +53,13 @@ export const useCompanyAutoFill = (
         if (defaultContact) {
             form.setValue(
                 getFieldName("contact"),
-                String(defaultContact.contact.id),
+                String(defaultContact.id),
             );
         } else if (contacts.length === 1) {
             form.setValue(
                 getFieldName("contact"),
-                String(contacts[0].contact.id),
+                String(contacts[0].id),
             );
         }
-    }, [companyId]); 
+    }, [companyId]);
+};
