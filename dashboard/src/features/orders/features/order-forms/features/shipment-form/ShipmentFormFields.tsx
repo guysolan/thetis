@@ -6,13 +6,15 @@ import ShipmentItems from "./ShipmentItems";
 import PackageDialog from "../../../../../items/components/PackageDialog";
 import { StockValidationAlert } from "../../components/StockValidationAlert";
 import StockItems from "../../components/StockItems";
+import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";
 
 const ShipmentFormFields = () => {
     useShipmentForm();
+    useCompanyDefaults({ fieldName: "from_company_id" });
 
     return (
         <>
-            <CompanyAddressSelect direction="from" />
+            <CompanyAddressSelect direction="from" defaultExpanded={false} />
             <CompanyAddressSelect direction="to" />
             <Card>
                 <CardHeader className="flex flex-row justify-between">

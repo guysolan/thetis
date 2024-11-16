@@ -16,9 +16,11 @@ import DatePicker from "../../../../../../components/DatePicker";
 import Input from "../../../../../../components/Input";
 import Select from "../../../../../../components/Select";
 import { currencyTypes } from "../../schema";
+import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";
 
 const SaleFormFields = () => {
     useSaleForm();
+    useCompanyDefaults({ fieldName: "from_company_id" });
 
     return (
         <>
@@ -45,8 +47,6 @@ const SaleFormFields = () => {
             <CompanyAddressSelect
                 title="Seller"
                 direction="from"
-                hideShipping={true}
-                description="Probably your company"
             />
 
             <CompanyAddressSelect

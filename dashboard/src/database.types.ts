@@ -121,6 +121,7 @@ export type Database = {
           id: number
           name: string
           tax_number: string | null
+          user_id: number | null
         }
         Insert: {
           company_number?: string | null
@@ -128,6 +129,7 @@ export type Database = {
           id?: number
           name: string
           tax_number?: string | null
+          user_id?: number | null
         }
         Update: {
           company_number?: string | null
@@ -135,8 +137,17 @@ export type Database = {
           id?: number
           name?: string
           tax_number?: string | null
+          user_id?: number | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "companies_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       company_users: {
         Row: {
@@ -165,7 +176,7 @@ export type Database = {
           {
             foreignKeyName: "company_users_user_id_fkey"
             columns: ["user_id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -788,6 +799,13 @@ export type Database = {
       }
     }
     Functions: {
+      change_user_company: {
+        Args: {
+          in_user_id: number
+          in_new_company_id: number
+        }
+        Returns: undefined
+      }
       create_shipment: {
         Args: {
           p_carriage: number

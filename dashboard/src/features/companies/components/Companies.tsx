@@ -46,15 +46,6 @@ const Companies = () => {
         setDefaultContact({ companyId, contactId });
     };
 
-    // Transform the nested data for CompanyAddressBook
-    const getTransformedAddresses = (company: any) => {
-        return company.addresses.map((addr: any) => ({
-            ...addr,
-            is_default_shipping: addr.is_default_shipping,
-            is_default_billing: addr.is_default_billing,
-        }));
-    };
-
     return (
         <section className="flex flex-col gap-4">
             {companies?.map((company) => (

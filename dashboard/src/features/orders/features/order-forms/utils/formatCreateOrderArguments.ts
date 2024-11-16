@@ -23,6 +23,7 @@ export type CreateOrderType = {
     in_from_contact_id: string | null;
     in_currency: Currency;
     in_carriage: number;
+    in_company_id: string;
 };
 export const formatCreateOrderArguments = (
     orderItems: OrderItemChange[],
@@ -42,5 +43,6 @@ export const formatCreateOrderArguments = (
         in_from_contact_id: formData.from_contact_id,
         in_currency: formData.currency,
         in_carriage: formData.carriage,
+        in_company_id: formData.company_id,
     };
 };

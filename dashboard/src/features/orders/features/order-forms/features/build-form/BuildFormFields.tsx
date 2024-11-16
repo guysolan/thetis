@@ -7,9 +7,11 @@ import DatePicker from "../../../../../../components/DatePicker";
 import Select from "../../../../../../components/Select";
 import Input from "../../../../../../components/Input";
 import { currencyTypes } from "../../schema";
+import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";
 const BuildFormFields = () => {
     // Initialize the build form logic
     useBuildForm();
+    useCompanyDefaults({ fieldName: "to_company_id" });
 
     return (
         <>
@@ -25,7 +27,9 @@ const BuildFormFields = () => {
             <CompanyAddressSelect
                 title="Buyer"
                 direction="to"
+                defaultExpanded={false}
             />
+
             <CompanyAddressSelect title="Maker" direction="from" />
 
             <StockItems

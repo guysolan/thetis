@@ -4,9 +4,9 @@ INSERT INTO auth.users(id, email, encrypted_password)
         'guy@thetismedical.com', crypt('Newspaper202!', gen_salt('bf')));
 
 -- Insert companies first
-INSERT INTO companies(id, name, company_number, tax_number)
-    VALUES (1, 'Thetis Medical Ltd', '12345678', 'GB123456789'),
-(2, 'MPD Limited', '87654321', 'GB987654321');
+INSERT INTO companies(id, name, company_number, tax_number, user_id)
+    VALUES (1, 'Thetis Medical Ltd', '12345678', 'GB123456789', 1),
+(2, 'MPD Limited', '87654321', 'GB987654321', 1);
 
 -- Then insert addresses with company_id references
 INSERT INTO addresses(id, name, line_1, line_2, city, country, code, holds_stock, company_id, is_default_shipping, is_default_billing)

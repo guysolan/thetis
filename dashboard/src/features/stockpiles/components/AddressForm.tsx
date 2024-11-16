@@ -98,7 +98,7 @@ export default function AddressForm({ address, operation, companyId }: Props) {
 					}))}
 				/>
 
-				<Input label="Name" name="name" type="text" />
+				<Input label="Care of" name="name" type="text" />
 				<Input label="Address Line 1" name="line_1" type="text" />
 				<Input
 					label="Address Line 2 (Optional)"

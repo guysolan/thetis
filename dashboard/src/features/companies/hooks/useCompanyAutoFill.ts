@@ -1,13 +1,17 @@
 import { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 
 export const useCompanyAutoFill = (
-    companyId: string,
+    direction: "to" | "from",
     getSelectedCompany: () => any,
     getFieldName: (
         type: "company" | "shipping" | "billing" | "contact",
     ) => string,
-    form: any,
 ) => {
+    const form = useFormContext();
+    const companyId = form.watch(
+        direction === "to" ? "to_company_id" : "from_company_id",
+    );
     useEffect(() => {
         if (!companyId) return;
 
@@ -15,35 +19,38 @@ export const useCompanyAutoFill = (
         const addresses = selectedCompany?.addresses || [];
         const contacts = selectedCompany?.contacts || [];
 
+        const billing = getFieldName("billing");
+        const shipping = getFieldName("shipping");
+        const contact = getFieldName("contact");
+
         // Clear existing values
-        form.setValue(getFieldName("shipping"), "");
-        form.setValue(getFieldName("billing"), "");
-        form.setValue(getFieldName("contact"), "");
+        form.setValue(billing, "");
+        form.setValue(shipping, "");
+        form.setValue(contact, "");
 
         // Set default shipping address
         const defaultShipping = addresses.find((a) => a.is_default_shipping);
-        if (defaultShipping) {
+        if (defaultShipping?.id) {
             form.setValue(
-                getFieldName("shipping"),
+                shipping,
                 String(defaultShipping.id),
             );
         } else if (addresses.length === 1) {
             form.setValue(
-                getFieldName("shipping"),
+                shipping,
                 String(addresses[0].id),
             );
         }
-
         // Set default billing address
         const defaultBilling = addresses.find((a) => a.is_default_billing);
         if (defaultBilling) {
             form.setValue(
-                getFieldName("billing"),
+                billing,
                 String(defaultBilling.id),
             );
         } else if (addresses.length === 1) {
             form.setValue(
-                getFieldName("billing"),
+                billing,
                 String(addresses[0].id),
             );
         }
@@ -52,12 +59,12 @@ export const useCompanyAutoFill = (
         const defaultContact = contacts.find((c) => c.is_default);
         if (defaultContact) {
             form.setValue(
-                getFieldName("contact"),
+                contact,
                 String(defaultContact.id),
             );
         } else if (contacts.length === 1) {
             form.setValue(
-                getFieldName("contact"),
+                contact,
                 String(contacts[0].id),
             );
         }

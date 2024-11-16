@@ -10,6 +10,7 @@ import Companies from "@/features/companies/components/Companies";
 import AddressForm from "@/features/stockpiles/components/AddressForm";
 import AddressBook from "@/features/stockpiles/components/AddressBook";
 import CompanyForm from "@/features/companies/components/CompanyForm";
+import MyCompany from "../../../features/companies/components/MyCompany";
 
 const DirectoryPage = () => {
     return (
@@ -30,6 +31,7 @@ const DirectoryPage = () => {
                     </TabsList>
 
                     <TabsContent value="companies" className="m-0">
+                        <MyCompany />
                         <Sheet
                             trigger={<Button>New Company</Button>}
                             title="New Company"

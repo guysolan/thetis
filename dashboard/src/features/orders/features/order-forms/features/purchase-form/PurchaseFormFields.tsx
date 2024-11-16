@@ -14,9 +14,11 @@ import { usePurchaseForm } from "./usePurchaseForm";
 import DatePicker from "../../../../../../components/DatePicker";
 import { currencyTypes } from "../../schema";
 import Select from "../../../../../../components/Select";
+import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";
 
 const PurchaseFormFields = () => {
     usePurchaseForm();
+    useCompanyDefaults({ fieldName: "to_company_id" });
 
     return (
         <>
@@ -29,7 +31,11 @@ const PurchaseFormFields = () => {
                 />
             </div>
 
-            <CompanyAddressSelect title="Buyer" direction="to" />
+            <CompanyAddressSelect
+                title="Buyer"
+                direction="to"
+                defaultExpanded={false}
+            />
 
             <CompanyAddressSelect title="Seller" direction="from" />
 

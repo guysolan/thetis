@@ -20,6 +20,7 @@ import {
     TableRow,
 } from "../../../../components/ui/table";
 import PackageSummary from "./PackageSummary";
+import ShippingAddress from "./ShippingAddress";
 
 const CommercialInvoice = ({ order }: { order: OrderView }) => {
     return (
@@ -35,6 +36,10 @@ const CommercialInvoice = ({ order }: { order: OrderView }) => {
                         title="Exporter"
                         company={order.from_company as CompanyRow}
                     />
+                    <ShippingAddress
+                        address={order.from_shipping_address as AddressRow}
+                        company={order.from_company as CompanyRow}
+                    />
                     <Address
                         title="Shipping Address"
                         address={order.from_shipping_address as AddressRow}
@@ -43,6 +48,10 @@ const CommercialInvoice = ({ order }: { order: OrderView }) => {
                         title="Billing Address"
                         address={order.from_billing_address as AddressRow}
                     />
+                    <h3 className="mt-4 mb-2 font-medium">Contact</h3>
+                    <p>{order.from_contact?.name}</p>
+                    <p>{order.from_contact?.email}</p>
+                    <p>{order.from_contact?.phone}</p>
                 </div>
                 <div>
                     <Company
@@ -57,6 +66,10 @@ const CommercialInvoice = ({ order }: { order: OrderView }) => {
                         title="Billing Address"
                         address={order.to_billing_address as AddressRow}
                     />
+                    <h3 className="mt-4 mb-2 font-medium text-sm">Contact</h3>
+                    <p>{order.to_contact?.name}</p>
+                    <p>{order.to_contact?.email}</p>
+                    <p>{order.to_contact?.phone}</p>
                 </div>
             </div>
 

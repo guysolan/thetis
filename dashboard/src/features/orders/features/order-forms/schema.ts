@@ -47,6 +47,7 @@ const baseAddressSchema = z.object({
     to_billing_address_id: z.string().min(1, "Billing address is required"),
     to_shipping_address_id: z.string().min(1, "Shipping address is required"),
     from_contact_id: z.string().min(1, "Contact is required").optional(),
+    company_id: z.string().min(1, "Company is required"),
 });
 
 const baseOrderSchema = z.object({

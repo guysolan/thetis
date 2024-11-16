@@ -58,3 +58,34 @@ CREATE TRIGGER on_auth_user_created
     FOR EACH ROW
     EXECUTE PROCEDURE sync_auth_users();
 
+-- Add user_id to companies table
+ALTER TABLE companies
+    ADD COLUMN user_id bigint REFERENCES users(id) ON DELETE SET NULL;
+
+-- Add unique constraint to company_users for user_id
+ALTER TABLE company_users
+    ADD CONSTRAINT company_users_user_id_key UNIQUE (user_id);
+
+-- Create function to change user's company
+CREATE OR REPLACE FUNCTION change_user_company(in_user_id bigint, in_new_company_id bigint)
+    RETURNS void
+    SECURITY DEFINER
+    SET search_path = public
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    -- Update or insert into company_users
+    INSERT INTO company_users(company_id, user_id)
+        VALUES(in_new_company_id, in_user_id)
+    ON CONFLICT(user_id)
+        DO UPDATE SET
+            company_id = EXCLUDED.company_id;
+    -- Update or insert into default_company
+    INSERT INTO default_company(user_id, company_id)
+        VALUES(in_user_id, in_new_company_id)
+    ON CONFLICT(user_id)
+        DO UPDATE SET
+            company_id = EXCLUDED.company_id;
+END;
+$$;
+

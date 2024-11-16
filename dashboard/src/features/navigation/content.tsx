@@ -38,8 +38,8 @@ export const jobs = {
         external: false,
       },
       {
-        name: "Addresses",
-        href: "/stock/inventory",
+        name: "Stock",
+        href: "/stock/stock",
         description: "Try not to lose track of things.",
         icon: <FactoryIcon />,
         external: false,

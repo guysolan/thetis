@@ -1,6 +1,6 @@
-import React from 'react';
-import { useLocation, Link } from '@tanstack/react-router';
-import { Home, ChevronRight, ExternalLink } from 'lucide-react';
+import React from "react";
+import { Link, useLocation } from "@tanstack/react-router";
+import { ChevronRight, ExternalLink, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Breadcrumb,
@@ -36,12 +36,13 @@ type Jobs = {
   [key: string]: NavItem;
 };
 
-import { jobs } from './content';
+import { jobs } from "./content";
+import { Logout } from "../auth/Logout";
 
 const Navigation = () => {
   const location = useLocation();
-  const pathSegments = location.pathname.split('/').filter(Boolean);
-  const currentSection = pathSegments[0] || 'home';
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const currentSection = pathSegments[0] || "home";
 
   return (
     <nav className="flex flex-col bg-background">
@@ -59,13 +60,15 @@ const Navigation = () => {
             {pathSegments.map((segment, index) => (
               <React.Fragment key={segment}>
                 <BreadcrumbItem>
-                  {index === pathSegments.length - 1 ? (
-                    <BreadcrumbPage>{segment}</BreadcrumbPage>
-                  ) : (
-                    <BreadcrumbLink href={`/${pathSegments.slice(0, index + 1).join('/')}`}>
-                      {segment}
-                    </BreadcrumbLink>
-                  )}
+                  {index === pathSegments.length - 1
+                    ? <BreadcrumbPage>{segment}</BreadcrumbPage>
+                    : (
+                      <BreadcrumbLink
+                        href={`/${pathSegments.slice(0, index + 1).join("/")}`}
+                      >
+                        {segment}
+                      </BreadcrumbLink>
+                    )}
                 </BreadcrumbItem>
                 {index < pathSegments.length - 1 && (
                   <BreadcrumbSeparator>
@@ -76,10 +79,11 @@ const Navigation = () => {
             ))}
           </BreadcrumbList>
         </Breadcrumb>
-       </div>
+        <Logout />
+      </div>
 
       {jobs[currentSection] && jobs[currentSection].pages && (
-        <Tabs defaultValue={pathSegments[1] || ''} className="w-full">
+        <Tabs defaultValue={pathSegments[1] || ""} className="w-full">
           <TabsList className="justify-start bg-transparent p-0 border-b rounded-none w-full h-12">
             <div className="flex items-center max-w-screen-2xl h-12 container">
               {jobs[currentSection].pages.map((item) => (
@@ -114,7 +118,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
-            className
+            className,
           )}
           {...props}
           target={external ? "_blank" : undefined}
@@ -122,7 +126,9 @@ const ListItem = React.forwardRef<
         >
           <div className="flex items-center font-medium text-sm leading-none">
             {title}
-            {external && <ExternalLink className="group-hover:tranzinc-x-0.5 group-hover:-tranzinc-y-0.5 ml-1 w-3 h-3 transition-transform" />}
+            {external && (
+              <ExternalLink className="group-hover:tranzinc-x-0.5 group-hover:-tranzinc-y-0.5 ml-1 w-3 h-3 transition-transform" />
+            )}
           </div>
           <p className="group-hover:text-accent-foreground line-clamp-2 text-muted-foreground text-sm leading-snug transition-colors">
             {children}

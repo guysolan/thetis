@@ -40,7 +40,7 @@ export const useCompanyForm = (direction: "to" | "from") => {
         const addressId = form.watch(getFieldName(type));
         return selectedCompany?.addresses?.find(
             (addr) => String(addr.id) === addressId,
-        )?.address;
+        );
     };
 
     const getContactOptions = () => {

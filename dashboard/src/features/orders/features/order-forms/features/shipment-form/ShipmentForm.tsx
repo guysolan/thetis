@@ -4,9 +4,11 @@ import { useCreateOrder } from "../../../../api/createOrder";
 import ShipmentFormFields from "./ShipmentFormFields";
 import DatePicker from "../../../../../../components/DatePicker";
 import { formatCreateOrderArguments } from "../../utils/formatCreateOrderArguments";
+import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";
 
 const ShipmentForm = () => {
     const { mutate: createOrder } = useCreateOrder();
+
     const defaultValues = {
         order_items: [{
             item_type: "product",
