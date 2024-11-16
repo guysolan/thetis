@@ -26,6 +26,7 @@ const Input = ({ name, label, type = "text", step }: InputProps) => {
                     <FormLabel className={label ? "not-sr-only" : "sr-only"}>
                         {label}
                     </FormLabel>
+                    <FormMessage />
                     <FormControl>
                         <InputWrap
                             type={type}
@@ -40,7 +41,6 @@ const Input = ({ name, label, type = "text", step }: InputProps) => {
                                     : field.onChange(e.target.value)}
                         />
                     </FormControl>
-                    <FormMessage />
                 </FormItem>
             )}
         />

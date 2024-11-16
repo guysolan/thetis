@@ -51,6 +51,13 @@ export const jobs = {
         icon: <BriefcaseBusiness />,
         external: false,
       },
+      {
+        name: "Contacts",
+        href: "/stock/contacts",
+        description: "Manage your Companies.",
+        icon: <BriefcaseBusiness />,
+        external: false,
+      },
     ],
   },
   finances: {

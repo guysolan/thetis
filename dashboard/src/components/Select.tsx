@@ -31,6 +31,7 @@ const Select = ({ name, label, options, disabled }: SelectProps) => {
                     <FormLabel className={label ? "not-sr-only" : "sr-only"}>
                         {label ?? name}
                     </FormLabel>
+                    <FormMessage />
                     <SelectWrap
                         disabled={disabled}
                         onValueChange={field.onChange}
@@ -53,7 +54,6 @@ const Select = ({ name, label, options, disabled }: SelectProps) => {
                             ))}
                         </SelectContent>
                     </SelectWrap>
-                    <FormMessage />
                 </FormItem>
             )}
         />

@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 import {
     Tooltip,
     TooltipContent,
@@ -33,6 +39,9 @@ const TooltipDialog = ({ icon, tooltipText, children }: TooltipDialogProps) => {
                     <TooltipContent>{tooltipText}</TooltipContent>
                 </Tooltip>
                 <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>{tooltipText}</DialogTitle>
+                    </DialogHeader>
                     {children}
                 </DialogContent>
             </Dialog>

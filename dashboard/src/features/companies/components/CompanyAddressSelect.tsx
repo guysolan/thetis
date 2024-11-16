@@ -1,19 +1,8 @@
 import { useFormContext } from "react-hook-form";
-import Select from "@/components/Select";
 import { useSelectCompanies } from "../api/selectCompanies";
 import { useEffect } from "react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import CompanyForm from "./CompanyForm";
-import { Button } from "../../../components/ui/button";
-import { Pencil, Plus } from "lucide-react";
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "../../../components/ui/tooltip";
-import TooltipDialog from "@/components/TooltipDialog";
-import AddressForm from "../../stockpiles/components/AddressForm";
+import CompanySelect from "./CompanySelect";
+import AddressSelect from "./AddressSelect";
 
 interface Props {
     direction: "to" | "from";
@@ -81,94 +70,23 @@ const CompanyAddressSelect = ({ direction }: Props) => {
 
     return (
         <>
-            <div className="flex flex-row items-end gap-2 w-full">
-                <Select
-                    label="Company"
-                    name={getFieldName("company")}
-                    options={(companies || []).map((c) => ({
-                        label: c.name,
-                        value: String(c.id),
-                    }))}
-                />
-                {getSelectedCompany() && (
-                    <TooltipDialog
-                        icon={<Pencil size={20} />}
-                        tooltipText={"Edit Company"}
-                    >
-                        <CompanyForm
-                            company={getSelectedCompany()}
-                        />
-                    </TooltipDialog>
-                )}
-                <TooltipDialog
-                    icon={<Plus size={20} />}
-                    tooltipText={"Add Company"}
-                >
-                    <CompanyForm />
-                </TooltipDialog>
-            </div>
-            <div className="flex flex-row items-end gap-2 w-full">
-                <Select
-                    label="Shipping Address"
-                    name={getFieldName("shipping")}
-                    options={getAddressOptions()}
-                />
-                <div className="flex gap-2">
-                    {getSelectedAddress("shipping") && (
-                        <TooltipDialog
-                            icon={<Pencil size={20} />}
-                            tooltipText="Edit Address"
-                        >
-                            <AddressForm
-                                operation="update"
-                                companyId={form.watch(getFieldName("company"))}
-                                address={getSelectedAddress("shipping")}
-                            />
-                        </TooltipDialog>
-                    )}
-                    <TooltipDialog
-                        icon={<Plus size={20} />}
-                        tooltipText="Add Address"
-                    >
-                        <AddressForm
-                            operation="insert"
-                            companyId={form.watch(getFieldName("company"))}
-                            address={null}
-                        />
-                    </TooltipDialog>
-                </div>
-            </div>
-            <div className="flex flex-row items-end gap-2 w-full">
-                <Select
-                    label="Billing Address"
-                    name={getFieldName("billing")}
-                    options={getAddressOptions()}
-                />
-                <div className="flex gap-2">
-                    {getSelectedAddress("billing") && (
-                        <TooltipDialog
-                            icon={<Pencil size={20} />}
-                            tooltipText="Edit Address"
-                        >
-                            <AddressForm
-                                operation="upsert"
-                                companyId={form.watch(getFieldName("company"))}
-                                address={getSelectedAddress("billing")}
-                            />
-                        </TooltipDialog>
-                    )}
-                    <TooltipDialog
-                        icon={<Plus size={20} />}
-                        tooltipText="Add Address"
-                    >
-                        <AddressForm
-                            operation="insert"
-                            companyId={form.watch(getFieldName("company"))}
-                            address={null}
-                        />
-                    </TooltipDialog>
-                </div>
-            </div>
+            <CompanySelect name={getFieldName("company")} />
+            <AddressSelect
+                label="Shipping Address"
+                type="shipping"
+                getFieldName={getFieldName}
+                getAddressOptions={getAddressOptions}
+                getSelectedAddress={getSelectedAddress}
+                form={form}
+            />
+            <AddressSelect
+                label="Billing Address"
+                type="billing"
+                getFieldName={getFieldName}
+                getAddressOptions={getAddressOptions}
+                getSelectedAddress={getSelectedAddress}
+                form={form}
+            />
         </>
     );
 };
