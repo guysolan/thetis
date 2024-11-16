@@ -5,19 +5,13 @@ import Company from "./Address";
 import OrderDescription from "./OrderDescription";
 import OrderTitle from "./OrderTitle";
 import OrderTotal from "./OrderTotal";
+import BuyerSeller from "./BuyerSeller";
 
 const BuildOrderDocument = ({ order }: { order: OrderView }) => {
     return (
         <>
             <OrderTitle orderType={order.order_type} />
-            <div className="gap-8 grid grid-cols-2 mb-8">
-                <Company
-                    address={order.from_address}
-                />
-                <Company
-                    address={order.to_address}
-                />
-            </div>
+            <BuyerSeller order={order} />
 
             <OrderDescription
                 orderId={order.order_id}

@@ -22,7 +22,7 @@ const Input = ({ name, label, type = "text", step }: InputProps) => {
             control={control}
             name={name}
             render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex-grow w-full">
                     <FormLabel className={label ? "not-sr-only" : "sr-only"}>
                         {label}
                     </FormLabel>

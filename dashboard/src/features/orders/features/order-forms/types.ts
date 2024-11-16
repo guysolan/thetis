@@ -1,18 +1,21 @@
 import { OrderItem } from "./schema";
 import { ItemView } from "../../../items/types";
 
-export interface StockItem {
+export type ItemType = "part" | "product";
+export type StockItemName =
+    | "produced_items"
+    | "consumed_items"
+    | "from_items"
+    | "to_items";
+export type AddressName = "to_shipping_address_id" | "from_shipping_address_id";
+
+export interface StockItemFormData {
+    item_type: ItemType;
     item_id: string;
-    item_name: string;
-    quantity_after: number;
-    address_id: string;
-    item_type: string;
     quantity_change: number;
-    item_price?: number;
-    item_tax?: number;
 }
 
-export interface StockQuantityResult {
+export interface StockItemQuantities {
     before: number;
     after: number;
 }
@@ -53,4 +56,13 @@ export interface ProcessedItems {
     fromItems: OrderItemChange[];
     toItems: OrderItemChange[];
     displayItems: DisplayItem[];
+}
+
+export interface PriceItemFormData {
+    item_type: string;
+    item_id: string;
+    quantity_change: number;
+    item_price: number;
+    item_tax: number;
+    item_total: string;
 }

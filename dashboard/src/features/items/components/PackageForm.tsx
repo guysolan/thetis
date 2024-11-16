@@ -45,7 +45,7 @@ interface Props {
 
 export function PackageForm({ item }: Props) {
     const { data: itemsView } = useSelectItemsView();
-    const { mutate: upsertItem } = useUpsertItem();
+    const upsertItem = useUpsertItem();
     const { mutate: upsertComponents } = useUpsertItemComponents();
 
     const form = useForm<FormData>({
@@ -56,12 +56,12 @@ export function PackageForm({ item }: Props) {
                 name: item?.item_name ?? "",
                 price: item?.item_price ?? 0,
                 type: "package",
-                height: item?.item_height ?? 0,
-                width: item?.item_width ?? 0,
-                depth: item?.item_depth ?? 0,
-                weight: item?.item_weight ?? 0,
+                height: item?.height ?? 0,
+                width: item?.width ?? 0,
+                depth: item?.depth ?? 0,
+                weight: item?.weight ?? 0,
             },
-            components: [],
+            components: item?.components ?? [],
         },
     });
 
@@ -70,20 +70,16 @@ export function PackageForm({ item }: Props) {
         name: "components",
     });
 
-    async function handleSubmit() {
-        const values = form.getValues();
-
+    async function onSubmit(values: FormData) {
         // First create/update the item
-        const itemResult = await upsertItem(values.item);
-
+        const itemResult = await upsertItem.mutateAsync(values.item);
         // Then create/update its components
-        if (itemResult?.item_id) {
-            const componentsWithItemId = values.components.map((component) => ({
-                ...component,
-                item_id: String(itemResult.item_id),
-            }));
-            await upsertComponents(componentsWithItemId);
-        }
+        const componentsWithItemId = values.components.map((component) => ({
+            component_id: Number(component.component_id),
+            component_quantity: component.component_quantity,
+            item_id: Number(itemResult.id),
+        }));
+        await upsertComponents(componentsWithItemId);
     }
 
     return (
@@ -181,9 +177,9 @@ export function PackageForm({ item }: Props) {
                 </div>
 
                 <Button
-                    type="button"
+                    type="submit"
                     disabled={form.formState.isSubmitting}
-                    onClick={handleSubmit}
+                    onClick={form.handleSubmit(onSubmit)}
                 >
                     {form.formState.isSubmitting ? "Saving..." : "Save Item"}
                 </Button>

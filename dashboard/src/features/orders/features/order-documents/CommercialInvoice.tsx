@@ -11,6 +11,15 @@ import ExporterDetails from "./ExporterDetails";
 import type { CompanyRow } from "../../../companies/types";
 import { AddressRow } from "../../../stockpiles/types";
 import CommercialInvoiceItems from "./CommercialInvoiceItems";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "../../../../components/ui/table";
+import PackageSummary from "./PackageSummary";
 
 const CommercialInvoice = ({ order }: { order: OrderView }) => {
     return (
@@ -51,7 +60,14 @@ const CommercialInvoice = ({ order }: { order: OrderView }) => {
                 </div>
             </div>
 
-            <CommercialInvoiceItems orderItems={order.items} />
+            <CommercialInvoiceItems
+                orderItems={order.items.filter((item) =>
+                    item.item_type !== "package"
+                )}
+            />
+
+            <PackageSummary items={order.items} />
+
             <FDADetails />
 
             <ExporterDetails />

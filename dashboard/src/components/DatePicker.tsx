@@ -18,22 +18,30 @@ import { cn } from "@/lib/utils";
 import { useFormContext } from "react-hook-form";
 import dayjs from "dayjs";
 
-const DatePicker = ({ name, label }: { name: string; label?: string }) => {
-    const form = useFormContext();
+type DatePickerProps = {
+    name: string;
+    label?: string;
+};
+
+const DatePicker = ({ name, label }: DatePickerProps) => {
+    const { control } = useFormContext();
     return (
         <FormField
-            control={form.control}
+            control={control}
             name={name}
             render={({ field }) => (
-                <FormItem className="flex flex-col">
-                    <FormLabel>{label ?? "Date"}</FormLabel>
+                <FormItem className="flex-grow w-full">
+                    <FormLabel className={label ? "not-sr-only" : "sr-only"}>
+                        {label ?? name}
+                    </FormLabel>
+                    <FormMessage />
                     <Popover>
                         <PopoverTrigger asChild>
                             <FormControl>
                                 <Button
                                     variant={"outline"}
                                     className={cn(
-                                        "w-[240px] pl-3 text-left font-normal",
+                                        "w-full pl-3 text-left font-normal",
                                         !field.value && "text-muted-foreground",
                                     )}
                                 >
@@ -57,7 +65,6 @@ const DatePicker = ({ name, label }: { name: string; label?: string }) => {
                             />
                         </PopoverContent>
                     </Popover>
-                    <FormMessage />
                 </FormItem>
             )}
         />

@@ -3,6 +3,7 @@ import { BaseOrderForm } from "../../components/BaseOrderForm";
 import { useCreateOrder } from "../../../../api/createOrder";
 import SaleFormFields from "./SaleFormFields";
 import dayjs from "dayjs";
+import { formatCreateOrderArguments } from "../../utils/formatCreateOrderArguments";
 
 const SaleForm = () => {
     const { mutate: createOrder } = useCreateOrder();
@@ -25,7 +26,7 @@ const SaleForm = () => {
     };
 
     const handleSubmit = async (formData: any) => {
-        const item_changes_with_address = formData.order_items.map((
+        const itemChanges = formData.order_items.map((
             ic: any,
         ) => ({
             item_id: ic.item_id,
@@ -35,17 +36,12 @@ const SaleForm = () => {
             address_id: formData.from_shipping_address_id,
         }));
 
-        await createOrder({
-            in_order_type: formData.order_type,
-            in_order_date: formData.order_date.toISOString(),
-            in_order_items: item_changes_with_address,
-            in_from_company_id: formData.from_company_id,
-            in_to_company_id: formData.to_company_id,
-            in_from_billing_address_id: formData.from_billing_address_id,
-            in_from_shipping_address_id: formData.from_shipping_address_id,
-            in_to_billing_address_id: formData.to_billing_address_id,
-            in_to_shipping_address_id: formData.to_shipping_address_id,
-        });
+        const processedData = formatCreateOrderArguments(
+            itemChanges,
+            formData,
+        );
+
+        createOrder(processedData);
     };
 
     return (

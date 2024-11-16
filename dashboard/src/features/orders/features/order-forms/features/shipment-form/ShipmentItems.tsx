@@ -9,11 +9,13 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Copy, Package, Trash } from "lucide-react";
+import { Copy, Package, Pencil, Plus, Trash } from "lucide-react";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView";
 import Select from "@/components/Select";
 
 import Input from "@/components/Input";
+import TooltipDialog from "@/components/TooltipDialog";
+import { PackageForm } from "../../../../../items/components/PackageForm";
 
 const ShipmentItems = () => {
     const { data: items } = useSelectItemsView();
@@ -61,12 +63,14 @@ const ShipmentItems = () => {
                         return (
                             <TableRow key={field.id}>
                                 <TableCell>
-                                    <Select
-                                        name={`order_items.${index}.item_id`}
-                                        options={getFilteredItemOptions(
-                                            "package",
-                                        )}
-                                    />
+                                    <div className="flex items-center gap-2">
+                                        <Select
+                                            name={`order_items.${index}.item_id`}
+                                            options={getFilteredItemOptions(
+                                                "package",
+                                            )}
+                                        />
+                                    </div>
                                 </TableCell>
                                 <TableCell>
                                     <Input
@@ -85,6 +89,16 @@ const ShipmentItems = () => {
 
                                 <TableCell className="">
                                     <div className="flex gap-2 pl-2 border-l">
+                                        <TooltipDialog
+                                            icon={selectedItem
+                                                ? <Pencil size={20} />
+                                                : <Plus size={20} />}
+                                            tooltipText="Edit Package"
+                                        >
+                                            <PackageForm
+                                                item={selectedItem ?? null}
+                                            />
+                                        </TooltipDialog>
                                         <Button
                                             type="button"
                                             onClick={() => {

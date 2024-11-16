@@ -1,9 +1,9 @@
-import { buildFormSchema } from "../../schema";
+import { buildFormSchema, OrderItem } from "../../schema";
 import { BaseOrderForm } from "../../components/BaseOrderForm";
 import { useCreateOrder } from "../../../../api/createOrder";
 import BuildFormFields from "./BuildFormFields";
-import DatePicker from "@/components/DatePicker";
 import dayjs from "dayjs";
+import { formatCreateOrderArguments } from "../../utils/formatCreateOrderArguments";
 
 const BuildForm = () => {
     const { mutate: createOrder } = useCreateOrder();
@@ -20,6 +20,8 @@ const BuildForm = () => {
         from_company_id: "",
         from_billing_address_id: "",
         from_shipping_address_id: "",
+        currency: "GBP",
+        carriage: 0,
     };
 
     const handleSubmit = async (formData: any) => {
@@ -47,17 +49,12 @@ const BuildForm = () => {
             item_type: ic.item_type,
         }));
 
-        await createOrder({
-            in_order_type: formData.order_type,
-            in_order_date: formData.order_date.toISOString(),
-            in_order_items: orderItems,
-            in_from_company_id: formData.from_company_id,
-            in_from_billing_address_id: formData.from_billing_address_id,
-            in_from_shipping_address_id: formData.from_shipping_address_id,
-            in_to_company_id: formData.to_company_id,
-            in_to_billing_address_id: formData.to_billing_address_id,
-            in_to_shipping_address_id: formData.to_shipping_address_id,
-        });
+        const processedData = formatCreateOrderArguments(
+            orderItems,
+            formData,
+        );
+
+        createOrder(processedData);
     };
 
     return (

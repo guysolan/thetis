@@ -17,40 +17,9 @@ import { create } from "zustand";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-interface FieldVisibility {
-    shipping: boolean;
-    billing: boolean;
-    contacts: boolean;
-}
-
-interface FieldVisibilityStore {
-    visibility: FieldVisibility;
-    toggleField: (field: keyof FieldVisibility, value: boolean) => void;
-}
-
-const useFieldVisibilityStore = create<FieldVisibilityStore>((set) => ({
-    visibility: {
-        shipping: true,
-        billing: true,
-        contacts: true,
-    },
-    toggleField: (field, value) =>
-        set((state) => ({
-            visibility: {
-                ...state.visibility,
-                [field]: value,
-            },
-        })),
-}));
-
 interface Props {
     direction: "to" | "from";
     title?: string;
-    defaultVisibility?: {
-        shipping?: boolean;
-        billing?: boolean;
-        contacts?: boolean;
-    };
 }
 
 const formatAddress = (address: any) => {
@@ -70,32 +39,19 @@ const formatAddress = (address: any) => {
 const CompanyAddressSelect = ({
     direction,
     title,
-    defaultVisibility,
 }: Props) => {
     const form = useFormContext();
     const { data: companies = [] } = useSelectCompanies();
-    const { visibility, toggleField } = useFieldVisibilityStore();
-    const [isExpanded, setIsExpanded] = useState(false);
-
-    // Initialize visibility based on props
-    useEffect(() => {
-        if (defaultVisibility) {
-            if (defaultVisibility.shipping !== undefined) {
-                toggleField("shipping", defaultVisibility.shipping);
-            }
-            if (defaultVisibility.billing !== undefined) {
-                toggleField("billing", defaultVisibility.billing);
-            }
-            if (defaultVisibility.contacts !== undefined) {
-                toggleField("contacts", defaultVisibility.contacts);
-            }
-        }
-    }, [defaultVisibility]);
+    const [isExpanded, setIsExpanded] = useState(true);
 
     // Helper function to get field names
-    const getFieldName = (type: "company" | "shipping" | "billing") => {
+    const getFieldName = (
+        type: "company" | "shipping" | "billing" | "contact",
+    ) => {
         const prefix = direction === "to" ? "to" : "from";
-        return `${prefix}_${type}_${type === "company" ? "id" : "address_id"}`;
+        if (type === "company") return `${prefix}_${type}_id`;
+        if (type === "contact") return `${prefix}_contact_id`;
+        return `${prefix}_${type}_address_id`;
     };
 
     // Get selected company's addresses
@@ -170,36 +126,6 @@ const CompanyAddressSelect = ({
         );
     };
 
-    // Extract visibility settings UI into a separate component
-    const VisibilitySettings = () => (
-        <div className="space-y-4">
-            <h4 className="font-medium">Show Fields</h4>
-            <div className="space-y-2">
-                <VisibilityToggle
-                    id="shipping"
-                    label="Shipping Address"
-                    checked={visibility.shipping}
-                    onCheckedChange={(checked) =>
-                        toggleField("shipping", checked)}
-                />
-                <VisibilityToggle
-                    id="billing"
-                    label="Billing Address"
-                    checked={visibility.billing}
-                    onCheckedChange={(checked) =>
-                        toggleField("billing", checked)}
-                />
-                <VisibilityToggle
-                    id="contacts"
-                    label="Contacts"
-                    checked={visibility.contacts}
-                    onCheckedChange={(checked) =>
-                        toggleField("contacts", checked)}
-                />
-            </div>
-        </div>
-    );
-
     // Add summary view helper
     const SummaryView = () => {
         const selectedCompany = getSelectedCompany();
@@ -211,24 +137,18 @@ const CompanyAddressSelect = ({
         return (
             <div className="space-y-2 text-muted-foreground text-sm">
                 <div className="font-medium">{selectedCompany.name}</div>
-                {visibility.shipping && (
-                    <div className="flex flex-row items-center gap-2">
-                        <Package size={20} />
-                        {formatAddress(shippingAddress)}
-                    </div>
-                )}
-                {visibility.billing && (
-                    <div className="flex flex-row items-center gap-2">
-                        <Clipboard size={20} />
-                        {formatAddress(billingAddress)}
-                    </div>
-                )}
-                {visibility.contacts && (
-                    <div className="flex flex-row items-center gap-2">
-                        <User2 size={20} />
-                        {getContactOptions().map((c) => c.label).join(", ")}
-                    </div>
-                )}
+                <div className="flex flex-row items-center gap-2">
+                    <Package size={20} />
+                    {formatAddress(shippingAddress)}
+                </div>
+                <div className="flex flex-row items-center gap-2">
+                    <Clipboard size={20} />
+                    {formatAddress(billingAddress)}
+                </div>
+                <div className="flex flex-row items-center gap-2">
+                    <User2 size={20} />
+                    {getContactOptions().map((c) => c.label).join(", ")}
+                </div>
             </div>
         );
     };
@@ -239,33 +159,14 @@ const CompanyAddressSelect = ({
                 <CardTitle className="font-medium text-base">
                     {title ?? (direction === "to" ? "To" : "From")}
                 </CardTitle>
-                <div className="flex flex-row-reverse gap-2">
-                    <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => setIsExpanded(!isExpanded)}
-                    >
-                        <Pencil className="w-4 h-4" />
-                    </Button>
-                    {isExpanded &&
-                        (
-                            <Popover>
-                                <PopoverTrigger asChild>
-                                    <Button variant="ghost" size="icon">
-                                        <Settings2 className="w-4 h-4" />
-                                    </Button>
-                                </PopoverTrigger>
-                                <PopoverContent
-                                    align="end"
-                                    side="bottom"
-                                    className="w-80"
-                                >
-                                    <VisibilitySettings />
-                                </PopoverContent>
-                            </Popover>
-                        )}
-                </div>
+                <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setIsExpanded(!isExpanded)}
+                >
+                    <Pencil className="w-4 h-4" />
+                </Button>
             </CardHeader>
             <CardContent>
                 {isExpanded
@@ -274,38 +175,30 @@ const CompanyAddressSelect = ({
                             <CompanySelect name={getFieldName("company")} />
 
                             <div className="space-y-4">
-                                {visibility.shipping && (
-                                    <AddressSelect
-                                        label="Shipping Address"
-                                        type="shipping"
-                                        getFieldName={getFieldName}
-                                        getAddressOptions={getAddressOptions}
-                                        getSelectedAddress={getSelectedAddress}
-                                        form={form}
-                                    />
-                                )}
-
-                                {visibility.billing && (
-                                    <AddressSelect
-                                        label="Billing Address"
-                                        type="billing"
-                                        getFieldName={getFieldName}
-                                        getAddressOptions={getAddressOptions}
-                                        getSelectedAddress={getSelectedAddress}
-                                        form={form}
-                                    />
-                                )}
-
-                                {visibility.contacts && (
-                                    <ContactSelect
-                                        label="Primary Contact"
-                                        type="primary"
-                                        getFieldName={getFieldName}
-                                        getContactOptions={getContactOptions}
-                                        getSelectedContact={getSelectedContact}
-                                        form={form}
-                                    />
-                                )}
+                                <AddressSelect
+                                    label="Shipping Address"
+                                    type="shipping"
+                                    getFieldName={getFieldName}
+                                    getAddressOptions={getAddressOptions}
+                                    getSelectedAddress={getSelectedAddress}
+                                    form={form}
+                                />
+                                <AddressSelect
+                                    label="Billing Address"
+                                    type="billing"
+                                    getFieldName={getFieldName}
+                                    getAddressOptions={getAddressOptions}
+                                    getSelectedAddress={getSelectedAddress}
+                                    form={form}
+                                />
+                                <ContactSelect
+                                    label="Contact"
+                                    type="contact"
+                                    getFieldName={getFieldName}
+                                    getContactOptions={getContactOptions}
+                                    getSelectedContact={getSelectedContact}
+                                    form={form}
+                                />
                             </div>
                             <Button
                                 variant="secondary"
@@ -321,27 +214,5 @@ const CompanyAddressSelect = ({
         </Card>
     );
 };
-
-// New helper component for visibility toggles
-const VisibilityToggle = ({
-    id,
-    label,
-    checked,
-    onCheckedChange,
-}: {
-    id: string;
-    label: string;
-    checked: boolean;
-    onCheckedChange: (checked: boolean) => void;
-}) => (
-    <div className="flex justify-between items-center">
-        <Label htmlFor={id}>{label}</Label>
-        <Switch
-            id={id}
-            checked={checked}
-            onCheckedChange={onCheckedChange}
-        />
-    </div>
-);
 
 export default CompanyAddressSelect;

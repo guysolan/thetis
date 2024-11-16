@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { itemTypes } from "../../../items/types";
 
+export const currencyTypes = ["GBP", "USD", "EUR"] as const;
+
 export const orderItemSchema = z.object({
     item_id: z.string().min(1, "Please select an item"),
     quantity_change: z.coerce.number().min(0, "Quantity must be at least 1"),
@@ -40,14 +42,18 @@ const baseAddressSchema = z.object({
     from_company_id: z.string().min(1, "Company is required"),
     from_billing_address_id: z.string().min(1, "Billing address is required"),
     from_shipping_address_id: z.string().min(1, "Shipping address is required"),
+    to_contact_id: z.string().min(1, "Contact is required").optional(),
     to_company_id: z.string().min(1, "Company is required"),
     to_billing_address_id: z.string().min(1, "Billing address is required"),
     to_shipping_address_id: z.string().min(1, "Shipping address is required"),
+    from_contact_id: z.string().min(1, "Contact is required").optional(),
 });
 
 const baseOrderSchema = z.object({
     order_date: z.date(),
     order_items: z.array(orderItemSchema),
+    currency: z.enum(currencyTypes).default("GBP"),
+    carriage: z.coerce.number().default(0),
 });
 
 // Refactored form schemas using composition

@@ -1,26 +1,32 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
-import React from "react";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
+import React, { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Copy, Trash } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView";
-import Select from "@/components/Select";
-import Input from "@/components/Input";
-import ItemTypeSelect from "@/components/ItemTypeSelect";
-import { itemTypes } from "@/features/items/types";
+import { ItemType, PriceItemFormData } from "../types";
+import PriceItemsFormFields from "./PriceItemsFormFields";
+import PriceItemsSummary from "./PriceItemsSummary";
+import PriceItemActions from "./PriceItemActions";
 
-const PriceItems = ({ showPrice = false }: { showPrice?: boolean }) => {
-    const { data: items } = useSelectItemsView();
+interface PriceItemsProps {
+    showPrice?: boolean;
+    title?: string;
+    defaultIsExpanded?: boolean;
+    allowedTypes?: ItemType[];
+}
 
+const PriceItems = (
+    {
+        showPrice = false,
+        title = "Order Items",
+        defaultIsExpanded = false,
+        allowedTypes = [],
+    }: PriceItemsProps,
+) => {
+    const [isExpanded, setIsExpanded] = useState(defaultIsExpanded);
+    const { data: items = [] } = useSelectItemsView();
     const form = useFormContext();
-
     const { fields, append, remove } = useFieldArray({
         control: form.control,
         name: "order_items",
@@ -77,130 +83,66 @@ const PriceItems = ({ showPrice = false }: { showPrice?: boolean }) => {
         append({ ...itemToCopy });
     };
 
+    const handleAppend = (type: string) => {
+        append({
+            item_type: type,
+            item_id: "",
+            quantity_change: 1,
+            item_price: 0,
+            item_tax: 0.2,
+            item_total: "0.00",
+        } as PriceItemFormData);
+    };
+
     return (
-        <>
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>Type</TableHead>
-                        <TableHead>Item</TableHead>
-                        <TableHead>Quantity</TableHead>
-                        {showPrice && <TableHead>Price</TableHead>}
-                        {showPrice && <TableHead>Tax</TableHead>}
-                        {showPrice && <TableHead>Total</TableHead>}
-                        <TableHead>
-                            <span className="sr-only">Delete</span>
-                        </TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {fields.map((field, index) => (
-                        <TableRow key={field.id}>
-                            <TableCell>
-                                <ItemTypeSelect
-                                    name={`order_items.${index}.item_type`}
-                                />
-                            </TableCell>
-                            <TableCell>
-                                <Select
-                                    name={`order_items.${index}.item_id`}
-                                    options={getFilteredItemOptions(
-                                        form.watch(
-                                            `order_items.${index}.item_type`,
-                                        ),
-                                    )}
-                                />
-                            </TableCell>
-                            <TableCell>
-                                <Input
-                                    name={`order_items.${index}.quantity_change`}
-                                    type="number"
-                                />
-                            </TableCell>
-                            {showPrice && (
-                                <TableCell>
-                                    <Input
-                                        name={`order_items.${index}.item_price`}
-                                        type="number"
-                                        step="0.01"
-                                    />
-                                </TableCell>
-                            )}
-                            {showPrice && (
-                                <TableCell>
-                                    <Input
-                                        name={`order_items.${index}.item_tax`}
-                                        type="number"
-                                        step="0.01"
-                                    />
-                                </TableCell>
-                            )}
-                            {showPrice && (
-                                <TableCell>
-                                    {itemTotal(index)}
-                                </TableCell>
-                            )}
-                            <TableCell>
-                                <div className="flex gap-2">
-                                    <Button
-                                        type="button"
-                                        onClick={() => copyRow(index)}
-                                        variant="secondary"
-                                        className="px-2"
-                                    >
-                                        <Copy size={20} />
-                                    </Button>
-                                    <Button
-                                        type="button"
-                                        onClick={() => remove(index)}
-                                        variant="destructive"
-                                        className="px-2"
-                                    >
-                                        <Trash size={20} />
-                                    </Button>
-                                </div>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                    {showPrice &&
-                        (
-                            <TableRow className="font-semibold">
-                                <TableCell colSpan={5}>
-                                    Total
-                                </TableCell>
-                                <TableCell>
-                                    {fields.reduce(
-                                        (sum, _, index) =>
-                                            sum + Number(itemTotal(index)),
-                                        0,
-                                    ).toFixed(2)}
-                                </TableCell>
-                            </TableRow>
-                        )}
-                </TableBody>
-            </Table>
-            <div className="flex gap-2 p-2">
-                {itemTypes.map((type) => (
-                    <Button
-                        key={type}
-                        type="button"
-                        variant="secondary"
-                        size="sm"
-                        onClick={() =>
-                            append({
-                                item_type: type,
-                                item_id: "",
-                                quantity_change: 1,
-                                item_price: 0,
-                                item_tax: 0.2,
-                                item_total: "0.00",
-                            })}
-                    >
-                        Add {type.charAt(0).toUpperCase() + type.slice(1)}
-                    </Button>
-                ))}
-            </div>
-        </>
+        <Card>
+            <CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
+                <CardTitle className="font-medium text-base">
+                    {title}
+                </CardTitle>
+                <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setIsExpanded(!isExpanded)}
+                >
+                    <Pencil className="w-4 h-4" />
+                </Button>
+            </CardHeader>
+            <CardContent>
+                {isExpanded
+                    ? (
+                        <div className="space-y-4">
+                            <PriceItemsFormFields
+                                name="order_items"
+                                fields={fields}
+                                items={items}
+                                form={form}
+                                onCopy={copyRow}
+                                onRemove={remove}
+                                showPrice={showPrice}
+                                itemTotal={itemTotal}
+                                getFilteredItemOptions={getFilteredItemOptions}
+                                allowedTypes={allowedTypes}
+                            />
+                            <PriceItemActions
+                                itemTypes={allowedTypes}
+                                onAppend={handleAppend}
+                            />
+                        </div>
+                    )
+                    : (
+                        <PriceItemsSummary
+                            name="order_items"
+                            fields={fields}
+                            items={items}
+                            form={form}
+                            showPrice={showPrice}
+                            itemTotal={itemTotal}
+                        />
+                    )}
+            </CardContent>
+        </Card>
     );
 };
 

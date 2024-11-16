@@ -121,36 +121,6 @@ export type Database = {
         }
         Relationships: []
       }
-      companies_contacts: {
-        Row: {
-          company_id: number
-          contact_id: number
-        }
-        Insert: {
-          company_id: number
-          contact_id: number
-        }
-        Update: {
-          company_id?: number
-          contact_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "companies_contacts_company_id_fkey"
-            columns: ["company_id"]
-            isOneToOne: false
-            referencedRelation: "companies"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "companies_contacts_contact_id_fkey"
-            columns: ["contact_id"]
-            isOneToOne: false
-            referencedRelation: "contacts"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       company_addresses: {
         Row: {
           address_id: number
@@ -198,6 +168,36 @@ export type Database = {
             columns: ["company_id"]
             isOneToOne: false
             referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      company_contacts: {
+        Row: {
+          company_id: number
+          contact_id: number
+        }
+        Insert: {
+          company_id: number
+          contact_id: number
+        }
+        Update: {
+          company_id?: number
+          contact_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "company_contacts_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "company_contacts_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
             referencedColumns: ["id"]
           },
         ]
@@ -467,38 +467,47 @@ export type Database = {
       orders: {
         Row: {
           carriage: number
+          currency: Database["public"]["Enums"]["currency_type"]
           from_billing_address_id: number | null
           from_company_id: number | null
+          from_contact_id: number | null
           from_shipping_address_id: number | null
           id: number
           order_date: string
           order_type: Database["public"]["Enums"]["order_type"]
           to_billing_address_id: number | null
           to_company_id: number | null
+          to_contact_id: number | null
           to_shipping_address_id: number | null
         }
         Insert: {
           carriage?: number
+          currency?: Database["public"]["Enums"]["currency_type"]
           from_billing_address_id?: number | null
           from_company_id?: number | null
+          from_contact_id?: number | null
           from_shipping_address_id?: number | null
           id?: number
           order_date?: string
           order_type: Database["public"]["Enums"]["order_type"]
           to_billing_address_id?: number | null
           to_company_id?: number | null
+          to_contact_id?: number | null
           to_shipping_address_id?: number | null
         }
         Update: {
           carriage?: number
+          currency?: Database["public"]["Enums"]["currency_type"]
           from_billing_address_id?: number | null
           from_company_id?: number | null
+          from_contact_id?: number | null
           from_shipping_address_id?: number | null
           id?: number
           order_date?: string
           order_type?: Database["public"]["Enums"]["order_type"]
           to_billing_address_id?: number | null
           to_company_id?: number | null
+          to_contact_id?: number | null
           to_shipping_address_id?: number | null
         }
         Relationships: [
@@ -535,6 +544,13 @@ export type Database = {
             columns: ["from_company_id"]
             isOneToOne: false
             referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orders_from_contact_id_fkey"
+            columns: ["from_contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
             referencedColumns: ["id"]
           },
           {
@@ -598,6 +614,13 @@ export type Database = {
             columns: ["to_company_id"]
             isOneToOne: false
             referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orders_to_contact_id_fkey"
+            columns: ["to_contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
             referencedColumns: ["id"]
           },
           {
@@ -682,8 +705,10 @@ export type Database = {
       orders_view: {
         Row: {
           carriage: number | null
+          currency: Database["public"]["Enums"]["currency_type"] | null
           from_billing_address: Json | null
           from_company: Json | null
+          from_contact: Json | null
           from_shipping_address: Json | null
           items: Json | null
           order_date: string | null
@@ -691,6 +716,7 @@ export type Database = {
           order_type: Database["public"]["Enums"]["order_type"] | null
           to_billing_address: Json | null
           to_company: Json | null
+          to_contact: Json | null
           to_shipping_address: Json | null
           total_value: number | null
         }
@@ -731,28 +757,55 @@ export type Database = {
           address_id: number
         }[]
       }
-      insert_order: {
-        Args: {
-          in_order_type: string
-          in_order_date: string
-          in_order_items: Json
-          in_from_company_id?: number
-          in_to_company_id?: number
-          in_from_billing_address_id?: number
-          in_from_shipping_address_id?: number
-          in_to_billing_address_id?: number
-          in_to_shipping_address_id?: number
-        }
-        Returns: {
-          order_id: number
-          item_change_id: number
-          item_id: number
-          quantity_change: number
-          address_id: number
-          item_price: number
-          item_tax: number
-        }[]
-      }
+      insert_order:
+        | {
+            Args: {
+              in_order_type: string
+              in_order_date: string
+              in_order_items: Json
+              in_from_company_id?: number
+              in_to_company_id?: number
+              in_from_billing_address_id?: number
+              in_from_shipping_address_id?: number
+              in_to_billing_address_id?: number
+              in_to_shipping_address_id?: number
+            }
+            Returns: {
+              order_id: number
+              item_change_id: number
+              item_id: number
+              quantity_change: number
+              address_id: number
+              item_price: number
+              item_tax: number
+            }[]
+          }
+        | {
+            Args: {
+              in_order_type: string
+              in_order_date: string
+              in_order_items: Json
+              in_from_company_id?: number
+              in_to_company_id?: number
+              in_from_contact_id?: number
+              in_to_contact_id?: number
+              in_from_billing_address_id?: number
+              in_from_shipping_address_id?: number
+              in_to_billing_address_id?: number
+              in_to_shipping_address_id?: number
+              in_currency?: Database["public"]["Enums"]["currency_type"]
+              in_carriage?: number
+            }
+            Returns: {
+              order_id: number
+              item_change_id: number
+              item_id: number
+              quantity_change: number
+              address_id: number
+              item_price: number
+              item_tax: number
+            }[]
+          }
       insert_order_item:
         | {
             Args: {
@@ -844,6 +897,7 @@ export type Database = {
       }
     }
     Enums: {
+      currency_type: "AUD" | "CAD" | "EUR" | "GBP" | "JPY" | "NZD" | "USD"
       item_type: "product" | "part" | "service" | "package"
       order_type: "purchase" | "sale" | "shipment" | "stocktake" | "build"
     }

@@ -3,6 +3,7 @@ import { BaseOrderForm } from "../../components/BaseOrderForm";
 import { useCreateOrder } from "../../../../api/createOrder";
 import ShipmentFormFields from "./ShipmentFormFields";
 import DatePicker from "../../../../../../components/DatePicker";
+import { formatCreateOrderArguments } from "../../utils/formatCreateOrderArguments";
 
 const ShipmentForm = () => {
     const { mutate: createOrder } = useCreateOrder();
@@ -28,6 +29,12 @@ const ShipmentForm = () => {
             item_tax: null,
             address_id: formData.from_shipping_address_id,
         }));
+        const orderItems = formData.order_items.map((item: any) => ({
+            ...item,
+            item_price: null,
+            item_tax: null,
+            address_id: formData.from_shipping_address_id,
+        }));
         const toItems = formData.to_items.map((item: any) => ({
             ...item,
             item_price: null,
@@ -35,18 +42,12 @@ const ShipmentForm = () => {
             address_id: formData.to_shipping_address_id,
         }));
 
-        const orderData = {
-            in_order_type: "shipment",
-            in_order_date: formData.order_date.toISOString(),
-            in_from_company_id: formData.from_company_id,
-            in_to_company_id: formData.to_company_id,
-            in_from_billing_address_id: formData.from_billing_address_id,
-            in_from_shipping_address_id: formData.from_shipping_address_id,
-            in_to_billing_address_id: formData.to_billing_address_id,
-            in_to_shipping_address_id: formData.to_shipping_address_id,
-            in_order_items: [...fromItems, ...toItems],
-        };
-        await createOrder(orderData);
+        const processedData = formatCreateOrderArguments(
+            [...fromItems, ...toItems, ...orderItems],
+            formData,
+        );
+
+        createOrder(processedData);
     };
 
     return (

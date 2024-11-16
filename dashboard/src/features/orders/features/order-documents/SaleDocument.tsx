@@ -6,6 +6,7 @@ import OrderDescription from "./OrderDescription";
 import OrderTitle from "./OrderTitle";
 import OrderTotal from "./OrderTotal";
 import PaymentDetails from "./PaymentDetails";
+import BuyerSeller from "./BuyerSeller";
 
 const SaleDocument = ({ order }: { order: OrderView }) => {
     return (
@@ -15,17 +16,7 @@ const SaleDocument = ({ order }: { order: OrderView }) => {
                 orderId={order.order_id}
                 orderDate={order.order_date as string}
             />
-            <div className="gap-8 grid grid-cols-2 mb-8">
-                <Company
-                    title="Seller"
-                    address={order.from_address}
-                />
-                <Company
-                    title="Buyer"
-                    address={order.to_address}
-                />
-            </div>
-
+            <BuyerSeller order={order} />
             <FinancialTransactions
                 orderItems={order.items}
                 orderType={order.order_type}

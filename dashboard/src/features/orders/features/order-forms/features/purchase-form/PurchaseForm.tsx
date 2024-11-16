@@ -3,6 +3,7 @@ import { purchaseFormSchema } from "../../schema";
 import { BaseOrderForm } from "../../components/BaseOrderForm";
 import PurchaseFormFields from "./PurchaseFormFields";
 import dayjs from "dayjs";
+import { formatCreateOrderArguments } from "../../utils/formatCreateOrderArguments";
 
 const PurchaseForm = () => {
     const { mutate: createOrder } = useCreateOrder();
@@ -23,7 +24,7 @@ const PurchaseForm = () => {
     };
 
     const handleSubmit = async (formData: any) => {
-        const item_changes = formData.order_items.map((item: any) => ({
+        const itemChanges = formData.order_items.map((item: any) => ({
             item_id: item.item_id,
             quantity_change: item.quantity_change,
             item_price: item.item_price ?? 0,
@@ -31,17 +32,12 @@ const PurchaseForm = () => {
             address_id: formData.to_shipping_address_id,
         }));
 
-        await createOrder({
-            in_order_type: formData.order_type,
-            in_order_date: formData.order_date.toISOString(),
-            in_order_items: item_changes,
-            in_from_company_id: formData.from_company_id,
-            in_from_billing_address_id: formData.from_billing_address_id,
-            in_from_shipping_address_id: formData.from_shipping_address_id,
-            in_to_company_id: formData.to_company_id,
-            in_to_billing_address_id: formData.to_billing_address_id,
-            in_to_shipping_address_id: formData.to_shipping_address_id,
-        });
+        const processedData = formatCreateOrderArguments(
+            itemChanges,
+            formData,
+        );
+
+        createOrder(processedData);
     };
 
     return (

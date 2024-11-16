@@ -1,59 +1,49 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import CompanyAddressSelect from "@/features/companies/components/CompanyAddressSelect";
 import PriceItems from "../../components/PriceItems";
 import StockItems from "../../components/StockItems";
-import LockCard from "../../../../components/LockCard";
 import { StockValidationAlert } from "../../components/StockValidationAlert";
-import { useFormContext } from "react-hook-form";
 import { useBuildForm } from "./useBuildForm";
 import DatePicker from "../../../../../../components/DatePicker";
-
+import Select from "../../../../../../components/Select";
+import Input from "../../../../../../components/Input";
+import { currencyTypes } from "../../schema";
 const BuildFormFields = () => {
-    const { watch } = useFormContext();
-    const fromShippingAddressId = watch("from_shipping_address_id");
-
     // Initialize the build form logic
     useBuildForm();
 
     return (
         <>
-            <DatePicker name="order_date" label="Order Date" />
+            <div className="flex flex-row gap-4">
+                <DatePicker name="order_date" label="Order Date" />
+                <Select
+                    name="currency"
+                    label="Currency"
+                    options={currencyTypes.map((o) => ({ label: o, value: o }))}
+                />
+            </div>
+
             <CompanyAddressSelect
                 title="Buyer"
-                defaultVisibility={{ shipping: false }}
                 direction="to"
             />
             <CompanyAddressSelect title="Maker" direction="from" />
 
+            <StockItems
+                defaultIsExpanded={true}
+                name="produced_items"
+                address_name="from_shipping_address_id"
+                allowedTypes={["product"]}
+            />
             <StockValidationAlert
                 itemsFieldName="consumed_items"
                 addressFieldName="from_shipping_address_id"
             />
+            <StockItems
+                name="consumed_items"
+                address_name="from_shipping_address_id"
+            />
 
-            {fromShippingAddressId && (
-                <>
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Produced Items</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <StockItems
-                                name="produced_items"
-                                address_name="from_shipping_address_id"
-                            />
-                        </CardContent>
-                    </Card>
-                    <LockCard title="Order Items">
-                        <PriceItems showPrice={true} />
-                    </LockCard>
-                    <LockCard title="Consumed Items">
-                        <StockItems
-                            name="consumed_items"
-                            address_name="from_shipping_address_id"
-                        />
-                    </LockCard>
-                </>
-            )}
+            <PriceItems showPrice={true} />
         </>
     );
 };

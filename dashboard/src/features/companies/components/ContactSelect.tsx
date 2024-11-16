@@ -5,16 +5,14 @@ import TooltipDialog from "../../../components/TooltipDialog";
 
 interface ContactSelectProps {
     label: string;
-    type: "primary" | "secondary";
-    getFieldName: (type: "company" | "primary" | "secondary") => string;
+    getFieldName: (type: "contact") => string;
     getContactOptions: () => { label: string; value: string }[];
-    getSelectedContact: (type: "primary" | "secondary") => any;
+    getSelectedContact: () => any;
     form: any;
 }
 
 const ContactSelect = ({
     label,
-    type,
     getFieldName,
     getContactOptions,
     getSelectedContact,
@@ -24,11 +22,11 @@ const ContactSelect = ({
         <div className="flex flex-row items-end gap-2 w-full">
             <Select
                 label={label}
-                name={getFieldName(type)}
+                name={getFieldName("contact")}
                 options={getContactOptions()}
             />
             <div className="flex gap-2">
-                {getSelectedContact(type) && (
+                {getSelectedContact() && (
                     <TooltipDialog
                         icon={<Pencil size={20} />}
                         tooltipText="Edit Contact"
@@ -36,7 +34,7 @@ const ContactSelect = ({
                         <CompanyContactForm
                             operation="upsert"
                             companyId={form.watch(getFieldName("company"))}
-                            contact={getSelectedContact(type)}
+                            contact={getSelectedContact()}
                         />
                     </TooltipDialog>
                 )}
@@ -46,7 +44,7 @@ const ContactSelect = ({
                 >
                     <CompanyContactForm
                         operation="insert"
-                        companyId={form.watch(getFieldName("company"))}
+                        companyId={form.watch(getFieldName("contact"))}
                         contact={null}
                     />
                 </TooltipDialog>

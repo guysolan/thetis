@@ -1,6 +1,6 @@
 import { Database } from "@/database.types";
 import { Company } from "../companies/types";
-
+export type Currency = Database["public"]["Enums"]["currency_type"];
 export const orderTypes = [
     "sale",
     "shipment",

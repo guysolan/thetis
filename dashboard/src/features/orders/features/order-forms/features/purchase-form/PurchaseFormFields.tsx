@@ -12,57 +12,39 @@ import AddressSelect from "../../../../../stockpiles/components/AddressSelect";
 import StockItems from "../../components/StockItems";
 import { usePurchaseForm } from "./usePurchaseForm";
 import DatePicker from "../../../../../../components/DatePicker";
+import { currencyTypes } from "../../schema";
+import Select from "../../../../../../components/Select";
 
 const PurchaseFormFields = () => {
     usePurchaseForm();
 
     return (
         <>
-            <DatePicker name="order_date" label="Order Date" />
-
-            <Card>
-                <CardHeader>
-                    <CardTitle>Buyer</CardTitle>
-                    <CardDescription>Probably your company</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <CompanyAddressSelect direction="to" />
-                </CardContent>
-            </Card>
-            <Card>
-                <CardHeader>
-                    <CardTitle>Seller</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <CompanyAddressSelect
-                        hideShipping={true}
-                        direction="from"
-                    />
-                </CardContent>
-            </Card>
-
-            <Card>
-                <CardHeader>
-                    <CardTitle>Order Items</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <PriceItems showPrice={true} />
-                </CardContent>
-            </Card>
-
-            <LockCard
-                title={
-                    <AddressSelect
-                        label="To Address"
-                        name="to_shipping_address_id"
-                    />
-                }
-            >
-                <StockItems
-                    address_name="to_shipping_address_id"
-                    name="produced_items"
+            <div className="flex flex-row gap-4">
+                <DatePicker name="order_date" label="Order Date" />
+                <Select
+                    name="currency"
+                    label="Currency"
+                    options={currencyTypes.map((o) => ({ label: o, value: o }))}
                 />
-            </LockCard>
+            </div>
+
+            <CompanyAddressSelect title="Buyer" direction="to" />
+
+            <CompanyAddressSelect title="Seller" direction="from" />
+
+            <PriceItems
+                title="Order Items"
+                defaultIsExpanded={true}
+                showPrice={true}
+                allowedTypes={["part", "product"]}
+            />
+
+            <StockItems
+                title="Produced Items"
+                address_name="to_shipping_address_id"
+                name="produced_items"
+            />
         </>
     );
 };
