@@ -1,13 +1,9 @@
-import { useFormContext } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pencil } from "lucide-react";
-import CompanySelect from "./CompanySelect";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCompanyForm } from "../hooks/useCompanyForm";
 import { CompanySummaryView } from "./CompanySummaryView";
-import AddressSelect from "./AddressSelect";
-import ContactSelect from "./ContactSelect";
 import { CompanyAddressExpandedView } from "./CompanyAddressExpandedView";
 import { useCompanyAutoFill } from "../hooks/useCompanyAutoFill";
 
