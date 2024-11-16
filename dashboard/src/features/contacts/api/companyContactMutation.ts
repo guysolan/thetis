@@ -17,6 +17,7 @@ const insertUpsertCompanyContact = async (
         id: contact.id,
         name: contact.name,
         phone: contact.phone,
+        email: contact.email,
     }, operation);
 
     const { error: relationError } = await supabase

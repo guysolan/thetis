@@ -25,8 +25,8 @@ const TooltipDialog = ({ icon, tooltipText, children }: TooltipDialogProps) => {
         <TooltipProvider>
             <Dialog>
                 <Tooltip>
-                    <TooltipTrigger>
-                        <DialogTrigger asChild>
+                    <TooltipTrigger type="button">
+                        <DialogTrigger type="button" asChild>
                             <Button
                                 variant="outline"
                                 size="icon"

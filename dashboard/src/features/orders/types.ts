@@ -1,5 +1,14 @@
 import { Database } from "@/database.types";
 import { Company } from "../companies/types";
+
+export const orderTypes = [
+    "sale",
+    "shipment",
+    "build",
+    "purchase",
+    "stocktake",
+] as const;
+
 export interface Address {
     name: string;
     line_1: string;

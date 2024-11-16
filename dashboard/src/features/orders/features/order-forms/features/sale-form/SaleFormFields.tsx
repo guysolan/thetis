@@ -1,4 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
 import CompanyAddressSelect from "../../../../../companies/components/CompanyAddressSelect";
 import PriceItems from "../../../../order-forms/components/PriceItems";
 import { useSaleForm } from "./useSaleForm";
@@ -6,23 +12,31 @@ import StockItems from "../../components/StockItems";
 import AddressSelect from "../../../../../stockpiles/components/AddressSelect";
 import LockCard from "../../../../components/LockCard";
 import { StockValidationAlert } from "../../components/StockValidationAlert";
+import DatePicker from "../../../../../../components/DatePicker";
+import Input from "../../../../../../components/Input";
 
 const SaleFormFields = () => {
     useSaleForm();
 
     return (
         <>
+            <DatePicker name="order_date" label="Order Date" />
+            <Input name="carriage" label="Shipping Cost" type="number" />
             <Card>
                 <CardHeader>
-                    <CardTitle>From</CardTitle>
+                    <CardTitle>Seller</CardTitle>
+                    <CardDescription>Probably your company</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <CompanyAddressSelect direction="from" />
+                    <CompanyAddressSelect
+                        hideShipping={true}
+                        direction="from"
+                    />
                 </CardContent>
             </Card>
             <Card>
                 <CardHeader>
-                    <CardTitle>To</CardTitle>
+                    <CardTitle>Buyer</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <CompanyAddressSelect direction="to" />

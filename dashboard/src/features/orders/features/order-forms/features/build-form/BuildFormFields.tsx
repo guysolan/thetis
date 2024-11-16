@@ -6,6 +6,7 @@ import LockCard from "../../../../components/LockCard";
 import { StockValidationAlert } from "../../components/StockValidationAlert";
 import { useFormContext } from "react-hook-form";
 import { useBuildForm } from "./useBuildForm";
+import DatePicker from "../../../../../../components/DatePicker";
 
 const BuildFormFields = () => {
     const { watch } = useFormContext();
@@ -16,7 +17,13 @@ const BuildFormFields = () => {
 
     return (
         <>
-            <CompanyAddressSelect direction="from" />
+            <DatePicker name="order_date" label="Order Date" />
+            <CompanyAddressSelect
+                title="Buyer"
+                defaultVisibility={{ shipping: false }}
+                direction="to"
+            />
+            <CompanyAddressSelect title="Maker" direction="from" />
 
             <StockValidationAlert
                 itemsFieldName="consumed_items"

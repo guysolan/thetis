@@ -6,25 +6,31 @@ import { Form } from "@/components/ui/form";
 
 import dayjs from "dayjs";
 import DatePicker from "@/components/DatePicker";
-import { editOrderSchema } from "../features/order-forms/schema";
+
 import { OrderView } from "../types";
 import Select from "@/components/Select";
-import { useUpdateOrder } from '../api/updateOrder';
+import { useUpdateOrder } from "../api/updateOrder";
+import { orderTypes } from "../types";
+
+const editOrderSchema = z.object({
+	order_type: z.enum(orderTypes),
+	order_date: z.coerce.date(),
+});
 
 const EditOrderForm = ({ order }: { order: OrderView }) => {
 	const form = useForm<z.infer<typeof editOrderSchema>>({
 		resolver: zodResolver(editOrderSchema),
 		defaultValues: {
 			order_date: dayjs().toDate(),
-			order_type: order.order_type ,
+			order_type: order.order_type,
 		},
 	});
 
-	const {mutate:updateOrder} = useUpdateOrder();
+	const { mutate: updateOrder } = useUpdateOrder();
 
 	const handleSubmit = async (formData: z.infer<typeof editOrderSchema>) => {
 		console.log(formData);
-		await updateOrder({...formData, id: order.order_id});
+		await updateOrder({ ...formData, id: order.order_id });
 	};
 
 	return (

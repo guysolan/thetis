@@ -16,10 +16,25 @@ export const useBuildForm = () => {
     useEffect(() => {
         if (!producedItems || !items || !addressItems) return;
 
-        // If no address is selected, treat all items as purchase items
+        // If no address is selected, split items between services and consumed
         if (!selectedAddress) {
-            setValue("consumed_items", []);
-            setValue("order_items", producedItems);
+            const { serviceItems, nonServiceItems } = producedItems.reduce(
+                (acc, item) => {
+                    const product = items.find((p) =>
+                        String(p.item_id) === String(item.item_id)
+                    );
+                    if (product?.item_type === "service") {
+                        acc.serviceItems.push(item);
+                    } else {
+                        acc.nonServiceItems.push(item);
+                    }
+                    return acc;
+                },
+                { serviceItems: [], nonServiceItems: [] },
+            );
+
+            setValue("consumed_items", nonServiceItems);
+            setValue("order_items", serviceItems);
             return;
         }
 
@@ -35,11 +50,34 @@ export const useBuildForm = () => {
             addressStock,
         });
 
-        console.log(purchaseItems);
+        // Split purchaseItems between services and consumed
+        const { serviceItems, nonServiceItems } = purchaseItems.reduce(
+            (acc, item) => {
+                const product = items.find((p) =>
+                    String(p.item_id) === String(item.item_id)
+                );
+                if (product?.item_type === "service") {
+                    acc.serviceItems.push(item);
+                } else {
+                    // Convert purchase item to consumed item format
+                    acc.nonServiceItems.push({
+                        item_id: item.item_id,
+                        item_name: product?.item_name,
+                        item_type: product?.item_type || "part",
+                        quantity_change: -item.quantity_change, // Negative because it's consumed
+                    });
+                }
+                return acc;
+            },
+            { serviceItems: [], nonServiceItems: [] },
+        );
+
+        // Combine all consumed items
+        const allConsumedItems = [...consumedItems, ...nonServiceItems];
 
         // Update form with processed items
-        setValue("consumed_items", consumedItems);
-        setValue("order_items", purchaseItems);
+        setValue("consumed_items", allConsumedItems);
+        setValue("order_items", serviceItems);
     }, [producedItems, items, addressItems, selectedAddress, setValue]);
 };
 

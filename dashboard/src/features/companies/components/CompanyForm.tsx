@@ -48,7 +48,12 @@ export default function CompanyForm({ company }: Props) {
                 <Input label="Company Name" name="name" />
                 <Input label="VAT Number" name="tax_number" />
                 <Input label="Company Number" name="company_number" />
-                <Button type="submit">Save Company</Button>
+                <Button
+                    type="button"
+                    onClick={() => form.handleSubmit(onSubmit)()}
+                >
+                    Save Company
+                </Button>
             </form>
         </Form>
     );

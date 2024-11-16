@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import Sheet from "@/components/Sheet";
 import { useSelectOrders } from "@/features/orders/features/order-history/api/selectOrders";
@@ -14,6 +14,12 @@ const OrdersPage = () => {
   return (
     <>
       <PageTitle title="Orders">
+        {
+          /* <Button asChild>
+          <Link to="/stock/orders/new">Create New Order</Link>
+        </Button> */
+        }
+
         <Sheet
           trigger={<Button>Create New Order</Button>}
           title="Create Order"
@@ -46,6 +52,6 @@ const OrdersPage = () => {
   );
 };
 
-export const Route = createFileRoute("/_apps/stock/orders")({
+export const Route = createFileRoute("/_apps/stock/orders/")({
   component: OrdersPage,
 });

@@ -58,6 +58,7 @@ export const ItemForm = ({ item, itemType }: Props) => {
 	return (
 		<Form {...form}>
 			<form
+				id="item-form"
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="space-y-4 mt-4 p-1"
 			>
@@ -118,7 +119,12 @@ export const ItemForm = ({ item, itemType }: Props) => {
 					</div>
 				)}
 
-				<Button type="submit">Save Changes</Button>
+				<Button
+					form="item-form"
+					type="submit"
+				>
+					Save Changes
+				</Button>
 			</form>
 		</Form>
 	);

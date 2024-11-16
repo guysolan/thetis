@@ -39,6 +39,7 @@ export function BaseOrderForm<T extends z.ZodType>({
     return (
         <Form {...form}>
             <form
+                id="order-form"
                 onSubmit={form.handleSubmit(handleSubmit)}
                 className="flex flex-col space-y-4 px-1 pt-2 pr-4"
             >

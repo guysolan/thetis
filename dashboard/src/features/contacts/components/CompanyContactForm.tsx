@@ -9,7 +9,7 @@ import { Contact } from "../types";
 import CompanySelect from "../../companies/components/CompanySelect";
 
 const contactFormSchema = z.object({
-    id: z.coerce.number(),
+    id: z.coerce.number().optional(),
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email").optional().nullable(),
     phone: z.string().optional().nullable(),
@@ -19,7 +19,7 @@ const contactFormSchema = z.object({
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
 interface Props {
-    contact: Contact | null;
+    contact: Contact["Row"] | null;
     operation: "insert" | "upsert";
     companyId?: number;
 }
@@ -36,6 +36,7 @@ export default function CompanyContactForm(
             name: contact?.name || "",
             email: contact?.email || "",
             phone: contact?.phone || "",
+            company_id: companyId || undefined,
         },
     });
 
@@ -53,7 +54,12 @@ export default function CompanyContactForm(
                 <Input label="Name" name="name" />
                 <Input label="Email" name="email" type="email" />
                 <Input label="Phone" name="phone" type="tel" />
-                <Button type="submit">Save Contact</Button>
+                <Button
+                    type="button"
+                    onClick={() => form.handleSubmit(onSubmit)()}
+                >
+                    Save Contact
+                </Button>
             </form>
         </Form>
     );

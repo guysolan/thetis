@@ -12,6 +12,8 @@ const OrdersPage = () => {
       return <BuildOrderDocument order={order} />;
     case ("sale"):
       return <SaleDocument order={order} />;
+    case ("purchase"):
+      return <SaleDocument order={order} />;
     case ("shipment"):
       return <CommercialInvoice order={order} />;
   }

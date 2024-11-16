@@ -1,16 +1,16 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DayPickerProvider } from "react-day-picker";
 import PurchaseForm from "../features/order-forms/features/purchase-form/PurchaseForm";
 import SaleForm from "../features/order-forms/features/sale-form/SaleForm";
 import BuildForm from "../features/order-forms/features/build-form/BuildForm";
-import { Banknote, Hammer, ShoppingCart, Truck } from "lucide-react";
+import { Banknote, Hammer, Info, ShoppingCart, Truck } from "lucide-react";
 import ShipmentForm from "../features/order-forms/features/shipment-form/ShipmentForm";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export const OrderForm: React.FC = () => {
 	return (
 		<Tabs defaultValue="build">
 			<div className="overflow-x-scroll">
-				<TabsList className="">
+				<TabsList className="my-2">
 					<TabsTrigger
 						className="flex flex-row gap-2"
 						value="build"
@@ -38,22 +38,47 @@ export const OrderForm: React.FC = () => {
 				</TabsList>
 			</div>
 			<TabsContent value="purchase">
-				<p>Purchase forms are for buying stock from a supplier.</p>
+				<Alert className="mb-4">
+					<Info size={20} />
+					<AlertTitle>Purchase Order</AlertTitle>
+					<AlertDescription>
+						Purchase forms are for buying stock from a supplier.
+					</AlertDescription>
+				</Alert>
 				<PurchaseForm />
 			</TabsContent>
 			<TabsContent value="sale">
-				<p>Sale forms are for selling stock to a customer.</p>
+				<Alert className="mb-4">
+					<Info size={20} />
+
+					<AlertTitle>Sale Order</AlertTitle>
+					<AlertDescription>
+						Sale forms are for selling stock to a customer.
+					</AlertDescription>
+				</Alert>
 				<SaleForm />
 			</TabsContent>
 			<TabsContent value="build">
-				<p>Build forms are for creating stock from parts materials.</p>
+				<Alert className="mb-4">
+					<Info size={20} />
+					<AlertTitle>Build Order</AlertTitle>
+					<AlertDescription>
+						Pay for products to be build using parts you already
+						have purchased.
+					</AlertDescription>
+				</Alert>
 				<BuildForm />
 			</TabsContent>
 			<TabsContent value="shipment">
-				<p>
-					Shipment forms are form moving packages of stock between
-					addresses where you keep stock.
-				</p>
+				<Alert className="mb-4">
+					<Info size={20} />
+
+					<AlertTitle>Shipment Order</AlertTitle>
+					<AlertDescription>
+						Shipment forms are for moving packages of stock between
+						addresses where you keep stock.
+					</AlertDescription>
+				</Alert>
 				<ShipmentForm />
 			</TabsContent>
 		</Tabs>

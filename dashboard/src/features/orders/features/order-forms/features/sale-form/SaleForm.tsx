@@ -2,7 +2,6 @@ import { saleFormSchema } from "../../schema";
 import { BaseOrderForm } from "../../components/BaseOrderForm";
 import { useCreateOrder } from "../../../../api/createOrder";
 import SaleFormFields from "./SaleFormFields";
-import DatePicker from "@/components/DatePicker";
 import dayjs from "dayjs";
 
 const SaleForm = () => {
@@ -56,7 +55,6 @@ const SaleForm = () => {
             defaultValues={defaultValues}
             onSubmit={handleSubmit}
         >
-            <DatePicker name="order_date" label="Order Date" />
             <SaleFormFields />
         </BaseOrderForm>
     );

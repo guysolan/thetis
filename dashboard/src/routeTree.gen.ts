@@ -19,12 +19,12 @@ import { Route as AppsFinancesImport } from './routes/_apps/finances'
 import { Route as AppsStockIndexImport } from './routes/_apps/stock/index'
 import { Route as DocumentsOrdersOrderIdImport } from './routes/documents/orders.$orderId'
 import { Route as AppsStockSettingsImport } from './routes/_apps/stock/settings'
-import { Route as AppsStockOrdersImport } from './routes/_apps/stock/orders'
 import { Route as AppsStockItemsImport } from './routes/_apps/stock/items'
-import { Route as AppsStockContactsImport } from './routes/_apps/stock/contacts'
-import { Route as AppsStockCompaniesImport } from './ro./routes/_apps/stock/contacts
-import { Route as AppsStockAddressesImport } from './routes/_apps/stock/addresses'
+import { Route as AppsStockInventoryImport } from './routes/_apps/stock/inventory'
+import { Route as AppsStockDirectoryImport } from './routes/_apps/stock/directory'
+import { Route as AppsStockOrdersIndexImport } from './routes/_apps/stock/orders.index'
 import { Route as AppsFinancesAmazonIndexImport } from './routes/_apps/finances/amazon/index'
+import { Route as AppsStockOrdersNewImport } from './routes/_apps/stock/orders.new'
 import { Route as AppsFinancesAccountsInstructionsImport } from './routes/_apps/finances/accounts/instructions'
 import { Route as AppsFinancesAmazonSettlementsIndexImport } from './routes/_apps/finances/amazon/settlements/index'
 import { Route as AppsFinancesAmazonYearMonthImport } from './routes/_apps/finances/amazon/$year.$month'
@@ -75,34 +75,34 @@ const AppsStockSettingsRoute = AppsStockSettingsImport.update({
   getParentRoute: () => AppsStockRoute,
 } as any)
 
-const AppsStockOrdersRoute = AppsStockOrdersImport.update({
-  path: '/orders',
-  getParentRoute: () => AppsStockRoute,
-} as any)
-
 const AppsStockItemsRoute = AppsStockItemsImport.update({
   path: '/items',
   getParentRoute: () => AppsStockRoute,
 } as any)
 
-const AppsStockContactsRoute = AppsStockContactsImport.update({
-  path: '/contacts',
+const AppsStockInventoryRoute = AppsStockInventoryImport.update({
+  path: '/inventory',
   getParentRoute: () => AppsStockRoute,
 } as any)
 
-const AppsStockCompaniesRoute = AppsStockCompaniesImport.update({
-  path: '/companies',
+const AppsStockDirectoryRoute = AppsStockDirectoryImport.update({
+  path: '/directory',
   getParentRoute: () => AppsStockRoute,
 } as any)
 
-const AppsStockAddressesRoute = AppsStockAddressesImport.update({
-  path: '/addresses',
+const AppsStockOrdersIndexRoute = AppsStockOrdersIndexImport.update({
+  path: '/orders/',
   getParentRoute: () => AppsStockRoute,
 } as any)
 
 const AppsFinancesAmazonIndexRoute = AppsFinancesAmazonIndexImport.update({
   path: '/amazon/',
   getParentRoute: () => AppsFinancesRoute,
+} as any)
+
+const AppsStockOrdersNewRoute = AppsStockOrdersNewImport.update({
+  path: '/orders/new',
+  getParentRoute: () => AppsStockRoute,
 } as any)
 
 const AppsFinancesAccountsInstructionsRoute =
@@ -186,25 +186,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppsStockImport
       parentRoute: typeof AppsImport
     }
-    '/_apps/stock/addresses': {
-      id: '/_apps/stock/addresses'
-      path: '/addresses'
-      fullPath: '/stock/addresses'
-      preLoaderRoute: typeof AppsStockAddressesImport
+    '/_apps/stock/directory': {
+      id: '/_apps/stock/directory'
+      path: '/directory'
+      fullPath: '/stock/directory'
+      preLoaderRoute: typeof AppsStockDirectoryImport
       parentRoute: typeof AppsStockImport
     }
-    '/_apps/stock/companies': {
-      id: '/_apps/stock/companies'
-      path: '/companies'
-      fullPath: '/stock/companies'
-      preLoaderRoute: typeof AppsStockCompaniesImport
-      parentRoute: typeof AppsStockImport
-    }
-    '/_apps/stock/contacts': {
-      id: '/_apps/stock/contacts'
-      path: '/contacts'
-      fullPath: '/stock/contacts'
-      preLoaderRoute: typeof AppsStockContactsImport
+    '/_apps/stock/inventory': {
+      id: '/_apps/stock/inventory'
+      path: '/inventory'
+      fullPath: '/stock/inventory'
+      preLoaderRoute: typeof AppsStockInventoryImport
       parentRoute: typeof AppsStockImport
     }
     '/_apps/stock/items': {
@@ -212,13 +205,6 @@ declare module '@tanstack/react-router' {
       path: '/items'
       fullPath: '/stock/items'
       preLoaderRoute: typeof AppsStockItemsImport
-      parentRoute: typeof AppsStockImport
-    }
-    '/_apps/stock/orders': {
-      id: '/_apps/stock/orders'
-      path: '/orders'
-      fullPath: '/stock/orders'
-      preLoaderRoute: typeof AppsStockOrdersImport
       parentRoute: typeof AppsStockImport
     }
     '/_apps/stock/settings': {
@@ -249,12 +235,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppsFinancesAccountsInstructionsImport
       parentRoute: typeof AppsFinancesImport
     }
+    '/_apps/stock/orders/new': {
+      id: '/_apps/stock/orders/new'
+      path: '/orders/new'
+      fullPath: '/stock/orders/new'
+      preLoaderRoute: typeof AppsStockOrdersNewImport
+      parentRoute: typeof AppsStockImport
+    }
     '/_apps/finances/amazon/': {
       id: '/_apps/finances/amazon/'
       path: '/amazon'
       fullPath: '/finances/amazon'
       preLoaderRoute: typeof AppsFinancesAmazonIndexImport
       parentRoute: typeof AppsFinancesImport
+    }
+    '/_apps/stock/orders/': {
+      id: '/_apps/stock/orders/'
+      path: '/orders'
+      fullPath: '/stock/orders'
+      preLoaderRoute: typeof AppsStockOrdersIndexImport
+      parentRoute: typeof AppsStockImport
     }
     '/_apps/finances/amazon/$year/$month': {
       id: '/_apps/finances/amazon/$year/$month'
@@ -335,23 +335,23 @@ const AppsFinancesRouteWithChildren = AppsFinancesRoute._addFileChildren(
 )
 
 interface AppsStockRouteChildren {
-  AppsStockAddressesRoute: typeof AppsStockAddressesRoute
-  AppsStockCompaniesRoute: typeof AppsStockCompaniesRoute
-  AppsStockContactsRoute: typeof AppsStockContactsRoute
+  AppsStockDirectoryRoute: typeof AppsStockDirectoryRoute
+  AppsStockInventoryRoute: typeof AppsStockInventoryRoute
   AppsStockItemsRoute: typeof AppsStockItemsRoute
-  AppsStockOrdersRoute: typeof AppsStockOrdersRoute
   AppsStockSettingsRoute: typeof AppsStockSettingsRoute
   AppsStockIndexRoute: typeof AppsStockIndexRoute
+  AppsStockOrdersNewRoute: typeof AppsStockOrdersNewRoute
+  AppsStockOrdersIndexRoute: typeof AppsStockOrdersIndexRoute
 }
 
 const AppsStockRouteChildren: AppsStockRouteChildren = {
-  AppsStockAddressesRoute: AppsStockAddressesRoute,
-  AppsStockCompaniesRoute: AppsStockCompaniesRoute,
-  AppsStockContactsRoute: AppsStockContactsRoute,
+  AppsStockDirectoryRoute: AppsStockDirectoryRoute,
+  AppsStockInventoryRoute: AppsStockInventoryRoute,
   AppsStockItemsRoute: AppsStockItemsRoute,
-  AppsStockOrdersRoute: AppsStockOrdersRoute,
   AppsStockSettingsRoute: AppsStockSettingsRoute,
   AppsStockIndexRoute: AppsStockIndexRoute,
+  AppsStockOrdersNewRoute: AppsStockOrdersNewRoute,
+  AppsStockOrdersIndexRoute: AppsStockOrdersIndexRoute,
 }
 
 const AppsStockRouteWithChildren = AppsStockRoute._addFileChildren(
@@ -388,16 +388,16 @@ export interface FileRoutesByFullPath {
   '/documents': typeof DocumentsRouteWithChildren
   '/finances': typeof AppsFinancesRouteWithChildren
   '/stock': typeof AppsStockRouteWithChildren
-  '/stock/addresses': typeof AppsStockAddressesRoute
-  '/stock/companies': typeof AppsStockCompaniesRoute
-  '/stock/contacts': typeof AppsStockContactsRoute
+  '/stock/directory': typeof AppsStockDirectoryRoute
+  '/stock/inventory': typeof AppsStockInventoryRoute
   '/stock/items': typeof AppsStockItemsRoute
-  '/stock/orders': typeof AppsStockOrdersRoute
   '/stock/settings': typeof AppsStockSettingsRoute
   '/documents/orders/$orderId': typeof DocumentsOrdersOrderIdRoute
   '/stock/': typeof AppsStockIndexRoute
   '/finances/accounts/instructions': typeof AppsFinancesAccountsInstructionsRoute
+  '/stock/orders/new': typeof AppsStockOrdersNewRoute
   '/finances/amazon': typeof AppsFinancesAmazonIndexRoute
+  '/stock/orders': typeof AppsStockOrdersIndexRoute
   '/finances/amazon/$year/$month': typeof AppsFinancesAmazonYearMonthRoute
   '/finances/amazon/settlements': typeof AppsFinancesAmazonSettlementsIndexRoute
   '/finances/amazon/settlements/$region/report': typeof AppsFinancesAmazonSettlementsRegionReportRoute
@@ -411,16 +411,16 @@ export interface FileRoutesByTo {
   '': typeof AppsRouteWithChildren
   '/documents': typeof DocumentsRouteWithChildren
   '/finances': typeof AppsFinancesRouteWithChildren
-  '/stock/addresses': typeof AppsStockAddressesRoute
-  '/stock/companies': typeof AppsStockCompaniesRoute
-  '/stock/contacts': typeof AppsStockContactsRoute
+  '/stock/directory': typeof AppsStockDirectoryRoute
+  '/stock/inventory': typeof AppsStockInventoryRoute
   '/stock/items': typeof AppsStockItemsRoute
-  '/stock/orders': typeof AppsStockOrdersRoute
   '/stock/settings': typeof AppsStockSettingsRoute
   '/documents/orders/$orderId': typeof DocumentsOrdersOrderIdRoute
   '/stock': typeof AppsStockIndexRoute
   '/finances/accounts/instructions': typeof AppsFinancesAccountsInstructionsRoute
+  '/stock/orders/new': typeof AppsStockOrdersNewRoute
   '/finances/amazon': typeof AppsFinancesAmazonIndexRoute
+  '/stock/orders': typeof AppsStockOrdersIndexRoute
   '/finances/amazon/$year/$month': typeof AppsFinancesAmazonYearMonthRoute
   '/finances/amazon/settlements': typeof AppsFinancesAmazonSettlementsIndexRoute
   '/finances/amazon/settlements/$region/report': typeof AppsFinancesAmazonSettlementsRegionReportRoute
@@ -436,16 +436,16 @@ export interface FileRoutesById {
   '/documents': typeof DocumentsRouteWithChildren
   '/_apps/finances': typeof AppsFinancesRouteWithChildren
   '/_apps/stock': typeof AppsStockRouteWithChildren
-  '/_apps/stock/addresses': typeof AppsStockAddressesRoute
-  '/_apps/stock/companies': typeof AppsStockCompaniesRoute
-  '/_apps/stock/contacts': typeof AppsStockContactsRoute
+  '/_apps/stock/directory': typeof AppsStockDirectoryRoute
+  '/_apps/stock/inventory': typeof AppsStockInventoryRoute
   '/_apps/stock/items': typeof AppsStockItemsRoute
-  '/_apps/stock/orders': typeof AppsStockOrdersRoute
   '/_apps/stock/settings': typeof AppsStockSettingsRoute
   '/documents/orders/$orderId': typeof DocumentsOrdersOrderIdRoute
   '/_apps/stock/': typeof AppsStockIndexRoute
   '/_apps/finances/accounts/instructions': typeof AppsFinancesAccountsInstructionsRoute
+  '/_apps/stock/orders/new': typeof AppsStockOrdersNewRoute
   '/_apps/finances/amazon/': typeof AppsFinancesAmazonIndexRoute
+  '/_apps/stock/orders/': typeof AppsStockOrdersIndexRoute
   '/_apps/finances/amazon/$year/$month': typeof AppsFinancesAmazonYearMonthRoute
   '/_apps/finances/amazon/settlements/': typeof AppsFinancesAmazonSettlementsIndexRoute
   '/_apps/finances/amazon/settlements/$region/report': typeof AppsFinancesAmazonSettlementsRegionReportRoute
@@ -462,16 +462,16 @@ export interface FileRouteTypes {
     | '/documents'
     | '/finances'
     | '/stock'
-    | '/stock/addresses'
-    | '/stock/companies'
-    | '/stock/contacts'
+    | '/stock/directory'
+    | '/stock/inventory'
     | '/stock/items'
-    | '/stock/orders'
     | '/stock/settings'
     | '/documents/orders/$orderId'
     | '/stock/'
     | '/finances/accounts/instructions'
+    | '/stock/orders/new'
     | '/finances/amazon'
+    | '/stock/orders'
     | '/finances/amazon/$year/$month'
     | '/finances/amazon/settlements'
     | '/finances/amazon/settlements/$region/report'
@@ -484,16 +484,16 @@ export interface FileRouteTypes {
     | ''
     | '/documents'
     | '/finances'
-    | '/stock/addresses'
-    | '/stock/companies'
-    | '/stock/contacts'
+    | '/stock/directory'
+    | '/stock/inventory'
     | '/stock/items'
-    | '/stock/orders'
     | '/stock/settings'
     | '/documents/orders/$orderId'
     | '/stock'
     | '/finances/accounts/instructions'
+    | '/stock/orders/new'
     | '/finances/amazon'
+    | '/stock/orders'
     | '/finances/amazon/$year/$month'
     | '/finances/amazon/settlements'
     | '/finances/amazon/settlements/$region/report'
@@ -507,16 +507,16 @@ export interface FileRouteTypes {
     | '/documents'
     | '/_apps/finances'
     | '/_apps/stock'
-    | '/_apps/stock/addresses'
-    | '/_apps/stock/companies'
-    | '/_apps/stock/contacts'
+    | '/_apps/stock/directory'
+    | '/_apps/stock/inventory'
     | '/_apps/stock/items'
-    | '/_apps/stock/orders'
     | '/_apps/stock/settings'
     | '/documents/orders/$orderId'
     | '/_apps/stock/'
     | '/_apps/finances/accounts/instructions'
+    | '/_apps/stock/orders/new'
     | '/_apps/finances/amazon/'
+    | '/_apps/stock/orders/'
     | '/_apps/finances/amazon/$year/$month'
     | '/_apps/finances/amazon/settlements/'
     | '/_apps/finances/amazon/settlements/$region/report'
@@ -589,33 +589,25 @@ export const routeTree = rootRoute
       "filePath": "_apps/stock.tsx",
       "parent": "/_apps",
       "children": [
-        "/_apps/stock/addresses",
-        "/_apps/stock/companies",
-        "/_apps/stock/contacts",
+        "/_apps/stock/directory",
+        "/_apps/stock/inventory",
         "/_apps/stock/items",
-        "/_apps/stock/orders",
         "/_apps/stock/settings",
-        "/_apps/stock/"
+        "/_apps/stock/",
+        "/_apps/stock/orders/new",
+        "/_apps/stock/orders/"
       ]
     },
-    "/_apps/stock/addresses": {
-      "filePath": "_apps/stock/addresses.tsx",
+    "/_apps/stock/directory": {
+      "filePath": "_apps/stock/directory.tsx",
       "parent": "/_apps/stock"
     },
-    "/_apps/stock/companies": {
-      "filePath": "_apps/stock/companies.tsx",
-      "parent": "/_apps/stock"
-    },
-    "/_apps/stock/contacts": {
-      "filePath": "_apps/stock/contacts.tsx",
+    "/_apps/stock/inventory": {
+      "filePath": "_apps/stock/inventory.tsx",
       "parent": "/_apps/stock"
     },
     "/_apps/stock/items": {
       "filePath": "_apps/stock/items.tsx",
-      "parent": "/_apps/stock"
-    },
-    "/_apps/stock/orders": {
-      "filePath": "_apps/stock/orders.tsx",
       "parent": "/_apps/stock"
     },
     "/_apps/stock/settings": {
@@ -634,9 +626,17 @@ export const routeTree = rootRoute
       "filePath": "_apps/finances/accounts/instructions.tsx",
       "parent": "/_apps/finances"
     },
+    "/_apps/stock/orders/new": {
+      "filePath": "_apps/stock/orders.new.tsx",
+      "parent": "/_apps/stock"
+    },
     "/_apps/finances/amazon/": {
       "filePath": "_apps/finances/amazon/index.tsx",
       "parent": "/_apps/finances"
+    },
+    "/_apps/stock/orders/": {
+      "filePath": "_apps/stock/orders.index.tsx",
+      "parent": "/_apps/stock"
     },
     "/_apps/finances/amazon/$year/$month": {
       "filePath": "_apps/finances/amazon/$year.$month.tsx",

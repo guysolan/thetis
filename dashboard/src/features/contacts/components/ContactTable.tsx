@@ -10,13 +10,21 @@ import ActionPopover from "@/components/ActionPopover";
 import CompanyContactForm from "./CompanyContactForm";
 import { useDeleteContact } from "../api/deleteContact";
 import { Contact } from "../types";
+import { Badge } from "@/components/ui/badge";
+import { Company } from "../../companies/types";
+
+type ContactCompany = Contact["Row"] & { companies: Company["Row"][] };
 
 interface Props {
-    contacts: Contact[];
+    contacts: ContactCompany[];
 }
 
 const ContactTable = ({ contacts }: Props) => {
     const { mutate: deleteContact } = useDeleteContact();
+
+    if (!contacts.length) {
+        return;
+    }
 
     return (
         <Table>
@@ -25,6 +33,7 @@ const ContactTable = ({ contacts }: Props) => {
                     <TableHead>Name</TableHead>
                     <TableHead>Email</TableHead>
                     <TableHead>Phone</TableHead>
+                    <TableHead>Company(s)</TableHead>
                     <TableHead>Actions</TableHead>
                 </TableRow>
             </TableHeader>
@@ -34,6 +43,11 @@ const ContactTable = ({ contacts }: Props) => {
                         <TableCell>{contact.name}</TableCell>
                         <TableCell>{contact.email}</TableCell>
                         <TableCell>{contact.phone}</TableCell>
+                        <TableCell>
+                            {contact.companies?.map((company) => (
+                                <Badge key={company.id}>{company.name}</Badge>
+                            ))}
+                        </TableCell>
                         <TableCell>
                             <ActionPopover
                                 title="Contact"

@@ -52,11 +52,11 @@ const BuildForm = () => {
             in_order_date: formData.order_date.toISOString(),
             in_order_items: orderItems,
             in_from_company_id: formData.from_company_id,
-            in_to_company_id: null,
             in_from_billing_address_id: formData.from_billing_address_id,
             in_from_shipping_address_id: formData.from_shipping_address_id,
-            in_to_billing_address_id: null,
-            in_to_shipping_address_id: null,
+            in_to_company_id: formData.to_company_id,
+            in_to_billing_address_id: formData.to_billing_address_id,
+            in_to_shipping_address_id: formData.to_shipping_address_id,
         });
     };
 
@@ -67,7 +67,6 @@ const BuildForm = () => {
             defaultValues={defaultValues}
             onSubmit={handleSubmit}
         >
-            <DatePicker name="order_date" label="Order Date" />
             <BuildFormFields />
         </BaseOrderForm>
     );

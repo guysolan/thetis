@@ -4,8 +4,8 @@ import { Address } from "../types";
 
 export const selectAddresses = async () => {
   const { data, error } = await supabase.from("addresses").select(
-    `*`,
-  ).returns<Address["Row"][]>();
+    "*, companies(*)",
+  );
 
   if (error) {
     throw error;

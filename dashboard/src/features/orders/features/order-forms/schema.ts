@@ -35,61 +35,43 @@ const pricedItemSchema = z.object({
 
 export type ItemChange = z.infer<typeof pricedItemSchema>;
 
-// Move schemas to a separate file: schemas.ts
-export const saleFormSchema = z.object({
+// Common base schemas
+const baseAddressSchema = z.object({
     from_company_id: z.string().min(1, "Company is required"),
     from_billing_address_id: z.string().min(1, "Billing address is required"),
     from_shipping_address_id: z.string().min(1, "Shipping address is required"),
     to_company_id: z.string().min(1, "Company is required"),
     to_billing_address_id: z.string().min(1, "Billing address is required"),
     to_shipping_address_id: z.string().min(1, "Shipping address is required"),
-    order_type: z.enum(["sale"]), // Add validation for order_type
-    order_items: z.array(orderItemSchema),
+});
+
+const baseOrderSchema = z.object({
     order_date: z.date(),
+    order_items: z.array(orderItemSchema),
+});
+
+// Refactored form schemas using composition
+export const saleFormSchema = baseAddressSchema.extend({
+    order_type: z.enum(["sale"]),
+    ...baseOrderSchema.shape,
     consumed_items: z.array(pricedItemSchema),
 });
 
-// Edit order Schema
-export const editOrderSchema = z.object({
-    order_type: z.enum(["sale", "shipment", "build", "purchase", "stocktake"]),
-    order_date: z.date(),
-});
-
-// Move schemas to a separate file: schemas.ts
-export const shipmentFormSchema = z.object({
-    from_company_id: z.string().min(1, "Company is required"),
-    from_billing_address_id: z.string().min(1, "Billing address is required"),
-    from_shipping_address_id: z.string().min(1, "Shipping address is required"),
-    to_company_id: z.string().min(1, "Company is required"),
-    to_billing_address_id: z.string().min(1, "Billing address is required"),
-    to_shipping_address_id: z.string().min(1, "Shipping address is required"),
-    order_type: z.enum(["shipment"]), // Add validation for order_type
-    order_items: z.array(orderItemSchema),
-    order_date: z.date(),
+export const shipmentFormSchema = baseAddressSchema.extend({
+    order_type: z.enum(["shipment"]),
+    ...baseOrderSchema.shape,
     from_items: z.array(itemSchema),
     to_items: z.array(itemSchema),
 });
 
-export const purchaseFormSchema = z.object({
-    from_company_id: z.string().min(1, "Company is required"),
-    from_billing_address_id: z.string().min(1, "Billing address is required"),
-    from_shipping_address_id: z.string().min(1, "Shipping address is required"),
-    to_company_id: z.string().min(1, "Company is required"),
-    to_billing_address_id: z.string().min(1, "Billing address is required"),
-    to_shipping_address_id: z.string().min(1, "Shipping address is required"),
+export const purchaseFormSchema = baseAddressSchema.extend({
     order_type: z.enum(["purchase"]),
-    order_items: z.array(orderItemSchema),
-    order_date: z.date(),
+    ...baseOrderSchema.shape,
 });
 
-// Move schemas to a separate file: schemas.ts
-export const buildFormSchema = z.object({
-    from_company_id: z.string().min(1, "Company is required"),
-    from_billing_address_id: z.string().min(1, "Billing address is required"),
-    from_shipping_address_id: z.string().min(1, "Shipping address is required"),
-    order_date: z.date(),
+export const buildFormSchema = baseAddressSchema.extend({
+    ...baseOrderSchema.shape,
     order_type: z.enum(["build"]),
-    order_items: z.array(orderItemSchema),
     produced_items: z.array(pricedItemSchema),
     consumed_items: z.array(pricedItemSchema),
 });

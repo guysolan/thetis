@@ -48,7 +48,7 @@ interface Props {
 export default function AddressForm({ address, operation, companyId }: Props) {
 	const { data: companies = [] } = useSelectCompanies();
 	const { mutate: upsertAddress } = useAddressMutation(operation);
-	const { mutate: upsertCompanyAddress } = useCompanyAddressMutation(
+	const { mutate: companyAddressMutation } = useCompanyAddressMutation(
 		operation,
 	);
 
@@ -71,20 +71,11 @@ export default function AddressForm({ address, operation, companyId }: Props) {
 
 	const onSubmit = (data: addressFormT) => {
 		if (data.company_id) {
-			upsertCompanyAddress({
-				address: {
-					id: data.id,
-					name: data.name,
-					line_1: data.line_1,
-					line_2: data.line_2,
-					city: data.city,
-					region: data.region,
-					code: data.code,
-					country: data.country,
-					is_active: data.is_active,
-					holds_stock: data.holds_stock,
-				},
-				companyId: parseInt(data.company_id),
+			const companyId = parseInt(data.company_id);
+			data.company_id = undefined;
+			companyAddressMutation({
+				address: data,
+				companyId: companyId,
 			});
 		} else {
 			upsertAddress(data);
@@ -94,6 +85,7 @@ export default function AddressForm({ address, operation, companyId }: Props) {
 	return (
 		<Form {...form}>
 			<form
+				id="address-form"
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="space-y-4 mt-4 p-1"
 			>
@@ -131,7 +123,13 @@ export default function AddressForm({ address, operation, companyId }: Props) {
 						Can the address hold stock?
 					</label>
 				</div>
-				<Button type="submit">Save Changes</Button>
+				<Button
+					form="address-form"
+					type="button"
+					onClick={() => form.handleSubmit(onSubmit)()}
+				>
+					Save Changes
+				</Button>
 			</form>
 		</Form>
 	);

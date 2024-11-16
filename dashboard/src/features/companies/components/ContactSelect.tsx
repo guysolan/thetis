@@ -1,53 +1,53 @@
 import Select from "@/components/Select";
 import { Pencil, Plus } from "lucide-react";
-import AddressForm from "../../stockpiles/components/AddressForm";
+import CompanyContactForm from "../../contacts/components/CompanyContactForm";
 import TooltipDialog from "../../../components/TooltipDialog";
 
-interface AddressSelectProps {
+interface ContactSelectProps {
     label: string;
-    type: "shipping" | "billing";
-    getFieldName: (type: "company" | "shipping" | "billing") => string;
-    getAddressOptions: () => { label: string; value: string }[];
-    getSelectedAddress: (type: "shipping" | "billing") => any;
+    type: "primary" | "secondary";
+    getFieldName: (type: "company" | "primary" | "secondary") => string;
+    getContactOptions: () => { label: string; value: string }[];
+    getSelectedContact: (type: "primary" | "secondary") => any;
     form: any;
 }
 
-const AddressSelect = ({
+const ContactSelect = ({
     label,
     type,
     getFieldName,
-    getAddressOptions,
-    getSelectedAddress,
+    getContactOptions,
+    getSelectedContact,
     form,
-}: AddressSelectProps) => {
+}: ContactSelectProps) => {
     return (
         <div className="flex flex-row items-end gap-2 w-full">
             <Select
                 label={label}
                 name={getFieldName(type)}
-                options={getAddressOptions()}
+                options={getContactOptions()}
             />
             <div className="flex gap-2">
-                {getSelectedAddress(type) && (
+                {getSelectedContact(type) && (
                     <TooltipDialog
                         icon={<Pencil size={20} />}
-                        tooltipText="Edit Address"
+                        tooltipText="Edit Contact"
                     >
-                        <AddressForm
+                        <CompanyContactForm
                             operation="upsert"
                             companyId={form.watch(getFieldName("company"))}
-                            address={getSelectedAddress(type)}
+                            contact={getSelectedContact(type)}
                         />
                     </TooltipDialog>
                 )}
                 <TooltipDialog
                     icon={<Plus size={20} />}
-                    tooltipText="Add Address"
+                    tooltipText="Add Contact"
                 >
-                    <AddressForm
+                    <CompanyContactForm
                         operation="insert"
                         companyId={form.watch(getFieldName("company"))}
-                        address={null}
+                        contact={null}
                     />
                 </TooltipDialog>
             </div>
@@ -55,4 +55,4 @@ const AddressSelect = ({
     );
 };
 
-export default AddressSelect;
+export default ContactSelect;

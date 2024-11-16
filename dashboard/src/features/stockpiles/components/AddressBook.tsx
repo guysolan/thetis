@@ -1,9 +1,16 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
 import AddressForm from "@/features/stockpiles/components/AddressForm";
 import useDeleteAddress from "@/features/stockpiles/api/deleteAddress";
 import { useSelectAddresses } from "../../../features/stockpiles/api/selectAddresses";
 import ActionPopover from "@/components/ActionPopover";
+import { Badge } from "../../../components/ui/badge";
 
 const AddressBook = () => {
     const { data: addresses } = useSelectAddresses();
@@ -43,6 +50,11 @@ const AddressBook = () => {
                             {address.country}
                         </div>
                     </CardContent>
+                    <CardFooter>
+                        {address.companies.map((company) => (
+                            <Badge key={company.id}>{company.name}</Badge>
+                        ))}
+                    </CardFooter>
                 </Card>
             ))}
         </section>

@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { selectOrdersQueryKey } from "../features/order-history/api/selectOrders";
 import { selectStockpilesQueryKey } from "../../stockpiles/api/selectStockpiles";
 import { ItemType } from "../../items/types";
+import { closeSheet } from "@/utils/closeSheet";
 
 export type OrderItemChange = {
 	item_id: string;
@@ -47,10 +48,7 @@ export const useCreateOrder = () => {
 				"noopener, noreferrer",
 			);
 			// Get the close button ref from Sheet and click it
-			const closeButton = document.getElementById("close-sheet");
-			if (closeButton instanceof HTMLButtonElement) {
-				closeButton.click();
-			}
+			closeSheet();
 		},
 		onError: () => {
 			toast.error("Error creating order");
