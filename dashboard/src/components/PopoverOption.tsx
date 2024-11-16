@@ -6,7 +6,9 @@ type PopoverOptionProps = {
     children: React.ReactNode;
     variant?: "default" | "destructive";
 };
-const PopoverOption = ({ children, variant='default' }: PopoverOptionProps) => {
+const PopoverOption = (
+    { children, variant = "default" }: PopoverOptionProps,
+) => {
     return (
         <Button
             variant="ghost"

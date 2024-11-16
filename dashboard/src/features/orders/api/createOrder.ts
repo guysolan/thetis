@@ -39,8 +39,18 @@ export const useCreateOrder = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: createOrder,
-		onSuccess: () => {
+		onSuccess: (data) => {
 			toast.success("Order created successfully");
+			window.open(
+				`/documents/orders/${data[0].order_id}`,
+				"_blank",
+				"noopener, noreferrer",
+			);
+			// Get the close button ref from Sheet and click it
+			const closeButton = document.getElementById("close-sheet");
+			if (closeButton instanceof HTMLButtonElement) {
+				closeButton.click();
+			}
 		},
 		onError: () => {
 			toast.error("Error creating order");

@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Form } from "@/components/ui/form";
 import dayjs from "dayjs";
 import OrderFormButton from "./OrderFormButton";
+import React from "react";
 
 interface BaseOrderFormProps<T extends z.ZodType> {
     schema: T;
@@ -27,14 +28,22 @@ export function BaseOrderForm<T extends z.ZodType>({
         },
     });
 
+    const handleSubmit = async (data: z.infer<T>) => {
+        try {
+            await onSubmit(data);
+        } catch (error) {
+            console.error("Form submission failed:", error);
+        }
+    };
+
     return (
         <Form {...form}>
             <form
-                onSubmit={form.handleSubmit(onSubmit)}
+                onSubmit={form.handleSubmit(handleSubmit)}
                 className="flex flex-col space-y-4 px-1 pt-2 pr-4"
             >
                 {children}
-                <OrderFormButton />
+                <OrderFormButton onClick={form.handleSubmit(handleSubmit)} />
             </form>
         </Form>
     );

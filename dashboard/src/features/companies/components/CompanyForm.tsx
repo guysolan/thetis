@@ -5,6 +5,7 @@ import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import Input from "@/components/Input";
 import { useCompanyMutation } from "../api/companyMutation";
+import { Company } from "../types";
 
 const companyFormSchema = z.object({
     id: z.number().optional(),
@@ -16,7 +17,7 @@ const companyFormSchema = z.object({
 type CompanyFormData = z.infer<typeof companyFormSchema>;
 
 interface Props {
-    company: any | null;
+    company?: Company["Row"];
 }
 
 export default function CompanyForm({ company }: Props) {

@@ -1,17 +1,15 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { useStockValidation } from "../hooks/useStockValidation";
-import { useFormContext } from "react-hook-form";
 
-const OrderFormButton = () => {
-    const { formState } = useFormContext();
+const OrderFormButton = ({ onClick }: { onClick: () => void }) => {
     const { hasNegativeStock } = useStockValidation();
 
     return (
         <Button
-            onClick={() => console.log(formState.errors)}
             disabled={hasNegativeStock}
-            type="submit"
+            type="button"
+            onClick={onClick}
         >
             Create Order
         </Button>

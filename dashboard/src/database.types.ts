@@ -121,6 +121,36 @@ export type Database = {
         }
         Relationships: []
       }
+      companies_contacts: {
+        Row: {
+          company_id: number
+          contact_id: number
+        }
+        Insert: {
+          company_id: number
+          contact_id: number
+        }
+        Update: {
+          company_id?: number
+          contact_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "companies_contacts_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "companies_contacts_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       company_addresses: {
         Row: {
           address_id: number
@@ -168,57 +198,6 @@ export type Database = {
             columns: ["company_id"]
             isOneToOne: false
             referencedRelation: "companies"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      contact_addresses: {
-        Row: {
-          address_id: number
-          contact_id: number
-        }
-        Insert: {
-          address_id: number
-          contact_id: number
-        }
-        Update: {
-          address_id?: number
-          contact_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "contact_addresses_address_id_fkey"
-            columns: ["address_id"]
-            isOneToOne: false
-            referencedRelation: "address_inventory_value"
-            referencedColumns: ["address_id"]
-          },
-          {
-            foreignKeyName: "contact_addresses_address_id_fkey"
-            columns: ["address_id"]
-            isOneToOne: false
-            referencedRelation: "addresses"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "contact_addresses_address_id_fkey"
-            columns: ["address_id"]
-            isOneToOne: false
-            referencedRelation: "items_by_address"
-            referencedColumns: ["address_id"]
-          },
-          {
-            foreignKeyName: "contact_addresses_address_id_fkey"
-            columns: ["address_id"]
-            isOneToOne: false
-            referencedRelation: "stockpiles"
-            referencedColumns: ["stockpile_id"]
-          },
-          {
-            foreignKeyName: "contact_addresses_contact_id_fkey"
-            columns: ["contact_id"]
-            isOneToOne: false
-            referencedRelation: "contacts"
             referencedColumns: ["id"]
           },
         ]

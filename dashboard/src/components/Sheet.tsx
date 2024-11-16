@@ -1,6 +1,7 @@
 import React from "react";
 import {
     Sheet as SheetWrap,
+    SheetClose,
     SheetContent,
     SheetDescription,
     SheetFooter,
@@ -20,6 +21,8 @@ type SheetProps = {
 const Sheet = (
     { trigger, children, title, description, footer }: SheetProps,
 ) => {
+    const closeRef = React.useRef<HTMLButtonElement>(null);
+
     return (
         <SheetWrap>
             <SheetTrigger asChild>
@@ -40,6 +43,11 @@ const Sheet = (
                 <SheetFooter>
                     {footer}
                 </SheetFooter>
+                <SheetClose
+                    id="close-sheet"
+                    ref={closeRef}
+                    className="hidden"
+                />
             </SheetContent>
         </SheetWrap>
     );
