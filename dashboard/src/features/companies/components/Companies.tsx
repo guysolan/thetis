@@ -12,41 +12,171 @@ import CompanyForm from "./CompanyForm";
 import { useDeleteCompany } from "../api/deleteCompany";
 import AddressForm from "../../stockpiles/components/AddressForm";
 import ActionPopover from "@/components/ActionPopover";
-import AddressTable from "../../stockpiles/components/AddressTable";
-import ContactTable from "../../contacts/components/ContactTable";
 import CompanyContactForm from "../../contacts/components/CompanyContactForm";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import CompanyAddressBook from "../../stockpiles/components/CompanyAddressBook";
-import { Separator } from "@/components/ui/separator";
+import {
+    useSetDefaultBilling,
+    useSetDefaultContact,
+    useSetDefaultShipping,
+} from "../api/defaultMutations";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+
 const Companies = () => {
     const { data: companies = [] } = useSelectCompanies();
     const { mutate: deleteCompany } = useDeleteCompany();
+    const { mutate: setDefaultShipping } = useSetDefaultShipping();
+    const { mutate: setDefaultBilling } = useSetDefaultBilling();
+    const { mutate: setDefaultContact } = useSetDefaultContact();
+
+    const handleSetDefaultShipping = (companyId: number, addressId: number) => {
+        setDefaultShipping({ companyId, addressId });
+    };
+
+    const handleSetDefaultBilling = (companyId: number, addressId: number) => {
+        setDefaultBilling({ companyId, addressId });
+    };
+
+    const handleSetDefaultContact = (companyId: number, contactId: number) => {
+        setDefaultContact({ companyId, contactId });
+    };
+
+    // Transform the nested data for CompanyAddressBook
+    const getTransformedAddresses = (company: any) => {
+        return company.addresses.map((addr: any) => ({
+            ...addr.address,
+            is_default_shipping: addr.is_default_shipping,
+            is_default_billing: addr.is_default_billing,
+        }));
+    };
+
+    // Transform the nested data for ContactTable
+    const getTransformedContacts = (company: any) => {
+        return company.contacts.map((cont: any) => ({
+            ...cont.contact,
+            is_default: cont.is_default,
+        }));
+    };
 
     return (
         <section className="flex flex-col gap-4">
             {companies.map((company) => (
                 <Card key={company.id}>
-                    <CardHeader className="flex flex-row justify-between items-start">
-                        <div>
-                            <CardTitle>{company.name}</CardTitle>
-                            <div className="pt-2 text-sm">
-                                <p>Company Number: {company.company_number}</p>
-                                <p>VAT Number: {company.vat_number}</p>
+                    <CardHeader className="flex flex-col gap-4">
+                        <div className="flex flex-row justify-between items-start">
+                            <div>
+                                <CardTitle>{company.name}</CardTitle>
+                                <div className="pt-2 text-sm">
+                                    <p>
+                                        Company Number: {company.company_number}
+                                    </p>
+                                    <p>VAT Number: {company.vat_number}</p>
+                                </div>
                             </div>
+                            <ActionPopover
+                                title={company.name}
+                                editForm={<CompanyForm company={company} />}
+                                deleteFunction={() => deleteCompany(company.id)}
+                            />
                         </div>
-                        <ActionPopover
-                            title={company.name}
-                            editForm={<CompanyForm company={company} />}
-                            deleteFunction={() => deleteCompany(company.id)}
-                        />
                     </CardHeader>
-                    <CardContent className="flex flex-col gap-6">
-                        <CompanyAddressBook
-                            addresses={company.addresses}
-                        />
-                        <ContactTable
-                            contacts={company.contacts}
-                        />
+                    <CardContent className="flex flex-row gap-4">
+                        <div className="flex flex-col flex-grow gap-2">
+                            <Label>
+                                Default Contact
+                            </Label>
+                            <Select
+                                value={company.contacts.find((c) =>
+                                    c.is_default
+                                )?.contact?.id?.toString()}
+                                onValueChange={(value) =>
+                                    handleSetDefaultContact(
+                                        company.id,
+                                        parseInt(value),
+                                    )}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select default contact" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {company.contacts.map((cont) => (
+                                        <SelectItem
+                                            key={cont.contact.id}
+                                            value={cont.contact.id
+                                                .toString()}
+                                        >
+                                            {cont.contact.name}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div className="flex flex-col flex-grow gap-2">
+                            <Label>
+                                Default Shipping Address
+                            </Label>
+                            <Select
+                                value={company.addresses.find((a) =>
+                                    a.is_default_shipping
+                                )?.address?.id?.toString()}
+                                onValueChange={(value) =>
+                                    handleSetDefaultShipping(
+                                        company.id,
+                                        parseInt(value),
+                                    )}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select default shipping" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {company.addresses.map((addr) => (
+                                        <SelectItem
+                                            key={addr.address.id}
+                                            value={addr.address.id
+                                                .toString()}
+                                        >
+                                            {addr.address.name}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+
+                        <div className="flex flex-col flex-grow gap-2">
+                            <Label>
+                                Default Billing Address
+                            </Label>
+                            <Select
+                                value={company.addresses.find((a) =>
+                                    a.is_default_billing
+                                )?.address?.id?.toString()}
+                                onValueChange={(value) =>
+                                    handleSetDefaultBilling(
+                                        company.id,
+                                        parseInt(value),
+                                    )}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select default billing" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {company.addresses.map((addr) => (
+                                        <SelectItem
+                                            key={addr.address.id}
+                                            value={addr.address.id
+                                                .toString()}
+                                        >
+                                            {addr.address.name}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
                     </CardContent>
                     <CardFooter className="flex flex-row flex-wrap gap-4">
                         <Sheet

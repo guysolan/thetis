@@ -2,9 +2,18 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 
 export const selectCompanies = async () => {
-    const { data, error } = await supabase.from("companies").select(
-        "*, addresses(*), contacts(*)",
-    );
+    const { data, error } = await supabase.from("companies").select(`
+        *,
+        addresses:company_addresses(
+            address:addresses(*),
+            is_default_shipping,
+            is_default_billing
+        ),
+        contacts:company_contacts(
+            contact:contacts(*),
+            is_default
+        )
+    `);
 
     if (error) {
         throw error;

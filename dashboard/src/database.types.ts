@@ -125,14 +125,20 @@ export type Database = {
         Row: {
           address_id: number
           company_id: number
+          is_default_billing: boolean | null
+          is_default_shipping: boolean | null
         }
         Insert: {
           address_id: number
           company_id: number
+          is_default_billing?: boolean | null
+          is_default_shipping?: boolean | null
         }
         Update: {
           address_id?: number
           company_id?: number
+          is_default_billing?: boolean | null
+          is_default_shipping?: boolean | null
         }
         Relationships: [
           {
@@ -176,14 +182,17 @@ export type Database = {
         Row: {
           company_id: number
           contact_id: number
+          is_default: boolean | null
         }
         Insert: {
           company_id: number
           contact_id: number
+          is_default?: boolean | null
         }
         Update: {
           company_id?: number
           contact_id?: number
+          is_default?: boolean | null
         }
         Relationships: [
           {
@@ -877,6 +886,27 @@ export type Database = {
           p_order_items: Json
         }
         Returns: number
+      }
+      set_default_billing_address: {
+        Args: {
+          in_company_id: number
+          in_address_id: number
+        }
+        Returns: undefined
+      }
+      set_default_contact: {
+        Args: {
+          in_company_id: number
+          in_contact_id: number
+        }
+        Returns: undefined
+      }
+      set_default_shipping_address: {
+        Args: {
+          in_company_id: number
+          in_address_id: number
+        }
+        Returns: undefined
       }
       stocktake: {
         Args: {
