@@ -11,7 +11,8 @@ import BuyerSeller from "../components/BuyerSeller";
 const PurchaseOrder = ({ order }: { order: OrderView }) => {
     return (
         <>
-            <OrderTitle orderType={order.order_type} />
+            <OrderTitle title="Purchase Order" />
+
             <OrderDescription
                 orderId={order.order_id}
                 orderDate={order.order_date as string}
@@ -22,7 +23,6 @@ const PurchaseOrder = ({ order }: { order: OrderView }) => {
                 orderType={order.order_type}
             />
             <OrderTotal order={order} />
-            <PaymentDetails orderId={order.order_id} />
         </>
     );
 };

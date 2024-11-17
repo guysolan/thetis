@@ -31,6 +31,7 @@ const StockItemsSummary = ({
             <TableHeader>
                 <TableRow>
                     <TableHead>Item</TableHead>
+                    <TableHead>Quantity</TableHead>
                     <TableHead>Before</TableHead>
                     <TableHead>After</TableHead>
                 </TableRow>
@@ -51,8 +52,9 @@ const StockItemsSummary = ({
                             <TableCell className="font-medium">
                                 {item?.item_name || "Not selected"}
                             </TableCell>
-                            <TableCell>{quantities?.before || 0}</TableCell>
-                            <TableCell>{quantities?.after || 0}</TableCell>
+                            <TableCell>{quantityChange || 0}</TableCell>
+                            <TableCell>{quantities?.before ?? 0}</TableCell>
+                            <TableCell>{quantities?.after ?? 0}</TableCell>
                         </TableRow>
                     );
                 })}

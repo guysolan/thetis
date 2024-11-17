@@ -11,7 +11,8 @@ import BuyerSeller from "../components/BuyerSeller";
 const Invoice = ({ order }: { order: OrderView }) => {
     return (
         <>
-            <OrderTitle orderType={order.order_type} />
+            <OrderTitle title="Invoice" />
+
             <OrderDescription
                 orderId={order.order_id}
                 orderDate={order.order_date as string}

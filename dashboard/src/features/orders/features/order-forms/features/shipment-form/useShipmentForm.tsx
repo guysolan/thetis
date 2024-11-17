@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useSelectItemsByAddress } from "../../../../../stockpiles/api/selectItemsByAddress";
 import { useSelectItemsView } from "../../../../../items/api/selectItemsView";
-import { processOrderItems } from "./processOrderItems";
+import { processPackageOrderItems } from "./processPackageOrderItems";
 
 // TODO
 /**
@@ -36,7 +36,15 @@ export const useShipmentForm = () => {
     });
 
     useEffect(() => {
+        console.log("Effect triggered with:", {
+            orderItems,
+            items,
+            fromShippingAddressId,
+            stockpileItems,
+        });
+
         if (!orderItems?.length || !items || !fromShippingAddressId) {
+            console.log("Resetting items due to missing dependencies");
             setValue("from_items", []);
             setValue("to_items", []);
             setValue("display_items", []);
@@ -45,12 +53,18 @@ export const useShipmentForm = () => {
 
         const fromStockLevels = stockpileItems?.[fromShippingAddressId] || {};
 
-        const { fromItems, toItems, displayItems } = processOrderItems({
+        const { fromItems, toItems, displayItems } = processPackageOrderItems({
             orderItems,
             items,
             fromStockLevels,
             fromShippingAddressId,
             toShippingAddressId,
+        });
+
+        console.log("Setting new values:", {
+            fromItems,
+            toItems,
+            displayItems,
         });
 
         setValue("from_items", fromItems);

@@ -6,6 +6,7 @@ import { selectStockpilesQueryKey } from "../../stockpiles/api/selectStockpiles"
 import { closeSheet } from "@/utils/closeSheet";
 import { CreateOrderType } from "../features/order-forms/utils/formatCreateOrderArguments";
 import { openDefaultDocument } from "../features/order-documents/utils/openDefaultDocument";
+import { OrderType } from "../types";
 
 const createOrder = async (orderData: CreateOrderType) => {
 	const { data: result, error } = await supabase.rpc(
@@ -17,13 +18,14 @@ const createOrder = async (orderData: CreateOrderType) => {
 	return result;
 };
 
-export const useCreateOrder = () => {
+export const useCreateOrder = (orderType: OrderType) => {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: createOrder,
 		onSuccess: (data) => {
+			console.log(data);
 			toast.success("Order created successfully");
-			openDefaultDocument(data[0].order_id, "shipment");
+			openDefaultDocument(data[0].order_id, orderType);
 			closeSheet();
 		},
 		onError: () => {

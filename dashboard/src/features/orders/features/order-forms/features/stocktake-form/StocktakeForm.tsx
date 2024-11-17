@@ -12,7 +12,7 @@ interface Props {
     onCancel?: () => void;
 }
 const StocktakeForm = ({ addressId, orderItems }: Props) => {
-    const { mutate: createOrder } = useCreateOrder();
+    const { mutate: createOrder } = useCreateOrder("stocktake");
     const defaultValues = {
         order_items: orderItems || [{
             item_type: "product",

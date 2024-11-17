@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import { formatCreateOrderArguments } from "../../utils/formatCreateOrderArguments";
 
 const SaleForm = () => {
-    const { mutate: createOrder } = useCreateOrder();
+    const { mutate: createOrder } = useCreateOrder("sale");
     const defaultValues = {
         order_items: [{
             item_type: "product",

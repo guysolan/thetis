@@ -1,5 +1,5 @@
 import React from "react";
-import { OrderView } from "../../../types";
+import { OrderItem, OrderView } from "../../../types";
 import Company from "../components/Company";
 import Address from "../components/Address";
 import OrderDescription from "../components/OrderDescription";
@@ -24,9 +24,27 @@ import ShippingAddress from "../components/ShippingAddress";
 import BuyerSeller from "../components/BuyerSeller";
 
 const CommercialInvoice = ({ order }: { order: OrderView }) => {
+    const prepareOrderItems = (order: OrderView) => {
+        const noPackages = order.items.filter((item) =>
+            item.item_type !== "package"
+        );
+        const noNegatives = noPackages.filter((item) => (
+            item.quantity > 0
+        ));
+        if (order.order_type === "sale") {
+            return noPackages.map((item) => ({
+                ...item,
+                quantity: Math.abs(item.quantity),
+            }));
+        }
+        if (order.order_type === "purchase") {
+            return noNegatives;
+        }
+        return noPackages;
+    };
     return (
         <>
-            <OrderTitle orderType={order.order_type} />
+            <OrderTitle title="Commercial Invoice" />
             <OrderDescription
                 orderId={order.order_id}
                 orderDate={order.order_date as string}
@@ -34,9 +52,7 @@ const CommercialInvoice = ({ order }: { order: OrderView }) => {
             <BuyerSeller order={order} />
 
             <ShippingItems
-                orderItems={order.items.filter((item) =>
-                    item.item_type !== "package"
-                ).map((i) => ({ ...i, quantity: Math.abs(i.quantity) }))}
+                orderItems={prepareOrderItems(order)}
             />
 
             <PackageSummary items={order.items} />

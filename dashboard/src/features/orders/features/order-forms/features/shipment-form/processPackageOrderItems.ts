@@ -15,18 +15,38 @@ const processPackageComponents = (
     toShippingAddressId: string,
     processedComponents: Map<string, number>,
 ): { fromItems: OrderItemChange[]; toItems: OrderItemChange[] } => {
+    console.log("Processing package components:", {
+        item,
+        orderItem,
+        components: item.components,
+    });
+
     const fromItems: OrderItemChange[] = [];
     const toItems: OrderItemChange[] = [];
 
-    if (!item.components) return { fromItems, toItems };
+    if (!item.components) {
+        console.log("No components found for package");
+        return { fromItems, toItems };
+    }
 
     for (const component of item.components) {
+        console.log("Processing component:", component);
+
         const componentQuantity = component.component_quantity *
             Number(orderItem.quantity_change);
         const componentId = String(component.component_id);
         const componentType = component.component_type;
 
-        if (["package", "service"].includes(componentType)) continue;
+        console.log("Component details:", {
+            componentQuantity,
+            componentId,
+            componentType,
+        });
+
+        if (["package", "service"].includes(componentType)) {
+            console.log("Skipping package/service component");
+            continue;
+        }
 
         const currentTotal = processedComponents.get(componentId) || 0;
         processedComponents.set(componentId, currentTotal + componentQuantity);
@@ -50,16 +70,29 @@ const processPackageComponents = (
         });
     }
 
+    console.log("Package components processed:", {
+        fromItems,
+        toItems,
+        processedComponents: Array.from(processedComponents.entries()),
+    });
+
     return { fromItems, toItems };
 };
 
-export const processOrderItems = ({
+export const processPackageOrderItems = ({
     orderItems,
     items,
     fromStockLevels,
     fromShippingAddressId,
     toShippingAddressId,
 }: ProcessOrderItemsParams): ProcessedItems => {
+    console.log("Processing with:", {
+        orderItems: orderItems,
+        itemsCount: items?.length,
+        fromStockLevels,
+        addresses: { from: fromShippingAddressId, to: toShippingAddressId },
+    });
+
     if (!orderItems?.length) {
         return { fromItems: [], toItems: [], displayItems: [] };
     }
@@ -71,12 +104,17 @@ export const processOrderItems = ({
 
     // Process each order item
     orderItems.forEach((orderItem) => {
+        console.log("Processing order item:", orderItem);
+
         const item = items?.find((w) =>
             String(w.item_id) === String(orderItem.item_id)
         );
+        console.log("Found matching item:", item);
+
         if (!item) return;
 
         if (item.item_type === "package") {
+            console.log("Processing as package");
             const { fromItems: packageFromItems, toItems: packageToItems } =
                 processPackageComponents(
                     item,
@@ -88,6 +126,7 @@ export const processOrderItems = ({
             fromItems.push(...packageFromItems);
             toItems.push(...packageToItems);
         } else {
+            console.log("Processing as single item");
             const quantityChange = Number(orderItem.quantity_change);
 
             fromItems.push({
@@ -116,6 +155,12 @@ export const processOrderItems = ({
         }
     });
 
+    console.log("Before processing components:", {
+        fromItems,
+        toItems,
+        processedComponents: Array.from(processedComponents.entries()),
+    });
+
     // Update quantities and create display items
     processedComponents.forEach((totalQuantity, itemId) => {
         const item = items.find((w) => String(w.item_id) === itemId);
@@ -141,5 +186,6 @@ export const processOrderItems = ({
         });
     });
 
+    console.log("Final result:", { fromItems, toItems, displayItems });
     return { fromItems, toItems, displayItems };
 };

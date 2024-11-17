@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 interface StockValidationAlertProps {
     itemsFieldName?: string;
     addressFieldName?: string;
-    addItem: (newItem: any) => void;
+    addItem?: (newItem: any) => void;
 }
 
 export const StockValidationAlert = ({

@@ -7,7 +7,7 @@ import { formatCreateOrderArguments } from "../../utils/formatCreateOrderArgumen
 import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";
 
 const ShipmentForm = () => {
-    const { mutate: createOrder } = useCreateOrder();
+    const { mutate: createOrder } = useCreateOrder("shipment");
 
     const defaultValues = {
         order_items: [{
