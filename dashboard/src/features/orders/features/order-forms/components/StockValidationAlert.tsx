@@ -1,6 +1,7 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useStockValidation } from "../hooks/useStockValidation";
 import { Button } from "@/components/ui/button";
+import { roundIfRequired } from "../utils/roundIfRequired";
 
 interface StockValidationAlertProps {
     itemsFieldName?: string;
@@ -32,7 +33,8 @@ export const StockValidationAlert = ({
                             className="flex justify-between items-center py-2 pl-4 md:pl-8"
                         >
                             <span className="">
-                                {item.item_name}: {item.item_quantity}
+                                {item.item_name}:{" "}
+                                {roundIfRequired(item.item_quantity)}
                             </span>
                             {addItem && (
                                 <Button

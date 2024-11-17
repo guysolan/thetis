@@ -18,7 +18,7 @@ interface StockItemsSummaryProps {
         itemId: string,
     ) => { before: number; after: number } | undefined;
 }
-
+import { roundIfRequired } from "../utils/roundIfRequired";
 const StockItemsSummary = ({
     name,
     fields,
@@ -52,9 +52,15 @@ const StockItemsSummary = ({
                             <TableCell className="font-medium">
                                 {item?.item_name || "Not selected"}
                             </TableCell>
-                            <TableCell>{quantityChange || 0}</TableCell>
-                            <TableCell>{quantities?.before ?? 0}</TableCell>
-                            <TableCell>{quantities?.after ?? 0}</TableCell>
+                            <TableCell>
+                                {roundIfRequired(quantityChange || 0)}
+                            </TableCell>
+                            <TableCell>
+                                {roundIfRequired(quantities?.before || 0)}
+                            </TableCell>
+                            <TableCell>
+                                {roundIfRequired(quantities?.after || 0)}
+                            </TableCell>
                         </TableRow>
                     );
                 })}

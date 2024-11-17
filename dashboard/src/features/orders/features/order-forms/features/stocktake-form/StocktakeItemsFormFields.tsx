@@ -9,9 +9,7 @@ import {
 } from "@/components/ui/table";
 import Select from "@/components/Select";
 import Input from "@/components/Input";
-import NumberCell from "@/components/NumberCell";
 import ItemTypeSelect from "@/components/ItemTypeSelect";
-import { ItemType, StockItemQuantities } from "../../types";
 
 interface StocktakeItemsFormFieldsProps {
     name: string;
