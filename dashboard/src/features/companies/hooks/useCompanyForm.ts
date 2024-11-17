@@ -58,7 +58,7 @@ export const useCompanyForm = (direction: "to" | "from") => {
         const contactId = form.watch(getFieldName("contact"));
         return selectedCompany?.contacts?.find(
             (cont) => String(cont.id) === contactId,
-        )?.contact;
+        )?.name;
     };
 
     return {

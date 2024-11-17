@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,8 +7,6 @@ import { CompanySummaryView } from "./CompanySummaryView";
 import { CompanyAddressExpandedView } from "./CompanyAddressExpandedView";
 import { useCompanyAutoFill } from "../hooks/useCompanyAutoFill";
 import { CompanyRow } from "../types";
-import { useUserCompany } from "../hooks/useUserCompany";
-import { usePublicUser } from "../../auth/hooks/usePublicUser";
 
 interface Props {
     direction: "to" | "from";
@@ -32,7 +30,6 @@ const CompanyAddressSelect = ({
         getSelectedContact,
     } = useCompanyForm(direction);
 
-    const companyId = form.watch(getFieldName("company"));
     const selectedCompany = getSelectedCompany() as CompanyRow & {
         addresses: Array<{
             address: {
@@ -94,7 +91,7 @@ const CompanyAddressSelect = ({
                             selectedCompany={selectedCompany}
                             shippingAddress={getSelectedAddress("shipping")}
                             billingAddress={getSelectedAddress("billing")}
-                            getContactOptions={getContactOptions}
+                            contact={getSelectedContact()}
                         />
                     )}
             </CardContent>

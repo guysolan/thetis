@@ -5,14 +5,14 @@ interface Props {
     selectedCompany: any;
     shippingAddress: any;
     billingAddress: any;
-    getContactOptions: () => Array<{ label: string; value: string }>;
+    contact: any;
 }
 
 export const CompanySummaryView = ({
     selectedCompany,
     shippingAddress,
     billingAddress,
-    getContactOptions,
+    contact,
 }: Props) => {
     if (!selectedCompany) return "No company selected";
 
@@ -29,7 +29,8 @@ export const CompanySummaryView = ({
             </div>
             <div className="flex flex-row items-center gap-2">
                 <User2 size={20} />
-                {getContactOptions().map((c) => c.label).join(", ")}
+                {contact}
+                {/* {getContactOptions().map((c) => c.label).join(", ")} */}
             </div>
         </div>
     );
