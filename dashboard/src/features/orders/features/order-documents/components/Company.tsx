@@ -1,5 +1,5 @@
 import React from "react";
-import { CompanyRow } from "../../../companies/types";
+import { CompanyRow } from "../../../../companies/types";
 
 type Props = {
     title: string;

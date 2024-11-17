@@ -2,15 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { selectOrderByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderById";
 import { CompanyRow } from "../../../../features/companies/types";
 import { AddressRow } from "../../../../features/stockpiles/types";
-import ShippingAddress from "../../../../features/orders/features/order-documents/ShippingAddress";
+import ShippingLabel from "../../../../features/orders/features/order-documents/documents/ShippingLabel";
 
 const OrdersPage = () => {
   const { order } = Route.useLoaderData();
 
   return (
-    <ShippingAddress
-      address={order.from_shipping_address as AddressRow}
-      company={order.from_company as CompanyRow}
+    <ShippingLabel
+      deliveryCompany={order.from_company as CompanyRow}
+      deliveryAddress={order.from_shipping_address as AddressRow}
+      returnAddress={order.from_shipping_address as AddressRow}
+      returnCompany={order.from_company as CompanyRow}
     />
   );
 };

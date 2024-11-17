@@ -16,6 +16,7 @@ import { Link } from "@tanstack/react-router";
 import ActionPopover from "@/components/ActionPopover";
 import { useDeleteOrder } from "../api/deleteOrder";
 import { Button } from "../../../components/ui/button";
+import { DocumentLinks } from "./DocumentLinks";
 
 interface ExistingOrdersProps {
 	orders: OrderView[];
@@ -60,65 +61,10 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 									deleteFunction={() =>
 										deleteOrder(order.order_id)}
 								>
-									<Button
-										asChild
-										variant="ghost"
-										className="justify-between px-2"
-									>
-										<Link
-											to="/documents/orders/$orderId/commercial-invoice"
-											params={{
-												orderId: String(order.order_id),
-											}}
-											target="_blank"
-											onClick={(e) => e.stopPropagation()}
-										>
-											<span className="flex flex-row items-center gap-2">
-												<Stamp size={20} />{" "}
-												Commercial Invoice
-											</span>
-											<ExternalLink size={20} />
-										</Link>
-									</Button>
-									<Button
-										asChild
-										variant="ghost"
-										className="justify-between px-2"
-									>
-										<Link
-											to="/documents/orders/$orderId/shipping-label"
-											params={{
-												orderId: String(order.order_id),
-											}}
-											target="_blank"
-											onClick={(e) => e.stopPropagation()}
-										>
-											<span className="flex flex-row items-center gap-2">
-												<Tag size={20} /> Shipping Label
-											</span>
-											<ExternalLink size={20} />
-										</Link>
-									</Button>
-									<Button
-										asChild
-										variant="ghost"
-										className="justify-between px-2"
-									>
-										<Link
-											to="/documents/orders/$orderId/purchase-order"
-											params={{
-												orderId: String(order.order_id),
-											}}
-											target="_blank"
-											onClick={(e) => e.stopPropagation()}
-										>
-											<span className="flex flex-row items-center gap-2">
-												<Dock size={20} />{" "}
-												Purchase Order
-											</span>
-											<ExternalLink size={20} />
-										</Link>
-									</Button>
+									<DocumentLinks
+										orderId={order.order_id}
+										orderType={order.order_type}
+									/>
 								</ActionPopover>
 							</div>
 						</div>

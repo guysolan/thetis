@@ -26,7 +26,8 @@ const StocktakeForm = ({ addressId, orderItems }: Props) => {
     };
 
     const handleSubmit = async (formData: any) => {
-        const item_changes = formData.change_quantity.map((item: any) => ({
+        console.log(formData);
+        const item_changes = formData.order_items.map((item: any) => ({
             item_id: item.item_id,
             quantity_change: Number(item.quantity_change),
             item_price: 0,

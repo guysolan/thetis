@@ -1,9 +1,10 @@
 import React from "react";
-import { OrderView } from "../../../orders/types";
+import { OrderView } from "../../../types";
 import Company from "./Company";
 import ShippingAddress from "./ShippingAddress";
-import { CompanyRow } from "../../../companies/types";
-import Address from "../../order-documents/Address";
+import { CompanyRow } from "../../../../companies/types";
+import Address from "../components/Address";
+import { AddressRow } from "../../../../stockpiles/types";
 
 const BuyerSeller = ({ order }: { order: OrderView }) => {
     return (
@@ -11,15 +12,17 @@ const BuyerSeller = ({ order }: { order: OrderView }) => {
             <div>
                 <Company
                     title="Seller"
-                    company={order.from_company as CompanyRow}
+                    company={order.from_company}
                 />
                 <ShippingAddress
-                    address={order.from_shipping_address as AddressRow}
-                    company={order.from_company as CompanyRow}
+                    title="Shipping Address"
+                    size="small"
+                    address={order.from_shipping_address}
+                    company={order.from_company}
                 />
                 <Address
                     title="Billing Address"
-                    address={order.from_billing_address as AddressRow}
+                    address={order.from_billing_address}
                 />
                 <h3 className="mt-4 mb-2 font-medium">Contact</h3>
                 <p>{order.from_contact?.name}</p>
@@ -29,15 +32,17 @@ const BuyerSeller = ({ order }: { order: OrderView }) => {
             <div>
                 <Company
                     title="Buyer"
-                    company={order.to_company as CompanyRow}
+                    company={order.to_company}
                 />
                 <ShippingAddress
-                    address={order.from_shipping_address as AddressRow}
-                    company={order.from_company as CompanyRow}
+                    title="Shipping Address"
+                    size="small"
+                    address={order.from_shipping_address}
+                    company={order.from_company}
                 />
                 <Address
                     title="Billing Address"
-                    address={order.to_billing_address as AddressRow}
+                    address={order.to_billing_address}
                 />
                 <h3 className="mt-4 mb-2 font-medium text-sm">Contact</h3>
                 <p>{order.to_contact?.name}</p>

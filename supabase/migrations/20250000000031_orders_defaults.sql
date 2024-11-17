@@ -81,10 +81,14 @@ SELECT
     END AS to_shipping_address,
     SUM(
         CASE WHEN o.order_type = 'sale' THEN
-            -1 * oic.price * ic.quantity_change *(1 + COALESCE(oic.tax, 0))
+            (-1 * oic.price * ic.quantity_change *(1 + COALESCE(oic.tax, 0)))
         ELSE
-            oic.price * ic.quantity_change *(1 + COALESCE(oic.tax, 0))
-        END) AS total_value,
+            (oic.price * ic.quantity_change *(1 + COALESCE(oic.tax, 0)))
+        END) + CASE WHEN o.order_type = 'sale' THEN
+        -1 * COALESCE(o.carriage, 0)
+    ELSE
+        COALESCE(o.carriage, 0)
+    END AS total_value,
     jsonb_agg(jsonb_build_object('item_id', i.id, 'item_name', i.name, 'item_type', i.type, 'item_hs_code', i.hs_code, 'item_sku', i.sku, 'item_country_of_origin', i.country_of_origin, 'height', COALESCE(i.height, 0) * ABS(ic.quantity_change), 'width', COALESCE(i.width, 0) * ABS(ic.quantity_change), 'depth', COALESCE(i.depth, 0) * ABS(ic.quantity_change), 'weight', COALESCE(i.weight, 0) * ABS(ic.quantity_change), 'address', to_jsonb(a) - 'created_at' - 'updated_at', 'quantity', ic.quantity_change, 'price', oic.price, 'tax', oic.tax, 'total', CASE WHEN o.order_type = 'sale' THEN
                 -1 * ic.quantity_change * oic.price *(1 + COALESCE(oic.tax, 0))
             ELSE

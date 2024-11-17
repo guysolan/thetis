@@ -1,5 +1,6 @@
 import { Database } from "@/database.types";
 import { Company } from "../companies/types";
+import { Contact } from "../contacts/types";
 export type Currency = Database["public"]["Enums"]["currency_type"];
 export const orderTypes = [
     "sale",
@@ -9,14 +10,7 @@ export const orderTypes = [
     "stocktake",
 ] as const;
 
-export interface Address {
-    name: string;
-    line_1: string;
-    line_2: string;
-    city: string;
-    code: string;
-    country: string;
-}
+import { Address } from "../stockpiles/types";
 export type Order = Database["public"]["Tables"]["orders"];
 export type OrderRow = Order["Row"];
 export type OrderItem =
@@ -36,8 +30,10 @@ export type OrderView = Database["public"]["Views"]["orders_view"]["Row"] & {
     order_id: number;
     items: OrderItemInView[];
     order_type: OrderType;
-    from_address: Address;
-    to_address: Address;
+    from_address: Address["Row"];
+    to_address: Address["Row"];
     from_company: Company["Row"];
     to_company: Company["Row"];
+    from_contact: Contact["Row"];
+    to_contact: Contact["Row"];
 };

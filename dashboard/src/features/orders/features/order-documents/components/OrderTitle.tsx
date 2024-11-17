@@ -1,5 +1,5 @@
 import React from "react";
-import { OrderType } from "../../types";
+import { OrderType } from "../../../types";
 
 const OrderTitle = (
     { orderType }: { orderType: OrderType },

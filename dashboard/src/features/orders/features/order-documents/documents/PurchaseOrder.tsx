@@ -1,14 +1,14 @@
 import React from "react";
-import FinancialTransactions from "../order-history/components/FinancialTransactions";
-import { OrderView } from "../../types";
-import Company from "./Address";
-import OrderDescription from "./OrderDescription";
-import OrderTitle from "./OrderTitle";
-import OrderTotal from "./OrderTotal";
-import PaymentDetails from "./PaymentDetails";
-import BuyerSeller from "./BuyerSeller";
+import FinancialTransactions from "../../order-history/components/FinancialTransactions";
+import { OrderView } from "../../../types";
+import Company from "../components/Address";
+import OrderDescription from "../components/OrderDescription";
+import OrderTitle from "../components/OrderTitle";
+import OrderTotal from "../components/OrderTotal";
+import PaymentDetails from "../components/PaymentDetails";
+import BuyerSeller from "../components/BuyerSeller";
 
-const SaleDocument = ({ order }: { order: OrderView }) => {
+const PurchaseOrder = ({ order }: { order: OrderView }) => {
     return (
         <>
             <OrderTitle orderType={order.order_type} />
@@ -27,4 +27,4 @@ const SaleDocument = ({ order }: { order: OrderView }) => {
     );
 };
 
-export default SaleDocument;
+export default PurchaseOrder;

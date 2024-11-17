@@ -25,6 +25,7 @@ import { Route as AppsStockDirectoryImport } from './routes/_apps/stock/director
 import { Route as AppsFinancesAmazonIndexImport } from './routes/_apps/finances/amazon/index'
 import { Route as DocumentsOrdersOrderIdShippingLabelImport } from './routes/documents/orders/$orderId/shipping-label'
 import { Route as DocumentsOrdersOrderIdPurchaseOrderImport } from './routes/documents/orders/$orderId/purchase-order'
+import { Route as DocumentsOrdersOrderIdInvoiceImport } from './routes/docum./routes/documents/orders/$orderId/invoice
 import { Route as DocumentsOrdersOrderIdCommercialInvoiceImport } from './routes/documents/orders/$orderId/commercial-invoice'
 import { Route as AppsFinancesAccountsInstructionsImport } from './routes/_apps/finances/accounts/instructions'
 import { Route as AppsFinancesAmazonSettlementsIndexImport } from './routes/_apps/finances/amazon/settlements/index'
@@ -105,6 +106,12 @@ const DocumentsOrdersOrderIdShippingLabelRoute =
 const DocumentsOrdersOrderIdPurchaseOrderRoute =
   DocumentsOrdersOrderIdPurchaseOrderImport.update({
     path: '/orders/$orderId/purchase-order',
+    getParentRoute: () => DocumentsRoute,
+  } as any)
+
+const DocumentsOrdersOrderIdInvoiceRoute =
+  DocumentsOrdersOrderIdInvoiceImport.update({
+    path: '/orders/$orderId/invoice',
     getParentRoute: () => DocumentsRoute,
   } as any)
 
@@ -251,6 +258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocumentsOrdersOrderIdCommercialInvoiceImport
       parentRoute: typeof DocumentsImport
     }
+    '/documents/orders/$orderId/invoice': {
+      id: '/documents/orders/$orderId/invoice'
+      path: '/orders/$orderId/invoice'
+      fullPath: '/documents/orders/$orderId/invoice'
+      preLoaderRoute: typeof DocumentsOrdersOrderIdInvoiceImport
+      parentRoute: typeof DocumentsImport
+    }
     '/documents/orders/$orderId/purchase-order': {
       id: '/documents/orders/$orderId/purchase-order'
       path: '/orders/$orderId/purchase-order'
@@ -386,6 +400,7 @@ const AppsRouteWithChildren = AppsRoute._addFileChildren(AppsRouteChildren)
 
 interface DocumentsRouteChildren {
   DocumentsOrdersOrderIdCommercialInvoiceRoute: typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
+  DocumentsOrdersOrderIdInvoiceRoute: typeof DocumentsOrdersOrderIdInvoiceRoute
   DocumentsOrdersOrderIdPurchaseOrderRoute: typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   DocumentsOrdersOrderIdShippingLabelRoute: typeof DocumentsOrdersOrderIdShippingLabelRoute
 }
@@ -393,6 +408,7 @@ interface DocumentsRouteChildren {
 const DocumentsRouteChildren: DocumentsRouteChildren = {
   DocumentsOrdersOrderIdCommercialInvoiceRoute:
     DocumentsOrdersOrderIdCommercialInvoiceRoute,
+  DocumentsOrdersOrderIdInvoiceRoute: DocumentsOrdersOrderIdInvoiceRoute,
   DocumentsOrdersOrderIdPurchaseOrderRoute:
     DocumentsOrdersOrderIdPurchaseOrderRoute,
   DocumentsOrdersOrderIdShippingLabelRoute:
@@ -417,6 +433,7 @@ export interface FileRoutesByFullPath {
   '/stock/': typeof AppsStockIndexRoute
   '/finances/accounts/instructions': typeof AppsFinancesAccountsInstructionsRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
+  '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/finances/amazon': typeof AppsFinancesAmazonIndexRoute
@@ -441,6 +458,7 @@ export interface FileRoutesByTo {
   '/stock': typeof AppsStockIndexRoute
   '/finances/accounts/instructions': typeof AppsFinancesAccountsInstructionsRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
+  '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/finances/amazon': typeof AppsFinancesAmazonIndexRoute
@@ -467,6 +485,7 @@ export interface FileRoutesById {
   '/_apps/stock/': typeof AppsStockIndexRoute
   '/_apps/finances/accounts/instructions': typeof AppsFinancesAccountsInstructionsRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
+  '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/_apps/finances/amazon/': typeof AppsFinancesAmazonIndexRoute
@@ -494,6 +513,7 @@ export interface FileRouteTypes {
     | '/stock/'
     | '/finances/accounts/instructions'
     | '/documents/orders/$orderId/commercial-invoice'
+    | '/documents/orders/$orderId/invoice'
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
     | '/finances/amazon'
@@ -517,6 +537,7 @@ export interface FileRouteTypes {
     | '/stock'
     | '/finances/accounts/instructions'
     | '/documents/orders/$orderId/commercial-invoice'
+    | '/documents/orders/$orderId/invoice'
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
     | '/finances/amazon'
@@ -541,6 +562,7 @@ export interface FileRouteTypes {
     | '/_apps/stock/'
     | '/_apps/finances/accounts/instructions'
     | '/documents/orders/$orderId/commercial-invoice'
+    | '/documents/orders/$orderId/invoice'
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
     | '/_apps/finances/amazon/'
@@ -596,6 +618,7 @@ export const routeTree = rootRoute
       "filePath": "documents.tsx",
       "children": [
         "/documents/orders/$orderId/commercial-invoice",
+        "/documents/orders/$orderId/invoice",
         "/documents/orders/$orderId/purchase-order",
         "/documents/orders/$orderId/shipping-label"
       ]
@@ -656,6 +679,10 @@ export const routeTree = rootRoute
     },
     "/documents/orders/$orderId/commercial-invoice": {
       "filePath": "documents/orders/$orderId/commercial-invoice.tsx",
+      "parent": "/documents"
+    },
+    "/documents/orders/$orderId/invoice": {
+      "filePath": "documents/orders/$orderId/invoice.tsx",
       "parent": "/documents"
     },
     "/documents/orders/$orderId/purchase-order": {

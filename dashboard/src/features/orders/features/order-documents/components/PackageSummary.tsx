@@ -7,7 +7,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { OrderView } from "../../types";
+import { OrderView } from "../../../types";
 
 const PackageSummary = ({ items }: { items: OrderView["items"] }) => {
     return (

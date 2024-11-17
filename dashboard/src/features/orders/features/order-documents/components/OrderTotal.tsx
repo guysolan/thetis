@@ -6,7 +6,7 @@ import {
     TableHead,
     TableRow,
 } from "@/components/ui/table";
-import { OrderView } from "../../types";
+import { OrderView } from "../../../types";
 
 const OrderTotal = ({ order }: { order: OrderView }) => {
     return (

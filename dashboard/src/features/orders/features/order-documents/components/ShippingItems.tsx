@@ -1,6 +1,6 @@
 import React from "react";
-import { OrderView } from "../../types";
-import { useSelectItemsView } from "../../../items/api/selectItemsView";
+import { OrderView } from "../../../types";
+import { useSelectItemsView } from "../../../../items/api/selectItemsView";
 import {
     Table,
     TableBody,
@@ -10,7 +10,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
-const CommercialInvoiceItems = (
+const ShippingItems = (
     { orderItems }: { orderItems: OrderView["items"] },
 ) => {
     const { data: items } = useSelectItemsView();
@@ -77,4 +77,4 @@ const CommercialInvoiceItems = (
     );
 };
 
-export default CommercialInvoiceItems;
+export default ShippingItems;
