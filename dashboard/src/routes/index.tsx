@@ -1,57 +1,42 @@
 import { createFileRoute, ReactNode } from "@tanstack/react-router";
 import PageTitle from "../components/PageTitle";
-import {
-  ExternalLink
-} from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
-import { jobs } from '../features/navigation/content';
-import Navigation from '../features/navigation/Navigation';
+import { jobs } from "../features/navigation/content";
+import Navigation from "../features/navigation/Navigation";
 
 export const Route = createFileRoute("/")({
   component: () => (
-    <section className="w-full">
+    <section className="p-8 w-full">
       <Navigation />
-      <div className="flex flex-col space-y-8">
-        {Object.entries(jobs).map(([category, jobData], index) => (
-          <div
-            key={category}
-            className="flex flex-col justify-start items-start"
+      <div className="flex flex-col space-y-12 mt-8">
+        <div className="gap-8 grid grid-cols-1 md:grid-cols-2 w-full">
+          <Link
+            to="/stock/orders"
+            className="flex flex-col bg-white hover:bg-zinc-50 shadow-sm hover:shadow-md p-8 border rounded-xl transition-colors"
           >
-            <Link
-              to={jobData.href}
-              className="flex items-center mb-4 group"
-              target={jobData.external ? "_blank" : "_self"}
-              rel={jobData.external ? "noopener noreferrer" : ""}
-            >
-              <span className="flex justify-center items-center mr-2 w-8 h-8">
-                {jobData.icon}
-              </span>
-              <h2 className="font-bold text-2xl group-hover:underline capitalize">{category}</h2>
-              {jobData.external && <ExternalLink className="ml-2 w-4 h-4" />}
-            </Link>
-            <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full">
-              {jobData.pages && jobData.pages.map((page) => (
-                <Link
-                  key={page.name}
-                  to={page.href}
-                  className="flex items-center bg-white hover:bg-zinc-50 p-4 border rounded-lg transition-colors"
-                  target={page.external ? "_blank" : "_self"}
-                  rel={page.external ? "noopener noreferrer" : ""}
-                >
-                  <span className="flex justify-center items-center mr-4 w-12 h-12">
-                    {page.icon}
-                  </span>
-                  <div className="flex-grow">
-                    <h4 className="font-semibold text-md">{page.name}</h4>
-                    <p className="text-sm text-zinc-600">{page.description}</p>
-                  </div>
-                  {page.external && <ExternalLink className="ml-2 w-4 h-4" />}
-                </Link>
-              ))}
+            <div className="flex-grow">
+              <h4 className="mb-4 font-bold text-2xl">Stock Orders</h4>
+              <p className="text-lg text-zinc-600">
+                View and manage your stock orders, track inventory levels, and
+                monitor order status. Keep your stock organized and up-to-date.
+              </p>
             </div>
-          </div>
-        ))}
+          </Link>
+          <Link
+            to="/finances/amazon/settlements"
+            className="flex flex-col bg-white hover:bg-zinc-50 shadow-sm hover:shadow-md p-8 border rounded-xl transition-colors"
+          >
+            <div className="flex-grow">
+              <h4 className="mb-4 font-bold text-2xl">Finances</h4>
+              <p className="text-lg text-zinc-600">
+                Manage your financial transactions, track expenses, and monitor
+                your budget. Get insights into your spending patterns and
+                financial health.
+              </p>
+            </div>
+          </Link>
+        </div>
       </div>
     </section>
   ),

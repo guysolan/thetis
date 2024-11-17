@@ -37,8 +37,8 @@ const BuyerSeller = ({ order }: { order: OrderView }) => {
                 <ShippingAddress
                     title="Shipping Address"
                     size="small"
-                    address={order.from_shipping_address}
-                    company={order.from_company}
+                    address={order.to_shipping_address}
+                    company={order.to_company}
                 />
                 <Address
                     title="Billing Address"

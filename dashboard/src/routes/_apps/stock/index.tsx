@@ -1,19 +1,19 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion'
+} from "@/components/ui/accordion";
 
-export const Route = createFileRoute('/_apps/stock/')({
+export const Route = createFileRoute("/_apps/stock/")({
   component: () => (
     <div className="mx-auto p-6 container">
       <h1 className="mb-6 font-bold text-3xl">Stock Management</h1>
@@ -130,4 +130,4 @@ export const Route = createFileRoute('/_apps/stock/')({
       </p>
     </div>
   ),
-})
+});

@@ -10,8 +10,8 @@ const ShippingAddress = (
         size?: "small" | "large";
     },
 ) => {
-    const textSize = size === "small" ? "text-sm" : "text-md";
-    const headerSize = size === "small" ? "text-lg" : "text-xl";
+    const textSize = size === "small" ? "text-sm" : "text-[2rem]";
+    const headerSize = size === "small" ? "text-lg" : "text-lg";
 
     return (
         <div className={`mb-4 text-neutral-600 ${textSize}`}>
