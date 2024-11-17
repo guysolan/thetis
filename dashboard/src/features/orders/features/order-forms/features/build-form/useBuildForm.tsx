@@ -181,11 +181,33 @@ export const useBuildForm = () => {
     const { data: items } = useSelectItemsView();
     const { data: addressItems } = useSelectItemsByAddress();
 
+    // Watch both the array and the individual fields within each item
+    // Watch doesn't work for deep changes to the object by default
     const producedItems = watch("produced_items");
+    // Watch all relevant fields of each produced item
+    const producedItemsValues = watch(
+        producedItems?.map((_, index) => [
+            `produced_items.${index}.item_id`,
+            `produced_items.${index}.quantity_change`,
+            `produced_items.${index}.item_type`,
+        ]).flat() ?? [],
+    );
     const selectedAddress = watch("from_shipping_address_id");
 
     useEffect(() => {
-        if (!producedItems || !items || !addressItems) return;
+        console.log("useEffect triggered", {
+            producedItems,
+            producedItemsValues,
+        }); // Debug log
+
+        if (!producedItems?.length || !items || !addressItems) {
+            console.log("Missing required data", {
+                hasProducedItems: !!producedItems?.length,
+                hasItems: !!items,
+                hasAddressItems: !!addressItems,
+            });
+            return;
+        }
 
         // 1. Process all produced items and their components
         const { consumedItems, orderItems } = processOrderItems(
@@ -219,7 +241,14 @@ export const useBuildForm = () => {
         setValue("stock_levels", stockLevels);
         setValue("consumed_items", consumedItems);
         setValue("order_items", orderItems);
-    }, [producedItems, items, addressItems, selectedAddress, setValue]);
+    }, [
+        producedItems,
+        producedItemsValues,
+        items,
+        addressItems,
+        selectedAddress,
+        setValue,
+    ]);
 };
 
 const consolidateConsumedItems = (items: ItemChange[]): ItemChange[] => {
