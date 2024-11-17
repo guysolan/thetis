@@ -9,6 +9,7 @@ export const openDefaultDocument = (
     order_type: string,
 ) => {
     const document_type = documentTypeMap[order_type];
+    if (!document_type) return;
     window.open(
         `/documents/orders/${order_id}/${document_type}`,
         "_blank",

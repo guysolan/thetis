@@ -13,8 +13,11 @@ type InputProps = {
     label?: string;
     type?: "text" | "number" | "email" | "password" | "tel";
     step?: string;
+    disabled?: boolean;
 };
-const Input = ({ name, label, type = "text", step }: InputProps) => {
+const Input = (
+    { name, label, type = "text", step, disabled = false }: InputProps,
+) => {
     const { control } = useFormContext();
 
     return (
@@ -29,6 +32,7 @@ const Input = ({ name, label, type = "text", step }: InputProps) => {
                     <FormMessage />
                     <FormControl>
                         <InputWrap
+                            disabled={disabled}
                             type={type}
                             step={step}
                             {...field}

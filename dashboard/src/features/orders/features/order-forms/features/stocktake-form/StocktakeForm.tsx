@@ -2,7 +2,6 @@ import { OrderItem, stockTakeFormSchema } from "../../schema";
 import { BaseOrderForm } from "../../components/BaseOrderForm";
 import { useCreateOrder } from "../../../../api/createOrder";
 import StocktakeFormFields from "./StocktakeFormFields";
-import DatePicker from "@/components/DatePicker";
 import dayjs from "dayjs";
 import { formatCreateOrderArguments } from "../../utils/formatCreateOrderArguments";
 
@@ -17,12 +16,13 @@ const StocktakeForm = ({ addressId, orderItems }: Props) => {
         order_items: orderItems || [{
             item_type: "product",
             item_id: "",
+            quantity_before: 0,
             quantity_change: 0,
+            quantity_after: 0,
         }],
         order_date: dayjs().toDate(),
         order_type: "stocktake",
         address_id: addressId,
-        change_quantity: [],
     };
 
     const handleSubmit = async (formData: any) => {

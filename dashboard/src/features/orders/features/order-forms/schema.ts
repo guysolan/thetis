@@ -78,18 +78,16 @@ export const buyFormSchema = baseAddressSchema.extend({
     consumed_items: z.array(pricedItemSchema),
 });
 
-const changeQuantitySchema = z.array(
-    z.object({
-        quantity_change: z.coerce.number(),
-        item_id: z.coerce.number(),
-    }),
-);
-
 export const stockTakeFormSchema = z.object({
     address_id: z.coerce.number(),
     order_type: z.enum(["stocktake"]),
-    ...orderItemsSchema.shape,
-    change_quantity: changeQuantitySchema,
+    order_items: z.array(z.object({
+        item_id: z.string().min(1, "Please select an item"),
+        item_type: z.string(),
+        quantity_before: z.coerce.number(),
+        quantity_change: z.coerce.number(),
+        quantity_after: z.coerce.number(),
+    })),
     order_date: z.date(),
 });
 

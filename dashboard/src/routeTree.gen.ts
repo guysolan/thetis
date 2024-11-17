@@ -23,6 +23,7 @@ import { Route as AppsStockOrdersImport } from './routes/_apps/stock/orders'
 import { Route as AppsStockItemsImport } from './routes/_apps/stock/items'
 import { Route as AppsStockDirectoryImport } from './routes/_apps/stock/directory'
 import { Route as AppsFinancesAmazonIndexImport } from './routes/_apps/finances/amazon/index'
+import { Route as DocumentsOrdersOrderIdStocktakeReportImport } from './routes/documents/orders/$orderId/stocktake-report'
 import { Route as DocumentsOrdersOrderIdShippingLabelImport } from './routes/documents/orders/$orderId/shipping-label'
 import { Route as DocumentsOrdersOrderIdPurchaseOrderImport } from './routes/documents/orders/$orderId/purchase-order'
 import { Route as DocumentsOrdersOrderIdInvoiceImport } from './routes/documents/orders/$orderId/invoice'
@@ -96,6 +97,12 @@ const AppsFinancesAmazonIndexRoute = AppsFinancesAmazonIndexImport.update({
   path: '/amazon/',
   getParentRoute: () => AppsFinancesRoute,
 } as any)
+
+const DocumentsOrdersOrderIdStocktakeReportRoute =
+  DocumentsOrdersOrderIdStocktakeReportImport.update({
+    path: '/orders/$orderId/stocktake-report',
+    getParentRoute: () => DocumentsRoute,
+  } as any)
 
 const DocumentsOrdersOrderIdShippingLabelRoute =
   DocumentsOrdersOrderIdShippingLabelImport.update({
@@ -279,6 +286,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocumentsOrdersOrderIdShippingLabelImport
       parentRoute: typeof DocumentsImport
     }
+    '/documents/orders/$orderId/stocktake-report': {
+      id: '/documents/orders/$orderId/stocktake-report'
+      path: '/orders/$orderId/stocktake-report'
+      fullPath: '/documents/orders/$orderId/stocktake-report'
+      preLoaderRoute: typeof DocumentsOrdersOrderIdStocktakeReportImport
+      parentRoute: typeof DocumentsImport
+    }
     '/_apps/finances/amazon/': {
       id: '/_apps/finances/amazon/'
       path: '/amazon'
@@ -403,6 +417,7 @@ interface DocumentsRouteChildren {
   DocumentsOrdersOrderIdInvoiceRoute: typeof DocumentsOrdersOrderIdInvoiceRoute
   DocumentsOrdersOrderIdPurchaseOrderRoute: typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   DocumentsOrdersOrderIdShippingLabelRoute: typeof DocumentsOrdersOrderIdShippingLabelRoute
+  DocumentsOrdersOrderIdStocktakeReportRoute: typeof DocumentsOrdersOrderIdStocktakeReportRoute
 }
 
 const DocumentsRouteChildren: DocumentsRouteChildren = {
@@ -413,6 +428,8 @@ const DocumentsRouteChildren: DocumentsRouteChildren = {
     DocumentsOrdersOrderIdPurchaseOrderRoute,
   DocumentsOrdersOrderIdShippingLabelRoute:
     DocumentsOrdersOrderIdShippingLabelRoute,
+  DocumentsOrdersOrderIdStocktakeReportRoute:
+    DocumentsOrdersOrderIdStocktakeReportRoute,
 }
 
 const DocumentsRouteWithChildren = DocumentsRoute._addFileChildren(
@@ -436,6 +453,7 @@ export interface FileRoutesByFullPath {
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
+  '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
   '/finances/amazon': typeof AppsFinancesAmazonIndexRoute
   '/finances/amazon/$year/$month': typeof AppsFinancesAmazonYearMonthRoute
   '/finances/amazon/settlements': typeof AppsFinancesAmazonSettlementsIndexRoute
@@ -461,6 +479,7 @@ export interface FileRoutesByTo {
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
+  '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
   '/finances/amazon': typeof AppsFinancesAmazonIndexRoute
   '/finances/amazon/$year/$month': typeof AppsFinancesAmazonYearMonthRoute
   '/finances/amazon/settlements': typeof AppsFinancesAmazonSettlementsIndexRoute
@@ -488,6 +507,7 @@ export interface FileRoutesById {
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
+  '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
   '/_apps/finances/amazon/': typeof AppsFinancesAmazonIndexRoute
   '/_apps/finances/amazon/$year/$month': typeof AppsFinancesAmazonYearMonthRoute
   '/_apps/finances/amazon/settlements/': typeof AppsFinancesAmazonSettlementsIndexRoute
@@ -516,6 +536,7 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/invoice'
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
+    | '/documents/orders/$orderId/stocktake-report'
     | '/finances/amazon'
     | '/finances/amazon/$year/$month'
     | '/finances/amazon/settlements'
@@ -540,6 +561,7 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/invoice'
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
+    | '/documents/orders/$orderId/stocktake-report'
     | '/finances/amazon'
     | '/finances/amazon/$year/$month'
     | '/finances/amazon/settlements'
@@ -565,6 +587,7 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/invoice'
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
+    | '/documents/orders/$orderId/stocktake-report'
     | '/_apps/finances/amazon/'
     | '/_apps/finances/amazon/$year/$month'
     | '/_apps/finances/amazon/settlements/'
@@ -620,7 +643,8 @@ export const routeTree = rootRoute
         "/documents/orders/$orderId/commercial-invoice",
         "/documents/orders/$orderId/invoice",
         "/documents/orders/$orderId/purchase-order",
-        "/documents/orders/$orderId/shipping-label"
+        "/documents/orders/$orderId/shipping-label",
+        "/documents/orders/$orderId/stocktake-report"
       ]
     },
     "/_apps/finances": {
@@ -691,6 +715,10 @@ export const routeTree = rootRoute
     },
     "/documents/orders/$orderId/shipping-label": {
       "filePath": "documents/orders/$orderId/shipping-label.tsx",
+      "parent": "/documents"
+    },
+    "/documents/orders/$orderId/stocktake-report": {
+      "filePath": "documents/orders/$orderId/stocktake-report.tsx",
       "parent": "/documents"
     },
     "/_apps/finances/amazon/": {

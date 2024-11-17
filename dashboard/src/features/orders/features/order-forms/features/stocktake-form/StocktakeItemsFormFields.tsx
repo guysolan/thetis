@@ -18,7 +18,6 @@ interface StocktakeItemsFormFieldsProps {
     fields: any[];
     items: Array<{ item_id: string; item_name: string; item_type: string }>;
     form: UseFormReturn<any>;
-    getItemQuantities: (itemId: string) => StockItemQuantities;
 }
 
 const StocktakeItemsFormFields = ({
@@ -26,9 +25,9 @@ const StocktakeItemsFormFields = ({
     fields,
     items,
     form,
-    getItemQuantities,
 }: StocktakeItemsFormFieldsProps) => {
     const allowedTypes = ["part", "product"];
+
     return (
         <Table>
             <TableHeader>
@@ -41,52 +40,53 @@ const StocktakeItemsFormFields = ({
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {fields.map((field, index) => {
-                    const quantities = getItemQuantities(
-                        form.watch(`${name}.${index}.item_id`),
-                    );
-                    return (
-                        <TableRow key={field.id}>
-                            {allowedTypes.length > 1 && (
-                                <TableCell>
-                                    <ItemTypeSelect
-                                        name={`${name}.${index}.item_type`}
-                                    />
-                                </TableCell>
-                            )}
+                {fields.map((field, index) => (
+                    <TableRow key={field.id}>
+                        {allowedTypes.length > 1 && (
                             <TableCell>
-                                <Select
-                                    name={`${name}.${index}.item_id`}
-                                    options={items
-                                        ?.filter(
-                                            (item) =>
-                                                item.item_type ===
-                                                    form.watch(
-                                                        `${name}.${index}.item_type`,
-                                                    ),
-                                        )
-                                        .map((item) => ({
-                                            label: item.item_name,
-                                            value: String(item.item_id),
-                                        })) || []}
+                                <ItemTypeSelect
+                                    name={`${name}.${index}.item_type`}
                                 />
                             </TableCell>
-                            <TableCell>
-                                <NumberCell value={quantities.before} />
-                            </TableCell>
-                            <TableCell>
-                                <NumberCell value={quantities.change} />
-                            </TableCell>
-                            <TableCell>
-                                <Input
-                                    name={`${name}.${index}.quantity_change`}
-                                    type="number"
-                                    defaultValue={quantities.before}
-                                />
-                            </TableCell>
-                        </TableRow>
-                    );
-                })}
+                        )}
+                        <TableCell>
+                            <Select
+                                name={`${name}.${index}.item_id`}
+                                options={items
+                                    ?.filter((item) =>
+                                        item.item_type ===
+                                            form.watch(
+                                                `${name}.${index}.item_type`,
+                                            )
+                                    )
+                                    .map((item) => ({
+                                        label: item.item_name,
+                                        value: String(item.item_id),
+                                    })) || []}
+                            />
+                        </TableCell>
+                        <TableCell>
+                            <Input
+                                name={`${name}.${index}.quantity_before`}
+                                type="number"
+                                disabled={true}
+                            />
+                        </TableCell>
+                        <TableCell>
+                            <Input
+                                name={`${name}.${index}.quantity_change`}
+                                type="number"
+                                disabled={true}
+                            />
+                        </TableCell>
+                        <TableCell>
+                            <Input
+                                name={`${name}.${index}.quantity_after`}
+                                type="number"
+                            />
+                        </TableCell>
+                    </TableRow>
+                ))}
             </TableBody>
         </Table>
     );

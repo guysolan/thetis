@@ -1,13 +1,8 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView";
-import { useStockQuantities } from "../../hooks/useStockQuantities";
-import StockItemsFormFields from "../../components/StockItemsFormFields";
-import StockItemsSummary from "../../components/StockItemsSummary";
+import { useStocktakeForm } from "../../hooks/useStocktakeForm";
 import StockItemActions from "../../components/StockItemActions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
-import { useState } from "react";
 import {
     AddressName,
     ItemType,
@@ -37,7 +32,8 @@ const StocktakeItems = ({
     const form = useFormContext();
     const { data: addresses } = useSelectAddresses();
     const { fields, append, remove } = useFieldArray({ name });
-    const { getItemQuantities } = useStockQuantities(name, address_name);
+
+    useStocktakeForm(name, address_name);
 
     const address = addresses?.find(
         (a) => String(a.id) === form.watch(address_name),
@@ -67,7 +63,6 @@ const StocktakeItems = ({
                     fields={fields}
                     items={items || []}
                     form={form}
-                    getItemQuantities={getItemQuantities}
                 />
                 <StockItemActions
                     allowedTypes={allowedTypes}

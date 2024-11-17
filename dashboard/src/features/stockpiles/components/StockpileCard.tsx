@@ -70,7 +70,13 @@ const StockpileCard = ({ stockpile }: Props) => {
                     <StocktakeForm
                         orderItems={stockpile?.items?.map((i) => ({
                             item_id: String(i.item_id),
-                            quantity_change: 0,
+                            quantity_before: i.item_quantity,
+                            quantity_after: i.item_quantity < 0
+                                ? 0
+                                : i.item_quantity,
+                            quantity_change: i.item_quantity < 0
+                                ? -i.item_quantity
+                                : 0,
                             item_type: i.item_type,
                         }))}
                         addressId={String(stockpile.stockpile_id)}

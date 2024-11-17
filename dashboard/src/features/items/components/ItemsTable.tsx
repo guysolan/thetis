@@ -22,28 +22,26 @@ export default function ItemsTable({ items }: Props) {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {items
-                    ?.filter((item: any) => item.item_quantity > 0)
-                    ?.map((wp: any) => (
-                        <TableRow
-                            key={`item-${wp.item_id}`}
-                        >
-                            <TableCell>
-                                <Badge
-                                    className="capitalize"
-                                    variant="default"
-                                >
-                                    {wp.item_type}
-                                </Badge>
-                            </TableCell>
-                            <TableCell>
-                                {wp.item_name}
-                            </TableCell>
-                            <TableCell>
-                                {wp.item_quantity}
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                {items?.map((wp: any) => (
+                    <TableRow
+                        key={`item-${wp.item_id}`}
+                    >
+                        <TableCell>
+                            <Badge
+                                className="capitalize"
+                                variant="default"
+                            >
+                                {wp.item_type}
+                            </Badge>
+                        </TableCell>
+                        <TableCell>
+                            {wp.item_name}
+                        </TableCell>
+                        <TableCell>
+                            {wp.item_quantity}
+                        </TableCell>
+                    </TableRow>
+                ))}
             </TableBody>
         </Table>
     );
