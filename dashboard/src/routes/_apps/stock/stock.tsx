@@ -1,12 +1,12 @@
-import { createFileRoute } from '@tanstack/react-router'
-import Sheet from '@/components/Sheet'
-import { selectStockpilesQueryOptions } from '@/features/stockpiles/api/selectStockpiles'
-import { Button } from '@/components/ui/button'
-import PageTitle from '@/components/PageTitle'
-import AddressForm from '@/features/stockpiles/components/AddressForm'
-import AmazonStock from '@/features/stockpiles/components/AmazonWarehouses'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import AddressStock from '@/features/stockpiles/components/AddressStock'
+import { createFileRoute } from "@tanstack/react-router";
+import Sheet from "@/components/Sheet";
+import { selectStockpilesQueryOptions } from "@/features/stockpiles/api/selectStockpiles";
+import { Button } from "@/components/ui/button";
+import PageTitle from "@/components/PageTitle";
+import AddressForm from "@/features/stockpiles/components/AddressForm";
+import AmazonStock from "@/features/stockpiles/components/AmazonWarehouses";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AddressStock from "@/features/stockpiles/components/AddressStock";
 
 const ItemsPage = () => {
   return (
@@ -23,7 +23,7 @@ const ItemsPage = () => {
 
       <Tabs defaultValue="stockpiles" className="w-full">
         <TabsList>
-          <TabsTrigger value="stockpiles">Stock</TabsTrigger>
+          <TabsTrigger value="stockpiles">Stockpiles</TabsTrigger>
           <TabsTrigger value="amazon">Amazon</TabsTrigger>
         </TabsList>
 
@@ -36,12 +36,12 @@ const ItemsPage = () => {
         </TabsContent>
       </Tabs>
     </>
-  )
-}
+  );
+};
 
-export const Route = createFileRoute('/_apps/stock/stock')({
+export const Route = createFileRoute("/_apps/stock/stock")({
   component: ItemsPage,
   loader: async ({ context }) => {
-    await context.queryClient.ensureQueryData(selectStockpilesQueryOptions())
+    await context.queryClient.ensureQueryData(selectStockpilesQueryOptions());
   },
-})
+});

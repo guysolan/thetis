@@ -36,7 +36,7 @@ const BuildFormFields = () => {
                 defaultIsExpanded={true}
                 name="produced_items"
                 address_name="from_shipping_address_id"
-                allowedTypes={["product"]}
+                allowedTypes={["product", "part"]}
             />
             <StockValidationAlert
                 itemsFieldName="consumed_items"
@@ -45,9 +45,14 @@ const BuildFormFields = () => {
             <StockItems
                 name="consumed_items"
                 address_name="from_shipping_address_id"
+                readOnly={true}
+                defaultIsExpanded={false}
             />
 
-            <PriceItems showPrice={true} />
+            <PriceItems
+                allowedTypes={["product", "part", "service"]}
+                showPrice={true}
+            />
         </>
     );
 };

@@ -30,7 +30,6 @@ export const CompanySummaryView = ({
             <div className="flex flex-row items-center gap-2">
                 <User2 size={20} />
                 {contact}
-                {/* {getContactOptions().map((c) => c.label).join(", ")} */}
             </div>
         </div>
     );

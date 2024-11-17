@@ -22,6 +22,7 @@ interface StockItemProps {
     title?: string;
     allowedTypes?: ItemType[];
     defaultIsExpanded?: boolean;
+    readOnly?: boolean;
 }
 
 const StockItems = ({
@@ -30,6 +31,7 @@ const StockItems = ({
     title,
     allowedTypes = [],
     defaultIsExpanded = false,
+    readOnly = false,
 }: StockItemProps) => {
     const [isExpanded, setIsExpanded] = useState(defaultIsExpanded);
     const { data: items } = useSelectItemsView();
@@ -55,6 +57,8 @@ const StockItems = ({
         } as StockItemFormData);
     };
 
+    const showEditButton = !readOnly;
+
     return (
         <Card>
             <CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
@@ -64,17 +68,19 @@ const StockItems = ({
                             name.includes("consumed") ? "Consumed" : "Produced"
                         } ${address?.name ? `(${address.name})` : ""}`}
                 </CardTitle>
-                <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setIsExpanded(!isExpanded)}
-                >
-                    <Pencil className="w-4 h-4" />
-                </Button>
+                {showEditButton && (
+                    <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setIsExpanded(!isExpanded)}
+                    >
+                        <Pencil className="w-4 h-4" />
+                    </Button>
+                )}
             </CardHeader>
             <CardContent>
-                {isExpanded
+                {(isExpanded && !readOnly)
                     ? (
                         <div className="space-y-4">
                             <StockItemsFormFields
@@ -85,6 +91,7 @@ const StockItems = ({
                                 getItemQuantities={getItemQuantities}
                                 onCopy={copyRow}
                                 onRemove={remove}
+                                allowedTypes={allowedTypes}
                             />
                             <StockItemActions
                                 allowedTypes={allowedTypes}

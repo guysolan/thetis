@@ -1,7 +1,7 @@
 import { OrderItem } from "./schema";
 import { ItemView } from "../../../items/types";
 
-export type ItemType = "part" | "product";
+export type ItemType = "part" | "product" | "service" | "package";
 export type StockItemName =
     | "produced_items"
     | "consumed_items"
