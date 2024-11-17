@@ -5,6 +5,7 @@ import { Form } from "@/components/ui/form";
 import dayjs from "dayjs";
 import OrderFormButton from "./OrderFormButton";
 import React from "react";
+import { StockValidationConfig } from "../hooks/useStockValidation";
 
 interface BaseOrderFormProps<T extends z.ZodType> {
     schema: T;
@@ -12,12 +13,14 @@ interface BaseOrderFormProps<T extends z.ZodType> {
     onSubmit: (data: z.infer<T>) => Promise<void>;
     children: React.ReactNode;
     title?: string;
+    config?: StockValidationConfig;
 }
 
 export function BaseOrderForm<T extends z.ZodType>({
     schema,
     defaultValues,
     onSubmit,
+    config,
     children,
 }: BaseOrderFormProps<T>) {
     const form = useForm<z.infer<T>>({
@@ -44,7 +47,10 @@ export function BaseOrderForm<T extends z.ZodType>({
                 className="flex flex-col space-y-4 px-1 pt-2 pr-4"
             >
                 {children}
-                <OrderFormButton onClick={form.handleSubmit(handleSubmit)} />
+                <OrderFormButton
+                    config={config}
+                    onClick={form.handleSubmit(handleSubmit)}
+                />
             </form>
         </Form>
     );

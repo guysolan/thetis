@@ -5,7 +5,6 @@ import { useLogout } from "./hooks/useLogout";
 export function Logout() {
     const { data: user } = useAuth();
     const { mutate: logout } = useLogout();
-    console.log(user);
     if (!user) {
         return null;
     }

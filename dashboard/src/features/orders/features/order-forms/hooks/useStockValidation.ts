@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { StockValidationResult } from "../types";
 import { useStockQuantities } from "./useStockQuantities";
 
-interface StockValidationConfig {
+export interface StockValidationConfig {
     itemsFieldName?: string;
     addressFieldName?: string;
 }

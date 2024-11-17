@@ -58,6 +58,10 @@ const BuyForm = () => {
 
     return (
         <BaseOrderForm
+            config={{
+                itemsFieldName: "consumed_items",
+                addressFieldName: "from_shipping_address_id",
+            }}
             schema={buyFormSchema}
             // @ts-expect-error
             defaultValues={defaultValues}

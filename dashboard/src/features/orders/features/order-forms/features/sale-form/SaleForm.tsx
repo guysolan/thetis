@@ -50,6 +50,10 @@ const SaleForm = () => {
             // @ts-expect-error
             defaultValues={defaultValues}
             onSubmit={handleSubmit}
+            config={{
+                itemsFieldName: "consumed_items",
+                addressFieldName: "from_shipping_address_id",
+            }}
         >
             <SaleFormFields />
         </BaseOrderForm>

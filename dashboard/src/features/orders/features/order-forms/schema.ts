@@ -20,19 +20,19 @@ export type OrderItem = z.infer<typeof orderItemSchema>;
 const itemSchema = z.object({
     item_id: z.string(),
     item_name: z.string().optional(),
-    quantity_change: z.coerce.number().multipleOf(0.01).optional(),
-    quantity_before: z.coerce.number().multipleOf(0.01).optional(),
-    quantity_after: z.coerce.number().multipleOf(0.01).optional(),
+    quantity_change: z.coerce.number().optional(),
+    quantity_before: z.coerce.number().optional(),
+    quantity_after: z.coerce.number().optional(),
     item_type: z.string(),
 });
 const pricedItemSchema = z.object({
     item_type: z.string(),
     item_id: z.string(),
     item_name: z.string().optional(),
-    quantity_change: z.coerce.number().multipleOf(0.01).optional(),
-    item_price: z.coerce.number().multipleOf(0.01).optional(),
-    item_tax: z.coerce.number().multipleOf(0.01).optional(),
-    quantity_after: z.coerce.number().multipleOf(0.01).optional(),
+    quantity_change: z.coerce.number().optional(),
+    item_price: z.coerce.number().optional(),
+    item_tax: z.coerce.number().optional(),
+    quantity_after: z.coerce.number().optional(),
 });
 
 export type ItemChange = z.infer<typeof pricedItemSchema>;

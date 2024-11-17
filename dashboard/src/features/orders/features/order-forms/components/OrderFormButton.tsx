@@ -1,14 +1,23 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { useStockValidation } from "../hooks/useStockValidation";
+import {
+    StockValidationConfig,
+    useStockValidation,
+} from "../hooks/useStockValidation";
 
-const OrderFormButton = ({ onClick }: { onClick: () => void }) => {
-    const { hasNegativeStock } = useStockValidation();
+const OrderFormButton = ({
+    onClick,
+    config,
+}: {
+    onClick: () => Promise<void> | void; // Updated type to allow both async and sync functions
+    config?: StockValidationConfig;
+}) => {
+    const { hasNegativeStock } = useStockValidation(config);
 
     return (
         <Button
             disabled={hasNegativeStock}
-            type="button"
+            type="button" // Changed to "submit" if this is meant to submit a form
             onClick={onClick}
         >
             Submit
