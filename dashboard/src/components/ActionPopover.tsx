@@ -14,6 +14,7 @@ interface ActionPopoverProps {
     editForm: React.ReactNode;
     deleteFunction: () => void;
     onDuplicate?: () => void;
+    children?: React.ReactNode;
 }
 
 const ActionPopover = ({
@@ -22,11 +23,17 @@ const ActionPopover = ({
     editForm,
     deleteFunction,
     onDuplicate,
+    children,
 }: ActionPopoverProps) => {
     return (
         <Popover>
             <PopoverTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button
+                    type="button"
+                    onClick={(e) => e.stopPropagation()}
+                    variant="ghost"
+                    size="icon"
+                >
                     <MoreVertical size={20} />
                 </Button>
             </PopoverTrigger>
@@ -59,7 +66,7 @@ const ActionPopover = ({
                         <Copy size={20} />Duplicate
                     </Button>
                 )}
-
+                {children}
                 <DeleteDialog
                     trigger={
                         <Button

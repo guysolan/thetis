@@ -1,11 +1,11 @@
-import { buildFormSchema, OrderItem } from "../../schema";
+import { buyFormSchema } from "../../schema";
 import { BaseOrderForm } from "../../components/BaseOrderForm";
 import { useCreateOrder } from "../../../../api/createOrder";
-import BuildFormFields from "./BuildFormFields";
+import BuyFormFields from "./BuyFormFields";
 import dayjs from "dayjs";
 import { formatCreateOrderArguments } from "../../utils/formatCreateOrderArguments";
 
-const BuildForm = () => {
+const BuyForm = () => {
     const { mutate: createOrder } = useCreateOrder();
     const defaultValues = {
         order_items: [{
@@ -16,7 +16,7 @@ const BuildForm = () => {
         order_date: dayjs().toDate(),
         consumed_items: [],
         produced_items: [],
-        order_type: "build",
+        order_type: "purchase",
         from_company_id: "",
         from_billing_address_id: "",
         from_shipping_address_id: "",
@@ -58,14 +58,14 @@ const BuildForm = () => {
 
     return (
         <BaseOrderForm
-            schema={buildFormSchema}
+            schema={buyFormSchema}
             // @ts-expect-error
             defaultValues={defaultValues}
             onSubmit={handleSubmit}
         >
-            <BuildFormFields />
+            <BuyFormFields />
         </BaseOrderForm>
     );
 };
 
-export default BuildForm;
+export default BuyForm;

@@ -25,7 +25,7 @@ import {
  *
  * @returns void
  */
-export const useBuildForm = () => {
+export const useBuyForm = () => {
     const { setValue, watch } = useFormContext();
     const { data: items } = useSelectItemsView();
     const { data: addressItems } = useSelectItemsByAddress();
@@ -44,17 +44,7 @@ export const useBuildForm = () => {
     const selectedAddress = watch("from_shipping_address_id");
 
     useEffect(() => {
-        console.log("useEffect triggered", {
-            producedItems,
-            producedItemsValues,
-        }); // Debug log
-
         if (!producedItems?.length || !items || !addressItems) {
-            console.log("Missing required data", {
-                hasProducedItems: !!producedItems?.length,
-                hasItems: !!items,
-                hasAddressItems: !!addressItems,
-            });
             return;
         }
 
@@ -119,8 +109,6 @@ function processOrderItems(producedItems: ItemChange[], items: any[]) {
     const orderItems: OrderItem[] = [];
 
     producedItems.forEach((producedItem) => {
-        console.log("producedItem", producedItem);
-
         const itemInView = items.find((p) =>
             String(p.item_id) === String(producedItem.item_id)
         );
@@ -172,8 +160,6 @@ function processOrderItems(producedItems: ItemChange[], items: any[]) {
             }
         });
     });
-
-    console.log("consumedItems", consumedItems);
 
     // Consolidate consumed items with same item_id
     const consolidatedConsumedItems = consolidateConsumedItems(consumedItems);

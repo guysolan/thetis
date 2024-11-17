@@ -45,6 +45,6 @@ const OrdersPage = () => {
   );
 };
 
-export const Route = createFileRoute("/_apps/stock/orders/")({
+export const Route = createFileRoute("/_apps/stock/orders")({
   component: OrdersPage,
 });

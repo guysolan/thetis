@@ -53,14 +53,6 @@ export const findStockLevel = (
         return sum;
     }, 0);
 
-    console.log("Stock calculation:", {
-        componentId,
-        baseStock: stockItem?.item_quantity || 0,
-        producedQuantity,
-        total: (stockItem ? parseFloat(String(stockItem.item_quantity)) : 0) +
-            producedQuantity,
-    });
-
     return (stockItem ? parseFloat(String(stockItem.item_quantity)) : 0) +
         producedQuantity;
 };
@@ -103,12 +95,6 @@ export const processComponent = (
     addressStock: any[],
     producedItems: ItemChange[],
 ) => {
-    console.log("Processing component:", {
-        component,
-        producedQuantity,
-        addressStockLength: addressStock.length,
-    });
-
     if (component.component_type === "service") {
         const serviceItem = createServiceItem(
             component,
@@ -117,7 +103,6 @@ export const processComponent = (
                 producedQuantity,
             ),
         );
-        console.log("Created service item:", serviceItem);
         return {
             consumedItems: [],
             purchaseItems: [serviceItem],
@@ -133,12 +118,6 @@ export const processComponent = (
         addressStock,
         producedItems,
     );
-
-    console.log("Stock check:", {
-        componentId: component.component_id,
-        requiredQuantity,
-        currentStock,
-    });
 
     if (currentStock >= requiredQuantity) {
         return {

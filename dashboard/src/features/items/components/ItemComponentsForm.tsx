@@ -31,6 +31,9 @@ const formSchema = z.object({
 			component_id: z.string().min(1, {
 				message: "Component item is required",
 			}),
+			component_type: z.string().min(1, {
+				message: "Component type is required",
+			}),
 		}),
 	),
 });
@@ -40,7 +43,11 @@ export type ItemFormData = z.infer<typeof formSchema>;
 function ItemComponentsForm({
 	itemId,
 	defaultValues,
-}: { itemId: number; defaultValues?: ItemFormData }) {
+}: {
+	itemId: number;
+	defaultValues?: ItemFormData;
+}) {
+	const allowedTypes = ["part", "product"];
 	const { data: itemsView } = useSelectItemsView();
 	const { mutate: upsertItem } = useUpsertItemComponents();
 
@@ -59,10 +66,23 @@ function ItemComponentsForm({
 	console.log(form.getValues());
 
 	async function onSubmit(values: ItemFormData) {
-		console.log(values);
+		const upsertItems = values.item_components.map((item) => ({
+			item_id: item.item_id,
+			component_id: item.component_id,
+			component_quantity: item.component_quantity,
+		}));
 		// @ts-ignore
-		await upsertItem(values.item_components);
+		await upsertItem(upsertItems);
 	}
+
+	const getFilteredItemOptions = (itemType: string) => {
+		return itemsView
+			?.filter((item) => item.item_type === itemType)
+			.map((ic) => ({
+				label: ic.item_name,
+				value: String(ic.item_id),
+			})) || [];
+	};
 
 	return (
 		<Form {...form}>
@@ -73,6 +93,7 @@ function ItemComponentsForm({
 				<Table>
 					<TableHeader>
 						<TableRow>
+							<TableHead>Type</TableHead>
 							<TableHead>Component</TableHead>
 							<TableHead>Quantity</TableHead>
 							<TableHead>Actions</TableHead>
@@ -83,11 +104,27 @@ function ItemComponentsForm({
 							<TableRow key={field.id}>
 								<TableCell>
 									<Select
-										name={`item_components.${index}.component_id`}
-										options={itemsView?.map((ic) => ({
-											label: ic.item_name,
-											value: String(ic.item_id),
+										name={`item_components.${index}.component_type`}
+										options={allowedTypes.map((type) => ({
+											label: type,
+											value: type,
 										}))}
+										onChange={() => {
+											form.setValue(
+												`item_components.${index}.component_id`,
+												"",
+											);
+										}}
+									/>
+								</TableCell>
+								<TableCell>
+									<Select
+										name={`item_components.${index}.component_id`}
+										options={getFilteredItemOptions(
+											form.watch(
+												`item_components.${index}.component_type`,
+											),
+										)}
 									/>
 								</TableCell>
 								<TableCell>
@@ -117,6 +154,7 @@ function ItemComponentsForm({
 							component_id: "",
 							component_quantity: 1,
 							item_id: String(itemId),
+							component_type: allowedTypes[0] || "",
 						})}
 				>
 					Add Component

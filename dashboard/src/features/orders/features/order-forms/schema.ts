@@ -71,14 +71,9 @@ export const shipmentFormSchema = baseAddressSchema.extend({
     to_items: z.array(itemSchema),
 });
 
-export const purchaseFormSchema = baseAddressSchema.extend({
+export const buyFormSchema = baseAddressSchema.extend({
+    ...baseOrderSchema.shape,
     order_type: z.enum(["purchase"]),
-    ...baseOrderSchema.shape,
-});
-
-export const buildFormSchema = baseAddressSchema.extend({
-    ...baseOrderSchema.shape,
-    order_type: z.enum(["build"]),
     produced_items: z.array(pricedItemSchema),
     consumed_items: z.array(pricedItemSchema),
 });
@@ -99,8 +94,7 @@ export const stockTakeFormSchema = z.object({
 });
 
 export type SaleFormData = z.infer<typeof saleFormSchema>;
-export type PurchaseFormData = z.infer<typeof purchaseFormSchema>;
-export type BuildFormData = z.infer<typeof buildFormSchema>;
+export type BuyFormData = z.infer<typeof buyFormSchema>;
 export type ShipmentFormData = z.infer<typeof shipmentFormSchema>;
 
 export type OrderItemChange = {

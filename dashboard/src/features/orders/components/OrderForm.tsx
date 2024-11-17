@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PurchaseForm from "../features/order-forms/features/purchase-form/PurchaseForm";
 import SaleForm from "../features/order-forms/features/sale-form/SaleForm";
-import BuildForm from "../features/order-forms/features/build-form/BuildForm";
+import BuyForm from "../features/order-forms/features/buy-form/BuyForm";
 import { Banknote, Hammer, Info, ShoppingCart, Truck } from "lucide-react";
 import ShipmentForm from "../features/order-forms/features/shipment-form/ShipmentForm";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -48,7 +48,7 @@ export const OrderForm: React.FC = () => {
 					</AlertDescription>
 				</Alert>
 				{/* <PurchaseForm /> */}
-				<BuildForm />
+				<BuyForm />
 			</TabsContent>
 			<TabsContent value="sale">
 				<Alert className="mb-4">

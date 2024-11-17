@@ -30,8 +30,8 @@ export const useStockValidation = (config?: StockValidationConfig) => {
                 return quantities.after < 0;
             })
             .map((item) => ({
-                name: item.item_name,
-                quantity: getItemQuantities(item.item_id).after,
+                ...item,
+                item_quantity: getItemQuantities(item.item_id).after,
             }));
     }, [items, getItemQuantities]);
 

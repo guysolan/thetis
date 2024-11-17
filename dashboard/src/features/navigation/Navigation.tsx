@@ -38,6 +38,7 @@ type Jobs = {
 
 import { jobs } from "./content";
 import { Logout } from "../auth/Logout";
+import MyCompany from "../companies/components/MyCompany";
 
 const Navigation = () => {
   const location = useLocation();
@@ -79,7 +80,10 @@ const Navigation = () => {
             ))}
           </BreadcrumbList>
         </Breadcrumb>
-        <Logout />
+        <div className="flex items-center gap-2">
+          <MyCompany />
+          <Logout />
+        </div>
       </div>
 
       {jobs[currentSection] && jobs[currentSection].pages && (

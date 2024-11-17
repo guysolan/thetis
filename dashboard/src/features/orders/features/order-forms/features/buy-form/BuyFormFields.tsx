@@ -2,17 +2,21 @@ import CompanyAddressSelect from "@/features/companies/components/CompanyAddress
 import PriceItems from "../../components/PriceItems";
 import StockItems from "../../components/StockItems";
 import { StockValidationAlert } from "../../components/StockValidationAlert";
-import { useBuildForm } from "./useBuildForm";
+import { useBuyForm } from "./useBuyForm";
 import DatePicker from "../../../../../../components/DatePicker";
 import Select from "../../../../../../components/Select";
-import Input from "../../../../../../components/Input";
 import { currencyTypes } from "../../schema";
 import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";
-const BuildFormFields = () => {
+import { useFormContext } from "react-hook-form";
+const BuyFormFields = () => {
     // Initialize the build form logic
-    useBuildForm();
+    const form = useFormContext();
+    useBuyForm();
     useCompanyDefaults({ fieldName: "to_company_id" });
 
+    const producedItems = form.watch("produced_items");
+    const addToProducedItems = (newItem: any) =>
+        form.setValue("produced_items", [...producedItems, newItem]);
     return (
         <>
             <div className="flex flex-row gap-4">
@@ -36,10 +40,11 @@ const BuildFormFields = () => {
                 defaultIsExpanded={true}
                 name="produced_items"
                 address_name="from_shipping_address_id"
-                allowedTypes={["product", "part"]}
+                allowedTypes={["part", "product"]}
                 title="Requested Items"
             />
             <StockValidationAlert
+                addItem={addToProducedItems}
                 itemsFieldName="consumed_items"
                 addressFieldName="from_shipping_address_id"
             />
@@ -60,4 +65,4 @@ const BuildFormFields = () => {
     );
 };
 
-export default BuildFormFields;
+export default BuyFormFields;

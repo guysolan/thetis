@@ -35,6 +35,13 @@ FROM
 WHERE
     u.uuid = 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11';
 
+-- Insert service items first
+INSERT INTO items(name, price, type, company_id)
+    VALUES ('Assemble Large Splint', 8.50, 'service', 1),
+('Assemble Small Splint', 7.50, 'service', 1),
+('Pack Large Splint', 3.08, 'service', 1),
+('Pack Small Splint', 2.58, 'service', 1);
+
 -- Insert items (parts) with company_id
 INSERT INTO items(name, price, type, sku, country_of_origin, company_id)
     VALUES ('Instruction Leaflet', 0.20, 'part', 'TM-PART-001', 'United Kingdom', 1),
@@ -58,6 +65,88 @@ INSERT INTO items(name, price, type, height, width, depth, weight, sku, country_
 ('Box of 50 Achilles Tendon Rupture Night Splints - Large Right', 4499.50, 'package', 60.00, 40.00, 35.00, 10.00, 'TM-ATRNS-LR-50', 'United Kingdom', 1),
 ('Box of 25 Achilles Tendon Rupture Night Splints - Small Left', 1999.75, 'package', 60.00, 40.00, 35.00, 5.00, 'TM-ATRNS-SL-25', 'United Kingdom', 1),
 ('Box of 25 Achilles Tendon Rupture Night Splints - Small Right', 1999.75, 'package', 60.00, 40.00, 35.00, 5.00, 'TM-ATRNS-SR-25', 'United Kingdom', 1);
+
+-- Add components to products (including services)
+WITH product_components AS (
+    SELECT
+        p.id AS product_id,
+        i.id AS component_id,
+        CASE
+        -- Physical components
+        WHEN i.type = 'part' THEN
+            CASE
+            -- Webbing quantities
+            WHEN i.name = 'Webbing'
+                AND p.name LIKE '%Large%' THEN
+                0.40
+            WHEN i.name = 'Webbing'
+                AND p.name LIKE '%Small%' THEN
+                0.36
+                -- Elastic quantities
+            WHEN i.name = 'Elastic'
+                AND p.name LIKE '%Large%' THEN
+                0.82
+            WHEN i.name = 'Elastic'
+                AND p.name LIKE '%Small%' THEN
+                0.78
+                -- Box or Bag (1 each)
+            WHEN (i.name LIKE '%Box%'
+                AND p.name LIKE '%Box%'
+                AND ((i.name LIKE '%Left%'
+                        AND p.name LIKE '%Left%')
+                    OR (i.name LIKE '%Right%'
+                        AND p.name LIKE '%Right%'))) THEN
+                1
+            WHEN i.name = 'Storage Bag'
+                AND p.name LIKE '%Bag%' THEN
+                1
+                -- Instruction Leaflet and Flier (1 each)
+            WHEN i.name IN ('Instruction Leaflet', 'Flier') THEN
+                1
+            ELSE
+                0
+            END
+            -- Service components
+        WHEN i.type = 'service' THEN
+            CASE WHEN p.name LIKE '%Large%'
+                AND i.name IN ('Assemble Large Splint', 'Pack Large Splint') THEN
+                1
+            WHEN p.name LIKE '%Small%'
+                AND i.name IN ('Assemble Small Splint', 'Pack Small Splint') THEN
+                1
+            ELSE
+                0
+            END
+        ELSE
+            0
+        END AS quantity
+    FROM
+        items p
+        CROSS JOIN items i
+    WHERE
+        p.type = 'product'
+        AND (
+            -- Include both parts and services
+(i.type = 'part'
+                AND i.name IN ('Webbing', 'Elastic', 'Box Left Small', 'Box Right Small', 'Storage Bag', 'Instruction Leaflet', 'Flier'))
+            OR (i.type = 'service'
+                AND i.name IN ('Assemble Large Splint', 'Assemble Small Splint', 'Pack Large Splint', 'Pack Small Splint')))
+        AND CASE WHEN i.name LIKE '%Box%' THEN
+            p.name LIKE '%Box%'
+        WHEN i.name = 'Storage Bag' THEN
+            p.name LIKE '%Bag%'
+        ELSE
+            TRUE
+        END)
+INSERT INTO item_components(item_id, component_id, component_quantity)
+SELECT
+    product_id,
+    component_id,
+    quantity
+FROM
+    product_components
+WHERE
+    quantity > 0;
 
 -- Insert orders with updated schema (including company_id)
 INSERT INTO orders(order_type, order_date, carriage, company_id, from_company_id, to_company_id, from_billing_address_id, from_shipping_address_id, to_billing_address_id, to_shipping_address_id)
@@ -207,81 +296,6 @@ WHERE
             AND i.name IN ('Instruction Leaflet', 'Storage Bag'))
         OR (o.order_date = '2023-01-02 11:00:00'
             AND i.name IN ('Achilles Tendon Rupture Night Splint in Bag - Large Left', 'Achilles Tendon Rupture Night Splint in Bag - Large Right')));
-
--- Insert service item
-INSERT INTO items(name, price, type)
-    VALUES ('Splint Assembly Service', 11.58, 'service');
-
--- Get the ID of the newly inserted service item
-WITH service_item AS (
-    SELECT
-        id
-    FROM
-        items
-    WHERE
-        name = 'Splint Assembly Service'
-        AND type = 'service')
-    -- Insert item components for the service (assuming it's composed of labor only, no physical parts)
-    INSERT INTO item_components(item_id, component_id, component_quantity)
-    SELECT
-        p.id AS item_id,
-        s.id AS component_id,
-        1 AS component_quantity -- Assuming one unit of service is required for each product
-    FROM
-        items p
-    CROSS JOIN service_item s
-WHERE
-    p.type = 'product'
-    AND p.name LIKE 'Achilles Tendon Rupture Night Splint%';
-
--- Add the service to existing orders (assuming it's part of the sales)
-WITH service_item AS (
-    SELECT
-        id
-    FROM
-        items
-    WHERE
-        name = 'Splint Assembly Service'
-        AND type = 'service')
-INSERT INTO item_changes(item_id, quantity_change, address_id)
-SELECT
-    s.id,
-    - ic.quantity_change, -- Negative because it's a sale
-    ic.address_id
-FROM
-    item_changes ic
-    JOIN items i ON i.id = ic.item_id
-    CROSS JOIN service_item s
-WHERE
-    i.type = 'product'
-    AND i.name LIKE 'Achilles Tendon Rupture Night Splint%'
-    AND ic.quantity_change < 0;
-
--- Only for sales
--- Link the new item changes to the existing sales orders
-WITH new_changes AS (
-    SELECT
-        ic.id AS item_change_id,
-        i.id AS product_id
-    FROM
-        item_changes ic
-        JOIN items i ON i.id = ic.item_id
-    WHERE
-        i.name = 'Splint Assembly Service')
-INSERT INTO order_item_changes(order_id, item_change_id, price, tax)
-SELECT
-    oic.order_id,
-    nc.item_change_id,
-    11.58 AS price, -- The price of the service
-    0.2 AS tax -- Assuming 20% tax rate
-FROM
-    order_item_changes oic
-    JOIN item_changes ic ON ic.id = oic.item_change_id
-    JOIN items i ON i.id = ic.item_id
-    JOIN new_changes nc ON nc.product_id = i.id
-WHERE
-    i.type = 'product'
-    AND i.name LIKE 'Achilles Tendon Rupture Night Splint%';
 
 INSERT INTO storage.buckets(id, name)
     VALUES ('amazon-reports', 'amazon-reports')

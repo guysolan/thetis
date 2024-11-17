@@ -15,9 +15,6 @@ import MyCompany from "../../../features/companies/components/MyCompany";
 const DirectoryPage = () => {
     return (
         <>
-            <PageTitle title="Directory">
-            </PageTitle>
-
             <Tabs defaultValue="companies" className="w-full">
                 <div className="flex justify-between items-center mb-4">
                     <TabsList>
@@ -31,7 +28,6 @@ const DirectoryPage = () => {
                     </TabsList>
 
                     <TabsContent value="companies" className="m-0">
-                        <MyCompany />
                         <Sheet
                             trigger={<Button>New Company</Button>}
                             title="New Company"

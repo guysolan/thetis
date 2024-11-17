@@ -7,7 +7,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { OrderView } from "../types";
 import { Separator } from "@/components/ui/separator";
-import { ExternalLink } from "lucide-react";
+import { Dock, ExternalLink, Ship, Stamp, Tag } from "lucide-react";
 import dayjs from "dayjs";
 import OrderBreakdown from "../features/order-history/components/OrderBreakdown";
 import EditOrderForm from "./EditOrderForm";
@@ -15,6 +15,7 @@ import { Link } from "@tanstack/react-router";
 
 import ActionPopover from "@/components/ActionPopover";
 import { useDeleteOrder } from "../api/deleteOrder";
+import { Button } from "../../../components/ui/button";
 
 interface ExistingOrdersProps {
 	orders: OrderView[];
@@ -53,28 +54,72 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 								</span>
 							</div>
 							<div className="flex items-center gap-2">
-								<Link
-									to="/documents/orders/$orderId"
-									params={{ orderId: String(order.order_id) }}
-									target="_blank"
-									onClick={(e) => e.stopPropagation()}
-									className="flex items-center gap-2 text-blue-500 hover:underline"
-								>
-									<span className="sr-only md:not-sr-only">
-										Open in new tab
-									</span>
-									<ExternalLink size={20} />
-								</Link>
-								<Separator
-									orientation="vertical"
-									className="h-4"
-								/>
 								<ActionPopover
 									title={`Order ${order.order_id}`}
 									editForm={<EditOrderForm order={order} />}
 									deleteFunction={() =>
 										deleteOrder(order.order_id)}
-								/>
+								>
+									<Button
+										asChild
+										variant="ghost"
+										className="justify-between px-2"
+									>
+										<Link
+											to="/documents/orders/$orderId/commercial-invoice"
+											params={{
+												orderId: String(order.order_id),
+											}}
+											target="_blank"
+											onClick={(e) => e.stopPropagation()}
+										>
+											<span className="flex flex-row items-center gap-2">
+												<Stamp size={20} />{" "}
+												Commercial Invoice
+											</span>
+											<ExternalLink size={20} />
+										</Link>
+									</Button>
+									<Button
+										asChild
+										variant="ghost"
+										className="justify-between px-2"
+									>
+										<Link
+											to="/documents/orders/$orderId/shipping-label"
+											params={{
+												orderId: String(order.order_id),
+											}}
+											target="_blank"
+											onClick={(e) => e.stopPropagation()}
+										>
+											<span className="flex flex-row items-center gap-2">
+												<Tag size={20} /> Shipping Label
+											</span>
+											<ExternalLink size={20} />
+										</Link>
+									</Button>
+									<Button
+										asChild
+										variant="ghost"
+										className="justify-between px-2"
+									>
+										<Link
+											to="/documents/orders/$orderId/purchase-order"
+											params={{
+												orderId: String(order.order_id),
+											}}
+											target="_blank"
+											onClick={(e) => e.stopPropagation()}
+										>
+											<span className="flex flex-row items-center gap-2">
+												<Dock size={20} />{" "}
+												Purchase Order
+											</span>
+											<ExternalLink size={20} />
+										</Link>
+									</Button>
+								</ActionPopover>
 							</div>
 						</div>
 					</AccordionTrigger>
