@@ -34,7 +34,7 @@ const ItemsPage = () => {
 
   return (
     <>
-      <PageTitle title="Items">
+      <PageTitle title="Build">
         <Sheet
           trigger={<Button variant="default">New Item</Button>}
           title="Edit"
@@ -43,16 +43,15 @@ const ItemsPage = () => {
         </Sheet>
       </PageTitle>
 
-      <Tabs defaultValue="all" className="w-full">
+      <Tabs defaultValue="part" className="w-full">
         <TabsList className="my-2">
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="product">Products</TabsTrigger>
           <TabsTrigger value="part">Parts</TabsTrigger>
+          <TabsTrigger value="product">Products</TabsTrigger>
           <TabsTrigger value="service">Services</TabsTrigger>
           <TabsTrigger value="package">Packages</TabsTrigger>
         </TabsList>
 
-        {["all", "product", "part", "service", "package"].map((tabValue) => (
+        {["part", "product", "service", "package"].map((tabValue) => (
           <TabsContent key={tabValue} value={tabValue}>
             <section className="flex flex-col gap-4">
               {itemsView

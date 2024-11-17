@@ -8,14 +8,10 @@ const OrdersPage = () => {
   const { order } = Route.useLoaderData();
 
   switch (order.order_type) {
-    case ("build"):
-      return <BuildOrderDocument order={order} />;
-    case ("sale"):
-      return <SaleDocument order={order} />;
-    case ("purchase"):
-      return <SaleDocument order={order} />;
     case ("shipment"):
       return <CommercialInvoice order={order} />;
+    default:
+      return <SaleDocument order={order} />;
   }
   return (
     <>

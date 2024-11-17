@@ -64,9 +64,9 @@ const StockItems = ({
             <CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
                 <CardTitle className="font-medium text-base">
                     {title ||
-                        `Stock ${
-                            name.includes("consumed") ? "Consumed" : "Produced"
-                        } ${address?.name ? `(${address.name})` : ""}`}
+                        `Stock Changes ${
+                            address?.name ? `(${address.name})` : ""
+                        }`}
                 </CardTitle>
                 {showEditButton && (
                     <Button

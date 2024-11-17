@@ -23,7 +23,7 @@ export const OrderForm: React.FC = () => {
 						className="flex flex-row gap-2"
 						value="purchase"
 					>
-						<ShoppingCart size={16} />Purchase
+						<ShoppingCart size={16} />Buy
 					</TabsTrigger>
 					<TabsTrigger
 						className="flex flex-row gap-2"

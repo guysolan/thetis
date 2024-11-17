@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
 import { useCompanyForm } from "../hooks/useCompanyForm";
 import { CompanySummaryView } from "./CompanySummaryView";
 import { CompanyAddressExpandedView } from "./CompanyAddressExpandedView";
@@ -95,6 +101,17 @@ const CompanyAddressSelect = ({
                         />
                     )}
             </CardContent>
+            <CardFooter>
+                {isExpanded &&
+                    (
+                        <Button
+                            type="button"
+                            onClick={() => setIsExpanded(false)}
+                        >
+                            Done
+                        </Button>
+                    )}
+            </CardFooter>
         </Card>
     );
 };

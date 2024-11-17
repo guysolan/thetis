@@ -22,7 +22,7 @@ const SaleDocument = ({ order }: { order: OrderView }) => {
                 orderType={order.order_type}
             />
             <OrderTotal order={order} />
-            <PaymentDetails />
+            <PaymentDetails orderId={order.order_id} />
         </>
     );
 };

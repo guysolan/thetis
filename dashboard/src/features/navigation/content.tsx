@@ -31,7 +31,7 @@ export const jobs = {
         external: false,
       },
       {
-        name: "Items",
+        name: "Build",
         href: "/stock/items",
         description: "Keep track of the items we buy and sell.",
         icon: <ToyBrick />,
