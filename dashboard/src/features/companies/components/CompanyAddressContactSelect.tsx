@@ -2,7 +2,7 @@ import CompanySelect from "./CompanySelect";
 import AddressSelect from "./AddressSelect";
 import ContactSelect from "./ContactSelect";
 
-interface CompanyAddressExpandedViewProps {
+interface CompanyAddressContactSelectProps {
     getFieldName: (
         type: "company" | "shipping" | "billing" | "contact",
     ) => string;
@@ -14,7 +14,7 @@ interface CompanyAddressExpandedViewProps {
     onDone: () => void;
 }
 
-export const CompanyAddressExpandedView = ({
+export const CompanyAddressContactSelect = ({
     getFieldName,
     getAddressOptions,
     getSelectedAddress,
@@ -22,7 +22,7 @@ export const CompanyAddressExpandedView = ({
     getSelectedContact,
     form,
     onDone,
-}: CompanyAddressExpandedViewProps) => {
+}: CompanyAddressContactSelectProps) => {
     return (
         <div className="space-y-4">
             <CompanySelect name={getFieldName("company")} />

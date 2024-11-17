@@ -5,7 +5,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import CompanyAddressSelect from "../../../../../companies/components/CompanyAddressSelect";
+import CompanyAddressContact from "../../../../../companies/components/CompanyAddressContact";
 import PriceItems from "../../components/PriceItems";
 import { useSaleForm } from "./useSaleForm";
 import StockItems from "../../components/StockItems";
@@ -44,12 +44,12 @@ const SaleFormFields = () => {
                 </div>
             </div>
 
-            <CompanyAddressSelect
+            <CompanyAddressContact
                 title="Seller"
                 direction="from"
             />
 
-            <CompanyAddressSelect
+            <CompanyAddressContact
                 title="Buyer"
                 direction="to"
             />

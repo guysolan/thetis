@@ -1,4 +1,4 @@
-import CompanyAddressSelect from "@/features/companies/components/CompanyAddressSelect";
+import CompanyAddressContact from "@/features/companies/components/CompanyAddressContact";
 import PriceItems from "../../components/PriceItems";
 import StockItems from "../../components/StockItems";
 import { StockValidationAlert } from "../../components/StockValidationAlert";
@@ -28,13 +28,13 @@ const BuyFormFields = () => {
                 />
             </div>
 
-            <CompanyAddressSelect
+            <CompanyAddressContact
                 title="Buyer"
                 direction="to"
                 defaultExpanded={false}
             />
 
-            <CompanyAddressSelect title="Seller" direction="from" />
+            <CompanyAddressContact title="Seller" direction="from" />
 
             <StockItems
                 defaultIsExpanded={true}

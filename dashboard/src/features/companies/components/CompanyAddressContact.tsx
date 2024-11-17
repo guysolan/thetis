@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { useCompanyForm } from "../hooks/useCompanyForm";
 import { CompanySummaryView } from "./CompanySummaryView";
-import { CompanyAddressExpandedView } from "./CompanyAddressExpandedView";
+import { CompanyAddressContactSelect } from "./CompanyAddressContactSelect";
 import { useCompanyAutoFill } from "../hooks/useCompanyAutoFill";
 import { CompanyRow } from "../types";
 
@@ -20,7 +20,7 @@ interface Props {
     defaultExpanded?: boolean;
 }
 
-const CompanyAddressSelect = ({
+const CompanyAddressContact = ({
     direction,
     title,
     defaultExpanded = true,
@@ -82,7 +82,7 @@ const CompanyAddressSelect = ({
             <CardContent>
                 {isExpanded
                     ? (
-                        <CompanyAddressExpandedView
+                        <CompanyAddressContactSelect
                             getFieldName={getFieldName}
                             getAddressOptions={getAddressOptions}
                             getSelectedAddress={getSelectedAddress}
@@ -116,4 +116,4 @@ const CompanyAddressSelect = ({
     );
 };
 
-export default CompanyAddressSelect;
+export default CompanyAddressContact;

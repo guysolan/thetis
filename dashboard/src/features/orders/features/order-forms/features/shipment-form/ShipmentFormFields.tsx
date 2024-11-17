@@ -1,7 +1,7 @@
 import { useWatch } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useShipmentForm } from "./useShipmentForm";
-import CompanyAddressSelect from "../../../../../companies/components/CompanyAddressSelect";
+import CompanyAddressContact from "../../../../../companies/components/CompanyAddressContact";
 import ShipmentItems from "./ShipmentItems";
 import PackageDialog from "../../../../../items/components/PackageDialog";
 import { StockValidationAlert } from "../../components/StockValidationAlert";
@@ -14,8 +14,11 @@ const ShipmentFormFields = () => {
 
     return (
         <>
-            <CompanyAddressSelect direction="from" defaultExpanded={false} />
-            <CompanyAddressSelect direction="to" />
+            <CompanyAddressContact
+                direction="from"
+                defaultExpanded={false}
+            />
+            <CompanyAddressContact direction="to" />
             <Card>
                 <CardHeader className="flex flex-row justify-between">
                     <CardTitle>Items to Ship</CardTitle>
