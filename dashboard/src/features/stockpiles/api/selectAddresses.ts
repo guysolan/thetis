@@ -24,7 +24,7 @@ export const selectAddressesQueryOptions = () => {
 
 export const useSelectAddresses = (companyId?: string) => {
   return useQuery({
-    queryKey: ["addresses", companyId],
+    ...selectAddressesQueryKey,
     queryFn: selectAddresses,
     enabled: !companyId || !!companyId,
   });

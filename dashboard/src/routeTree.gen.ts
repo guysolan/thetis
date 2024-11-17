@@ -25,7 +25,7 @@ import { Route as AppsStockDirectoryImport } from './routes/_apps/stock/director
 import { Route as AppsFinancesAmazonIndexImport } from './routes/_apps/finances/amazon/index'
 import { Route as DocumentsOrdersOrderIdShippingLabelImport } from './routes/documents/orders/$orderId/shipping-label'
 import { Route as DocumentsOrdersOrderIdPurchaseOrderImport } from './routes/documents/orders/$orderId/purchase-order'
-import { Route as DocumentsOrdersOrderIdInvoiceImport } from './routes/docum./routes/documents/orders/$orderId/invoice
+import { Route as DocumentsOrdersOrderIdInvoiceImport } from './routes/documents/orders/$orderId/invoice'
 import { Route as DocumentsOrdersOrderIdCommercialInvoiceImport } from './routes/documents/orders/$orderId/commercial-invoice'
 import { Route as AppsFinancesAccountsInstructionsImport } from './routes/_apps/finances/accounts/instructions'
 import { Route as AppsFinancesAmazonSettlementsIndexImport } from './routes/_apps/finances/amazon/settlements/index'

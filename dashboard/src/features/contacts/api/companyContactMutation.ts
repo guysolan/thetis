@@ -4,6 +4,7 @@ import { Contact } from "../types";
 import { selectContactsQueryKey } from "./selectContacts";
 import { selectCompaniesQueryKey } from "../../companies/api/selectCompanies";
 import { insertUpsertContact } from "./contactMutation";
+import { closeSheet } from "../../../utils/closeSheet";
 
 const insertUpsertCompanyContact = async (
     contact: Contact["Insert"],

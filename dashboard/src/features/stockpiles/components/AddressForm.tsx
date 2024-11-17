@@ -11,6 +11,7 @@ import { Address } from "../types";
 import { useSelectCompanies } from "../../companies/api/selectCompanies";
 import { useCompanyAddressMutation } from "../../companies/api/companyAddressMutation";
 import Select from "@/components/Select";
+import { Company } from "../../companies/types";
 
 const addressFormSchema = z.object({
 	id: z.coerce.number().optional(),
@@ -23,14 +24,13 @@ const addressFormSchema = z.object({
 	country: z.string().min(1, "Country required"),
 	is_active: z.boolean().default(true),
 	holds_stock: z.boolean().default(false),
-	company_id: z.string().optional(),
+	company_id: z.coerce.number().min(1, "Company Required"),
 });
 
 export type addressFormT = z.infer<typeof addressFormSchema>;
 
 interface Props {
-	companyId?: number;
-	address: Address["Row"] | null | {
+	address: Address["Row"] & { companies: Company["Row"] } | null | {
 		id: number;
 		name: string | null;
 		line_1?: string | null;
@@ -45,7 +45,7 @@ interface Props {
 	operation: "insert" | "upsert";
 }
 
-export default function AddressForm({ address, operation, companyId }: Props) {
+export default function AddressForm({ address, operation }: Props) {
 	const { data: companies = [] } = useSelectCompanies();
 	const { mutate: upsertAddress } = useAddressMutation(operation);
 	const { mutate: companyAddressMutation } = useCompanyAddressMutation(
@@ -65,7 +65,7 @@ export default function AddressForm({ address, operation, companyId }: Props) {
 			country: address?.country ?? "",
 			is_active: address?.is_active ?? true,
 			holds_stock: address?.holds_stock ?? false,
-			company_id: companyId?.toString() ?? "",
+			company_id: String(address?.companies?.id) ?? undefined,
 		},
 	});
 
