@@ -3,11 +3,15 @@ import { ItemView } from "../../../items/types";
 
 export type ItemType = "part" | "product" | "service" | "package";
 export type StockItemName =
+    | "order_items"
     | "produced_items"
     | "consumed_items"
     | "from_items"
     | "to_items";
-export type AddressName = "to_shipping_address_id" | "from_shipping_address_id";
+export type AddressName =
+    | "address_id"
+    | "to_shipping_address_id"
+    | "from_shipping_address_id";
 
 export interface StockItemFormData {
     item_type: ItemType;

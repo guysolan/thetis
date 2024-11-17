@@ -11,7 +11,7 @@ const OrderFormButton = ({ onClick }: { onClick: () => void }) => {
             type="button"
             onClick={onClick}
         >
-            Create Order
+            Submit
         </Button>
     );
 };

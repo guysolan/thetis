@@ -7,8 +7,9 @@ import dayjs from "dayjs";
 import { formatCreateOrderArguments } from "../../utils/formatCreateOrderArguments";
 
 interface Props {
-    addressId: number;
+    addressId: string;
     orderItems?: OrderItem[];
+    onCancel?: () => void;
 }
 const StocktakeForm = ({ addressId, orderItems }: Props) => {
     const { mutate: createOrder } = useCreateOrder();
@@ -48,7 +49,6 @@ const StocktakeForm = ({ addressId, orderItems }: Props) => {
             defaultValues={defaultValues}
             onSubmit={handleSubmit}
         >
-            <DatePicker name="order_date" label="Order Date" />
             <StocktakeFormFields />
         </BaseOrderForm>
     );

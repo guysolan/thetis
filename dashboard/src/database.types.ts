@@ -790,7 +790,9 @@ export type Database = {
       }
       stockpiles: {
         Row: {
+          company_name: string | null
           items: Json | null
+          stockpile_address: string | null
           stockpile_created_at: string | null
           stockpile_id: number | null
           stockpile_name: string | null

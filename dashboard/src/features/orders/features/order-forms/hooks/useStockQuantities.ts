@@ -20,7 +20,7 @@ export const useStockQuantities = (
 
     const getItemQuantities = (itemId: string) => {
         if (!selectedAddress || !stockpileItems) {
-            return { before: 0, after: 0 };
+            return { before: 0, change: 0, new: 0 };
         }
 
         const stockpileItem = stockpileItems.find(
@@ -30,14 +30,15 @@ export const useStockQuantities = (
         );
 
         const currentQuantity = stockpileItem?.item_quantity ?? 0;
-        const addedQuantity =
+        const newQuantity =
             itemChanges?.find((i) => String(i.item_id) === String(itemId))
-                ?.quantity_change || 0;
-        const quantityAfter = currentQuantity + addedQuantity;
+                ?.quantity_change ?? currentQuantity;
+        const quantityChange = newQuantity - currentQuantity;
 
         return {
             before: Number(currentQuantity),
-            after: Number(quantityAfter),
+            change: Number(quantityChange),
+            new: Number(newQuantity),
         };
     };
 

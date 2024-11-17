@@ -6,7 +6,7 @@ import PageTitle from "@/components/PageTitle";
 import AddressForm from "@/features/stockpiles/components/AddressForm";
 import AmazonStock from "@/features/stockpiles/components/AmazonWarehouses";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import AddressStock from "@/features/stockpiles/components/AddressStock";
+import Stockpiles from "@/features/stockpiles/components/Stockpiles";
 
 const ItemsPage = () => {
   return (
@@ -28,7 +28,7 @@ const ItemsPage = () => {
         </TabsList>
 
         <TabsContent value="stockpiles">
-          <AddressStock />
+          <Stockpiles />
         </TabsContent>
 
         <TabsContent value="amazon">
