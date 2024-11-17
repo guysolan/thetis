@@ -85,6 +85,12 @@ const ItemsPage = () => {
                                 price: item.item_price as number,
                                 name: item.item_name,
                                 type: item.item_type!,
+                                weight: item.weight ?? 0,
+                                height: item.height ?? 0,
+                                width: item.width ?? 0,
+                                depth: item.depth ?? 0,
+                                country_of_origin: item.country_of_origin,
+                                sku: item.sku,
                               },
                               // @ts-ignore
                               components: item.components,
