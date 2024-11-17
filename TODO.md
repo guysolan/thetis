@@ -4,3 +4,4 @@
 - [ ] Add order type to order
 - [ ] Change Stocktake form to be an edit button on the Stockpiles
   - [ ] change name "Stockpile" -> "Stock"
+- [ ] Remove build and merge into purchase

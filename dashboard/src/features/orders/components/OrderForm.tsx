@@ -8,15 +8,17 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export const OrderForm: React.FC = () => {
 	return (
-		<Tabs defaultValue="build">
+		<Tabs defaultValue="purchase">
 			<div className="overflow-x-scroll">
 				<TabsList className="my-2">
-					<TabsTrigger
+					{
+						/* <TabsTrigger
 						className="flex flex-row gap-2"
 						value="build"
 					>
 						<Hammer size={16} />Build
-					</TabsTrigger>
+					</TabsTrigger> */
+					}
 					<TabsTrigger
 						className="flex flex-row gap-2"
 						value="purchase"
@@ -45,7 +47,8 @@ export const OrderForm: React.FC = () => {
 						Purchase forms are for buying stock from a supplier.
 					</AlertDescription>
 				</Alert>
-				<PurchaseForm />
+				{/* <PurchaseForm /> */}
+				<BuildForm />
 			</TabsContent>
 			<TabsContent value="sale">
 				<Alert className="mb-4">
@@ -58,7 +61,8 @@ export const OrderForm: React.FC = () => {
 				</Alert>
 				<SaleForm />
 			</TabsContent>
-			<TabsContent value="build">
+			{
+				/* <TabsContent value="build">
 				<Alert className="mb-4">
 					<Info size={20} />
 					<AlertTitle>Build Order</AlertTitle>
@@ -68,7 +72,8 @@ export const OrderForm: React.FC = () => {
 					</AlertDescription>
 				</Alert>
 				<BuildForm />
-			</TabsContent>
+			</TabsContent> */
+			}
 			<TabsContent value="shipment">
 				<Alert className="mb-4">
 					<Info size={20} />

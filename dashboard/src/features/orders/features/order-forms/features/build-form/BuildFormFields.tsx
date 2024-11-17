@@ -30,7 +30,7 @@ const BuildFormFields = () => {
                 defaultExpanded={false}
             />
 
-            <CompanyAddressSelect title="Maker" direction="from" />
+            <CompanyAddressSelect title="Seller" direction="from" />
 
             <StockItems
                 defaultIsExpanded={true}
