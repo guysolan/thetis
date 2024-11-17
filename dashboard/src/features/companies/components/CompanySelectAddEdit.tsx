@@ -9,7 +9,7 @@ interface Props {
     name: string;
 }
 
-const CompanySelect = ({ name }: Props) => {
+const CompanySelectAddEdit = ({ name }: Props) => {
     const form = useFormContext();
     const { data: companies = [] } = useSelectCompanies();
 
@@ -46,4 +46,4 @@ const CompanySelect = ({ name }: Props) => {
     );
 };
 
-export default CompanySelect;
+export default CompanySelectAddEdit;

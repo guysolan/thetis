@@ -31,8 +31,9 @@ export const useCompanyAddressMutation = (operation: "insert" | "upsert") => {
         onError: () => {
             toast.error("Error saving company address");
         },
-        onSuccess: () => {
+        onSuccess: (data, mutation) => {
             toast.success("Company address saved");
+            mutation?.onSuccess && mutation?.onSuccess(data.id);
         },
         onSettled: () => {
             queryClient.invalidateQueries(selectAddressesQueryKey);

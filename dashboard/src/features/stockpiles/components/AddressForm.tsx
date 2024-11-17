@@ -43,9 +43,10 @@ interface Props {
 		holds_stock?: boolean | null;
 	};
 	operation: "insert" | "upsert";
+	onSuccess?: () => void;
 }
 
-export default function AddressForm({ address, operation }: Props) {
+export default function AddressForm({ address, operation, onSuccess }: Props) {
 	const { data: companies = [] } = useSelectCompanies();
 	const { mutate: upsertAddress } = useAddressMutation(operation);
 	const { mutate: companyAddressMutation } = useCompanyAddressMutation(
@@ -76,6 +77,8 @@ export default function AddressForm({ address, operation }: Props) {
 			companyAddressMutation({
 				address: data,
 				companyId: companyId,
+			}, {
+				onSuccess: onSuccess,
 			});
 		} else {
 			upsertAddress(data);

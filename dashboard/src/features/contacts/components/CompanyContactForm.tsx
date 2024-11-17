@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Input from "@/components/Input";
 import { useCompanyContactMutation } from "../api/companyContactMutation";
 import { Contact } from "../types";
-import CompanySelect from "../../companies/components/CompanySelect";
+import CompanySelectAddEdit from "../../companies/components/CompanySelectAddEdit";
 
 const contactFormSchema = z.object({
     id: z.coerce.number().optional(),
@@ -22,10 +22,11 @@ interface Props {
     contact: Contact["Row"] | null;
     operation: "insert" | "upsert";
     companyId?: number;
+    onSuccess?: (contactId: number) => void;
 }
 
 export default function CompanyContactForm(
-    { contact, operation, companyId }: Props,
+    { contact, operation, companyId, onSuccess }: Props,
 ) {
     const { mutate: upsertContact } = useCompanyContactMutation(operation);
 
@@ -41,7 +42,14 @@ export default function CompanyContactForm(
     });
 
     const onSubmit = (data: ContactFormData) => {
-        upsertContact(data);
+        upsertContact({
+            ...data,
+            company_id: companyId,
+        }, {
+            onSuccess: (contactId) => {
+                onSuccess?.(contactId);
+            },
+        });
     };
 
     return (
@@ -50,7 +58,7 @@ export default function CompanyContactForm(
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-4 p-1"
             >
-                <CompanySelect name="company_id" />
+                <CompanySelectAddEdit name="company_id" />
                 <Input label="Name" name="name" />
                 <Input label="Email" name="email" type="email" />
                 <Input label="Phone" name="phone" type="tel" />

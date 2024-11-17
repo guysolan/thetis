@@ -1,6 +1,8 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogHeader,
     DialogTitle,
@@ -21,6 +23,8 @@ interface TooltipDialogProps {
 }
 
 const TooltipDialog = ({ icon, tooltipText, children }: TooltipDialogProps) => {
+    const closeRef = React.useRef<HTMLButtonElement>(null);
+
     return (
         <TooltipProvider>
             <Dialog>
@@ -45,6 +49,12 @@ const TooltipDialog = ({ icon, tooltipText, children }: TooltipDialogProps) => {
                     {children}
                 </DialogContent>
             </Dialog>
+            <DialogClose
+                data-component="dialog"
+                id="close-dialog"
+                ref={closeRef}
+                className="hidden"
+            />
         </TooltipProvider>
     );
 };

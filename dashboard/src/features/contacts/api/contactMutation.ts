@@ -16,7 +16,7 @@ export const insertUpsertContact = async (
                 ignoreDuplicates: in_operation === "insert",
             },
         )
-        .select("*")
+        .select()
         .single();
 
     if (contactError) throw contactError;

@@ -1,5 +1,5 @@
-import CompanySelect from "./CompanySelect";
-import AddressSelect from "./AddressSelect";
+import CompanySelectAddEdit from "./CompanySelectAddEdit";
+import AddressSelectAddEdit from "./AddressSelectAddEdit";
 import ContactSelect from "./ContactSelect";
 
 interface CompanyAddressContactSelectProps {
@@ -25,8 +25,8 @@ export const CompanyAddressContactSelect = ({
 }: CompanyAddressContactSelectProps) => {
     return (
         <div className="space-y-4">
-            <CompanySelect name={getFieldName("company")} />
-            <AddressSelect
+            <CompanySelectAddEdit name={getFieldName("company")} />
+            <AddressSelectAddEdit
                 label="Shipping Address"
                 type="shipping"
                 getFieldName={getFieldName}
@@ -34,7 +34,7 @@ export const CompanyAddressContactSelect = ({
                 getSelectedAddress={getSelectedAddress}
                 form={form}
             />
-            <AddressSelect
+            <AddressSelectAddEdit
                 label="Billing Address"
                 type="billing"
                 getFieldName={getFieldName}

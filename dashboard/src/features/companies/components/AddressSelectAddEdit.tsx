@@ -2,6 +2,7 @@ import Select from "@/components/Select";
 import { Pencil, Plus } from "lucide-react";
 import AddressForm from "../../stockpiles/components/AddressForm";
 import TooltipDialog from "../../../components/TooltipDialog";
+import { closeDialog } from "../../../utils/closeDialog";
 
 interface AddressSelectProps {
     label: string;
@@ -12,7 +13,7 @@ interface AddressSelectProps {
     form: any;
 }
 
-const AddressSelect = ({
+const AddressSelectAddEdit = ({
     label,
     type,
     getFieldName,
@@ -20,6 +21,9 @@ const AddressSelect = ({
     getSelectedAddress,
     form,
 }: AddressSelectProps) => {
+    const onCompanySuccess = (companyId: number) => {
+        form.setValue(getFieldName("company"), String(companyId));
+    };
     return (
         <div className="flex flex-row items-end gap-2 w-full">
             <Select
@@ -37,6 +41,7 @@ const AddressSelect = ({
                             operation="upsert"
                             companyId={form.watch(getFieldName("company"))}
                             address={getSelectedAddress(type)}
+                            onSuccess={onCompanySuccess}
                         />
                     </TooltipDialog>
                 )}
@@ -48,6 +53,7 @@ const AddressSelect = ({
                         operation="insert"
                         companyId={form.watch(getFieldName("company"))}
                         address={null}
+                        onSuccess={onCompanySuccess}
                     />
                 </TooltipDialog>
             </div>
@@ -55,4 +61,4 @@ const AddressSelect = ({
     );
 };
 
-export default AddressSelect;
+export default AddressSelectAddEdit;

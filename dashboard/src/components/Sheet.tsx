@@ -46,6 +46,7 @@ const Sheet = (
                 <SheetClose
                     id="close-sheet"
                     ref={closeRef}
+                    data-component="sheet"
                     className="hidden"
                 />
             </SheetContent>

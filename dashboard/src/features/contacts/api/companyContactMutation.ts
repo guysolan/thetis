@@ -4,19 +4,19 @@ import { Contact } from "../types";
 import { selectContactsQueryKey } from "./selectContacts";
 import { selectCompaniesQueryKey } from "../../companies/api/selectCompanies";
 import { insertUpsertContact } from "./contactMutation";
-import { closeSheet } from "../../../utils/closeSheet";
 
 const insertUpsertCompanyContact = async (
     contact: Contact["Insert"],
     operation: "insert" | "upsert",
 ) => {
-    return await insertUpsertContact({
+    const data = await insertUpsertContact({
         id: contact.id,
         name: contact.name,
         phone: contact.phone,
         email: contact.email,
         company_id: contact.company_id,
     }, operation);
+    return data;
 };
 
 export const useCompanyContactMutation = (operation: "insert" | "upsert") => {
@@ -28,8 +28,10 @@ export const useCompanyContactMutation = (operation: "insert" | "upsert") => {
         onError: () => {
             toast.error("Error saving company contact");
         },
-        onSuccess: () => {
+        onSuccess: (data) => {
+            const contactId = data.id;
             toast.success("Company contact saved");
+            return contactId;
         },
         onSettled: () => {
             queryClient.invalidateQueries(selectContactsQueryKey);
