@@ -14,12 +14,6 @@ const OrdersPage = () => {
   return (
     <>
       <PageTitle title="Orders">
-        {
-          /* <Button asChild>
-          <Link to="/stock/orders/new">Create New Order</Link>
-        </Button> */
-        }
-
         <Sheet
           trigger={<Button>Create New Order</Button>}
           title="Create Order"
@@ -33,12 +27,11 @@ const OrdersPage = () => {
         <TabsList className="my-2">
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="sale">Sales</TabsTrigger>
-          <TabsTrigger value="build">Builds</TabsTrigger>
           <TabsTrigger value="purchase">Purchases</TabsTrigger>
           <TabsTrigger value="shipment">Shipments</TabsTrigger>
         </TabsList>
 
-        {["all", "sale", "build", "purchase", "shipment"].map((tabValue) => (
+        {["all", "sale", "purchase", "shipment"].map((tabValue) => (
           <TabsContent key={tabValue} value={tabValue}>
             <OrderHistory
               orders={orders?.filter((order) =>

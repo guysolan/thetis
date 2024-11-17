@@ -27,7 +27,6 @@ const BuildForm = () => {
     const handleSubmit = async (formData: any) => {
         const item_changes = [
             ...formData.consumed_items,
-            ...formData.produced_items,
             ...formData.order_items.map((item: any) => ({
                 ...item,
                 quantity_change: Math.abs(Number(item.quantity_change)),
