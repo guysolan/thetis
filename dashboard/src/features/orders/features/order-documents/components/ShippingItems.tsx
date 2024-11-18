@@ -9,6 +9,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import { formatCurrency } from "../../../../../constants/currencies";
 
 const ShippingItems = (
     { orderItems }: { orderItems: OrderView["items"] },
@@ -53,10 +54,13 @@ const ShippingItems = (
                                 {item.quantity}
                             </TableCell>
                             <TableCell className="text-right">
-                                ${item.item_price?.toFixed(2)}
+                                {formatCurrency(item.item_price, "GBP")}
                             </TableCell>
                             <TableCell className="text-right">
-                                ${(item.quantity * item.item_price)?.toFixed(2)}
+                                {formatCurrency(
+                                    item.quantity * item.item_price,
+                                    "GBP",
+                                )}
                             </TableCell>
                         </TableRow>
                     ))}
@@ -65,10 +69,16 @@ const ShippingItems = (
                             Total:
                         </TableCell>
                         <TableCell className="text-right">
-                            ${invoiceItems
-                                .reduce((sum, item) =>
-                                    sum + (item.quantity * item.item_price), 0)
-                                .toFixed(2)}
+                            {formatCurrency(
+                                invoiceItems
+                                    .reduce(
+                                        (sum, item) =>
+                                            sum +
+                                            (item.quantity * item.item_price),
+                                        0,
+                                    ),
+                                "GBP",
+                            )}
                         </TableCell>
                     </TableRow>
                 </TableBody>

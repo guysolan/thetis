@@ -10,6 +10,8 @@ import {
 import { OrderView } from "../../../types";
 
 const PackageSummary = ({ items }: { items: OrderView["items"] }) => {
+    const packageItems = items.filter((item) => item.item_type === "package");
+    if (!packageItems.length) return <></>;
     return (
         <div className="mb-8">
             <h3 className="mb-4 font-semibold">Package Summary</h3>
