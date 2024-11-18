@@ -18,13 +18,13 @@ const AddressBook = () => {
     return (
         <section className="gap-4 grid lg:grid-cols-2 pt-4">
             {addresses?.map((address) => (
-                <Card key={address.id} className="flex flex-col">
+                <Card key={address?.id} className="flex flex-col">
                     <CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
                         <CardTitle className="font-semibold text-lg truncate">
-                            {address.name}
+                            {address?.name}
                         </CardTitle>
                         <ActionPopover
-                            title={address.name ?? "Address"}
+                            title={address?.name ?? "Address"}
                             editForm={
                                 <AddressForm
                                     operation="upsert"
@@ -51,7 +51,7 @@ const AddressBook = () => {
                         </div>
                     </CardContent>
                     <CardFooter>
-                        <Badge>{address.companies.name}</Badge>
+                        <Badge>{address.companies?.name}</Badge>
                     </CardFooter>
                 </Card>
             ))}
