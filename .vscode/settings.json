@@ -25,6 +25,7 @@
   "deno.importMap": "./supabase/functions/import_map.json",
   "cSpell.words": [
     "Discrepency",
+    "Doppio",
     "Edit",
     "EORI",
     "Godalming",
