@@ -43,7 +43,9 @@ const Select = ({ name, label, options, disabled }: SelectProps) => {
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                            {options.map((o) => (
+                            {options.sort((a, b) =>
+                                a.label.localeCompare(b.label)
+                            ).map((o) => (
                                 <SelectItem
                                     className="capitalize"
                                     key={o.value}
