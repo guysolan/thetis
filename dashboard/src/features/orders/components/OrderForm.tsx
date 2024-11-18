@@ -11,14 +11,6 @@ export const OrderForm: React.FC = () => {
 		<Tabs defaultValue="purchase">
 			<div className="overflow-x-scroll">
 				<TabsList className="my-2">
-					{
-						/* <TabsTrigger
-						className="flex flex-row gap-2"
-						value="build"
-					>
-						<Hammer size={16} />Build
-					</TabsTrigger> */
-					}
 					<TabsTrigger
 						className="flex flex-row gap-2"
 						value="purchase"
@@ -47,7 +39,6 @@ export const OrderForm: React.FC = () => {
 						Purchase forms are for buying stock from a supplier.
 					</AlertDescription>
 				</Alert>
-				{/* <PurchaseForm /> */}
 				<BuyForm />
 			</TabsContent>
 			<TabsContent value="sale">
@@ -61,19 +52,7 @@ export const OrderForm: React.FC = () => {
 				</Alert>
 				<SaleForm />
 			</TabsContent>
-			{
-				/* <TabsContent value="build">
-				<Alert className="mb-4">
-					<Info size={20} />
-					<AlertTitle>Build Order</AlertTitle>
-					<AlertDescription>
-						Pay for products to be build using parts you already
-						have purchased.
-					</AlertDescription>
-				</Alert>
-				<BuildForm />
-			</TabsContent> */
-			}
+
 			<TabsContent value="shipment">
 				<Alert className="mb-4">
 					<Info size={20} />

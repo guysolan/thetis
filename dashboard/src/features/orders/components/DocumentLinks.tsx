@@ -20,7 +20,7 @@ const documents: DocumentConfig[] = [
         path: "commercial-invoice",
         label: "Commercial Invoice",
         icon: <Receipt size={20} />,
-        showFor: ["shipment"],
+        showFor: ["shipment", "sale"],
     },
     {
         path: "shipping-label",

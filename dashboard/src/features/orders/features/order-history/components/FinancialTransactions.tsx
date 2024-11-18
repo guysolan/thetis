@@ -11,6 +11,26 @@ import {
 import type { OrderView } from "@/features/orders/types";
 import { formatCurrency } from "../../../../../constants/currencies";
 import { Currency } from "../../../../../constants/currencies";
+
+/**
+ * Processes order items for display in the financial transactions table
+ * @param items - Array of order items from the OrderView
+ * @returns Sorted and filtered array of order items
+ */
+const processOrderItems = (
+    items: OrderView["items"],
+    orderType: OrderView["order_type"],
+) => {
+    const sorted = items
+        // Sort items by ID for consistent display order
+        ?.sort((a, b) => a.item_id - b.item_id);
+    if (orderType === "sale") return sorted;
+
+    return sorted
+        // Remove items with zero price to avoid displaying irrelevant entries
+        ?.filter((item) => Number(item?.price) !== 0);
+};
+
 const FinancialTransactions = (
     { orderType, orderItems, currency }: {
         orderType: OrderView["order_type"];
@@ -31,11 +51,7 @@ const FinancialTransactions = (
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {orderItems.sort((a, b) => a.item_id - b.item_id).filter((
-                    item: OrderView["items"][number],
-                ) => Number(item?.price) !== 0).map((
-                    item: OrderView["items"][number],
-                ) => (
+                {processOrderItems(orderItems, orderType).map((item) => (
                     <TableRow
                         className="text-left"
                         key={`${item.item_id}-${item.item_name}`}

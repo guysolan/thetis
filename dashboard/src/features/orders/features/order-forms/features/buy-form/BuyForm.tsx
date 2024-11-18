@@ -1,4 +1,4 @@
-import { buyFormSchema } from "../../schema";
+import { BuyFormData, buyFormSchema } from "../../schema";
 import { BaseOrderForm } from "../../components/BaseOrderForm";
 import { useCreateOrder } from "../../../../api/createOrder";
 import BuyFormFields from "./BuyFormFields";
@@ -24,16 +24,25 @@ const BuyForm = () => {
         carriage: 0,
     };
 
-    const handleSubmit = async (formData: any) => {
+    const handleSubmit = async (formData: BuyFormData) => {
         const item_changes = [
             ...formData.consumed_items,
+            // Positive order items to record the prices of items
             ...formData.order_items.map((item: any) => ({
                 ...item,
                 quantity_change: Math.abs(Number(item.quantity_change)),
             })),
+            // Negative order items as the produced items need to be created
             ...formData.order_items.map((item: any) => ({
                 ...item,
                 quantity_change: -1 * Math.abs(Number(item.quantity_change)),
+                item_price: 0,
+                item_tax: 0,
+            })),
+            // Produced Items added
+            ...formData.produced_items.map((item: any) => ({
+                ...item,
+                quantity_change: Math.abs(Number(item.quantity_change)),
                 item_price: 0,
                 item_tax: 0,
             })),

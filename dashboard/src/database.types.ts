@@ -785,6 +785,7 @@ export type Database = {
           to_contact: Json | null
           to_shipping_address: Json | null
           total_value: number | null
+          total_weight: number | null
         }
         Relationships: []
       }
