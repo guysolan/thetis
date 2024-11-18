@@ -22,7 +22,9 @@ export default function ItemsTable({ items }: Props) {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {items?.map((wp: any) => (
+                {items?.filter((wp) => wp.item_quantity !== 0)?.map((
+                    wp: any,
+                ) => (
                     <TableRow
                         key={`item-${wp.item_id}`}
                     >
