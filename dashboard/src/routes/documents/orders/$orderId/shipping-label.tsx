@@ -13,6 +13,8 @@ const OrdersPage = () => {
       deliveryAddress={order.to_shipping_address as AddressRow}
       returnAddress={order.from_shipping_address as AddressRow}
       returnCompany={order.from_company as CompanyRow}
+      returnContactName={order.from_contact?.name}
+      deliveryContactName={order.to_contact?.name}
     />
   );
 };

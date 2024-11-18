@@ -8,6 +8,8 @@ interface ShippingLabelProps {
     deliveryCompany: CompanyRow;
     returnAddress: AddressRow;
     returnCompany: CompanyRow;
+    returnContactName?: string;
+    deliveryContactName?: string;
 }
 
 const ShippingLabel = ({
@@ -15,6 +17,8 @@ const ShippingLabel = ({
     deliveryCompany,
     returnAddress,
     returnCompany,
+    returnContactName,
+    deliveryContactName,
 }: ShippingLabelProps) => {
     return (
         <div className="p-20 min-h-[800px]">
@@ -24,6 +28,7 @@ const ShippingLabel = ({
                     address={returnAddress}
                     company={returnCompany}
                     size="small"
+                    contactName={returnContactName}
                 />
             </div>
 
@@ -34,6 +39,7 @@ const ShippingLabel = ({
                     address={deliveryAddress}
                     company={deliveryCompany}
                     size="lg"
+                    contactName={deliveryContactName}
                 />
             </div>
         </div>
