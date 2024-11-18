@@ -60,11 +60,7 @@ const StockpileCard = ({ stockpile }: Props) => {
             </CardHeader>
 
             <CardContent>
-                <ItemsTable
-                    items={stockpile.items?.filter((i) =>
-                        ["product", "part"].includes(i.item_type)
-                    ).filter((i) => i.quantity !== 0)}
-                />
+                <ItemsTable items={stockpile.items} />
             </CardContent>
             <CardFooter>
                 <Sheet
