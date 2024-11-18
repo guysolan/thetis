@@ -9,8 +9,8 @@ const OrdersPage = () => {
 
   return (
     <ShippingLabel
-      deliveryCompany={order.from_company as CompanyRow}
-      deliveryAddress={order.from_shipping_address as AddressRow}
+      deliveryCompany={order.to_company as CompanyRow}
+      deliveryAddress={order.to_shipping_address as AddressRow}
       returnAddress={order.from_shipping_address as AddressRow}
       returnCompany={order.from_company as CompanyRow}
     />

@@ -17,8 +17,8 @@ const ShippingLabel = ({
     returnCompany,
 }: ShippingLabelProps) => {
     return (
-        <div className="relative p-20 min-h-[800px]">
-            <div className="flex ml-auto w-[200px]">
+        <div className="p-20 min-h-[800px]">
+            <div className="flex mb-8 ml-auto w-[200px]">
                 <ShippingAddress
                     title="Return Address"
                     address={returnAddress}
@@ -28,12 +28,12 @@ const ShippingLabel = ({
             </div>
 
             {/* Delivery Address - Large, centered */}
-            <div className="mx-auto mt-24 w-[400px]">
+            <div className="flex justify-center items-center mx-auto mt-24 pt-8 scale-150">
                 <ShippingAddress
                     title="Delivery Address"
                     address={deliveryAddress}
                     company={deliveryCompany}
-                    size="large"
+                    size="lg"
                 />
             </div>
         </div>
