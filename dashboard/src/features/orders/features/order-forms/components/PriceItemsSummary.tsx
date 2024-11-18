@@ -1,5 +1,6 @@
 import { UseFormReturn } from "react-hook-form";
 import { Item } from "@/features/items/types";
+import PriceSummary from "./PriceSummary";
 
 interface PriceItemsSummaryProps {
     name: string;
@@ -40,18 +41,9 @@ const PriceItemsSummary = ({
                 </div>
             ))}
             {showPrice && fields.length > 0 && (
-                <div className="flex justify-between items-center pt-2 border-t font-semibold">
-                    <span>Total</span>
-                    <span>
-                        $
-                        {fields
-                            .reduce(
-                                (sum, _, index) =>
-                                    sum + Number(itemTotal(index)),
-                                0,
-                            )
-                            .toFixed(2)}
-                    </span>
+                <div className="flex justify-between items-start pt-2 border-t">
+                    <b>Total</b>
+                    <PriceSummary />
                 </div>
             )}
         </div>

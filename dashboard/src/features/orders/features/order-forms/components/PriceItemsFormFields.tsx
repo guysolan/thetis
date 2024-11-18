@@ -22,6 +22,7 @@ interface PriceItemsFormFieldsProps {
     onCopy: (index: number) => void;
     onRemove: (index: number) => void;
     showPrice?: boolean;
+    grandTotal: () => string;
     itemTotal: (index: number) => string;
     getFilteredItemOptions: (
         itemType: string,
@@ -32,6 +33,7 @@ interface PriceItemsFormFieldsProps {
 const PriceItemsFormFields = ({
     name,
     fields,
+    grandTotal,
     form,
     onCopy,
     onRemove,
@@ -126,7 +128,7 @@ const PriceItemsFormFields = ({
                 {showPrice && fields.length > 0 && (
                     <TableRow className="font-semibold">
                         <TableCell colSpan={5}>Total</TableCell>
-                        <TableCell>{itemTotal(fields.length - 1)}</TableCell>
+                        <TableCell>{grandTotal()}</TableCell>
                         <TableCell>
                             <div className="flex gap-2">
                                 <Button
