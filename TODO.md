@@ -7,3 +7,4 @@
 - [ ] Editable Orders in Order History
 - [ ] Add a 'View' to switch table -> blocks
 - [ ] Set company billing/shipping address etc for Stocktake
+- [ ] Create order show in the CompanyAddressContact summary if error in form.
