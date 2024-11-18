@@ -10,21 +10,16 @@ interface OrderBreakdownProps {
 
 const OrderBreakdown = ({ order }: OrderBreakdownProps) => {
     return (
-        <Tabs defaultValue="financial" className="w-full">
-            <TabsList className="grid grid-cols-2 w-full">
-                <TabsTrigger value="financial">Financial Transactions</TabsTrigger>
-                <TabsTrigger value="stock">Stock Movements</TabsTrigger>
-            </TabsList>
-            <TabsContent value="financial">
-                <FinancialTransactions 
+        <section className="flex flex-col gap-4">
+            {["purchase", "sale"].includes(order.order_type) && (
+                <FinancialTransactions
+                    currency={order.currency}
                     orderType={order.order_type}
                     orderItems={order.items}
                 />
-            </TabsContent>
-            <TabsContent value="stock">
-                <StockMovements orderItems={order.items} />
-            </TabsContent>
-        </Tabs>
+            )}
+            <StockMovements orderItems={order.items} />
+        </section>
     );
 };
 

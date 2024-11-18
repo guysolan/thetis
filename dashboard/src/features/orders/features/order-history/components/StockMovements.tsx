@@ -4,6 +4,7 @@ import type { OrderView } from "../../types";
 import {
     Table,
     TableBody,
+    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -43,36 +44,35 @@ const StockMovements = ({ orderItems }: { orderItems: OrderView["items"] }) => {
     }, [orderItems]);
 
     return (
-        <>
-            <h3 className="mb-2 font-semibold">Stock Movements</h3>
-            <Table className="mb-6 text-left">
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>Item Name</TableHead>
-                        <TableHead>Type</TableHead>
-                        <TableHead>Location</TableHead>
-                        <TableHead className="text-right">Quantity</TableHead>
+        <Table className="mb-6 text-left">
+            <TableCaption>Stock Movements</TableCaption>
+
+            <TableHeader>
+                <TableRow>
+                    <TableHead>Item Name</TableHead>
+                    <TableHead>Type</TableHead>
+                    <TableHead>Location</TableHead>
+                    <TableHead>Quantity</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {stockChanges.map((item) => (
+                    <TableRow
+                        className="text-left"
+                        key={`${item.item_id}-${item.warehouse_name}-${item.quantity}`}
+                    >
+                        <TableCell>{item.item_name}</TableCell>
+                        <TableCell className="capitalize">
+                            {item.item_type}
+                        </TableCell>
+                        <TableCell>{item.warehouse_name}</TableCell>
+                        <TableCell>
+                            {item.quantity}
+                        </TableCell>
                     </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {stockChanges.map((item) => (
-                        <TableRow
-                            className="text-left"
-                            key={`${item.item_id}-${item.warehouse_name}-${item.quantity}`}
-                        >
-                            <TableCell>{item.item_name}</TableCell>
-                            <TableCell className="capitalize">
-                                {item.item_type}
-                            </TableCell>
-                            <TableCell>{item.warehouse_name}</TableCell>
-                            <TableCell className="text-right">
-                                {item.quantity}
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </>
+                ))}
+            </TableBody>
+        </Table>
     );
 };
 

@@ -2,6 +2,7 @@ import React from "react";
 import {
     Table,
     TableBody,
+    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -19,6 +20,7 @@ const FinancialTransactions = (
 ) => {
     return (
         <Table className="text-left">
+            <TableCaption>Financial Transactions</TableCaption>
             <TableHeader>
                 <TableRow>
                     <TableHead>Item Name</TableHead>

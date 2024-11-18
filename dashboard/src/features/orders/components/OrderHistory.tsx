@@ -63,7 +63,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 										<span>
 											To: {order.to_company.name}
 											{order.to_contact &&
-												` (${order.to_contact.name})`}
+												`(${order.to_contact.name})`}
 										</span>
 									)}
 								</div>
