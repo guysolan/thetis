@@ -52,14 +52,14 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 										{dayjs(order.order_date as string)
 											.format("DD MMM YYYY")}
 									</span>
-									{order.from_company && (
+									{order.from_company?.id && (
 										<span>
 											From: {order.from_company.name}
 											{order.from_contact &&
 												` (${order.from_contact.name})`}
 										</span>
 									)}
-									{order.to_company && (
+									{order.to_company?.id && (
 										<span>
 											To: {order.to_company.name}
 											{order.to_contact &&
