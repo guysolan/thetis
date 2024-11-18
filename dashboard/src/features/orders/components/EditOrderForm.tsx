@@ -40,7 +40,13 @@ const EditOrderForm = ({ order }: { order: OrderView }) => {
 				className="flex flex-col space-y-4 px-1 pt-2 pr-4"
 			>
 				<Select
-					options={["sale", "shipment", "build", "purchase"].map((
+					options={[
+						"sale",
+						"shipment",
+						"build",
+						"purchase",
+						"stocktake",
+					].map((
 						x,
 					) => ({ label: x, value: x }))}
 					name="order_type"

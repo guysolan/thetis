@@ -20,7 +20,7 @@ const OrderFormButton = ({
             type="button" // Changed to "submit" if this is meant to submit a form
             onClick={onClick}
         >
-            Submit
+            Save
         </Button>
     );
 };
