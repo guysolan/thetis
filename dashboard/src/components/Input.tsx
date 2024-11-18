@@ -36,12 +36,17 @@ const Input = (
                             type={type}
                             step={step}
                             {...field}
+                            value={field.value ?? ""}
                             className={type === "number"
                                 ? "[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 : ""}
                             onChange={(e) =>
                                 type === "number"
-                                    ? field.onChange(Number(e.target.value))
+                                    ? field.onChange(
+                                        e.target.value === ""
+                                            ? null
+                                            : Number(e.target.value),
+                                    )
                                     : field.onChange(e.target.value)}
                         />
                     </FormControl>
