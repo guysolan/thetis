@@ -47,7 +47,7 @@ function ItemComponentsForm({
 	itemId: number;
 	defaultValues?: ItemFormData;
 }) {
-	const allowedTypes = ["part", "product"];
+	const allowedTypes = ["part", "product", "service"];
 	const { data: itemsView } = useSelectItemsView();
 	const { mutate: upsertItem } = useUpsertItemComponents();
 

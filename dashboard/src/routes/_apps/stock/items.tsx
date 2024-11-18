@@ -180,6 +180,7 @@ const ItemsPage = () => {
                                     component_quantity: (ic.component_quantity),
                                     item_id: String(item.item_id),
                                     component_id: String(ic.component_id),
+                                    component_type: ic.component_type,
                                   })),
                                 }}
                               />
