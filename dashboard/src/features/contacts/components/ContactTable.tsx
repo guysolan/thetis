@@ -9,9 +9,7 @@ import {
 import ActionPopover from "@/components/ActionPopover";
 import CompanyContactForm from "./CompanyContactForm";
 import { useDeleteContact } from "../api/deleteContact";
-import { Contact } from "../types";
 import { Badge } from "@/components/ui/badge";
-import { Company } from "../../companies/types";
 import { useSelectContacts } from "../api/selectContacts";
 
 const ContactTable = () => {

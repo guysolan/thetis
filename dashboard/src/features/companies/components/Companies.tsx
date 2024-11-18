@@ -77,7 +77,7 @@ const Companies = () => {
                             <Select
                                 value={company.contacts.find((c) =>
                                     c.is_default
-                                )?.contact?.id?.toString()}
+                                )?.id?.toString()}
                                 onValueChange={(value) =>
                                     handleSetDefaultContact(
                                         company.id,
