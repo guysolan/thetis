@@ -1,10 +1,14 @@
 import React from "react";
 
 const OrderDescription = (
-    { orderDate, orderId }: { orderDate: string; orderId: number },
+    { orderDate, orderId, currency }: {
+        orderDate: string;
+        orderId: number;
+        currency: string;
+    },
 ) => {
     return (
-        <div className="mb-8">
+        <section>
             <p>
                 <strong>Date:</strong>{" "}
                 {new Date(orderDate).toLocaleDateString()}
@@ -13,7 +17,10 @@ const OrderDescription = (
                 <strong>Order Number:</strong>{" "}
                 #{orderId.toString().padStart(4, "0")}
             </p>
-        </div>
+            <p>
+                <strong>Currency:</strong> {currency}
+            </p>
+        </section>
     );
 };
 

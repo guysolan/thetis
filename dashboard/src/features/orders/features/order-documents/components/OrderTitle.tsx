@@ -5,7 +5,7 @@ const OrderTitle = (
     { title }: { title: string },
 ) => {
     return (
-        <h1 className="mb-6 font-bold text-3xl capitalize">
+        <h1>
             {title}
         </h1>
     );

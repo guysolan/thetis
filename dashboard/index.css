@@ -6,7 +6,7 @@ html {
   color-scheme: light dark;
 }
 * {
-  @apply border-zinc-200 dark:border-zinc-800;
+  @apply border-zinc-200 dark:border-zinc-900;
 }
 body {
   @apply bg-zinc-50 text-zinc-950 dark:bg-zinc-900 dark:text-zinc-200;
@@ -44,4 +44,34 @@ body {
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+}
+
+.document section {
+  @apply space-y-1 my-4;
+}
+.document div {
+  @apply space-y-0 py-2;
+}
+.document h1 {
+  @apply mb-6 font-bold text-3xl capitalize;
+}
+
+.document h2 {
+  @apply mb-2 text-lg font-semibold text-neutral-950 dark:text-neutral-50;
+}
+
+.document h3 {
+  @apply mb-2 font-semibold text-neutral-900 underline dark:text-neutral-100 text-sm;
+}
+
+.document h4 {
+  @apply mb-2 font-semibold text-neutral-900 dark:text-neutral-300 text-sm;
+}
+
+.document p {
+  @apply text-neutral-900 dark:text-neutral-300 text-sm;
+}
+
+.document b {
+  @apply text-neutral-900 dark:text-neutral-300 text-sm font-semibold;
 }

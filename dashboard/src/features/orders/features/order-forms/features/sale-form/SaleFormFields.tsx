@@ -1,22 +1,13 @@
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
 import CompanyAddressContact from "../../../../../companies/components/CompanyAddressContact";
 import PriceItems from "../../components/PriceItems";
 import { useSaleForm } from "./useSaleForm";
 import StockItems from "../../components/StockItems";
-import AddressSelect from "../../../../../stockpiles/components/AddressSelect";
-import LockCard from "../../../../components/LockCard";
 import { StockValidationAlert } from "../../components/StockValidationAlert";
 import DatePicker from "../../../../../../components/DatePicker";
 import Input from "../../../../../../components/Input";
 import Select from "../../../../../../components/Select";
-import { currencyTypes } from "../../schema";
 import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";
+import { currencyKeys } from "../../../../../../constants/currencies";
 
 const SaleFormFields = () => {
     useSaleForm();
@@ -30,7 +21,7 @@ const SaleFormFields = () => {
                     <Select
                         name="currency"
                         label="Currency"
-                        options={currencyTypes.map((o) => ({
+                        options={currencyKeys.map((o) => ({
                             label: o,
                             value: o,
                         }))}

@@ -16,9 +16,11 @@ const PurchaseOrder = ({ order }: { order: OrderView }) => {
             <OrderDescription
                 orderId={order.order_id}
                 orderDate={order.order_date as string}
+                currency={order.currency}
             />
             <BuyerSeller order={order} />
             <FinancialTransactions
+                currency={order.currency}
                 orderItems={order.items}
                 orderType={order.order_type}
             />

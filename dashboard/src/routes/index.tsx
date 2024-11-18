@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
         <div className="gap-8 grid grid-cols-1 md:grid-cols-2 w-full">
           <Link
             to="/stock/orders"
-            className="flex flex-col bg-white hover:bg-zinc-50 shadow-sm hover:shadow-md p-8 border rounded-xl transition-colors"
+            className="flex flex-col bg-white hover:bg-zinc-50 shadow-sm hover:shadow-md p-8 border transition-colors"
           >
             <div className="flex-grow">
               <h4 className="mb-4 font-bold text-2xl">Stock Orders</h4>
@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
           </Link>
           <Link
             to="/finances/amazon/settlements"
-            className="flex flex-col bg-white hover:bg-zinc-50 shadow-sm hover:shadow-md p-8 border rounded-xl transition-colors"
+            className="flex flex-col bg-white hover:bg-zinc-50 shadow-sm hover:shadow-md p-8 border transition-colors"
           >
             <div className="flex-grow">
               <h4 className="mb-4 font-bold text-2xl">Finances</h4>

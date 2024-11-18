@@ -1,7 +1,7 @@
 import { Database } from "@/database.types";
 import { Company } from "../companies/types";
 import { Contact } from "../contacts/types";
-export type Currency = Database["public"]["Enums"]["currency_type"];
+
 export const orderTypes = [
     "sale",
     "shipment",
@@ -36,4 +36,5 @@ export type OrderView = Database["public"]["Views"]["orders_view"]["Row"] & {
     to_company: Company["Row"];
     from_contact: Contact["Row"];
     to_contact: Contact["Row"];
+    currency: Currency;
 };

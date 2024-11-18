@@ -9,6 +9,7 @@ const StocktakeReport = ({ order }: { order: OrderView }) => {
         <>
             <OrderTitle title="Stocktake Report" />
             <OrderDescription
+                currency={order.currency}
                 orderId={order.order_id}
                 orderDate={order.order_date as string}
             />

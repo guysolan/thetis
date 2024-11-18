@@ -46,6 +46,7 @@ const CommercialInvoice = ({ order }: { order: OrderView }) => {
         <>
             <OrderTitle title="Commercial Invoice" />
             <OrderDescription
+                currency={order.currency}
                 orderId={order.order_id}
                 orderDate={order.order_date as string}
             />

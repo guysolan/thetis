@@ -7,12 +7,14 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import type { OrderView } from "../../types";
-
+import type { OrderView } from "@/features/orders/types";
+import { formatCurrency } from "../../../../../constants/currencies";
+import { Currency } from "../../../../../constants/currencies";
 const FinancialTransactions = (
-    { orderType, orderItems }: {
+    { orderType, orderItems, currency }: {
         orderType: OrderView["order_type"];
         orderItems: OrderView["items"];
+        currency: Currency;
     },
 ) => {
     return (
@@ -45,8 +47,7 @@ const FinancialTransactions = (
                                 : item.quantity}
                         </TableCell>
                         <TableCell>
-                            ${item.price?.toFixed(2) ??
-                                0.00}
+                            {formatCurrency(item.price, currency)}
                         </TableCell>
                         <TableCell>
                             {(item.tax * 100)?.toFixed(0) ??
@@ -54,8 +55,7 @@ const FinancialTransactions = (
                         </TableCell>
 
                         <TableCell>
-                            ${item.total?.toFixed(2) ??
-                                0.00}
+                            {formatCurrency(item.total, currency)}
                         </TableCell>
                     </TableRow>
                 ))}

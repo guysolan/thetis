@@ -2,9 +2,8 @@ import React from "react";
 import { OrderView } from "../../../types";
 import Company from "./Company";
 import ShippingAddress from "./ShippingAddress";
-import { CompanyRow } from "../../../../companies/types";
 import Address from "../components/Address";
-import { AddressRow } from "../../../../stockpiles/types";
+import Contact from "./Contact";
 
 const BuyerSeller = ({ order }: { order: OrderView }) => {
     return (
@@ -24,10 +23,7 @@ const BuyerSeller = ({ order }: { order: OrderView }) => {
                     title="Billing Address"
                     address={order.from_billing_address}
                 />
-                <h3 className="mt-4 mb-2 font-medium">Contact</h3>
-                <p>{order.from_contact?.name}</p>
-                <p>{order.from_contact?.email}</p>
-                <p>{order.from_contact?.phone}</p>
+                <Contact contact={order.from_contact} />
             </div>
             <div>
                 <Company
@@ -44,10 +40,7 @@ const BuyerSeller = ({ order }: { order: OrderView }) => {
                     title="Billing Address"
                     address={order.to_billing_address}
                 />
-                <h3 className="mt-4 mb-2 font-medium text-sm">Contact</h3>
-                <p>{order.to_contact?.name}</p>
-                <p>{order.to_contact?.email}</p>
-                <p>{order.to_contact?.phone}</p>
+                <Contact contact={order.to_contact} />
             </div>
         </div>
     );

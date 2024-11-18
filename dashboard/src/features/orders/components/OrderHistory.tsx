@@ -6,17 +6,14 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { OrderView } from "../types";
-import { Separator } from "@/components/ui/separator";
-import { Dock, ExternalLink, Ship, Stamp, Tag } from "lucide-react";
 import dayjs from "dayjs";
 import OrderBreakdown from "../features/order-history/components/OrderBreakdown";
 import EditOrderForm from "./EditOrderForm";
-import { Link } from "@tanstack/react-router";
 
 import ActionPopover from "@/components/ActionPopover";
 import { useDeleteOrder } from "../api/deleteOrder";
-import { Button } from "../../../components/ui/button";
 import { DocumentLinks } from "./DocumentLinks";
+import { formatCurrency } from "../../../constants/currencies";
 
 interface ExistingOrdersProps {
 	orders: OrderView[];
@@ -43,16 +40,49 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 									<Badge variant="outline">
 										{order.order_type}
 									</Badge>
+									{order.currency && (
+										<Badge variant="secondary">
+											{order.currency}
+										</Badge>
+									)}
 								</div>
 
-								<span className="font-light text-neutral-600 text-sm">
-									{dayjs(order.order_date as string)
-										.format("DD MMM YYYY")}
-								</span>
-								<span className="font-semibold text-neutral-800">
-									${order.total_value?.toFixed(2) ??
-										"0.00"}
-								</span>
+								<div className="flex flex-col gap-0.5 text-neutral-600 text-sm">
+									<span>
+										{dayjs(order.order_date as string)
+											.format("DD MMM YYYY")}
+									</span>
+									{order.from_company && (
+										<span>
+											From: {order.from_company.name}
+											{order.from_contact &&
+												` (${order.from_contact.name})`}
+										</span>
+									)}
+									{order.to_company && (
+										<span>
+											To: {order.to_company.name}
+											{order.to_contact &&
+												` (${order.to_contact.name})`}
+										</span>
+									)}
+								</div>
+								<div className="flex items-baseline gap-2">
+									<span className="font-semibold text-neutral-800">
+										{formatCurrency(
+											order.total_value,
+											order.currency,
+										)}
+									</span>
+									{order.carriage > 0 && (
+										<span className="text-neutral-600 text-sm">
+											{formatCurrency(
+												order.carriage ?? 0,
+												order.currency,
+											)}
+										</span>
+									)}
+								</div>
 							</div>
 							<div className="flex items-center gap-2">
 								<ActionPopover
