@@ -3,11 +3,12 @@ import { AddressRow } from "../../../../stockpiles/types";
 import { CompanyRow } from "../../../../companies/types";
 
 const ShippingAddress = (
-    { address, company, title, size = "large" }: {
+    { address, company, title, contactName, size = "large" }: {
         address: AddressRow;
         company: CompanyRow;
         title?: string;
         size?: "small" | "large";
+        contactName?: string;
     },
 ) => {
     const textSize = size === "small" ? "text-sm" : "text-[2rem]";
@@ -23,7 +24,7 @@ const ShippingAddress = (
                     ? (
                         <>
                             <p>{company?.name}</p>
-                            <p>Care of: {address?.name}</p>
+                            {contactName && <p>Care of: {contactName}</p>}
                             <p>{address?.line_1}</p>
                             <p>{address?.line_2}</p>
                             <p>{address?.city}</p>

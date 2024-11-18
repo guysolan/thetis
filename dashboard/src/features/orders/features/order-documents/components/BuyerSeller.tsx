@@ -17,6 +17,7 @@ const BuyerSeller = ({ order }: { order: OrderView }) => {
                     title="Shipping Address"
                     size="small"
                     address={order.from_shipping_address}
+                    contactName={order.from_contact?.name}
                     company={order.from_company}
                 />
                 <Address
@@ -35,6 +36,7 @@ const BuyerSeller = ({ order }: { order: OrderView }) => {
                     size="small"
                     address={order.to_shipping_address}
                     company={order.to_company}
+                    contactName={order.to_contact?.name}
                 />
                 <Address
                     title="Billing Address"
