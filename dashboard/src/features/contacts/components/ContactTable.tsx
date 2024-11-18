@@ -41,8 +41,8 @@ const ContactTable = () => {
                         <TableCell>{contact.email}</TableCell>
                         <TableCell>{contact.phone}</TableCell>
                         <TableCell>
-                            <Badge key={contact.companies.id}>
-                                {contact.companies.name}
+                            <Badge key={contact.companies?.id}>
+                                {contact.companies?.name}
                             </Badge>
                         </TableCell>
                         <TableCell>
