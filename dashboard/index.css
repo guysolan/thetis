@@ -46,6 +46,9 @@ body {
   }
 }
 
+.document {
+  @apply text-black dark:text-white;
+}
 .document section {
   @apply space-y-1 my-4;
 }
@@ -57,21 +60,21 @@ body {
 }
 
 .document h2 {
-  @apply mb-2 text-lg font-semibold text-neutral-950 dark:text-neutral-50;
+  @apply mb-2 text-lg font-semibold;
 }
 
 .document h3 {
-  @apply mb-2 font-semibold text-neutral-900 underline dark:text-neutral-100 text-sm;
+  @apply mb-2 font-semibold underline text-sm;
 }
 
 .document h4 {
-  @apply mb-2 font-semibold text-neutral-900 dark:text-neutral-300 text-sm;
+  @apply mb-2 font-semibold  text-sm;
 }
 
 .document p {
-  @apply text-neutral-900 dark:text-neutral-300 text-sm;
+  @apply text-sm;
 }
 
 .document b {
-  @apply text-neutral-900 dark:text-neutral-300 text-sm font-semibold;
+  @apply text-sm font-semibold;
 }

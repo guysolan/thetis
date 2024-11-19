@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form } from "@/components/ui/form";
@@ -11,10 +11,12 @@ import { OrderView } from "../types";
 import Select from "@/components/Select";
 import { useUpdateOrder } from "../api/updateOrder";
 import { orderTypes } from "../types";
+import Input from '../../../components/Input';
 
 const editOrderSchema = z.object({
 	order_type: z.enum(orderTypes),
 	order_date: z.coerce.date(),
+	carriage: z.number(),
 });
 
 const EditOrderForm = ({ order }: { order: OrderView }) => {
@@ -23,6 +25,7 @@ const EditOrderForm = ({ order }: { order: OrderView }) => {
 		defaultValues: {
 			order_date: dayjs().toDate(),
 			order_type: order.order_type,
+			carriage: order.carriage,
 		},
 	});
 
@@ -53,6 +56,7 @@ const EditOrderForm = ({ order }: { order: OrderView }) => {
 					label="Order Type"
 				/>
 				<DatePicker name="order_date" label="Order Date" />
+				<Input type='number' name="carriage" label="Carriage" />
 				<Button
 					onClick={() => {
 						console.log(form.formState.errors);
