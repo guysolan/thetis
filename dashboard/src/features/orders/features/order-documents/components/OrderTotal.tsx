@@ -6,7 +6,8 @@ import {
     TableHead,
     TableRow,
 } from "@/components/ui/table";
-import { Currency, OrderView } from "../../../types";
+import { Currency } from '../../../../../constants/currencies';
+import { OrderView } from "../../../types";
 import { formatCurrency } from "../../../../../constants/currencies";
 
 const OrderTotal = (
@@ -20,9 +21,9 @@ const OrderTotal = (
             <TableBody>
                 {showCarriage &&
                     (
-                        <TableRow className="border-t">
+                        <TableRow className="border-t text-neutral-800">
                             <TableHead>Carriage</TableHead>
-                            <TableCell className="w-1/6 font-medium text-neutral-600">
+                            <TableCell className="w-1/6 font-medium">
                                 {formatCurrency(
                                     order.carriage ?? 0,
                                     order.currency,

@@ -7,7 +7,7 @@ import Contact from "./Contact";
 
 const BuyerSeller = ({ order }: { order: OrderView }) => {
     return (
-        <div className="gap-8 grid grid-cols-2 mb-8 capitalize">
+        <div className="gap-8 grid grid-cols-2 capitalize">
             <div>
                 <Company
                     title="Seller"

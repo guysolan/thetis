@@ -37,16 +37,19 @@ const CommercialInvoice = ({ order }: { order: OrderView }) => {
                 orderId={order.order_id}
                 orderDate={order.order_date as string}
             />
-            <BuyerSeller order={order} />
 
             <ShippingItems
                 orderItems={prepareOrderItems(order)}
             />
 
             <PackageSummary items={order.items} />
-            <ExchangeRates />
+
+            <BuyerSeller order={order} />
+
             <FDADetails />
             <ExporterDetails />
+            <ExchangeRates />
+
         </>
     );
 };

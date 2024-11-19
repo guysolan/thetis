@@ -40,7 +40,6 @@ const FinancialTransactions = (
 ) => {
     return (
         <Table className="text-left">
-            <TableCaption>Financial Transactions</TableCaption>
             <TableHeader>
                 <TableRow>
                     <TableHead>Item Name</TableHead>

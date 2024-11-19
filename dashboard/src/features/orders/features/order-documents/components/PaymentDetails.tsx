@@ -131,9 +131,9 @@ const PaymentDetails = (
             <h2 className="mb-1 font-medium text-lg text-neutral-900">
                 Payment Information
             </h2>
-            <p>
+            <h4>
                 Payment Reference: #{orderId.toString().padStart(4, "0")}
-            </p>
+            </h4>
             <section>
                 {filteredAccounts.map((account) => (
                     <section key={account.currency}>

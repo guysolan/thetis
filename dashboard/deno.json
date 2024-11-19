@@ -1,0 +1,21 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-net --allow-read --allow-env --unstable-sloppy-imports --watch src/main.tsx --port=2122",
+    "start": "deno run --allow-net --allow-read --allow-env --unstable-sloppy-imports src/main.tsx",
+    "build": "deno bundle src/main.tsx dist/bundle.js"
+  },
+  "imports": {
+    "react": "https://esm.sh/react@18.3.1",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "@tanstack/react-query": "https://esm.sh/@tanstack/react-query@5.59.3",
+    "@tanstack/react-router": "https://esm.sh/@tanstack/react-router@1.63.5",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.45.4",
+    "@/": "./src/"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["./src/types.d.ts"]
+  }
+}

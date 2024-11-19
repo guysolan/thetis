@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { routeTree } from './routeTree.gen'
+import { routeTree } from './routeTree.gen.ts'
 const queryClient = new QueryClient()
 
 // Set up a Router instance

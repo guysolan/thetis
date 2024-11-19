@@ -1,5 +1,4 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import PurchaseForm from "../features/order-forms/features/purchase-form/PurchaseForm";
 import SaleForm from "../features/order-forms/features/sale-form/SaleForm";
 import BuyForm from "../features/order-forms/features/buy-form/BuyForm";
 import { Banknote, Hammer, Info, ShoppingCart, Truck } from "lucide-react";
