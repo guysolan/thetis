@@ -16,6 +16,7 @@ import { Stockpile } from "../types";
 import Sheet from "../../../components/Sheet";
 import AddressForm from "./AddressForm";
 import { useSelectAddresses } from "../api/selectAddresses";
+import InlineStocktakeForm from './InlineStocktakeForm';
 
 interface Props {
     stockpile: Stockpile["Row"];
@@ -60,7 +61,10 @@ const StockpileCard = ({ stockpile }: Props) => {
             </CardHeader>
 
             <CardContent>
-                <ItemsTable items={stockpile.items} />
+                {/* <ItemsTable items={stockpile.items} /> */}
+                <InlineStocktakeForm
+                    items={stockpile?.items}
+                />
             </CardContent>
             <CardFooter>
                 <Sheet

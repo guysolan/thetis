@@ -13,21 +13,22 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-
+import { cn } from "@/lib/utils";
 type SelectProps = {
     name: string;
     label?: string;
     options: { label: string; value: string }[];
     disabled?: boolean;
+    className?: string;
 };
-const Select = ({ name, label, options, disabled }: SelectProps) => {
+const Select = ({ name, label, options, disabled, className }: SelectProps) => {
     const { control } = useFormContext();
     return (
         <FormField
             control={control}
             name={name}
             render={({ field }) => (
-                <FormItem className="flex-grow w-full">
+                <FormItem className={cn("flex-grow w-full", className)}>
                     <FormLabel className={label ? "not-sr-only" : "sr-only"}>
                         {label ?? name}
                     </FormLabel>

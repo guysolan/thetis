@@ -4,6 +4,7 @@ import BuyForm from "../features/order-forms/features/buy-form/BuyForm";
 import { Banknote, Hammer, Info, ShoppingCart, Truck } from "lucide-react";
 import ShipmentForm from "../features/order-forms/features/shipment-form/ShipmentForm";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import SellForm from '../features/order-forms/features/sell-form/SellForm';
 
 export const OrderForm: React.FC = () => {
 	return (
@@ -49,7 +50,8 @@ export const OrderForm: React.FC = () => {
 						Sale forms are for selling stock to a customer.
 					</AlertDescription>
 				</Alert>
-				<SaleForm />
+				<SellForm />
+				{/* <SaleForm /> */}
 			</TabsContent>
 
 			<TabsContent value="shipment">

@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import OrderFormButton from "./OrderFormButton";
 import React from "react";
 import { StockValidationConfig } from "../hooks/useStockValidation";
+import FormErrors from '../../../../../components/FormErrors';
 
 interface BaseOrderFormProps<T extends z.ZodType> {
     schema: T;
@@ -47,6 +48,7 @@ export function BaseOrderForm<T extends z.ZodType>({
                 className="flex flex-col space-y-4 px-1 pt-2 pr-4"
             >
                 {children}
+                <FormErrors />
                 <OrderFormButton
                     config={config}
                     onClick={form.handleSubmit(handleSubmit)}

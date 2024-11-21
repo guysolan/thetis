@@ -12,6 +12,7 @@ const ShipmentFormFields = () => {
     useShipmentForm();
     useCompanyDefaults({ fieldName: "from_company_id" });
 
+
     return (
         <>
             <CompanyAddressContact
@@ -19,15 +20,8 @@ const ShipmentFormFields = () => {
                 defaultExpanded={false}
             />
             <CompanyAddressContact direction="to" />
-            <Card>
-                <CardHeader className="flex flex-row justify-between">
-                    <CardTitle>Items to Ship</CardTitle>
-                    <PackageDialog />
-                </CardHeader>
-                <CardContent>
-                    <ShipmentItems />
-                </CardContent>
-            </Card>
+            <CardTitle>Items to Ship</CardTitle>
+            <ShipmentItems />
             <StockValidationAlert />
 
             <StockItems

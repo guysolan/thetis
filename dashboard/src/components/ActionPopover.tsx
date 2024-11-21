@@ -12,7 +12,7 @@ interface ActionPopoverProps {
     title: string;
     description?: string;
     editForm: React.ReactNode;
-    deleteFunction: () => void;
+    deleteFunction?: () => void;
     onDuplicate?: () => void;
     children?: React.ReactNode;
 }
@@ -67,7 +67,7 @@ const ActionPopover = ({
                     </Button>
                 )}
                 {children}
-                <DeleteDialog
+                {deleteFunction && <DeleteDialog
                     trigger={
                         <Button
                             variant="ghost"
@@ -77,7 +77,7 @@ const ActionPopover = ({
                         </Button>
                     }
                     deleteFunction={deleteFunction}
-                />
+                />}
             </PopoverContent>
         </Popover>
     );

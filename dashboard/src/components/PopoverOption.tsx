@@ -5,12 +5,14 @@ import { cn } from "../lib/utils";
 type PopoverOptionProps = {
     children: React.ReactNode;
     variant?: "default" | "destructive";
+    onClick?: () => void;
 };
 const PopoverOption = (
-    { children, variant = "default" }: PopoverOptionProps,
+    { children, variant = "default", onClick }: PopoverOptionProps,
 ) => {
     return (
         <Button
+            onClick={onClick}
             variant="ghost"
             className={cn(
                 "w-full justify-start gap-2 px-2",

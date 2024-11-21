@@ -53,9 +53,9 @@ const StocktakeItemsFormFields = ({
                                 options={items
                                     ?.filter((item) =>
                                         item.item_type ===
-                                            form.watch(
-                                                `${name}.${index}.item_type`,
-                                            )
+                                        form.watch(
+                                            `${name}.${index}.item_type`,
+                                        )
                                     )
                                     .map((item) => ({
                                         label: item.item_name,

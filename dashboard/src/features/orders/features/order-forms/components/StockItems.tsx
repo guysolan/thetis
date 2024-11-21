@@ -40,6 +40,10 @@ const StockItems = ({
     const { fields, append, remove } = useFieldArray({ name });
     const { getItemQuantities } = useStockQuantities(name, address_name);
 
+
+    console.log(form.formState.errors);
+
+
     const address = addresses?.find(
         (a) => String(a.id) === form.watch(address_name),
     );
@@ -64,8 +68,7 @@ const StockItems = ({
             <CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
                 <CardTitle className="font-medium text-base">
                     {title ||
-                        `Stock Changes ${
-                            address?.name ? `(${address.name})` : ""
+                        `Stock Changes ${address?.name ? `(${address.name})` : ""
                         }`}
                 </CardTitle>
                 {showEditButton && (

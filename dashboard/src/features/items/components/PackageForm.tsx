@@ -52,7 +52,7 @@ export function PackageForm({ item }: Props) {
         resolver: zodResolver(formSchema),
         defaultValues: {
             item: {
-                id: item?.item_id,
+                id: String(item?.item_id),
                 name: item?.item_name ?? "",
                 price: item?.item_price ?? 0,
                 type: "package",
@@ -134,7 +134,7 @@ export function PackageForm({ item }: Props) {
                                             options={itemsView
                                                 ?.filter((ic) =>
                                                     ic.item_type ===
-                                                        "product" ||
+                                                    "product" ||
                                                     ic.item_type === "part"
                                                 )
                                                 .map((ic) => ({
@@ -175,14 +175,26 @@ export function PackageForm({ item }: Props) {
                         Add Component
                     </Button>
                 </div>
-
-                <Button
-                    type="submit"
-                    disabled={form.formState.isSubmitting}
-                    onClick={form.handleSubmit(onSubmit)}
-                >
-                    {form.formState.isSubmitting ? "Saving..." : "Save Item"}
-                </Button>
+                <div className="flex gap-2">
+                    <Button
+                        type="submit"
+                        disabled={form.formState.isSubmitting}
+                        onClick={form.handleSubmit(onSubmit)}
+                    >
+                        {form.formState.isSubmitting ? "Saving..." : "Save Item"}
+                    </Button>
+                    <Button
+                        type="submit"
+                        variant="secondary"
+                        disabled={form.formState.isSubmitting}
+                        onClick={() => {
+                            form.setValue("item.id", undefined);
+                            form.handleSubmit(onSubmit)()
+                        }}
+                    >
+                        {form.formState.isSubmitting ? "Saving..." : "Save As New"}
+                    </Button>
+                </div>
             </div>
         </Form>
     );
