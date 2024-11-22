@@ -9,6 +9,7 @@ import Select from "../../../../../../components/Select";
 import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";
 import { currencyKeys } from "../../../../../../constants/currencies";
 import PricePackageItems from '../../components/PricePackageItems';
+import ShipmentItems from '../shipment-form/ShipmentItems';
 
 const SellFormFields = () => {
     useSellForm();
@@ -45,6 +46,8 @@ const SellFormFields = () => {
                 title="Buyer"
                 direction="to"
             />
+
+            {/* <ShipmentItems /> */}
 
             <PricePackageItems
                 title="Packages"

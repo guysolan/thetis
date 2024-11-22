@@ -17,6 +17,8 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { useSelectItemsView } from "../api/selectItemsView";
+import ItemTypeSelect from '../../../components/ItemTypeSelect';
+import { Trash } from 'lucide-react';
 
 const formSchema = z.object({
     item: z.object({
@@ -33,6 +35,7 @@ const formSchema = z.object({
         z.object({
             component_quantity: z.coerce.number().min(0),
             component_id: z.string().min(1, "Component item is required"),
+            item_type: z.enum(["product", "part"]).optional(),
         }),
     ),
 });
@@ -52,7 +55,7 @@ export function PackageForm({ item }: Props) {
         resolver: zodResolver(formSchema),
         defaultValues: {
             item: {
-                id: String(item?.item_id),
+                id: item?.item_id ? String(item?.item_id) : undefined,
                 name: item?.item_name ?? "",
                 price: item?.item_price ?? 0,
                 type: "package",
@@ -82,120 +85,137 @@ export function PackageForm({ item }: Props) {
         await upsertComponents(componentsWithItemId);
     }
 
+    const itemId = form.watch("item.id");
+    console.log(itemId)
     return (
         <Form {...form}>
-            <div className="space-y-8">
-                <div className="space-y-4">
-                    <h3 className="font-medium text-lg">Package Details</h3>
-                    <Input label="Name" name="item.name" type="text" />
-                    <Input label="Price" name="item.price" type="number" />
+            <form className="px-1">
+                <div className="space-y-8">
+                    <div className="space-y-4">
+                        <h3 className="font-medium text-lg">Package Details</h3>
+                        <Input label="Name" name="item.name" type="text" />
+                        <Input label="Price" name="item.price" type="number" />
 
-                    <div className="gap-4 grid grid-cols-2">
-                        <Input
-                            label="Height (cm)"
-                            name="item.height"
-                            type="number"
-                        />
-                        <Input
-                            label="Width (cm)"
-                            name="item.width"
-                            type="number"
-                        />
-                        <Input
-                            label="Depth (cm)"
-                            name="item.depth"
-                            type="number"
-                        />
-                        <Input
-                            label="Weight (kg)"
-                            name="item.weight"
-                            type="number"
-                        />
+                        <div className="gap-4 grid grid-cols-2">
+                            <Input
+                                label="Height (cm)"
+                                name="item.height"
+                                type="number"
+                            />
+                            <Input
+                                label="Width (cm)"
+                                name="item.width"
+                                type="number"
+                            />
+                            <Input
+                                label="Depth (cm)"
+                                name="item.depth"
+                                type="number"
+                            />
+                            <Input
+                                label="Weight (kg)"
+                                name="item.weight"
+                                type="number"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Components Section */}
+                    <div className="space-y-4">
+                        <h3 className="font-medium text-lg">Package Contents</h3>
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead className='w-32'>Type</TableHead>
+                                    <TableHead>Component</TableHead>
+                                    <TableHead className='w-20'>Quantity</TableHead>
+                                    <TableHead className='w-16'>Actions</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {fields.map((field, index) => (
+                                    <TableRow key={field.id}>
+                                        <TableCell>
+                                            <Select
+                                                name={`components.${index}.item_type`}
+                                                options={[
+                                                    { label: "Product", value: "product" },
+                                                    { label: "Part", value: "part" }
+                                                ]}
+                                            />
+                                        </TableCell>
+                                        <TableCell>
+                                            <Select
+                                                name={`components.${index}.component_id`}
+                                                options={itemsView
+                                                    ?.filter((ic) =>
+                                                        ic.item_type === form.watch(`components.${index}.item_type`)
+                                                    )
+                                                    .map((ic) => ({
+                                                        label: ic.item_name,
+                                                        value: String(ic.item_id),
+                                                    })) || []}
+                                            />
+                                        </TableCell>
+                                        <TableCell>
+                                            <Input
+                                                name={`components.${index}.component_quantity`}
+                                                type="number"
+                                            />
+                                        </TableCell>
+                                        <TableCell >
+                                            <Button
+                                                type="button"
+                                                variant="ghost"
+                                                size="icon"
+                                                className='py-1'
+                                                // variant="destructive"
+                                                onClick={() =>
+                                                    remove(index)}
+                                            >
+                                                <span className="sr-only">Remove</span>
+                                                <Trash size={20} />
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                        <Button
+                            type="button"
+                            variant="secondary"
+                            onClick={() =>
+                                append({
+                                    component_id: "",
+                                    component_quantity: 1,
+                                    item_type: "product", // Default to product
+                                })}
+                        >
+                            Add Component
+                        </Button>
+                    </div>
+                    <div className="flex gap-2">
+                        {!!itemId && <Button
+                            type="submit"
+                            disabled={form.formState.isSubmitting}
+                            onClick={form.handleSubmit(onSubmit)}
+                        >
+                            {form.formState.isSubmitting ? "Saving..." : "Save Item"}
+                        </Button>}
+                        <Button
+                            type="submit"
+                            variant={itemId ? "secondary" : "default"}
+                            disabled={form.formState.isSubmitting}
+                            onClick={() => {
+                                form.setValue("item.id", undefined);
+                                form.handleSubmit(onSubmit)()
+                            }}
+                        >
+                            {form.formState.isSubmitting ? "Saving..." : "Save As New"}
+                        </Button>
                     </div>
                 </div>
-
-                {/* Components Section */}
-                <div className="space-y-4">
-                    <h3 className="font-medium text-lg">Package Contents</h3>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Component</TableHead>
-                                <TableHead>Quantity</TableHead>
-                                <TableHead>Actions</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {fields.map((field, index) => (
-                                <TableRow key={field.id}>
-                                    <TableCell>
-                                        <Select
-                                            name={`components.${index}.component_id`}
-                                            options={itemsView
-                                                ?.filter((ic) =>
-                                                    ic.item_type ===
-                                                    "product" ||
-                                                    ic.item_type === "part"
-                                                )
-                                                .map((ic) => ({
-                                                    label: ic.item_name,
-                                                    value: String(ic.item_id),
-                                                })) || []}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <Input
-                                            name={`components.${index}.component_quantity`}
-                                            type="number"
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button
-                                            type="button"
-                                            variant="destructive"
-                                            onClick={() =>
-                                                remove(index)}
-                                        >
-                                            Remove
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                    <Button
-                        type="button"
-                        variant="secondary"
-                        onClick={() =>
-                            append({
-                                component_id: "",
-                                component_quantity: 1,
-                            })}
-                    >
-                        Add Component
-                    </Button>
-                </div>
-                <div className="flex gap-2">
-                    <Button
-                        type="submit"
-                        disabled={form.formState.isSubmitting}
-                        onClick={form.handleSubmit(onSubmit)}
-                    >
-                        {form.formState.isSubmitting ? "Saving..." : "Save Item"}
-                    </Button>
-                    <Button
-                        type="submit"
-                        variant="secondary"
-                        disabled={form.formState.isSubmitting}
-                        onClick={() => {
-                            form.setValue("item.id", undefined);
-                            form.handleSubmit(onSubmit)()
-                        }}
-                    >
-                        {form.formState.isSubmitting ? "Saving..." : "Save As New"}
-                    </Button>
-                </div>
-            </div>
+            </form>
         </Form>
     );
 }

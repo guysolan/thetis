@@ -1,7 +1,7 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Package, Trash, Box, Weight } from "lucide-react";
+import { Package, Trash, Box, Weight, BoxIcon } from "lucide-react";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView";
 import Select from "@/components/Select";
 
@@ -11,9 +11,7 @@ import ShipmentItemComponents from './ShipmentItemComponents';
 import ActionPopover from "@/components/ActionPopover";
 import PopoverOption from '../../../../../../components/PopoverOption';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../../../../components/ui/card';
-import { Label } from '../../../../../../components/ui/label';
 import { Badge } from '../../../../../../components/ui/badge';
-import FormErrors from '../../../../../../components/FormErrors';
 import {
     Table,
     TableHeader,
@@ -22,6 +20,7 @@ import {
     TableRow,
     TableCell,
 } from "@/components/ui/table";
+import Sheet from '../../../../../../components/Sheet';
 
 const ShipmentItems = () => {
     const { data: items } = useSelectItemsView();
@@ -63,6 +62,16 @@ const ShipmentItems = () => {
                                     append({ ...itemToCopy });
                                 }}
                             >
+                                <Sheet
+                                    trigger={<PopoverOption  >
+                                        <BoxIcon size={20} />
+                                        New
+                                    </PopoverOption>}
+                                    title="New Package"
+                                    description="Create a new package with the selected template."
+                                >
+                                    <PackageForm item={null} />
+                                </Sheet>
                                 <PopoverOption disabled={orderItems.length < 2} variant="destructive" onClick={() => remove(index)}>
                                     <Trash size={20} />
                                     Delete
@@ -76,7 +85,7 @@ const ShipmentItems = () => {
                                         <TableHead>Package</TableHead>
                                         <TableHead className="w-16">Quantity</TableHead>
                                         <TableHead className="w-32">Dimensions</TableHead>
-                                        <TableHead className="w-16">Weight</TableHead>
+                                        <TableHead className="w-20">Weight</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
@@ -127,7 +136,7 @@ const ShipmentItems = () => {
                     Add Package
                 </Button>
             </div>
-        </div>
+        </div >
     );
 };
 

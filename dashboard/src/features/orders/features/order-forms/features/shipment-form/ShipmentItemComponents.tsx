@@ -15,12 +15,12 @@ const ShipmentItemComponents = ({ itemId }: { itemId: string }) => {
     }
 
     return (
-        <div className="space-y-1.5">
-            <div className="flex flex-wrap gap-1.5">
+        <div className="space-y-2 px-2 py-1">
+            <div className="flex flex-wrap gap-2">
                 {item.components.map((comp, index) => (
                     <Badge
                         key={comp.component_id}
-                        className="inline-flex items-center bg-background hover:bg-accent px-2.5 py-0.5 border focus:ring-2 focus:ring-ring focus:ring-offset-2 font-semibold text-foreground text-xs transition-colors focus:outline-none"
+                        className=""
                     >
                         <span className="font-medium text-primary">
                             {comp.component_quantity}x

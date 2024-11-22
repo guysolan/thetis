@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import Sheet from "@/components/Sheet";
 import { useSelectOrders } from "@/features/orders/features/order-history/api/selectOrders";
@@ -6,14 +6,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { OrderForm } from "@/features/orders/components/OrderForm";
 import { OrderHistory } from "@/features/orders/components/OrderHistory";
-import PageTitle from "../../../components/PageTitle";
+
+export type OrderTab = "sale" | "purchase" | "shipment" | "all"
+const tabs: OrderTab[] = ['all', 'purchase', 'sale', 'shipment']
 
 const OrdersPage = () => {
   const { data: orders } = useSelectOrders();
 
   return (
     <>
-      <PageTitle title="Orders">
+      {/* <PageTitle title="Orders">
         <Sheet
           trigger={<Button>Create New Order</Button>}
           title="Create Order"
@@ -21,17 +23,30 @@ const OrdersPage = () => {
         >
           <OrderForm />
         </Sheet>
-      </PageTitle>
+      </PageTitle> */}
 
       <Tabs defaultValue="all" className="w-full">
-        <TabsList className="my-2">
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="sale">Sales</TabsTrigger>
-          <TabsTrigger value="purchase">Purchases</TabsTrigger>
-          <TabsTrigger value="shipment">Shipments</TabsTrigger>
-        </TabsList>
+        <div className='flex justify-between items-center'>
+          <TabsList className="my-2">
+            {tabs.map((tab) => (<TabsTrigger className="capitalize" key={tab} value={tab}>{tab}</TabsTrigger>))}
+          </TabsList>
 
-        {["all", "sale", "purchase", "shipment"].map((tabValue) => (
+          <Sheet
+            trigger={<Button>Create New Order</Button>}
+            title="Create Order"
+            description="Enter the details for your new Order."
+          >
+            {tabs?.map((tabValue) => (
+              <TabsContent key={tabValue} value={tabValue}>
+
+                <OrderForm defaultTab={tabValue} />
+              </TabsContent>
+
+            ))}
+
+          </Sheet>
+        </div>
+        {tabs?.map((tabValue) => (
           <TabsContent key={tabValue} value={tabValue}>
             <OrderHistory
               orders={orders?.filter((order) =>
