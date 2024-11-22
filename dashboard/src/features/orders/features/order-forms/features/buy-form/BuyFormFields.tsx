@@ -5,7 +5,7 @@ import { StockValidationAlert } from "../../components/StockValidationAlert";
 import { useBuyForm } from "./useBuyForm";
 import DatePicker from "../../../../../../components/DatePicker";
 import Select from "../../../../../../components/Select";
-import { currencyTypes } from "../../schema";
+import { currencyKeys } from "../../../../../../constants/currencies";
 import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";
 import { useFormContext } from "react-hook-form";
 const BuyFormFields = () => {
@@ -24,7 +24,7 @@ const BuyFormFields = () => {
                 <Select
                     name="currency"
                     label="Currency"
-                    options={currencyTypes.map((o) => ({ label: o, value: o }))}
+                    options={currencyKeys.map((o) => ({ label: o, value: o }))}
                 />
             </div>
 

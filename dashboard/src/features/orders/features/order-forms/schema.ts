@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { itemTypes } from "../../../items/types";
 
-export const currencyTypes = ["GBP", "USD", "EUR"] as const;
+import { currencyKeys } from '../../../../constants/currencies';
 
 export const orderItemSchema = z.object({
     item_id: z.string().min(1, "Please select an item"),
@@ -52,9 +52,11 @@ const baseAddressSchema = z.object({
 
 const baseOrderSchema = z.object({
     order_date: z.date(),
-    order_items: z.array(orderItemSchema),
-    currency: z.enum(currencyTypes).default("GBP"),
-    carriage: z.coerce.number().default(0),
+    order_items: z.array(orderItemSchema).min(1, "At least one item is required"),
+    currency: z.enum(currencyKeys, {
+        errorMap: () => ({ message: "Please select a valid currency" })
+    }).default("GBP"),
+    carriage: z.coerce.number().min(0, "Carriage must be 0 or greater").default(0),
 });
 
 // Refactored form schemas using composition
@@ -74,7 +76,7 @@ export const shipmentFormSchema = baseAddressSchema.extend({
 export const buyFormSchema = baseAddressSchema.extend({
     ...baseOrderSchema.shape,
     order_type: z.enum(["purchase"]),
-    produced_items: z.array(pricedItemSchema),
+    produced_items: z.array(pricedItemSchema).min(1, "At least one item is required"),
     consumed_items: z.array(pricedItemSchema),
 });
 

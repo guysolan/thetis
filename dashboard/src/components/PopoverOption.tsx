@@ -5,13 +5,15 @@ import { cn } from "../lib/utils";
 type PopoverOptionProps = {
     children: React.ReactNode;
     variant?: "default" | "destructive";
+    disabled?: boolean;
     onClick?: () => void;
 };
 const PopoverOption = (
-    { children, variant = "default", onClick }: PopoverOptionProps,
+    { children, variant = "default", onClick, disabled = false }: PopoverOptionProps,
 ) => {
     return (
         <Button
+            disabled={disabled}
             onClick={onClick}
             variant="ghost"
             className={cn(

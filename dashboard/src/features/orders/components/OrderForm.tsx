@@ -50,8 +50,9 @@ export const OrderForm: React.FC = () => {
 						Sale forms are for selling stock to a customer.
 					</AlertDescription>
 				</Alert>
-				<SellForm />
-				{/* <SaleForm /> */}
+				{/* TODO - Use SellForm not Sales form to include packages */}
+				{/* <SellForm /> */}
+				<SaleForm />
 			</TabsContent>
 
 			<TabsContent value="shipment">

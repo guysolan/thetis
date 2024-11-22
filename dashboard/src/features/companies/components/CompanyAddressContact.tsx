@@ -13,6 +13,7 @@ import { CompanySummaryView } from "./CompanySummaryView";
 import { CompanyAddressContactSelect } from "./CompanyAddressContactSelect";
 import { useCompanyAutoFill } from "../hooks/useCompanyAutoFill";
 import { CompanyRow } from "../types";
+import { CompanyAddressContactErrors } from './CompanyAddressContactErrors';
 
 interface Props {
     direction: "to" | "from";
@@ -102,7 +103,7 @@ const CompanyAddressContact = ({
                     )}
             </CardContent>
             <CardFooter>
-                {isExpanded &&
+                {isExpanded ?
                     (
                         <Button
                             type="button"
@@ -110,7 +111,9 @@ const CompanyAddressContact = ({
                         >
                             Done
                         </Button>
-                    )}
+                    ) :
+                    <CompanyAddressContactErrors direction={direction} />
+                }
             </CardFooter>
         </Card>
     );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { ItemType } from "../types";
@@ -9,6 +9,7 @@ import PriceItemActions from "./PriceItemActions";
 import { formatCurrency } from "../../../../../constants/currencies";
 import { usePriceItems } from "../hooks/usePriceItems";
 import PriceSummary from "./PriceSummary";
+import FormErrors from '../../../../../components/FormErrors';
 
 interface PriceItemsProps {
     showPrice?: boolean;
@@ -95,6 +96,13 @@ const PriceItems = ({
                         />
                     )}
             </CardContent>
+            <CardFooter>
+                <FormErrors
+                    title="Price Items Errors"
+                    fieldPrefix={'order_items'}
+                    fields={['order_items', ...(fields.map(field => field.id))]}
+                />
+            </CardFooter>
         </Card>
     );
 };

@@ -32,11 +32,19 @@ export function BaseOrderForm<T extends z.ZodType>({
         },
     });
 
+    const scrollToTop = () => {
+        document.getElementById('order-form')?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    };
+
     const handleSubmit = async (data: z.infer<T>) => {
         try {
             await onSubmit(data);
         } catch (error) {
             console.error("Form submission failed:", error);
+            scrollToTop();
         }
     };
 
@@ -44,14 +52,14 @@ export function BaseOrderForm<T extends z.ZodType>({
         <Form {...form}>
             <form
                 id="order-form"
-                onSubmit={form.handleSubmit(handleSubmit)}
+                onSubmit={form.handleSubmit(handleSubmit, () => scrollToTop())}
                 className="flex flex-col space-y-4 px-1 pt-2 pr-4"
             >
                 {children}
                 <FormErrors />
                 <OrderFormButton
                     config={config}
-                    onClick={form.handleSubmit(handleSubmit)}
+                    onClick={form.handleSubmit(handleSubmit, () => scrollToTop())}
                 />
             </form>
         </Form>

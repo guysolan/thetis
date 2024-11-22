@@ -4,7 +4,7 @@ import { useStockQuantities } from "../hooks/useStockQuantities";
 import StockItemsFormFields from "./StockItemsFormFields";
 import StockItemsSummary from "./StockItemsSummary";
 import StockItemActions from "./StockItemActions";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { useState } from "react";
@@ -15,6 +15,7 @@ import {
     StockItemName,
 } from "../types";
 import { useSelectAddresses } from "@/features/stockpiles/api/selectAddresses";
+import FormErrors from '../../../../../components/FormErrors';
 
 interface StockItemProps {
     name: StockItemName;
@@ -112,6 +113,13 @@ const StockItems = ({
                         />
                     )}
             </CardContent>
+            <CardFooter>
+                <FormErrors
+                    title="Stock Items Errors"
+                    fieldPrefix={name}
+                    fields={[name, ...(fields.map(field => field.id))]}
+                />
+            </CardFooter>
         </Card>
     );
 };

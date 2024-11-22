@@ -1,9 +1,7 @@
-import { useWatch } from "react-hook-form";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardTitle } from "@/components/ui/card";
 import { useShipmentForm } from "./useShipmentForm";
 import CompanyAddressContact from "../../../../../companies/components/CompanyAddressContact";
 import ShipmentItems from "./ShipmentItems";
-import PackageDialog from "../../../../../items/components/PackageDialog";
 import { StockValidationAlert } from "../../components/StockValidationAlert";
 import StockItems from "../../components/StockItems";
 import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";

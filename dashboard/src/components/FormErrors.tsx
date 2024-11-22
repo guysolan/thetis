@@ -6,7 +6,17 @@ interface FormErrorsProps {
     title?: string;
 }
 
-const FormErrors = ({ title = "Form Errors" }: FormErrorsProps) => {
+interface FormErrorsProps {
+    title?: string;
+    fieldPrefix?: string;
+    fields?: string[];
+}
+
+const FormErrors = ({
+    title = "Form Errors",
+    fieldPrefix,
+    fields
+}: FormErrorsProps) => {
     const { errors } = useFormState();
 
     if (!errors || Object.keys(errors).length === 0) {
@@ -14,18 +24,29 @@ const FormErrors = ({ title = "Form Errors" }: FormErrorsProps) => {
     }
 
     // Transform errors into a more readable format
-    const formattedErrors = Object.entries(errors).map(([field, error]) => ({
-        field: field.split('.')
-            .map(part => part
-                .replace(/_/g, ' ') // Convert underscores to spaces
-                .replace(/([A-Z])/g, ' $1')
-                .replace(/^\w/, c => c.toUpperCase())
-                .replace(/\b\w/g, c => c.toUpperCase()) // Capitalize all words
-                .replace(/\d+$/, '')
-                .trim()
-            ).join(' › '),
-        message: error?.message as string
-    })).filter(error => error.message);
+    const formattedErrors = Object.entries(errors)
+        // Filter errors by prefix and fields if provided
+        .filter(([field]) => {
+            if (!fieldPrefix && !fields) return true;
+            if (fields) return fields.includes(field);
+            return field.startsWith(fieldPrefix!);
+        })
+        .map(([field, error]) => ({
+            field: field.split('.')
+                .map(part => part
+                    .replace(/_/g, ' ') // Convert underscores to spaces
+                    .replace(/([A-Z])/g, ' $1')
+                    .replace(/^\w/, c => c.toUpperCase())
+                    .replace(/\b\w/g, c => c.toUpperCase()) // Capitalize all words
+                    .replace(/\d+$/, '')
+                    .trim()
+                ).join(' › '),
+            message: error?.message as string
+        })).filter(error => error.message);
+
+    if (formattedErrors.length === 0) {
+        return null;
+    }
 
     return (
         <Alert variant="destructive">

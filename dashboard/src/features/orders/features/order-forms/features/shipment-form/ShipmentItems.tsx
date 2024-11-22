@@ -13,6 +13,16 @@ import PopoverOption from '../../../../../../components/PopoverOption';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../../../../components/ui/card';
 import { Label } from '../../../../../../components/ui/label';
 import { Badge } from '../../../../../../components/ui/badge';
+import FormErrors from '../../../../../../components/FormErrors';
+import {
+    Table,
+    TableHeader,
+    TableBody,
+    TableHead,
+    TableRow,
+    TableCell,
+} from "@/components/ui/table";
+
 const ShipmentItems = () => {
     const { data: items } = useSelectItemsView();
     const form = useFormContext();
@@ -53,48 +63,49 @@ const ShipmentItems = () => {
                                     append({ ...itemToCopy });
                                 }}
                             >
-                                <PopoverOption variant="destructive" onClick={() => remove(index)}>
+                                <PopoverOption disabled={orderItems.length < 2} variant="destructive" onClick={() => remove(index)}>
                                     <Trash size={20} />
                                     Delete
                                 </PopoverOption>
                             </ActionPopover>
                         </CardHeader>
                         <CardContent>
-                            <div className="flex justify-between items-center">
-                                <div className="flex-1 space-y-4">
-                                    <div className="flex flex-row items-end gap-2 w-full">
-                                        <div className="flex-grow">
-                                            <Label className="font-medium text-sm">Package</Label>
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>Package</TableHead>
+                                        <TableHead className="w-16">Quantity</TableHead>
+                                        <TableHead className="w-32">Dimensions</TableHead>
+                                        <TableHead className="w-16">Weight</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell>
                                             <Select
                                                 name={`order_items.${index}.item_id`}
                                                 options={getFilteredItemOptions("package")}
                                             />
-                                        </div>
-                                        <div className="w-32">
-                                            <Label className="font-medium text-sm">Quantity</Label>
+                                        </TableCell>
+                                        <TableCell>
                                             <Input
                                                 name={`order_items.${index}.quantity_change`}
                                                 type="number"
                                             />
-                                        </div>
-                                        <div className="w-24">
-                                            <Label className="font-medium text-sm">Dimensions</Label>
+                                        </TableCell>
+                                        <TableCell>
                                             <Badge variant="secondary" className="w-full text-center">
                                                 {selectedItem?.height} × {selectedItem?.width} × {selectedItem?.depth}
                                             </Badge>
-                                        </div>
-                                        <div className="w-16">
-                                            <Label className="font-medium text-sm">Weight</Label>
+                                        </TableCell>
+                                        <TableCell>
                                             <Badge variant="secondary" className="w-full text-center">
                                                 {selectedItem?.weight} kg
                                             </Badge>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
                             <ShipmentItemComponents itemId={orderItems[index]?.item_id} />
                         </CardContent>
                     </Card>
