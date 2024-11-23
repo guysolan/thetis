@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView";
 import { Currency } from '../../../../../../../components/Currency';
+import { PackageFormItem } from '../sellFormSchema';
 
 interface SellPackageItemSummaryProps {
     packageIndex: number;
@@ -11,7 +12,7 @@ const SellPackageItemSummary = ({ packageIndex }: SellPackageItemSummaryProps) =
     const { data: items } = useSelectItemsView();
 
     const currency = watch('currency');
-    const packageItems = watch(`order_items.${packageIndex}.package_items`);
+    const packageItems: PackageFormItem[] = watch(`order_items.${packageIndex}.package_items`);
 
     const getItemName = (itemId: string) => {
         return items?.find(item => String(item.item_id) === itemId)?.item_name || '';
@@ -21,7 +22,7 @@ const SellPackageItemSummary = ({ packageIndex }: SellPackageItemSummaryProps) =
         <div className="space-y-2">
             {packageItems?.map((item: any, index: number) => (
                 <p key={index} className="flex justify-start text-sm">
-                    {item.quantity} x {getItemName(item.item_id)}{" "}@{' '}<Currency amount={item.price} currency={currency} />
+                    {item.quantity} x {getItemName(item.item_id)}{" "}@{' '}<Currency amount={item.item_price} currency={currency} />
                 </p>
             ))}
         </div>

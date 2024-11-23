@@ -23,6 +23,7 @@ const FormErrors = ({
         return null;
     }
 
+    console.log(errors)
     // Transform errors into a more readable format
     const formattedErrors = Object.entries(errors)
         // Filter errors by prefix and fields if provided

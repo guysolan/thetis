@@ -1,9 +1,7 @@
-import { useFormContext, UseFormReturn, useWatch } from "react-hook-form";
-import { Item } from "@/features/items/types";
+import { useFormContext } from "react-hook-form";
 import PriceSummary from "./PriceSummary";
 import { useOrderItems } from '../hooks/useOrderItems';
 import { useSelectItemsView } from '../../../../items/api/selectItemsView';
-import { useOrderItemsTotal } from '../hooks/useOrderItemsTotal';
 import { Currency } from '../../../../../components/Currency';
 
 interface PriceItemsSummaryProps {
@@ -13,12 +11,10 @@ interface PriceItemsSummaryProps {
 const PriceItemsSummary = ({
     showPrice = false,
 }: PriceItemsSummaryProps) => {
-    const form = useFormContext()
+    const form = useFormContext();
     const currency = form.watch('currency')
     const { data: itemsView } = useSelectItemsView();
     const orderItems = useOrderItems()
-
-    console.log(orderItems)
 
     return (
         <div className="space-y-2">

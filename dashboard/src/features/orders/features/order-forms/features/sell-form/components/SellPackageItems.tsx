@@ -110,7 +110,7 @@ const SellPackageItems = ({ packageIndex }: SellPackageItemsComponentsProps) => 
                                 </TableCell>
                                 <TableCell>
                                     <Input
-                                        name={`order_items.${packageIndex}.package_items.${index}.item_quantity`}
+                                        name={`order_items.${packageIndex}.package_items.${index}.quantity_change`}
                                         type="number"
                                     />
                                 </TableCell>

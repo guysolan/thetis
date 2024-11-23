@@ -7,20 +7,33 @@ export const useOrderItems = (): OrderItemWithTotal[] => {
     const form = useFormContext();
 
     const mode = form.watch('mode')
+    const orderType = form.watch('order_type')
 
 
     const orderItems = form.watch("order_items").map((oi) => ({ ...oi, total: oi.quantity_change * oi.item_price * (1 + oi.item_tax) }));
 
-    return extractOrderItems(orderItems, mode)
+    return extractOrderItems(orderItems, mode, orderType)
 };
 
-export function extractOrderItems(orderItems: FormOrderItem[], mode: 'package' | 'direct'): OrderItemWithTotal[] {
+export function extractOrderItems(orderItems: FormOrderItem[], mode: 'package' | 'direct', order_type?: 'sale' | 'purchase'): OrderItemWithTotal[] {
+    const quantityMultiplier = order_type === 'sale' ? -1 : 1;
+
     if (mode === 'package') {
-        const packageOrder = orderItems as PackageOrderItems[];
-        return packageOrder?.flatMap((pkg: PackageOrderItems) =>
-            pkg?.package_items?.map((pkg_i) => ({ ...pkg_i, quantity_change: pkg_i.item_quantity * pkg.package_quantity, total: pkg_i.item_quantity * pkg.package_quantity * pkg_i.item_price })) ?? []
-        );
+        return orderItems
+            .flatMap((pkg: PackageOrderItems) => pkg.package_items ?? [])
+            .map(item => ({
+                item_id: item.item_id,
+                item_type: item.item_type,
+                quantity_change: item.quantity_change * quantityMultiplier,
+                item_price: item.item_price,
+                total: item.quantity_change * item.item_price
+            }));
     } else {
-        return orderItems.map((oi) => ({ ...oi, quantity_change: oi.item_quantity, total: oi.item_quantity * oi.item_price * (1 + oi.item_tax) }));
+        return orderItems.map((oi) => ({
+            ...oi,
+            quantity_change: oi.quantity_change * quantityMultiplier,
+            total: oi.quantity_change * oi.item_price * (1 + oi.item_tax)
+        }));
     }
 }
+

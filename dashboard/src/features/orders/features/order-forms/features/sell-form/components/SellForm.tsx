@@ -1,10 +1,10 @@
-import { sellFormSchema } from "../sellFormSchema";
+import { PackageOrderItems, saleFormSchema } from "../../../schema";
 import { BaseOrderForm } from "../../../components/BaseOrderForm";
 import { useCreateOrder } from "../../../../../api/createOrder";
 import SellFormFields from "./SellFormFields";
 import dayjs from "dayjs";
 import { formatCreateOrderArguments, FormatOrderItemChanges } from "../../../utils/formatCreateOrderArguments";
-import { useOrderItems } from '../../../hooks/useOrderItems';
+import { extractOrderItems, useOrderItems } from '../../../hooks/useOrderItems';
 import { OrderItemChange } from '../../../schema';
 
 const SellForm = () => {
@@ -36,15 +36,17 @@ const SellForm = () => {
     };
 
     const handleSubmit = async (formData: any) => {
-
-
-        const itemChanges: FormatOrderItemChanges[] = formData.order_items.map((i) => ({
+        console.log(formData);
+        const orderItems = extractOrderItems(formData.order_items, formData.mode, formData.order_type) as PackageOrderItems[];
+        console.log(orderItems)
+        const itemChanges: FormatOrderItemChanges[] = orderItems.map((i) => ({
             item_id: i.item_id,
             quantity_change: i.quantity_change,
-            item_price: i.item_price,
-            item_tax: i.item_tax,
+            item_price: i.item_price ?? 0,
+            item_tax: i.item_tax ?? 0,
             address_id: formData.from_shipping_address_id
         }));
+        console.log(itemChanges)
 
         const processedData = formatCreateOrderArguments(
             itemChanges,
@@ -56,7 +58,7 @@ const SellForm = () => {
 
     return (
         <BaseOrderForm
-            schema={sellFormSchema}
+            schema={saleFormSchema}
             defaultValues={defaultValues}
             onSubmit={handleSubmit}
             config={{
