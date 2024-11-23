@@ -11,7 +11,7 @@ import DeleteDialog from "./DeleteDialog";
 interface ActionPopoverProps {
     title: string;
     description?: string;
-    editForm: React.ReactNode;
+    editForm?: React.ReactNode;
     deleteFunction?: () => void;
     onDuplicate?: () => void;
     children?: React.ReactNode;
@@ -42,7 +42,7 @@ const ActionPopover = ({
                 side="bottom"
                 className="flex flex-col gap-1 p-1"
             >
-                <Sheet
+                {editForm && <Sheet
                     trigger={
                         <Button
                             className="justify-start gap-2 px-2"
@@ -55,7 +55,7 @@ const ActionPopover = ({
                     description={description || `Edit the details for ${title}`}
                 >
                     {editForm}
-                </Sheet>
+                </Sheet>}
 
                 {onDuplicate && (
                     <Button

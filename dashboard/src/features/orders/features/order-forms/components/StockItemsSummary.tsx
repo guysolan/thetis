@@ -1,4 +1,4 @@
-import { UseFormReturn } from "react-hook-form";
+import { useFieldArray, useFormContext, UseFormReturn } from "react-hook-form";
 import {
     Table,
     TableBody,
@@ -11,21 +11,21 @@ import { Item } from "@/features/items/types";
 
 interface StockItemsSummaryProps {
     name: string;
-    fields: any[];
-    items: Item[];
-    form: UseFormReturn<any>;
-    getItemQuantities: (
-        itemId: string,
-    ) => { before: number; after: number } | undefined;
+    addressName: string;
 }
 import { roundIfRequired } from "../utils/roundIfRequired";
+import { useSelectItemsView } from '../../../../items/api/selectItemsView';
+import { useStockQuantities } from '../hooks/useStockQuantities';
 const StockItemsSummary = ({
     name,
-    fields,
-    items,
-    form,
-    getItemQuantities,
+    addressName,
 }: StockItemsSummaryProps) => {
+    const { data: items } = useSelectItemsView();
+    const form = useFormContext()
+    const { fields } = useFieldArray({ name });
+    const { getItemQuantities } = useStockQuantities(name, addressName);
+
+
     return (
         <Table>
             <TableHeader>

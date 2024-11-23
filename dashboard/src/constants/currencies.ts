@@ -72,17 +72,26 @@ export const currencies: Record<Currency, CurrencyConfig> = {
 
 export const currencyKeys = Object.keys(currencies);
 
-export const formatCurrency = (amount: number, currencyCode: Currency) => {
+export type CurrencyFormatError = 
+  | { type: 'INVALID_CURRENCY'; message: string }
+  | { type: 'INVALID_AMOUNT'; message: string }
+  | { type: 'FORMAT_ERROR'; message: string };
+
+export const formatCurrency = (amount: number, currencyCode: Currency): string | CurrencyFormatError => {
     // Validate currency code
     if (!currencies[currencyCode]) {
-        console.error(`Invalid currency code: ${currencyCode}`);
-        return undefined;
+        return {
+            type: 'INVALID_CURRENCY',
+            message: `Invalid currency code: ${currencyCode}`
+        };
     }
 
     // Validate amount is a number
     if (typeof Number(amount) !== "number" || isNaN(Number(amount))) {
-        console.error("Amount must be a valid number");
-        return undefined;
+        return {
+            type: 'INVALID_AMOUNT',
+            message: "Amount must be a valid number"
+        };
     }
 
     const currency = currencies[currencyCode];
@@ -94,6 +103,9 @@ export const formatCurrency = (amount: number, currencyCode: Currency) => {
             maximumFractionDigits: currency.decimal_digits,
         }).format(amount);
     } catch (error) {
-        throw new Error(`Failed to format currency: ${error.message}`);
+        return {
+            type: 'FORMAT_ERROR',
+            message: `Failed to format currency: ${error.message}`
+        };
     }
 };

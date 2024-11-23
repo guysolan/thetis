@@ -1,25 +1,25 @@
 import React from "react";
 import { usePriceItems } from "../hooks/usePriceItems";
 import { useFormContext } from "react-hook-form";
-import { formatCurrency } from "../../../../../constants/currencies";
+import { Currency } from '../../../../../components/Currency';
+import { useOrderItemsTotal } from '../hooks/useOrderItemsTotal';
 
 const PriceSummary = () => {
     const form = useFormContext();
-    const { grandTotal } = usePriceItems();
+    const total = useOrderItemsTotal();
     return (
         <div className="text-right">
             <p>
-                Carriage: {formatCurrency(
-                    form.watch("carriage"),
-                    form.watch("currency"),
-                )}
+                Carriage: <Currency
+                    amount={form.watch("carriage")}
+                    currency={form.watch("currency")}
+                />
             </p>
             <b>
-                Total: {formatCurrency(
-                    Number(grandTotal()) +
-                        Number(form.watch("carriage")),
-                    form.watch("currency"),
-                )}
+                Total: <Currency
+                    amount={total + Number(form.watch("carriage"))}
+                    currency={form.watch("currency")}
+                />
             </b>
         </div>
     );

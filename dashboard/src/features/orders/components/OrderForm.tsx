@@ -3,14 +3,15 @@ import BuyForm from "../features/order-forms/features/buy-form/BuyForm";
 import { Banknote, Info, ShoppingCart, Truck } from "lucide-react";
 import ShipmentForm from "../features/order-forms/features/shipment-form/ShipmentForm";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import SellForm from '../features/order-forms/features/sell-form/SellForm';
+import SellForm from '../features/order-forms/features/sell-form/components/SellForm';
 import { OrderTab } from '../../../routes/_apps/stock/orders';
 import SaleForm from '../features/order-forms/features/sale-form/SaleForm';
+import { OrderSettings } from '../features/order-forms/features/order-settings/components/OrderSettings';
 
 export const OrderForm: React.FC = ({ defaultTab }: { defaultTab: OrderTab }) => {
 	return (
 		<Tabs defaultValue={defaultTab === 'all' ? 'purchase' : defaultTab}>
-			<div className="overflow-x-scroll">
+			<div className="flex justify-between items-center w-full overflow-x-scroll">
 				<TabsList className="my-2">
 					<TabsTrigger
 						className="flex flex-row gap-2"
@@ -31,9 +32,11 @@ export const OrderForm: React.FC = ({ defaultTab }: { defaultTab: OrderTab }) =>
 						<Truck size={16} />Ship
 					</TabsTrigger>
 				</TabsList>
+				<OrderSettings />
+
 			</div>
 			<TabsContent value="purchase">
-				<Alert className="mb-4">
+				<Alert className="mx-1 mb-4">
 					<Info size={20} />
 					<AlertTitle>Purchase Order</AlertTitle>
 					<AlertDescription>
@@ -43,7 +46,7 @@ export const OrderForm: React.FC = ({ defaultTab }: { defaultTab: OrderTab }) =>
 				<BuyForm />
 			</TabsContent>
 			<TabsContent value="sale">
-				<Alert className="mb-4">
+				<Alert className="mb-4" variant="info">
 					<Info size={20} />
 
 					<AlertTitle>Sale Order</AlertTitle>
@@ -52,12 +55,12 @@ export const OrderForm: React.FC = ({ defaultTab }: { defaultTab: OrderTab }) =>
 					</AlertDescription>
 				</Alert>
 				{/* TODO - Use SellForm not Sales form to include packages */}
-				{/* <SellForm /> */}
-				<SaleForm />
+				<SellForm />
+				{/* <SaleForm /> */}
 			</TabsContent>
 
 			<TabsContent value="shipment">
-				<Alert className="mb-4">
+				<Alert className="mx-1 mb-4">
 					<Info size={20} />
 
 					<AlertTitle>Shipment Order</AlertTitle>

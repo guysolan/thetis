@@ -19,7 +19,11 @@ export const StockValidationAlert = ({
         addressFieldName,
     });
 
-    if (!hasNegativeStock) return null;
+    const filteredNegativeItems = negativeStockItems.filter(
+        item => item.item_type === 'product' || item.item_type === 'part'
+    );
+
+    if (!hasNegativeStock || filteredNegativeItems.length === 0) return null;
 
     return (
         <Alert variant="destructive">
@@ -27,7 +31,7 @@ export const StockValidationAlert = ({
                 Cannot create order: The following items would have negative
                 stock:
                 <ul>
-                    {negativeStockItems.map((item, index) => (
+                    {filteredNegativeItems.map((item, index) => (
                         <li
                             key={index}
                             className="flex justify-between items-center py-2 pl-4 md:pl-8"

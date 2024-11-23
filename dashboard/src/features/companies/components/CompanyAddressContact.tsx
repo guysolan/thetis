@@ -66,7 +66,7 @@ const CompanyAddressContact = ({
     useCompanyAutoFill(direction, getSelectedCompany, getFieldName);
 
     return (
-        <Card>
+        <Card className="">
             <CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
                 <CardTitle className="font-medium text-base">
                     {title ?? (direction === "to" ? "To" : "From")}
@@ -77,7 +77,7 @@ const CompanyAddressContact = ({
                     size="icon"
                     onClick={() => setIsExpanded(!isExpanded)}
                 >
-                    <Pencil className="w-4 h-4" />
+                    <Pencil size={20} />
                 </Button>
             </CardHeader>
             <CardContent>

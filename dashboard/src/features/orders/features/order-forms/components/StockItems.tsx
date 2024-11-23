@@ -41,10 +41,6 @@ const StockItems = ({
     const { fields, append, remove } = useFieldArray({ name });
     const { getItemQuantities } = useStockQuantities(name, address_name);
 
-
-    console.log(form.formState.errors);
-
-
     const address = addresses?.find(
         (a) => String(a.id) === form.watch(address_name),
     );
@@ -106,10 +102,7 @@ const StockItems = ({
                     : (
                         <StockItemsSummary
                             name={name}
-                            fields={fields}
-                            items={items || []}
-                            form={form}
-                            getItemQuantities={getItemQuantities}
+                            addressName={address_name}
                         />
                     )}
             </CardContent>

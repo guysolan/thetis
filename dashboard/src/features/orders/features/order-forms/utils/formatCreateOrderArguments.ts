@@ -1,18 +1,18 @@
-import { Currency } from "../../../types";
+import { Currency } from '../../../../../constants/currencies';
 import { ItemType } from "../types";
-export type OrderItemChange = {
+export type FormatOrderItemChanges = {
     item_id: string;
     quantity_change: number;
     item_price: number;
     item_tax: number;
-    item_type: ItemType;
+    item_type?: ItemType;
     address_id: string;
 };
 
 export type CreateOrderType = {
     in_order_type: string;
     in_order_date: string;
-    in_order_items: OrderItemChange[];
+    in_order_items: FormatOrderItemChanges[];
     in_from_company_id: string | null;
     in_to_company_id: string | null;
     in_from_billing_address_id: string | null;
@@ -26,7 +26,7 @@ export type CreateOrderType = {
     in_company_id: string;
 };
 export const formatCreateOrderArguments = (
-    orderItems: OrderItemChange[],
+    orderItems: FormatOrderItemChanges[],
     formData: any,
 ): CreateOrderType => {
     return {

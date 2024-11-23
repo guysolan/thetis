@@ -26,12 +26,14 @@ const AddressSelectAddEdit = ({
     };
     return (
         <div className="flex flex-row items-end gap-2 w-full">
-            <Select
-                label={label}
-                name={getFieldName(type)}
-                options={getAddressOptions()}
-            />
-            <div className="flex gap-2">
+            <div className="flex-1 min-w-0">
+                <Select
+                    label={label}
+                    name={getFieldName(type)}
+                    options={getAddressOptions()}
+                />
+            </div>
+            <div className="flex flex-shrink-0 gap-2">
                 {getSelectedAddress(type) && (
                     <TooltipDialog
                         icon={<Pencil size={20} />}

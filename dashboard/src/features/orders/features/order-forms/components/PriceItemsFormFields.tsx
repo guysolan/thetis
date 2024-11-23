@@ -46,12 +46,12 @@ const PriceItemsFormFields = ({
         <Table>
             <TableHeader>
                 <TableRow>
-                    <TableHead>Type</TableHead>
-                    <TableHead>Item</TableHead>
-                    <TableHead>Quantity</TableHead>
-                    {showPrice && <TableHead>Price</TableHead>}
-                    {showPrice && <TableHead>Tax</TableHead>}
-                    {showPrice && <TableHead>Total</TableHead>}
+                    <TableHead className='min-w-32'>Type</TableHead>
+                    <TableHead >Item</TableHead>
+                    <TableHead className='min-w-20'>Quantity</TableHead>
+                    {showPrice && <TableHead className='min-w-20'>Price</TableHead>}
+                    {showPrice && <TableHead className='min-w-20'>Tax</TableHead>}
+                    {showPrice && <TableHead className='min-w-24'>Total</TableHead>}
                     <TableHead>
                         <span className="sr-only">Actions</span>
                     </TableHead>

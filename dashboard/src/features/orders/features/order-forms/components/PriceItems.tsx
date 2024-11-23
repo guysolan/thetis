@@ -6,7 +6,6 @@ import { ItemType } from "../types";
 import PriceItemsFormFields from "./PriceItemsFormFields";
 import PriceItemsSummary from "./PriceItemsSummary";
 import PriceItemActions from "./PriceItemActions";
-import { formatCurrency } from "../../../../../constants/currencies";
 import { usePriceItems } from "../hooks/usePriceItems";
 import PriceSummary from "./PriceSummary";
 import FormErrors from '../../../../../components/FormErrors';
@@ -87,12 +86,7 @@ const PriceItems = ({
                     )
                     : (
                         <PriceItemsSummary
-                            name="order_items"
-                            fields={fields}
-                            items={items}
-                            form={form}
                             showPrice={showPrice}
-                            itemTotal={itemTotal}
                         />
                     )}
             </CardContent>

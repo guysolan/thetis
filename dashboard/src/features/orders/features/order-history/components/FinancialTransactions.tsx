@@ -9,9 +9,8 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import type { OrderView } from "@/features/orders/types";
-import { formatCurrency } from "../../../../../constants/currencies";
-import { Currency } from "../../../../../constants/currencies";
-
+import { Currency } from '../../../../../components/Currency';
+import { Currency as CurrencyType } from '../../../../../constants/currencies';
 /**
  * Processes order items for display in the financial transactions table
  * @param items - Array of order items from the OrderView
@@ -35,7 +34,7 @@ const FinancialTransactions = (
     { orderType, orderItems, currency }: {
         orderType: OrderView["order_type"];
         orderItems: OrderView["items"];
-        currency: Currency;
+        currency: CurrencyType;
     },
 ) => {
     return (
@@ -64,7 +63,10 @@ const FinancialTransactions = (
                                 : item.quantity}
                         </TableCell>
                         <TableCell>
-                            {formatCurrency(item.price, currency)}
+                            <Currency
+                                amount={item.price}
+                                currency={currency}
+                            />
                         </TableCell>
                         <TableCell>
                             {(item.tax * 100)?.toFixed(0) ??
@@ -72,7 +74,10 @@ const FinancialTransactions = (
                         </TableCell>
 
                         <TableCell>
-                            {formatCurrency(item.total, currency)}
+                            <Currency
+                                amount={item.total}
+                                currency={currency}
+                            />
                         </TableCell>
                     </TableRow>
                 ))}

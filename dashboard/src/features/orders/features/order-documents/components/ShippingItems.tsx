@@ -4,14 +4,12 @@ import { useSelectItemsView } from "../../../../items/api/selectItemsView";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { formatCurrency } from "../../../../../constants/currencies";
-
+import { Currency } from '../../../../../components/Currency';
 const ShippingItems = (
     { orderItems }: { orderItems: OrderView["items"] },
 ) => {
@@ -53,13 +51,16 @@ const ShippingItems = (
                             {item.quantity}
                         </TableCell>
                         <TableCell className="text-right">
-                            {formatCurrency(item.item_price, "GBP")}
+                            <Currency
+                                amount={item.item_price ?? 0}
+                                currency="GBP"
+                            />
                         </TableCell>
                         <TableCell className="text-right">
-                            {formatCurrency(
-                                item.quantity * item.item_price,
-                                "GBP",
-                            )}
+                            <Currency
+                                amount={item.quantity * (item.item_price ?? 0)}
+                                currency="GBP"
+                            />
                         </TableCell>
                     </TableRow>
                 ))}
@@ -68,16 +69,16 @@ const ShippingItems = (
                         Total:
                     </TableCell>
                     <TableCell className="text-right">
-                        {formatCurrency(
-                            invoiceItems
+                        <Currency
+                            amount={invoiceItems
                                 .reduce(
                                     (sum, item) =>
                                         sum +
                                         (item.quantity * item.item_price),
                                     0,
-                                ),
-                            "GBP",
-                        )}
+                                )}
+                            currency="GBP"
+                        />
                     </TableCell>
                 </TableRow>
             </TableBody>

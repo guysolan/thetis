@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { useSelectItemsView } from "../../../../../items/api/selectItemsView";
+import { useSelectItemsView } from "../../../../../../items/api/selectItemsView";
+import { useOrderItems } from '../../../hooks/useOrderItems';
+import { ItemChange } from '../../../schema';
 
 export const useSellForm = () => {
     const form = useFormContext();
     const { data: items } = useSelectItemsView();
 
-    const orderItems = form.watch("order_items");
+    const orderItems = useOrderItems();
     const selectedAddress = form.watch("from_shipping_address_id");
 
     useEffect(() => {
@@ -15,7 +17,7 @@ export const useSellForm = () => {
             return;
         }
 
-        const consumedItems = orderItems.map((orderItem) => {
+        const consumedItems: ItemChange[] = orderItems.map((orderItem) => {
             const item = items.find(
                 (i) => String(i.item_id) === String(orderItem.item_id),
             );

@@ -7,6 +7,7 @@ import {
 } from "./ui/form";
 import { Input as InputWrap } from "./ui/input";
 import { useFormContext } from "react-hook-form";
+import { cn } from "@/lib/utils";
 
 type InputProps = {
     name: string;
@@ -14,9 +15,10 @@ type InputProps = {
     type?: "text" | "number" | "email" | "password" | "tel";
     step?: string;
     disabled?: boolean;
+    className?: string;
 };
 const Input = (
-    { name, label, type = "text", step, disabled = false }: InputProps,
+    { name, label, type = "text", step, disabled = false, className }: InputProps,
 ) => {
     const { control } = useFormContext();
 
@@ -37,9 +39,10 @@ const Input = (
                             step={step}
                             {...field}
                             value={field.value ?? ""}
-                            className={type === "number"
-                                ? "[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                                : ""}
+                            className={cn(
+                                type === "number" && "[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
+                                className
+                            )}
                             onChange={(e) =>
                                 type === "number"
                                     ? field.onChange(

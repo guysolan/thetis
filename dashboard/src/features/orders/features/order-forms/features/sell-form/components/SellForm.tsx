@@ -1,13 +1,16 @@
-import { sellFormSchema } from "./sellFormSchema";
-import { BaseOrderForm } from "../../components/BaseOrderForm";
-import { useCreateOrder } from "../../../../api/createOrder";
+import { sellFormSchema } from "../sellFormSchema";
+import { BaseOrderForm } from "../../../components/BaseOrderForm";
+import { useCreateOrder } from "../../../../../api/createOrder";
 import SellFormFields from "./SellFormFields";
 import dayjs from "dayjs";
-import { formatCreateOrderArguments } from "../../utils/formatCreateOrderArguments";
+import { formatCreateOrderArguments, FormatOrderItemChanges } from "../../../utils/formatCreateOrderArguments";
+import { useOrderItems } from '../../../hooks/useOrderItems';
+import { OrderItemChange } from '../../../schema';
 
 const SellForm = () => {
     const { mutate: createOrder } = useCreateOrder("sale");
     const defaultValues = {
+        mode: "package" as const,
         order_items: [{
             item_type: "package",
             item_id: "",
@@ -32,20 +35,17 @@ const SellForm = () => {
         display_items: [],
     };
 
+    const orderItems = useOrderItems();
     const handleSubmit = async (formData: any) => {
-        const itemChanges = formData.order_items.flatMap((orderItem: any) => {
-            if (orderItem.item_type === "package") {
-                return orderItem.package_items.map((packageItem: any) => ({
-                    item_id: packageItem.item_id,
-                    quantity_change: -1 * Number(orderItem.quantity_change * packageItem.quantity),
-                    item_price: packageItem.item_price ?? 0,
-                    item_tax: packageItem.item_tax ?? 0,
-                    address_id: formData.from_shipping_address_id,
-                    package_id: orderItem.item_id
-                }));
-            }
-            return [];
-        });
+
+
+        const itemChanges: FormatOrderItemChanges[] = orderItems.map((i) => ({
+            item_id: i.item_id,
+            quantity_change: i.quantity_change,
+            item_price: i.item_price,
+            item_tax: i.item_tax,
+            address_id: formData.from_shipping_address_id
+        }));
 
         const processedData = formatCreateOrderArguments(
             itemChanges,

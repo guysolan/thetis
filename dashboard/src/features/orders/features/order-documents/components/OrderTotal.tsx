@@ -6,10 +6,8 @@ import {
     TableHead,
     TableRow,
 } from "@/components/ui/table";
-import { Currency } from '../../../../../constants/currencies';
 import { OrderView } from "../../../types";
-import { formatCurrency } from "../../../../../constants/currencies";
-
+import { Currency } from '../../../../../components/Currency';
 const OrderTotal = (
     { order, showCarriage = true }: {
         order: OrderView;
@@ -24,10 +22,10 @@ const OrderTotal = (
                         <TableRow className="border-t text-neutral-800">
                             <TableHead>Carriage</TableHead>
                             <TableCell className="w-1/6 font-medium">
-                                {formatCurrency(
-                                    order.carriage ?? 0,
-                                    order.currency,
-                                )}
+                                <Currency
+                                    amount={order.carriage ?? 0}
+                                    currency={order.currency as Currency}
+                                />
                             </TableCell>
                         </TableRow>
                     )}
@@ -36,10 +34,10 @@ const OrderTotal = (
                         Total
                     </TableHead>
                     <TableCell className="w-1/6 font-medium text-lg text-neutral-900">
-                        {formatCurrency(
-                            order.total_value ?? 0,
-                            order.currency as Currency,
-                        )}
+                        <Currency
+                            amount={order.total_value ?? 0}
+                            currency={order.currency as Currency}
+                        />
                     </TableCell>
                 </TableRow>
             </TableBody>

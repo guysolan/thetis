@@ -13,7 +13,7 @@ import EditOrderForm from "./EditOrderForm";
 import ActionPopover from "@/components/ActionPopover";
 import { useDeleteOrder } from "../api/deleteOrder";
 import { DocumentLinks } from "./DocumentLinks";
-import { formatCurrency } from "../../../constants/currencies";
+import { Currency } from '../../../components/Currency';
 
 interface ExistingOrdersProps {
 	orders: OrderView[];
@@ -69,17 +69,17 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 								</div>
 								<div className="flex items-baseline gap-2">
 									<span className="font-semibold text-neutral-800">
-										{formatCurrency(
-											order.total_value,
-											order.currency,
-										)}
+										<Currency
+											amount={order.total_value}
+											currency={order.currency}
+										/>
 									</span>
 									{order.carriage > 0 && (
 										<span className="text-neutral-600 text-sm">
-											{formatCurrency(
-												order.carriage ?? 0,
-												order.currency,
-											)}
+											<Currency
+												amount={order.carriage ?? 0}
+												currency={order.currency}
+											/>
 										</span>
 									)}
 								</div>

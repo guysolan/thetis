@@ -4,6 +4,8 @@ import Select from "../../../../../components/Select";
 import Input from "../../../../../components/Input";
 import { Button } from "../../../../../components/ui/button";
 import { PlusIcon, TrashIcon } from "lucide-react";
+import { Database } from "@/database.types";
+import { useEffect } from "react";
 
 interface PackageItemsProps {
     packageIndex: number;
@@ -11,11 +13,50 @@ interface PackageItemsProps {
 
 const PackageItems = ({ packageIndex }: PackageItemsProps) => {
     const { data: items } = useSelectItemsView();
-    const { control } = useFormContext();
+    const { control, setValue, watch } = useFormContext();
     const { fields, append, remove } = useFieldArray({
         control,
         name: `order_items.${packageIndex}.package_items`
     });
+
+    // Watch the specific field we want to track
+    const watchedItems = watch(`order_items.${packageIndex}.package_items`);
+
+    useEffect(() => {
+        console.log("Package items changed:", watchedItems); // Debug log
+
+        if (!watchedItems || !items) return;
+
+        watchedItems.forEach((item, index) => {
+            if (item?.item_id) {
+                const selectedProduct = items.find(product =>
+                    String(product.item_id) === String(item.item_id)
+                );
+
+                if (selectedProduct) {
+                    console.log("Updating item:", index, selectedProduct); // Debug log
+                    setValue(
+                        `order_items.${packageIndex}.package_items.${index}.item_price`,
+                        selectedProduct.item_price || 0,
+                        { shouldDirty: true }
+                    );
+                    setValue(
+                        `order_items.${packageIndex}.package_items.${index}.item_type`,
+                        selectedProduct.item_type,
+                        { shouldDirty: true }
+                    );
+                }
+            }
+        });
+    }, [watchedItems, items, packageIndex, setValue]); // Proper dependency array
+
+    const getFilteredItemOptions = () => {
+        return items?.filter((item) => item.item_type === "product")
+            .map((item) => ({
+                label: item.item_name || '',
+                value: String(item.item_id),
+            })) || [];
+    };
 
     return (
         <div className="border-gray-200 ml-8 pl-4 border-l-2">
@@ -25,10 +66,8 @@ const PackageItems = ({ packageIndex }: PackageItemsProps) => {
                         <Select
                             name={`order_items.${packageIndex}.package_items.${index}.item_id`}
                             label="Item"
-                            options={items?.map(item => ({
-                                label: item.item_name,
-                                value: item.item_id
-                            })) ?? []}
+                            options={getFilteredItemOptions()}
+                            value={watchedItems?.[index]?.item_id}
                         />
                         <Input
                             name={`order_items.${packageIndex}.package_items.${index}.quantity`}

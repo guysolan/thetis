@@ -28,7 +28,7 @@ const Sheet = (
             <SheetTrigger asChild>
                 {trigger}
             </SheetTrigger>
-            <SheetContent>
+            <SheetContent className="bg-neutral-50">
                 <SheetHeader>
                     <SheetTitle>{title}</SheetTitle>
                     {description && (
