@@ -51,7 +51,7 @@ const SellPackages = () => {
         <div className="space-y-4">
             {fields.map((field, index) => {
                 const selectedItem = items?.find(item =>
-                    String(item.item_id) === String(orderItems[index]?.item_id)
+                    String(item.item_id) === String(orderItems[index]?.package_id)
                 );
 
                 return (
@@ -147,17 +147,15 @@ const SellPackages = () => {
                                         <TableRow>
                                             <TableCell>
                                                 <Select
-                                                    name={`order_items.${index}.item_id`}
+                                                    name={`order_items.${index}.package_id`}
                                                     options={getFilteredItemOptions("package")}
-                                                    placeholder="Select package template..."
                                                     className="flex-grow w-full min-w-[250px]"
                                                 />
                                             </TableCell>
                                             <TableCell>
 
                                                 <Input
-                                                    placeholder="Quantity"
-                                                    name={`order_items.${index}.quantity_change`}
+                                                    name={`order_items.${index}.package_quantity`}
                                                     type="number"
                                                     className="w-24"
                                                 />
@@ -170,7 +168,6 @@ const SellPackages = () => {
                                             </TableCell>
                                             <TableCell>
                                                 <Badge className='flex gap-x-2 px-3 py-1.5' variant="outline"><Weight size={16} />{selectedItem?.weight} kg</Badge>
-
                                             </TableCell>
                                         </TableRow>
                                     </TableBody>

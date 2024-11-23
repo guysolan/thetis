@@ -49,7 +49,7 @@ const SellPackageItems = ({ packageIndex }: SellPackageItemsComponentsProps) => 
     const { data: itemsView } = useSelectItemsView();
     // Watch for package selection changes
     useEffect(() => {
-        const packageId = currentPackage.item_id;
+        const packageId = currentPackage.package_id;
         const selectedPackageView = itemsView?.find((iv) => String(iv.item_id) === packageId);
 
         if (selectedPackageView?.components) {
@@ -60,10 +60,10 @@ const SellPackageItems = ({ packageIndex }: SellPackageItemsComponentsProps) => 
             const packageComponents = selectedPackageView.components;
             packageComponents.forEach((component) => {
                 append({
-                    item_id: String(component.component_id),
-                    item_type: "product",
-                    quantity: component.component_quantity || 1,
-                    price: component.component_price || 0
+                    item_id: String(component?.component_id),
+                    item_type: component?.component_type ?? 'product',
+                    item_quantity: component?.component_quantity || 1,
+                    item_price: component?.component_price || 0
                 });
             });
         }
@@ -110,13 +110,13 @@ const SellPackageItems = ({ packageIndex }: SellPackageItemsComponentsProps) => 
                                 </TableCell>
                                 <TableCell>
                                     <Input
-                                        name={`order_items.${packageIndex}.package_items.${index}.quantity`}
+                                        name={`order_items.${packageIndex}.package_items.${index}.item_quantity`}
                                         type="number"
                                     />
                                 </TableCell>
                                 <TableCell>
                                     <Input
-                                        name={`order_items.${packageIndex}.package_items.${index}.price`}
+                                        name={`order_items.${packageIndex}.package_items.${index}.item_price`}
                                         type="number"
                                         step="0.01"
                                     />

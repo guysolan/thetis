@@ -35,11 +35,10 @@ const SellForm = () => {
         display_items: [],
     };
 
-    const orderItems = useOrderItems();
     const handleSubmit = async (formData: any) => {
 
 
-        const itemChanges: FormatOrderItemChanges[] = orderItems.map((i) => ({
+        const itemChanges: FormatOrderItemChanges[] = formData.order_items.map((i) => ({
             item_id: i.item_id,
             quantity_change: i.quantity_change,
             item_price: i.item_price,

@@ -18,6 +18,8 @@ const PriceItemsSummary = ({
     const { data: itemsView } = useSelectItemsView();
     const orderItems = useOrderItems()
 
+    console.log(orderItems)
+
     return (
         <div className="space-y-2">
             {orderItems.map((item, index) => (
