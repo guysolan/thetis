@@ -6,8 +6,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import ActionPopover from "@/components/ActionPopover";
-import CompanyContactForm from "./CompanyContactForm";
+import { ContactActions } from "./ContactActions";
 import { useDeleteContact } from "../api/deleteContact";
 import { Badge } from "@/components/ui/badge";
 import { useSelectContacts } from "../api/selectContacts";
@@ -15,7 +14,6 @@ import { useSelectContacts } from "../api/selectContacts";
 const ContactTable = () => {
     const { data: contacts = [] } = useSelectContacts();
 
-    const { mutate: deleteContact } = useDeleteContact();
 
     if (!contacts.length) {
         return;
@@ -44,15 +42,8 @@ const ContactTable = () => {
                             </Badge>
                         </TableCell>
                         <TableCell>
-                            <ActionPopover
-                                title="Contact"
-                                editForm={
-                                    <CompanyContactForm
-                                        contact={contact}
-                                        operation="upsert"
-                                    />
-                                }
-                                deleteFunction={() => deleteContact(contact.id)}
+                            <ContactActions
+                                contact={contact}
                             />
                         </TableCell>
                     </TableRow>

@@ -10,3 +10,4 @@
 - [ ] Inline stocktake form
 - [X] Create order show in the CompanyAddressContact summary if error in form.
 - [ ] Allow packages on Sales orders
+- [ ] Restructure db so all item_changes have a from and to address?

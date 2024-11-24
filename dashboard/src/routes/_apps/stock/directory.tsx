@@ -1,16 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Sheet from "@/components/Sheet";
 import { Button } from "@/components/ui/button";
-import PageTitle from "@/components/PageTitle";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CompanyContactForm from "@/features/contacts/components/CompanyContactForm";
-import ContactTable from "@/features/contacts/components/ContactTable";
-import { useSelectContacts } from "@/features/contacts/api/selectContacts";
-import Companies from "@/features/companies/components/Companies";
 import AddressForm from "@/features/stockpiles/components/AddressForm";
-import AddressBook from "@/features/stockpiles/components/AddressBook";
 import CompanyForm from "@/features/companies/components/CompanyForm";
-import MyCompany from "../../../features/companies/components/MyCompany";
+import LayoutPopover from '../../../components/LayoutPopover';
+import Companies from '../../../features/companies/components/Companies';
+import Contacts from '../../../features/contacts/components/Contacts';
+import Addresses from '../../../features/stockpiles/components/Addresses';
 
 const DirectoryPage = () => {
     return (
@@ -26,42 +24,44 @@ const DirectoryPage = () => {
                             Addresses
                         </TabsTrigger>
                     </TabsList>
+                    <div className="flex items-center gap-2">
+                        <LayoutPopover />
+                        <TabsContent value="companies" className="m-0">
+                            <Sheet
+                                trigger={<Button>New Company</Button>}
+                                title="New Company"
+                                description="Add a new company to your system."
+                            >
+                                <CompanyForm />
+                            </Sheet>
+                        </TabsContent>
 
-                    <TabsContent value="companies" className="m-0">
-                        <Sheet
-                            trigger={<Button>New Company</Button>}
-                            title="New Company"
-                            description="Add a new company to your system."
-                        >
-                            <CompanyForm />
-                        </Sheet>
-                    </TabsContent>
+                        <TabsContent value="contacts" className="m-0">
+                            <Sheet
+                                trigger={<Button>New Contact</Button>}
+                                title="New Contact"
+                                description="Add a new contact to your system."
+                            >
+                                <CompanyContactForm
+                                    contact={null}
+                                    operation="insert"
+                                />
+                            </Sheet>
+                        </TabsContent>
 
-                    <TabsContent value="contacts" className="m-0">
-                        <Sheet
-                            trigger={<Button>New Contact</Button>}
-                            title="New Contact"
-                            description="Add a new contact to your system."
-                        >
-                            <CompanyContactForm
-                                contact={null}
-                                operation="insert"
-                            />
-                        </Sheet>
-                    </TabsContent>
-
-                    <TabsContent value="addresses" className="m-0">
-                        <Sheet
-                            trigger={<Button>New Address</Button>}
-                            title="New Address"
-                            description="Add a new address to your system."
-                        >
-                            <AddressForm
-                                operation="insert"
-                                address={null}
-                            />
-                        </Sheet>
-                    </TabsContent>
+                        <TabsContent value="addresses" className="m-0">
+                            <Sheet
+                                trigger={<Button>New Address</Button>}
+                                title="New Address"
+                                description="Add a new address to your system."
+                            >
+                                <AddressForm
+                                    operation="insert"
+                                    address={null}
+                                />
+                            </Sheet>
+                        </TabsContent>
+                    </div>
                 </div>
 
                 <TabsContent value="companies">
@@ -69,11 +69,11 @@ const DirectoryPage = () => {
                 </TabsContent>
 
                 <TabsContent value="contacts">
-                    <ContactTable />
+                    <Contacts />
                 </TabsContent>
 
                 <TabsContent value="addresses">
-                    <AddressBook />
+                    <Addresses />
                 </TabsContent>
             </Tabs>
         </>

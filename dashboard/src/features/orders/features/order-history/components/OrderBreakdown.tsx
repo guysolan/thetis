@@ -18,7 +18,7 @@ const OrderBreakdown = ({ order }: OrderBreakdownProps) => {
                     orderItems={order.items}
                 />
             )}
-            <StockMovements orderItems={order.items} />
+            <StockMovements from={order.from_shipping_address.name} to={order.to_shipping_address.name} orderItems={order.items} />
         </section>
     );
 };

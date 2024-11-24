@@ -15,7 +15,7 @@ import {
 
 export const Route = createFileRoute("/_apps/stock/")({
   component: () => (
-    <div className="mx-auto p-6 container">
+    <>
       <h1 className="mb-6 font-bold text-3xl">Stock Management</h1>
       <Card>
         <CardHeader>
@@ -128,6 +128,6 @@ export const Route = createFileRoute("/_apps/stock/")({
         feedback throughout these components. Utilize the Supabase client for
         database operations and ensure real-time updates where appropriate.
       </p>
-    </div>
+    </>
   ),
 });

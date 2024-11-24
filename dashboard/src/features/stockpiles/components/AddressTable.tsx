@@ -11,12 +11,14 @@ import ActionPopover from "@/components/ActionPopover";
 import AddressForm from "./AddressForm";
 import useDeleteAddress from "../api/deleteAddress";
 import { Address } from "../types";
+import { Badge } from '../../../components/ui/badge';
 
 interface Props {
     addresses: Address["Row"][];
     companyId?: number;
 }
 const AddressTable = ({ companyId, addresses }: Props) => {
+
     const { mutate: deleteAddress } = useDeleteAddress();
     return (
         <Table>
@@ -26,7 +28,10 @@ const AddressTable = ({ companyId, addresses }: Props) => {
                         Name
                     </TableHead>
                     <TableHead>
-                        Address
+                        Line 1
+                    </TableHead>
+                    <TableHead>
+                        Line 2
                     </TableHead>
                     <TableHead>
                         City
@@ -36,6 +41,9 @@ const AddressTable = ({ companyId, addresses }: Props) => {
                     </TableHead>
                     <TableHead>
                         Stock
+                    </TableHead>
+                    <TableHead>
+                        Company
                     </TableHead>
                     <TableHead className="w-[100px]">
                         Actions
@@ -52,20 +60,28 @@ const AddressTable = ({ companyId, addresses }: Props) => {
                         <TableCell>
                             {address.name}
                         </TableCell>
-                        <TableCell>
+                        <TableCell className='min-w-32'>
                             {address.line_1}
                         </TableCell>
-                        <TableCell>
+                        <TableCell >
+                            {address.line_2}
+                        </TableCell>
+                        <TableCell >
                             {address.city}
                         </TableCell>
-                        <TableCell>
+                        <TableCell >
                             {address.region}
                         </TableCell>
-                        <TableCell>
+                        <TableCell className='min-w-16'>
                             {address
-                                    .holds_stock
+                                .holds_stock
                                 ? "Yes"
                                 : "No"}
+                        </TableCell>
+                        <TableCell className='min-w-40'>
+                            <Badge >
+                                {address?.companies?.name}
+                            </Badge>
                         </TableCell>
                         <TableCell>
                             <ActionPopover

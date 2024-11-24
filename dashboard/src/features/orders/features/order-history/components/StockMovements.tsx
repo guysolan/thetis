@@ -11,7 +11,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
-const StockMovements = ({ orderItems }: { orderItems: OrderView["items"] }) => {
+const StockMovements = ({ orderItems, from, to }: { orderItems: OrderView["items"], from: string, to: string }) => {
     const stockChanges = useMemo(() => {
         // First, filter and map the items
         const mappedItems = orderItems
@@ -77,8 +77,8 @@ const StockMovements = ({ orderItems }: { orderItems: OrderView["items"] }) => {
                         <TableCell className="capitalize">
                             {item.item_type}
                         </TableCell>
-                        <TableCell>{item.from_location || '-'}</TableCell>
-                        <TableCell>{item.to_location || '-'}</TableCell>
+                        <TableCell>{from || '-'}</TableCell>
+                        <TableCell>{to || '-'}</TableCell>
                         <TableCell>
                             {item.quantity}
                         </TableCell>
