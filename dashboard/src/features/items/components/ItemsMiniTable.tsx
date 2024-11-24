@@ -14,7 +14,7 @@ interface Props {
     items: ItemView[];
 }
 
-export default function ItemsTable({ items }: Props) {
+export default function ItemsMiniTable({ items }: Props) {
     // Sort items alphabetically by name
     const sortedItems = [...items].sort((a, b) =>
         a.item_name.localeCompare(b.item_name)

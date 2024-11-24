@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Pencil } from "lucide-react";
-import ItemsTable from "../../items/components/ItemsTable";
+import ItemsMiniTable from "../../items/components/ItemsMiniTable";
 import StocktakeForm from "../../orders/features/order-forms/features/stocktake-form/StocktakeForm";
 import { Stockpile } from "../types";
 import Sheet from "../../../components/Sheet";
