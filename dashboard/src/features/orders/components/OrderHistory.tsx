@@ -67,7 +67,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 										</span>
 									)}
 								</div>
-								<div className="flex items-baseline gap-2">
+								{!['stocktake', 'shipment'].includes(order.order_type) && <div className="flex items-baseline gap-2">
 									<span className="font-semibold text-neutral-800">
 										<Currency
 											amount={order.total_value}
@@ -82,7 +82,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 											/>
 										</span>
 									)}
-								</div>
+								</div>}
 							</div>
 							<div className="flex items-center gap-2">
 								<ActionPopover

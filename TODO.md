@@ -5,9 +5,10 @@
 - [ ] Open in new tab if clicking on 'Add Item' as the item is required for a build order
 - [ ] Link companies to items to be suppliers
 - [ ] Editable Orders in Order History
-- [ ] Add a 'View' to switch table -> blocks
+- [X] Add a 'View' to switch table -> blocks
 - [ ] Set company billing/shipping address etc for Stocktake
-- [ ] Inline stocktake form
+- [ ] Inline stocktake form?
 - [X] Create order show in the CompanyAddressContact summary if error in form.
-- [ ] Allow packages on Sales orders
+- [X] Allow packages on Sales orders
 - [ ] Restructure db so all item_changes have a from and to address?
+- [ ] Shawer/Dreet (Drawer/Sheet combo) for Forms in Sheets on Mobile
