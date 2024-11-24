@@ -3,6 +3,7 @@ import { OrderView } from "../../../types";
 import OrderDescription from "../components/OrderDescription";
 import OrderTitle from "../components/OrderTitle";
 import ShippingItems from "../components/ShippingItems";
+import StockMovements from '../../order-history/components/StockMovements';
 
 const StocktakeReport = ({ order }: { order: OrderView }) => {
     return (
@@ -14,9 +15,14 @@ const StocktakeReport = ({ order }: { order: OrderView }) => {
                 orderDate={order.order_date as string}
             />
 
-            <ShippingItems
+            <StockMovements
                 orderItems={order.items}
+                from={order.from_shipping_address}
+                to={order.to_shipping_address}
             />
+            {/* <ShippingItems
+                orderItems={order.items}
+            /> */}
         </>
     );
 };

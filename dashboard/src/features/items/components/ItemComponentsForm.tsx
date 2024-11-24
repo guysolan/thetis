@@ -43,9 +43,11 @@ export type ItemFormData = z.infer<typeof formSchema>;
 function ItemComponentsForm({
 	itemId,
 	defaultValues,
+	onSuccess,
 }: {
 	itemId: number;
 	defaultValues?: ItemFormData;
+	onSuccess: () => void;
 }) {
 	const allowedTypes = ["part", "product", "service"];
 	const { data: itemsView } = useSelectItemsView();
@@ -72,7 +74,9 @@ function ItemComponentsForm({
 			component_quantity: item.component_quantity,
 		}));
 		// @ts-ignore
-		await upsertItem(upsertItems);
+		await upsertItem(upsertItems, {
+			onSuccess: () => onSuccess(),
+		});
 	}
 
 	const getFilteredItemOptions = (itemType: string) => {

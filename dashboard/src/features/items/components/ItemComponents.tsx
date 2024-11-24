@@ -2,31 +2,16 @@ import React from 'react'
 import { ItemView } from '../types'
 import ComponentsTable from './ComponentsTable'
 import ItemComponentsForm from './ItemComponentsForm'
-import { Sheet } from '@/components/ui/sheet'
-import { Button } from '@/components/ui/button'
-import { Pencil } from 'lucide-react'
 
-const ItemComponents = ({ item }: { item: ItemView }) => {
+const ItemComponents = ({ item, isEditing = false, stopEditing }: { item: ItemView, isEditing: boolean, stopEditing: () => void }) => {
     return (
         <> {["product", "package"].includes(item?.item_type ?? "") &&
             (
                 <>
-                    <ComponentsTable components={item.components} />
-                    <Sheet
-                        trigger={
-                            <Button
-                                size="lg"
-                                className="gap-x-2 mt-4 w-full"
-                                variant="secondary"
-                            >
-                                <Pencil size={16} />
-                                Edit Components
-                            </Button>
-                        }
-                        title={item.item_name}
-                        description={`Make changes to the ${item.item_name} details here. Click save when you're done.`}
-                    >
+                    {!isEditing ? <ComponentsTable components={item.components} />
+                        :
                         <ItemComponentsForm
+                            onSuccess={stopEditing}
                             itemId={item.item_id}
                             defaultValues={{
                                 item_components: item.components.map((
@@ -38,8 +23,7 @@ const ItemComponents = ({ item }: { item: ItemView }) => {
                                     component_type: ic.component_type,
                                 })),
                             }}
-                        />
-                    </Sheet>
+                        />}
                 </>
             )}</>
     )

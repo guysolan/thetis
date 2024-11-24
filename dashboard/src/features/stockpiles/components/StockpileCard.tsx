@@ -17,18 +17,21 @@ import Sheet from "../../../components/Sheet";
 import AddressForm from "./AddressForm";
 import { useSelectAddresses } from "../api/selectAddresses";
 import InlineStocktakeForm from './InlineStocktakeForm';
+import ActionPopover from '../../../components/ActionPopover';
+import PopoverOption from '../../../components/PopoverOption';
+import { Separator } from '../../../components/ui/separator';
 
 interface Props {
     stockpile: Stockpile["Row"];
 }
 
 const StockpileCard = ({ stockpile }: Props) => {
+    const [isEditing, setIsEditing] = useState(false);
     const { data: addresses } = useSelectAddresses();
     const address = addresses?.find((a) => a.id === stockpile.stockpile_id);
-    const [isExpanded, setIsExpanded] = useState(false);
 
-    const toggleExpansion = () => {
-        setIsExpanded(!isExpanded);
+    const toggleIsEditing = () => {
+        setIsEditing(!isEditing);
     };
 
     return (
@@ -41,51 +44,50 @@ const StockpileCard = ({ stockpile }: Props) => {
                     </CardDescription>
                     <Badge>{stockpile.company_name}</Badge>
                 </div>
-                <Sheet
-                    trigger={
-                        <Button
-                            size="icon"
-                            variant="ghost"
-                            onClick={toggleExpansion}
-                        >
-                            <Pencil className="w-4 h-4" />
-                        </Button>
-                    }
+                <ActionPopover
+
                     title="Edit Address"
-                >
-                    <AddressForm
+
+                    editForm={<AddressForm
                         operation="upsert"
                         address={address}
-                    />
-                </Sheet>
+                    />}>
+                    <Separator />
+                    <PopoverOption
+                        onClick={toggleIsEditing}
+                    >
+                        <Pencil size={20} />
+                        {isEditing ? "Cancel" : "Update Stock"}
+                    </PopoverOption>
+                </ActionPopover>
             </CardHeader>
 
             <CardContent>
                 {/* <ItemsTable items={stockpile.items} /> */}
-                <InlineStocktakeForm
-                    items={stockpile?.items}
-                />
+                {isEditing ? <StocktakeForm
+                    onSuccess={() => setIsEditing(false)}
+                    isInline={true}
+                    orderItems={stockpile?.items?.map((i) => ({
+                        item_id: String(i.item_id),
+                        quantity_before: i.item_quantity,
+                        quantity_after: i.item_quantity < 0
+                            ? 0
+                            : i.item_quantity,
+                        quantity_change: i.item_quantity < 0
+                            ? -i.item_quantity
+                            : 0,
+                        item_type: i.item_type,
+                    }))}
+                    addressId={String(stockpile.stockpile_id)}
+                /> :
+                    <span className="cursor-pointer" onClick={toggleIsEditing}>
+                        <ItemsMiniTable items={stockpile?.items} />
+                    </span>}
             </CardContent>
             <CardFooter>
-                <Sheet
-                    trigger={<Button variant="secondary">Update Stock</Button>}
-                    title="Update Stock"
-                >
-                    <StocktakeForm
-                        orderItems={stockpile?.items?.map((i) => ({
-                            item_id: String(i.item_id),
-                            quantity_before: i.item_quantity,
-                            quantity_after: i.item_quantity < 0
-                                ? 0
-                                : i.item_quantity,
-                            quantity_change: i.item_quantity < 0
-                                ? -i.item_quantity
-                                : 0,
-                            item_type: i.item_type,
-                        }))}
-                        addressId={String(stockpile.stockpile_id)}
-                    />
-                </Sheet>
+                {isEditing && <Button variant='outline' onClick={() => setIsEditing(false)}>
+                    Cancel
+                </Button>}
             </CardFooter>
         </Card>
     );

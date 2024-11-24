@@ -31,10 +31,10 @@ const StocktakeItemsFormFields = ({
             <TableHeader>
                 <TableRow>
                     {allowedTypes.length > 0 && <TableHead>Type</TableHead>}
-                    <TableHead>Item</TableHead>
-                    <TableHead>Old Quantity</TableHead>
-                    <TableHead>Change</TableHead>
-                    <TableHead>New Quantity</TableHead>
+                    <TableHead className='min-w-32'>Item</TableHead>
+                    <TableHead className='min-w-24'>Old Quantity</TableHead>
+                    <TableHead className='min-w-24'>Change</TableHead>
+                    <TableHead className='min-w-24'>New Quantity</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>

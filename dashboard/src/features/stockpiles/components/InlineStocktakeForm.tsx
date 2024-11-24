@@ -9,8 +9,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { ItemView } from "../../items/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Pencil } from 'lucide-react';
 import InlineStocktakeRow from './InlineStocktakeRow';
 
 interface Props {

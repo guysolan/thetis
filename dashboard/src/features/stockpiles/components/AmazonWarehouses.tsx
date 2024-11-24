@@ -12,13 +12,13 @@ const AmazonStockpiles = () => {
     const { data: allInventories } = useAmazonInventory();
 
     return (
-        <div className="flex flex-col gap-4 py-4">
+        <div className="flex flex-col gap-4">
             {Object.entries(allInventories).map(([key, stockpile]) => (
                 <Card key={key}>
-                    <CardHeader>
+                    <CardHeader className='p-2 md:p-4'>
                         <CardTitle>{key}</CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className='p-2 md:p-4'>
                         <Table>
                             <TableHeader>
                                 <TableRow>

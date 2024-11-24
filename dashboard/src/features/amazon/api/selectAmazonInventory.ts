@@ -1,4 +1,4 @@
-import { queryOptions, useQuery } from "@tanstack/react-query";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "../../../lib/supabase"; // Adjust the import path as needed
 
 interface stockpileData {
@@ -39,4 +39,4 @@ export const selectAmazonInventoryQueryOptions = () => {
 };
 
 export const useAmazonInventory = () =>
-    useQuery(selectAmazonInventoryQueryOptions());
+    useSuspenseQuery(selectAmazonInventoryQueryOptions());

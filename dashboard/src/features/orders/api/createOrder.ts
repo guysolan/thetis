@@ -22,11 +22,13 @@ export const useCreateOrder = (orderType: OrderType) => {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: createOrder,
-		onSuccess: (data) => {
+		onSuccess: (data, mutation) => {
 			console.log(data);
 			toast.success("Order created successfully");
 			openDefaultDocument(data[0].order_id, orderType);
 			closeSheet();
+			// @ts-ignore
+			mutation?.onSuccess&&mutation.onSuccess();
 		},
 		onError: () => {
 			toast.error("Error creating order");

@@ -24,8 +24,9 @@ export const useUpsertItemComponents = () => {
     onError: () => {
       toast.error("Error updating item");
     },
-    onSuccess: () => {
+    onSuccess: (data, mutation) => {
       toast.success("Item updated successfully");
+      mutation?.onSuccess && mutation.onSuccess();
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["select-items-view"] });

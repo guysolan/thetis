@@ -47,7 +47,7 @@ const Navigation = () => {
 
   return (
     <nav className="flex flex-col bg-background">
-      <div className="flex justify-between items-center p-4">
+      <div className="flex md:flex-row flex-col-reverse md:justify-between md:items-center gap-4 p-2 md:p-4">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -80,7 +80,7 @@ const Navigation = () => {
             ))}
           </BreadcrumbList>
         </Breadcrumb>
-        <div className="flex items-center gap-2">
+        <div className="flex justify-between justify-self-end items-center gap-2 w-full md:w-fit">
           <MyCompany />
           <Logout />
         </div>
@@ -89,13 +89,13 @@ const Navigation = () => {
       {jobs[currentSection] && jobs[currentSection].pages && (
         <Tabs defaultValue={pathSegments[1] || ""} className="w-full">
           <TabsList className="justify-start bg-transparent p-0 border-b rounded-none w-full h-12">
-            <div className="flex items-center max-w-screen-2xl h-12 container">
+            <div className="flex items-center gap-x-1 max-w-screen-2xl h-12 container">
               {jobs[currentSection].pages.map((item) => (
                 <TabsTrigger
                   key={item.name}
                   value={item.name.toLowerCase()}
                   asChild
-                  className="relative gap-2 bg-transparent shadow-none data-[state=active]:shadow-none px-4 pt-1 pb-1 border-b-2 border-b-transparent data-[state=active]:border-b-primary rounded-none h-12 font-semibold text-muted-foreground data-[state=active]:text-zinc-900 transition-none"
+                  className="relative gap-2 bg-transparent shadow-none data-[state=active]:shadow-none px-2 md:px-4 pt-1 pb-1 border-b-2 border-b-transparent data-[state=active]:border-b-primary rounded-none h-12 font-semibold text-muted-foreground data-[state=active]:text-zinc-900 transition-none"
                 >
                   <Link to={item.href} activeOptions={{ exact: true }}>
                     <span className="[&_svg]:w-4 [&_svg]:h-4">{item.icon}</span>

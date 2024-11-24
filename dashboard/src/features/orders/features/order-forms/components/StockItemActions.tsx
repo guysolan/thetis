@@ -11,7 +11,7 @@ const StockItemActions = ({
     onAppend,
 }: StockItemActionsProps) => {
     return (
-        <div className="flex gap-2 p-2">
+        <div className="flex gap-2">
             {allowedTypes.map((type) => (
                 <Button
                     key={type}

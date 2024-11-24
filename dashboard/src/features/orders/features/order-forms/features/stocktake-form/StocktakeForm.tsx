@@ -4,13 +4,16 @@ import { useCreateOrder } from "../../../../api/createOrder";
 import StocktakeFormFields from "./StocktakeFormFields";
 import dayjs from "dayjs";
 import { formatCreateOrderArguments } from "../../utils/formatCreateOrderArguments";
+import InlineStocktakeFormFields from './InlineStocktakeFormFields';
+import StocktakeItems from './StocktakeItems';
 
 interface Props {
-    addressId: string;
+    addressId?: string;
     orderItems?: OrderItem[];
-    onCancel?: () => void;
+    isInline?: boolean;
+    onSuccess?: () => void;
 }
-const StocktakeForm = ({ addressId, orderItems }: Props) => {
+const StocktakeForm = ({ addressId, orderItems, isInline, onSuccess }: Props) => {
     const { mutate: createOrder } = useCreateOrder("stocktake");
     const defaultValues = {
         order_items: orderItems || [{
@@ -40,7 +43,7 @@ const StocktakeForm = ({ addressId, orderItems }: Props) => {
             formData,
         );
 
-        await createOrder(processedData);
+        await createOrder(processedData, { onSuccess: onSuccess });
     };
 
     return (
@@ -50,7 +53,13 @@ const StocktakeForm = ({ addressId, orderItems }: Props) => {
             defaultValues={defaultValues}
             onSubmit={handleSubmit}
         >
-            <StocktakeFormFields />
+            {isInline ? <StocktakeItems
+                address_name="address_id"
+                defaultIsExpanded={true}
+                allowedTypes={["part", "product"]}
+                name="order_items"
+                inCard={true}
+            /> : <StocktakeFormFields />}
         </BaseOrderForm>
     );
 };

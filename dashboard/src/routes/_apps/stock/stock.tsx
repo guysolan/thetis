@@ -7,26 +7,30 @@ import AddressForm from "@/features/stockpiles/components/AddressForm";
 import AmazonStock from "@/features/stockpiles/components/AmazonWarehouses";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Stockpiles from "@/features/stockpiles/components/Stockpiles";
+import StocktakeForm from '../../../features/orders/features/order-forms/features/stocktake-form/StocktakeForm';
+import TabsHeader from "@/components/TabsHeader";
 
 const ItemsPage = () => {
   return (
     <>
-      <PageTitle title="Stock">
-        <Sheet
-          trigger={<Button>New Address</Button>}
-          title="New address"
-          description="Add a new address to your system."
-        >
-          <AddressForm operation="insert" address={null} />
-        </Sheet>
-      </PageTitle>
-
-      <Tabs defaultValue="stockpiles" className="w-full">
-        <TabsList>
-          <TabsTrigger value="stockpiles">Stockpiles</TabsTrigger>
-          <TabsTrigger value="amazon">Amazon</TabsTrigger>
-        </TabsList>
-
+      <Tabs defaultValue="stockpiles" >
+        <TabsHeader
+          tabsList={
+            <>
+              <TabsTrigger value="stockpiles">Stockpiles</TabsTrigger>
+              <TabsTrigger value="amazon">Amazon</TabsTrigger>
+            </>
+          }
+          actionButtons={
+            <Sheet
+              trigger={<Button>New Stocktake</Button>}
+              title="New Stocktake"
+              description="Update the stock at one of your addresses."
+            >
+              <StocktakeForm />
+            </Sheet>
+          }
+        />
         <TabsContent value="stockpiles">
           <Stockpiles />
         </TabsContent>

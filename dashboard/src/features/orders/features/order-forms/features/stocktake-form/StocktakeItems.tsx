@@ -18,7 +18,7 @@ interface StocktakeItemProps {
     title?: string;
     allowedTypes?: ItemType[];
     defaultIsExpanded?: boolean;
-    readOnly?: boolean;
+    inCard?: boolean;
 }
 
 const StocktakeItems = ({
@@ -26,7 +26,7 @@ const StocktakeItems = ({
     address_name = "address_id",
     title,
     allowedTypes = [],
-    readOnly = false,
+    inCard = false,
 }: StocktakeItemProps) => {
     const { data: items } = useSelectItemsView();
     const form = useFormContext();
@@ -47,13 +47,25 @@ const StocktakeItems = ({
         } as StockItemFormData);
     };
 
+    if (inCard) {
+        return (<>
+            <StocktakeItemsFormFields
+                name={name}
+                fields={fields}
+                items={items || []}
+                form={form}
+            />
+            <StockItemActions
+                allowedTypes={allowedTypes}
+                onAppend={handleAppend}
+            /></>)
+    }
     return (
         <Card>
             <CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
                 <CardTitle className="font-medium text-base">
                     {title ||
-                        `Stock Changes ${
-                            address?.name ? `(${address.name})` : ""
+                        `Stock Changes ${address?.name ? `(${address.name})` : ""
                         }`}
                 </CardTitle>
             </CardHeader>
