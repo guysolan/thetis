@@ -13,7 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as StockImport } from './routes/stock'
 import { Route as OrdersImport } from './routes/orders'
-import { Route as DocumentsImport } fr./routes/buildocuments'
+import { Route as DocumentsImport } from './routes/documents'
 import { Route as DirectoryImport } from './routes/directory'
 import { Route as BuildImport } from './routes/build'
 import { Route as IndexImport } from './routes/index'

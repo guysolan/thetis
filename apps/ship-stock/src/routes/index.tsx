@@ -46,5 +46,10 @@ const ShipStockHome = () => {
 
 export const Route = createFileRoute('/')({
   component: ShipStockHome,
-  loader: () => <div>Loading...</div>,
+  loader: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 500))
+    return {
+      message: 'Hello, world!',
+    }
+  },
 })
