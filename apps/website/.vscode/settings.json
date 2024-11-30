@@ -1,0 +1,20 @@
+{
+    "prettier.documentSelectors": ["\"**/*.astro\"", "**/*.astro"],
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[astro]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "files.associations": {
+        "*.mdx": "markdown"
+    },
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "files.exclude": {
+        "**/node_modules": true
+    },
+    "search.exclude": {
+        "**/node_modules": true
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    }
+}

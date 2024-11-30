@@ -1,0 +1,18 @@
+---
+import { page2md } from '../../api/notion.js'
+import { marked } from 'marked'
+const page = await page2md('11d9f1b9e77c40fc8bd33c7f737a7774')
+import BlogLayout from '../../layouts/BlogLayout.astro'
+---
+
+<BlogLayout details={page}>
+    <div class="blog">
+        {
+            page?.articleBody ? (
+                <Fragment set:html={marked.parse(page?.articleBody)} />
+            ) : (
+                <h3>Sorry! No content on this page.</h3>
+            )
+        }
+    </div>
+</BlogLayout>

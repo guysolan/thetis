@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro'
+import AchillesDrawing from '../assets/drawings/achilles-drawing.svg'
+import Image from 'astro/components/Image.astro'
+---
+
+<Layout
+    title="Achilles Rupture Evidence Based Recovery"
+    description="Medical device company specialising in splints for injured Achilles Tendons. We sell an Achilles Rupture Night Splint and a Trauma Splint."
+    image="https://thetismedical.com/images/achilles-drawing-image.png"
+>
+    <main data-barba="container" data-barba-namespace="home">
+        <section class="faq-landing">
+            <div class="faq-words">
+                <h1>Evidence based Achilles Rupture Recovery</h1>
+                <b>
+                    At Thetis Medical we believe that your Achilles injury
+                    should be treated in accordance with the best scientific
+                    data.
+                </b>
+                <div class="go-to-subscribe">
+                    <a href="./contact" class="go-to-subscribe explore"
+                        >Get in Touch</a
+                    >
+                </div>
+            </div>
+            <Image src={AchillesDrawing} alt="achilles-drawing" />
+        </section>
+        <div class="scroll">
+            <a href="#products">
+                <p>Scroll to Explore</p>
+            </a>
+        </div>
+        <section id="natural-healing" class="article-wrap">
+            <div class="evidence faq slide-title">
+                <h2>
+                    Surgery is not always required for Achilles Tendon Rupture
+                </h2>
+                <div class="article evidence">
+                    <p>
+                        Patients with a ruptured Achilles tendon are often
+                        surprised to hear that they do not require an operation
+                        to repair it. Natural healing is, in fact, extremely
+                        reliable. Treatment in a boot with “functional
+                        rehabilitation” gives excellent results. Surgical
+                        treatment is not required except in certain
+                        circumstances. Surgery always carries more risks than
+                        non-surgical treatment.
+                    </p>
+                    <br /><br />
+                    <p>
+                        This scientific paper from the UK was published in 2015.
+                        It remains the best evidence for how an Achilles tendon
+                        rupture should be treated.
+                    </p>
+                    <br /><br />
+                    <a
+                        href="https://online.boneandjoint.org.uk/doi/full/10.1302/0301-620X.97B4.35314"
+                        target="_blank"
+                        class="article evidence explore">Read Article</a
+                    >
+                </div>
+            </div>
+            <section id="natural-healing" class="article-wrap">
+                <div class="evidence faq slide-title">
+                    <h2>
+                        Platelet Rich Plasma (PRP) for fast and reliable
+                        Achilles Rupture Recovery? Not yet.
+                    </h2>
+                    <div class="article evidence">
+                        <p>
+                            Patients want the fastest and most reliable
+                            recovery.
+                        </p>
+                        <br /><br />
+                        <p>
+                            Newspapers and the internet frequently write about
+                            using biological therapies to treat orthopaedic
+                            injuries. Platelet Rich Plasma (PRP) is a treatment
+                            where the patient’s own blood is taken from an arm
+                            vein, spun to concentrate the healing potential and
+                            injected back into the injured/painful part. This is
+                            a promising idea and has been tried in many parts of
+                            the body. Unfortunately there is no reliable
+                            evidence that it is useful.
+                        </p>
+                        <br /><br />
+                        <p>
+                            Thetis surgeons were involved with the PATH-2 study
+                            investigating the use of PRP in Achilles’ tendon
+                            ruptures. The results demonstrate no benefit with
+                            the use of PRP. The 2 year data has recently been
+                            published reinforcing the conclusion that enhancing
+                            healing with PRP is not yet a reality.
+                        </p>
+                        <br /><br />
+                        <a
+                            href="https://online.boneandjoint.org.uk/doi/full/10.1302/0301-620X.104B11.BJJ-2022-0653.R1"
+                            target="_blank"
+                            class="article evidence explore">Read Article</a
+                        >
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+</Layout>

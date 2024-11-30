@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_2_);}
+	.st1{clip-path:url(#SVGID_4_);}
+	.st2{clip-path:url(#SVGID_6_);fill:#1D1D1B;}
+</style>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_1_" x="1.1" y="1.2" width="196.9" height="196.9"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+		</clipPath>
+		<g class="st0">
+			<defs>
+				<rect id="SVGID_3_" x="1.1" y="1.2" width="196.9" height="196.9"/>
+			</defs>
+			<clipPath id="SVGID_4_">
+				<use xlink:href="#SVGID_3_"  style="overflow:visible;"/>
+			</clipPath>
+			<path class="st1" d="M99.6,15.6c46.3,0,84,37.7,84,84c0,46.3-37.7,84-84,84s-84-37.7-84-84C15.6,53.3,53.3,15.6,99.6,15.6
+				 M99.6,3.8C46.7,3.8,3.8,46.7,3.8,99.7c0,52.9,42.9,95.8,95.8,95.8s95.8-42.9,95.8-95.8C195.4,46.7,152.5,3.8,99.6,3.8"/>
+		</g>
+		<g class="st0">
+			<defs>
+				<rect id="SVGID_5_" x="29.1" y="29.2" width="140.9" height="140.9"/>
+			</defs>
+			<clipPath id="SVGID_6_">
+				<use xlink:href="#SVGID_5_"  style="overflow:visible;"/>
+			</clipPath>
+			<path class="st2" d="M107.3,153.2c0,4.3-3.5,7.8-7.8,7.8c-4.3,0-7.8-3.5-7.8-7.8c0-4.3,3.5-7.8,7.8-7.8
+				C103.9,145.5,107.3,148.9,107.3,153.2"/>
+			<path class="st2" d="M109.3,132.6c0,5.4-4.3,9.7-9.7,9.7c-5.3,0-9.7-4.3-9.7-9.7s4.3-9.7,9.7-9.7
+				C104.9,122.9,109.3,127.3,109.3,132.6"/>
+			<path class="st2" d="M111.2,108.1c0,6.4-5.2,11.6-11.6,11.6c-6.4,0-11.6-5.2-11.6-11.6c0-6.4,5.2-11.6,11.6-11.6
+				C106,96.5,111.2,101.7,111.2,108.1"/>
+			<path class="st2" d="M113.2,56.7c0,7.5-6.1,13.6-13.6,13.6c-7.5,0-13.6-6.1-13.6-13.6c0-7.5,6.1-13.6,13.6-13.6
+				C107.1,43.1,113.2,49.2,113.2,56.7"/>
+			<path class="st2" d="M103.2,80.3c0.4-6.2,5.5-9.6,11.7-11c9.3-2.2,46.3,0.9,48.1,10c2,9.7-28.5,31.9-46.7,22.2
+				c-5.8-3.1-13.7-11.1-13-21C103.1,80.4,103.2,80.4,103.2,80.3"/>
+			<path class="st2" d="M96,80.3c-0.4-6.2-5.5-9.6-11.7-11c-9.3-2.2-46.3,0.9-48.1,10c-2,9.7,28.5,31.9,46.7,22.2
+				c5.8-3.1,13.7-11.1,13.1-21C96,80.4,96,80.4,96,80.3"/>
+		</g>
+	</g>
+</g>
+</svg>

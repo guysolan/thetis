@@ -1,0 +1,93 @@
+---
+import Social from './icons/socials/Social.jsx'
+export interface Props {
+    title: string
+}
+
+const { title } = Astro.props
+---
+
+<section class="faq-landing">
+    <div class="faq-words">
+        <h1 class="lg:pt-6">{title}</h1>
+        <div>
+            <h3>Get the full eBook on Achilles tendon ruptures FREE.</h3>
+        </div>
+        <div class="go-to-subscribe">
+            <a href="#subscribe" class="go-to-subscribe explore"
+                >Get the eBook</a
+            >
+        </div>
+        <h4 class="matthew-solan">
+            Written by <a
+                target="_blank"
+                itemprop="author"
+                href="https://www.londonfootandanklecentre.co.uk/staff/matthew-solan/"
+                >Matthew Solan</a
+            >.<br />Achilles rupture expert and orthopedic surgeon.
+        </h4>
+    </div>
+    <img src="../assets/drawings/achilles-drawing.svg" alt="achilles-drawing" />
+    <div class="shares">
+        <!-- <a class="!cursor-pointer" onclick="copyToClipboard()">
+            <Social type="copy" action="share" disabled={true} />
+        </a>
+        <Social type="mail" action="share" />
+        <Social type="linkedin" action="share" />
+        <Social
+            mode="twitter"
+            action="share"
+            customLink="https://twitter.com/intent/tweet/?text=Great%20article%20-%20Is%20my%20Achilles%20Ruptured%3F&url=https%3A%2F%2Fthetismedical.com%2Ffaqs%2Fis-my-achilles-ruptured"
+        />
+        <Social
+            type="facebook"
+            action="share"
+            customLink="https://facebook.com/sharer/sharer.php?u=https%3A%2F%2Fthetismedical.com%2Ffaqs%2Fis-my-achilles-ruptured"
+        /> -->
+
+        <!-- <a
+      href="#"
+      id="site-link"
+      class="https://thetismedical.com/faqs/is-my-achilles-ruptured"
+      onclick="copyToClipboard()"
+      ><img
+        class="share-icon"
+        src="/images/sharing-icon.svg"
+        alt="Email Icon"
+      /></a
+    >
+    <a
+      href="mailto:?subject=Great%20article%20-%20Is%20my%20Achilles%20Ruptured%3F&body=https%3A%2F%2Fthetismedical.com%2Ffaqs%2Fis-my-achilles-ruptured"
+      target="_self"
+      rel="noopener"
+      aria-label="Share by E-Mail"
+      ><img
+        class="share-icon"
+        src="/images/icons/socials/social-media-email.svg"
+        alt="Email Icon"
+      /></a
+    >
+    <a
+      href="https://twitter.com/intent/tweet/?text=Great%20article%20-%20Is%20my%20Achilles%20Ruptured%3F&url=https%3A%2F%2Fthetismedical.com%2Ffaqs%2Fis-my-achilles-ruptured"
+      target="_blank"
+      rel="noopener"
+      aria-label="Share on Twitter"
+      ><img
+        class="share-icon"
+        src="/images/icons/socials/social-media-twitter.svg"
+        alt="Twitter Icon"
+      /></a
+    >
+    <a
+      href="https://facebook.com/sharer/sharer.php?u=https%3A%2F%2Fthetismedical.com%2Ffaqs%2Fis-my-achilles-ruptured"
+      target="_blank"
+      rel="noopener"
+      aria-label="Share on Facebook"
+      ><img
+        class="share-icon"
+        src="/images/icons/socials/social-media-facebook.svg"
+        alt="Facebook Icon"
+      /></a
+    > -->
+    </div>
+</section>

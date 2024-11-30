@@ -1,0 +1,129 @@
+---
+import Layout from '../layouts/Layout.astro'
+import FullImageCTA from '../components/CTA/FullCTA.astro'
+import { buttonVariants } from '@thetis/ui/button'
+import { cn } from '../lib/utils'
+import EmailCTA from '../components/CTA/EmailCTA.astro'
+import Slide from '../components/Slide.astro'
+import Title from '../components/Title.astro'
+import DownloadList from '../components/DownloadList.astro'
+import AchillesDrawing from '../assets/drawings/achilles-drawing.svg'
+import Image from 'astro/components/Image.astro'
+---
+
+<Layout
+    title="Thetis Medical - Professionals"
+    description="Medical device company specialising in splints for injured Achilles Tendons. We sell an Achilles Rupture Night Splint and a Trauma Splint."
+    image="https://thetismedical.com/images/evidence-based-recovery"
+>
+    <main class="my-6">
+        <Slide className="!mt-0 !pt-0">
+            <div
+                class="flex md:flex-row flex-col md:justify-between sm:gap-y-8 md:gap-x-20 md:gap-y-0 mx-0"
+            >
+                <div class="md:flex-1 space-y-8 max-w-[600px]">
+                    <Title>Healthcare Professionals</Title>
+                    <Image
+                        src={AchillesDrawing}
+                        alt="achilles-drawing"
+                        class="md:hidden max-h-[min(50vh,_500px)]"
+                    />
+
+                    <p>
+                        Achilles Rupture carries a very long recovery - whether
+                        the patient is managed non-operatively or surgically.
+                        <br /><br />
+                        Thetis Medical Splints are designed to help patients, healthcare
+                        professionals and hospitals.
+                    </p>
+                    <div class="go-to-subscribe">
+                        <a
+                            href="./contact"
+                            class={cn(
+                                buttonVariants({ size: 'xl' }),
+                                'go-to-subscribe'
+                            )}>Get in Touch</a
+                        >
+                    </div>
+                </div>
+                <Image
+                    src={AchillesDrawing}
+                    alt="achilles-drawing"
+                    class="md:inline-flex md:flex-1 hidden md:mx-auto mt-0 max-h-[min(50vh,_500px)]"
+                />
+            </div>
+        </Slide>
+
+        <FullImageCTA
+            title="Trauma Splint"
+            paragraph={[
+                'Use of the Achilles Rupture Trauma Splint helps your patients reach a treatment plan promptly.',
+                'Thetis Achilles Trauma Splints make the diagnostic pathway more flexible and efficient. Plaster room visits are not required. Boots are not wasted. In one study the time from A&E to definitive treatment decision was halved.',
+            ]}
+            primaryHref="/contact"
+            secondaryHref="/trauma-splint"
+            primaryWords="Order Now"
+            secondaryWords="Learn More"
+            image="/images/trauma-splint/trauma-splint.jpg"
+            imageAlt="Trauma Splint Image"
+        />
+        <FullImageCTA
+            title="Night Splint"
+            paragraph={[
+                'Do you know any patients who are pleased to sleep in their boot? The Achilles Rupture Night Splint is a secure alternative.',
+                'Thetis Achilles Rupture Night Splint has been welcomed by patients. One patient (himself a surgeon) described it as “the most important bit of rehab kit that they don’t tell you about”.',
+            ]}
+            primaryHref="/contact"
+            secondaryHref="/night-splint"
+            primaryWords="Order Now"
+            secondaryWords="Learn More"
+            image="/images/night-splint/Thetis Medical Achilles Rupture Night Splint In Bed.jpg"
+            imageAlt="Trauma Splint Image"
+        />
+
+        <EmailCTA
+            title="Sound Interesting?"
+            paragraph="Want to get a sample, speak to us or just learn more?"
+        />
+
+        <Slide title="Downloads">
+            <div class="space-y-12 my-12">
+                <DownloadList
+                    title="Medical Studies"
+                    downloads={[
+                        {
+                            title: 'Quality Improvement Study Flowchart.pdf',
+                            href: '/images/documents/QIP FLOWCHART embed.pdf',
+                        },
+                    ]}
+                />
+                <DownloadList
+                    title="Information for Patients"
+                    downloads={[
+                        {
+                            title: 'Achilles Rupture Information Sheet.pdf',
+                            href: '/images/documents/Achilles Rupture Information Sheet.pdf',
+                        },
+                        {
+                            title: 'A Game of Snakes and Ladders Poster.pdf',
+                            href: '/images/documents/Achilles Rupture Information Sheet.pdf',
+                        },
+                    ]}
+                />
+                <DownloadList
+                    title="Information for Patients"
+                    downloads={[
+                        {
+                            title: 'Night Splint Instructions.pdf',
+                            href: '/images/documents/screen-instructions-induvidual.pdf',
+                        },
+                        {
+                            title: 'Trauma Splint Instructions.pdf',
+                            href: '/images/documents/trauma_splint_insert.pdf',
+                        },
+                    ]}
+                />
+            </div>
+        </Slide>
+    </main>
+</Layout>

@@ -1,0 +1,35 @@
+---
+import { buttonVariants, Button } from '@thetis/ui/button'
+import { DesktopNav } from './DesktopNav.tsx'
+import { MobileNav } from './MobileNav.tsx'
+import { cn } from '../lib/utils'
+import ShopifyShopButton from '../components/ShopifyShopButton.astro'
+import Thetis from './Thetis.astro'
+---
+
+<header
+    class="top-0 z-50 fixed flex border-gray-300 bg-background item-center m-auto my-auto px-2 lg:px-8 py-4 border-b w-full"
+>
+    <div class="lg:flex justify-between items-center gap-x-6 hidden w-full">
+        <Thetis />
+        <div class="flex justify-center items-center gap-x-6 ml-auto text-md">
+            <DesktopNav client:load />
+            <a
+                href="/contact"
+                class={cn(
+                    buttonVariants({ variant: 'outline', size: 'md' }),
+                    'font-light'
+                )}>Contact</a
+            >
+            <!-- <ShopifyShopButton size="md" /> -->
+        </div>
+    </div>
+
+    <div class="flex justify-between items-center lg:hidden w-full">
+        <Thetis />
+        <div class="flex gap-x-2">
+            <!-- <ShopifyShopButton size="sm" /> -->
+            <MobileNav client:load />
+        </div>
+    </div>
+</header>

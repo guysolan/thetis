@@ -1,0 +1,45 @@
+---
+import { buttonVariants } from '../ui/button'
+import Slide from '../Slide.astro'
+import { cn } from '../../lib/utils'
+interface Props {
+    title: string
+    paragraph: string
+}
+
+const { title, paragraph }: Props = Astro.props
+---
+
+<Slide background="green">
+    <form
+        autocomplete="on"
+        action="https://formspree.io/f/xbjvlval"
+        method="POST"
+        class="my-8 items-center w-full justify-center flex flex-col space-y-8"
+    >
+        <div class="space-y-3 flex flex-col w-full items-center justify-center">
+            <h2 class="text-2xl font-semibold">{title}</h2>
+            <p class="text-lg text-gray-600">{paragraph}</p>
+        </div>
+
+        <div class="flex gap-x-2 w-full max-w-sm">
+            <input
+                class="h-12 lg:h-14 w-full border-2 border-gray-500 bg-white font-light px-2 py-2 rounded-lg"
+                required
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+            />
+            <button
+                type="submit"
+                value="send"
+                class={cn(
+                    buttonVariants({ size: 'md' }),
+                    'h-12 lg:h-14 md:w-24 lg:w-36'
+                )}
+            >
+                Send <i data-lucide-name="send"></i>
+            </button>
+        </div>
+    </form>
+</Slide>

@@ -1,0 +1,55 @@
+---
+import { buttonVariants } from '../ui/button'
+import Slide from '../Slide.astro'
+import { cn } from '../../lib/utils'
+
+interface Props {
+    title: string
+    paragraph: string[]
+    primaryHref: string
+    secondaryHref: string
+    primaryWords: string
+    secondaryWords: string
+    image: string
+    imageAlt: string
+}
+
+const {
+    title,
+    paragraph,
+    primaryHref,
+    secondaryHref,
+    primaryWords,
+    secondaryWords,
+    image,
+    imageAlt,
+}: Props = Astro.props
+---
+
+<Slide>
+    <div class="flex flex-col lg:flex-row gap-8 w-full items-center">
+        <div class="w-full">
+            <img id="" src={image} alt={imageAlt} loading="lazy" />
+        </div>
+        <div class="space-y-4 w-full max-w-1/2">
+            <h2 class="text-2xl">{title}</h2>
+            <div class="space-y-4">
+                {paragraph.map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+            <div class="flex gap-x-4 pt-4">
+                <a
+                    href={primaryHref}
+                    class={cn(
+                        buttonVariants({ size: 'lg', variant: 'default' })
+                    )}>{primaryWords}</a
+                >
+                <a
+                    href={secondaryHref}
+                    class={cn(
+                        buttonVariants({ size: 'lg', variant: 'outline' })
+                    )}>{secondaryWords}</a
+                >
+            </div>
+        </div>
+    </div>
+</Slide>

@@ -1,0 +1,23 @@
+{
+    "extends": "astro/tsconfigs/base",
+    "include": [
+        "source-path/**/*.json",
+        "./src/",
+        "./src/**/*.ts",
+        "./src/**/*.tsx"
+    ],
+    "compilerOptions": {
+        "strictNullChecks": true,
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "allowImportingTsExtensions": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "jsx": "react-jsx",
+        "jsxImportSource": "react"
+    }
+}

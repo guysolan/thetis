@@ -1,0 +1,69 @@
+---
+import Slide from './Slide.astro'
+---
+
+<Slide
+    id="subscribe"
+    title="Subscribe"
+    paragraph="Sign up to our newsletter to get expert advice on Achilles ruptures and the latest on our business developments."
+>
+    <div id="mc_embed_signup" class="w-full border-2 border-black p-8 my-8">
+        <form
+            action="https://thetismedical.us5.list-manage.com/subscribe/post?u=c24150147626fd5e19c7684c6&id=f85ef48215"
+            method="post"
+            id="mc-embedded-subscribe-form"
+            name="mc-embedded-subscribe-form"
+            class="validate"
+            target="_blank"
+            novalidate
+        >
+            <div id="mc_embed_signup_scroll">
+                <div class="mc-field-group mailchimp form">
+                    <label for="mce-EMAIL">Email Address</label>
+                    <input
+                        type="email"
+                        value=""
+                        name="EMAIL"
+                        class="required email border-2 border-black rounded-lg"
+                        id="mce-EMAIL"
+                    />
+                </div>
+                <div id="mce-responses" class="clear mailchimp response">
+                    <div
+                        class="response"
+                        id="mce-error-response"
+                        style="display:none"
+                    >
+                    </div>
+                    <div
+                        class="response"
+                        id="mce-success-response"
+                        style="display:none"
+                    >
+                    </div>
+                </div>
+                <div
+                    style="position: absolute; left: -5000px;"
+                    aria-hidden="true"
+                >
+                    <input
+                        type="text"
+                        name="b_c24150147626fd5e19c7684c6_f85ef48215"
+                        tabindex="-1"
+                        value=""
+                    />
+                </div>
+                <div class="">
+                    <input
+                        type="submit"
+                        value="Subscribe"
+                        name="subscribe"
+                        id="mc-embedded-subscribe"
+                        class="button mailchimp explore bg-primary"
+                    />
+                </div>
+            </div>
+        </form>
+    </div>
+</Slide>
+<script is:inline type="text/partytown" src="@/services/Mailchimp.ts"></script>
