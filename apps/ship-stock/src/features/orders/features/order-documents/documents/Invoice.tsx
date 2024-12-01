@@ -1,41 +1,49 @@
 import React from "react";
 import FinancialTransactions from "../../order-history/components/FinancialTransactions";
-import { Currency, OrderView } from "../../../types";
-import Company from "../components/Address";
+import { OrderView } from "../../../types";
 import OrderDescription from "../components/OrderDescription";
 import OrderTitle from "../components/OrderTitle";
 import OrderTotal from "../components/OrderTotal";
 import PaymentDetails from "../components/PaymentDetails";
 import BuyerSeller from "../components/BuyerSeller";
 import Heading from "../components/Heading";
+import { DocumentOptions } from "../../../../documents/schema";
 
-const Invoice = ({ order }: { order: OrderView }) => {
-    return (
-        <>
-            <Heading />
-            <OrderTitle title="Invoice" />
-            <OrderDescription
-                currency={order.currency}
-                orderId={order.order_id}
-                orderDate={order.order_date as string}
-            />
+const Invoice = ({
+  order,
+  options,
+}: { order: OrderView; options: DocumentOptions }) => {
+  return (
+    <>
+      <Heading />
+      <OrderTitle title="Invoice" />
+      <OrderDescription
+        currency={order.currency}
+        orderId={order.order_id}
+        orderDate={order.order_date as string}
+      />
 
-            <BuyerSeller order={order} />
+      <BuyerSeller
+        order={order}
+        fromOptions={options.from}
+        toOptions={options.to}
+      />
 
-            <FinancialTransactions
-                orderItems={order.items}
-                orderType={order.order_type}
-                currency={order.currency as Currency}
-            />
+      <FinancialTransactions
+        orderItems={order.items}
+        orderType={order.order_type}
+        currency={order.currency}
+      />
 
-            <OrderTotal order={order} />
+      {options.total && (
+        <OrderTotal order={order} showCarriage={options.carriage} />
+      )}
 
-            <PaymentDetails
-                orderId={order.order_id}
-                currency={order.currency}
-            />
-        </>
-    );
+      {options.payment && (
+        <PaymentDetails orderId={order.order_id} currency={order.currency} />
+      )}
+    </>
+  );
 };
 
 export default Invoice;

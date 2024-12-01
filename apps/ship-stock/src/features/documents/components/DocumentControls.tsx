@@ -1,12 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-import { Outlet } from "@tanstack/react-router";
 import { Button } from "@thetis/ui/button";
 
-export const Route = createFileRoute("/documents")({
-  component: () => (
-    <div className="bg-white shadow-lg mx-auto p-8 max-w-4xl document">
+import DocumentOptionsPopover from "./DocumentOptionsPopover";
+import { documentOptions } from "../schema";
+
+const DocumentControls = ({
+  documentType,
+}: { documentType?: keyof typeof documentOptions }) => {
+  return (
+    <>
       <div className="top-4 right-4 fixed flex items-center gap-2 print:hidden">
+        {documentType && <DocumentOptionsPopover documentType={documentType} />}
         <Button onClick={() => window.print()}>Print</Button>
       </div>
       <style>
@@ -23,7 +26,8 @@ export const Route = createFileRoute("/documents")({
           }
         `}
       </style>
-      <Outlet />
-    </div>
-  ),
-});
+    </>
+  );
+};
+
+export default DocumentControls;
