@@ -2,27 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { Outlet } from "@tanstack/react-router";
 import { Button } from "@thetis/ui/button";
+import DocumentHeader from "../features/documents/components/DocumentHeader";
 
 export const Route = createFileRoute("/documents")({
   component: () => (
     <div className="bg-white shadow-lg mx-auto p-8 max-w-4xl document">
-      <div className="top-4 right-4 fixed flex items-center gap-2 print:hidden">
-        <Button onClick={() => window.print()}>Print</Button>
-      </div>
-      <style>
-        {`
-          @page {
-            margin: 4mm 0mm;
-            size: auto;
-          }
-          @media print {
-            body {
-              -webkit-print-color-adjust: exact !important;
-              print-color-adjust: exact !important;
-            }
-          }
-        `}
-      </style>
+      <DocumentHeader />
       <Outlet />
     </div>
   ),
