@@ -18,7 +18,6 @@ import {
   SelectItem,
 } from "@thetis/ui/select";
 import calculateItemTotal from "../../../utils/calculateItemTotal";
-import { useSelectItems } from "../../../../items/api/selectItems";
 import { useSelectItemsView } from "../../../../items/api/selectItemsView";
 
 interface StockItemRowCellsProps {
