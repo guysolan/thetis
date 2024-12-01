@@ -5,34 +5,28 @@ import ShipmentItems from "./ShipmentItems";
 import { StockValidationAlert } from "../../components/StockValidationAlert";
 import StockItems from "../../components/StockItems";
 import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";
+import OrderDetails from "../sell-form/components/OrderDetails";
+import BuyerSeller from "../../../../../companies/components/BuyerSeller";
 
 const ShipmentFormFields = () => {
-    useShipmentForm();
-    useCompanyDefaults({ fieldName: "from_company_id" });
+  useShipmentForm();
+  useCompanyDefaults({ fieldName: "from_company_id" });
 
+  return (
+    <>
+      <OrderDetails />
+      <BuyerSeller />
+      <CompanyAddressContact direction="from" defaultExpanded={false} />
+      <CompanyAddressContact direction="to" />
+      <CardTitle>Items to Ship</CardTitle>
+      <ShipmentItems />
+      <StockValidationAlert />
 
-    return (
-        <>
-            <CompanyAddressContact
-                direction="from"
-                defaultExpanded={false}
-            />
-            <CompanyAddressContact direction="to" />
-            <CardTitle>Items to Ship</CardTitle>
-            <ShipmentItems />
-            <StockValidationAlert />
+      <StockItems address_name="from_shipping_address_id" name="from_items" />
 
-            <StockItems
-                address_name="from_shipping_address_id"
-                name="from_items"
-            />
-
-            <StockItems
-                name="to_items"
-                address_name="to_shipping_address_id"
-            />
-        </>
-    );
+      <StockItems name="to_items" address_name="to_shipping_address_id" />
+    </>
+  );
 };
 
 export default ShipmentFormFields;

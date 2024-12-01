@@ -11,12 +11,13 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as StockImport } from './routes/stock'
-import { Route as OrdersImport } from './routes/orders'
 import { Route as DocumentsImport } from './routes/documents'
-import { Route as DirectoryImport } from './routes/directory'
-import { Route as BuildImport } from './routes/build'
-import { Route as IndexImport } from './routes/index'
+import { Route as AppImport } from './routes/_app'
+import { Route as AppIndexImport } from './routes/_app/index'
+import { Route as AppStockImport } from './routes/_app/stock'
+import { Route as AppOrdersImport } from './routes/_app/orders'
+import { Route as AppDirectoryImport } from './routes/_app/directory'
+import { Route as AppBuildImport } from './routes/_app/build'
 import { Route as DocumentsOrdersOrderIdStocktakeReportImport } from './routes/documents/orders/$orderId/stocktake-report'
 import { Route as DocumentsOrdersOrderIdShippingLabelImport } from './routes/documents/orders/$orderId/shipping-label'
 import { Route as DocumentsOrdersOrderIdPurchaseOrderImport } from './routes/documents/orders/$orderId/purchase-order'
@@ -25,40 +26,45 @@ import { Route as DocumentsOrdersOrderIdCommercialInvoiceImport } from './routes
 
 // Create/Update Routes
 
-const StockRoute = StockImport.update({
-  id: '/stock',
-  path: '/stock',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const OrdersRoute = OrdersImport.update({
-  id: '/orders',
-  path: '/orders',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const DocumentsRoute = DocumentsImport.update({
   id: '/documents',
   path: '/documents',
   getParentRoute: () => rootRoute,
 } as any)
 
-const DirectoryRoute = DirectoryImport.update({
-  id: '/directory',
-  path: '/directory',
+const AppRoute = AppImport.update({
+  id: '/_app',
   getParentRoute: () => rootRoute,
 } as any)
 
-const BuildRoute = BuildImport.update({
-  id: '/build',
-  path: '/build',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const IndexRoute = IndexImport.update({
+const AppIndexRoute = AppIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppStockRoute = AppStockImport.update({
+  id: '/stock',
+  path: '/stock',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppOrdersRoute = AppOrdersImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppDirectoryRoute = AppDirectoryImport.update({
+  id: '/directory',
+  path: '/directory',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppBuildRoute = AppBuildImport.update({
+  id: '/build',
+  path: '/build',
+  getParentRoute: () => AppRoute,
 } as any)
 
 const DocumentsOrdersOrderIdStocktakeReportRoute =
@@ -100,25 +106,11 @@ const DocumentsOrdersOrderIdCommercialInvoiceRoute =
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/build': {
-      id: '/build'
-      path: '/build'
-      fullPath: '/build'
-      preLoaderRoute: typeof BuildImport
-      parentRoute: typeof rootRoute
-    }
-    '/directory': {
-      id: '/directory'
-      path: '/directory'
-      fullPath: '/directory'
-      preLoaderRoute: typeof DirectoryImport
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppImport
       parentRoute: typeof rootRoute
     }
     '/documents': {
@@ -128,19 +120,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocumentsImport
       parentRoute: typeof rootRoute
     }
-    '/orders': {
-      id: '/orders'
+    '/_app/build': {
+      id: '/_app/build'
+      path: '/build'
+      fullPath: '/build'
+      preLoaderRoute: typeof AppBuildImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/directory': {
+      id: '/_app/directory'
+      path: '/directory'
+      fullPath: '/directory'
+      preLoaderRoute: typeof AppDirectoryImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/orders': {
+      id: '/_app/orders'
       path: '/orders'
       fullPath: '/orders'
-      preLoaderRoute: typeof OrdersImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AppOrdersImport
+      parentRoute: typeof AppImport
     }
-    '/stock': {
-      id: '/stock'
+    '/_app/stock': {
+      id: '/_app/stock'
       path: '/stock'
       fullPath: '/stock'
-      preLoaderRoute: typeof StockImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AppStockImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/': {
+      id: '/_app/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AppIndexImport
+      parentRoute: typeof AppImport
     }
     '/documents/orders/$orderId/commercial-invoice': {
       id: '/documents/orders/$orderId/commercial-invoice'
@@ -182,6 +195,24 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+interface AppRouteChildren {
+  AppBuildRoute: typeof AppBuildRoute
+  AppDirectoryRoute: typeof AppDirectoryRoute
+  AppOrdersRoute: typeof AppOrdersRoute
+  AppStockRoute: typeof AppStockRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppBuildRoute: AppBuildRoute,
+  AppDirectoryRoute: AppDirectoryRoute,
+  AppOrdersRoute: AppOrdersRoute,
+  AppStockRoute: AppStockRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 interface DocumentsRouteChildren {
   DocumentsOrdersOrderIdCommercialInvoiceRoute: typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
   DocumentsOrdersOrderIdInvoiceRoute: typeof DocumentsOrdersOrderIdInvoiceRoute
@@ -207,12 +238,13 @@ const DocumentsRouteWithChildren = DocumentsRoute._addFileChildren(
 )
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/build': typeof BuildRoute
-  '/directory': typeof DirectoryRoute
+  '': typeof AppRouteWithChildren
   '/documents': typeof DocumentsRouteWithChildren
-  '/orders': typeof OrdersRoute
-  '/stock': typeof StockRoute
+  '/build': typeof AppBuildRoute
+  '/directory': typeof AppDirectoryRoute
+  '/orders': typeof AppOrdersRoute
+  '/stock': typeof AppStockRoute
+  '/': typeof AppIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
@@ -221,12 +253,12 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/build': typeof BuildRoute
-  '/directory': typeof DirectoryRoute
   '/documents': typeof DocumentsRouteWithChildren
-  '/orders': typeof OrdersRoute
-  '/stock': typeof StockRoute
+  '/build': typeof AppBuildRoute
+  '/directory': typeof AppDirectoryRoute
+  '/orders': typeof AppOrdersRoute
+  '/stock': typeof AppStockRoute
+  '/': typeof AppIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
@@ -236,12 +268,13 @@ export interface FileRoutesByTo {
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/build': typeof BuildRoute
-  '/directory': typeof DirectoryRoute
+  '/_app': typeof AppRouteWithChildren
   '/documents': typeof DocumentsRouteWithChildren
-  '/orders': typeof OrdersRoute
-  '/stock': typeof StockRoute
+  '/_app/build': typeof AppBuildRoute
+  '/_app/directory': typeof AppDirectoryRoute
+  '/_app/orders': typeof AppOrdersRoute
+  '/_app/stock': typeof AppStockRoute
+  '/_app/': typeof AppIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
@@ -252,12 +285,13 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
+    | ''
+    | '/documents'
     | '/build'
     | '/directory'
-    | '/documents'
     | '/orders'
     | '/stock'
+    | '/'
     | '/documents/orders/$orderId/commercial-invoice'
     | '/documents/orders/$orderId/invoice'
     | '/documents/orders/$orderId/purchase-order'
@@ -265,12 +299,12 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/stocktake-report'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
+    | '/documents'
     | '/build'
     | '/directory'
-    | '/documents'
     | '/orders'
     | '/stock'
+    | '/'
     | '/documents/orders/$orderId/commercial-invoice'
     | '/documents/orders/$orderId/invoice'
     | '/documents/orders/$orderId/purchase-order'
@@ -278,12 +312,13 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/stocktake-report'
   id:
     | '__root__'
-    | '/'
-    | '/build'
-    | '/directory'
+    | '/_app'
     | '/documents'
-    | '/orders'
-    | '/stock'
+    | '/_app/build'
+    | '/_app/directory'
+    | '/_app/orders'
+    | '/_app/stock'
+    | '/_app/'
     | '/documents/orders/$orderId/commercial-invoice'
     | '/documents/orders/$orderId/invoice'
     | '/documents/orders/$orderId/purchase-order'
@@ -293,21 +328,13 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  BuildRoute: typeof BuildRoute
-  DirectoryRoute: typeof DirectoryRoute
+  AppRoute: typeof AppRouteWithChildren
   DocumentsRoute: typeof DocumentsRouteWithChildren
-  OrdersRoute: typeof OrdersRoute
-  StockRoute: typeof StockRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  BuildRoute: BuildRoute,
-  DirectoryRoute: DirectoryRoute,
+  AppRoute: AppRouteWithChildren,
   DocumentsRoute: DocumentsRouteWithChildren,
-  OrdersRoute: OrdersRoute,
-  StockRoute: StockRoute,
 }
 
 export const routeTree = rootRoute
@@ -320,22 +347,19 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/build",
-        "/directory",
-        "/documents",
-        "/orders",
-        "/stock"
+        "/_app",
+        "/documents"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/build": {
-      "filePath": "build.tsx"
-    },
-    "/directory": {
-      "filePath": "directory.tsx"
+    "/_app": {
+      "filePath": "_app.tsx",
+      "children": [
+        "/_app/build",
+        "/_app/directory",
+        "/_app/orders",
+        "/_app/stock",
+        "/_app/"
+      ]
     },
     "/documents": {
       "filePath": "documents.tsx",
@@ -347,11 +371,25 @@ export const routeTree = rootRoute
         "/documents/orders/$orderId/stocktake-report"
       ]
     },
-    "/orders": {
-      "filePath": "orders.tsx"
+    "/_app/build": {
+      "filePath": "_app/build.tsx",
+      "parent": "/_app"
     },
-    "/stock": {
-      "filePath": "stock.tsx"
+    "/_app/directory": {
+      "filePath": "_app/directory.tsx",
+      "parent": "/_app"
+    },
+    "/_app/orders": {
+      "filePath": "_app/orders.tsx",
+      "parent": "/_app"
+    },
+    "/_app/stock": {
+      "filePath": "_app/stock.tsx",
+      "parent": "/_app"
+    },
+    "/_app/": {
+      "filePath": "_app/index.tsx",
+      "parent": "/_app"
     },
     "/documents/orders/$orderId/commercial-invoice": {
       "filePath": "documents/orders/$orderId/commercial-invoice.tsx",

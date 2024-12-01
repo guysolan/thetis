@@ -1,8 +1,9 @@
 import { useFormContext, useWatch, useController } from "react-hook-form";
-import NumberFlow, { NumberFlowProps } from "@number-flow/react";
+import NumberFlow, { Format, NumberFlowProps } from "@number-flow/react";
 import { TableCell } from "@thetis/ui/table";
 import { useState } from "react";
 import Input from "./NumberInput";
+import { cn } from "@thetis/ui/cn";
 
 interface NumberCellProps {
   name: string;
@@ -10,7 +11,7 @@ interface NumberCellProps {
   onChange?:
     | ((value: number) => void)
     | React.FormEventHandler<HTMLInputElement>;
-  format?: Intl.NumberFormatOptions;
+  format: Format;
   suffix?: string;
   editable?: boolean;
 }
@@ -26,27 +27,33 @@ const NumberFlowCell = (props: NumberCellProps) => {
     props.onChange?.(value);
   };
 
+  const focus = () => {
+    if (props.editable) {
+      setIsFocused(true);
+    }
+  };
+
+  const blur = (e: React.FocusEvent<HTMLDivElement>) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setIsFocused(false);
+    }
+  };
+
   return (
     <TableCell
-      onClick={() => props.editable && !isFocused && setIsFocused(true)}
-      onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget)) {
-          setIsFocused(false);
-        }
-      }}
-      style={{
-        cursor: isFocused ? "default" : props.editable ? "pointer" : "default",
-      }}
+      onClick={focus}
+      onBlur={blur}
+      className={cn("text-center", isFocused && "cursor-default")}
     >
-      {isFocused && props.editable ? (
-        <Input
-          step={props.step}
-          onChange={handleValueChange}
-          value={numericValue}
-        />
-      ) : (
-        <NumberFlow {...props} value={numericValue} />
-      )}
+      <Input
+        focus={focus}
+        blur={blur}
+        format={props.format}
+        step={props.step}
+        onChange={handleValueChange}
+        value={numericValue}
+        editing={props.editable && isFocused}
+      />
     </TableCell>
   );
 };

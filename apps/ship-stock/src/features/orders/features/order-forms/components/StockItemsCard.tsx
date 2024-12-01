@@ -5,6 +5,16 @@ import StockItemsFormFields from "./StockItemsFormFields";
 import StockItemsSummary from "./StockItemsSummary";
 import StockItemActions from "./StockItemActions";
 import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@thetis/ui/card";
+import { Button } from "@thetis/ui/button";
+import { Pencil } from "lucide-react";
+import { useState } from "react";
+import {
   AddressName,
   ItemType,
   StockItemFormData,
@@ -18,22 +28,19 @@ interface StockItemProps {
   address_name?: AddressName;
   title?: string;
   allowedTypes?: ItemType[];
+  defaultIsExpanded?: boolean;
   readOnly?: boolean;
-  showPrice?: boolean;
-  showQuantity?: boolean;
-  onUpdate?: () => void;
 }
 
 const StockItems = ({
   name,
   address_name = "from_shipping_address_id",
   title,
-  allowedTypes = ["part", "product", "service", "package"],
-  showPrice = false,
-  showQuantity = true,
+  allowedTypes = [],
+  defaultIsExpanded = false,
   readOnly = false,
-  onUpdate,
 }: StockItemProps) => {
+  const [isExpanded, setIsExpanded] = useState(defaultIsExpanded);
   const { data: items } = useSelectItemsView();
   const form = useFormContext();
   const { data: addresses } = useSelectAddresses();
@@ -60,44 +67,55 @@ const StockItems = ({
     } as StockItemFormData);
   };
 
+  const showEditButton = !readOnly;
+
   return (
-    <div>
-      <h2 className="mb-2 font-medium text-base">
-        {title || `Stock Changes ${address?.name ? `(${address.name})` : ""}`}
-      </h2>
-
-      {!readOnly ? (
-        <div className="space-y-4">
-          <StockItemsFormFields
-            onUpdate={onUpdate}
-            showPrice={showPrice}
-            showQuantity={showQuantity}
-            name={name}
-            fields={fields}
-            items={items || []}
-            form={form}
-            getItemQuantities={getItemQuantities}
-            onCopy={copyRow}
-            onRemove={remove}
-            allowedTypes={allowedTypes}
-          />
-          <StockItemActions
-            allowedTypes={allowedTypes}
-            onAppend={handleAppend}
-          />
-        </div>
-      ) : (
-        <StockItemsSummary name={name} addressName={address_name} />
-      )}
-
-      <div className="mt-4">
+    <Card>
+      <CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
+        <CardTitle className="font-medium text-base">
+          {title || `Stock Changes ${address?.name ? `(${address.name})` : ""}`}
+        </CardTitle>
+        {showEditButton && (
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            <Pencil className="w-4 h-4" />
+          </Button>
+        )}
+      </CardHeader>
+      <CardContent>
+        {isExpanded && !readOnly ? (
+          <div className="space-y-4">
+            <StockItemsFormFields
+              name={name}
+              fields={fields}
+              items={items || []}
+              form={form}
+              getItemQuantities={getItemQuantities}
+              onCopy={copyRow}
+              onRemove={remove}
+              allowedTypes={allowedTypes}
+            />
+            <StockItemActions
+              allowedTypes={allowedTypes}
+              onAppend={handleAppend}
+            />
+          </div>
+        ) : (
+          <StockItemsSummary name={name} addressName={address_name} />
+        )}
+      </CardContent>
+      <CardFooter>
         <FormErrors
           title="Stock Items Errors"
           fieldPrefix={name}
           fields={[name, ...fields.map((field) => field.id)]}
         />
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
 };
 

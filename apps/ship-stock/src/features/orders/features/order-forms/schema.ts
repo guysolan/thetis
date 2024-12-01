@@ -28,22 +28,25 @@ const baseItemSchema = z.object({
 });
 
 const pricedItemSchema = baseItemSchema.extend({
-    item_name: z.string().optional(),
+    item_id:  z.coerce.number(),
     item_price: z.coerce.number().optional(),
     item_tax: z.coerce.number().optional(),
-    quantity_after: z.coerce.number().optional(),
+    item_total: z.coerce.number().optional(),
+    quantity_change: z.coerce.number().optional(),
 });
+
+export type PricedItem = z.infer<typeof pricedItemSchema>;
 
 // Base order item schema
 const baseOrderItemSchema = baseItemSchema.extend({
-    quantity_change: z.coerce.number().min(0, "Quantity must be at least 1"),
-    item_price: z.coerce.number().optional(),
-    item_tax: z.coerce.number().optional(),
-    item_type: z.enum(itemTypes.filter(type => type !== "package") as [string, ...string[]]),
+    item_type: z.enum(["product", "part"]),
+    quantity_before: z.coerce.number().optional(),
+    quantity_after: z.coerce.number().optional(),
 });
 
 export const orderItemSchema = z.discriminatedUnion("item_type", [
-    baseOrderItemSchema,
+    baseOrderItemSchema.extend({ item_type: z.literal("product") }),
+    baseOrderItemSchema.extend({ item_type: z.literal("part") }),
     packageOrderItemSchema
 ]);
 
@@ -100,8 +103,9 @@ export const shipmentFormSchema = baseFormSchema.extend({
 
 export const buyFormSchema = baseFormSchema.extend({
     order_type: z.literal("purchase"),
-    produced_items: z.array(pricedItemSchema).min(1, "At least one item is required"),
+    produced_items: z.array(pricedItemSchema),
     consumed_items: z.array(pricedItemSchema),
+    order_items: z.array(pricedItemSchema),
     item_type: z.enum(["product", "part"]),
 
 });

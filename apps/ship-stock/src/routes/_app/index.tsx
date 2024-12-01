@@ -1,15 +1,15 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Link } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@thetis/ui/card'
-import { jobs } from '../features/navigation/content'
+} from "@thetis/ui/card";
+import { jobs } from "../../features/navigation/content";
 
-import React from 'react'
+import React from "react";
 
 const ShipStockHome = () => {
   return (
@@ -32,7 +32,7 @@ const ShipStockHome = () => {
               <CardContent>
                 <ul className="space-y-2 pl-6 list-disc">
                   {job.content.items.map((item, index) => (
-                    <li key={index}>{item}</li>
+                    <li key={`${index}-${item}`}>{item}</li>
                   ))}
                 </ul>
               </CardContent>
@@ -41,15 +41,15 @@ const ShipStockHome = () => {
         ))}
       </div>
     </>
-  )
-}
+  );
+};
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/_app/")({
   component: ShipStockHome,
   loader: async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500))
+    await new Promise((resolve) => setTimeout(resolve, 300));
     return {
-      message: 'Hello, world!',
-    }
+      message: "Hello, world!",
+    };
   },
-})
+});

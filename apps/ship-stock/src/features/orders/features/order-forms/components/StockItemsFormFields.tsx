@@ -11,7 +11,7 @@ import { Button } from "@thetis/ui/button";
 import { Copy, Trash, Check, Lock, Unlock } from "lucide-react";
 import Select from "@/components/Select";
 import Input from "@/components/Input";
-import NumberCell from "./NumberCell";
+import NumberCell from "./NumberFlowCell";
 import ItemTypeSelect from "@/components/ItemTypeSelect";
 import { ItemType, StockItemFormData, StockItemQuantities } from "../types";
 import { useEffect, useState } from "react";
@@ -22,40 +22,52 @@ interface StockItemsFormFieldsProps {
   name: string;
   fields: any[];
   items: Array<{ item_id: string; item_name: string; item_type: string }>;
-  form: UseFormReturn<any>;
   getItemQuantities: (itemId: string) => StockItemQuantities;
   onCopy: (index: number) => void;
   onRemove: (index: number) => void;
   onToggleLock: (index: number) => void;
   isLocked?: (index: number) => boolean;
   allowedTypes?: ItemType[];
+  showPrice?: boolean;
+  showQuantity?: boolean;
+  onUpdate?: () => void;
 }
 
 const StockItemsFormFields = ({
   name,
   fields,
   items,
-  form,
   getItemQuantities,
   onCopy,
   onRemove,
+  showPrice = false,
+  onUpdate,
   onToggleLock,
   isLocked = () => false,
   allowedTypes = [],
+  showQuantity = true,
 }: StockItemsFormFieldsProps) => {
   return (
-    <Table>
+    <Table className="bg-white">
       <TableHeader>
         <TableRow>
           {allowedTypes.length > 1 && <TableHead>Type</TableHead>}
           <TableHead>Item</TableHead>
-          <TableHead>Quantity</TableHead>
-          <TableHead>Price</TableHead>
-          <TableHead>Tax</TableHead>
-          <TableHead>Total</TableHead>
-          <TableHead>Before</TableHead>
-          <TableHead>After</TableHead>
-          <TableHead>
+          <TableHead className="w-24 text-center">Quantity</TableHead>
+          {showPrice && (
+            <TableHead className="w-24 text-center">Price</TableHead>
+          )}
+          {showPrice && <TableHead className="w-24 text-center">Tax</TableHead>}
+          {showPrice && (
+            <TableHead className="w-24 text-center">Total</TableHead>
+          )}
+          {showQuantity && (
+            <TableHead className="w-16 text-center">Before</TableHead>
+          )}
+          {showQuantity && (
+            <TableHead className="w-16 text-center">After</TableHead>
+          )}
+          <TableHead className="w-32 text-center">
             <span className="sr-only">Actions</span>
           </TableHead>
         </TableRow>
@@ -63,8 +75,11 @@ const StockItemsFormFields = ({
       <TableBody>
         {fields.map((field, index) => (
           <StockItemRowCells
+            showQuantity={showQuantity}
+            showPrice={showPrice}
             key={field.id}
             index={index}
+            onUpdate={onUpdate}
             name={name}
             items={items}
             getItemQuantities={getItemQuantities}

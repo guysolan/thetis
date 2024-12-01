@@ -1,12 +1,12 @@
-import { createFileRoute } from '@tanstack/react-router'
-import Sheet from '@/components/Sheet.tsx'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@thetis/ui/tabs'
-import { Button } from '@thetis/ui/button'
-import { ItemForm } from '@/features/items/components/ItemForm.tsx'
-import LayoutPopover from '../components/LayoutPopover'
-import { itemTypes } from '../features/items/types'
-import Items from '../features/items/components/Item'
-import TabsHeader from '@/components/TabsHeader'
+import { createFileRoute } from "@tanstack/react-router";
+import Sheet from "@/components/Sheet.tsx";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@thetis/ui/tabs";
+import { Button } from "@thetis/ui/button";
+import { ItemForm } from "@/features/items/components/ItemForm.tsx";
+import LayoutPopover from "../../components/LayoutPopover";
+import { itemTypes } from "../../features/items/types";
+import Items from "../../features/items/components/Item";
+import TabsHeader from "@/components/TabsHeader";
 
 const ItemsPage = () => {
   const tabsList = (
@@ -16,15 +16,15 @@ const ItemsPage = () => {
       <TabsTrigger value="service">Services</TabsTrigger>
       <TabsTrigger value="package">Packages</TabsTrigger>
     </>
-  )
+  );
 
   const actionButtons = (
     <Sheet trigger={<Button variant="default">New Item</Button>} title="Edit">
       <ItemForm item={null} />
     </Sheet>
-  )
+  );
 
-  const optionButtons = <LayoutPopover />
+  const optionButtons = <LayoutPopover />;
 
   return (
     <>
@@ -41,9 +41,9 @@ const ItemsPage = () => {
         ))}
       </Tabs>
     </>
-  )
-}
+  );
+};
 
-export const Route = createFileRoute('/build')({
+export const Route = createFileRoute("/_app/build")({
   component: ItemsPage,
-})
+});

@@ -1,7 +1,6 @@
 import {
   createRootRouteWithContext,
   Link,
-  Outlet,
   useRouterState,
 } from "@tanstack/react-router";
 import { Toaster } from "@thetis/ui/sonner";
@@ -11,6 +10,8 @@ import type { QueryClient } from "@tanstack/react-query";
 import { Button } from "@thetis/ui/button";
 import { Loader2 } from "lucide-react";
 import { cn } from "../lib/utils";
+import Authentication from "../features/auth/Authentication";
+import Navigation from "../features/navigation/Navigation";
 
 function RouterSpinner() {
   const isLoading = useRouterState({ select: (s) => s.status === "pending" });
@@ -43,12 +44,9 @@ export const Route = createRootRouteWithContext<{
 
 function RootComponent() {
   return (
-    <>
-      <Outlet />
-      <RouterSpinner />
-      <Toaster />
-      {/* <ReactQueryDevtools buttonPosition="top-right" /> */}
-      {/* <TanStackRouterDevtools position="bottom-right" /> */}
-    </>
+    <main className="w-full min-h-screen font-raleway text-left text-zinc-800">
+      <Navigation />
+      <Authentication />
+    </main>
   );
 }
