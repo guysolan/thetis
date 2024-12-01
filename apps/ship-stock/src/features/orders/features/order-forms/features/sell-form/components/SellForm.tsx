@@ -35,6 +35,7 @@ const SellForm = () => {
         to_billing_address_id: "",
         to_shipping_address_id: "",
         display_items: [],
+        carriage: 0,
         currency: defaultCurrency,
     };
 

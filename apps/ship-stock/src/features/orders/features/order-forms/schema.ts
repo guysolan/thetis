@@ -102,6 +102,8 @@ export const buyFormSchema = baseFormSchema.extend({
     order_type: z.literal("purchase"),
     produced_items: z.array(pricedItemSchema).min(1, "At least one item is required"),
     consumed_items: z.array(pricedItemSchema),
+    item_type: z.enum(["product", "part"]),
+
 });
 
 export const stockTakeFormSchema = z.object({

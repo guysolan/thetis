@@ -14,6 +14,7 @@ import { useFormContext } from 'react-hook-form';
 import PriceItemsSummary from '../../../components/PriceItemsSummary';
 import StockItemsSummary from '../../../components/StockItemsSummary';
 import OrderDetails from './OrderDetails';
+import BuyerSeller from '../../../../../../companies/components/BuyerSeller';
 
 const SellFormFields = () => {
     const { watch, setValue } = useFormContext();
@@ -24,17 +25,7 @@ const SellFormFields = () => {
     return (
         <>
             <OrderDetails />
-            <div className="gap-4 grid grid-cols-1 lg:grid-cols-2">
-                <CompanyAddressContact
-                    title="Seller"
-                    direction="from"
-                />
-
-                <CompanyAddressContact
-                    title="Buyer"
-                    direction="to"
-                />
-            </div>
+            <BuyerSeller />
 
             <Select
                 label="Package Items?"

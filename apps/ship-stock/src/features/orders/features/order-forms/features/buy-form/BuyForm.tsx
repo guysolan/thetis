@@ -14,6 +14,7 @@ const BuyForm = () => {
             item_id: "",
             quantity_change: 1,
         }],
+        item_type: "product",
         order_date: dayjs().toDate(),
         consumed_items: [],
         produced_items: [],
