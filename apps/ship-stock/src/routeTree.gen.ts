@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as LoginImport } from './routes/login'
 import { Route as DocumentsImport } from './routes/documents'
 import { Route as AppImport } from './routes/_app'
 import { Route as AppIndexImport } from './routes/_app/index'
@@ -25,6 +26,12 @@ import { Route as DocumentsOrdersOrderIdInvoiceImport } from './routes/documents
 import { Route as DocumentsOrdersOrderIdCommercialInvoiceImport } from './routes/documents/orders/$orderId/commercial-invoice'
 
 // Create/Update Routes
+
+const LoginRoute = LoginImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const DocumentsRoute = DocumentsImport.update({
   id: '/documents',
@@ -118,6 +125,13 @@ declare module '@tanstack/react-router' {
       path: '/documents'
       fullPath: '/documents'
       preLoaderRoute: typeof DocumentsImport
+      parentRoute: typeof rootRoute
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
     '/_app/build': {
@@ -240,6 +254,7 @@ const DocumentsRouteWithChildren = DocumentsRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '': typeof AppRouteWithChildren
   '/documents': typeof DocumentsRouteWithChildren
+  '/login': typeof LoginRoute
   '/build': typeof AppBuildRoute
   '/directory': typeof AppDirectoryRoute
   '/orders': typeof AppOrdersRoute
@@ -254,6 +269,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/documents': typeof DocumentsRouteWithChildren
+  '/login': typeof LoginRoute
   '/build': typeof AppBuildRoute
   '/directory': typeof AppDirectoryRoute
   '/orders': typeof AppOrdersRoute
@@ -270,6 +286,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_app': typeof AppRouteWithChildren
   '/documents': typeof DocumentsRouteWithChildren
+  '/login': typeof LoginRoute
   '/_app/build': typeof AppBuildRoute
   '/_app/directory': typeof AppDirectoryRoute
   '/_app/orders': typeof AppOrdersRoute
@@ -287,6 +304,7 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/documents'
+    | '/login'
     | '/build'
     | '/directory'
     | '/orders'
@@ -300,6 +318,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/documents'
+    | '/login'
     | '/build'
     | '/directory'
     | '/orders'
@@ -314,6 +333,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_app'
     | '/documents'
+    | '/login'
     | '/_app/build'
     | '/_app/directory'
     | '/_app/orders'
@@ -330,11 +350,13 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   DocumentsRoute: typeof DocumentsRouteWithChildren
+  LoginRoute: typeof LoginRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   DocumentsRoute: DocumentsRouteWithChildren,
+  LoginRoute: LoginRoute,
 }
 
 export const routeTree = rootRoute
@@ -348,7 +370,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/_app",
-        "/documents"
+        "/documents",
+        "/login"
       ]
     },
     "/_app": {
@@ -370,6 +393,9 @@ export const routeTree = rootRoute
         "/documents/orders/$orderId/shipping-label",
         "/documents/orders/$orderId/stocktake-report"
       ]
+    },
+    "/login": {
+      "filePath": "login.tsx"
     },
     "/_app/build": {
       "filePath": "_app/build.tsx",

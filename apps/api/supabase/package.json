@@ -13,7 +13,7 @@
     "login": "supabase login",
     "migrate": "supabase migration up",
     "seed": "supabase db seed generate && supabase db seed run",
-    "reset": "supabase db reset",
+    "reset": "supabase db reset --local",
     "generate": "supabase gen types --lang=typescript --local --schema public > ../../packages/supabase/src/types/db.ts"
   },
   "dependencies": {

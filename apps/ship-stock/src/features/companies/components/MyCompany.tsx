@@ -3,48 +3,44 @@ import { useUserCompany } from "../hooks/useUserCompany";
 import { useUpdateUserCompany } from "../hooks/useChangeUserCompany";
 import { useSelectCompanies } from "../api/selectCompanies";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@thetis/ui/select";
 
 const MyCompany = () => {
-    const { data: publicUser, isLoading: isLoadingUser } = usePublicUser();
-    const { data: companyUser } = useUserCompany(publicUser?.id);
-    const { mutate: updateCompany } = useUpdateUserCompany();
-    const { data: companies = [] } = useSelectCompanies();
+  const { data: publicUser, isLoading: isLoadingUser } = usePublicUser();
+  const { data: companyUser } = useUserCompany(publicUser?.id);
+  const { mutate: updateCompany } = useUpdateUserCompany();
+  const { data: companies = [] } = useSelectCompanies();
 
-    const handleCompanyChange = (value: string) => {
-        if (!publicUser) return;
+  const handleCompanyChange = (value: string) => {
+    const newCompanyId = Number.parseInt(value);
+    const userId = publicUser?.id;
+    updateCompany({ userId: userId, companyId: newCompanyId });
+  };
 
-        const newCompanyId = parseInt(value);
-        updateCompany({ userId: publicUser.id, companyId: newCompanyId });
-    };
+  if (isLoadingUser) return null;
 
-    if (isLoadingUser) return null;
-
-    return (
-        <Select
-            value={companyUser?.company_id?.toString()}
-            onValueChange={handleCompanyChange}
-        >
-            <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="Select company" />
-            </SelectTrigger>
-            <SelectContent>
-                {companies.map((company) => (
-                    <SelectItem
-                        key={company.id}
-                        value={company.id.toString()}
-                    >
-                        {company.name}
-                    </SelectItem>
-                ))}
-            </SelectContent>
-        </Select>
-    );
+  return (
+    <Select
+      value={companyUser?.company_id?.toString()}
+      onValueChange={handleCompanyChange}
+    >
+      <SelectTrigger className="w-[200px]">
+        <SelectValue placeholder="Select company" />
+      </SelectTrigger>
+      <SelectContent>
+        {companies.map((company) => (
+          <SelectItem key={company.id} value={company.id.toString()}>
+            {company.name}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
 };
 
 export default MyCompany;

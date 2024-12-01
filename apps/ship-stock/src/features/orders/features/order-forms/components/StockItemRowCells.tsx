@@ -134,10 +134,7 @@ const StockItemRowCells = ({
     form.setValue(`${name}.${index}.item_total`, value);
     if (quantityChange && tax !== undefined) {
       const calculatedPrice = value / (quantityChange * (1 + tax));
-      form.setValue(
-        `${name}.${index}.item_price`,
-        Number(calculatedPrice.toFixed(4)),
-      );
+      form.setValue(`${name}.${index}.item_price`, Number(calculatedPrice));
     }
   };
 
@@ -181,7 +178,7 @@ const StockItemRowCells = ({
       {showPrice && (
         <NumberCell
           name={`${name}.${index}.item_price`}
-          step={0.01}
+          step={0.000001}
           onChange={handlePriceChange}
           format={{ style: "currency", currency: currency }}
           editable={editable}

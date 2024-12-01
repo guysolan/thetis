@@ -10,7 +10,7 @@ import type { QueryClient } from "@tanstack/react-query";
 import { Button } from "@thetis/ui/button";
 import { Loader2 } from "lucide-react";
 import { cn } from "../lib/utils";
-import Authentication from "../features/auth/Authentication";
+import AuthOutlet from "../features/auth/AuthOutlet";
 import Navigation from "../features/navigation/Navigation";
 
 function RouterSpinner() {
@@ -46,7 +46,7 @@ function RootComponent() {
   return (
     <main className="w-full min-h-screen font-raleway text-left text-zinc-800">
       <Navigation />
-      <Authentication />
+      <AuthOutlet />
     </main>
   );
 }

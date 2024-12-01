@@ -1,6 +1,0 @@
-{
-    "imports": {
-        "google": "npm:googleapis",
-        "dayjs": "npm:dayjs"
-    }
-}

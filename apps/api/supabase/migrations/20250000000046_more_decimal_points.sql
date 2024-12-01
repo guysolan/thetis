@@ -1,21 +1,18 @@
--- Create currency enum type
-CREATE TYPE currency_type AS ENUM(
-    'AUD', -- Australian Dollar
-    'CAD', -- Canadian Dollar
-    'EUR', -- Euro
-    'GBP', -- British Pound
-    'JPY', -- Japanese Yen
-    'NZD', -- New Zealand Dollar
-    'USD' -- US Dollar
-);
-
--- Add contact_id and currency columns to orders table
-ALTER TABLE orders
-    ADD COLUMN from_contact_id bigint REFERENCES contacts(id) NULL,
-    ADD COLUMN to_contact_id bigint REFERENCES contacts(id) NULL,
-    ADD COLUMN currency currency_type NOT NULL DEFAULT 'GBP'::currency_type;
-
 DROP VIEW IF EXISTS orders_view;
+
+DROP VIEW IF EXISTS address_inventory_value;
+
+DROP VIEW IF EXISTS items_by_address;
+
+DROP VIEW IF EXISTS items_view;
+
+DROP VIEW IF EXISTS stockpiles;
+
+ALTER TABLE order_item_changes
+    ALTER COLUMN price TYPE DECIMAL;
+
+ALTER TABLE items
+    ALTER COLUMN price TYPE DECIMAL;
 
 -- Update orders_view to include contact information
 CREATE OR REPLACE VIEW orders_view AS
@@ -65,14 +62,15 @@ SELECT
     END AS to_shipping_address,
     SUM(
         CASE WHEN o.order_type = 'sale' THEN
-            -1 * oic.price * ic.quantity_change *(1 + COALESCE(oic.tax, 0))
+            (-1 * oic.price * ic.quantity_change *(1 + COALESCE(oic.tax, 0)))
         ELSE
-            oic.price * ic.quantity_change *(1 + COALESCE(oic.tax, 0))
-        END) AS total_value,
-    jsonb_agg(jsonb_build_object('item_id', i.id, 'item_name', i.name, 'item_type', i.type, 'item_hs_code', i.hs_code, 'item_sku', i.sku, 'item_country_of_origin', i.country_of_origin, 'height', COALESCE(i.height, 0) * ABS(ic.quantity_change), 'width', COALESCE(i.width, 0) * ABS(ic.quantity_change), 'depth', COALESCE(i.depth, 0) * ABS(ic.quantity_change), 'weight', COALESCE(i.weight, 0) * ABS(ic.quantity_change), 'address', to_jsonb(a) - 'created_at' - 'updated_at', 'quantity', ic.quantity_change, 'price', oic.price, 'tax', oic.tax, 'total', CASE WHEN o.order_type = 'sale' THEN
-                -1 * ic.quantity_change * oic.price *(1 + COALESCE(oic.tax, 0))
+            (oic.price * ic.quantity_change *(1 + COALESCE(oic.tax, 0)))
+        END) + COALESCE(o.carriage, 0) AS total_value,
+    SUM(COALESCE(i.weight, 0) * ABS(ic.quantity_change)) AS total_weight,
+    jsonb_agg(jsonb_build_object('item_id', i.id, 'item_name', i.name, 'item_type', i.type, 'item_hs_code', i.hs_code, 'item_sku', i.sku, 'item_country_of_origin', i.country_of_origin, 'height', COALESCE(i.height, 0), 'width', COALESCE(i.width, 0), 'depth', COALESCE(i.depth, 0), 'weight', COALESCE(i.weight, 0), 'address', to_jsonb(a) - 'created_at' - 'updated_at', 'quantity', ic.quantity_change, 'price', oic.price, 'tax', oic.tax, 'total', CASE WHEN o.order_type = 'sale' THEN
+                (-1 * ic.quantity_change * oic.price *(1 + COALESCE(oic.tax, 0)))
             ELSE
-                ic.quantity_change * oic.price *(1 + COALESCE(oic.tax, 0))
+                (ic.quantity_change * oic.price *(1 + COALESCE(oic.tax, 0)))
             END)) AS items
 FROM
     orders o
@@ -183,4 +181,115 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
+
+-- Recreate views with updated table names
+CREATE OR REPLACE VIEW items_by_address AS
+SELECT
+    a.id AS address_id,
+    a.name AS address_name,
+    i.id AS item_id,
+    i.name AS item_name,
+    i.price AS item_price,
+    i.type AS item_type,
+    COALESCE(SUM(ic.quantity_change), 0) AS item_quantity,
+    COALESCE(SUM(ic.quantity_change), 0) * i.price AS item_value
+FROM
+    addresses a
+    CROSS JOIN items i
+    LEFT JOIN item_changes ic ON i.id = ic.item_id
+        AND a.id = ic.address_id
+WHERE
+    a.holds_stock = TRUE
+GROUP BY
+    a.id,
+    a.name,
+    i.id,
+    i.name,
+    i.price,
+    i.type
+HAVING
+    COALESCE(SUM(ic.quantity_change), 0) > 0;
+
+CREATE OR REPLACE VIEW address_inventory_value AS
+SELECT
+    a.id AS address_id,
+    a.name AS address_name,
+    COALESCE(SUM(ai.item_value), 0) AS total_inventory_value
+FROM
+    addresses a
+    LEFT JOIN items_by_address ai ON a.id = ai.address_id
+WHERE
+    a.holds_stock = TRUE
+GROUP BY
+    a.id,
+    a.name;
+
+CREATE VIEW public.items_view AS
+SELECT
+    i.id AS item_id,
+    i.name AS item_name,
+    i.price AS item_price,
+    i.type AS item_type,
+    i.height,
+    i.width,
+    i.depth,
+    i.weight,
+    i.hs_code,
+    i.sku,
+    i.country_of_origin,
+    coalesce(jsonb_agg(jsonb_build_object('component_id', ic.component_id, 'component_name', ci.name, 'component_type', ci.type, 'component_quantity', ic.component_quantity, 'component_price', ci.price)) FILTER (WHERE ic.component_id IS NOT NULL), '[]'::jsonb) AS components
+FROM
+    items i
+    LEFT JOIN item_components ic ON i.id = ic.item_id
+    LEFT JOIN items ci ON ic.component_id = ci.id
+GROUP BY
+    i.id,
+    i.name,
+    i.price,
+    i.type,
+    i.height,
+    i.width,
+    i.depth,
+    i.weight,
+    i.hs_code,
+    i.sku,
+    i.country_of_origin;
+
+CREATE VIEW public.stockpiles AS
+SELECT
+    a.id AS stockpile_id,
+    a.name AS stockpile_name,
+    a.created_at AS stockpile_created_at,
+    concat_ws(', '::text, nullif(a.line_1, ''::text), nullif(a.line_2, ''::text), nullif(a.city, ''::text), nullif(a.region, ''::text), nullif(a.code, ''::text), nullif(a.country, ''::text)) AS stockpile_address,
+    c.name AS company_name,
+    coalesce(jsonb_agg(jsonb_build_object('item_id', i.id, 'item_name', i.name, 'item_price', i.price, 'item_type', i.type, 'item_quantity', ic.quantity_change, 'item_value', ic.quantity_change * i.price)) FILTER (WHERE i.id IS NOT NULL
+            AND ic.quantity_change <> 0::numeric
+            AND (i.type <> ALL (ARRAY['package'::item_type, 'service'::item_type]))), '[]'::jsonb) AS items
+FROM
+    addresses a
+    LEFT JOIN companies c ON a.company_id = c.id
+    LEFT JOIN (
+        SELECT
+            item_changes.address_id,
+            item_changes.item_id,
+            sum(item_changes.quantity_change) AS quantity_change
+        FROM
+            item_changes
+        GROUP BY
+            item_changes.address_id,
+            item_changes.item_id) ic ON a.id = ic.address_id
+    LEFT JOIN items i ON ic.item_id = i.id
+WHERE
+    a.holds_stock = TRUE
+GROUP BY
+    a.id,
+    a.name,
+    a.created_at,
+    a.line_1,
+    a.line_2,
+    a.city,
+    a.region,
+    a.code,
+    a.country,
+    c.name;
 
