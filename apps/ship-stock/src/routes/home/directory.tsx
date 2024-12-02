@@ -81,6 +81,6 @@ const DirectoryPage = () => {
   )
 }
 
-export const Route = createFileRoute('/app/directory')({
+export const Route = createFileRoute('/home/directory')({
   component: DirectoryPage,
 })

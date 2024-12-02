@@ -44,6 +44,6 @@ const ItemsPage = () => {
   )
 }
 
-export const Route = createFileRoute('/app/build')({
+export const Route = createFileRoute('/home/build')({
   component: ItemsPage,
 })

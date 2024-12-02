@@ -52,6 +52,6 @@ const OrdersPage = () => {
   )
 }
 
-export const Route = createFileRoute('/app/orders')({
+export const Route = createFileRoute('/home/orders')({
   component: OrdersPage,
 })

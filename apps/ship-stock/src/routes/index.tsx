@@ -20,7 +20,7 @@ const ShipStockHome = () => {
             {content.banner.description}
           </p>
           <Button size="lg" asChild>
-            <Link to="/app">Get Organized</Link>
+            <Link to="/home">Try it Out</Link>
           </Button>
         </div>
 

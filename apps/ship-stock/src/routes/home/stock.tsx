@@ -43,7 +43,7 @@ const ItemsPage = () => {
   )
 }
 
-export const Route = createFileRoute('/app/stock')({
+export const Route = createFileRoute('/home/stock')({
   component: ItemsPage,
   loader: async ({ context }) => {
     await context.queryClient.ensureQueryData(selectStockpilesQueryOptions())

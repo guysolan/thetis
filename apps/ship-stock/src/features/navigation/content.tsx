@@ -8,7 +8,7 @@ import {
 export const features = {
   orders: {
     name: "Orders",
-    href: "/app/orders",
+    href: "/home/orders",
     description: "Buy, sell and ship orders.",
     icon: <ShoppingBag />,
     external: false,
@@ -22,7 +22,7 @@ export const features = {
   },
   build: {
     name: "Build",
-    href: "/app/build",
+    href: "/home/build",
     description: "Keep track of the items we buy and sell.",
     icon: <ToyBrick />,
     external: false,
@@ -36,7 +36,7 @@ export const features = {
   },
   stock: {
     name: "Stock",
-    href: "/app/stock",
+    href: "/home/stock",
     description: "Try not to lose track of things.",
     icon: <FactoryIcon />,
     external: false,
@@ -50,7 +50,7 @@ export const features = {
   },
   directory: {
     name: "Directory",
-    href: "/app/directory",
+    href: "/home/directory",
     description: "Who's who.",
     icon: <BriefcaseBusiness />,
     external: false,

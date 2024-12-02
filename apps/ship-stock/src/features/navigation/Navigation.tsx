@@ -17,7 +17,6 @@ import { Logout } from "../auth/Logout";
 const Navigation = () => {
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
-  const currentSection = pathSegments[0] || "home";
 
   return (
     <nav className="flex flex-col bg-background">
@@ -25,7 +24,7 @@ const Navigation = () => {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/">
+              <BreadcrumbLink href="/home">
                 <Home size={20} />
               </BreadcrumbLink>
             </BreadcrumbItem>
@@ -60,27 +59,25 @@ const Navigation = () => {
         </div>
       </div>
 
-      {features[currentSection] && (
-        <Tabs defaultValue={pathSegments[1] || ""} className="w-full">
-          <TabsList className="justify-start bg-transparent p-0 border-b rounded-none w-full h-12">
-            <div className="flex items-center gap-x-1 h-12">
-              {Object.values(features).map((item) => (
-                <TabsTrigger
-                  key={item.name}
-                  value={item.name.toLowerCase()}
-                  asChild
-                  className="relative gap-2 bg-transparent shadow-none data-[state=active]:shadow-none px-2 md:px-4 pt-1 pb-1 border-b-2 border-b-transparent data-[state=active]:border-b-primary rounded-none h-12 font-semibold text-muted-foreground data-[state=active]:text-zinc-900 transition-none"
-                >
-                  <Link to={item.href} activeOptions={{ exact: true }}>
-                    <span className="[&_svg]:w-4 [&_svg]:h-4">{item.icon}</span>
-                    {item.name}
-                  </Link>
-                </TabsTrigger>
-              ))}
-            </div>
-          </TabsList>
-        </Tabs>
-      )}
+      <Tabs defaultValue={pathSegments[2] || ""} className="w-full">
+        <TabsList className="justify-start bg-transparent p-0 border-b rounded-none w-full h-12">
+          <div className="flex items-center gap-x-1 h-12">
+            {Object.values(features).map((item) => (
+              <TabsTrigger
+                key={item.name}
+                value={item.href.split("/").pop() || ""}
+                asChild
+                className="relative gap-2 bg-transparent shadow-none data-[state=active]:shadow-none px-2 md:px-4 pt-1 pb-1 border-b-2 border-b-transparent data-[state=active]:border-b-primary rounded-none h-12 font-semibold text-muted-foreground data-[state=active]:text-zinc-900 transition-none"
+              >
+                <Link to={item.href} activeOptions={{ exact: true }}>
+                  <span className="[&_svg]:w-4 [&_svg]:h-4">{item.icon}</span>
+                  {item.name}
+                </Link>
+              </TabsTrigger>
+            ))}
+          </div>
+        </TabsList>
+      </Tabs>
     </nav>
   );
 };
