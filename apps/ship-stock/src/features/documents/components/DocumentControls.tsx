@@ -11,8 +11,8 @@ const DocumentControls = ({
   const handlePrint = () => {
     const originalTitle = document.title;
     document.title = documentType
-      ? `${changeCase.sentenceCase(documentType)}_${orderNumber}_${dayjs().format("DDMMYYYY")}`
-      : `document_${dayjs().format("DDMMYYYY")}`;
+      ? `${changeCase.snakeCase(documentType)}_${orderNumber}_${dayjs().format("YYYY-MM-DD")}`
+      : `document_${dayjs().format("YYYY-MM-DD")}`;
 
     window.print();
 
