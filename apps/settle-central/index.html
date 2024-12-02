@@ -1,34 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Amazon Settle Central</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
-    <body class="flex flex-col justify-center items-center bg-slate-100 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] m-0 py-8 w-full font-raleway text-center text-slate-800">
-        <div class="p-4 w-full max-w-[1000px]">
-            <h1 class="mb-6 font-bold text-5xl text-slate-800 md:text-[4rem] leading-tight">Amazon<br class="block md:hidden"/> <span class="text-orange-500">Settle</span> Central</h1>
-            <video controls class="border-2 border-orange-500 mt-8 mb-4 rounded-lg w-full h-auto">
-                <source src="path_to_your_video.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
-             <form action="https://formspree.io/f/mgvevdlw" method="POST" class="flex flex-col items-center mx-auto p-2 lg:p-4 w-full max-w-lg">
-                <label for="email" class="lg:mb-4 font-medium text-[1.5rem] text-left text-slate-600">Join the waitlist</label>
-                <div class="flex justify-between items-center gap-2 w-full">
-                    <input required type="email" name="email" placeholder="Enter your email" class="block flex-grow border-2 border-orange-500 focus:border-orange-600 shadow-md focus:shadow-lg mt-2 sm:mt-0 sm:mr-2 px-4 rounded-lg w-full sm:w-auto h-12 text-lg transition-all duration-300" />
-                    <button type="submit" class="border-2 border-orange-500 hover:border-orange-400 bg-orange-500 hover:bg-orange-400 mt-2 sm:mt-0 px-3 md:px-6 rounded-lg h-12 font-bold text-lg text-white transition-all duration-300 cursor-pointer">Send</button>
-                </div>
-            </form>
-            <ul class="md:border-slate-200 md:bg-slate-50 md:bg-opacity-80 md:shadow-sm mx-auto md:my-8 py-8 p-2 md:p-8 md:border md:rounded-md max-w-[800px] list-none">
-                <li class="flex justify-start items-center gap-2 mb-2 text-left text-lg"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg><span class="w-5/6">Downloading CSVs and PDFs in one click</span></li>
-                <li class="flex justify-start items-center gap-2 mb-2 text-left text-lg"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg><span class="w-5/6">Files are automatically organised by region and deposit date</span></li>
-                <li class="flex justify-start items-center gap-2 mb-2 text-left text-lg"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg><span class="w-5/6">Automatically download new reports to prevent expiration</span></li>
-            </ul>
-           
-        </div>
-    </body>
-    <footer class="mt-8 text-center text-slate-600 text-sm">
-        <p>Copyright © 2024 | <a href="mailto:guy@thetismedical.com" class="text-orange-500">Guy Solan</a></p>
-    </footer>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settle Central</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

@@ -1,5 +1,5 @@
 {
-  "name": "@thetis/settle-central-app",
+  "name": "@thetis/settle-central",
   "private": true,
   "type": "module",
   "scripts": {

@@ -8,7 +8,7 @@ import { Toaster } from "@thetis/ui/sonner";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { QueryClient } from "@tanstack/react-query";
-import { Button } from "@thetis/uin";
+import { Button } from "@thetis/ui/button";
 import { Loader2 } from "lucide-react";
 import { cn } from "../lib/utils";
 
