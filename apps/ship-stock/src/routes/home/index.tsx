@@ -1,13 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Link } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@thetis/ui/card'
-import { features } from '../../features/navigation/content'
+} from "@thetis/ui/card";
+import { features } from "../../features/navigation/content";
 
 const ShipStockHome = () => {
   return (
@@ -39,15 +39,15 @@ const ShipStockHome = () => {
         ))}
       </div>
     </>
-  )
-}
+  );
+};
 
-export const Route = createFileRoute('/home/')({
+export const Route = createFileRoute("/home/")({
   component: ShipStockHome,
   loader: async () => {
-    await new Promise((resolve) => setTimeout(resolve, 300))
+    await new Promise((resolve) => setTimeout(resolve, 300));
     return {
-      message: 'Hello, world!',
-    }
+      message: "Hello, world!",
+    };
   },
-})
+});

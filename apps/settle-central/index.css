@@ -11,36 +11,3 @@ html {
 body {
   @apply bg-zinc-50 text-zinc-950 dark:bg-zinc-900 dark:text-zinc-200;
 }
-
-.document {
-  @apply text-black dark:text-white;
-}
-.document section {
-  @apply space-y-1 my-4;
-}
-.document div {
-  @apply space-y-0 py-2;
-}
-.document h1 {
-  @apply mb-6 font-bold text-3xl capitalize;
-}
-
-.document h2 {
-  @apply mb-2 text-lg font-semibold;
-}
-
-.document h3 {
-  @apply mb-2 font-semibold underline text-sm;
-}
-
-.document h4 {
-  @apply mb-2 font-semibold  text-sm;
-}
-
-.document p {
-  @apply text-sm;
-}
-
-.document b {
-  @apply text-sm font-semibold;
-}

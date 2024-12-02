@@ -11,6 +11,8 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as MonthsImport } from './routes/months'
+import { Route as InstructionsImport } from './routes/instructions'
 import { Route as IndexImport } from './routes/index'
 import { Route as SettlementsIndexImport } from './routes/settlements/index'
 import { Route as YearMonthImport } from './routes/$year.$month'
@@ -20,6 +22,18 @@ import { Route as SettlementsRegionSummaryImport } from './routes/settlements/$r
 import { Route as SettlementsRegionReportImport } from './routes/settlements/$region/report'
 
 // Create/Update Routes
+
+const MonthsRoute = MonthsImport.update({
+  id: '/months',
+  path: '/months',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const InstructionsRoute = InstructionsImport.update({
+  id: '/instructions',
+  path: '/instructions',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -74,6 +88,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/instructions': {
+      id: '/instructions'
+      path: '/instructions'
+      fullPath: '/instructions'
+      preLoaderRoute: typeof InstructionsImport
+      parentRoute: typeof rootRoute
+    }
+    '/months': {
+      id: '/months'
+      path: '/months'
+      fullPath: '/months'
+      preLoaderRoute: typeof MonthsImport
+      parentRoute: typeof rootRoute
+    }
     '/$year/$month': {
       id: '/$year/$month'
       path: '/$year/$month'
@@ -123,6 +151,8 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/instructions': typeof InstructionsRoute
+  '/months': typeof MonthsRoute
   '/$year/$month': typeof YearMonthRoute
   '/settlements': typeof SettlementsIndexRoute
   '/settlements/$region/report': typeof SettlementsRegionReportRoute
@@ -133,6 +163,8 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/instructions': typeof InstructionsRoute
+  '/months': typeof MonthsRoute
   '/$year/$month': typeof YearMonthRoute
   '/settlements': typeof SettlementsIndexRoute
   '/settlements/$region/report': typeof SettlementsRegionReportRoute
@@ -144,6 +176,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/instructions': typeof InstructionsRoute
+  '/months': typeof MonthsRoute
   '/$year/$month': typeof YearMonthRoute
   '/settlements/': typeof SettlementsIndexRoute
   '/settlements/$region/report': typeof SettlementsRegionReportRoute
@@ -156,6 +190,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/instructions'
+    | '/months'
     | '/$year/$month'
     | '/settlements'
     | '/settlements/$region/report'
@@ -165,6 +201,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/instructions'
+    | '/months'
     | '/$year/$month'
     | '/settlements'
     | '/settlements/$region/report'
@@ -174,6 +212,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/instructions'
+    | '/months'
     | '/$year/$month'
     | '/settlements/'
     | '/settlements/$region/report'
@@ -185,6 +225,8 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InstructionsRoute: typeof InstructionsRoute
+  MonthsRoute: typeof MonthsRoute
   YearMonthRoute: typeof YearMonthRoute
   SettlementsIndexRoute: typeof SettlementsIndexRoute
   SettlementsRegionReportRoute: typeof SettlementsRegionReportRoute
@@ -195,6 +237,8 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InstructionsRoute: InstructionsRoute,
+  MonthsRoute: MonthsRoute,
   YearMonthRoute: YearMonthRoute,
   SettlementsIndexRoute: SettlementsIndexRoute,
   SettlementsRegionReportRoute: SettlementsRegionReportRoute,
@@ -214,6 +258,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/instructions",
+        "/months",
         "/$year/$month",
         "/settlements/",
         "/settlements/$region/report",
@@ -224,6 +270,12 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/instructions": {
+      "filePath": "instructions.tsx"
+    },
+    "/months": {
+      "filePath": "months.tsx"
     },
     "/$year/$month": {
       "filePath": "$year.$month.tsx"

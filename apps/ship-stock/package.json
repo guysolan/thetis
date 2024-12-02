@@ -19,6 +19,7 @@
     "@tanstack/react-query-devtools": "^5.59.0",
     "@tanstack/react-router": "^1.85.0",
     "@tanstack/router-devtools": "^1.85.0",
+    "@thetis/ui": "workspace:*",
     "change-case": "^5.4.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

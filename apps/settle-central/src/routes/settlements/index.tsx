@@ -1,18 +1,18 @@
-import React from 'react'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { Button } from '@thetis/ui/button'
+import React from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@thetis/ui/button";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@thetis/ui/card'
-import { DollarSign, Euro, FolderArchive, FolderOpen } from 'lucide-react'
-import { useDownloadFolder } from '@/features/amazon/api/useDownloadFolder'
+} from "@thetis/ui/card";
+import { DollarSign, Euro, FolderArchive, FolderOpen } from "lucide-react";
+import { useDownloadFolder } from "@/features/amazon/api/useDownloadFolder";
 
 const AmazonFinancialReports = () => {
-  const { mutate: downloadFolder } = useDownloadFolder()
+  const { mutate: downloadFolder } = useDownloadFolder();
   return (
     <div className="p-4">
       <h1 className="mb-4 font-bold text-2xl">Amazon Financial Reports</h1>
@@ -20,15 +20,15 @@ const AmazonFinancialReports = () => {
       <div className="gap-4 grid grid-cols-1 md:grid-cols-2">
         {[
           {
-            countries: ['US', 'MX', 'CA'],
-            code: 'NA',
-            name: 'North America',
+            countries: ["US", "MX", "CA"],
+            code: "NA",
+            name: "North America",
             icon: <DollarSign size={32} />,
           },
           {
-            countries: ['IT', 'GB', 'DE', 'SE', 'FR'],
-            code: 'EUR',
-            name: 'Europe',
+            countries: ["IT", "GB", "DE", "SE", "FR"],
+            code: "EUR",
+            name: "Europe",
             icon: <Euro size={32} />,
           },
         ].map((region) => (
@@ -67,9 +67,9 @@ const AmazonFinancialReports = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export const Route = createFileRoute('/settlements/')({
+export const Route = createFileRoute("/settlements/")({
   component: AmazonFinancialReports,
-})
+});

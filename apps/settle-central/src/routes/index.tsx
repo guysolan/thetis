@@ -1,79 +1,54 @@
-import React from 'react'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { Button } from '@thetis/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@thetis/ui/card'
-
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-]
-
-const currentYear = new Date().getFullYear()
-const currentMonth = new Date().getMonth() + 1 // Adding 1 because getMonth() returns 0-11
+import React from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@thetis/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@thetis/ui/card";
 
 const AmazonFinancialReports = () => {
-  const years = Array.from(
-    { length: currentYear - 2021 },
-    (_, i) => currentYear - i,
-  )
-
   return (
     <div className="p-4">
       <h1 className="mb-4 font-bold text-2xl">Amazon Financial Reports</h1>
-      {years.map((year) => (
-        <div key={year} className="mb-8">
-          <h2 className="mb-4 font-bold text-xl">{year}</h2>
-          <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {months.map((month, index) => (
-              <Card key={`${year}-${month}`}>
-                <CardHeader>
-                  <CardTitle>{month}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex space-x-2">
-                    <Button
-                      asChild
-                      variant="default"
-                      disabled={
-                        year === currentYear && index + 1 > currentMonth
-                      }
-                    >
-                      <Link to={`/finances/amazon/${year}/${index + 1}`}>
-                        Report
-                      </Link>
-                    </Button>
-                    <Button
-                      asChild
-                      variant="secondary"
-                      disabled={
-                        year === currentYear && index + 1 > currentMonth
-                      }
-                    >
-                      <Link to={`/finances/amazon/${year}/${index + 1}`}>
-                        Transactions
-                      </Link>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      ))}
+      <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <Card>
+          <CardHeader>
+            <CardTitle>Months</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex space-x-2">
+              <Button asChild variant="default">
+                <Link to="/months">Months</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Settlements</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex space-x-2">
+              <Button asChild variant="default">
+                <Link to="/settlements">Settlements</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Instructions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex space-x-2">
+              <Button asChild variant="default">
+                <Link to="/instructions">Instructions</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: AmazonFinancialReports,
-})
+});
