@@ -10,9 +10,9 @@ import {
   BreadcrumbSeparator,
 } from "@thetis/ui/breadcrumb";
 import { Tabs, TabsList, TabsTrigger } from "@thetis/ui/tabs";
-import { jobs } from "./content";
-import MyCompany from '../companies/components/MyCompany';
-import { Logout } from '../auth/Logout';
+import { features } from "./content";
+import MyCompany from "../companies/components/MyCompany";
+import { Logout } from "../auth/Logout";
 
 const Navigation = () => {
   const location = useLocation();
@@ -60,11 +60,11 @@ const Navigation = () => {
         </div>
       </div>
 
-      {jobs[currentSection] && (
+      {features[currentSection] && (
         <Tabs defaultValue={pathSegments[1] || ""} className="w-full">
           <TabsList className="justify-start bg-transparent p-0 border-b rounded-none w-full h-12">
             <div className="flex items-center gap-x-1 h-12">
-              {Object.values(jobs).map((item) => (
+              {Object.values(features).map((item) => (
                 <TabsTrigger
                   key={item.name}
                   value={item.name.toLowerCase()}

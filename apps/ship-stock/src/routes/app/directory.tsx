@@ -1,15 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
-import Sheet from "@/components/Sheet";
-import { Button } from "@thetis/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@thetis/ui/tabs";
-import CompanyContactForm from "@/features/contacts/components/CompanyContactForm";
-import AddressForm from "@/features/stockpiles/components/AddressForm";
-import CompanyForm from "@/features/companies/components/CompanyForm";
-import LayoutPopover from "../../components/LayoutPopover";
-import Companies from "../../features/companies/components/Companies";
-import Contacts from "../../features/contacts/components/Contacts";
-import Addresses from "../../features/stockpiles/components/Addresses";
-import TabsHeader from "@/components/TabsHeader";
+import { createFileRoute } from '@tanstack/react-router'
+import Sheet from '@/components/Sheet'
+import { Button } from '@thetis/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@thetis/ui/tabs'
+import CompanyContactForm from '@/features/contacts/components/CompanyContactForm'
+import AddressForm from '@/features/stockpiles/components/AddressForm'
+import CompanyForm from '@/features/companies/components/CompanyForm'
+import LayoutPopover from '../../components/LayoutPopover'
+import Companies from '../../features/companies/components/Companies'
+import Contacts from '../../features/contacts/components/Contacts'
+import Addresses from '../../features/stockpiles/components/Addresses'
+import TabsHeader from '@/components/TabsHeader'
 
 const DirectoryPage = () => {
   const tabsList = (
@@ -18,9 +18,9 @@ const DirectoryPage = () => {
       <TabsTrigger value="contacts">Contacts</TabsTrigger>
       <TabsTrigger value="addresses">Addresses</TabsTrigger>
     </>
-  );
+  )
 
-  const optionButtons = <LayoutPopover />;
+  const optionButtons = <LayoutPopover />
 
   const actionButtons = (
     <>
@@ -54,7 +54,7 @@ const DirectoryPage = () => {
         </Sheet>
       </TabsContent>
     </>
-  );
+  )
 
   return (
     <>
@@ -78,9 +78,9 @@ const DirectoryPage = () => {
         </TabsContent>
       </Tabs>
     </>
-  );
-};
+  )
+}
 
-export const Route = createFileRoute("/_app/directory")({
+export const Route = createFileRoute('/app/directory')({
   component: DirectoryPage,
-});
+})

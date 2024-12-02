@@ -5,10 +5,10 @@ import {
   ToyBrick,
 } from "lucide-react";
 
-export const jobs = {
+export const features = {
   orders: {
     name: "Orders",
-    href: "/orders",
+    href: "/app/orders",
     description: "Buy, sell and ship orders.",
     icon: <ShoppingBag />,
     external: false,
@@ -22,7 +22,7 @@ export const jobs = {
   },
   build: {
     name: "Build",
-    href: "/build",
+    href: "/app/build",
     description: "Keep track of the items we buy and sell.",
     icon: <ToyBrick />,
     external: false,
@@ -36,7 +36,7 @@ export const jobs = {
   },
   stock: {
     name: "Stock",
-    href: "/stock",
+    href: "/app/stock",
     description: "Try not to lose track of things.",
     icon: <FactoryIcon />,
     external: false,
@@ -50,7 +50,7 @@ export const jobs = {
   },
   directory: {
     name: "Directory",
-    href: "/directory",
+    href: "/app/directory",
     description: "Who's who.",
     icon: <BriefcaseBusiness />,
     external: false,

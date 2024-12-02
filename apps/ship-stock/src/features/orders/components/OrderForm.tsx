@@ -4,7 +4,7 @@ import { Banknote, Info, ShoppingCart, Truck } from "lucide-react";
 import ShipmentForm from "../features/order-forms/features/shipment-form/ShipmentForm";
 import { Alert, AlertDescription, AlertTitle } from "@thetis/ui/alert";
 import SellForm from "../features/order-forms/features/sell-form/components/SellForm";
-import type { OrderTab } from "../../../routes/_app/orders";
+import type { OrderTab } from "../../../routes/app/orders";
 import SaleForm from "../features/order-forms/features/sale-form/SaleForm";
 import { OrderSettings } from "../features/order-forms/features/order-settings/components/OrderSettings";
 
