@@ -20,7 +20,7 @@ const Navigation = () => {
 
   return (
     <nav className="flex flex-col bg-background">
-      <div className="flex justify-between items-center p-2 md:p-4">
+      <div className="flex md:flex-row flex-col-reverse justify-between md:items-center gap-4 p-2 md:p-4">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
