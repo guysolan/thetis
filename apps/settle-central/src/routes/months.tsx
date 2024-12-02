@@ -48,9 +48,7 @@ const AmazonFinancialReports = () => {
                         year === currentYear && index + 1 > currentMonth
                       }
                     >
-                      <Link to={`/finances/amazon/${year}/${index + 1}`}>
-                        Report
-                      </Link>
+                      <Link to={`${year}/${index + 1}`}>Report</Link>
                     </Button>
                     <Button
                       asChild
@@ -59,9 +57,7 @@ const AmazonFinancialReports = () => {
                         year === currentYear && index + 1 > currentMonth
                       }
                     >
-                      <Link to={`/finances/amazon/${year}/${index + 1}`}>
-                        Transactions
-                      </Link>
+                      <Link to={`${year}/${index + 1}`}>Transactions</Link>
                     </Button>
                   </div>
                 </CardContent>
