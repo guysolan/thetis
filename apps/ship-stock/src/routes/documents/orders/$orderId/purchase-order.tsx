@@ -11,7 +11,10 @@ const OrdersPage = () => {
 
   return (
     <>
-      <DocumentControls documentType="purchaseOrder" />
+      <DocumentControls
+        documentType="purchaseOrder"
+        orderNumber={order.order_id}
+      />
       <PurchaseOrder order={order} options={search} />
     </>
   );

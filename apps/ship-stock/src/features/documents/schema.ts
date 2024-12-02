@@ -50,6 +50,7 @@ export const documentOptions = {
   commercialInvoice: commercialInvoiceOptions,
   purchaseOrder: purchaseOrderOptions,
   invoice: invoiceOptions,
+  shippingLabel: {},
 };
 
 export const documentOptionsSchema = z.object({

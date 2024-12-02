@@ -9,7 +9,10 @@ const OrdersPage = () => {
   const search = Route.useSearch();
   return (
     <>
-      <DocumentControls documentType="commercialInvoice" />
+      <DocumentControls
+        orderNumber={order.order_id}
+        documentType="commercialInvoice"
+      />
       <CommercialInvoice order={order} options={search} />
     </>
   );

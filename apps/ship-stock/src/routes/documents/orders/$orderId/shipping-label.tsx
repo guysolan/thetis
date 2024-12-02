@@ -3,19 +3,26 @@ import { selectOrderByIdQueryOptions } from "../../../../features/orders/feature
 import { CompanyRow } from "../../../../features/companies/types";
 import { AddressRow } from "../../../../features/stockpiles/types";
 import ShippingLabel from "../../../../features/orders/features/order-documents/documents/ShippingLabel";
+import DocumentControls from "../../../../features/documents/components/DocumentControls";
 
 const OrdersPage = () => {
   const { order } = Route.useLoaderData();
 
   return (
-    <ShippingLabel
-      deliveryCompany={order.to_company as CompanyRow}
-      deliveryAddress={order.to_shipping_address as AddressRow}
-      returnAddress={order.from_shipping_address as AddressRow}
-      returnCompany={order.from_company as CompanyRow}
-      returnContactName={order.from_contact?.name}
-      deliveryContactName={order.to_contact?.name}
-    />
+    <>
+      <DocumentControls
+        orderNumber={order.order_id}
+        documentType="shippingLabel"
+      />
+      <ShippingLabel
+        deliveryCompany={order.to_company as CompanyRow}
+        deliveryAddress={order.to_shipping_address as AddressRow}
+        returnAddress={order.from_shipping_address as AddressRow}
+        returnCompany={order.from_company as CompanyRow}
+        returnContactName={order.from_contact?.name}
+        deliveryContactName={order.to_contact?.name}
+      />
+    </>
   );
 };
 export const Route = createFileRoute(
