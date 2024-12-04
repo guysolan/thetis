@@ -1,0 +1,17 @@
+{
+  "beginningBalance": 70.28,
+  "sales": 412.97,
+  "productCharges": 319.92,
+  "tax": 64.0,
+  "shipping": 1.66,
+  "inventoryReimbursements": 27.39,
+  "refunds": -40.91,
+  "refundedExpenses": 7.08,
+  "refundedSales": -47.99,
+  "expenses": -118.63,
+  "promoRebates": -1.66,
+  "fbaFees": -1.08,
+  "amazonFees": -115.89,
+  "accountReserveLevel": -70.28,
+  "netProceeds": 253.43
+}

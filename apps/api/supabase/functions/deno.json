@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "test": "deno test",
+    "test:amazon-reports": "deno test --allow-read --allow-write ./_shared/amazon/reports/reports.test.ts"
+  },
+  "importMap": "./import_map.json"
+}

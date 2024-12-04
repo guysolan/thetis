@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { corsHeaders } from "../_shared/cors.ts";
 
-import { getAmazonReportById } from "../_shared/amazon/index.ts";
+import { getAmazonReportById } from "../_shared/amazon/reports/process-amazon-report.ts";
 
 import { doppio } from "../_shared/doppio/index.ts";
 import {
@@ -30,7 +30,7 @@ Deno.serve(async (req) => {
 
         // You might need to validate or process the request here
         const pdf = await doppio(
-            `https://dashboard.thetismedical.com/finances/amazon/settlements/${region}/summary?report=${
+            `https://tax.thetismedical.com/finances/amazon/settlements/${region}/summary?report=${
                 encodeURIComponent(JSON.stringify(report))
             }`,
         );

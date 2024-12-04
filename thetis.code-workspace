@@ -1,0 +1,59 @@
+{
+    "folders": [
+        {
+            "path": "apps/api/supabase/functions"
+        },
+        {
+            "path": "apps/website"
+        },
+        {
+            "path": "apps/ship-stock"
+        },
+        {
+            "path": "apps/settle-central"
+        },
+        {
+            "path": "packages/ui"
+        },
+        {
+            "path": "packages/supabase"
+        },
+        {
+            "path": "packages/jobs"
+        },
+        {
+            "path": "packages/kv"
+        },
+        {
+            "path": "packages/email"
+        },
+        {
+            "path": "packages/logger"
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "**/node_modules": true,
+            "**/dist": true,
+            "**/build": true,
+            "**/.turbo": true,
+            "**/coverage": true,
+            "**/.next": true,
+            "**/.astro": true
+        },
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "biomejs.biome",
+        "[astro]": {
+            "editor.defaultFormatter": "astro-build.astro-vscode"
+        },
+        "[typescript]": {
+            "editor.defaultFormatter": "denoland.vscode-deno"
+        },
+        "deno.enable": true,
+        "deno.enablePaths": [
+            "./apps/api/supabase/functions"
+        ],
+        "deno.importMap": "./apps/api/supabase/functions/import_map.json"
+    }
+}

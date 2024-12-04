@@ -5,7 +5,9 @@
         "lib": [
             "dom",
             "dom.iterable",
-            "esnext"
+            "esnext",
+            "deno.ns",
+            "deno.unstable"
         ],
         "allowJs": true,
         "skipLibCheck": true,

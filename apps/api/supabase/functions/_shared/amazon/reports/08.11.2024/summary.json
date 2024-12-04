@@ -1,0 +1,14 @@
+{
+  "beginningBalance": 0.0,
+  "sales": 115.16,
+  "productCharges": 104.76,
+  "shipping": 10.4,
+  "refunds": -43.1,
+  "refundedExpenses": 11.42,
+  "refundedSales": -54.52,
+  "expenses": -49.26,
+  "amazonFees": -49.26,
+  "promoRebates": "undefined",
+  "accountReserveLevel": -22.8,
+  "netProceeds": 0.0
+}

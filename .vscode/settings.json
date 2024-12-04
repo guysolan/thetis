@@ -3,27 +3,15 @@
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "deno.lint": true,
-  "deno.unstable": [
-    "bare-node-builtins",
-    "byonm",
-    "sloppy-imports",
-    "unsafe-proto",
-    "webgpu",
-    "broadcast-channel",
-    "worker-options",
-    "cron",
-    "kv",
-    "ffi",
-    "fs",
-    "http",
-    "net"
-  ],
+  "deno.unstable": true,
   "deno.enable": true,
-  "deno.enablePaths": [
-    "./supabase/functions/*"
+  "deno.disablePaths": [
+    "./apps/settle-central",
+    "./apps/ship-stock"
   ],
-  "deno.importMap": "./supabase/functions/import_map.json",
+  "deno.importMap": "./apps/api/supabase/functions/import_map.json",
   "cSpell.words": [
+    "denoland",
     "Discrepency",
     "Doppio",
     "Edit",
@@ -41,6 +29,7 @@
     "sonner",
     "Stilemans",
     "stocktake",
+    "summarise",
     "supabase",
     "tanstack",
     "to_address_id",

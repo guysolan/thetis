@@ -1,21 +1,38 @@
-import { callSellingPartnerAPI } from "./config.ts";
-import { type CountryCode, marketplaces } from "./marketplace-ids.ts";
+import { callSellingPartnerAPI } from "../config.ts";
 import * as pako from "https://deno.land/x/pako@v2.0.3/pako.js";
 
-type ReportType =
-    | "GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_V2"
-    | "GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE"
-    | "GET_V2_SETTLEMENT_REPORT_DATA_XML";
+interface SettlementReportSummary {
+    settlementId: string;
+    settlementStartDate: string;
+    settlementEndDate: string;
+    depositDate: string;
+    totalAmount: number;
+    currency: string;
+    marketplace: string;
+    location: string;
+    amountTypeSum: Record<string, number>;
+    summary: Record<string, number>;
+    metadata: {
+        transactionTypes: string[];
+        marketplaces: string[];
+        feeTypes: string[];
+        promotionTypes: string[];
+        directPaymentTypes: string[];
+    };
+    sampleData: any[];
+}
 
 const processMarketplaces = (marketplaces: string[], currency: string) => {
     console.log(marketplaces, currency);
     if (marketplaces.length && marketplaces[0]) {
         console.log("marketplaces[0]");
         return marketplaces[0];
-    } else if (marketplaces[1]) {
+    }
+    if (marketplaces[1]) {
         console.log("marketplaces[1]");
         return marketplaces[1];
-    } else if (currency === "CAD") {
+    }
+    if (currency === "CAD") {
         console.log("Amazon.ca");
         return "Amazon.ca";
     }
@@ -55,7 +72,7 @@ export async function getSettlementReportsByRegion(
         reportTypes: "GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE",
     };
 
-    let reports = [];
+    let reports: any[] = [];
     let nextToken: string | undefined;
 
     do {
@@ -84,19 +101,6 @@ export async function getSettlementReportsByRegion(
 
     return reports;
 }
-
-// Example usage
-export const getAllSettlementDataByCountryAndReportType = async (
-    countryCode: CountryCode,
-    reportType: ReportType,
-) => {
-    const reports = await getAllSettlementReports(
-        countryCode,
-        reportType,
-    );
-
-    return reports;
-};
 
 export async function getReportDocument(
     region: "NA" | "EUR",
@@ -127,13 +131,14 @@ export async function getReportDocument(
             );
         }
 
-        let documentContent;
+        let documentContent: string;
         if (compressionAlgorithm === "GZIP") {
             const buffer = await documentResponse.arrayBuffer();
-            const decompressed = new TextDecoder("utf-8").decode(
-                pako.inflate(new Uint8Array(buffer)),
+            const uint8Array = new Uint8Array(buffer);
+            const inflated = pako.inflate(uint8Array);
+            documentContent = new TextDecoder("utf-8").decode(
+                new Uint8Array(inflated as ArrayBufferLike),
             );
-            documentContent = decompressed;
         } else {
             documentContent = await documentResponse.text();
         }
@@ -145,28 +150,28 @@ export async function getReportDocument(
     }
 }
 
-export function convertToCSV(
-    content: string,
-    delimiter: string = "\t",
-): string {
+export function convertToCSV(content: string, delimiter = "\t"): string {
     const lines = content.trim().split("\n");
     const headers = lines[0].split(delimiter);
 
-    let csvContent = headers.map((header) => `"${header.trim()}"`).join(",") +
-        "\n";
+    let csvContent = `${
+        headers.map((header) => `"${header.trim()}"`).join(",")
+    }\n`;
 
     for (let i = 1; i < lines.length; i++) {
         const values = lines[i].split(delimiter);
         const csvLine = values.map((value) =>
             `"${value.trim()?.replace(/"/g, "")}"`
         ).join(",");
-        csvContent += csvLine + "\n";
+        csvContent += `${csvLine}\n`;
     }
 
     return csvContent;
 }
 
-export function summariseSettlementReport(report: any[]) {
+export function summariseSettlementReport(
+    report: any[],
+): SettlementReportSummary {
     const settlementInfo = report[0];
     const [settlementStartDate, settlementEndDate, depositDate] = [
         "settlement-start-date",
@@ -175,7 +180,7 @@ export function summariseSettlementReport(report: any[]) {
     ]
         .map((key) => settlementInfo[key]);
 
-    const totalAmount = parseFloat(
+    const totalAmount = Number.parseFloat(
         settlementInfo["total-amount"] || "0",
     );
     const currency = settlementInfo["currency"];
@@ -208,16 +213,16 @@ export function summariseSettlementReport(report: any[]) {
     const directPaymentTypes = new Set<string>();
 
     for (const item of report) {
-        const amount = parseFloat(item["direct-payment-amount"] || "0") +
-            parseFloat(item["total-amount"] || "0") +
-            parseFloat(item["order-fee-amount"] || "0") +
-            parseFloat(item["other-amount"] || "0") +
-            parseFloat(item["order-amount"] || "0") +
-            parseFloat(item["order-fee-amount"] || "0") +
-            parseFloat(item["shipment-fee-amount"] || "0") +
-            parseFloat(item["item-related-fee-amount"] || "0") +
-            parseFloat(item["promotion-amount"] || "0") +
-            parseFloat(item["price-amount"] || "0");
+        const amount = Number.parseFloat(item["direct-payment-amount"] || "0") +
+            Number.parseFloat(item["total-amount"] || "0") +
+            Number.parseFloat(item["order-fee-amount"] || "0") +
+            Number.parseFloat(item["other-amount"] || "0") +
+            Number.parseFloat(item["order-amount"] || "0") +
+            Number.parseFloat(item["order-fee-amount"] || "0") +
+            Number.parseFloat(item["shipment-fee-amount"] || "0") +
+            Number.parseFloat(item["item-related-fee-amount"] || "0") +
+            Number.parseFloat(item["promotion-amount"] || "0") +
+            Number.parseFloat(item["price-amount"] || "0");
 
         const amountType = item["transaction-type"];
         const priceType = item["price-type"];
@@ -299,6 +304,11 @@ export function summariseSettlementReport(report: any[]) {
         currency,
         marketplace,
         location,
+        amountTypeSum: Object.fromEntries(
+            Object.entries(summary).map((
+                [key, value],
+            ) => [key, Number(value.toFixed(2))]),
+        ),
         summary: Object.fromEntries(
             Object.entries(summary).map((
                 [key, value],
@@ -322,15 +332,17 @@ export function summariseSettlementReport(report: any[]) {
             merchantOrderItemId: item["merchant-order-item-id"],
             merchantAdjustmentItemId: item["merchant-adjustment-item-id"],
             sku: item["sku"],
-            quantityPurchased: parseInt(item["quantity-purchased"] || "0"),
+            quantityPurchased: Number.parseInt(
+                item["quantity-purchased"] || "0",
+            ),
             priceType: item["price-type"],
-            priceAmount: parseFloat(item["price-amount"] || "0"),
-            miscFeeAmount: parseFloat(item["misc-fee-amount"] || "0"),
-            otherFeeAmount: parseFloat(item["other-fee-amount"] || "0"),
+            priceAmount: Number.parseFloat(item["price-amount"] || "0"),
+            miscFeeAmount: Number.parseFloat(item["misc-fee-amount"] || "0"),
+            otherFeeAmount: Number.parseFloat(item["other-fee-amount"] || "0"),
             otherFeeReasonDescription: item["other-fee-reason-description"],
             promotionId: item["promotion-id"],
-            promotionAmount: parseFloat(item["promotion-amount"] || "0"),
-            otherAmount: parseFloat(item["other-amount"] || "0"),
+            promotionAmount: Number.parseFloat(item["promotion-amount"] || "0"),
+            otherAmount: Number.parseFloat(item["other-amount"] || "0"),
         })),
     };
 }
