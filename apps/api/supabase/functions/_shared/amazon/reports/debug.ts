@@ -1,5 +1,5 @@
-import { convertCommaDecimalsInJson, generateSummary } from "./utils.ts";
-
+import { generateSummary } from "./main.ts";
+import { convertCommaDecimalsInJson } from "./utils.ts";
 import { logAnalysis } from "./logger.ts";
 
 async function processReports(folderName: string) {

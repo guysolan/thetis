@@ -16,6 +16,8 @@ import { useDownloadedAmazonReports } from "../api/selectDownloadedAmazonReports
 import { Separator } from "@thetis/ui/separator";
 import { useDownloadFile } from "../api/useDownloadFile";
 import EmailPdfDialog from "./EmailPdfDialog";
+import { Route as SummaryRoute } from "../../../routes/settlements/$region/summary";
+import { Route as ReportRoute } from "../../../routes/settlements/$region/report";
 
 const AmazonSettlementCard = ({
   region,
@@ -42,7 +44,7 @@ const AmazonSettlementCard = ({
         <div className="flex flex-wrap gap-2">
           <Separator />
           <Link
-            to="/finances/amazon/settlements/$region/summary"
+            to={SummaryRoute.to}
             params={{
               region: region,
             }}
@@ -54,7 +56,7 @@ const AmazonSettlementCard = ({
           <Separator />
 
           <Link
-            to="/finances/amazon/settlements/$region/report"
+            to={ReportRoute.to}
             params={{
               region: region,
             }}

@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { corsHeaders } from "../_shared/cors.ts";
 
-import { getAmazonReportById } from "../_shared/amazon/reports/process-amazon-report.ts";
+import { getAmazonReportById } from "../_shared/amazon/reports/index.ts";
 
 import { doppio } from "../_shared/doppio/index.ts";
 import {

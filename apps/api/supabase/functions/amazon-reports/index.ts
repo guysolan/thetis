@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { corsHeaders } from "../_shared/cors.ts";
 
-import { getSettlementReportsByRegion } from "../_shared/amazon/reports.ts";
+import { getSettlementReportsByRegion } from "../_shared/amazon/reports/api.ts";
 
 Deno.serve(async (req) => {
     if (req.method === "OPTIONS") {

@@ -1,3 +1,6 @@
+import { Summary } from "./types.ts";
+import { sumObjectValues, sumValues } from "./utils.ts";
+
 interface AmazonSettlementRecord {
     "settlement-id": string;
     "settlement-start-date": string;
@@ -26,32 +29,23 @@ interface AmazonSettlementRecord {
     // ... other fields exist but not needed for this analysis
 }
 
-export function convertCommaDecimalsInJson(obj: any): any {
-    if (typeof obj === "string") {
-        // Check if the string is a number with a comma or dot, allowing for a negative sign
-        if (/^-?\d+[,.]\d+$/.test(obj)) {
-            return Number.parseFloat(obj.replace(",", "."));
-        }
-        // Check if the string is a numeric zero
-        if (/^-?0$/.test(obj)) {
-            return 0;
-        }
-        return obj;
+const getMetadata = (in_data: AmazonSettlementRecord[]) => {
+    if (!in_data || in_data.length === 0) {
+        return null;
     }
-    if (Array.isArray(obj)) {
-        return obj.map(convertCommaDecimalsInJson);
-    }
-    if (typeof obj === "object" && obj !== null) {
-        const convertedObj: any = {};
-        for (const key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                convertedObj[key] = convertCommaDecimalsInJson(obj[key]);
-            }
-        }
-        return convertedObj;
-    }
-    return obj;
-}
+
+    const v_firstRecord = in_data[0];
+    const v_secondRecord = in_data[1];
+
+    return {
+        settlement_id: v_firstRecord["settlement-id"],
+        settlement_start_date: v_firstRecord["settlement-start-date"],
+        settlement_end_date: v_firstRecord["settlement-end-date"],
+        deposit_date: v_firstRecord["deposit-date"],
+        net_proceeds: v_firstRecord["total-amount"],
+        marketplace_name: v_secondRecord["marketplace-name"],
+    };
+};
 
 function getAmountByField(
     data: AmazonSettlementRecord[],
@@ -149,29 +143,6 @@ function analyzeSettlementReport(data: AmazonSettlementRecord[]) {
     };
 }
 
-function sumObjectValues(obj: Record<string, number>): number {
-    if (!obj) {
-        return 0;
-    }
-    const values = Object.values(obj).map(
-        (v_value) => Number(v_value) as number,
-    );
-    return sumValues(values);
-}
-
-export function sumValues(
-    values: (number | string | undefined | null)[],
-): number {
-    return values
-        .map((v_value) =>
-            typeof v_value === "string"
-                ? Number.parseFloat(v_value)
-                : (v_value ?? 0)
-        )
-        .filter((v_value): v_value is number => Number.isFinite(v_value))
-        .reduce((v_acc, v_value) => v_acc + v_value, 0);
-}
-
 export function calculateRefunds(analysis: any) {
     const v_promotion = analysis.summary.Refund?.Promotion || {};
     const v_itemPrice = analysis.summary.Refund?.ItemPrice || {};
@@ -238,7 +209,7 @@ export function calculateExpenses(analysis: any, euro?: boolean) {
     return { total, amazon_fees, promo_rebates, fba_fees };
 }
 
-export function generateSummary(data: any) {
+export function generateSummary(data: any): Summary {
     const currency = getCurrency(data);
     const euro = currency === "EUR";
     const analysis = analyzeSettlementReport(data);
@@ -248,6 +219,7 @@ export function generateSummary(data: any) {
     // console.log("\n\n Analysis \n\n");
 
     return {
+        ...getMetadata(data),
         sales: calculateSales(analysis, euro),
         refunds: calculateRefunds(analysis),
         expenses: calculateExpenses(analysis, euro),
@@ -262,5 +234,5 @@ export function generateSummary(data: any) {
             "Previous Reserve Amount Balance",
         ),
         net_proceeds: getTotalAmount(data),
-    };
+    } as Summary;
 }

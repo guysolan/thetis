@@ -29,8 +29,34 @@ function compareValues(
 
 export function logAnalysis(
     summary: Summary,
-    expectedValues: any,
+    expectedValues: { [key: string]: number },
 ) {
+    console.log(
+        `\n\n\n\nSettlement ID: ${summary.settlement_id}`,
+    );
+
+    console.log(
+        `Marketplace Name: ${summary.marketplace_name}`,
+    );
+
+    console.log(
+        `Settlement Start Date: ${summary.settlement_start_date}`,
+    );
+
+    console.log(
+        `Settlement End Date: ${summary.settlement_end_date}`,
+    );
+
+    console.log(
+        `Deposit Date: ${summary.deposit_date}`,
+    );
+
+    compareValues(
+        "\n\nNet Proceeds",
+        expectedValues.netProceeds,
+        summary.net_proceeds,
+    );
+
     compareValues(
         "\n\nBeginning Balance",
         expectedValues.beginningBalance,
