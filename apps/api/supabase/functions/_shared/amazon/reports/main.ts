@@ -190,7 +190,7 @@ function calculateAmazonFees(analysis: any) {
 
 export function calculateExpenses(analysis: any, euro?: boolean) {
     const amazon_fees = calculateAmazonFees(analysis);
-    const promo_rebates = analysis.summary.Order.Promotion?.Shipping;
+    const promo_rebates = analysis.summary?.Order?.Promotion?.Shipping;
     const fba_fees = euro ? 0 : sumObjectValues(
         analysis.summary?.["other-transaction"]?.["other-transaction"],
     );

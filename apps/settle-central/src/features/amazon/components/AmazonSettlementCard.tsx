@@ -18,6 +18,7 @@ import { useDownloadFile } from "../api/useDownloadFile";
 import EmailPdfDialog from "./EmailPdfDialog";
 import { Route as SummaryRoute } from "../../../routes/settlements/$region/summary";
 import { Route as ReportRoute } from "../../../routes/settlements/$region/report";
+import { useDeleteAmazonReport } from "../api/deleteAmazonReport";
 
 const AmazonSettlementCard = ({
   region,
@@ -26,6 +27,8 @@ const AmazonSettlementCard = ({
   const { mutate: downloadFile } = useDownloadFile();
   const { mutate: saveReport, isPending: isSavingReport } =
     useSaveAmazonReport();
+  const { mutate: deleteReport, isPending: isDeletingReport } =
+    useDeleteAmazonReport();
   const { data: downloadedReports } = useDownloadedAmazonReports();
   const downloaded = downloadedReports?.find(
     (r) => r.report_id === report.reportId,
@@ -63,7 +66,7 @@ const AmazonSettlementCard = ({
             search={{ report: report }}
             className="flex justify-between items-center py-1 w-full text-zinc-700 hover:underline"
           >
-            Open Table <span className="ml-2">→</span>
+            Open Table <span className="ml-2">��</span>
           </Link>
           <Separator />
         </div>
@@ -81,6 +84,12 @@ const AmazonSettlementCard = ({
               path={downloaded.storage_path}
               reportDate={dayjs(report.dataEndTime).format("YYYY-MM-DD")}
             />
+            <Button
+              variant="danger"
+              onClick={() => deleteReport({ reportId: report.reportId })}
+            >
+              {isDeletingReport ? "Deleting..." : "Delete"}
+            </Button>
           </>
         ) : (
           <Button

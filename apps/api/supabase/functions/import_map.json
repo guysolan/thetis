@@ -4,6 +4,6 @@
     "dayjs": "npm:dayjs",
     "std/": "https://deno.land/std@0.208.0/",
     "std/testing/": "https://deno.land/std@0.208.0/testing/",
-    "serve": "https://deno.land/std@0.208.0/http/server.ts"
+    "http/": "https://deno.land/std@0.208.0/http/"
   }
 }

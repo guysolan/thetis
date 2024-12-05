@@ -5,9 +5,8 @@
   "deno.lint": true,
   "deno.unstable": true,
   "deno.enable": true,
-  "deno.disablePaths": [
-    "./apps/settle-central",
-    "./apps/ship-stock"
+  "deno.enablePaths": [
+    "./apps/api/supabase/functions/*",
   ],
   "deno.importMap": "./apps/api/supabase/functions/import_map.json",
   "cSpell.words": [

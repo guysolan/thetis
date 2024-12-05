@@ -1,7 +1,19 @@
 {
-  "tasks": {
-    "test": "deno test",
-    "test:amazon-reports": "deno test --allow-read --allow-write ./_shared/amazon/reports/reports.test.ts"
+  "compilerOptions": {
+    "lib": ["deno.ns", "dom", "es7"],
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true
   },
-  "importMap": "./import_map.json"
+  "importMap": "./import_map.json",
+  "lint": {
+    "files": {
+      "include": ["./**/*.ts"]
+    }
+  },
+  "fmt": {
+    "files": {
+      "exclude": ["./**/*.ts"]
+    }
+  }
 }

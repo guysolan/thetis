@@ -1,3 +1,5 @@
+import { serve } from "http/server.ts";
+
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { corsHeaders } from "../_shared/cors.ts";
 
@@ -9,8 +11,9 @@ import {
     uploadFileFromUrl,
 } from "../_shared/supabase/storage.ts";
 import { supabase } from "../_shared/supabase/config.ts";
+import { marketplaces } from "../_shared/amazon/marketplace-ids.ts";
 
-Deno.serve(async (req) => {
+serve(async (req) => {
     if (req.method === "OPTIONS") {
         return new Response("ok", { headers: corsHeaders });
     }
@@ -25,12 +28,21 @@ Deno.serve(async (req) => {
         );
 
         const reportId = report.reportId;
-        const location = summary.location;
-        const date = summary.depositDate.split("T")[0];
+        const marketplaceName = summary.marketplace_name;
+
+        console.log(marketplaceName);
+
+        const date = summary.deposit_date.split("T")[0];
+
+        const location = marketplaces.find(
+            (m) => m.name.toLowerCase() === marketplaceName.toLowerCase(),
+        )?.country;
+
+        console.log(location);
 
         // You might need to validate or process the request here
         const pdf = await doppio(
-            `https://tax.thetismedical.com/finances/amazon/settlements/${region}/summary?report=${
+            `https://tax.thetismedical.com/settlements/${region}/summary?report=${
                 encodeURIComponent(JSON.stringify(report))
             }`,
         );
