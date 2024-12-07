@@ -46,8 +46,9 @@ Deno.serve(async (req) => {
         const emailResponse = await resend({
             prefix: "reports",
             to: Array.isArray(to) ? to : [to],
-            subject: subject || "Accounts: Amazon Settlement Report",
-            html: `<p>Please find attached the Amazon settlement report.</p>`,
+            subject: subject || `Amazon Accounts: ${filename}`,
+            html:
+                `<p>Please find attached the Amazon settlement report for ${filename}.</p>`,
             attachments: [{
                 filename,
                 content: base64Content,
