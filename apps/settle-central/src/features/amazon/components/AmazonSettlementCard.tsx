@@ -19,7 +19,8 @@ import EmailPdfDialog from "./EmailPdfDialog";
 import { Route as SummaryRoute } from "../../../routes/settlements/$region/summary";
 import { Route as ReportRoute } from "../../../routes/settlements/$region/report";
 import { useDeleteAmazonReport } from "../api/deleteAmazonReport";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight, File } from "lucide-react";
+import { FilePreview } from "@/components/FilePreview";
 
 const AmazonSettlementCard = ({
   region,
@@ -41,7 +42,15 @@ const AmazonSettlementCard = ({
           Settlement Report - {dayjs(report.dataEndTime).format("DD MMM YYYY")}
         </CardTitle>
         {downloaded && (
-          <CardDescription>{downloaded.storage_path}</CardDescription>
+          <>
+            <CardDescription>{downloaded.storage_path}</CardDescription>
+            <File size={16} />
+            <FilePreview
+              fileName={`${downloaded.storage_path}.pdf`}
+              className="mt-2"
+              thumbnailSize={100}
+            />
+          </>
         )}
       </CardHeader>
       <CardContent>
