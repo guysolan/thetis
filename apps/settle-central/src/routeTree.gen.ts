@@ -15,11 +15,11 @@ import { Route as MonthsImport } from './routes/months'
 import { Route as InstructionsImport } from './routes/instructions'
 import { Route as IndexImport } from './routes/index'
 import { Route as SettlementsIndexImport } from './routes/settlements/index'
-import { Route as YearMonthImport } from './routes/$year.$month'
 import { Route as SettlementsRegionIndexImport } from './routes/settlements/$region/index'
 import { Route as SettlementsRegionXmlImport } from './routes/settlements/$region/xml'
 import { Route as SettlementsRegionSummaryImport } from './routes/settlements/$region/summary'
 import { Route as SettlementsRegionReportImport } from './routes/settlements/$region/report'
+import { Route as RegionYearMonthImport } from './routes/$region.$year.$month'
 
 // Create/Update Routes
 
@@ -47,12 +47,6 @@ const SettlementsIndexRoute = SettlementsIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const YearMonthRoute = YearMonthImport.update({
-  id: '/$year/$month',
-  path: '/$year/$month',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const SettlementsRegionIndexRoute = SettlementsRegionIndexImport.update({
   id: '/settlements/$region/',
   path: '/settlements/$region/',
@@ -74,6 +68,12 @@ const SettlementsRegionSummaryRoute = SettlementsRegionSummaryImport.update({
 const SettlementsRegionReportRoute = SettlementsRegionReportImport.update({
   id: '/settlements/$region/report',
   path: '/settlements/$region/report',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const RegionYearMonthRoute = RegionYearMonthImport.update({
+  id: '/$region/$year/$month',
+  path: '/$region/$year/$month',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -102,18 +102,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MonthsImport
       parentRoute: typeof rootRoute
     }
-    '/$year/$month': {
-      id: '/$year/$month'
-      path: '/$year/$month'
-      fullPath: '/$year/$month'
-      preLoaderRoute: typeof YearMonthImport
-      parentRoute: typeof rootRoute
-    }
     '/settlements/': {
       id: '/settlements/'
       path: '/settlements'
       fullPath: '/settlements'
       preLoaderRoute: typeof SettlementsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/$region/$year/$month': {
+      id: '/$region/$year/$month'
+      path: '/$region/$year/$month'
+      fullPath: '/$region/$year/$month'
+      preLoaderRoute: typeof RegionYearMonthImport
       parentRoute: typeof rootRoute
     }
     '/settlements/$region/report': {
@@ -153,8 +153,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/instructions': typeof InstructionsRoute
   '/months': typeof MonthsRoute
-  '/$year/$month': typeof YearMonthRoute
   '/settlements': typeof SettlementsIndexRoute
+  '/$region/$year/$month': typeof RegionYearMonthRoute
   '/settlements/$region/report': typeof SettlementsRegionReportRoute
   '/settlements/$region/summary': typeof SettlementsRegionSummaryRoute
   '/settlements/$region/xml': typeof SettlementsRegionXmlRoute
@@ -165,8 +165,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/instructions': typeof InstructionsRoute
   '/months': typeof MonthsRoute
-  '/$year/$month': typeof YearMonthRoute
   '/settlements': typeof SettlementsIndexRoute
+  '/$region/$year/$month': typeof RegionYearMonthRoute
   '/settlements/$region/report': typeof SettlementsRegionReportRoute
   '/settlements/$region/summary': typeof SettlementsRegionSummaryRoute
   '/settlements/$region/xml': typeof SettlementsRegionXmlRoute
@@ -178,8 +178,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/instructions': typeof InstructionsRoute
   '/months': typeof MonthsRoute
-  '/$year/$month': typeof YearMonthRoute
   '/settlements/': typeof SettlementsIndexRoute
+  '/$region/$year/$month': typeof RegionYearMonthRoute
   '/settlements/$region/report': typeof SettlementsRegionReportRoute
   '/settlements/$region/summary': typeof SettlementsRegionSummaryRoute
   '/settlements/$region/xml': typeof SettlementsRegionXmlRoute
@@ -192,8 +192,8 @@ export interface FileRouteTypes {
     | '/'
     | '/instructions'
     | '/months'
-    | '/$year/$month'
     | '/settlements'
+    | '/$region/$year/$month'
     | '/settlements/$region/report'
     | '/settlements/$region/summary'
     | '/settlements/$region/xml'
@@ -203,8 +203,8 @@ export interface FileRouteTypes {
     | '/'
     | '/instructions'
     | '/months'
-    | '/$year/$month'
     | '/settlements'
+    | '/$region/$year/$month'
     | '/settlements/$region/report'
     | '/settlements/$region/summary'
     | '/settlements/$region/xml'
@@ -214,8 +214,8 @@ export interface FileRouteTypes {
     | '/'
     | '/instructions'
     | '/months'
-    | '/$year/$month'
     | '/settlements/'
+    | '/$region/$year/$month'
     | '/settlements/$region/report'
     | '/settlements/$region/summary'
     | '/settlements/$region/xml'
@@ -227,8 +227,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   InstructionsRoute: typeof InstructionsRoute
   MonthsRoute: typeof MonthsRoute
-  YearMonthRoute: typeof YearMonthRoute
   SettlementsIndexRoute: typeof SettlementsIndexRoute
+  RegionYearMonthRoute: typeof RegionYearMonthRoute
   SettlementsRegionReportRoute: typeof SettlementsRegionReportRoute
   SettlementsRegionSummaryRoute: typeof SettlementsRegionSummaryRoute
   SettlementsRegionXmlRoute: typeof SettlementsRegionXmlRoute
@@ -239,8 +239,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   InstructionsRoute: InstructionsRoute,
   MonthsRoute: MonthsRoute,
-  YearMonthRoute: YearMonthRoute,
   SettlementsIndexRoute: SettlementsIndexRoute,
+  RegionYearMonthRoute: RegionYearMonthRoute,
   SettlementsRegionReportRoute: SettlementsRegionReportRoute,
   SettlementsRegionSummaryRoute: SettlementsRegionSummaryRoute,
   SettlementsRegionXmlRoute: SettlementsRegionXmlRoute,
@@ -260,8 +260,8 @@ export const routeTree = rootRoute
         "/",
         "/instructions",
         "/months",
-        "/$year/$month",
         "/settlements/",
+        "/$region/$year/$month",
         "/settlements/$region/report",
         "/settlements/$region/summary",
         "/settlements/$region/xml",
@@ -277,11 +277,11 @@ export const routeTree = rootRoute
     "/months": {
       "filePath": "months.tsx"
     },
-    "/$year/$month": {
-      "filePath": "$year.$month.tsx"
-    },
     "/settlements/": {
       "filePath": "settlements/index.tsx"
+    },
+    "/$region/$year/$month": {
+      "filePath": "$region.$year.$month.tsx"
     },
     "/settlements/$region/report": {
       "filePath": "settlements/$region/report.tsx"

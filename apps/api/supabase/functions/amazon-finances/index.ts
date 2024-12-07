@@ -6,8 +6,8 @@ Deno.serve(async (req) => {
     return new Response("ok", { headers: corsHeaders });
   }
   try {
-    const { year, month } = await req.json();
-    const finances = await getMonthlyFinancialReport("NA", year, month);
+    const { year, month, region } = await req.json();
+    const finances = await getMonthlyFinancialReport(region, year, month);
     return new Response(
       JSON.stringify(finances.payload.transactions),
       {

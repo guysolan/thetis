@@ -1,11 +1,16 @@
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase"; // Adjust the import path as needed
 
-export const selectAmazonFinances = async (year: number, month: number) => {
+export const selectAmazonFinances = async (
+    region: "NA" | "EUR",
+    year: number,
+    month: number,
+) => {
     const { data, error } = await supabase.functions.invoke(
         "amazon-finances",
         {
             body: {
+                region: region,
                 year: year,
                 month: month,
             },
@@ -22,14 +27,18 @@ export const selectAmazonFinances = async (year: number, month: number) => {
 };
 
 export const selectAmazonFinancesQueryOptions = (
+    region: "NA" | "EUR",
     year: number,
     month: number,
 ) => {
     return queryOptions({
-        queryKey: ["amazonFinances", year, month] as const,
-        queryFn: () => selectAmazonFinances(year, month),
+        queryKey: ["amazonFinances", region, year, month] as const,
+        queryFn: () => selectAmazonFinances(region, year, month),
     });
 };
 
-export const useAmazonFinances = (year: number, month: number) =>
-    useSuspenseQuery(selectAmazonFinancesQueryOptions(year, month));
+export const useAmazonFinances = (
+    region: "NA" | "EUR",
+    year: number,
+    month: number,
+) => useSuspenseQuery(selectAmazonFinancesQueryOptions(region, year, month));

@@ -1,6 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
-import { useAmazonFinances } from '@/features/amazon/api/selectAmazonFinances'
+import { useAmazonFinances } from "@/features/amazon/api/selectAmazonFinances";
 import {
   Table,
   TableBody,
@@ -10,113 +12,133 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@thetis/ui/table'
-import { Badge } from '@thetis/ui/badge'
+} from "@thetis/ui/table";
+import { Badge } from "@thetis/ui/badge";
 
 type Transaction = {
   sellingPartnerMetadata: {
-    sellingPartnerId: string
-    marketplaceId: string
-    accountType: string
-  }
-  transactionType: string
-  transactionId: string
-  transactionStatus: string
+    sellingPartnerId: string;
+    marketplaceId: string;
+    accountType: string;
+  };
+  transactionType: string;
+  transactionId: string;
+  transactionStatus: string;
   relatedIdentifiers: Array<{
-    relatedIdentifierName: string
-    relatedIdentifierValue: string
-  }>
+    relatedIdentifierName: string;
+    relatedIdentifierValue: string;
+  }>;
   totalAmount: {
-    currencyAmount: number
-    currencyCode: string
-  }
-  description: string
-  postedDate: string
+    currencyAmount: number;
+    currencyCode: string;
+  };
+  description: string;
+  postedDate: string;
   marketplaceDetails: {
-    marketplaceId: string
-    marketplaceName: string
-  }
+    marketplaceId: string;
+    marketplaceName: string;
+  };
   items: Array<{
-    description: string | null
+    description: string | null;
     totalAmount: {
-      currencyAmount: number
-      currencyCode: string
-    }
+      currencyAmount: number;
+      currencyCode: string;
+    };
     relatedIdentifiers: Array<{
-      itemRelatedIdentifierName: string
-      itemRelatedIdentifierValue: string
-    }>
+      itemRelatedIdentifierName: string;
+      itemRelatedIdentifierValue: string;
+    }>;
     breakdowns: Array<{
-      breakdownType: string
+      breakdownType: string;
       breakdownAmount: {
-        currencyAmount: number
-        currencyCode: string
-      }
+        currencyAmount: number;
+        currencyCode: string;
+      };
       breakdowns: Array<{
-        breakdownType: string
+        breakdownType: string;
         breakdownAmount: {
-          currencyAmount: number
-          currencyCode: string
-        }
+          currencyAmount: number;
+          currencyCode: string;
+        };
         breakdowns?: Array<{
-          breakdownType: string
+          breakdownType: string;
           breakdownAmount: {
-            currencyAmount: number
-            currencyCode: string
-          }
-        }>
-      }> | null
-    }>
+            currencyAmount: number;
+            currencyCode: string;
+          };
+        }>;
+      }> | null;
+    }>;
     contexts: Array<{
-      asin: string | null
-      quantityShipped: number
-      sku: string | null
-      fulfillmentNetwork: string | null
-      contextType: string
-    }>
-  }>
+      asin: string | null;
+      quantityShipped: number;
+      sku: string | null;
+      fulfillmentNetwork: string | null;
+      contextType: string;
+    }>;
+  }>;
   breakdowns: Array<{
-    breakdownType: string
+    breakdownType: string;
     breakdownAmount: {
-      currencyAmount: number
-      currencyCode: string
-    }
+      currencyAmount: number;
+      currencyCode: string;
+    };
     breakdowns:
       | Array<{
-          breakdownType: string
+          breakdownType: string;
           breakdownAmount: {
-            currencyAmount: number
-            currencyCode: string
-          }
-          breakdowns: null
+            currencyAmount: number;
+            currencyCode: string;
+          };
+          breakdowns: null;
         }>
-      | []
-  }>
-  contexts: null
-}
+      | [];
+  }>;
+  contexts: null;
+};
+
+dayjs.extend(customParseFormat);
 
 const AmazonFinancesTable = ({
   year,
   month,
+  region,
 }: {
-  year: number
-  month: number
+  year: number;
+  month: number;
+  region: "NA" | "EUR";
 }) => {
-  const { data: transactions } = useAmazonFinances(year, month)
+  const { data: transactions } = useAmazonFinances(region, year, month);
+
+  // Filter out transfers and then sort
+  const filteredAndSortedTransactions = [...transactions]
+    .filter((transaction) => transaction.transactionType !== "Transfer")
+    .sort((a, b) => {
+      const dateA = dayjs(
+        a.postedDate,
+        region === "EUR" ? "DD/MM/YYYY" : "MM/DD/YYYY",
+      );
+      const dateB = dayjs(
+        b.postedDate,
+        region === "EUR" ? "DD/MM/YYYY" : "MM/DD/YYYY",
+      );
+      return dateB.isBefore(dateA) ? -1 : 1;
+    });
 
   const formatCurrency = (amount: number, currencyCode: string) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
       currency: currencyCode,
-    }).format(amount)
-  }
+    }).format(amount);
+  };
 
-  const totalAmount = transactions.reduce(
+  // Update totalAmount calculation to use filtered transactions
+  const totalAmount = filteredAndSortedTransactions.reduce(
     (sum: number, transaction: Transaction) =>
       sum + transaction.totalAmount.currencyAmount,
     0,
-  )
-  const currencyCode = transactions[0]?.totalAmount.currencyCode || 'USD'
+  );
+  const currencyCode = transactions[0]?.totalAmount.currencyCode || "USD";
 
   return (
     <Table>
@@ -133,23 +155,23 @@ const AmazonFinancesTable = ({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {transactions.map((transaction: Transaction) => {
+        {filteredAndSortedTransactions.map((transaction: Transaction) => {
           const productCharges = transaction.breakdowns.find(
-            (breakdown) => breakdown.breakdownType === 'ProductCharges',
+            (breakdown) => breakdown.breakdownType === "ProductCharges",
           )?.breakdownAmount || {
             currencyAmount: 0,
             currencyCode: transaction.totalAmount.currencyCode,
-          }
+          };
           const amazonFees = transaction.breakdowns.find(
-            (breakdown) => breakdown.breakdownType === 'AmazonFees',
+            (breakdown) => breakdown.breakdownType === "AmazonFees",
           )?.breakdownAmount || {
             currencyAmount: 0,
             currencyCode: transaction.totalAmount.currencyCode,
-          }
+          };
           const otherAmount =
             transaction.totalAmount.currencyAmount -
             productCharges.currencyAmount -
-            amazonFees.currencyAmount
+            amazonFees.currencyAmount;
 
           return (
             <TableRow key={transaction.transactionId}>
@@ -157,7 +179,7 @@ const AmazonFinancesTable = ({
                 {new Date(transaction.postedDate).toLocaleDateString()}
               </TableCell>
               <TableCell>
-                {transaction.items?.map((item) => item.description).join(', ')}
+                {transaction.items?.map((item) => item.description).join(", ")}
               </TableCell>
               <TableCell>
                 <Badge variant="outline">{transaction.transactionType}</Badge>
@@ -187,7 +209,7 @@ const AmazonFinancesTable = ({
                 )}
               </TableCell>
             </TableRow>
-          )
+          );
         })}
       </TableBody>
       <TableFooter>
@@ -196,23 +218,27 @@ const AmazonFinancesTable = ({
           <TableCell className="text-right">
             {formatCurrency(totalAmount, currencyCode)}
           </TableCell>
-          <TableCell colSpan={3}></TableCell>
+          <TableCell colSpan={3} />
         </TableRow>
       </TableFooter>
     </Table>
-  )
-}
+  );
+};
 
 const AmazonFinancesPage = () => {
-  const { year, month } = Route.useParams()
+  const { year, month, region } = Route.useParams();
   return (
     <div className="p-4">
       <h1 className="mb-4 font-bold text-2xl">Amazon Financial Report</h1>
-      <AmazonFinancesTable year={Number(year)} month={Number(month)} />
+      <AmazonFinancesTable
+        region={region}
+        year={Number(year)}
+        month={Number(month)}
+      />
     </div>
-  )
-}
+  );
+};
 
-export const Route = createFileRoute('/$year/$month')({
+export const Route = createFileRoute("/$region/$year/$month")({
   component: AmazonFinancesPage,
-})
+});

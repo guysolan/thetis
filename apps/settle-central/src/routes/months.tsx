@@ -39,27 +39,39 @@ const AmazonFinancialReports = () => {
                 <CardHeader>
                   <CardTitle>{month}</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="flex space-x-2">
-                    <Button
-                      asChild
-                      variant="default"
-                      disabled={
-                        year === currentYear && index + 1 > currentMonth
-                      }
+                <CardContent className="flex flex-row flex-wrap gap-2">
+                  <Button
+                    asChild
+                    variant="secondary"
+                    disabled={year === currentYear && index + 1 > currentMonth}
+                  >
+                    <Link
+                      to={"/$region/$year/$month"}
+                      params={{
+                        region: "EUR",
+                        month: String(index + 1),
+                        year: String(year),
+                      }}
                     >
-                      <Link to={`${year}/${index + 1}`}>Report</Link>
-                    </Button>
-                    <Button
-                      asChild
-                      variant="secondary"
-                      disabled={
-                        year === currentYear && index + 1 > currentMonth
-                      }
+                      Europe
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="default"
+                    disabled={year === currentYear && index + 1 > currentMonth}
+                  >
+                    <Link
+                      to={"/$region/$year/$month"}
+                      params={{
+                        region: "NA",
+                        month: String(index + 1),
+                        year: String(year),
+                      }}
                     >
-                      <Link to={`${year}/${index + 1}`}>Transactions</Link>
-                    </Button>
-                  </div>
+                      North America
+                    </Link>
+                  </Button>
                 </CardContent>
               </Card>
             ))}
@@ -70,6 +82,6 @@ const AmazonFinancialReports = () => {
   );
 };
 
-export const Route = createFileRoute("/index copy")({
+export const Route = createFileRoute("/months")({
   component: AmazonFinancialReports,
 });
