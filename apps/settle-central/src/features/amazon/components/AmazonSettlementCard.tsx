@@ -44,7 +44,6 @@ const AmazonSettlementCard = ({
         {downloaded && (
           <>
             <CardDescription>{downloaded.storage_path}</CardDescription>
-            <File size={16} />
             <FilePreview
               fileName={`${downloaded.storage_path}.pdf`}
               className="mt-2"
