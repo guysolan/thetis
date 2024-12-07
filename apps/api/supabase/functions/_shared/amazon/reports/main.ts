@@ -179,7 +179,7 @@ export function calculateSales(analysis: any, euro?: boolean) {
     const tax = order?.ItemPrice?.Tax || 0;
     const shipping = order?.ItemPrice?.Shipping || 0;
     const shippingTax = order?.ItemPrice?.ShippingTax || 0;
-    const promotionTaxDiscount = order.Promotion?.TaxDiscount || 0;
+    const promotionTaxDiscount = order?.Promotion?.TaxDiscount || 0;
 
     // Item withheld tax
     const item_withheld_tax = sumObjectValues(

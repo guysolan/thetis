@@ -8,7 +8,9 @@ import {
 } from "@thetis/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@thetis/ui/card";
 import dayjs from "dayjs";
-import Numberflow from "@number-flow/react";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+
+dayjs.extend(customParseFormat);
 import NumberFlow from "@number-flow/react";
 const formatCurrency = (num: number, currency: string) => {
   return `${Number(num ?? 0).toFixed(2)} ${currency}`;
@@ -110,11 +112,21 @@ const AmazonReportById = ({ summary }: { summary: SummaryData }) => {
         <div className="text-muted-foreground text-sm">
           <div>Settlement {summary.settlement_id}</div>
           <div>
-            {dayjs(summary.settlement_start_date).format("DD MMM YYYY")} -{" "}
-            {dayjs(summary.settlement_end_date).format("DD MMM YYYY")}
+            {dayjs(
+              summary.settlement_start_date,
+              "DD.MM.YYYY HH:mm:ss UTC",
+            ).format("DD MMM YYYY")}{" "}
+            -{" "}
+            {dayjs(
+              summary.settlement_end_date,
+              "DD.MM.YYYY HH:mm:ss UTC",
+            ).format("DD MMM YYYY")}
           </div>
           <div>
-            Deposit date: {dayjs(summary.deposit_date).format("DD MMM YYYY")}
+            Deposit date:{" "}
+            {dayjs(summary.deposit_date, "DD.MM.YYYY HH:mm:ss UTC").format(
+              "DD MMM YYYY",
+            )}
           </div>
         </div>
       </div>
