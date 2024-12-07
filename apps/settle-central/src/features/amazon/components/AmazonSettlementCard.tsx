@@ -19,6 +19,7 @@ import EmailPdfDialog from "./EmailPdfDialog";
 import { Route as SummaryRoute } from "../../../routes/settlements/$region/summary";
 import { Route as ReportRoute } from "../../../routes/settlements/$region/report";
 import { useDeleteAmazonReport } from "../api/deleteAmazonReport";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const AmazonSettlementCard = ({
   region,
@@ -54,7 +55,7 @@ const AmazonSettlementCard = ({
             search={{ report: report }}
             className="flex justify-between items-center py-1 w-full text-zinc-700 hover:underline"
           >
-            Open Summary <span className="ml-2">→</span>
+            Open Summary <ArrowRight size={20} />
           </Link>
           <Separator />
 
@@ -66,7 +67,7 @@ const AmazonSettlementCard = ({
             search={{ report: report }}
             className="flex justify-between items-center py-1 w-full text-zinc-700 hover:underline"
           >
-            Open Table <span className="ml-2">��</span>
+            Open Table <ArrowRight size={20} />
           </Link>
           <Separator />
         </div>
