@@ -66,19 +66,6 @@ function getAmountByField(
     return v_totalAmount;
 }
 
-function getTotalAmount(data: AmazonSettlementRecord[]): number {
-    let v_totalAmount = 0;
-
-    for (const record of data) {
-        const v_amount = record["total-amount"] || 0;
-        if (!Number.isNaN(v_amount)) {
-            v_totalAmount += v_amount;
-        }
-    }
-
-    return v_totalAmount;
-}
-
 function getCurrency(data: AmazonSettlementRecord[]): string {
     for (const record of data) {
         if (record?.currency !== "") {
@@ -131,8 +118,9 @@ function analyzeSettlementReport(data: AmazonSettlementRecord[]) {
             result[transType][amountType] = {};
 
             for (const [amountDesc, total] of amountTypeMap) {
-                result[transType][amountType][amountDesc] = Number.parseFloat(
-                    total.toFixed(2),
+                const v_amount = typeof total === "number" ? total : 0;
+                result[transType][amountType][amountDesc] = Number(
+                    v_amount.toFixed(2),
                 );
             }
         }
@@ -144,69 +132,122 @@ function analyzeSettlementReport(data: AmazonSettlementRecord[]) {
 }
 
 export function calculateRefunds(analysis: any) {
-    const v_promotion = analysis.summary.Refund?.Promotion || {};
-    const v_itemPrice = analysis.summary.Refund?.ItemPrice || {};
-    const v_itemWithheldTax = analysis.summary.Refund?.ItemWithheldTax || {};
-    const v_itemFees = analysis.summary.Refund?.ItemFees || {};
+    const itemPrice = analysis.summary.Refund?.ItemPrice || {};
 
+    const refundPromotionTaxDiscount =
+        analysis.summary.Refund?.Promotion?.TaxDiscount || 0;
+    const refundPromotionShipping =
+        analysis.summary.Refund?.Promotion?.Shipping || 0;
+
+    const itemWithheldTaxTotal = sumObjectValues(
+        analysis.summary.Refund?.ItemWithheldTax || {},
+    );
+
+    const refundedSalesTotal = sumValues(
+        [
+            itemPrice.Principal,
+            itemPrice.Tax,
+            itemPrice.Shipping,
+            itemPrice.ShippingTax,
+            itemWithheldTaxTotal,
+            refundPromotionTaxDiscount,
+        ],
+    );
+
+    const refundItemFees = sumObjectValues(
+        analysis.summary.Refund?.ItemFees || {},
+    );
+
+    const restockingFee = itemPrice?.RestockingFee || 0;
     // Calculate Refunded Expenses
-    const v_refundedExpenses = sumValues(Object.values(v_itemFees)) +
-        (v_promotion.Shipping || 0);
-
-    // Calculate Refunded Sales
-    const v_refundedSales = sumValues(Object.values(v_itemPrice)) +
-        sumValues(Object.values(v_itemWithheldTax)) +
-        (v_promotion.TaxDiscount || 0);
+    const refundedExpensesTotal = refundItemFees + restockingFee +
+        refundPromotionShipping;
 
     return {
-        total: v_refundedSales + v_refundedExpenses,
-        refunded_expenses: v_refundedExpenses,
-        refunded_sales: v_refundedSales,
+        total: refundedSalesTotal + refundedExpensesTotal,
+        refunded_expenses: refundedExpensesTotal,
+        refunded_sales: refundedSalesTotal,
     };
 }
 
 export function calculateSales(analysis: any, euro?: boolean) {
     const order = analysis.summary.Order;
+    const item_price_total = sumObjectValues(order?.ItemPrice || {});
+
+    // ItemPrice
     const product_charges = order?.ItemPrice?.Principal || 0;
-    const tax = euro ? 0 : order?.ItemPrice?.Tax || 0;
+    const tax = order?.ItemPrice?.Tax || 0;
     const shipping = order?.ItemPrice?.Shipping || 0;
+    const shippingTax = order?.ItemPrice?.ShippingTax || 0;
+    const promotionTaxDiscount = order.Promotion?.TaxDiscount || 0;
+
+    // Item withheld tax
+    const item_withheld_tax = sumObjectValues(
+        order?.ItemWithheldTax || {},
+    );
+
+    // Other
+    const other = sumObjectValues(
+        analysis.summary?.Liquidations?.ItemPrice || {},
+    );
+
     const inventory_reimbursements =
         analysis.summary["other-transaction"]?.["FBA Inventory Reimbursement"]
             ?.REVERSAL_REIMBURSEMENT || 0;
-    const total = sumValues([
-        product_charges,
+
+    const taxTotal = sumValues([
         tax,
+        item_withheld_tax,
+        promotionTaxDiscount,
+        shippingTax,
+    ]);
+
+    const total = sumValues([
+        item_price_total,
+        item_withheld_tax,
+        other,
+        inventory_reimbursements,
+        promotionTaxDiscount,
+    ]);
+
+    return {
+        total,
+        product_charges,
+        other,
+        tax: taxTotal,
         shipping,
         inventory_reimbursements,
-    ]);
-    return { total, product_charges, tax, shipping, inventory_reimbursements };
+    };
 }
 
 function calculateAmazonFees(analysis: any) {
-    const v_refundFees = Object.values(analysis.summary?.Order?.ItemFees || {});
-    const v_totalRefundFees = sumValues(v_refundFees as number[]);
-    return v_totalRefundFees;
+    const liquidationFees =
+        sumObjectValues(analysis.summary?.Liquidations?.ItemFees) ?? 0;
+    const refundFees = sumObjectValues(analysis.summary?.Order?.ItemFees || {});
+    return liquidationFees + refundFees;
 }
 
 export function calculateExpenses(analysis: any, euro?: boolean) {
-    const amazon_fees = calculateAmazonFees(analysis);
-    const promo_rebates = analysis.summary?.Order?.Promotion?.Shipping;
+    const amazon_fees = calculateAmazonFees(analysis) ?? 0;
+    const promo_rebates = analysis.summary?.Order?.Promotion?.Shipping ?? 0;
+    const cost_of_advertising = sumObjectValues(
+        analysis.summary?.ServiceFee?.["Cost of Advertising"],
+    ) ?? 0;
     const fba_fees = euro ? 0 : sumObjectValues(
         analysis.summary?.["other-transaction"]?.["other-transaction"],
-    );
+    ) ?? 0;
     const inventory_reimbursements = sumObjectValues(
         analysis.summary["other-transaction"]?.["FBA Inventory Reimbursement"],
-    );
-
-    console.log(inventory_reimbursements);
+    ) ?? 0;
 
     const total = sumValues([
         amazon_fees,
         promo_rebates,
+        cost_of_advertising,
         fba_fees,
         // inventory_reimbursements,
     ]);
-    return { total, amazon_fees, promo_rebates, fba_fees };
+    return { total, amazon_fees, cost_of_advertising, promo_rebates, fba_fees };
 }
 
 export function generateSummary(data: any): Summary {
@@ -214,12 +255,9 @@ export function generateSummary(data: any): Summary {
     const euro = currency === "EUR";
     const analysis = analyzeSettlementReport(data);
 
-    // console.log("\n\n Analysis \n\n");
-    // console.log(analysis);
-    // console.log("\n\n Analysis \n\n");
-
     return {
         ...getMetadata(data),
+        currency: currency,
         sales: calculateSales(analysis, euro),
         refunds: calculateRefunds(analysis),
         expenses: calculateExpenses(analysis, euro),
@@ -233,6 +271,5 @@ export function generateSummary(data: any): Summary {
             "amount-description",
             "Previous Reserve Amount Balance",
         ),
-        net_proceeds: getTotalAmount(data),
     } as Summary;
 }

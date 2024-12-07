@@ -1,21 +1,21 @@
 {
-  "version": "3",
-  "packages": {
-    "specifiers": {
-      "npm:dayjs": "npm:dayjs@1.11.10",
-      "npm:dayjs@1.11.10": "npm:dayjs@1.11.10",
-      "npm:lodash": "npm:lodash@4.17.21",
-      "npm:lodash@4.17.21": "npm:lodash@4.17.21"
+  "version": "4",
+  "specifiers": {
+    "npm:change-case@*": "5.4.4",
+    "npm:dayjs@*": "1.11.10",
+    "npm:dayjs@1.11.10": "1.11.10",
+    "npm:lodash@*": "4.17.21",
+    "npm:lodash@4.17.21": "4.17.21"
+  },
+  "npm": {
+    "change-case@5.4.4": {
+      "integrity": "sha512-HRQyTk2/YPEkt9TnUPbOpr64Uw3KOicFWPVBb+xiHvd6eBx/qPr9xqfBFDT8P2vWsvvz4jbEkfDe71W3VyNu2w=="
     },
-    "npm": {
-      "dayjs@1.11.10": {
-        "integrity": "sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==",
-        "dependencies": {}
-      },
-      "lodash@4.17.21": {
-        "integrity": "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==",
-        "dependencies": {}
-      }
+    "dayjs@1.11.10": {
+      "integrity": "sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ=="
+    },
+    "lodash@4.17.21": {
+      "integrity": "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
     }
   },
   "redirects": {

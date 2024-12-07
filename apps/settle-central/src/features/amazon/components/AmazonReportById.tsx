@@ -7,6 +7,9 @@ import {
   TableRow,
 } from "@thetis/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@thetis/ui/card";
+import dayjs from "dayjs";
+import Numberflow from "@number-flow/react";
+import NumberFlow from "@number-flow/react";
 const formatCurrency = (num: number, currency: string) => {
   return `${Number(num ?? 0).toFixed(2)} ${currency}`;
 };
@@ -57,18 +60,16 @@ type SummaryData = {
 
 const AmazonReportById = ({ summary }: { summary: SummaryData }) => {
   const settlementDetails = [
+    { label: "Marketplace Name", value: summary.marketplace_name },
     { label: "Settlement ID", value: summary.settlement_id },
     { label: "Settlement Start Date", value: summary.settlement_start_date },
     { label: "Settlement End Date", value: summary.settlement_end_date },
     { label: "Deposit Date", value: summary.deposit_date },
-    {
-      label: "Net Proceeds",
-      value: formatCurrency(parseFloat(summary.net_proceeds), "USD"),
-    },
-    { label: "Marketplace Name", value: summary.marketplace_name },
   ];
 
   const financialSummary = [
+    { label: "Beginning Balance", value: summary.beginning_balance },
+
     { label: "Sales Total", value: summary.sales.total },
     {
       label: "Product Charges",
@@ -96,23 +97,27 @@ const AmazonReportById = ({ summary }: { summary: SummaryData }) => {
     { label: "Expenses Total", value: summary.expenses.total },
     { label: "Amazon Fees", value: summary.expenses.amazon_fees, indent: true },
     { label: "FBA Fees", value: summary.expenses.fba_fees, indent: true },
-    { label: "Account Reserve Level", value: summary.account_reserve_level },
-    { label: "Beginning Balance", value: summary.beginning_balance },
+    {
+      label: "Net Proceeds",
+      value: Number.parseFloat(summary.net_proceeds),
+    },
   ];
 
   return (
     <div className="space-y-8">
-      <CardTitle>Settlement Detail for {summary.marketplace_name}</CardTitle>
-      <Table>
-        <TableBody>
-          {settlementDetails.map(({ label, value }) => (
-            <TableRow key={label}>
-              <TableCell className="font-medium text-left">{label}</TableCell>
-              <TableCell className="text-right">{value}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <div className="space-y-2">
+        <CardTitle>Settlement Detail for {summary.marketplace_name}</CardTitle>
+        <div className="text-muted-foreground text-sm">
+          <div>Settlement {summary.settlement_id}</div>
+          <div>
+            {dayjs(summary.settlement_start_date).format("DD MMM YYYY")} -{" "}
+            {dayjs(summary.settlement_end_date).format("DD MMM YYYY")}
+          </div>
+          <div>
+            Deposit date: {dayjs(summary.deposit_date).format("DD MMM YYYY")}
+          </div>
+        </div>
+      </div>
 
       <CardTitle>Financial Summary</CardTitle>
       <Table>
@@ -131,7 +136,13 @@ const AmazonReportById = ({ summary }: { summary: SummaryData }) => {
                 {label}
               </TableCell>
               <TableCell className="text-right">
-                {formatCurrency(value, "USD")}
+                <NumberFlow
+                  value={value}
+                  format={{
+                    style: "currency",
+                    currency: summary.currency,
+                  }}
+                />
               </TableCell>
             </TableRow>
           ))}

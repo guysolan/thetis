@@ -13,6 +13,7 @@ export interface Summary {
         tax: number;
         shipping: number;
         inventory_reimbursements: number;
+        other: number;
     };
     refunds: {
         total: number;
@@ -24,5 +25,6 @@ export interface Summary {
         fba_fees: number;
         amazon_fees: number;
         promo_rebates: number;
+        cost_of_advertising: number;
     };
 }

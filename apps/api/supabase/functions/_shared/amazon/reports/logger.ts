@@ -88,6 +88,12 @@ export function logAnalysis(
     );
 
     compareValues(
+        "- Other",
+        expectedValues.other,
+        summary.sales.other,
+    );
+
+    compareValues(
         "\n\nRefunds:",
         expectedValues.refunds,
         summary.refunds.total,
@@ -108,10 +114,17 @@ export function logAnalysis(
         expectedValues.expenses,
         summary.expenses.total,
     );
+
     compareValues(
         "- Amazon Fees",
         expectedValues.amazonFees,
         summary.expenses.amazon_fees,
+    );
+
+    compareValues(
+        "- Cost of Advertising",
+        expectedValues.costOfAdvertising,
+        summary.expenses.cost_of_advertising,
     );
 
     compareValues(
