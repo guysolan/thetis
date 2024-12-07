@@ -38,7 +38,7 @@ const AmazonSettlementCard = ({
     <Card key={report.reportId}>
       <CardHeader>
         <CardTitle>
-          Settlement Report - {dayjs(report.dataEndTime).format("YYYY-MM-DD")}
+          Settlement Report - {dayjs(report.dataEndTime).format("DD MMM YYYY")}
         </CardTitle>
         {downloaded && (
           <CardDescription>{downloaded.storage_path}</CardDescription>
