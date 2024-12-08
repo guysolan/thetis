@@ -14,7 +14,7 @@ import { AmazonReport } from "@/features/amazon/components/AmazonReportById";
 import { useSaveAmazonReport } from "@/features/amazon/api/saveAmazonReport";
 import { useDownloadedAmazonReports } from "../api/selectDownloadedAmazonReports";
 import { Separator } from "@thetis/ui/separator";
-import { useDownloadFile } from "../api/useDownloadFile";
+import { useDownloadFiles } from "../api/useDownloadFiles";
 import EmailPdfDialog from "./EmailPdfDialog";
 import { Route as SummaryRoute } from "../../../routes/settlements/$region/summary";
 import { Route as ReportRoute } from "../../../routes/settlements/$region/report";
@@ -26,7 +26,7 @@ const AmazonSettlementCard = ({
   region,
   report,
 }: { region: string; report: AmazonReport }) => {
-  const { mutate: downloadFile } = useDownloadFile();
+  const { mutate: downloadFile } = useDownloadFiles();
   const { mutate: saveReport, isPending: isSavingReport } =
     useSaveAmazonReport();
   const { mutate: deleteReport, isPending: isDeletingReport } =

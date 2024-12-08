@@ -13,6 +13,9 @@ const AmazonFinancialReports = () => {
             <CardTitle>Months</CardTitle>
           </CardHeader>
           <CardContent>
+            <p className="mb-4 text-muted-foreground text-sm">
+              Track monthly revenue, expenses, and profit trends.
+            </p>
             <div className="flex space-x-2">
               <Button asChild variant="default">
                 <Link to="/months">Months</Link>
@@ -25,6 +28,9 @@ const AmazonFinancialReports = () => {
             <CardTitle>Settlements</CardTitle>
           </CardHeader>
           <CardContent>
+            <p className="mb-4 text-muted-foreground text-sm">
+              View detailed Amazon settlement reports and transactions.
+            </p>
             <div className="flex space-x-2">
               <Button asChild variant="default">
                 <Link to="/settlements">Settlements</Link>
@@ -34,9 +40,27 @@ const AmazonFinancialReports = () => {
         </Card>
         <Card>
           <CardHeader>
+            <CardTitle>Saved</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4 text-muted-foreground text-sm">
+              Quick access to saved reports and analyses.
+            </p>
+            <div className="flex space-x-2">
+              <Button asChild variant="default">
+                <Link to="/settlements/saved">Settlements</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
             <CardTitle>Instructions</CardTitle>
           </CardHeader>
           <CardContent>
+            <p className="mb-4 text-muted-foreground text-sm">
+              Step-by-step guides for VAT filing for Guy.
+            </p>
             <div className="flex space-x-2">
               <Button asChild variant="default">
                 <Link to="/instructions">Instructions</Link>
