@@ -57,27 +57,27 @@ export const documentOptionsSchema = z.object({
   from: z
     .object({
       show: z.boolean().default(true),
-      billing: z.boolean().default(false),
+      billing: z.boolean().default(true),
       shipping: z.boolean().default(true),
       contact: z.boolean().default(true),
     })
     .default({
       show: true,
-      billing: false,
+      billing: true,
       shipping: true,
       contact: true,
     }),
   to: z
     .object({
       show: z.boolean().default(true),
-      billing: z.boolean().default(false),
-      shipping: z.boolean().default(false),
+      billing: z.boolean().default(true),
+      shipping: z.boolean().default(true),
       contact: z.boolean().default(true),
     })
     .default({
       show: true,
-      billing: false,
-      shipping: false,
+      billing: true,
+      shipping: true,
       contact: true,
     }),
   payment: z.boolean().default(false),

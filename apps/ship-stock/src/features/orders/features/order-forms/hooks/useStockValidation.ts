@@ -1,39 +1,56 @@
 import { useFormContext, useWatch } from "react-hook-form";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { StockValidationResult } from "../types";
 import { useStockQuantities } from "./useStockQuantities";
+import { useSelectItemsView } from "../../../../items/api/selectItemsView";
 
 export interface StockValidationConfig {
     itemsFieldName?: string;
-    addressFieldName?: string;
 }
 
 export const useStockValidation = (config?: StockValidationConfig) => {
     const {
         itemsFieldName = "from_items",
-        addressFieldName = "from_shipping_address_id",
     } = config || {};
 
+    const form = useFormContext();
+
+    console.log("form", form.getValues());
     const { control } = useFormContext();
-    const items = useWatch({ control, name: itemsFieldName });
-    const { getItemQuantities } = useStockQuantities(
-        itemsFieldName,
-        addressFieldName,
-    );
+
+    // Watch all relevant fields explicitly
+    const items = useWatch({
+        control,
+        name: itemsFieldName,
+        defaultValue: [],
+    });
+
+    console.log("items", items);
+
+    const { data: itemsView } = useSelectItemsView();
 
     const negativeStockItems = useMemo((): StockValidationResult[] => {
-        if (!items) return [];
+        if (!items || !itemsView) return [];
 
         return items
             .filter((item) => {
-                const quantities = getItemQuantities(item.item_id);
-                return quantities.after < 0;
+                // Add more detailed validation
+                const quantityAfter = Number(item.quantity_after);
+                return !Number.isNaN(quantityAfter) && quantityAfter < 0;
             })
-            .map((item) => ({
-                ...item,
-                item_quantity: getItemQuantities(item.item_id).after,
-            }));
-    }, [items, getItemQuantities]);
+            .map((item) => {
+                const itemView = itemsView.find((view) =>
+                    String(view.item_id) === String(item.item_id)
+                );
+                return {
+                    item_name: itemView?.item_name || "Unknown Item",
+                    quantity_after: item.quantity_after,
+                    item_id: item.item_id, // Add this for debugging
+                };
+            });
+    }, [items, itemsView]);
+
+    console.log(negativeStockItems);
 
     return {
         hasNegativeStock: negativeStockItems.length > 0,

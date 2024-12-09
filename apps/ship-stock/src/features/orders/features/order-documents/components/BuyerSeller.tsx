@@ -23,27 +23,6 @@ const BuyerSeller = ({ order, fromOptions, toOptions }: BuyerSellerProps) => {
   console.log(fromOptions);
   return (
     <div className="gap-8 grid grid-cols-2 capitalize">
-      {fromOptions.show && (
-        <div>
-          <Company title="Seller" company={order.from_company} />
-          {fromOptions.shipping && (
-            <ShippingAddress
-              title="Shipping Address"
-              size="small"
-              address={order.from_shipping_address}
-              contactName={order.from_contact?.name}
-              company={order.from_company}
-            />
-          )}
-          {fromOptions.billing && (
-            <Address
-              title="Billing Address"
-              address={order.from_billing_address}
-            />
-          )}
-          {fromOptions.contact && <Contact contact={order.from_contact} />}
-        </div>
-      )}
       {toOptions.show && (
         <div>
           <Company title="Buyer" company={order.to_company} />
@@ -63,6 +42,27 @@ const BuyerSeller = ({ order, fromOptions, toOptions }: BuyerSellerProps) => {
             />
           )}
           {toOptions.contact && <Contact contact={order.to_contact} />}
+        </div>
+      )}
+      {fromOptions.show && (
+        <div>
+          <Company title="Seller" company={order.from_company} />
+          {fromOptions.shipping && (
+            <ShippingAddress
+              title="Shipping Address"
+              size="small"
+              address={order.from_shipping_address}
+              contactName={order.from_contact?.name}
+              company={order.from_company}
+            />
+          )}
+          {fromOptions.billing && (
+            <Address
+              title="Billing Address"
+              address={order.from_billing_address}
+            />
+          )}
+          {fromOptions.contact && <Contact contact={order.from_contact} />}
         </div>
       )}
     </div>

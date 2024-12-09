@@ -7,6 +7,7 @@ import TabsHeader from "@/components/TabsHeader";
 
 import { OrderForm } from "@/features/orders/components/OrderForm";
 import { OrderHistory } from "@/features/orders/components/OrderHistory";
+import { MultiOrderForm } from "../../features/orders/features/multi-order-form/MultiOrderForm";
 
 export type OrderTab = "sale" | "purchase" | "shipment" | "all";
 const tabs: OrderTab[] = ["all", "purchase", "sale", "shipment"];
@@ -35,7 +36,8 @@ const OrdersPage = () => {
                   key={tabValue}
                   value={tabValue}
                 >
-                  <OrderForm defaultTab={tabValue} />
+                  <MultiOrderForm defaultOrderType={tabValue} />
+                  {/* <OrderForm defaultTab={tabValue} /> */}
                 </TabsContent>
               ))}
             </Sheet>

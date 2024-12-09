@@ -43,7 +43,11 @@ const NumberFlowCell = (props: NumberCellProps) => {
     <TableCell
       onClick={focus}
       onBlur={blur}
-      className={cn("text-center", isFocused && "cursor-default")}
+      className={cn(
+        "text-center",
+        isFocused && "cursor-default",
+        numericValue < 0 && "text-red-500",
+      )}
     >
       <Input
         focus={focus}

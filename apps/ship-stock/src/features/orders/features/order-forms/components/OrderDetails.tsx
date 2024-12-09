@@ -1,7 +1,7 @@
-import DatePicker from "../../../../../../../components/DatePicker";
-import Input from "../../../../../../../components/Input";
-import Select from "../../../../../../../components/Select";
-import { currencyKeys } from "../../../../../../../constants/currencies";
+import DatePicker from "../../../../../components/DatePicker";
+import Input from "../../../../../components/Input";
+import Select from "../../../../../components/Select";
+import { currencyKeys } from "../../../../../constants/currencies";
 import { Card } from "@thetis/ui/card";
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 import { EditIcon, Pencil } from "lucide-react";
 
 const SellFormFields = () => {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(true);
   const { watch } = useFormContext();
 
   const orderDate = watch("order_date");

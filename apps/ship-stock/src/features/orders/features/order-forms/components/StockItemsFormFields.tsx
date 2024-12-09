@@ -43,8 +43,6 @@ const StockItemsFormFields = ({
   onRemove,
   showPrice = false,
   onUpdate,
-  onToggleLock,
-  isLocked = () => false,
   allowedTypes = [],
   showQuantity = true,
 }: StockItemsFormFieldsProps) => {

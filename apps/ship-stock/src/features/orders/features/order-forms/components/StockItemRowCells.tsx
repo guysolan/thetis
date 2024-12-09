@@ -58,7 +58,7 @@ const StockItemRowCells = ({
   const price = form.watch(`${name}.${index}.item_price`) || 0;
   const tax = form.watch(`${name}.${index}.item_tax`) || 0;
   const address = form.watch("from_shipping_address_id");
-
+  const isSale = form.watch("order_type") === "sale";
   const { data: itemsView } = useSelectItemsView();
   const { data: stockItems } = useSelectItemsByAddress();
 
@@ -68,12 +68,29 @@ const StockItemRowCells = ({
 
   const findItemQuantity = (itemId: string) => {
     const itemInStock = stockItems?.find((item) => {
+      const stockItemId = String(item.item_id).trim();
+      const searchItemId = String(itemId).trim();
       return (
-        String(item.item_id) === String(itemId) &&
+        stockItemId === searchItemId &&
         String(item.address_id) === String(address)
       );
     });
-    return itemInStock?.item_quantity;
+    return itemInStock?.item_quantity ?? 0;
+  };
+
+  const updateQuantities = (index: number, quantityChange: number) => {
+    console.log(`${name}.${index}.item_id`);
+    const itemId = form.watch(`${name}.${index}.item_id`);
+    console.log(itemId);
+    const quantityBefore = findItemQuantity(itemId);
+
+    console.log(quantityBefore);
+    const change = quantityChange ?? 1;
+    const after = isSale ? quantityBefore - change : quantityBefore + change;
+
+    form.setValue(`${name}.${index}.quantity_before`, quantityBefore);
+    form.setValue(`${name}.${index}.quantity_change`, quantityChange);
+    form.setValue(`${name}.${index}.quantity_after`, after);
   };
 
   const handleItemChange = (itemId: string) => {
@@ -81,7 +98,7 @@ const StockItemRowCells = ({
     const itemQuantity = findItemQuantity(itemId);
     const before = itemQuantity;
     const change = quantityChange ?? 1;
-    const after = itemQuantity + change;
+    const after = isSale ? itemQuantity - change : itemQuantity + change;
     const itemPrice = item?.item_price ?? 1;
     const itemTotal = calculateItemTotal(itemPrice, defaultTax, change);
     form.setValue(`${name}.${index}.item_id`, itemId);
@@ -94,7 +111,8 @@ const StockItemRowCells = ({
     onUpdate?.();
   };
 
-  const handleQuantityChange = (value: number) => {
+  const handleQuantityChange = (value: number, index: number) => {
+    console.log(value);
     form.setValue(`${name}.${index}.quantity_change`, value);
     if (value && price) {
       const calculatedTotal = value * price * (1 + (tax || 0) / 100);
@@ -103,7 +121,7 @@ const StockItemRowCells = ({
         Number(calculatedTotal.toFixed(2)),
       );
     }
-    form.setValue(`${name}.${index}.quantity_after`, quantityBefore + value);
+    updateQuantities(index, value);
     onUpdate?.();
   };
 
@@ -171,7 +189,7 @@ const StockItemRowCells = ({
           </Select>
         </TableCell>
       )}
-      <TableCell className="truncate">
+      <TableCell className="w-1/4 truncate">
         <Select value={itemId} onValueChange={handleItemChange}>
           <SelectTrigger className="w-40">
             <SelectValue placeholder="Select an item" />
@@ -190,7 +208,7 @@ const StockItemRowCells = ({
       <NumberCell
         name={`${name}.${index}.quantity_change`}
         step={1}
-        onChange={handleQuantityChange}
+        onChange={(value) => handleQuantityChange(value, index)}
         editable={editable}
         format={{ style: "decimal" }}
       />
@@ -228,7 +246,10 @@ const StockItemRowCells = ({
       )}
       {showQuantity && (
         <TableCell className="text-center">
-          <NumberFlow value={quantityAfter} />
+          <NumberFlow
+            className={quantityAfter < 0 ? "text-red-500" : ""}
+            value={quantityAfter}
+          />
         </TableCell>
       )}
       <TableCell>

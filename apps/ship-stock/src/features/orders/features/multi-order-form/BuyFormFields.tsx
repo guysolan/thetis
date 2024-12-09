@@ -1,12 +1,9 @@
-import StockItems from "../../components/StockItems";
-import { StockValidationAlert } from "../../components/StockValidationAlert";
-import { useBuyForm } from "./useBuyForm";
-import Select from "../../../../../../components/Select";
-import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";
+import StockItems from "../order-forms/components/StockItems";
+import { StockValidationAlert } from "../order-forms/components/StockValidationAlert";
+import { useBuyForm } from "../order-forms/features/buy-form/useBuyForm";
+import Select from "../../../../components/Select";
+import useCompanyDefaults from "../../../companies/hooks/useCompanyDefaults";
 import { useFormContext, useWatch } from "react-hook-form";
-import OrderDetails from "../../components/OrderDetails";
-import BuyerSeller from "../../../../../companies/components/BuyerSeller";
-import PriceSummary from "../../components/PriceSummary";
 import { useEffect } from "react";
 const BuyFormFields = () => {
   const form = useFormContext();
@@ -29,15 +26,6 @@ const BuyFormFields = () => {
     form.setValue("produced_items", [...producedItems, newItem]);
   return (
     <>
-      <OrderDetails />
-      <BuyerSeller />
-      <Select
-        name="item_type"
-        options={["product", "part"].map((type) => ({
-          label: type,
-          value: type,
-        }))}
-      />
       {itemType === "part" && (
         <StockItems
           name="order_items"
@@ -79,7 +67,6 @@ const BuyFormFields = () => {
           />
         </>
       )}
-      <PriceSummary />
     </>
   );
 };

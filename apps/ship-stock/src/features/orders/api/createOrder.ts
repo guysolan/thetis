@@ -7,13 +7,16 @@ import { closeSheet } from "@/utils/closeSheet";
 import { CreateOrderType } from "../features/order-forms/utils/formatCreateOrderArguments";
 import { openDefaultDocument } from "../features/order-documents/utils/openDefaultDocument";
 import { OrderType } from "../types";
+import { MultiOrderFormData } from "../features/multi-order-form/schema";
+import { processMultiOrderFormData } from "../features/multi-order-form/utils";
 
-const createOrder = async (orderData: CreateOrderType) => {
+const createOrder = async (formData: MultiOrderFormData) => {
+	const orderData = processMultiOrderFormData(formData);
+
 	const { data: result, error } = await supabase.rpc(
 		"insert_order",
 		orderData,
 	);
-	console.log(result, error);
 	if (error) throw error;
 	return result;
 };
@@ -28,7 +31,7 @@ export const useCreateOrder = (orderType: OrderType) => {
 			openDefaultDocument(data[0].order_id, orderType);
 			closeSheet();
 			// @ts-ignore
-			mutation?.onSuccess&&mutation.onSuccess();
+			mutation?.onSuccess && mutation.onSuccess();
 		},
 		onError: () => {
 			toast.error("Error creating order");

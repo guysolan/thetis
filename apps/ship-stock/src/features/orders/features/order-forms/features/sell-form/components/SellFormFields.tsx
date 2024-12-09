@@ -13,7 +13,7 @@ import { Card } from "@thetis/ui/card";
 import { useFormContext } from "react-hook-form";
 import PriceItemsSummary from "../../../components/PriceItemsSummary";
 import StockItemsSummary from "../../../components/StockItemsSummary";
-import OrderDetails from "./OrderDetails";
+import OrderDetails from "../../../components/OrderDetails";
 import BuyerSeller from "../../../../../../companies/components/BuyerSeller";
 // import StockItemsFormFields from "../../../components/StockItemsFormFields";
 

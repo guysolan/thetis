@@ -2,7 +2,6 @@ import { useFormContext } from "react-hook-form";
 import PriceSummary from "./PriceSummary";
 import { useOrderItems } from "../hooks/useOrderItems";
 import { useSelectItemsView } from "../../../../items/api/selectItemsView";
-import { Currency } from "../../../../../components/Currency";
 import NumberFlow from "@number-flow/react";
 
 interface PriceItemsSummaryProps {
@@ -18,7 +17,10 @@ const PriceItemsSummary = ({ showPrice = false }: PriceItemsSummaryProps) => {
   return (
     <div className="space-y-2">
       {orderItems.map((item, index) => (
-        <div key={item.item_id} className="flex justify-between items-center">
+        <div
+          key={item.item_id}
+          className="flex justify-between items-center text-sm"
+        >
           <span>
             {
               itemsView?.find((i) => String(i.item_id) === String(item.item_id))
@@ -30,7 +32,7 @@ const PriceItemsSummary = ({ showPrice = false }: PriceItemsSummaryProps) => {
           {showPrice && (
             <span className="font-medium">
               <NumberFlow
-                value={item.total}
+                value={Math.abs(item.item_total)}
                 format={{ style: "currency", currency: currency }}
               />
             </span>

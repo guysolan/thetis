@@ -5,7 +5,7 @@ import ShipmentItems from "./ShipmentItems";
 import { StockValidationAlert } from "../../components/StockValidationAlert";
 import StockItems from "../../components/StockItems";
 import useCompanyDefaults from "../../../../../companies/hooks/useCompanyDefaults";
-import OrderDetails from "../sell-form/components/OrderDetails";
+import OrderDetails from "../../components/OrderDetails";
 import BuyerSeller from "../../../../../companies/components/BuyerSeller";
 
 const ShipmentFormFields = () => {
@@ -22,9 +22,17 @@ const ShipmentFormFields = () => {
       <ShipmentItems />
       <StockValidationAlert />
 
-      <StockItems address_name="from_shipping_address_id" name="from_items" />
+      <StockItems
+        readOnly={true}
+        address_name="from_shipping_address_id"
+        name="from_items"
+      />
 
-      <StockItems name="to_items" address_name="to_shipping_address_id" />
+      <StockItems
+        readOnly={true}
+        name="to_items"
+        address_name="to_shipping_address_id"
+      />
     </>
   );
 };

@@ -1,5 +1,4 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
-import React, { useEffect } from "react";
 import { Button } from "@thetis/ui/button";
 import {
   Package,

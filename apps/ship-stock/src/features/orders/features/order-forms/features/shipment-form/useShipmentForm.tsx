@@ -21,61 +21,63 @@ import { processPackageOrderItems } from "./processPackageOrderItems";
  */
 
 export const useShipmentForm = () => {
-    const { control, setValue } = useFormContext();
-    const { data: items } = useSelectItemsView();
-    const { data: stockpileItems } = useSelectItemsByAddress();
+  const { control, setValue } = useFormContext();
+  const { data: items } = useSelectItemsView();
+  const { data: stockpileItems } = useSelectItemsByAddress();
 
-    const orderItems = useWatch({ control, name: "order_items" });
-    const fromShippingAddressId = useWatch({
-        control,
-        name: "from_shipping_address_id",
+  const orderItems = useWatch({ control, name: "order_items" });
+  const fromShippingAddressId = useWatch({
+    control,
+    name: "from_shipping_address_id",
+  });
+  const toShippingAddressId = useWatch({
+    control,
+    name: "to_shipping_address_id",
+  });
+
+  useEffect(() => {
+    console.log("Effect triggered with:", {
+      orderItems,
+      items,
+      fromShippingAddressId,
+      stockpileItems,
     });
-    const toShippingAddressId = useWatch({
-        control,
-        name: "to_shipping_address_id",
+
+    if (!orderItems?.length || !items || !fromShippingAddressId) {
+      console.log("Resetting items due to missing dependencies");
+      setValue("from_items", []);
+      setValue("to_items", []);
+      setValue("display_items", []);
+      return;
+    }
+
+    const fromStockLevels = stockpileItems?.[fromShippingAddressId] || {};
+
+    console.log("fromStockLevels", fromStockLevels);
+
+    const { fromItems, toItems, displayItems } = processPackageOrderItems({
+      orderItems,
+      items,
+      fromStockLevels,
+      fromShippingAddressId,
+      toShippingAddressId,
     });
 
-    useEffect(() => {
-        console.log("Effect triggered with:", {
-            orderItems,
-            items,
-            fromShippingAddressId,
-            stockpileItems,
-        });
+    console.log("Setting new values:", {
+      fromItems,
+      toItems,
+      displayItems,
+    });
 
-        if (!orderItems?.length || !items || !fromShippingAddressId) {
-            console.log("Resetting items due to missing dependencies");
-            setValue("from_items", []);
-            setValue("to_items", []);
-            setValue("display_items", []);
-            return;
-        }
-
-        const fromStockLevels = stockpileItems?.[fromShippingAddressId] || {};
-
-        const { fromItems, toItems, displayItems } = processPackageOrderItems({
-            orderItems,
-            items,
-            fromStockLevels,
-            fromShippingAddressId,
-            toShippingAddressId,
-        });
-
-        console.log("Setting new values:", {
-            fromItems,
-            toItems,
-            displayItems,
-        });
-
-        setValue("from_items", fromItems);
-        setValue("to_items", toItems);
-        setValue("display_items", displayItems);
-    }, [
-        orderItems,
-        items,
-        stockpileItems,
-        fromShippingAddressId,
-        toShippingAddressId,
-        setValue,
-    ]);
+    setValue("from_items", fromItems);
+    setValue("to_items", toItems);
+    setValue("display_items", displayItems);
+  }, [
+    orderItems,
+    items,
+    stockpileItems,
+    fromShippingAddressId,
+    toShippingAddressId,
+    setValue,
+  ]);
 };

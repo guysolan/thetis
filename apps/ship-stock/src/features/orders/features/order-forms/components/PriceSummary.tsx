@@ -28,7 +28,7 @@ const PriceSummary = () => {
           <TableCell className="">Total:</TableCell>
           <TableCell className="text-right text-lg">
             <NumberFlow
-              value={total + Number(form.watch("carriage"))}
+              value={Math.abs(total) + Number(form.watch("carriage"))}
               format={{
                 style: "currency",
                 currency: form.watch("currency") ?? defaultCurrency,
