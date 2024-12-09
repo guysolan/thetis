@@ -1,10 +1,11 @@
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
-import { OrderView } from "../../../types.ts";
+import { OrderView } from "../../../types";
 
 export const selectOrders = async () => {
   const { data, error } = await supabase.from("orders_view").select("*")
     .order("order_id", { ascending: false })
+    .order("order_date", { ascending: false })
     .returns<OrderView[]>();
 
   if (error) {
