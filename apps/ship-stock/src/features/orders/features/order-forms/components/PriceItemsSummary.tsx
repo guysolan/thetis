@@ -25,7 +25,7 @@ const PriceItemsSummary = ({ showPrice = false }: PriceItemsSummaryProps) => {
                 ?.item_name
             }
             {" x "}
-            {item.quantity_change}
+            {Math.abs(item.quantity_change)}
           </span>
           {showPrice && (
             <span className="font-medium">

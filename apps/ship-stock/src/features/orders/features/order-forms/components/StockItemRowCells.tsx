@@ -141,19 +141,39 @@ const StockItemRowCells = ({
     setEditable(!editable);
   };
 
+  const handleItemTypeChange = (value: string) => {
+    form.setValue(`${name}.${index}.item_type`, value);
+    form.setValue(`${name}.${index}.item_id`, "");
+    form.setValue(`${name}.${index}.quantity_before`, 0);
+    form.setValue(`${name}.${index}.quantity_after`, 0);
+    form.setValue(`${name}.${index}.quantity_change`, 0);
+    form.setValue(`${name}.${index}.item_price`, 0);
+    form.setValue(`${name}.${index}.item_tax`, 0);
+    form.setValue(`${name}.${index}.item_total`, 0);
+    onUpdate?.();
+  };
+
   return (
     <TableRow className={cn("border-b", !editable && "opacity-50")} key={key}>
       {allowedTypes.length > 1 && (
         <TableCell>
-          <ItemTypeSelect
-            name={`${name}.${index}.item_type`}
-            disabled={!editable}
-          />
+          <Select value={itemType} onValueChange={handleItemTypeChange}>
+            <SelectTrigger className="w-24 capitalize">
+              <SelectValue placeholder="Select an item" />
+            </SelectTrigger>
+            <SelectContent>
+              {allowedTypes.map((item) => (
+                <SelectItem className="capitalize" key={item} value={item}>
+                  {item}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </TableCell>
       )}
-      <TableCell>
+      <TableCell className="truncate">
         <Select value={itemId} onValueChange={handleItemChange}>
-          <SelectTrigger>
+          <SelectTrigger className="w-40">
             <SelectValue placeholder="Select an item" />
           </SelectTrigger>
           <SelectContent>

@@ -7,7 +7,6 @@ import OrderFormButton from "./OrderFormButton";
 import React from "react";
 import type { StockValidationConfig } from "../hooks/useStockValidation";
 import FormErrors from "../../../../../components/FormErrors";
-import { DevTool } from "@hookform/devtools";
 
 interface BaseOrderFormProps<T extends z.ZodType> {
   schema: T;
@@ -49,12 +48,14 @@ export function BaseOrderForm<T extends z.ZodType>({
     }
   };
 
+  console.log(form.getValues());
+
   return (
     <Form {...form}>
       <form
         id="order-form"
+        className="flex flex-col gap-y-4 px-1 w-full"
         onSubmit={form.handleSubmit(handleSubmit, () => scrollToTop())}
-        className="flex flex-col space-y-4 px-1 pt-2 pr-4"
       >
         {children}
         <FormErrors />
@@ -62,7 +63,6 @@ export function BaseOrderForm<T extends z.ZodType>({
           config={config}
           onClick={form.handleSubmit(handleSubmit, () => scrollToTop())}
         />
-        <DevTool control={form.control} />
       </form>
     </Form>
   );

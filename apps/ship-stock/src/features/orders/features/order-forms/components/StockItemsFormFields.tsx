@@ -17,6 +17,7 @@ import { ItemType, StockItemFormData, StockItemQuantities } from "../types";
 import { useEffect, useState } from "react";
 import NumberFlow from "@number-flow/react";
 import StockItemRowCells from "./StockItemRowCells";
+import { ScrollArea } from "@thetis/ui/scroll-area";
 
 interface StockItemsFormFieldsProps {
   name: string;
@@ -48,26 +49,46 @@ const StockItemsFormFields = ({
   showQuantity = true,
 }: StockItemsFormFieldsProps) => {
   return (
-    <Table className="bg-white">
+    <Table>
       <TableHeader>
         <TableRow>
-          {allowedTypes.length > 1 && <TableHead>Type</TableHead>}
-          <TableHead>Item</TableHead>
-          <TableHead className="w-24 text-center">Quantity</TableHead>
-          {showPrice && (
-            <TableHead className="w-24 text-center">Price</TableHead>
+          {allowedTypes.length > 1 && (
+            <TableHead className="w-[10%]">Type</TableHead>
           )}
-          {showPrice && <TableHead className="w-24 text-center">Tax</TableHead>}
+          <TableHead className={`${showPrice ? "w-[20%]" : "w-[30%]"}`}>
+            Item
+          </TableHead>
+          <TableHead
+            className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}
+          >
+            Quantity
+          </TableHead>
           {showPrice && (
-            <TableHead className="w-24 text-center">Total</TableHead>
+            <TableHead className="w-[10%] text-center">Price</TableHead>
+          )}
+          {showPrice && (
+            <TableHead className="w-[10%] text-center">Tax</TableHead>
+          )}
+          {showPrice && (
+            <TableHead className="w-[10%] text-center">Total</TableHead>
           )}
           {showQuantity && (
-            <TableHead className="w-16 text-center">Before</TableHead>
+            <TableHead
+              className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}
+            >
+              Before
+            </TableHead>
           )}
           {showQuantity && (
-            <TableHead className="w-16 text-center">After</TableHead>
+            <TableHead
+              className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}
+            >
+              After
+            </TableHead>
           )}
-          <TableHead className="w-32 text-center">
+          <TableHead
+            className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}
+          >
             <span className="sr-only">Actions</span>
           </TableHead>
         </TableRow>

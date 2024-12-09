@@ -12,8 +12,11 @@ export const OrderForm: React.FC = ({
   defaultTab,
 }: { defaultTab: OrderTab }) => {
   return (
-    <Tabs defaultValue={defaultTab === "all" ? "purchase" : defaultTab}>
-      <div className="flex justify-between items-center w-full overflow-x-scroll">
+    <Tabs
+      className=""
+      defaultValue={defaultTab === "all" ? "purchase" : defaultTab}
+    >
+      <div className="flex justify-between items-center w-full">
         <TabsList className="my-2">
           <TabsTrigger className="flex flex-row gap-2" value="purchase">
             <ShoppingCart size={16} />
@@ -31,7 +34,7 @@ export const OrderForm: React.FC = ({
         <OrderSettings />
       </div>
       <TabsContent value="purchase">
-        <Alert className="mx-1 mb-4" variant="info">
+        <Alert className="mb-4" variant="info">
           <Info size={20} />
           <AlertTitle>Purchase Order</AlertTitle>
           <AlertDescription>
@@ -55,7 +58,7 @@ export const OrderForm: React.FC = ({
       </TabsContent>
 
       <TabsContent value="shipment">
-        <Alert className="mx-1 mb-4" variant="info">
+        <Alert className="mb-4" variant="info">
           <Info size={20} />
 
           <AlertTitle>Shipment Order</AlertTitle>

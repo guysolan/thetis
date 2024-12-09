@@ -61,30 +61,32 @@ const StockItems = ({
   };
 
   return (
-    <div>
+    <div className="flex flex-col gap-y-4">
       <h2 className="mb-2 font-medium text-base">
         {title || `Stock Changes ${address?.name ? `(${address.name})` : ""}`}
       </h2>
 
       {!readOnly ? (
         <div className="space-y-4">
-          <StockItemsFormFields
-            onUpdate={onUpdate}
-            showPrice={showPrice}
-            showQuantity={showQuantity}
-            name={name}
-            fields={fields}
-            items={items || []}
-            form={form}
-            getItemQuantities={getItemQuantities}
-            onCopy={copyRow}
-            onRemove={remove}
-            allowedTypes={allowedTypes}
-          />
-          <StockItemActions
-            allowedTypes={allowedTypes}
-            onAppend={handleAppend}
-          />
+          <div className="max-w-full">
+            <StockItemsFormFields
+              onUpdate={onUpdate}
+              showPrice={showPrice}
+              showQuantity={showQuantity}
+              name={name}
+              fields={fields}
+              items={items || []}
+              form={form}
+              getItemQuantities={getItemQuantities}
+              onCopy={copyRow}
+              onRemove={remove}
+              allowedTypes={allowedTypes}
+            />
+            <StockItemActions
+              allowedTypes={allowedTypes}
+              onAppend={handleAppend}
+            />
+          </div>
         </div>
       ) : (
         <StockItemsSummary name={name} addressName={address_name} />

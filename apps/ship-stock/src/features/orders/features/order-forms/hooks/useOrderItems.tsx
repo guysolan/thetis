@@ -5,7 +5,7 @@ import {
 } from "../features/sell-form/sellFormSchema";
 import { OrderItem, OrderItemChange } from "../schema";
 
-type OrderItemWithTotal = OrderItem & { total: number };
+type OrderItemWithTotal = OrderItem & { item_total: number };
 export const useOrderItems = (): OrderItemWithTotal[] => {
   const form = useFormContext();
 
