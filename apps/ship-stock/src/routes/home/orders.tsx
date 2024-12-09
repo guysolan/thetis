@@ -2,10 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@thetis/ui/button";
 import Sheet from "@/components/Sheet";
 import { useSelectOrders } from "@/features/orders/features/order-history/api/selectOrders";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@thetis/ui/tabs";
+import { Tabs, TabsContent, TabsTrigger } from "@thetis/ui/tabs";
 import TabsHeader from "@/components/TabsHeader";
 
-import { OrderForm } from "@/features/orders/components/OrderForm";
 import { OrderHistory } from "@/features/orders/components/OrderHistory";
 import { MultiOrderForm } from "../../features/orders/features/multi-order-form/MultiOrderForm";
 

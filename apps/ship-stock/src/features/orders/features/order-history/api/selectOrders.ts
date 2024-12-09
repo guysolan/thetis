@@ -4,7 +4,6 @@ import { OrderView } from "../../../types";
 
 export const selectOrders = async () => {
   const { data, error } = await supabase.from("orders_view").select("*")
-    .order("order_id", { ascending: false })
     .order("order_date", { ascending: false })
     .returns<OrderView[]>();
 
