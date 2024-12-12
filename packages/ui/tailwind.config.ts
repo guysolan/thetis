@@ -4,22 +4,26 @@ const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
 
-const config = {
-  darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  prefix: "",
+// const config = {
+//   darkMode: ["class"],
+//   content: [
+//     "./pages/**/*.{ts,tsx}",
+//     "./components/**/*.{ts,tsx}",
+//     "./app/**/*.{ts,tsx}",
+//     "./src/**/*.{ts,tsx}",
+//     "./index.html",
+//     "./src/**/*.{js,ts,jsx,tsx}",
+//   ],
+//   prefix: "",
+// } satisfies Config;
+
+export default {
   theme: {
     container: {
       center: true,
       padding: "2rem",
       screens: {
+        xl: "1200px",
         "2xl": "1400px",
       },
     },
@@ -78,6 +82,15 @@ const config = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        figma: {
+          red: "#FBC8C1",
+          orange: "#F8D19A",
+          yellow: "#FDE8A0",
+          green: "#B6F3C6",
+          blue: "#C1E3FF",
+          purple: "#E2CDFF",
+          gray: "#E6E6E6",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -105,12 +118,17 @@ const config = {
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       },
+      maxWidth: {
+        xs: "400px",
+        sm: "600px",
+        md: "800px",
+        lg: "1000px",
+        xl: "1200px",
+      },
     },
   },
   plugins: [addVariablesForColors, require("tailwindcss-animate")],
-} satisfies Config;
-
-export default config;
+};
 
 function addVariablesForColors({ addBase, theme }) {
   const allColors = flattenColorPalette(theme("colors"));

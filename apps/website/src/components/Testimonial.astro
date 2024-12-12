@@ -10,15 +10,14 @@ export interface Props {
 const { name, description, image } = Astro.props;
 ---
 
-<div class="border-2 border-neutral-300 shadow-lg mx-auto p-8 rounded-xl w-full md:w-7/12 text-md">
+<div class="border-2 border-neutral-300 shadow-lg mx-auto p-8 rounded-xl w-full md:w-7/12 text-sm">
     <p>
         <slot />
         <div class="flex justify-start items-center gap-x-4 mt-4">
             <Image
                 class="shadow-md rounded-full w-12 lg:w-16 h-12 lg:h-16"
-                loading="lazy"
                 src={image}
-                alt={name + ' Photo'}
+                alt={`${name}_photo`}
             />
             <div class="md:text-lg">
                 <h4 class="font-semibold text-gray-800">{name}</h4>

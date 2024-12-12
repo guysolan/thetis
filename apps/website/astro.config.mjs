@@ -35,9 +35,7 @@ export default defineConfig({
     partytown(),
     react(),
     markdownIntegration(),
-    tailwind({
-      applyBaseStyles: false,
-    }),
+    tailwind(),
   ],
   output: "server",
   adapter: vercel(),
