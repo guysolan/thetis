@@ -1,9 +1,4 @@
 {
   "framework": "astro",
-  "cleanUrls": true,
-  "functions": {
-    "*": {
-      "runtime": "nodejs20.x"
-    }
-  }
+  "cleanUrls": true
 }
