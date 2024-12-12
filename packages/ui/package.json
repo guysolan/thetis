@@ -21,6 +21,7 @@
   "exports": {
     "./globals.css": "./src/globals.css",
     "./cn": "./src/utils/cn.ts",
+    "./animated-testimonials": "./src/components/animated-testimonials.tsx",
     "./ui": "./src/components/index.ts",
     "./button": "./src/components/button.tsx",
     "./accordion": "./src/components/accordion.tsx",
@@ -60,6 +61,7 @@
     "./sonner": "./src/components/sonner.tsx",
     "./context-menu": "./src/components/context-menu.tsx",
     "./icons": "./src/components/icons.tsx",
+    "./infinite-moving-cards": "./src/components/infinite-moving-cards.tsx",
     "./tailwind.config": "./tailwind.config.ts",
     "./postcss": "./postcss.config.js"
   },

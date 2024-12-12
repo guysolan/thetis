@@ -19,7 +19,7 @@
         --border: 220 13% 91%;
         --input: 220 13% 91%;
 
-        --primary: 161 25% 47%;
+        --primary: 161 36% 43%;
         --primary-foreground: 0 0% 100%;
 
         --secondary: 220 14.3% 95.9%;
@@ -156,7 +156,7 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     font-family: Raleway;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 :root {
@@ -822,7 +822,8 @@ img.fraction-svg {
 .footer-words a {
     cursor: pointer;
     font-size: 1.05rem;
-    font-weight: 400;
+    font-weight: 300;
+
 }
 
 .footer-words h3 {

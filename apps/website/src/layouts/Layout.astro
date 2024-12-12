@@ -1,25 +1,25 @@
 ---
 export interface Props {
-    title: string
-    description: string
-    image?: string
-    bodyClass?: string
-    hideFooter?: boolean
-    logoColor?: 'black' | 'white'
-    name?: string
+  title: string;
+  description: string;
+  image?: string;
+  bodyClass?: string;
+  hideFooter?: boolean;
+  logoColor?: "black" | "white";
+  name?: string;
 }
 
-import { cn } from '../lib/utils'
+import { cn } from "../lib/utils";
 
 const { title, description, image, bodyClass, hideFooter, logoColor } =
-    Astro.props
+  Astro.props;
 
-import GoogleTagHead from './GoogleTagHead.astro'
-import GoogleTagBody from './GoogleTagBody.astro'
-import BaseHead from './BaseHead.astro'
-import Nav from './Nav.astro'
-import Footer from './Footer.astro'
-import ShopifyBuyButton2 from '../components/ShopifyBuyButton2.astro'
+import GoogleTagHead from "./GoogleTagHead.astro";
+import GoogleTagBody from "./GoogleTagBody.astro";
+import BaseHead from "./BaseHead.astro";
+import Nav from "./Nav.astro";
+import Footer from "./Footer.astro";
+import ShopifyBuyButton2 from "../components/ShopifyBuyButton2.astro";
 ---
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ import ShopifyBuyButton2 from '../components/ShopifyBuyButton2.astro'
         <slot name="head" />
     </head>
 
-    <body class={cn(bodyClass, 'pt-16 overflow-y-auto overflow-x-hidden')}>
+    <body class={cn(bodyClass, 'pt-10 overflow-y-auto overflow-x-hidden')}>
         <GoogleTagBody />
         <ShopifyBuyButton2 />
 
@@ -53,14 +53,5 @@ import ShopifyBuyButton2 from '../components/ShopifyBuyButton2.astro'
             type="text/partytown"
             src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"
         ></script>
-        <!-- <script is:inline type="text/partytown" type="text/partytown">
-            ;(function ($) {
-                window.fnames = new Array()
-                window.ftypes = new Array()
-                fnames[0] = 'EMAIL'
-                ftypes[0] = 'email'
-            })(jQuery)
-            var $mcj = jQuery.noConflict(true)
-        </script> -->
     </body>
 </html>

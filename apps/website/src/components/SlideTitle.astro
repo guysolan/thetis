@@ -1,13 +1,15 @@
 ---
 export interface Props {
-    title: string
+  title: string;
 }
 
-const { title } = Astro.props
+const { title } = Astro.props;
 ---
 
-<h2
-    class="w-full text-xl lg:text-2xl font-semibold border-b-2 border-t-2 border-black text-center lg:text-left py-2 px-4"
->
-    {title}
-</h2>
+<div class="border-neutral-300 border-t w-full">
+    <h2
+        class="px-6 py-4 w-full font-semibold text-2xl leading-normal"
+    >
+        {title}
+    </h2>
+</div>

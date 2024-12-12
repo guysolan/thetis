@@ -1,26 +1,28 @@
 ---
+import { Image } from "astro:assets";
+
 export interface Props {
-    name: string
-    description: string
-    image: string
+  name: string;
+  description: string;
+  image: string;
 }
 
-const { name, description, image } = Astro.props
+const { name, description, image } = Astro.props;
 ---
 
-<div class="w-full md:w-7/12 mx-auto my-4 p-8 border-2 border-black">
+<div class="border-2 border-neutral-300 shadow-lg mx-auto p-8 rounded-xl w-full md:w-7/12 text-md">
     <p>
         <slot />
-        <div class="flex gap-x-2 mt-4 items-center justify-start my-auto">
-            <img
-                class="h-12 w-12 lg:w-16 lg:h-16 mr-4"
+        <div class="flex justify-start items-center gap-x-4 mt-4">
+            <Image
+                class="shadow-md rounded-full w-12 lg:w-16 h-12 lg:h-16"
                 loading="lazy"
-                src={'/images/faces/' + image}
+                src={image}
                 alt={name + ' Photo'}
             />
             <div class="md:text-lg">
                 <h4 class="font-semibold text-gray-800">{name}</h4>
-                <h3 class="font-normal">{description}</h3>
+                <h3 class="font-normal text-gray-600 text-md">{description}</h3>
             </div>
         </div>
     </p>

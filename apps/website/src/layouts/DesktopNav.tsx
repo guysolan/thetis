@@ -6,11 +6,11 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@thetis/ui/navigation-menu";
+} from "../components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import * as React from "react";
 
-import { Badge } from "@thetis/ui/badge";
+import { Badge } from "../components/ui/badge";
 import { articles } from "../data/articles.ts";
 import { products } from "../data/products.ts";
 

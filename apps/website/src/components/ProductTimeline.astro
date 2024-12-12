@@ -1,0 +1,118 @@
+---
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+
+// Define timeline points in a more structured way
+const timelinePoints = [
+  { label: "Rupture", position: 2 },
+  { label: "Week 1", position: 25 },
+  { label: "Week 2", position: 48.5 },
+  { label: "Week 6", position: 71.75 },
+  { label: "Week 12", position: 95 },
+];
+
+// Define product sections for better maintainability
+const products = [
+  {
+    title: "Initial Assessment: Trauma Splint",
+    image: {
+      src: "/images/trauma-splint/trauma-splint.jpg",
+      alt: "Trauma Splint Image",
+    },
+    description:
+      "Instead of immediate plaster casting in A&E, the Trauma Splint offers a more flexible solution for initial assessment and diagnosis.",
+    benefits: [
+      "Allows for easy ultrasound assessment without removal",
+      "Halves the time from A&E to treatment decision",
+      "Eliminates need for plaster room visits",
+      "Maintains proper tip-toe position for initial healing",
+    ],
+    links: {
+      primary: "/contact",
+      secondary: "/trauma-splint",
+    },
+  },
+  {
+    title: "Recovery Period: Night Splint",
+    image: {
+      src: "/images/night-splint/Thetis Medical Achilles Rupture Night Splint In Bed.jpg",
+      alt: "Night Splint Image",
+    },
+    description:
+      "During the crucial 2-12 week recovery period, replace your uncomfortable boot at night with our specialized Night Splint.",
+    benefits: [
+      "Maintains proper healing position while sleeping",
+      "Significantly more comfortable than sleeping in a boot",
+      "Prevents accidental re-rupture during sleep",
+      "Compatible with standard daytime boot treatment",
+    ],
+    links: {
+      primary: "/contact",
+      secondary: "/night-splint",
+    },
+    reverse: true,
+  },
+];
+---
+
+<div class="relative flex gap-2 md:gap-8 lg:gap-12 mx-auto md:px-4 py-16 pr-4 pl-1 max-w-[1400px]">
+  <!-- Timeline Bar (Left Side) -->
+  <div class="relative w-16 md:w-24 shrink-0">
+    <div class="left-8 absolute bg-primary/50 w-0.5 h-full">
+      {timelinePoints.map((point) => (
+        <div 
+          class="-left-8 absolute flex justify-center items-center gap-2 bg-white p-1 w-16 text-center" 
+          style={`top: ${point.position}%`}
+        >
+          <span class="text-center text-muted-foreground text-sm whitespace-nowrap">{point.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Product Sections (Right Side) -->
+  <div class="flex-1">
+    {products.map((product) => (
+      <section class="mb-24 last:mb-0">
+        <div class="flex flex-col gap-8">
+              <h2 class="block md:hidden text-xl md:text-2xl">{product.title}</h2>
+          
+          <div class="flex lg:flex-row flex-col gap-8">
+            <div class="w-full lg:w-1/2">
+              <img
+                src={product.image.src}
+                alt={product.image.alt}
+                loading="lazy"
+                class="shadow-lg rounded-lg w-full"
+              />
+            </div>
+
+            <div class="space-y-4 w-full lg:w-1/2">
+              <h2 class="md:block hidden text-2xl">{product.title}</h2>
+              <p>{product.description}</p>
+              <ul class="space-y-2 pl-5 list-disc">
+                {product.benefits.map((benefit) => (
+                  <li>{benefit}</li>
+                ))}
+              </ul>
+              <div class="flex flex-wrap gap-4 pt-4">
+                <a
+                  href={product.links.primary}
+                  class={cn(buttonVariants({ size: "lg", variant: "default" }),'w-fit')}
+                >
+                  Order Now
+                </a>
+                <a
+                  href={product.links.secondary}
+                  class={cn(buttonVariants({ size: "lg", variant: "outline" }),'w-fit')}
+                >
+                  Learn More
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    ))}
+  </div>
+</div>

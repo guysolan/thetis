@@ -1,12 +1,15 @@
 ---
-import Layout from '@/layouts/Layout.astro'
-import Subscribe from '@/components/Subscribe.astro'
-import SlideTitle from '@/components/SlideTitle.astro'
-import ThetisSchema from '@/schemas/ThetisSchema.astro'
-import Slide from '@/components/Slide.astro'
-import HalfCTA from '@/components/CTA/HalfCTA.astro'
-import '@/styles/global.css'
-import { Testimonials } from '../components/testimonials/Testimonials'
+import Layout from "@/layouts/Layout.astro";
+import ThetisSchema from "@/schemas/ThetisSchema.astro";
+import Image from "astro/components/Image.astro";
+import { cn } from "../lib/utils";
+import Reviews from "../components/reviews/Reviews.astro";
+import EmailCTA from "../components/CTA/EmailCTA.astro";
+import "@/styles/global.css";
+import Testimonials from "../components/Testimonials.astro";
+import NightSplintImage from "../assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
+import { buttonVariants } from "../components/ui/button";
+import ProductTimeline from "../components/ProductTimeline.astro";
 ---
 
 <ThetisSchema slot="head" />
@@ -14,259 +17,97 @@ import { Testimonials } from '../components/testimonials/Testimonials'
 
 <Layout
     title="Thetis Medical - Achilles Splint Specialists"
-    description="Medical device company specialising in splints for injured Achilles Tendons. We sell an Achilles Rupture Night Splint and a Trauma Splint."
+    description="Medical device company specializing in splints for injured Achilles Tendons. We sell an Achilles Rupture Night Splint and a Trauma Splint."
     image="https://thetismedical.com/images/night-splint.png"
 >
-    
+  
     <main class="flex flex-col mx-auto w-full">
-        <section class="landing">
-            <div class="landing-para">
-                <div>
-                    <h1>Achilles Splint Specialists</h1>
-                    <a
-                        href="./contact"
-                        class="explore get-in-touch home landing"
-                        >Get in Touch</a
-                    >
-                </div>
-                <ul class="landing-nav">
-                    <li>
-                        <a class="landing-link" href="#products">Products</a>
-                    </li>
-                    <li>
-                        <a class="landing-link" href="#wholesale">Wholesale</a>
-                    </li>
-                    <li><a class="landing-link" href="#process">Process</a></li>
-                    <li><a class="landing-link" href="#quality">Quality</a></li>
-                    <li>
-                        <a class="landing-link" href="#performance"
-                            >Performance</a
-                        >
-                    </li>
-                    <li><a class="landing-link" href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="dotty-logo">
-                <img
-                    src="/images/dotty-logo-trimmed.svg"
-                    alt="logo background image"
-                />
-            </div>
-        </section>
-        <Slide title="Products (Patent Pending)" id="products">
-            <div class="flex lg:flex-row flex-col w-full">
-                <div class="col info">
-                    <h2 class="my-4 text-xl">Night Splint</h2>
-                    <p id="night-splint-desc">
-                        The ONLY splint for Achilles rupture. Brings improved
-                        sleep and makes recovery more comfortable.
-                    </p>
-                    <img
-                        id="night-splint-img"
-                        src="/images/night-splint.png"
-                        alt="Rehab Splint Image"
-                        loading="lazy"
-                    />
-                    <a
-                        href="https://thetismedical.myshopify.com/"
-                        target="_blank"
-                        class="order-night-home explore"
-                        id="order-night-home">Buy Now</a
-                    >
-                    <!-- <a
-                        href="https://www.amazon.co.uk/dp/B09N58H79F?ref=myi_title_dp&th=1"
-                        target="_blank"
-                        class="order-night-home explore"
-                        id="order-night-home">Buy Now</a
-                    > -->
-                    <div class="learn-more">
-                        <a href="./night-splint">
-                            <h4>Learn More</h4>
-                        </a>
-                    </div>
-                </div>
-                <div class="col info">
-                    <h2 class="my-4 text-xl">Trauma Splint</h2>
-                    <p id="trauma-splint-desc">
-                        A novel splint for hospitals to treat suspected Achilles
-                        injury. Low cost and easy to apply.
-                    </p>
-                    <img
-                        id="trauma-splint-img"
-                        src="/images/A&E.png"
-                        alt="Trauma Splint Image"
-                        loading="lazy"
-                    />
-                    <a href="./contact" class="order-trauma-home explore"
-                        >Order Now</a
-                    >
-                    <div class="learn-more">
-                        <a href="./trauma-splint">
-                            <h4>Learn More</h4>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </Slide>
+  
+   
 
-        <Slide title="Process" id="process">
-            <div class="info-wrap row wholesale">
-                <div class="col info">
-                    <img
-                        loading="lazy"
-                        class="process-arrow"
-                        src="/images/idea-arrow.svg"
-                        alt="Idea Arrow"
-                    />
-                    <img
-                        loading="lazy"
-                        class="process-icon"
-                        src="/images/lightbulb.svg"
-                        alt="Lightbulb Graphic"
-                    />
-                    <!-- <p>After hearing years of patient dissatisfaction, an orthopaedic foot and ankle surgeon decided something had to be done.</p> -->
-                    <p>
-                        Seeing so many patients struggling to sleep in
-                        orthopaedic boots, our specialist foot and ankle surgeon
-                        wanted a solution.
-                    </p>
-                </div>
-                <div class="col info">
-                    <img
-                        loading="lazy"
-                        class="process-arrow"
-                        src="/images/design-arrow.svg"
-                        alt="Design Arrow"
-                    />
-                    <img
-                        loading="lazy"
-                        class="process-icon"
-                        src="/images/gears.svg"
-                        alt="Lightbulb Graphic"
-                    />
-                    <p>
-                        3D printing technology and anatomic design was used to
-                        refine the splint's shape and materials.
-                    </p>
-                </div>
-                <div class="col info">
-                    <img
-                        loading="lazy"
-                        class="process-arrow"
-                        src="/images/testing-arrow.svg"
-                        alt="Testing Arrow"
-                    />
-                    <img
-                        loading="lazy"
-                        class="process-icon"
-                        src="/images/clipboard.svg"
-                        alt="Lightbulb Graphic"
-                    />
-                    <p>
-                        An extensive user focused study validated the splint's
-                        design. A quality improvement study with the NHS is now
-                        underway.
-                    </p>
-                </div>
-            </div>
-        </Slide>
-        <Slide
-            id="performance"
-            title="Performance"
-            paragraph="Results of the user focused study demonstrated the splint's performance:"
-        >
-            <div class="md:gap-x-4 fractions info-wrap row">
-                <div class="bg-primary/50 !rounded-xl w-full col info">
-                    <div class="fraction-title">
-                        <h3>Stability and Security</h3>
-                        <div class="divider fraction"></div>
+        <div class="relative bg-gradient-to-b from-primary/25 to-white py-16">
+            <div class="mx-auto px-4 container">
+                <div class="flex md:flex-row flex-col justify-between items-center gap-8">
+                    <div class="space-y-6 md:w-1/2">
+                        <h1 class="font-semibold text-[3rem] leading-normal">
+                            <span class="font-semibold text-primary">Better Recovery</span> for Achilles Rupture Patients
+                        </h1>
+
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Experience breakthrough comfort and proven outcomes with our innovative Achilles splints - 
+                            trusted by leading healthcare professionals worldwide.
+                        </p>
+
+                         <Image 
+                            src={NightSplintImage} 
+                            alt="Thetis Medical Achilles Rupture Night Splint"
+                            class="group-hover:scale-[102%] group-hover:brightness-[0.85] block md:hidden shadow-lg hover:shadow-2xl rounded-xl transition-all duration-300" 
+                        />
+                        
+                        <div class="flex sm:flex-row flex-col gap-4 pt-4">
+                            <a href="/contact" 
+                               class={cn(buttonVariants({ size: 'lg', variant: 'default' }), 
+                               'w-full sm:w-auto text-center font-semibold')}>
+                                Order Now
+                            </a>
+                            <a href="/night-splint" 
+                               class={cn(buttonVariants({ size: 'lg', variant: 'outline' }), 
+                               'w-full sm:w-auto text-center')}>
+                                Learn More
+                            </a>
+                        </div>
+
+                        <div class="flex sm:flex-row flex-col items-start sm:items-center gap-2 sm:gap-4 px-4 text-gray-600 text-md">
+                            <div class="flex items-center gap-2">
+                                <span class="text-primary">&#10003;</span>
+                                Clinically Proven
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-primary">&#10003;</span>
+                                NHS/FDA Approved
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-primary">&#10003;</span>
+                                Fast Delivery
+                            </div>
+                        </div>
                     </div>
-                    <img
-                        loading="lazy"
-                        class="fraction-svg"
-                        src="/images/fraction-9.0.svg"
-                        alt="fraction 9.0/10 image"
-                    />
-                </div>
-                <div class="bg-primary/50 !rounded-xl w-full col info">
-                    <div class="fraction-title">
-                        <h3>Ease of Application</h3>
-                        <div class="divider fraction"></div>
+
+                    <div class="md:block relative hidden md:w-5/12 group">
+                        <Image 
+                            src={NightSplintImage} 
+                            alt="Thetis Medical Achilles Rupture Night Splint"
+                            class="group-hover:scale-[102%] group-hover:brightness-[0.85] shadow-lg hover:shadow-2xl rounded-xl transition-all duration-300" 
+                        />
+                        <div class="bottom-0 left-0 absolute flex flex-col justify-end items-start opacity-0 group-hover:opacity-100 p-4 w-1/2 text-md transition-opacity duration-300">
+                            <div class="mb-1 font-semibold text-md text-white">
+                                Night Splint
+                            </div>
+                            <p class="text-md text-white leading-tight">
+                                Sleep comfortably while your achilles rupture heals.
+                            </p>
+                            <a href="/night-splint" class="mt-3 text-lg text-white !underline underline-offset-2">
+                                Order Now
+                            </a>
+                        </div>
                     </div>
-                    <img
-                        loading="lazy"
-                        class="fraction-svg"
-                        src="/images/fraction-8.6.svg"
-                        alt="fraction 8.6/10 image"
-                    />
-                </div>
-                <div class="bg-primary/50 !rounded-xl w-full col info">
-                    <div class="fraction-title">
-                        <h3>Material<br />Comfort</h3>
-                        <div class="divider fraction"></div>
-                    </div>
-                    <img
-                        loading="lazy"
-                        class="fraction-svg"
-                        src="/images/fraction-8.7.svg"
-                        alt="fraction 8.7/10 image"
-                    />
                 </div>
             </div>
-        </Slide>
-        <Slide
-            id="wholesale"
-            title="Wholesale and Distribution"
-            paragraph="Supply contracts are available to:"
-        >
-            <div class="info-wrap row wholesale">
-                <div class="col info wholesale">
-                    <img
-                        loading="lazy"
-                        src="/images/hospital.svg"
-                        alt="Hospital Graphic"
-                    />
-                    <h3>Hospitals</h3>
-                </div>
-                <div class="col info wholesale">
-                    <img
-                        loading="lazy"
-                        src="/images/pharmacy.svg"
-                        alt="Hospital Graphic"
-                    />
-                    <h3>Pharmacies</h3>
-                </div>
-                <div class="col info wholesale">
-                    <img
-                        loading="lazy"
-                        src="/images/insurance.svg"
-                        alt="Insurance Graphic"
-                    />
-                    <h3>Physiotherapists</h3>
-                </div>
-            </div>
-            <div class="preorder">
-                <a href="./contact" class="order-wholesale explore preorder"
-                    >Get a Quote</a
-                >
-            </div>
-        </Slide>
-        <Slide id="quality" title="Quality">
-            <div class="about-wrap">
-                <p class="intro">
-                    Thetis Medical Ltd is a UK based company. All our Achilles
-                    splints are made domestically. Our manufacturers are ISO
-                    9001 certified.
-                </p>
-                <!-- <img class='uk-map' src="/images/GB-flag.svg" alt="GB-Flag"> -->
-                <img
-                    loading="lazy"
-                    class="md:mt-4 !max-h-[60vh] uk-map"
-                    src="/images/UK.svg"
-                    alt="UK Map of Sites"
-                />
-            </div>
-        </Slide>
-        <Subscribe />
+        </div>
+
+       
+
+                <Reviews />
+
+        <ProductTimeline     />
+
+        <EmailCTA
+            title="Sound Interesting?"
+            paragraph="Want to get a sample, speak to us or just learn more?"
+        />
+
+
+        <Testimonials />
+       
     </main>
 </Layout>

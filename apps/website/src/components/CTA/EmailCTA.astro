@@ -1,13 +1,14 @@
 ---
-import { buttonVariants } from '../ui/button'
-import Slide from '../Slide.astro'
-import { cn } from '../../lib/utils'
+import { buttonVariants } from "@/components/ui/button";
+import Slide from "../Slide.astro";
+import { cn } from "../../lib/utils";
+
 interface Props {
-    title: string
-    paragraph: string
+  title: string;
+  paragraph: string;
 }
 
-const { title, paragraph }: Props = Astro.props
+const { title, paragraph }: Props = Astro.props;
 ---
 
 <Slide background="green">
@@ -15,16 +16,16 @@ const { title, paragraph }: Props = Astro.props
         autocomplete="on"
         action="https://formspree.io/f/xbjvlval"
         method="POST"
-        class="my-8 items-center w-full justify-center flex flex-col space-y-8"
+        class="flex flex-col justify-center items-center space-y-8 my-8 w-full"
     >
-        <div class="space-y-3 flex flex-col w-full items-center justify-center">
-            <h2 class="text-2xl font-semibold">{title}</h2>
-            <p class="text-lg text-gray-600">{paragraph}</p>
+        <div class="flex flex-col justify-center items-center space-y-3 w-full">
+            <h2 class="font-semibold text-2xl">{title}</h2>
+            <p class="text-gray-600 text-lg">{paragraph}</p>
         </div>
 
         <div class="flex gap-x-2 w-full max-w-sm">
             <input
-                class="h-12 lg:h-14 w-full border-2 border-gray-500 bg-white font-light px-2 py-2 rounded-lg"
+                class="border-2 border-gray-500 bg-white px-2 py-2 rounded-lg w-full h-12 lg:h-14 font-light"
                 required
                 name="email"
                 type="email"
@@ -34,7 +35,7 @@ const { title, paragraph }: Props = Astro.props
                 type="submit"
                 value="send"
                 class={cn(
-                    buttonVariants({ size: 'md' }),
+                    buttonVariants({size: 'md' }),
                     'h-12 lg:h-14 md:w-24 lg:w-36'
                 )}
             >

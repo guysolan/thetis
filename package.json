@@ -12,6 +12,7 @@
     "build": "turbo build",
     "dev": "turbo dev --parallel",
     "dev:ship-stock": "turbo dev --filter=@thetis/ship-stock",
+    "dev:website": "turbo dev --filter=@thetis/website",
     "dev:settle-central": "turbo dev --filter=@thetis/settle-central",
     "build:settle-central": "turbo build --filter=@thetis/settle-central",
     "clean": "git clean -xdf node_modules",
@@ -21,5 +22,9 @@
     "lint:repo": "bunx sherif@latest",
     "typecheck": "turbo typecheck"
   },
-  "workspaces": ["packages/*", "apps/*"]
+  "workspaces": ["packages/*", "apps/*"],
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
 }

@@ -1,20 +1,21 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import Testimonial from '@/components/Testimonial.astro'
-import Slide from '@/components/Slide.astro'
-import BigLinks from '@/components/BigLinks.astro'
-import NightSplintSchema from '../schemas/NightSplintSchema.astro'
-import RedCross from '@/components/icons/RedCross.astro'
-import GreenTick from '@/components/icons/GreenTick.astro'
-import EmailCTA from '@/components/CTA/EmailCTA.astro'
-import DownloadList from '../components/DownloadList.astro'
-import Quote from '../components/Quote.astro'
-import ShopifyBuyButton from '../components/ShopifyBuyButton.astro'
-import SizeChart from '../components/SizeChart.astro'
-import StarRating from '../features/reviews/StarRating.tsx'
-import { buttonVariants } from '../components/ui/button'
-import WarningShipping from '../components/WarningShipping.astro'
-import Title from '../components/Title.astro'
+import Layout from "../layouts/Layout.astro";
+import Testimonials from "@/components/Testimonials.astro";
+import Slide from "@/components/Slide.astro";
+import BigLinks from "@/components/BigLinks.astro";
+import NightSplintSchema from "../schemas/NightSplintSchema.astro";
+import RedCross from "@/components/icons/RedCross.astro";
+import GreenTick from "@/components/icons/GreenTick.astro";
+import EmailCTA from "@/components/CTA/EmailCTA.astro";
+import DownloadList from "../components/DownloadList.astro";
+import Quote from "../components/Quote.astro";
+import ShopifyBuyButton from "../components/ShopifyBuyButton.astro";
+import SizeChart from "../components/SizeChart.astro";
+import StarRating from "../features/reviews/StarRating.tsx";
+import { buttonVariants } from "../components/ui/button";
+// import { NightSplintCarousel } from "../components/NightSplintCarousel.tsx";
+// import WarningShipping from '../components/WarningShipping.astro'
+// import Title from '../components/Title.astro'
 ---
 
 <NightSplintSchema slot="head" />
@@ -25,23 +26,24 @@ import Title from '../components/Title.astro'
     image="https://thetismedical.com/images/green-shell.png"
 >
     <main>
+        <Slide className="!mt-0 !pt-0"></Slide>
         <section class="landing splint">
             <BigLinks active="night" />
-            <h2 class="pb-4 text-lg text-center lg:text-xl lg:pb-8 lg:pt-4">
+            <h2 class="lg:pt-4 pb-4 lg:pb-8 text-center text-lg lg:text-xl">
                 DESIGNED ALONGSIDE SURGEONS TO IMPROVE ACHILLES RUPTURE
                 RECOVERY.
             </h2>
-            <div class="flex flex-col my-2 md:flex-row">
+            <div class="flex md:flex-row flex-col my-2">
                 <img
-                    class="lg:w-7/12 lg:mr-4"
+                    class="lg:mr-4 lg:w-7/12"
                     src="/images/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg"
                     alt="Night Splint Render"
                 />
                 <div
-                    class="mt-6 lg:mt-0 mx-auto w-[90%] flex flex-col gap-y-6 items-center text-center lg:items-start lg:text-left"
+                    class="flex flex-col items-center lg:items-start gap-y-6 mx-auto mt-6 lg:mt-0 w-[90%] text-center lg:text-left"
                 >
                     <h1
-                        class="text-2xl lg:text-4xl font-semibold leading-[135%]"
+                        class="font-semibold text-2xl lg:text-4xl leading-[135%]"
                     >
                         Achilles Tendon Rupture Night Splint
                     </h1>
@@ -64,7 +66,7 @@ import Title from '../components/Title.astro'
                 author="Clinical Director, London Foot and Ankle Centre"
             />
             <div
-                class="flex items-center justify-center w-full px-4 mx-auto mt-8"
+                class="flex justify-center items-center mx-auto mt-8 px-4 w-full"
             >
                 <h3>
                     <a
@@ -246,45 +248,7 @@ import Title from '../components/Title.astro'
         <Slide title="Testimonials" id="testimonials">
             <div id="more-reviews"></div>
             <div class="space-y-8">
-                <Testimonial
-                    name="Andrew Lawrence"
-                    description="Team GB Basketball Player"
-                    image="andrew-lawrence.png"
-                >
-                    "I recently began using the Thetis Night Splint overnight.
-                    My regular boot is good for daily use but very heavy and
-                    uncomfortable to sleep in - the night splint has been
-                    revolutionary for me! It keeps my foot perfectly in place
-                    but without being bulky, meaning I can sleep more
-                    comfortably with no fear of hurting my Achilles tendon. I
-                    would highly recommend everyone and anyone to use this
-                    product during your recovery from Achilles rupture."
-                </Testimonial>
-                <Testimonial
-                    name="Olivia Blatch"
-                    description="Team GB Weightlifter"
-                    image="olivia-blatch.png"
-                >
-                    "The Thetis Night Splint is a lot slimmer and far more
-                    lightweight than the orthopaedic boot I was sleeping in. It
-                    allows me to move my leg more freely but still stops me from
-                    flexing my toes beyond a certain point, which is ideal
-                    whilst the tendon heals. The splint even comes in my
-                    favourite colour, so I was sold the minute I saw it!"
-                </Testimonial>
-                <Testimonial
-                    name="Mr James Davis"
-                    description="Past President of the British Orthopaedic Foot and Ankle Society"
-                    image="mr-james-davis.png"
-                >
-                    "When I tore my own Achilles tendon, the hardest part of the
-                    recovery was having to wear the hospital boot in bed at
-                    night for many weeks. My only option was to make myself a
-                    splint using plaster-cast materials and make-shift straps.
-                    It is fantastic that Thetis Medical have produced this
-                    night-splint. It is certain to improve the recovery
-                    experience for patients."
-                </Testimonial>
+               <Testimonials /> 
             </div>
         </Slide>
 

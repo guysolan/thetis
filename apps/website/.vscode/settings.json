@@ -1,8 +1,13 @@
 {
-    "prettier.documentSelectors": ["\"**/*.astro\"", "**/*.astro"],
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.documentSelectors": [
+        "\"**/*.astro\"",
+        "**/*.astro"
+    ],
     "[astro]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "astro-build.astro-vscode"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "biomejs.biome"
     },
     "files.associations": {
         "*.mdx": "markdown"
