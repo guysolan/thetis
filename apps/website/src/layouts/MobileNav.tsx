@@ -18,7 +18,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../components/ui/sheet";
-import { ChevronRight } from "lucide-react";
 
 import { articles } from "../data/articles.ts";
 import { products } from "../data/products.ts";
@@ -43,47 +42,28 @@ export function MobileNav() {
             experience Achilles tendon ruptures.
           </SheetDescription>
         </SheetHeader>
-        <Accordion defaultValue="products" type="single" collapsible>
-          <AccordionItem value="products" className="">
-            <AccordionTrigger className="w-full text-left hover:no-underline">
-              Products
-            </AccordionTrigger>
-            <AccordionContent>
-              {products.map((product) => (
-                <a
-                  key={product.href}
-                  href={product.href}
-                  className={cn(
-                    buttonVariants({ variant: "ghost" }),
-                    "flex justify-between items-center w-full h-12 px-4 transition-colors hover:bg-accent",
-                  )}
-                >
-                  <span className="font-medium">{product.title}</span>
-                  <ChevronRight size={16} />
-                </a>
-              ))}
-            </AccordionContent>
+        <Accordion type="single" collapsible>
+          <AccordionItem value="products">
+            <AccordionTrigger>Products</AccordionTrigger>
+            {products.map((product) => {
+              return (
+                <AccordionContent key={product.href}>
+                  <a href={product.href}>{product.title}</a>
+                </AccordionContent>
+              );
+            })}
           </AccordionItem>
-
           <AccordionItem value="patient-guides">
-            <AccordionTrigger className="w-full text-left hover:no-underline">
-              Patient Guides
-            </AccordionTrigger>
-            <AccordionContent className="p-0">
-              {articles.map((article) => (
-                <a
-                  key={article.href}
-                  href={article.href}
-                  className={cn(
-                    buttonVariants({ variant: "ghost" }),
-                    "flex justify-between items-center w-full h-12 px-4 transition-colors hover:bg-accent",
-                  )}
-                >
-                  <span className="font-medium">{article.title}</span>
-                  <ChevronRight size={16} />
-                </a>
-              ))}
-            </AccordionContent>
+            <AccordionTrigger>Patient Guides</AccordionTrigger>
+            {articles.map((article) => {
+              return (
+                <AccordionContent key={article.href}>
+                  <a className="font-slight text-base" href={article.href}>
+                    {article.title}
+                  </a>
+                </AccordionContent>
+              );
+            })}
           </AccordionItem>
 
           <NoAccordionLink href="/professionals" title="Professionals" />

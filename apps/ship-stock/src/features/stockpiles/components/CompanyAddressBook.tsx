@@ -36,7 +36,9 @@ const CompanyAddressBook = ({
                 title={address.name ?? "Address"}
                 editForm={<AddressForm operation="upsert" address={address} />}
                 deleteFunction={() => deleteAddress(address.id as number)}
-              />
+          
+          
+          />
             </div>
           </Card>
         ))}
@@ -57,4 +59,5 @@ const CompanyAddressBook = ({
   );
 };
 
+export default CompanyAddressBook;
 export default CompanyAddressBook;
