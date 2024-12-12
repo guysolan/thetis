@@ -1,53 +1,12 @@
 ---
 import { InfiniteMovingCards } from "@thetis/ui/infinite-moving-cards";
 
-const testimonials = [
-  {
-    quote:
-      "The night splint has been a game changer for my recovery. I can finally get a good night's sleep without worrying about my Achilles. Highly recommend!",
-    name: "Dr. James Wilson",
-    title: "Verified Purchase",
-    rating: 5,
-    date: "March 15, 2024",
-  },
-  {
-    quote:
-      "As a physiotherapist, I've recommended this to several patients. The design is thoughtful and the quality is excellent. My patients report much better comfort compared to traditional boots.",
-    name: "Sarah Thompson",
-    title: "Senior Physiotherapist",
-    rating: 5,
-    date: "February 28, 2024",
-  },
-  {
-    quote:
-      "After my Achilles surgery, this splint made a huge difference to my recovery journey. Much more comfortable than the boot for sleeping.",
-    name: "Michael Roberts",
-    title: "Verified Purchase",
-    rating: 5,
-    date: "March 2, 2024",
-  },
-  {
-    quote:
-      "Our hospital has been using the trauma splints for 6 months now. They're cost-effective and our patients find them very comfortable. Great product!",
-    name: "Dr. Emily Chen",
-    title: "Orthopedic Surgeon",
-    rating: 5,
-    date: "March 10, 2024",
-  },
-  {
-    quote:
-      "The customer service was excellent and the splint arrived quickly. It's well-made and does exactly what it promises. Very satisfied.",
-    name: "David Brown",
-    title: "Verified Purchase",
-    rating: 4,
-    date: "March 8, 2024",
-  },
-];
+import { reviews } from "./reviews";
 ---
 
-<div class="relative left-0 flex flex-col justify-center items-center dark:bg-neutral-950 rounded-md w-[100vw] antialiased overflow-hidden">
+<div class="relative left-0 flex flex-col justify-center items-center rounded-md w-[100vw] antialiased overflow-hidden">
   <InfiniteMovingCards
-    items={testimonials}
+    items={reviews.filter((review) => review.is_pinned)}
     direction="right"
     client:load
   />

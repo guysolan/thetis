@@ -1,26 +1,31 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import { testimonials } from '../data/testimonials'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/ui/card.tsx'
-import { Star } from 'lucide-astro';
-
+import Layout from "../layouts/Layout.astro";
+import { testimonials } from "../data/testimonials";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card.tsx";
+import { Star } from "lucide-astro";
 ---
 
 <Layout
 	title='Thetis Medical Testimonials'
 	description='Testimonials and reviews of the Thetis Medical Achilles Rupture Night Splints.'
 	image='https://thetismedical.com/images/dotty-logo'>
-	<section class='px-4 my-8 flex flex-col w-full max-w-[900px] mx-auto'>
-		<h1 class="text-slate-900 text-2xl mb-8">Testimonials</h1>
+	<section class='flex flex-col mx-auto my-8 px-4 w-full max-w-[900px]'>
+		<h1 class="mb-8 text-2xl text-slate-900">Testimonials</h1>
 
-		<div class='flex flex-col md:flex-row gap-x-8'>
+		<div class='flex md:flex-row flex-col gap-x-8'>
 			<div class='flex-grow'>
-				<ul class='w-full flex flex-col gap-6'>
+				<ul class='flex flex-col gap-6 w-full'>
 					{
 						testimonials.map((product) => {
 							return (
 								<li>
-									<h3 class='text-xl font-semibold text-slate-800 mb-4'>{product.name}</h3>
+									<h3 class='mb-4 font-semibold text-slate-800 text-xl'>{product.name}</h3>
 									<ul class='flex flex-col gap-4'>
 										{product.testimonials.map((t) => {
 											return (
@@ -30,9 +35,9 @@ import { Star } from 'lucide-astro';
 															<CardTitle className='text-lg text-slate-800'>
 																{t.author}
 															</CardTitle>
-															<p class="text-md text-slate-800 font-medium">{t.details}</p>
+															<p class="font-medium text-base text-slate-800">{t.details}</p>
 														</CardHeader>
-														<CardContent className='text-md text-slate-950 font-normal'>
+														<CardContent className='font-normal text-base text-slate-950'>
 															{t.quote}
 														</CardContent>
 													</Card>
@@ -60,12 +65,12 @@ import { Star } from 'lucide-astro';
 																<Star class="fill-amber-300 stroke-amber-500"/>
 																<Star class="fill-amber-300 stroke-amber-500"/>
 															</div>
-															<p class="text-md text-slate-800 font-semibold">{r.rating}</p>
+															<p class="font-semibold text-base text-slate-800">{r.rating}</p>
 
 															
 
 														</CardHeader>
-														<CardContent className='text-md text-slate-950 font-normal'>
+														<CardContent className='font-normal text-base text-slate-950'>
 															<p>{r.body}</p>
 														</CardContent>
 														<CardFooter className="capitalize">{r.author}</CardFooter>

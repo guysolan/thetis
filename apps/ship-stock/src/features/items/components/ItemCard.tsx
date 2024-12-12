@@ -27,7 +27,7 @@ const ItemCard = ({ item }: { item: ItemView }) => {
             {item.item_name}
             <Badge>{item.item_type}</Badge>
           </CardTitle>
-          <div className="font-medium text-foreground text-md">
+          <div className="font-medium text-base text-foreground">
             <NumberFlow
               value={Number(item.item_price ?? 0)}
               format={{ style: "currency", currency: defaultCurrency }}

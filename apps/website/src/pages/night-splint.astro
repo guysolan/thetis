@@ -13,6 +13,8 @@ import ShopifyBuyButton from "../components/ShopifyBuyButton.astro";
 import SizeChart from "../components/SizeChart.astro";
 import StarRating from "../features/reviews/StarRating.tsx";
 import { buttonVariants } from "../components/ui/button";
+import NightSplintFAQs from "../components/NightSplintFAQs.tsx";
+import ReviewsMasonry from "../components/reviews/ReviewsMasonry.astro";
 // import { NightSplintCarousel } from "../components/NightSplintCarousel.tsx";
 // import WarningShipping from '../components/WarningShipping.astro'
 // import Title from '../components/Title.astro'
@@ -243,47 +245,12 @@ import { buttonVariants } from "../components/ui/button";
             />
         </Slide>
 
-        <!-- Testimonials -->
+        <ReviewsMasonry client:load />
 
-        <Slide title="Testimonials" id="testimonials">
-            <div id="more-reviews"></div>
-            <div class="space-y-8">
-               <Testimonials /> 
-            </div>
-        </Slide>
+        <Testimonials />
 
         <Slide title="FAQs">
-            <div class="space-y-8">
-                <div class="space-y-2">
-                    <h4>Can you use the splint for Achilles tendonitis?</h4>
-                    <p>
-                        No, the splint is only used after rupture of the
-                        Achilles tendon. It is not suitable for broken bones,
-                        plantar fasciitis or Achilles tendonitis. The splint
-                        holds the foot pointed downwards, in a tip toe position,
-                        for tendon healing. For other conditions, like plantar
-                        fasciitis and Achilles tendonitis, there are different
-                        splints deliberately designed to do the opposite, and
-                        hold the foot up.
-                    </p>
-                </div>
-                <div class="space-y-2">
-                    <h4>Can you use the splint instead of a boot?</h4>
-                    <p>
-                        Yes, it is designed as an alternative - but ONLY for use
-                        when resting. You cannot walk or stand in the splint
-                        without crutches.
-                    </p>
-                </div>
-                <div class="space-y-2">
-                    <h4>Is the sizing accurate?</h4>
-                    <p>
-                        Yes, the sizing is accurate. Sizing is based on foot
-                        size, designed to ensure that the splint does not
-                        interfere with the toes.
-                    </p>
-                </div>
-            </div>
+            <NightSplintFAQs />
         </Slide>
     </main>
 </Layout>

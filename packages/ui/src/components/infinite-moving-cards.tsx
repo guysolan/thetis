@@ -11,10 +11,10 @@ export const InfiniteMovingCards = ({
   className,
 }: {
   items: {
-    quote: string;
+    body: string;
     name: string;
     title: string;
-    rating: number;
+    stars: number;
     date: string;
   }[];
   direction?: "left" | "right";
@@ -72,15 +72,13 @@ export const InfiniteMovingCards = ({
     }
   };
 
-  const renderStars = (rating: number) => {
+  const renderStars = () => {
     return (
       <div className="flex gap-1 mb-2">
         {[...Array(5)].map((_, index) => (
           <svg
             key={index}
-            className={`w-4 h-4 ${
-              index < rating ? "text-yellow-400" : "text-gray-300"
-            }`}
+            className="w-4 h-4 text-yellow-400"
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -113,15 +111,15 @@ export const InfiniteMovingCards = ({
             key={item.name}
           >
             <blockquote>
-              {renderStars(item.rating)}
-              <span className="relative z-20 font-normal text-neutral-900 text-sm dark:text-neutral-200 leading-[1.6]">
-                {item.quote}
+              {renderStars()}
+              <span className="relative z-20 font-normal text-base text-neutral-900 dark:text-neutral-200 leading-[1.6]">
+                {item.body}
               </span>
               <div className="relative z-20 flex flex-col mt-6">
-                <span className="font-medium text-neutral-800 text-sm dark:text-neutral-200">
+                <span className="font-medium text-lg text-neutral-800 dark:text-neutral-200">
                   {item.name}
                 </span>
-                <span className="mt-1 text-neutral-500 text-sm">
+                <span className="mt-1 font-semibold text-base text-neutral-500">
                   {item.title}
                 </span>
               </div>

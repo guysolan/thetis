@@ -4,19 +4,6 @@ const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
 
-// const config = {
-//   darkMode: ["class"],
-//   content: [
-//     "./pages/**/*.{ts,tsx}",
-//     "./components/**/*.{ts,tsx}",
-//     "./app/**/*.{ts,tsx}",
-//     "./src/**/*.{ts,tsx}",
-//     "./index.html",
-//     "./src/**/*.{js,ts,jsx,tsx}",
-//   ],
-//   prefix: "",
-// } satisfies Config;
-
 export default {
   theme: {
     container: {

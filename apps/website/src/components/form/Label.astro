@@ -1,10 +1,10 @@
 ---
 interface Props {
-    labelFor: string
+  labelFor: string;
 }
-const { labelFor }: Props = Astro.props
+const { labelFor }: Props = Astro.props;
 ---
 
-<label for={labelFor} class="block mb-2 text-md font-semibold text-gray-700">
+<label for={labelFor} class="block mb-2 font-semibold text-base text-gray-700">
     <slot />
 </label>

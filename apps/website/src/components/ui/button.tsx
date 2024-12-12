@@ -19,10 +19,10 @@ const buttonVariants = cva(
         link: "text-bg underline-offset-4 !underline",
       },
       size: {
-        default: "h-10 rounded-md px-4 py-2 text-md",
-        md: "h-10 rounded-md px-4 py-2 text-md",
+        default: "h-10 rounded-md px-4 py-2 text-base",
+        md: "h-10 rounded-md px-4 py-2 text-base",
         sm: "h-9 rounded-md px-3 text-sm",
-        lg: "md:h-12 rounded-lg md:px-8 text-md h-10 px-6",
+        lg: "md:h-12 rounded-lg md:px-8 text-base h-10 px-6",
         xl: "h-14 px-10 text-lg rounded-lg",
         icon: "h-10 w-10",
       },

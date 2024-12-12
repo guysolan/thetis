@@ -44,6 +44,7 @@
     "pnpm": "^9.12.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-responsive-masonry": "^2.6.0",
     "remark-toc": "^8.0.1",
     "schema-dts": "^1.1.2",
     "tailwind-merge": "^2.5.5",

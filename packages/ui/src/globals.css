@@ -81,7 +81,7 @@
   }
 
   body {
-    @apply bg-background text-foreground text-md overflow-x-hidden overflow-y-scroll;
+    @apply bg-background text-foreground text-base overflow-x-hidden overflow-y-scroll;
   }
 
   main {
@@ -91,7 +91,7 @@
   input,
   textarea,
   select {
-    @apply rounded-sm focus:border-primary focus:ring-primary border border-gray-400 text-black  text-md  transition-all ease-in-out duration-100 delay-100  hover:ring-gray-400 ring-1 ring-transparent block w-full p-3 font-normal placeholder:text-gray-500;
+    @apply rounded-sm focus:border-primary focus:ring-primary border border-gray-400 text-black  text-base  transition-all ease-in-out duration-100 delay-100  hover:ring-gray-400 ring-1 ring-transparent block w-full p-3 font-normal placeholder:text-gray-500;
   }
 }
 
@@ -648,12 +648,6 @@ img.process-icon {
   margin: 0 auto;
 }
 
-.learn-more h4:hover {
-  -webkit-transform: scale(1.02);
-  -ms-transform: scale(1.02);
-  transform: scale(1.02);
-}
-
 /* .fraction1 {
 background-color: rgba(125, 154, 150, 0.32);
 width: 20vw;
@@ -929,24 +923,11 @@ a#blue-link {
   transition: 0.005 ease;
 }
 
-.explore:hover,
-.explore.pre-order:hover {
-  -webkit-transform: scale(1.02);
-  -ms-transform: scale(1.02);
-  transform: scale(1.02);
-}
-
 .email-icon,
 .email-icon button {
   background-color: rgba(0, 0, 0, 0);
   border: 0px solid rgba(0, 0, 0, 0);
   cursor: pointer;
-}
-
-.email-icon:hover {
-  -webkit-transform: scale(1.05);
-  -ms-transform: scale(1.05);
-  transform: scale(1.05);
 }
 
 .nav-bar {
@@ -1085,14 +1066,6 @@ a#blue-link {
   padding: 1rem 1.5rem;
 }
 
-a:hover,
-.landing-nav li:hover {
-  -webkit-transform: scale(1.02);
-  -ms-transform: scale(1.02);
-  transform: scale(1.02);
-  transition: 0.01s ease;
-}
-
 .nav-links a:hover {
   background-color: var(--main-bg-color);
   color: var(--main-font-color);
@@ -1224,7 +1197,6 @@ a:hover,
   cursor: pointer;
   /* width: 25px;
     height: 25px; */
-  transform: scale(1.25);
   width: 25px;
   height: 25px;
   border-radius: 5px;
