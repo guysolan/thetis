@@ -1,0 +1,112 @@
+---
+import LargeLeft from "./LargeLeft.astro";
+import LargeRight from "./LargeRight.astro";
+import SmallLeft from "./SmallLeft.astro";
+import SmallRight from "./SmallRight.astro";
+---
+
+<div class="my-5">
+    <SmallLeft/>
+  <div class="flex gap-5 mb-5">
+    <div class="flex items-center gap-2.5">
+      <span class="font-medium">Size:</span>
+      <button 
+        class="border-[#5a9784] hover:bg-[#518877] [&.active]:bg-[#5a9784] px-4 py-2 border rounded-full font-raleway hover:text-white [&.active]:text-white transition-all duration-200 cursor-pointer" 
+        data-size="large"
+      >
+        Large
+      </button>
+      <button 
+        class="border-[#5a9784] hover:bg-[#518877] [&.active]:bg-[#5a9784] px-4 py-2 border rounded-full font-raleway hover:text-white [&.active]:text-white transition-all duration-200 cursor-pointer" 
+        data-size="small"
+      >
+        Small
+      </button>
+    </div>
+    
+    <div class="flex items-center gap-2.5">
+      <span class="font-medium font-raleway">Side:</span>
+      <button 
+        class="border-[#5a9784] hover:bg-[#518877] [&.active]:bg-[#5a9784] px-4 py-2 border rounded-full font-raleway hover:text-white [&.active]:text-white transition-all duration-200 cursor-pointer" 
+        data-side="left"
+      >
+        Left
+      </button>
+      <button 
+        class="border-[#5a9784] hover:bg-[#518877] [&.active]:bg-[#5a9784] px-4 py-2 border rounded-full font-raleway hover:text-white [&.active]:text-white transition-all duration-200 cursor-pointer" 
+        data-side="right"
+      >
+        Right
+      </button>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <div class="button-variant" data-variant="large-left">
+      <LargeLeft />
+    </div>
+    <div class="hidden button-variant" data-variant="large-right">
+      <LargeRight />
+    </div>
+    <div class="hidden button-variant" data-variant="small-left">
+      <SmallLeft />
+    </div>
+    <div class="hidden button-variant" data-variant="small-right">
+      <SmallRight />
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function updateButtonVisibility(size: string, side: string) {
+    const variants = document.querySelectorAll('.button-variant');
+    variants.forEach((variant) => {
+      const variantType = variant.getAttribute('data-variant');
+      if (variantType === `${size}-${side}`) {
+        variant.classList.remove('hidden');
+      } else {
+        variant.classList.add('hidden');
+      }
+    });
+  }
+
+  // Initialize buttons
+  const sizeButtons = document.querySelectorAll('[data-size]');
+  const sideButtons = document.querySelectorAll('[data-side]');
+
+  let currentSize = 'large';
+  let currentSide = 'left';
+
+  // Initialize the correct button visibility on page load
+  updateButtonVisibility(currentSize, currentSide);
+
+  function updateButtons(buttons: NodeListOf<Element>, activeValue: string, type: 'size' | 'side') {
+    buttons.forEach(button => {
+      const value = button.getAttribute(`data-${type}`);
+      if (value === activeValue) {
+        button.classList.add('active');
+      } else {
+        button.classList.remove('active');
+      }
+    });
+  }
+
+  sizeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const size = button.getAttribute('data-size')!;
+      currentSize = size;
+      updateButtons(sizeButtons, size, 'size');
+      updateButtonVisibility(currentSize, currentSide);
+    });
+  });
+
+  sideButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const side = button.getAttribute('data-side')!;
+      currentSide = side;
+      updateButtons(sideButtons, side, 'side');
+      updateButtonVisibility(currentSize, currentSide);
+    });
+  });
+</script>

@@ -8,7 +8,13 @@ import EmailCTA from "@/components/CTA/EmailCTA.astro";
 import SizeChart from "@/components/SizeChart.astro";
 import NHSLogo from "@/assets/NHS_logo.svg";
 import Title from "../components/Title.astro";
+import { ClientRouter } from "astro:transitions";
+import ProsCons from "@/components/ProsCons.astro";
 ---
+
+<Fragment slot="head">
+  <ClientRouter />
+</Fragment>
 
 <Layout
     title="Trauma Splint for Torn Achilles Tendons"
@@ -77,58 +83,40 @@ import Title from "../components/Title.astro";
     </Slide>
 
     <Slide
-        id="problem"
-        title="Problem"
-        paragraph="Currently, patients who visit A&E with a query Achilles rupture are placed in a cast. This cast needs to be removed and reapplied if scanned."
-    />
-    <p class="px-8 text-base">Using a cast creates issues:</p>
-    <div class="bullet-wrap">
-        <div class="bullet-points">
-            <div class="boot-point">
-                <img src="/images/red-cross.svg" alt="Red-Cross" />
-                <p>5 layer application</p>
-            </div>
-            <div class="boot-point">
-                <img src="/images/red-cross.svg" alt="Red-Cross" />
-                <p>Difficult to apply</p>
-            </div>
-        </div>
-        <div class="bullet-points">
-            <div class="boot-point">
-                <img src="/images/red-cross.svg" alt="Red-Cross" />
-                <p>Staff need training</p>
-            </div>
-            <div class="boot-point">
-                <img src="/images/red-cross.svg" alt="Red-Cross" />
-                <p>Takes time to dry</p>
-            </div>
-        </div>
-    </div>
-    <Slide
-        id="Solution"
-        title="Solution (Patent Pending)"
-        paragraph="By using a comfortable, padded, plastic shell wrapped in crepe bandage, the process is transformed."
+        id="problem-solution"
+
     >
-        <div class="product-solution"></div>
-        <div class="bullet-wrap">
-            <div class="bullet-points">
-                <div class="boot-point">
-                    <img src="/images/green-tick.svg" alt="Green-Tick" />
-                    <p>2 layer application</p>
-                </div>
-                <div class="boot-point">
-                    <img src="/images/green-tick.svg" alt="Green-Tick" />
-                    <p>Easier to apply</p>
+        <div class="gap-8 grid md:grid-cols-2 w-full">
+            <div class="flex flex-col p-6">
+                <h3 class="mb-4 font-semibold text-2xl">Current Problem</h3>
+                <p class="mb-6">A&E patients with suspected Achilles ruptures receive casts that must be removed for scanning.</p>
+                
+                <div class="mt-auto">
+                    <ProsCons 
+                        points={[
+                            { type: "con", text: "5 layer application" },
+                            { type: "con", text: "Difficult to apply" },
+                            { type: "con", text: "Staff need training" },
+                            { type: "con", text: "Takes time to dry" }
+                        ]}
+                    />
                 </div>
             </div>
-            <div class="bullet-points">
-                <div class="boot-point">
-                    <img src="/images/green-tick.svg" alt="Green-Tick" />
-                    <p>No training needed</p>
-                </div>
-                <div class="boot-point">
-                    <img src="/images/green-tick.svg" alt="Green-Tick" />
-                    <p>Save patients time</p>
+
+            <div class="flex flex-col p-6">
+                <h3 class="mb-4 font-semibold text-2xl">Our Solution (Patent Pending)</h3>
+                <p class="mb-6">By using a comfortable, padded, plastic shell wrapped in crepe bandage, the process is transformed.</p>
+                <div class="mb-6 product-solution"></div>
+                
+                <div class="mt-auto">
+                    <ProsCons 
+                        points={[
+                            { type: "pro", text: "2 layer application" },
+                            { type: "pro", text: "Easier to apply" },
+                            { type: "pro", text: "No training needed" },
+                            { type: "pro", text: "Save patients time" }
+                        ]}
+                    />
                 </div>
             </div>
         </div>

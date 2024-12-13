@@ -55,10 +55,10 @@ const products = [
 ];
 ---
 
-<div class="relative flex gap-4 md:gap-8 lg:gap-12 mx-auto md:px-4 py-8 md:py-16 pr-4 pl-1 max-w-[1400px]">
+<div class="relative flex gap-4 mx-auto px-4 md:px-4 py-8 md:py-16 max-w-[1400px]">
   <!-- Timeline Bar (Left Side) -->
-  <div class="relative w-12 md:w-24 shrink-0">
-    <div class="left-6 md:left-8 absolute bg-primary/50 w-0.5 h-full">
+  <div class="md:block relative hidden px-8 w-24 shrink-0">
+    <div class="left-8 absolute bg-primary/50 w-0.5 h-full">
       {timelinePoints.map((point) => (
         <div 
           class="-left-6 md:-left-8 absolute flex justify-center items-center gap-2 bg-white p-1 w-14 md:w-16 text-center" 
@@ -98,13 +98,13 @@ const products = [
               <div class="flex flex-wrap gap-3 md:gap-4 pt-3 md:pt-4">
                 <a
                   href={product.links.primary}
-                  class={cn(buttonVariants({ size: "default", variant: "default" }),'w-fit text-sm md:text-base')}
+                  class={cn(buttonVariants({ size: "lg", variant: "default" }),'w-fit md:text-base')}
                 >
                   Order Now
                 </a>
                 <a
                   href={product.links.secondary}
-                  class={cn(buttonVariants({ size: "default", variant: "outline" }),'w-fit text-sm md:text-base')}
+                  class={cn(buttonVariants({ size: "lg", variant: "outline" }),'w-fit md:text-base')}
                 >
                   Learn More
                 </a>

@@ -2,7 +2,7 @@
 
 import { cn } from "../utils";
 import React, { useEffect, useState } from "react";
-
+import getUnicodeFlagIcon from "country-flag-icons/unicode";
 export const InfiniteMovingCards = ({
   items,
   direction = "left",
@@ -12,6 +12,7 @@ export const InfiniteMovingCards = ({
 }: {
   items: {
     body: string;
+    short?: string;
     name: string;
     title: string;
     stars: number;
@@ -89,6 +90,16 @@ export const InfiniteMovingCards = ({
     );
   };
 
+  const decodeText = (text: string) => {
+    try {
+      const textarea = document.createElement("textarea");
+      textarea.innerHTML = text;
+      return textarea.value;
+    } catch {
+      return text;
+    }
+  };
+
   return (
     <div
       ref={containerRef}
@@ -107,20 +118,21 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item) => (
           <li
-            className="relative flex-shrink-0 border-neutral-400 bg-white dark:bg-neutral-950 px-8 py-6 border rounded-2xl w-[350px] md:w-[450px] max-w-full"
+            className="relative flex-shrink-0 border-neutral-400 bg-white px-8 py-6 border rounded-2xl w-[350px] md:w-[450px] max-w-full"
             key={item.name}
           >
             <blockquote>
               {renderStars()}
-              <span className="relative z-20 font-normal text-base text-neutral-900 dark:text-neutral-200 leading-[1.6]">
-                {item.body}
-              </span>
+              <p className="mt-1 mb-2 font-semibold text-lg text-neutral-700">
+                {decodeText(item.title)}
+                {item.title.length > 20 && "..."}
+              </p>
+              <p className="relative z-20 font-normal text-base text-neutral-900 dark:text-neutral-200 leading-[1.6]">
+                {decodeText(item?.short ?? item.body)}
+              </p>
               <div className="relative z-20 flex flex-col mt-6">
                 <span className="font-medium text-lg text-neutral-800 dark:text-neutral-200">
-                  {item.name}
-                </span>
-                <span className="mt-1 font-semibold text-base text-neutral-500">
-                  {item.title}
+                  {decodeText(item.name)} {getUnicodeFlagIcon(item.country)}
                 </span>
               </div>
             </blockquote>

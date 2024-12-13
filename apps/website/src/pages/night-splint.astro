@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { ClientRouter } from "astro:transitions";
 import Testimonials from "@/components/Testimonials.astro";
 import Slide from "@/components/Slide.astro";
 import BigLinks from "@/components/BigLinks.astro";
@@ -15,14 +16,20 @@ import StarRating from "../features/reviews/StarRating.tsx";
 import { buttonVariants } from "../components/ui/button";
 import NightSplintFAQs from "../components/NightSplintFAQs.tsx";
 import ReviewsMasonry from "../components/reviews/ReviewsMasonry.astro";
+import BuyButton from "../components/buy-button/BuyButton.astro";
+import SleepingComfortably from "../components/pros-cons/SleepingComfortably.tsx";
 // import { NightSplintCarousel } from "../components/NightSplintCarousel.tsx";
 // import WarningShipping from '../components/WarningShipping.astro'
 // import Title from '../components/Title.astro'
 ---
 
-<NightSplintSchema slot="head" />
+<Fragment slot="head">
+  <NightSplintSchema />
+  <ClientRouter />
+</Fragment>
 
 <Layout
+
     title="Achilles Tendon Rupture Night Splint"
     description="Thetis Medical's Achilles rupture night splint to make sleeping more pleasant and bearable. The brace straps to the leg to prevent further tendon injury."
     image="https://thetismedical.com/images/green-shell.png"
@@ -50,7 +57,8 @@ import ReviewsMasonry from "../components/reviews/ReviewsMasonry.astro";
                         Achilles Tendon Rupture Night Splint
                     </h1>
                     <StarRating />
-                    <ShopifyBuyButton />
+                    <BuyButton />
+                    <!-- <ShopifyBuyButton /> -->
                 </div>
             </div>
             <p class="splint-intro">
@@ -78,6 +86,7 @@ import ReviewsMasonry from "../components/reviews/ReviewsMasonry.astro";
                 </h3>
             </div>
         </Slide>
+        <SleepingComfortably client:load />
         <Slide
             id="problem"
             title="Problem"

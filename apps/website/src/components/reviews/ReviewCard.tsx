@@ -26,8 +26,8 @@ export function ReviewCard({ review }: { review: Review }) {
 
   return (
     <div
-      className={`relative flex-shrink-0 border-neutral-400 bg-white dark:bg-neutral-950 px-8 py-6 border rounded-2xl ${
-        review.is_pinned ? "border-blue-500" : ""
+      className={`relative flex-shrink-0 border-2 shadow-md shadow-neutral-300 bg-white dark:bg-neutral-950 px-8 py-6 rounded-2xl ${
+        review.is_pinned ? "border-primary/50" : ""
       }`}
     >
       <blockquote>
@@ -37,10 +37,10 @@ export function ReviewCard({ review }: { review: Review }) {
             {isExpanded ? review.body : truncateText(review.body, 300)}
           </span>
           <br />
-          {review.body.length > 100 && (
+          {review.body.length > 300 && (
             <button
               type="button"
-              className="mt-2 text-blue-500 text-sm hover:text-blue-600"
+              className="mt-2 font-semibold text-primary text-sm underline-offset-2 hover:underline"
               onClick={() => setIsExpanded(!isExpanded)}
             >
               {isExpanded ? "Show less" : "Show more"}
