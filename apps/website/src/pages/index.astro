@@ -10,6 +10,7 @@ import Testimonials from "../components/Testimonials.astro";
 import NightSplintImage from "../assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
 import { buttonVariants } from "../components/ui/button";
 import ProductTimeline from "../components/ProductTimeline.astro";
+import VIPBadges from "../components/VIPBadges.astro";
 ---
 
 <ThetisSchema slot="head" />
@@ -26,7 +27,9 @@ import ProductTimeline from "../components/ProductTimeline.astro";
    
 
         <div class="relative bg-gradient-to-b from-primary/25 to-white py-16">
+          
             <div class="mx-auto px-4 container">
+                
                 <div class="flex md:flex-row flex-col justify-between items-center gap-8">
                     <div class="space-y-6 md:w-1/2">
                         <h1 class="font-semibold text-[3rem] leading-normal">
@@ -71,7 +74,9 @@ import ProductTimeline from "../components/ProductTimeline.astro";
                                 Fast Delivery
                             </div>
                         </div>
+
                     </div>
+
 
                     <div class="md:block relative hidden md:w-5/12 group">
                         <Image 
@@ -92,10 +97,14 @@ import ProductTimeline from "../components/ProductTimeline.astro";
                         </div>
                     </div>
                 </div>
+        <VIPBadges client:load />
+
             </div>
+
         </div>
 
-       
+       <br/>
+       <br/>
 
         <Reviews />
 
@@ -113,20 +122,9 @@ import ProductTimeline from "../components/ProductTimeline.astro";
 </Layout>
 
 <script is:inline>
-	const getThemePreference = () => {
-		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-			return localStorage.getItem('theme');
-		}
-		return window.matchMedia('(prefers-color-scheme: light)').matches ? 'dark' : 'light';
-	};
-	const isDark = getThemePreference() === 'dark';
-	document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
- 
+	document.documentElement.classList.remove('dark');
+	
 	if (typeof localStorage !== 'undefined') {
-		const observer = new MutationObserver(() => {
-			const isDark = document.documentElement.classList.contains('dark');
-			localStorage.setItem('theme', isDark ? 'dark' : 'light');
-		});
-		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+		localStorage.setItem('theme', 'light');
 	}
 </script>

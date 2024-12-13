@@ -1,0 +1,31 @@
+---
+import { testimonials } from "../data/testimonials.ts";
+import Slide from "./Slide.astro";
+import { Image } from "astro:assets";
+---
+
+    <div class="flex flex-row sm:flex-row flex-wrap justify-start gap-6 mx-auto mr-auto pb-2">
+        {testimonials
+            .filter((testimonial) => testimonial.is_pinned)
+            .map((testimonial) => (
+            <div class="relative group">
+                <div class="flex flex-row items-center rounded-lg transform transition-all duration-300 hover:rotate-2">
+                    <Image
+                        class="shadow-md rounded-full w-10 h-10"
+                        src={testimonial.image}
+                        alt={`${testimonial.name}_photo`}
+                    />
+                    <div class="ml-2">
+                        <h4 class="font-semibold text-gray-800 text-sm">{testimonial.name}</h4>
+                        <p class="text-gray-600 text-xs">{testimonial.description}</p>
+                    </div>
+                    
+                    {/* Hover Quote */}
+                    <div class="group-hover:visible bottom-full absolute bg-white opacity-0 group-hover:opacity-100 shadow-lg mb-2 p-3 border rounded-lg w-60 transition-all duration-300 invisible">
+                        <p class="text-gray-700 text-sm italic">"{testimonial.short}"</p>
+                        <div class="bottom-[-8px] left-1/2 absolute bg-white border-r border-b w-4 h-4 transform -translate-x-1/2 rotate-45"></div>
+                    </div>
+                </div>
+            </div>
+        ))}
+    </div>

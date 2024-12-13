@@ -10,6 +10,7 @@ import reviews from "./reviews.json";
       .filter((review) => review.is_pinned)
       .sort(() => Math.random() - 0.5)}
     direction="right"
+    speed="slow"
     client:load
   />
 </div>
