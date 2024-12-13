@@ -55,8 +55,5 @@
     "@tailwindcss/line-clamp": "^0.4.4",
     "prettier": "^2.8.7",
     "prettier-plugin-astro": "^0.8.1"
-  },
-  "engines": {
-    "node": ">=18.14.1"
   }
 }
