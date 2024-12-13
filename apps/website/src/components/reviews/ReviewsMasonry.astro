@@ -7,7 +7,7 @@ import { ReviewCard } from "./ReviewCard";
   <h3 class="font-semibold text-3xl text-left text-neutral-900">Hear it from our customers...</h3>
   <div class="absolute inset-0 bg-primary/20"></div>
   <div class="relative z-10 masonry-grid py-8">
-    {reviews.map((review, idx) => (
+    {reviews.map((review) => (
       <div class="masonry-item">
         <ReviewCard client:load review={review} />
       </div>

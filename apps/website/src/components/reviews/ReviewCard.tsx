@@ -1,13 +1,5 @@
-import React, { useState } from "react";
-import { Button } from "../../components/ui/button";
-interface Review {
-  stars: number;
-  body: string;
-  name: string;
-  title: string;
-  date: string;
-  is_pinned?: boolean;
-}
+import { useState } from "react";
+import type { Review } from "./types";
 
 const renderStars = (count: number) => {
   return Array(count)
@@ -26,10 +18,10 @@ const renderStars = (count: number) => {
 
 const truncateText = (text: string, maxLength: number) => {
   if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength) + "...";
+  return text?.slice(0, maxLength) + "...";
 };
 
-export const ReviewCard = ({ review }: { review: Review }) => {
+export function ReviewCard({ review }: { review: Review }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -45,14 +37,14 @@ export const ReviewCard = ({ review }: { review: Review }) => {
             {isExpanded ? review.body : truncateText(review.body, 300)}
           </span>
           <br />
-          {review.body.length > 300 && (
-            <Button
-              variant="link"
-              className="px-0 font-normal"
+          {review.body.length > 100 && (
+            <button
+              type="button"
+              className="mt-2 text-blue-500 text-sm hover:text-blue-600"
               onClick={() => setIsExpanded(!isExpanded)}
             >
               {isExpanded ? "Show less" : "Show more"}
-            </Button>
+            </button>
           )}
         </div>
         <div className="relative z-20 flex flex-col mt-6">
@@ -67,4 +59,4 @@ export const ReviewCard = ({ review }: { review: Review }) => {
       </blockquote>
     </div>
   );
-};
+}

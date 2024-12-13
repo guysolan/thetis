@@ -13,6 +13,7 @@
     "dev": "turbo dev --parallel",
     "dev:ship-stock": "turbo dev --filter=@thetis/ship-stock",
     "dev:website": "turbo dev --filter=@thetis/website",
+    "build:website": "turbo build --filter=@thetis/website",
     "dev:settle-central": "turbo dev --filter=@thetis/settle-central",
     "build:settle-central": "turbo build --filter=@thetis/settle-central",
     "clean": "git clean -xdf node_modules",
