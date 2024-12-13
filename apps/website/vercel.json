@@ -1,5 +1,0 @@
-{
-  "framework": "astro",
-  "cleanUrls": true,
-  "outputDirectory": "dist"
-}
