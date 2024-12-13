@@ -1,9 +1,4 @@
 {
   "framework": "astro",
-  "cleanUrls": true,
-  "functions": {
-    "_render": {
-      "runtime": "@vercel/node@3.0.0"
-    }
-  }
+  "cleanUrls": true
 }
