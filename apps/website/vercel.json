@@ -1,4 +1,9 @@
 {
   "framework": "astro",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "functions": {
+    "_render": {
+      "runtime": "nodejs20.x"
+    }
+  }
 }
