@@ -44,13 +44,11 @@ const ShopifyBuyButton: React.FC<ShopifyBuyButtonProps> = ({
               styles: {
                 product: {
                   "@media (min-width: 601px)": {
-                    "max-width": "100%",
-                    "margin-left": "0",
-                    "margin-bottom": "0",
-                    display: "flex",
-                    "flex-direction": "column",
-                    "align-items": "flex-start",
+                    "max-width": "calc(25% - 20px)",
+                    "margin-left": "0px",
+                    "margin-bottom": "0px",
                   },
+                  "text-align": "left",
                 },
                 title: {
                   "font-family": "Raleway, sans-serif",
@@ -73,7 +71,6 @@ const ShopifyBuyButton: React.FC<ShopifyBuyButtonProps> = ({
                   "border-radius": "12px",
                   "padding-left": "24px",
                   "padding-right": "24px",
-                  "margin-left": "0",
                   "align-self": "flex-start",
                 },
                 quantityInput: {
@@ -182,9 +179,12 @@ const ShopifyBuyButton: React.FC<ShopifyBuyButtonProps> = ({
                   "font-size": "16px",
                 },
                 wrapper: {
-                  display: "flex",
                   gap: "10px",
                   "margin-top": "10px",
+                  "text-align": "left",
+                  width: "100%",
+                  display: "flex",
+                  "justify-content": "flex-start",
                 },
               },
               contents: {
@@ -349,7 +349,11 @@ const ShopifyBuyButton: React.FC<ShopifyBuyButtonProps> = ({
     };
   }, [componentId, productId, variantId]);
 
-  return <div id={componentId} />;
+  return (
+    <div className="relative flex flex-col justify-start items-start mx-0 w-fit">
+      <div id={componentId} />
+    </div>
+  );
 };
 
 export default ShopifyBuyButton;

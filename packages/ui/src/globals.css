@@ -33,7 +33,7 @@
 
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 14.3% 95.9%;
+    --secondary: 161 38% 65%;
     --secondary-foreground: 220.9 39.3% 11%;
 
     --accent: 220 14.3% 95.9%;
@@ -4167,4 +4167,8 @@ a.article.explore {
 .tick-or-cross {
   height: 30px;
   width: 30px;
+}
+
+.shopify-buy__layout-vertical {
+  margin-left: 0;
 }

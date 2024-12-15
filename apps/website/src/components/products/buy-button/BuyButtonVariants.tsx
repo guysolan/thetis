@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ShopifyBuyButton from "./ShopifyBuyButton";
 import { Button } from "@/components/ui/button";
-import { Shield, CheckCircle } from "lucide-react";
+import { Shield, CheckCircle, ArrowRight } from "lucide-react";
 
 interface BuyButtonVariantsProps {
   productId?: string;
@@ -38,9 +38,9 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
   const isSelectionComplete = currentSize && currentSide;
 
   return (
-    <div className={`max-w-xl mx-auto text-left ${className}`}>
-      <div className="flex flex-col justify-start items-start mb-6">
-        <h3 className="mb-4 font-semibold text-left text-lg">
+    <div className={`text-left flex flex-col gap-4 ${className}`}>
+      <div className="flex flex-col justify-start items-start my-4">
+        <h3 className="mb-2 font-semibold text-left text-lg">
           Choose Your Options
         </h3>
         <div className="space-y-4 w-full">
@@ -104,7 +104,7 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
         </div>
       )}
 
-      <div className="gap-4 grid grid-cols-2 mt-6 text-primary text-sm">
+      <div className="gap-4 grid grid-cols-2 mt-auto text-primary text-sm">
         <div className="flex items-center gap-2">
           <CheckCircle size={20} />
           <span className="text-left text-neutral-800">Free Shipping</span>
@@ -115,14 +115,12 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
         </div>
       </div>
 
-      <div className="mt-4 text-center">
-        <a
-          href="/bulk-orders"
-          className="text-primary text-sm hover:text-primary-dark underline"
-        >
-          Interested in ordering in bulk? Click here for special pricing
+      <Button asChild variant="link">
+        <a href="/bulk-orders">
+          Bulk Orders & Special Pricing
+          <ArrowRight size={16} />
         </a>
-      </div>
+      </Button>
     </div>
   );
 };

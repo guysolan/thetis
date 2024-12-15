@@ -1,24 +1,25 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
 import { ClientRouter } from "astro:transitions";
 import Testimonials from "@/components/testimonials/Testimonials.astro";
 import Slide from "@/components/Slide.astro";
 import BigLinks from "@/components/BigLinks.astro";
-import NightSplintSchema from "../schemas/NightSplintSchema.astro";
+import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
 import RedCross from "@/components/icons/RedCross.astro";
 import GreenTick from "@/components/icons/GreenTick.astro";
 import EmailCTA from "@/components/CTA/EmailCTA.astro";
-import DownloadList from "../components/DownloadList.astro";
-import Quote from "../components/Quote.astro";
-import SizeChart from "../components/SizeChart.astro";
-import StarRating from "../components/reviews/StarRating.tsx";
-import { buttonVariants } from "../components/ui/button";
-import NightSplintFAQs from "../components/NightSplintFAQs.tsx";
-import ReviewsMasonry from "../components/reviews/ReviewsMasonry.astro";
-import SleepingComfortably from "../components/pros-cons/SleepingComfortably.tsx";
-import BuyButtonVariants from "../components/products/buy-button/BuyButtonVariants.tsx";
-import ReviewStatistics from "../components/reviews/ReviewStatistics.tsx";
-import ReviewSummary from "../components/reviews/ReviewSummary.tsx";
+import DownloadList from "@/components/DownloadList.astro";
+import Quote from "@/components/Quote.astro";
+import SizeChart from "@/components/SizeChart.astro";
+import StarRating from "@/components/reviews/StarRating.astro";
+import { buttonVariants } from "@/components/ui/button";
+import NightSplintFAQs from "@/components/NightSplintFAQs.tsx";
+import ReviewsMasonry from "@/components/reviews/ReviewsMasonry.astro";
+import SleepingComfortably from "@/components/pros-cons/SleepingComfortably.tsx";
+import BuyButtonVariants from "@/components/products/buy-button/BuyButtonVariants.tsx";
+import ReviewStatistics from "@/components/reviews/ReviewStatistics.tsx";
+import ReviewSummary from "@/components/reviews/ReviewSummary.tsx";
+import BuyNightSplint from "../components/BuyNightSplint.astro";
 ---
 
 <Fragment slot="head">
@@ -40,25 +41,7 @@ import ReviewSummary from "../components/reviews/ReviewSummary.tsx";
                 DESIGNED ALONGSIDE SURGEONS TO IMPROVE ACHILLES RUPTURE
                 RECOVERY.
             </h2>
-            <div class="flex md:flex-row flex-col my-2">
-                <img
-                    class="lg:mr-4 lg:w-7/12"
-                    src="/images/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg"
-                    alt="Night Splint Render"
-                />
-                <div
-                    class="flex flex-col items-center lg:items-start gap-y-6 mx-auto mt-6 lg:mt-0 w-[90%] text-center lg:text-left"
-                >
-                    <h1
-                        class="font-semibold text-2xl lg:text-4xl leading-[135%]"
-                    >
-                        Achilles Tendon Rupture Night Splint
-                    </h1>
-                    <StarRating rating={4.5} showNumber={false} />
-                    <a href="#more-reviews" class="font-medium text-primary underline underline-offset-2 hover:underline-offset-4 transition-all duration-300">Read more reviews</a>
-                    <BuyButtonVariants client:load />
-                </div>
-            </div>
+            <BuyNightSplint />
             <p class="splint-intro">
                 The ONLY splint for post Achilles rupture recovery. Aimed to
                 improve sleep and make recovery more comfortable.
@@ -88,7 +71,7 @@ import ReviewSummary from "../components/reviews/ReviewSummary.tsx";
         <Slide
             id="problem"
             title="Problem"
-            paragraph="Currently, patients wear a large, outdoor, orthopaedic boot, day and night, for the 10 week rehabillitation. This is analagous to wearing hiking boots for 10 weeks, and sleeping in them..."
+            paragraph="Currently, patients wear a large, outdoor, orthopaedic boot, day and night, for the 10 week rehabillitation. This is analagous to wearing hiking boots for 10 weeks, and sleeping in them@."
         >
             <p class="intro large">Patients find these boots:</p>
             <div class="bullet-wrap">
