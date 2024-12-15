@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { ClientRouter } from "astro:transitions";
-import Testimonials from "@/components/Testimonials.astro";
+import Testimonials from "@/components/testimonials/Testimonials.astro";
 import Slide from "@/components/Slide.astro";
 import BigLinks from "@/components/BigLinks.astro";
 import NightSplintSchema from "../schemas/NightSplintSchema.astro";
@@ -10,17 +10,15 @@ import GreenTick from "@/components/icons/GreenTick.astro";
 import EmailCTA from "@/components/CTA/EmailCTA.astro";
 import DownloadList from "../components/DownloadList.astro";
 import Quote from "../components/Quote.astro";
-import ShopifyBuyButton from "../components/ShopifyBuyButton.astro";
 import SizeChart from "../components/SizeChart.astro";
 import StarRating from "../features/reviews/StarRating.tsx";
 import { buttonVariants } from "../components/ui/button";
 import NightSplintFAQs from "../components/NightSplintFAQs.tsx";
 import ReviewsMasonry from "../components/reviews/ReviewsMasonry.astro";
-import BuyButton from "../components/buy-button/BuyButton.astro";
 import SleepingComfortably from "../components/pros-cons/SleepingComfortably.tsx";
-// import { NightSplintCarousel } from "../components/NightSplintCarousel.tsx";
-// import WarningShipping from '../components/WarningShipping.astro'
-// import Title from '../components/Title.astro'
+import BuyButtonVariants from "../components/buy-button/BuyButtonVariants.tsx";
+import ReviewStatistics from "../components/reviews/ReviewStatistics.tsx";
+import ReviewSummary from "../components/reviews/ReviewSummary.tsx";
 ---
 
 <Fragment slot="head">
@@ -56,9 +54,9 @@ import SleepingComfortably from "../components/pros-cons/SleepingComfortably.tsx
                     >
                         Achilles Tendon Rupture Night Splint
                     </h1>
-                    <StarRating />
-                    <BuyButton />
-                    <!-- <ShopifyBuyButton /> -->
+                    <StarRating rating={4.5} showNumber={false} />
+                    <a href="#more-reviews" class="font-medium text-primary underline underline-offset-2 hover:underline-offset-4 transition-all duration-300">Read more reviews</a>
+                    <BuyButtonVariants client:load />
                 </div>
             </div>
             <p class="splint-intro">

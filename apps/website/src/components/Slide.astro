@@ -1,7 +1,7 @@
 ---
 const { id, size, background, title, paragraph, className } = Astro.props;
 
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import SlideTitle from "./SlideTitle.astro";
 
@@ -11,7 +11,9 @@ const outerVariants = cva("relative w-full", {
       default: "",
       black: "bg-black",
       gray: "bg-gray-100",
-      green: "bg-primary/20",
+      green: "bg-primary/30",
+      light: "bg-primary/15",
+      dark: "bg-primary/50",
     },
   },
   defaultVariants: {

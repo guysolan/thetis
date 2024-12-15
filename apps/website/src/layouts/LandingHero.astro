@@ -1,0 +1,79 @@
+---
+import Image from "astro/components/Image.astro";
+import { cn } from "@/lib/utils";
+import "@thetis/ui/globals.css";
+import NightSplintImage from "@/assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
+import { buttonVariants } from "@/components/ui/button";
+import AthletesBadges from "@/components/AthletesBadges.astro";
+const benefitsList = ["Clinically Proven", "NHS/FDA Approved", "Fast Delivery"];
+import HighlightedWord from "@/components/HighlightedWord.tsx";
+import BuyModal from "@/components/BuyModal.astro";
+import HoverImageLink from "../components/HoverImageLink.astro";
+---
+
+ <div class="relative bg-gradient-to-b from-primary/25 to-white pt-16 w-full">
+          
+            <div class="mx-auto px-4 container">
+                
+                <div class="flex md:flex-row flex-col justify-between items-center gap-8">
+                    <div class="space-y-6 lg:pr-16 md:w-1/2 lg:w-7/12">
+                   
+                   
+                        <h1 class="font-semibold text-5xl md:text-6xl leading-[105%]">
+                            <HighlightedWord>Better Recovery</HighlightedWord> for Achilles Tendon Rupture
+                        </h1>
+
+
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Experience breakthrough comfort and proven outcomes with our innovative Achilles splints - 
+                            trusted by leading healthcare professionals worldwide.
+                        </p>
+
+                         <Image 
+                            src={NightSplintImage} 
+                            alt="Thetis Medical Achilles Rupture Night Splint"
+                            class="group-hover:scale-[102%] group-hover:brightness-[0.85] block md:hidden shadow-lg hover:shadow-2xl rounded-xl transition-all duration-300" 
+                        />
+                        
+                        <div class="flex sm:flex-row flex-col gap-4 pt-4">
+                            <a href="/contact" 
+                               class={cn(buttonVariants({ size: 'lg', variant: 'default' }), 
+                               'w-full sm:w-auto text-center font-semibold')}>
+                                Order Now
+                            </a>
+                            <!-- <BuyModal /> -->
+                            <a href="/night-splint" 
+                               class={cn(buttonVariants({ size: 'lg', variant: 'outline' }), 
+                               'w-full sm:w-auto text-center')}>
+                                Learn More
+                            </a>
+                        </div>
+
+                        <div class="flex flex-row flex-wrap items-start sm:items-center gap-x-4 gap-y-2 px-2 text-base text-gray-600">
+                            {benefitsList.map(benefit => (
+                                <div class="flex items-center gap-2">
+                                    <span class="text-primary">&#10003;</span>
+                                    {benefit}
+                                </div>
+                            ))}
+                        </div>
+            <div class="pt-8 md:pt-2">
+                <AthletesBadges />
+                </div>
+                    </div>
+
+
+
+
+                    <HoverImageLink
+    image={NightSplintImage}
+    imageAlt="Thetis Medical Achilles Rupture Night Splint"
+    title="Night Splint"
+    description="Sleep comfortably while your achilles rupture heals."
+    linkText="Order Now"
+    linkHref="/night-splint"
+    className="md:block relative hidden md:w-1/2 lg:w-5/12" // optional
+/>
+                </div>
+            </div>
+        </div>

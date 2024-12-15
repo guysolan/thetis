@@ -28,7 +28,9 @@
     --border: 220 13% 91%;
     --input: 220 13% 91%;
 
-    --primary: 161 36% 43%;
+    --primary-hsl: hsl(161, 59%, 34%);
+    --primary: 161 60% 43%;
+
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 14.3% 95.9%;
@@ -185,8 +187,7 @@ p {
   font-weight: 400;
 }
 
-#logo,
-a {
+#logo {
   text-decoration: none !important;
 }
 

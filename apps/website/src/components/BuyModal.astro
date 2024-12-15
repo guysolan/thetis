@@ -1,0 +1,22 @@
+---
+import AnimatedModal from "./AnimatedModal.astro";
+import { Button } from "@/components/ui/button";
+---
+
+<AnimatedModal
+  triggerId="my-modal-trigger"
+  modalId="my-modal"
+  triggerClass=""
+>
+  <Button slot="trigger">Open Modal</Button>
+  
+  <div slot="content">
+    <h2 class="mb-4 font-bold text-2xl">Modal Title</h2>
+    <p>Modal content goes here...</p>
+  </div>
+  
+  <div slot="footer">
+    <Button variant="outline">Cancel</Button>
+    <Button>Confirm</Button>
+  </div>
+</AnimatedModal>

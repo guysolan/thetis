@@ -1,4 +1,4 @@
-export const options = `{
+export const options = {
     product: {
         styles: {
             product: {
@@ -274,4 +274,4 @@ export const options = `{
             },
         },
     },
-}`;
+};

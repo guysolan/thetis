@@ -1,7 +1,10 @@
 ---
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-
+import { Image } from "astro:assets";
+import HighlightedWord from "@/components/HighlightedWord";
+import nightSplintImage from "@/features/products/images/night-splint/night_splint_bed_side.jpg";
+import traumaSplintImage from "@/features/products/images/trauma-splint/trauma_splint.jpg";
 // Define timeline points in a more structured way
 const timelinePoints = [
   { label: "Rupture", position: 2 },
@@ -16,7 +19,7 @@ const products = [
   {
     title: "Initial Assessment: Trauma Splint",
     image: {
-      src: "/images/trauma-splint/trauma-splint.jpg",
+      src: traumaSplintImage,
       alt: "Trauma Splint Image",
     },
     description:
@@ -35,7 +38,7 @@ const products = [
   {
     title: "Recovery Period: Night Splint",
     image: {
-      src: "/images/night-splint/Thetis Medical Achilles Rupture Night Splint In Bed.jpg",
+      src: nightSplintImage,
       alt: "Night Splint Image",
     },
     description:
@@ -55,64 +58,77 @@ const products = [
 ];
 ---
 
-<div class="relative flex gap-4 mx-auto px-4 md:px-4 py-8 md:py-16 max-w-[1400px]">
-  <!-- Timeline Bar (Left Side) -->
-  <div class="md:block relative hidden px-8 w-24 shrink-0">
-    <div class="left-8 absolute bg-primary/50 w-0.5 h-full">
-      {timelinePoints.map((point) => (
-        <div 
-          class="-left-6 md:-left-8 absolute flex justify-center items-center gap-2 bg-white p-1 w-14 md:w-16 text-center" 
-          style={`top: ${point.position}%`}
-        >
-          <span class="text-center text-muted-foreground md:text-lg whitespace-nowrap">{point.label}</span>
-        </div>
-      ))}
-    </div>
+<div class="relative bg-gradient-to-l from-primary/10 via-white to-white w-full">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_200px,rgba(var(--primary-rgb),0.1),transparent)]"></div>
+  
+  <!-- Added Introduction Section -->
+  <div class="relative mx-auto px-4 md:px-8 pt-16 max-w-[1400px] text-center">
+    <h2 class="mb-4 font-semibold text-3xl md:text-4xl">Achilles <HighlightedWord>Rupture</HighlightedWord> Recovery <HighlightedWord>Reimagined</HighlightedWord></h2>
+    <p class="mx-auto mb-12 max-w-3xl text-lg text-muted-foreground md:text-xl">
+      Two products to make Achilles tendon rupture recovery as <HighlightedWord>Quick</HighlightedWord> and <HighlightedWord>Comfortable</HighlightedWord> as possible
+    </p>
   </div>
 
-  <!-- Product Sections (Right Side) -->
-  <div class="flex-1">
-    {products.map((product) => (
-      <section class="mb-16 md:mb-24 last:mb-0">
-        <div class="flex flex-col gap-4 md:gap-8">
-          <h2 class="block md:hidden font-semibold text-xl">{product.title}</h2>
-          
-          <div class="flex lg:flex-row flex-col gap-6 md:gap-8">
-            <div class="w-full lg:w-1/2">
-              <img
-                src={product.image.src}
-                alt={product.image.alt}
-                loading="lazy"
-                class="shadow-lg rounded-lg w-full"
-              />
-            </div>
+  <div class="relative flex gap-4 mx-auto px-4 md:px-4 pb-16 max-w-[1400px]">
+    <!-- Timeline Bar (Left Side) -->
+    <div class="md:block relative hidden px-8 w-24 shrink-0">
+      <div class="left-8 absolute bg-primary/50 w-0.5 h-full">
+        {timelinePoints.map((point) => (
+          <div 
+            class="-left-6 md:-left-8 absolute flex justify-center items-center gap-2 bg-white p-1 w-14 md:w-16 text-center transition-all hover:scale-105" 
+            style={`top: ${point.position}%`}
+          >
+            <span class="text-center text-muted-foreground md:text-lg whitespace-nowrap">{point.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
 
-            <div class="space-y-3 md:space-y-4 w-full lg:w-1/2">
-              <h2 class="md:block hidden text-2xl">{product.title}</h2>
-              <p class="text-base md:text-lg">{product.description}</p>
-              <ul class="space-y-1.5 md:space-y-2 pl-4 md:pl-5 text-base md:text-lg list-disc">
-                {product.benefits.map((benefit) => (
-                  <li>{benefit}</li>
-                ))}
-              </ul>
-              <div class="flex flex-wrap gap-3 md:gap-4 pt-3 md:pt-4">
-                <a
-                  href={product.links.primary}
-                  class={cn(buttonVariants({ size: "lg", variant: "default" }),'w-fit md:text-base')}
-                >
-                  Order Now
-                </a>
-                <a
-                  href={product.links.secondary}
-                  class={cn(buttonVariants({ size: "lg", variant: "outline" }),'w-fit md:text-base')}
-                >
-                  Learn More
-                </a>
+    <!-- Product Sections (Right Side) -->
+    <div class="flex-1">
+      {products.map((product) => (
+        <section class="mb-16 md:mb-24 last:mb-0">
+          <div class="flex flex-col gap-4 md:gap-8">
+            <h2 class="block md:hidden font-semibold text-xl">{product.title}</h2>
+            
+            <div class="flex lg:flex-row flex-col gap-6 md:gap-8 group">
+              <div class="w-full lg:w-1/2">
+                <Image
+                  src={product.image.src}
+                  alt={product.image.alt}
+                  class="group-hover:scale-[102%] shadow-lg group-hover:shadow-xl rounded-lg w-full transition-all duration-300"
+                  width={600}
+                  height={400}
+                />
+              </div>
+
+              <div class="space-y-3 md:space-y-4 w-full lg:w-1/2">
+                <h2 class="md:block hidden font-semibold text-2xl">{product.title}</h2>
+                <p class="text-base md:text-lg">{product.description}</p>
+                <ul class="space-y-1.5 md:space-y-2 pl-4 md:pl-5 text-base md:text-lg list-disc">
+                  {product.benefits.map((benefit) => (
+                    <li>{benefit}</li>
+                  ))}
+                </ul>
+                <div class="flex flex-wrap gap-3 md:gap-4 pt-3 md:pt-4">
+                  <a
+                    href={product.links.primary}
+                    class={cn(buttonVariants({ size: "lg", variant: "default" }),'w-fit md:text-base transition-transform hover:scale-105')}
+                  >
+                    Order Now
+                  </a>
+                  <a
+                    href={product.links.secondary}
+                    class={cn(buttonVariants({ size: "lg", variant: "outline" }),'w-fit md:text-base transition-transform hover:scale-105')}
+                  >
+                    Learn More
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    ))}
+        </section>
+      ))}
+    </div>
   </div>
 </div>

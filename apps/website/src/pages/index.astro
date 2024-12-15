@@ -1,16 +1,13 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import ThetisSchema from "@/schemas/ThetisSchema.astro";
-import Image from "astro/components/Image.astro";
-import { cn } from "../lib/utils";
-import Reviews from "../components/reviews/Reviews.astro";
-import EmailCTA from "../components/CTA/EmailCTA.astro";
+import LandingHero from "@/layouts/LandingHero.astro";
+import Reviews from "@/components/reviews/Reviews.astro";
+import EmailCTA from "@/components/CTA/EmailCTA.astro";
 import "@thetis/ui/globals.css";
-import Testimonials from "../components/Testimonials.astro";
-import NightSplintImage from "../assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
-import { buttonVariants } from "../components/ui/button";
-import ProductTimeline from "../components/ProductTimeline.astro";
-import VIPBadges from "../components/VIPBadges.astro";
+import ProductTimeline from "@/components/ProductTimeline.astro";
+import ProfessionalOpinionsCarousel from "@/components/testimonials/ProfessionalOpinionsCarousel";
+import ComplianceLogos from "../components/compliance/ComplianceLogos.astro";
 ---
 
 <ThetisSchema slot="head" />
@@ -22,101 +19,27 @@ import VIPBadges from "../components/VIPBadges.astro";
     image="https://thetismedical.com/images/night-splint.png"
 >
   
-    <main  class="flex flex-col mx-auto w-full">
-  
-   
-
-        <div class="relative bg-gradient-to-b from-primary/25 to-white py-16">
-          
-            <div class="mx-auto px-4 container">
-                
-                <div class="flex md:flex-row flex-col justify-between items-center gap-8">
-                    <div class="space-y-6 md:w-1/2">
-                        <h1 class="font-semibold text-[3rem] leading-normal">
-                            <span class="font-semibold text-primary">Better Recovery</span> for Achilles Rupture Patients
-                        </h1>
-
-                        <p class="text-gray-700 text-lg leading-relaxed">
-                            Experience breakthrough comfort and proven outcomes with our innovative Achilles splints - 
-                            trusted by leading healthcare professionals worldwide.
-                        </p>
-
-                         <Image 
-                            src={NightSplintImage} 
-                            alt="Thetis Medical Achilles Rupture Night Splint"
-                            class="group-hover:scale-[102%] group-hover:brightness-[0.85] block md:hidden shadow-lg hover:shadow-2xl rounded-xl transition-all duration-300" 
-                        />
-                        
-                        <div class="flex sm:flex-row flex-col gap-4 pt-4">
-                            <a href="/contact" 
-                               class={cn(buttonVariants({ size: 'lg', variant: 'default' }), 
-                               'w-full sm:w-auto text-center font-semibold')}>
-                                Order Now
-                            </a>
-                            <a href="/night-splint" 
-                               class={cn(buttonVariants({ size: 'lg', variant: 'outline' }), 
-                               'w-full sm:w-auto text-center')}>
-                                Learn More
-                            </a>
-                        </div>
-
-                        <div class="flex sm:flex-row flex-col items-start sm:items-center gap-2 sm:gap-4 px-4 text-base text-gray-600">
-                            <div class="flex items-center gap-2">
-                                <span class="text-primary">&#10003;</span>
-                                Clinically Proven
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="text-primary">&#10003;</span>
-                                NHS/FDA Approved
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="text-primary">&#10003;</span>
-                                Fast Delivery
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="md:block relative hidden md:w-5/12 group">
-                        <Image 
-                            src={NightSplintImage} 
-                            alt="Thetis Medical Achilles Rupture Night Splint"
-                            class="group-hover:rotate-1 group-hover:scale-[102%] group-hover:brightness-[0.85] shadow-lg hover:shadow-2xl rounded-xl transition-all duration-300" 
-                        />
-                        <div class="bottom-0 left-0 absolute flex flex-col justify-end items-start opacity-0 group-hover:opacity-100 p-4 w-1/2 text-base transition-opacity duration-300">
-                            <div class="mb-1 font-semibold text-base text-white">
-                                Night Splint
-                            </div>
-                            <p class="text-base text-white leading-tight">
-                                Sleep comfortably while your achilles rupture heals.
-                            </p>
-                            <a href="/night-splint" class="mt-3 text-lg text-white !underline underline-offset-2">
-                                Order Now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-        <VIPBadges client:load />
-
-            </div>
-
-        </div>
-
-       <br/>
-       <br/>
+    <main  class="flex flex-col justify-center items-center mx-auto w-full">
+       
+<LandingHero />
 
         <Reviews />
 
+       <ComplianceLogos />
+
+
         <ProductTimeline     />
 
+
         <EmailCTA
-            title="Sound Interesting?"
-            paragraph="Want to get a sample, speak to us or just learn more?"
+            title="End the suffering"
+            paragraph="Speak to us to allow you, your loved ones or your patients to recover in comfort"
         />
 
 
-        <Testimonials />
+        <!-- <NightSplintCarousel client:load/> -->
+        <!-- <Testimonials /> -->
+        <ProfessionalOpinionsCarousel client:load />
        
     </main>
 </Layout>

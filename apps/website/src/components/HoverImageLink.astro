@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  image: ImageMetadata;
+  imageAlt: string;
+  title: string;
+  description: string;
+  linkText: string;
+  linkHref: string;
+  className?: string;
+}
+
+const {
+  image,
+  imageAlt,
+  title,
+  description,
+  linkText,
+  linkHref,
+  className = "md:block relative hidden md:w-1/2 lg:w-5/12",
+} = Astro.props;
+---
+
+<div class={`${className} group`}>
+    <Image 
+        height="450"
+        width="450"
+        src={image} 
+        alt={imageAlt}
+        class="group-hover:rotate-1 group-hover:scale-[102%] group-hover:brightness-[0.85] shadow-lg hover:shadow-2xl rounded-2xl transition-all duration-300" 
+    />
+    <div class="bottom-0 left-0 absolute flex flex-col justify-end items-start opacity-0 group-hover:opacity-100 p-4 w-1/2 text-base transition-opacity duration-300">
+        <div class="mb-1 font-semibold text-base text-white">
+            {title}
+        </div>
+        <p class="text-base text-white leading-tight">
+            {description}
+        </p>
+        <a href={linkHref} class="mt-3 text-lg text-white !underline underline-offset-2">
+            {linkText}
+        </a>
+    </div>
+</div>

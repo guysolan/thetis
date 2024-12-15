@@ -1,0 +1,167 @@
+---
+// AnimatedModal.astro
+interface Props {
+  triggerId: string;
+  modalId: string;
+  triggerClass?: string;
+  modalClass?: string;
+  footerClass?: string;
+}
+
+const {
+  triggerId,
+  modalId,
+  triggerClass = "",
+  modalClass = "",
+  footerClass = "",
+} = Astro.props;
+---
+
+<button
+  id={triggerId}
+  class:list={[
+    "px-4 py-2 rounded-md text-black dark:text-white text-center relative overflow-hidden",
+    triggerClass,
+  ]}
+>
+  <slot name="trigger" />
+</button>
+
+<dialog
+  id={modalId}
+  class:list={[
+    "min-h-[50%] max-h-[90%] md:max-w-[40%] bg-white dark:bg-neutral-950 border border-transparent dark:border-neutral-800 md:rounded-2xl p-0 backdrop:bg-black/50 backdrop:backdrop-blur-sm",
+    modalClass,
+  ]}
+>
+  <div class="relative flex flex-col h-full">
+    <button
+      class="top-4 right-4 absolute close-modal group"
+      aria-label="Close modal"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="group-hover:scale-125 group-hover:rotate-3 w-4 h-4 text-black dark:text-white transition duration-200"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M18 6l-12 12"></path>
+        <path d="M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <div class="flex flex-col flex-1 p-8 md:p-10">
+      <slot name="content" />
+    </div>
+
+    {
+      Astro.slots.has("footer") && (
+        <div
+          class:list={[
+            "flex justify-end p-4 bg-gray-100 dark:bg-neutral-900",
+            footerClass,
+          ]}
+        >
+          <slot name="footer" />
+        </div>
+      )
+    }
+  </div>
+</dialog>
+
+<style>
+  dialog {
+    margin: auto;
+    opacity: 0;
+    scale: 0.5;
+    rotate: 0deg;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  dialog[open] {
+    opacity: 1;
+    scale: 1;
+    rotate: 0deg;
+  }
+
+  dialog::backdrop {
+    background: rgb(0 0 0 / 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  dialog[open]::backdrop {
+    opacity: 1;
+  }
+
+  /* This helps with animation */
+  dialog[open]::backdrop {
+    animation: fade 0.3s ease forwards;
+  }
+
+  dialog[open] {
+    animation: slide 0.3s ease forwards;
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide {
+    from {
+      opacity: 0;
+      scale: 0.5;
+      rotate: 4deg;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+      rotate: 0deg;
+    }
+  }
+</style>
+
+<script define:vars={{ modalId, triggerId }}>
+  // Minimal required JavaScript
+  const dialog = document.getElementById(modalId);
+  const trigger = document.getElementById(triggerId);
+  const closeBtn = dialog.querySelector('.close-modal');
+
+  // Open modal
+  trigger.addEventListener('click', () => {
+    dialog.showModal();
+    document.body.style.overflow = 'hidden';
+  });
+
+  // Close modal
+  closeBtn.addEventListener('click', () => {
+    dialog.close();
+    document.body.style.overflow = 'auto';
+  });
+
+  // Close on click outside
+  dialog.addEventListener('click', (e) => {
+    const dialogDimensions = dialog.getBoundingClientRect();
+    if (
+      e.clientX < dialogDimensions.left ||
+      e.clientX > dialogDimensions.right ||
+      e.clientY < dialogDimensions.top ||
+      e.clientY > dialogDimensions.bottom
+    ) {
+      dialog.close();
+      document.body.style.overflow = 'auto';
+    }
+  });
+</script>

@@ -34,7 +34,16 @@ import { options } from "./options";
           variantId: '47494539608392',
         node: document.getElementById('product-component-1734121550955'),
         moneyFormat: '%C2%A3%7B%7Bamount%7D%7D',
-        options: options
+        options: {
+          product:{
+            option:{
+              contents: {
+                select: false,
+                button: true,
+              }
+            }
+          }
+        }
       });
     });
   }

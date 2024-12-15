@@ -2,7 +2,7 @@ import React from "react";
 import { AnimatedTestimonials } from "@thetis/ui/animated-testimonials";
 import NightSplintWhiteBg from "../assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
 
-export function NightSplintCarousel() {
+function NightSplintCarousel() {
   const testimonials = [
     {
       quote:
@@ -48,3 +48,5 @@ export function NightSplintCarousel() {
   // );
   return <AnimatedTestimonials testimonials={testimonials} autoplay={false} />;
 }
+
+export default NightSplintCarousel;

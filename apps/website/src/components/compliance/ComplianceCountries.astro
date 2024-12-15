@@ -1,0 +1,39 @@
+---
+const complianceItems = [
+  {
+    flag: "🇪🇺",
+    authority: "MDR",
+    country: "European Union",
+  },
+  {
+    flag: "🇦🇺",
+    authority: "TGA",
+    country: "Australia",
+  },
+  {
+    flag: "🇨🇦",
+    authority: "MDEL",
+    country: "Canada",
+  },
+  {
+    flag: "🇺🇸",
+    authority: "FDA",
+    country: "United States",
+  },
+  {
+    flag: "🇬🇧",
+    authority: "MHRA",
+    country: "United Kingdom",
+  },
+];
+---
+
+<div class="flex flex-wrap justify-center items-center gap-6 mx-auto px-4 py-4 max-w-6xl">
+    {complianceItems.map((item) => (
+        <div class="flex items-center gap-2 bg-white shadow-sm hover:shadow-md px-4 py-2 rounded-lg transition-shadow">
+            <span class="font-emoji text-2xl">{item.flag}</span>
+            <span class="font-medium text-gray-700">{item.authority}</span>
+            &#10003;
+        </div>
+    ))}
+</div>

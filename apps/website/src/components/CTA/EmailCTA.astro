@@ -1,8 +1,8 @@
 ---
-import { buttonVariants } from "@/components/ui/button";
-import Slide from "../Slide.astro";
-import { cn } from "../../lib/utils";
-
+import { Button, buttonVariants } from "@/components/ui/button";
+import Slide from "@/components/Slide.astro";
+import { cn } from "@/lib/utils";
+import { Input } from "@thetis/ui/input";
 interface Props {
   title: string;
   paragraph: string;
@@ -11,36 +11,39 @@ interface Props {
 const { title, paragraph }: Props = Astro.props;
 ---
 
-<Slide background="green">
+<Slide 
+  background="green" 
+  className="relative shadow-lg hover:shadow-xl mx-auto rounded-[2rem] max-w-screen-lg transition-shadow duration-300 overflow-hidden group"
+>
+    <!-- Lighter gradient background with texture -->
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/50 via-primary/70 to-primary/40"></div>
+    <div class="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-overlay"></div>
+
     <form
         autocomplete="on"
         action="https://formspree.io/f/xbjvlval"
         method="POST"
-        class="flex flex-col justify-center items-center space-y-8 my-8 w-full"
+        class="relative z-10 flex flex-col justify-center items-center space-y-8 my-8 w-full"
     >
-        <div class="flex flex-col justify-center items-center space-y-3 w-full">
-            <h2 class="font-semibold text-2xl">{title}</h2>
-            <p class="text-gray-600 text-lg">{paragraph}</p>
+        <div class="group-hover:scale-105 flex flex-col justify-center items-center space-y-3 w-full transition-all duration-300">
+            <h2 class="group-hover:text-white font-semibold text-3xl text-white/95 md:text-4xl">{title}</h2>
+            <p class="text-lg text-slate-800 md:text-xl">{paragraph}</p>
         </div>
 
-        <div class="flex gap-x-2 w-full max-w-sm">
-            <input
-                class="border-2 border-gray-500 bg-white px-2 py-2 rounded-lg w-full h-12 lg:h-14 font-light"
-                required
-                name="email"
+        <div class="group-hover:scale-110 flex gap-x-3 w-full max-w-sm transition-all duration-300">
+            <Input 
                 type="email"
+                name="email"
+                className='h-14'
                 placeholder="Enter your email"
             />
-            <button
+            <Button
                 type="submit"
                 value="send"
-                class={cn(
-                    buttonVariants({size: 'md' }),
-                    'h-12 lg:h-14 md:w-24 lg:w-36'
-                )}
+                className="h-14 transition-all duration-300"
             >
-                Send <i data-lucide-name="send"></i>
-            </button>
+                Subscribe <i data-lucide-name="arrow-right"></i>
+            </Button>
         </div>
     </form>
 </Slide>
