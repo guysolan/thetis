@@ -1,25 +1,27 @@
 ---
-import StarRating from "@/components/StarRating.astro";
-import BuyButtonVariants from "@/components/BuyButtonVariants.astro";
+import StarRating from "@/components/reviews/StarRating.astro";
+import BuyButtonVariants from "./products/buy-button/BuyButtonVariants";
+import nightSplint from "@/components/products/images/night-splint/night_splint_bed_top.jpg";
+import { Image } from "astro:assets";
 ---
 
 <div class="flex md:flex-row flex-col my-2">
-  <img
-    class="lg:mr-4 lg:w-7/12"
-    src="/images/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg"
-    alt="Night Splint Render"
-  />
-  <div class="flex flex-col items-center lg:items-start gap-y-6 mx-auto mt-6 lg:mt-0 w-[90%] text-center lg:text-left">
+  <div class="relative lg:w-1/2 group">
+    <div class="absolute inset-0 bg-gray-200 rounded-lg animate-pulse"></div>
+    <Image
+      height="500"
+      width="400"
+      class="group-hover:scale-[102%] relative shadow-lg group-hover:shadow-xl rounded-lg w-full transition-all duration-300 object-contain"
+      src={nightSplint}
+      alt="Night Splint Render"
+      onload="this.previousElementSibling.style.display='none'"
+    />
+  </div>
+  <div class="flex flex-col items-center md:items-start gap-y-6 mx-auto mt-6 lg:mt-0 w-[90%] text-center md:text-left">
     <h1 class="font-semibold text-2xl lg:text-4xl leading-[135%]">
       Achilles Tendon Rupture Night Splint
     </h1>
     <StarRating rating={4.5} showNumber={false} />
-    <a
-      href="#more-reviews"
-      class="font-medium text-primary underline underline-offset-2 hover:underline-offset-4 transition-all duration-300"
-    >
-      Read more reviews
-    </a>
     <BuyButtonVariants client:load />
   </div>
 </div>;

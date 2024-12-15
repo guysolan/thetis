@@ -1,22 +1,24 @@
 ---
 import AnimatedModal from "./AnimatedModal.astro";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
+import BuyNightSplint from "./BuyNightSplint.astro";
 ---
 
 <AnimatedModal
-  triggerId="my-modal-trigger"
-  modalId="my-modal"
+  triggerId="buy-modal-trigger"
+  modalId="buy-modal"
   triggerClass=""
+  size="lg"
+  variant="default"
 >
-  <Button slot="trigger">Open Modal</Button>
+  <span slot="trigger">Buy Now</span>
   
   <div slot="content">
-    <h2 class="mb-4 font-bold text-2xl">Modal Title</h2>
-    <p>Modal content goes here...</p>
+    <BuyNightSplint />  
   </div>
   
-  <div slot="footer">
+  <!-- <div slot="footer">
     <Button variant="outline">Cancel</Button>
     <Button>Confirm</Button>
-  </div>
+  </div> -->
 </AnimatedModal>

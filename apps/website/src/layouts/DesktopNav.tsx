@@ -12,8 +12,8 @@ import * as React from "react";
 
 import { Badge } from "../components/ui/badge";
 import { articles } from "../data/articles.ts";
-import nightSplintImage from "@/features/products/images/night-splint/night_splint_bed_side.jpg";
-import traumaSplintImage from "@/features/products/images/trauma-splint/trauma_splint.jpg";
+import nightSplintImage from "@/components/products/images/night-splint/night_splint_bed_side.jpg";
+import traumaSplintImage from "@/components/products/images/trauma-splint/trauma_splint.jpg";
 
 ("use client");
 

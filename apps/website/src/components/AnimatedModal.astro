@@ -1,4 +1,5 @@
 ---
+import { buttonVariants } from "@/components/ui/button";
 // AnimatedModal.astro
 interface Props {
   triggerId: string;
@@ -6,6 +7,8 @@ interface Props {
   triggerClass?: string;
   modalClass?: string;
   footerClass?: string;
+  size?: "sm" | "md" | "lg";
+  variant?: "default" | "outline" | "secondary" | "ghost" | "link";
 }
 
 const {
@@ -14,13 +17,15 @@ const {
   triggerClass = "",
   modalClass = "",
   footerClass = "",
+  size = "lg",
+  variant = "default",
 } = Astro.props;
 ---
 
 <button
   id={triggerId}
   class:list={[
-    "px-4 py-2 rounded-md text-black dark:text-white text-center relative overflow-hidden",
+    buttonVariants({ variant: variant, size: size }),
     triggerClass,
   ]}
 >
@@ -30,7 +35,7 @@ const {
 <dialog
   id={modalId}
   class:list={[
-    "min-h-[50%] max-h-[90%] md:max-w-[40%] bg-white dark:bg-neutral-950 border border-transparent dark:border-neutral-800 md:rounded-2xl p-0 backdrop:bg-black/50 backdrop:backdrop-blur-sm",
+    "min-h-[50%] max-h-[90%] max-w-[100vw] w-screen-lg md:max-w-[80vw] bg-white dark:bg-neutral-950 border border-transparent dark:border-neutral-800 md:rounded-2xl p-0 backdrop:bg-black/50 backdrop:backdrop-blur-sm",
     modalClass,
   ]}
 >

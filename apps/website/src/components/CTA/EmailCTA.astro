@@ -1,8 +1,7 @@
 ---
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Slide from "@/components/Slide.astro";
-import { cn } from "@/lib/utils";
-import { Input } from "@thetis/ui/input";
+import { inputStyle } from "@/components/form/Input.astro";
 interface Props {
   title: string;
   paragraph: string;
@@ -31,10 +30,10 @@ const { title, paragraph }: Props = Astro.props;
         </div>
 
         <div class="group-hover:scale-110 flex gap-x-3 w-full max-w-sm transition-all duration-300">
-            <Input 
+            <input 
                 type="email"
                 name="email"
-                className='h-14'
+                class:list={[inputStyle, 'h-14']}
                 placeholder="Enter your email"
             />
             <Button
