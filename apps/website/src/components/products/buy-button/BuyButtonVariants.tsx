@@ -92,35 +92,19 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
         </div>
       </div>
 
-      {isSelectionComplete && (
-        <div className="relative flex-col justify-start items-start mx-0 w-fit">
-          <ShopifyBuyButton
-            key={key}
-            productId={productId}
-            variantId={getCurrentVariantId()}
-            position={currentSide}
-            size={currentSize}
-          />
-        </div>
-      )}
-
-      <div className="gap-4 grid grid-cols-2 mt-auto text-primary text-sm">
-        <div className="flex items-center gap-2">
-          <CheckCircle size={20} />
-          <span className="text-left text-neutral-800">Free Shipping</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Shield size={20} />
-          <span className="text-left text-neutral-800">Secure Payment</span>
-        </div>
+      <div className="h-40">
+        {isSelectionComplete && (
+          <div className="relative flex-col justify-start items-start mx-0 w-fit">
+            <ShopifyBuyButton
+              key={key}
+              productId={productId}
+              variantId={getCurrentVariantId()}
+              position={currentSide}
+              size={currentSize}
+            />
+          </div>
+        )}
       </div>
-
-      <Button asChild variant="link">
-        <a href="/bulk-orders">
-          Bulk Orders & Special Pricing
-          <ArrowRight size={16} />
-        </a>
-      </Button>
     </div>
   );
 };

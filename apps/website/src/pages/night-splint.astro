@@ -3,10 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import { ClientRouter } from "astro:transitions";
 import Testimonials from "@/components/testimonials/Testimonials.astro";
 import Slide from "@/components/Slide.astro";
-import BigLinks from "@/components/BigLinks.astro";
 import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
-import RedCross from "@/components/icons/RedCross.astro";
-import GreenTick from "@/components/icons/GreenTick.astro";
 import EmailCTA from "@/components/CTA/EmailCTA.astro";
 import DownloadList from "@/components/DownloadList.astro";
 import Quote from "@/components/Quote.astro";
@@ -20,6 +17,11 @@ import BuyButtonVariants from "@/components/products/buy-button/BuyButtonVariant
 import ReviewStatistics from "@/components/reviews/ReviewStatistics.tsx";
 import ReviewSummary from "@/components/reviews/ReviewSummary.tsx";
 import BuyNightSplint from "../components/BuyNightSplint.astro";
+import ListIcon from "@/components/ListIcon.astro";
+import Reviews from "@/components/reviews/Reviews.astro";
+import { Button } from "@thetis/ui/button";
+import SleepInYourWellies from "@/components/SleepInYourWellies.tsx";
+import { CheckCircle, AlertTriangle } from "lucide-astro";
 ---
 
 <Fragment slot="head">
@@ -28,30 +30,90 @@ import BuyNightSplint from "../components/BuyNightSplint.astro";
 </Fragment>
 
 <Layout
-
     title="Achilles Tendon Rupture Night Splint"
     description="Thetis Medical's Achilles rupture night splint to make sleeping more pleasant and bearable. The brace straps to the leg to prevent further tendon injury."
     image="https://thetismedical.com/images/green-shell.png"
 >
-    <main>
-        <Slide className="!mt-0 !pt-0"></Slide>
-        <section class="landing splint">
-            <BigLinks active="night" />
-            <h2 class="lg:pt-4 pb-4 lg:pb-8 text-center text-lg lg:text-xl">
-                DESIGNED ALONGSIDE SURGEONS TO IMPROVE ACHILLES RUPTURE
-                RECOVERY.
-            </h2>
-            <BuyNightSplint />
-            <p class="splint-intro">
-                The ONLY splint for post Achilles rupture recovery. Aimed to
-                improve sleep and make recovery more comfortable.
-            </p>
+    <main class="">
+        <section class="bg-gradient-to-b from-primary/50 to-white mt-0 pt-0 pt-32 pb-16 hero-section">
+            <div class="mx-auto text-center container">
+                <h1 class="mb-6 font-bold text-4xl text-gray-900 md:text-5xl">
+                    The Only Specialist Night Splint for Achilles Rupture Recovery
+                </h1>
+                <p class="mx-auto mb-8 max-w-3xl text-gray-700 text-xl">
+                    Finally, a comfortable solution for nighttime recovery. Designed alongside surgeons to protect your healing Achilles while you rest.
+                </p>
+                <BuyNightSplint client:load />
+            </div>
         </section>
+
+        <section class="features-grid py-16">
+            <div class="mx-auto container">
+                <div class="gap-8 grid md:grid-cols-2">
+                    <div class="bg-white shadow-sm p-8 rounded-xl feature-card">
+                        <h3 class="mb-4 font-semibold text-2xl">Specifically Designed for Achilles Rupture</h3>
+                        <ul class="space-y-3">
+                            <ListIcon type="positive">
+                                Maintains optimal 155° plantarflexed position for healing
+                            </ListIcon>
+                            <ListIcon type="positive">
+                                Patented design developed with orthopedic specialists
+                            </ListIcon>
+                            <ListIcon type="negative">
+                                Not for tendinitis, plantar fasciitis, or broken bones
+                            </ListIcon>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white shadow-sm p-8 rounded-xl feature-card">
+                        <h3 class="mb-4 font-semibold text-2xl">Superior Comfort & Security</h3>
+                        <ul class="space-y-3">
+                            <ListIcon type="positive">
+                                Non-slip silicone straps for maximum comfort
+                            </ListIcon>
+                            <ListIcon type="positive">
+                                Innovative heel strap design avoids pressure on injury
+                            </ListIcon>
+                            <ListIcon type="positive">
+                                Breathable, lightweight alternative to bulky boots
+                            </ListIcon>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gray-50 py-16 usage-guidelines">
+            <div class="mx-auto container">
+                <h2 class="mb-12 font-bold text-3xl text-center">When To Use Your Night Splint</h2>
+                <div class="mx-auto max-w-4xl">
+                    <div class="bg-white shadow-sm mb-6 p-6 rounded-lg">
+                        <h4 class="flex flex-row items-center gap-2 mb-3 font-semibold text-green-600 text-xl"><CheckCircle size={20} /> Perfect for Rest & Sleep</h4>
+                        <p>Replace your uncomfortable boot while resting or sleeping for up to 3 months during recovery</p>
+                    </div>
+                    
+                    <div class="bg-white shadow-sm mb-6 p-6 rounded-lg">
+                        <h4 class="flex flex-row items-center gap-2 mb-3 font-semibold text-amber-600 text-xl"><AlertTriangle size={20} /> Important Safety Note</h4>
+                        <p>Do not walk or stand in this splint. Wait 2 weeks post-surgery before use (consult your surgeon)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 cta-section">
+            <div class="mx-auto text-center container">
+                <h2 class="mb-6 font-bold text-3xl">Ready for More Comfortable Recovery?</h2>
+                <p class="mb-8 text-gray-700 text-xl">Join thousands of patients who've improved their recovery experience</p>
+                <Reviews />
+                <Button asChild><a href="#more-reviews" >More Testimonials</a></Button>
+            </div>
+        </section>
+
         <Slide
-            title="Intended Use"
-            paragraph="  Night-time splint to ensure the foot is kept in plantar flexion (foot pointed down) for the first 3 months after an Achilles tendon tear."
-        />
-        <Slide id="testimonials" title="Testimonials">
+            id="testimonials"
+            title="Testimonials"
+            paragraph=" 78% of patients found sleeping in the boot difficult and would therefore benefit from our night splint."
+        >
             <Quote
                 title="Simply brilliant - and brilliantly simple"
                 author="Clinical Director, London Foot and Ankle Centre"
@@ -68,37 +130,88 @@ import BuyNightSplint from "../components/BuyNightSplint.astro";
             </div>
         </Slide>
         <SleepingComfortably client:load />
-        <Slide
-            id="problem"
-            title="Problem"
-            paragraph="Currently, patients wear a large, outdoor, orthopaedic boot, day and night, for the 10 week rehabillitation. This is analagous to wearing hiking boots for 10 weeks, and sleeping in them@."
-        >
-            <p class="intro large">Patients find these boots:</p>
-            <div class="bullet-wrap">
-                <div class="bullet-points">
-                    <div class="boot-point">
-                        <RedCross />
-                        <p>Hot</p>
-                    </div>
-                    <div class="boot-point">
-                        <RedCross />
-                        <p>Dirty</p>
+        
+        
+
+        <SleepInYourWellies client:load />
+
+        <div class="mx-auto py-16 container">
+            <div class="lg:gap-12 lg:grid lg:grid-cols-2">
+                <!-- Problem Section -->
+                <div class="relative bg-gradient-to-br from-red-50 via-red-100 to-red-50 shadow-lg p-8 rounded-3xl transform transition-all hover:-translate-y-1 duration-300 overflow-hidden">
+                    <!-- Decorative background elements -->
+                    <div class="-top-16 -right-16 absolute bg-red-200 opacity-20 blur-2xl rounded-full w-32 h-32"></div>
+                    <div class="-bottom-8 -left-8 absolute bg-red-300 opacity-20 blur-2xl rounded-full w-24 h-24"></div>
+                    
+                    <div class="relative z-10">
+                        <h3 class="mb-4 font-bold text-3xl text-red-900">The Problem with Boot</h3>
+                        <p class="mb-8 text-red-800/80">
+                            Currently, patients wear a large, outdoor, orthopaedic boot, day and night, for the 10 week rehabilitation. This is analogous to wearing hiking boots for 10 weeks, and sleeping in them.
+                        </p>
+
+                        <p class="mb-6 font-semibold text-red-800 text-xl">Patients struggle with traditional boots:</p>
+                        
+                        <div class="gap-8 grid grid-cols-2">
+                            <div class="space-y-4">
+                                <ListIcon type="negative" class="animate-fade-in-up" style="animation-delay: 100ms">
+                                    Hot & Sweaty
+                                </ListIcon>
+                                <ListIcon type="negative" class="animate-fade-in-up" style="animation-delay: 200ms">
+                                    Collects Dirt & Debris
+                                </ListIcon>
+                            </div>
+                            <div class="space-y-4">
+                                <ListIcon type="negative" class="animate-fade-in-up" style="animation-delay: 300ms">
+                                    Uncomfortable in Bed
+                                </ListIcon>
+                                <ListIcon type="negative" class="animate-fade-in-up" style="animation-delay: 400ms">
+                                    Bulky & Heavy
+                                </ListIcon>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="bullet-points">
-                    <div class="boot-point">
-                        <RedCross />
-                        <p>Uncomfortable</p>
-                    </div>
-                    <div class="boot-point">
-                        <RedCross />
-                        <p>Heavy</p>
+
+                <!-- Solution Section -->
+                <div class="relative bg-gradient-to-br from-green-50 via-green-100 to-green-50 shadow-lg mt-8 lg:mt-0 p-8 rounded-3xl transform transition-all hover:-translate-y-1 duration-300 overflow-hidden">
+                    <!-- Decorative background elements -->
+                    <div class="-top-16 -right-16 absolute bg-green-200 opacity-20 blur-2xl rounded-full w-32 h-32"></div>
+                    <div class="-bottom-8 -left-8 absolute bg-green-300 opacity-20 blur-2xl rounded-full w-24 h-24"></div>
+
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 mb-4">
+                            <h3 class="font-bold text-3xl text-green-900">Our Solution</h3>
+                            <span class="bg-green-200 px-3 py-1 rounded-full text-green-800 text-sm">Patent Pending</span>
+                        </div>
+                        
+                        <p class="mb-8 text-green-800/80">
+                            A revolutionary lightweight, comfort-focused splint that makes recovery more bearable.
+                        </p>
+
+                        <p class="mb-6 font-semibold text-green-800 text-xl">The Thetis Advantage:</p>
+                        
+                        <div class="gap-8 grid grid-cols-2">
+                            <div class="space-y-4">
+                                <ListIcon type="positive" class="animate-fade-in-up" style="animation-delay: 100ms">
+                                    Breathable & Cool
+                                </ListIcon>
+                                <ListIcon type="positive" class="animate-fade-in-up" style="animation-delay: 200ms">
+                                    Anatomically Contoured
+                                </ListIcon>
+                            </div>
+                            <div class="space-y-4">
+                                <ListIcon type="positive" class="animate-fade-in-up" style="animation-delay: 300ms">
+                                    Ultra-Lightweight
+                                </ListIcon>
+                                <ListIcon type="positive" class="animate-fade-in-up" style="animation-delay: 400ms">
+                                    Slim & Comfortable
+                                </ListIcon>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </Slide>
-
-        <!-- Statistics -->
+        </div>
 
         <Slide
             id="statistics"
@@ -118,35 +231,6 @@ import BuyNightSplint from "../components/BuyNightSplint.astro";
                     src="/images/sleeping-piechart-key.svg"
                     alt="Pie Chart key of Patient's Sleep post Achilles Rupture"
                 />
-            </div>
-        </Slide>
-
-        <Slide
-            id="solution"
-            title="Solution (Patent Pending)"
-            paragraph="By sleeping and resting in a lightweight, comfort-focused splint, recovery becomes more bearable."
-        >
-            <div class="bullet-wrap">
-                <div class="bullet-points">
-                    <div class="boot-point">
-                        <GreenTick />
-                        <p>Cool</p>
-                    </div>
-                    <div class="boot-point">
-                        <GreenTick />
-                        <p>Contoured</p>
-                    </div>
-                </div>
-                <div class="bullet-points">
-                    <div class="boot-point">
-                        <GreenTick />
-                        <p>Lightweight</p>
-                    </div>
-                    <div class="boot-point">
-                        <GreenTick />
-                        <p>Slim-line</p>
-                    </div>
-                </div>
             </div>
         </Slide>
 
@@ -273,3 +357,21 @@ import BuyNightSplint from "../components/BuyNightSplint.astro";
             // console.log('Request failed');
         })
 </script>
+
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out forwards;
+        opacity: 0;
+    }
+</style>
