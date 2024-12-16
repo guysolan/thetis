@@ -69,7 +69,7 @@ export function MultiOrderForm({ defaultOrderType }: MultiOrderFormProps) {
         onSubmit={form.handleSubmit(handleSubmit, () => scrollToTop())}
       >
         <Select
-          label="Order Type"
+          label="Company"
           name="company_id"
           options={companies.map((company) => ({
             label: company.name,

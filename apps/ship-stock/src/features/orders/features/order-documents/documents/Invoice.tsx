@@ -8,6 +8,7 @@ import PaymentDetails from "../components/PaymentDetails";
 import BuyerSeller from "../components/BuyerSeller";
 import Heading from "../components/Heading";
 import { DocumentOptions } from "../../../../documents/schema";
+import { Editor } from "@thetis/ui/editor";
 
 const Invoice = ({
   order,
@@ -28,6 +29,8 @@ const Invoice = ({
         fromOptions={options.from}
         toOptions={options.to}
       />
+
+      <Editor initialContent={""} />
 
       <FinancialTransactions
         orderItems={order.items}

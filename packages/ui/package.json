@@ -23,6 +23,7 @@
     "./animated-modal": "./src/components/animated-modal.tsx",
     "./animated-testimonials": "./src/components/animated-testimonials.tsx",
     "./ui": "./src/components/index.ts",
+    "./editor": "./src/components/editor/index.tsx",
     "./button": "./src/components/button.tsx",
     "./accordion": "./src/components/accordion.tsx",
     "./command": "./src/components/command.tsx",
@@ -86,13 +87,20 @@
     "@radix-ui/react-switch": "^1.1.1",
     "@radix-ui/react-tabs": "^1.1.1",
     "@radix-ui/react-tooltip": "^1.1.4",
+    "@tiptap/extension-link": "^2.10.3",
+    "@tiptap/extension-placeholder": "^2.10.3",
+    "@tiptap/extension-underline": "^2.10.3",
+    "@tiptap/react": "^2.10.3",
+    "@tiptap/starter-kit": "^2.10.3",
     "@types/react-lazy-load-image-component": "^1.6.4",
     "class-variance-authority": "^0.7.0",
     "cmdk": "^1.0.4",
     "lucide-react": "^0.438.0",
+    "react-icons": "^5.4.0",
     "react-lazy-load-image-component": "^1.6.2",
     "tailwind-merge": "^2.5.2",
     "tailwindcss": "^3.4.16",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "tiptap": "^1.32.2"
   }
 }
