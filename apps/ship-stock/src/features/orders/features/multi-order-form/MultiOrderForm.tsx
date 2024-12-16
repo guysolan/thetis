@@ -18,12 +18,15 @@ import BuyFormFields from "./BuyFormFields";
 import PriceSummary from "../order-forms/components/PriceSummary";
 import ShipmentFormFields from "./ShipmentFormFields";
 import { Button } from "@thetis/ui/button";
+import { useSelectCompanies } from "../../../companies/api/selectCompanies";
 type Schema = z.infer<typeof schema>;
 interface MultiOrderFormProps {
   defaultOrderType: Schema["order_type"];
 }
 
 export function MultiOrderForm({ defaultOrderType }: MultiOrderFormProps) {
+  const { data: companies = [] } = useSelectCompanies();
+
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -65,6 +68,14 @@ export function MultiOrderForm({ defaultOrderType }: MultiOrderFormProps) {
         className="flex flex-col gap-y-4 px-1 w-full"
         onSubmit={form.handleSubmit(handleSubmit, () => scrollToTop())}
       >
+        <Select
+          label="Order Type"
+          name="company_id"
+          options={companies.map((company) => ({
+            label: company.name,
+            value: company.id.toString(),
+          }))}
+        />
         <div className="flex flex-row gap-x-4">
           <Select
             label="Order Type"
