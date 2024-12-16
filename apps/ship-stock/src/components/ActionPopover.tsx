@@ -25,6 +25,7 @@ const ActionPopover = ({
     <Popover>
       <PopoverTrigger asChild>
         <Button
+          className="dark:text-neutral-100"
           type="button"
           onClick={(e) => e.stopPropagation()}
           variant="ghost"

@@ -4,7 +4,7 @@ import { Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/documents")({
   component: () => (
-    <div className="bg-white mx-auto p-8 max-w-4xl document">
+    <div className="bg-white dark:bg-black mx-auto p-8 max-w-4xl document">
       <Outlet />
     </div>
   ),

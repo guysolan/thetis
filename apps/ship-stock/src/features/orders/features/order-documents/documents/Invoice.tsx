@@ -9,6 +9,9 @@ import BuyerSeller from "../components/BuyerSeller";
 import Heading from "../components/Heading";
 import { DocumentOptions } from "../../../../documents/schema";
 import { Editor } from "@thetis/ui/editor";
+import { EditTextBlock } from "../text-blocks/EditTextBlock";
+import { AddTextBlock } from "../text-blocks/AddTextBlock";
+import { ShowTextBlocks } from "../text-blocks/ShowTextBlocks";
 
 const Invoice = ({
   order,
@@ -30,8 +33,6 @@ const Invoice = ({
         toOptions={options.to}
       />
 
-      <Editor initialContent={""} />
-
       <FinancialTransactions
         orderItems={order.items}
         orderType={order.order_type}
@@ -45,6 +46,10 @@ const Invoice = ({
       {options.payment && (
         <PaymentDetails orderId={order.order_id} currency={order.currency} />
       )}
+
+      <ShowTextBlocks textBlocks={order.text_blocks} />
+
+      <AddTextBlock orderId={order.order_id} position={0} onSelect={() => {}} />
     </>
   );
 };

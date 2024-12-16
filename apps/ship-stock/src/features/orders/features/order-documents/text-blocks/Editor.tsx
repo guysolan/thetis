@@ -10,6 +10,7 @@ type Props = {
   className?: string;
   onChange?: (content?: JSONContent | null) => void;
   onBlur?: (content: JSONContent | null) => void;
+  onFocus?: () => void; // Make sure this prop is defined
   placeholder?: string;
   disablePlaceholder?: boolean;
   tabIndex?: number;
@@ -20,11 +21,11 @@ export function Editor({
   className,
   onChange,
   onBlur,
+  onFocus,
   placeholder,
   disablePlaceholder = false,
   tabIndex,
 }: Props) {
-  const [isFocused, setIsFocused] = useState(false);
   const [content, setContent] = useState<JSONContent | null | undefined>(
     initialContent,
   );
@@ -41,21 +42,23 @@ export function Editor({
   );
 
   const handleBlur = useCallback(() => {
-    setIsFocused(false);
-
     // Only call onBlur if the content has changed
     if (content !== initialContent) {
       onBlur?.(content ?? null);
     }
     onBlur?.(content ?? null);
-  }, [content, onBlur]);
+  }, [content, initialContent, onBlur]);
 
-  const showPlaceholder = !disablePlaceholder && !content && !isFocused;
+  const handleFocus = useCallback(() => {
+    onFocus?.();
+  }, [onFocus]);
+
+  const showPlaceholder = !disablePlaceholder && !content;
 
   return (
     <BaseEditor
       className={cn(
-        "font-mono text-[11px] text-primary leading-[18px] invoice-editor",
+        "text-[11px] text-primary leading-[18px] invoice-editor",
         showPlaceholder &&
           "w-full bg-[repeating-linear-gradient(-60deg,#DBDBDB,#DBDBDB_1px,transparent_1px,transparent_5px)] dark:bg-[repeating-linear-gradient(-60deg,#2C2C2C,#2C2C2C_1px,transparent_1px,transparent_5px)]",
         className,
@@ -63,7 +66,7 @@ export function Editor({
       placeholder={placeholder}
       initialContent={content ?? undefined}
       onUpdate={handleUpdate}
-      onFocus={() => setIsFocused(true)}
+      onFocus={handleFocus}
       onBlur={handleBlur}
       tabIndex={tabIndex}
     />

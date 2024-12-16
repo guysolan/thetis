@@ -3,12 +3,11 @@
 }
 
 .tiptap {
-  @apply font-mono text-xs leading-loose;
+  @apply text-xs leading-loose;
 }
 
 .tiptap h2 {
   @apply text-2xl;
-  @apply font-sans;
   margin-bottom: 1.5rem;
 }
 
