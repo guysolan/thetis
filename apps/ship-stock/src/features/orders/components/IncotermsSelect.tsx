@@ -50,6 +50,11 @@ const incoterms = [
     name: "Cost, Insurance and Freight (CIF)",
     description: "Like CFR plus seller provides insurance during transport.",
   },
+  {
+    name: "Delivered Duty Paid (DDP)",
+    description:
+      "Seller is responsible for delivering goods to named destination, paying all costs including duties, taxes, and import clearance. Risk transfers at delivery.",
+  },
 ];
 
 export function IncotermsSelect() {
