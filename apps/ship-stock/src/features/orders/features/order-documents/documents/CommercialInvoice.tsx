@@ -14,6 +14,36 @@ import {
   DocumentOptions,
 } from "../../../../documents/schema";
 
+interface ShippingDetails {
+  reasonForExport: string;
+  modeOfTransport: string;
+  incoterms: string;
+  unitOfMeasurement: string;
+  shipmentNumber: string;
+  airwaybill: string;
+}
+
+const ShippingDetails: React.FC<ShippingDetails> = ({
+  reasonForExport,
+  modeOfTransport,
+  incoterms,
+  unitOfMeasurement,
+  shipmentNumber,
+  airwaybill,
+}) => (
+  <div className="gap-4 grid grid-cols-2 mt-4">
+    <div>
+      <h3 className="font-bold">Shipping Details</h3>
+      <p className="capitalize">Reason for Export: {reasonForExport}</p>
+      <p className="capitalize">Mode of Transport: {modeOfTransport}</p>
+      <p className="capitalize">Incoterms: {incoterms}</p>
+      <p className="capitalize">Unit of Measurement: {unitOfMeasurement}</p>
+      <p className="capitalize">Shipment Number: {shipmentNumber}</p>
+      <p className="capitalize">Airway Bill: {airwaybill}</p>
+    </div>
+  </div>
+);
+
 const CommercialInvoice = ({
   order,
   options,
@@ -41,6 +71,15 @@ const CommercialInvoice = ({
         currency={order.currency}
         orderId={order.order_id}
         orderDate={order.order_date as string}
+      />
+
+      <ShippingDetails
+        reasonForExport={order.reason_for_export}
+        modeOfTransport={order.mode_of_transport}
+        incoterms={order.incoterms}
+        unitOfMeasurement={order.unit_of_measurement}
+        shipmentNumber={order.shipment_number}
+        airwaybill={order.airwaybill}
       />
 
       {options.showShippingItems && (

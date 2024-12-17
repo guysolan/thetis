@@ -37,7 +37,7 @@ const ActionPopover = ({
       <PopoverContent
         align="end"
         side="bottom"
-        className="flex flex-col gap-1 p-1"
+        className="z-30 flex flex-col gap-1 p-1"
       >
         {editForm && (
           <Sheet
