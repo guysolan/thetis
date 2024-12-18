@@ -29,10 +29,10 @@ const ShippingDetailItem: React.FC<ShippingDetailItemProps> = ({
   value,
   valueClassName = "capitalize",
 }) => (
-  <div className="flex items-center gap-4 text-gray-500">
+  <div className="flex items-center gap-4 text-gray-700">
     <div>{icon}</div>
     <div className="!my-0 !py-0">
-      <p className="text-gray-500 text-sm">{label}</p>
+      <p className="text-gray-700 text-sm">{label}</p>
       <p className={`font-medium ${valueClassName}`}>{value}</p>
     </div>
   </div>
@@ -47,7 +47,7 @@ const ShippingDetails: React.FC<ShippingDetails> = ({
   airwaybill,
 }) => (
   <div className="mt-6 p-4">
-    <h3 className="mb-4 font-bold text-gray-700 text-lg">Shipping Details</h3>
+    <h3 className="mb-4 font-bold text-gray-900 text-lg">Shipping Details</h3>
     <div className="gap-4 grid md:grid-cols-2">
       <div className="space-y-3">
         <ShippingDetailItem

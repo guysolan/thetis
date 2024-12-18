@@ -47,9 +47,9 @@ const Invoice = ({
         <PaymentDetails orderId={order.order_id} currency={order.currency} />
       )}
 
-      <ShowTextBlocks textBlocks={order.text_blocks} />
+      {/* <ShowTextBlocks textBlocks={order.text_blocks} /> */}
 
-      <AddTextBlock orderId={order.order_id} position={0} onSelect={() => {}} />
+      {/* <AddTextBlock orderId={order.order_id} position={0} onSelect={() => {}} /> */}
     </>
   );
 };
