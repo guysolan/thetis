@@ -43,6 +43,7 @@ export const commercialInvoiceOptions = {
     { id: "showFDA", label: "FDA Information" },
     { id: "showExporter", label: "Exporter Information" },
     { id: "showExchangeRates", label: "Exchange Rates" },
+    { id: "showSignature", label: "Signature" },
   ],
 };
 
@@ -83,6 +84,7 @@ export const documentOptionsSchema = z.object({
   payment: z.boolean().default(false),
   carriage: z.boolean().default(true),
   total: z.boolean().default(true),
+  showSignature: z.boolean().default(true),
 });
 
 export const purchaseOrderOptionsSchema = documentOptionsSchema.extend({
@@ -99,6 +101,7 @@ export const commercialInvoiceSchema = documentOptionsSchema.extend({
   showExchangeRates: z.boolean().default(true),
   showPackages: z.boolean().default(true),
   showShippingItems: z.boolean().default(true),
+  showSignature: z.boolean().default(true),
 });
 
 export type CommercialInvoiceOptions = z.infer<typeof commercialInvoiceSchema>;

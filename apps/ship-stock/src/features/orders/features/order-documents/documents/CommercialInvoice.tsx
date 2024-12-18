@@ -13,37 +13,8 @@ import {
   CommercialInvoiceOptions,
   DocumentOptions,
 } from "../../../../documents/schema";
-
-interface ShippingDetails {
-  reasonForExport: string;
-  modeOfTransport: string;
-  incoterms: string;
-  unitOfMeasurement: string;
-  shipmentNumber: string;
-  airwaybill: string;
-}
-
-const ShippingDetails: React.FC<ShippingDetails> = ({
-  reasonForExport,
-  modeOfTransport,
-  incoterms,
-  unitOfMeasurement,
-  shipmentNumber,
-  airwaybill,
-}) => (
-  <div className="gap-4 grid grid-cols-2 mt-4">
-    <div>
-      <h3 className="font-bold">Shipping Details</h3>
-      <p className="capitalize">Reason for Export: {reasonForExport}</p>
-      <p className="capitalize">Mode of Transport: {modeOfTransport}</p>
-      <p className="capitalize">Incoterms: {incoterms}</p>
-      <p className="capitalize">Unit of Measurement: {unitOfMeasurement}</p>
-      <p className="capitalize">Shipment Number: {shipmentNumber}</p>
-      <p className="capitalize">Airway Bill: {airwaybill}</p>
-    </div>
-  </div>
-);
-
+import Signature from "../components/signature";
+import ShippingDetails from "../components/ShippingDetails";
 const CommercialInvoice = ({
   order,
   options,
@@ -97,9 +68,13 @@ const CommercialInvoice = ({
         order={order}
       />
 
-      {options.showFDA && <FDADetails />}
       {options.showExporter && <ExporterDetails />}
+
+      {options.showFDA && <FDADetails />}
+
       {options.showExchangeRates && <ExchangeRates />}
+
+      {options.showSignature && <Signature />}
     </>
   );
 };
