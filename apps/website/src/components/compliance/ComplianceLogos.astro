@@ -7,7 +7,7 @@ import { Image } from "astro:assets";
     <h2 class="mb-3 font-semibold text-2xl text-gray-800">Class I Medical Device Trusted by...</h2>
     <div class="flex flex-wrap justify-center items-center gap-6 mx-auto px-4 py-4 max-w-6xl">
         {complianceLogos.map((logo) => (
-            <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg h-12 max-h-12 transition-shadow grayscale">
+            <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg max-w-[30vw] h-12 max-h-12 transition-shadow grayscale">
                 <Image class="w-full h-full object-scale-down" src={logo.image} alt={logo.alt} height={80} />
             </div>
         ))}
