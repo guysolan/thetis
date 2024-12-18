@@ -48,7 +48,7 @@ const ShippingDetails: React.FC<ShippingDetails> = ({
 }) => (
   <div className="mt-6 p-4">
     <h3 className="mb-4 font-bold text-gray-900 text-lg">Shipping Details</h3>
-    <div className="gap-4 grid md:grid-cols-2">
+    <div className="gap-4 grid grid-cols-2">
       <div className="space-y-3">
         <ShippingDetailItem
           icon={<FileText size={20} />}
