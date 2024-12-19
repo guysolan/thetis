@@ -11,15 +11,8 @@ const { title, paragraph }: Props = Astro.props;
 ---
 
 <Slide 
-  background="green" 
-  className="relative shadow-lg hover:shadow-xl mx-auto rounded-[2rem] max-w-screen-lg transition-all duration-300 overflow-hidden group"
+  className="relative bg-gradient-to-tr from-primary/30 via-primary/40 to-primary/30 shadow-lg hover:shadow-xl mx-auto rounded-[2rem] max-w-screen-lg transition-all duration-300 overflow-hidden group"
 >
-    <!-- Radial gradient background -->
-    <div class="absolute inset-0 bg-gradient-radial from-primary/90 via-primary/70 to-primary/40"></div>
-    
-    <!-- Noise texture overlay -->
-    <div class="absolute inset-0 bg-[url('/noise.png')] opacity-10 pointer-events-none mix-blend-overlay"></div>
-
     <form
         autocomplete="on"
         action="https://formspree.io/f/xbjvlval"

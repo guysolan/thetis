@@ -4,7 +4,7 @@ import BuyButtonVariants from "./products/buy-button/BuyButtonVariants";
 import nightSplint from "@/components/products/images/night-splint/night_splint_bed_top.jpg";
 import { Image } from "astro:assets";
 import { Button } from "@/components/ui/button";
-import { Shield, CheckCircle, ArrowRight } from "lucide-react";
+import { Shield, CheckCircle, ArrowRight } from "lucide-astro";
 ---
 
 
@@ -40,9 +40,9 @@ import { Shield, CheckCircle, ArrowRight } from "lucide-react";
         </div>
       </div>
 
-      <Button asChild variant="link">
-        <a href="/bulk-orders">
-          Bulk Orders & Special Pricing
+      <Button asChild variant="ghost" size="lg">
+        <a class="flex flex-row items-center gap-2" href="/bulk-orders">
+          <span>Bulk Orders & Special Pricing</span>
           <ArrowRight size={16} />
         </a>
       </Button>

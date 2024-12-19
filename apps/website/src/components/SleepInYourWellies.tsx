@@ -54,17 +54,19 @@ export default function SleepInYourWellies() {
 
   return (
     <div className="py-8 text-center">
-      <h3 className="flex justify-center items-center gap-2 mb-2 text-4xl">
+      <h3 className="flex md:flex-row flex-col justify-center items-center gap-2 mb-2 text-4xl">
         <span className="font-medium">Would you sleep in your</span>{" "}
-        <div className="inline-flex justify-center items-center min-w-[20px] font-semibold">
-          <HighlightedWord>
-            <div>
-              {displayText}
-              <span className="ml-2">{displayFlag}</span>
-            </div>
-          </HighlightedWord>
-        </div>
-        <span>?</span>
+        <span>
+          <span className="inline-flex justify-center items-center min-w-[20px] font-semibold">
+            <HighlightedWord>
+              <div>
+                {displayText}
+                <span className="ml-2">{displayFlag}</span>
+              </div>
+            </HighlightedWord>
+          </span>
+          ?
+        </span>
       </h3>
     </div>
   );

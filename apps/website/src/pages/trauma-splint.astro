@@ -1,15 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SlideTitle from "@/components/SlideTitle.astro";
 import Slide from "@/components/Slide.astro";
-import BigLinks from "@/components/BigLinks.astro";
+import TraumaSplintInstructions from "@/components/products/trauma-splint/trauma-splint-instructions/index.astro";
 import Quote from "@/components/Quote.astro";
 import EmailCTA from "@/components/CTA/EmailCTA.astro";
-import SizeChart from "@/components/SizeChart.astro";
-import NHSLogo from "@/assets/NHS_logo.svg";
-import Title from "../components/Title.astro";
+import SizeChart from "@/components/SizeChart.tsx";
 import { ClientRouter } from "astro:transitions";
 import ProsCons from "@/components/ProsCons.astro";
+import DownloadList from "@/components/DownloadList.astro";
+import EvidenceTable from '@/components/products/trauma-splint/EvidenceTable.tsx';
+import EvidenceChart from '@/components/products/trauma-splint/EvidenceChart.tsx';
+import TraumaSplintHero from '@/components/products/trauma-splint/TraumaSplintHero.astro';
 ---
 
 <Fragment slot="head">
@@ -22,59 +23,8 @@ import ProsCons from "@/components/ProsCons.astro";
     image="https://thetismedical.com/images/A&E.png"
 >
     <main>
-        <Slide>
-            <BigLinks active="trauma" />
-            <h2 class="lg:pt-4 pb-4 lg:pb-8 text-center text-lg lg:text-xl">
-                AVAILABLE TO HOSPITALS AND MEDICAL PROFESSIONALS.
-            </h2>
-            <div
-                class="flex lg:flex-row flex-col justify-center items-center lg:items-start gap-y-8 lg:gap-y-0 lg:gap-x-8 my-8"
-            >
-                <img
-                    class="mb-8 px-2 lg:w-2/3"
-                    src="/images/A&E.png"
-                    alt="Night Splint Product Image"
-                />
-                <div
-                    class="flex flex-col justify-center lg:justify-start items-center lg:items-start gap-y-8 lg:pt-4 lg:w-1/3 text-center lg:text-left"
-                >
-                    <Title>Achilles Tendon Rupture Trauma Splint</Title>
-
-                    <a
-                        href="./contact"
-                        class="order-trauma-product explore landing"
-                        >Order Now</a
-                    >
-                    <p class="font-normal text-lg lg:text-xl">
-                        Trusted by <img
-                            width="80"
-                            height="40"
-                            class="inline-flex my-auto ml-1 w-[66px] lg:w-[88px] object-cover"
-                            src="/images/NHS_logo.png"
-                            alt="NHS England Logo"
-                        />
-                    </p>
-                </div>
-            </div>
-        </Slide>
-    </main>
-    <br /><br />
-    <section class="col slide">
-        <div class="vid-wrap">
-            <div>
-                <iframe
-                    title="Trauma-Splint-Application"
-                    src="https://www.youtube.com/embed/t-MAXbiqQkU"
-                    frameborder="0"
-                    allowfullscreen></iframe>
-            </div>
-        </div>
-    </section>
-    <br /><br />
-    <Slide
-        title="Intended Use"
-        paragraph="A modern and convenient splint for suspected Achilles rupture. The splint is applied in A&E/ER and does not require training to apply. It holds the foot plantar flexed until seen the patient is by a specialist."
-    />
+      <TraumaSplintHero />
+   
     <Slide id="testimonials" title="Testimonials">
         <Quote
             title="This splint saves patients and staff time. It also facilitates an efficient pathway for scanning and making decisions about treatment."
@@ -125,74 +75,36 @@ import ProsCons from "@/components/ProsCons.astro";
     <Slide
         title="Evidence"
         paragraph="Evidence - The time taken to achieve both ultrasound scan and specialist review fell > 60%. All Thetis Trauma Splint patients reached their definitive treatment decisions within one week."
-    />
-    <div class="evidence-table">
-        <img src="/images/trauma-splint/Evidence-Table.svg" />
-    </div>
-    <EmailCTA
-        title="Sound Interesting?"
-        paragraph="Want to get a sample, speak to us or just learn more?"
-    />
-    <Slide title="Instructions">
-        <div class="trauma-instructions-wrap">
-            <div class="instruction-part">
-                <p class="trauma-instruction">
-                    1. Remove bandage clips (for use later) and position
-                    stockinette overhanging the toes.
-                </p>
-                <img
-                    src="/images/trauma-splint/stage-1.png"
-                    alt="Stage 1 of Trauma Splint Application"
-                />
-            </div>
-            <div class="instruction-part">
-                <p class="trauma-instruction">
-                    2. Keeping foot pointed down (tip-toes), position the splint
-                    to cover the shin and top of foot, but leave toes free.
-                </p>
-                <img
-                    src="/images/trauma-splint/stage-2.png"
-                    alt="Stage 2 of Trauma Splint Application"
-                />
-            </div>
-            <div class="instruction-part">
-                <p class="trauma-instruction">
-                    3. Fold the stockinette over at both ends.
-                </p>
-                <img
-                    src="/images/trauma-splint/stage-3.png"
-                    alt="Stage 3 of Trauma Splint Application"
-                />
-            </div>
-            <div class="instruction-part">
-                <p class="trauma-instruction">
-                    4. Wrap the crepe bandage firmly, but not too tight. Secure
-                    with the bandage clips provided.
-                </p>
-                <img
-                    src="/images/trauma-splint/stage-4.png"
-                    alt="Stage 4 of Trauma Splint Application"
-                />
-            </div>
-        </div>
-    </Slide>
+    >
+    <EvidenceTable />
+</Slide>
+    <EvidenceChart client:load />
+
+ 
+   <TraumaSplintInstructions />
     <Slide title="Sizing">
         <SizeChart />
     </Slide>
     <Slide title="Downloads">
-        <div class="downloads-wrap">
-            <div class="download intro large">
-                <a
-                    href="/images/documents/trauma-splint/trauma_splint_instructions.pdf"
-                    target="_blank">Trauma-Instructions.pdf</a
-                >
-            </div>
-            <div class="download intro large">
-                <a
-                    href="/images/documents/information-brochure-trauma-splint.pdf"
-                    target="_blank">Trauma Splint Brochure.pdf</a
-                >
-            </div>
-        </div>
+        <DownloadList
+            title="Information for Patients"
+            downloads={[
+                {
+                    title: 'Trauma-Instructions.pdf',
+                    href: '/images/documents/trauma-splint/trauma_splint_instructions.pdf',
+                },
+                {
+                    title: 'Trauma Splint Brochure.pdf',
+                    href: '/images/documents/information-brochure-trauma-splint.pdf',
+                },
+            ]}
+        />
     </Slide>
+       <EmailCTA
+        title="Sound Interesting?"
+        paragraph="Want to get a sample, speak to us or just learn more?"
+    />
+    <br class="pt-60"/>
+    </main>
+
 </Layout>

@@ -19,7 +19,7 @@ import HoverImageLink from "../components/HoverImageLink.astro";
                     <div class="space-y-6 lg:pr-16 md:w-1/2 lg:w-7/12">
                    
                    
-                        <h1 class="font-semibold text-5xl md:text-6xl leading-[105%]">
+                        <h1 class="font-semibold sm:text-3xl md:text-6xl leading-[105%]">
                             <HighlightedWord>Better Recovery</HighlightedWord> for Achilles Tendon Rupture
                         </h1>
 
@@ -28,14 +28,18 @@ import HoverImageLink from "../components/HoverImageLink.astro";
                             Experience breakthrough comfort and proven outcomes with our innovative Achilles splints - 
                             trusted by leading healthcare professionals worldwide.
                         </p>
-
+                        <div class='block relative md:hidden'>
                          <Image 
                             src={NightSplintImage} 
                             alt="Thetis Medical Achilles Rupture Night Splint"
-                            class="group-hover:scale-[102%] group-hover:brightness-[0.85] block md:hidden shadow-lg hover:shadow-2xl rounded-xl transition-all duration-300" 
+                            class="group-hover:scale-[102%] group-hover:brightness-[0.85] shadow-lg hover:shadow-2xl rounded-xl transition-all duration-300" 
                         />
+                        <div class='bottom-4 left-4 absolute'>
+                        <BuyModal />
+                        </div>
+                        </div>
                         
-                        <div class="flex sm:flex-row flex-col gap-4 pt-4">
+                        <div class="md:flex sm:flex-row flex-col gap-4 hidden pt-4">
                             <BuyModal />
                             <a href="/night-splint" 
                                class={cn(buttonVariants({ size: 'lg', variant: 'outline' }), 

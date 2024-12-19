@@ -30,7 +30,7 @@ export function BuyModal() {
         </ModalTrigger>
         <ModalBody>
           <ModalContent>
-            <h4 className="mb-8 font-bold text-center text-lg text-neutral-600 md:text-2xl dark:text-neutral-100">
+            <h4 className="mb-8 font-semibold text-center text-lg text-neutral-600 md:text-2xl dark:text-neutral-100">
               Book your trip to{" "}
               <span className="border-gray-200 dark:border-neutral-700 bg-gray-100 dark:bg-neutral-800 px-1 py-0.5 border rounded-md">
                 Bali

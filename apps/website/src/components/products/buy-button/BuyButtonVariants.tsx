@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import ShopifyBuyButton from "./ShopifyBuyButton";
-import { Button } from "@/components/ui/button";
-import { Shield, CheckCircle, ArrowRight } from "lucide-react";
-
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Shield, CheckCircle, ArrowRight, Info } from "lucide-react";
+import SizeChart from "../../SizeChart.tsx";
+import {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  PopoverTrigger,
+} from "@thetis/ui/popover";
+import { cn } from "../../../lib/utils.ts";
 interface BuyButtonVariantsProps {
   productId?: string;
   className?: string;
@@ -40,9 +47,24 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
   return (
     <div className={`text-left flex flex-col gap-4 ${className}`}>
       <div className="flex flex-col justify-start items-start my-4">
-        <h3 className="mb-2 font-semibold text-left text-lg">
-          Choose Your Options
-        </h3>
+        <div className="flex flex-row justify-between items-center my-4 w-full">
+          <h3 className="font-semibold text-left text-lg">
+            Choose Your Options
+          </h3>
+          <Popover>
+            <PopoverTrigger
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "flex flex-row items-center gap-2",
+              )}
+            >
+              Size Guide <Info />
+            </PopoverTrigger>
+            <PopoverContent className="p-0 min-w-96">
+              <SizeChart />
+            </PopoverContent>
+          </Popover>
+        </div>
         <div className="space-y-4 w-full">
           <div className="flex flex-col justify-start items-start space-y-2">
             <label className="font-semibold text-base text-left text-neutral-600">

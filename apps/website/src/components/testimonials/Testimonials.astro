@@ -6,7 +6,7 @@ import Slide from "@/components/Slide.astro";
 
 <Slide title="A Professional's Perspective" id="testimonials">
     <div id="more-reviews" />
-    <div class="flex flex-wrap justify-center gap-y-8 mx-auto px-2">
+    <div class="gap-4 gap-y-8 grid grid-cols-1 lg:grid-cols-2 mx-auto px-2">
         {testimonials.map((testimonial) => (
             <Testimonial
                 name={testimonial.name}

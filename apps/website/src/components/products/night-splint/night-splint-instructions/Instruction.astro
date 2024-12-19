@@ -1,0 +1,24 @@
+    ---
+    import {Image} from 'astro:assets';
+
+    export interface Props {
+    step: string;
+    text: string;
+    imageSrc: string;
+    imageAlt: string;
+    }
+
+    const { step, text, imageSrc, imageAlt } = Astro.props;
+    ---
+
+    <div class="flex flex-row items-start">
+        <p class="my-8 max-w-60">
+            {step}. {text}
+        </p>
+        <Image
+            src={imageSrc}
+            alt={imageAlt}
+            width={300}
+            height={400}
+        />
+    </div>

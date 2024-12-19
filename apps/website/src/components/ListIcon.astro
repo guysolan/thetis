@@ -1,5 +1,5 @@
 ---
-import { CheckCircle, MinusCircle, Info, CircleDot } from "lucide-react";
+import { CheckCircle, MinusCircle, Info, CircleDot } from "lucide-astro";
 
 interface Props {
   type?: "positive" | "negative" | "neutral" | "info";
@@ -33,11 +33,11 @@ const iconMap = {
 const { icon: Icon, color, label } = iconMap[type];
 ---
 
-<li class="flex items-center gap-2 min-h-12">
+<li class="flex items-center gap-2 min-h-12 text-lg">
   <Icon
     size={28}
     strokeWidth={3.5}
-    class={`flex-shrink-0 drop-shadow-md ${color} animate-appear`}
+    class={`flex-shrink-0 drop-shadow-md animate-fade-in-up ${color} animate-appear`}
     aria-label={label}
   />
   <span><slot /></span>

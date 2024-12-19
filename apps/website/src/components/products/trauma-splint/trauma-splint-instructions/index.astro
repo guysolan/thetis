@@ -1,0 +1,60 @@
+---
+import Slide from "@/components/Slide.astro";
+import stage1 from './stage-1.png';
+import stage2 from './stage-2.png';
+import stage3 from './stage-3.png';
+import stage4 from './stage-4.png';
+import { Image } from 'astro:assets';
+---
+
+<Slide title='Instructions'>
+    <div class="trauma-instructions-wrap">
+        <div class="instruction-part">
+                <p class="trauma-instruction">
+                    1. Remove bandage clips (for use later) and position
+                    stockinette overhanging the toes.
+                </p>
+                <Image
+                        height={300}
+                    width={600}
+                    src={stage1}
+                    alt="Stage 1 of Trauma Splint Application"
+                />
+            </div>
+            <div class="instruction-part">
+                <p class="trauma-instruction">
+                    2. Keeping foot pointed down (tip-toes), position the splint
+                    to cover the shin and top of foot, but leave toes free.
+                </p>
+                <Image
+                        height={300}
+                    width={600}
+                    src={stage2}
+                    alt="Stage 2 of Trauma Splint Application"
+                />
+            </div>
+            <div class="instruction-part">
+                <p class="trauma-instruction">
+                    3. Fold the stockinette over at both ends.
+                </p>
+                <Image
+                        height={300}
+                    width={600}
+                    src={stage3}
+                    alt="Stage 3 of Trauma Splint Application"
+                />
+            </div>
+            <div class="instruction-part">
+                <p class="trauma-instruction">
+                    4. Wrap the crepe bandage firmly, but not too tight. Secure
+                    with the bandage clips provided.
+                </p>
+                <Image
+                    height={300}
+                    width={600}
+                    src={stage4}
+                    alt="Stage 4 of Trauma Splint Application"
+                />
+            </div>
+        </div>
+    </Slide>

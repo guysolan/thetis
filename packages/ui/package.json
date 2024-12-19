@@ -23,6 +23,7 @@
     "./animated-modal": "./src/components/animated-modal.tsx",
     "./animated-testimonials": "./src/components/animated-testimonials.tsx",
     "./ui": "./src/components/index.ts",
+    "./colors": "./src/utils/colors.ts",
     "./editor": "./src/components/editor/index.tsx",
     "./button": "./src/components/button.tsx",
     "./accordion": "./src/components/accordion.tsx",

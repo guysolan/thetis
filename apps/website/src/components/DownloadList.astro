@@ -1,27 +1,29 @@
 ---
-interface Download {
+import { Download } from "lucide-react";
+interface DownloadType {
     href: string
     title: string
 }
 interface Props {
     title: string
-    downloads: Download[]
+    downloads: DownloadType[]
 }
 const { title, downloads } = Astro.props
 ---
 
 <div class="space-y-4 w-full">
     <h2 class="text-lg md:text-xl">{title}</h2>
-    <ul class="flex flex-col gap-y-8 pl-8">
+    <ul class="flex flex-wrap gap-8 gap-y-8">
         {
             downloads.map((download) => (
-                <li>
+                <li class="">
                     <a
-                        class="text-lg font-light underline underline-offset-2  "
+                        class="flex flex-col justify-center items-center gap-4 border-neutral-400 p-8 border w-40 md:w-60 h-60 md:h-80 font-light text-center text-lg underline underline-offset-2 group"
                         href={download.href}
                         target="_blank"
                     >
-                        {download.title}
+                        <Download className="w-8 lg:w-10 h-8 lg:h-10 group-hover:animate-bounce" /> 
+                        <span>{download.title}</span>
                     </a>
                 </li>
             ))

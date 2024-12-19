@@ -1,0 +1,58 @@
+---
+import Slide from '@/components/Slide.astro';
+import { buttonVariants } from '../../ui/button';
+import { cn } from '@thetis/ui/cn';
+---
+
+    <section class="bg-gradient-to-b from-primary/20 to-white mt-0 px-2 md:px-8 lg:px-24 pt-32 pb-16 hero-section">
+        <h2 class="lg:pt-4 pb-4 lg:pb-8 font-semibold text-center text-lg lg:text-xl">
+            AVAILABLE TO HOSPITALS AND MEDICAL PROFESSIONALS.
+        </h2>
+        <div
+            class="flex lg:flex-row flex-col justify-center items-center lg:items-start gap-y-8 lg:gap-y-0 lg:gap-x-8 my-8"
+        >
+                <iframe
+                    class="w-[95vw] md:w-[47.5vw] h-[55vw] md:h-[27.5vw]"
+                    title="Trauma-Splint-Application"
+                    src="https://www.youtube.com/embed/t-MAXbiqQkU"
+                    allowfullscreen></iframe>
+            <div
+                class="flex flex-col justify-center lg:justify-start items-center lg:items-start gap-y-8 lg:pt-4 lg:w-7/12 text-center lg:text-left"
+            >
+                <h1 class="font-semibold text-2xl lg:text-4xl">Achilles Tendon Rupture Trauma Splint</h1>
+                <p class="text-gray-700 text-xl">A modern and convenient splint for suspected Achilles rupture. The splint is applied in A&E/ER and does not require training to apply. It holds the foot plantar flexed until seen the patient is by a specialist.</p>
+                <a
+                    href="./contact"
+                    class={cn(buttonVariants({ variant: "default", size: "lg" }))}
+                    >Order Now</a
+                >
+                <p class="font-normal text-lg lg:text-xl">
+                    Trusted by <img
+                        width="80"
+                        height="40"
+                        class="inline-flex my-auto ml-1 w-[66px] lg:w-[88px] object-cover"
+                        src="/images/NHS_logo.png"
+                        alt="NHS England Logo"
+                    />
+                </p>
+            </div>
+        </div>
+    </section>
+
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out forwards;
+        opacity: 0;
+    }
+</style>
