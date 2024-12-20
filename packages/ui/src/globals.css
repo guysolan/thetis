@@ -33,7 +33,8 @@
 
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 161 38% 65%;
+    --secondary-hsl: hsl(162, 46%, 75%);
+    --secondary: 162 46% 75%;
     --secondary-foreground: 220.9 39.3% 11%;
 
     --accent: 220 14.3% 95.9%;

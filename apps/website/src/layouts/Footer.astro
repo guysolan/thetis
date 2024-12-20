@@ -2,15 +2,12 @@
 import Social from "@/components/icons/socials/Social";
 import Slide from "@/components/Slide.astro";
 import FooterEmailCTA from "@/components/CTA/FooterEmailCTA.astro";
+import Theme from '../components/theme/index.astro'
 ---
 
-<!-- <section id="contact" class="footer"> -->
 <Slide background="black">
     <div class="footer-words">
-        <!-- <div class="footer-title">
-                <a href="/contact"><h2>Contact</h2></a>
-                <img src="/images/logo.svg" alt="Logo Image" />
-            </div> -->
+      
         <div class="links-row">
             <div class="links-column">
                 <h3>Company</h3>
@@ -51,6 +48,8 @@ import FooterEmailCTA from "@/components/CTA/FooterEmailCTA.astro";
                 <h3>Stay in Touch</h3>
 
                 <FooterEmailCTA />
+
+
                 <div class="flex gap-x-4 flex-wrap h-fit [&>a]:mt-0">
                     <Social color="white" mode="mail" />
                     <Social color="white" mode="linkedin" />
@@ -61,11 +60,17 @@ import FooterEmailCTA from "@/components/CTA/FooterEmailCTA.astro";
                     href="mailto:info@thetismedical.com"
                     class="!font-semibold !text-base">info@thetismedical.com</a
                 >
+
             </div>
+
         </div>
     </div>
 
-    <p class="mt-8 w-full text-center text-white md:text-left">
+    <div class="flex md:flex-row flex-col justify-between items-center mt-8 w-full text-center text-white md:text-left">
+         <p class="text-white">
         &copy;Thetis Medical Ltd 2020-2025
     </p>
+        <Theme />
+    </div>
+   
 </Slide>

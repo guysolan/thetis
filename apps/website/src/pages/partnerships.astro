@@ -1,0 +1,70 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { ClientRouter } from "astro:transitions";
+import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
+import HighlightedWord from '../components/HighlightedWord';
+---
+
+<Fragment slot="head">
+  <NightSplintSchema />
+  <ClientRouter />
+</Fragment>
+
+<Layout
+    title="Achilles Tendon Rupture Night Splint"
+    description="Thetis Medical's Achilles rupture night splint to make sleeping more pleasant and bearable. The brace straps to the leg to prevent further tendon injury."
+    image="https://thetismedical.com/images/green-shell.png"
+>
+    <main class="flex flex-col py-24">
+       <h1 class="font-3xl text-semibold">In our Partners we choose <HighlightedWord>Quality</HighlightedWord> over <HighlightedWord>Quantity</HighlightedWord></h1>
+       <p>Club Warehouse</p>
+       <p>Pedorthotics in Motion</p>
+    </main>
+</Layout>
+
+<script>
+    fetch('https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq')
+        .then((res) => res.json())
+        .then((response) => {
+            console.log('Country: ', response.country)
+            try {
+                // Check if on Night Splint Page
+                const shopify = document.getElementById(
+                    'shopify-buy-button-wrapper'
+                )
+                const amazon = document.getElementById(
+                    'amazon-buy-button-wrapper'
+                )
+
+                if (response.country === 'United Kingdom') {
+                    amazon?.remove()
+                } else {
+                    shopify?.remove()
+                }
+            } catch (error) {
+                // console.log(error)
+            }
+        })
+        .catch((reason: any) => {
+            console.log(reason)
+            // console.log('Request failed');
+        })
+</script>
+
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out forwards;
+        opacity: 0;
+    }
+</style>

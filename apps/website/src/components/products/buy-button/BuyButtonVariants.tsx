@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ShopifyBuyButton from "./ShopifyBuyButton";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Shield, CheckCircle, ArrowRight, Info } from "lucide-react";
+import { Info } from "lucide-react";
 import SizeChart from "../../SizeChart.tsx";
 import {
   Popover,
@@ -54,7 +54,7 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
           <Popover>
             <PopoverTrigger
               className={cn(
-                buttonVariants({ variant: "outline" }),
+                buttonVariants({ variant: "secondary" }),
                 "flex flex-row items-center gap-2",
               )}
             >
@@ -114,7 +114,7 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
         </div>
       </div>
 
-      <div className="h-40">
+      <div className="h-24">
         {isSelectionComplete && (
           <div className="relative flex-col justify-start items-start mx-0 w-fit">
             <ShopifyBuyButton

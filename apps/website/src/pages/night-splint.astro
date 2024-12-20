@@ -10,17 +10,16 @@ import DownloadList from "@/components/DownloadList.astro";
 import SizeChart from "@/components/SizeChart.jsx";
 import NightSplintFAQs from "@/components/NightSplintFAQs.tsx";
 import ReviewsMasonry from "@/components/reviews/ReviewsMasonry.tsx";
-import BuyNightSplint from "../components/BuyNightSplint.astro";
-import Reviews from "@/components/reviews/Reviews.astro";
+import Reviews from "@/components/reviews/ReviewCarousel";
 import {  buttonVariants } from "@/components/ui/button";
 import SimplyBrilliantQuote from "@/components/reviews/SimplyBrilliantQuote.astro";
 import SleepInYourWellies from "@/components/SleepInYourWellies.tsx";
-import HighlightedWord from '../components/HighlightedWord';
 import NightSplintFeatures from "@/components/products/night-splint/NightSplintFeatures.astro";
 import NightSplintUsage from "@/components/products/night-splint/NightSplintUsage.astro";
 import NightSplintProsCons from "@/components/products/night-splint/NightSplintProsCons.astro";
 import NightSplintInstructions from "@/components/products/night-splint/night-splint-instructions/index.astro";
-import BigLinks from "@/components/BigLinks.astro";
+import NightSplintHero from '../components/products/night-splint/NightSplintHero.astro';
+import TestimonialsCarousel from '@/components/testimonials/TestimonialsCarousel.tsx'
 ---
 
 <Fragment slot="head">
@@ -34,18 +33,7 @@ import BigLinks from "@/components/BigLinks.astro";
     image="https://thetismedical.com/images/green-shell.png"
 >
     <main class="">
-        <section class="bg-gradient-to-b from-primary/20 to-white mt-0 pt-32 pb-16 hero-section">
-           
-            <div class="mx-auto text-center container">
-                <h1 class="mb-6 font-semibold text-4xl text-gray-900 md:text-5xl">
-                    The <HighlightedWord>Only</HighlightedWord> Night Splint for Achilles Tendon <HighlightedWord>Rupture</HighlightedWord>
-                </h1>
-                <p class="mx-auto mb-8 max-w-3xl text-gray-700 text-xl">
-                    Finally, a comfortable solution for nighttime recovery. Designed alongside surgeons to protect your healing Achilles while you rest.
-                </p>
-                <BuyNightSplint client:load />
-            </div>
-        </section>
+        <NightSplintHero />
 
         <SleepInYourWellies client:load />
 
@@ -54,10 +42,10 @@ import BigLinks from "@/components/BigLinks.astro";
         <NightSplintUsage/>
 
         <section class="py-16 cta-section">
-            <div class="mx-auto text-center container">
+            <div class="flex flex-col items-center mx-auto text-center">
                 <h2 class="mb-6 font-semibold text-3xl">Ready for More Comfortable Recovery?</h2>
                 <p class="mb-8 text-gray-700 text-xl">Join thousands of patients who've improved their recovery experience</p>
-                <Reviews />
+                <Reviews client:load/>
                 <a href="#more-reviews" class={cn(buttonVariants({ variant: 'outline', size: 'lg' }))} >More Testimonials</a>
             </div>
         </section>
@@ -93,6 +81,10 @@ import BigLinks from "@/components/BigLinks.astro";
 
         <ReviewsMasonry client:load/>
 
+        <p>Our Athletes Recover Well Rested</p>
+        <TestimonialsCarousel/>
+
+        <p>Trusted by Professionals</p>
         <Testimonials />
 
         <EmailCTA
