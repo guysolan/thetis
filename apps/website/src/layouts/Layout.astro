@@ -46,6 +46,11 @@ import ShopifyBuyButton2 from "../components/ShopifyBuyButton2.astro";
             type="text/partytown"
             src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
         ></script>
-        
+
+        <script is:inline>
+          const theme = localStorage.getItem('theme') || 'theme-light';
+          const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: light)').matches);
+          document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+        </script>
     </body>
 </html>

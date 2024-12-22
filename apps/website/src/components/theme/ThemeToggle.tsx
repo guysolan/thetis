@@ -18,7 +18,7 @@ export function ThemeToggle() {
     const isDark =
       theme === "dark" ||
       (theme === "system" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
+        window.matchMedia("(prefers-color-scheme: light)").matches);
     document.documentElement.classList[isDark ? "add" : "remove"]("dark");
   }, [theme]);
 
