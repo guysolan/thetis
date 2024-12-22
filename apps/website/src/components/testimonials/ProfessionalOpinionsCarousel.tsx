@@ -4,7 +4,7 @@ import HighlightedWord from "../HighlightedWord.tsx";
 
 function ProfessionalOpinionsCarousel() {
   return (
-    <div className="relative bg-gradient-to-b from-gray-50 to-white py-24">
+    <div className="relative bg-gradient-to-b from-neutral-50 dark:from-neutral-900 to-white dark:to-black py-24">
       <div className="mx-auto px-4 container">
         <div className="space-y-6 mb-16 text-center">
           <h2 className="font-semibold text-3xl md:text-4xl leading-tight">

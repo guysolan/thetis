@@ -184,6 +184,14 @@ html {
   scroll-behavior: smooth;
 }
 
+h1 {
+  @apply font-semibold text-neutral-950 sm:text-3xl md:text-6xl dark:text-neutral-50 leading-[105%];
+}
+
+h2 {
+  @apply font-semibold text-neutral-950 sm:text-3xl md:text-6xl dark:text-neutral-50 leading-[105%];
+}
+
 p {
   font-weight: 400;
 }
