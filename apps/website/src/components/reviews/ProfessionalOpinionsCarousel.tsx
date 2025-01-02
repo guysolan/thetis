@@ -1,5 +1,5 @@
 import { AnimatedTestimonials } from "@thetis/ui/animated-testimonials";
-import { testimonials } from "./testimonials.ts";
+import { clinicians } from "./content/clinicians.ts";
 import HighlightedWord from "../HighlightedWord.tsx";
 
 function ProfessionalOpinionsCarousel() {
@@ -21,12 +21,10 @@ function ProfessionalOpinionsCarousel() {
           <AnimatedTestimonials
             height={350}
             width={250}
-            testimonials={testimonials
-              .filter((t) => t.is_professional)
-              .map((t) => ({
-                ...t,
-                src: t.image.src,
-              }))}
+            testimonials={clinicians.map((t) => ({
+              ...t,
+              src: t.image.src,
+            }))}
             autoplay={false}
           />
         </div>

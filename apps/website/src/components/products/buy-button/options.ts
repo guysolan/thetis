@@ -61,6 +61,7 @@ export const options = {
     productSet: {
         styles: {
             products: {
+                "margin-top": "0px",
                 "@media (min-width: 601px)": {
                     "margin-left": "-20px",
                 },
@@ -142,7 +143,7 @@ export const options = {
             wrapper: {
                 display: "flex",
                 gap: "10px",
-                "margin-top": "10px",
+                "margin-top": "0px",
             },
         },
         contents: {

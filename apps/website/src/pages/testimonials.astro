@@ -1,14 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { testimonials } from "../components/testimonials/testimonials.ts";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../components/ui/card.tsx";
-import { Star } from "lucide-astro";
+import ReviewsByType from '../components/reviews/ReviewsByType';
 ---
 
 <Layout
@@ -17,74 +9,6 @@ import { Star } from "lucide-astro";
 	image='https://thetismedical.com/images/dotty-logo'>
 	<section class='flex flex-col mx-auto my-8 px-4 w-full max-w-[900px]'>
 		<h1 class="mb-8 text-2xl text-slate-900">Testimonials</h1>
-
-		<div class='flex md:flex-row flex-col gap-x-8'>
-			<div class='flex-grow'>
-				<ul class='flex flex-col gap-6 w-full'>
-					{
-						testimonials.map((product) => {
-							return (
-								<li>
-									<h3 class='mb-4 font-semibold text-slate-800 text-xl'>{product.name}</h3>
-									<ul class='flex flex-col gap-4'>
-										{product.testimonials.map((t) => {
-											return (
-												<li>
-													<Card>
-														<CardHeader>
-															<CardTitle className='text-lg text-slate-800'>
-																{t.author}
-															</CardTitle>
-															<p class="font-medium text-base text-slate-800">{t.details}</p>
-														</CardHeader>
-														<CardContent className='font-normal text-base text-slate-950'>
-															{t.quote}
-														</CardContent>
-													</Card>
-												</li>
-											)
-										})}
-									</ul>
-
-									<ul class="flex flex-col gap-4">
-                                     <h4 class={`mt-8 text-lg slate-700 font-semibold ${!product?.reviews?.length&&'hidden'}`}>Reviews and Ratings</h4>
-										{product.reviews?.map((r) => {
-											return (
-												<li>
-                                                    
-													<Card>
-														<CardHeader>
-															<CardTitle className='text-lg text-slate-800'>
-																{r.title}
-															</CardTitle>
-															<p>{r.date}</p>
-															<div class="flex flex-row flex-gap-1">
-																<Star class="fill-amber-300 stroke-amber-500"/>
-																<Star class="fill-amber-300 stroke-amber-500"/>
-																<Star class="fill-amber-300 stroke-amber-500"/>
-																<Star class="fill-amber-300 stroke-amber-500"/>
-																<Star class="fill-amber-300 stroke-amber-500"/>
-															</div>
-															<p class="font-semibold text-base text-slate-800">{r.rating}</p>
-
-															
-
-														</CardHeader>
-														<CardContent className='font-normal text-base text-slate-950'>
-															<p>{r.body}</p>
-														</CardContent>
-														<CardFooter className="capitalize">{r.author}</CardFooter>
-													</Card>
-												</li>
-											)
-										})}
-									</ul>
-								</li>
-							)
-						})
-					}
-				</ul>
-			</div>
-		</div>
+		<ReviewsByType />
 	</section>
 </Layout>

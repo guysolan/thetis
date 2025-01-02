@@ -5,13 +5,13 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@thetis/ui/tabs";
 import { cn } from "../../lib/utils";
 
 export function ThemeToggle() {
-  const [theme, setThemeState] = React.useState<
-    "theme-light" | "dark" | "system"
-  >("theme-light");
+  const [theme, setThemeState] = React.useState<"light" | "dark" | "system">(
+    "light",
+  );
 
   React.useEffect(() => {
     const isDarkMode = document.documentElement.classList.contains("dark");
-    setThemeState(isDarkMode ? "dark" : "theme-light");
+    setThemeState(isDarkMode ? "dark" : "light");
   }, []);
 
   React.useEffect(() => {
@@ -26,11 +26,11 @@ export function ThemeToggle() {
     <Tabs value={theme}>
       <TabsList className="gap-2 p-2 h-fit">
         <TabsTrigger
-          onClick={() => setThemeState("theme-light")}
-          value="theme-light"
+          onClick={() => setThemeState("light")}
+          value="light"
           className={cn(
             "h-8 w-8 p-0",
-            theme === "theme-light" ? "bg-neutral-200" : "",
+            theme === "light" ? "bg-neutral-200" : "",
           )}
         >
           <Sun size={20} />

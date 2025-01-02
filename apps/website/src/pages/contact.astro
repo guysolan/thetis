@@ -13,29 +13,29 @@ import { inputStyle } from '../components/form/Input.astro'
 >
     <main data-barba="container" data-barba-namespace="home">
         <div class="contact-wrap">
-            <div class="black-side">
-                <h1>Get in Touch</h1>
-                <ul>
-                    <li>Order splints</li>
-                    <li>Get some samples</li>
-                    <li>Restock your leaflets</li>
-                    <li>Ask a question</li>
-                    <li>Just say hi!</li>
+            <div class="mr-12 w-[35vw] text-white">
+                <h1 class="mt-12 text-5xl text-white">Get in Touch</h1>
+                <ul class="mx-8 mt-4 mb-24 ml-8">
+                    <li class="text-lg">Order splints</li>
+                    <li class="text-lg">Get some samples</li>
+                    <li class="text-lg">Restock your leaflets</li>
+                    <li class="text-lg">Ask a question</li>
+                    <li class="text-lg">Just say hi!</li>
                 </ul>
                 <h4>
-                    <a href="mailto:info@thetismedical.com"
+                    <a href="mailto:info@thetismedical.com" class="text-white text-xl"
                         >info@thetismedical.com</a
                     >
                 </h4>
-                <div class="socials contact">
-                    <a class="invert" href="https://twitter.com/ThetisMedical"
+                <div class="contact socials">
+                    <a class="fill-white" href="https://twitter.com/ThetisMedical"
                         ><img
                             src="/images/icons/socials/social-media-twitter.svg"
                             alt="Twitter Icon"
                         /></a
                     >
                     <a
-                        class="invert"
+                        class="fill-white"
                         href="https://www.instagram.com/thetismedical/"
                         ><img
                             src="/images/icons/socials/social-media-insta.svg"
@@ -43,7 +43,7 @@ import { inputStyle } from '../components/form/Input.astro'
                         /></a
                     >
                     <a
-                        class="invert"
+                        class="fill-white"
                         href="https://www.facebook.com/thetismedical"
                         ><img
                             src="/images/icons/socials/social-media-facebook.svg"
@@ -57,32 +57,33 @@ import { inputStyle } from '../components/form/Input.astro'
                 autocomplete="on"
                 action="https://formspree.io/f/mdobaqwr"
                 method="POST"
-                class="form pt-10"
+                class="pt-10 form"
             >
-                <div class="form-wrap">
-                    <h2 class="text-3xl pt-4">Contact Us</h2>
+                <div class="form-wrap dark:text-black">
+                    <h2 class="pt-4 text-3xl dark:text-black">Contact Us</h2>
                     <p>Would you like to:</p>
-                    <div class="form-row checkbox">
+                    <div class="form-row">
                         <div class="checkbox">
                             <div class="checkbox-edge">
                                 <input
-                                    name="bulk-order"
+                                    name="contact-reason"
+                                    value="bulk-order"
                                     checked
                                     id="order-check"
-                                    type="checkbox"
-                                    class={inputStyle}
+                                    type="radio"
+                                    class='rounded-full [&:checked]:accent-white'
                                 />
                             </div>
-                            <label for="order-check">Bulk Order / Restock</label
-                            >
+                            <label for="order-check">Bulk Order / Restock</label>
                         </div>
                         <div class="checkbox">
                             <div class="checkbox-edge">
                                 <input
-                                    name="ask-a-question"
+                                    name="contact-reason"
+                                    value="ask-question"
                                     id="ask-a-question"
-                                    type="checkbox"
-                                    class={inputStyle}
+                                    type="radio"
+                                    class={`${inputStyle} [&:checked]:accent-white`}
                                 />
                             </div>
                             <label for="ask-a-question">Ask a question</label>
@@ -90,8 +91,10 @@ import { inputStyle } from '../components/form/Input.astro'
                     </div>
                     <div class="form-row">
                         <div class="form-group">
+                            <label for="name" class="sr-only">Name</label>
                             <input
                                 required
+                                id="name"
                                 name="name"
                                 type="text"
                                 placeholder="Name"
@@ -99,7 +102,9 @@ import { inputStyle } from '../components/form/Input.astro'
                             />
                         </div>
                         <div class="form-group">
+                            <label for="company" class="sr-only">Company</label>
                             <input
+                                id="company"
                                 name="company"
                                 type="text"
                                 placeholder="Company"
@@ -109,8 +114,10 @@ import { inputStyle } from '../components/form/Input.astro'
                     </div>
                     <div class="form-row">
                         <div class="form-group">
+                            <label for="email" class="sr-only">Email</label>
                             <input
                                 required
+                                id="email"
                                 name="email"
                                 type="email"
                                 placeholder="Email"
@@ -118,7 +125,9 @@ import { inputStyle } from '../components/form/Input.astro'
                             />
                         </div>
                         <div class="form-group">
+                            <label for="phone" class="sr-only">Phone</label>
                             <input
+                                id="phone"
                                 name="phone"
                                 type="tel"
                                 placeholder="Phone"
@@ -129,7 +138,7 @@ import { inputStyle } from '../components/form/Input.astro'
                     <div class="order-wrap">
                         <p>Enter quantities to get a quote by email:</p>
                         <div class="form-row">
-                            <div class="form-group flex">
+                            <div class="flex form-group">
                                 <p>Night Splint</p>
                                 <input
                                     name="night-splint-qty"
@@ -141,7 +150,7 @@ import { inputStyle } from '../components/form/Input.astro'
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group flex">
+                            <div class="flex form-group">
                                 <p>Trauma Splint</p>
                                 <input
                                     name="trauma-splint-qty"
@@ -154,7 +163,9 @@ import { inputStyle } from '../components/form/Input.astro'
                         </div>
                     </div>
                     <div class="form-group message">
+                        <label for="message" class="sr-only">Message</label>
                         <textarea
+                            id="message"
                             name="message"
                             cols="50"
                             rows="3"
@@ -167,18 +178,19 @@ import { inputStyle } from '../components/form/Input.astro'
                             <div class="checkbox-edge">
                                 <input
                                     class={inputStyle}
+                                    id="opt-out"
                                     name="opt-out"
                                     type="checkbox"
                                 />
                             </div>
-                            <label>Opt out of all newsletters.</label>
+                            <label for="opt-out">Opt out of all newsletters.</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <button
                             type="submit"
                             value="send"
-                            class="explore contact-form-submit bg-primary"
+                            class="bg-primary contact-form-submit explore"
                             >Send</button
                         >
                     </div>

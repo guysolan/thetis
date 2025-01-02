@@ -119,7 +119,6 @@
   /* Legacy iOS */
 }
 
-/* raleway-600 - latin */
 @font-face {
   font-family: 'Raleway';
   font-style: normal;
@@ -2011,6 +2010,18 @@ a.evidence.article.explore {
 
 .questions {
   width: 20vw;
+  margin-top: 1rem;
+}
+
+.questions h1 {
+  font-size: 2rem;
+}
+
+.questions h2,
+.answers h2 {
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
 }
 
 .questions h3 {

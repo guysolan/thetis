@@ -2,7 +2,6 @@
 import { cn } from "@thetis/ui/cn";
 import Layout from "@/layouts/Layout.astro";
 import { ClientRouter } from "astro:transitions";
-import Testimonials from "@/components/testimonials/Testimonials.astro";
 import Slide from "@/components/Slide.astro";
 import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
 import EmailCTA from "@/components/CTA/EmailCTA.astro";
@@ -19,7 +18,8 @@ import NightSplintUsage from "@/components/products/night-splint/NightSplintUsag
 import NightSplintProsCons from "@/components/products/night-splint/NightSplintProsCons.astro";
 import NightSplintInstructions from "@/components/products/night-splint/night-splint-instructions/index.astro";
 import NightSplintHero from '../components/products/night-splint/NightSplintHero.astro';
-import TestimonialsCarousel from '@/components/testimonials/TestimonialsCarousel.tsx'
+import TestimonialsCarousel from '@/components/reviews/TestimonialsCarousel'
+import ReviewByType from '../components/reviews/ReviewsByType';
 ---
 
 <Fragment slot="head">
@@ -46,7 +46,7 @@ import TestimonialsCarousel from '@/components/testimonials/TestimonialsCarousel
                 <h2 class="mb-6 font-semibold text-3xl">Ready for More Comfortable Recovery?</h2>
                 <p class="mb-8 text-gray-700 text-xl">Join thousands of patients who've improved their recovery experience</p>
                 <Reviews client:load/>
-                <a href="#more-reviews" class={cn(buttonVariants({ variant: 'outline', size: 'lg' }))} >More Testimonials</a>
+                <!-- <FilterByReview client:load/> -->
             </div>
         </section>
        
@@ -60,8 +60,6 @@ import TestimonialsCarousel from '@/components/testimonials/TestimonialsCarousel
             <div class="h-6"></div>
             <SizeChart />
         </Slide>
-
-        <!-- Downloads -->
 
         <Slide title="Downloads">
             <DownloadList
@@ -79,13 +77,13 @@ import TestimonialsCarousel from '@/components/testimonials/TestimonialsCarousel
             />
         </Slide>
 
-        <ReviewsMasonry client:load/>
+        <!-- <ReviewsMasonry client:load/> -->
 
-        <p>Our Athletes Recover Well Rested</p>
-        <TestimonialsCarousel/>
+        <!-- <TestimonialsCarousel/> -->
 
-        <p>Trusted by Professionals</p>
-        <Testimonials />
+        <!-- <Testimonials /> -->
+
+        <!-- <ReviewByType client:load/> -->
 
         <EmailCTA
         title="Sound Interesting?"

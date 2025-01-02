@@ -1,4 +1,6 @@
 ---
+import { cn } from "@/lib/utils";
+
 export interface Props {
     color: string
     style?: string
@@ -8,7 +10,7 @@ const { color, style } = Astro.props
 ---
 
 <svg
-    class={style}
+    class={cn('stroke-black fill-black dark:stroke-white dark:fill-white', style)}
     width="256"
     height="238"
     viewBox="0 0 256 238"

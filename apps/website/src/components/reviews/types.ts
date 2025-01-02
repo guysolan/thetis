@@ -1,8 +1,12 @@
 export interface Review {
-    stars: number;
-    body: string;
     name: string;
+    description?: string;
+    date?: string;
+    image?: ImageMetadata;
+    stars?: number;
     title: string;
-    date: string;
+    body: string;
+    short?: string;
     is_pinned?: boolean;
+    country: "US" | "CA" | "GB" | "DE" | "IT" | "FR";
 }

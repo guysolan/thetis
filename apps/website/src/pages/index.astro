@@ -6,8 +6,9 @@ import Reviews from "@/components/reviews/InfiniteReviews.astro";
 import EmailCTA from "@/components/CTA/EmailCTA.astro";
 import "@thetis/ui/globals.css";
 import ProductTimeline from "@/components/ProductTimeline.astro";
-import ProfessionalOpinionsCarousel from "@/components/testimonials/ProfessionalOpinionsCarousel";
+import ProfessionalOpinionsCarousel from "@/components/reviews/ProfessionalOpinionsCarousel";
 import ComplianceLogos from "../components/compliance/ComplianceLogos.astro";
+import BuyNightSplintPopup from '../components/BuyNightSplintPopup';
 ---
 
 <ThetisSchema slot="head" />
@@ -19,7 +20,7 @@ import ComplianceLogos from "../components/compliance/ComplianceLogos.astro";
     image="https://thetismedical.com/images/night-splint.png"
 >
   
-    <main  class="flex flex-col justify-center items-center bg-black dark:bg-black mx-auto w-full">
+    <main  class="flex flex-col justify-center items-center bg-white dark:bg-black mx-auto w-full">
        
         <LandingHero />
 
@@ -36,10 +37,14 @@ import ComplianceLogos from "../components/compliance/ComplianceLogos.astro";
             paragraph="Speak to us to allow you, your loved ones or your patients to recover in comfort"
         />
 
+        <div class="h-24"/>
+
 
         <!-- <NightSplintCarousel client:load/> -->
+
         <!-- <Testimonials /> -->
-        <ProfessionalOpinionsCarousel client:load />
+
+        <!-- <ProfessionalOpinionsCarousel client:load /> -->
        
     </main>
 </Layout>

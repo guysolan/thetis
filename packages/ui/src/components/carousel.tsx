@@ -184,7 +184,7 @@ const CarouselItem = React.forwardRef<
       aria-roledescription="slide"
       className={cn(
         "min-w-0 shrink-0 grow-0 basis-full",
-        orientation === "horizontal" ? "pl-4" : "pt-4",
+        orientation === "horizontal" ? "" : "pt-4",
         className,
       )}
       {...props}
@@ -196,7 +196,7 @@ CarouselItem.displayName = "CarouselItem";
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+>(({ className, variant = "ghost", size = "icon", ...props }, ref) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
@@ -225,7 +225,7 @@ CarouselPrevious.displayName = "CarouselPrevious";
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+>(({ className, variant = "ghost", size = "icon", ...props }, ref) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
@@ -249,6 +249,50 @@ const CarouselNext = React.forwardRef<
 });
 CarouselNext.displayName = "CarouselNext";
 
+const CarouselDots = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const { api } = useCarousel();
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([]);
+
+  React.useEffect(() => {
+    if (!api) return;
+
+    setScrollSnaps(api.scrollSnapList());
+    setSelectedIndex(api.selectedScrollSnap());
+
+    api.on("select", () => {
+      setSelectedIndex(api.selectedScrollSnap());
+    });
+  }, [api]);
+
+  return (
+    <div
+      ref={ref}
+      className={cn("flex gap-2 justify-center py-2", className)}
+      {...props}
+    >
+      {scrollSnaps.map((_, index) => (
+        <button
+          type="button"
+          key={`dot-${index}`}
+          className={cn(
+            "w-3 h-3 rounded-full transition-colors",
+            selectedIndex === index
+              ? "bg-black"
+              : "bg-white border border-black",
+          )}
+          onClick={() => api?.scrollTo(index)}
+          aria-label={`Go to slide ${index + 1}`}
+        />
+      ))}
+    </div>
+  );
+});
+CarouselDots.displayName = "CarouselDots";
+
 export {
   type CarouselApi,
   Carousel,
@@ -256,4 +300,5 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  CarouselDots,
 };

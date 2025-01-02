@@ -17,13 +17,17 @@ import traumaSplintImage from "@/components/products/images/trauma-splint/trauma
 
 ("use client");
 
+const contentWidth = "min-w-[800px]";
+
 function DesktopNav() {
   return (
     <NavigationMenu>
-      <NavigationMenuList>
+      <NavigationMenuList className={cn("justify-end", contentWidth)}>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Products</NavigationMenuTrigger>
-          <NavigationMenuContent className="flex flex-row gap-6 p-6 w-[600px]">
+          <NavigationMenuContent
+            className={cn("flex flex-row gap-6 p-6", contentWidth)}
+          >
             <ProductCard
               title="Night Splint"
               description="Sleep comfortably while your achilles rupture heals."
@@ -46,23 +50,27 @@ function DesktopNav() {
             </NavigationMenuLink>
           </a>
         </NavigationMenuItem>
-        <NavigationMenuItem>
+        {/* <NavigationMenuItem>
           <a href="/testimonials">
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Testimonials
             </NavigationMenuLink>
           </a>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
         <NavigationMenuItem>
           <NavigationMenuTrigger>Patient Guides</NavigationMenuTrigger>
-          <NavigationMenuContent className="p-4 md:w-screen-md lg:w-screen-xl md:max-w-screen-md lg:max-w-screen-2xl">
+          <NavigationMenuContent
+            className={cn("grid grid-cols-2 p-4", contentWidth)}
+          >
             {articles.map((article) => (
               <ListItem
                 key={article.href}
                 title={article.title}
                 href={article.href}
               >
-                <p className="line-clamp-2 text-sm">{article.description}</p>
+                <p className="line-clamp-2 text-sm dark:text-neutral-200">
+                  {article.description}
+                </p>
 
                 <div className="flex flex-wrap gap-1 pt-2">
                   {article.tags.map((tag) => {
@@ -108,7 +116,7 @@ const ListItem = React.forwardRef<
         )}
         {...props}
       >
-        <div className="line-clamp-2 font-medium text-base leading-none">
+        <div className="line-clamp-2 font-medium text-base dark:text-neutral-50 leading-none">
           {title}
         </div>
         <p className="line-clamp-2 text-muted-foreground text-sm leading-snug">

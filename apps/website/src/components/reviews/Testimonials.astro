@@ -1,5 +1,5 @@
 ---
-import { testimonials } from "./testimonials.ts";
+import { clinicians } from "./content/clinicians";
 import Testimonial from "./Testimonial.astro";
 import Slide from "@/components/Slide.astro";
 ---
@@ -7,13 +7,13 @@ import Slide from "@/components/Slide.astro";
 <Slide title="A Professional's Perspective" id="testimonials">
     <div id="more-reviews" />
     <div class="gap-4 gap-y-8 grid grid-cols-1 lg:grid-cols-2 mx-auto px-2">
-        {testimonials.map((testimonial) => (
+        {clinicians?.map((testimonial) => (
             <Testimonial
                 name={testimonial.name}
                 description={testimonial.description}
                 image={testimonial.image}
             >
-                "{testimonial.quote}"
+                "{testimonial.body}"
             </Testimonial>
         ))}
     </div>

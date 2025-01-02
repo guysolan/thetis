@@ -3,11 +3,9 @@ import Logo from "@/components/icons/Logo.astro";
 ---
 
 <a
-        class="flex flex-wrap justify-start items-center gap-x-1 lg:gap-x-2 hover:bg-neutral-100 p-2 rounded-md h-fit text-lg lg:text-xl"
-        href="/"
-    >
-         <Logo color="black" style="h-8 w-8" />
-
-        <span>Thetis Medical<sup class="translate-y-6 scale-60">&reg;</sup>
-        </span>
+    class="flex flex-wrap justify-start items-center gap-x-1 lg:gap-x-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 p-2 rounded-md h-fit text-lg lg:text-xl"
+    href="/"
+>
+    <Logo  style="h-8 w-8 dark:fill-white" />
+    <span class="dark:text-white">Thetis Medical<sup class="translate-y-6 scale-60">&reg;</sup></span>
 </a>

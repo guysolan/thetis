@@ -7,11 +7,12 @@ import { buttonVariants } from "@/components/ui/button";
 import AthletesBadges from "@/components/AthletesBadges.astro";
 const benefitsList = ["Clinically Proven", "NHS/FDA Approved", "Fast Delivery"];
 import HighlightedWord from "@/components/HighlightedWord.tsx";
-import BuyModal from "@/components/BuyModal.astro";
 import HoverImageLink from "../components/HoverImageLink.astro";
+import BuyNightSplintPopup from "@/components/BuyNightSplintPopup.tsx";
+import BuyNightSplintDialog from "@/components/BuyNightSplintDialog.tsx";
 ---
 
- <div class="relative bg-gradient-to-b from-primary/25 to-white dark:to-black pt-16 w-full">
+ <div class="bg-gradient-to-b from-primary/25 to-white dark:to-black pt-16 w-full">
           
             <div class="mx-auto px-4 container">
                 
@@ -19,7 +20,7 @@ import HoverImageLink from "../components/HoverImageLink.astro";
                     <div class="space-y-6 lg:pr-16 md:w-1/2 lg:w-7/12">
                    
                    
-                        <h1 class="font-semibold text-neutral-950 sm:text-3xl md:text-6xl dark:text-neutral-50 leading-[105%]">
+                        <h1 class="font-semibold text-4xl text-neutral-950 md:text-6xl dark:text-neutral-50 leading-[105%]">
                             <HighlightedWord>Better Recovery</HighlightedWord> for Achilles Tendon Rupture
                         </h1>
 
@@ -28,6 +29,8 @@ import HoverImageLink from "../components/HoverImageLink.astro";
                             Experience breakthrough comfort and proven outcomes with our innovative Achilles splints - 
                             trusted by leading healthcare professionals worldwide.
                         </p>
+
+                        <!-- SMALL SCREENS ONLY -->
                         <div class='block relative md:hidden'>
                          <Image 
                             src={NightSplintImage} 
@@ -35,12 +38,13 @@ import HoverImageLink from "../components/HoverImageLink.astro";
                             class="group-hover:scale-[102%] group-hover:brightness-[0.85] shadow-lg hover:shadow-2xl rounded-xl transition-all duration-300" 
                         />
                         <div class='bottom-4 left-4 absolute'>
-                        <BuyModal />
+                        <BuyNightSplintPopup client:load />
                         </div>
                         </div>
                         
+                        <!-- LARGE SCREENS ONLY -->
                         <div class="md:flex sm:flex-row flex-col gap-4 hidden pt-4">
-                            <BuyModal />
+                        <BuyNightSplintDialog client:load />
                             <a href="/night-splint" 
                                class={cn(buttonVariants({ size: 'lg', variant: 'outline' }), 
                                'w-full sm:w-auto text-center')}>
@@ -71,7 +75,7 @@ import HoverImageLink from "../components/HoverImageLink.astro";
     description="Sleep comfortably while your achilles rupture heals."
     linkText="Order Now"
     linkHref="/night-splint"
-    className="md:block relative hidden md:w-1/2 lg:w-5/12" // optional
+    className="md:block relative hidden md:w-1/2 lg:w-5/12"
 />
                 </div>
             </div>

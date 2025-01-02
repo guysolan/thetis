@@ -5,6 +5,7 @@ const {
 } = require("tailwindcss/lib/util/flattenColorPalette");
 
 export default {
+  darkMode: "class",
   theme: {
     container: {
       center: true,

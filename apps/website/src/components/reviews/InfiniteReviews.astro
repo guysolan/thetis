@@ -1,12 +1,12 @@
 ---
 import { InfiniteMovingCards } from "@thetis/ui/infinite-moving-cards";
 
-import reviews from "./reviews.json";
+import {patients} from "./content/patients";
 ---
 
 <div class="relative left-0 flex flex-col justify-center items-center py-8 rounded-md w-[100vw] antialiased overflow-hidden">
   <InfiniteMovingCards
-    items={reviews
+    items={patients
       .filter((review) => review.is_pinned)
       .sort(() => Math.random() - 0.5)}
     direction="right"

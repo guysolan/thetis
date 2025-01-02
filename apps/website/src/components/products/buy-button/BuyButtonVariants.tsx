@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ShopifyBuyButton from "./ShopifyBuyButton";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Info } from "lucide-react";
-import SizeChart from "../../SizeChart.tsx";
-import {
-  Popover,
-  PopoverAnchor,
-  PopoverContent,
-  PopoverTrigger,
-} from "@thetis/ui/popover";
-import { cn } from "../../../lib/utils.ts";
+import { Button } from "@/components/ui/button";
+import WhatSizeAmI from "../../WhatSizeAmI.tsx";
 interface BuyButtonVariantsProps {
   productId?: string;
   className?: string;
@@ -22,9 +14,10 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
   productId = "8572432253256",
   className = "",
 }) => {
-  const [currentSize, setCurrentSize] = useState<Size | undefined>(undefined);
-  const [currentSide, setCurrentSide] = useState<Side | undefined>(undefined);
-  const [key, setKey] = useState(0);
+  const [currentSize, setCurrentSize] = useState<Size>("large");
+  const [currentSide, setCurrentSide] = useState<Side>("left");
+  const [key, setKey] = useState(() => Date.now());
+  const [isInitialRender, setIsInitialRender] = useState(true);
 
   const variantIds = {
     "large-left": "47494539673928",
@@ -34,6 +27,10 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
   } as const;
 
   useEffect(() => {
+    if (isInitialRender) {
+      setIsInitialRender(false);
+      return;
+    }
     setKey((prevKey) => prevKey + 1);
   }, [currentSize, currentSide]);
 
@@ -45,26 +42,9 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
   const isSelectionComplete = currentSize && currentSide;
 
   return (
-    <div className={`text-left flex flex-col gap-4 ${className}`}>
-      <div className="flex flex-col justify-start items-start my-4">
-        <div className="flex flex-row justify-between items-center my-4 w-full">
-          <h3 className="font-semibold text-left text-lg">
-            Choose Your Options
-          </h3>
-          <Popover>
-            <PopoverTrigger
-              className={cn(
-                buttonVariants({ variant: "secondary" }),
-                "flex flex-row items-center gap-2",
-              )}
-            >
-              Size Guide <Info />
-            </PopoverTrigger>
-            <PopoverContent className="p-0 min-w-96">
-              <SizeChart />
-            </PopoverContent>
-          </Popover>
-        </div>
+    <div className={`text-left w-full flex flex-col ${className}`}>
+      <div className="flex flex-col justify-start items-start my-4 w-full">
+        <h3 className="font-semibold text-left text-lg">Choose Your Options</h3>
         <div className="space-y-4 w-full">
           <div className="flex flex-col justify-start items-start space-y-2">
             <label className="font-semibold text-base text-left text-neutral-600">
@@ -114,8 +94,8 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
         </div>
       </div>
 
-      <div className="h-24">
-        {isSelectionComplete && (
+      <div className="mb-8 h-16">
+        {isSelectionComplete ? (
           <div className="relative flex-col justify-start items-start mx-0 w-fit">
             <ShopifyBuyButton
               key={key}
@@ -125,8 +105,13 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
               size={currentSize}
             />
           </div>
+        ) : (
+          <div className="text-neutral-600 italic">
+            Please select both a size and side to continue
+          </div>
         )}
       </div>
+      <WhatSizeAmI />
     </div>
   );
 };

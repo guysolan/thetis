@@ -25,8 +25,8 @@ import ShopifyBuyButton2 from "../components/ShopifyBuyButton2.astro";
 <!DOCTYPE html>
 <html lang="en">
     <head>
+       <meta charset="UTF-8">
         <GoogleTagHead />
-        
         <BaseHead title={title} description={description} image={image} />
         <slot name="head" />
     </head>
@@ -47,10 +47,15 @@ import ShopifyBuyButton2 from "../components/ShopifyBuyButton2.astro";
             src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
         ></script>
 
-        <script is:inline>
-          const theme = localStorage.getItem('theme') || 'theme-light';
-          const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: light)').matches);
-          document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
-        </script>
+   <script>
+      if (
+        localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
     </body>
 </html>
