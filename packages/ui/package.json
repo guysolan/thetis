@@ -32,6 +32,7 @@
     "./popover": "./src/components/popover.tsx",
     "./input": "./src/components/input.tsx",
     "./tooltip": "./src/components/tooltip.tsx",
+    "./sonner": "./src/components/sonner.tsx",
     "./dialog": "./src/components/dialog.tsx",
     "./password-input": "./src/components/password-input.tsx",
     "./phone-input": "./src/components/phone-input.tsx",

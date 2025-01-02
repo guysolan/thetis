@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import Article from '@/components/Article.astro'
+import Article from '@/components/blog/Article.astro'
 import Subscribe from '@/components/Subscribe.astro'
 ---
 
@@ -11,7 +11,7 @@ import Subscribe from '@/components/Subscribe.astro'
 >
     <main data-barba="container" data-barba-namespace="home">
         <Article title="Achilles Rupture Recovery Pathway" />
-        <section id="pathway-slide" class="slide pathway-info">
+        <section id="pathway-slide" class="pathway-info slide">
             <h2>Your Recovery from Achilles Tendon Rupture</h2>
             <p>
                 If you are reading this, then you have almost certainly suffered
@@ -122,7 +122,7 @@ import Subscribe from '@/components/Subscribe.astro'
                 </b>
             </div>
         </section>
-        <section class="snakes-and-ladders pathway">
+        <section class="pathway snakes-and-ladders">
             <h2>A Game of Snakes and Ladders</h2>
             <h3>Toes down at all times, day and night, 24/7</h3>
             <p>
@@ -143,7 +143,7 @@ import Subscribe from '@/components/Subscribe.astro'
             tip toe position e.g. when boot off for washing.
         </p>
     </main>
-    <section class="slide col downloads">
+    <section class="col downloads slide">
         <div class="slide-title">
             <div class="divider"></div>
             <h2>Downloads</h2>
@@ -151,7 +151,7 @@ import Subscribe from '@/components/Subscribe.astro'
         </div>
         <div class="downloads-wrap">
             <h2>Information for Patients</h2>
-            <ul class="intro large download">
+            <ul class="download intro large">
                 <li>
                     <a
                         href="/images/documents/Achilles Rupture Information Sheet.pdf"
@@ -169,10 +169,10 @@ import Subscribe from '@/components/Subscribe.astro'
             </ul>
         </div>
     </section>
-    <section class="slide col">
+    <section class="col slide">
         <h2>Check out our night splint to improve sleep during recovery:</h2>
-        <div class="other-articles btn">
-            <a href="../night-splint" class="explore article-to-night-splint"
+        <div class="btn other-articles">
+            <a href="../night-splint" class="article-to-night-splint explore"
                 >Achilles Rupture Night Splint</a
             >
         </div>
