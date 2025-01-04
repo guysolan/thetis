@@ -9,14 +9,14 @@ import {
   CardTitle,
 } from "@thetis/ui/card";
 import { DollarSign, Euro, FolderArchive, FolderOpen } from "lucide-react";
-import { useDownloadFolder } from "@/features/amazon/api/useDownloadFolder";
-import { useAmazonReports } from "../../features/amazon/api/selectSavedReports";
-import AmazonReportById from "../../features/amazon/components/AmazonReportById";
+import { useDownloadFolder } from "@/api/useDownloadFolder";
+import { useAmazonReportsFromDb } from "../../api/selectAmazonReportsFromDb";
+import AmazonReportById from "../../components/AmazonReportById";
 import { FilePreview } from "../../components/FilePreview";
-import { useDownloadFile } from "../../features/amazon/api/useDownloadFile";
+import { useDownloadFile } from "../../api/useDownloadFile";
 
 const AmazonFinancialReports = () => {
-  const { data: amazonReports } = useAmazonReports();
+  const { data: amazonReports } = useAmazonReportsFromDb();
   const { mutate: downloadFile } = useDownloadFile();
 
   return (

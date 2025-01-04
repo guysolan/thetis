@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
-import { useAmazonFinances } from "@/features/amazon/api/selectAmazonFinances";
+import { useAmazonFinances } from "@/api/selectAmazonFinances";
 import {
   Table,
   TableBody,

@@ -1,9 +1,0 @@
-{
-  "imports": {
-    "google": "npm:googleapis",
-    "dayjs": "npm:dayjs",
-    "std/": "https://deno.land/std@0.208.0/",
-    "std/testing/": "https://deno.land/std@0.208.0/testing/",
-    "http/": "https://deno.land/std@0.208.0/http/"
-  }
-}
