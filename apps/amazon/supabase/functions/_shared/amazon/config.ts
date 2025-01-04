@@ -1,42 +1,62 @@
 export async function getAccessToken(region: "NA" | "EUR"): Promise<string> {
-    const refreshToken = Deno.env.get(`SP_API_${region}`) as string;
-    const clientId = Deno.env.get(`SP_CLIENT_ID`) as string;
-    const clientSecret = Deno.env.get(`SP_CLIENT_SECRET`) as string;
+    const refreshToken = Deno.env.get(`SP_API_${region}`);
+    const clientId = Deno.env.get(`SP_CLIENT_ID`);
+    const clientSecret = Deno.env.get(`SP_CLIENT_SECRET`);
 
-    console.log(refreshToken, clientId, clientSecret);
-    const response = await fetch(
-        "https://api.amazon.com/auth/o2/token",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type":
-                    "application/x-www-form-urlencoded;charset=UTF-8",
-            },
-            body: new URLSearchParams({
-                grant_type: "refresh_token",
-                refresh_token: refreshToken,
-                client_id: clientId,
-                client_secret: clientSecret,
-            }),
-        },
-    );
+    // Check if any required env vars are missing
+    const missingVars = [];
+    if (!refreshToken) missingVars.push(`SP_API_${region}`);
+    if (!clientId) missingVars.push("SP_CLIENT_ID");
+    if (!clientSecret) missingVars.push("SP_CLIENT_SECRET");
 
-    const data = await response.json();
-
-    if (!response.ok) {
-        console.error("Error getting access token:", data);
+    if (missingVars.length > 0) {
+        console.error("Missing environment variables:", missingVars);
         throw new Error(
-            `Failed to get access token: ${
-                data.error_description || data.error || "Unknown error"
-            }`,
+            `Missing required environment variables: ${missingVars.join(", ")}`,
         );
     }
 
-    if (!data.access_token) {
-        throw new Error("Access token not found in response");
-    }
+    console.log(refreshToken, clientId, clientSecret);
+    try {
+        const response = await fetch(
+            "https://api.amazon.com/auth/o2/token",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                        "application/x-www-form-urlencoded;charset=UTF-8",
+                },
+                body: new URLSearchParams({
+                    grant_type: "refresh_token",
+                    refresh_token: refreshToken,
+                    client_id: clientId,
+                    client_secret: clientSecret,
+                }),
+            },
+        );
 
-    return data.access_token;
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error("Error getting access token:", data);
+            throw new Error(
+                `Failed to get access token: ${
+                    data.error_description || data.error || "Unknown error"
+                }`,
+            );
+        }
+
+        if (!data.access_token) {
+            throw new Error("Access token not found in response");
+        }
+
+        return data.access_token;
+    } catch (error) {
+        console.error("Network error while getting access token:", error);
+        throw new Error(
+            `Failed to connect to Amazon auth service: ${error.message}`,
+        );
+    }
 }
 
 export async function callSellingPartnerAPI(
@@ -53,23 +73,36 @@ export async function callSellingPartnerAPI(
         url.searchParams.append(key, value);
     });
 
-    const response = await fetch(url.toString(), {
-        method,
-        headers: {
-            "host": new URL(baseUrl).host,
-            "user-agent":
-                "My Selling Tool/1.0 (Language=TypeScript; Platform=Deno)",
-            "x-amz-access-token": accessToken,
-            "x-amz-date": new Date().toISOString().replace(/[:-]|\.\d{3}/g, ""),
-        },
-    });
+    try {
+        const response = await fetch(url.toString(), {
+            method,
+            headers: {
+                "host": new URL(baseUrl).host,
+                "user-agent":
+                    "My Selling Tool/1.0 (Language=TypeScript; Platform=Deno)",
+                "x-amz-access-token": accessToken,
+                "x-amz-date": new Date().toISOString().replace(
+                    /[:-]|\.\d{3}/g,
+                    "",
+                ),
+            },
+        });
 
-    const responseData = await response.json();
+        const responseData = await response.json();
 
-    if (responseData.errors) {
-        console.error(responseData.errors);
-        throw responseData.errors;
+        if (responseData.errors) {
+            console.error(responseData.errors);
+            throw responseData.errors;
+        }
+
+        return responseData;
+    } catch (error) {
+        console.error(
+            "Network error while calling Selling Partner API:",
+            error,
+        );
+        throw new Error(
+            `Failed to connect to Amazon Selling Partner API: ${error.message}`,
+        );
     }
-
-    return responseData;
 }

@@ -23,9 +23,7 @@ serve(async (req) => {
         const { report, region, country } = body;
 
         const { csvData, summary } = await getAmazonReportById(
-            region,
-            country,
-            report.reportDocumentId,
+            { region: region, reportId: report.report_document_id },
         );
 
         const reportId = report.reportId;

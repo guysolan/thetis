@@ -68,7 +68,7 @@ function getAmountByField(
     data: AmazonSettlementRecord[],
     field: keyof AmazonSettlementRecord,
     matchValue: string,
-): number {
+): number | null {
     let v_totalAmount = 0;
 
     for (const record of data) {
@@ -80,7 +80,8 @@ function getAmountByField(
         }
     }
 
-    return v_totalAmount;
+    // Return null if the total amount is not a valid number
+    return Number.isFinite(v_totalAmount) ? v_totalAmount : null;
 }
 
 function getCurrency(data: AmazonSettlementRecord[]): string {

@@ -13,14 +13,13 @@ export const processAmazonReport = async (report: string) => {
 
 type AmazonReportById = {
     region: string;
-    country: string;
     reportId: string;
 };
 
 export const getAmazonReportById = async (
     props: AmazonReportById,
 ) => {
-    const { region, country, reportId } = props;
+    const { region, reportId } = props;
 
     const report = await getReportDocument(region as "NA" | "EUR", reportId);
     const { csvData, jsonData, summary } = await processAmazonReport(report);
@@ -38,7 +37,7 @@ const getMarketplaceByName = (name: string) => {
         m.country.toLowerCase() === name.toLowerCase()
     );
     if (!marketplace) {
-        throw new Error(`No marketplace found for country: ${name}`);
+        console.error(`No marketplace found for country: ${name}`);
     }
     return marketplace;
 };
