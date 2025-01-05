@@ -21,6 +21,7 @@ import {
 } from "@thetis/ui/form";
 import { Input } from "@thetis/ui/input";
 import { useEmailAmazonReport } from "../api/emailReport";
+import { Mail } from "lucide-react";
 // Form schema
 const emailFormSchema = z.object({
   path: z.string(),
@@ -35,7 +36,7 @@ interface EmailReportDialogProps {
   reportDate: string;
 }
 
-export function EailPdfDialog({ path, reportDate }: EmailReportDialogProps) {
+export function EmailPdfDialog({ path, reportDate }: EmailReportDialogProps) {
   // Initialize form
   const form = useForm<EmailFormValue>({
     resolver: zodResolver(emailFormSchema),
@@ -56,7 +57,9 @@ export function EailPdfDialog({ path, reportDate }: EmailReportDialogProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Email Report</Button>
+        <Button size="icon" variant="outline">
+          <Mail size={16} />
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -92,4 +95,4 @@ export function EailPdfDialog({ path, reportDate }: EmailReportDialogProps) {
   );
 }
 
-export default EailPdfDialog;
+export default EmailPdfDialog;

@@ -69,8 +69,11 @@ const WhatSizeAmI = () => {
       className="mx-auto border-t w-full max-w-md"
     >
       <AccordionItem value="size-calculator">
-        <AccordionTrigger className="font-medium text-md">
-          What Size am I?
+        <AccordionTrigger className="[&_svg]:hidden font-medium text-md">
+          <div className="flex flex-row justify-between items-center w-full">
+            <p className="font-semibold text-lg">Choose your Options</p>
+            <p className="text-neutral-600 text-sm">What Size am I?</p>
+          </div>
         </AccordionTrigger>
         <AccordionContent>
           <div className="space-y-6 p-2">
@@ -79,8 +82,8 @@ const WhatSizeAmI = () => {
                 value={sizeType}
                 onValueChange={(value) => setSizeType(value as SizeType)}
               >
-                <SelectTrigger className="w-2/3">
-                  <SelectValue placeholder="Select size type" />
+                <SelectTrigger className="w-1/3">
+                  <SelectValue placeholder="Select Metric" />
                 </SelectTrigger>
                 <SelectContent>
                   {sizeTypes.map((type) => (
@@ -92,19 +95,19 @@ const WhatSizeAmI = () => {
               </Select>
 
               <Input
-                className="w-1/3"
+                className="w-2/3"
                 type="number"
                 step={sizeGuide
                   .find((g) => g.metric === sizeType)
                   ?.step.toString()}
                 value={size}
                 onChange={handleSizeChange}
-                placeholder={`Enter ${sizeType} size`}
+                placeholder={"Enter size"}
               />
             </div>
 
             {size && isValidSize(size) && (
-              <div className="bg-muted p-4 rounded-lg font-medium text-center text-lg">
+              <div className="border-2 border-primary bg-primary/10 p-4 rounded-lg font-medium text-center text-lg">
                 Your size is:{" "}
                 {getSizeCategory(sizeType, Number.parseFloat(size))}
               </div>

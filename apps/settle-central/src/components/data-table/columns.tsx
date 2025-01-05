@@ -1,9 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Save, Trash2, FileText, FileSpreadsheet } from "lucide-react";
+import { FileText, FileSpreadsheet } from "lucide-react";
 import { Button } from "@thetis/ui/button";
 import SaveOrDeleteReport from "./save-or-delete-report";
 import { FilePreview } from "../FilePreview";
 import dayjs from "dayjs";
+import EmailPdfDialog from "../EmailPdfDialog";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type AmazonReport = {
@@ -22,6 +23,19 @@ export type AmazonReport = {
 };
 
 export const columns: ColumnDef<AmazonReport>[] = [
+  {
+    id: "actions",
+    header: "Actions",
+    cell: ({ row }) => {
+      const report = row.original;
+      return (
+        <SaveOrDeleteReport
+          report={row.original}
+          region={row.original.region}
+        />
+      );
+    },
+  },
   {
     accessorKey: "preview",
     header: "Preview",
@@ -114,14 +128,15 @@ export const columns: ColumnDef<AmazonReport>[] = [
     },
   },
   {
-    id: "actions",
-    header: "Actions",
+    id: "email",
+    header: "Email",
     cell: ({ row }) => {
-      const report = row.original;
+      const storagePath = row.original.storage_path;
+      const depositDate = row.original.deposit_date;
       return (
-        <SaveOrDeleteReport
-          report={row.original}
-          region={row.original.region}
+        <EmailPdfDialog
+          path={storagePath}
+          reportDate={dayjs(depositDate).format("YYYY-MM-DD")}
         />
       );
     },

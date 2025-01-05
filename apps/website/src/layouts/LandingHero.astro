@@ -10,6 +10,7 @@ import HighlightedWord from "@/components/HighlightedWord.tsx";
 import HoverImageLink from "../components/HoverImageLink.astro";
 import BuyNightSplintPopup from "@/components/BuyNightSplintPopup.tsx";
 import BuyNightSplintDialog from "@/components/BuyNightSplintDialog.tsx";
+import BuyModal from '../components/BuyModal';
 ---
 
  <div class="bg-gradient-to-b from-primary/25 to-white dark:to-black pt-16 w-full">
@@ -44,11 +45,11 @@ import BuyNightSplintDialog from "@/components/BuyNightSplintDialog.tsx";
                         
                         <!-- LARGE SCREENS ONLY -->
                         <div class="md:flex sm:flex-row flex-col gap-4 hidden pt-4">
-                        <BuyNightSplintDialog client:load />
+                        <BuyModal client:load/>
                             <a href="/night-splint" 
                                class={cn(buttonVariants({ size: 'lg', variant: 'outline' }), 
                                'w-full sm:w-auto text-center')}>
-                                Learn More
+                                Buy in Bulk
                             </a>
                         </div>
 

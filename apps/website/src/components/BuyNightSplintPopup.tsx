@@ -1,8 +1,10 @@
 "use client";
 
 import { DrawerDialog, DrawerDialogContent } from "@thetis/ui/drawer-or-dialog";
-import BuyNightSplint from "./BuyNightSplint.tsx";
 import { Button } from "@/components/ui/button";
+import BulkOrders from "./buy-button/BulkOrders.tsx";
+import FreeAndSecure from "./buy-button/FreeAndSecure.tsx";
+import BuyButtonVariants from "./products/buy-button/BuyButtonVariants.tsx";
 
 export default function BuyNightSplintPopup() {
   return (
@@ -14,7 +16,12 @@ export default function BuyNightSplintPopup() {
       }
     >
       <DrawerDialogContent>
-        <BuyNightSplint showImage={false} />
+        <div className="space-y-4 w-full text-left">
+          <h3 className="font-semibold text-2xl lg:text-3xl">
+            Achilles Tendon Rupture Night Splint
+          </h3>
+          <BuyButtonVariants />
+        </div>
       </DrawerDialogContent>
     </DrawerDialog>
   );

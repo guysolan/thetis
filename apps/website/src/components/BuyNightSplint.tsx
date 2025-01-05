@@ -6,6 +6,8 @@ import nightSplint from "@/components/products/images/night-splint/night_splint_
 
 import { Button } from "@/components/ui/button";
 import { Shield, CheckCircle, ArrowRight } from "lucide-react";
+import BulkOrders from "./buy-button/BulkOrders";
+import FreeAndSecure from "./buy-button/FreeAndSecure";
 interface Props {
   showImage?: boolean;
 }
@@ -37,27 +39,10 @@ const BuyNightSplint: FC<Props> = ({ showImage = true }) => {
         <h3 className="font-semibold text-2xl lg:text-3xl">
           Achilles Tendon Rupture Night Splint
         </h3>
-        {/* <StarRating /> */}
-        {/* <StarRating /> */}
         <BuyButtonVariants />
         <div className="flex flex-col gap-4 md:gap-8">
-          <div className="justify-center gap-2 md:gap-4 grid grid-cols-2 text-primary text-sm">
-            <div className="flex justify-center md:justify-start items-center gap-2">
-              <CheckCircle size={20} />
-              <span className="text-left text-neutral-800">Free Shipping</span>
-            </div>
-            <div className="flex justify-center md:justify-start items-center gap-2">
-              <Shield size={20} />
-              <span className="text-left text-neutral-800">Secure Payment</span>
-            </div>
-          </div>
-
-          <Button asChild variant="ghost" size="lg">
-            <a className="flex flex-row items-center gap-2" href="/bulk-orders">
-              <span>Bulk Orders & Special Pricing</span>
-              <ArrowRight size={16} />
-            </a>
-          </Button>
+          <FreeAndSecure />
+          <BulkOrders />
         </div>
       </div>
     </div>

@@ -25,7 +25,7 @@ const SaveOrDeleteReport = ({
       {saved ? (
         <Button
           size="sm"
-          variant="outline"
+          variant="ghost"
           onClick={() => deleteReport({ reportId: report.reportId })}
         >
           <Trash2 size={16} className="mr-1" />
@@ -34,7 +34,7 @@ const SaveOrDeleteReport = ({
       ) : (
         <Button
           size="sm"
-          variant="outline"
+          variant="ghost"
           onClick={() => {
             saveReport({
               report: report,

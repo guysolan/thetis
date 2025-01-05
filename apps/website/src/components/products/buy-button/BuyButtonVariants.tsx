@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ShopifyBuyButton from "./ShopifyBuyButton";
 import { Button } from "@/components/ui/button";
-import WhatSizeAmI from "../../WhatSizeAmI.tsx";
+import WhatSizeAmI from "../../WhatSizeAmI";
 interface BuyButtonVariantsProps {
   productId?: string;
   className?: string;
@@ -14,8 +14,8 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
   productId = "8572432253256",
   className = "",
 }) => {
-  const [currentSize, setCurrentSize] = useState<Size>("large");
-  const [currentSide, setCurrentSide] = useState<Side>("left");
+  const [currentSize, setCurrentSize] = useState<Size | undefined>(undefined);
+  const [currentSide, setCurrentSide] = useState<Side | undefined>(undefined);
   const [key, setKey] = useState(() => Date.now());
   const [isInitialRender, setIsInitialRender] = useState(true);
 
@@ -34,9 +34,14 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
     setKey((prevKey) => prevKey + 1);
   }, [currentSize, currentSide]);
 
+  const getVariantKey = (size?: Size, side?: Side): string => {
+    if (!size || !side) return "";
+    return `${size}-${side}`;
+  };
+
   const getCurrentVariantId = () => {
-    const key = `${currentSize}-${currentSide}` as keyof typeof variantIds;
-    return variantIds[key];
+    const key = getVariantKey(currentSize, currentSide);
+    return key ? variantIds[key as keyof typeof variantIds] : undefined;
   };
 
   const isSelectionComplete = currentSize && currentSide;
@@ -44,7 +49,7 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
   return (
     <div className={`text-left w-full flex flex-col ${className}`}>
       <div className="flex flex-col justify-start items-start my-4 w-full">
-        <h3 className="font-semibold text-left text-lg">Choose Your Options</h3>
+        <WhatSizeAmI />
         <div className="space-y-4 w-full">
           <div className="flex flex-col justify-start items-start space-y-2">
             <label className="font-semibold text-base text-left text-neutral-600">
@@ -95,14 +100,14 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
       </div>
 
       <div className="mb-8 h-16">
-        {isSelectionComplete ? (
+        {isSelectionComplete && getCurrentVariantId() ? (
           <div className="relative flex-col justify-start items-start mx-0 w-fit">
             <ShopifyBuyButton
               key={key}
               productId={productId}
-              variantId={getCurrentVariantId()}
-              position={currentSide}
-              size={currentSize}
+              variantId={getCurrentVariantId() || ""}
+              position={currentSide || "left"}
+              size={currentSize || "small"}
             />
           </div>
         ) : (
@@ -111,7 +116,6 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
           </div>
         )}
       </div>
-      <WhatSizeAmI />
     </div>
   );
 };
