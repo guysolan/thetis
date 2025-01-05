@@ -111,8 +111,8 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
             />
           </div>
         ) : (
-          <div className="text-neutral-600 italic">
-            Please select both a size and side to continue
+          <div className="mt-4 font-medium text-lg text-neutral-700 italic">
+            Please select both a size and side
           </div>
         )}
       </div>

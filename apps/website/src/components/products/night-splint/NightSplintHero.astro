@@ -3,7 +3,7 @@ import HighlightedWord from '../../HighlightedWord';
 import BuyNightSplint from '../../BuyNightSplint.tsx';
 import BulkOrders from '../../buy-button/BulkOrders';
 import FreeAndSecure from '../../buy-button/FreeAndSecure';
-import BuyButtonVariants from '../buy-button/BuyButtonVariants';
+import BuyButtonVariants from '../buy-button/BuyButtonVariants.tsx';
 import { Image } from 'astro:assets';
 import nightSplint from "@/components/products/images/night-splint/night_splint_bed_top.jpg";
 
@@ -15,7 +15,7 @@ import nightSplint from "@/components/products/images/night-splint/night_splint_
             The <HighlightedWord>Only</HighlightedWord> Night Splint for Achilles Tendon <HighlightedWord>Rupture</HighlightedWord>
         </h1>
         <p class="mx-auto mb-8 max-w-3xl text-gray-700 text-xl">
-            Finally, a comfortable solution for nighttime recovery. Designed alongside surgeons to protect your healing Achilles while you rest.
+            Finally, a comfortable solution for night-time recovery. Designed alongside surgeons to protect your healing Achilles while you rest.
         </p>
            <div class="flex md:flex-row flex-col gap-4 md:gap-8 my-2">
           <Image
@@ -32,7 +32,7 @@ import nightSplint from "@/components/products/images/night-splint/night_splint_
         <BuyButtonVariants client:load />
         <div class="flex flex-col gap-4 md:gap-8">
           <FreeAndSecure />
-          <BulkOrders />
+          <BulkOrders  />
         </div>
       </div>
     </div>
