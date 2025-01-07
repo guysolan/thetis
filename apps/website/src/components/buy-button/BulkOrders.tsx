@@ -6,10 +6,10 @@ const BulkOrders = () => {
   return (
     <Button asChild variant="ghost" size="lg" className="mx-auto">
       <a className="flex flex-row items-center gap-2" href="/contact">
-        <span className="underline underline-offset-2">
+        <span className="text-base underline underline-offset-2">
           For Bulk Orders Click Here
         </span>
-        <ArrowRight size={16} />
+        <ArrowRight size={20} />
       </a>
     </Button>
   );

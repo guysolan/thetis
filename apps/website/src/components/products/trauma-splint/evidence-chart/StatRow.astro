@@ -1,0 +1,16 @@
+---
+interface Props {
+  label: string;
+  value: number;
+  unit?: string;
+}
+
+const { label, value, unit = 'days' } = Astro.props;
+---
+
+<div class="flex justify-between text-sm">
+  <span>{label}:</span>
+  <span class="font-medium">
+    {value} {unit}
+  </span>
+</div>

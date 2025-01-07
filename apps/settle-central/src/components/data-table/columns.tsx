@@ -1,10 +1,11 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { FileText, FileSpreadsheet } from "lucide-react";
+import { FileText, FileSpreadsheet, FolderDown } from "lucide-react";
 import { Button } from "@thetis/ui/button";
 import SaveOrDeleteReport from "./save-or-delete-report";
 import { FilePreview } from "../FilePreview";
 import dayjs from "dayjs";
 import EmailPdfDialog from "../EmailPdfDialog";
+import DownloadFolderButton from "./download-folder-button";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type AmazonReport = {
@@ -77,13 +78,6 @@ export const columns: ColumnDef<AmazonReport>[] = [
     },
   },
   {
-    accessorKey: "deposit_date",
-    header: "Deposit Date",
-    cell: ({ row }) => {
-      return dayjs(row.original.deposit_date).format("DD MMM YYYY");
-    },
-  },
-  {
     accessorKey: "currency",
     header: "Currency",
   },
@@ -124,6 +118,18 @@ export const columns: ColumnDef<AmazonReport>[] = [
         <Button disabled={!isSaved} variant="ghost" size="icon">
           <FileSpreadsheet className="w-4 h-4" />
         </Button>
+      );
+    },
+  },
+  {
+    id: "download",
+    header: "Download",
+    cell: ({ row }) => {
+      return (
+        <DownloadFolderButton
+          disabled={!row.original.is_saved}
+          storagePath={row.original.storage_path}
+        />
       );
     },
   },

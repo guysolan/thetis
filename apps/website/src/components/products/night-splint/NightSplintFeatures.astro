@@ -1,39 +1,59 @@
 ---
 import ListIcon from "@/components/ListIcon.astro";
+
+const features = [
+    {
+        title: "Specifically Designed for Achilles Rupture",
+        items: [
+            {
+                type: "positive",
+                text: "Maintains optimal 155° plantarflexed position for healing"
+            },
+            {
+                type: "positive",
+                text: "Patented design developed with orthopedic specialists"
+            },
+            {
+                type: "info",
+                text: "Not for tendinitis, plantar fasciitis, or broken bones"
+            }
+        ]
+    },
+    {
+        title: "Superior Comfort & Security",
+        items: [
+            {
+                type: "positive",
+                text: "Non-slip silicone straps for maximum comfort"
+            },
+            {
+                type: "positive",
+                text: "Innovative heel strap design avoids pressure on injury"
+            },
+            {
+                type: "positive",
+                text: "Breathable, lightweight alternative to bulky boots"
+            }
+        ]
+    }
+] as const;
 ---
 
 <section class="features-grid py-16">
-            <div class="mx-auto container">
-                <div class="gap-8 grid md:grid-cols-2">
-                    <div class="bg-white shadow-sm p-8 rounded-xl feature-card">
-                        <h3 class="mb-4 font-semibold text-2xl">Specifically Designed for Achilles Rupture</h3>
-                        <ul class="space-y-3">
-                            <ListIcon type="positive">
-                                Maintains optimal 155° plantarflexed position for healing
+    <div class="mx-auto px-4">
+        <div class="gap-16 grid md:grid-cols-2">
+            {features.map((feature) => (
+                <div class="bg-white md:p-4 lg:p-8 rounded-xl feature-card">
+                    <h3 class="mb-4 font-semibold text-2xl">{feature.title}</h3>
+                    <ul class="space-y-3">
+                        {feature.items.map((item) => (
+                            <ListIcon type={item.type}>
+                                {item.text}
                             </ListIcon>
-                            <ListIcon type="positive">
-                                Patented design developed with orthopedic specialists
-                            </ListIcon>
-                            <ListIcon type="info">
-                                Not for tendinitis, plantar fasciitis, or broken bones
-                            </ListIcon>
-                        </ul>
-                    </div>
-
-                    <div class="bg-white shadow-sm p-8 rounded-xl feature-card">
-                        <h3 class="mb-4 font-semibold text-2xl">Superior Comfort & Security</h3>
-                        <ul class="space-y-3">
-                            <ListIcon type="positive">
-                                Non-slip silicone straps for maximum comfort
-                            </ListIcon>
-                            <ListIcon type="positive">
-                                Innovative heel strap design avoids pressure on injury
-                            </ListIcon>
-                            <ListIcon type="positive">
-                                Breathable, lightweight alternative to bulky boots
-                            </ListIcon>
-                        </ul>
-                    </div>
+                        ))}
+                    </ul>
                 </div>
-            </div>
-        </section>
+            ))}
+        </div>
+    </div>
+</section>

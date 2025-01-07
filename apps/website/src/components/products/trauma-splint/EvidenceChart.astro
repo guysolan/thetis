@@ -1,0 +1,68 @@
+---
+const data = {
+  labels: ["Plaster Cast", "Thetis splint"],
+  datasets: [
+    {
+      label: "Mean Days A&E to Scan then Specialist",
+      data: [8.7, 2.9], // Mean Days
+    },
+    {
+      label: "Maximum Days A&E to Scan then Specialist",
+      data: [23, 6],
+    },
+  ],
+};
+---
+
+<div class="flex flex-col justify-center items-center">
+  <h2 class="mb-8 font-semibold text-3xl text-center">
+    Time from A&E to Scan & Specialist Review
+  </h2>
+
+  <div class="flex md:flex-row flex-col gap-4 md:gap-8 lg:gap-16 my-8">
+    <div class="space-y-8 w-full max-w-md">
+      {data.labels.map((label, index) => (
+        <div key={index} class="space-y-4">
+          <h3 class="font-semibold text-lg">{label}</h3>
+
+          {/* Mean Days */}
+          <div class="space-y-2">
+            <div class="flex justify-between text-sm">
+              <span>Mean Time:</span>
+              <span class="font-medium">
+                {data.datasets[0].data[index]} days
+              </span>
+            </div>
+            <div class="bg-gray-100 rounded-full w-full h-6 overflow-hidden">
+              <div
+                class={`h-full ${index === 0 ? "bg-primary/30" : "bg-primary/70"}`}
+                style={{
+                  width: `${(data.datasets[0].data[index] / 23) * 100}%`,
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Maximum Days */}
+          <div class="space-y-2">
+            <div class="flex justify-between text-sm">
+              <span>Maximum Time:</span>
+              <span class="font-medium">
+                {data.datasets[1].data[index]} days
+              </span>
+            </div>
+            <div class="bg-gray-100 rounded-full w-full h-6 overflow-hidden">
+              <div
+                class={`h-full ${index === 0 ? "bg-primary/30" : "bg-primary/70"}`}
+                style={{
+                  width: `${(data.datasets[1].data[index] / 23) * 100}%`,
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+

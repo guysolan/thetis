@@ -1,4 +1,5 @@
 import * as React from "react";
+import getUnicodeFlagIcon from "country-flag-icons/unicode";
 import StarIcon from "@thetis/ui/star";
 import {
   Card,
@@ -27,7 +28,7 @@ export default function ReviewCarousel() {
         loop: true,
       }}
     >
-      <div className="flex flex-row justify-center items-center w-full max-w-xl">
+      <div className="flex flex-row justify-center items-center w-full max-w-[90vw] md:max-w-xl">
         <CarouselPrevious className="relative bg-white dark:bg-black mr-4 px-2 py-1 rounded-md w-10 h-10" />
         <CarouselContent className="w-full">
           {reviews
@@ -35,7 +36,7 @@ export default function ReviewCarousel() {
             .map((review, index) => (
               <CarouselItem
                 key={review.name}
-                className="md:basis-1/2 lg:basis-1/3"
+                className="w-full md:basis-1/2 lg:basis-1/3"
               >
                 <div className="p-2">
                   <Card className="bg-white shadow-lg rounded-lg">
@@ -48,14 +49,15 @@ export default function ReviewCarousel() {
                         <StarIcon />
                       </div>
                     </CardHeader>
-                    <CardContent className="flex flex-col justify-center items-center p-6 pt-0 h-48">
-                      <span className="font-medium text-center text-lg text-neutral-700">
+                    <CardContent className="flex flex-col justify-center items-center p-6 pt-0">
+                      <span className="line-clamp-5 lg:line-clamp-4 font-medium text-base text-center text-neutral-700 lg:text-lg">
                         {review.short ?? review.body}
                       </span>
                     </CardContent>
                     <CardFooter className="bottom-0 flex flex-row justify-center items-center mt-auto text-center">
-                      <b className="px-12 w-full text-center text-neutral-800">
-                        {review.name}
+                      <b className="space-x-2 px-12 w-full text-center text-neutral-800">
+                        <span className="pr-1">{review.name}</span>
+                        {getUnicodeFlagIcon(review.country)}
                       </b>
                     </CardFooter>
                   </Card>

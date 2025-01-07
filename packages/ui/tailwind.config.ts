@@ -115,7 +115,11 @@ export default {
       },
     },
   },
-  plugins: [addVariablesForColors, require("tailwindcss-animate")],
+  plugins: [
+    addVariablesForColors,
+    require("tailwindcss-animate"),
+    require("@tailwindcss/line-clamp"),
+  ],
 };
 
 function addVariablesForColors({ addBase, theme }) {

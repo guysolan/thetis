@@ -1,60 +1,52 @@
 ---
 import Slide from "@/components/Slide.astro";
-import stage1 from './stage-1.png';
-import stage2 from './stage-2.png';
-import stage3 from './stage-3.png';
-import stage4 from './stage-4.png';
+import stage1 from './images/1-bandage.jpg';
+import stage2 from './images/2-splint.jpg';
+import stage3 from './images/3-fold.jpg';
+import stage4 from './images/4-clip.jpg';
 import { Image } from 'astro:assets';
 ---
 
 <Slide title='Instructions'>
-    <div class="trauma-instructions-wrap">
-        <div class="instruction-part">
-                <p class="trauma-instruction">
-                    1. Remove bandage clips (for use later) and position
-                    stockinette overhanging the toes.
+    <div class="gap-8 grid mx-auto lg:p-4 max-w-7xl">
+        {[
+            {
+                step: 1,
+                text: "Remove bandage clips (for use later) and position stockinette overhanging the toes.",
+                image: stage1,
+                alt: "Stage 1 of Trauma Splint Application"
+            },
+            {
+                step: 2,
+                text: "Keeping foot pointed down (tip-toes), position the splint to cover the shin and top of foot, but leave toes free.",
+                image: stage2,
+                alt: "Stage 2 of Trauma Splint Application"
+            },
+            {
+                step: 3,
+                text: "Fold the stockinette over at both ends.",
+                image: stage3,
+                alt: "Stage 3 of Trauma Splint Application"
+            },
+            {
+                step: 4,
+                text: "Wrap the crepe bandage firmly, but not too tight. Secure with the bandage clips provided.",
+                image: stage4,
+                alt: "Stage 4 of Trauma Splint Application"
+            }
+        ].map(({ step, text, image, alt }) => (
+            <div class="flex lg:flex-row flex-col lg:justify-between gap-4 lg:p-6 rounded-lg w-full">
+                <p class="m-0 lg:w-1/3 text-lg leading-relaxed">
+                    <span class="font-bold text-primary">Step {step}.</span> {text}
                 </p>
-                <Image
+                    <Image
                         height={300}
-                    width={600}
-                    src={stage1}
-                    alt="Stage 1 of Trauma Splint Application"
-                />
+                        width={600}
+                        src={image}
+                        alt={alt}
+                        class="rounded-md max-w-full h-auto"
+                    />
             </div>
-            <div class="instruction-part">
-                <p class="trauma-instruction">
-                    2. Keeping foot pointed down (tip-toes), position the splint
-                    to cover the shin and top of foot, but leave toes free.
-                </p>
-                <Image
-                        height={300}
-                    width={600}
-                    src={stage2}
-                    alt="Stage 2 of Trauma Splint Application"
-                />
-            </div>
-            <div class="instruction-part">
-                <p class="trauma-instruction">
-                    3. Fold the stockinette over at both ends.
-                </p>
-                <Image
-                        height={300}
-                    width={600}
-                    src={stage3}
-                    alt="Stage 3 of Trauma Splint Application"
-                />
-            </div>
-            <div class="instruction-part">
-                <p class="trauma-instruction">
-                    4. Wrap the crepe bandage firmly, but not too tight. Secure
-                    with the bandage clips provided.
-                </p>
-                <Image
-                    height={300}
-                    width={600}
-                    src={stage4}
-                    alt="Stage 4 of Trauma Splint Application"
-                />
-            </div>
-        </div>
-    </Slide>
+        ))}
+    </div>
+</Slide>

@@ -53,7 +53,7 @@ export default function SleepInYourWellies() {
   }, [currentIndex]);
 
   return (
-    <div className="py-8 text-center">
+    <div className="px-4 py-8 text-center">
       <h3 className="flex md:flex-row flex-col justify-center items-center gap-2 mb-2 text-4xl">
         <span className="font-medium">Would you sleep in your</span>{" "}
         <span>

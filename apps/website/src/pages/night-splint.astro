@@ -41,13 +41,14 @@ import ReviewByType from '../components/reviews/ReviewsByType';
 
         <NightSplintUsage/>
 
-        <section class="py-16 cta-section">
-            <div class="flex flex-col items-center mx-auto text-center">
+        <section class="flex flex-col items-center py-16">
+            <div class="flex flex-col items-center mx-auto px-8 md:px-0 text-center">
                 <h2 class="mb-6 font-semibold text-3xl">Ready for More Comfortable Recovery?</h2>
                 <p class="mb-8 text-gray-700 text-xl">Join thousands of patients who've improved their recovery experience</p>
-                <Reviews client:load/>
                 <!-- <FilterByReview client:load/> -->
             </div>
+            <Reviews client:load/>
+
         </section>
        
         <NightSplintProsCons/>
@@ -57,13 +58,11 @@ import ReviewByType from '../components/reviews/ReviewsByType';
         <NightSplintInstructions />
 
         <Slide title="Sizing">
-            <div class="h-6"></div>
             <SizeChart />
         </Slide>
 
         <Slide title="Downloads">
             <DownloadList
-                title="Information for Patients"
                 downloads={[
                     {
                         title: 'Night Splint Instructions.pdf',

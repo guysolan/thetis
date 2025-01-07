@@ -1,0 +1,62 @@
+---
+import ProgressBar from './ProgressBar.astro';
+import StatRow from './StatRow.astro';
+
+const data = {
+  labels: ["Plaster Cast", "Thetis splint"],
+  datasets: [
+    {
+      label: "Mean Days A&E to Scan then Specialist",
+      data: [8.7, 2.9],
+    },
+    {
+      label: "Maximum Days A&E to Scan then Specialist",
+      data: [23, 6],
+    },
+  ],
+};
+
+const maxValue = Math.max(...data.datasets[1].data);
+---
+
+<div class="flex flex-col justify-center items-center px-4 w-full">
+  <div>
+    <h2 class="mb-8 font-semibold text-3xl text-center">
+        Get Patients to Specialists 3x Faster ⚡
+    </h2>
+    <h3 class="text-center text-xl">Reducing Wait Times from A&E to Treatment</h3>
+  </div>
+  <div class="flex lg:flex-row flex-col gap-4 md:gap-8 lg:gap-16 my-8 w-full">
+    {data.labels.map((label, index) => (
+      <div key={index} class="space-y-4 w-full">
+        <h3 class="font-semibold text-lg">{label}</h3>
+
+        {/* Mean Days */}
+        <div class="space-y-2">
+          <StatRow 
+            label="Mean Time"
+            value={data.datasets[0].data[index]}
+          />
+          <ProgressBar
+            value={data.datasets[0].data[index]}
+            max={maxValue}
+            variant={index === 0 ? 'secondary' : 'primary'}
+          />
+        </div>
+
+        {/* Maximum Days */}
+        <div class="space-y-2">
+          <StatRow 
+            label="Maximum Time"
+            value={data.datasets[1].data[index]}
+          />
+          <ProgressBar
+            value={data.datasets[1].data[index]}
+            max={maxValue}
+            variant={index === 0 ? 'secondary' : 'primary'}
+          />
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

@@ -14,7 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as MonthsImport } from './routes/months'
 import { Route as InstructionsImport } from './routes/instructions'
 import { Route as IndexImport } from './routes/index'
-import { Route as SettlementsTableImport } from './routes/settlements/table'
+import { Route as SettlementsIndexImport } from './routes/settlements/index'
 import { Route as SettlementsSavedImport } from './routes/settlements/saved'
 import { Route as SettlementsReportImport } from './routes/settlements/report'
 import { Route as SettlementsRegionsImport } from './routes/settlements/regions'
@@ -46,9 +46,9 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const SettlementsTableRoute = SettlementsTableImport.update({
-  id: '/settlements/table',
-  path: '/settlements/table',
+const SettlementsIndexRoute = SettlementsIndexImport.update({
+  id: '/settlements/',
+  path: '/settlements/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -161,11 +161,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettlementsSavedImport
       parentRoute: typeof rootRoute
     }
-    '/settlements/table': {
-      id: '/settlements/table'
-      path: '/settlements/table'
-      fullPath: '/settlements/table'
-      preLoaderRoute: typeof SettlementsTableImport
+    '/settlements/': {
+      id: '/settlements/'
+      path: '/settlements'
+      fullPath: '/settlements'
+      preLoaderRoute: typeof SettlementsIndexImport
       parentRoute: typeof rootRoute
     }
     '/$region/$year/$month': {
@@ -244,7 +244,7 @@ export interface FileRoutesByFullPath {
   '/settlements/regions': typeof SettlementsRegionsRoute
   '/settlements/report': typeof SettlementsReportRouteWithChildren
   '/settlements/saved': typeof SettlementsSavedRoute
-  '/settlements/table': typeof SettlementsTableRoute
+  '/settlements': typeof SettlementsIndexRoute
   '/$region/$year/$month': typeof RegionYearMonthRoute
   '/settlements/report/summary': typeof SettlementsReportSummaryRoute
   '/settlements/report/xml': typeof SettlementsReportXmlRoute
@@ -260,7 +260,7 @@ export interface FileRoutesByTo {
   '/months': typeof MonthsRoute
   '/settlements/regions': typeof SettlementsRegionsRoute
   '/settlements/saved': typeof SettlementsSavedRoute
-  '/settlements/table': typeof SettlementsTableRoute
+  '/settlements': typeof SettlementsIndexRoute
   '/$region/$year/$month': typeof RegionYearMonthRoute
   '/settlements/report/summary': typeof SettlementsReportSummaryRoute
   '/settlements/report/xml': typeof SettlementsReportXmlRoute
@@ -278,7 +278,7 @@ export interface FileRoutesById {
   '/settlements/regions': typeof SettlementsRegionsRoute
   '/settlements/report': typeof SettlementsReportRouteWithChildren
   '/settlements/saved': typeof SettlementsSavedRoute
-  '/settlements/table': typeof SettlementsTableRoute
+  '/settlements/': typeof SettlementsIndexRoute
   '/$region/$year/$month': typeof RegionYearMonthRoute
   '/settlements/report/summary': typeof SettlementsReportSummaryRoute
   '/settlements/report/xml': typeof SettlementsReportXmlRoute
@@ -297,7 +297,7 @@ export interface FileRouteTypes {
     | '/settlements/regions'
     | '/settlements/report'
     | '/settlements/saved'
-    | '/settlements/table'
+    | '/settlements'
     | '/$region/$year/$month'
     | '/settlements/report/summary'
     | '/settlements/report/xml'
@@ -312,7 +312,7 @@ export interface FileRouteTypes {
     | '/months'
     | '/settlements/regions'
     | '/settlements/saved'
-    | '/settlements/table'
+    | '/settlements'
     | '/$region/$year/$month'
     | '/settlements/report/summary'
     | '/settlements/report/xml'
@@ -328,7 +328,7 @@ export interface FileRouteTypes {
     | '/settlements/regions'
     | '/settlements/report'
     | '/settlements/saved'
-    | '/settlements/table'
+    | '/settlements/'
     | '/$region/$year/$month'
     | '/settlements/report/summary'
     | '/settlements/report/xml'
@@ -346,7 +346,7 @@ export interface RootRouteChildren {
   SettlementsRegionsRoute: typeof SettlementsRegionsRoute
   SettlementsReportRoute: typeof SettlementsReportRouteWithChildren
   SettlementsSavedRoute: typeof SettlementsSavedRoute
-  SettlementsTableRoute: typeof SettlementsTableRoute
+  SettlementsIndexRoute: typeof SettlementsIndexRoute
   RegionYearMonthRoute: typeof RegionYearMonthRoute
   SettlementsRegionCountrySummaryRoute: typeof SettlementsRegionCountrySummaryRoute
   SettlementsRegionCountryXmlRoute: typeof SettlementsRegionCountryXmlRoute
@@ -360,7 +360,7 @@ const rootRouteChildren: RootRouteChildren = {
   SettlementsRegionsRoute: SettlementsRegionsRoute,
   SettlementsReportRoute: SettlementsReportRouteWithChildren,
   SettlementsSavedRoute: SettlementsSavedRoute,
-  SettlementsTableRoute: SettlementsTableRoute,
+  SettlementsIndexRoute: SettlementsIndexRoute,
   RegionYearMonthRoute: RegionYearMonthRoute,
   SettlementsRegionCountrySummaryRoute: SettlementsRegionCountrySummaryRoute,
   SettlementsRegionCountryXmlRoute: SettlementsRegionCountryXmlRoute,
@@ -383,7 +383,7 @@ export const routeTree = rootRoute
         "/settlements/regions",
         "/settlements/report",
         "/settlements/saved",
-        "/settlements/table",
+        "/settlements/",
         "/$region/$year/$month",
         "/settlements/$region/$country/summary",
         "/settlements/$region/$country/xml",
@@ -413,8 +413,8 @@ export const routeTree = rootRoute
     "/settlements/saved": {
       "filePath": "settlements/saved.tsx"
     },
-    "/settlements/table": {
-      "filePath": "settlements/table.tsx"
+    "/settlements/": {
+      "filePath": "settlements/index.tsx"
     },
     "/$region/$year/$month": {
       "filePath": "$region.$year.$month.tsx"

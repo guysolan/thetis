@@ -45,7 +45,7 @@ const WhatSizeAmI = () => {
   };
 
   return (
-    <div className="mx-auto p-4 border-t w-full max-w-md">
+    <div className="mx-auto py-4 border-t w-full max-w-md">
       <div className="flex flex-col space-y-4">
         <div className="flex flex-row justify-between items-center">
           <p className="font-semibold text-lg">Choose your Options</p>

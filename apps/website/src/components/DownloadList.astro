@@ -5,14 +5,14 @@ interface DownloadType {
     title: string
 }
 interface Props {
-    title: string
+    title?: string
     downloads: DownloadType[]
 }
 const { title, downloads } = Astro.props
 ---
 
 <div class="space-y-4 w-full">
-    <h2 class="text-lg md:text-xl">{title}</h2>
+   {title&& <h2 class="text-lg md:text-xl">{title}</h2>}
     <ul class="flex flex-wrap gap-8 gap-y-8">
         {
             downloads.map((download) => (

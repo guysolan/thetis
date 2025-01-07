@@ -9,8 +9,9 @@ import { ClientRouter } from "astro:transitions";
 import ProsCons from "@/components/ProsCons.astro";
 import DownloadList from "@/components/DownloadList.astro";
 import EvidenceTable from '@/components/products/trauma-splint/EvidenceTable.tsx';
-import EvidenceChart from '@/components/products/trauma-splint/EvidenceChart.tsx';
+import EvidenceChart from '@/components/products/trauma-splint/evidence-chart/index.astro';
 import TraumaSplintHero from '@/components/products/trauma-splint/TraumaSplintHero.astro';
+import TraumaSplintProsCons from '../components/products/trauma-splint/TraumaSplintProsCons.astro';
 ---
 
 <Fragment slot="head">
@@ -33,43 +34,9 @@ import TraumaSplintHero from '@/components/products/trauma-splint/TraumaSplintHe
     </Slide>
 
     <Slide
-        id="problem-solution"
-
+        title="Plaster of Paris vs Trauma Splint"
     >
-        <div class="gap-8 grid md:grid-cols-2 w-full">
-            <div class="flex flex-col p-6">
-                <h3 class="mb-4 font-semibold text-2xl">Current Problem</h3>
-                <p class="mb-6">A&E patients with suspected Achilles ruptures receive casts that must be removed for scanning.</p>
-                
-                <div class="mt-auto">
-                    <ProsCons 
-                        points={[
-                            { type: "con", text: "5 layer application" },
-                            { type: "con", text: "Difficult to apply" },
-                            { type: "con", text: "Staff need training" },
-                            { type: "con", text: "Takes time to dry" }
-                        ]}
-                    />
-                </div>
-            </div>
-
-            <div class="flex flex-col p-6">
-                <h3 class="mb-4 font-semibold text-2xl">Our Solution (Patent Pending)</h3>
-                <p class="mb-6">By using a comfortable, padded, plastic shell wrapped in crepe bandage, the process is transformed.</p>
-                <div class="mb-6 product-solution"></div>
-                
-                <div class="mt-auto">
-                    <ProsCons 
-                        points={[
-                            { type: "pro", text: "2 layer application" },
-                            { type: "pro", text: "Easier to apply" },
-                            { type: "pro", text: "No training needed" },
-                            { type: "pro", text: "Save patients time" }
-                        ]}
-                    />
-                </div>
-            </div>
-        </div>
+        <TraumaSplintProsCons />
     </Slide>
 
     <Slide

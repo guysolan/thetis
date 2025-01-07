@@ -69,7 +69,7 @@ serve(async (req) => {
             "amazon_reports",
         )
             .insert({
-                report_id: report.reportId,
+                report_id: report.report_id,
                 storage_path: fileName,
                 settlement_id: summary.settlement_id,
                 region: summary.region,

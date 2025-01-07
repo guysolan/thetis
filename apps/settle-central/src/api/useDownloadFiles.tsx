@@ -10,6 +10,8 @@ interface DownloadFileParams {
 
 async function downloadFiles({ path }: DownloadFileParams) {
   try {
+    toast.info("Downloading files...");
+
     const zip = new JSZip();
     const extensions = [".csv", ".pdf"];
 

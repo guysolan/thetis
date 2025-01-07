@@ -11,9 +11,9 @@
     const { step, text, imageSrc, imageAlt } = Astro.props;
     ---
 
-    <div class="flex flex-row items-start">
-        <p class="my-8 max-w-60">
-            {step}. {text}
+    <div class="flex md:flex-row flex-col items-start">
+        <p class="my-8 md:max-w-60 text-lg">
+            <span class="font-semibold text-primary">Step {step}.</span> {text}
         </p>
         <Image
             src={imageSrc}

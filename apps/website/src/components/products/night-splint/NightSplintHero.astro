@@ -9,8 +9,8 @@ import nightSplint from "@/components/products/images/night-splint/night_splint_
 
 ---
 
-<section class="bg-gradient-to-b from-primary/20 to-white mt-0 pt-32 pb-16 hero-section">
-    <div class="mx-auto text-center container">
+<section class="bg-gradient-to-b from-primary/20 to-white mt-0 pt-16 lg:pt-32 pb-16 hero-section">
+    <div class="mx-auto px-4 text-center">
         <h1 class="mb-6 lg:px-24 font-semibold text-4xl text-gray-900 md:text-5xl">
             The <HighlightedWord>Only</HighlightedWord> Night Splint for Achilles Tendon <HighlightedWord>Rupture</HighlightedWord>
         </h1>
@@ -21,7 +21,7 @@ import nightSplint from "@/components/products/images/night-splint/night_splint_
           <Image
             height={1200}
             width={800}
-            class="group-hover:scale-[102%] relative shadow-lg group-hover:shadow-xl rounded-lg w-full max-w-[45vw] h-full transition-all duration-300 object-cover"
+            class="group-hover:scale-[102%] relative shadow-lg group-hover:shadow-xl rounded-lg w-full lg:max-w-[45vw] h-full transition-all duration-300 object-cover"
             src={nightSplint}
             alt="Night Splint Render"
             
@@ -30,7 +30,7 @@ import nightSplint from "@/components/products/images/night-splint/night_splint_
       <div class="space-y-4 w-full text-left">
         
         <BuyButtonVariants client:load />
-        <div class="flex flex-col gap-4 md:gap-8">
+        <div class="flex flex-col gap-8">
           <FreeAndSecure />
           <BulkOrders  />
         </div>

@@ -4,7 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { selectAmazonReportsQueryOptions } from "../../api/selectAmazonReports";
 import { objectKeysToSnakeCase } from "../../lib/utils";
 
-export const Route = createFileRoute("/settlements/table")({
+export const Route = createFileRoute("/settlements/")({
   component: RouteComponent,
   loader: async ({ context }) => {
     const reports = await context.queryClient.ensureQueryData(
@@ -17,12 +17,26 @@ export const Route = createFileRoute("/settlements/table")({
       selectAmazonReportsFromDbQueryOptions(),
     );
 
+    const savedReports = saved.map((saved) => ({
+      ...saved,
+      is_saved: true,
+    }));
+
+    const savedReportIds = saved.map((saved) => saved.report_id);
+
+    const unprocessedReports = processedReports.filter(
+      (r) => !savedReportIds.includes(r.reportId),
+    );
+
+    const unsavedReports = unprocessedReports.map((r) => ({
+      ...r,
+      is_saved: false,
+      settlement_start_date: r.data_start_time,
+      settlement_end_date: r.data_end_time,
+    }));
+
     const data = [
-      ...processedReports.map((r) => ({
-        ...r,
-        is_saved: false,
-        settlement_start_date: r.data_start_time,
-      })),
+      ...unsavedReports,
       ...saved.map((s) => ({ ...s, is_saved: true })),
     ];
 

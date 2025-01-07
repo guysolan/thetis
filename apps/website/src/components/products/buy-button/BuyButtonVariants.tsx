@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ShopifyBuyButton from "./ShopifyBuyButton";
 import { Button } from "@/components/ui/button";
 import WhatSizeAmI from "../../WhatSizeAmI";
+
 interface BuyButtonVariantsProps {
   productId?: string;
   className?: string;
@@ -9,6 +10,24 @@ interface BuyButtonVariantsProps {
 
 type Size = "large" | "small";
 type Side = "left" | "right";
+
+const content = {
+  labels: {
+    size: "Size:",
+    side: "Side:",
+    selectionPrompt: "Please select a size and side",
+  },
+  variants: {
+    size: ["large", "small"] as const,
+    side: ["left", "right"] as const,
+  },
+  variantIds: {
+    "large-left": "47494539673928",
+    "large-right": "47494539608392",
+    "small-left": "47494539706696",
+    "small-right": "47494539641160",
+  } as const,
+} as const;
 
 const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
   productId = "8572432253256",
@@ -19,12 +38,7 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
   const [key, setKey] = useState(() => Date.now());
   const [isInitialRender, setIsInitialRender] = useState(true);
 
-  const variantIds = {
-    "large-left": "47494539673928",
-    "large-right": "47494539608392",
-    "small-left": "47494539706696",
-    "small-right": "47494539641160",
-  } as const;
+  const variantIds = content.variantIds;
 
   useEffect(() => {
     if (isInitialRender) {
@@ -53,10 +67,10 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
         <div className="space-y-4 w-full">
           <div className="flex flex-col justify-start items-start space-y-2">
             <label className="font-semibold text-base text-left text-neutral-600">
-              Size:
+              {content.labels.size}
             </label>
             <div className="flex gap-2 w-full">
-              {(["large", "small"] as const).map((size) => (
+              {content.variants.size.map((size) => (
                 <Button
                   key={size}
                   variant={currentSize === size ? "default" : "outline"}
@@ -76,10 +90,10 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
 
           <div className="flex flex-col justify-start items-start space-y-2">
             <label className="font-semibold text-base text-left text-neutral-600">
-              Side:
+              {content.labels.side}
             </label>
             <div className="flex gap-2 w-full">
-              {(["left", "right"] as const).map((side) => (
+              {content.variants.side.map((side) => (
                 <Button
                   key={side}
                   variant={currentSide === side ? "default" : "outline"}
@@ -111,8 +125,8 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
             />
           </div>
         ) : (
-          <div className="mt-4 font-medium text-lg text-neutral-700 italic">
-            Please select both a size and side
+          <div className="mt-8 font-medium text-center text-lg text-neutral-950 md:text-xl lg:text-left italic animate-bounce">
+            {content.labels.selectionPrompt}
           </div>
         )}
       </div>

@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import Slide from "@/components/Slide.astro";
 import { inputStyle } from "@/components/form/Input.astro";
+import { Send } from 'lucide-react';
 interface Props {
   title: string;
   paragraph: string;
@@ -11,34 +12,42 @@ interface Props {
 const { title, paragraph }: Props = Astro.props;
 ---
 
-<Slide 
-  className="relative bg-gradient-to-tr from-primary/70 via-primary/30 to-primary/50 shadow-lg hover:shadow-xl mx-auto rounded-[2rem] max-w-screen-lg transition-all duration-300 overflow-hidden group"
->
-    <form
-        autocomplete="on"
-        action="https://formspree.io/f/xbjvlval"
-        method="POST"
-        class="relative z-10 flex flex-col justify-center items-center space-y-8 my-16 px-6 w-full h-full"
+<div class="px-4">
+    <section 
+        class="relative bg-gradient-to-tr from-primary/70 via-primary/30 to-primary/50 shadow-lg hover:shadow-xl mx-4 mx-auto rounded-[2rem] max-w-screen-lg transition-all duration-300 overflow-hidden group"
     >
-        <div class="group-hover:scale-105 flex flex-col justify-center items-center space-y-4 w-full max-w-[650px] text-center transition-all duration-300">
-            <h2 class="font-semibold text-3xl text-neutral-900 md:text-4xl">{title}</h2>
-            <p class="max-w-[650px] text-lg text-neutral-700 md:text-xl">{paragraph}</p>
-        </div>
+        <form
+            autocomplete="on"
+            action="https://formspree.io/f/xbjvlval"
+            method="POST"
+            class="relative z-10 flex flex-col justify-center items-center space-y-8 my-16 px-6 w-full h-full"
+        >
+            <div class="group-hover:scale-105 flex flex-col justify-center items-center space-y-4 w-full max-w-[650px] text-center transition-all duration-300">
+                <h2 class="font-semibold text-3xl text-neutral-900 md:text-4xl">{title}</h2>
+                <p class="max-w-[650px] text-lg text-neutral-700 md:text-xl">{paragraph}</p>
+            </div>
 
-        <div class="group-hover:scale-105 flex gap-x-3 w-full max-w-sm transition-all duration-300">
-            <input 
-                type="email"
-                name="email"
-                class:list={[inputStyle, 'h-14']}
-                placeholder="Enter your email"
-            />
-            <Button
-                type="submit"
-                value="send"
-                className="h-14 transition-all duration-300"
-            >
-                Subscribe <i data-lucide-name="arrow-right"></i>
-            </Button>
-        </div>
-    </form>
-</Slide>
+            <div class="group-hover:scale-105 flex gap-x-3 w-full max-w-sm transition-all duration-300">
+                <div class="relative flex-1">
+                    <i 
+                        data-lucide-name="mail" 
+                        class="top-1/2 left-4 absolute w-5 h-5 text-neutral-400 -translate-y-1/2"
+                    ></i>
+                    <input 
+                        type="email"
+                        name="email"
+                        class="border-neutral-200 bg-white pr-4 lg:pl-8 border rounded-lg focus:ring-2 focus:ring-primary/50 w-full h-14 text-neutral-900 placeholder:text-neutral-400 transition-all focus:outline-none"
+                        placeholder="Enter your email"
+                    />
+                </div>
+                <Button
+                    type="submit"
+                    value="send"
+                    className="h-14 max-h-14 transition-all duration-300"
+                >
+                    <span class="md:not-sr-only sr-only">Subscribe</span> <Send size={20} />
+                </Button>
+            </div>
+        </form>
+    </section>
+</div>

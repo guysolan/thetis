@@ -17,15 +17,15 @@ import React from "react";
 const SizeChart = () => {
   return (
     <Table>
-      <TableHeader className="bg-primary/80 text-white uppercase">
+      <TableHeader className="bg-primary text-white uppercase">
         <TableRow>
-          <TableHead className="font-semibold text-white" scope="col">
+          <TableHead className="font-semibold text-base text-white" scope="col">
             Location
           </TableHead>
-          <TableHead className="font-semibold text-white" scope="col">
+          <TableHead className="font-semibold text-base text-white" scope="col">
             Small
           </TableHead>
-          <TableHead className="font-semibold text-white" scope="col">
+          <TableHead className="font-semibold text-base text-white" scope="col">
             Large
           </TableHead>
         </TableRow>
@@ -35,14 +35,14 @@ const SizeChart = () => {
           <TableRow key={val}>
             <TableHead
               scope="row"
-              className="px-6 py-4 font-semibold text-gray-800 whitespace-nowrap"
+              className="px-6 py-4 font-semibold text-base text-gray-800 whitespace-nowrap"
             >
               {key}
             </TableHead>
-            <TableCell className="px-6 py-4 font-normal text-black">
+            <TableCell className="px-6 py-4 font-normal text-base text-black">
               &lt; {val}
             </TableCell>
-            <TableCell className="px-6 py-4 font-normal text-black">
+            <TableCell className="px-6 py-4 font-normal text-base text-black">
               &ge; {val}
             </TableCell>
           </TableRow>

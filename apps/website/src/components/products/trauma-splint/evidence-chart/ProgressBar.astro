@@ -1,0 +1,15 @@
+---
+interface Props {
+  value: number;
+  max: number;
+  variant: 'primary' | 'secondary';
+}
+
+const { value, max, variant } = Astro.props;
+const width = `${(value / max) * 100}%`;
+const bgColor = variant === 'primary' ? 'bg-primary/70' : 'bg-primary/30';
+---
+
+<div class="border-neutral-200 bg-neutral-100 border rounded-full w-full h-6 overflow-hidden">
+  <div class={`h-full ${bgColor}`} style={{ width }} />
+</div>
