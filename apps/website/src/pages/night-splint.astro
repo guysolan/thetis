@@ -20,6 +20,7 @@ import NightSplintInstructions from "@/components/products/night-splint/night-sp
 import NightSplintHero from '../components/products/night-splint/NightSplintHero.astro';
 import TestimonialsCarousel from '@/components/reviews/TestimonialsCarousel'
 import ReviewByType from '../components/reviews/ReviewsByType';
+import GetInTouch from '../components/CTA/GetInTouch.astro';
 ---
 
 <Fragment slot="head">
@@ -87,11 +88,10 @@ import ReviewByType from '../components/reviews/ReviewsByType';
 
         <!-- <ReviewByType client:load/> -->
 
-        <EmailCTA
-        title="Sound Interesting?"
-        paragraph="Want to learn more? Enter your email below."
-         />
-
+        <GetInTouch
+            title="Sound Interesting?"
+            paragraph="Want to get a sample, speak to us or just learn more?"
+        />
         <Slide title="FAQs">
             <NightSplintFAQs client:load />
         </Slide>
