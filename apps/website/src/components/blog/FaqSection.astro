@@ -1,0 +1,44 @@
+---
+interface Props {
+    title: string;
+    links: Array<{
+        href: string;
+        text: string;
+    }>;
+    readMoreLink: string;
+}
+
+const { title, links, readMoreLink } = Astro.props;
+import SlideTitle from '../SlideTitle.astro';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { ArrowRight } from 'lucide-astro';
+---
+
+<section class="border-primary/20 bg-white shadow-md hover:shadow-xl p-4 md:p-8 lg:p-12 border rounded-lg transition-all duration-300 article-wrap hover:scale-[1.02]">
+    <SlideTitle title={title} />
+    <div class="mt-6 article">
+        <ul class="space-y-3 mb-6 p-8 md:p-4">
+            {links.map(link => (
+                <li class="transition-all hover:translate-x-1 duration-200">
+                    <a 
+                        href={link.href} 
+                        class="flex items-center gap-2 text-primary/90 hover:text-primary"
+                    >
+                        <ArrowRight class="mr-1" />
+                        {link.text}
+                    </a>
+                </li>
+            ))}
+        </ul>
+        <a 
+            href={readMoreLink}
+            class={cn(
+                buttonVariants({ variant: "outline", size: "lg" }), 
+                "w-full sm:w-auto hover:bg-primary/10 transition-colors duration-300"
+            )}
+        >
+            Read Article
+        </a>
+    </div>
+</section>

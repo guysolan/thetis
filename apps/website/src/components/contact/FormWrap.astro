@@ -1,0 +1,16 @@
+---
+interface Props {
+    formId: string;
+}
+
+const { formId } = Astro.props;
+---
+
+<form
+    autocomplete="on"
+    action={`https://formspree.io/f/${formId}`}
+    method="POST"
+    class="flex-grow lg:border-neutral-300 lg:bg-white/80 lg:shadow-lg hover:shadow-xl backdrop-blur-sm lg:p-12 border rounded-2xl w-full transition-all"
+>
+    <slot />
+</form>

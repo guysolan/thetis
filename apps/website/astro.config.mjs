@@ -8,8 +8,8 @@ import tailwind from "@astrojs/tailwind";
 // Performance
 import partytown from "@astrojs/partytown";
 // Content
-import { articles } from "./src/data/articles";
-import { pages } from "./src/data/pages";
+import { articles } from "./src/content/articles";
+import { pages } from "./src/content/pages";
 // Services
 import sitemap from "@astrojs/sitemap";
 

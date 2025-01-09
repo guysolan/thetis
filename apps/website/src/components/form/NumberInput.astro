@@ -11,7 +11,7 @@ import { Minus, Plus } from 'lucide-react';
 
 <div class="flex flex-row gap-4 w-full">
     <label class="block w-full font-medium text-lg">{label}</label>
-    <div class="flex justify-center items-center rounded-sm ring-1 ring-gray-400 focus-within:ring-primary focus:ring-2 dark:ring-zinc-800 w-full min-w-60 font-semibold text-3xl transition-[box-shadow] group">
+    <div class="flex justify-center items-center border-gray-400 focus-within:border-primary bg-white border rounded-sm hover:ring-gray-400 hover:ring-1 focus-within:ring-primary focus-within:ring-1 w-full min-w-60 font-semibold text-3xl transition-all duration-100 delay-50 ease">
         <button
             type="button"
             class="flex items-center pr-[.325em] pl-[.5em]"
@@ -25,7 +25,7 @@ import { Minus, Plus } from 'lucide-react';
             {name}
             min="0"
             value="0"
-            class="bg-transparent py-2 border-none ring-none w-[1.5em] min-w-16 text-center [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [appearance:textfield] outline-none"
+            class="border-0 hover:border-0 focus:border-0 bg-transparent py-2 hover:ring-0 focus:ring-0 w-[1.5em] min-w-16 text-center [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [appearance:textfield] hover:outline-none focus:outline-none"
         />
         <button
             type="button"

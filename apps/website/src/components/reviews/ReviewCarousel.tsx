@@ -28,7 +28,7 @@ export default function ReviewCarousel() {
         loop: true,
       }}
     >
-      <div className="flex flex-row justify-center items-center w-full max-w-[90vw] md:max-w-xl">
+      <div className="flex flex-row justify-center items-center w-full max-w-[90vw] lg:max-w-xl">
         <CarouselPrevious className="relative bg-white dark:bg-black mr-4 px-2 py-1 rounded-md w-10 h-10" />
         <CarouselContent className="w-full">
           {reviews

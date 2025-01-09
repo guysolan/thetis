@@ -11,7 +11,7 @@ const reasons = [
 const currentUrl = Astro.url.pathname;
 ---
 
-<ul class="space-y-4 mt-4 pl-4 text-zinc-600 dark:text-zinc-400 marker:text-zinc-400 list-disc">
+<ul class="flex flex-col items-center lg:items-start gap-y-4 mt-4 pl-4 text-zinc-600 dark:text-zinc-400 marker:text-zinc-400 list-disc">
   {reasons.map((reason) => (
     <li class={cn("list-none")}>
       {currentUrl === reason.url ? (

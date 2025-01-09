@@ -1,12 +1,13 @@
 ---
-import { inputStyle } from '@/components/form/Input.astro';
+import Label from '@/components/form/Label.astro';
+import Input from '@/components/form/Input.astro';
+import FormWrap from '../FormWrap.astro';
+import TextArea from '../../form/TextArea.astro';
 ---
 
-<form
-    autocomplete="on"
-    action="https://formspree.io/f/mdobaqwr"
-    method="POST"
-    class="flex-grow border-neutral-300 bg-white/80 shadow-lg hover:shadow-xl backdrop-blur-sm p-12 border rounded-2xl w-full transition-all"
+
+<FormWrap
+    formId="mdobaqwr"
 >
     <div class="space-y-8 w-full">
         <h2 class="font-semibold text-2xl text-neutral-950 md:text-3xl leading-[105%]">Ask a Question</h2>
@@ -16,46 +17,39 @@ import { inputStyle } from '@/components/form/Input.astro';
     
         <div class="space-y-6">
             <div class="form-group">
-                <label for="name" class="block mb-2 font-medium text-sm">Name</label>
-                <input
-                    required
-                    id="name"
+                <Label labelFor="name">Name</Label>
+                <Input
                     name="name"
                     type="text"
-                    class={`${inputStyle} w-full rounded-lg bg-white/90`}
+                    required={true}
                 />
             </div>
 
             <div class="form-group">
-                <label for="email" class="block mb-2 font-medium text-sm">Email</label>
-                <input
-                    required
-                    id="email"
+                <Label labelFor="email">Email</Label>
+                <Input
+                    required={true}
                     name="email"
                     type="email"
-                    class={`${inputStyle} w-full rounded-lg bg-white/90`}
                 />
             </div>
         
             <div class="form-group">
-                <label for="message" class="block mb-2 font-medium text-sm">Message</label>
-                <textarea
-                    id="message"
+                <Label labelFor="message">Message</Label>
+                <TextArea
                     name="message"
-                    rows="4"
-                    maxlength="1000"
-                    class={`${inputStyle} w-full rounded-lg resize-none bg-white/90`}
-                ></textarea>
+                    rows={4}
+                    maxlength={1000}
+                ></TextArea>
             </div>
 
             <div class="flex items-center gap-2">
-                <input
+                <Input
                     class="border-gray-300 rounded w-4 h-4"
-                    id="opt-out"
                     name="opt-out"
                     type="checkbox"
                 />
-                <label for="opt-out" class="text-base text-gray-600">Opt out of further communications.</label>
+                <Label labelFor="opt-out">Opt out of further communications.</Label>
             </div>
 
             <button
@@ -66,4 +60,4 @@ import { inputStyle } from '@/components/form/Input.astro';
             </button>
         </div>
     </div>
-</form>
+</FormWrap>

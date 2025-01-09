@@ -11,14 +11,13 @@ import { cn } from "@/lib/utils";
 import * as React from "react";
 
 import { Badge } from "../components/ui/badge";
-import { articles } from "../data/articles.ts";
-import nightSplintImage from "@/components/products/images/night-splint/night_splint_bed_side.jpg";
-import traumaSplintImage from "@/components/products/images/trauma-splint/trauma_splint.jpg";
-import { Box, Handshake, HeartHandshake } from "lucide-react";
+import { articles } from "../content/articles.tsx";
 
 ("use client");
 
 const contentWidth = "min-w-[800px]";
+
+import { partnerLinks, productLinks } from "../content/pages.tsx";
 
 function DesktopNav() {
   return (
@@ -29,18 +28,15 @@ function DesktopNav() {
           <NavigationMenuContent
             className={cn("flex flex-row gap-6 p-6", contentWidth)}
           >
-            <ProductCard
-              title="Night Splint"
-              description="Sleep comfortably while your achilles rupture heals."
-              imageUrl={nightSplintImage}
-              href="/night-splint"
-            />
-            <ProductCard
-              title="Trauma Splint"
-              description="Sleep comfortably while your achilles rupture heals."
-              imageUrl={traumaSplintImage}
-              href="/trauma-splint"
-            />
+            {productLinks.map((product) => (
+              <ProductCard
+                key={product.href}
+                title={product.title}
+                description={product.description}
+                imageUrl={product.image as ImageMetadata}
+                href={product.href}
+              />
+            ))}
           </NavigationMenuContent>
         </NavigationMenuItem>
 
@@ -51,29 +47,12 @@ function DesktopNav() {
           >
             <div className="flex flex-row gap-4">
               <div className="flex-1">
-                <LinkCard
-                  title="Our Partners"
-                  description="Our partners are the best in the business."
-                  href="/partners"
-                  icon={<HeartHandshake size={20} />}
-                  variant="default"
-                />
+                <LinkCard {...partnerLinks[0]} />
               </div>
               <div className="flex flex-col flex-1 gap-4">
-                <LinkCard
-                  title="Become a Partner"
-                  description="Become a partner and help us spread the word."
-                  href="/become-a-partners"
-                  icon={<Handshake size={20} />}
-                  variant="outline"
-                />
-                <LinkCard
-                  title="Order Wholesale"
-                  description="Order wholesale products for your clinic."
-                  href="/wholesale"
-                  icon={<Box size={20} />}
-                  variant="outline"
-                />
+                {partnerLinks.slice(1).map((link) => (
+                  <LinkCard key={link.href} {...link} />
+                ))}
               </div>
             </div>
           </NavigationMenuContent>
@@ -88,13 +67,14 @@ function DesktopNav() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Patient Guides</NavigationMenuTrigger>
           <NavigationMenuContent
-            className={cn("grid grid-cols-2 p-4", contentWidth)}
+            className={cn("grid grid-cols-2 p-4 gap-4", contentWidth)}
           >
             {articles.map((article) => (
               <ListItem
                 key={article.href}
                 title={article.title}
                 href={article.href}
+                className="border-neutral-200 hover:bg-neutral-100 p-4 border rounded-lg"
               >
                 <p className="line-clamp-2 text-sm dark:text-neutral-200">
                   {article.description}

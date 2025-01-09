@@ -17,7 +17,7 @@ import Article from '@/components/blog/Article.astro'
     description={description}
     image="https://thetismedical.com/images/achilles-drawing-image.png"
 >
-    <main data-barba="container" data-barba-namespace="home">
+    <main class="flex flex-col gap-4">
         <Article title={title} />
         <slot />
         <OtherArticles />

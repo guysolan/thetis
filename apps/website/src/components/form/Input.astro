@@ -1,4 +1,24 @@
 ---
+import { cn } from '../../lib/utils';
+
 export const inputStyle =
-  "rounded-sm focus:border-primary font-normal [&:checked]:accent-white focus:ring-primary border border-gray-400 text-black  text-base  transition-all ease duration-100 delay-50 focus:ring-primary hover:ring-gray-400 ring-1 ring-transparent block w-full pl-10 p-3 font-normal placeholder:text-gray-500";
+  "rounded-sm focus:border-primary !border-[2px] font-normal [&:checked]:accent-white focus:ring-primary  border-text-black  text-base  transition-all ease duration-100 delay-50 focus:ring-primary hover:ring-gray-400 ring-1 ring-transparent block w-full pl-10 p-3 font-normal placeholder:text-gray-500  w-full rounded-lg bg-white/90";
+
+interface Props {
+    id?: string;
+    name: string;
+    type?: 'text'|'email'|'password'|'number'|'tel'|'url'|'search'|'date'|'time'|'datetime-local'|'month'|'week'|'checkbox'|'radio'|'submit'|'reset'|'button'|'color'|'file'|'hidden'|'image'|'range';
+    required?: boolean;
+    class?: string;
+}
+
+const { id, name, type, required, class: className }: Props = Astro.props;
 ---
+
+<input
+    required={required}
+    id={id}
+    name={name}
+    type={type||'text'}
+    class={cn(inputStyle, className   )}
+/>

@@ -1,18 +1,16 @@
 ---
 import Label from '@/components/form/Label.astro';
 import Input from '@/components/form/Input.astro';
-import TextArea from '../../form/TextArea.astro';
-import NumberInput from '@/components/form/NumberInput.astro';
 import FormWrap from '../FormWrap.astro';
+import TextArea from '../../form/TextArea.astro';
+import { inputStyle } from '@/components/form/Input.astro';
 ---
 
-<FormWrap
-    formId="xvggdoal"
->
+<FormWrap formId="xwppakoz">
     <div class="space-y-8 w-full">
-        <h2 class="font-semibold text-2xl text-neutral-950 md:text-3xl leading-[105%]">Wholesale Order Inquiry</h2>
+        <h2 class="font-semibold text-2xl text-neutral-950 md:text-3xl leading-[105%]">Become a Partner</h2>
         <p class="text-gray-800 text-lg leading-relaxed">
-            Interested in wholesale opportunities? Please fill out the form below and we'll get back to you with pricing and details.
+            Looking to partner with us as a distributor, healthcare provider, or clinician? Fill out this form and we'll be in touch with next steps.
         </p>
     
         <div class="space-y-6">
@@ -36,29 +34,28 @@ import FormWrap from '../FormWrap.astro';
                 </div>
             </div>
 
-            <div class="space-y-6">
-                <NumberInput
-                    client:load
-                    id="traumaSplintQuantity"
-                    name="traumaSplintQuantity"
-                    label="Trauma Splint Quantity"
-                />
-
-                <NumberInput
-                    client:load
-                    id="nightSplintQuantity"
-                    name="nightSplintQuantity"
-                    label="Night Splint Quantity"
-                />
+            <div class="form-group">
+                <Label labelFor="partnerType">Partnership Type</Label>
+                <select
+                    required
+                    id="partnerType"
+                    name="partnerType"
+                    class={`${inputStyle} w-full rounded-lg bg-white/90`}
+                >
+                    <option value="">Select partnership type</option>
+                    <option value="distributor">Distributor</option>
+                    <option value="clinic">Healthcare Provider/Clinic</option>
+                    <option value="clinician">Individual Clinician</option>
+                    <option value="other">Other</option>
+                </select>
             </div>
 
             <div class="form-group">
-                <Label labelFor="message">Order Details</Label>
+                <Label labelFor="message">Additional Information</Label>
                 <TextArea
                     name="message"
                     rows={4}
                     maxlength={1000}
-                    placeholder="Please include your estimated order quantity and any specific products you're interested in."
                 ></TextArea>
             </div>
 
@@ -75,7 +72,7 @@ import FormWrap from '../FormWrap.astro';
                 type="submit"
                 class="bg-primary hover:bg-primary/90 hover:shadow-md px-8 py-4 rounded-lg w-full md:w-auto font-medium text-white transition-all"
             >
-                Send Message
+               Send Message
             </button>
         </div>
     </div>

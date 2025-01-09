@@ -170,12 +170,12 @@
 :root {
   --main-bg-color: rgb(255, 255, 255);
   --main-font-color: rgb(5, 5, 5);
-  --green-color: #5a9784;
+  --green-color: #29a37c;
   --about-bg-color: rgb(11, 12, 15);
   --purple-highlight-color: rgb(109, 58, 204);
   --orange-highlight-color: rgb(216, 79, 25);
   --blue-highlight-color: rgb(94, 204, 212);
-  --green-highlight-color: rgb(82, 185, 159);
+  --green-highlight-color: #29a37c;
   --red-highlight-color: rgb(233, 64, 71);
 }
 
@@ -319,15 +319,12 @@ input {
 }
 
 .explore.landing {
-  margin: 0;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  z-index: 2;
-  padding: 1rem;
-  border-radius: 5rem;
-  width: 25vw;
-  text-align: center;
+  @apply inline-flex justify-center items-center rounded-lg px-8 py-3 
+         text-base font-semibold transition-colors cursor-pointer
+         hover:scale-[1.02] focus-visible:outline-none
+         focus-visible:ring-2 focus-visible:ring-ring ring-offset-background 
+         focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none
+         bg-primary text-primary-foreground hover:bg-primary/90;
 }
 
 #logo {

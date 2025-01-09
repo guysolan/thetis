@@ -1,44 +1,61 @@
 ---
-import Slide from '@/components/Slide.astro';
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from '@thetis/ui/cn';
+import HighlightedWord from '../../HighlightedWord';
+import BulkOrders from '../../buy-button/BulkOrders';
+import FreeAndSecure from '../../buy-button/FreeAndSecure';
 ---
 
-    <section class="bg-gradient-to-b from-primary/20 to-white mt-0 px-2 md:px-8 lg:px-24 pt-32 pb-16 hero-section">
-      
-        <div
-            class="flex lg:flex-row flex-col justify-center items-center lg:items-start gap-y-8 lg:gap-y-0 lg:gap-x-8 my-8"
-        >
-                <iframe
-                    class="w-[95vw] md:w-[47.5vw] h-[55vw] md:h-[27.5vw]"
-                    title="Trauma-Splint-Application"
-                    src="https://www.youtube.com/embed/t-MAXbiqQkU"
-                    allowfullscreen></iframe>
-            <div
-                class="flex flex-col justify-center lg:justify-start items-center lg:items-start gap-y-8 lg:pt-4 lg:w-7/12 text-center lg:text-left"
-            >
-                <h1 class="font-semibold text-2xl lg:text-4xl">Achilles Tendon Rupture Trauma Splint</h1>
-                <p class="text-gray-700 text-xl">A modern and convenient splint for suspected Achilles rupture. The splint is applied in A&E/ER and does not require training to apply. It holds the foot plantar flexed until seen the patient is by a specialist.</p>
-                  <i class="lg:pt-4 pb-4 lg:pb-8 font-semibold text-center text-lg lg:text-xl">
-            AVAILABLE TO HOSPITALS AND MEDICAL PROFESSIONALS.
-                  </i>
-                <a
-                    href="./contact"
-                    class={cn(buttonVariants({ variant: "default", size: "lg" }))}
-                    >Order Now</a
-                >
-                <p class="font-normal text-lg lg:text-xl">
-                    Trusted by <img
-                        width="80"
-                        height="40"
-                        class="inline-flex my-auto ml-1 w-[66px] lg:w-[88px] object-cover"
-                        src="/images/NHS_logo.png"
-                        alt="NHS England Logo"
-                    />
-                </p>
+<section class="bg-gradient-to-b from-primary/20 to-white mt-0 pt-16 lg:pt-32 pb-16 hero-section">
+    <div class="mx-auto px-4 container">
+        <h1 class="mb-6 lg:px-24 font-semibold text-4xl text-center text-gray-900 md:text-5xl">
+            The <HighlightedWord>Modern</HighlightedWord> Solution for Achilles Tendon <HighlightedWord>Rupture</HighlightedWord>
+        </h1>
+        <p class="mx-auto mb-8 max-w-3xl text-center text-gray-700 text-xl">
+            A convenient splint for suspected Achilles rupture, designed for immediate application in A&E/ER. Maintains optimal foot position until specialist consultation.
+        </p>
+
+        <div class="flex lg:flex-row flex-col gap-4 lg:gap-8 my-2">
+            <iframe
+                class="group-hover:scale-[102%] relative shadow-lg group-hover:shadow-xl rounded-lg w-full lg:max-w-[45vw] h-full transition-all duration-300 aspect-video"
+                title="Trauma-Splint-Application"
+                src="https://www.youtube.com/embed/t-MAXbiqQkU"
+                allowfullscreen>
+            </iframe>
+
+            <div class="space-y-6 w-full text-left">
+                <div class="space-y-4">
+                    <h2 class="font-semibold text-2xl">Available to Medical Professionals</h2>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-neutral-700 dark:text-neutral-300">&#10003;</span>
+                            <span>No Training Required</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-neutral-700 dark:text-neutral-300">&#10003;</span>
+                            <span>Immediate Application</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-neutral-700 dark:text-neutral-300">&#10003;</span>
+                            <span>NHS Approved</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-8">
+                    <div class="flex sm:flex-row lg:flex-row flex-col gap-4">
+                        <a
+                            href="/order-wholesale"
+                            class={cn(buttonVariants({ variant: "default", size: "lg" }), "w-full sm:w-auto")}
+                        >Order Now</a>
+                    </div>
+                    <FreeAndSecure />
+                    <BulkOrders />
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 <style>
     @keyframes fadeInUp {
