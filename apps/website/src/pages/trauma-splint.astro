@@ -3,13 +3,10 @@ import Layout from "../layouts/Layout.astro";
 import Slide from "@/components/Slide.astro";
 import TraumaSplintInstructions from "@/components/products/trauma-splint/trauma-splint-instructions/index.astro";
 import Quote from "@/components/Quote.astro";
-import EmailCTA from "@/components/CTA/EmailCTA.astro";
 import SizeChart from "@/components/SizeChart.tsx";
 import { ClientRouter } from "astro:transitions";
-import ProsCons from "@/components/ProsCons.astro";
 import DownloadList from "@/components/DownloadList.astro";
-import EvidenceTable from '@/components/products/trauma-splint/EvidenceTable.tsx';
-import EvidenceChart from '@/components/products/trauma-splint/evidence-chart/index.astro';
+import EvidenceChart from '@/components/products/trauma-splint/EvidenceChart.astro';
 import TraumaSplintHero from '@/components/products/trauma-splint/TraumaSplintHero.astro';
 import TraumaSplintProsCons from '../components/products/trauma-splint/TraumaSplintProsCons.astro';
 ---
@@ -39,7 +36,7 @@ import TraumaSplintProsCons from '../components/products/trauma-splint/TraumaSpl
         <TraumaSplintProsCons />
     </Slide>
 
-    <EvidenceChart client:load />
+    <EvidenceChart />
 
  
    <TraumaSplintInstructions />
