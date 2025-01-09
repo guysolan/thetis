@@ -1,0 +1,56 @@
+---
+interface Props {
+    id: string;
+    name: string;
+    label: string;
+}
+
+const { id, name, label } = Astro.props;
+import { Minus, Plus } from 'lucide-react';
+---
+
+<div class="flex flex-row gap-4 w-full">
+    <label class="block w-full font-medium text-lg">{label}</label>
+    <div class="flex justify-center items-center rounded-sm ring-1 ring-gray-400 focus-within:ring-primary focus:ring-2 dark:ring-zinc-800 w-full min-w-60 font-semibold text-3xl transition-[box-shadow] group">
+        <button
+            type="button"
+            class="flex items-center pr-[.325em] pl-[.5em]"
+            onclick={`decrementValue('${id}')`}
+        >
+            <Minus className="size-4" />
+        </button>
+        <input
+            type="number"
+            {id}
+            {name}
+            min="0"
+            value="0"
+            class="bg-transparent py-2 border-none ring-none w-[1.5em] min-w-16 text-center [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [appearance:textfield] outline-none"
+        />
+        <button
+            type="button"
+            class="flex items-center pr-[.5em] pl-[.325em]"
+            onclick={`incrementValue('${id}')`}
+        >
+            <Plus className="size-4" />
+        </button>
+    </div>
+</div>
+
+<script>
+    // Make sure functions are available in the global scope
+    window.incrementValue = function(id: string) {
+        const input = document.getElementById(id) as HTMLInputElement;
+        if (input) {
+            input.value = String(parseInt(input.value) + 1);
+        }
+    }
+
+    window.decrementValue = function(id: string) {
+        const input = document.getElementById(id) as HTMLInputElement;
+        if (input) {
+            const newValue = Math.max(0, parseInt(input.value) - 1);
+            input.value = String(newValue);
+        }
+    }
+</script> 

@@ -45,6 +45,7 @@
     "marked": "^4.3.0",
     "notion-page-to-html": "^1.2.0",
     "notion-to-md": "^2.5.6",
+    "number-flow": "^0.5.1",
     "pnpm": "^9.12.3",
     "react": "^19.0.0",
     "react-chartjs-2": "^5.2.0",

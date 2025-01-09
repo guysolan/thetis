@@ -265,7 +265,7 @@ const ShopifyBuyButton: React.FC<ShopifyBuyButtonProps> = ({
               styles: {
                 toggle: {
                   "font-family": "Raleway, sans-serif",
-                  "background-color": "#5a9784",
+                  "background-color": "#29A37C",
                   ":hover": {
                     "background-color": "#29A37C",
                   },

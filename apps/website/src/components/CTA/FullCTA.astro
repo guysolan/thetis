@@ -2,6 +2,7 @@
 import { buttonVariants } from '../ui/button'
 import Slide from '../Slide.astro'
 import { cn } from '../../lib/utils'
+import {Image} from 'astro:assets'
 
 interface Props {
     title: string
@@ -10,7 +11,7 @@ interface Props {
     secondaryHref: string
     primaryWords: string
     secondaryWords: string
-    image: string
+    image: ImageMetadata
     imageAlt: string
 }
 
@@ -27,9 +28,9 @@ const {
 ---
 
 <Slide>
-    <div class="flex flex-col lg:flex-row gap-8 w-full items-center">
+    <div class="flex lg:flex-row flex-col items-center gap-8 w-full">
         <div class="w-full">
-            <img id="" src={image} alt={imageAlt} loading="lazy" />
+            <Image width={600} height={450} id="" src={image} alt={imageAlt} loading="lazy" />
         </div>
         <div class="space-y-4 w-full max-w-1/2">
             <h2 class="text-2xl">{title}</h2>

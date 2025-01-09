@@ -3,16 +3,17 @@ import ProsConsSection from "@/components/pros-cons/ProsConsSection.astro";
 ---
 
 <div class="mx-auto lg:py-16 space-8">
-    <div class="lg:gap-12 space-y-8 lg:grid lg:grid-cols-2">
+    <div class="flex md:flex-row flex-col gap-8 lg:gap-16 lg:px-8">
+
         <!-- Problem Section -->
         <ProsConsSection 
             type="negative"
             title="The Problem with Plaster"
-            description="Traditional plaster of paris casts are heavy, rigid, and can cause significant discomfort during the 10-week rehabilitation period. They cannot be removed and pose hygiene challenges."
+            description="Traditional plaster of paris casts are heavy, rigid, and can't easily be removed."
             items={[
                 "Slow to Apply",
                 "Training Required",
-                "Must remote to scan",
+                "Must remove to scan",
                 "Prone to Damage"
             ]}
         />
@@ -21,7 +22,7 @@ import ProsConsSection from "@/components/pros-cons/ProsConsSection.astro";
         <ProsConsSection 
             type="positive"
             title="Our Solution"
-            description="A revolutionary lightweight, comfort-focused splint that makes recovery more bearable."
+            description="Quick to apply and no training required means easy scanning and quick time to diagnosis."
             items={[
                 "Quick to Apply",
                 "No Training Required",

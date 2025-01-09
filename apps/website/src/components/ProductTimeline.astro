@@ -25,14 +25,13 @@ const products = [
     description:
       "Instead of immediate plaster casting in A&E, the Trauma Splint offers a more flexible solution for initial assessment and diagnosis.",
     benefits: [
-      "Allows for easy ultrasound assessment without removal",
+      "Allows for easy ultrasound assessment",
       "Halves the time from A&E to treatment decision",
       "Eliminates need for plaster room visits",
       "Maintains proper tip-toe position for initial healing",
     ],
     links: {
-      primary: "/contact",
-      secondary: "/trauma-splint",
+      primary: "/trauma-splint",
     },
   },
   {
@@ -42,7 +41,7 @@ const products = [
       alt: "Night Splint Image",
     },
     description:
-      "During the crucial 2-12 week recovery period, replace your uncomfortable boot at night with our specialized Night Splint.",
+      "During the crucial 2-12 week recovery period, replace your uncomfortable boot at night with our specialised Night Splint.",
     benefits: [
       "Maintains proper healing position while sleeping",
       "Significantly more comfortable than sleeping in a boot",
@@ -50,8 +49,7 @@ const products = [
       "Compatible with standard daytime boot treatment",
     ],
     links: {
-      primary: "/contact",
-      secondary: "/night-splint",
+      primary: "/night-splint",
     },
     reverse: true,
   },
@@ -115,12 +113,7 @@ const products = [
                   >
                     Order Now
                   </a>
-                  <a
-                    href={product.links.secondary}
-                    class={cn(buttonVariants({ size: "lg", variant: "outline" }),'w-fit md:text-base transition-transform hover:scale-105 dark:text-neutral-200')}
-                  >
-                    Learn More
-                  </a>
+                 
                 </div>
               </div>
             </div>

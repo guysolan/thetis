@@ -66,11 +66,11 @@ const ShopifyBuyButton: React.FC<ShopifyBuyButtonProps> = ({
                   "padding-top": "16px",
                   "padding-bottom": "16px",
                   ":hover": {
-                    "background-color": "#518877",
+                    "background-color": "#29A37C",
                   },
-                  "background-color": "#5a9784",
+                  "background-color": "#29A37C",
                   ":focus": {
-                    "background-color": "#518877",
+                    "background-color": "#29A37C",
                   },
                   "border-radius": "40px",
                   "padding-left": "60px",

@@ -5,10 +5,11 @@ import "@thetis/ui/globals.css";
 import NightSplintImage from "@/assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
 import { buttonVariants } from "@/components/ui/button";
 import AthletesBadges from "@/components/AthletesBadges.astro";
-const benefitsList = ["Clinically Proven", "NHS/FDA Approved", "Fast Delivery"];
+const benefitsList = ["Clinically Proven", "FDA Approved", "Fast Delivery"];
 import HighlightedWord from "@/components/HighlightedWord.tsx";
 import HoverImageLink from "../components/HoverImageLink.astro";
 import BuyModal from '../components/BuyModal';
+import { Button } from '@/components/ui/button';
 ---
 
  <div class="bg-gradient-to-b from-primary/25 to-white dark:to-black pt-16 w-full">
@@ -43,11 +44,11 @@ import BuyModal from '../components/BuyModal';
                         
                         <!-- LARGE SCREENS ONLY -->
                         <div class="md:flex sm:flex-row flex-col gap-4 hidden pt-4">
-                        <BuyModal client:load/>
-                            <a href="/night-splint" 
+                        <a class={cn(buttonVariants({ size: 'lg', variant: 'default' }))} href="/night-splint">Buy Now</a>
+                            <a href="/contact" 
                                class={cn(buttonVariants({ size: 'lg', variant: 'outline' }), 
                                'w-full sm:w-auto text-center')}>
-                                Buy in Bulk
+                                Wholesale
                             </a>
                         </div>
 

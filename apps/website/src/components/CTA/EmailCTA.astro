@@ -14,7 +14,7 @@ const { title, paragraph }: Props = Astro.props;
 
 <div class="px-4">
     <section 
-        class="relative bg-gradient-to-tr from-primary/70 via-primary/30 to-primary/50 shadow-lg hover:shadow-xl mx-4 mx-auto rounded-[2rem] max-w-screen-lg transition-all duration-300 overflow-hidden group"
+        class="relative bg-gradient-to-tr from-primary/70 via-primary/30 to-primary/50 shadow-lg hover:shadow-xl mx-auto px-12 md:px-16 rounded-[2rem] max-w-screen-xl transition-all duration-300 overflow-hidden group"
     >
         <form
             autocomplete="on"
@@ -22,7 +22,7 @@ const { title, paragraph }: Props = Astro.props;
             method="POST"
             class="relative z-10 flex flex-col justify-center items-center space-y-8 my-16 px-6 w-full h-full"
         >
-            <div class="group-hover:scale-105 flex flex-col justify-center items-center space-y-4 w-full max-w-[650px] text-center transition-all duration-300">
+            <div class="group-hover:scale-102 flex flex-col justify-center items-center space-y-4 w-full max-w-[700px] text-center transition-all duration-300">
                 <h2 class="font-semibold text-3xl text-neutral-900 md:text-4xl">{title}</h2>
                 <p class="max-w-[650px] text-lg text-neutral-700 md:text-xl">{paragraph}</p>
             </div>
@@ -45,7 +45,7 @@ const { title, paragraph }: Props = Astro.props;
                     value="send"
                     className="h-14 max-h-14 transition-all duration-300"
                 >
-                    <span class="md:not-sr-only sr-only">Subscribe</span> <Send size={20} />
+                    <Send size={20} /><span class="md:pl-2 md:not-sr-only sr-only">Submit</span> 
                 </Button>
             </div>
         </form>

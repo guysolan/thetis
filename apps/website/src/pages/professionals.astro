@@ -7,8 +7,11 @@ import EmailCTA from "../components/CTA/EmailCTA.astro";
 import Slide from "../components/Slide.astro";
 import Title from "../components/Title.astro";
 import DownloadList from "../components/DownloadList.astro";
-import AchillesDrawing from "../assets/drawings/achilles-drawing.svg";
+import AchillesDrawing from "@/assets/drawings/achilles-drawing.svg";
 import Image from "astro/components/Image.astro";
+import TraumaSplintImage from "@/components/products/images/trauma-splint/trauma_splint.jpg";
+import NightSplintImage from "@/components/products/images/night-splint/night_splint_bed_side.jpg";
+import GetInTouch from '../components/CTA/GetInTouch.astro';
 ---
 
 <Layout
@@ -64,7 +67,7 @@ import Image from "astro/components/Image.astro";
             secondaryHref="/trauma-splint"
             primaryWords="Order Now"
             secondaryWords="Learn More"
-            image="/images/trauma-splint/trauma-splint.jpg"
+            image={TraumaSplintImage}
             imageAlt="Trauma Splint Image"
         />
         <FullImageCTA
@@ -77,11 +80,11 @@ import Image from "astro/components/Image.astro";
             secondaryHref="/night-splint"
             primaryWords="Order Now"
             secondaryWords="Learn More"
-            image="/images/night-splint/Thetis Medical Achilles Rupture Night Splint In Bed.jpg"
+            image={NightSplintImage}
             imageAlt="Trauma Splint Image"
         />
 
-        <EmailCTA
+        <GetInTouch
             title="Sound Interesting?"
             paragraph="Want to get a sample, speak to us or just learn more?"
         />

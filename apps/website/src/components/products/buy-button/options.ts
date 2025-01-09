@@ -20,11 +20,11 @@ export const options = {
                 "padding-top": "20px",
                 "padding-bottom": "20px",
                 ":hover": {
-                    "background-color": "#518877",
+                    "background-color": "#29A37C",
                 },
-                "background-color": "#5a9784",
+                "background-color": "#29A37C",
                 ":focus": {
-                    "background-color": "#518877",
+                    "background-color": "#29A37C",
                 },
                 "border-radius": "40px",
                 "padding-left": "60px",
@@ -89,11 +89,11 @@ export const options = {
                 "padding-top": "16px",
                 "padding-bottom": "16px",
                 ":hover": {
-                    "background-color": "#518877",
+                    "background-color": "#29A37C",
                 },
-                "background-color": "#5a9784",
+                "background-color": "#29A37C",
                 ":focus": {
-                    "background-color": "#518877",
+                    "background-color": "#29A37C",
                 },
                 "border-radius": "40px",
                 "padding-left": "60px",
@@ -163,11 +163,11 @@ export const options = {
                 "padding-top": "16px",
                 "padding-bottom": "16px",
                 ":hover": {
-                    "background-color": "#518877",
+                    "background-color": "#29A37C",
                 },
-                "background-color": "#5a9784",
+                "background-color": "#29A37C",
                 ":focus": {
-                    "background-color": "#518877",
+                    "background-color": "#29A37C",
                 },
                 "border-radius": "40px",
             },
@@ -224,12 +224,12 @@ export const options = {
         styles: {
             toggle: {
                 "font-family": "Raleway, sans-serif",
-                "background-color": "#5a9784",
+                "background-color": "#29A37C",
                 ":hover": {
-                    "background-color": "#518877",
+                    "background-color": "#29A37C",
                 },
                 ":focus": {
-                    "background-color": "#518877",
+                    "background-color": "#29A37C",
                 },
             },
             count: {

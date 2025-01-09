@@ -14,6 +14,7 @@ import { Badge } from "../components/ui/badge";
 import { articles } from "../data/articles.ts";
 import nightSplintImage from "@/components/products/images/night-splint/night_splint_bed_side.jpg";
 import traumaSplintImage from "@/components/products/images/trauma-splint/trauma_splint.jpg";
+import { Box, Handshake, HeartHandshake } from "lucide-react";
 
 ("use client");
 
@@ -44,11 +45,38 @@ function DesktopNav() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <a href="/contact">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Wholesale
-            </NavigationMenuLink>
-          </a>
+          <NavigationMenuTrigger>Partners</NavigationMenuTrigger>
+          <NavigationMenuContent
+            className={cn("p-6 flex flex-col gap-2", contentWidth)}
+          >
+            <div className="flex flex-row gap-4">
+              <div className="flex-1">
+                <LinkCard
+                  title="Our Partners"
+                  description="Our partners are the best in the business."
+                  href="/partners"
+                  icon={<HeartHandshake size={20} />}
+                  variant="default"
+                />
+              </div>
+              <div className="flex flex-col flex-1 gap-4">
+                <LinkCard
+                  title="Become a Partner"
+                  description="Become a partner and help us spread the word."
+                  href="/become-a-partners"
+                  icon={<Handshake size={20} />}
+                  variant="outline"
+                />
+                <LinkCard
+                  title="Order Wholesale"
+                  description="Order wholesale products for your clinic."
+                  href="/wholesale"
+                  icon={<Box size={20} />}
+                  variant="outline"
+                />
+              </div>
+            </div>
+          </NavigationMenuContent>
         </NavigationMenuItem>
         {/* <NavigationMenuItem>
           <a href="/testimonials">
@@ -174,3 +202,46 @@ const ProductCard = React.forwardRef<
   );
 });
 ProductCard.displayName = "ProductCard";
+
+const LinkCard = ({
+  title,
+  description,
+  href,
+  icon,
+  variant = "default",
+}: {
+  title: string;
+  description: string;
+  href: string;
+  icon: React.ReactNode;
+  variant: "default" | "outline";
+}) => {
+  return (
+    <NavigationMenuLink asChild>
+      <a
+        className={cn(
+          "rounded-lg p-4 border-primary/20 border flex flex-row gap-2 items-center h-full w-full transition-colors duration-300",
+          variant === "default" &&
+            "bg-gradient-to-tr from-primary/10 to-primary/20 text-primary hover:bg-primary/15 hover:text-primary-dark",
+          variant === "outline" &&
+            "border-neutral-200 text-neutral-800 hover:bg-neutral-100 hover:text-neutral-900",
+        )}
+        href={href}
+      >
+        {icon}
+        <div className="w-full">
+          <h3
+            className={cn(
+              "font-semibold text-base",
+              variant === "default" && "text-primary",
+              variant === "outline" && "text-neutral-800",
+            )}
+          >
+            {title}
+          </h3>
+          <p className={cn("text-sm text-neutral-500")}>{description}</p>
+        </div>
+      </a>
+    </NavigationMenuLink>
+  );
+};

@@ -1,0 +1,139 @@
+---
+import { inputStyle } from '@/components/form/Input.astro';
+import NumberInput from '@/components/form/NumberInput.astro';
+import Required from '../../form/Required.astro';
+---
+
+<form
+    autocomplete="on"
+    action="https://formspree.io/f/mdobaqwr"
+    method="POST"
+    class="flex-grow border-neutral-300 bg-white/80 shadow-lg hover:shadow-xl backdrop-blur-sm p-12 border rounded-2xl w-full transition-all"
+>
+    <div class="space-y-8 w-full">
+        <h2 class="font-semibold text-2xl text-neutral-950 md:text-3xl leading-[105%]">Wholesale Order Inquiry</h2>
+        <p class="text-gray-800 text-lg leading-relaxed">
+            Interested in wholesale opportunities? Please fill out the form below and we'll get back to you with pricing and details.
+        </p>
+    
+        <div class="space-y-6">
+            <div class="form-group">
+                <label for="businessName" class="block mb-2 font-medium text-sm">Business Name<Required/></label>
+                <input
+                    required
+                    id="businessName"
+                    name="businessName"
+                    type="text"
+                    class={`${inputStyle} w-full rounded-lg bg-white/90`}
+                />
+            </div>
+
+            <div class="gap-6 grid md:grid-cols-2">
+                <div class="form-group">
+                    <label for="name" class="block mb-2 font-medium text-sm">Contact Name<Required/></label>
+                    <input
+                        required
+                        id="name"
+                        name="name"
+                        type="text"
+                        class={`${inputStyle} w-full rounded-lg bg-white/90`}
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="block mb-2 font-medium text-sm">Business Email<Required/></label>
+                    <input
+                        required
+                        id="email"
+                        name="email"
+                        type="email"
+                        class={`${inputStyle} w-full rounded-lg bg-white/90`}
+                    />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="block mb-2 font-medium text-sm">Phone Number</label>
+                <input
+                    required
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    class={`${inputStyle} w-full rounded-lg bg-white/90`}
+                />
+            </div>
+
+            <div class="space-y-6">
+                <NumberInput
+                    client:load
+                    id="traumaSplintQuantity"
+                    name="traumaSplintQuantity"
+                    label="Trauma Splint Quantity"
+                />
+
+                <NumberInput
+                    client:load
+                    id="nightSplintQuantity"
+                    name="nightSplintQuantity"
+                    label="Night Splint Quantity"
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="message" class="block mb-2 font-medium text-sm">Order Details<Required/></label>
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    maxlength="1000"
+                    placeholder="Please include your estimated order quantity and any specific products you're interested in."
+                    class={`${inputStyle} w-full rounded-lg resize-none bg-white/90`}
+                ></textarea>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <input
+                    class="border-gray-300 rounded w-4 h-4"
+                    id="opt-out"
+                    name="opt-out"
+                    type="checkbox"
+                />
+                <label for="opt-out" class="text-base text-gray-600">Opt out of marketing communications.</label>
+            </div>
+
+            <button
+                type="submit"
+                class="bg-primary hover:bg-primary/90 hover:shadow-md px-8 py-4 rounded-lg w-full md:w-auto font-medium text-white transition-all"
+            >
+                Submit Inquiry
+            </button>
+        </div>
+    </div>
+</form>
+
+<script>
+function incrementValue(id) {
+    const input = document.getElementById(id);
+    const currentValue = parseInt(input.value) || 0;
+    input.value = currentValue + 1;
+}
+
+function decrementValue(id) {
+    const input = document.getElementById(id);
+    const currentValue = parseInt(input.value) || 0;
+    if (currentValue > 0) {
+        input.value = currentValue - 1;
+    }
+}
+</script>
+
+<style>
+.spin-hide::-webkit-inner-spin-button,
+.spin-hide::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.spin-hide {
+    -moz-appearance: textfield;
+}
+</style>

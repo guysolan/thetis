@@ -51,7 +51,7 @@ const WhatSizeAmI = () => {
           <p className="font-semibold text-lg">Choose your Options</p>
           <button
             type="button"
-            className="font-medium text-md text-primary underline underline-offset-2 cursor-pointer"
+            className="font-semibold text-md text-primary underline underline-offset-2 cursor-pointer"
             onClick={() => setIsCalculatorVisible(!isCalculatorVisible)}
           >
             What Size am I?
@@ -61,7 +61,7 @@ const WhatSizeAmI = () => {
         {isCalculatorVisible && (
           <div className="flex flex-row gap-4">
             <select
-              className="border-neutral-200 bg-transparent px-3 py-2 border w-1/3 text-sm"
+              className="border-neutral-200 bg-transparent bg-white px-3 py-2 border w-1/3 text-sm"
               value={sizeType}
               onChange={(e) => setSizeType(e.target.value as SizeType)}
             >
