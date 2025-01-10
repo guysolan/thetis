@@ -108,7 +108,7 @@ const NavAccordion = () => {
                 </span>
                 <div>
                   <h3 className="font-semibold text-base text-neutral-800 md:text-lg dark:text-neutral-200">
-                    {article.title}å
+                    {article.title}
                   </h3>
                   {article.description && (
                     <p className="text-neutral-500 text-sm md:text-base dark:text-neutral-400">

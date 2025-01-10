@@ -4,7 +4,7 @@ import HighlightedWord from "../HighlightedWord.tsx";
 
 function ProfessionalOpinionsCarousel() {
   return (
-    <div className="relative bg-gradient-to-b from-neutral-50 dark:from-neutral-900 to-white dark:to-black py-24">
+    <div className="relative mx-auto py-24 max-w-4xl">
       <div className="mx-auto px-4 container">
         <div className="space-y-6 mb-16 text-center">
           <h2 className="font-semibold text-3xl md:text-4xl leading-tight">
@@ -23,7 +23,7 @@ function ProfessionalOpinionsCarousel() {
             width={250}
             testimonials={clinicians.map((t) => ({
               ...t,
-              src: t.image.src,
+              src: t.image?.src,
             }))}
             autoplay={false}
           />

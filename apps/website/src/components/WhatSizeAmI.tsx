@@ -4,7 +4,7 @@ import { Input } from "@thetis/ui/input";
 // Constants
 const sizeTypes = ["EU", "UK", "US Men", "US Women"] as const;
 const sizeGuide = [
-  { metric: "EU", threshold: 38, step: 1 },
+  { metric: "EU", threshold: 42, step: 1 },
   { metric: "UK", threshold: 8, step: 0.5 },
   { metric: "US Men", threshold: 9, step: 0.5 },
   { metric: "US Women", threshold: 10.5, step: 0.5 },

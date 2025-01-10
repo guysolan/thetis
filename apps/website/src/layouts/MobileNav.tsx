@@ -1,11 +1,4 @@
 import Social from "@/components/icons/socials/Social.tsx";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-  NoAccordionLink,
-} from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
 import { buttonVariants } from "../components/ui/button";
 import {
@@ -19,14 +12,13 @@ import {
   SheetTrigger,
 } from "../components/ui/sheet";
 
-import { articles } from "../content/articles.tsx";
-import { products } from "../content/products.ts";
 import { cn } from "../lib/utils";
 
 ("client only");
 
 import NavAccordion from "./NavAccordion";
-// import { amazonLink } from '@/services/getAmazonLink'
+import { ArrowRight } from "lucide-react";
+
 export function MobileNav() {
   return (
     <Sheet>
@@ -45,6 +37,15 @@ export function MobileNav() {
           </SheetClose>
         </SheetHeader>
         <NavAccordion />
+        <h3 className="flex flex-1 justify-between items-center py-4 pr-1 border-b font-medium transition-all">
+          <a
+            className="flex justify-between items-center w-full h-full font-light text-lg"
+            href="/professionals"
+          >
+            Professionals
+            <ArrowRight className="w-4 h-4 shrink-0" />
+          </a>
+        </h3>
 
         <SheetFooter className="flex flex-col gap-y-4 mt-4">
           <SheetClose>

@@ -28,28 +28,47 @@ const {
 ---
 
 <Slide>
-    <div class="flex lg:flex-row flex-col items-center gap-8 w-full">
-        <div class="w-full">
-            <Image width={600} height={450} id="" src={image} alt={imageAlt} loading="lazy" />
-        </div>
-        <div class="space-y-4 w-full max-w-1/2">
-            <h2 class="text-2xl">{title}</h2>
-            <div class="space-y-4">
-                {paragraph.map((paragraph) => <p>{paragraph}</p>)}
+    <div class="mx-auto container">
+        <div class="flex lg:flex-row flex-col justify-between items-center gap-8">
+            <!-- Left column (image) -->
+            <div class="w-full lg:w-5/12">
+                <Image 
+                    src={image} 
+                    alt={imageAlt} 
+                    width={800} 
+                    height={600}
+                    class="group-hover:scale-[102%] group-hover:brightness-[0.85] shadow-lg hover:shadow-2xl rounded-xl transition-all duration-300"
+                    loading="lazy" 
+                />
             </div>
-            <div class="flex gap-x-4 pt-4">
-                <a
-                    href={primaryHref}
-                    class={cn(
-                        buttonVariants({ size: 'lg', variant: 'default' })
-                    )}>{primaryWords}</a
-                >
-                <a
-                    href={secondaryHref}
-                    class={cn(
-                        buttonVariants({ size: 'lg', variant: 'outline' })
-                    )}>{secondaryWords}</a
-                >
+
+            <!-- Right column (text content) -->
+            <div class="flex flex-col gap-y-6 lg:pl-16 lg:w-7/12">
+                <h2 class="font-semibold text-2xl text-neutral-950 md:text-4xl dark:text-neutral-50 leading-[105%]">
+                    {title}
+                </h2>
+                <div class="space-y-4">
+                    {paragraph.map((p) => (
+                        <p class="text-gray-800 dark:text-neutral-200 leading-relaxed">{p}</p>
+                    ))}
+                </div>
+                <div class="flex sm:flex-row flex-col gap-4 pt-4">
+                    <a
+                        href={primaryHref}
+                        class={cn(buttonVariants({ size: 'lg', variant: 'default' }))}
+                    >
+                        {primaryWords}
+                    </a>
+                    <a
+                        href={secondaryHref}
+                        class={cn(
+                            buttonVariants({ size: 'lg', variant: 'outline' }),
+                            'w-full sm:w-auto text-center'
+                        )}
+                    >
+                        {secondaryWords}
+                    </a>
+                </div>
             </div>
         </div>
     </div>

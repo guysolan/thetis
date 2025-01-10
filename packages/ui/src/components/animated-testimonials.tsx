@@ -82,11 +82,13 @@ export const AnimatedTestimonials = ({
   autoplay = false,
   width = 500,
   height = 500,
+  baseZIndex = 1,
 }: {
   testimonials: Testimonial[];
   autoplay?: boolean;
   width?: number;
   height?: number;
+  baseZIndex?: number;
 }) => {
   const [active, setActive] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -140,12 +142,13 @@ export const AnimatedTestimonials = ({
   }, [autoplay, isHovered, testimonials.length]);
 
   const arrowStyle =
-    "flex justify-center items-center bg-green-500 rounded-full w-7 h-7 text-white cursor-pointer group/button hover:rotate-2";
+    "flex justify-center items-center bg-primary rounded-full w-10 h-10 text-white cursor-pointer group/button hover:rotate-2";
   return (
     <div
       className="mx-auto px-4 md:px-8 lg:px-12 py-20 font-sans antialiased"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      style={{ zIndex: baseZIndex }}
     >
       <div className="relative flex md:flex-row flex-col items-center gap-8 md:gap-32">
         <div className="flex flex-col justify-center py-4 pr-4 w-full md:w-2/3">
@@ -174,31 +177,51 @@ export const AnimatedTestimonials = ({
             <p className="text-base text-gray-500 dark:text-neutral-500">
               {testimonials[active].description}
             </p>
-            <motion.p className="mt-4 text-base text-gray-500 dark:text-neutral-300">
-              {testimonials[active].quote.split(" ").map((word, index) => (
-                <motion.span
-                  key={index}
+            {testimonials[active].body
+              .split("\n\n")
+              .map((paragraph, pIndex) => (
+                <motion.p
+                  key={pIndex}
+                  className="mt-4 text-base text-gray-500 dark:text-neutral-300"
                   initial={{
-                    filter: "blur(10px)",
                     opacity: 0,
-                    y: 5,
+                    y: 20,
                   }}
                   animate={{
-                    filter: "blur(0px)",
                     opacity: 1,
                     y: 0,
                   }}
                   transition={{
-                    duration: 0.2,
+                    duration: 0.3,
                     ease: "easeInOut",
-                    delay: 0.02 * index,
+                    delay: 0.2 * pIndex,
                   }}
-                  className="inline-block"
                 >
-                  {word}&nbsp;
-                </motion.span>
+                  {paragraph.split(" ").map((word, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{
+                        filter: "blur(10px)",
+                        opacity: 0,
+                        y: 5,
+                      }}
+                      animate={{
+                        filter: "blur(0px)",
+                        opacity: 1,
+                        y: 0,
+                      }}
+                      transition={{
+                        duration: 0.2,
+                        ease: "easeInOut",
+                        delay: 0.2 * pIndex + 0.02 * index,
+                      }}
+                      className="inline-block"
+                    >
+                      {word}&nbsp;
+                    </motion.span>
+                  ))}
+                </motion.p>
               ))}
-            </motion.p>
           </motion.div>
           <div className="flex gap-4 mt-8">
             <button

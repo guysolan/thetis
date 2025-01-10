@@ -15,7 +15,7 @@ import { articles } from "../content/articles.tsx";
 
 ("use client");
 
-const contentWidth = "min-w-[800px]";
+const contentWidth = "min-w-[min(50vw,700px)]";
 
 import { partnerLinks, productLinks } from "../content/pages.tsx";
 

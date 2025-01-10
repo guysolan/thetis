@@ -33,8 +33,8 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
   productId = "8572432253256",
   className = "",
 }) => {
-  const [currentSize, setCurrentSize] = useState<Size | undefined>(undefined);
-  const [currentSide, setCurrentSide] = useState<Side | undefined>(undefined);
+  const [currentSize, setCurrentSize] = useState<Size | undefined>("large");
+  const [currentSide, setCurrentSide] = useState<Side | undefined>("right");
   const [key, setKey] = useState(() => Date.now());
   const [isInitialRender, setIsInitialRender] = useState(true);
 

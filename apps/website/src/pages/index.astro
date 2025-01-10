@@ -5,6 +5,7 @@ import LandingHero from "@/layouts/LandingHero.astro";
 import Reviews from "@/components/reviews/InfiniteReviews.astro";
 import EmailCTA from "@/components/CTA/EmailCTA.astro";
 import "@thetis/ui/globals.css";
+import SleepInYourWellies from "@/components/SleepInYourWellies.tsx";
 import ProductTimeline from "@/components/ProductTimeline.astro";
 import ProfessionalOpinionsCarousel from "@/components/reviews/ProfessionalOpinionsCarousel";
 import ComplianceLogos from "../components/compliance/ComplianceLogos.astro";
@@ -28,23 +29,15 @@ import BuyNightSplintPopup from '../components/BuyNightSplintPopup';
 
        <ComplianceLogos />
 
-
         <ProductTimeline     />
 
-<!-- 
+        <!-- 
         <EmailCTA
             title="End the Sleepless Nights"
             paragraph="Speak to us to allow you, your loved ones or your patients to recover in comfort"
         /> -->
 
-        <div class="h-24"/>
-
-
-        <!-- <NightSplintCarousel client:load/> -->
-
-        <!-- <Testimonials /> -->
-
-        <!-- <ProfessionalOpinionsCarousel client:load /> -->
+        <ProfessionalOpinionsCarousel client:load />
        
     </main>
 </Layout>

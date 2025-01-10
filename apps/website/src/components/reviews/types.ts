@@ -3,6 +3,7 @@ export interface Review {
     description?: string;
     date?: string;
     image?: ImageMetadata;
+    link?: string;
     stars?: number;
     title: string;
     body: string;

@@ -2,9 +2,10 @@
 import { InfiniteMovingCards } from "@thetis/ui/infinite-moving-cards";
 
 import {patients} from "./content/patients";
+import ReviewCarousel from './ReviewCarousel';
 ---
 
-<div class="relative left-0 flex flex-col justify-center items-center py-8 rounded-md w-[100vw] antialiased overflow-hidden">
+<div class="relative left-0 lg:flex flex-col justify-center items-center hidden py-8 rounded-md w-[100vw] antialiased overflow-hidden">
   <InfiniteMovingCards
     items={patients
       .filter((review) => review.is_pinned)
@@ -14,3 +15,9 @@ import {patients} from "./content/patients";
     client:load
   />
 </div>
+
+<div class="relative left-0 flex flex-col justify-center items-center lg:hidden py-8 rounded-md w-[100vw] antialiased overflow-hidden">
+  <ReviewCarousel /> 
+</div>
+
+

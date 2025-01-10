@@ -5,10 +5,11 @@ import "@thetis/ui/globals.css";
 import NightSplintImage from "@/assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
 import { buttonVariants } from "@/components/ui/button";
 import AthletesBadges from "@/components/AthletesBadges.astro";
-const benefitsList = ["Clinically Proven", "FDA Approved", "Fast Delivery"];
 import HighlightedWord from "@/components/HighlightedWord.tsx";
 import HoverImageLink from "../components/HoverImageLink.astro";
 import ColorGradient from '@/components/ColorGradient.astro';
+
+const benefitsList = ["Clinically Proven", "FDA Approved", "Fast Delivery"];
 ---
 
 <ColorGradient>
@@ -32,12 +33,12 @@ import ColorGradient from '@/components/ColorGradient.astro';
                         alt="Thetis Medical Achilles Rupture Night Splint"
                         class="group-hover:scale-[102%] group-hover:brightness-[0.85] shadow-lg hover:shadow-2xl rounded-xl transition-all duration-300" 
                     />
-                    <a class={cn(buttonVariants({ size: 'lg', variant: 'default' }),'bottom-4 left-4 absolute')} href="/night-splint">Buy Now</a>
+                    <a class={cn(buttonVariants({ size: 'lg', variant: 'default' }),'bottom-4 left-4 absolute')} href="/buy-now">Buy Now</a>
                 </div>
 
                 <!-- LARGE SCREENS ONLY -->
                 <div class="lg:flex sm:flex-row flex-col gap-4 hidden">
-                    <a class={cn(buttonVariants({ size: 'lg', variant: 'default' }))} href="/night-splint">Buy Now</a>
+                    <a class={cn(buttonVariants({ size: 'lg', variant: 'default' }))} href="/buy-now">Buy Now</a>
                     <a href="/contact" 
                         class={cn(buttonVariants({ size: 'lg', variant: 'outline' }), 
                         'w-full sm:w-auto text-center')}>
@@ -53,7 +54,7 @@ import ColorGradient from '@/components/ColorGradient.astro';
                         </div>
                     ))}
                 </div>
-
+                
                 <div class="pt-8 md:pt-2">
                     <AthletesBadges />
                 </div>
