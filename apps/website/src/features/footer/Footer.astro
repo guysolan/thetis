@@ -3,6 +3,7 @@ import Social from "@/components/icons/socials/Social";
 import Slide from "@/components/Slide.astro";
 import FooterEmailCTA from "@/components/CTA/FooterEmailCTA.astro";
 import FooterBlock from './FooterBlock.astro';
+import { ThemeToggle } from '../../components/theme/ThemeToggle';
 
 const footerLinks = {
   company: {
@@ -96,6 +97,10 @@ const socials = [
 
         <div class="flex md:flex-row flex-col justify-center md:justify-between items-center border-gray-800 mt-8 pt-6 border-t">
             <p class="text-base text-gray-300">&copy; Thetis Medical Ltd 2020-2025</p>
+        </div>
+
+        <div class="sr-only">
+        <ThemeToggle />
         </div>
     </footer>
 </Slide>
