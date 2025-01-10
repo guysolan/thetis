@@ -1,30 +1,34 @@
 import { Minus, Plus } from "lucide-react";
+import React from "react";
 
 interface NumberInputProps {
   id: string;
   name: string;
   label: string;
-  value?: number;
-  onChange?: (value: number) => void;
+  value?: number | undefined;
+  onChange?: (value: number | undefined) => void;
+  defaultValue?: number;
 }
 
 export function NumberInput({
   id,
   name,
   label,
-  value = 0,
-  onChange,
+  defaultValue = 0,
 }: NumberInputProps) {
+  const [value, setValue] = React.useState(defaultValue);
+
   const incrementValue = () => {
-    if (onChange) {
-      onChange(value + 1);
-    }
+    setValue((prev) => prev + 1);
   };
 
   const decrementValue = () => {
-    if (onChange) {
-      onChange(Math.max(0, value - 1));
-    }
+    setValue((prev) => Math.max(0, prev - 1));
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setValue(inputValue === "" ? undefined : parseInt(inputValue) || 0);
   };
 
   return (
@@ -49,7 +53,7 @@ export function NumberInput({
           name={name}
           min="0"
           value={value}
-          onChange={(e) => onChange?.(parseInt(e.target.value) || 0)}
+          onChange={handleInputChange}
           className="border-0 hover:border-0 focus:border-0 bg-transparent py-2 hover:ring-0 focus:ring-0 w-[1.5em] min-w-16 text-center [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [appearance:textfield] hover:outline-none focus:outline-none"
         />
         <button

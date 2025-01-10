@@ -9,12 +9,12 @@ import { Badge } from "../components/ui/badge";
 import { articles } from "@thetis/website/src/content/articles";
 import { productLinks } from "@/content/pages.tsx";
 import { partnerLinks } from "@/content/pages.tsx";
-import { ArrowRight, X, FileText } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NavAccordion = () => {
   return (
-    <Accordion type="single" defaultValue="products" collapsible>
+    <Accordion type="single" collapsible>
       {/* Products */}
       <AccordionItem value="products">
         <AccordionTrigger>Our Products</AccordionTrigger>

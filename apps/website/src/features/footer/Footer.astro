@@ -1,0 +1,101 @@
+---
+import Social from "@/components/icons/socials/Social";
+import Slide from "@/components/Slide.astro";
+import FooterEmailCTA from "@/components/CTA/FooterEmailCTA.astro";
+import FooterBlock from './FooterBlock.astro';
+
+const footerLinks = {
+  company: {
+    title: "Company",
+    links: [
+      { href: "../", label: "Home" },
+      { href: "../professionals", label: "Professionals" },
+      { href: "../contact", label: "Contact Us" },
+      { href: "../sitemap", label: "Sitemap" },
+    ]
+  },
+  products: {
+    title: "Products",
+    links: [
+      { href: "../night-splint", label: "Achilles Rupture Night Splint" },
+      { href: "../trauma-splint", label: "Achilles Rupture Trauma Splint" },
+    ]
+  },
+  patientGuides: {
+    title: "Patient Guides",
+    links: [
+      { href: "../achilles-ruptures", label: "Achilles Ruptures" },
+      { href: "../FAQs/achilles-rupture-timeline", label: "Achilles Rupture Timeline" },
+      { href: "../FAQs/is-my-achilles-ruptured", label: "Is my Achilles Ruptured?" },
+      { href: "../FAQs/what-happens-if-my-achilles-is-ruptured?", label: "What happens if my Achilles is ruptured?" },
+      { href: "../FAQs/achilles-tear-treatment", label: "Achilles Tear Treatment" },
+      { href: "../FAQs/torn-achilles-recovery", label: "Torn Achilles Recovery" },
+      { href: "../FAQs/life-after-achilles-rupture", label: "Life After Achilles Rupture" },
+      { href: "../evidence-based-recovery", label: "Evidence Based Recovery" },
+    ]
+  },
+  partners: {
+    title: "Partners",
+    links: [
+      { href: "/partners", label: "Partners" },
+      { href: "/order-wholesale", label: "Order Wholesale" },
+      { href: "/become-a-partner", label: "Become a Partner" },
+    ]
+  }
+};
+
+const socials = [
+  { mode: "mail", color: "white" },
+  { mode: "linkedin", color: "white" },
+  { mode: "instagram", color: "white" },
+  { mode: "facebook", color: "white" },
+];
+---
+
+<Slide background="black">
+    <footer class="w-full text-white">
+        <div class="gap-8 lg:gap-12 grid grid-cols-1 lg:grid-cols-3 text-center lg:text-left">
+            <!-- Company & Products -->
+            <div class="space-y-8">
+                <FooterBlock title={footerLinks.company.title} links={footerLinks.company.links} />
+                <FooterBlock title={footerLinks.products.title} links={footerLinks.products.links} />
+            </div>
+
+            <!-- Patient Guides -->
+            <div>
+                <FooterBlock 
+                    title={footerLinks.patientGuides.title} 
+                    links={footerLinks.patientGuides.links}
+                />
+            </div>
+
+            <!-- Partners & Contact -->
+            <div class="space-y-8">
+                <FooterBlock title={footerLinks.partners.title} links={footerLinks.partners.links} />
+
+                <div class="space-y-4">
+                    <h3 class="font-semibold text-lg">Stay in Touch</h3>
+                    <FooterEmailCTA />
+
+                    <div class="flex flex-col items-center lg:items-start gap-y-4">
+                        <div class="flex justify-center lg:justify-start gap-4">
+                            {socials.map((social) => (
+                                <Social color='white' mode={social.mode} />
+                            ))}
+                        </div>
+                        <a 
+                            href="mailto:info@thetismedical.com" 
+                            class="font-semibold text-base text-white hover:text-gray-300 transition-colors"
+                        >
+                            info@thetismedical.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex md:flex-row flex-col justify-center md:justify-between items-center border-gray-800 mt-8 pt-6 border-t">
+            <p class="text-base text-gray-300">&copy; Thetis Medical Ltd 2020-2025</p>
+        </div>
+    </footer>
+</Slide>

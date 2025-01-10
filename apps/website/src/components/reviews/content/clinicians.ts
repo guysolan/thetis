@@ -6,7 +6,7 @@ import type { Review } from "../types";
 export const clinicians: Review[] = [
     {
         name: "Mr James Davis",
-        link: "https://www.jamesdavis.co.uk/",
+        link: "https://www.londonfootandanklecentre.co.uk/staff/james-davis/",
         description:
             "Past President of the British Orthopaedic Foot and Ankle Society",
         image: JamesDavis,
@@ -19,9 +19,9 @@ export const clinicians: Review[] = [
         country: "GB",
     },
     {
-        name: "Robbie Ray",
-        link: "https://www.mattwelck.com/",
-        description: "Foot and Ankle Specialist",
+        name: "Dr Robbie Ray",
+        link: "https://www.drrobbieray.com/",
+        description: "Foot and Ankle Surgeon",
         image: RobbieRay,
         title: "A unique innovation in Achilles tendon rehabilitation",
         short: "A game-changing splint for controlled recovery",
@@ -36,9 +36,9 @@ I highly recommend the Thetis Medical Achilles Repair Splint to colleagues and p
         country: "GB",
     },
     {
-        name: "Dr Matt Welck",
-        link: "https://www.mattwelck.com/",
-        description: "Foot and Ankle Specialist",
+        name: "Mr Matthew Welck",
+        link: "https://matthewwelck.com/",
+        description: "Foot and Ankle Surgeon",
         image: MattWelck,
         title: "A unique innovation in Achilles tendon rehabilitation",
         short: "A game-changing splint for controlled recovery",

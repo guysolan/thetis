@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useCallback, memo } from "react";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../utils";
+import { ExternalLink } from "lucide-react";
 
 type Testimonial = {
   quote: string;
@@ -171,9 +172,15 @@ export const AnimatedTestimonials = ({
               ease: "easeInOut",
             }}
           >
-            <h3 className="font-bold text-2xl text-neutral-900 dark:text-white">
+            <a
+              href={testimonials[active].link}
+              target="_blank"
+              rel="noreferrer"
+              className="flex flex-row items-center gap-2 font-bold text-2xl text-neutral-900 dark:text-white"
+            >
               {testimonials[active].name}
-            </h3>
+              <ExternalLink size={20} />
+            </a>
             <p className="text-base text-gray-500 dark:text-neutral-500">
               {testimonials[active].description}
             </p>

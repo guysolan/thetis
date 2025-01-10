@@ -18,6 +18,7 @@ import { cn } from "../lib/utils";
 
 import NavAccordion from "./NavAccordion";
 import { ArrowRight } from "lucide-react";
+import Thetis from "./Thetis.tsx";
 
 export function MobileNav() {
   return (
@@ -29,7 +30,7 @@ export function MobileNav() {
       </SheetTrigger>
       <SheetContent className="p-4 w-[90vw]">
         <SheetHeader className="flex flex-row justify-between items-center">
-          <SheetTitle>Thetis Medical</SheetTitle>
+          <Thetis />
           <SheetClose
             className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
           >
