@@ -172,18 +172,45 @@ export const AnimatedTestimonials = ({
               ease: "easeInOut",
             }}
           >
-            <a
-              href={testimonials[active].link}
-              target="_blank"
-              rel="noreferrer"
-              className="flex flex-row items-center gap-2 font-bold text-2xl text-neutral-900 dark:text-white"
-            >
-              {testimonials[active].name}
-              <ExternalLink size={20} />
-            </a>
-            <p className="text-base text-gray-500 dark:text-neutral-500">
-              {testimonials[active].description}
-            </p>
+            <div className="flex flex-row justify-between gap-2 w-full">
+              <div className="flex flex-col gap-2 w-full">
+                <a
+                  href={testimonials[active].link}
+                  rel="noreferrer"
+                  target="_blank"
+                  className="flex flex-row items-center gap-2 font-semibold text-2xl text-neutral-900 dark:text-white"
+                >
+                  {testimonials[active].name}
+                  <span>
+                    <ExternalLink className="inline" size={20} />
+                  </span>
+                </a>
+                <p className="text-base text-gray-500 dark:text-neutral-500">
+                  {testimonials[active].description}
+                </p>
+              </div>
+              <div className="flex justify-center items-center md:hidden w-1/3">
+                <div
+                  className="relative flex justify-end items-center mx-auto w-32"
+                  style={{ height: `${90}px` }}
+                >
+                  <AnimatePresence>
+                    {testimonials.map((testimonial, index) => (
+                      <TestimonialImage
+                        key={index}
+                        testimonial={testimonial}
+                        isActive={isActive(index)}
+                        index={index}
+                        totalLength={testimonials.length}
+                        width={70}
+                        height={90}
+                      />
+                    ))}
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
+
             {testimonials[active].body
               .split("\n\n")
               .map((paragraph, pIndex) => (
@@ -267,7 +294,7 @@ export const AnimatedTestimonials = ({
             </button>
           </div>
         </div>
-        <div className="flex justify-center items-center w-full md:w-1/3">
+        <div className="md:flex justify-center items-center hidden w-full md:w-1/3">
           <div
             className="relative flex justify-center items-center mx-auto w-full"
             style={{ height: `${height + 50}px` }}

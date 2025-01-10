@@ -118,7 +118,6 @@ export default {
   plugins: [
     addVariablesForColors,
     require("tailwindcss-animate"),
-    require("@tailwindcss/line-clamp"),
   ],
 };
 
