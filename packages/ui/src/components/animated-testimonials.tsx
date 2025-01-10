@@ -172,8 +172,8 @@ export const AnimatedTestimonials = ({
               ease: "easeInOut",
             }}
           >
-            <div className="flex flex-row justify-between gap-2 w-full">
-              <div className="flex flex-col gap-2 w-full">
+            <div className="flex flex-row justify-between items-center">
+              <div>
                 <a
                   href={testimonials[active].link}
                   rel="noreferrer"
@@ -189,28 +189,12 @@ export const AnimatedTestimonials = ({
                   {testimonials[active].description}
                 </p>
               </div>
-              <div className="flex justify-center items-center md:hidden w-1/3">
-                <div
-                  className="relative flex justify-end items-center mx-auto w-32"
-                  style={{ height: `${90}px` }}
-                >
-                  <AnimatePresence>
-                    {testimonials.map((testimonial, index) => (
-                      <TestimonialImage
-                        key={index}
-                        testimonial={testimonial}
-                        isActive={isActive(index)}
-                        index={index}
-                        totalLength={testimonials.length}
-                        width={70}
-                        height={90}
-                      />
-                    ))}
-                  </AnimatePresence>
-                </div>
-              </div>
+              <img
+                className="object-top flex md:hidden shadow-sm rounded-md w-12 h-20 object-cover"
+                src={testimonials[active].src}
+                alt={testimonials[active].name}
+              />
             </div>
-
             {testimonials[active].body
               .split("\n\n")
               .map((paragraph, pIndex) => (
