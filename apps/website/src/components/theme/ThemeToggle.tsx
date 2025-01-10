@@ -1,13 +1,11 @@
 import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@thetis/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@thetis/ui/tabs";
 import { cn } from "../../lib/utils";
 
 export function ThemeToggle() {
-  const [theme, setThemeState] = React.useState<"light" | "dark" | "system">(
-    "light",
-  );
+  const [theme, setThemeState] = React.useState<"light" | "dark">("light");
 
   React.useEffect(() => {
     const isDarkMode = document.documentElement.classList.contains("dark");
@@ -15,11 +13,8 @@ export function ThemeToggle() {
   }, []);
 
   React.useEffect(() => {
-    const isDark =
-      theme === "dark" ||
-      (theme === "system" &&
-        window.matchMedia("(prefers-color-scheme: light)").matches);
-    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   return (
