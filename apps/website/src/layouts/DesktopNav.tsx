@@ -103,6 +103,13 @@ function DesktopNav() {
             </NavigationMenuLink>
           </a>
         </NavigationMenuItem>
+        <NavigationMenuItem>
+          <a href="/reviews">
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Reviews
+            </NavigationMenuLink>
+          </a>
+        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   );

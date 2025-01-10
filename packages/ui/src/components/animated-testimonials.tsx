@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef, useCallback, memo } from "react";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../utils";
-import { ExternalLink } from "lucide-react";
 
 type Testimonial = {
   quote: string;
@@ -172,29 +171,12 @@ export const AnimatedTestimonials = ({
               ease: "easeInOut",
             }}
           >
-            <div className="flex flex-row justify-between items-center">
-              <div>
-                <a
-                  href={testimonials[active].link}
-                  rel="noreferrer"
-                  target="_blank"
-                  className="flex flex-row items-center gap-2 font-semibold text-2xl text-neutral-900 dark:text-white"
-                >
-                  {testimonials[active].name}
-                  <span>
-                    <ExternalLink className="inline" size={20} />
-                  </span>
-                </a>
-                <p className="text-base text-gray-500 dark:text-neutral-500">
-                  {testimonials[active].description}
-                </p>
-              </div>
-              <img
-                className="object-top flex md:hidden shadow-sm rounded-md w-12 h-20 object-cover"
-                src={testimonials[active].src}
-                alt={testimonials[active].name}
-              />
-            </div>
+            <h3 className="font-bold text-2xl text-neutral-900 dark:text-white">
+              {testimonials[active].name}
+            </h3>
+            <p className="text-base text-gray-500 dark:text-neutral-500">
+              {testimonials[active].description}
+            </p>
             {testimonials[active].body
               .split("\n\n")
               .map((paragraph, pIndex) => (
@@ -278,7 +260,8 @@ export const AnimatedTestimonials = ({
             </button>
           </div>
         </div>
-        <div className="md:flex justify-center items-center hidden w-full md:w-1/3">
+
+        <div className="flex justify-center items-center w-full md:w-1/3">
           <div
             className="relative flex justify-center items-center mx-auto w-full"
             style={{ height: `${height + 50}px` }}

@@ -23,8 +23,8 @@ export const clinicians: Review[] = [
         link: "https://www.drrobbieray.com/",
         description: "Foot and Ankle Surgeon",
         image: RobbieRay,
-        title: "A unique innovation in Achilles tendon rehabilitation",
-        short: "A game-changing splint for controlled recovery",
+        title: "Setting a new standard in Achilles tendon rehabilitation",
+        short: "Setting a new standard in Achilles tendon rehabilitation",
         body:
             `As a foot and ankle specialist, I am always on the lookout for innovative tools that can improve patient outcomes. The Thetis Medical Achilles Repair Splint has proven to be a game-changer in my practice. It is truly unique, being the only splint of its kind on the market, and I have used it with great success in the rehabilitation of my patients following Achilles tendon ruptures.
 
@@ -40,8 +40,8 @@ I highly recommend the Thetis Medical Achilles Repair Splint to colleagues and p
         link: "https://matthewwelck.com/",
         description: "Foot and Ankle Surgeon",
         image: MattWelck,
-        title: "A unique innovation in Achilles tendon rehabilitation",
-        short: "A game-changing splint for controlled recovery",
+        title: "An excellent piece of equipment",
+        short: "An excellent piece of equipment",
         body:
             `I have been recommending the Achilles rupture night splint to my patients for over a year. The feedback has been excellent. Patients sometimes find sleeping in a boot uncomfortable, and having an alternative, more lightweight option is well received. My patients have also used it to protect the foot and enable some time outside of the boot. I think it is an excellent piece of equipment that can make recovery from a difficult condition more user-friendly.`,
         country: "GB",

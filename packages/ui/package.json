@@ -23,6 +23,7 @@
     "./cn": "./src/utils/cn.ts",
     "./animated-modal": "./src/components/animated-modal.tsx",
     "./animated-testimonials": "./src/components/animated-testimonials.tsx",
+    "./mobile-animated-testimonials": "./src/components/mobile-animated-testimonials.tsx",
     "./ui": "./src/components/index.ts",
     "./colors": "./src/utils/colors.ts",
     "./carousel": "./src/components/carousel.tsx",

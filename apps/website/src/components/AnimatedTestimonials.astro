@@ -1,0 +1,138 @@
+---
+import { Image } from "astro:assets";
+import {ArrowLeft, ArrowRight} from "lucide-astro";
+interface Testimonial {
+  quote: string;
+  name: string;
+  description: string;
+  src: string;
+}
+
+interface Props {
+  testimonials: Testimonial[];
+  width?: number;
+  height?: number;
+}
+
+const { testimonials, width = 500, height = 500 } = Astro.props;
+---
+
+<div class="mx-auto px-4 md:px-8 py-20 testimonials-wrapper">
+  <div class="relative flex md:flex-row flex-col items-center gap-8 md:gap-32">
+    <div class="flex flex-col justify-center py-4 pr-4 w-full md:w-2/3">
+      <div class="testimonial-content">
+        <h3 class="font-bold text-2xl text-neutral-900 dark:text-white"></h3>
+        <p class="text-base text-gray-500 dark:text-neutral-500"></p>
+        <div class="mt-4 text-base text-gray-500 dark:text-neutral-300 quote-text"></div>
+      </div>
+      
+      <div class="flex gap-4 mt-8">
+        <button type="button" class="nav-button prev">
+          <ArrowLeft class="w-6 h-6" />
+        </button>
+        <button type="button" class="nav-button next">
+          <ArrowRight class="w-6 h-6" />
+        </button>
+      </div>
+    </div>
+
+    <div class="flex justify-center items-center w-full md:w-1/3">
+      <div class="relative testimonial-images" style={`height: ${height + 50}px`}>
+        {testimonials.map((testimonial, index) => (
+          <div class="absolute inset-0 testimonial-image" data-index={index}>
+            <Image
+              src={testimonial.src}
+              alt={testimonial.name}
+              width={width}
+              height={height}
+              class="shadow-xl hover:shadow-2xl border rounded-xl transition-all duration-300"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .nav-button {
+    @apply flex justify-center items-center bg-primary rounded-full w-10 h-10 text-white cursor-pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .nav-button:hover {
+    transform: scale(1.05);
+  }
+  
+  .nav-button.prev:hover {
+    transform: rotate(10deg) scale(1.05);
+  }
+  
+  .nav-button.next:hover {
+    transform: rotate(-10deg) scale(1.05);
+  }
+
+  .testimonial-image {
+    opacity: 0;
+    transform: scale(0.95) translateZ(-100px);
+    transition: all 0.4s ease-in-out;
+  }
+
+  .testimonial-image.active {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+    z-index: 999;
+  }
+</style>
+
+<script>
+  class TestimonialsCarousel {
+    constructor() {
+      this.currentIndex = 0;
+      this.testimonials = document.querySelectorAll('.testimonial-image');
+      this.content = document.querySelector('.testimonial-content');
+      
+      this.init();
+      this.setupListeners();
+    }
+
+    init() {
+      this.updateTestimonial();
+    }
+
+    setupListeners() {
+      document.querySelector('.prev')?.addEventListener('click', () => this.prev());
+      document.querySelector('.next')?.addEventListener('click', () => this.next());
+    }
+
+    updateTestimonial() {
+      // Update images
+      this.testimonials.forEach((t, i) => {
+        t.classList.toggle('active', i === this.currentIndex);
+      });
+
+      // Update content
+      const testimonialData = JSON.parse(this.testimonials[this.currentIndex].dataset.testimonial || '{}');
+      if (this.content) {
+        this.content.querySelector('h3').textContent = testimonialData.name;
+        this.content.querySelector('p').textContent = testimonialData.description;
+        this.content.querySelector('.quote-text').textContent = testimonialData.quote;
+      }
+    }
+
+    next() {
+      this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
+      this.updateTestimonial();
+    }
+
+    prev() {
+      this.currentIndex = (this.currentIndex - 1 + this.testimonials.length) % this.testimonials.length;
+      this.updateTestimonial();
+    }
+  }
+
+  // Initialize carousel when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new TestimonialsCarousel();
+  });
+</script> 

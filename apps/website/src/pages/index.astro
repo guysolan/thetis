@@ -10,6 +10,8 @@ import ProductTimeline from "@/components/ProductTimeline.astro";
 import ProfessionalOpinionsCarousel from "@/components/reviews/ProfessionalOpinionsCarousel";
 import ComplianceLogos from "../components/compliance/ComplianceLogos.astro";
 import BuyNightSplintPopup from '../components/BuyNightSplintPopup';
+import EmailSubscribe from '../components/CTA/EmailSubscribe.astro';
+import GetInTouch from '../components/CTA/GetInTouch.astro';
 ---
 
 <ThetisSchema slot="head" />
@@ -31,13 +33,7 @@ import BuyNightSplintPopup from '../components/BuyNightSplintPopup';
 
         <ProductTimeline     />
 
-        <!-- 
-        <EmailCTA
-            title="End the Sleepless Nights"
-            paragraph="Speak to us to allow you, your loved ones or your patients to recover in comfort"
-        /> -->
-
-        <ProfessionalOpinionsCarousel client:load />
+        <ProfessionalOpinionsCarousel client:idle />
        
     </main>
 </Layout>

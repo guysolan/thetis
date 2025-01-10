@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Review } from "./types";
+import { Badge } from "../ui/badge";
 
 const renderStars = (count: number) => {
   return Array(count)
@@ -31,7 +32,18 @@ export function ReviewCard({ review }: { review: Review }) {
       }`}
     >
       <blockquote>
-        <div className="flex gap-1 mb-2">{renderStars(review.stars)}</div>
+        <div className="flex justify-between items-center gap-2">
+          <div className="flex gap-1 mb-2">{renderStars(5)}</div>
+          <Badge
+            className="capitalize"
+            variant={review?.type === "patient" ? "outline" : "default"}
+          >
+            {review?.type}
+          </Badge>
+        </div>
+        <p className="my-2 font-semibold text-lg text-neutral-800">
+          {review.title}
+        </p>
         <div className="relative z-20">
           <span className="review-text font-normal text-base text-neutral-900 leading-[1.6]">
             {isExpanded ? review.body : truncateText(review.body, 300)}
@@ -52,7 +64,7 @@ export function ReviewCard({ review }: { review: Review }) {
             {review.name}
           </span>
           <span className="mt-1 font-semibold text-base text-neutral-500">
-            {review.title}
+            {review.description ?? "Happy Customer"}
           </span>
           <span className="mt-1 text-neutral-400 text-sm">{review.date}</span>
         </div>

@@ -1,0 +1,18 @@
+---
+import ColorGradient from '../components/ColorGradient.astro';
+import Layout from "../layouts/Layout.astro";
+import ReviewsMasonry from "@/components/reviews/ReviewsMasonry";
+---
+
+<Layout
+    title="Thetis Medical - Achilles Splint Specialists"
+    description="Medical device company specialising in splints for injured Achilles Tendons. We sell an Achilles Rupture Night Splint and a Trauma Splint."
+    image="https://thetismedical.com/images/night-splint.png"
+>
+
+<main>
+    <ColorGradient >
+<ReviewsMasonry client:load />
+</ColorGradient>
+</main>
+</Layout>

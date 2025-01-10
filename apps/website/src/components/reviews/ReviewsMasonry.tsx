@@ -1,29 +1,74 @@
 import React, { useState } from "react";
-import reviews from "./reviews.json";
+import { reviews } from "./content/all";
 import { ReviewCard } from "./ReviewCard";
 import { Button } from "../ui/button";
+import { Shuffle } from "lucide-react";
 
 const ReviewsMasonry = () => {
   const [v_displayCount, setDisplayCount] = useState(9);
+  const [v_activeFilter, setActiveFilter] = useState<
+    "all" | "athlete" | "clinician" | "patient"
+  >("all");
+  const [v_shuffledReviews, setShuffledReviews] = useState(reviews);
+
+  const handleShuffle = () => {
+    setShuffledReviews((prev) => [...prev].sort(() => Math.random() - 0.5));
+  };
 
   const handleShowMore = () => {
     setDisplayCount(v_displayCount + 9);
   };
 
+  const v_filteredReviews = v_shuffledReviews.filter(
+    (review) => v_activeFilter === "all" || review.type === v_activeFilter,
+  );
+
   return (
     <div id="more-reviews">
       <div className="relative left-0 flex flex-col justify-center items-center p-8 w-[100vw] antialiased overflow-hidden">
-        <h3 className="font-semibold text-3xl text-left text-neutral-900">
+        <h1 className="mb-4 font-semibold text-3xl text-left text-neutral-900">
           Hear it from our customers...
-        </h3>
+        </h1>
+
+        <div className="flex gap-2 my-4">
+          <Button
+            onClick={() => setActiveFilter("all")}
+            variant={v_activeFilter === "all" ? "default" : "outline"}
+          >
+            All
+          </Button>
+          <Button
+            onClick={() => setActiveFilter("athlete")}
+            variant={v_activeFilter === "athlete" ? "default" : "outline"}
+          >
+            Athletes
+          </Button>
+          <Button
+            onClick={() => setActiveFilter("clinician")}
+            variant={v_activeFilter === "clinician" ? "default" : "outline"}
+          >
+            Clinicians
+          </Button>
+          <Button
+            onClick={() => setActiveFilter("patient")}
+            variant={v_activeFilter === "patient" ? "default" : "outline"}
+          >
+            Patients
+          </Button>
+          <Button onClick={handleShuffle} variant="secondary" className="gap-2">
+            <span className="font-semibold sr-only">Shuffle</span>
+            <Shuffle size={20} />
+          </Button>
+        </div>
+
         <div className="relative z-10 masonry-grid py-8">
-          {reviews.slice(0, v_displayCount).map((review) => (
+          {v_filteredReviews.slice(0, v_displayCount).map((review) => (
             <div className="masonry-item" key={review.id}>
               <ReviewCard review={review} />
             </div>
           ))}
         </div>
-        {v_displayCount < reviews.length && (
+        {v_displayCount < v_filteredReviews.length && (
           <Button type="button" onClick={handleShowMore}>
             Show More
           </Button>
