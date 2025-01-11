@@ -1,10 +1,15 @@
-import { AnimatedTestimonials } from "@thetis/ui/animated-testimonials";
-import { MobileTestimonialCarousel } from "@thetis/ui/mobile-animated-testimonials";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@thetis/ui/carousel";
 import { clinicians } from "./content/clinicians.ts";
 import HighlightedWord from "../HighlightedWord.tsx";
 import { cn } from "../../lib/utils.ts";
-import { buttonVariants } from "../ui/button.tsx";
 import { ReviewCard } from "./ReviewCard.tsx";
+import { ProfessionalReview } from "./ProfessionalReview.tsx";
 
 function ProfessionalOpinionsCarousel() {
   return (
@@ -21,27 +26,33 @@ function ProfessionalOpinionsCarousel() {
           </p>
         </div>
 
-        <div className="space-y-6 md:hidden mx-auto max-w-[90vw]">
-          <MobileTestimonialCarousel
-            testimonials={clinicians.map((t) => ({
-              ...t,
-              src: t.image?.src,
-            }))}
-          />
+        <div className="w-full max-w-[90vw] md:max-w-screen-lg">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="p-0 w-full"
+          >
+            <CarouselContent>
+              {clinicians.map((review, index) => (
+                <CarouselItem
+                  key={index}
+                  className="max-w-[90vw] md:basis-1/2 lg:basis-1/3"
+                >
+                  <ProfessionalReview review={review} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            {/* Fixed position navigation controls */}
+            <div className="flex justify-center gap-4 border-gray-200 mt-6 pt-4 border-t">
+              <CarouselPrevious className="static rounded-full translate-x-0 translate-y-0 aspect-square" />
+              <CarouselNext className="static rounded-full translate-x-0 translate-y-0 aspect-square" />
+            </div>
+          </Carousel>
         </div>
 
-        <div className="md:flex justify-center items-center hidden mx-auto max-w-screen-lg">
-          <AnimatedTestimonials
-            height={350}
-            width={250}
-            testimonials={clinicians.map((t) => ({
-              ...t,
-              src: t.image?.src,
-            }))}
-            autoplay={false}
-          />
-        </div>
-        <div className="inline-flex md:flex-row flex-col justify-center items-center gap-1 mx-auto mt-8 md:mt-12 max-w-screen-lg text-center">
+        <div className="inline-flex md:flex-row flex-col justify-center items-center gap-1 mx-auto mt-8 md:mt-12 max-w-screen-lg text-center text-lg">
           <p className="font-medium text-base text-gray-600 md:text-xl">
             Still not convinced?
           </p>

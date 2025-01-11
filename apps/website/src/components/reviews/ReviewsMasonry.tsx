@@ -25,12 +25,12 @@ const ReviewsMasonry = () => {
 
   return (
     <div id="more-reviews">
-      <div className="relative left-0 flex flex-col justify-center items-center p-8 w-[100vw] antialiased overflow-hidden">
+      <div className="relative left-0 flex flex-col justify-center items-center p-4 md:p-8 w-[100vw] antialiased overflow-hidden">
         <h1 className="mb-4 font-semibold text-3xl text-left text-neutral-900">
           Hear it from our customers...
         </h1>
 
-        <div className="flex gap-2 my-4">
+        <div className="flex flex-wrap justify-center items-center gap-2 my-4 px-4">
           <Button
             onClick={() => setActiveFilter("all")}
             variant={v_activeFilter === "all" ? "default" : "outline"}
