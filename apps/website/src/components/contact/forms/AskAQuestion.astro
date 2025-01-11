@@ -3,6 +3,7 @@ import Label from '@/components/form/Label.astro';
 import Input from '@/components/form/Input.astro';
 import FormWrap from '../FormWrap.astro';
 import TextArea from '../../form/TextArea.astro';
+import OptOut from '../../form/OptOut.astro';
 ---
 
 
@@ -43,14 +44,7 @@ import TextArea from '../../form/TextArea.astro';
                 ></TextArea>
             </div>
 
-            <div class="flex items-center gap-2">
-                <Input
-                    class="border-gray-300 rounded w-4 h-4"
-                    name="opt-out"
-                    type="checkbox"
-                />
-                <Label labelFor="opt-out">Opt out of further communications.</Label>
-            </div>
+            <OptOut/>
 
             <button
                 type="submit"

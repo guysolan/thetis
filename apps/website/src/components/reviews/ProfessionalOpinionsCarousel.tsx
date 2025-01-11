@@ -8,12 +8,12 @@ import {
 import { clinicians } from "./content/clinicians.ts";
 import HighlightedWord from "../HighlightedWord.tsx";
 import { cn } from "../../lib/utils.ts";
-import { ReviewCard } from "./ReviewCard.tsx";
 import { ProfessionalReview } from "./ProfessionalReview.tsx";
+import { AnimatedTestimonials } from "@thetis/ui/animated-testimonials";
 
 function ProfessionalOpinionsCarousel() {
   return (
-    <div className="relative mx-auto py-12 md:py-24 max-w-screen lg:max-w-4xl">
+    <div className="relative mx-auto py-12 md:py-24 max-w-screen lg:max-w-5xl">
       <div className="flex flex-col justify-center items-center mx-auto">
         <div className="space-y-4 md:space-y-6 mb-8 md:mb-16 text-center">
           <h2 className="font-semibold text-2xl md:text-3xl lg:text-4xl leading-tight">
@@ -26,7 +26,7 @@ function ProfessionalOpinionsCarousel() {
           </p>
         </div>
 
-        <div className="w-full max-w-[90vw] md:max-w-screen-lg">
+        <div className="md:hidden w-full max-w-[90vw] md:max-w-screen-lg">
           <Carousel
             opts={{
               align: "start",
@@ -50,6 +50,18 @@ function ProfessionalOpinionsCarousel() {
               <CarouselNext className="static rounded-full translate-x-0 translate-y-0 aspect-square" />
             </div>
           </Carousel>
+        </div>
+
+        <div className="md:block hidden">
+          <AnimatedTestimonials
+            height={350}
+            width={250}
+            client:idle
+            testimonials={clinicians.map((testimonial) => ({
+              ...testimonial,
+              src: testimonial.image.src,
+            }))}
+          />
         </div>
 
         <div className="inline-flex md:flex-row flex-col justify-center items-center gap-1 mx-auto mt-8 md:mt-12 max-w-screen-lg text-center text-lg">

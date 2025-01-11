@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../utils";
 
 type Testimonial = {
-  quote: string;
+  body: string;
   name: string;
   description: string;
   src: string;
@@ -43,7 +43,7 @@ const TestimonialImage = memo(
           scale: isActive ? 1 : 0.95,
           z: isActive ? 0 : -100,
           rotate: isActive ? 0 : randomRotateY(),
-          zIndex: isActive ? 999 : totalLength + 2 - index,
+          zIndex: isActive ? 10 : totalLength - index,
           y: isActive ? [0, -80, 0] : 0,
         }}
         exit={{

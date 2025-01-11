@@ -4,6 +4,7 @@ import Input from '@/components/form/Input.astro';
 import FormWrap from '../FormWrap.astro';
 import TextArea from '../../form/TextArea.astro';
 import { inputStyle } from '@/components/form/Input.astro';
+import OptOut from '../../form/OptOut.astro';
 ---
 
 <FormWrap formId="xwppakoz">
@@ -59,14 +60,7 @@ import { inputStyle } from '@/components/form/Input.astro';
                 ></TextArea>
             </div>
 
-            <div class="flex items-center gap-2">
-                <Input
-                    class="border-gray-300 rounded w-4 h-4"
-                    name="opt-out"
-                    type="checkbox"
-                />
-                <Label labelFor="opt-out">Opt out of marketing communications.</Label>
-            </div>
+            <OptOut/>
 
             <button
                 type="submit"

@@ -10,7 +10,7 @@ const { formId } = Astro.props;
     autocomplete="on"
     action={`https://formspree.io/f/${formId}`}
     method="POST"
-    class="flex-grow lg:border-neutral-300 lg:bg-white/80 lg:shadow-lg hover:shadow-xl backdrop-blur-sm lg:p-12 border rounded-2xl w-full transition-all"
+    class="flex-grow border-0 lg:border-neutral-300 bg-transparent lg:bg-white/80 shadow-none lg:shadow-lg hover:lg:shadow-xl lg:backdrop-blur-sm lg:p-12 rounded-2xl w-full transition-all"
 >
     <slot />
 </form>
