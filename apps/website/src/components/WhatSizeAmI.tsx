@@ -80,7 +80,7 @@ const WhatSizeAmI = () => {
                 ?.step.toString()}
               value={size}
               onChange={handleSizeChange}
-              placeholder={"Enter size"}
+              placeholder={"Enter shoe size"}
             />
           </div>
         )}
