@@ -1,5 +1,6 @@
 import JamesDavis from "./images/james-davis.png";
 import RobbieRay from "./images/robbie-ray.png";
+import IanGill from "./images/ian-gill.png";
 import MattWelck from "./images/matt-welck.png";
 import type { Review } from "../types";
 
@@ -15,7 +16,7 @@ export const clinicians: Review[] = [
         short:
             "A fantastic alternative to uncomfortable hospital boots for night wear",
         body:
-            `When I tore my own Achilles tendon, the hardest part of the recovery was having to wear the hospital boot in bed at night for many weeks. My only option was to make myself a splint using plaster-cast materials and make-shift straps. It is fantastic that Thetis Medical have produced this night-splint. It is certain to improve the recovery experience for patients.`,
+            "When I tore my own Achilles tendon, the hardest part of the recovery was having to wear the hospital boot in bed at night for many weeks. My only option was to make myself a splint using plaster-cast materials and make-shift straps. It is fantastic that Thetis Medical have produced this night-splint. It is certain to improve the recovery experience for patients.",
         country: "GB",
     },
     {
@@ -43,7 +44,18 @@ I highly recommend the Thetis Medical Achilles Repair Splint to colleagues and p
         title: "An excellent piece of equipment",
         short: "An excellent piece of equipment",
         body:
-            `I have been recommending the Achilles rupture night splint to my patients for over a year. The feedback has been excellent. Patients sometimes find sleeping in a boot uncomfortable, and having an alternative, more lightweight option is well received. My patients have also used it to protect the foot and enable some time outside of the boot. I think it is an excellent piece of equipment that can make recovery from a difficult condition more user-friendly.`,
+            "I have been recommending the Achilles rupture night splint to my patients for over a year. The feedback has been excellent. Patients sometimes find sleeping in a boot uncomfortable, and having an alternative, more lightweight option is well received. My patients have also used it to protect the foot and enable some time outside of the boot. I think it is an excellent piece of equipment that can make recovery from a difficult condition more user-friendly.",
+        country: "GB",
+    },
+    {
+        name: "Mr Ian Gill",
+        link: "https://www.footsurgerykingston.com/",
+        description: "Foot and Ankle Surgeon",
+        image: IanGill,
+        title: "Get a good night's sleep!",
+        short: "Worth Every Penny",
+        body:
+            "I’ve been recommending the Thetis night time splint for all my ruptured Achilles patients for two years now. It is worth every penny as it stops the misery of trying to get good nights sleep in an uncomfortable boot !",
         country: "GB",
     },
 ];

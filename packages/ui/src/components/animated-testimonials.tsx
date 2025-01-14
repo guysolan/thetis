@@ -65,7 +65,7 @@ const TestimonialImage = memo(
           height={height}
           loading="lazy"
           draggable={false}
-          className="border-neutral-200 dark:border-neutral-800 shadow-xl hover:shadow-2xl border rounded-xl w-full h-full transition-all duration-300 object-center object-cover"
+          className="border-neutral-200 dark:border-neutral-800 bg-neutral-50 shadow-xl hover:shadow-2xl border rounded-xl w-full h-full transition-all duration-300 object-center object-cover"
           style={{ width: `${width}px`, height: `${height}px` }}
           onError={(e) => {
             console.error("Image failed to load:", testimonial.src);
