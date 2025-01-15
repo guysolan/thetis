@@ -12,6 +12,7 @@ import { FilePreview } from "../FilePreview";
 import dayjs from "dayjs";
 import EmailPdfDialog from "../EmailPdfDialog";
 import DownloadFolderButton from "./download-folder-button";
+import DeleteFolderButton from "./delete-folder-button";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type AmazonReport = {
@@ -147,6 +148,7 @@ export const columns: ColumnDef<AmazonReport>[] = [
       );
     },
   },
+
   {
     id: "email",
     header: "Email",
@@ -157,6 +159,18 @@ export const columns: ColumnDef<AmazonReport>[] = [
         <EmailPdfDialog
           path={storagePath}
           reportDate={dayjs(depositDate).format("YYYY-MM-DD")}
+        />
+      );
+    },
+  },
+  {
+    id: "delete",
+    header: "Delete",
+    cell: ({ row }) => {
+      return (
+        <DeleteFolderButton
+          disabled={!row.original.is_saved}
+          reportId={row.original.report_document_id}
         />
       );
     },
