@@ -170,7 +170,7 @@ export const columns: ColumnDef<AmazonReport>[] = [
       return (
         <DeleteFolderButton
           disabled={!row.original.is_saved}
-          reportId={row.original.report_document_id}
+          reportId={row.original.report_id}
         />
       );
     },
