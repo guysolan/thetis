@@ -1,5 +1,13 @@
 export async function getAccessToken(region: "NA" | "EUR"): Promise<string> {
     const refreshToken = Deno.env.get(`SP_API_${region}`);
+
+    // Add this temporarily to check token format
+    console.log(
+        `Token format check - Length: ${refreshToken?.length}, Starts with: ${
+            refreshToken?.substring(0, 5)
+        }...`,
+    );
+
     const clientId = Deno.env.get(`SP_CLIENT_ID`);
     const clientSecret = Deno.env.get(`SP_CLIENT_SECRET`);
 

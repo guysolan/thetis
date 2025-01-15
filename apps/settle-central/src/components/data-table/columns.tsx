@@ -1,6 +1,12 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { FileText, FileSpreadsheet, FolderDown } from "lucide-react";
+import {
+  FileText,
+  FileSpreadsheet,
+  FolderDown,
+  ExternalLink,
+} from "lucide-react";
 import { Button } from "@thetis/ui/button";
+import { Link } from "@tanstack/react-router";
 import SaveOrDeleteReport from "./save-or-delete-report";
 import { FilePreview } from "../FilePreview";
 import dayjs from "dayjs";
@@ -101,10 +107,18 @@ export const columns: ColumnDef<AmazonReport>[] = [
     id: "pdf",
     header: "PDF",
     cell: ({ row }) => {
-      const isSaved = row.original.is_saved;
       return (
-        <Button disabled={!isSaved} variant="ghost" size="icon">
-          <FileText className="w-4 h-4" />
+        <Button variant="ghost" size="icon">
+          <Link
+            to="/settlements/report/summary"
+            search={{
+              report: row.original,
+              region: row.original.region,
+              country: row.original.country,
+            }}
+          >
+            <ExternalLink className="w-4 h-4" />
+          </Link>
         </Button>
       );
     },
@@ -116,7 +130,7 @@ export const columns: ColumnDef<AmazonReport>[] = [
       const isSaved = row.original.is_saved;
       return (
         <Button disabled={!isSaved} variant="ghost" size="icon">
-          <FileSpreadsheet className="w-4 h-4" />
+          <ExternalLink className="w-4 h-4" />
         </Button>
       );
     },
