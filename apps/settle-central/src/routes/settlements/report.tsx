@@ -16,7 +16,7 @@ export const Route = createFileRoute("/settlements/report")({
     const { report, region, country } = deps;
     const document = await context.queryClient.ensureQueryData(
       selectAmazonReportByIdQueryOptions({
-        reportId: report.report_id ?? report.report_document_id,
+        reportId: report.report_document_id,
         region: region,
         country: country,
       }),
