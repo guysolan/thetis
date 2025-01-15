@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Payment, columns } from "./columns";
+import { columns } from "./columns";
 import { DataTable } from "./data-table";
 
 export default function AmazonReportsDataTable({ data }) {

@@ -42,7 +42,9 @@ serve(async (req) => {
         // You might need to validate or process the request here
         const pdf = await doppio(
             `https://tax.thetismedical.com/settlements/report/summary?report=${
-                encodeURIComponent(JSON.stringify(report))
+                encodeURIComponent(
+                    JSON.stringify({ ...report, region: region }),
+                )
             }`,
         );
 
