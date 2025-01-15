@@ -25,7 +25,7 @@ export const Route = createFileRoute("/settlements/")({
     const savedReportIds = saved.map((saved) => saved.report_id);
 
     const unprocessedReports = processedReports.filter(
-      (r) => !savedReportIds.includes(r.reportId),
+      (r) => !savedReportIds.includes(r.report_id),
     );
 
     const unsavedReports = unprocessedReports.map((r) => ({
