@@ -70,6 +70,7 @@ serve(async (req) => {
         )
             .insert({
                 report_id: report.report_id,
+                report_document_id: report.report_document_id,
                 storage_path: fileName,
                 settlement_id: summary.settlement_id,
                 region: summary.region,

@@ -128,10 +128,18 @@ export const columns: ColumnDef<AmazonReport>[] = [
     id: "csv",
     header: "CSV",
     cell: ({ row }) => {
-      const isSaved = row.original.is_saved;
       return (
-        <Button disabled={!isSaved} variant="ghost" size="icon">
-          <ExternalLink className="w-4 h-4" />
+        <Button variant="ghost" size="icon">
+          <Link
+            to="/settlements/report"
+            search={{
+              report: row.original,
+              region: row.original.region,
+              country: row.original.country,
+            }}
+          >
+            <ExternalLink className="w-4 h-4" />
+          </Link>
         </Button>
       );
     },
