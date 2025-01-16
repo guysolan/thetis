@@ -2,6 +2,8 @@
 import ColorGradient from '../components/ColorGradient.astro';
 import Layout from "../layouts/Layout.astro";
 import ReviewsMasonry from "@/components/reviews/ReviewsMasonry";
+import { cn } from '../lib/utils';
+import { buttonVariants } from '@/components/ui/button';
 ---
 
 <Layout
@@ -13,6 +15,29 @@ import ReviewsMasonry from "@/components/reviews/ReviewsMasonry";
 <main>
     <ColorGradient >
 <ReviewsMasonry client:load />
+    <section 
+        class="relative bg-gradient-to-tr from-primary/50 via-primary/20 to-primary/30 shadow-lg hover:shadow-xl mx-auto px-12 md:px-16 rounded-[2rem] max-w-[90vw] lg:max-w-screen-lg transition-all duration-300 overflow-hidden group"
+    >
+        <div
+            class="relative z-10 flex flex-col justify-center items-center space-y-8 my-16 px-6 w-full h-full"
+        >
+            <div class="group-hover:scale-102 flex flex-col justify-center items-center space-y-4 w-full max-w-[700px] text-center transition-all duration-300">
+                <h2 class="font-semibold text-3xl text-neutral-900 md:text-4xl">Heard enough?</h2>
+                <p class="max-w-[650px] text-lg text-neutral-700 md:text-xl">Experience it for yourself</p>
+            </div>
+
+            <a 
+        href="/buy-now" 
+        class={cn(buttonVariants({ size: 'lg', variant: 'default' }))}
+    >
+        Buy now
+    </a>
+</div>
+    </section>
+<div class="mt-12 mb-8 text-center">
+  
+</div>
 </ColorGradient>
+
 </main>
 </Layout>

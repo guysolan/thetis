@@ -1,4 +1,9 @@
 {
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/build": true
+    },
     "[typescript]": {
         "editor.defaultFormatter": "denoland.vscode-deno"
     },
