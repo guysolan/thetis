@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 import EmailPdfDialog from "../EmailPdfDialog";
 import DownloadFolderButton from "./download-folder-button";
 import DeleteFolderButton from "./delete-folder-button";
+import SaveReportButton from './save-report';
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type AmazonReport = {
@@ -35,13 +36,11 @@ export const columns: ColumnDef<AmazonReport>[] = [
     id: "actions",
     header: "Actions",
     cell: ({ row }) => {
-      const report = row.original;
-      return (
-        <SaveOrDeleteReport
-          report={row.original}
-          region={row.original.region}
-        />
-      );
+      const isSaved = row.original.is_saved;
+      if (isSaved) {
+        return <DownloadFolderButton storagePath={row.original.storage_path} />;
+      }
+      return <SaveReportButton report={row.original} region={row.original.region} />;
     },
   },
   {

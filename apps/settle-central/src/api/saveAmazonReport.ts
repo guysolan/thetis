@@ -5,13 +5,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const saveAmazonReport = async (
     region: string,
-    country: string,
     report: AmazonReport,
 ) => {
     const { data, error } = await supabase.functions.invoke(
         "save-amazon-report",
         {
-            body: { report, region, country },
+            body: { report, region },
         },
     );
     if (error) throw error;
@@ -24,10 +23,9 @@ export const useSaveAmazonReport = () => {
         mutationFn: (
             {
                 region,
-                country,
                 report,
-            }: { region: string; country: string; report: AmazonReport },
-        ) => saveAmazonReport(region, country, report),
+            }: { region: string; report: AmazonReport },
+        ) => saveAmazonReport(region, report),
         onSuccess: () => {
             toast.success("Report saved");
         },
