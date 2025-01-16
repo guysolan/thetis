@@ -1,5 +1,5 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { ExternalLink } from "lucide-react";
+import { ColumnDef, Column } from "@tanstack/react-table";
+import { ArrowUpDown, ExternalLink } from "lucide-react";
 import { Button } from "@thetis/ui/button";
 import { Link } from "@tanstack/react-router";
 import { FilePreview } from "../FilePreview";
@@ -8,14 +8,28 @@ import EmailPdfDialog from "../EmailPdfDialog";
 import DownloadFolderButton from "./download-folder-button";
 import DeleteFolderButton from "./delete-folder-button";
 import SaveReportButton from "./save-report";
+import NumberFlow from "@number-flow/react";
+
 import { AmazonReport } from "@thetis/amazon/amazon-types";
 
 type RowData = AmazonReport & { is_saved: boolean };
 
+const SortableHeader = ({ column, title }: { column: any; title: string }) => {
+  return (
+    <Button
+      variant="ghost"
+      onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+    >
+      {title}
+      <ArrowUpDown className="ml-2 w-4 h-4" />
+    </Button>
+  );
+};
+
 export const columns: ColumnDef<RowData>[] = [
   {
     id: "actions",
-    header: "Actions",
+    header: ({ column }) => <SortableHeader column={column} title="Actions" />,
     cell: ({ row }) => {
       const isSaved = row.original.is_saved;
       if (isSaved) {
@@ -28,7 +42,7 @@ export const columns: ColumnDef<RowData>[] = [
   },
   {
     accessorKey: "preview",
-    header: "Preview",
+    header: ({ column }) => <SortableHeader column={column} title="Preview" />,
     cell: ({ row }) => {
       if (!row.original.is_saved) return null;
       return (
@@ -42,57 +56,117 @@ export const columns: ColumnDef<RowData>[] = [
   },
   {
     accessorKey: "report_id",
-    header: "Report ID",
+    header: ({ column }) => (
+      <SortableHeader column={column} title="Report ID" />
+    ),
   },
   {
     accessorKey: "settlement_id",
-    header: "Settlement ID",
+    header: ({ column }) => (
+      <SortableHeader column={column} title="Settlement ID" />
+    ),
   },
   {
     accessorKey: "region",
-    header: "Region",
+    header: ({ column }) => <SortableHeader column={column} title="Region" />,
   },
   {
     accessorKey: "marketplace_name",
-    header: "Marketplace",
+    header: ({ column }) => (
+      <SortableHeader column={column} title="Marketplace" />
+    ),
   },
   {
     accessorKey: "settlement_start_date",
-    header: "Start Date",
+    header: ({ column }) => (
+      <SortableHeader column={column} title="Start Date" />
+    ),
     cell: ({ row }) => {
       return dayjs(row.original.settlement_start_date).format("DD MMM YYYY");
     },
   },
   {
     accessorKey: "settlement_end_date",
-    header: "End Date",
+    header: ({ column }) => <SortableHeader column={column} title="End Date" />,
     cell: ({ row }) => {
       return dayjs(row.original.settlement_end_date).format("DD MMM YYYY");
     },
   },
   {
     accessorKey: "currency",
-    header: "Currency",
+    header: ({ column }) => <SortableHeader column={column} title="Currency" />,
   },
   {
     accessorKey: "net_proceeds",
-    header: "Net Proceeds",
+    header: ({ column }) => (
+      <SortableHeader column={column} title="Net Proceeds" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <NumberFlow
+          value={row.original.net_proceeds}
+          format={{
+            style: "currency",
+            currency: row.original.currency,
+          }}
+        />
+      );
+    },
   },
   {
     accessorKey: "sales_total",
-    header: "Total Sales",
+    header: ({ column }) => (
+      <SortableHeader column={column} title="Total Sales" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <NumberFlow
+          value={row.original.sales_total}
+          format={{
+            style: "currency",
+            currency: row.original.currency,
+          }}
+        />
+      );
+    },
   },
   {
     accessorKey: "expenses_total",
-    header: "Total Expenses",
+    header: ({ column }) => (
+      <SortableHeader column={column} title="Total Expenses" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <NumberFlow
+          value={row.original.expenses_total}
+          format={{
+            style: "currency",
+            currency: row.original.currency,
+          }}
+        />
+      );
+    },
   },
   {
     accessorKey: "refunds_total",
-    header: "Total Refunds",
+    header: ({ column }) => (
+      <SortableHeader column={column} title="Total Refunds" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <NumberFlow
+          value={row.original.refunds_total}
+          format={{
+            style: "currency",
+            currency: row.original.currency,
+          }}
+        />
+      );
+    },
   },
   {
     id: "pdf",
-    header: "PDF",
+    header: ({ column }) => <SortableHeader column={column} title="PDF" />,
     cell: ({ row }) => {
       return (
         <Button variant="ghost" size="icon">
@@ -112,7 +186,7 @@ export const columns: ColumnDef<RowData>[] = [
   },
   {
     id: "csv",
-    header: "CSV",
+    header: ({ column }) => <SortableHeader column={column} title="CSV" />,
     cell: ({ row }) => {
       return (
         <Button variant="ghost" size="icon">
@@ -131,21 +205,8 @@ export const columns: ColumnDef<RowData>[] = [
     },
   },
   {
-    id: "download",
-    header: "Download",
-    cell: ({ row }) => {
-      return (
-        <DownloadFolderButton
-          disabled={!row.original.is_saved}
-          storagePath={row.original.storage_path}
-        />
-      );
-    },
-  },
-
-  {
     id: "email",
-    header: "Email",
+    header: ({ column }) => <SortableHeader column={column} title="Email" />,
     cell: ({ row }) => {
       const storagePath = row.original.storage_path;
       const depositDate = row.original.deposit_date;
@@ -159,7 +220,7 @@ export const columns: ColumnDef<RowData>[] = [
   },
   {
     id: "delete",
-    header: "Delete",
+    header: ({ column }) => <SortableHeader column={column} title="Delete" />,
     cell: ({ row }) => {
       return (
         <DeleteFolderButton

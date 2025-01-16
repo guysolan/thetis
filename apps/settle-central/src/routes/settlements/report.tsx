@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-
-import { AmazonReport, ReportSearch } from "@/components/AmazonReportById";
+import { AmazonReport } from "@thetis/amazon/amazon-types";
+import { ReportSearch } from "@/components/AmazonReportById";
 import { selectAmazonReportByIdQueryOptions } from "@/api/getAmazonReportById";
 
 export const Route = createFileRoute("/settlements/report")({

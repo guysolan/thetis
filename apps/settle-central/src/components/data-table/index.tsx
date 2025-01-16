@@ -5,7 +5,7 @@ import { DataTable } from "./data-table";
 
 export default function AmazonReportsDataTable({ data }) {
   return (
-    <div className="mx-auto py-10 container">
+    <div className="p-2">
       <DataTable columns={columns} data={data} />
     </div>
   );
