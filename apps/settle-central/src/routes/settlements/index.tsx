@@ -22,7 +22,7 @@ export const Route = createFileRoute("/settlements/")({
       is_saved: true,
     }));
 
-    const savedReportIds = saved.map((saved) => saved.report_id);
+    const savedReportIds = savedReports.map((saved) => saved.report_id);
 
     const unprocessedReports = processedReports.filter(
       (r) => !savedReportIds.includes(r.report_id),
@@ -35,10 +35,7 @@ export const Route = createFileRoute("/settlements/")({
       settlement_end_date: r.data_end_time,
     }));
 
-    const data = [
-      ...unsavedReports,
-      ...saved.map((s) => ({ ...s, is_saved: true })),
-    ];
+    const data = [...unsavedReports, ...savedReports];
 
     return data.sort((a, b) => {
       return (
