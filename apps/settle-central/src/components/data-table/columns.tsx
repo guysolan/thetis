@@ -26,6 +26,13 @@ const SortableHeader = ({ column, title }: { column: any; title: string }) => {
   );
 };
 
+const CurrencyCell = ({
+  value,
+  currency,
+}: { value: number; currency: string }) => {
+  return <NumberFlow value={value} format={{ style: "currency", currency }} />;
+};
+
 export const columns: ColumnDef<RowData>[] = [
   {
     id: "actions",
@@ -103,12 +110,9 @@ export const columns: ColumnDef<RowData>[] = [
     ),
     cell: ({ row }) => {
       return (
-        <NumberFlow
+        <CurrencyCell
           value={row.original.net_proceeds}
-          format={{
-            style: "currency",
-            currency: row.original.currency,
-          }}
+          currency={row.original.currency}
         />
       );
     },
@@ -120,12 +124,9 @@ export const columns: ColumnDef<RowData>[] = [
     ),
     cell: ({ row }) => {
       return (
-        <NumberFlow
+        <CurrencyCell
           value={row.original.sales_total}
-          format={{
-            style: "currency",
-            currency: row.original.currency,
-          }}
+          currency={row.original.currency}
         />
       );
     },
@@ -137,12 +138,9 @@ export const columns: ColumnDef<RowData>[] = [
     ),
     cell: ({ row }) => {
       return (
-        <NumberFlow
+        <CurrencyCell
           value={row.original.expenses_total}
-          format={{
-            style: "currency",
-            currency: row.original.currency,
-          }}
+          currency={row.original.currency}
         />
       );
     },
@@ -154,12 +152,9 @@ export const columns: ColumnDef<RowData>[] = [
     ),
     cell: ({ row }) => {
       return (
-        <NumberFlow
+        <CurrencyCell
           value={row.original.refunds_total}
-          format={{
-            style: "currency",
-            currency: row.original.currency,
-          }}
+          currency={row.original.currency}
         />
       );
     },
