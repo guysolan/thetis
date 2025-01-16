@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback, memo } from "react";
-import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../utils";
 
@@ -239,7 +239,7 @@ export const AnimatedTestimonials = ({
                 e.currentTarget.style.transform = "rotate(0deg) scale(1)";
               }}
             >
-              <IconArrowLeft />
+              <ArrowLeft />
             </button>
             <button
               type="button"
@@ -256,7 +256,7 @@ export const AnimatedTestimonials = ({
                 e.currentTarget.style.transform = "rotate(0deg) scale(1)";
               }}
             >
-              <IconArrowRight />
+              <ArrowRight />
             </button>
           </div>
         </div>
