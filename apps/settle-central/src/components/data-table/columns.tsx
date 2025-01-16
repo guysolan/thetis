@@ -1,37 +1,18 @@
 import { ColumnDef } from "@tanstack/react-table";
-import {
-  FileText,
-  FileSpreadsheet,
-  FolderDown,
-  ExternalLink,
-} from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Button } from "@thetis/ui/button";
 import { Link } from "@tanstack/react-router";
-import SaveOrDeleteReport from "./save-or-delete-report";
 import { FilePreview } from "../FilePreview";
 import dayjs from "dayjs";
 import EmailPdfDialog from "../EmailPdfDialog";
 import DownloadFolderButton from "./download-folder-button";
 import DeleteFolderButton from "./delete-folder-button";
-import SaveReportButton from './save-report';
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type AmazonReport = {
-  id: string;
-  settlement_id: string;
-  marketplace_name: string;
-  settlement_start_date: Date;
-  settlement_end_date: Date;
-  deposit_date: Date;
-  currency: string;
-  net_proceeds: number;
-  sales_total: number;
-  expenses_total: number;
-  refunds_total: number;
-  is_saved: boolean;
-};
+import SaveReportButton from "./save-report";
+import { AmazonReport } from "@thetis/amazon/amazon-types";
 
-export const columns: ColumnDef<AmazonReport>[] = [
+type RowData = AmazonReport & { is_saved: boolean };
+
+export const columns: ColumnDef<RowData>[] = [
   {
     id: "actions",
     header: "Actions",
@@ -40,7 +21,9 @@ export const columns: ColumnDef<AmazonReport>[] = [
       if (isSaved) {
         return <DownloadFolderButton storagePath={row.original.storage_path} />;
       }
-      return <SaveReportButton report={row.original} region={row.original.region} />;
+      return (
+        <SaveReportButton report={row.original} region={row.original.region} />
+      );
     },
   },
   {

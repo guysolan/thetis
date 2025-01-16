@@ -15,18 +15,8 @@ import NumberFlow from "@number-flow/react";
 const formatCurrency = (num: number, currency: string) => {
   return `${Number(num ?? 0).toFixed(2)} ${currency}`;
 };
-export type AmazonReport = {
-  createdTime: string;
-  dataEndTime: string;
-  dataStartTime: string;
-  marketplaceIds: string[];
-  processingEndTime: string;
-  processingStartTime: string;
-  processingStatus: string;
-  reportDocumentId: string;
-  reportId: string;
-  reportType: string;
-};
+
+import { AmazonReport } from "@/types";
 
 export type ReportSearch = {
   report: AmazonReport;

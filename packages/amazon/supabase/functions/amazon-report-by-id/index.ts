@@ -13,7 +13,6 @@ Deno.serve(async (req) => {
 
         const res = await getAmazonReportById({
             region,
-            country,
             reportId,
         });
 

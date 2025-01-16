@@ -1,5 +1,5 @@
 import { Button } from "@thetis/ui/button";
-import { AmazonReport } from "@/components/AmazonReportById";
+import { AmazonReport } from "@/types";
 import { useSaveAmazonReport } from "@/api/saveAmazonReport";
 import { Loader2, Save } from "lucide-react";
 
