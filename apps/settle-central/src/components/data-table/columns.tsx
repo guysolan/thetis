@@ -67,6 +67,10 @@ export const columns: ColumnDef<AmazonReport>[] = [
     header: "Settlement ID",
   },
   {
+    accessorKey: "region",
+    header: "Region",
+  },
+  {
     accessorKey: "marketplace_name",
     header: "Marketplace",
   },
