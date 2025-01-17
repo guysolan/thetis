@@ -31,7 +31,20 @@ const CurrencyCell = ({
   value,
   currency,
 }: { value: number; currency: string }) => {
-  return <NumberFlow value={value} format={{ style: "currency", currency }} />;
+  return (
+    <NumberFlow
+      value={value}
+      format={
+        currency
+          ? { style: "currency", currency: currency }
+          : {
+              style: "decimal",
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }
+      }
+    />
+  );
 };
 
 export const columns: ColumnDef<RowData>[] = [
@@ -99,12 +112,14 @@ export const columns: ColumnDef<RowData>[] = [
   {
     accessorKey: "region",
     header: ({ column }) => <SortableHeader column={column} title="Region" />,
+    filterFn: "arrIncludesSome",
   },
   {
     accessorKey: "marketplace_name",
     header: ({ column }) => (
       <SortableHeader column={column} title="Marketplace" />
     ),
+    filterFn: "arrIncludesSome",
   },
   {
     accessorKey: "settlement_start_date",
