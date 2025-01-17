@@ -11,7 +11,7 @@ const AmazonSettlementCard = ({
     <Button
       disabled={disabled}
       variant="outline"
-      size="sm"
+      size="icon"
       onClick={() => downloadFile({ path: storagePath })}
     >
       {isPending ? (

@@ -69,6 +69,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
 } from "@thetis/ui/dropdown-menu";
+import { Progress } from "@thetis/ui/progress";
 
 import * as changeCase from "change-case";
 import { useExportFiles } from "@/api/useExportFiles";
@@ -93,7 +94,7 @@ export function DataTable<TData, TValue>({
   const [openMarketplace, setOpenMarketplace] = React.useState(false);
   const [openColumns, setOpenColumns] = React.useState(false);
 
-  const { mutate: downloadFiles } = useExportFiles();
+  const { mutateAsync: downloadFiles } = useExportFiles();
 
   const table = useReactTable({
     data,
@@ -119,11 +120,11 @@ export function DataTable<TData, TValue>({
     },
   });
 
-  const handleExport = (fileTypes: ("pdf" | "csv")[]) => {
+  const handleExport = async (fileTypes: ("pdf" | "csv")[]) => {
     const selectedRows = table.getFilteredSelectedRowModel().rows;
     const fileNames = selectedRows.map((row) => row.original.storage_path);
 
-    downloadFiles({
+    await downloadFiles({
       fileNames,
       fileTypes,
     });
@@ -344,55 +345,70 @@ export function DataTable<TData, TValue>({
                 <DialogTitle>Export Selected Data</DialogTitle>
               </DialogHeader>
               <div className="space-y-4 py-4">
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-4 hover:bg-accent p-4 border rounded-lg cursor-pointer">
-                    <div className="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
-                      <FileText className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="flex-1 space-y-1">
-                      <p className="font-medium text-sm leading-none">
-                        PDF Export
-                      </p>
-                      <p className="text-muted-foreground text-sm">
-                        Export data in a formatted PDF document
-                      </p>
-                    </div>
+                <div className="flex items-center space-x-4 hover:bg-accent p-4 border rounded-lg cursor-pointer">
+                  <div className="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
+                    <FileText className="w-5 h-5 text-primary" />
+                  </div>
+                  <div className="flex-1 space-y-1">
+                    <p className="font-medium text-sm leading-none">
+                      PDF Export
+                    </p>
+                    <p className="text-muted-foreground text-sm">
+                      Export data in a formatted PDF document
+                    </p>
+                  </div>
+                  <DialogTrigger asChild>
                     <Button
                       variant="outline"
                       onClick={() => handleExport(["pdf"])}
                     >
                       Export PDF
                     </Button>
-                  </div>
+                  </DialogTrigger>
+                </div>
 
-                  <div className="flex items-center space-x-4 hover:bg-accent p-4 border rounded-lg cursor-pointer">
-                    <div className="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
-                      <Table2 className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="flex-1 space-y-1">
-                      <p className="font-medium text-sm leading-none">
-                        CSV Export
-                      </p>
-                      <p className="text-muted-foreground text-sm">
-                        Export data in a spreadsheet-compatible format
-                      </p>
-                    </div>
+                <div className="flex items-center space-x-4 hover:bg-accent p-4 border rounded-lg cursor-pointer">
+                  <div className="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
+                    <Table2 className="w-5 h-5 text-primary" />
+                  </div>
+                  <div className="flex-1 space-y-1">
+                    <p className="font-medium text-sm leading-none">
+                      CSV Export
+                    </p>
+                    <p className="text-muted-foreground text-sm">
+                      Export data in a spreadsheet-compatible format
+                    </p>
+                  </div>
+                  <DialogTrigger asChild>
                     <Button
                       variant="outline"
                       onClick={() => handleExport(["csv"])}
                     >
                       Export CSV
                     </Button>
-                  </div>
+                  </DialogTrigger>
                 </div>
 
-                <div className="flex justify-end">
-                  <Button
-                    className="w-full"
-                    onClick={() => handleExport(["pdf", "csv"])}
-                  >
-                    Export Both Formats
-                  </Button>
+                <div className="flex items-center space-x-4 hover:bg-accent p-4 border rounded-lg cursor-pointer">
+                  <div className="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
+                    <FileText className="w-5 h-5 text-primary" />
+                  </div>
+                  <div className="flex-1 space-y-1">
+                    <p className="font-medium text-sm leading-none">
+                      Export Both
+                    </p>
+                    <p className="text-muted-foreground text-sm">
+                      Export data in both PDF and CSV formats
+                    </p>
+                  </div>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      onClick={() => handleExport(["pdf", "csv"])}
+                    >
+                      Export Both
+                    </Button>
+                  </DialogTrigger>
                 </div>
               </div>
             </DialogContent>

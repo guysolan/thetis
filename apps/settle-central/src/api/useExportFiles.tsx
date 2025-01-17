@@ -2,19 +2,31 @@ import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import JSZip from "jszip";
-// @deno-ignore
 import { saveAs } from "file-saver";
+import { Progress } from "@thetis/ui/progress";
 
 async function downloadZippedFolder(
   fileNames: string[],
   fileTypes: ("pdf" | "csv")[],
 ) {
-  try {
-    // Create array of all possible file combinations
-    const filesToDownload = fileNames.flatMap((fileName) =>
-      fileTypes.map((type) => `${fileName}.${type}`),
-    );
+  // Create array of all possible file combinations
+  const filesToDownload = fileNames.flatMap((fileName) =>
+    fileTypes.map((type) => `${fileName}.${type}`),
+  );
 
+  const toastId = toast("Preparing your export...", {
+    duration: Number.Infinity,
+    description: (
+      <div className="space-y-2">
+        <Progress value={100} className="animate-progress-linear" />
+        <p className="text-muted-foreground text-sm">
+          Exporting {filesToDownload.length} file(s)...
+        </p>
+      </div>
+    ),
+  });
+
+  try {
     const zip = new JSZip();
 
     // Get signed URLs and add files to zip
@@ -44,8 +56,16 @@ async function downloadZippedFolder(
     // Generate and download the zip file
     const content = await zip.generateAsync({ type: "blob" });
     saveAs(content, `amazon_reports.zip`);
+
+    toast.success("Export completed!", {
+      id: toastId,
+      description: `Successfully exported ${filesToDownload.length} file(s)`,
+    });
   } catch (error) {
-    console.error("Error downloading files:", error);
+    toast.error("Export failed", {
+      id: toastId,
+      description: "There was an error exporting your files",
+    });
     throw error;
   }
 }
@@ -56,11 +76,5 @@ export const useExportFiles = () => {
       fileNames: string[];
       fileTypes: ("pdf" | "csv")[];
     }) => downloadZippedFolder(params.fileNames, params.fileTypes),
-    onSuccess: () => {
-      toast.success("Files downloaded successfully");
-    },
-    onError: () => {
-      toast.error("Failed to download files");
-    },
   });
 };
