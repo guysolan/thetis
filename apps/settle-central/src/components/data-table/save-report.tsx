@@ -16,7 +16,7 @@ const SaveReportButton = ({
   return (
     <>
       <Button
-        size="icon"
+        size="sm"
         variant="outline"
         onClick={() => {
           saveReport({
@@ -30,7 +30,7 @@ const SaveReportButton = ({
         ) : (
           <Save size={16} />
         )}
-        <span className="sr-only">Save Report</span>
+        <span>Save Report</span>
       </Button>
     </>
   );

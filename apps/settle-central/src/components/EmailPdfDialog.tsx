@@ -22,7 +22,7 @@ import {
 import { Input } from "@thetis/ui/input";
 import { useEmailAmazonReport } from "../api/emailReport";
 import { Mail } from "lucide-react";
-// Form schema
+
 const emailFormSchema = z.object({
   path: z.string(),
   to: z.string().email("Please enter a valid email address"),
@@ -34,10 +34,14 @@ export type EmailFormValue = z.infer<typeof emailFormSchema>;
 interface EmailReportDialogProps {
   path: string;
   reportDate: string;
+  children: React.ReactNode;
 }
 
-export function EmailPdfDialog({ path, reportDate }: EmailReportDialogProps) {
-  // Initialize form
+export function EmailPdfDialog({
+  path,
+  reportDate,
+  children,
+}: EmailReportDialogProps) {
   const form = useForm<EmailFormValue>({
     resolver: zodResolver(emailFormSchema),
     defaultValues: {
@@ -47,7 +51,6 @@ export function EmailPdfDialog({ path, reportDate }: EmailReportDialogProps) {
     },
   });
 
-  // Email mutation
   const { mutate: sendEmail, isPending } = useEmailAmazonReport();
 
   function onSubmit(data: EmailFormValue) {
@@ -56,11 +59,7 @@ export function EmailPdfDialog({ path, reportDate }: EmailReportDialogProps) {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button size="icon" variant="outline">
-          <Mail size={16} />
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Email Settlement Report</DialogTitle>

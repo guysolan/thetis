@@ -9,6 +9,7 @@ import { Skeleton } from "@thetis/ui/skeleton";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import { Badge } from "@thetis/ui/badge";
+import { cn } from "@thetis/ui/cn";
 
 interface FilePreviewProps {
   fileName: string;
@@ -20,7 +21,6 @@ interface FilePreviewProps {
 export function FilePreview({
   fileName,
   className,
-  thumbnailSize = 40,
   previewSize = 400,
 }: FilePreviewProps) {
   const [isHovering, setIsHovering] = React.useState(false);
@@ -43,10 +43,10 @@ export function FilePreview({
 
   return (
     <HoverCard onOpenChange={setIsHovering}>
-      <HoverCardTrigger className="flex items-center gap-2">
-        <Badge className="gap-1 hover:bg-opacity-70 px-2 py-1 transition-colors cursor-pointer">
-          <File size={16} /> Preview PDF
-        </Badge>
+      <HoverCardTrigger
+        className={cn("flex flex-row items-center gap-2", className)}
+      >
+        <File size={16} /> Preview
       </HoverCardTrigger>
 
       <HoverCardContent className="p-2 w-fit">
