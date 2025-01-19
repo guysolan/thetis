@@ -1,0 +1,59 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>🦿 Understanding Achilles Tendon Rupture Recovery</h1>
+			<p>
+				Welcome to your comprehensive guide for Achilles tendon rupture recovery. Whether you've recently
+				experienced an injury or are in the midst of rehabilitation, we're here to help you understand
+				the recovery process and guide you back to full health.
+			</p>
+			<p>
+				An Achilles tendon rupture can be a challenging injury, but with proper care, patience, and
+				dedication to rehabilitation, most patients can return to their normal activities. Recovery
+				typically spans several months and involves multiple phases.
+			</p>
+			<p>Here are the key aspects of Achilles tendon rupture recovery:</p>
+			<ul>
+				<li>
+					<strong>Initial Treatment (0-2 weeks):</strong> Rest, immobilization, and pain management
+				</li>
+				<li>
+					<strong>Early Recovery (2-6 weeks):</strong> Protected weight-bearing and gentle exercises
+				</li>
+				<li>
+					<strong>Progressive Loading (6-12 weeks):</strong> Increased mobility and strengthening
+				</li>
+				<li>
+					<strong>Return to Activity (3-6 months):</strong> Sport-specific training and conditioning
+				</li>
+				<li>
+					<strong>Long-term Recovery:</strong> Ongoing maintenance and injury prevention
+				</li>
+			</ul>
+			<p>
+				Throughout this website, you'll find detailed information about each recovery phase, exercises,
+				and tips for successful rehabilitation. Remember to always follow your healthcare provider's
+				specific instructions, as recovery plans may vary based on individual circumstances.
+			</p>
+			<p>
+				Need support? Join our <a href="/community">community forum</a> to connect with others on their
+				recovery journey or <a href="/contact">consult with our specialists</a> for personalized
+				guidance. You can also explore our <a href="/blog">blog</a> for the latest research and
+				recovery tips.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
