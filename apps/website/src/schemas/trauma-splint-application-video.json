@@ -1,0 +1,19 @@
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "How to Apply the Trauma Splint - Video Guide",
+  "description": "Step-by-step video instructions for healthcare professionals on how to properly apply the Trauma Splint for Achilles tendon injuries.",
+  "thumbnailUrl": ["https://thetismedical.com/images/A&E.png"],
+  "uploadDate": "2022-10-01T00:00:00Z",
+  "contentUrl": "https://www.youtube.com/watch?v=t-MAXbiqQkU",
+  "embedUrl": "https://www.youtube.com/embed/t-MAXbiqQkU?rel=0",
+  "duration": "PT2M12S",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Thetis Medical",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://thetismedical.com/images/dotty-logo.svg"
+    }
+  }
+}

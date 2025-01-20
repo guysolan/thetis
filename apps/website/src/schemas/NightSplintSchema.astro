@@ -1,5 +1,7 @@
 ---
 import { Schema } from "astro-seo-schema";
+import nightSplintPresentationVideo from './night-splint-presentation-video.json'
+import nightSplintInstructionsVideo from './night-splint-instructions-video.json'
 ---
 
 <Schema
@@ -126,42 +128,8 @@ import { Schema } from "astro-seo-schema";
       },
     ],
     video: [
-      {
-        "@type": "VideoObject",
-        "name": "Achilles Rupture Night Splint Product Presentation",
-        "description": "Detailed presentation of the Thetis Medical Achilles Rupture Night Splint, showcasing its features and benefits",
-        "thumbnailUrl": ["https://thetismedical.com/images/presentation-thumbnail.avif"],
-        "uploadDate": "2022-10-01T00:00:00Z",
-        "contentUrl": "https://www.youtube.com/watch?v=ndIB1WSqvow",
-        "embedUrl": "https://www.youtube.com/embed/ndIB1WSqvow",
-        "duration": "PT2M12S",
-        "publisher": {
-          "@type": "Organization",
-          "name": "Thetis Medical",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://thetismedical.com/images/dotty-logo.svg"
-          }
-        }
-      },
-      {
-        "@type": "VideoObject",
-        "name": "How to Apply the Achilles Rupture Night Splint",
-        "description": "Step-by-step instructions for properly applying the Thetis Medical Night Splint",
-        "thumbnailUrl": ["https://thetismedical.com/images/instructions-thumbnail.webp"],
-        "uploadDate": "2022-01-01T00:00:00Z",
-        "contentUrl": "https://www.youtube.com/watch?v=T09Xnwaqbm0",
-        "embedUrl": "https://www.youtube.com/embed/T09Xnwaqbm0",
-        "duration": "PT1M40S",
-        "publisher": {
-          "@type": "Organization",
-          "name": "Thetis Medical",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://thetismedical.com/images/dotty-logo.svg"
-          }
-        }
-      }
+      nightSplintPresentationVideo,
+      nightSplintInstructionsVideo
     ],
   }}
 />

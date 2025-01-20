@@ -1,0 +1,20 @@
+---
+import traumaSplintApplicationVideo from '../../schemas/trauma-splint-application-video.json'
+import VideoPage from "../../layouts/VideoPage.astro";
+---
+
+<VideoPage
+    title="How to Apply the Trauma Splint - Video Guide"
+    description="Step-by-step video instructions for healthcare professionals on how to properly apply the Trauma Splint for Achilles tendon injuries."
+    image="https://thetismedical.com/images/A&E.png"
+    video="https://www.youtube.com/embed/t-MAXbiqQkU?rel=0"
+    bullets={[
+        "Proper positioning of the patient's foot",
+        "Correct alignment of the splint",
+        "Securing the straps effectively",
+        "Final adjustments and comfort checks"
+    ]}
+    link="/trauma-splint"
+    linkText="main Trauma Splint page"
+    schema={traumaSplintApplicationVideo}
+/>

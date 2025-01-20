@@ -1,0 +1,64 @@
+---
+import Layout from "./Layout.astro";
+import Slide from "@/components/Slide.astro";
+import { Schema } from "astro-seo-schema";
+import type { WithContext, Thing } from "schema-dts";
+
+interface Props {
+    title: string;
+    description: string;
+    image: string;
+    video: string;
+    bullets: string[];
+    link: string;
+    linkText: string;
+    schema: WithContext<Thing>;
+}
+
+const { title, description, image, video, bullets, link, linkText, schema } = Astro.props;  
+
+---
+
+<Schema item={schema} />
+
+<Layout
+    title={title}
+    description={description}
+    image={image}
+>
+    <main>
+        <Slide id="video-guide" title="Trauma Splint Application Guide">
+            <div class="mx-auto px-4 sm:px-6 lg:px-8 w-full max-w-[1920px]">
+                <div class="relative w-full" style="padding-top: 56.25%;">
+                    <iframe 
+                        class="top-0 left-0 absolute shadow-lg rounded-lg w-full h-full"
+                        src={video}
+                        title="Trauma Splint Application Guide"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+                
+                <div class="mx-auto mt-8 max-w-none prose prose-lg">
+                    <h2 class='mb-4 font-semibold text-2xl'>Key Points in the Video</h2>
+                    <ul class='space-y-2'>
+                        {bullets.map((bullet) => (
+                            <li class="flex items-center gap-2">
+                                <span class="text-neutral-700">•</span>
+                                <span>{bullet}</span>
+                            </li>
+                        ))}
+                    </ul>
+                    
+                    <p class="mt-4">
+                        For more information, please visit our 
+                        <a href={link} class="text-primary hover:text-primary/80">
+                            {linkText}
+                        </a>.
+                    </p>
+                </div>
+            </div>
+        </Slide>
+    </main>
+</Layout>
+</Layout>
