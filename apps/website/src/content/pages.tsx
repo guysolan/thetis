@@ -54,6 +54,21 @@ export const partnerLinks: Link[] = [
   },
 ];
 
+export const videoPages = [
+  {
+    title: "Night Splint Instructions",
+    href: "video/night-splint-instructions",
+  },
+  {
+    title: "Trauma Splint Application",
+    href: "video/trauma-splint-application",
+  },
+  {
+    title: "Night Splint Presentation",
+    href: "video/night-splint-presentation",
+  },
+];
+
 export const pages = [
   { title: "Home", href: "" },
   { title: "Night Splint", href: "night-splint" },
@@ -63,6 +78,7 @@ export const pages = [
   { title: "Achilles Ruptures", href: "achilles-ruptures" },
   { title: "Recovery Pathway", href: "recovery-pathway" },
   { title: "Evidence Based Recovery", href: "evidence-based-recovery" },
+  ...videoPages,
   ...partnerLinks,
   ...productLinks,
 ];

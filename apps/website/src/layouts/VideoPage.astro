@@ -27,13 +27,13 @@ const { title, description, image, video, bullets, link, linkText, schema } = As
     image={image}
 >
     <main>
-        <Slide id="video-guide" title="Trauma Splint Application Guide">
+        <Slide id="video-guide" title={title}>
             <div class="mx-auto px-4 sm:px-6 lg:px-8 w-full max-w-[1920px]">
                 <div class="relative w-full" style="padding-top: 56.25%;">
                     <iframe 
                         class="top-0 left-0 absolute shadow-lg rounded-lg w-full h-full"
                         src={video}
-                        title="Trauma Splint Application Guide"
+                        title={title}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen
                     ></iframe>
