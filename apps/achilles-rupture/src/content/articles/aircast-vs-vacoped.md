@@ -5,7 +5,7 @@ description: "When recovering from an Achilles tendon rupture, the choice of wal
 pubDate: "Jan 21 2025"
 type: "article"
 tags: ["equipment", "recovery"]
-heroImage: "/src/images/aircast-vs-vacoped.png"
+heroImage: "../../images/aircast-vs-vacoped.png"
 ---
 
 ## The best walking boot for Achilles tendon recovery: Aircast vs Vacoped
@@ -18,7 +18,7 @@ We know that finding the right boot for your Achilles tendon rupture can be over
 
 ## Aircast boot with wedges
 
-![Aircast](/src/images/aircast.jpg)
+![Aircast](../../images/aircast.jpg)
 
 When discussing the Aircast, we are referring to the [AIRSELECT ELITE](https://www.djoglobal.com/products/aircast/airselect-elite). The Aircast boot is a type of cast that is designed to protect and immobilize the foot and ankle after an Achilles rupture. The boot has air-filled bladders that provide support and comfort while walking. The boot is designed with removable wedges that can be added or removed to adjust the angle of the foot and ankle, which can help stretch the Achilles tendon and promote healing.
 
@@ -28,7 +28,7 @@ When discussing the Aircast, we are referring to the [AIRSELECT ELITE](https://w
 - Lightweight: The Aircast boot is relatively lightweight and easy to use, making it a popular choice for many patients.
 - Inexpensive: Compared to other treatment options for an Achilles rupture, the Aircast boot is relatively inexpensive, making it a popular choice for those who want an effective treatment option that won't break the bank.
 
-![wedges.jpg](/src/images/wedges.jpg)
+![wedges](../../images/wedges.jpg)
 
 ### Disadvantages
 
@@ -39,7 +39,7 @@ When discussing the Aircast, we are referring to the [AIRSELECT ELITE](https://w
 
 The [VACOped](https://opedmedical.com/products/vacoped/) boot is a more advanced type of boot that provides increased support and mobility compared to the Aircast boot. The VACOped boot has an air-filled chamber that provides compression and helps reduce swelling. It also has a unique hinged design that allows for contrulled ankle movement, which can help promote healing and prevent muscle atrophy.
 
-![VACOped.jpg](/src/images/VACOped.jpg)
+![VACOped](../../images/VACOped.jpg)
 
 ### Advantages
 
@@ -52,7 +52,7 @@ The [VACOped](https://opedmedical.com/products/vacoped/) boot is a more advanced
 - Expensive: Compared to the Aircast boot, the VACOped boot is relatively expensive, which can be a significant drawback for some patients.
 - Can be more difficult to use: The VACOped boot has a more advanced design than the Aircast boot, which can make it more difficult to use for some patients.
 
-![ROM-VACOped.png](/src/images/ROM-VACOped.png)
+![ROM-VACOped](../../images/ROM-VACOped.png)
 
 ## Breakdown
 
@@ -70,7 +70,7 @@ The Aircast boot with wedges provides adequate comfort as it allows for some mob
 
 On the other hand, the VACOped boot provides excellent comfort and stability as it completely immobilizes the foot. The vacuum cushion provides cushioning to the foot, making it comfortable to walk in.
 
-![Liner-VACOped.png](/src/images/Liner-VACOped.png)
+![Liner-VACOped](../../images/Liner-VACOped.png)
 
 ### 🏆 **Winner: Tie - Both boots provide adequate comfort.**
 
@@ -111,7 +111,7 @@ Wearing a comfortable boot while sleeping is essential for a good night's rest. 
 
 🏆 **Winner: [Achilles Rupture Night Splint](https://www.thetismedical.com/night-splint)**
 
-![Achilles Rupture Night Splint](/src/images/thetis-night-splint.jpg)
+![Achilles Rupture Night Splint](../../images/thetis-night-splint.jpg)
 
 ### Showering and Bathing
 

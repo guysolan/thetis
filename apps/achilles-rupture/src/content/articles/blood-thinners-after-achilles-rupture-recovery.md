@@ -5,7 +5,7 @@ description: 'Blood thinners after Achilles tendon rupture recovery'
 pubDate: 'Jan 21 2025'
 type: 'article'
 tags: ['recovery','treatment']
-heroImage: '/src/images/blood.webp'
+heroImage: '../../images/blood.webp'
 ---
 
 **Key Message:** you should consider blood thinners after Achilles tendon rupture, and discuss with your medical team how long to take them for.

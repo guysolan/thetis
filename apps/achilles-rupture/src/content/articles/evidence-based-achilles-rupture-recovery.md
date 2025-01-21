@@ -5,7 +5,7 @@ description: 'Evidence-based Achilles tendon rupture recovery'
 pubDate: 'Jan 21 2025'
 type: 'article'
 tags: ['science','recovery','treatment']
-heroImage: '/src/images/prp.jpg'
+heroImage: '../../images/prp.jpg'
 ---
 
 ## Surgery is not always required for Achilles Tendon Rupture

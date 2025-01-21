@@ -5,10 +5,13 @@ interface Props {
 }
 
 const { articleName } = Astro.props;
+const formId = `upvote-form-${articleName.toLowerCase().replace(/\s+/g, '-')}`;
+const statusId = `upvote-status-${articleName.toLowerCase().replace(/\s+/g, '-')}`;
+const buttonId = `upvote-button-${articleName.toLowerCase().replace(/\s+/g, '-')}`;
 ---
 
 <form 
-  id="upvote-form" 
+  id={formId}
   action="https://formspree.io/f/mldgrdze" 
   method="POST" 
   class="inline-block space-y-4 text-center"
@@ -17,7 +20,7 @@ const { articleName } = Astro.props;
   <input type="hidden" name="articleName" value={articleName} />
 
   <button 
-    id="upvote-button"
+    id={buttonId}
     type="submit"
     class="flex justify-center items-center gap-3 border-gray-300 bg-white hover:bg-gray-50 mx-auto px-6 py-3 border rounded-lg text-gray-600 text-lg hover:text-gray-800 transition-colors duration-200"
   >
@@ -26,39 +29,59 @@ const { articleName } = Astro.props;
     </svg>
     <span>Yes, Upvote</span>
   </button>
-  <p id="upvote-status" class="text-center text-gray-500 text-sm"></p>
+  <p id={statusId} class="hidden opacity-0 text-center text-gray-500 text-lg transition-all duration-300">
+    <span class="inline-flex items-center gap-2">
+      <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg>
+      Upvote Recorded
+    </span>
+  </p>
 </form>
 
-<script>
-  var form = document.getElementById("upvote-form");
+<script define:vars={{ formId, statusId, buttonId }}>
+  var form = document.getElementById(formId);
+  var button = document.getElementById(buttonId);
+  var status = document.getElementById(statusId);
   
   async function handleSubmit(event) {
     event.preventDefault();
-    var status = document.getElementById("upvote-status");
     var data = new FormData(event.target);
     
-    fetch(event.target.action, {
-      method: form.method,
-      body: data,
-      headers: {
+    try {
+      const response = await fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: {
           'Accept': 'application/json'
-      }
-    }).then(response => {
+        }
+      });
+
       if (response.ok) {
-        status.innerHTML = "Thanks for your upvote!";
-        form.reset()
+        // Hide button with fade out
+        button.style.opacity = '0';
+        setTimeout(() => {
+          button.style.display = 'none';
+          // Show success message with fade in
+          status.classList.remove('hidden');
+          setTimeout(() => {
+            status.style.opacity = '1';
+          }, 50);
+        }, 300);
+        
+        form.reset();
       } else {
-        response.json().then(data => {
-          if (Object.hasOwn(data, 'errors')) {
-            status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
-          } else {
-            status.innerHTML = "Oops! There was a problem submitting your upvote"
-          }
-        })
+        const data = await response.json();
+        if (Object.hasOwn(data, 'errors')) {
+          status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+        } else {
+          status.innerHTML = "Oops! There was a problem submitting your upvote";
+        }
       }
-    }).catch(error => {
-      status.innerHTML = "Oops! There was a problem submitting your upvote"
-    });
+    } catch (error) {
+      status.innerHTML = "Oops! There was a problem submitting your upvote";
+    }
   }
-  form.addEventListener("submit", handleSubmit)
+  
+  form.addEventListener("submit", handleSubmit);
 </script>

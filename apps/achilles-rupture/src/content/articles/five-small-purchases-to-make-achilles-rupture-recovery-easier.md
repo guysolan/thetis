@@ -4,7 +4,7 @@ description: 'Essential accessories and items that can significantly improve you
 pubDate: '21 Jan 2025'
 type: 'article'
 tags: ['equipment','recovery','comfort']
-heroImage: '/src/images/crutches.webp'
+heroImage: '../../images/crutches.webp'
 ---
 
 When recovering from an Achilles tendon rupture, you'll need the essential medical equipment like a walking boot, crutches, and night splint. However, there are several small, affordable purchases that can significantly improve your comfort during the recovery process. Here are five items worth considering:
