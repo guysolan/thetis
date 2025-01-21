@@ -17,6 +17,8 @@ The walking boot is your most critical piece of equipment during Achilles tendon
 
 Research demonstrates that maintaining proper ankle position during sleep is crucial for optimal healing. A night splint prevents potentially harmful foot positions that could stress the healing tendon. While less discussed than walking boots, night splints play a vital role in preventing re-rupture and maintaining appropriate tendon length during recovery.
 
+[Thetis Night Splint](https://thetismedical.com/night-splint)
+
 ## Elevation Aids: Reducing Swelling and Promoting Healing
 
 Medical evidence shows that proper elevation above heart level significantly reduces swelling and supports healing. Specialized leg elevation pillows or wedges ensure consistent, correct positioning. This is particularly important during the first few weeks post-injury when swelling management is crucial for comfort and recovery.
