@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Guide from '../../layouts/Guide.astro';
 import { render } from 'astro:content';
+import LinkText from '../../components/LinkText.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('guide');
@@ -19,8 +20,10 @@ const { Content } = await render(post);
 <Guide {...post.data}>
 	<Content />
 	<div class="mt-8 text-gray-600 text-lg">
-		<a href="https://thetismedical.com/achilles-ruptures" class="hover:underline">
-			See Original Articles →
+		<a href="https://thetismedical.com/achilles-ruptures">
+			<LinkText>
+				See Original
+			</LinkText>
 		</a>
 	</div>
 </Guide>

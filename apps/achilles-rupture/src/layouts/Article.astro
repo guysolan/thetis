@@ -12,7 +12,7 @@ const { title, description, pubDate, updatedDate, heroImage, status} = Astro.pro
 <Layout title={title} description={description}>
 	<main class="m-0 w-full max-w-full">
 		{status === 'draft' ? (
-			<div class="prose-img:border-gray-200/20 prose-img:shadow-xl mx-auto p-4 prose-img:border prose-img:rounded-xl w-[720px] prose-img:w-full prose-img:aspect-[2/1] prose-img:object-cover">
+			<div class="prose-img:border-gray-200/20 prose-img:shadow-xl mx-auto p-4 prose-img:border prose-img:rounded-xl lg:w-[720px] prose-img:w-full prose-img:aspect-[2/1] prose-img:object-cover">
 				<div class="mb-4 py-4 text-center">
 					<h1 class="mb-2">{title}</h1>
 				</div>
@@ -24,7 +24,7 @@ const { title, description, pubDate, updatedDate, heroImage, status} = Astro.pro
 				</div>
 			</div>
 		) : (
-			<article class="prose-img:border-gray-200/20 prose-img:shadow-xl prose-img:border prose-img:rounded-xl prose-img:w-full prose-img:aspect-[2/1] prose-img:object-cover">
+			<article class="prose-img:border-gray-200/20 prose-img:shadow-xl prose-img:border prose-img:rounded-xl prose-img:w-full prose-img:aspect-square prose-img:object-cover">
 				<div class="mx-auto px-4 w-full max-w-[1020px]">
 					{heroImage && (
 						<img 
@@ -36,7 +36,7 @@ const { title, description, pubDate, updatedDate, heroImage, status} = Astro.pro
 						/>
 					)}
 				</div>
-				<div class="mx-auto p-4 w-[720px] max-w-[calc(100%-2em)] text-gray-800">
+				<div class="mx-auto p-4 max-w-[calc(100%-2em)] text-gray-800">
 					<div class="mb-4 py-4 text-center">
 						<div class="mb-2 text-gray-600">
 							<FormattedDate date={pubDate} />
@@ -60,7 +60,6 @@ const { title, description, pubDate, updatedDate, heroImage, status} = Astro.pro
 
 <style>
   :global(article img), :global(.prose img) {
-    aspect-ratio: 2/1;
     max-height: none;
     object-fit: cover;
     border: 1px solid rgb(229, 231, 235);
@@ -83,6 +82,9 @@ const { title, description, pubDate, updatedDate, heroImage, status} = Astro.pro
     width: 100%;
     border-collapse: collapse;
     margin: 1.5rem 0;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
   :global(th), :global(td) {

@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ContentListing from '../components/ContentListing.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 
@@ -9,152 +10,27 @@ import { getCollection } from 'astro:content';
 const guides = await getCollection('guide');
 const articles = await getCollection('article');
 const allPosts = [...guides.map((g)=>({...g, type: 'guide'})), ...articles.map((a)=>({...a, type: 'article'}))].sort((a, b) => 
-	new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+    new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
-
-// Replace tag icons mapping and allTags with a single array
-const tags = [
-	{ word: 'recovery', icon: '🏥' },
-	{ word: 'comfort', icon: '🛌' },
-	{ word: 'science', icon: '💡' },
-	{ word: 'diagnosis', icon: '🔬' },
-	{ word: 'equipment', icon: '🦿' },
-	{ word: 'treatment', icon: '🎯' },
-] as const;
-
-// Get the selected tag from URL params and ensure it's a string
-const selectedTag = Astro.url.searchParams.get('tag') || 'all';
-
-// Filter posts based on selected tag
-const filteredPosts = selectedTag === 'all' 
-	? allPosts 
-	: allPosts.filter(post => post.data.tags && post.data.tags.includes(selectedTag));
-
-
 ---
-
-<script>
-  // Get all article cards and tag links
-  const articleCards = document.querySelectorAll('.article-card');
-  const tagLinks = document.querySelectorAll('#filter-nav a');
-  const shuffleButton = document.getElementById('shuffle-button');
-  const articlesContainer = document.getElementById('articles-container');
-
-  // Function to shuffle DOM elements
-  function shuffleNodes(parentNode) {
-    const elements = [...parentNode.children];
-    const shuffled = elements.sort(() => Math.random() - 0.5);
-    shuffled.forEach(node => parentNode.appendChild(node));
-  }
-
-  // Add shuffle button click handler
-  shuffleButton?.addEventListener('click', () => {
-    shuffleNodes(articlesContainer);
-  });
-
-  // Add click event listeners to tag links
-  tagLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const tag = new URL(link.href).searchParams.get('tag') || 'all';
-      
-      // Update URL without page reload
-      const newUrl = tag === 'all' ? '/' : `/?tag=${tag}`;
-      history.pushState({}, '', newUrl);
-
-      // Update active state of links
-      tagLinks.forEach(l => {
-        l.classList.toggle('bg-gray-800', l.href === link.href);
-        l.classList.toggle('text-white', l.href === link.href);
-        l.setAttribute('aria-current', l.href === link.href ? 'page' : undefined);
-      });
-
-      // Filter articles
-      articleCards.forEach(card => {
-        if (tag === 'all') {
-          card.parentElement.style.display = 'block';
-        } else {
-          const cardTags = card.dataset.tags?.split(' ') || [];
-          card.parentElement.style.display = cardTags.includes(tag) ? 'block' : 'none';
-        }
-      });
-    });
-  });
-</script>
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={`${SITE_TITLE} - Recovery Guide & Resources`} description={SITE_DESCRIPTION} />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content={`${SITE_TITLE} - Recovery Guide & Resources`} />
-		<meta property="og:description" content={SITE_DESCRIPTION} />
-		<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).toString()} />
-	</head>
-	<body>
-		<Header />
-		<main id="main-content">
-			<div class="mx-auto px-4 py-8 max-w-[1400px]">
-				<h1 class="mb-8 font-bold text-4xl text-center text-gray-800">🦿 Understanding Achilles Tendon Rupture Recovery</h1>
-				
-				<nav aria-label="Content filter" id="filter-nav" class="mb-12 w-full">
-					<div class="flex md:flex-row flex-col items-start gap-4 w-full">
-						<div class="flex flex-wrap items-center gap-4">
-							<a 
-								href="/"
-							class={`border-gray-300 hover:border-gray-400 hover:bg-gray-200 px-4 py-2 border rounded-full hover:text-black transition-all ${selectedTag === 'all' ? 'bg-gray-800 text-white' : ''}`}
-							aria-current={selectedTag === 'all' ? 'page' : undefined}>
-							📚 All
-						</a>
-						{tags.map(({ word, icon }) => (
-							<a 
-								href={`/?tag=${word}`}
-								class={`border-gray-400 hover:border-gray-500 capitalize hover:bg-gray-200 px-4 py-2 border rounded-full hover:text-black transition-all ${selectedTag === word ? 'bg-gray-800 text-white' : ''}`}
-								aria-current={selectedTag === word ? 'page' : undefined}>
-								{icon} {word}
-							</a>
-						))}
-					</div>
-						<button
-							id="shuffle-button"
-							class="border-gray-300 hover:border-gray-400 bg-gray-200 hover:bg-gray-300 px-4 py-2 border rounded-full w-fit text-nowrap hover:text-black transition-all"
-							aria-label="Shuffle posts">
-							🎲 Shuffle
-						</button>
-					</div>
-				</nav>
-
-				<div id="articles-container" class="gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" role="feed" aria-busy="false">
-					{filteredPosts.map(post => (
-						<a href={`/${post.type}s/${post.id}`} class="block group">
-							<article class="flex flex-col border-gray-200 hover:border-gray-300 bg-white hover:shadow-lg p-6 border rounded-lg h-full transition-all hover:-translate-y-1 duration-200 article-card ease-in-out" data-tags={post.data.tags?.join(' ')}>
-								<header>
-									<h2 class="mb-3 font-semibold text-2xl text-gray-800">
-										{post.data.title}
-									</h2>
-									<div class="flex flex-wrap gap-2 mb-4">
-										{post.data.tags?.map(tag => (
-											<span class="bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded-md text-gray-700 text-sm transition-colors">
-												#{tag}
-											</span>
-										))}
-									</div>
-								</header>
-								<p class="mb-4 line-clamp-3 text-gray-600">{post.data.description}</p>
-								<footer class="mt-auto">
-									<span class="group-hover:text-blue-800 inline-flex items-center text-blue-600 transition-colors">
-										Read full {post.type}
-										<svg class="ml-2 w-4 h-4 transform transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-											<path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-										</svg>
-									</span>
-								</footer>
-							</article>
-						</a>
-					))}
-				</div>
-			</div>
-		</main>
-		<Footer />
-	</body>
+    <head>
+        <BaseHead title={`${SITE_TITLE} - Recovery Guide & Resources`} description={SITE_DESCRIPTION} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`${SITE_TITLE} - Recovery Guide & Resources`} />
+        <meta property="og:description" content={SITE_DESCRIPTION} />
+        <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).toString()} />
+    </head>
+    <body>
+        <Header />
+        <main id="main-content">
+            <ContentListing 
+                posts={allPosts}
+                title="🦿 Understanding Achilles Tendon Rupture Recovery"
+            />
+        </main>
+        <Footer />
+    </body>
 </html>
