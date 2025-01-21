@@ -1,13 +1,11 @@
 ---
 title: "A doctor's perspective on Achilles rupture recovery"
-created_time: March 20, 2024 12:00 PM
-last_edited_time: March 20, 2024 12:00 PM
-read_time: 15
-section: Blog
-status: draft
-article: doctors-perspective-achilles
-author: anonymous
-image: /images/blog/doctors-perspective/doctors-perspective-header.png
+status: 'draft'
+description: "A medical professional's insights into Achilles tendon rupture recovery process"
+pubDate: 'Mar 20 2025'
+type: 'article'
+tags: ['recovery', 'treatment']
+heroImage: '/src/images/surgeons.jpeg'
 ---
 
 Patient Compliance

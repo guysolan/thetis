@@ -1,5 +1,10 @@
 ---
-title: 'How will my Achilles tendon heal?'
+title: 'Science of Achilles tendon healing'
+description: 'Learn how your Achilles tendon heals naturally after a rupture, with detailed explanations of the biological healing process. Understand the science behind why surgery is rarely needed and how the body repairs itself through distinct healing phases.'
+pubDate: 'Jan 21 2025'
+type: 'article'
+tags: ['science','recovery','treatment']
+heroImage: '/src/images/science.webp'
 ---
 
 Modern evidence has shown that there is seldom a need to repair a ruptured Achilles tendon with surgery. Treatment without an operation brings excellent results. Understanding the natural healing processes involved will help you to follow the advice and precautions that are necessary to ensure a great outcome from your injury.

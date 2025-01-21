@@ -3,6 +3,8 @@ title: 'Achilles Rupture Recovery Timeline: What to Expect'
 description: 'A week-by-week guide to Achilles tendon rupture recovery, covering both surgical and non-surgical treatment paths and key recovery milestones.'
 pubDate: 'Jul 15 2022'
 heroImage: '/blog-placeholder-1.jpg'
+type: 'guide'
+tags: ['treatment','recovery']
 ---
 
 ## Week 1 (Trauma Splint)

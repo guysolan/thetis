@@ -1,6 +1,10 @@
 ---
-title: Why surgery isn't (usually) required after an Achilles tendon tear (backed by science)
-status: 'draft'
+title: "Why surgery isn't (usually) required after an Achilles tendon tear (backed by science)"
+description: "Why surgery isn't (usually) required after an Achilles tendon tear (backed by science)"
+pubDate: "2024-07-15"
+status: "draft"
+tags: ["science", "treatment"]
+heroImage: '/src/images/surgery.jpeg'
 ---
 
 When it comes to treating an Achilles tendon rupture, there are several options available, including rest, physical therapy, and surgery. However, when it comes to determining whether surgery is necessary for an Achilles rupture, there are a few key factors that must be considered.

@@ -3,6 +3,8 @@ title: 'What happens if my Achilles is ruptured?'
 description: 'A guide to what happens if you have ruptured your Achilles tendon, including what to expect in A&E and what the specialist will do'
 pubDate: 'Jul 08 2022'
 heroImage: '/blog-placeholder-5.jpg'
+type: 'guide'
+tags: ['diagnosis','recovery','treatment']
 ---
 
 ## **What will happen in A&E?**

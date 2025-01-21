@@ -1,6 +1,10 @@
 ---
-title: 9 Tips for Achilles Tendon Rupture Recovery
+title: '9 Tips for Achilles Tendon Rupture Recovery'
+description: 'Essential tips and practical advice for managing daily life while recovering from an Achilles tendon rupture.'
+pubDate: 2024-03-20
+tags: ['recovery', 'comfort', 'equipment']
 status: 'draft'
+heroImage: '/src/images/idea.jpeg'
 ---
 
 1. Blood Thinners
@@ -10,5 +14,5 @@ status: 'draft'
 5. Chair in shower
 6. Take your physio home
 7. Choose your shoes wisely
-Socks not liners
-The other leg
+8. Socks not liners
+9. The other leg

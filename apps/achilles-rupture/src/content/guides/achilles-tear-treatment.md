@@ -3,6 +3,8 @@ title: How to treat a torn Achilles tendon / Op vs Non-Op?
 description: 'A guide to how to treat a torn Achilles tendon, including whether to have surgery or not'
 pubDate: 'Jul 08 2022'
 heroImage: '/blog-placeholder-2.jpg'
+type: 'guide'
+tags: ['treatment']
 ---
 
 ## How to treat a torn Achilles tendon / Op vs Non-Op?

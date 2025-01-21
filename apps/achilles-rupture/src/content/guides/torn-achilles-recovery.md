@@ -3,6 +3,8 @@ title: 'Complete Guide to Achilles Tendon Rupture Recovery: Timeline & Treatment
 description: 'Expert guide to Achilles tendon rupture recovery: Learn about recovery timelines, walking boot options, rehabilitation exercises, and essential tips to prevent re-injury. Includes both surgical and non-surgical treatment paths.'
 pubDate: 'Jul 08 2022'
 heroImage: '/blog-placeholder-3.jpg'
+type: 'guide'
+tags: ['treatment','recovery','equipment']
 ---
 
 

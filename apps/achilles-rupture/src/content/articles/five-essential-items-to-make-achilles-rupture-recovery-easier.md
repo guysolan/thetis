@@ -1,7 +1,10 @@
 ---
 title: 5 Essential Items for Achilles Rupture Recovery - Medical Equipment Guide
 description: Discover the most important medical equipment for Achilles tendon rupture recovery. Expert guide to walking boots, night splints, and mobility aids that support healing.
-status: 'draft'
+pubDate: '21 Jan 2025'
+type: 'article'
+tags: ['equipment','recovery','comfort']
+heroImage: '/src/images/thetis-night-splint-side.jpg'
 ---
 
 ## Walking Boot Options for Achilles Rupture Recovery

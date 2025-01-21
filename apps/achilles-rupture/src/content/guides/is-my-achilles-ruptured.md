@@ -3,6 +3,8 @@ title: 'Is my Achilles ruptured?'
 description: 'A guide to help you identify if you have ruptured your Achilles tendon, including symptoms, causes and what to do next'
 pubDate: 'Jul 08 2022'
 heroImage: '/blog-placeholder-4.jpg'
+tags: ['diagnosis']
+type: 'guide'
 ---
 
 ## Is my Achilles ruptured?

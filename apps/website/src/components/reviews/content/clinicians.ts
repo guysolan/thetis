@@ -2,6 +2,7 @@ import JamesDavis from "./images/james-davis.png";
 import RobbieRay from "./images/robbie-ray.png";
 import IanGill from "./images/ian-gill.png";
 import MattWelck from "./images/matt-welck.png";
+import SohailYousaf from "./images/sohail-yousaf.png";
 import type { Review } from "../types";
 
 export const clinicians: Review[] = [
@@ -55,7 +56,18 @@ I highly recommend the Thetis Medical Achilles Repair Splint to colleagues and p
         title: "Get a good night's sleep!",
         short: "Worth Every Penny",
         body:
-            "I’ve been recommending the Thetis night time splint for all my ruptured Achilles patients for two years now. It is worth every penny as it stops the misery of trying to get good nights sleep in an uncomfortable boot !",
+            "I've been recommending the Thetis night time splint for all my ruptured Achilles patients for two years now. It is worth every penny as it stops the misery of trying to get good nights sleep in an uncomfortable boot !",
+        country: "GB",
+    },
+    {
+        name: "Mr Sohail Yousaf",
+        link: "https://www.sohailyousaf.com/",
+        description: "Foot and Ankle Surgeon",
+        image: SohailYousaf,
+        title: "Excellent tool for enhancing recovery and comfort",
+        short: "Lightweight and effective for sleep and protection",
+        body:
+            "Thetis night-time splint are excellent tools for enhancing recovery and patient comfort. My patients have had a very positive experience. Lightweight and effective, it provide relief during sleep and protect the foot outside the boot. Highly recommended to improve compliance and recovery outcomes.",
         country: "GB",
     },
 ];

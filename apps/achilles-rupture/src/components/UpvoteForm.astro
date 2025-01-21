@@ -1,0 +1,64 @@
+---
+// Add the interface and props
+interface Props {
+  articleName: string;
+}
+
+const { articleName } = Astro.props;
+---
+
+<form 
+  id="upvote-form" 
+  action="https://formspree.io/f/mldgrdze" 
+  method="POST" 
+  class="inline-block space-y-4 text-center"
+>
+
+  <input type="hidden" name="articleName" value={articleName} />
+
+  <button 
+    id="upvote-button"
+    type="submit"
+    class="flex justify-center items-center gap-3 border-gray-300 bg-white hover:bg-gray-50 mx-auto px-6 py-3 border rounded-lg text-gray-600 text-lg hover:text-gray-800 transition-colors duration-200"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+    </svg>
+    <span>Yes, Upvote</span>
+  </button>
+  <p id="upvote-status" class="text-center text-gray-500 text-sm"></p>
+</form>
+
+<script>
+  var form = document.getElementById("upvote-form");
+  
+  async function handleSubmit(event) {
+    event.preventDefault();
+    var status = document.getElementById("upvote-status");
+    var data = new FormData(event.target);
+    
+    fetch(event.target.action, {
+      method: form.method,
+      body: data,
+      headers: {
+          'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        status.innerHTML = "Thanks for your upvote!";
+        form.reset()
+      } else {
+        response.json().then(data => {
+          if (Object.hasOwn(data, 'errors')) {
+            status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+          } else {
+            status.innerHTML = "Oops! There was a problem submitting your upvote"
+          }
+        })
+      }
+    }).catch(error => {
+      status.innerHTML = "Oops! There was a problem submitting your upvote"
+    });
+  }
+  form.addEventListener("submit", handleSubmit)
+</script>
