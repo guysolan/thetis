@@ -5,7 +5,7 @@ description: "A medical professional's insights into Achilles tendon rupture rec
 pubDate: 'Mar 20 2025'
 type: 'article'
 tags: ['recovery', 'treatment']
-heroImage: '../../images/surgeons.jpeg'
+heroImage: '../../../../imagessurgeons.jpeg'
 ---
 
 Patient Compliance

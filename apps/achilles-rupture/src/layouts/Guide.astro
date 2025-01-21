@@ -15,7 +15,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<BaseHead title={title} description={description} />
 		<style>
 			.prose {
-				width: 720px;
 				max-width: calc(100% - 2em);
 				margin: auto;
 				padding: 1em;
@@ -42,7 +41,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 	<body>
 		<Header />
-		<main class="w-full">
+		<main class="w-full max-w-screen-xl">
 			<article class="w-full">
 				<div class="prose">
 					<div class="title">

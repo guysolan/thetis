@@ -4,7 +4,7 @@ description: Discover the most important medical equipment for Achilles tendon r
 pubDate: '21 Jan 2025'
 type: 'article'
 tags: ['equipment','recovery','comfort']
-heroImage: '../../images/thetis-night-splint-side.jpg'
+heroImage: '/images/thetis-night-splint-side.jpg'
 ---
 
 ## Walking Boot Options for Achilles Rupture Recovery

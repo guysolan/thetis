@@ -4,7 +4,7 @@ description: 'Essential tips and practical advice for managing daily life while 
 pubDate: 2024-03-20
 tags: ['recovery', 'comfort', 'equipment']
 status: 'draft'
-heroImage: '../../images/idea.jpeg'
+heroImage: '/images/idea.jpeg'
 ---
 
 1. Blood Thinners

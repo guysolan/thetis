@@ -5,7 +5,7 @@ pubDate: '21 Jan 2025'
 updatedDate: '21 Jan 2025'
 status: 'draft'
 tags: ['treatment', 'recovery', 'science']
-heroImage: '../../images/trends.jpeg'
+heroImage: '/images/trends.jpeg'
 ---
 
 History of Achilles tendon rupture (link to paper)
