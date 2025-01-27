@@ -27,14 +27,14 @@ const buttonId = `upvote-button-${articleName.toLowerCase().replace(/\s+/g, '-')
     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
       <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
     </svg>
-    <span>Yes, Upvote</span>
+    <span>Vote</span>
   </button>
   <p id={statusId} class="hidden opacity-0 text-center text-gray-500 text-lg transition-all duration-300">
     <span class="inline-flex items-center gap-2">
       <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
       </svg>
-      Upvote Recorded
+      Vote Recorded
     </span>
   </p>
 </form>
@@ -75,11 +75,11 @@ const buttonId = `upvote-button-${articleName.toLowerCase().replace(/\s+/g, '-')
         if (Object.hasOwn(data, 'errors')) {
           status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
         } else {
-          status.innerHTML = "Oops! There was a problem submitting your upvote";
+          status.innerHTML = "Oops! There was a problem submitting your vote";
         }
       }
     } catch (error) {
-      status.innerHTML = "Oops! There was a problem submitting your upvote";
+      status.innerHTML = "Oops! There was a problem submitting your vote";
     }
   }
   
