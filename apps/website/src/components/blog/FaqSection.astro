@@ -15,18 +15,21 @@ import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-astro';
 ---
 
-<section class="border-primary/20 bg-white shadow-md hover:shadow-xl p-4 md:p-8 lg:p-12 border rounded-lg transition-all duration-300 article-wrap hover:scale-[1.02]">
+<section class="border-gray-100 bg-white shadow-sm hover:shadow-lg p-6 md:p-8 border rounded-xl transition-all duration-300 group">
     <SlideTitle title={title} />
-    <div class="mt-6 article">
-        <ul class="space-y-3 mb-6 p-8 md:p-4">
+    <div class="mt-8">
+        <ul class="space-y-4 mb-8">
             {links.map(link => (
-                <li class="transition-all hover:translate-x-1 duration-200">
+                <li class="group/item">
                     <a 
                         href={link.href} 
-                        class="flex items-center gap-2 text-primary/90 hover:text-primary"
+                        class="flex items-center gap-3 hover:bg-gray-50 p-3 rounded-lg font-medium text-gray-700 text-lg hover:text-primary transition-all duration-200"
                     >
-                        <ArrowRight class="mr-1" />
-                        {link.text}
+                        <ArrowRight
+                        size={20} 
+                            class="group-hover/item:text-primary text-primary/60 transition-all duration-200" 
+                        />
+                        <span class="text-lg leading-relaxed">{link.text}</span>
                     </a>
                 </li>
             ))}
@@ -35,10 +38,11 @@ import { ArrowRight } from 'lucide-astro';
             href={readMoreLink}
             class={cn(
                 buttonVariants({ variant: "outline", size: "lg" }), 
-                "w-full sm:w-auto hover:bg-primary/10 transition-colors duration-300"
+                "w-full sm:w-auto bg-white hover:bg-primary hover:text-white border-primary/20 text-primary transition-all duration-300 font-medium"
             )}
         >
-            Read Article
+            Read Full Article
+            <ArrowRight class="ml-2 w-4 h-4" />
         </a>
     </div>
 </section>
