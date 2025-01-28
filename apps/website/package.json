@@ -27,6 +27,7 @@
     "@types/marked": "^4.0.8",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "@vercel/analytics": "^1.4.1",
     "astro": "^5.0.5",
     "astro-seo-schema": "^4.0.2",
     "chart.js": "^4.4.7",
