@@ -3,6 +3,7 @@ import RobbieRay from "./images/robbie-ray.png";
 import IanGill from "./images/ian-gill.png";
 import MattWelck from "./images/matt-welck.png";
 import SohailYousaf from "./images/sohail-yousaf.png";
+import AndyRoche from "./images/andy-roche.jpg";
 import type { Review } from "../types";
 
 export const clinicians: Review[] = [
@@ -69,5 +70,16 @@ I highly recommend the Thetis Medical Achilles Repair Splint to colleagues and p
         body:
             "Thetis night-time splint are excellent tools for enhancing recovery and patient comfort. My patients have had a very positive experience. Lightweight and effective, it provide relief during sleep and protect the foot outside the boot. Highly recommended to improve compliance and recovery outcomes.",
         country: "GB",
+    },
+    {
+        name: "Mr Andy Roche",
+        link: "https://www.londonorthopaedicsurgery.co.uk/mr-andy-roche/",
+        country: "GB",
+        image: AndyRoche,
+        description: "Foot and Ankle Surgeon",
+        title: "Comfort and usability all round.",
+        short: "It makes complete sense to use a product like this",
+        body:
+            "I came across this device, not too long ago and feel it has really helped my patients recover from Achilles tendon ruptures. Makes complete sense to use something like this and I highly recommend this product. Comfort and usability all round.",
     },
 ];
