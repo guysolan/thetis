@@ -5,11 +5,13 @@ import { Image } from "astro:assets";
 
     <div class="flex flex-row sm:flex-row flex-wrap justify-start gap-6 mx-auto mr-auto pb-2">
         {athletes
+            .sort(() => Math.random() - 0.5) // Randomly shuffle the array
+            .slice(0, 3) // Take first 3 items
             .map((testimonial) => (
             <div class="relative max-w-40 md:max-w-52 group">
                 <div class="flex flex-row items-center rounded-lg transform transition-all duration-300 hover:rotate-2">
                     <Image
-                        class="shadow-md rounded-full w-10 h-10"
+                        class="object-top shadow-md rounded-full w-10 h-10 aspect-square object-cover"
                         src={testimonial.image}
                         alt={`${testimonial.name}_photo`}
                     />

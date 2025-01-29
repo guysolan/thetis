@@ -9,5 +9,5 @@ export interface Review {
     body: string;
     short?: string;
     is_pinned?: boolean;
-    country: "US" | "CA" | "GB" | "DE" | "IT" | "FR";
+    country: "US" | "CA" | "GB" | "DE" | "IT" | "FR" | "WLS" | "SCT" | "IRL" | "SE";
 }

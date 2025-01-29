@@ -1,6 +1,7 @@
 import OliviaBlatch from "@/assets/faces/olivia-blatch.png";
 import AndrewLawrence from "@/assets/faces/andrew-lawrence.png";
 import KimDaybell from "@/assets/faces/kim-daybell.png";
+import SteffEvans from './images/steff-evans.png'
 import type { Review } from "../types";
 
 export const athletes: Review[] = [
@@ -38,4 +39,13 @@ export const athletes: Review[] = [
       "The Thetis Night Splint has a simple design that is perfectly fit for purpose. It has allowed me to get the sleep that is so vital as I recovered from achilles tendon rupture and surgery whilst also feeling secure and protected. Apart from being less bulky than the orthopaedic boot, it also gives the surgical wounds a chance to breath and has made the recovery period a lot more bearable. I would highly recommend this product!",
     country: "GB",
   },
+  {
+    name: "Steff Evans",
+    description: "Welsh Rugby Union Player",
+    image: SteffEvans,
+    title: "The Thetis night splint was an absolute saviour",
+    short: "The Thetis night splint was an absolute saviour",
+    body: "After my Achilles tendon rupture surgery, I was advised by a specialist to invest in a Thetis night splint as the best product to use as part of my recovery.\n\nThe difference between sleeping in a big bulky boot and the Thetis night splint was an absolute saviour. It made sleeping at night so much better and easier, and helped with my recovery as I was fresh because of better sleep. It kept my foot at the right angle and was light enough that I didn't notice it while asleep!\n\nI would and have recommended this product to my other teammates who have ruptured their Achilles tendon!",
+    country: "WL"
+  }
 ];
