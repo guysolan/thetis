@@ -28,6 +28,9 @@ articles.forEach((page) => {
 // https://astro.build/config
 export default defineConfig({
   site: "https://thetismedical.com",
+  build: {
+    format: "file",
+  },
   integrations: [
     sitemap({
       customPages: allPages,
