@@ -7,6 +7,7 @@ import SlideTitle from '@/components/SlideTitle.astro';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import DownloadList from '@/components/DownloadList.astro';
+import Slide from '../components/Slide.astro';
 
 const faqSections = [
     {
@@ -111,6 +112,7 @@ const downloads = [
     <main>
         <Article title="Achilles Ruptures FAQs" />
         
+        <Slide>
         <div class="space-y-8 mx-auto max-w-4xl">
             {faqSections.map((section, index) => (
                 <FAQSection 
@@ -125,14 +127,13 @@ const downloads = [
                     >Achilles Rupture Night Splint</a
                 >
             </div>
-
-            <section class="bg-white mt-8">
+        </Slide>
+        <Slide>
                 <DownloadList 
                     title="Downloads"
                     downloads={downloads}
                 />
-            </section>
-
+        </Slide>
             <Subscribe />
         </div>
     </main>
