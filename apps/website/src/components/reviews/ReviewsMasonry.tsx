@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { reviews } from "./content/all";
 import { ReviewCard } from "./ReviewCard";
 import { Button } from "../ui/button";
@@ -8,8 +8,24 @@ const ReviewsMasonry = () => {
   const [v_displayCount, setDisplayCount] = useState(9);
   const [v_activeFilter, setActiveFilter] = useState<
     "all" | "athlete" | "clinician" | "patient"
-  >("all");
+  >(() => {
+    const params = new URLSearchParams(window.location.search);
+    return (
+      (params.get("filter") as "all" | "athlete" | "clinician" | "patient") ||
+      "all"
+    );
+  });
   const [v_shuffledReviews, setShuffledReviews] = useState(reviews);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("filter", v_activeFilter);
+    window.history.replaceState(
+      {},
+      "",
+      `${window.location.pathname}?${params.toString()}`,
+    );
+  }, [v_activeFilter]);
 
   const handleShuffle = () => {
     setShuffledReviews((prev) => [...prev].sort(() => Math.random() - 0.5));
