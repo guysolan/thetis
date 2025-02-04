@@ -12,6 +12,7 @@ import ComplianceLogos from "../components/compliance/ComplianceLogos.astro";
 import BuyNightSplintPopup from '../components/BuyNightSplintPopup';
 import EmailSubscribe from '../components/CTA/EmailSubscribe.astro';
 import GetInTouch from '../components/CTA/GetInTouch.astro';
+import NightSplintFAQs from '../components/NightSplintFAQs';
 ---
 
 <ThetisSchema slot="head" />
@@ -23,7 +24,7 @@ import GetInTouch from '../components/CTA/GetInTouch.astro';
     image="https://thetismedical.com/images/night-splint.png"
 >
   
-    <main  class="flex flex-col justify-center items-center bg-white dark:bg-black mx-auto w-full">
+    <main  class="flex flex-col justify-center items-center bg-white dark:bg-black mx-auto mb-24 w-full">
        
         <LandingHero />
 
@@ -34,8 +35,9 @@ import GetInTouch from '../components/CTA/GetInTouch.astro';
         <ProductTimeline     />
 
         <ProfessionalOpinionsCarousel client:idle />
-       
-    </main>
+        
+    <NightSplintFAQs client:load />
+  </main>
 </Layout>
 
 <script is:inline>
