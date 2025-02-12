@@ -6,6 +6,7 @@ import { ClientRouter } from "astro:transitions";
 import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
 import { Image } from 'astro:assets';
 import ColorGradient from "@/components/ColorGradient.astro";
+import BulkOrders from '../components/buy-button/BulkOrders';
 ---
 
 <Fragment slot="head">
@@ -25,11 +26,11 @@ import ColorGradient from "@/components/ColorGradient.astro";
             <div class="mx-auto px-4 max-w-5xl">
                 <div class="flex lg:flex-row flex-col items-start gap-8">
                     {/* Product Image Column */}
-                    <div class="lg:block hidden lg:w-3/5">
+                    <div class="hidden lg:block lg:w-3/5">
                         <Image    
                             height={700}
                             width={700}
-                            class="shadow-md rounded-lg w-full aspect-square object-cover"
+                            class="shadow-md rounded-lg w-full object-cover aspect-square"
                             src={nightSplint}
                             alt="Night Splint Render"
                         />
@@ -38,7 +39,7 @@ import ColorGradient from "@/components/ColorGradient.astro";
 
                     {/* Product Info Column */}
                     <div class="top-24 sticky flex flex-col lg:w-2/5">
-                        <h1 class="font-semibold text-3xl text-gray-900">
+                        <h1 class="font-semibold text-gray-900 text-3xl">
                             Night Splint for Achilles Tendon Rupture
                         </h1>
                         
@@ -51,7 +52,10 @@ import ColorGradient from "@/components/ColorGradient.astro";
                 </div>
             </div>
         </section>
+          <BulkOrders  />
+
        </ColorGradient>
+
     </main>
 </Layout>
 

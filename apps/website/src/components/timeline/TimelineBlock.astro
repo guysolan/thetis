@@ -1,0 +1,37 @@
+---
+import { cn } from '../../lib/utils';
+
+// No props needed based on the prompt
+interface Props {
+  reverse?: boolean;
+}
+
+const { reverse = false } = Astro.props;
+---
+
+<div class={cn(
+  "flex flex-col md:flex-row max-w-4xl relative", 
+  reverse ? 'md:flex-row-reverse' : 'md:flex-row'
+)}>
+  <!-- Badge -->
+  <div class={cn(
+    "my-8 flex basis-1/2 items-center h-fit mb-0",
+    reverse ? "md:justify-start md:pl-4" : "md:justify-end md:pr-4",
+    "px-4 justify-start"
+  )}>
+    <slot name="badge" />
+  </div>
+
+  <!-- Timeline Line -->
+  <div class="hidden md:flex justify-center py-2 w-8">
+    <div class="top-0 left-1/2 absolute border-gray-200 dark:border-gray-700 border-l-2 h-full -translate-x-1/2"></div>
+  </div>
+
+  <!-- Content -->
+  <div class={cn(
+    "my-8 basis-1/2 px-4",
+    reverse ? "md:pr-8" : "md:pl-8"
+  )}>
+    <slot name="item" />
+  </div>
+</div>

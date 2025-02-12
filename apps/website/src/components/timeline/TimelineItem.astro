@@ -1,0 +1,30 @@
+---
+interface Props {
+  time: string;
+  align?: 'left' | 'right';
+}
+
+const { time, align = 'left' } = Astro.props;
+const isLeft = align === 'left';
+---
+
+<div class:list={[
+  "flex md:flex-row flex-col justify-between items-start mb-8 md:mb-16 timeline-item",
+  {'md:flex-row-reverse': !isLeft}
+]}>
+  <div class:list={[
+    "w-full md:w-1/2",
+    "px-4 md:px-0", // Add padding on mobile
+    { 'md:pr-8': isLeft, 'md:pl-8': !isLeft }
+  ]}>
+    <slot name="content" />
+  </div>
+  <div class:list={[
+    "w-full md:w-1/2",
+    "mb-4 md:mb-0", // Add margin bottom on mobile
+    "px-4 md:px-0", // Add padding on mobile
+    {'md:text-right': isLeft, 'md:text-left': !isLeft}
+  ]}>
+    <span class="inline-block bg-primary/10 hover:bg-primary/25 px-4 py-2 border-2 border-primary/30 rounded font-semibold text-md text-primary transition-colors duration-200">{time}</span>
+  </div>
+</div>

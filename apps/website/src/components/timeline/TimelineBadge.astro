@@ -1,0 +1,29 @@
+---
+interface Props {
+  time: string;
+  variant?: 'primary' | 'neutral';
+}
+
+const { time, variant = 'primary' } = Astro.props;
+
+const bgColor = variant === 'primary' ? 'bg-primary/10' : 'bg-neutral-600/10';
+const borderColor = variant === 'primary' ? 'border-primary/30' : 'border-neutral-600/30';
+const textColor = variant === 'primary' ? 'text-primary' : 'text-neutral-600';
+
+---
+
+<span class:list={[
+  bgColor, 
+  borderColor, 
+  textColor, 
+  "px-4 py-2 border-2 rounded font-semibold text-md",
+  "inline-block", // Show on all screen sizes
+  "hover:bg-primary/25 transition-colors duration-200",
+  "shadow-sm" // Subtle shadow for depth
+]}>{time}</span>
+
+<style>
+  span {
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+</style>

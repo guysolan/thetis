@@ -138,7 +138,7 @@ import SizeCalculator from "./SizeCalculator";
 
 const NightSplintFAQs = () => {
   return (
-    <Accordion className="w-full max-w-xl" type="multiple">
+    <Accordion className="sm:px-2 w-full max-w-xl" type="multiple">
       {faqs.map((faq) => (
         <AccordionItem key={faq.category} value={faq.category} className="">
           <AccordionTrigger className="py-8 font-semibold text-neutral-900 text-xl">
