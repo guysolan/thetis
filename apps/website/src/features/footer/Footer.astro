@@ -53,9 +53,9 @@ const socials = [
 ];
 ---
 
-<Slide background="black">
+<Slide background="black" className='mt-24'>
     <footer class="w-full text-white">
-        <div class="gap-8 lg:gap-12 grid grid-cols-1 lg:grid-cols-3 text-center lg:text-left">
+        <div class="gap-8 lg:gap-12 grid grid-cols-1 lg:grid-cols-3 lg:text-left text-center">
             <!-- Company & Products -->
             <div class="space-y-8">
                 <FooterBlock title={footerLinks.company.title} links={footerLinks.company.links} />
@@ -86,7 +86,7 @@ const socials = [
                         </div>
                         <a 
                             href="mailto:info@thetismedical.com" 
-                            class="font-semibold text-base text-white hover:text-gray-300 transition-colors"
+                            class="font-semibold text-white hover:text-gray-300 text-base transition-colors"
                         >
                             info@thetismedical.com
                         </a>
@@ -95,8 +95,8 @@ const socials = [
             </div>
         </div>
 
-        <div class="flex md:flex-row flex-col justify-center md:justify-between items-center border-gray-800 mt-8 pt-6 border-t">
-            <p class="text-base text-gray-300">&copy; Thetis Medical Ltd 2020-2025</p>
+        <div class="flex md:flex-row flex-col justify-center md:justify-between items-center mt-8 pt-6 border-gray-800 border-t">
+            <p class="text-gray-300 text-base">&copy; Thetis Medical Ltd 2020-2025</p>
         </div>
 
         <div class="sr-only">

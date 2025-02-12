@@ -10,9 +10,10 @@ interface Props {
     type?: 'text'|'email'|'password'|'number'|'tel'|'url'|'search'|'date'|'time'|'datetime-local'|'month'|'week'|'checkbox'|'radio'|'submit'|'reset'|'button'|'color'|'file'|'hidden'|'image'|'range';
     required?: boolean;
     class?: string;
+    placeholder?: string;
 }
 
-const { id, name, type, required, class: className }: Props = Astro.props;
+const { id, name, type, required,placeholder, class: className }: Props = Astro.props;
 ---
 
 <input
@@ -21,4 +22,5 @@ const { id, name, type, required, class: className }: Props = Astro.props;
     name={name}
     type={type||'text'}
     class={cn(inputStyle, className   )}
+    placeholder={placeholder}
 />

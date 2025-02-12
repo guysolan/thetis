@@ -2,7 +2,8 @@
   "name": "@thetis/amazon",
   "private": true,
   "exports": {
-    "./amazon-types": "./supabase/functions/_shared/types.ts"
+    "./amazon-types": "./supabase/functions/_shared/types.ts",
+    ".": "./index.ts"
   },
   "scripts": {
     "update-supabase": "brew install supabase/tap/supabase",

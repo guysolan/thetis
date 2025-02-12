@@ -10,6 +10,7 @@ import Layout from './Layout.astro'
 import OtherArticles from '@/components/OtherArticles.astro'
 import Subscribe from '@/components/Subscribe.astro'
 import Article from '@/components/blog/Article.astro'
+import NightSplintAdvert from '@/components/products/night-splint/NightSplintAdvert.astro'
 ---
 
 <Layout
@@ -20,7 +21,7 @@ import Article from '@/components/blog/Article.astro'
     <main class="flex flex-col gap-4">
         <Article title={title} />
         <slot />
+        <NightSplintAdvert />
         <OtherArticles />
-        <Subscribe />
     </main>
 </Layout>

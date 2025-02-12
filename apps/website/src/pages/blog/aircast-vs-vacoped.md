@@ -28,16 +28,16 @@ When discussing the Aircast, we are referring to the [AIRSELECT ELITE](https://w
 
 ### Advantages
 
--   Customizable: The Aircast boot is highly customizable, as the wedges can be added or removed to adjust the angle of the foot and ankle, which can help to promote healing.
--   Lightweight: The Aircast boot is relatively lightweight and easy to use, making it a popular choice for many patients.
--   Inexpensive: Compared to other treatment options for an Achilles rupture, the Aircast boot is relatively inexpensive, making it a popular choice for those who want an effective treatment option that won't break the bank.
+- Customizable: The Aircast boot is highly customizable, as the wedges can be added or removed to adjust the angle of the foot and ankle, which can help to promote healing.
+- Lightweight: The Aircast boot is relatively lightweight and easy to use, making it a popular choice for many patients.
+- Inexpensive: Compared to other treatment options for an Achilles rupture, the Aircast boot is relatively inexpensive, making it a popular choice for those who want an effective treatment option that won't break the bank.
 
 ![wedges.jpg](../../assets/blog/wedges.jpg)
 
 ### Disadvantages
 
--   Limited mobility: While the Aircast boot provides support and immobilization, it can limit mobility, which can be frustrating for some patients.
--   Not waterproof: The Aircast boot is not waterproof, which can be an inconvenience for some patients.
+- Limited mobility: While the Aircast boot provides support and immobilization, it can limit mobility, which can be frustrating for some patients.
+- Not waterproof: The Aircast boot is not waterproof, which can be an inconvenience for some patients.
 
 ## VACOped boot
 
@@ -47,14 +47,14 @@ The [VACOped](https://opedmedical.com/products/vacoped/) boot is a more advanced
 
 ### Advantages
 
--   Increased mobility: The VACOped boot provides more mobility compared to the Aircast boot, which can be a significant advantage for patients who want to get back to their daily activities as soon as possible.
--   Increased support: The VACOped boot provides increased support compared to the Aircast boot, which can help prevent further injury and promote healing.
--   Waterproof: The VACOped boot is waterproof, which can be a significant advantage for patients who want to continue with their daily activities, such as showering or swimming.
+- Increased mobility: The VACOped boot provides more mobility compared to the Aircast boot, which can be a significant advantage for patients who want to get back to their daily activities as soon as possible.
+- Increased support: The VACOped boot provides increased support compared to the Aircast boot, which can help prevent further injury and promote healing.
+- Waterproof: The VACOped boot is waterproof, which can be a significant advantage for patients who want to continue with their daily activities, such as showering or swimming.
 
 ### Disadvantages
 
--   Expensive: Compared to the Aircast boot, the VACOped boot is relatively expensive, which can be a significant drawback for some patients.
--   Can be more difficult to use: The VACOped boot has a more advanced design than the Aircast boot, which can make it more difficult to use for some patients.
+- Expensive: Compared to the Aircast boot, the VACOped boot is relatively expensive, which can be a significant drawback for some patients.
+- Can be more difficult to use: The VACOped boot has a more advanced design than the Aircast boot, which can make it more difficult to use for some patients.
 
 ![ROM-VACOped.png](../../assets/blog/ROM-VACOped.png)
 
