@@ -1,6 +1,7 @@
 ---
 import FAQsLayout from '../../layouts/FAQsLayout.astro'
-import Article from '../../components/Article.astro'
+import FaqSchemaAccordion from '../../components/blog/FaqSchemaAccordion.astro'
+import NightSplintAdvert from '../../components/products/night-splint/NightSplintAdvert.astro'
 ---
 
 <FAQsLayout
@@ -131,4 +132,35 @@ import Article from '../../components/Article.astro'
             </p>
         </div>
     </section>
+
+<NightSplintAdvert />
+
+<FaqSchemaAccordion
+    faqs={[
+        {
+            question: "What's better for Achilles recovery - walking casts or boots?",
+            answer: "Boots offer both advantages and disadvantages. The main benefit is that they can be removed for washing or scratching an itch. However, this removability is also a potential risk, as improper removal or misuse can lead to re-injury. While boots are convenient and safe when used correctly, cutting corners in their use may result in re-rupture of the tendon, requiring surgery and restarting the entire recovery process."
+        },
+        {
+            question: "Which type of Achilles rupture boot should I choose?",
+            answer: "There are two main boot designs, both shaped to hold your ankle in a tip-toe position for healing: 1) Boots with wedges that lift the heel, which are gradually reduced during recovery, and 2) Boots with hinges that can be adjusted towards a flatter foot posture over time. Both types are equally effective for recovery, provided they fit well and are used properly."
+        },
+        {
+            question: "How should I sleep with a torn Achilles tendon?",
+            answer: "It's essential to maintain a tip-toe position during sleep using either your boot or a specialized night splint. Removing protection during sleep puts the healing tendon at high risk of re-injury. While sleeping in a boot can be uncomfortable and may dirty your bedding, solutions include using a detachable sole or placing the booted leg in an old pillowcase to protect both your bed and your other leg from scratches."
+        },
+        {
+            question: "How long does Achilles tendon healing take?",
+            answer: "The healing process is lengthy, typically requiring 10 weeks in a plaster cast or boot, regardless of whether you have surgery or not. After this initial period, you can begin walking without the boot and start physiotherapy. However, the tendon isn't at full strength even then, and re-rupture is still possible. Competitive sports should be avoided for at least six months post-injury."
+        },
+        {
+            question: "Is recovery faster with surgery?",
+            answer: "No, surgery does not accelerate recovery time. The purpose of surgery is simply to ensure proper alignment of the torn tendon ends for natural healing. The surgical stitches aren't strong enough to support body weight, and you'll still need the same protective period in a boot or cast as non-surgical treatment."
+        }
+    ]}
+/>
+
+
+
+
 </FAQsLayout>

@@ -1,6 +1,7 @@
 ---
+import FaqSchemaAccordion from '../../components/blog/FaqSchemaAccordion.astro'
+import NightSplintAdvert from '../../components/products/night-splint/NightSplintAdvert.astro'
 import FAQsLayout from '../../layouts/FAQsLayout.astro'
-import Article from '../../components/Article.astro'
 ---
 
 <FAQsLayout
@@ -92,7 +93,7 @@ import Article from '../../components/Article.astro'
                 Pushing off with your foot causes a strong and sudden
                 contraction of the calf muscle which proves to be too much for
                 the tendon. The tendon is made of millions of hairs that run
-                like a horse’s tail from the calf muscle to the heel bone. Why
+                like a horse's tail from the calf muscle to the heel bone. Why
                 the tendon should suddenly fail is not well understood. Each
                 fibre tears at a different point, so the tear is not clean but
                 results in two ragged ends.
@@ -187,4 +188,40 @@ import Article from '../../components/Article.astro'
             </p>
         </div>
     </section>
+
+        <NightSplintAdvert />
+
+
+<FaqSchemaAccordion
+    faqs={[
+        {
+            question: "Is my Achilles ruptured?",
+            answer: "If you get sudden sharp pain in the back of the heel, sometimes with an audible snapping sound, then you may have torn the Achilles tendon. You should assume that is the case until you are sure it is a less serious injury. Even with a torn Achilles you can move the foot and still walk (albeit awkwardly). Sometimes people delay seeking help, hoping the injury was something minor."
+        },
+        {
+            question: "What happens when you tear your Achilles?",
+            answer: "The Achilles tendon joins the calf muscles to the heel bone. It is important for standing up on tip toes and pushing off when you walk. If it tears, then the muscle is no longer connected to the heel and so the ankle movement is weak."
+        },
+        {
+            question: "How do Achilles tears happen?",
+            answer: "The type of injury can be any sudden push-off using the ankle. The classical stereotype is of a middle-aged person returning to sport. Pushing a heavy object or (particularly in older individuals) just an awkward stumble can be enough."
+        },
+        {
+            question: "What does it feel like when you tear your Achilles tendon?",
+            answer: "Usually, you experience a sudden pain in the back of your leg. You might hear a snap. Sometimes other people hear it too. Often the rupture happens during sport. You might think that an opponent has kicked you or your tennis partner hit you with their racquet."
+        },
+        {
+            question: "Should I go to hospital?",
+            answer: "If you are in doubt, seek medical advice and have the injury checked. Limping around hoping it will get better means a delay in diagnosis and a greater chance that surgical repair will be needed."
+        },
+        {
+            question: "How bad is an Achilles tear?",
+            answer: "Properly treated Achilles tendon ruptures heal well, but recovery is lengthy. You can expect to be in a boot or similar support for your leg for about 10 weeks. After this it takes months to regain the muscle strength. Full recovery takes about a year, with most people being limited in activities for at least 6 months."
+        }
+    ]}
+/>
+
+
+
+
 </FAQsLayout>

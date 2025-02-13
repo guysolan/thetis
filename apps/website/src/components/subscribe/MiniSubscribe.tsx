@@ -56,7 +56,7 @@ export default function MiniSubscribe() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-row gap-2">
+    <form onSubmit={handleSubmit} className="print:hidden flex flex-row gap-2">
       <Input
         type="email"
         name="email"

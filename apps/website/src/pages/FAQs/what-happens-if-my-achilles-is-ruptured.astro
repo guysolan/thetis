@@ -1,5 +1,7 @@
 ---
 import FAQsLayout from '../../layouts/FAQsLayout.astro'
+import FaqSchemaAccordion from '../../components/blog/FaqSchemaAccordion.astro'
+import NightSplintAdvert from '../../components/products/night-splint/NightSplintAdvert.astro'
 ---
 
 <FAQsLayout
@@ -135,4 +137,35 @@ import FAQsLayout from '../../layouts/FAQsLayout.astro'
             </p>
         </div>
     </section>
+
+<NightSplintAdvert />
+
+<FaqSchemaAccordion
+    faqs={[
+        {
+            question: "What happens when I go to A&E with a ruptured Achilles?",
+            answer: "In A&E, your injury will be assessed and if an Achilles rupture is suspected, they will position your foot in a tip-toe position using either a plaster cast or a specialized boot with a high heel. You'll be given crutches to help you walk, and blood thinning medicine is usually prescribed to prevent thrombosis. They will also arrange for you to see a specialist for further care."
+        },
+        {
+            question: "What happens at the specialist appointment?",
+            answer: "The specialist will remove any cast to reassess the injury and confirm the diagnosis. They usually perform an ultrasound scan to check if the tendon ends meet properly in the tip-toe position and to check for any blood clots. If the tendon ends don't meet (occurs in about 10% of cases), surgery might be discussed. You'll be fitted with a special boot with heel wedges or hinges that must be worn for 10 weeks to allow proper healing."
+        },
+        {
+            question: "How many check-ups will I need?",
+            answer: "Typically, you'll have a clinic appointment after 5 weeks to check healing and receive instructions for gradually adjusting your boot. Between weeks 8-10, the position of your foot will be gradually adjusted until you're walking almost flat in your boot. After 10 weeks, you can discontinue the boot, though it's advisable to wear it in crowded areas or uncertain terrain to prevent re-injury."
+        },
+        {
+            question: "When do I start physiotherapy?",
+            answer: "Physiotherapy begins 9-10 weeks after injury, following a specific rehabilitation protocol. The main focus is building calf muscle strength through prescribed exercises. It's important to avoid vigorous stretching, even if the tendon feels tight, as this can lead to excessive stretching and long-term power loss in the leg. Any tightness will gradually resolve with normal activity over time."
+        },
+        {
+            question: "Should I take blood-thinning medication?",
+            answer: "Blood-thinners are often recommended as an Achilles rupture carries a relatively high risk of developing blood clots in leg veins. Treatment can be via injections or tablets, with many surgeons recommending a 6-week duration (similar to hip/knee replacement protocols). If you haven't been prescribed blood-thinners, taking 150mg of Aspirin daily could be considered until discussing with your specialist. Even with blood-thinners, watch for signs of thrombosis such as whole-leg swelling."
+        }
+    ]}
+/>
+
+
+
+
 </FAQsLayout>

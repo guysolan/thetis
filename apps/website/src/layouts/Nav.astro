@@ -7,9 +7,9 @@ import Thetis from "./Thetis.tsx";
 ---
 
 <header
-    class="top-0 z-[40] fixed flex border-gray-300 bg-background item-center m-auto my-auto px-2 lg:px-8 py-4 border-b w-screen"
+    class="top-0 z-[40] fixed flex bg-background item-center m-auto my-auto px-2 lg:px-8 py-4 border-gray-300 border-b w-screen"
 >
-    <div class="lg:flex justify-between items-center gap-x-6 hidden w-full">
+    <div class="hidden lg:flex justify-between items-center gap-x-6 w-full">
         <Thetis />
         <div class="flex justify-center items-center gap-x-6 ml-auto text-base">
             <DesktopNav client:load />
@@ -22,7 +22,7 @@ import Thetis from "./Thetis.tsx";
         </div>
     </div>
 
-    <div class="flex justify-between items-center lg:hidden w-full">
+    <div class="lg:hidden flex justify-between items-center w-full">
         <Thetis />
         <div class="flex gap-x-2">
             <MobileNav client:load />

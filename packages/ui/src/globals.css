@@ -1622,6 +1622,15 @@ a#blue-link {
   padding: 1rem 0;
 }
 
+@media print {
+  .faqs {
+    width: 95%;  /* Increase width for print */
+    max-width: none; /* Remove any max-width constraints */
+    margin: 0 auto; /* Center on page */
+    padding: 0.5rem 0;
+  }
+}
+
 .faqs h4 {
   font-weight: 700;
   font-size: 1.25rem;
@@ -4182,6 +4191,15 @@ a.article.explore {
     justify-content: space-between;
     margin: auto 0;
   }
+}
+
+.tick-or-cross {
+  height: 30px;
+  width: 30px;
+}
+
+.shopify-buy__layout-vertical {
+  margin-left: 0;
 }
 
 .tick-or-cross {
