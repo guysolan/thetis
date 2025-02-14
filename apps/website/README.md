@@ -1,6 +1,6 @@
 # Astro Starter Kit: Basics
 
-I'm having issues and have reverted to an old branch
+I'm having issues and have reverted to an old branch - is it fixed?
 
 ```bash
 npm create astro@latest -- --template basics
