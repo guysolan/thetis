@@ -50,12 +50,12 @@ export default function ReviewCarousel() {
                       </div>
                     </CardHeader>
                     <CardContent className="flex flex-col justify-center items-center p-6 pt-0">
-                      <span className="line-clamp-5 lg:line-clamp-4 font-medium text-base text-center text-neutral-700 lg:text-lg">
+                      <span className="font-medium text-neutral-700 text-base lg:text-lg text-center line-clamp-5 lg:line-clamp-4">
                         {review.short ?? review.body}
                       </span>
                     </CardContent>
                     <CardFooter className="bottom-0 flex flex-row justify-center items-center mt-auto text-center">
-                      <b className="space-x-2 px-12 w-full text-center text-neutral-800">
+                      <b className="space-x-2 px-12 w-full text-neutral-800 text-center">
                         <span className="pr-1">{review.name}</span>
                         {getUnicodeFlagIcon(review.country)}
                       </b>
