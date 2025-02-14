@@ -74,9 +74,9 @@ function DesktopNav() {
                 key={article.href}
                 title={article.title}
                 href={article.href}
-                className="border-neutral-200 hover:bg-neutral-100 p-4 border rounded-lg"
+                className="hover:bg-neutral-100 p-4 border border-neutral-200 rounded-lg"
               >
-                <p className="line-clamp-2 text-sm dark:text-neutral-200">
+                <p className="dark:text-neutral-200 text-sm line-clamp-2">
                   {article.description}
                 </p>
 
@@ -131,10 +131,10 @@ const ListItem = React.forwardRef<
         )}
         {...props}
       >
-        <div className="line-clamp-2 font-medium text-base dark:text-neutral-50 leading-none">
+        <div className="font-medium dark:text-neutral-50 text-base line-clamp-2 leading-none">
           {title}
         </div>
-        <p className="line-clamp-2 text-muted-foreground text-sm leading-snug">
+        <p className="text-muted-foreground text-sm line-clamp-2 leading-snug">
           {children}
         </p>
       </a>
@@ -157,7 +157,7 @@ const ProductCard = React.forwardRef<
   return (
     <NavigationMenuLink
       ref={ref}
-      className="block relative rounded-lg w-full h-[280px] no-underline transition-all duration-300 overflow-hidden select-none group outline-none"
+      className="group block relative rounded-lg outline-none w-full h-[280px] overflow-hidden no-underline transition-all duration-300 select-none"
       href={href}
     >
       <img
@@ -165,7 +165,7 @@ const ProductCard = React.forwardRef<
         alt={title}
         width={260}
         height={280}
-        className="group-hover:brightness-100 brightness-120 w-full h-full transition-all duration-300 object-cover"
+        className="brightness-120 group-hover:brightness-100 w-full h-full object-cover transition-all duration-300"
       />
 
       <div className="absolute inset-0 flex flex-col justify-end p-4">
@@ -177,10 +177,10 @@ const ProductCard = React.forwardRef<
 
         {/* Content */}
         <div className="relative">
-          <div className="group-hover:text-white mb-2 font-medium text-white/90 text-xl underline-offset-4 group-hover:underline transition-colors duration-300">
+          <div className="group-hover:text-white mb-2 font-medium text-white/90 text-xl group-hover:underline underline-offset-4 transition-colors duration-300">
             {title}
           </div>
-          <p className="group-hover:text-white/80 text-sm text-white/70 leading-tight transition-colors duration-300">
+          <p className="group-hover:text-white/80 text-white/70 text-sm leading-tight transition-colors duration-300">
             {description}
           </p>
         </div>
