@@ -41,9 +41,9 @@ const ReviewsMasonry = () => {
 
   return (
     <div id="more-reviews">
-      <div className="relative left-0 flex flex-col justify-center items-center p-4 md:p-8 w-[100vw] antialiased overflow-hidden">
-        <h1 className="mb-4 font-semibold text-3xl text-left text-neutral-900">
-          Hear it from our customers...
+      <div className="left-0 relative flex flex-col justify-center items-center p-4 md:p-8 w-[100vw] overflow-hidden antialiased">
+        <h1 className="mb-4 font-semibold text-neutral-900 text-3xl text-center">
+          Hear it from the horse's mouth...
         </h1>
 
         <div className="flex flex-wrap justify-center items-center gap-2 my-4 px-4">
@@ -72,12 +72,12 @@ const ReviewsMasonry = () => {
             Patients
           </Button>
           <Button onClick={handleShuffle} variant="secondary" className="gap-2">
-            <span className="font-semibold sr-only">Shuffle</span>
+            <span className="sr-only font-semibold">Shuffle</span>
             <Shuffle size={20} />
           </Button>
         </div>
 
-        <div className="relative z-10 masonry-grid py-8">
+        <div className="z-10 relative masonry-grid py-8">
           {v_filteredReviews.slice(0, v_displayCount).map((review) => (
             <div className="masonry-item" key={review.id}>
               <ReviewCard review={review} />

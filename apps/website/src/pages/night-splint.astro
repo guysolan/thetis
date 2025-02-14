@@ -54,7 +54,7 @@ import GetInTouch from '../components/CTA/GetInTouch.astro';
                 <p class="mb-8 text-gray-700 text-xl">Join thousands of patients who've improved their recovery experience</p>
                 <!-- <FilterByReview client:load/> -->
             </div>
-            <Reviews client:load/>
+            <Reviews client:only/>
         </section>
    
         <NightSplintInstructions />
@@ -72,7 +72,7 @@ import GetInTouch from '../components/CTA/GetInTouch.astro';
                     },
                     {
                         title: 'Night Splint Information Brochure.pdf',
-                        href: '/images/documents/information-brochure-night-splint.pdf',
+                        href: '/documents/information-brochure-night-splint.pdf',
                     },
                 ]}
             />

@@ -9,17 +9,17 @@ import HighlightedWord from '@/components/HighlightedWord';
     <div class="mx-auto px-4 pt-16 max-w-7xl container">
         <div class="flex lg:flex-row flex-col justify-between items-center gap-8">
             <div class="flex flex-col gap-y-6 lg:pr-16 lg:w-7/12">
-                <h1 class="font-semibold text-4xl text-neutral-950 md:text-6xl dark:text-neutral-50 leading-[105%] leading-[105%] md:leading-[120%]">
+                <h1 class="font-semibold text-neutral-950 dark:text-neutral-50 text-4xl md:text-6xl leading-[105%] leading-[105%] md:leading-[120%]">
                     For <HighlightedWord>Healthcare</HighlightedWord> Professionals
                 </h1>
 
-                <p class="text-gray-800 text-lg dark:text-neutral-200 leading-relaxed">
+                <p class="text-gray-800 dark:text-neutral-200 text-lg leading-relaxed">
                     Achilles Rupture carries a very long recovery - whether the patient is managed non-operatively or surgically.
                     Thetis Medical Splints are designed to help patients, healthcare professionals and hospitals.
                 </p>
 
                 <!-- SMALL SCREENS ONLY -->
-                <div class="block relative lg:hidden">
+                <div class="lg:hidden block relative">
                     <Image
                         src={AchillesDrawing}
                         alt="achilles-drawing"
@@ -27,17 +27,22 @@ import HighlightedWord from '@/components/HighlightedWord';
                     />
                 </div>
 
-                <div class="flex sm:flex-row flex-col gap-4">
+                  <div class="flex sm:flex-row flex-col gap-4">
+                     <a 
+                        href="/order-wholesale" 
+                        class={cn(buttonVariants({ size: 'lg', variant: 'default' }))}>
+                        Order for your Patients
+                    </a>
                     <a 
                         href="/become-a-partner" 
-                        class={cn(buttonVariants({ size: 'lg', variant: 'default' }))}>
+                        class={cn(buttonVariants({ size: 'lg', variant: 'secondary' }))}>
                         Become a Partner
                     </a>
                 </div>
             </div>
 
             <!-- Right column (image) - LARGE SCREENS ONLY -->
-            <div class="lg:block hidden lg:w-5/12">
+            <div class="hidden lg:block lg:w-5/12">
                 <Image
                     src={AchillesDrawing}
                     alt="achilles-drawing"

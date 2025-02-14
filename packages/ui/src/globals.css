@@ -1624,7 +1624,7 @@ a#blue-link {
 
 @media print {
   .faqs {
-    width: 95%;  /* Increase width for print */
+    width: 95%; /* Increase width for print */
     max-width: none; /* Remove any max-width constraints */
     margin: 0 auto; /* Center on page */
     padding: 0.5rem 0;

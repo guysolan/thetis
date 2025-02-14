@@ -1,4 +1,13 @@
-import { HeartHandshake, Handshake, Box, Zap, Moon } from "lucide-react";
+import {
+  HeartHandshake,
+  Handshake,
+  Box,
+  Zap,
+  Moon,
+  Stethoscope,
+  Microscope,
+  Mail,
+} from "lucide-react";
 import nightSplintImage from "./night_splint_bed_side.jpg";
 import traumaSplintImage from "./trauma_splint.jpg";
 
@@ -38,6 +47,32 @@ export const partnerLinks: Link[] = [
     icon: <HeartHandshake size={20} />,
     variant: "default",
   },
+
+  {
+    title: "Professionals",
+    description: "Join other clinicians improving patient recovery.",
+    href: "/professionals",
+    icon: <Stethoscope size={20} />,
+    variant: "outline",
+  },
+  {
+    title: "Evidence",
+    description:
+      "Proven to shorten time to care and improve patient experience.",
+    href: "/evidence",
+    icon: <Microscope size={20} />,
+    variant: "outline",
+  },
+];
+
+export const contactLinks: Link[] = [
+  {
+    title: "Contact Us",
+    description: "Contact us for more information.",
+    href: "/contact",
+    icon: <Mail size={20} />,
+    variant: "default",
+  },
   {
     title: "Become a Partner",
     description: "Become a partner and help us spread the word.",
@@ -53,6 +88,24 @@ export const partnerLinks: Link[] = [
     variant: "outline",
   },
 ];
+
+// const professionalLinks: Link[] = [
+//   {
+//     title: "Professionals",
+//     description: "Professionals are the best in the business.",
+//     href: "/professionals",
+//     icon: <Stethoscope size={20} />,
+//     variant: "default",
+//   },
+//   {
+//     title: "Evidence",
+//     description:
+//       "Evidence for Thetis Medical's Achilles Rupture Night Splint and Trauma Splint.",
+//     href: "/evidence",
+//     icon: <Microscope size={20} />,
+//     variant: "outline",
+//   },
+// ];
 
 export const videoPages = [
   {
@@ -73,12 +126,14 @@ export const pages = [
   { title: "Home", href: "" },
   { title: "Night Splint", href: "night-splint" },
   { title: "Trauma Splint", href: "trauma-splint" },
-  { title: "Professionals", href: "professionals" },
+
   { title: "Sitemap", href: "sitemap" },
   { title: "Achilles Ruptures", href: "achilles-ruptures" },
   { title: "Recovery Pathway", href: "recovery-pathway" },
   { title: "Evidence Based Recovery", href: "evidence-based-recovery" },
+  // ...professionalLinks,
   ...videoPages,
   ...partnerLinks,
   ...productLinks,
+  ...contactLinks,
 ];
