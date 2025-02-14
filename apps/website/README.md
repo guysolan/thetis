@@ -1,5 +1,7 @@
 # Astro Starter Kit: Basics
 
+I'm having issues and have reverted to an old branch
+
 ```bash
 npm create astro@latest -- --template basics
 ```
