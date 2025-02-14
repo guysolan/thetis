@@ -112,20 +112,20 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item) => (
           <li
-            className="relative flex-shrink-0 border-neutral-400 dark:border-neutral-600 bg-white dark:bg-black px-4 md:px-8 py-4 md:py-6 border rounded-2xl w-[350px] md:w-[450px] max-w-full"
+            className="relative flex-shrink-0 bg-white dark:bg-black px-4 md:px-8 py-4 md:py-6 border border-neutral-400 dark:border-neutral-600 rounded-2xl w-[350px] md:w-[450px] max-w-full"
             key={item.name}
           >
             <blockquote>
               {renderStars()}
-              <p className="mt-1 mb-2 font-semibold text-lg text-neutral-700 dark:text-neutral-300">
+              <p className="mt-1 mb-2 font-semibold text-neutral-700 dark:text-neutral-300 text-lg">
                 {decodeText(item.title)}
                 {item.title.length > 20 && "..."}
               </p>
-              <p className="relative z-20 font-normal text-base text-neutral-900 dark:text-neutral-100 leading-[1.6]">
+              <p className="z-20 relative font-normal text-neutral-900 dark:text-neutral-100 text-base leading-[1.6]">
                 {decodeText(item?.short ?? item.body)}
               </p>
-              <div className="relative z-20 flex flex-col mt-6">
-                <span className="font-medium text-lg text-neutral-800 dark:text-neutral-200">
+              <div className="z-20 relative flex flex-col mt-6">
+                <span className="font-medium text-neutral-800 dark:text-neutral-200 text-lg">
                   {decodeText(item.name)} {getUnicodeFlagIcon(item.country)}
                 </span>
               </div>
