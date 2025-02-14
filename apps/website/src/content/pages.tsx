@@ -6,6 +6,7 @@ import {
   Moon,
   Stethoscope,
   Microscope,
+  Mail,
 } from "lucide-react";
 import nightSplintImage from "./night_splint_bed_side.jpg";
 import traumaSplintImage from "./trauma_splint.jpg";
@@ -52,7 +53,7 @@ export const partnerLinks: Link[] = [
     description: "Join other clinicians improving patient recovery.",
     href: "/professionals",
     icon: <Stethoscope size={20} />,
-    variant: "default",
+    variant: "outline",
   },
   {
     title: "Evidence",
@@ -60,6 +61,16 @@ export const partnerLinks: Link[] = [
       "Proven to shorten time to care and improve patient experience.",
     href: "/evidence",
     icon: <Microscope size={20} />,
+    variant: "outline",
+  },
+];
+
+export const contactLinks: Link[] = [
+  {
+    title: "Contact Us",
+    description: "Contact us for more information.",
+    href: "/contact",
+    icon: <Mail size={20} />,
     variant: "default",
   },
   {
@@ -124,4 +135,5 @@ export const pages = [
   ...videoPages,
   ...partnerLinks,
   ...productLinks,
+  ...contactLinks,
 ];

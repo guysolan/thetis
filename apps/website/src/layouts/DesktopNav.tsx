@@ -12,105 +12,141 @@ import * as React from "react";
 
 import { Badge } from "../components/ui/badge";
 import { articles } from "../content/articles.tsx";
-
+import { buttonVariants } from "../components/ui/button";
 ("use client");
 
 const contentWidth = "min-w-[min(50vw,700px)]";
 
-import { partnerLinks, productLinks } from "../content/pages.tsx";
+import { partnerLinks, productLinks, contactLinks } from "../content/pages.tsx";
+import { ArrowRight, Star } from "lucide-react";
 
 function DesktopNav() {
   return (
-    <NavigationMenu>
-      <NavigationMenuList className={cn("justify-end", contentWidth)}>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Products</NavigationMenuTrigger>
-          <NavigationMenuContent
-            className={cn("flex flex-row gap-6 p-6", contentWidth)}
-          >
-            {productLinks.map((product) => (
-              <ProductCard
-                key={product.href}
-                title={product.title}
-                description={product.description}
-                imageUrl={product.image as ImageMetadata}
-                href={product.href}
-              />
-            ))}
-          </NavigationMenuContent>
-        </NavigationMenuItem>
+    <>
+      <NavigationMenu>
+        <NavigationMenuList className={cn("justify-end", contentWidth)}>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+            <NavigationMenuContent
+              className={cn("flex flex-row gap-6 p-6", contentWidth)}
+            >
+              {productLinks.map((product) => (
+                <ProductCard
+                  key={product.href}
+                  title={product.title}
+                  description={product.description}
+                  imageUrl={product.image as ImageMetadata}
+                  href={product.href}
+                />
+              ))}
+            </NavigationMenuContent>
+          </NavigationMenuItem>
 
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Partners</NavigationMenuTrigger>
-          <NavigationMenuContent
-            className={cn("p-6 flex flex-col gap-2", contentWidth)}
-          >
-            <div className="flex flex-row gap-4">
-              <div className="flex flex-col flex-1 gap-4">
-                {partnerLinks
-                  .filter((l) => l.variant === "default")
-                  .map((link) => (
-                    <LinkCard key={link.href} {...link} />
-                  ))}
-              </div>
-              <div className="flex flex-col flex-1 gap-4">
-                {partnerLinks
-                  .filter((l) => l.variant === "outline")
-                  .map((link) => (
-                    <LinkCard key={link.href} {...link} />
-                  ))}
-              </div>
-            </div>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        {/* <NavigationMenuItem>
-          <a href="/testimonials">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Testimonials
-            </NavigationMenuLink>
-          </a>
-        </NavigationMenuItem> */}
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Patient Guides</NavigationMenuTrigger>
-          <NavigationMenuContent
-            className={cn("grid grid-cols-2 p-4 gap-4", contentWidth)}
-          >
-            {articles.map((article) => (
-              <ListItem
-                key={article.href}
-                title={article.title}
-                href={article.href}
-                className="hover:bg-neutral-100 p-4 border border-neutral-200 rounded-lg"
-              >
-                <p className="dark:text-neutral-200 text-sm line-clamp-2">
-                  {article.description}
-                </p>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Patient Guides</NavigationMenuTrigger>
+            <NavigationMenuContent
+              className={cn("grid grid-cols-2 p-4 gap-4", contentWidth)}
+            >
+              {articles.map((article) => (
+                <ListItem
+                  key={article.href}
+                  title={article.title}
+                  href={article.href}
+                  className="hover:bg-neutral-100 p-4 border border-neutral-200 rounded-lg"
+                >
+                  <p className="dark:text-neutral-200 text-sm line-clamp-2">
+                    {article.description}
+                  </p>
 
-                <div className="flex flex-wrap gap-1 pt-2">
-                  {article.tags.map((tag) => {
-                    return (
-                      <Badge
-                        key={`${article.href}-${tag.words}`}
-                        className={`${tag.color} text-black bg-opacity-80 font-light text-xs`}
-                      >
-                        {tag.words}
-                      </Badge>
-                    );
-                  })}
+                  <div className="flex flex-wrap gap-1 pt-2">
+                    {article.tags.map((tag) => {
+                      return (
+                        <Badge
+                          key={`${article.href}-${tag.words}`}
+                          className={`${tag.color} text-black bg-opacity-80 font-light text-xs`}
+                        >
+                          {tag.words}
+                        </Badge>
+                      );
+                    })}
+                  </div>
+                </ListItem>
+              ))}
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Professionals</NavigationMenuTrigger>
+            <NavigationMenuContent
+              className={cn("p-6 flex flex-col gap-2", contentWidth)}
+            >
+              <div className="flex flex-row gap-4">
+                <div className="flex flex-col flex-1 gap-4">
+                  {partnerLinks
+                    .filter((l) => l.variant === "default")
+                    .map((link) => (
+                      <LinkCard key={link.href} {...link} />
+                    ))}
                 </div>
-              </ListItem>
-            ))}
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <a href="/reviews">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Reviews
-            </NavigationMenuLink>
-          </a>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+                <div className="flex flex-col flex-1 gap-4">
+                  {partnerLinks
+                    .filter((l) => l.variant === "outline")
+                    .map((link) => (
+                      <LinkCard key={link.href} {...link} />
+                    ))}
+                </div>
+              </div>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <a href="/reviews">
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Reviews
+                <Star size={12} className="flex-shrink-0 ml-1" />
+              </NavigationMenuLink>
+            </a>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuTrigger
+              className={cn(
+                buttonVariants({ variant: "outline", size: "md" }),
+                "font-normal ml-2",
+              )}
+            >
+              Contact Us
+            </NavigationMenuTrigger>
+            <NavigationMenuContent
+              className={cn("p-6 flex flex-col gap-2", contentWidth)}
+            >
+              <div className="flex flex-row gap-4">
+                <div className="flex flex-col flex-1 gap-4">
+                  {contactLinks
+                    .filter((l) => l.variant === "default")
+                    .map((link) => (
+                      <LinkCard key={link.href} {...link} />
+                    ))}
+                </div>
+                <div className="flex flex-col flex-1 gap-4">
+                  {contactLinks
+                    .filter((l) => l.variant === "outline")
+                    .map((link) => (
+                      <LinkCard key={link.href} {...link} />
+                    ))}
+                </div>
+              </div>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+      <a
+        href="/buy-now"
+        className={cn(buttonVariants({ variant: "default", size: "md" }))}
+      >
+        <span className="font-semibold text-nowrap">Buy Now</span>
+      </a>
+    </>
   );
 }
 

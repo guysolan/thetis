@@ -39,31 +39,7 @@ export function MobileNav() {
         </SheetHeader>
         <NavAccordion />
 
-        <h3 className="flex flex-1 justify-between items-center py-4 pr-1 border-b font-medium transition-all">
-          <a
-            className="flex justify-between items-center w-full h-full font-light text-lg"
-            href="/reviews"
-          >
-            Reviews
-            <ArrowRight className="w-4 h-4 shrink-0" />
-          </a>
-        </h3>
-
         <SheetFooter className="flex flex-col gap-y-4 mt-4">
-          <SheetClose>
-            <a
-              className={cn(
-                "w-full",
-                buttonVariants({
-                  variant: "outline",
-                  size: "lg",
-                }),
-              )}
-              href="/contact"
-            >
-              Contact Us
-            </a>
-          </SheetClose>
           <SheetClose>
             <a
               href="/buy-now"

@@ -8,7 +8,7 @@ import { Badge } from "../components/ui/badge";
 
 import { articles } from "@thetis/website/src/content/articles";
 import { productLinks } from "@/content/pages.tsx";
-import { partnerLinks } from "@/content/pages.tsx";
+import { partnerLinks, contactLinks } from "@/content/pages.tsx";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -54,7 +54,7 @@ const NavAccordion = () => {
 
       {/* Partners */}
       <AccordionItem value="partners">
-        <AccordionTrigger>Partners</AccordionTrigger>
+        <AccordionTrigger>Professionals</AccordionTrigger>
         <AccordionContent>
           <div className="flex flex-col gap-2">
             {partnerLinks.map((partner) => (
@@ -63,7 +63,9 @@ const NavAccordion = () => {
                 href={partner.href}
                 className={cn(
                   "flex items-center gap-2 p-3 rounded-lg border transition-colors duration-300",
-                  "border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100",
+                  partner.variant === "default"
+                    ? "bg-gradient-to-tr from-primary/10 to-primary/20 dark:from-primary/5 dark:to-primary/10 text-primary hover:bg-primary/15 dark:hover:bg-primary/20 hover:text-primary-dark border-primary/20 dark:border-primary/10"
+                    : "border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100",
                 )}
               >
                 <span className="flex justify-center items-center w-10 h-10">
@@ -73,7 +75,9 @@ const NavAccordion = () => {
                   <h3
                     className={cn(
                       "font-semibold text-base md:text-lg",
-                      "text-neutral-800 dark:text-neutral-200",
+                      partner.variant === "default"
+                        ? "text-primary"
+                        : "text-neutral-800 dark:text-neutral-200",
                     )}
                   >
                     {partner.title}
@@ -121,6 +125,56 @@ const NavAccordion = () => {
                       </Badge>
                     ))}
                   </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </AccordionContent>
+      </AccordionItem>
+
+      <h3 className="flex flex-1 justify-between items-center py-4 pr-1 border-b font-medium transition-all">
+        <a
+          className="flex justify-between items-center w-full h-full font-light text-lg"
+          href="/reviews"
+        >
+          Reviews
+          <ArrowRight className="w-4 h-4 shrink-0" />
+        </a>
+      </h3>
+      {/* Contact Us */}
+      {/* Partners */}
+      <AccordionItem value="contacts">
+        <AccordionTrigger>Contact Us</AccordionTrigger>
+        <AccordionContent>
+          <div className="flex flex-col gap-2">
+            {contactLinks.map((contact) => (
+              <a
+                key={contact.href}
+                href={contact.href}
+                className={cn(
+                  "flex items-center gap-2 p-3 rounded-lg border transition-colors duration-300",
+                  contact.variant === "default"
+                    ? "bg-gradient-to-tr from-primary/10 to-primary/20 dark:from-primary/5 dark:to-primary/10 text-primary hover:bg-primary/15 dark:hover:bg-primary/20 hover:text-primary-dark border-primary/20 dark:border-primary/10"
+                    : "border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100",
+                )}
+              >
+                <span className="flex justify-center items-center w-10 h-10">
+                  {contact.icon && contact.icon}
+                </span>
+                <div>
+                  <h3
+                    className={cn(
+                      "font-semibold text-base md:text-lg",
+                      contact.variant === "default"
+                        ? "text-primary"
+                        : "text-neutral-800 dark:text-neutral-200",
+                    )}
+                  >
+                    {contact.title}
+                  </h3>
+                  <p className="text-neutral-500 dark:text-neutral-400 text-sm md:text-base">
+                    {contact.description}
+                  </p>
                 </div>
               </a>
             ))}
