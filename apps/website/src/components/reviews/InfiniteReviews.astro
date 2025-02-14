@@ -3,13 +3,14 @@ import { InfiniteMovingCards } from "@thetis/ui/infinite-moving-cards";
 
 import {patients} from "./content/patients";
 import ReviewCarousel from './ReviewCarousel';
+import { isMobile } from "react-device-detect";
 ---
  <InfiniteMovingCards
     items={patients
       .filter((review) => review.is_pinned)
       .sort(() => Math.random() - 0.5)}
     direction="right"
-    speed="slow"
+    speed={isMobile ? "fast" : "slow"}
     client:load
   />
 <!-- <div class="hidden left-0 relative lg:flex flex-col justify-center items-center py-8 rounded-md w-[100vw] overflow-hidden antialiased">
