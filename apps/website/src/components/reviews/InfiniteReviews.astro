@@ -5,7 +5,7 @@ import {patients} from "./content/patients";
 import ReviewCarousel from './ReviewCarousel';
 ---
 
-<div class="relative left-0 lg:flex flex-col justify-center items-center hidden py-8 rounded-md w-[100vw] antialiased overflow-hidden">
+<div class="hidden left-0 relative lg:flex flex-col justify-center items-center py-8 rounded-md w-[100vw] overflow-hidden antialiased">
   <InfiniteMovingCards
     items={patients
       .filter((review) => review.is_pinned)
@@ -16,8 +16,8 @@ import ReviewCarousel from './ReviewCarousel';
   />
 </div>
 
-<div class="relative left-0 flex flex-col justify-center items-center lg:hidden py-8 rounded-md w-[100vw] antialiased overflow-hidden">
-  <ReviewCarousel  client:load /> 
+<div class="lg:hidden left-0 relative flex flex-col justify-center items-center py-8 rounded-md w-[100vw] overflow-hidden antialiased">
+  <ReviewCarousel client:only /> 
 </div>
 
 
