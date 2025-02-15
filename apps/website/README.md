@@ -1,5 +1,7 @@
 # Astro Starter Kit: Basics
 
+Change for Vercel
+
 ```bash
 npm create astro@latest -- --template basics
 ```
