@@ -45,7 +45,7 @@ import GetInTouch from '../components/CTA/GetInTouch.astro';
                 <h2 class="mb-6 font-semibold text-3xl">Ready for More Comfortable Recovery?</h2>
                 <p class="mb-8 text-gray-700 text-xl">Join thousands of patients who've improved their recovery experience</p>
             </div>
-            <ReviewCarousel client:only="react"/>
+            <ReviewCarousel client:load/>
         </section>
    
         <NightSplintInstructions />
@@ -80,34 +80,32 @@ import GetInTouch from '../components/CTA/GetInTouch.astro';
 </Layout>
 
 <script>
-    const hideInappropriateButton = (country: string) => {
-        const shopify = document.getElementById('shopify-buy-button-wrapper')
-        const amazon = document.getElementById('amazon-buy-button-wrapper')
+    fetch('https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq')
+        .then((res) => res.json())
+        .then((response) => {
+            console.log('Country: ', response.country)
+            try {
+                // Check if on Night Splint Page
+                const shopify = document.getElementById(
+                    'shopify-buy-button-wrapper'
+                )
+                const amazon = document.getElementById(
+                    'amazon-buy-button-wrapper'
+                )
 
-        if (country === 'United Kingdom') {
-            amazon?.remove()
-        } else {
-            shopify?.remove()
-        }
-    }
-
-    try {
-        fetch('https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq')
-            .then((res) => {
-                if (!res.ok) throw new Error('Network response was not ok')
-                return res.json()
-            })
-            .then((response) => {
-                if (response.country) {
-                    hideInappropriateButton(response.country)
+                if (response.country === 'United Kingdom') {
+                    amazon?.remove()
+                } else {
+                    shopify?.remove()
                 }
-            })
-            .catch((error) => {
-                console.error('Failed to determine user location:', error)
-            })
-    } catch (error) {
-        console.error('Error in geolocation script:', error)
-    }
+            } catch (error) {
+                // console.log(error)
+            }
+        })
+        .catch((reason: any) => {
+            console.log(reason)
+            // console.log('Request failed');
+        })
 </script>
 
 <style>

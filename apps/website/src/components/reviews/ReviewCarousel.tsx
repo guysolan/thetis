@@ -18,7 +18,6 @@ import {
 } from "@thetis/ui/carousel";
 
 import reviews from "./reviews.json";
-import { Star } from "lucide-react";
 
 export default function ReviewCarousel() {
   return (
