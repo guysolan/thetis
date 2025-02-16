@@ -7,14 +7,16 @@ export const MyEmail = ({ recipientName = "" }) => {
     <FootAndAnkle1
       heading1={
         <>
-          {recipientName ? `${recipientName}, would` : "Would"} you sleep in
-          your <HighlightedSpan>Rain Boots? 😮</HighlightedSpan>
+          {recipientName ? `${recipientName}, ` : ""}"I can't sleep in this
+          boot!" - <HighlightedSpan>80%</HighlightedSpan> of{" "}
+          <HighlightedSpan>Achilles Rupture</HighlightedSpan> Patients 🤬
         </>
       }
       heading2={
         <>
-          The <HighlightedSpan>Only</HighlightedSpan> Night Splint for Achilles
-          Tendon Rupture
+          Introducing a splint for
+          <HighlightedSpan>Happier</HighlightedSpan> Achilles Rupture{" "}
+          <HighlightedSpan>Patients</HighlightedSpan>
         </>
       }
     />

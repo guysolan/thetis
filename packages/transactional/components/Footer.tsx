@@ -2,21 +2,25 @@ import { Link } from "@react-email/components";
 import { Img } from "@react-email/components";
 import React from "react";
 
-const Footer = () => {
+const Footer = ({ align = "center" }: { align?: "left" | "center" }) => {
   return (
-    <div className="flex items-center gap-2">
-      <Img
-        src="https://thetismedical.com/images/logo-black.svg"
-        alt="Thetis Medical"
-        width="40"
-        height="40"
-        className="rounded-lg"
-      />
-      <b>
-        <Link className="text-black" href="https://thetismedical.com">
-          Thetis Medical
-        </Link>
-      </b>
+    <div>
+      <p className={`font-medium ${align === "center" ? "text-center" : ""}`}>
+        <span className="font-normal">Guy Solan</span> - Founder
+      </p>
+      <Link
+        className={`text-black flex items-center gap-2 ${align === "center" ? "justify-center" : ""}`}
+        href="https://thetismedical.com"
+      >
+        <Img
+          src="https://thetismedical.com/images/logo-black.svg"
+          alt="Thetis Medical"
+          width="32"
+          height="32"
+          className="rounded-lg"
+        />
+        <b>Thetis Medical</b>
+      </Link>
     </div>
   );
 };
