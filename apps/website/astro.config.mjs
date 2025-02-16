@@ -33,8 +33,9 @@ export default defineConfig({
     webAnalytics: {
       enabled: true,
     },
-    functionPerRoute: true,
+    functionPerRoute: false,
     maxDuration: 60,
+    includeFiles: ["**/*.{js,mjs}"],
   }),
   integrations: [
     sitemap(),
