@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 
 // Stack
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 
