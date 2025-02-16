@@ -1,9 +1,0 @@
-{
-  "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }],
-  "build": {
-    "env": {
-      "NODE_OPTIONS": "--max-old-space-size=4096 --experimental-modules --experimental-specifier-resolution=node",
-      "UV_THREADPOOL_SIZE": "128"
-    }
-  }
-}

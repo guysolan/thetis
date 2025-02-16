@@ -5,7 +5,7 @@ import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
 import DownloadList from "@/components/DownloadList.astro";
 import SizeChart from "@/components/SizeChart.jsx";
 import NightSplintFAQs from "@/components/NightSplintFAQs.tsx";
-// import ReviewCarousel from "@/components/reviews/ReviewCarousel";
+import ReviewCarousel from "@/components/reviews/ReviewCarousel";
 import SimplyBrilliantQuote from "@/components/reviews/SimplyBrilliantQuote.astro";
 import SleepInYourWellies from "@/components/SleepInYourWellies.tsx";
 import NightSplintFeatures from "@/components/products/night-splint/NightSplintFeatures.astro";
@@ -45,7 +45,7 @@ import GetInTouch from '../components/CTA/GetInTouch.astro';
                 <h2 class="mb-6 font-semibold text-3xl">Ready for More Comfortable Recovery?</h2>
                 <p class="mb-8 text-gray-700 text-xl">Join thousands of patients who've improved their recovery experience</p>
             </div>
-            <!-- <ReviewCarousel client:load/> -->
+            <ReviewCarousel client:load/>
         </section>
    
         <NightSplintInstructions />
