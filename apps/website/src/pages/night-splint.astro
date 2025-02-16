@@ -1,11 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import { ClientRouter } from "astro:transitions";
 import Slide from "@/components/Slide.astro";
 import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
 import DownloadList from "@/components/DownloadList.astro";
 import SizeChart from "@/components/SizeChart.jsx";
 import NightSplintFAQs from "@/components/NightSplintFAQs.tsx";
-import ReviewCarousel from "@/components/reviews/ReviewCarousel";
+// import ReviewCarousel from "@/components/reviews/ReviewCarousel";
 import SimplyBrilliantQuote from "@/components/reviews/SimplyBrilliantQuote.astro";
 import SleepInYourWellies from "@/components/SleepInYourWellies.tsx";
 import NightSplintFeatures from "@/components/products/night-splint/NightSplintFeatures.astro";
@@ -14,11 +15,11 @@ import NightSplintProsCons from "@/components/products/night-splint/NightSplintP
 import NightSplintInstructions from "@/components/products/night-splint/night-splint-instructions/index.astro";
 import NightSplintHero from '../components/products/night-splint/NightSplintHero.astro';
 import GetInTouch from '../components/CTA/GetInTouch.astro';
-import InfiniteReviews from '@/components/reviews/InfiniteReviews.astro';
 ---
 
 <Fragment slot="head">
   <NightSplintSchema />
+  <ClientRouter />
 </Fragment>
 
 <Layout
@@ -46,10 +47,8 @@ import InfiniteReviews from '@/components/reviews/InfiniteReviews.astro';
                 <h2 class="mb-6 font-semibold text-3xl">Ready for More Comfortable Recovery?</h2>
                 <p class="mb-8 text-gray-700 text-xl">Join thousands of patients who've improved their recovery experience</p>
             </div>
-            
+            <!-- <ReviewCarousel client:load/> -->
         </section>
-
-        <InfiniteReviews client:load/>
    
         <NightSplintInstructions />
 
