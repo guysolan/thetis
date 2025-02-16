@@ -1,6 +1,5 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { ClientRouter } from "astro:transitions";
 import Slide from "@/components/Slide.astro";
 import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
 import DownloadList from "@/components/DownloadList.astro";
@@ -19,7 +18,6 @@ import GetInTouch from '../components/CTA/GetInTouch.astro';
 
 <Fragment slot="head">
   <NightSplintSchema />
-  <ClientRouter />
 </Fragment>
 
 <Layout
@@ -47,7 +45,7 @@ import GetInTouch from '../components/CTA/GetInTouch.astro';
                 <h2 class="mb-6 font-semibold text-3xl">Ready for More Comfortable Recovery?</h2>
                 <p class="mb-8 text-gray-700 text-xl">Join thousands of patients who've improved their recovery experience</p>
             </div>
-            <ReviewCarousel client:load/>
+            <ReviewCarousel client:only="react"/>
         </section>
    
         <NightSplintInstructions />
@@ -82,32 +80,34 @@ import GetInTouch from '../components/CTA/GetInTouch.astro';
 </Layout>
 
 <script>
-    fetch('https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq')
-        .then((res) => res.json())
-        .then((response) => {
-            console.log('Country: ', response.country)
-            try {
-                // Check if on Night Splint Page
-                const shopify = document.getElementById(
-                    'shopify-buy-button-wrapper'
-                )
-                const amazon = document.getElementById(
-                    'amazon-buy-button-wrapper'
-                )
+    const hideInappropriateButton = (country: string) => {
+        const shopify = document.getElementById('shopify-buy-button-wrapper')
+        const amazon = document.getElementById('amazon-buy-button-wrapper')
 
-                if (response.country === 'United Kingdom') {
-                    amazon?.remove()
-                } else {
-                    shopify?.remove()
+        if (country === 'United Kingdom') {
+            amazon?.remove()
+        } else {
+            shopify?.remove()
+        }
+    }
+
+    try {
+        fetch('https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq')
+            .then((res) => {
+                if (!res.ok) throw new Error('Network response was not ok')
+                return res.json()
+            })
+            .then((response) => {
+                if (response.country) {
+                    hideInappropriateButton(response.country)
                 }
-            } catch (error) {
-                // console.log(error)
-            }
-        })
-        .catch((reason: any) => {
-            console.log(reason)
-            // console.log('Request failed');
-        })
+            })
+            .catch((error) => {
+                console.error('Failed to determine user location:', error)
+            })
+    } catch (error) {
+        console.error('Error in geolocation script:', error)
+    }
 </script>
 
 <style>
