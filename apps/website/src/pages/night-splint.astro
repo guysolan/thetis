@@ -14,6 +14,7 @@ import NightSplintProsCons from "@/components/products/night-splint/NightSplintP
 import NightSplintInstructions from "@/components/products/night-splint/night-splint-instructions/index.astro";
 import NightSplintHero from '../components/products/night-splint/NightSplintHero.astro';
 import GetInTouch from '../components/CTA/GetInTouch.astro';
+import InfiniteReviews from '@/components/reviews/InfiniteReviews.astro';
 ---
 
 <Fragment slot="head">
@@ -45,8 +46,10 @@ import GetInTouch from '../components/CTA/GetInTouch.astro';
                 <h2 class="mb-6 font-semibold text-3xl">Ready for More Comfortable Recovery?</h2>
                 <p class="mb-8 text-gray-700 text-xl">Join thousands of patients who've improved their recovery experience</p>
             </div>
-            <ReviewCarousel client:load/>
+            
         </section>
+
+        <InfiniteReviews client:load/>
    
         <NightSplintInstructions />
 

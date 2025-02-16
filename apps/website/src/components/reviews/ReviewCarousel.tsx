@@ -49,7 +49,7 @@ export default function ReviewCarousel() {
                       </div>
                     </CardHeader>
                     <CardContent className="flex flex-col justify-center items-center p-6 pt-0">
-                      <span className="font-medium text-neutral-700 text-base lg:text-lg text-center line-clamp-5 lg:line-clamp-4">
+                      <span className="font-medium text-neutral-700 text-base lg:text-lg text-center line-clamp-4">
                         {review.short ?? review.body}
                       </span>
                     </CardContent>

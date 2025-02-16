@@ -115,7 +115,7 @@ function DesktopNav() {
                 "font-normal ml-2",
               )}
             >
-              Contact Us
+              Contact
             </NavigationMenuTrigger>
             <NavigationMenuContent
               className={cn("p-6 flex flex-col gap-2", contentWidth)}
