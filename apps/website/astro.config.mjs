@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 
 // Stack
-import vercel from "@astrojs/vercel";
+import vercel from "@astrojs/vercel/serverless";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 
@@ -28,18 +28,6 @@ articles.forEach((page) => {
 // https://astro.build/config
 export default defineConfig({
   site: "https://thetismedical.com",
-  build: {
-    format: "file",
-  },
-  integrations: [
-    sitemap({
-      customPages: allPages,
-    }),
-    partytown(),
-    react(),
-    markdownIntegration(),
-    tailwind(),
-  ],
   output: "server",
   adapter: vercel({
     webAnalytics: {
@@ -48,4 +36,11 @@ export default defineConfig({
     functionPerRoute: true,
     maxDuration: 60,
   }),
+  integrations: [
+    sitemap(),
+    partytown(),
+    react(),
+    markdownIntegration(),
+    tailwind(),
+  ],
 });
