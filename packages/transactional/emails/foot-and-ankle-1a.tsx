@@ -10,7 +10,8 @@ import {
 import * as React from "react";
 import Tailwind from "../components/Tailwind";
 import HighlightedSpan from "../components/HighlightedSpan";
-
+import Unsubscribe from "../components/Unsubscribe";
+import Footer from "../components/Footer";
 export const MyEmail = ({ recipientName = "" }) => {
   return (
     <Tailwind>
@@ -70,31 +71,8 @@ export const MyEmail = ({ recipientName = "" }) => {
         </p>
         <p>Guy Solan - Founder</p>
 
-        <div className="flex items-center gap-2">
-          <Img
-            src="https://thetismedical.com/images/logo-black.svg"
-            alt="Thetis Medical"
-            width="40"
-            height="40"
-            className="rounded-lg"
-          />
-          <b>
-            <Link className="text-black" href="https://thetismedical.com">
-              Thetis Medical
-            </Link>
-          </b>
-        </div>
-        <div className="mt-8 text-gray-500 text-sm">
-          <p>
-            This email was sent to {"{"}email{"}"}.{" "}
-            <Link
-              href="https://unsubscribe.resend.com/"
-              className="text-gray-600 underline"
-            >
-              Unsubscribe
-            </Link>
-          </p>
-        </div>
+        <Footer />
+        <Unsubscribe />
       </Html>
     </Tailwind>
   );
