@@ -29,12 +29,12 @@ export const MyEmail = ({ recipientName = "" }) => {
           />
         </Head>
         <Heading as="h1">
-          {recipientName ? `${recipientName}, would` : "Would"} you sleep in
-          your <HighlightedSpan>Rain Boots? 😮</HighlightedSpan>
-        </Heading>
-        <Heading as="h2">
           The <HighlightedSpan>Only</HighlightedSpan> Night Splint for Achilles
           Tendon Rupture
+        </Heading>
+        <Heading as="h2">
+          {recipientName ? `${recipientName}, would` : "Would"} you sleep in
+          your <HighlightedSpan>Rain Boots? 😮</HighlightedSpan>
         </Heading>
         <ul className="flex flex-col gap-y-2">
           <li>Sleep Easy</li>
