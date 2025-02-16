@@ -18,7 +18,7 @@ import { buttonVariants } from "../components/ui/button";
 const contentWidth = "min-w-[min(50vw,700px)]";
 
 import { partnerLinks, productLinks, contactLinks } from "../content/pages.tsx";
-import { ArrowRight, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 function DesktopNav() {
   return (
