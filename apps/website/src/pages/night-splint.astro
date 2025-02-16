@@ -1,6 +1,5 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { ClientRouter } from "astro:transitions";
 import Slide from "@/components/Slide.astro";
 import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
 import DownloadList from "@/components/DownloadList.astro";
@@ -19,7 +18,6 @@ import GetInTouch from '../components/CTA/GetInTouch.astro';
 
 <Fragment slot="head">
   <NightSplintSchema />
-  <ClientRouter />
 </Fragment>
 
 <Layout
