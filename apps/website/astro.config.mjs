@@ -41,7 +41,5 @@ export default defineConfig({
     tailwind(),
   ],
   output: "server",
-  adapter: vercel({
-    runtime: "nodejs20.x",
-  }),
+  adapter: vercel(),
 });
