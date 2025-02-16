@@ -45,7 +45,7 @@ export default defineConfig({
     webAnalytics: {
       enabled: true,
     },
-    functionPerRoute: false,
+    functionPerRoute: true,
     maxDuration: 60,
   }),
 });
