@@ -28,20 +28,15 @@ articles.forEach((page) => {
 // https://astro.build/config
 export default defineConfig({
   site: "https://thetismedical.com",
-  output: "server",
-  adapter: vercel({
-    webAnalytics: {
-      enabled: true,
-    },
-    functionPerRoute: false,
-    maxDuration: 60,
-    includeFiles: ["**/*.{js,mjs}"],
-  }),
   integrations: [
-    sitemap(),
+    sitemap({
+      customPages: allPages,
+    }),
     partytown(),
     react(),
     markdownIntegration(),
     tailwind(),
   ],
+  output: "server",
+  adapter: vercel(),
 });
