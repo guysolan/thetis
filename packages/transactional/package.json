@@ -1,4 +1,5 @@
 {
+  "name": "@thetis/transactional",
   "scripts": {
     "dev": "email dev --port 2112"
   },

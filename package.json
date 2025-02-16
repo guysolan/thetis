@@ -22,7 +22,8 @@
     "format": "biome format --write .",
     "lint": "turbo lint && bun lint:repo",
     "lint:repo": "bunx sherif@latest",
-    "typecheck": "turbo typecheck"
+    "typecheck": "turbo typecheck",
+    "deploy:website": "vercel deploy ./apps/website --prod --build-env TURBO_FORCE=true"
   },
   "workspaces": ["packages/*", "apps/*"],
   "dependencies": {
