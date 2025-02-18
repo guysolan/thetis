@@ -2,7 +2,7 @@
 title: The best way to sleep with an Achilles tendon rupture
 status: 'draft'
 description: 'Patients with an Achilles tendon rupture must sleep with a walking boot or night splint to protect their tendon and promote healing.'
-pubDate: 'Jul 15 2024'
+publishedAt: 'Jul 15 2024'
 type: 'article'
 tags: ['equipment','recovery','comfort']
 heroImage: '/images/sleep.webp'

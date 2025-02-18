@@ -1,7 +1,7 @@
 ---
 title: '9 Tips for Achilles Tendon Rupture Recovery'
 description: 'Essential tips and practical advice for managing daily life while recovering from an Achilles tendon rupture.'
-pubDate: 2024-03-20
+publishedAt: 2024-03-20
 tags: ['recovery', 'comfort', 'equipment']
 status: 'draft'
 heroImage: '/images/idea.jpeg'

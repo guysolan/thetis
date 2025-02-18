@@ -4,8 +4,8 @@ import { defineCollection, z } from "astro:content";
 const PageSchema = z.object({
 	title: z.string(),
 	description: z.string(),
-	pubDate: z.coerce.date(),
-	updatedDate: z.coerce.date().optional(),
+	publishedAt: z.coerce.date(),
+	updatedAt: z.coerce.date().optional(),
 	heroImage: z.string().optional(),
 	status: z.enum(["draft", "published"]).optional(),
 	tags: z.array(

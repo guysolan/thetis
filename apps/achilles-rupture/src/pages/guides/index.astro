@@ -1,33 +1,43 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ContentListing from '../../components/ContentListing.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { getCollection } from 'astro:content';
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ContentListing from "../../components/ContentListing.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { getCollection } from "astro:content";
 
-const guides = await getCollection('guide');
-const guidePosts = guides.map((g) => ({...g, type: 'guide'})).sort((a, b) => 
-    new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
-);
+const guides = await getCollection("guide");
+const guidePosts = guides
+    .map((g) => ({ ...g, type: "guide" }))
+    .sort(
+        (a, b) =>
+            new Date(b.data.publishedAt).getTime() -
+            new Date(a.data.publishedAt).getTime(),
+    );
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={`Guides - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+        <BaseHead
+            title={`Guides - ${SITE_TITLE}`}
+            description={SITE_DESCRIPTION}
+        />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={`Guides - ${SITE_TITLE}`} />
         <meta property="og:description" content={SITE_DESCRIPTION} />
-        <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).toString()} />
+        <link
+            rel="canonical"
+            href={new URL(Astro.url.pathname, Astro.site).toString()}
+        />
     </head>
     <body>
         <Header />
         <main id="main-content">
-            <ContentListing 
+            <ContentListing
                 posts={guidePosts}
                 title="📚 Achilles Rupture Recovery Guides"
-				 excludeTags={['science']}
+                excludeTags={["science"]}
             />
         </main>
         <Footer />

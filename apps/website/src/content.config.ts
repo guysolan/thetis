@@ -2,9 +2,9 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 const article = defineCollection({
-	// Load Markdown and MDX files in the `src/content/blog/` directory.
+	// Load Markdown and MDX files in the `src/content/articles/` directory.
 	loader: glob({
-		base: "./content/articles",
+		base: "./src/content/articles",
 		pattern: "**/*.{md,mdx}",
 	}),
 	// Type-check frontmatter using a schema
@@ -12,8 +12,9 @@ const article = defineCollection({
 		title: z.string(),
 		description: z.string(),
 		createdAt: z.coerce.date(),
-		updatedDate: z.coerce.date().optional(),
+		updatedAt: z.coerce.date().optional(),
 		heroImage: z.string().optional(),
+		tags: z.array(z.enum(["equipment", "science", "guides", "news"])),
 	}),
 });
 

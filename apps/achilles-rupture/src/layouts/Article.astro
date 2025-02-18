@@ -1,107 +1,179 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import Layout from './Layout.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import UpvoteForm from '../components/UpvoteForm.astro';
+import type { CollectionEntry } from "astro:content";
+import Layout from "./Layout.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import UpvoteForm from "../components/UpvoteForm.astro";
 
-type Props = CollectionEntry<'article'>['data'];
+type Props = CollectionEntry<"article">["data"] & {
+	canonicalURL?: string;
+	author?: string;
+	keywords?: string[];
+};
 
-const { title, description, pubDate, updatedDate, heroImage, status} = Astro.props;
+const {
+	title,
+	description,
+	publishedAt,
+	updatedAt,
+	heroImage,
+	status,
+	canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+	author = "Thetis Medical",
+	keywords = [],
+} = Astro.props;
+
+// Create JSON-LD schema for Article
+const articleSchema = {
+	"@context": "https://schema.org",
+	"@type": "Article",
+	headline: title,
+	description: description,
+	image: heroImage,
+	datePublished: publishedAt,
+	dateModified: updatedAt || publishedAt,
+	author: {
+		"@type": "Organization",
+		name: author,
+		url: "https://thetismedical.com/",
+	},
+	publisher: {
+		"@type": "Organization",
+		name: "Thetis Medical",
+		url: "https://thetismedical.com/",
+	},
+	mainEntityOfPage: {
+		"@type": "WebPage",
+		"@id": canonicalURL,
+	},
+};
 ---
 
-<Layout title={title} description={description}>
-	<main class="m-0 mx-auto w-full max-w-screen-xl">
-		{status === 'draft' ? (
-			<div class="prose-img:border-gray-200/20 prose-img:shadow-xl mx-auto p-4 prose-img:border prose-img:rounded-xl lg:w-[720px] prose-img:w-full prose-img:aspect-[2/1] prose-img:object-cover">
-				<div class="mb-4 py-4 text-center">
-					<h1 class="mb-2">{title}</h1>
-				</div>
-				<div class="flex flex-col justify-center items-center">
-					  <h2 class="mb-6 text-gray-600 text-xl">
+<Layout
+	title={title}
+	description={description}
+	canonicalURL={canonicalURL}
+	author={author}
+	keywords={keywords}
+>
+	<script
+		type="application/ld+json"
+		set:html={JSON.stringify(articleSchema)}
+	/>
+	<main class="m-0 mx-auto py-8 w-full max-w-screen-xl" role="main">
+		{
+			status === "draft" ? (
+				<div class="mx-auto p-8 lg:w-[720px]">
+					<header class="mb-12 text-center">
+						<h1 class="mb-6 font-bold text-gray-900 text-3xl">
+							{title}
+						</h1>
+					</header>
+					<div class="flex flex-col justify-center items-center space-y-8">
+						<h2 class="mb-8 font-semibold text-gray-800 text-xl">
 							Would you like to read this article?
 						</h2>
-					<UpvoteForm articleName={title} />
-				</div>
-			</div>
-		) : (
-			<article class="prose-img:border-gray-200/20 prose-img:shadow-xl prose-img:border prose-img:rounded-xl prose-img:w-full prose-img:aspect-square prose-img:object-cover">
-				<div class="mx-auto px-4 w-full max-w-[1020px]">
-					{heroImage && (
-						<img 
-							width={1020} 
-							height={510} 
-							src={heroImage} 
-							alt="" 
-							class="border-gray-200/20 shadow-xl my-8 border rounded-xl w-full aspect-[2/1] object-cover" 
-						/>
-					)}
-				</div>
-				<div class="mx-auto p-4 max-w-[calc(100%-2em)] text-gray-800">
-					<div class="mb-4 py-4 text-center">
-						<div class="mb-2 text-gray-600">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="italic">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1 class="mb-2">{title}</h1>
-						<hr />
+						<UpvoteForm articleName={title} />
 					</div>
-					<slot />
 				</div>
-			</article>
-		)}
+			) : (
+				<article class="mx-auto">
+					<div class="mx-auto px-8 w-full max-w-[1020px]">
+						{heroImage && (
+							<img
+								width={1020}
+								height={510}
+								src={heroImage}
+								alt={`Hero image for article "${title}"`}
+								class="my-12 rounded-xl w-full object-cover aspect-[2/1]"
+							/>
+						)}
+					</div>
+					<div class="mx-auto p-8 max-w-[calc(100%-2em)]">
+						<header class="mb-12 text-center">
+							<div class="mb-6 text-gray-700">
+								<FormattedDate date={publishedAt} />
+								{updatedAt && (
+									<div class="mt-4 text-gray-700">
+										Last updated on{" "}
+										<FormattedDate date={updatedAt} />
+									</div>
+								)}
+							</div>
+							<h1 class="mb-6 font-bold text-gray-900 text-3xl">
+								{title}
+							</h1>
+							<hr class="my-8 border-gray-300" />
+						</header>
+						<div class="space-y-8 max-w-none text-gray-900 prose prose-lg">
+							<slot />
+						</div>
+					</div>
+				</article>
+			)
+		}
 	</main>
 </Layout>
 
 <style>
-  :global(article img), :global(.prose img) {
-    max-height: 600px;
-    max-width: 600px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border: 1px solid rgb(229, 231, 235);
-    border-radius: 0.5rem;
-    margin: 2rem auto;
-    background: white;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-                0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    transition: all 0.2s ease-in-out;
-  }
+	:global(article img),
+	:global(.prose img) {
+		max-height: 600px;
+		max-width: 100%;
+		width: auto;
+		height: auto;
+		object-fit: contain;
+		border: 1px solid rgb(209, 213, 219);
+		border-radius: 0.75rem;
+		margin: 3rem auto;
+		background: white;
+		box-shadow:
+			0 4px 6px -1px rgba(0, 0, 0, 0.1),
+			0 2px 4px -1px rgba(0, 0, 0, 0.06);
+		transition: transform 0.2s ease-in-out;
+	}
 
-  :global(article img:hover), :global(.prose img:hover) {
-    transform: translateY(-2px);
-    border-color: rgb(209, 213, 219);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-                0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  }
+	:global(article img:hover),
+	:global(.prose img:hover) {
+		transform: translateY(-2px);
+		box-shadow:
+			0 10px 15px -3px rgba(0, 0, 0, 0.1),
+			0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	}
 
-  :global(table) {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1.5rem 0;
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
+	:global(table) {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 3rem 0;
+		display: block;
+		overflow-x: auto;
+		white-space: nowrap;
+		border: 1px solid rgba(209, 213, 219, 1);
+	}
 
-  :global(th), :global(td) {
-    padding: 0.75rem;
-    border: 1px solid rgba(229, 231, 235, 1);
-    text-align: left;
-  }
+	:global(th),
+	:global(td) {
+		padding: 1.25rem;
+		border: 1px solid rgba(209, 213, 219, 1);
+		text-align: left;
+	}
 
-  :global(th) {
-    background-color: rgba(229, 231, 235, 0.1);
-    font-weight: 600;
-  }
+	:global(th) {
+		background-color: rgba(243, 244, 246, 1);
+		font-weight: 600;
+		color: rgba(31, 41, 55, 1);
+	}
 
-  :global(tr:nth-child(even)) {
-    background-color: rgba(229, 231, 235, 0.05);
-  }
+	:global(tr:nth-child(even)) {
+		background-color: rgba(249, 250, 251, 1);
+	}
+
+	:global(.prose ol) {
+		list-style-type: decimal;
+		padding-left: 1.625em;
+	}
+
+	:global(.prose ol > li) {
+		position: relative;
+		padding-left: 0.375em;
+	}
 </style>

@@ -2,7 +2,7 @@
 title: 'Achilles Tendon Ruptures and Blood Clot Risk'
 status: 'published'
 description: 'Understanding the increased risk of venous thromboembolism (VTE) after an Achilles tendon rupture, based on the UK-FATE audit.'
-pubDate: 'Feb 12 2025'
+publishedAt: 'Feb 12 2025'
 type: 'article'
 tags: ['science','recovery','treatment']
 heroImage: '/images/blood.webp'

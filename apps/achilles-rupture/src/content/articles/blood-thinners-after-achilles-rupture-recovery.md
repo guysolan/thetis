@@ -2,7 +2,7 @@
 title: Blood thinners after Achilles tendon rupture recovery
 status: 'published'
 description: 'Blood thinners after Achilles tendon rupture recovery'
-pubDate: 'Jan 21 2025'
+publishedAt: 'Jan 21 2025'
 type: 'article'
 tags: ['recovery','treatment']
 heroImage: '/images/blood.webp'
