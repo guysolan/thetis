@@ -92,12 +92,6 @@ const articleSchema = {
 						<header class="mb-12 text-center">
 							<div class="mb-6 text-gray-700">
 								<FormattedDate date={publishedAt} />
-								{updatedAt && (
-									<div class="mt-4 text-gray-700">
-										Last updated on{" "}
-										<FormattedDate date={updatedAt} />
-									</div>
-								)}
 							</div>
 							<h1 class="mb-6 font-bold text-gray-900 text-3xl">
 								{title}
@@ -173,6 +167,18 @@ const articleSchema = {
 	}
 
 	:global(.prose ol > li) {
+		position: relative;
+		padding-left: 0.375em;
+	}
+
+	:global(.prose ul) {
+		list-style-type: disc;
+		padding-left: 1.625em;
+		margin-top: 1.25em;
+		margin-bottom: 1.25em;
+	}
+
+	:global(.prose ul > li) {
 		position: relative;
 		padding-left: 0.375em;
 	}
