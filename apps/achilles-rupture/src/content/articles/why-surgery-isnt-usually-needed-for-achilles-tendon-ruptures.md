@@ -1,7 +1,7 @@
 ---
 title: "Why surgery isn't (usually) required after an Achilles tendon tear (backed by science)"
 description: "Why surgery isn't (usually) required after an Achilles tendon tear (backed by science)"
-pubDate: "2024-07-15"
+publishedAt: "2024-07-15"
 status: "draft"
 tags: ["science", "treatment"]
 heroImage: '/images/surgery.jpeg'

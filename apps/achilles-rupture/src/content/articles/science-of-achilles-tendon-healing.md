@@ -1,7 +1,7 @@
 ---
 title: 'Science of Achilles tendon healing'
 description: 'Learn how your Achilles tendon heals naturally after a rupture, with detailed explanations of the biological healing process. Understand the science behind why surgery is rarely needed and how the body repairs itself through distinct healing phases.'
-pubDate: 'Jan 21 2025'
+publishedAt: 'Jan 21 2025'
 type: 'article'
 tags: ['science','recovery','treatment']
 heroImage: '/images/science.webp'

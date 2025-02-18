@@ -1,13 +1,13 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
 
-type Props = CollectionEntry<'guide'>['data'];
+type Props = CollectionEntry<"guide">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, publishedAt, updatedAt, heroImage } = Astro.props;
 ---
 
 <html lang="en">
@@ -19,6 +19,38 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				margin: auto;
 				padding: 1em;
 				color: rgb(var(--gray-dark));
+				position: relative;
+				max-height: 1200px;
+				overflow: hidden;
+			}
+			.prose::after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				height: 50%;
+				background: linear-gradient(to bottom, transparent, white 70%);
+				pointer-events: none;
+			}
+			.original-link {
+				position: absolute;
+				bottom: 40%;
+				left: 50%;
+				transform: translateX(-50%);
+				z-index: 10;
+				background-color: #10b981;
+				color: white;
+				padding: 1rem 2rem;
+				border-radius: 0.5rem;
+				font-weight: bold;
+				text-align: center;
+				box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+				transition: all 0.2s;
+			}
+			.original-link:hover {
+				background-color: #059669;
+				transform: translateX(-50%) translateY(-2px);
 			}
 			.title {
 				margin-bottom: 1em;
@@ -46,11 +78,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				<div class="prose">
 					<div class="title">
 						<div class="date">
-							<FormattedDate date={pubDate} />
+							<FormattedDate date={publishedAt} />
 							{
-								updatedDate && (
+								updatedAt && (
 									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
+										Last updated on{" "}
+										<FormattedDate date={updatedAt} />
 									</div>
 								)
 							}
@@ -58,6 +91,14 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						<h1>{title}</h1>
 						<hr />
 					</div>
+					<a
+						href="https://thetismedical.com/"
+						class="original-link"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Read Full Article at Thetis Medical →
+					</a>
 					<slot />
 				</div>
 			</article>

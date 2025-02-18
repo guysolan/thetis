@@ -1,24 +1,20 @@
 ---
-import { page2md } from '../../api/notion.js'
-import { marked } from 'marked'
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
 
-const getPage = async () => {
-    return page2md('e7b4e4bfa49241d587bc80acf79d5062').then((page: any) => {
-        if (page?.articleBody?.parent) {
-            return marked?.parse(page?.articleBody?.parent)
-        }
-    })
+export async function getStaticPaths() {
+    const posts = await getCollection('blog');
+    return posts.map((post) => ({
+        params: { slug: post.id },
+        props: post,
+    }));
 }
-const page = await getPage()
-import BlogLayout from '../../layouts/BlogLayout.astro'
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await render(post);
 ---
 
-<>
-    {
-        page && (
-            <BlogLayout details={page}>
-                <Fragment set:html={page} />
-            </BlogLayout>
-        )
-    }
-</>
+<BlogLayout {...post.data}>
+    <Content />
+</BlogLayout>

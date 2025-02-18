@@ -1,7 +1,7 @@
 ---
 title: '5 small purchases for a comfortable recovery from Achilles rupture'
 description: 'Essential accessories and items that can significantly improve your comfort during Achilles tendon rupture recovery'
-pubDate: '21 Jan 2025'
+publishedAt: '21 Jan 2025'
 type: 'article'
 tags: ['equipment','recovery','comfort']
 heroImage: '/images/crutches.webp'

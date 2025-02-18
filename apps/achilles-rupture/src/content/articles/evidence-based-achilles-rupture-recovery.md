@@ -2,7 +2,7 @@
 title: Evidence-based Achilles tendon rupture recovery
 status: 'published'
 description: 'Evidence-based Achilles tendon rupture recovery'
-pubDate: 'Jan 21 2025'
+publishedAt: 'Jan 21 2025'
 type: 'article'
 tags: ['science','recovery','treatment']
 heroImage: '/images/prp.jpg'

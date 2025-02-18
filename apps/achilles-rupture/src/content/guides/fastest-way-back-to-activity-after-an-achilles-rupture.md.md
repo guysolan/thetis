@@ -1,7 +1,7 @@
 ---
 title: 'Fastest way back to activity after an Achilles rupture'
 description: 'A guide to recovery and rehabilitation after an Achilles tendon rupture, including timelines for returning to activities and tips to avoid re-injury'
-pubDate: 'Jul 08 2022'
+publishedAt: 'Jul 08 2022'
 heroImage: '/blog-placeholder-3.jpg'
 type: 'guide'
 tags: ['recovery']

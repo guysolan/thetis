@@ -11,14 +11,8 @@ import Thetis from "./Thetis.tsx";
 >
     <div class="hidden lg:flex justify-between items-center gap-x-6 w-full">
         <Thetis />
-        <div class="flex justify-center items-center gap-x-6 ml-auto text-base">
+        <div class="flex justify-center items-center gap-x-4 ml-auto text-base">
             <DesktopNav client:load />
-            <a
-                href="/contact"
-                class={cn(
-                    buttonVariants({ variant: 'default', size: 'md' }),
-                )}><span class="font-semibold text-nowrap">Contact Us</span></a
-            >
         </div>
     </div>
 

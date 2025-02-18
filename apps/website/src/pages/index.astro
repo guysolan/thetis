@@ -9,41 +9,40 @@ import SleepInYourWellies from "@/components/SleepInYourWellies.tsx";
 import ProductTimeline from "@/components/ProductTimeline.astro";
 import ProfessionalOpinionsCarousel from "@/components/reviews/ProfessionalOpinionsCarousel";
 import ComplianceLogos from "../components/compliance/ComplianceLogos.astro";
-import BuyNightSplintPopup from '../components/BuyNightSplintPopup';
-import EmailSubscribe from '../components/CTA/EmailSubscribe.astro';
-import GetInTouch from '../components/CTA/GetInTouch.astro';
-import NightSplintFAQs from '../components/NightSplintFAQs';
+import BuyNightSplintPopup from "../components/BuyNightSplintPopup";
+import EmailSubscribe from "../components/CTA/EmailSubscribe.astro";
+import GetInTouch from "../components/CTA/GetInTouch.astro";
+import NightSplintFAQs from "../components/NightSplintFAQs";
 ---
 
 <ThetisSchema slot="head" />
 
-
 <Layout
-    title="Thetis Medical - Achilles Splint Specialists"
-    description="Medical device company specializing in splints for injured Achilles Tendons. We sell an Achilles Rupture Night Splint and a Trauma Splint."
-    image="https://thetismedical.com/images/night-splint.png"
+        title="Thetis Medical - Achilles Splint Specialists"
+        description="Medical device company specializing in splints for injured Achilles Tendons. We sell an Achilles Rupture Night Splint and a Trauma Splint."
+        image="https://thetismedical.com/images/night-splint.png"
 >
-  
-    <main  class="flex flex-col justify-center items-center bg-white dark:bg-black mx-auto mb-24 w-full">
-       
-        <LandingHero />
+        <main
+                class="flex flex-col justify-center items-center bg-white dark:bg-black mx-auto mb-24 w-full"
+        >
+                <LandingHero />
 
-        <Reviews />
+                <Reviews />
 
-        <ComplianceLogos />
+                <ComplianceLogos />
 
-        <ProductTimeline     />
+                <ProductTimeline />
 
-        <!-- <ProfessionalOpinionsCarousel client:idle /> -->
-        
-        <NightSplintFAQs client:load />
-  </main>
+                <ProfessionalOpinionsCarousel client:load />
+
+                <NightSplintFAQs client:load />
+        </main>
 </Layout>
 
 <script is:inline>
-	document.documentElement.classList.remove('dark');
-	
-	if (typeof localStorage !== 'undefined') {
-		localStorage.setItem('theme', 'light');
-	}
+        document.documentElement.classList.remove("dark");
+
+        if (typeof localStorage !== "undefined") {
+                localStorage.setItem("theme", "light");
+        }
 </script>

@@ -1,0 +1,27 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+	const posts = await getCollection("article");
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: post,
+	}));
+}
+type Props = CollectionEntry<"article">;
+
+const post = Astro.props;
+console.log("Post data:", post); // Debug log to check post content
+const { Content } = await render(post);
+console.log("Rendered content available:", !!Content); // Debug log to verify Content
+---
+
+<ArticleLayout {...post.data}>
+	<div style="background: #eee; padding: 10px; margin: 10px 0;">
+		<p>Debug info:</p>
+		<pre>{JSON.stringify(post, null, 2)}</pre>
+	</div>
+	<Content />
+</ArticleLayout>

@@ -1,6 +1,6 @@
 # Astro Starter Kit: Basics
 
-Change for Vercel - is it fixed?
+Is it fixed?
 
 ```bash
 npm create astro@latest -- --template basics

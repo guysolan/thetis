@@ -2,7 +2,7 @@
 title: "The best walking boot for Achilles tendon recovery: Aircast vs Vacoped"
 status: "published"
 description: "When recovering from an Achilles tendon rupture, the choice of walking boot is crucial. This article compares the Aircast boot with wedges and the VACOped boot to help you make an informed decision."
-pubDate: "Jan 21 2025"
+publishedAt: "Jan 21 2025"
 type: "article"
 tags: ["equipment", "recovery"]
 heroImage: "/images/aircast-vs-vacoped.png"

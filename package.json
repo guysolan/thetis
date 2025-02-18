@@ -11,6 +11,7 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev --parallel",
+    "dev:achilles-rupture": "turbo dev --filter=@thetis/achilles-rupture",
     "dev:ship-stock": "turbo dev --filter=@thetis/ship-stock",
     "dev:website": "turbo dev --filter=@thetis/website",
     "preview:website": "turbo preview --filter=@thetis/website",
@@ -23,11 +24,12 @@
     "lint": "turbo lint && bun lint:repo",
     "lint:repo": "bunx sherif@latest",
     "typecheck": "turbo typecheck",
-    "deploy:website": "vercel deploy apps/website --cwd apps/website --prod"
+    "deploy:website": "vercel deploy ./apps/website --prod --build-env TURBO_FORCE=true"
   },
   "workspaces": ["packages/*", "apps/*"],
   "dependencies": {
-    "embla-carousel-react": "8.5.2",
+    "@astrojs/vercel": "^8.0.7",
+    "@radix-ui/react-focus-scope": "^1.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "supabase": "^2.2.1",

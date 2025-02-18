@@ -1,0 +1,49 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Layout from "./Layout.astro";
+import dayjs from "dayjs";
+
+type Props = CollectionEntry<"article">["data"];
+
+const { title, description, createdAt, updatedAt, heroImage } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+    <main class="m-0 mx-auto w-full max-w-screen-xl">
+        {
+            (
+                <article class="prose-img:shadow-xl prose-img:border prose-img:border-gray-200/20 prose-img:rounded-xl prose-img:w-full prose-img:object-cover prose-img:aspect-square">
+                    <div class="mx-auto px-4 w-full max-w-[1020px]">
+                        {heroImage && (
+                            <img
+                                width={1020}
+                                height={510}
+                                src={heroImage}
+                                alt=""
+                                class="shadow-xl my-8 border border-gray-200/20 rounded-xl w-full object-cover aspect-[2/1]"
+                            />
+                        )}
+                    </div>
+                    <div class="mx-auto p-4 max-w-[calc(100%-2em)] text-gray-800">
+                        <div class="mb-4 py-4 text-center">
+                            <div class="mb-2 text-gray-600">
+                                {dayjs(createdAt).format("MMMM D, YYYY")}
+                                {updatedAt && (
+                                    <div class="text-gray-500 text-sm italic">
+                                        Last updated on{" "}
+                                        {dayjs(updatedAt).format(
+                                            "MMMM D, YYYY",
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                            <h1 class="mb-2">{title}</h1>
+                            <hr />
+                        </div>
+                        <slot />
+                    </div>
+                </article>
+            )
+        }
+    </main>
+</Layout>
