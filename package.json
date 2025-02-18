@@ -14,6 +14,7 @@
     "dev:achilles-rupture": "turbo dev --filter=@thetis/achilles-rupture",
     "dev:ship-stock": "turbo dev --filter=@thetis/ship-stock",
     "dev:website": "turbo dev --filter=@thetis/website",
+    "dev:email": "turbo dev --filter=@thetis/email",
     "preview:website": "turbo preview --filter=@thetis/website",
     "build:website": "turbo build --filter=@thetis/website",
     "dev:settle-central": "turbo dev --filter=@thetis/settle-central",

@@ -10,7 +10,7 @@ export const MyEmail = ({ recipientName = "" }) => {
           {recipientName ? `${recipientName}, introducing` : "Introducing"} a
           Revolutionary
           <HighlightedSpan>Night Splint</HighlightedSpan> for{" "}
-          <HighlightedSpan>Achilles Rupture 🌙</HighlightedSpan>
+          <HighlightedSpan>Achilles Rupture</HighlightedSpan>
         </>
       }
       heading2={

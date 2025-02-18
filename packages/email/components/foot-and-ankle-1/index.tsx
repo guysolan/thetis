@@ -1,14 +1,13 @@
 import React from "react";
-import { Heading, Html, Img, Link, Section } from "@react-email/components";
+import { Heading, Html, Section } from "@react-email/components";
 import Tailwind from "../tailwind";
-import HighlightedSpan from "../highlighted-span";
 import Unsubscribe from "../unsubscribe";
 import Footer from "../footer";
+
 import Head from "../head";
-import InBedImage from "./in-bed-image";
+import InBedImage from "../in-bed-image";
 import SimplyBrilliant from "./simply-brilliant";
 import LearnMoreButton from "./learn-more-button";
-import FootAndAnkleBullets from "../foot-and-ankle-3/foot-and-ankle-bullets";
 import WantItForYourPatients from "./want-it-for-your-patients";
 
 interface Props {

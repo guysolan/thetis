@@ -3,12 +3,12 @@ import React from "react";
 const SimplyBrilliant = () => {
   return (
     <div className="mt-4 mb-4 p-2 rounded-lg font-medium text-gray-700 text-base md:text-lg text-center">
-      <div className="flex justify-center gap-1 mb-2">
-        <span className="text-yellow-400">⭐</span>
-        <span className="text-yellow-400">⭐</span>
-        <span className="text-yellow-400">⭐</span>
-        <span className="text-yellow-400">⭐</span>
-        <span className="text-yellow-400">⭐</span>
+      <div className="text-center">
+        <span className="mx-0.5 text-yellow-400">⭐</span>
+        <span className="mx-0.5 text-yellow-400">⭐</span>
+        <span className="mx-0.5 text-yellow-400">⭐</span>
+        <span className="mx-0.5 text-yellow-400">⭐</span>
+        <span className="mx-0.5 text-yellow-400">⭐</span>
       </div>
       <p className="font-medium text-gray-700 text-base md:text-lg text-center">
         "Simply brilliant - and brilliantly simple"
