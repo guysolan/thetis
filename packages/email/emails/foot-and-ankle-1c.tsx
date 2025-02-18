@@ -14,9 +14,8 @@ export const MyEmail = ({ recipientName = "" }) => {
       }
       heading2={
         <>
-          Introducing a splint for
-          <HighlightedSpan>Happier</HighlightedSpan> Achilles Rupture{" "}
-          <HighlightedSpan>Patients</HighlightedSpan>
+          Introducing a splint for <HighlightedSpan>Happier</HighlightedSpan>{" "}
+          Achilles Rupture <HighlightedSpan>Patients</HighlightedSpan>
         </>
       }
     />

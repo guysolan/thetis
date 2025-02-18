@@ -7,11 +7,10 @@ import {
   Img,
 } from "@react-email/components";
 import * as React from "react";
-import Tailwind from "../components/Tailwind";
-import HighlightedSpan from "../components/HighlightedSpan";
+import Tailwind from "../components/tailwind";
 
 export const MyEmail = () => {
-  const colors = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+  const colors = [50, 100, 200, 300, 400, 500, 600];
 
   return (
     <Tailwind>
