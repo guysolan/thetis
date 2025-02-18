@@ -11,6 +11,7 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev --parallel",
+    "dev:achilles-rupture": "turbo dev --filter=@thetis/achilles-rupture",
     "dev:ship-stock": "turbo dev --filter=@thetis/ship-stock",
     "dev:website": "turbo dev --filter=@thetis/website",
     "preview:website": "turbo preview --filter=@thetis/website",

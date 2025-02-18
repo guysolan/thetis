@@ -6,17 +6,14 @@ import Unsubscribe from "../unsubscribe";
 import Footer from "../footer";
 import Head from "../head";
 import InBedImage from "./in-bed-image";
-import SimplyBrilliant from "./simply-brilliant";
-import LearnMoreButton from "./learn-more-button";
-import FootAndAnkleBullets from "../foot-and-ankle-3/foot-and-ankle-bullets";
-import WantItForYourPatients from "./want-it-for-your-patients";
+import GetSampleButton from "./get-sample-button";
 
 interface Props {
   heading1: React.ReactNode;
   heading2: React.ReactNode;
 }
 
-export const FootAndAnkle1 = ({ heading1, heading2 }: Props) => {
+export const FootAndAnkle5 = ({ heading1, heading2 }: Props) => {
   return (
     <Tailwind>
       <Html
@@ -39,13 +36,11 @@ export const FootAndAnkle1 = ({ heading1, heading2 }: Props) => {
           </Heading>
         </Section>
 
-        <InBedImage />
+        <Section className="flex flex-col justify-center items-center gap-y-4 px-4 py-4">
+          <InBedImage />
 
-        <SimplyBrilliant />
-
-        <LearnMoreButton />
-
-        <WantItForYourPatients />
+          <GetSampleButton />
+        </Section>
 
         <Footer align="center" />
 
@@ -55,4 +50,4 @@ export const FootAndAnkle1 = ({ heading1, heading2 }: Props) => {
   );
 };
 
-export default FootAndAnkle1;
+export default FootAndAnkle5;
