@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Img } from "@react-email/components";
+
 const Logo = () => {
   return (
     <div className="text-center">

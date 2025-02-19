@@ -10,11 +10,11 @@ const SimplyBrilliant = () => {
         <span className="mx-0.5 text-yellow-400">⭐</span>
         <span className="mx-0.5 text-yellow-400">⭐</span>
       </div>
-      <p className="font-medium text-gray-700 text-base md:text-lg text-center">
+      <p className="mx-auto font-medium text-gray-700 text-base md:text-lg text-center">
         "Simply brilliant - and brilliantly simple"
         <br />
-        <span className="block mt-2 font-normal text-sm md:text-base">
-          - Clinical Director, London Foot and Ankle Centre
+        <span className="block mx-auto mt-2 font-normal text-sm md:text-base">
+          Clinical Director, London Foot and Ankle Centre
         </span>
       </p>
     </div>

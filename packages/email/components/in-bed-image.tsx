@@ -3,7 +3,7 @@ import { Img } from "@react-email/components";
 const InBedImage = () => {
   return (
     <Img
-      src="https://thetismedical.com/images/night_splint_bed_top_square.jpg"
+      src="https://thetismedical.com/images/night_splint_square_small.jpg"
       alt="Achilles tendon rupture night splint"
       width="300"
       height="300"

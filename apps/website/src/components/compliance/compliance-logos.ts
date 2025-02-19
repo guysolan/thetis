@@ -8,7 +8,7 @@ import MDR from "./images/mdr.png";
 
 export const complianceLogos = [
     { image: FDA, alt: "FDA" },
-    { image: MDEL, alt: "MDEL" },
+    // { image: MDEL, alt: "MDEL" },
     { image: MHRA, alt: "MHRA" },
     { image: TGA, alt: "TGA" },
     { image: NHS, alt: "NHS" },
