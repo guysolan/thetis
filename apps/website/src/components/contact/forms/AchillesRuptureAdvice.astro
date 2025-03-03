@@ -1,0 +1,112 @@
+---
+import Label from "@/components/form/Label.astro";
+import Input from "@/components/form/Input.astro";
+import FormWrap from "../FormWrap.astro";
+import TextArea from "../../form/TextArea.astro";
+import OptOut from "../../form/OptOut.astro";
+---
+
+<FormWrap formId="xvgzedag">
+    <div class="space-y-8 w-full">
+        <h2
+            class="font-semibold text-neutral-950 text-2xl md:text-3xl leading-[105%]"
+        >
+            Share Your Recovery Wisdom
+        </h2>
+        <p class="text-gray-800 text-lg leading-relaxed">
+            What do you wish someone had told you about recovering from an
+            Achilles rupture? Your experience could help others on their
+            recovery journey.
+        </p>
+
+        <div class="space-y-6">
+            <div class="form-group">
+                <Label labelFor="name">Your Name</Label>
+                <Input name="name" type="text" required={true} />
+            </div>
+
+            <div class="form-group">
+                <Label labelFor="email">Email</Label>
+                <Input required={true} name="email" type="email" />
+            </div>
+
+            <div class="space-y-4" id="tipsContainer">
+                <div class="form-group tip-group">
+                    <Label labelFor="tip1">Tip #1</Label>
+                    <TextArea
+                        name="tip1"
+                        rows={4}
+                        maxlength={500}
+                        placeholder="Share your first recovery tip..."
+                        required={true}
+                    />
+                </div>
+            </div>
+
+            <button
+                type="button"
+                id="addTipBtn"
+                class="flex items-center gap-2 font-medium text-primary hover:text-primary/90"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                Add Another Tip
+            </button>
+
+            <OptOut />
+
+            <button
+                type="submit"
+                class="bg-primary hover:bg-primary/90 hover:shadow-md px-8 py-4 rounded-lg w-full md:w-auto font-medium text-white transition-all"
+            >
+                Share Your Experience
+            </button>
+        </div>
+    </div>
+</FormWrap>
+
+<script>
+    const tipsContainer = document.getElementById("tipsContainer");
+    const addTipBtn = document.getElementById("addTipBtn");
+    let tipCount = 1;
+
+    if (addTipBtn && tipsContainer) {
+        addTipBtn.addEventListener("click", () => {
+            if (tipCount < 3) {
+                tipCount++;
+                const newTip = document.createElement("div");
+                newTip.className = "form-group tip-group";
+                newTip.innerHTML = `
+                    <label for="tip${tipCount}" class="block mb-2 font-medium text-gray-900 text-sm">
+                        Tip #${tipCount}
+                    </label>
+                    <textarea
+                        name="tip${tipCount}"
+                        rows="4"
+                        maxlength="500"
+                        placeholder="Share another recovery tip..."
+                        class="block px-4 py-3 border border-gray-300 focus:border-primary rounded-lg focus:ring-primary w-full text-gray-900 sm:text-sm"
+                    ></textarea>
+                `;
+                tipsContainer.appendChild(newTip);
+
+                if (tipCount === 3) {
+                    addTipBtn.style.display = "none";
+                }
+            }
+        });
+    }
+</script>
