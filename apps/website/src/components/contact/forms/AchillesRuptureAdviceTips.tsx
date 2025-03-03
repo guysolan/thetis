@@ -29,7 +29,9 @@ const AchillesRuptureAdviceTips: React.FC = () => {
     <div className="space-y-4 mt-4" id="tipsContainer">
       {/* Tip 1 - Always visible */}
       <div className="form-group tip-group" id="tip1Container">
-        <label className="font-semibold text-gray-700 text-md">Tip #1</label>
+        <label htmlFor="tip1" className="font-semibold text-gray-700 text-md">
+          Tip #1
+        </label>
         <textarea
           name="tip1"
           rows={4}
@@ -43,7 +45,10 @@ const AchillesRuptureAdviceTips: React.FC = () => {
       {visibleTips >= 2 && (
         <div className="form-group tip-group" id="tip2Container">
           <div className="flex justify-between items-center">
-            <label className="font-semibold text-gray-700 text-md">
+            <label
+              htmlFor="tip2"
+              className="font-semibold text-gray-700 text-md"
+            >
               Tip #2
             </label>
             <button
@@ -69,7 +74,10 @@ const AchillesRuptureAdviceTips: React.FC = () => {
       {visibleTips >= 3 && (
         <div className="form-group tip-group" id="tip3Container">
           <div className="flex justify-between items-center">
-            <label className="font-semibold text-gray-700 text-md">
+            <label
+              htmlFor="tip3"
+              className="font-semibold text-gray-700 text-md"
+            >
               Tip #3
             </label>
             <button
