@@ -4,6 +4,7 @@ import Input from "@/components/form/Input.astro";
 import FormWrap from "../FormWrap.astro";
 import TextArea from "../../form/TextArea.astro";
 import OptOut from "../../form/OptOut.astro";
+import AchillesRuptureAdviceTips from "./AchillesRuptureAdviceTips";
 
 // Define the maximum number of tips
 const maxTips = 3;
@@ -28,121 +29,7 @@ const maxTips = 3;
                 <Input name="name" type="text" required={false} />
             </div>
 
-            <div class="space-y-4" id="tipsContainer">
-                <!-- Tip 1 - Always visible -->
-                <div class="form-group tip-group" id="tip1Container">
-                    <Label labelFor="tip1">Tip #1</Label>
-                    <TextArea
-                        name="tip1"
-                        rows={4}
-                        maxlength={500}
-                        placeholder="Share your first recovery tip..."
-                        required={true}
-                    />
-                </div>
-
-                <!-- Tip 2 - Hidden by default with inline style -->
-                <div
-                    class="form-group tip-group"
-                    id="tip2Container"
-                    style="display: none;"
-                >
-                    <div class="flex justify-between items-center">
-                        <Label labelFor="tip2">Tip #2</Label>
-                        <button
-                            type="button"
-                            id="removeTip2"
-                            class="flex items-center gap-1 text-red-600 hover:text-red-700 text-sm"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="15" y1="9" x2="9" y2="15"></line>
-                                <line x1="9" y1="9" x2="15" y2="15"></line>
-                            </svg>
-                            Remove
-                        </button>
-                    </div>
-                    <TextArea
-                        name="tip2"
-                        rows={4}
-                        maxlength={500}
-                        placeholder="Share another recovery tip..."
-                    />
-                </div>
-
-                <!-- Tip 3 - Hidden by default with inline style -->
-                <div
-                    class="form-group tip-group"
-                    id="tip3Container"
-                    style="display: none;"
-                >
-                    <div class="flex justify-between items-center">
-                        <Label labelFor="tip3">Tip #3</Label>
-                        <button
-                            type="button"
-                            id="removeTip3"
-                            class="flex items-center gap-1 text-red-600 hover:text-red-700 text-sm"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="15" y1="9" x2="9" y2="15"></line>
-                                <line x1="9" y1="9" x2="15" y2="15"></line>
-                            </svg>
-                            Remove
-                        </button>
-                    </div>
-                    <TextArea
-                        name="tip3"
-                        rows={4}
-                        maxlength={500}
-                        placeholder="Share another recovery tip..."
-                    />
-                </div>
-            </div>
-
-            <button
-                type="button"
-                id="addTipBtn"
-                class="flex items-center gap-2 font-medium text-primary hover:text-primary/90"
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="16"></line>
-                    <line x1="8" y1="12" x2="16" y2="12"></line>
-                </svg>
-                Add Another Tip
-            </button>
-
+            <AchillesRuptureAdviceTips client:load />
             <OptOut />
 
             <button
