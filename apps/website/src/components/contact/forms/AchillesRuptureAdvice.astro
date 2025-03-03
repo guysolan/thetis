@@ -2,12 +2,8 @@
 import Label from "@/components/form/Label.astro";
 import Input from "@/components/form/Input.astro";
 import FormWrap from "../FormWrap.astro";
-import TextArea from "../../form/TextArea.astro";
 import OptOut from "../../form/OptOut.astro";
 import AchillesRuptureAdviceTips from "./AchillesRuptureAdviceTips";
-
-// Define the maximum number of tips
-const maxTips = 3;
 ---
 
 <FormWrap formId="xvgzedag">
@@ -41,62 +37,3 @@ const maxTips = 3;
         </div>
     </div>
 </FormWrap>
-
-<script is:inline>
-    // Use inline script to ensure it runs
-    document.addEventListener("DOMContentLoaded", function () {
-        let visibleTips = 1;
-
-        // Get elements
-        const tip2Container = document.getElementById("tip2Container");
-        const tip3Container = document.getElementById("tip3Container");
-        const addTipBtn = document.getElementById("addTipBtn");
-        const removeTip2 = document.getElementById("removeTip2");
-        const removeTip3 = document.getElementById("removeTip3");
-
-        // Add button click handler
-        if (addTipBtn) {
-            addTipBtn.addEventListener("click", function () {
-                if (visibleTips === 1) {
-                    tip2Container.style.display = "block";
-                    visibleTips = 2;
-                } else if (visibleTips === 2) {
-                    tip3Container.style.display = "block";
-                    addTipBtn.style.display = "none";
-                    visibleTips = 3;
-                }
-            });
-        }
-
-        // Remove tip 2 button
-        if (removeTip2) {
-            removeTip2.addEventListener("click", function () {
-                tip2Container.style.display = "none";
-                tip3Container.style.display = "none";
-                addTipBtn.style.display = "flex";
-
-                // Clear textareas
-                const textarea2 = tip2Container.querySelector("textarea");
-                const textarea3 = tip3Container.querySelector("textarea");
-                if (textarea2) textarea2.value = "";
-                if (textarea3) textarea3.value = "";
-
-                visibleTips = 1;
-            });
-        }
-
-        // Remove tip 3 button
-        if (removeTip3) {
-            removeTip3.addEventListener("click", function () {
-                tip3Container.style.display = "none";
-                addTipBtn.style.display = "flex";
-
-                // Clear textarea
-                const textarea = tip3Container.querySelector("textarea");
-                if (textarea) textarea.value = "";
-
-                visibleTips = 2;
-            });
-        }
-    });
-</script>
