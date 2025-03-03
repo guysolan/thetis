@@ -4,6 +4,9 @@ import Input from "@/components/form/Input.astro";
 import FormWrap from "../FormWrap.astro";
 import TextArea from "../../form/TextArea.astro";
 import OptOut from "../../form/OptOut.astro";
+
+// Define the maximum number of tips
+const maxTips = 3;
 ---
 
 <FormWrap formId="xvgzedag">
@@ -22,16 +25,12 @@ import OptOut from "../../form/OptOut.astro";
         <div class="space-y-6">
             <div class="form-group">
                 <Label labelFor="name">Your Name</Label>
-                <Input name="name" type="text" required={true} />
-            </div>
-
-            <div class="form-group">
-                <Label labelFor="email">Email</Label>
-                <Input required={true} name="email" type="email" />
+                <Input name="name" type="text" required={false} />
             </div>
 
             <div class="space-y-4" id="tipsContainer">
-                <div class="form-group tip-group">
+                <!-- Tip 1 - Always visible -->
+                <div class="form-group tip-group" id="tip1Container">
                     <Label labelFor="tip1">Tip #1</Label>
                     <TextArea
                         name="tip1"
@@ -39,6 +38,84 @@ import OptOut from "../../form/OptOut.astro";
                         maxlength={500}
                         placeholder="Share your first recovery tip..."
                         required={true}
+                    />
+                </div>
+
+                <!-- Tip 2 - Hidden by default with inline style -->
+                <div
+                    class="form-group tip-group"
+                    id="tip2Container"
+                    style="display: none;"
+                >
+                    <div class="flex justify-between items-center">
+                        <Label labelFor="tip2">Tip #2</Label>
+                        <button
+                            type="button"
+                            id="removeTip2"
+                            class="flex items-center gap-1 text-red-600 hover:text-red-700 text-sm"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="15" y1="9" x2="9" y2="15"></line>
+                                <line x1="9" y1="9" x2="15" y2="15"></line>
+                            </svg>
+                            Remove
+                        </button>
+                    </div>
+                    <TextArea
+                        name="tip2"
+                        rows={4}
+                        maxlength={500}
+                        placeholder="Share another recovery tip..."
+                    />
+                </div>
+
+                <!-- Tip 3 - Hidden by default with inline style -->
+                <div
+                    class="form-group tip-group"
+                    id="tip3Container"
+                    style="display: none;"
+                >
+                    <div class="flex justify-between items-center">
+                        <Label labelFor="tip3">Tip #3</Label>
+                        <button
+                            type="button"
+                            id="removeTip3"
+                            class="flex items-center gap-1 text-red-600 hover:text-red-700 text-sm"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="15" y1="9" x2="9" y2="15"></line>
+                                <line x1="9" y1="9" x2="15" y2="15"></line>
+                            </svg>
+                            Remove
+                        </button>
+                    </div>
+                    <TextArea
+                        name="tip3"
+                        rows={4}
+                        maxlength={500}
+                        placeholder="Share another recovery tip..."
                     />
                 </div>
             </div>
@@ -78,35 +155,61 @@ import OptOut from "../../form/OptOut.astro";
     </div>
 </FormWrap>
 
-<script>
-    const tipsContainer = document.getElementById("tipsContainer");
-    const addTipBtn = document.getElementById("addTipBtn");
-    let tipCount = 1;
+<script is:inline>
+    // Use inline script to ensure it runs
+    document.addEventListener("DOMContentLoaded", function () {
+        let visibleTips = 1;
 
-    if (addTipBtn && tipsContainer) {
-        addTipBtn.addEventListener("click", () => {
-            if (tipCount < 3) {
-                tipCount++;
-                const newTip = document.createElement("div");
-                newTip.className = "form-group tip-group";
-                newTip.innerHTML = `
-                    <label for="tip${tipCount}" class="block mb-2 font-medium text-gray-900 text-sm">
-                        Tip #${tipCount}
-                    </label>
-                    <textarea
-                        name="tip${tipCount}"
-                        rows="4"
-                        maxlength="500"
-                        placeholder="Share another recovery tip..."
-                        class="block px-4 py-3 border border-gray-300 focus:border-primary rounded-lg focus:ring-primary w-full text-gray-900 sm:text-sm"
-                    ></textarea>
-                `;
-                tipsContainer.appendChild(newTip);
+        // Get elements
+        const tip2Container = document.getElementById("tip2Container");
+        const tip3Container = document.getElementById("tip3Container");
+        const addTipBtn = document.getElementById("addTipBtn");
+        const removeTip2 = document.getElementById("removeTip2");
+        const removeTip3 = document.getElementById("removeTip3");
 
-                if (tipCount === 3) {
+        // Add button click handler
+        if (addTipBtn) {
+            addTipBtn.addEventListener("click", function () {
+                if (visibleTips === 1) {
+                    tip2Container.style.display = "block";
+                    visibleTips = 2;
+                } else if (visibleTips === 2) {
+                    tip3Container.style.display = "block";
                     addTipBtn.style.display = "none";
+                    visibleTips = 3;
                 }
-            }
-        });
-    }
+            });
+        }
+
+        // Remove tip 2 button
+        if (removeTip2) {
+            removeTip2.addEventListener("click", function () {
+                tip2Container.style.display = "none";
+                tip3Container.style.display = "none";
+                addTipBtn.style.display = "flex";
+
+                // Clear textareas
+                const textarea2 = tip2Container.querySelector("textarea");
+                const textarea3 = tip3Container.querySelector("textarea");
+                if (textarea2) textarea2.value = "";
+                if (textarea3) textarea3.value = "";
+
+                visibleTips = 1;
+            });
+        }
+
+        // Remove tip 3 button
+        if (removeTip3) {
+            removeTip3.addEventListener("click", function () {
+                tip3Container.style.display = "none";
+                addTipBtn.style.display = "flex";
+
+                // Clear textarea
+                const textarea = tip3Container.querySelector("textarea");
+                if (textarea) textarea.value = "";
+
+                visibleTips = 2;
+            });
+        }
+    });
 </script>
