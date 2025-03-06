@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Input } from "@thetis/ui/input";
 import { Button } from "../ui/button";
 import { subscribePatient } from "./api/subscribe";
+import { Check, Download } from "lucide-react";
 
 export default function MiniSubscribe() {
   const [email, setEmail] = useState("");
-
-  console.log(email);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,6 +18,7 @@ export default function MiniSubscribe() {
 
     if (!email) return;
 
+    setIsSubmitting(true);
     const pdfUrl = "/documents/Achilles_Tendon_Rupture_eBook.pdf";
     console.log("Attempting to download PDF from:", pdfUrl);
 
@@ -45,33 +47,73 @@ export default function MiniSubscribe() {
 
       document.body.removeChild(link);
       console.log("Cleanup completed");
+
+      // Show success state
+      setIsSuccess(true);
+
+      // Reset success state after 5 seconds
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 5000);
     } catch (error) {
       console.error("Detailed error:", error);
       alert("There was an error processing your request. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value); // Actually update the email state
+    // Reset success state when user starts typing again
+    if (isSuccess) {
+      setIsSuccess(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="print:hidden flex flex-row gap-2">
-      <Input
-        type="email"
-        name="email"
-        placeholder="Enter your email"
-        className="rounded-md h-12"
-        onChange={handleChange}
-        required
-      />
-      <Button
-        className="px-2 rounded-md w-fit h-12 text-nowrap"
-        size="lg"
-        type="submit"
-      >
-        Get the eBook
-      </Button>
-    </form>
+    <div className="print:hidden">
+      <form onSubmit={handleSubmit} className="flex flex-row gap-2">
+        <Input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          className="rounded-md h-12"
+          onChange={handleChange}
+          value={email}
+          required
+          disabled={isSubmitting}
+        />
+        <Button
+          className="flex items-center gap-2 px-2 rounded-md w-fit h-12 text-nowrap"
+          size="lg"
+          type="submit"
+          disabled={isSubmitting || isSuccess}
+        >
+          {isSubmitting ? (
+            <>
+              <span className="animate-pulse">Downloading...</span>
+            </>
+          ) : isSuccess ? (
+            <>
+              <Check size={16} />
+              <span>Downloaded!</span>
+            </>
+          ) : (
+            <>
+              <Download size={16} />
+              <span>Get the eBook</span>
+            </>
+          )}
+        </Button>
+      </form>
+
+      {isSuccess && (
+        <div className="flex items-center gap-1 mt-2 text-green-600 text-sm">
+          <Check size={14} />
+          <span>eBook downloaded! Check your downloads folder.</span>
+        </div>
+      )}
+    </div>
   );
 }
