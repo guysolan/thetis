@@ -1,17 +1,17 @@
 ---
 export interface Props {
-    title: string
-    description: string
+    title: string;
+    description: string;
 }
 
-const { title, description } = Astro.props
+const { title, description } = Astro.props;
 
-import Layout from './Layout.astro'
-import OtherArticles from '@/components/OtherArticles.astro'
-import Subscribe from '@/components/Subscribe.astro'
-import Article from '@/components/blog/Article.astro'
-import NightSplintAdvert from '@/components/products/night-splint/NightSplintAdvert.astro'
-import ShareControls from '@/components/blog/ShareControls.tsx'
+import Layout from "./Layout.astro";
+import OtherArticles from "@/components/OtherArticles.astro";
+import Subscribe from "@/components/Subscribe.astro";
+import Article from "@/components/blog/Article.astro";
+import NightSplintAdvert from "@/components/products/night-splint/NightSplintAdvert.astro";
+import ShareControls from "@/components/blog/ShareControls.tsx";
 ---
 
 <Layout
@@ -28,13 +28,13 @@ import ShareControls from '@/components/blog/ShareControls.tsx'
 </Layout>
 
 <style>
-html {
-    scroll-behavior: smooth;
-}
-
-@media print {
     html {
-        scroll-behavior: auto;
+        scroll-behavior: smooth;
     }
-}
+
+    @media print {
+        html {
+            scroll-behavior: auto;
+        }
+    }
 </style>

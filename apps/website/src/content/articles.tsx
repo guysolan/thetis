@@ -60,15 +60,6 @@ export const articles = [
     icon: <HelpCircle />,
   },
   {
-    href: "/blog/aircast-vs-vacoped",
-    title: "The Best Boot for Recovery: Aircast vs Vacoped",
-    description:
-      "Learn how to select the most suitable boot for your Achilles rupture recovery by considering design, comfort, functionality, and cost factors.",
-    tags: [{ words: "Equipment", color: "bg-sky-200" }],
-    image: AircastVsAchilles,
-    icon: <CircleX />,
-  },
-  {
     href: "/FAQs/life-after-achilles-rupture",
     title: "Life After Achilles Rupture",
     description:
