@@ -7,7 +7,8 @@
     "format": "biome format --write .",
     "typecheck": "tsc --noEmit",
     "build": "email build",
-    "start": "email start"
+    "start": "email start",
+    "test-email": "bun broadcasts/sequence-1/test.tsx"
   },
   "devDependencies": {
     "react-email": "3.0.7"

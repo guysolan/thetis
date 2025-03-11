@@ -1,215 +1,317 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import EvidenceHero from '@/layouts/EvidenceHero.astro';
+import EvidenceHero from "@/layouts/EvidenceHero.astro";
 
 // No component imports or client-side scripts are necessary for this static content.
 ---
 
 <Layout
-    title="Thetis Medical Evidence - Achilles Splint Specialists"
-    description="Evidence for Thetis Medical's Achilles Rupture Night Splint and Trauma Splint."
-    image="https://thetismedical.com/images/night-splint.png"
+  title="Thetis Medical Evidence - Achilles Splint Specialists"
+  description="Evidence for Thetis Medical's Achilles Rupture Night Splint and Trauma Splint."
+  image="https://thetismedical.com/images/night-splint.png"
 >
-    <div class="mx-auto px-4 pt-16 max-w-7xl container">
-        <EvidenceHero />
+  <div class="mx-auto px-4 pt-16 max-w-7xl container">
+    <EvidenceHero />
 
-        <div class="gap-12 grid md:grid-cols-2 lg:grid-cols-2 mt-20">
-            <article id="trauma-splint-qip" itemscope itemtype="https://schema.org/Article" class="bg-white dark:bg-gray-900 shadow-lg hover:shadow-xl p-8 border border-gray-100 dark:border-gray-800 rounded-xl hover:scale-[1.02] transition-all duration-200">
-                <div class="mb-6 pl-4 border-primary border-l-4">
-                    <h2 itemprop="headline" class="font-semibold text-gray-900 dark:text-gray-100 text-2xl">Trauma Splint Quality Improvement Project</h2>
-                    <p class="mt-1 text-gray-600 dark:text-gray-400">Royal Surrey NHS Trust</p>
-                </div>
-                <a href='/documents/time-to-care.pdf' class="group block">
-                    <p class="mb-4">
-                        <strong class="group-hover:text-primary text-gray-900 dark:text-gray-100 text-lg transition-colors">#1874 - Teamwork And Innovation For Achilles Tendon Rupture - A Multidisciplinary Quality Improvement Project</strong>
-                        <br/>
-                        <em itemprop="author" class="block mt-2 text-gray-600 dark:text-gray-400 text-sm">Solan, Matthew; Gaukroger, Andrew; Bailey, Lucy; Gadamsetty, Chintu; Carne, Andrew (Royal Surrey NHS Trust)</em>
-                    </p>
-                    <div class="bg-gray-50 dark:bg-gray-800 mb-6 p-4 rounded-lg">
-                        <strong class="text-primary dark:text-blue-400">Key Finding:</strong>
-                        <p class="mt-2 text-gray-700 dark:text-gray-300">Significantly reduced time to definitive treatment plan for Achilles tendon ruptures to a mean of 3.7 days (previously 8.8 days, max 23 days).</p>
-                    </div>
-                </a>
-                <p class="text-sm">Prize Winning Poster at <a href="https://www.efort.org/" rel="noopener noreferrer" target="_blank" class="font-medium text-primary hover:text-blue-700">EFORT 2023</a></p>
-            </article>
-
-            <article id="mother-knows-best" itemscope itemtype="https://schema.org/Article" class="bg-white dark:bg-gray-900 shadow-lg hover:shadow-xl p-8 border border-gray-100 dark:border-gray-800 rounded-xl hover:scale-[1.02] transition-all duration-200">
-                <div class="mb-6 pl-4 border-primary border-l-4">
-                    <h2 itemprop="headline" class="font-semibold text-gray-900 dark:text-gray-100 text-2xl">Mother Knows Best</h2>
-                    <p class="mt-1 text-gray-600 dark:text-gray-400">BOFAS 2023</p>
-                </div>
-                <a href='/documents/mother-knows-best.pdf' class="group block">
-                    <p class="mb-4">
-                        <strong class="group-hover:text-primary text-gray-900 dark:text-gray-100 text-lg transition-colors">201 - Mother Knows Best – Improving recovery experience after Achilles tendon rupture</strong>
-                        <br/>
-                        <em itemprop="author" class="block mt-2 text-gray-600 dark:text-gray-400 text-sm">Z. Little; A. Gaukroger; C. Peacock; I. Kolodziejczyk; M. Solan (Affiliations TBD)</em>
-                    </p>
-                    <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                        <strong class="text-primary dark:text-blue-400">Key Finding:</strong>
-                        <p class="mt-2 text-gray-700 dark:text-gray-300">High patient satisfaction and no adverse outcomes with the Thetis Achilles Rupture Night Splint, significantly improving recovery experience.</p>
-                    </div>
-                </a>
-            </article>
-
-            <article id="sleeping-safe-and-sound" itemscope itemtype="https://schema.org/Article" class="bg-white dark:bg-gray-900 shadow-lg hover:shadow-xl p-8 border border-gray-100 dark:border-gray-800 rounded-xl hover:scale-[1.02] transition-all duration-200">
-                <div class="mb-6 pl-4 border-primary border-l-4">
-                    <h2 itemprop="headline" class="font-semibold text-gray-900 dark:text-gray-100 text-2xl">Sleeping Safe and Sound</h2>
-                    <p class="mt-1 text-gray-600 dark:text-gray-400">BOFAS 2024</p>
-                </div>
-                <a href='/documents/sleeping-safe-and-sound.pdf' class="group block">
-                    <p class="mb-4">
-                        <strong class="group-hover:text-primary text-gray-900 dark:text-gray-100 text-lg transition-colors">120 - Sleeping safe and sound after Achilles rupture</strong>
-                        <br/>
-                        <em itemprop="author" class="block mt-2 text-gray-600 dark:text-gray-400 text-sm">C. Peacock; M. Solan; A. Gaukroger; N. George (Affiliations TBD)</em>
-                    </p>
-                    <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                        <strong class="text-primary dark:text-blue-400">Key Finding:</strong>
-                        <p class="mt-2 text-gray-700 dark:text-gray-300">Confirmed safety of the Thetis Night Splint with no difference in complication rates or functional outcomes compared to control group.</p>
-                    </div>
-                </a>
-            </article>
-
-            <article id="epsom-st-helier-study" itemscope itemtype="https://schema.org/Article" class="bg-white dark:bg-gray-900 shadow-lg hover:shadow-xl p-8 border border-gray-100 dark:border-gray-800 rounded-xl hover:scale-[1.02] transition-all duration-200">
-                <div class="mb-6 pl-4 border-primary border-l-4">
-                    <h2 itemprop="headline" class="font-semibold text-gray-900 dark:text-gray-100 text-2xl">Night Splint Study</h2>
-                    <p class="mt-1 text-gray-600 dark:text-gray-400">Epsom and St Helier University Hospitals</p>
-                </div>
-                <p class="text-gray-600 dark:text-gray-400">Coming soon - British Pakistani Orthopaedic Society</p>
-            </article>
+    <div class="gap-12 grid md:grid-cols-2 lg:grid-cols-2 mt-20">
+      <article
+        id="trauma-splint-qip"
+        itemscope
+        itemtype="https://schema.org/Article"
+        class="bg-white dark:bg-gray-900 shadow-lg hover:shadow-xl p-8 border border-gray-100 dark:border-gray-800 rounded-xl hover:scale-[1.02] transition-all duration-200"
+      >
+        <div class="mb-6 pl-4 border-primary border-l-4">
+          <h2
+            itemprop="headline"
+            class="font-semibold text-gray-900 dark:text-gray-100 text-2xl"
+          >
+            Trauma Splint Quality Improvement Project
+          </h2>
+          <p class="mt-1 text-gray-600 dark:text-gray-400">
+            Royal Surrey NHS Trust
+          </p>
         </div>
-    </div>
-    
-    <section class="mx-auto px-4 py-16 max-w-7xl container">
-        <div class="flex flex-col justify-center items-center text-center">
-            <h2 class="mb-6 font-semibold text-neutral-950 dark:text-neutral-50 text-3xl">Want to Learn More?</h2>
-            <p class="mb-8 max-w-2xl text-gray-800 dark:text-neutral-200 text-lg">
-                Contact us to discover how our evidence-based solutions can improve your patients' outcomes.
+        <a href="/documents/evidence/time-to-care.pdf" class="group block">
+          <p class="mb-4">
+            <strong
+              class="group-hover:text-primary text-gray-900 dark:text-gray-100 text-lg transition-colors"
+              >#1874 - Teamwork And Innovation For Achilles Tendon Rupture - A
+              Multidisciplinary Quality Improvement Project</strong
+            >
+            <br />
+            <em
+              itemprop="author"
+              class="block mt-2 text-gray-600 dark:text-gray-400 text-sm"
+              >Solan, Matthew; Gaukroger, Andrew; Bailey, Lucy; Gadamsetty,
+              Chintu; Carne, Andrew (Royal Surrey NHS Trust)</em
+            >
+          </p>
+          <div class="bg-gray-50 dark:bg-gray-800 mb-6 p-4 rounded-lg">
+            <strong class="text-primary dark:text-blue-400">Key Finding:</strong
+            >
+            <p class="mt-2 text-gray-700 dark:text-gray-300">
+              Significantly reduced time to definitive treatment plan for
+              Achilles tendon ruptures to a mean of 3.7 days (previously 8.8
+              days, max 23 days).
             </p>
-            <a 
-                href="/contact" 
-                class={cn(buttonVariants({ size: 'lg', variant: 'default' }))}>
-                Get in Touch
-            </a>
+          </div>
+        </a>
+        <p class="text-sm">
+          Prize Winning Poster at <a
+            href="https://www.efort.org/"
+            rel="noopener noreferrer"
+            target="_blank"
+            class="font-medium text-primary hover:text-blue-700">EFORT 2023</a
+          >
+        </p>
+      </article>
+
+      <article
+        id="mother-knows-best"
+        itemscope
+        itemtype="https://schema.org/Article"
+        class="bg-white dark:bg-gray-900 shadow-lg hover:shadow-xl p-8 border border-gray-100 dark:border-gray-800 rounded-xl hover:scale-[1.02] transition-all duration-200"
+      >
+        <div class="mb-6 pl-4 border-primary border-l-4">
+          <h2
+            itemprop="headline"
+            class="font-semibold text-gray-900 dark:text-gray-100 text-2xl"
+          >
+            Mother Knows Best
+          </h2>
+          <p class="mt-1 text-gray-600 dark:text-gray-400">BOFAS 2023</p>
         </div>
-    </section>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "Article",
-            "headline": "Trauma Splint Quality Improvement Project at Royal Surrey NHS Trust",
-            "url": "https://thetismedical.com/evidence#trauma-splint-qip",
-            "author": [
-              {
-                "@type": "Person",
-                "name": "Matthew Solan"
-              },
-              {
-                "@type": "Person",
-                "name": "Andrew Gaukroger"
-              },
-              {
-                "@type": "Person",
-                "name": "Lucy Bailey"
-              },
-              {
-                "@type": "Person",
-                "name": "Chintu Gadamsetty"
-              },
-              {
-                "@type": "Person",
-                "name": "Andrew Carne"
-              }
-            ],
-            "publisher": {
-              "@type": "Organization",
-              "name": "Royal Surrey NHS Trust"
+        <a href="/documents/evidence/mother-knows-best.pdf" class="group block">
+          <p class="mb-4">
+            <strong
+              class="group-hover:text-primary text-gray-900 dark:text-gray-100 text-lg transition-colors"
+              >201 - Mother Knows Best – Improving recovery experience after
+              Achilles tendon rupture</strong
+            >
+            <br />
+            <em
+              itemprop="author"
+              class="block mt-2 text-gray-600 dark:text-gray-400 text-sm"
+              >Z. Little; A. Gaukroger; C. Peacock; I. Kolodziejczyk; M. Solan
+              (Affiliations TBD)</em
+            >
+          </p>
+          <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+            <strong class="text-primary dark:text-blue-400">Key Finding:</strong
+            >
+            <p class="mt-2 text-gray-700 dark:text-gray-300">
+              High patient satisfaction and no adverse outcomes with the Thetis
+              Achilles Rupture Night Splint, significantly improving recovery
+              experience.
+            </p>
+          </div>
+        </a>
+      </article>
+
+      <article
+        id="sleeping-safe-and-sound"
+        itemscope
+        itemtype="https://schema.org/Article"
+        class="bg-white dark:bg-gray-900 shadow-lg hover:shadow-xl p-8 border border-gray-100 dark:border-gray-800 rounded-xl hover:scale-[1.02] transition-all duration-200"
+      >
+        <div class="mb-6 pl-4 border-primary border-l-4">
+          <h2
+            itemprop="headline"
+            class="font-semibold text-gray-900 dark:text-gray-100 text-2xl"
+          >
+            Sleeping Safe and Sound
+          </h2>
+          <p class="mt-1 text-gray-600 dark:text-gray-400">BOFAS 2024</p>
+        </div>
+        <a
+          href="/documents/evidence/sleeping-safe-and-sound.pdf"
+          class="group block"
+        >
+          <p class="mb-4">
+            <strong
+              class="group-hover:text-primary text-gray-900 dark:text-gray-100 text-lg transition-colors"
+              >120 - Sleeping safe and sound after Achilles rupture</strong
+            >
+            <br />
+            <em
+              itemprop="author"
+              class="block mt-2 text-gray-600 dark:text-gray-400 text-sm"
+              >C. Peacock; M. Solan; A. Gaukroger; N. George (Affiliations TBD)</em
+            >
+          </p>
+          <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+            <strong class="text-primary dark:text-blue-400">Key Finding:</strong
+            >
+            <p class="mt-2 text-gray-700 dark:text-gray-300">
+              Confirmed safety of the Thetis Night Splint with no difference in
+              complication rates or functional outcomes compared to control
+              group.
+            </p>
+          </div>
+        </a>
+      </article>
+
+      <article
+        id="epsom-st-helier-study"
+        itemscope
+        itemtype="https://schema.org/Article"
+        class="bg-white dark:bg-gray-900 shadow-lg hover:shadow-xl p-8 border border-gray-100 dark:border-gray-800 rounded-xl hover:scale-[1.02] transition-all duration-200"
+      >
+        <div class="mb-6 pl-4 border-primary border-l-4">
+          <h2
+            itemprop="headline"
+            class="font-semibold text-gray-900 dark:text-gray-100 text-2xl"
+          >
+            Night Splint Study
+          </h2>
+          <p class="mt-1 text-gray-600 dark:text-gray-400">
+            Epsom and St Helier University Hospitals
+          </p>
+        </div>
+        <p class="text-gray-600 dark:text-gray-400">
+          Coming soon - British Pakistani Orthopaedic Society
+        </p>
+      </article>
+    </div>
+  </div>
+
+  <section class="mx-auto px-4 py-16 max-w-7xl container">
+    <div class="flex flex-col justify-center items-center text-center">
+      <h2
+        class="mb-6 font-semibold text-neutral-950 dark:text-neutral-50 text-3xl"
+      >
+        Want to Learn More?
+      </h2>
+      <p class="mb-8 max-w-2xl text-gray-800 dark:text-neutral-200 text-lg">
+        Contact us to discover how our evidence-based solutions can improve your
+        patients' outcomes.
+      </p>
+      <a
+        href="/contact"
+        class={cn(buttonVariants({ size: "lg", variant: "default" }))}
+      >
+        Get in Touch
+      </a>
+    </div>
+  </section>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "Article",
+          "headline": "Trauma Splint Quality Improvement Project at Royal Surrey NHS Trust",
+          "url": "https://thetismedical.com/evidence#trauma-splint-qip",
+          "author": [
+            {
+              "@type": "Person",
+              "name": "Matthew Solan"
+            },
+            {
+              "@type": "Person",
+              "name": "Andrew Gaukroger"
+            },
+            {
+              "@type": "Person",
+              "name": "Lucy Bailey"
+            },
+            {
+              "@type": "Person",
+              "name": "Chintu Gadamsetty"
+            },
+            {
+              "@type": "Person",
+              "name": "Andrew Carne"
             }
-          },
-          {
-            "@type": "Article",
-            "headline": "Mother Knows Best",
-            "url": "https://thetismedical.com/evidence#mother-knows-best",
-             "author": [
-              {
-                "@type": "Person",
-                "name": "Z. Little"
-              },
-              {
-                "@type": "Person",
-                "name": "A. Gaukroger"
-              },
-              {
-                "@type": "Person",
-                "name": "C. Peacock"
-              },
-              {
-                "@type": "Person",
-                "name": "I. Kolodziejczyk"
-              },
-              {
-                "@type": "Person",
-                "name": "M. Solan"
-              }
-            ],
-            "publisher": {
-              "@type": "Organization",
-              "name": "BOFAS"
-            }
-          },
-          {
-            "@type": "Article",
-            "headline": "Sleeping Safe and Sound",
-            "url": "https://thetismedical.com/evidence#sleeping-safe-and-sound",
-            "author": [
-              {
-                "@type": "Person",
-                "name": "C. Peacock"
-              },
-              {
-                "@type": "Person",
-                "name": "M. Solan"
-              },
-              {
-                "@type": "Person",
-                "name": "A. Gaukroger"
-              },
-              {
-                "@type": "Person",
-                "name": "N. George"
-              }
-            ],
-             "publisher": {
-              "@type": "Organization",
-              "name": "BOFAS"
-            }
-          },
-          {
-            "@type": "Article",
-            "headline": "Night Splint Study at Epsom and St Helier University Hospitals",
-            "url": "https://thetismedical.com/evidence#epsom-st-helier-study",
-            "publisher": {
-              "@type": "Organization",
-              "name": "British Pakistani Orthopaedic Society"
-            }
+          ],
+          "publisher": {
+            "@type": "Organization",
+            "name": "Royal Surrey NHS Trust"
           }
-        ]
-      }
-    </script>
+        },
+        {
+          "@type": "Article",
+          "headline": "Mother Knows Best",
+          "url": "https://thetismedical.com/evidence#mother-knows-best",
+          "author": [
+            {
+              "@type": "Person",
+              "name": "Z. Little"
+            },
+            {
+              "@type": "Person",
+              "name": "A. Gaukroger"
+            },
+            {
+              "@type": "Person",
+              "name": "C. Peacock"
+            },
+            {
+              "@type": "Person",
+              "name": "I. Kolodziejczyk"
+            },
+            {
+              "@type": "Person",
+              "name": "M. Solan"
+            }
+          ],
+          "publisher": {
+            "@type": "Organization",
+            "name": "BOFAS"
+          }
+        },
+        {
+          "@type": "Article",
+          "headline": "Sleeping Safe and Sound",
+          "url": "https://thetismedical.com/evidence#sleeping-safe-and-sound",
+          "author": [
+            {
+              "@type": "Person",
+              "name": "C. Peacock"
+            },
+            {
+              "@type": "Person",
+              "name": "M. Solan"
+            },
+            {
+              "@type": "Person",
+              "name": "A. Gaukroger"
+            },
+            {
+              "@type": "Person",
+              "name": "N. George"
+            }
+          ],
+          "publisher": {
+            "@type": "Organization",
+            "name": "BOFAS"
+          }
+        },
+        {
+          "@type": "Article",
+          "headline": "Night Splint Study at Epsom and St Helier University Hospitals",
+          "url": "https://thetismedical.com/evidence#epsom-st-helier-study",
+          "publisher": {
+            "@type": "Organization",
+            "name": "British Pakistani Orthopaedic Society"
+          }
+        }
+      ]
+    }
+  </script>
 </Layout>
 
 <style>
-html {
+  html {
     scroll-behavior: smooth;
-}
+  }
 
-@media print {
+  @media print {
     html {
-        scroll-behavior: auto;
+      scroll-behavior: auto;
     }
-}
+  }
 </style>

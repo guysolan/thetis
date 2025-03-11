@@ -2,13 +2,13 @@ import * as React from "react";
 import HighlightedSpan from "../components/highlighted-span";
 import { FootAndAnkle1 } from "../components/foot-and-ankle-1/index.tsx";
 
-export const MyEmail = ({ recipientName = "" }) => {
+export const MyEmail = () => {
   return (
     <FootAndAnkle1
       heading1={
         <>
-          {recipientName ? `${recipientName}, would` : "Would"} you sleep in
-          your <HighlightedSpan>Rain Boots? 😮</HighlightedSpan>
+          Would you sleep in your{" "}
+          <HighlightedSpan>Rain Boots? 😮</HighlightedSpan>
         </>
       }
       heading2={
