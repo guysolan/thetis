@@ -1,7 +1,9 @@
 -- Create initial user in auth.users
-INSERT INTO auth.users(id, email, encrypted_password)
-    VALUES ('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', -- UUID for consistency
-        'guy@thetismedical.com', crypt('Newspaper202!', gen_salt('bf')));
+-- INSERT INTO auth.users(id, email, encrypted_password, email_confirmed_at, confirmed_at, created_at, updated_at, raw_user_meta_data)
+--     VALUES ('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 'guy@thetismedical.com', crypt('Newspaper202!', gen_salt('bf')), now(), now(), now(), now(), '{}'::jsonb);
+-- Create initial user in auth.users
+INSERT INTO "auth"."users"("instance_id", "id", "aud", "role", "email", "encrypted_password", "email_confirmed_at", "invited_at", "confirmation_token", "confirmation_sent_at", "recovery_token", "recovery_sent_at", "email_change_token_new", "email_change", "email_change_sent_at", "last_sign_in_at", "raw_app_meta_data", "raw_user_meta_data", "is_super_admin", "created_at", "updated_at", "phone", "phone_confirmed_at", "phone_change", "phone_change_token", "phone_change_sent_at", "email_change_token_current", "email_change_confirm_status", "banned_until", "reauthentication_token", "reauthentication_sent_at", "is_sso_user", "deleted_at", "is_anonymous")
+    VALUES ('00000000-0000-0000-0000-000000000000', 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 'authenticated', 'authenticated', 'guy@thetismedical.com', '$2a$10$xOKlwI180wfilIbcXtUQ.upAgfmwvB5uYyHTcJPTzRiithwIm4Wai', '2025-03-14 18:58:08.048878+00', NULL, '', NULL, '', NULL, '', '', NULL, '2025-03-14 18:58:21.829352+00', '{"provider": "email", "providers": ["email"]}', '{"email_verified": true}', NULL, '2025-03-14 18:58:08.034684+00', '2025-03-14 18:58:21.834628+00', NULL, NULL, '', '', NULL, '', 0, NULL, '', NULL, FALSE, NULL, FALSE);
 
 -- Insert companies first
 INSERT INTO companies(id, name, company_number, tax_number, user_id)
