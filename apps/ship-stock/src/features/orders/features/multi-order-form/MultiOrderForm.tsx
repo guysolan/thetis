@@ -20,27 +20,41 @@ import ShipmentFormFields from "./ShipmentFormFields";
 import { Button } from "@thetis/ui/button";
 import { useSelectCompanies } from "../../../companies/api/selectCompanies";
 import useMyCompanyId from "../../../companies/hooks/useMyCompanyId";
+import AdditionalFormFields from "../../components/AdditionalOrderFormFields";
+import { Order } from "../../types";
 type Schema = z.infer<typeof schema>;
 
 interface MultiOrderFormProps {
   defaultOrderType: Schema["order_type"];
+  order?: Order["Row"];
 }
 
-export function MultiOrderForm({ defaultOrderType }: MultiOrderFormProps) {
+export function MultiOrderForm({
+  defaultOrderType,
+  order,
+}: MultiOrderFormProps) {
   const companyId = useMyCompanyId();
   const { data: companies = [] } = useSelectCompanies();
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      company_id: companyId,
-      order_date: dayjs().toDate(),
-      order_type: defaultOrderType,
-      currency: defaultCurrency,
+      company_id: order?.company_id ?? companyId,
+      order_date: order?.order_date
+        ? dayjs(order?.order_date).toDate()
+        : dayjs().toDate(),
+      order_type: order?.order_type ?? defaultOrderType,
+      currency: order?.currency ?? defaultCurrency,
       order_items: [],
-      carriage: 0,
+      carriage: order?.carriage ?? 0,
       item_type: "part",
       mode: "package",
+      to_company_id: String(order?.to_company_id),
+      to_shipping_address_id: String(order?.to_shipping_address_id),
+      to_billing_address_id: String(order?.to_billing_address_id),
+      from_company_id: String(order?.from_company_id),
+      from_shipping_address_id: String(order?.from_shipping_address_id),
+      from_billing_address_id: String(order?.from_billing_address_id),
     },
   });
 
@@ -118,6 +132,8 @@ export function MultiOrderForm({ defaultOrderType }: MultiOrderFormProps) {
         {orderType === "sale" && <SellFormFields />}
         {orderType === "shipment" && <ShipmentFormFields />}
         <PriceSummary />
+
+        <AdditionalFormFields />
 
         <FormErrors />
         <Button type="submit">Submit</Button>

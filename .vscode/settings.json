@@ -11,6 +11,7 @@
   "deno.importMap": "./apps/api/supabase/functions/import_map.json",
   "cSpell.words": [
     "Aircast",
+    "airwaybill",
     "astrojs",
     "astropub",
     "chartjs",
@@ -24,6 +25,7 @@
     "Hascombe",
     "hookform",
     "IBAN",
+    "Incoterms",
     "lucide",
     "marketplaces",
     "msapplication",

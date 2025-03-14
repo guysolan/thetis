@@ -70,6 +70,14 @@ export const multiOrderFormSchema = z.object({
     currency: z.enum(currencyKeys as [string, ...string[]]).default("GBP"),
     carriage: z.coerce.number().min(0).default(0),
 
+    // Additional
+    reason_for_export: z.string().optional(),
+    shipment_number: z.string().optional(),
+    airwaybill: z.string().optional(),
+    mode_of_transport: z.string().optional(),
+    incoterms: z.string().optional(),
+    unit_of_measurement: z.string().optional(),
+
     // Item arrays
     order_items: z.array(pricedItemSchema).min(1),
     consumed_items: z.array(pricedItemSchema).optional(),

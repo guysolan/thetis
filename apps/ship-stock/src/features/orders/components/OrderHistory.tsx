@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@thetis/ui/accordion";
 import { Badge } from "@thetis/ui/badge";
-import type { OrderView } from "../types";
+import type { OrderType, OrderView } from "../types";
 import NumberFlow from "@number-flow/react";
 import dayjs from "dayjs";
 import OrderBreakdown from "../features/order-history/components/OrderBreakdown";
@@ -15,6 +15,7 @@ import ActionPopover from "@/components/ActionPopover";
 import { useDeleteOrder } from "../api/deleteOrder";
 import { DocumentLinks } from "./DocumentLinks";
 import { Currency } from "../../../components/Currency";
+import { MultiOrderForm } from "../features/multi-order-form/MultiOrderForm";
 
 interface ExistingOrdersProps {
   orders: OrderView[];
@@ -42,7 +43,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                   )}
                 </div>
 
-                <div className="flex flex-col gap-0.5 text-neutral-600 text-sm dark:text-neutral-400">
+                <div className="flex flex-col gap-0.5 text-neutral-600 dark:text-neutral-400 text-sm">
                   <span>
                     {dayjs(order.order_date as string).format("DD MMM YYYY")}
                   </span>
@@ -68,7 +69,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                       />
                     </span>
                     {order?.carriage && (
-                      <span className="text-neutral-600 text-sm dark:text-neutral-400">
+                      <span className="text-neutral-600 dark:text-neutral-400 text-sm">
                         <NumberFlow
                           value={order.carriage ?? 0}
                           format={{
@@ -84,7 +85,12 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
               <div className="flex items-center gap-2">
                 <ActionPopover
                   title={`Order ${order.order_id}`}
-                  editForm={<EditOrderForm order={order} />}
+                  editForm={
+                    <MultiOrderForm
+                      order={order}
+                      defaultOrderType={order.order_type as OrderType}
+                    />
+                  }
                   deleteFunction={() => deleteOrder(order.order_id)}
                 >
                   <DocumentLinks
