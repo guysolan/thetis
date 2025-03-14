@@ -35,7 +35,15 @@ const OrdersPage = () => {
                   key={tabValue}
                   value={tabValue}
                 >
-                  <MultiOrderForm defaultOrderType={tabValue} />
+                  <MultiOrderForm
+                    defaultOrderType={
+                      (tabValue === "all" ? "sale" : tabValue) as
+                        | "sale"
+                        | "purchase"
+                        | "shipment"
+                        | "stocktake"
+                    }
+                  />
                   {/* <OrderForm defaultTab={tabValue} /> */}
                 </TabsContent>
               ))}

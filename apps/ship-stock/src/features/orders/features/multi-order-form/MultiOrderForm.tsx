@@ -19,17 +19,21 @@ import PriceSummary from "../order-forms/components/PriceSummary";
 import ShipmentFormFields from "./ShipmentFormFields";
 import { Button } from "@thetis/ui/button";
 import { useSelectCompanies } from "../../../companies/api/selectCompanies";
+import useMyCompanyId from "../../../companies/hooks/useMyCompanyId";
 type Schema = z.infer<typeof schema>;
+
 interface MultiOrderFormProps {
   defaultOrderType: Schema["order_type"];
 }
 
 export function MultiOrderForm({ defaultOrderType }: MultiOrderFormProps) {
+  const companyId = useMyCompanyId();
   const { data: companies = [] } = useSelectCompanies();
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
+      company_id: companyId,
       order_date: dayjs().toDate(),
       order_type: defaultOrderType,
       currency: defaultCurrency,
@@ -97,6 +101,7 @@ export function MultiOrderForm({ defaultOrderType }: MultiOrderFormProps) {
           ) : (
             <Select
               label="Package Items?"
+              description="If you need a commercial invoice, you must use package mode to describe the size and contents of the box being shipped."
               name="mode"
               options={[
                 { label: "Package Mode", value: "package" },

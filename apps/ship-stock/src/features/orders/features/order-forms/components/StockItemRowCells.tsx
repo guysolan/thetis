@@ -215,7 +215,7 @@ const StockItemRowCells = ({
       {showPrice && (
         <NumberCell
           name={`${name}.${index}.item_price`}
-          step={0.000001}
+          step={0.01}
           onChange={handlePriceChange}
           format={{ style: "currency", currency: currency }}
           editable={editable}

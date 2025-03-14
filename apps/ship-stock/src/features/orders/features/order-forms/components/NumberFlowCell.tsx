@@ -1,5 +1,5 @@
-import { useFormContext, useWatch, useController } from "react-hook-form";
-import NumberFlow, { Format, NumberFlowProps } from "@number-flow/react";
+import { useFormContext, useWatch } from "react-hook-form";
+import NumberFlow, { Format } from "@number-flow/react";
 import { TableCell } from "@thetis/ui/table";
 import { useState } from "react";
 import Input from "./NumberInput";
@@ -8,9 +8,7 @@ import { cn } from "@thetis/ui/cn";
 interface NumberCellProps {
   name: string;
   step?: number;
-  onChange?:
-    | ((value: number) => void)
-    | React.FormEventHandler<HTMLInputElement>;
+  onChange?: (value: number) => void;
   format: Format;
   suffix?: string;
   editable?: boolean;
@@ -24,7 +22,9 @@ const NumberFlowCell = (props: NumberCellProps) => {
 
   const handleValueChange = (value: number) => {
     setValue(props.name, value);
-    props.onChange?.(value);
+    if (props.onChange) {
+      props.onChange(value);
+    }
   };
 
   const focus = () => {
