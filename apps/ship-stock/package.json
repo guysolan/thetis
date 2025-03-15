@@ -20,7 +20,7 @@
     "@tanstack/react-router": "^1.85.0",
     "@tanstack/router-devtools": "^1.85.0",
     "@thetis/ui": "workspace:*",
-    "@thetis/ship-stock": "workspace:*",
+    "@thetis/ship-stock-api": "workspace:*",
     "change-case": "^5.4.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
