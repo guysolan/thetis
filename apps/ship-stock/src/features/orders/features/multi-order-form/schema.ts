@@ -114,7 +114,9 @@ export const multiOrderFormSchema = z.object({
     }
     if (
         data.order_type === "stocktake" &&
-        !data.order_items.every((item) => item.item_type === "stocktake")
+        !data.order_items.every((item) =>
+            item.item_type === "part" || item.item_type === "product"
+        )
     ) {
         ctx.addIssue({
             path: ["order_items"],
