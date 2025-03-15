@@ -21,12 +21,12 @@ import { Button } from "@thetis/ui/button";
 import { useSelectCompanies } from "../../../companies/api/selectCompanies";
 import useMyCompanyId from "../../../companies/hooks/useMyCompanyId";
 import AdditionalFormFields from "../../components/AdditionalOrderFormFields";
-import { Order } from "../../types";
+import type { OrderView } from "../../types";
 type Schema = z.infer<typeof schema>;
 
 interface MultiOrderFormProps {
   defaultOrderType: Schema["order_type"];
-  order?: Order["Row"];
+  order?: OrderView;
 }
 
 export function MultiOrderForm({
@@ -45,16 +45,32 @@ export function MultiOrderForm({
         : dayjs().toDate(),
       order_type: order?.order_type ?? defaultOrderType,
       currency: order?.currency ?? defaultCurrency,
-      order_items: [],
       carriage: order?.carriage ?? 0,
       item_type: "part",
-      mode: "package",
-      to_company_id: String(order?.to_company_id),
-      to_shipping_address_id: String(order?.to_shipping_address_id),
-      to_billing_address_id: String(order?.to_billing_address_id),
-      from_company_id: String(order?.from_company_id),
-      from_shipping_address_id: String(order?.from_shipping_address_id),
-      from_billing_address_id: String(order?.from_billing_address_id),
+
+      mode: order?.items?.filter((i) => i.item_type === "package")?.length
+        ? "package"
+        : "direct",
+
+      to_company_id: String(order?.to_company.id),
+      to_shipping_address_id: String(order?.to_shipping_address.id),
+      to_billing_address_id: String(order?.to_billing_address.id),
+      from_company_id: String(order?.from_company.id),
+      from_shipping_address_id: String(order?.from_shipping_address.id),
+      from_billing_address_id: String(order?.from_billing_address.id),
+      // Additional
+      reason_for_export: order?.reason_for_export,
+      shipment_number: order?.shipment_number,
+      airwaybill: order?.airwaybill,
+      mode_of_transport: order?.mode_of_transport,
+      incoterms: order?.incoterms,
+      unit_of_measurement: order?.unit_of_measurement,
+
+      // Items
+      order_items:
+        order?.items
+          .filter((i) => i.price > 0)
+          ?.map((i) => ({ ...i, item_id: String(i.id) })) ?? [],
     },
   });
 

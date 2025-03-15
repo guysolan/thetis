@@ -15,10 +15,12 @@
     "astrojs",
     "astropub",
     "chartjs",
+    "cmdk",
     "denoland",
     "Discrepency",
     "Doppio",
     "Edit",
+    "embla",
     "EORI",
     "Godalming",
     "gsap",
@@ -49,6 +51,7 @@
     "topo",
     "upsert",
     "Vacoped",
+    "vaul",
     "Westbury"
   ]
 }

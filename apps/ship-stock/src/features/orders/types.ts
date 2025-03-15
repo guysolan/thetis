@@ -1,4 +1,4 @@
-import { Database } from "@/database.types";
+import { Database } from "@thetis/ship-stock-api/types";
 import { Company } from "../companies/types";
 import { Contact } from "../contacts/types";
 

@@ -37,10 +37,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                   <h2 className="dark:text-white underline-offset-2">
                     Order {order.order_id}
                   </h2>
-                  <Badge variant="outline">{order.order_type}</Badge>
-                  {order.currency && (
-                    <Badge variant="secondary">{order.currency}</Badge>
-                  )}
+                  <Badge>{order.order_type}</Badge>
                 </div>
 
                 <div className="flex flex-col gap-0.5 text-neutral-600 dark:text-neutral-400 text-sm">
