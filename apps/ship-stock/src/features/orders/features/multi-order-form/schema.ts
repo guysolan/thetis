@@ -52,6 +52,7 @@ const orderItemSchema = z.discriminatedUnion("item_type", [
 // Main form schema
 export const multiOrderFormSchema = z.object({
     // Address fields
+    order_id: z.string().optional().nullable(),
     from_company_id: z.string().min(1, "Company is required"),
     from_billing_address_id: z.string().min(1, "Billing address is required"),
     from_shipping_address_id: z.string().min(1, "Shipping address is required"),
@@ -71,12 +72,12 @@ export const multiOrderFormSchema = z.object({
     carriage: z.coerce.number().min(0).default(0),
 
     // Additional
-    reason_for_export: z.string().optional(),
-    shipment_number: z.string().optional(),
-    airwaybill: z.string().optional(),
-    mode_of_transport: z.string().optional(),
-    incoterms: z.string().optional(),
-    unit_of_measurement: z.string().optional(),
+    reason_for_export: z.string().optional().nullable(),
+    shipment_number: z.string().optional().nullable(),
+    airwaybill: z.string().optional().nullable(),
+    mode_of_transport: z.string().optional().nullable(),
+    incoterms: z.string().optional().nullable(),
+    unit_of_measurement: z.string().optional().nullable(),
 
     // Item arrays
     order_items: z.array(pricedItemSchema).min(1),

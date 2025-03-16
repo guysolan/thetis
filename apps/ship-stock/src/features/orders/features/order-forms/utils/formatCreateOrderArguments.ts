@@ -11,6 +11,7 @@ export type FormatOrderItemChanges = {
 };
 
 export type CreateOrderType = {
+    in_order_id: string | null;
     in_order_type: string;
     in_order_date: string;
     in_order_items: FormatOrderItemChanges[];
@@ -24,13 +25,19 @@ export type CreateOrderType = {
     in_from_contact_id: string | null;
     in_currency: Currency;
     in_carriage: number;
-    in_company_id: string;
+    in_reason_for_export: string | null;
+    in_shipment_number: string | null;
+    in_airwaybill: string | null;
+    in_mode_of_transport: string | null;
+    in_incoterms: string | null;
+    in_unit_of_measurement: string | null;
 };
 export const formatCreateOrderArguments = (
     orderItems: FormatOrderItemChanges[],
     formData: any,
 ): CreateOrderType => {
     return {
+        in_order_id: formData.order_id ?? null,
         in_order_type: formData.order_type,
         in_order_date: formData.order_date?.toISOString() ??
             dayjs().toISOString(),
@@ -45,6 +52,11 @@ export const formatCreateOrderArguments = (
         in_from_contact_id: formData.from_contact_id ?? null,
         in_currency: formData.currency ?? null,
         in_carriage: formData.carriage ?? 0,
-        in_company_id: formData.company_id ?? null,
+        in_reason_for_export: formData.reason_for_export ?? null,
+        in_shipment_number: formData.shipment_number ?? null,
+        in_airwaybill: formData.airwaybill ?? null,
+        in_mode_of_transport: formData.mode_of_transport ?? null,
+        in_incoterms: formData.incoterms ?? null,
+        in_unit_of_measurement: formData.unit_of_measurement ?? null,
     };
 };

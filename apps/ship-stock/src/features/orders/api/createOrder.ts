@@ -11,12 +11,10 @@ import { MultiOrderFormData } from "../features/multi-order-form/schema";
 import { processMultiOrderFormData } from "../features/multi-order-form/utils";
 
 const createOrder = async (formData: MultiOrderFormData) => {
-	const orderData = formData.order_type === "stocktake"
-		? formData
-		: processMultiOrderFormData(formData);
+	const orderData = processMultiOrderFormData(formData);
 
 	const { data: result, error } = await supabase.rpc(
-		"insert_order",
+		"upsert_order",
 		orderData,
 	);
 	if (error) throw error;

@@ -39,6 +39,7 @@ export function MultiOrderForm({
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
+      order_id: order?.order_id ? String(order.order_id) : null,
       company_id: order?.company_id ?? companyId,
       order_date: order?.order_date
         ? dayjs(order?.order_date).toDate()
@@ -53,11 +54,11 @@ export function MultiOrderForm({
         : "direct",
 
       to_company_id: String(order?.to_company.id),
-      to_shipping_address_id: String(order?.to_shipping_address.id),
-      to_billing_address_id: String(order?.to_billing_address.id),
-      from_company_id: String(order?.from_company.id),
-      from_shipping_address_id: String(order?.from_shipping_address.id),
-      from_billing_address_id: String(order?.from_billing_address.id),
+      to_shipping_address_id: String(order?.to_shipping_address?.id),
+      to_billing_address_id: String(order?.to_billing_address?.id),
+      from_company_id: String(order?.from_company?.id),
+      from_shipping_address_id: String(order?.from_shipping_address?.id),
+      from_billing_address_id: String(order?.from_billing_address?.id),
       // Additional
       reason_for_export: order?.reason_for_export,
       shipment_number: order?.shipment_number,
