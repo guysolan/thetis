@@ -8,7 +8,7 @@ import { CreateOrderType } from "../features/order-forms/utils/formatCreateOrder
 
 const createStocktakeOrder = async (formData: CreateOrderType) => {
     const { data: result, error } = await supabase.rpc(
-        "insert_order",
+        "upsert_order",
         formData,
     );
     if (error) throw error;
