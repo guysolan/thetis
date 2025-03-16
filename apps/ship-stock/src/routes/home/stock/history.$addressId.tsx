@@ -13,10 +13,9 @@ import {
 import { Badge } from "@thetis/ui/badge";
 import PageTitle from "@/components/PageTitle";
 import { supabase } from "@/lib/supabase";
-import { Card, CardContent, CardHeader, CardTitle } from "@thetis/ui/card";
-import { AlertCircle, AlertTriangle } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 
-// Types for the inventory history data directly using the JSON structure
+// Updated interface to match the new SQL view structure
 interface InventoryHistoryRecord {
   order_id: number;
   address_id: number;
@@ -26,13 +25,6 @@ interface InventoryHistoryRecord {
   order_type: "purchase" | "sale" | "shipment" | "stocktake";
   from_company: string | null;
   to_company: string | null;
-  payment_status:
-    | "unpaid"
-    | "paid"
-    | "overdue"
-    | "refunded"
-    | "cancelled"
-    | null;
   items: Array<{
     id: number;
     name: string;
@@ -40,12 +32,15 @@ interface InventoryHistoryRecord {
     quantity: number; // Current running total
     change: number; // Change in this transaction
   }>;
+  item_quantities: Record<string, number>;
+  items_changed: number;
+  net_change: number;
 }
 
 // Function to fetch inventory history data from the location view
 const fetchInventoryHistory = async (addressId: string) => {
   const { data, error } = await supabase
-    .from("inventory_history_by_address")
+    .from("inventory_history_by_location")
     .select("*")
     .eq("address_id", addressId)
     .order("transaction_date", { ascending: true }); // Ascending for chronological processing
@@ -89,22 +84,22 @@ function StockHistoryPage() {
     return Array.from(itemMap.values());
   }, [inventoryHistory]);
 
-  // Group data by date for the timeline view
+  // Group orders by date and maintain running totals for all items
   const timelineData = React.useMemo(() => {
     if (!inventoryHistory || inventoryHistory.length === 0) return [];
 
-    // First, group records by date
+    // Group orders by date
     const dateGroups = {};
-    const runningTotals = {}; // Keep track of the latest known quantity for each item
+    const runningTotals = {}; // Keep running total for each item
 
-    // Initialize running totals for all items
+    // Initialize running totals
     uniqueItems.forEach((item) => {
       runningTotals[item.id] = 0;
     });
 
-    // Process each record in chronological order
+    // Process each order record chronologically
     inventoryHistory.forEach((record) => {
-      if (!record.items) return;
+      if (!record.items || record.items.length === 0) return;
 
       const dateKey = dayjs(record.transaction_date).format("YYYY-MM-DD");
 
@@ -116,57 +111,64 @@ function StockHistoryPage() {
           itemsWithChanges: {}, // Track only items that changed on this date
           hasChanges: false,
           orders: new Set(),
+          orderDetails: [], // Store complete order information
+          allItemTotals: {}, // Store running totals for ALL items on this date
         };
       }
 
       // Add order ID to the list of orders for this date
       dateGroups[dateKey].orders.add(record.order_id);
+      dateGroups[dateKey].orderDetails.push({
+        id: record.order_id,
+        type: record.order_type,
+        net_change: record.net_change,
+        items_changed: record.items_changed,
+      });
 
-      // Process each item in this record
+      // Check if this date has any changes
+      if (record.net_change !== 0) {
+        dateGroups[dateKey].hasChanges = true;
+      }
+
+      // Update running totals for items in this order
       record.items.forEach((item) => {
-        // Update running total
         runningTotals[item.id] = item.quantity;
 
-        // Store each item data for this date
-        if (item.change !== 0) {
-          // Only save items with changes in the "items with changes" collection
-          dateGroups[dateKey].itemsWithChanges[item.id] = {
-            quantity: item.quantity,
-            quantity_change: item.change,
-            hasChange: true,
-            order_type: record.order_type,
-            order_id: record.order_id,
-            name: item.name,
-            type: item.type,
-          };
-
-          // Mark this date as having changes
-          dateGroups[dateKey].hasChanges = true;
-        }
-
-        // Always update the full items collection with latest quantities
+        // Store each item's current quantity
         dateGroups[dateKey].items[item.id] = {
           quantity: item.quantity,
-          quantity_change: item.change,
-          hasChange: item.change !== 0,
+          quantity_change: 0,
+          hasChange: false,
           order_type: record.order_type,
           order_id: record.order_id,
           name: item.name,
           type: item.type,
         };
+
+        // If this item changed in this order, add to changes
+        if (item.change !== 0) {
+          // Create or update item in itemsWithChanges
+          if (!dateGroups[dateKey].itemsWithChanges[item.id]) {
+            dateGroups[dateKey].itemsWithChanges[item.id] = {
+              quantity: item.quantity,
+              quantity_change: item.change,
+              hasChange: true,
+              order_type: record.order_type,
+              order_id: record.order_id,
+              name: item.name,
+              type: item.type,
+            };
+          } else {
+            // Add this change to existing aggregate
+            dateGroups[dateKey].itemsWithChanges[item.id].quantity_change +=
+              item.change;
+          }
+        }
       });
 
-      // Add all known items with their current running totals
-      uniqueItems.forEach((uniqueItem) => {
-        if (!dateGroups[dateKey].items[uniqueItem.id]) {
-          dateGroups[dateKey].items[uniqueItem.id] = {
-            quantity: runningTotals[uniqueItem.id],
-            quantity_change: 0,
-            hasChange: false,
-            name: uniqueItem.name,
-            type: uniqueItem.type,
-          };
-        }
+      // Store current running totals for ALL items on this date
+      uniqueItems.forEach((item) => {
+        dateGroups[dateKey].allItemTotals[item.id] = runningTotals[item.id];
       });
     });
 
@@ -195,12 +197,18 @@ function StockHistoryPage() {
   // Get address name from the first record
   const addressName = inventoryHistory[0]?.address_name || "Unknown Address";
 
+  // Get the most recent record for current stock
+  const currentStock =
+    inventoryHistory.length > 0
+      ? inventoryHistory[inventoryHistory.length - 1]
+      : null;
+
   return (
     <div className="">
       <PageTitle title={`Inventory History: ${addressName}`} />
 
       <div className="overflow-x-auto">
-        <Table>
+        <Table className="bg-white">
           <TableCaption>
             Stock levels at each point when inventory changed
           </TableCaption>
@@ -221,22 +229,23 @@ function StockHistoryPage() {
           </TableHeader>
           <TableBody>
             {/* Current stock levels (most recent date) */}
-            {stockChangeTimeline.length > 0 && (
+            {currentStock && (
               <TableRow className="font-bold">
-                <TableCell className="left-0 z-10 sticky">
+                <TableCell className="left-0 z-10 sticky bg-white">
                   <div className="font-medium">Current</div>
                   <div className="text-gray-500 text-xs">
-                    {dayjs(stockChangeTimeline[0].date).format("DD MMM YYYY")}
+                    {dayjs(currentStock.transaction_date).format("DD MMM YYYY")}
                   </div>
                 </TableCell>
                 {uniqueItems.map((item) => {
-                  const itemData = stockChangeTimeline[0].items[item.id];
+                  // Use the proper running total from the most recent date
+                  const mostRecentDate = stockChangeTimeline[0];
+                  const quantity = mostRecentDate.allItemTotals[item.id] || 0;
+
                   return (
                     <TableCell key={item.id} className="text-right">
-                      <span
-                        className={itemData?.quantity < 0 ? "text-red-500" : ""}
-                      >
-                        {itemData?.quantity.toFixed(2)}
+                      <span className={quantity < 0 ? "text-red-500" : ""}>
+                        {quantity.toFixed(2)}
                       </span>
                     </TableCell>
                   );
@@ -248,50 +257,44 @@ function StockHistoryPage() {
             {stockChangeTimeline.map((dateData: any, index: number) => (
               <TableRow
                 key={dateData.formattedDate}
-                className={index === 0 ? "hidden" : ""}
+                className={index === 0 && currentStock ? "hidden" : ""}
               >
                 <TableCell className="left-0 z-10 sticky">
                   <div className="font-medium">{dateData.formattedDate}</div>
                   <div className="text-gray-500 text-xs">
-                    {dateData.orders.map((orderId) => {
-                      const v_orderRecord = inventoryHistory.find(
-                        (record) => record.order_id === orderId,
-                      );
-
-                      if (v_orderRecord?.order_type) {
-                        return (
-                          <Badge
-                            key={orderId}
-                            variant={getOrderTypeBadgeVariant(
-                              v_orderRecord.order_type,
-                            )}
-                            className="mr-1 px-1 py-0 text-[10px]"
-                          >
-                            {v_orderRecord.order_type}
-                            <span className="ml-1">#{orderId}</span>
-                          </Badge>
-                        );
-                      }
-                      return null;
-                    })}
+                    {dateData.orderDetails.map((order) => (
+                      <Badge
+                        key={order.id}
+                        variant={getOrderTypeBadgeVariant(order.type)}
+                        className="mr-1 px-1 py-0 text-[10px]"
+                      >
+                        {order.type}
+                        <span className="ml-1">#{order.id}</span>
+                      </Badge>
+                    ))}
                   </div>
                 </TableCell>
                 {uniqueItems.map((item) => {
-                  const itemData = dateData.items[item.id];
+                  // Always use the running total for this date for this item
+                  const quantity = dateData.allItemTotals[item.id] || 0;
                   const itemWithChange = dateData.itemsWithChanges?.[item.id];
 
                   return (
                     <TableCell key={item.id} className="text-right">
                       <div>
                         <span className="flex justify-end items-center">
-                          {itemData?.quantity < 0 && (
+                          {quantity < 0 && (
                             <AlertTriangle className="mr-1 w-4 h-4 text-red-500" />
                           )}
-                          <span>{itemData?.quantity.toFixed(2)}</span>
+                          <span>{quantity.toFixed(2)}</span>
                         </span>
                         {itemWithChange && (
                           <div
-                            className={`text-xs font-medium ${itemWithChange.quantity_change < 0 ? "text-red-500" : "text-green-500"}`}
+                            className={`text-xs font-medium ${
+                              itemWithChange.quantity_change < 0
+                                ? "text-red-500"
+                                : "text-green-500"
+                            }`}
                           >
                             {itemWithChange.quantity_change > 0 ? "+" : ""}
                             {itemWithChange.quantity_change.toFixed(2)}

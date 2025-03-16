@@ -3,7 +3,7 @@ DROP VIEW IF EXISTS inventory_history_by_location;
 
 DROP VIEW IF EXISTS inventory_history_by_address;
 
--- Create a simpler, more efficient view with JSON output
+-- Create a view that groups inventory history by order
 CREATE OR REPLACE VIEW inventory_history_by_location AS
 WITH item_changes_with_dates AS (
     -- Calculate the effective date for each item change
@@ -83,8 +83,8 @@ order_item_aggregates AS (
         icd.from_company_name,
         icd.to_company_name
 ),
--- Create a stable sequence number for items to calculate running balances
-ordered_items AS (
+-- Sequence each item change in chronological order
+ordered_changes AS (
     SELECT
         oia.*,
         ROW_NUMBER() OVER (PARTITION BY oia.address_id,
@@ -93,60 +93,57 @@ ordered_items AS (
     FROM
         order_item_aggregates oia
 ),
--- Calculate running balances based on the aggregated changes
-running_balances AS (
+-- Calculate running balances per item
+item_balances AS (
     SELECT
-        oi.*,
-        SUM(oi.total_change) OVER (PARTITION BY oi.address_id,
-            oi.item_id ORDER BY oi.change_seq ROWS UNBOUNDED PRECEDING) AS balance
+        oc.*,
+        SUM(oc.total_change) OVER (PARTITION BY oc.address_id,
+            oc.item_id ORDER BY oc.change_seq ROWS UNBOUNDED PRECEDING) AS balance
     FROM
-        ordered_items oi
+        ordered_changes oc
 ),
--- Create the order snapshots with combined item quantities
-order_snapshots AS (
+-- Group item balances by order, creating a record of all items for each order
+orders_with_items AS (
     SELECT
-        rb.order_id,
-        rb.address_id,
-        rb.address_name,
-        rb.effective_date,
-        rb.order_date,
-        rb.order_type,
-        rb.from_company_name,
-        rb.to_company_name,
-        -- Group items by order - include all items with non-zero quantity
-        jsonb_object_agg(rb.item_id::text, rb.balance) FILTER (WHERE rb.balance != 0) AS item_quantities,
-        -- Create a JSON array with all items for this order
-        jsonb_agg(jsonb_build_object('id', rb.item_id, 'name', rb.item_name, 'type', rb.item_type, 'quantity', rb.balance, 'change', rb.total_change)) FILTER (WHERE rb.balance != 0) AS items
+        ib.order_id,
+        MIN(ib.effective_date) AS effective_date,
+        MIN(ib.order_date) AS order_date,
+        MIN(ib.order_type) AS order_type,
+        MIN(ib.address_id) AS address_id,
+        MIN(ib.address_name) AS address_name,
+        MIN(ib.from_company_name) AS from_company_name,
+        MIN(ib.to_company_name) AS to_company_name,
+        -- Create a JSON array of all items in this order with their current balances
+        jsonb_agg(jsonb_build_object('id', ib.item_id, 'name', ib.item_name, 'type', ib.item_type, 'quantity', ib.balance, 'change', ib.total_change)) FILTER (WHERE ib.balance != 0) AS items,
+        -- Create a JSON object mapping item_id to quantity
+        jsonb_object_agg(ib.item_id::text, ib.balance) FILTER (WHERE ib.balance != 0) AS item_quantities,
+        -- Calculate total items affected by this order
+        COUNT(DISTINCT ib.item_id) FILTER (WHERE ib.total_change != 0) AS items_changed,
+        -- Net quantity change for the entire order (useful for sorting)
+        SUM(ib.total_change) AS net_change
     FROM
-        running_balances rb
+        item_balances ib
     GROUP BY
-        rb.order_id,
-        rb.address_id,
-        rb.address_name,
-        rb.effective_date,
-        rb.order_date,
-        rb.order_type,
-        rb.from_company_name,
-        rb.to_company_name
+        ib.order_id
 )
 SELECT
-    os.order_id,
-    os.address_id,
-    os.address_name,
-    os.effective_date AS transaction_date,
-    os.order_date,
-    os.order_type,
-    os.from_company_name AS from_company,
-    os.to_company_name AS to_company,
-    os.item_quantities,
-    os.items
+    o.order_id,
+    o.address_id,
+    o.address_name,
+    o.effective_date AS transaction_date,
+    o.order_date,
+    o.order_type,
+    o.from_company_name AS from_company,
+    o.to_company_name AS to_company,
+    o.items,
+    o.item_quantities,
+    o.items_changed,
+    o.net_change
 FROM
-    order_snapshots os
-WHERE
-    os.items IS NOT NULL
+    orders_with_items o
 ORDER BY
-    os.address_name,
-    os.effective_date;
+    o.address_name,
+    o.effective_date;
 
 -- Create a compatible view with the old name to avoid breaking existing code
 CREATE OR REPLACE VIEW inventory_history_by_address AS
@@ -156,12 +153,13 @@ FROM
     inventory_history_by_location;
 
 -- Add a comment explaining the view
-COMMENT ON VIEW inventory_history_by_location IS 'Shows inventory levels after each order.
-Each row represents one order with JSON columns containing the inventory state:
-- item_quantities: A simple object mapping item_id to quantity
-- items: An array of objects with detailed item information
-Only items with non-zero quantities are included.
-Multiple changes to the same item in a single order are totaled.';
+COMMENT ON VIEW inventory_history_by_location IS 'Shows inventory levels grouped by order.
+Each row represents one order with its complete inventory state:
+- items: A JSON array of all items with their current quantities after this order
+- item_quantities: A JSON object mapping item_id to quantity
+- items_changed: Count of items affected by this order
+- net_change: Total quantity change across all items in this order
+Only items with non-zero quantities are included.';
 
 -- Grant permissions for the views
 GRANT SELECT ON inventory_history_by_location TO anon, authenticated, service_role;
