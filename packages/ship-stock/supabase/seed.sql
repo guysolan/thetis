@@ -311,3 +311,525 @@ INSERT INTO contacts(name, email, phone, company_id, is_default)
 ('Sarah Johnson', 'sarah@thetismedical.com', '+44 7700 900099', 1, FALSE),
 ('Mike Williams', 'mike@mpd.com', '+44 7700 900066', 2, FALSE);
 
+-- Update delivery dates for all orders with values that make sense for each order type
+UPDATE
+    orders
+SET
+    delivery_dates = CASE
+    -- Purchase orders: 4-7 day window (longer lead time)
+    WHEN order_type = 'purchase' THEN
+        tstzrange(order_date + interval '1 day', order_date + interval '7 days' + time '12:00:00')
+        -- Sale orders: 2-3 day window (standard delivery)
+    WHEN order_type = 'sale' THEN
+        tstzrange(order_date + interval '1 day', order_date + interval '3 days' + time '18:00:00')
+        -- Shipment orders: 1-2 day window (internal transfers are quicker)
+    WHEN order_type = 'shipment' THEN
+        tstzrange(order_date + interval '6 hours', order_date + interval '2 days' + time '16:00:00')
+        -- Stocktake orders: same day (typically completed within hours)
+    WHEN order_type = 'stocktake' THEN
+        tstzrange(order_date, order_date + interval '8 hours')
+        -- Default: 3 day window for any other order types
+    ELSE
+        tstzrange(order_date + interval '1 day', order_date + interval '4 days')
+    END;
+
+-- Verify all orders now have delivery dates
+SELECT
+    order_type,
+    COUNT(*) AS order_count,
+    MIN(lower(delivery_dates) - order_date) AS min_start_delay,
+    MAX(lower(delivery_dates) - order_date) AS max_start_delay,
+    MIN(upper(delivery_dates) - lower(delivery_dates)) AS min_delivery_window,
+    MAX(upper(delivery_dates) - lower(delivery_dates)) AS max_delivery_window
+FROM
+    orders
+GROUP BY
+    order_type
+ORDER BY
+    order_type;
+
+-- Add more purchase orders for the same items
+INSERT INTO orders(order_type, order_date, delivery_dates, carriage, company_id, from_company_id, to_company_id, from_billing_address_id, from_shipping_address_id, to_billing_address_id, to_shipping_address_id)
+    VALUES ('purchase', '2023-05-10 09:30:00', tstzrange('2023-05-10 09:30:00', '2023-05-13 09:30:00'), 12.00, 1, 2, 1, 2, 2, 3, 1),
+('purchase', '2023-06-15 11:20:00', tstzrange('2023-06-15 11:20:00', '2023-06-18 11:20:00'), 15.00, 1, 2, 1, 2, 2, 3, 1),
+('purchase', '2023-10-01 10:00:00', tstzrange('2023-10-01 10:00:00', '2023-10-04 10:00:00'), 18.00, 1, 2, 1, 2, 2, 3, 1);
+
+-- Add more sales orders for the same items
+INSERT INTO orders(order_type, order_date, delivery_dates, carriage, company_id, from_company_id, to_company_id, from_billing_address_id, from_shipping_address_id, to_billing_address_id, to_shipping_address_id)
+    VALUES ('sale', '2023-07-05 14:15:00', tstzrange('2023-07-05 14:15:00', '2023-07-08 14:15:00'), 8.50, 1, 1, NULL, 3, 1, NULL, NULL),
+('sale', '2023-08-22 10:45:00', tstzrange('2023-08-22 10:45:00', '2023-08-25 10:45:00'), 9.00, 1, 1, NULL, 3, 1, NULL, NULL),
+('sale', '2023-11-10 13:30:00', tstzrange('2023-11-10 13:30:00', '2023-11-13 13:30:00'), 10.00, 1, 1, NULL, 3, 1, NULL, NULL);
+
+-- Add a stocktake order to adjust inventory
+INSERT INTO orders(order_type, order_date, delivery_dates, company_id, from_company_id, to_company_id, from_billing_address_id, from_shipping_address_id, to_billing_address_id, to_shipping_address_id)
+    VALUES ('stocktake', '2023-09-01 09:00:00', tstzrange('2023-09-01 09:00:00', '2023-09-01 09:00:00'), 1, 1, 1, 3, 1, 3, 1);
+
+-- Add more shipments between locations
+INSERT INTO orders(order_type, order_date, delivery_dates, carriage, company_id, from_company_id, to_company_id, from_billing_address_id, from_shipping_address_id, to_billing_address_id, to_shipping_address_id)
+    VALUES ('shipment', '2023-12-01 10:30:00', tstzrange('2023-12-01 10:30:00', '2023-12-03 10:30:00'), 18.00, 1, 1, 2, 3, 1, 2, 2);
+
+-- Item changes for the new purchase orders - adding more of the same parts
+-- Webbing for May order
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    100,
+    1
+FROM
+    items i
+WHERE
+    i.name = 'Webbing'
+    AND i.type = 'part';
+
+-- Elastic for May order
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    150,
+    1
+FROM
+    items i
+WHERE
+    i.name = 'Elastic'
+    AND i.type = 'part';
+
+-- Storage Bag for June order
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    75,
+    1
+FROM
+    items i
+WHERE
+    i.name = 'Storage Bag'
+    AND i.type = 'part';
+
+-- Instruction Leaflet for June order
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    250,
+    1
+FROM
+    items i
+WHERE
+    i.name = 'Instruction Leaflet'
+    AND i.type = 'part';
+
+-- Webbing for October order
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    200,
+    1
+FROM
+    items i
+WHERE
+    i.name = 'Webbing'
+    AND i.type = 'part';
+
+-- Elastic for October order
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    180,
+    1
+FROM
+    items i
+WHERE
+    i.name = 'Elastic'
+    AND i.type = 'part';
+
+-- Link item changes to purchase orders using proper JOIN syntax
+-- May 2023 - Webbing
+INSERT INTO order_item_changes(order_id, item_change_id, price, tax)
+SELECT
+    o.id,
+    ic.id,
+    40.00,
+    0.2
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 1
+        AND ic.quantity_change = 100
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Webbing'
+WHERE
+    o.order_date = '2023-05-10 09:30:00'
+    AND o.order_type = 'purchase'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
+-- May 2023 - Elastic
+INSERT INTO order_item_changes(order_id, item_change_id, price, tax)
+SELECT
+    o.id,
+    ic.id,
+    108.00,
+    0.2
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 1
+        AND ic.quantity_change = 150
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Elastic'
+WHERE
+    o.order_date = '2023-05-10 09:30:00'
+    AND o.order_type = 'purchase'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
+-- June 2023 - Storage Bag
+INSERT INTO order_item_changes(order_id, item_change_id, price, tax)
+SELECT
+    o.id,
+    ic.id,
+    83.25,
+    0.2
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 1
+        AND ic.quantity_change = 75
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Storage Bag'
+WHERE
+    o.order_date = '2023-06-15 11:20:00'
+    AND o.order_type = 'purchase'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
+-- June 2023 - Instruction Leaflet
+INSERT INTO order_item_changes(order_id, item_change_id, price, tax)
+SELECT
+    o.id,
+    ic.id,
+    50.00,
+    0.2
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 1
+        AND ic.quantity_change = 250
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Instruction Leaflet'
+WHERE
+    o.order_date = '2023-06-15 11:20:00'
+    AND o.order_type = 'purchase'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
+-- October 2023 - Webbing
+INSERT INTO order_item_changes(order_id, item_change_id, price, tax)
+SELECT
+    o.id,
+    ic.id,
+    80.00,
+    0.2
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 1
+        AND ic.quantity_change = 200
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Webbing'
+WHERE
+    o.order_date = '2023-10-01 10:00:00'
+    AND o.order_type = 'purchase'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
+-- October 2023 - Elastic
+INSERT INTO order_item_changes(order_id, item_change_id, price, tax)
+SELECT
+    o.id,
+    ic.id,
+    129.60,
+    0.2
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 1
+        AND ic.quantity_change = 180
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Elastic'
+WHERE
+    o.order_date = '2023-10-01 10:00:00'
+    AND o.order_type = 'purchase'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
+-- Item changes for sale orders
+-- July 2023 sales - Large Left
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    -15,
+    1
+FROM
+    items i
+WHERE
+    i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
+    AND i.type = 'product';
+
+-- Link to July 2023 sale order
+INSERT INTO order_item_changes(order_id, item_change_id, price, tax)
+SELECT
+    o.id,
+    ic.id,
+    1349.85,
+    0.2
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 1
+        AND ic.quantity_change = - 15
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Left'
+WHERE
+    o.order_date = '2023-07-05 14:15:00'
+    AND o.order_type = 'sale'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
+-- August 2023 sales - Large Right
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    -12,
+    1
+FROM
+    items i
+WHERE
+    i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
+    AND i.type = 'product';
+
+-- Link to August 2023 sale order
+INSERT INTO order_item_changes(order_id, item_change_id, price, tax)
+SELECT
+    o.id,
+    ic.id,
+    1079.88,
+    0.2
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 1
+        AND ic.quantity_change = - 12
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Achilles Tendon Rupture Night Splint in Bag - Large Right'
+WHERE
+    o.order_date = '2023-08-22 10:45:00'
+    AND o.order_type = 'sale'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
+-- November 2023 sales - Small Left
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    -20,
+    1
+FROM
+    items i
+WHERE
+    i.name = 'Achilles Tendon Rupture Night Splint in Box - Small Left'
+    AND i.type = 'product';
+
+-- Link to November 2023 sale order
+INSERT INTO order_item_changes(order_id, item_change_id, price, tax)
+SELECT
+    o.id,
+    ic.id,
+    1599.80,
+    0.2
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 1
+        AND ic.quantity_change = - 20
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Achilles Tendon Rupture Night Splint in Box - Small Left'
+WHERE
+    o.order_date = '2023-11-10 13:30:00'
+    AND o.order_type = 'sale'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
+-- Item changes for stocktake
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    -5,
+    1
+FROM
+    items i
+WHERE
+    i.name = 'Webbing'
+    AND i.type = 'part';
+
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    8,
+    1
+FROM
+    items i
+WHERE
+    i.name = 'Elastic'
+    AND i.type = 'part';
+
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    -3,
+    1
+FROM
+    items i
+WHERE
+    i.name = 'Storage Bag'
+    AND i.type = 'part';
+
+-- Link to stocktake order
+INSERT INTO order_item_changes(order_id, item_change_id)
+SELECT
+    o.id,
+    ic.id
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 1
+        AND ic.quantity_change = - 5
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Webbing'
+WHERE
+    o.order_date = '2023-09-01 09:00:00'
+    AND o.order_type = 'stocktake'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
+INSERT INTO order_item_changes(order_id, item_change_id)
+SELECT
+    o.id,
+    ic.id
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 1
+        AND ic.quantity_change = 8
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Elastic'
+WHERE
+    o.order_date = '2023-09-01 09:00:00'
+    AND o.order_type = 'stocktake'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
+INSERT INTO order_item_changes(order_id, item_change_id)
+SELECT
+    o.id,
+    ic.id
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 1
+        AND ic.quantity_change = - 3
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Storage Bag'
+WHERE
+    o.order_date = '2023-09-01 09:00:00'
+    AND o.order_type = 'stocktake'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
+-- Item changes for the final shipment
+-- Outgoing from Thetis
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    -25,
+    1
+FROM
+    items i
+WHERE
+    i.name = 'Achilles Tendon Rupture Night Splint in Box - Small Left'
+    AND i.type = 'product';
+
+-- Incoming to MPD
+INSERT INTO item_changes(item_id, quantity_change, address_id)
+SELECT
+    i.id,
+    25,
+    2
+FROM
+    items i
+WHERE
+    i.name = 'Achilles Tendon Rupture Night Splint in Box - Small Left'
+    AND i.type = 'product';
+
+-- Link to December 2023 shipment order
+INSERT INTO order_item_changes(order_id, item_change_id)
+SELECT
+    o.id,
+    ic.id
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 1
+        AND ic.quantity_change = - 25
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Achilles Tendon Rupture Night Splint in Box - Small Left'
+WHERE
+    o.order_date = '2023-12-01 10:30:00'
+    AND o.order_type = 'shipment'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
+INSERT INTO order_item_changes(order_id, item_change_id)
+SELECT
+    o.id,
+    ic.id
+FROM
+    orders o
+    JOIN item_changes ic ON ic.address_id = 2
+        AND ic.quantity_change = 25
+    JOIN items i ON ic.item_id = i.id
+        AND i.name = 'Achilles Tendon Rupture Night Splint in Box - Small Left'
+WHERE
+    o.order_date = '2023-12-01 10:30:00'
+    AND o.order_type = 'shipment'
+    AND ic.id NOT IN (
+        SELECT
+            item_change_id
+        FROM
+            order_item_changes);
+
