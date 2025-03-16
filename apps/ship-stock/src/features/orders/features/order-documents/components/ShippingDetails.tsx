@@ -47,7 +47,7 @@ const ShippingDetails: React.FC<ShippingDetails> = ({
   airwaybill,
 }) => (
   <div className="mt-6 p-4">
-    <h3 className="mb-4 font-bold text-gray-900 text-lg">Shipping Details</h3>
+    <h3 className="mb-4 font-bold text-lg">Shipping Details</h3>
     <div className="gap-4 grid grid-cols-2">
       <div className="space-y-3">
         <ShippingDetailItem
@@ -56,8 +56,7 @@ const ShippingDetails: React.FC<ShippingDetails> = ({
           value={reasonForExport}
         />
         <ShippingDetailItem
-          size={20}
-          icon={<Truck />}
+          icon={<Truck size={20} />}
           label="Mode of Transport"
           value={modeOfTransport}
         />

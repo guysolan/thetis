@@ -23,31 +23,37 @@ const PackageSummary = ({ items }: { items: OrderView["items"] }) => {
 
   return (
     <div className="mb-8">
-      <h3 className="mb-4 font-semibold">Package Summary</h3>
+      <h3 className="mb-4 font-semibold text-black">Package Summary</h3>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Package</TableHead>
-            <TableHead>Dimensions (cm)</TableHead>
-            <TableHead>Quantity</TableHead>
-            <TableHead>Weight (kg)</TableHead>
+            <TableHead className="text-black">Package</TableHead>
+            <TableHead className="text-black">Dimensions (cm)</TableHead>
+            <TableHead className="text-black">Quantity</TableHead>
+            <TableHead className="text-black">Weight (kg)</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {packageItems.map((item, index) => (
             <TableRow key={index}>
-              <TableCell>{item.item_name}</TableCell>
-              <TableCell>
+              <TableCell className="text-black">{item.item_name}</TableCell>
+              <TableCell className="text-black">
                 {item.height} x {item.width} x {item.depth}
               </TableCell>
-              <TableCell>{Math.abs(item.quantity)}</TableCell>
-              <TableCell>{item.weight}</TableCell>
+              <TableCell className="text-black">
+                {Math.abs(item.quantity)}
+              </TableCell>
+              <TableCell className="text-black">{item.weight}</TableCell>
             </TableRow>
           ))}
           <TableRow className="font-semibold">
-            <TableCell colSpan={2}>Total</TableCell>
-            <TableCell>{totalQuantity}</TableCell>
-            <TableCell>{totalWeight.toFixed(2)}</TableCell>
+            <TableCell className="text-black" colSpan={2}>
+              Total
+            </TableCell>
+            <TableCell className="text-black">{totalQuantity}</TableCell>
+            <TableCell className="text-black">
+              {totalWeight.toFixed(2)}
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>

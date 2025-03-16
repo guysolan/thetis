@@ -22,7 +22,7 @@ const DocumentControls = ({
 
   return (
     <>
-      <div className="top-4 right-4 fixed flex items-center gap-2 print:hidden">
+      <div className="print:hidden top-4 right-4 fixed flex items-center gap-2">
         {documentType && documentType !== "shippingLabel" && (
           <DocumentOptionsPopover documentType={documentType} />
         )}
@@ -38,6 +38,11 @@ const DocumentControls = ({
             body {
               -webkit-print-color-adjust: exact !important;
               print-color-adjust: exact !important;
+              color: black !important;
+            }
+            * {
+              color: black !important;
+              text-color: black !important;
             }
           }
         `}

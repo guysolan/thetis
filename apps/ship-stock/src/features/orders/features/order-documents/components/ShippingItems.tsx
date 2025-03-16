@@ -33,30 +33,34 @@ const ShippingItems = ({
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Description</TableHead>
-          <TableHead>SKU</TableHead>
-          <TableHead>Country of Origin</TableHead>
-          <TableHead>HS Code</TableHead>
-          <TableHead className="text-right">Quantity</TableHead>
-          <TableHead className="text-right">Unit Price</TableHead>
-          <TableHead className="text-right">Total</TableHead>
+          <TableHead className="text-black">Description</TableHead>
+          <TableHead className="text-black">SKU</TableHead>
+          <TableHead className="text-black">Country of Origin</TableHead>
+          <TableHead className="text-black">HS Code</TableHead>
+          <TableHead className="text-black text-right">Quantity</TableHead>
+          <TableHead className="text-black text-right">Unit Price</TableHead>
+          <TableHead className="text-black text-right">Total</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {invoiceItems.map((item, index) => (
           <TableRow key={index}>
-            <TableCell>{item.item_name}</TableCell>
-            <TableCell>{item.sku}</TableCell>
-            <TableCell>{item.country_of_origin}</TableCell>
-            <TableCell>{item.hs_code}</TableCell>
-            <TableCell className="text-right">{item.quantity}</TableCell>
-            <TableCell className="text-right">
+            <TableCell className="text-black">{item.item_name}</TableCell>
+            <TableCell className="text-black">{item.sku}</TableCell>
+            <TableCell className="text-black">
+              {item.country_of_origin}
+            </TableCell>
+            <TableCell className="text-black">{item.hs_code}</TableCell>
+            <TableCell className="text-black text-right">
+              {item.quantity}
+            </TableCell>
+            <TableCell className="text-black text-right">
               <NumberFlow
                 value={item.item_price ?? 0}
                 format={{ style: "currency", currency: currency }}
               />
             </TableCell>
-            <TableCell className="text-right">
+            <TableCell className="text-black text-right">
               <NumberFlow
                 value={item.quantity * (item.item_price ?? 0)}
                 format={{ style: "currency", currency: currency }}
@@ -65,9 +69,9 @@ const ShippingItems = ({
           </TableRow>
         ))}
         <TableRow className="font-semibold">
-          <TableCell>Total</TableCell>
+          <TableCell className="text-black">Total</TableCell>
           <TableCell colSpan={5} />
-          <TableCell className="text-right">
+          <TableCell className="text-black text-right">
             <NumberFlow
               value={invoiceItems.reduce(
                 (sum, item) => sum + item.quantity * (item.item_price ?? 0),
