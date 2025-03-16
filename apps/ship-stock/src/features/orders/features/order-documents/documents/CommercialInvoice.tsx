@@ -72,7 +72,7 @@ const CommercialInvoice = ({
 
       {options.showFDA && <FDADetails />}
 
-      {options.showExchangeRates && <ExchangeRates />}
+      {options.showExchangeRates && <ExchangeRates date={order.order_date} />}
 
       {options.showSignature && <Signature />}
     </>
