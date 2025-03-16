@@ -99,6 +99,9 @@ export const processMultiOrderFormData = (formData: MultiOrderFormData) => {
     if (formData.order_type === "shipment") {
         itemChanges = processShipmentFormData(formData);
     }
+    if (formData.order_type === "stocktake") {
+        return formData;
+    }
     console.log(itemChanges);
     const processedData = formatCreateOrderArguments(itemChanges, formData);
     console.log(processedData);

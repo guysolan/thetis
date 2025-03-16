@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { itemTypes } from "../../../items/types";
 
-import { currencyKeys } from '../../../../constants/currencies';
+import { currencyKeys } from "../../../../constants/currencies";
 // Add new package-related schemas
 const packageItemSchema = z.object({
     item_id: z.string().min(1, "Please select an item"),
@@ -15,7 +15,7 @@ const packageOrderItemSchema = z.object({
     package_id: z.string().min(1, "Package is required"),
     package_quantity: z.coerce.number().min(1, "Quantity must be at least 1"),
     package_items: z.array(packageItemSchema)
-        .min(1, "Package must contain at least one item")
+        .min(1, "Package must contain at least one item"),
 });
 
 export type PackageOrderItems = z.infer<typeof packageOrderItemSchema>;
@@ -28,7 +28,7 @@ const baseItemSchema = z.object({
 });
 
 const pricedItemSchema = baseItemSchema.extend({
-    item_id:  z.coerce.number(),
+    item_id: z.coerce.number(),
     item_price: z.coerce.number().optional(),
     item_tax: z.coerce.number().optional(),
     item_total: z.coerce.number().optional(),
@@ -47,7 +47,7 @@ const baseOrderItemSchema = baseItemSchema.extend({
 export const orderItemSchema = z.discriminatedUnion("item_type", [
     baseOrderItemSchema.extend({ item_type: z.literal("product") }),
     baseOrderItemSchema.extend({ item_type: z.literal("part") }),
-    packageOrderItemSchema
+    packageOrderItemSchema,
 ]);
 
 export const orderItemsSchema = z.object({
@@ -76,11 +76,16 @@ const baseAddressSchema = z.object({
 
 const baseOrderSchema = z.object({
     order_date: z.date(),
-    order_items: z.array(orderItemSchema).min(1, "At least one item is required"),
+    order_items: z.array(orderItemSchema).min(
+        1,
+        "At least one item is required",
+    ),
     currency: z.enum(currencyKeys as [string, ...string[]], {
-        errorMap: () => ({ message: "Please select a valid currency" })
+        errorMap: () => ({ message: "Please select a valid currency" }),
     }).default("GBP"),
-    carriage: z.coerce.number().min(0, "Carriage must be 0 or greater").default(0),
+    carriage: z.coerce.number().min(0, "Carriage must be 0 or greater").default(
+        0,
+    ),
 });
 
 // Base form schema combining address and order schemas
@@ -107,11 +112,10 @@ export const buyFormSchema = baseFormSchema.extend({
     consumed_items: z.array(pricedItemSchema),
     order_items: z.array(pricedItemSchema),
     item_type: z.enum(["product", "part"]),
-
 });
 
 export const stockTakeFormSchema = z.object({
-    address_id: z.coerce.number(),
+    to_shipping_address_id: z.coerce.number(),
     order_type: z.literal("stocktake"),
     order_items: z.array(stockTakeItemSchema),
     order_date: z.date(),
@@ -128,6 +132,3 @@ export type OrderItemChange = {
     in_item_tax: number;
     in_address_id: string;
 };
-
-
-

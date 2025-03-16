@@ -1,4 +1,5 @@
-import { Currency } from '../../../../../constants/currencies';
+import dayjs from "dayjs";
+import { Currency } from "../../../../../constants/currencies";
 import { ItemType } from "../types";
 export type FormatOrderItemChanges = {
     item_id: string;
@@ -31,7 +32,8 @@ export const formatCreateOrderArguments = (
 ): CreateOrderType => {
     return {
         in_order_type: formData.order_type,
-        in_order_date: formData.order_date.toISOString(),
+        in_order_date: formData.order_date?.toISOString() ??
+            dayjs().toISOString(),
         in_order_items: orderItems,
         in_from_company_id: formData.from_company_id ?? null,
         in_from_billing_address_id: formData.from_billing_address_id ?? null,

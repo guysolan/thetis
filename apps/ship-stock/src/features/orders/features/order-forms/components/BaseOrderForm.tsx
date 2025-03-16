@@ -48,8 +48,6 @@ export function BaseOrderForm<T extends z.ZodType>({
     }
   };
 
-  console.log(form.getValues());
-
   return (
     <Form {...form}>
       <form

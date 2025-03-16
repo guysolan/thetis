@@ -11,7 +11,9 @@ import { MultiOrderFormData } from "../features/multi-order-form/schema";
 import { processMultiOrderFormData } from "../features/multi-order-form/utils";
 
 const createOrder = async (formData: MultiOrderFormData) => {
-	const orderData = processMultiOrderFormData(formData);
+	const orderData = formData.order_type === "stocktake"
+		? formData
+		: processMultiOrderFormData(formData);
 
 	const { data: result, error } = await supabase.rpc(
 		"insert_order",
@@ -33,7 +35,8 @@ export const useCreateOrder = (orderType: OrderType) => {
 			// @ts-ignore
 			mutation?.onSuccess && mutation.onSuccess();
 		},
-		onError: () => {
+		onError: (error) => {
+			console.error(error);
 			toast.error("Error creating order");
 		},
 		onSettled: () => {

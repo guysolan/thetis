@@ -40,7 +40,7 @@ interface InventoryHistoryRecord {
 // Function to fetch inventory history data from the location view
 const fetchInventoryHistory = async (addressId: string) => {
   const { data, error } = await supabase
-    .from("inventory_history_by_location")
+    .from("inventory_history_by_address")
     .select("*")
     .eq("address_id", addressId)
     .order("transaction_date", { ascending: true }); // Ascending for chronological processing
@@ -109,10 +109,11 @@ function StockHistoryPage() {
           formattedDate: dayjs(record.transaction_date).format("DD MMM YYYY"),
           items: {},
           itemsWithChanges: {}, // Track only items that changed on this date
-          hasChanges: false,
           orders: new Set(),
           orderDetails: [], // Store complete order information
           allItemTotals: {}, // Store running totals for ALL items on this date
+          // Track if any order on this date has items_changed > 0
+          hasItemsChanged: false,
         };
       }
 
@@ -125,9 +126,9 @@ function StockHistoryPage() {
         items_changed: record.items_changed,
       });
 
-      // Check if this date has any changes
-      if (record.net_change !== 0) {
-        dateGroups[dateKey].hasChanges = true;
+      // Track if any order on this date has items that changed
+      if (record.items_changed > 0) {
+        dateGroups[dateKey].hasItemsChanged = true;
       }
 
       // Update running totals for items in this order
@@ -183,7 +184,7 @@ function StockHistoryPage() {
 
   // Filter timeline to only show dates with actual stock changes
   const stockChangeTimeline = React.useMemo(() => {
-    return timelineData.filter((dateData: any) => dateData.hasChanges);
+    return timelineData.filter((dateData: any) => dateData.hasItemsChanged);
   }, [timelineData]);
 
   if (!inventoryHistory || inventoryHistory.length === 0) {
@@ -214,7 +215,7 @@ function StockHistoryPage() {
           </TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="left-0 z-10 sticky w-[150px]">
+              <TableHead className="left-0 z-10 sticky bg-white border-neutral-300 border-r w-[150px]">
                 Date
               </TableHead>
               {uniqueItems.map((item) => (
@@ -231,7 +232,7 @@ function StockHistoryPage() {
             {/* Current stock levels (most recent date) */}
             {currentStock && (
               <TableRow className="font-bold">
-                <TableCell className="left-0 z-10 sticky bg-white">
+                <TableCell className="left-0 z-10 sticky bg-white border-neutral-300 border-r">
                   <div className="font-medium">Current</div>
                   <div className="text-gray-500 text-xs">
                     {dayjs(currentStock.transaction_date).format("DD MMM YYYY")}
@@ -255,11 +256,8 @@ function StockHistoryPage() {
 
             {/* Historical stock levels at each change point */}
             {stockChangeTimeline.map((dateData: any, index: number) => (
-              <TableRow
-                key={dateData.formattedDate}
-                className={index === 0 && currentStock ? "hidden" : ""}
-              >
-                <TableCell className="left-0 z-10 sticky">
+              <TableRow key={dateData.formattedDate}>
+                <TableCell className="left-0 z-10 sticky bg-white border-neutral-300 border-r">
                   <div className="font-medium">{dateData.formattedDate}</div>
                   <div className="text-gray-500 text-xs">
                     {dateData.orderDetails.map((order) => (

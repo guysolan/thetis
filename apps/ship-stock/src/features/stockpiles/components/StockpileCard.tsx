@@ -68,12 +68,10 @@ const StockpileCard = ({ stockpile }: Props) => {
             addressId={String(stockpile.stockpile_id)}
           />
         ) : (
-          <span className="cursor-pointer" onClick={toggleIsEditing}>
-            <ItemsMiniTable items={stockpile?.items} />
-          </span>
+          <ItemsMiniTable items={stockpile?.items} />
         )}
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex flex-row justify-between items-center gap-4">
         {isEditing && (
           <Button variant="outline" onClick={() => setIsEditing(false)}>
             Cancel
@@ -81,7 +79,7 @@ const StockpileCard = ({ stockpile }: Props) => {
         )}
         <Button variant="outline" asChild>
           <Link
-            params={{ addressId: stockpile?.stockpile_id }}
+            params={{ addressId: String(stockpile?.stockpile_id) }}
             to="/home/stock/history/$addressId"
           >
             To Stock History
