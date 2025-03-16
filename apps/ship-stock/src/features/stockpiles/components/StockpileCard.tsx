@@ -82,7 +82,7 @@ const StockpileCard = ({ stockpile }: Props) => {
         <Button variant="outline" asChild>
           <Link
             params={{ addressId: stockpile?.stockpile_id }}
-            to="/stock/history/$addressId"
+            to="/home/stock/history/$addressId"
           >
             To Stock History
           </Link>
