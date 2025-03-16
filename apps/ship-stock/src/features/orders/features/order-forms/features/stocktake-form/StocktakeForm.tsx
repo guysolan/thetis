@@ -20,6 +20,7 @@ const StocktakeForm = ({
 }: Props) => {
   const { mutate: createOrder } = useCreateStocktakeOrder();
   const defaultValues = {
+    order_id: null,
     order_items: orderItems || [
       {
         item_type: "product",
