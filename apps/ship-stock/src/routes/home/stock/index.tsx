@@ -19,15 +19,6 @@ const ItemsPage = () => {
               <TabsTrigger value="amazon">Amazon</TabsTrigger>
             </>
           }
-          actionButtons={
-            <Sheet
-              trigger={<Button>New Stocktake</Button>}
-              title="New Stocktake"
-              description="Update the stock at one of your addresses."
-            >
-              <StocktakeForm />
-            </Sheet>
-          }
         />
         <TabsContent value="stockpiles">
           <Stockpiles />
