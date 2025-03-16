@@ -205,21 +205,24 @@ function StockHistoryPage() {
       : null;
 
   return (
-    <div className="">
+    <div className="mx-auto">
       <PageTitle title={`Inventory History: ${addressName}`} />
 
-      <div className="overflow-x-auto">
+      <div className="shadow-sm mb-8 border rounded-lg overflow-x-auto">
         <Table className="bg-white">
-          <TableCaption>
+          <TableCaption className="py-3">
             Stock levels at each point when inventory changed
           </TableCaption>
           <TableHeader>
-            <TableRow>
-              <TableHead className="left-0 z-10 sticky bg-white border-neutral-300 border-r w-[150px]">
-                Date
+            <TableRow className="border-b-2">
+              <TableHead className="left-0 z-10 sticky bg-white p-4 border-neutral-300 border-r w-[150px]">
+                <span className="sr-only">Date</span>
               </TableHead>
               {uniqueItems.map((item) => (
-                <TableHead key={item.id} className="min-w-[120px] text-right">
+                <TableHead
+                  key={item.id}
+                  className="p-4 min-w-[120px] text-right"
+                >
                   {item.name}
                   <div className="font-normal text-gray-500 text-xs capitalize">
                     {item.type}
@@ -231,8 +234,8 @@ function StockHistoryPage() {
           <TableBody>
             {/* Current stock levels (most recent date) */}
             {currentStock && (
-              <TableRow className="font-bold">
-                <TableCell className="left-0 z-10 sticky bg-white border-neutral-300 border-r">
+              <TableRow className="hover:bg-gray-50 font-bold">
+                <TableCell className="left-0 z-10 sticky bg-white p-4 border-neutral-300 border-r">
                   <div className="font-medium">Current</div>
                   <div className="text-gray-500 text-xs">
                     {dayjs(currentStock.transaction_date).format("DD MMM YYYY")}
