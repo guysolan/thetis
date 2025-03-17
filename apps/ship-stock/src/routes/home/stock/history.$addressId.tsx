@@ -346,7 +346,7 @@ const StockHistoryTable: React.FC<{
                 return (
                   <TableCell key={item.id} className="p-4 text-right">
                     <span className={quantity < 0 ? "text-red-500" : ""}>
-                      {quantity.toFixed(2)}
+                      {Math.round(quantity)}
                     </span>
                   </TableCell>
                 );
@@ -384,7 +384,7 @@ const StockHistoryTable: React.FC<{
                         {quantity < 0 && (
                           <AlertTriangle className="mr-1 w-4 h-4 text-red-500" />
                         )}
-                        <span>{quantity.toFixed(2)}</span>
+                        <span>{Math.round(quantity)}</span>
                       </span>
                       {itemWithChange && (
                         <div
@@ -395,7 +395,7 @@ const StockHistoryTable: React.FC<{
                           }`}
                         >
                           {itemWithChange.quantity_change > 0 ? "+" : ""}
-                          {itemWithChange.quantity_change.toFixed(2)}
+                          {Math.round(itemWithChange.quantity_change)}
                         </div>
                       )}
                     </div>
