@@ -14,7 +14,7 @@
     "react-email": "3.0.7"
   },
   "dependencies": {
-    "@react-email/components": "0.0.33",
+    "@react-email/components": "0.0.34",
     "@react-email/img": "0.0.11",
     "@react-email/tailwind": "1.0.4",
     "lucide-react": "^0.482.0",

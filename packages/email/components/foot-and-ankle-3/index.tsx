@@ -75,9 +75,9 @@ export const FootAndAnkle3 = ({ quote, author, title }: Props) => {
 
         <MoreSurgeonReviewsButton />
 
-        <Footer align="center" />
+        <Footer />
 
-        <Unsubscribe align="center" />
+        <Unsubscribe />
       </Html>
     </Tailwind>
   );
