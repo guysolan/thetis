@@ -1,13 +1,13 @@
 import React from "react";
-import { Heading, Html, Img, Link, Section } from "@react-email/components";
+import { Heading, Html, Section } from "@react-email/components";
 import Tailwind from "../tailwind";
-import HighlightedSpan from "../highlighted-span";
 import Unsubscribe from "../unsubscribe";
 import Footer from "../footer";
 import Head from "../head";
 import InBedImage from "./in-bed-image";
 import SeeTheProductButton from "./night-splint-button";
 import FootAndAnkleBullets from "./foot-and-ankle-bullets";
+import WantItForYourPatients from "../want-it-for-your-patients";
 
 interface Props {
   heading1: React.ReactNode;
@@ -38,12 +38,16 @@ export const FootAndAnkle2 = ({ heading1, heading2 }: Props) => {
         </Section>
 
         <InBedImage />
+
         <FootAndAnkleBullets />
+
         <SeeTheProductButton />
 
-        <Footer align="center" />
+        <WantItForYourPatients />
 
-        <Unsubscribe align="center" />
+        <Footer />
+
+        <Unsubscribe />
       </Html>
     </Tailwind>
   );

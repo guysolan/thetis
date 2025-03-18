@@ -1,0 +1,35 @@
+---
+import HighlightedWord from "../../HighlightedWord";
+import { Image } from "astro:assets";
+import nightSplint from "@/components/products/images/night-splint/night_splint_bed_top_square.jpg";
+---
+
+<div
+    class="flex md:flex-row flex-col gap-8 bg-primary/10 mx-auto my-8 mt-24 px-8 py-8 rounded-md max-w-4xl text-center"
+>
+    <Image
+        height={500}
+        width={500}
+        class="relative shadow-lg group-hover:shadow-xl rounded-lg w-full max-w-[350px] h-full max-h-[100vw] object-cover group-hover:scale-[102%] transition-all duration-300 30vw, 400px)]"
+        src={nightSplint}
+        alt="Night Splint Render"
+    />
+    <div class="space-y-4 md:space-y-8 w-full text-left">
+        <h2
+            class="mx-w-4xl font-semibold text-gray-900 text-2xl md:text-3xl leading-[120%]"
+        >
+            Give your <HighlightedWord>Achilles patients</HighlightedWord> the comfort
+            they deserve
+        </h2>
+        <p class="mx-auto max-w-3xl text-gray-700 text-lg">
+            Improve recovery outcomes and increase patient satisfaction with the
+            only specialized night splint for Achilles tendon ruptures.
+        </p>
+        <a
+            href="/order-wholesale"
+            class="inline-block bg-primary px-4 py-2 rounded font-semibold text-white"
+        >
+            Order for Your Clinic
+        </a>
+    </div>
+</div>

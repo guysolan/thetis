@@ -8,7 +8,7 @@ import Head from "../head";
 import InBedImage from "../in-bed-image";
 import SimplyBrilliant from "./simply-brilliant";
 import LearnMoreButton from "./learn-more-button";
-import WantItForYourPatients from "./want-it-for-your-patients";
+import WantItForYourPatients from "../want-it-for-your-patients";
 
 interface Props {
   heading1: React.ReactNode;
@@ -52,9 +52,9 @@ export const FootAndAnkle1 = ({ heading1, heading2 }: Props) => {
 
           <WantItForYourPatients />
 
-          <Footer align="center" />
+          <Footer />
 
-          <Unsubscribe align="center" />
+          <Unsubscribe />
         </Body>
       </Html>
     </Tailwind>

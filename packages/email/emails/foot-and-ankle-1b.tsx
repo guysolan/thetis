@@ -1,5 +1,5 @@
 import * as React from "react";
-import HighlightedSpan from "../components/highlighted-span";
+import HighlightedSpan from "../components/highlighted-span.tsx";
 import { FootAndAnkle1 } from "../components/foot-and-ankle-1/index.tsx";
 
 export const MyEmail = ({ recipientName = "" }) => {
@@ -7,16 +7,15 @@ export const MyEmail = ({ recipientName = "" }) => {
     <FootAndAnkle1
       heading1={
         <>
-          {recipientName ? `${recipientName}, introducing` : "Introducing"} a
-          Revolutionary
-          <HighlightedSpan>Night Splint</HighlightedSpan> for{" "}
-          <HighlightedSpan>Achilles Rupture</HighlightedSpan>
+          <HighlightedSpan>80%</HighlightedSpan> of{" "}
+          <HighlightedSpan>Achilles Rupture</HighlightedSpan> patients: "I can't
+          sleep in this 🤬 boot!"
         </>
       }
       heading2={
         <>
-          Finally, a <HighlightedSpan>Comfortable Solution</HighlightedSpan> for
-          Achilles Tendon Recovery
+          Introducing a splint for <HighlightedSpan>Happier</HighlightedSpan>{" "}
+          Achilles Rupture <HighlightedSpan>Patients</HighlightedSpan>
         </>
       }
     />

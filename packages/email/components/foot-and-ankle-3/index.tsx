@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Heading,
-  Html,
-  Section,
-  Button,
-  Link,
-  Img,
-} from "@react-email/components";
+import { Heading, Html, Section, Img } from "@react-email/components";
 import Tailwind from "../tailwind";
 import HighlightedSpan from "../highlighted-span";
 import Unsubscribe from "../unsubscribe";
@@ -31,27 +24,51 @@ export const FootAndAnkle3 = ({ quote, author, title }: Props) => {
       >
         <Head />
 
-        <Heading
-          as="h1"
-          className="text-gray-900 text-3xl lg:text-4xl text-center"
-        >
-          A New <HighlightedSpan>Favorite</HighlightedSpan> with{" "}
-          <HighlightedSpan>Foot and Ankle</HighlightedSpan>Surgeons
-        </Heading>
-        {/* Quote Section */}
-        <Section className="px-8 py-10">
-          <div className="relative mx-auto pl-6 border-gray-300 border-l-4 max-w-2xl">
-            <span className="-top-2 -left-3 absolute font-serif text-gray-300 text-7xl">
-              "
-            </span>
-            <blockquote className="mb-4 font-serif text-gray-900 text-2xl lg:text-3xl leading-relaxed">
-              {quote}
+        <Section className="px-6 py-4">
+          <Heading
+            as="h1"
+            className="mb-2 font-bold text-gray-900 text-3xl lg:text-4xl text-center"
+            style={{ marginBottom: "12px" }}
+          >
+            A New <HighlightedSpan>Favorite</HighlightedSpan> with{" "}
+            <HighlightedSpan>Foot and Ankle</HighlightedSpan> Surgeons 👨‍⚕️
+          </Heading>
+
+          <Heading
+            as="h2"
+            className="mb-6 font-medium text-gray-700 text-xl text-center"
+            style={{ marginBottom: "24px" }}
+          >
+            The innovative night splint transforming patient recovery
+          </Heading>
+        </Section>
+
+        {/* Quote Section - Redesigned to be more professional */}
+        <Section className="mb-6 px-6">
+          <div
+            className="bg-gray-50 mx-auto p-6 pt-2 text-center"
+            style={{
+              backgroundColor: "#f9fafb",
+              padding: "24px",
+              borderLeft: "4px solid #059669",
+            }}
+          >
+            <blockquote
+              className="mx-0 mb-4 font-medium text-gray-700 text-xl italic"
+              style={{
+                marginBottom: "16px",
+                fontStyle: "italic",
+                lineHeight: "1.6",
+              }}
+            >
+              "{quote}"
             </blockquote>
-            <div className="mt-6">
-              <Heading as="h2" className="font-medium text-gray-800 text-xl">
-                — {author}
-              </Heading>
-              <p className="mt-1 text-gray-600">{title}</p>
+
+            <div className="bg-emerald-600 mx-auto w-1/2 h-0.5" />
+
+            <div className="flex flex-col items-center">
+              <p className="mb-0 font-bold text-gray-900 text-lg">{author}</p>
+              <p className="mt-0 pt-2 text-emerald-800 text-sm">{title}</p>
             </div>
           </div>
         </Section>

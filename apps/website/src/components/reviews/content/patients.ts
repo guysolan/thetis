@@ -27,7 +27,7 @@ export const patients: Review[] = [
     country: "US",
     title: "An essential and wonderful device",
     body:
-      "The Night Splint should be a Dr recommended accessory at the time a boot is prescribed to be worn for 24 hours a day. On my first day, after 15 minutes in bed with 'the boot'', I began looking online for suggestions and options. I quickly found the Thetis Medical, Night Splint with excellent reviews. I contacted my orthopedist n the morning and received approval to using the splint for sleeping, The splint arrived a day or two later and proved its worth that night, and for the following months as a viable sleeping splint. Thank you.",
+      "The Night Splint should be a Dr recommended accessory at the time a boot is prescribed. On my first day, after 15 minutes in bed with 'the boot'', I began looking online for suggestions and options. I quickly found the Thetis Medical, Night Splint with excellent reviews. I contacted my orthopedist n the morning and received approval to using the splint for sleeping, The splint arrived a day or two later and proved its worth that night, and for the following months as a viable sleeping splint. Thank you.",
   },
   {
     date: "2025-02-09",
