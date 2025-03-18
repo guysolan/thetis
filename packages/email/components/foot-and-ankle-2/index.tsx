@@ -12,9 +12,10 @@ import WantItForYourPatients from "../want-it-for-your-patients";
 interface Props {
   heading1: React.ReactNode;
   heading2: React.ReactNode;
+  button?: React.ReactNode;
 }
 
-export const FootAndAnkle2 = ({ heading1, heading2 }: Props) => {
+export const FootAndAnkle2 = ({ heading1, heading2, button }: Props) => {
   return (
     <Tailwind>
       <Html
@@ -41,7 +42,7 @@ export const FootAndAnkle2 = ({ heading1, heading2 }: Props) => {
 
         <FootAndAnkleBullets />
 
-        <SeeTheProductButton />
+        {button ? button : <SeeTheProductButton />}
 
         <WantItForYourPatients />
 
