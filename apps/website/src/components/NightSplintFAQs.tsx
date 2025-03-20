@@ -41,6 +41,11 @@ const faqs = [
         answer:
           "No, the splint is only used after rupture of the Achilles tendon. It is not suitable for broken bones, plantar fasciitis or Achilles tendonitis. The splint holds the foot pointed downwards, in a tip toe position, for tendon healing. For other conditions, like plantar fasciitis and Achilles tendonitis, there are different splints deliberately designed to do the opposite, and hold the foot up.",
       },
+      {
+        question: "Can I get the splint wet (shower/swimming)?",
+        answer:
+          "The splint can tolerate occasional exposure to water, but it's not specifically designed for wet environments. Extended water exposure may cause deterioration of the soft parts over time. If showering, we recommend using a chair or stool to sit safely, as wet surfaces increase slip hazards. For swimming, the splint can be worn but should be thoroughly dried afterward. Obviously, don't wear the splint for too long when wet to avoid skin laceration. Remember that your safety is paramount - never attempt standing or walking while wearing the splint, especially on wet surfaces.",
+      },
     ],
   },
   {
@@ -76,6 +81,11 @@ const faqs = [
         question: "How does this compare to wearing a boot at night?",
         answer:
           "The night splint is designed to complement your boot treatment, not replace it entirely. It offers several advantages for nighttime use: it's significantly lighter, more breathable, and more hygienic since it's specifically designed for indoor use. Think of it as wearing a specialized night brace rather than sleeping in outdoor footwear.",
+      },
+      {
+        question: "Is some side-to-side movement in the splint normal?",
+        answer:
+          "Yes, a small amount of side-to-side movement is normal and will not harm your recovery or cause rerupture. The splint's main purpose is to maintain the correct angle of your foot (plantar flexion), which is essential for proper Achilles tendon healing. Some lateral movement is expected and safe. Most importantly, the splint prevents your foot from dorsiflexing (bending upward), which would place harmful stress on the healing tendon.",
       },
     ],
   },
