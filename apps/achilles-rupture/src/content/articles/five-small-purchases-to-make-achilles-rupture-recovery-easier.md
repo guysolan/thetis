@@ -41,7 +41,6 @@ Keeping your boot clean and dry is essential for hygiene and comfort:
 * Waterproof material keeps your cast completely dry
 * Reusable and easy to clean
 * Secure fit prevents water seepage
-* Also useful for outdoor use in wet weather
 
 [Choose Your Waterproof Protector](https://limboproducts.co.uk/configurator/)
 
@@ -51,7 +50,7 @@ A high-quality merino wool sock can make a huge difference inside your boot:
 
 * Naturally moisture-wicking to keep your foot dry
 * Temperature regulating for all-day comfort
-* Antimicrobial properties reduce odor
+* Antimicrobial properties reduce odour
 * Soft and non-irritating for extended wear
 * Thin enough to fit comfortably in your boot
 

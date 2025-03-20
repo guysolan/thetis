@@ -29,3 +29,8 @@ const Signature = () => {
 };
 
 export default Signature;
+
+
+<p>Guy Solan</p><br/>
+<b>Founder</b><br/>
+<a href="mailto:guy@thetismedical.com">guy@thetismedical.com</a>
