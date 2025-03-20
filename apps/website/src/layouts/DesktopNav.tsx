@@ -12,13 +12,13 @@ import * as React from "react";
 
 import { Badge } from "../components/ui/badge";
 import { articles } from "../content/articles.tsx";
-import { buttonVariants } from "../components/ui/button";
+import { Button, buttonVariants } from "../components/ui/button";
 ("use client");
 
 const contentWidth = "min-w-[min(50vw,700px)]";
 
-import { partnerLinks, productLinks, contactLinks } from "../content/pages.tsx";
-import { Star } from "lucide-react";
+import { partnerLinks, contactLinks } from "../content/pages.tsx";
+import { ArrowRight, Star } from "lucide-react";
 
 function DesktopNav() {
   return (
@@ -26,19 +26,18 @@ function DesktopNav() {
       <NavigationMenu>
         <NavigationMenuList className={cn("justify-end", contentWidth)}>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Products</NavigationMenuTrigger>
-            <NavigationMenuContent
-              className={cn("flex flex-row gap-6 p-6", contentWidth)}
-            >
-              {productLinks.map((product) => (
-                <ProductCard
-                  key={product.href}
-                  title={product.title}
-                  description={product.description}
-                  imageUrl={product.image as ImageMetadata}
-                  href={product.href}
-                />
-              ))}
+            <NavigationMenuTrigger>Our Product</NavigationMenuTrigger>
+            <NavigationMenuContent className={cn("p-6", contentWidth)}>
+              <ProductLink
+                title="Achilles Tendon Rupture Splint"
+                description="Improve recovery time and comfort after Achilles tendon rupture"
+                imageSrc="/images/night_splint_square_small.jpg"
+                imageAlt="Achilles Tendon Rupture Splint"
+                reviewCount={184}
+                productUrl="/night-splint"
+                buyUrl="/buy-now"
+                wholesaleUrl="/wholesale"
+              />
             </NavigationMenuContent>
           </NavigationMenuItem>
 
@@ -97,15 +96,6 @@ function DesktopNav() {
                 </div>
               </div>
             </NavigationMenuContent>
-          </NavigationMenuItem>
-
-          <NavigationMenuItem>
-            <a href="/reviews">
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Reviews
-                <Star size={12} className="flex-shrink-0 ml-1" />
-              </NavigationMenuLink>
-            </a>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
@@ -212,10 +202,10 @@ const ProductCard = React.forwardRef<
 
         {/* Content */}
         <div className="relative">
-          <div className="group-hover:text-white mb-2 font-medium text-white/90 text-xl group-hover:underline underline-offset-4 transition-colors duration-300">
+          <div className="mb-2 font-medium text-white/90 group-hover:text-white text-xl group-hover:underline underline-offset-4 transition-colors duration-300">
             {title}
           </div>
-          <p className="group-hover:text-white/80 text-white/70 text-sm leading-tight transition-colors duration-300">
+          <p className="text-white/70 group-hover:text-white/80 text-sm leading-tight transition-colors duration-300">
             {description}
           </p>
         </div>
@@ -265,5 +255,93 @@ const LinkCard = ({
         </div>
       </a>
     </NavigationMenuLink>
+  );
+};
+
+type ProductLinkProps = {
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+  reviewCount: number;
+  productUrl: string;
+  buyUrl: string;
+  wholesaleUrl: string;
+};
+
+const ProductLink = ({
+  title,
+  description,
+  imageSrc,
+  imageAlt,
+  reviewCount,
+  productUrl,
+  buyUrl,
+  wholesaleUrl,
+}: ProductLinkProps) => {
+  return (
+    <div className="flex md:flex-row flex-col gap-6">
+      {/* Product image - square and prominent */}
+      <a
+        href={productUrl}
+        className="flex-shrink-0 w-[250px] h-[250px] overflow-hidden"
+      >
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          className="shadow-md hover:shadow-lg border border-gray-100 dark:border-gray-800 rounded-xl w-full h-full object-cover transition-all duration-300"
+        />
+      </a>
+
+      {/* Product info */}
+      <div className="flex flex-col justify-between">
+        <div>
+          <h4 className="mb-2 font-semibold text-xl">{title}</h4>
+          <p className="mb-2 text-neutral-600 dark:text-neutral-300">
+            {description}
+          </p>
+
+          {/* Reviews snippet */}
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="group flex items-center hover:bg-neutral-50 mb-4 px-2 py-1 border border-neutral-200 hover:border-primary dark:border-neutral-700 dark:hover:border-primary rounded-md transition-all duration-200"
+          >
+            <a href="/reviews" role="button" aria-label="View all reviews">
+              <div className="flex mr-2 transition-all duration-200">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={`star-rating-${i}`}
+                    size={16}
+                    className={`fill-yellow-400 stroke-amber-500 text-yellow-400 ${i % 2 === 0 ? "group-hover:rotate-12" : "group-hover:-rotate-12"} transition-transform duration-300`}
+                  />
+                ))}
+              </div>
+              <span className="text-neutral-600 dark:text-neutral-300 group-hover:text-primary text-sm group-hover:underline">
+                Based on {reviewCount} reviews
+              </span>
+              <ArrowRight size={16} className="ml-1 group-hover:text-primary" />
+            </a>
+          </Button>
+        </div>
+
+        {/* Action buttons */}
+        <div className="flex gap-3">
+          <a
+            href={buyUrl}
+            className={cn(buttonVariants({ variant: "default" }))}
+          >
+            Buy Now
+          </a>
+          <a
+            href={wholesaleUrl}
+            className={cn(buttonVariants({ variant: "outline" }))}
+          >
+            Order Wholesale
+          </a>
+        </div>
+      </div>
+    </div>
   );
 };

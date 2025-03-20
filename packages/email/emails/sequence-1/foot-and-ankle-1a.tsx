@@ -1,6 +1,6 @@
 import * as React from "react";
-import HighlightedSpan from "../components/highlighted-span";
-import { FootAndAnkle1 } from "../components/foot-and-ankle-1/index.tsx";
+import HighlightedSpan from "../../components/highlighted-span";
+import { FootAndAnkle1 } from "../../components/foot-and-ankle-1/index.tsx";
 
 export const MyEmail = () => {
   return (

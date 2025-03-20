@@ -39,12 +39,12 @@ export const FootAndAnkle3 = ({ quote, author, title }: Props) => {
             className="mb-6 font-medium text-gray-700 text-xl text-center"
             style={{ marginBottom: "24px" }}
           >
-            The innovative night splint transforming patient recovery
+            Achilles Rupture Splints: Happier patients, means happier surgeons
           </Heading>
         </Section>
 
         {/* Quote Section - Redesigned to be more professional */}
-        <Section className="mb-6 px-6">
+        <Section className="mb-8 px-2 md:px-6">
           <div
             className="bg-gray-50 mx-auto p-6 pt-2 text-center"
             style={{

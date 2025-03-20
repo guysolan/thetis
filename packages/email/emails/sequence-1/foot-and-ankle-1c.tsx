@@ -1,10 +1,10 @@
 import * as React from "react";
-import HighlightedSpan from "../components/highlighted-span.tsx";
-import FootAndAnkle2 from "../components/foot-and-ankle-2/index.tsx";
+import HighlightedSpan from "../../components/highlighted-span.tsx";
+import FootAndAnkle1 from "../../components/foot-and-ankle-1/index.tsx";
 
-export const MyEmail = ({ recipientName = "" }) => {
+export const MyEmail = () => {
   return (
-    <FootAndAnkle2
+    <FootAndAnkle1
       heading1={
         <>
           New: <HighlightedSpan>Night Splint</HighlightedSpan> for{" "}

@@ -2,7 +2,7 @@ import React from "react";
 
 const FootAndAnkleBullets = () => {
   return (
-    <div className="flex flex-col gap-y-4 mx-auto my-8 md:px-12 md:max-w-md">
+    <div className="flex flex-col gap-y-4 mx-auto my-8 px-2 md:px-12 md:max-w-md">
       <div className="flex justify-start items-center gap-x-3 text-gray-800 text-base">
         <svg
           xmlns="http://www.w3.org/2000/svg"

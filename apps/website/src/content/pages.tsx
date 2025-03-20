@@ -7,6 +7,7 @@ import {
   Stethoscope,
   Microscope,
   Mail,
+  Star,
 } from "lucide-react";
 import nightSplintImage from "./night_splint_bed_side.jpg";
 import traumaSplintImage from "./trauma_splint.jpg";
@@ -22,19 +23,19 @@ type Link = {
 
 export const productLinks: Link[] = [
   {
-    title: "Night Splint",
-    description: "Sleep comfortably while your achilles rupture heals.",
+    title: "Achilles Rupture Splint",
+    description:
+      "Recovery quicker and more comfortably from achilles tendon rupture.",
     href: "/night-splint",
     image: nightSplintImage,
     icon: <Moon size={20} />,
     variant: "outline",
   },
   {
-    title: "Trauma Splint",
-    description: "Start recovering quicker after an Achilles rupture",
-    href: "/trauma-splint",
-    image: traumaSplintImage,
-    icon: <Zap size={20} />,
+    title: "Reviews",
+    description: "Read what our customers have to say about our products.",
+    href: "/reviews",
+    icon: <Star size={20} />,
     variant: "outline",
   },
 ];

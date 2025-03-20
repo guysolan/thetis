@@ -1,8 +1,8 @@
 import * as React from "react";
-import HighlightedSpan from "../components/highlighted-span.tsx";
-import { FootAndAnkle1 } from "../components/foot-and-ankle-1/index.tsx";
+import HighlightedSpan from "../../components/highlighted-span.tsx";
+import { FootAndAnkle1 } from "../../components/foot-and-ankle-1/index.tsx";
 
-export const MyEmail = ({ recipientName = "" }) => {
+export const MyEmail = () => {
   return (
     <FootAndAnkle1
       heading1={
