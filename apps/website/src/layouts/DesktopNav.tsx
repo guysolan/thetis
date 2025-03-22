@@ -282,16 +282,20 @@ const ProductLink = ({
   return (
     <div className="flex md:flex-row flex-col gap-6">
       {/* Product image - square and prominent */}
-      <a
-        href={productUrl}
-        className="flex-shrink-0 w-[250px] h-[250px] overflow-hidden"
-      >
-        <img
-          src={imageSrc}
-          alt={imageAlt}
-          className="shadow-md hover:shadow-lg border border-gray-100 dark:border-gray-800 rounded-xl w-full h-full object-cover transition-all duration-300"
-        />
-      </a>
+      <div className="group relative flex-shrink-0 w-[250px] h-[250px]">
+        <a href={productUrl} className="block w-full h-full overflow-hidden">
+          <img
+            src={imageSrc}
+            alt={imageAlt}
+            className="shadow-md group-hover:shadow-lg border border-gray-100 dark:border-gray-800 rounded-xl w-full h-full object-cover transition-all duration-300"
+          />
+          <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-0 group-hover:bg-opacity-20 rounded-xl transition-all duration-300">
+            <span className="bg-white bg-opacity-80 group-hover:shadow-md px-4 py-2 rounded-md font-medium text-neutral-800 group-hover:text-primary group-hover:-rotate-1 scale-95 group-hover:scale-100 transition-all duration-300 transform">
+              Learn More
+            </span>
+          </div>
+        </a>
+      </div>
 
       {/* Product info */}
       <div className="flex flex-col justify-between">

@@ -1,0 +1,335 @@
+---
+const data = {
+    labels: ["Plaster Cast", "Thetis splint"],
+    datasets: [
+        {
+            label: "Mean Days A&E to Scan then Specialist",
+            data: [8.7, 2.9], // Mean Days
+        },
+        {
+            label: "Maximum Days A&E to Scan then Specialist",
+            data: [23, 6],
+        },
+    ],
+};
+---
+
+<div class="mx-auto container">
+    <!-- Study 1: A&E Initial Treatment -->
+    <section class="bg-white dark:bg-gray-900 px-6 py-24">
+        <div class="mx-auto max-w-5xl">
+            <div class="mb-20 text-center">
+                <span
+                    class="font-semibold text-primary text-sm uppercase tracking-wider"
+                    >Replacing Plaster Casts</span
+                >
+                <h2
+                    class="mt-2 font-semibold text-gray-900 dark:text-white text-3xl"
+                >
+                    Initial A&E Treatment Comparison
+                </h2>
+                <p
+                    class="mx-auto mt-6 max-w-3xl text-gray-600 dark:text-gray-300 text-lg"
+                >
+                    Study comparing the Thetis splint with traditional plaster
+                    casts for initial treatment in A&E following Achilles tendon
+                    rupture.
+                </p>
+            </div>
+
+            <!-- Time Comparison Chart - Minimal Design -->
+            <div class="mb-20">
+                <div class="bg-gray-50 dark:bg-gray-800 p-8 sm:p-10 rounded-xl">
+                    <h3
+                        class="mb-10 font-medium text-gray-900 dark:text-white text-xl text-center"
+                    >
+                        Time from A&E to Specialist Assessment
+                    </h3>
+
+                    <div class="space-y-16">
+                        {
+                            data.labels.map((label, index) => (
+                                <div key={index}>
+                                    <h4 class="flex items-center mb-6 font-medium text-gray-900 dark:text-white text-lg">
+                                        <span
+                                            class={`inline-block w-3 h-3 rounded-full ${index === 0 ? "bg-gray-400" : "bg-primary"} mr-3`}
+                                        />
+                                        {label}
+                                    </h4>
+
+                                    <div class="mb-8 ml-6">
+                                        <div class="flex justify-between mb-3">
+                                            <span class="text-gray-500 dark:text-gray-400 text-sm">
+                                                Average wait time:
+                                            </span>
+                                            <span
+                                                class={`text-xl font-semibold ${index === 0 ? "text-gray-700" : "text-primary"} dark:text-white`}
+                                            >
+                                                {data.datasets[0].data[index]}{" "}
+                                                days
+                                            </span>
+                                        </div>
+                                        <div class="bg-gray-100 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
+                                            <div
+                                                class={`h-full rounded-full ${index === 0 ? "bg-gray-400" : "bg-primary"}`}
+                                                style={{
+                                                    width: `${(data.datasets[0].data[index] / 23) * 100}%`,
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div class="ml-6">
+                                        <div class="flex justify-between mb-3">
+                                            <span class="text-gray-500 dark:text-gray-400 text-sm">
+                                                Maximum wait time:
+                                            </span>
+                                            <span
+                                                class={`text-xl font-semibold ${index === 0 ? "text-gray-700" : "text-primary"} dark:text-white`}
+                                            >
+                                                {data.datasets[1].data[index]}{" "}
+                                                days
+                                            </span>
+                                        </div>
+                                        <div class="bg-gray-100 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
+                                            <div
+                                                class={`h-full rounded-full ${index === 0 ? "bg-gray-400" : "bg-primary"}`}
+                                                style={{
+                                                    width: `${(data.datasets[1].data[index] / 23) * 100}%`,
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+
+                    <div
+                        class="bg-white dark:bg-gray-700 shadow-sm mt-16 p-5 rounded-lg"
+                    >
+                        <div class="gap-6 grid grid-cols-1 md:grid-cols-2">
+                            <div class="flex items-start">
+                                <div
+                                    class="flex flex-shrink-0 justify-center items-center bg-primary/10 mr-3 rounded-full w-8 h-8"
+                                >
+                                    <svg
+                                        class="w-4 h-4 text-primary"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13 10V3L4 14h7v7l9-11h-7z"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p
+                                        class="font-medium text-gray-900 dark:text-white"
+                                    >
+                                        67% Faster Assessment
+                                    </p>
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300 text-sm"
+                                    >
+                                        Mean waiting time reduced from 8.7 to
+                                        just 2.9 days
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div
+                                    class="flex flex-shrink-0 justify-center items-center bg-primary/10 mr-3 rounded-full w-8 h-8"
+                                >
+                                    <svg
+                                        class="w-4 h-4 text-primary"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p
+                                        class="font-medium text-gray-900 dark:text-white"
+                                    >
+                                        74% Shorter Maximum Waits
+                                    </p>
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300 text-sm"
+                                    >
+                                        Maximum wait time reduced from 23 to
+                                        just 6 days
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study 2: Recovery Period Safety -->
+    <section class="bg-gray-50 dark:bg-gray-800 px-6 py-24">
+        <div class="mx-auto max-w-5xl">
+            <div class="mb-20 text-center">
+                <span
+                    class="font-semibold text-primary text-sm uppercase tracking-wider"
+                    >In Parallel with the Boot</span
+                >
+                <h2
+                    class="mt-2 font-semibold text-gray-900 dark:text-white text-3xl"
+                >
+                    Recovery Period Safety Assessment
+                </h2>
+                <p
+                    class="mx-auto mt-6 max-w-3xl text-gray-600 dark:text-gray-300 text-lg"
+                >
+                    Study examining the safety of the Thetis splint as a
+                    nighttime alternative to walking boots during the recovery
+                    period.
+                </p>
+            </div>
+
+            <div class="gap-16 grid grid-cols-1 lg:grid-cols-2">
+                <!-- Image side -->
+                <div class="flex flex-col justify-center">
+                    <img
+                        src="/images/night_splint_bed_top_square.jpg"
+                        alt="Patient wearing the Achilles Tendon Rupture Splint"
+                        class="shadow-sm rounded-xl w-full"
+                    />
+
+                    <div class="gap-4 grid grid-cols-2 mt-4">
+                        <div
+                            class="bg-white dark:bg-gray-700 shadow-md hover:shadow-lg p-4 border-2 border-primary rounded-lg text-center hover:scale-105 transition-all duration-200 transform"
+                        >
+                            <p class="font-bold text-primary text-3xl">
+                                3,000+
+                            </p>
+                            <p
+                                class="mt-1 font-medium text-gray-700 dark:text-gray-300 text-sm"
+                            >
+                                patient recorded
+                            </p>
+                        </div>
+                        <div
+                            class="bg-white dark:from-gray-700 shadow-md hover:shadow-lg p-4 border-2 border-primary rounded-lg text-center hover:scale-105 transition-all duration-200 transform"
+                        >
+                            <p class="font-bold text-primary text-3xl">Zero</p>
+                            <p
+                                class="mt-1 font-medium text-gray-700 dark:text-gray-300 text-sm"
+                            >
+                                reported injuries
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data side -->
+                <div class="bg-white dark:bg-gray-700 shadow-sm p-8 rounded-xl">
+                    <h3
+                        class="mb-8 font-medium text-gray-900 dark:text-white text-xl"
+                    >
+                        Safety Statistical Analysis
+                    </h3>
+
+                    <div class="space-y-8">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span
+                                    class="font-medium text-gray-700 dark:text-gray-300 text-sm"
+                                    >Sample Size Adequacy</span
+                                >
+                                <span class="font-medium text-primary text-sm"
+                                    >99.9%</span
+                                >
+                            </div>
+                            <div
+                                class="bg-gray-100 dark:bg-gray-600 rounded-full h-2 overflow-hidden"
+                            >
+                                <div
+                                    class="bg-primary rounded-full h-2"
+                                    style="width: 99.9%"
+                                >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span
+                                    class="font-medium text-gray-700 dark:text-gray-300 text-sm"
+                                    >Statistical Power</span
+                                >
+                                <span class="font-medium text-primary text-sm"
+                                    >99.7%</span
+                                >
+                            </div>
+                            <div
+                                class="bg-gray-100 dark:bg-gray-600 rounded-full h-2 overflow-hidden"
+                            >
+                                <div
+                                    class="bg-primary rounded-full h-2"
+                                    style="width: 99.7%"
+                                >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span
+                                    class="font-medium text-gray-700 dark:text-gray-300 text-sm"
+                                    >Confidence Level</span
+                                >
+                                <span class="font-medium text-primary text-sm"
+                                    >95%</span
+                                >
+                            </div>
+                            <div
+                                class="bg-gray-100 dark:bg-gray-600 rounded-full h-2 overflow-hidden"
+                            >
+                                <div
+                                    class="bg-primary rounded-full h-2"
+                                    style="width: 95%"
+                                >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="mt-8 pt-6 border-gray-100 dark:border-gray-600 border-t"
+                    >
+                        <h4
+                            class="mb-3 font-medium text-gray-900 dark:text-white"
+                        >
+                            Key Finding
+                        </h4>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            With a 95% confidence interval, the risk of injury
+                            while using the Thetis splint is
+                            <span class="font-semibold text-primary"
+                                >less than 0.1%</span
+                            >, making it as safe as traditional walking boots
+                            but with significantly better comfort during sleep.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

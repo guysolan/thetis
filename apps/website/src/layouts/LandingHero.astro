@@ -17,27 +17,27 @@ const benefitsList = ["Clinically Proven", "FDA Approved", "Fast Delivery"];
         <div class="flex lg:flex-row flex-col justify-between items-center gap-8">
             <!-- Left column (text content) -->
             <div class="flex flex-col gap-y-6 lg:pr-16 lg:w-7/12">
-                <h1 class="font-semibold text-4xl text-neutral-950 md:text-6xl dark:text-neutral-50 leading-[105%] md:leading-[120%]">
+                <h1 class="font-semibold text-neutral-950 dark:text-neutral-50 text-4xl md:text-6xl leading-[105%] md:leading-[120%]">
                     <HighlightedWord>Better Recovery</HighlightedWord> for Achilles Tendon Rupture
                 </h1>
 
-                <p class="text-gray-800 text-lg dark:text-neutral-200 leading-relaxed">
+                <p class="text-gray-800 dark:text-neutral-200 text-lg leading-relaxed">
                     Experience breakthrough comfort and proven outcomes with our innovative Achilles splints - 
                     trusted by leading healthcare professionals worldwide.
                 </p>
 
                 <!-- SMALL SCREENS ONLY -->
-                <div class='block relative lg:hidden'>
+                <div class='lg:hidden block relative'>
                     <Image 
                         src={NightSplintImage} 
-                        alt="Thetis Medical Achilles Rupture Night Splint"
-                        class="group-hover:scale-[102%] group-hover:brightness-[0.85] shadow-lg hover:shadow-2xl rounded-xl transition-all duration-300" 
+                        alt="Thetis Medical Achilles Rupture Splint"
+                        class="shadow-lg hover:shadow-2xl group-hover:brightness-[0.85] rounded-xl group-hover:scale-[102%] transition-all duration-300" 
                     />
                     <a class={cn(buttonVariants({ size: 'lg', variant: 'default' }),'bottom-4 left-4 absolute')} href="/buy-now">Buy Now</a>
                 </div>
 
                 <!-- LARGE SCREENS ONLY -->
-                <div class="lg:flex sm:flex-row flex-col gap-4 hidden">
+                <div class="hidden lg:flex sm:flex-row flex-col gap-4">
                     <a class={cn(buttonVariants({ size: 'lg', variant: 'default' }))} href="/buy-now">Buy Now</a>
                     <a href="/order-wholesale" 
                         class={cn(buttonVariants({ size: 'lg', variant: 'outline' }), 
@@ -46,7 +46,7 @@ const benefitsList = ["Clinically Proven", "FDA Approved", "Fast Delivery"];
                     </a>
                 </div>
 
-                <div class="flex flex-row flex-wrap items-start sm:items-center gap-x-4 gap-y-2 px-2 text-base text-gray-600">
+                <div class="flex flex-row flex-wrap items-start sm:items-center gap-x-4 gap-y-2 px-2 text-gray-600 text-base">
                     {benefitsList.map(benefit => (
                         <div class="flex items-center gap-2">
                             <span class="text-neutral-700 dark:text-neutral-300">&#10003;</span>
@@ -63,12 +63,12 @@ const benefitsList = ["Clinically Proven", "FDA Approved", "Fast Delivery"];
             <!-- Right column (image) -->
             <HoverImageLink
                 image={NightSplintImage}
-                imageAlt="Thetis Medical Achilles Rupture Night Splint"
-                title="Night Splint"
+                imageAlt="Thetis Medical Achilles Rupture Splint"
+                title="Splint"
                 description="Sleep comfortably while your achilles rupture heals."
                 linkText="Order Now"
                 linkHref="/night-splint"
-                className="lg:block hidden lg:w-5/12"
+                className="hidden lg:block lg:w-5/12"
             />
         </div>
     </div>
