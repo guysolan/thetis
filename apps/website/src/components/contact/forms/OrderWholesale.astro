@@ -1,39 +1,34 @@
 ---
-import Label from '@/components/form/Label.astro';
-import Input from '@/components/form/Input.astro';
-import TextArea from '../../form/TextArea.astro';
-import {NumberInput} from '../../form/NumberInput.tsx';
-import FormWrap from '../FormWrap.astro';
-import OptOut from '../../form/OptOut.astro';
+import Label from "@/components/form/Label.astro";
+import Input from "@/components/form/Input.astro";
+import TextArea from "../../form/TextArea.astro";
+import { NumberInput } from "../../form/NumberInput.tsx";
+import FormWrap from "../FormWrap.astro";
+import OptOut from "../../form/OptOut.astro";
 ---
 
-<FormWrap
-    formId="xvggdoal"
->
+<FormWrap formId="xvggdoal">
     <div class="space-y-8 w-full">
-        <h2 class="font-semibold text-neutral-950 text-2xl md:text-3xl leading-[105%]">Wholesale Order Inquiry</h2>
+        <h2
+            class="font-semibold text-neutral-950 text-2xl md:text-3xl leading-[105%]"
+        >
+            Wholesale Order Inquiry
+        </h2>
         <p class="text-gray-800 text-lg leading-relaxed">
-            Interested in wholesale opportunities? Please fill out the form below and we'll get back to you with pricing and details.
+            Interested in wholesale opportunities? Please fill out the form
+            below and we'll get back to you with pricing and details.
         </p>
-    
+
         <div class="space-y-6">
             <div class="gap-6 grid md:grid-cols-2">
                 <div class="form-group">
                     <Label labelFor="name">Contact Name</Label>
-                    <Input
-                        name="name"
-                        type="text"
-                        required={true}
-                    />
+                    <Input name="name" type="text" required={true} />
                 </div>
 
                 <div class="form-group">
                     <Label labelFor="email">Business Email</Label>
-                    <Input
-                        name="email"
-                        type="email"
-                        required={true}
-                    />
+                    <Input name="email" type="email" required={true} />
                 </div>
             </div>
 
@@ -60,10 +55,10 @@ import OptOut from '../../form/OptOut.astro';
                     rows={4}
                     maxlength={1000}
                     placeholder="Please include your estimated order quantity and any specific products you're interested in."
-                ></TextArea>
+                />
             </div>
 
-           <OptOut/>
+            <OptOut />
 
             <button
                 type="submit"
