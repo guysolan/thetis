@@ -1,0 +1,311 @@
+---
+import getUnicodeFlagIcon from "country-flag-icons/unicode";
+import { Clock, Hammer, ExternalLink } from "lucide-astro";
+import countryData from "./data.json";
+
+// Helper function to get the latest surgical rate
+function getLatestSurgicalRate(country) {
+  if (!country.surgical_rate) return null;
+  
+  const years = Object.keys(country.surgical_rate)
+    .filter(k => !isNaN(parseInt(k)))
+    .sort((a, b) => parseInt(b) - parseInt(a));
+  
+  if (years.length === 0) return null;
+  
+  return country.surgical_rate[years[0]];
+}
+
+// Process countries for visualization
+const countries = countryData
+  .filter(country => getLatestSurgicalRate(country) !== null && country.code)
+  .map(country => {
+    const latestRate = getLatestSurgicalRate(country);
+    
+    return {
+      code: country.code,
+      name: country.country,
+      percentage: latestRate,
+      position: latestRate,
+      approach: country.surgical_rate.trend ? country.surgical_rate.trend.split('.')[0] : "Not specified",
+      source: country.source ? country.source.split('//')[1] : "Data unavailable",
+      url: country.source || "#"
+    };
+  });
+
+---
+
+<div class="mx-auto px-4 py-8 max-w-5xl">
+    <div class="mb-10 text-center">
+        <h3 class="mb-2 font-semibold text-gray-800 text-2xl">Global Approaches to Achilles Rupture Treatment</h3>
+        <p class="text-gray-600">Percentage of Achilles ruptures treated surgically by country</p>
+    </div>
+
+    <div class="relative py-6">
+        <div class="relative bg-gradient-to-r from-gray-200 to-emerald-600 mb-36 rounded w-full h-2">
+            {countries.map((country) => (
+                <div class="group country-marker" style={`position: absolute; left: ${country.position}%; transform: translateX(-50%);`}>
+                    <div class="country-pin">
+                        <!-- This is the expandable pin circle with content inside -->
+                        <div class="pin-circle">
+                            <!-- Initial state (small flag only) -->
+                            <div class="pin-initial">
+                                <span class="flag-icon">{getUnicodeFlagIcon(country.code)}</span>
+                            </div>
+                            
+                            <!-- Expanded state (with all country info) -->
+                            <div class="pin-expanded">
+                                <div class="country-info">
+                                    <div class="country-header">
+                                        <span class="country-flag">{getUnicodeFlagIcon(country.code)}</span>
+                                        <span class="country-name">{country.name}</span>
+                                    </div>
+                                    
+                                    <div class="percentage-indicator">
+                                        <div class="percentage-value">{country.percentage}%</div>
+                                        <div class="percentage-bar">
+                                            <div class="percentage-fill" style={`width: ${country.percentage}%`}></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="approach-info">
+                                        <div class="approach-label">Treatment:</div>
+                                        <div class="approach-value">{country.approach}</div>
+                                    </div>
+                                    
+                                    <a href={country.url} target="_blank" rel="noopener noreferrer" class="guidelines-link">
+                                        Source
+                                        <ExternalLink size={10} />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+            
+            <div class="flex justify-between mb-1 pt-8 text-gray-500 text-xs">
+                <div>0%</div>
+                <div>25%</div>
+                <div>50%</div>
+                <div>75%</div>
+                <div>100%</div>
+            </div>
+        </div>
+
+        <div class="flex justify-between mt-24">
+            <div class="flex items-center gap-2">
+                <div class="flex justify-center items-center bg-gray-100 rounded-full w-8 h-8">
+                    <Clock size={18} class="text-gray-600" />
+                </div>
+                <span class="font-medium text-gray-700 text-sm">Conservative Treatment</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="font-medium text-gray-700 text-sm">Surgical Treatment</span>
+                <div class="flex justify-center items-center bg-emerald-600 rounded-full w-8 h-8">
+                    <Hammer size={18} class="text-white" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="shadow-sm mt-12 p-5 border border-gray-100 rounded-lg">
+        <h4 class="mb-3 font-medium text-gray-800 text-lg">About This Data</h4>
+        <p class="mb-5 text-gray-700 leading-relaxed">
+            Treatment approaches for Achilles tendon ruptures vary significantly across countries, influenced by healthcare systems, medical traditions, and evolving research. Countries like the UK favor conservative management with evidence showing equivalent outcomes, while the US shows a strong preference for surgical intervention, particularly among athletic populations.
+        </p>
+        
+        <div class="gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <span class="font-bold text-emerald-600 text-2xl">92%</span>
+                <p class="mt-1 text-gray-700 text-sm">Recovery rate with proper conservative treatment according to Willits et al. (2010)</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <span class="font-bold text-emerald-600 text-2xl">4.5%</span>
+                <p class="mt-1 text-gray-700 text-sm">Average re-rupture rate difference between surgical and non-surgical approaches (Ochen et al., JAMA 2019)</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <span class="font-bold text-emerald-600 text-2xl">68%</span>
+                <p class="mt-1 text-gray-700 text-sm">Proportion of centers using early weight-bearing protocols in non-surgical management (Kearney et al., 2021)</p>
+            </div>
+        </div>
+        
+        <div class="mt-4 text-gray-600 text-sm italic">
+            <p>Note: In the UK and Australia they are called "anaesthetists" rather than "anesthesiologists" as in the US. Medical terminology varies between countries based on different healthcare systems and traditions.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .country-marker {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .country-marker:hover {
+        z-index: 50;
+    }
+    
+    .country-pin {
+        position: absolute;
+        /* Adjusted positioning to sit on the bar instead of below it */
+        top: -18px;
+        left: 50%;
+        transform: translateX(-50%);
+        cursor: pointer;
+    }
+    
+    .pin-circle {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        border: 2px solid #059669;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    /* Keep circular shape on hover, just enlarge */
+    .group:hover .pin-circle {
+        width: 200px;
+        height: 200px;
+        transform: translateY(-100px);
+    }
+    
+    .pin-initial {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    
+    .flag-icon {
+        font-size: 1.25rem;
+    }
+    
+    .group:hover .pin-initial {
+        opacity: 0;
+        transform: scale(2.5);
+    }
+    
+    .pin-expanded {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease 0.1s, visibility 0.3s ease 0.1s;
+    }
+    
+    .group:hover .pin-expanded {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .country-info {
+        width: 80%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .country-header {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .country-flag {
+        font-size: 1.25rem;
+    }
+    
+    .country-name {
+        font-weight: 600;
+        color: #1f2937;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .percentage-indicator {
+        margin-top: 6px;
+    }
+    
+    .percentage-value {
+        font-weight: 700;
+        color: #059669;
+        font-size: 1.125rem;
+        text-align: center;
+    }
+    
+    .percentage-bar {
+        margin-top: 3px;
+        height: 5px;
+        background-color: #f3f4f6;
+        border-radius: 9999px;
+        overflow: hidden;
+    }
+    
+    .percentage-fill {
+        height: 100%;
+        background: linear-gradient(to right, #10b981, #059669);
+        border-radius: 9999px;
+    }
+    
+    .approach-info {
+        margin-top: 6px;
+    }
+    
+    .approach-label {
+        font-weight: 600;
+        color: #4b5563;
+        font-size: 0.6875rem;
+    }
+    
+    .approach-value {
+        color: #1f2937;
+        font-size: 0.6875rem;
+        line-height: 1.2;
+    }
+    
+    .guidelines-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        margin-top: 6px;
+        font-size: 0.6875rem;
+        color: #059669;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    
+    .guidelines-link:hover {
+        color: #047857;
+        text-decoration: underline;
+    }
+    
+    /* Highlight US by default with a slightly larger size */
+    .country-marker[style*="left: 97%"] .pin-circle {
+        border-color: #047857;
+        width: 44px;
+        height: 44px;
+    }
+</style>

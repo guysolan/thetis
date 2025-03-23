@@ -1,0 +1,124 @@
+---
+// Report.astro - Global Trends in Achilles Tendon Rupture Treatment
+
+// Define the JSON schema for the report data
+const reportData = {
+    title: "Global Trends in Achilles Tendon Rupture Incidence and Surgical Versus Non-Surgical Treatment Rates",
+    sections: [
+        {
+            id: "introduction",
+            title: "Introduction",
+            content: [
+                "The Achilles tendon, the strongest and largest tendon in the human body, plays a critical role in locomotion by connecting the calf muscles to the heel bone. This robust structure is essential for activities such as walking, running, and jumping, bearing loads up to 12 times body weight during running.",
+                "Despite its strength, the Achilles tendon is susceptible to rupture, a common musculoskeletal injury that can result in significant morbidity. Achilles tendon rupture typically occurs due to sudden, forceful plantarflexion or dorsiflexion of the foot, often during sports participation involving rapid acceleration, deceleration, or changes in direction.",
+                "The management of Achilles tendon rupture has evolved over time, with primary treatment options including surgical repair and non-surgical management. This report analyzes the global trends in the incidence of Achilles tendon ruptures and the corresponding shifts in treatment approaches across various countries.",
+            ],
+        },
+        {
+            id: "incidence-trends",
+            title: "Global Trends in Achilles Tendon Rupture Incidence",
+            content: [
+                "Epidemiological studies from various parts of the world have consistently reported an increasing trend in the incidence of Achilles tendon ruptures over the past few decades:",
+                "• Sweden: 45% increase from 2002 to 2021 (28.8 to 41.7 cases per 100,000 person-years)",
+                "• Denmark: Significant increase between 1994 and 2013 (26.95 to 31.17 per 100,000 people annually)",
+                "• Finland: Increase from 17.3 to 32.3 per 100,000 person-years between 1997 and 2019",
+                "• United Kingdom: Increasing trend from 1995 to 2019, with rates around 8 cases per 100,000 people per year",
+                "• South Korea: Upward trend between 2009 and 2017, reaching 26.53 cases per 100,000 person-years",
+                "• New Zealand: Substantial increase from 4.7 to 10.3 per 100,000 between 1998 and 2003",
+                "Several factors contribute to this rising incidence, including an aging but active population, increased sports participation, rising obesity rates, certain medications (fluoroquinolones, corticosteroids), and improved diagnostic methods.",
+            ],
+        },
+        {
+            id: "treatment-approaches",
+            title: "Evolution of Treatment Approaches: Surgical vs. Non-Surgical Rates",
+            content: [
+                "Recent years have witnessed significant changes in clinical practice regarding Achilles tendon rupture treatment:",
+                "• Canada: Substantial decline in surgical repair rates after 2009",
+                "• United Kingdom: Strong trend toward non-operative management",
+                "• Sweden: Decrease in surgical incidence from 13.4 to 6.0 per 100,000 person-years (2002-2021)",
+                "• Denmark: Decrease in surgically treated patients from 16.9 to 6.3 per 100,000 (1994-2013)",
+                "• Finland: Decrease in operative treatment from 13.6 to 4.9 per 100,000 person-years (1997-2019)",
+                "• Australia: 68% decrease in surgical repairs between 2009 and 2014",
+                "However, this trend is not universal:",
+                "• Japan: Increase in surgical treatment from 67% in 2010 to 72% in 2017",
+                "• France: 92% of acute Achilles tendon ruptures treated surgically (2018-2019)",
+                "• United States: Surgical repair rate remained stable at around 70% (2007-2015)",
+                "• Italy: Increasing hospitalizations for Achilles tendon repair (2001-2015)",
+                "The shift toward non-operative management in many regions is largely attributed to high-quality studies showing comparable outcomes with well-managed non-operative protocols that include early functional rehabilitation.",
+            ],
+        },
+        {
+            id: "demographics",
+            title: "Demographic Characteristics of Achilles Tendon Rupture Patients",
+            content: [
+                "• Age: Typically 30-50 years, with Sweden showing an increase in median age from 44 (2002) to 50 (2021)",
+                "• Gender: Consistently higher incidence in males (2-12 times more likely than females)",
+                "• High-risk groups: Middle-aged men (40-49 years), 'weekend warriors', and increasingly older adults (>50 years)",
+                "• Activity association: Commonly linked to sports (basketball in US, soccer and badminton in Europe)",
+            ],
+        },
+        {
+            id: "outcomes",
+            title: "Outcomes Associated with Surgical and Non-Surgical Treatment",
+            content: [
+                "• Re-rupture risk: Surgical treatment shows a small reduction (1-2%) compared to non-operative management, but this gap narrows with functional rehabilitation protocols",
+                "• Complications: Surgery has significantly higher risks (infections ~2.8%, wound problems, nerve injury, DVT)",
+                "• Functional outcomes: Recent studies show comparable results between surgical and non-surgical approaches when non-operative management includes early functional rehabilitation",
+            ],
+        },
+        {
+            id: "conclusion",
+            title: "Conclusion",
+            content: [
+                "The incidence of Achilles tendon rupture has increased globally, while treatment approaches have evolved toward non-operative management in many regions. This shift is supported by evidence showing comparable functional outcomes and lower complication risks with non-operative treatment that includes early functional rehabilitation.",
+                "The optimal management strategy should be individualized, considering each patient's unique circumstances through shared decision-making between patient and clinician.",
+            ],
+        },
+    ],
+    references: [
+        "Surgical vs. nonoperative treatment for acute Achilles' tendon rupture: a meta-analysis of randomized controlled trials - Frontiers",
+        "Global trends in research of achilles tendon injury/rupture: A bibliometric analysis, 2000–2021 - Frontiers",
+        "Achilles Rupture - Physiopedia",
+        "Acute Achilles tendon ruptures between 2002–2021: sustained increased incidence, surgical decline and prolonged delay to surgery—a nationwide study of 53,688 ruptures in Sweden | BMJ Open Sport & Exercise Medicine",
+        "Clinical and functional outcomes of 405 Achilles tendon ruptures - PubMed",
+        "Operative Versus Nonoperative Treatment of Acute Achilles Tendon Rupture: A Propensity Score–Matched Analysis of a Large National Dataset - Sage Journals",
+        "Increase in Achilles Tendon Rupture Surgery in Japan: Results From a Nationwide Health Care Database - PMC",
+    ],
+};
+---
+
+<article class="mx-auto px-4 py-8 max-w-4xl">
+    <header class="mb-12 text-center">
+        <h1 class="mb-4 font-bold text-gray-900 text-3xl">
+            {reportData.title}
+        </h1>
+    </header>
+
+    <div class="max-w-none prose prose-lg">
+        {
+            reportData.sections.map((section) => (
+                <section id={section.id} class="mb-10">
+                    <h2 class="mb-4 font-semibold text-gray-800 text-2xl">
+                        {section.title}
+                    </h2>
+                    {section.content.map((paragraph) => (
+                        <p class="mb-4">{paragraph}</p>
+                    ))}
+                </section>
+            ))
+        }
+
+        <section id="references" class="mt-16">
+            <h2 class="mb-4 font-semibold text-gray-800 text-2xl">
+                References
+            </h2>
+            <ol class="space-y-2 pl-5 list-decimal">
+                {
+                    reportData.references.map((reference) => (
+                        <li class="text-gray-700">{reference}</li>
+                    ))
+                }
+            </ol>
+        </section>
+    </div>
+</article>

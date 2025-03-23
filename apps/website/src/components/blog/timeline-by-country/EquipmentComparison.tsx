@@ -4,11 +4,14 @@ type Equipment = {
   kneeScooter: string;
   evenUp: string;
   nightSplint: string;
+  walkingBoot: string;
 };
 
 export const equipment: Equipment[] = [
   {
     countryId: "usa",
+    walkingBoot:
+      "Standard CAM boot with heel wedges. Typically prescribed by emergency physicians, orthopedic surgeons, or podiatrists (DPMs). VACOped hinged boots less common than in Europe.",
     crutches:
       "Used initially during non‑weight-bearing and early partial weight-bearing phases. Typically prescribed by emergency physicians, orthopedic surgeons, or podiatrists (DPMs). Physical therapists provide gait training.",
     kneeScooter:
@@ -20,6 +23,8 @@ export const equipment: Equipment[] = [
   },
   {
     countryId: "canada",
+    walkingBoot:
+      "Removable CAM boots with heel wedges common. Some centers use VACOped hinged boots for better range of motion control. Prescribed by orthopedic surgeons or sports medicine physicians.",
     crutches:
       "Standard during initial non‑weight-bearing phase. Prescribed by emergency physicians or orthopedic surgeons. Physiotherapists provide gait training and safety instruction.",
     kneeScooter:
@@ -31,6 +36,8 @@ export const equipment: Equipment[] = [
   },
   {
     countryId: "australia",
+    walkingBoot:
+      "Combination of standard CAM boots and VACOped hinged boots depending on center. VACOped more common in specialized sports medicine clinics for controlled ankle mobilization.",
     crutches:
       "Commonly used in early rehab. Provided in emergency departments or fracture clinics. Physiotherapists provide gait training and safety instruction.",
     kneeScooter:
@@ -42,6 +49,8 @@ export const equipment: Equipment[] = [
   },
   {
     countryId: "uk",
+    walkingBoot:
+      "Varies by center. VACOped hinged boots increasingly common in NHS trusts with specialized Achilles clinics. Traditional CAM boots still used in many general orthopedic departments.",
     crutches:
       "Initially required. Provided by A&E departments or fracture clinics. Physiotherapists provide gait training and safety instruction.",
     kneeScooter:
@@ -53,6 +62,8 @@ export const equipment: Equipment[] = [
   },
   {
     countryId: "germany",
+    walkingBoot:
+      "Strong preference for VACOped hinged boots over standard CAM boots. Considered superior for controlled mobilization and rehabilitation. Widely available through public health insurance.",
     crutches:
       "Standard during early phases. Provided at initial treatment. Physiotherapists provide detailed gait training with emphasis on proper technique.",
     kneeScooter:
@@ -64,6 +75,8 @@ export const equipment: Equipment[] = [
   },
   {
     countryId: "france",
+    walkingBoot:
+      "VACOped hinged boots widely used in specialized centers. Considered standard for Achilles rupture management. Allows for controlled dorsiflexion while limiting plantar flexion.",
     crutches:
       "Used initially until full weight-bearing is achieved. Provided at initial treatment. Kinésithérapeutes provide gait training with emphasis on energy conservation.",
     kneeScooter:
@@ -84,6 +97,7 @@ import {
   Grid,
   Briefcase,
   Stethoscope,
+  Footprints,
 } from "lucide-react";
 
 interface EquipmentComparisonProps {
@@ -107,8 +121,8 @@ export const EquipmentComparison: React.FC<EquipmentComparisonProps> = ({
     {
       id: "boot",
       title: "Walking Boot",
-      dataKey: "crutches",
-      icon: <AlignJustify size={24} />,
+      dataKey: "walkingBoot",
+      icon: <Footprints size={24} />,
     },
     {
       id: "crutches",
@@ -140,7 +154,7 @@ export const EquipmentComparison: React.FC<EquipmentComparisonProps> = ({
     <div className="mb-12">
       <h2 className="mb-6 font-bold text-2xl">Recovery Equipment Comparison</h2>
 
-      <div className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      <div className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {equipmentSections.map((section) => (
           <div
             key={section.id}

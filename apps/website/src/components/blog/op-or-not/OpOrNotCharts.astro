@@ -1,0 +1,430 @@
+---
+import { BarChart, LineChart, ScatterChart, PieChart } from "lucide-astro";
+
+// Import the data
+import countryData from "./data.json";
+
+// Function to get the latest surgical rate for each country
+function getLatestSurgicalRate(country) {
+    if (!country.surgical_rate) return null;
+
+    const years = Object.keys(country.surgical_rate)
+        .filter((k) => !Number.isNaN(Number.parseInt(k)))
+        .sort((a, b) => Number.parseInt(b) - Number.parseInt(a));
+
+    if (years.length === 0) return null;
+
+    return country.surgical_rate[years[0]];
+}
+
+// Function to get the latest incidence for each country
+function getLatestIncidence(country) {
+    if (!country.incidence) return null;
+
+    const years = Object.keys(country.incidence)
+        .filter((k) => !isNaN(parseInt(k)))
+        .sort((a, b) => parseInt(b) - parseInt(a));
+
+    if (years.length === 0) return null;
+
+    return country.incidence[years[0]];
+}
+
+// Prepare countries with complete data
+const countriesWithComplete = countryData
+    .filter(
+        (country) =>
+            getLatestSurgicalRate(country) !== null &&
+            getLatestIncidence(country) !== null,
+    )
+    .map((country) => ({
+        country: country.country,
+        code: country.code,
+        latestSurgicalRate: getLatestSurgicalRate(country),
+        latestIncidence: getLatestIncidence(country),
+        surgicalTrend: country.surgical_rate.trend || "Not specified",
+        incidenceTrend: country.incidence.trend || "Not specified",
+        keyFinding: country.key_finding || "",
+    }));
+
+// Sort by surgical rate for the bar chart
+const sortedByRate = [...countriesWithComplete].sort(
+    (a, b) => b.latestSurgicalRate - a.latestSurgicalRate,
+);
+
+// Countries for the trend charts
+const trendCountries = [
+    "Sweden",
+    "Finland",
+    "United Kingdom",
+    "Japan",
+    "France",
+    "Germany",
+    "Australia",
+];
+---
+
+<div class="gap-6 grid grid-cols-1 lg:grid-cols-2">
+    <div class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="font-semibold text-lg">
+                Surgical Treatment Rates by Country
+            </h3>
+            <BarChart class="text-emerald-600" size={24} />
+        </div>
+        <div class="h-80">
+            <canvas id="surgicalRatesChart"></canvas>
+        </div>
+        <p class="mt-4 text-gray-600 text-sm">
+            Latest available surgical treatment rates show significant variation
+            across countries, from as low as 5% in the UK to over 90% in France
+            and Germany.
+        </p>
+    </div>
+
+    <div class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="font-semibold text-lg">Incidence Trends Over Time</h3>
+            <LineChart class="text-emerald-600" size={24} />
+        </div>
+        <div class="h-80">
+            <canvas id="incidenceTrendChart"></canvas>
+        </div>
+        <p class="mt-4 text-gray-600 text-sm">
+            All studied countries show increasing incidence of Achilles tendon
+            ruptures over time, with the highest rates in Scandinavian
+            countries.
+        </p>
+    </div>
+
+    <div class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="font-semibold text-lg">
+                Surgical Approach Trends Over Time
+            </h3>
+            <LineChart class="text-emerald-600" size={24} />
+        </div>
+        <div class="h-80">
+            <canvas id="surgicalTrendsChart"></canvas>
+        </div>
+        <p class="mt-4 text-gray-600 text-sm">
+            Many countries show declining surgical treatment rates over time,
+            with notable exceptions in Japan where rates have increased.
+        </p>
+    </div>
+
+    <div class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="font-semibold text-lg">Regional Comparison</h3>
+            <PieChart class="text-emerald-600" size={24} />
+        </div>
+        <div class="h-80">
+            <canvas id="regionalComparisonChart"></canvas>
+        </div>
+        <p class="mt-4 text-gray-600 text-sm">
+            Clear geographical patterns exist, with Asian and Southern European
+            countries favoring surgical treatment while Northern European
+            countries prefer non-operative management.
+        </p>
+    </div>
+
+    <div
+        class="col-span-1 lg:col-span-2 bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+    >
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="font-semibold text-lg">
+                Correlation: Incidence vs. Surgical Treatment
+            </h3>
+            <ScatterChart class="text-emerald-600" size={24} />
+        </div>
+        <div class="h-80">
+            <canvas id="correlationChart"></canvas>
+        </div>
+        <p class="mt-4 text-gray-600 text-sm">
+            This scatter plot shows the relationship between incidence rates and
+            surgical treatment preferences, revealing that countries with the
+            highest incidence rates (Scandinavia) tend to have lower surgical
+            rates.
+        </p>
+    </div>
+</div>
+
+<div class="bg-white shadow-sm mt-8 p-5 border border-gray-100 rounded-lg">
+    <h3 class="mb-4 font-semibold text-lg">
+        Key Insights from Data Visualization
+    </h3>
+    <ul class="space-y-2 pl-5 text-gray-700 list-disc">
+        <li>
+            <strong>Geographic Treatment Patterns:</strong> Clear geographical patterns
+            exist in treatment approaches, with Asian and Southern European countries
+            maintaining high surgical rates (70-92%), while Scandinavian countries
+            and the UK have shifted strongly toward non-operative management (5-20%).
+        </li>
+        <li>
+            <strong>Timing of Treatment Shifts:</strong> Most notable shifts away
+            from surgical management occurred between 2008-2014, following publication
+            of high-quality randomized controlled trials showing comparable outcomes
+            with functional rehabilitation protocols.
+        </li>
+        <li>
+            <strong>Universal Incidence Increase:</strong> Despite varying treatment
+            approaches, all studied countries show increasing Achilles tendon rupture
+            incidence, with the highest rates in Scandinavian countries (30-42 per
+            100,000).
+        </li>
+        <li>
+            <strong>Counter-Trend in Japan:</strong> While most countries show declining
+            or stable surgical rates, Japan demonstrated an increasing preference
+            for surgical management (67% to 72% between 2010-2017), reflecting different
+            practice patterns and potentially different patient populations.
+        </li>
+        <li>
+            <strong>Outcome Considerations:</strong> The downward trend in surgical
+            management correlates with research showing similar functional outcomes
+            and reduced complication risks with well-managed non-operative protocols
+            that include early functional rehabilitation.
+        </li>
+    </ul>
+</div>
+
+<script>
+    import Chart from "chart.js/auto";
+
+    // Initialize charts when the component is mounted
+    document.addEventListener("DOMContentLoaded", initializeCharts);
+
+    function initializeCharts() {
+        // Data from the JSON file
+        const countryData = [
+            // Get data from the backend
+        ];
+
+        // Filter out countries with incomplete data and create datasets for charts
+
+        // Surgical Rates Chart
+        createSurgicalRatesChart();
+
+        // Incidence Trend Chart
+        createIncidenceTrendChart();
+
+        // Surgical Trends Chart
+        createSurgicalTrendsChart();
+
+        // Regional Comparison Chart
+        createRegionalComparisonChart();
+
+        // Correlation Chart
+        createCorrelationChart();
+    }
+
+    function createSurgicalRatesChart() {
+        const ctx = document.getElementById("surgicalRatesChart");
+        if (!ctx) return;
+
+        fetch("/api/op-or-not/surgical-rates")
+            .then((response) => response.json())
+            .then((data) => {
+                new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                label: "Surgical Treatment Rate (%)",
+                                data: data.values,
+                                backgroundColor: "rgba(5, 150, 105, 0.7)",
+                                borderColor: "rgba(5, 150, 105, 1)",
+                                borderWidth: 1,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: "Percentage (%)",
+                                },
+                            },
+                            x: {
+                                ticks: {
+                                    autoSkip: false,
+                                    maxRotation: 45,
+                                    minRotation: 45,
+                                },
+                            },
+                        },
+                    },
+                });
+            });
+    }
+
+    function createIncidenceTrendChart() {
+        const ctx = document.getElementById("incidenceTrendChart");
+        if (!ctx) return;
+
+        fetch("/api/op-or-not/incidence-trends")
+            .then((response) => response.json())
+            .then((data) => {
+                new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        datasets: data,
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                type: "linear",
+                                position: "bottom",
+                                min: 1990,
+                                max: 2025,
+                                title: {
+                                    display: true,
+                                    text: "Year",
+                                },
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: "Cases per 100,000 person-years",
+                                },
+                            },
+                        },
+                    },
+                });
+            });
+    }
+
+    function createSurgicalTrendsChart() {
+        const ctx = document.getElementById("surgicalTrendsChart");
+        if (!ctx) return;
+
+        fetch("/api/op-or-not/surgical-trends")
+            .then((response) => response.json())
+            .then((data) => {
+                new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        datasets: data,
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                type: "linear",
+                                position: "bottom",
+                                min: 1990,
+                                max: 2025,
+                                title: {
+                                    display: true,
+                                    text: "Year",
+                                },
+                            },
+                            y: {
+                                min: 0,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: "Surgical Treatment Rate (%)",
+                                },
+                            },
+                        },
+                    },
+                });
+            });
+    }
+
+    function createRegionalComparisonChart() {
+        const ctx = document.getElementById("regionalComparisonChart");
+        if (!ctx) return;
+
+        fetch("/api/op-or-not/regional-comparison")
+            .then((response) => response.json())
+            .then((data) => {
+                new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: data.regions,
+                        datasets: [
+                            {
+                                label: "Average Surgical Treatment Rate (%)",
+                                data: data.values,
+                                backgroundColor: [
+                                    "rgba(249, 115, 22, 0.7)",
+                                    "rgba(59, 130, 246, 0.7)",
+                                    "rgba(16, 185, 129, 0.7)",
+                                    "rgba(245, 158, 11, 0.7)",
+                                    "rgba(236, 72, 153, 0.7)",
+                                ],
+                                borderColor: [
+                                    "rgba(249, 115, 22, 1)",
+                                    "rgba(59, 130, 246, 1)",
+                                    "rgba(16, 185, 129, 1)",
+                                    "rgba(245, 158, 11, 1)",
+                                    "rgba(236, 72, 153, 1)",
+                                ],
+                                borderWidth: 1,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: "Average Surgical Rate (%)",
+                                },
+                            },
+                        },
+                    },
+                });
+            });
+    }
+
+    function createCorrelationChart() {
+        const ctx = document.getElementById("correlationChart");
+        if (!ctx) return;
+
+        fetch("/api/op-or-not/correlation")
+            .then((response) => response.json())
+            .then((data) => {
+                new Chart(ctx, {
+                    type: "scatter",
+                    data: {
+                        datasets: data,
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: "Incidence (per 100,000 person-years)",
+                                },
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: "Surgical Treatment Rate (%)",
+                                },
+                                min: 0,
+                                max: 100,
+                            },
+                        },
+                    },
+                });
+            });
+    }
+</script>

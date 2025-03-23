@@ -1,0 +1,333 @@
+---
+import OpOrNotBody from "./OpOrNotBody.astro";
+import OpOrNotByCountry from "./OpOrNotByCountry.astro";
+import OpOrNotCharts from "./OpOrNotCharts.astro";
+import { Clock, Hammer, ChartBar, FileText, LineChart } from "lucide-astro";
+import countryData from "./data.json";
+
+// Process data for overview table
+const countryOverview = countryData.map((country) => {
+    // Get latest surgical rate
+    const surgicalYears = Object.keys(country.surgical_rate || {})
+        .filter((k) => !isNaN(parseInt(k)))
+        .sort((a, b) => parseInt(b) - parseInt(a));
+
+    const latestSurgicalYear =
+        surgicalYears.length > 0 ? surgicalYears[0] : null;
+    const latestSurgicalRate = latestSurgicalYear
+        ? country.surgical_rate[latestSurgicalYear]
+        : null;
+
+    // Get incidence trend description
+    const incidenceTrend = country.incidence?.trend || null;
+
+    // Get surgical trend description
+    const surgicalTrend = country.surgical_rate?.trend || null;
+
+    return {
+        country: country.country,
+        code: country.code,
+        latestSurgicalRate,
+        latestSurgicalYear,
+        incidenceTrend,
+        surgicalTrend,
+        keyFinding: country.key_finding,
+    };
+});
+
+function getUnicodeFlagIcon(code) {
+    try {
+        return require("country-flag-icons/unicode")(code);
+    } catch (error) {
+        return "";
+    }
+}
+---
+
+<div class="mx-auto px-4 py-8 max-w-5xl">
+    <div class="mb-10 text-center">
+        <h2 class="mb-4 font-bold text-gray-900 text-3xl">
+            Achilles Tendon Rupture: Global Treatment Trends
+        </h2>
+        <p class="mx-auto max-w-3xl text-gray-600">
+            A comprehensive overview of global trends in Achilles tendon rupture
+            incidence and treatment approaches, combining data from multiple
+            international studies.
+        </p>
+    </div>
+
+    <!-- Tabs for different views -->
+    <div class="mb-8 border-gray-200 border-b">
+        <ul
+            class="flex flex-wrap -mb-px font-medium text-sm text-center"
+            id="tab-navigation"
+            role="tablist"
+        >
+            <li class="mr-2" role="presentation">
+                <button
+                    class="inline-block p-4 border-emerald-600 border-b-2 rounded-t-lg active"
+                    id="overview-tab"
+                    data-tabs-target="#overview"
+                    type="button"
+                    role="tab"
+                    aria-controls="overview"
+                    aria-selected="true"
+                >
+                    <div class="flex items-center">
+                        <Clock class="mr-2" size={16} />
+                        <span>Overview</span>
+                    </div>
+                </button>
+            </li>
+            <li class="mr-2" role="presentation">
+                <button
+                    class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600"
+                    id="data-visualization-tab"
+                    data-tabs-target="#data-visualization"
+                    type="button"
+                    role="tab"
+                    aria-controls="data-visualization"
+                    aria-selected="false"
+                >
+                    <div class="flex items-center">
+                        <ChartBar class="mr-2" size={16} />
+                        <span>Data Visualization</span>
+                    </div>
+                </button>
+            </li>
+            <li class="mr-2" role="presentation">
+                <button
+                    class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600"
+                    id="country-comparison-tab"
+                    data-tabs-target="#country-comparison"
+                    type="button"
+                    role="tab"
+                    aria-controls="country-comparison"
+                    aria-selected="false"
+                >
+                    <div class="flex items-center">
+                        <Hammer class="mr-2" size={16} />
+                        <span>Country Comparison</span>
+                    </div>
+                </button>
+            </li>
+            <li role="presentation">
+                <button
+                    class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600"
+                    id="detailed-report-tab"
+                    data-tabs-target="#detailed-report"
+                    type="button"
+                    role="tab"
+                    aria-controls="detailed-report"
+                    aria-selected="false"
+                >
+                    <div class="flex items-center">
+                        <FileText class="mr-2" size={16} />
+                        <span>Detailed Report</span>
+                    </div>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Tab content -->
+    <div id="tab-content">
+        <!-- Overview Tab -->
+        <div
+            class="block bg-gray-50 p-4 rounded-lg"
+            id="overview"
+            role="tabpanel"
+            aria-labelledby="overview-tab"
+        >
+            <div class="mb-6">
+                <h3 class="mb-3 font-semibold text-xl">Key Findings</h3>
+                <div class="gap-4 grid grid-cols-1 md:grid-cols-3">
+                    <div
+                        class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                    >
+                        <div class="flex items-center mb-2">
+                            <div
+                                class="flex justify-center items-center bg-emerald-100 mr-3 rounded-full w-8 h-8 text-emerald-600"
+                            >
+                                <LineChart size={16} />
+                            </div>
+                            <h4 class="font-medium">Increasing Incidence</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                            Achilles tendon rupture incidence has increased
+                            globally over the past decades, with rates as high
+                            as 41.7 per 100,000 person-years in Sweden.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                    >
+                        <div class="flex items-center mb-2">
+                            <div
+                                class="flex justify-center items-center bg-emerald-100 mr-3 rounded-full w-8 h-8 text-emerald-600"
+                            >
+                                <Hammer size={16} />
+                            </div>
+                            <h4 class="font-medium">Treatment Evolution</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                            Many regions show a shift from surgical to
+                            non-surgical treatment, though surgical approaches
+                            remain dominant in the US, Japan, France, and Italy.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                    >
+                        <div class="flex items-center mb-2">
+                            <div
+                                class="flex justify-center items-center bg-emerald-100 mr-3 rounded-full w-8 h-8 text-emerald-600"
+                            >
+                                <Clock size={16} />
+                            </div>
+                            <h4 class="font-medium">Comparable Outcomes</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                            Recent high-quality studies show comparable
+                            functional outcomes between surgical and
+                            well-managed non-operative protocols with early
+                            functional rehabilitation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="mb-3 font-semibold text-xl">Global Snapshot</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-gray-700 text-sm text-left">
+                        <thead
+                            class="bg-gray-100 text-gray-700 text-xs uppercase"
+                        >
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Country</th>
+                                <th scope="col" class="px-6 py-3"
+                                    >Current Approach</th
+                                >
+                                <th scope="col" class="px-6 py-3"
+                                    >Incidence Trend</th
+                                >
+                                <th scope="col" class="px-6 py-3"
+                                    >Surgical Rate Trend</th
+                                >
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                countryOverview.map((country) => (
+                                    <tr class="bg-white border-b">
+                                        <td class="flex items-center px-6 py-4 font-medium">
+                                            {country.code && (
+                                                <span class="mr-2">
+                                                    {getUnicodeFlagIcon(
+                                                        country.code,
+                                                    )}
+                                                </span>
+                                            )}
+                                            <span>{country.country}</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {country.latestSurgicalRate
+                                                ? `${country.latestSurgicalRate}% (${country.latestSurgicalYear})`
+                                                : "Data not available"}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {country.incidenceTrend ||
+                                                "Data not available"}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {country.surgicalTrend ||
+                                                "Data not available"}
+                                        </td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Visualization Tab -->
+        <div
+            class="hidden bg-gray-50 p-4 rounded-lg"
+            id="data-visualization"
+            role="tabpanel"
+            aria-labelledby="data-visualization-tab"
+        >
+            <OpOrNotCharts />
+        </div>
+
+        <!-- Country Comparison Tab -->
+        <div
+            class="hidden bg-gray-50 p-4 rounded-lg"
+            id="country-comparison"
+            role="tabpanel"
+            aria-labelledby="country-comparison-tab"
+        >
+            <OpOrNotByCountry />
+        </div>
+
+        <!-- Detailed Report Tab -->
+        <div
+            class="hidden bg-gray-50 p-4 rounded-lg"
+            id="detailed-report"
+            role="tabpanel"
+            aria-labelledby="detailed-report-tab"
+        >
+            <OpOrNotBody />
+        </div>
+    </div>
+</div>
+
+<script>
+    import getUnicodeFlagIcon from "country-flag-icons/unicode";
+
+    // DOM elements for tabs
+    const tabButtons = document.querySelectorAll('[role="tab"]');
+    const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+
+    // Tab switching functionality
+    tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            // Deactivate all tabs
+            tabButtons.forEach((btn) => {
+                btn.classList.remove("active", "border-emerald-600");
+                btn.classList.add("border-transparent");
+                btn.setAttribute("aria-selected", "false");
+            });
+
+            tabPanels.forEach((panel) => {
+                panel.classList.add("hidden");
+            });
+
+            // Activate current tab
+            button.classList.add("active", "border-emerald-600");
+            button.classList.remove("border-transparent");
+            button.setAttribute("aria-selected", "true");
+
+            // Show current panel
+            const panelId = button
+                .getAttribute("data-tabs-target")
+                ?.substring(1);
+            if (panelId) {
+                const panel = document.getElementById(panelId);
+                if (panel) {
+                    panel.classList.remove("hidden");
+                }
+            }
+        });
+    });
+</script>
+
+<style>
+    #tab-navigation button.active {
+        color: #059669;
+        font-weight: 600;
+    }
+</style>

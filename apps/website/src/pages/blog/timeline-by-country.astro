@@ -1,5 +1,5 @@
 ---
-import Layout from "../../layouts/ArticleLayout.astro";
+import Layout from "../../layouts/Layout.astro";
 import { AchillesRecoveryComparison } from "../../components/blog/timeline-by-country/AchillesRecoveryComparison";
 
 // SEO metadata
@@ -9,7 +9,7 @@ const description =
 ---
 
 <Layout title={title} description={description}>
-  <main class="mx-auto px-4 py-8 container">
+  <main class="mx-auto mt-8 px-4 py-8 container">
     <AchillesRecoveryComparison client:only />
   </main>
 </Layout>

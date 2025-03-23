@@ -1,0 +1,24 @@
+---
+import Layout from "../../layouts/ArticleLayout.astro";
+import OpOrNotByCountry from "../../components/blog/op-or-not/OpOrNotByCountry.astro";
+import MasterOpOrNotComponent from "../../components/blog/op-or-not/MasterOpOrNotComponent.astro";
+
+// SEO metadata
+const title = "Achilles Rupture: Surgery or Non-Surgical Treatment";
+const description =
+  "Compare surgical vs non-surgical treatment approaches for Achilles tendon ruptures across different countries, including recovery outcomes and regional preferences.";
+const createdAt = new Date("2023-11-01");
+const tags = ["science", "guides"];
+---
+
+<Layout
+  title={title}
+  description={description}
+  createdAt={createdAt}
+  tags={tags}
+>
+  <main class="mx-auto px-4 py-8 container">
+    <OpOrNotByCountry />
+    <MasterOpOrNotComponent />
+  </main></Layout
+>

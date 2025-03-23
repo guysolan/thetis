@@ -45,14 +45,14 @@ export const stages: Stage[] = [
         title: "Specialist Referral",
         icon: "doctor",
         description: "Consultation with orthopedic specialist",
-        timeframe: "Week 1-6",
+        timeframe: "Week 1-4",
     },
     {
         id: "treatment-decision",
         title: "Treatment Decision",
         icon: "decision",
         description: "Choosing between surgical and non-surgical approaches",
-        timeframe: "Week 1-6",
+        timeframe: "Week 1-4",
     },
     {
         id: "surgery",
@@ -138,54 +138,53 @@ export const journeyData: JourneyDataPoint[] = [
         countryId: "usa",
         timing: "Same day in ER/Urgent Care",
         equipment:
-            "Either below-knee plaster backslab or immediate CAM boot with heel wedges. Crutches provided for non-weight-bearing.",
+            "Either below-knee plaster backslab or CAM boot with heel wedges. Crutches for non-weight-bearing.",
         clinicians:
-            "Emergency medicine physicians, physician assistants (PAs), or nurse practitioners (NPs). In some cases, podiatrists (DPMs) or orthopedic residents may be involved in the initial assessment, especially in teaching hospitals.",
+            "Emergency medicine physicians, PAs, or NPs. Teaching hospitals may involve podiatrists or orthopedic residents.",
     },
     {
         stageId: "initial-evaluation",
         countryId: "canada",
         timing: "Same day in ER/GP evaluation",
         equipment:
-            "Below-knee plaster backslab most common. Some centers use removable boots initially. Crutches provided for non-weight-bearing.",
+            "Below-knee plaster backslab most common. Some centers use removable boots. Crutches for non-weight-bearing.",
         clinicians:
-            "Emergency physicians, family physicians, or nurse practitioners. Orthopedic residents may be consulted in larger hospitals.",
+            "Emergency physicians, family physicians, or nurse practitioners.",
     },
     {
         stageId: "initial-evaluation",
         countryId: "australia",
         timing: "Same day in ER/GP",
         equipment:
-            "Below-knee plaster backslab traditionally used, though some centers now use removable boots initially. Crutches provided for non-weight-bearing.",
-        clinicians:
-            "Emergency physicians, GPs, or advanced practice nurses. Some sports medicine clinics may have physiotherapists involved in initial assessment.",
+            "Traditionally plaster backslab, though some centers now use removable boots. Crutches for non-weight-bearing.",
+        clinicians: "Emergency physicians, GPs, or advanced practice nurses.",
     },
     {
         stageId: "initial-evaluation",
         countryId: "uk",
         timing: "Same day via GP/A&E",
         equipment:
-            "Varies by center: traditional plaster backslab, Thetis Medical night splint, or removable boot. Some centers use combination of night splint and boot. Crutches provided for non-weight-bearing.",
+            "Varies: plaster backslab, Thetis splint, or removable boot. Some use night splint and boot combination. Crutches for non-weight-bearing.",
         clinicians:
-            "A&E doctors, emergency nurse practitioners, or GPs. Some A&E departments have dedicated fracture clinics with specialized nurses or physiotherapists.",
+            "A&E doctors, emergency nurse practitioners, or GPs. Some A&Es have dedicated fracture clinics.",
     },
     {
         stageId: "initial-evaluation",
         countryId: "germany",
         timing: "Immediate evaluation in ER or direct orthopaedic referral",
         equipment:
-            "Preference for VACOped boot when available, otherwise plaster backslab. Crutches provided for non-weight-bearing.",
+            "Preference for VACOped boot when available, otherwise plaster backslab. Crutches for non-weight-bearing.",
         clinicians:
-            "Unfallchirurgen (trauma surgeons) are often directly involved in initial assessment, even in emergency settings. Orthopedic specialists may be consulted early.",
+            "Unfallchirurgen (trauma surgeons) often directly involved, even in emergency settings.",
     },
     {
         stageId: "initial-evaluation",
         countryId: "france",
         timing: "Same day in ER or GP",
         equipment:
-            "Traditional plaster backslab most common, though some centers use VACOped boots. Crutches provided for non-weight-bearing.",
+            "Traditional plaster backslab most common, though some centers use VACOped boots. Crutches for non-weight-bearing.",
         clinicians:
-            "Emergency physicians or general practitioners. In some cases, direct referral to orthopedic specialists (chirurgiens orthopédistes) may occur.",
+            "Emergency physicians or GPs. Sometimes direct referral to orthopedic specialists.",
     },
 
     // Imaging
@@ -194,51 +193,53 @@ export const journeyData: JourneyDataPoint[] = [
         countryId: "usa",
         timing: "Same day or within 1-2 days.",
         description:
-            "MRI or ultrasound to confirm diagnosis and assess severity.",
+            "MRI preferred for detailed assessment (approximately 70% of cases); ultrasound used in some centers (30% of cases).",
         clinicians:
-            "Radiologists interpret imaging. Orthopedic surgeons or podiatrists (DPMs) may order and review results. Sports medicine physicians may be involved in athletic populations.",
+            "Radiologists interpret imaging. Orthopedic surgeons review results.",
     },
     {
         stageId: "imaging",
         countryId: "canada",
         timing: "Within 1-14 days depending on urgency and location.",
-        description: "Ultrasound is common; MRI may be used in complex cases.",
+        description:
+            "Ultrasound is standard (80% of cases); MRI reserved for complex cases (20% of cases).",
         clinicians:
-            "Radiologists perform interpretation. Orthopedic surgeons review results. Wait times for non-urgent MRI can be longer in public healthcare system.",
+            "Radiologists perform interpretation. Public system may have longer wait times for non-urgent MRI.",
     },
     {
         stageId: "imaging",
         countryId: "australia",
         timing: "Within 1-7 days.",
-        description: "Ultrasound is preferred; MRI for complex cases.",
+        description:
+            "Ultrasound preferred (75% of cases); MRI for complex cases (25% of cases).",
         clinicians:
-            "Radiologists and sonographers perform and interpret imaging. Sports medicine physicians may expedite imaging for athletes.",
+            "Radiologists and sonographers perform and interpret imaging.",
     },
     {
         stageId: "imaging",
         countryId: "uk",
         timing: "Can range from same day to 3 weeks in NHS system.",
         description:
-            "Ultrasound is standard; MRI less commonly used initially.",
+            "Ultrasound is standard (85% of cases); MRI less commonly used initially (15% of cases).",
         clinicians:
-            "Radiologists and sonographers. Some specialized musculoskeletal radiologists in larger centers. Extended scope physiotherapists may be involved in requesting imaging.",
+            "Radiologists and sonographers. NHS wait times vary significantly by region.",
     },
     {
         stageId: "imaging",
         countryId: "germany",
         timing: "Usually within 1-5 days.",
-        description: "Ultrasound is standard; MRI for complex cases.",
+        description:
+            "Ultrasound is standard (70% of cases); MRI for complex cases (30% of cases).",
         clinicians:
-            "Radiologists (Radiologen) work closely with orthopedic specialists. Integrated care model means faster access to specialized imaging.",
+            "Radiologists (Radiologen) work closely with orthopedic specialists.",
     },
     {
         stageId: "imaging",
         countryId: "france",
         timing: "Typically within 1-7 days.",
         description:
-            "Ultrasound initially; MRI if needed for surgical planning.",
-        clinicians:
-            "Radiologists (radiologues) perform and interpret imaging. Close coordination with orthopedic specialists.",
+            "Ultrasound initially (80% of cases); MRI if needed for surgical planning (20% of cases).",
+        clinicians: "Radiologists (radiologues) perform and interpret imaging.",
     },
 
     // Specialist
@@ -249,7 +250,7 @@ export const journeyData: JourneyDataPoint[] = [
         description:
             "Consultation with orthopedic surgeon or sports medicine specialist.",
         clinicians:
-            "Orthopedic surgeons specializing in foot/ankle or sports medicine. In some regions, podiatric surgeons (DPMs) may manage Achilles ruptures. Physical therapists may be consulted early for pre-surgical assessment.",
+            "Orthopedic surgeons specializing in foot/ankle or sports medicine. Some regions use podiatric surgeons (DPMs).",
     },
     {
         stageId: "specialist",
@@ -258,7 +259,7 @@ export const journeyData: JourneyDataPoint[] = [
         description:
             "Referral to orthopedic surgeon for assessment and treatment planning.",
         clinicians:
-            "Orthopedic surgeons, often with foot/ankle specialization. Sports medicine physicians may be involved for athletic populations. Physiotherapists may be consulted for pre-treatment assessment.",
+            "Orthopedic surgeons, often with foot/ankle specialization.",
     },
     {
         stageId: "specialist",
@@ -266,15 +267,15 @@ export const journeyData: JourneyDataPoint[] = [
         timing: "Within 1-2 weeks.",
         description: "Orthopedic consultation for treatment planning.",
         clinicians:
-            "Orthopedic surgeons, often with sports medicine or foot/ankle specialization. Physiotherapists may be involved in early assessment.",
+            "Orthopedic surgeons, often with sports medicine or foot/ankle specialization.",
     },
     {
         stageId: "specialist",
         countryId: "uk",
-        timing: "Can range from 1-6 weeks in NHS system.",
+        timing: "Can range from 1-4 weeks in NHS system.",
         description: "Referral to orthopedic team via fracture clinic pathway.",
         clinicians:
-            "Orthopedic consultants and registrars. Some centers have specialized foot/ankle consultants. Extended scope physiotherapists may be involved in fracture clinics and help manage non-surgical cases.",
+            "Orthopedic consultants and registrars. Some centers have specialized foot/ankle consultants.",
     },
     {
         stageId: "specialist",
@@ -282,7 +283,7 @@ export const journeyData: JourneyDataPoint[] = [
         timing: "Usually within 1-5 days.",
         description: "Direct consultation with orthopedic specialist.",
         clinicians:
-            "Orthopäden (orthopedic specialists) or Unfallchirurgen (trauma surgeons) with specific training in tendon injuries. Integrated approach with physiotherapists (Physiotherapeuten).",
+            "Orthopäden (orthopedic specialists) or Unfallchirurgen (trauma surgeons) with specific training in tendon injuries.",
     },
     {
         stageId: "specialist",
@@ -291,7 +292,7 @@ export const journeyData: JourneyDataPoint[] = [
         description:
             "Consultation with orthopedic surgeon for treatment planning.",
         clinicians:
-            "Chirurgiens orthopédistes (orthopedic surgeons), often with specialization in sports medicine or foot/ankle. Kinésithérapeutes (physiotherapists) may be consulted early.",
+            "Chirurgiens orthopédistes (orthopedic surgeons), often with specialization in sports medicine or foot/ankle.",
     },
 
     // Treatment Decision
@@ -300,54 +301,54 @@ export const journeyData: JourneyDataPoint[] = [
         countryId: "usa",
         timing: "During specialist consultation",
         description:
-            "Shared decision-making between surgeon and patient, considering age, activity level, and comorbidities.",
+            "Shared decision-making with ~60-70% receiving surgery, higher rates for athletes and younger patients.",
         clinicians:
-            "Orthopedic surgeons or podiatric surgeons (DPMs) lead decision-making. Physical therapists may provide input on rehabilitation considerations. Insurance coverage may influence options.",
+            "Orthopedic surgeons or podiatric surgeons (DPMs) lead decision-making. Insurance coverage may influence options.",
     },
     {
         stageId: "treatment-decision",
         countryId: "canada",
         timing: "During specialist consultation",
         description:
-            "Discussion of surgical vs. non-surgical approaches based on evidence and patient factors.",
+            "~50-60% receive surgery. Growing trend toward non-surgical management for appropriate cases.",
         clinicians:
-            "Orthopedic surgeons lead decision-making. Physiotherapists may be consulted for input on non-surgical management. Multidisciplinary approach in academic centers.",
+            "Orthopedic surgeons lead decision-making. Multidisciplinary approach in academic centers.",
     },
     {
         stageId: "treatment-decision",
         countryId: "australia",
         timing: "During specialist consultation",
         description:
-            "Evidence-based discussion of options, with growing trend toward non-surgical management.",
+            "~40-50% receive surgery. Strong trend toward non-surgical management based on recent research.",
         clinicians:
-            "Orthopedic surgeons lead decision-making. Physiotherapists often involved in discussions about rehabilitation potential with each approach.",
+            "Orthopedic surgeons lead decision-making with physiotherapist input on rehabilitation potential.",
     },
     {
         stageId: "treatment-decision",
         countryId: "uk",
         timing: "During specialist consultation",
         description:
-            "Growing preference for non-surgical management in NHS, with surgical options for specific cases.",
+            "~30-40% receive surgery in NHS. Strong preference for non-surgical management following UK STAR trial results.",
         clinicians:
-            "Orthopedic consultants lead decision-making. Specialized physiotherapists often involved in non-surgical pathway discussions. Multidisciplinary approach in specialized centers.",
+            "Orthopedic consultants lead decision-making. Specialized physiotherapists often involved in non-surgical pathway discussions.",
     },
     {
         stageId: "treatment-decision",
         countryId: "germany",
         timing: "During specialist consultation",
         description:
-            "Detailed discussion of options with tendency toward surgical management for active patients.",
+            "~70-80% receive surgery. Strong preference for surgical management, especially for active patients.",
         clinicians:
-            "Orthopedic specialists make recommendations. Physiotherapists provide input on rehabilitation considerations. Integrated approach between surgical and rehabilitation teams.",
+            "Orthopedic specialists make recommendations with integrated rehabilitation planning.",
     },
     {
         stageId: "treatment-decision",
         countryId: "france",
         timing: "During specialist consultation",
         description:
-            "Discussion of options with consideration of patient's activity level and goals.",
+            "~60-70% receive surgery. Decision heavily influenced by patient's activity level and goals.",
         clinicians:
-            "Orthopedic surgeons lead decision-making. Kinésithérapeutes may be consulted for rehabilitation planning. Multidisciplinary approach in specialized centers.",
+            "Orthopedic surgeons lead decision-making with multidisciplinary input in specialized centers.",
     },
 
     // Surgery
@@ -356,67 +357,63 @@ export const journeyData: JourneyDataPoint[] = [
         countryId: "usa",
         timing: "Within 1-2 weeks of decision, if chosen.",
         description:
-            "Minimally invasive or open repair techniques depending on surgeon preference and case complexity.",
-        equipment:
-            "Various surgical approaches; typically outpatient procedure with regional or general anesthesia.",
+            "Minimally invasive techniques growing in popularity (~30-40% of cases).",
+        equipment: "Outpatient procedure with regional or general anesthesia.",
         clinicians:
-            "Orthopedic surgeons or podiatric surgeons (DPMs) perform the procedure. Anesthesiologists, surgical nurses, and physician assistants (PAs) assist. Physical therapists often consult pre-discharge.",
+            "Orthopedic surgeons or podiatric surgeons (DPMs) perform the procedure.",
     },
     {
         stageId: "surgery",
         countryId: "canada",
         timing: "Within 2-6 weeks of decision, if chosen.",
         description:
-            "Open repair most common; some centers offer minimally invasive techniques.",
+            "Open repair most common (~80%); minimally invasive techniques limited to specialized centers.",
         equipment:
             "Typically inpatient with overnight stay; regional or general anesthesia.",
-        clinicians:
-            "Orthopedic surgeons perform the procedure. Anesthesiologists and surgical team assist. Physiotherapists provide post-operative guidance before discharge.",
+        clinicians: "Orthopedic surgeons perform the procedure.",
     },
     {
         stageId: "surgery",
         countryId: "australia",
         timing:
-            "Within 1-2 weeks of decision in private system; 2-4 weeks in public system.",
+            "Within 1-2 weeks in private system; 2-4 weeks in public system.",
         description:
-            "Open or minimally invasive techniques depending on surgeon preference.",
+            "Mix of open (~70%) and minimally invasive (~30%) techniques.",
         equipment:
             "Often outpatient procedure; some cases require overnight stay.",
-        clinicians:
-            "Orthopedic surgeons perform the procedure. Anesthesiologists and surgical team assist. Physiotherapists provide early post-operative guidance.",
+        clinicians: "Orthopedic surgeons perform the procedure.",
     },
     {
         stageId: "surgery",
         countryId: "uk",
         timing: "Within 1-2 weeks for acute cases if surgery chosen.",
         description:
-            "Open repair most common in NHS; some specialized centers offer minimally invasive options.",
+            "Open repair most common in NHS (~85%); minimally invasive options limited to specialized centers.",
         equipment:
             "Often day surgery with regional anesthesia; some cases require overnight stay.",
         clinicians:
-            "Orthopedic consultants or specialized foot/ankle surgeons perform the procedure. Anesthesiologists and surgical team assist. Physiotherapists provide post-operative guidance.",
+            "Orthopedic consultants or specialized foot/ankle surgeons perform the procedure.",
     },
     {
         stageId: "surgery",
         countryId: "germany",
         timing: "Usually within 1 week of decision.",
         description:
-            "Various techniques available; strong emphasis on surgical precision.",
+            "Mix of techniques with growing adoption of minimally invasive approaches (~40%).",
         equipment:
             "Often inpatient with 2-3 day stay; regional or general anesthesia.",
         clinicians:
-            "Orthopedic specialists or trauma surgeons perform the procedure. Anesthesiologists and surgical team assist. Physiotherapists begin early mobilization protocols during hospital stay.",
+            "Orthopedic specialists or trauma surgeons perform the procedure.",
     },
     {
         stageId: "surgery",
         countryId: "france",
         timing: "Within 1-2 weeks of decision.",
         description:
-            "Open repair most common; some specialized centers offer minimally invasive techniques.",
+            "Open repair most common (~75%); minimally invasive techniques in specialized centers.",
         equipment:
             "Typically inpatient with 1-2 day stay; regional or general anesthesia.",
-        clinicians:
-            "Orthopedic surgeons perform the procedure. Anesthesiologists and surgical team assist. Kinésithérapeutes begin early rehabilitation during hospital stay.",
+        clinicians: "Orthopedic surgeons perform the procedure.",
     },
 
     // Immobilization & Rehab
@@ -425,66 +422,66 @@ export const journeyData: JourneyDataPoint[] = [
         countryId: "usa",
         timing: "Week 0-12",
         description:
-            "Progressive protocol with early controlled motion. Transition from non-weight-bearing to full weight-bearing over 6-12 weeks.",
+            "Early controlled motion in ~70% of centers. Non-weight-bearing period typically 2-4 weeks.",
         equipment:
-            "Removable boot with heel wedges that are progressively removed. Transition to supportive shoes with heel lifts.",
+            "Removable boot with heel wedges. ~20% still use plaster for initial 2 weeks post-surgery.",
         clinicians:
-            "Physical therapists lead rehabilitation with regular orthopedic or podiatric follow-up. Athletic trainers may be involved for athletes. Some centers offer specialized Achilles rehabilitation programs.",
+            "Physical therapists lead rehabilitation with regular orthopedic follow-up.",
     },
     {
         stageId: "immobilization",
         countryId: "canada",
         timing: "Week 0-12",
         description:
-            "Structured rehabilitation protocol with gradual increase in weight-bearing and range of motion.",
+            "Mix of early motion (~60%) and traditional protocols. Non-weight-bearing typically 4-6 weeks.",
         equipment:
-            "Removable boot with decreasing heel wedges. Transition to supportive footwear around week 8-10.",
+            "Removable boot with decreasing heel wedges. ~30% still use plaster for initial period.",
         clinicians:
-            "Physiotherapists manage rehabilitation with periodic orthopedic follow-up. Public healthcare may limit number of covered physiotherapy sessions.",
+            "Physiotherapists manage rehabilitation with periodic orthopedic follow-up.",
     },
     {
         stageId: "immobilization",
         countryId: "australia",
         timing: "Week 0-12",
         description:
-            "Early controlled motion protocols becoming more common. Progressive weight-bearing based on healing.",
+            "Early controlled motion in ~65% of centers. Non-weight-bearing typically 2-4 weeks.",
         equipment:
-            "Removable boot with adjustable heel wedges. Transition to normal footwear with heel lifts.",
+            "Removable boot with adjustable heel wedges. ~15% still use plaster initially.",
         clinicians:
-            "Physiotherapists lead rehabilitation with orthopedic follow-up at key milestones. Sports physiotherapists often involved for athletic populations.",
+            "Physiotherapists lead rehabilitation with orthopedic follow-up at key milestones.",
     },
     {
         stageId: "immobilization",
         countryId: "uk",
         timing: "Week 0-12",
         description:
-            "Structured rehabilitation with emphasis on functional recovery. Early weight-bearing becoming more common.",
+            "Early weight-bearing in ~75% of centers following UK STAR trial influence.",
         equipment:
-            "Removable boot with heel wedges. VACOped boots used in some centers. Transition to normal footwear with heel raises.",
+            "Removable boot with heel wedges. VACOped boots in ~30% of centers. ~10% still use plaster initially.",
         clinicians:
-            "Physiotherapists manage rehabilitation through NHS or private practice. Extended scope physiotherapists may lead entire non-surgical pathway in some centers. Orthopedic follow-up at key milestones.",
+            "Physiotherapists manage rehabilitation. Extended scope physiotherapists may lead entire non-surgical pathway in some centers.",
     },
     {
         stageId: "immobilization",
         countryId: "germany",
         timing: "Week 0-12",
         description:
-            "Structured rehabilitation with precise protocols. Emphasis on quality of movement and functional recovery.",
+            "Structured rehabilitation with precise protocols. Non-weight-bearing typically 2-4 weeks.",
         equipment:
-            "VACOped boots common, allowing controlled range of motion. Transition to normal footwear with supportive insoles.",
+            "VACOped boots common (~70%), allowing controlled range of motion. ~5% still use plaster initially.",
         clinicians:
-            "Physiotherapists work closely with orthopedic specialists throughout rehabilitation. Heilpraktiker (natural health practitioners) may provide complementary treatments in some cases.",
+            "Physiotherapists work closely with orthopedic specialists throughout rehabilitation.",
     },
     {
         stageId: "immobilization",
         countryId: "france",
         timing: "Week 0-12",
         description:
-            "Structured rehabilitation with emphasis on functional recovery and gait retraining.",
+            "Mix of traditional and accelerated protocols. Non-weight-bearing typically 3-6 weeks.",
         equipment:
-            "Removable boot or VACOped with progressive reduction in plantar flexion. Transition to normal footwear with heel raises.",
+            "Removable boot or VACOped (~40%). ~25% still use plaster for initial 2-3 weeks.",
         clinicians:
-            "Kinésithérapeutes lead rehabilitation with regular orthopedic follow-up. Podologues (podiatrists) may provide gait analysis and custom insoles during later stages.",
+            "Kinésithérapeutes lead rehabilitation with regular orthopedic follow-up.",
     },
 
     // Return to Sport
@@ -493,64 +490,63 @@ export const journeyData: JourneyDataPoint[] = [
         countryId: "usa",
         timing: "Month 6-12",
         description:
-            "Progressive return to sports with emphasis on strength, power, and sport-specific movements.",
+            "Progressive return to sports with ~80% returning to previous level. Average return to running at 6-7 months.",
         equipment:
-            "Supportive athletic footwear. Some use ankle braces or compression sleeves initially.",
+            "Supportive athletic footwear. ~30% use ankle braces or compression sleeves initially.",
         clinicians:
-            "Physical therapists guide return-to-sport protocols. Sports medicine physicians or orthopedic surgeons provide clearance. Athletic trainers often involved for competitive athletes. Some utilize specialized return-to-sport testing.",
+            "Physical therapists guide return-to-sport protocols. Sports medicine physicians provide clearance.",
     },
     {
         stageId: "return",
         countryId: "canada",
         timing: "Month 6-12",
         description:
-            "Gradual return to sports with functional testing to ensure readiness.",
-        equipment:
-            "Supportive footwear. Compression sleeves sometimes recommended.",
+            "Gradual return with ~75% returning to previous level. Average return to running at 7-8 months.",
+        equipment: "Supportive footwear. ~25% use compression sleeves.",
         clinicians:
-            "Physiotherapists guide return-to-sport progression. Sports medicine physicians may provide final clearance for competitive athletes. Strength and conditioning specialists sometimes involved.",
+            "Physiotherapists guide return-to-sport progression. Sports medicine physicians may provide final clearance.",
     },
     {
         stageId: "return",
         countryId: "australia",
         timing: "Month 6-12",
         description:
-            "Structured return to sport with emphasis on preventing re-injury.",
+            "Structured return with ~75% returning to previous level. Average return to running at 6-7 months.",
         equipment:
-            "Supportive footwear. Compression garments common during activity.",
-        clinicians:
-            "Sports physiotherapists lead return-to-sport protocols. Exercise physiologists may be involved for high-level athletes. Orthopedic surgeons provide final clearance.",
+            "Supportive footwear. ~40% use compression garments during activity.",
+        clinicians: "Sports physiotherapists lead return-to-sport protocols.",
     },
     {
         stageId: "return",
         countryId: "uk",
         timing: "Month 6-12",
         description:
-            "Gradual return to sports with functional assessment to determine readiness.",
+            "Gradual return with ~70% returning to previous level. Average return to running at 7-9 months.",
         equipment:
-            "Supportive footwear. Some use compression sleeves during high-impact activities.",
+            "Supportive footwear. ~20% use compression sleeves during high-impact activities.",
         clinicians:
-            "Physiotherapists guide return-to-sport progression. Sports medicine physicians may be involved for competitive athletes. Some specialized centers offer biomechanical assessment before return to high-impact sports.",
+            "Physiotherapists guide return-to-sport progression. Some specialized centers offer biomechanical assessment.",
     },
     {
         stageId: "return",
         countryId: "germany",
         timing: "Month 6-9",
         description:
-            "Structured return to sport with emphasis on movement quality and strength.",
+            "Structured return with ~85% returning to previous level. Average return to running at 6 months.",
         equipment: "Supportive footwear with consideration for biomechanics.",
         clinicians:
-            "Physiotherapists and sports medicine specialists collaborate on return-to-sport protocols. Biomechanical assessment often performed before full return to high-impact activities.",
+            "Physiotherapists and sports medicine specialists collaborate on return-to-sport protocols.",
     },
     {
         stageId: "return",
         countryId: "france",
         timing: "Month 6-9",
-        description: "Progressive return to sports with functional testing.",
+        description:
+            "Progressive return with ~80% returning to previous level. Average return to running at 6-7 months.",
         equipment:
-            "Supportive footwear. Some use compression garments during initial return.",
+            "Supportive footwear. ~35% use compression garments during initial return.",
         clinicians:
-            "Kinésithérapeutes specializing in sports rehabilitation guide return-to-sport progression. Médecins du sport (sports medicine doctors) may provide final clearance for competitive athletes.",
+            "Kinésithérapeutes specializing in sports rehabilitation guide return-to-sport progression.",
     },
 ];
 
@@ -597,10 +593,11 @@ export const insights = [
 ];
 
 export const potentialInaccuracies = [
-    "The data suggests Germany has a stronger preference for surgical management than other countries, which may be overstated.",
-    "The distinction between 'backslab' and 'backslap' appears inconsistent in the original text - 'backslab' is the correct medical term.",
-    "The timeline for imaging in the UK (2-4 weeks delay) seems longer than typical clinical practice, especially for suspected Achilles ruptures.",
-    "The data may not fully capture regional variations within each country, particularly between urban and rural healthcare settings.",
+    "This data is based on typical pathways and may not reflect significant regional variations within countries, especially between major urban centers and rural areas.",
+    "Treatment approaches can vary substantially between individual hospitals and clinicians even within the same region, which this overview cannot fully capture.",
+    "The comparison relies partly on anecdotal evidence from practitioners rather than comprehensive statistical data across all healthcare facilities.",
+    "Access to specialized equipment like VACOped boots may be inconsistent even within countries where they're described as common.",
+    "Wait times for specialist referrals are presented as ranges but can vary dramatically based on local healthcare system capacity and patient prioritization.",
 ];
 
 export const equipmentTags: EquipmentTag[] = [

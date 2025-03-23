@@ -70,7 +70,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
     isEquipmentSection?: boolean;
   }) => (
     <div className="mb-6 last:mb-0">
-      <div className="flex items-center gap-2 mb-3">
+      <div className="flex justify-start items-start gap-2 mb-3">
         <span className="text-primary">{icon}</span>
         <h4 className="font-semibold text-lg">{title}</h4>
       </div>
