@@ -4,6 +4,7 @@ import OpOrNotByCountry from "./OpOrNotByCountry.astro";
 import OpOrNotCharts from "./OpOrNotCharts.astro";
 import {
     Hammer,
+    Flag,
     ChartBar,
     FileText,
     TrendingDown,
@@ -84,18 +85,7 @@ function getUnicodeFlagIcon(code) {
 }
 ---
 
-<div class="mx-auto px-4 py-8 max-w-5xl">
-    <div class="mb-10 text-center">
-        <h2 class="mb-4 font-bold text-gray-900 text-3xl">
-            Global Approaches to Surgical Treatment of Achilles Tendon Ruptures
-        </h2>
-        <p class="mx-auto max-w-3xl text-gray-600">
-            A comprehensive analysis of international surgical trends for
-            Achilles tendon rupture management, revealing significant variations
-            in treatment preferences across countries.
-        </p>
-    </div>
-
+<div class="mx-auto px-4 pb-8 max-w-5xl">
     <!-- Tabs for different views -->
     <div class="mb-8 border-gray-200 border-b">
         <ul
@@ -106,12 +96,28 @@ function getUnicodeFlagIcon(code) {
             <li class="mr-2" role="presentation">
                 <button
                     class="inline-block p-4 border-emerald-600 border-b-2 rounded-t-lg active"
+                    id="country-comparison-tab"
+                    data-tabs-target="#country-comparison"
+                    type="button"
+                    role="tab"
+                    aria-controls="country-comparison"
+                    aria-selected="true"
+                >
+                    <div class="flex items-center">
+                        <Flag class="mr-2" size={16} />
+                        <span>Country Treatment Map</span>
+                    </div>
+                </button>
+            </li>
+            <li class="mr-2" role="presentation">
+                <button
+                    class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600"
                     id="overview-tab"
                     data-tabs-target="#overview"
                     type="button"
                     role="tab"
                     aria-controls="overview"
-                    aria-selected="true"
+                    aria-selected="false"
                 >
                     <div class="flex items-center">
                         <Hammer class="mr-2" size={16} />
@@ -135,22 +141,7 @@ function getUnicodeFlagIcon(code) {
                     </div>
                 </button>
             </li>
-            <li class="mr-2" role="presentation">
-                <button
-                    class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600"
-                    id="country-comparison-tab"
-                    data-tabs-target="#country-comparison"
-                    type="button"
-                    role="tab"
-                    aria-controls="country-comparison"
-                    aria-selected="false"
-                >
-                    <div class="flex items-center">
-                        <Hammer class="mr-2" size={16} />
-                        <span>Country Treatment Map</span>
-                    </div>
-                </button>
-            </li>
+
             <li role="presentation">
                 <button
                     class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600"
@@ -171,10 +162,20 @@ function getUnicodeFlagIcon(code) {
     </div>
 
     <!-- Tab content -->
-    <div id="tab-content">
+    <div id="tab-content" class="w-full">
+        <!-- Country Comparison Tab -->
+        <div
+            class="block bg-gray-50 p-4 rounded-lg w-full"
+            id="country-comparison"
+            role="tabpanel"
+            aria-labelledby="country-comparison-tab"
+        >
+            <OpOrNotByCountry />
+        </div>
+
         <!-- Overview Tab -->
         <div
-            class="block bg-gray-50 p-4 rounded-lg"
+            class="hidden bg-gray-50 p-4 rounded-lg w-full"
             id="overview"
             role="tabpanel"
             aria-labelledby="overview-tab"
@@ -656,17 +657,7 @@ function getUnicodeFlagIcon(code) {
             role="tabpanel"
             aria-labelledby="data-visualization-tab"
         >
-            <OpOrNotCharts client:load />
-        </div>
-
-        <!-- Country Comparison Tab -->
-        <div
-            class="hidden bg-gray-50 p-4 rounded-lg"
-            id="country-comparison"
-            role="tabpanel"
-            aria-labelledby="country-comparison-tab"
-        >
-            <OpOrNotByCountry />
+            <OpOrNotCharts />
         </div>
 
         <!-- Detailed Report Tab -->
@@ -682,8 +673,6 @@ function getUnicodeFlagIcon(code) {
 </div>
 
 <script>
-    import getUnicodeFlagIcon from "country-flag-icons/unicode";
-
     // DOM elements for tabs
     const tabButtons = document.querySelectorAll('[role="tab"]');
     const tabPanels = document.querySelectorAll('[role="tabpanel"]');

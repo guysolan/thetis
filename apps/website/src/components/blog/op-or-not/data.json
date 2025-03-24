@@ -138,26 +138,29 @@
   {
     "country": "New Zealand",
     "code": "NZ",
-    "source": "https://www.tandfonline.com/doi/abs/10.1179/108331907X174998",
-    "sample_size": "Regional study",
+    "source": "https://pubmed.ncbi.nlm.nih.gov/21733434/",
+    "sample_size": "363 patients",
     "surgical_rate": {
-      "1998": 80.0,
-      "2003": 60.0,
-      "trend": "Decreasing surgical rate",
-      "evidence": "Regional study showing shift toward more non-operative protocols",
-      "direction": "decreasing"
+      "2010": 39.4,
+      "trend": "Selective approach to treatment with 39.4% treated surgically",
+      "evidence": "Consecutive series of 363 patients over 8.5 years (143 operative, 220 nonoperative)",
+      "direction": "selective"
     },
     "incidence": {
-      "1998": 4.7,
-      "2003": 10.3,
-      "trend": "Substantial increase from 4.7 to 10.3 per 100,000 between 1998 and 2003",
-      "direction": "increasing"
+      "2010": 15.2,
+      "trend": "High incidence, particularly among women due to netball injuries",
+      "direction": "high"
     },
     "demographics": {
-      "peak_age": "30-39 years",
-      "male_percentage": 84
+      "gender_distribution": "Equal male:female ratio up to age 50, 73% male in 51-60 age group",
+      "common_cause": "Netball was the most common cause of injury, explaining high female incidence"
     },
-    "key_finding": "Significant increase in ATR incidence with shift toward more non-operative management"
+    "outcomes": {
+      "surgical_rerupture": "1.4% re-rupture rate in surgical group",
+      "nonsurgical_rerupture": "8.6% re-rupture rate in non-operative group (11.5% males, 5.6% females)",
+      "age_factor": "Lower re-rupture rate in patients over 40 (4.1%) vs under 40 (13.1%) in non-operative group"
+    },
+    "key_finding": "Results support surgery in patients under 40 years (particularly males) if no contraindications. Functional bracing with non-operative treatment yields low re-rupture rates in patients over 40, especially females."
   },
   {
     "country": "Canada",
@@ -332,27 +335,34 @@
   {
     "country": "Australia",
     "code": "AU",
-    "source": "https://orthosports.com.au/pdf-download/Achilles-Tendon-Rupture-1.pdf",
-    "sample_size": "Victorian Orthopaedic Trauma Outcomes Registry data",
+    "source": "https://research.monash.edu/en/publications/twelve-month-outcomes-following-surgical-repair-of-the-achilles-t",
+    "sample_size": "204 patients (Victorian Orthopaedic Trauma Outcomes Registry)",
     "surgical_rate": {
       "2009": 68.0,
       "2012": 43.0,
       "2014": 35.0,
-      "trend": "68% decrease in surgical repairs between 2009 and 2014",
-      "evidence": "Analysis of Victorian Orthopaedic Trauma Outcomes Registry",
+      "2019": 12.3,
+      "trend": "68% decrease in surgical repairs between 2009 and 2014, continuing to decline to 12.3% by 2019",
+      "evidence": "Analysis of Victorian Orthopaedic Trauma Outcomes Registry and subsequent national studies",
       "direction": "decreasing"
     },
     "incidence": {
       "2009": 13.4,
       "2012": 15.9,
       "2014": 17.7,
-      "trend": "Increasing trend between 2009 and 2014",
+      "2018": 20.1,
+      "trend": "Increasing trend between 2009 and 2018",
       "direction": "increasing"
     },
     "demographics": {
       "peak_age": "30-45 years",
-      "male_percentage": 78
+      "male_percentage": 78,
+      "bimodal_distribution": "First peak at 25-40 years (sports injuries), second peak >60 years (low-energy injuries)"
     },
-    "key_finding": "Rapid decline in surgical treatment following publication of landmark studies in 2010 showing non-inferiority of well-managed conservative treatment"
+    "outcomes": {
+      "non_operative_success": "Supervised non-operative management with functional rehabilitation protocols shows comparable outcomes to surgery",
+      "complication_rates": "30% complication rate with surgery vs 8% with non-operative treatment"
+    },
+    "key_finding": "Australia shows a significant shift away from surgical management, with a 68% decrease in surgical repairs from 2009-2014, mirroring international trends. This shift is attributed to emerging high-quality evidence supporting non-surgical approaches with lower complication rates."
   }
 ]

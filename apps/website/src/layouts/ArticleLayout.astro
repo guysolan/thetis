@@ -24,7 +24,7 @@ const { title, description, createdAt, updatedAt, heroImage } = Astro.props;
                             />
                         )}
                     </div>
-                    <div class="mx-auto p-4 max-w-[calc(100%-2em)] text-gray-800">
+                    <div class="mx-auto mt-8 p-4 max-w-[calc(100%-2em)] text-gray-800">
                         <div class="mb-4 py-4 text-center">
                             <div class="mb-2 text-gray-600">
                                 {dayjs(createdAt).format("MMMM D, YYYY")}
@@ -37,8 +37,13 @@ const { title, description, createdAt, updatedAt, heroImage } = Astro.props;
                                     </div>
                                 )}
                             </div>
-                            <h1 class="mb-2">{title}</h1>
-                            <hr />
+                            <h1 class="mb-4 font-bold text-gray-900 text-3xl md:text-3xl leading-tight">
+                                {title}
+                            </h1>
+                            <p class="mx-auto max-w-4xl text-gray-600 text-base md:text-lg">
+                                {description}
+                            </p>
+                            <hr class="mx-auto mt-8 border-gray-200 w-2/3" />
                         </div>
                         <slot />
                     </div>
