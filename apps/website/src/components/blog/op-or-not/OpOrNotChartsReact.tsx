@@ -164,15 +164,15 @@ const chartGreen = "hsl(162, 46%, 75%)";
 
 export function OpOrNotCharts() {
   return (
-    <div className="space-y-8 w-full">
+    <div className="space-y-4 sm:space-y-8 w-full">
       {/* Scatter Plot */}
-      <div className="bg-white shadow-sm p-6 border border-gray-100 rounded-lg w-full">
-        <h3 className="mb-4 font-semibold text-lg">
+      <div className="bg-white shadow-sm p-3 sm:p-6 border border-gray-100 rounded-lg w-full">
+        <h3 className="mb-2 sm:mb-4 font-semibold text-lg">
           Surgical Rates vs Incidence
         </h3>
-        <div className="w-full h-[400px]">
+        <div className="w-full h-[350px] sm:h-[400px]">
           <ResponsiveContainer width="100%" height="100%">
-            <ScatterChart margin={{ top: 20, right: 10, bottom: 20, left: 10 }}>
+            <ScatterChart margin={{ top: 20, right: 5, bottom: 20, left: 5 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                 type="number"
@@ -246,13 +246,13 @@ export function OpOrNotCharts() {
       </div>
 
       {/* Surgical Trends with 2025 Projections */}
-      <div className="bg-white shadow-sm p-6 border border-gray-100 rounded-lg w-full">
-        <h3 className="mb-4 font-semibold text-lg">
+      <div className="bg-white shadow-sm p-3 sm:p-6 border border-gray-100 rounded-lg w-full">
+        <h3 className="mb-2 sm:mb-4 font-semibold text-lg">
           Surgical Treatment Trends with 2025 Projections
         </h3>
-        <div className="w-full h-[400px]">
+        <div className="w-full h-[350px] sm:h-[400px]">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart margin={{ top: 20, right: 10, bottom: 40, left: 10 }}>
+            <LineChart margin={{ top: 20, right: 5, bottom: 40, left: 5 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="year" type="number" domain={[1990, 2025]} />
               <YAxis
@@ -352,14 +352,14 @@ export function OpOrNotCharts() {
       </div>
 
       {/* Bar Chart */}
-      <div className="bg-white shadow-sm p-6 border border-gray-100 rounded-lg w-full">
-        <h3 className="mb-4 font-semibold text-lg">
+      <div className="bg-white shadow-sm p-3 sm:p-6 border border-gray-100 rounded-lg w-full">
+        <h3 className="mb-2 sm:mb-4 font-semibold text-lg">
           Latest Surgical Rates by Region
         </h3>
-        <div className="w-full h-[400px]">
+        <div className="w-full h-[350px] sm:h-[400px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              margin={{ top: 20, right: 10, bottom: 60, left: 10 }}
+              margin={{ top: 20, right: 5, bottom: 60, left: 5 }}
               data={scatterData}
             >
               <CartesianGrid strokeDasharray="3 3" />
