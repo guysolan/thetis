@@ -8,7 +8,7 @@ const title = "Achilles Rupture: Surgery or Non-Surgical Treatment";
 const description =
   "Compare surgical vs non-surgical treatment approaches for Achilles tendon ruptures across different countries, including recovery outcomes and regional preferences.";
 const createdAt = new Date("2023-11-01");
-const tags = ["science", "guides"];
+const tags = ["science", "guides"] as ("science" | "guides")[];
 ---
 
 <Layout
@@ -19,6 +19,6 @@ const tags = ["science", "guides"];
 >
   <main class="mx-auto px-4 py-8 container">
     <OpOrNotByCountry />
-    <MasterOpOrNotComponent />
+    <!-- <MasterOpOrNotComponent /> -->
   </main></Layout
 >

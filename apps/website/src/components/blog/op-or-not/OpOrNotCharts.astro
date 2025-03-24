@@ -4,44 +4,67 @@ import { BarChart, LineChart, ScatterChart, PieChart } from "lucide-astro";
 // Import the data
 import countryData from "./data.json";
 
+// Define country data type
+interface CountryData {
+    country: string;
+    code: string;
+    surgical_rate: {
+        [yearKey: string]: number | string;
+    } & {
+        trend?: string;
+        direction?: string;
+        evidence?: string;
+    };
+    incidence: {
+        [yearKey: string]: number | string;
+    } & {
+        trend?: string;
+        direction?: string;
+    };
+    key_finding?: string;
+    [key: string]: unknown;
+}
+
 // Function to get the latest surgical rate for each country
-function getLatestSurgicalRate(country) {
+function getLatestSurgicalRate(country: CountryData): number | null {
     if (!country.surgical_rate) return null;
 
     const years = Object.keys(country.surgical_rate)
-        .filter((k) => !Number.isNaN(Number.parseInt(k)))
-        .sort((a, b) => Number.parseInt(b) - Number.parseInt(a));
+        .filter((k) => !Number.isNaN(Number(k)))
+        .sort((a, b) => Number(b) - Number(a));
 
     if (years.length === 0) return null;
 
-    return country.surgical_rate[years[0]];
+    return country.surgical_rate[years[0]] as number;
 }
 
 // Function to get the latest incidence for each country
-function getLatestIncidence(country) {
+function getLatestIncidence(country: CountryData): number | null {
     if (!country.incidence) return null;
 
     const years = Object.keys(country.incidence)
-        .filter((k) => !isNaN(parseInt(k)))
-        .sort((a, b) => parseInt(b) - parseInt(a));
+        .filter((k) => !Number.isNaN(Number(k)))
+        .sort((a, b) => Number(b) - Number(a));
 
     if (years.length === 0) return null;
 
-    return country.incidence[years[0]];
+    return country.incidence[years[0]] as number;
 }
 
 // Prepare countries with complete data
 const countriesWithComplete = countryData
     .filter(
         (country) =>
-            getLatestSurgicalRate(country) !== null &&
-            getLatestIncidence(country) !== null,
+            getLatestSurgicalRate(country as unknown as CountryData) !== null &&
+            getLatestIncidence(country as unknown as CountryData) !== null,
     )
     .map((country) => ({
         country: country.country,
         code: country.code,
-        latestSurgicalRate: getLatestSurgicalRate(country),
-        latestIncidence: getLatestIncidence(country),
+        latestSurgicalRate: getLatestSurgicalRate(
+            country as unknown as CountryData,
+        ),
+        latestIncidence: getLatestIncidence(country as unknown as CountryData),
         surgicalTrend: country.surgical_rate.trend || "Not specified",
         incidenceTrend: country.incidence.trend || "Not specified",
         keyFinding: country.key_finding || "",
@@ -49,7 +72,7 @@ const countriesWithComplete = countryData
 
 // Sort by surgical rate for the bar chart
 const sortedByRate = [...countriesWithComplete].sort(
-    (a, b) => b.latestSurgicalRate - a.latestSurgicalRate,
+    (a, b) => (b.latestSurgicalRate || 0) - (a.latestSurgicalRate || 0),
 );
 
 // Countries for the trend charts
@@ -218,10 +241,12 @@ const trendCountries = [
     }
 
     function createSurgicalRatesChart() {
-        const ctx = document.getElementById("surgicalRatesChart");
+        const ctx = document.getElementById(
+            "surgicalRatesChart",
+        ) as HTMLCanvasElement;
         if (!ctx) return;
 
-        fetch("/api/op-or-not/surgical-rates")
+        fetch("/api/blog/op-or-not/surgical-rates")
             .then((response) => response.json())
             .then((data) => {
                 new Chart(ctx, {
@@ -264,10 +289,12 @@ const trendCountries = [
     }
 
     function createIncidenceTrendChart() {
-        const ctx = document.getElementById("incidenceTrendChart");
+        const ctx = document.getElementById(
+            "incidenceTrendChart",
+        ) as HTMLCanvasElement;
         if (!ctx) return;
 
-        fetch("/api/op-or-not/incidence-trends")
+        fetch("/api/blog/op-or-not/incidence-trends")
             .then((response) => response.json())
             .then((data) => {
                 new Chart(ctx, {
@@ -302,10 +329,12 @@ const trendCountries = [
     }
 
     function createSurgicalTrendsChart() {
-        const ctx = document.getElementById("surgicalTrendsChart");
+        const ctx = document.getElementById(
+            "surgicalTrendsChart",
+        ) as HTMLCanvasElement;
         if (!ctx) return;
 
-        fetch("/api/op-or-not/surgical-trends")
+        fetch("/api/blog/op-or-not/surgical-trends")
             .then((response) => response.json())
             .then((data) => {
                 new Chart(ctx, {
@@ -342,10 +371,12 @@ const trendCountries = [
     }
 
     function createRegionalComparisonChart() {
-        const ctx = document.getElementById("regionalComparisonChart");
+        const ctx = document.getElementById(
+            "regionalComparisonChart",
+        ) as HTMLCanvasElement;
         if (!ctx) return;
 
-        fetch("/api/op-or-not/regional-comparison")
+        fetch("/api/blog/op-or-not/regional-comparison")
             .then((response) => response.json())
             .then((data) => {
                 new Chart(ctx, {
@@ -393,10 +424,12 @@ const trendCountries = [
     }
 
     function createCorrelationChart() {
-        const ctx = document.getElementById("correlationChart");
+        const ctx = document.getElementById(
+            "correlationChart",
+        ) as HTMLCanvasElement;
         if (!ctx) return;
 
-        fetch("/api/op-or-not/correlation")
+        fetch("/api/blog/op-or-not/correlation")
             .then((response) => response.json())
             .then((data) => {
                 new Chart(ctx, {
