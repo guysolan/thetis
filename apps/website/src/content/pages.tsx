@@ -114,10 +114,6 @@ export const videoPages = [
     href: "video/night-splint-instructions",
   },
   {
-    title: "Trauma Splint Application",
-    href: "video/trauma-splint-application",
-  },
-  {
     title: "Night Splint Presentation",
     href: "video/night-splint-presentation",
   },
