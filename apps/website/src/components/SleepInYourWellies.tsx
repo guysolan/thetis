@@ -16,6 +16,11 @@ const bootTerms = [
     country: "United States",
   },
   { term: "Rubber Boots", flag: getUnicodeFlagIcon("CA"), country: "Canada" },
+  {
+    term: "Gummistiefel",
+    flag: getUnicodeFlagIcon("DE"),
+    country: "Germany",
+  },
 ];
 
 export default function SleepInYourWellies() {
