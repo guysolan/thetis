@@ -26,15 +26,19 @@ export type OrderItemInView = {
     "item_type": string;
     address: Address;
 };
-export type OrderView = Database["public"]["Views"]["orders_view"]["Row"] & {
+export interface OrderView {
     order_id: number;
+    order_type: string;
+    order_date: string;
+    total_value?: number;
+    carriage?: number;
+    currency: string;
+    payment_status?: string;
     items: OrderItemInView[];
-    order_type: OrderType;
     from_address: Address["Row"];
     to_address: Address["Row"];
     from_company: Company["Row"];
     to_company: Company["Row"];
     from_contact: Contact["Row"];
     to_contact: Contact["Row"];
-    currency: Currency;
-};
+}
