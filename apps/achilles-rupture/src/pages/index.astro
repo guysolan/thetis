@@ -6,7 +6,6 @@ import ContentListing from "../components/ContentListing.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
 
-// Fetch all articles and guides
 const guides = await getCollection("guide");
 const articles = await getCollection("article");
 const allPosts = [
@@ -39,6 +38,7 @@ const allPosts = [
     </head>
     <body>
         <Header />
+
         <main id="main-content">
             <ContentListing
                 posts={allPosts}
