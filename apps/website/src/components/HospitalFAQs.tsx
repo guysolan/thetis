@@ -15,7 +15,7 @@ const hospitalFaqs: FAQCategory[] = [
       {
         question: "What is an Achilles Rupture Splint?",
         answer:
-          "Our Achilles Rupture Splint is a medical device designed to support and protect the Achilles tendon during recovery from injury or surgery. It holds the foot in plantarflexion (pointing toes downward) which helps prevent Achilles tendon lengthening and prevents re-ruptures.",
+          "Our Achilles Rupture Splint is a medical device designed to support and protect the Achilles tendon during recovery from injury or surgery. It holds the foot in plantarflexion (pointing toes downward) which helps avoid Achilles tendon lengthening and prevents re-ruptures.",
       },
       {
         question: "What are the key use cases for the splint?",
@@ -200,7 +200,7 @@ const hospitalFaqs: FAQCategory[] = [
       {
         question: "Do you offer warranty or replacement options?",
         answer:
-          "Yes, all our splints come with a manufacturer warranty. We also offer replacement options in case of sizing issues or product defects. Contact our customer service team at info@thetismedical.com for details on our warranty policy.",
+          "Yes, all our splints come with a manufacturer warranty. We also offer replacement options in case of sizing issues or product defects.",
       },
     ],
   },
