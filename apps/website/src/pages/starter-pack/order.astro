@@ -1,0 +1,11 @@
+---
+import OrderLayout from "@/layouts/OrderLayout.astro";
+import OrderForm from "@/components/starter-pack/OrderForm.astro";
+
+// Get size from URL parameter
+const size = Astro.url.searchParams.get("size") || "18";
+---
+
+<OrderLayout>
+    <OrderForm size={size} />
+</OrderLayout>

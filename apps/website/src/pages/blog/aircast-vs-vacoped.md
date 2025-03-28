@@ -111,9 +111,9 @@ One of the most critical aspects of the recovery process is being able to walk w
 
 ### Sleeping
 
-Wearing a comfortable boot while sleeping is essential for a good night's rest. Unfortutely, the Aircast boot with wedges is bulky, making it difficult to sleep. Meanwhile the VACOped boot is slight more comfortable thanks to its vacuum cushion and adjustable air pump. Despite this, niether option is great. To get a good nights sleep, the Achilles rupture night splint can be worn at night for a lightweight, cool and slim-line solution.
+Wearing a comfortable boot while sleeping is essential for a good night's rest. Unfortutely, the Aircast boot with wedges is bulky, making it difficult to sleep. Meanwhile the VACOped boot is slight more comfortable thanks to its vacuum cushion and adjustable air pump. Despite this, niether option is great. To get a good nights sleep, the Achilles rupture splint can be worn at night for a lightweight, cool and slim-line solution.
 
-🏆 **Winner: [Achilles Rupture Night Splint](https://www.thetismedical.com/night-splint)**
+🏆 **Winner: [Achilles Rupture Splint](https://www.thetismedical.com/night-splint)**
 
 ![achilles_rupture_night_splint_bed_thetis_medical.jpg](/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg)
 
@@ -140,4 +140,4 @@ Driving can be a challenging activity while wearing a boot, and it's essential t
 
 In conclusion, both the Aircast boot with wedges and the VACOped boot are effective treatment options for an Achilles rupture. The choice between the two largely depends on the patient's individual needs, preferences, and budget. The Aircast boot is a good choice for patients who want a customizable, lightweight, and inexpensive treatment option, while the VACOped boot is a good choice for patients who want increased mobility, increased support, and waterproofing, but are willing to pay a higher price for those benefits.
 
-Whichever boot you choose, it is important to note that neither of these boots are designed for sleeping. Therefore, when making your decision - ensure to consider usage alongside the [Achilles Rupture Night Splint](night-splint).
+Whichever boot you choose, it is important to note that neither of these boots are designed for sleeping. Therefore, when making your decision - ensure to consider usage alongside the [Achilles Rupture Splint](night-splint).

@@ -46,7 +46,7 @@ I highly recommend the Thetis Medical Achilles Repair Splint to colleagues and p
         title: "An excellent piece of equipment",
         short: "An excellent piece of equipment",
         body:
-            "I have been recommending the Achilles rupture night splint to my patients for over a year. The feedback has been excellent. Patients sometimes find sleeping in a boot uncomfortable, and having an alternative, more lightweight option is well received. My patients have also used it to protect the foot and enable some time outside of the boot. I think it is an excellent piece of equipment that can make recovery from a difficult condition more user-friendly.",
+            "I have been recommending the Achilles rupture splint to my patients for over a year. The feedback has been excellent. Patients sometimes find sleeping in a boot uncomfortable, and having an alternative, more lightweight option is well received. My patients have also used it to protect the foot and enable some time outside of the boot. I think it is an excellent piece of equipment that can make recovery from a difficult condition more user-friendly.",
         country: "GB",
     },
     {

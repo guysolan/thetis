@@ -1,0 +1,117 @@
+---
+import Label from "@/components/form/Label.astro";
+import Input from "@/components/form/Input.astro";
+import FormWrap from "@/components/contact/FormWrap.astro";
+import OptOut from "@/components/form/OptOut.astro";
+
+const { size = "18" } = Astro.props;
+const sizeKey = typeof size === "string" ? size : "18";
+
+const packSizes: Record<
+    string,
+    { name: string; quantity: number; price: number; shipping: number }
+> = {
+    "18": { name: "Starter Pack", quantity: 18, price: 1314, shipping: 79 },
+    "36": { name: "Standard Pack", quantity: 36, price: 2592, shipping: 124 },
+    "72": { name: "Department Pack", quantity: 72, price: 5112, shipping: 163 },
+};
+
+const pack = packSizes[sizeKey] || packSizes["18"];
+const total = pack.price + pack.shipping;
+---
+
+<FormWrap formId="xyzedwnb">
+    <div class="space-y-8 w-full">
+        <h2
+            class="font-bold text-neutral-950 text-3xl md:text-4xl leading-[105%]"
+        >
+            Order {pack.name}
+        </h2>
+        <p class="text-gray-800 text-xl leading-relaxed">
+            Complete your order for {pack.quantity} Achilles tendon rupture splints.
+        </p>
+
+        <div class="bg-gray-50 mb-6 p-5 rounded-lg text-lg">
+            <div class="flex justify-between mb-2">
+                <span>{pack.quantity} splints</span>
+                <span>${pack.price}</span>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span>Shipping</span>
+                <span>${pack.shipping}</span>
+            </div>
+            <div class="flex justify-between mt-2 pt-2 border-t font-semibold">
+                <span>Total</span>
+                <span>${total}</span>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <div class="gap-6 grid grid-cols-1 md:grid-cols-2">
+                <div class="form-group">
+                    <Label labelFor="firstName" class="text-lg"
+                        >First Name</Label
+                    >
+                    <Input
+                        name="firstName"
+                        type="text"
+                        required={true}
+                        placeholder="Your first name"
+                        class="p-3 text-lg"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <Label labelFor="lastName" class="text-lg">Last Name</Label>
+                    <Input
+                        name="lastName"
+                        type="text"
+                        required={true}
+                        placeholder="Your last name"
+                        class="p-3 text-lg"
+                    />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <Label labelFor="facility" class="text-lg"
+                    >Healthcare Facility Name</Label
+                >
+                <Input
+                    name="facility"
+                    type="text"
+                    required={true}
+                    placeholder="Hospital or Clinic Name"
+                    class="p-3 text-lg"
+                />
+            </div>
+
+            <div class="form-group">
+                <Label labelFor="email" class="text-lg">Email</Label>
+                <Input
+                    required={true}
+                    name="email"
+                    type="email"
+                    placeholder="Your professional email"
+                    class="p-3 text-lg"
+                />
+            </div>
+
+            <OptOut />
+
+            <p class="bg-primary/10 p-5 rounded-lg text-primary text-base">
+                <span class="font-semibold">Note:</span> By submitting this form,
+                you're requesting the {pack.name.toLowerCase()} with {
+                    pack.quantity
+                } units. Our team will contact you to complete your order.
+            </p>
+
+            <button
+                type="submit"
+                class="bg-primary hover:bg-primary/90 hover:shadow-md px-10 py-5 rounded-lg w-full md:w-auto font-bold text-white text-lg transition-all"
+            >
+                Submit Order Request
+            </button>
+        </div>
+    </div>
+</FormWrap>

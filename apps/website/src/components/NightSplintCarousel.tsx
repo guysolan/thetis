@@ -43,7 +43,7 @@ function NightSplintCarousel() {
   // return (
   //   <img
   //     src={NightSplintWhiteBg.src || NightSplintWhiteBg}
-  //     alt="Night Splint"
+  //     alt="Splint"
   //   />
   // );
   return <AnimatedTestimonials testimonials={testimonials} autoplay={false} />;

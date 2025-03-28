@@ -101,7 +101,7 @@ export const contactLinks: Link[] = [
 //   {
 //     title: "Evidence",
 //     description:
-//       "Evidence for Thetis Medical's Achilles Rupture Night Splint and Trauma Splint.",
+//       "Evidence for Thetis Medical's Achilles Rupture Splint and Trauma Splint.",
 //     href: "/evidence",
 //     icon: <Microscope size={20} />,
 //     variant: "outline",
@@ -110,18 +110,18 @@ export const contactLinks: Link[] = [
 
 export const videoPages = [
   {
-    title: "Night Splint Instructions",
+    title: "Splint Instructions",
     href: "video/night-splint-instructions",
   },
   {
-    title: "Night Splint Presentation",
+    title: "Splint Presentation",
     href: "video/night-splint-presentation",
   },
 ];
 
 export const pages = [
   { title: "Home", href: "" },
-  { title: "Night Splint", href: "night-splint" },
+  { title: "Splint", href: "night-splint" },
   { title: "Trauma Splint", href: "trauma-splint" },
 
   { title: "Sitemap", href: "sitemap" },

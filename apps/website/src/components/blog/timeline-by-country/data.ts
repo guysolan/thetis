@@ -164,7 +164,7 @@ export const journeyData: JourneyDataPoint[] = [
         countryId: "uk",
         timing: "Same day via GP/A&E",
         equipment:
-            "Varies: plaster backslab, Thetis splint, or removable boot. Some use night splint and boot combination. Crutches for non-weight-bearing.",
+            "Varies: plaster backslab, Thetis splint, or removable boot. Some use splint and boot combination. Crutches for non-weight-bearing.",
         clinicians:
             "A&E doctors, emergency nurse practitioners, or GPs. Some A&Es have dedicated fracture clinics.",
     },
@@ -589,7 +589,7 @@ export const insights = [
     "Germany and France appear to favor the VACOped boot system, which may offer more precise control than standard CAM/Aircast boots.",
     "The UK NHS system shows the longest potential delays for specialist referral (up to 6 weeks).",
     "Return to sport timelines are consistent (6-12 months) across all countries, suggesting this is based on biological healing rather than healthcare differences.",
-    "Night splints are more commonly used in the UK and US healthcare systems, while being less prevalent in continental European approaches.",
+    "Splints are more commonly used in the UK and US healthcare systems, while being less prevalent in continental European approaches.",
 ];
 
 export const potentialInaccuracies = [
@@ -609,8 +609,8 @@ export const equipmentTags: EquipmentTag[] = [
     },
     {
         id: "thetis-splint",
-        name: "Thetis Night Splint",
-        description: "Specialized night splint for maintaining ankle position",
+        name: "Thetis Splint",
+        description: "Specialized splint for maintaining ankle position",
         color: "green",
     },
     {

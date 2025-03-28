@@ -1,0 +1,28 @@
+---
+import { ArrowLeft } from "lucide-astro";
+import Layout from "./Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+---
+
+<Layout
+    title="Thetis Medical - Order Starter Pack"
+    description="Order Achilles tendon night splints starter packs for your healthcare facility."
+    image="https://thetismedical.com/images/icons/socials/achilles-drawing-image.png"
+>
+    <main>
+        <ColorGradient>
+            <div class="mx-auto px-4 py-12 max-w-5xl">
+                <div class="flex items-center mb-8">
+                    <a
+                        href="/starter-pack"
+                        class="flex items-center text-primary text-base hover:underline"
+                    >
+                        <ArrowLeft class="mr-1 w-5 h-5" />
+                        Back to Packs
+                    </a>
+                </div>
+                <slot />
+            </div>
+        </ColorGradient>
+    </main>
+</Layout>

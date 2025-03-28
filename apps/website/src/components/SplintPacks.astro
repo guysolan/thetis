@@ -1,0 +1,91 @@
+---
+import {
+    packSizes,
+    formatCurrency,
+    shippingCostsUS,
+} from "@/data/splintPricing";
+
+// Default to US shipping
+const region = Astro.props.region || "US";
+const shippingCosts = region === "US" ? shippingCostsUS : shippingCostsUK;
+---
+
+<!-- Pricing Cards Section -->
+<div class="gap-8 grid md:grid-cols-3 mb-16 px-4 md:px-8 lg:px-16">
+    {
+        packSizes.map((pack, index) => {
+            const shipping =
+                region === "US" ? pack.shippingUS : pack.shippingUK;
+            const isMiddlePack = index === 1;
+            return (
+                <div
+                    class:list={[
+                        "group relative bg-white shadow-lg hover:shadow-xl rounded-xl overflow-hidden transition-all transform",
+                        isMiddlePack
+                            ? "hover:-translate-y-2"
+                            : "hover:-translate-y-1",
+                    ]}
+                >
+                    <div class="absolute inset-0 bg-gradient-to-r from-gray-500/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    {isMiddlePack && (
+                        <>
+                            <div class="top-0 right-0 absolute bg-primary px-4 py-1 rounded-bl-lg font-semibold text-white text-sm">
+                                POPULAR
+                            </div>
+                            <div class="-top-1 -right-1 -left-1 absolute bg-primary rounded-t-lg h-1"></div>
+                        </>
+                    )}
+                    <div class="relative p-8">
+                        <div class="mb-6 text-center">
+                            <h3 class="font-bold text-primary text-2xl">
+                                {pack.name}
+                            </h3>
+                            <p class="mt-2 text-gray-600">
+                                {index === 0
+                                    ? "For smaller hospitals or clinics"
+                                    : index === 1
+                                      ? "Most popular for mid-sized hospitals"
+                                      : "For large hospitals or multiple departments"}
+                            </p>
+                            <div class="flex justify-center items-center mt-4">
+                                <span class="font-bold text-5xl">
+                                    {formatCurrency(pack.total)}
+                                </span>
+                            </div>
+                            <p class="mt-2 pb-2 border-b text-gray-600">
+                                {pack.quantity} Units (
+                                {formatCurrency(pack.pricePerUnit)} per unit)
+                            </p>
+                        </div>
+
+                        <ul class="space-y-3 mb-8">
+                            {Object.entries(pack.splints).map(
+                                ([key, { qty, name }]) => (
+                                    <li class="flex justify-between items-center text-gray-700">
+                                        <span>{name}</span>
+                                        <span class="font-bold text-primary">
+                                            {qty}x
+                                        </span>
+                                    </li>
+                                ),
+                            )}
+                            <li class="flex justify-between items-center pt-3 border-t">
+                                <span class="font-medium">Shipping</span>
+                                <span class="font-bold">
+                                    {formatCurrency(shipping)}
+                                </span>
+                            </li>
+                        </ul>
+
+                        <a
+                            href={`/starter-pack/order?size=${pack.value}`}
+                            class="block bg-primary hover:bg-primary/90 py-4 rounded-lg w-full font-medium font-semibold text-white text-center transition-colors"
+                        >
+                            Order {pack.name}
+                        </a>
+                    </div>
+                </div>
+            );
+        })
+    }
+</div>

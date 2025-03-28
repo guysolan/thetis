@@ -144,7 +144,7 @@ export const EquipmentComparison: React.FC<EquipmentComparisonProps> = ({
     },
     {
       id: "nightSplint",
-      title: "Thetis Night Splint",
+      title: "Thetis Splint",
       dataKey: "nightSplint",
       icon: <Briefcase size={24} />,
     },

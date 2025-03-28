@@ -1,0 +1,52 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import HospitalFAQs from "@/components/HospitalFAQs";
+import SplintPacks from "../../components/SplintPacks.astro";
+import HighlightedWord from "../../components/HighlightedWord";
+---
+
+<Layout
+    title="Hospital Starter Packs - Achilles Tendon Splints | Thetis Medical"
+    description="Order Achilles tendon splints for your healthcare facility. Ideal for ER departments and overnight patient care with eligible insurance reimbursement."
+>
+    <main>
+        <ColorGradient>
+            <div class="mx-auto px-4 pt-16 pb-12 max-w-7xl">
+                <div class="flex flex-col gap-4 mb-8 text-center">
+                    <h1
+                        class="font-semibold text-neutral-950 text-3xl md:text-4xl leading-[105%]"
+                    >
+                        Make your first order of
+                        <HighlightedWord>Achilles Rupture </HighlightedWord> Splints
+                    </h1>
+
+                    <p class="mx-auto max-w-3xl text-gray-600 text-xl">
+                        All packs have twice as many large splints as small
+                        splints because men (who have bigger feet) are more
+                        likely to rupture their Achilles tendon.
+                    </p>
+                </div>
+            </div>
+
+            <SplintPacks />
+
+            <!-- FAQ Section -->
+            <div class="mx-auto mb-16 max-w-4xl">
+                <h2 class="mb-12 font-bold text-3xl text-center">
+                    Frequently Asked Questions
+                </h2>
+                <HospitalFAQs client:only />
+            </div>
+
+            <div class="mx-auto max-w-2xl text-gray-600 text-sm text-center">
+                <p>
+                    First-time orders are typically processed within one
+                    business day. Our team will contact you to discuss payment
+                    options, billing procedures, and confirm your delivery
+                    details.
+                </p>
+            </div>
+        </ColorGradient>
+    </main>
+</Layout>

@@ -36,7 +36,7 @@ function DesktopNav() {
                 reviewCount={184}
                 productUrl="/night-splint"
                 buyUrl="/buy-now"
-                wholesaleUrl="/wholesale"
+                wholesaleUrl="/order-wholesale"
               />
             </NavigationMenuContent>
           </NavigationMenuItem>
