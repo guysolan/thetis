@@ -24,7 +24,7 @@ type FAQsProps = {
 
 const FAQs = ({
   faqs,
-  className = "sm:px-2 w-full",
+  className = "px-4 md:px-0 w-full",
   withSchema = true,
 }: FAQsProps) => {
   useEffect(() => {
