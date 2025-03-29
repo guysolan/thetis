@@ -24,7 +24,7 @@ const { title, description, createdAt, updatedAt, heroImage } = Astro.props;
                             />
                         )}
                     </div>
-                    <div class="mx-auto mt-4 sm:mt-8 p-0 sm:p-4 max-w-[calc(100%-1em)] sm:max-w-[calc(100%-2em)] text-gray-800">
+                    <div class="mx-auto mt-4 sm:mt-8 sm:p-4 px-2 md:px-0 w-full text-gray-800">
                         <div class="mb-4 py-2 sm:py-4 text-center">
                             <div class="mb-2 pt-4 text-gray-600">
                                 {dayjs(createdAt).format("MMMM D, YYYY")}

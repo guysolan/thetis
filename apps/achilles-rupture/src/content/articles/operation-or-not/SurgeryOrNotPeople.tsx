@@ -68,7 +68,7 @@ export default function SurgeryOrNotPeople() {
               return (
                 <UserRound
                   key={`person-${v_index}`}
-                  className={`w-5 h-5 m-0.5 transition-transform hover:scale-125 ${v_colorMap[v_outcome]}`}
+                  className={`w-4 h-4 md:w-5 md:h-5 m-0.5 transition-transform hover:scale-125 ${v_colorMap[v_outcome]}`}
                   stroke="currentColor"
                 />
               );
@@ -79,19 +79,26 @@ export default function SurgeryOrNotPeople() {
 
   return (
     <div className="w-full">
-      <h2 className="mb-6 font-bold text-3xl text-center">
+      <h2 className="mb-6 font-bold text-2xl md:text-3xl text-center">
         Treatment Outcomes per 100 Patients
       </h2>
 
-      <div className="flex md:flex-row flex-col justify-center items-center gap-4 md:gap-0">
+      {/* VS Divider for Mobile - Shown at top on mobile, hidden on desktop */}
+      <div className="md:hidden flex justify-center mb-4">
+        <div className="bg-gray-100 px-4 py-2 rounded-full font-bold text-xl">
+          VS
+        </div>
+      </div>
+
+      <div className="flex md:flex-row flex-col justify-center md:items-center gap-6 md:gap-0">
         {/* Surgical Treatment */}
-        <div className="flex-1 bg-white shadow-sm hover:shadow-md p-5 border border-gray-200 rounded-xl transition-shadow">
-          <h3 className="mb-4 font-bold text-2xl text-center">
+        <div className="flex-1 bg-white shadow-sm hover:shadow-md p-4 md:p-5 border border-gray-200 rounded-xl transition-shadow">
+          <h3 className="mb-3 md:mb-4 font-bold text-xl md:text-2xl text-center">
             Surgical Treatment
           </h3>
 
-          <div className="mb-5">
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-4 rounded-lg">
+          <div className="mb-4 md:mb-5">
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-2 md:p-4 rounded-lg">
               {renderPeopleGrid({
                 success: surgicalSuccess,
                 rerupture: surgicalReruptures,
@@ -101,46 +108,48 @@ export default function SurgeryOrNotPeople() {
             </div>
           </div>
 
-          <div className="mt-3 text-lg">
+          <div className="space-y-1 mt-3 text-base md:text-lg">
             <div className="flex justify-between">
               <span className="font-semibold">Re-ruptures:</span>
               <span>
-                {surgicalReruptures} patients ({SURGICAL_RERUPTURE_RATE}%)
+                {surgicalReruptures} ({SURGICAL_RERUPTURE_RATE}%)
               </span>
             </div>
             <div className="flex justify-between">
               <span className="font-semibold">Infections:</span>
               <span>
-                {surgicalInfections} patients ({SURGICAL_INFECTION_RATE}%)
+                {surgicalInfections} ({SURGICAL_INFECTION_RATE}%)
               </span>
             </div>
             <div className="flex justify-between">
               <span className="font-semibold">Complications:</span>
               <span>
-                {surgicalOtherComplications} patients (
+                {surgicalOtherComplications} (
                 {SURGICAL_OTHER_COMPLICATIONS.toFixed(1)}%)
               </span>
             </div>
             <div className="flex justify-between font-semibold">
               <span>Success:</span>
-              <span>{surgicalSuccess} patients</span>
+              <span>{surgicalSuccess}</span>
             </div>
           </div>
         </div>
 
-        {/* VS Divider */}
-        <div className="flex flex-col justify-center items-center mx-2 md:mx-6">
-          <div className="px-6 py-4 rounded-full font-bold text-3xl">VS</div>
+        {/* VS Divider - Hidden on mobile, shown on desktop */}
+        <div className="hidden md:flex flex-col justify-center items-center mx-2 md:mx-6">
+          <div className="bg-gray-100 px-6 py-4 rounded-full font-bold text-3xl">
+            VS
+          </div>
         </div>
 
         {/* Non-Surgical Treatment */}
-        <div className="flex-1 bg-white shadow-sm hover:shadow-md p-5 border border-gray-200 rounded-xl transition-shadow">
-          <h3 className="mb-4 font-bold text-2xl text-center">
+        <div className="flex-1 bg-white shadow-sm hover:shadow-md p-4 md:p-5 border border-gray-200 rounded-xl transition-shadow">
+          <h3 className="mb-3 md:mb-4 font-bold text-xl md:text-2xl text-center">
             Non-Surgical Treatment
           </h3>
 
-          <div className="mb-5">
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-4 rounded-lg">
+          <div className="mb-4 md:mb-5">
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-2 md:p-4 rounded-lg">
               {renderPeopleGrid({
                 success: nonsurgicalSuccess,
                 rerupture: nonsurgicalReruptures,
@@ -149,71 +158,70 @@ export default function SurgeryOrNotPeople() {
             </div>
           </div>
 
-          <div className="mt-3 text-lg">
+          <div className="space-y-1 mt-3 text-base md:text-lg">
             <div className="flex justify-between">
               <span className="font-semibold">Re-ruptures:</span>
               <span>
-                {nonsurgicalReruptures} patients ({NONSURGICAL_RERUPTURE_RATE}%)
+                {nonsurgicalReruptures} ({NONSURGICAL_RERUPTURE_RATE}%)
               </span>
             </div>
             <div className="flex justify-between">
               <span className="font-semibold">Complications:</span>
               <span>
-                {nonsurgicalComplications} patients (
-                {NONSURGICAL_COMPLICATION_RATE}%)
+                {nonsurgicalComplications} ({NONSURGICAL_COMPLICATION_RATE}%)
               </span>
             </div>
             <div className="flex justify-between font-semibold">
               <span>Success:</span>
-              <span>{nonsurgicalSuccess} patients</span>
+              <span>{nonsurgicalSuccess}</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Combined Key */}
-      <div className="bg-white mx-auto mt-8 p-5 border border-gray-200 rounded-xl max-w-3xl">
-        <div className="gap-4 grid grid-cols-2 md:grid-cols-4 text-base">
+      <div className="bg-white mx-auto mt-6 md:mt-8 p-4 md:p-5 border border-gray-200 rounded-xl max-w-3xl">
+        <div className="gap-3 md:gap-4 grid grid-cols-2 md:grid-cols-4 text-sm md:text-base">
           <div className="flex items-center gap-2">
-            <div className="bg-red-500 rounded-full w-6 h-6" />
+            <div className="bg-red-500 rounded-full w-4 md:w-6 h-4 md:h-6" />
             <span className="font-medium">Re-ruptures</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="bg-yellow-500 rounded-full w-6 h-6" />
-            <span className="font-medium">Infections (surgical only)</span>
+            <div className="bg-yellow-500 rounded-full w-4 md:w-6 h-4 md:h-6" />
+            <span className="font-medium">Infections</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="bg-purple-500 rounded-full w-6 h-6" />
+            <div className="bg-purple-500 rounded-full w-4 md:w-6 h-4 md:h-6" />
             <span className="font-medium">Complications</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="bg-gray-600 rounded-full w-6 h-6" />
-            <span className="font-medium">Successful recovery</span>
+            <div className="bg-gray-600 rounded-full w-4 md:w-6 h-4 md:h-6" />
+            <span className="font-medium">Success</span>
           </div>
         </div>
-        <div className="mt-4 pt-4 border-gray-200 border-t">
+        <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-gray-200 border-t">
           <div className="gap-4 grid grid-cols-1 md:grid-cols-2">
-            <div className="text-sm">
+            <div className="text-xs md:text-sm">
               <span className="block mb-1 font-semibold">
                 Surgical complications:
               </span>
               <span className="text-gray-600">
-                Nerve damage, blood clots, wound healing issues
+                Nerve damage, blood clots, wound healing
               </span>
             </div>
-            <div className="text-sm">
+            <div className="text-xs md:text-sm">
               <span className="block mb-1 font-semibold">
                 Non-surgical complications:
               </span>
               <span className="text-gray-600">
-                Skin pressure, muscle atrophy, joint stiffness
+                Skin pressure, muscle atrophy, stiffness
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-4 py-2 w-full text-gray-600 text-base text-center">
+      <div className="mt-3 md:mt-4 py-2 w-full text-gray-600 text-xs md:text-base text-center">
         Source: Meta-analysis of 29 studies including 15,862 patients (Ochen et
         al., 2019)
       </div>
