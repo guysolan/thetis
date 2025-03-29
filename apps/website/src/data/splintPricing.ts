@@ -15,6 +15,7 @@ export const shippingCostsUK = {
 export const packSizes = [
     {
         name: "Small Pack",
+        productId: "9410072478024",
         quantity: 18,
         pricePerUnit: 73,
         total: 18 * 73,
@@ -30,6 +31,8 @@ export const packSizes = [
     },
     {
         name: "Medium Pack",
+        productId: "9410107834696",
+
         quantity: 36,
         pricePerUnit: 72,
         total: 36 * 72,
@@ -45,6 +48,8 @@ export const packSizes = [
     },
     {
         name: "Large Pack",
+        productId: "9410122744136",
+
         quantity: 72,
         pricePerUnit: 71,
         total: 72 * 71,
