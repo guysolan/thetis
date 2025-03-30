@@ -17,7 +17,7 @@ const NavAccordion = () => {
     <Accordion type="single" collapsible>
       {/* Products */}
       <AccordionItem value="products">
-        <AccordionTrigger>Our Products</AccordionTrigger>
+        <AccordionTrigger>Our Product</AccordionTrigger>
         <AccordionContent>
           <div className="flex flex-col gap-4">
             {productLinks.map((link) =>

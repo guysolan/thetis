@@ -1,11 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import FullImageCTA from "../components/CTA/FullCTA.astro";
-import { buttonVariants } from "../components/ui/button";
-import { cn } from "../lib/utils";
-import EmailCTA from "../components/CTA/EmailCTA.astro";
 import Slide from "../components/Slide.astro";
-import Title from "../components/Title.astro";
 import DownloadList from "../components/DownloadList.astro";
 import ProfessionalsHero from "../layouts/ProfessionalsHero.astro";
 import TraumaSplintImage from "@/components/products/images/trauma-splint/trauma_splint.jpg";
@@ -23,26 +19,26 @@ import ProfessionalOpinionsCarousel from "../components/reviews/ProfessionalOpin
         <ProfessionalsHero />
 
         <FullImageCTA
-            title="Trauma Splint"
+            title="Use in A&E 🇬🇧 / ER 🇺🇲"
             paragraph={[
-                "Use of the Achilles Rupture Trauma Splint helps your patients reach a treatment plan promptly.",
-                "Thetis Achilles Trauma Splints make the diagnostic pathway more flexible and efficient. Plaster room visits are not required. Boots are not wasted. In one study the time from A&E to definitive treatment decision was halved.",
+                "Use of the Achilles Rupture Splint helps your patients reach a treatment plan promptly.",
+                "Thetis Achilles Splints make the diagnostic pathway more flexible and efficient. Plaster room visits are not required. Boots are not wasted. In one study the time from first presentation to definitive treatment decision was halved.",
             ]}
             primaryHref="/order-wholesale"
-            secondaryHref="/trauma-splint"
+            secondaryHref="/splint"
             primaryWords="Order Now"
             secondaryWords="Learn More"
             image={TraumaSplintImage}
             imageAlt="Trauma Splint Image"
         />
         <FullImageCTA
-            title="Splint"
+            title="Sleep Safely Without a Boot"
             paragraph={[
                 "Do you know any patients who are pleased to sleep in their boot? The Achilles Rupture Splint is a secure alternative.",
                 "Thetis Achilles Rupture Splint has been welcomed by patients. One patient (himself a surgeon) described it as “the most important bit of rehab kit that they don’t tell you about”.",
             ]}
             primaryHref="/buy-now"
-            secondaryHref="/night-splint"
+            secondaryHref="/splint"
             primaryWords="Order Now"
             secondaryWords="Learn More"
             image={NightSplintImage}
