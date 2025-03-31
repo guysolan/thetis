@@ -35,6 +35,7 @@
     "./popover": "./src/components/popover.tsx",
     "./input": "./src/components/input.tsx",
     "./tooltip": "./src/components/tooltip.tsx",
+    "./faqs": "./src/components/faqs.tsx",
     "./sonner": "./src/components/sonner.tsx",
     "./number-input": "./src/components/number-input.tsx",
     "./dialog": "./src/components/dialog.tsx",
