@@ -19,7 +19,7 @@ const AccordionItem = React.forwardRef<
 AccordionItem.displayName = "AccordionItem";
 
 export const accordianTrigger =
-  "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180";
+  "flex flex-1 items-center text-left justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180";
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
@@ -29,7 +29,7 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "text-lg flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline underline-offset-4 [&[data-state=open]>svg]:rotate-180",
+        "text-lg flex flex-1 text-left items-center justify-between py-4 font-medium transition-all hover:underline underline-offset-4 [&[data-state=open]>svg]:rotate-180",
         className,
       )}
       {...props}

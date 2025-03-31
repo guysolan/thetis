@@ -96,7 +96,7 @@ const FAQs = ({
           value={faq.category}
           className="w-full"
         >
-          <AccordionTrigger className="py-8 font-semibold text-neutral-900 text-xl">
+          <AccordionTrigger className="pb-8 font-semibold text-neutral-900 text-xl text-left">
             {faq.category}
           </AccordionTrigger>
           <AccordionContent>
@@ -107,7 +107,10 @@ const FAQs = ({
                   key={question.question}
                   value={question.question}
                 >
-                  <AccordionTrigger className="font-semibold leading-loose">
+                  <AccordionTrigger
+                    style={{ textAlign: "left" }}
+                    className="font-semibold leading-loose"
+                  >
                     {question.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-lg leading-loose">
