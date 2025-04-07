@@ -4,7 +4,7 @@ description: "Evidence-based comparison of functional braces versus plaster cast
 publishedAt: "21 Feb 2025"
 updatedAt: "21 Feb 2025"
 status: "published"
-tags: ["equipment", "science", "treatment", "non-surgical", "rehabilitation"]
+tags: ["equipment", "science", "treatment"]
 ---
 
 ## Achilles Tendon Rupture Treatment: Key Takeaways
