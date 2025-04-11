@@ -23,7 +23,7 @@ import PageTitle from "@/components/PageTitle";
 import { supabase } from "@/lib/supabase";
 import { AlertTriangle } from "lucide-react";
 
-// Updated interface to match the new SQL view structure
+// Simplified interface for inventory history
 interface InventoryHistoryRecord {
   order_id: number;
   address_id: number;
@@ -37,34 +37,12 @@ interface InventoryHistoryRecord {
     id: number;
     name: string;
     type: string;
-    quantity: number; // Current running total
-    change: number; // Change in this transaction
+    quantity: number;
+    change: number;
   }>;
   item_quantities: Record<string, number>;
   items_changed: number;
   net_change: number;
-}
-
-interface StockItem {
-  id: number;
-  name: string;
-  type: string;
-}
-
-interface TimelineDataPoint {
-  date: string;
-  formattedDate: string;
-  items: Record<number, any>;
-  itemsWithChanges: Record<number, any>;
-  orders: number[];
-  orderDetails: Array<{
-    id: number;
-    type: string;
-    net_change: number;
-    items_changed: number;
-  }>;
-  allItemTotals: Record<number, number>;
-  hasItemsChanged: boolean;
 }
 
 // Update Location interface to match the database schema
@@ -74,8 +52,8 @@ interface Location {
   line_1?: string;
   line_2?: string;
   city?: string;
-  region?: string; // instead of state
-  code?: string; // instead of postal_code
+  region?: string;
+  code?: string;
   country?: string;
   is_active?: boolean;
   holds_stock?: boolean;
@@ -90,7 +68,7 @@ const fetchInventoryHistory = async (addressId: string) => {
     .from("inventory_history_by_address")
     .select("*")
     .eq("address_id", addressId)
-    .order("transaction_date", { ascending: true }); // Ascending for chronological processing
+    .order("transaction_date", { ascending: true });
 
   if (error) {
     throw new Error(`Error fetching inventory history: ${error.message}`);
@@ -140,28 +118,24 @@ function getOrderTypeBadgeVariant(
       return "secondary";
     case "stocktake":
       return "outline";
-    case "multiple":
-      return "outline";
     default:
       return "default";
   }
 }
 
-// Extract this as a standalone component
+// Simplified StockHistoryTable component
 const StockHistoryTable: React.FC<{
   inventoryHistory: InventoryHistoryRecord[];
   activeTab: string;
 }> = ({ inventoryHistory, activeTab }) => {
-  // Get unique items that have ever been at this address
+  // Get unique items across all records
   const uniqueItems = React.useMemo(() => {
-    if (!inventoryHistory || inventoryHistory.length === 0) return [];
+    const itemMap = new Map<
+      number,
+      { id: number; name: string; type: string }
+    >();
 
-    const itemMap = new Map<number, StockItem>();
-
-    // Process all items from all records
     inventoryHistory.forEach((record) => {
-      if (!record.items) return;
-
       record.items.forEach((item) => {
         if (!itemMap.has(item.id)) {
           itemMap.set(item.id, {
@@ -176,112 +150,7 @@ const StockHistoryTable: React.FC<{
     return Array.from(itemMap.values());
   }, [inventoryHistory]);
 
-  // Group orders by date and maintain running totals for all items
-  const timelineData = React.useMemo(() => {
-    if (!inventoryHistory || inventoryHistory.length === 0) return [];
-
-    // Group orders by date
-    const dateGroups: Record<string, any> = {};
-    const runningTotals: Record<number, number> = {}; // Keep running total for each item
-
-    // Initialize running totals
-    uniqueItems.forEach((item) => {
-      runningTotals[item.id] = 0;
-    });
-
-    // Process each order record chronologically
-    inventoryHistory.forEach((record) => {
-      if (!record.items || record.items.length === 0) return;
-
-      const dateKey = dayjs(record.transaction_date).format("YYYY-MM-DD");
-
-      if (!dateGroups[dateKey]) {
-        dateGroups[dateKey] = {
-          date: record.transaction_date,
-          formattedDate: dayjs(record.transaction_date).format("DD MMM YYYY"),
-          items: {},
-          itemsWithChanges: {}, // Track only items that changed on this date
-          orders: new Set(),
-          orderDetails: [], // Store complete order information
-          allItemTotals: {}, // Store running totals for ALL items on this date
-          // Track if any order on this date has items_changed > 0
-          hasItemsChanged: false,
-        };
-      }
-
-      // Add order ID to the list of orders for this date
-      dateGroups[dateKey].orders.add(record.order_id);
-      dateGroups[dateKey].orderDetails.push({
-        id: record.order_id,
-        type: record.order_type,
-        net_change: record.net_change,
-        items_changed: record.items_changed,
-      });
-
-      // Track if any order on this date has items that changed
-      if (record.items_changed > 0) {
-        dateGroups[dateKey].hasItemsChanged = true;
-      }
-
-      // Update running totals for items in this order
-      record.items.forEach((item) => {
-        runningTotals[item.id] = item.quantity;
-
-        // Store each item's current quantity
-        dateGroups[dateKey].items[item.id] = {
-          quantity: item.quantity,
-          quantity_change: 0,
-          hasChange: false,
-          order_type: record.order_type,
-          order_id: record.order_id,
-          name: item.name,
-          type: item.type,
-        };
-
-        // If this item changed in this order, add to changes
-        if (item.change !== 0) {
-          // Create or update item in itemsWithChanges
-          if (!dateGroups[dateKey].itemsWithChanges[item.id]) {
-            dateGroups[dateKey].itemsWithChanges[item.id] = {
-              quantity: item.quantity,
-              quantity_change: item.change,
-              hasChange: true,
-              order_type: record.order_type,
-              order_id: record.order_id,
-              name: item.name,
-              type: item.type,
-            };
-          } else {
-            // Add this change to existing aggregate
-            dateGroups[dateKey].itemsWithChanges[item.id].quantity_change +=
-              item.change;
-          }
-        }
-      });
-
-      // Store current running totals for ALL items on this date
-      uniqueItems.forEach((item) => {
-        dateGroups[dateKey].allItemTotals[item.id] = runningTotals[item.id];
-      });
-    });
-
-    // Convert to array and sort by date (newest first for display)
-    return Object.values(dateGroups)
-      .map((group) => ({
-        ...group,
-        orders: Array.from(group.orders),
-      }))
-      .sort((a: any, b: any) =>
-        dayjs(b.date).diff(dayjs(a.date)),
-      ) as TimelineDataPoint[];
-  }, [inventoryHistory, uniqueItems]);
-
-  // Filter timeline to only show dates with actual stock changes
-  const stockChangeTimeline = React.useMemo(() => {
-    return timelineData.filter((dateData) => dateData.hasItemsChanged);
-  }, [timelineData]);
-
-  // Filter uniqueItems based on the active tab
+  // Filter items based on active tab
   const filteredItems = React.useMemo(() => {
     if (activeTab === "all") return uniqueItems;
     if (activeTab === "products")
@@ -293,6 +162,24 @@ const StockHistoryTable: React.FC<{
     return uniqueItems;
   }, [uniqueItems, activeTab]);
 
+  // Get current stock (most recent record)
+  const currentStock =
+    inventoryHistory.length > 0
+      ? inventoryHistory[inventoryHistory.length - 1]
+      : null;
+
+  // Get the latest quantity for each item
+  const getCurrentQuantity = (itemId: number) => {
+    if (!currentStock) return 0;
+
+    // Find the last entry for this item ID
+    const itemEntries = currentStock.items.filter((item) => item.id === itemId);
+    if (itemEntries.length === 0) return 0;
+
+    // Return the quantity from the last entry
+    return itemEntries[itemEntries.length - 1].quantity;
+  };
+
   if (!inventoryHistory || inventoryHistory.length === 0) {
     return (
       <div className="p-4 text-center">
@@ -300,12 +187,6 @@ const StockHistoryTable: React.FC<{
       </div>
     );
   }
-
-  // Get the most recent record for current stock
-  const currentStock =
-    inventoryHistory.length > 0
-      ? inventoryHistory[inventoryHistory.length - 1]
-      : null;
 
   return (
     <div className="mb-8 overflow-x-auto">
@@ -339,10 +220,7 @@ const StockHistoryTable: React.FC<{
                 </div>
               </TableCell>
               {filteredItems.map((item) => {
-                // Use the proper running total from the most recent date
-                const mostRecentDate = stockChangeTimeline[0];
-                const quantity = mostRecentDate.allItemTotals[item.id] || 0;
-
+                const quantity = getCurrentQuantity(item.id);
                 return (
                   <TableCell key={item.id} className="p-4 text-right">
                     <span className={quantity < 0 ? "text-red-500" : ""}>
@@ -355,47 +233,56 @@ const StockHistoryTable: React.FC<{
           )}
 
           {/* Historical stock levels at each change point */}
-          {stockChangeTimeline.map((dateData) => (
-            <TableRow key={dateData.formattedDate} className="hover:bg-gray-50">
+          {inventoryHistory.map((record) => (
+            <TableRow
+              key={`${record.order_id}-${record.transaction_date}`}
+              className="hover:bg-gray-50"
+            >
               <TableCell className="left-0 z-10 sticky bg-white p-4 border-neutral-300 border-r">
-                <div className="font-medium">{dateData.formattedDate}</div>
+                <div className="font-medium">
+                  {dayjs(record.transaction_date).format("DD MMM YYYY")}
+                </div>
                 <div className="text-gray-500 text-xs">
-                  {dateData.orderDetails.map((order) => (
-                    <Badge
-                      key={order.id}
-                      variant={getOrderTypeBadgeVariant(order.type)}
-                      className="mr-1 px-1 py-0 text-[10px]"
-                    >
-                      {order.type}
-                      <span className="ml-1">#{order.id}</span>
-                    </Badge>
-                  ))}
+                  <Badge
+                    variant={getOrderTypeBadgeVariant(record.order_type)}
+                    className="mr-1 px-1 py-0 text-[10px]"
+                  >
+                    {record.order_type}
+                    <span className="ml-1">#{record.order_id}</span>
+                  </Badge>
                 </div>
               </TableCell>
               {filteredItems.map((item) => {
-                // Always use the running total for this date for this item
-                const quantity = dateData.allItemTotals[item.id] || 0;
-                const itemWithChange = dateData.itemsWithChanges?.[item.id];
+                // Find the last entry for this item in this record
+                const itemEntries = record.items.filter(
+                  (i) => i.id === item.id,
+                );
+                const lastEntry =
+                  itemEntries.length > 0
+                    ? itemEntries[itemEntries.length - 1]
+                    : null;
 
                 return (
                   <TableCell key={item.id} className="p-4 text-right">
                     <div>
                       <span className="flex justify-end items-center">
-                        {quantity < 0 && (
+                        {lastEntry && lastEntry.quantity < 0 && (
                           <AlertTriangle className="mr-1 w-4 h-4 text-red-500" />
                         )}
-                        <span>{Math.round(quantity)}</span>
+                        <span>
+                          {lastEntry ? Math.round(lastEntry.quantity) : 0}
+                        </span>
                       </span>
-                      {itemWithChange && (
+                      {lastEntry && lastEntry.change !== 0 && (
                         <div
                           className={`text-xs font-medium ${
-                            itemWithChange.quantity_change < 0
+                            lastEntry.change < 0
                               ? "text-red-500"
                               : "text-green-500"
                           }`}
                         >
-                          {itemWithChange.quantity_change > 0 ? "+" : ""}
-                          {Math.round(itemWithChange.quantity_change)}
+                          {lastEntry.change > 0 ? "+" : ""}
+                          {Math.round(lastEntry.change)}
                         </div>
                       )}
                     </div>

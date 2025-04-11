@@ -100,7 +100,7 @@ export function MultiOrderForm({
     <Form {...form}>
       <form
         id="order-form"
-        className="flex flex-col gap-y-4 px-1 w-full"
+        className="flex flex-col gap-y-4 px-1 w-full overflow-x-scroll"
         onSubmit={form.handleSubmit(handleSubmit, () => scrollToTop())}
       >
         <Select

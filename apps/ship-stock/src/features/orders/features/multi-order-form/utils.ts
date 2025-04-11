@@ -39,7 +39,7 @@ export const processBuyFormData = (formData: MultiOrderFormData) => {
         quantity_change: Number(ic.quantity_change),
         item_price: ic?.item_price ?? 0,
         item_tax: ic?.item_tax ?? 0,
-        address_id: formData.from_shipping_address_id,
+        address_id: formData.to_shipping_address_id,
         item_type: ic.item_type,
     }));
 
