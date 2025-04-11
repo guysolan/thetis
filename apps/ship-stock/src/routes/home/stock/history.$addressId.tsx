@@ -189,21 +189,19 @@ const StockHistoryTable: React.FC<{
   // Get current stock (first record since we're now getting data in descending order)
   const currentStock = inventoryHistory.length > 0 ? inventoryHistory[0] : null;
 
-  // Get the latest quantity for each item by calculating cumulative total across all transactions
+  // Get the latest quantity for each item by finding the last non-zero value
   const getCurrentQuantity = (itemId: number) => {
     if (!inventoryHistory.length) return 0;
 
-    // Calculate total by summing all changes across all records
-    let total = 0;
-    for (let i = inventoryHistory.length - 1; i >= 0; i--) {
-      const record = inventoryHistory[i];
+    // Loop through history in reverse (newest to oldest) to find the most recent non-zero quantity
+    for (const record of inventoryHistory) {
       const itemEntry = record.items.find((item) => item.id === itemId);
-      if (itemEntry) {
-        total += itemEntry.change;
+      if (itemEntry && itemEntry.quantity !== 0) {
+        return itemEntry.quantity;
       }
     }
 
-    return total;
+    return 0;
   };
 
   const [columnVisibility, setColumnVisibility] =
