@@ -19,6 +19,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@thetis/ui/select";
+import {
+  ColumnDef,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import { Button } from "@thetis/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@thetis/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from "@thetis/ui/command";
+import { Check, LayoutList } from "lucide-react";
+import { cn } from "@thetis/ui/cn";
 import PageTitle from "@/components/PageTitle";
 import { supabase } from "@/lib/supabase";
 import { AlertTriangle } from "lucide-react";
@@ -68,7 +85,7 @@ const fetchInventoryHistory = async (addressId: string) => {
     .from("inventory_history_by_address")
     .select("*")
     .eq("address_id", addressId)
-    .order("transaction_date", { ascending: true });
+    .order("transaction_date", { ascending: false });
 
   if (error) {
     throw new Error(`Error fetching inventory history: ${error.message}`);
@@ -123,6 +140,13 @@ function getOrderTypeBadgeVariant(
   }
 }
 
+// Interface for column data
+interface ItemColumn {
+  id: number;
+  name: string;
+  type: string;
+}
+
 // Simplified StockHistoryTable component
 const StockHistoryTable: React.FC<{
   inventoryHistory: InventoryHistoryRecord[];
@@ -162,23 +186,142 @@ const StockHistoryTable: React.FC<{
     return uniqueItems;
   }, [uniqueItems, activeTab]);
 
-  // Get current stock (most recent record)
-  const currentStock =
-    inventoryHistory.length > 0
-      ? inventoryHistory[inventoryHistory.length - 1]
-      : null;
+  // Get current stock (first record since we're now getting data in descending order)
+  const currentStock = inventoryHistory.length > 0 ? inventoryHistory[0] : null;
 
-  // Get the latest quantity for each item
+  // Get the latest quantity for each item by calculating cumulative total across all transactions
   const getCurrentQuantity = (itemId: number) => {
-    if (!currentStock) return 0;
+    if (!inventoryHistory.length) return 0;
 
-    // Find the last entry for this item ID
-    const itemEntries = currentStock.items.filter((item) => item.id === itemId);
-    if (itemEntries.length === 0) return 0;
+    // Calculate total by summing all changes across all records
+    let total = 0;
+    for (let i = inventoryHistory.length - 1; i >= 0; i--) {
+      const record = inventoryHistory[i];
+      const itemEntry = record.items.find((item) => item.id === itemId);
+      if (itemEntry) {
+        total += itemEntry.change;
+      }
+    }
 
-    // Return the quantity from the last entry
-    return itemEntries[itemEntries.length - 1].quantity;
+    return total;
   };
+
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({});
+  const [openColumns, setOpenColumns] = React.useState(false);
+
+  // Create columns dynamically based on filteredItems
+  const columns = React.useMemo<ColumnDef<InventoryHistoryRecord>[]>(() => {
+    const baseColumns = [
+      {
+        id: "date",
+        header: () => <div className="font-bold">Date</div>,
+        cell: ({ row }) => {
+          const record = row.original;
+          return (
+            <div className="left-0 z-10 w-[150px]">
+              <div className="font-medium">
+                {record === currentStock
+                  ? "Current"
+                  : dayjs(record.transaction_date).format("DD MMM YYYY")}
+              </div>
+              <div className="text-gray-500 text-xs">
+                {record !== currentStock && (
+                  <Badge
+                    variant={getOrderTypeBadgeVariant(record.order_type)}
+                    className="mr-1 px-1 py-0 text-[10px]"
+                  >
+                    {record.order_type}
+                    <span className="ml-1">#{record.order_id}</span>
+                  </Badge>
+                )}
+              </div>
+            </div>
+          );
+        },
+      },
+    ];
+
+    // Create a column for each filtered item
+    const itemColumns = filteredItems.map((item) => ({
+      id: `item-${item.id}`,
+      header: () => (
+        <div className="min-w-[120px] text-right">
+          <div className="font-medium">{item.name}</div>
+          <div className="font-normal text-gray-500 text-xs capitalize">
+            {item.type}
+          </div>
+        </div>
+      ),
+      cell: ({ row }) => {
+        const record = row.original;
+        // For "Current" row, show calculated total
+        if (record === currentStock) {
+          const quantity = getCurrentQuantity(item.id);
+          return (
+            <div className="text-right">
+              <span
+                className={cn(
+                  "font-semibold",
+                  quantity < 0 ? "text-red-500" : "",
+                )}
+              >
+                {Math.round(quantity)}
+              </span>
+            </div>
+          );
+        }
+
+        // For history rows
+        const itemEntry = record.items.find((i) => i.id === item.id);
+        return (
+          <div className="text-right">
+            <div>
+              <span className="flex justify-end items-center">
+                {itemEntry && itemEntry.quantity < 0 && (
+                  <AlertTriangle className="mr-1 w-4 h-4 text-red-500" />
+                )}
+                <span>{itemEntry ? Math.round(itemEntry.quantity) : 0}</span>
+              </span>
+              {itemEntry && itemEntry.change !== 0 && (
+                <div
+                  className={`text-xs font-medium ${
+                    itemEntry.change < 0 ? "text-red-500" : "text-green-500"
+                  }`}
+                >
+                  {itemEntry.change > 0 ? "+" : ""}
+                  {Math.round(itemEntry.change)}
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      },
+    }));
+
+    return [...baseColumns, ...itemColumns];
+  }, [filteredItems, currentStock, inventoryHistory]);
+
+  // Memoize the data array to prevent recreating it on every render
+  const tableData = React.useMemo(() => {
+    if (!currentStock) {
+      return inventoryHistory;
+    }
+    return [
+      currentStock,
+      ...inventoryHistory.filter((record) => record !== currentStock),
+    ].filter(Boolean) as InventoryHistoryRecord[];
+  }, [currentStock, inventoryHistory]);
+
+  const table = useReactTable({
+    data: tableData,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    state: {
+      columnVisibility,
+    },
+  });
 
   if (!inventoryHistory || inventoryHistory.length === 0) {
     return (
@@ -189,110 +332,139 @@ const StockHistoryTable: React.FC<{
   }
 
   return (
-    <div className="mb-8 overflow-x-auto">
-      <Table className="bg-white">
-        <TableCaption className="pb-4">
-          Stock levels at each point when inventory changed
-        </TableCaption>
-        <TableHeader>
-          <TableRow className="border-b-2">
-            <TableHead className="left-0 z-10 sticky bg-white p-4 border-neutral-300 border-r w-[150px]">
-              Date
-            </TableHead>
-            {filteredItems.map((item) => (
-              <TableHead key={item.id} className="p-4 min-w-[120px] text-right">
-                {item.name}
-                <div className="font-normal text-gray-500 text-xs capitalize">
-                  {item.type}
-                </div>
-              </TableHead>
-            ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {/* Current stock levels (most recent date) */}
-          {currentStock && (
-            <TableRow className="hover:bg-gray-50 font-bold">
-              <TableCell className="left-0 z-10 sticky bg-white p-4 border-neutral-300 border-r">
-                <div className="font-medium">Current</div>
-                <div className="text-gray-500 text-xs">
-                  {dayjs(currentStock.transaction_date).format("DD MMM YYYY")}
-                </div>
-              </TableCell>
-              {filteredItems.map((item) => {
-                const quantity = getCurrentQuantity(item.id);
-                return (
-                  <TableCell key={item.id} className="p-4 text-right">
-                    <span className={quantity < 0 ? "text-red-500" : ""}>
-                      {Math.round(quantity)}
-                    </span>
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          )}
-
-          {/* Historical stock levels at each change point */}
-          {inventoryHistory.map((record) => (
-            <TableRow
-              key={`${record.order_id}-${record.transaction_date}`}
-              className="hover:bg-gray-50"
+    <div>
+      <div className="flex justify-end mb-4">
+        <Popover open={openColumns} onOpenChange={setOpenColumns}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={openColumns}
+              className="ml-auto"
             >
-              <TableCell className="left-0 z-10 sticky bg-white p-4 border-neutral-300 border-r">
-                <div className="font-medium">
-                  {dayjs(record.transaction_date).format("DD MMM YYYY")}
-                </div>
-                <div className="text-gray-500 text-xs">
-                  <Badge
-                    variant={getOrderTypeBadgeVariant(record.order_type)}
-                    className="mr-1 px-1 py-0 text-[10px]"
-                  >
-                    {record.order_type}
-                    <span className="ml-1">#{record.order_id}</span>
-                  </Badge>
-                </div>
-              </TableCell>
-              {filteredItems.map((item) => {
-                // Find the last entry for this item in this record
-                const itemEntries = record.items.filter(
-                  (i) => i.id === item.id,
-                );
-                const lastEntry =
-                  itemEntries.length > 0
-                    ? itemEntries[itemEntries.length - 1]
-                    : null;
+              <LayoutList className="mr-2 w-4 h-4" />
+              {Object.keys(columnVisibility).length > 0
+                ? `${Object.keys(columnVisibility).length} columns hidden`
+                : "Toggle Columns"}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent
+            className="bg-white p-0 w-3/4 md:w-[350px] lg:w-[450px]"
+            align="end"
+          >
+            <Command className="border-none">
+              <CommandEmpty>No columns found.</CommandEmpty>
+              <CommandGroup heading="Toggle Item Columns">
+                {table
+                  .getAllColumns()
+                  .filter(
+                    (column) => column.getCanHide() && column.id !== "date",
+                  )
+                  .map((column) => {
+                    const isVisible = column.getIsVisible();
+                    // Get the item details for better display
+                    const itemMatch = /item-(\d+)/.exec(column.id);
+                    let columnLabel = column.id;
+                    let itemType = "";
 
-                return (
-                  <TableCell key={item.id} className="p-4 text-right">
-                    <div>
-                      <span className="flex justify-end items-center">
-                        {lastEntry && lastEntry.quantity < 0 && (
-                          <AlertTriangle className="mr-1 w-4 h-4 text-red-500" />
-                        )}
-                        <span>
-                          {lastEntry ? Math.round(lastEntry.quantity) : 0}
-                        </span>
-                      </span>
-                      {lastEntry && lastEntry.change !== 0 && (
+                    if (itemMatch) {
+                      const itemId = Number.parseInt(itemMatch[1], 10);
+                      const item = filteredItems.find((i) => i.id === itemId);
+                      if (item) {
+                        columnLabel = item.name;
+                        itemType = item.type;
+                      }
+                    }
+
+                    return (
+                      <CommandItem
+                        key={column.id}
+                        onSelect={() => column.toggleVisibility(!isVisible)}
+                        className="flex items-center hover:bg-slate-100 px-2 py-2 transition-colors cursor-pointer"
+                      >
                         <div
-                          className={`text-xs font-medium ${
-                            lastEntry.change < 0
-                              ? "text-red-500"
-                              : "text-green-500"
-                          }`}
+                          className={cn(
+                            "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
+                            isVisible
+                              ? "bg-primary text-primary-foreground"
+                              : "opacity-50",
+                          )}
                         >
-                          {lastEntry.change > 0 ? "+" : ""}
-                          {Math.round(lastEntry.change)}
+                          {isVisible && <Check className="w-4 h-4" />}
                         </div>
-                      )}
-                    </div>
-                  </TableCell>
-                );
-              })}
+                        <div>
+                          <span className="font-medium">{columnLabel}</span>
+                          {itemType && (
+                            <span className="ml-2 text-muted-foreground text-xs capitalize">
+                              ({itemType})
+                            </span>
+                          )}
+                        </div>
+                      </CommandItem>
+                    );
+                  })}
+              </CommandGroup>
+            </Command>
+          </PopoverContent>
+        </Popover>
+      </div>
+
+      <div className="mb-8 overflow-x-auto">
+        <Table className="bg-white">
+          <TableCaption className="pb-4">
+            Stock levels at each point when inventory changed
+          </TableCaption>
+          <TableHeader>
+            <TableRow className="border-b-2">
+              {table.getHeaderGroups().map((headerGroup) =>
+                headerGroup.headers.map((header) => (
+                  <TableHead
+                    key={header.id}
+                    className={cn(
+                      header.id === "date"
+                        ? "left-0 z-10 sticky bg-white p-4 border-neutral-300 border-r w-[150px]"
+                        : "p-4",
+                    )}
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                  </TableHead>
+                )),
+              )}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows.map((row, index) => (
+              <TableRow
+                key={row.id}
+                className={
+                  index === 0
+                    ? "hover:bg-gray-50 font-bold"
+                    : "hover:bg-gray-50"
+                }
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell
+                    key={cell.id}
+                    className={cn(
+                      "p-4",
+                      cell.column.id === "date"
+                        ? "left-0 z-10 sticky bg-white border-neutral-300 border-r"
+                        : "",
+                    )}
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 };
@@ -307,7 +479,7 @@ function StockHistoryPage() {
 
   // Format address for display with correct field names
   const formatAddressPreview = (location: Location) => {
-    const parts = [];
+    const parts: string[] = [];
     if (location.line_1) parts.push(location.line_1);
     if (location.city) parts.push(location.city);
     if (location.region) parts.push(location.region);
