@@ -47,10 +47,26 @@ export const commercialInvoiceOptions = {
   ],
 };
 
+export const packingListOptions = {
+  ...baseDocumentOptions,
+  additional: [
+    { id: "showPackages", label: "Packages" },
+    { id: "showShippingItems", label: "Shipping Items" },
+    { id: "payment", label: "Payment Information" },
+    { id: "carriage", label: "Carriage" },
+    { id: "total", label: "Total Amount" },
+    { id: "showFDA", label: "FDA Information" },
+    { id: "showExporter", label: "Exporter Information" },
+    { id: "showExchangeRates", label: "Exchange Rates" },
+    { id: "showSignature", label: "Signature" },
+  ],
+};
+
 export const documentOptions = {
   commercialInvoice: commercialInvoiceOptions,
   purchaseOrder: purchaseOrderOptions,
   invoice: invoiceOptions,
+  packingList: packingListOptions,
   shippingLabel: {},
 };
 
@@ -101,6 +117,15 @@ export const commercialInvoiceSchema = documentOptionsSchema.extend({
   showExchangeRates: z.boolean().default(true),
   showPackages: z.boolean().default(true),
   showShippingItems: z.boolean().default(true),
+  showSignature: z.boolean().default(true),
+});
+
+export const packingListSchema = documentOptionsSchema.extend({
+  showFDA: z.boolean().default(false),
+  showExporter: z.boolean().default(false),
+  showExchangeRates: z.boolean().default(false),
+  showPackages: z.boolean().default(true),
+  showShippingItems: z.boolean().default(false),
   showSignature: z.boolean().default(true),
 });
 
