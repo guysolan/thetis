@@ -23,6 +23,12 @@ const documents: DocumentConfig[] = [
     showFor: ["shipment", "sale"],
   },
   {
+    path: "packing-list",
+    label: "Packing List",
+    icon: <Tag size={20} />,
+    showFor: ["shipment", "sale"],
+  },
+  {
     path: "shipping-label",
     label: "Shipping Label",
     icon: <Tag size={20} />,

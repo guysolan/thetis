@@ -38,6 +38,7 @@ const Navigation = () => {
                     <BreadcrumbPage>{segment}</BreadcrumbPage>
                   ) : (
                     <BreadcrumbLink
+                      className="capitalize"
                       href={`/${pathSegments.slice(0, index + 1).join("/")}`}
                     >
                       {segment}
