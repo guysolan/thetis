@@ -62,7 +62,7 @@ const ShippingItems = ({
             </TableCell>
             <TableCell className="text-black text-right">
               <NumberFlow
-                value={item.quantity * (item.item_price ?? 0)}
+                value={item.quantity * (item.price ?? 0)}
                 format={{ style: "currency", currency: currency }}
               />
             </TableCell>
@@ -74,7 +74,7 @@ const ShippingItems = ({
           <TableCell className="text-black text-right">
             <NumberFlow
               value={invoiceItems.reduce(
-                (sum, item) => sum + item.quantity * (item.item_price ?? 0),
+                (sum, item) => sum + item.quantity * (item.price ?? 0),
                 0,
               )}
               format={{ style: "currency", currency: currency }}
