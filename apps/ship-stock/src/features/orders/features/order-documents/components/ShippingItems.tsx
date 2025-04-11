@@ -43,8 +43,8 @@ const ShippingItems = ({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoiceItems.map((item, index) => (
-          <TableRow key={index}>
+        {invoiceItems.map((item) => (
+          <TableRow key={item.item_id}>
             <TableCell className="text-black">{item.item_name}</TableCell>
             <TableCell className="text-black">{item.sku}</TableCell>
             <TableCell className="text-black">
@@ -56,7 +56,7 @@ const ShippingItems = ({
             </TableCell>
             <TableCell className="text-black text-right">
               <NumberFlow
-                value={item.item_price ?? 0}
+                value={item.price ?? 0}
                 format={{ style: "currency", currency: currency }}
               />
             </TableCell>
