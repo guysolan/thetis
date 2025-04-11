@@ -56,6 +56,7 @@ interface InventoryHistoryRecord {
     type: string;
     quantity: number;
     change: number;
+    address_id?: number; // Added address_id to handle multi-address items
   }>;
   item_quantities: Record<string, number>;
   items_changed: number;
@@ -152,7 +153,7 @@ const StockHistoryTable: React.FC<{
   inventoryHistory: InventoryHistoryRecord[];
   activeTab: string;
 }> = ({ inventoryHistory, activeTab }) => {
-  // Get unique items across all records
+  // Get unique items across all records, filtering for items that belong to the current address
   const uniqueItems = React.useMemo(() => {
     const itemMap = new Map<
       number,
@@ -161,12 +162,15 @@ const StockHistoryTable: React.FC<{
 
     inventoryHistory.forEach((record) => {
       record.items.forEach((item) => {
-        if (!itemMap.has(item.id)) {
-          itemMap.set(item.id, {
-            id: item.id,
-            name: item.name,
-            type: item.type,
-          });
+        // Only consider items that match the record's address_id or have no address_id specified
+        if (!item.address_id || item.address_id === record.address_id) {
+          if (!itemMap.has(item.id)) {
+            itemMap.set(item.id, {
+              id: item.id,
+              name: item.name,
+              type: item.type,
+            });
+          }
         }
       });
     });
@@ -195,7 +199,12 @@ const StockHistoryTable: React.FC<{
 
     // Loop through history in reverse (newest to oldest) to find the most recent non-zero quantity
     for (const record of inventoryHistory) {
-      const itemEntry = record.items.find((item) => item.id === itemId);
+      // Find item that matches both the item ID and the record's address_id (or has no address_id)
+      const itemEntry = record.items.find(
+        (item) =>
+          item.id === itemId &&
+          (!item.address_id || item.address_id === record.address_id),
+      );
       if (itemEntry && itemEntry.quantity !== 0) {
         return itemEntry.quantity;
       }
@@ -270,8 +279,13 @@ const StockHistoryTable: React.FC<{
           );
         }
 
-        // For history rows
-        const itemEntry = record.items.find((i) => i.id === item.id);
+        // For history rows - find the item entry that matches both the item id and address_id
+        const itemEntry = record.items.find(
+          (i) =>
+            i.id === item.id &&
+            (!i.address_id || i.address_id === record.address_id),
+        );
+
         return (
           <div className="text-right">
             <div>

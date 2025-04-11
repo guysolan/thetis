@@ -24,6 +24,7 @@ import { Route as HomeStockHistoryAddressIdImport } from './routes/home/stock/hi
 import { Route as DocumentsOrdersOrderIdStocktakeReportImport } from './routes/documents/orders/$orderId/stocktake-report'
 import { Route as DocumentsOrdersOrderIdShippingLabelImport } from './routes/documents/orders/$orderId/shipping-label'
 import { Route as DocumentsOrdersOrderIdPurchaseOrderImport } from './routes/documents/orders/$orderId/purchase-order'
+import { Route as DocumentsOrdersOrderIdPackingListImport } from './routes/documents/orders/$orderId/packing-list'
 import { Route as DocumentsOrdersOrderIdInvoiceImport } from './routes/documents/orders/$orderId/invoice'
 import { Route as DocumentsOrdersOrderIdCommercialInvoiceImport } from './routes/documents/orders/$orderId/commercial-invoice'
 
@@ -107,6 +108,13 @@ const DocumentsOrdersOrderIdPurchaseOrderRoute =
   DocumentsOrdersOrderIdPurchaseOrderImport.update({
     id: '/orders/$orderId/purchase-order',
     path: '/orders/$orderId/purchase-order',
+    getParentRoute: () => DocumentsRoute,
+  } as any)
+
+const DocumentsOrdersOrderIdPackingListRoute =
+  DocumentsOrdersOrderIdPackingListImport.update({
+    id: '/orders/$orderId/packing-list',
+    path: '/orders/$orderId/packing-list',
     getParentRoute: () => DocumentsRoute,
   } as any)
 
@@ -205,6 +213,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocumentsOrdersOrderIdInvoiceImport
       parentRoute: typeof DocumentsImport
     }
+    '/documents/orders/$orderId/packing-list': {
+      id: '/documents/orders/$orderId/packing-list'
+      path: '/orders/$orderId/packing-list'
+      fullPath: '/documents/orders/$orderId/packing-list'
+      preLoaderRoute: typeof DocumentsOrdersOrderIdPackingListImport
+      parentRoute: typeof DocumentsImport
+    }
     '/documents/orders/$orderId/purchase-order': {
       id: '/documents/orders/$orderId/purchase-order'
       path: '/orders/$orderId/purchase-order'
@@ -241,6 +256,7 @@ declare module '@tanstack/react-router' {
 interface DocumentsRouteChildren {
   DocumentsOrdersOrderIdCommercialInvoiceRoute: typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
   DocumentsOrdersOrderIdInvoiceRoute: typeof DocumentsOrdersOrderIdInvoiceRoute
+  DocumentsOrdersOrderIdPackingListRoute: typeof DocumentsOrdersOrderIdPackingListRoute
   DocumentsOrdersOrderIdPurchaseOrderRoute: typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   DocumentsOrdersOrderIdShippingLabelRoute: typeof DocumentsOrdersOrderIdShippingLabelRoute
   DocumentsOrdersOrderIdStocktakeReportRoute: typeof DocumentsOrdersOrderIdStocktakeReportRoute
@@ -250,6 +266,8 @@ const DocumentsRouteChildren: DocumentsRouteChildren = {
   DocumentsOrdersOrderIdCommercialInvoiceRoute:
     DocumentsOrdersOrderIdCommercialInvoiceRoute,
   DocumentsOrdersOrderIdInvoiceRoute: DocumentsOrdersOrderIdInvoiceRoute,
+  DocumentsOrdersOrderIdPackingListRoute:
+    DocumentsOrdersOrderIdPackingListRoute,
   DocumentsOrdersOrderIdPurchaseOrderRoute:
     DocumentsOrdersOrderIdPurchaseOrderRoute,
   DocumentsOrdersOrderIdShippingLabelRoute:
@@ -294,6 +312,7 @@ export interface FileRoutesByFullPath {
   '/home/stock': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
+  '/documents/orders/$orderId/packing-list': typeof DocumentsOrdersOrderIdPackingListRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
@@ -311,6 +330,7 @@ export interface FileRoutesByTo {
   '/home/stock': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
+  '/documents/orders/$orderId/packing-list': typeof DocumentsOrdersOrderIdPackingListRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
@@ -330,6 +350,7 @@ export interface FileRoutesById {
   '/home/stock/': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
+  '/documents/orders/$orderId/packing-list': typeof DocumentsOrdersOrderIdPackingListRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
@@ -350,6 +371,7 @@ export interface FileRouteTypes {
     | '/home/stock'
     | '/documents/orders/$orderId/commercial-invoice'
     | '/documents/orders/$orderId/invoice'
+    | '/documents/orders/$orderId/packing-list'
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
     | '/documents/orders/$orderId/stocktake-report'
@@ -366,6 +388,7 @@ export interface FileRouteTypes {
     | '/home/stock'
     | '/documents/orders/$orderId/commercial-invoice'
     | '/documents/orders/$orderId/invoice'
+    | '/documents/orders/$orderId/packing-list'
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
     | '/documents/orders/$orderId/stocktake-report'
@@ -383,6 +406,7 @@ export interface FileRouteTypes {
     | '/home/stock/'
     | '/documents/orders/$orderId/commercial-invoice'
     | '/documents/orders/$orderId/invoice'
+    | '/documents/orders/$orderId/packing-list'
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
     | '/documents/orders/$orderId/stocktake-report'
@@ -428,6 +452,7 @@ export const routeTree = rootRoute
       "children": [
         "/documents/orders/$orderId/commercial-invoice",
         "/documents/orders/$orderId/invoice",
+        "/documents/orders/$orderId/packing-list",
         "/documents/orders/$orderId/purchase-order",
         "/documents/orders/$orderId/shipping-label",
         "/documents/orders/$orderId/stocktake-report"
@@ -473,6 +498,10 @@ export const routeTree = rootRoute
     },
     "/documents/orders/$orderId/invoice": {
       "filePath": "documents/orders/$orderId/invoice.tsx",
+      "parent": "/documents"
+    },
+    "/documents/orders/$orderId/packing-list": {
+      "filePath": "documents/orders/$orderId/packing-list.tsx",
       "parent": "/documents"
     },
     "/documents/orders/$orderId/purchase-order": {

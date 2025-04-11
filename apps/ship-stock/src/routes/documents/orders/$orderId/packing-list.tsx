@@ -18,7 +18,7 @@ const OrdersPage = () => {
   );
 };
 export const Route = createFileRoute(
-  "/documents/orders/$orderId/commercial-invoice",
+  "/documents/orders/$orderId/packing-list",
 )({
   component: OrdersPage,
   validateSearch: packingListSchema,
