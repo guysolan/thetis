@@ -181,6 +181,7 @@ function StockHistoryPage() {
         <StockHistoryTable
           inventoryHistory={inventoryHistory}
           activeTab={activeTab}
+          addressId={addressId}
         />
       )}
     </div>

@@ -72,14 +72,19 @@ function getOrderTypeBadgeVariant(
 interface StockHistoryTableProps {
   inventoryHistory: InventoryHistoryRecord[];
   activeTab: string;
+  addressId?: string;
 }
 
 const StockHistoryTable: React.FC<StockHistoryTableProps> = ({
   inventoryHistory,
   activeTab,
+  addressId,
 }) => {
   // State for active tab
   const [activeTabState, setActiveTabState] = React.useState(activeTab);
+
+  // Convert addressId to number for comparison
+  const currentAddressId = addressId ? Number.parseInt(addressId, 10) : null;
 
   // Get unique items and filter based on active tab
   const uniqueItems = new Map<
@@ -89,7 +94,12 @@ const StockHistoryTable: React.FC<StockHistoryTableProps> = ({
 
   inventoryHistory.forEach((record) => {
     record.items.forEach((item) => {
-      if (!item.address_id || item.address_id === record.address_id) {
+      // Only consider items that match the current address ID
+      if (
+        currentAddressId &&
+        ((!item.address_id && record.address_id === currentAddressId) ||
+          item.address_id === currentAddressId)
+      ) {
         if (!uniqueItems.has(item.id)) {
           uniqueItems.set(item.id, {
             id: item.id,
@@ -146,7 +156,9 @@ const StockHistoryTable: React.FC<StockHistoryTableProps> = ({
       const itemEntry = record.items.find(
         (item) =>
           item.id === itemId &&
-          (!item.address_id || item.address_id === record.address_id),
+          currentAddressId &&
+          ((!item.address_id && record.address_id === currentAddressId) ||
+            item.address_id === currentAddressId),
       );
 
       if (itemEntry) {
@@ -208,29 +220,32 @@ const StockHistoryTable: React.FC<StockHistoryTableProps> = ({
     const itemEntry = record.items.find(
       (i) =>
         i.id === itemId &&
-        (!i.address_id || i.address_id === record.address_id),
+        currentAddressId &&
+        record.address_id === currentAddressId,
     );
 
     return (
       <div className="text-right">
         <div className="flex justify-end items-center">
           <div className="flex items-center">
-            {itemEntry && itemEntry.change !== 0 && (
-              <Badge
-                className={`text-xs font-medium flex px-1 py-0.5 items-center mr-2 ${
-                  itemEntry.change < 0
-                    ? "bg-red-100 text-red-500"
-                    : "bg-green-100 text-green-500"
-                }`}
-              >
-                {itemEntry.change > 0 ? (
-                  <TrendingUp className="mx-0.5 w-3 h-3" />
-                ) : (
-                  <TrendingDown className="mx-0.5 w-3 h-3" />
-                )}
-                {Math.abs(Math.round(itemEntry.change))}
-              </Badge>
-            )}
+            {itemEntry &&
+              itemEntry.change !== 0 &&
+              itemEntry.address_id === currentAddressId && (
+                <Badge
+                  className={`text-xs font-medium flex px-1 py-0.5 items-center mr-2 ${
+                    itemEntry.change < 0
+                      ? "bg-red-100 text-red-500"
+                      : "bg-green-100 text-green-500"
+                  }`}
+                >
+                  {itemEntry.change > 0 ? (
+                    <TrendingUp className="mx-0.5 w-3 h-3" />
+                  ) : (
+                    <TrendingDown className="mx-0.5 w-3 h-3" />
+                  )}
+                  {Math.abs(Math.round(itemEntry.change))}
+                </Badge>
+              )}
 
             <span
               className={
