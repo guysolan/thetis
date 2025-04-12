@@ -102,14 +102,16 @@ const StockHistoryTable: React.FC<StockHistoryTableProps> = ({
   });
 
   // Filter items based on type and active tab
-  const filteredItems = Array.from(uniqueItems.values()).filter((item) => {
-    const itemType = item.type.toLowerCase();
-    if (itemType === "package" || itemType === "service") return false;
-    if (activeTabState === "all") return true;
-    if (activeTabState === "products") return itemType === "product";
-    if (activeTabState === "parts") return itemType === "part";
-    return true;
-  });
+  const filteredItems = Array.from(uniqueItems.values())
+    .filter((item) => {
+      const itemType = item.type.toLowerCase();
+      if (itemType === "package" || itemType === "service") return false;
+      if (activeTabState === "all") return true;
+      if (activeTabState === "products") return itemType === "product";
+      if (activeTabState === "parts") return itemType === "part";
+      return true;
+    })
+    .sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically by name
 
   // State for column visibility
   const [hiddenColumns, setHiddenColumns] = React.useState<Set<number>>(
