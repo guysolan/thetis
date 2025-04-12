@@ -70,7 +70,7 @@ const Navigation = () => {
                 asChild
                 className="relative gap-2 bg-transparent shadow-none data-[state=active]:shadow-none px-2 md:px-4 pt-1 pb-1 border-b-2 border-b-transparent data-[state=active]:border-b-primary rounded-none h-12 font-semibold text-muted-foreground data-[state=active]:text-zinc-900 transition-none"
               >
-                <Link to={item.href} activeOptions={{ exact: true }}>
+                <Link to={item.href} activeOptions={{ exact: false }}>
                   <span className="[&_svg]:w-4 [&_svg]:h-4">{item.icon}</span>
                   {item.name}
                 </Link>

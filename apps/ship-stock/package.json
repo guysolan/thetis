@@ -56,5 +56,14 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
     "vite": "6.2.2"
-  }
+  },
+  "description": "Orders relate to changes in item_quantities.",
+  "version": "1.0.0",
+  "main": "postcss.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
