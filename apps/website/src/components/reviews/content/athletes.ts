@@ -2,6 +2,7 @@ import OliviaBlatch from "@/assets/faces/olivia-blatch.png";
 import AndrewLawrence from "@/assets/faces/andrew-lawrence.png";
 import KimDaybell from "@/assets/faces/kim-daybell.png";
 import SteffEvans from "./images/steff-evans.png";
+import OllieLawrence from "./images/ollie-lawrence.png";
 import type { Review } from "../types";
 
 export const athletes: Review[] = [
@@ -45,6 +46,16 @@ export const athletes: Review[] = [
     short: "The Thetis splint was an absolute saviour",
     body:
       "After my Achilles tendon rupture surgery, I was advised by a specialist to invest in a Thetis splint as the best product to use as part of my recovery.\n\nThe difference between sleeping in a big bulky boot and the Thetis splint was an absolute saviour. It made sleeping at night so much better and easier, and helped with my recovery as I was fresh because of better sleep. It kept my foot at the right angle and was light enough that I didn't notice it while asleep!\n\nI would and have recommended this product to my other teammates who have ruptured their Achilles tendon!",
-    country: "WL",
+    country: "GB",
+  },
+  {
+    name: "Ollie Lawrence",
+    description: "English Rugby Union Player",
+    image: OllieLawrence,
+    title: "Game changer!",
+    short: "Great for physio and a game changer for sleep!",
+    body:
+      "The Thetis splint was really helpful for staying safe when doing my rehab exercises.\n\nI’ve also been sleeping in it since I came out the cast which has been a game changer.",
+    country: "GB",
   },
 ];
