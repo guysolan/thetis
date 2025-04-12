@@ -1,8 +1,8 @@
 import OliviaBlatch from "@/assets/faces/olivia-blatch.png";
 import AndrewLawrence from "@/assets/faces/andrew-lawrence.png";
 import KimDaybell from "@/assets/faces/kim-daybell.png";
-import SteffEvans from "./images/steff-evans.png";
-import OllieLawrence from "./images/ollie-lawrence.png";
+import SteffEvans from "@/assets/faces/steff-evans.png";
+import OllieLawrence from "@/assets/faces/ollie-lawrence.png";
 import type { Review } from "../types";
 
 export const athletes: Review[] = [
@@ -55,7 +55,7 @@ export const athletes: Review[] = [
     title: "Game changer!",
     short: "Great for physio and a game changer for sleep!",
     body:
-      "The Thetis splint was really helpful for staying safe when doing my rehab exercises.\n\nI’ve also been sleeping in it since I came out the cast which has been a game changer.",
+      "The Thetis splint was really helpful for staying safe when doing my rehab exercises.\n\nI've also been sleeping in it since I came out the cast which has been an absolute game changer.",
     country: "GB",
   },
 ];
