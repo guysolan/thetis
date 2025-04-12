@@ -34,7 +34,6 @@ const fetchInventoryHistory = async (addressId: string) => {
   const { data, error } = await supabase
     .from("inventory_history_by_address")
     .select("*")
-    .eq("address_id", addressId)
     .order("transaction_date", { ascending: false });
 
   if (error) {
