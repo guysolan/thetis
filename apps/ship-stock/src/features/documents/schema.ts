@@ -18,6 +18,8 @@ export const baseDocumentOptions = {
 export const purchaseOrderOptions = {
   ...baseDocumentOptions,
   additional: [
+    { id: "showPackages", label: "Packages" },
+    { id: "showShippingItems", label: "Shipping Items" },
     { id: "carriage", label: "Carriage" },
     { id: "total", label: "Total Amount" },
   ],
@@ -105,10 +107,14 @@ export const documentOptionsSchema = z.object({
 
 export const purchaseOrderOptionsSchema = documentOptionsSchema.extend({
   carriage: z.boolean().default(false),
+  showPackages: z.boolean().default(true),
+  showShippingItems: z.boolean().default(true),
 });
 
 export const invoiceOptionsSchema = documentOptionsSchema.extend({
   payment: z.boolean().default(true),
+  showPackages: z.boolean().default(true),
+  showShippingItems: z.boolean().default(true),
 });
 
 export const commercialInvoiceSchema = documentOptionsSchema.extend({
@@ -132,3 +138,7 @@ export const packingListSchema = documentOptionsSchema.extend({
 export type CommercialInvoiceOptions = z.infer<typeof commercialInvoiceSchema>;
 
 export type DocumentOptions = z.infer<typeof documentOptionsSchema>;
+
+export type PurchaseOrderOptions = z.infer<typeof purchaseOrderOptionsSchema>;
+export type InvoiceOptions = z.infer<typeof invoiceOptionsSchema>;
+export type PackingListOptions = z.infer<typeof packingListSchema>;

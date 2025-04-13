@@ -5,14 +5,17 @@ import OrderTitle from "../components/OrderTitle";
 import OrderTotal from "../components/OrderTotal";
 import PaymentDetails from "../components/PaymentDetails";
 import BuyerSeller from "../components/BuyerSeller";
-import { DocumentOptions } from "../../../../documents/schema";
+import { PurchaseOrderOptions } from "../../../../documents/schema";
+import ShippingItems from "../components/ShippingItems";
+import PackageSummary from "../components/PackageSummary";
+import { prepareOrderItems } from "../utils/utils";
 
 const PurchaseOrder = ({
   order,
   options,
 }: {
   order: OrderView;
-  options: DocumentOptions;
+  options: PurchaseOrderOptions;
 }) => {
   return (
     <>
@@ -28,6 +31,24 @@ const PurchaseOrder = ({
         fromOptions={options.from}
         toOptions={options.to}
       />
+      {options.showShippingItems && (
+        <ShippingItems
+          currency={
+            order.currency as
+              | "AUD"
+              | "CAD"
+              | "EUR"
+              | "GBP"
+              | "JPY"
+              | "NZD"
+              | "USD"
+          }
+          orderItems={prepareOrderItems(order)}
+        />
+      )}
+
+      {options.showPackages && <PackageSummary items={order.items} />}
+
       <FinancialTransactions
         currency={order.currency}
         orderItems={order.items}
