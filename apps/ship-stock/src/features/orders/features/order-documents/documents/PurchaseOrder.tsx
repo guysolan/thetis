@@ -6,9 +6,9 @@ import OrderTotal from "../components/OrderTotal";
 import PaymentDetails from "../components/PaymentDetails";
 import BuyerSeller from "../components/BuyerSeller";
 import { PurchaseOrderOptions } from "../../../../documents/schema";
-import ShippingItems from "../components/ShippingItems";
 import PackageSummary from "../components/PackageSummary";
 import { prepareOrderItems } from "../utils/utils";
+import OrderItems from "../components/OrderItems";
 
 const PurchaseOrder = ({
   order,
@@ -32,7 +32,7 @@ const PurchaseOrder = ({
         toOptions={options.to}
       />
       {options.showShippingItems && (
-        <ShippingItems
+        <OrderItems
           currency={
             order.currency as
               | "AUD"
