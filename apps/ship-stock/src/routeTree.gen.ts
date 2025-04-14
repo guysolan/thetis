@@ -16,6 +16,7 @@ import { Route as HomeImport } from './routes/home'
 import { Route as DocumentsImport } from './routes/documents'
 import { Route as IndexImport } from './routes/index'
 import { Route as HomeIndexImport } from './routes/home/index'
+import { Route as TestStockHistoryImport } from './routes/test/stock-history'
 import { Route as HomeOrdersImport } from './routes/home/orders'
 import { Route as HomeDirectoryImport } from './routes/home/directory'
 import { Route as HomeBuildImport } from './routes/home/build'
@@ -58,6 +59,12 @@ const HomeIndexRoute = HomeIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => HomeRoute,
+} as any)
+
+const TestStockHistoryRoute = TestStockHistoryImport.update({
+  id: '/test/stock-history',
+  path: '/test/stock-history',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const HomeOrdersRoute = HomeOrdersImport.update({
@@ -185,6 +192,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeOrdersImport
       parentRoute: typeof HomeImport
     }
+    '/test/stock-history': {
+      id: '/test/stock-history'
+      path: '/test/stock-history'
+      fullPath: '/test/stock-history'
+      preLoaderRoute: typeof TestStockHistoryImport
+      parentRoute: typeof rootRoute
+    }
     '/home/': {
       id: '/home/'
       path: '/'
@@ -308,6 +322,7 @@ export interface FileRoutesByFullPath {
   '/home/build': typeof HomeBuildRoute
   '/home/directory': typeof HomeDirectoryRoute
   '/home/orders': typeof HomeOrdersRoute
+  '/test/stock-history': typeof TestStockHistoryRoute
   '/home/': typeof HomeIndexRoute
   '/home/stock': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
@@ -326,6 +341,7 @@ export interface FileRoutesByTo {
   '/home/build': typeof HomeBuildRoute
   '/home/directory': typeof HomeDirectoryRoute
   '/home/orders': typeof HomeOrdersRoute
+  '/test/stock-history': typeof TestStockHistoryRoute
   '/home': typeof HomeIndexRoute
   '/home/stock': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
@@ -346,6 +362,7 @@ export interface FileRoutesById {
   '/home/build': typeof HomeBuildRoute
   '/home/directory': typeof HomeDirectoryRoute
   '/home/orders': typeof HomeOrdersRoute
+  '/test/stock-history': typeof TestStockHistoryRoute
   '/home/': typeof HomeIndexRoute
   '/home/stock/': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
@@ -367,6 +384,7 @@ export interface FileRouteTypes {
     | '/home/build'
     | '/home/directory'
     | '/home/orders'
+    | '/test/stock-history'
     | '/home/'
     | '/home/stock'
     | '/documents/orders/$orderId/commercial-invoice'
@@ -384,6 +402,7 @@ export interface FileRouteTypes {
     | '/home/build'
     | '/home/directory'
     | '/home/orders'
+    | '/test/stock-history'
     | '/home'
     | '/home/stock'
     | '/documents/orders/$orderId/commercial-invoice'
@@ -402,6 +421,7 @@ export interface FileRouteTypes {
     | '/home/build'
     | '/home/directory'
     | '/home/orders'
+    | '/test/stock-history'
     | '/home/'
     | '/home/stock/'
     | '/documents/orders/$orderId/commercial-invoice'
@@ -419,6 +439,7 @@ export interface RootRouteChildren {
   DocumentsRoute: typeof DocumentsRouteWithChildren
   HomeRoute: typeof HomeRouteWithChildren
   LoginRoute: typeof LoginRoute
+  TestStockHistoryRoute: typeof TestStockHistoryRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -426,6 +447,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocumentsRoute: DocumentsRouteWithChildren,
   HomeRoute: HomeRouteWithChildren,
   LoginRoute: LoginRoute,
+  TestStockHistoryRoute: TestStockHistoryRoute,
 }
 
 export const routeTree = rootRoute
@@ -441,7 +463,8 @@ export const routeTree = rootRoute
         "/",
         "/documents",
         "/home",
-        "/login"
+        "/login",
+        "/test/stock-history"
       ]
     },
     "/": {
@@ -483,6 +506,9 @@ export const routeTree = rootRoute
     "/home/orders": {
       "filePath": "home/orders.tsx",
       "parent": "/home"
+    },
+    "/test/stock-history": {
+      "filePath": "test/stock-history.tsx"
     },
     "/home/": {
       "filePath": "home/index.tsx",
