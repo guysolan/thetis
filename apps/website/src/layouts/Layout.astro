@@ -14,6 +14,7 @@ import { cn } from "../lib/utils";
 const { title, description, image, bodyClass, hideFooter, logoColor } =
   Astro.props;
 
+import InstantlyPixel from "./InstantlyPixel.astro";
 import GoogleTagHead from "./GoogleTagHead.astro";
 import GoogleTagBody from "./GoogleTagBody.astro";
 import BaseHead from "./BaseHead.astro";
@@ -22,33 +23,33 @@ import Footer from "@/features/footer/Footer.astro";
 import ShopifyBuyButton2 from "../components/ShopifyBuyButton2.astro";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-       <meta charset="UTF-8">
-        <GoogleTagHead />
-        <BaseHead title={title} description={description} image={image} />
-        <slot name="head" />
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <GoogleTagHead />
+    <BaseHead title={title} description={description} image={image} />
+    <slot name="head" />
+  </head>
 
-    <body class={cn(bodyClass, 'pt-10 overflow-y-auto overflow-x-hidden')}>
-        <GoogleTagBody />
-        <ShopifyBuyButton2 />
+  <body class={cn(bodyClass, "pt-10 overflow-y-auto overflow-x-hidden")}>
+    <GoogleTagBody />
+    <ShopifyBuyButton2 />
+    <InstantlyPixel />
+    <Nav />
+    <slot />
+    {!hideFooter && <Footer />}
+    <script type="text/partytown" src="@/services/lucide.ts"></script>
+    <script type="text/partytown" src="@/services/location"></script>
+    <script
+      is:inline
+      defer
+      type="text/partytown"
+      src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
+    ></script>
 
-        <Nav />
-        <slot />
-        {!hideFooter && <Footer />}
-        <script type="text/partytown" src="@/services/lucide.ts"></script>
-        <script type="text/partytown" src="@/services/location"></script>
-        <script
-            is:inline
-            defer
-            type="text/partytown"
-            src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
-        ></script>
-
-   <script>
-        document.documentElement.classList.remove('dark');
+    <script>
+      document.documentElement.classList.remove("dark");
     </script>
-    </body>
+  </body>
 </html>
