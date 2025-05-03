@@ -7,6 +7,7 @@ import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
 import { Image } from "astro:assets";
 import ColorGradient from "@/components/ColorGradient.astro";
 import BulkOrders from "../components/buy-button/BulkOrders";
+import ReviewsLink from "../components/ReviewsLink";
 ---
 
 <Fragment slot="head">
@@ -20,7 +21,7 @@ import BulkOrders from "../components/buy-button/BulkOrders";
     image="https://thetismedical.com/images/green-shell.png"
     hideFooter={true}
 >
-    <main class="">
+    <main class="mb-8">
         <ColorGradient>
             <section class="mt-0 pb-12">
                 <div class="mx-auto px-4 max-w-5xl">
@@ -43,7 +44,7 @@ import BulkOrders from "../components/buy-button/BulkOrders";
                                 Splint for Achilles Tendon Rupture
                             </h1>
 
-                            <div class="space-y-2 mt-4 text-gray-600 text-lg">
+                            <div class="space-y-2 my-4 text-gray-600 text-lg">
                                 <p>
                                     Protect your healing tendon while you sleep
                                     with our splint. Designed to maintain
@@ -51,6 +52,7 @@ import BulkOrders from "../components/buy-button/BulkOrders";
                                     during your recovery journey.
                                 </p>
                             </div>
+                            <ReviewsLink size="lg" />
 
                             <BuyButtonVariants client:load />
                         </div>

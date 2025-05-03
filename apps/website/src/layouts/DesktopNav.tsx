@@ -19,6 +19,7 @@ const contentWidth = "min-w-[min(50vw,700px)]";
 
 import { partnerLinks, contactLinks } from "../content/pages.tsx";
 import { ArrowRight, Star } from "lucide-react";
+import ReviewsLink from "../components/ReviewsLink.tsx";
 
 function DesktopNav() {
   return (
@@ -33,7 +34,6 @@ function DesktopNav() {
                 description="Improve recovery time and comfort after Achilles tendon rupture"
                 imageSrc="/images/night_splint_square_small.jpg"
                 imageAlt="Achilles Tendon Rupture Splint"
-                reviewCount={184}
                 productUrl="/night-splint"
                 buyUrl="/buy-now"
                 wholesaleUrl="/order-wholesale"
@@ -306,28 +306,7 @@ const ProductLink = ({
           </p>
 
           {/* Reviews snippet */}
-          <Button
-            asChild
-            variant="outline"
-            size="sm"
-            className="group flex items-center hover:bg-neutral-50 mb-4 px-2 py-1 border border-neutral-200 hover:border-primary dark:border-neutral-700 dark:hover:border-primary rounded-md transition-all duration-200"
-          >
-            <a href="/reviews" role="button" aria-label="View all reviews">
-              <div className="flex mr-2 transition-all duration-200">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={`star-rating-${i}`}
-                    size={16}
-                    className={`fill-yellow-400 stroke-amber-500 text-yellow-400 ${i % 2 === 0 ? "group-hover:rotate-12" : "group-hover:-rotate-12"} transition-transform duration-300`}
-                  />
-                ))}
-              </div>
-              <span className="text-neutral-600 dark:text-neutral-300 group-hover:text-primary text-sm group-hover:underline">
-                Based on {reviewCount} reviews
-              </span>
-              <ArrowRight size={16} className="ml-1 group-hover:text-primary" />
-            </a>
-          </Button>
+          <ReviewsLink size="sm" variant="background" />
         </div>
 
         {/* Action buttons */}

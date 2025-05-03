@@ -6,21 +6,24 @@ import BuyButtonVariants from "../buy-button/BuyButtonVariants.tsx";
 import { Image } from "astro:assets";
 import ColorGradient from "@/components/ColorGradient.astro";
 import nightSplint from "@/components/products/images/night-splint/night_splint_bed_top_square.jpg";
+import ReviewsLink from "../../ReviewsLink";
 ---
 
 <ColorGradient>
   <div class="mx-auto px-4 max-w-7xl text-center">
-    <h1
-      class="mb-6 mx-w-4xl font-semibold text-gray-900 text-4xl md:text-5xl leading-[105%] md:leading-[120%]"
-    >
-      The <HighlightedWord>Only</HighlightedWord> Splint for Achilles Tendon <HighlightedWord
-        >Rupture</HighlightedWord
+    <div class="lg:hidden flex flex-col gap-4">
+      <h1
+        class="mb-6 mx-w-4xl font-semibold text-gray-900 text-4xl md:text-5xl leading-[105%] md:leading-[120%]"
       >
-    </h1>
-    <p class="mx-auto mb-8 max-w-3xl text-gray-700 text-xl">
-      Finally, a comfortable solution for recovery. Designed alongside surgeons
-      to protect your healing Achilles while recover.
-    </p>
+        The <HighlightedWord>Only</HighlightedWord> Splint for Achilles Tendon <HighlightedWord
+          >Rupture</HighlightedWord
+        >
+      </h1>
+      <p class="mx-auto mb-8 max-w-3xl text-gray-700 text-xl">
+        Finally, a comfortable solution for recovery. Designed alongside
+        surgeons to protect your healing Achilles while recover.
+      </p>
+    </div>
     <div class="flex lg:flex-row flex-col gap-4 lg:gap-8 my-2">
       <Image
         height={1000}
@@ -30,7 +33,21 @@ import nightSplint from "@/components/products/images/night-splint/night_splint_
         alt="Splint Render"
       />
 
-      <div class="space-y-8 w-full text-left">
+      <div class="space-y-2 w-full text-left">
+        <div class="hidden lg:flex flex-col gap-6">
+          <h1
+            class="mx-w-4xl font-semibold text-gray-900 text-4xl md:text-5xl leading-[105%] md:leading-[120%]"
+          >
+            The <HighlightedWord>Only</HighlightedWord> Splint for Achilles Tendon
+            <HighlightedWord>Rupture</HighlightedWord>
+          </h1>
+          <p class="mx-auto max-w-3xl text-gray-700 text-xl">
+            Finally, a comfortable solution for recovery. Designed alongside
+            surgeons to protect your healing Achilles while recover.
+          </p>
+        </div>
+        <ReviewsLink size="lg" />
+
         <BuyButtonVariants client:load />
         <div class="flex flex-col gap-8">
           <FreeAndSecure />
