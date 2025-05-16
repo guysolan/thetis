@@ -8,6 +8,7 @@ import { getCollection } from "astro:content";
 
 const guides = await getCollection("guide");
 const guidePosts = guides
+    .filter((post) => post.data.status !== "draft")
     .map((g) => ({ ...g, type: "guide" }))
     .sort(
         (a, b) =>

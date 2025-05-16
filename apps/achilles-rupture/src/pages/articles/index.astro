@@ -9,6 +9,7 @@ import { getCollection } from "astro:content";
 const articles = await getCollection("article");
 const articlePosts = articles
     .map((a) => ({ ...a, type: "article" }))
+    .filter((post) => post.data.status !== "draft")
     .sort(
         (a, b) =>
             new Date(b.data.publishedAt).getTime() -
