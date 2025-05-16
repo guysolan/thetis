@@ -27,11 +27,11 @@ export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
       <Head />
       <Preview>Achilles Rupture Update: Aircast vs VACOped Comparison</Preview>
       <Tailwind>
-        <Body className="bg-white mx-auto my-auto font-sans">
-          <Container className="mx-auto my-[40px] p-[20px] border border-[#eaeaea] border-solid rounded w-[465px]">
+        <Body className="bg-gray-50 mx-auto my-auto font-sans">
+          <Container className="mx-auto my-[20px] p-[20px] rounded w-[600px]">
             <Section className="mt-[32px]">
               <Img
-                src="https://achilles-ruptures.com/images/logo.png"
+                src="https://achilles-rupture.com/images/achilles-rupture-logo-no-padding.svg"
                 width="40"
                 height="40"
                 alt="Achilles Ruptures"
@@ -40,13 +40,10 @@ export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
             </Section>
 
             <Heading className="mx-0 my-[30px] p-0 font-normal text-[24px] text-black text-center">
-              Achilles Rupture Update
+              The Boot Battle: Aircast vs VACOped
             </Heading>
 
             <Section className="bg-indigo-50 my-6 p-4 rounded-lg">
-              <Text className="text-[14px] text-black leading-[24px]">
-                Dear Dr. {firstName},
-              </Text>
               <Text className="text-[14px] text-black leading-[24px]">
                 Ever wondered if your Achilles rupture patients would achieve
                 better outcomes with a VACOped versus an Aircast + wedges? Here
@@ -340,17 +337,17 @@ export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
             <Section className="mt-[32px] mb-[32px] text-center">
               <Button
                 className="bg-indigo-600 hover:bg-indigo-700 px-5 py-3 rounded font-semibold text-[12px] text-white text-center no-underline"
-                href="https://achilles-ruptures.com/articles/aircast-vs-vacoped"
+                href="https://achilles-rupture.com/articles/aircast-vs-vacoped"
               >
                 Access Full Clinical Analysis
               </Button>
             </Section>
 
             <Text className="text-[14px] text-black leading-[24px]">
+              Warm regards,
+              <br />
               The Achilles Ruptures Research Team
             </Text>
-
-            <Unsubscribe />
             <Footer />
           </Container>
         </Body>
