@@ -13,29 +13,23 @@ import {
   Text,
 } from "@react-email/components";
 import Tailwind from "../../components/achilles-rupture/tailwind";
-import Unsubscribe from "../../components/achilles-rupture/unsubscribe";
 import Footer from "../../components/achilles-rupture/footer";
 
-interface Props {
-  firstName?: string;
-  clinic?: string;
-}
-
-export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
+export const MyEmail = () => {
   return (
     <Html>
       <Head />
       <Preview>Achilles Rupture Update: Aircast vs VACOped Comparison</Preview>
       <Tailwind>
-        <Body className="bg-gray-50 mx-auto my-auto font-sans">
-          <Container className="mx-auto my-[20px] p-[20px] rounded w-[600px]">
-            <Section className="mt-[32px]">
+        <Body className="mx-auto my-auto font-sans">
+          <Container className="mx-auto my-[20px] p-[20px] rounded w-full max-w-[600px]">
+            <Section className="flex justify-center mt-[32px]">
               <Img
                 src="https://achilles-rupture.com/images/achilles-rupture-logo-no-padding.svg"
                 width="40"
                 height="40"
                 alt="Achilles Ruptures"
-                className="mx-auto my-0"
+                className="my-0"
               />
             </Section>
 
@@ -43,7 +37,7 @@ export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
               The Boot Battle: Aircast vs VACOped
             </Heading>
 
-            <Section className="bg-indigo-50 my-6 p-4 rounded-lg">
+            <Section className="bg-indigo-50 my-6 p-6 rounded-lg">
               <Text className="text-[14px] text-black leading-[24px]">
                 Ever wondered if your Achilles rupture patients would achieve
                 better outcomes with a VACOped versus an Aircast + wedges? Here
@@ -68,13 +62,36 @@ export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
                 🦿 VACOped Boot Analysis
               </Heading>
               <Text className="text-[14px] text-black leading-[24px]">
-                The VACOped represents the gold standard in Achilles rupture
+                The VACOped claims to be the gold standard in Achilles rupture
                 management:
               </Text>
+              <Section className="bg-indigo-50 my-4 p-6 rounded-lg">
+                <Heading className="mb-2 font-semibold text-[16px] text-indigo-700">
+                  How It Works: VACOped's Dynamic Recovery System
+                </Heading>
+                <Text className="text-[14px] text-black leading-[24px]">
+                  The VACOped uses a hinged mechanism that allows controlled
+                  movement within a range, rather than locking the ankle in a
+                  fixed position. This means:
+                </Text>
+                <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
+                  <li>
+                    Your ankle can move slightly within a safe range, keeping
+                    muscles active
+                  </li>
+                  <li>
+                    As you heal, the range of motion can be gradually increased
+                  </li>
+                  <li>
+                    This dynamic movement helps prevent muscle wasting and
+                    stiffness
+                  </li>
+                  <li>
+                    The controlled motion promotes better blood flow and healing
+                  </li>
+                </ul>
+              </Section>
               <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
-                <li>
-                  Fixed 48° ankle plantarflexion for optimal tendon healing
-                </li>
                 <li>
                   Vacuum-bead liner for superior compression and swelling
                   reduction
@@ -96,9 +113,35 @@ export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
                 The Aircast offers a practical alternative with its own
                 advantages:
               </Text>
+              <Section className="bg-indigo-50 my-4 p-6 rounded-lg">
+                <Heading className="mb-2 font-semibold text-[16px] text-indigo-700">
+                  How It Works: Aircast's Wedge System
+                </Heading>
+                <Text className="text-[14px] text-black leading-[24px]">
+                  The Aircast uses a series of removable wedges to adjust the
+                  ankle position:
+                </Text>
+                <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
+                  <li>
+                    Wedges are placed under the heel to maintain a fixed
+                    plantarflexed position
+                  </li>
+                  <li>
+                    As healing progresses, wedges are removed to gradually
+                    reduce the angle
+                  </li>
+                  <li>
+                    The ankle remains locked in each position until the next
+                    wedge adjustment
+                  </li>
+                  <li>
+                    This step-by-step approach is simpler but provides less
+                    dynamic movement
+                  </li>
+                </ul>
+              </Section>
               <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
-                <li>Adjustable ankle position using removable wedges</li>
-                <li>Lightweight design ideal for driving</li>
+                <li>Lightweight design</li>
                 <li>Simple wedge-based adjustment mechanism</li>
                 <li>Cost-effective at $150 + wedges</li>
                 <li>Widely available in clinical settings</li>
@@ -146,13 +189,6 @@ export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
                     <td className="p-3 border border-[#eaeaea]">★☆☆☆☆</td>
                     <td className="p-3 border border-[#eaeaea]">★☆☆☆☆</td>
                   </tr>
-                  <tr className="bg-indigo-50">
-                    <td className="p-3 border border-[#eaeaea] font-medium">
-                      Driving
-                    </td>
-                    <td className="p-3 border border-[#eaeaea]">★★★★★</td>
-                    <td className="p-3 border border-[#eaeaea]">★★★☆☆</td>
-                  </tr>
                 </tbody>
               </table>
               <Text className="mt-2 text-[12px] text-gray-600">
@@ -177,8 +213,9 @@ export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
               </Text>
               <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
                 <li>
-                  <strong>Walking:</strong> VACOped's pronounced rocker design
-                  enables better heel-to-toe movement
+                  <strong>Walking:</strong> VACOped's hinged mechanism and
+                  pronounced rocker design enables better heel-to-toe movement
+                  while preserving muscle function
                 </li>
                 <li>
                   <strong>Sleeping:</strong> Neither boot is recommended for
@@ -189,10 +226,6 @@ export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
                   <strong>Showering:</strong> For both boots, we recommend using
                   a shower chair and waterproof cast cover for safety. The
                   VACOped's waterproof design provides additional protection
-                </li>
-                <li>
-                  <strong>Driving:</strong> Aircast's lighter weight makes it
-                  more suitable for driving
                 </li>
               </ul>
             </Section>
@@ -233,7 +266,7 @@ export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
                       Adjustable with wedges
                     </td>
                     <td className="p-3 border border-[#eaeaea]">
-                      Fixed 48° plantarflexion
+                      Hinged plantarflexion
                     </td>
                   </tr>
                   <tr>
@@ -284,7 +317,6 @@ export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
                 <strong>Choose Aircast if:</strong>
               </Text>
               <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
-                <li>You drive frequently and need a lighter boot</li>
                 <li>Cost is a significant factor</li>
                 <li>You prefer simpler adjustment mechanisms</li>
                 <li>You have limited access to clinical support</li>
@@ -313,10 +345,6 @@ export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
                   users during showering
                 </li>
                 <li>
-                  <strong>Shower Chair:</strong> Provides safety and stability
-                  during bathing
-                </li>
-                <li>
                   <strong>Merino Wool Socks:</strong> Helps manage temperature
                   and moisture for optimal comfort
                 </li>
@@ -339,7 +367,7 @@ export const MyEmail = ({ firstName = "", clinic = "" }: Props) => {
                 className="bg-indigo-600 hover:bg-indigo-700 px-5 py-3 rounded font-semibold text-[12px] text-white text-center no-underline"
                 href="https://achilles-rupture.com/articles/aircast-vs-vacoped"
               >
-                Access Full Clinical Analysis
+                Read Full Article
               </Button>
             </Section>
 
