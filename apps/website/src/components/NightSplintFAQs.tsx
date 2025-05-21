@@ -64,7 +64,7 @@ const nightSplintFaqs: FAQCategory[] = [
       {
         question: "How does the splint maintain the correct healing position?",
         answer:
-          "The splint holds your foot at a 150-degree angle, which is the optimal position for Achilles tendon healing. This matches the angle you would achieve with a hinged boot or wedges, ensuring proper recovery throughout the healing period.",
+          "The splint holds your foot at a 30-degree angle, which is the optimal position for Achilles tendon healing. This matches the angle you would achieve with a hinged boot or wedges, ensuring proper recovery throughout the healing period.",
       },
       {
         question: "Can I use this with a complete Achilles tear?",
@@ -136,7 +136,7 @@ const nightSplintFaqs: FAQCategory[] = [
       {
         question: "What angle does the splint maintain?",
         answer:
-          "The splint maintains a fixed 150-degree angle, which matches the maximum angle provided by hinged boots or wedged boots. This specific angle is designed to optimize healing throughout your recovery period while keeping the device lightweight and user-friendly.",
+          "The splint maintains a fixed 30-degree angle, which matches the maximum angle provided by hinged boots or wedged boots. This specific angle is designed to optimize healing throughout your recovery period while keeping the device lightweight and user-friendly.",
       },
     ],
   },
