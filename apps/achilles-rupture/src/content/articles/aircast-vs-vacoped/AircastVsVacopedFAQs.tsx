@@ -39,21 +39,6 @@ const aircastVsVacopedFaqs: FAQCategory[] = [
     ],
   },
   {
-    category: "Elevation & Recovery",
-    questions: [
-      {
-        question: "How important is elevation during recovery?",
-        answer:
-          "Elevation is crucial, especially in the early stages. UK rehabilitation guidelines recommend elevating the affected limb above heart level. One established protocol prescribes 23 hours/day with the ankle above chest level for the first week, followed by 12 hours/day at heart level for the next week. This helps reduce swelling and promote healing.",
-      },
-      {
-        question: "Can I exercise while wearing the walking boot?",
-        answer:
-          "Yes, but only with your healthcare provider's approval. The boot allows for controlled weight-bearing and movement, which is part of the early rehabilitation process. However, the type and intensity of exercise should be carefully guided by your medical team to prevent re-injury.",
-      },
-    ],
-  },
-  {
     category: "Additional Equipment",
     questions: [
       {

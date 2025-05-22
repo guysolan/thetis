@@ -48,7 +48,7 @@ const hospitalFaqs: FAQCategory[] = [
       {
         question: "How does the splint maintain the correct healing position?",
         answer:
-          "The splint holds the foot at a 30-degree angle, which is the optimal position for Achilles tendon healing. This matches the angle achieved with a hinged boot or wedges, ensuring proper recovery throughout the healing period.",
+          "The splint holds the foot at a 3a angle, which is the optimal position for Achilles tendon healing. This matches the angle achieved with a hinged boot or wedges, ensuring proper recovery throughout the healing period.",
       },
       {
         question: "Where should hospitals store the splints?",
