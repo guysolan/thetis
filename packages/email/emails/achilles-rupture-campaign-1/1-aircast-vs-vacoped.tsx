@@ -49,11 +49,24 @@ export const MyEmail = () => {
                   Daily activity ratings: walking, showering, sleeping & driving
                 </li>
                 <li>
-                  Detailed clinical comparison: price, ankle position &
-                  mechanism
+                  Detailed clinical comparison: ankle position & mechanism
                 </li>
                 <li>Patient selection guide: who should choose which boot</li>
                 <li>Essential recovery products for optimal outcomes</li>
+              </ul>
+            </Section>
+
+            <Section className="my-6">
+              <Heading className="mb-4 font-semibold text-[18px] text-indigo-700">
+                💰 Cost Comparison
+              </Heading>
+              <Text className="text-[14px] text-black leading-[24px]">
+                Both boots support early weightbearing, but differ significantly
+                in price:
+              </Text>
+              <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
+                <li>VACOped: Premium price point at $375</li>
+                <li>Aircast: Cost-effective at $150 + wedges</li>
               </ul>
             </Section>
 
@@ -76,18 +89,15 @@ export const MyEmail = () => {
                 </Text>
                 <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
                   <li>
-                    Your ankle can move slightly within a safe range, keeping
-                    muscles active
+                    Achieves 48° of ankle plantarflexion, closer to cast
+                    immobilization (56°)
                   </li>
                   <li>
-                    As you heal, the range of motion can be gradually increased
+                    Provides true ankle equinus rather than midfoot compensation
                   </li>
+                  <li>Better preserves tendon length during healing</li>
                   <li>
-                    This dynamic movement helps prevent muscle wasting and
-                    stiffness
-                  </li>
-                  <li>
-                    The controlled motion promotes better blood flow and healing
+                    Dynamic movement helps prevent muscle wasting and stiffness
                   </li>
                 </ul>
               </Section>
@@ -101,7 +111,6 @@ export const MyEmail = () => {
                   Enhanced walking mechanics with pronounced rocker design
                 </li>
                 <li>30% lower tendon loading during ambulation</li>
-                <li>Premium price point at $375</li>
               </ul>
             </Section>
 
@@ -123,27 +132,25 @@ export const MyEmail = () => {
                 </Text>
                 <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
                   <li>
-                    Wedges are placed under the heel to maintain a fixed
-                    plantarflexed position
+                    Wedges create equinus appearance through midfoot bending
+                    rather than true ankle equinus
                   </li>
                   <li>
-                    As healing progresses, wedges are removed to gradually
-                    reduce the angle
+                    Achieves only 28° of ankle plantarflexion (vs. 56° in cast)
                   </li>
                   <li>
-                    The ankle remains locked in each position until the next
-                    wedge adjustment
+                    May not provide sufficient tendon shortening for optimal
+                    healing
                   </li>
                   <li>
-                    This step-by-step approach is simpler but provides less
-                    dynamic movement
+                    Step-by-step approach with fixed positions between
+                    adjustments
                   </li>
                 </ul>
               </Section>
               <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
                 <li>Lightweight design</li>
                 <li>Simple wedge-based adjustment mechanism</li>
-                <li>Cost-effective at $150 + wedges</li>
                 <li>Widely available in clinical settings</li>
                 <li>Requires waterproof cover for showering</li>
               </ul>
@@ -263,10 +270,10 @@ export const MyEmail = () => {
                       Ankle Position
                     </td>
                     <td className="p-3 border border-[#eaeaea]">
-                      Adjustable with wedges
+                      28° plantarflexion (midfoot compensation)
                     </td>
                     <td className="p-3 border border-[#eaeaea]">
-                      Hinged plantarflexion
+                      48° true ankle plantarflexion
                     </td>
                   </tr>
                   <tr>
@@ -308,9 +315,10 @@ export const MyEmail = () => {
                 <strong>Choose VACOped if:</strong>
               </Text>
               <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
-                <li>You're an active patient requiring early weightbearing</li>
+                <li>
+                  You need superior walking mechanics and dynamic movement
+                </li>
                 <li>Waterproofing is important for your lifestyle</li>
-                <li>You need superior walking mechanics</li>
                 <li>Cost is not a primary concern</li>
               </ul>
               <Text className="mt-4 text-[14px] text-black leading-[24px]">
