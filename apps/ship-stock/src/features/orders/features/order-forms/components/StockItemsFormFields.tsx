@@ -32,6 +32,7 @@ interface StockItemsFormFieldsProps {
   showPrice?: boolean;
   showQuantity?: boolean;
   onUpdate?: () => void;
+  packageMode?: boolean;
 }
 
 const StockItemsFormFields = ({
@@ -45,6 +46,7 @@ const StockItemsFormFields = ({
   onUpdate,
   allowedTypes = [],
   showQuantity = true,
+  packageMode = false,
 }: StockItemsFormFieldsProps) => {
   return (
     <Table>
@@ -84,6 +86,13 @@ const StockItemsFormFields = ({
               After
             </TableHead>
           )}
+          {packageMode && (
+            <TableHead
+              className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}
+            >
+              Package
+            </TableHead>
+          )}
           <TableHead
             className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}
           >
@@ -105,6 +114,7 @@ const StockItemsFormFields = ({
             onCopy={onCopy}
             onRemove={onRemove}
             allowedTypes={allowedTypes}
+            packageMode={packageMode}
           />
         ))}
       </TableBody>

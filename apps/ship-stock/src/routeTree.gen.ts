@@ -17,10 +17,11 @@ import { Route as DocumentsImport } from './routes/documents'
 import { Route as IndexImport } from './routes/index'
 import { Route as HomeIndexImport } from './routes/home/index'
 import { Route as TestStockHistoryImport } from './routes/test/stock-history'
-import { Route as HomeOrdersImport } from './routes/home/orders'
 import { Route as HomeDirectoryImport } from './routes/home/directory'
 import { Route as HomeBuildImport } from './routes/home/build'
 import { Route as HomeStockIndexImport } from './routes/home/stock/index'
+import { Route as HomeOrdersIndexImport } from './routes/home/orders/index'
+import { Route as HomeOrdersOrderIdImport } from './routes/home/orders/$orderId'
 import { Route as HomeStockHistoryAddressIdImport } from './routes/home/stock/history.$addressId'
 import { Route as DocumentsOrdersOrderIdStocktakeReportImport } from './routes/documents/orders/$orderId/stocktake-report'
 import { Route as DocumentsOrdersOrderIdShippingLabelImport } from './routes/documents/orders/$orderId/shipping-label'
@@ -67,12 +68,6 @@ const TestStockHistoryRoute = TestStockHistoryImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const HomeOrdersRoute = HomeOrdersImport.update({
-  id: '/orders',
-  path: '/orders',
-  getParentRoute: () => HomeRoute,
-} as any)
-
 const HomeDirectoryRoute = HomeDirectoryImport.update({
   id: '/directory',
   path: '/directory',
@@ -88,6 +83,18 @@ const HomeBuildRoute = HomeBuildImport.update({
 const HomeStockIndexRoute = HomeStockIndexImport.update({
   id: '/stock/',
   path: '/stock/',
+  getParentRoute: () => HomeRoute,
+} as any)
+
+const HomeOrdersIndexRoute = HomeOrdersIndexImport.update({
+  id: '/orders/',
+  path: '/orders/',
+  getParentRoute: () => HomeRoute,
+} as any)
+
+const HomeOrdersOrderIdRoute = HomeOrdersOrderIdImport.update({
+  id: '/orders/$orderId',
+  path: '/orders/$orderId',
   getParentRoute: () => HomeRoute,
 } as any)
 
@@ -185,13 +192,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeDirectoryImport
       parentRoute: typeof HomeImport
     }
-    '/home/orders': {
-      id: '/home/orders'
-      path: '/orders'
-      fullPath: '/home/orders'
-      preLoaderRoute: typeof HomeOrdersImport
-      parentRoute: typeof HomeImport
-    }
     '/test/stock-history': {
       id: '/test/stock-history'
       path: '/test/stock-history'
@@ -204,6 +204,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/home/'
       preLoaderRoute: typeof HomeIndexImport
+      parentRoute: typeof HomeImport
+    }
+    '/home/orders/$orderId': {
+      id: '/home/orders/$orderId'
+      path: '/orders/$orderId'
+      fullPath: '/home/orders/$orderId'
+      preLoaderRoute: typeof HomeOrdersOrderIdImport
+      parentRoute: typeof HomeImport
+    }
+    '/home/orders/': {
+      id: '/home/orders/'
+      path: '/orders'
+      fullPath: '/home/orders'
+      preLoaderRoute: typeof HomeOrdersIndexImport
       parentRoute: typeof HomeImport
     }
     '/home/stock/': {
@@ -297,8 +311,9 @@ const DocumentsRouteWithChildren = DocumentsRoute._addFileChildren(
 interface HomeRouteChildren {
   HomeBuildRoute: typeof HomeBuildRoute
   HomeDirectoryRoute: typeof HomeDirectoryRoute
-  HomeOrdersRoute: typeof HomeOrdersRoute
   HomeIndexRoute: typeof HomeIndexRoute
+  HomeOrdersOrderIdRoute: typeof HomeOrdersOrderIdRoute
+  HomeOrdersIndexRoute: typeof HomeOrdersIndexRoute
   HomeStockIndexRoute: typeof HomeStockIndexRoute
   HomeStockHistoryAddressIdRoute: typeof HomeStockHistoryAddressIdRoute
 }
@@ -306,8 +321,9 @@ interface HomeRouteChildren {
 const HomeRouteChildren: HomeRouteChildren = {
   HomeBuildRoute: HomeBuildRoute,
   HomeDirectoryRoute: HomeDirectoryRoute,
-  HomeOrdersRoute: HomeOrdersRoute,
   HomeIndexRoute: HomeIndexRoute,
+  HomeOrdersOrderIdRoute: HomeOrdersOrderIdRoute,
+  HomeOrdersIndexRoute: HomeOrdersIndexRoute,
   HomeStockIndexRoute: HomeStockIndexRoute,
   HomeStockHistoryAddressIdRoute: HomeStockHistoryAddressIdRoute,
 }
@@ -321,9 +337,10 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/home/build': typeof HomeBuildRoute
   '/home/directory': typeof HomeDirectoryRoute
-  '/home/orders': typeof HomeOrdersRoute
   '/test/stock-history': typeof TestStockHistoryRoute
   '/home/': typeof HomeIndexRoute
+  '/home/orders/$orderId': typeof HomeOrdersOrderIdRoute
+  '/home/orders': typeof HomeOrdersIndexRoute
   '/home/stock': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
@@ -340,9 +357,10 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/home/build': typeof HomeBuildRoute
   '/home/directory': typeof HomeDirectoryRoute
-  '/home/orders': typeof HomeOrdersRoute
   '/test/stock-history': typeof TestStockHistoryRoute
   '/home': typeof HomeIndexRoute
+  '/home/orders/$orderId': typeof HomeOrdersOrderIdRoute
+  '/home/orders': typeof HomeOrdersIndexRoute
   '/home/stock': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
@@ -361,9 +379,10 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/home/build': typeof HomeBuildRoute
   '/home/directory': typeof HomeDirectoryRoute
-  '/home/orders': typeof HomeOrdersRoute
   '/test/stock-history': typeof TestStockHistoryRoute
   '/home/': typeof HomeIndexRoute
+  '/home/orders/$orderId': typeof HomeOrdersOrderIdRoute
+  '/home/orders/': typeof HomeOrdersIndexRoute
   '/home/stock/': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
@@ -383,9 +402,10 @@ export interface FileRouteTypes {
     | '/login'
     | '/home/build'
     | '/home/directory'
-    | '/home/orders'
     | '/test/stock-history'
     | '/home/'
+    | '/home/orders/$orderId'
+    | '/home/orders'
     | '/home/stock'
     | '/documents/orders/$orderId/commercial-invoice'
     | '/documents/orders/$orderId/invoice'
@@ -401,9 +421,10 @@ export interface FileRouteTypes {
     | '/login'
     | '/home/build'
     | '/home/directory'
-    | '/home/orders'
     | '/test/stock-history'
     | '/home'
+    | '/home/orders/$orderId'
+    | '/home/orders'
     | '/home/stock'
     | '/documents/orders/$orderId/commercial-invoice'
     | '/documents/orders/$orderId/invoice'
@@ -420,9 +441,10 @@ export interface FileRouteTypes {
     | '/login'
     | '/home/build'
     | '/home/directory'
-    | '/home/orders'
     | '/test/stock-history'
     | '/home/'
+    | '/home/orders/$orderId'
+    | '/home/orders/'
     | '/home/stock/'
     | '/documents/orders/$orderId/commercial-invoice'
     | '/documents/orders/$orderId/invoice'
@@ -486,8 +508,9 @@ export const routeTree = rootRoute
       "children": [
         "/home/build",
         "/home/directory",
-        "/home/orders",
         "/home/",
+        "/home/orders/$orderId",
+        "/home/orders/",
         "/home/stock/",
         "/home/stock/history/$addressId"
       ]
@@ -503,15 +526,19 @@ export const routeTree = rootRoute
       "filePath": "home/directory.tsx",
       "parent": "/home"
     },
-    "/home/orders": {
-      "filePath": "home/orders.tsx",
-      "parent": "/home"
-    },
     "/test/stock-history": {
       "filePath": "test/stock-history.tsx"
     },
     "/home/": {
       "filePath": "home/index.tsx",
+      "parent": "/home"
+    },
+    "/home/orders/$orderId": {
+      "filePath": "home/orders/$orderId.tsx",
+      "parent": "/home"
+    },
+    "/home/orders/": {
+      "filePath": "home/orders/index.tsx",
       "parent": "/home"
     },
     "/home/stock/": {

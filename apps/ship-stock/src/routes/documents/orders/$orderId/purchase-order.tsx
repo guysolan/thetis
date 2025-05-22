@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { selectOrderByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderById";
+import { selectOrderByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderViewById";
 import PurchaseOrder from "../../../../features/orders/features/order-documents/documents/PurchaseOrder";
 import { purchaseOrderOptionsSchema } from "../../../../features/documents/schema";
 import DocumentOptionsPopover from "../../../../features/documents/components/DocumentOptionsPopover";

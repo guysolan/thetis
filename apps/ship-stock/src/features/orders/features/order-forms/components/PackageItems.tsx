@@ -1,120 +1,209 @@
-import { useFieldArray, useFormContext } from "react-hook-form";
-import { useSelectItemsView } from "../../../../items/api/selectItemsView";
-import Select from "../../../../../components/Select";
-import Input from "../../../../../components/Input";
+import { useFormContext } from "react-hook-form";
+import { useSelectItemsView } from "@/features/items/api/selectItemsView";
 import { Button } from "@thetis/ui/button";
-import { PlusIcon, TrashIcon } from "lucide-react";
-import { Database } from "@/database.types";
+import { Plus, Trash2 } from "lucide-react";
 import { useEffect } from "react";
+import { Badge } from "@thetis/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@thetis/ui/table";
+import Select from "@/components/Select";
+import Input from "@/components/Input";
+import { StockValidationAlert } from "./StockValidationAlert";
+import EditCard from "@/components/EditCard";
+import StockItems from "./StockItems";
+import type { PricedItem } from "../schema";
 
-interface PackageItemsProps {
-    packageIndex: number;
+interface PackageItem {
+  item_type: "package";
+  item_id?: string;
+  quantity_change: number;
 }
 
-const PackageItems = ({ packageIndex }: PackageItemsProps) => {
-    const { data: items } = useSelectItemsView();
-    const { control, setValue, watch } = useFormContext();
-    const { fields, append, remove } = useFieldArray({
-        control,
-        name: `order_items.${packageIndex}.package_items`
-    });
+interface PackageItemsProps {
+  name?: string;
+  address_name?: string;
+  showPrice?: boolean;
+  readOnly?: boolean;
+  title?: string;
+}
 
-    // Watch the specific field we want to track
-    const watchedItems = watch(`order_items.${packageIndex}.package_items`);
+const PackageItems = ({
+  name = "order_items",
+  address_name = "from_shipping_address_id",
+  showPrice = true,
+  readOnly = false,
+  title = "Packages",
+}: PackageItemsProps) => {
+  const form = useFormContext();
+  const { data: items } = useSelectItemsView();
+  const formValues = form.watch(name) as PackageItem[];
+  const unitOfMeasurement = form.watch("unit_of_measurement") || "metric";
 
-    useEffect(() => {
-        console.log("Package items changed:", watchedItems); // Debug log
-
-        if (!watchedItems || !items) return;
-
-        watchedItems.forEach((item, index) => {
-            if (item?.item_id) {
-                const selectedProduct = items.find(product =>
-                    String(product.item_id) === String(item.item_id)
-                );
-
-                if (selectedProduct) {
-                    console.log("Updating item:", index, selectedProduct); // Debug log
-                    setValue(
-                        `order_items.${packageIndex}.package_items.${index}.item_price`,
-                        selectedProduct.item_price || 0,
-                        { shouldDirty: true }
-                    );
-                    setValue(
-                        `order_items.${packageIndex}.package_items.${index}.item_type`,
-                        selectedProduct.item_type,
-                        { shouldDirty: true }
-                    );
-                }
-            }
-        });
-    }, [watchedItems, items, packageIndex, setValue]); // Proper dependency array
-
-    const getFilteredItemOptions = () => {
-        return items?.filter((item) => item.item_type === "product")
-            .map((item) => ({
-                label: item.item_name || '',
-                value: String(item.item_id),
-            })) || [];
+  const addPackage = () => {
+    const currentItems = form.getValues(name) || [];
+    const newPackage = {
+      item_type: "package",
+      item_id: "",
+      quantity_change: 1,
     };
+    form.setValue(name, [...currentItems, newPackage], { shouldDirty: false });
+  };
+
+  const removePackage = (index: number) => {
+    const currentItems = form.getValues(name) as PackageItem[];
+    const packageId = currentItems[index].item_id;
+
+    // Remove the package
+    const newItems = currentItems.filter((_, i) => i !== index);
+
+    // Also remove any items that were part of this package
+    const allItems = form.getValues(name) as PricedItem[];
+    const remainingItems = allItems.filter(
+      (item) => item.package_item_id !== packageId,
+    );
+
+    form.setValue(name, remainingItems, { shouldDirty: false });
+  };
+
+  const getPackageDimensions = (packageItem: PackageItem) => {
+    if (!items || !packageItem.item_id) return null;
+    const selectedPackage = items.find(
+      (item) => String(item.item_id) === String(packageItem.item_id),
+    );
+    if (!selectedPackage) return null;
 
     return (
-        <div className="border-gray-200 ml-8 pl-4 border-l-2">
-            <div className="flex flex-col gap-2">
-                {fields.map((field, index) => (
-                    <div key={field.id} className="flex flex-row items-end gap-2">
-                        <Select
-                            name={`order_items.${packageIndex}.package_items.${index}.item_id`}
-                            label="Item"
-                            options={getFilteredItemOptions()}
-                            value={watchedItems?.[index]?.item_id}
-                        />
-                        <Input
-                            name={`order_items.${packageIndex}.package_items.${index}.quantity`}
-                            label="Quantity"
-                            type="number"
-                            step="1"
-                            min="1"
-                        />
-                        <Input
-                            name={`order_items.${packageIndex}.package_items.${index}.item_price`}
-                            label="Price"
-                            type="number"
-                            step="0.01"
-                        />
-                        <Input
-                            name={`order_items.${packageIndex}.package_items.${index}.item_tax`}
-                            label="Tax"
-                            type="number"
-                            step="0.01"
-                        />
-                        <Button
-                            type="button"
-                            variant="ghost"
-                            onClick={() => remove(index)}
-                        >
-                            <TrashIcon className="w-5 h-5" />
-                        </Button>
-                    </div>
-                ))}
-            </div>
-            <Button
-                type="button"
-                variant="ghost"
-                className="mt-2"
-                onClick={() => append({
-                    item_id: "",
-                    item_type: "product",
-                    quantity: 1,
-                    item_price: 0,
-                    item_tax: 0
-                })}
-            >
-                <PlusIcon className="mr-2 w-5 h-5" />
-                Add Item
-            </Button>
+      <div className="flex flex-row gap-x-4 text-sm">
+        <div className="flex gap-2">
+          <Badge variant="default">
+            {selectedPackage.height} × {selectedPackage.width} ×{" "}
+            {selectedPackage.depth}{" "}
+            {unitOfMeasurement === "metric" ? "cm" : "in"}
+          </Badge>
+          <Badge variant="outline">
+            {selectedPackage.weight}{" "}
+            {unitOfMeasurement === "metric" ? "kg" : "lb"}
+          </Badge>
         </div>
+      </div>
     );
+  };
+
+  return (
+    <div className="space-y-4">
+      {formValues?.map((packageItem, index) => {
+        const selectedPackage = items?.find(
+          (item) => String(item.item_id) === String(packageItem.item_id),
+        );
+
+        return (
+          <EditCard
+            key={`${packageItem.item_id || index}`}
+            title={`Package ${index + 1}`}
+            previewContent={
+              <div className="space-y-2">
+                {selectedPackage && (
+                  <>
+                    <div className="font-medium">
+                      {selectedPackage.item_name}
+                    </div>
+                    {getPackageDimensions(packageItem)}
+                  </>
+                )}
+              </div>
+            }
+          >
+            <div className="space-y-4">
+              <div className="flex justify-end">
+                {formValues.length > 1 && !readOnly && (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => removePackage(index)}
+                  >
+                    <Trash2 size={20} className="text-red-600" />
+                  </Button>
+                )}
+              </div>
+
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Package</TableHead>
+                    <TableHead className="w-32">Quantity</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>
+                      <Select
+                        name={`${name}.${index}.item_id`}
+                        options={
+                          items
+                            ?.filter((item) => item.item_type === "package")
+                            .map((item) => ({
+                              label: item.item_name,
+                              value: String(item.item_id),
+                            })) || []
+                        }
+                        disabled={readOnly}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Input
+                        name={`${name}.${index}.quantity_change`}
+                        type="number"
+                        disabled={readOnly}
+                      />
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+
+              {packageItem?.item_id && (
+                <div className="mt-4">
+                  <StockItems
+                    name={name as "order_items"}
+                    title="Package Items"
+                    allowedTypes={["product", "part", "service"]}
+                    showPrice={showPrice}
+                    readOnly={readOnly}
+                    filter={(item: PricedItem) =>
+                      item.package_item_id === packageItem.item_id
+                    }
+                  />
+                </div>
+              )}
+            </div>
+          </EditCard>
+        );
+      })}
+
+      {!readOnly && (
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full"
+          onClick={addPackage}
+        >
+          <Plus className="mr-2 w-4 h-4" />
+          Add Package
+        </Button>
+      )}
+
+      <StockValidationAlert
+        itemsFieldName={name}
+        addressFieldName={address_name}
+      />
+    </div>
+  );
 };
 
-export default PackageItems; 
+export default PackageItems;

@@ -3,7 +3,6 @@ import { supabase } from "../../../lib/supabase";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { selectOrdersQueryKey } from "../features/order-history/api/selectOrders";
 import { selectStockpilesQueryKey } from "../../stockpiles/api/selectStockpiles";
-import { closeSheet } from "@/utils/closeSheet";
 import { CreateOrderType } from "../features/order-forms/utils/formatCreateOrderArguments";
 
 const createStocktakeOrder = async (formData: CreateOrderType) => {
@@ -22,7 +21,6 @@ export const useCreateStocktakeOrder = () => {
         onSuccess: (data, mutation) => {
             console.log(data);
             toast.success("Order created successfully");
-            closeSheet();
             // @ts-ignore
             mutation?.onSuccess && mutation.onSuccess();
         },

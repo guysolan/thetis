@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { selectOrderByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderById";
+import { selectOrderByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderViewById";
 import StocktakeReport from "../../../../features/orders/features/order-documents/documents/StocktakeReport";
 
 const OrdersPage = () => {

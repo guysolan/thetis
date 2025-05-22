@@ -1,13 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@thetis/ui/button";
-import Sheet from "@/components/Sheet";
-import { useSelectOrders } from "@/features/orders/features/order-history/api/selectOrders";
 import { Tabs, TabsContent, TabsTrigger } from "@thetis/ui/tabs";
 import TabsHeader from "@/components/TabsHeader";
+import { Link } from "@tanstack/react-router";
 
 import { OrderHistory } from "@/features/orders/components/OrderHistory";
-import { MultiOrderForm } from "../../features/orders/features/multi-order-form/MultiOrderForm";
-
+import { useSelectOrders } from "@/features/orders/features/order-history/api/selectOrders";
+import { v4 as uuidv4 } from "uuid";
 export type OrderTab = "sale" | "purchase" | "shipment" | "all";
 const tabs: OrderTab[] = ["all", "purchase", "sale", "shipment"];
 
@@ -24,30 +23,9 @@ const OrdersPage = () => {
             </TabsTrigger>
           ))}
           actionButtons={
-            <Sheet
-              trigger={<Button>New Order</Button>}
-              title="Create Order"
-              description="Enter the details for your new Order."
-            >
-              {tabs?.map((tabValue) => (
-                <TabsContent
-                  className="flex flex-col gap-4 w-full"
-                  key={tabValue}
-                  value={tabValue}
-                >
-                  <MultiOrderForm
-                    defaultOrderType={
-                      (tabValue === "all" ? "sale" : tabValue) as
-                        | "sale"
-                        | "purchase"
-                        | "shipment"
-                        | "stocktake"
-                    }
-                  />
-                  {/* <OrderForm defaultTab={tabValue} /> */}
-                </TabsContent>
-              ))}
-            </Sheet>
+            <Link to="/home/orders/$orderId" params={{ orderId: "new" }}>
+              <Button>New Order</Button>
+            </Link>
           }
         />
 
@@ -69,6 +47,6 @@ const OrdersPage = () => {
   );
 };
 
-export const Route = createFileRoute("/home/orders")({
+export const Route = createFileRoute("/home/orders/")({
   component: OrdersPage,
 });

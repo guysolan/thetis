@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { selectOrderByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderById";
+import { selectOrderByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderViewById";
 import Invoice from "../../../../features/orders/features/order-documents/documents/Invoice";
 import { invoiceOptionsSchema } from "../../../../features/documents/schema";
 import DocumentControls from "../../../../features/documents/components/DocumentControls";

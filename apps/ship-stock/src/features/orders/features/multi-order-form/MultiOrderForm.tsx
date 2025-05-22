@@ -22,6 +22,11 @@ import { useSelectCompanies } from "../../../companies/api/selectCompanies";
 import useMyCompanyId from "../../../companies/hooks/useMyCompanyId";
 import AdditionalFormFields from "../../components/AdditionalOrderFormFields";
 import type { OrderView } from "../../types";
+import OrderCarriage from "../order-forms/components/OrderCarriage";
+import EditCard from "../../../../components/EditCard";
+import { Card, CardContent, CardHeader } from "@thetis/ui/card";
+import PackageStockItems from "../order-forms/components/PackageStockItems";
+
 type Schema = z.infer<typeof schema>;
 
 interface MultiOrderFormProps {
@@ -38,44 +43,20 @@ export function MultiOrderForm({
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
-    defaultValues: {
-      order_id: order?.order_id ? String(order.order_id) : null,
-      company_id: order?.company_id ?? companyId,
-      order_date: order?.order_date
-        ? dayjs(order?.order_date).toDate()
-        : dayjs().toDate(),
-      order_type: order?.order_type ?? defaultOrderType,
-      currency: order?.currency ?? defaultCurrency,
-      carriage: order?.carriage ?? 0,
-      item_type: "part",
-
-      mode: order?.items?.filter((i) => i.item_type === "package")?.length
-        ? "package"
-        : "direct",
-
-      to_company_id: String(order?.to_company.id),
-      to_shipping_address_id: String(order?.to_shipping_address?.id),
-      to_billing_address_id: String(order?.to_billing_address?.id),
-      from_company_id: String(order?.from_company?.id),
-      from_shipping_address_id: String(order?.from_shipping_address?.id),
-      from_billing_address_id: String(order?.from_billing_address?.id),
-      // Additional
-      reason_for_export: order?.reason_for_export,
-      shipment_number: order?.shipment_number,
-      airwaybill: order?.airwaybill,
-      mode_of_transport: order?.mode_of_transport,
-      incoterms: order?.incoterms,
-      unit_of_measurement: order?.unit_of_measurement,
-
-      // Items
-      order_items:
-        order?.items
-          .filter((i) => i.price > 0)
-          ?.map((i) => ({ ...i, item_id: String(i.id) })) ?? [],
+    defaultValues: order?.order_form_value ?? {
+      order_date: new Date(),
+      unit_of_measurement: "metric",
+      currency: defaultCurrency,
+      order_type: defaultOrderType,
+      order_items: [],
+      package_items: [],
+      to_company_id: companyId,
+      from_company_id: companyId,
     },
   });
 
   const orderType = form.watch("order_type");
+  const mode = form.watch("mode");
 
   const { mutate: createOrder } = useCreateOrder(orderType);
 
@@ -88,7 +69,6 @@ export function MultiOrderForm({
 
   const handleSubmit = async (data: Schema) => {
     try {
-      // processMultiOrderFormData(data);
       await createOrder(data);
     } catch (error) {
       console.error("Form submission failed:", error);
@@ -103,58 +83,51 @@ export function MultiOrderForm({
         className="flex flex-col gap-y-4 px-1 w-full overflow-x-scroll"
         onSubmit={form.handleSubmit(handleSubmit, () => scrollToTop())}
       >
-        <Select
-          label="Company"
-          name="company_id"
-          options={companies.map((company) => ({
-            label: company.name,
-            value: company.id.toString(),
-          }))}
-        />
-        <div className="flex flex-row gap-x-4">
-          <Select
-            label="Order Type"
-            name="order_type"
-            options={["purchase", "sale", "shipment"].map((type) => ({
-              label: type,
-              value: type,
-            }))}
-          />
-          {orderType === "purchase" ? (
-            <Select
-              label="Item Type"
-              name="item_type"
-              options={["product", "part"].map((type) => ({
-                label: type,
-                value: type,
-              }))}
-            />
-          ) : (
-            <Select
-              label="Package Items?"
-              description="If you need a commercial invoice, you must use package mode to describe the size and contents of the box being shipped."
-              name="mode"
-              options={[
-                { label: "Package Mode", value: "package" },
-                { label: "Direct Items", value: "direct" },
-              ]}
-            />
-          )}
-        </div>
-
         <OrderDetails />
         <BuyerSeller isShipment={orderType === "shipment"} />
+        <Card>
+          <CardHeader>Order Items</CardHeader>
+          <CardContent>
+            <div className="flex flex-row gap-x-4">
+              <Select
+                label="Order Type"
+                name="order_type"
+                options={["purchase", "sale", "shipment"].map((type) => ({
+                  label: type,
+                  value: type,
+                }))}
+              />
+              {orderType === "purchase" && (
+                <Select
+                  label="Item Type"
+                  name="item_type"
+                  options={["product", "part"].map((type) => ({
+                    label: type,
+                    value: type,
+                  }))}
+                />
+              )}
+              <Select
+                label="Package Items?"
+                name="mode"
+                options={[
+                  { label: "Package Mode", value: "package" },
+                  { label: "Direct Items", value: "direct" },
+                ]}
+              />
+            </div>
 
-        {orderType === "purchase" && <BuyFormFields />}
-        {orderType === "sale" && <SellFormFields />}
-        {orderType === "shipment" && <ShipmentFormFields />}
+            {orderType === "purchase" && <BuyFormFields />}
+            {orderType === "sale" && <SellFormFields />}
+            {orderType === "shipment" && <ShipmentFormFields />}
+          </CardContent>
+        </Card>
+        <OrderCarriage />
+
         <PriceSummary />
-
-        <AdditionalFormFields />
 
         <FormErrors />
         <Button type="submit">Submit</Button>
-        {/* <MultiOrderFormButton /> */}
       </form>
     </Form>
   );

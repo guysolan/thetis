@@ -62,7 +62,7 @@ export const multiOrderFormSchema = z.object({
     to_shipping_address_id: z.string().min(1, "Shipping address is required"),
     from_contact_id: z.string().min(1, "Contact is required").optional(),
     company_id: z.string().min(1, "Company is required"),
-    item_type: itemTypeSchema,
+    item_type: z.enum(["product", "part", "service", "package"]).optional(),
 
     // Order fields
     order_date: z.date(),
@@ -77,7 +77,7 @@ export const multiOrderFormSchema = z.object({
     airwaybill: z.string().optional().nullable(),
     mode_of_transport: z.string().optional().nullable(),
     incoterms: z.string().optional().nullable(),
-    unit_of_measurement: z.string().optional().nullable(),
+    unit_of_measurement: z.enum(["metric", "imperial"]),
 
     // Item arrays
     order_items: z.array(pricedItemSchema).min(1),
@@ -85,6 +85,11 @@ export const multiOrderFormSchema = z.object({
     produced_items: z.array(pricedItemSchema).optional(),
     from_items: z.array(baseItemSchema).optional(),
     to_items: z.array(baseItemSchema).optional(),
+    package_items: z.array(
+        z.object({
+            package_id: z.string(),
+        }),
+    ),
 }).superRefine((data, ctx) => {
     if (data.order_type === "sale" && !data.consumed_items) {
         ctx.addIssue({

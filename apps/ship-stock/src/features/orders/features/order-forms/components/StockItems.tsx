@@ -22,6 +22,7 @@ interface StockItemProps {
   showPrice?: boolean;
   showQuantity?: boolean;
   onUpdate?: () => void;
+  packageMode?: boolean;
 }
 
 const StockItems = ({
@@ -33,6 +34,7 @@ const StockItems = ({
   showQuantity = true,
   readOnly = false,
   onUpdate,
+  packageMode = false,
 }: StockItemProps) => {
   const { data: items } = useSelectItemsView();
   const form = useFormContext();
@@ -80,6 +82,7 @@ const StockItems = ({
             onCopy={copyRow}
             onRemove={remove}
             allowedTypes={allowedTypes}
+            packageMode={packageMode}
           />
           <StockItemActions
             allowedTypes={allowedTypes}

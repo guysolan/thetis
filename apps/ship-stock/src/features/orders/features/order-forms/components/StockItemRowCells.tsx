@@ -32,6 +32,7 @@ interface StockItemRowCellsProps {
   onRemove: (index: number) => void;
   allowedTypes: ItemType[];
   onUpdate?: () => void;
+  packageMode: boolean;
 }
 
 const StockItemRowCells = ({
@@ -46,6 +47,7 @@ const StockItemRowCells = ({
   onRemove,
   allowedTypes,
   onUpdate,
+  packageMode,
 }: StockItemRowCellsProps) => {
   const form = useFormContext();
   const [editable, setEditable] = useState<boolean>(true);
@@ -171,6 +173,12 @@ const StockItemRowCells = ({
     onUpdate?.();
   };
 
+  const packageItemId = form.watch(`${name}.${index}.package_item_id`);
+
+  const handlePackageItemChange = (value: string) => {
+    form.setValue(`${name}.${index}.package_item_id`, value);
+  };
+
   return (
     <TableRow className={cn("border-b", !editable && "opacity-50")} key={key}>
       {allowedTypes.length > 1 && (
@@ -250,6 +258,25 @@ const StockItemRowCells = ({
             className={quantityAfter < 0 ? "text-red-500" : ""}
             value={quantityAfter}
           />
+        </TableCell>
+      )}
+      {packageMode && (
+        <TableCell>
+          <Select value={packageItemId} onValueChange={handlePackageItemChange}>
+            <SelectTrigger className="w-40">
+              <SelectValue placeholder="Select an item" />
+            </SelectTrigger>
+            <SelectContent>
+              {items
+                ?.filter((item) => item.item_type === "package")
+                .map((item) => (
+                  <SelectItem key={item.item_id} value={String(item.item_id)}>
+                    {item.item_name}
+                  </SelectItem>
+                ))}
+            </SelectContent>
+          </Select>
+          <Select />
         </TableCell>
       )}
       <TableCell>

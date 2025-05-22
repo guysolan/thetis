@@ -4,6 +4,7 @@ import { useBuyForm } from "../order-forms/features/buy-form/useBuyForm";
 import useCompanyDefaults from "../../../companies/hooks/useCompanyDefaults";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useEffect } from "react";
+import PackageStockItems from "../order-forms/components/PackageStockItems";
 const BuyFormFields = () => {
   const form = useFormContext();
   const { updateBuyForm } = useBuyForm();
@@ -21,10 +22,21 @@ const BuyFormFields = () => {
   }, [itemType]);
 
   const producedItems = form.watch("produced_items");
+  const packageMode = form.watch("mode") === "package";
+
   const addToProducedItems = (newItem: any) =>
     form.setValue("produced_items", [...producedItems, newItem]);
   return (
     <>
+      {packageMode && (
+        <PackageStockItems
+          itemsToUpdate={
+            form.watch("item_type") === "product"
+              ? "produced_items"
+              : "order_items"
+          }
+        />
+      )}
       {itemType === "part" && (
         <StockItems
           name="order_items"
@@ -32,6 +44,7 @@ const BuyFormFields = () => {
           allowedTypes={[itemType]}
           title="Purchase Items"
           showPrice={true}
+          packageMode={packageMode}
         />
       )}
       {itemType === "product" && (
@@ -43,6 +56,7 @@ const BuyFormFields = () => {
             allowedTypes={[itemType]}
             title="Produced Items"
             showPrice={false}
+            packageMode={packageMode}
           />
           <StockItems
             name="order_items"

@@ -17,6 +17,9 @@ import { DocumentLinks } from "./DocumentLinks";
 import { Currency } from "../../../components/Currency";
 import { MultiOrderForm } from "../features/multi-order-form/MultiOrderForm";
 import { PaymentStatusSelect } from "./PaymentStatusSelect";
+import { Link } from "@tanstack/react-router";
+import { Edit } from "lucide-react";
+import { Button } from "@thetis/ui/button";
 
 interface ExistingOrdersProps {
   orders: OrderView[];
@@ -96,14 +99,24 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
               <div className="flex items-center gap-2">
                 <ActionPopover
                   title={`Order ${order.order_id}`}
-                  editForm={
-                    <MultiOrderForm
-                      order={order}
-                      defaultOrderType={order.order_type as OrderType}
-                    />
-                  }
                   deleteFunction={() => deleteOrder(order.order_id)}
                 >
+                  <Button
+                    asChild
+                    variant="ghost"
+                    className="justify-between px-2 w-full"
+                  >
+                    <Link
+                      to="/home/orders/$orderId"
+                      params={{ orderId: order.order_id.toString() }}
+                      className="flex items-center gap-2"
+                    >
+                      <span className="flex flex-row items-center gap-2">
+                        <Edit size={20} />
+                        Edit
+                      </span>
+                    </Link>
+                  </Button>
                   <DocumentLinks
                     orderId={order.order_id.toString()}
                     orderType={order.order_type as OrderType}

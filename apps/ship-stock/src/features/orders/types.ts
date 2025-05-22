@@ -11,7 +11,20 @@ export const orderTypes = [
 ] as const;
 
 import { Address } from "../stockpiles/types";
+import { MultiOrderFormData } from "./features/multi-order-form/schema";
 export type Order = Database["public"]["Tables"]["orders"];
+export type OrderItemChange =
+    Database["public"]["Tables"]["order_item_changes"];
+export type OrderItemChangeRow = OrderItemChange["Row"];
+export type ItemChange = Database["public"]["Tables"]["item_changes"];
+export type ItemChangeRow = ItemChange["Row"];
+export type ExtendedOrderItemChange = OrderItemChangeRow & {
+    item_changes: ItemChangeRow[];
+};
+export type ExtendedOrder = OrderRow & {
+    order_item_changes: ExtendedOrderItemChange[];
+};
+
 export type OrderRow = Order["Row"];
 export type OrderItem =
     Database["public"]["Tables"]["order_item_changes"]["Row"];
@@ -27,6 +40,7 @@ export type OrderItemInView = {
     address: Address;
 };
 export interface OrderView {
+    order_form_value: MultiOrderFormData;
     order_id: number;
     order_type: string;
     order_date: string;
