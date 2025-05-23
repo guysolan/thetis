@@ -50,8 +50,6 @@ export const useStockValidation = (config?: StockValidationConfig) => {
             });
     }, [items, itemsView]);
 
-    console.log(negativeStockItems);
-
     return {
         hasNegativeStock: negativeStockItems.length > 0,
         negativeStockItems,

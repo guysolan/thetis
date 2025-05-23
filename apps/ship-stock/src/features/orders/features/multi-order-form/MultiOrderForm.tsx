@@ -30,33 +30,37 @@ import PackageStockItems from "../order-forms/components/PackageStockItems";
 type Schema = z.infer<typeof schema>;
 
 interface MultiOrderFormProps {
+  orderId?: string;
   defaultOrderType: Schema["order_type"];
-  order?: OrderView;
+  defaultOrderFormValues?: JSON;
 }
 
 export function MultiOrderForm({
+  orderId,
   defaultOrderType,
-  order,
+  defaultOrderFormValues,
 }: MultiOrderFormProps) {
+  console.log(defaultOrderFormValues);
+
   const companyId = useMyCompanyId();
-  const { data: companies = [] } = useSelectCompanies();
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
-    defaultValues: order?.order_form_value ?? {
+    defaultValues: defaultOrderFormValues ?? {
       order_date: new Date(),
       unit_of_measurement: "metric",
       currency: defaultCurrency,
-      order_type: defaultOrderType,
+      order_type: defaultOrderType ?? "sale",
       order_items: [],
       package_items: [],
       to_company_id: companyId,
       from_company_id: companyId,
+      mode: "package",
+      carriage: 0,
     },
   });
 
   const orderType = form.watch("order_type");
-  const mode = form.watch("mode");
 
   const { mutate: createOrder } = useCreateOrder(orderType);
 
@@ -69,7 +73,10 @@ export function MultiOrderForm({
 
   const handleSubmit = async (data: Schema) => {
     try {
-      await createOrder(data);
+      await createOrder({
+        ...data,
+        id: orderId ? Number.parseInt(orderId) : undefined,
+      });
     } catch (error) {
       console.error("Form submission failed:", error);
       scrollToTop();

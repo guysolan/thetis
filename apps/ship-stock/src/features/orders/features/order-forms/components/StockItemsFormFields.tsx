@@ -30,8 +30,9 @@ interface StockItemsFormFieldsProps {
   isLocked?: (index: number) => boolean;
   allowedTypes?: ItemType[];
   showPrice?: boolean;
+  showTax?: boolean;
   showQuantity?: boolean;
-  onUpdate?: () => void;
+  onUpdate?: (vals?: unknown) => void;
   packageMode?: boolean;
 }
 
@@ -43,6 +44,7 @@ const StockItemsFormFields = ({
   onCopy,
   onRemove,
   showPrice = false,
+  showTax = false,
   onUpdate,
   allowedTypes = [],
   showQuantity = true,
@@ -55,9 +57,17 @@ const StockItemsFormFields = ({
           {allowedTypes.length > 1 && (
             <TableHead className="w-[10%]">Type</TableHead>
           )}
+          {packageMode && (
+            <TableHead
+              className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-left`}
+            >
+              Package
+            </TableHead>
+          )}
           <TableHead className={`${showPrice ? "w-[20%]" : "w-[30%]"}`}>
             Item
           </TableHead>
+          <TableHead className="w-[15%]">Lot Number</TableHead>
           <TableHead
             className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}
           >
@@ -66,7 +76,7 @@ const StockItemsFormFields = ({
           {showPrice && (
             <TableHead className="w-[10%] text-center">Price</TableHead>
           )}
-          {showPrice && (
+          {showTax && (
             <TableHead className="w-[10%] text-center">Tax</TableHead>
           )}
           {showPrice && (
@@ -86,13 +96,7 @@ const StockItemsFormFields = ({
               After
             </TableHead>
           )}
-          {packageMode && (
-            <TableHead
-              className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}
-            >
-              Package
-            </TableHead>
-          )}
+
           <TableHead
             className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}
           >
@@ -105,6 +109,7 @@ const StockItemsFormFields = ({
           <StockItemRowCells
             showQuantity={showQuantity}
             showPrice={showPrice}
+            showTax={showTax}
             key={field.id}
             index={index}
             onUpdate={onUpdate}

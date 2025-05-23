@@ -53,12 +53,12 @@ const CommercialInvoice = ({
         airwaybill={order.airwaybill}
       />
 
-      <ShippingItems
+      {/* <ShippingItems
         currency={order.currency}
         orderItems={prepareOrderItems(order)}
-      />
+      /> */}
 
-      {options.showPackages && <PackageSummary items={order.items} />}
+      <PackageSummary items={order.items} />
 
       <BuyerSeller
         fromOptions={options.from}

@@ -17,7 +17,6 @@ const EditCard = ({
   onDone,
 }: EditCardProps) => {
   const [isEditing, setIsEditing] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleDone = () => {
     setIsEditing(false);
@@ -27,10 +26,8 @@ const EditCard = ({
   return (
     <Card
       className={`relative transition-all duration-300 ${
-        isHovered && !isEditing ? "bg-neutral-50 shadow-md" : ""
-      } ${!isEditing ? "cursor-pointer hover:shadow-md" : ""}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+        !isEditing ? "cursor-pointer" : ""
+      }`}
       onClick={() => !isEditing && setIsEditing(true)}
     >
       <div className="flex flex-row justify-between items-center space-y-0 p-4 pb-2">
@@ -43,30 +40,17 @@ const EditCard = ({
             e.stopPropagation();
             setIsEditing(!isEditing);
           }}
-          className="relative flex items-center gap-2 hover:bg-neutral-100 active:bg-neutral-200 transition-all duration-300 touch-manipulation"
+          className="relative flex items-center gap-2"
         >
           {isEditing ? (
             <div className="relative w-5 h-5">
-              <Unlock
-                size={18}
-                className="absolute inset-0 text-neutral-600 rotate-12 transition-all duration-300"
-              />
+              <Unlock size={18} className="absolute inset-0 text-neutral-600" />
             </div>
           ) : (
             <>
               <span className="text-sm">Edit</span>
               <div className="relative w-5 h-5">
-                {isHovered ? (
-                  <Unlock
-                    size={18}
-                    className="absolute inset-0 text-neutral-600 rotate-12 transition-all duration-300"
-                  />
-                ) : (
-                  <Lock
-                    size={18}
-                    className="absolute inset-0 text-neutral-600 transition-all duration-300"
-                  />
-                )}
+                <Lock size={18} className="absolute inset-0 text-neutral-600" />
               </div>
             </>
           )}
@@ -79,11 +63,7 @@ const EditCard = ({
 
       {isEditing && (
         <div className="flex justify-start px-4 pb-4">
-          <Button
-            type="button"
-            onClick={handleDone}
-            className="group-hover:bg-neutral-100"
-          >
+          <Button type="button" onClick={handleDone}>
             Save
           </Button>
         </div>

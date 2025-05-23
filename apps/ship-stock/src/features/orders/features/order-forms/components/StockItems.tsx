@@ -21,7 +21,7 @@ interface StockItemProps {
   readOnly?: boolean;
   showPrice?: boolean;
   showQuantity?: boolean;
-  onUpdate?: () => void;
+  onUpdate?: (vals?: unknown) => void;
   packageMode?: boolean;
 }
 

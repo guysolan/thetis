@@ -37,6 +37,7 @@ export type OrderItemInView = {
     "quantity": number;
     "item_name": string;
     "item_type": string;
+    "package_item_change_id"?: string;
     address: Address;
 };
 export interface OrderView {

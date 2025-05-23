@@ -5,11 +5,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@thetis/ui/select";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelectItemsView } from "../../../../items/api/selectItemsView";
 import { useFormContext, useFieldArray } from "react-hook-form";
 import { Button } from "@thetis/ui/button";
-import { Plus, Trash, Box, Weight } from "lucide-react";
+import { Plus, Trash, Box, Weight, Copy } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -18,69 +18,271 @@ import {
   CardTitle,
 } from "@thetis/ui/card";
 import { Badge } from "@thetis/ui/badge";
+import { Input } from "@thetis/ui/input";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase";
+import PackageDimensions from "./PackageDimensions";
+import PackageItemsBadges from "./PackageItemsBadges";
 
-interface PackageStockItemsProps {
-  itemsToUpdate: "order_items" | "produced_items";
+type ItemsToUpdate =
+  | "order_items"
+  | "produced_items"
+  | "from_items"
+  | "to_items";
+
+interface PackageComponent {
+  component_id: number;
+  component_quantity: number;
+  component_price: number;
+  component_type: string;
 }
 
-const PackageStockItems = ({
-  itemsToUpdate = "order_items",
-}: PackageStockItemsProps) => {
-  const { data: itemsView } = useSelectItemsView();
+interface OrderItem {
+  item_id: string;
+  quantity_change: number;
+  price: number;
+  item_type: string;
+  package_item_change_id: number;
+}
+
+interface PackageItem {
+  package_id: string;
+  package_item_change_id: number;
+}
+
+interface PackageStockItemsProps {
+  itemsToUpdate: ItemsToUpdate[];
+}
+
+const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
+  const { data: lastItemChange } = useQuery({
+    queryKey: ["last-item-change"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("item_changes")
+        .select("*")
+        .order("id", { ascending: false })
+        .limit(1)
+        .single();
+
+      if (error) {
+        throw error;
+      }
+
+      return data;
+    },
+  });
+
   const form = useFormContext();
+
+  const packageItems = form.watch("package_items");
+  const packagesCount = packageItems.length;
+
+  const { data: itemsView } = useSelectItemsView();
 
   const { fields, append, remove } = useFieldArray({
     name: "package_items",
   });
 
-  const itemType = form.watch("item_type");
+  const itemType = form.watch("item_type") ?? "product";
 
   const availablePackages = itemsView?.filter(
     (item) =>
       item.item_type === "package" &&
-      item.components.some(
+      (item.components as PackageComponent[]).some(
         (component) => component.component_type === itemType,
       ),
   );
 
-  const addPackage = () => {
-    append({ package_id: "" });
+  const createPackageItems = (
+    packageComponents: PackageComponent[],
+    packageId: string,
+    packageItemChangeId: number,
+  ): OrderItem[] => {
+    return packageComponents.map((component) => ({
+      item_id: String(component.component_id),
+      quantity_change: component.component_quantity,
+      price: component.component_price,
+      item_type: component.component_type,
+      package_item_change_id: packageItemChangeId,
+    }));
   };
 
-  const updatePackageId = (newValue: string, index: number) => {
-    // Get the current package ID before updating
-    const currentPackageId = form.watch(`package_items.${index}.package_id`);
-
-    // Update the package_id in the form
-    form.setValue(`package_items.${index}.package_id`, newValue);
-
-    // Get the selected package
-    const newPackage = availablePackages?.find(
-      (item) => item.item_id === Number(newValue),
+  const updatePackageItems = (
+    packageId: string,
+    packageItemChangeId: number,
+    fieldName: ItemsToUpdate,
+    shouldPreserveExisting: boolean = false,
+  ) => {
+    const selectedPkg = availablePackages?.find(
+      (item) => String(item.item_id) === packageId,
     );
 
-    // Get all form values
+    if (!selectedPkg?.components) return [];
+
+    const itemsFromPackage = createPackageItems(
+      selectedPkg.components as PackageComponent[],
+      packageId,
+      packageItemChangeId,
+    );
+
     const formValues = form.getValues();
-    const orderItems = formValues.order_items || [];
+    const currentItemsInThisField: OrderItem[] = formValues[fieldName] || [];
 
-    // Remove items with matching old package_item_id
-    const newOrderItems = orderItems.filter(
-      (item) => item.package_item_id !== currentPackageId,
+    const preservedItemsInField = shouldPreserveExisting
+      ? currentItemsInThisField
+      : currentItemsInThisField.filter(
+          (item) => item.package_item_change_id !== packageItemChangeId,
+        );
+
+    let itemsToSetForField = itemsFromPackage;
+    if (fieldName === "from_items") {
+      itemsToSetForField = itemsFromPackage.map((item) => ({
+        ...item,
+        quantity_change: -item.quantity_change,
+      }));
+    }
+
+    return [...preservedItemsInField, ...itemsToSetForField];
+  };
+
+  const updatePackage = (index: number, newPackageId?: string) => {
+    const currentPackageId = form.watch(`package_items.${index}.package_id`);
+    const packageItemChangeId = form.watch(
+      `package_items.${index}.package_item_change_id`,
     );
 
-    // Add new components to the end
-    newPackage?.components?.forEach((component) => {
-      newOrderItems.push({
-        item_id: String(component.component_id),
-        quantity_change: component.component_quantity,
-        price: component.component_price,
-        item_type: component.component_type,
-        package_item_id: newValue,
+    const targetPackageId = newPackageId || currentPackageId;
+
+    if (newPackageId !== undefined) {
+      form.setValue(`package_items.${index}.package_id`, newPackageId);
+    }
+
+    if (targetPackageId) {
+      itemsToUpdate.forEach((fieldName: ItemsToUpdate) => {
+        const updatedItems = updatePackageItems(
+          targetPackageId,
+          packageItemChangeId,
+          fieldName,
+          false, // Don't preserve existing items during update
+        );
+        form.setValue(fieldName, updatedItems);
       });
+    }
+  };
+
+  const addPackage = () => {
+    const lastId = lastItemChange?.id ?? 0;
+    const newPackageItemChangeId = lastId + packagesCount + 1;
+    append({
+      package_id: "",
+      package_item_change_id: newPackageItemChangeId,
+    });
+  };
+
+  const duplicatePackage = (index: number) => {
+    const currentPackage = form.getValues(`package_items.${index}`);
+    const lastId = lastItemChange?.id ?? 0;
+    const newPackageItemChangeId = lastId + packagesCount + 2;
+
+    // Add the new package to package_items
+    append({
+      package_id: currentPackage.package_id,
+      package_item_change_id: newPackageItemChangeId,
     });
 
-    // Update the entire order_items array
-    form.setValue(itemsToUpdate, newOrderItems);
+    // If there's a selected package, create new items for it
+    if (currentPackage.package_id) {
+      const selectedPkg = availablePackages?.find(
+        (item) => String(item.item_id) === currentPackage.package_id,
+      );
+
+      if (selectedPkg?.components) {
+        const newItems = createPackageItems(
+          selectedPkg.components as PackageComponent[],
+          currentPackage.package_id,
+          newPackageItemChangeId,
+        );
+
+        itemsToUpdate.forEach((fieldName: ItemsToUpdate) => {
+          const formValues = form.getValues();
+          const currentItemsInThisField: OrderItem[] =
+            formValues[fieldName] || [];
+
+          let itemsToAdd = newItems;
+          if (fieldName === "from_items") {
+            itemsToAdd = newItems.map((item) => ({
+              ...item,
+              quantity_change: -item.quantity_change,
+            }));
+          }
+
+          // Keep existing items and add new ones
+          const updatedItems = [...currentItemsInThisField, ...itemsToAdd];
+          form.setValue(fieldName, updatedItems);
+        });
+      }
+    }
+  };
+
+  return {
+    fields,
+    remove,
+    addPackage,
+    duplicatePackage,
+    availablePackages,
+    updatePackage,
+  };
+};
+
+const PackageStockItems = ({
+  itemsToUpdate = ["order_items"],
+}: PackageStockItemsProps) => {
+  const form = useFormContext();
+  const {
+    fields,
+    remove,
+    addPackage,
+    duplicatePackage,
+    availablePackages,
+    updatePackage,
+  } = usePackageManagement(itemsToUpdate);
+
+  // Sync quantities between to_items and from_items
+  useEffect(() => {
+    const syncQuantities = () => {
+      const toItems = form.watch("to_items") || [];
+      const fromItems = form.watch("from_items") || [];
+
+      // Create a map of package_item_change_id to quantity for to_items
+      const toItemsMap = new Map(
+        toItems.map((item) => [
+          item.package_item_change_id,
+          item.quantity_change,
+        ]),
+      );
+
+      // Update from_items to match to_items quantities (with opposite sign)
+      const updatedFromItems = fromItems.map((item) => {
+        const toQuantity = toItemsMap.get(item.package_item_change_id);
+        if (toQuantity !== undefined) {
+          return {
+            ...item,
+            quantity_change: -Number(toQuantity),
+          };
+        }
+        return item;
+      });
+
+      form.setValue("from_items", updatedFromItems);
+    };
+
+    form.watch("to_items", syncQuantities);
+    form.watch("from_items", syncQuantities);
+  }, [form]);
+
+  const updatePackageId = (newValue: string, index: number) => {
+    updatePackage(index, newValue);
   };
 
   return (
@@ -90,14 +292,16 @@ const PackageStockItems = ({
           const selectedPackageId = form.watch(
             `package_items.${index}.package_id`,
           );
+          const packageItemChangeId = form.watch(
+            `package_items.${index}.package_item_change_id`,
+          );
           const selectedPackage = availablePackages?.find(
             (item) => String(item.item_id) === selectedPackageId,
           );
 
-          // Get order items for this package
-          const orderItems = form.watch(itemsToUpdate) || [];
+          const orderItems = form.watch(itemsToUpdate[0]) || [];
           const packageItems = orderItems.filter(
-            (item) => item.package_item_id === selectedPackageId,
+            (item) => item.package_item_change_id === packageItemChangeId,
           );
 
           return (
@@ -105,80 +309,59 @@ const PackageStockItems = ({
               <CardHeader className="pb-2">
                 <div className="flex justify-between items-start">
                   <CardTitle className="text-base">
-                    <Select
-                      value={selectedPackageId}
-                      onValueChange={(value) => updatePackageId(value, index)}
-                    >
-                      <SelectTrigger className="w-full capitalize">
-                        <SelectValue placeholder="Select a package" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {availablePackages?.map((item) => (
-                          <SelectItem
-                            className="capitalize"
-                            key={item.item_id}
-                            value={String(item.item_id)}
-                          >
-                            {item.item_name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    Package {index + 1}
                   </CardTitle>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => remove(index)}
-                    className="-mt-2 -mr-2 w-8 h-8"
-                  >
-                    <Trash className="w-4 h-4" />
-                  </Button>
+                  <div className="flex gap-1">
+                    {selectedPackage && (
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => duplicatePackage(index)}
+                        className="-mt-2 -mr-2 w-8 h-8"
+                      >
+                        <Copy className="w-4 h-4" />
+                      </Button>
+                    )}
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => remove(index)}
+                      className="-mt-2 -mr-2 w-8 h-8"
+                    >
+                      <Trash className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
               </CardHeader>
-              {selectedPackage && (
-                <CardContent>
-                  <div className="space-y-2">
-                    {packageItems.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {packageItems.map((item) => {
-                          const itemDetails = itemsView?.find(
-                            (i) => String(i.item_id) === item.item_id,
-                          );
-                          return (
-                            <Badge
-                              key={item.item_id}
-                              variant="secondary"
-                              className="gap-x-1"
-                            >
-                              {itemDetails?.item_name} × {item.quantity_change}
-                            </Badge>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                </CardContent>
-              )}
+              <CardContent>
+                <Select
+                  value={selectedPackageId}
+                  onValueChange={(value) => updatePackageId(value, index)}
+                >
+                  <SelectTrigger className="w-full capitalize">
+                    <SelectValue placeholder="Select a package" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {availablePackages?.map((item) => (
+                      <SelectItem
+                        className="capitalize"
+                        key={item.item_id}
+                        value={String(item.item_id)}
+                      >
+                        {item.item_name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {selectedPackage && (
+                  <PackageItemsBadges packageItems={packageItems} />
+                )}
+              </CardContent>
               <CardFooter>
                 {selectedPackage && (
-                  <div className="flex flex-wrap gap-2">
-                    {selectedPackage.height &&
-                      selectedPackage.width &&
-                      selectedPackage.depth && (
-                        <Badge variant="default" className="gap-x-2">
-                          <Box size={16} />
-                          {selectedPackage.height} × {selectedPackage.width} ×{" "}
-                          {selectedPackage.depth} cm
-                        </Badge>
-                      )}
-                    {selectedPackage.weight && selectedPackage.weight > 0 && (
-                      <Badge variant="default" className="gap-x-2">
-                        <Weight size={16} />
-                        {selectedPackage.weight} kg
-                      </Badge>
-                    )}
-                  </div>
+                  <PackageDimensions selectedPackage={selectedPackage} />
                 )}
               </CardFooter>
             </Card>

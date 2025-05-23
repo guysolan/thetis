@@ -19,9 +19,11 @@ import {
 } from "@thetis/ui/select";
 import calculateItemTotal from "../../../utils/calculateItemTotal";
 import { useSelectItemsView } from "../../../../items/api/selectItemsView";
+import { Input } from "@thetis/ui/input";
 
 interface StockItemRowCellsProps {
   showPrice: boolean;
+  showTax: boolean;
   showQuantity: boolean;
   key: string;
   index: number;
@@ -37,6 +39,7 @@ interface StockItemRowCellsProps {
 
 const StockItemRowCells = ({
   showPrice,
+  showTax,
   showQuantity,
   index,
   key,
@@ -103,6 +106,10 @@ const StockItemRowCells = ({
     const after = isSale ? itemQuantity - change : itemQuantity + change;
     const itemPrice = item?.item_price ?? 1;
     const itemTotal = calculateItemTotal(itemPrice, defaultTax, change);
+    const packageItemChangeId = form.watch(
+      `${name}.${index}.package_item_change_id`,
+    );
+
     form.setValue(`${name}.${index}.item_id`, itemId);
     form.setValue(`${name}.${index}.quantity_before`, before);
     form.setValue(`${name}.${index}.quantity_after`, after);
@@ -110,6 +117,12 @@ const StockItemRowCells = ({
     form.setValue(`${name}.${index}.item_price`, item?.item_price);
     form.setValue(`${name}.${index}.item_tax`, defaultTax);
     form.setValue(`${name}.${index}.item_total`, itemTotal);
+    if (packageItemChangeId) {
+      form.setValue(
+        `${name}.${index}.package_item_change_id`,
+        packageItemChangeId,
+      );
+    }
     onUpdate?.();
   };
 
@@ -173,10 +186,12 @@ const StockItemRowCells = ({
     onUpdate?.();
   };
 
-  const packageItemId = form.watch(`${name}.${index}.package_item_id`);
+  const packageItemId = form.watch(`${name}.${index}.package_item_change_id`);
+
+  const packageItems = form.watch("package_items");
 
   const handlePackageItemChange = (value: string) => {
-    form.setValue(`${name}.${index}.package_item_id`, value);
+    form.setValue(`${name}.${index}.package_item_change_id`, value);
   };
 
   return (
@@ -197,9 +212,32 @@ const StockItemRowCells = ({
           </Select>
         </TableCell>
       )}
+      {packageMode && (
+        <TableCell>
+          <Select
+            value={String(packageItemId)}
+            onValueChange={handlePackageItemChange}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select a package" />
+            </SelectTrigger>
+            <SelectContent>
+              {packageItems.map((item, index) => (
+                <SelectItem
+                  key={item.package_item_change_id}
+                  value={String(item.package_item_change_id)}
+                >
+                  Package {index + 1}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select />
+        </TableCell>
+      )}
       <TableCell className="w-1/4 truncate">
         <Select value={itemId} onValueChange={handleItemChange}>
-          <SelectTrigger className="w-40">
+          <SelectTrigger>
             <SelectValue placeholder="Select an item" />
           </SelectTrigger>
           <SelectContent>
@@ -212,6 +250,16 @@ const StockItemRowCells = ({
               ))}
           </SelectContent>
         </Select>
+      </TableCell>
+      <TableCell>
+        <Input
+          value={form.watch(`${name}.${index}.lot_number`) || ""}
+          onChange={(e) => {
+            form.setValue(`${name}.${index}.lot_number`, e.target.value);
+            onUpdate?.();
+          }}
+          placeholder="Enter LOT number"
+        />
       </TableCell>
       <NumberCell
         name={`${name}.${index}.quantity_change`}
@@ -229,7 +277,7 @@ const StockItemRowCells = ({
           editable={editable}
         />
       )}
-      {showPrice && (
+      {showTax && (
         <NumberCell
           name={`${name}.${index}.item_tax`}
           step={0.01}
@@ -260,25 +308,7 @@ const StockItemRowCells = ({
           />
         </TableCell>
       )}
-      {packageMode && (
-        <TableCell>
-          <Select value={packageItemId} onValueChange={handlePackageItemChange}>
-            <SelectTrigger className="w-40">
-              <SelectValue placeholder="Select an item" />
-            </SelectTrigger>
-            <SelectContent>
-              {items
-                ?.filter((item) => item.item_type === "package")
-                .map((item) => (
-                  <SelectItem key={item.item_id} value={String(item.item_id)}>
-                    {item.item_name}
-                  </SelectItem>
-                ))}
-            </SelectContent>
-          </Select>
-          <Select />
-        </TableCell>
-      )}
+
       <TableCell>
         <div className="flex">
           <Button

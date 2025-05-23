@@ -5,6 +5,7 @@ import Select from "../../../../components/Select";
 import useCompanyDefaults from "../../../companies/hooks/useCompanyDefaults";
 import SellPackages from "../order-forms/features/sell-form/components/SellPackages";
 import { useFormContext } from "react-hook-form";
+import PackageStockItems from "../order-forms/components/PackageStockItems";
 
 const SellFormFields = () => {
   const { watch } = useFormContext();
@@ -14,16 +15,16 @@ const SellFormFields = () => {
 
   return (
     <>
-      {mode === "package" ? (
-        <SellPackages />
-      ) : (
-        <StockItems
-          title="Order Items"
-          name="order_items"
-          showPrice={true}
-          allowedTypes={["product", "part"]}
-        />
+      {mode === "package" && (
+        <PackageStockItems itemsToUpdate={["order_items"]} />
       )}
+
+      <StockItems
+        title="Order Items"
+        name="order_items"
+        showPrice={true}
+        allowedTypes={["product", "part"]}
+      />
 
       <StockValidationAlert
         itemsFieldName="order_items"

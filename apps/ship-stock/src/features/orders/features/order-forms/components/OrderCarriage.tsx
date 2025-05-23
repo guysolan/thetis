@@ -12,18 +12,28 @@ const OrderCarriage = () => {
 
   const currency = watch("currency");
   const carriage = watch("carriage");
+  const deliveryDates = watch("delivery_dates") || [null, null];
 
   const editContent = (
     <div className="flex flex-col gap-4">
-      <DateRangePicker name="delivery_date" label="Delivery Date" />
+      <DateRangePicker name="delivery_dates" label="Delivery Date" />
       <Input name="carriage" label="Carriage" type="number" step="0.01" />
     </div>
   );
 
   const previewContent = (
     <div className="flex flex-col gap-y-2">
+      <p>
+        {deliveryDates[0]
+          ? dayjs(deliveryDates[0]).format("DD/MM/YYYY")
+          : "Not set"}{" "}
+        -{" "}
+        {deliveryDates[1]
+          ? dayjs(deliveryDates[1]).format("DD/MM/YYYY")
+          : "Not set"}
+      </p>
       <NumberFlow
-        value={carriage}
+        value={carriage || 0}
         format={{ style: "currency", currency: currency }}
       />
     </div>

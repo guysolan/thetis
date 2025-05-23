@@ -32,8 +32,8 @@ const BuyFormFields = () => {
         <PackageStockItems
           itemsToUpdate={
             form.watch("item_type") === "product"
-              ? "produced_items"
-              : "order_items"
+              ? ["produced_items"]
+              : ["order_items"]
           }
         />
       )}
