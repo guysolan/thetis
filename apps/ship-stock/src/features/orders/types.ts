@@ -45,6 +45,7 @@ export interface OrderView {
     order_id: number;
     order_type: string;
     order_date: string;
+    delivery_dates?: string | null;
     total_value?: number;
     carriage?: number;
     currency: string;

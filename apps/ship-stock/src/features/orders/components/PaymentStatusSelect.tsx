@@ -39,7 +39,9 @@ const statusConfig = {
     color: "bg-gray-100 text-gray-800 border-gray-200",
     hoverColor: "hover:bg-gray-200",
   },
-};
+} as const;
+
+type PaymentStatus = keyof typeof statusConfig;
 
 export function PaymentStatusSelect({
   orderId,
@@ -50,16 +52,23 @@ export function PaymentStatusSelect({
   const handleStatusChange = (newStatus: string) => {
     updateOrder({
       id: orderId,
-      payment_status: newStatus,
+      payment_status: newStatus as PaymentStatus,
     });
   };
+
+  // Get the status config with fallback to unpaid
+  const statusKey = (
+    currentStatus in statusConfig ? currentStatus : "unpaid"
+  ) as PaymentStatus;
+  const statusColor =
+    statusConfig[statusKey]?.color || statusConfig.unpaid.color;
 
   return (
     <Select onValueChange={handleStatusChange} defaultValue={currentStatus}>
       <SelectTrigger
         className={cn(
-          "border rounded-full px-2 h-6 text-xs font-medium",
-          statusConfig[currentStatus as keyof typeof statusConfig]?.color,
+          "border rounded-full px-2 h-6 text-xs font-medium w-fit min-w-0",
+          statusColor,
         )}
       >
         <SelectValue />
