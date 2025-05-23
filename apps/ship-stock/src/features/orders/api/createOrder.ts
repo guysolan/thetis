@@ -479,45 +479,10 @@ const processShipmentFormData = (
 		return result;
 	});
 
-	// NEW: Process package_items for package mode shipments
-	const packageItems = (formData.package_items || []).map((packageItem) => {
-		console.log(
-			"🚢 Processing package_item:",
-			JSON.stringify(packageItem, null, 2),
-		);
-
-		// Create a package item format that mapToFormOrderItem can handle
-		const packageItemForMapping = {
-			item_type: "package" as const,
-			package_id: packageItem.package_id,
-			package_item_change_id: packageItem.package_item_change_id,
-			quantity_change: 1, // Default quantity for package shipments
-			item_price: 0,
-			item_tax: 0,
-			item_total: 0,
-		};
-
-		const mapped = mapToFormOrderItem(packageItemForMapping);
-		const result = {
-			...mapped,
-			item_price: 0,
-			item_tax: 0,
-			// For shipments, packages move from source to destination
-			address_id: formData.from_shipping_address_id,
-			quantity_change: 1, // Ship 1 package
-		};
-		console.log(
-			"🚢 Package item processed:",
-			JSON.stringify(result, null, 2),
-		);
-		return result;
-	});
-
 	const result = [
 		...fromItems,
 		...toItems,
 		...orderItemsInternal,
-		...packageItems,
 	];
 	console.log(
 		"🚢 processShipmentFormData - FINAL RESULT:",
