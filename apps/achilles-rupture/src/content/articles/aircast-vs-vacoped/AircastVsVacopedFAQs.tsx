@@ -59,7 +59,7 @@ const aircastVsVacopedFaqs: FAQCategory[] = [
       {
         question: "How do I shower with the walking boot?",
         answer:
-          "For the Aircast, you'll need a waterproof boot cover to protect the boot and any dressings. The VACOped is waterproof by design, though it requires removing the inner lining. NHS guidelines recommend using waterproof covers to prevent infection and maintain boot integrity. Always ensure your foot and any wounds stay dry.",
+          "For the Aircast, you'll need a waterproof boot cover to protect the boot and any dressings. The VACOped is waterproof by design, though it requires removing the inner lining. Always ensure your foot and any wounds stay dry.",
       },
       {
         question: "What is the EVENup Shoe Leveler and why do I need it?",
