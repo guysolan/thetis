@@ -103,12 +103,15 @@ export const MyEmail = () => {
               </Section>
               <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
                 <li>
-                  Vacuum-bead liner for superior compression and swelling
-                  reduction
+                  Vacuum-bead liner for pressure relief and swelling reduction
                 </li>
-                <li>Waterproof design for safe showering and swimming</li>
                 <li>
-                  Enhanced walking mechanics with pronounced rocker design
+                  Waterproof design (though fiddly to use - requires removing
+                  inner lining and using a backup liner)
+                </li>
+                <li>
+                  May provide improved walking mechanics with pronounced rocker
+                  design
                 </li>
                 <li>30% lower tendon loading during ambulation</li>
               </ul>
@@ -230,9 +233,10 @@ export const MyEmail = () => {
                   and support for nighttime use
                 </li>
                 <li>
-                  <strong>Showering:</strong> For both boots, we recommend using
-                  a shower chair and waterproof cast cover for safety. The
-                  VACOped's waterproof design provides additional protection
+                  <strong>Showering:</strong> The VACOped has built-in
+                  waterproofing (though fiddly to use - requires removing inner
+                  lining and using a backup liner), while the Aircast requires a
+                  waterproof cover
                 </li>
               </ul>
             </Section>
@@ -293,7 +297,8 @@ export const MyEmail = () => {
                     </td>
                     <td className="p-3 border border-[#eaeaea]">No</td>
                     <td className="p-3 border border-[#eaeaea]">
-                      Yes *backup liner advised
+                      Yes (requires removing inner lining and using backup
+                      liner)
                     </td>
                   </tr>
                   <tr>
@@ -327,7 +332,6 @@ export const MyEmail = () => {
               <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
                 <li>Cost is a significant factor</li>
                 <li>You prefer simpler adjustment mechanisms</li>
-                <li>You have limited access to clinical support</li>
               </ul>
             </Section>
 

@@ -24,7 +24,7 @@ const aircastVsVacopedFaqs: FAQCategory[] = [
       {
         question: "Can I drive while wearing the walking boot?",
         answer:
-          "Driving regulations vary by country and insurance provider. In the UK, you should check with your insurance provider and doctor. The Aircast's lighter weight may make it more suitable for driving, but you should never drive if you feel unsafe or if your doctor advises against it. If you have an automatic car, most patients find it easier to drive with their non-injured foot.",
+          "Neither boot is recommended for driving. If you must drive, you should only do so in an automatic car using your non-injured foot for the pedals. You must check with your insurance provider and doctor first, as driving with a walking boot may invalidate your insurance and could be dangerous. Never drive if you feel unsafe or if your doctor advises against it. The Aircast's lighter weight may make it slightly more manageable, but both boots can significantly affect your ability to drive safely.",
       },
       {
         question: "How often should I adjust the boot's angle?",
