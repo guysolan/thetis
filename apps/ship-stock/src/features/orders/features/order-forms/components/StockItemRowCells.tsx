@@ -104,8 +104,9 @@ const StockItemRowCells = ({
     const before = itemQuantity;
     const change = quantityChange ?? 1;
     const after = isSale ? itemQuantity - change : itemQuantity + change;
-    const itemPrice = item?.item_price ?? 1;
-    const itemTotal = calculateItemTotal(itemPrice, defaultTax, change);
+    const itemPrice = item?.item_price ?? 0;
+    const itemTax = defaultTax;
+    const itemTotal = calculateItemTotal(itemPrice, itemTax, change);
     const packageItemChangeId = form.watch(
       `${name}.${index}.package_item_change_id`,
     );
@@ -114,8 +115,8 @@ const StockItemRowCells = ({
     form.setValue(`${name}.${index}.quantity_before`, before);
     form.setValue(`${name}.${index}.quantity_after`, after);
     form.setValue(`${name}.${index}.quantity_change`, change);
-    form.setValue(`${name}.${index}.item_price`, item?.item_price);
-    form.setValue(`${name}.${index}.item_tax`, defaultTax);
+    form.setValue(`${name}.${index}.item_price`, itemPrice);
+    form.setValue(`${name}.${index}.item_tax`, itemTax);
     form.setValue(`${name}.${index}.item_total`, itemTotal);
     if (packageItemChangeId) {
       form.setValue(

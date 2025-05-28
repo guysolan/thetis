@@ -43,12 +43,18 @@ const orderItemSchema = z.discriminatedUnion("item_type", [
         item_type: z.enum(["product", "part"]),
         quantity_before: z.coerce.number().optional(),
         quantity_after: z.coerce.number().optional(),
+        item_price: z.coerce.number().optional(),
+        item_tax: z.coerce.number().optional(),
+        item_total: z.coerce.number().optional(),
     }),
     packageOrderItemSchema,
     baseItemSchema.extend({
         item_type: z.literal("stocktake"),
         quantity_before: z.coerce.number(),
         quantity_after: z.coerce.number(),
+        item_price: z.coerce.number().optional(),
+        item_tax: z.coerce.number().optional(),
+        item_total: z.coerce.number().optional(),
     }),
 ]);
 

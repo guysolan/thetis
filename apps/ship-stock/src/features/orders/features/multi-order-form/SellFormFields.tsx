@@ -23,7 +23,9 @@ const SellFormFields = () => {
         title="Order Items"
         name="order_items"
         showPrice={true}
+        showTax={true}
         allowedTypes={["product", "part"]}
+        packageMode={mode === "package"}
       />
 
       <StockValidationAlert

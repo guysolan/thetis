@@ -12,6 +12,7 @@ import {
 } from "../types";
 import { useSelectAddresses } from "@/features/stockpiles/api/selectAddresses";
 import FormErrors from "../../../../../components/FormErrors";
+import { defaultTax } from "../../../../../constants/tax";
 
 interface StockItemProps {
   name: StockItemName;
@@ -20,6 +21,7 @@ interface StockItemProps {
   allowedTypes?: ItemType[];
   readOnly?: boolean;
   showPrice?: boolean;
+  showTax?: boolean;
   showQuantity?: boolean;
   onUpdate?: (vals?: unknown) => void;
   packageMode?: boolean;
@@ -31,6 +33,7 @@ const StockItems = ({
   title,
   allowedTypes = ["part", "product", "service", "package"],
   showPrice = false,
+  showTax = false,
   showQuantity = true,
   readOnly = false,
   onUpdate,
@@ -56,9 +59,12 @@ const StockItems = ({
       item_type: type,
       item_id: "",
       quantity_change: 1,
-      price: 1,
-      tax: 20,
-      total: 1.2,
+      item_price: 0,
+      item_tax: defaultTax,
+      item_total: 0,
+      quantity_before: 0,
+      quantity_after: 0,
+      lot_number: "",
     } as StockItemFormData);
   };
 
@@ -73,16 +79,17 @@ const StockItems = ({
           <StockItemsFormFields
             onUpdate={onUpdate}
             showPrice={showPrice}
+            showTax={showTax}
             showQuantity={showQuantity}
             name={name}
             fields={fields}
             items={items || []}
-            form={form}
             getItemQuantities={getItemQuantities}
             onCopy={copyRow}
             onRemove={remove}
             allowedTypes={allowedTypes}
             packageMode={packageMode}
+            onToggleLock={() => {}}
           />
           <StockItemActions
             allowedTypes={allowedTypes}

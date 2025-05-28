@@ -117,72 +117,21 @@ function extractOrderItems(
 		return [];
 	}
 
-	if (mode === "package") {
-		console.log("📦 extractOrderItems - Processing package mode");
-
-		const packageItems = orderItems
-			.filter((item) => item.item_type === "package")
-			.map((item) => ({
-				...item,
-				quantity_change: Number(item.quantity_change),
-				item_total: item.item_total ?? 0,
-			}));
-		console.log(
-			"📦 Package items found:",
-			packageItems.length,
-			JSON.stringify(packageItems, null, 2),
-		);
-
-		const componentItems = orderItems
-			.filter((item) => item.package_item_id)
-			.reduce((acc, item) => {
-				const existingItem = acc.find((i) =>
-					i.item_id === item.item_id
-				);
-				if (existingItem) {
-					existingItem.quantity_change += Number(
-						item.quantity_change,
-					);
-					existingItem.item_total = (existingItem.item_total ?? 0) +
-						(item.item_total ?? 0);
-				} else {
-					acc.push({
-						...item,
-						quantity_change: Number(item.quantity_change),
-						item_total: item.item_total ?? 0,
-					});
-				}
-				return acc;
-			}, [] as OrderItemWithTotal[]);
-		console.log(
-			"🧩 Component items found:",
-			componentItems.length,
-			JSON.stringify(componentItems, null, 2),
-		);
-
-		const result = [...packageItems, ...componentItems];
-		console.log(
-			"📦 extractOrderItems - Package mode result:",
-			result.length,
-			JSON.stringify(result, null, 2),
-		);
-		return result;
-	}
-
-	const filtered = orderItems
-		.filter((item) => item.item_type !== "package" && !item.package_item_id)
-		.map((oi) => ({
-			...oi,
-			quantity_change: Number(oi.quantity_change),
-			item_total: oi.item_total ?? 0,
-		}));
+	// Just return the items as is, ensuring quantities are numbers and prices are preserved
+	const result = orderItems.map((item) => ({
+		...item,
+		quantity_change: Number(item.quantity_change),
+		item_price: Number(item.item_price ?? 0),
+		item_tax: Number(item.item_tax ?? 0),
+		item_total: item.item_total ?? 0,
+	}));
 
 	console.log(
-		"📋 extractOrderItems - Direct mode result:",
-		filtered.length,
-		JSON.stringify(filtered, null, 2),
+		"📦 extractOrderItems - Result:",
+		result.length,
+		JSON.stringify(result, null, 2),
 	);
-	return filtered;
+	return result;
 }
 
 // Updated function to handle the different item types from the schema
@@ -212,7 +161,7 @@ const mapToFormOrderItem = (item: AnyOrderItem): FormOrderItem => {
 		return result;
 	}
 
-	// Handle regular items
+	// Handle regular items - preserve price fields if they exist
 	const result = {
 		item_id: String(item.item_id || ""),
 		item_type: item.item_type as ItemType,
@@ -341,9 +290,22 @@ function processSellFormData(
 		"💰 processSellFormData - mode:",
 		formData.mode,
 	);
+	console.log(
+		"💰 processSellFormData - RAW formData.order_items:",
+		JSON.stringify(formData.order_items, null, 2),
+	);
 
-	const orderItemsForExtraction: OrderItemWithTotal[] =
-		(formData.order_items || []).map((item) => {
+	// For sales, process all order_items (including those with package_item_change_id)
+	// since we're not processing package_items separately
+	const filteredOrderItems = formData.order_items || [];
+
+	console.log(
+		"💰 processSellFormData - Processing all order_items for sale:",
+		JSON.stringify(filteredOrderItems, null, 2),
+	);
+
+	const orderItemsForExtraction: OrderItemWithTotal[] = filteredOrderItems
+		.map((item) => {
 			console.log(
 				"💰 Processing order item:",
 				JSON.stringify(item, null, 2),
@@ -351,15 +313,15 @@ function processSellFormData(
 			const mappedItem = mapToFormOrderItem(item);
 			console.log("💰 Mapped item:", JSON.stringify(mappedItem, null, 2));
 
+			// Calculate total based on quantity, price and tax
+			const quantity = mappedItem.quantity_change || 0;
+			const price = mappedItem.item_price || 0;
+			const tax = mappedItem.item_tax || 0;
+			const total = quantity * price * (1 + tax / 100); // Convert tax percentage to decimal
+
 			const result = {
 				...mappedItem,
-				item_total: Number(
-					mappedItem.item_total ??
-						(Number(mappedItem.quantity_change ?? 0) *
-							(Number(mappedItem.item_price ?? 0)) *
-							(1 + Number(mappedItem.item_tax ?? 0))),
-				),
-				components: (item as OrderItemWithTotal).components, // Retain components if they exist
+				item_total: total,
 			};
 			console.log(
 				"💰 Item with total calculated:",
@@ -388,12 +350,13 @@ function processSellFormData(
 	const itemChangesResult: FormatOrderItemChanges[] = extractedOrderItems.map(
 		(i) => ({
 			item_id: i.item_id,
-			quantity_change: i.quantity_change,
+			quantity_change: -Math.abs(i.quantity_change), // Make quantity negative for sales (items leaving stock)
 			item_price: i.item_price ?? 0,
 			item_tax: i.item_tax ?? 0,
 			address_id: formData.from_shipping_address_id,
 			item_type: i.item_type as ItemType,
 			package_item_id: i.package_item_id,
+			package_item_change_id: i.package_item_change_id,
 		}),
 	);
 
@@ -898,7 +861,9 @@ export const useCreateOrder = (orderTypeParam: string) => {
 			);
 
 			// Use formData.package_items directly (not filtered from order_items)
-			const packageItems = formData.package_items || [];
+			const packageItems = formData.order_type === "sale"
+				? []
+				: (formData.package_items || []);
 			// All items in processedInput.order_items are regular items
 			const regularItems = processedInput.order_items;
 

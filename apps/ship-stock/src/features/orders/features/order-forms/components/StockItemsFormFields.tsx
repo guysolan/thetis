@@ -1,4 +1,4 @@
-import { UseFormReturn } from "react-hook-form";
+import { UseFormReturn, FieldArrayWithId } from "react-hook-form";
 import {
   Table,
   TableBody,
@@ -18,11 +18,12 @@ import { useEffect, useState } from "react";
 import NumberFlow from "@number-flow/react";
 import StockItemRowCells from "./StockItemRowCells";
 import { ScrollArea } from "@thetis/ui/scroll-area";
+import { ItemView } from "@/features/items/types";
 
 interface StockItemsFormFieldsProps {
   name: string;
-  fields: any[];
-  items: Array<{ item_id: string; item_name: string; item_type: string }>;
+  fields: FieldArrayWithId[];
+  items: ItemView[];
   getItemQuantities: (itemId: string) => StockItemQuantities;
   onCopy: (index: number) => void;
   onRemove: (index: number) => void;
