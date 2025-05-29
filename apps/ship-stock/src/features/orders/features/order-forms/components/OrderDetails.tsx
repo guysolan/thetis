@@ -15,6 +15,7 @@ import {
   PlaneTakeoff,
   Eye,
   EyeOff,
+  Hash as HashIcon,
 } from "lucide-react";
 import { UnitOfMeasurementSelect } from "../../../components/UnitOfMeasurement";
 import { ReasonForExportSelect } from "../../../components/ReasonForExportSelect";
@@ -36,6 +37,7 @@ const OrderDetails = () => {
   const incoterms = watch("incoterms");
   const shipmentNumber = watch("shipment_number");
   const airwaybill = watch("airwaybill");
+  const referenceNumber = watch("reference_number");
 
   const getPlaceholder = (value: string | undefined) => {
     return value || "Not specified";
@@ -44,7 +46,7 @@ const OrderDetails = () => {
   const editContent = (
     <div className="flex flex-col gap-4">
       <div className="gap-4 grid grid-cols-2">
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col gap-4">
           <DatePicker name="order_date" label="Order Date" />
           <Select
             name="currency"
@@ -57,12 +59,15 @@ const OrderDetails = () => {
           <UnitOfMeasurementSelect />
           <Input type="text" name="shipment_number" label="Shipment Number" />
         </div>
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col gap-4">
           <ReasonForExportSelect />
           <ModeOfTransportSelect />
           <IncotermsSelect />
           <Input type="text" name="airwaybill" label="Air Waybill" />
         </div>
+      </div>
+      <div className="w-1/2">
+        <Input type="text" name="reference_number" label="Reference Number" />
       </div>
     </div>
   );
@@ -70,7 +75,7 @@ const OrderDetails = () => {
   const previewContent = (
     <div className="flex flex-col gap-4">
       <div className="gap-4 grid grid-cols-2">
-        <div className="space-y-4">
+        <div className="flex flex-col gap-4">
           <div className="flex items-center gap-4 text-gray-700">
             <Calendar size={20} />
             <div>
@@ -104,7 +109,7 @@ const OrderDetails = () => {
             </div>
           </div>
         </div>
-        <div className="space-y-4">
+        <div className="flex flex-col gap-4">
           <div className="flex items-center gap-4 text-gray-700">
             <FileText size={20} />
             <div>
@@ -132,6 +137,15 @@ const OrderDetails = () => {
               <p className="text-gray-700 text-sm">Air Waybill</p>
               <p className="font-medium">{getPlaceholder(airwaybill)}</p>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-1/2">
+        <div className="flex items-center gap-4 text-gray-700">
+          <HashIcon size={20} />
+          <div>
+            <p className="text-gray-700 text-sm">Reference Number</p>
+            <p className="font-medium">{getPlaceholder(referenceNumber)}</p>
           </div>
         </div>
       </div>

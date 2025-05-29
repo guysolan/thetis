@@ -73,6 +73,27 @@ export const documentOptions = {
 };
 
 export const documentOptionsSchema = z.object({
+  shippingDetails: z
+    .object({
+      show: z.boolean().default(true),
+      reasonForExport: z.boolean().default(true),
+      modeOfTransport: z.boolean().default(true),
+      incoterms: z.boolean().default(true),
+      unitOfMeasurement: z.boolean().default(true),
+      shipmentNumber: z.boolean().default(true),
+      airwaybill: z.boolean().default(true),
+      referenceNumber: z.boolean().default(true),
+    })
+    .default({
+      show: true,
+      reasonForExport: true,
+      modeOfTransport: true,
+      incoterms: true,
+      unitOfMeasurement: true,
+      shipmentNumber: true,
+      airwaybill: true,
+      referenceNumber: true,
+    }),
   from: z
     .object({
       show: z.boolean().default(true),
@@ -103,17 +124,19 @@ export const documentOptionsSchema = z.object({
   carriage: z.boolean().default(true),
   total: z.boolean().default(true),
   showSignature: z.boolean().default(true),
+  showPackages: z.boolean().default(false),
+  showShippingItems: z.boolean().default(true),
 });
 
 export const purchaseOrderOptionsSchema = documentOptionsSchema.extend({
   carriage: z.boolean().default(false),
-  showPackages: z.boolean().default(true),
+  showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
 });
 
 export const invoiceOptionsSchema = documentOptionsSchema.extend({
   payment: z.boolean().default(true),
-  showPackages: z.boolean().default(true),
+  showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
 });
 
@@ -121,7 +144,7 @@ export const commercialInvoiceSchema = documentOptionsSchema.extend({
   showFDA: z.boolean().default(true),
   showExporter: z.boolean().default(true),
   showExchangeRates: z.boolean().default(true),
-  showPackages: z.boolean().default(true),
+  showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
   showSignature: z.boolean().default(true),
 });

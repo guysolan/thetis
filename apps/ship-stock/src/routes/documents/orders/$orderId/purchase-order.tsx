@@ -1,13 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { selectOrderByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderViewById";
-import PurchaseOrder from "../../../../features/orders/features/order-documents/documents/PurchaseOrder";
-import { purchaseOrderOptionsSchema } from "../../../../features/documents/schema";
-import DocumentOptionsPopover from "../../../../features/documents/components/DocumentOptionsPopover";
+import Document from "../../../../features/orders/features/order-documents/documents/Document";
+import {
+  purchaseOrderOptionsSchema,
+  type DocumentOptions,
+} from "../../../../features/documents/schema";
 import DocumentControls from "../../../../features/documents/components/DocumentControls";
 
 const OrdersPage = () => {
   const search = Route.useSearch();
   const { order } = Route.useLoaderData();
+
+  // Extract only the base DocumentOptions from the extended search params
+  const documentOptions: DocumentOptions = {
+    shippingDetails: search.shippingDetails,
+    from: search.from,
+    to: search.to,
+    payment: search.payment,
+    carriage: search.carriage,
+    total: search.total,
+    showSignature: search.showSignature,
+    showPackages: search.showPackages,
+    showShippingItems: search.showShippingItems,
+  };
 
   return (
     <>
@@ -15,7 +30,11 @@ const OrdersPage = () => {
         documentType="purchaseOrder"
         orderNumber={order.order_id}
       />
-      <PurchaseOrder order={order} options={search} />
+      <Document
+        order={order}
+        options={documentOptions}
+        title="Purchase Order"
+      />
     </>
   );
 };

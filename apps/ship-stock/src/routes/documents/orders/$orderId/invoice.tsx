@@ -1,16 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { selectOrderByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderViewById";
-import Invoice from "../../../../features/orders/features/order-documents/documents/Invoice";
-import { invoiceOptionsSchema } from "../../../../features/documents/schema";
+import Document from "../../../../features/orders/features/order-documents/documents/Document";
+import {
+  invoiceOptionsSchema,
+  type DocumentOptions,
+} from "../../../../features/documents/schema";
 import DocumentControls from "../../../../features/documents/components/DocumentControls";
 
 const OrdersPage = () => {
   const { order } = Route.useLoaderData();
   const search = Route.useSearch();
+
+  // Extract only the base DocumentOptions from the extended search params
+  const documentOptions: DocumentOptions = {
+    shippingDetails: search.shippingDetails,
+    from: search.from,
+    to: search.to,
+    payment: search.payment,
+    carriage: search.carriage,
+    total: search.total,
+    showSignature: search.showSignature,
+    showPackages: search.showPackages,
+    showShippingItems: search.showShippingItems,
+  };
+
   return (
     <>
       <DocumentControls documentType="invoice" orderNumber={order.order_id} />
-      <Invoice order={order} options={search} />
+      <Document order={order} options={documentOptions} title="Invoice" />
     </>
   );
 };

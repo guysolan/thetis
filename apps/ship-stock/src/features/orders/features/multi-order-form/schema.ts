@@ -80,6 +80,7 @@ export const multiOrderFormSchema = z.object({
     mode: z.enum(["package", "direct"]).optional(),
     currency: z.enum(currencyKeys as [string, ...string[]]).default("GBP"),
     carriage: z.coerce.number().min(0).default(0),
+    reference_number: z.string().optional().nullable(),
     delivery_dates: z.tuple([
         z.union([z.string(), z.date()]).nullable(),
         z.union([z.string(), z.date()]).nullable(),
