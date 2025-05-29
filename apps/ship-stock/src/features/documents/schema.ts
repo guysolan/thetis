@@ -126,16 +126,11 @@ export const documentOptionsSchema = z.object({
   showSignature: z.boolean().default(true),
   showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
+  showExtendedSections: z.boolean().default(false),
 });
 
 export const purchaseOrderOptionsSchema = documentOptionsSchema.extend({
   carriage: z.boolean().default(false),
-  showPackages: z.boolean().default(false),
-  showShippingItems: z.boolean().default(true),
-});
-
-export const invoiceOptionsSchema = documentOptionsSchema.extend({
-  payment: z.boolean().default(true),
   showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
 });
@@ -147,6 +142,33 @@ export const commercialInvoiceSchema = documentOptionsSchema.extend({
   showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
   showSignature: z.boolean().default(true),
+  shippingDetails: z.object({
+    show: z.boolean().default(true),
+    reasonForExport: z.boolean().default(true),
+    modeOfTransport: z.boolean().default(true),
+    incoterms: z.boolean().default(true),
+    unitOfMeasurement: z.boolean().default(true),
+    shipmentNumber: z.boolean().default(true),
+    airwaybill: z.boolean().default(true),
+    referenceNumber: z.boolean().default(true),
+  }),
+  payment: z.boolean().default(false),
+});
+
+export const invoiceOptionsSchema = documentOptionsSchema.extend({
+  payment: z.boolean().default(true),
+  showPackages: z.boolean().default(false),
+  showShippingItems: z.boolean().default(true),
+  shippingDetails: z.object({
+    show: z.boolean().default(false),
+    reasonForExport: z.boolean().default(false),
+    modeOfTransport: z.boolean().default(false),
+    incoterms: z.boolean().default(false),
+    unitOfMeasurement: z.boolean().default(false),
+    shipmentNumber: z.boolean().default(false),
+    airwaybill: z.boolean().default(false),
+    referenceNumber: z.boolean().default(false),
+  }),
 });
 
 export const packingListSchema = documentOptionsSchema.extend({

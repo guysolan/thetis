@@ -25,22 +25,6 @@ interface DocumentProps {
 }
 
 const Document = ({ order, options, title }: DocumentProps) => {
-  // Get order form values which contain the additional shipping details
-  const orderFormValues = order.order_form_value;
-
-  // Check if we should show financial sections (for invoices, commercial invoices, purchase orders)
-  const showFinancialSections =
-    title.toLowerCase().includes("invoice") ||
-    title.toLowerCase().includes("purchase");
-
-  // Check if we should show shipping sections (for commercial invoices, packing lists)
-  const showShippingSections =
-    title.toLowerCase().includes("commercial") ||
-    title.toLowerCase().includes("packing");
-
-  // Check if we should show extended sections (for commercial invoices)
-  const showExtendedSections = title.toLowerCase().includes("commercial");
-
   return (
     <>
       <Heading />
@@ -53,7 +37,7 @@ const Document = ({ order, options, title }: DocumentProps) => {
         orderDate={order.order_date as string}
       />
 
-      {showShippingSections && (
+      {options.shippingDetails.show && (
         <ShippingDetails
           reasonForExport={order.reason_for_export || ""}
           modeOfTransport={order.mode_of_transport || ""}
@@ -73,6 +57,10 @@ const Document = ({ order, options, title }: DocumentProps) => {
         />
       )}
 
+      {options.total && (
+        <OrderTotal order={order} showCarriage={options.carriage} />
+      )}
+
       {options.showPackages && <PackageSummary items={order.items} />}
 
       {(options.from.show || options.to.show) && (
@@ -83,19 +71,17 @@ const Document = ({ order, options, title }: DocumentProps) => {
         />
       )}
 
-      {options.total && showFinancialSections && (
-        <OrderTotal order={order} showCarriage={options.carriage} />
-      )}
-
       {options.payment && (
         <PaymentDetails orderId={order.order_id} currency={order.currency} />
       )}
 
-      {showExtendedSections && <ExporterDetails />}
+      {options.showExtendedSections && <ExporterDetails />}
 
-      {showExtendedSections && <FDADetails />}
+      {options.showExtendedSections && <FDADetails />}
 
-      {showExtendedSections && <ExchangeRates date={order.order_date} />}
+      {options.showExtendedSections && (
+        <ExchangeRates date={order.order_date} />
+      )}
 
       {options.showSignature && <Signature />}
     </>

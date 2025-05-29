@@ -57,6 +57,7 @@ const DocumentOptionsPopover = ({
     showSignature: search?.showSignature ?? true,
     showPackages: search?.showPackages ?? documentType === "packingList",
     showShippingItems: search?.showShippingItems ?? true,
+    showExtendedSections: search?.showExtendedSections ?? true,
   };
 
   // Local state for pending changes
@@ -129,6 +130,8 @@ const DocumentOptionsPopover = ({
         else if (key === "showPackages") newOptions.showPackages = value;
         else if (key === "showShippingItems")
           newOptions.showShippingItems = value;
+        else if (key === "showExtendedSections")
+          newOptions.showExtendedSections = value;
       }
 
       return newOptions;
@@ -166,6 +169,7 @@ const DocumentOptionsPopover = ({
       showSignature: pendingOptions.showSignature,
       showPackages: pendingOptions.showPackages,
       showShippingItems: pendingOptions.showShippingItems,
+      showExtendedSections: pendingOptions.showExtendedSections,
     } satisfies DocumentOptions;
 
     // Navigate with the new search params
@@ -435,6 +439,15 @@ const DocumentOptionsPopover = ({
                     checked={pendingOptions.showSignature}
                     onCheckedChange={(checked) =>
                       updateOption("showSignature", checked)
+                    }
+                  />
+                </div>
+                <div className="flex justify-between items-center">
+                  <label className="text-sm">Extended Sections</label>
+                  <Switch
+                    checked={pendingOptions.showExtendedSections}
+                    onCheckedChange={(checked) =>
+                      updateOption("showExtendedSections", checked)
                     }
                   />
                 </div>
