@@ -1,28 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { selectOrderByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderViewById";
 import Document from "../../../../features/orders/features/order-documents/documents/Document";
-import {
-  packingListSchema,
-  type DocumentOptions,
-} from "../../../../features/documents/schema";
+import { packingListSchema } from "../../../../features/documents/schema";
 import DocumentControls from "../../../../features/documents/components/DocumentControls";
+import { useDocumentOptions } from "../../../../features/documents/hooks/useDocumentOptions";
 
 const OrdersPage = () => {
   const { order } = Route.useLoaderData();
-  const search = Route.useSearch();
-
-  // Extract only the base DocumentOptions from the extended search params
-  const documentOptions: DocumentOptions = {
-    shippingDetails: search.shippingDetails,
-    from: search.from,
-    to: search.to,
-    payment: search.payment,
-    carriage: search.carriage,
-    total: search.total,
-    showSignature: search.showSignature,
-    showPackages: search.showPackages,
-    showShippingItems: search.showShippingItems,
-  };
+  const documentOptions = useDocumentOptions("packingList");
 
   return (
     <>
@@ -30,7 +15,12 @@ const OrdersPage = () => {
         orderNumber={order.order_id}
         documentType="packingList"
       />
-      <Document order={order} options={documentOptions} title="Packing List" />
+      <Document
+        order={order}
+        options={documentOptions}
+        title="Packing List"
+        documentType="packingList"
+      />
     </>
   );
 };

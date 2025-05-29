@@ -37,6 +37,9 @@ const DocumentOptionsPopover = ({
       airwaybill: search?.shippingDetails?.airwaybill ?? true,
       referenceNumber: search?.shippingDetails?.referenceNumber ?? true,
     },
+    showShippingItems: search?.showShippingItems ?? true,
+    total: search?.total ?? true,
+    showPackages: search?.showPackages ?? documentType === "packingList",
     from: {
       show: search?.from?.show ?? true,
       billing: search?.from?.billing ?? true,
@@ -52,12 +55,13 @@ const DocumentOptionsPopover = ({
     payment:
       search?.payment ??
       (documentType === "invoice" || documentType === "commercialInvoice"),
-    carriage: search?.carriage ?? true,
-    total: search?.total ?? true,
+    showExporterDetails:
+      search?.showExporterDetails ?? documentType === "commercialInvoice",
+    showFDADetails:
+      search?.showFDADetails ?? documentType === "commercialInvoice",
+    showExchangeRates:
+      search?.showExchangeRates ?? documentType === "commercialInvoice",
     showSignature: search?.showSignature ?? true,
-    showPackages: search?.showPackages ?? documentType === "packingList",
-    showShippingItems: search?.showShippingItems ?? true,
-    showExtendedSections: search?.showExtendedSections ?? true,
   };
 
   // Local state for pending changes
@@ -124,14 +128,16 @@ const DocumentOptionsPopover = ({
       } else {
         // Handle direct boolean properties
         if (key === "payment") newOptions.payment = value;
-        else if (key === "carriage") newOptions.carriage = value;
         else if (key === "total") newOptions.total = value;
         else if (key === "showSignature") newOptions.showSignature = value;
         else if (key === "showPackages") newOptions.showPackages = value;
         else if (key === "showShippingItems")
           newOptions.showShippingItems = value;
-        else if (key === "showExtendedSections")
-          newOptions.showExtendedSections = value;
+        else if (key === "showExporterDetails")
+          newOptions.showExporterDetails = value;
+        else if (key === "showFDADetails") newOptions.showFDADetails = value;
+        else if (key === "showExchangeRates")
+          newOptions.showExchangeRates = value;
       }
 
       return newOptions;
@@ -164,12 +170,13 @@ const DocumentOptionsPopover = ({
         contact: pendingOptions.to.contact,
       },
       payment: pendingOptions.payment,
-      carriage: pendingOptions.carriage,
       total: pendingOptions.total,
       showSignature: pendingOptions.showSignature,
       showPackages: pendingOptions.showPackages,
       showShippingItems: pendingOptions.showShippingItems,
-      showExtendedSections: pendingOptions.showExtendedSections,
+      showExporterDetails: pendingOptions.showExporterDetails,
+      showFDADetails: pendingOptions.showFDADetails,
+      showExchangeRates: pendingOptions.showExchangeRates,
     } satisfies DocumentOptions;
 
     // Navigate with the new search params
@@ -196,6 +203,36 @@ const DocumentOptionsPopover = ({
         className="flex flex-col gap-3 p-4 w-72"
       >
         <h3 className="font-semibold">Document Options</h3>
+
+        {/* Quick Access Controls */}
+        <div className="space-y-2 pb-3 border-b">
+          <div className="flex justify-between items-center">
+            <label className="text-sm">Total Amount</label>
+            <Switch
+              checked={pendingOptions.total}
+              onCheckedChange={(checked) => updateOption("total", checked)}
+            />
+          </div>
+          <div className="flex justify-between items-center">
+            <label className="text-sm">Shipping Items List</label>
+            <Switch
+              checked={pendingOptions.showShippingItems}
+              onCheckedChange={(checked) =>
+                updateOption("showShippingItems", checked)
+              }
+            />
+          </div>
+          <div className="flex justify-between items-center">
+            <label className="text-sm">Package Summary</label>
+            <Switch
+              checked={pendingOptions.showPackages}
+              onCheckedChange={(checked) =>
+                updateOption("showPackages", checked)
+              }
+            />
+          </div>
+        </div>
+
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="shipping-details">
             <AccordionTrigger className="font-medium text-sm">
@@ -416,20 +453,29 @@ const DocumentOptionsPopover = ({
                   />
                 </div>
                 <div className="flex justify-between items-center">
-                  <label className="text-sm">Carriage</label>
+                  <label className="text-sm">Exporter Details</label>
                   <Switch
-                    checked={pendingOptions.carriage}
+                    checked={pendingOptions.showExporterDetails}
                     onCheckedChange={(checked) =>
-                      updateOption("carriage", checked)
+                      updateOption("showExporterDetails", checked)
                     }
                   />
                 </div>
                 <div className="flex justify-between items-center">
-                  <label className="text-sm">Total Amount</label>
+                  <label className="text-sm">FDA Details</label>
                   <Switch
-                    checked={pendingOptions.total}
+                    checked={pendingOptions.showFDADetails}
                     onCheckedChange={(checked) =>
-                      updateOption("total", checked)
+                      updateOption("showFDADetails", checked)
+                    }
+                  />
+                </div>
+                <div className="flex justify-between items-center">
+                  <label className="text-sm">Exchange Rates</label>
+                  <Switch
+                    checked={pendingOptions.showExchangeRates}
+                    onCheckedChange={(checked) =>
+                      updateOption("showExchangeRates", checked)
                     }
                   />
                 </div>
@@ -439,43 +485,6 @@ const DocumentOptionsPopover = ({
                     checked={pendingOptions.showSignature}
                     onCheckedChange={(checked) =>
                       updateOption("showSignature", checked)
-                    }
-                  />
-                </div>
-                <div className="flex justify-between items-center">
-                  <label className="text-sm">Extended Sections</label>
-                  <Switch
-                    checked={pendingOptions.showExtendedSections}
-                    onCheckedChange={(checked) =>
-                      updateOption("showExtendedSections", checked)
-                    }
-                  />
-                </div>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="shipping-items">
-            <AccordionTrigger className="font-medium text-sm">
-              Shipping Items & Packages
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <label className="text-sm">Shipping Items List</label>
-                  <Switch
-                    checked={pendingOptions.showShippingItems}
-                    onCheckedChange={(checked) =>
-                      updateOption("showShippingItems", checked)
-                    }
-                  />
-                </div>
-                <div className="flex justify-between items-center">
-                  <label className="text-sm">Package Summary</label>
-                  <Switch
-                    checked={pendingOptions.showPackages}
-                    onCheckedChange={(checked) =>
-                      updateOption("showPackages", checked)
                     }
                   />
                 </div>
