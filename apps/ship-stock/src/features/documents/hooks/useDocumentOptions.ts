@@ -1,5 +1,6 @@
 import { useSearch } from "@tanstack/react-router";
 import type { DocumentOptions } from "../schema";
+import { packingListSchema } from "../schema";
 
 type DocumentType =
     | "commercialInvoice"
@@ -138,20 +139,47 @@ export const useDocumentOptions = (documentType: DocumentType) => {
 
     // Extract only the base DocumentOptions from the extended search params
     const documentOptions: DocumentOptions = {
-        shippingDetails: defaults.shippingDetails,
-        from: defaults.from,
-        to: defaults.to,
-        payment: search.payment ?? defaults.payment ?? false,
-        total: search.total ?? defaults.total ?? true,
-        showSignature: search.showSignature ?? true,
-        showPackages: search.showPackages ?? defaults.showPackages ?? false,
-        showShippingItems: search.showShippingItems ??
+        shippingDetails: {
+            show: search?.shippingDetails?.show ??
+                defaults.shippingDetails.show,
+            reasonForExport: search?.shippingDetails?.reasonForExport ??
+                defaults.shippingDetails.reasonForExport,
+            modeOfTransport: search?.shippingDetails?.modeOfTransport ??
+                defaults.shippingDetails.modeOfTransport,
+            incoterms: search?.shippingDetails?.incoterms ??
+                defaults.shippingDetails.incoterms,
+            unitOfMeasurement: search?.shippingDetails?.unitOfMeasurement ??
+                defaults.shippingDetails.unitOfMeasurement,
+            shipmentNumber: search?.shippingDetails?.shipmentNumber ??
+                defaults.shippingDetails.shipmentNumber,
+            airwaybill: search?.shippingDetails?.airwaybill ??
+                defaults.shippingDetails.airwaybill,
+            referenceNumber: search?.shippingDetails?.referenceNumber ??
+                defaults.shippingDetails.referenceNumber,
+        },
+        from: {
+            show: search?.from?.show ?? defaults.from.show,
+            billing: search?.from?.billing ?? defaults.from.billing,
+            shipping: search?.from?.shipping ?? defaults.from.shipping,
+            contact: search?.from?.contact ?? defaults.from.contact,
+        },
+        to: {
+            show: search?.to?.show ?? defaults.to.show,
+            billing: search?.to?.billing ?? defaults.to.billing,
+            shipping: search?.to?.shipping ?? defaults.to.shipping,
+            contact: search?.to?.contact ?? defaults.to.contact,
+        },
+        payment: search?.payment ?? defaults.payment ?? false,
+        total: search?.total ?? defaults.total ?? true,
+        showSignature: search?.showSignature ?? true,
+        showPackages: search?.showPackages ?? defaults.showPackages ?? false,
+        showShippingItems: search?.showShippingItems ??
             defaults.showShippingItems ?? true,
-        showExporterDetails: search.showExporterDetails ??
+        showExporterDetails: search?.showExporterDetails ??
             defaults.showExporterDetails ?? false,
-        showFDADetails: search.showFDADetails ?? defaults.showFDADetails ??
+        showFDADetails: search?.showFDADetails ?? defaults.showFDADetails ??
             false,
-        showExchangeRates: search.showExchangeRates ??
+        showExchangeRates: search?.showExchangeRates ??
             defaults.showExchangeRates ?? false,
     };
 

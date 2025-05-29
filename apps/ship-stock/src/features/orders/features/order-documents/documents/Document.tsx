@@ -26,113 +26,21 @@ type DocumentType =
   | "shippingLabel";
 
 interface DocumentProps {
-  order: OrderView;
+  order: OrderView & {
+    reason_for_export?: string;
+    mode_of_transport?: string;
+    incoterms?: string;
+    unit_of_measurement?: string;
+    shipment_number?: string;
+    airwaybill?: string;
+    reference_number?: string;
+  };
   options: DocumentOptions;
   title: string;
   documentType: DocumentType;
 }
 
-const Document = ({ order, options, title, documentType }: DocumentProps) => {
-  // Get default values based on document type
-  const getDefaults = () => {
-    switch (documentType) {
-      case "packingList":
-        return {
-          total: false,
-          payment: false,
-          showPackages: true,
-          showShippingItems: false,
-        };
-      case "commercialInvoice":
-        return {
-          shippingDetails: {
-            show: true,
-            reasonForExport: true,
-            modeOfTransport: true,
-            incoterms: true,
-            unitOfMeasurement: true,
-            shipmentNumber: true,
-            airwaybill: true,
-            referenceNumber: true,
-          },
-          payment: false,
-          showExporterDetails: true,
-          showFDADetails: true,
-          showExchangeRates: true,
-        };
-      case "invoice":
-        return {
-          shippingDetails: {
-            show: true,
-            reasonForExport: true,
-            modeOfTransport: true,
-            incoterms: true,
-            unitOfMeasurement: true,
-            shipmentNumber: true,
-            airwaybill: true,
-            referenceNumber: true,
-          },
-          payment: true,
-          showExporterDetails: false,
-          showFDADetails: false,
-          showExchangeRates: false,
-        };
-      default:
-        return {};
-    }
-  };
-
-  const defaults = getDefaults();
-
-  // Merge options with defaults
-  const mergedOptions = {
-    ...options,
-    total: options.total ?? defaults.total ?? true,
-    payment: options.payment ?? defaults.payment ?? false,
-    showPackages: options.showPackages ?? defaults.showPackages ?? false,
-    showShippingItems:
-      options.showShippingItems ?? defaults.showShippingItems ?? true,
-    showExporterDetails:
-      options.showExporterDetails ?? defaults.showExporterDetails ?? false,
-    showFDADetails: options.showFDADetails ?? defaults.showFDADetails ?? false,
-    showExchangeRates:
-      options.showExchangeRates ?? defaults.showExchangeRates ?? false,
-    shippingDetails: {
-      show:
-        options.shippingDetails?.show ??
-        defaults.shippingDetails?.show ??
-        false,
-      reasonForExport:
-        options.shippingDetails?.reasonForExport ??
-        defaults.shippingDetails?.reasonForExport ??
-        false,
-      modeOfTransport:
-        options.shippingDetails?.modeOfTransport ??
-        defaults.shippingDetails?.modeOfTransport ??
-        false,
-      incoterms:
-        options.shippingDetails?.incoterms ??
-        defaults.shippingDetails?.incoterms ??
-        false,
-      unitOfMeasurement:
-        options.shippingDetails?.unitOfMeasurement ??
-        defaults.shippingDetails?.unitOfMeasurement ??
-        false,
-      shipmentNumber:
-        options.shippingDetails?.shipmentNumber ??
-        defaults.shippingDetails?.shipmentNumber ??
-        false,
-      airwaybill:
-        options.shippingDetails?.airwaybill ??
-        defaults.shippingDetails?.airwaybill ??
-        false,
-      referenceNumber:
-        options.shippingDetails?.referenceNumber ??
-        defaults.shippingDetails?.referenceNumber ??
-        false,
-    },
-  };
-
+const Document = ({ order, options, title }: DocumentProps) => {
   return (
     <>
       <Heading />
@@ -145,7 +53,7 @@ const Document = ({ order, options, title, documentType }: DocumentProps) => {
         orderDate={order.order_date as string}
       />
 
-      {mergedOptions.shippingDetails.show && (
+      {options.shippingDetails?.show && (
         <ShippingDetails
           reasonForExport={order.reason_for_export || ""}
           modeOfTransport={order.mode_of_transport || ""}
@@ -154,44 +62,40 @@ const Document = ({ order, options, title, documentType }: DocumentProps) => {
           shipmentNumber={order.shipment_number || ""}
           airwaybill={order.airwaybill || ""}
           referenceNumber={order.reference_number || ""}
-          options={mergedOptions.shippingDetails}
+          options={options.shippingDetails}
         />
       )}
 
-      {mergedOptions.showShippingItems && (
+      {options.showShippingItems && (
         <ShippingItems
           currency={order.currency as Currency}
           orderItems={prepareOrderItems(order)}
         />
       )}
 
-      {mergedOptions.total && (
-        <OrderTotal order={order} showCarriage={mergedOptions.carriage} />
-      )}
+      {options.total && <OrderTotal order={order} showCarriage={false} />}
 
-      {mergedOptions.showPackages && <PackageSummary items={order.items} />}
+      {options.showPackages && <PackageSummary items={order.items} />}
 
-      {(mergedOptions.from.show || mergedOptions.to.show) && (
+      {(options.from.show || options.to.show) && (
         <BuyerSeller
-          fromOptions={mergedOptions.from}
-          toOptions={mergedOptions.to}
+          fromOptions={options.from}
+          toOptions={options.to}
           order={order}
         />
       )}
 
-      {mergedOptions.payment && (
+      {options.payment && (
         <PaymentDetails orderId={order.order_id} currency={order.currency} />
       )}
 
-      {mergedOptions.showExporterDetails && <ExporterDetails />}
+      {options.showExporterDetails && <ExporterDetails />}
 
-      {mergedOptions.showFDADetails && <FDADetails />}
+      {options.showFDADetails && <FDADetails />}
 
-      {mergedOptions.showExchangeRates && (
-        <ExchangeRates date={order.order_date} />
-      )}
+      {options.showExchangeRates && <ExchangeRates date={order.order_date} />}
 
-      {mergedOptions.showSignature && <Signature />}
+      {options.showSignature && <Signature />}
     </>
   );
 };

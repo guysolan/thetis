@@ -5,6 +5,7 @@ import { Settings } from "lucide-react";
 import { useSearch, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import type { DocumentOptions, InvoiceOptions } from "../schema";
+import { packingListSchema } from "../schema";
 import {
   Accordion,
   AccordionContent,
@@ -177,7 +178,7 @@ const DocumentOptionsPopover = ({
       showExporterDetails: pendingOptions.showExporterDetails,
       showFDADetails: pendingOptions.showFDADetails,
       showExchangeRates: pendingOptions.showExchangeRates,
-    } satisfies DocumentOptions;
+    };
 
     // Navigate with the new search params
     navigate({
