@@ -14,16 +14,18 @@ const ShipmentFormFields = () => {
   const form = useFormContext();
   const mode = form.watch("mode");
 
-  // useEffect(() => {
-  //   const fromItems = form.watch("from_items");
+  useEffect(() => {
+    if (mode === "direct") {
+      const fromItems = form.watch("from_items");
 
-  //   const reverseItems = fromItems.map((item) => ({
-  //     ...item,
-  //     quantity_change: -item.quantity_change,
-  //   }));
+      const reverseItems = fromItems.map((item) => ({
+        ...item,
+        quantity_change: -item.quantity_change,
+      }));
 
-  //   form.setValue("to_items", reverseItems);
-  // }, [form, form.watch("from_items")]);
+      form.setValue("to_items", reverseItems);
+    }
+  }, [form, form.watch("from_items")]);
 
   return (
     <>

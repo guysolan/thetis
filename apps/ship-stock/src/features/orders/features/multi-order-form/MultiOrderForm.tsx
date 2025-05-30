@@ -29,6 +29,7 @@ import PackageStockItems from "../order-forms/components/PackageStockItems";
 import SellPreview from "./SellPreview";
 import BuyPreview from "./BuyPreview";
 import ShipmentPreview from "./ShipmentPreview";
+import { useEffect } from "react";
 
 type Schema = z.infer<typeof schema>;
 
@@ -65,6 +66,16 @@ export function MultiOrderForm({
 
   // Use useWatch to prevent infinite loops
   const orderType = useWatch({ control: form.control, name: "order_type" });
+
+  useEffect(() => {
+    form.setValue("from_items", []);
+    form.setValue("to_items", []);
+    form.setValue("order_items", []);
+    form.setValue("package_items", []);
+    form.setValue("consumed_items", []);
+    form.setValue("produced_items", []);
+  }, [orderType]);
+
   const mode = useWatch({ control: form.control, name: "mode" });
   const orderItems =
     useWatch({ control: form.control, name: "order_items" }) || [];
@@ -157,8 +168,6 @@ export function MultiOrderForm({
         return null;
     }
   };
-
-  console.log(form.getValues("order_items"));
 
   return (
     <Form {...form}>
