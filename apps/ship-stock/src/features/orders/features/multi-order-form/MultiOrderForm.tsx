@@ -99,10 +99,9 @@ export function MultiOrderForm({
   };
 
   const handleSubmit = async (data: Schema) => {
-    console.log(
-      "🚀 MultiOrderForm - handleSubmit - RAW data:",
-      JSON.stringify(data, null, 2),
-    );
+    console.log("🚀 MultiOrderForm - handleSubmit - RAW data:", data);
+    console.log(data);
+    console.log("Data OVer");
     console.log(
       "🚀 MultiOrderForm - handleSubmit - order_items:",
       JSON.stringify(data.order_items, null, 2),

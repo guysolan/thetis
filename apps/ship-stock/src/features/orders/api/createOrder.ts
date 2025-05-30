@@ -21,10 +21,10 @@ export type FormatOrderItemChanges = {
 	quantity_change: number;
 	item_price: number;
 	item_tax: number;
-	item_type?: ItemType;
+	item_type: ItemType;
 	address_id: string;
 	package_item_id?: string;
-	package_item_change_id?: number;
+	package_item_change_id: number | null;
 };
 
 export type CreateOrderType = {
@@ -58,6 +58,7 @@ const formOrderItemSchema = baseItemSchema.extend({
 	item_tax: z.number().optional(),
 	item_total: z.number().optional(),
 	package_item_id: z.string().optional(),
+	item_type: z.enum(["product", "part", "service", "package"]),
 });
 type FormOrderItem = z.infer<typeof formOrderItemSchema>;
 
@@ -72,12 +73,12 @@ type OrderItemWithTotal = FormOrderItem & {
 
 // Type for the different item types we might receive
 type AnyOrderItem =
-	| PricedOrderItem
+	| (PricedOrderItem & { item_type: ItemType })
 	| {
 		item_type: "package";
 		package_id: string;
 		package_items?: PricedOrderItem[];
-		package_item_change_id?: number;
+		package_item_change_id: number | null;
 		quantity_change?: number;
 		item_price?: number;
 		item_tax?: number;
@@ -89,7 +90,7 @@ type AnyOrderItem =
 		item_id: string;
 		quantity_change: number;
 		lot_number?: string;
-		package_item_change_id?: number;
+		package_item_change_id: number | null;
 		quantity_before?: number;
 		quantity_after?: number;
 		item_price?: number;
@@ -97,6 +98,14 @@ type AnyOrderItem =
 		item_total?: number;
 		package_item_id?: string;
 	};
+
+// Only map items with a valid item_type
+const isValidOrderItem = (item: any) =>
+	item.item_type === "product" ||
+	item.item_type === "part" ||
+	item.item_type === "service" ||
+	item.item_type === "package" ||
+	item.item_type === "stocktake";
 
 function extractOrderItems(
 	orderItems: OrderItemWithTotal[] | undefined,
@@ -135,7 +144,7 @@ function extractOrderItems(
 }
 
 // Updated function to handle the different item types from the schema
-const mapToFormOrderItem = (item: AnyOrderItem): FormOrderItem => {
+const mapToFormOrderItem = (item: any): FormOrderItem => {
 	console.log(
 		"🔍 mapToFormOrderItem - Input item:",
 		JSON.stringify(item, null, 2),
@@ -154,7 +163,7 @@ const mapToFormOrderItem = (item: AnyOrderItem): FormOrderItem => {
 			item_tax: Number(item.item_tax ?? 0),
 			item_total: Number(item.item_total ?? 0),
 			package_item_id: undefined,
-			package_item_change_id: item.package_item_change_id,
+			package_item_change_id: item.package_item_change_id ?? null,
 			lot_number: item.lot_number,
 		};
 		console.log("📦 Package item mapped:", JSON.stringify(result, null, 2));
@@ -164,18 +173,16 @@ const mapToFormOrderItem = (item: AnyOrderItem): FormOrderItem => {
 	// Handle regular items - preserve price fields if they exist
 	const result = {
 		item_id: String(item.item_id || ""),
-		item_type: item.item_type as ItemType,
+		item_type: (item.item_type || "product") as ItemType,
 		quantity_change: Number(item.quantity_change ?? 0),
 		item_price: Number(item.item_price ?? 0),
 		item_tax: Number(item.item_tax ?? 0),
 		item_total: Number(item.item_total ?? 0),
-		package_item_id: "package_item_id" in item
-			? item.package_item_id
-			: undefined,
-		package_item_change_id: item.package_item_change_id,
+		package_item_id: item.package_item_id,
+		package_item_change_id: item.package_item_change_id ?? null,
 		lot_number: item.lot_number,
 	};
-	console.log("📋 Regular item mapped:", JSON.stringify(result, null, 2));
+	console.log("🔍 Regular item mapped:", JSON.stringify(result, null, 2));
 	return result;
 };
 
@@ -198,36 +205,34 @@ const processBuyFormData = (
 	let item_changes_internal: FormOrderItem[] = [];
 	if (formData.item_type === "part") {
 		console.log("🛒 Processing part items");
-		item_changes_internal = (formData.order_items || []).map(
-			mapToFormOrderItem,
-		);
+		item_changes_internal = (formData.order_items || [])
+			.map((item) => ({ ...item, item_type: "part" }))
+			.map(mapToFormOrderItem);
 		console.log("🛒 Part items processed:", item_changes_internal.length);
 	} else {
 		console.log(
 			"🛒 Processing non-part items (consumed/produced/order items)",
 		);
 
-		const consumed = (formData.consumed_items || []).map(
-			mapToFormOrderItem,
-		);
+		// Process consumed items (from from_shipping_address_id)
+		const consumed = (formData.consumed_items || [])
+			.map((item) => ({ ...item, item_type: "product" }))
+			.filter(isValidOrderItem)
+			.map(mapToFormOrderItem);
 		console.log(
 			"🛒 Consumed items:",
 			consumed.length,
 			JSON.stringify(consumed, null, 2),
 		);
 
-		const produced = (formData.produced_items || []).map(
-			mapToFormOrderItem,
-		);
-		console.log(
-			"🛒 Produced items:",
-			produced.length,
-			JSON.stringify(produced, null, 2),
-		);
-
-		const order_items_mapped = (formData.order_items || []).map(
-			mapToFormOrderItem,
-		);
+		// Process order items (need both FROM and TO entries)
+		const order_items_mapped = (formData.order_items || [])
+			.map((item) => ({
+				...item,
+				item_type: item.item_type || "product",
+			}))
+			.filter(isValidOrderItem)
+			.map(mapToFormOrderItem);
 		console.log(
 			"🛒 Order items mapped:",
 			order_items_mapped.length,
@@ -235,23 +240,18 @@ const processBuyFormData = (
 		);
 
 		item_changes_internal = [
-			...consumed,
-			...order_items_mapped.map((item) => ({
+			// Consumed items come from from_shipping_address_id
+			...consumed.map((item) => ({
 				...item,
-				quantity_change: Number(item.quantity_change),
+				address_id: formData.from_shipping_address_id,
 			})),
-			...order_items_mapped.map((item) => ({
-				...item,
-				quantity_change: -Number(item.quantity_change),
-				item_price: 0,
-				item_tax: 0,
-			})),
-			...produced.map((item) => ({
-				...item,
-				quantity_change: Number(item.quantity_change),
-				item_price: 0,
-				item_tax: 0,
-			})),
+			// Add all order items to to_shipping_address_id
+			...order_items_mapped
+				.map((item) => ({
+					...item,
+					address_id: formData.to_shipping_address_id,
+					quantity_change: Number(item.quantity_change),
+				})),
 		];
 		console.log(
 			"🛒 All item changes combined:",
@@ -265,7 +265,7 @@ const processBuyFormData = (
 			quantity_change: Number(ic.quantity_change),
 			item_price: ic?.item_price ?? 0,
 			item_tax: ic?.item_tax ?? 0,
-			address_id: formData.to_shipping_address_id,
+			address_id: ic.address_id,
 			item_type: ic.item_type as ItemType,
 			package_item_id: ic.package_item_id,
 			package_item_change_id: ic.package_item_change_id,
@@ -418,7 +418,7 @@ const processShipmentFormData = (
 			...mapped,
 			item_price: 0,
 			item_tax: 0,
-			address_id: formData.from_shipping_address_id,
+			address_id: formData.to_shipping_address_id,
 			quantity_change: Number(mapped.quantity_change ?? 0),
 		};
 		console.log(
@@ -885,28 +885,24 @@ export const useCreateOrder = (orderTypeParam: string) => {
 							JSON.stringify(packageItem, null, 2),
 						);
 
-						if (!packageItem.package_item_change_id) {
-							console.error(
-								`❌ Package item ${
-									index + 1
-								} has no package_item_change_id:`,
-								packageItem,
-							);
-							throw new Error(
-								`Package item ${
-									index + 1
-								} is missing package_item_change_id`,
-							);
-						}
+						// Generate a new ID if package_item_change_id is null
+						const itemChangeId =
+							packageItem.package_item_change_id ||
+							Math.floor(Math.random() * 1000000);
+						console.log(
+							`📦 Using item_change_id ${itemChangeId} for package item ${
+								index + 1
+							}`,
+						);
 
 						console.log(
-							`📦 Inserting package item_change with ID ${packageItem.package_item_change_id}...`,
+							`📦 Upserting package item_change with ID ${itemChangeId}...`,
 						);
 						const { data: itemChange, error: itemChangeError } =
 							await supabase
 								.from("item_changes")
 								.upsert({
-									id: packageItem.package_item_change_id,
+									id: itemChangeId,
 									item_id: String(packageItem.package_id),
 									quantity_change: 1, // Default quantity for packages
 									address_id: String(
@@ -918,7 +914,7 @@ export const useCreateOrder = (orderTypeParam: string) => {
 
 						if (itemChangeError) {
 							console.error(
-								`❌ Error inserting package item_change for package item ${
+								`❌ Error upserting package item_change for package item ${
 									index + 1
 								}:`,
 								itemChangeError,
@@ -927,31 +923,30 @@ export const useCreateOrder = (orderTypeParam: string) => {
 						}
 
 						console.log(
-							`✅ Created package item_change with ID ${itemChange.id} for package item ${
+							`✅ Created/Updated package item_change with ID ${itemChange.id} for package item ${
 								index + 1
 							}`,
 						);
 
 						console.log(
-							`📦 Inserting package order_item_change for package item ${
+							`📦 Upserting package order_item_change for package item ${
 								index + 1
 							}...`,
 						);
 						const { error: orderItemChangeError } = await supabase
 							.from("order_item_changes")
-							.insert({
+							.upsert({
 								order_id: orderId,
 								item_change_id: itemChange.id,
 								price: 0, // Packages typically have no price in this context
 								tax: 0,
 								package_item_id: undefined,
-								package_item_change_id:
-									packageItem.package_item_change_id,
-							});
+								package_item_change_id: itemChangeId, // Use the same ID we generated/used
+							}, { onConflict: "order_id,item_change_id" });
 
 						if (orderItemChangeError) {
 							console.error(
-								`❌ Error inserting package order_item_change for package item ${
+								`❌ Error upserting package order_item_change for package item ${
 									index + 1
 								}:`,
 								orderItemChangeError,
@@ -960,7 +955,7 @@ export const useCreateOrder = (orderTypeParam: string) => {
 						}
 
 						console.log(
-							`✅ Created package order_item_change for package item ${
+							`✅ Created/Updated package order_item_change for package item ${
 								index + 1
 							}`,
 						);
@@ -1011,25 +1006,31 @@ export const useCreateOrder = (orderTypeParam: string) => {
 							);
 						}
 
+						// Generate a unique ID for this item change
+						const itemChangeId = Math.floor(
+							Math.random() * 1000000,
+						);
+
 						console.log(
-							`📋 Inserting regular item_change for item ${
+							`📋 Upserting regular item_change for item ${
 								index + 1
 							}...`,
 						);
 						const { data: itemChange, error: itemChangeError } =
 							await supabase
 								.from("item_changes")
-								.insert({
+								.upsert({
+									id: itemChangeId,
 									item_id: String(item.item_id),
 									quantity_change: item.quantity_change,
 									address_id: String(item.address_id),
-								})
+								}, { onConflict: "id" })
 								.select("id")
 								.single();
 
 						if (itemChangeError) {
 							console.error(
-								`❌ Error inserting regular item_change for item ${
+								`❌ Error upserting regular item_change for item ${
 									index + 1
 								}:`,
 								itemChangeError,
@@ -1050,32 +1051,31 @@ export const useCreateOrder = (orderTypeParam: string) => {
 						}
 
 						console.log(
-							`✅ Created regular item_change with ID ${itemChange.id} for item ${
+							`✅ Created/Updated regular item_change with ID ${itemChange.id} for item ${
 								index + 1
 							}`,
 						);
 
 						console.log(
-							`📋 Inserting regular order_item_change for item ${
+							`📋 Upserting regular order_item_change for item ${
 								index + 1
 							}...`,
 						);
 						const { error: orderItemChangeError } = await supabase
 							.from("order_item_changes")
-							.insert({
+							.upsert({
 								order_id: orderId,
 								item_change_id: itemChange.id,
 								price: item.item_price,
 								tax: item.item_tax,
 								package_item_id: item.package_item_id,
-								// Use the package_item_change_id directly if this item references a package
 								package_item_change_id:
 									item.package_item_change_id,
-							});
+							}, { onConflict: "order_id,item_change_id" });
 
 						if (orderItemChangeError) {
 							console.error(
-								`❌ Error inserting regular order_item_change for item ${
+								`❌ Error upserting regular order_item_change for item ${
 									index + 1
 								}:`,
 								orderItemChangeError,
@@ -1084,7 +1084,7 @@ export const useCreateOrder = (orderTypeParam: string) => {
 						}
 
 						console.log(
-							`✅ Created regular order_item_change for item ${
+							`✅ Created/Updated regular order_item_change for item ${
 								index + 1
 							}`,
 						);

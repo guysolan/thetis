@@ -100,6 +100,7 @@ export const documentOptionsSchema = z.object({
   showSignature: z.boolean().default(true),
   showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
+  showServicesTable: z.boolean().default(true),
   showExporterDetails: z.boolean().default(false),
   showFDADetails: z.boolean().default(false),
   showExchangeRates: z.boolean().default(false),
@@ -109,6 +110,48 @@ export const purchaseOrderOptionsSchema = documentOptionsSchema.extend({
   carriage: z.boolean().default(false),
   showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
+  showServicesTable: z.boolean().default(true),
+  shippingDetails: z.object({
+    show: z.boolean().default(true),
+    reasonForExport: z.boolean().default(true),
+    modeOfTransport: z.boolean().default(true),
+    incoterms: z.boolean().default(true),
+    unitOfMeasurement: z.boolean().default(true),
+    shipmentNumber: z.boolean().default(true),
+    airwaybill: z.boolean().default(true),
+    referenceNumber: z.boolean().default(true),
+  }).default({
+    show: true,
+    reasonForExport: true,
+    modeOfTransport: true,
+    incoterms: true,
+    unitOfMeasurement: true,
+    shipmentNumber: true,
+    airwaybill: true,
+    referenceNumber: true,
+  }),
+  from: z.object({
+    show: z.boolean().default(true),
+    billing: z.boolean().default(true),
+    shipping: z.boolean().default(true),
+    contact: z.boolean().default(true),
+  }).default({
+    show: true,
+    billing: true,
+    shipping: true,
+    contact: true,
+  }),
+  to: z.object({
+    show: z.boolean().default(true),
+    billing: z.boolean().default(true),
+    shipping: z.boolean().default(true),
+    contact: z.boolean().default(true),
+  }).default({
+    show: true,
+    billing: true,
+    shipping: true,
+    contact: true,
+  }),
 });
 
 export const commercialInvoiceSchema = documentOptionsSchema.extend({

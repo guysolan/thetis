@@ -6,15 +6,27 @@ import useCompanyDefaults from "../../../companies/hooks/useCompanyDefaults";
 import SellPackages from "../order-forms/features/sell-form/components/SellPackages";
 import { useFormContext } from "react-hook-form";
 import PackageStockItems from "../order-forms/components/PackageStockItems";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 
 const SellFormFields = () => {
-  const { watch } = useFormContext();
+  const { watch, setValue } = useFormContext();
   const mode = watch("mode");
+  const orderItems = watch("order_items") || [];
 
   // Initialize hooks with proper dependencies
   useSellForm();
   useCompanyDefaults({ fieldName: "from_company_id" });
+
+  // Ensure all order items have the correct item_type
+  useEffect(() => {
+    if (orderItems.length > 0) {
+      const updatedItems = orderItems.map((item: any) => ({
+        ...item,
+        item_type: item.item_type || "product", // Default to product if not set
+      }));
+      setValue("order_items", updatedItems);
+    }
+  }, [orderItems, setValue]);
 
   // Memoize the package items section to prevent unnecessary re-renders
   const packageItemsSection = useMemo(() => {
@@ -35,6 +47,7 @@ const SellFormFields = () => {
         showTax={true}
         allowedTypes={["product", "part"]}
         packageMode={mode === "package"}
+        defaultItemType="product"
       />
 
       <StockValidationAlert

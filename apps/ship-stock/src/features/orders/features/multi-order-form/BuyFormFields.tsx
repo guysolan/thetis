@@ -5,6 +5,7 @@ import useCompanyDefaults from "../../../companies/hooks/useCompanyDefaults";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useEffect } from "react";
 import PackageStockItems from "../order-forms/components/PackageStockItems";
+
 const BuyFormFields = () => {
   const form = useFormContext();
   const { updateBuyForm } = useBuyForm();
@@ -12,20 +13,21 @@ const BuyFormFields = () => {
   useCompanyDefaults({ fieldName: "to_company_id" });
 
   const itemType = useWatch({ control: form.control, name: "item_type" });
-
-  useEffect(() => {
-    form.setValue("order_items", [
-      { item_type: itemType, item_id: "", quantity_change: 0 },
-    ]);
-    form.setValue("consumed_items", []);
-    form.setValue("produced_items", []);
-  }, [itemType]);
-
   const producedItems = form.watch("produced_items");
   const packageMode = form.watch("mode") === "package";
 
+  // Initialize form with default values when itemType changes
+  useEffect(() => {
+    if (itemType) {
+      form.setValue("order_items", []);
+      form.setValue("consumed_items", []);
+      form.setValue("produced_items", []);
+    }
+  }, [itemType]);
+
   const addToProducedItems = (newItem: any) =>
     form.setValue("produced_items", [...producedItems, newItem]);
+
   return (
     <>
       {packageMode && (

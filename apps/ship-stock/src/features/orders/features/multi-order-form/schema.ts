@@ -7,10 +7,9 @@ const itemTypeSchema = z.enum([...itemTypes]);
 // Base item schema that all other item schemas extend from
 export const baseItemSchema = z.object({
     item_id: z.string().min(1, "Please select an item"),
-    item_type: itemTypeSchema,
     quantity_change: z.coerce.number(),
     lot_number: z.string().optional(),
-    package_item_change_id: z.number().optional(),
+    package_item_change_id: z.number().nullable().default(null),
 });
 
 // Single schema for all priced items (consumed/produced)
@@ -23,7 +22,6 @@ export type PricedOrderItem = z.infer<typeof pricedItemSchema>;
 
 // Simplified package schemas
 const packageItemSchema = pricedItemSchema.extend({
-    item_type: z.literal("product"),
     quantity_change: z.coerce.number().min(1, "Quantity must be at least 1"),
 });
 
@@ -34,13 +32,41 @@ const packageOrderItemSchema = z.object({
         1,
         "Package must contain at least one item",
     ),
-    package_item_change_id: z.number().optional(),
+    package_item_change_id: z.number().nullable().default(null),
 });
 
 // Combined order item schema
 const orderItemSchema = z.discriminatedUnion("item_type", [
-    baseItemSchema.extend({
-        item_type: z.enum(["product", "part"]),
+    z.object({
+        item_type: z.literal("product"),
+        item_id: z.string().min(1, "Please select an item"),
+        quantity_change: z.coerce.number(),
+        lot_number: z.string().optional(),
+        package_item_change_id: z.number().nullable().default(null),
+        quantity_before: z.coerce.number().optional(),
+        quantity_after: z.coerce.number().optional(),
+        item_price: z.coerce.number().optional(),
+        item_tax: z.coerce.number().optional(),
+        item_total: z.coerce.number().optional(),
+    }),
+    z.object({
+        item_type: z.literal("part"),
+        item_id: z.string().min(1, "Please select an item"),
+        quantity_change: z.coerce.number(),
+        lot_number: z.string().optional(),
+        package_item_change_id: z.number().nullable().default(null),
+        quantity_before: z.coerce.number().optional(),
+        quantity_after: z.coerce.number().optional(),
+        item_price: z.coerce.number().optional(),
+        item_tax: z.coerce.number().optional(),
+        item_total: z.coerce.number().optional(),
+    }),
+    z.object({
+        item_type: z.literal("service"),
+        item_id: z.string().min(1, "Please select an item"),
+        quantity_change: z.coerce.number(),
+        lot_number: z.string().optional(),
+        package_item_change_id: z.number().nullable().default(null),
         quantity_before: z.coerce.number().optional(),
         quantity_after: z.coerce.number().optional(),
         item_price: z.coerce.number().optional(),
@@ -48,8 +74,12 @@ const orderItemSchema = z.discriminatedUnion("item_type", [
         item_total: z.coerce.number().optional(),
     }),
     packageOrderItemSchema,
-    baseItemSchema.extend({
+    z.object({
         item_type: z.literal("stocktake"),
+        item_id: z.string().min(1, "Please select an item"),
+        quantity_change: z.coerce.number(),
+        lot_number: z.string().optional(),
+        package_item_change_id: z.number().nullable().default(null),
         quantity_before: z.coerce.number(),
         quantity_after: z.coerce.number(),
         item_price: z.coerce.number().optional(),
@@ -105,7 +135,7 @@ export const multiOrderFormSchema = z.object({
             package_item_change_id: z.number().min(
                 1,
                 "Package item change ID is required",
-            ),
+            ).nullable().default(null),
             package_id: z.string().min(1, "Package is required"),
         }),
     ).default([]),

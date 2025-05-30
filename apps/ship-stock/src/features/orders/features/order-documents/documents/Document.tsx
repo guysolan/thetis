@@ -16,7 +16,9 @@ import FinancialTransactions from "../../order-history/components/FinancialTrans
 import OrderTotal from "../components/OrderTotal";
 import PaymentDetails from "../components/PaymentDetails";
 import Heading from "../components/Heading";
+import ServicesTable from "../components/ServicesTable";
 import type { Currency } from "../../../../../constants/currencies";
+import OrderItems from '../components/OrderItems';
 
 type DocumentType =
   | "commercialInvoice"
@@ -72,6 +74,8 @@ const Document = ({ order, options, title }: DocumentProps) => {
           orderItems={prepareOrderItems(order)}
         />
       )}
+
+      <ServicesTable order={order} currency={order.currency as Currency} />
 
       {options.total && <OrderTotal order={order} showCarriage={false} />}
 

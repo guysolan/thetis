@@ -7,7 +7,7 @@ import { useDocumentOptions } from "../../../../features/documents/hooks/useDocu
 
 const OrdersPage = () => {
   const { order } = Route.useLoaderData();
-  const documentOptions = useDocumentOptions();
+  const documentOptions = useDocumentOptions("purchaseOrder");
 
   return (
     <>
