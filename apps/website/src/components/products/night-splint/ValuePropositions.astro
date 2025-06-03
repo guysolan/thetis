@@ -1,0 +1,109 @@
+---
+import ColorGradient from "@/components/ColorGradient.astro";
+import HighlightedWord from "@/components/HighlightedWord.tsx";
+import { ExternalLink } from "lucide-astro";
+---
+
+<div class="bg-gradient-to-t from-primary/15 to-white h-24"></div>
+<div class="bg-primary/15 py-8 w-full">
+    <div class="mx-auto px-4 container">
+        <div class="mx-auto mb-12 max-w-3xl text-center">
+            <h2
+                class="mb-4 font-semibold text-neutral-950 dark:text-neutral-50 text-3xl md:text-4xl leading-[120%]"
+            >
+                Finally Sleep Comfortably During Recovery
+            </h2>
+            <p
+                class="text-gray-800 dark:text-neutral-200 text-lg leading-relaxed"
+            >
+                The lightweight alternative to sleeping in your heavy boot
+            </p>
+        </div>
+
+        <div class="gap-8 grid md:grid-cols-2 mx-auto max-w-4xl">
+            <div
+                class="group bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg p-6 rounded-lg transition-all duration-300"
+            >
+                <h3
+                    class="mb-3 font-semibold text-neutral-900 dark:text-neutral-50 text-xl"
+                >
+                    <HighlightedWord>Sleep Better</HighlightedWord> Tonight
+                </h3>
+                <p class="text-gray-600 dark:text-neutral-400">
+                    Experience the difference in your sleep quality. <span
+                        class="italic"
+                        >"The boot was making sleep impossible! It felt like a
+                        torture chamber at night."</span
+                    > Our splint provides the perfect balance of support and comfort.
+                </p>
+            </div>
+
+            <div
+                class="group bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg p-6 rounded-lg transition-all duration-300"
+            >
+                <h3
+                    class="mb-3 font-semibold text-neutral-900 dark:text-neutral-50 text-xl"
+                >
+                    <HighlightedWord>Light</HighlightedWord> &{" "}
+                    <HighlightedWord>Breathable</HighlightedWord>
+                </h3>
+                <p class="text-gray-600 dark:text-neutral-400">
+                    Unlike the heavy boot, our splint keeps you cool and
+                    comfortable. <span class="italic"
+                        >"So much easier than the big boot. Finally lets your
+                        leg breathe!"</span
+                    >
+                </p>
+            </div>
+
+            <div
+                class="group bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg p-6 rounded-lg transition-all duration-300"
+            >
+                <h3
+                    class="mb-3 font-semibold text-neutral-900 dark:text-neutral-50 text-xl"
+                >
+                    <HighlightedWord>Safe</HighlightedWord> Achilles Healing
+                </h3>
+                <p class="text-gray-600 dark:text-neutral-400">
+                    Maintains optimal position for recovery. <span
+                        class="italic"
+                        >"Works perfect to keep my foot in plantar flexion.
+                        Sleep is critical to recovery."</span
+                    >
+                </p>
+                <a
+                    href="/evidence/safety"
+                    class="inline-flex items-center gap-1 mt-2 text-primary hover:text-primary/80 underline underline-offset-2 transition-colors"
+                >
+                    <span>3000 patients, no complications</span>
+                    <ExternalLink class="w-4 h-4" />
+                </a>
+            </div>
+
+            <div
+                class="group bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg p-6 rounded-lg transition-all duration-300"
+            >
+                <h3
+                    class="mb-3 font-semibold text-neutral-900 dark:text-neutral-50 text-xl"
+                >
+                    <HighlightedWord>Surgeon-Approved</HighlightedWord> Design
+                </h3>
+                <p class="text-gray-600 dark:text-neutral-400">
+                    Trusted by medical professionals. <span class="italic"
+                        >"My surgeon, who also has an MA in engineering, gave
+                        his approval after reviewing the design."</span
+                    >
+                </p>
+                <a
+                    href="/reviews?filter=clinician"
+                    class="inline-flex items-center gap-1 mt-2 text-primary hover:text-primary/80 underline underline-offset-2 transition-colors"
+                >
+                    <span>Read more clinician reviews</span>
+                    <ExternalLink class="w-4 h-4" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-gradient-to-b from-primary/15 to-white h-24"></div>

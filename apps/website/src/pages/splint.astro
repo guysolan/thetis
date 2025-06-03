@@ -6,15 +6,19 @@ import DownloadList from "@/components/DownloadList.astro";
 import SizeChart from "@/components/SizeChart.jsx";
 import NightSplintFAQs from "@/components/NightSplintFAQs.tsx";
 import ReviewCarousel from "@/components/reviews/ReviewCarousel";
-import SimplyBrilliantQuote from "@/components/reviews/SimplyBrilliantQuote.astro";
 import SleepInYourWellies from "@/components/SleepInYourWellies.tsx";
-import NightSplintFeatures from "@/components/products/night-splint/NightSplintFeatures.astro";
 import NightSplintUsage from "@/components/products/night-splint/NightSplintUsage.astro";
-import NightSplintProsCons from "@/components/products/night-splint/NightSplintProsCons.astro";
 import NightSplintInstructions from "@/components/products/night-splint/night-splint-instructions/index.astro";
 import NightSplintHero from "../components/products/night-splint/NightSplintHero.astro";
 import GetInTouch from "../components/CTA/GetInTouch.astro";
-import Evidence from "../components/products/night-splint/Evidence.astro";
+import ValuePropositions from "../components/products/night-splint/ValuePropositions.astro";
+import KeyFeatures from "../components/products/night-splint/KeyFeatures.astro";
+import TestimonialHighlight from "../components/products/night-splint/TestimonialHighlight.astro";
+import NightSplintAdvert from "../components/products/night-splint/NightSplintAdvert.astro";
+import Reviews from "@/components/reviews/InfiniteReviews.astro";
+import { buttonVariants } from "../components/ui/button";
+import BuyNowCallout from "../components/products/night-splint/BuyNowCallout.astro";
+import HighlightedWord from "../components/HighlightedWord";
 ---
 
 <Fragment slot="head">
@@ -33,15 +37,23 @@ import Evidence from "../components/products/night-splint/Evidence.astro";
             <SleepInYourWellies client:load />
         </div>
 
-        <NightSplintFeatures />
+        <Reviews />
 
-        <NightSplintUsage />
+        <ValuePropositions />
 
-        <SimplyBrilliantQuote />
+        <KeyFeatures />
 
-        <NightSplintProsCons />
-
-        <Evidence />
+        <BuyNowCallout buttonText="Buy Now" buttonHref="/buy-now">
+            <span slot="title"
+                >Ready for <HighlightedWord>Real Relief?</HighlightedWord></span
+            >
+            <span slot="body">
+                Tired of sleepless nights and discomfort from your boot? Our
+                splint is lightweight, easy to use, and trusted by thousands for
+                a good night's sleep. Experience the difference — wake up rested
+                and on track for recovery.
+            </span>
+        </BuyNowCallout>
 
         <section class="flex flex-col items-center py-16">
             <div
@@ -57,6 +69,19 @@ import Evidence from "../components/products/night-splint/Evidence.astro";
             </div>
             <ReviewCarousel client:load />
         </section>
+
+        <div class="relative mx-auto mt-8 w-full">
+            <iframe
+                class="shadow-lg mx-auto rounded-lg w-full max-w-[300px] md:hover:max-w-[60vw] md:max-w-[50vw] lg:hover:max-w-[70vw] hover:max-w-[80vw] aspect-video transition-all duration-300 cursor-pointer"
+                title="Night-Splint-Application"
+                src="https://www.youtube.com/embed/T09Xnwaqbm0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+            >
+            </iframe>
+        </div>
+
+        <NightSplintUsage />
 
         <NightSplintInstructions />
 
@@ -79,59 +104,72 @@ import Evidence from "../components/products/night-splint/Evidence.astro";
             />
         </Slide>
 
-        <GetInTouch
-            title="Sound Interesting?"
-            paragraph="Want to get a sample, speak to us or just learn more?"
-        />
+        <BuyNowCallout
+            buttonText="Buy Now"
+            buttonHref="/buy-now"
+            secondaryButtonText="Order for Clinic"
+            secondaryButtonHref="/order-wholesale"
+        >
+            <span slot="title">Order Your Splint Today</span>
+            <span slot="body">
+                Don't let pain or poor sleep slow your recovery. Patients and
+                clinicians agree: this splint brings <HighlightedWord
+                    >comfort</HighlightedWord
+                >, <HighlightedWord>peace of mind</HighlightedWord>, and <HighlightedWord
+                    >better rest</HighlightedWord
+                >—night after night.
+            </span>
+        </BuyNowCallout>
+
         <Slide title="FAQs">
             <NightSplintFAQs client:load />
         </Slide>
     </main>
-</Layout>
 
-<script>
-    fetch("https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq")
-        .then((res) => res.json())
-        .then((response) => {
-            console.log("Country: ", response.country);
-            try {
-                // Check if on Splint Page
-                const shopify = document.getElementById(
-                    "shopify-buy-button-wrapper",
-                );
-                const amazon = document.getElementById(
-                    "amazon-buy-button-wrapper",
-                );
+    <script>
+        fetch("https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq")
+            .then((res) => res.json())
+            .then((response) => {
+                console.log("Country: ", response.country);
+                try {
+                    // Check if on Splint Page
+                    const shopify = document.getElementById(
+                        "shopify-buy-button-wrapper",
+                    );
+                    const amazon = document.getElementById(
+                        "amazon-buy-button-wrapper",
+                    );
 
-                if (response.country === "United Kingdom") {
-                    amazon?.remove();
-                } else {
-                    shopify?.remove();
+                    if (response.country === "United Kingdom") {
+                        amazon?.remove();
+                    } else {
+                        shopify?.remove();
+                    }
+                } catch (error) {
+                    // console.log(error)
                 }
-            } catch (error) {
-                // console.log(error)
+            })
+            .catch((reason: any) => {
+                console.log(reason);
+                // console.log('Request failed');
+            });
+    </script>
+
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-        })
-        .catch((reason: any) => {
-            console.log(reason);
-            // console.log('Request failed');
-        });
-</script>
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-<style>
-    @keyframes fadeInUp {
-        from {
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
             opacity: 0;
-            transform: translateY(20px);
         }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .animate-fade-in-up {
-        animation: fadeInUp 0.6s ease-out forwards;
-        opacity: 0;
-    }
-</style>
+    </style>
+</Layout>

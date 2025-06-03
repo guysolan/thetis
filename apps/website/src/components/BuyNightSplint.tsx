@@ -4,8 +4,6 @@ import BuyButtonVariants from "./products/buy-button/BuyButtonVariants";
 import nightSplint from "@/components/products/images/night-splint/night_splint_bed_top.jpg";
 // import Image from "next/image";
 
-import { Button } from "@/components/ui/button";
-import { Shield, CheckCircle, ArrowRight } from "lucide-react";
 import BulkOrders from "./buy-button/BulkOrders";
 import FreeAndSecure from "./buy-button/FreeAndSecure";
 interface Props {

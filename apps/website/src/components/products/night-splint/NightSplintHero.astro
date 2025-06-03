@@ -7,6 +7,7 @@ import { Image } from "astro:assets";
 import ColorGradient from "@/components/ColorGradient.astro";
 import nightSplint from "@/components/products/images/night-splint/night_splint_bed_top_square.jpg";
 import ReviewsLink from "../../ReviewsLink";
+import WorkInHealthcare from "./WorkInHealthcare.astro";
 ---
 
 <ColorGradient>
@@ -20,8 +21,8 @@ import ReviewsLink from "../../ReviewsLink";
         >
       </h1>
       <p class="mx-auto mb-8 max-w-3xl text-gray-700 text-xl">
-        Finally, a comfortable solution for recovery. Designed alongside
-        surgeons to protect your healing Achilles while recover.
+        Finally, a comfortable solution for sleep. Designed alongside surgeons
+        to protect your healing Achilles while you get the rest you need.
       </p>
     </div>
     <div class="flex lg:flex-row flex-col gap-4 lg:gap-8 my-2">
@@ -42,18 +43,19 @@ import ReviewsLink from "../../ReviewsLink";
             <HighlightedWord>Rupture</HighlightedWord>
           </h1>
           <p class="mx-auto max-w-3xl text-gray-700 text-xl">
-            Finally, a comfortable solution for recovery. Designed alongside
-            surgeons to protect your healing Achilles while recover.
+            Finally, a comfortable solution for sleep. Designed alongside
+            surgeons to protect your healing Achilles tendon while you get the
+            rest you need.
           </p>
         </div>
         <ReviewsLink size="lg" />
 
         <BuyButtonVariants client:load />
-        <div class="flex flex-col gap-8">
-          <FreeAndSecure />
-          <BulkOrders />
-        </div>
       </div>
+    </div>
+    <div class="flex flex-col gap-16 pt-8">
+      <FreeAndSecure />
+      <WorkInHealthcare />
     </div>
   </div>
 </ColorGradient>

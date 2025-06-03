@@ -34,7 +34,7 @@ function DesktopNav() {
                 description="Improve recovery time and comfort after Achilles tendon rupture"
                 imageSrc="/images/night_splint_square_small.jpg"
                 imageAlt="Achilles Tendon Rupture Splint"
-                productUrl="/night-splint"
+                productUrl="/splint"
                 buyUrl="/buy-now"
                 wholesaleUrl="/order-wholesale"
               />

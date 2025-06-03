@@ -7,7 +7,7 @@ import Thetis from "./Thetis.tsx";
 ---
 
 <header
-    class="top-0 z-[40] fixed flex bg-background item-center m-auto my-auto px-2 lg:px-8 py-4 border-gray-300 border-b w-screen"
+    class="top-0 z-[40] fixed flex bg-background m-auto my-auto px-2 lg:px-8 py-4 border-gray-300 border-b w-screen item-center"
 >
     <div class="hidden lg:flex justify-between items-center gap-x-6 w-full">
         <Thetis />
@@ -19,6 +19,11 @@ import Thetis from "./Thetis.tsx";
     <div class="lg:hidden flex justify-between items-center w-full">
         <Thetis />
         <div class="flex gap-x-2">
+            <a
+                class={buttonVariants({ variant: "default", size: "sm" })}
+                href="/buy-now">Buy Now</a
+            >
+
             <MobileNav client:load />
         </div>
     </div>

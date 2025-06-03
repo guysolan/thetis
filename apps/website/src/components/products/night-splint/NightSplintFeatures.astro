@@ -7,53 +7,57 @@ const features = [
         items: [
             {
                 type: "positive",
-                text: "Maintains optimal 155° plantarflexed position for healing"
+                text: "Maintains optimal 30° plantarflexed position for healing",
             },
             {
                 type: "positive",
-                text: "Patented design developed with orthopedic specialists"
+                text: "Patented design developed with orthopedic specialists",
             },
             {
                 type: "positive",
-                text: "Designed with and for Achilles tendon rupture patients"
-            }
-        ]
+                text: "Designed with and for Achilles tendon rupture patients",
+            },
+        ],
     },
     {
         title: "Superior Comfort & Security",
         items: [
             {
                 type: "positive",
-                text: "Non-slip silicone straps for maximum comfort"
+                text: "Non-slip silicone straps for maximum comfort",
             },
             {
                 type: "positive",
-                text: "Innovative heel strap design avoids pressure on injury"
+                text: "Innovative heel strap design avoids pressure on injury",
             },
             {
                 type: "positive",
-                text: "Breathable, lightweight alternative to bulky boots"
-            }
-        ]
-    }
+                text: "Breathable, lightweight alternative to bulky boots",
+            },
+        ],
+    },
 ] as const;
 ---
 
 <section class="flex flex-col items-center mx-auto py-16">
     <div class="mx-auto px-4">
         <div class="gap-16 grid md:grid-cols-2">
-            {features.map((feature) => (
-                <div class="bg-white md:p-4 lg:p-8 rounded-xl feature-card">
-                    <h3 class="mb-4 font-semibold text-2xl">{feature.title}</h3>
-                    <ul class="space-y-3">
-                        {feature.items.map((item) => (
-                            <ListIcon type={item.type}>
-                                {item.text}
-                            </ListIcon>
-                        ))}
-                    </ul>
-                </div>
-            ))}
+            {
+                features.map((feature) => (
+                    <div class="bg-white md:p-4 lg:p-8 rounded-xl feature-card">
+                        <h3 class="mb-4 font-semibold text-2xl">
+                            {feature.title}
+                        </h3>
+                        <ul class="space-y-3">
+                            {feature.items.map((item) => (
+                                <ListIcon type={item.type}>
+                                    {item.text}
+                                </ListIcon>
+                            ))}
+                        </ul>
+                    </div>
+                ))
+            }
         </div>
     </div>
 </section>

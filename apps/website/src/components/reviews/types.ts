@@ -1,24 +1,15 @@
-export interface Review {
+import type { ImageMetadata } from "astro";
+
+export type Review = {
     name: string;
-    description?: string;
-    date?: string;
-    image?: string | { src: string; [key: string]: any };
-    link?: string;
-    stars?: number;
+    link: string;
+    description: string;
+    image: ImageMetadata;
     title: string;
-    body: string;
     short?: string;
-    is_pinned?: boolean;
-    type?: "athlete" | "clinician" | "patient";
-    country:
-        | "US"
-        | "CA"
-        | "GB"
-        | "DE"
-        | "IT"
-        | "FR"
-        | "WLS"
-        | "SCT"
-        | "IRL"
-        | "SE";
-}
+    body: string;
+    country: string;
+    clinics: string[];
+    clinicImages: string[];
+    date: string;
+};

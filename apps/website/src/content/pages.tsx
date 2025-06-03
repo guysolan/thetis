@@ -26,7 +26,7 @@ export const productLinks: Link[] = [
     title: "Achilles Rupture Splint",
     description:
       "Recovery quicker and more comfortably from achilles tendon rupture.",
-    href: "/night-splint",
+    href: "/splint",
     image: nightSplintImage,
     icon: <Moon size={20} />,
     variant: "outline",
