@@ -231,6 +231,28 @@ export const invoiceOptionsSchema = documentOptionsSchema.extend({
     airwaybill: true,
     referenceNumber: true,
   }),
+  from: z.object({
+    show: z.boolean().default(true),
+    billing: z.boolean().default(true),
+    shipping: z.boolean().default(true),
+    contact: z.boolean().default(true),
+  }).default({
+    show: true,
+    billing: true,
+    shipping: true,
+    contact: true,
+  }),
+  to: z.object({
+    show: z.boolean().default(true),
+    billing: z.boolean().default(true),
+    shipping: z.boolean().default(true),
+    contact: z.boolean().default(true),
+  }).default({
+    show: true,
+    billing: true,
+    shipping: true,
+    contact: true,
+  }),
 });
 
 export const packingListSchema = documentOptionsSchema.extend({

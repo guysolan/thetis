@@ -48,6 +48,7 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                     showExporterDetails: false,
                     showFDADetails: false,
                     showExchangeRates: false,
+                    showServicesTable: true,
                 };
             case "commercialInvoice":
                 return {
@@ -77,6 +78,7 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                     showExporterDetails: true,
                     showFDADetails: true,
                     showExchangeRates: true,
+                    showServicesTable: true,
                 };
             case "invoice":
                 return {
@@ -106,6 +108,11 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                     showExporterDetails: false,
                     showFDADetails: false,
                     showExchangeRates: false,
+                    total: true,
+                    showSignature: true,
+                    showPackages: false,
+                    showShippingItems: true,
+                    showServicesTable: true,
                 };
             default:
                 return {
@@ -131,6 +138,7 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                         shipping: true,
                         contact: true,
                     },
+                    showServicesTable: true,
                 };
         }
     };
@@ -181,6 +189,8 @@ export const useDocumentOptions = (documentType: DocumentType) => {
             false,
         showExchangeRates: search?.showExchangeRates ??
             defaults.showExchangeRates ?? false,
+        showServicesTable: search?.showServicesTable ??
+            defaults.showServicesTable ?? true,
     };
 
     return documentOptions;
