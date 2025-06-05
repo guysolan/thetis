@@ -1,0 +1,16 @@
+---
+import BookDemoPage from "@/components/contact/forms/BookDemo.astro";
+import Layout from "../layouts/Layout.astro";
+import ColorGradient from "../components/ColorGradient.astro";
+---
+
+<Layout
+    title="Book a Product Demo"
+    description="Schedule a personal demonstration of our Achilles Rupture Splint at your practice. Our representative will show you how our product can improve patient comfort and recovery."
+>
+    <ColorGradient>
+        <div class="mx-auto max-w-screen-lg">
+            <BookDemoPage />
+        </div>
+    </ColorGradient>
+</Layout>
