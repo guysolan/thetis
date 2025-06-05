@@ -40,6 +40,9 @@ const DocumentOptionsPopover = ({
     },
     showShippingItems: search?.showShippingItems ?? true,
     total: search?.total ?? true,
+    showCarriage:
+      search?.showCarriage ??
+      (documentType === "invoice" || documentType === "commercialInvoice"),
     showPackages: search?.showPackages ?? documentType === "packingList",
     from: {
       show: search?.from?.show ?? true,
@@ -139,6 +142,7 @@ const DocumentOptionsPopover = ({
         else if (key === "showFDADetails") newOptions.showFDADetails = value;
         else if (key === "showExchangeRates")
           newOptions.showExchangeRates = value;
+        else if (key === "showCarriage") newOptions.showCarriage = value;
       }
 
       return newOptions;
@@ -178,6 +182,7 @@ const DocumentOptionsPopover = ({
       showExporterDetails: pendingOptions.showExporterDetails,
       showFDADetails: pendingOptions.showFDADetails,
       showExchangeRates: pendingOptions.showExchangeRates,
+      showCarriage: pendingOptions.showCarriage,
     };
 
     // Navigate with the new search params
@@ -212,6 +217,15 @@ const DocumentOptionsPopover = ({
             <Switch
               checked={pendingOptions.total}
               onCheckedChange={(checked) => updateOption("total", checked)}
+            />
+          </div>
+          <div className="flex justify-between items-center">
+            <label className="text-sm">Carriage</label>
+            <Switch
+              checked={pendingOptions.showCarriage}
+              onCheckedChange={(checked) =>
+                updateOption("showCarriage", checked)
+              }
             />
           </div>
           <div className="flex justify-between items-center">

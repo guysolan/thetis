@@ -20,7 +20,7 @@ const OrderTotal = ({
         {showCarriage && (
           <TableRow className="border-t text-neutral-800">
             <TableHead>Carriage</TableHead>
-            <TableCell className="w-1/6 font-medium">
+            <TableCell className="w-1/6 font-medium text-right">
               <NumberFlow
                 value={order.carriage ?? 0}
                 format={{ style: "currency", currency: order.currency }}
@@ -29,8 +29,8 @@ const OrderTotal = ({
           </TableRow>
         )}
         <TableRow>
-          <TableHead className="text-lg text-neutral-900">Total</TableHead>
-          <TableCell className="w-1/6 font-medium text-lg text-neutral-900">
+          <TableHead className="text-neutral-900 text-lg">Total</TableHead>
+          <TableCell className="w-1/6 font-medium text-neutral-900 text-lg text-right">
             <NumberFlow
               value={order.total_value ?? 0}
               format={{ style: "currency", currency: order.currency }}

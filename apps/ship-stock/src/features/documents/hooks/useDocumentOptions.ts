@@ -79,6 +79,7 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                     showFDADetails: true,
                     showExchangeRates: true,
                     showServicesTable: true,
+                    showCarriage: true,
                 };
             case "invoice":
                 return {
@@ -113,6 +114,7 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                     showPackages: false,
                     showShippingItems: true,
                     showServicesTable: true,
+                    showCarriage: true,
                 };
             default:
                 return {
@@ -138,7 +140,16 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                         shipping: true,
                         contact: true,
                     },
+                    payment: false,
+                    showExporterDetails: false,
+                    showFDADetails: false,
+                    showExchangeRates: false,
+                    total: true,
+                    showSignature: true,
+                    showPackages: false,
+                    showShippingItems: true,
                     showServicesTable: true,
+                    showCarriage: false,
                 };
         }
     };

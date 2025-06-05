@@ -18,7 +18,7 @@ import PaymentDetails from "../components/PaymentDetails";
 import Heading from "../components/Heading";
 import ServicesTable from "../components/ServicesTable";
 import type { Currency } from "../../../../../constants/currencies";
-import OrderItems from '../components/OrderItems';
+import OrderItems from "../components/OrderItems";
 
 type DocumentType =
   | "commercialInvoice"
@@ -77,7 +77,9 @@ const Document = ({ order, options, title }: DocumentProps) => {
 
       <ServicesTable order={order} currency={order.currency as Currency} />
 
-      {options.total && <OrderTotal order={order} showCarriage={false} />}
+      {options.total && (
+        <OrderTotal order={order} showCarriage={options.showCarriage} />
+      )}
 
       {options.showPackages && <PackageSummary items={order.items} />}
 

@@ -104,6 +104,7 @@ export const documentOptionsSchema = z.object({
   showExporterDetails: z.boolean().default(false),
   showFDADetails: z.boolean().default(false),
   showExchangeRates: z.boolean().default(false),
+  showCarriage: z.boolean().default(false),
 });
 
 export const purchaseOrderOptionsSchema = documentOptionsSchema.extend({
@@ -161,6 +162,7 @@ export const commercialInvoiceSchema = documentOptionsSchema.extend({
   showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
   showSignature: z.boolean().default(true),
+  showCarriage: z.boolean().default(true),
   shippingDetails: z.object({
     show: z.boolean().default(true),
     reasonForExport: z.boolean().default(true),
@@ -212,6 +214,7 @@ export const invoiceOptionsSchema = documentOptionsSchema.extend({
   showExporterDetails: z.boolean().default(false),
   showFDADetails: z.boolean().default(false),
   showExchangeRates: z.boolean().default(false),
+  showCarriage: z.boolean().default(true),
   shippingDetails: z.object({
     show: z.boolean().default(true),
     reasonForExport: z.boolean().default(true),
