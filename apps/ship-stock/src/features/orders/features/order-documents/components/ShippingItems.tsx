@@ -17,6 +17,7 @@ type ItemDetails = {
   sku?: string;
   country_of_origin?: string;
   hs_code?: string;
+  tax?: number;
 };
 
 type GroupedItem = OrderView["items"][number] &
@@ -41,16 +42,25 @@ const ShippingItems = ({
         );
 
         if (!acc[orderItem.item_id]) {
+          const price = orderItem.price ?? 0;
+          const quantity = orderItem.quantity;
+          const taxRate = orderItem?.tax ?? 0;
+          const totalPrice = quantity * price * (1 + taxRate);
+
           acc[orderItem.item_id] = {
             ...orderItem,
             ...itemDetails,
-            totalQuantity: orderItem.quantity,
-            totalPrice: orderItem.quantity * (orderItem.price ?? 0),
+            totalQuantity: quantity,
+            totalPrice,
           } as GroupedItem;
         } else {
-          acc[orderItem.item_id].totalQuantity += orderItem.quantity;
-          acc[orderItem.item_id].totalPrice +=
-            orderItem.quantity * (orderItem.price ?? 0);
+          const price = orderItem.price ?? 0;
+          const quantity = orderItem.quantity;
+          const taxRate = orderItem?.tax ?? 0;
+          const itemTotal = quantity * price * (1 + taxRate);
+
+          acc[orderItem.item_id].totalQuantity += quantity;
+          acc[orderItem.item_id].totalPrice += itemTotal;
         }
         return acc;
       },
@@ -69,6 +79,7 @@ const ShippingItems = ({
           <TableHead className="text-black">HS Code</TableHead>
           <TableHead className="text-black text-right">Quantity</TableHead>
           <TableHead className="text-black text-right">Unit Price</TableHead>
+          <TableHead className="text-black text-right">Tax Rate</TableHead>
           <TableHead className="text-black text-right">Total</TableHead>
         </TableRow>
       </TableHeader>
@@ -91,6 +102,9 @@ const ShippingItems = ({
               />
             </TableCell>
             <TableCell className="text-black text-right">
+              {(item.tax ?? 0) * 100}%
+            </TableCell>
+            <TableCell className="text-black text-right">
               <NumberFlow
                 value={item.totalPrice}
                 format={{ style: "currency", currency: currency }}
@@ -100,7 +114,7 @@ const ShippingItems = ({
         ))}
         <TableRow className="font-semibold">
           <TableCell className="text-black">Total</TableCell>
-          <TableCell colSpan={5} />
+          <TableCell colSpan={6} />
           <TableCell className="text-black text-right">
             <NumberFlow
               value={invoiceItems.reduce(

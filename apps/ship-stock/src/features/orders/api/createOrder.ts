@@ -207,7 +207,11 @@ const processBuyFormData = (
 		console.log("🛒 Processing part items");
 		item_changes_internal = (formData.order_items || [])
 			.map((item) => ({ ...item, item_type: "part" }))
-			.map(mapToFormOrderItem);
+			.map(mapToFormOrderItem)
+			.map((item) => ({
+				...item,
+				address_id: formData.to_shipping_address_id,
+			}));
 		console.log("🛒 Part items processed:", item_changes_internal.length);
 	} else {
 		console.log(

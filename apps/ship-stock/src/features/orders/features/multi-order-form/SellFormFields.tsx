@@ -7,6 +7,7 @@ import SellPackages from "../order-forms/features/sell-form/components/SellPacka
 import { useFormContext } from "react-hook-form";
 import PackageStockItems from "../order-forms/components/PackageStockItems";
 import { useMemo, useEffect } from "react";
+import type { OrderItem } from "../order-forms/schema";
 
 const SellFormFields = () => {
   const { watch, setValue } = useFormContext();
@@ -20,11 +21,15 @@ const SellFormFields = () => {
   // Ensure all order items have the correct item_type
   useEffect(() => {
     if (orderItems.length > 0) {
-      const updatedItems = orderItems.map((item: any) => ({
-        ...item,
-        item_type: item.item_type || "product", // Default to product if not set
-      }));
-      setValue("order_items", updatedItems);
+      // Only update items that don't have an item_type set
+      const needsUpdate = orderItems.some((item: OrderItem) => !item.item_type);
+      if (needsUpdate) {
+        const updatedItems = orderItems.map((item: OrderItem) => ({
+          ...item,
+          item_type: item.item_type || "product", // Default to product if not set
+        }));
+        setValue("order_items", updatedItems);
+      }
     }
   }, [orderItems, setValue]);
 
@@ -47,7 +52,6 @@ const SellFormFields = () => {
         showTax={true}
         allowedTypes={["product", "part"]}
         packageMode={mode === "package"}
-        defaultItemType="product"
       />
 
       <StockValidationAlert
