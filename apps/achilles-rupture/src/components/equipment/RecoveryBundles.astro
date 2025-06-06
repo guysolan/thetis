@@ -1,0 +1,149 @@
+---
+import { bundles, equipmentList } from "../../content/equipment/equipment";
+
+interface Bundle {
+    name: string;
+    priceRange: string;
+    isPopular: boolean;
+    features: string[];
+}
+
+interface Equipment {
+    name: string;
+    keyBenefit: string;
+    actionUrl: string;
+    actionText: string;
+    isExternal: boolean;
+}
+
+type BundleArray = Bundle[];
+type EquipmentArray = Equipment[];
+---
+
+<section class="mb-16" id="mobility-bundle">
+    <div class="mb-12 text-center">
+        <h2 class="mb-4 font-bold text-3xl">
+            Recovery Bundles for Every Stage
+        </h2>
+        <div class="mx-auto max-w-3xl">
+            <p class="mb-4 text-gray-600">
+                Achilles rupture recovery is challenging enough without
+                struggling with uncomfortable or inadequate equipment. The right
+                gear can make the difference between a frustrating recovery and
+                a smooth journey back to full mobility.
+            </p>
+            <p class="text-gray-600">
+                We've curated these bundles based on real patient experiences
+                and surgeon recommendations. Each bundle is designed to address
+                specific recovery needs, from essential protection to complete
+                comfort solutions.
+            </p>
+        </div>
+    </div>
+
+    <!-- Bundle Comparison Table -->
+    <div class="mb-8 overflow-x-auto">
+        <table class="bg-white shadow rounded-lg w-full">
+            <thead>
+                <tr class="bg-gray-50">
+                    <th class="p-4 border-b w-1/4 text-left">Features</th>
+                    {
+                        (bundles as BundleArray).map((bundle) => (
+                            <th
+                                class={`p-4 border-b w-1/4 text-center ${bundle.isPopular ? "bg-purple-50" : ""}`}
+                            >
+                                <div class="font-bold text-lg">
+                                    {bundle.name}
+                                </div>
+                                <div class="text-gray-600 text-sm">
+                                    {bundle.priceRange}
+                                </div>
+                                {bundle.isPopular && (
+                                    <span class="inline-block bg-purple-600 mt-1 px-2 py-1 rounded text-white text-xs">
+                                        Most Popular
+                                    </span>
+                                )}
+                            </th>
+                        ))
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    (equipmentList as EquipmentArray)
+                        .filter((item) =>
+                            (bundles as BundleArray).some((bundle) =>
+                                bundle.features.includes(item.name),
+                            ),
+                        )
+                        .map((item) => (
+                            <tr class="border-b">
+                                <td class="p-4 font-medium">{item.name}</td>
+                                {(bundles as BundleArray).map((bundle) => (
+                                    <td
+                                        class={`p-4 text-center ${bundle.isPopular ? "bg-purple-50" : ""}`}
+                                    >
+                                        {bundle.features.includes(item.name)
+                                            ? "✓"
+                                            : "-"}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="p-4"></td>
+                    {
+                        (bundles as BundleArray).map((bundle) => (
+                            <td
+                                class={`p-4 text-center ${bundle.isPopular ? "bg-purple-50" : ""}`}
+                            >
+                                <a
+                                    href={`/bundles/${bundle.name.toLowerCase().replace(/\s+/g, "-")}`}
+                                    class={`px-4 btn ${bundle.isPopular ? "btn-primary" : "btn-secondary"}`}
+                                >
+                                    View Bundle
+                                </a>
+                            </td>
+                        ))
+                    }
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- Why Choose Each Bundle -->
+    <div class="gap-6 grid md:grid-cols-3">
+        {
+            (bundles as BundleArray).map((bundle) => (
+                <div
+                    class={`p-6 border rounded-lg ${
+                        bundle.isPopular
+                            ? "bg-purple-50 border-2 border-purple-200"
+                            : "bg-gray-50 border border-gray-200"
+                    }`}
+                >
+                    <h3
+                        class={`mb-3 font-bold text-lg ${
+                            bundle.isPopular
+                                ? "text-purple-900"
+                                : "text-gray-900"
+                        }`}
+                    >
+                        {bundle.name}
+                    </h3>
+                    <ul class="space-y-2 text-gray-700 text-sm">
+                        {bundle.features.map((feature) => (
+                            <li class="flex items-center gap-2">
+                                <span class="text-purple-600">✓</span>
+                                <span>{feature}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))
+        }
+    </div>
+</section>

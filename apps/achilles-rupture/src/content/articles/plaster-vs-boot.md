@@ -1,10 +1,12 @@
 ---
-title: "Achilles Tendon Rupture Treatment: Functional Braces vs. Plaster Casts"
-description: "Evidence-based comparison of functional braces versus plaster casts for Achilles tendon rupture treatment. The landmark UKSTAR trial shows functional braces are as effective as plaster casts with earlier mobility benefits."
-publishedAt: "21 Feb 2025"
-updatedAt: "21 Feb 2025"
+title: "Plaster Cast vs Walking Boot for Achilles Rupture: Which is Better?"
 status: "published"
-tags: ["equipment", "science", "treatment"]
+description: "Comparing traditional plaster casts with modern walking boots for Achilles rupture recovery"
+publishedAt: "Feb 1 2025"
+type: "article"
+tags: ["treatment", "equipment"]
+audience: ["patient", "clinician"]
+heroImage: '/images/plaster-vs-boot.jpeg'
 ---
 
 ## Achilles Tendon Rupture Treatment: Key Takeaways

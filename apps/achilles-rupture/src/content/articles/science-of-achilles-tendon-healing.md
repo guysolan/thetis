@@ -1,10 +1,12 @@
 ---
-title: 'Achilles Tendon Rupture: The Science of Healing & Recovery (Without Surgery)'
-description: 'Learn the science behind Achilles tendon healing after a rupture. Understand the natural biological processes, why surgery is often unnecessary, and how to optimize your recovery through each healing phase. FAQs included.'
-publishedAt: 'Jan 21 2025'
-type: 'article'
-tags: ['recovery', 'treatment', 'science']
-heroImage: '/images/science.webp'
+title: "The Science of Achilles Tendon Healing"
+status: "published"
+description: "Understanding the biological processes behind Achilles tendon repair and recovery"
+publishedAt: "Feb 5 2025"
+type: "article"
+tags: ["science", "recovery"]
+audience: ["patient", "clinician"]
+heroImage: '/images/tendon-healing.jpeg'
 ---
 
 Modern evidence increasingly supports non-surgical treatment for Achilles tendon ruptures. When managed correctly, non-operative treatment yields excellent results. This article explores the science of natural Achilles tendon healing, explaining the biological processes and providing practical insights for a successful recovery.

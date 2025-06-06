@@ -1,0 +1,770 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import EquipmentFAQs from "../components/EquipmentFAQs.astro";
+import RecoveryChallenges from "../components/equipment/RecoveryChallenges.astro";
+import RecoveryBundles from "../components/equipment/RecoveryBundles.astro";
+import { SITE_TITLE } from "../consts";
+import { equipmentList, priorityLabels } from "../content/equipment/equipment";
+
+const pageTitle =
+    "2025 Best Achilles Rupture Recovery Equipment Guide | Expert-Tested Leaderboard";
+const pageDescription =
+    "Discover the top-rated equipment for Achilles tendon rupture recovery. Expert reviews, surgeon recommendations, and real patient feedback on boots, splints, and essential accessories.";
+
+// Schema.org structured data for SEO
+const schemaData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "ItemList",
+            name: "Best Achilles Rupture Recovery Equipment 2025",
+            description: pageDescription,
+            numberOfItems: 8,
+            itemListElement: [
+                {
+                    "@type": "ListItem",
+                    position: 1,
+                    item: {
+                        "@type": "Product",
+                        name: "Thetis Medical Night Splint",
+                        description:
+                            "The only night splint specifically designed for Achilles rupture recovery",
+                        brand: {
+                            "@type": "Brand",
+                            name: "Thetis Medical",
+                        },
+                        aggregateRating: {
+                            "@type": "AggregateRating",
+                            ratingValue: "4.8",
+                            bestRating: "5",
+                            ratingCount: "127",
+                        },
+                        offers: {
+                            "@type": "Offer",
+                            price: "79.00",
+                            priceCurrency: "GBP",
+                            availability: "https://schema.org/InStock",
+                            url: "https://thetismedical.com/night-splint",
+                        },
+                        award: [
+                            "Best Overall",
+                            "Best Newcomer",
+                            "Best for Sleep",
+                        ],
+                    },
+                },
+                {
+                    "@type": "ListItem",
+                    position: 2,
+                    item: {
+                        "@type": "Product",
+                        name: "EVENup Shoe Leveler",
+                        description:
+                            "Prevents back pain and balances gait when wearing a walking boot",
+                        aggregateRating: {
+                            "@type": "AggregateRating",
+                            ratingValue: "4.6",
+                            bestRating: "5",
+                            ratingCount: "892",
+                        },
+                        offers: {
+                            "@type": "Offer",
+                            price: "25.00",
+                            priceCurrency: "GBP",
+                            availability: "https://schema.org/InStock",
+                        },
+                        award: "Best Value for Money",
+                    },
+                },
+            ],
+        },
+        {
+            "@type": "FAQPage",
+            mainEntity: [
+                {
+                    "@type": "Question",
+                    name: "Why is the Thetis Night Splint rated #1?",
+                    acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "It's the only night splint specifically designed for Achilles rupture recovery, addressing a critical gap in the market. Traditional boots are uncomfortable for sleep, leading to poor rest and potential re-injury risks. The Thetis splint has received endorsements from leading surgeons including the BOFAS Past President.",
+                    },
+                },
+                {
+                    "@type": "Question",
+                    name: "Do I need all these items?",
+                    acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "The walking boot and crutches are essential. The night splint is highly recommended for sleep comfort and safety. Other items significantly improve quality of life during recovery but aren't strictly necessary.",
+                    },
+                },
+            ],
+        },
+    ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={pageTitle} description={pageDescription} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <link
+            rel="canonical"
+            href={new URL(Astro.url.pathname, Astro.site).toString()}
+        />
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(schemaData)}
+        />
+        <meta
+            name="twitter:description"
+            content="Expert-rated equipment for Achilles rupture recovery. Compare boots, night splints, and recovery aids with patient reviews and surgeon recommendations."
+        />
+        <meta
+            name="twitter:image"
+            content="/images/thetis-night-splint-side.jpg"
+        />
+        <style>
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 500;
+                text-decoration: none;
+                border-radius: 0.375rem;
+                transition: all 0.2s;
+                cursor: pointer;
+            }
+
+            .btn-primary {
+                background-color: #1a1a1a;
+                color: white;
+                border: 1px solid #1a1a1a;
+            }
+
+            .btn-primary:hover {
+                background-color: #333;
+                border-color: #333;
+            }
+
+            .btn-secondary {
+                background-color: #e5e7eb;
+                color: #1a1a1a;
+                border: 1px solid #e5e7eb;
+            }
+
+            .btn-secondary:hover {
+                background-color: #d1d5db;
+                border-color: #d1d5db;
+            }
+
+            .btn-outline {
+                background-color: transparent;
+                color: #1a1a1a;
+                border: 1px solid #d1d5db;
+            }
+
+            .btn-outline:hover {
+                background-color: #f9fafb;
+                border-color: #9ca3af;
+            }
+
+            .btn-sm {
+                padding: 0.375rem 0.75rem;
+                font-size: 0.875rem;
+            }
+
+            .btn-default {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+
+            .btn-lg {
+                padding: 0.625rem 2rem;
+                font-size: 1rem;
+            }
+
+            .product-card {
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+                transition:
+                    transform 0.2s,
+                    box-shadow 0.2s;
+                overflow: hidden;
+            }
+
+            .product-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            }
+
+            .category-badge {
+                display: inline-block;
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 0.875rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+            .winner-card {
+                background: linear-gradient(135deg, #f5f3ff 0%, #e9e4ff 100%);
+                border: 2px solid #7c3aed;
+            }
+
+            .interactive-question {
+                background: #f3f4f6;
+                padding: 20px;
+                border-radius: 8px;
+                margin: 20px 0;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+
+            .interactive-question:hover {
+                background: #e5e7eb;
+            }
+
+            @media (max-width: 768px) {
+                .product-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+
+        <main id="main-content">
+            <section class="mx-auto px-4 py-12 max-w-6xl container">
+                <!-- Hero Section -->
+                <div class="mb-12 text-center">
+                    <div class="flex flex-wrap justify-center gap-4 mb-4">
+                        <span
+                            class="bg-purple-100 text-purple-800 category-badge"
+                            >Surgeon Approved</span
+                        >
+                        <span class="bg-green-100 text-green-800 category-badge"
+                            >Patient Tested</span
+                        >
+                        <span class="bg-blue-100 text-blue-800 category-badge"
+                            >Evidence Based</span
+                        >
+                    </div>
+                    <h1 class="mb-4 font-bold text-4xl md:text-5xl">
+                        🏆 2025 Achilles Rupture Recovery Equipment Leaderboard
+                    </h1>
+                    <p class="mb-8 text-gray-600 text-xl">
+                        Expert-tested equipment ranked by surgeons,
+                        physiotherapists, and real patients
+                    </p>
+                </div>
+
+                <!-- Trust Bar -->
+                <section class="bg-gray-50 mb-12 p-6 rounded-lg">
+                    <div
+                        class="flex flex-wrap justify-around items-center gap-6 text-center"
+                    >
+                        <div>
+                            <div class="font-bold text-purple-600 text-3xl">
+                                🏥
+                            </div>
+                            <div class="text-gray-600 text-sm">
+                                Surgeon-Reviewed
+                            </div>
+                        </div>
+                        <div>
+                            <div class="font-bold text-purple-600 text-3xl">
+                                📚
+                            </div>
+                            <div class="text-gray-600 text-sm">
+                                Evidence-Based
+                            </div>
+                        </div>
+                        <div>
+                            <div class="font-bold text-purple-600 text-3xl">
+                                💬
+                            </div>
+                            <div class="text-gray-600 text-sm">
+                                Real Patient Stories
+                            </div>
+                        </div>
+                        <div>
+                            <div class="font-bold text-purple-600 text-3xl">
+                                ✓
+                            </div>
+                            <div class="text-gray-600 text-sm">
+                                Vetted Products
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recovery Challenges Section -->
+                <RecoveryChallenges />
+
+                <!-- Overall Winner Spotlight -->
+                <section class="mb-16">
+                    <div class="mb-8 text-center">
+                        <h2 class="mb-4 font-bold text-3xl">
+                            🏆 Overall Winner
+                        </h2>
+                        <p class="text-gray-600 text-xl">
+                            The most innovative solution for Achilles rupture
+                            recovery
+                        </p>
+                    </div>
+                    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                        <div class="p-6">
+                            <div class="flex md:flex-row flex-col gap-8">
+                                <!-- Left side: Image -->
+                                <div class="md:w-1/2">
+                                    <img
+                                        src="/images/splint/night_splint_bed_top.jpg"
+                                        alt="Thetis Medical Night Splint"
+                                        class="rounded-lg w-full h-auto"
+                                    />
+                                </div>
+
+                                <!-- Right side: Content -->
+                                <div class="space-y-6 md:w-1/2">
+                                    <div>
+                                        <h3
+                                            class="mb-2 font-bold text-gray-900 text-2xl"
+                                        >
+                                            Thetis Medical Night Splint
+                                        </h3>
+                                        <p class="text-gray-600">
+                                            The only night splint specifically
+                                            designed for Achilles rupture
+                                            recovery
+                                        </p>
+                                    </div>
+
+                                    <!-- Why It Wins -->
+                                    <div class="bg-purple-50 p-4 rounded-lg">
+                                        <h4
+                                            class="mb-2 font-semibold text-purple-900"
+                                        >
+                                            Why It Wins
+                                        </h4>
+                                        <p class="text-purple-800">
+                                            The first and only night splint
+                                            specifically engineered for Achilles
+                                            rupture recovery. Patented in 2024,
+                                            this innovative solution addresses
+                                            the critical gap in recovery
+                                            equipment. Endorsed by leading
+                                            surgeons, it provides a safe way for
+                                            patients to get a good nights sleep
+                                            while their Achilles tendon heals.
+                                        </p>
+                                    </div>
+
+                                    <!-- Patient Quotes -->
+                                    <div
+                                        class="gap-4 grid grid-cols-1 md:grid-cols-2"
+                                    >
+                                        <div class="bg-gray-50 p-4 rounded-lg">
+                                            <p class="text-gray-700 italic">
+                                                "This has been a very worthwhile
+                                                purchase. It's a good example of
+                                                a small company that's
+                                                identified a problem and
+                                                provided a solution... worth
+                                                every penny."
+                                            </p>
+                                            <p
+                                                class="mt-2 text-gray-500 text-sm"
+                                            >
+                                                - Patient Review
+                                            </p>
+                                        </div>
+                                        <div class="bg-gray-50 p-4 rounded-lg">
+                                            <p class="text-gray-700 italic">
+                                                "It was fantastic being able to
+                                                remove the boot and sleep
+                                                comfortably."
+                                            </p>
+                                            <p
+                                                class="mt-2 text-gray-500 text-sm"
+                                            >
+                                                - Patient Review
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Price and CTA -->
+                                    <div
+                                        class="flex sm:flex-row flex-col gap-4"
+                                    >
+                                        <div class="flex-1">
+                                            <p
+                                                class="font-bold text-gray-900 text-2xl"
+                                            >
+                                                $90-120
+                                            </p>
+                                            <p class="text-gray-500 text-sm">
+                                                Free shipping to US/UK
+                                            </p>
+                                        </div>
+                                        <div class="flex gap-4">
+                                            <a
+                                                href="https://thetismedical.com/night-splint"
+                                                class="inline-flex justify-center items-center bg-purple-600 hover:bg-purple-700 px-6 py-3 border border-transparent rounded-md font-medium text-white text-base"
+                                            >
+                                                Buy Now
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Category Winners -->
+                <section class="mb-16">
+                    <h2 class="mb-8 font-bold text-3xl text-center">
+                        Award Categories
+                    </h2>
+                    <div
+                        class="gap-6 grid product-grid md:grid-cols-2 lg:grid-cols-3"
+                    >
+                        <!-- Best Value -->
+                        <div class="p-6 product-card">
+                            <img
+                                src="/images/even-up.jpg"
+                                alt="EVENup Shoe Leveler"
+                                class="mb-4 w-full h-40 object-contain"
+                            />
+                            <span class="mb-2 text-2xl">🚶</span>
+                            <h3 class="mb-2 font-bold text-xl">
+                                Best for Walking
+                            </h3>
+                            <div
+                                class="bg-yellow-100 mb-3 text-yellow-800 category-badge"
+                            >
+                                Winner: EVENup Shoe Leveler
+                            </div>
+                            <p class="mb-4 text-gray-600">
+                                Prevents back pain and balances gait when
+                                wearing a walking boot
+                            </p>
+                            <ul class="space-y-1 mb-4 text-sm">
+                                <li>• Prevents back/hip pain</li>
+                                <li>• Immediate comfort improvement</li>
+                                <li>• Universal fit</li>
+                            </ul>
+                            <a
+                                href="https://www.amazon.com/dp/B004HY68DO"
+                                class="btn btn-secondary btn-sm"
+                            >
+                                Buy on Amazon
+                            </a>
+                        </div>
+
+                        <!-- Most Essential -->
+                        <div class="p-6 product-card">
+                            <img
+                                src="/images/aircast-vs-vacoped.png"
+                                alt="Walking Boots"
+                                class="mb-4 w-full h-40 object-contain"
+                            />
+                            <span class="mb-2 text-2xl">🛡️</span>
+                            <h3 class="mb-2 font-bold text-xl">
+                                Most Essential Equipment
+                            </h3>
+                            <div
+                                class="bg-red-100 mb-3 text-red-800 category-badge"
+                            >
+                                Winner: Walking Boot
+                            </div>
+                            <p class="mb-4 text-gray-600">
+                                Foundation of recovery - Aircast or VACOped
+                            </p>
+                            <ul class="space-y-1 mb-4 text-sm">
+                                <li>• Clinical evidence backed</li>
+                                <li>• 68-80% tendon load reduction</li>
+                                <li>• Adjustable support</li>
+                            </ul>
+                            <a
+                                href="/articles/aircast-vs-vacoped-comparison"
+                                class="btn btn-secondary btn-sm"
+                            >
+                                Compare Options
+                            </a>
+                        </div>
+
+                        <!-- Best Comfort Upgrade -->
+                        <div class="p-6 product-card">
+                            <img
+                                src="/images/soft-crutch-handles.jpg"
+                                alt="Ergonomic Crutch Handles"
+                                class="mb-4 w-full h-40 object-contain"
+                            />
+                            <span class="mb-2 text-2xl">🧘</span>
+                            <h3 class="mb-2 font-bold text-xl">
+                                Best Comfort Upgrade
+                            </h3>
+                            <div
+                                class="bg-blue-100 mb-3 text-blue-800 category-badge"
+                            >
+                                Winner: Ergonomic Crutch Handles
+                            </div>
+                            <p class="mb-4 text-gray-600">
+                                40% reduction in forearm pain
+                            </p>
+                            <ul class="space-y-1 mb-4 text-sm">
+                                <li>• Prevents nerve damage</li>
+                                <li>• Easy installation</li>
+                                <li>• Memory foam comfort</li>
+                            </ul>
+                            <a
+                                href="https://www.amazon.com/dp/B0716XTJ8L"
+                                class="btn btn-secondary btn-sm"
+                            >
+                                Buy on Amazon
+                            </a>
+                        </div>
+
+                        <!-- Best for Stinky Feet -->
+                        <div class="p-6 product-card" id="hygiene-solutions">
+                            <img
+                                src="/images/merino-socks.webp"
+                                alt="Merino Wool Socks"
+                                class="mb-4 w-full h-40 object-contain"
+                            />
+                            <span class="mb-2 text-2xl">🧦</span>
+                            <h3 class="mb-2 font-bold text-xl">
+                                Best for Stinky Feet
+                            </h3>
+                            <div
+                                class="bg-green-100 mb-3 text-green-800 category-badge"
+                            >
+                                Winner: Merino Socks + Antifungal
+                            </div>
+                            <p class="mb-4 text-gray-600">
+                                Complete odor and moisture control
+                            </p>
+                            <ul class="space-y-1 mb-4 text-sm">
+                                <li>• Antimicrobial protection</li>
+                                <li>• Temperature regulation</li>
+                                <li>• Prevents athlete's foot</li>
+                            </ul>
+                            <a
+                                href="https://www.amazon.com/s?k=merino+wool+socks"
+                                class="btn btn-secondary btn-sm"
+                            >
+                                Browse on Amazon
+                            </a>
+                        </div>
+
+                        <!-- Best Hygiene Solution -->
+                        <div class="p-6 product-card" id="hygiene-solutions">
+                            <img
+                                src="/images/boot-bag.jpg"
+                                alt="Waterproof Boot Cover"
+                                class="mb-4 w-full h-40 object-contain"
+                            />
+                            <span class="mb-2 text-2xl">🚿</span>
+                            <h3 class="mb-2 font-bold text-xl">
+                                Best Hygiene Solution
+                            </h3>
+                            <div
+                                class="bg-teal-100 mb-3 text-teal-800 category-badge"
+                            >
+                                Winner: Waterproof Boot Cover
+                            </div>
+                            <p class="mb-4 text-gray-600">
+                                Essential for safe showering
+                            </p>
+                            <ul class="space-y-1 mb-4 text-sm">
+                                <li>• Prevents infection</li>
+                                <li>• Reusable design</li>
+                                <li>• Secure seal</li>
+                            </ul>
+                            <a
+                                href="https://www.amazon.com/dp/B0BN9XWHJT"
+                                class="btn btn-secondary btn-sm"
+                            >
+                                Buy on Amazon
+                            </a>
+                        </div>
+
+                        <!-- Best Sleep Solution -->
+                        <div class="p-6 product-card" id="sleep-solutions">
+                            <img
+                                src="/images/thetis-night-splint-side.jpg"
+                                alt="Thetis Night Splint"
+                                class="mb-4 w-full h-40 object-contain"
+                            />
+                            <span class="mb-2 text-2xl">😴</span>
+                            <h3 class="mb-2 font-bold text-xl">
+                                Best Sleep Solution
+                            </h3>
+                            <div
+                                class="bg-purple-100 mb-3 text-purple-800 category-badge"
+                            >
+                                Winner: Thetis Night Splint
+                            </div>
+                            <p class="mb-4 text-gray-600">
+                                Purpose-built for comfortable sleep
+                            </p>
+                            <blockquote
+                                class="mb-4 text-gray-700 text-sm italic"
+                            >
+                                "Finally got the restful sleep I needed" - Chad
+                            </blockquote>
+                            <a
+                                href="https://thetismedical.com/night-splint"
+                                class="btn btn-secondary btn-sm"
+                            >
+                                Buy Now
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recovery Bundles -->
+                <RecoveryBundles />
+
+                <!-- Complete Equipment List -->
+                <section class="mb-16">
+                    <h2 class="mb-8 font-bold text-3xl text-center">
+                        Complete Equipment Comparison
+                    </h2>
+                    <div class="overflow-x-auto">
+                        <table
+                            class="bg-white shadow rounded-lg w-full border-collapse"
+                        >
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="p-4 border-b text-left"
+                                        >Priority</th
+                                    >
+                                    <th class="p-4 border-b text-left"
+                                        >Product</th
+                                    >
+                                    <th class="p-4 border-b text-left"
+                                        >Category</th
+                                    >
+                                    <th class="p-4 border-b text-left"
+                                        >Price Range (USD)</th
+                                    >
+                                    <th class="p-4 border-b text-left"
+                                        >Key Benefit</th
+                                    >
+                                    <th class="p-4 border-b text-left"
+                                        >Action</th
+                                    >
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    equipmentList.map((item) => (
+                                        <tr class="hover:bg-gray-50 border-b">
+                                            <td class="p-4">
+                                                <span
+                                                    class="text-2xl"
+                                                    title={
+                                                        priorityLabels[
+                                                            item.priority
+                                                        ]?.label
+                                                    }
+                                                >
+                                                    {
+                                                        priorityLabels[
+                                                            item.priority
+                                                        ]?.emoji
+                                                    }
+                                                </span>
+                                            </td>
+                                            <td class="p-4 font-semibold">
+                                                {item.name}
+                                            </td>
+                                            <td class="p-4">{item.category}</td>
+                                            <td class="p-4">
+                                                {item.priceRange}
+                                            </td>
+                                            <td class="p-4">
+                                                {item.keyBenefit}
+                                            </td>
+                                            <td class="p-4">
+                                                <a
+                                                    href={item.actionUrl}
+                                                    class="inline-flex items-center gap-1 text-purple-600 hover:underline"
+                                                    target={
+                                                        item.isExternal
+                                                            ? "_blank"
+                                                            : undefined
+                                                    }
+                                                    rel={
+                                                        item.isExternal
+                                                            ? "noopener noreferrer"
+                                                            : undefined
+                                                    }
+                                                >
+                                                    {item.actionText}
+                                                    {item.isExternal && (
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="16"
+                                                            height="16"
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            stroke-width="2"
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="inline-block"
+                                                        >
+                                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                                            <polyline points="15 3 21 3 21 9" />
+                                                            <line
+                                                                x1="10"
+                                                                y1="14"
+                                                                x2="21"
+                                                                y2="3"
+                                                            />
+                                                        </svg>
+                                                    )}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+                        <div class="mt-4 text-gray-600 text-sm">
+                            {
+                                Object.entries(priorityLabels).map(
+                                    ([key, { emoji, label }]) => (
+                                        <p>
+                                            <span class="text-2xl">
+                                                {emoji}
+                                            </span>{" "}
+                                            {label}
+                                        </p>
+                                    ),
+                                )
+                            }
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Interactive FAQ Component -->
+                <section class="mb-16" id="faq">
+                    <EquipmentFAQs />
+                </section>
+            </section>
+        </main>
+        <Footer />
+    </body>
+</html>

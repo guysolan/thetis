@@ -3,13 +3,15 @@ import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import ContentListing from "../../components/ContentListing.astro";
+import EquipmentBanner from "../../components/EquipmentBanner.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
 
-const guides = await getCollection("guide");
-const guidePosts = guides
-    .filter((post) => post.data.status !== "draft")
-    .map((g) => ({ ...g, type: "guide" }))
+const articles = await getCollection("article");
+const articlePosts = articles
+    .filter((post) => post.data.audience.includes("clinician"))
+    .filter((post) => post.data.status === "published")
+    .map((a) => ({ ...a, type: "article" }))
     .sort(
         (a, b) =>
             new Date(b.data.publishedAt).getTime() -
@@ -21,11 +23,11 @@ const guidePosts = guides
 <html lang="en">
     <head>
         <BaseHead
-            title={`Guides - ${SITE_TITLE}`}
+            title={`Articles - ${SITE_TITLE}`}
             description={SITE_DESCRIPTION}
         />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={`Guides - ${SITE_TITLE}`} />
+        <meta property="og:title" content={`Articles - ${SITE_TITLE}`} />
         <meta property="og:description" content={SITE_DESCRIPTION} />
         <link
             rel="canonical"
@@ -33,12 +35,13 @@ const guidePosts = guides
         />
     </head>
     <body>
+        <EquipmentBanner />
         <Header />
         <main id="main-content">
             <ContentListing
-                posts={guidePosts}
-                title="📚 Achilles Rupture Recovery Guides"
-                excludeTags={["science"]}
+                posts={articlePosts}
+                title="Achilles Rupture Articles for Clinicians"
+                excludeTags={["draft"]}
             />
         </main>
         <Footer />

@@ -1,11 +1,12 @@
 ---
-title: 'Achilles Tendon Ruptures and Blood Clot Risk'
-status: 'published'
-description: 'Understanding the increased risk of venous thromboembolism (VTE) after an Achilles tendon rupture, based on the UK-FATE audit.'
-publishedAt: 'Feb 12 2025'
-type: 'article'
-tags: ['science','recovery','treatment']
-heroImage: '/images/blood.webp'
+title: "Understanding Venous Thromboembolism Risk After Achilles Rupture"
+status: "draft"
+description: "Important information about blood clot prevention during Achilles rupture recovery"
+publishedAt: "Feb 20 2025"
+type: "article"
+tags: ["recovery"]
+audience: ["patient", "clinician"]
+heroImage: '/images/blood-clot.jpeg'
 ---
 
 Achilles tendon ruptures (ATRs) are a common injury, especially among active individuals. While recovery often focuses on regaining strength and mobility, a less-discussed but serious risk is the development of blood clots, known medically as venous thromboembolism (VTE). This article summarizes the findings of a large UK study (the UK-FATE audit) that investigated the risk of VTE after an ATR.

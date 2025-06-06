@@ -1,9 +1,12 @@
 ---
 title: "Achilles Recovery Tracker App: A Comprehensive Review"
+status: "published"
 description: "An in-depth look at a specialized app designed to help patients track and manage their Achilles tendon rupture recovery"
 publishedAt: '21 Jan 2025'
-type: 'article'
-tags: ['recovery']
+type: "article"
+tags: ["recovery"]
+audience: ["patient"]
+heroImage: '/images/app-review.jpeg'
 ---
 
 The Achilles Recovery Tracker app has emerged as a specialized tool in rehabilitation technology, designed specifically for patients recovering from Achilles tendon injuries. This review examines its key features and potential benefits for recovery management.

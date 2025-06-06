@@ -1,0 +1,60 @@
+---
+const challenges = [
+    {
+        id: "sleep",
+        icon: "😴",
+        title: "Sleep & Rest",
+        description:
+            "Struggling to get comfortable at night or maintain proper foot position while sleeping?",
+    },
+    {
+        id: "mobility",
+        icon: "🚶",
+        title: "Mobility & Walking",
+        description:
+            "Finding it difficult to move around safely or experiencing pain while walking?",
+    },
+    {
+        id: "hygiene",
+        icon: "🚿",
+        title: "Hygiene & Comfort",
+        description:
+            "Worried about keeping your boot clean or staying comfortable throughout the day?",
+    },
+    {
+        id: "pain",
+        icon: "😣",
+        title: "Pain & Discomfort",
+        description:
+            "Experiencing swelling, pain, or discomfort that's affecting your daily activities?",
+    },
+];
+---
+
+<section class="mb-16">
+    <div class="mb-8 text-center">
+        <h2 class="mb-4 font-bold text-3xl">Common Recovery Challenges</h2>
+        <p class="text-gray-600 text-xl">
+            We've got you covered with expert-tested solutions for every stage
+            of recovery
+        </p>
+    </div>
+
+    <div class="gap-6 grid md:grid-cols-2">
+        {
+            challenges.map((challenge) => (
+                <div class="bg-white shadow-sm p-6 border border-gray-200 rounded-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">{challenge.icon}</div>
+                        <div>
+                            <h3 class="mb-2 font-semibold text-xl">
+                                {challenge.title}
+                            </h3>
+                            <p class="text-gray-600">{challenge.description}</p>
+                        </div>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</section>

@@ -1,10 +1,12 @@
 ---
-title: '5 Small Purchases for a Comfortable Recovery from Achilles Rupture'
-description: 'Essential accessories and items that can significantly improve your comfort during Achilles tendon rupture recovery'
-publishedAt: '21 Jan 2025'
-type: 'article'
-tags: ['equipment','recovery','comfort']
+title: "Five Small Purchases to Make Achilles Rupture Recovery Easier"
+description: "Essential items that can significantly improve your comfort and recovery experience after an Achilles tendon rupture"
+publishedAt: "Jan 15 2025"
+type: "article"
+tags: ["equipment", "recovery", "comfort"]
+audience: ["patient"]
 heroImage: '/images/crutches.webp'
+status: "published"
 ---
 
 When recovering from an Achilles tendon rupture, you'll need essential medical equipment like a walking boot, crutches, and night splint. However, these five affordable purchases can significantly improve your comfort during the recovery process:

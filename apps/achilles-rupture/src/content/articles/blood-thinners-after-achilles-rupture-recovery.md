@@ -1,11 +1,12 @@
 ---
-title: Blood thinners after Achilles tendon rupture recovery
-status: 'published'
-description: 'Blood thinners after Achilles tendon rupture recovery'
-publishedAt: 'Jan 21 2025'
-type: 'article'
-tags: ['recovery','treatment']
-heroImage: '/images/blood.webp'
+title: "Blood Thinners After Achilles Rupture Recovery"
+status: "published"
+description: "Understanding the importance of blood thinners during Achilles tendon rupture recovery and how they help prevent complications"
+publishedAt: "Jan 21 2025"
+type: "article"
+tags: ["recovery", "treatment"]
+audience: ["patient", "clinician"]
+heroImage: "/images/blood.webp"
 ---
 
 **Key Message:** you should consider blood thinners after Achilles tendon rupture, and discuss with your medical team how long to take them for.
@@ -48,7 +49,7 @@ Another way to help reduce the chances of thrombosis problems is to use blood th
 
 !<https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb>
 
-Six weeks of injections is a lot to put up with. The injections sting and they bruise the injected area. Thankfully there are tablets that do the same job. The problem is that these are not officially licensed for use after Achilles tendon rupture. Your hospital would be required to have special permission from pharmacy to “bend the rules” – even though using the pills instead of injections is no more costly and is only common sense.
+Six weeks of injections is a lot to put up with. The injections sting and they bruise the injected area. Thankfully there are tablets that do the same job. The problem is that these are not officially licensed for use after Achilles tendon rupture. Your hospital would be required to have special permission from pharmacy to "bend the rules" – even though using the pills instead of injections is no more costly and is only common sense.
 
 One hospital that switched from injections to tablets saw the chances of thrombosis fall from 6% to 0% in Achilles tendon rupture patients (<https://www.bofas.org.uk/clinician/news-events/news-events-reader/dvt-and-achilles-tendon-rupture-a-better-pill-to-swallow>)
 
@@ -64,17 +65,17 @@ In at least one hospital, routinely using tablets instead of injections for prev
 
 1) Incidence of Deep Vein Thrombosis and Pulmonary Embolism after Achilles Tendon Rupture
 
-[Arush Patel](https://pubmed.ncbi.nlm.nih.gov/?term=Patel%20A%5BAuthor%5D), MD, [Brent Ogawa](https://pubmed.ncbi.nlm.nih.gov/?term=Ogawa%20B%5BAuthor%5D), MD, [Timothy Charlton](https://pubmed.ncbi.nlm.nih.gov/?term=Charlton%20T%5BAuthor%5D), MD, and [David Thordarson](https://pubmed.ncbi.nlm.nih.gov/?term=Thordarson%20D%5BAuthor%5D), MD
+[Arush Patel](https://pubmed.ncbi.nlm.nih.gov/?term=Patel%20A%5BAuthor%5D), MD, [Brent Ogawa](https://pubmed.ncbi.nlm.nih.gov/?term=Ogawa%20B%5BAuthor%5D), MD, [Timothy Charlton](https://pubmed.ncbi.nlm.nih.gov/?term=Charlton%20T%5BAuthor%5D), MD, and [David Thordarson](https://pubmed.ncbi.nlm.nih.gov/?term=Thordarson%20D%5BAuthor%5D), MD
 
-[Clin Orthop Relat Res.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3237970/) 2012 Jan; 470(1): 270–274.
+[Clin Orthop Relat Res.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3237970/) 2012 Jan; 470(1): 270–274.
 
 **Comment:** DVT is common if you look for it. How many small clots are dangerous is unknown.
 
 2) Risk of Deep Vein Thrombosis After Acute Achilles Tendon Rupture: A Secondary Analysis of a Randomized Controlled Trial Comparing Early Controlled Motion of the Ankle Versus Immobilization
 
-[Kristoffer Weisskirchner Barfod](https://pubmed.ncbi.nlm.nih.gov/?term=Barfod%20KW%5BAuthor%5D), MD, PhD,*† [Emil Graakjær Nielsen](https://pubmed.ncbi.nlm.nih.gov/?term=Nielsen%20EG%5BAuthor%5D), MD,‡ [Beth Hærsted Olsen](https://pubmed.ncbi.nlm.nih.gov/?term=Olsen%20BH%5BAuthor%5D), MD,‡ [Pablo Gustavo Vinicoff](https://pubmed.ncbi.nlm.nih.gov/?term=Vinicoff%20PG%5BAuthor%5D), MD,‡ [Anders Troelsen](https://pubmed.ncbi.nlm.nih.gov/?term=Troelsen%20A%5BAuthor%5D), MD, PhD, DMSc,§ and [Per Holmich](https://pubmed.ncbi.nlm.nih.gov/?term=Holmich%20P%5BAuthor%5D), MD, DMSc†
+[Kristoffer Weisskirchner Barfod](https://pubmed.ncbi.nlm.nih.gov/?term=Barfod%20KW%5BAuthor%5D), MD, PhD,*† [Emil Graakjær Nielsen](https://pubmed.ncbi.nlm.nih.gov/?term=Nielsen%20EG%5BAuthor%5D), MD,‡ [Beth Hærsted Olsen](https://pubmed.ncbi.nlm.nih.gov/?term=Olsen%20BH%5BAuthor%5D), MD,‡ [Pablo Gustavo Vinicoff](https://pubmed.ncbi.nlm.nih.gov/?term=Vinicoff%20PG%5BAuthor%5D), MD,‡ [Anders Troelsen](https://pubmed.ncbi.nlm.nih.gov/?term=Troelsen%20A%5BAuthor%5D), MD, PhD, DMSc,§ and [Per Holmich](https://pubmed.ncbi.nlm.nih.gov/?term=Holmich%20P%5BAuthor%5D), MD, DMSc†
 
-[Orthop J Sports Med.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7222258/) 2020 Apr; 8(4): 2325967120915909.
+[Orthop J Sports Med.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7222258/) 2020 Apr; 8(4): 2325967120915909.
 
 **Comment:** Despite the notion that early muscle activity would bring a better recovery, this paper showed no benefit from Early Controlled Motion
 
@@ -84,6 +85,6 @@ In at least one hospital, routinely using tablets instead of injections for prev
 
 [Simon Svedman](https://link.springer.com/article/10.1007/s00167-020-05945-2#auth-Simon-Svedman), [Gunnar Edman](https://link.springer.com/article/10.1007/s00167-020-05945-2#auth-Gunnar-Edman) & [Paul W. Ackermann](https://link.springer.com/article/10.1007/s00167-020-05945-2#auth-Paul_W_-Ackermann)
 
-[*Knee Surgery, Sports Traumatology, Arthroscopy*](https://link.springer.com/journal/167) **volume 28**, pages3309–3317 (2020)
+[*Knee Surgery, Sports Traumatology, Arthroscopy*](https://link.springer.com/journal/167) **volume 28**, pages3309–3317 (2020)
 
 **Comment:** this study shows that patients with a DVT are more likely to have a poorer outcome from their Achilles rupture.

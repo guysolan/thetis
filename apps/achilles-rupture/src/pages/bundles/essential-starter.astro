@@ -1,0 +1,168 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { equipmentList, bundles } from "../../content/equipment/equipment";
+
+const bundle = bundles.find((b) => b.name === "Essential Starter")!;
+const bundleItems = equipmentList.filter((item) =>
+    bundle.features.includes(item.name),
+);
+
+const totalPrice = bundle.priceRange;
+---
+
+<Layout title="Essential Starter Bundle - Achilles Recovery Equipment">
+    <main class="mx-auto px-4 py-8 max-w-6xl container">
+        <!-- Breadcrumb -->
+        <nav class="mb-6 text-sm">
+            <a
+                href="/recovery-equipment-guide"
+                class="text-purple-600 hover:underline">Equipment Guide</a
+            >
+            <span class="mx-2">/</span>
+            <span class="text-gray-600">Essential Starter Bundle</span>
+        </nav>
+
+        <h1 class="mb-8 font-bold text-4xl">Essential Starter Bundle</h1>
+
+        <div class="gap-8 grid lg:grid-cols-3">
+            <!-- Products List -->
+            <div class="space-y-6 lg:col-span-2">
+                {
+                    bundleItems.map((item) => (
+                        <div class="bg-white shadow p-6 border border-gray-200 rounded-lg">
+                            <div class="flex gap-4">
+                                <img
+                                    src={item.imagePath}
+                                    alt={item.name}
+                                    class="w-24 h-24 object-contain"
+                                />
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xl">
+                                            {item.priority === "essential"
+                                                ? "🥇"
+                                                : "🥈"}
+                                        </span>
+                                        <h3 class="font-semibold text-lg">
+                                            {item.name}
+                                        </h3>
+                                    </div>
+                                    <p class="mb-3 text-gray-600 text-sm">
+                                        {item.keyBenefit}
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold">
+                                            {item.priceRange}
+                                        </span>
+                                        <div class="flex gap-2">
+                                            {item.name ===
+                                                "Thetis Night Splint" && (
+                                                <a
+                                                    href="https://www.amazon.com/dp/B09N5KH4F3"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="bg-gray-600 hover:bg-gray-700 px-3 py-1 rounded text-white text-sm transition-colors"
+                                                >
+                                                    Amazon
+                                                </a>
+                                            )}
+                                            <a
+                                                href={item.actionUrl}
+                                                target={
+                                                    item.isExternal
+                                                        ? "_blank"
+                                                        : undefined
+                                                }
+                                                rel={
+                                                    item.isExternal
+                                                        ? "noopener noreferrer"
+                                                        : undefined
+                                                }
+                                                class="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded text-white text-sm transition-colors"
+                                            >
+                                                {item.actionText}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Bundle Summary -->
+            <div class="lg:col-span-1">
+                <div class="top-4 sticky bg-gray-50 p-6 rounded-lg">
+                    <h2 class="mb-4 font-bold text-2xl">Bundle Summary</h2>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span>{bundle.features.length} Essential Items</span
+                            >
+                            <span class="font-semibold">{totalPrice}</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-6 pt-4 border-t">
+                        <h3 class="mb-3 font-semibold">What You Get:</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span
+                                    >Clinical-grade walking boot for proper
+                                    support</span
+                                >
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Comfortable night-time protection</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Prevention of secondary injuries</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Safe showering solution</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-100 mb-6 p-4 rounded-lg">
+                        <p class="text-purple-900 text-sm">
+                            <strong>Pro tip:</strong> The night splint is the #1
+                            rated recovery aid by patients. Don't skip this essential
+                            comfort upgrade.
+                        </p>
+                    </div>
+
+                    <a
+                        href="/recovery-equipment-guide"
+                        class="text-purple-600 text-sm hover:underline"
+                    >
+                        ← Back to Equipment Guide
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patient Quote -->
+        <div class="bg-purple-50 mt-12 p-6 rounded-lg">
+            <blockquote
+                class="mb-6 pl-4 border-purple-600 border-l-4 text-gray-700 text-sm italic"
+            >
+                "The Thetis Night Splint is a game-changer for sleep quality
+                during recovery" - Sarah
+            </blockquote>
+            <p class="mt-2 text-gray-600 text-sm">- Chad, verified patient</p>
+            <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://thetismedical.com/splint"
+                class="bg-purple-600 px-4 py-2 rounded-md text-white hover:text-white text-sm hover:underline"
+            >
+                Buy Achilles Rupture Splint
+            </a>
+        </div>
+    </main>
+</Layout>

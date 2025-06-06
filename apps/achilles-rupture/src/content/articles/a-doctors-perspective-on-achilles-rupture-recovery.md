@@ -1,11 +1,12 @@
 ---
 title: "A doctor's perspective on Achilles rupture recovery"
-status: 'draft'
+status: "draft"
 description: "A medical professional's insights into Achilles tendon rupture recovery process"
-publishedAt: 'Mar 20 2025'
-type: 'article'
-tags: ['recovery', 'treatment']
-heroImage: '/images/surgeons.jpeg'
+publishedAt: "Mar 20 2025"
+type: "article"
+tags: ["recovery", "treatment"]
+audience: ["clinician"]
+heroImage: "/images/surgeons.jpeg"
 ---
 
 Patient Compliance
