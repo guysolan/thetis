@@ -1,229 +1,201 @@
 ---
-import BaseHead from "../../components/BaseHead.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
-import { SITE_TITLE } from "../../consts";
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
 
-const pageTitle = "Essential Starter Bundle - Achilles Recovery Equipment";
-const pageDescription = "Everything you need for the first 6 weeks of Achilles rupture recovery. Walking boot, night splint, and waterproof cover.";
+const bundleItems = [
+    {
+        name: 'Walking Boot',
+        isChoice: true,
+        options: [
+            {
+                name: 'Aircast + Heel Wedges',
+                price: '$150-180',
+                image: '/images/aircast-boot.jpg',
+                description: 'Popular choice, requires separate wedges',
+                buyLink: 'https://www.amazon.com/dp/B00296Z9L6'
+            },
+            {
+                name: 'VACOped Boot',
+                price: '$250-300',
+                image: '/images/vacoped-boot.jpg',
+                description: 'All-in-one with built-in wedge system',
+                buyLink: 'https://www.amazon.com/dp/B07DHLPVLF'
+            }
+        ]
+    },
+    {
+        name: 'Thetis Medical Night Splint',
+        price: '$90-120',
+        image: '/images/thetis-night-splint-side.jpg',
+        description: 'Only Achilles-specific night splint. Purpose-built for comfortable sleep.',
+        buyLink: 'https://thetismedical.com/night-splint',
+        amazonLink: 'https://www.amazon.com/dp/B09N5KH4F3'
+    },
+    {
+        name: 'EVENup Shoe Leveler',
+        price: '$35-40',
+        image: '/images/even-up.jpg',
+        description: 'Prevents back pain and hip issues from uneven gait',
+        buyLink: 'https://www.amazon.com/dp/B004HY68DO'
+    },
+    {
+        name: 'Waterproof Boot Cover',
+        price: '$25-45',
+        image: '/images/boot-bag.jpg',
+        description: 'Essential for safe showering and preventing infection',
+        buyLink: 'https://www.amazon.com/dp/B0BN9XWHJT'
+    }
+];
+
+const totalPrice = '$300-400';
 ---
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <BaseHead
-            title={pageTitle}
-            description={pageDescription}
-        />
-        <style>
-            .bundle-item {
-                background: white;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                padding: 1.5rem;
-                display: flex;
-                gap: 1.5rem;
-                align-items: center;
-                transition: all 0.2s;
-            }
-            
-            .bundle-item:hover {
-                box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            }
-            
-            .item-image {
-                width: 120px;
-                height: 120px;
-                object-fit: contain;
-                border-radius: 8px;
-                background: #f9fafb;
-                padding: 0.5rem;
-            }
-            
-            .price-tag {
-                font-size: 1.5rem;
-                font-weight: bold;
-                color: #059669;
-            }
-            
-            .bundle-summary {
-                background: #f3f4f6;
-                border-radius: 12px;
-                padding: 2rem;
-                position: sticky;
-                top: 2rem;
-            }
-        </style>
-    </head>
-    <body>
-        <Header />
+<Layout title="Essential Starter Bundle - Achilles Recovery Equipment">
+    <main class="mx-auto px-4 py-8 max-w-6xl container">
+        <!-- Breadcrumb -->
+        <nav class="mb-6 text-sm">
+            <a href="/recovery-equipment-guide" class="text-purple-600 hover:underline">Equipment Guide</a>
+            <span class="mx-2">/</span>
+            <span class="text-gray-600">Essential Starter Bundle</span>
+        </nav>
 
-        <main id="main-content">
-            <section class="mx-auto px-4 py-12 max-w-6xl container">
-                <!-- Breadcrumb -->
-                <nav class="mb-8 text-sm">
-                    <a href="/" class="text-gray-600 hover:text-gray-900">Home</a>
-                    <span class="mx-2 text-gray-400">/</span>
-                    <a href="/recovery-equipment-guide" class="text-gray-600 hover:text-gray-900">Equipment Guide</a>
-                    <span class="mx-2 text-gray-400">/</span>
-                    <span class="text-gray-900">Essential Bundle</span>
-                </nav>
-
-                <h1 class="mb-4 font-bold text-4xl">Essential Starter Bundle</h1>
-                <p class="mb-8 text-gray-600 text-xl">
-                    Everything you need for the first 6 weeks of recovery. Surgeon-recommended essentials to protect your healing Achilles tendon.
-                </p>
-
-                <div class="gap-8 grid lg:grid-cols-3">
-                    <!-- Bundle Items -->
-                    <div class="space-y-6 lg:col-span-2">
-                        
-                        <!-- Walking Boot -->
-                        <div class="bundle-item">
-                            <img src="/images/aircast.jpg" alt="Walking Boot" class="item-image" />
-                            <div class="flex-1">
-                                <h3 class="mb-2 font-bold text-xl">Walking Boot (Aircast or VACOped)</h3>
-                                <p class="mb-3 text-gray-600">
-                                    The foundation of your recovery. Protects your tendon and allows early weight-bearing.
-                                </p>
-                                <ul class="space-y-1 text-gray-600 text-sm">
-                                    <li>• 68-80% tendon load reduction</li>
-                                    <li>• Adjustable ankle positioning</li>
-                                    <li>• Clinically proven outcomes</li>
-                                </ul>
+        <h1 class="mb-8 font-bold text-4xl">Essential Starter Bundle</h1>
+        
+        <div class="gap-8 grid lg:grid-cols-3">
+            <!-- Products List -->
+            <div class="space-y-6 lg:col-span-2">
+                {bundleItems.map((item) => (
+                    item.isChoice ? (
+                        <div class="bg-white shadow p-6 border border-gray-200 rounded-lg">
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="text-2xl">🥇</span>
+                                <h3 class="font-bold text-xl">Walking Boot (Choose One)</h3>
                             </div>
-                            <div class="text-right">
-                                <p class="price-tag">£100-200</p>
-                                <span class="text-2xl" title="Essential">🥇 Essential</span>
+                            <div class="gap-4 grid md:grid-cols-2">
+                                {item.options.map((option) => (
+                                    <div class="p-4 border border-gray-200 rounded-lg">
+                                        <img 
+                                            src={option.image} 
+                                            alt={option.name}
+                                            class="mb-3 w-full h-32 object-contain"
+                                        />
+                                        <h4 class="mb-1 font-semibold">{option.name}</h4>
+                                        <p class="mb-2 text-gray-600 text-sm">{option.description}</p>
+                                        <div class="flex justify-between items-center mb-3">
+                                            <span class="font-bold text-lg">{option.price}</span>
+                                        </div>
+                                        <a 
+                                            href={option.buyLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="block bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded w-full text-white text-sm text-center transition-colors"
+                                        >
+                                            Buy This Option
+                                        </a>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-
-                        <!-- Night Splint -->
-                        <div class="bundle-item">
-                            <img src="/images/thetis-night-splint-side.jpg" alt="Thetis Night Splint" class="item-image" />
-                            <div class="flex-1">
-                                <h3 class="mb-2 font-bold text-xl">Thetis Medical Night Splint</h3>
-                                <p class="mb-3 text-gray-600">
-                                    The only Achilles-specific night splint. Sleep comfortably while protecting your healing tendon.
-                                </p>
-                                <blockquote class="pl-3 border-purple-600 border-l-4 text-gray-700 text-sm italic">
-                                    "This worked great and kept me from having to wear my big clunky walking boot to bed!" - Brandon
-                                </blockquote>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-gray-600 text-lg">Premium Quality</p>
-                                <span class="text-2xl" title="Essential">🥇 Essential</span>
-                                <div class="mt-2">
-                                    <a href="https://thetismedical.com/night-splint" 
-                                       class="text-purple-600 text-sm hover:underline">
-                                        Learn More →
-                                    </a>
+                    ) : (
+                        <div class="bg-white shadow p-6 border border-gray-200 rounded-lg">
+                            <div class="flex gap-4">
+                                <img 
+                                    src={item.image} 
+                                    alt={item.name}
+                                    class="w-24 h-24 object-contain"
+                                />
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xl">
+                                            {item.name.includes('Night Splint') ? '🥇' : '🥈'}
+                                        </span>
+                                        <h3 class="font-semibold text-lg">{item.name}</h3>
+                                    </div>
+                                    <p class="mb-3 text-gray-600 text-sm">{item.description}</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold">{item.price}</span>
+                                        <div class="flex gap-2">
+                                            {item.amazonLink && (
+                                                <a 
+                                                    href={item.amazonLink}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="bg-gray-600 hover:bg-gray-700 px-3 py-1 rounded text-white text-sm transition-colors"
+                                                >
+                                                    Amazon
+                                                </a>
+                                            )}
+                                            <a 
+                                                href={item.buyLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded text-white text-sm transition-colors"
+                                            >
+                                                {item.name.includes('Night Splint') ? 'Buy Direct' : 'Buy Now'}
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    )
+                ))}
+            </div>
 
-                        <!-- Waterproof Cover -->
-                        <div class="bundle-item">
-                            <img src="/images/boot-bag.jpg" alt="Waterproof Boot Cover" class="item-image" />
-                            <div class="flex-1">
-                                <h3 class="mb-2 font-bold text-xl">Waterproof Boot Cover</h3>
-                                <p class="mb-3 text-gray-600">
-                                    Essential for safe showering. Prevents infection and keeps your boot dry.
-                                </p>
-                                <ul class="space-y-1 text-gray-600 text-sm">
-                                    <li>• Reusable design</li>
-                                    <li>• Secure seal prevents leaks</li>
-                                    <li>• Easy to use</li>
-                                </ul>
-                            </div>
-                            <div class="text-right">
-                                <p class="price-tag">£20-35</p>
-                                <span class="text-2xl" title="Highly Recommended">🥈 Essential</span>
-                            </div>
+            <!-- Bundle Summary -->
+            <div class="lg:col-span-1">
+                <div class="top-4 sticky bg-gray-50 p-6 rounded-lg">
+                    <h2 class="mb-4 font-bold text-2xl">Bundle Summary</h2>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span>4 Essential Items</span>
+                            <span class="font-semibold">{totalPrice}</span>
                         </div>
                     </div>
-
-                    <!-- Bundle Summary -->
-                    <div class="lg:col-span-1">
-                        <div class="bundle-summary">
-                            <h2 class="mb-4 font-bold text-2xl">Bundle Summary</h2>
-                            
-                            <div class="space-y-3 mb-6">
-                                <div class="flex justify-between">
-                                    <span>Walking Boot</span>
-                                    <span>£100-200</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Night Splint</span>
-                                    <span>Premium</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Waterproof Cover</span>
-                                    <span>£20-35</span>
-                                </div>
-                                <hr />
-                                <div class="flex justify-between font-bold text-lg">
-                                    <span>Total Value</span>
-                                    <span class="text-green-600">£200-270</span>
-                                </div>
-                            </div>
-
-                            <div class="space-y-4">
-                                <h3 class="mb-2 font-semibold">Why This Bundle?</h3>
-                                <ul class="space-y-2 text-sm">
-                                    <li class="flex items-start">
-                                        <span class="mr-2 text-green-500">✓</span>
-                                        <span>Covers all essential needs for first 6 weeks</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="mr-2 text-green-500">✓</span>
-                                        <span>Surgeon-recommended combination</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="mr-2 text-green-500">✓</span>
-                                        <span>Prevents common complications</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="mr-2 text-green-500">✓</span>
-                                        <span>Enables better sleep and hygiene</span>
-                                    </li>
-                                </ul>
-
-                                <div class="space-y-3 pt-6">
-                                    <a href="https://thetismedical.com/night-splint" 
-                                       class="block bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg w-full font-semibold text-white text-center transition-colors">
-                                        Start with Night Splint →
-                                    </a>
-                                    <a href="/recovery-equipment-guide" 
-                                       class="block bg-gray-200 hover:bg-gray-300 px-6 py-3 rounded-lg w-full font-semibold text-gray-800 text-center transition-colors">
-                                        Compare All Bundles
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                    
+                    <div class="mb-6 pt-4 border-t">
+                        <h3 class="mb-3 font-semibold">What You Get:</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Clinical-grade walking boot for proper support</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Comfortable night-time protection</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Prevention of secondary injuries</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Safe showering solution</span>
+                            </li>
+                        </ul>
                     </div>
+
+                    <div class="bg-purple-100 mb-6 p-4 rounded-lg">
+                        <p class="text-purple-900 text-sm">
+                            <strong>Pro tip:</strong> The night splint is the #1 rated recovery aid by patients. 
+                            Don't skip this essential comfort upgrade.
+                        </p>
+                    </div>
+
+                    <a href="/recovery-equipment-guide" class="text-purple-600 text-sm hover:underline">
+                        ← Back to Equipment Guide
+                    </a>
                 </div>
+            </div>
+        </div>
 
-                <!-- Patient Stories -->
-                <section class="mt-16">
-                    <h2 class="mb-8 font-bold text-3xl">What Patients Say</h2>
-                    <div class="gap-6 grid md:grid-cols-2">
-                        <div class="bg-purple-50 p-6 rounded-lg">
-                            <p class="mb-4 italic">
-                                "The splint arrived a day or two later and proved its worth that night, and for the following months as a viable sleeping splint."
-                            </p>
-                            <p class="font-semibold">- Faustine, USA</p>
-                        </div>
-                        <div class="bg-purple-50 p-6 rounded-lg">
-                            <p class="mb-4 italic">
-                                "It was extremely difficult getting any sleep whilst wearing a heavy boot. The splint made a massive difference to getting a good nights rest."
-                            </p>
-                            <p class="font-semibold">- DSM, USA</p>
-                        </div>
-                    </div>
-                </section>
-            </section>
-        </main>
-        <Footer />
-    </body>
-</html>
+        <!-- Patient Quote -->
+        <div class="bg-purple-50 mt-12 p-6 rounded-lg">
+            <blockquote class="text-gray-700 text-lg italic">
+                "Finally got the restful sleep I needed. The cast and heavy dirty boot made sleep tough. If you're recovering from an achilles rupture buy this immediately."
+            </blockquote>
+            <p class="mt-2 text-gray-600 text-sm">- Chad, verified patient</p>
+        </div>
+    </main>
+</Layout>

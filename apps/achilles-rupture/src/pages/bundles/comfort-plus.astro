@@ -1,304 +1,235 @@
 ---
-import BaseHead from "../../components/BaseHead.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
-import { SITE_TITLE } from "../../consts";
+import Layout from '../../layouts/Layout.astro';
 
-const pageTitle = "Comfort Plus Bundle - Achilles Recovery Equipment";
-const pageDescription = "Maximize comfort throughout your Achilles rupture recovery. Includes all essentials plus EVENup leveler, crutch handles, and elevation wedge.";
+const bundleItems = [
+    {
+        name: 'Walking Boot',
+        isChoice: true,
+        options: [
+            {
+                name: 'Aircast + Heel Wedges',
+                price: '$150-180',
+                image: '/images/aircast-boot.jpg',
+                description: 'Popular choice, requires separate wedges',
+                buyLink: 'https://www.amazon.com/dp/B00296Z9L6'
+            },
+            {
+                name: 'VACOped Boot',
+                price: '$250-300',
+                image: '/images/vacoped-boot.jpg',
+                description: 'All-in-one with built-in wedge system',
+                buyLink: 'https://www.amazon.com/dp/B07DHLPVLF'
+            }
+        ]
+    },
+    {
+        name: 'Thetis Medical Night Splint',
+        price: '$90-120',
+        image: '/images/thetis-night-splint-side.jpg',
+        description: 'Only Achilles-specific night splint. Purpose-built for comfortable sleep.',
+        buyLink: 'https://thetismedical.com/night-splint',
+        amazonLink: 'https://www.amazon.com/dp/B09N5KH4F3'
+    },
+    {
+        name: 'EVENup Shoe Leveler',
+        price: '$35-40',
+        image: '/images/even-up.jpg',
+        description: 'Prevents back pain and hip issues from uneven gait',
+        buyLink: 'https://www.amazon.com/dp/B004HY68DO'
+    },
+    {
+        name: 'Waterproof Boot Cover',
+        price: '$25-45',
+        image: '/images/boot-bag.jpg',
+        description: 'Essential for safe showering and preventing infection',
+        buyLink: 'https://www.amazon.com/dp/B0BN9XWHJT'
+    },
+    {
+        name: 'Ergonomic Crutch Handles',
+        price: '$20-35',
+        image: '/images/soft-crutch-handles.jpg',
+        description: '40% reduction in forearm pain, memory foam comfort',
+        buyLink: 'https://www.amazon.com/dp/B0716XTJ8L'
+    },
+    {
+        name: 'Elevation Wedge',
+        price: '$45-75',
+        image: '/images/elevation-wedge.jpg',
+        description: 'Medical-grade elevation to reduce swelling',
+        buyLink: 'https://www.amazon.com/dp/B01FTYB0O6'
+    }
+];
+
+const totalPrice = '$400-550';
 ---
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <BaseHead
-            title={pageTitle}
-            description={pageDescription}
-        />
-        <style>
-            .bundle-item {
-                background: white;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                padding: 1.5rem;
-                display: flex;
-                gap: 1.5rem;
-                align-items: center;
-                transition: all 0.2s;
-            }
-            
-            .bundle-item:hover {
-                box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            }
-            
-            .item-image {
-                width: 120px;
-                height: 120px;
-                object-fit: contain;
-                border-radius: 8px;
-                background: #f9fafb;
-                padding: 0.5rem;
-            }
-            
-            .price-tag {
-                font-size: 1.5rem;
-                font-weight: bold;
-                color: #059669;
-            }
-            
-            .bundle-summary {
-                background: linear-gradient(to bottom, #f5f3ff, #f3f4f6);
-                border: 2px solid #7c3aed;
-                border-radius: 12px;
-                padding: 2rem;
-                position: sticky;
-                top: 2rem;
-            }
-            
-            .popular-badge {
-                background: #7c3aed;
-                color: white;
-                padding: 0.5rem 1rem;
-                border-radius: 20px;
-                font-weight: bold;
-                text-align: center;
-                margin-bottom: 1rem;
-            }
-        </style>
-    </head>
-    <body>
-        <Header />
+<Layout title="Comfort Plus Bundle - Achilles Recovery Equipment">
+    <main class="mx-auto px-4 py-8 max-w-6xl container">
+        <!-- Breadcrumb -->
+        <nav class="mb-6 text-sm">
+            <a href="/recovery-equipment-guide" class="text-purple-600 hover:underline">Equipment Guide</a>
+            <span class="mx-2">/</span>
+            <span class="text-gray-600">Comfort Plus Bundle</span>
+        </nav>
 
-        <main id="main-content">
-            <section class="mx-auto px-4 py-12 max-w-6xl container">
-                <!-- Breadcrumb -->
-                <nav class="mb-8 text-sm">
-                    <a href="/" class="text-gray-600 hover:text-gray-900">Home</a>
-                    <span class="mx-2 text-gray-400">/</span>
-                    <a href="/recovery-equipment-guide" class="text-gray-600 hover:text-gray-900">Equipment Guide</a>
-                    <span class="mx-2 text-gray-400">/</span>
-                    <span class="text-gray-900">Comfort Plus Bundle</span>
-                </nav>
-
-                <h1 class="mb-4 font-bold text-4xl">Comfort Plus Bundle</h1>
-                <p class="mb-8 text-gray-600 text-xl">
-                    Our most popular bundle. Everything from the Essential bundle plus comfort upgrades to prevent secondary injuries and maximize recovery comfort.
-                </p>
-
-                <div class="gap-8 grid lg:grid-cols-3">
-                    <!-- Bundle Items -->
-                    <div class="space-y-6 lg:col-span-2">
-                        
-                        <h3 class="font-semibold text-gray-600 text-lg">Essential Items</h3>
-                        
-                        <!-- Walking Boot -->
-                        <div class="bundle-item">
-                            <img src="/images/aircast.jpg" alt="Walking Boot" class="item-image" />
-                            <div class="flex-1">
-                                <h3 class="mb-2 font-bold text-xl">Walking Boot</h3>
-                                <p class="mb-3 text-gray-600">Foundation of recovery with adjustable support.</p>
+        <div class="flex items-center gap-3 mb-8">
+            <h1 class="font-bold text-4xl">Comfort Plus Bundle</h1>
+            <span class="inline-block bg-purple-600 px-3 py-1 rounded-full font-semibold text-white text-sm">
+                Most Popular
+            </span>
+        </div>
+        
+        <div class="gap-8 grid lg:grid-cols-3">
+            <!-- Products List -->
+            <div class="space-y-6 lg:col-span-2">
+                {bundleItems.map((item) => (
+                    item.isChoice ? (
+                        <div class="bg-white shadow p-6 border border-purple-200 rounded-lg">
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="text-2xl">🥇</span>
+                                <h3 class="font-bold text-xl">Walking Boot (Choose One)</h3>
                             </div>
-                            <div class="text-right">
-                                <p class="price-tag">£100-200</p>
-                                <span class="text-2xl" title="Essential">🥇</span>
+                            <div class="gap-4 grid md:grid-cols-2">
+                                {item.options.map((option) => (
+                                    <div class="p-4 border border-gray-200 rounded-lg">
+                                        <img 
+                                            src={option.image} 
+                                            alt={option.name}
+                                            class="mb-3 w-full h-32 object-contain"
+                                        />
+                                        <h4 class="mb-1 font-semibold">{option.name}</h4>
+                                        <p class="mb-2 text-gray-600 text-sm">{option.description}</p>
+                                        <div class="flex justify-between items-center mb-3">
+                                            <span class="font-bold text-lg">{option.price}</span>
+                                        </div>
+                                        <a 
+                                            href={option.buyLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="block bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded w-full text-white text-sm text-center transition-colors"
+                                        >
+                                            Buy This Option
+                                        </a>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-
-                        <!-- Night Splint -->
-                        <div class="bundle-item">
-                            <img src="/images/thetis-night-splint-side.jpg" alt="Thetis Night Splint" class="item-image" />
-                            <div class="flex-1">
-                                <h3 class="mb-2 font-bold text-xl">Thetis Medical Night Splint</h3>
-                                <blockquote class="pl-3 border-purple-600 border-l-4 text-gray-700 text-sm italic">
-                                    "Worth it! This has been a very worthwhile purchase." - M. D. Taylor
-                                </blockquote>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-gray-600 text-lg">Premium</p>
-                                <span class="text-2xl" title="Essential">🥇</span>
-                            </div>
-                        </div>
-
-                        <!-- Waterproof Cover -->
-                        <div class="bundle-item">
-                            <img src="/images/boot-bag.jpg" alt="Waterproof Boot Cover" class="item-image" />
-                            <div class="flex-1">
-                                <h3 class="mb-2 font-bold text-xl">Waterproof Boot Cover</h3>
-                                <p class="text-gray-600">Safe showering without risk.</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="price-tag">£20-35</p>
-                                <span class="text-2xl" title="Highly Recommended">🥈</span>
-                            </div>
-                        </div>
-
-                        <h3 class="pt-4 font-semibold text-gray-600 text-lg">Comfort Additions</h3>
-
-                        <!-- EVENup -->
-                        <div class="bundle-item">
-                            <img src="/images/even-up.jpg" alt="EVENup Shoe Leveler" class="item-image" />
-                            <div class="flex-1">
-                                <h3 class="mb-2 font-bold text-xl">EVENup Shoe Leveler</h3>
-                                <p class="mb-3 text-gray-600">
-                                    Prevents back, hip, and knee pain by balancing your gait.
-                                </p>
-                                <ul class="space-y-1 text-gray-600 text-sm">
-                                    <li>• Attaches to your healthy foot's shoe</li>
-                                    <li>• Immediate relief from uneven walking</li>
-                                    <li>• Prevents compensatory injuries</li>
-                                </ul>
-                            </div>
-                            <div class="text-right">
-                                <p class="price-tag">£25-30</p>
-                                <span class="text-2xl" title="Highly Recommended">🥈</span>
+                    ) : (
+                        <div class={`bg-white p-6 rounded-lg shadow ${item.name.includes('Night Splint') ? 'border-2 border-purple-200' : 'border border-gray-200'}`}>
+                            <div class="flex gap-4">
+                                <img 
+                                    src={item.image} 
+                                    alt={item.name}
+                                    class="w-24 h-24 object-contain"
+                                />
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xl">
+                                            {item.name.includes('Night Splint') ? '🥇' : 
+                                             item.name.includes('EVENup') || item.name.includes('Waterproof') ? '🥈' : '🥉'}
+                                        </span>
+                                        <h3 class="font-semibold text-lg">{item.name}</h3>
+                                    </div>
+                                    <p class="mb-3 text-gray-600 text-sm">{item.description}</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold">{item.price}</span>
+                                        <div class="flex gap-2">
+                                            {item.amazonLink && (
+                                                <a 
+                                                    href={item.amazonLink}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="bg-gray-600 hover:bg-gray-700 px-3 py-1 rounded text-white text-sm transition-colors"
+                                                >
+                                                    Amazon
+                                                </a>
+                                            )}
+                                            <a 
+                                                href={item.buyLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded text-white text-sm transition-colors"
+                                            >
+                                                {item.name.includes('Night Splint') ? 'Buy Direct' : 'Buy Now'}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    )
+                ))}
+            </div>
 
-                        <!-- Crutch Handles -->
-                        <div class="bundle-item">
-                            <img src="/images/soft-crutch-handles.jpg" alt="Ergonomic Crutch Handles" class="item-image" />
-                            <div class="flex-1">
-                                <h3 class="mb-2 font-bold text-xl">Ergonomic Crutch Handles</h3>
-                                <p class="mb-3 text-gray-600">
-                                    40% reduction in forearm pain. Prevents nerve damage.
-                                </p>
-                                <p class="text-gray-700 text-sm italic">
-                                    "These handles saved my hands during 12 weeks on crutches" - Patient review
-                                </p>
-                            </div>
-                            <div class="text-right">
-                                <p class="price-tag">£15-25</p>
-                                <span class="text-2xl" title="Comfort Enhancement">🥉</span>
-                            </div>
-                        </div>
-
-                        <!-- Elevation Wedge -->
-                        <div class="bundle-item">
-                            <img src="/images/wedge.jpg" alt="Elevation Wedge" class="item-image" />
-                            <div class="flex-1">
-                                <h3 class="mb-2 font-bold text-xl">Elevation Wedge</h3>
-                                <p class="mb-3 text-gray-600">
-                                    Essential for reducing swelling in early recovery.
-                                </p>
-                                <ul class="space-y-1 text-gray-600 text-sm">
-                                    <li>• Maintains proper leg elevation</li>
-                                    <li>• Better than stacked pillows</li>
-                                    <li>• Improves circulation</li>
-                                </ul>
-                            </div>
-                            <div class="text-right">
-                                <p class="price-tag">£30-50</p>
-                                <span class="text-2xl" title="Comfort Enhancement">🥉</span>
-                            </div>
+            <!-- Bundle Summary -->
+            <div class="lg:col-span-1">
+                <div class="top-4 sticky bg-purple-50 p-6 border-2 border-purple-200 rounded-lg">
+                    <h2 class="mb-4 font-bold text-2xl">Bundle Summary</h2>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span>6 Comfort Items</span>
+                            <span class="font-semibold">{totalPrice}</span>
                         </div>
                     </div>
-
-                    <!-- Bundle Summary -->
-                    <div class="lg:col-span-1">
-                        <div class="bundle-summary">
-                            <div class="popular-badge">
-                                ⭐ MOST POPULAR BUNDLE
-                            </div>
-                            
-                            <h2 class="mb-4 font-bold text-2xl">Bundle Summary</h2>
-                            
-                            <div class="space-y-3 mb-6">
-                                <div class="font-semibold text-purple-700">Essential Items:</div>
-                                <div class="flex justify-between text-sm">
-                                    <span>Walking Boot</span>
-                                    <span>£100-200</span>
-                                </div>
-                                <div class="flex justify-between text-sm">
-                                    <span>Night Splint</span>
-                                    <span>Premium</span>
-                                </div>
-                                <div class="flex justify-between text-sm">
-                                    <span>Waterproof Cover</span>
-                                    <span>£20-35</span>
-                                </div>
-                                
-                                <div class="pt-2 font-semibold text-purple-700">Comfort Upgrades:</div>
-                                <div class="flex justify-between text-sm">
-                                    <span>EVENup Leveler</span>
-                                    <span>£25-30</span>
-                                </div>
-                                <div class="flex justify-between text-sm">
-                                    <span>Crutch Handles</span>
-                                    <span>£15-25</span>
-                                </div>
-                                <div class="flex justify-between text-sm">
-                                    <span>Elevation Wedge</span>
-                                    <span>£30-50</span>
-                                </div>
-                                <hr />
-                                <div class="flex justify-between font-bold text-lg">
-                                    <span>Total Value</span>
-                                    <span class="text-green-600">£270-350</span>
-                                </div>
-                            </div>
-
-                            <div class="space-y-4">
-                                <h3 class="mb-2 font-semibold">Why Choose This Bundle?</h3>
-                                <ul class="space-y-2 text-sm">
-                                    <li class="flex items-start">
-                                        <span class="mr-2 text-green-500">✓</span>
-                                        <span>Prevents secondary injuries</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="mr-2 text-green-500">✓</span>
-                                        <span>Maximum comfort during recovery</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="mr-2 text-green-500">✓</span>
-                                        <span>Reduces overall recovery time</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="mr-2 text-green-500">✓</span>
-                                        <span>Most popular choice among patients</span>
-                                    </li>
-                                </ul>
-
-                                <div class="space-y-3 pt-6">
-                                    <a href="https://thetismedical.com/night-splint" 
-                                       class="block bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg w-full font-semibold text-white text-center transition-colors">
-                                        Start with Night Splint →
-                                    </a>
-                                    <a href="/recovery-equipment-guide#mobility-bundle" 
-                                       class="block bg-gray-200 hover:bg-gray-300 px-6 py-3 rounded-lg w-full font-semibold text-gray-800 text-center transition-colors">
-                                        Compare All Bundles
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                    
+                    <div class="mb-6 pt-4 border-purple-200 border-t">
+                        <h3 class="mb-3 font-semibold">What You Get:</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Everything from Essential Bundle</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Pain-free crutch use</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Proper elevation for healing</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Maximum daily comfort</span>
+                            </li>
+                        </ul>
                     </div>
+
+                    <div class="bg-white mb-6 p-4 rounded-lg">
+                        <p class="text-purple-900 text-sm">
+                            <strong>Why most popular?</strong> Patients report significantly better recovery experience with these comfort upgrades. The elevation wedge and crutch handles make daily life much easier.
+                        </p>
+                    </div>
+
+                    <blockquote class="mb-6 pl-4 border-purple-600 border-l-4 text-gray-700 text-sm italic">
+                        "It's convenient, comfortable, well ventilated whilst providing adequate support" - Thomas
+                    </blockquote>
+
+                    <a href="/recovery-equipment-guide" class="text-purple-600 text-sm hover:underline">
+                        ← Back to Equipment Guide
+                    </a>
                 </div>
+            </div>
+        </div>
 
-                <!-- Why Patients Choose This Bundle -->
-                <section class="mt-16">
-                    <h2 class="mb-8 font-bold text-3xl text-center">Why Patients Choose Comfort Plus</h2>
-                    <div class="gap-6 grid md:grid-cols-3">
-                        <div class="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-lg">
-                            <h3 class="mb-3 font-bold">Prevents Pain</h3>
-                            <p class="text-gray-700">
-                                "The EVENup saved my back. I had terrible hip pain until I started using it." - Recovery patient
-                            </p>
-                        </div>
-                        <div class="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-lg">
-                            <h3 class="mb-3 font-bold">Better Sleep</h3>
-                            <p class="text-gray-700">
-                                "Being able to elevate properly and sleep without the boot was life-changing." - Verified buyer
-                            </p>
-                        </div>
-                        <div class="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-lg">
-                            <h3 class="mb-3 font-bold">Faster Recovery</h3>
-                            <p class="text-gray-700">
-                                "My surgeon said proper elevation and comfortable sleep speeds healing. This bundle delivers both."
-                            </p>
-                        </div>
-                    </div>
-                </section>
-            </section>
-        </main>
-        <Footer />
-    </body>
-</html>
+        <!-- Success Story -->
+        <div class="bg-gradient-to-r from-purple-50 to-blue-50 mt-12 p-8 rounded-xl">
+            <h3 class="mb-4 font-bold text-2xl">Why Patients Choose Comfort Plus</h3>
+            <div class="gap-6 grid md:grid-cols-2">
+                <div>
+                    <h4 class="mb-2 font-semibold">Better Sleep Quality</h4>
+                    <p class="mb-4 text-gray-700">
+                        The night splint allows you to remove the heavy boot at night while keeping your foot protected. 
+                        Patients report 6-8 hours of quality sleep compared to 1-2 hours with the boot.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="mb-2 font-semibold">Independence at Home</h4>
+                    <p class="mb-4 text-gray-700">
+                        With proper elevation and comfortable crutch handles, you can maintain more normal activities. 
+                        Cook, work from home, and move around without constant pain.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>
