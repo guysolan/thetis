@@ -1,0 +1,308 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { SITE_TITLE } from "../../consts";
+
+const pageTitle = "Complete Recovery Bundle - Achilles Recovery Equipment";
+const pageDescription = "Everything for optimal Achilles rupture recovery. All essentials, comfort items, plus hygiene and care accessories for a comprehensive recovery experience.";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={pageTitle}
+            description={pageDescription}
+        />
+        <style>
+            .bundle-item {
+                background: white;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                padding: 1.5rem;
+                display: flex;
+                gap: 1.5rem;
+                align-items: center;
+                transition: all 0.2s;
+            }
+            
+            .bundle-item:hover {
+                box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            }
+            
+            .item-image {
+                width: 120px;
+                height: 120px;
+                object-fit: contain;
+                border-radius: 8px;
+                background: #f9fafb;
+                padding: 0.5rem;
+            }
+            
+            .price-tag {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #059669;
+            }
+            
+            .bundle-summary {
+                background: #f3f4f6;
+                border-radius: 12px;
+                padding: 2rem;
+                position: sticky;
+                top: 2rem;
+            }
+            
+            .complete-badge {
+                background: linear-gradient(45deg, #7c3aed, #3b82f6);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+
+        <main id="main-content">
+            <section class="mx-auto px-4 py-12 max-w-6xl container">
+                <!-- Breadcrumb -->
+                <nav class="mb-8 text-sm">
+                    <a href="/" class="text-gray-600 hover:text-gray-900">Home</a>
+                    <span class="mx-2 text-gray-400">/</span>
+                    <a href="/recovery-equipment-guide" class="text-gray-600 hover:text-gray-900">Equipment Guide</a>
+                    <span class="mx-2 text-gray-400">/</span>
+                    <span class="text-gray-900">Complete Recovery Bundle</span>
+                </nav>
+
+                <h1 class="mb-4 font-bold text-4xl">Complete Recovery Bundle</h1>
+                <p class="mb-8 text-gray-600 text-xl">
+                    The comprehensive solution for optimal recovery. Includes everything from Comfort Plus bundle plus additional hygiene and care items.
+                </p>
+
+                <div class="gap-8 grid lg:grid-cols-3">
+                    <!-- Bundle Items -->
+                    <div class="space-y-6 lg:col-span-2">
+                        
+                        <h3 class="font-semibold text-gray-600 text-lg">Essential Items</h3>
+                        
+                        <!-- Walking Boot -->
+                        <div class="bundle-item">
+                            <img src="/images/aircast.jpg" alt="Walking Boot" class="item-image" />
+                            <div class="flex-1">
+                                <h3 class="mb-2 font-bold text-xl">Walking Boot</h3>
+                                <p class="text-gray-600">Foundation of recovery</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="price-tag">£100-200</p>
+                                <span class="text-2xl" title="Essential">🥇</span>
+                            </div>
+                        </div>
+
+                        <!-- Night Splint -->
+                        <div class="bundle-item">
+                            <img src="/images/thetis-night-splint-side.jpg" alt="Thetis Night Splint" class="item-image" />
+                            <div class="flex-1">
+                                <h3 class="mb-2 font-bold text-xl">Thetis Medical Night Splint</h3>
+                                <blockquote class="text-gray-700 text-sm italic">
+                                    "Quality made in England. Worth every penny!" - Patient reviews
+                                </blockquote>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-gray-600 text-lg">Premium</p>
+                                <span class="text-2xl" title="Essential">🥇</span>
+                            </div>
+                        </div>
+
+                        <!-- Waterproof Cover -->
+                        <div class="bundle-item">
+                            <img src="/images/boot-bag.jpg" alt="Waterproof Boot Cover" class="item-image" />
+                            <div class="flex-1">
+                                <h3 class="mb-2 font-bold text-xl">Waterproof Boot Cover</h3>
+                                <p class="text-gray-600">Safe showering</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="price-tag">£20-35</p>
+                                <span class="text-2xl">🥈</span>
+                            </div>
+                        </div>
+
+                        <h3 class="pt-4 font-semibold text-gray-600 text-lg">Comfort Items</h3>
+
+                        <!-- EVENup -->
+                        <div class="bundle-item">
+                            <img src="/images/even-up.jpg" alt="EVENup Shoe Leveler" class="item-image" />
+                            <div class="flex-1">
+                                <h3 class="mb-2 font-bold text-xl">EVENup Shoe Leveler</h3>
+                                <p class="text-gray-600">Prevents back pain</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="price-tag">£25-30</p>
+                                <span class="text-2xl">🥈</span>
+                            </div>
+                        </div>
+
+                        <!-- Crutch Handles -->
+                        <div class="bundle-item">
+                            <img src="/images/soft-crutch-handles.jpg" alt="Ergonomic Crutch Handles" class="item-image" />
+                            <div class="flex-1">
+                                <h3 class="mb-2 font-bold text-xl">Ergonomic Crutch Handles</h3>
+                                <p class="text-gray-600">40% pain reduction</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="price-tag">£15-25</p>
+                                <span class="text-2xl">🥉</span>
+                            </div>
+                        </div>
+
+                        <!-- Elevation Wedge -->
+                        <div class="bundle-item">
+                            <img src="/images/wedge.jpg" alt="Elevation Wedge" class="item-image" />
+                            <div class="flex-1">
+                                <h3 class="mb-2 font-bold text-xl">Elevation Wedge</h3>
+                                <p class="text-gray-600">Reduces swelling</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="price-tag">£30-50</p>
+                                <span class="text-2xl">🥉</span>
+                            </div>
+                        </div>
+
+                        <h3 class="pt-4 font-semibold text-gray-600 text-lg">Hygiene & Care Extras</h3>
+
+                        <!-- Merino Socks -->
+                        <div class="bundle-item">
+                            <div class="flex justify-center items-center bg-gray-100 item-image">
+                                <span class="text-4xl">🧦</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="mb-2 font-bold text-xl">Merino Wool Socks (2 pairs)</h3>
+                                <p class="mb-3 text-gray-600">
+                                    Temperature regulating, moisture-wicking comfort inside your boot.
+                                </p>
+                                <ul class="space-y-1 text-gray-600 text-sm">
+                                    <li>• Naturally antimicrobial</li>
+                                    <li>• Reduces odor</li>
+                                    <li>• All-day comfort</li>
+                                </ul>
+                            </div>
+                            <div class="text-right">
+                                <p class="price-tag">£30-50</p>
+                                <span class="text-2xl">🥉</span>
+                            </div>
+                        </div>
+
+                        <!-- Antifungal Powder -->
+                        <div class="bundle-item">
+                            <div class="flex justify-center items-center bg-gray-100 item-image">
+                                <span class="text-4xl">💊</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="mb-2 font-bold text-xl">Antifungal Powder</h3>
+                                <p class="mb-3 text-gray-600">
+                                    Prevents athlete's foot and keeps your boot fresh.
+                                </p>
+                                <ul class="space-y-1 text-gray-600 text-sm">
+                                    <li>• Prevents infections</li>
+                                    <li>• Absorbs moisture</li>
+                                    <li>• Daily protection</li>
+                                </ul>
+                            </div>
+                            <div class="text-right">
+                                <p class="price-tag">£10-15</p>
+                                <span class="text-2xl">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bundle Summary -->
+                    <div class="lg:col-span-1">
+                        <div class="bundle-summary">
+                            <div class="complete-badge">
+                                🌟 COMPLETE RECOVERY KIT
+                            </div>
+                            
+                            <h2 class="mb-4 font-bold text-2xl">Bundle Summary</h2>
+                            
+                            <div class="space-y-2 mb-6 text-sm">
+                                <div class="font-semibold">Essential (3 items)</div>
+                                <div class="font-semibold">+ Comfort (3 items)</div>
+                                <div class="font-semibold">+ Hygiene (2 items)</div>
+                                <hr class="my-2" />
+                                <div class="flex justify-between">
+                                    <span class="font-bold">8 Total Items</span>
+                                </div>
+                                <hr class="my-2" />
+                                <div class="flex justify-between font-bold text-lg">
+                                    <span>Total Value</span>
+                                    <span class="text-green-600">£300-390</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <h3 class="mb-2 font-semibold">Complete Care Benefits</h3>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <span class="mr-2 text-green-500">✓</span>
+                                        <span>Everything you need, nothing you don't</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="mr-2 text-green-500">✓</span>
+                                        <span>Addresses all aspects of recovery</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="mr-2 text-green-500">✓</span>
+                                        <span>Prevents common complications</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="mr-2 text-green-500">✓</span>
+                                        <span>Maximum comfort & hygiene</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="mr-2 text-green-500">✓</span>
+                                        <span>Peace of mind with complete kit</span>
+                                    </li>
+                                </ul>
+
+                                <div class="space-y-3 pt-6">
+                                    <a href="https://thetismedical.com/night-splint" 
+                                       class="block bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg w-full font-semibold text-white text-center transition-colors">
+                                        Start with Night Splint →
+                                    </a>
+                                    <a href="/recovery-equipment-guide#mobility-bundle" 
+                                       class="block bg-gray-200 hover:bg-gray-300 px-6 py-3 rounded-lg w-full font-semibold text-gray-800 text-center transition-colors">
+                                        Compare All Bundles
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Why Go Complete -->
+                <section class="bg-gradient-to-r from-purple-50 to-blue-50 mt-16 p-8 rounded-lg">
+                    <h2 class="mb-8 font-bold text-3xl text-center">Why Choose Complete Recovery?</h2>
+                    <div class="gap-8 grid md:grid-cols-2 mx-auto max-w-4xl">
+                        <div>
+                            <h3 class="mb-3 font-bold">Dr. Robbie Ray, Foot & Ankle Surgeon:</h3>
+                            <p class="text-gray-700 italic">
+                                "Comprehensive care from day one makes a significant difference. Patients who invest in proper equipment consistently report better outcomes and fewer complications."
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="mb-3 font-bold">Patient Experience:</h3>
+                            <p class="text-gray-700 italic">
+                                "I wish I'd gotten everything from the start. Adding items piecemeal as problems arose was frustrating and more expensive in the long run."
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </main>
+        <Footer />
+    </body>
+</html>
