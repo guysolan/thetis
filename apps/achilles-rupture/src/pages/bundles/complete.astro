@@ -66,6 +66,30 @@ const bundleItems = [
         buyLink: 'https://www.amazon.com/dp/B01FTYB0O6'
     },
     {
+        name: 'Cold Therapy Pack',
+        price: '$25-40',
+        description: 'Reusable gel pack for swelling control in early weeks',
+        buyLink: 'https://www.amazon.com/dp/B000EAPNCQ',
+        noImage: true,
+        emoji: '🧊'
+    },
+    {
+        name: 'Resistance Bands Set',
+        price: '$15-25',
+        description: 'Essential for strength training from week 6 onward',
+        buyLink: 'https://www.amazon.com/dp/B01AVDVHTI',
+        noImage: true,
+        emoji: '💪'
+    },
+    {
+        name: 'Boot Liner Replacement',
+        price: '$20-30',
+        description: 'Extra liner for hygiene during 12+ weeks of boot wear',
+        buyLink: 'https://www.amazon.com/dp/B07K2NXGSG',
+        noImage: true,
+        emoji: '🧽'
+    },
+    {
         name: 'Merino Wool Socks (2 pairs)',
         price: '$20-35',
         description: 'Temperature regulation, antimicrobial properties',
@@ -80,10 +104,18 @@ const bundleItems = [
         buyLink: 'https://www.amazon.com/dp/B00GYPZREU',
         noImage: true,
         emoji: '💨'
+    },
+    {
+        name: 'Silicone Scar Sheets',
+        price: '$15-25',
+        description: 'For surgical patients - minimizes scarring',
+        buyLink: 'https://www.amazon.com/dp/B001AJ4L1E',
+        noImage: true,
+        emoji: '🩹'
     }
 ];
 
-const totalPrice = '$450-600';
+const totalPrice = '$600-750';
 ---
 
 <Layout title="Complete Recovery Bundle - Achilles Recovery Equipment">
@@ -151,7 +183,7 @@ const totalPrice = '$450-600';
                                         <span class="text-xl">
                                             {item.name.includes('Night Splint') ? '🥇' : 
                                              item.name.includes('EVENup') || item.name.includes('Waterproof') ? '🥈' : 
-                                             item.name.includes('Crutch') || item.name.includes('Elevation') ? '🥉' : '⭐'}
+                                             item.name.includes('Crutch') || item.name.includes('Elevation') || item.name.includes('Cold Therapy') || item.name.includes('Resistance') ? '🥉' : '⭐'}
                                         </span>
                                         <h3 class="font-semibold text-lg">{item.name}</h3>
                                     </div>
@@ -193,7 +225,7 @@ const totalPrice = '$450-600';
                     <h2 class="mb-4 font-bold text-2xl">Bundle Summary</h2>
                     <div class="space-y-3 mb-6">
                         <div class="flex justify-between">
-                            <span>8 Recovery Items</span>
+                            <span>12 Recovery Items</span>
                             <span class="font-semibold">{totalPrice}</span>
                         </div>
                     </div>
@@ -207,22 +239,26 @@ const totalPrice = '$450-600';
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="text-green-600">✓</span>
-                                <span>Complete odor & moisture control</span>
+                                <span>Cold therapy for swelling control</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="text-green-600">✓</span>
-                                <span>Temperature regulation in boot</span>
+                                <span>Resistance bands for rehab (week 6+)</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="text-green-600">✓</span>
-                                <span>Prevention of fungal infections</span>
+                                <span>Extra boot liner for hygiene</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Scar care for surgical patients</span>
                             </li>
                         </ul>
                     </div>
 
                     <div class="bg-green-100 mb-6 p-4 rounded-lg">
                         <p class="text-green-900 text-sm">
-                            <strong>Best for:</strong> Patients who want maximum comfort and hygiene throughout their entire recovery journey.
+                            <strong>Best for:</strong> Patients who want the most comprehensive recovery kit with items for all phases from injury through rehabilitation.
                         </p>
                     </div>
 
@@ -237,31 +273,25 @@ const totalPrice = '$450-600';
             </div>
         </div>
 
-        <!-- Special Note -->
+        <!-- Recovery Timeline Note -->
         <div class="bg-blue-50 mt-12 p-6 rounded-lg">
-            <h3 class="mb-3 font-bold text-xl">Why Include Hygiene Items?</h3>
-            <div class="gap-4 grid md:grid-cols-2 text-gray-700">
+            <h3 class="mb-3 font-bold text-xl">Recovery Phase Timeline</h3>
+            <div class="space-y-3 text-gray-700">
                 <div>
-                    <h4 class="mb-2 font-semibold">🧦 Merino Wool Benefits</h4>
-                    <ul class="space-y-1 text-sm">
-                        <li>• Natural antimicrobial properties</li>
-                        <li>• Wicks moisture away from skin</li>
-                        <li>• Temperature regulation in all seasons</li>
-                        <li>• Reduces boot odor significantly</li>
-                    </ul>
+                    <h4 class="font-semibold">Weeks 0-6: Immobilization</h4>
+                    <p class="text-sm">Boot, night splint, waterproof cover, cold therapy, elevation wedge</p>
                 </div>
                 <div>
-                    <h4 class="mb-2 font-semibold">💨 Antifungal Protection</h4>
-                    <ul class="space-y-1 text-sm">
-                        <li>• Prevents athlete's foot in moist boot environment</li>
-                        <li>• Reduces risk of skin breakdown</li>
-                        <li>• Keeps feet dry and comfortable</li>
-                        <li>• Essential for 12+ weeks of boot wear</li>
-                    </ul>
+                    <h4 class="font-semibold">Weeks 6-12: Early Mobilization</h4>
+                    <p class="text-sm">Continue boot/splint, add resistance bands for gentle exercises</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold">Weeks 12+: Rehabilitation</h4>
+                    <p class="text-sm">Progressive resistance training, scar care if applicable</p>
                 </div>
             </div>
             <p class="mt-4 text-gray-600 text-sm italic">
-                "After 12 weeks in a boot, you'll understand why these 'extras' are actually essentials" - Recovery patients
+                Always follow your surgeon's specific protocol - timelines vary by individual
             </p>
         </div>
     </main>
