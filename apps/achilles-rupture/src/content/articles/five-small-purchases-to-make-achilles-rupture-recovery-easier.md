@@ -80,4 +80,6 @@ Standard crutch handles can cause discomfort in your hands and wrists:
 
 Remember to consult with your healthcare provider before making any modifications to your medical equipment or recovery routine. These accessories complement, not replace, your prescribed medical devices.
 
+For a complete list of all recovery products including rehabilitation equipment and mobility aids, check out our [Complete Achilles Rupture Recovery Products Guide](/articles/complete-achilles-rupture-recovery-products-guide).
+
 *Note: This article contains general recommendations and should not be considered medical advice. Always follow your doctor's specific instructions for your recovery.*
