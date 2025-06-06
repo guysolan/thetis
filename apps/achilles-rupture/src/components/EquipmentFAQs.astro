@@ -1,0 +1,120 @@
+---
+interface FAQ {
+    question: string;
+    answer: string;
+}
+
+const faqs: FAQ[] = [
+    {
+        question: "Why is the Thetis Night Splint rated #1?",
+        answer: "It's the only night splint specifically designed for Achilles rupture recovery, addressing a critical gap in the market. Traditional boots are uncomfortable for sleep, leading to poor rest and potential re-injury risks. The Thetis splint has received endorsements from leading surgeons including the BOFAS Past President."
+    },
+    {
+        question: "Do I need all these items?",
+        answer: "The walking boot and crutches are essential. The night splint is highly recommended for sleep comfort and safety. Other items significantly improve quality of life during recovery but aren't strictly necessary. We recommend starting with the essentials and adding comfort items as you identify specific needs."
+    },
+    {
+        question: "When should I buy these items?",
+        answer: "Ideally, have the essential items ready as soon as possible after injury. The night splint becomes crucial once you start needing better sleep (usually within the first week). Other comfort items can be added as needed throughout your recovery journey."
+    },
+    {
+        question: "Are there any alternatives to these products?",
+        answer: "While there are alternatives for most items, the products listed have been selected based on clinical evidence, patient reviews, and expert recommendations. The Thetis Night Splint is unique as the only Achilles-specific night splint on the market."
+    },
+    {
+        question: "How long will I need these items?",
+        answer: "Boot usage typically lasts 6-12 weeks depending on your treatment protocol. The night splint is useful throughout the immobilization phase and early rehabilitation. Items like the EVENup and crutch handles are needed as long as you're using crutches or the boot."
+    },
+    {
+        question: "Can I rent instead of buying?",
+        answer: "Some items like walking boots can be rented through medical supply companies. However, for hygiene reasons and convenience, most patients prefer to purchase items like the night splint, socks, and personal comfort accessories."
+    }
+];
+---
+
+<div class="space-y-4" id="equipment-faqs">
+    {faqs.map((faq, index) => (
+        <div class="bg-gray-50 rounded-lg overflow-hidden faq-item">
+            <button
+                class="flex justify-between items-center hover:bg-gray-100 p-6 w-full font-semibold text-left transition-colors faq-toggle"
+                aria-expanded="false"
+                aria-controls={`faq-answer-${index}`}
+            >
+                <span>{faq.question}</span>
+                <svg
+                    class="w-5 h-5 transition-transform faq-icon transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                    />
+                </svg>
+            </button>
+            <div
+                id={`faq-answer-${index}`}
+                class="hidden px-6 pb-6 faq-content"
+            >
+                <p class="text-gray-600">{faq.answer}</p>
+            </div>
+        </div>
+    ))}
+</div>
+
+<script>
+    // Make FAQs interactive
+    document.addEventListener('DOMContentLoaded', () => {
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+        
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling as HTMLElement | null;
+                const icon = toggle.querySelector('.faq-icon') as SVGElement | null;
+                
+                if (!content || !icon) return;
+                
+                const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+                
+                // Toggle the content
+                if (isExpanded) {
+                    content.classList.add('hidden');
+                    icon.classList.remove('rotate-180');
+                    toggle.setAttribute('aria-expanded', 'false');
+                } else {
+                    content.classList.remove('hidden');
+                    icon.classList.add('rotate-180');
+                    toggle.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    .faq-icon {
+        transition: transform 0.2s ease;
+    }
+    
+    .rotate-180 {
+        transform: rotate(180deg);
+    }
+    
+    .faq-content {
+        animation: slideDown 0.2s ease-out;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

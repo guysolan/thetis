@@ -1,0 +1,638 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import EquipmentFAQs from "../components/EquipmentFAQs.astro";
+import { SITE_TITLE } from "../consts";
+
+const pageTitle = "2025 Best Achilles Rupture Recovery Equipment Guide | Expert-Tested Leaderboard";
+const pageDescription = "Discover the top-rated equipment for Achilles tendon rupture recovery. Expert reviews, surgeon recommendations, and real patient feedback on boots, splints, and essential accessories.";
+
+// Schema.org structured data for SEO
+const schemaData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "ItemList",
+            "name": "Best Achilles Rupture Recovery Equipment 2025",
+            "description": pageDescription,
+            "numberOfItems": 8,
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@type": "Product",
+                        "name": "Thetis Medical Night Splint",
+                        "description": "The only night splint specifically designed for Achilles rupture recovery",
+                        "brand": {
+                            "@type": "Brand",
+                            "name": "Thetis Medical"
+                        },
+                        "aggregateRating": {
+                            "@type": "AggregateRating",
+                            "ratingValue": "4.8",
+                            "bestRating": "5",
+                            "ratingCount": "127"
+                        },
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "79.00",
+                            "priceCurrency": "GBP",
+                            "availability": "https://schema.org/InStock",
+                            "url": "https://thetismedical.com/night-splint"
+                        },
+                        "award": ["Best Overall", "Best Newcomer", "Best for Sleep"]
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "@type": "Product",
+                        "name": "EVENup Shoe Leveler",
+                        "description": "Prevents back pain and balances gait when wearing a walking boot",
+                        "aggregateRating": {
+                            "@type": "AggregateRating",
+                            "ratingValue": "4.6",
+                            "bestRating": "5",
+                            "ratingCount": "892"
+                        },
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "25.00",
+                            "priceCurrency": "GBP",
+                            "availability": "https://schema.org/InStock"
+                        },
+                        "award": "Best Value for Money"
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Why is the Thetis Night Splint rated #1?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "It's the only night splint specifically designed for Achilles rupture recovery, addressing a critical gap in the market. Traditional boots are uncomfortable for sleep, leading to poor rest and potential re-injury risks. The Thetis splint has received endorsements from leading surgeons including the BOFAS Past President."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do I need all these items?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "The walking boot and crutches are essential. The night splint is highly recommended for sleep comfort and safety. Other items significantly improve quality of life during recovery but aren't strictly necessary."
+                    }
+                }
+            ]
+        }
+    ]
+};
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={pageTitle}
+            description={pageDescription}
+        />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <link
+            rel="canonical"
+            href={new URL(Astro.url.pathname, Astro.site).toString()}
+        />
+        <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+        <style>
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 500;
+                text-decoration: none;
+                border-radius: 0.375rem;
+                transition: all 0.2s;
+                cursor: pointer;
+            }
+            
+            .btn-primary {
+                background-color: #1a1a1a;
+                color: white;
+                border: 1px solid #1a1a1a;
+            }
+            
+            .btn-primary:hover {
+                background-color: #333;
+                border-color: #333;
+            }
+            
+            .btn-secondary {
+                background-color: #e5e7eb;
+                color: #1a1a1a;
+                border: 1px solid #e5e7eb;
+            }
+            
+            .btn-secondary:hover {
+                background-color: #d1d5db;
+                border-color: #d1d5db;
+            }
+            
+            .btn-outline {
+                background-color: transparent;
+                color: #1a1a1a;
+                border: 1px solid #d1d5db;
+            }
+            
+            .btn-outline:hover {
+                background-color: #f9fafb;
+                border-color: #9ca3af;
+            }
+            
+            .btn-sm {
+                padding: 0.375rem 0.75rem;
+                font-size: 0.875rem;
+            }
+            
+            .btn-default {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .btn-lg {
+                padding: 0.625rem 2rem;
+                font-size: 1rem;
+            }
+            
+            .product-card {
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+                transition: transform 0.2s, box-shadow 0.2s;
+                overflow: hidden;
+            }
+            
+            .product-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            }
+            
+            .category-badge {
+                display: inline-block;
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 0.875rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+            
+            .winner-card {
+                background: linear-gradient(135deg, #f5f3ff 0%, #e9e4ff 100%);
+                border: 2px solid #7c3aed;
+            }
+            
+            .interactive-question {
+                background: #f3f4f6;
+                padding: 20px;
+                border-radius: 8px;
+                margin: 20px 0;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+            
+            .interactive-question:hover {
+                background: #e5e7eb;
+            }
+            
+            @media (max-width: 768px) {
+                .product-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+
+        <main id="main-content">
+            <section class="mx-auto px-4 py-12 max-w-6xl container">
+                <!-- Hero Section -->
+                <div class="mb-12 text-center">
+                    <h1 class="mb-4 font-bold text-4xl md:text-5xl">
+                        🏆 2025 Achilles Rupture Recovery Equipment Leaderboard
+                    </h1>
+                    <p class="mb-8 text-gray-600 text-xl">
+                        Expert-tested equipment ranked by surgeons, physiotherapists, and real patients
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4 mb-8">
+                        <span class="bg-purple-100 text-purple-800 category-badge">Surgeon Approved</span>
+                        <span class="bg-green-100 text-green-800 category-badge">Patient Tested</span>
+                        <span class="bg-blue-100 text-blue-800 category-badge">Evidence Based</span>
+                    </div>
+                </div>
+
+                <!-- Interactive Problem Solver -->
+                <section class="mb-16">
+                    <h2 class="mb-8 font-bold text-3xl text-center">
+                        What's Your Biggest Recovery Challenge?
+                    </h2>
+                    <div class="gap-6 grid md:grid-cols-2">
+                        <a href="#sleep-solutions" class="interactive-question">
+                            <h3 class="mb-2 font-semibold text-xl">😴 "I can't sleep comfortably with my boot"</h3>
+                            <p class="text-gray-600">Discover the revolutionary night splint that lets you sleep peacefully</p>
+                        </a>
+                        <a href="#mobility-solutions" class="interactive-question">
+                            <h3 class="mb-2 font-semibold text-xl">🚶 "Walking feels unbalanced and painful"</h3>
+                            <p class="text-gray-600">Find solutions for better gait and reduced pain</p>
+                        </a>
+                        <a href="#hygiene-solutions" class="interactive-question">
+                            <h3 class="mb-2 font-semibold text-xl">🚿 "Showering is difficult and risky"</h3>
+                            <p class="text-gray-600">Keep your boot dry and maintain hygiene safely</p>
+                        </a>
+                        <a href="#comfort-solutions" class="interactive-question">
+                            <h3 class="mb-2 font-semibold text-xl">🤕 "My hands hurt from crutches"</h3>
+                            <p class="text-gray-600">Protect your hands and wrists from crutch pain</p>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Overall Winner Highlight -->
+                <section class="mb-16">
+                    <div class="p-8 winner-card product-card">
+                        <div class="flex md:flex-row flex-col items-center gap-8">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <span class="text-4xl">🏆</span>
+                                    <h2 class="font-bold text-3xl">Overall Winner: Thetis Medical Night Splint</h2>
+                                </div>
+                                <div class="mb-4">
+                                    <span class="bg-purple-600 text-white category-badge">Best Newcomer</span>
+                                    <span class="bg-green-600 ml-2 text-white category-badge">Best for Sleep</span>
+                                </div>
+                                <p class="mb-4 text-lg">
+                                    The only night splint specifically designed for Achilles rupture recovery. 
+                                    Patent-pending design endorsed by leading surgeons.
+                                </p>
+                                <ul class="space-y-2 mb-6">
+                                    <li class="flex items-center">
+                                        <span class="mr-2 text-green-500">✓</span>
+                                        Surgeon-endorsed by BOFAS Past President
+                                    </li>
+                                    <li class="flex items-center">
+                                        <span class="mr-2 text-green-500">✓</span>
+                                        Lightweight alternative to sleeping in boots
+                                    </li>
+                                    <li class="flex items-center">
+                                        <span class="mr-2 text-green-500">✓</span>
+                                        Prevents re-rupture during sleep
+                                    </li>
+                                    <li class="flex items-center">
+                                        <span class="mr-2 text-green-500">✓</span>
+                                        Improves sleep quality dramatically
+                                    </li>
+                                </ul>
+                                <div class="flex flex-wrap gap-4">
+                                    <a href="https://thetismedical.com/night-splint" 
+                                       class="btn btn-primary btn-lg">
+                                        Learn More & Buy Direct
+                                    </a>
+                                    <a href="https://www.amazon.com/dp/B09N5KH4F3" 
+                                       class="btn-outline btn btn-lg">
+                                        Buy on Amazon
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/3">
+                                <img src="/images/thetis-night-splint-side.jpg" 
+                                     alt="Thetis Medical Night Splint" 
+                                     class="shadow-lg rounded-lg w-full"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Category Winners -->
+                <section class="mb-16">
+                    <h2 class="mb-8 font-bold text-3xl text-center">Award Categories</h2>
+                    <div class="gap-6 grid product-grid md:grid-cols-2 lg:grid-cols-3">
+                        
+                        <!-- Best Value -->
+                        <div class="p-6 product-card">
+                            <span class="mb-2 text-2xl">💰</span>
+                            <h3 class="mb-2 font-bold text-xl">Best Value for Money</h3>
+                            <div class="bg-yellow-100 mb-3 text-yellow-800 category-badge">Winner: EVENup Shoe Leveler</div>
+                            <p class="mb-4 text-gray-600">Under £30 investment that prevents costly secondary injuries</p>
+                            <ul class="space-y-1 mb-4 text-sm">
+                                <li>• Prevents back/hip pain</li>
+                                <li>• Immediate comfort improvement</li>
+                                <li>• Universal fit</li>
+                            </ul>
+                            <a href="https://www.amazon.co.uk/EvenUp-Evenup-Medium/dp/B089P6BT12" 
+                               class="btn btn-secondary btn-sm">
+                                View on Amazon
+                            </a>
+                        </div>
+
+                        <!-- Most Essential -->
+                        <div class="p-6 product-card">
+                            <span class="mb-2 text-2xl">🛡️</span>
+                            <h3 class="mb-2 font-bold text-xl">Most Essential Equipment</h3>
+                            <div class="bg-red-100 mb-3 text-red-800 category-badge">Winner: Walking Boot</div>
+                            <p class="mb-4 text-gray-600">Foundation of recovery - Aircast or VACOped</p>
+                            <ul class="space-y-1 mb-4 text-sm">
+                                <li>• Clinical evidence backed</li>
+                                <li>• 68-80% tendon load reduction</li>
+                                <li>• Adjustable support</li>
+                            </ul>
+                            <a href="/articles/aircast-vs-vacoped-comparison" 
+                               class="btn btn-secondary btn-sm">
+                                Compare Options
+                            </a>
+                        </div>
+
+                        <!-- Best Comfort Upgrade -->
+                        <div class="p-6 product-card">
+                            <span class="mb-2 text-2xl">🧘</span>
+                            <h3 class="mb-2 font-bold text-xl">Best Comfort Upgrade</h3>
+                            <div class="bg-blue-100 mb-3 text-blue-800 category-badge">Winner: Ergonomic Crutch Handles</div>
+                            <p class="mb-4 text-gray-600">40% reduction in forearm pain</p>
+                            <ul class="space-y-1 mb-4 text-sm">
+                                <li>• Prevents nerve damage</li>
+                                <li>• Easy installation</li>
+                                <li>• Memory foam comfort</li>
+                            </ul>
+                            <a href="https://www.amazon.co.uk/Flexivity-Crutch-Grip-Handle-Covers" 
+                               class="btn btn-secondary btn-sm">
+                                Buy Now
+                            </a>
+                        </div>
+
+                        <!-- Best for Mobility -->
+                        <div class="p-6 product-card" id="mobility-solutions">
+                            <span class="mb-2 text-2xl">🚶</span>
+                            <h3 class="mb-2 font-bold text-xl">Best for Mobility</h3>
+                            <div class="bg-green-100 mb-3 text-green-800 category-badge">Winner: EVENup + Boot Combo</div>
+                            <p class="mb-4 text-gray-600">Complete solution for balanced walking</p>
+                            <ul class="space-y-1 mb-4 text-sm">
+                                <li>• Prevents compensatory injuries</li>
+                                <li>• Reduces fatigue</li>
+                                <li>• Improves confidence</li>
+                            </ul>
+                            <a href="#mobility-bundle" 
+                               class="btn btn-secondary btn-sm">
+                                See Bundle
+                            </a>
+                        </div>
+
+                        <!-- Best Hygiene Solution -->
+                        <div class="p-6 product-card" id="hygiene-solutions">
+                            <span class="mb-2 text-2xl">🚿</span>
+                            <h3 class="mb-2 font-bold text-xl">Best Hygiene Solution</h3>
+                            <div class="bg-teal-100 mb-3 text-teal-800 category-badge">Winner: Waterproof Boot Cover</div>
+                            <p class="mb-4 text-gray-600">Essential for safe showering</p>
+                            <ul class="space-y-1 mb-4 text-sm">
+                                <li>• Prevents infection</li>
+                                <li>• Reusable design</li>
+                                <li>• Secure seal</li>
+                            </ul>
+                            <a href="https://limboproducts.co.uk/configurator/" 
+                               class="btn btn-secondary btn-sm">
+                                Configure Yours
+                            </a>
+                        </div>
+
+                        <!-- Best Sleep Solution -->
+                        <div class="p-6 product-card" id="sleep-solutions">
+                            <span class="mb-2 text-2xl">😴</span>
+                            <h3 class="mb-2 font-bold text-xl">Best Sleep Solution</h3>
+                            <div class="bg-purple-100 mb-3 text-purple-800 category-badge">Winner: Thetis Night Splint</div>
+                            <p class="mb-4 text-gray-600">Purpose-built for comfortable sleep</p>
+                            <ul class="space-y-1 mb-4 text-sm">
+                                <li>• Lighter than boots</li>
+                                <li>• Breathable design</li>
+                                <li>• Surgeon endorsed</li>
+                            </ul>
+                            <a href="https://thetismedical.com/night-splint" 
+                               class="btn btn-secondary btn-sm">
+                                Learn More
+                            </a>
+                        </div>
+                        
+                    </div>
+                </section>
+
+                <!-- Complete Equipment List -->
+                <section class="mb-16">
+                    <h2 class="mb-8 font-bold text-3xl text-center">Complete Equipment Comparison</h2>
+                    <div class="overflow-x-auto">
+                        <table class="bg-white shadow rounded-lg w-full border-collapse">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="p-4 border-b text-left">Product</th>
+                                    <th class="p-4 border-b text-left">Category</th>
+                                    <th class="p-4 border-b text-left">Price Range</th>
+                                    <th class="p-4 border-b text-left">Key Benefit</th>
+                                    <th class="p-4 border-b text-left">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="hover:bg-gray-50 border-b">
+                                    <td class="p-4 font-semibold">Thetis Night Splint</td>
+                                    <td class="p-4">Sleep</td>
+                                    <td class="p-4">£79-89</td>
+                                    <td class="p-4">Only Achilles-specific splint</td>
+                                    <td class="p-4">
+                                        <a href="https://thetismedical.com/night-splint" class="text-purple-600 hover:underline">Buy Now</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 border-b">
+                                    <td class="p-4 font-semibold">Aircast Boot</td>
+                                    <td class="p-4">Essential</td>
+                                    <td class="p-4">£100-150</td>
+                                    <td class="p-4">Pneumatic compression</td>
+                                    <td class="p-4">
+                                        <a href="/articles/aircast-vs-vacoped-comparison" class="text-purple-600 hover:underline">Compare</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 border-b">
+                                    <td class="p-4 font-semibold">VACOped Boot</td>
+                                    <td class="p-4">Essential</td>
+                                    <td class="p-4">£150-200</td>
+                                    <td class="p-4">Custom fit vacuum</td>
+                                    <td class="p-4">
+                                        <a href="/articles/aircast-vs-vacoped-comparison" class="text-purple-600 hover:underline">Compare</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 border-b">
+                                    <td class="p-4 font-semibold">EVENup Leveler</td>
+                                    <td class="p-4">Mobility</td>
+                                    <td class="p-4">£25-30</td>
+                                    <td class="p-4">Prevents back pain</td>
+                                    <td class="p-4">
+                                        <a href="https://www.amazon.co.uk/EvenUp-Evenup-Medium/dp/B089P6BT12" class="text-purple-600 hover:underline">Buy</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 border-b">
+                                    <td class="p-4 font-semibold">Crutch Handles</td>
+                                    <td class="p-4">Comfort</td>
+                                    <td class="p-4">£15-25</td>
+                                    <td class="p-4">40% pain reduction</td>
+                                    <td class="p-4">
+                                        <a href="https://www.amazon.co.uk/Flexivity-Crutch-Grip-Handle-Covers" class="text-purple-600 hover:underline">Buy</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 border-b">
+                                    <td class="p-4 font-semibold">Waterproof Cover</td>
+                                    <td class="p-4">Hygiene</td>
+                                    <td class="p-4">£20-35</td>
+                                    <td class="p-4">Safe showering</td>
+                                    <td class="p-4">
+                                        <a href="https://limboproducts.co.uk/configurator/" class="text-purple-600 hover:underline">Configure</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 border-b">
+                                    <td class="p-4 font-semibold">Elevation Wedge</td>
+                                    <td class="p-4">Recovery</td>
+                                    <td class="p-4">£30-50</td>
+                                    <td class="p-4">Reduces swelling</td>
+                                    <td class="p-4">
+                                        <a href="https://www.amazon.co.uk/K%D3%A7lbs-Elevation-Pillow-Jacquard-Surgery/" class="text-purple-600 hover:underline">Buy</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 border-b">
+                                    <td class="p-4 font-semibold">Merino Socks</td>
+                                    <td class="p-4">Comfort</td>
+                                    <td class="p-4">£15-25</td>
+                                    <td class="p-4">Temperature regulation</td>
+                                    <td class="p-4">
+                                        <a href="https://www.amazon.co.uk/s?k=best+merino+wool+socks" class="text-purple-600 hover:underline">Browse</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Recovery Bundles -->
+                <section class="mb-16" id="mobility-bundle">
+                    <h2 class="mb-8 font-bold text-3xl text-center">Recommended Recovery Bundles</h2>
+                    <div class="gap-6 grid md:grid-cols-3">
+                        <!-- Essential Bundle -->
+                        <div class="p-6 product-card">
+                            <h3 class="mb-4 font-bold text-xl">Essential Starter Bundle</h3>
+                            <p class="mb-4 text-gray-600">Everything you need for the first 6 weeks</p>
+                            <ul class="space-y-2 mb-6">
+                                <li class="flex items-center">
+                                    <span class="mr-2 text-green-500">✓</span>
+                                    Walking Boot
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="mr-2 text-green-500">✓</span>
+                                    Thetis Night Splint
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="mr-2 text-green-500">✓</span>
+                                    Waterproof Cover
+                                </li>
+                            </ul>
+                            <p class="mb-4 font-bold text-2xl">Total: £200-270</p>
+                            <a href="#contact" class="btn btn-primary btn-default">
+                                Get Bundle Advice
+                            </a>
+                        </div>
+
+                        <!-- Comfort Bundle -->
+                        <div class="p-6 product-card">
+                            <h3 class="mb-4 font-bold text-xl">Comfort Plus Bundle</h3>
+                            <p class="mb-4 text-gray-600">Maximize comfort throughout recovery</p>
+                            <ul class="space-y-2 mb-6">
+                                <li class="flex items-center">
+                                    <span class="mr-2 text-green-500">✓</span>
+                                    Essential Bundle +
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="mr-2 text-green-500">✓</span>
+                                    EVENup Leveler
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="mr-2 text-green-500">✓</span>
+                                    Crutch Handles
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="mr-2 text-green-500">✓</span>
+                                    Elevation Wedge
+                                </li>
+                            </ul>
+                            <p class="mb-4 font-bold text-2xl">Total: £270-350</p>
+                            <a href="#contact" class="btn btn-primary btn-default">
+                                Get Bundle Advice
+                            </a>
+                        </div>
+
+                        <!-- Complete Bundle -->
+                        <div class="p-6 border-2 border-purple-500 product-card">
+                            <div class="mb-2 text-center">
+                                <span class="bg-purple-600 text-white category-badge">Most Popular</span>
+                            </div>
+                            <h3 class="mb-4 font-bold text-xl">Complete Recovery Bundle</h3>
+                            <p class="mb-4 text-gray-600">Everything for optimal recovery</p>
+                            <ul class="space-y-2 mb-6">
+                                <li class="flex items-center">
+                                    <span class="mr-2 text-green-500">✓</span>
+                                    All Comfort Plus items +
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="mr-2 text-green-500">✓</span>
+                                    Merino Socks (2 pairs)
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="mr-2 text-green-500">✓</span>
+                                    Antifungal Powder
+                                </li>
+                            </ul>
+                            <p class="mb-4 font-bold text-2xl">Total: £300-390</p>
+                            <a href="#contact" class="btn btn-primary btn-default">
+                                Get Bundle Advice
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FAQ Section -->
+                <section class="mb-16">
+                    <h2 class="mb-8 font-bold text-3xl text-center">Frequently Asked Questions</h2>
+                    <div class="mx-auto max-w-3xl">
+                        <EquipmentFAQs />
+                    </div>
+                </section>
+
+                <!-- CTA Section -->
+                <section class="bg-purple-50 py-12 rounded-lg text-center">
+                    <h2 class="mb-4 font-bold text-3xl">Start Your Recovery Right</h2>
+                    <p class="mb-8 text-gray-600 text-xl">
+                        Don't let poor equipment choices slow your healing. Get the surgeon-recommended night splint today.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="https://thetismedical.com/night-splint" 
+                           class="btn btn-primary btn-lg">
+                            Get Thetis Night Splint - £79
+                        </a>
+                        <a href="/articles/six-essential-items-to-make-achilles-rupture-recovery-easier" 
+                           class="btn-outline btn btn-lg">
+                            Read Full Equipment Guide
+                        </a>
+                    </div>
+                </section>
+
+            </section>
+        </main>
+        <Footer />
+    </body>
+</html>
