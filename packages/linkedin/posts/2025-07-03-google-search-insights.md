@@ -1,6 +1,6 @@
 ---
 title: "What 10K Google Searches Tell Us About Achilles Patients"
-date: 2025-08-01
+date: 2025-07-03
 type: "Evidence"
 ---
 

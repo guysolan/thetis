@@ -1,6 +1,6 @@
 ---
 title: "Night-Splint Care 101: Fresh Liners, Happy Tendons"
-date: 2025-07-25
+date: 2025-07-15
 type: "Product"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Doctor & Olympian Kim Daybell: Sleep Is Medicine"
-date: 2025-07-18
+date: 2025-06-24
 type: "Story"
 ---
 

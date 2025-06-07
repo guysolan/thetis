@@ -1,6 +1,6 @@
 ---
 title: "Why 45° Plantarflexion Might Do More Harm Than Good"
-date: 2025-07-11
+date: 2025-06-23
 type: "Evidence"
 ---
 

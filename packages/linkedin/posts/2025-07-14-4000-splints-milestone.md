@@ -1,6 +1,6 @@
 ---
 title: "4,000 Splints Shipped—Milestone Unlocked"
-date: 2025-07-08
+date: 2025-07-14
 type: "Founder"
 ---
 

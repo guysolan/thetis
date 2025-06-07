@@ -1,6 +1,6 @@
 ---
 title: "A $20 Heel Lift That Halves Tendon Strain"
-date: 2025-07-02
+date: 2025-06-16
 type: "Product"
 ---
 

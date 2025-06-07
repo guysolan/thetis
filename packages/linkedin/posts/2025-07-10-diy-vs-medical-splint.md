@@ -1,6 +1,6 @@
 ---
 title: "DIY Cast vs Clinical Splint: Mr James Davis Explains the Difference"
-date: 2025-07-15
+date: 2025-07-10
 type: "Story"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Regulatory Price-Tag Showdown: UKCA vs FDA 510(k)"
-date: 2025-07-14
+date: 2025-07-04
 type: "Founder"
 ---
 

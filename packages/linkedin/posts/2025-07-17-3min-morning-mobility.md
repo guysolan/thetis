@@ -1,6 +1,6 @@
 ---
 title: "3-Minute Morning Mobility for Rupture Patients"
-date: 2025-07-29
+date: 2025-07-17
 type: "Evidence"
 ---
 

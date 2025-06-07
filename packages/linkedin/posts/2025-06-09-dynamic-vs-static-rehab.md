@@ -1,6 +1,6 @@
 ---
 title: "Dynamic vs Static Rehab: Why Early Range Matters"
-date: 2025-07-01
+date: 2025-06-09
 type: "Evidence"
 ---
 

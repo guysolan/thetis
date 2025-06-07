@@ -1,6 +1,6 @@
 ---
 title: "Weightlifter Wisdom 🚀 Olivia Blatch on Staying Splint-Safe"
-date: 2025-07-17
+date: 2025-06-17
 type: "Story"
 ---
 
