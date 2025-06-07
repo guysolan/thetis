@@ -1,6 +1,6 @@
 ---
 title: "Shrinking Footprints 🌍 One Splint at a Time"
-date: 2025-07-05
+date: 2025-06-12
 type: "Founder"
 ---
 

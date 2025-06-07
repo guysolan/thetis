@@ -1,6 +1,6 @@
 ---
 title: "Holiday Travel Kit ✈️ Guidance for Your Achilles Patients"
-date: 2025-07-30
+date: 2025-06-20
 type: "Product"
 ---
 

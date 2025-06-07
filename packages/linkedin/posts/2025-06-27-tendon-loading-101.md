@@ -1,6 +1,6 @@
 ---
 title: "Achilles Tendon Loading 101: Get the Goldilocks Dose"
-date: 2025-07-31
+date: 2025-06-27
 type: "Evidence"
 ---
 

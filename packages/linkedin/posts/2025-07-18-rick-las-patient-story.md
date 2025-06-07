@@ -1,6 +1,6 @@
 ---
 title: "From Boot to Rehab: Rick's No-Surgery Success Story"
-date: 2025-07-03
+date: 2025-07-18
 type: "Story"
 ---
 

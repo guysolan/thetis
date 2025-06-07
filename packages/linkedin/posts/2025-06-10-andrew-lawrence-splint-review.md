@@ -1,6 +1,6 @@
 ---
 title: "Athlete Spotlight 🎯 Andrew Lawrence on Night Splints"
-date: 2025-07-16
+date: 2025-06-10
 type: "Story"
 ---
 
