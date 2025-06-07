@@ -18,7 +18,7 @@ Let's break down what patients REALLY need for a complete recovery setup:
 - EVENup Shoe Leveler: $36
 - Night Splint: $93
 
-That's a $246 difference! 💸
+That's a $208 difference! 💸
 
 The key difference? VACOped's Dynamic ROM vs Aircast's Fixed Positions:
 
