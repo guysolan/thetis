@@ -18,4 +18,4 @@ Bonus: remind them to move every 2 h in-flight; early weight-bearing wins don't 
 
 Add this to your discharge packet and thank us later.
 
-#TravelTips #PatientEducation #AchillesRupture
+ #TravelTips #PatientEducation #AchillesRupture

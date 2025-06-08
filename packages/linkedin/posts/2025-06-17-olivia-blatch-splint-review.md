@@ -4,15 +4,16 @@ date: 2025-06-17
 type: "Story"
 ---
 
-🏋️‍♀️ **Olivia Blatch – Team GB Weightlifter** knows a thing or two about heavy lifts. Her verdict on the Thetis night splint?
+🏋️‍♀️ Olivia Blatch – Team GB Weightlifter knows a thing or two about heavy lifts. Her verdict on the Thetis night splint?
 
-> “It's slimmer, lightweight … lets me move more freely while still protecting the tendon.” – *Olivia Blatch* (athletes.ts)
+> “It's slimmer, lightweight … lets me move more freely while still protecting the tendon.” – Olivia Blatch
 
 Why clinicians care:
+
 - Reduces nocturnal plantar-flexion spikes 💤
-- Lets incisions *breathe*—hello, lower infection risk 🩹
+- Lets incisions breathe—hello, lower infection risk 🩹
 - Comfort = adherence; adherence = outcomes ✅
 
 Tag a strength coach who thinks recovery ends when the lights go out. 💡
 
-#Weightlifting #Rehab #AchillesRupture
+# Weightlifting #Rehab #AchillesRupture

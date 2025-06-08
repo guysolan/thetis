@@ -1,0 +1,238 @@
+---
+import { BarChart, LineChart, TrendingUp } from "lucide-astro";
+import countryData from "./data.json";
+import { buttonVariants } from "../../../components/ui/button";
+import type { CountryData } from "./types";
+
+// Helper: find the latest numeric incidence value for a country
+const latestIncidence = (c: CountryData) => {
+  if (!c.incidence) return null;
+  const years = Object.keys(c.incidence)
+    .filter((y) => !Number.isNaN(parseInt(y)))
+    .sort((a, b) => parseInt(b) - parseInt(a));
+  return years.length
+    ? { year: years[0], value: Number(c.incidence[years[0]]) }
+    : null;
+};
+
+// Pre-compute values used in the textual descriptions
+const countriesWithIncidence = (countryData as unknown as CountryData[])
+  .map((c) => ({
+    ...c,
+    latest: latestIncidence(c),
+  }))
+  .filter((c) => c.latest !== null);
+
+// Sort for bar chart (descending by latest incidence)
+const sortedByIncidence = [...countriesWithIncidence].sort(
+  (a, b) => (b.latest?.value ?? 0) - (a.latest?.value ?? 0),
+);
+---
+
+<div class="gap-6 grid grid-cols-1 lg:grid-cols-2">
+  <!-- Incidence by Country (latest year) -->
+  <div class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="font-semibold text-lg">Latest Achilles Rupture Incidence</h3>
+      <BarChart class="text-indigo-600" size={24} />
+    </div>
+    <div class="h-80">
+      <canvas id="incidenceByCountryChart"></canvas>
+    </div>
+    <p class="mt-4 text-gray-600 text-sm">
+      Scandinavian nations continue to post the highest incidence rates, led
+      by&nbsp;
+      <strong>{sortedByIncidence[0]?.country}</strong> at around
+      <strong>{sortedByIncidence[0]?.latest?.value}</strong> ruptures per 100,000
+      person-years.
+    </p>
+  </div>
+
+  <!-- Trend chart -->
+  <div class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="font-semibold text-lg">
+        Incidence Trends (Selected Countries)
+      </h3>
+      <LineChart class="text-indigo-600" size={24} />
+    </div>
+    <div class="h-80">
+      <canvas id="incidenceTrendChart"></canvas>
+    </div>
+    <p class="mt-4 text-gray-600 text-sm">
+      All selected countries show an upward trajectory – an alarming but
+      consistent global pattern.
+    </p>
+  </div>
+
+  <!-- Total Cases Chart -->
+  <div
+    class="col-span-1 lg:col-span-2 bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="font-semibold text-lg">Total Cases by Country</h3>
+      <TrendingUp class="text-indigo-600" size={24} />
+    </div>
+    <div class="h-80">
+      <canvas id="totalCasesChart"></canvas>
+    </div>
+    <p class="mt-4 text-gray-600 text-sm">
+      Total number of Achilles tendon ruptures per country, calculated using
+      incidence rates and population data.
+    </p>
+  </div>
+</div>
+
+<script>
+  import Chart from "chart.js/auto";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    buildIncidenceByCountryChart();
+    buildIncidenceTrendChart();
+    buildTotalCasesChart();
+  });
+
+  function buildIncidenceByCountryChart() {
+    const ctx = document.getElementById(
+      "incidenceByCountryChart",
+    ) as HTMLCanvasElement;
+    if (!ctx) return;
+
+    fetch("/api/incidence/rates")
+      .then((response) => response.json())
+      .then((data) => {
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: data.labels,
+            datasets: [
+              {
+                label: "Incidence (per 100k)",
+                data: data.values,
+                backgroundColor: "rgba(79, 70, 229, 0.7)", // indigo-600
+                borderColor: "rgba(79, 70, 229, 1)", // indigo-600
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: "Cases per 100,000 person-years",
+                },
+              },
+              x: {
+                ticks: { autoSkip: false, maxRotation: 45, minRotation: 45 },
+              },
+            },
+          },
+        });
+      });
+  }
+
+  function buildIncidenceTrendChart() {
+    const ctx = document.getElementById(
+      "incidenceTrendChart",
+    ) as HTMLCanvasElement;
+    if (!ctx) return;
+
+    fetch("/api/incidence/trends")
+      .then((response) => response.json())
+      .then((data) => {
+        new Chart(ctx, {
+          type: "line",
+          data: {
+            datasets: data.map((dataset: any, index: number) => ({
+              ...dataset,
+              borderColor: `hsl(${index * 45}, 70%, 50%)`,
+              backgroundColor: `hsla(${index * 45}, 70%, 50%, 0.1)`,
+              fill: false,
+              tension: 0.4,
+            })),
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                type: "linear",
+                title: { display: true, text: "Year" },
+                min: 1990,
+                max: 2025,
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "Incidence (per 100k)",
+                },
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+      });
+  }
+
+  function buildTotalCasesChart() {
+    const ctx = document.getElementById("totalCasesChart") as HTMLCanvasElement;
+    if (!ctx) return;
+
+    fetch("/api/incidence/totals")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Total cases data:", data); // Debug log
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: data.labels,
+            datasets: [
+              {
+                label: "Total Cases",
+                data: data.values,
+                backgroundColor: "rgba(79, 70, 229, 0.7)", // indigo-600
+                borderColor: "rgba(79, 70, 229, 1)", // indigo-600
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: "Total Cases",
+                },
+                ticks: {
+                  callback: (value) => `${Number(value).toLocaleString()}`,
+                },
+              },
+              x: {
+                ticks: { autoSkip: false, maxRotation: 45, minRotation: 45 },
+              },
+            },
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label: (context) => {
+                    const value = context.raw as number;
+                    return `Total Cases: ${value.toLocaleString()}`;
+                  },
+                },
+              },
+            },
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching total cases data:", error);
+      });
+  }
+</script>

@@ -2,7 +2,7 @@ import {
   HeartHandshake,
   Handshake,
   Box,
-  Zap,
+  ClipboardCheck,
   Moon,
   Stethoscope,
   Microscope,
@@ -10,7 +10,6 @@ import {
   Star,
 } from "lucide-react";
 import nightSplintImage from "./night_splint_bed_side.jpg";
-import traumaSplintImage from "./trauma_splint.jpg";
 
 type Link = {
   title: string;
@@ -41,19 +40,25 @@ export const productLinks: Link[] = [
 ];
 
 export const partnerLinks: Link[] = [
+    {
+    title: "Professionals",
+    description: "Join other clinicians improving patient recovery.",
+    href: "/professionals",
+    icon: <Stethoscope size={20} />,
+    variant: "default",
+  },
   {
     title: "Our Partners",
     description: "Our partners are the best in the business.",
     href: "/partners",
     icon: <HeartHandshake size={20} />,
-    variant: "default",
+    variant: "outline",
   },
-
-  {
-    title: "Professionals",
-    description: "Join other clinicians improving patient recovery.",
-    href: "/professionals",
-    icon: <Stethoscope size={20} />,
+   {
+    title: "Our Research",
+    description: "Our analysis of Achilles Rupture Recovery.",
+    href: "/research",
+    icon: <Microscope size={20} />,
     variant: "outline",
   },
   {
@@ -61,7 +66,7 @@ export const partnerLinks: Link[] = [
     description:
       "Proven to shorten time to care and improve patient experience.",
     href: "/evidence",
-    icon: <Microscope size={20} />,
+    icon: <ClipboardCheck size={20} />,
     variant: "outline",
   },
 ];

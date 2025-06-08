@@ -1,29 +1,14 @@
 ---
+import ColorGradient from "../../components/ColorGradient.astro";
 import Layout from "../../layouts/Layout.astro";
 import { ArrowRight, Users, Pill, Scale, Clock } from "lucide-astro";
 
 const resources = [
     {
-        title: "Boot Comparison: Aircast vs VACOped",
-        description:
-            "Compare two popular walking boots used in Achilles rupture recovery. Learn about comfort, cost, and effectiveness.",
-        href: "/blog/aircast-or-vacoped",
-        icon: Users,
-        audience: "patients",
-    },
-    {
-        title: "Blood Thinners and Achilles Rupture",
-        description:
-            "Understanding the role of anticoagulants in Achilles rupture treatment and recovery.",
-        href: "/blog/blood-thinners",
-        icon: Pill,
-        audience: "both",
-    },
-    {
         title: "Surgery or Non-Surgical Treatment?",
         description:
             "Evidence-based comparison of surgical vs non-surgical treatment approaches across different countries.",
-        href: "/blog/operation-or-not",
+        href: "/research/operation-or-not",
         icon: Scale,
         audience: "both",
     },
@@ -31,7 +16,7 @@ const resources = [
         title: "Recovery Timeline Comparison",
         description:
             "International comparison of recovery protocols, timelines, and rehabilitation approaches.",
-        href: "/blog/timeline-by-country",
+        href: "/research/timeline-by-country",
         icon: Clock,
         audience: "both",
     },
@@ -39,7 +24,7 @@ const resources = [
         title: "Global Trends in the Incidence of Achilles Tendon Rupture",
         description:
             "Comprehensive analysis of global trends in Achilles tendon rupture incidence and the factors driving changes in occurrence rates.",
-        href: "/blog/incidence",
+        href: "/research/incidence",
         icon: Users,
         audience: "both",
     },
@@ -50,7 +35,7 @@ const resources = [
     title="Achilles Rupture Resources"
     description="Comprehensive guide to Achilles tendon rupture treatment, recovery, and decision-making for patients and healthcare providers."
 >
-    <main class="mx-auto px-4 py-12 container">
+    <ColorGradient>
         <div class="mx-auto max-w-3xl">
             <h1 class="mb-6 font-bold text-4xl">Achilles Rupture Resources</h1>
 
@@ -101,20 +86,15 @@ const resources = [
                     ))
                 }
             </div>
-
-            <div class="bg-gray-50 mt-12 p-6 rounded-lg">
-                <h2 class="mb-4 font-semibold text-xl">
-                    About These Resources
-                </h2>
-                <p class="text-gray-700">
-                    These articles are based on current medical research and
-                    international treatment protocols. While they provide
-                    valuable information, always consult with your healthcare
-                    provider for personalized medical advice. Treatment
-                    approaches may vary based on individual circumstances and
-                    local medical practices.
-                </p>
-            </div>
         </div>
-    </main>
+    </ColorGradient>
+
+    <div class="bg-gray-50 mx-4 md:mx-auto mt-12 p-6 rounded-lg md:max-w-3xl">
+        <h2 class="mb-4 font-semibold text-xl">About These Resources</h2>
+        <p class="text-gray-700">
+            These research articles were originally compiled for Thetis
+            Medical's internal research and are now publicly available to
+            benefit the global medical community.
+        </p>
+    </div>
 </Layout>

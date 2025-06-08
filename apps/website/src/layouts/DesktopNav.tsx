@@ -18,7 +18,6 @@ import { Button, buttonVariants } from "../components/ui/button";
 const contentWidth = "min-w-[min(50vw,700px)]";
 
 import { partnerLinks, contactLinks } from "../content/pages.tsx";
-import { ArrowRight, Star } from "lucide-react";
 import ReviewsLink from "../components/ReviewsLink.tsx";
 
 function DesktopNav() {
@@ -79,21 +78,10 @@ function DesktopNav() {
             <NavigationMenuContent
               className={cn("p-6 flex flex-col gap-2", contentWidth)}
             >
-              <div className="flex flex-row gap-4">
-                <div className="flex flex-col flex-1 gap-4">
-                  {partnerLinks
-                    .filter((l) => l.variant === "default")
-                    .map((link) => (
-                      <LinkCard key={link.href} {...link} />
-                    ))}
-                </div>
-                <div className="flex flex-col flex-1 gap-4">
-                  {partnerLinks
-                    .filter((l) => l.variant === "outline")
-                    .map((link) => (
-                      <LinkCard key={link.href} {...link} />
-                    ))}
-                </div>
+              <div className="gap-4 grid grid-cols-2">
+                {partnerLinks.map((link) => (
+                  <LinkCard key={link.href} {...link} variant={link.variant || "outline"} />
+                ))}
               </div>
             </NavigationMenuContent>
           </NavigationMenuItem>

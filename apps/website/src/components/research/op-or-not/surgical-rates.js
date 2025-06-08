@@ -1,4 +1,4 @@
-import countryData from "../../../components/blog/op-or-not/data.json";
+import countryData from "./data.json";
 
 export async function get() {
   // Filter out countries with no surgical rate data

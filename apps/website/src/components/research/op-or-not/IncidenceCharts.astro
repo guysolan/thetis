@@ -58,8 +58,8 @@ const trendCountries = [
             <canvas id="incidenceRatesChart"></canvas>
         </div>
         <p class="mt-4 text-gray-600 text-sm">
-            Latest available incidence rates show significant variation
-            across countries, with the highest rates in Scandinavian countries.
+            Latest available incidence rates show significant variation across
+            countries, with the highest rates in Scandinavian countries.
         </p>
     </div>
 
@@ -87,22 +87,25 @@ const trendCountries = [
             <canvas id="regionalIncidenceChart"></canvas>
         </div>
         <p class="mt-4 text-gray-600 text-sm">
-            Clear geographical patterns exist in incidence rates, with Northern European
-            countries showing significantly higher rates than other regions.
+            Clear geographical patterns exist in incidence rates, with Northern
+            European countries showing significantly higher rates than other
+            regions.
         </p>
     </div>
 
     <div class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg">
         <div class="flex justify-between items-center mb-4">
-            <h3 class="font-semibold text-lg">Incidence Growth Rate by Country</h3>
+            <h3 class="font-semibold text-lg">
+                Incidence Growth Rate by Country
+            </h3>
             <BarChart class="text-emerald-600" size={24} />
         </div>
         <div class="h-80">
             <canvas id="incidenceGrowthChart"></canvas>
         </div>
         <p class="mt-4 text-gray-600 text-sm">
-            This chart shows the percentage increase in Achilles rupture incidence
-            over the past decade across different countries.
+            This chart shows the percentage increase in Achilles rupture
+            incidence over the past decade across different countries.
         </p>
     </div>
 
@@ -119,16 +122,15 @@ const trendCountries = [
             <canvas id="demographicsChart"></canvas>
         </div>
         <p class="mt-4 text-gray-600 text-sm">
-            This visualization explores the relationship between demographic factors
-            (such as median age and gender distribution) and Achilles rupture incidence rates.
+            This visualization explores the relationship between demographic
+            factors (such as median age and gender distribution) and Achilles
+            rupture incidence rates.
         </p>
     </div>
 </div>
 
 <div class="bg-white shadow-sm mt-8 p-5 border border-gray-100 rounded-lg">
-    <h3 class="mb-4 font-semibold text-lg">
-        Key Insights from Incidence Data
-    </h3>
+    <h3 class="mb-4 font-semibold text-lg">Key Insights from Incidence Data</h3>
     <ul class="space-y-2 pl-5 text-gray-700 list-disc">
         <li>
             <strong>Geographic Incidence Patterns:</strong> Clear geographical patterns
@@ -136,24 +138,25 @@ const trendCountries = [
             the highest rates (30-42 per 100,000 person-years).
         </li>
         <li>
-            <strong>Universal Incidence Increase:</strong> All studied countries show
-            increasing Achilles tendon rupture incidence over time, suggesting global
-            trends in risk factors.
+            <strong>Universal Incidence Increase:</strong> All studied countries
+            show increasing Achilles tendon rupture incidence over time, suggesting
+            global trends in risk factors.
         </li>
         <li>
-            <strong>Age Shift:</strong> Many countries report an increasing median age
-            of patients with Achilles ruptures, with Sweden showing an increase from
-            44 years (2002) to 50 years (2021).
+            <strong>Age Shift:</strong> Many countries report an increasing median
+            age of patients with Achilles ruptures, with Sweden showing an increase
+            from 44 years (2002) to 50 years (2021).
         </li>
         <li>
-            <strong>Gender Distribution:</strong> Males consistently account for 70-80%
-            of all Achilles ruptures across countries, with the highest risk in men
-            aged 40-49 years.
+            <strong>Gender Distribution:</strong> Males consistently account for
+            70-80% of all Achilles ruptures across countries, with the highest risk
+            in men aged 40-49 years.
         </li>
         <li>
-            <strong>Potential Risk Factors:</strong> The increasing incidence may be
-            related to greater sports participation among middle-aged adults, changes
-            in recreational activities, and potentially increased diagnosis rates.
+            <strong>Potential Risk Factors:</strong> The increasing incidence may
+            be related to greater sports participation among middle-aged adults,
+            changes in recreational activities, and potentially increased diagnosis
+            rates.
         </li>
     </ul>
 </div>
@@ -174,7 +177,9 @@ const trendCountries = [
     }
 
     function createIncidenceRatesChart() {
-        const ctx = document.getElementById("incidenceRatesChart") as HTMLCanvasElement;
+        const ctx = document.getElementById(
+            "incidenceRatesChart",
+        ) as HTMLCanvasElement;
         if (!ctx) return;
 
         fetch("/api/op-or-not/incidence-rates")
@@ -219,7 +224,9 @@ const trendCountries = [
     }
 
     function createIncidenceTrendChart() {
-        const ctx = document.getElementById("incidenceTrendChart") as HTMLCanvasElement;
+        const ctx = document.getElementById(
+            "incidenceTrendChart",
+        ) as HTMLCanvasElement;
         if (!ctx) return;
 
         fetch("/api/op-or-not/incidence-trends")
@@ -257,7 +264,9 @@ const trendCountries = [
     }
 
     function createRegionalIncidenceChart() {
-        const ctx = document.getElementById("regionalIncidenceChart") as HTMLCanvasElement;
+        const ctx = document.getElementById(
+            "regionalIncidenceChart",
+        ) as HTMLCanvasElement;
         if (!ctx) return;
 
         fetch("/api/op-or-not/regional-incidence")
@@ -307,7 +316,9 @@ const trendCountries = [
     }
 
     function createIncidenceGrowthChart() {
-        const ctx = document.getElementById("incidenceGrowthChart") as HTMLCanvasElement;
+        const ctx = document.getElementById(
+            "incidenceGrowthChart",
+        ) as HTMLCanvasElement;
         if (!ctx) return;
 
         fetch("/api/op-or-not/incidence-growth")
@@ -352,7 +363,9 @@ const trendCountries = [
     }
 
     function createDemographicsChart() {
-        const ctx = document.getElementById("demographicsChart") as HTMLCanvasElement;
+        const ctx = document.getElementById(
+            "demographicsChart",
+        ) as HTMLCanvasElement;
         if (!ctx) return;
 
         fetch("/api/op-or-not/demographics-incidence")

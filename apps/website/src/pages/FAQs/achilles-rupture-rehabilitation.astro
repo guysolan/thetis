@@ -1,0 +1,377 @@
+---
+import FaqSchemaAccordion from "../../components/research/FaqSchemaAccordion.astro";
+import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
+import FAQsLayout from "../../layouts/FAQsLayout.astro";
+import {
+    Dumbbell,
+    Timer,
+    Footprints,
+    Zap,
+    Trophy,
+    Heart,
+    Activity,
+    Move,
+    Weight,
+    Target,
+    CheckCircle,
+    AlertCircle,
+    Clock,
+    ArrowRight,
+} from "lucide-astro";
+
+const exercisePhases = [
+    {
+        time: "Weeks 0-2",
+        icon: Timer,
+        title: "Early Recovery Phase",
+        exercises: [
+            {
+                icon: Heart,
+                title: "Gentle Movement",
+                items: [
+                    "Light calf squeezes while sitting",
+                    "Small ankle circles (keep foot pointed down)",
+                    "Focus on keeping the wound clean and dry",
+                ],
+            },
+            {
+                icon: Activity,
+                title: "Upper Body & Core",
+                items: [
+                    "Hip and knee exercises with resistance bands",
+                    "Core strengthening exercises",
+                    "Upper body workouts to maintain fitness",
+                ],
+            },
+        ],
+    },
+    {
+        time: "Weeks 2-6",
+        icon: Footprints,
+        title: "Walking Phase",
+        exercises: [
+            {
+                icon: ArrowRight,
+                title: "Boot Walking",
+                items: [
+                    "Start walking in your boot with heel wedges",
+                    "Practice proper walking technique",
+                    "Gradually increase walking distance",
+                ],
+            },
+            {
+                icon: Move,
+                title: "Early Exercises",
+                items: [
+                    "Gentle ankle movements (keep knee bent)",
+                    "Light calf squeezes in different positions",
+                    "Stationary bike when wound is healed",
+                ],
+            },
+        ],
+    },
+    {
+        time: "Weeks 6-12",
+        icon: Dumbbell,
+        title: "Strength Building",
+        exercises: [
+            {
+                icon: Weight,
+                title: "Calf Strengthening",
+                items: [
+                    "Two-legged heel raises on a step",
+                    "Seated calf raises with light weights",
+                    "Walking practice with less heel lift",
+                ],
+            },
+            {
+                icon: Activity,
+                title: "Functional Movement",
+                items: [
+                    "Basic squats and lunges",
+                    "Pool exercises for better movement",
+                    "Balance and stability exercises",
+                ],
+            },
+        ],
+    },
+    {
+        time: "Weeks 12-24",
+        icon: Zap,
+        title: "Return to Activity",
+        exercises: [
+            {
+                icon: Target,
+                title: "Advanced Strength",
+                items: [
+                    "One-legged heel raises",
+                    "Jumping and hopping exercises",
+                    "Sport-specific movements",
+                ],
+            },
+            {
+                icon: CheckCircle,
+                title: "Movement Quality",
+                items: [
+                    "Focus on smooth, natural movement",
+                    "Practice sport-specific skills",
+                    "Gradual return to full activity",
+                ],
+            },
+        ],
+    },
+    {
+        time: "Milestones",
+        icon: Trophy,
+        title: "Key Recovery Milestones",
+        exercises: [
+            {
+                icon: Clock,
+                title: "Strength Goals",
+                items: [
+                    "Week 8: Two-legged heel raises through full range",
+                    "Week 12: One-legged heel raises",
+                    "Week 16: Ready for dynamic activities",
+                    "Week 24: Return to sport (requires >90% strength)",
+                ],
+            },
+            {
+                icon: AlertCircle,
+                title: "Important Notes",
+                items: [
+                    "Always follow your physio's specific plan",
+                    "Stop if you feel sharp pain",
+                    "Timeline may vary based on individual healing",
+                    "Focus on quality of movement over speed of progress",
+                ],
+            },
+        ],
+    },
+];
+---
+
+<FAQsLayout
+    title="Achilles Rupture Rehabilitation: Week-by-Week Guide & Return-to-Sport Milestones"
+    description="Practical recovery roadmap after an Achilles tendon rupture – weight-bearing, physio exercises, driving, and getting back to sport."
+>
+    <section id="faq-slide" class="faq slide">
+        <div class="questions">
+            <h2>Find your answer:</h2>
+            <a href="#q1"
+                ><h3>Achilles rehab timeline – what happens each week?</h3></a
+            >
+            <a href="#q2"><h3>When can I start physiotherapy?</h3></a>
+            <a href="#q3"><h3>When is it safe to put weight on my foot?</h3></a>
+            <a href="#q4"
+                ><h3>Best home exercises after an Achilles rupture</h3></a
+            >
+            <a href="#q5"><h3>When can I drive again?</h3></a>
+            <a href="#q6"><h3>How do I progress from walking to running?</h3></a
+            >
+            <a href="#q7"><h3>Products that make rehab easier</h3></a>
+            <a href="#q8"><h3>Top tips to avoid re-rupture</h3></a>
+        </div>
+        <div class="answers">
+            <div id="q1"></div>
+            <h2>Achilles rehab timeline – what happens each week?</h2>
+            <div>
+                <p>
+                    Recovery usually follows a <a
+                        href="/FAQs/achilles-rupture-timeline"
+                        class="text-primary underline">week-by-week roadmap</a
+                    >:
+                </p>
+                <ul class="flex flex-col gap-y-4 my-2">
+                    <li class="!my-1 !py-0">
+                        <strong>Weeks 0-2:</strong> Boot in tip-toe (equinus) position,
+                        partial weight-bearing.
+                    </li>
+                    <li class="!my-1 !py-0">
+                        <strong>Weeks 2-6:</strong> Gradual heel-wedge reduction,
+                        full weight-bearing, begin gentle isometrics.
+                    </li>
+                    <li class="!my-1 !py-0">
+                        <strong>Weeks 6-10:</strong> Transition out of boot, double
+                        then single-leg heel raises.
+                    </li>
+                    <li class="!my-1 !py-0">
+                        <strong>Months 3-6:</strong> Running drills and sport-specific
+                        training.
+                    </li>
+                    <li class="!my-1 !py-0">
+                        <strong>6+ months:</strong> Return to competition once calf
+                        strength ≥90% of the other side.
+                    </li>
+                </ul>
+            </div>
+
+            <div id="q2"></div>
+            <h2>When can I start physiotherapy?</h2>
+            <p>
+                Most protocols introduce <strong
+                    >guided physio around week 2-3</strong
+                > for simple ankle range-of-motion and seated calf activation. By
+                weeks 6-10 you'll progress to resistance bands and load-bearing heel
+                raises.
+            </p>
+
+            <div id="q3"></div>
+            <h2>When is it safe to put weight on my foot?</h2>
+            <p>
+                Evidence supports <strong>early protected weight-bearing</strong
+                > in a boot as soon as comfort permits – often within the first few
+                days. This promotes tendon healing and reduces stiffness. Keep the
+                foot pointed (don't let the ankle bend up) whenever you stand.
+            </p>
+
+            <div id="q4"></div>
+            <h2>Best home exercises after an Achilles rupture</h2>
+
+            <div class="flex flex-col gap-y-8 mx-auto mt-8 w-full">
+                {
+                    exercisePhases.map((phase) => (
+                        <div class="bg-primary/10 border border-primary/30 rounded-lg">
+                            <div class="flex items-center gap-2 mb-4 p-4 pb-2 border-primary/30 border-b">
+                                <phase.icon class="w-5 h-5 text-primary" />
+                                <span class="font-medium text-primary text-lg">
+                                    {phase.time}
+                                </span>
+                            </div>
+                            <div class="space-y-4 p-4 pt-0">
+                                {phase.exercises.map((exercise) => (
+                                    <div>
+                                        <div class="font-medium text-md text-neutral-700">
+                                            {exercise.title}
+                                        </div>
+                                        <ul class="my-2 ml-4 text-sm list-disc list-inside">
+                                            {exercise.items.map((item) => (
+                                                <li class="!my-1 !py-0">
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <style>
+                @media print {
+                    .timeline-block {
+                        break-inside: avoid;
+                        page-break-inside: avoid;
+                    }
+                }
+
+                html {
+                    scroll-behavior: smooth;
+                }
+            </style>
+
+            <p class="mt-4 text-muted-foreground text-sm">
+                Remember: Always follow your physio's specific plan and stop if
+                you feel sharp pain. Your timeline might be different based on
+                your doctor's advice and how you're healing.
+            </p>
+
+            <div id="q5"></div>
+            <h2>When can I drive again?</h2>
+            <p>
+                For <em>right</em>-sided injuries most surgeons recommend
+                waiting until you can perform an emergency stop simulation in
+                trainers – typically after week 8-10 once you're out of the
+                boot. Left-sided injuries in an automatic car may return sooner.
+                Check with your doctor and insurer first.
+            </p>
+
+            <div id="q6"></div>
+            <h2>How do I progress from walking to running?</h2>
+            <p>
+                Start with a <strong>jog-walk programme</strong>: 1 min jog / 1
+                min walk x10 on a flat track when you can perform 25 single-leg
+                heel raises pain-free. Gradually increase jog intervals and
+                introduce direction changes.
+            </p>
+
+            <div id="q7"></div>
+            <h2>Products that make recovery easier</h2>
+            <p>
+                • <a
+                    href="https://thetismedical.com/splint"
+                    target="_blank"
+                    rel="noopener">Achilles Rupture Splint</a
+                > – sleep comfortably without risking re-rupture.<br />
+                • <a
+                    href="https://achilles-rupture.com/recovery-equipment-guide"
+                    class="text-primary underline">Full equipment guide</a
+                > compares boots, waterproof covers and more.
+            </p>
+
+            <div id="q8"></div>
+            <h2>Top tips to avoid re-rupture</h2>
+            <ul class="space-y-3">
+                <li class="flex items-start gap-2 !my-4 !py-0">
+                    <CheckCircle class="mt-0.5 w-5 h-5 text-primary" />
+                    <span
+                        >Wear the boot or splint <em>every</em> night for the full
+                        10&nbsp;weeks.</span
+                    >
+                </li>
+                <li class="flex items-start gap-2 !my-4 !py-0">
+                    <CheckCircle class="mt-0.5 w-5 h-5 text-primary" />
+
+                    <span
+                        >Remove the boot only when seated and never let the
+                        ankle bend up.</span
+                    >
+                </li>
+                <li class="flex items-start gap-2 !my-4 !py-0">
+                    <CheckCircle class="mt-0.5 w-5 h-5 text-primary" />
+
+                    <span
+                        >Use crutches for balance until you can walk without a
+                        limp.</span
+                    >
+                </li>
+                <li class="flex items-start gap-2 !my-4 !py-0">
+                    <CheckCircle class="mt-0.5 w-5 h-5 text-primary" />
+
+                    <span
+                        >Follow your physio's loading plan – calf strength is
+                        king.</span
+                    >
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <NightSplintAdvert />
+
+    <FaqSchemaAccordion
+        faqs={[
+            {
+                question: "What is the typical Achilles rehab timeline?",
+                answer: "Weeks 0-2: partial weight-bearing in a boot. Weeks 2-6: heel-wedge reduction & early physio. Weeks 6-10: out of boot, heel raises. Months 3-6: return-to-run drills. 6+ months: unrestricted sport when strength >90 %.",
+            },
+            {
+                question: "When can I start physiotherapy?",
+                answer: "Usually around week 2-3 for gentle range-of-motion and isometrics, progressing to resistance work by week 6-10.",
+            },
+            {
+                question: "How soon can I walk without crutches?",
+                answer: "Many patients discard crutches between weeks 2-4 once full weight-bearing in the boot feels comfortable.",
+            },
+            {
+                question: "How do I know I'm ready to run?",
+                answer: "Aim for 25 single-leg heel raises and 90 % hop test symmetry before beginning a run-walk programme.",
+            },
+            {
+                question: "What gear helps during rehab?",
+                answer: "A purpose-built night splint, EVENup shoe leveler, waterproof boot cover and Therabands can all make rehab smoother. See our full equipment guide for details.",
+            },
+        ]}
+    />
+</FAQsLayout>

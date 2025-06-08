@@ -1,23 +1,21 @@
 ---
-const { frontmatter, article } = Astro.props
-import dayjs from 'dayjs'
-import Author from './Author.astro'
-// import mainImage from '../assets/blog/aircast-vs-vacoped.png'
-const date = dayjs(frontmatter?.last_edited_time).format('DD MMMM YYYY')
+const { frontmatter, article } = Astro.props;
+import dayjs from "dayjs";
+import Author from "./Author.astro";
+const date = dayjs(frontmatter?.last_edited_time).format("DD MMMM YYYY");
 ---
 
 <script
     type="text/partytown"
     slot="head"
-    src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"
-></script>
+    src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 
-<section class="blog-landing pt-8">
+<section class="pt-8 blog-landing">
     <div class="blog-words">
         <div>
             <h1>{article?.title}</h1>
             {
-                frontmatter?.author === 'matthew solan' && (
+                frontmatter?.author === "matthew solan" && (
                     <Author imageAlt={frontmatter?.image_alt} />
                 )
             }

@@ -4,15 +4,18 @@ date: 2025-06-12
 type: "Founder"
 ---
 
-🌱 **18 g less plastic per splint** since we switched to recycled TPU straps (Q2 2024).
+🌱 We moved from boxes to bags for our Achilles Rupture Splints—here are the results (Q2 2024).
 
-Why clinicians should care:
-- Parcels weigh 12 % less → 🚚 shipping 1 day faster on average (DHL data, n = 820 shipments)
-- Lighter boot bag for patients on crutches 💪
-- Same tensile strength (ISO 13934-1 lab report)
+Why this matters for North America:
 
-Small tweak, big scale: 4 000 units = **72 kg plastic spared**—roughly 7 000 water bottles.
+- Moved from boxes to bags: 2x more space efficient
+- 2000 units = 80 boxes → now just 40 bags
+- Fewer shipments = lower shipping costs for our customers
+- Reduced air freight = smaller carbon footprint
+- More budget for UK manufacturing, less for shipping
 
-What other green tweaks would you like to see? 🔽
+We'd rather invest in UK manufacturing than pay to ship air around the world.
 
-#Sustainability #MedTech #AchillesRupture
+Sustainability rarely gets a look-in in healthcare. What other changes would you like to see made? 🔽
+
+ #Sustainability #MedTech #AchillesRupture

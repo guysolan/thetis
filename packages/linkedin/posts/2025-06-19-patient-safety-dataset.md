@@ -14,12 +14,13 @@ type: "Evidence"
 | DVTs | 0 |
 
 How we track 👇
+
 1. Unique serial on every unit 🔢
 2. Mandatory surgeon / patient feedback form (90-day & 180-day)
 3. Automated flag if adverse event logged
 
-> "It is worth every penny as it stops the misery of trying to get good night's sleep!" – *Mr Ian Gill*, Foot & Ankle Surgeon (clinicians.ts)
+> "It is worth every penny as it stops the misery of trying to get good night's sleep!" – *Mr Ian Gill*, Foot & Ankle Surgeon
 
 Data is boring—until it's your license on the line. 🔍
 
-#PatientSafety #MDR #AchillesRupture
+ #PatientSafety #MDR #AchillesRupture

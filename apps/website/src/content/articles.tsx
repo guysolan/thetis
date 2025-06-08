@@ -9,8 +9,10 @@ import {
   CircleX,
   Heart,
   Shield,
+  Dumbbell,
 } from "lucide-react";
 export const articles = [
+
   {
     href: "/FAQs/achilles-rupture-timeline",
     title: "Achilles Rupture Timeline",
@@ -49,6 +51,18 @@ export const articles = [
     tags: [{ words: "Recovery", color: "bg-purple-200" }],
     image: AchillesDrawing,
     icon: <Hourglass />,
+  },
+    {
+    href: "/FAQs/achilles-rupture-rehabilitation",
+    title: "Achilles Rupture Rehabilitation Guide",
+    description:
+      "A comprehensive week-by-week guide to Achilles rupture rehabilitation, including exercise phases, recovery milestones, and expert tips for a successful return to activity.",
+    tags: [
+      { words: "Recovery", color: "bg-purple-200" },
+      { words: "Exercise", color: "bg-green-200" },
+    ],
+    image: AchillesDrawing,
+    icon: <Dumbbell />,
   },
   {
     href: "/FAQs/what-happens-if-my-achilles-is-ruptured",

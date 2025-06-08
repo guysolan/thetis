@@ -1,7 +1,6 @@
 ---
 import Layout from "../../layouts/ArticleLayout.astro";
-import OpOrNotByCountry from "../../components/blog/op-or-not/OpOrNotByCountry.astro";
-import MasterOpOrNotComponent from "../../components/blog/op-or-not/MasterOpOrNotComponent.astro";
+import MasterOpOrNotComponent from "../../components/research/op-or-not/MasterOpOrNotComponent.astro";
 
 // SEO metadata
 const title =
@@ -19,7 +18,6 @@ const tags = ["science", "guides"] as ("science" | "guides")[];
   tags={tags}
 >
   <main class="mx-auto px-4 py-8 container">
-    <!-- <OpOrNotByCountry /> -->
     <MasterOpOrNotComponent />
   </main></Layout
 >
