@@ -8,12 +8,8 @@ type: "Story"
 
 > “It's slimmer, lightweight … lets me move more freely while still protecting the tendon.” – Olivia Blatch
 
-Why clinicians care:
+If you treat athletes, pro or not - telling them about the splint is an easy way to allow them to recover well rested.
 
-- Reduces nocturnal plantar-flexion spikes 💤
-- Lets incisions breathe—hello, lower infection risk 🩹
-- Comfort = adherence; adherence = outcomes ✅
-
-Tag a strength coach who thinks recovery ends when the lights go out. 💡
+Do you recommend the splint to your patients or know someone who should? 💡
 
 # Weightlifting #Rehab #AchillesRupture

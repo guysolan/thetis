@@ -4,15 +4,8 @@ date: 2025-06-24
 type: "Story"
 ---
 
-🏓 **Kim Daybell** – Team GB Para-table-tennis star *and* doctor – cut straight to the science:
+🏓 **Kim Daybell** – Team GB Para-table-tennis star and doctor:
 
-> “The splint has allowed me to get the sleep that is so vital … while giving surgical wounds a chance to breathe.” – *Kim Daybell* (athletes.ts)
+> “The splint has allowed me to get the sleep that is so vital … while giving surgical wounds a chance to breathe.” – *Kim Daybell*
 
-Key takeaways 🩺
-- Less bulk = ↓ skin maceration
-- Secure 20° PF angle prevents midnight dorsiflexion jolts
-- Better sleep → ↑ collagen synthesis (as high as 50 % during deep sleep)
-
-Clinicians: are you prescribing *sleep medicine* in brace form yet?
-
-#SportsMedicine #SleepScience #AchillesRecovery
+# SportsMedicine #SleepScience #AchillesRecovery

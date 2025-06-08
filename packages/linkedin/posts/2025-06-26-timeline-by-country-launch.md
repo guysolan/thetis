@@ -6,7 +6,8 @@ type: "Product"
 
 🌐 New feature drop: **Timeline-by-Country** comparison tool.
 
-<timeline-by-country.astro> now lets patients & clinicians:
+<https://thetismedical.com/research/timeline-by-country> now lets patients & clinicians:
+
 - Compare 🇺🇸 🇬🇧 🇩🇪 rehab protocols side-by-side
 - Toggle surgical vs conservative routes
 - Export PDF for clinic handouts 📄
@@ -18,4 +19,4 @@ Try it → AchillesRupture.com/timeline
 
 What country should we add next? 🌏
 
-#DigitalHealth #PatientEducation #AchillesRupture
+# DigitalHealth #PatientEducation #AchillesRupture
