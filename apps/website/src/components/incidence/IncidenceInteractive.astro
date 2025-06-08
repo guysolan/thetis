@@ -1,0 +1,112 @@
+---
+import IncidenceCharts from "./IncidenceCharts.astro";
+import LongReport from "../blog/incidence/LongReport.astro";
+import { ChartBar, FileText, Flag } from "lucide-astro";
+import countryData from "../blog/op-or-not/data.json";
+
+// Prepare overview table data (latest incidence per country)
+const latestIncidence = (c) => {
+  if (!c.incidence) return null;
+  const years = Object.keys(c.incidence)
+    .filter((y) => !Number.isNaN(parseInt(y)))
+    .sort((a, b) => parseInt(b) - parseInt(a));
+  return years.length ? { year: years[0], value: c.incidence[years[0]] } : null;
+};
+
+const overview = countryData
+  .map((c) => ({ ...c, latest: latestIncidence(c) }))
+  .filter((c) => c.latest !== null)
+  .sort((a, b) => b.latest.value - a.latest.value);
+
+function getUnicodeFlagIcon(code) {
+  try {
+    return require("country-flag-icons/unicode")(code);
+  } catch {
+    return "";
+  }
+}
+
+<div class="mx-auto px-2 sm:px-4 pb-8 max-w-5xl">
+  <!-- Tab navigation -->
+  <div class="mb-8 border-gray-200 border-b">
+    <ul class="flex flex-wrap -mb-px font-medium text-sm text-center" role="tablist">
+      <li class="mr-2" role="presentation">
+        <button id="data-tab" data-tabs-target="#data" type="button" role="tab" aria-controls="data" aria-selected="true" class="inline-block p-4 border-emerald-600 border-b-2 rounded-t-lg active">
+          <div class="flex items-center"><ChartBar size={16} class="mr-2"/>Data Visualisation</div>
+        </button>
+      </li>
+      <li class="mr-2" role="presentation">
+        <button id="overview-tab" data-tabs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="false" class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600">
+          <div class="flex items-center"><Flag size={16} class="mr-2"/>Country Overview</div>
+        </button>
+      </li>
+      <li role="presentation">
+        <button id="report-tab" data-tabs-target="#report" type="button" role="tab" aria-controls="report" aria-selected="false" class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600">
+          <div class="flex items-center"><FileText size={16} class="mr-2"/>Detailed Report</div>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Tab panels -->
+  <div id="tab-content">
+    <div id="data" role="tabpanel" aria-labelledby="data-tab" class="block bg-gray-50 p-2 sm:p-4 rounded-lg">
+      <IncidenceCharts />
+    </div>
+
+    <div id="overview" role="tabpanel" aria-labelledby="overview-tab" class="hidden bg-gray-50 p-2 sm:p-4 rounded-lg">
+      <h3 class="mb-3 font-semibold text-xl">Latest Incidence by Country</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-gray-700 text-sm text-left">
+          <thead class="bg-gray-100 text-gray-700 text-xs uppercase">
+            <tr>
+              <th scope="col" class="px-6 py-3">Country</th>
+              <th scope="col" class="px-6 py-3">Latest Incidence</th>
+              <th scope="col" class="px-6 py-3">Key Finding</th>
+            </tr>
+          </thead>
+          <tbody>
+            {overview.map((c) => (
+              <tr class="bg-white border-b" key={c.code}>
+                <td class="flex items-center px-6 py-4 font-medium">
+                  {c.code && <span class="mr-2">{getUnicodeFlagIcon(c.code)}</span>}
+                  {c.country}
+                </td>
+                <td class="px-6 py-4">{c.latest.value} / 100k ({c.latest.year})</td>
+                <td class="px-6 py-4 max-w-xs truncate">{c.key_finding || c.incidence.trend}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="report" role="tabpanel" aria-labelledby="report-tab" class="hidden bg-gray-50 p-2 sm:p-4 rounded-lg">
+      <LongReport />
+    </div>
+  </div>
+</div>
+
+<script>
+  // Simple tab switching (no external lib)
+  const tabButtons = document.querySelectorAll('[role="tab"]');
+  const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+
+  tabButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      tabButtons.forEach((b) => {
+        b.classList.remove('active', 'border-emerald-600');
+        b.classList.add('border-transparent');
+        b.setAttribute('aria-selected', 'false');
+      });
+      tabPanels.forEach((p) => p.classList.add('hidden'));
+
+      btn.classList.add('active', 'border-emerald-600');
+      btn.classList.remove('border-transparent');
+      btn.setAttribute('aria-selected', 'true');
+
+      const targetId = btn.getAttribute('data-tabs-target').substring(1);
+      document.getElementById(targetId).classList.remove('hidden');
+    });
+  });
+</script>

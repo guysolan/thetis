@@ -1,0 +1,268 @@
+---
+import { BarChart, LineChart, TrendingUp } from "lucide-astro";
+// Re-use the existing combined data set from the op-or-not article.
+import countryData from "../blog/op-or-not/data.json";
+
+// Helper: find the latest numeric incidence value for a country
+const latestIncidence = (c) => {
+  if (!c.incidence) return null;
+  const years = Object.keys(c.incidence)
+    .filter((y) => !Number.isNaN(parseInt(y)))
+    .sort((a, b) => parseInt(b) - parseInt(a));
+  return years.length ? { year: years[0], value: c.incidence[years[0]] } : null;
+};
+
+// Pre-compute values used in the textual descriptions
+const countriesWithIncidence = countryData
+  .map((c) => ({
+    ...c,
+    latest: latestIncidence(c),
+  }))
+  .filter((c) => c.latest !== null);
+
+// Sort for bar chart (descending by latest incidence)
+const sortedByIncidence = [...countriesWithIncidence].sort(
+  (a, b) => b.latest.value - a.latest.value,
+);
+
+// Select a handful of interesting countries for the trend line chart
+const trendCountries = [
+  "Sweden",
+  "Finland",
+  "United Kingdom",
+  "Japan",
+  "United States",
+  "Australia",
+];
+---
+
+<div class="gap-6 grid grid-cols-1 lg:grid-cols-2">
+  <!-- Incidence by Country (latest year) -->
+  <div class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="font-semibold text-lg">Latest Achilles Rupture Incidence</h3>
+      <BarChart class="text-emerald-600" size={24} />
+    </div>
+    <div class="h-80">
+      <canvas id="incidenceByCountryChart"></canvas>
+    </div>
+    <p class="mt-4 text-gray-600 text-sm">
+      Scandinavian nations continue to post the highest incidence rates, led by&nbsp;
+      <strong>{sortedByIncidence[0].country}</strong> at around
+      <strong>{sortedByIncidence[0].latest.value}</strong> ruptures per 100,000
+      person-years.
+    </p>
+  </div>
+
+  <!-- Trend chart -->
+  <div class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="font-semibold text-lg">Incidence Trends (Selected Countries)</h3>
+      <LineChart class="text-emerald-600" size={24} />
+    </div>
+    <div class="h-80">
+      <canvas id="incidenceTrendChart"></canvas>
+    </div>
+    <p class="mt-4 text-gray-600 text-sm">
+      All selected countries show an upward trajectory – an alarming but
+      consistent global pattern.
+    </p>
+  </div>
+
+  <!-- Growth chart -->
+  <div class="col-span-1 lg:col-span-2 bg-white shadow-sm p-5 border border-gray-100 rounded-lg">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="font-semibold text-lg">Decadal Growth in Incidence</h3>
+      <TrendingUp class="text-emerald-600" size={24} />
+    </div>
+    <div class="h-80">
+      <canvas id="incidenceGrowthChart"></canvas>
+    </div>
+    <p class="mt-4 text-gray-600 text-sm">
+      Percentage change in incidence rates over the last ~10&nbsp;years for
+      countries with sufficient longitudinal data.
+    </p>
+  </div>
+</div>
+
+<!-- Serialize dataset so the client-side script can read it without an extra fetch -->
+<script type="application/json" id="incidence-dataset">{JSON.stringify(countryData)}</script>
+
+<script>
+  import Chart from "chart.js/auto";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const data = JSON.parse(
+      document.getElementById("incidence-dataset").textContent,
+    );
+    if (!data) return;
+
+    buildIncidenceByCountryChart(data);
+    buildIncidenceTrendChart(data);
+    buildIncidenceGrowthChart(data);
+  });
+
+  function getLatestIncidence(country) {
+    if (!country.incidence) return null;
+    const years = Object.keys(country.incidence)
+      .filter((y) => !isNaN(parseInt(y)))
+      .sort((a, b) => parseInt(b) - parseInt(a));
+    return years.length ? { year: years[0], value: country.incidence[years[0]] } : null;
+  }
+
+  function buildIncidenceByCountryChart(dataset) {
+    const ctx = document.getElementById("incidenceByCountryChart");
+    if (!ctx) return;
+    const rows = dataset
+      .map((c) => ({ country: c.country, latest: getLatestIncidence(c) }))
+      .filter((c) => c.latest)
+      .sort((a, b) => b.latest.value - a.latest.value);
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: rows.map((r) => r.country),
+        datasets: [
+          {
+            label: "Incidence (per 100k)",
+            data: rows.map((r) => r.latest.value),
+            backgroundColor: "rgba(5, 150, 105, 0.7)",
+            borderColor: "rgba(5, 150, 105, 1)",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "Cases per 100,000 person-years",
+            },
+          },
+          x: {
+            ticks: { autoSkip: false, maxRotation: 45, minRotation: 45 },
+          },
+        },
+      },
+    });
+  }
+
+  function buildIncidenceTrendChart(dataset) {
+    const ctx = document.getElementById("incidenceTrendChart");
+    if (!ctx) return;
+
+    const countries = [
+      "Sweden",
+      "Finland",
+      "United Kingdom",
+      "Japan",
+      "United States",
+      "Australia",
+    ];
+
+    const lineColours = [
+      "#059669",
+      "#2563eb",
+      "#f59e0b",
+      "#ef4444",
+      "#6366f1",
+      "#10b981",
+    ];
+
+    const datasets = countries
+      .map((name, idx) => {
+        const c = dataset.find((d) => d.country === name);
+        if (!c || !c.incidence) return null;
+        const points = Object.entries(c.incidence)
+          .filter(([k]) => !isNaN(parseInt(k)))
+          .map(([year, value]) => ({ x: Number(year), y: value }));
+        if (points.length < 2) return null;
+        return {
+          label: name,
+          data: points,
+          borderColor: lineColours[idx % lineColours.length],
+          backgroundColor: lineColours[idx % lineColours.length],
+          tension: 0.25,
+        };
+      })
+      .filter(Boolean);
+
+    new Chart(ctx, {
+      type: "line",
+      data: { datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            type: "linear",
+            title: { display: true, text: "Year" },
+            min: 1990,
+            max: 2025,
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Incidence (per 100k)",
+            },
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  }
+
+  function buildIncidenceGrowthChart(dataset) {
+    const ctx = document.getElementById("incidenceGrowthChart");
+    if (!ctx) return;
+
+    // Compute growth: first vs latest numeric incidence value
+    const growthRows = dataset
+      .map((c) => {
+        const years = Object.keys(c.incidence || {})
+          .filter((y) => !isNaN(parseInt(y)))
+          .sort((a, b) => parseInt(a) - parseInt(b));
+        if (years.length < 2) return null;
+        const first = c.incidence[years[0]];
+        const last = c.incidence[years[years.length - 1]];
+        if (!first || !last) return null;
+        const pct = ((last - first) / first) * 100;
+        return { country: c.country, pct: Number(pct.toFixed(1)) };
+      })
+      .filter(Boolean)
+      .sort((a, b) => b.pct - a.pct);
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: growthRows.map((r) => r.country),
+        datasets: [
+          {
+            label: "Growth (%)",
+            data: growthRows.map((r) => r.pct),
+            backgroundColor: "rgba(16, 185, 129, 0.7)",
+            borderColor: "rgba(16, 185, 129, 1)",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: "% change (first → latest)" },
+          },
+          x: {
+            ticks: { autoSkip: false, maxRotation: 45, minRotation: 45 },
+          },
+        },
+      },
+    });
+  }
+</script>
