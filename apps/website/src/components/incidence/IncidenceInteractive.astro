@@ -2,7 +2,7 @@
 import IncidenceCharts from "./IncidenceCharts.astro";
 import LongReport from "../blog/incidence/LongReport.astro";
 import { ChartBar, FileText, Flag } from "lucide-astro";
-import countryData from "../blog/op-or-not/data.json";
+import countryData from "../../../../achilles-rupture/src/data/incidence-and-surgery.json";
 
 // Prepare overview table data (latest incidence per country)
 const latestIncidence = (c) => {
@@ -25,6 +25,7 @@ function getUnicodeFlagIcon(code) {
     return "";
   }
 }
+---
 
 <div class="mx-auto px-2 sm:px-4 pb-8 max-w-5xl">
   <!-- Tab navigation -->

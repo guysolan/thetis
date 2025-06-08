@@ -1,7 +1,7 @@
 ---
 import { BarChart, LineChart, TrendingUp } from "lucide-astro";
 // Re-use the existing combined data set from the op-or-not article.
-import countryData from "../blog/op-or-not/data.json";
+import countryData from "../../../../achilles-rupture/src/data/incidence-and-surgery.json";
 
 // Helper: find the latest numeric incidence value for a country
 const latestIncidence = (c) => {
@@ -25,15 +25,6 @@ const sortedByIncidence = [...countriesWithIncidence].sort(
   (a, b) => b.latest.value - a.latest.value,
 );
 
-// Select a handful of interesting countries for the trend line chart
-const trendCountries = [
-  "Sweden",
-  "Finland",
-  "United Kingdom",
-  "Japan",
-  "United States",
-  "Australia",
-];
 ---
 
 <div class="gap-6 grid grid-cols-1 lg:grid-cols-2">
