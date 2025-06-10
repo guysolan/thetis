@@ -9,10 +9,10 @@ Welsh winger **Steff Evans** knows tackles hurt—but the boot hurt his sleep mo
 > "The Thetis splint was an *absolute saviour*. Sleeping became so much easier and kept my foot at the right angle." – *Steff Evans* (athletes.ts)
 
 Why PTs love this:
+
 - Maintains 20° protective PF while letting athletes turn in bed ✅
-- Lightweight frame → HRV ↑ during recovery nights 📈
 - Happy sleepers train harder next day 💪
 
 Who's next on the comeback list? Tag them below.👇
 
-#Rugby #ReturnToPlay #AchillesRupture
+ #Rugby #ReturnToPlay #AchillesRupture

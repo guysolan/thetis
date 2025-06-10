@@ -24,7 +24,7 @@ Ben Austen - Health Solutions | Orthopaedics | Lymphoedema |Osteoarthritis, Hele
 
 17 likes including - Prof. Dr. med. Hazibullah Waizy - Partner Orthoprofis Foot and Ankle Surgeon D.A.F. German Foot and Ankle Society AGA Gesellschaft für Arthroskopie und Gelenkchirurgie
 
-2 reposts - Head Physiotherapist at Wingate and Finchely FC (unknown) and sales repo for medtech equipment (known)
+2 reposts - Head Physiotherapist at Wingate and Finchely FC (unknown) and sales repo for MedTech equipment (known)
 
 ### 2025-05-01-amazon-choice
 

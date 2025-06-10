@@ -7,5 +7,3 @@ Re-ruptures are serious complications, and their caution is understandable.
 BUT, Thetis Medical has now had over 3,000 patients use the splint without a single complication.
 
 Hopefully this gives foot and ankle surgeons the peace of mind that patients can sleep without a boot if, and only if, they wear a splint.
-
-

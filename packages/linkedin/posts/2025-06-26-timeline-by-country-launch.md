@@ -14,9 +14,10 @@ type: "Product"
 
 Why it matters:
 Early-weight-bearing is standard in Sweden, conservative casting still common in the US. Seeing the data sparks better questions in consults.
+Early-weight-bearing is standard in Sweden, conservative casting still common in the US. Seeing the data sparks better questions in consults.
 
-Try it → AchillesRupture.com/timeline
+Try it → <https://thetismedical.com/research/timeline-by-country>
 
 What country should we add next? 🌏
 
-# DigitalHealth #PatientEducation #AchillesRupture
+ #DigitalHealth #PatientEducation #AchillesRupture
