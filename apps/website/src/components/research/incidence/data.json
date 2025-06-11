@@ -2,367 +2,172 @@
   {
     "country": "Sweden",
     "code": "SE",
-    "source": "https://bmjopensem.bmj.com/content/10/3/e001960",
-    "sample_size": "53,688 ruptures",
-    "surgical_rate": {
-      "2002": 46.5,
-      "2012": 25.8,
-      "2021": 14.4,
-      "trend": "Significant decline in surgical treatment",
-      "evidence": "Nationwide study of 53,688 ruptures showing sustained increased incidence with surgical decline",
-      "direction": "decreasing"
-    },
+    "verified": true,
+    "source": "https://doi.org/10.1136/bmjsem-2024-001960",
+    "sample_size": 53688,
     "incidence": {
       "2002": 28.8,
-      "2012": 35.6,
       "2021": 41.7,
-      "trend": "45% increase from 2002 to 2021",
-      "direction": "increasing"
+      "trend": "+45% per 100,000 person-years"
     },
-    "demographics": {
-      "median_age": "Increased from 44 years (2002) to 50 years (2021)",
-      "male_percentage": 71.5,
-      "male_to_female_ratio": "2.5:1"
+    "surgical_rate": {
+      "2002": 47,
+      "2021": 14,
+      "unit": "percent"
     },
-    "key_finding": "Achilles tendon rupture incidence has increased by 45% while surgical interventions have decreased by 55%"
+    "key_finding": "Nationwide register: incidence rising, surgical management fell to 14%"
   },
   {
     "country": "Denmark",
     "code": "DK",
-    "source": "https://www.researchgate.net/publication/272517801_Increasing_incidence_of_acute_Achilles_tendon_rupture_and_a_noticeable_decline_in_surgical_treatment_from_1994_to_2013_A_nationwide_registry_study_of_33160_patients",
-    "sample_size": "33,160 patients",
-    "surgical_rate": {
-      "1994": 62.7,
-      "2005": 45.5,
-      "2013": 20.2,
-      "trend": "Significant decline in surgical treatment",
-      "evidence": "National registry data showing decreasing surgical interventions from 16.9 to 6.3 per 100,000",
-      "direction": "decreasing"
-    },
+    "verified": true,
+    "source": "https://doi.org/10.1007/s00167-015-3544-5",
+    "sample_size": 33160,
     "incidence": {
       "1994": 26.95,
-      "2005": 29.7,
       "2013": 31.17,
-      "trend": "Significant increase between 1994 and 2013",
-      "direction": "increasing"
+      "trend": "+16% per 100,000 person-years"
     },
-    "demographics": {
-      "male_percentage": 73,
-      "highest_risk": "Men aged 40-49 years"
+    "surgical_incidence": {
+      "1994": 16.9,
+      "2013": 6.3,
+      "unit": "per 100,000 person-years"
     },
-    "key_finding": "Decreasing trend in surgical management, with significant shift toward non-operative treatment"
+    "key_finding": "Incidence up, surgical incidence down"
   },
   {
     "country": "Finland",
     "code": "FI",
-    "source": "https://pubmed.ncbi.nlm.nih.gov/36389616/",
-    "sample_size": "Nationwide register data",
-    "surgical_rate": {
-      "1997": 78.6,
-      "2008": 36.4,
-      "2019": 15.2,
-      "trend": "Significant decline beginning in 2008",
-      "evidence": "Decrease in operative treatment from 13.6 to 4.9 per 100,000 person-years between 1997 and 2019",
-      "direction": "decreasing"
-    },
+    "verified": true,
+    "source": "https://doi.org/10.1177/23259671221131536",
+    "sample_size": 30162,
     "incidence": {
       "1997": 17.3,
-      "2008": 25.0,
       "2019": 32.3,
-      "trend": "Increase from 17.3 to 32.3 per 100,000 person-years between 1997 and 2019",
-      "direction": "increasing"
+      "trend": "+87% per 100,000 person-years"
     },
-    "demographics": {
-      "affected_groups": "Increase in all age groups, most markedly among the elderly",
-      "gender": "Increase observed in both sexes"
+    "surgical_incidence": {
+      "1997": 13.6,
+      "2019": 4.9,
+      "unit": "per 100,000 person-years"
     },
-    "key_finding": "ATR incidence increased while operative treatment decreased significantly. The plateau in incidence during the second half of the study period suggests stabilization."
+    "key_finding": "Incidence almost doubled; surgery incidence fell 64%"
   },
   {
-    "country": "United Kingdom",
+    "country": "United Kingdom (England)",
     "code": "GB",
-    "source": "https://www.bmj.com/content/364/bmj.k5120",
-    "sample_size": "15,862 patients (29 studies)",
-    "surgical_rate": {
-      "2010": 40.2,
-      "2015": 20.5,
-      "2020": 5.0,
-      "trend": "Strong trend toward non-operative management",
-      "evidence": "Systematic review and meta-analysis of 10 RCTs and 19 observational studies",
-      "direction": "decreasing"
-    },
+    "verified": true,
+    "source": "https://doi.org/10.1371/journal.pone.0304197",
+    "sample_size": 361,
     "incidence": {
-      "1995": 8.0,
-      "2005": 11.3,
-      "2015": 15.7,
-      "2019": 21.5,
-      "trend": "Increasing trend from 1995 to 2019",
-      "direction": "increasing"
+      "2016-2020_avg": 8.0,
+      "unit": "per 100,000 person-years"
     },
-    "demographics": {
-      "study_types": "10 randomised controlled trials (944 patients) and 19 observational studies (14,918 patients)"
+    "surgical_rate": {
+      "overall": 2.9,
+      "unit": "percent"
     },
-    "outcomes": {
-      "re_rupture_risk": "Lower with surgery (2.3% vs 3.9%, RR 0.43, 95% CI 0.31-0.60)",
-      "complication_risk": "Higher with surgery (4.9% vs 1.6%, RR 2.76, 95% CI 1.84-4.13)",
-      "infection_rate": "2.8% in surgical group"
+    "key_finding": ">97% of ruptures managed non-surgically in prospective ED cohort"
+  },
+  {
+    "country": "Canada (Ontario)",
+    "code": "CA",
+    "verified": true,
+    "source": "https://doi.org/10.1302/0301-620X.99B1.BJJ-2016-0434.R1",
+    "sample_size": 27607,
+    "incidence": {
+      "2003": 18.0,
+      "2013": 29.3,
+      "trend": "+63% per 100,000 person-years"
     },
-    "key_finding": "Operative treatment reduces re-rupture risk but increases complications. Final decision should be based on patient-specific factors and shared decision-making."
+    "surgical_rate": {
+      "2003": 20.1,
+      "2013": 9.2,
+      "unit": "percent"
+    },
+    "key_finding": "Surgical proportion dropped >50% after 2009"
+  },
+  {
+    "country": "United States (Medicare)",
+    "code": "US",
+    "verified": true,
+    "source": "https://doi.org/10.1177/2325967118808238",
+    "sample_size": 14127,
+    "incidence": {
+      "2005": 6.7,
+      "2015": 13.2,
+      "trend": "+97% per 100,000 person-years"
+    },
+    "surgical_rate": {
+      "2005-2015": 70,
+      "unit": "percent (stable)"
+    },
+    "key_finding": "Incidence nearly doubled; surgery rate ~70% throughout"
   },
   {
     "country": "South Korea",
     "code": "KR",
-    "source": "https://pubmed.ncbi.nlm.nih.gov/34708136/",
-    "sample_size": "National health insurance data",
-    "surgical_rate": {
-      "2009": 65.0,
-      "2013": 63.0,
-      "2017": 61.0,
-      "trend": "Slight decrease but remained predominantly surgical",
-      "evidence": "Analysis of national health insurance database",
-      "direction": "decreasing"
-    },
+    "verified": true,
+    "source": "https://doi.org/10.4055/cios20255",
+    "sample_size": 112350,
     "incidence": {
       "2009": 19.25,
-      "2013": 23.45,
       "2017": 26.53,
-      "trend": "Upward trend between 2009 and 2017",
-      "direction": "increasing"
+      "trend": "+38% per 100,000 person-years"
     },
-    "demographics": {
-      "peak_age": "30-39 years",
-      "male_to_female_ratio": "4:1"
+    "surgical_incidence": {
+      "2009": 8.10,
+      "2017": 10.38,
+      "unit": "per 100,000 person-years"
     },
-    "key_finding": "Incidence of Achilles tendon ruptures has increased with continued preference for surgical management"
-  },
-  {
-    "country": "New Zealand",
-    "code": "NZ",
-    "source": "https://pubmed.ncbi.nlm.nih.gov/21733434/",
-    "sample_size": "363 patients",
-    "surgical_rate": {
-      "2010": 39.4,
-      "trend": "Selective approach to treatment with 39.4% treated surgically",
-      "evidence": "Consecutive series of 363 patients over 8.5 years (143 operative, 220 nonoperative)",
-      "direction": "selective"
-    },
-    "incidence": {
-      "2010": 15.2,
-      "trend": "High incidence, particularly among women due to netball injuries",
-      "direction": "high"
-    },
-    "demographics": {
-      "gender_distribution": "Equal male:female ratio up to age 50, 73% male in 51-60 age group",
-      "common_cause": "Netball was the most common cause of injury, explaining high female incidence"
-    },
-    "outcomes": {
-      "surgical_rerupture": "1.4% re-rupture rate in surgical group",
-      "nonsurgical_rerupture": "8.6% re-rupture rate in non-operative group (11.5% males, 5.6% females)",
-      "age_factor": "Lower re-rupture rate in patients over 40 (4.1%) vs under 40 (13.1%) in non-operative group"
-    },
-    "key_finding": "Results support surgery in patients under 40 years (particularly males) if no contraindications. Functional bracing with non-operative treatment yields low re-rupture rates in patients over 40, especially females."
-  },
-  {
-    "country": "Canada",
-    "code": "CA",
-    "source": "https://pubmed.ncbi.nlm.nih.gov/28053261/",
-    "sample_size": "27,607 patients",
-    "surgical_rate": {
-      "2003": 20.1,
-      "2009": 15.3,
-      "2013": 9.2,
-      "trend": "Significant decline after 2009",
-      "evidence": "Coincided with publication of high-quality RCTs showing similar outcomes between 'functional' non-operative management and surgical repair",
-      "direction": "decreasing"
-    },
-    "incidence": {
-      "2003": 18.0,
-      "2009": 25.5,
-      "2013": 29.3,
-      "trend": "Significant increase between 2003 and 2013",
-      "direction": "increasing"
-    },
-    "demographics": {
-      "median_age": 44,
-      "male_percentage": 66.5,
-      "highest_risk": "Men aged 40-49 years (46.0 per 100,000 person-years)"
-    },
-    "key_finding": "Surgical repair rates have substantially decreased while Achilles rupture incidence has increased"
-  },
-  {
-    "country": "France",
-    "code": "FR",
-    "source": "https://pubmed.ncbi.nlm.nih.gov/38615885/",
-    "sample_size": "405 patients",
-    "surgical_rate": {
-      "2018": 92.0,
-      "2019": 92.0,
-      "trend": "Strong preference for surgical treatment",
-      "evidence": "Multicenter study of 405 patients across 21 sites in France with 24-month follow-up",
-      "direction": "stable"
-    },
-    "incidence": {
-      "2010": 14.2,
-      "2015": 17.8,
-      "2019": 21.3,
-      "trend": "Increasing trend between 2010 and 2019",
-      "direction": "increasing"
-    },
-    "demographics": {
-      "follow_up": "Mean 24 months (±7)",
-      "study_sites": 21
-    },
-    "outcomes": {
-      "re_rupture_risk": "No significant difference (4% surgical vs 9% non-surgical, p=0.176)",
-      "functional_scores": "Better in surgical group (ATRS p=0.017, EFAS p=0.013, SF-12 physical p=0.01)",
-      "complications": "More general complications in conservative group (24% vs 11%, p=0.04)",
-      "surgery_specific": "9% rate of surgery-related complications (infection, nerve damage)"
-    },
-    "key_finding": "Strong preference for surgical treatment despite similar re-rupture rates. Early weightbearing and mobilization within 30 days optimized outcomes without increasing re-rupture risk."
-  },
-  {
-    "country": "Italy",
-    "code": "IT",
-    "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7568369/",
-    "sample_size": "118,652 patients",
-    "surgical_rate": {
-      "2001": 85.3,
-      "2010": 82.1,
-      "2015": 80.0,
-      "trend": "High, predominant approach",
-      "evidence": "Nationwide registry study of 118,652 cases from 2001-2015",
-      "direction": "slightly decreasing"
-    },
-    "incidence": {
-      "2001": 10.7,
-      "2010": 16.2,
-      "2015": 19.8,
-      "trend": "Increasing trend between 2001 and 2015",
-      "direction": "increasing"
-    },
-    "demographics": {
-      "peak_age": "35-45 years",
-      "gender": "Higher prevalence in men of working age",
-      "regional_distribution": "52.1% North, 20.6% Center, 27.2% South"
-    },
-    "outcomes": {
-      "projection": "2.65% growth in surgical procedures predicted by 2025"
-    },
-    "key_finding": "Surgical management remains the standard of care across all regions of Italy, with the highest rate of procedures in the northern regions"
-  },
-  {
-    "country": "Germany",
-    "code": "DE",
-    "source": "https://bookinghealth.com/disease/achilles-tendon-rupture/germany",
-    "sample_size": "National survey of 787 clinics",
-    "surgical_rate": {
-      "2005": 92.3,
-      "2010": 90.5,
-      "2018": 88.7,
-      "trend": "Slight decline but still predominantly surgical",
-      "evidence": "Nationwide survey of 787 clinics",
-      "direction": "slightly decreasing"
-    },
-    "incidence": {
-      "2005": 13.5,
-      "2010": 18.7,
-      "2018": 25.2,
-      "trend": "Significant increase between 2005 and 2018",
-      "direction": "increasing"
-    },
-    "outcomes": {
-      "re_rupture_risk": "1.6% surgical vs 2.7% non-surgical",
-      "complications": "3.5% postoperative complication rate"
-    },
-    "key_finding": "Operation remains standard therapy, though trend toward conservative functional therapy exists"
+    "key_finding": "Both rupture and surgery incidences rising"
   },
   {
     "country": "Japan",
     "code": "JP",
-    "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8543583/",
-    "sample_size": "National health insurance data",
-    "surgical_rate": {
-      "2010": 67.0,
-      "2014": 70.0,
-      "2017": 72.0,
-      "trend": "Increase in surgical treatment from 67% in 2010 to 72% in 2017",
-      "evidence": "Analysis of national health insurance database",
-      "direction": "increasing"
-    },
+    "verified": true,
+    "source": "https://doi.org/10.1177/23259671211034128",
+    "sample_size": 112601,
     "incidence": {
-      "2010": 15.6,
-      "2014": 18.2,
-      "2017": 22.4,
-      "trend": "Increasing trend between 2010 and 2017",
-      "direction": "increasing"
+      "2010": 12.8,
+      "2017": 13.9,
+      "trend": "Stable incidence per 100,000 person-years"
     },
-    "demographics": {
-      "peak_age": "40-49 years",
-      "male_to_female_ratio": "3.5:1"
-    },
-    "key_finding": "Japan shows a counter-trend with increasing surgical treatment rates compared to Western countries"
-  },
-  {
-    "country": "United States",
-    "code": "US",
-    "source": "https://journals.sagepub.com/doi/10.1177/2325967114549948",
-    "sample_size": "14,127 patients",
     "surgical_rate": {
-      "2005": 69.5,
-      "2010": 70.2,
-      "2015": 70.0,
-      "trend": "Surgical repair rate remained stable at around 70%",
-      "evidence": "Analysis of Medicare database with 14,127 Achilles tendon ruptures",
-      "direction": "stable"
+      "2010": 67,
+      "2017": 72,
+      "unit": "percent"
     },
-    "incidence": {
-      "2005": 6.7,
-      "2011": 10.8,
-      "2015": 13.2,
-      "trend": "Significant increase (p < 0.01)",
-      "direction": "increasing"
-    },
-    "demographics": {
-      "gender_distribution": "No significant difference between males (6,636) and females (7,582)",
-      "age_factor": "Older patients, especially those >85 years, more likely to be treated nonoperatively"
-    },
-    "outcomes": {
-      "treatment_breakdown": "30.5% managed nonoperatively, 69.5% treated surgically",
-      "regional_variation": "No differences in treatment patterns based on region"
-    },
-    "key_finding": "The incidence of Achilles tendon ruptures is increasing with time, but the trend in operative and nonoperative treatment remained stable between 2005 and 2015. Treatment decisions appear to be influenced primarily by patient age."
+    "key_finding": "~70% of ruptures treated surgically; proportion increasing"
   },
   {
     "country": "Australia",
     "code": "AU",
-    "source": "https://research.monash.edu/en/publications/twelve-month-outcomes-following-surgical-repair-of-the-achilles-t",
-    "sample_size": "204 patients (Victorian Orthopaedic Trauma Outcomes Registry)",
-    "surgical_rate": {
-      "2009": 68.0,
-      "2012": 43.0,
-      "2014": 35.0,
-      "2019": 12.3,
-      "trend": "68% decrease in surgical repairs between 2009 and 2014, continuing to decline to 12.3% by 2019",
-      "evidence": "Analysis of Victorian Orthopaedic Trauma Outcomes Registry and subsequent national studies",
-      "direction": "decreasing"
-    },
-    "incidence": {
-      "2009": 13.4,
-      "2012": 15.9,
-      "2014": 17.7,
-      "2018": 20.1,
-      "trend": "Increasing trend between 2009 and 2018",
-      "direction": "increasing"
-    },
-    "demographics": {
-      "peak_age": "30-45 years",
-      "male_percentage": 78,
-      "bimodal_distribution": "First peak at 25-40 years (sports injuries), second peak >60 years (low-energy injuries)"
-    },
-    "outcomes": {
-      "non_operative_success": "Supervised non-operative management with functional rehabilitation protocols shows comparable outcomes to surgery",
-      "complication_rates": "30% complication rate with surgery vs 8% with non-operative treatment"
-    },
-    "key_finding": "Australia shows a significant shift away from surgical management, with a 68% decrease in surgical repairs from 2009-2014, mirroring international trends. This shift is attributed to emerging high-quality evidence supporting non-surgical approaches with lower complication rates."
+    "verified": false,
+    "note": "No nation-level registry study; only regional data currently available"
+  },
+  {
+    "country": "France",
+    "code": "FR",
+    "verified": false,
+    "note": "Only multicentre cohort (n=405) – lacks population incidence"
+  },
+  {
+    "country": "Germany",
+    "code": "DE",
+    "verified": false,
+    "note": "Clinic survey data exist but no national registry incidence"
+  },
+  {
+    "country": "Italy",
+    "code": "IT",
+    "verified": false,
+    "note": "Procedure-only registry; incidence of rupture not reported"
+  },
+  {
+    "country": "New Zealand",
+    "code": "NZ",
+    "verified": false,
+    "note": "Single-centre series available; national epidemiology pending"
   }
 ]
