@@ -5,12 +5,15 @@ type: "Evidence"
 image: ./images/latest-atr-incidence.png
 ---
 
-📊 Scandinavian nations continue to post the highest Achilles rupture incidence rates—Sweden leads at 41.7 per 100,000 person-years.
+F&A surgeons, when do you see the most Achilles tendon ruptures?
 
-- Incidence is rising globally, not just in athletes, everyone agrees on this but the crazy differences in country incidence data seems weird.
+We consistently see 3x more sales in spring vs winter.
 
-How does your country compare? See the full chart below.
+More exercise, Less turkey?
 
-![Latest Achilles Rupture Incidence](./images/latest-atr-incidence.png)
+Do you think the inactivity in the winter leads to unprepared tendons in spring?
 
-# Epidemiology #AchillesRupture #SportsMedicine
+![US Amazon](./images/us-amazon.jpeg)
+![UK Amazon](./images/uk-amazon.jpeg)
+
+## Repost
