@@ -1,32 +1,30 @@
 import type { APIRoute } from "astro";
 import countryData from "../../../components/research/incidence/data.json";
-import type { CountryData } from "../../../components/research/incidence/types";
-
-// Helper: find the latest numeric incidence value for a country
-const latestIncidence = (c: CountryData) => {
-    if (!c.incidence) return null;
-    const years = Object.keys(c.incidence)
-        .filter((y) => !Number.isNaN(parseInt(y)))
-        .sort((a, b) => parseInt(b) - parseInt(a));
-    return years.length
-        ? { year: years[0], value: Number(c.incidence[years[0]]) }
-        : null;
-};
 
 export const GET: APIRoute = async () => {
-    // Get latest incidence for each country
-    const latestRates = (countryData as unknown as CountryData[])
-        .map((c) => ({
-            country: c.country,
-            rate: latestIncidence(c)?.value ?? 0,
-        }))
-        .filter((c) => c.rate > 0)
-        .sort((a, b) => b.rate - a.rate);
+    // Filter for verified countries with incidence data
+    const verifiedData = countryData
+        .filter((country) => country.verified && country.incidence)
+        .map((country) => {
+            // Get the latest year's incidence
+            const years = Object.keys(country.incidence)
+                .filter((key) => !isNaN(Number(key)))
+                .sort((a, b) => Number(b) - Number(a));
+
+            const latestYear = years[0];
+            const latestValue = country.incidence[latestYear];
+
+            return {
+                country: country.country,
+                value: latestValue,
+            };
+        })
+        .sort((a, b) => b.value - a.value);
 
     return new Response(
         JSON.stringify({
-            labels: latestRates.map((r) => r.country),
-            values: latestRates.map((r) => r.rate),
+            labels: verifiedData.map((d) => d.country),
+            values: verifiedData.map((d) => d.value),
         }),
         {
             status: 200,

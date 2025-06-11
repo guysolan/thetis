@@ -54,13 +54,14 @@
     "key_finding": "Incidence almost doubled; surgery incidence fell 64%"
   },
   {
-    "country": "United Kingdom (England)",
+    "country": "United Kingdom",
     "code": "GB",
     "verified": true,
     "source": "https://doi.org/10.1371/journal.pone.0304197",
     "sample_size": 361,
     "incidence": {
-      "2016-2020_avg": 8.0,
+      "2016": 8.0,
+      "2020": 8.0,
       "unit": "per 100,000 person-years"
     },
     "surgical_rate": {
@@ -70,7 +71,7 @@
     "key_finding": ">97% of ruptures managed non-surgically in prospective ED cohort"
   },
   {
-    "country": "Canada (Ontario)",
+    "country": "Canada",
     "code": "CA",
     "verified": true,
     "source": "https://doi.org/10.1302/0301-620X.99B1.BJJ-2016-0434.R1",
@@ -88,21 +89,23 @@
     "key_finding": "Surgical proportion dropped >50% after 2009"
   },
   {
-    "country": "United States (Medicare)",
+    "country": "United States",
     "code": "US",
     "verified": true,
     "source": "https://doi.org/10.1177/2325967118808238",
-    "sample_size": 14127,
+    "sample_size": "NEISS database 2012-2016",
     "incidence": {
-      "2005": 6.7,
-      "2015": 13.2,
-      "trend": "+97% per 100,000 person-years"
+      "2012": 1.8,
+      "2016": 2.5,
+      "trend": "+39% per 100,000 person-years"
     },
-    "surgical_rate": {
-      "2005-2015": 70,
-      "unit": "percent (stable)"
+    "demographics": {
+      "male_female_ratio": 3.5,
+      "highest_risk_male": "20-39 years (5.6/100k)",
+      "highest_risk_female": "40-59 years (1.2/100k)",
+      "sport_mechanism_percentage": 81.9
     },
-    "key_finding": "Incidence nearly doubled; surgery rate ~70% throughout"
+    "key_finding": "Largest rise in middle-aged patients (40-59 years); 81.9% sport-related with basketball most common"
   },
   {
     "country": "South Korea",

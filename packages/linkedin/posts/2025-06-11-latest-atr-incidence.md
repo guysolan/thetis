@@ -2,7 +2,6 @@
 title: "Latest Achilles Rupture Incidence: Who Tops the Charts?"
 date: 2025-06-11
 type: "Evidence"
-image: ./images/latest-atr-incidence.png
 ---
 
 F&A surgeons, when do you see the most Achilles tendon ruptures?

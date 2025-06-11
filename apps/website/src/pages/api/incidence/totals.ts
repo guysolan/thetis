@@ -1,69 +1,66 @@
 import type { APIRoute } from "astro";
 import countryData from "../../../components/research/incidence/data.json";
-import type { CountryData } from "../../../components/research/incidence/types";
 
-// Helper: find the latest numeric incidence value for a country
-const latestIncidence = (c: CountryData) => {
-    if (!c.incidence) return null;
-    const years = Object.keys(c.incidence)
-        .filter((y) => !Number.isNaN(parseInt(y)))
-        .sort((a, b) => parseInt(b) - parseInt(a));
-    return years.length
-        ? { year: years[0], value: Number(c.incidence[years[0]]) }
-        : null;
-};
-
-// Population data in millions (2023 estimates)
+// Population data (2023 estimates from World Bank)
+// Note: For regional data (e.g., Ontario, England), using regional population
 const populations: Record<string, number> = {
-    "United States": 339.996,
-    "Canada": 38.25,
-    "United Kingdom": 67.33,
-    "Germany": 83.2,
-    "France": 68.07,
-    "Italy": 58.85,
-    "Spain": 47.39,
-    "Netherlands": 17.62,
-    "Sweden": 10.42,
-    "Denmark": 5.9,
-    "Norway": 5.48,
-    "Finland": 5.55,
-    "Australia": 26.44,
-    "New Zealand": 5.22,
-    "Japan": 123.29,
-    "South Korea": 51.74,
-    "China": 1411.75,
-    "India": 1425.78,
-    "Singapore": 5.92,
-    "Taiwan": 23.35,
+    "Sweden": 10500000,
+    "Denmark": 5900000,
+    "Finland": 5500000,
+    "United Kingdom": 65000000, // England only
+    "Canada": 40000000, // Ontario only
+    "United States": 331900000, // Full US population for NEISS data
+    "South Korea": 51000000,
+    "Japan": 125000000,
 };
 
-export const GET: APIRoute = async ({ request }) => {
-    // Get countries with valid incidence data
-    const countriesWithData = (countryData as unknown as CountryData[])
-        .map((c) => ({
-            country: c.country,
-            latest: latestIncidence(c),
-        }))
-        .filter((c) => c.latest !== null);
-
+export const GET: APIRoute = async () => {
     // Calculate total cases for each country
-    const totals = countriesWithData.map((c) => {
-        const population = populations[c.country] * 1000000; // Convert to actual population
-        const incidence = c.latest!.value;
-        const totalCases = Math.round((incidence * population) / 100000); // Calculate total cases
-        return {
-            country: c.country,
-            total: totalCases,
-        };
-    });
+    const totalCases = countryData
+        .filter((country) =>
+            country.verified && country.incidence &&
+            populations[country.country]
+        )
+        .map((country) => {
+            if (!country.incidence) return null;
 
-    // Sort by total cases (descending)
-    totals.sort((a, b) => b.total - a.total);
+            // Get the latest year's incidence
+            const years = Object.keys(country.incidence)
+                .filter((key) => !isNaN(Number(key)))
+                .sort((a, b) => Number(b) - Number(a));
+
+            if (years.length === 0) return null;
+
+            const latestYear = years[0];
+            const latestIncidence = Number(country.incidence[latestYear]);
+            const population = populations[country.country];
+
+            if (isNaN(latestIncidence) || !population) return null;
+
+            // Calculate total cases: (incidence per 100k * population) / 100000
+            const totalCases = Math.round(
+                (latestIncidence * population) / 100000,
+            );
+
+            return {
+                country: country.country,
+                totalCases,
+                incidence: latestIncidence,
+                population: population,
+            };
+        })
+        .filter((item): item is NonNullable<typeof item> => item !== null)
+        .sort((a, b) => b.totalCases - a.totalCases);
 
     return new Response(
         JSON.stringify({
-            labels: totals.map((t) => t.country),
-            values: totals.map((t) => t.total),
+            labels: totalCases.map((d) => d.country),
+            values: totalCases.map((d) => d.totalCases),
+            metadata: totalCases.map((d) => ({
+                country: d.country,
+                incidence: d.incidence,
+                population: d.population,
+            })),
         }),
         {
             status: 200,
