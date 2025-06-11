@@ -364,5 +364,72 @@
       "complication_rates": "30% complication rate with surgery vs 8% with non-operative treatment"
     },
     "key_finding": "Australia shows a significant shift away from surgical management, with a 68% decrease in surgical repairs from 2009-2014, mirroring international trends. This shift is attributed to emerging high-quality evidence supporting non-surgical approaches with lower complication rates."
+  },
+  {
+    "country": "United Kingdom (Leicester, England)",
+    "code": "GB-LE",
+    "source": "https://doi.org/10.1371/journal.pone.0304197",
+    "sample_size": "361 patients",
+    "surgical_rate": {
+      "2015-2021": 2.9,
+      "trend": "Predominantly non-surgical (97.1% managed conservatively)",
+      "evidence": "Prospective ED cohort showing only 2.9% underwent surgery",
+      "direction": "very_low"
+    },
+    "incidence": {
+      "2016-2020": 8.0,
+      "trend": "Stable at ~8 per 100,000 person-years over 5 years",
+      "direction": "stable"
+    },
+    "demographics": {
+      "median_age": 45,
+      "male_percentage": 79.2,
+      "sport_mechanism_percentage": 65.2
+    },
+    "key_finding": "Emergency-department surveillance in central England found an incidence of 8/100k with overwhelming preference for non-operative management and two-thirds of injuries sport-related."
+  },
+  {
+    "country": "Slovenia (Maribor Region)",
+    "code": "SI",
+    "source": "https://doi.org/10.1177/03000605231205179",
+    "sample_size": "524 patients (1991-2015)",
+    "surgical_rate": {
+      "note": "Treatment modality distribution not specified in incidence paper"
+    },
+    "incidence": {
+      "average": 7.77,
+      "peak_2004": 11.33,
+      "trend": "Gradual rise until 2008 followed by decline",
+      "direction": "variable"
+    },
+    "demographics": {
+      "male_percentage": 92.75,
+      "median_age": 39.03,
+      "sport_mechanism_percentage": 67.0
+    },
+    "key_finding": "First Central-European regional study shows moderate incidence with very high male predominance and sports as leading cause; bilateral ruptures extremely rare (0.1/100k)."
+  },
+  {
+    "country": "Sweden (2001-2012 study)",
+    "code": "SE-12",
+    "source": "https://doi.org/10.1177/0363546514540599",
+    "sample_size": "27,702 patients",
+    "surgical_rate": {
+      "2001": 43,
+      "2012": 25,
+      "trend": "Proportion surgically treated declined from 43% to 25%",
+      "direction": "decreasing"
+    },
+    "incidence": {
+      "2001": 29.5,
+      "2012": 34.9,
+      "trend": "17% overall increase in incidence (men 47→55 per 100k)",
+      "direction": "increasing"
+    },
+    "demographics": {
+      "male_percentage": 79,
+      "highest_risk": "Men aged 40+ participating in high-demand sports"
+    },
+    "key_finding": "Nationwide registry confirms rising incidence but rapidly falling operative rates in Sweden during 2001-2012, preceding the larger 2002-2021 dataset."
   }
 ]
