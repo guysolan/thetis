@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import Article from "@/components/research/Article.astro";
 import FAQSection from "@/components/research/FaqSection.astro";
 import DownloadList from "@/components/DownloadList.astro";
+import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
 
 const faqSections = [
     {
@@ -183,19 +184,11 @@ const downloads = [
                 ))
             }
 
-            <div class="other-articles">
-                <a
-                    href="../night-splint"
-                    class="article-to-night-splint explore"
-                    >Achilles Rupture Splint</a
-                >
-            </div>
+            <NightSplintAdvert />
 
             <section class="bg-white mt-8">
                 <DownloadList title="Downloads" downloads={downloads} />
             </section>
-
-            <Subscribe />
         </div>
     </main>
 </Layout>
