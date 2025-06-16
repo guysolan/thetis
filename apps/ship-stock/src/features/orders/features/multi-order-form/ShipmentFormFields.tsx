@@ -16,16 +16,25 @@ const ShipmentFormFields = () => {
 
   useEffect(() => {
     if (mode === "direct") {
-      const fromItems = form.watch("from_items");
+      const toItems = form.watch("to_items");
 
-      const reverseItems = fromItems.map((item) => ({
-        ...item,
-        quantity_change: -item.quantity_change,
-      }));
+      // Only update if we have items and they're different from current from_items
+      if (toItems?.length > 0) {
+        const currentFromItems = form.getValues("from_items");
+        const reverseItems = toItems.map((item) => ({
+          ...item,
+          quantity_change: -item.quantity_change,
+        }));
 
-      form.setValue("to_items", reverseItems);
+        // Only update if the items are actually different
+        const hasChanged =
+          JSON.stringify(currentFromItems) !== JSON.stringify(reverseItems);
+        if (hasChanged) {
+          form.setValue("from_items", reverseItems, { shouldDirty: true });
+        }
+      }
     }
-  }, [form, form.watch("from_items")]);
+  }, [form, mode, form.watch("to_items")]);
 
   return (
     <>
@@ -37,20 +46,22 @@ const ShipmentFormFields = () => {
 
       <StockItems
         // readOnly={true}
-        allowedTypes={["product", "part"]}
         showPrice={true}
-        packageMode={mode === "package"}
-        address_name="from_shipping_address_id"
-        name="from_items"
-      />
-
-      <StockItems
-        // readOnly={true}
-        showPrice={true}
+        showTax={true}
         allowedTypes={["product", "part"]}
         packageMode={mode === "package"}
         name="to_items"
         address_name="to_shipping_address_id"
+      />
+
+      <StockItems
+        readOnly={true}
+        allowedTypes={["product", "part"]}
+        showPrice={false}
+        showTax={false}
+        packageMode={mode === "package"}
+        address_name="from_shipping_address_id"
+        name="from_items"
       />
     </>
   );

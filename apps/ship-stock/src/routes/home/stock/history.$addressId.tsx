@@ -12,6 +12,9 @@ import StockHistoryTable, {
   InventoryHistoryRecord,
 } from "../../../features/stock-history/StockHistoryTable";
 import { supabase } from "@/lib/supabase";
+import { Card, CardContent, CardHeader, CardTitle } from "@thetis/ui/card";
+import { getCurrentStockLevels } from "../../../features/stock-history/utils";
+
 // Update Location interface to match the database schema
 interface Location {
   id: number;
@@ -91,6 +94,12 @@ function StockHistoryPage() {
   // Current address ID from the URL params
   const { addressId } = Route.useParams();
 
+  // Get current stock levels
+  const currentStock = getCurrentStockLevels(
+    inventoryHistory,
+    Number(addressId),
+  );
+
   // Format address for display with correct field names
   const formatAddressPreview = (location: Location) => {
     const parts: string[] = [];
@@ -117,8 +126,8 @@ function StockHistoryPage() {
   };
 
   return (
-    <div className="mx-auto">
-      <div className="flex md:flex-row-reverse flex-col justify-between items-center gap-4 mb-4">
+    <div className="space-y-6 mx-auto">
+      <div className="flex md:flex-row-reverse flex-col justify-between items-center gap-4">
         <div className="w-full md:w-auto">
           <Select value={addressId} onValueChange={handleLocationChange}>
             <SelectTrigger className="w-full md:w-[320px]">
@@ -171,19 +180,22 @@ function StockHistoryPage() {
         </div>
       </div>
 
-      {!inventoryHistory || inventoryHistory.length === 0 ? (
-        <div className="bg-white p-4 border rounded-lg text-center">
-          <p className="text-gray-500 text-lg">
-            No inventory history found for this address.
-          </p>
-        </div>
-      ) : (
-        <StockHistoryTable
-          inventoryHistory={inventoryHistory}
-          activeTab={activeTab}
-          addressId={addressId}
-        />
-      )}
+      {/* History Table */}
+      {!inventoryHistory || inventoryHistory.length === 0
+        ? (
+          <div className="bg-white p-4 border rounded-lg text-center">
+            <p className="text-gray-500 text-lg">
+              No inventory history found for this address.
+            </p>
+          </div>
+        )
+        : (
+          <StockHistoryTable
+            inventoryHistory={inventoryHistory}
+            activeTab={activeTab}
+            addressId={addressId}
+          />
+        )}
     </div>
   );
 }

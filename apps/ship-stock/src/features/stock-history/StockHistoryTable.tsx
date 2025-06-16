@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -19,13 +19,13 @@ import {
 } from "@thetis/ui/dropdown-menu";
 import dayjs from "dayjs";
 import {
-  getOrderTypeBadgeVariant,
-  getUniqueItems,
   filterItemsByType,
-  getTableData,
   getAllItemsForAddress,
-  getItemQuantityAtTime,
   getItemChangeAtTime,
+  getItemQuantityAtTime,
+  getOrderTypeBadgeVariant,
+  getTableData,
+  getUniqueItems,
 } from "./utils";
 
 export interface InventoryHistoryRecord {
@@ -88,14 +88,18 @@ export const StockHistoryTable: React.FC<StockHistoryTableProps> = ({
   // Update table data when visible items change
   useEffect(() => {
     const data = getTableData(inventoryHistory, visibleItems, addressId);
-    setTableData(data);
+    // Sort data by transaction_date in descending order
+    const sortedData = [...data].sort((a, b) =>
+      dayjs(b.transaction_date).valueOf() - dayjs(a.transaction_date).valueOf()
+    );
+    setTableData(sortedData);
   }, [inventoryHistory, visibleItems, addressId]);
 
   const toggleColumn = (column: string) => {
     setHiddenColumns((prev) =>
       prev.includes(column)
         ? prev.filter((col) => col !== column)
-        : [...prev, column],
+        : [...prev, column]
     );
   };
 
@@ -110,9 +114,8 @@ export const StockHistoryTable: React.FC<StockHistoryTableProps> = ({
               <TableHead>Type</TableHead>
               {visibleItems
                 .filter((item) => !hiddenColumns.includes(item.name))
-                .map((item) => (
-                  <TableHead key={item.id}>{item.name}</TableHead>
-                ))}
+                .map((item) => <TableHead key={item.id}>{item.name}
+                </TableHead>)}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -125,24 +128,28 @@ export const StockHistoryTable: React.FC<StockHistoryTableProps> = ({
                   {record.order_id === 0 ? "Current" : record.order_id}
                 </TableCell>
                 <TableCell>
-                  <Badge variant={getOrderTypeBadgeVariant(record.order_type)}>
+                  <Badge
+                    className={getOrderTypeBadgeVariant(record.order_type)}
+                  >
                     {record.order_type}
                   </Badge>
                 </TableCell>
                 {visibleItems
-                  .filter((item) => !hiddenColumns.includes(item.name))
+                  .filter((item) =>
+                    !hiddenColumns.includes(item.name)
+                  )
                   .map((item) => {
                     // For current stock record, use the item directly from the record
                     // For historical records, find the item in the record or get its quantity at that time
                     let itemData:
                       | {
-                          id: number;
-                          name: string;
-                          type: string;
-                          quantity: number;
-                          change: number;
-                          address_id?: number;
-                        }
+                        id: number;
+                        name: string;
+                        type: string;
+                        quantity: number;
+                        change: number;
+                        address_id?: number;
+                      }
                       | undefined;
 
                     if (record.order_id === 0) {
@@ -178,25 +185,27 @@ export const StockHistoryTable: React.FC<StockHistoryTableProps> = ({
 
                     return (
                       <TableCell key={item.id}>
-                        {itemData ? (
-                          <div>
-                            <div>{itemData.quantity}</div>
-                            {itemData.change !== 0 && (
-                              <div
-                                className={`text-xs ${
-                                  itemData.change > 0
-                                    ? "text-green-500"
-                                    : "text-red-500"
-                                }`}
-                              >
-                                {itemData.change > 0 ? "+" : ""}
-                                {itemData.change}
-                              </div>
-                            )}
-                          </div>
-                        ) : (
-                          "-"
-                        )}
+                        {itemData
+                          ? (
+                            <div>
+                              <div>{itemData.quantity}</div>
+                              {itemData.change !== 0 && (
+                                <div
+                                  className={`text-xs ${
+                                    itemData.change > 0
+                                      ? "text-green-500"
+                                      : "text-red-500"
+                                  }`}
+                                >
+                                  {itemData.change > 0 ? "+" : ""}
+                                  {itemData.change}
+                                </div>
+                              )}
+                            </div>
+                          )
+                          : (
+                            "-"
+                          )}
                       </TableCell>
                     );
                   })}
@@ -232,11 +241,9 @@ export const StockHistoryTable: React.FC<StockHistoryTableProps> = ({
                 key={item.id}
                 onClick={() => toggleColumn(item.name)}
               >
-                {hiddenColumns.includes(item.name) ? (
-                  <EyeOff className="mr-2 w-4 h-4" />
-                ) : (
-                  <Eye className="mr-2 w-4 h-4" />
-                )}
+                {hiddenColumns.includes(item.name)
+                  ? <EyeOff className="mr-2 w-4 h-4" />
+                  : <Eye className="mr-2 w-4 h-4" />}
                 {item.name}
               </DropdownMenuItem>
             ))}

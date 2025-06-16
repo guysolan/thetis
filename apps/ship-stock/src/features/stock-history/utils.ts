@@ -21,20 +21,20 @@ interface ItemInfo {
 // Helper function to determine badge variant based on order type
 export function getOrderTypeBadgeVariant(
     orderType: string,
-): "default" | "secondary" | "destructive" | "outline" {
+): string {
     switch (orderType) {
         case "purchase":
-            return "default";
+            return "bg-blue-100 text-blue-800 hover:bg-blue-200";
         case "sale":
-            return "destructive";
+            return "bg-green-100 text-green-800 hover:bg-green-200";
         case "shipment":
-            return "secondary";
+            return "bg-purple-100 text-purple-800 hover:bg-purple-200";
         case "stocktake":
-            return "outline";
+            return "bg-orange-100 text-orange-800 hover:bg-orange-200";
         case "current":
-            return "default";
+            return "bg-rose-500 text-white hover:bg-rose-600";
         default:
-            return "default";
+            return "bg-gray-100 text-gray-800 hover:bg-gray-200";
     }
 }
 
