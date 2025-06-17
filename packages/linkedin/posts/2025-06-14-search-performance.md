@@ -5,7 +5,7 @@ type: "Evidence"
 image: ./images/search-performance-3-months.png
 ---
 
-🔎 Over 243,000 impressions and 4,240 clicks in the last 3 months—what are Achilles patients searching for?
+🔎 Over 243,000 impressions and 4,240 clicks in the last 3 months—what are Achilles rupture patients searching for?
 
 Key insights:
 
