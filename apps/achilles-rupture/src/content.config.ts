@@ -16,6 +16,7 @@ const PageSchema = z.object({
 			"treatment",
 			"science",
 			"diagnosis",
+			"rehabilitation",
 			"comfort",
 		]),
 	).optional(),

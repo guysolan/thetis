@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
 } from "./accordion";
 
 export type FAQItem = {
@@ -12,8 +12,10 @@ export type FAQItem = {
 };
 
 export type FAQCategory = {
-  category: string;
-  questions: FAQItem[];
+  category?: string;
+  question?: string;
+  answer?: React.ReactNode | string;
+  questions?: FAQItem[];
 };
 
 type FAQsProps = {
@@ -30,34 +32,45 @@ const FAQs = ({
   useEffect(() => {
     if (!withSchema) return;
 
-    // Create and add schema to the page
     try {
-      // Convert React elements to plain text for JSON schema
-      const allFAQs = faqs.flatMap((category) =>
-        category.questions.map((q) => {
-          // Handle converting React nodes to strings in a cleaner way
-          let answerText = "";
-          if (typeof q.answer === "string") {
-            answerText = q.answer;
-          } else {
-            // Convert React element to string without assignment in expression
-            const div = document.createElement("div");
-            div.textContent = q.answer?.toString() || "";
-            answerText = div.textContent;
-          }
-
-          return {
+      // Convert both nested and unnested FAQs to a flat array of Q&As
+      const allFAQs = faqs.flatMap((category) => {
+        if (category.questions) {
+          // Handle nested structure
+          return category.questions.map((q) => ({
             question: q.question,
-            answer: answerText,
-          };
-        }),
-      );
+            answer: q.answer,
+          }));
+        } else if (category.question && category.answer) {
+          // Handle flat structure
+          return [{
+            question: category.question,
+            answer: category.answer,
+          }];
+        }
+        return [];
+      });
 
-      // Create the FAQ schema
+      // Convert answers to strings for schema
+      const processedFAQs = allFAQs.map((faq) => {
+        let answerText = "";
+        if (typeof faq.answer === "string") {
+          answerText = faq.answer;
+        } else {
+          const div = document.createElement("div");
+          div.textContent = faq.answer?.toString() || "";
+          answerText = div.textContent;
+        }
+        return {
+          question: faq.question,
+          answer: answerText,
+        };
+      });
+
       const faqSchema = {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        mainEntity: allFAQs.map((faq) => ({
+        mainEntity: processedFAQs.map((faq) => ({
           "@type": "Question",
           name: faq.question,
           acceptedAnswer: {
@@ -67,14 +80,12 @@ const FAQs = ({
         })),
       };
 
-      // Add the schema to the page
       const script = document.createElement("script");
       script.type = "application/ld+json";
       script.innerHTML = JSON.stringify(faqSchema);
       script.setAttribute("data-faq-schema", "");
       document.head.appendChild(script);
 
-      // Clean up on unmount
       return () => {
         const existingScript = document.querySelector(
           "script[data-faq-schema]",
@@ -90,38 +101,62 @@ const FAQs = ({
 
   return (
     <Accordion className={className} type="multiple">
-      {faqs.map((faq) => (
-        <AccordionItem
-          key={faq.category}
-          value={faq.category}
-          className="w-full"
-        >
-          <AccordionTrigger className="pb-8 font-semibold text-neutral-900 text-xl text-left">
-            {faq.category}
-          </AccordionTrigger>
-          <AccordionContent>
-            <Accordion type="single" collapsible>
-              {faq.questions.map((question) => (
-                <AccordionItem
-                  className="last:border-b-0"
-                  key={question.question}
-                  value={question.question}
-                >
-                  <AccordionTrigger
-                    style={{ textAlign: "left" }}
-                    className="font-semibold leading-loose"
-                  >
-                    {question.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-lg leading-loose">
-                    {question.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </AccordionContent>
-        </AccordionItem>
-      ))}
+      {faqs.map((faq, index) => {
+        if (faq.questions) {
+          // Render nested structure
+          return (
+            <AccordionItem
+              key={faq.category || index}
+              value={faq.category || `faq-${index}`}
+              className="w-full"
+            >
+              <AccordionTrigger className="pb-8 font-semibold text-neutral-900 text-xl text-left">
+                {faq.category}
+              </AccordionTrigger>
+              <AccordionContent>
+                <Accordion type="single" collapsible>
+                  {faq.questions.map((question, qIndex) => (
+                    <AccordionItem
+                      className="last:border-b-0"
+                      key={question.question || `q-${qIndex}`}
+                      value={question.question || `q-${qIndex}`}
+                    >
+                      <AccordionTrigger
+                        style={{ textAlign: "left" }}
+                        className="font-semibold leading-loose"
+                      >
+                        {question.question}
+                      </AccordionTrigger>
+                      <AccordionContent className="text-lg leading-loose">
+                        {question.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </AccordionContent>
+            </AccordionItem>
+          );
+        } else {
+          // Render flat structure
+          return (
+            <AccordionItem
+              key={faq.question || `faq-${index}`}
+              value={faq.question || `faq-${index}`}
+              className="w-full"
+            >
+              <AccordionTrigger
+                style={{ textAlign: "left" }}
+                className="font-semibold leading-loose"
+              >
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-lg leading-loose">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          );
+        }
+      })}
     </Accordion>
   );
 };
