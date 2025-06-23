@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { defaultTax } from "../../../../../constants/tax";
 import { TableCell, TableRow } from "@thetis/ui/table";
 import { Button } from "@thetis/ui/button";
-import { Copy, Trash, Lock, Unlock } from "lucide-react";
+import { Copy, Lock, Trash, Unlock } from "lucide-react";
 import ItemTypeSelect from "@/components/ItemTypeSelect";
 import NumberCell from "./NumberFlowCell";
 import { ItemType, StockItemQuantities } from "../types";
@@ -13,9 +13,9 @@ import { useSelectItemsByAddress } from "../../../../stockpiles/api/selectItemsB
 import {
   Select,
   SelectContent,
-  SelectValue,
-  SelectTrigger,
   SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@thetis/ui/select";
 import calculateItemTotal from "../../../utils/calculateItemTotal";
 import { useSelectItemsView } from "../../../../items/api/selectItemsView";
@@ -220,7 +220,24 @@ const StockItemRowCells = ({
             onValueChange={handlePackageItemChange}
           >
             <SelectTrigger>
-              <SelectValue placeholder="Select a package" />
+              <SelectValue placeholder="Select a package">
+                {packageItemId && packageItems && packageItems.length > 0
+                  ? (
+                    (() => {
+                      const selectedPackageIndex = packageItems.findIndex(
+                        (item) =>
+                          String(item.package_item_change_id) ===
+                            String(packageItemId),
+                      );
+                      return selectedPackageIndex >= 0
+                        ? `Package ${selectedPackageIndex + 1}`
+                        : "Select a package";
+                    })()
+                  )
+                  : (
+                    "Select a package"
+                  )}
+              </SelectValue>
             </SelectTrigger>
             <SelectContent>
               {packageItems.map((item, index) => (
@@ -233,7 +250,6 @@ const StockItemRowCells = ({
               ))}
             </SelectContent>
           </Select>
-          <Select />
         </TableCell>
       )}
       <TableCell className="w-1/4 truncate">
@@ -243,7 +259,9 @@ const StockItemRowCells = ({
           </SelectTrigger>
           <SelectContent>
             {items
-              ?.filter((item) => item.item_type === itemType)
+              ?.filter((item) =>
+                item.item_type === itemType
+              )
               .map((item) => (
                 <SelectItem key={item.item_id} value={String(item.item_id)}>
                   {item.item_name}

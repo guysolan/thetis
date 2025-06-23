@@ -28,7 +28,7 @@ export default function ReviewCarousel() {
       }}
     >
       <div className="flex flex-row justify-center items-center w-full max-w-[90vw] lg:max-w-xl">
-        <CarouselPrevious className="relative bg-white dark:bg-black mr-4 px-2 py-1 rounded-md w-10 h-10" />
+        <CarouselPrevious className="relative bg-white dark:bg-black mr-4 px-2 py-1 rounded-sm w-10 h-10" />
         <CarouselContent className="w-full">
           {reviews
             .filter((review) => review.is_pinned)
@@ -38,7 +38,7 @@ export default function ReviewCarousel() {
                 className="w-full md:basis-1/2 lg:basis-1/3"
               >
                 <div className="p-2">
-                  <Card className="bg-white shadow-lg rounded-lg">
+                  <Card className="bg-white shadow-lg rounded-sm">
                     <CardHeader className="pt-8 pb-2">
                       <div className="flex flex-row justify-center items-center gap-2">
                         <StarIcon />
@@ -64,7 +64,7 @@ export default function ReviewCarousel() {
               </CarouselItem>
             ))}
         </CarouselContent>
-        <CarouselNext className="relative bg-white dark:bg-black ml-4 px-2 py-1 rounded-md w-10 h-10" />
+        <CarouselNext className="relative bg-white dark:bg-black ml-4 px-2 py-1 rounded-sm w-10 h-10" />
       </div>
       <br />
       <CarouselDots />

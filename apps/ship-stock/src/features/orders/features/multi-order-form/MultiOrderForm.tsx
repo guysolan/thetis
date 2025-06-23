@@ -29,7 +29,7 @@ import PackageStockItems from "../order-forms/components/PackageStockItems";
 import SellPreview from "./SellPreview";
 import BuyPreview from "./BuyPreview";
 import ShipmentPreview from "./ShipmentPreview";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 type Schema = z.infer<typeof schema>;
 
@@ -67,26 +67,33 @@ export function MultiOrderForm({
   // Use useWatch to prevent infinite loops
   const orderType = useWatch({ control: form.control, name: "order_type" });
 
+  const previousOrderTypeRef = useRef<Schema["order_type"] | null>(null);
+
   useEffect(() => {
-    form.setValue("from_items", []);
-    form.setValue("to_items", []);
-    form.setValue("order_items", []);
-    form.setValue("package_items", []);
-    form.setValue("consumed_items", []);
-    form.setValue("produced_items", []);
-  }, [orderType]);
+    // Only clear arrays if orderType actually changed and is different from the previous value
+    const previousOrderType = previousOrderTypeRef.current;
+    if (orderType !== previousOrderType) {
+      form.setValue("from_items", []);
+      form.setValue("to_items", []);
+      form.setValue("order_items", []);
+      form.setValue("package_items", []);
+      form.setValue("consumed_items", []);
+      form.setValue("produced_items", []);
+      previousOrderTypeRef.current = orderType;
+    }
+  }, [orderType, form]);
 
   const mode = useWatch({ control: form.control, name: "mode" });
-  const orderItems =
-    useWatch({ control: form.control, name: "order_items" }) || [];
+  const orderItems = useWatch({ control: form.control, name: "order_items" }) ||
+    [];
   const packageItems =
     useWatch({ control: form.control, name: "package_items" }) || [];
   const consumedItems =
     useWatch({ control: form.control, name: "consumed_items" }) || [];
   const producedItems =
     useWatch({ control: form.control, name: "produced_items" }) || [];
-  const fromItems =
-    useWatch({ control: form.control, name: "from_items" }) || [];
+  const fromItems = useWatch({ control: form.control, name: "from_items" }) ||
+    [];
   const toItems = useWatch({ control: form.control, name: "to_items" }) || [];
 
   const { mutate: createOrder } = useCreateOrder(orderType);
@@ -179,7 +186,9 @@ export function MultiOrderForm({
         <BuyerSeller isShipment={orderType === "shipment"} />
 
         <EditCard
-          title={`${orderType?.charAt(0).toUpperCase() + orderType?.slice(1)} Order`}
+          title={`${
+            orderType?.charAt(0).toUpperCase() + orderType?.slice(1)
+          } Order`}
           previewContent={getPreviewContent()}
         >
           <div className="space-y-4">
@@ -192,7 +201,7 @@ export function MultiOrderForm({
                   value: type,
                 }))}
               />
-              {orderType === "purchase" && (
+              {orderType !== "sale" && (
                 <Select
                   label="Item Type"
                   name="item_type"

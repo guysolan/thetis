@@ -11,22 +11,22 @@ import { DocumentLinks } from "./DocumentLinks";
 import { PaymentStatusSelect } from "./PaymentStatusSelect";
 import { Link } from "@tanstack/react-router";
 import {
-  Edit,
-  Truck,
-  CheckCircle,
-  Clock,
   AlertCircle,
   Building2,
-  User,
   Calendar,
-  DollarSign,
-  Package,
-  ShoppingCart,
-  Send,
-  Wrench,
-  ClipboardList,
+  CheckCircle,
   ChevronDown,
   ChevronUp,
+  ClipboardList,
+  Clock,
+  DollarSign,
+  Edit,
+  Package,
+  Send,
+  ShoppingCart,
+  Truck,
+  User,
+  Wrench,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -127,14 +127,13 @@ const DeliveryStatus: React.FC<DeliveryStatusProps> = ({
   const formatDate = (date: string) => dayjs(date).format("D MMM");
 
   // Create concise date range text
-  const dateText =
-    deliveryDates[0] && deliveryDates[1]
-      ? `${formatDate(deliveryDates[0])}-${formatDate(deliveryDates[1])}`
-      : deliveryDates[0]
-        ? `from ${formatDate(deliveryDates[0])}`
-        : deliveryDates[1]
-          ? `by ${formatDate(deliveryDates[1])}`
-          : "";
+  const dateText = deliveryDates[0] && deliveryDates[1]
+    ? `${formatDate(deliveryDates[0])}-${formatDate(deliveryDates[1])}`
+    : deliveryDates[0]
+    ? `from ${formatDate(deliveryDates[0])}`
+    : deliveryDates[1]
+    ? `by ${formatDate(deliveryDates[1])}`
+    : "";
 
   return (
     <div
@@ -189,7 +188,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
         return (
           <div
             key={order.order_id}
-            className="bg-white dark:bg-gray-900 shadow-sm hover:shadow-md p-6 border rounded-lg transition-shadow"
+            className="bg-white dark:bg-gray-900 shadow-sm hover:shadow-md p-6 border rounded-sm transition-shadow"
           >
             {/* Header with Order Info and Actions */}
             <div className="flex justify-between items-start mb-4">
@@ -221,11 +220,9 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                   onClick={() => toggleExpanded(order.order_id)}
                   className="hover:bg-gray-100 dark:hover:bg-gray-800"
                 >
-                  {isExpanded ? (
-                    <ChevronUp size={16} />
-                  ) : (
-                    <ChevronDown size={16} />
-                  )}
+                  {isExpanded
+                    ? <ChevronUp size={16} />
+                    : <ChevronDown size={16} />}
                 </Button>
 
                 <ActionPopover

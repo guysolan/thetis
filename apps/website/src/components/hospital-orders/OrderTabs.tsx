@@ -66,19 +66,19 @@ export default function OrderTabs() {
         );
       }}
     >
-      <TabsList className="grid grid-cols-3 bg-gray-100/80 mb-8 p-1 rounded-lg w-full">
+      <TabsList className="grid grid-cols-3 bg-gray-100/80 mb-8 p-1 rounded-sm w-full">
         {packSizes.map((pack) => (
           <TabsTrigger
             key={pack.value}
             value={pack.value}
-            className="data-[state=active]:bg-primary py-6 rounded-md data-[state=active]:text-white text-lg transition-all"
+            className="data-[state=active]:bg-primary py-6 rounded-sm data-[state=active]:text-white text-lg transition-all"
           >
             {pack.name}
           </TabsTrigger>
         ))}
       </TabsList>
 
-      <div className="bg-blue-50 mb-8 p-5 border border-blue-200 rounded-lg">
+      <div className="bg-blue-50 mb-8 p-5 border border-blue-200 rounded-sm">
         <div className="flex items-center">
           <div className="bg-blue-100 mr-4 p-3 rounded-full">
             <svg
@@ -122,9 +122,9 @@ export default function OrderTabs() {
               <img
                 src="/images/night-splint.png"
                 alt="Achilles Tendon Splint"
-                className="shadow-lg rounded-lg"
+                className="shadow-lg rounded-sm"
               />
-              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent rounded-lg">
+              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent rounded-sm">
                 <div className="p-6 text-white">
                   <p className="mb-2 font-bold text-3xl">
                     {pack.quantity} Units
@@ -134,7 +134,7 @@ export default function OrderTabs() {
               </div>
             </div>
 
-            <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="bg-white shadow-lg rounded-sm overflow-hidden">
               <div className="p-6 border-b">
                 <h3 className="mb-4 font-bold text-2xl">ER & Splint Pack</h3>
                 <p className="mb-4 text-gray-600">
@@ -245,7 +245,7 @@ function OrderDialog({ pack }: { pack: (typeof packSizes)[0] }) {
             <input
               type="text"
               required
-              className="p-2 border rounded-lg w-full"
+              className="p-2 border rounded-sm w-full"
               placeholder="Hospital or Clinic Name"
             />
           </div>
@@ -257,7 +257,7 @@ function OrderDialog({ pack }: { pack: (typeof packSizes)[0] }) {
               <input
                 type="text"
                 required
-                className="p-2 border rounded-lg w-full"
+                className="p-2 border rounded-sm w-full"
                 placeholder="Full Name"
               />
             </div>
@@ -268,7 +268,7 @@ function OrderDialog({ pack }: { pack: (typeof packSizes)[0] }) {
               <input
                 type="text"
                 required
-                className="p-2 border rounded-lg w-full"
+                className="p-2 border rounded-sm w-full"
                 placeholder="e.g., Emergency, Orthopedics"
               />
             </div>
@@ -278,7 +278,7 @@ function OrderDialog({ pack }: { pack: (typeof packSizes)[0] }) {
             <input
               type="email"
               required
-              className="p-2 border rounded-lg w-full"
+              className="p-2 border rounded-sm w-full"
               placeholder="professional email"
             />
           </div>
@@ -289,7 +289,7 @@ function OrderDialog({ pack }: { pack: (typeof packSizes)[0] }) {
             <input
               type="tel"
               required
-              className="p-2 border rounded-lg w-full"
+              className="p-2 border rounded-sm w-full"
               placeholder="For order verification"
             />
           </div>
@@ -299,12 +299,12 @@ function OrderDialog({ pack }: { pack: (typeof packSizes)[0] }) {
             </label>
             <textarea
               required
-              className="p-2 border rounded-lg w-full"
+              className="p-2 border rounded-sm w-full"
               rows={3}
               placeholder="Full shipping address"
             />
           </div>
-          <div className="bg-gray-50 p-3 rounded-lg text-gray-600 text-sm">
+          <div className="bg-gray-50 p-3 rounded-sm text-gray-600 text-sm">
             <p>
               By submitting this form, you're requesting information about our{" "}
               {pack.name.toLowerCase()}. Our team will contact you within one
@@ -314,7 +314,7 @@ function OrderDialog({ pack }: { pack: (typeof packSizes)[0] }) {
           </div>
           <button
             type="submit"
-            className="bg-primary hover:bg-primary/90 py-3 rounded-lg w-full text-white transition-colors"
+            className="bg-primary hover:bg-primary/90 py-3 rounded-sm w-full text-white transition-colors"
           >
             Submit Request
           </button>

@@ -21,8 +21,7 @@ export default function SurgeryOrNotPeople() {
   const surgicalOtherComplications = Math.round(
     TOTAL_PEOPLE * (SURGICAL_OTHER_COMPLICATIONS / 100),
   );
-  const surgicalSuccess =
-    TOTAL_PEOPLE -
+  const surgicalSuccess = TOTAL_PEOPLE -
     surgicalReruptures -
     surgicalInfections -
     surgicalOtherComplications;
@@ -33,8 +32,8 @@ export default function SurgeryOrNotPeople() {
   const nonsurgicalComplications = Math.round(
     TOTAL_PEOPLE * (NONSURGICAL_COMPLICATION_RATE / 100),
   );
-  const nonsurgicalSuccess =
-    TOTAL_PEOPLE - nonsurgicalReruptures - nonsurgicalComplications;
+  const nonsurgicalSuccess = TOTAL_PEOPLE - nonsurgicalReruptures -
+    nonsurgicalComplications;
 
   // Helper function to render people icons in a 10x10 grid
   const renderPeopleGrid = (outcomes) => {
@@ -68,7 +67,9 @@ export default function SurgeryOrNotPeople() {
               return (
                 <UserRound
                   key={`person-${v_index}`}
-                  className={`w-4 h-4 md:w-5 md:h-5 m-0.5 transition-transform hover:scale-125 ${v_colorMap[v_outcome]}`}
+                  className={`w-4 h-4 md:w-5 md:h-5 m-0.5 transition-transform hover:scale-125 ${
+                    v_colorMap[v_outcome]
+                  }`}
                   stroke="currentColor"
                 />
               );
@@ -92,13 +93,13 @@ export default function SurgeryOrNotPeople() {
 
       <div className="flex md:flex-row flex-col justify-center md:items-center gap-6 md:gap-0">
         {/* Surgical Treatment */}
-        <div className="flex-1 bg-white shadow-sm hover:shadow-md p-4 md:p-5 border border-gray-200 rounded-xl transition-shadow">
+        <div className="flex-1 bg-white shadow-sm hover:shadow-md p-4 md:p-5 border border-gray-200 rounded-sm transition-shadow">
           <h3 className="mb-3 md:mb-4 font-bold text-xl md:text-2xl text-center">
             Surgical Treatment
           </h3>
 
           <div className="mb-4 md:mb-5">
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-2 md:p-4 rounded-lg">
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-2 md:p-4 rounded-sm">
               {renderPeopleGrid({
                 success: surgicalSuccess,
                 rerupture: surgicalReruptures,
@@ -143,13 +144,13 @@ export default function SurgeryOrNotPeople() {
         </div>
 
         {/* Non-Surgical Treatment */}
-        <div className="flex-1 bg-white shadow-sm hover:shadow-md p-4 md:p-5 border border-gray-200 rounded-xl transition-shadow">
+        <div className="flex-1 bg-white shadow-sm hover:shadow-md p-4 md:p-5 border border-gray-200 rounded-sm transition-shadow">
           <h3 className="mb-3 md:mb-4 font-bold text-xl md:text-2xl text-center">
             Non-Surgical Treatment
           </h3>
 
           <div className="mb-4 md:mb-5">
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-2 md:p-4 rounded-lg">
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-2 md:p-4 rounded-sm">
               {renderPeopleGrid({
                 success: nonsurgicalSuccess,
                 rerupture: nonsurgicalReruptures,
@@ -180,7 +181,7 @@ export default function SurgeryOrNotPeople() {
       </div>
 
       {/* Combined Key */}
-      <div className="bg-white mx-auto mt-6 md:mt-8 p-4 md:p-5 border border-gray-200 rounded-xl max-w-3xl">
+      <div className="bg-white mx-auto mt-6 md:mt-8 p-4 md:p-5 border border-gray-200 rounded-sm max-w-3xl">
         <div className="gap-3 md:gap-4 grid grid-cols-2 md:grid-cols-4 text-sm md:text-base">
           <div className="flex items-center gap-2">
             <div className="bg-red-500 rounded-full w-4 md:w-6 h-4 md:h-6" />

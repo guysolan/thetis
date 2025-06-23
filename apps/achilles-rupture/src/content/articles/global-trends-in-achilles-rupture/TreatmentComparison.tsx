@@ -1,16 +1,16 @@
 import React from "react";
 import {
-  Scissors,
-  Bandage,
   AlertTriangle,
-  Scale,
+  Bandage,
   CheckCircle,
-  X
+  Scale,
+  Scissors,
+  X,
 } from "lucide-react";
 
 export default function TreatmentComparison() {
   return (
-    <div className="bg-white shadow-md mx-auto my-8 p-4 sm:p-6 border border-gray-200 rounded-lg w-full">
+    <div className="bg-white shadow-md mx-auto my-8 p-4 sm:p-6 border border-gray-200 rounded-sm w-full">
       <h2 className="mb-6 font-bold text-2xl text-center">
         Surgical vs. Non-Surgical Treatment
       </h2>
@@ -19,7 +19,7 @@ export default function TreatmentComparison() {
       <div className="flex lg:flex-row flex-col gap-6 w-full">
         {/* Non-Surgical Column */}
         <div className="flex-1">
-          <div className="bg-blue-50 p-5 border-2 border-blue-200 rounded-lg h-full">
+          <div className="bg-blue-50 p-5 border-2 border-blue-200 rounded-sm h-full">
             <div className="flex justify-center mb-4">
               <Bandage className="w-12 h-12 text-blue-600" />
             </div>
@@ -44,7 +44,9 @@ export default function TreatmentComparison() {
                 </h4>
                 <ul className="space-y-2 pl-5 text-base list-disc">
                   <li>No surgical risks</li>
-                  <li><strong>Lower complication rates (1.6%)</strong></li>
+                  <li>
+                    <strong>Lower complication rates (1.6%)</strong>
+                  </li>
                   <li>No hospitalization required</li>
                   <li>Good for patients over 40</li>
                 </ul>
@@ -66,7 +68,7 @@ export default function TreatmentComparison() {
 
         {/* Surgical Column */}
         <div className="flex-1">
-          <div className="bg-gray-50 p-5 border-2 border-gray-200 rounded-lg h-full">
+          <div className="bg-gray-50 p-5 border-2 border-gray-200 rounded-sm h-full">
             <div className="flex justify-center mb-4">
               <Scissors className="w-12 h-12 text-gray-600" />
             </div>
@@ -102,8 +104,12 @@ export default function TreatmentComparison() {
                   Risks
                 </h4>
                 <ul className="space-y-2 pl-5 text-base list-disc">
-                  <li><strong>Infection risk (2.8%)</strong></li>
-                  <li><strong>Higher overall complication rate (4.9%)</strong></li>
+                  <li>
+                    <strong>Infection risk (2.8%)</strong>
+                  </li>
+                  <li>
+                    <strong>Higher overall complication rate (4.9%)</strong>
+                  </li>
                   <li>Nerve injury potential</li>
                   <li>Scar tissue formation</li>
                 </ul>
@@ -114,7 +120,7 @@ export default function TreatmentComparison() {
       </div>
 
       {/* Key Research Finding */}
-      <div className="bg-green-50 mt-8 p-6 border-2 border-green-200 rounded-lg w-full text-center">
+      <div className="bg-green-50 mt-8 p-6 border-2 border-green-200 rounded-sm w-full text-center">
         <div className="flex justify-center mb-2">
           <Scale className="w-10 h-10 text-green-600" />
         </div>
@@ -122,16 +128,17 @@ export default function TreatmentComparison() {
           Key Finding: Equivalent Outcomes
         </h2>
         <p className="text-lg">
-          When patients are appropriately selected, both approaches yield 
-          <span className="font-bold"> equivalent long-term results</span> in terms of 
-          functional recovery and re-rupture rates.
+          When patients are appropriately selected, both approaches yield
+          <span className="font-bold">equivalent long-term results</span>{" "}
+          in terms of functional recovery and re-rupture rates.
         </p>
       </div>
 
       {/* Decision Factors - Simplified */}
       <div className="flex flex-col items-center mt-6 p-4">
         <h3 className="mb-3 font-semibold text-xl text-center">
-          Treatment selection should consider: age, activity level, and personal preference
+          Treatment selection should consider: age, activity level, and personal
+          preference
         </h3>
       </div>
     </div>

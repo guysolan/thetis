@@ -3,7 +3,7 @@ import { StockValidationAlert } from "../order-forms/components/StockValidationA
 import { useBuyForm } from "../order-forms/features/buy-form/useBuyForm";
 import useCompanyDefaults from "../../../companies/hooks/useCompanyDefaults";
 import { useFormContext, useWatch } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import PackageStockItems from "../order-forms/components/PackageStockItems";
 
 const BuyFormFields = () => {
@@ -16,14 +16,18 @@ const BuyFormFields = () => {
   const producedItems = form.watch("produced_items");
   const packageMode = form.watch("mode") === "package";
 
+  const previousItemTypeRef = useRef<string | null>(null);
+
   // Initialize form with default values when itemType changes
   useEffect(() => {
-    if (itemType) {
+    const previousItemType = previousItemTypeRef.current;
+    if (itemType && itemType !== previousItemType) {
       form.setValue("order_items", []);
       form.setValue("consumed_items", []);
       form.setValue("produced_items", []);
+      previousItemTypeRef.current = itemType;
     }
-  }, [itemType]);
+  }, [itemType, form]);
 
   const addToProducedItems = (newItem: any) =>
     form.setValue("produced_items", [...producedItems, newItem]);
@@ -32,11 +36,9 @@ const BuyFormFields = () => {
     <>
       {packageMode && (
         <PackageStockItems
-          itemsToUpdate={
-            form.watch("item_type") === "product"
-              ? ["produced_items"]
-              : ["order_items"]
-          }
+          itemsToUpdate={form.watch("item_type") === "product"
+            ? ["produced_items"]
+            : ["order_items"]}
         />
       )}
       {itemType === "part" && (

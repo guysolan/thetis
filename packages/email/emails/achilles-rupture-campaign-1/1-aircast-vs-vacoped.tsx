@@ -37,7 +37,7 @@ export const MyEmail = () => {
               The Boot Battle: Aircast vs VACOped
             </Heading>
 
-            <Section className="bg-indigo-50 my-6 p-6 rounded-lg">
+            <Section className="bg-indigo-50 my-6 p-6 rounded-sm">
               <Text className="text-[14px] text-black leading-[24px]">
                 Ever wondered if your Achilles rupture patients would achieve
                 better outcomes with a VACOped versus an Aircast + wedges? Here
@@ -78,7 +78,7 @@ export const MyEmail = () => {
                 The VACOped claims to be the gold standard in Achilles rupture
                 management:
               </Text>
-              <Section className="bg-indigo-50 my-4 p-6 rounded-lg">
+              <Section className="bg-indigo-50 my-4 p-6 rounded-sm">
                 <Heading className="mb-2 font-semibold text-[16px] text-indigo-700">
                   How It Works: VACOped's Dynamic Recovery System
                 </Heading>
@@ -125,7 +125,7 @@ export const MyEmail = () => {
                 The Aircast offers a practical alternative with its own
                 advantages:
               </Text>
-              <Section className="bg-indigo-50 my-4 p-6 rounded-lg">
+              <Section className="bg-indigo-50 my-4 p-6 rounded-sm">
                 <Heading className="mb-2 font-semibold text-[16px] text-indigo-700">
                   How It Works: Aircast's Wedge System
                 </Heading>
@@ -223,20 +223,21 @@ export const MyEmail = () => {
               </Text>
               <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
                 <li>
-                  <strong>Walking:</strong> VACOped's hinged mechanism and
-                  pronounced rocker design enables better heel-to-toe movement
-                  while preserving muscle function
+                  <strong>Walking:</strong>{" "}
+                  VACOped's hinged mechanism and pronounced rocker design
+                  enables better heel-to-toe movement while preserving muscle
+                  function
                 </li>
                 <li>
-                  <strong>Sleeping:</strong> Neither boot is recommended for
-                  sleep - the Achilles Rupture Splint provides optimal comfort
-                  and support for nighttime use
+                  <strong>Sleeping:</strong>{" "}
+                  Neither boot is recommended for sleep - the Achilles Rupture
+                  Splint provides optimal comfort and support for nighttime use
                 </li>
                 <li>
-                  <strong>Showering:</strong> The VACOped has built-in
-                  waterproofing (though fiddly to use - requires removing inner
-                  lining and using a backup liner), while the Aircast requires a
-                  waterproof cover
+                  <strong>Showering:</strong>{" "}
+                  The VACOped has built-in waterproofing (though fiddly to use -
+                  requires removing inner lining and using a backup liner),
+                  while the Aircast requires a waterproof cover
                 </li>
               </ul>
             </Section>
@@ -345,25 +346,28 @@ export const MyEmail = () => {
               </Text>
               <ul className="pl-4 text-[14px] text-black leading-[24px] list-disc">
                 <li>
-                  <strong>Achilles Rupture Night Splint:</strong> Essential for
-                  comfortable sleep and maintaining proper tendon length
+                  <strong>Achilles Rupture Night Splint:</strong>{" "}
+                  Essential for comfortable sleep and maintaining proper tendon
+                  length
                 </li>
                 <li>
-                  <strong>EVENup Shoe Leveler:</strong> Prevents back, hip, and
-                  knee pain by balancing height difference
+                  <strong>EVENup Shoe Leveler:</strong>{" "}
+                  Prevents back, hip, and knee pain by balancing height
+                  difference
                 </li>
                 <li>
-                  <strong>Limbo Waterproof Cover:</strong> Essential for Aircast
-                  users during showering
+                  <strong>Limbo Waterproof Cover:</strong>{" "}
+                  Essential for Aircast users during showering
                 </li>
                 <li>
-                  <strong>Merino Wool Socks:</strong> Helps manage temperature
-                  and moisture for optimal comfort
+                  <strong>Merino Wool Socks:</strong>{" "}
+                  Helps manage temperature and moisture for optimal comfort
                 </li>
               </ul>
               <Text className="mt-4 text-[14px] text-black leading-[24px]">
-                <strong>Bonus Tip:</strong> For showering, place a chair in your
-                shower and use either the{" "}
+                <strong>Bonus Tip:</strong>{" "}
+                For showering, place a chair in your shower and use either the
+                {" "}
                 <Link
                   href="https://thetismedical.com/splint"
                   className="text-indigo-600"

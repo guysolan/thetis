@@ -1,15 +1,15 @@
 import {
   Select,
-  SelectItem,
   SelectContent,
+  SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@thetis/ui/select";
 import React, { useEffect } from "react";
 import { useSelectItemsView } from "../../../../items/api/selectItemsView";
-import { useFormContext, useFieldArray } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { Button } from "@thetis/ui/button";
-import { Plus, Trash, Box, Weight, Copy } from "lucide-react";
+import { Box, Copy, Plus, Trash, Weight } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -127,13 +127,13 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
     );
 
     const formValues = form.getValues();
-    const currentItemsInThisField: OrderItem[] = formValues[fieldName] || [];
+    const currentItemsInThisField = formValues[fieldName] || [];
 
     const preservedItemsInField = shouldPreserveExisting
       ? currentItemsInThisField
       : currentItemsInThisField.filter(
-          (item) => item.package_item_change_id !== packageItemChangeId,
-        );
+        (item) => item.package_item_change_id !== packageItemChangeId,
+      );
 
     let itemsToSetForField = itemsFromPackage;
     if (fieldName === "from_items") {
@@ -160,13 +160,42 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
 
     if (targetPackageId) {
       itemsToUpdate.forEach((fieldName: ItemsToUpdate) => {
-        const updatedItems = updatePackageItems(
-          targetPackageId,
-          packageItemChangeId,
-          fieldName,
-          false, // Don't preserve existing items during update
+        // Get current items in this field
+        const formValues = form.getValues();
+        const currentItemsInThisField = formValues[fieldName] || [];
+
+        // Remove existing items for this specific package
+        const itemsWithoutThisPackage = currentItemsInThisField.filter(
+          (item) => item.package_item_change_id !== packageItemChangeId,
         );
-        form.setValue(fieldName, updatedItems);
+
+        // Create new items for this package
+        const selectedPkg = availablePackages?.find(
+          (item) => String(item.item_id) === targetPackageId,
+        );
+
+        if (selectedPkg?.components) {
+          const newItems = createPackageItems(
+            selectedPkg.components as PackageComponent[],
+            targetPackageId,
+            packageItemChangeId,
+          );
+
+          let itemsToAdd = newItems;
+          if (fieldName === "from_items") {
+            itemsToAdd = newItems.map((item) => ({
+              ...item,
+              quantity_change: -item.quantity_change,
+            }));
+          }
+
+          // Combine existing items (without this package) with new items
+          const updatedItems = [...itemsWithoutThisPackage, ...itemsToAdd];
+          form.setValue(fieldName, updatedItems);
+        } else {
+          // If no package selected, just remove items for this package
+          form.setValue(fieldName, itemsWithoutThisPackage);
+        }
       });
     }
   };
@@ -206,8 +235,7 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
 
         itemsToUpdate.forEach((fieldName: ItemsToUpdate) => {
           const formValues = form.getValues();
-          const currentItemsInThisField: OrderItem[] =
-            formValues[fieldName] || [];
+          const currentItemsInThisField = formValues[fieldName] || [];
 
           let itemsToAdd = newItems;
           if (fieldName === "from_items") {
@@ -254,6 +282,9 @@ const PackageStockItems = ({
       const toItems = form.watch("to_items") || [];
       const fromItems = form.watch("from_items") || [];
 
+      // Only sync if both arrays have items and are for shipment orders
+      if (toItems.length === 0 && fromItems.length === 0) return;
+
       // Create a map of package_item_change_id to quantity for to_items
       const toItemsMap = new Map(
         toItems.map((item) => [
@@ -263,6 +294,7 @@ const PackageStockItems = ({
       );
 
       // Update from_items to match to_items quantities (with opposite sign)
+      // Only update items that exist in both arrays to avoid erasing package items
       const updatedFromItems = fromItems.map((item) => {
         const toQuantity = toItemsMap.get(item.package_item_change_id);
         if (toQuantity !== undefined) {
@@ -274,11 +306,23 @@ const PackageStockItems = ({
         return item;
       });
 
-      form.setValue("from_items", updatedFromItems);
+      // Only set if there are actual changes to avoid unnecessary re-renders
+      const currentFromItems = form.getValues("from_items") || [];
+      if (
+        JSON.stringify(currentFromItems) !== JSON.stringify(updatedFromItems)
+      ) {
+        form.setValue("from_items", updatedFromItems);
+      }
     };
 
-    form.watch("to_items", syncQuantities);
-    form.watch("from_items", syncQuantities);
+    // Only watch for changes in shipment-related fields
+    const subscription = form.watch((value, { name }) => {
+      if (name?.startsWith("to_items") || name?.startsWith("from_items")) {
+        syncQuantities();
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, [form]);
 
   const updatePackageId = (newValue: string, index: number) => {

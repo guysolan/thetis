@@ -58,7 +58,11 @@ const PackagePreview = ({
           return (
             <div
               key={`${pkg.package_id}-${pkg.package_item_change_id}`}
-              className={`p-3 rounded-lg border-2 ${borderColor} ${isEmpty ? "bg-gray-100/50 border-dashed" : "bg-gray-50/50 hover:bg-gray-100/50"} transition-colors`}
+              className={`p-3 rounded-sm border-2 ${borderColor} ${
+                isEmpty
+                  ? "bg-gray-100/50 border-dashed"
+                  : "bg-gray-50/50 hover:bg-gray-100/50"
+              } transition-colors`}
             >
               <div className="space-y-2">
                 {/* Header with package number and price */}
@@ -89,39 +93,41 @@ const PackagePreview = ({
                 )}
 
                 {/* Package items list or empty state */}
-                {isEmpty ? (
-                  <div className="py-2 text-center">
-                    <div className="text-gray-500 text-xs">No items</div>
-                  </div>
-                ) : (
-                  <div className="space-y-1">
-                    <div className="space-y-1 max-h-20 overflow-y-auto">
-                      {packageOrderItems.map((item) => {
-                        const itemDetails = itemsView?.find(
-                          (i) => String(i.item_id) === item.item_id,
-                        );
-                        return (
-                          <div
-                            key={`${item.item_id}-${item.item_name}-${item.package_item_change_id}`}
-                            className="text-gray-700 text-xs"
-                          >
-                            <div className="font-medium">
-                              {itemDetails?.item_name ||
-                                item.item_name ||
-                                `Item ${item.item_id}`}{" "}
-                              × {Math.abs(item.quantity_change || 0)}
-                            </div>
-                            {showValue && item.item_total && (
-                              <div className="mt-0.5 text-gray-600">
-                                ${item.item_total.toFixed(2)}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
+                {isEmpty
+                  ? (
+                    <div className="py-2 text-center">
+                      <div className="text-gray-500 text-xs">No items</div>
                     </div>
-                  </div>
-                )}
+                  )
+                  : (
+                    <div className="space-y-1">
+                      <div className="space-y-1 max-h-20 overflow-y-auto">
+                        {packageOrderItems.map((item) => {
+                          const itemDetails = itemsView?.find(
+                            (i) => String(i.item_id) === item.item_id,
+                          );
+                          return (
+                            <div
+                              key={`${item.item_id}-${item.item_name}-${item.package_item_change_id}`}
+                              className="text-gray-700 text-xs"
+                            >
+                              <div className="font-medium">
+                                {itemDetails?.item_name ||
+                                  item.item_name ||
+                                  `Item ${item.item_id}`} ×{" "}
+                                {Math.abs(item.quantity_change || 0)}
+                              </div>
+                              {showValue && item.item_total && (
+                                <div className="mt-0.5 text-gray-600">
+                                  ${item.item_total.toFixed(2)}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
 
                 {/* Package dimensions */}
                 {selectedPackage && (
@@ -129,14 +135,15 @@ const PackagePreview = ({
                     {selectedPackage.height &&
                       selectedPackage.width &&
                       selectedPackage.depth && (
-                        <div className="flex items-center gap-1 text-gray-600 text-xs">
-                          <Box size={12} />
-                          <span>
-                            {selectedPackage.height} × {selectedPackage.width} ×{" "}
-                            {selectedPackage.depth} cm
-                          </span>
-                        </div>
-                      )}
+                      <div className="flex items-center gap-1 text-gray-600 text-xs">
+                        <Box size={12} />
+                        <span>
+                          {selectedPackage.height} × {selectedPackage.width} ×
+                          {" "}
+                          {selectedPackage.depth} cm
+                        </span>
+                      </div>
+                    )}
                     {selectedPackage.weight && selectedPackage.weight > 0 && (
                       <div className="flex items-center gap-1 text-gray-600 text-xs">
                         <Weight size={12} />

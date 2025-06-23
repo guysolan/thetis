@@ -1,30 +1,35 @@
 ---
-title: "One thing I agree with Trump on - onshoring manufacturing"
+title: "Why We're Committed to 100% UK Manufacturing"
 date: 2025-06-16
-type: "Product"
+type: "Company Post"
 ---
 
-One thing I agree with Trump on - onshoring manufacturing
+🏢 At @Thetis Medical, we're proud to manufacture our Achilles rupture splint 100% in the UK. We often get asked why, especially when it means higher costs. Here's a look behind our decision.
 
-My company @Thetis Medical makes our Achilles rupture splint 100% in the UK.
+🛠️ Our splint is built from 6 key components, all sourced and assembled domestically:
 
-The splint is made from 6 things:
+1. Medical-grade sponge lining for comfort
+2. High-durability elastic straps
+3. Industrial-strength nylon webbing
+4. Custom-molded plastic shell
+5. Premium Velcro fasteners
+6. Reinforced threading
 
-1. Sponge lining
-2. Elastic straps
-3. Nylon Webbing
-4. Plastic Shell
-5. Velcro
-6. Thread
+🇬🇧 This commitment to local sourcing with partners like MPD Hook and Loop means our costs are 4-5 times higher than manufacturing in Asia. This is reflected in our final price.
 
-All from the UK, all assembled in the UK by the phenomenal MPD Hook and Loop.
+⭐ We recently received a two-star review: "I have to buy this product because it is the only option at this price - the company is just shooting fish in a barrel."
 
-This means that making the product costs 4 or 5 times what it would cost in Asia
+This might be one of our favorite "negative" reviews. It highlights an important truth: quality, domestic manufacturing has a real-world cost.
 
-It also means, we have to sell the product at a high price.
+So, why do we insist on it?
 
-One Amazon review we got from a nurse told us "I have to buy this product because it is the only option at this price the company is just shooting fish in a barrel".
+💪 For us, the reasons are clear:
 
-Probably my favorite negative review to date. Two stars. Fair enough.
+* Supporting UK manufacturing jobs
+* Maintaining strict quality control
+* Reducing supply chain vulnerabilities
+* Contributing to a country which shares the companies values
 
-But, giving 50% of our annual profit a UK based company is, for me, worth the price of a few ignorant grumbles.
+✨ The higher price is a trade-off we believe is worth making for a product made entirely in the UK. It's a core part of our identity.
+
+# UKManufacturing #MadeInTheUK #MedicalDevices #SupplyChain

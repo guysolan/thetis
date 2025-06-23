@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@thetis/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@thetis/ui/tabs";
 import { reviews } from "./content/all";
 
 type ReviewType = {
@@ -25,25 +25,19 @@ function ReviewsByType() {
       <TabsContent value="patient">
         {reviews
           .filter((r) => r.type === "patient")
-          .map((review, index) => (
-            <ReviewCard key={index} review={review} />
-          ))}
+          .map((review, index) => <ReviewCard key={index} review={review} />)}
       </TabsContent>
 
       <TabsContent value="athlete">
         {reviews
           .filter((r) => r.type === "athlete")
-          .map((review, index) => (
-            <ReviewCard key={index} review={review} />
-          ))}
+          .map((review, index) => <ReviewCard key={index} review={review} />)}
       </TabsContent>
 
       <TabsContent value="clinician">
         {reviews
           .filter((r) => r.type === "clinician")
-          .map((review, index) => (
-            <ReviewCard key={index} review={review} />
-          ))}
+          .map((review, index) => <ReviewCard key={index} review={review} />)}
       </TabsContent>
     </Tabs>
   );
@@ -52,7 +46,7 @@ function ReviewsByType() {
 // You'll need to create this component to display individual reviews
 function ReviewCard({ review }: { review: ReviewType }) {
   return (
-    <div className="mb-4 p-4 border rounded-lg">
+    <div className="mb-4 p-4 border rounded-sm">
       {/* Add your review card content here */}
       {review.type}
     </div>

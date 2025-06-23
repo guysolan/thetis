@@ -5,7 +5,7 @@ type: "Evidence"
 image: ./images/thetis-best-queries-3-months.png
 ---
 
-💡 The most common questions patients ask online:
+💡 The most common questions Achilles rupture patients ask online:
 
 - "How long after Achilles surgery can I walk?"
 - "Signs your Achilles tendon is about to rupture"

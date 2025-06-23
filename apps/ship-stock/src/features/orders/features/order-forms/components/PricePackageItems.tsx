@@ -19,20 +19,21 @@ const PricePackageItems = ({
     title,
     showPrice = true,
     defaultIsExpanded = true,
-    showPackageItems = true
+    showPackageItems = true,
 }: PricePackageItemsProps) => {
     const { control } = useFormContext();
     const { data: packages } = useSelectItemsView();
     const { fields, append, remove } = useFieldArray({
         name: "order_items",
-        control
+        control,
     });
 
-    const packageOptions = packages?.filter(item => item.item_type === "package")
-        .map(pkg => ({
-            label: pkg.item_name,
-            value: String(pkg.item_id)
-        })) ?? [];
+    const packageOptions =
+        packages?.filter((item) => item.item_type === "package")
+            .map((pkg) => ({
+                label: pkg.item_name,
+                value: String(pkg.item_id),
+            })) ?? [];
 
     return (
         <div className="space-y-4">
@@ -41,7 +42,7 @@ const PricePackageItems = ({
                 {fields.map((field, index) => (
                     <div
                         key={field.id}
-                        className="bg-white shadow-sm p-4 border rounded-lg"
+                        className="bg-white shadow-sm p-4 border rounded-sm"
                     >
                         <div className="flex flex-row items-end gap-1">
                             <Select
@@ -55,35 +56,30 @@ const PricePackageItems = ({
                                 label="Length"
                                 type="number"
                                 step="1"
-
                             />
                             <Input
                                 name={`order_items.${index}.width`}
                                 label="Width"
                                 type="number"
                                 step="1"
-
                             />
                             <Input
                                 name={`order_items.${index}.depth`}
                                 label="Depth"
                                 type="number"
                                 step="1"
-
                             />
                             <Input
                                 name={`order_items.${index}.depth`}
                                 label="Weight"
                                 type="number"
                                 step="1"
-
                             />
                             <Input
                                 name={`order_items.${index}.quantity_change`}
                                 label="Quantity"
                                 type="number"
                                 step="1"
-
                             />
                             <Button
                                 type="button"
@@ -105,18 +101,19 @@ const PricePackageItems = ({
             <Button
                 type="button"
                 variant="outline"
-                onClick={() => append({
-                    item_type: "package",
-                    item_id: "",
-                    quantity_change: 1,
-                    package_items: [{
+                onClick={() =>
+                    append({
+                        item_type: "package",
                         item_id: "",
-                        item_type: "product",
-                        quantity: 1,
-                        item_price: 0,
-                        item_tax: 0
-                    }]
-                })}
+                        quantity_change: 1,
+                        package_items: [{
+                            item_id: "",
+                            item_type: "product",
+                            quantity: 1,
+                            item_price: 0,
+                            item_tax: 0,
+                        }],
+                    })}
             >
                 <PlusCircleIcon className="mr-2 w-4 h-4" />
                 Add Package

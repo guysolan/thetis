@@ -10,12 +10,12 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "@thetis/ui/popover";
 import {
   ArrowUp,
-  Printer,
-  Share2,
-  Twitter,
   Facebook,
   Link,
   Linkedin,
+  Printer,
+  Share2,
+  Twitter,
 } from "lucide-react";
 
 const ShareControls = () => {
@@ -123,42 +123,48 @@ const ShareControls = () => {
           : ""
       }`}
     >
-      {isMobile ? (
-        <Drawer>
-          <DrawerTrigger asChild>
-            <Button
-              variant="default"
-              size="icon"
-              className="order-first rounded-full"
-              title="Share article"
+      {isMobile
+        ? (
+          <Drawer>
+            <DrawerTrigger asChild>
+              <Button
+                variant="default"
+                size="icon"
+                className="order-first rounded-full"
+                title="Share article"
+              >
+                <Share2 size={20} />
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader>
+                <DrawerTitle>Share Article</DrawerTitle>
+              </DrawerHeader>
+              <ShareContent />
+            </DrawerContent>
+          </Drawer>
+        )
+        : (
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="default"
+                size="icon"
+                className="order-first rounded-full"
+                title="Share article"
+              >
+                <Share2 size={20} />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent
+              className="rounded-sm w-sm"
+              align="start"
+              side="left"
             >
-              <Share2 size={20} />
-            </Button>
-          </DrawerTrigger>
-          <DrawerContent>
-            <DrawerHeader>
-              <DrawerTitle>Share Article</DrawerTitle>
-            </DrawerHeader>
-            <ShareContent />
-          </DrawerContent>
-        </Drawer>
-      ) : (
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant="default"
-              size="icon"
-              className="order-first rounded-full"
-              title="Share article"
-            >
-              <Share2 size={20} />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="rounded-lg w-sm" align="start" side="left">
-            <ShareContent />
-          </PopoverContent>
-        </Popover>
-      )}
+              <ShareContent />
+            </PopoverContent>
+          </Popover>
+        )}
 
       <Button
         variant="secondary"

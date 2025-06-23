@@ -40,57 +40,59 @@ const BuyPreview = ({
     <div className="space-y-4">
       <p className="text-gray-600 text-sm">Purchase Order Summary</p>
 
-      {mode === "package" ? (
-        <PackagePreview
-          packageItems={packageItems}
-          orderItems={orderItems}
-          showValue={true}
-        />
-      ) : (
-        <div className="space-y-3">
-          <div className="gap-4 grid grid-cols-1 md:grid-cols-3">
-            {orderItems.length > 0 && (
-              <div className="bg-blue-50 p-3 border border-blue-200 rounded-lg">
-                <p className="mb-1 font-medium text-blue-800 text-sm">
-                  Purchasing
-                </p>
-                <p className="font-semibold text-blue-900 text-lg">
-                  {orderItems.length}
-                </p>
-                <p className="text-blue-600 text-xs">
-                  item{orderItems.length !== 1 ? "s" : ""}
-                </p>
-              </div>
-            )}
-            {producedItems.length > 0 && (
-              <div className="bg-green-50 p-3 border border-green-200 rounded-lg">
-                <p className="mb-1 font-medium text-green-800 text-sm">
-                  Producing
-                </p>
-                <p className="font-semibold text-green-900 text-lg">
-                  {producedItems.length}
-                </p>
-                <p className="text-green-600 text-xs">
-                  item{producedItems.length !== 1 ? "s" : ""}
-                </p>
-              </div>
-            )}
-            {consumedItems.length > 0 && (
-              <div className="bg-orange-50 p-3 border border-orange-200 rounded-lg">
-                <p className="mb-1 font-medium text-orange-800 text-sm">
-                  Consuming
-                </p>
-                <p className="font-semibold text-orange-900 text-lg">
-                  {consumedItems.length}
-                </p>
-                <p className="text-orange-600 text-xs">
-                  item{consumedItems.length !== 1 ? "s" : ""}
-                </p>
-              </div>
-            )}
+      {mode === "package"
+        ? (
+          <PackagePreview
+            packageItems={packageItems}
+            orderItems={orderItems}
+            showValue={true}
+          />
+        )
+        : (
+          <div className="space-y-3">
+            <div className="gap-4 grid grid-cols-1 md:grid-cols-3">
+              {orderItems.length > 0 && (
+                <div className="bg-blue-50 p-3 border border-blue-200 rounded-sm">
+                  <p className="mb-1 font-medium text-blue-800 text-sm">
+                    Purchasing
+                  </p>
+                  <p className="font-semibold text-blue-900 text-lg">
+                    {orderItems.length}
+                  </p>
+                  <p className="text-blue-600 text-xs">
+                    item{orderItems.length !== 1 ? "s" : ""}
+                  </p>
+                </div>
+              )}
+              {producedItems.length > 0 && (
+                <div className="bg-green-50 p-3 border border-green-200 rounded-sm">
+                  <p className="mb-1 font-medium text-green-800 text-sm">
+                    Producing
+                  </p>
+                  <p className="font-semibold text-green-900 text-lg">
+                    {producedItems.length}
+                  </p>
+                  <p className="text-green-600 text-xs">
+                    item{producedItems.length !== 1 ? "s" : ""}
+                  </p>
+                </div>
+              )}
+              {consumedItems.length > 0 && (
+                <div className="bg-orange-50 p-3 border border-orange-200 rounded-sm">
+                  <p className="mb-1 font-medium text-orange-800 text-sm">
+                    Consuming
+                  </p>
+                  <p className="font-semibold text-orange-900 text-lg">
+                    {consumedItems.length}
+                  </p>
+                  <p className="text-orange-600 text-xs">
+                    item{consumedItems.length !== 1 ? "s" : ""}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
       {totalValue > 0 && (
         <div className="pt-3 border-gray-200 border-t">

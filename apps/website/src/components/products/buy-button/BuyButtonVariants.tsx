@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ShopifyBuyButton from "./ShopifyBuyButton";
 import { Button } from "@/components/ui/button";
 import WhatSizeAmI from "../../WhatSizeAmI";
+import { useUserCountry } from "@/hooks/use-user-country";
 
 interface BuyButtonVariantsProps {
   productId?: string;
@@ -37,6 +38,7 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
   const [currentSide, setCurrentSide] = useState<Side | undefined>("right");
   const [key, setKey] = useState(() => Date.now());
   const [isInitialRender, setIsInitialRender] = useState(true);
+  const { country, isLoading: isCountryLoading } = useUserCountry();
 
   const variantIds = content.variantIds;
 
@@ -53,6 +55,13 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
     return `${size}-${side}`;
   };
 
+  const getAustralianDistributorUrl = (size?: Size, side?: Side): string => {
+    if (!size || !side) return "";
+    const sizeChar = size === "large" ? "L" : "S";
+    const sideChar = side === "left" ? "L" : "R";
+    return `https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php`;
+  };
+
   const getCurrentVariantId = () => {
     const key = getVariantKey(currentSize, currentSide);
     return key ? variantIds[key as keyof typeof variantIds] : undefined;
@@ -66,7 +75,7 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
         <WhatSizeAmI />
         <div className="space-y-4 w-full">
           <div className="flex flex-col justify-start items-start space-y-2">
-            <label className="font-semibold text-base text-left text-neutral-600">
+            <label className="font-semibold text-neutral-600 text-base text-left">
               {content.labels.size}
             </label>
             <div className="flex gap-2 w-full">
@@ -89,7 +98,7 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
           </div>
 
           <div className="flex flex-col justify-start items-start space-y-2">
-            <label className="font-semibold text-base text-left text-neutral-600">
+            <label className="font-semibold text-neutral-600 text-base text-left">
               {content.labels.side}
             </label>
             <div className="flex gap-2 w-full">
@@ -114,21 +123,43 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
       </div>
 
       <div className="mb-8 h-16">
-        {isSelectionComplete && getCurrentVariantId() ? (
-          <div className="relative flex-col justify-start items-start mx-0 w-fit">
-            <ShopifyBuyButton
-              key={key}
-              productId={productId}
-              variantId={getCurrentVariantId() || ""}
-              position={currentSide || "left"}
-              size={currentSize || "small"}
-            />
-          </div>
-        ) : (
-          <div className="mt-8 font-medium text-center text-lg text-neutral-950 md:text-xl lg:text-left italic animate-bounce">
-            {content.labels.selectionPrompt}
-          </div>
-        )}
+        {isCountryLoading
+          ? (
+            <div className="mt-8 font-medium text-neutral-950 text-lg md:text-xl lg:text-left text-center italic">
+              Checking availability...
+            </div>
+          )
+          : country === "AU" || country === "NZ"
+          ? (
+            isSelectionComplete && (
+              <Button asChild className="mt-4 w-full">
+                <a
+                  href={getAustralianDistributorUrl(currentSize, currentSide)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Buy from Australian Distributor
+                </a>
+              </Button>
+            )
+          )
+          : isSelectionComplete && getCurrentVariantId()
+          ? (
+            <div className="relative flex-col justify-start items-start mx-0 w-fit">
+              <ShopifyBuyButton
+                key={key}
+                productId={productId}
+                variantId={getCurrentVariantId() || ""}
+                position={currentSide || "left"}
+                size={currentSize || "small"}
+              />
+            </div>
+          )
+          : (
+            <div className="mt-8 font-medium text-neutral-950 text-lg md:text-xl lg:text-left text-center italic animate-bounce">
+              {content.labels.selectionPrompt}
+            </div>
+          )}
       </div>
     </div>
   );
