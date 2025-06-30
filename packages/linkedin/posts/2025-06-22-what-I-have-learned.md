@@ -1,11 +1,28 @@
-I invented the Achilles rupture splint with almost no knowledge of Achilles tendon ruptures. All I know was patients didn't like sleeping in the boot, so I needed to make something more comfy.
+---
+title: "Key Insights: What We've Learned About Achilles Rupture Treatment"
+date: 2025-06-22
+type: "Company"
+---
 
-Since then I've learn lots of practical tips from feedback from patients, tips from surgeons and research for my marketing.
+🔬 5 Things We've Learned About ATR (That Might Surprise You)
 
-Here are a few of my favorites nuggets:
+At Thetis Medical, we've been deep in the Achilles rupture rabbit hole. Here's what we found that might help your ATR patients:
 
-1. Achilles ruptures rates are increasing in all countries with decent evidence (thankfully for my business)
-2. Not that many Achilles ruptures happen, the data is mixed but somewhere from 5k to 15k per year in the UK and 25k to 75k in the US (unhappily for my business)
-3. 5x more men tear their achilles than women
-4. Countries with private healthcare like to operate on patients, countries with public healthcare treat conservatively. Both sides think the other side is wrong.
-5. Between 1% and 5% of patients in the UK and US use the Achilles rupture splint
+📊 **The Numbers Game**
+• Achilles ruptures are on the rise globally (good for business, bad for ankles)
+• Men are 5x more likely to tear their Achilles than women (sorry, guys)
+• UK: 5k-15k cases/year vs US: 25k-75k cases/year
+
+🏥 **The Great Surgery Debate**
+• Private healthcare = "Let's operate!"
+• Public healthcare = "Let's wait and see!"
+• Both sides think the other is wrong (shocking, right?)
+
+💡 **The Comfort Problem**
+• Only 1-5% of patients use specialized ATR splints
+• Traditional boots are apparently terrible for sleeping (who knew?)
+• Better comfort = better compliance = better outcomes
+
+Your patients will thank you for reading this. Their sleep-deprived partners will thank us.
+
+ #AchillesRupture #MedicalResearch #Healthcare #Orthopedics #PatientCare #ThetisMedical

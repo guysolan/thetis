@@ -6,10 +6,14 @@ type: "Evidence"
 
 🧮 **Post-market surveillance (EU MDR compliant) – 2019-2025**
 
-Total splints tracked - 4 000
-Re-ruptures - 0
+Achilles rupture splints sold - 4 000
+Reported Re-ruptures - 0
 
- #PatientSafety #MDR #AchillesRupture
+Our theory is that because patients have a comfortable alternative to removing the boot at night, they stay safe.
+
+What do you think?
+
+ #PatientSafety #AchillesRupture
 
 ## Personal Repost
 

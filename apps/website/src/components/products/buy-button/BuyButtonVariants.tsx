@@ -59,7 +59,7 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
     if (!size || !side) return "";
     const sizeChar = size === "large" ? "L" : "S";
     const sideChar = side === "left" ? "L" : "R";
-    return `https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php`;
+    return 'https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php';
   };
 
   const getCurrentVariantId = () => {
