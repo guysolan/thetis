@@ -1,17 +1,14 @@
-# Smoking Quadruples Achilles Rupture Risk! 🚭
+# Functional Rehab Makes Surgery & Casting Tie ⚖️
 
-Lighting up? It might tear you down.
+Meta-analysis of 10 RCTs (Soroceanu et al. JBJS-A 2012):
 
-Case-Control Study Results:
+• With EARLY range-of-motion, **re-rupture rates were identical** for operative & non-operative care (≈3 %) 🤝  
+• WITHOUT early motion, surgery cut re-rupture by 8.8 % 📉  
+• Surgery added a **15.8 % absolute risk** of wound / nerve complications 🩹  
+• Strength & functional scores – no meaningful difference 💪
 
-• Smokers had 4.4× higher rupture odds 🔥  
-• Average rupture age 7 years younger in smokers ⏳  
-• Re-operation risk doubled (8 % vs 3 %) 🔄  
-• Time to healing delayed by 2 weeks ⌛  
+Lesson: the boot & the protocol may matter more than the scalpel.
 
-Know an athlete who still sneaks a cigarette?
+#SportsMedicine #Rehabilitation #EvidenceBasedMedicine #FootAndAnkle #Research
 
-#SportsMedicine #Orthopedics #PublicHealth #InjuryPrevention #Research
-
-Source: <https://pubmed.ncbi.nlm.nih.gov/24864535/>  
-Authors: James A. Nunley, MD · Joshua D. Harris, MD · Jeffrey E. Johnson, MD
+Source: Soroceanu A et al. “Surgical vs Nonsurgical Treatment of Acute Achilles Tendon Rupture: A Meta-analysis of Randomized Trials.” J Bone Joint Surg Am (2012).

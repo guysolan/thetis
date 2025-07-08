@@ -1,17 +1,17 @@
-# Achilles Ruptures in NCAA Athletes – How Common?
+# Achilles Ruptures in NCAA Athletes – How Often & Where?
 
-Just **5 out of every 100,000 athlete-exposures** end with an Achilles rupture!
+Just **2.17 injuries per 100,000 athlete-exposures** across ALL college sports – but some teams are real hot-spots!
 
-Key Findings (2004-2015 NCAA Injury Surveillance):
+Top Sports (2004-2014 NCAA-ISP):
 
-• Incidence: 5.3 per 100 000 athlete-exposures 🏃‍♂️  
-• 85 % occurred during competition vs practice 🏆  
-• 78 % were non-contact injuries 🚫🤝  
-• Basketball & football accounted for 64 % of all ruptures 🏀🏈  
+• Women’s Gymnastics: 16.7 /100k AEs 🤸‍♀️  
+• Men’s Basketball: 4.3 /100k AEs 🏀  
+• Women’s Basketball: 3.3 /100k AEs �  
+• 20 % of all injuries were SEVERE (median 48-day time-loss) ⏱️  
+• 65 % of severe cases went to surgery 🩺
 
-Are your athletic trainers ready with Achilles rupture splints on game-day sidelines?
+Which college programs in your network need an Achilles injury prevention plan?
 
-#SportsMedicine #Orthopedics #InjuryPrevention #NCAA #Research
+#SportsMedicine #AthleticTraining #NCAA #InjuryPrevention #Research
 
-Source: <https://pubmed.ncbi.nlm.nih.gov/31393493/>  
-Authors: Brett D. Owens, MD · Nicholas Lemme, MD · Larry N. Drakos, MD
+Source: Chan JJ et al. “Epidemiology of Achilles Tendon Injuries in Collegiate Level Athletes in the United States.” International Orthopaedics (2020). <https://doi.org/10.1007/s00264-019-04471-2>

@@ -1,17 +1,16 @@
-# Early Weight-Bearing After Achilles Repair – Safe or Sorry?
+# Early Motion After Achilles Repair – Ready, Set, Walk!
 
-Quicker steps might actually mean safer outcomes!
+A San Diego study let patients load up **10 days post-op** … and the results were stellar.
 
-Accelerated Rehabilitation Results:
+Troop et al Findings (13 surgical patients):
 
-• Time to full weight-bearing: 2 weeks vs 6 weeks 🚶‍♂️💨  
-• No increase in rerupture (0 % vs 2 %) ✅  
-• DVT rate cut by TWO-THIRDS (3 % vs 9 %) 🩸  
-• 96 % patient satisfaction at 12 months 😃  
+• 12 / 13 back to RUNNING in 3 months 🏃‍♂️💨  
+• Plantar-flexion strength recovered to **92 %** of the other leg 💪  
+• No reruptures, no infections ✅  
+• Average time to FULL weight-bearing in boot: 3.5 weeks ⏱️  
 
-Are your post-op protocols still stuck in neutral?
+Still casting for 8-weeks? Your patients might outrun you.
 
-#SportsMedicine #Orthopedics #Rehabilitation #FootAndAnkle #Research
+#SportsMedicine #Rehabilitation #FootAndAnkle #EarlyWeightBearing #Research
 
-Source: <https://pubmed.ncbi.nlm.nih.gov/28662512/>  
-Authors: Timothy C. Beals, MD · Anish R. Kadakia, MD · Mark S. Myerson, MD
+Source: Troop RL et al. “Early Motion After Repair of Achilles Tendon Ruptures.” Foot & Ankle Int (1995). DOI 10.1177/107110079501601106

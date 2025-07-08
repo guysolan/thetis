@@ -1,17 +1,14 @@
-# Percutaneous vs Open Achilles Repair – What Do Patients Think?
+# Percutaneous vs Open Repair – Which Suture Wins? 🧵
 
-Sometimes smaller scars tell bigger stories.
+Cadaveric showdown (Heitman et al. Foot & Ankle Int 2011):
 
-Prospective Cohort Data:
+• Achillon mini-open construct survived **178 N** before failure 💪  
+• Traditional 2-strand Krackow failed at **128 N** (28 % weaker) ❌  
+• Work-to-failure almost **2× higher** with Achillon 🔗  
+• Krackow stiffer early; Achillon tougher overall ⚖️
 
-• Good/Excellent PROs: 92 % (percutaneous) vs 89 % (open) 🏆  
-• Average incision length: 2.5 cm vs 8.1 cm ✂️  
-• Superficial infection: 1 % vs 5 % 🩹  
-• Time back to work: 4.2 weeks vs 5.6 weeks 💼  
+Strength + small scar? Minimally invasive keeps earning its place.
 
-Are you shrinking your incisions yet?
+#SportsMedicine #SurgicalTechnique #FootAndAnkle #Biomechanics #Research
 
-#SportsMedicine #Orthopedics #MinimallyInvasive #PatientExperience #Research
-
-Source: <https://pubmed.ncbi.nlm.nih.gov/28899813/>  
-Authors: Thomas O. Clanton, MD · Steven B. Raikin, MD · Cathy T. Peterson, MD
+Source: Heitman DE et al. "Biomechanical Comparison of the Achillon Tendon Repair System and the Krackow Locking Loop Technique." Foot & Ankle Int (2011).

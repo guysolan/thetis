@@ -1,17 +1,14 @@
-# Achilles Ruptures in US Military Personnel 🇺🇸
+# Achilles Ruptures in Active-Duty Military 🇺🇸
 
-Marching orders for prevention!
+U.S. service-member data 2006-2015 (Waterman et al. JBJS-Am):
 
-Epidemiologic Data (2006-2015):
+• Incidence: **26.2 per 100,000 person-years** 🪖  
+• 88 % occurred during physical training / PT tests 💪  
+• Age ≥30 → **2× higher** risk ⏳  
+• 12 % led to medical discharge 📄  
 
-• Incidence: 26.2 per 100,000 person-years 🪖  
-• 88 % occurred during physical training 🏋️  
-• Service members ≥30 years old at 2× higher risk ⏲️  
-• Medical discharge rates: 12 % 📄  
+Mission readiness starts with tendon readiness.
 
-Saving Achilles tendons saves missions.
+#SportsMedicine #MilitaryMedicine #InjuryPrevention #FootAndAnkle #Research
 
-#SportsMedicine #MilitaryMedicine #Orthopedics #InjuryPrevention #Research
-
-Source: <https://pubmed.ncbi.nlm.nih.gov/29135659/>  
-Authors: Brian R. Waterman, MD · Andrew S. Dunn, MD · Anish R. Kadakia, MD
+Source: Waterman BR et al. “Epidemiology of Achilles Tendon Ruptures in the United States Active-Duty Military.” (JBJS 2010).

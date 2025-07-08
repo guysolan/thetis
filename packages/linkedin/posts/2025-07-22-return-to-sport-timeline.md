@@ -1,17 +1,15 @@
-# Return to Sport After Achilles Rupture – Reality Check
+# Pro Athletes After Achilles Rupture – Who Comes Back? 🏆
 
-Most athletes are BACK in action before the season ends!
+Major-league study of **80 NBA/NFL/MLS/NHL players** post-surgery (Trofa et al. AJSM 2017):
 
-Study Highlights:
+• Overall **80 %** returned to play ✅  
+• Mean time to first game: **10.5 months** ⏱️  
+• BUT 36 % started <10 games the rest of their career ⚠️  
+• Player Efficiency Rating dropped **-2.9 pts** on average 📉  
+• 21 % retired because of the injury 🚪
 
-• 90 % returned to play within 6 months 🗓️  
-• Average time to competition: 5.9 months ⏱️  
-• 12-month performance index: 95 % of pre-injury level 🏅  
-• Zero reruptures reported at 2-year follow-up ✅  
+Performance, not just participation, matters – rehab & load-management are the competitive edge.
 
-Got a patient itching to compete again?
+#SportsMedicine #ReturnToPlay #Performance #AthleteRecovery #Research
 
-#SportsMedicine #Orthopedics #Rehab #AthleteRecovery #Research
-
-Source: <https://pubmed.ncbi.nlm.nih.gov/24691321/>  
-Authors: Christopher W. DiGiovanni, MD · Steven B. Raikin, MD · Donald J. Bohay, MD
+Source: Trofa DP et al. “Professional Athletes' Return to Play and Performance After Operative Repair of an Achilles Tendon Rupture.” Am J Sports Med (2017).

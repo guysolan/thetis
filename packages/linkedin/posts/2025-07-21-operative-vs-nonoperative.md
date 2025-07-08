@@ -1,17 +1,16 @@
-# Operative vs Non-operative: Rerupture Showdown
+# Surgery or No Surgery? Achilles Rupture RCT Says…🧐
 
-When is surgery worth the scalpel?
+Multicenter trial – 144 patients, ALL on the same accelerated rehab.
 
-Multicenter RCT Findings:
+Key 2-Year Outcomes (Willits et al. JBJS-A 2010):
 
-• Rerupture: 4 % (operative) vs 6 % (non-operative) ✂️  
-• Infection: 0 % vs 4 % 💉  
-• Return-to-Sport at 9 months: 78 % vs 74 % 🏃‍♂️  
-• No difference in calf strength at 1 year 🦵  
+• Rerupture: 2 of 72 surgical (2.8 %) vs 3 of 72 non-surgical (4.2 %) ✂️  
+• Strength, ROM & calf girth – NO significant difference �  
+• Surgical group had 6 wound-related complications vs 0 non-op 🩹  
+• Both groups back to work in ≈ 5.5 months 👟
 
-Could your patients avoid the OR without sacrificing outcomes?
+Shared decision-making just got easier – evidence backs either path when paired with FUNCTIONAL rehab.
 
-#SportsMedicine #Orthopedics #SharedDecisionMaking #FootAndAnkle #Research
+#SportsMedicine #EvidenceBasedMedicine #FootAndAnkle #SharedDecisionMaking #Research
 
-Source: <https://pubmed.ncbi.nlm.nih.gov/23511750/>  
-Authors: Anish R. Kadakia, MD · James R. Holmes, MD · Robert B. Anderson, MD
+Source: Willits K et al. “Operative vs Non-Operative Treatment of Acute Achilles Tendon Ruptures.” J Bone Joint Surg Am (2010).

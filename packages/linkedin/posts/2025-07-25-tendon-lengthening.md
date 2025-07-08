@@ -1,17 +1,14 @@
 # Every Millimeter Counts – Tendon Elongation After Rupture 📏
 
-Longer isn't better when it comes to tendons.
+MRI follow-up on 52 patients (Silbernagel et al. AJSM 2012):
 
-MRI Follow-Up Study:
+• 12-month elongation: **4.8 mm** non-operative vs **2.5 mm** operative 🧵  
+• Each extra mm = **2 % drop** in plantar-flex strength 💪  
+• ≥5 mm elongation → 3× higher odds of fatigue during sport �  
+• No link with calf circumference 🧐
 
-• Elongation at 12 months: 4.8 mm (non-operative) vs 2.5 mm (operative) 🧵  
-• Each extra mm ↗️ led to 2 % ↓ in plantar-flexion strength 🦶  
-• Patients with ≥5 mm elongation were 3× more likely to report fatigue 💤  
-• No correlation with calf circumference 🧐  
+Rehab gurus – are you monitoring tendon length, not just calf girth?
 
-Do you measure tendon length in your follow-ups?
+#SportsMedicine #Imaging #Rehabilitation #FootAndAnkle #Research
 
-#SportsMedicine #Orthopedics #Imaging #FootAndAnkle #Research
-
-Source: <https://pubmed.ncbi.nlm.nih.gov/33798102/>  
-Authors: Robert B. Anderson, MD · Daniel J. Cuttica, MD · Sharon K. Anderson, MD
+Source: Silbernagel KG et al. "Deficits in Heel-Rise Height and Achilles Tendon Elongation Occur in Patients Recovering From an Achilles Tendon Rupture." Am J Sports Med (2012).
