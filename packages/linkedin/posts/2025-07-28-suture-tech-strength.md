@@ -27,4 +27,4 @@ Tip: More strands > fancy patterns, and knot security still rules.
 
 #SportsMedicine #Biomechanics #SurgicalTechnique #FootAndAnkle #Research
 
-Source: McCoy BW & Haddad SL. “The Strength of Achilles Tendon Repair: A Comparison of Three Suture Techniques in Human Cadaver Tendons.” Foot & Ankle Int (2010).
+Source: McCoy BW & Haddad SL. "The Strength of Achilles Tendon Repair: A Comparison of Three Suture Techniques in Human Cadaver Tendons." Foot & Ankle Int (2010).
