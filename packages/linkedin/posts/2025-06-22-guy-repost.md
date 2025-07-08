@@ -14,4 +14,4 @@ The most surprising finding? The dramatic differences in treatment approaches be
 
 Check out our latest research breakdown below for the full insights 👇
 
-# HealthcareInnovation #PatientCare #Orthopedics #StartupLife #ContentMarketing
+ #HealthcareInnovation #PatientCare #Orthopedics #StartupLife #ContentMarketing

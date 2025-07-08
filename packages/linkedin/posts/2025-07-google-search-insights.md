@@ -7,6 +7,7 @@ type: "Evidence"
 🔍 We crunched **10 432** organic search queries to AchillesRupture.com (GA4 Q1–Q2 2025):
 
 Top 3 pain points:
+
 1. “When can I drive again?” 🚗
 2. “Boot too tight at night.” 😖
 3. “Running timeline.” 🏃‍♀️
@@ -17,4 +18,4 @@ REAL DATA TO COME: we'll publish the full SEO deep-dive once the dashboard is li
 
 Clinicians: what's the #1 FAQ in your clinic?
 
-#ContentStrategy #PatientInsights #AchillesRupture
+# ContentStrategy #PatientInsights #AchillesRupture

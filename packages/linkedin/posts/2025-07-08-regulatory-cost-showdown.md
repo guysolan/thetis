@@ -14,10 +14,11 @@ type: "Founder"
 Add lab testing, legal, consultant hours… and the FDA route is easily **50×** the cost.
 
 Why bother?
+
 1. Patients everywhere deserve comfy nights 💤
 2. US surgeons asked—loudly 📢
 3. Big markets fund better R&D 🔬
 
 Founders: which market would *you* tackle first? 🔽
 
-#MedTech #RegulatoryAffairs #AchillesRupture
+ #MedTech #RegulatoryAffairs #AchillesRupture

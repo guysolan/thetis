@@ -1,8 +1,8 @@
-# Where Do Achilles Tendon Ruptures Happen? 🏃‍♂️
+# Where Do Achilles Tendon Ruptures Happen?
 
 HALF of all Achilles ruptures happen at Sports Venues!!!
 
-## Location Breakdown:
+Location Breakdown:
 
 • Sporting venues: 47.7% 🏟️
 • Home: 8.7% 🏠
@@ -13,6 +13,7 @@ HALF of all Achilles ruptures happen at Sports Venues!!!
 
 Do you know any sports physios who should have a few Achilles tendon rupture splints in their bags?
 
-# SportsMedicine #Orthopedics #InjuryPrevention #Healthcare #Research
+ #SportsMedicine #Orthopedics #InjuryPrevention #Healthcare #Research
 
-Source: <https://journals.sagepub.com/doi/10.1177/2325967118808238>
+Source: <https://lnkd.in/dasGEs9P>
+Authors: Nicholas Lemme, MD Neill Li Brett Owens Steve DeFroda Justin Kleiner

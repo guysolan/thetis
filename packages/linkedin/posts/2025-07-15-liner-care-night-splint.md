@@ -7,6 +7,7 @@ type: "Product"
 🍃 Fresh liner = fresh healing.
 
 Best practices (IFU v3.2):
+
 1. Swap every **7–10 days**
 2. Hand-wash at 30 °C with pH-neutral soap 🧼
 3. Air-dry; avoid tumble heat 🔥
@@ -14,4 +15,4 @@ Best practices (IFU v3.2):
 
 Clinics: do you resale spare liners or bundle them into the kit?
 
-#MedicalDevice #PatientComfort #AchillesRupture
+# MedicalDevice #PatientComfort #AchillesRupture

@@ -12,4 +12,6 @@ export type Review = {
     clinics: string[];
     clinicImages: string[];
     date: string;
+    stars?: number;
+    is_pinned?: boolean;
 };

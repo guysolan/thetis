@@ -3,3 +3,4 @@ Between 1% and 5% of patients in the UK and US use the Achilles rupture splint I
 These numbers aren't bad, but we found 78% of patients don't like sleeping in the boot.
 
 Clinicians who treat Achilles ruptures, why do you think this is?
+

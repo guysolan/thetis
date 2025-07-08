@@ -1,0 +1,354 @@
+{
+  "version": "4",
+  "remote": {
+    "https://esm.sh/acorn@8.11.3": "362fd68550028bd4facae10c22d4d708984d293ae57f0207a8270a432a2f922c",
+    "https://esm.sh/acorn@8.11.3/denonext/acorn.mjs": "bd844dd72c01c61d6ca2d48271f3eb3dd9c55efd1caf98ffb7ab34c35634c2c3"
+  },
+  "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:@astrojs/vercel@^8.0.7",
+        "npm:@biomejs/biome@1.8.3",
+        "npm:@changesets/cli@^2.27.1",
+        "npm:@radix-ui/react-focus-scope@^1.1.2",
+        "npm:react-dom@^18.3.1",
+        "npm:react@^18.3.1",
+        "npm:supabase@^2.2.1",
+        "npm:turbo@2.1.1",
+        "npm:turborepo@^0.0.1",
+        "npm:typescript@^5.5.4",
+        "npm:vercel@^39.2.2"
+      ]
+    },
+    "members": {
+      "apps/achilles-rupture": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@astrojs/mdx@^4.2.2",
+            "npm:@astrojs/react@^4.2.2",
+            "npm:@astrojs/rss@^4.0.11",
+            "npm:@astrojs/sitemap@^3.2.1",
+            "npm:@astrojs/tailwind@^5.1.5",
+            "npm:astro@^5.5.5",
+            "npm:ismobilejs@^1.1.1",
+            "npm:react-dom@18.3.1",
+            "npm:react@18.3.1",
+            "npm:recharts@^2.15.1",
+            "npm:tailwindcss@^3.4.17"
+          ]
+        }
+      },
+      "apps/settle-central": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@hookform/devtools@^4.3.1",
+            "npm:@hookform/resolvers@^3.9.0",
+            "npm:@number-flow/react@~0.4.1",
+            "npm:@supabase/auth-ui-react@~0.4.7",
+            "npm:@supabase/auth-ui-shared@~0.1.8",
+            "npm:@supabase/supabase-js@^2.45.4",
+            "npm:@tanstack/react-query-devtools@^5.59.0",
+            "npm:@tanstack/react-query@^5.59.3",
+            "npm:@tanstack/react-router@^1.63.5",
+            "npm:@tanstack/react-table@^8.20.6",
+            "npm:@tanstack/router-devtools@^1.63.5",
+            "npm:@tanstack/router-vite-plugin@^1.84.4",
+            "npm:@thetis/amazon@*",
+            "npm:@types/file-saver@^2.0.7",
+            "npm:@types/react-csv@^1.1.10",
+            "npm:@types/react-dom@^18.2.18",
+            "npm:@vitejs/plugin-react@^4.3.2",
+            "npm:autoprefixer@^10.4.20",
+            "npm:change-case@^5.4.4",
+            "npm:class-variance-authority@0.7",
+            "npm:clsx@^2.1.1",
+            "npm:date-fns@^4.1.0",
+            "npm:dayjs@^1.11.13",
+            "npm:embla-carousel-react@^8.5.2",
+            "npm:file-saver@^2.0.5",
+            "npm:jszip@^3.10.1",
+            "npm:lucide-react@0.451",
+            "npm:next-themes@0.3",
+            "npm:postcss@^8.4.47",
+            "npm:react-csv@^2.2.2",
+            "npm:react-day-picker@8.10.1",
+            "npm:react-dom@^18.2.0",
+            "npm:react-hook-form@^7.53.0",
+            "npm:react-pdf@^9.1.1",
+            "npm:react-xml-viewer@^2.0.2",
+            "npm:react@^18.3.1",
+            "npm:recharts@^2.12.7",
+            "npm:redaxios@~0.5.1",
+            "npm:sonner@^1.5.0",
+            "npm:tailwind-merge@^2.5.3",
+            "npm:tailwindcss-animate@^1.0.7",
+            "npm:tailwindcss@^3.4.13",
+            "npm:vite@^5.4.8",
+            "npm:vitest@^2.1.2",
+            "npm:zod@^3.23.8",
+            "npm:zustand@^5.0.1"
+          ]
+        }
+      },
+      "apps/ship-stock": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@hookform/devtools@^4.3.1",
+            "npm:@hookform/resolvers@^3.9.0",
+            "npm:@number-flow/react@~0.4.1",
+            "npm:@supabase/auth-ui-react@~0.4.7",
+            "npm:@supabase/auth-ui-shared@~0.1.8",
+            "npm:@supabase/supabase-js@^2.45.4",
+            "npm:@tanstack/react-query-devtools@^5.59.0",
+            "npm:@tanstack/react-query@^5.59.3",
+            "npm:@tanstack/react-router@^1.85.0",
+            "npm:@tanstack/router-devtools@^1.85.0",
+            "npm:@tanstack/router-vite-plugin@^1.84.4",
+            "npm:@types/file-saver@^2.0.7",
+            "npm:@types/react-csv@^1.1.10",
+            "npm:@types/react-dom@^18.2.18",
+            "npm:@vitejs/plugin-react@^4.3.2",
+            "npm:autoprefixer@^10.4.20",
+            "npm:change-case@^5.4.4",
+            "npm:class-variance-authority@0.7",
+            "npm:clsx@^2.1.1",
+            "npm:date-fns@^4.1.0",
+            "npm:dayjs@^1.11.13",
+            "npm:file-saver@^2.0.5",
+            "npm:install@0.13.0",
+            "npm:jszip@^3.10.1",
+            "npm:lucide-react@0.451",
+            "npm:next-themes@0.3",
+            "npm:postcss@^8.4.47",
+            "npm:react-csv@^2.2.2",
+            "npm:react-day-picker@8.10.1",
+            "npm:react-dom@^18.2.0",
+            "npm:react-hook-form@^7.53.0",
+            "npm:react-xml-viewer@^2.0.2",
+            "npm:react@^18.3.1",
+            "npm:recharts@^2.12.7",
+            "npm:redaxios@~0.5.1",
+            "npm:sonner@^1.5.0",
+            "npm:tailwind-merge@^2.5.3",
+            "npm:tailwindcss-animate@^1.0.7",
+            "npm:tailwindcss@^3.4.13",
+            "npm:vite@6.2.2",
+            "npm:vitest@^3.1.1",
+            "npm:zod@^3.23.8",
+            "npm:zustand@^5.0.1"
+          ]
+        }
+      },
+      "apps/website": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@astrojs/markdown-remark@^5.3.0",
+            "npm:@astrojs/mdx@3.1.9",
+            "npm:@astrojs/partytown@2.1.3",
+            "npm:@astrojs/react@3.6.2",
+            "npm:@astrojs/sitemap@3.2.1",
+            "npm:@astrojs/tailwind@5.1.2",
+            "npm:@astrojs/vercel@8.0.7",
+            "npm:@astropub/md@1",
+            "npm:@notionhq/client@^2.2.3",
+            "npm:@radix-ui/react-accordion@^1.2.3",
+            "npm:@radix-ui/react-alert-dialog@^1.1.6",
+            "npm:@radix-ui/react-aspect-ratio@^1.1.2",
+            "npm:@radix-ui/react-avatar@^1.1.3",
+            "npm:@radix-ui/react-checkbox@^1.1.4",
+            "npm:@radix-ui/react-collapsible@^1.1.3",
+            "npm:@radix-ui/react-context-menu@^2.2.6",
+            "npm:@radix-ui/react-dialog@^1.1.6",
+            "npm:@radix-ui/react-dropdown-menu@^2.1.6",
+            "npm:@radix-ui/react-focus-scope@^1.1.2",
+            "npm:@radix-ui/react-hover-card@^1.1.6",
+            "npm:@radix-ui/react-label@^2.1.2",
+            "npm:@radix-ui/react-menubar@^1.1.6",
+            "npm:@radix-ui/react-navigation-menu@^1.2.5",
+            "npm:@radix-ui/react-popover@^1.1.6",
+            "npm:@radix-ui/react-progress@^1.1.2",
+            "npm:@radix-ui/react-radio-group@^1.2.3",
+            "npm:@radix-ui/react-scroll-area@^1.2.3",
+            "npm:@radix-ui/react-select@^2.1.6",
+            "npm:@radix-ui/react-separator@^1.1.2",
+            "npm:@radix-ui/react-slot@^1.1.2",
+            "npm:@radix-ui/react-switch@^1.1.3",
+            "npm:@radix-ui/react-tabs@^1.1.3",
+            "npm:@radix-ui/react-toast@^1.2.6",
+            "npm:@radix-ui/react-toggle@^1.1.2",
+            "npm:@radix-ui/react-tooltip@^1.1.8",
+            "npm:@supabase/supabase-js@^2.48.1",
+            "npm:@tailwindcss/line-clamp@~0.4.4",
+            "npm:@types/marked@^4.0.8",
+            "npm:@types/react-dom@^18.2.7",
+            "npm:@types/react@^18.2.15",
+            "npm:@vercel/analytics@1.5.0",
+            "npm:astro-seo-schema@^4.0.2",
+            "npm:astro@5.3.0",
+            "npm:chart.js@^4.4.7",
+            "npm:class-variance-authority@~0.7.1",
+            "npm:clsx@^2.1.1",
+            "npm:country-flag-emoji@^1.0.3",
+            "npm:country-flag-icons@1.5.16",
+            "npm:dayjs@^1.11.7",
+            "npm:dotenv@^16.0.3",
+            "npm:framer-motion@11.18.2",
+            "npm:lucide-astro@0.473.0",
+            "npm:lucide-react@0.469.0",
+            "npm:lucide@0.475.0",
+            "npm:marked@^4.3.0",
+            "npm:notion-page-to-html@^1.2.0",
+            "npm:notion-to-md@^2.5.6",
+            "npm:number-flow@~0.5.1",
+            "npm:prettier-plugin-astro@0.14.1",
+            "npm:prettier@3.5.1",
+            "npm:react-chartjs-2@^5.2.0",
+            "npm:react-device-detect@^2.2.3",
+            "npm:react-dom@18.3.1",
+            "npm:react-error-boundary@5",
+            "npm:react-responsive-masonry@2.7.1",
+            "npm:react-slick@~0.30.3",
+            "npm:react@18.3.1",
+            "npm:remark-toc@^8.0.1",
+            "npm:resend@^4.1.2",
+            "npm:schema-dts@^1.1.2",
+            "npm:sharp@~0.33.5",
+            "npm:slick-carousel@^1.8.1",
+            "npm:tailwind-merge@^3.0.1",
+            "npm:tailwindcss-animate@^1.0.6",
+            "npm:tailwindcss@^3.3.3",
+            "npm:vaul@^1.1.2"
+          ]
+        }
+      },
+      "packages/amazon": {
+        "packageJson": {
+          "dependencies": [
+            "npm:supabase@^1.191.3"
+          ]
+        }
+      },
+      "packages/analytics": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@openpanel/nextjs@1",
+            "npm:@vercel/functions@^1.4.1"
+          ]
+        }
+      },
+      "packages/email": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@react-email/components@0.0.34",
+            "npm:@react-email/img@0.0.11",
+            "npm:@react-email/tailwind@1.0.4",
+            "npm:lucide-react@0.482",
+            "npm:react-dom@18.2.0",
+            "npm:react-email@3.0.7",
+            "npm:react@18.2.0"
+          ]
+        }
+      },
+      "packages/jobs": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@trigger.dev/sdk@3.0.0-beta.56"
+          ]
+        }
+      },
+      "packages/kv": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@upstash/ratelimit@^2.0.2",
+            "npm:@upstash/redis@^1.34.0",
+            "npm:server-only@^0.0.1"
+          ]
+        }
+      },
+      "packages/logger": {
+        "packageJson": {
+          "dependencies": [
+            "npm:pino@^9.3.2"
+          ]
+        }
+      },
+      "packages/ship-stock": {
+        "packageJson": {
+          "dependencies": [
+            "npm:supabase@^1.191.3"
+          ]
+        }
+      },
+      "packages/supabase": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@supabase/ssr@~0.5.1",
+            "npm:@supabase/supabase-js@^2.45.3",
+            "npm:react@^18.3.1",
+            "npm:server-only@^0.0.1",
+            "npm:supabase@^1.191.3",
+            "npm:typescript@^5.5.4"
+          ]
+        }
+      },
+      "packages/ui": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@radix-ui/react-accordion@^1.2.3",
+            "npm:@radix-ui/react-alert-dialog@^1.1.6",
+            "npm:@radix-ui/react-aspect-ratio@^1.1.2",
+            "npm:@radix-ui/react-avatar@^1.1.3",
+            "npm:@radix-ui/react-checkbox@^1.1.4",
+            "npm:@radix-ui/react-collapsible@^1.1.3",
+            "npm:@radix-ui/react-context-menu@^2.2.6",
+            "npm:@radix-ui/react-dialog@^1.1.6",
+            "npm:@radix-ui/react-dropdown-menu@^2.1.6",
+            "npm:@radix-ui/react-hover-card@^1.1.6",
+            "npm:@radix-ui/react-icons@^1.3.2",
+            "npm:@radix-ui/react-label@^2.1.2",
+            "npm:@radix-ui/react-menubar@^1.1.6",
+            "npm:@radix-ui/react-navigation-menu@^1.2.5",
+            "npm:@radix-ui/react-popover@^1.1.6",
+            "npm:@radix-ui/react-progress@^1.1.2",
+            "npm:@radix-ui/react-radio-group@^1.2.3",
+            "npm:@radix-ui/react-scroll-area@^1.2.3",
+            "npm:@radix-ui/react-select@^2.1.6",
+            "npm:@radix-ui/react-separator@^1.1.2",
+            "npm:@radix-ui/react-slider@^1.2.3",
+            "npm:@radix-ui/react-slot@^1.1.2",
+            "npm:@radix-ui/react-switch@^1.1.3",
+            "npm:@radix-ui/react-tabs@^1.1.3",
+            "npm:@radix-ui/react-toast@^1.2.6",
+            "npm:@radix-ui/react-toggle@^1.1.2",
+            "npm:@radix-ui/react-tooltip@^1.1.8",
+            "npm:@tailwindcss/line-clamp@~0.4.4",
+            "npm:@tiptap/extension-link@^2.10.3",
+            "npm:@tiptap/extension-placeholder@^2.10.3",
+            "npm:@tiptap/extension-underline@^2.10.3",
+            "npm:@tiptap/react@^2.10.3",
+            "npm:@tiptap/starter-kit@^2.10.3",
+            "npm:@types/react-lazy-load-image-component@^1.6.4",
+            "npm:autoprefixer@^10.4.20",
+            "npm:class-variance-authority@~0.7.1",
+            "npm:clsx@^2.1.1",
+            "npm:cmdk@^1.0.4",
+            "npm:embla-carousel-react@^8.5.2",
+            "npm:lucide-react@0.483",
+            "npm:postcss@^8.4.43",
+            "npm:react-dom@^18.3.1",
+            "npm:react-icons@^5.4.0",
+            "npm:react-lazy-load-image-component@^1.6.2",
+            "npm:react@^18.3.1",
+            "npm:recharts@^2.15.1",
+            "npm:tailwind-merge@^3.0.1",
+            "npm:tailwindcss-animate@^1.0.7",
+            "npm:tailwindcss@^3.4.16",
+            "npm:tiptap@^1.32.2",
+            "npm:typescript@^5.5.4",
+            "npm:vaul@^1.1.2"
+          ]
+        }
+      }
+    }
+  }
+}
