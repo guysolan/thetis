@@ -6,7 +6,7 @@ Top Sports (2004-2014 NCAA-ISP):
 
 • Women’s Gymnastics: 16.7 /100k AEs 🤸‍♀️  
 • Men’s Basketball: 4.3 /100k AEs 🏀  
-• Women’s Basketball: 3.3 /100k AEs �  
+• Women’s Basketball: 3.3 /100k AEs 🏀  
 • 20 % of all injuries were SEVERE (median 48-day time-loss) ⏱️  
 • 65 % of severe cases went to surgery 🩺
 

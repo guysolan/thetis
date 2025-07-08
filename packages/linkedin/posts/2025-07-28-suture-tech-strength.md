@@ -18,13 +18,13 @@ Authors: Steven B. Raikin, MD · Christopher W. DiGiovanni, MD · Daniel C. Farb
 
 Cadaver study (McCoy & Haddad, Foot & Ankle Int 2010):
 
-• Double Krackow (4 strands) held **200 N** before failure 💪  
+• Double Krackow (4 strands) held **≈200 N** before failure 💪  
 • Double Bunnell & Kessler (4-strand) ≈ 196 N & 167 N respectively  
-• When only 2 strands are used, strength drops by ~45 % in earlier literature ⚠️  
-• All constructs failed at the KNOT – not through tendon tissue 🔗
+• Earlier 2-strand constructs clocked in ~45 % weaker ⚠️  
+• All repairs failed at the KNOT – not through tendon tissue 🔗
 
-Tip: More strands > fancy patterns, and knot security still rules.
+Take-home: More strands > fancy patterns, and knot security still rules.
 
 #SportsMedicine #Biomechanics #SurgicalTechnique #FootAndAnkle #Research
 
-Source: McCoy BW & Haddad SL. "The Strength of Achilles Tendon Repair: A Comparison of Three Suture Techniques in Human Cadaver Tendons." Foot & Ankle Int (2010).
+Source: McCoy BW & Haddad SL. "The Strength of Achilles Tendon Repair: A Comparison of Three Suture Techniques in Human Cadaver Tendons." Foot & Ankle Int. 2010. <https://pubmed.ncbi.nlm.nih.gov/20727319/>

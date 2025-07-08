@@ -1,16 +1,14 @@
-# Surgery or No Surgery? Achilles Rupture RCT Says…🧐
+# Surgery vs No Surgery – What 18,000 U.S. Patients Tell Us 📊
 
-Multicenter trial – 144 patients, ALL on the same accelerated rehab.
+Propensity-matched analysis using the MarketScan national database (Crook et al., Orthop J Sports Med 2023):
 
-Key 2-Year Outcomes (Willits et al. JBJS-A 2010):
+• Complication risk **+1.2 %** with surgery → Number-Needed-to-Harm = 83 ⚠️  
+• No difference in re-operation at 1 yr (1.1 % vs 1.3 %) or 2 yrs (1.9 % vs 2.0 %) 🔄  
+• Up-front cost higher for surgery, but costs equalized by 5 yrs 💵  
+• U.S. surgical rate held steady ~70 % (2007-2015) despite evidence 🤔
 
-• Rerupture: 2 of 72 surgical (2.8 %) vs 3 of 72 non-surgical (4.2 %) ✂️  
-• Strength, ROM & calf girth – NO significant difference �  
-• Surgical group had 6 wound-related complications vs 0 non-op 🩹  
-• Both groups back to work in ≈ 5.5 months 👟
+Bottom line: Outcomes look similar—yet surgery still dominates practice. Functional rehab + shared decisions = the real game-changers.
 
-Shared decision-making just got easier – evidence backs either path when paired with FUNCTIONAL rehab.
+#SportsMedicine #FootAndAnkle #EvidenceBasedMedicine #HealthcareData #Research
 
-#SportsMedicine #EvidenceBasedMedicine #FootAndAnkle #SharedDecisionMaking #Research
-
-Source: Willits K et al. “Operative vs Non-Operative Treatment of Acute Achilles Tendon Ruptures.” J Bone Joint Surg Am (2010).
+Source: Crook BS et al. “Operative Versus Nonoperative Treatment of Acute Achilles Tendon Rupture: A Propensity Score–Matched Analysis of a Large National Dataset.” Orthop J Sports Med. 2023. <https://pubmed.ncbi.nlm.nih.gov/36874053/>
