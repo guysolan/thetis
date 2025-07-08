@@ -12,3 +12,4 @@ Value-based care isn't just clinical – it's logistical.
 #HealthEconomics #ValueBasedCare #FootAndAnkle #Surgery #Research
 
 Source: Wagers K et al. "Evaluation of Costs Associated With Acute Achilles Tendon Repair." Foot & Ankle Orthopaedics (2024). <https://doi.org/10.1177/24730114241238215>
+Authors: Kayla Wagers, Noah Drew, Catherine C. Waggoner, Joshua S. Bingham, Charles L. Saltzman

@@ -11,3 +11,4 @@ Question: Are we operating out of habit or hard indications?
 #SportsMedicine #HealthServicesResearch #FootAndAnkle #PracticePatterns #Research
 
 Source: Wang D et al. “Operative Versus Nonoperative Treatment of Acute Achilles Tendon Rupture: An Analysis of 12,570 Patients in a Large Healthcare Database.” Foot & Ankle Surg (2015). <https://doi.org/10.1016/j.fas.2015.01.009>
+Authors: Decheng Wang, Michael I. Sandlin, Jonathan R. Cohen, Eric L. Lord, Frank A. Petrigliano, Nicholas F. SooHoo

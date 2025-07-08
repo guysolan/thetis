@@ -15,3 +15,4 @@ Which college programs in your network need an Achilles injury prevention plan?
 #SportsMedicine #AthleticTraining #NCAA #InjuryPrevention #Research
 
 Source: Chan JJ et al. “Epidemiology of Achilles Tendon Injuries in Collegiate Level Athletes in the United States.” International Orthopaedics (2020). <https://doi.org/10.1007/s00264-019-04471-2>
+Authors: Jimmy J. Chan, Kevin K. Chen, Salman Sarker, Rohit Hasija, Hsin-Hui Huang, Javier Z. Guzman, Ettore Vulcano

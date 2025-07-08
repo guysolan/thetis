@@ -12,3 +12,4 @@ Rehab gurus – are you monitoring tendon length, not just calf girth?
 #SportsMedicine #Imaging #Rehabilitation #FootAndAnkle #Research
 
 Source: Silbernagel KG et al. "Deficits in Heel-Rise Height and Achilles Tendon Elongation Occur in Patients Recovering From an Achilles Tendon Rupture." Am J Sports Med (2012). <https://doi.org/10.1177/0363546512447926>
+Authors: Karin Grävare Silbernagel, Jesper Olsson, Åsa Karlsson, Karin Thomeé

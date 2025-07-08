@@ -12,3 +12,4 @@ Strength + small scar? Minimally invasive keeps earning its place.
 #SportsMedicine #SurgicalTechnique #FootAndAnkle #Biomechanics #Research
 
 Source: Heitman DE et al. "Biomechanical Comparison of the Achillon Tendon Repair System and the Krackow Locking Loop Technique." Foot & Ankle Int (2011). <https://doi.org/10.3113/FAI.2011.0879>
+Authors: Darren E. Heitman, Thomas O. Clanton, Laura P. Casey, Ty C. Smith

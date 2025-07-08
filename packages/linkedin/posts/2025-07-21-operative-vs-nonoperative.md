@@ -12,3 +12,4 @@ Bottom line: Outcomes look similar—yet surgery still dominates practice. Funct
 #SportsMedicine #FootAndAnkle #EvidenceBasedMedicine #HealthcareData #Research
 
 Source: Crook BS et al. “Operative Versus Nonoperative Treatment of Acute Achilles Tendon Rupture: A Propensity Score–Matched Analysis of a Large National Dataset.” Orthop J Sports Med (2023). <https://doi.org/10.1177/23259671231152904>
+Authors: Brandon S. Crook, Kevin Varshneya, Lindsay E. Meyer, Alexander Anastasio, Matthew M. Cullen, Benedict C. Lau
