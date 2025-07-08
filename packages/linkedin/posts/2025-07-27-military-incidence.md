@@ -11,4 +11,4 @@ Mission readiness starts with tendon readiness.
 
 #SportsMedicine #MilitaryMedicine #InjuryPrevention #FootAndAnkle #Research
 
-Source: Waterman BR et al. “Epidemiology of Achilles Tendon Ruptures in the United States Active-Duty Military.” J Bone Joint Surg Am (2010). <https://pubmed.ncbi.nlm.nih.gov/20595542/>
+Source: Waterman BR et al. “Epidemiology of Achilles Tendon Ruptures in the United States Active-Duty Military.” J Bone Joint Surg Am (2010). <https://doi.org/10.2106/JBJS.I.01244>

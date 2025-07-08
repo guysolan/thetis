@@ -13,4 +13,4 @@ Still casting for 8-weeks? Your patients might outrun you.
 
 #SportsMedicine #Rehabilitation #FootAndAnkle #EarlyWeightBearing #Research
 
-Source: Troop RL et al. “Early Motion After Repair of Achilles Tendon Ruptures.” Foot & Ankle Int (1995). DOI 10.1177/107110079501601106
+Source: Troop RL et al. “Early Motion After Repair of Achilles Tendon Ruptures.” Foot & Ankle Int (1995). <https://doi.org/10.1177/107110079501601106>

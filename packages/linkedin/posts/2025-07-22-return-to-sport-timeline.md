@@ -12,4 +12,4 @@ Performance, not just participation, matters – rehab & load-management are the
 
 #SportsMedicine #ReturnToPlay #Performance #AthleteRecovery #Research
 
-Source: Trofa DP et al. “Professional Athletes' Return to Play and Performance After Operative Repair of an Achilles Tendon Rupture.” Am J Sports Med (2017). <https://pubmed.ncbi.nlm.nih.gov/28644678/>
+Source: Trofa DP et al. “Professional Athletes' Return to Play and Performance After Operative Repair of an Achilles Tendon Rupture.” Am J Sports Med (2017). <https://doi.org/10.1177/0363546517713001>

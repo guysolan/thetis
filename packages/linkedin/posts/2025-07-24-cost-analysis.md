@@ -2,9 +2,9 @@
 
 University of Utah cost audit (224 cases, 2014-2022):
 
-• Open repair was **37 % cheaper** than percutaneous jig systems �  
+• Open repair was **37 % cheaper** than percutaneous jig systems 💰  
 • Moving from hospital OR ➜ ambulatory center cut **total cost 19 %** and facility fees 41 % 🏥➡️🏢  
-• Patient positioning (supine vs prone) – ZERO difference �  
+• Patient positioning (supine vs prone) – ZERO difference 🚫  
 • Each extra 10 min of OR time = 12 % higher bill ⏳
 
 Value-based care isn't just clinical – it's logistical.
