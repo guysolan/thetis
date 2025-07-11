@@ -16,4 +16,4 @@ Take-home 📌 Controlled load + heel wedges beat bed rest.
 
 Is your protocol WBAT Day 1 yet?
 
-#EvidenceBased #AchillesRupture #Rehab
+ #EvidenceBased #AchillesRupture #Rehab
