@@ -1,4 +1,3 @@
-import { google } from "googleapis";
 import type { SplintData } from "../types/splint";
 
 // Mock data based on actual Google Sheets structure
@@ -229,6 +228,7 @@ export async function getSplintData(
         }
 
         console.log("Setting up Google Auth...");
+        const { google } = await import("googleapis");
         const auth = new google.auth.GoogleAuth({
             credentials: {
                 client_email: clientEmail,
