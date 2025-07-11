@@ -39,4 +39,11 @@ export default defineConfig({
   ],
   output: "server",
   adapter: vercel(),
+  vite: {
+    build: {
+      rollupOptions: {
+        external: ["googleapis"],
+      },
+    },
+  },
 });
