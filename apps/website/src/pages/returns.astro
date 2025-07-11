@@ -44,7 +44,12 @@ import Label from "@/components/form/Label.astro";
                 </div>
                 <div>
                     <Label labelFor="return-reason">Return Reason</Label>
-                    <TextArea />
+                    <TextArea
+                        name="return-reason"
+                        id="return-reason"
+                        placeholder="Please describe the reason for your return..."
+                        required
+                    />
                     <HelperText>
                         Please be as descriptive as possible. This will help us
                         return your money and improve our products for future
