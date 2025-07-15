@@ -1,0 +1,7 @@
+praw==7.7.1
+google-generativeai==0.3.2
+python-dotenv==1.0.0
+pydantic==2.5.3
+click==8.1.7
+colorama==0.4.6
+loguru==0.7.2
