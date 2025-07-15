@@ -1,7 +1,8 @@
 import React from "react";
-import FAQs, { type FAQCategory } from "@thetis/ui/faqs";
+import FAQs from "../../../components/FAQs";
+import type { FAQItem } from "../../../components/FAQs";
 
-const exercisesFaqs: FAQCategory[] = [
+const exercisesFaqs: FAQItem[] = [
     {
         question: "How can I know if my Achilles rupture recovery is on track?",
         answer:
