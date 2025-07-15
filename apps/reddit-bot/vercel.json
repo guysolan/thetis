@@ -1,0 +1,21 @@
+{
+  "functions": {
+    "src/app/api/**/*.ts": {
+      "maxDuration": 300
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/monitor-posts",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "path": "/api/cron/monitor-comments", 
+      "schedule": "*/10 * * * *"
+    },
+    {
+      "path": "/api/cron/reply-to-posts",
+      "schedule": "*/30 * * * *"
+    }
+  ]
+}
