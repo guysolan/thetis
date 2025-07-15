@@ -1,0 +1,33 @@
+{
+  "name": "@thetis/reddit-bot",
+  "version": "1.0.0",
+  "description": "Automated Reddit monitoring and response bot",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check ./src",
+    "format": "biome format --write ./src",
+    "start:node": "node --loader tsx src/index.ts"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "snoowrap": "^1.23.0",
+    "dotenv": "^16.3.1",
+    "zod": "^3.22.4",
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "date-fns": "^3.0.6",
+    "p-queue": "^8.0.1",
+    "winston": "^3.11.0",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@types/node-cron": "^3.0.11",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}

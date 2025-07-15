@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+dist/
+
+# Configuration files (contain sensitive data)
+accounts.json
+bot_config.json
+
+# Log files
+*.log
+monitored_posts.txt
+monitored_comments.txt
+ai_replies.txt
+ai_analysis_log.txt
+processed_posts.txt
+processed_comments.txt
+last_reply_time.txt
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+
+# Build files
+*.tsbuildinfo

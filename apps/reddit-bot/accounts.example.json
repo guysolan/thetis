@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "description": "Reddit Bot Multiple Accounts Configuration",
+  "accounts": [
+    {
+      "client_id": "YOUR_CLIENT_ID_HERE",
+      "client_secret": "YOUR_CLIENT_SECRET_HERE",
+      "username": "YOUR_REDDIT_USERNAME",
+      "password": "YOUR_REDDIT_PASSWORD",
+      "api_key": "YOUR_GEMINI_API_KEY"
+    }
+  ]
+}
