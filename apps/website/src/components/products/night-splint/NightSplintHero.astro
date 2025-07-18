@@ -2,6 +2,7 @@
 import HighlightedWord from "../../HighlightedWord";
 import BulkOrders from "../../buy-button/BulkOrders";
 import FreeAndSecure from "../../buy-button/FreeAndSecure";
+import CheckWithCareTeam from "../../buy-button/CheckWithCareTeam";
 import BuyButtonVariants from "../buy-button/BuyButtonVariants.tsx";
 import { Image } from "astro:assets";
 import ColorGradient from "@/components/ColorGradient.astro";
@@ -48,6 +49,7 @@ import WorkInHealthcare from "./WorkInHealthcare.astro";
             rest you need.
           </p>
         </div>
+        <CheckWithCareTeam client:load />
         <ReviewsLink size="lg" />
 
         <BuyButtonVariants client:load />

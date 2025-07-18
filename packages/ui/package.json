@@ -116,6 +116,7 @@
     "cmdk": "^1.0.4",
     "embla-carousel-react": "^8.5.2",
     "lucide-react": "^0.483.0",
+    "react-hook-form": "7.60.0",
     "react-icons": "^5.4.0",
     "react-lazy-load-image-component": "^1.6.2",
     "recharts": "^2.15.1",

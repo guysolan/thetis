@@ -10,6 +10,7 @@ import ColorGradient from "../../../components/ColorGradient.astro";
 import FreeAndSecure from "../../../components/buy-button/FreeAndSecure";
 import LocationSelect from "../../../components/location/LocationSelect";
 import DetailsTable from "../../../components/DetailsTable";
+import CheckWithCareTeam from "../../../components/buy-button/CheckWithCareTeam";
 
 // Remove prerender to enable SSR
 // export const prerender = true;
@@ -241,6 +242,8 @@ const variants = [
                                 >
                             </div>
                         </div>
+
+                        <CheckWithCareTeam client:load />
 
                         <!-- Add to Cart Button -->
                         <div class="space-y-4">

@@ -1,3 +1,35 @@
 ---
-export const checkboxStyle = 'ml-2 text-sm font-medium text-gray-900'
+import { cn } from "../../lib/utils";
+
+interface Props {
+    id?: string;
+    name: string;
+    value?: string;
+    required?: boolean;
+    class?: string;
+    label?: string;
+}
+
+const {
+    id,
+    name,
+    value,
+    required,
+    class: className,
+    label,
+}: Props = Astro.props;
 ---
+
+<label class="flex items-center space-x-2 cursor-pointer">
+    <input
+        type="checkbox"
+        name={name}
+        value={value}
+        required={required}
+        class={cn(
+            "border-2 checked:border-primary-600 hover:border-gray-400 focus:border-primary checked:bg-primary-600 checked:hover:bg-primary-700 border-text-black rounded-lg w-6 h-6 transition-all duration-100 delay-50 ease",
+            className,
+        )}
+    />
+    <span class="text-sm">{label}</span>
+</label>

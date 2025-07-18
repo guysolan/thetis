@@ -4,62 +4,34 @@ import Slide from "@/components/Slide.astro";
 import FooterEmailCTA from "@/components/CTA/FooterEmailCTA.astro";
 import FooterBlock from "./FooterBlock.astro";
 import { ThemeToggle } from "../../components/theme/ThemeToggle";
+import {
+  productLinks,
+  partnerLinks,
+  contactLinks,
+  faqLinks,
+  legalLinks,
+} from "../../content/pages";
 
 const footerLinks = {
   company: {
-    title: "Company",
-    links: [
-      { href: "../", label: "Home" },
-      { href: "../professionals", label: "Professionals" },
-      { href: "../contact", label: "Contact Us" },
-      { href: "../sitemap", label: "Sitemap" },
-    ],
+    title: "Contact",
+    links: contactLinks,
   },
   products: {
     title: "Products",
-    links: [
-      { href: "../splint", label: "Achilles Rupture Splint" },
-      { href: "../reviews", label: "Reviews" },
-    ],
+    links: productLinks,
   },
   patientGuides: {
     title: "Patient Guides",
-    links: [
-      { href: "../achilles-ruptures", label: "Achilles Ruptures" },
-      {
-        href: "../FAQs/achilles-rupture-timeline",
-        label: "Achilles Rupture Timeline",
-      },
-      {
-        href: "../FAQs/is-my-achilles-ruptured",
-        label: "Is my Achilles Ruptured?",
-      },
-      {
-        href: "../FAQs/what-happens-if-my-achilles-is-ruptured?",
-        label: "What happens if my Achilles is ruptured?",
-      },
-      {
-        href: "../FAQs/achilles-tear-treatment",
-        label: "Achilles Tear Treatment",
-      },
-      {
-        href: "../FAQs/torn-achilles-recovery",
-        label: "Torn Achilles Recovery",
-      },
-      {
-        href: "../FAQs/life-after-achilles-rupture",
-        label: "Life After Achilles Rupture",
-      },
-      { href: "../evidence-based-recovery", label: "Evidence Based Recovery" },
-    ],
+    links: faqLinks,
   },
-  partners: {
-    title: "Partners",
-    links: [
-      { href: "/partners", label: "Partners" },
-      { href: "/order-wholesale", label: "Order Wholesale" },
-      { href: "/become-a-partner", label: "Become a Partner" },
-    ],
+  professionals: {
+    title: "Professionals",
+    links: partnerLinks,
+  },
+  legal: {
+    title: "Legal",
+    links: legalLinks,
   },
 };
 
@@ -99,8 +71,8 @@ const socials = [
       <!-- Partners & Contact -->
       <div class="space-y-8">
         <FooterBlock
-          title={footerLinks.partners.title}
-          links={footerLinks.partners.links}
+          title={footerLinks.professionals.title}
+          links={footerLinks.professionals.links}
         />
 
         <div class="space-y-4">

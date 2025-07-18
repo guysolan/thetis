@@ -1,14 +1,14 @@
 ---
-import { Image } from 'astro:assets';
-import Layout from '@/layouts/Layout.astro';
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
 
-import { partners } from '@/content/partners/index.ts';
-import getCountryFlag from 'country-flag-icons/unicode';
-import { ExternalLink } from 'lucide-astro';
-import { cn } from '../lib/utils';
-import { buttonVariants } from '../components/ui/button';
-import ColorGradient from '@/components/ColorGradient.astro';
-import HighlightedWord from '@/components/HighlightedWord.tsx';
+import { partners } from "@/content/partners/index.ts";
+import getCountryFlag from "country-flag-icons/unicode";
+import { ExternalLink } from "lucide-astro";
+import { cn } from "../lib/utils";
+import { buttonVariants } from "../components/ui/button";
+import ColorGradient from "@/components/ColorGradient.astro";
+import HighlightedWord from "@/components/HighlightedWord.tsx";
 ---
 
 <Layout
@@ -16,47 +16,71 @@ import HighlightedWord from '@/components/HighlightedWord.tsx';
     description="Our global network of trusted medical device partners and distributors"
     image="https://thetismedical.com/images/night-splint.png"
 >
-    <main class="flex flex-col justify-center items-center bg-white dark:bg-black mx-auto w-full">
+    <main
+        class="flex flex-col justify-center items-center bg-white dark:bg-black mx-auto w-full"
+    >
         <ColorGradient>
-        <div class="h-12"/>
-        <h1 class="mb-12 font-bold text-4xl text-center">Our Partners</h1>
-        
-        <div class="gap-8 grid grid-cols-1 md:grid-cols-3 mx-auto p-4 w-full max-w-7xl">
-            {partners.map((partner) => (
-                <div class="flex flex-col items-center border-neutral-300 bg-gradient-to-bl from-neutral-100/50 via-white to-neutral-100/50 hover:shadow-lg p-8 border rounded-3xl transition-shadow">
-                    <h2 class="mb-6 font-semibold text-2xl text-center">{partner.name} {getCountryFlag(partner.country)}</h2>
-                    <Image
-                        height="200"
-                        width="400" 
-                        src={partner.image} 
-                        alt={partner.name} 
-                        class="mb-6 w-40 h-40 object-contain"
-                    />
-                    <a 
-                        href={partner.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        class={cn(buttonVariants({size:"lg", variant:"outline"}),'gap-2')}
-                    >
-                        Visit Website
-                        <ExternalLink/>
-                    </a>
-                </div>
-            ))}
-        </div>
+            <div class="h-12"></div>
+            <h1 class="mb-12 font-bold text-4xl text-center">Our Partners</h1>
+
+            <div
+                class="gap-8 grid grid-cols-1 md:grid-cols-3 mx-auto p-4 w-full max-w-7xl"
+            >
+                {
+                    partners.map((partner) => (
+                        <div class="flex flex-col items-center bg-gradient-to-bl from-neutral-100/50 via-white to-neutral-100/50 hover:shadow-lg p-8 border border-neutral-300 rounded-3xl transition-shadow">
+                            <h2 class="mb-6 font-semibold text-2xl text-center">
+                                {partner.name} {getCountryFlag(partner.country)}
+                            </h2>
+                            <Image
+                                height="200"
+                                width="400"
+                                src={partner.image}
+                                alt={partner.name}
+                                class="mb-6 w-40 h-40 object-contain"
+                            />
+                            <a
+                                href={partner.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class={cn(
+                                    buttonVariants({
+                                        size: "lg",
+                                        variant: "outline",
+                                    }),
+                                    "gap-2",
+                                )}
+                            >
+                                Visit Website
+                                <ExternalLink />
+                            </a>
+                        </div>
+                    ))
+                }
+            </div>
         </ColorGradient>
-        <section class="flex flex-col justify-center items-center border-primary md:border-4 bg-gradient-to-bl from-primary/5 via-white to-primary/5 shadow-lg mx-4 my-16 py-8 p-4 md:p-8 lg:p-16 border rounded-3xl">
+        <section
+            class="flex flex-col justify-center items-center bg-gradient-to-bl from-primary/5 via-white to-primary/5 shadow-lg mx-4 my-16 p-4 md:p-8 lg:p-16 py-8 border border-primary md:border-4 rounded-3xl"
+        >
             <div class="mx-auto mb-8 px-4 max-w-2xl text-center">
-                <h2 class="bg-clip-text bg-gradient-to-r from-primary to-primary/80 mb-4 font-semibold text-3xl text-transparent">Join Our Global Network</h2>
-                <p class="mb-6 text-gray-600 text-lg dark:text-gray-300">
-                    Become part of our growing international community of <HighlightedWord>clinicians</HighlightedWord>, <HighlightedWord>hospitals</HighlightedWord> and <HighlightedWord>distributors</HighlightedWord>. 
+                <h2
+                    class="bg-clip-text bg-gradient-to-r from-primary to-primary/80 mb-4 font-semibold text-transparent text-3xl"
+                >
+                    Join Our Global Network
+                </h2>
+                <p class="mb-6 text-gray-600 dark:text-gray-300 text-lg">
+                    Become part of our growing international community of <HighlightedWord
+                        >clinicians</HighlightedWord
+                    >, <HighlightedWord>hospitals</HighlightedWord> and <HighlightedWord
+                        >distributors</HighlightedWord
+                    >.
                 </p>
             </div>
-            <a 
-                href="/become-a-partner" 
+            <a
+                href="/become-a-partner"
                 class={cn(
-                    buttonVariants({size:"lg"}),
-                    "hover:animate-none hover:scale-105 transition-transform"
+                    buttonVariants({ size: "lg" }),
+                    "hover:animate-none hover:scale-105 transition-transform",
                 )}
             >
                 Become a Partner
