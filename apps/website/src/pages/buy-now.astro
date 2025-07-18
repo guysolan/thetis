@@ -8,6 +8,7 @@ import { Image } from "astro:assets";
 import ColorGradient from "@/components/ColorGradient.astro";
 import BulkOrders from "../components/buy-button/BulkOrders";
 import ReviewsLink from "../components/ReviewsLink";
+import CheckWithCareTeam from "@/components/buy-button/CheckWithCareTeam";
 ---
 
 <Fragment slot="head">
@@ -53,7 +54,7 @@ import ReviewsLink from "../components/ReviewsLink";
                                 </p>
                             </div>
                             <ReviewsLink size="lg" />
-
+                            <CheckWithCareTeam client:load />
                             <BuyButtonVariants client:load />
                         </div>
                     </div>

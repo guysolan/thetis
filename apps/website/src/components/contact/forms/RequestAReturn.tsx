@@ -108,9 +108,17 @@ export default function RequestAReturn(
 
     const canProceedToReason = () => {
         const { email, orderId, country } = formData;
-        const isValid = form.formState.isValid;
         const hasRequiredFields = email && orderId && country;
-        return hasRequiredFields && isValid;
+
+        // Basic validation checks
+        const isEmailValid = email?.includes("@") &&
+            email?.includes(".");
+        const isOrderIdValid = orderId && /^\d{4}$/.test(orderId);
+        const isCountryValid = country &&
+            (country === "uk" || country === "usa");
+
+        return hasRequiredFields && isEmailValid && isOrderIdValid &&
+            isCountryValid;
     };
 
     const canProceedToDetails = () => {
@@ -642,11 +650,11 @@ export default function RequestAReturn(
 
                 {/* Additional Details Section */}
                 {formData.returnReason === "uncomfortable" &&
-                    formData.comfortIssues.length > 0 && (
+                    (formData.comfortIssues?.length || 0) > 0 && (
                     <div className="mt-4 pt-4 border-gray-200 border-t">
                         <span className="font-medium">Comfort Issues:</span>
                         <ul className="mt-2 text-gray-700 text-sm list-disc list-inside">
-                            {formData.comfortIssues.map((issue) => (
+                            {(formData.comfortIssues || []).map((issue) => (
                                 <li key={issue}>{issue}</li>
                             ))}
                         </ul>
