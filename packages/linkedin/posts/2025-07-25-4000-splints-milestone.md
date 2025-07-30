@@ -7,6 +7,7 @@ type: "Founder"
 🎉 **From garage prototype to 4 000 splints helping Achilles-rupture patients across 9 countries.**
 
 Snapshot 📸
+
 - **Countries served:** 🇺🇸 🇬🇧 🇩🇪 🇨🇦 🇦🇺 🇳🇿 🇫🇷 🇮🇹 🇪🇸
 - **Re-ruptures reported:** 0 (post-market surveillance 2019-2025)
 - **5-star reviews:** 100 + (Amazon & clinic portals)
@@ -20,4 +21,4 @@ Every splint = one more patient sleeping boot-free. 💤
 
 Next stop: 10 000.
 
-#StartupLife #MedTech #AchillesRupture
+# StartupLife #MedTech #AchillesRupture
