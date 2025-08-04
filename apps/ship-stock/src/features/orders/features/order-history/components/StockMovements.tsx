@@ -11,11 +11,7 @@ import {
   TableRow,
 } from "@thetis/ui/table";
 
-const StockMovements = ({
-  orderItems,
-  from,
-  to,
-}: { orderItems: OrderView["items"]; from: string; to: string }) => {
+const StockMovements = ({ orderItems }: { orderItems: OrderView["items"] }) => {
   const stockChanges = useMemo(() => {
     // First, filter and map the items
     const mappedItems = orderItems
@@ -31,6 +27,7 @@ const StockMovements = ({
         quantity: item.quantity,
         warehouse_name: item.address?.name || "Unknown Location",
         item_type: item.item_type,
+        lot_number: item.lot_number,
       }));
 
     // Group by item_id first
@@ -45,6 +42,7 @@ const StockMovements = ({
             quantity: Math.abs(item.quantity),
             from_location: item.quantity < 0 ? item.warehouse_name : null,
             to_location: item.quantity > 0 ? item.warehouse_name : null,
+            lot_number: item.lot_number,
           };
         } else {
           // If we find a matching opposite movement, populate the other location
@@ -81,7 +79,14 @@ const StockMovements = ({
             className="text-left"
             key={`${item.item_id}-${item.quantity}`}
           >
-            <TableCell>{item.item_name}</TableCell>
+            <TableCell>
+              {item.item_name}{" "}
+              {item?.lot_number && (
+                <span className="text-gray-500 text-xs">
+                  (LOT {item.lot_number})
+                </span>
+              )}
+            </TableCell>
             <TableCell className="capitalize">{item.item_type}</TableCell>
             <TableCell>{item.from_location || "-"}</TableCell>
             <TableCell>{item.to_location || "-"}</TableCell>

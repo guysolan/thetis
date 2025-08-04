@@ -25,6 +25,7 @@ export type FormatOrderItemChanges = {
 	address_id: string;
 	package_item_id?: string;
 	package_item_change_id: number | null;
+	lot_number?: string;
 };
 
 export type CreateOrderType = {
@@ -59,6 +60,7 @@ const formOrderItemSchema = baseItemSchema.extend({
 	item_total: z.number().optional(),
 	package_item_id: z.string().optional(),
 	item_type: z.enum(["product", "part", "service", "package"]),
+	address_id: z.string().optional(),
 });
 type FormOrderItem = z.infer<typeof formOrderItemSchema>;
 
@@ -269,10 +271,11 @@ const processBuyFormData = (
 			quantity_change: Number(ic.quantity_change),
 			item_price: ic?.item_price ?? 0,
 			item_tax: ic?.item_tax ?? 0,
-			address_id: ic.address_id,
+			address_id: ic.address_id ?? "",
 			item_type: ic.item_type as ItemType,
 			package_item_id: ic.package_item_id,
 			package_item_change_id: ic.package_item_change_id,
+			lot_number: ic.lot_number,
 		}));
 
 	console.log(
@@ -361,6 +364,7 @@ function processSellFormData(
 			item_type: i.item_type as ItemType,
 			package_item_id: i.package_item_id,
 			package_item_change_id: i.package_item_change_id,
+			lot_number: i.lot_number,
 		}),
 	);
 
@@ -404,8 +408,6 @@ const processShipmentFormData = (
 		const mapped = mapToFormOrderItem(item);
 		const result = {
 			...mapped,
-			item_price: 0,
-			item_tax: 0,
 			address_id: formData.from_shipping_address_id,
 			quantity_change: Number(mapped.quantity_change ?? 0),
 		};
@@ -420,8 +422,6 @@ const processShipmentFormData = (
 		const mapped = mapToFormOrderItem(item);
 		const result = {
 			...mapped,
-			item_price: 0,
-			item_tax: 0,
 			address_id: formData.to_shipping_address_id,
 			quantity_change: Number(mapped.quantity_change ?? 0),
 		};
@@ -437,8 +437,6 @@ const processShipmentFormData = (
 		const mapped = mapToFormOrderItem(item);
 		const result = {
 			...mapped,
-			item_price: 0,
-			item_tax: 0,
 			address_id: formData.to_shipping_address_id,
 			quantity_change: Number(mapped.quantity_change ?? 0),
 		};
@@ -446,10 +444,40 @@ const processShipmentFormData = (
 		return result;
 	});
 
-	const result = [
-		...fromItems,
-		...toItems,
-		...orderItemsInternal,
+	const result: FormatOrderItemChanges[] = [
+		...fromItems.map((item) => ({
+			item_id: item.item_id,
+			quantity_change: item.quantity_change,
+			item_price: Number(item.item_price ?? 0),
+			item_tax: Number(item.item_tax ?? 0),
+			address_id: item.address_id,
+			item_type: item.item_type as ItemType,
+			package_item_id: item.package_item_id,
+			package_item_change_id: item.package_item_change_id,
+			lot_number: item.lot_number,
+		})),
+		...toItems.map((item) => ({
+			item_id: item.item_id,
+			quantity_change: item.quantity_change,
+			item_price: Number(item.item_price ?? 0),
+			item_tax: Number(item.item_tax ?? 0),
+			address_id: item.address_id,
+			item_type: item.item_type as ItemType,
+			package_item_id: item.package_item_id,
+			package_item_change_id: item.package_item_change_id,
+			lot_number: item.lot_number,
+		})),
+		...orderItemsInternal.map((item) => ({
+			item_id: item.item_id,
+			quantity_change: item.quantity_change,
+			item_price: Number(item.item_price ?? 0),
+			item_tax: Number(item.item_tax ?? 0),
+			address_id: item.address_id,
+			item_type: item.item_type as ItemType,
+			package_item_id: item.package_item_id,
+			package_item_change_id: item.package_item_change_id,
+			lot_number: item.lot_number,
+		})),
 	];
 	console.log(
 		"🚢 processShipmentFormData - FINAL RESULT:",
@@ -946,6 +974,7 @@ export const useCreateOrder = (orderTypeParam: string) => {
 								tax: 0,
 								package_item_id: undefined,
 								package_item_change_id: itemChangeId, // Use the same ID we generated/used
+								lot_number: undefined, // Package items don't have lot numbers
 							}, { onConflict: "order_id,item_change_id" });
 
 						if (orderItemChangeError) {
@@ -1075,6 +1104,7 @@ export const useCreateOrder = (orderTypeParam: string) => {
 								package_item_id: item.package_item_id,
 								package_item_change_id:
 									item.package_item_change_id,
+								lot_number: item.lot_number,
 							}, { onConflict: "order_id,item_change_id" });
 
 						if (orderItemChangeError) {

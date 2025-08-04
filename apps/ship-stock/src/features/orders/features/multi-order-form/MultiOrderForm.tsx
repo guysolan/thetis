@@ -1,7 +1,7 @@
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
-import { Form } from "@thetis/ui/form";
+import { FormProvider } from "react-hook-form";
 import dayjs from "dayjs";
 
 import FormErrors from "../../../../components/FormErrors";
@@ -128,31 +128,71 @@ export function MultiOrderForm({
   const getPreviewContent = () => {
     const safeMode = mode || "direct";
 
+    // Filter out items with null package_item_change_id for preview components
+    const filteredPackageItems = packageItems.filter(
+      (item) => item.package_item_change_id !== null
+    ) as Array<{
+      package_id: string;
+      package_item_change_id: number;
+    }>;
+
+    // Convert orderItems to the expected type for preview components
+    const convertedOrderItems = orderItems
+      .filter((item) => item.item_type !== "service")
+      .map((item) => {
+        if (item.item_type === "package") {
+          return {
+            item_type: item.item_type,
+            package_id: item.package_id,
+            quantity_change: 1, // Default for packages
+            package_item_change_id: item.package_item_change_id ?? undefined,
+            package_items: item.package_items,
+          };
+        }
+        return {
+          ...item,
+          package_item_change_id: item.package_item_change_id ?? undefined,
+        };
+      });
+
+    // Convert fromItems and toItems to include item_type
+    const convertedFromItems = fromItems.map((item) => ({
+      ...item,
+      item_type: "product" as const,
+      package_item_change_id: item.package_item_change_id ?? undefined,
+    }));
+
+    const convertedToItems = toItems.map((item) => ({
+      ...item,
+      item_type: "product" as const,
+      package_item_change_id: item.package_item_change_id ?? undefined,
+    }));
+
     switch (orderType) {
       case "sale":
         return (
           <SellPreview
-            orderItems={orderItems}
-            packageItems={packageItems}
+            orderItems={convertedOrderItems}
+            packageItems={filteredPackageItems}
             mode={safeMode}
           />
         );
       case "purchase":
         return (
           <BuyPreview
-            orderItems={orderItems}
+            orderItems={convertedOrderItems}
             producedItems={producedItems}
             consumedItems={consumedItems}
-            packageItems={packageItems}
+            packageItems={filteredPackageItems}
             mode={safeMode}
           />
         );
       case "shipment":
         return (
           <ShipmentPreview
-            fromItems={fromItems}
-            toItems={toItems}
-            packageItems={packageItems}
+            fromItems={convertedFromItems}
+            toItems={convertedToItems}
+            packageItems={filteredPackageItems}
             mode={safeMode}
           />
         );
@@ -176,7 +216,7 @@ export function MultiOrderForm({
   };
 
   return (
-    <Form {...form}>
+    <FormProvider {...form}>
       <form
         id="order-form"
         className="flex flex-col gap-y-4 px-1 w-full overflow-x-scroll"
@@ -231,6 +271,6 @@ export function MultiOrderForm({
         <FormErrors />
         <Button type="submit">Submit</Button>
       </form>
-    </Form>
+    </FormProvider>
   );
 }
