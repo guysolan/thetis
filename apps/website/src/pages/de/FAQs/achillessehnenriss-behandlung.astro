@@ -1,0 +1,232 @@
+---
+import FaqSchemaAccordion from "../../../components/research/FaqSchemaAccordion.astro";
+import NightSplintAdvert from "../../../components/products/night-splint/NightSplintAdvert.astro";
+import FAQsLayout from "../../../layouts/FAQsLayout.astro";
+import { getAlternateLanguages } from "../../../config/languages";
+
+// Language configuration
+const currentPath = Astro.url.pathname;
+const alternateLanguages = getAlternateLanguages(currentPath, "de");
+---
+
+<FAQsLayout
+    title="Achillessehnenriss Behandlung: Operation vs Konservativ & Schmerzen FAQs"
+    description="Klare Anleitung zur Behandlung eines Achillessehnenrisses – Entscheidung zwischen Operation oder konservativer Behandlung, OP-Timing, Schmerzniveau und Reha-Zeitplan."
+    lang="de"
+    alternateLanguages={alternateLanguages}
+>
+    <section id="faq-slide" class="faq slide">
+        <div class="questions">
+            <h2>Finden Sie Ihre Antwort:</h2>
+            <a href="#q1">
+                <h3>
+                    Wie behandelt man einen Achillessehnenriss – Operation vs
+                    konservativ?
+                </h3>
+            </a>
+            <a href="#q2">
+                <h3>Wie lange kann man mit einer Achillessehnen-OP warten?</h3>
+            </a>
+            <a href="#q3">
+                <h3>Wie lange dauert eine Achillessehnen-Operation?</h3>
+            </a>
+            <a href="#q4">
+                <h3>Erholung nach Achillessehnenriss-Operation</h3>
+            </a>
+            <a href="#q5">
+                <h3>Schmerzen nach Achillessehnenriss / Operation</h3>
+            </a>
+            <ul>
+                <li>
+                    <a href="#q6">
+                        <h3>Fersenschmerzen</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="#q7">
+                        <h3>Wadenschmerzen</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="#q8">
+                        <h3>Wadenkrampf</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="#q9">
+                        <h3>Knieschmerzen</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="#q10">
+                        <h3>Nervenschmerzen</h3>
+                    </a>
+                </li>
+            </ul>
+            <a href="#q11">
+                <h3>Narbenheilung nach Operation</h3>
+            </a>
+        </div>
+        <div class="answers">
+            <div id="q1"></div>
+            <h2>
+                Wie behandelt man einen Achillessehnenriss – Operation vs konservativ?
+            </h2>
+            <p>
+                Sehnen heilen, wie Knochen, unter den richtigen Bedingungen gut.
+                Bei der Achillessehne wird angenommen, dass die Heilung am besten
+                ist, wenn die beiden gerissenen Enden nahe beieinander liegen.
+                Normalerweise wird dies erreicht, indem der Fuß in eine
+                Zehenspitzenposition gebracht und dort mit einem Gipsverband oder
+                Stiefel gehalten wird. Wenn die Sehnenenden nicht gut
+                zusammenkommen und eine "Lücke" hinterlassen (dies kann durch
+                eine Ultraschalluntersuchung bestimmt werden), kann eine
+                Operation eine Option sein. Die Operation dient dazu, die Enden
+                zusammenzubringen. Sie macht die Sehne nicht stark. Die gleiche
+                lange Erholung ist erforderlich, unabhängig davon, ob eine
+                Operation durchgeführt wird oder nicht. Für reale
+                Erholungsbeispiele lesen Sie unseren <a
+                    href="/de/FAQs/achillessehnenriss-genesung"
+                    class="text-primary underline"
+                    >Achillessehnenriss-Erholungsleitfaden</a
+                >.
+            </p>
+            <div id="q2"></div>
+            <h2>Wie lange kann man mit einer Achillessehnen-OP warten?</h2>
+            <p>
+                Die meisten Chirurgen bevorzugen es, die Sehne (wenn eine
+                Operation erforderlich ist) innerhalb von drei Wochen nach der
+                Verletzung zu reparieren. Das liegt daran, dass sich nach dieser
+                Zeit die "elastischen" Sehnenenden auseinandergezogen haben und
+                schwerer zu verbinden sind.
+            </p>
+            <div id="q3"></div>
+            <h2>Wie lange dauert eine Achillessehnen-Operation?</h2>
+            <p>
+                Die Operation zur Reparatur der Achillessehne wird normalerweise
+                als Tagesklinik-Eingriff durchgeführt. Die Operation dauert
+                weniger als eine Stunde. Die Erholung und Rehabilitation dauert
+                viele Monate.
+            </p>
+            <div id="q4"></div>
+            <h2>Erholung nach Achillessehnenriss-Operation</h2>
+            <p>
+                Es dauert 2 Wochen, bis die Hautnähte heilen, und Sie werden
+                wahrscheinlich bis dahin in einem Gipsverband sein. Sobald Sie in
+                einem geeigneten Stiefel unterstützt werden, mit dem Fuß in
+                einer Zehenspitzenposition, können (und sollten) Sie gehen.
+                Krücken können immer noch nützlich sein, um beim Gleichgewicht zu
+                helfen. Nach einigen Wochen (4-6) wird der Stiefel nach und nach
+                angepasst, um die Ferse herabkommen zu lassen. Ab der zehnten
+                Woche (ungefähr) wird der Stiefel nicht mehr benötigt. Jetzt
+                beginnt der lange Prozess des Muskelaufbaus und der
+                Rehabilitation. Diese Phase dauert etwa 6 Monate.
+            </p>
+            <div id="q5"></div>
+            <h2>Schmerzen nach Achillessehnenriss / Operation</h2>
+            <p>
+                Das anfängliche "Knacken" ist schmerzhaft, aber das lässt
+                normalerweise schnell nach. Die Verletzung ist dann
+                überraschend schmerzlos. Ebenso, wenn eine chirurgische Reparatur
+                erforderlich ist, besteht nicht viel Bedarf an
+                Schmerzmedikamenten, sobald die Schmerzen vom Hautschnitt
+                nachlassen.
+            </p>
+            <ul>
+                <div id="q6"></div>
+
+                <li>
+                    <b>Fersenschmerzen</b> - Sobald Sie in dem Stiefel gehen,
+                    kann die Unterseite der Ferse wund werden. Das Hinzufügen eines
+                    Gel-Fersenpolsters aus der Apotheke kann helfen. Diese Art von
+                    Schmerz neigt dazu, sich zu lösen, sobald Sie mit der Rehabilitation
+                    ohne den Stiefel beginnen.
+                </li>
+                <div id="q7"></div>
+
+                <li>
+                    <b>Wadenschmerzen</b> – Diese sollten nicht ignoriert werden,
+                    besonders wenn eine Schwellung des gesamten Unterschenkels
+                    vorliegt. Diese Kombination von Problemen könnte bedeuten, dass
+                    eine blockierte Vene (Thrombose) vorliegt, die auch auftreten
+                    kann, wenn Sie Blutverdünner zur Vorbeugung solcher Probleme
+                    einnehmen. Suchen Sie ärztliche Beratung, wenn Sie sich darüber
+                    Sorgen machen.
+                </li>
+                <div id="q8"></div>
+                <li>
+                    <b>Wadenkrampf</b> – Eine häufigere Art von Wadenschmerzen sind
+                    Krämpfe des Muskels, der aufgrund des Sehnenrisses "nichts hat,
+                    woran er ziehen kann". Diese Art von Schmerz wird keine
+                    begleitende Schwellung haben und ist intermittierend.
+                </li>
+                <div id="q9"></div>
+
+                <li>
+                    <b>Knieschmerzen</b> – Dies kann aufgrund der Ungeschicklichkeit
+                    des hochhackigen Stiefels auftreten und kann beide Knie betreffen.
+                </li>
+                <div id="q10"></div>
+
+                <li>
+                    <b>Nervenschmerzen</b> – Nervenschäden sind bei chirurgischer
+                    Reparatur möglich, neigen aber dazu, Taubheit statt Schmerzen
+                    zu hinterlassen. Ungeschicktes Gehen durch den Stiefel (oder
+                    Krücken) kann selten zu Rückenproblemen und Ischias-ähnlichen
+                    Schmerzen führen.
+                </li>
+            </ul>
+            <div id="q11"></div>
+
+            <h2>Narbenheilung nach Operation</h2>
+            <p>
+                Die Hautnarbe von einer Achillessehnenreparatur heilt
+                normalerweise sehr gut und wird mit der Zeit fast unsichtbar.
+                Während der ersten Wochen nach der Operation besteht ein Risiko
+                einer Hautinfektion, daher ist es wichtig, anfangs richtig zu
+                ruhen (um die Schwellung niedrig zu halten und zu verhindern,
+                dass sich die Wunde dehnt). Sobald der Gipsverband entfernt und
+                die Nähte weg sind, möchten Sie vielleicht Cremes oder Salben
+                verwenden, die reich an Vitamin E sind. Spezielle
+                narbenreduzierende Klebepflaster können von Vorteil sein,
+                besonders wenn Sie zu breiter oder "keloider" Narbenbildung
+                neigen.
+            </p>
+        </div>
+    </section>
+
+    <NightSplintAdvert />
+
+    <FaqSchemaAccordion
+        faqs={[
+            {
+                question:
+                    "Wie behandelt man einen Achillessehnenriss – Operation vs konservativ?",
+                answer: "Sehnen heilen unter den richtigen Bedingungen gut. Bei der Achillessehne ist die Heilung am besten, wenn die beiden gerissenen Enden nahe beieinander liegen. Dies wird normalerweise erreicht, indem der Fuß in eine Zehenspitzenposition gebracht und dort mit einem Gipsverband oder Stiefel gehalten wird. Wenn die Sehnenenden nicht gut zusammenkommen und eine 'Lücke' hinterlassen (durch Ultraschall bestimmt), kann eine Operation erforderlich sein, um die Enden zusammenzubringen. Die Operation macht die Sehne nicht stark - die gleiche lange Erholung ist erforderlich, unabhängig davon, ob eine Operation durchgeführt wird oder nicht.",
+            },
+            {
+                question: "Wie lange kann man mit einer Achillessehnen-OP warten?",
+                answer: "Die meisten Chirurgen bevorzugen es, die Sehne (wenn eine Operation erforderlich ist) innerhalb von drei Wochen nach der Verletzung zu reparieren. Das liegt daran, dass sich nach dieser Zeit die 'elastischen' Sehnenenden auseinandergezogen haben und schwerer zu verbinden sind.",
+            },
+            {
+                question: "Wie lange dauert eine Achillessehnen-Operation?",
+                answer: "Die Operation zur Reparatur der Achillessehne wird normalerweise als Tagesklinik-Eingriff durchgeführt. Die Operation dauert weniger als eine Stunde. Die Erholung und Rehabilitation dauert viele Monate.",
+            },
+            {
+                question:
+                    "Wie ist der Erholungsprozess nach einer Achillessehnenriss-Operation?",
+                answer: "Es dauert 2 Wochen, bis die Hautnähte heilen, mit einem Gipsverband. Sobald Sie in einem geeigneten Stiefel mit dem Fuß in Zehenspitzenposition unterstützt werden, können und sollten Sie gehen (Krücken können beim Gleichgewicht helfen). Nach 4-6 Wochen wird der Stiefel schrittweise angepasst, um die Ferse herabkommen zu lassen. Ab etwa der zehnten Woche wird der Stiefel nicht mehr benötigt. Dann beginnt der lange Prozess des Muskelaufbaus und der Rehabilitation, der etwa 6 Monate dauert.",
+            },
+            {
+                question:
+                    "Welche Arten von Schmerzen sind nach Achillessehnenriss/Operation häufig?",
+                answer: "Das anfängliche 'Knacken' ist schmerzhaft, aber lässt schnell nach. Die Verletzung und chirurgische Reparatur sind danach überraschend schmerzlos. Häufige Schmerzarten umfassen: Fersenschmerzen (vom Gehen im Stiefel), Wadenschmerzen (könnte Thrombose anzeigen bei begleitender Schwellung), Wadenkrämpfe (Krämpfe des getrennten Muskels), Knieschmerzen (vom hochhackigen Stiefel) und Nervenschmerzen (zeigt sich normalerweise als Taubheit nach der Operation).",
+            },
+            {
+                question:
+                    "Wie heilt die Narbe nach einer Achillessehnen-Operation?",
+                answer: "Die Hautnarbe heilt normalerweise sehr gut und wird mit der Zeit fast unsichtbar. Während der ersten Wochen besteht ein Risiko einer Hautinfektion, daher ist richtige Ruhe wichtig, um die Schwellung niedrig zu halten und zu verhindern, dass sich die Wunde dehnt. Nach Entfernung des Gipsverbands und der Nähte können Vitamin-E-Cremes/Salben verwendet werden. Spezielle narbenreduzierende Klebepflaster können helfen, besonders bei Neigung zu breiter oder 'keloider' Narbenbildung.",
+            },
+        ]}
+    />
+</FAQsLayout>

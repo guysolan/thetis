@@ -1,0 +1,465 @@
+---
+import FAQsLayout from "../../../layouts/FAQsLayout.astro";
+import TimelineBadge from "../../../components/timeline/TimelineBadge.astro";
+import TimelineBlock from "../../../components/timeline/TimelineBlock.astro";
+import FAQAccordion from "../../../components/research/FaqSchemaAccordion.astro";
+import NightSplintAdvert from "../../../components/products/night-splint/NightSplintAdvert.astro";
+import { getAlternateLanguages } from "../../../config/languages";
+
+// Language configuration
+const currentPath = Astro.url.pathname;
+const alternateLanguages = getAlternateLanguages(currentPath, "de");
+---
+
+<FAQsLayout
+  title="Achillessehnenriss Erholungs-Zeitplan 2024: Wöchentlicher Leitfaden (Operativ & Konservativ)"
+  description="Umfassender 2024 wöchentlicher Zeitplan für Achillessehnenriss-Erholung nach Operation oder konservativer Behandlung – Meilensteine, Übungen, Physiotherapie-Tipps und Rückkehr-zum-Sport-Ziele."
+  lang="de"
+  alternateLanguages={alternateLanguages}
+>
+  <section
+    id="faq-slide"
+    class="flex flex-col justify-center items-center mx-auto px-4"
+  >
+    <div class="relative mt-8 w-full max-w-4xl">
+      {/* Week 1 */}
+      <TimelineBlock reverse={true}>
+        <Fragment slot="badge">
+          <TimelineBadge time="Woche 1" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            Woche 1: Anfängliche Verletzung und Trauma-Schiene
+          </h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="li-heading">Anfängliche Verletzung</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Sofortige medizinische Betreuung ist entscheidend nach einem Achillessehnenriss.
+                  Wenn Sie vermuten, dass Sie Ihre Achillessehne gerissen haben,
+                  siehe unseren Leitfaden: <a
+                    href="/de/FAQs/achillessehnenriss-erkennen"
+                    class="text-primary underline">Ist meine Achillessehne gerissen?</a
+                  >
+                </li>
+                <li>
+                  Genaue Bewertung der Verletzungsschwere ist wichtig, um andere
+                  Verletzungen wie einen Wadenmuskelfaserriss auszuschließen.
+                </li>
+                <li>
+                  Vorübergehende Ruhigstellung mit einem Gipsverband oder <a
+                    href="/trauma-splint"
+                    class="text-primary underline">Trauma-Schiene</a
+                  >.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <span class="li-heading">Notfallversorgung (Notaufnahme)</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Anfängliche Schmerzbehandlung. Das anfängliche "Knacken" ist schmerzhaft,
+                  aber das lässt normalerweise schnell nach.
+                </li>
+                <li>
+                  Anlegen einer Trauma-Schiene oder eines Gipsverbands, um den Fuß in
+                  einer Zehenspitzenposition zu halten.
+                </li>
+                <li>Sie erhalten wahrscheinlich Krücken, um beim Gehen zu helfen.</li>
+                <li>
+                  Blutverdünnende Medikamente können empfohlen werden, um eine
+                  verstopfte Vene (Thrombose) zu verhindern.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <span class="li-heading">Medizinische Bewertung</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>Körperliche Untersuchung zur Beurteilung der Verletzung.</li>
+                <li>Überweisung zum Spezialisten für weitere Behandlung.</li>
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Weeks 1-3 */}
+      <TimelineBlock>
+        <Fragment slot="badge">
+          <TimelineBadge time="Wochen 1-3" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            Wochen 1–3: Trauma-Schiene und Behandlungsentscheidung
+          </h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="mt-2 pb-1 font-semibold"
+                >Spezialistenkonsultation</span
+              >
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Detaillierte Untersuchung zur Bestätigung der Diagnose eines
+                  Achillessehnenrisses.
+                </li>
+                <li>
+                  Bildgebung (normalerweise eine Ultraschalluntersuchung) kann empfohlen
+                  werden, um sicherzustellen, dass die Sehnenenden nahe beieinander
+                  liegen. Dies hilft zu bestimmen, ob eine Operation eine Option ist.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <span class="li-heading">Behandlungsentscheidung</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Konservative Behandlung (am häufigsten): Der Fuß wird in einer
+                  Zehenspitzenposition mit einem Stiefel gehalten, damit die
+                  Sehnenenden natürlich heilen können.
+                </li>
+                <li>
+                  Operative Behandlung (einige Fälle): Eine Operation kann in Betracht
+                  gezogen werden, wenn eine Lücke zwischen den Sehnenenden besteht.
+                  Das Ziel ist es, die Enden zusammenzubringen, aber es macht die
+                  Sehne nicht stärker oder beschleunigt die Erholung nicht. Erfahren
+                  Sie mehr über den <a
+                    href="/de/FAQs/achillessehnenriss-behandlung"
+                    class="text-primary underline"
+                    >Achillessehnenriss-Behandlungsweg</a
+                  >.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <span class="li-heading">Anfängliche Erholungsphase</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Stiefelanpassung und -einstellung, um sicherzustellen, dass der Fuß
+                  in der richtigen Position ist. Eine <a
+                    href="/de/splint"
+                    class="text-primary underline">Schiene</a
+                  > kann verwendet werden, um die richtige Fußposition während des
+                  Schlafs beizubehalten, wenn der Stiefel unbequem ist.
+                </li>
+                <li>Erlernen der Verwendung von Krücken für das Gleichgewicht beim Gehen.</li>
+                <li>
+                  Keine Gewichtsbelastung oder teilweise Gewichtsbelastung wie von
+                  Ihrem Gesundheitsdienstleister empfohlen.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Weeks 4-6 */}
+      <TimelineBlock reverse={true}>
+        <Fragment slot="badge">
+          <TimelineBadge time="Wochen 4-6" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            Wochen 4–6: Erholungsfortschritt mit Schiene
+          </h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="li-heading">Erholungsfortschritt</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>Regelmäßige medizinische Kontrolle zur Überwachung der Heilung.</li>
+                <li>
+                  Stiefelanpassungen können beginnen, um einen größeren Bewegungsbereich
+                  zu ermöglichen, wodurch die Zehenspitzenposition schrittweise reduziert
+                  wird. Dies geschieht normalerweise durch Entfernen von Keilen von
+                  der Rückseite des Stiefels.
+                </li>
+                <li>
+                  Bei Schwierigkeiten beim Schlafen im Stiefel kann eine <a
+                    href="/de/splint"
+                    class="text-primary underline">Schiene</a
+                  > verwendet werden, um die richtige Fußposition während des Schlafs
+                  beizubehalten. Dies hilft bei der häufigen Beschwerde des Schlafens
+                  in einem schweren Stiefel.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <span class="li-heading">Mobilität</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Befolgen Sie weiterhin medizinische Anweisungen für Gewichtsbelastung
+                  und Bewegung. Gehen im Stiefel wird allgemein empfohlen.
+                </li>
+                <li>
+                  Schrittweise Progression von Mobilitätsübungen wie von Ihrem
+                  Physiotherapeuten empfohlen. Die Physiotherapie beginnt normalerweise
+                  um die 9-10 Woche nach der Verletzung.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Weeks 7-9 */}
+      <TimelineBlock>
+        <Fragment slot="badge">
+          <TimelineBadge time="Wochen 7-9" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            Wochen 7–9: Fortgesetzte Pflege und Überwachung
+          </h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="li-heading">Fortgesetzte Pflege</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Regelmäßige Überwachung des Heilungsfortschritts Ihrer Achillessehne.
+                </li>
+                <li>
+                  Befolgen des etablierten Behandlungsplans genau, einschließlich
+                  Stiefelanpassungen.
+                </li>
+                <li>
+                  Anpassungen des Behandlungsplans nach Bedarf, basierend auf Ihrem
+                  Fortschritt und der Bewertung Ihres Gesundheitsdienstleisters.
+                  Erfahren Sie mehr über die Optionen unter <a
+                    href="/de/FAQs/achillessehnenriss-behandlung"
+                    class="text-primary underline"
+                    >Achillessehnenriss-Behandlungsweg</a
+                  >.
+                </li>
+                <li>Verwenden Sie weiterhin die Schiene für bequemen Schlaf.</li>
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Weeks 10-12 */}
+      <TimelineBlock reverse={true}>
+        <Fragment slot="badge">
+          <TimelineBadge time="Wochen 10-12" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            Wochen 10–12: Beginn der Rehabilitation
+          </h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="li-heading">Rehabilitation beginnt</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Beginn der Physiotherapie zur Wiedererlangung von Kraft und
+                  Flexibilität. Der Fokus liegt auf dem Aufbau der Wadenmuskelkraft.
+                </li>
+                <li>
+                  Übergang vom Stiefel zu normalem Schuhwerk, normalerweise um
+                  die 10. Woche.
+                </li>
+                <li>
+                  Befolgen eines geführten Übungsprogramms, das auf Ihre spezifischen
+                  Bedürfnisse zugeschnitten ist. Vermeiden Sie kräftige Dehnübungen,
+                  auch wenn sich die Sehne steif anfühlt. Für einen detaillierten
+                  Blick auf den Erholungsprozess siehe unseren Leitfaden: <a
+                    href="/de/FAQs/achillessehnenriss-genesung"
+                    class="text-primary underline">Achillessehnenriss-Genesung</a
+                  >.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Weeks 13-25 */}
+      <TimelineBlock>
+        <Fragment slot="badge">
+          <TimelineBadge time="Wochen 13-25" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            Wochen 13–25: Progressive Erholung und Kräftigung
+          </h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="li-heading">Progressive Erholung</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Schrittweise Erhöhung der Aktivitätsniveaus unter Anleitung
+                  Ihres Physiotherapeuten.
+                </li>
+                <li>
+                  Weiterhin befolgen der Physiotherapie-Anleitung, um ordnungsgemäße
+                  Heilung sicherzustellen und Kraft zurückzugewinnen.
+                </li>
+                <li>
+                  Aufbau von Kraft und Ausdauer in der Wade und den umgebenden
+                  Muskeln. Dies ist eine entscheidende Phase für die langfristige
+                  Erholung.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Weeks 26+ */}
+      <TimelineBlock reverse={true}>
+        <Fragment slot="badge">
+          <TimelineBadge time="Woche 26+" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            Woche 26+: Rückkehr zur Aktivität und langfristige Erholung
+          </h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="li-heading">Rückkehr zur Aktivität</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Schrittweise Rückkehr zu normalen Aktivitäten, einschließlich
+                  Sport und Bewegung, entsprechend medizinischem Rat. Die meisten
+                  Rehabilitationsprogramme zielen auf eine Rückkehr zum Sport
+                  um 6 Monate ab.
+                </li>
+                <li>
+                  Individuelle Fortschritte variieren, also hören Sie auf Ihren
+                  Körper und überanstrengen Sie sich nicht.
+                </li>
+                <li>
+                  Das Verständnis von <a
+                    href="/de/FAQs/leben-nach-achillessehnenriss"
+                    class="text-primary underline"
+                    >Leben nach Achillessehnenriss</a
+                  > ist entscheidend für die Aufrechterhaltung langfristiger Gesundheit
+                  und die Vermeidung von Wiederverletzungen. Die geheilte Sehne wird
+                  wahrscheinlich dicker bleiben als vorher, und der Wadenmuskel
+                  kann etwas kleiner sein.
+                </li>
+                <li>
+                  Seien Sie sich bewusst, eine Wiederruptur zu vermeiden. Befolgen
+                  Sie alle Anweisungen sorgfältig, besonders in den frühen Stadien
+                  der Erholung.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Important Notes */}
+      <TimelineBlock>
+        <Fragment slot="badge">
+          <TimelineBadge time="Hinweise" variant="neutral" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">Wichtige Hinweise</h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              Erholungszeiten sind ungefähr und können erheblich variieren
+              je nach individuellen Faktoren wie Alter, allgemeine Gesundheit und
+              Schwere der Verletzung.
+            </li>
+            <li>
+              Befolgen Sie immer die spezifischen Anweisungen und Empfehlungen
+              Ihres Gesundheitsdienstleisters. Dieser Zeitplan ist ein allgemeiner
+              Leitfaden, kein Ersatz für personalisierte medizinische Beratung.
+            </li>
+            <li>
+              Nehmen Sie an allen geplanten Nachsorgeterminen teil, um Ihren
+              Fortschritt zu überwachen.
+            </li>
+            <li>
+              Es gibt KEINEN TEIL-RISS der Achillessehne. Gehen Sie von einem
+              vollständigen Riss aus, bis ein Spezialist Ihre Verletzung beurteilt hat.
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+    </div>
+
+    <NightSplintAdvert />
+
+    <FAQAccordion
+      faqs={[
+        {
+          question: "Was passiert in der ersten Woche nach einem Achillessehnenriss?",
+          answer:
+            "In der ersten Woche benötigen Sie sofortige medizinische Betreuung. Sie werden wahrscheinlich die Notaufnahme besuchen, wo sie anfängliche Schmerzbehandlung, Anlegen einer Trauma-Schiene oder eines Gipsverbands zur Haltung des Fußes in Zehenspitzenposition und Krücken bereitstellen. Blutverdünnende Medikamente können verschrieben werden, um Thrombose zu verhindern. Eine Spezialistenüberweisung wird für weitere Pflege arrangiert.",
+        },
+        {
+          question:
+            "Wann muss ich die Entscheidung zwischen operativer und konservativer Behandlung treffen?",
+          answer:
+            "Die Behandlungsentscheidung wird normalerweise in den Wochen 1-3 nach Konsultation mit einem Spezialisten getroffen. Sie werden eine detaillierte Untersuchung durchführen und können Bildgebung (normalerweise Ultraschall) anfordern, um zu prüfen, ob die Sehnenenden nahe beieinander liegen. Konservative Behandlung ist am häufigsten, bei der der Fuß in einer Zehenspitzenposition mit einem Stiefel gehalten wird. Eine Operation wird hauptsächlich in Betracht gezogen, wenn eine erhebliche Lücke zwischen den Sehnenenden besteht.",
+        },
+        {
+          question: "Wann kann ich vom Stiefel zur Schiene wechseln?",
+          answer:
+            "Um die Wochen 4-6, wenn Sie Schwierigkeiten beim Schlafen im Stiefel haben, kann Ihr Gesundheitsdienstleister den Wechsel zu einer Schiene empfehlen. Die Schiene ist leichter als der Stiefel und hilft, die richtige Fußposition während des Schlafs beizubehalten, während sichergestellt wird, dass die Sehne weiterhin richtig heilt.",
+        },
+        {
+          question:
+            "Wann beginnt normalerweise die Physiotherapie im Erholungsprozess?",
+          answer:
+            "Die Physiotherapie beginnt normalerweise um die Wochen 10-12. Dies ist, wenn Sie beginnen werden, aus dem Stiefel herauszugehen und ein geführtes Übungsprogramm zu starten, das auf den Aufbau der Wadenmuskelkraft fokussiert ist. Es ist wichtig, der Anleitung Ihres Physiotherapeuten zu folgen und kräftige Dehnübungen zu vermeiden, auch wenn sich die Sehne steif anfühlt.",
+        },
+        {
+          question:
+            "Wie lange dauert es, bis ich nach einem Achillessehnenriss zum Sport zurückkehren kann?",
+          answer:
+            "Die meisten Rehabilitationsprogramme zielen auf eine Rückkehr zum Sport um 6 Monate (Woche 26+) ab. Dies variiert jedoch je nach Individual und hängt von Ihrem Fortschritt durch die Rehabilitation ab. Der Fokus während der Wochen 13-25 liegt auf progressiver Kräftigung und Aufbau der Ausdauer in den Wadenmuskeln, was entscheidend für eine sichere Rückkehr zu sportlichen Aktivitäten ist.",
+        },
+        {
+          question: "Was sind die wichtigsten Meilensteine in der Achillessehnenriss-Erholung?",
+          answer:
+            "Wichtige Meilensteine umfassen: Woche 1 (anfängliche Behandlung und Ruhigstellung), Wochen 1-3 (Behandlungsentscheidung), Wochen 4-6 (möglicher Übergang zur Schiene), Wochen 10-12 (Beginn der Physiotherapie und Übergang vom Stiefel), Wochen 13-25 (progressive Kräftigung) und Woche 26+ (schrittweise Rückkehr zu normalen Aktivitäten einschließlich Sport).",
+        },
+        {
+          question:
+            "Welche Vorsichtsmaßnahmen sollte ich treffen, um eine Wiederruptur während der Erholung zu verhindern?",
+          answer:
+            "Um eine Wiederruptur zu verhindern, befolgen Sie strikt die Anweisungen Ihres Gesundheitsdienstleisters, besonders während der ersten 12 Wochen, wenn die Sehne am verletzlichsten ist. Entfernen Sie den Stiefel nicht, es sei denn, es wird angewiesen, vermeiden Sie ungestütztes Gehen und überstürzen Sie den Rehabilitationsprozess nicht. Beim Beginn der Physiotherapie vermeiden Sie aggressive Dehnung und befolgen Ihr Übungsprogramm sorgfältig.",
+        },
+        {
+          question: "Wie erkenne ich, ob meine Achillessehne richtig heilt?",
+          answer:
+            "Ihr Gesundheitsdienstleister wird die Heilung durch regelmäßige Kontrollen überwachen, besonders während der ersten 9 Wochen. Zeichen ordnungsgemäßer Heilung umfassen verringerte Schmerzen, Fähigkeit zur Gewichtsbelastung wie im Stiefel empfohlen und schrittweise Verbesserung der Bewegung wenn erlaubt. Denken Sie jedoch daran, dass es KEINEN TEIL-RISS gibt - befolgen Sie immer die Anleitung Ihres Spezialisten für ordnungsgemäße Heilungsbewertung.",
+        },
+      ]}
+    />
+  </section>
+</FAQsLayout>
+
+<style>
+  .li-heading {
+    @apply mt-2 pb-1 font-semibold text-neutral-700 list-none;
+  }
+
+  :global(.timeline-block:hover) {
+    @apply scale-[1.02] transition-transform duration-200 transform;
+  }
+
+  :global(.timeline-badge) {
+    @apply shadow-md;
+  }
+
+  @media print {
+    .timeline-block {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .timeline-block {
+      margin-left: 1rem;
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

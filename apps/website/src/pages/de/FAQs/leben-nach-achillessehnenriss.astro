@@ -1,0 +1,136 @@
+---
+import FaqSchemaAccordion from "../../../components/research/FaqSchemaAccordion.astro";
+import NightSplintAdvert from "../../../components/products/night-splint/NightSplintAdvert.astro";
+import FAQsLayout from "../../../layouts/FAQsLayout.astro";
+import { getAlternateLanguages } from "../../../config/languages";
+
+// Language configuration
+const currentPath = Astro.url.pathname;
+const alternateLanguages = getAlternateLanguages(currentPath, "de");
+---
+
+<FAQsLayout
+    title="Leben nach Achillessehnenriss: Erholungstipps, Gehzeitplan & Aktivitätsleitfaden"
+    description="Detaillierte Beratung zum Leben nach einem Achillessehnenriss: Gehzeitplan, Rückkehr-zum-Sport-Richtlinien, Rückkehr zur Arbeit und Vermeidung von Wiederruptur – plus praktische Erholungstipps."
+    lang="de"
+    alternateLanguages={alternateLanguages}
+>
+    <section id="faq-slide" class="faq slide">
+        <div class="questions">
+            <h2>Finden Sie Ihre Antwort:</h2>
+            <a href="#q1">
+                <h3>Leben nach Achillessehnenriss Erholungs-Zeitplan</h3>
+            </a>
+            <a href="#q2">
+                <h3>Wann kann ich nach einem Achillessehnenriss zum Sport zurückkehren?</h3>
+            </a>
+            <a href="#q3">
+                <h3>Wann kann ich nach einem Achillessehnenriss zur Arbeit zurückkehren?</h3>
+            </a>
+            <a href="#q4">
+                <h3>Wann kann ich nach einem Achillessehnenriss gehen?</h3>
+            </a>
+            <a href="#q5">
+                <h3>Wie man eine Wiederruptur vermeidet</h3>
+            </a>
+        </div>
+        <div class="answers">
+            <div id="q1"></div>
+            <h2>
+                Leben nach Achillessehnenriss – tägliche Aktivitäten & Erholungserwartungen
+            </h2>
+            <p>
+                Richtig behandelt heilen Achillessehnenrisse sehr gut. Für einen
+                detaillierten <a
+                    href="/de/FAQs/achillessehnenriss-heilungsverlauf"
+                    class="text-primary underline"
+                    >wöchentlichen Achillessehnen-Erholungsplan</a
+                >, siehe unseren speziellen Leitfaden. Die vollständige Erholung
+                dauert jedoch lange Zeit. Erwarten Sie, etwa 10 Wochen einen
+                Stiefel oder ähnliche Stütze zu tragen, gefolgt von Monaten der
+                Rehabilitation zum Wiederaufbau der Wadenkraft. Viele Patienten
+                berichten von Aktivitätseinschränkungen für mindestens sechs
+                Monate und dass die wahre vollständige Erholung ein Jahr oder
+                mehr dauern kann. Auch langfristig kann der Wadenmuskel auf der
+                verletzten Seite etwas kleiner bleiben und die geheilte Sehne
+                dicker als vor der Verletzung, obwohl beide weiterhin normal
+                funktionieren.
+            </p>
+            <div id="q2"></div>
+            <h2>Wann kann ich nach einem Achillessehnenriss zum Sport zurückkehren?</h2>
+            <p>
+                Das hängt von der Sportart ab, aber die meisten
+                Rehabilitationsprogramme erreichen den Punkt, an dem Sie nach 6
+                Monaten wieder teilnehmen können.
+            </p>
+            <div id="q3"></div>
+            <h2>
+                Wann kann ich nach einem Achillessehnenriss zur Arbeit oder
+                Bürotätigkeiten zurückkehren?
+            </h2>
+            <p>
+                Das hängt von der genauen Art der Arbeit ab, aber die meisten
+                Rehabilitationsprogramme erreichen den Punkt, an dem Sie nach 6
+                Monaten wieder arbeiten können.
+            </p>
+            <div id="q4"></div>
+            <h2>Wann kann ich nach einem Achillessehnenriss gehen?</h2>
+            <p>
+                Sobald Sie in einem geeigneten Stiefel unterstützt werden, mit
+                dem Fuß in einer Zehenspitzenposition, können (und sollten) Sie
+                gehen. Krücken dienen nur zur Unterstützung des Gleichgewichts.
+                Ein Schuh mit einer großzügigen Ferse am anderen Fuß hilft, Sie
+                auszugleichen. Das Gehen auf dem verletzten Bein im Stiefel ist
+                gut für die Heilung. Die Gehbewegung hilft den Sehnenenden, sich
+                auf effiziente und starke Weise zu verbinden. Dieses frühe Gehen
+                hat zu weniger Wiederrupturen im Vergleich zu früheren Regimen
+                geführt, als die Behandlung Monate von Gipsverbänden und
+                einbeiniges Hüpfen mit Krücken erforderte.
+            </p>
+            <div id="q5"></div>
+            <h2>Wie man eine Wiederruptur vermeidet</h2>
+            <p>
+                Tragen Sie den Stiefel wie angewiesen für die vollen 10 Wochen.
+                Nehmen Sie keine Abkürzungen. Ihre Erholung ist wie das Spiel
+                "Schlangen und Leitern" – jede Woche bringt Sie näher zum Ziel.
+                Aber ein kleiner Fehler ist wie auf die große Schlange zu
+                treten, die Sie direkt zum Anfang zurückbringt, mit einer
+                Wiederruptur. Wenn Sie ihn zum Waschen abnehmen, setzen Sie sich
+                zuerst; behalten Sie die Zehenspitzenposition bei; beugen Sie
+                den Knöchel nicht nach oben, um Ihre Zehen zum Waschen oder
+                Trocknen zu erreichen. Wenn Sie nicht flexibel genug sind,
+                holen Sie sich Hilfe. Gehen Sie nicht davon aus, dass Sie in
+                Ordnung sind und in die Dusche hüpfen. Ein winziger Ausrutscher
+                kann verheerend sein.
+            </p>
+        </div>
+    </section>
+
+    <NightSplintAdvert />
+
+    <FaqSchemaAccordion
+        faqs={[
+            {
+                question: "Wann kann ich nach einem Achillessehnenriss gehen?",
+                answer: "Sie können und sollten gehen, sobald Sie in einem geeigneten Stiefel unterstützt werden, der Ihren Fuß in einer Zehenspitzenposition hält. Krücken werden nur für das Gleichgewicht benötigt. Das Gehen auf dem verletzten Bein während des Tragens des Stiefels ist vorteilhaft für die Heilung, da es den Sehnenenden hilft, sich effizient und stark zu verbinden. Ein Schuh mit einer großzügigen Ferse am unverletzten Fuß hilft, Sie auf gleicher Höhe zu halten. Dieser frühe Gehansatz hat zu weniger Wiederrupturen im Vergleich zu älteren Behandlungen geführt, die Monate von Gipsverbänden und einbeiniges Hüpfen erforderten.",
+            },
+            {
+                question: "Wie lange dauert die Erholung von einem Achillessehnenriss?",
+                answer: "Die vollständige Erholung von einem Achillessehnenriss dauert normalerweise etwa ein Jahr. Sie müssen etwa 10 Wochen einen Stiefel oder ähnliche Stütze tragen. Danach dauert es mehrere Monate, um die Muskelkraft zurückzugewinnen, wobei die meisten Menschen mindestens 6 Monate Aktivitätseinschränkungen erfahren. Auch langfristig kann der Wadenmuskel auf der verletzten Seite etwas kleiner bleiben, ist aber stark genug für normale Funktion. Die geheilte Sehne wird anfangs dicker sein, verbessert sich aber über Monate bis Jahre.",
+            },
+            {
+                question: "Wann kann ich zu Sport und körperlicher Arbeit zurückkehren?",
+                answer: "Die meisten Rehabilitationsprogramme erlauben die Rückkehr zu Sport und körperlicher Arbeit nach 6 Monaten. Der genaue Zeitpunkt hängt jedoch von der spezifischen Sportart oder Art der Arbeit ab. Die vollständige Erholung dauert normalerweise etwa ein Jahr.",
+            },
+            {
+                question: "Wie kann ich eine Wiederruptur meiner Achillessehne verhindern?",
+                answer: "Um eine Wiederruptur zu verhindern, ist es entscheidend, den Stiefel wie angewiesen für die vollen 10 Wochen zu tragen, ohne Abkürzungen zu nehmen. Beim Entfernen des Stiefels (z.B. zum Waschen) setzen Sie sich immer zuerst und behalten die Zehenspitzenposition bei. Beugen Sie den Knöchel nicht nach oben, um Ihre Zehen zu erreichen. Wenn Sie nicht flexibel genug sind, holen Sie sich Hilfe, anstatt eine Verletzung zu riskieren. Auch ein kleiner Ausrutscher kann eine Wiederruptur verursachen und Sie zwingen, den gesamten Erholungsprozess neu zu starten.",
+            },
+            {
+                question:
+                    "Was sind die langfristigen Auswirkungen eines Achillessehnenrisses?",
+                answer: "Obwohl Achillessehnenrisse bei ordnungsgemäßer Behandlung allgemein gut heilen, gibt es einige langfristige Veränderungen. Der Wadenmuskel auf der verletzten Seite bleibt normalerweise etwas kleiner als vorher, behält aber normale Funktion. Die geheilte Sehne bleibt etwas dicker als das Original, obwohl sich diese Dicke über Monate bis Jahre allmählich verbessert. Trotz dieser Veränderungen kehren die meisten Menschen zu normalen Aktivitäten zurück.",
+            },
+        ]}
+    />
+</FAQsLayout>
