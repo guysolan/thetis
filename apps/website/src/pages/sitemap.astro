@@ -1,8 +1,19 @@
-﻿---
+---
 import Layout from "../layouts/Layout.astro";
+import { getRoutesByLanguage } from "../content/routes";
+import { getLanguageFromPath } from "../utils/language";
 
-import { pages } from "../content/pages.tsx";
-import { articles } from "../content/articles.tsx";
+// Get current language and routes
+const currentPath = Astro.url.pathname;
+const currentLang = getLanguageFromPath(currentPath);
+const routes = getRoutesByLanguage(currentLang);
+
+// Separate routes by category
+const pages = routes.filter(route => 
+  !route.slug.startsWith('FAQs/') && 
+  !route.slug.startsWith('video/')
+);
+const articles = routes.filter(route => route.slug.startsWith('FAQs/'));
 ---
 
 <Layout

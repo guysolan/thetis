@@ -1,0 +1,71 @@
+---
+import FormLayout from "@/layouts/FormLayout.astro";
+import { getLocalizedRoute } from "../../utils/language";
+
+// Get German content for the contact page
+const contactRoute = getLocalizedRoute("contact", "de");
+const title = contactRoute?.title || "Kontaktieren Sie uns";
+const description = contactRoute?.description || "Kontaktieren Sie uns für weitere Informationen.";
+---
+
+<FormLayout
+    title={title}
+    description={description}
+    lang="de"
+    slug="contact"
+>
+    <div class="mx-auto py-8 px-4 container">
+        <h1 class="mb-6 font-bold text-3xl text-center">{title}</h1>
+        <p class="mb-8 text-center text-gray-600">{description}</p>
+        
+        <div class="mx-auto max-w-md">
+            <form class="space-y-4">
+                <div>
+                    <label for="name" class="block mb-2 font-medium text-sm text-gray-700">
+                        Name
+                    </label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        class="px-3 py-2 border border-gray-300 rounded-md w-full focus:ring-primary focus:border-primary"
+                        required
+                    />
+                </div>
+                
+                <div>
+                    <label for="email" class="block mb-2 font-medium text-sm text-gray-700">
+                        E-Mail
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="px-3 py-2 border border-gray-300 rounded-md w-full focus:ring-primary focus:border-primary"
+                        required
+                    />
+                </div>
+                
+                <div>
+                    <label for="message" class="block mb-2 font-medium text-sm text-gray-700">
+                        Nachricht
+                    </label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="4"
+                        class="px-3 py-2 border border-gray-300 rounded-md w-full focus:ring-primary focus:border-primary"
+                        required
+                    ></textarea>
+                </div>
+                
+                <button
+                    type="submit"
+                    class="bg-primary hover:bg-primary/90 px-6 py-2 rounded-md w-full text-white transition-colors"
+                >
+                    Nachricht senden
+                </button>
+            </form>
+        </div>
+    </div>
+</FormLayout>

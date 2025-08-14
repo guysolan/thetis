@@ -14,14 +14,26 @@ import EmailSubscribe from "../components/CTA/EmailSubscribe.astro";
 import GetInTouch from "../components/CTA/GetInTouch.astro";
 import NightSplintFAQs from "../components/NightSplintFAQs";
 import BuyNowCallout from "../components/products/night-splint/BuyNowCallout.astro";
+import { getCurrentLanguage, getLocalizedRoute } from "../utils/language";
+
+// Get current language and localized content
+const currentPath = Astro.url.pathname;
+const currentLang = getCurrentLanguage(currentPath);
+const homeRoute = getLocalizedRoute("", currentLang.code);
+
+// Fallback titles and descriptions if route not found
+const title = homeRoute?.title || "Thetis Medical - Achilles Splint Specialists";
+const description = homeRoute?.description || "Medical device company specializing in splints for injured Achilles Tendons. We sell an Achilles Rupture Splint and a Trauma Splint.";
 ---
 
 <ThetisSchema slot="head" />
 
 <Layout
-        title="Thetis Medical - Achilles Splint Specialists"
-        description="Medical device company specializing in splints for injured Achilles Tendons. We sell an Achilles Rupture Splint and a Trauma Splint."
+        title={title}
+        description={description}
         image="https://thetismedical.com/images/night-splint.png"
+        slug=""
+        lang={currentLang.code}
 >
         <main
                 class="flex flex-col justify-center items-center bg-white dark:bg-black mx-auto mb-24 w-full"
