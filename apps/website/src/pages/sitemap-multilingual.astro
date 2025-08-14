@@ -1,0 +1,83 @@
+---
+import { languages } from "../config/languages";
+
+// Define your main pages (without language prefix)
+const mainPages = [
+    "/",
+    "/FAQs/achilles-rupture-rehabilitation",
+    "/FAQs/achilles-rupture-timeline",
+    "/splint",
+    "/achilles-ruptures",
+    "/recovery-pathway",
+    "/evidence-based-recovery",
+    "/buy-now",
+    "/how-to-buy",
+    "/partners",
+    "/professionals",
+    "/return-policy",
+    "/returns",
+    "/request-a-return",
+    "/size-guide",
+    "/order-sample",
+    "/book-demo",
+    "/review",
+    "/thanks",
+    "/landing",
+    "/clinical-information",
+    "/evidence",
+    "/night-splint",
+    "/testimonials",
+    "/reviews",
+    "/single-review",
+    "/achilles-rupture-advice",
+    "/become-a-partner",
+    "/order-wholesale",
+    "/contact",
+    "/partnerships",
+    "/trauma-splint",
+];
+
+// Generate URLs for all languages
+const allUrls = [];
+
+for (const page of mainPages) {
+    for (const lang of languages) {
+        const url = `${lang.dir}${page === "/" ? "" : page}`;
+        allUrls.push({
+            url,
+            lang: lang.hreflang,
+            lastmod: new Date().toISOString(),
+            changefreq: "weekly",
+            priority: page === "/" ? "1.0" : "0.8",
+        });
+    }
+}
+
+// Create XML sitemap
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${allUrls
+    .map(
+        (item) => `  <url>
+    <loc>https://thetismedical.com${item.url}</loc>
+    <lastmod>${item.lastmod}</lastmod>
+    <changefreq>${item.changefreq}</changefreq>
+    <priority>${item.priority}</priority>
+${languages
+    .map(
+        (lang) =>
+            `    <xhtml:link rel="alternate" hreflang="${lang.hreflang}" href="https://thetismedical.com${lang.dir}${item.url.replace(/^\/[a-z]{2}/, "") || ""}" />`,
+    )
+    .join("\n")}
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thetismedical.com${item.url.replace(/^\/[a-z]{2}/, "") || ""}" />
+  </url>`,
+    )
+    .join("\n")}
+</urlset>`;
+
+// Set content type and return sitemap
+Astro.response.headers.set("Content-Type", "application/xml");
+---
+
+{sitemap}

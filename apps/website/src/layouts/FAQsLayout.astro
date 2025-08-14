@@ -2,9 +2,19 @@
 export interface Props {
     title: string;
     description: string;
+    lang?: string;
+    alternateLanguages?: Array<{
+        lang: string;
+        url: string;
+    }>;
 }
 
-const { title, description } = Astro.props;
+const {
+    title,
+    description,
+    lang = "en",
+    alternateLanguages = [],
+} = Astro.props;
 
 import Layout from "./Layout.astro";
 import OtherArticles from "@/components/OtherArticles.astro";
@@ -16,6 +26,8 @@ import ShareControls from "@/components/research/ShareControls";
     title={title}
     description={description}
     image="https://thetismedical.com/images/achilles-drawing-image.png"
+    lang={lang}
+    alternateLanguages={alternateLanguages}
 >
     <main class="relative flex flex-col gap-4 print:w-full print:max-w-none">
         <Article title={title} />

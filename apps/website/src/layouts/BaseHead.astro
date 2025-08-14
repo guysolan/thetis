@@ -9,6 +9,11 @@ export interface Props {
     title: string;
     description: string;
     image?: string;
+    lang?: string;
+    alternateLanguages?: Array<{
+        lang: string;
+        url: string;
+    }>;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -17,6 +22,8 @@ const {
     title,
     description,
     image = `${Astro.site}/images/night_splint_bed_top_square.jpg`,
+    lang = "en",
+    alternateLanguages = [],
 } = Astro.props;
 ---
 
@@ -26,6 +33,16 @@ const {
     name="viewport"
     content="width=device-width, initial-scale=1, minimum-scale=1"
 />
+
+<!-- Language and Localization -->
+<meta name="language" content={lang} />
+<meta property="og:locale" content={lang} />
+
+<!-- Hreflang tags for multilingual SEO -->
+{alternateLanguages.map(({ lang: altLang, url }) => (
+    <link rel="alternate" hreflang={altLang} href={url} />
+))}
+<link rel="alternate" hreflang="x-default" href={canonicalURL} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

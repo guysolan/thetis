@@ -15,7 +15,40 @@
       "2021": 14,
       "unit": "percent"
     },
-    "key_finding": "Nationwide register: incidence rising, surgical management fell to 14%"
+    "key_finding": "Nationwide register: incidence rising, surgical management fell to 14%",
+    "is_accurate_gpt_deep_research": true,
+    "authors": [
+      {
+        "name": "Simon Svedman",
+        "linkedin": "",
+        "website": "https://ki.se/en/people/simon-svedman",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Alejandro Marcano",
+        "linkedin": "https://www.linkedin.com/in/alemarcmd",
+        "website": "https://ki.se/en/people/alejandro-marcano",
+        "speciality": "Orthopaedic surgery, epidemiology"
+      },
+      {
+        "name": "Paul W. Ackermann",
+        "linkedin": "https://www.linkedin.com/in/paulwackermann",
+        "website": "https://ki.se/en/people/paul-ackermann",
+        "speciality": "Orthopaedic surgery, sports medicine"
+      },
+      {
+        "name": "Li Felländer-Tsai",
+        "linkedin": "",
+        "website": "https://ki.se/en/people/li-fellander-tsai",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Hans Erik Berg",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      }
+    ]
   },
   {
     "country": "Denmark",
@@ -33,7 +66,34 @@
       "2013": 6.3,
       "unit": "per 100,000 person-years"
     },
-    "key_finding": "Incidence up, surgical incidence down"
+    "key_finding": "Incidence up, surgical incidence down",
+    "is_accurate_gpt_deep_research": true,
+    "authors": [
+      {
+        "name": "Ann Ganestam",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Thomas Kallemose",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Epidemiology, biostatistics"
+      },
+      {
+        "name": "Anders Troelsen",
+        "linkedin": "",
+        "website": "https://researchprofiles.ku.dk/en/persons/anders-troelsen",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Kristoffer Weisskirchner Barfod",
+        "linkedin": "",
+        "website": "https://researchprofiles.ku.dk/en/persons/kristoffer-weisskirchner-barfod",
+        "speciality": "Orthopaedic surgery"
+      }
+    ]
   },
   {
     "country": "Finland",
@@ -51,7 +111,46 @@
       "2019": 4.9,
       "unit": "per 100,000 person-years"
     },
-    "key_finding": "Incidence almost doubled; surgery incidence fell 64%"
+    "key_finding": "Incidence almost doubled; surgery incidence fell 64%",
+    "is_accurate_gpt_deep_research": true,
+    "authors": [
+      {
+        "name": "Oskari Leino",
+        "linkedin": "",
+        "website": "https://www.utu.fi/en/people/oskari-leino",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Heli Keskinen",
+        "linkedin": "",
+        "website": "https://www.utu.fi/en/people/heli-keskinen",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Inari Laaksonen",
+        "linkedin": "",
+        "website": "https://www.utu.fi/en/people/inari-laaksonen",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Keijo Mäkelä",
+        "linkedin": "",
+        "website": "https://www.utu.fi/en/people/keijo-makela",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Eliisa Löyttyniemi",
+        "linkedin": "",
+        "website": "https://www.utu.fi/en/people/eliisa-loyttyniemi",
+        "speciality": "Biostatistics"
+      },
+      {
+        "name": "Elina Ekman",
+        "linkedin": "",
+        "website": "https://www.utu.fi/en/people/elina-ekman",
+        "speciality": "Orthopaedic surgery"
+      }
+    ]
   },
   {
     "country": "United Kingdom",
@@ -68,7 +167,58 @@
       "overall": 2.9,
       "unit": "percent"
     },
-    "key_finding": ">97% of ruptures managed non-surgically in prospective ED cohort"
+    "key_finding": ">97% of ruptures managed non-surgically in prospective ED cohort",
+    "is_accurate_gpt_deep_research": true,
+    "authors": [
+      {
+        "name": "Samuel Briggs-Price",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Physiotherapy, sports rehabilitation"
+      },
+      {
+        "name": "Jitendra Mangwani",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery (foot & ankle)"
+      },
+      {
+        "name": "Linzy Houchen-Wolloff",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Physiotherapy (rehabilitation research)"
+      },
+      {
+        "name": "Gayatri Modha",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Emergency medicine"
+      },
+      {
+        "name": "Emma Fitzpatrick",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Murtaza Faizi",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Jenna Shepherd",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Seth O'Neill",
+        "linkedin": "",
+        "website": "https://le.ac.uk/people/seth-o-neill",
+        "speciality": "Physiotherapy, sports medicine"
+      }
+    ]
   },
   {
     "country": "Canada",
@@ -86,7 +236,46 @@
       "2013": 9.2,
       "unit": "percent"
     },
-    "key_finding": "Surgical proportion dropped >50% after 2009"
+    "key_finding": "Surgical proportion dropped >50% after 2009",
+    "is_accurate_gpt_deep_research": true,
+    "authors": [
+      {
+        "name": "U Sheth",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Daniel Wasserstein",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Richard Jenkinson",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Ranayn Moineddin",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Epidemiology"
+      },
+      {
+        "name": "Harish Kreder",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Sheila B. Jaglal",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Public health, epidemiology"
+      }
+    ]
   },
   {
     "country": "United States",
@@ -105,7 +294,40 @@
       "highest_risk_female": "40-59 years (1.2/100k)",
       "sport_mechanism_percentage": 81.9
     },
-    "key_finding": "Largest rise in middle-aged patients (40-59 years); 81.9% sport-related with basketball most common"
+    "key_finding": "Largest rise in middle-aged patients (40-59 years); 81.9% sport-related with basketball most common",
+    "is_accurate_gpt_deep_research": true,
+    "authors": [
+      {
+        "name": "Nicholas J. Lemme",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Neill Y. Li",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Steven F. DeFroda",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Justin Kleiner",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Brett D. Owens",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      }
+    ]
   },
   {
     "country": "South Korea",
@@ -114,16 +336,43 @@
     "source": "https://doi.org/10.4055/cios20255",
     "sample_size": 112350,
     "incidence": {
-      "2009": 19.25,
+      "2009": 20.75,
       "2017": 26.53,
-      "trend": "+38% per 100,000 person-years"
+      "trend": "+28% per 100,000 person-years"
     },
     "surgical_incidence": {
-      "2009": 8.10,
+      "2009": 8.1,
       "2017": 10.38,
       "unit": "per 100,000 person-years"
     },
-    "key_finding": "Both rupture and surgery incidences rising"
+    "key_finding": "Both rupture and surgery incidences rising",
+    "is_accurate_gpt_deep_research": false,
+    "authors": [
+      {
+        "name": "Hong-Gi Park",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Dukyoung Youn",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Epidemiology, data analysis"
+      },
+      {
+        "name": "Jong-Min Baik",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Jae Ho Hwang",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      }
+    ]
   },
   {
     "country": "Japan",
@@ -134,43 +383,104 @@
     "incidence": {
       "2010": 12.8,
       "2017": 13.9,
-      "trend": "Stable incidence per 100,000 person-years"
+      "trend": "stable incidence per 100,000 person-years"
     },
     "surgical_rate": {
       "2010": 67,
       "2017": 72,
       "unit": "percent"
     },
-    "key_finding": "~70% of ruptures treated surgically; proportion increasing"
+    "key_finding": "~70% of ruptures treated surgically; proportion increasing",
+    "is_accurate_gpt_deep_research": true,
+    "authors": [
+      {
+        "name": "Satoshi Yamaguchi",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Seiji Kimura",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Ryuichiro Akagi",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Kensuke Yoshimura",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Biostatistics"
+      },
+      {
+        "name": "Yohei Kawasaki",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Biostatistics"
+      },
+      {
+        "name": "Yuki Shiko",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Biostatistics"
+      },
+      {
+        "name": "Takahisa Sasho",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      },
+      {
+        "name": "Seiji Ohtori",
+        "linkedin": "",
+        "website": "",
+        "speciality": "Orthopaedic surgery"
+      }
+    ]
   },
   {
     "country": "Australia",
     "code": "AU",
     "verified": false,
-    "note": "No nation-level registry study; only regional data currently available"
+    "note": "No nation-level registry study; only regional data currently available",
+    "is_accurate_gpt_deep_research": false,
+    "authors": []
   },
   {
     "country": "France",
     "code": "FR",
     "verified": false,
-    "note": "Only multicentre cohort (n=405) – lacks population incidence"
+    "note": "Only multicentre cohort (n=405) – lacks population incidence",
+    "is_accurate_gpt_deep_research": false,
+    "authors": []
   },
   {
     "country": "Germany",
     "code": "DE",
     "verified": false,
-    "note": "Clinic survey data exist but no national registry incidence"
+    "note": "Clinic survey data exist but no national registry incidence",
+    "is_accurate_gpt_deep_research": false,
+    "authors": []
   },
   {
     "country": "Italy",
     "code": "IT",
     "verified": false,
-    "note": "Procedure-only registry; incidence of rupture not reported"
+    "note": "Procedure-only registry; incidence of rupture not reported",
+    "is_accurate_gpt_deep_research": false,
+    "authors": []
   },
   {
     "country": "New Zealand",
     "code": "NZ",
     "verified": false,
-    "note": "Single-centre series available; national epidemiology pending"
+    "note": "Single-centre series available; national epidemiology pending",
+    "is_accurate_gpt_deep_research": false,
+    "authors": []
   }
 ]

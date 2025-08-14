@@ -1,0 +1,218 @@
+---
+import FAQsLayout from "../../../layouts/FAQsLayout.astro";
+import FaqSchemaAccordion from "../../../components/research/FaqSchemaAccordion.astro";
+import NightSplintAdvert from "../../../components/products/night-splint/NightSplintAdvert.astro";
+import { getAlternateLanguages } from "../../../config/languages";
+
+// Language configuration
+const currentPath = Astro.url.pathname;
+const alternateLanguages = getAlternateLanguages(currentPath, "de");
+---
+
+<FAQsLayout
+    title="Was passiert wenn meine Achilles-Sehne gerissen ist? Symptome, Behandlung & Erholung"
+    description="Erfahren Sie was bei einem Achillessehnenriss passiert - von den ersten Symptomen über die Behandlung bis zur vollständigen Erholung. Vollständiger Leitfaden für Patienten."
+    lang="de"
+    alternateLanguages={alternateLanguages}
+>
+    <section id="faq-slide" class="faq slide">
+        <div class="questions">
+            <h2>Finden Sie Ihre Antwort:</h2>
+            <a href="#q1">
+                <h3>Was passiert sofort nach einem Achillessehnenriss?</h3>
+            </a>
+            <a href="#q2">
+                <h3>Wie fühlt sich ein Achillessehnenriss an?</h3>
+            </a>
+            <a href="#q3">
+                <h3>Kann ich mit einem gerissenen Achilles gehen?</h3>
+            </a>
+            <a href="#q4">
+                <h3>Wie wird ein Achillessehnenriss behandelt?</h3>
+            </a>
+            <a href="#q5">
+                <h3>Brauche ich eine Operation?</h3>
+            </a>
+            <a href="#q6">
+                <h3>Wie lange dauert die Erholung?</h3>
+            </a>
+            <a href="#q7">
+                <h3>Kann ich wieder Sport treiben?</h3>
+            </a>
+        </div>
+        <div class="answers">
+            <div id="q1"></div>
+            <h2>Was passiert sofort nach einem Achillessehnenriss?</h2>
+            <p>
+                Ein Achillessehnenriss ist eine ernste Verletzung, die sofortige
+                Aufmerksamkeit erfordert. Sofort nach dem Riss werden Sie
+                wahrscheinlich einen plötzlichen, scharfen Schmerz in der Wade
+                spüren, als ob Sie von hinten getreten wurden. Sie werden nicht
+                in der Lage sein, auf den Zehenspitzen zu stehen oder zu gehen.
+            </p>
+            <p>
+                Die ersten Schritte sind:
+                <br /><br />
+                • <strong>Ruhigstellung:</strong> Legen Sie sich hin und heben Sie
+                das Bein an<br />
+                • <strong>Eis:</strong> Kühlen Sie die verletzte Stelle 20 Minuten
+                lang<br />
+                • <strong>Notfallversorgung:</strong> Suchen Sie sofort einen Arzt
+                auf<br />
+                • <strong>Keine Belastung:</strong> Versuchen Sie nicht zu gehen
+                oder zu stehen
+            </p>
+
+            <div id="q2"></div>
+            <h2>Wie fühlt sich ein Achillessehnenriss an?</h2>
+            <p>
+                Ein Achillessehnenriss fühlt sich typischerweise an wie:
+                <br /><br />
+                • <strong>Plötzlicher Schmerz:</strong> Wie ein Tritt oder Schlag
+                in die Wade<br />
+                • <strong>Knallendes Geräusch:</strong> Viele Patienten hören ein
+                "Pop" oder "Snap"<br />
+                • <strong>Schwäche:</strong> Unfähigkeit, das Bein zu belasten<br
+                />
+                • <strong>Schwellung:</strong> Schnelle Schwellung um die Ferse<br
+                />
+                • <strong>Empfindlichkeit:</strong> Berührungsempfindlichkeit in
+                der Wade
+            </p>
+            <p>
+                Der Schmerz kann zunächst stark sein, aber manchmal nachlassen.
+                Das bedeutet NICHT, dass die Verletzung nicht ernst ist - Sie
+                sollten trotzdem sofort einen Arzt aufsuchen.
+            </p>
+
+            <div id="q3"></div>
+            <h2>Kann ich mit einem gerissenen Achilles gehen?</h2>
+            <p>
+                <strong>Nein, Sie sollten nicht versuchen zu gehen.</strong> Ein
+                Achillessehnenriss macht es unmöglich, normal zu gehen, da die Sehne
+                für die Kraftübertragung vom Muskel zum Fuß verantwortlich ist.
+            </p>
+            <p>
+                Wenn Sie versuchen zu gehen, können Sie:
+                <br /><br />
+                • Die Verletzung verschlimmern<br />
+                • Andere Muskeln und Gelenke überlasten<br />
+                • Das Risiko weiterer Komplikationen erhöhen
+            </p>
+            <p>
+                Verwenden Sie Krücken oder einen Rollstuhl, bis Sie von einem
+                Arzt untersucht wurden.
+            </p>
+
+            <div id="q4"></div>
+            <h2>Wie wird ein Achillessehnenriss behandelt?</h2>
+            <p>
+                Die Behandlung hängt von der Schwere der Verletzung und Ihrem
+                Lebensstil ab:
+                <br /><br />
+                <strong>Konservative Behandlung (ohne Operation):</strong><br />
+                • 10-12 Wochen in einem speziellen Stiefel<br />
+                • Allmähliche Reduzierung der Fersenkeile<br />
+                • Physiotherapie nach der Immobilisierung<br />
+                • Sanfte Übungen zur Stärkung der Wade
+            </p>
+            <p>
+                <strong>Chirurgische Behandlung:</strong><br />
+                • Reparatur der gerissenen Sehne<br />
+                • 6-8 Wochen Immobilisierung<br />
+                • Intensive Physiotherapie<br />
+                • Schnellere Rückkehr zur Aktivität
+            </p>
+
+            <div id="q5"></div>
+            <h2>Brauche ich eine Operation?</h2>
+            <p>
+                Nicht jeder Achillessehnenriss erfordert eine Operation. Die
+                Entscheidung hängt von ab:
+                <br /><br />
+                • <strong>Ihr Alter:</strong> Jüngere, aktive Patienten profitieren
+                oft von der Operation<br />
+                • <strong>Ihr Aktivitätsniveau:</strong> Sportler brauchen oft eine
+                Operation<br />
+                • <strong>Die Art des Risses:</strong> Komplette Risse werden oft
+                operiert<br />
+                • <strong>Ihre Gesundheit:</strong> Bestehende Erkrankungen können
+                die Entscheidung beeinflussen
+            </p>
+            <p>
+                Ihr Arzt wird Ihnen die beste Option für Ihre spezifische
+                Situation empfehlen.
+            </p>
+
+            <div id="q6"></div>
+            <h2>Wie lange dauert die Erholung?</h2>
+            <p>
+                Die Erholung von einem Achillessehnenriss ist ein langer
+                Prozess:
+                <br /><br />
+                <strong>Phase 1 (Wochen 0-10):</strong> Immobilisierung im Stiefel<br
+                />
+                <strong>Phase 2 (Wochen 10-16):</strong> Beginn der Physiotherapie<br
+                />
+                <strong>Phase 3 (Monate 4-6):</strong> Stärkung und Rückkehr zur
+                Aktivität<br />
+                <strong>Phase 4 (Monate 6-12):</strong> Vollständige Erholung
+            </p>
+            <p>
+                Die Gesamterholungszeit beträgt normalerweise 6-12 Monate,
+                abhängig von der Behandlung und Ihrem Engagement bei der
+                Physiotherapie.
+            </p>
+
+            <div id="q7"></div>
+            <h2>Kann ich wieder Sport treiben?</h2>
+            <p>
+                <strong
+                    >Ja, die meisten Menschen können wieder Sport treiben,</strong
+                > aber es braucht Zeit und Geduld. Die Rückkehr zum Sport erfolgt
+                schrittweise:
+                <br /><br />
+                • <strong>Monat 3-4:</strong> Sanfte Übungen und Gehen<br />
+                • <strong>Monat 4-6:</strong> Joggen und leichte Aktivitäten<br
+                />
+                • <strong>Monat 6-9:</strong> Sportartspezifisches Training<br
+                />
+                • <strong>Monat 9-12:</strong> Vollständige Rückkehr zum Sport
+            </p>
+            <p>
+                Wichtig: Folgen Sie immer dem Rat Ihres Physiotherapeuten und
+                überstürzen Sie nichts. Eine zu frühe Rückkehr kann zu einem
+                erneuten Riss führen.
+            </p>
+        </div>
+    </section>
+
+    <NightSplintAdvert />
+
+    <FaqSchemaAccordion
+        faqs={[
+            {
+                question:
+                    "Was sind die ersten Anzeichen eines Achillessehnenrisses?",
+                answer: "Plötzlicher scharfer Schmerz in der Wade, oft mit einem 'Pop'-Geräusch, Unfähigkeit auf den Zehenspitzen zu stehen, und Schwäche im betroffenen Bein.",
+            },
+            {
+                question: "Kann ein Achillessehnenriss von selbst heilen?",
+                answer: "Nein, ein Achillessehnenriss heilt nicht von selbst richtig. Ohne Behandlung kann es zu dauerhafter Schwäche und Funktionsverlust kommen.",
+            },
+            {
+                question: "Wie lange muss ich im Stiefel bleiben?",
+                answer: "Normalerweise 10-12 Wochen im Stiefel, mit schrittweiser Reduzierung der Fersenkeile während der Erholung.",
+            },
+            {
+                question:
+                    "Wann kann ich nach einem Achillessehnenriss wieder laufen?",
+                answer: "Das Laufen beginnt normalerweise nach 3-4 Monaten, aber nur unter Anleitung Ihres Physiotherapeuten und nach ausreichender Stärkung.",
+            },
+            {
+                question: "Wie hoch ist das Risiko eines erneuten Risses?",
+                answer: "Das Risiko eines erneuten Risses beträgt etwa 5-10%, besonders in den ersten 6 Monaten nach der Verletzung. Richtige Rehabilitation reduziert dieses Risiko.",
+            },
+        ]}
+    />
+</FAQsLayout>

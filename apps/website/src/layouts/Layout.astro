@@ -7,12 +7,25 @@ export interface Props {
   hideFooter?: boolean;
   logoColor?: "black" | "white";
   name?: string;
+  lang?: string;
+  alternateLanguages?: Array<{
+    lang: string;
+    url: string;
+  }>;
 }
 
 import { cn } from "../lib/utils";
 
-const { title, description, image, bodyClass, hideFooter, logoColor } =
-  Astro.props;
+const {
+  title,
+  description,
+  image,
+  bodyClass,
+  hideFooter,
+  logoColor,
+  lang = "en",
+  alternateLanguages = [],
+} = Astro.props;
 
 import InstantlyPixel from "./InstantlyPixel.astro";
 import GoogleTagHead from "./GoogleTagHead.astro";
@@ -24,11 +37,17 @@ import ShopifyBuyButton2 from "../components/ShopifyBuyButton2.astro";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <GoogleTagHead />
-    <BaseHead title={title} description={description} image={image} />
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      lang={lang}
+      alternateLanguages={alternateLanguages}
+    />
     <slot name="head" />
   </head>
 
