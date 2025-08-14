@@ -2,6 +2,98 @@
 import ColorGradient from "@/components/ColorGradient.astro";
 import HighlightedWord from "@/components/HighlightedWord.tsx";
 import { ExternalLink } from "lucide-astro";
+
+interface Props {
+    lang?: "en" | "de";
+}
+
+const { lang = "en" } = Astro.props;
+
+const content = {
+    en: {
+        title: "Finally Sleep Comfortably During Recovery",
+        subtitle: "The lightweight alternative to sleeping in your heavy boot",
+        cards: [
+            {
+                title: "Sleep Better Tonight",
+                description:
+                    "Experience the difference in your sleep quality. ",
+                quote: "The boot was making sleep impossible! It felt like a torture chamber at night.",
+                highlightWords: ["Sleep Better"],
+            },
+            {
+                title: "Light & Breathable",
+                description:
+                    "Unlike the heavy boot, our splint keeps you cool and comfortable. ",
+                quote: "So much easier than the big boot. Finally lets your leg breathe!",
+                highlightWords: ["Light", "Breathable"],
+            },
+            {
+                title: "Safe Achilles Healing",
+                description: "Maintains optimal position for recovery. ",
+                quote: "Works perfect to keep my foot in plantar flexion. Sleep is critical to recovery.",
+                highlightWords: ["Safe"],
+                link: {
+                    text: "3000 patients, no complications",
+                    href: "/evidence/safety",
+                },
+            },
+            {
+                title: "Surgeon-Approved Design",
+                description: "Trusted by medical professionals. ",
+                quote: "My surgeon, who also has an MA in engineering, gave his approval after reviewing the design.",
+                highlightWords: ["Surgeon-Approved"],
+                link: {
+                    text: "Read more clinician reviews",
+                    href: "/reviews?filter=clinician",
+                },
+            },
+        ],
+    },
+    de: {
+        title: "Endlich bequem schlafen während der Erholung",
+        subtitle: "Die leichte Alternative zum Schlafen im schweren Stiefel",
+        cards: [
+            {
+                title: "Schlafen Sie heute Nacht besser",
+                description:
+                    "Erleben Sie den Unterschied in Ihrer Schlafqualität. ",
+                quote: "Der Stiefel machte das Schlafen unmöglich! Es fühlte sich nachts wie eine Folterkammer an.",
+                highlightWords: ["Schlafen Sie besser"],
+            },
+            {
+                title: "Leicht & Atmungsaktiv",
+                description:
+                    "Anders als der schwere Stiefel hält unsere Schiene Sie kühl und bequem. ",
+                quote: "So viel einfacher als der große Stiefel. Lässt Ihr Bein endlich atmen!",
+                highlightWords: ["Leicht", "Atmungsaktiv"],
+            },
+            {
+                title: "Sichere Achilles-Heilung",
+                description:
+                    "Behält die optimale Position für die Erholung bei. ",
+                quote: "Funktioniert perfekt, um meinen Fuß in Plantarflexion zu halten. Schlaf ist entscheidend für die Erholung.",
+                highlightWords: ["Sicher"],
+                link: {
+                    text: "3000 Patienten, keine Komplikationen",
+                    href: "/evidence/safety",
+                },
+            },
+            {
+                title: "Chirurgisch genehmigtes Design",
+                description: "Vertraut von medizinischen Fachkräften. ",
+                quote: "Mein Chirurg, der auch einen MA in Ingenieurwesen hat, gab seine Zustimmung nach der Überprüfung des Designs.",
+                highlightWords: ["Chirurgisch genehmigtes"],
+                link: {
+                    text: "Weitere Kliniker-Bewertungen lesen",
+                    href: "/reviews?filter=clinician",
+                },
+            },
+        ],
+    },
+};
+
+const currentContent = content[lang];
 ---
 
 <div class="bg-gradient-to-t from-primary/15 to-white h-24"></div>
@@ -11,97 +103,95 @@ import { ExternalLink } from "lucide-astro";
             <h2
                 class="mb-4 font-semibold text-neutral-950 dark:text-neutral-50 text-3xl md:text-4xl leading-[120%]"
             >
-                Finally Sleep Comfortably During Recovery
+                {currentContent.title}
             </h2>
             <p
                 class="text-gray-800 dark:text-neutral-200 text-lg leading-relaxed"
             >
-                The lightweight alternative to sleeping in your heavy boot
+                {currentContent.subtitle}
             </p>
         </div>
 
         <div class="gap-8 grid md:grid-cols-2 mx-auto max-w-4xl">
-            <div
-                class="group bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg p-6 rounded-lg transition-all duration-300"
-            >
-                <h3
-                    class="mb-3 font-semibold text-neutral-900 dark:text-neutral-50 text-xl"
-                >
-                    <HighlightedWord>Sleep Better</HighlightedWord> Tonight
-                </h3>
-                <p class="text-gray-600 dark:text-neutral-400">
-                    Experience the difference in your sleep quality. <span
-                        class="italic"
-                        >"The boot was making sleep impossible! It felt like a
-                        torture chamber at night."</span
-                    > Our splint provides the perfect balance of support and comfort.
-                </p>
-            </div>
-
-            <div
-                class="group bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg p-6 rounded-lg transition-all duration-300"
-            >
-                <h3
-                    class="mb-3 font-semibold text-neutral-900 dark:text-neutral-50 text-xl"
-                >
-                    <HighlightedWord>Light</HighlightedWord> &{" "}
-                    <HighlightedWord>Breathable</HighlightedWord>
-                </h3>
-                <p class="text-gray-600 dark:text-neutral-400">
-                    Unlike the heavy boot, our splint keeps you cool and
-                    comfortable. <span class="italic"
-                        >"So much easier than the big boot. Finally lets your
-                        leg breathe!"</span
-                    >
-                </p>
-            </div>
-
-            <div
-                class="group bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg p-6 rounded-lg transition-all duration-300"
-            >
-                <h3
-                    class="mb-3 font-semibold text-neutral-900 dark:text-neutral-50 text-xl"
-                >
-                    <HighlightedWord>Safe</HighlightedWord> Achilles Healing
-                </h3>
-                <p class="text-gray-600 dark:text-neutral-400">
-                    Maintains optimal position for recovery. <span
-                        class="italic"
-                        >"Works perfect to keep my foot in plantar flexion.
-                        Sleep is critical to recovery."</span
-                    >
-                </p>
-                <a
-                    href="/evidence/safety"
-                    class="inline-flex items-center gap-1 mt-2 text-primary hover:text-primary/80 underline underline-offset-2 transition-colors"
-                >
-                    <span>3000 patients, no complications</span>
-                    <ExternalLink class="w-4 h-4" />
-                </a>
-            </div>
-
-            <div
-                class="group bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg p-6 rounded-lg transition-all duration-300"
-            >
-                <h3
-                    class="mb-3 font-semibold text-neutral-900 dark:text-neutral-50 text-xl"
-                >
-                    <HighlightedWord>Surgeon-Approved</HighlightedWord> Design
-                </h3>
-                <p class="text-gray-600 dark:text-neutral-400">
-                    Trusted by medical professionals. <span class="italic"
-                        >"My surgeon, who also has an MA in engineering, gave
-                        his approval after reviewing the design."</span
-                    >
-                </p>
-                <a
-                    href="/reviews?filter=clinician"
-                    class="inline-flex items-center gap-1 mt-2 text-primary hover:text-primary/80 underline underline-offset-2 transition-colors"
-                >
-                    <span>Read more clinician reviews</span>
-                    <ExternalLink class="w-4 h-4" />
-                </a>
-            </div>
+            {
+                currentContent.cards.map((card) => (
+                    <div class="group bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg p-6 rounded-lg transition-all duration-300">
+                        <h3 class="mb-3 font-semibold text-neutral-900 dark:text-neutral-50 text-xl">
+                            {card.title === "Light & Breathable" ||
+                            card.title === "Leicht & Atmungsaktiv" ? (
+                                <>
+                                    <HighlightedWord>Light</HighlightedWord> &{" "}
+                                    <HighlightedWord>
+                                        Breathable
+                                    </HighlightedWord>
+                                </>
+                            ) : card.title === "Leicht & Atmungsaktiv" ? (
+                                <>
+                                    <HighlightedWord>Leicht</HighlightedWord> &{" "}
+                                    <HighlightedWord>
+                                        Atmungsaktiv
+                                    </HighlightedWord>
+                                </>
+                            ) : card.title === "Sleep Better Tonight" ? (
+                                <>
+                                    <HighlightedWord>
+                                        Sleep Better
+                                    </HighlightedWord>{" "}
+                                    Tonight
+                                </>
+                            ) : card.title ===
+                              "Schlafen Sie heute Nacht besser" ? (
+                                <>
+                                    <HighlightedWord>
+                                        Schlafen Sie besser
+                                    </HighlightedWord>{" "}
+                                    heute Nacht
+                                </>
+                            ) : card.title === "Safe Achilles Healing" ? (
+                                <>
+                                    <HighlightedWord>Safe</HighlightedWord>{" "}
+                                    Achilles Healing
+                                </>
+                            ) : card.title === "Sichere Achilles-Heilung" ? (
+                                <>
+                                    <HighlightedWord>Sichere</HighlightedWord>{" "}
+                                    Achilles-Heilung
+                                </>
+                            ) : card.title === "Surgeon-Approved Design" ? (
+                                <>
+                                    <HighlightedWord>
+                                        Surgeon-Approved
+                                    </HighlightedWord>{" "}
+                                    Design
+                                </>
+                            ) : card.title ===
+                              "Chirurgisch genehmigtes Design" ? (
+                                <>
+                                    <HighlightedWord>
+                                        Chirurgisch genehmigtes
+                                    </HighlightedWord>{" "}
+                                    Design
+                                </>
+                            ) : (
+                                card.title
+                            )}
+                        </h3>
+                        <p class="text-gray-600 dark:text-neutral-400">
+                            {card.description}
+                            <span class="italic">"{card.quote}"</span>
+                        </p>
+                        {card.link && (
+                            <a
+                                href={card.link.href}
+                                class="inline-flex items-center gap-1 mt-2 text-primary hover:text-primary/80 underline underline-offset-2 transition-colors"
+                            >
+                                <span>{card.link.text}</span>
+                                <ExternalLink class="w-4 h-4" />
+                            </a>
+                        )}
+                    </div>
+                ))
+            }
         </div>
     </div>
 </div>

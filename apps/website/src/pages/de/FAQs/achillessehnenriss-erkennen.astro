@@ -2,193 +2,215 @@
 import FaqSchemaAccordion from "../../../components/research/FaqSchemaAccordion.astro";
 import NightSplintAdvert from "../../../components/products/night-splint/NightSplintAdvert.astro";
 import FAQsLayout from "../../../layouts/FAQsLayout.astro";
+import { getAlternateLanguages } from "../../../config/languages";
+
+// Language configuration
+const currentPath = Astro.url.pathname;
+const alternateLanguages = getAlternateLanguages(currentPath, "de");
 ---
 
 <FAQsLayout
-    title="Is My Achilles Ruptured? Symptoms, Snap Sound & Pain Explained"
-    description="Learn the warning signs of an Achilles tendon rupture – sudden snap sound, sharp heel pain, walking difficulties – and discover when to seek urgent medical help."
+    title="Ist meine Achillessehne gerissen? Symptome, Knall-Geräusch & Schmerzen erklärt"
+    description="Erfahren Sie die Warnzeichen eines Achillessehnenrisses – plötzliches Knall-Geräusch, scharfe Fersenschmerzen, Gehschwierigkeiten – und wann Sie dringend ärztliche Hilfe suchen sollten."
+    lang="de"
+    alternateLanguages={alternateLanguages}
 >
     <section id="faq-slide" class="faq slide">
         <div class="questions">
-            <h2>Find your answer:</h2>
+            <h2>Finden Sie Ihre Antwort:</h2>
             <a href="#q1">
-                <h3>Is my Achilles ruptured? Symptoms checklist</h3>
+                <h3>Ist meine Achillessehne gerissen? Symptom-Checkliste</h3>
             </a>
             <a href="#q2">
-                <h3>What happens when you tear your Achilles?</h3>
+                <h3>Was passiert wenn die Achillessehne reißt?</h3>
             </a>
             <a href="#q3">
-                <h3>How to tell if your Achilles tendon is about to tear?</h3>
-            </a>
-            <a href="#q4">
-                <h3>How do you tear your Achilles?</h3>
-            </a>
-            <a href="#q5">
-                <h3>How do Achilles tears happen?</h3>
-            </a>
-            <a href="#q6">
-                <h3>What else it could be?</h3>
-            </a>
-            <a href="#q7">
                 <h3>
-                    What does it feel like when you tear your Achilles tendon?
+                    Wie kann man erkennen, ob die Achillessehne kurz vor dem
+                    Reißen steht?
                 </h3>
             </a>
+            <a href="#q4">
+                <h3>Wie reißt die Achillessehne?</h3>
+            </a>
+            <a href="#q5">
+                <h3>Wie entstehen Achillessehnenrisse?</h3>
+            </a>
+            <a href="#q6">
+                <h3>Was könnte es sonst noch sein?</h3>
+            </a>
+            <a href="#q7">
+                <h3>Wie fühlt es sich an, wenn die Achillessehne reißt?</h3>
+            </a>
             <a href="#q8">
-                <h3>How painful is a torn Achilles?</h3>
+                <h3>Wie schmerzhaft ist ein Achillessehnenriss?</h3>
             </a>
             <a href="#q9">
-                <h3>How do you know if you tore your Achilles?</h3>
+                <h3>Wie weiß ich, ob ich meine Achillessehne gerissen habe?</h3>
             </a>
             <a href="#q10">
-                <h3>Should I go to hospital?</h3>
+                <h3>Soll ich ins Krankenhaus gehen?</h3>
             </a>
             <a href="#q11">
-                <h3>How bad is an Achilles tear?</h3>
+                <h3>Wie schlimm ist ein Achillessehnenriss?</h3>
             </a>
             <a href="#q12">
-                <h3>How common is an Achilles tendon rupture?</h3>
+                <h3>Wie häufig ist ein Achillessehnenriss?</h3>
             </a>
         </div>
         <div class="answers">
             <div id="q1"></div>
-            <h2>Is my Achilles ruptured? Symptoms checklist</h2>
+            <h2>Ist meine Achillessehne gerissen? Symptom-Checkliste</h2>
             <p>
-                If you get sudden sharp pain in the back of the heel, sometimes
-                with an audible snapping sound, then you may have torn the
-                Achilles tendon. For what happens next, see <a
-                    href="/FAQs/what-happens-if-my-achilles-is-ruptured"
+                Wenn Sie plötzlich scharfe Schmerzen im hinteren Fersenbereich
+                verspüren, manchmal mit einem hörbaren Knall-Geräusch, dann
+                haben Sie möglicherweise die Achillessehne gerissen. Für weitere
+                Informationen siehe
+                <a
+                    href="/de/FAQs/achillessehnenriss-folgen"
                     class="text-primary underline"
-                    >what happens after an Achilles rupture</a
-                >. You should assume that is the case until you are sure it is a
-                less serious injury. You may be tempted think you have just
-                sprained your ankle. There are several myths about what is and
-                is not possible to do with your leg after you have suffered a
-                tear to the Achilles tendon, and sometimes this leads to a
-                delayed diagnosis. Even with a torn Achilles you can move the
-                foot (other tendons help to do this) and you can still walk
-                (albeit awkwardly). Sometimes people seek help after a delay,
-                having initially hoped that the injury was something more minor
-                and would recover quickly.
+                    >was nach einem Achillessehnenriss passiert</a
+                >. Sie sollten davon ausgehen, dass dies der Fall ist, bis Sie
+                sicher sind, dass es eine weniger schwere Verletzung ist. Sie
+                könnten versucht sein zu denken, dass Sie nur Ihren Knöchel
+                verstaucht haben. Es gibt verschiedene Mythen darüber, was mit
+                Ihrem Bein nach einem Achillessehnenriss möglich ist und was
+                nicht, und manchmal führt dies zu einer verzögerten Diagnose.
+                Selbst mit einer gerissenen Achillessehne können Sie den Fuß
+                bewegen (andere Sehnen helfen dabei) und Sie können immer noch
+                gehen (wenn auch unbeholfen). Manchmal suchen Menschen verzögert
+                Hilfe, nachdem sie anfangs hofften, dass die Verletzung etwas
+                Geringfügigeres sei und schnell heilen würde.
             </p>
             <div id="q2"></div>
-            <h2>What happens when you tear your Achilles?</h2>
+            <h2>Was passiert wenn die Achillessehne reißt?</h2>
             <p>
-                The Achilles tendon joins the calf muscles to the heel bone. It
-                is important for standing up on tip toes and pushing off when
-                you walk. If it tears, then the muscle is no longer connected to
-                the heel and so the ankle movement is weak.
+                Die Achillessehne verbindet die Wadenmuskeln mit dem Fersenbein.
+                Sie ist wichtig für das Stehen auf den Zehenspitzen und das
+                Abstoßen beim Gehen. Wenn sie reißt, ist der Muskel nicht mehr
+                mit der Ferse verbunden und daher ist die Knöchelbewegung
+                schwach.
             </p>
             <div id="q3"></div>
 
-            <h2>How to tell if your Achilles tendon is about to tear?</h2>
+            <h2>
+                Wie kann man erkennen, ob die Achillessehne kurz vor dem Reißen
+                steht?
+            </h2>
             <p>
-                Most ruptures of the Achilles happen suddenly with no warning at
-                all. The reasons for this are not well understood, but
-                susceptibility to rupture may relate to poor blood supply to the
-                tendon. Most patients with a rupture report that they have never
-                had any previous Achilles trouble (such as tendinitis /
-                tendinopathy).
+                Die meisten Achillessehnenrisse passieren plötzlich ohne jede
+                Warnung. Die Gründe dafür sind nicht gut verstanden, aber die
+                Anfälligkeit für Risse könnte mit schlechter Blutversorgung der
+                Sehne zusammenhängen. Die meisten Patienten mit einem Riss
+                berichten, dass sie nie zuvor Achillessehnenprobleme hatten (wie
+                Sehnenentzündung / Tendinopathie).
             </p>
             <div id="q4"></div>
 
-            <h2>How do you tear your Achilles?</h2>
+            <h2>Wie reißt die Achillessehne?</h2>
             <p>
-                Pushing off with your foot causes a strong and sudden
-                contraction of the calf muscle which proves to be too much for
-                the tendon. The tendon is made of millions of hairs that run
-                like a horse's tail from the calf muscle to the heel bone. Why
-                the tendon should suddenly fail is not well understood. Each
-                fibre tears at a different point, so the tear is not clean but
-                results in two ragged ends.
+                Das Abstoßen mit dem Fuß verursacht eine starke und plötzliche
+                Kontraktion des Wadenmuskels, die für die Sehne zu viel ist. Die
+                Sehne besteht aus Millionen von Fasern, die wie ein
+                Pferdeschwanz vom Wadenmuskel zum Fersenbein laufen. Warum die
+                Sehne plötzlich versagen sollte, ist nicht gut verstanden. Jede
+                Faser reißt an einem anderen Punkt, daher ist der Riss nicht
+                sauber, sondern führt zu zwei ausgefransten Enden.
             </p>
             <div id="q5"></div>
 
-            <h2>How do Achilles tears happen?</h2>
+            <h2>Wie entstehen Achillessehnenrisse?</h2>
             <p>
-                The type of injury can be any sudden push-off using the ankle.
-                The classical stereotype is of a middle-aged person returning to
-                sport. Pushing a heavy object or (particularly in older
-                individuals) just an awkward stumble can be enough.
+                Die Art der Verletzung kann jeder plötzliche Abstoß mit dem
+                Knöchel sein. Das klassische Klischee ist eine Person mittleren
+                Alters, die zum Sport zurückkehrt. Das Schieben eines schweren
+                Gegenstands oder (besonders bei älteren Personen) nur ein
+                ungeschicktes Stolpern kann ausreichen.
             </p>
             <div id="q6"></div>
 
-            <h2>What else it could be?</h2>
+            <h2>Was könnte es sonst noch sein?</h2>
             <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
 
             <p>
-                A torn calf muscle (tennis leg) is a different injury where
-                sudden pain develops, but in the middle of the calf rather than
-                low down by the heel. Like a torn Achilles this can be suddenly
-                very painful. A tearing or snapping feeling is common. This
-                injury is much less severe than an Achilles rupture.
+                Ein gerissener Wadenmuskel (Tennisbein) ist eine andere
+                Verletzung, bei der plötzlich Schmerzen auftreten, aber in der
+                Mitte der Wade und nicht unten bei der Ferse. Wie bei einer
+                gerissenen Achillessehne kann dies plötzlich sehr schmerzhaft
+                sein. Ein reißendes oder knackendes Gefühl ist häufig. Diese
+                Verletzung ist viel weniger schwerwiegend als ein
+                Achillessehnenriss.
             </p>
             <div id="q7"></div>
 
-            <h2>What does it feel like when you tear your Achilles tendon?</h2>
+            <h2>Wie fühlt es sich an, wenn die Achillessehne reißt?</h2>
             <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
 
             <p>
-                Usually, you experience a sudden pain in the back of your leg.
-                You might hear a snap. Sometimes other people hear it too. Often
-                the rupture happens during sport. You might think that an
-                opponent has kicked you or your tennis partner hit you with
-                their racquet.
+                Normalerweise verspüren Sie einen plötzlichen Schmerz im
+                hinteren Teil Ihres Beins. Sie könnten ein Knacken hören.
+                Manchmal hören es auch andere Leute. Oft passiert der Riss beim
+                Sport. Sie könnten denken, dass ein Gegner Sie getreten hat oder
+                Ihr Tennispartner Sie mit seinem Schläger getroffen hat.
             </p>
             <div id="q8"></div>
 
-            <h2>How painful is a torn Achilles?</h2>
+            <h2>Wie schmerzhaft ist ein Achillessehnenriss?</h2>
             <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
 
             <p>
-                The pain is instantaneously quite severe but settles down
-                quickly. The absence of lasting pain makes some people believe
-                (hope) that nothing too serious has happened.
+                Der Schmerz ist sofort ziemlich stark, lässt aber schnell nach.
+                Das Fehlen anhaltender Schmerzen lässt manche Menschen glauben
+                (hoffen), dass nichts allzu Ernstes passiert ist.
             </p>
             <div id="q9"></div>
 
-            <h2>How do you know if you tore your Achilles?</h2>
+            <h2>Wie weiß ich, ob ich meine Achillessehne gerissen habe?</h2>
             <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
 
             <p>
-                Sudden pain in the back of the heel, often with an accompanying
-                snapping sound. The pain subsides quickly. You can still move
-                your toes and ankle. You can still stand and walk/limp. You
-                cannot stand onto tip toes on just the injured leg.
+                Plötzlicher Schmerz im hinteren Fersenbereich, oft mit einem
+                begleitenden Knack-Geräusch. Der Schmerz lässt schnell nach. Sie
+                können Ihre Zehen und Ihren Knöchel immer noch bewegen. Sie
+                können immer noch stehen und gehen/hinken. Sie können nicht auf
+                Zehenspitzen nur mit dem verletzten Bein stehen.
             </p>
             <div id="q10"></div>
 
-            <h2>Should I go to hospital?</h2>
+            <h2>Soll ich ins Krankenhaus gehen?</h2>
             <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
 
             <p>
-                If you are in doubt, seek medical advice and have the injury
-                checked. Limping around hoping it will get better means a delay
-                in diagnosis and a greater chance that surgical repair will be
-                needed.
+                Wenn Sie sich unsicher sind, suchen Sie ärztlichen Rat und
+                lassen Sie die Verletzung untersuchen. Herumhinken in der
+                Hoffnung, dass es besser wird, bedeutet eine Verzögerung der
+                Diagnose und eine größere Chance, dass eine chirurgische
+                Reparatur nötig sein wird.
             </p>
             <div id="q11"></div>
 
-            <h2>How bad is an Achilles tear?</h2>
+            <h2>Wie schlimm ist ein Achillessehnenriss?</h2>
             <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
 
             <p>
-                Properly treated Achilles tendon ruptures heal well, but
-                recovery is lengthy. You can expect to be in a boot or similar
-                support for your leg for about 10 weeks. After this it takes
-                months to regain the muscle strength. If you ask someone who has
-                been through this they will say that they were limited in
-                activities for at least 6 months and that full recovery takes
-                about a year.
+                Richtig behandelte Achillessehnenrisse heilen gut, aber die
+                Erholung ist langwierig. Sie können erwarten, etwa 10 Wochen in
+                einem Stiefel oder ähnlicher Unterstützung für Ihr Bein zu sein.
+                Danach dauert es Monate, um die Muskelkraft zurückzugewinnen.
+                Wenn Sie jemanden fragen, der das durchgemacht hat, wird er
+                sagen, dass er mindestens 6 Monate in seinen Aktivitäten
+                eingeschränkt war und dass die vollständige Erholung etwa ein
+                Jahr dauert.
             </p>
             <div id="q12"></div>
 
-            <h2>How common is an Achilles tendon rupture?</h2>
+            <h2>Wie häufig ist ein Achillessehnenriss?</h2>
             <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
             <p>
-                Between 0.01% and 0.02% of the population tear their Achilles
-                every year. In the UK it is estimated that there are 11,000
-                confirmed cases per year. In the US the estimate is 59 000.
+                Zwischen 0,01% und 0,02% der Bevölkerung reißen sich jedes Jahr
+                die Achillessehne. In Großbritannien wird geschätzt, dass es
+                11.000 bestätigte Fälle pro Jahr gibt. In den USA wird die Zahl
+                auf 59.000 geschätzt.
             </p>
         </div>
     </section>
@@ -198,29 +220,28 @@ import FAQsLayout from "../../../layouts/FAQsLayout.astro";
     <FaqSchemaAccordion
         faqs={[
             {
-                question: "Is my Achilles ruptured?",
-                answer: "If you get sudden sharp pain in the back of the heel, sometimes with an audible snapping sound, then you may have torn the Achilles tendon. You should assume that is the case until you are sure it is a less serious injury. Even with a torn Achilles you can move the foot and still walk (albeit awkwardly). Sometimes people delay seeking help, hoping the injury was something minor.",
+                question: "Ist meine Achillessehne gerissen?",
+                answer: "Wenn Sie plötzlich scharfe Schmerzen im hinteren Fersenbereich verspüren, manchmal mit einem hörbaren Knall-Geräusch, dann haben Sie möglicherweise die Achillessehne gerissen. Sie sollten davon ausgehen, dass dies der Fall ist, bis Sie sicher sind, dass es eine weniger schwere Verletzung ist. Selbst mit einer gerissenen Achillessehne können Sie den Fuß bewegen und immer noch gehen (wenn auch unbeholfen). Manchmal zögern Menschen, Hilfe zu suchen, in der Hoffnung, dass die Verletzung etwas Geringfügiges war.",
             },
             {
-                question: "What happens when you tear your Achilles?",
-                answer: "The Achilles tendon joins the calf muscles to the heel bone. It is important for standing up on tip toes and pushing off when you walk. If it tears, then the muscle is no longer connected to the heel and so the ankle movement is weak.",
+                question: "Was passiert wenn die Achillessehne reißt?",
+                answer: "Die Achillessehne verbindet die Wadenmuskeln mit dem Fersenbein. Sie ist wichtig für das Stehen auf den Zehenspitzen und das Abstoßen beim Gehen. Wenn sie reißt, ist der Muskel nicht mehr mit der Ferse verbunden und daher ist die Knöchelbewegung schwach.",
             },
             {
-                question: "How do Achilles tears happen?",
-                answer: "The type of injury can be any sudden push-off using the ankle. The classical stereotype is of a middle-aged person returning to sport. Pushing a heavy object or (particularly in older individuals) just an awkward stumble can be enough.",
+                question: "Wie entstehen Achillessehnenrisse?",
+                answer: "Die Art der Verletzung kann jeder plötzliche Abstoß mit dem Knöchel sein. Das klassische Klischee ist eine Person mittleren Alters, die zum Sport zurückkehrt. Das Schieben eines schweren Gegenstands oder (besonders bei älteren Personen) nur ein ungeschicktes Stolpern kann ausreichen.",
             },
             {
-                question:
-                    "What does it feel like when you tear your Achilles tendon?",
-                answer: "Usually, you experience a sudden pain in the back of your leg. You might hear a snap. Sometimes other people hear it too. Often the rupture happens during sport. You might think that an opponent has kicked you or your tennis partner hit you with their racquet.",
+                question: "Wie fühlt es sich an, wenn die Achillessehne reißt?",
+                answer: "Normalerweise verspüren Sie einen plötzlichen Schmerz im hinteren Teil Ihres Beins. Sie könnten ein Knacken hören. Manchmal hören es auch andere Leute. Oft passiert der Riss beim Sport. Sie könnten denken, dass ein Gegner Sie getreten hat oder Ihr Tennispartner Sie mit seinem Schläger getroffen hat.",
             },
             {
-                question: "Should I go to hospital?",
-                answer: "If you are in doubt, seek medical advice and have the injury checked. Limping around hoping it will get better means a delay in diagnosis and a greater chance that surgical repair will be needed.",
+                question: "Soll ich ins Krankenhaus gehen?",
+                answer: "Wenn Sie sich unsicher sind, suchen Sie ärztlichen Rat und lassen Sie die Verletzung untersuchen. Herumhinken in der Hoffnung, dass es besser wird, bedeutet eine Verzögerung der Diagnose und eine größere Chance, dass eine chirurgische Reparatur nötig sein wird.",
             },
             {
-                question: "How bad is an Achilles tear?",
-                answer: "Properly treated Achilles tendon ruptures heal well, but recovery is lengthy. You can expect to be in a boot or similar support for your leg for about 10 weeks. After this it takes months to regain the muscle strength. Full recovery takes about a year, with most people being limited in activities for at least 6 months.",
+                question: "Wie schlimm ist ein Achillessehnenriss?",
+                answer: "Richtig behandelte Achillessehnenrisse heilen gut, aber die Erholung ist langwierig. Sie können erwarten, etwa 10 Wochen in einem Stiefel oder ähnlicher Unterstützung zu sein. Danach dauert es Monate, um die Muskelkraft zurückzugewinnen. Die vollständige Erholung dauert etwa ein Jahr, wobei die meisten Menschen mindestens 6 Monate in ihren Aktivitäten eingeschränkt sind.",
             },
         ]}
     />

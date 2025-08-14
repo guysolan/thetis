@@ -9,17 +9,12 @@ import ReviewCarousel from "@/components/reviews/ReviewCarousel";
 import SleepInYourWellies from "@/components/SleepInYourWellies.tsx";
 import NightSplintUsage from "@/components/products/night-splint/NightSplintUsage.astro";
 import NightSplintInstructions from "@/components/products/night-splint/night-splint-instructions/index.astro";
-import NightSplintHero from "../components/products/night-splint/NightSplintHero.astro";
-import GetInTouch from "../components/CTA/GetInTouch.astro";
-import ValuePropositions from "../components/products/night-splint/ValuePropositions.astro";
-import KeyFeatures from "../components/products/night-splint/KeyFeatures.astro";
-import TestimonialHighlight from "../components/products/night-splint/TestimonialHighlight.astro";
-import NightSplintAdvert from "../components/products/night-splint/NightSplintAdvert.astro";
+import NightSplintHero from "../../components/products/night-splint/NightSplintHero.astro";
+import ValuePropositions from "../../components/products/night-splint/ValuePropositions.astro";
+import KeyFeatures from "../../components/products/night-splint/KeyFeatures.astro";
 import Reviews from "@/components/reviews/InfiniteReviews.astro";
-import { buttonVariants } from "../components/ui/button";
-import BuyNowCallout from "../components/products/night-splint/BuyNowCallout.astro";
-import HighlightedWord from "../components/HighlightedWord";
-import SplintIntro from "../components/products/night-splint/SplintIntro.astro";
+import BuyNowCallout from "../../components/products/night-splint/BuyNowCallout.astro";
+import HighlightedWord from "../../components/HighlightedWord";
 ---
 
 <Fragment slot="head">
@@ -34,7 +29,55 @@ import SplintIntro from "../components/products/night-splint/SplintIntro.astro";
     <main class="">
         <NightSplintHero />
 
-        <SplintIntro />
+        <section class="bg-gray-50 py-12">
+            <div class="mx-auto px-4 container">
+                <div class="mx-auto max-w-3xl">
+                    <h2 class="mb-6 font-semibold text-3xl">
+                        Sleeping with an Achilles Rupture: Boot vs. Splint
+                    </h2>
+                    <div class="prose prose-lg">
+                        <p class="mb-4">
+                            After an Achilles rupture, proper night-time
+                            protection is crucial for healing. You have two main
+                            options:
+                        </p>
+
+                        <h3 class="mt-6 mb-3 font-semibold text-xl">
+                            Option 1: Sleep in Your Boot
+                        </h3>
+                        <p class="mb-4">
+                            While effective, sleeping in a walking boot can be
+                            uncomfortable and disruptive to your sleep quality.
+                            The bulkiness and weight can make it difficult to
+                            find a comfortable position.
+                        </p>
+
+                        <h3 class="mt-6 mb-3 font-semibold text-xl">
+                            Option 2: Use Thetis Medical's Night Splint
+                        </h3>
+                        <p class="mb-4">
+                            Our specialized night splint offers a more
+                            comfortable alternative. Simply keep crutches by
+                            your bed for bathroom visits. The splint is:
+                        </p>
+                        <ul class="mb-4 pl-6 list-disc">
+                            <li>Lightweight and less bulky than a boot</li>
+                            <li>Designed specifically for night-time use</li>
+                            <li>
+                                Provides proper tendon protection while you
+                                sleep
+                            </li>
+                            <li>Allows for better sleep quality and comfort</li>
+                        </ul>
+                        <p>
+                            Many patients report significantly better sleep
+                            quality when using our splint compared to sleeping
+                            in their boot.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <div class="mt-8 lg:mt-16">
             <SleepInYourWellies client:load />
