@@ -1,13 +1,20 @@
 ---
 import { ExternalLink, CircleDot, Circle } from "lucide-astro";
 import { cn } from "@/lib/utils";
+import { getRoutesByLanguage } from "../../content/routes";
+import { getLanguageFromPath } from "../../utils/language";
 
-const reasons = [
-  { text: "Ask a Question", url: "/contact" },
-  { text: "Become a Partner", url: "/become-a-partner" },
-  { text: "Order Wholesale", url: "/order-wholesale" },
-  { text: "Request a Return", url: "/request-a-return" },
-];
+// Get current language and routes
+const currentPath = Astro.url.pathname;
+const currentLang = getLanguageFromPath(currentPath);
+const routes = getRoutesByLanguage(currentLang);
+
+// Define the form routes we want to show
+const formSlugs = ["contact", "become-a-partner", "order-wholesale", "request-a-return"];
+const reasons = formSlugs.map(slug => {
+  const route = routes.find(r => r.slug === slug);
+  return route ? { text: route.title, url: route.href } : null;
+}).filter(Boolean);
 
 const currentUrl = Astro.url.pathname;
 ---

@@ -12,9 +12,16 @@ export interface Props {
     lang: string;
     url: string;
   }>;
+  slug?: string; // Add slug for automatic hreflang generation
 }
 
 import { cn } from "../lib/utils";
+import { getCurrentLanguage, generateHreflangLinks, getSlugFromPath } from "../utils/language";
+
+// Determine current language and slug from URL if not provided
+const currentPath = Astro.url.pathname;
+const autoDetectedLang = getCurrentLanguage(currentPath);
+const autoDetectedSlug = getSlugFromPath(currentPath);
 
 const {
   title,
@@ -23,9 +30,15 @@ const {
   bodyClass,
   hideFooter,
   logoColor,
-  lang = "en",
+  lang = autoDetectedLang.code,
   alternateLanguages = [],
+  slug = autoDetectedSlug,
 } = Astro.props;
+
+// Generate hreflang links if slug is available and no manual alternateLanguages provided
+const hreflangLinks = (alternateLanguages.length === 0 && slug !== undefined) 
+  ? generateHreflangLinks(slug) 
+  : alternateLanguages;
 
 import InstantlyPixel from "./InstantlyPixel.astro";
 import GoogleTagHead from "./GoogleTagHead.astro";
@@ -46,7 +59,7 @@ import ShopifyBuyButton2 from "../components/ShopifyBuyButton2.astro";
       description={description}
       image={image}
       lang={lang}
-      alternateLanguages={alternateLanguages}
+      alternateLanguages={hreflangLinks}
     />
     <slot name="head" />
   </head>
