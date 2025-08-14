@@ -1,0 +1,237 @@
+---
+import FaqSchemaAccordion from "../../../components/research/FaqSchemaAccordion.astro";
+import NightSplintAdvert from "../../../components/products/night-splint/NightSplintAdvert.astro";
+import FAQsLayout from "../../../layouts/FAQsLayout.astro";
+import { getAlternateLanguages } from "../../../config/languages";
+
+// Language configuration
+const currentPath = Astro.url.pathname;
+const alternateLanguages = getAlternateLanguages(currentPath, "de");
+---
+
+<FAQsLayout
+    title="Ist meine Achillessehne gerissen? Symptome, Knacken & Schmerzen erklärt"
+    description="Lernen Sie die Warnzeichen eines Achillessehnenrisses kennen – plötzliches Knacken, scharfe Fersenschmerzen, Gehschwierigkeiten – und erfahren Sie, wann Sie dringend medizinische Hilfe suchen sollten."
+    lang="de"
+    alternateLanguages={alternateLanguages}
+>
+    <section id="faq-slide" class="faq slide">
+        <div class="questions">
+            <h2>Finden Sie Ihre Antwort:</h2>
+            <a href="#q1">
+                <h3>Ist meine Achillessehne gerissen? Symptom-Checkliste</h3>
+            </a>
+            <a href="#q2">
+                <h3>Was passiert, wenn Sie Ihre Achillessehne reißen?</h3>
+            </a>
+            <a href="#q3">
+                <h3>Wie erkennt man, ob die Achillessehne kurz vor dem Reißen steht?</h3>
+            </a>
+            <a href="#q4">
+                <h3>Wie reißt man sich die Achillessehne?</h3>
+            </a>
+            <a href="#q5">
+                <h3>Wie entstehen Achillessehnenrisse?</h3>
+            </a>
+            <a href="#q6">
+                <h3>Was könnte es sonst sein?</h3>
+            </a>
+            <a href="#q7">
+                <h3>
+                    Wie fühlt es sich an, wenn Sie Ihre Achillessehne reißen?
+                </h3>
+            </a>
+            <a href="#q8">
+                <h3>Wie schmerzhaft ist ein Achillessehnenriss?</h3>
+            </a>
+            <a href="#q9">
+                <h3>Wie erkennt man, ob man seine Achillessehne gerissen hat?</h3>
+            </a>
+            <a href="#q10">
+                <h3>Sollte ich ins Krankenhaus?</h3>
+            </a>
+            <a href="#q11">
+                <h3>Wie schlimm ist ein Achillessehnenriss?</h3>
+            </a>
+            <a href="#q12">
+                <h3>Wie häufig ist ein Achillessehnenriss?</h3>
+            </a>
+        </div>
+        <div class="answers">
+            <div id="q1"></div>
+            <h2>Ist meine Achillessehne gerissen? Symptom-Checkliste</h2>
+            <p>
+                Wenn Sie plötzliche, scharfe Schmerzen im hinteren Bereich der
+                Ferse bekommen, manchmal mit einem hörbaren Knacken, dann haben
+                Sie möglicherweise die Achillessehne gerissen. Für weitere
+                Informationen siehe <a
+                    href="/de/FAQs/achillessehnenriss-folgen"
+                    class="text-primary underline"
+                    >was nach einem Achillessehnenriss passiert</a
+                >. Sie sollten davon ausgehen, dass dies der Fall ist, bis Sie
+                sicher sind, dass es eine weniger ernste Verletzung ist. Sie
+                könnten versucht sein zu denken, dass Sie sich nur den Knöchel
+                verstaucht haben. Es gibt mehrere Mythen darüber, was mit Ihrem
+                Bein nach einem Achillessehnenriss möglich und nicht möglich
+                ist, und manchmal führt dies zu einer verspäteten Diagnose.
+                Auch mit einer gerissenen Achillessehne können Sie den Fuß
+                bewegen (andere Sehnen helfen dabei) und Sie können immer noch
+                gehen (wenn auch ungeschickt). Manchmal suchen Menschen erst
+                mit Verzögerung Hilfe, da sie zunächst hofften, dass die
+                Verletzung etwas Geringfügigeres war und schnell heilen würde.
+            </p>
+            <div id="q2"></div>
+            <h2>Was passiert, wenn Sie Ihre Achillessehne reißen?</h2>
+            <p>
+                Die Achillessehne verbindet die Wadenmuskeln mit dem
+                Fersenbein. Sie ist wichtig für das Stehen auf Zehenspitzen und
+                das Abstoßen beim Gehen. Wenn sie reißt, ist der Muskel nicht
+                mehr mit der Ferse verbunden und die Knöchelbewegung ist
+                schwach.
+            </p>
+            <div id="q3"></div>
+
+            <h2>Wie erkennt man, ob die Achillessehne kurz vor dem Reißen steht?</h2>
+            <p>
+                Die meisten Achillessehnenrisse geschehen plötzlich ohne
+                jegliche Vorwarnung. Die Gründe dafür sind nicht gut
+                verstanden, aber die Anfälligkeit für einen Riss könnte mit
+                einer schlechten Blutversorgung der Sehne zusammenhängen. Die
+                meisten Patienten mit einem Riss berichten, dass sie nie zuvor
+                Achillesprobleme hatten (wie Sehnenentzündung / Tendinopathie).
+            </p>
+            <div id="q4"></div>
+
+            <h2>Wie reißt man sich die Achillessehne?</h2>
+            <p>
+                Das Abstoßen mit dem Fuß verursacht eine starke und plötzliche
+                Kontraktion des Wadenmuskels, die sich als zu viel für die
+                Sehne erweist. Die Sehne besteht aus Millionen von Fasern, die
+                wie ein Pferdeschweif vom Wadenmuskel zum Fersenbein verlaufen.
+                Warum die Sehne plötzlich versagen sollte, ist nicht gut
+                verstanden. Jede Faser reißt an einem anderen Punkt, sodass der
+                Riss nicht sauber ist, sondern zu zwei ausgefransten Enden
+                führt.
+            </p>
+            <div id="q5"></div>
+
+            <h2>Wie entstehen Achillessehnenrisse?</h2>
+            <p>
+                Die Art der Verletzung kann jedes plötzliche Abstoßen mit dem
+                Knöchel sein. Das klassische Stereotyp ist eine Person mittleren
+                Alters, die zum Sport zurückkehrt. Das Schieben eines schweren
+                Gegenstands oder (besonders bei älteren Personen) nur ein
+                ungeschicktes Stolpern kann ausreichen.
+            </p>
+            <div id="q6"></div>
+
+            <h2>Was könnte es sonst sein?</h2>
+
+            <p>
+                Ein gerissener Wadenmuskel (Tennis-Bein) ist eine andere
+                Verletzung, bei der plötzliche Schmerzen auftreten, aber in der
+                Mitte der Wade und nicht unten an der Ferse. Wie ein gerissener
+                Achilles kann dies plötzlich sehr schmerzhaft sein. Ein
+                reißendes oder knackendes Gefühl ist häufig. Diese Verletzung
+                ist viel weniger schwerwiegend als ein Achillessehnenriss.
+            </p>
+            <div id="q7"></div>
+
+            <h2>Wie fühlt es sich an, wenn Sie Ihre Achillessehne reißen?</h2>
+
+            <p>
+                Normalerweise verspüren Sie einen plötzlichen Schmerz im
+                hinteren Bereich Ihres Beins. Sie könnten ein Knacken hören.
+                Manchmal hören es auch andere Personen. Oft passiert der Riss
+                während des Sports. Sie könnten denken, dass ein Gegner Sie
+                getreten hat oder Ihr Tennispartner Sie mit seinem Schläger
+                getroffen hat.
+            </p>
+            <div id="q8"></div>
+
+            <h2>Wie schmerzhaft ist ein Achillessehnenriss?</h2>
+
+            <p>
+                Der Schmerz ist sofort ziemlich stark, aber lässt schnell nach.
+                Das Fehlen anhaltender Schmerzen lässt manche Menschen glauben
+                (hoffen), dass nichts zu Ernstes passiert ist.
+            </p>
+            <div id="q9"></div>
+
+            <h2>Wie erkennt man, ob man seine Achillessehne gerissen hat?</h2>
+
+            <p>
+                Plötzlicher Schmerz im hinteren Bereich der Ferse, oft mit
+                einem begleitenden Knacken. Der Schmerz lässt schnell nach. Sie
+                können Ihre Zehen und Ihren Knöchel immer noch bewegen. Sie
+                können immer noch stehen und gehen/hinken. Sie können nicht auf
+                Zehenspitzen auf nur dem verletzten Bein stehen.
+            </p>
+            <div id="q10"></div>
+
+            <h2>Sollte ich ins Krankenhaus?</h2>
+
+            <p>
+                Wenn Sie im Zweifel sind, suchen Sie medizinischen Rat und
+                lassen Sie die Verletzung untersuchen. Herumhumpeln in der
+                Hoffnung, dass es besser wird, bedeutet eine Verzögerung der
+                Diagnose und eine größere Chance, dass eine chirurgische
+                Reparatur erforderlich sein wird.
+            </p>
+            <div id="q11"></div>
+
+            <h2>Wie schlimm ist ein Achillessehnenriss?</h2>
+
+            <p>
+                Richtig behandelte Achillessehnenrisse heilen gut, aber die
+                Erholung ist langwierig. Sie können erwarten, etwa 10 Wochen in
+                einem Stiefel oder ähnlicher Stütze für Ihr Bein zu sein.
+                Danach dauert es Monate, um die Muskelkraft zurückzugewinnen.
+                Wenn Sie jemanden fragen, der das durchgemacht hat, wird er
+                sagen, dass er mindestens 6 Monate in Aktivitäten eingeschränkt
+                war und dass die vollständige Erholung etwa ein Jahr dauert.
+            </p>
+            <div id="q12"></div>
+
+            <h2>Wie häufig ist ein Achillessehnenriss?</h2>
+            <p>
+                Zwischen 0,01% und 0,02% der Bevölkerung reißen sich jedes Jahr
+                ihre Achillessehne. In Deutschland wird geschätzt, dass es etwa
+                18.000 bestätigte Fälle pro Jahr gibt. In den USA wird die
+                Schätzung auf 59.000 beziffert.
+            </p>
+        </div>
+    </section>
+
+    <NightSplintAdvert />
+
+    <FaqSchemaAccordion
+        faqs={[
+            {
+                question: "Ist meine Achillessehne gerissen?",
+                answer: "Wenn Sie plötzliche, scharfe Schmerzen im hinteren Bereich der Ferse bekommen, manchmal mit einem hörbaren Knacken, dann haben Sie möglicherweise die Achillessehne gerissen. Sie sollten davon ausgehen, dass dies der Fall ist, bis Sie sicher sind, dass es eine weniger ernste Verletzung ist. Auch mit einer gerissenen Achillessehne können Sie den Fuß bewegen und immer noch gehen (wenn auch ungeschickt). Manchmal verzögern Menschen die Hilfesuche, da sie hoffen, die Verletzung war etwas Geringfügigeres.",
+            },
+            {
+                question: "Was passiert, wenn Sie Ihre Achillessehne reißen?",
+                answer: "Die Achillessehne verbindet die Wadenmuskeln mit dem Fersenbein. Sie ist wichtig für das Stehen auf Zehenspitzen und das Abstoßen beim Gehen. Wenn sie reißt, ist der Muskel nicht mehr mit der Ferse verbunden und die Knöchelbewegung ist schwach.",
+            },
+            {
+                question: "Wie entstehen Achillessehnenrisse?",
+                answer: "Die Art der Verletzung kann jedes plötzliche Abstoßen mit dem Knöchel sein. Das klassische Stereotyp ist eine Person mittleren Alters, die zum Sport zurückkehrt. Das Schieben eines schweren Gegenstands oder (besonders bei älteren Personen) nur ein ungeschicktes Stolpern kann ausreichen.",
+            },
+            {
+                question:
+                    "Wie fühlt es sich an, wenn Sie Ihre Achillessehne reißen?",
+                answer: "Normalerweise verspüren Sie einen plötzlichen Schmerz im hinteren Bereich Ihres Beins. Sie könnten ein Knacken hören. Manchmal hören es auch andere Personen. Oft passiert der Riss während des Sports. Sie könnten denken, dass ein Gegner Sie getreten hat oder Ihr Tennispartner Sie mit seinem Schläger getroffen hat.",
+            },
+            {
+                question: "Sollte ich ins Krankenhaus?",
+                answer: "Wenn Sie im Zweifel sind, suchen Sie medizinischen Rat und lassen Sie die Verletzung untersuchen. Herumhumpeln in der Hoffnung, dass es besser wird, bedeutet eine Verzögerung der Diagnose und eine größere Chance, dass eine chirurgische Reparatur erforderlich sein wird.",
+            },
+            {
+                question: "Wie schlimm ist ein Achillessehnenriss?",
+                answer: "Richtig behandelte Achillessehnenrisse heilen gut, aber die Erholung ist langwierig. Sie können erwarten, etwa 10 Wochen in einem Stiefel oder ähnlicher Stütze für Ihr Bein zu sein. Danach dauert es Monate, um die Muskelkraft zurückzugewinnen. Die vollständige Erholung dauert etwa ein Jahr, wobei die meisten Menschen mindestens 6 Monate in Aktivitäten eingeschränkt sind.",
+            },
+        ]}
+    />
+</FAQsLayout>
