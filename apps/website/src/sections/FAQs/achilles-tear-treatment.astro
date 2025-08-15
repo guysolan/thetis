@@ -1,0 +1,272 @@
+---
+import type { Lang } from "../../config/languages";
+
+interface Props {
+    lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+
+// Multilingual content
+const content = {
+    en: {
+        title: "Find your answer:",
+        questions: {
+            q1: "How to treat a torn Achilles tendon – surgery vs non-surgical?",
+            q2: "How long can you wait for Achilles tendon surgery?",
+            q3: "How long does Achilles tendon surgery take?",
+            q4: "Recovery from Achilles Rupture Surgery",
+            q5: "Pain after Achilles tendon rupture / surgery",
+            q6: "Heel Pain",
+            q7: "Calf Pain",
+            q8: "Calf Spasm",
+            q9: "Knee Pain",
+            q10: "Nerve Pain",
+            q11: "Scar healing post-surgery",
+        },
+        answers: {
+            q1: 'Tendons, like bones, heal well in the right conditions. For the Achilles tendon it is thought that healing is best when the two torn ends are close together. Usually this is achieved by putting the foot into a tip toe position and keeping it there with a plaster cast or boot. If the ends of the tendon do not come together well, leaving a "gap" (this can be determined using an ultrasound scan) then surgery may be an option. The operation is to bring the ends together. It does not make the tendon strong. The same long recovery is required whether or not surgery is used. For real-world recovery examples, read our <a href="/FAQs/torn-achilles-recovery" class="text-primary underline">Torn Achilles recovery guide</a>.',
+            q2: 'Most surgeons prefer to repair the tendon (when surgery is required) within three weeks of the injury. This is because after that the "elastic" tendon ends have pulled apart and are harder to join.',
+            q3: "Surgery to repair the Achilles tendon is usually performed as a Day Surgery procedure. The operation takes less than one hour. The recovery and rehabilitation will take many months.",
+            q4: "It takes 2 weeks for the skin stitches to heal and you will probably be in a plaster cast till then. Once you are supported in a suitable boot, with the foot held in a tip-toe posture, then you can (and should) walk. Crutches may still be useful, to help with balance. After a few weeks (4-6) the boot is adjusted little by little to allow the heel to come down. From ten weeks (approximately) the boot is no longer needed. Now the long process of building up the muscle and rehabilitating begins. This phase lasts for about 6 months.",
+            q5: 'The initial "snap" is painful, but this usually subsides quickly. The injury is then surprisingly painless. Similarly, if surgical repair is needed there is not much need for pain medication once the soreness from the skin cut settles.',
+            q6: "Once you are walking in the boot then the underneath of the heel can become sore. Adding a gel heel cushion from the chemist store may help. This type of pain tends to resolve once you begin rehabilitation without the boot.",
+            q7: "This should not be ignored, particularly if there is swelling affecting the whole lower leg. This combination of problems might mean there is a blocked vein (thrombosis), which can still occur even if you are taking blood thinners to prevent such problems. Seek medical advice if you are worried about this.",
+            q8: 'A more common type of calf pain is cramping from the muscle which "has nothing to pull on" due to the tendon rupture. This type of pain will not have associated swelling and is intermittent.',
+            q9: "This can occur due to the awkwardness of the high heeled boot and might affect either knee.",
+            q10: "Nerve damage is possible with surgical repair but tends to leave numbness rather than pain. Awkward walking from the boot (or crutches) can rarely give rise to back trouble and sciatica-like pain.",
+            q11: 'The skin scar from an Achilles tendon repair usually heals very well, becoming almost invisible with time. During the early weeks after surgery there is a risk of skin infection, so resting properly to begin with is important (to keep the swelling down and stop the wound stretching). Once the plaster is removed and the sutures have gone you may wish to use creams or ointments rich in Vitamin E. Special scar reducing adhesive dressings may be of benefit, especially if you are prone to broad or "keloid" scar formation.',
+        },
+    },
+    es: {
+        title: "Encuentra tu respuesta:",
+        questions: {
+            q1: "¿Cómo tratar un tendón de Aquiles desgarrado – cirugía vs no quirúrgico?",
+            q2: "¿Cuánto tiempo puedes esperar para la cirugía del tendón de Aquiles?",
+            q3: "¿Cuánto tiempo toma la cirugía del tendón de Aquiles?",
+            q4: "Recuperación de la cirugía de rotura del tendón de Aquiles",
+            q5: "Dolor después de la rotura/cirugía del tendón de Aquiles",
+            q6: "Dolor en el talón",
+            q7: "Dolor en la pantorrilla",
+            q8: "Espasmo en la pantorrilla",
+            q9: "Dolor en la rodilla",
+            q10: "Dolor nervioso",
+            q11: "Cicatrización post-cirugía",
+        },
+        answers: {
+            q1: 'Los tendones, como los huesos, sanan bien en las condiciones adecuadas. Para el tendón de Aquiles se cree que la curación es mejor cuando los dos extremos desgarrados están juntos. Generalmente esto se logra poniendo el pie en posición de puntillas y manteniéndolo así con un yeso o bota. Si los extremos del tendón no se juntan bien, dejando un "espacio" (esto se puede determinar usando una ecografía), entonces la cirugía puede ser una opción. La operación es para juntar los extremos. No hace que el tendón sea fuerte. Se requiere la misma recuperación larga tanto si se usa cirugía como si no.',
+            q2: 'La mayoría de los cirujanos prefieren reparar el tendón (cuando se requiere cirugía) dentro de las tres semanas posteriores a la lesión. Esto es porque después de eso los extremos "elásticos" del tendón se han separado y son más difíciles de unir.',
+            q3: "La cirugía para reparar el tendón de Aquiles generalmente se realiza como un procedimiento de cirugía ambulatoria. La operación toma menos de una hora. La recuperación y rehabilitación tomará muchos meses.",
+            q4: "Toma 2 semanas para que las suturas de la piel sanen y probablemente estarás en un yeso hasta entonces. Una vez que estés apoyado en una bota adecuada, con el pie sostenido en postura de puntillas, entonces puedes (y debes) caminar. Las muletas aún pueden ser útiles para ayudar con el equilibrio. Después de unas semanas (4-6) la bota se ajusta poco a poco para permitir que el talón baje. Desde las diez semanas (aproximadamente) la bota ya no es necesaria. Ahora comienza el largo proceso de fortalecer el músculo y rehabilitar. Esta fase dura aproximadamente 6 meses.",
+            q5: 'El "chasquido" inicial es doloroso, pero esto generalmente disminuye rápidamente. La lesión es entonces sorprendentemente indolora. De manera similar, si una reparación quirúrgica es necesaria, no hay mucha necesidad de medicación para el dolor una vez que se calma la molestia del corte en la piel.',
+            q6: "Una vez que estés caminando en la bota, la parte inferior del talón puede volverse dolorosa. Agregar una almohadilla de gel para el talón de la farmacia puede ayudar. Este tipo de dolor tiende a resolverse una vez que comienzas la rehabilitación sin la bota.",
+            q7: "Esto no debe ignorarse, particularmente si hay hinchazón que afecta toda la parte inferior de la pierna. Esta combinación de problemas podría significar que hay una vena bloqueada (trombosis), que aún puede ocurrir incluso si estás tomando anticoagulantes para prevenir tales problemas. Busca consejo médico si estás preocupado por esto.",
+            q8: 'Un tipo más común de dolor en la pantorrilla es el calambre del músculo que "no tiene nada a qué agarrarse" debido a la rotura del tendón. Este tipo de dolor no tendrá hinchazón asociada y es intermitente.',
+            q9: "Esto puede ocurrir debido a la incomodidad de la bota a tacón alto y podría afectar cualquiera de las rodillas.",
+            q10: "El daño nervioso es posible con la reparación quirúrgica pero tiende a dejar entumecimiento en lugar de dolor. Caminar incómodamente con la bota (o muletas) raramente puede dar lugar a problemas de espalda y dolor similar a la ciática.",
+            q11: 'La cicatriz de la piel de una reparación del tendón de Aquiles generalmente sana muy bien, volviéndose casi invisible con el tiempo. Durante las primeras semanas después de la cirugía hay riesgo de infección de la piel, por lo que descansar adecuadamente al principio es importante (para mantener la hinchazón baja y evitar que la herida se estire). Una vez que se quita el yeso y las suturas se han ido, puedes querer usar cremas o ungüentos ricos en vitamina E. Vendajes adhesivos especiales para reducir cicatrices pueden ser beneficiosos, especialmente si eres propenso a la formación de cicatrices anchas o "queloides".',
+        },
+    },
+    fr: {
+        title: "Trouvez votre réponse :",
+        questions: {
+            q1: "Comment traiter un tendon d'Achille déchiré – chirurgie vs non-chirurgical ?",
+            q2: "Combien de temps pouvez-vous attendre pour la chirurgie du tendon d'Achille ?",
+            q3: "Combien de temps dure la chirurgie du tendon d'Achille ?",
+            q4: "Récupération après chirurgie de rupture du tendon d'Achille",
+            q5: "Douleur après rupture/chirurgie du tendon d'Achille",
+            q6: "Douleur au talon",
+            q7: "Douleur au mollet",
+            q8: "Spasme du mollet",
+            q9: "Douleur au genou",
+            q10: "Douleur nerveuse",
+            q11: "Cicatrisation post-chirurgie",
+        },
+        answers: {
+            q1: "Les tendons, comme les os, guérissent bien dans les bonnes conditions. Pour le tendon d'Achille, on pense que la guérison est meilleure lorsque les deux extrémités déchirées sont proches l'une de l'autre. Habituellement, cela est obtenu en mettant le pied en position de pointe et en le maintenant ainsi avec un plâtre ou une botte. Si les extrémités du tendon ne se rejoignent pas bien, laissant un \"espace\" (cela peut être déterminé par une échographie), alors la chirurgie peut être une option. L'opération consiste à rapprocher les extrémités. Cela ne rend pas le tendon fort. La même longue récupération est requise que la chirurgie soit utilisée ou non.",
+            q2: "La plupart des chirurgiens préfèrent réparer le tendon (lorsque la chirurgie est requise) dans les trois semaines suivant la blessure. C'est parce qu'après cela, les extrémités \"élastiques\" du tendon se sont séparées et sont plus difficiles à joindre.",
+            q3: "La chirurgie pour réparer le tendon d'Achille est généralement effectuée comme une procédure de chirurgie d'un jour. L'opération prend moins d'une heure. La récupération et la rééducation prendront plusieurs mois.",
+            q4: "Il faut 2 semaines pour que les points de suture de la peau guérissent et vous serez probablement dans un plâtre jusqu'alors. Une fois que vous êtes soutenu dans une botte appropriée, avec le pied maintenu en posture de pointe, alors vous pouvez (et devriez) marcher. Les béquilles peuvent encore être utiles pour aider à l'équilibre. Après quelques semaines (4-6), la botte est ajustée petit à petit pour permettre au talon de descendre. À partir de dix semaines (approximativement), la botte n'est plus nécessaire. Maintenant commence le long processus de renforcement musculaire et de rééducation. Cette phase dure environ 6 mois.",
+            q5: 'Le "claquement" initial est douloureux, mais cela diminue généralement rapidement. La blessure est alors étonnamment indolore. De même, si une réparation chirurgicale est nécessaire, il n\'y a pas beaucoup besoin de médicaments contre la douleur une fois que la douleur de la coupure de la peau se calme.',
+            q6: "Une fois que vous marchez dans la botte, la partie inférieure du talon peut devenir douloureuse. Ajouter un coussin de talon en gel de la pharmacie peut aider. Ce type de douleur tend à se résoudre une fois que vous commencez la rééducation sans la botte.",
+            q7: "Cela ne doit pas être ignoré, particulièrement s'il y a un gonflement affectant toute la partie inférieure de la jambe. Cette combinaison de problèmes pourrait signifier qu'il y a une veine bloquée (thrombose), qui peut encore survenir même si vous prenez des anticoagulants pour prévenir de tels problèmes. Consultez un médecin si vous êtes inquiet à ce sujet.",
+            q8: "Un type plus commun de douleur au mollet est la crampe du muscle qui \"n'a rien à tirer\" à cause de la rupture du tendon. Ce type de douleur n'aura pas de gonflement associé et est intermittent.",
+            q9: "Cela peut survenir à cause de l'inconfort de la botte à talon haut et pourrait affecter l'un ou l'autre genou.",
+            q10: "Les dommages nerveux sont possibles avec la réparation chirurgicale mais tendent à laisser un engourdissement plutôt que de la douleur. Marcher maladroitement avec la botte (ou les béquilles) peut rarement donner lieu à des problèmes de dos et des douleurs similaires à la sciatique.",
+            q11: "La cicatrice de la peau d'une réparation du tendon d'Achille guérit généralement très bien, devenant presque invisible avec le temps. Pendant les premières semaines après la chirurgie, il y a un risque d'infection de la peau, donc se reposer correctement au début est important (pour maintenir le gonflement bas et empêcher la plaie de s'étirer). Une fois que le plâtre est retiré et que les sutures sont parties, vous pouvez vouloir utiliser des crèmes ou onguents riches en vitamine E. Des pansements adhésifs spéciaux pour réduire les cicatrices peuvent être bénéfiques, surtout si vous êtes sujet à la formation de cicatrices larges ou \"chéloïdes\".",
+        },
+    },
+    de: {
+        title: "Finden Sie Ihre Antwort:",
+        questions: {
+            q1: "Wie behandelt man eine gerissene Achillessehne – Operation vs nicht-chirurgisch?",
+            q2: "Wie lange kann man auf eine Achillessehnen-Operation warten?",
+            q3: "Wie lange dauert eine Achillessehnen-Operation?",
+            q4: "Erholung nach Achillessehnen-Ruptur-Operation",
+            q5: "Schmerzen nach Achillessehnen-Ruptur/Operation",
+            q6: "Fersenschmerzen",
+            q7: "Wadenschmerzen",
+            q8: "Wadenkrampf",
+            q9: "Knieschmerzen",
+            q10: "Nervenschmerzen",
+            q11: "Narbenheilung nach Operation",
+        },
+        answers: {
+            q1: 'Sehnen heilen wie Knochen gut unter den richtigen Bedingungen. Für die Achillessehne wird angenommen, dass die Heilung am besten ist, wenn die beiden gerissenen Enden nahe beieinander sind. Dies wird normalerweise erreicht, indem der Fuß in eine Zehenspitzenposition gebracht und dort mit einem Gipsverband oder Stiefel gehalten wird. Wenn die Enden der Sehne nicht gut zusammenkommen und eine "Lücke" hinterlassen (dies kann mit einer Ultraschalluntersuchung bestimmt werden), dann kann eine Operation eine Option sein. Die Operation dient dazu, die Enden zusammenzubringen. Sie macht die Sehne nicht stark. Die gleiche lange Erholung ist erforderlich, ob eine Operation verwendet wird oder nicht.',
+            q2: 'Die meisten Chirurgen bevorzugen es, die Sehne zu reparieren (wenn eine Operation erforderlich ist) innerhalb von drei Wochen nach der Verletzung. Das liegt daran, dass danach die "elastischen" Sehnenenden auseinandergezogen sind und schwerer zu verbinden sind.',
+            q3: "Die Operation zur Reparatur der Achillessehne wird normalerweise als Tageschirurgie durchgeführt. Die Operation dauert weniger als eine Stunde. Die Erholung und Rehabilitation wird viele Monate dauern.",
+            q4: "Es dauert 2 Wochen, bis die Hautnähte heilen, und Sie werden wahrscheinlich bis dahin in einem Gipsverband sein. Sobald Sie in einem geeigneten Stiefel unterstützt werden, mit dem Fuß in Zehenspitzenhaltung gehalten, dann können (und sollten) Sie laufen. Krücken können immer noch nützlich sein, um beim Gleichgewicht zu helfen. Nach einigen Wochen (4-6) wird der Stiefel nach und nach angepasst, um die Ferse nach unten zu lassen. Ab zehn Wochen (ungefähr) wird der Stiefel nicht mehr benötigt. Jetzt beginnt der lange Prozess des Muskelaufbaus und der Rehabilitation. Diese Phase dauert etwa 6 Monate.",
+            q5: 'Das anfängliche "Schnappen" ist schmerzhaft, aber dies lässt normalerweise schnell nach. Die Verletzung ist dann überraschenderweise schmerzlos. Ebenso ist bei einer chirurgischen Reparatur nicht viel Schmerzmedikation erforderlich, sobald die Schmerzen des Hautschnitts nachlassen.',
+            q6: "Sobald Sie im Stiefel laufen, kann die Unterseite der Ferse wund werden. Das Hinzufügen eines Gel-Fersenkissens aus der Apotheke kann helfen. Diese Art von Schmerz neigt dazu, sich zu lösen, sobald Sie mit der Rehabilitation ohne den Stiefel beginnen.",
+            q7: "Dies sollte nicht ignoriert werden, besonders wenn es Schwellungen gibt, die den gesamten Unterschenkel betreffen. Diese Kombination von Problemen könnte bedeuten, dass es eine blockierte Vene (Thrombose) gibt, die noch auftreten kann, auch wenn Sie Blutverdünner einnehmen, um solche Probleme zu verhindern. Suchen Sie ärztlichen Rat, wenn Sie sich darüber Sorgen machen.",
+            q8: 'Eine häufigere Art von Wadenschmerzen ist das Krampfen des Muskels, der "nichts zum Ziehen hat" aufgrund der Sehnenruptur. Diese Art von Schmerz wird keine begleitende Schwellung haben und ist intermittierend.',
+            q9: "Dies kann aufgrund der Unbeholfenheit des hochhackigen Stiefels auftreten und könnte beide Knie betreffen.",
+            q10: "Nervenschäden sind bei chirurgischen Reparaturen möglich, neigen aber dazu, Taubheit anstatt Schmerzen zu hinterlassen. Unbeholfenes Gehen mit dem Stiefel (oder Krücken) kann selten zu Rückenproblemen und Ischias-ähnlichen Schmerzen führen.",
+            q11: 'Die Hautnarbe von einer Achillessehnen-Reparatur heilt normalerweise sehr gut und wird mit der Zeit fast unsichtbar. Während der ersten Wochen nach der Operation besteht ein Risiko für Hautinfektionen, daher ist es wichtig, sich anfangs richtig auszuruhen (um die Schwellung niedrig zu halten und zu verhindern, dass die Wunde sich dehnt). Sobald der Gips entfernt ist und die Nähte weg sind, möchten Sie möglicherweise Cremes oder Salben reich an Vitamin E verwenden. Spezielle narbenreduzierende Klebeverbände können von Vorteil sein, besonders wenn Sie anfällig für breite oder "Keloid"-Narbenbildung sind.',
+        },
+    },
+    it: {
+        title: "Trova la tua risposta:",
+        questions: {
+            q1: "Come trattare un tendine d'Achille rotto – chirurgia vs non chirurgico?",
+            q2: "Quanto tempo puoi aspettare per la chirurgia del tendine d'Achille?",
+            q3: "Quanto tempo dura la chirurgia del tendine d'Achille?",
+            q4: "Recupero dalla chirurgia di rottura del tendine d'Achille",
+            q5: "Dolore dopo rottura/chirurgia del tendine d'Achille",
+            q6: "Dolore al tallone",
+            q7: "Dolore al polpaccio",
+            q8: "Spasmo del polpaccio",
+            q9: "Dolore al ginocchio",
+            q10: "Dolore nervoso",
+            q11: "Guarigione della cicatrice post-chirurgia",
+        },
+        answers: {
+            q1: "I tendini, come le ossa, guariscono bene nelle giuste condizioni. Per il tendine d'Achille si ritiene che la guarigione sia migliore quando le due estremità rotte sono vicine tra loro. Di solito questo si ottiene mettendo il piede in posizione di punta e mantenendolo così con un gesso o uno stivale. Se le estremità del tendine non si uniscono bene, lasciando un \"gap\" (questo può essere determinato usando un'ecografia), allora la chirurgia può essere un'opzione. L'operazione è per unire le estremità. Non rende il tendine forte. La stessa lunga recupero è richiesta sia che si usi la chirurgia o meno.",
+            q2: 'La maggior parte dei chirurghi preferisce riparare il tendine (quando la chirurgia è richiesta) entro tre settimane dall\'infortunio. Questo perché dopo di che le estremità "elastiche" del tendine si sono separate e sono più difficili da unire.',
+            q3: "La chirurgia per riparare il tendine d'Achille viene solitamente eseguita come procedura di chirurgia diurna. L'operazione richiede meno di un'ora. Il recupero e la riabilitazione richiederanno molti mesi.",
+            q4: "Ci vogliono 2 settimane perché i punti di sutura della pelle guariscano e probabilmente sarai in un gesso fino ad allora. Una volta che sei supportato in uno stivale adatto, con il piede tenuto in postura di punta, allora puoi (e dovresti) camminare. Le stampelle possono ancora essere utili per aiutare con l'equilibrio. Dopo alcune settimane (4-6) lo stivale viene regolato poco a poco per permettere al tallone di scendere. Da dieci settimane (circa) lo stivale non è più necessario. Ora inizia il lungo processo di costruzione muscolare e riabilitazione. Questa fase dura circa 6 mesi.",
+            q5: "Lo \"schiocco\" iniziale è doloroso, ma questo di solito diminuisce rapidamente. L'infortunio è poi sorprendentemente indolore. Allo stesso modo, se è necessaria una riparazione chirurgica, non c'è molto bisogno di farmaci per il dolore una volta che il dolore del taglio della pelle si calma.",
+            q6: "Una volta che cammini nello stivale, la parte inferiore del tallone può diventare dolorosa. Aggiungere un cuscinetto per tallone in gel dalla farmacia può aiutare. Questo tipo di dolore tende a risolversi una volta che inizi la riabilitazione senza lo stivale.",
+            q7: "Questo non deve essere ignorato, particolarmente se c'è gonfiore che colpisce tutta la parte inferiore della gamba. Questa combinazione di problemi potrebbe significare che c'è una vena bloccata (trombosi), che può ancora verificarsi anche se stai prendendo fluidificanti del sangue per prevenire tali problemi. Cerca consiglio medico se sei preoccupato per questo.",
+            q8: 'Un tipo più comune di dolore al polpaccio è il crampo del muscolo che "non ha nulla a cui aggrapparsi" a causa della rottura del tendine. Questo tipo di dolore non avrà gonfiore associato ed è intermittente.',
+            q9: "Questo può verificarsi a causa dell'imbarazzo dello stivale con tacco alto e potrebbe colpire entrambe le ginocchia.",
+            q10: "Il danno nervoso è possibile con la riparazione chirurgica ma tende a lasciare intorpidimento piuttosto che dolore. Camminare goffamente con lo stivale (o le stampelle) può raramente dare origine a problemi alla schiena e dolori simili alla sciatica.",
+            q11: "La cicatrice della pelle da una riparazione del tendine d'Achille di solito guarisce molto bene, diventando quasi invisibile con il tempo. Durante le prime settimane dopo la chirurgia c'è un rischio di infezione della pelle, quindi riposare adeguatamente all'inizio è importante (per mantenere il gonfiore basso e fermare la ferita che si allunga). Una volta che il gesso viene rimosso e le suture sono andate, potresti voler usare creme o unguenti ricchi di vitamina E. Bende adesive speciali per ridurre le cicatrici possono essere di beneficio, specialmente se sei incline alla formazione di cicatrici larghe o \"cheloidi\".",
+        },
+    },
+};
+
+const currentContent = content[lang];
+---
+
+<section id="faq-slide" class="faq slide">
+    <div class="questions">
+        <h2>{currentContent.title}</h2>
+        <a href="#q1">
+            <h3>
+                {currentContent.questions.q1}
+            </h3>
+        </a>
+        <a href="#q2">
+            <h3>{currentContent.questions.q2}</h3>
+        </a>
+        <a href="#q3">
+            <h3>{currentContent.questions.q3}</h3>
+        </a>
+        <a href="#q4">
+            <h3>{currentContent.questions.q4}</h3>
+        </a>
+        <a href="#q5">
+            <h3>{currentContent.questions.q5}</h3>
+        </a>
+        <ul>
+            <li>
+                <a href="#q6">
+                    <h3>{currentContent.questions.q6}</h3>
+                </a>
+            </li>
+            <li>
+                <a href="#q7">
+                    <h3>{currentContent.questions.q7}</h3>
+                </a>
+            </li>
+            <li>
+                <a href="#q8">
+                    <h3>{currentContent.questions.q8}</h3>
+                </a>
+            </li>
+            <li>
+                <a href="#q9">
+                    <h3>{currentContent.questions.q9}</h3>
+                </a>
+            </li>
+            <li>
+                <a href="#q10">
+                    <h3>{currentContent.questions.q10}</h3>
+                </a>
+            </li>
+        </ul>
+        <a href="#q11">
+            <h3>{currentContent.questions.q11}</h3>
+        </a>
+    </div>
+    <div class="answers">
+        <div id="q1"></div>
+        <h2>
+            {currentContent.questions.q1}
+        </h2>
+        <p set:html={currentContent.answers.q1} />
+        <div id="q2"></div>
+        <h2>{currentContent.questions.q2}</h2>
+        <p>{currentContent.answers.q2}</p>
+        <div id="q3"></div>
+        <h2>{currentContent.questions.q3}</h2>
+        <p>{currentContent.answers.q3}</p>
+        <div id="q4"></div>
+        <h2>{currentContent.questions.q4}</h2>
+        <p>{currentContent.answers.q4}</p>
+        <div id="q5"></div>
+        <h2>{currentContent.questions.q5}</h2>
+        <p>{currentContent.answers.q5}</p>
+        <ul>
+            <div id="q6"></div>
+
+            <li>
+                <b>{currentContent.questions.q6}</b> - {
+                    currentContent.answers.q6
+                }
+            </li>
+            <div id="q7"></div>
+
+            <li>
+                <b>{currentContent.questions.q7}</b> – {
+                    currentContent.answers.q7
+                }
+            </li>
+            <div id="q8"></div>
+            <li>
+                <b>{currentContent.questions.q8}</b> – {
+                    currentContent.answers.q8
+                }
+            </li>
+            <div id="q9"></div>
+
+            <li>
+                <b>{currentContent.questions.q9}</b> – {
+                    currentContent.answers.q9
+                }
+            </li>
+            <div id="q10"></div>
+
+            <li>
+                <b>{currentContent.questions.q10}</b> – {
+                    currentContent.answers.q10
+                }
+            </li>
+        </ul>
+        <div id="q11"></div>
+
+        <h2>{currentContent.questions.q11}</h2>
+        <p>{currentContent.answers.q11}</p>
+    </div>
+</section>

@@ -45,6 +45,12 @@ const content = {
             "La férula de rotura de Aquiles de Thetis Medical para hacer el sueño más agradable y soportable. La ortesis se sujeta a la pierna para prevenir más lesiones del tendón.",
         image: "https://thetismedical.com/images/night_splint_bed_top_square.jpg",
     },
+    it: {
+        title: "Férula per Rottura di Achille",
+        description:
+            "La férula per rottura di Achille di Thetis Medical per rendere il sonno più piacevole e supportabile. L'ortesi si fissa alla gamba per prevenire ulteriori lesioni del tendine.",
+        image: "https://thetismedical.com/images/night_splint_bed_top_square.jpg",
+    },
 };
 
 const currentContent = content[lang as keyof typeof content];
@@ -60,22 +66,22 @@ const currentContent = content[lang as keyof typeof content];
     image={currentContent.image}
     lang={lang}
 >
-    <main class="">
-        <NightSplintHero lang="en" />
+    <main>
+        <NightSplintHero lang={lang} />
 
-        <SplintIntro lang="en" />
+        <SplintIntro lang={lang} />
 
         <SleepInYourWelliesSection />
 
         <Reviews />
 
-        <ValuePropositions lang="en" />
+        <ValuePropositions lang={lang} />
 
-        <KeyFeatures lang="en" />
+        <KeyFeatures lang={lang} />
 
-        <ReadyForRelief lang="en" />
+        <ReadyForRelief lang={lang} />
 
-        <ComfortableRecoveryReviews lang="en" />
+        <ComfortableRecoveryReviews lang={lang} />
 
         <div class="relative mx-auto mt-8 w-full">
             <iframe
@@ -88,17 +94,17 @@ const currentContent = content[lang as keyof typeof content];
             </iframe>
         </div>
 
-        <NightSplintUsage lang="en" />
+        <NightSplintUsage lang={lang} />
 
-        <NightSplintInstructions lang="en" />
+        <NightSplintInstructions lang={lang} />
 
         <Slide title="Sizing">
             <SizeChart />
         </Slide>
 
-        <SplintDownloads lang="en" />
+        <SplintDownloads lang={lang} />
 
-        <OrderYourSplint lang="en" />
+        <OrderYourSplint lang={lang} />
 
         <Slide title="FAQs">
             <NightSplintFAQs client:load />

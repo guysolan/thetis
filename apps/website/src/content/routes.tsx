@@ -2,14 +2,44 @@ import nightSplintImage from "./night_splint_bed_side.jpg";
 import AchillesDrawing from "../assets/drawings/achilles-drawing.svg";
 import { type Language, languages } from "../config/languages";
 import type { ImageMetadata } from "astro";
+import {
+  Box,
+  ClipboardCheck,
+  Handshake,
+  HeartHandshake,
+  Mail,
+  Microscope,
+  Rewind,
+  ShoppingCart,
+  Stethoscope,
+} from "lucide-react";
 
+/**
+ * Flexible URL Mapping System
+ *
+ * This system allows multiple URLs to map to the same content across languages.
+ *
+ * Examples:
+ * - Any of these URLs: ['/splint', '/night-splint', '/achilles-splint', '/de/achillessehnenriss-schiene']
+ *   will map to '/it/ferula-rottura-tendine-achille' when switching to Italian
+ *
+ * - Any of these URLs: ['/reviews', '/customer-reviews', '/testimonials', '/de/bewertungen']
+ *   will map to '/it/recensioni' when switching to Italian
+ *
+ * The system handles:
+ * 1. Translated slugs (e.g., 'splint' -> 'achillessehnenriss-schiene' in German)
+ * 2. Legacy slugs (e.g., 'night-splint' -> 'achillessehnenriss-schiene' in German)
+ * 3. Base slugs (e.g., 'splint' -> 'splint' in English)
+ * 4. Fallback to simple language prefix if no route is found
+ */
 // Base route definition
 export interface BaseRoute {
   slug: string; // Base slug without language prefix
   title: Record<string, string>; // Titles for each language
   description: Record<string, string>; // Descriptions for each language
   slugTranslations?: Record<string, string>; // Translated slugs for each language
-  icon?: string; // Icon name as string
+  legacySlugs?: string[]; // Array of legacy/alternative slugs that should map to this route
+  icon?: string | React.ReactNode; // Icon name as string or React component
   variant?: "default" | "outline";
   image?: ImageMetadata; // ImageMetadata
   tags?: Array<{ words: string; color: string }>;
@@ -20,7 +50,7 @@ export interface Route {
   href: string; // Full href including language prefix
   title: string;
   description: string;
-  icon?: string; // Icon name as string
+  icon?: React.ReactNode; // Icon as React component
   variant?: "default" | "outline";
   image?: ImageMetadata; // ImageMetadata
   tags?: Array<{ words: string; color: string }>;
@@ -31,12 +61,13 @@ export interface Route {
 // Product routes
 export const productRoutes: BaseRoute[] = [
   {
-    slug: "splint",
+    slug: "achilles-rupture-splint",
     title: {
       en: "Achilles Rupture Splint",
       de: "Achillessehnen-Ruptur-Schiene",
       fr: "Attelle de Rupture d'Achille",
       es: "Férula de Ruptura de Aquiles",
+      it: "Férula per Rottura di Achille",
     },
     description: {
       en: "Recovery quicker and more comfortably from achilles tendon rupture.",
@@ -45,13 +76,22 @@ export const productRoutes: BaseRoute[] = [
         "Récupération plus rapide et plus confortable de la rupture du tendon d'Achille.",
       es:
         "Recuperación más rápida y cómoda de la ruptura del tendón de Aquiles.",
+      it:
+        "Recupero più veloce e confortevole dalla rottura del tendine di Achille.",
     },
     slugTranslations: {
       en: "achilles-rupture-splint",
       de: "achillessehnenriss-schiene",
       fr: "attelle-rupture-tendon-achille",
       es: "bota-ortopedica-tendon-aquiles",
+      it: "tutore-tendine-achille",
     },
+    legacySlugs: [
+      "splint",
+      "night-splint",
+      "achilles-tendon-splint",
+      "achilles-splint",
+    ],
     image: nightSplintImage,
     icon: "Moon",
     variant: "outline",
@@ -63,13 +103,16 @@ export const productRoutes: BaseRoute[] = [
       de: "Bewertungen",
       fr: "Avis",
       es: "Reseñas",
+      it: "Recensioni",
     },
     description: {
       en: "Read what our customers have to say about our products.",
       de: "Lesen Sie, was unsere Kunden über unsere Produkte sagen.",
       fr: "Lisez ce que nos clients disent de nos produits.",
       es: "Lea lo que nuestros clientes dicen sobre nuestros productos.",
+      it: "Leggi cosa dicono i nostri clienti sui nostri prodotti.",
     },
+    legacySlugs: ["customer-reviews", "testimonials", "feedback"],
     icon: "Star",
     variant: "outline",
   },
@@ -84,6 +127,7 @@ export const partnerRoutes: BaseRoute[] = [
       de: "Fachkräfte",
       fr: "Professionnels",
       es: "Profesionales",
+      it: "Professionisti",
     },
     description: {
       en: "Join other clinicians improving patient recovery.",
@@ -92,8 +136,11 @@ export const partnerRoutes: BaseRoute[] = [
       fr:
         "Rejoignez d'autres cliniciens qui améliorent la récupération des patients.",
       es: "Únase a otros médicos que mejoran la recuperación de los pacientes.",
+      it:
+        "Unisciti ad altri clinici che migliorano la guarigione dei pazienti.",
     },
-    icon: "Stethoscope",
+    legacySlugs: ["clinicians", "healthcare-professionals", "doctors"],
+    icon: <Stethoscope />,
     variant: "default",
   },
   {
@@ -103,14 +150,16 @@ export const partnerRoutes: BaseRoute[] = [
       de: "Unsere Partner",
       fr: "Nos Partenaires",
       es: "Nuestros Socios",
+      it: "I Nostri Partner",
     },
     description: {
       en: "Our partners are the best in the business.",
       de: "Unsere Partner sind die Besten in der Branche.",
       fr: "Nos partenaires sont les meilleurs du secteur.",
       es: "Nuestros socios son los mejores del negocio.",
+      it: "I nostri partner sono i migliori del settore.",
     },
-    icon: "HeartHandshake",
+    icon: <HeartHandshake />,
     variant: "outline",
   },
   {
@@ -120,14 +169,16 @@ export const partnerRoutes: BaseRoute[] = [
       de: "Unsere Forschung",
       fr: "Notre Recherche",
       es: "Nuestra Investigación",
+      it: "La Nostra Ricerca",
     },
     description: {
       en: "Our analysis of Achilles Rupture Recovery.",
       de: "Unsere Analyse der Achillessehnenriss-Genesung.",
       fr: "Notre analyse de la récupération de la rupture d'Achille.",
       es: "Nuestro análisis de la recuperación de la ruptura de Aquiles.",
+      it: "La nostra analisi della guarigione della rottura di Achille.",
     },
-    icon: "Microscope",
+    icon: <Microscope />,
     variant: "outline",
   },
   {
@@ -137,6 +188,7 @@ export const partnerRoutes: BaseRoute[] = [
       de: "Nachweis",
       fr: "Preuves",
       es: "Evidencia",
+      it: "Prove",
     },
     description: {
       en: "Proven to shorten time to care and improve patient experience.",
@@ -146,8 +198,10 @@ export const partnerRoutes: BaseRoute[] = [
         "Prouvé pour raccourcir le temps de soins et améliorer l'expérience patient.",
       es:
         "Comprobado para acortar el tiempo de atención y mejorar la experiencia del paciente.",
+      it:
+        "Dimostrato per ridurre i tempi di cura e migliorare l'esperienza del paziente.",
     },
-    icon: "ClipboardCheck",
+    icon: <ClipboardCheck />,
     variant: "outline",
   },
 ];
@@ -161,14 +215,16 @@ export const contactRoutes: BaseRoute[] = [
       de: "Kontaktieren Sie uns",
       fr: "Contactez-nous",
       es: "Contáctanos",
+      it: "Contattaci",
     },
     description: {
       en: "Contact us for more information.",
       de: "Kontaktieren Sie uns für weitere Informationen.",
       fr: "Contactez-nous pour plus d'informations.",
       es: "Contáctenos para más información.",
+      it: "Contattaci per maggiori informazioni.",
     },
-    icon: "Mail",
+    icon: <Mail />,
     variant: "default",
   },
   {
@@ -187,7 +243,7 @@ export const contactRoutes: BaseRoute[] = [
       es: "Compre nuestra férula de ruptura de Aquiles.",
       it: "Acquista la nostra férula per rottura di Achille.",
     },
-    icon: "ShoppingCart",
+    icon: <ShoppingCart />,
     variant: "default",
   },
   {
@@ -206,7 +262,7 @@ export const contactRoutes: BaseRoute[] = [
       es: "Solicite productos al por mayor para su clínica.",
       it: "Ordina prodotti all'ingrosso per la tua clinica.",
     },
-    icon: "Box",
+    icon: <Box />,
     variant: "outline",
   },
   {
@@ -216,14 +272,16 @@ export const contactRoutes: BaseRoute[] = [
       de: "Partner werden",
       fr: "Devenir Partenaire",
       es: "Convertirse en Socio",
+      it: "Diventa Partner",
     },
     description: {
       en: "Become a partner and help us spread the word.",
       de: "Werden Sie Partner und helfen Sie uns, das Wort zu verbreiten.",
       fr: "Devenez partenaire et aidez-nous à faire passer le mot.",
       es: "Conviértase en socio y ayúdenos a correr la voz.",
+      it: "Diventa partner e aiutaci a diffondere la parola.",
     },
-    icon: "Handshake",
+    icon: <Handshake />,
     variant: "outline",
   },
   {
@@ -233,14 +291,16 @@ export const contactRoutes: BaseRoute[] = [
       de: "Rücksendung anfordern",
       fr: "Demander un Retour",
       es: "Solicitar una Devolución",
+      it: "Richiedi un Reso",
     },
     description: {
       en: "Request a return for your product.",
       de: "Fordern Sie eine Rücksendung für Ihr Produkt an.",
       fr: "Demandez un retour pour votre produit.",
       es: "Solicite una devolución para su producto.",
+      it: "Richiedi un reso per il tuo prodotto.",
     },
-    icon: "Rewind",
+    icon: <Rewind />,
     variant: "outline",
   },
 ];
@@ -612,9 +672,11 @@ export function getRouteBySlugAndLanguage(
   slug: string,
   langCode: string,
 ): Route | undefined {
-  // First try to find by translated slug
+  // First try to find by translated slug, then by base slug, then by legacy slugs
   const baseRoute = allBaseRoutes.find((route) =>
-    route.slugTranslations?.[langCode] === slug || route.slug === slug
+    route.slugTranslations?.[langCode] === slug ||
+    route.slug === slug ||
+    route.legacySlugs?.includes(slug)
   );
   const language = languages.find((lang) => lang.code === langCode);
 
@@ -627,9 +689,11 @@ export function getAlternateRoutesForSlug(
   slug: string,
   currentLangCode: string,
 ): Array<{ lang: string; href: string }> {
-  // First try to find by translated slug, then by base slug
+  // First try to find by translated slug, then by base slug, then by legacy slugs
   const baseRoute = allBaseRoutes.find((route) =>
-    route.slugTranslations?.[currentLangCode] === slug || route.slug === slug
+    route.slugTranslations?.[currentLangCode] === slug ||
+    route.slug === slug ||
+    route.legacySlugs?.includes(slug)
   );
   if (!baseRoute) return [];
 
@@ -639,6 +703,52 @@ export function getAlternateRoutesForSlug(
       lang: lang.hreflang,
       href: generateRouteForLanguage(baseRoute, lang).href,
     }));
+}
+
+// Language switcher function - maps any URL to the correct translated URL for a given language
+export function getTranslatedUrlForLanguage(
+  currentUrl: string,
+  targetLangCode: string,
+): string {
+  // Remove leading slash and get the slug
+  let slug = currentUrl.replace(/^\//, "");
+
+  // If the URL starts with a language code, extract the slug after it
+  const languagePrefixes = languages.map((lang) => lang.code);
+  for (const langCode of languagePrefixes) {
+    if (slug.startsWith(`${langCode}/`)) {
+      slug = slug.substring(langCode.length + 1); // +1 for the slash
+      break;
+    }
+  }
+
+  // Find the base route that matches this slug (including legacy slugs)
+  const baseRoute = allBaseRoutes.find((route) => {
+    // Check if this slug matches any of the translated slugs for any language
+    const matchesTranslatedSlug = Object.values(route.slugTranslations || {})
+      .includes(slug);
+    // Check if this slug matches the base slug
+    const matchesBaseSlug = route.slug === slug;
+    // Check if this slug matches any legacy slug
+    const matchesLegacySlug = route.legacySlugs?.includes(slug);
+
+    return matchesTranslatedSlug || matchesBaseSlug || matchesLegacySlug;
+  });
+
+  if (!baseRoute) {
+    // If no route found, just add language prefix as fallback
+    const language = languages.find((lang) => lang.code === targetLangCode);
+    if (language && language.code !== "en") {
+      return `${language.dir}/${slug}`;
+    }
+    return `/${slug}`;
+  }
+
+  // Generate the route for the target language
+  const language = languages.find((lang) => lang.code === targetLangCode);
+  if (!language) return `/${slug}`;
+
+  return generateRouteForLanguage(baseRoute, language).href;
 }
 
 // Backward compatibility exports
@@ -666,3 +776,32 @@ export const faqLinks = articleRoutes.map((route) =>
 export const legalLinks = legalRoutes.map((route) =>
   generateRouteForLanguage(route, languages[0])
 );
+
+// Test function to verify URL mapping (for debugging)
+export function testUrlMapping() {
+  const testCases = [
+    {
+      from: "/de/achillessehnenriss-schiene",
+      to: "fr",
+      expected: "/fr/attelle-rupture-tendon-achille",
+    },
+    { from: "/splint", to: "de", expected: "/de/achillessehnenriss-schiene" },
+    {
+      from: "/night-splint",
+      to: "fr",
+      expected: "/fr/attelle-rupture-tendon-achille",
+    },
+    { from: "/reviews", to: "de", expected: "/de/bewertungen" },
+  ];
+
+  console.log("Testing URL mapping:");
+  testCases.forEach(({ from, to, expected }) => {
+    const result = getTranslatedUrlForLanguage(from, to);
+    const passed = result === expected;
+    console.log(
+      `${from} -> ${to}: ${result} ${
+        passed ? "✅" : "❌ (expected: " + expected + ")"
+      }`,
+    );
+  });
+}

@@ -1,0 +1,722 @@
+---
+import FAQsLayout from "../../layouts/FAQsLayout.astro";
+import TimelineBadge from "../../components/timeline/TimelineBadge.astro";
+import TimelineBlock from "../../components/timeline/TimelineBlock.astro";
+import FAQAccordion from "../../components/research/FaqSchemaAccordion.astro";
+import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+  en: {
+    title:
+      "Achilles Tendon Rupture Recovery Timeline 2024: Week-by-Week Guide (Surgical & Non-Surgical)",
+    description:
+      "Comprehensive 2024 week-by-week timeline for Achilles tendon rupture recovery after surgery or non-surgical treatment – milestones, exercises, physiotherapy tips, and return-to-sport goals.",
+    week1: {
+      title: "Week 1: Initial Injury and Trauma Splint",
+      initialInjury: {
+        title: "Initial Injury",
+        points: [
+          "Immediate medical attention is crucial after an Achilles tendon rupture. If you suspect you have ruptured your Achilles, see our guide: Is My Achilles Ruptured?",
+          "Accurate assessment of the injury severity is important to rule out other injuries, such as a calf muscle tear.",
+          "Temporary immobilization with a plaster cast or trauma splint.",
+        ],
+      },
+      emergencyCare: {
+        title: "Emergency Care (A&E)",
+        points: [
+          'Initial pain management. The initial "snap" is painful, but this usually subsides quickly.',
+          "Trauma splint or plaster cast application to keep the foot in a tip-toe position.",
+          "You will likely be given crutches to help you walk.",
+          "Blood thinning medicine may be advised to prevent a blocked vein (thrombosis).",
+        ],
+      },
+      medicalAssessment: {
+        title: "Medical Assessment",
+        points: [
+          "Physical examination to assess the injury.",
+          "Specialist referral for further care.",
+        ],
+      },
+    },
+    weeks1to3: {
+      title: "Weeks 1–3: Trauma Splint and Treatment Decision",
+      specialistConsultation: {
+        title: "Specialist Consultation",
+        points: [
+          "Detailed examination to confirm the diagnosis of an Achilles tendon rupture.",
+          "Imaging (usually an ultrasound scan) may be recommended to ensure the tendon ends are close together. This helps determine if surgery is an option.",
+        ],
+      },
+      treatmentDecision: {
+        title: "Treatment Decision",
+        points: [
+          "Non-surgical treatment (most common): The foot is held in a tip-toe position with a boot to allow the tendon ends to heal naturally.",
+          "Surgical treatment (some cases): Surgery may be considered if there's a gap between the tendon ends. The goal is to bring the ends together, but it doesn't make the tendon stronger or speed up recovery. Learn more about the Achilles Tear Treatment Pathway.",
+        ],
+      },
+      initialRecovery: {
+        title: "Initial Recovery Phase",
+        points: [
+          "Boot fitting and adjustment to ensure the foot is in the correct position. A splint may be used to maintain proper foot position during sleep, if the boot is uncomfortable.",
+          "Learning to use crutches for balance while walking.",
+          "Non-weight bearing or partial weight-bearing as advised by your healthcare provider.",
+        ],
+      },
+    },
+  },
+  de: {
+    title:
+      "Achillessehnenriss-Genesungszeitplan 2024: Wöchentlicher Leitfaden (Chirurgisch & Nicht-Chirurgisch)",
+    description:
+      "Umfassender wöchentlicher Zeitplan 2024 für die Genesung nach Achillessehnenriss nach chirurgischer oder nicht-chirurgischer Behandlung – Meilensteine, Übungen, Physiotherapie-Tipps und Ziele für die Rückkehr zum Sport.",
+    week1: {
+      title: "Woche 1: Erste Verletzung und Trauma-Schiene",
+      initialInjury: {
+        title: "Erste Verletzung",
+        points: [
+          "Sofortige medizinische Behandlung ist nach einem Achillessehnenriss entscheidend. Wenn Sie vermuten, dass Sie sich Ihren Achilles gerissen haben, sehen Sie unseren Leitfaden: Ist meine Achillessehne gerissen?",
+          "Eine genaue Bewertung des Verletzungsgrades ist wichtig, um andere Verletzungen wie einen Wadenmuskelriss auszuschließen.",
+          "Temporäre Immobilisierung mit einem Gipsverband oder einer Trauma-Schiene.",
+        ],
+      },
+      emergencyCare: {
+        title: "Notfallversorgung (A&E)",
+        points: [
+          'Erste Schmerzbehandlung. Der erste "Knall" ist schmerzhaft, aber dies lässt normalerweise schnell nach.',
+          "Trauma-Schiene oder Gipsverband-Anwendung, um den Fuß in einer Zehenspitzen-Position zu halten.",
+          "Sie erhalten wahrscheinlich Krücken, um Ihnen beim Gehen zu helfen.",
+          "Blutverdünnungsmedikamente können zur Vorbeugung einer verstopften Vene (Thrombose) empfohlen werden.",
+        ],
+      },
+      medicalAssessment: {
+        title: "Medizinische Bewertung",
+        points: [
+          "Körperliche Untersuchung zur Bewertung der Verletzung.",
+          "Facharztüberweisung für weitere Behandlung.",
+        ],
+      },
+    },
+    weeks1to3: {
+      title: "Wochen 1–3: Trauma-Schiene und Behandlungsentscheidung",
+      specialistConsultation: {
+        title: "Facharztkonsultation",
+        points: [
+          "Detaillierte Untersuchung zur Bestätigung der Diagnose eines Achillessehnenrisses.",
+          "Bildgebung (normalerweise ein Ultraschall-Scan) kann empfohlen werden, um sicherzustellen, dass die Sehnenenden nahe beieinander liegen. Dies hilft zu bestimmen, ob eine Operation eine Option ist.",
+        ],
+      },
+      treatmentDecision: {
+        title: "Behandlungsentscheidung",
+        points: [
+          "Nicht-chirurgische Behandlung (am häufigsten): Der Fuß wird in einer Zehenspitzen-Position mit einem Stiefel gehalten, um die Sehnenenden natürlich heilen zu lassen.",
+          "Chirurgische Behandlung (einige Fälle): Eine Operation kann in Betracht gezogen werden, wenn es eine Lücke zwischen den Sehnenenden gibt. Das Ziel ist es, die Enden zusammenzubringen, aber es macht die Sehne nicht stärker oder beschleunigt die Genesung. Erfahren Sie mehr über den Achillessehnenriss-Behandlungsweg.",
+        ],
+      },
+      initialRecovery: {
+        title: "Erste Genesungsphase",
+        points: [
+          "Stiefel-Anpassung und -Einstellung, um sicherzustellen, dass der Fuß in der richtigen Position ist. Eine Schiene kann verwendet werden, um die richtige Fußposition während des Schlafens zu erhalten, wenn der Stiefel unangenehm ist.",
+          "Lernen, Krücken für das Gleichgewicht beim Gehen zu verwenden.",
+          "Nicht-Gewichtstragend oder teilweise Gewichtstragend, wie von Ihrem Gesundheitsdienstleister empfohlen.",
+        ],
+      },
+    },
+  },
+  fr: {
+    title:
+      "Chronologie de Récupération de la Rupture du Tendon d'Achille 2024: Guide Hebdomadaire (Chirurgical et Non-Chirurgical)",
+    description:
+      "Chronologie hebdomadaire complète 2024 pour la récupération de la rupture du tendon d'Achille après traitement chirurgical ou non-chirurgical – étapes, exercices, conseils de physiothérapie et objectifs de retour au sport.",
+    week1: {
+      title: "Semaine 1: Blessure Initiale et Attelle de Traumatisme",
+      initialInjury: {
+        title: "Blessure Initiale",
+        points: [
+          "Une attention médicale immédiate est cruciale après une rupture du tendon d'Achille. Si vous soupçonnez avoir rompu votre tendon d'Achille, consultez notre guide: Mon tendon d'Achille est-il rompu?",
+          "Une évaluation précise de la gravité de la blessure est importante pour exclure d'autres blessures, comme une déchirure du muscle du mollet.",
+          "Immobilisation temporaire avec un plâtre ou une attelle de traumatisme.",
+        ],
+      },
+      emergencyCare: {
+        title: "Soins d'Urgence (A&E)",
+        points: [
+          'Gestion initiale de la douleur. Le "claquement" initial est douloureux, mais cela disparaît généralement rapidement.',
+          "Application d'attelle de traumatisme ou de plâtre pour maintenir le pied en position pointe de pied.",
+          "Vous recevrez probablement des béquilles pour vous aider à marcher.",
+          "Des médicaments anticoagulants peuvent être conseillés pour prévenir une veine bloquée (thrombose).",
+        ],
+      },
+      medicalAssessment: {
+        title: "Évaluation Médicale",
+        points: [
+          "Examen physique pour évaluer la blessure.",
+          "Référence spécialisée pour des soins ultérieurs.",
+        ],
+      },
+    },
+    weeks1to3: {
+      title: "Semaines 1–3: Attelle de Traumatisme et Décision de Traitement",
+      specialistConsultation: {
+        title: "Consultation Spécialisée",
+        points: [
+          "Examen détaillé pour confirmer le diagnostic d'une rupture du tendon d'Achille.",
+          "L'imagerie (généralement une échographie) peut être recommandée pour s'assurer que les extrémités du tendon sont proches. Cela aide à déterminer si la chirurgie est une option.",
+        ],
+      },
+      treatmentDecision: {
+        title: "Décision de Traitement",
+        points: [
+          "Traitement non-chirurgical (le plus courant): Le pied est maintenu en position pointe de pied avec une botte pour permettre aux extrémités du tendon de guérir naturellement.",
+          "Traitement chirurgical (certains cas): La chirurgie peut être considérée s'il y a un écart entre les extrémités du tendon. L'objectif est de rapprocher les extrémités, mais cela ne rend pas le tendon plus fort ou n'accélère pas la récupération. En savoir plus sur la Voie de Traitement de la Déchirure d'Achille.",
+        ],
+      },
+      initialRecovery: {
+        title: "Phase de Récupération Initiale",
+        points: [
+          "Ajustement et adaptation de la botte pour s'assurer que le pied est dans la bonne position. Une attelle peut être utilisée pour maintenir la bonne position du pied pendant le sommeil, si la botte est inconfortable.",
+          "Apprentissage de l'utilisation des béquilles pour l'équilibre lors de la marche.",
+          "Non-port de charge ou port de charge partiel selon les conseils de votre fournisseur de soins de santé.",
+        ],
+      },
+    },
+  },
+  es: {
+    title:
+      "Cronología de Recuperación de la Rotura del Tendón de Aquiles 2024: Guía Semanal (Quirúrgica y No Quirúrgica)",
+    description:
+      "Cronología semanal completa 2024 para la recuperación de la rotura del tendón de Aquiles después del tratamiento quirúrgico o no quirúrgico – hitos, ejercicios, consejos de fisioterapia y objetivos de retorno al deporte.",
+    week1: {
+      title: "Semana 1: Lesión Inicial y Férula de Trauma",
+      initialInjury: {
+        title: "Lesión Inicial",
+        points: [
+          "La atención médica inmediata es crucial después de una rotura del tendón de Aquiles. Si sospecha que se ha roto el tendón de Aquiles, vea nuestra guía: ¿Está roto mi tendón de Aquiles?",
+          "La evaluación precisa de la gravedad de la lesión es importante para descartar otras lesiones, como un desgarro del músculo de la pantorrilla.",
+          "Inmovilización temporal con un yeso o férula de trauma.",
+        ],
+      },
+      emergencyCare: {
+        title: "Atención de Emergencia (A&E)",
+        points: [
+          'Manejo inicial del dolor. El "chasquido" inicial es doloroso, pero esto generalmente desaparece rápidamente.',
+          "Aplicación de férula de trauma o yeso para mantener el pie en posición de punta de pie.",
+          "Probablemente le darán muletas para ayudarle a caminar.",
+          "Se pueden aconsejar medicamentos anticoagulantes para prevenir una vena bloqueada (trombosis).",
+        ],
+      },
+      medicalAssessment: {
+        title: "Evaluación Médica",
+        points: [
+          "Examen físico para evaluar la lesión.",
+          "Referencia especializada para atención adicional.",
+        ],
+      },
+    },
+    weeks1to3: {
+      title: "Semanas 1–3: Férula de Trauma y Decisión de Tratamiento",
+      specialistConsultation: {
+        title: "Consulta Especializada",
+        points: [
+          "Examen detallado para confirmar el diagnóstico de una rotura del tendón de Aquiles.",
+          "Las imágenes (generalmente una ecografía) pueden ser recomendadas para asegurar que los extremos del tendón estén juntos. Esto ayuda a determinar si la cirugía es una opción.",
+        ],
+      },
+      treatmentDecision: {
+        title: "Decisión de Tratamiento",
+        points: [
+          "Tratamiento no quirúrgico (más común): El pie se mantiene en posición de punta de pie con una bota para permitir que los extremos del tendón sanen naturalmente.",
+          "Tratamiento quirúrgico (algunos casos): La cirugía puede ser considerada si hay un espacio entre los extremos del tendón. El objetivo es acercar los extremos, pero no hace el tendón más fuerte o acelera la recuperación. Aprenda más sobre la Vía de Tratamiento de la Rotura de Aquiles.",
+        ],
+      },
+      initialRecovery: {
+        title: "Fase de Recuperación Inicial",
+        points: [
+          "Ajuste y adaptación de la bota para asegurar que el pie esté en la posición correcta. Se puede usar una férula para mantener la posición correcta del pie durante el sueño, si la bota es incómoda.",
+          "Aprender a usar muletas para el equilibrio al caminar.",
+          "Sin carga de peso o carga parcial según lo aconsejado por su proveedor de atención médica.",
+        ],
+      },
+    },
+  },
+  it: {
+    title:
+      "Cronologia di Recupero della Rottura del Tendine di Achille 2024: Guida Settimanale (Chirurgica e Non Chirurgica)",
+    description:
+      "Cronologia settimanale completa 2024 per il recupero della rottura del tendine di Achille dopo trattamento chirurgico o non chirurgico – traguardi, esercizi, consigli di fisioterapia e obiettivi di ritorno allo sport.",
+    week1: {
+      title: "Settimana 1: Lesione Iniziale e Férula da Trauma",
+      initialInjury: {
+        title: "Lesione Iniziale",
+        points: [
+          "L'attenzione medica immediata è cruciale dopo una rottura del tendine di Achille. Se sospetti di aver rotto il tendine di Achille, consulta la nostra guida: Il mio tendine di Achille è rotto?",
+          "Una valutazione accurata della gravità della lesione è importante per escludere altre lesioni, come uno strappo del muscolo del polpaccio.",
+          "Immobilizzazione temporanea con un gesso o férula da trauma.",
+        ],
+      },
+      emergencyCare: {
+        title: "Cure di Emergenza (A&E)",
+        points: [
+          'Gestione iniziale del dolore. Il "crack" iniziale è doloroso, ma di solito scompare rapidamente.',
+          "Applicazione di férula da trauma o gesso per mantenere il piede in posizione a punta di piede.",
+          "Probabilmente ti verranno date le stampelle per aiutarti a camminare.",
+          "Possono essere consigliati farmaci anticoagulanti per prevenire una vena bloccata (trombosi).",
+        ],
+      },
+      medicalAssessment: {
+        title: "Valutazione Medica",
+        points: [
+          "Esame fisico per valutare la lesione.",
+          "Riferimento specialistico per ulteriori cure.",
+        ],
+      },
+    },
+    weeks1to3: {
+      title: "Settimane 1–3: Férula da Trauma e Decisione di Trattamento",
+      specialistConsultation: {
+        title: "Consulenza Specialistica",
+        points: [
+          "Esame dettagliato per confermare la diagnosi di rottura del tendine di Achille.",
+          "L'imaging (di solito un'ecografia) può essere raccomandato per assicurarsi che le estremità del tendine siano vicine. Questo aiuta a determinare se la chirurgia è un'opzione.",
+        ],
+      },
+      treatmentDecision: {
+        title: "Decisione di Trattamento",
+        points: [
+          "Trattamento non chirurgico (più comune): Il piede è mantenuto in posizione a punta di piede con uno stivale per permettere alle estremità del tendine di guarire naturalmente.",
+          "Trattamento chirurgico (alcuni casi): La chirurgia può essere considerata se c'è un gap tra le estremità del tendine. L'obiettivo è avvicinare le estremità, ma non rende il tendine più forte o accelera il recupero. Scopri di più sul Percorso di Trattamento della Rottura di Achille.",
+        ],
+      },
+      initialRecovery: {
+        title: "Fase di Recupero Iniziale",
+        points: [
+          "Adattamento e regolazione dello stivale per assicurarsi che il piede sia nella posizione corretta. Una férula può essere usata per mantenere la corretta posizione del piede durante il sonno, se lo stivale è scomodo.",
+          "Imparare a usare le stampelle per l'equilibrio durante la camminata.",
+          "Non caricamento o caricamento parziale come consigliato dal tuo fornitore di assistenza sanitaria.",
+        ],
+      },
+    },
+  },
+};
+
+const t = content[lang] || content.en;
+---
+
+<FAQsLayout title={t.title} description={t.description} lang={lang}>
+  <section
+    id="faq-slide"
+    class="flex flex-col justify-center items-center mx-auto px-4"
+  >
+    {/* Assuming FAQsLayout generates an <h1> from the title prop */}
+
+    <div class="relative mt-8 w-full max-w-4xl">
+      {/* Vertical Line - hidden on mobile */}
+
+      {/* Week 1 */}
+      <TimelineBlock reverse={true}>
+        <Fragment slot="badge">
+          <TimelineBadge time="Week 1" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            {t.week1.title}
+          </h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="li-heading">{t.week1.initialInjury.title}</span>
+              <ul class="ml-4 list-disc list-inside">
+                {
+                  t.week1.initialInjury.points.map((point) => (
+                    <li set:html={point} />
+                  ))
+                }
+              </ul>
+            </li>
+            <li>
+              <span class="li-heading">{t.week1.emergencyCare.title}</span>
+              <ul class="ml-4 list-disc list-inside">
+                {
+                  t.week1.emergencyCare.points.map((point) => (
+                    <li set:html={point} />
+                  ))
+                }
+              </ul>
+            </li>
+            <li>
+              <span class="li-heading">{t.week1.medicalAssessment.title}</span>
+              <ul class="ml-4 list-disc list-inside">
+                {
+                  t.week1.medicalAssessment.points.map((point) => (
+                    <li set:html={point} />
+                  ))
+                }
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Weeks 1-3 */}
+      <TimelineBlock>
+        <Fragment slot="badge">
+          <TimelineBadge time="Weeks 1-3" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            {t.weeks1to3.title}
+          </h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="li-heading"
+                >{t.weeks1to3.specialistConsultation.title}</span
+              >
+              <ul class="ml-4 list-disc list-inside">
+                {
+                  t.weeks1to3.specialistConsultation.points.map((point) => (
+                    <li set:html={point} />
+                  ))
+                }
+              </ul>
+            </li>
+            <li>
+              <span class="li-heading"
+                >{t.weeks1to3.treatmentDecision.title}</span
+              >
+              <ul class="ml-4 list-disc list-inside">
+                {
+                  t.weeks1to3.treatmentDecision.points.map((point) => (
+                    <li set:html={point} />
+                  ))
+                }
+              </ul>
+            </li>
+            <li>
+              <span class="li-heading">{t.weeks1to3.initialRecovery.title}</span
+              >
+              <ul class="ml-4 list-disc list-inside">
+                {
+                  t.weeks1to3.initialRecovery.points.map((point) => (
+                    <li set:html={point} />
+                  ))
+                }
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Weeks 4-6 */}
+      <TimelineBlock reverse={true}>
+        <Fragment slot="badge">
+          <TimelineBadge time="Weeks 4-6" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            Weeks 4–6: Recovery Progress with Splint
+          </h2>
+          {/* More descriptive h2 */}
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="li-heading">Recovery Progress</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>Regular medical review to monitor healing.</li>
+                <li>
+                  Boot adjustments may begin to allow for a greater range of
+                  motion, gradually reducing the tip-toe position. This is
+                  usually done by removing wedges from the back of the boot.
+                </li>
+                <li>
+                  If difficulty sleeping in the boot, a <a
+                    href="/night-splint"
+                    class="text-primary underline">splint</a
+                  > may be used to maintain proper foot position during sleep. This
+                  helps address the common complaint of sleeping in a heavy boot.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <span class="li-heading">Mobility</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Continue following medical guidance for weight-bearing and
+                  movement. Walking in the boot is generally encouraged.
+                </li>
+                <li>
+                  Gradual progression of mobility exercises as advised by your
+                  physiotherapist. Physiotherapy typically starts around 9-10
+                  weeks after the injury.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Weeks 7-9 */}
+      <TimelineBlock>
+        <Fragment slot="badge">
+          <TimelineBadge time="Weeks 7-9" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            Weeks 7–9: Continued Care and Monitoring
+          </h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="li-heading">Continued Care</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Regular monitoring of your Achilles tendon's healing progress.
+                </li>
+                <li>
+                  Following the established treatment plan closely, including
+                  boot adjustments.
+                </li>
+                <li>
+                  Adjustments to the treatment plan as needed, based on your
+                  progress and your healthcare provider's assessment. Learn more
+                  about the options at <a
+                    href="/FAQs/achilles-tear-treatment"
+                    class="text-primary underline"
+                    >Achilles Tear Treatment Pathway</a
+                  >.
+                </li>
+                <li>Continue using the splint for comfortable sleep.</li>
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Weeks 10-12 */}
+      <TimelineBlock reverse={true}>
+        <Fragment slot="badge">
+          <TimelineBadge time="Weeks 10-12" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            Weeks 10–12: Starting Rehabilitation
+          </h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="li-heading">Rehabilitation Begins</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Starting physiotherapy to regain strength and flexibility. The
+                  focus is on building calf muscle strength.
+                </li>
+                <li>
+                  Transitioning from the boot to more regular footwear,
+                  typically around 10 weeks.
+                </li>
+                <li>
+                  Following a guided exercise program tailored to your specific
+                  needs. Avoid vigorous stretching exercises, even if the tendon
+                  feels tight. For a detailed look at the recovery process, see
+                  our guide: <a
+                    href="/FAQs/torn-achilles-recovery"
+                    class="text-primary underline">Torn Achilles Recovery</a
+                  >.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Weeks 13-25 */}
+      <TimelineBlock>
+        <Fragment slot="badge">
+          <TimelineBadge time="Weeks 13-25" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            Weeks 13–25: Progressive Recovery and Strengthening
+          </h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="li-heading">Progressive Recovery</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Increasing activity levels gradually, under the guidance of
+                  your physiotherapist.
+                </li>
+                <li>
+                  Continuing to follow physiotherapy guidance to ensure proper
+                  healing and regain strength.
+                </li>
+                <li>
+                  Building strength and endurance in the calf and surrounding
+                  muscles. This is a crucial phase for long-term recovery.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Weeks 26+ */}
+      <TimelineBlock reverse={true}>
+        <Fragment slot="badge">
+          <TimelineBadge time="Week 26+" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">
+            Weeks 26+: Return to Activity and Long-Term Recovery
+          </h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              <span class="li-heading">Return to Activity</span>
+              <ul class="ml-4 list-disc list-inside">
+                <li>
+                  Gradual return to normal activities, including sports and
+                  exercise, following medical advice. Most rehabilitation
+                  programs aim for a return to sport around 6 months.
+                </li>
+                <li>
+                  Individual progress varies, so listen to your body and avoid
+                  pushing yourself too hard.
+                </li>
+                <li>
+                  Understanding <a
+                    href="/FAQs/life-after-achilles-rupture"
+                    class="text-primary underline"
+                    >Life After Achilles Rupture</a
+                  > is key to maintaining long-term health and preventing re-injury.
+                  The healed tendon will likely remain thicker than before, and the
+                  calf muscle may be slightly smaller.
+                </li>
+                <li>
+                  Be mindful of avoiding re-rupture. Follow all instructions
+                  carefully, especially during the early stages of recovery.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+
+      {/* Important Notes */}
+      <TimelineBlock>
+        <Fragment slot="badge">
+          <TimelineBadge time="Notes" variant="neutral" />
+        </Fragment>
+        <Fragment slot="item">
+          <h2 class="mb-2 font-semibold text-xl">Important Notes</h2>
+          <ul class="space-y-6 list-none">
+            <li>
+              Recovery timelines are approximate and can vary significantly
+              depending on individual factors, such as age, overall health, and
+              the severity of the injury.
+            </li>
+            <li>
+              Always follow your healthcare provider's specific guidance and
+              instructions. This timeline is a general guide, not a substitute
+              for personalized medical advice.
+            </li>
+            <li>
+              Attend all scheduled follow-up appointments to monitor your
+              progress.
+            </li>
+            <li>
+              There is NO SUCH THING as a partial tear of the Achilles tendon.
+              Assume you have a complete rupture until a specialist has assessed
+              your injury.
+            </li>
+          </ul>
+        </Fragment>
+      </TimelineBlock>
+    </div>
+
+    <NightSplintAdvert />
+
+    {/* Replace the FAQ section with: */}
+    <FAQAccordion
+      faqs={[
+        {
+          question: "What happens in the first week after an Achilles rupture?",
+          answer:
+            "In the first week, you'll need immediate medical attention. You'll likely visit A&E where they'll provide initial pain management, apply a trauma splint or plaster cast to keep your foot in a tip-toe position, and give you crutches. Blood thinning medicine may be prescribed to prevent thrombosis. A specialist referral will be arranged for further care.",
+        },
+        {
+          question:
+            "When do I need to make the decision between surgical and non-surgical treatment?",
+          answer:
+            "The treatment decision is typically made during weeks 1-3 after consulting with a specialist. They'll perform a detailed examination and may request imaging (usually ultrasound) to check if the tendon ends are close together. Non-surgical treatment is most common, where the foot is held in a tip-toe position with a boot. Surgery is mainly considered if there's a significant gap between the tendon ends.",
+        },
+        {
+          question: "When can I switch from the boot to a splint?",
+          answer:
+            "Around weeks 4-6, if you're having difficulty sleeping in the boot, your healthcare provider may recommend switching to a splint. The splint is lighter than the boot and helps maintain proper foot position during sleep while ensuring the tendon continues to heal correctly.",
+        },
+        {
+          question:
+            "When does physiotherapy typically begin in the recovery process?",
+          answer:
+            "Physiotherapy typically starts around weeks 10-12. This is when you'll begin transitioning out of the boot and start a guided exercise program focused on building calf muscle strength. It's important to follow your physiotherapist's guidance and avoid vigorous stretching exercises, even if the tendon feels tight.",
+        },
+        {
+          question:
+            "How long until I can return to sports after an Achilles rupture?",
+          answer:
+            "Most rehabilitation programs aim for a return to sports around 6 months (week 26+). However, this varies by individual and depends on your progress through rehabilitation. The focus during weeks 13-25 is on progressive strengthening and building endurance in the calf muscles, which is crucial for safe return to sports activities.",
+        },
+        {
+          question: "What are the key milestones in Achilles rupture recovery?",
+          answer:
+            "Key milestones include: Week 1 (initial treatment and immobilization), Weeks 1-3 (treatment decision), Weeks 4-6 (possible transition to splint), Weeks 10-12 (starting physiotherapy and transitioning from the boot), Weeks 13-25 (progressive strengthening), and Week 26+ (gradual return to normal activities including sports).",
+        },
+        {
+          question:
+            "What precautions should I take to prevent re-rupture during recovery?",
+          answer:
+            "To prevent re-rupture, strictly follow your healthcare provider's instructions, especially during the first 12 weeks when the tendon is most vulnerable. Don't remove the boot unless instructed, avoid unsupported walking, and don't rush the rehabilitation process. When starting physiotherapy, avoid aggressive stretching and follow your exercise program carefully.",
+        },
+        {
+          question: "How do I know if my Achilles is healing properly?",
+          answer:
+            "Your healthcare provider will monitor healing through regular check-ups, particularly during the first 9 weeks. Signs of proper healing include decreased pain, ability to bear weight as advised in your boot, and gradual improvement in movement when permitted. However, remember there is NO SUCH THING as a partial tear - always follow your specialist's guidance for proper healing assessment.",
+        },
+      ]}
+    />
+  </section>
+</FAQsLayout>
+
+<style>
+  /* Remove styles that are now handled by components */
+  .li-heading {
+    @apply mt-2 pb-1 font-semibold text-neutral-700 list-none;
+  }
+
+  /* Add a subtle hover effect to timeline blocks */
+  :global(.timeline-block:hover) {
+    @apply scale-[1.02] transition-transform duration-200 transform;
+  }
+
+  /* Add a subtle shadow to timeline badges */
+  :global(.timeline-badge) {
+    @apply shadow-md;
+  }
+
+  /* Add print styles for better printability */
+  @media print {
+    .timeline-block {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+  }
+
+  /* Improve mobile responsiveness */
+  @media (max-width: 640px) {
+    .timeline-block {
+      margin-left: 1rem;
+    }
+  }
+
+  /* Add smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

@@ -1,0 +1,1031 @@
+---
+import {
+    Dumbbell,
+    Timer,
+    Footprints,
+    Zap,
+    Trophy,
+    Heart,
+    Activity,
+    Move,
+    Weight,
+    Target,
+    CheckCircle,
+    AlertCircle,
+    Clock,
+    ArrowRight,
+} from "lucide-astro";
+
+interface Props {
+    lang: "en" | "de" | "fr" | "es";
+}
+
+const { lang = "en" } = Astro.props;
+
+const icons = {
+    Dumbbell,
+    Timer,
+    Footprints,
+    Zap,
+    Trophy,
+    Heart,
+    Activity,
+    Move,
+    Weight,
+    Target,
+    CheckCircle,
+    AlertCircle,
+    Clock,
+    ArrowRight,
+};
+
+const content = {
+    en: {
+        exercisePhases: [
+            {
+                time: "Weeks 0-2",
+                icon: "Timer",
+                title: "Early Recovery Phase",
+                exercises: [
+                    {
+                        icon: "Heart",
+                        title: "Gentle Movement",
+                        items: [
+                            "Light calf squeezes while sitting",
+                            "Small ankle circles (keep foot pointed down)",
+                            "Focus on keeping the wound clean and dry",
+                        ],
+                    },
+                    {
+                        icon: "Activity",
+                        title: "Upper Body & Core",
+                        items: [
+                            "Hip and knee exercises with resistance bands",
+                            "Core strengthening exercises",
+                            "Upper body workouts to maintain fitness",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Weeks 2-6",
+                icon: "Footprints",
+                title: "Walking Phase",
+                exercises: [
+                    {
+                        icon: "ArrowRight",
+                        title: "Boot Walking",
+                        items: [
+                            "Start walking in your boot with heel wedges",
+                            "Practice proper walking technique",
+                            "Gradually increase walking distance",
+                        ],
+                    },
+                    {
+                        icon: "Move",
+                        title: "Early Exercises",
+                        items: [
+                            "Gentle ankle movements (keep knee bent)",
+                            "Light calf squeezes in different positions",
+                            "Stationary bike when wound is healed",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Weeks 6-12",
+                icon: "Dumbbell",
+                title: "Strength Building",
+                exercises: [
+                    {
+                        icon: "Weight",
+                        title: "Calf Strengthening",
+                        items: [
+                            "Two-legged heel raises on a step",
+                            "Seated calf raises with light weights",
+                            "Walking practice with less heel lift",
+                        ],
+                    },
+                    {
+                        icon: "Activity",
+                        title: "Functional Movement",
+                        items: [
+                            "Basic squats and lunges",
+                            "Pool exercises for better movement",
+                            "Balance and stability exercises",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Weeks 12-24",
+                icon: "Zap",
+                title: "Return to Activity",
+                exercises: [
+                    {
+                        icon: "Target",
+                        title: "Advanced Strength",
+                        items: [
+                            "One-legged heel raises",
+                            "Jumping and hopping exercises",
+                            "Sport-specific movements",
+                        ],
+                    },
+                    {
+                        icon: "CheckCircle",
+                        title: "Movement Quality",
+                        items: [
+                            "Focus on smooth, natural movement",
+                            "Practice sport-specific skills",
+                            "Gradual return to full activity",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Milestones",
+                icon: "Trophy",
+                title: "Key Recovery Milestones",
+                exercises: [
+                    {
+                        icon: "Clock",
+                        title: "Strength Goals",
+                        items: [
+                            "Week 8: Two-legged heel raises through full range",
+                            "Week 12: One-legged heel raises",
+                            "Week 16: Ready for dynamic activities",
+                            "Week 24: Return to sport (requires >90% strength)",
+                        ],
+                    },
+                    {
+                        icon: "AlertCircle",
+                        title: "Important Notes",
+                        items: [
+                            "Always follow your physio's specific plan",
+                            "Stop if you feel sharp pain",
+                            "Timeline may vary based on individual healing",
+                            "Focus on quality of movement over speed of progress",
+                        ],
+                    },
+                ],
+            },
+        ],
+        faq: {
+            title: "Find your answer:",
+            questions: [
+                {
+                    id: "q1",
+                    text: "Achilles rehab timeline – what happens each week?",
+                },
+                { id: "q2", text: "When can I start physiotherapy?" },
+                { id: "q3", text: "When is it safe to put weight on my foot?" },
+                {
+                    id: "q4",
+                    text: "Best home exercises after an Achilles rupture",
+                },
+                { id: "q5", text: "When can I drive again?" },
+                {
+                    id: "q6",
+                    text: "How do I progress from walking to running?",
+                },
+                { id: "q7", text: "Products that make rehab easier" },
+                { id: "q8", text: "Top tips to avoid re-rupture" },
+            ],
+            answers: {
+                q1: {
+                    title: "Achilles rehab timeline – what happens each week?",
+                    content: [
+                        'Recovery usually follows a <a href="/FAQs/achilles-rupture-timeline" class="text-primary underline">week-by-week roadmap</a>:',
+                        {
+                            type: "list",
+                            items: [
+                                "<strong>Weeks 0-2:</strong> Boot in tip-toe (equinus) position, partial weight-bearing.",
+                                "<strong>Weeks 2-6:</strong> Gradual heel-wedge reduction, full weight-bearing, begin gentle isometrics.",
+                                "<strong>Weeks 6-10:</strong> Transition out of boot, double then single-leg heel raises.",
+                                "<strong>Months 3-6:</strong> Running drills and sport-specific training.",
+                                "<strong>6+ months:</strong> Return to competition once calf strength ≥90% of the other side.",
+                            ],
+                        },
+                    ],
+                },
+                q2: {
+                    title: "When can I start physiotherapy?",
+                    content: [
+                        "Most protocols introduce <strong>guided physio around week 2-3</strong> for simple ankle range-of-motion and seated calf activation. By weeks 6-10 you'll progress to resistance bands and load-bearing heel raises.",
+                    ],
+                },
+                q3: {
+                    title: "When is it safe to put weight on my foot?",
+                    content: [
+                        "Evidence supports <strong>early protected weight-bearing</strong> in a boot as soon as comfort permits – often within the first few days. This promotes tendon healing and reduces stiffness. Keep the foot pointed (don't let the ankle bend up) whenever you stand.",
+                    ],
+                },
+                q4: {
+                    title: "Best home exercises after an Achilles rupture",
+                    content: [
+                        "Remember: Always follow your physio's specific plan and stop if you feel sharp pain. Your timeline might be different based on your doctor's advice and how you're healing.",
+                    ],
+                },
+                q5: {
+                    title: "When can I drive again?",
+                    content: [
+                        "For <em>right</em>-sided injuries most surgeons recommend waiting until you can perform an emergency stop simulation in trainers – typically after week 8-10 once you're out of the boot. Left-sided injuries in an automatic car may return sooner. Check with your doctor and insurer first.",
+                    ],
+                },
+                q6: {
+                    title: "How do I progress from walking to running?",
+                    content: [
+                        "Start with a <strong>jog-walk programme</strong>: 1 min jog / 1 min walk x10 on a flat track when you can perform 25 single-leg heel raises pain-free. Gradually increase jog intervals and introduce direction changes.",
+                    ],
+                },
+                q7: {
+                    title: "Products that make recovery easier",
+                    content: [
+                        '• <a href="https://thetismedical.com/splint" target="_blank" rel="noopener">Achilles Rupture Splint</a> – sleep comfortably without risking re-rupture.<br />• <a href="https://achilles-rupture.com/recovery-equipment-guide" class="text-primary underline">Full equipment guide</a> compares boots, waterproof covers and more.',
+                    ],
+                },
+                q8: {
+                    title: "Top tips to avoid re-rupture",
+                    content: [
+                        {
+                            type: "list",
+                            items: [
+                                "Wear the boot or splint <em>every</em> night for the full 10&nbsp;weeks.",
+                                "Remove the boot only when seated and never let the ankle bend up.",
+                                "Use crutches for balance until you can walk without a limp.",
+                                "Follow your physio's loading plan – calf strength is king.",
+                            ],
+                        },
+                    ],
+                },
+            },
+        },
+    },
+    de: {
+        exercisePhases: [
+            {
+                time: "Wochen 0-2",
+                icon: "Timer",
+                title: "Frühe Erholungsphase",
+                exercises: [
+                    {
+                        icon: "Heart",
+                        title: "Sanfte Bewegung",
+                        items: [
+                            "Leichte Wadenpressen im Sitzen",
+                            "Kleine Knöchelkreise (Fußspitze nach unten halten)",
+                            "Fokus auf saubere und trockene Wunde",
+                        ],
+                    },
+                    {
+                        icon: "Activity",
+                        title: "Oberkörper & Rumpf",
+                        items: [
+                            "Hüft- und Knieübungen mit Widerstandsbändern",
+                            "Rumpfkräftigungsübungen",
+                            "Oberkörpertraining zur Aufrechterhaltung der Fitness",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Wochen 2-6",
+                icon: "Footprints",
+                title: "Gehphase",
+                exercises: [
+                    {
+                        icon: "ArrowRight",
+                        title: "Gehen im Stiefel",
+                        items: [
+                            "Beginnen Sie mit dem Gehen in Ihrem Stiefel mit Fersenkeilen",
+                            "Üben Sie die richtige Gehtechnik",
+                            "Erhöhen Sie allmählich die Gehstrecke",
+                        ],
+                    },
+                    {
+                        icon: "Move",
+                        title: "Frühe Übungen",
+                        items: [
+                            "Sanfte Knöchelbewegungen (Knie gebeugt halten)",
+                            "Leichte Wadenpressen in verschiedenen Positionen",
+                            "Heimtrainer, wenn die Wunde verheilt ist",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Wochen 6-12",
+                icon: "Dumbbell",
+                title: "Kraftaufbau",
+                exercises: [
+                    {
+                        icon: "Weight",
+                        title: "Wadenkräftigung",
+                        items: [
+                            "Beidbeinige Fersenhebungen auf einer Stufe",
+                            "Sitzende Wadenhebungen mit leichten Gewichten",
+                            "Gehübung mit weniger Fersenlift",
+                        ],
+                    },
+                    {
+                        icon: "Activity",
+                        title: "Funktionelle Bewegung",
+                        items: [
+                            "Grundlegende Kniebeugen und Ausfallschritte",
+                            "Poolübungen für bessere Bewegung",
+                            "Gleichgewichts- und Stabilitätsübungen",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Wochen 12-24",
+                icon: "Zap",
+                title: "Rückkehr zur Aktivität",
+                exercises: [
+                    {
+                        icon: "Target",
+                        title: "Fortgeschrittene Stärke",
+                        items: [
+                            "Einbeinige Fersenhebungen",
+                            "Sprung- und Hüpfübungen",
+                            "Sportspezifische Bewegungen",
+                        ],
+                    },
+                    {
+                        icon: "CheckCircle",
+                        title: "Bewegungsqualität",
+                        items: [
+                            "Fokus auf flüssige, natürliche Bewegung",
+                            "Üben Sie sportspezifische Fähigkeiten",
+                            "Allmähliche Rückkehr zur vollen Aktivität",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Meilensteine",
+                icon: "Trophy",
+                title: "Wichtige Meilensteine der Genesung",
+                exercises: [
+                    {
+                        icon: "Clock",
+                        title: "Kraftziele",
+                        items: [
+                            "Woche 8: Beidbeinige Fersenhebungen über den gesamten Bereich",
+                            "Woche 12: Einbeinige Fersenhebungen",
+                            "Woche 16: Bereit für dynamische Aktivitäten",
+                            "Woche 24: Rückkehr zum Sport (erfordert >90% Kraft)",
+                        ],
+                    },
+                    {
+                        icon: "AlertCircle",
+                        title: "Wichtige Hinweise",
+                        items: [
+                            "Befolgen Sie immer den spezifischen Plan Ihres Physiotherapeuten",
+                            "Hören Sie auf, wenn Sie scharfe Schmerzen verspüren",
+                            "Der Zeitplan kann je nach individueller Heilung variieren",
+                            "Fokus auf Bewegungsqualität statt auf Geschwindigkeit des Fortschritts",
+                        ],
+                    },
+                ],
+            },
+        ],
+        faq: {
+            title: "Finden Sie Ihre Antwort:",
+            questions: [
+                {
+                    id: "q1",
+                    text: "Achillessehnen-Reha-Zeitplan – was passiert jede Woche?",
+                },
+                {
+                    id: "q2",
+                    text: "Wann kann ich mit der Physiotherapie beginnen?",
+                },
+                {
+                    id: "q3",
+                    text: "Wann ist es sicher, Gewicht auf meinen Fuß zu legen?",
+                },
+                {
+                    id: "q4",
+                    text: "Beste Heimübungen nach einer Achillessehnenruptur",
+                },
+                { id: "q5", text: "Wann kann ich wieder fahren?" },
+                { id: "q6", text: "Wie komme ich vom Gehen zum Laufen?" },
+                { id: "q7", text: "Produkte, die die Reha erleichtern" },
+                {
+                    id: "q8",
+                    text: "Top-Tipps zur Vermeidung einer erneuten Ruptur",
+                },
+            ],
+            answers: {
+                q1: {
+                    title: "Achillessehnen-Reha-Zeitplan – was passiert jede Woche?",
+                    content: [
+                        'Die Genesung folgt in der Regel einem <a href="/FAQs/achilles-rupture-timeline" class="text-primary underline">Woche-für-Woche-Fahrplan</a>:',
+                        {
+                            type: "list",
+                            items: [
+                                "<strong>Wochen 0-2:</strong> Stiefel in Zehenspitzenstellung (Equinus), teilweise Gewichtsbelastung.",
+                                "<strong>Wochen 2-6:</strong> Allmähliche Reduzierung des Fersenkeils, volle Gewichtsbelastung, Beginn mit sanften Isometrien.",
+                                "<strong>Wochen 6-10:</strong> Übergang aus dem Stiefel, beidbeinige, dann einbeinige Fersenhebungen.",
+                                "<strong>Monate 3-6:</strong> Laufübungen und sportspezifisches Training.",
+                                "<strong>6+ Monate:</strong> Rückkehr zum Wettkampf, sobald die Wadenkraft ≥90% der anderen Seite beträgt.",
+                            ],
+                        },
+                    ],
+                },
+                q2: {
+                    title: "Wann kann ich mit der Physiotherapie beginnen?",
+                    content: [
+                        "Die meisten Protokolle führen <strong>geführte Physiotherapie um Woche 2-3</strong> für einfache Knöchelbewegungen und sitzende Wadenaktivierung ein. In den Wochen 6-10 werden Sie zu Widerstandsbändern und belastenden Fersenhebungen übergehen.",
+                    ],
+                },
+                q3: {
+                    title: "Wann ist es sicher, Gewicht auf meinen Fuß zu legen?",
+                    content: [
+                        "Die Evidenz unterstützt eine <strong>frühe geschützte Gewichtsbelastung</strong> in einem Stiefel, sobald es der Komfort erlaubt – oft innerhalb der ersten Tage. Dies fördert die Sehnenheilung und reduziert die Steifheit. Halten Sie den Fuß gestreckt (lassen Sie den Knöchel nicht nach oben biegen), wann immer Sie stehen.",
+                    ],
+                },
+                q4: {
+                    title: "Beste Heimübungen nach einer Achillessehnenruptur",
+                    content: [
+                        "Denken Sie daran: Befolgen Sie immer den spezifischen Plan Ihres Physiotherapeuten und hören Sie auf, wenn Sie scharfe Schmerzen verspüren. Ihr Zeitplan kann je nach Anweisung Ihres Arztes und Ihrem Heilungsverlauf abweichen.",
+                    ],
+                },
+                q5: {
+                    title: "Wann kann ich wieder fahren?",
+                    content: [
+                        "Bei Verletzungen auf der <em>rechten</em> Seite empfehlen die meisten Chirurgen, zu warten, bis Sie eine Notbremsungssimulation in Turnschuhen durchführen können – normalerweise nach Woche 8-10, sobald Sie aus dem Stiefel sind. Verletzungen auf der linken Seite in einem Automatikauto können früher zurückkehren. Erkundigen Sie sich zuerst bei Ihrem Arzt und Ihrer Versicherung.",
+                    ],
+                },
+                q6: {
+                    title: "Wie komme ich vom Gehen zum Laufen?",
+                    content: [
+                        "Beginnen Sie mit einem <strong>Jog-Walk-Programm</strong>: 1 Minute Joggen / 1 Minute Gehen x10 auf einer flachen Strecke, wenn Sie 25 einbeinige Fersenhebungen schmerzfrei durchführen können. Erhöhen Sie allmählich die Jogging-Intervalle und führen Sie Richtungswechsel ein.",
+                    ],
+                },
+                q7: {
+                    title: "Produkte, die die Reha erleichtern",
+                    content: [
+                        '• <a href="https://thetismedical.com/splint" target="_blank" rel="noopener">Achillessehnenruptur-Schiene</a> – schlafen Sie bequem, ohne eine erneute Ruptur zu riskieren.<br />• <a href="https://achilles-rupture.com/recovery-equipment-guide" class="text-primary underline">Vollständiger Ausrüstungsleitfaden</a> vergleicht Stiefel, wasserdichte Abdeckungen und mehr.',
+                    ],
+                },
+                q8: {
+                    title: "Top-Tipps zur Vermeidung einer erneuten Ruptur",
+                    content: [
+                        {
+                            type: "list",
+                            items: [
+                                "Tragen Sie den Stiefel oder die Schiene <em>jede</em> Nacht für die vollen 10&nbsp;Wochen.",
+                                "Entfernen Sie den Stiefel nur im Sitzen und lassen Sie den Knöchel niemals nach oben biegen.",
+                                "Verwenden Sie Krücken zum Gleichgewicht, bis Sie ohne Hinken gehen können.",
+                                "Befolgen Sie den Belastungsplan Ihres Physiotherapeuten – Wadenkraft ist alles.",
+                            ],
+                        },
+                    ],
+                },
+            },
+        },
+    },
+    fr: {
+        exercisePhases: [
+            {
+                time: "Semaines 0-2",
+                icon: "Timer",
+                title: "Phase de récupération précoce",
+                exercises: [
+                    {
+                        icon: "Heart",
+                        title: "Mouvement doux",
+                        items: [
+                            "Légères contractions du mollet en position assise",
+                            "Petits cercles de cheville (garder le pied pointé vers le bas)",
+                            "Se concentrer sur le maintien de la plaie propre et sèche",
+                        ],
+                    },
+                    {
+                        icon: "Activity",
+                        title: "Haut du corps et tronc",
+                        items: [
+                            "Exercices pour les hanches et les genoux avec des bandes de résistance",
+                            "Exercices de renforcement du tronc",
+                            "Entraînements du haut du corps pour maintenir la forme physique",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Semaines 2-6",
+                icon: "Footprints",
+                title: "Phase de marche",
+                exercises: [
+                    {
+                        icon: "ArrowRight",
+                        title: "Marche avec la botte",
+                        items: [
+                            "Commencer à marcher avec votre botte et des talonnettes",
+                            "Pratiquer une technique de marche correcte",
+                            "Augmenter progressivement la distance de marche",
+                        ],
+                    },
+                    {
+                        icon: "Move",
+                        title: "Premiers exercices",
+                        items: [
+                            "Mouvements doux de la cheville (garder le genou plié)",
+                            "Légères contractions du mollet dans différentes positions",
+                            "Vélo stationnaire lorsque la plaie est guérie",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Semaines 6-12",
+                icon: "Dumbbell",
+                title: "Renforcement musculaire",
+                exercises: [
+                    {
+                        icon: "Weight",
+                        title: "Renforcement du mollet",
+                        items: [
+                            "Élévations des talons sur les deux jambes sur une marche",
+                            "Élévations des mollets assis avec des poids légers",
+                            "Pratique de la marche avec moins de soulèvement du talon",
+                        ],
+                    },
+                    {
+                        icon: "Activity",
+                        title: "Mouvement fonctionnel",
+                        items: [
+                            "Squats et fentes de base",
+                            "Exercices en piscine pour un meilleur mouvement",
+                            "Exercices d'équilibre et de stabilité",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Semaines 12-24",
+                icon: "Zap",
+                title: "Retour à l'activité",
+                exercises: [
+                    {
+                        icon: "Target",
+                        title: "Force avancée",
+                        items: [
+                            "Élévations des talons sur une jambe",
+                            "Exercices de saut et de bond",
+                            "Mouvements spécifiques au sport",
+                        ],
+                    },
+                    {
+                        icon: "CheckCircle",
+                        title: "Qualité du mouvement",
+                        items: [
+                            "Se concentrer sur un mouvement fluide et naturel",
+                            "Pratiquer les compétences spécifiques au sport",
+                            "Retour progressif à une activité complète",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Jalons",
+                icon: "Trophy",
+                title: "Principaux jalons de la récupération",
+                exercises: [
+                    {
+                        icon: "Clock",
+                        title: "Objectifs de force",
+                        items: [
+                            "Semaine 8 : Élévations des talons sur les deux jambes sur toute l'amplitude",
+                            "Semaine 12 : Élévations des talons sur une jambe",
+                            "Semaine 16 : Prêt pour les activités dynamiques",
+                            "Semaine 24 : Retour au sport (nécessite >90% de force)",
+                        ],
+                    },
+                    {
+                        icon: "AlertCircle",
+                        title: "Remarques importantes",
+                        items: [
+                            "Suivez toujours le plan spécifique de votre kinésithérapeute",
+                            "Arrêtez si vous ressentez une douleur aiguë",
+                            "Le calendrier peut varier en fonction de la guérison individuelle",
+                            "Se concentrer sur la qualité du mouvement plutôt que sur la vitesse de progression",
+                        ],
+                    },
+                ],
+            },
+        ],
+        faq: {
+            title: "Trouvez votre réponse :",
+            questions: [
+                {
+                    id: "q1",
+                    text: "Calendrier de rééducation de la rupture d'Achille – que se passe-t-il chaque semaine ?",
+                },
+                {
+                    id: "q2",
+                    text: "Quand puis-je commencer la kinésithérapie ?",
+                },
+                {
+                    id: "q3",
+                    text: "Quand est-il sécuritaire de mettre du poids sur mon pied ?",
+                },
+                {
+                    id: "q4",
+                    text: "Meilleurs exercices à domicile après une rupture d'Achille",
+                },
+                { id: "q5", text: "Quand puis-je reconduire ?" },
+                { id: "q6", text: "Comment passer de la marche à la course ?" },
+                { id: "q7", text: "Produits qui facilitent la rééducation" },
+                { id: "q8", text: "Conseils pour éviter une nouvelle rupture" },
+            ],
+            answers: {
+                q1: {
+                    title: "Calendrier de rééducation de la rupture d'Achille – que se passe-t-il chaque semaine ?",
+                    content: [
+                        'La récupération suit généralement une <a href="/FAQs/achilles-rupture-timeline" class="text-primary underline">feuille de route semaine par semaine</a> :',
+                        {
+                            type: "list",
+                            items: [
+                                "<strong>Semaines 0-2 :</strong> Botte en position de pointe (équin), mise en charge partielle.",
+                                "<strong>Semaines 2-6 :</strong> Réduction progressive de la talonnette, mise en charge complète, début des exercices isométriques doux.",
+                                "<strong>Semaines 6-10 :</strong> Transition hors de la botte, élévations des talons sur deux jambes puis sur une seule.",
+                                "<strong>Mois 3-6 :</strong> Exercices de course et entraînement spécifique au sport.",
+                                "<strong>6+ mois :</strong> Retour à la compétition une fois que la force du mollet est ≥90% de l'autre côté.",
+                            ],
+                        },
+                    ],
+                },
+                q2: {
+                    title: "Quand puis-je commencer la kinésithérapie ?",
+                    content: [
+                        "La plupart des protocoles introduisent une <strong>kinésithérapie guidée vers la semaine 2-3</strong> pour une simple amplitude de mouvement de la cheville et une activation du mollet en position assise. D'ici les semaines 6-10, vous progresserez vers des bandes de résistance et des élévations de talons en charge.",
+                    ],
+                },
+                q3: {
+                    title: "Quand est-il sécuritaire de mettre du poids sur mon pied ?",
+                    content: [
+                        "Les preuves soutiennent une <strong>mise en charge précoce protégée</strong> dans une botte dès que le confort le permet – souvent dans les premiers jours. Cela favorise la guérison du tendon et réduit la raideur. Gardez le pied pointé (ne laissez pas la cheville se plier vers le haut) chaque fois que vous êtes debout.",
+                    ],
+                },
+                q4: {
+                    title: "Meilleurs exercices à domicile après une rupture d'Achille",
+                    content: [
+                        "Rappel : Suivez toujours le plan spécifique de votre kinésithérapeute et arrêtez si vous ressentez une douleur aiguë. Votre calendrier peut être différent en fonction des conseils de votre médecin et de votre guérison.",
+                    ],
+                },
+                q5: {
+                    title: "Quand puis-je reconduire ?",
+                    content: [
+                        "Pour les blessures du côté <em>droit</em>, la plupart des chirurgiens recommandent d'attendre de pouvoir effectuer une simulation d'arrêt d'urgence en baskets – généralement après la semaine 8-10, une fois que vous n'avez plus la botte. Les blessures du côté gauche dans une voiture automatique peuvent permettre un retour plus rapide. Vérifiez d'abord auprès de votre médecin et de votre assureur.",
+                    ],
+                },
+                q6: {
+                    title: "Comment passer de la marche à la course ?",
+                    content: [
+                        "Commencez par un <strong>programme de jogging-marche</strong> : 1 min de jogging / 1 min de marche x10 sur une piste plate lorsque vous pouvez effectuer 25 élévations de talon sur une seule jambe sans douleur. Augmentez progressivement les intervalles de jogging et introduisez des changements de direction.",
+                    ],
+                },
+                q7: {
+                    title: "Produits qui facilitent la rééducation",
+                    content: [
+                        '• <a href="https://thetismedical.com/splint" target="_blank" rel="noopener">Attelle pour rupture du tendon d\'Achille</a> – dormez confortablement sans risquer une nouvelle rupture.<br />• <a href="https://achilles-rupture.com/recovery-equipment-guide" class="text-primary underline">Guide complet de l\'équipement</a> compare les bottes, les housses imperméables et plus.',
+                    ],
+                },
+                q8: {
+                    title: "Conseils pour éviter une nouvelle rupture",
+                    content: [
+                        {
+                            type: "list",
+                            items: [
+                                "Portez la botte ou l'attelle <em>toutes</em> les nuits pendant les 10&nbsp;semaines complètes.",
+                                "Retirez la botte uniquement en position assise et ne laissez jamais la cheville se plier vers le haut.",
+                                "Utilisez des béquilles pour l'équilibre jusqu'à ce que vous puissiez marcher sans boiter.",
+                                "Suivez le plan de charge de votre kinésithérapeute – la force du mollet est reine.",
+                            ],
+                        },
+                    ],
+                },
+            },
+        },
+    },
+    es: {
+        exercisePhases: [
+            {
+                time: "Semanas 0-2",
+                icon: "Timer",
+                title: "Fase de recuperación temprana",
+                exercises: [
+                    {
+                        icon: "Heart",
+                        title: "Movimiento suave",
+                        items: [
+                            "Ligeras compresiones de pantorrilla sentado",
+                            "Pequeños círculos de tobillo (mantener el pie apuntando hacia abajo)",
+                            "Enfocarse en mantener la herida limpia y seca",
+                        ],
+                    },
+                    {
+                        icon: "Activity",
+                        title: "Parte superior del cuerpo y núcleo",
+                        items: [
+                            "Ejercicios de cadera y rodilla con bandas de resistencia",
+                            "Ejercicios de fortalecimiento del núcleo",
+                            "Entrenamientos de la parte superior del cuerpo para mantener la condición física",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Semanas 2-6",
+                icon: "Footprints",
+                title: "Fase de caminata",
+                exercises: [
+                    {
+                        icon: "ArrowRight",
+                        title: "Caminar con bota",
+                        items: [
+                            "Comenzar a caminar con su bota con cuñas en el talón",
+                            "Practicar la técnica de caminata adecuada",
+                            "Aumentar gradualmente la distancia de caminata",
+                        ],
+                    },
+                    {
+                        icon: "Move",
+                        title: "Primeros ejercicios",
+                        items: [
+                            "Movimientos suaves del tobillo (mantener la rodilla doblada)",
+                            "Ligeras compresiones de pantorrilla en diferentes posiciones",
+                            "Bicicleta estática cuando la herida esté curada",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Semanas 6-12",
+                icon: "Dumbbell",
+                title: "Desarrollo de la fuerza",
+                exercises: [
+                    {
+                        icon: "Weight",
+                        title: "Fortalecimiento de la pantorrilla",
+                        items: [
+                            "Elevaciones de talón con dos piernas en un escalón",
+                            "Elevaciones de pantorrilla sentado con pesas ligeras",
+                            "Práctica de caminata con menos elevación del talón",
+                        ],
+                    },
+                    {
+                        icon: "Activity",
+                        title: "Movimiento funcional",
+                        items: [
+                            "Sentadillas y estocadas básicas",
+                            "Ejercicios en la piscina para un mejor movimiento",
+                            "Ejercicios de equilibrio y estabilidad",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Semanas 12-24",
+                icon: "Zap",
+                title: "Regreso a la actividad",
+                exercises: [
+                    {
+                        icon: "Target",
+                        title: "Fuerza avanzada",
+                        items: [
+                            "Elevaciones de talón con una sola pierna",
+                            "Ejercicios de salto y brinco",
+                            "Movimientos específicos del deporte",
+                        ],
+                    },
+                    {
+                        icon: "CheckCircle",
+                        title: "Calidad del movimiento",
+                        items: [
+                            "Enfocarse en un movimiento suave y natural",
+                            "Practicar habilidades específicas del deporte",
+                            "Regreso gradual a la actividad completa",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Hitos",
+                icon: "Trophy",
+                title: "Hitos clave de la recuperación",
+                exercises: [
+                    {
+                        icon: "Clock",
+                        title: "Metas de fuerza",
+                        items: [
+                            "Semana 8: Elevaciones de talón con dos piernas en todo el rango",
+                            "Semana 12: Elevaciones de talón con una sola pierna",
+                            "Semana 16: Listo para actividades dinámicas",
+                            "Semana 24: Regreso al deporte (requiere >90% de fuerza)",
+                        ],
+                    },
+                    {
+                        icon: "AlertCircle",
+                        title: "Notas importantes",
+                        items: [
+                            "Siga siempre el plan específico de su fisioterapeuta",
+                            "Deténgase si siente un dolor agudo",
+                            "El cronograma puede variar según la curación individual",
+                            "Enfóquese en la calidad del movimiento sobre la velocidad del progreso",
+                        ],
+                    },
+                ],
+            },
+        ],
+        faq: {
+            title: "Encuentre su respuesta:",
+            questions: [
+                {
+                    id: "q1",
+                    text: "Cronograma de rehabilitación de la rotura de Aquiles: ¿qué sucede cada semana?",
+                },
+                { id: "q2", text: "¿Cuándo puedo comenzar la fisioterapia?" },
+                { id: "q3", text: "¿Cuándo es seguro poner peso en mi pie?" },
+                {
+                    id: "q4",
+                    text: "Los mejores ejercicios en casa después de una rotura de Aquiles",
+                },
+                { id: "q5", text: "¿Cuándo puedo volver a conducir?" },
+                { id: "q6", text: "¿Cómo progreso de caminar a correr?" },
+                { id: "q7", text: "Productos que facilitan la rehabilitación" },
+                {
+                    id: "q8",
+                    text: "Consejos principales para evitar una nueva rotura",
+                },
+            ],
+            answers: {
+                q1: {
+                    title: "Cronograma de rehabilitación de la rotura de Aquiles: ¿qué sucede cada semana?",
+                    content: [
+                        'La recuperación generalmente sigue un <a href="/FAQs/achilles-rupture-timeline" class="text-primary underline">mapa de ruta semana a semana</a>:',
+                        {
+                            type: "list",
+                            items: [
+                                "<strong>Semanas 0-2:</strong> Bota en posición de puntillas (equino), carga de peso parcial.",
+                                "<strong>Semanas 2-6:</strong> Reducción gradual de la cuña del talón, carga de peso completa, comenzar isométricos suaves.",
+                                "<strong>Semanas 6-10:</strong> Transición fuera de la bota, elevaciones de talón con dos piernas y luego con una.",
+                                "<strong>Meses 3-6:</strong> Ejercicios de carrera y entrenamiento específico del deporte.",
+                                "<strong>6+ meses:</strong> Regreso a la competencia una vez que la fuerza de la pantorrilla sea ≥90% del otro lado.",
+                            ],
+                        },
+                    ],
+                },
+                q2: {
+                    title: "¿Cuándo puedo comenzar la fisioterapia?",
+                    content: [
+                        "La mayoría de los protocolos introducen <strong>fisioterapia guiada alrededor de la semana 2-3</strong> para un rango de movimiento simple del tobillo y activación de la pantorrilla sentado. Para las semanas 6-10, progresará a bandas de resistencia y elevaciones de talón con carga.",
+                    ],
+                },
+                q3: {
+                    title: "¿Cuándo es seguro poner peso en mi pie?",
+                    content: [
+                        "La evidencia respalda la <strong>carga de peso temprana protegida</strong> en una bota tan pronto como la comodidad lo permita, a menudo dentro de los primeros días. Esto promueve la curación del tendón y reduce la rigidez. Mantenga el pie apuntando (no deje que el tobillo se doble hacia arriba) cada vez que se ponga de pie.",
+                    ],
+                },
+                q4: {
+                    title: "Los mejores ejercicios en casa después de una rotura de Aquiles",
+                    content: [
+                        "Recuerde: Siga siempre el plan específico de su fisioterapeuta y deténgase si siente un dolor agudo. Su cronograma puede ser diferente según el consejo de su médico y cómo esté sanando.",
+                    ],
+                },
+                q5: {
+                    title: "¿Cuándo puedo volver a conducir?",
+                    content: [
+                        "Para las lesiones del lado <em>derecho</em>, la mayoría de los cirujanos recomiendan esperar hasta que pueda realizar una simulación de parada de emergencia en zapatillas, generalmente después de la semana 8-10, una vez que esté fuera de la bota. Las lesiones del lado izquierdo en un automóvil automático pueden regresar antes. Consulte primero con su médico y su aseguradora.",
+                    ],
+                },
+                q6: {
+                    title: "¿Cómo progreso de caminar a correr?",
+                    content: [
+                        "Comience con un <strong>programa de trote-caminata</strong>: 1 minuto de trote / 1 minuto de caminata x10 en una pista plana cuando pueda realizar 25 elevaciones de talón con una sola pierna sin dolor. Aumente gradualmente los intervalos de trote e introduzca cambios de dirección.",
+                    ],
+                },
+                q7: {
+                    title: "Productos que facilitan la rehabilitación",
+                    content: [
+                        '• <a href="https://thetismedical.com/splint" target="_blank" rel="noopener">Férula para rotura del tendón de Aquiles</a> – duerma cómodamente sin arriesgarse a una nueva rotura.<br />• <a href="https://achilles-rupture.com/recovery-equipment-guide" class="text-primary underline">Guía completa de equipos</a> compara botas, cubiertas impermeables y más.',
+                    ],
+                },
+                q8: {
+                    title: "Consejos principales para evitar una nueva rotura",
+                    content: [
+                        {
+                            type: "list",
+                            items: [
+                                "Use la bota o la férula <em>todas</em> las noches durante las 10&nbsp;semanas completas.",
+                                "Quítese la bota solo cuando esté sentado y nunca deje que el tobillo se doble hacia arriba.",
+                                "Use muletas para mantener el equilibrio hasta que pueda caminar sin cojear.",
+                                "Siga el plan de carga de su fisioterapeuta: la fuerza de la pantorrilla es el rey.",
+                            ],
+                        },
+                    ],
+                },
+            },
+        },
+    },
+};
+
+const t = content[lang];
+const exercisePhases = t.exercisePhases.map((phase) => ({
+    ...phase,
+    icon: icons[phase.icon as keyof typeof icons],
+    exercises: phase.exercises.map((exercise) => ({
+        ...exercise,
+        icon: icons[exercise.icon as keyof typeof icons],
+    })),
+}));
+---
+
+<section id="faq-slide" class="faq slide">
+    <div class="questions">
+        <h2>{t.faq.title}</h2>
+        {
+            t.faq.questions.map((q) => (
+                <a href={`#${q.id}`}>
+                    <h3>{q.text}</h3>
+                </a>
+            ))
+        }
+    </div>
+    <div class="answers">
+        {
+            Object.entries(t.faq.answers).map(([id, answer]) => (
+                <div id={id}>
+                    <h2>{answer.title}</h2>
+                    {answer.content.map((item) => {
+                        if (typeof item === "string") {
+                            return <p set:html={item} />;
+                        } else if (item.type === "list") {
+                            return (
+                                <ul class="flex flex-col gap-y-4 my-2">
+                                    {item.items.map((li) => (
+                                        <li class="!my-1 !py-0" set:html={li} />
+                                    ))}
+                                </ul>
+                            );
+                        }
+                    })}
+                </div>
+            ))
+        }
+
+        <div id="q4"></div>
+        <h2>{t.faq.answers.q4.title}</h2>
+
+        <div class="flex flex-col gap-y-8 mx-auto mt-8 w-full">
+            {
+                exercisePhases.map((phase) => (
+                    <div class="bg-primary/10 border border-primary/30 rounded-lg">
+                        <div class="flex items-center gap-2 mb-4 p-4 pb-2 border-primary/30 border-b">
+                            <phase.icon class="w-5 h-5 text-primary" />
+                            <span class="font-medium text-primary text-lg">
+                                {phase.time}
+                            </span>
+                        </div>
+                        <div class="space-y-4 p-4 pt-0">
+                            {phase.exercises.map((exercise) => (
+                                <div>
+                                    <div class="font-medium text-md text-neutral-700">
+                                        {exercise.title}
+                                    </div>
+                                    <ul class="my-2 ml-4 text-sm list-disc list-inside">
+                                        {exercise.items.map((item) => (
+                                            <li class="!my-1 !py-0">{item}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+
+        <style>
+            @media print {
+                .timeline-block {
+                    break-inside: avoid;
+                    page-break-inside: avoid;
+                }
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+        </style>
+
+        <p class="mt-4 text-muted-foreground text-sm">
+            {t.faq.answers.q4.content[0]}
+        </p>
+    </div>
+</section>

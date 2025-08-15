@@ -23,7 +23,7 @@ import {
   getRouteBySlugAndLanguage,
   getRoutesByLanguage,
   partnerRoutes,
-} from "../content/routes";
+} from "../content/routes.tsx";
 import ReviewsLink from "../components/ReviewsLink.tsx";
 import type { Lang } from "../config/languages.ts";
 

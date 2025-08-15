@@ -2,7 +2,8 @@ import { type Language, languages } from "../config/languages";
 import {
     getAlternateRoutesForSlug,
     getRouteBySlugAndLanguage,
-} from "../content/routes";
+    getTranslatedUrlForLanguage,
+} from "../content/routes.tsx";
 
 /**
  * Extract language code from a path
@@ -211,13 +212,20 @@ export const urlUtils = {
      * @returns Array of language options with URLs
      */
     getLanguageSwitcherOptions(currentPath: string) {
-        const currentSlug = getSlugFromPath(currentPath);
         const currentLangCode = getLanguageFromPath(currentPath);
 
-        return languages.map((language) => ({
-            ...language,
-            href: generateLocalizedPath(currentSlug, language.code),
-            isActive: language.code === currentLangCode,
-        }));
+        return languages.map((language) => {
+            // Use the new function that can handle any URL and map it to the correct translated URL
+            const href = getTranslatedUrlForLanguage(
+                currentPath,
+                language.code,
+            );
+
+            return {
+                ...language,
+                href,
+                isActive: language.code === currentLangCode,
+            };
+        });
     },
 };

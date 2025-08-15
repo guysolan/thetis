@@ -2,7 +2,7 @@
 import BuyNowCallout from "@/components/products/night-splint/BuyNowCallout.astro";
 import HighlightedWord from "@/components/HighlightedWord.tsx";
 import type { Lang } from "@/config/languages.ts";
-import { getRouteBySlugAndLanguage } from "@/content/routes.ts";
+import { getRouteBySlugAndLanguage } from "@/content/routes.tsx";
 
 const { lang = "en" } = Astro.props as { lang?: Lang };
 

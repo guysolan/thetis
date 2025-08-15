@@ -42,6 +42,14 @@ export const languages: Language[] = [
         dir: "/es",
         hreflang: "es",
     },
+    {
+        code: "it",
+        name: "Italian",
+        nativeName: "Italiano",
+        flag: "🇮🇹",
+        dir: "/it",
+        hreflang: "it",
+    },
 ];
 
 export function getLanguageByCode(code: string): Language | undefined {
