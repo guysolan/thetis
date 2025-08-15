@@ -3,23 +3,29 @@ import { Button } from "./ui/button";
 import { Star } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import { cn } from "../lib/utils";
+import { content } from "./products/night-splint/content.ts";
+import type { Lang } from "../config/languages.ts";
 
 type ReviewsLinkProps = {
   variant?: "default" | "background";
   size?: "sm" | "md" | "lg";
   className?: string;
+  lang: Lang;
 };
 
 const ReviewsLink = ({
   variant = "default",
   size = "sm",
   className,
+  lang = "en",
 }: ReviewsLinkProps) => {
   const iconSize = {
     sm: 16,
     md: 20,
     lg: 24,
   }[size];
+
+  const t = content[lang]?.reviewsLink || content.en.reviewsLink;
 
   return (
     <a
@@ -35,11 +41,13 @@ const ReviewsLink = ({
       aria-label="View all reviews"
     >
       <div className="flex mr-2 transition-all duration-200">
-        {[...Array(5)].map((_, i) => (
+        {Array.from({ length: 5 }, (_, i) => (
           <Star
-            key={`star-rating-${i}`}
+            key={`star-rating-${i}-${Math.random()}`}
             size={iconSize}
-            className={`fill-yellow-400 stroke-amber-500 text-yellow-400 ${i % 2 === 0 ? "group-hover:rotate-12" : "group-hover:-rotate-12"} transition-transform duration-300`}
+            className={`fill-yellow-400 stroke-amber-500 text-yellow-400 ${
+              i % 2 === 0 ? "group-hover:rotate-12" : "group-hover:-rotate-12"
+            } transition-transform duration-300`}
           />
         ))}
       </div>
@@ -49,7 +57,7 @@ const ReviewsLink = ({
           size === "lg" && "text-md",
         )}
       >
-        Based on {184} reviews
+        {t.basedOn}
       </span>
       <ArrowRight
         size={iconSize - 6}

@@ -15,3 +15,17 @@ export type Review = {
     stars?: number;
     is_pinned?: boolean;
 };
+import type { Lang } from "../../config/languages";
+
+export type ReviewContent = {
+    description: string;
+    title: string;
+    short?: string;
+    body: string;
+};
+
+export type TranslatedReview =
+    & Omit<Review, "description" | "title" | "short" | "body">
+    & {
+        content: Record<Lang, ReviewContent>;
+    };

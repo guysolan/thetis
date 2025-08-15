@@ -1,0 +1,88 @@
+---
+import HighlightedParagraph from "@/components/HighlightedParagraph.tsx";
+import BuyNowCallout from "@/components/products/night-splint/BuyNowCallout.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content: Record<
+    Lang,
+    {
+        title: { text: string; highlighted: boolean }[];
+        body: string;
+    }
+> = {
+    en: {
+        title: [
+            {
+                text: "Ready for",
+                highlighted: false,
+            },
+            {
+                text: "Real Relief?",
+                highlighted: true,
+            },
+        ],
+        body: "Tired of sleepless nights and discomfort from your boot? Our splint is lightweight, easy to use, and trusted by thousands for a good night's sleep. Experience the difference — wake up rested and on track for recovery.",
+    },
+    de: {
+        title: [
+            {
+                text: "Bereit für",
+                highlighted: false,
+            },
+            {
+                text: "Echte Entspannung?",
+                highlighted: true,
+            },
+        ],
+        body: "Schläfrige Nächte und Unbehagen aus Ihrem Boot? Unser Splint ist leicht, einfach zu bedienen und von Tausenden für eine gute Nachtschlaf vertraut. Erfahren Sie die Differenz — aufstehen entspannt und auf dem Weg zur Genesung.",
+    },
+    fr: {
+        title: [
+            {
+                text: "Prêt pour",
+                highlighted: false,
+            },
+            {
+                text: "une réelle relaxation ?",
+                highlighted: true,
+            },
+        ],
+        body: "Fatigué de nuits sans sommeil et inconfort de votre botte ? Notre attelle est légère, facile à utiliser et approuvée par des milliers pour un bon sommeil. Découvrez la différence — se lever reposé et sur la voie du rétablissement.",
+    },
+    es: {
+        title: [
+            {
+                text: "¿Listo para",
+                highlighted: false,
+            },
+            {
+                text: "una verdadera relajación?",
+                highlighted: true,
+            },
+        ],
+        body: "¿Cansado de noches sin dormir y molestias de tu botas? Nuestra atadura es ligera, fácil de usar y confiable para miles de personas para una buena noche de sueño. Experimenta la diferencia — levantate descansado y en camino a la recuperación.",
+    },
+    it: {
+        title: [
+            {
+                text: "Pronto per",
+                highlighted: false,
+            },
+            {
+                text: "una vera rilassamento?",
+                highlighted: true,
+            },
+        ],
+        body: "Stanco di notti senza riposo e disagio della tua botta? Il nostro splint è leggero, facile da usare e affidato a migliaia di persone per una buona notte di riposo. Scopri la differenza — alzati rilassato e sulla via della guarigione.",
+    },
+};
+---
+
+<BuyNowCallout buttonText="Buy Now" buttonHref="/buy-now">
+    <span slot="title">
+        <HighlightedParagraph paragraph={content[lang].title} />
+    </span>
+    <span slot="body">{content[lang].body}</span>
+</BuyNowCallout>

@@ -1,4 +1,6 @@
 ---
+import type { Lang } from "@/config/languages";
+
 export interface Props {
   title: string;
   description: string;
@@ -7,7 +9,7 @@ export interface Props {
   hideFooter?: boolean;
   logoColor?: "black" | "white";
   name?: string;
-  lang?: string;
+  lang: Lang;
   alternateLanguages?: Array<{
     lang: string;
     url: string;
@@ -55,9 +57,9 @@ import ShopifyBuyButton2 from "../components/ShopifyBuyButton2.astro";
     <GoogleTagBody />
     <ShopifyBuyButton2 />
     <InstantlyPixel />
-    <Nav />
+    <Nav lang={lang} />
     <slot />
-    {!hideFooter && <Footer />}
+    {!hideFooter && <Footer lang={lang} />}
     <script type="text/partytown" src="@/services/lucide.ts"></script>
     <script type="text/partytown" src="@/services/location"></script>
     <script

@@ -5,6 +5,33 @@ import { MobileNav } from "./MobileNav.tsx";
 import { cn } from "../lib/utils";
 import Thetis from "./Thetis.tsx";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
+import type { Lang } from "@/config/languages";
+
+export interface Props {
+    lang: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+
+const content = {
+    en: {
+        buyNow: "Buy Now",
+    },
+    de: {
+        buyNow: "Jetzt kaufen",
+    },
+    fr: {
+        buyNow: "Acheter maintenant",
+    },
+    es: {
+        buyNow: "Comprar ahora",
+    },
+    it: {
+        buyNow: "Compra ora",
+    },
+};
+
+const t = content[lang];
 ---
 
 <header
@@ -13,7 +40,7 @@ import LanguageSwitcher from "../components/LanguageSwitcher.astro";
     <div class="hidden lg:flex justify-between items-center gap-x-6 w-full">
         <Thetis />
         <div class="flex justify-center items-center gap-x-4 ml-auto text-base">
-            <DesktopNav client:load />
+            <DesktopNav client:load lang={lang} />
             <LanguageSwitcher />
         </div>
     </div>
@@ -23,10 +50,10 @@ import LanguageSwitcher from "../components/LanguageSwitcher.astro";
         <div class="flex gap-x-2">
             <a
                 class={buttonVariants({ variant: "default", size: "sm" })}
-                href="/buy-now">Buy Now</a
+                href="/buy-now">{t.buyNow}</a
             >
             <LanguageSwitcher />
-            <MobileNav client:load />
+            <MobileNav client:load lang={lang} />
         </div>
     </div>
 </header>

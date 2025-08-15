@@ -1,0 +1,321 @@
+---
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { Image } from "astro:assets";
+import HighlightedWord from "@/components/HighlightedWord";
+import nightSplintImage from "@/components/products/images/night-splint/night_splint_bed_side.jpg";
+import traumaSplintImage from "@/components/products/images/trauma-splint/trauma_splint.jpg";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+  en: {
+    intro: {
+      title: {
+        part1: "Achilles",
+        highlight1: "Rupture",
+        part2: "Recovery",
+        highlight2: "Reimagined",
+      },
+      subtitle: {
+        part1:
+          "One product with two uses to make Achilles tendon rupture recovery as",
+        highlight1: "Quick",
+        part2: "and",
+        highlight2: "Comfortable",
+        part3: "as possible",
+      },
+    },
+    timeline: ["Rupture", "Week 1", "Week 2", "Week 6", "Week 12"],
+    products: [
+      {
+        title: "Suspected Rupture? Replace Plaster of Paris",
+        imageAlt: "Trauma Splint Image",
+        description:
+          "Instead of immediate plaster casting in A&E/ER, the Achilles rupture splint (HCPCS code Q4051) offers a more flexible solution for initial assessment and diagnosis.",
+        benefits: [
+          "Allows for easy ultrasound assessment",
+          "Halves the time from A&E to treatment decision",
+          "Eliminates need for plaster room visits",
+          "Maintains proper tip-toe position for initial healing",
+        ],
+        linkText: "Order for your Clinic",
+      },
+      {
+        title: "Recovery Period: Wear at Night",
+        imageAlt: "Splint Image",
+        description:
+          "During the crucial 2-12 week recovery period, the splint can also replace the orthopaedic boot at night.",
+        benefits: [
+          "Maintains proper healing position while sleeping",
+          "Significantly more comfortable than sleeping in a boot",
+          "Prevents accidental re-rupture during sleep",
+          "Compatible with standard daytime boot treatment",
+        ],
+        linkText: "Buy it Now",
+      },
+    ],
+  },
+  de: {
+    intro: {
+      title: {
+        part1: "Achillessehnen",
+        highlight1: "Ruptur",
+        part2: "Erholung",
+        highlight2: "Neu Gedacht",
+      },
+      subtitle: {
+        part1:
+          "Ein Produkt mit zwei Anwendungen, um die Genesung von Achillessehnenrissen so",
+        highlight1: "schnell",
+        part2: "und",
+        highlight2: "bequem",
+        part3: "wie möglich zu gestalten",
+      },
+    },
+    timeline: ["Ruptur", "Woche 1", "Woche 2", "Woche 6", "Woche 12"],
+    products: [
+      {
+        title: "Verdacht auf Ruptur? Ersetzen Sie Gips",
+        imageAlt: "Trauma-Schiene Bild",
+        description:
+          "Anstelle einer sofortigen Gipsruhigstellung in der Notaufnahme bietet die Achillessehnenruptur-Schiene (HCPCS-Code Q4051) eine flexiblere Lösung für die Erstbeurteilung und Diagnose.",
+        benefits: [
+          "Ermöglicht eine einfache Ultraschalluntersuchung",
+          "Halbiert die Zeit von der Notaufnahme bis zur Behandlungsentscheidung",
+          "Macht Besuche im Gipsraum überflüssig",
+          "Hält die richtige Zehenspitzenposition für die anfängliche Heilung bei",
+        ],
+        linkText: "Für Ihre Klinik bestellen",
+      },
+      {
+        title: "Erholungsphase: Nachts tragen",
+        imageAlt: "Schienenbild",
+        description:
+          "Während der entscheidenden 2-12-wöchigen Erholungsphase kann die Schiene auch den orthopädischen Stiefel nachts ersetzen.",
+        benefits: [
+          "Hält die richtige Heilungsposition im Schlaf bei",
+          "Deutlich bequemer als das Schlafen in einem Stiefel",
+          "Verhindert eine versehentliche erneute Ruptur im Schlaf",
+          "Kompatibel mit der standardmäßigen Tagesbehandlung mit Stiefeln",
+        ],
+        linkText: "Jetzt kaufen",
+      },
+    ],
+  },
+  fr: {
+    intro: {
+      title: {
+        part1: "Récupération de la",
+        highlight1: "rupture",
+        part2: "du tendon d'Achille",
+        highlight2: "réimaginée",
+      },
+      subtitle: {
+        part1:
+          "Un produit à double usage pour rendre la récupération de la rupture du tendon d'Achille aussi",
+        highlight1: "rapide",
+        part2: "et",
+        highlight2: "confortable",
+        part3: "que possible",
+      },
+    },
+    timeline: ["Rupture", "Semaine 1", "Semaine 2", "Semaine 6", "Semaine 12"],
+    products: [
+      {
+        title: "Rupture suspectée ? Remplacez le plâtre",
+        imageAlt: "Image de l'attelle de traumatologie",
+        description:
+          "Au lieu d'un plâtre immédiat aux urgences, l'attelle pour rupture du tendon d'Achille (code LPP Q4051) offre une solution plus flexible pour l'évaluation initiale et le diagnostic.",
+        benefits: [
+          "Permet une évaluation échographique facile",
+          "Réduit de moitié le temps entre les urgences et la décision de traitement",
+          "Élimine les visites en salle de plâtre",
+          "Maintient une position correcte sur la pointe des pieds pour la guérison initiale",
+        ],
+        linkText: "Commander pour votre clinique",
+      },
+      {
+        title: "Période de récupération : à porter la nuit",
+        imageAlt: "Image de l'attelle",
+        description:
+          "Pendant la période de récupération cruciale de 2 à 12 semaines, l'attelle peut également remplacer la botte orthopédique la nuit.",
+        benefits: [
+          "Maintient une position de guérison correcte pendant le sommeil",
+          "Beaucoup plus confortable que de dormir dans une botte",
+          "Prévient une nouvelle rupture accidentelle pendant le sommeil",
+          "Compatible avec le traitement de jour standard par botte",
+        ],
+        linkText: "Acheter maintenant",
+      },
+    ],
+  },
+  es: {
+    intro: {
+      title: {
+        part1: "Recuperación de la",
+        highlight1: "rotura",
+        part2: "del tendón de Aquiles",
+        highlight2: "reinventada",
+      },
+      subtitle: {
+        part1:
+          "Un producto con dos usos para que la recuperación de la rotura del tendón de Aquiles sea lo más",
+        highlight1: "rápida",
+        part2: "y",
+        highlight2: "cómoda",
+        part3: "posible",
+      },
+    },
+    timeline: ["Rotura", "Semana 1", "Semana 2", "Semana 6", "Semana 12"],
+    products: [
+      {
+        title: "¿Sospecha de rotura? Reemplace el yeso",
+        imageAlt: "Imagen de la férula de trauma",
+        description:
+          "En lugar de un yeso inmediato en urgencias, la férula para rotura del tendón de Aquiles (código HCPCS Q4051) ofrece una solución más flexible para la evaluación y el diagnóstico inicial.",
+        benefits: [
+          "Permite una fácil evaluación por ultrasonido",
+          "Reduce a la mitad el tiempo desde urgencias hasta la decisión del tratamiento",
+          "Elimina la necesidad de visitas a la sala de yesos",
+          "Mantiene la posición correcta de puntillas para la curación inicial",
+        ],
+        linkText: "Pedir para su clínica",
+      },
+      {
+        title: "Período de recuperación: usar de noche",
+        imageAlt: "Imagen de la férula",
+        description:
+          "Durante el período de recuperación crucial de 2 a 12 semanas, la férula también puede reemplazar la bota ortopédica por la noche.",
+        benefits: [
+          "Mantiene la posición de curación adecuada mientras duerme",
+          "Significativamente más cómoda que dormir con una bota",
+          "Previene una nueva rotura accidental durante el sueño",
+          "Compatible con el tratamiento diurno estándar con bota",
+        ],
+        linkText: "Comprar ahora",
+      },
+    ],
+  },
+};
+
+const t = content[lang as keyof typeof content];
+
+const timelinePoints = [
+  { position: 2 },
+  { position: 25 },
+  { position: 48.5 },
+  { position: 71.75 },
+  { position: 95 },
+].map((point, i) => ({ ...point, label: t.timeline[i] }));
+
+const products = [
+  {
+    image: traumaSplintImage,
+    links: { primary: "/order-wholesale" },
+  },
+  {
+    image: nightSplintImage,
+    links: { primary: "/night-splint" },
+    reverse: true,
+  },
+].map((product, i) => ({ ...product, ...t.products[i] }));
+---
+
+<div class="relative w-full">
+  <!-- Introduction Section -->
+  <div class="relative mx-auto px-4 md:px-8 pt-16 max-w-[1400px] text-center">
+    <h2
+      class="mb-4 font-semibold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl"
+    >
+      {t.intro.title.part1}
+      <HighlightedWord>{t.intro.title.highlight1}</HighlightedWord>
+      {t.intro.title.part2}
+      <HighlightedWord>{t.intro.title.highlight2}</HighlightedWord>
+    </h2>
+    <p
+      class="mx-auto mb-12 max-w-3xl text-muted-foreground text-neutral-900 dark:text-neutral-200 text-lg md:text-xl"
+    >
+      {t.intro.subtitle.part1}
+      <HighlightedWord>{t.intro.subtitle.highlight1}</HighlightedWord>
+      {t.intro.subtitle.part2}
+      <HighlightedWord>{t.intro.subtitle.highlight2}</HighlightedWord>
+      {t.intro.subtitle.part3}
+    </p>
+  </div>
+
+  <div class="relative flex gap-4 mx-auto px-4 md:px-4 pb-16 max-w-[1400px]">
+    <!-- Timeline Bar (Left Side) -->
+    <div class="hidden md:block relative px-8 w-24 shrink-0">
+      <div
+        class="left-8 absolute bg-primary/50 dark:bg-primary/70 w-0.5 h-full"
+      >
+        {
+          timelinePoints.map((point) => (
+            <div
+              class="-left-6 md:-left-8 absolute flex justify-center items-center gap-2 bg-white dark:bg-black p-1 w-14 md:w-16 dark:text-neutral-200 text-center hover:scale-105 transition-all"
+              style={`top: ${point.position}%`}
+            >
+              <span class="text-muted-foreground dark:text-neutral-400 md:text-lg text-center whitespace-nowrap">
+                {point.label}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Product Sections (Right Side) -->
+    <div class="flex-1">
+      {
+        products.map((product) => (
+          <section class="mb-16 md:mb-24 last:mb-0">
+            <div class="flex flex-col gap-4 md:gap-8">
+              <h2 class="md:hidden block font-semibold text-neutral-800 dark:text-neutral-200 text-xl">
+                {product.title}
+              </h2>
+
+              <div class="group flex lg:flex-row flex-col gap-6 md:gap-8">
+                <div class="w-full lg:w-1/2">
+                  <Image
+                    src={product.image}
+                    alt={product.imageAlt}
+                    class="shadow-lg group-hover:shadow-xl rounded-lg w-full group-hover:scale-[102%] transition-all duration-300"
+                    width={600}
+                    height={400}
+                  />
+                </div>
+
+                <div class="space-y-3 md:space-y-4 w-full lg:w-1/2">
+                  <h2 class="hidden md:block font-semibold dark:text-neutral-200 text-2xl">
+                    {product.title}
+                  </h2>
+                  <p class="dark:text-neutral-400 text-base md:text-lg">
+                    {product.description}
+                  </p>
+                  <ul class="space-y-1.5 md:space-y-2 pl-4 md:pl-5 dark:text-neutral-400 text-base md:text-lg list-disc">
+                    {product.benefits.map((benefit) => (
+                      <li>{benefit}</li>
+                    ))}
+                  </ul>
+                  <div class="flex flex-wrap gap-3 md:gap-4 pt-3 md:pt-4">
+                    <a
+                      href={product.links.primary}
+                      class={cn(
+                        buttonVariants({ size: "lg", variant: "default" }),
+                        "w-fit md:text-base transition-transform hover:scale-105 dark:text-neutral-200",
+                      )}
+                    >
+                      {product.linkText}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</div>

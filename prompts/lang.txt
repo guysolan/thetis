@@ -1,0 +1,30 @@
+ update this component and all the components used within it to take a lang prop with options for en, de, fr, es. 
+ 
+ All the content should be stored in an object with the keys being the language codes and the values being the content.
+ 
+ The component should then use the lang prop to determine which object to use and then render the content.
+
+ Example of the content object:
+ 
+ const content = {
+    en: {
+        title: "Title",
+        description: "Description",
+    },
+    de: {
+        title: "Titel",
+        description: "Beschreibung",
+    },
+    fr: {
+        title: "Titre",
+        description: "Description",
+    },
+    es: {
+        title: "Título",
+        description: "Descripción",
+    },
+ }
+ 
+ 
+ 
+ 

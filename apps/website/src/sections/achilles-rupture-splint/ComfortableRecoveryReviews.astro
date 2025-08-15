@@ -1,0 +1,47 @@
+---
+import ReviewCarousel from "@/components/reviews/ReviewCarousel";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content: Record<
+    Lang,
+    {
+        title: string;
+        body: string;
+    }
+> = {
+    en: {
+        title: "Ready for More Comfortable Recovery?",
+        body: "Join thousands of patients who've improved their recovery experience",
+    },
+    de: {
+        title: "Bereit für mehr Komfort bei der Genesung?",
+        body: "Schläfrige Nächte und Unbehagen aus Ihrem Boot? Unser Splint ist leicht, einfach zu bedienen und von Tausenden für eine gute Nachtschlaf vertraut. Erfahren Sie die Differenz — aufstehen entspannt und auf dem Weg zur Genesung.",
+    },
+    fr: {
+        title: "Prêt pour plus de confort lors de la récupération ?",
+        body: "Fatigué de nuits sans sommeil et inconfort de votre botte ? Notre attelle est légère, facile à utiliser et approuvée par des milliers pour un bon sommeil. Découvrez la différence — se lever reposé et sur la voie du rétablissement.",
+    },
+    es: {
+        title: "¿Listo para una recuperación más cómoda?",
+        body: "¿Cansado de noches sin dormir y molestias de tu botas? Nuestra atadura es ligera, fácil de usar y confiable para miles de personas para una buena noche de sueño. Experimenta la diferencia — levantate descansado y en camino a la recuperación.",
+    },
+    it: {
+        title: "Pronto per una riposo più confortevole?",
+        body: "Stanco di notti senza riposo e disagio della tua botta? Il nostro splint è leggero, facile da usare e affidato a migliaia di persone per una buona notte di riposo. Scopri la differenza — alzati rilassato e sulla via della guarigione.",
+    },
+};
+---
+
+<section class="flex flex-col items-center py-16">
+    <div class="flex flex-col items-center mx-auto px-8 md:px-0 text-center">
+        <h2 class="mb-6 font-semibold text-3xl">
+            {content[lang].title}
+        </h2>
+        <p class="mb-8 text-gray-700 text-xl">
+            {content[lang].body}
+        </p>
+    </div>
+    <ReviewCarousel client:load />
+</section>

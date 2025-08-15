@@ -1,14 +1,22 @@
 ---
-import HighlightedWord from "../../HighlightedWord";
-import BulkOrders from "../../buy-button/BulkOrders";
-import FreeAndSecure from "../../buy-button/FreeAndSecure";
-import CheckWithCareTeam from "../../buy-button/CheckWithCareTeam";
-import BuyButtonVariants from "../buy-button/BuyButtonVariants.tsx";
+import HighlightedParagraph from "@/components/HighlightedParagraph";
+import FreeAndSecure from "@/components/buy-button/FreeAndSecure.tsx";
+import CheckWithCareTeam from "@/components/buy-button/CheckWithCareTeam.tsx";
+import BuyButtonVariants from "../../components/products/buy-button/BuyButtonVariants.tsx";
 import { Image } from "astro:assets";
 import ColorGradient from "@/components/ColorGradient.astro";
 import nightSplint from "@/components/products/images/night-splint/night_splint_bed_top_square.jpg";
-import ReviewsLink from "../../ReviewsLink";
-import WorkInHealthcare from "./WorkInHealthcare.astro";
+import ReviewsLink from "@/components/ReviewsLink.tsx";
+import WorkInHealthcare from "@/components/products/night-splint/WorkInHealthcare.astro";
+import { content } from "@/components/products/night-splint/content.ts";
+import type { Lang } from "../../config/languages";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+const t = content[lang]?.hero || content.en.hero;
 ---
 
 <ColorGradient>
@@ -17,13 +25,10 @@ import WorkInHealthcare from "./WorkInHealthcare.astro";
       <h1
         class="mb-6 mx-w-4xl font-semibold text-gray-900 text-4xl md:text-5xl leading-[105%] md:leading-[120%]"
       >
-        The <HighlightedWord>Only</HighlightedWord> Splint for Achilles Tendon <HighlightedWord
-          >Rupture</HighlightedWord
-        >
+        <HighlightedParagraph paragraph={t.title} client:load />
       </h1>
       <p class="mx-auto mb-8 max-w-3xl text-gray-700 text-xl">
-        Finally, a comfortable solution for sleep. Designed alongside surgeons
-        to protect your healing Achilles while you get the rest you need.
+        {t.description}
       </p>
     </div>
     <div class="flex lg:flex-row flex-col gap-4 lg:gap-8 my-2">
@@ -40,23 +45,20 @@ import WorkInHealthcare from "./WorkInHealthcare.astro";
           <h1
             class="mx-w-4xl font-semibold text-gray-900 text-4xl md:text-5xl leading-[105%] md:leading-[120%]"
           >
-            The <HighlightedWord>Only</HighlightedWord> Splint for Achilles Tendon
-            <HighlightedWord>Rupture</HighlightedWord>
+            <HighlightedParagraph paragraph={t.title} client:load />
           </h1>
           <p class="mx-auto max-w-3xl text-gray-700 text-xl">
-            Finally, a comfortable solution for sleep. Designed alongside
-            surgeons to protect your healing Achilles tendon while you get the
-            rest you need.
+            {t.description}
           </p>
         </div>
-        <ReviewsLink size="lg" />
-        <CheckWithCareTeam className="mt-2" client:load />
-        <BuyButtonVariants client:load />
+        <ReviewsLink size="lg" lang={lang} />
+        <CheckWithCareTeam className="mt-2" client:load lang={lang} />
+        <BuyButtonVariants client:load lang={lang} />
       </div>
     </div>
     <div class="flex flex-col gap-16 pt-8">
-      <FreeAndSecure />
-      <WorkInHealthcare />
+      <FreeAndSecure lang={lang} />
+      <WorkInHealthcare lang={lang} />
     </div>
   </div>
 </ColorGradient>

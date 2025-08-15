@@ -1,3 +1,5 @@
+"use client";
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -11,37 +13,133 @@ import { cn } from "@/lib/utils";
 import * as React from "react";
 
 import { Badge } from "../components/ui/badge";
-import { articles } from "../content/articles.tsx";
 import { Button, buttonVariants } from "../components/ui/button";
-("use client");
 
 const contentWidth = "min-w-[min(50vw,700px)]";
 
-import { partnerLinks, contactLinks } from "../content/pages.tsx";
+import {
+  articleRoutes,
+  contactRoutes,
+  getRouteBySlugAndLanguage,
+  getRoutesByLanguage,
+  partnerRoutes,
+} from "../content/routes";
 import ReviewsLink from "../components/ReviewsLink.tsx";
+import type { Lang } from "../config/languages.ts";
 
-function DesktopNav() {
+interface DesktopNavProps {
+  lang: Lang;
+}
+
+const content = {
+  en: {
+    ourProduct: "Our Product",
+    patientGuides: "Patient Guides",
+    professionals: "Professionals",
+    contact: "Contact",
+    buyNow: "Buy Now",
+    learnMore: "Learn More",
+    orderWholesale: "Order Wholesale",
+    productTitle: "Achilles Tendon Rupture Splint",
+    productDescription:
+      "Improve recovery time and comfort after Achilles tendon rupture",
+  },
+  de: {
+    ourProduct: "Unser Produkt",
+    patientGuides: "Patientenleitfäden",
+    professionals: "Fachkräfte",
+    contact: "Kontakt",
+    buyNow: "Jetzt kaufen",
+    learnMore: "Mehr erfahren",
+    orderWholesale: "Großhandel bestellen",
+    productTitle: "Achillessehnenruptur-Schiene",
+    productDescription:
+      "Verbessern Sie die Genesungszeit und den Komfort nach einer Achillessehnenruptur",
+  },
+  fr: {
+    ourProduct: "Notre Produit",
+    patientGuides: "Guides du Patient",
+    professionals: "Professionnels",
+    contact: "Contact",
+    buyNow: "Acheter maintenant",
+    learnMore: "En savoir plus",
+    orderWholesale: "Commander en gros",
+    productTitle: "Attelle de rupture du tendon d'Achille",
+    productDescription:
+      "Améliorez le temps de récupération et le confort après une rupture du tendon d'Achille",
+  },
+  es: {
+    ourProduct: "Nuestro Producto",
+    patientGuides: "Guías del Paciente",
+    professionals: "Profesionales",
+    contact: "Contacto",
+    buyNow: "Comprar ahora",
+    learnMore: "Aprende más",
+    orderWholesale: "Pedir al por mayor",
+    productTitle: "Férula para rotura del tendón de Aquiles",
+    productDescription:
+      "Mejore el tiempo de recuperación y la comodidad después de la rotura del tendón de Aquiles",
+  },
+  it: {
+    ourProduct: "Il Nostro Prodotto",
+    patientGuides: "Guide del Paziente",
+    professionals: "Professionisti",
+    contact: "Contatto",
+    buyNow: "Compra ora",
+    learnMore: "Scopri di più",
+    orderWholesale: "Ordina all'ingrosso",
+    productTitle: "Férula per rottura del tendine di Achille",
+    productDescription:
+      "Migliora i tempi di recupero e il comfort dopo la rottura del tendine di Achille",
+  },
+};
+
+function DesktopNav({ lang = "en" }: DesktopNavProps) {
+  const t = content[lang];
+  // Get localized routes
+  const localizedRoutes = getRoutesByLanguage(lang);
+  const articles = localizedRoutes.filter((route) =>
+    route.slug.startsWith("FAQs/")
+  );
+  const partnerLinks = localizedRoutes.filter((route) =>
+    partnerRoutes.some((pr) => pr.slug === route.slug)
+  );
+  const contactLinks = localizedRoutes.filter((route) =>
+    contactRoutes.some((cr) => cr.slug === route.slug)
+  );
+
+  // Get dynamic URLs for the current language
+  const splintRoute = getRouteBySlugAndLanguage("splint", lang);
+  const buyNowRoute = getRouteBySlugAndLanguage("buy-now", lang);
+  const wholesaleRoute = getRouteBySlugAndLanguage("order-wholesale", lang);
+
   return (
     <>
       <NavigationMenu>
         <NavigationMenuList className={cn("justify-end", contentWidth)}>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Our Product</NavigationMenuTrigger>
+            <NavigationMenuTrigger>
+              {t.ourProduct}
+            </NavigationMenuTrigger>
             <NavigationMenuContent className={cn("p-6", contentWidth)}>
               <ProductLink
-                title="Achilles Tendon Rupture Splint"
-                description="Improve recovery time and comfort after Achilles tendon rupture"
+                title={t.productTitle}
+                description={t.productDescription}
                 imageSrc="/images/night_splint_square_small.jpg"
                 imageAlt="Achilles Tendon Rupture Splint"
-                productUrl="/splint"
-                buyUrl="/buy-now"
-                wholesaleUrl="/order-wholesale"
+                reviewCount={0}
+                productUrl={splintRoute?.href || "/splint"}
+                buyUrl={buyNowRoute?.href || "/buy-now"}
+                wholesaleUrl={wholesaleRoute?.href || "/order-wholesale"}
+                lang={lang}
               />
             </NavigationMenuContent>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Patient Guides</NavigationMenuTrigger>
+            <NavigationMenuTrigger>
+              {t.patientGuides}
+            </NavigationMenuTrigger>
             <NavigationMenuContent
               className={cn("grid grid-cols-2 p-4 gap-4", contentWidth)}
             >
@@ -57,7 +155,7 @@ function DesktopNav() {
                   </p>
 
                   <div className="flex flex-wrap gap-1 pt-2">
-                    {article.tags.map((tag) => {
+                    {article.tags?.map((tag) => {
                       return (
                         <Badge
                           key={`${article.href}-${tag.words}`}
@@ -74,13 +172,20 @@ function DesktopNav() {
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Professionals</NavigationMenuTrigger>
+            <NavigationMenuTrigger>
+              {t.professionals}
+            </NavigationMenuTrigger>
             <NavigationMenuContent
               className={cn("p-6 flex flex-col gap-2", contentWidth)}
             >
               <div className="gap-4 grid grid-cols-2">
                 {partnerLinks.map((link) => (
-                  <LinkCard key={link.href} {...link} variant={link.variant || "outline"} />
+                  <LinkCard
+                    key={link.href}
+                    {...link}
+                    variant={link.variant || "outline"}
+                    icon={link.icon}
+                  />
                 ))}
               </div>
             </NavigationMenuContent>
@@ -93,7 +198,7 @@ function DesktopNav() {
                 "font-normal ml-2",
               )}
             >
-              Contact
+              {t.contact}
             </NavigationMenuTrigger>
             <NavigationMenuContent
               className={cn("p-6 flex flex-col gap-2", contentWidth)}
@@ -103,14 +208,22 @@ function DesktopNav() {
                   {contactLinks
                     .filter((l) => l.variant === "default")
                     .map((link) => (
-                      <LinkCard key={link.href} {...link} />
+                      <LinkCard
+                        key={link.href}
+                        {...link}
+                        variant={link.variant || "default"}
+                      />
                     ))}
                 </div>
                 <div className="flex flex-col flex-1 gap-4">
                   {contactLinks
                     .filter((l) => l.variant === "outline")
                     .map((link) => (
-                      <LinkCard key={link.href} {...link} />
+                      <LinkCard
+                        key={link.href}
+                        {...link}
+                        variant={link.variant || "outline"}
+                      />
                     ))}
                 </div>
               </div>
@@ -119,10 +232,10 @@ function DesktopNav() {
         </NavigationMenuList>
       </NavigationMenu>
       <a
-        href="/buy-now"
+        href={buyNowRoute?.href || "/buy-now"}
         className={cn(buttonVariants({ variant: "default", size: "md" }))}
       >
-        <span className="font-semibold text-nowrap">Buy Now</span>
+        <span className="font-semibold text-nowrap">{t.buyNow}</span>
       </a>
     </>
   );
@@ -213,7 +326,7 @@ const LinkCard = ({
   title: string;
   description: string;
   href: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   variant: "default" | "outline";
 }) => {
   return (
@@ -255,6 +368,7 @@ type ProductLinkProps = {
   productUrl: string;
   buyUrl: string;
   wholesaleUrl: string;
+  lang: Lang;
 };
 
 const ProductLink = ({
@@ -266,7 +380,9 @@ const ProductLink = ({
   productUrl,
   buyUrl,
   wholesaleUrl,
+  lang = "en",
 }: ProductLinkProps) => {
+  const t = content[lang];
   return (
     <div className="flex md:flex-row flex-col gap-6">
       {/* Product image - square and prominent */}
@@ -279,7 +395,7 @@ const ProductLink = ({
           />
           <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-0 group-hover:bg-opacity-20 rounded-xl transition-all duration-300">
             <span className="bg-white bg-opacity-80 group-hover:shadow-md px-4 py-2 rounded-md font-medium text-neutral-800 group-hover:text-primary group-hover:-rotate-1 scale-95 group-hover:scale-100 transition-all duration-300 transform">
-              Learn More
+              {t.learnMore}
             </span>
           </div>
         </a>
@@ -294,7 +410,7 @@ const ProductLink = ({
           </p>
 
           {/* Reviews snippet */}
-          <ReviewsLink size="sm" variant="background" />
+          <ReviewsLink size="sm" variant="background" lang={lang} />
         </div>
 
         {/* Action buttons */}
@@ -303,13 +419,13 @@ const ProductLink = ({
             href={buyUrl}
             className={cn(buttonVariants({ variant: "default" }))}
           >
-            Buy Now
+            {t.buyNow}
           </a>
           <a
             href={wholesaleUrl}
             className={cn(buttonVariants({ variant: "outline" }))}
           >
-            Order Wholesale
+            {t.orderWholesale}
           </a>
         </div>
       </div>

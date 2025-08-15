@@ -11,13 +11,52 @@ import { productLinks } from "@/content/pages.tsx";
 import { contactLinks, partnerLinks } from "@/content/pages.tsx";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import type { Lang } from "../config/languages";
 
-const NavAccordion = () => {
+interface NavAccordionProps {
+  lang?: Lang;
+}
+
+const content = {
+  en: {
+    ourProduct: "Our Product",
+    professionals: "Professionals",
+    patientGuides: "Patient Guides",
+    contactUs: "Contact Us",
+  },
+  de: {
+    ourProduct: "Unser Produkt",
+    professionals: "Fachkräfte",
+    patientGuides: "Patientenleitfäden",
+    contactUs: "Kontaktiere uns",
+  },
+  fr: {
+    ourProduct: "Notre Produit",
+    professionals: "Professionnels",
+    patientGuides: "Guides du Patient",
+    contactUs: "Contactez-nous",
+  },
+  es: {
+    ourProduct: "Nuestro Producto",
+    professionals: "Profesionales",
+    patientGuides: "Guías del Paciente",
+    contactUs: "Contáctenos",
+  },
+  it: {
+    ourProduct: "Il Nostro Prodotto",
+    professionals: "Professionisti",
+    patientGuides: "Guide del Paziente",
+    contactUs: "Contattaci",
+  },
+};
+
+const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
+  const t = content[lang];
   return (
     <Accordion type="single" collapsible>
       {/* Products */}
       <AccordionItem value="products">
-        <AccordionTrigger>Our Product</AccordionTrigger>
+        <AccordionTrigger>{t.ourProduct}</AccordionTrigger>
         <AccordionContent>
           <div className="flex flex-col gap-4">
             {productLinks.map((link) =>
@@ -66,7 +105,7 @@ const NavAccordion = () => {
 
       {/* Partners */}
       <AccordionItem value="partners">
-        <AccordionTrigger>Professionals</AccordionTrigger>
+        <AccordionTrigger>{t.professionals}</AccordionTrigger>
         <AccordionContent>
           <div className="flex flex-col gap-2">
             {partnerLinks.map((partner) => (
@@ -85,7 +124,7 @@ const NavAccordion = () => {
 
       {/* Patient Guides */}
       <AccordionItem value="patient-guides">
-        <AccordionTrigger>Patient Guides</AccordionTrigger>
+        <AccordionTrigger>{t.patientGuides}</AccordionTrigger>
         <AccordionContent>
           <div className="flex flex-col gap-2">
             {articles.map((article) => (
@@ -125,7 +164,7 @@ const NavAccordion = () => {
 
       {/* Partners */}
       <AccordionItem value="contacts">
-        <AccordionTrigger>Contact Us</AccordionTrigger>
+        <AccordionTrigger>{t.contactUs}</AccordionTrigger>
         <AccordionContent>
           <div className="flex flex-col gap-2">
             {contactLinks.map((contact) => (

@@ -1,13 +1,9 @@
 ---
-import {
-    languages,
-    getLanguageByPath,
-    getAlternateLanguages,
-} from "../config/languages";
+import { urlUtils, getCurrentLanguage } from "../utils/language";
 
 const currentPath = Astro.url.pathname;
-const currentLang = getLanguageByPath(currentPath) || languages[0];
-const alternateLanguages = getAlternateLanguages(currentPath, currentLang.code);
+const currentLang = getCurrentLanguage(currentPath);
+const languageOptions = urlUtils.getLanguageSwitcherOptions(currentPath);
 ---
 
 <div class="relative language-switcher">
@@ -17,8 +13,7 @@ const alternateLanguages = getAlternateLanguages(currentPath, currentLang.code);
         aria-expanded="false"
         aria-haspopup="true"
     >
-        <span class="text-lg">{currentLang.flag}</span>
-        <span>{currentLang.nativeName}</span>
+        <span class="capitalize">{currentLang.code.toUpperCase()}</span>
         <svg
             class="w-4 h-4"
             fill="none"
@@ -39,24 +34,20 @@ const alternateLanguages = getAlternateLanguages(currentPath, currentLang.code);
     >
         <div class="py-1">
             {
-                languages.map((lang) => {
-                    const basePath =
-                        currentPath.replace(/^\/[a-z]{2}/, "") || "/";
-                    const langUrl = `${lang.dir}${basePath === "/" ? "" : basePath}`;
-                    const isActive = lang.code === currentLang.code;
-
+                languageOptions.map((langOption) => {
                     return (
                         <a
-                            href={langUrl}
+                            href={langOption.href}
                             class={`flex items-center gap-3 px-4 py-2 text-sm ${
-                                isActive
+                                langOption.isActive
                                     ? "bg-primary text-white"
                                     : "text-gray-700 hover:bg-gray-100"
                             }`}
                         >
-                            <span class="text-lg">{lang.flag}</span>
-                            <span>{lang.nativeName}</span>
-                            {isActive && (
+                            <span class="capitalize">
+                                {langOption.code.toUpperCase()}
+                            </span>
+                            {langOption.isActive && (
                                 <svg
                                     class="ml-auto w-4 h-4"
                                     fill="currentColor"

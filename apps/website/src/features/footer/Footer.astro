@@ -5,37 +5,98 @@ import FooterEmailCTA from "@/components/CTA/FooterEmailCTA.astro";
 import FooterBlock from "./FooterBlock.astro";
 import { ThemeToggle } from "../../components/theme/ThemeToggle";
 import {
-  productLinks,
-  partnerLinks,
-  contactLinks,
-  faqLinks,
-  legalLinks,
-} from "../../content/pages";
+  getRoutesByLanguage,
+  productRoutes,
+  partnerRoutes,
+  contactRoutes,
+} from "../../content/routes";
+import type { Lang } from "../../config/languages";
 
-const footerLinks = {
-  company: {
-    title: "Contact",
-    links: contactLinks,
+export interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+
+const localizedRoutes = getRoutesByLanguage(lang);
+
+// Filter routes by category
+const productLinks = localizedRoutes.filter((route) =>
+  productRoutes.some((pr) => pr.slug === route.slug),
+);
+const partnerLinks = localizedRoutes.filter((route) =>
+  partnerRoutes.some((pr) => pr.slug === route.slug),
+);
+const contactLinks = localizedRoutes.filter((route) =>
+  contactRoutes.some((cr) => cr.slug === route.slug),
+);
+const faqLinks = localizedRoutes.filter((route) =>
+  route.slug.startsWith("FAQs/"),
+);
+
+const content = {
+  en: {
+    contact: "Contact",
+    products: "Products",
+    patientGuides: "Patient Guides",
+    professionals: "Professionals",
+    stayInTouch: "Stay in Touch",
   },
-  products: {
-    title: "Products",
-    links: productLinks,
+  de: {
+    contact: "Kontakt",
+    products: "Produkte",
+    patientGuides: "Patientenleitfäden",
+    professionals: "Fachkräfte",
+    stayInTouch: "In Kontakt bleiben",
   },
-  patientGuides: {
-    title: "Patient Guides",
-    links: faqLinks,
+  fr: {
+    contact: "Contact",
+    products: "Produits",
+    patientGuides: "Guides du Patient",
+    professionals: "Professionnels",
+    stayInTouch: "Restez en Contact",
   },
-  professionals: {
-    title: "Professionals",
-    links: partnerLinks,
+  es: {
+    contact: "Contacto",
+    products: "Productos",
+    patientGuides: "Guías del Paciente",
+    professionals: "Profesionales",
+    stayInTouch: "Manténgase en Contacto",
   },
-  legal: {
-    title: "Legal",
-    links: legalLinks,
+  it: {
+    contact: "Contatto",
+    products: "Prodotti",
+    patientGuides: "Guide del Paziente",
+    professionals: "Professionisti",
+    stayInTouch: "Rimani in Contatto",
   },
 };
 
-const socials = [
+const t = content[lang];
+
+const footerLinks = {
+  company: {
+    title: t.contact,
+    links: contactLinks,
+  },
+  products: {
+    title: t.products,
+    links: productLinks,
+  },
+  patientGuides: {
+    title: t.patientGuides,
+    links: faqLinks,
+  },
+  professionals: {
+    title: t.professionals,
+    links: partnerLinks,
+  },
+};
+
+const socials: Array<{
+  mode: "mail" | "linkedin" | "instagram" | "facebook";
+  color: string;
+}> = [
   { mode: "mail", color: "white" },
   { mode: "linkedin", color: "white" },
   { mode: "instagram", color: "white" },
@@ -76,7 +137,7 @@ const socials = [
         />
 
         <div class="space-y-4">
-          <h3 class="font-semibold text-lg">Stay in Touch</h3>
+          <h3 class="font-semibold text-lg">{t.stayInTouch}</h3>
           <FooterEmailCTA />
 
           <div class="flex flex-col items-center lg:items-start gap-y-4">

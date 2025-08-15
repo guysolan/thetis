@@ -1,0 +1,218 @@
+---
+import BuyNowCallout from "@/components/products/night-splint/BuyNowCallout.astro";
+import HighlightedWord from "@/components/HighlightedWord.tsx";
+import type { Lang } from "@/config/languages.ts";
+import { getRouteBySlugAndLanguage } from "@/content/routes.ts";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const buyNowRoute = getRouteBySlugAndLanguage("splint", lang);
+const wholesaleRoute = getRouteBySlugAndLanguage("order-wholesale", lang);
+
+const content: Record<
+    Lang,
+    {
+        title: string;
+        buttonText: string;
+        secondaryButtonText: string;
+        body: { highlighted: boolean; text: string }[];
+    }
+> = {
+    en: {
+        title: "Order Your Splint Today",
+        buttonText: "Buy Now",
+        secondaryButtonText: "Order for Clinic",
+        body: [
+            {
+                highlighted: false,
+                text: "Don't let pain or poor sleep slow your recovery. Patients and clinicians agree: this splint brings ",
+            },
+            {
+                highlighted: true,
+                text: "comfort",
+            },
+            {
+                highlighted: false,
+                text: ", ",
+            },
+            {
+                highlighted: true,
+                text: "peace of mind",
+            },
+            {
+                highlighted: false,
+                text: ", and ",
+            },
+            {
+                highlighted: true,
+                text: "better rest",
+            },
+            {
+                highlighted: false,
+                text: "—night after night.",
+            },
+        ],
+    },
+    de: {
+        title: "Bestellen Sie Ihre Schiene Heute",
+        buttonText: "Jetzt Kaufen",
+        secondaryButtonText: "Für Klinik Bestellen",
+        body: [
+            {
+                highlighted: false,
+                text: "Lassen Sie Schmerzen oder schlechten Schlaf Ihre Genesung nicht verlangsamen. Patienten und Kliniker sind sich einig: Diese Schiene bringt ",
+            },
+            {
+                highlighted: true,
+                text: "Komfort",
+            },
+            {
+                highlighted: false,
+                text: ", ",
+            },
+            {
+                highlighted: true,
+                text: "Seelenfrieden",
+            },
+            {
+                highlighted: false,
+                text: " und ",
+            },
+            {
+                highlighted: true,
+                text: "besseren Schlaf",
+            },
+            {
+                highlighted: false,
+                text: "—Nacht für Nacht.",
+            },
+        ],
+    },
+    fr: {
+        title: "Commandez Votre Attelle Aujourd'hui",
+        buttonText: "Acheter Maintenant",
+        secondaryButtonText: "Commander pour Clinique",
+        body: [
+            {
+                highlighted: false,
+                text: "Ne laissez pas la douleur ou le mauvais sommeil ralentir votre rétablissement. Patients et cliniciens s'accordent : cette attelle apporte ",
+            },
+            {
+                highlighted: true,
+                text: "confort",
+            },
+            {
+                highlighted: false,
+                text: ", ",
+            },
+            {
+                highlighted: true,
+                text: "tranquillité d'esprit",
+            },
+            {
+                highlighted: false,
+                text: " et ",
+            },
+            {
+                highlighted: true,
+                text: "un meilleur repos",
+            },
+            {
+                highlighted: false,
+                text: "—nuit après nuit.",
+            },
+        ],
+    },
+    es: {
+        title: "Ordene Su Férula Hoy",
+        buttonText: "Comprar Ahora",
+        secondaryButtonText: "Pedir para Clínica",
+        body: [
+            {
+                highlighted: false,
+                text: "No deje que el dolor o el mal sueño ralenticen su recuperación. Pacientes y clínicos están de acuerdo: esta férula trae ",
+            },
+            {
+                highlighted: true,
+                text: "comodidad",
+            },
+            {
+                highlighted: false,
+                text: ", ",
+            },
+            {
+                highlighted: true,
+                text: "tranquilidad",
+            },
+            {
+                highlighted: false,
+                text: " y ",
+            },
+            {
+                highlighted: true,
+                text: "mejor descanso",
+            },
+            {
+                highlighted: false,
+                text: "—noche tras noche.",
+            },
+        ],
+    },
+    it: {
+        title: "Ordina La Tua Stecca Oggi",
+        buttonText: "Compra Ora",
+        secondaryButtonText: "Ordina per Clinica",
+        body: [
+            {
+                highlighted: false,
+                text: "Non lasciare che il dolore o il sonno povero rallentino la tua guarigione. Pazienti e clinici sono d'accordo: questa stecca porta ",
+            },
+            {
+                highlighted: true,
+                text: "comfort",
+            },
+            {
+                highlighted: false,
+                text: ", ",
+            },
+            {
+                highlighted: true,
+                text: "tranquillità",
+            },
+            {
+                highlighted: false,
+                text: " e ",
+            },
+            {
+                highlighted: true,
+                text: "migliore riposo",
+            },
+            {
+                highlighted: false,
+                text: "—notte dopo notte.",
+            },
+        ],
+    },
+};
+---
+
+<BuyNowCallout
+    buttonText={content[lang].buttonText}
+    buttonHref={buyNowRoute?.href || "/splint"}
+    secondaryButtonText={content[lang].secondaryButtonText}
+    secondaryButtonHref={wholesaleRoute?.href || "/order-wholesale"}
+>
+    <span slot="title">{content[lang].title}</span>
+    <span slot="body">
+        {
+            content[lang].body.map((item) => (
+                <span>
+                    {item.text}
+                    {item.highlighted && (
+                        <HighlightedWord>{item.text}</HighlightedWord>
+                    )}
+                </span>
+            ))
+        }
+    </span>
+</BuyNowCallout>

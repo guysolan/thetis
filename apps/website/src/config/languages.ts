@@ -1,5 +1,7 @@
+export type Lang = "en" | "de" | "fr" | "es" | "it";
+
 export interface Language {
-    code: string;
+    code: Lang;
     name: string;
     nativeName: string;
     flag: string;

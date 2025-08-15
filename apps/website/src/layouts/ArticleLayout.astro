@@ -1,14 +1,48 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import Layout from "./Layout.astro";
 import dayjs from "dayjs";
+import type { Lang } from "../config/languages";
 
-type Props = CollectionEntry<"article">["data"];
+type Props = {
+    title: string;
+    description: string;
+    createdAt: Date;
+    updatedAt?: Date;
+    heroImage?: string;
+    lang?: Lang;
+};
 
-const { title, description, createdAt, updatedAt, heroImage } = Astro.props;
+const {
+    title,
+    description,
+    createdAt,
+    updatedAt,
+    heroImage,
+    lang = "en",
+} = Astro.props;
+
+const content = {
+    en: {
+        lastUpdated: "Last updated on",
+    },
+    de: {
+        lastUpdated: "Zuletzt aktualisiert am",
+    },
+    fr: {
+        lastUpdated: "Dernière mise à jour le",
+    },
+    es: {
+        lastUpdated: "Última actualización el",
+    },
+    it: {
+        lastUpdated: "Ultimo aggiornamento il",
+    },
+};
+
+const t = content[lang];
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} lang={lang}>
     <main class="m-0 mx-auto w-full max-w-screen-xl">
         {
             (
@@ -30,7 +64,7 @@ const { title, description, createdAt, updatedAt, heroImage } = Astro.props;
                                 {dayjs(createdAt).format("MMMM D, YYYY")}
                                 {updatedAt && (
                                     <div class="text-gray-500 text-sm italic">
-                                        Last updated on{" "}
+                                        {t.lastUpdated}{" "}
                                         {dayjs(updatedAt).format(
                                             "MMMM D, YYYY",
                                         )}

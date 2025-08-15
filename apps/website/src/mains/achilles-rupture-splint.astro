@@ -1,0 +1,154 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Slide from "@/components/Slide.astro";
+import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
+import SizeChart from "@/components/SizeChart.jsx";
+import NightSplintFAQs from "@/sections/achilles-rupture-splint/SplintFAQs.tsx";
+import NightSplintUsage from "@/sections/achilles-rupture-splint/NightSplintUsage.astro";
+import NightSplintInstructions from "@/sections/achilles-rupture-splint/night-splint-instructions/index.astro";
+import NightSplintHero from "@/sections/achilles-rupture-splint/NightSplintHero.astro";
+import ValuePropositions from "@/sections/achilles-rupture-splint/ValuePropositions.astro";
+import KeyFeatures from "@/sections/achilles-rupture-splint/KeyFeatures.astro";
+import Reviews from "@/components/reviews/InfiniteReviews.astro";
+import SplintIntro from "@/sections/achilles-rupture-splint/SplintIntro.astro";
+import ReadyForRelief from "@/sections/achilles-rupture-splint/ReadyForRelief.astro";
+import ComfortableRecoveryReviews from "@/sections/achilles-rupture-splint/ComfortableRecoveryReviews.astro";
+import OrderYourSplint from "@/sections/achilles-rupture-splint/OrderYourSplint.astro";
+import SleepInYourWelliesSection from "@/sections/achilles-rupture-splint/SleepInYourWelliesSection.astro";
+import SplintDownloads from "@/sections/achilles-rupture-splint/SplintDownloads.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content = {
+    en: {
+        title: "Achilles Tendon Rupture Splint",
+        description:
+            "Thetis Medical's Achilles rupture splint to make sleeping more pleasant and bearable. The brace straps to the leg to prevent further tendon injury.",
+        image: "https://thetismedical.com/images/night_splint_bed_top_square.jpg",
+    },
+    fr: {
+        title: "Attelle de Rupture du Tendon d'Achille",
+        description:
+            "L'attelle de rupture d'Achille de Thetis Medical pour rendre le sommeil plus agréable et supportable. L'orthèse se fixe à la jambe pour prévenir d'autres blessures du tendon.",
+        image: "https://thetismedical.com/images/night_splint_bed_top_square.jpg",
+    },
+    de: {
+        title: "Achillessehnenriss-Schiene",
+        description:
+            "Die Achillessehnenriss-Schiene von Thetis Medical macht das Schlafen angenehmer und erträglicher. Die Orthese wird am Bein befestigt, um weitere Sehnenverletzungen zu verhindern.",
+        image: "https://thetismedical.com/images/night_splint_bed_top_square.jpg",
+    },
+    es: {
+        title: "Férula de Rotura del Tendón de Aquiles",
+        description:
+            "La férula de rotura de Aquiles de Thetis Medical para hacer el sueño más agradable y soportable. La ortesis se sujeta a la pierna para prevenir más lesiones del tendón.",
+        image: "https://thetismedical.com/images/night_splint_bed_top_square.jpg",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<Fragment slot="head">
+    <NightSplintSchema />
+</Fragment>
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    image={currentContent.image}
+    lang={lang}
+>
+    <main class="">
+        <NightSplintHero lang="en" />
+
+        <SplintIntro lang="en" />
+
+        <SleepInYourWelliesSection />
+
+        <Reviews />
+
+        <ValuePropositions lang="en" />
+
+        <KeyFeatures lang="en" />
+
+        <ReadyForRelief lang="en" />
+
+        <ComfortableRecoveryReviews lang="en" />
+
+        <div class="relative mx-auto mt-8 w-full">
+            <iframe
+                class="shadow-lg mx-auto rounded-lg w-full max-w-[300px] md:hover:max-w-[60vw] md:max-w-[50vw] lg:hover:max-w-[70vw] hover:max-w-[80vw] aspect-video transition-all duration-300 cursor-pointer"
+                title="Night-Splint-Application"
+                src="https://www.youtube.com/embed/T09Xnwaqbm0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+            >
+            </iframe>
+        </div>
+
+        <NightSplintUsage lang="en" />
+
+        <NightSplintInstructions lang="en" />
+
+        <Slide title="Sizing">
+            <SizeChart />
+        </Slide>
+
+        <SplintDownloads lang="en" />
+
+        <OrderYourSplint lang="en" />
+
+        <Slide title="FAQs">
+            <NightSplintFAQs client:load />
+        </Slide>
+    </main>
+
+    <script>
+        fetch("https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq")
+            .then((res) => res.json())
+            .then((response) => {
+                console.log("Country: ", response.country);
+                try {
+                    // Check if on Splint Page
+                    const shopify = document.getElementById(
+                        "shopify-buy-button-wrapper",
+                    );
+                    const amazon = document.getElementById(
+                        "amazon-buy-button-wrapper",
+                    );
+
+                    if (response.country === "United Kingdom") {
+                        amazon?.remove();
+                    } else {
+                        shopify?.remove();
+                    }
+                } catch (error) {
+                    // console.log(error)
+                }
+            })
+            .catch((reason: any) => {
+                console.log(reason);
+                // console.log('Request failed');
+            });
+    </script>
+
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+    </style>
+</Layout>

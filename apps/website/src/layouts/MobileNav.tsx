@@ -14,18 +14,52 @@ import {
 
 import { cn } from "../lib/utils";
 
-("client only");
+"client only";
 
 import NavAccordion from "./NavAccordion";
 import { ArrowRight } from "lucide-react";
 import Thetis from "./Thetis.tsx";
+import type { Lang } from "../config/languages.ts";
 
-export function MobileNav() {
+interface MobileNavProps {
+  lang: Lang;
+}
+
+const content = {
+  en: {
+    menu: "Menu",
+    close: "Close",
+    buyNow: "Buy Now",
+  },
+  de: {
+    menu: "Menü",
+    close: "Schließen",
+    buyNow: "Jetzt kaufen",
+  },
+  fr: {
+    menu: "Menu",
+    close: "Fermer",
+    buyNow: "Acheter maintenant",
+  },
+  es: {
+    menu: "Menú",
+    close: "Cerrar",
+    buyNow: "Comprar ahora",
+  },
+  it: {
+    menu: "Menu",
+    close: "Chiudi",
+    buyNow: "Compra ora",
+  },
+};
+
+export function MobileNav({ lang = "en" }: MobileNavProps) {
+  const t = content[lang];
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="outline" size="sm" className="font-light text-base">
-          Menu
+          {t.menu}
         </Button>
       </SheetTrigger>
       <SheetContent className="p-4 w-[90vw]">
@@ -34,7 +68,7 @@ export function MobileNav() {
           <SheetClose
             className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
           >
-            Close
+            {t.close}
           </SheetClose>
         </SheetHeader>
         <NavAccordion />
@@ -48,7 +82,7 @@ export function MobileNav() {
                 buttonVariants({ variant: "default", size: "lg" }),
               )}
             >
-              <span className="font-semibold text-nowrap">Buy Now</span>
+              <span className="font-semibold text-nowrap">{t.buyNow}</span>
             </a>
           </SheetClose>
           <div className="flex flex-wrap gap-x-6 mx-auto my-2">

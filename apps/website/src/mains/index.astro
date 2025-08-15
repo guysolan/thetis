@@ -1,0 +1,76 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ThetisSchema from "@/schemas/ThetisSchema.astro";
+import LandingHero from "@/sections/index/LandingHero.astro";
+import Reviews from "@/components/reviews/InfiniteReviews.astro";
+import "@thetis/ui/globals.css";
+import ProductTimeline from "@/sections/index/ProductTimeline.astro";
+import ProfessionalOpinionsCarousel from "@/sections/index/ProfessionalOpinionsCarousel";
+import ComplianceLogos from "@/sections/index/compliance/ComplianceLogos.astro";
+import NightSplintFAQs from "@/sections/achilles-rupture-splint/SplintFAQs.tsx";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Thetis Medical - Achilles Splint Specialists",
+        description:
+            "Medical device company specializing in splints for injured Achilles Tendons. We sell an Achilles Rupture Splint and a Trauma Splint.",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+    fr: {
+        title: "Thetis Medical - Spécialistes de l'attelle d'Achille",
+        description:
+            "Entreprise de dispositifs médicaux spécialisés dans les attelles pour les blessures du tendon d'Achille. Nous vendons une attelle de rupture d'Achille et une attelle de traumatisme.",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+    de: {
+        title: "Thetis Medical - Achillessehnenriss-Spezialisten",
+        description:
+            "Medizinische Unternehmen, das sich auf Splints für verletzte Achillessehnen spezialisiert hat. Wir verkaufen eine Achillessehnenriss-Schiene und eine Trauma-Schiene.",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+    es: {
+        title: "Thetis Medical - Especialistas en Férula de Rotura del Tendón de Aquiles",
+        description:
+            "Empresa de dispositivos médicos especializados en férulas para lesiones de tendón de Aquiles. Vendemos una férula de rotura de tendón de Aquiles y una férula de traumatismo.",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<ThetisSchema slot="head" />
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    image={currentContent.image}
+    lang={lang}
+>
+    <main
+        class="flex flex-col justify-center items-center bg-white dark:bg-black mx-auto mb-24 w-full"
+    >
+        <LandingHero lang={lang} />
+
+        <Reviews />
+
+        <ComplianceLogos />
+
+        <ProductTimeline lang={lang} />
+
+        <ProfessionalOpinionsCarousel lang={lang} client:load />
+
+        <NightSplintFAQs lang={lang} client:load />
+    </main>
+</Layout>
+
+<script is:inline>
+    document.documentElement.classList.remove("dark");
+
+    if (typeof localStorage !== "undefined") {
+        localStorage.setItem("theme", "light");
+    }
+</script>

@@ -2,9 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@thetis/ui/button";
 import { Info, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { content } from "../products/night-splint/content.ts";
+import type { Lang } from "../../config/languages.ts";
 
-const CheckWithCareTeam = ({ className }: { className?: string }) => {
+interface Props {
+  className?: string;
+  lang: Lang;
+}
+
+const CheckWithCareTeam = ({ className, lang = "en" }: Props) => {
   const [open, setOpen] = useState(false);
+  const t = content[lang]?.checkWithCareTeam || content.en.checkWithCareTeam;
 
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -66,7 +74,7 @@ const CheckWithCareTeam = ({ className }: { className?: string }) => {
         }}
       >
         <Info className="w-4 h-4" />
-        <span className="underline">Check with care team before buying</span>
+        <span className="underline">{t.button}</span>
       </Button>
 
       {/* Modal */}
@@ -74,6 +82,11 @@ const CheckWithCareTeam = ({ className }: { className?: string }) => {
         <div
           className="z-50 fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 p-4"
           onClick={handleOverlayClick}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              setOpen(false);
+            }
+          }}
         >
           <div className="relative bg-white shadow-xl rounded-lg w-full max-w-md transition-all transform">
             <button
@@ -97,38 +110,31 @@ const CheckWithCareTeam = ({ className }: { className?: string }) => {
 
             <div className="p-6">
               <h2 className="mb-4 font-semibold text-black text-lg">
-                Sleeping in a boot is miserable - we get it
+                {t.modal.title}
               </h2>
 
               <div className="space-y-4 text-base">
                 <p className="text-gray-700">
-                  We know sleeping in a boot is miserable. That's why we built
-                  this splint - to give you better sleep during recovery.
+                  {t.modal.p1}
                 </p>
 
-                <p className="text-gray-700">
-                  However,{" "}
-                  <strong>you must check with your doctor first</strong>. Some
-                  surgeons may not approve the splint for home use.
-                </p>
+                <p
+                  className="text-gray-700"
+                  dangerouslySetInnerHTML={{ __html: t.modal.p2 }}
+                />
 
                 <div className="bg-primary/10 p-4 border-primary/30 border-l-4 rounded-r-lg">
                   <p className="mb-2 font-medium text-primary">
-                    📋 What to do:
+                    {t.modal.whatToDo}
                   </p>
-                  <p className="text-primary">
-                    Show your surgeon our{" "}
-                    <a href="/evidence" className="text-primary text-semibold underline">
-                      evidence page
-                    </a>{" "}
-                    before buying. We have safety data and clinical studies that
-                    support the splint's effectiveness.
-                  </p>
+                  <p
+                    className="text-primary"
+                    dangerouslySetInnerHTML={{ __html: t.modal.evidence }}
+                  />
                 </div>
 
                 <p className="text-gray-600 text-sm">
-                  We want you to sleep better, but we also want your recovery to
-                  be safe and approved by your medical team.
+                  {t.modal.p3}
                 </p>
               </div>
             </div>

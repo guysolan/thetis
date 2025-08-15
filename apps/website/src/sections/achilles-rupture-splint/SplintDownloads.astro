@@ -1,0 +1,102 @@
+---
+import Slide from "@/components/Slide.astro";
+import DownloadList from "@/components/DownloadList.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content: Record<
+    Lang,
+    { title: string; downloads: { title: string; href: string }[] }
+> = {
+    en: {
+        title: "Downloads",
+        downloads: [
+            {
+                title: "Splint Instructions.pdf",
+                href: "/images/documents/screen-instructions-individual.pdf",
+            },
+            {
+                title: "Splint Information Brochure.pdf",
+                href: "/documents/information-brochure-night-splint.pdf",
+            },
+            {
+                title: "Splint Flier.pdf",
+                href: "/documents/achilles-rupture-splint-flier-v3.pdf",
+            },
+        ],
+    },
+    de: {
+        title: "Downloads",
+        downloads: [
+            {
+                title: "Splint Instructions.pdf",
+                href: "/images/documents/screen-instructions-individual.pdf",
+            },
+            {
+                title: "Splint Information Brochure.pdf",
+                href: "/documents/information-brochure-night-splint.pdf",
+            },
+            {
+                title: "Splint Flier.pdf",
+                href: "/documents/achilles-rupture-splint-flier-v3.pdf",
+            },
+        ],
+    },
+    fr: {
+        title: "Downloads",
+        downloads: [
+            {
+                title: "Splint Instructions.pdf",
+                href: "/images/documents/screen-instructions-individual.pdf",
+            },
+            {
+                title: "Splint Information Brochure.pdf",
+                href: "/documents/information-brochure-night-splint.pdf",
+            },
+            {
+                title: "Splint Flier.pdf",
+                href: "/documents/achilles-rupture-splint-flier-v3.pdf",
+            },
+        ],
+    },
+    es: {
+        title: "Downloads",
+        downloads: [
+            {
+                title: "Splint Instructions.pdf",
+                href: "/images/documents/screen-instructions-individual.pdf",
+            },
+            {
+                title: "Splint Information Brochure.pdf",
+                href: "/documents/information-brochure-night-splint.pdf",
+            },
+            {
+                title: "Splint Flier.pdf",
+                href: "/documents/achilles-rupture-splint-flier-v3.pdf",
+            },
+        ],
+    },
+    it: {
+        title: "Downloads",
+        downloads: [
+            {
+                title: "Splint Instructions.pdf",
+                href: "/images/documents/screen-instructions-individual.pdf",
+            },
+            {
+                title: "Splint Information Brochure.pdf",
+                href: "/documents/information-brochure-night-splint.pdf",
+            },
+            {
+                title: "Splint Flier.pdf",
+                href: "/documents/achilles-rupture-splint-flier-v3.pdf",
+            },
+        ],
+    },
+};
+---
+
+<Slide title={content[lang].title}>
+    <DownloadList downloads={content[lang].downloads} />
+</Slide>
