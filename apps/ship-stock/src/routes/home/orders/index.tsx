@@ -3,7 +3,7 @@ import { Button } from "@thetis/ui/button";
 import { Tabs, TabsContent, TabsTrigger } from "@thetis/ui/tabs";
 import TabsHeader from "@/components/TabsHeader";
 import { Link } from "@tanstack/react-router";
-import { Grid3X3, Package, ShoppingCart, Send, Plus } from "lucide-react";
+import { Grid3X3, Package, Plus, Send, ShoppingCart } from "lucide-react";
 
 import { OrderHistory } from "@/features/orders/components/OrderHistory";
 import { useSelectOrders } from "@/features/orders/features/order-history/api/selectOrders";
@@ -71,7 +71,7 @@ const OrdersPage = () => {
           >
             <OrderHistory
               orders={orders?.filter((order) =>
-                tabValue === "all" ? true : order.order_type === tabValue,
+                tabValue === "all" ? true : order.order_type === tabValue
               )}
             />
           </TabsContent>

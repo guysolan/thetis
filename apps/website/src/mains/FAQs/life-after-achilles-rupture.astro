@@ -2,122 +2,51 @@
 import FaqSchemaAccordion from "../../components/research/FaqSchemaAccordion.astro";
 import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
 import FAQsLayout from "../../layouts/FAQsLayout.astro";
+import LifeAfterAchillesRuptureSection from "../../sections/FAQs/life-after-achilles-rupture.astro";
+import type { Lang } from "@/config/languages";
+import LifeAfterAchillesRuptureFaqs from "@/sections/FAQs/life-after-achilles-rupture-faqs.astro";
+
+const { lang = "en" }: { lang?: Lang } = Astro.props;
+
+const content: Record<Lang, { title: string; description: string }> = {
+    en: {
+        title: "Life After Achilles Rupture: Recovery Tips, Walking Timeline & Activity Guide",
+        description:
+            "Detailed advice on life after an Achilles tendon rupture: walking timeline, return-to-sport guidelines, going back to work, and preventing re-rupture – plus practical recovery tips.",
+    },
+    fr: {
+        title: "Vie après la rupture de l'Achille : Conseils de récupération, Chronologie du retour à la marche & Guide d'activité",
+        description:
+            "Conseils détaillés sur la vie après une rupture du tendon d'Achille : chronologie du retour à la marche, recommandations pour le retour au sport, retour au travail et prévention de la re-rupture – plus des conseils pratiques pour la récupération.",
+    },
+    de: {
+        title: "Leben nach einer Achillenruptur: Rückkehr-Tipps, Zeitplan für die Gehbühne & Aktivitätsleitfaden",
+        description:
+            "Detaillierte Ratschläge für das Leben nach einer Achillenruptur: Zeitplan für die Gehbühne, Rückkehr-Tipps für Sport und Arbeit, sowie praktische Tipps für die Rekonvaleszenz.",
+    },
+    es: {
+        title: "Vida después de la ruptura del tendón de la pantorrilla: Consejos de recuperación, Cronología del retorno a la marcha & Guía de actividad",
+        description:
+            "Consejos detallados sobre la vida después de una ruptura del tendón de la pantorrilla: cronología del retorno a la marcha, recomendaciones para el retorno al deporte, retorno al trabajo y prevención de la re-ruptura – más consejos prácticos para la recuperación.",
+    },
+    it: {
+        title: "Vita dopo la rottura dell'Achille: Consigli di recupero, Cronologia del ritorno al cammino & Guida all'attività",
+        description:
+            "Consigli dettagliati sulla vita dopo una rottura del tendine dell'Achille: cronologia del ritorno al cammino, linee guida per il ritorno al sport, ritorno al lavoro e prevenzione della re-ruptura – più consigli pratici per la riabilitazione.",
+    },
+};
+
+const currentContent = content[lang];
 ---
 
 <FAQsLayout
-    title="Life After Achilles Rupture: Recovery Tips, Walking Timeline & Activity Guide"
-    description="Detailed advice on life after an Achilles tendon rupture: walking timeline, return-to-sport guidelines, going back to work, and preventing re-rupture – plus practical recovery tips."
+    title={currentContent.title}
+    description={currentContent.description}
+    lang={lang}
 >
-    <section id="faq-slide" class="faq slide">
-        <div class="questions">
-            <h2>Find your answer:</h2>
-            <a href="#q1">
-                <h3>Life after Achilles tendon rupture recovery timeline</h3>
-            </a>
-            <a href="#q2">
-                <h3>When can I return to sport after Achilles rupture?</h3>
-            </a>
-            <a href="#q3">
-                <h3>When can I return to work after Achilles rupture?</h3>
-            </a>
-            <a href="#q4">
-                <h3>When can I walk after Achilles rupture?</h3>
-            </a>
-            <a href="#q5">
-                <h3>How to avoid re-rupture</h3>
-            </a>
-        </div>
-        <div class="answers">
-            <div id="q1"></div>
-            <h2>
-                Life after Achilles tendon rupture – daily activities & recovery
-                expectations
-            </h2>
-            <p>
-                Properly treated, Achilles tendon ruptures heal very well. For a
-                detailed <a
-                    href="/FAQs/achilles-rupture-timeline"
-                    class="text-primary underline"
-                    >week-by-week Achilles recovery timeline</a
-                >, see our dedicated guide. However, full recovery takes a long
-                time. Expect to wear a boot or similar support for around 10
-                weeks, followed by months of rehabilitation to rebuild calf
-                strength. Many patients report activity limitations for at least
-                six months and that true full recovery can take a year or more.
-                Even in the long-term, the calf muscle on the injured side may
-                remain slightly smaller and the healed tendon thicker than it
-                was pre-injury, though both continue to function normally.
-            </p>
-            <div id="q2"></div>
-            <h2>When can I return to sport after Achilles rupture?</h2>
-            <p>
-                This depends upon the sport, but most rehabilitation programs
-                reach the point where you can resume after 6 months.
-            </p>
-            <div id="q3"></div>
-            <h2>
-                When can I return to work or desk duties after Achilles rupture?
-            </h2>
-            <p>
-                This depends upon the precise nature of the work, but most
-                rehabilitation programs reach the point where you can resume
-                after 6 months.
-            </p>
-            <div id="q4"></div>
-            <h2>When can I walk after Achilles rupture?</h2>
-            <p>
-                Once you are supported in a suitable boot, with the foot held in
-                a tip-toe posture, then you can (and should) walk. Crutches are
-                only to help with balance. A shoe with a generous heel on the
-                other foot helps to even you up. Walking on the injured leg, in
-                the boot, is good for the healing. The action of walking helps
-                the tendon ends to join in an efficient and strong manner. This
-                early walking has led to fewer re-ruptures compared to previous
-                regimens, when treatment required months of plaster casts and
-                hopping one-legged with crutches.
-            </p>
-            <div id="q5"></div>
-            <h2>How to avoid re-rupture</h2>
-            <p>
-                Wear the boot as instructed for the full 10 weeks. Don't take
-                any short-cuts. Your recovery is like the game Snakes and
-                Ladders (Shutes and Ladders in the US) – each week sees you
-                closer to the finish. But one small mistake is like landing on
-                the big snake that takes you right back to the beginning, with a
-                re-rupture. If you take it off to wash, be seated first;
-                maintain the tip-toe posture; do not bend the ankle up to reach
-                your toes to wash or dry them. If you are not sufficiently
-                flexible get help. Do not assume that you'll be fine, hopping
-                into the shower. One tiny slip can be disastrous.
-            </p>
-        </div>
-    </section>
+    <LifeAfterAchillesRuptureSection lang={lang} />
 
-    <NightSplintAdvert />
+    <NightSplintAdvert lang={lang} />
 
-    <FaqSchemaAccordion
-        faqs={[
-            {
-                question: "When can I walk after an Achilles rupture?",
-                answer: "You can and should walk once you are supported in a suitable boot that holds your foot in a tip-toe posture. Crutches are only needed for balance. Walking on the injured leg while wearing the boot is beneficial for healing, as it helps the tendon ends join efficiently and strongly. Wearing a shoe with a generous heel on your uninjured foot helps keep you level. This early walking approach has resulted in fewer re-ruptures compared to older treatments that required months of plaster casts and one-legged hopping.",
-            },
-            {
-                question: "How long does recovery from Achilles rupture take?",
-                answer: "Full recovery from an Achilles rupture typically takes about a year. You'll need to wear a boot or similar support for approximately 10 weeks. After this, it takes several months to regain muscle strength, with most people experiencing activity limitations for at least 6 months. Even long-term, the calf muscle on the injured side may remain slightly smaller but will be strong enough for normal function. The healed tendon will be thicker initially but improves over months to years.",
-            },
-            {
-                question: "When can I return to sports and physical work?",
-                answer: "Most rehabilitation programs allow return to sports and physical work after 6 months. However, the exact timing depends on the specific sport or type of work involved. Full recovery typically takes about a year.",
-            },
-            {
-                question: "How can I prevent re-rupturing my Achilles?",
-                answer: "To prevent re-rupture, it's crucial to wear the boot as instructed for the full 10 weeks without taking shortcuts. When removing the boot (e.g., for washing), always be seated first and maintain the tip-toe posture. Don't bend the ankle up to reach your toes. If you're not flexible enough, get help rather than risk injury. Even a small slip can cause a re-rupture and force you to restart the entire recovery process.",
-            },
-            {
-                question:
-                    "What are the long-term effects of an Achilles rupture?",
-                answer: "While Achilles ruptures generally heal well with proper treatment, there are some long-term changes. The calf muscle on the injured side typically remains slightly smaller than before, though it maintains normal function. The healed tendon stays somewhat thicker than the original, though this thickness gradually improves over months to years. Despite these changes, most people return to normal activities.",
-            },
-        ]}
-    />
+    <LifeAfterAchillesRuptureFaqs lang={lang} />
 </FAQsLayout>

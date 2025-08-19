@@ -1,0 +1,267 @@
+---
+import type { Lang } from "@/config/languages";
+
+export interface Props {
+    lang: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+
+const content = {
+    en: {
+        sectionTitle: "Replacing Plaster Casts",
+        mainTitle: "Initial A&E Treatment Comparison",
+        description:
+            "Study comparing the Thetis splint with traditional plaster casts for initial treatment in A&E following Achilles tendon rupture.",
+        chartTitle: "Time from A&E to Specialist Assessment",
+        averageWaitTime: "Average wait time:",
+        maximumWaitTime: "Maximum wait time:",
+        days: "days",
+        fasterAssessment: "67% Faster Assessment",
+        fasterAssessmentDesc:
+            "Mean waiting time reduced from 8.7 to just 2.9 days",
+        shorterWaits: "74% Shorter Maximum Waits",
+        shorterWaitsDesc: "Maximum wait time reduced from 23 to just 6 days",
+    },
+    de: {
+        sectionTitle: "Ersetzung von Gipsverbänden",
+        mainTitle: "Vergleich der Erstbehandlung in der Notaufnahme",
+        description:
+            "Studie zum Vergleich der Thetis-Schiene mit traditionellen Gipsverbänden für die Erstbehandlung in der Notaufnahme nach Achillessehnenruptur.",
+        chartTitle: "Zeit von der Notaufnahme bis zur Facharztbeurteilung",
+        averageWaitTime: "Durchschnittliche Wartezeit:",
+        maximumWaitTime: "Maximale Wartezeit:",
+        days: "Tage",
+        fasterAssessment: "67% schnellere Beurteilung",
+        fasterAssessmentDesc:
+            "Durchschnittliche Wartezeit von 8,7 auf nur 2,9 Tage reduziert",
+        shorterWaits: "74% kürzere maximale Wartezeiten",
+        shorterWaitsDesc: "Maximale Wartezeit von 23 auf nur 6 Tage reduziert",
+    },
+    fr: {
+        sectionTitle: "Remplacement des Plâtres",
+        mainTitle: "Comparaison du Traitement Initial aux Urgences",
+        description:
+            "Étude comparant l'attelle Thetis avec les plâtres traditionnels pour le traitement initial aux urgences suite à une rupture du tendon d'Achille.",
+        chartTitle: "Temps des Urgences à l'Évaluation Spécialisée",
+        averageWaitTime: "Temps d'attente moyen :",
+        maximumWaitTime: "Temps d'attente maximum :",
+        days: "jours",
+        fasterAssessment: "67% d'Évaluation Plus Rapide",
+        fasterAssessmentDesc:
+            "Temps d'attente moyen réduit de 8,7 à seulement 2,9 jours",
+        shorterWaits: "74% de Temps d'Attente Maximum Plus Courts",
+        shorterWaitsDesc:
+            "Temps d'attente maximum réduit de 23 à seulement 6 jours",
+    },
+    es: {
+        sectionTitle: "Reemplazo de Yesos",
+        mainTitle: "Comparación del Tratamiento Inicial en Urgencias",
+        description:
+            "Estudio que compara la férula Thetis con los yesos tradicionales para el tratamiento inicial en urgencias tras la ruptura del tendón de Aquiles.",
+        chartTitle: "Tiempo desde Urgencias hasta la Evaluación Especializada",
+        averageWaitTime: "Tiempo de espera promedio:",
+        maximumWaitTime: "Tiempo de espera máximo:",
+        days: "días",
+        fasterAssessment: "67% de Evaluación Más Rápida",
+        fasterAssessmentDesc:
+            "Tiempo de espera promedio reducido de 8,7 a solo 2,9 días",
+        shorterWaits: "74% de Tiempos de Espera Máximos Más Cortos",
+        shorterWaitsDesc:
+            "Tiempo de espera máximo reducido de 23 a solo 6 días",
+    },
+    it: {
+        sectionTitle: "Sostituzione dei Gessi",
+        mainTitle: "Confronto del Trattamento Iniziale al Pronto Soccorso",
+        description:
+            "Studio che confronta il tutore Thetis con i gessi tradizionali per il trattamento iniziale al pronto soccorso dopo la rottura del tendine di Achille.",
+        chartTitle: "Tempo dal Pronto Soccorso alla Valutazione Specialistica",
+        averageWaitTime: "Tempo di attesa medio:",
+        maximumWaitTime: "Tempo di attesa massimo:",
+        days: "giorni",
+        fasterAssessment: "67% di Valutazione Più Veloce",
+        fasterAssessmentDesc:
+            "Tempo di attesa medio ridotto da 8,7 a solo 2,9 giorni",
+        shorterWaits: "74% di Tempi di Attesa Massimi Più Brevi",
+        shorterWaitsDesc:
+            "Tempo di attesa massimo ridotto da 23 a solo 6 giorni",
+    },
+};
+
+const currentContent = content[lang];
+
+const data = {
+    labels: ["Plaster Cast", "Thetis splint"],
+    datasets: [
+        {
+            label: "Mean Days A&E to Scan then Specialist",
+            data: [8.7, 2.9], // Mean Days
+        },
+        {
+            label: "Maximum Days A&E to Scan then Specialist",
+            data: [23, 6],
+        },
+    ],
+};
+---
+
+<!-- Study 1: A&E Initial Treatment -->
+<section class="bg-white dark:bg-gray-900 mx-auto px-6 py-24 container">
+    <div class="mx-auto max-w-5xl">
+        <div class="mb-20 text-center">
+            <span
+                class="font-semibold text-primary text-sm uppercase tracking-wider"
+                >{currentContent.sectionTitle}</span
+            >
+            <h2
+                class="mt-2 font-semibold text-gray-900 dark:text-white text-3xl"
+            >
+                {currentContent.mainTitle}
+            </h2>
+            <p
+                class="mx-auto mt-6 max-w-3xl text-gray-600 dark:text-gray-300 text-lg"
+            >
+                {currentContent.description}
+            </p>
+        </div>
+
+        <!-- Time Comparison Chart - Minimal Design -->
+        <div class="mb-20">
+            <div class="bg-gray-50 dark:bg-gray-800 p-8 sm:p-10 rounded-xl">
+                <h3
+                    class="mb-10 font-medium text-gray-900 dark:text-white text-xl text-center"
+                >
+                    {currentContent.chartTitle}
+                </h3>
+
+                <div class="space-y-16">
+                    {
+                        data.labels.map((label, index) => (
+                            <div key={index}>
+                                <h4 class="flex items-center mb-6 font-medium text-gray-900 dark:text-white text-lg">
+                                    <span
+                                        class={`inline-block w-3 h-3 rounded-full ${index === 0 ? "bg-gray-400" : "bg-primary"} mr-3`}
+                                    />
+                                    {label}
+                                </h4>
+
+                                <div class="mb-8 ml-6">
+                                    <div class="flex justify-between mb-3">
+                                        <span class="text-gray-500 dark:text-gray-400 text-sm">
+                                            {currentContent.averageWaitTime}
+                                        </span>
+                                        <span
+                                            class={`text-xl font-semibold ${index === 0 ? "text-gray-700" : "text-primary"} dark:text-white`}
+                                        >
+                                            {data.datasets[0].data[index]}{" "}
+                                            {currentContent.days}
+                                        </span>
+                                    </div>
+                                    <div class="bg-gray-100 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
+                                        <div
+                                            class={`h-full rounded-full ${index === 0 ? "bg-gray-400" : "bg-primary"}`}
+                                            style={{
+                                                width: `${(data.datasets[0].data[index] / 23) * 100}%`,
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="ml-6">
+                                    <div class="flex justify-between mb-3">
+                                        <span class="text-gray-500 dark:text-gray-400 text-sm">
+                                            {currentContent.maximumWaitTime}
+                                        </span>
+                                        <span
+                                            class={`text-xl font-semibold ${index === 0 ? "text-gray-700" : "text-primary"} dark:text-white`}
+                                        >
+                                            {data.datasets[1].data[index]}{" "}
+                                            {currentContent.days}
+                                        </span>
+                                    </div>
+                                    <div class="bg-gray-100 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
+                                        <div
+                                            class={`h-full rounded-full ${index === 0 ? "bg-gray-400" : "bg-primary"}`}
+                                            style={{
+                                                width: `${(data.datasets[1].data[index] / 23) * 100}%`,
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+
+                <div
+                    class="bg-white dark:bg-gray-700 shadow-sm mt-16 p-5 rounded-lg"
+                >
+                    <div class="gap-6 grid grid-cols-1 md:grid-cols-2">
+                        <div class="flex items-start">
+                            <div
+                                class="flex flex-shrink-0 justify-center items-center bg-primary/10 mr-3 rounded-full w-8 h-8"
+                            >
+                                <svg
+                                    class="w-4 h-4 text-primary"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p
+                                    class="font-medium text-gray-900 dark:text-white"
+                                >
+                                    {currentContent.fasterAssessment}
+                                </p>
+                                <p
+                                    class="text-gray-600 dark:text-gray-300 text-sm"
+                                >
+                                    {currentContent.fasterAssessmentDesc}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div
+                                class="flex flex-shrink-0 justify-center items-center bg-primary/10 mr-3 rounded-full w-8 h-8"
+                            >
+                                <svg
+                                    class="w-4 h-4 text-primary"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    ></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p
+                                    class="font-medium text-gray-900 dark:text-white"
+                                >
+                                    {currentContent.shorterWaits}
+                                </p>
+                                <p
+                                    class="text-gray-600 dark:text-gray-300 text-sm"
+                                >
+                                    {currentContent.shorterWaitsDesc}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

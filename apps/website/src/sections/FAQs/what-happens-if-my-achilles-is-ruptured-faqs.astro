@@ -1,0 +1,126 @@
+---
+import type { Lang } from "@/config/languages";
+import FaqSchemaAccordion from "@/components/research/FaqSchemaAccordion.astro";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const faqs: Record<Lang, { question: string; answer: string }[]> = {
+    en: [
+        {
+            question: "What happens when I go to A&E with a ruptured Achilles?",
+            answer: "In A&E, your injury will be assessed and if an Achilles rupture is suspected, they will position your foot in a tip-toe position using either a plaster cast or a specialized boot with a high heel. You'll be given crutches to help you walk, and blood thinning medicine is usually prescribed to prevent thrombosis. They will also arrange for you to see a specialist for further care.",
+        },
+        {
+            question: "What happens at the specialist appointment?",
+            answer: "The specialist will remove any cast to reassess the injury and confirm the diagnosis. They usually perform an ultrasound scan to check if the tendon ends meet properly in the tip-toe position and to check for any blood clots. If the tendon ends don't meet (occurs in about 10% of cases), surgery might be discussed. You'll be fitted with a special boot with heel wedges or hinges that must be worn for 10 weeks to allow proper healing.",
+        },
+        {
+            question: "How many check-ups will I need?",
+            answer: "Typically, you'll have a clinic appointment after 5 weeks to check healing and receive instructions for gradually adjusting your boot. Between weeks 8-10, the position of your foot will be gradually adjusted until you're walking almost flat in your boot. After 10 weeks, you can discontinue the boot, though it's advisable to wear it in crowded areas or uncertain terrain to prevent re-injury.",
+        },
+        {
+            question: "When do I start physiotherapy?",
+            answer: "Physiotherapy begins 9-10 weeks after injury, following a specific rehabilitation protocol. The main focus is building calf muscle strength through prescribed exercises. It's important to avoid vigorous stretching, even if the tendon feels tight, as this can lead to excessive stretching and long-term power loss in the leg. Any tightness will gradually resolve with normal activity over time.",
+        },
+        {
+            question: "Should I take blood-thinning medication?",
+            answer: "Blood-thinners are often recommended as an Achilles rupture carries a relatively high risk of developing blood clots in leg veins. Treatment can be via injections or tablets, with many surgeons recommending a 6-week duration (similar to hip/knee replacement protocols). If you haven't been prescribed blood-thinners, taking 150mg of Aspirin daily could be considered until discussing with your specialist. Even with blood-thinners, watch for signs of thrombosis such as whole-leg swelling.",
+        },
+    ],
+    es: [
+        {
+            question:
+                "¿Qué sucede cuando voy a urgencias con un tendón de Aquiles roto?",
+            answer: "En urgencias, evaluarán tu lesión y, si se sospecha una ruptura del tendón de Aquiles, colocarán tu pie en posición de puntillas usando un yeso o una bota especializada con tacón alto. Te darán muletas para ayudarte a caminar, y normalmente se prescribe un anticoagulante para prevenir trombosis. También organizarán que veas a un especialista para un cuidado adicional.",
+        },
+        {
+            question: "¿Qué sucede en la cita con el especialista?",
+            answer: "El especialista retirará cualquier yeso para reevaluar la lesión y confirmar el diagnóstico. Normalmente realiza una ecografía para verificar si los extremos del tendón se encuentran correctamente en posición de puntillas y para comprobar posibles coágulos. Si los extremos del tendón no se encuentran (ocurre en aproximadamente el 10% de los casos), se podría considerar la cirugía. Te colocarán una bota especial con cuñas o bisagras que debe usarse durante 10 semanas para permitir la correcta recuperación.",
+        },
+        {
+            question: "¿Cuántas revisiones necesitaré?",
+            answer: "Normalmente, tendrás una cita en la clínica después de 5 semanas para revisar la curación y recibir instrucciones para ajustar gradualmente tu bota. Entre las semanas 8 y 10, la posición del pie se ajustará gradualmente hasta que camines casi plano con la bota. Después de 10 semanas, puedes dejar de usar la bota, aunque se aconseja llevarla en lugares concurridos o terrenos inciertos para prevenir nuevas lesiones.",
+        },
+        {
+            question: "¿Cuándo comienzo la fisioterapia?",
+            answer: "La fisioterapia comienza 9-10 semanas después de la lesión, siguiendo un protocolo de rehabilitación específico. El enfoque principal es fortalecer los músculos de la pantorrilla mediante ejercicios prescritos. Es importante evitar estiramientos vigorosos, incluso si el tendón se siente tenso, ya que esto puede causar estiramiento excesivo y pérdida de fuerza a largo plazo. La tensión se resolverá gradualmente con la actividad normal con el tiempo.",
+        },
+        {
+            question: "¿Debo tomar medicamentos anticoagulantes?",
+            answer: "A menudo se recomiendan anticoagulantes, ya que una ruptura del tendón de Aquiles conlleva un riesgo relativamente alto de desarrollar coágulos en las venas de la pierna. El tratamiento puede ser mediante inyecciones o tabletas, y muchos cirujanos recomiendan una duración de 6 semanas (similar a los protocolos de reemplazo de cadera/rodilla). Si no te han recetado anticoagulantes, se podría considerar tomar 150 mg de aspirina al día hasta consultar con tu especialista. Incluso con anticoagulantes, vigila signos de trombosis como hinchazón de toda la pierna.",
+        },
+    ],
+    fr: [
+        {
+            question:
+                "Que se passe-t-il lorsque je vais aux urgences avec une rupture du tendon d'Achille ?",
+            answer: "Aux urgences, votre blessure sera évaluée et si une rupture du tendon d'Achille est suspectée, votre pied sera placé en position sur la pointe des pieds avec un plâtre ou une botte spécialisée à talon haut. On vous donnera des béquilles pour vous aider à marcher, et des anticoagulants sont généralement prescrits pour prévenir la thrombose. Ils organiseront également une consultation avec un spécialiste pour un suivi.",
+        },
+        {
+            question:
+                "Que se passe-t-il lors du rendez-vous avec le spécialiste ?",
+            answer: "Le spécialiste retirera tout plâtre pour réévaluer la blessure et confirmer le diagnostic. Il effectue généralement une échographie pour vérifier si les extrémités du tendon se rejoignent correctement en position sur la pointe des pieds et pour rechercher d'éventuels caillots sanguins. Si les extrémités du tendon ne se rejoignent pas (environ 10 % des cas), une chirurgie pourrait être envisagée. On vous mettra une botte spéciale avec des cales de talon ou des charnières à porter pendant 10 semaines pour permettre une guérison correcte.",
+        },
+        {
+            question: "Combien de contrôles seront nécessaires ?",
+            answer: "En général, vous aurez un rendez-vous à la clinique après 5 semaines pour vérifier la guérison et recevoir des instructions pour ajuster progressivement votre botte. Entre les semaines 8 et 10, la position de votre pied sera ajustée progressivement jusqu'à ce que vous marchiez presque à plat dans votre botte. Après 10 semaines, vous pouvez arrêter d'utiliser la botte, mais il est conseillé de la porter dans les zones fréquentées ou sur un terrain incertain pour éviter une nouvelle blessure.",
+        },
+        {
+            question: "Quand commencer la physiothérapie ?",
+            answer: "La physiothérapie commence 9-10 semaines après la blessure, selon un protocole de rééducation spécifique. L'accent est mis sur le renforcement des muscles du mollet grâce à des exercices prescrits. Il est important d'éviter les étirements vigoureux, même si le tendon semble tendu, car cela peut entraîner un étirement excessif et une perte de force à long terme dans la jambe. Toute tension disparaîtra progressivement avec l'activité normale au fil du temps.",
+        },
+        {
+            question: "Dois-je prendre des médicaments anticoagulants ?",
+            answer: "Les anticoagulants sont souvent recommandés car une rupture du tendon d'Achille comporte un risque relativement élevé de caillots sanguins dans les veines des jambes. Le traitement peut se faire par injections ou comprimés, de nombreux chirurgiens recommandant une durée de 6 semaines (similaire aux protocoles de remplacement de hanche/genou). Si aucun anticoagulant ne vous a été prescrit, la prise de 150 mg d'aspirine par jour pourrait être envisagée jusqu'à discussion avec votre spécialiste. Même avec des anticoagulants, surveillez les signes de thrombose tels qu'un gonflement de toute la jambe.",
+        },
+    ],
+    de: [
+        {
+            question:
+                "Was passiert, wenn ich mit einem gerissenen Achillessehnen in die Notaufnahme gehe?",
+            answer: "In der Notaufnahme wird Ihre Verletzung beurteilt, und wenn ein Achillessehnenriss vermutet wird, wird Ihr Fuß in einer Zehenspitzenposition mit einem Gips oder einem speziellen Schuh mit hohem Absatz fixiert. Sie erhalten Krücken, um beim Gehen zu helfen, und in der Regel wird blutverdünnende Medizin verschrieben, um Thrombosen zu verhindern. Außerdem wird ein Termin bei einem Spezialisten für weitere Betreuung vereinbart.",
+        },
+        {
+            question: "Was passiert beim Termin beim Spezialisten?",
+            answer: "Der Spezialist entfernt den Gips, um die Verletzung erneut zu beurteilen und die Diagnose zu bestätigen. Normalerweise wird eine Ultraschalluntersuchung durchgeführt, um zu prüfen, ob die Enden der Sehne in der Zehenspitzenposition richtig aufeinandertreffen und ob Blutgerinnsel vorhanden sind. Wenn die Sehnenenden nicht aufeinandertreffen (etwa 10% der Fälle), könnte eine Operation in Betracht gezogen werden. Sie werden mit einem speziellen Schuh mit Fersenkeilen oder Scharnieren ausgestattet, der 10 Wochen getragen werden muss, um eine richtige Heilung zu ermöglichen.",
+        },
+        {
+            question: "Wie viele Kontrolltermine werde ich benötigen?",
+            answer: "In der Regel haben Sie nach 5 Wochen einen Termin in der Klinik, um die Heilung zu überprüfen und Anweisungen zur schrittweisen Anpassung Ihres Schuhs zu erhalten. Zwischen Woche 8-10 wird die Position Ihres Fußes allmählich angepasst, bis Sie fast flach in Ihrem Schuh gehen können. Nach 10 Wochen können Sie den Schuh absetzen, es wird jedoch empfohlen, ihn in überfüllten Bereichen oder unebenem Gelände zu tragen, um erneute Verletzungen zu vermeiden.",
+        },
+        {
+            question: "Wann beginne ich mit der Physiotherapie?",
+            answer: "Die Physiotherapie beginnt 9-10 Wochen nach der Verletzung nach einem spezifischen Rehabilitationsprotokoll. Der Schwerpunkt liegt auf dem Aufbau der Wadenmuskulatur durch vorgeschriebene Übungen. Es ist wichtig, kräftiges Dehnen zu vermeiden, auch wenn die Sehne sich straff anfühlt, da dies zu übermäßiger Dehnung und langfristigem Kraftverlust im Bein führen kann. Jegliche Spannung löst sich im Laufe der Zeit durch normale Aktivität.",
+        },
+        {
+            question: "Sollte ich blutverdünnende Medikamente einnehmen?",
+            answer: "Blutverdünner werden häufig empfohlen, da ein Achillessehnenriss ein relativ hohes Risiko für Blutgerinnsel in den Beinvenen birgt. Die Behandlung kann über Injektionen oder Tabletten erfolgen, viele Chirurgen empfehlen eine Dauer von 6 Wochen (ähnlich wie bei Hüft-/Knieersatzprotokollen). Wenn Ihnen keine Blutverdünner verschrieben wurden, könnte die Einnahme von 150 mg Aspirin täglich in Betracht gezogen werden, bis Sie mit Ihrem Spezialisten sprechen. Auch bei Blutverdünnern sollten Sie auf Anzeichen von Thrombosen achten, wie z. B. eine Schwellung des gesamten Beins.",
+        },
+    ],
+    it: [
+        {
+            question:
+                "Cosa succede se vado al pronto soccorso con il tendine d'Achille rotto?",
+            answer: "Al pronto soccorso, la tua lesione verrà valutata e, se si sospetta una rottura del tendine d'Achille, posizioneranno il piede in punta usando un gesso o uno stivaletto speciale con tacco alto. Ti saranno fornite le stampelle per aiutarti a camminare, e di solito viene prescritto un anticoagulante per prevenire la trombosi. Organizzeranno anche una visita da uno specialista per ulteriori cure.",
+        },
+        {
+            question: "Cosa succede durante la visita specialistica?",
+            answer: "Lo specialista rimuoverà eventuali gessi per rivalutare la lesione e confermare la diagnosi. Solitamente esegue un'ecografia per controllare se le estremità del tendine si incontrano correttamente in posizione sulle punte e per verificare eventuali coaguli di sangue. Se le estremità del tendine non si incontrano (circa il 10% dei casi), si potrebbe discutere un intervento chirurgico. Ti sarà applicato uno stivaletto speciale con cunei o cerniere da indossare per 10 settimane per permettere una corretta guarigione.",
+        },
+        {
+            question: "Quante visite di controllo saranno necessarie?",
+            answer: "Di solito avrai un appuntamento in clinica dopo 5 settimane per controllare la guarigione e ricevere istruzioni per regolare gradualmente lo stivaletto. Tra la settimana 8 e 10, la posizione del piede verrà regolata gradualmente fino a camminare quasi piatto nello stivaletto. Dopo 10 settimane, puoi smettere di usarlo, anche se è consigliabile indossarlo in luoghi affollati o terreni incerti per prevenire nuove lesioni.",
+        },
+        {
+            question: "Quando inizio la fisioterapia?",
+            answer: "La fisioterapia inizia 9-10 settimane dopo l'infortunio, seguendo un protocollo di riabilitazione specifico. L'obiettivo principale è rafforzare i muscoli del polpaccio attraverso esercizi prescritti. È importante evitare stiramenti vigorosi, anche se il tendine appare teso, poiché ciò può portare a stiramenti eccessivi e perdita di forza a lungo termine nella gamba. Eventuali rigidità si risolveranno gradualmente con l'attività normale nel tempo.",
+        },
+        {
+            question: "Dovrei assumere farmaci anticoagulanti?",
+            answer: "Gli anticoagulanti sono spesso raccomandati poiché una rottura del tendine d'Achille comporta un rischio relativamente alto di sviluppare coaguli nelle vene delle gambe. Il trattamento può avvenire tramite iniezioni o compresse, con molti chirurghi che raccomandano una durata di 6 settimane (simile ai protocolli per sostituzione di anca/ginocchio). Se non ti sono stati prescritti anticoagulanti, si potrebbe considerare l'assunzione di 150 mg di aspirina al giorno fino a consultare lo specialista. Anche con anticoagulanti, presta attenzione ai segni di trombosi come gonfiore dell'intera gamba.",
+        },
+    ],
+};
+---
+
+<FaqSchemaAccordion faqs={faqs[lang]} />

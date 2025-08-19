@@ -14,6 +14,70 @@ import {
   Stethoscope,
 } from "lucide-react";
 
+// Navigation content for DesktopNav
+export const navigationContent = {
+  en: {
+    ourProduct: "Our Product",
+    patientGuides: "Patient Guides",
+    professionals: "Professionals",
+    contact: "Contact",
+    buyNow: "Buy Now",
+    learnMore: "Learn More",
+    orderWholesale: "Order Wholesale",
+    productTitle: "Achilles Tendon Rupture Splint",
+    productDescription:
+      "Improve recovery time and comfort after Achilles tendon rupture",
+  },
+  de: {
+    ourProduct: "Unser Produkt",
+    patientGuides: "Patientenleitfäden",
+    professionals: "Fachkräfte",
+    contact: "Kontakt",
+    buyNow: "Jetzt kaufen",
+    learnMore: "Mehr erfahren",
+    orderWholesale: "Großhandel bestellen",
+    productTitle: "Achillessehnenruptur-Schiene",
+    productDescription:
+      "Verbessern Sie die Genesungszeit und den Komfort nach einer Achillessehnenruptur",
+  },
+  fr: {
+    ourProduct: "Notre Produit",
+    patientGuides: "Guides du Patient",
+    professionals: "Professionnels",
+    contact: "Contact",
+    buyNow: "Acheter maintenant",
+    learnMore: "En savoir plus",
+    orderWholesale: "Commander en gros",
+    productTitle: "Attelle de rupture du tendon d'Achille",
+    productDescription:
+      "Améliorez le temps de récupération et le confort après une rupture du tendon d'Achille",
+  },
+  es: {
+    ourProduct: "Nuestro Producto",
+    patientGuides: "Guías del Paciente",
+    professionals: "Profesionales",
+    contact: "Contacto",
+    buyNow: "Comprar ahora",
+    learnMore: "Aprende más",
+    orderWholesale: "Pedir al por mayor",
+    productTitle: "Férula para rotura del tendón de Aquiles",
+    productDescription:
+      "Mejore el tiempo de recuperación y la comodidad después de la rotura del tendón de Aquiles",
+  },
+  it: {
+    ourProduct: "Il Nostro Prodotto",
+    patientGuides: "Guide del Paziente",
+    professionals: "Professionisti",
+    contact: "Contatto",
+    buyNow: "Compra ora",
+    learnMore: "Scopri di più",
+    orderWholesale: "Ordina all'ingrosso",
+    productTitle: "Férula per rottura del tendine di Achille",
+    productDescription:
+      "Migliora i tempi di recupero e il comfort dopo la rottura del tendine di Achille",
+  },
+};
+
 /**
  * Flexible URL Mapping System
  *
@@ -112,6 +176,13 @@ export const productRoutes: BaseRoute[] = [
       es: "Lea lo que nuestros clientes dicen sobre nuestros productos.",
       it: "Leggi cosa dicono i nostri clienti sui nostri prodotti.",
     },
+    slugTranslations: {
+      en: "reviews",
+      de: "bewertungen",
+      fr: "avis",
+      es: "resenas",
+      it: "recensioni",
+    },
     legacySlugs: ["customer-reviews", "testimonials", "feedback"],
     icon: "Star",
     variant: "outline",
@@ -139,6 +210,13 @@ export const partnerRoutes: BaseRoute[] = [
       it:
         "Unisciti ad altri clinici che migliorano la guarigione dei pazienti.",
     },
+    slugTranslations: {
+      en: "professionals",
+      de: "aerzte",
+      fr: "professionnels",
+      es: "profesionales",
+      it: "professionisti",
+    },
     legacySlugs: ["clinicians", "healthcare-professionals", "doctors"],
     icon: <Stethoscope />,
     variant: "default",
@@ -161,6 +239,13 @@ export const partnerRoutes: BaseRoute[] = [
     },
     icon: <HeartHandshake />,
     variant: "outline",
+    slugTranslations: {
+      en: "partners",
+      de: "partner",
+      fr: "partenaires",
+      es: "socios",
+      it: "partner",
+    },
   },
   {
     slug: "research",
@@ -180,6 +265,13 @@ export const partnerRoutes: BaseRoute[] = [
     },
     icon: <Microscope />,
     variant: "outline",
+    slugTranslations: {
+      en: "research",
+      de: "forschung",
+      fr: "recherche",
+      es: "investigación",
+      it: "ricerca",
+    },
   },
   {
     slug: "evidence",
@@ -203,6 +295,13 @@ export const partnerRoutes: BaseRoute[] = [
     },
     icon: <ClipboardCheck />,
     variant: "outline",
+    slugTranslations: {
+      en: "evidence",
+      de: "nachweis",
+      fr: "preuves",
+      es: "evidencia",
+      it: "prove",
+    },
   },
 ];
 
@@ -226,6 +325,13 @@ export const contactRoutes: BaseRoute[] = [
     },
     icon: <Mail />,
     variant: "default",
+    slugTranslations: {
+      en: "contact",
+      de: "kontakt",
+      fr: "contact",
+      es: "contacto",
+      it: "contatto",
+    },
   },
   {
     slug: "buy-now",
@@ -245,6 +351,13 @@ export const contactRoutes: BaseRoute[] = [
     },
     icon: <ShoppingCart />,
     variant: "default",
+    slugTranslations: {
+      en: "buy-now",
+      de: "jetzt-kaufen",
+      fr: "acheter-maintenant",
+      es: "comprar-ahora",
+      it: "compra-ora",
+    },
   },
   {
     slug: "order-wholesale",
@@ -264,6 +377,13 @@ export const contactRoutes: BaseRoute[] = [
     },
     icon: <Box />,
     variant: "outline",
+    slugTranslations: {
+      en: "order-wholesale",
+      de: "großhandel-bestellen",
+      fr: "commander-en-gros",
+      es: "pedido-al-por-mayor",
+      it: "ordina-all-ingrosso",
+    },
   },
   {
     slug: "become-a-partner",
@@ -283,6 +403,13 @@ export const contactRoutes: BaseRoute[] = [
     },
     icon: <Handshake />,
     variant: "outline",
+    slugTranslations: {
+      en: "become-a-partner",
+      de: "partner-werden",
+      fr: "devenir-partenaire",
+      es: "convertirse-en-socio",
+      it: "diventa-partner",
+    },
   },
   {
     slug: "request-a-return",
@@ -302,6 +429,13 @@ export const contactRoutes: BaseRoute[] = [
     },
     icon: <Rewind />,
     variant: "outline",
+    slugTranslations: {
+      en: "request-a-return",
+      de: "ruecksendung-anfordern",
+      fr: "demander-un-retour",
+      es: "solicitar-una-devolucion",
+      it: "richiedere-un-reso",
+    },
   },
 ];
 
@@ -314,12 +448,21 @@ export const videoRoutes: BaseRoute[] = [
       de: "Schienen-Anweisungen",
       fr: "Instructions d'Attelle",
       es: "Instrucciones de Férula",
+      it: "Istruzioni per il Tutore",
     },
     description: {
       en: "How to use your night splint properly.",
       de: "So verwenden Sie Ihre Nachtschiene richtig.",
       fr: "Comment utiliser correctement votre attelle de nuit.",
       es: "Cómo usar correctamente su férula nocturna.",
+      it: "Come usare correttamente il tuo tutore notturno.",
+    },
+    slugTranslations: {
+      en: "video/night-splint-instructions",
+      de: "video/schienen-anweisungen",
+      fr: "video/instructions-attelle",
+      es: "video/instrucciones-ferula",
+      it: "video/istruzioni-tutore",
     },
   },
   {
@@ -329,12 +472,21 @@ export const videoRoutes: BaseRoute[] = [
       de: "Schienen-Präsentation",
       fr: "Présentation d'Attelle",
       es: "Presentación de Férula",
+      it: "Presentazione del Tutore",
     },
     description: {
       en: "Professional presentation of our night splint.",
       de: "Professionelle Präsentation unserer Nachtschiene.",
       fr: "Présentation professionnelle de notre attelle de nuit.",
       es: "Presentación profesional de nuestra férula nocturna.",
+      it: "Presentazione professionale del nostro tutore notturno.",
+    },
+    slugTranslations: {
+      en: "video/night-splint-presentation",
+      de: "video/schienen-praesentation",
+      fr: "video/presentation-attelle",
+      es: "video/presentacion-ferula",
+      it: "video/presentazione-tutore",
     },
   },
 ];
@@ -348,6 +500,7 @@ export const articleRoutes: BaseRoute[] = [
       de: "Achillessehnenriss-Zeitplan",
       fr: "Chronologie de la Rupture d'Achille",
       es: "Cronología de la Ruptura de Aquiles",
+      it: "Cronologia della Rottura di Achille",
     },
     description: {
       en:
@@ -358,6 +511,15 @@ export const articleRoutes: BaseRoute[] = [
         "Explorez une chronologie détaillée décrivant le parcours de traitement et de récupération d'une rupture du tendon d'Achille, du moment de la blessure à la reprise d'activité sans restriction. Découvrez les phases cruciales et les jalons en cours de route.",
       es:
         "Explore una cronología detallada que describe el viaje de tratamiento y recuperación de una ruptura del tendón de Aquiles, desde el momento de la lesión hasta recuperar la actividad sin restricciones. Descubra las fases cruciales y los hitos en el camino.",
+      it:
+        "Esplora una cronologia dettagliata che delinea il percorso di trattamento e recupero di una rottura del tendine di Achille, dal momento della lesione al ritorno all'attività senza restrizioni. Scopri le fasi cruciali e le tappe lungo il percorso.",
+    },
+    slugTranslations: {
+      en: "FAQs/achilles-rupture-timeline",
+      de: "FAQs/achillessehnenriss-heilungsverlauf",
+      fr: "FAQs/chronologie-rupture-achille",
+      es: "FAQs/cronologia-ruptura-aquiles",
+      it: "FAQs/cronologia-rottura-achille",
     },
     tags: [
       { words: "Treatment", color: "bg-orange-200" },
@@ -373,6 +535,7 @@ export const articleRoutes: BaseRoute[] = [
       de: "Behandlungsweg für gerissene Achillessehne",
       fr: "Voie de Traitement d'Achille Déchiré",
       es: "Vía de Tratamiento de Aquiles Desgarrado",
+      it: "Percorso di Trattamento per Achille Strappato",
     },
     description: {
       en:
@@ -383,6 +546,15 @@ export const articleRoutes: BaseRoute[] = [
         "Naviguez à travers un guide complet dédié à la compréhension des options de traitement pour un tendon d'Achille rompu. Plongez dans des aspects comme les considérations chirurgicales, la gestion de la douleur post-chirurgicale et le chemin vers la récupération.",
       es:
         "Navegue a través de una guía completa dedicada a entender las opciones de tratamiento para un tendón de Aquiles roto. Profundice en aspectos como consideraciones quirúrgicas, manejo del dolor post-cirugía y el camino hacia la recuperación.",
+      it:
+        "Naviga attraverso una guida completa dedicata alla comprensione delle opzioni di trattamento per un tendine di Achille rotto. Approfondisci aspetti come considerazioni chirurgiche, gestione del dolore post-operatorio e il percorso verso la guarigione.",
+    },
+    slugTranslations: {
+      en: "FAQs/achilles-tear-treatment",
+      de: "FAQs/achillessehnenriss-behandlung",
+      fr: "FAQs/traitement-rupture-achille",
+      es: "FAQs/tratamiento-ruptura-aquiles",
+      it: "FAQs/trattamento-rottura-achille",
     },
     tags: [{ words: "Treatment", color: "bg-orange-200" }],
     image: AchillesDrawing,
@@ -395,6 +567,7 @@ export const articleRoutes: BaseRoute[] = [
       de: "Ist meine Achillessehne gerissen?",
       fr: "Mon Achille est-il Rompu?",
       es: "¿Está Roto mi Aquiles?",
+      it: "Il Mio Achille è Rotto?",
     },
     description: {
       en:
@@ -405,6 +578,15 @@ export const articleRoutes: BaseRoute[] = [
         "Découvrez tout ce dont vous avez besoin pour déterminer si vous avez subi une rupture du tendon d'Achille. Apprenez les causes, les symptômes et la gravité de la blessure.",
       es:
         "Descubra todo lo que necesita para determinar si ha experimentado una ruptura del tendón de Aquiles. Aprenda sobre las causas, síntomas y la gravedad de la lesión.",
+      it:
+        "Scopri tutto quello che devi sapere per determinare se hai subito una rottura del tendine di Achille. Impara le cause, i sintomi e la gravità della lesione.",
+    },
+    slugTranslations: {
+      en: "FAQs/is-my-achilles-ruptured",
+      de: "FAQs/achillessehnenriss-erkennen",
+      fr: "FAQs/mon-achille-est-il-rompu",
+      es: "FAQs/esta-roto-mi-aquiles",
+      it: "FAQs/il-mio-achille-e-rotto",
     },
     tags: [{ words: "Diagnosis", color: "bg-rose-100" }],
     icon: "Stethoscope",
@@ -416,6 +598,7 @@ export const articleRoutes: BaseRoute[] = [
       de: "Genesung von gerissener Achillessehne",
       fr: "Récupération d'Achille Déchiré",
       es: "Recuperación de Aquiles Desgarrado",
+      it: "Recupero di Achille Strappato",
     },
     description: {
       en:
@@ -426,6 +609,15 @@ export const articleRoutes: BaseRoute[] = [
         "Trouvez une ressource complète sur la récupération d'Achille déchiré, couvrant des aspects tels que la durée de récupération avec ou sans chirurgie, plâtres versus bottes, et considérations de sommeil pendant la récupération.",
       es:
         "Encuentre un recurso completo sobre la recuperación de Aquiles desgarrado, cubriendo aspectos como duración de recuperación con o sin cirugía, yesos versus botas, y consideraciones de sueño durante la recuperación.",
+      it:
+        "Trova una risorsa completa sul recupero di Achille strappato, che copre aspetti come la durata del recupero con o senza chirurgia, gessi versus stivali, e considerazioni sul sonno durante il recupero.",
+    },
+    slugTranslations: {
+      en: "FAQs/torn-achilles-recovery",
+      de: "FAQs/achillessehnenriss-genesung",
+      fr: "FAQs/recuperation-achille-dechire",
+      es: "FAQs/recuperacion-aquiles-desgarrado",
+      it: "FAQs/recupero-achille-strappato",
     },
     tags: [{ words: "Recovery", color: "bg-purple-200" }],
     image: AchillesDrawing,
@@ -438,6 +630,7 @@ export const articleRoutes: BaseRoute[] = [
       de: "Was passiert, wenn meine Achillessehne gerissen ist?",
       fr: "Que se Passe-t-il si Mon Achille est Rompu?",
       es: "¿Qué Sucede si mi Aquiles está Roto?",
+      it: "Cosa Succede se il Mio Achille è Rotto?",
     },
     description: {
       en:
@@ -448,6 +641,15 @@ export const articleRoutes: BaseRoute[] = [
         "Obtenez des aperçus sur ce à quoi s'attendre si vous avez un tendon d'Achille rompu, y compris le traitement initial aux urgences, les recommandations de physiothérapie et le nombre de contrôles requis.",
       es:
         "Obtenga información sobre qué esperar si tiene un tendón de Aquiles roto, incluyendo tratamiento inicial en urgencias, recomendaciones de fisioterapia y el número de chequeos requeridos.",
+      it:
+        "Ottieni informazioni su cosa aspettarti se hai un tendine di Achille rotto, inclusi il trattamento iniziale al pronto soccorso, le raccomandazioni di fisioterapia e il numero di controlli richiesti.",
+    },
+    slugTranslations: {
+      en: "FAQs/what-happens-if-my-achilles-is-ruptured",
+      de: "FAQs/achillessehnenriss-folgen",
+      fr: "FAQs/que-se-passe-t-il-si-mon-achille-est-rompu",
+      es: "FAQs/que-sucede-si-mi-aquiles-esta-roto",
+      it: "FAQs/cosa-succede-se-il-mio-achille-e-rotto",
     },
     tags: [{ words: "Treatment", color: "bg-orange-200" }],
     image: AchillesDrawing,
@@ -460,6 +662,7 @@ export const articleRoutes: BaseRoute[] = [
       de: "Leben nach Achillessehnenriss",
       fr: "Vie Après la Rupture d'Achille",
       es: "Vida Después de la Ruptura de Aquiles",
+      it: "Vita Dopo la Rottura di Achille",
     },
     description: {
       en:
@@ -470,6 +673,15 @@ export const articleRoutes: BaseRoute[] = [
         "Découvrez des aperçus sur la vie après une rupture d'Achille, y compris quand vous pouvez reprendre la marche, le travail et la pratique du sport.",
       es:
         "Descubra información sobre la vida después de una ruptura de Aquiles, incluyendo cuándo puede reanudar caminar, trabajar y participar en deportes.",
+      it:
+        "Scopri informazioni sulla vita dopo una rottura di Achille, inclusi quando puoi riprendere a camminare, lavorare e praticare sport.",
+    },
+    slugTranslations: {
+      en: "FAQs/life-after-achilles-rupture",
+      de: "FAQs/leben-nach-achillessehnenriss",
+      fr: "FAQs/vie-apres-rupture-achille",
+      es: "FAQs/vida-despues-ruptura-aquiles",
+      it: "FAQs/vita-dopo-rottura-achille",
     },
     tags: [{ words: "Recovery", color: "bg-purple-200" }],
     image: AchillesDrawing,
@@ -478,7 +690,7 @@ export const articleRoutes: BaseRoute[] = [
 ];
 
 // Main page routes
-export const mainPageRoutes: BaseRoute[] = [
+export const routes: BaseRoute[] = [
   {
     slug: "",
     title: {
@@ -486,12 +698,21 @@ export const mainPageRoutes: BaseRoute[] = [
       de: "Startseite",
       fr: "Accueil",
       es: "Inicio",
+      it: "Home",
     },
     description: {
       en: "Thetis Medical - Achilles Splint Specialists",
       de: "Thetis Medical - Achillessehnen-Schienen-Spezialisten",
       fr: "Thetis Medical - Spécialistes d'Attelles d'Achille",
       es: "Thetis Medical - Especialistas en Férulas de Aquiles",
+      it: "Thetis Medical - Specialisti in Tutori di Achille",
+    },
+    slugTranslations: {
+      en: "",
+      de: "",
+      fr: "",
+      es: "",
+      it: "",
     },
   },
   {
@@ -501,6 +722,7 @@ export const mainPageRoutes: BaseRoute[] = [
       de: "Nachtschiene",
       fr: "Attelle de Nuit",
       es: "Férula Nocturna",
+      it: "Tutore Notturno",
     },
     description: {
       en: "Our specialized night splint for Achilles recovery.",
@@ -508,6 +730,15 @@ export const mainPageRoutes: BaseRoute[] = [
       fr: "Notre attelle de nuit spécialisée pour la récupération d'Achille.",
       es:
         "Nuestra férula nocturna especializada para la recuperación de Aquiles.",
+      it:
+        "Il nostro tutore notturno specializzato per la guarigione di Achille.",
+    },
+    slugTranslations: {
+      en: "night-splint",
+      de: "achillessehnenriss-schiene",
+      fr: "attelle-rupture-tendon-achille",
+      es: "bota-ortopedica-tendon-aquiles",
+      it: "tutore-tendine-achille",
     },
   },
   {
@@ -517,12 +748,21 @@ export const mainPageRoutes: BaseRoute[] = [
       de: "Traumaschiene",
       fr: "Attelle de Traumatisme",
       es: "Férula de Trauma",
+      it: "Tutore per Trauma",
     },
     description: {
       en: "Emergency splint for acute Achilles injuries.",
       de: "Notfallschiene für akute Achillesverletzungen.",
       fr: "Attelle d'urgence pour les blessures aiguës d'Achille.",
       es: "Férula de emergencia para lesiones agudas de Aquiles.",
+      it: "Tutore di emergenza per lesioni acute di Achille.",
+    },
+    slugTranslations: {
+      en: "trauma-splint",
+      de: "traumaschiene",
+      fr: "attelle-traumatisme",
+      es: "ferula-trauma",
+      it: "tutore-trauma",
     },
   },
   {
@@ -532,12 +772,21 @@ export const mainPageRoutes: BaseRoute[] = [
       de: "Achillessehnenrisse",
       fr: "Ruptures d'Achille",
       es: "Rupturas de Aquiles",
+      it: "Rotture di Achille",
     },
     description: {
       en: "Understanding Achilles ruptures and treatment options.",
       de: "Verstehen von Achillessehnenrissen und Behandlungsoptionen.",
       fr: "Comprendre les ruptures d'Achille et les options de traitement.",
       es: "Entendiendo las rupturas de Aquiles y opciones de tratamiento.",
+      it: "Comprendere le rotture di Achille e le opzioni di trattamento.",
+    },
+    slugTranslations: {
+      en: "achilles-ruptures",
+      de: "achillessehnenrisse",
+      fr: "ruptures-achille",
+      es: "rupturas-aquiles",
+      it: "rotture-achille",
     },
   },
   {
@@ -547,6 +796,7 @@ export const mainPageRoutes: BaseRoute[] = [
       de: "Genesungsweg",
       fr: "Voie de Récupération",
       es: "Vía de Recuperación",
+      it: "Percorso di Recupero",
     },
     description: {
       en: "Your guided path to full recovery from Achilles injury.",
@@ -556,6 +806,15 @@ export const mainPageRoutes: BaseRoute[] = [
         "Votre chemin guidé vers une récupération complète de la blessure d'Achille.",
       es:
         "Su camino guiado hacia la recuperación completa de la lesión de Aquiles.",
+      it:
+        "Il tuo percorso guidato verso la guarigione completa dalla lesione di Achille.",
+    },
+    slugTranslations: {
+      en: "recovery-pathway",
+      de: "genesungsweg",
+      fr: "voie-recuperation",
+      es: "via-recuperacion",
+      it: "percorso-recupero",
     },
   },
   {
@@ -565,12 +824,21 @@ export const mainPageRoutes: BaseRoute[] = [
       de: "Evidenzbasierte Genesung",
       fr: "Récupération Basée sur les Preuves",
       es: "Recuperación Basada en Evidencia",
+      it: "Recupero Basato su Evidenze",
     },
     description: {
       en: "Scientific approach to Achilles tendon recovery.",
       de: "Wissenschaftlicher Ansatz zur Achillessehnen-Genesung.",
       fr: "Approche scientifique de la récupération du tendon d'Achille.",
       es: "Enfoque científico para la recuperación del tendón de Aquiles.",
+      it: "Approccio scientifico per la guarigione del tendine di Achille.",
+    },
+    slugTranslations: {
+      en: "evidence-based-recovery",
+      de: "evidenzbasierte-genesung",
+      fr: "recuperation-basee-preuves",
+      es: "recuperacion-basada-evidencia",
+      it: "recupero-basato-evidenze",
     },
   },
   {
@@ -580,12 +848,21 @@ export const mainPageRoutes: BaseRoute[] = [
       de: "Sitemap",
       fr: "Plan du Site",
       es: "Mapa del Sitio",
+      it: "Mappa del Sito",
     },
     description: {
       en: "Complete site navigation and page listing.",
       de: "Vollständige Website-Navigation und Seitenliste.",
       fr: "Navigation complète du site et liste des pages.",
       es: "Navegación completa del sitio y lista de páginas.",
+      it: "Navigazione completa del sito e lista delle pagine.",
+    },
+    slugTranslations: {
+      en: "sitemap",
+      de: "sitemap",
+      fr: "plan-du-site",
+      es: "mapa-del-sitio",
+      it: "mappa-del-sito",
     },
   },
 ];
@@ -599,19 +876,28 @@ export const legalRoutes: BaseRoute[] = [
       de: "Rückgaberichtlinie",
       fr: "Politique de Retour",
       es: "Política de Devoluciones",
+      it: "Politica di Reso",
     },
     description: {
       en: "Our product return and refund policy.",
       de: "Unsere Produktrückgabe- und Erstattungsrichtlinie.",
       fr: "Notre politique de retour et de remboursement de produits.",
       es: "Nuestra política de devolución y reembolso de productos.",
+      it: "La nostra politica di reso e rimborso dei prodotti.",
+    },
+    slugTranslations: {
+      en: "returns-policy",
+      de: "rueckgaberichtlinie",
+      fr: "politique-retour",
+      es: "politica-devoluciones",
+      it: "politica-reso",
     },
   },
 ];
 
 // All routes combined
 export const allBaseRoutes: BaseRoute[] = [
-  ...mainPageRoutes,
+  ...routes,
   ...productRoutes,
   ...partnerRoutes,
   ...contactRoutes,
@@ -629,6 +915,7 @@ export function generateRouteForLanguage(
   const translatedSlug = baseRoute.slugTranslations?.[language.code] ||
     baseRoute.slug;
 
+  // Don't encode the slug - let the browser handle URL encoding naturally
   const href = language.dir === "/"
     ? `/${translatedSlug}`
     : `${language.dir}/${translatedSlug}`;
@@ -668,15 +955,54 @@ export function getRoutesByLanguage(langCode: string): Route[] {
   );
 }
 
+export function getArticleRoutesByLanguage(langCode: string): Route[] {
+  const language = languages.find((lang) => lang.code === langCode);
+  if (!language) return [];
+
+  return articleRoutes.map((baseRoute) =>
+    generateRouteForLanguage(baseRoute, language)
+  );
+}
+
+export function getPartnerRoutesByLanguage(langCode: string): Route[] {
+  const language = languages.find((lang) => lang.code === langCode);
+  if (!language) return [];
+
+  return partnerRoutes.map((baseRoute) =>
+    generateRouteForLanguage(baseRoute, language)
+  );
+}
+
+export function getContactRoutesByLanguage(langCode: string): Route[] {
+  const language = languages.find((lang) => lang.code === langCode);
+  if (!language) return [];
+
+  return contactRoutes.map((baseRoute) =>
+    generateRouteForLanguage(baseRoute, language)
+  );
+}
+
+export function getProductRoutesByLanguage(langCode: string): Route[] {
+  const language = languages.find((lang) => lang.code === langCode);
+  if (!language) return [];
+
+  return productRoutes.map((baseRoute) =>
+    generateRouteForLanguage(baseRoute, language)
+  );
+}
+
 export function getRouteBySlugAndLanguage(
   slug: string,
   langCode: string,
 ): Route | undefined {
+  // Decode the URL to handle special characters like ñ -> %C3%B1
+  const decodedSlug = decodeURIComponent(slug);
+
   // First try to find by translated slug, then by base slug, then by legacy slugs
   const baseRoute = allBaseRoutes.find((route) =>
-    route.slugTranslations?.[langCode] === slug ||
-    route.slug === slug ||
-    route.legacySlugs?.includes(slug)
+    route.slugTranslations?.[langCode] === decodedSlug ||
+    route.slug === decodedSlug ||
+    route.legacySlugs?.includes(decodedSlug)
   );
   const language = languages.find((lang) => lang.code === langCode);
 
@@ -689,11 +1015,14 @@ export function getAlternateRoutesForSlug(
   slug: string,
   currentLangCode: string,
 ): Array<{ lang: string; href: string }> {
+  // Decode the URL to handle special characters like ñ -> %C3%B1
+  const decodedSlug = decodeURIComponent(slug);
+
   // First try to find by translated slug, then by base slug, then by legacy slugs
   const baseRoute = allBaseRoutes.find((route) =>
-    route.slugTranslations?.[currentLangCode] === slug ||
-    route.slug === slug ||
-    route.legacySlugs?.includes(slug)
+    route.slugTranslations?.[currentLangCode] === decodedSlug ||
+    route.slug === decodedSlug ||
+    route.legacySlugs?.includes(decodedSlug)
   );
   if (!baseRoute) return [];
 
@@ -719,24 +1048,43 @@ export function getTranslatedUrlForLanguage(
     if (slug.startsWith(`${langCode}/`)) {
       slug = slug.substring(langCode.length + 1); // +1 for the slash
       break;
+    } else if (slug === langCode) {
+      // Handle case where URL is exactly "/de" (no trailing slash)
+      slug = "";
+      break;
     }
+  }
+
+  // Decode the URL to handle special characters like ñ -> %C3%B1
+  const decodedSlug = decodeURIComponent(slug);
+
+  // Special handling for home route (empty slug)
+  if (
+    decodedSlug === "" || decodedSlug === "index" ||
+    decodedSlug === "index.html"
+  ) {
+    const language = languages.find((lang) => lang.code === targetLangCode);
+    if (language && language.code !== "en") {
+      return language.dir;
+    }
+    return "/";
   }
 
   // Find the base route that matches this slug (including legacy slugs)
   const baseRoute = allBaseRoutes.find((route) => {
     // Check if this slug matches any of the translated slugs for any language
     const matchesTranslatedSlug = Object.values(route.slugTranslations || {})
-      .includes(slug);
+      .includes(decodedSlug);
     // Check if this slug matches the base slug
-    const matchesBaseSlug = route.slug === slug;
+    const matchesBaseSlug = route.slug === decodedSlug;
     // Check if this slug matches any legacy slug
-    const matchesLegacySlug = route.legacySlugs?.includes(slug);
+    const matchesLegacySlug = route.legacySlugs?.includes(decodedSlug);
 
     return matchesTranslatedSlug || matchesBaseSlug || matchesLegacySlug;
   });
 
   if (!baseRoute) {
-    // If no route found, just add language prefix as fallback
+    // For other routes, just add language prefix as fallback
     const language = languages.find((lang) => lang.code === targetLangCode);
     if (language && language.code !== "en") {
       return `${language.dir}/${slug}`;
@@ -776,32 +1124,3 @@ export const faqLinks = articleRoutes.map((route) =>
 export const legalLinks = legalRoutes.map((route) =>
   generateRouteForLanguage(route, languages[0])
 );
-
-// Test function to verify URL mapping (for debugging)
-export function testUrlMapping() {
-  const testCases = [
-    {
-      from: "/de/achillessehnenriss-schiene",
-      to: "fr",
-      expected: "/fr/attelle-rupture-tendon-achille",
-    },
-    { from: "/splint", to: "de", expected: "/de/achillessehnenriss-schiene" },
-    {
-      from: "/night-splint",
-      to: "fr",
-      expected: "/fr/attelle-rupture-tendon-achille",
-    },
-    { from: "/reviews", to: "de", expected: "/de/bewertungen" },
-  ];
-
-  console.log("Testing URL mapping:");
-  testCases.forEach(({ from, to, expected }) => {
-    const result = getTranslatedUrlForLanguage(from, to);
-    const passed = result === expected;
-    console.log(
-      `${from} -> ${to}: ${result} ${
-        passed ? "✅" : "❌ (expected: " + expected + ")"
-      }`,
-    );
-  });
-}

@@ -1,0 +1,268 @@
+---
+import ColorGradient from "@/components/ColorGradient.astro";
+import Layout from "@/layouts/Layout.astro";
+import { ArrowRight, Users, Scale, Clock } from "lucide-astro";
+import type { Lang } from "@/config/languages";
+
+export interface Props {
+    lang: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+
+const content = {
+    en: {
+        title: "Achilles Rupture Resources",
+        description:
+            "Comprehensive guide to Achilles tendon rupture treatment, recovery, and decision-making for patients and healthcare providers.",
+        intro: "Whether you're a patient who recently experienced an Achilles tendon rupture or a healthcare provider seeking evidence-based information, these resources will help guide treatment decisions and recovery expectations.",
+        aboutTitle: "About These Resources",
+        aboutText:
+            "These research articles were originally compiled for Thetis Medical's internal research and are now publicly available to benefit the global medical community.",
+        patientResource: "Patient Resource",
+        patientProviderResource: "Patient & Provider Resource",
+        resources: [
+            {
+                title: "Surgery or Non-Surgical Treatment?",
+                description:
+                    "Evidence-based comparison of surgical vs non-surgical treatment approaches across different countries.",
+                href: "/research/operation-or-not",
+                icon: Scale,
+                audience: "both",
+            },
+            {
+                title: "Recovery Timeline Comparison",
+                description:
+                    "International comparison of recovery protocols, timelines, and rehabilitation approaches.",
+                href: "/research/timeline-by-country",
+                icon: Clock,
+                audience: "both",
+            },
+            {
+                title: "Global Trends in the Incidence of Achilles Tendon Rupture",
+                description:
+                    "Comprehensive analysis of global trends in Achilles tendon rupture incidence and the factors driving changes in occurrence rates.",
+                href: "/research/incidence",
+                icon: Users,
+                audience: "both",
+            },
+        ],
+    },
+    de: {
+        title: "Achillessehnenruptur-Ressourcen",
+        description:
+            "Umfassender Leitfaden zur Behandlung, Genesung und Entscheidungsfindung bei Achillessehnenrupturen für Patienten und Gesundheitsdienstleister.",
+        intro: "Ob Sie ein Patient sind, der kürzlich eine Achillessehnenruptur erlebt hat, oder ein Gesundheitsdienstleister, der evidenzbasierte Informationen sucht - diese Ressourcen helfen bei der Führung von Behandlungsentscheidungen und Genesungserwartungen.",
+        aboutTitle: "Über diese Ressourcen",
+        aboutText:
+            "Diese Forschungsartikel wurden ursprünglich für die interne Forschung von Thetis Medical zusammengestellt und sind jetzt öffentlich verfügbar, um der globalen medizinischen Gemeinschaft zu nützen.",
+        patientResource: "Patientenressource",
+        patientProviderResource: "Patienten- und Anbieterressource",
+        resources: [
+            {
+                title: "Operation oder nicht-operative Behandlung?",
+                description:
+                    "Evidenzbasierter Vergleich von chirurgischen vs. nicht-chirurgischen Behandlungsansätzen in verschiedenen Ländern.",
+                href: "/research/operation-or-not",
+                icon: Scale,
+                audience: "both",
+            },
+            {
+                title: "Vergleich der Genesungszeitlinie",
+                description:
+                    "Internationaler Vergleich von Genesungsprotokollen, Zeitplänen und Rehabilitationsansätzen.",
+                href: "/research/timeline-by-country",
+                icon: Clock,
+                audience: "both",
+            },
+            {
+                title: "Globale Trends bei der Inzidenz von Achillessehnenrupturen",
+                description:
+                    "Umfassende Analyse globaler Trends bei der Inzidenz von Achillessehnenrupturen und den Faktoren, die Änderungen der Auftretensraten vorantreiben.",
+                href: "/research/incidence",
+                icon: Users,
+                audience: "both",
+            },
+        ],
+    },
+    fr: {
+        title: "Ressources sur la Rupture d'Achille",
+        description:
+            "Guide complet sur le traitement, la récupération et la prise de décision pour les ruptures du tendon d'Achille pour les patients et les prestataires de soins.",
+        intro: "Que vous soyez un patient qui a récemment subi une rupture du tendon d'Achille ou un prestataire de soins cherchant des informations fondées sur des preuves, ces ressources vous aideront à guider les décisions de traitement et les attentes de récupération.",
+        aboutTitle: "À propos de ces ressources",
+        aboutText:
+            "Ces articles de recherche ont été initialement compilés pour la recherche interne de Thetis Medical et sont maintenant disponibles publiquement pour bénéficier à la communauté médicale mondiale.",
+        patientResource: "Ressource Patient",
+        patientProviderResource: "Ressource Patient et Prestataire",
+        resources: [
+            {
+                title: "Chirurgie ou Traitement Non-Chirurgical ?",
+                description:
+                    "Comparaison fondée sur des preuves des approches de traitement chirurgical vs non-chirurgical dans différents pays.",
+                href: "/research/operation-or-not",
+                icon: Scale,
+                audience: "both",
+            },
+            {
+                title: "Comparaison des Chronologies de Récupération",
+                description:
+                    "Comparaison internationale des protocoles de récupération, des chronologies et des approches de réadaptation.",
+                href: "/research/timeline-by-country",
+                icon: Clock,
+                audience: "both",
+            },
+            {
+                title: "Tendances Mondiales dans l'Incidence de la Rupture du Tendon d'Achille",
+                description:
+                    "Analyse complète des tendances mondiales dans l'incidence de la rupture du tendon d'Achille et des facteurs qui stimulent les changements dans les taux d'occurrence.",
+                href: "/research/incidence",
+                icon: Users,
+                audience: "both",
+            },
+        ],
+    },
+    es: {
+        title: "Recursos sobre Ruptura de Aquiles",
+        description:
+            "Guía completa sobre el tratamiento, recuperación y toma de decisiones para rupturas del tendón de Aquiles para pacientes y proveedores de atención médica.",
+        intro: "Ya sea que sea un paciente que recientemente experimentó una ruptura del tendón de Aquiles o un proveedor de atención médica que busca información basada en evidencia, estos recursos ayudarán a guiar las decisiones de tratamiento y las expectativas de recuperación.",
+        aboutTitle: "Acerca de estos Recursos",
+        aboutText:
+            "Estos artículos de investigación fueron originalmente compilados para la investigación interna de Thetis Medical y ahora están disponibles públicamente para beneficiar a la comunidad médica global.",
+        patientResource: "Recurso para Pacientes",
+        patientProviderResource: "Recurso para Pacientes y Proveedores",
+        resources: [
+            {
+                title: "¿Cirugía o Tratamiento No Quirúrgico?",
+                description:
+                    "Comparación basada en evidencia de enfoques de tratamiento quirúrgico vs no quirúrgico en diferentes países.",
+                href: "/research/operation-or-not",
+                icon: Scale,
+                audience: "both",
+            },
+            {
+                title: "Comparación de Cronogramas de Recuperación",
+                description:
+                    "Comparación internacional de protocolos de recuperación, cronogramas y enfoques de rehabilitación.",
+                href: "/research/timeline-by-country",
+                icon: Clock,
+                audience: "both",
+            },
+            {
+                title: "Tendencias Globales en la Incidencia de Ruptura del Tendón de Aquiles",
+                description:
+                    "Análisis integral de las tendencias globales en la incidencia de ruptura del tendón de Aquiles y los factores que impulsan los cambios en las tasas de ocurrencia.",
+                href: "/research/incidence",
+                icon: Users,
+                audience: "both",
+            },
+        ],
+    },
+    it: {
+        title: "Risorse per la Rottura di Achille",
+        description:
+            "Guida completa al trattamento, recupero e processo decisionale per le rotture del tendine di Achille per pazienti e fornitori di assistenza sanitaria.",
+        intro: "Che tu sia un paziente che ha recentemente subito una rottura del tendine di Achille o un fornitore di assistenza sanitaria che cerca informazioni basate sull'evidenza, queste risorse ti aiuteranno a guidare le decisioni di trattamento e le aspettative di recupero.",
+        aboutTitle: "Su queste Risorse",
+        aboutText:
+            "Questi articoli di ricerca sono stati originariamente compilati per la ricerca interna di Thetis Medical e sono ora disponibili pubblicamente per beneficiare la comunità medica globale.",
+        patientResource: "Risorsa per Pazienti",
+        patientProviderResource: "Risorsa per Pazienti e Fornitori",
+        resources: [
+            {
+                title: "Chirurgia o Trattamento Non Chirurgico?",
+                description:
+                    "Confronto basato sull'evidenza degli approcci di trattamento chirurgico vs non chirurgico in diversi paesi.",
+                href: "/research/operation-or-not",
+                icon: Scale,
+                audience: "both",
+            },
+            {
+                title: "Confronto delle Tempistiche di Recupero",
+                description:
+                    "Confronto internazionale di protocolli di recupero, tempistiche e approcci di riabilitazione.",
+                href: "/research/timeline-by-country",
+                icon: Clock,
+                audience: "both",
+            },
+            {
+                title: "Tendenze Globali nell'Incidenza della Rottura del Tendine di Achille",
+                description:
+                    "Analisi completa delle tendenze globali nell'incidenza della rottura del tendine di Achille e dei fattori che guidano i cambiamenti nei tassi di occorrenza.",
+                href: "/research/incidence",
+                icon: Users,
+                audience: "both",
+            },
+        ],
+    },
+};
+
+const currentContent = content[lang];
+---
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    lang={lang}
+>
+    <ColorGradient>
+        <div class="mx-auto max-w-3xl">
+            <h1 class="mb-6 font-bold text-4xl">{currentContent.title}</h1>
+
+            <div class="mb-12">
+                <p class="mb-4 text-gray-700 text-lg">
+                    {currentContent.intro}
+                </p>
+            </div>
+
+            <div class="gap-6 grid">
+                {
+                    currentContent.resources.map((resource) => (
+                        <a
+                            href={resource.href}
+                            class="group block bg-white shadow-sm hover:shadow-md p-6 border border-gray-100 rounded-lg transition-shadow"
+                        >
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1">
+                                    <resource.icon class="w-6 h-6 text-emerald-600" />
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center">
+                                        <h2 class="font-semibold group-hover:text-emerald-600 text-xl transition-colors">
+                                            {resource.title}
+                                        </h2>
+                                        <ArrowRight class="opacity-0 group-hover:opacity-100 w-5 h-5 text-emerald-600 transition-opacity" />
+                                    </div>
+                                    <p class="mt-2 text-gray-600">
+                                        {resource.description}
+                                    </p>
+                                    <div class="mt-3">
+                                        {resource.audience === "patients" ? (
+                                            <span class="inline-flex items-center bg-blue-50 px-2 py-1 rounded-full font-medium text-blue-700 text-xs">
+                                                {currentContent.patientResource}
+                                            </span>
+                                        ) : (
+                                            <span class="inline-flex items-center bg-emerald-50 px-2 py-1 rounded-full font-medium text-emerald-700 text-xs">
+                                                {
+                                                    currentContent.patientProviderResource
+                                                }
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+    </ColorGradient>
+
+    <div class="bg-gray-50 mx-4 md:mx-auto mt-12 p-6 rounded-lg md:max-w-3xl">
+        <h2 class="mb-4 font-semibold text-xl">{currentContent.aboutTitle}</h2>
+        <p class="text-gray-700">
+            {currentContent.aboutText}
+        </p>
+    </div>
+</Layout>

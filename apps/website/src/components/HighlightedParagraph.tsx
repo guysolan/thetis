@@ -1,4 +1,3 @@
-import React from "react";
 import HighlightedWord from "./HighlightedWord";
 
 export type HighlightedParagraphProps = {
@@ -11,11 +10,11 @@ const HighlightedParagraph = (
 ) => {
   return (
     <>
-      {paragraph.map((item) => (
+      {paragraph.map((item, i) => (
         <>
           {item.highlighted
-            ? <HighlightedWord key={item.text}>{item.text}</HighlightedWord>
-            : <span key={item.text}>{item.text}</span>}
+            ? <HighlightedWord key={item.text + i}>{item.text}</HighlightedWord>
+            : <span key={item.text + i}>{item.text}</span>}
         </>
       ))}
     </>

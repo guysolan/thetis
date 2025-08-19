@@ -10,6 +10,9 @@ export const patients: Review[] = [
       "It was fantastic being able to remove the boot and sleep comfortably",
     body:
       "Overall, it was fantastic being able to remove the boot and sleep comfortably. My one small complaint was that the bottom of the splint dug into my shin because there was no enough padding to cover the hard plastic part. I had to stuff tissues in-between the splint and my shin to stop it from hurting. The orthopaedic surgen I was seeing at Kings Hospital in Romford was absolutely useless. I tried to show him the splint and explain how it allowed me to remove the boot and he just got upset and didn't want to listen. Overall, they have a very back-in-the-days approach to achilles tendon tears, putting patients in thigh-high plaster and then knee-high plaster for about a month before they will go to the boot. I objected and said I just wanted the boot after 2 weeks because of the immobility of the plaster and this upset them.",
+    link: "",
+    clinics: [],
+    clinicImages: [],
   },
   {
     date: "2025-02-09",
@@ -19,6 +22,9 @@ export const patients: Review[] = [
     title: "I believe the splint helped me greatly",
     body:
       "I've had much success with the Achilles Splint. Here in the states, surgery is much more common as I was told I had a complete tear. I refused and was put in a cam boot. Finding the splint online, I tried it. Visiting back with the surgeon he said it is healing and I should start rehab straight away. I am now trying to rebuild the muscle. It's slow, but a positive process. I believe the splint helped me greatly. Thank you.",
+    link: "",
+    clinics: [],
+    clinicImages: [],
   },
   {
     date: "2025-02-09",

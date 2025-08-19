@@ -1,0 +1,61 @@
+---
+import ColorGradient from "../components/ColorGradient.astro";
+import Layout from "../layouts/Layout.astro";
+import ReviewsMasonry from "@/sections/reviews/ReviewsMasonry";
+import ExperienceIfForYourself from "@/sections/reviews/ExperienceIfForYourself.astro";
+import type { Lang } from "@/config/languages";
+import { getAlternateLanguages } from "@/config/languages";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+// Language configuration
+const currentPath = Astro.url.pathname;
+const alternateLanguages = getAlternateLanguages(currentPath, lang);
+
+// Multilingual content
+const content = {
+    en: {
+        title: "Reviews - Thetis Medical Achilles Splints",
+        description:
+            "Read what our customers have to say about our Achilles splints. Real reviews from patients, athletes, and doctors.",
+    },
+    es: {
+        title: "Reseñas - Thetis Medical Férulas de Aquiles",
+        description:
+            "Lea lo que nuestros clientes dicen sobre nuestras férulas de Aquiles. Reseñas reales de pacientes, atletas y médicos.",
+    },
+    fr: {
+        title: "Avis - Thetis Medical Attelles d'Achille",
+        description:
+            "Lisez ce que nos clients disent de nos attelles d'Achille. Avis réels de patients, athlètes et médecins.",
+    },
+    de: {
+        title: "Bewertungen - Thetis Medical Achilles Schienen",
+        description:
+            "Lesen Sie, was unsere Kunden über unsere Achilles-Schienen sagen. Echte Bewertungen von Patienten, Athleten und Ärzten.",
+    },
+    it: {
+        title: "Recensioni - Thetis Medical Férula di Achille",
+        description:
+            "Leggi cosa dicono i nostri clienti sulle nostre férula di Achille. Recensioni reali di pazienti, atleti e medici.",
+    },
+};
+
+const currentContent = content[lang] || content.en;
+---
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    image="https://thetismedical.com/images/night-splint.png"
+    lang={lang}
+    alternateLanguages={alternateLanguages}
+>
+    <main>
+        <ColorGradient>
+            <ReviewsMasonry lang={lang} client:only />
+            <ExperienceIfForYourself lang={lang} />
+            <div class="mt-12 mb-8 text-center"></div>
+        </ColorGradient>
+    </main>
+</Layout>

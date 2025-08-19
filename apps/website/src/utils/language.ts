@@ -36,7 +36,9 @@ export function getSlugFromPath(path: string): string {
     // For other languages, remove the language prefix
     const langPrefix = `/${langCode}`;
     if (path.startsWith(langPrefix)) {
-        return path.substring(langPrefix.length).replace(/^\//, "") || "";
+        const slug = path.substring(langPrefix.length).replace(/^\//, "") || "";
+        // Decode URL to handle special characters like ñ -> %C3%B1
+        return decodeURIComponent(slug);
     }
 
     return path.replace(/^\//, "") || "";
@@ -56,6 +58,7 @@ export function generateLocalizedPath(slug: string, langCode: string): string {
         return slug ? `/${slug}` : "/";
     }
 
+    // Don't encode the slug - let the browser handle URL encoding naturally
     return slug ? `${language.dir}/${slug}` : language.dir;
 }
 

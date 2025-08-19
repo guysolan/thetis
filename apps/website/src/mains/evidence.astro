@@ -1,0 +1,69 @@
+---
+import Layout from "../layouts/Layout.astro";
+import EvidenceHero from "@/sections/evidence/EvidenceHero.astro";
+import EvidenceInfographics from "@/sections/evidence/EvidenceInfographics.astro";
+import SafetyStudy from "@/sections/evidence/SafetyStudy.astro";
+import Articles from "@/sections/evidence/Articles.astro";
+import LearnMore from "@/sections/evidence/LearnMore.astro";
+import type { Lang } from "@/config/languages";
+
+export interface Props {
+  lang: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+
+const content = {
+  en: {
+    title: "Thetis Medical Evidence - Achilles Splint Specialists",
+    description:
+      "Evidence for Thetis Medical's Achilles Rupture Splint and Trauma Splint.",
+  },
+  de: {
+    title: "Thetis Medical Beweise - Achillessehnen-Schienen-Spezialisten",
+    description:
+      "Beweise für Thetis Medicals Achillessehnenruptur-Schiene und Traumaschiene.",
+  },
+  fr: {
+    title: "Preuves Thetis Medical - Spécialistes d'Attelles d'Achille",
+    description:
+      "Preuves pour l'attelle de rupture d'Achille et l'attelle de traumatisme de Thetis Medical.",
+  },
+  es: {
+    title: "Evidencia Thetis Medical - Especialistas en Férulas de Aquiles",
+    description:
+      "Evidencia para la férula de ruptura de Aquiles y la férula de trauma de Thetis Medical.",
+  },
+  it: {
+    title: "Prove Thetis Medical - Specialisti in Tutori di Achille",
+    description:
+      "Prove per il tutore per rottura di Achille e il tutore per trauma di Thetis Medical.",
+  },
+};
+
+const currentContent = content[lang];
+---
+
+<Layout
+  title={currentContent.title}
+  description={currentContent.description}
+  image="https://thetismedical.com/images/night-splint.png"
+  lang={lang}
+>
+  <EvidenceHero lang={lang} />
+  <EvidenceInfographics lang={lang} />
+  <SafetyStudy lang={lang} />
+  <Articles lang={lang} />
+  <LearnMore lang={lang} />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media print {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</Layout>

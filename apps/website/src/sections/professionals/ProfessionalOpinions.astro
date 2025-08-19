@@ -1,0 +1,63 @@
+---
+import ColorGradientInOut from "@/components/ColorGradientInOut.astro";
+import HighlightedParagraph from "@/components/HighlightedParagraph";
+import ProfessionalOpinionsCarousel from "@/sections/index/ProfessionalOpinionsCarousel";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: [
+            { highlighted: false, text: "Trusted by Leading " },
+            { highlighted: true, text: "Foot and Ankle Specialists" },
+        ],
+    },
+    de: {
+        title: [
+            { highlighted: false, text: "Vertraut von führenden " },
+            { highlighted: true, text: "Fuß- und Sprunggelenksspezialisten" },
+        ],
+    },
+    fr: {
+        title: [
+            { highlighted: false, text: "Approuvé par les meilleurs " },
+            {
+                highlighted: true,
+                text: "Spécialistes du Pied et de la Cheville",
+            },
+        ],
+    },
+    es: {
+        title: [
+            { highlighted: false, text: "Confiado por los principales " },
+            { highlighted: true, text: "Especialistas en Pie y Tobillo" },
+        ],
+    },
+    it: {
+        title: [
+            { highlighted: false, text: "Fidato dai principali " },
+            {
+                highlighted: true,
+                text: "Specialisti del Piede e della Caviglia",
+            },
+        ],
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<ColorGradientInOut>
+    <div class="mx-auto px-4 container">
+        <h2 class="mb-8 font-semibold text-2xl text-center">
+            <HighlightedParagraph
+                paragraph={currentContent.title}
+                client:load
+            />
+        </h2>
+        <div class="w-full">
+            <ProfessionalOpinionsCarousel lang={lang} client:load />
+        </div>
+    </div>
+</ColorGradientInOut>

@@ -1,6 +1,5 @@
 ---
 import { urlUtils, getCurrentLanguage } from "../utils/language";
-import { testUrlMapping } from "../content/routes";
 
 const currentPath = Astro.url.pathname;
 const currentLang = getCurrentLanguage(currentPath);
@@ -14,9 +13,6 @@ console.log(
     "Language options:",
     languageOptions.map((opt) => `${opt.code}: ${opt.href}`),
 );
-
-// Test URL mapping
-testUrlMapping();
 ---
 
 <div class="relative language-switcher">

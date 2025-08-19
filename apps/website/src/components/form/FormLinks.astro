@@ -1,0 +1,69 @@
+---
+import { ExternalLink, CircleDot, Circle } from "lucide-astro";
+import { cn } from "@/lib/utils";
+import type { Lang } from "@/config/languages.ts";
+import { contactRoutes } from "@/content/routes.tsx";
+import { languages } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+// Get the current language object
+const currentLanguage = languages.find((l) => l.code === lang) || languages[0];
+
+// Generate routes for the current language
+const currentRoutes = contactRoutes.map((route) => {
+  const translatedSlug = route.slugTranslations?.[lang] || route.slug;
+  const href =
+    currentLanguage.dir === "/"
+      ? `/${translatedSlug}`
+      : `${currentLanguage.dir}/${translatedSlug}`;
+
+  return {
+    text: route.title[lang] || route.title.en,
+    url: href.replace(/\/+/g, "/").replace(/\/$/, "") || "/",
+  };
+});
+
+const currentUrl = Astro.url.pathname;
+---
+
+<ul
+  class="flex flex-col items-center lg:items-start gap-y-4 mt-4 pl-4 text-zinc-600 dark:text-zinc-400 marker:text-zinc-400 list-disc"
+>
+  {
+    currentRoutes.map((reason) => (
+      <li class={cn("list-none")}>
+        {currentUrl === reason.url ? (
+          <p
+            class={cn(
+              "flex items-center gap-2 text-lg transition-all duration-200",
+              "font-semibold text-primary dark:text-primary/90",
+            )}
+          >
+            <CircleDot
+              size={18}
+              className="text-primary dark:text-primary/90"
+            />
+            {reason.text}
+          </p>
+        ) : (
+          <a
+            href={reason.url}
+            class={cn(
+              "flex items-center gap-2 text-lg transition-all duration-200",
+              "text-zinc-600 dark:text-zinc-400 hover:underline",
+              "hover:text-primary dark:hover:text-primary/90",
+            )}
+          >
+            <Circle size={18} className="" />
+            {reason.text}
+            <ExternalLink
+              size={18}
+              className="text-zinc-400 dark:group-hover:text-primary/90 dark:text-zinc-500 group-hover:text-primary"
+            />
+          </a>
+        )}
+      </li>
+    ))
+  }
+</ul>

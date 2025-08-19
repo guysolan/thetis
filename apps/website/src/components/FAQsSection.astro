@@ -1,0 +1,46 @@
+---
+const props = Astro.props as {
+    content: ContentWithLinks;
+};
+
+export type ContentWithLinks = {
+    title: string;
+    answers: AnswerWithLinks[];
+};
+
+export type AnswerWithLinks = {
+    title: string;
+    content: { text: string; href?: string }[];
+};
+
+const { content } = props;
+---
+
+<section id="faq-slide" class="faq slide">
+    <div class="questions">
+        <h2>{content.title}</h2>
+        {
+            content.answers.map((answer, index) => (
+                <a href={`#q${index + 1}`}>
+                    <h3>{answer.title}</h3>
+                </a>
+            ))
+        }
+    </div>
+    <div class="answers">
+        {
+            content.answers.map((answer, index) => (
+                <div id={`q${index + 1}`}>
+                    <h2>{answer.title}</h2>
+                    {answer.content.map((content) =>
+                        content.href ? (
+                            <a href={content.href}>{content.text}</a>
+                        ) : (
+                            <p>{content.text}</p>
+                        ),
+                    )}
+                </div>
+            ))
+        }
+    </div>
+</section>

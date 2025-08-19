@@ -1,0 +1,59 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Article from "@/components/research/Article.astro";
+import NightSplintAdvert from "@/components/products/night-splint/NightSplintAdvert.astro";
+import Downloads from "@/sections/FAQs/downloads.astro";
+import FAQs from "@/sections/FAQs/index.astro";
+import type { Lang } from "../../config/languages";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Achilles Rupture FAQs",
+        description:
+            "A comprehensive guide to Achilles rupture with questions about the healing process, diagnosis, treatment, and recovery.",
+    },
+    es: {
+        title: "Preguntas Frecuentes sobre Ruptura de Aquiles",
+        description:
+            "Una guía completa sobre la ruptura de Aquiles con preguntas sobre el proceso de curación, diagnóstico, tratamiento y recuperación.",
+    },
+    fr: {
+        title: "FAQ sur la Rupture d'Achille",
+        description:
+            "Un guide complet sur la rupture d'Achille avec des questions sur le processus de guérison, le diagnostic, le traitement et la récupération.",
+    },
+    de: {
+        title: "Achillessehnenriss FAQs",
+        description:
+            "Ein umfassender Leitfaden zum Achillessehnenriss mit Fragen zum Heilungsverlauf, Diagnose, Behandlung und Erholung.",
+    },
+    it: {
+        title: "FAQ sulla Rottura di Achille",
+        description:
+            "Una guida completa alla rottura di Achille con domande sul processo di guarigione, diagnosi, trattamento e recupero.",
+    },
+};
+
+const currentContent = content[lang];
+---
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    image="https://thetismedical.com/images/achilles-drawing-image.png"
+    lang={lang}
+>
+    <main>
+        <Article title={currentContent.title} />
+
+        <div class="space-y-8 mx-auto max-w-4xl">
+            <FAQs lang={lang} />
+
+            <NightSplintAdvert lang={lang} />
+
+            <Downloads lang={lang} />
+        </div>
+    </main>
+</Layout>

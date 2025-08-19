@@ -1,0 +1,120 @@
+---
+import Slide from "@/components/Slide.astro";
+import DownloadList from "@/components/DownloadList.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Downloads",
+        medicalStudies: "Medical Studies",
+        patientInfo: "Information for Patients",
+        instructions: "Instructions",
+        downloads: {
+            qipFlowchart: "Quality Improvement Study Flowchart.pdf",
+            achillesInfo: "Achilles Rupture Information Sheet.pdf",
+            snakesLadders: "A Game of Snakes and Ladders Poster.pdf",
+            splintInstructions: "Splint Instructions.pdf",
+            traumaInstructions: "Trauma Splint Instructions.pdf",
+        },
+    },
+    de: {
+        title: "Downloads",
+        medicalStudies: "Medizinische Studien",
+        patientInfo: "Informationen für Patienten",
+        instructions: "Anweisungen",
+        downloads: {
+            qipFlowchart: "Qualitätsverbesserungsstudie Flussdiagramm.pdf",
+            achillesInfo: "Achillessehnenruptur Informationsblatt.pdf",
+            snakesLadders: "Ein Spiel von Schlangen und Leitern Poster.pdf",
+            splintInstructions: "Schienen-Anweisungen.pdf",
+            traumaInstructions: "Trauma-Schienen-Anweisungen.pdf",
+        },
+    },
+    fr: {
+        title: "Téléchargements",
+        medicalStudies: "Études Médicales",
+        patientInfo: "Informations pour les Patients",
+        instructions: "Instructions",
+        downloads: {
+            qipFlowchart:
+                "Organigramme d'Étude d'Amélioration de la Qualité.pdf",
+            achillesInfo: "Fiche d'Information sur la Rupture d'Achille.pdf",
+            snakesLadders: "Un Jeu de Serpents et Échelles Affiche.pdf",
+            splintInstructions: "Instructions d'Attelle.pdf",
+            traumaInstructions: "Instructions d'Attelle de Traumatisme.pdf",
+        },
+    },
+    es: {
+        title: "Descargas",
+        medicalStudies: "Estudios Médicos",
+        patientInfo: "Información para Pacientes",
+        instructions: "Instrucciones",
+        downloads: {
+            qipFlowchart:
+                "Diagrama de Flujo de Estudio de Mejora de Calidad.pdf",
+            achillesInfo: "Hoja de Información de Ruptura de Aquiles.pdf",
+            snakesLadders: "Un Juego de Serpientes y Escaleras Póster.pdf",
+            splintInstructions: "Instrucciones de Férula.pdf",
+            traumaInstructions: "Instrucciones de Férula de Trauma.pdf",
+        },
+    },
+    it: {
+        title: "Download",
+        medicalStudies: "Studi Medici",
+        patientInfo: "Informazioni per i Pazienti",
+        instructions: "Istruzioni",
+        downloads: {
+            qipFlowchart:
+                "Diagramma di Flusso dello Studio di Miglioramento della Qualità.pdf",
+            achillesInfo: "Scheda Informativa sulla Rottura di Achille.pdf",
+            snakesLadders: "Un Gioco di Serpenti e Scale Poster.pdf",
+            splintInstructions: "Istruzioni Férula.pdf",
+            traumaInstructions: "Istruzioni Férula Trauma.pdf",
+        },
+    },
+};
+
+const currentContent = content[lang] || content.en;
+---
+
+<Slide title={currentContent.title}>
+    <div class="space-y-12 my-12">
+        <DownloadList
+            title={currentContent.medicalStudies}
+            downloads={[
+                {
+                    title: currentContent.downloads.qipFlowchart,
+                    href: "/images/documents/QIP FLOWCHART embed.pdf",
+                },
+            ]}
+        />
+        <DownloadList
+            title={currentContent.patientInfo}
+            downloads={[
+                {
+                    title: currentContent.downloads.achillesInfo,
+                    href: "/images/documents/Achilles Rupture Information Sheet.pdf",
+                },
+                {
+                    title: currentContent.downloads.snakesLadders,
+                    href: "/images/documents/Achilles Rupture Information Sheet.pdf",
+                },
+            ]}
+        />
+        <DownloadList
+            title={currentContent.instructions}
+            downloads={[
+                {
+                    title: currentContent.downloads.splintInstructions,
+                    href: "/images/documents/screen-instructions-induvidual.pdf",
+                },
+                {
+                    title: currentContent.downloads.traumaInstructions,
+                    href: "/images/documents/trauma_splint_insert.pdf",
+                },
+            ]}
+        />
+    </div>
+</Slide>

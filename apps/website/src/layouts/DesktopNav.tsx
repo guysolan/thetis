@@ -18,11 +18,12 @@ import { Button, buttonVariants } from "../components/ui/button";
 const contentWidth = "min-w-[min(50vw,700px)]";
 
 import {
-  articleRoutes,
-  contactRoutes,
+  getArticleRoutesByLanguage,
+  getContactRoutesByLanguage,
+  getPartnerRoutesByLanguage,
+  getProductRoutesByLanguage,
   getRouteBySlugAndLanguage,
-  getRoutesByLanguage,
-  partnerRoutes,
+  navigationContent,
 } from "../content/routes.tsx";
 import ReviewsLink from "../components/ReviewsLink.tsx";
 import type { Lang } from "../config/languages.ts";
@@ -31,82 +32,12 @@ interface DesktopNavProps {
   lang: Lang;
 }
 
-const content = {
-  en: {
-    ourProduct: "Our Product",
-    patientGuides: "Patient Guides",
-    professionals: "Professionals",
-    contact: "Contact",
-    buyNow: "Buy Now",
-    learnMore: "Learn More",
-    orderWholesale: "Order Wholesale",
-    productTitle: "Achilles Tendon Rupture Splint",
-    productDescription:
-      "Improve recovery time and comfort after Achilles tendon rupture",
-  },
-  de: {
-    ourProduct: "Unser Produkt",
-    patientGuides: "Patientenleitfäden",
-    professionals: "Fachkräfte",
-    contact: "Kontakt",
-    buyNow: "Jetzt kaufen",
-    learnMore: "Mehr erfahren",
-    orderWholesale: "Großhandel bestellen",
-    productTitle: "Achillessehnenruptur-Schiene",
-    productDescription:
-      "Verbessern Sie die Genesungszeit und den Komfort nach einer Achillessehnenruptur",
-  },
-  fr: {
-    ourProduct: "Notre Produit",
-    patientGuides: "Guides du Patient",
-    professionals: "Professionnels",
-    contact: "Contact",
-    buyNow: "Acheter maintenant",
-    learnMore: "En savoir plus",
-    orderWholesale: "Commander en gros",
-    productTitle: "Attelle de rupture du tendon d'Achille",
-    productDescription:
-      "Améliorez le temps de récupération et le confort après une rupture du tendon d'Achille",
-  },
-  es: {
-    ourProduct: "Nuestro Producto",
-    patientGuides: "Guías del Paciente",
-    professionals: "Profesionales",
-    contact: "Contacto",
-    buyNow: "Comprar ahora",
-    learnMore: "Aprende más",
-    orderWholesale: "Pedir al por mayor",
-    productTitle: "Férula para rotura del tendón de Aquiles",
-    productDescription:
-      "Mejore el tiempo de recuperación y la comodidad después de la rotura del tendón de Aquiles",
-  },
-  it: {
-    ourProduct: "Il Nostro Prodotto",
-    patientGuides: "Guide del Paziente",
-    professionals: "Professionisti",
-    contact: "Contatto",
-    buyNow: "Compra ora",
-    learnMore: "Scopri di più",
-    orderWholesale: "Ordina all'ingrosso",
-    productTitle: "Férula per rottura del tendine di Achille",
-    productDescription:
-      "Migliora i tempi di recupero e il comfort dopo la rottura del tendine di Achille",
-  },
-};
-
 function DesktopNav({ lang = "en" }: DesktopNavProps) {
-  const t = content[lang];
+  const t = navigationContent[lang];
   // Get localized routes
-  const localizedRoutes = getRoutesByLanguage(lang);
-  const articles = localizedRoutes.filter((route) =>
-    route.slug.startsWith("FAQs/")
-  );
-  const partnerLinks = localizedRoutes.filter((route) =>
-    partnerRoutes.some((pr) => pr.slug === route.slug)
-  );
-  const contactLinks = localizedRoutes.filter((route) =>
-    contactRoutes.some((cr) => cr.slug === route.slug)
-  );
+  const articles = getArticleRoutesByLanguage(lang);
+  const partnerLinks = getPartnerRoutesByLanguage(lang);
+  const contactLinks = getContactRoutesByLanguage(lang);
 
   // Get dynamic URLs for the current language
   const splintRoute = getRouteBySlugAndLanguage("splint", lang);
@@ -382,7 +313,7 @@ const ProductLink = ({
   wholesaleUrl,
   lang = "en",
 }: ProductLinkProps) => {
-  const t = content[lang];
+  const t = navigationContent[lang];
   return (
     <div className="flex md:flex-row flex-col gap-6">
       {/* Product image - square and prominent */}

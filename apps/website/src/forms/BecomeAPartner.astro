@@ -1,0 +1,161 @@
+---
+import Label from "@/components/form/Label.astro";
+import Input from "@/components/form/Input.astro";
+import FormWrap from "@/components/form/FormWrap.astro";
+import TextArea from "@/components/form/TextArea.astro";
+import { inputStyle } from "@/components/form/Input.astro";
+import OptOut from "@/components/form/OptOut.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Become a Partner",
+        description:
+            "Looking to partner with us as a distributor, healthcare provider, or clinician? Fill out this form and we'll be in touch with next steps.",
+        contactNameLabel: "Contact Name",
+        businessEmailLabel: "Business Email",
+        partnershipTypeLabel: "Partnership Type",
+        selectPlaceholder: "Select partnership type",
+        distributorOption: "Distributor",
+        clinicOption: "Healthcare Provider/Clinic",
+        clinicianOption: "Individual Clinician",
+        otherOption: "Other",
+        additionalInfoLabel: "Additional Information",
+        submitButton: "Send Message",
+    },
+    de: {
+        title: "Partner werden",
+        description:
+            "Möchten Sie als Händler, Gesundheitsdienstleister oder Kliniker mit uns zusammenarbeiten? Füllen Sie dieses Formular aus und wir melden uns mit den nächsten Schritten bei Ihnen.",
+        contactNameLabel: "Kontaktname",
+        businessEmailLabel: "Geschäfts-E-Mail",
+        partnershipTypeLabel: "Partnerschaftstyp",
+        selectPlaceholder: "Partnerschaftstyp auswählen",
+        distributorOption: "Händler",
+        clinicOption: "Gesundheitsdienstleister/Klinik",
+        clinicianOption: "Einzelner Kliniker",
+        otherOption: "Andere",
+        additionalInfoLabel: "Zusätzliche Informationen",
+        submitButton: "Nachricht senden",
+    },
+    fr: {
+        title: "Devenir Partenaire",
+        description:
+            "Vous souhaitez devenir partenaire en tant que distributeur, prestataire de soins de santé ou clinicien ? Remplissez ce formulaire et nous vous contacterons pour les prochaines étapes.",
+        contactNameLabel: "Nom du contact",
+        businessEmailLabel: "E-mail professionnel",
+        partnershipTypeLabel: "Type de partenariat",
+        selectPlaceholder: "Sélectionner le type de partenariat",
+        distributorOption: "Distributeur",
+        clinicOption: "Prestataire de soins/Clinique",
+        clinicianOption: "Clinicien individuel",
+        otherOption: "Autre",
+        additionalInfoLabel: "Informations supplémentaires",
+        submitButton: "Envoyer le message",
+    },
+    es: {
+        title: "Convertirse en Socio",
+        description:
+            "¿Busca asociarse con nosotros como distribuidor, proveedor de atención médica o clínico? Complete este formulario y nos pondremos en contacto con los próximos pasos.",
+        contactNameLabel: "Nombre de contacto",
+        businessEmailLabel: "Correo electrónico comercial",
+        partnershipTypeLabel: "Tipo de asociación",
+        selectPlaceholder: "Seleccionar tipo de asociación",
+        distributorOption: "Distribuidor",
+        clinicOption: "Proveedor de atención médica/Clínica",
+        clinicianOption: "Clínico individual",
+        otherOption: "Otro",
+        additionalInfoLabel: "Información adicional",
+        submitButton: "Enviar mensaje",
+    },
+    it: {
+        title: "Diventa Partner",
+        description:
+            "Vuoi diventare nostro partner come distributore, fornitore di assistenza sanitaria o clinico? Compila questo modulo e ti contatteremo per i prossimi passi.",
+        contactNameLabel: "Nome del contatto",
+        businessEmailLabel: "Email aziendale",
+        partnershipTypeLabel: "Tipo di partnership",
+        selectPlaceholder: "Seleziona tipo di partnership",
+        distributorOption: "Distributore",
+        clinicOption: "Fornitore di assistenza sanitaria/Clinica",
+        clinicianOption: "Clinico individuale",
+        otherOption: "Altro",
+        additionalInfoLabel: "Informazioni aggiuntive",
+        submitButton: "Invia messaggio",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<FormWrap formId="xwppakoz">
+    <div class="space-y-8 w-full">
+        <h2
+            class="font-semibold text-neutral-950 text-2xl md:text-3xl leading-[105%]"
+        >
+            {currentContent.title}
+        </h2>
+        <p class="text-gray-800 text-lg leading-relaxed">
+            {currentContent.description}
+        </p>
+
+        <div class="space-y-6">
+            <div class="gap-6 grid md:grid-cols-2">
+                <div class="form-group">
+                    <Label labelFor="name"
+                        >{currentContent.contactNameLabel}</Label
+                    >
+                    <Input name="name" type="text" required={true} />
+                </div>
+
+                <div class="form-group">
+                    <Label labelFor="email"
+                        >{currentContent.businessEmailLabel}</Label
+                    >
+                    <Input name="email" type="email" required={true} />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <Label labelFor="partnerType"
+                    >{currentContent.partnershipTypeLabel}</Label
+                >
+                <select
+                    required
+                    id="partnerType"
+                    name="partnerType"
+                    class={`${inputStyle} w-full rounded-lg bg-white/90`}
+                >
+                    <option value="">{currentContent.selectPlaceholder}</option>
+                    <option value="distributor"
+                        >{currentContent.distributorOption}</option
+                    >
+                    <option value="clinic">{currentContent.clinicOption}</option
+                    >
+                    <option value="clinician"
+                        >{currentContent.clinicianOption}</option
+                    >
+                    <option value="other">{currentContent.otherOption}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <Label labelFor="message"
+                    >{currentContent.additionalInfoLabel}</Label
+                >
+                <TextArea name="message" rows={4} maxlength={1000} />
+            </div>
+
+            <OptOut />
+
+            <button
+                type="submit"
+                class="bg-primary hover:bg-primary/90 hover:shadow-md px-8 py-4 rounded-lg w-full md:w-auto font-medium text-white transition-all"
+            >
+                {currentContent.submitButton}
+            </button>
+        </div>
+    </div>
+</FormWrap>

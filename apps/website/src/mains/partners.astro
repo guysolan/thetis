@@ -1,0 +1,145 @@
+---
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+
+import { partners } from "@/content/partners/index.ts";
+import getCountryFlag from "country-flag-icons/unicode";
+import { ExternalLink } from "lucide-astro";
+import { cn } from "../lib/utils";
+import { buttonVariants } from "../components/ui/button";
+import ColorGradient from "@/components/ColorGradient.astro";
+import HighlightedWord from "@/components/HighlightedWord.tsx";
+import type { Lang } from "@/config/languages";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Our Partners",
+        description:
+            "Our global network of trusted medical device partners and distributors",
+        joinTitle: "Join Our Global Network",
+        joinDescription:
+            "Become part of our growing international community of clinicians, hospitals and distributors.",
+        visitWebsite: "Visit Website",
+        becomePartner: "Become a Partner",
+    },
+    es: {
+        title: "Nuestros Socios",
+        description:
+            "Nuestra red global de socios y distribuidores de dispositivos médicos de confianza",
+        joinTitle: "Únete a Nuestra Red Global",
+        joinDescription:
+            "Conviértete en parte de nuestra creciente comunidad internacional de clínicos, hospitales y distribuidores.",
+        visitWebsite: "Visitar Sitio Web",
+        becomePartner: "Convertirse en Socio",
+    },
+    fr: {
+        title: "Nos Partenaires",
+        description:
+            "Notre réseau mondial de partenaires et distributeurs d'appareils médicaux de confiance",
+        joinTitle: "Rejoignez Notre Réseau Mondial",
+        joinDescription:
+            "Faites partie de notre communauté internationale croissante de cliniciens, hôpitaux et distributeurs.",
+        visitWebsite: "Visiter le Site Web",
+        becomePartner: "Devenir Partenaire",
+    },
+    de: {
+        title: "Unsere Partner",
+        description:
+            "Unser globales Netzwerk vertrauenswürdiger Partner und Händler für medizinische Geräte",
+        joinTitle: "Werden Sie Teil Unseres Globalen Netzwerks",
+        joinDescription:
+            "Werden Sie Teil unserer wachsenden internationalen Gemeinschaft von Klinikern, Krankenhäusern und Händlern.",
+        visitWebsite: "Website Besuchen",
+        becomePartner: "Partner Werden",
+    },
+    it: {
+        title: "I Nostri Partner",
+        description:
+            "La nostra rete globale di partner e distributori di dispositivi medici affidabili",
+        joinTitle: "Unisciti alla Nostra Rete Globale",
+        joinDescription:
+            "Diventa parte della nostra crescente comunità internazionale di clinici, ospedali e distributori.",
+        visitWebsite: "Visita il Sito Web",
+        becomePartner: "Diventa Partner",
+    },
+};
+
+const t = content[lang];
+---
+
+<Layout
+    title="Thetis Medical Partners"
+    description={t.description}
+    image="https://thetismedical.com/images/night-splint.png"
+    lang={lang}
+>
+    <main
+        class="flex flex-col justify-center items-center bg-white dark:bg-black mx-auto w-full"
+    >
+        <ColorGradient>
+            <div class="h-12"></div>
+            <h1 class="mb-12 font-bold text-4xl text-center">{t.title}</h1>
+
+            <div
+                class="gap-8 grid grid-cols-1 md:grid-cols-3 mx-auto p-4 w-full max-w-7xl"
+            >
+                {
+                    partners.map((partner) => (
+                        <div class="flex flex-col items-center bg-gradient-to-bl from-neutral-100/50 via-white to-neutral-100/50 hover:shadow-lg p-8 border border-neutral-300 rounded-3xl transition-shadow">
+                            <h2 class="mb-6 font-semibold text-2xl text-center">
+                                {partner.name} {getCountryFlag(partner.country)}
+                            </h2>
+                            <Image
+                                height="200"
+                                width="400"
+                                src={partner.image}
+                                alt={partner.name}
+                                class="mb-6 w-40 h-40 object-contain"
+                            />
+                            <a
+                                href={partner.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class={cn(
+                                    buttonVariants({
+                                        size: "lg",
+                                        variant: "outline",
+                                    }),
+                                    "gap-2",
+                                )}
+                            >
+                                {t.visitWebsite}
+                                <ExternalLink />
+                            </a>
+                        </div>
+                    ))
+                }
+            </div>
+        </ColorGradient>
+        <section
+            class="flex flex-col justify-center items-center bg-gradient-to-bl from-primary/5 via-white to-primary/5 shadow-lg mx-4 my-16 p-4 md:p-8 lg:p-16 py-8 border border-primary md:border-4 rounded-3xl"
+        >
+            <div class="mx-auto mb-8 px-4 max-w-2xl text-center">
+                <h2
+                    class="bg-clip-text bg-gradient-to-r from-primary to-primary/80 mb-4 font-semibold text-transparent text-3xl"
+                >
+                    {t.joinTitle}
+                </h2>
+                <p class="mb-6 text-gray-600 dark:text-gray-300 text-lg">
+                    {t.joinDescription}
+                </p>
+            </div>
+            <a
+                href="/become-a-partner"
+                class={cn(
+                    buttonVariants({ size: "lg" }),
+                    "hover:animate-none hover:scale-105 transition-transform",
+                )}
+            >
+                {t.becomePartner}
+            </a>
+        </section>
+    </main>
+</Layout>

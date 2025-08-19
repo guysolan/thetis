@@ -1,0 +1,393 @@
+---
+import FAQsSection from "@/components/FAQsSection.astro";
+import type { Lang } from "@/config/languages";
+
+const { lang = "en" }: { lang?: Lang } = Astro.props;
+
+const content = {
+    en: {
+        title: "Find your answer:",
+        questions: [
+            {
+                id: "q1",
+                title: "Life after Achilles tendon rupture recovery timeline",
+                link: "/FAQs/achilles-rupture-timeline",
+            },
+            {
+                id: "q2",
+                title: "When can I return to sport after Achilles rupture?",
+            },
+            {
+                id: "q3",
+                title: "When can I return to work or desk duties after Achilles rupture?",
+            },
+            { id: "q4", title: "When can I walk after Achilles rupture?" },
+            { id: "q5", title: "How to avoid re-rupture" },
+        ],
+        answers: [
+            {
+                id: "q1",
+                title: "Life after Achilles tendon rupture – daily activities & recovery expectations",
+                content: [
+                    {
+                        text: "Properly treated, Achilles tendon ruptures heal very well. For a ",
+                    },
+                    {
+                        text: "detailed week-by-week Achilles recovery timeline",
+                        href: "/FAQs/achilles-rupture-timeline",
+                    },
+                    {
+                        text: ", see our dedicated guide. However, full recovery takes a long time. Expect to wear a boot or similar support for around 10 weeks, followed by months of rehabilitation to rebuild calf strength. Many patients report activity limitations for at least six months and that true full recovery can take a year or more. Even in the long-term, the calf muscle on the injured side may remain slightly smaller and the healed tendon thicker than it was pre-injury, though both continue to function normally.",
+                    },
+                ],
+            },
+            {
+                id: "q2",
+                title: "When can I return to sport after Achilles rupture?",
+                content: [
+                    {
+                        text: "This depends upon the sport, but most rehabilitation programs reach the point where you can resume after 6 months.",
+                    },
+                ],
+            },
+            {
+                id: "q3",
+                title: "When can I return to work or desk duties after Achilles rupture?",
+                content: [
+                    {
+                        text: "This depends upon the precise nature of the work, but most rehabilitation programs reach the point where you can resume after 6 months.",
+                    },
+                ],
+            },
+            {
+                id: "q4",
+                title: "When can I walk after Achilles rupture?",
+                content: [
+                    {
+                        text: "Once you are supported in a suitable boot, with the foot held in a tip-toe posture, then you can (and should) walk. Crutches are only to help with balance. A shoe with a generous heel on the other foot helps to even you up. Walking on the injured leg, in the boot, is good for the healing. The action of walking helps the tendon ends to join in an efficient and strong manner. This early walking has led to fewer re-ruptures compared to previous regimens, when treatment required months of plaster casts and hopping one-legged with crutches.",
+                    },
+                ],
+            },
+            {
+                id: "q5",
+                title: "How to avoid re-rupture",
+                content: [
+                    {
+                        text: "Wear the boot as instructed for the full 10 weeks. Don't take any short-cuts. Your recovery is like the game Snakes and Ladders (Shutes and Ladders in the US) – each week sees you closer to the finish. But one small mistake is like landing on the big snake that takes you right back to the beginning, with a re-rupture. If you take it off to wash, be seated first; maintain the tip-toe posture; do not bend the ankle up to reach your toes to wash or dry them. If you are not sufficiently flexible get help. Do not assume that you'll be fine, hopping into the shower. One tiny slip can be disastrous.",
+                    },
+                ],
+            },
+        ],
+    },
+    de: {
+        title: "Finde deine Antwort:",
+        questions: [
+            {
+                id: "q1",
+                title: "Leben nach Achillessehnenriss – Genesungszeitplan",
+                link: "/FAQs/achilles-rupture-timeline",
+            },
+            {
+                id: "q2",
+                title: "Wann kann ich nach einem Achillessehnenriss wieder Sport treiben?",
+            },
+            {
+                id: "q3",
+                title: "Wann kann ich nach einem Achillessehnenriss wieder arbeiten oder Bürotätigkeiten ausführen?",
+            },
+            {
+                id: "q4",
+                title: "Wann kann ich nach einem Achillessehnenriss wieder gehen?",
+            },
+            { id: "q5", title: "Wie kann man eine erneute Ruptur vermeiden?" },
+        ],
+        answers: [
+            {
+                id: "q1",
+                title: "Leben nach Achillessehnenriss – Alltag & Erwartungen an die Genesung",
+                content: [
+                    {
+                        text: "Richtig behandelt, heilen Achillessehnenrisse sehr gut. Für einen ",
+                    },
+                    {
+                        text: "detaillierten Wochen-für-Wochen-Genesungsplan",
+                        href: "/FAQs/achilles-rupture-timeline",
+                    },
+                    {
+                        text: " siehe unseren speziellen Leitfaden. Eine vollständige Genesung dauert jedoch lange. Rechne mit etwa 10 Wochen im Stiefel oder ähnlicher Unterstützung, gefolgt von Monaten der Rehabilitation zur Wiederherstellung der Wadenkraft. Viele Patienten berichten von Einschränkungen für mindestens sechs Monate und dass eine vollständige Genesung ein Jahr oder länger dauern kann. Langfristig kann die Wadenmuskulatur auf der verletzten Seite etwas kleiner und die geheilte Sehne dicker bleiben als vor der Verletzung, obwohl beide normal funktionieren.",
+                    },
+                ],
+            },
+            {
+                id: "q2",
+                title: "Wann kann ich nach einem Achillessehnenriss wieder Sport treiben?",
+                content: [
+                    {
+                        text: "Das hängt von der Sportart ab, aber die meisten Rehabilitationsprogramme erlauben die Rückkehr nach etwa 6 Monaten.",
+                    },
+                ],
+            },
+            {
+                id: "q3",
+                title: "Wann kann ich nach einem Achillessehnenriss wieder arbeiten oder Bürotätigkeiten ausführen?",
+                content: [
+                    {
+                        text: "Das hängt von der Art der Arbeit ab, aber die meisten Rehabilitationsprogramme erlauben die Rückkehr nach etwa 6 Monaten.",
+                    },
+                ],
+            },
+            {
+                id: "q4",
+                title: "Wann kann ich nach einem Achillessehnenriss wieder gehen?",
+                content: [
+                    {
+                        text: "Sobald du in einem geeigneten Stiefel unterstützt wirst, der den Fuß in einer Zehenspitzenhaltung fixiert, kannst (und solltest) du gehen. Krücken dienen nur dem Gleichgewicht. Ein Schuh mit höherem Absatz am anderen Fuß hilft beim Ausgleich. Gehen auf dem verletzten Bein im Stiefel ist gut für die Heilung. Das Gehen unterstützt das effiziente Zusammenwachsen der Sehnenenden. Dieses frühe Gehen führte zu weniger erneuten Rissen im Vergleich zu früheren Behandlungen, die monatelange Gipsverbände und Hüpfen auf einem Bein erforderten.",
+                    },
+                ],
+            },
+            {
+                id: "q5",
+                title: "Wie kann man eine erneute Ruptur vermeiden?",
+                content: [
+                    {
+                        text: "Trage den Stiefel wie vorgeschrieben die vollen 10 Wochen. Keine Abkürzungen! Deine Genesung ist wie das Spiel „Leiterspiel“ – jede Woche bringt dich näher ans Ziel. Aber ein kleiner Fehler ist wie auf der großen Schlange zu landen, die dich wieder an den Anfang zurückwirft, mit einer erneuten Ruptur. Wenn du den Stiefel zum Waschen abnimmst, setze dich zuerst hin; halte die Zehenspitzenhaltung bei; beuge den Fuß nicht nach oben, um die Zehen zu waschen oder zu trocknen. Wenn du nicht beweglich genug bist, hole dir Hilfe. Gehe nicht davon aus, dass es klappt, wenn du ins Bad hüpfst. Ein winziger Ausrutscher kann katastrophal sein.",
+                    },
+                ],
+            },
+        ],
+    },
+    fr: {
+        title: "Trouvez votre réponse :",
+        questions: [
+            {
+                id: "q1",
+                title: "Vie après rupture du tendon d’Achille – calendrier de récupération",
+                link: "/FAQs/achilles-rupture-timeline",
+            },
+            {
+                id: "q2",
+                title: "Quand puis-je reprendre le sport après une rupture du tendon d’Achille ?",
+            },
+            {
+                id: "q3",
+                title: "Quand puis-je reprendre le travail ou les tâches de bureau après une rupture du tendon d’Achille ?",
+            },
+            {
+                id: "q4",
+                title: "Quand puis-je marcher après une rupture du tendon d’Achille ?",
+            },
+            { id: "q5", title: "Comment éviter une nouvelle rupture ?" },
+        ],
+        answers: [
+            {
+                id: "q1",
+                title: "Vie après rupture du tendon d’Achille – activités quotidiennes & attentes de récupération",
+                content: [
+                    {
+                        text: "Correctement traitées, les ruptures du tendon d’Achille guérissent très bien. Pour un ",
+                    },
+                    {
+                        text: "calendrier détaillé de récupération semaine par semaine",
+                        href: "/FAQs/achilles-rupture-timeline",
+                    },
+                    {
+                        text: ", consultez notre guide dédié. Cependant, une récupération complète prend beaucoup de temps. Comptez environ 10 semaines avec une botte ou un soutien similaire, suivies de plusieurs mois de rééducation pour reconstruire la force du mollet. Beaucoup de patients signalent des limitations d’activité pendant au moins six mois et une récupération complète pouvant prendre un an ou plus. À long terme, le mollet du côté blessé peut rester légèrement plus petit et le tendon guéri plus épais qu’avant la blessure, bien que les deux fonctionnent normalement.",
+                    },
+                ],
+            },
+            {
+                id: "q2",
+                title: "Quand puis-je reprendre le sport après une rupture du tendon d’Achille ?",
+                content: [
+                    {
+                        text: "Cela dépend du sport, mais la plupart des programmes de rééducation permettent une reprise après environ 6 mois.",
+                    },
+                ],
+            },
+            {
+                id: "q3",
+                title: "Quand puis-je reprendre le travail ou les tâches de bureau après une rupture du tendon d’Achille ?",
+                content: [
+                    {
+                        text: "Cela dépend de la nature précise du travail, mais la plupart des programmes de rééducation permettent une reprise après environ 6 mois.",
+                    },
+                ],
+            },
+            {
+                id: "q4",
+                title: "Quand puis-je marcher après une rupture du tendon d’Achille ?",
+                content: [
+                    {
+                        text: "Une fois équipé d’une botte adaptée, maintenant le pied en position de pointe, vous pouvez (et devez) marcher. Les béquilles ne servent qu’à l’équilibre. Une chaussure avec un talon généreux de l’autre côté aide à équilibrer. Marcher sur la jambe blessée, dans la botte, est bénéfique pour la guérison. L’action de marcher aide les extrémités du tendon à se rejoindre de manière efficace et solide. Cette marche précoce a réduit les récidives par rapport aux anciens protocoles, qui imposaient des mois de plâtre et des déplacements sur une jambe avec béquilles.",
+                    },
+                ],
+            },
+            {
+                id: "q5",
+                title: "Comment éviter une nouvelle rupture ?",
+                content: [
+                    {
+                        text: "Portez la botte comme indiqué pendant les 10 semaines complètes. Ne prenez aucun raccourci. Votre récupération ressemble au jeu des Serpents et Échelles – chaque semaine vous rapproche de la fin. Mais une petite erreur est comme tomber sur un grand serpent qui vous ramène au début, avec une nouvelle rupture. Si vous l’enlevez pour vous laver, asseyez-vous d’abord ; gardez la position sur la pointe des pieds ; ne pliez pas la cheville vers le haut pour atteindre vos orteils. Si vous manquez de souplesse, demandez de l’aide. Ne supposez pas que vous irez bien en sautillant dans la douche. Un petit faux pas peut être désastreux.",
+                    },
+                ],
+            },
+        ],
+    },
+    es: {
+        title: "Encuentra tu respuesta:",
+        questions: [
+            {
+                id: "q1",
+                title: "Vida después de una ruptura del tendón de Aquiles – cronograma de recuperación",
+                link: "/FAQs/achilles-rupture-timeline",
+            },
+            {
+                id: "q2",
+                title: "¿Cuándo puedo volver a hacer deporte después de una ruptura del tendón de Aquiles?",
+            },
+            {
+                id: "q3",
+                title: "¿Cuándo puedo volver al trabajo o tareas de oficina después de una ruptura del tendón de Aquiles?",
+            },
+            {
+                id: "q4",
+                title: "¿Cuándo puedo caminar después de una ruptura del tendón de Aquiles?",
+            },
+            { id: "q5", title: "Cómo evitar una nueva ruptura" },
+        ],
+        answers: [
+            {
+                id: "q1",
+                title: "Vida después de una ruptura del tendón de Aquiles – actividades diarias & expectativas de recuperación",
+                content: [
+                    {
+                        text: "Bien tratadas, las rupturas del tendón de Aquiles sanan muy bien. Para un ",
+                    },
+                    {
+                        text: "cronograma detallado de recuperación semana a semana",
+                        href: "/FAQs/achilles-rupture-timeline",
+                    },
+                    {
+                        text: ", consulta nuestra guía dedicada. Sin embargo, la recuperación completa lleva mucho tiempo. Se espera usar una bota o soporte similar durante unas 10 semanas, seguido de meses de rehabilitación para reconstruir la fuerza de la pantorrilla. Muchos pacientes reportan limitaciones en la actividad durante al menos seis meses y que la recuperación total puede tardar un año o más. A largo plazo, el músculo de la pantorrilla del lado lesionado puede quedar ligeramente más pequeño y el tendón curado más grueso que antes de la lesión, aunque ambos funcionen con normalidad.",
+                    },
+                ],
+            },
+            {
+                id: "q2",
+                title: "¿Cuándo puedo volver a hacer deporte después de una ruptura del tendón de Aquiles?",
+                content: [
+                    {
+                        text: "Depende del deporte, pero la mayoría de los programas de rehabilitación permiten la reanudación después de unos 6 meses.",
+                    },
+                ],
+            },
+            {
+                id: "q3",
+                title: "¿Cuándo puedo volver al trabajo o tareas de oficina después de una ruptura del tendón de Aquiles?",
+                content: [
+                    {
+                        text: "Depende de la naturaleza exacta del trabajo, pero la mayoría de los programas de rehabilitación permiten la reanudación después de unos 6 meses.",
+                    },
+                ],
+            },
+            {
+                id: "q4",
+                title: "¿Cuándo puedo caminar después de una ruptura del tendón de Aquiles?",
+                content: [
+                    {
+                        text: "Una vez que estés apoyado con una bota adecuada, con el pie en postura de puntillas, podrás (y deberás) caminar. Las muletas son solo para el equilibrio. Un zapato con un buen tacón en el otro pie ayuda a nivelar. Caminar sobre la pierna lesionada, dentro de la bota, favorece la curación. La acción de caminar ayuda a que los extremos del tendón se unan de manera fuerte y eficiente. Esta marcha temprana ha reducido las re-rupturas en comparación con protocolos anteriores, que requerían meses de yeso y desplazarse saltando en una pierna con muletas.",
+                    },
+                ],
+            },
+            {
+                id: "q5",
+                title: "Cómo evitar una nueva ruptura",
+                content: [
+                    {
+                        text: "Usa la bota como se indica durante las 10 semanas completas. No tomes atajos. Tu recuperación es como el juego Serpientes y Escaleras – cada semana te acerca al final. Pero un pequeño error es como caer en la gran serpiente que te devuelve al principio, con una nueva ruptura. Si te la quitas para lavarte, siéntate primero; mantén la postura de puntillas; no dobles el tobillo hacia arriba para alcanzar los dedos de los pies. Si no eres lo suficientemente flexible, pide ayuda. No supongas que estarás bien saltando hasta la ducha. Un pequeño resbalón puede ser desastroso.",
+                    },
+                ],
+            },
+        ],
+    },
+    it: {
+        title: "Trova la tua risposta:",
+        questions: [
+            {
+                id: "q1",
+                title: "Vita dopo la rottura del tendine d’Achille – tempi di recupero",
+                link: "/FAQs/achilles-rupture-timeline",
+            },
+            {
+                id: "q2",
+                title: "Quando posso tornare a fare sport dopo una rottura del tendine d’Achille?",
+            },
+            {
+                id: "q3",
+                title: "Quando posso tornare al lavoro o a compiti d’ufficio dopo una rottura del tendine d’Achille?",
+            },
+            {
+                id: "q4",
+                title: "Quando posso camminare dopo una rottura del tendine d’Achille?",
+            },
+            { id: "q5", title: "Come evitare una nuova rottura" },
+        ],
+        answers: [
+            {
+                id: "q1",
+                title: "Vita dopo la rottura del tendine d’Achille – attività quotidiane & aspettative di recupero",
+                content: [
+                    {
+                        text: "Se trattate correttamente, le rotture del tendine d’Achille guariscono molto bene. Per una ",
+                    },
+                    {
+                        text: "cronologia dettagliata del recupero settimana per settimana",
+                        href: "/FAQs/achilles-rupture-timeline",
+                    },
+                    {
+                        text: ", consulta la nostra guida dedicata. Tuttavia, il recupero completo richiede molto tempo. Aspettati di indossare uno stivale o un supporto simile per circa 10 settimane, seguito da mesi di riabilitazione per ricostruire la forza del polpaccio. Molti pazienti riportano limitazioni nelle attività per almeno sei mesi e che il recupero totale può richiedere un anno o più. A lungo termine, il muscolo del polpaccio dal lato lesionato può rimanere leggermente più piccolo e il tendine guarito più spesso rispetto a prima della lesione, sebbene entrambi funzionino normalmente.",
+                    },
+                ],
+            },
+            {
+                id: "q2",
+                title: "Quando posso tornare a fare sport dopo una rottura del tendine d’Achille?",
+                content: [
+                    {
+                        text: "Dipende dallo sport, ma la maggior parte dei programmi di riabilitazione permette la ripresa dopo circa 6 mesi.",
+                    },
+                ],
+            },
+            {
+                id: "q3",
+                title: "Quando posso tornare al lavoro o a compiti d’ufficio dopo una rottura del tendine d’Achille?",
+                content: [
+                    {
+                        text: "Dipende dalla natura precisa del lavoro, ma la maggior parte dei programmi di riabilitazione permette la ripresa dopo circa 6 mesi.",
+                    },
+                ],
+            },
+            {
+                id: "q4",
+                title: "Quando posso camminare dopo una rottura del tendine d’Achille?",
+                content: [
+                    {
+                        text: "Una volta che sei supportato con uno stivale adatto, con il piede mantenuto in posizione sulle punte, puoi (e dovresti) camminare. Le stampelle servono solo per l’equilibrio. Una scarpa con un tacco generoso sull’altro piede aiuta ad allinearti. Camminare sulla gamba ferita, nello stivale, è benefico per la guarigione. L’azione del camminare aiuta le estremità del tendine a unirsi in modo efficiente e forte. Questa deambulazione precoce ha portato a meno re- rotture rispetto ai protocolli precedenti, che richiedevano mesi di gesso e saltelli su una gamba con le stampelle.",
+                    },
+                ],
+            },
+            {
+                id: "q5",
+                title: "Come evitare una nuova rottura",
+                content: [
+                    {
+                        text: "Indossa lo stivale come indicato per tutte le 10 settimane. Non prendere scorciatoie. La tua guarigione è come il gioco Scale e Serpenti – ogni settimana ti porta più vicino alla fine. Ma un piccolo errore è come finire sul grande serpente che ti riporta all’inizio, con una nuova rottura. Se lo togli per lavarti, siediti prima; mantieni la postura sulle punte; non piegare la caviglia verso l’alto per raggiungere le dita dei piedi. Se non sei sufficientemente flessibile, chiedi aiuto. Non dare per scontato che andrà tutto bene saltellando sotto la doccia. Un piccolo scivolone può essere disastroso.",
+                    },
+                ],
+            },
+        ],
+    },
+};
+---
+
+<FAQsSection content={content[lang]} />

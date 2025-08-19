@@ -1,0 +1,553 @@
+---
+import FAQsSection, {
+    type ContentWithLinks,
+} from "../../components/FAQsSection.astro";
+import type { Lang } from "../../config/languages";
+
+const { lang } = Astro.props as { lang: Lang };
+
+const content: Record<Lang, ContentWithLinks> = {
+    en: {
+        title: "Find your answer:",
+        answers: [
+            {
+                title: "Is my Achilles ruptured? Symptoms checklist",
+                content: [
+                    {
+                        text: "If you get sudden sharp pain in the back of the heel, sometimes with an audible snapping sound, then you may have torn the Achilles tendon. For what happens next, see ",
+                    },
+                    {
+                        text: "what happens after an Achilles rupture",
+                        href: "/FAQs/what-happens-if-my-achilles-is-ruptured",
+                    },
+                    {
+                        text: ". You should assume that is the case until you are sure it is a less serious injury. You may be tempted think you have just sprained your ankle. There are several myths about what is and is not possible to do with your leg after you have suffered a tear to the Achilles tendon, and sometimes this leads to a delayed diagnosis. Even with a torn Achilles you can move the foot (other tendons help to do this) and you can still walk (albeit awkwardly). Sometimes people seek help after a delay, having initially hoped that the injury was something more minor and would recover quickly.",
+                    },
+                ],
+            },
+            {
+                title: "What happens when you tear your Achilles?",
+                content: [
+                    {
+                        text: "The Achilles tendon joins the calf muscles to the heel bone. It is important for standing up on tip toes and pushing off when you walk. If it tears, then the muscle is no longer connected to the heel and so the ankle movement is weak.",
+                    },
+                ],
+            },
+            {
+                title: "How to tell if your Achilles tendon is about to tear?",
+                content: [
+                    {
+                        text: "Most ruptures of the Achilles happen suddenly with no warning at all. The reasons for this are not well understood, but susceptibility to rupture may relate to poor blood supply to the tendon. Most patients with a rupture report that they have never had any previous Achilles trouble (such as tendinitis / tendinopathy).",
+                    },
+                ],
+            },
+            {
+                title: "How do you tear your Achilles?",
+                content: [
+                    {
+                        text: "Pushing off with your foot causes a strong and sudden contraction of the calf muscle which proves to be too much for the tendon. The tendon is made of millions of hairs that run like a horse's tail from the calf muscle to the heel bone. Why the tendon should suddenly fail is not well understood. Each fibre tears at a different point, so the tear is not clean but results in two ragged ends.",
+                    },
+                ],
+            },
+            {
+                title: "How do Achilles tears happen?",
+                content: [
+                    {
+                        text: "The type of injury can be any sudden push-off using the ankle. The classical stereotype is of a middle-aged person returning to sport. Pushing a heavy object or (particularly in older individuals) just an awkward stumble can be enough.",
+                    },
+                ],
+            },
+            {
+                title: "What else it could be?",
+                content: [
+                    {
+                        text: "A torn calf muscle (tennis leg) is a different injury where sudden pain develops, but in the middle of the calf rather than low down by the heel. Like a torn Achilles this can be suddenly very painful. A tearing or snapping feeling is common. This injury is much less severe than an Achilles rupture.",
+                    },
+                ],
+            },
+            {
+                title: "What does it feel like when you tear your Achilles tendon?",
+                content: [
+                    {
+                        text: "Usually, you experience a sudden pain in the back of your leg. You might hear a snap. Sometimes other people hear it too. Often the rupture happens during sport. You might think that an opponent has kicked you or your tennis partner hit you with their racquet.",
+                    },
+                ],
+            },
+            {
+                title: "How painful is a torn Achilles?",
+                content: [
+                    {
+                        text: "The pain is instantaneously quite severe but settles down quickly. The absence of lasting pain makes some people believe (hope) that nothing too serious has happened.",
+                    },
+                ],
+            },
+            {
+                title: "How do you know if you tore your Achilles?",
+                content: [
+                    {
+                        text: "Sudden pain in the back of the heel, often with an accompanying snapping sound. The pain subsides quickly. You can still move your toes and ankle. You can still stand and walk/limp. You cannot stand onto tip toes on just the injured leg.",
+                    },
+                ],
+            },
+            {
+                title: "Should I go to hospital?",
+                content: [
+                    {
+                        text: "If you are in doubt, seek medical advice and have the injury checked. Limping around hoping it will get better means a delay in diagnosis and a greater chance that surgical repair will be needed.",
+                    },
+                ],
+            },
+            {
+                title: "How bad is an Achilles tear?",
+                content: [
+                    {
+                        text: "Properly treated Achilles tendon ruptures heal well, but recovery is lengthy. You can expect to be in a boot or similar support for your leg for about 10 weeks. After this it takes months to regain the muscle strength. If you ask someone who has been through this they will say that they were limited in activities for at least 6 months and that full recovery takes about a year.",
+                    },
+                ],
+            },
+            {
+                title: "How common is an Achilles tendon rupture?",
+                content: [
+                    {
+                        text: "Between 0.01% and 0.02% of the population tear their Achilles every year. In the UK it is estimated that there are 11,000 confirmed cases per year. In the US the estimate is 59 000.",
+                    },
+                ],
+            },
+        ],
+    },
+    es: {
+        title: "Encuentra tu respuesta:",
+        answers: [
+            {
+                title: "¿Tengo el tendón de Aquiles roto? Lista de síntomas",
+                content: [
+                    {
+                        text: "Si siente un dolor agudo y repentino en la parte posterior del talón, a veces con un chasquido audible, es posible que se haya roto el tendón de Aquiles. Para saber qué sucede a continuación, consulte ",
+                    },
+                    {
+                        text: "qué sucede después de una rotura de Aquiles",
+                        href: "/es/FAQs/what-happens-if-my-achilles-is-ruptured",
+                    },
+                    {
+                        text: ". Debe asumir que ese es el caso hasta que esté seguro de que es una lesión menos grave. Puede tener la tentación de pensar que solo se ha torcido el tobillo. Existen varios mitos sobre lo que es y no es posible hacer con la pierna después de haber sufrido un desgarro en el tendón de Aquiles, y en ocasiones esto conduce a un diagnóstico tardío. Incluso con un tendón de Aquiles roto, puede mover el pie (otros tendones ayudan a hacerlo) y aún puede caminar (aunque con dificultad). A veces, las personas buscan ayuda con retraso, habiendo esperado inicialmente que la lesión fuera algo menor y que se recuperaría rápidamente.",
+                    },
+                ],
+            },
+            {
+                title: "¿Qué sucede cuando te rompes el tendón de Aquiles?",
+                content: [
+                    {
+                        text: "El tendón de Aquiles une los músculos de la pantorrilla con el hueso del talón. Es importante para ponerse de puntillas y para impulsarse al caminar. Si se rompe, el músculo ya no está conectado al talón y, por lo tanto, el movimiento del tobillo es débil.",
+                    },
+                ],
+            },
+            {
+                title: "¿Cómo saber si tu tendón de Aquiles está a punto de romperse?",
+                content: [
+                    {
+                        text: "La mayoría de las roturas de Aquiles ocurren de repente sin ninguna advertencia. Las razones de esto no se comprenden bien, pero la susceptibilidad a la rotura puede estar relacionada con un suministro de sangre deficiente al tendón. La mayoría de los pacientes con una rotura informan que nunca han tenido problemas previos en el tendón de Aquiles (como tendinitis / tendinopatía).",
+                    },
+                ],
+            },
+            {
+                title: "¿Cómo te rompes el tendón de Aquiles?",
+                content: [
+                    {
+                        text: "Empujar con el pie provoca una contracción fuerte y repentina del músculo de la pantorrilla que resulta ser demasiado para el tendón. El tendón está formado por millones de pelos que corren como la cola de un caballo desde el músculo de la pantorrilla hasta el hueso del talón. No se comprende bien por qué el tendón falla repentinamente. Cada fibra se rompe en un punto diferente, por lo que el desgarro no es limpio, sino que da como resultado dos extremos irregulares.",
+                    },
+                ],
+            },
+            {
+                title: "¿Cómo ocurren los desgarros de Aquiles?",
+                content: [
+                    {
+                        text: "El tipo de lesión puede ser cualquier impulso repentino con el tobillo. El estereotipo clásico es el de una persona de mediana edad que vuelve a practicar deporte. Empujar un objeto pesado o (especialmente en personas mayores) simplemente un tropiezo incómodo puede ser suficiente.",
+                    },
+                ],
+            },
+            {
+                title: "¿Qué más podría ser?",
+                content: [
+                    {
+                        text: "Un desgarro del músculo de la pantorrilla (pierna de tenista) es una lesión diferente en la que se desarrolla un dolor repentino, pero en el medio de la pantorrilla en lugar de en la parte baja del talón. Al igual que un tendón de Aquiles roto, esto puede ser repentinamente muy doloroso. Es común una sensación de desgarro o chasquido. Esta lesión es mucho menos grave que una rotura de Aquiles.",
+                    },
+                ],
+            },
+            {
+                title: "¿Qué se siente cuando te rompes el tendón de Aquiles?",
+                content: [
+                    {
+                        text: "Por lo general, experimenta un dolor repentino en la parte posterior de la pierna. Es posible que escuche un chasquido. A veces, otras personas también lo escuchan. A menudo, la rotura ocurre durante la práctica deportiva. Podría pensar que un oponente lo ha pateado o que su compañero de tenis lo ha golpeado con la raqueta.",
+                    },
+                ],
+            },
+            {
+                title: "¿Qué tan doloroso es un desgarro de Aquiles?",
+                content: [
+                    {
+                        text: "El dolor es instantáneamente bastante intenso pero se calma rápidamente. La ausencia de dolor duradero hace que algunas personas crean (esperen) que no ha sucedido nada demasiado grave.",
+                    },
+                ],
+            },
+            {
+                title: "¿Cómo sabes si te rompiste el tendón de Aquiles?",
+                content: [
+                    {
+                        text: "Dolor repentino en la parte posterior del talón, a menudo con un chasquido audible. El dolor desaparece rápidamente. Todavía puede mover los dedos de los pies y el tobillo. Todavía puede pararse y caminar / cojear. No puede pararse de puntillas solo con la pierna lesionada.",
+                    },
+                ],
+            },
+            {
+                title: "¿Debo ir al hospital?",
+                content: [
+                    {
+                        text: "Si tiene dudas, busque consejo médico y haga que le revisen la lesión. Andar cojeando con la esperanza de que mejore significa un retraso en el diagnóstico y una mayor probabilidad de que se necesite una reparación quirúrgica.",
+                    },
+                ],
+            },
+            {
+                title: "¿Qué tan grave es un desgarro de Aquiles?",
+                content: [
+                    {
+                        text: "Las roturas del tendón de Aquiles tratadas adecuadamente sanan bien, pero la recuperación es prolongada. Puede esperar estar en una bota o un soporte similar para la pierna durante aproximadamente 10 semanas. Después de esto, se necesitan meses para recuperar la fuerza muscular. Si le pregunta a alguien que ha pasado por esto, le dirá que estuvo limitado en sus actividades durante al menos 6 meses y que la recuperación total lleva aproximadamente un año.",
+                    },
+                ],
+            },
+            {
+                title: "¿Qué tan común es una rotura del tendón de Aquiles?",
+                content: [
+                    {
+                        text: "Entre el 0.01% y el 0.02% de la población se rompe el tendón de Aquiles cada año. En el Reino Unido se estima que hay 11.000 casos confirmados por año. En los EE. UU. la estimación es de 59.000.",
+                    },
+                ],
+            },
+        ],
+    },
+    fr: {
+        title: "Trouvez votre réponse :",
+        answers: [
+            {
+                title: "Mon tendon d'Achille est-il rompu ? Liste de contrôle des symptômes",
+                content: [
+                    {
+                        text: "Si vous ressentez une douleur vive et soudaine à l'arrière du talon, parfois accompagnée d'un claquement audible, vous vous êtes peut-être déchiré le tendon d'Achille. Pour savoir ce qui se passe ensuite, consultez ",
+                    },
+                    {
+                        text: "ce qui se passe après une rupture d'Achille",
+                        href: "/fr/FAQs/what-happens-if-my-achilles-is-ruptured",
+                    },
+                    {
+                        text: ". Vous devez supposer que c'est le cas jusqu'à ce que vous soyez sûr qu'il s'agit d'une blessure moins grave. Vous pourriez être tenté de penser que vous vous êtes simplement foulé la cheville. Il existe plusieurs mythes sur ce qu'il est possible ou non de faire avec sa jambe après une déchirure du tendon d'Achille, ce qui entraîne parfois un diagnostic tardif. Même avec un tendon d'Achille déchiré, vous pouvez bouger le pied (d'autres tendons aident à le faire) et vous pouvez toujours marcher (bien que maladroitement). Parfois, les gens demandent de l'aide avec un certain retard, ayant d'abord espéré que la blessure était quelque chose de mineur et qu'elle guérirait rapidement.",
+                    },
+                ],
+            },
+            {
+                title: "Que se passe-t-il lorsque vous vous déchirez le tendon d'Achille ?",
+                content: [
+                    {
+                        text: "Le tendon d'Achille relie les muscles du mollet à l'os du talon. Il est important pour se tenir sur la pointe des pieds et pour pousser lorsque vous marchez. S'il se déchire, le muscle n'est plus connecté au talon et le mouvement de la cheville est donc faible.",
+                    },
+                ],
+            },
+            {
+                title: "Comment savoir si votre tendon d'Achille est sur le point de se déchirer ?",
+                content: [
+                    {
+                        text: "La plupart des ruptures d'Achille se produisent soudainement sans aucun avertissement. Les raisons de ce phénomène ne sont pas bien comprises, mais la prédisposition à la rupture peut être liée à une mauvaise irrigation sanguine du tendon. La plupart des patients ayant subi une rupture déclarent n'avoir jamais eu de problèmes d'Achille auparavant (comme une tendinite / tendinopathie).",
+                    },
+                ],
+            },
+            {
+                title: "Comment se déchire-t-on le tendon d'Achille ?",
+                content: [
+                    {
+                        text: "Pousser sur votre pied provoque une contraction forte et soudaine du muscle du mollet qui s'avère trop importante pour le tendon. Le tendon est composé de millions de poils qui vont comme une queue de cheval du muscle du mollet à l'os du talon. On ne comprend pas bien pourquoi le tendon se rompt soudainement. Chaque fibre se déchire à un point différent, de sorte que la déchirure n'est pas nette mais se traduit par deux extrémités déchiquetées.",
+                    },
+                ],
+            },
+            {
+                title: "Comment les déchirures d'Achille se produisent-elles ?",
+                content: [
+                    {
+                        text: "Le type de blessure peut être n'importe quelle poussée soudaine utilisant la cheville. Le stéréotype classique est celui d'une personne d'âge mûr qui reprend le sport. Pousser un objet lourd ou (en particulier chez les personnes âgées) une simple chute maladroite peut suffire.",
+                    },
+                ],
+            },
+            {
+                title: "Qu'est-ce que ça pourrait être d'autre ?",
+                content: [
+                    {
+                        text: "Une déchirure du muscle du mollet (tennis leg) est une blessure différente où une douleur soudaine se développe, mais au milieu du mollet plutôt qu'en bas près du talon. Comme une déchirure du tendon d'Achille, cela peut être soudainement très douloureux. Une sensation de déchirure ou de claquement est courante. Cette blessure est beaucoup moins grave qu'une rupture d'Achille.",
+                    },
+                ],
+            },
+            {
+                title: "Quelle est la sensation lorsqu'on se déchire le tendon d'Achille ?",
+                content: [
+                    {
+                        text: "Habituellement, vous ressentez une douleur soudaine à l'arrière de votre jambe. Vous pourriez entendre un claquement. Parfois, d'autres personnes l'entendent aussi. Souvent, la rupture se produit pendant le sport. Vous pourriez penser qu'un adversaire vous a donné un coup de pied ou que votre partenaire de tennis vous a frappé avec sa raquette.",
+                    },
+                ],
+            },
+            {
+                title: "À quel point une déchirure d'Achille est-elle douloureuse ?",
+                content: [
+                    {
+                        text: "La douleur est instantanément assez intense mais s'atténue rapidement. L'absence de douleur durable fait croire (espérer) à certaines personnes que rien de trop grave ne s'est produit.",
+                    },
+                ],
+            },
+            {
+                title: "Comment savoir si vous vous êtes déchiré le tendon d'Achille ?",
+                content: [
+                    {
+                        text: "Douleur soudaine à l'arrière du talon, souvent accompagnée d'un claquement. La douleur disparaît rapidement. Vous pouvez toujours bouger vos orteils et votre cheville. Vous pouvez toujours vous tenir debout et marcher/boiter. Vous ne pouvez pas vous tenir sur la pointe des pieds uniquement sur la jambe blessée.",
+                    },
+                ],
+            },
+            {
+                title: "Dois-je aller à l'hôpital ?",
+                content: [
+                    {
+                        text: "En cas de doute, consultez un médecin et faites examiner la blessure. Boiter en espérant que ça s'améliore signifie un retard de diagnostic et une plus grande chance qu'une réparation chirurgicale soit nécessaire.",
+                    },
+                ],
+            },
+            {
+                title: "Quelle est la gravité d'une déchirure d'Achille ?",
+                content: [
+                    {
+                        text: "Les ruptures du tendon d'Achille correctement traitées guérissent bien, mais la récupération est longue. Vous pouvez vous attendre à porter une botte ou un support similaire pour votre jambe pendant environ 10 semaines. Après cela, il faut des mois pour retrouver la force musculaire. Si vous demandez à quelqu'un qui a vécu cela, il vous dira qu'il a été limité dans ses activités pendant au moins 6 mois et que la récupération complète prend environ un an.",
+                    },
+                ],
+            },
+            {
+                title: "Quelle est la fréquence d'une rupture du tendon d'Achille ?",
+                content: [
+                    {
+                        text: "Entre 0,01 % et 0,02 % de la population se déchire le tendon d'Achille chaque année. Au Royaume-Uni, on estime qu'il y a 11 000 cas confirmés par an. Aux États-Unis, l'estimation est de 59 000.",
+                    },
+                ],
+            },
+        ],
+    },
+    de: {
+        title: "Finden Sie Ihre Antwort:",
+        answers: [
+            {
+                title: "Ist meine Achillessehne gerissen? Symptom-Checkliste",
+                content: [
+                    {
+                        text: "Wenn Sie einen plötzlichen, stechenden Schmerz an der Ferse verspüren, manchmal mit einem hörbaren Knallgeräusch, haben Sie sich möglicherweise die Achillessehne gerissen. Was als Nächstes passiert, erfahren Sie unter ",
+                    },
+                    {
+                        text: "Was passiert nach einem Achillessehnenriss",
+                        href: "/de/FAQs/what-happens-if-my-achilles-is-ruptured",
+                    },
+                    {
+                        text: ". Sie sollten davon ausgehen, dass dies der Fall ist, bis Sie sicher sind, dass es sich um eine weniger schwere Verletzung handelt. Sie könnten versucht sein zu denken, Sie hätten sich nur den Knöchel verstaucht. Es gibt mehrere Mythen darüber, was man mit dem Bein nach einem Riss der Achillessehne tun kann und was nicht, und dies führt manchmal zu einer verspäteten Diagnose. Selbst mit einer gerissenen Achillessehne können Sie den Fuß bewegen (andere Sehnen helfen dabei) und Sie können immer noch gehen (wenn auch umständlich). Manchmal suchen Menschen erst mit Verzögerung Hilfe, nachdem sie anfangs gehofft hatten, die Verletzung sei etwas Geringfügigeres und würde schnell heilen.",
+                    },
+                ],
+            },
+            {
+                title: "Was passiert, wenn man sich die Achillessehne reißt?",
+                content: [
+                    {
+                        text: "Die Achillessehne verbindet die Wadenmuskulatur mit dem Fersenbein. Sie ist wichtig, um auf den Zehenspitzen zu stehen und sich beim Gehen abzustoßen. Wenn sie reißt, ist der Muskel nicht mehr mit der Ferse verbunden und die Knöchelbewegung ist schwach.",
+                    },
+                ],
+            },
+            {
+                title: "Woran erkennt man, dass die Achillessehne kurz vor dem Reißen steht?",
+                content: [
+                    {
+                        text: "Die meisten Achillessehnenrisse treten plötzlich und ohne Vorwarnung auf. Die Gründe dafür sind nicht gut verstanden, aber die Anfälligkeit für einen Riss kann mit einer schlechten Blutversorgung der Sehne zusammenhängen. Die meisten Patienten mit einem Riss berichten, dass sie noch nie zuvor Probleme mit der Achillessehne hatten (wie Tendinitis / Tendinopathie).",
+                    },
+                ],
+            },
+            {
+                title: "Wie reißt man sich die Achillessehne?",
+                content: [
+                    {
+                        text: "Das Abstoßen mit dem Fuß verursacht eine starke und plötzliche Kontraktion des Wadenmuskels, die sich als zu viel für die Sehne erweist. Die Sehne besteht aus Millionen von Haaren, die wie ein Pferdeschwanz vom Wadenmuskel zum Fersenbein verlaufen. Warum die Sehne plötzlich versagt, ist nicht gut verstanden. Jede Faser reißt an einer anderen Stelle, so dass der Riss nicht sauber ist, sondern zu zwei ausgefransten Enden führt.",
+                    },
+                ],
+            },
+            {
+                title: "Wie kommt es zu Achillessehnenrissen?",
+                content: [
+                    {
+                        text: "Die Art der Verletzung kann jeder plötzliche Abstoß mit dem Knöchel sein. Das klassische Stereotyp ist eine Person mittleren Alters, die wieder mit dem Sport beginnt. Das Schieben eines schweren Gegenstandes oder (insbesondere bei älteren Menschen) nur ein ungeschicktes Stolpern kann ausreichen.",
+                    },
+                ],
+            },
+            {
+                title: "Was könnte es sonst noch sein?",
+                content: [
+                    {
+                        text: "Ein gerissener Wadenmuskel (Tennisbein) ist eine andere Verletzung, bei der plötzliche Schmerzen auftreten, aber in der Mitte der Wade und nicht unten an der Ferse. Wie eine gerissene Achillessehne kann dies plötzlich sehr schmerzhaft sein. Ein reißendes oder knallendes Gefühl ist üblich. Diese Verletzung ist viel weniger schwerwiegend als ein Achillessehnenriss.",
+                    },
+                ],
+            },
+            {
+                title: "Wie fühlt es sich an, wenn man sich die Achillessehne reißt?",
+                content: [
+                    {
+                        text: "Normalerweise verspüren Sie einen plötzlichen Schmerz im hinteren Teil Ihres Beins. Sie könnten einen Knall hören. Manchmal hören ihn auch andere Leute. Oft passiert der Riss beim Sport. Sie könnten denken, dass ein Gegner Sie getreten hat oder Ihr Tennispartner Sie mit seinem Schläger geschlagen hat.",
+                    },
+                ],
+            },
+            {
+                title: "Wie schmerzhaft ist ein gerissener Achilles?",
+                content: [
+                    {
+                        text: "Der Schmerz ist augenblicklich ziemlich stark, lässt aber schnell nach. Das Ausbleiben von anhaltenden Schmerzen lässt manche Leute glauben (hoffen), dass nichts allzu Ernstes passiert ist.",
+                    },
+                ],
+            },
+            {
+                title: "Woher wissen Sie, ob Sie sich die Achillessehne gerissen haben?",
+                content: [
+                    {
+                        text: "Plötzlicher Schmerz an der Ferse, oft begleitet von einem Knallgeräusch. Der Schmerz lässt schnell nach. Sie können Ihre Zehen und Ihren Knöchel noch bewegen. Sie können immer noch stehen und gehen/humpeln. Sie können nicht nur auf dem verletzten Bein auf den Zehenspitzen stehen.",
+                    },
+                ],
+            },
+            {
+                title: "Soll ich ins Krankenhaus gehen?",
+                content: [
+                    {
+                        text: "Wenn Sie im Zweifel sind, suchen Sie ärztlichen Rat und lassen Sie die Verletzung untersuchen. Humpelnd herumzulaufen in der Hoffnung, dass es besser wird, bedeutet eine Verzögerung der Diagnose und eine größere Wahrscheinlichkeit, dass eine operative Reparatur erforderlich wird.",
+                    },
+                ],
+            },
+            {
+                title: "Wie schlimm ist ein Achillessehnenriss?",
+                content: [
+                    {
+                        text: "Richtig behandelte Achillessehnenrisse heilen gut, aber die Genesung ist langwierig. Sie können davon ausgehen, dass Sie etwa 10 Wochen lang einen Stiefel oder eine ähnliche Stütze für Ihr Bein tragen müssen. Danach dauert es Monate, bis die Muskelkraft wiederhergestellt ist. Wenn Sie jemanden fragen, der dies durchgemacht hat, wird er sagen, dass er mindestens 6 Monate lang in seinen Aktivitäten eingeschränkt war und die vollständige Genesung etwa ein Jahr dauert.",
+                    },
+                ],
+            },
+            {
+                title: "Wie häufig ist ein Achillessehnenriss?",
+                content: [
+                    {
+                        text: "Zwischen 0,01 % und 0,02 % der Bevölkerung reißen sich jedes Jahr die Achillessehne. Im Vereinigten Königreich gibt es schätzungsweise 11.000 bestätigte Fälle pro Jahr. In den USA wird die Zahl auf 59.000 geschätzt.",
+                    },
+                ],
+            },
+        ],
+    },
+    it: {
+        title: "Trova la tua risposta:",
+        answers: [
+            {
+                title: "Mi sono rotto il tendine d'Achille? Lista di controllo dei sintomi",
+                content: [
+                    {
+                        text: "Se avverti un dolore acuto e improvviso nella parte posteriore del tallone, a volte con uno schiocco udibile, potresti esserti rotto il tendine d'Achille. Per sapere cosa succede dopo, vedi ",
+                    },
+                    {
+                        text: "cosa succede dopo una rottura del tendine d'Achille",
+                        href: "/it/FAQs/what-happens-if-my-achilles-is-ruptured",
+                    },
+                    {
+                        text: ". Dovresti presumere che sia così finché non sei sicuro che si tratti di un infortunio meno grave. Potresti essere tentato di pensare di esserti solo slogato una caviglia. Esistono diversi miti su cosa sia possibile e cosa non sia possibile fare con la gamba dopo aver subito una lesione al tendine d'Achille, e talvolta questo porta a una diagnosi tardiva. Anche con un tendine d'Achille rotto puoi muovere il piede (altri tendini aiutano a farlo) e puoi ancora camminare (anche se goffamente). A volte le persone cercano aiuto in ritardo, avendo inizialmente sperato che l'infortunio fosse qualcosa di minore e che si sarebbe ripreso rapidamente.",
+                    },
+                ],
+            },
+            {
+                title: "Cosa succede quando ti rompi il tendine d'Achille?",
+                content: [
+                    {
+                        text: "Il tendine d'Achille unisce i muscoli del polpaccio all'osso del tallone. È importante per stare in punta di piedi e per spingere quando si cammina. Se si rompe, il muscolo non è più collegato al tallone e quindi il movimento della caviglia è debole.",
+                    },
+                ],
+            },
+            {
+                title: "Come capire se il tendine d'Achille sta per rompersi?",
+                content: [
+                    {
+                        text: "La maggior parte delle rotture del tendine d'Achille avviene improvvisamente senza alcun preavviso. Le ragioni di ciò non sono ben comprese, ma la suscettibilità alla rottura può essere correlata a uno scarso afflusso di sangue al tendine. La maggior parte dei pazienti con una rottura riferisce di non aver mai avuto problemi precedenti al tendine d'Achille (come tendinite / tendinopatia).",
+                    },
+                ],
+            },
+            {
+                title: "Come ci si rompe il tendine d'Achille?",
+                content: [
+                    {
+                        text: "Spingere con il piede provoca una contrazione forte e improvvisa del muscolo del polpaccio che si rivela eccessiva per il tendine. Il tendine è composto da milioni di peli che corrono come la coda di un cavallo dal muscolo del polpaccio all'osso del tallone. Non è ben chiaro perché il tendine si rompa improvvisamente. Ogni fibra si rompe in un punto diverso, quindi la lesione non è netta ma si traduce in due estremità sfilacciate.",
+                    },
+                ],
+            },
+            {
+                title: "Come avvengono le lesioni del tendine d'Achille?",
+                content: [
+                    {
+                        text: "Il tipo di infortunio può essere una qualsiasi spinta improvvisa con la caviglia. Lo stereotipo classico è quello di una persona di mezza età che torna a fare sport. Spingere un oggetto pesante o (in particolare nelle persone anziane) anche solo un inciampo goffo può essere sufficiente.",
+                    },
+                ],
+            },
+            {
+                title: "Cos'altro potrebbe essere?",
+                content: [
+                    {
+                        text: "Uno strappo muscolare al polpaccio (gamba da tennista) è un infortunio diverso in cui si sviluppa un dolore improvviso, ma al centro del polpaccio anziché in basso vicino al tallone. Come una rottura del tendine d'Achille, questo può essere improvvisamente molto doloroso. È comune una sensazione di strappo o schiocco. Questo infortunio è molto meno grave di una rottura del tendine d'Achille.",
+                    },
+                ],
+            },
+            {
+                title: "Cosa si prova quando ci si rompe il tendine d'Achille?",
+                content: [
+                    {
+                        text: "Di solito, si avverte un dolore improvviso nella parte posteriore della gamba. Potresti sentire uno schiocco. A volte anche altre persone lo sentono. Spesso la rottura avviene durante lo sport. Potresti pensare che un avversario ti abbia dato un calcio o che il tuo partner di tennis ti abbia colpito con la racchetta.",
+                    },
+                ],
+            },
+            {
+                title: "Quanto è dolorosa una lesione del tendine d'Achille?",
+                content: [
+                    {
+                        text: "Il dolore è istantaneamente piuttosto forte ma si attenua rapidamente. L'assenza di dolore duraturo fa credere (sperare) ad alcune persone che non sia successo niente di troppo grave.",
+                    },
+                ],
+            },
+            {
+                title: "Come fai a sapere se ti sei rotto il tendine d'Achille?",
+                content: [
+                    {
+                        text: "Dolore improvviso nella parte posteriore del tallone, spesso accompagnato da uno schiocco udibile. Il dolore si attenua rapidamente. Puoi ancora muovere le dita dei piedi e la caviglia. Puoi ancora stare in piedi e camminare/zoppicare. Non puoi stare in punta di piedi solo sulla gamba infortunata.",
+                    },
+                ],
+            },
+            {
+                title: "Devo andare in ospedale?",
+                content: [
+                    {
+                        text: "In caso di dubbio, consultare un medico e far controllare l'infortunio. Zoppicare sperando che migliori significa un ritardo nella diagnosi e una maggiore probabilità che sia necessario un intervento chirurgico.",
+                    },
+                ],
+            },
+            {
+                title: "Quanto è grave una lesione del tendine d'Achille?",
+                content: [
+                    {
+                        text: "Le rotture del tendine d'Achille trattate correttamente guariscono bene, ma il recupero è lungo. Puoi aspettarti di indossare uno stivale o un supporto simile per la gamba per circa 10 settimane. Dopodiché ci vogliono mesi per recuperare la forza muscolare. Se chiedi a qualcuno che ci è passato, ti dirà che è stato limitato nelle attività per almeno 6 mesi e che il recupero completo richiede circa un anno.",
+                    },
+                ],
+            },
+            {
+                title: "Quanto è comune una rottura del tendine d'Achille?",
+                content: [
+                    {
+                        text: "Tra lo 0,01% e lo 0,02% della popolazione si rompe il tendine d'Achille ogni anno. Nel Regno Unito si stima che ci siano 11.000 casi confermati all'anno. Negli Stati Uniti la stima è di 59.000.",
+                    },
+                ],
+            },
+        ],
+    },
+};
+---
+
+<FAQsSection content={content[lang]} />

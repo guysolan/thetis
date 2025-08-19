@@ -38,7 +38,7 @@ const t = content[lang];
     class="top-0 z-[40] fixed flex bg-background m-auto my-auto px-2 lg:px-8 py-4 border-gray-300 border-b w-screen item-center"
 >
     <div class="hidden lg:flex justify-between items-center gap-x-6 w-full">
-        <Thetis />
+        <Thetis lang={lang} />
         <div class="flex justify-center items-center gap-x-4 ml-auto text-base">
             <DesktopNav client:load lang={lang} />
             <LanguageSwitcher />
@@ -46,7 +46,7 @@ const t = content[lang];
     </div>
 
     <div class="lg:hidden flex justify-between items-center w-full">
-        <Thetis />
+        <Thetis lang={lang} />
         <div class="flex gap-x-2">
             <a
                 class={buttonVariants({ variant: "default", size: "sm" })}

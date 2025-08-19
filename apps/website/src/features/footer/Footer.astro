@@ -21,76 +21,69 @@ const { lang = "en" } = Astro.props as Props;
 const localizedRoutes = getRoutesByLanguage(lang);
 
 // Filter routes by category
-const productLinks = localizedRoutes.filter((route) =>
-  productRoutes.some((pr) => pr.slug === route.slug),
-);
-const partnerLinks = localizedRoutes.filter((route) =>
-  partnerRoutes.some((pr) => pr.slug === route.slug),
-);
-const contactLinks = localizedRoutes.filter((route) =>
-  contactRoutes.some((cr) => cr.slug === route.slug),
-);
+const productLinks = localizedRoutes.filter((route) => {
+  // Find the base route that matches this translated route
+  const baseRoute = productRoutes.find(
+    (pr) =>
+      pr.slugTranslations?.[lang] === route.slug || pr.slug === route.slug,
+  );
+  return !!baseRoute;
+});
+
+const partnerLinks = localizedRoutes.filter((route) => {
+  // Find the base route that matches this translated route
+  const baseRoute = partnerRoutes.find(
+    (pr) =>
+      pr.slugTranslations?.[lang] === route.slug || pr.slug === route.slug,
+  );
+  return !!baseRoute;
+});
+
+const contactLinks = localizedRoutes.filter((route) => {
+  // Find the base route that matches this translated route
+  const baseRoute = contactRoutes.find(
+    (cr) =>
+      cr.slugTranslations?.[lang] === route.slug || cr.slug === route.slug,
+  );
+  return !!baseRoute;
+});
+
 const faqLinks = localizedRoutes.filter((route) =>
   route.slug.startsWith("FAQs/"),
 );
 
-const content = {
-  en: {
-    contact: "Contact",
-    products: "Products",
-    patientGuides: "Patient Guides",
-    professionals: "Professionals",
-    stayInTouch: "Stay in Touch",
-  },
-  de: {
-    contact: "Kontakt",
-    products: "Produkte",
-    patientGuides: "Patientenleitfäden",
-    professionals: "Fachkräfte",
-    stayInTouch: "In Kontakt bleiben",
-  },
-  fr: {
-    contact: "Contact",
-    products: "Produits",
-    patientGuides: "Guides du Patient",
-    professionals: "Professionnels",
-    stayInTouch: "Restez en Contact",
-  },
-  es: {
-    contact: "Contacto",
-    products: "Productos",
-    patientGuides: "Guías del Paciente",
-    professionals: "Profesionales",
-    stayInTouch: "Manténgase en Contacto",
-  },
-  it: {
-    contact: "Contatto",
-    products: "Prodotti",
-    patientGuides: "Guide del Paziente",
-    professionals: "Professionisti",
-    stayInTouch: "Rimani in Contatto",
-  },
+// Get section titles from routes.tsx content
+const getSectionTitle = (routes: any[], sectionSlug: string) => {
+  const route = routes.find((r) => r.slug === sectionSlug);
+  return route?.title?.[lang] || route?.title?.en || sectionSlug;
 };
-
-const t = content[lang];
 
 const footerLinks = {
   company: {
-    title: t.contact,
+    title: getSectionTitle(contactRoutes, "contact"),
     links: contactLinks,
   },
   products: {
-    title: t.products,
+    title: getSectionTitle(productRoutes, "achilles-rupture-splint"),
     links: productLinks,
   },
   patientGuides: {
-    title: t.patientGuides,
+    title: "Patient Guides", // This is a generic title, not from a specific route
     links: faqLinks,
   },
   professionals: {
-    title: t.professionals,
+    title: getSectionTitle(partnerRoutes, "professionals"),
     links: partnerLinks,
   },
+};
+
+// Get "Stay in Touch" title based on language
+const stayInTouchTitles = {
+  en: "Stay in Touch",
+  de: "In Kontakt bleiben",
+  fr: "Restez en Contact",
+  es: "Manténgase en Contacto",
+  it: "Rimani in Contatto",
 };
 
 const socials: Array<{
@@ -137,7 +130,7 @@ const socials: Array<{
         />
 
         <div class="space-y-4">
-          <h3 class="font-semibold text-lg">{t.stayInTouch}</h3>
+          <h3 class="font-semibold text-lg">{stayInTouchTitles[lang]}</h3>
           <FooterEmailCTA />
 
           <div class="flex flex-col items-center lg:items-start gap-y-4">

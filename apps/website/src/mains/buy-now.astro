@@ -1,0 +1,108 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { ClientRouter } from "astro:transitions";
+import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import BulkOrders from "../components/buy-button/BulkOrders";
+import type { Lang } from "@/config/languages.ts";
+import BuyNowHero from "../sections/buy-now/buy-now-hero.astro";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Achilles Tendon Rupture Splint",
+        description:
+            "Thetis Medical's Achilles rupture splint to make sleeping more pleasant and bearable. The brace straps to the leg to prevent further tendon injury.",
+    },
+    de: {
+        title: "Schiene für Achillessehnenruptur",
+        description:
+            "Die Thetis Medical Achillessehnenruptur-Schiene macht das Schlafen angenehmer und erträglicher. Die Schiene hält die Sehne am Bein und verhindert weitere Sehnenverletzungen.",
+    },
+    fr: {
+        title: "Attelle pour Rupture du Tendon d'Achille",
+        description:
+            "La Thetis Medical Attelle pour Rupture du Tendon d'Achille rend le sommeil plus agréable et supportable. L'attelle maintient la seine au pied et prévient les blessures supplémentaires.",
+    },
+    es: {
+        title: "Férula para Rotura del Tendón de Aquiles",
+        description:
+            "La Thetis Medical Férula para Rotura del Tendón de Aquiles hace que el sueño sea más agradable y soportable. La férula mantiene la seña en el pie y previene lesiones adicionales.",
+    },
+    it: {
+        title: "Tutore per Rottura del Tendine di Achille",
+        description:
+            "La Thetis Medical Tutore per Rottura del Tendine di Achille rende il sonno più piacevole e supportabile. Il tutore mantiene la sezione al piede e previene lesioni aggiuntive.",
+    },
+};
+
+const currentContent = content[lang];
+---
+
+<Fragment slot="head">
+    <NightSplintSchema />
+    <ClientRouter />
+</Fragment>
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    image="https://thetismedical.com/images/achilles_rupture_night_splint_bed_thetis_medical.jpg"
+    hideFooter={true}
+    lang={lang}
+>
+    <main class="mb-8">
+        <ColorGradient>
+            <BuyNowHero lang={lang} />
+            <BulkOrders lang={lang} />
+        </ColorGradient>
+    </main>
+</Layout>
+
+<script>
+    fetch("https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq")
+        .then((res) => res.json())
+        .then((response) => {
+            console.log("Country: ", response.country);
+            try {
+                // Check if on Splint Page
+                const shopify = document.getElementById(
+                    "shopify-buy-button-wrapper",
+                );
+                const amazon = document.getElementById(
+                    "amazon-buy-button-wrapper",
+                );
+
+                if (response.country === "United Kingdom") {
+                    amazon?.remove();
+                } else {
+                    shopify?.remove();
+                }
+            } catch (error) {
+                // console.log(error)
+            }
+        })
+        .catch((reason: any) => {
+            console.log(reason);
+            // console.log('Request failed');
+        });
+</script>
+
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out forwards;
+        opacity: 0;
+    }
+</style>

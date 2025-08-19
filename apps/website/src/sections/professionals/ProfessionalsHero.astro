@@ -1,0 +1,129 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Image from "astro/components/Image.astro";
+import AchillesDrawing from "@/assets/drawings/achilles-drawing.svg";
+import HighlightedWord from "@/components/HighlightedWord";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "For Healthcare Professionals",
+        description:
+            "Achilles Rupture carries a very long recovery - whether the patient is managed non-operatively or surgically. Thetis Medical Splints are designed to help patients, healthcare professionals and hospitals.",
+        orderButton: "Order for your Patients",
+        partnerButton: "Become a Partner",
+        orderLink: "/order-wholesale",
+        partnerLink: "/become-a-partner",
+    },
+    de: {
+        title: "Für Gesundheitsfachkräfte",
+        description:
+            "Ein Achillessehnenriss hat eine sehr lange Genesungszeit - unabhängig davon, ob der Patient konservativ oder operativ behandelt wird. Thetis Medical Schienen sind darauf ausgelegt, Patienten, Gesundheitsfachkräften und Krankenhäusern zu helfen.",
+        orderButton: "Für Ihre Patienten bestellen",
+        partnerButton: "Partner werden",
+        orderLink: "/de/order-wholesale",
+        partnerLink: "/de/become-a-partner",
+    },
+    fr: {
+        title: "Pour les Professionnels de Santé",
+        description:
+            "La rupture du tendon d'Achille nécessite une très longue récupération - que le patient soit traité de manière non chirurgicale ou chirurgicale. Les Attelles Thetis Medical sont conçues pour aider les patients, les professionnels de santé et les hôpitaux.",
+        orderButton: "Commander pour vos Patients",
+        partnerButton: "Devenir Partenaire",
+        orderLink: "/fr/order-wholesale",
+        partnerLink: "/fr/become-a-partner",
+    },
+    es: {
+        title: "Para Profesionales de la Salud",
+        description:
+            "La rotura del tendón de Aquiles conlleva una recuperación muy larga, ya sea que el paciente sea tratado de forma no quirúrgica o quirúrgica. Las Férulas Thetis Medical están diseñadas para ayudar a pacientes, profesionales de la salud y hospitales.",
+        orderButton: "Pedir para sus Pacientes",
+        partnerButton: "Convertirse en Socio",
+        orderLink: "/es/order-wholesale",
+        partnerLink: "/es/become-a-partner",
+    },
+    it: {
+        title: "Per Professionisti Sanitari",
+        description:
+            "La rottura del tendine di Achille comporta una guarigione molto lunga - sia che il paziente sia gestito in modo non chirurgico o chirurgico. Le Stecche Thetis Medical sono progettate per aiutare pazienti, professionisti sanitari e ospedali.",
+        orderButton: "Ordina per i tuoi Pazienti",
+        partnerButton: "Diventa Partner",
+        orderLink: "/it/order-wholesale",
+        partnerLink: "/it/become-a-partner",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<section class="mx-auto px-4 pt-16 max-w-7xl container">
+    <div class="flex lg:flex-row flex-col justify-between items-center gap-8">
+        <div class="flex flex-col gap-y-6 lg:pr-16 lg:w-7/12">
+            <h1
+                class="font-semibold text-neutral-950 dark:text-neutral-50 text-4xl md:text-6xl leading-[105%] leading-[105%] md:leading-[120%]"
+            >
+                {
+                    currentContent.title
+                        .split(" ")
+                        .map((word, index) =>
+                            word.toLowerCase() === "healthcare" ||
+                            word.toLowerCase() === "gesundheitsfachkräfte" ||
+                            word.toLowerCase() === "professionnels" ||
+                            word.toLowerCase() === "profesionales" ||
+                            word.toLowerCase() === "professionisti" ? (
+                                <HighlightedWord>{word}</HighlightedWord>
+                            ) : (
+                                word
+                            ),
+                        )
+                }
+            </h1>
+
+            <p
+                class="text-gray-800 dark:text-neutral-200 text-lg leading-relaxed"
+            >
+                {currentContent.description}
+            </p>
+
+            <!-- SMALL SCREENS ONLY -->
+            <div class="lg:hidden block relative">
+                <Image
+                    src={AchillesDrawing}
+                    alt="achilles-drawing"
+                    class="max-h-[min(50vh,_500px)]"
+                />
+            </div>
+
+            <div class="flex sm:flex-row flex-col gap-4">
+                <a
+                    href={currentContent.orderLink}
+                    class={cn(
+                        buttonVariants({ size: "lg", variant: "default" }),
+                    )}
+                >
+                    {currentContent.orderButton}
+                </a>
+                <a
+                    href={currentContent.partnerLink}
+                    class={cn(
+                        buttonVariants({ size: "lg", variant: "secondary" }),
+                    )}
+                >
+                    {currentContent.partnerButton}
+                </a>
+            </div>
+        </div>
+
+        <!-- Right column (image) - LARGE SCREENS ONLY -->
+        <div class="hidden lg:block lg:w-5/12">
+            <Image
+                src={AchillesDrawing}
+                alt="achilles-drawing"
+                class="max-h-[min(50vh,_500px)]"
+            />
+        </div>
+    </div>
+</section>

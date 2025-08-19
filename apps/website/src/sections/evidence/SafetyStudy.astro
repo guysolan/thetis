@@ -1,0 +1,253 @@
+---
+import type { Lang } from "@/config/languages.ts";
+
+export interface Props {
+    lang: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+
+const content = {
+    en: {
+        sectionTitle: "In Parallel with the Boot",
+        mainTitle: "Recovery Period Safety Assessment",
+        description:
+            "Examining the safety of the Thetis splint as a nighttime alternative to walking boots during the recovery period.",
+        imageAlt: "Patient wearing the Achilles Tendon Rupture Splint",
+        patientRecorded: "patient recorded",
+        reportedInjuries: "reported injuries",
+        safetyAnalysis: "Safety Statistical Analysis",
+        sampleSizeAdequacy: "Sample Size Adequacy",
+        statisticalPower: "Statistical Power",
+        confidenceLevel: "Confidence Level",
+        keyFinding: "Key Finding",
+        keyFindingText:
+            "With a 95% confidence interval, the risk of injury while using the Thetis splint is",
+        lessThan: "less than 0.1%",
+        keyFindingEnd:
+            ", making it as safe as traditional walking boots but with significantly better comfort during sleep.",
+    },
+    de: {
+        sectionTitle: "Parallel zum Stiefel",
+        mainTitle: "Sicherheitsbewertung der Genesungsphase",
+        description:
+            "Untersuchung der Sicherheit der Thetis-Schiene als nächtliche Alternative zu Gehstiefeln während der Genesungsphase.",
+        imageAlt: "Patient trägt die Achillessehnenruptur-Schiene",
+        patientRecorded: "Patienten erfasst",
+        reportedInjuries: "gemeldete Verletzungen",
+        safetyAnalysis: "Sicherheitsstatistische Analyse",
+        sampleSizeAdequacy: "Angemessenheit der Stichprobengröße",
+        statisticalPower: "Statistische Aussagekraft",
+        confidenceLevel: "Konfidenzniveau",
+        keyFinding: "Wichtigster Befund",
+        keyFindingText:
+            "Mit einem 95%-Konfidenzintervall liegt das Verletzungsrisiko bei der Verwendung der Thetis-Schiene bei",
+        lessThan: "weniger als 0,1%",
+        keyFindingEnd:
+            ", was sie genauso sicher macht wie traditionelle Gehstiefel, aber mit deutlich besserem Komfort während des Schlafens.",
+    },
+    fr: {
+        sectionTitle: "En Parallèle avec la Botte",
+        mainTitle: "Évaluation de la Sécurité de la Période de Récupération",
+        description:
+            "Examen de la sécurité de l'attelle Thetis comme alternative nocturne aux bottes de marche pendant la période de récupération.",
+        imageAlt: "Patient portant l'attelle de rupture du tendon d'Achille",
+        patientRecorded: "patients enregistrés",
+        reportedInjuries: "blessures signalées",
+        safetyAnalysis: "Analyse Statistique de Sécurité",
+        sampleSizeAdequacy: "Adéquation de la Taille d'Échantillon",
+        statisticalPower: "Puissance Statistique",
+        confidenceLevel: "Niveau de Confiance",
+        keyFinding: "Découverte Clé",
+        keyFindingText:
+            "Avec un intervalle de confiance de 95%, le risque de blessure lors de l'utilisation de l'attelle Thetis est",
+        lessThan: "inférieur à 0,1%",
+        keyFindingEnd:
+            ", la rendant aussi sûre que les bottes de marche traditionnelles mais avec un confort significativement meilleur pendant le sommeil.",
+    },
+    es: {
+        sectionTitle: "En Paralelo con la Bota",
+        mainTitle: "Evaluación de Seguridad del Período de Recuperación",
+        description:
+            "Examinando la seguridad de la férula Thetis como alternativa nocturna a las botas de caminar durante el período de recuperación.",
+        imageAlt: "Paciente usando la férula de ruptura del tendón de Aquiles",
+        patientRecorded: "pacientes registrados",
+        reportedInjuries: "lesiones reportadas",
+        safetyAnalysis: "Análisis Estadístico de Seguridad",
+        sampleSizeAdequacy: "Adecuación del Tamaño de Muestra",
+        statisticalPower: "Potencia Estadística",
+        confidenceLevel: "Nivel de Confianza",
+        keyFinding: "Hallazgo Clave",
+        keyFindingText:
+            "Con un intervalo de confianza del 95%, el riesgo de lesión al usar la férula Thetis es",
+        lessThan: "menos del 0,1%",
+        keyFindingEnd:
+            ", haciéndola tan segura como las botas de caminar tradicionales pero con un confort significativamente mejor durante el sueño.",
+    },
+    it: {
+        sectionTitle: "In Parallelo con lo Stivale",
+        mainTitle: "Valutazione della Sicurezza del Periodo di Recupero",
+        description:
+            "Esaminando la sicurezza del tutore Thetis come alternativa notturna agli stivali da passeggio durante il periodo di recupero.",
+        imageAlt:
+            "Paziente che indossa il tutore per rottura del tendine di Achille",
+        patientRecorded: "pazienti registrati",
+        reportedInjuries: "lesioni segnalate",
+        safetyAnalysis: "Analisi Statistica di Sicurezza",
+        sampleSizeAdequacy: "Adeguatezza della Dimensione del Campione",
+        statisticalPower: "Potenza Statistica",
+        confidenceLevel: "Livello di Confidenza",
+        keyFinding: "Risultato Chiave",
+        keyFindingText:
+            "Con un intervallo di confidenza del 95%, il rischio di lesione durante l'uso del tutore Thetis è",
+        lessThan: "inferiore allo 0,1%",
+        keyFindingEnd:
+            ", rendendolo sicuro come gli stivali da passeggio tradizionali ma con un comfort significativamente migliore durante il sonno.",
+    },
+};
+
+const currentContent = content[lang];
+---
+
+<section class="bg-gray-50 dark:bg-gray-800 mx-auto px-6 py-24 container">
+    <div class="mx-auto max-w-5xl">
+        <div class="mb-20 text-center">
+            <span
+                class="font-semibold text-primary text-sm uppercase tracking-wider"
+                >{currentContent.sectionTitle}</span
+            >
+            <h2
+                class="mt-2 font-semibold text-gray-900 dark:text-white text-3xl"
+            >
+                {currentContent.mainTitle}
+            </h2>
+            <p
+                class="mx-auto mt-6 max-w-3xl text-gray-600 dark:text-gray-300 text-lg"
+            >
+                {currentContent.description}
+            </p>
+        </div>
+
+        <div class="gap-16 grid grid-cols-1 lg:grid-cols-2">
+            <!-- Image side -->
+            <div class="flex flex-col justify-center">
+                <img
+                    src="/images/night_splint_bed_top_square.jpg"
+                    alt={currentContent.imageAlt}
+                    class="shadow-sm rounded-xl w-full"
+                />
+
+                <div class="gap-4 grid grid-cols-2 mt-4">
+                    <div
+                        class="bg-white dark:bg-gray-700 shadow-md hover:shadow-lg p-4 border-2 border-primary rounded-lg text-center hover:scale-105 transition-all duration-200 transform"
+                    >
+                        <p class="font-bold text-primary text-3xl">3,000+</p>
+                        <p
+                            class="mt-1 font-medium text-gray-700 dark:text-gray-300 text-sm"
+                        >
+                            {currentContent.patientRecorded}
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white dark:from-gray-700 shadow-md hover:shadow-lg p-4 border-2 border-primary rounded-lg text-center hover:scale-105 transition-all duration-200 transform"
+                    >
+                        <p class="font-bold text-primary text-3xl">Zero</p>
+                        <p
+                            class="mt-1 font-medium text-gray-700 dark:text-gray-300 text-sm"
+                        >
+                            {currentContent.reportedInjuries}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data side -->
+            <div class="bg-white dark:bg-gray-700 shadow-sm p-8 rounded-xl">
+                <h3
+                    class="mb-8 font-medium text-gray-900 dark:text-white text-xl"
+                >
+                    {currentContent.safetyAnalysis}
+                </h3>
+
+                <div class="space-y-8">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span
+                                class="font-medium text-gray-700 dark:text-gray-300 text-sm"
+                                >{currentContent.sampleSizeAdequacy}</span
+                            >
+                            <span class="font-medium text-primary text-sm"
+                                >99.9%</span
+                            >
+                        </div>
+                        <div
+                            class="bg-gray-100 dark:bg-gray-600 rounded-full h-2 overflow-hidden"
+                        >
+                            <div
+                                class="bg-primary rounded-full h-2"
+                                style="width: 99.9%"
+                            >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span
+                                class="font-medium text-gray-700 dark:text-gray-300 text-sm"
+                                >{currentContent.statisticalPower}</span
+                            >
+                            <span class="font-medium text-primary text-sm"
+                                >99.7%</span
+                            >
+                        </div>
+                        <div
+                            class="bg-gray-100 dark:bg-gray-600 rounded-full h-2 overflow-hidden"
+                        >
+                            <div
+                                class="bg-primary rounded-full h-2"
+                                style="width: 99.7%"
+                            >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span
+                                class="font-medium text-gray-700 dark:text-gray-300 text-sm"
+                                >{currentContent.confidenceLevel}</span
+                            >
+                            <span class="font-medium text-primary text-sm"
+                                >95%</span
+                            >
+                        </div>
+                        <div
+                            class="bg-gray-100 dark:bg-gray-600 rounded-full h-2 overflow-hidden"
+                        >
+                            <div
+                                class="bg-primary rounded-full h-2"
+                                style="width: 95%"
+                            >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="mt-8 pt-6 border-gray-100 dark:border-gray-600 border-t"
+                >
+                    <h4 class="mb-3 font-medium text-gray-900 dark:text-white">
+                        {currentContent.keyFinding}
+                    </h4>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        {currentContent.keyFindingText}
+                        <span class="font-semibold text-primary"
+                            >{currentContent.lessThan}</span
+                        >{currentContent.keyFindingEnd}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

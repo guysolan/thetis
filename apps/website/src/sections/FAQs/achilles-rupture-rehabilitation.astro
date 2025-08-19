@@ -17,7 +17,7 @@ import {
 } from "lucide-astro";
 
 interface Props {
-    lang: "en" | "de" | "fr" | "es";
+    lang: "en" | "de" | "fr" | "es" | "it";
 }
 
 const { lang = "en" } = Astro.props;
@@ -933,6 +933,233 @@ const content = {
             },
         },
     },
+    it: {
+        exercisePhases: [
+            {
+                time: "Settimane 0-2",
+                icon: "Timer",
+                title: "Fase di recupero precoce",
+                exercises: [
+                    {
+                        icon: "Heart",
+                        title: "Movimento delicato",
+                        items: [
+                            "Leggere compressioni del polpaccio da seduti",
+                            "Piccoli cerchi della caviglia (mantenere il piede puntato verso il basso)",
+                            "Concentrarsi sul mantenere la ferita pulita e asciutta",
+                        ],
+                    },
+                    {
+                        icon: "Activity",
+                        title: "Parte superiore del corpo e core",
+                        items: [
+                            "Esercizi per fianchi e ginocchia con bande di resistenza",
+                            "Esercizi di rafforzamento del core",
+                            "Allenamenti della parte superiore del corpo per mantenere la forma fisica",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Settimane 2-6",
+                icon: "Footprints",
+                title: "Fase di camminata",
+                exercises: [
+                    {
+                        icon: "ArrowRight",
+                        title: "Camminare con lo stivale",
+                        items: [
+                            "Iniziare a camminare con lo stivale con cunei del tallone",
+                            "Praticare la tecnica di camminata corretta",
+                            "Aumentare gradualmente la distanza di camminata",
+                        ],
+                    },
+                    {
+                        icon: "Move",
+                        title: "Primi esercizi",
+                        items: [
+                            "Movimenti delicati della caviglia (mantenere il ginocchio piegato)",
+                            "Leggere compressioni del polpaccio in posizioni diverse",
+                            "Bicicletta stazionaria quando la ferita è guarita",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Settimane 6-12",
+                icon: "Dumbbell",
+                title: "Costruzione della forza",
+                exercises: [
+                    {
+                        icon: "Weight",
+                        title: "Rafforzamento del polpaccio",
+                        items: [
+                            "Elevazioni del tallone con due gambe su un gradino",
+                            "Elevazioni del polpaccio da seduti con pesi leggeri",
+                            "Pratica di camminata con meno elevazione del tallone",
+                        ],
+                    },
+                    {
+                        icon: "Activity",
+                        title: "Movimento funzionale",
+                        items: [
+                            "Squat e affondi di base",
+                            "Esercizi in piscina per un movimento migliore",
+                            "Esercizi di equilibrio e stabilità",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Settimane 12-24",
+                icon: "Zap",
+                title: "Ritorno all'attività",
+                exercises: [
+                    {
+                        icon: "Target",
+                        title: "Forza avanzata",
+                        items: [
+                            "Elevazioni del tallone con una gamba",
+                            "Esercizi di salto e rimbalzo",
+                            "Movimenti specifici dello sport",
+                        ],
+                    },
+                    {
+                        icon: "CheckCircle",
+                        title: "Qualità del movimento",
+                        items: [
+                            "Concentrarsi su un movimento fluido e naturale",
+                            "Praticare abilità specifiche dello sport",
+                            "Ritorno graduale all'attività completa",
+                        ],
+                    },
+                ],
+            },
+            {
+                time: "Traguardi",
+                icon: "Trophy",
+                title: "Traguardi chiave del recupero",
+                exercises: [
+                    {
+                        icon: "Clock",
+                        title: "Obiettivi di forza",
+                        items: [
+                            "Settimana 8: Elevazioni del tallone con due gambe attraverso tutto il range",
+                            "Settimana 12: Elevazioni del tallone con una gamba",
+                            "Settimana 16: Pronto per attività dinamiche",
+                            "Settimana 24: Ritorno allo sport (richiede >90% di forza)",
+                        ],
+                    },
+                    {
+                        icon: "AlertCircle",
+                        title: "Note importanti",
+                        items: [
+                            "Seguire sempre il piano specifico del fisioterapista",
+                            "Fermarsi se si sente dolore acuto",
+                            "La timeline può variare in base alla guarigione individuale",
+                            "Concentrarsi sulla qualità del movimento piuttosto che sulla velocità del progresso",
+                        ],
+                    },
+                ],
+            },
+        ],
+        faq: {
+            title: "Trova la tua risposta:",
+            questions: [
+                {
+                    id: "q1",
+                    text: "Timeline di riabilitazione della rottura di Achille – cosa succede ogni settimana?",
+                },
+                { id: "q2", text: "Quando posso iniziare la fisioterapia?" },
+                {
+                    id: "q3",
+                    text: "Quando è sicuro mettere peso sul mio piede?",
+                },
+                {
+                    id: "q4",
+                    text: "Migliori esercizi a casa dopo una rottura di Achille",
+                },
+                { id: "q5", text: "Quando posso guidare di nuovo?" },
+                { id: "q6", text: "Come progredire dal camminare al correre?" },
+                {
+                    id: "q7",
+                    text: "Prodotti che rendono la riabilitazione più facile",
+                },
+                {
+                    id: "q8",
+                    text: "Consigli principali per evitare una nuova rottura",
+                },
+            ],
+            answers: {
+                q1: {
+                    title: "Timeline di riabilitazione della rottura di Achille – cosa succede ogni settimana?",
+                    content: [
+                        'Il recupero di solito segue una <a href="/FAQs/achilles-rupture-timeline" class="text-primary underline">roadmap settimana per settimana</a>:',
+                        {
+                            type: "list",
+                            items: [
+                                "<strong>Settimane 0-2:</strong> Stivale in posizione di punta (equino), carico parziale.",
+                                "<strong>Settimane 2-6:</strong> Riduzione graduale del cuneo del tallone, carico completo, iniziare isometrici delicati.",
+                                "<strong>Settimane 6-10:</strong> Transizione fuori dallo stivale, elevazioni del tallone con due gambe poi con una.",
+                                "<strong>Mesi 3-6:</strong> Esercizi di corsa e allenamento specifico dello sport.",
+                                "<strong>6+ mesi:</strong> Ritorno alla competizione una volta che la forza del polpaccio è ≥90% dell'altro lato.",
+                            ],
+                        },
+                    ],
+                },
+                q2: {
+                    title: "Quando posso iniziare la fisioterapia?",
+                    content: [
+                        "La maggior parte dei protocolli introduce <strong>fisioterapia guidata intorno alla settimana 2-3</strong> per un semplice range di movimento della caviglia e attivazione del polpaccio da seduti. Entro le settimane 6-10 progredirai verso bande di resistenza e elevazioni del tallone con carico.",
+                    ],
+                },
+                q3: {
+                    title: "Quando è sicuro mettere peso sul mio piede?",
+                    content: [
+                        "L'evidenza supporta il <strong>carico precoce protetto</strong> in uno stivale non appena il comfort lo permette – spesso entro i primi giorni. Questo promuove la guarigione del tendine e riduce la rigidità. Mantieni il piede puntato (non lasciare che la caviglia si pieghi verso l'alto) ogni volta che stai in piedi.",
+                    ],
+                },
+                q4: {
+                    title: "Migliori esercizi a casa dopo una rottura di Achille",
+                    content: [
+                        "Ricorda: Segui sempre il piano specifico del tuo fisioterapista e fermati se senti dolore acuto. La tua timeline potrebbe essere diversa in base ai consigli del tuo medico e a come stai guarendo.",
+                    ],
+                },
+                q5: {
+                    title: "Quando posso guidare di nuovo?",
+                    content: [
+                        "Per lesioni del lato <em>destro</em> la maggior parte dei chirurghi raccomanda di aspettare fino a quando puoi eseguire una simulazione di frenata di emergenza in scarpe da ginnastica – tipicamente dopo la settimana 8-10 una volta che sei fuori dallo stivale. Lesioni del lato sinistro in un'auto automatica possono tornare prima. Controlla prima con il tuo medico e assicuratore.",
+                    ],
+                },
+                q6: {
+                    title: "Come progredire dal camminare al correre?",
+                    content: [
+                        "Inizia con un <strong>programma jog-walk</strong>: 1 min jog / 1 min camminata x10 su una pista piatta quando puoi eseguire 25 elevazioni del tallone con una gamba senza dolore. Aumenta gradualmente gli intervalli di jog e introduci cambi di direzione.",
+                    ],
+                },
+                q7: {
+                    title: "Prodotti che rendono la riabilitazione più facile",
+                    content: [
+                        '• <a href="https://thetismedical.com/splint" target="_blank" rel="noopener">Stecca per rottura del tendine di Achille</a> – dormi comodamente senza rischiare una nuova rottura.<br />• <a href="https://achilles-rupture.com/recovery-equipment-guide" class="text-primary underline">Guida completa all\'equipaggiamento</a> confronta stivali, coperture impermeabili e altro.',
+                    ],
+                },
+                q8: {
+                    title: "Consigli principali per evitare una nuova rottura",
+                    content: [
+                        {
+                            type: "list",
+                            items: [
+                                "Indossa lo stivale o la stecca <em>ogni</em> notte per tutte le 10&nbsp;settimane.",
+                                "Rimuovi lo stivale solo quando sei seduto e non lasciare mai che la caviglia si pieghi verso l'alto.",
+                                "Usa le stampelle per l'equilibrio finché non puoi camminare senza zoppicare.",
+                                "Segui il piano di carico del tuo fisioterapista – la forza del polpaccio è tutto.",
+                            ],
+                        },
+                    ],
+                },
+            },
+        },
+    },
 };
 
 const t = content[lang];
@@ -959,24 +1186,33 @@ const exercisePhases = t.exercisePhases.map((phase) => ({
     </div>
     <div class="answers">
         {
-            Object.entries(t.faq.answers).map(([id, answer]) => (
-                <div id={id}>
-                    <h2>{answer.title}</h2>
-                    {answer.content.map((item) => {
-                        if (typeof item === "string") {
-                            return <p set:html={item} />;
-                        } else if (item.type === "list") {
-                            return (
-                                <ul class="flex flex-col gap-y-4 my-2">
-                                    {item.items.map((li) => (
-                                        <li class="!my-1 !py-0" set:html={li} />
-                                    ))}
-                                </ul>
-                            );
-                        }
-                    })}
-                </div>
-            ))
+            Object.entries(t.faq.answers).map(([id, answer]) => {
+                const typedAnswer = answer as {
+                    title: string;
+                    content: (string | { type: string; items: string[] })[];
+                };
+                return (
+                    <div id={id}>
+                        <h2>{typedAnswer.title}</h2>
+                        {typedAnswer.content.map((item) => {
+                            if (typeof item === "string") {
+                                return <p set:html={item} />;
+                            } else if (item.type === "list") {
+                                return (
+                                    <ul class="flex flex-col gap-y-4 my-2">
+                                        {item.items.map((li) => (
+                                            <li
+                                                class="!my-1 !py-0"
+                                                set:html={li}
+                                            />
+                                        ))}
+                                    </ul>
+                                );
+                            }
+                        })}
+                    </div>
+                );
+            })
         }
 
         <div id="q4"></div>

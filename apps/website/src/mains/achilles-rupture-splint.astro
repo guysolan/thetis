@@ -58,6 +58,7 @@ const currentContent = content[lang as keyof typeof content];
 
 <Fragment slot="head">
     <NightSplintSchema />
+    <slot name="head" />
 </Fragment>
 
 <Layout

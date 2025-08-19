@@ -1,16 +1,5 @@
 ---
-import FormLayout from "@/layouts/FormLayout.astro";
-import RequestAReturn from "@/components/contact/forms/RequestAReturn.tsx";
-
-// Get stage from URL parameters
-const url = new URL(Astro.request.url);
-const stageParam = url.searchParams.get("stage");
-const validStages = ["info", "reason", "details", "submit"];
-const initialStage = validStages.includes(stageParam || "")
-    ? stageParam
-    : "info";
+import RequestAReturnMain from "@/mains/request-a-return.astro";
 ---
 
-<FormLayout>
-    <RequestAReturn client:load initialStage={initialStage} />
-</FormLayout>
+<RequestAReturnMain lang="en" />

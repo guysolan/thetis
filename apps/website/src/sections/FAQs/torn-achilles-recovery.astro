@@ -1,0 +1,500 @@
+---
+import FAQsSection, {
+    type ContentWithLinks,
+} from "@/components/FAQsSection.astro";
+import type { Lang } from "@/config/languages";
+
+const { lang } = Astro.props as { lang: Lang };
+
+const content: Record<Lang, ContentWithLinks> = {
+    en: {
+        title: "Find your answer:",
+        answers: [
+            {
+                title: "Achilles walking cast vs boot – which is better?",
+                content: [
+                    {
+                        text: "The beauty of the boots is that they can be removed (for a wash or to scratch an itch). Check our ",
+                    },
+                    {
+                        text: "Achilles treatment options guide",
+                        href: "/FAQs/achilles-tear-treatment",
+                    },
+                    { text: " for more on choosing the right boot." },
+                    {
+                        text: "The danger of the boots is that they can be removed (at which point the Achilles is at risk of re-injury).",
+                    },
+                    { text: "So - boots are both good and bad!" },
+                    {
+                        text: "Boots are convenient and safe – as long as they are used properly and you don't cut corners. Misuse may lead to a re-rupture of the tendon, which usually requires an operation. Then you have to start the recovery all over again. This is extremely frustrating.",
+                    },
+                ],
+            },
+            {
+                title: "Which Achilles tendon rupture boot is best?",
+                content: [
+                    {
+                        text: "Boots come in two different designs. Both are shaped to hold your ankle in a tip-toes position. This brings the torn tendon ends together to allow healing.",
+                    },
+                    {
+                        text: "Wedges are used in some boots to lift the heel. As the weeks of recovery pass, the number of wedges (and so the height that the heel is lifted to) is gradually reduced.",
+                    },
+                    {
+                        text: "Hinges are fitted to other boots. The angle of the hinge is adjusted towards a flatter foot posture as recovery progresses.",
+                    },
+                    {
+                        text: "Nobody knows for certain whether one or other style is better for recovery. Both types of boot work very satisfactorily; as long as they fit well and are used properly.",
+                    },
+                ],
+            },
+            {
+                title: "How to sleep comfortably with an Achilles rupture boot?",
+                content: [
+                    {
+                        text: "Yes, you DO need to maintain a tip toe position at night. You must either use your boot or consider a Thetis Achilles Night Splint. If you take the boot or splint off, then the healing tendon is at high risk of re-injury.",
+                    },
+                    {
+                        text: "Sleeping in the hot and heavy boot is the most common complaint from patients recovering from an Achilles tendon rupture. The specially designed ",
+                    },
+                    {
+                        text: "Achilles Rupture Splint",
+                        href: "../night-splint",
+                    },
+                    { text: ", from Thetis Medical solves these problems." },
+                    {
+                        text: "Sleeping in the boot brings other problems. Since you are walking on it during the day, the bottom of the boot inevitably gets dirty. Some boots have a detachable sole, but this leaves sharp plastic edges. The Thetis Achilles Splint avoids this too. Another solution is to put the injured leg, inside the boot, into an old pillowcase. This protects the other leg from being scratched by the plastic and straps. It also keeps the bed clean.",
+                    },
+                ],
+            },
+            {
+                title: "How long for an Achilles tendon rupture to heal?",
+                content: [
+                    {
+                        text: "Whether the tendon is treated with surgery, or allowed to mend naturally in a boot, the healing time is long. It is usual to spend 10 weeks in a plaster cast or boot. After this, healing is sufficiently advanced to allow walking without the boot, and physiotherapy begins. However, the tendon is not at full strength even then. Re-rupture is still possible. Competitive sport is not advised until at least six months from injury.",
+                    },
+                ],
+            },
+            {
+                title: "Recovery time with and without surgery?",
+                content: [
+                    {
+                        text: "There is no difference. Surgery does not make the recovery from a torn Achilles tendon any quicker. The goal of surgery is just to ensure that the two ends of the torn tendon sit close together, so that natural healing can occur. The stitches are not strong enough to support body weight. Activity without the protective boot or cast cannot commence until the tendon has had sufficient time to heal.",
+                    },
+                ],
+            },
+            {
+                title: "Partial Achilles tear recovery",
+                content: [
+                    {
+                        text: "The Golden Rule is that there is NO SUCH THING as a partial tear of the Achilles tendon. Assume you have a complete rupture of the tendon until a specialist has assessed your injury. (A partial tear can in fact occur but is extremely rare).",
+                    },
+                ],
+            },
+            {
+                title: "Achilles tendon recovery/rehab exercises",
+                content: [
+                    {
+                        text: "Your physiotherapist will guide you through the stages of recovery. The goal is to build the calf muscle strength. Lots of heel lifts/tip toe exercises are required, before advancing to a return to sport program. All this takes at least six months. It is important to avoid stretching exercises even if the tendon feels tight. With time it will always gradually stretch a little.",
+                    },
+                ],
+            },
+        ],
+    },
+    de: {
+        title: "Finden Sie Ihre Antwort:",
+        answers: [
+            {
+                title: "Achillessehnen-Gehgips vs. Stiefel – was ist besser?",
+                content: [
+                    {
+                        text: "Das Schöne an den Stiefeln ist, dass sie entfernt werden können (zum Waschen oder um einen Juckreiz zu kratzen). Schauen Sie sich unseren ",
+                    },
+                    {
+                        text: "Achillessehnen-Behandlungsoptionen-Leitfaden",
+                        href: "/de/FAQs/achilles-tear-treatment",
+                    },
+                    {
+                        text: " für mehr Informationen zur Auswahl des richtigen Stiefels.",
+                    },
+                    {
+                        text: "Die Gefahr der Stiefel ist, dass sie entfernt werden können (wobei die Achillessehne einem Re-Injury-Risiko ausgesetzt ist).",
+                    },
+                    {
+                        text: "Also - Stiefel sind sowohl gut als auch schlecht!",
+                    },
+                    {
+                        text: "Stiefel sind bequem und sicher – solange sie ordnungsgemäß verwendet werden und Sie keine Ecken schneiden. Missbrauch kann zu einer erneuten Ruptur der Sehne führen, die normalerweise eine Operation erfordert. Dann müssen Sie die Genesung von vorne beginnen. Das ist extrem frustrierend.",
+                    },
+                ],
+            },
+            {
+                title: "Welcher Achillessehnenruptur-Stiefel ist am besten?",
+                content: [
+                    {
+                        text: "Stiefel gibt es in zwei verschiedenen Designs. Beide sind geformt, um Ihren Knöchel in einer Zehenspitzenposition zu halten. Dies bringt die gerissenen Sehnenenden zusammen, um die Heilung zu ermöglichen.",
+                    },
+                    {
+                        text: "Keile werden in einigen Stiefeln verwendet, um die Ferse zu heben. Mit fortschreitender Genesung wird die Anzahl der Keile (und damit die Höhe, auf die die Ferse angehoben wird) allmählich reduziert.",
+                    },
+                    {
+                        text: "Scharniere werden an anderen Stiefeln angebracht. Der Winkel des Scharniers wird mit fortschreitender Genesung auf eine flachere Fußhaltung eingestellt.",
+                    },
+                    {
+                        text: "Niemand weiß mit Sicherheit, ob ein oder der andere Stil besser für die Genesung ist. Beide Arten von Stiefeln funktionieren sehr zufriedenstellend; solange sie gut passen und ordnungsgemäß verwendet werden.",
+                    },
+                ],
+            },
+            {
+                title: "Wie schläft man bequem mit einem Achillessehnenruptur-Stiefel?",
+                content: [
+                    {
+                        text: "Ja, Sie MÜSSEN nachts eine Zehenspitzenposition beibehalten. Sie müssen entweder Ihren Stiefel verwenden oder eine Thetis-Achillessehnen-Nachtschiene in Betracht ziehen. Wenn Sie den Stiefel oder die Schiene abnehmen, ist die heilende Sehne einem hohen Risiko einer erneuten Verletzung ausgesetzt.",
+                    },
+                    {
+                        text: "Das Schlafen im heißen und schweren Stiefel ist die häufigste Beschwerde von Patienten, die sich von einer Achillessehnenruptur erholen. Die speziell entwickelte ",
+                    },
+                    {
+                        text: "Achillessehnenruptur-Schiene",
+                        href: "../night-splint",
+                    },
+                    { text: " von Thetis Medical löst diese Probleme." },
+                    {
+                        text: "Das Schlafen im Stiefel bringt andere Probleme mit sich. Da Sie tagsüber darauf gehen, wird die Unterseite des Stiefels unweigerlich schmutzig. Einige Stiefel haben eine abnehmbare Sohle, aber das hinterlässt scharfe Plastikkanten. Die Thetis-Achillessehnen-Schiene vermeidet auch das. Eine andere Lösung ist, das verletzte Bein, innerhalb des Stiefels, in einen alten Kissenbezug zu stecken. Dies schützt das andere Bein davor, von dem Plastik und den Gurten zerkratzt zu werden. Es hält auch das Bett sauber.",
+                    },
+                ],
+            },
+            {
+                title: "Wie lange dauert es, bis eine Achillessehnenruptur heilt?",
+                content: [
+                    {
+                        text: "Ob die Sehne operativ behandelt wird oder natürlich in einem Stiefel heilen darf, die Heilungszeit ist lang. Es ist üblich, 10 Wochen in einem Gipsverband oder Stiefel zu verbringen. Danach ist die Heilung ausreichend fortgeschritten, um das Gehen ohne Stiefel zu ermöglichen, und die Physiotherapie beginnt. Die Sehne ist jedoch auch dann noch nicht in voller Stärke. Eine erneute Ruptur ist immer noch möglich. Wettkampfsport wird erst mindestens sechs Monate nach der Verletzung empfohlen.",
+                    },
+                ],
+            },
+            {
+                title: "Genesungszeit mit und ohne Operation?",
+                content: [
+                    {
+                        text: "Es gibt keinen Unterschied. Eine Operation macht die Genesung von einer gerissenen Achillessehne nicht schneller. Das Ziel der Operation ist nur sicherzustellen, dass die beiden Enden der gerissenen Sehne eng beieinander sitzen, damit eine natürliche Heilung stattfinden kann. Die Stiche sind nicht stark genug, um das Körpergewicht zu tragen. Aktivität ohne den schützenden Stiefel oder Gips kann nicht beginnen, bis die Sehne ausreichend Zeit zur Heilung hatte.",
+                    },
+                ],
+            },
+            {
+                title: "Teilweise Achillessehnenruptur-Genesung",
+                content: [
+                    {
+                        text: "Die goldene Regel ist, dass es KEINE teilweise Ruptur der Achillessehne gibt. Gehen Sie davon aus, dass Sie eine vollständige Ruptur der Sehne haben, bis ein Spezialist Ihre Verletzung beurteilt hat. (Eine teilweise Ruptur kann tatsächlich auftreten, ist aber extrem selten).",
+                    },
+                ],
+            },
+            {
+                title: "Achillessehnen-Genesung/Reha-Übungen",
+                content: [
+                    {
+                        text: "Ihr Physiotherapeut wird Sie durch die Phasen der Genesung führen. Das Ziel ist es, die Wadenmuskelkraft aufzubauen. Viele Fersenhebungen/Zehenspitzenübungen sind erforderlich, bevor Sie zu einem Rückkehr-zum-Sport-Programm übergehen. All dies dauert mindestens sechs Monate. Es ist wichtig, Dehnungsübungen zu vermeiden, auch wenn die Sehne sich etwas eng anfühlt. Mit der Zeit wird sie sich immer allmählich ein wenig dehnen.",
+                    },
+                ],
+            },
+        ],
+    },
+    fr: {
+        title: "Trouvez votre réponse :",
+        answers: [
+            {
+                title: "Plâtre de marche d'Achille vs botte – lequel est meilleur ?",
+                content: [
+                    {
+                        text: "La beauté des bottes est qu'elles peuvent être retirées (pour un lavage ou pour gratter une démangeaison). Consultez notre ",
+                    },
+                    {
+                        text: "guide des options de traitement d'Achille",
+                        href: "/fr/FAQs/achilles-tear-treatment",
+                    },
+                    {
+                        text: " pour plus d'informations sur le choix de la bonne botte.",
+                    },
+                    {
+                        text: "Le danger des bottes est qu'elles peuvent être retirées (moment où l'Achille est à risque de nouvelle blessure).",
+                    },
+                    {
+                        text: "Donc - les bottes sont à la fois bonnes et mauvaises !",
+                    },
+                    {
+                        text: "Les bottes sont pratiques et sûres – tant qu'elles sont utilisées correctement et que vous ne prenez pas de raccourcis. Une mauvaise utilisation peut entraîner une nouvelle rupture du tendon, qui nécessite généralement une opération. Ensuite, vous devez recommencer la récupération depuis le début. C'est extrêmement frustrant.",
+                    },
+                ],
+            },
+            {
+                title: "Quelle botte de rupture du tendon d'Achille est la meilleure ?",
+                content: [
+                    {
+                        text: "Les bottes existent en deux designs différents. Les deux sont conçus pour maintenir votre cheville en position de pointe. Cela rapproche les extrémités du tendon déchiré pour permettre la guérison.",
+                    },
+                    {
+                        text: "Des cales sont utilisées dans certaines bottes pour soulever le talon. Au fur et à mesure que les semaines de récupération passent, le nombre de cales (et donc la hauteur à laquelle le talon est soulevé) est progressivement réduit.",
+                    },
+                    {
+                        text: "Des charnières sont installées sur d'autres bottes. L'angle de la charnière est ajusté vers une posture de pied plus plate à mesure que la récupération progresse.",
+                    },
+                    {
+                        text: "Personne ne sait avec certitude si un style ou l'autre est meilleur pour la récupération. Les deux types de bottes fonctionnent très bien ; tant qu'elles s'adaptent bien et sont utilisées correctement.",
+                    },
+                ],
+            },
+            {
+                title: "Comment dormir confortablement avec une botte de rupture d'Achille ?",
+                content: [
+                    {
+                        text: "Oui, vous DEVEZ maintenir une position de pointe la nuit. Vous devez soit utiliser votre botte, soit envisager une attelle de nuit d'Achille Thetis. Si vous retirez la botte ou l'attelle, le tendon en cours de guérison est à haut risque de nouvelle blessure.",
+                    },
+                    {
+                        text: "Dormir dans la botte chaude et lourde est la plainte la plus courante des patients se remettant d'une rupture du tendon d'Achille. La ",
+                    },
+                    {
+                        text: "Attelle de rupture d'Achille",
+                        href: "../night-splint",
+                    },
+                    {
+                        text: " spécialement conçue de Thetis Medical résout ces problèmes.",
+                    },
+                    {
+                        text: "Dormir dans la botte apporte d'autres problèmes. Comme vous marchez dessus pendant la journée, le fond de la botte devient inévitablement sale. Certaines bottes ont une semelle amovible, mais cela laisse des bords en plastique tranchants. L'attelle d'Achille Thetis évite aussi cela. Une autre solution est de mettre la jambe blessée, à l'intérieur de la botte, dans une vieille taie d'oreiller. Cela protège l'autre jambe d'être rayée par le plastique et les sangles. Cela garde aussi le lit propre.",
+                    },
+                ],
+            },
+            {
+                title: "Combien de temps faut-il pour qu'une rupture du tendon d'Achille guérisse ?",
+                content: [
+                    {
+                        text: "Que le tendon soit traité par chirurgie ou qu'il soit autorisé à guérir naturellement dans une botte, le temps de guérison est long. Il est habituel de passer 10 semaines dans un plâtre ou une botte. Après cela, la guérison est suffisamment avancée pour permettre la marche sans la botte, et la physiothérapie commence. Cependant, le tendon n'est pas encore à pleine force même alors. Une nouvelle rupture est toujours possible. Le sport de compétition n'est pas conseillé avant au moins six mois après la blessure.",
+                    },
+                ],
+            },
+            {
+                title: "Temps de récupération avec et sans chirurgie ?",
+                content: [
+                    {
+                        text: "Il n'y a pas de différence. La chirurgie ne rend pas la récupération d'un tendon d'Achille déchiré plus rapide. Le but de la chirurgie est simplement de s'assurer que les deux extrémités du tendon déchiré sont proches l'une de l'autre, afin qu'une guérison naturelle puisse se produire. Les points de suture ne sont pas assez forts pour supporter le poids du corps. L'activité sans la botte ou le plâtre protecteur ne peut pas commencer jusqu'à ce que le tendon ait eu suffisamment de temps pour guérir.",
+                    },
+                ],
+            },
+            {
+                title: "Récupération d'une déchirure partielle d'Achille",
+                content: [
+                    {
+                        text: "La règle d'or est qu'il n'y a PAS de déchirure partielle du tendon d'Achille. Supposez que vous ayez une rupture complète du tendon jusqu'à ce qu'un spécialiste ait évalué votre blessure. (Une déchirure partielle peut en fait se produire mais est extrêmement rare).",
+                    },
+                ],
+            },
+            {
+                title: "Exercices de récupération/rééducation du tendon d'Achille",
+                content: [
+                    {
+                        text: "Votre physiothérapeute vous guidera à travers les étapes de la récupération. L'objectif est de renforcer la force musculaire du mollet. Beaucoup d'exercices de soulèvement du talon/pointe sont nécessaires, avant de passer à un programme de retour au sport. Tout cela prend au moins six mois. Il est important d'éviter les exercices d'étirement même si le tendon se sent un peu serré. Avec le temps, il s'étirera toujours progressivement un peu.",
+                    },
+                ],
+            },
+        ],
+    },
+    es: {
+        title: "Encuentra tu respuesta:",
+        answers: [
+            {
+                title: "¿Yeso de caminata de Aquiles vs bota – cuál es mejor?",
+                content: [
+                    {
+                        text: "La belleza de las botas es que se pueden quitar (para lavar o rascar una picazón). Consulte nuestra ",
+                    },
+                    {
+                        text: "guía de opciones de tratamiento de Aquiles",
+                        href: "/es/FAQs/achilles-tear-treatment",
+                    },
+                    {
+                        text: " para más información sobre cómo elegir la bota correcta.",
+                    },
+                    {
+                        text: "El peligro de las botas es que se pueden quitar (momento en el que el Aquiles está en riesgo de nueva lesión).",
+                    },
+                    {
+                        text: "Entonces - ¡las botas son tanto buenas como malas!",
+                    },
+                    {
+                        text: "Las botas son convenientes y seguras – siempre que se usen correctamente y no tomen atajos. El mal uso puede llevar a una nueva ruptura del tendón, que generalmente requiere una operación. Luego tienes que comenzar la recuperación desde el principio. Esto es extremadamente frustrante.",
+                    },
+                ],
+            },
+            {
+                title: "¿Qué bota de ruptura del tendón de Aquiles es la mejor?",
+                content: [
+                    {
+                        text: "Las botas vienen en dos diseños diferentes. Ambos están formados para mantener su tobillo en una posición de puntillas. Esto une los extremos del tendón desgarrado para permitir la curación.",
+                    },
+                    {
+                        text: "Se usan cuñas en algunas botas para levantar el talón. A medida que pasan las semanas de recuperación, el número de cuñas (y por lo tanto la altura a la que se levanta el talón) se reduce gradualmente.",
+                    },
+                    {
+                        text: "Se instalan bisagras en otras botas. El ángulo de la bisagra se ajusta hacia una postura de pie más plana a medida que progresa la recuperación.",
+                    },
+                    {
+                        text: "Nadie sabe con certeza si un estilo u otro es mejor para la recuperación. Ambos tipos de botas funcionan muy satisfactoriamente; siempre que se ajusten bien y se usen correctamente.",
+                    },
+                ],
+            },
+            {
+                title: "¿Cómo dormir cómodamente con una bota de ruptura de Aquiles?",
+                content: [
+                    {
+                        text: "Sí, NECESITAS mantener una posición de puntillas por la noche. Debes usar tu bota o considerar una férula nocturna de Aquiles Thetis. Si te quitas la bota o la férula, el tendón en curación está en alto riesgo de nueva lesión.",
+                    },
+                    {
+                        text: "Dormir en la bota caliente y pesada es la queja más común de los pacientes que se recuperan de una ruptura del tendón de Aquiles. La ",
+                    },
+                    {
+                        text: "Férula de ruptura de Aquiles",
+                        href: "../night-splint",
+                    },
+                    {
+                        text: " especialmente diseñada de Thetis Medical resuelve estos problemas.",
+                    },
+                    {
+                        text: "Dormir en la bota trae otros problemas. Como caminas sobre ella durante el día, la parte inferior de la bota inevitablemente se ensucia. Algunas botas tienen una suela desmontable, pero esto deja bordes de plástico afilados. La férula de Aquiles Thetis también evita esto. Otra solución es poner la pierna lesionada, dentro de la bota, en una funda de almohada vieja. Esto protege la otra pierna de ser rayada por el plástico y las correas. También mantiene la cama limpia.",
+                    },
+                ],
+            },
+            {
+                title: "¿Cuánto tiempo tarda en curarse una ruptura del tendón de Aquiles?",
+                content: [
+                    {
+                        text: "Ya sea que el tendón sea tratado con cirugía o se le permita curar naturalmente en una bota, el tiempo de curación es largo. Es usual pasar 10 semanas en un yeso o bota. Después de esto, la curación está suficientemente avanzada para permitir caminar sin la bota, y comienza la fisioterapia. Sin embargo, el tendón no está en plena fuerza incluso entonces. La nueva ruptura sigue siendo posible. El deporte competitivo no se aconseja hasta al menos seis meses después de la lesión.",
+                    },
+                ],
+            },
+            {
+                title: "¿Tiempo de recuperación con y sin cirugía?",
+                content: [
+                    {
+                        text: "No hay diferencia. La cirugía no hace que la recuperación de un tendón de Aquiles desgarrado sea más rápida. El objetivo de la cirugía es simplemente asegurar que los dos extremos del tendón desgarrado estén juntos, para que pueda ocurrir la curación natural. Los puntos no son lo suficientemente fuertes para soportar el peso del cuerpo. La actividad sin la bota o yeso protector no puede comenzar hasta que el tendón haya tenido suficiente tiempo para curar.",
+                    },
+                ],
+            },
+            {
+                title: "Recuperación de desgarro parcial de Aquiles",
+                content: [
+                    {
+                        text: "La regla de oro es que NO EXISTE un desgarro parcial del tendón de Aquiles. Asume que tienes una ruptura completa del tendón hasta que un especialista haya evaluado tu lesión. (Un desgarro parcial puede ocurrir de hecho pero es extremadamente raro).",
+                    },
+                ],
+            },
+            {
+                title: "Ejercicios de recuperación/rehabilitación del tendón de Aquiles",
+                content: [
+                    {
+                        text: "Tu fisioterapeuta te guiará a través de las etapas de recuperación. El objetivo es desarrollar la fuerza muscular de la pantorrilla. Se requieren muchos ejercicios de elevación del talón/puntillas, antes de avanzar a un programa de retorno al deporte. Todo esto toma al menos seis meses. Es importante evitar ejercicios de estiramiento incluso si el tendón se siente un poco apretado. Con el tiempo siempre se estirará gradualmente un po'.",
+                    },
+                ],
+            },
+        ],
+    },
+    it: {
+        title: "Trova la tua risposta:",
+        answers: [
+            {
+                title: "Gesso da passeggio di Achille vs stivale – quale è migliore?",
+                content: [
+                    {
+                        text: "La bellezza degli stivali è che possono essere rimossi (per un lavaggio o per grattare un prurito). Controlla la nostra ",
+                    },
+                    {
+                        text: "guida alle opzioni di trattamento di Achille",
+                        href: "/it/FAQs/achilles-tear-treatment",
+                    },
+                    {
+                        text: " per maggiori informazioni sulla scelta dello stivale giusto.",
+                    },
+                    {
+                        text: "Il pericolo degli stivali è che possono essere rimossi (momento in cui l'Achille è a rischio di nuova lesione).",
+                    },
+                    {
+                        text: "Quindi - gli stivali sono sia buoni che cattivi!",
+                    },
+                    {
+                        text: "Gli stivali sono convenienti e sicuri – finché sono usati correttamente e non prendi scorciatoie. L'uso improprio può portare a una nuova rottura del tendine, che di solito richiede un'operazione. Poi devi ricominciare la ripresa dall'inizio. Questo è estremamente frustrante.",
+                    },
+                ],
+            },
+            {
+                title: "Quale stivale per rottura del tendine di Achille è il migliore?",
+                content: [
+                    {
+                        text: "Gli stivali vengono in due design diversi. Entrambi sono modellati per tenere la caviglia in una posizione di punta. Questo unisce le estremità del tendine strappato per permettere la guarigione.",
+                    },
+                    {
+                        text: "I cunei sono usati in alcuni stivali per sollevare il tallone. Con il passare delle settimane di recupero, il numero di cunei (e quindi l'altezza a cui il tallone è sollevato) è gradualmente ridotto.",
+                    },
+                    {
+                        text: "Le cerniere sono installate su altri stivali. L'angolo della cerniera è regolato verso una postura del piede più piatta man mano che il recupero progredisce.",
+                    },
+                    {
+                        text: "Nessuno sa con certezza se uno stile o l'altro sia migliore per il recupero. Entrambi i tipi di stivali funzionano molto soddisfacentemente; finché si adattano bene e sono usati correttamente.",
+                    },
+                ],
+            },
+            {
+                title: "Come dormire comodamente con uno stivale per rottura di Achille?",
+                content: [
+                    {
+                        text: "Sì, DEVI mantenere una posizione di punta di notte. Devi usare il tuo stivale o considerare una stecca notturna di Achille Thetis. Se togli lo stivale o la stecca, il tendine in guarigione è ad alto rischio di nuova lesione.",
+                    },
+                    {
+                        text: "Dormire nello stivale caldo e pesante è il reclamo più comune dei pazienti che si riprendono da una rottura del tendine di Achille. La ",
+                    },
+                    {
+                        text: "Stecca per rottura di Achille",
+                        href: "../night-splint",
+                    },
+                    {
+                        text: " appositamente progettata di Thetis Medical risolve questi problemi.",
+                    },
+                    {
+                        text: "Dormire nello stivale porta altri problemi. Dato che ci cammini sopra durante il giorno, il fondo dello stivale inevitabilmente si sporca. Alcuni stivali hanno una suola staccabile, ma questo lascia bordi di plastica taglienti. La stecca di Achille Thetis evita anche questo. Un'altra soluzione è mettere la gamba ferita, dentro lo stivale, in una vecchia federa. Questo protegge l'altra gamba dall'essere graffiata dalla plastica e dalle cinghie. Mantiene anche il letto pulito.",
+                    },
+                ],
+            },
+            {
+                title: "Quanto tempo ci vuole per guarire una rottura del tendine di Achille?",
+                content: [
+                    {
+                        text: "Che il tendine sia trattato con chirurgia o lasciato guarire naturalmente in uno stivale, il tempo di guarigione è lungo. È usuale passare 10 settimane in un gesso o stivale. Dopo questo, la guarigione è sufficientemente avanzata per permettere di camminare senza lo stivale, e la fisioterapia inizia. Tuttavia, il tendine non è ancora a piena forza anche allora. La nuova rottura è ancora possibile. Lo sport competitivo non è consigliato fino ad almeno sei mesi dopo la lesione.",
+                    },
+                ],
+            },
+            {
+                title: "Tempo di recupero con e senza chirurgia?",
+                content: [
+                    {
+                        text: "Non c'è differenza. La chirurgia non rende il recupero da un tendine di Achille strappato più veloce. L'obiettivo della chirurgia è semplicemente assicurarsi che le due estremità del tendine strappato siano vicine l'una all'altra, così che possa verificarsi la guarigione naturale. I punti non sono abbastanza forti per sostenere il peso del corpo. L'attività senza lo stivale o gesso protettivo non può iniziare finché il tendine non ha avuto tempo sufficiente per guarire.",
+                    },
+                ],
+            },
+            {
+                title: "Recupero da strappo parziale di Achille",
+                content: [
+                    {
+                        text: "La regola d'oro è che NON ESISTE uno strappo parziale del tendine di Achille. Assumi di avere una rottura completa del tendine finché uno specialista non ha valutato la tua lesione. (Uno strappo parziale può effettivamente verificarsi ma è estremamente raro).",
+                    },
+                ],
+            },
+            {
+                title: "Esercizi di recupero/riabilitazione del tendine di Achille",
+                content: [
+                    {
+                        text: "Il tuo fisioterapista ti guiderà attraverso le fasi del recupero. L'obiettivo è costruire la forza muscolare del polpaccio. Molti esercizi di sollevamento del tallone/punta sono richiesti, prima di avanzare a un programma di ritorno allo sport. Tutto questo richiede almeno sei mesi. È importante evitare esercizi di stretching anche se il tendine si sente un po' stretto. Con il tempo si allungherà sempre gradualmente un po'.",
+                    },
+                ],
+            },
+        ],
+    },
+};
+---
+
+<FAQsSection content={content[lang]} />

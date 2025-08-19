@@ -7,7 +7,12 @@
     "start": "astro dev --toolbar=false",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^5.3.0",
@@ -89,8 +94,10 @@
     "zod": "^4.0.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.0",
     "@tailwindcss/line-clamp": "^0.4.4",
     "prettier": "3.5.1",
-    "prettier-plugin-astro": "0.14.1"
+    "prettier-plugin-astro": "0.14.1",
+    "vitest": "^1.0.0"
   }
 }

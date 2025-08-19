@@ -1,227 +1,51 @@
 ---
-import FaqSchemaAccordion from "../../components/research/FaqSchemaAccordion.astro";
 import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
 import FAQsLayout from "../../layouts/FAQsLayout.astro";
+import IsMyAchillesRupturedSection from "@/sections/FAQs/is-my-achilles-ruptured.astro";
+import type { Lang } from "../../config/languages";
+import IsMyAchillesRupturedFaqsSection from "@/sections/FAQs/is-my-achilles-ruptured-faqs.astro";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Is My Achilles Ruptured?",
+        description:
+            "Check if you have an Achilles rupture with our symptom checklist.",
+    },
+    es: {
+        title: "¿Mi Aquiles está roto?",
+        description:
+            "Comprueba si tienes una ruptura del Aquiles con nuestra lista de síntomas.",
+    },
+    fr: {
+        title: "Est-ce que mon Achille est rompu ?",
+        description:
+            "Vérifiez si vous avez une rupture d'Achille avec notre liste de symptômes.",
+    },
+    de: {
+        title: "Ist mein Achilles verletzt?",
+        description:
+            "Überprüfen Sie, ob Sie einen Achillesriss haben, mit unserer Symptom-Checkliste.",
+    },
+    it: {
+        title: "Il mio Achille è rotto?",
+        description:
+            "Controlla se hai una rottura del tendine d'Achille con la nostra lista di sintomi.",
+    },
+};
+
+const currentContent = content[lang];
 ---
 
 <FAQsLayout
-    title="Is My Achilles Ruptured? Symptoms, Snap Sound & Pain Explained"
-    description="Learn the warning signs of an Achilles tendon rupture – sudden snap sound, sharp heel pain, walking difficulties – and discover when to seek urgent medical help."
+    title={currentContent.title}
+    description={currentContent.description}
+    lang={lang}
 >
-    <section id="faq-slide" class="faq slide">
-        <div class="questions">
-            <h2>Find your answer:</h2>
-            <a href="#q1">
-                <h3>Is my Achilles ruptured? Symptoms checklist</h3>
-            </a>
-            <a href="#q2">
-                <h3>What happens when you tear your Achilles?</h3>
-            </a>
-            <a href="#q3">
-                <h3>How to tell if your Achilles tendon is about to tear?</h3>
-            </a>
-            <a href="#q4">
-                <h3>How do you tear your Achilles?</h3>
-            </a>
-            <a href="#q5">
-                <h3>How do Achilles tears happen?</h3>
-            </a>
-            <a href="#q6">
-                <h3>What else it could be?</h3>
-            </a>
-            <a href="#q7">
-                <h3>
-                    What does it feel like when you tear your Achilles tendon?
-                </h3>
-            </a>
-            <a href="#q8">
-                <h3>How painful is a torn Achilles?</h3>
-            </a>
-            <a href="#q9">
-                <h3>How do you know if you tore your Achilles?</h3>
-            </a>
-            <a href="#q10">
-                <h3>Should I go to hospital?</h3>
-            </a>
-            <a href="#q11">
-                <h3>How bad is an Achilles tear?</h3>
-            </a>
-            <a href="#q12">
-                <h3>How common is an Achilles tendon rupture?</h3>
-            </a>
-        </div>
-        <div class="answers">
-            <div id="q1"></div>
-            <h2>Is my Achilles ruptured? Symptoms checklist</h2>
-            <p>
-                If you get sudden sharp pain in the back of the heel, sometimes
-                with an audible snapping sound, then you may have torn the
-                Achilles tendon. For what happens next, see <a
-                    href="/FAQs/what-happens-if-my-achilles-is-ruptured"
-                    class="text-primary underline"
-                    >what happens after an Achilles rupture</a
-                >. You should assume that is the case until you are sure it is a
-                less serious injury. You may be tempted think you have just
-                sprained your ankle. There are several myths about what is and
-                is not possible to do with your leg after you have suffered a
-                tear to the Achilles tendon, and sometimes this leads to a
-                delayed diagnosis. Even with a torn Achilles you can move the
-                foot (other tendons help to do this) and you can still walk
-                (albeit awkwardly). Sometimes people seek help after a delay,
-                having initially hoped that the injury was something more minor
-                and would recover quickly.
-            </p>
-            <div id="q2"></div>
-            <h2>What happens when you tear your Achilles?</h2>
-            <p>
-                The Achilles tendon joins the calf muscles to the heel bone. It
-                is important for standing up on tip toes and pushing off when
-                you walk. If it tears, then the muscle is no longer connected to
-                the heel and so the ankle movement is weak.
-            </p>
-            <div id="q3"></div>
+    <IsMyAchillesRupturedSection lang={lang} />
 
-            <h2>How to tell if your Achilles tendon is about to tear?</h2>
-            <p>
-                Most ruptures of the Achilles happen suddenly with no warning at
-                all. The reasons for this are not well understood, but
-                susceptibility to rupture may relate to poor blood supply to the
-                tendon. Most patients with a rupture report that they have never
-                had any previous Achilles trouble (such as tendinitis /
-                tendinopathy).
-            </p>
-            <div id="q4"></div>
+    <NightSplintAdvert lang={lang} />
 
-            <h2>How do you tear your Achilles?</h2>
-            <p>
-                Pushing off with your foot causes a strong and sudden
-                contraction of the calf muscle which proves to be too much for
-                the tendon. The tendon is made of millions of hairs that run
-                like a horse's tail from the calf muscle to the heel bone. Why
-                the tendon should suddenly fail is not well understood. Each
-                fibre tears at a different point, so the tear is not clean but
-                results in two ragged ends.
-            </p>
-            <div id="q5"></div>
-
-            <h2>How do Achilles tears happen?</h2>
-            <p>
-                The type of injury can be any sudden push-off using the ankle.
-                The classical stereotype is of a middle-aged person returning to
-                sport. Pushing a heavy object or (particularly in older
-                individuals) just an awkward stumble can be enough.
-            </p>
-            <div id="q6"></div>
-
-            <h2>What else it could be?</h2>
-            <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
-
-            <p>
-                A torn calf muscle (tennis leg) is a different injury where
-                sudden pain develops, but in the middle of the calf rather than
-                low down by the heel. Like a torn Achilles this can be suddenly
-                very painful. A tearing or snapping feeling is common. This
-                injury is much less severe than an Achilles rupture.
-            </p>
-            <div id="q7"></div>
-
-            <h2>What does it feel like when you tear your Achilles tendon?</h2>
-            <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
-
-            <p>
-                Usually, you experience a sudden pain in the back of your leg.
-                You might hear a snap. Sometimes other people hear it too. Often
-                the rupture happens during sport. You might think that an
-                opponent has kicked you or your tennis partner hit you with
-                their racquet.
-            </p>
-            <div id="q8"></div>
-
-            <h2>How painful is a torn Achilles?</h2>
-            <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
-
-            <p>
-                The pain is instantaneously quite severe but settles down
-                quickly. The absence of lasting pain makes some people believe
-                (hope) that nothing too serious has happened.
-            </p>
-            <div id="q9"></div>
-
-            <h2>How do you know if you tore your Achilles?</h2>
-            <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
-
-            <p>
-                Sudden pain in the back of the heel, often with an accompanying
-                snapping sound. The pain subsides quickly. You can still move
-                your toes and ankle. You can still stand and walk/limp. You
-                cannot stand onto tip toes on just the injured leg.
-            </p>
-            <div id="q10"></div>
-
-            <h2>Should I go to hospital?</h2>
-            <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
-
-            <p>
-                If you are in doubt, seek medical advice and have the injury
-                checked. Limping around hoping it will get better means a delay
-                in diagnosis and a greater chance that surgical repair will be
-                needed.
-            </p>
-            <div id="q11"></div>
-
-            <h2>How bad is an Achilles tear?</h2>
-            <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
-
-            <p>
-                Properly treated Achilles tendon ruptures heal well, but
-                recovery is lengthy. You can expect to be in a boot or similar
-                support for your leg for about 10 weeks. After this it takes
-                months to regain the muscle strength. If you ask someone who has
-                been through this they will say that they were limited in
-                activities for at least 6 months and that full recovery takes
-                about a year.
-            </p>
-            <div id="q12"></div>
-
-            <h2>How common is an Achilles tendon rupture?</h2>
-            <!-- <a class='bait' href='#top'><p>Included in the full guide, available by email.</p></a> -->
-            <p>
-                Between 0.01% and 0.02% of the population tear their Achilles
-                every year. In the UK it is estimated that there are 11,000
-                confirmed cases per year. In the US the estimate is 59 000.
-            </p>
-        </div>
-    </section>
-
-    <NightSplintAdvert />
-
-    <FaqSchemaAccordion
-        faqs={[
-            {
-                question: "Is my Achilles ruptured?",
-                answer: "If you get sudden sharp pain in the back of the heel, sometimes with an audible snapping sound, then you may have torn the Achilles tendon. You should assume that is the case until you are sure it is a less serious injury. Even with a torn Achilles you can move the foot and still walk (albeit awkwardly). Sometimes people delay seeking help, hoping the injury was something minor.",
-            },
-            {
-                question: "What happens when you tear your Achilles?",
-                answer: "The Achilles tendon joins the calf muscles to the heel bone. It is important for standing up on tip toes and pushing off when you walk. If it tears, then the muscle is no longer connected to the heel and so the ankle movement is weak.",
-            },
-            {
-                question: "How do Achilles tears happen?",
-                answer: "The type of injury can be any sudden push-off using the ankle. The classical stereotype is of a middle-aged person returning to sport. Pushing a heavy object or (particularly in older individuals) just an awkward stumble can be enough.",
-            },
-            {
-                question:
-                    "What does it feel like when you tear your Achilles tendon?",
-                answer: "Usually, you experience a sudden pain in the back of your leg. You might hear a snap. Sometimes other people hear it too. Often the rupture happens during sport. You might think that an opponent has kicked you or your tennis partner hit you with their racquet.",
-            },
-            {
-                question: "Should I go to hospital?",
-                answer: "If you are in doubt, seek medical advice and have the injury checked. Limping around hoping it will get better means a delay in diagnosis and a greater chance that surgical repair will be needed.",
-            },
-            {
-                question: "How bad is an Achilles tear?",
-                answer: "Properly treated Achilles tendon ruptures heal well, but recovery is lengthy. You can expect to be in a boot or similar support for your leg for about 10 weeks. After this it takes months to regain the muscle strength. Full recovery takes about a year, with most people being limited in activities for at least 6 months.",
-            },
-        ]}
-    />
+    <IsMyAchillesRupturedFaqsSection lang={lang} />
 </FAQsLayout>

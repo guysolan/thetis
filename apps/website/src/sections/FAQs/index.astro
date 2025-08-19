@@ -1,0 +1,1076 @@
+---
+import FAQSection from "@/components/research/FaqSection.astro";
+import type { Lang } from "../../config/languages";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const faqSections = {
+    en: [
+        {
+            title: "Achilles Rupture Timeline",
+            links: [
+                {
+                    href: "./FAQs/achilles-rupture-timeline",
+                    text: "Achilles Rupture Timeline",
+                },
+            ],
+            readMoreLink: "./FAQs/achilles-rupture-timeline",
+        },
+        {
+            title: "Is My Achilles Ruptured?",
+            links: [
+                {
+                    href: "./FAQs/is-my-achilles-ruptured#q1",
+                    text: "Is my Achilles ruptured?",
+                },
+                {
+                    href: "./FAQs/is-my-achilles-ruptured#q2",
+                    text: "What happens when you tear your Achilles?",
+                },
+            ],
+            readMoreLink: "./FAQs/is-my-achilles-ruptured",
+        },
+        {
+            title: "What Happens If My Achilles Is Ruptured?",
+            links: [
+                {
+                    href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q1",
+                    text: "What will happen in A&E after an Achilles rupture?",
+                },
+                {
+                    href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q2",
+                    text: "What will the specialist do?",
+                },
+                {
+                    href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q3",
+                    text: "How many check-ups?",
+                },
+                {
+                    href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q4",
+                    text: "When should I see a physio?",
+                },
+                {
+                    href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q5",
+                    text: "Should I take blood-thinners?",
+                },
+            ],
+            readMoreLink: "./FAQs/what-happens-if-my-achilles-is-ruptured",
+        },
+        {
+            title: "Achilles Tear Treatment",
+            links: [
+                {
+                    href: "./FAQs/achilles-tear-treatment#q1",
+                    text: "How to treat a torn Achilles tendon – surgery vs non-surgical?",
+                },
+                {
+                    href: "./FAQs/achilles-tear-treatment#q2",
+                    text: "How long can you wait for Achilles tendon surgery?",
+                },
+                {
+                    href: "./FAQs/achilles-tear-treatment#q3",
+                    text: "How long does Achilles tendon surgery take?",
+                },
+                {
+                    href: "./FAQs/achilles-tear-treatment#q4",
+                    text: "Recovery from Achilles Rupture Surgery",
+                },
+                {
+                    href: "./FAQs/achilles-tear-treatment#q5",
+                    text: "Pain after Achilles tendon rupture / surgery",
+                },
+                {
+                    href: "./FAQs/achilles-tear-treatment#q6",
+                    text: "Heel Pain",
+                },
+                {
+                    href: "./FAQs/achilles-tear-treatment#q7",
+                    text: "Calf Pain",
+                },
+                {
+                    href: "./FAQs/achilles-tear-treatment#q8",
+                    text: "Calf Spasm",
+                },
+                {
+                    href: "./FAQs/achilles-tear-treatment#q9",
+                    text: "Knee Pain",
+                },
+                {
+                    href: "./FAQs/achilles-tear-treatment#q10",
+                    text: "Nerve Pain",
+                },
+                {
+                    href: "./FAQs/achilles-tear-treatment#q11",
+                    text: "Scar healing post-surgery",
+                },
+            ],
+            readMoreLink: "./FAQs/achilles-tear-treatment",
+        },
+        {
+            title: "Torn Achilles Recovery",
+            links: [
+                {
+                    href: "./FAQs/torn-achilles-recovery#q1",
+                    text: "Achilles walking cast vs boot – which is better?",
+                },
+                {
+                    href: "./FAQs/torn-achilles-recovery#q2",
+                    text: "Which Achilles tendon rupture boot is best?",
+                },
+                {
+                    href: "./FAQs/torn-achilles-recovery#q3",
+                    text: "How to sleep comfortably with an Achilles rupture boot?",
+                },
+                {
+                    href: "./FAQs/torn-achilles-recovery#q4",
+                    text: "How long for an Achilles tendon rupture to heal?",
+                },
+                {
+                    href: "./FAQs/torn-achilles-recovery#q5",
+                    text: "Recovery time with and without surgery?",
+                },
+                {
+                    href: "./FAQs/torn-achilles-recovery#q6",
+                    text: "Partial Achilles tear recovery",
+                },
+                {
+                    href: "./FAQs/torn-achilles-recovery#q7",
+                    text: "Achilles tendon recovery/rehab exercises",
+                },
+            ],
+            readMoreLink: "./FAQs/torn-achilles-recovery",
+        },
+        {
+            title: "Achilles Rupture Rehabilitation",
+            links: [
+                {
+                    href: "./FAQs/achilles-rupture-rehabilitation#q1",
+                    text: "Achilles rehab timeline – what happens each week?",
+                },
+                {
+                    href: "./FAQs/achilles-rupture-rehabilitation#q2",
+                    text: "When can I start physiotherapy?",
+                },
+                {
+                    href: "./FAQs/achilles-rupture-rehabilitation#q3",
+                    text: "When is it safe to put weight on my foot?",
+                },
+                {
+                    href: "./FAQs/achilles-rupture-rehabilitation#q4",
+                    text: "Best home exercises after an Achilles rupture",
+                },
+                {
+                    href: "./FAQs/achilles-rupture-rehabilitation#q5",
+                    text: "When can I drive again?",
+                },
+                {
+                    href: "./FAQs/achilles-rupture-rehabilitation#q6",
+                    text: "How do I progress from walking to running?",
+                },
+                {
+                    href: "./FAQs/achilles-rupture-rehabilitation#q7",
+                    text: "Products that make rehab easier",
+                },
+                {
+                    href: "./FAQs/achilles-rupture-rehabilitation#q8",
+                    text: "Top tips to avoid re-rupture",
+                },
+            ],
+            readMoreLink: "./FAQs/achilles-rupture-rehabilitation",
+        },
+        {
+            title: "Life After Achilles Rupture",
+            links: [
+                {
+                    href: "./FAQs/life-after-achilles-rupture#q1",
+                    text: "Life after Achilles rupture",
+                },
+                {
+                    href: "./FAQs/life-after-achilles-rupture#q2",
+                    text: "When can I return to sports?",
+                },
+                {
+                    href: "./FAQs/life-after-achilles-rupture#q3",
+                    text: "When can I return to physical work?",
+                },
+                {
+                    href: "./FAQs/life-after-achilles-rupture#q4",
+                    text: "When can I walk after an Achilles rupture?",
+                },
+                {
+                    href: "./FAQs/life-after-achilles-rupture#q5",
+                    text: "How to avoid re-rupture",
+                },
+            ],
+            readMoreLink: "./FAQs/life-after-achilles-rupture",
+        },
+    ],
+    es: [
+        {
+            title: "Cronología de Ruptura de Aquiles",
+            links: [
+                {
+                    href: "./FAQs/cronologia-ruptura-aquiles",
+                    text: "Cronología de Ruptura de Aquiles",
+                },
+            ],
+            readMoreLink: "./FAQs/cronologia-ruptura-aquiles",
+        },
+        {
+            title: "¿Está Roto mi Aquiles?",
+            links: [
+                {
+                    href: "./FAQs/esta-roto-mi-aquiles#q1",
+                    text: "¿Está roto mi Aquiles?",
+                },
+                {
+                    href: "./FAQs/esta-roto-mi-aquiles#q2",
+                    text: "¿Qué pasa cuando te rompes el Aquiles?",
+                },
+            ],
+            readMoreLink: "./FAQs/esta-roto-mi-aquiles",
+        },
+        {
+            title: "¿Qué Pasa si mi Aquiles está Roto?",
+            links: [
+                {
+                    href: "./FAQs/que-pasa-si-mi-aquiles-esta-roto#q1",
+                    text: "¿Qué pasará en urgencias después de una ruptura de Aquiles?",
+                },
+                {
+                    href: "./FAQs/que-pasa-si-mi-aquiles-esta-roto#q2",
+                    text: "¿Qué hará el especialista?",
+                },
+                {
+                    href: "./FAQs/que-pasa-si-mi-aquiles-esta-roto#q3",
+                    text: "¿Cuántas revisiones?",
+                },
+                {
+                    href: "./FAQs/que-pasa-si-mi-aquiles-esta-roto#q4",
+                    text: "¿Cuándo debo ver al fisio?",
+                },
+                {
+                    href: "./FAQs/que-pasa-si-mi-aquiles-esta-roto#q5",
+                    text: "¿Debo tomar anticoagulantes?",
+                },
+            ],
+            readMoreLink: "./FAQs/que-pasa-si-mi-aquiles-esta-roto",
+        },
+        {
+            title: "Tratamiento de Rotura de Aquiles",
+            links: [
+                {
+                    href: "./FAQs/tratamiento-rotura-aquiles#q1",
+                    text: "¿Cómo tratar un tendón de Aquiles desgarrado – cirugía vs no quirúrgico?",
+                },
+                {
+                    href: "./FAQs/tratamiento-rotura-aquiles#q2",
+                    text: "¿Cuánto tiempo puedes esperar para la cirugía del tendón de Aquiles?",
+                },
+                {
+                    href: "./FAQs/tratamiento-rotura-aquiles#q3",
+                    text: "¿Cuánto tiempo toma la cirugía del tendón de Aquiles?",
+                },
+                {
+                    href: "./FAQs/tratamiento-rotura-aquiles#q4",
+                    text: "Recuperación de la cirugía de rotura del tendón de Aquiles",
+                },
+                {
+                    href: "./FAQs/tratamiento-rotura-aquiles#q5",
+                    text: "Dolor después de la rotura/cirugía del tendón de Aquiles",
+                },
+                {
+                    href: "./FAQs/tratamiento-rotura-aquiles#q6",
+                    text: "Dolor en el talón",
+                },
+                {
+                    href: "./FAQs/tratamiento-rotura-aquiles#q7",
+                    text: "Dolor en la pantorrilla",
+                },
+                {
+                    href: "./FAQs/tratamiento-rotura-aquiles#q8",
+                    text: "Espasmo en la pantorrilla",
+                },
+                {
+                    href: "./FAQs/tratamiento-rotura-aquiles#q9",
+                    text: "Dolor en la rodilla",
+                },
+                {
+                    href: "./FAQs/tratamiento-rotura-aquiles#q10",
+                    text: "Dolor nervioso",
+                },
+                {
+                    href: "./FAQs/tratamiento-rotura-aquiles#q11",
+                    text: "Cicatrización post-cirugía",
+                },
+            ],
+            readMoreLink: "./FAQs/tratamiento-rotura-aquiles",
+        },
+        {
+            title: "Recuperación de Aquiles Desgarrado",
+            links: [
+                {
+                    href: "./FAQs/recuperacion-aquiles-desgarrado#q1",
+                    text: "Yeso caminante vs bota de Aquiles – ¿cuál es mejor?",
+                },
+                {
+                    href: "./FAQs/recuperacion-aquiles-desgarrado#q2",
+                    text: "¿Cuál es la mejor bota de ruptura del tendón de Aquiles?",
+                },
+                {
+                    href: "./FAQs/recuperacion-aquiles-desgarrado#q3",
+                    text: "¿Cómo dormir cómodamente con una bota de ruptura de Aquiles?",
+                },
+                {
+                    href: "./FAQs/recuperacion-aquiles-desgarrado#q4",
+                    text: "¿Cuánto tiempo tarda en curar una ruptura del tendón de Aquiles?",
+                },
+                {
+                    href: "./FAQs/recuperacion-aquiles-desgarrado#q5",
+                    text: "¿Tiempo de recuperación con y sin cirugía?",
+                },
+                {
+                    href: "./FAQs/recuperacion-aquiles-desgarrado#q6",
+                    text: "Recuperación de desgarro parcial de Aquiles",
+                },
+                {
+                    href: "./FAQs/recuperacion-aquiles-desgarrado#q7",
+                    text: "Ejercicios de recuperación/rehabilitación del tendón de Aquiles",
+                },
+            ],
+            readMoreLink: "./FAQs/recuperacion-aquiles-desgarrado",
+        },
+        {
+            title: "Rehabilitación de Ruptura de Aquiles",
+            links: [
+                {
+                    href: "./FAQs/rehabilitacion-ruptura-aquiles#q1",
+                    text: "Cronología de rehabilitación de Aquiles – ¿qué pasa cada semana?",
+                },
+                {
+                    href: "./FAQs/rehabilitacion-ruptura-aquiles#q2",
+                    text: "¿Cuándo puedo empezar la fisioterapia?",
+                },
+                {
+                    href: "./FAQs/rehabilitacion-ruptura-aquiles#q3",
+                    text: "¿Cuándo es seguro poner peso en mi pie?",
+                },
+                {
+                    href: "./FAQs/rehabilitacion-ruptura-aquiles#q4",
+                    text: "Mejores ejercicios en casa después de una ruptura de Aquiles",
+                },
+                {
+                    href: "./FAQs/rehabilitacion-ruptura-aquiles#q5",
+                    text: "¿Cuándo puedo conducir de nuevo?",
+                },
+                {
+                    href: "./FAQs/rehabilitacion-ruptura-aquiles#q6",
+                    text: "¿Cómo progreso de caminar a correr?",
+                },
+                {
+                    href: "./FAQs/rehabilitacion-ruptura-aquiles#q7",
+                    text: "Productos que facilitan la rehabilitación",
+                },
+                {
+                    href: "./FAQs/rehabilitacion-ruptura-aquiles#q8",
+                    text: "Consejos principales para evitar la re-ruptura",
+                },
+            ],
+            readMoreLink: "./FAQs/rehabilitacion-ruptura-aquiles",
+        },
+        {
+            title: "Vida Después de la Ruptura de Aquiles",
+            links: [
+                {
+                    href: "./FAQs/vida-despues-ruptura-aquiles#q1",
+                    text: "Vida después de la ruptura de Aquiles",
+                },
+                {
+                    href: "./FAQs/vida-despues-ruptura-aquiles#q2",
+                    text: "¿Cuándo puedo volver al deporte?",
+                },
+                {
+                    href: "./FAQs/vida-despues-ruptura-aquiles#q3",
+                    text: "¿Cuándo puedo volver al trabajo físico?",
+                },
+                {
+                    href: "./FAQs/vida-despues-ruptura-aquiles#q4",
+                    text: "¿Cuándo puedo caminar después de una ruptura de Aquiles?",
+                },
+                {
+                    href: "./FAQs/vida-despues-ruptura-aquiles#q5",
+                    text: "Cómo evitar la re-ruptura",
+                },
+            ],
+            readMoreLink: "./FAQs/vida-despues-ruptura-aquiles",
+        },
+    ],
+    fr: [
+        {
+            title: "Chronologie de la rupture du tendon d'Achille",
+            links: [
+                {
+                    href: "./FAQs/processus-guerison-rupture-tendon-achille",
+                    text: "Chronologie de la rupture du tendon d'Achille",
+                },
+            ],
+            readMoreLink: "./FAQs/processus-guerison-rupture-tendon-achille",
+        },
+        {
+            title: "Comment reconnaître une rupture du tendon d'Achille",
+            links: [
+                {
+                    href: "./FAQs/reconnaitre-rupture-tendon-achille#q1",
+                    text: "Mon tendon d'Achille est-il rompu ? Liste de contrôle des symptômes",
+                },
+                {
+                    href: "./FAQs/reconnaitre-rupture-tendon-achille#q2",
+                    text: "Que se passe-t-il lorsque le tendon d'Achille se rompt ?",
+                },
+            ],
+            readMoreLink: "./FAQs/reconnaitre-rupture-tendon-achille",
+        },
+        {
+            title: "Conséquences d'une rupture du tendon d'Achille",
+            links: [
+                {
+                    href: "./FAQs/consequences-rupture-tendon-achille#q1",
+                    text: "Que se passe-t-il immédiatement après une rupture du tendon d'Achille ?",
+                },
+                {
+                    href: "./FAQs/consequences-rupture-tendon-achille#q2",
+                    text: "Quelle est la sensation d'une rupture du tendon d'Achille ?",
+                },
+                {
+                    href: "./FAQs/consequences-rupture-tendon-achille#q3",
+                    text: "Puis-je marcher avec un tendon d'Achille rompu ?",
+                },
+                {
+                    href: "./FAQs/consequences-rupture-tendon-achille#q4",
+                    text: "Comment traite-t-on une rupture du tendon d'Achille ?",
+                },
+                {
+                    href: "./FAQs/consequences-rupture-tendon-achille#q5",
+                    text: "Ai-je besoin d'une intervention chirurgicale ?",
+                },
+            ],
+            readMoreLink: "./FAQs/consequences-rupture-tendon-achille",
+        },
+        {
+            title: "Traitement de la rupture du tendon d'Achille",
+            links: [
+                {
+                    href: "./FAQs/traitement-rupture-tendon-achille#q1",
+                    text: "Comment traiter une rupture du tendon d'Achille – Chirurgie vs conservateur ?",
+                },
+                {
+                    href: "./FAQs/traitement-rupture-tendon-achille#q2",
+                    text: "Combien de temps peut-on attendre pour une opération du tendon d'Achille ?",
+                },
+                {
+                    href: "./FAQs/traitement-rupture-tendon-achille#q3",
+                    text: "Combien de temps dure une opération du tendon d'Achille ?",
+                },
+                {
+                    href: "./FAQs/traitement-rupture-tendon-achille#q4",
+                    text: "Récupération après une opération de la rupture du tendon d'Achille",
+                },
+                {
+                    href: "./FAQs/traitement-rupture-tendon-achille#q5",
+                    text: "Douleur après une rupture / opération du tendon d'Achille",
+                },
+                {
+                    href: "./FAQs/traitement-rupture-tendon-achille#q6",
+                    text: "Douleur au talon",
+                },
+                {
+                    href: "./FAQs/traitement-rupture-tendon-achille#q7",
+                    text: "Douleur au mollet",
+                },
+                {
+                    href: "./FAQs/traitement-rupture-tendon-achille#q8",
+                    text: "Crampe au mollet",
+                },
+                {
+                    href: "./FAQs/traitement-rupture-tendon-achille#q9",
+                    text: "Douleur au genou",
+                },
+                {
+                    href: "./FAQs/traitement-rupture-tendon-achille#q10",
+                    text: "Douleur nerveuse",
+                },
+                {
+                    href: "./FAQs/traitement-rupture-tendon-achille#q11",
+                    text: "Cicatrisation après une opération",
+                },
+            ],
+            readMoreLink: "./FAQs/traitement-rupture-tendon-achille",
+        },
+        {
+            title: "Guérison d'une rupture du tendon d'Achille",
+            links: [
+                {
+                    href: "./FAQs/guerison-rupture-tendon-achille#q1",
+                    text: "Plâtre de marche d'Achille vs botte - lequel est le meilleur ?",
+                },
+                {
+                    href: "./FAQs/guerison-rupture-tendon-achille#q2",
+                    text: "Quelle est la meilleure botte pour une rupture du tendon d'Achille ?",
+                },
+                {
+                    href: "./FAQs/guerison-rupture-tendon-achille#q3",
+                    text: "Comment dormir confortablement avec une botte pour rupture du tendon d'Achille ?",
+                },
+                {
+                    href: "./FAQs/guerison-rupture-tendon-achille#q4",
+                    text: "Combien de temps faut-il pour guérir d'une rupture du tendon d'Achille ?",
+                },
+                {
+                    href: "./FAQs/guerison-rupture-tendon-achille#q5",
+                    text: "Temps de récupération avec et sans chirurgie ?",
+                },
+                {
+                    href: "./FAQs/guerison-rupture-tendon-achille#q6",
+                    text: "Récupération d'une rupture partielle du tendon d'Achille",
+                },
+                {
+                    href: "./FAQs/guerison-rupture-tendon-achille#q7",
+                    text: "Exercices de récupération/rééducation du tendon d'Achille",
+                },
+            ],
+            readMoreLink: "./FAQs/guerison-rupture-tendon-achille",
+        },
+        {
+            title: "Rééducation de la rupture du tendon d'Achille",
+            links: [
+                {
+                    href: "./FAQs/reeducation-rupture-tendon-achille#q1",
+                    text: "Calendrier de rééducation d'Achille – que se passe-t-il chaque semaine ?",
+                },
+                {
+                    href: "./FAQs/reeducation-rupture-tendon-achille#q2",
+                    text: "Quand puis-je commencer la physiothérapie ?",
+                },
+                {
+                    href: "./FAQs/reeducation-rupture-tendon-achille#q3",
+                    text: "Quand est-il sûr de mettre du poids sur mon pied ?",
+                },
+                {
+                    href: "./FAQs/reeducation-rupture-tendon-achille#q4",
+                    text: "Meilleurs exercices à domicile après une rupture d'Achille",
+                },
+                {
+                    href: "./FAQs/reeducation-rupture-tendon-achille#q5",
+                    text: "Quand puis-je reconduire ?",
+                },
+                {
+                    href: "./FAQs/reeducation-rupture-tendon-achille#q6",
+                    text: "Comment progresser de la marche à la course ?",
+                },
+                {
+                    href: "./FAQs/reeducation-rupture-tendon-achille#q7",
+                    text: "Produits qui facilitent la rééducation",
+                },
+                {
+                    href: "./FAQs/reeducation-rupture-tendon-achille#q8",
+                    text: "Conseils pour éviter la re-rupture",
+                },
+            ],
+            readMoreLink: "./FAQs/reeducation-rupture-tendon-achille",
+        },
+        {
+            title: "Vivre après une rupture du tendon d'Achille",
+            links: [
+                {
+                    href: "./FAQs/vivre-apres-rupture-tendon-achille#q1",
+                    text: "La vie après une rupture du tendon d'Achille",
+                },
+                {
+                    href: "./FAQs/vivre-apres-rupture-tendon-achille#q2",
+                    text: "Quand puis-je reprendre le sport après une rupture d'Achille ?",
+                },
+                {
+                    href: "./FAQs/vivre-apres-rupture-tendon-achille#q3",
+                    text: "Quand puis-je retourner au travail après une rupture d'Achille ?",
+                },
+                {
+                    href: "./FAQs/vivre-apres-rupture-tendon-achille#q4",
+                    text: "Quand puis-je marcher après une rupture d'Achille ?",
+                },
+                {
+                    href: "./FAQs/vivre-apres-rupture-tendon-achille#q5",
+                    text: "Comment éviter une nouvelle rupture",
+                },
+            ],
+            readMoreLink: "./FAQs/vivre-apres-rupture-tendon-achille",
+        },
+    ],
+    de: [
+        {
+            title: "Achillessehnenriss Heilungsverlauf",
+            links: [
+                {
+                    href: "./FAQs/achillessehnenriss-heilungsverlauf",
+                    text: "Achillessehnenriss Heilungsverlauf",
+                },
+            ],
+            readMoreLink: "./FAQs/achillessehnenriss-heilungsverlauf",
+        },
+        {
+            title: "Ist meine Achillessehne gerissen?",
+            links: [
+                {
+                    href: "./FAQs/achillessehnenriss-erkennen#q1",
+                    text: "Ist meine Achillessehne gerissen?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-erkennen#q2",
+                    text: "Was passiert wenn die Achillessehne reißt?",
+                },
+            ],
+            readMoreLink: "./FAQs/achillessehnenriss-erkennen",
+        },
+        {
+            title: "Was passiert wenn meine Achillessehne gerissen ist?",
+            links: [
+                {
+                    href: "./FAQs/achillessehnenriss-folgen#q1",
+                    text: "Was passiert sofort nach einem Achillessehnenriss?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-folgen#q2",
+                    text: "Wie fühlt sich ein Achillessehnenriss an?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-folgen#q3",
+                    text: "Kann ich mit einem gerissenen Achilles gehen?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-folgen#q4",
+                    text: "Wie wird ein Achillessehnenriss behandelt?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-folgen#q5",
+                    text: "Brauche ich eine Operation?",
+                },
+            ],
+            readMoreLink: "./FAQs/achillessehnenriss-folgen",
+        },
+        {
+            title: "Achillessehnenriss Behandlung",
+            links: [
+                {
+                    href: "./FAQs/achillessehnenriss-behandlung#q1",
+                    text: "Wie behandelt man einen Achillessehnenriss – Operation vs konservativ?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-behandlung#q2",
+                    text: "Wie lange kann man mit einer Achillessehnen-OP warten?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-behandlung#q3",
+                    text: "Wie lange dauert eine Achillessehnen-Operation?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-behandlung#q4",
+                    text: "Erholung nach Achillessehnenriss-Operation",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-behandlung#q5",
+                    text: "Schmerzen nach Achillessehnenriss / Operation",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-behandlung#q6",
+                    text: "Fersenschmerzen",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-behandlung#q7",
+                    text: "Wadenschmerzen",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-behandlung#q8",
+                    text: "Wadenkrampf",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-behandlung#q9",
+                    text: "Knieschmerzen",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-behandlung#q10",
+                    text: "Nervenschmerzen",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-behandlung#q11",
+                    text: "Narbenheilung nach Operation",
+                },
+            ],
+            readMoreLink: "./FAQs/achillessehnenriss-behandlung",
+        },
+        {
+            title: "Achillessehnenriss Genesung",
+            links: [
+                {
+                    href: "./FAQs/achillessehnenriss-genesung#q1",
+                    text: "Gehgips vs Stiefel",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-genesung#q2",
+                    text: "Welcher Achillessehnenriss-Stiefel ist der beste?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-genesung#q3",
+                    text: "Wie schläft man mit gerissenem Achilles?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-genesung#q4",
+                    text: "Wie lange dauert die Heilung eines Achillessehnenrisses?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-genesung#q5",
+                    text: "Erholungszeit mit und ohne Operation?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-genesung#q6",
+                    text: "Teilriss der Achillessehne Genesung",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-genesung#q7",
+                    text: "Achillessehnen Erholung/Reha Übungen",
+                },
+            ],
+            readMoreLink: "./FAQs/achillessehnenriss-genesung",
+        },
+        {
+            title: "Achillessehnenriss Rehabilitation",
+            links: [
+                {
+                    href: "./FAQs/achillessehnenriss-rehabilitation#q1",
+                    text: "Achilles-Reha-Zeitplan – was passiert jede Woche?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-rehabilitation#q2",
+                    text: "Wann kann ich mit der Physiotherapie beginnen?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-rehabilitation#q3",
+                    text: "Wann ist es sicher, Gewicht auf meinen Fuß zu legen?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-rehabilitation#q4",
+                    text: "Beste Heimübungen nach einem Achillessehnenriss",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-rehabilitation#q5",
+                    text: "Wann kann ich wieder Auto fahren?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-rehabilitation#q6",
+                    text: "Wie komme ich vom Gehen zum Laufen?",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-rehabilitation#q7",
+                    text: "Produkte, die die Reha erleichtern",
+                },
+                {
+                    href: "./FAQs/achillessehnenriss-rehabilitation#q8",
+                    text: "Top-Tipps zur Vermeidung eines erneuten Risses",
+                },
+            ],
+            readMoreLink: "./FAQs/achillessehnenriss-rehabilitation",
+        },
+        {
+            title: "Leben nach Achillessehnenriss",
+            links: [
+                {
+                    href: "./FAQs/leben-nach-achillessehnenriss#q1",
+                    text: "Leben nach Achillessehnenriss",
+                },
+                {
+                    href: "./FAQs/leben-nach-achillessehnenriss#q2",
+                    text: "Wann kann ich wieder Sport treiben?",
+                },
+                {
+                    href: "./FAQs/leben-nach-achillessehnenriss#q3",
+                    text: "Wann kann ich wieder körperlich arbeiten?",
+                },
+                {
+                    href: "./FAQs/leben-nach-achillessehnenriss#q4",
+                    text: "Wann kann ich nach einem Achillessehnenriss wieder gehen?",
+                },
+                {
+                    href: "./FAQs/leben-nach-achillessehnenriss#q5",
+                    text: "Wie vermeidet man einen erneuten Riss",
+                },
+            ],
+            readMoreLink: "./FAQs/leben-nach-achillessehnenriss",
+        },
+    ],
+    it: [
+        {
+            title: "Cronologia Rottura di Achille",
+            links: [
+                {
+                    href: "./FAQs/cronologia-rottura-achille",
+                    text: "Cronologia Rottura di Achille",
+                },
+            ],
+            readMoreLink: "./FAQs/cronologia-rottura-achille",
+        },
+        {
+            title: "Il Mio Achille è Rotto?",
+            links: [
+                {
+                    href: "./FAQs/il-mio-achille-e-rotto#q1",
+                    text: "Il mio Achille è rotto?",
+                },
+                {
+                    href: "./FAQs/il-mio-achille-e-rotto#q2",
+                    text: "Cosa succede quando ti strappi l'Achille?",
+                },
+            ],
+            readMoreLink: "./FAQs/il-mio-achille-e-rotto",
+        },
+        {
+            title: "Cosa Succede se il Mio Achille è Rotto?",
+            links: [
+                {
+                    href: "./FAQs/cosa-succede-se-il-mio-achille-e-rotto#q1",
+                    text: "Cosa succederà al pronto soccorso dopo una rottura di Achille?",
+                },
+                {
+                    href: "./FAQs/cosa-succede-se-il-mio-achille-e-rotto#q2",
+                    text: "Cosa farà lo specialista?",
+                },
+                {
+                    href: "./FAQs/cosa-succede-se-il-mio-achille-e-rotto#q3",
+                    text: "Quanti controlli?",
+                },
+                {
+                    href: "./FAQs/cosa-succede-se-il-mio-achille-e-rotto#q4",
+                    text: "Quando devo vedere il fisioterapista?",
+                },
+                {
+                    href: "./FAQs/cosa-succede-se-il-mio-achille-e-rotto#q5",
+                    text: "Devo prendere anticoagulanti?",
+                },
+            ],
+            readMoreLink: "./FAQs/cosa-succede-se-il-mio-achille-e-rotto",
+        },
+        {
+            title: "Trattamento Rottura di Achille",
+            links: [
+                {
+                    href: "./FAQs/trattamento-rottura-achille#q1",
+                    text: "Come trattare un tendine di Achille rotto – chirurgia vs non chirurgico?",
+                },
+                {
+                    href: "./FAQs/trattamento-rottura-achille#q2",
+                    text: "Quanto tempo puoi aspettare per la chirurgia del tendine di Achille?",
+                },
+                {
+                    href: "./FAQs/trattamento-rottura-achille#q3",
+                    text: "Quanto tempo dura la chirurgia del tendine di Achille?",
+                },
+                {
+                    href: "./FAQs/trattamento-rottura-achille#q4",
+                    text: "Recupero dalla chirurgia di rottura del tendine di Achille",
+                },
+                {
+                    href: "./FAQs/trattamento-rottura-achille#q5",
+                    text: "Dolore dopo rottura/chirurgia del tendine di Achille",
+                },
+                {
+                    href: "./FAQs/trattamento-rottura-achille#q6",
+                    text: "Dolore al tallone",
+                },
+                {
+                    href: "./FAQs/trattamento-rottura-achille#q7",
+                    text: "Dolore al polpaccio",
+                },
+                {
+                    href: "./FAQs/trattamento-rottura-achille#q8",
+                    text: "Spasmo del polpaccio",
+                },
+                {
+                    href: "./FAQs/trattamento-rottura-achille#q9",
+                    text: "Dolore al ginocchio",
+                },
+                {
+                    href: "./FAQs/trattamento-rottura-achille#q10",
+                    text: "Dolore nervoso",
+                },
+                {
+                    href: "./FAQs/trattamento-rottura-achille#q11",
+                    text: "Guarigione della cicatrice post-chirurgia",
+                },
+            ],
+            readMoreLink: "./FAQs/trattamento-rottura-achille",
+        },
+        {
+            title: "Recupero Achille Strappato",
+            links: [
+                {
+                    href: "./FAQs/recupero-achille-strappato#q1",
+                    text: "Gesso da deambulazione vs stivale di Achille – quale è meglio?",
+                },
+                {
+                    href: "./FAQs/recupero-achille-strappato#q2",
+                    text: "Quale stivale per rottura del tendine di Achille è il migliore?",
+                },
+                {
+                    href: "./FAQs/recupero-achille-strappato#q3",
+                    text: "Come dormire comodamente con uno stivale per rottura di Achille?",
+                },
+                {
+                    href: "./FAQs/recupero-achille-strappato#q4",
+                    text: "Quanto tempo per guarire una rottura del tendine di Achille?",
+                },
+                {
+                    href: "./FAQs/recupero-achille-strappato#q5",
+                    text: "Tempo di recupero con e senza chirurgia?",
+                },
+                {
+                    href: "./FAQs/recupero-achille-strappato#q6",
+                    text: "Recupero strappo parziale di Achille",
+                },
+                {
+                    href: "./FAQs/recupero-achille-strappato#q7",
+                    text: "Esercizi di recupero/riabilitazione del tendine di Achille",
+                },
+            ],
+            readMoreLink: "./FAQs/recupero-achille-strappato",
+        },
+        {
+            title: "Riabilitazione Rottura di Achille",
+            links: [
+                {
+                    href: "./FAQs/riabilitazione-rottura-achille#q1",
+                    text: "Cronoprogramma di riabilitazione di Achille – cosa succede ogni settimana?",
+                },
+                {
+                    href: "./FAQs/riabilitazione-rottura-achille#q2",
+                    text: "Quando posso iniziare la fisioterapia?",
+                },
+                {
+                    href: "./FAQs/riabilitazione-rottura-achille#q3",
+                    text: "Quando è sicuro mettere peso sul mio piede?",
+                },
+                {
+                    href: "./FAQs/riabilitazione-rottura-achille#q4",
+                    text: "Migliori esercizi a casa dopo una rottura di Achille",
+                },
+                {
+                    href: "./FAQs/riabilitazione-rottura-achille#q5",
+                    text: "Quando posso guidare di nuovo?",
+                },
+                {
+                    href: "./FAQs/riabilitazione-rottura-achille#q6",
+                    text: "Come progredire dal camminare al correre?",
+                },
+                {
+                    href: "./FAQs/riabilitazione-rottura-achille#q7",
+                    text: "Prodotti che facilitano la riabilitazione",
+                },
+                {
+                    href: "./FAQs/riabilitazione-rottura-achille#q8",
+                    text: "Consigli principali per evitare la re-rottura",
+                },
+            ],
+            readMoreLink: "./FAQs/riabilitazione-rottura-achille",
+        },
+        {
+            title: "Vita Dopo la Rottura di Achille",
+            links: [
+                {
+                    href: "./FAQs/vita-dopo-rottura-achille#q1",
+                    text: "Vita dopo la rottura di Achille",
+                },
+                {
+                    href: "./FAQs/vita-dopo-rottura-achille#q2",
+                    text: "Quando posso tornare allo sport?",
+                },
+                {
+                    href: "./FAQs/vita-dopo-rottura-achille#q3",
+                    text: "Quando posso tornare al lavoro fisico?",
+                },
+                {
+                    href: "./FAQs/vita-dopo-rottura-achille#q4",
+                    text: "Quando posso camminare dopo una rottura di Achille?",
+                },
+                {
+                    href: "./FAQs/vita-dopo-rottura-achille#q5",
+                    text: "Come evitare la re-rottura",
+                },
+            ],
+            readMoreLink: "./FAQs/vita-dopo-rottura-achille",
+        },
+    ],
+};
+
+const currentSections = faqSections[lang] || faqSections.en;
+
+const downloads = {
+    en: [
+        {
+            href: "/images/documents/A Game of Snakes and Ladders Poster.pdf",
+            title: "Snakes and Ladders Poster",
+        },
+        {
+            href: "/images/documents/Achilles Rupture Information Sheet.pdf",
+            title: "Achilles Rupture Information Sheet",
+        },
+    ],
+    es: [
+        {
+            href: "/images/documents/A Game of Snakes and Ladders Poster.pdf",
+            title: "Póster de Serpientes y Escaleras",
+        },
+        {
+            href: "/images/documents/Achilles Rupture Information Sheet.pdf",
+            title: "Hoja Informativa de Ruptura de Aquiles",
+        },
+    ],
+    fr: [
+        {
+            href: "/images/documents/A Game of Snakes and Ladders Poster.pdf",
+            title: "Affiche Serpents et Échelles",
+        },
+        {
+            href: "/images/documents/Achilles Rupture Information Sheet.pdf",
+            title: "Fiche d'Information sur la Rupture d'Achille",
+        },
+    ],
+    de: [
+        {
+            href: "/images/documents/A Game of Snakes and Ladders Poster.pdf",
+            title: "Schlangen und Leitern Poster",
+        },
+        {
+            href: "/images/documents/Achilles Rupture Information Sheet.pdf",
+            title: "Achillessehnenriss Informationsblatt",
+        },
+    ],
+    it: [
+        {
+            href: "/images/documents/A Game of Snakes and Ladders Poster.pdf",
+            title: "Poster Serpenti e Scale",
+        },
+        {
+            href: "/images/documents/Achilles Rupture Information Sheet.pdf",
+            title: "Scheda Informativa Rottura di Achille",
+        },
+    ],
+};
+
+const currentDownloads = downloads[lang] || downloads.en;
+---
+
+{
+    currentSections.map((section, index) => (
+        <FAQSection
+            title={section.title}
+            links={section.links}
+            readMoreLink={section.readMoreLink}
+        />
+    ))
+}

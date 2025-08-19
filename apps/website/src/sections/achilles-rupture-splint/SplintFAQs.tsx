@@ -2,7 +2,7 @@ import React from "react";
 import FAQs from "@/components/ui/faqs";
 import type { FAQCategory } from "@/components/ui/faqs";
 import SizeCalculator from "../../components/SizeCalculator";
-import type { Lang } from "../../components/types";
+import type { Lang } from "@/config/languages.ts";
 
 const content: Record<Lang, FAQCategory[]> = {
     en: [
@@ -597,6 +597,153 @@ const content: Record<Lang, FAQCategory[]> = {
                     question: "¿Qué ángulo mantiene la férula?",
                     answer:
                         "La férula mantiene un ángulo fijo de 30 grados, que coincide con el ángulo máximo que proporcionan las botas con bisagras o las botas con cuña. Este ángulo específico está diseñado para optimizar la curación durante todo el período de recuperación, manteniendo el dispositivo ligero y fácil de usar.",
+                },
+            ],
+        },
+    ],
+    it: [
+        {
+            category: "Taglie e adattamento",
+            questions: [
+                {
+                    question: "Come faccio a sapere quale taglia scegliere?",
+                    answer: <SizeCalculator lang="it" />,
+                },
+                {
+                    question: "La taglia è precisa?",
+                    answer:
+                        "Sì, la taglia è precisa. La taglia si basa sulla dimensione del piede, progettata per garantire che il tutore non interferisca con le dita dei piedi.",
+                },
+                {
+                    question: "Posso regolare l'angolo del tutore?",
+                    answer:
+                        "No, il tutore è progettato per non essere regolabile per rimanere leggero. Mantiene l'angolo massimo che una borsa articolata o una borsa con cunei offrirebbe. Questo garantisce una guarigione sicura durante l'intero periodo di recupero. Poiché viene utilizzato in aggiunta alla borsa, l'angolo ottuso non porterà a un accorciamento del tendine o ad altri effetti indesiderati.",
+                },
+                {
+                    question:
+                        "Il mio piede può muoversi lateralmente, è un problema?",
+                    answer:
+                        "Un certo movimento laterale è normale e non influenzerà la guarigione. Lo scopo principale del tutore è mantenere l'angolo corretto del piede rivolto verso il basso (flessione plantare).",
+                },
+                {
+                    question: "Quanto forte devo allacciare le cinghie?",
+                    answer:
+                        "Le cinghie devono essere ferme ma comode: abbastanza strette da fissare il piede ma non da limitare la circolazione. Allentare immediatamente se si avverte formicolio, intorpidimento o cambiamenti di colore nel piede. Anche se il piede non dovrebbe muoversi verso l'alto, è previsto un leggero movimento laterale.",
+                },
+            ],
+        },
+        {
+            category: "Utilizzo del prodotto",
+            questions: [
+                {
+                    question:
+                        "Posso indossare questo invece di una borsa durante il giorno?",
+                    answer:
+                        "No, questo tutore è solo per riposo e sonno. Devi usare le stampelle se stai in piedi o ti muovi mentre indossi il tutore; non è progettato per camminare o sopportare peso.",
+                },
+                {
+                    question:
+                        "Posso usare il tutore per la tendinite di Achille?",
+                    answer:
+                        "No, il tutore viene utilizzato solo dopo la rottura del tendine di Achille. Non è adatto per ossa rotte, fascite plantare o tendinite di Achille. Il tutore mantiene il piede rivolto verso il basso, in una posizione di punta, per la guarigione del tendine. Per altre condizioni, come la fascite plantare e la tendinite di Achille, ci sono diversi tutori progettati deliberatamente per fare il contrario e mantenere il piede sollevato.",
+                },
+                {
+                    question: "Posso bagnare il tutore (doccia/natazione)?",
+                    answer:
+                        "Il tutore può tollerare un'esposizione occasionale all'acqua, ma non è specificamente progettato per ambienti umidi. L'esposizione prolungata all'acqua può causare deterioramento delle parti morbide nel tempo. Se fai la doccia, ti consigliamo di usare una sedia o uno sgabello per sederti in sicurezza, poiché le superfici bagnate aumentano il rischio di scivolamento. Per nuotare, il tutore può essere indossato, ma deve essere asciugato accuratamente dopo. Ovviamente, non indossare il tutore troppo a lungo quando è bagnato per evitare lacerazioni cutanee. Ricorda che la tua sicurezza è fondamentale: non tentare mai di stare in piedi o camminare mentre indossi il tutore, specialmente su superfici bagnate.",
+                },
+            ],
+        },
+        {
+            category: "Recupero medico",
+            questions: [
+                {
+                    question:
+                        "In quale fase di recupero dovrei iniziare a usare il tutore?",
+                    answer:
+                        "Il tutore dovrebbe essere utilizzato durante le settimane 2-12 dopo l'infortunio, che è la fase principale di guarigione del recupero del tendine di Achille.",
+                },
+                {
+                    question:
+                        "Come mantiene il tutore la corretta posizione di guarigione?",
+                    answer:
+                        "Il tutore mantiene il piede a un angolo di 30 gradi, che è la posizione ottimale per la guarigione del tendine di Achille. Questo corrisponde all'angolo che otterresti con una borsa articolata o cunei, garantendo una corretta guarigione durante l'intero periodo di guarigione.",
+                },
+                {
+                    question:
+                        "Posso usare questo con una rottura completa del tendine di Achille?",
+                    answer: (
+                        <>
+                            Sì, è progettato per rotture complete del tendine di
+                            Achille. Per ulteriori informazioni, vai{" "}
+                            <a
+                                className="text-primary underline underline-offset-2"
+                                href="https://thetismedical.com/achilles-ruptures"
+                            >
+                                qui
+                            </a>
+                            .
+                        </>
+                    ),
+                },
+                {
+                    question:
+                        "Come si confronta questo con l'uso di una borsa di notte?",
+                    answer:
+                        "Il tutore è progettato per completare il trattamento con la borsa, non per sostituirlo completamente. Offre diversi vantaggi per l'uso notturno: è significativamente più leggero, più traspirante e più igienico, poiché è specificamente progettato per l'uso interno. Pensalo come indossare un tutore notturno specializzato piuttosto che dormire con calzature da esterno.",
+                },
+                {
+                    question:
+                        "È normale un certo movimento laterale nel tutore?",
+                    answer:
+                        "Sì, una piccola quantità di movimento laterale è normale e non danneggerà il tuo recupero o causerà una nuova rottura. Lo scopo principale del tutore è mantenere l'angolo corretto del tuo piede (flessione plantare), che è essenziale per una corretta guarigione del tendine di Achille. Un certo movimento laterale è previsto e sicuro. La cosa più importante è che il tutore impedisce al tuo piede di dorsiflettersi (piegarsi verso l'alto), il che eserciterebbe uno stress dannoso sul tendine in fase di guarigione.",
+                },
+            ],
+        },
+        {
+            category: "Ordini e disponibilità",
+            questions: [
+                {
+                    question: "Spedite a livello internazionale?",
+                    answer: (
+                        <>
+                            Spediamo negli Stati Uniti e nel Regno Unito; per
+                            ordini in altri paesi, visita{" "}
+                            <a
+                                className="text-primary underline underline-offset-2"
+                                href="https://thetismedical.com/partners"
+                            >
+                                la nostra pagina partner
+                            </a>
+                            .
+                        </>
+                    ),
+                },
+                {
+                    question: "Quando saranno disponibili le taglie esaurite?",
+                    answer: (
+                        <>
+                            Il nostro tutore è popolare, quindi lo stiamo sempre
+                            riassortendo. Contatta{" "}
+                            <a
+                                className="text-primary underline underline-offset-2"
+                                href="mailto:info@thetismedical.com"
+                            >
+                                info@thetismedical.com
+                            </a>{" "}
+                            per tempistiche esatte.
+                        </>
+                    ),
+                },
+            ],
+        },
+        {
+            category: "Specifiche tecniche",
+            questions: [
+                {
+                    question: "Quale angolo mantiene il tutore?",
+                    answer:
+                        "Il tutore mantiene un angolo fisso di 30 gradi, che corrisponde all'angolo massimo fornito da stivali articolati o stivali a cuneo. Questo angolo specifico è progettato per ottimizzare la guarigione durante il tuo periodo di recupero, mantenendo il dispositivo leggero e facile da usare.",
                 },
             ],
         },

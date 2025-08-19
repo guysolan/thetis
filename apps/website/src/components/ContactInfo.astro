@@ -1,0 +1,79 @@
+---
+import { Instagram, Facebook, Linkedin, Mail } from "lucide-astro";
+import FormLinks from "@/components/form/FormLinks.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+const content = {
+    en: {
+        title: "Get in Touch",
+        subtitle: "Follow us",
+    },
+    de: {
+        title: "Kontaktiere uns",
+        subtitle: "Folge uns",
+    },
+    fr: {
+        title: "Contactez-nous",
+        subtitle: "Suivez-nous",
+    },
+    es: {
+        title: "Contacta con nosotros",
+        subtitle: "Síguenos",
+    },
+    it: {
+        title: "Contattaci",
+        subtitle: "Seguici",
+    },
+};
+---
+
+<div
+    class="flex flex-col items-center lg:items-start gap-y-12 mx-auto mb-8 p-4 w-full min-w-lg max-w-2xl"
+>
+    <div class="space-y-6">
+        <h1 class="font-semibold text-gray-800 text-4xl">
+            {content[lang].title}
+        </h1>
+        <FormLinks lang={lang} />
+    </div>
+
+    <div class="flex flex-col items-center lg:items-start space-y-4">
+        <h3 class="font-semibold text-gray-800 text-lg">
+            {content[lang].subtitle}
+        </h3>
+        <a
+            href="mailto:info@thetismedical.com"
+            class="flex items-center gap-3 text-gray-600 hover:text-gray-800 text-lg transition-colors"
+        >
+            <Mail size={24} class="text-primary-600" />
+            info@thetismedical.com
+        </a>
+    </div>
+
+    <div class="flex flex-col items-center lg:items-start gap-y-4">
+        <h4 class="font-semibold text-gray-800 text-lg">
+            {content[lang].subtitle}
+        </h4>
+        <div class="flex gap-6">
+            <a
+                href="https://twitter.com/ThetisMedical"
+                class="text-gray-600 hover:text-primary-600 transition-colors"
+            >
+                <Linkedin size={24} />
+            </a>
+            <a
+                href="https://www.instagram.com/thetismedical/"
+                class="text-gray-600 hover:text-primary-600 transition-colors"
+            >
+                <Instagram size={24} />
+            </a>
+            <a
+                href="https://www.facebook.com/thetismedical"
+                class="text-gray-600 hover:text-primary-600 transition-colors"
+            >
+                <Facebook size={24} />
+            </a>
+        </div>
+    </div>
+</div>

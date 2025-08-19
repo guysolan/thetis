@@ -1,0 +1,88 @@
+---
+import FullImageCTA from "@/components/CTA/FullCTA.astro";
+import NightSplintImage from "@/components/products/images/night-splint/night_splint_bed_side.jpg";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Sleep Safely Without a Boot",
+        description:
+            "Do you know any patients who are pleased to sleep in their boot? The Achilles Rupture Splint is a secure alternative.",
+        paragraphs: [
+            "Do you know any patients who are pleased to sleep in their boot? The Achilles Rupture Splint is a secure alternative.",
+            "Thetis Achilles Rupture Splint has been welcomed by patients. One patient (himself a surgeon) described it as 'the most important bit of rehab kit that they don't tell you about'.",
+            "Lightweight and effective, it provides relief during sleep and protects the foot outside the boot. Highly recommended to improve compliance and recovery outcomes.",
+        ],
+        primaryWords: "Order Now",
+        secondaryWords: "Learn More",
+        imageAlt: "Night Splint Image",
+    },
+    de: {
+        title: "Sicher ohne Stiefel schlafen",
+        description:
+            "Kennen Sie Patienten, die gerne in ihrem Stiefel schlafen? Die Achillessehnenruptur-Schiene ist eine sichere Alternative.",
+        paragraphs: [
+            "Kennen Sie Patienten, die gerne in ihrem Stiefel schlafen? Die Achillessehnenruptur-Schiene ist eine sichere Alternative.",
+            "Die Thetis Achilles Rupture Splint wurde von Patienten begrüßt. Ein Patient (selbst Chirurg) beschrieb sie als 'das wichtigste Reha-Equipment, von dem sie Ihnen nichts erzählen'.",
+            "Leicht und effektiv bietet sie Linderung während des Schlafes und schützt den Fuß außerhalb des Stiefels. Sehr empfohlen zur Verbesserung der Compliance und der Genesungsergebnisse.",
+        ],
+        primaryWords: "Jetzt bestellen",
+        secondaryWords: "Mehr erfahren",
+        imageAlt: "Nachtschiene Bild",
+    },
+    fr: {
+        title: "Dormir en sécurité sans botte",
+        description:
+            "Connaissez-vous des patients qui sont contents de dormir dans leur botte ? L'attelle de rupture d'Achille est une alternative sécurisée.",
+        paragraphs: [
+            "Connaissez-vous des patients qui sont contents de dormir dans leur botte ? L'attelle de rupture d'Achille est une alternative sécurisée.",
+            "L'attelle de rupture d'Achille Thetis a été bien accueillie par les patients. Un patient (lui-même chirurgien) l'a décrite comme 'le plus important équipement de rééducation dont ils ne vous parlent pas'.",
+            "Légère et efficace, elle apporte un soulagement pendant le sommeil et protège le pied en dehors de la botte. Très recommandée pour améliorer la compliance et les résultats de récupération.",
+        ],
+        primaryWords: "Commander maintenant",
+        secondaryWords: "En savoir plus",
+        imageAlt: "Image d'attelle de nuit",
+    },
+    es: {
+        title: "Dormir con seguridad sin bota",
+        description:
+            "¿Conoce algún paciente que esté contento de dormir en su bota? La férula de ruptura de Aquiles es una alternativa segura.",
+        paragraphs: [
+            "¿Conoce algún paciente que esté contento de dormir en su bota? La férula de ruptura de Aquiles es una alternativa segura.",
+            "La férula de ruptura de Aquiles Thetis ha sido bien recibida por los pacientes. Un paciente (él mismo cirujano) la describió como 'el equipo de rehabilitación más importante del que no te hablan'.",
+            "Ligera y efectiva, proporciona alivio durante el sueño y protege el pie fuera de la bota. Muy recomendada para mejorar el cumplimiento y los resultados de recuperación.",
+        ],
+        primaryWords: "Ordenar ahora",
+        secondaryWords: "Saber más",
+        imageAlt: "Imagen de férula nocturna",
+    },
+    it: {
+        title: "Dormire in sicurezza senza stivale",
+        description:
+            "Conosci pazienti che sono contenti di dormire nel loro stivale? La férula per rottura di Achille è un'alternativa sicura.",
+        paragraphs: [
+            "Conosci pazienti che sono contenti di dormire nel loro stivale? La férula per rottura di Achille è un'alternativa sicura.",
+            "La férula per rottura di Achille Thetis è stata accolta con favore dai pazienti. Un paziente (lui stesso chirurgo) l'ha descritta come 'il kit di riabilitazione più importante di cui non ti parlano'.",
+            "Leggera ed efficace, fornisce sollievo durante il sonno e protegge il piede fuori dallo stivale. Molto raccomandata per migliorare la compliance e i risultati di recupero.",
+        ],
+        primaryWords: "Ordina ora",
+        secondaryWords: "Scopri di più",
+        imageAlt: "Immagine férula notturna",
+    },
+};
+
+const currentContent = content[lang] || content.en;
+---
+
+<FullImageCTA
+    title={currentContent.title}
+    paragraph={currentContent.paragraphs}
+    primaryHref="/buy-now"
+    secondaryHref="/splint"
+    primaryWords={currentContent.primaryWords}
+    secondaryWords={currentContent.secondaryWords}
+    image={NightSplintImage}
+    imageAlt={currentContent.imageAlt}
+/>

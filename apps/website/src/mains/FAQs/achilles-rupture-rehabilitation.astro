@@ -1,130 +1,46 @@
 ---
-import AchillesRuptureRehabilitationSection from "@/sections/FAQs/achilles-rupture-rehabilitation.astro";
-import FaqSchemaAccordion from "@/components/research/FaqSchemaAccordion.astro";
-import NightSplintAdvert from "@/components/products/night-splint/NightSplintAdvert.astro";
-import FAQsLayout from "@/layouts/FAQsLayout.astro";
+import AchillesRuptureRehabilitationSection from "../../sections/FAQs/achilles-rupture-rehabilitation.astro";
+import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
+import FAQsLayout from "../../layouts/FAQsLayout.astro";
+import type { Lang } from "../../config/languages";
 
-const { lang = "en" } = Astro.props as { lang: "en" | "de" | "fr" | "es" };
+const { lang = "en" } = Astro.props as { lang: Lang };
 
 const content = {
     en: {
-        title: "Achilles Rupture Rehabilitation: Week-by-Week Guide & Return-to-Sport Milestones",
+        title: "Achilles Rupture Rehabilitation: Complete Recovery Guide & Exercise Program",
         description:
-            "Practical recovery roadmap after an Achilles tendon rupture – weight-bearing, physio exercises, driving, and getting back to sport.",
-        faqs: [
-            {
-                question: "What is the typical Achilles rehab timeline?",
-                answer: "Weeks 0-2: partial weight-bearing in a boot. Weeks 2-6: heel-wedge reduction & early physio. Weeks 6-10: out of boot, heel raises. Months 3-6: return-to-run drills. 6+ months: unrestricted sport when strength >90 %.",
-            },
-            {
-                question: "When can I start physiotherapy?",
-                answer: "Usually around week 2-3 for gentle range-of-motion and isometrics, progressing to resistance work by week 6-10.",
-            },
-            {
-                question: "How soon can I walk without crutches?",
-                answer: "Many patients discard crutches between weeks 2-4 once full weight-bearing in the boot feels comfortable.",
-            },
-            {
-                question: "How do I know I'm ready to run?",
-                answer: "Aim for 25 single-leg heel raises and 90 % hop test symmetry before beginning a run-walk programme.",
-            },
-            {
-                question: "What gear helps during rehab?",
-                answer: "A purpose-built night splint, EVENup shoe leveler, waterproof boot cover and Therabands can all make rehab smoother. See our full equipment guide for details.",
-            },
-        ],
-    },
-    de: {
-        title: "Achillessehnenruptur-Rehabilitation: Wochenweiser Leitfaden & Meilensteine für die Rückkehr zum Sport",
-        description:
-            "Praktischer Fahrplan für die Genesung nach einer Achillessehnenruptur – Belastung, physiotherapeutische Übungen, Autofahren und die Rückkehr zum Sport.",
-        faqs: [
-            {
-                question:
-                    "Wie sieht der typische Zeitplan für die Achillessehnen-Reha aus?",
-                answer: "Wochen 0-2: Teilbelastung in einem Stiefel. Wochen 2-6: Reduzierung des Fersenkeils & frühe Physiotherapie. Wochen 6-10: aus dem Stiefel, Fersenheben. Monate 3-6: Übungen zur Rückkehr zum Laufen. 6+ Monate: uneingeschränkter Sport, wenn die Kraft >90 % beträgt.",
-            },
-            {
-                question: "Wann kann ich mit der Physiotherapie beginnen?",
-                answer: "Normalerweise um Woche 2-3 für sanfte Bewegungsübungen und Isometrie, mit Übergang zu Widerstandsübungen in den Wochen 6-10.",
-            },
-            {
-                question: "Wie schnell kann ich ohne Krücken gehen?",
-                answer: "Viele Patienten legen die Krücken zwischen den Wochen 2-4 ab, sobald sich die volle Belastung im Stiefel angenehm anfühlt.",
-            },
-            {
-                question: "Woher weiß ich, dass ich bereit bin zu laufen?",
-                answer: "Streben Sie 25 einbeinige Fersenhebungen und 90 % Symmetrie im Sprungtest an, bevor Sie mit einem Lauf-Geh-Programm beginnen.",
-            },
-            {
-                question: "Welche Ausrüstung hilft bei der Reha?",
-                answer: "Eine speziell angefertigte Nachtschiene, ein EVENup-Schuhausgleich, eine wasserdichte Stiefelabdeckung und Therabänder können die Reha erleichtern. Weitere Informationen finden Sie in unserem vollständigen Ausrüstungsleitfaden.",
-            },
-        ],
-    },
-    fr: {
-        title: "Rééducation de la rupture du tendon d'Achille : Guide semaine par semaine et jalons du retour au sport",
-        description:
-            "Feuille de route pratique pour la récupération après une rupture du tendon d'Achille – mise en charge, exercices de kinésithérapie, conduite et retour au sport.",
-        faqs: [
-            {
-                question:
-                    "Quel est le calendrier type de la rééducation du tendon d'Achille ?",
-                answer: "Semaines 0-2 : mise en charge partielle dans une botte. Semaines 2-6 : réduction de la talonnette et kinésithérapie précoce. Semaines 6-10 : sortie de la botte, élévations des talons. Mois 3-6 : exercices de retour à la course. 6+ mois : sport sans restriction lorsque la force est >90 %.",
-            },
-            {
-                question: "Quand puis-je commencer la kinésithérapie ?",
-                answer: "Généralement vers la semaine 2-3 pour une amplitude de mouvement douce et des exercices isométriques, en progressant vers un travail de résistance d'ici la semaine 6-10.",
-            },
-            {
-                question: "Quand puis-je marcher sans béquilles ?",
-                answer: "De nombreux patients abandonnent les béquilles entre les semaines 2 et 4, une fois que la mise en charge complète dans la botte est confortable.",
-            },
-            {
-                question: "Comment savoir si je suis prêt à courir ?",
-                answer: "Visez 25 élévations de talon sur une seule jambe et 90 % de symétrie au test de saut avant de commencer un programme de course-marche.",
-            },
-            {
-                question: "Quel équipement aide pendant la rééducation ?",
-                answer: "Une attelle de nuit sur mesure, un niveleur de chaussure EVENup, une housse de botte imperméable et des Therabands peuvent tous faciliter la rééducation. Consultez notre guide complet de l'équipement pour plus de détails.",
-            },
-        ],
+            "Comprehensive Achilles rupture rehabilitation guide covering recovery phases, exercise programs, physiotherapy protocols, and return-to-sport progression for optimal recovery.",
     },
     es: {
-        title: "Rehabilitación de la rotura del tendón de Aquiles: Guía semana a semana e hitos para el regreso al deporte",
+        title: "Rehabilitación de Ruptura de Aquiles: Guía Completa de Recuperación y Programa de Ejercicios",
         description:
-            "Hoja de ruta práctica para la recuperación después de una rotura del tendón de Aquiles: carga de peso, ejercicios de fisioterapia, conducción y regreso al deporte.",
-        faqs: [
-            {
-                question:
-                    "¿Cuál es el cronograma típico de rehabilitación de Aquiles?",
-                answer: "Semanas 0-2: carga de peso parcial en una bota. Semanas 2-6: reducción de la cuña del talón y fisioterapia temprana. Semanas 6-10: fuera de la bota, elevaciones de talón. Meses 3-6: ejercicios de regreso a la carrera. 6+ meses: deporte sin restricciones cuando la fuerza es >90 %.",
-            },
-            {
-                question: "¿Cuándo puedo empezar la fisioterapia?",
-                answer: "Generalmente alrededor de la semana 2-3 para un rango de movimiento suave e isométricos, progresando al trabajo de resistencia en la semana 6-10.",
-            },
-            {
-                question: "¿Qué tan pronto puedo caminar sin muletas?",
-                answer: "Muchos pacientes desechan las muletas entre las semanas 2 y 4 una vez que la carga de peso completa en la bota se siente cómoda.",
-            },
-            {
-                question: "¿Cómo sé que estoy listo para correr?",
-                answer: "Apunte a 25 elevaciones de talón con una sola pierna y un 90 % de simetría en la prueba de salto antes de comenzar un programa de correr y caminar.",
-            },
-            {
-                question: "¿Qué equipo ayuda durante la rehabilitación?",
-                answer: "Una férula nocturna hecha a medida, un nivelador de zapatos EVENup, una cubierta impermeable para botas y Therabands pueden facilitar la rehabilitación. Consulte nuestra guía completa de equipos para obtener más detalles.",
-            },
-        ],
+            "Guía completa de rehabilitación de ruptura de Aquiles que cubre fases de recuperación, programas de ejercicios, protocolos de fisioterapia y progresión de retorno al deporte para una recuperación óptima.",
+    },
+    fr: {
+        title: "Rééducation de Rupture d'Achille : Guide Complet de Récupération et Programme d'Exercices",
+        description:
+            "Guide complet de rééducation de rupture d'Achille couvrant les phases de récupération, programmes d'exercices, protocoles de physiothérapie et progression de retour au sport pour une récupération optimale.",
+    },
+    de: {
+        title: "Achillessehnenriss-Rehabilitation: Vollständiger Genesungsleitfaden & Übungsprogramm",
+        description:
+            "Umfassender Achillessehnenriss-Rehabilitationsleitfaden mit Genesungsphasen, Übungsprogrammen, Physiotherapie-Protokollen und Rückkehr-zum-Sport-Progression für optimale Genesung.",
+    },
+    it: {
+        title: "Riabilitazione Rottura di Achille: Guida Completa al Recupero e Programma di Esercizi",
+        description:
+            "Guida completa alla riabilitazione della rottura di Achille che copre fasi di recupero, programmi di esercizi, protocolli di fisioterapia e progressione di ritorno allo sport per un recupero ottimale.",
     },
 };
 
-const t = content[lang];
+const currentContent = content[lang];
 ---
 
-<FAQsLayout title={t.title} description={t.description}>
+<FAQsLayout
+    title={currentContent.title}
+    description={currentContent.description}
+>
     <AchillesRuptureRehabilitationSection lang={lang} />
     <NightSplintAdvert lang={lang} />
-    <FaqSchemaAccordion faqs={t.faqs} />
 </FAQsLayout>

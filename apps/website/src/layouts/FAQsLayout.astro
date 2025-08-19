@@ -1,8 +1,10 @@
 ---
+import type { Lang } from "@/config/languages";
+
 export interface Props {
     title: string;
     description: string;
-    lang?: string;
+    lang: Lang;
     alternateLanguages?: Array<{
         lang: string;
         url: string;

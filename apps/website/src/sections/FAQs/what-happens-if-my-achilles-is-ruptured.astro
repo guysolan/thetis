@@ -1,0 +1,428 @@
+---
+import FAQsSection, {
+    type ContentWithLinks,
+} from "@/components/FAQsSection.astro";
+import type { Lang } from "@/config/languages";
+
+const { lang } = Astro.props as { lang: Lang };
+
+const content: Record<Lang, ContentWithLinks> = {
+    en: {
+        title: "Find your answer:",
+        answers: [
+            {
+                title: "What will happen in A&E after an Achilles rupture?",
+                content: [
+                    {
+                        text: "Your injury will be assessed and if an Achilles tendon rupture is suspected then you will be put into a tip toe position with (usually) a plaster cast bandaged in place. Before visiting A&E, confirm the injury signs in our ",
+                    },
+                    {
+                        text: "Achilles rupture symptom checklist",
+                        href: "/FAQs/is-my-achilles-ruptured",
+                    },
+                    {
+                        text: ". This is so that at the back of your leg the two ends of the torn tendon will sit together and can start to heal. You might be fitted with a boot incorporating a high heel instead. You should be given crutches to help you walk.",
+                    },
+                    {
+                        text: "Blood thinning medicine is usually advised in order to prevent a blocked vein (thrombosis). Arrangements are made for you to see a specialist for further care.",
+                    },
+                ],
+            },
+            {
+                title: "What will the specialist do?",
+                content: [
+                    {
+                        text: "When you are seen by the specialist, the plaster cast is removed to allow the injury to be re-assessed and the diagnosis confirmed. Occasionally the Achilles tendon is normal and a similar more minor injury (e.g. calf muscle tear) is found instead. Sometimes there is no rupture, just tendinitis of the Achilles.",
+                    },
+                    {
+                        text: "Often an ultrasound scan is performed. This is not to check the diagnosis, but is to ensure that, in the tip toe position, the two ends of the tendon meet. Occasionally (about 10% of the time) they do not. Blood or other tissue can get between the tendon ends. This situation leads to a discussion regarding the merits of surgery. The goal of surgery is to remove the debris from between the two ends of the tendon and stitch them together to allow healing. The repair is not strong. The rehabilitation is the same for surgically repaired tendons as it is for those managed without an operation.",
+                    },
+                    {
+                        text: "The ultrasound scan also checks that there is no thrombosis (leg vein blockage) in the leg. After the ultrasound scan a special boot with heel wedges or hinges is fitted to replace the cast. This must be worn for a total of 10 weeks, to allow the tendon to heal. During this period the tip toe posture is maintained in the boot. If you remove the boot and stand up, the ankle will bend upwards and the repairing tendon is torn again.",
+                    },
+                    {
+                        text: "Sleeping in the hot and heavy boot is the most common complaint from patients recovering from an Achilles tendon rupture. The specially designed ",
+                    },
+                    {
+                        text: "Achilles Rupture Splint",
+                        href: "https://thetismedical.com/splint",
+                    },
+                    {
+                        text: ", from Thetis Medical solves these problems.",
+                    },
+                    {
+                        text: "The recovery is like the game Snakes and Ladders (Shutes and Ladders) – each week sees you closer to the finish. But one small mistake is like landing on the big snake that takes you right back to the beginning, with a re-rupture.",
+                    },
+                ],
+            },
+            {
+                title: "How many check-ups?",
+                content: [
+                    {
+                        text: "A clinic appointment may be recommended after 5 weeks to check healing and give instructions for gradual adjustment of the boot. Referral to physio is arranged. Further scans are not routinely required.",
+                    },
+                    {
+                        text: "Depending upon the type of boot you are using, instructions regarding changing the heel wedges or adjusting the hinge are now required. The position of the foot is gradually adjusted until you are walking almost flat in your boot (week 8-10). After 10 weeks your tendon is sufficiently well healed to discontinue the boot and start physiotherapy. However, the tendon has not reached full strength yet. It is advisable to put the boot on if you are going anywhere crowded, where the terrain is unpredictable or if there is any other reason why you might stumble or trip. Re-rupture of the tendon at this stage in recovery is extremely frustrating.",
+                    },
+                ],
+            },
+            {
+                title: "When should I see a physio?",
+                content: [
+                    {
+                        text: "Physiotherapy starts 9-10 weeks after injury. A specific rehab protocol is used by the physiotherapy team. Building up calf muscle strength is the key goal. This requires lots of exercises in between visits to the physiotherapist. It is important to NOT do vigorous stretches (even if the tendon feels a little tight) because the tendon can stretch out too much, resulting in long term loss of power in the leg. You can expect any tightness to gradually resolve over time and with normal activity.",
+                    },
+                ],
+            },
+            {
+                title: "Should I take blood-thinners?",
+                content: [
+                    {
+                        text: "An Achilles rupture is a relatively high-risk injury for developing a blockage in the leg veins. For this reason, blood-thinners are often recommended. Injections or tablets can be used. Different hospitals have different policies in this regard. No-one really knows the best duration to take blood-thinners for. After a new hip or new knee operation blood-thinners are often recommended for 6 weeks and many Foot and Ankle Surgeons recommend this duration of preventative treatment for Achilles rupture patients.",
+                    },
+                    {
+                        text: "If you have not been given any blood-thinners then 150mg of Aspirin a day is something you could consider taking until you discuss the issue with your specialist.",
+                    },
+                    {
+                        text: "Remember that even with blood-thinners it is possible (though very rare) to develop a thrombosis/blocked vein. Swelling of the whole leg up to the knee should prompt medical review even if painless.",
+                    },
+                ],
+            },
+        ],
+    },
+    es: {
+        title: "Encuentra tu respuesta:",
+        answers: [
+            {
+                title: "¿Qué pasará en urgencias después de una rotura de Aquiles?",
+                content: [
+                    {
+                        text: "Su lesión será evaluada y si se sospecha una rotura del tendón de Aquiles, se le colocará en posición de puntillas con (generalmente) un yeso vendado en su lugar. Antes de visitar urgencias, confirme los signos de la lesión en nuestra ",
+                    },
+                    {
+                        text: "lista de verificación de síntomas de rotura de Aquiles",
+                        href: "/es/FAQs/is-my-achilles-ruptured",
+                    },
+                    {
+                        text: ". Esto es para que en la parte posterior de su pierna los dos extremos del tendón desgarrado se junten y puedan comenzar a sanar. Podría ser equipado con una bota que incorpora un tacón alto en su lugar. Debería recibir muletas para ayudarle a caminar.",
+                    },
+                    {
+                        text: "Generalmente se aconseja medicamento anticoagulante para prevenir una vena bloqueada (trombosis). Se hacen arreglos para que vea a un especialista para más cuidados.",
+                    },
+                ],
+            },
+            {
+                title: "¿Qué hará el especialista?",
+                content: [
+                    {
+                        text: "Cuando sea visto por el especialista, se retira el yeso para permitir que la lesión sea re-evaluada y el diagnóstico confirmado. Ocasionalmente el tendón de Aquiles es normal y se encuentra una lesión similar más menor (ej. desgarro del músculo de la pantorrilla) en su lugar. A veces no hay rotura, solo tendinitis del Aquiles.",
+                    },
+                    {
+                        text: "A menudo se realiza una ecografía. Esto no es para verificar el diagnóstico, sino para asegurar que, en la posición de puntillas, los dos extremos del tendón se encuentren. Ocasionalmente (aproximadamente 10% de las veces) no lo hacen. Sangre u otro tejido puede quedar entre los extremos del tendón. Esta situación lleva a una discusión sobre los méritos de la cirugía. El objetivo de la cirugía es remover los escombros de entre los dos extremos del tendón y coserlos juntos para permitir la curación. La reparación no es fuerte. La rehabilitación es la misma para tendones reparados quirúrgicamente que para aquellos manejados sin operación.",
+                    },
+                    {
+                        text: "La ecografía también verifica que no haya trombosis (bloqueo de vena de la pierna) en la pierna. Después de la ecografía se ajusta una bota especial con cuñas del talón o bisagras para reemplazar el yeso. Esto debe usarse por un total de 10 semanas, para permitir que el tendón sane. Durante este período se mantiene la postura de puntillas en la bota. Si se quita la bota y se pone de pie, el tobillo se doblará hacia arriba y el tendón en reparación se desgarra de nuevo.",
+                    },
+                    {
+                        text: "Dormir en la bota caliente y pesada es la queja más común de los pacientes que se recuperan de una rotura del tendón de Aquiles. La ",
+                    },
+                    {
+                        text: "Férula de rotura de Aquiles",
+                        href: "https://thetismedical.com/splint",
+                    },
+                    {
+                        text: " especialmente diseñada de Thetis Medical resuelve estos problemas.",
+                    },
+                    {
+                        text: "La recuperación es como el juego Serpientes y Escaleras – cada semana te ve más cerca del final. Pero un pequeño error es como caer en la serpiente grande que te lleva de vuelta al principio, con una nueva rotura.",
+                    },
+                ],
+            },
+            {
+                title: "¿Cuántas revisiones?",
+                content: [
+                    {
+                        text: "Se puede recomendar una cita en la clínica después de 5 semanas para verificar la curación y dar instrucciones para el ajuste gradual de la bota. Se organiza la derivación al fisio. No se requieren más escaneos rutinariamente.",
+                    },
+                    {
+                        text: "Dependiendo del tipo de bota que esté usando, ahora se requieren instrucciones sobre cambiar las cuñas del talón o ajustar la bisagra. La posición del pie se ajusta gradualmente hasta que esté caminando casi plano en su bota (semana 8-10). Después de 10 semanas su tendón está suficientemente bien curado para discontinuar la bota y comenzar fisioterapia. Sin embargo, el tendón no ha alcanzado fuerza completa aún. Es aconsejable ponerse la bota si va a algún lugar concurrido, donde el terreno es impredecible o si hay alguna otra razón por la que podría tropezar. La nueva rotura del tendón en esta etapa de recuperación es extremadamente frustrante.",
+                    },
+                ],
+            },
+            {
+                title: "¿Cuándo debo ver a un fisio?",
+                content: [
+                    {
+                        text: "La fisioterapia comienza 9-10 semanas después de la lesión. El equipo de fisioterapia usa un protocolo de rehabilitación específico. Construir la fuerza del músculo de la pantorrilla es el objetivo clave. Esto requiere muchos ejercicios entre visitas al fisioterapeuta. Es importante NO hacer estiramientos vigorosos (even if the tendon feels a little tight) porque el tendón puede estirarse demasiado, resultando en pérdida de poder a largo plazo en la pierna. Puede esperar que cualquier tensión se resuelva gradualmente con el tiempo y con actividad normal.",
+                    },
+                ],
+            },
+            {
+                title: "¿Debo tomar anticoagulantes?",
+                content: [
+                    {
+                        text: "Una rotura de Aquiles es una lesión relativamente de alto riesgo para desarrollar un bloqueo en las venas de la pierna. Por esta razón, a menudo se recomiendan anticoagulantes. Se pueden usar inyecciones o tabletas. Diferentes hospitales tienen diferentes políticas en este sentido. Nadie realmente sabe la mejor duración para tomar anticoagulantes. Después de una nueva operación de cadera o rodilla a menudo se recomiendan anticoagulantes por 6 semanas y muchos cirujanos de pie y tobillo recomiendan esta duración de tratamiento preventivo para pacientes con rotura de Aquiles.",
+                    },
+                    {
+                        text: "Si no le han dado ningún anticoagulante entonces 150mg de Aspirina al día es algo que podría considerar tomar hasta que discuta el tema con su especialista.",
+                    },
+                    {
+                        text: "Recuerde que incluso con anticoagulantes es posible (aunque muy raro) desarrollar una trombosis/vena bloqueada. La hinchazón de toda la pierna hasta la rodilla debe provocar revisión médica incluso si es indolora.",
+                    },
+                ],
+            },
+        ],
+    },
+    fr: {
+        title: "Trouvez votre réponse :",
+        answers: [
+            {
+                title: "Que se passera-t-il aux urgences après une rupture d'Achille ?",
+                content: [
+                    {
+                        text: "Votre blessure sera évaluée et si une rupture du tendon d'Achille est suspectée, vous serez mis en position de pointe avec (généralement) un plâtre bandé en place. Avant de visiter les urgences, confirmez les signes de blessure dans notre ",
+                    },
+                    {
+                        text: "liste de vérification des symptômes de rupture d'Achille",
+                        href: "/fr/FAQs/is-my-achilles-ruptured",
+                    },
+                    {
+                        text: ". C'est pour que à l'arrière de votre jambe les deux extrémités du tendon déchiré se rejoignent et puissent commencer à guérir. Vous pourriez être équipé d'une botte incorporant un talon haut à la place. Vous devriez recevoir des béquilles pour vous aider à marcher.",
+                    },
+                    {
+                        text: "Un médicament anticoagulant est généralement conseillé afin de prévenir une veine bloquée (thrombose). Des arrangements sont faits pour que vous voyiez un spécialiste pour des soins supplémentaires.",
+                    },
+                ],
+            },
+            {
+                title: "Que fera le spécialiste ?",
+                content: [
+                    {
+                        text: "Lorsque vous êtes vu par le spécialiste, le plâtre est retiré pour permettre à la blessure d'être réévaluée et le diagnostic confirmé. Occasionnellement le tendon d'Achille est normal et une blessure similaire plus mineure (ex. déchirure du muscle du mollet) est trouvée à la place. Parfois il n'y a pas de rupture, juste une tendinite de l'Achille.",
+                    },
+                    {
+                        text: "Souvent une échographie est effectuée. Ce n'est pas pour vérifier le diagnostic, mais pour s'assurer que, en position de pointe, les deux extrémités du tendon se rencontrent. Occasionnellement (environ 10% du temps) elles ne le font pas. Du sang ou autre tissu peut se mettre entre les extrémités du tendon. Cette situation mène à une discussion concernant les mérites de la chirurgie. Le but de la chirurgie est de retirer les débris entre les deux extrémités du tendon et de les coudre ensemble pour permettre la guérison. La réparation n'est pas forte. La rééducation est la même pour les tendons réparés chirurgicalement que pour ceux gérés sans opération.",
+                    },
+                    {
+                        text: "L'échographie vérifie aussi qu'il n'y a pas de thrombose (blocage de veine de jambe) dans la jambe. Après l'échographie une botte spéciale avec des cales de talon ou des charnières est ajustée pour remplacer le plâtre. Cela doit être porté pour un total de 10 semaines, pour permettre au tendon de guérir. Pendant cette période la posture de pointe est maintenue dans la botte. Si vous retirez la botte et vous levez, la cheville se pliera vers le haut et le tendon en réparation est déchiré à nouveau.",
+                    },
+                    {
+                        text: "Dormir dans la botte chaude et lourde est la plainte la plus courante des patients se remettant d'une rupture du tendon d'Achille. L'",
+                    },
+                    {
+                        text: "Attelle de rupture d'Achille",
+                        href: "https://thetismedical.com/splint",
+                    },
+                    {
+                        text: " spécialement conçue de Thetis Medical résout ces problèmes.",
+                    },
+                    {
+                        text: "La récupération est comme le jeu Serpents et Échelles – chaque semaine vous rapproche de la fin. Mais une petite erreur est comme atterrir sur le gros serpent qui vous ramène au début, avec une nouvelle rupture.",
+                    },
+                ],
+            },
+            {
+                title: "Combien de contrôles ?",
+                content: [
+                    {
+                        text: "Un rendez-vous en clinique peut être recommandé après 5 semaines pour vérifier la guérison et donner des instructions pour l'ajustement graduel de la botte. La référence au kiné est arrangée. D'autres scans ne sont pas routinièrement requis.",
+                    },
+                    {
+                        text: "Selon le type de botte que vous utilisez, des instructions concernant le changement des cales de talon ou l'ajustement de la charnière sont maintenant requises. La position du pied est graduellement ajustée jusqu'à ce que vous marchiez presque à plat dans votre botte (semaine 8-10). Après 10 semaines votre tendon est suffisamment bien guéri pour discontinuer la botte et commencer la kinésithérapie. Cependant, le tendon n'a pas encore atteint sa pleine force. Il est conseillé de mettre la botte si vous allez quelque part de bondé, où le terrain est imprévisible ou s'il y a une autre raison pour laquelle vous pourriez trébucher. La nouvelle rupture du tendon à ce stade de récupération est extrêmement frustrante.",
+                    },
+                ],
+            },
+            {
+                title: "Quand devrais-je voir un kiné ?",
+                content: [
+                    {
+                        text: "La kinésithérapie commence 9-10 semaines après la blessure. Un protocole de rééducation spécifique est utilisé par l'équipe de kinésithérapie. Construire la force musculaire du mollet est l'objectif clé. Cela nécessite beaucoup d'exercices entre les visites au kinésithérapeute. Il est important de NE PAS faire d'étirements vigoureux (même si le tendon se sent un peu serré) parce que le tendon peut trop s'étirer, résultant en une perte de puissance à long terme dans la jambe. Vous pouvez vous attendre à ce que toute tension se résolve graduellement avec le temps et avec une activité normale.",
+                    },
+                ],
+            },
+            {
+                title: "Devrais-je prendre des anticoagulants ?",
+                content: [
+                    {
+                        text: "Une rupture d'Achille est une blessure relativement à haut risque pour développer un blocage dans les veines de la jambe. Pour cette raison, les anticoagulants sont souvent recommandés. Des injections ou des comprimés peuvent être utilisés. Différents hôpitaux ont différentes politiques à cet égard. Personne ne sait vraiment la meilleure durée pour prendre des anticoagulants. Après une nouvelle opération de hanche ou de genou les anticoagulants sont souvent recommandés pour 6 semaines et beaucoup de chirurgiens du pied et de la cheville recommandent cette durée de traitement préventif pour les patients avec rupture d'Achille.",
+                    },
+                    {
+                        text: "Si vous n'avez pas reçu d'anticoagulants alors 150mg d'Aspirine par jour est quelque chose que vous pourriez considérer prendre jusqu'à ce que vous discutiez le problème avec votre spécialiste.",
+                    },
+                    {
+                        text: "Rappelez-vous que même avec des anticoagulants il est possible (bien que très rare) de développer une thrombose/veine bloquée. Le gonflement de toute la jambe jusqu'au genou devrait provoquer une révision médicale même si indolore.",
+                    },
+                ],
+            },
+        ],
+    },
+    de: {
+        title: "Finden Sie Ihre Antwort:",
+        answers: [
+            {
+                title: "Was passiert in der Notaufnahme nach einer Achillessehnenruptur?",
+                content: [
+                    {
+                        text: "Ihre Verletzung wird beurteilt und wenn eine Achillessehnenruptur vermutet wird, werden Sie in eine Zehenspitzenposition gebracht mit (normalerweise) einem Gipsverband an Ort und Stelle. Bestätigen Sie vor dem Besuch der Notaufnahme die Verletzungszeichen in unserer ",
+                    },
+                    {
+                        text: "Achillessehnenruptur-Symptom-Checkliste",
+                        href: "/de/FAQs/is-my-achilles-ruptured",
+                    },
+                    {
+                        text: ". Dies ist so, dass an der Rückseite Ihres Beins die beiden Enden der gerissenen Sehne zusammen sitzen und zu heilen beginnen können. Sie könnten mit einem Stiefel ausgestattet werden, der stattdessen einen hohen Absatz enthält. Sie sollten Krücken erhalten, um Ihnen beim Gehen zu helfen.",
+                    },
+                    {
+                        text: "Blutverdünnungsmedizin wird normalerweise empfohlen, um eine blockierte Vene (Thrombose) zu verhindern. Es werden Vorkehrungen getroffen, damit Sie einen Spezialisten für weitere Pflege sehen.",
+                    },
+                ],
+            },
+            {
+                title: "Was wird der Spezialist tun?",
+                content: [
+                    {
+                        text: "Wenn Sie vom Spezialisten gesehen werden, wird der Gipsverband entfernt, um die Verletzung neu zu beurteilen und die Diagnose zu bestätigen. Gelegentlich ist die Achillessehne normal und eine ähnliche, geringfügigere Verletzung (z.B. Wadenmuskelriss) wird stattdessen gefunden. Manchmal gibt es keine Ruptur, nur eine Tendinitis der Achillessehne.",
+                    },
+                    {
+                        text: "Oft wird eine Ultraschalluntersuchung durchgeführt. Dies ist nicht, um die Diagnose zu überprüfen, sondern um sicherzustellen, dass in der Zehenspitzenposition die beiden Enden der Sehne zusammentreffen. Gelegentlich (etwa 10% der Zeit) tun sie das nicht. Blut oder anderes Gewebe kann zwischen die Sehnenenden gelangen. Diese Situation führt zu einer Diskussion über die Vorzüge einer Operation. Das Ziel der Operation ist es, die Trümmer zwischen den beiden Enden der Sehne zu entfernen und sie zusammenzunähen, um die Heilung zu ermöglichen. Die Reparatur ist nicht stark. Die Rehabilitation ist die gleiche für chirurgisch reparierte Sehnen wie für diejenigen, die ohne Operation behandelt werden.",
+                    },
+                    {
+                        text: "Die Ultraschalluntersuchung überprüft auch, dass es keine Thrombose (Beinvenenblockade) im Bein gibt. Nach der Ultraschalluntersuchung wird ein spezieller Stiefel mit Fersenkeilen oder Scharnieren angepasst, um den Gips zu ersetzen. Dies muss für insgesamt 10 Wochen getragen werden, um die Sehne zu heilen. Während dieser Zeit wird die Zehenspitzenhaltung im Stiefel beibehalten. Wenn Sie den Stiefel entfernen und aufstehen, wird sich der Knöchel nach oben biegen und die reparierende Sehne wird wieder gerissen.",
+                    },
+                    {
+                        text: "Das Schlafen im heißen und schweren Stiefel ist die häufigste Beschwerde von Patienten, die sich von einer Achillessehnenruptur erholen. Die speziell entwickelte ",
+                    },
+                    {
+                        text: "Achillessehnenruptur-Schiene",
+                        href: "https://thetismedical.com/splint",
+                    },
+                    {
+                        text: " von Thetis Medical löst diese Probleme.",
+                    },
+                    {
+                        text: "Die Genesung ist wie das Spiel Schlangen und Leitern – jede Woche bringt Sie näher ans Ziel. Aber ein kleiner Fehler ist wie auf der großen Schlange zu landen, die Sie direkt zurück zum Anfang bringt, mit einer erneuten Ruptur.",
+                    },
+                ],
+            },
+            {
+                title: "Wie viele Kontrollen?",
+                content: [
+                    {
+                        text: "Ein Kliniktermin kann nach 5 Wochen empfohlen werden, um die Heilung zu überprüfen und Anweisungen für die schrittweise Anpassung des Stiefels zu geben. Die Überweisung zum Physio wird arrangiert. Weitere Scans sind routinemäßig nicht erforderlich.",
+                    },
+                    {
+                        text: "Je nach Art des Stiefels, den Sie verwenden, sind jetzt Anweisungen bezüglich des Wechsels der Fersenkeile oder der Einstellung des Scharniers erforderlich. Die Position des Fußes wird schrittweise angepasst, bis Sie fast flach in Ihrem Stiefel gehen (Woche 8-10). Nach 10 Wochen ist Ihre Sehne ausreichend gut verheilt, um den Stiefel zu beenden und mit der Physiotherapie zu beginnen. Die Sehne hat jedoch noch nicht ihre volle Kraft erreicht. Es ist ratsam, den Stiefel anzuziehen, wenn Sie irgendwohin gehen, wo es voll ist, wo das Gelände unvorhersehbar ist oder wenn es einen anderen Grund gibt, warum Sie stolpern könnten. Eine erneute Ruptur der Sehne in diesem Stadium der Genesung ist extrem frustrierend.",
+                    },
+                ],
+            },
+            {
+                title: "Wann sollte ich einen Physio sehen?",
+                content: [
+                    {
+                        text: "Die Physiotherapie beginnt 9-10 Wochen nach der Verletzung. Ein spezifisches Reha-Protokoll wird vom Physiotherapie-Team verwendet. Der Aufbau der Wadenmuskelkraft ist das Hauptziel. Dies erfordert viele Übungen zwischen den Besuchen beim Physiotherapeuten. Es ist wichtig, KEINE kräftigen Dehnungen zu machen (auch wenn die Sehne sich etwas eng anfühlt), weil die Sehne zu sehr gedehnt werden kann, was zu langfristigem Kraftverlust im Bein führt. Sie können erwarten, dass sich jede Enge mit der Zeit und bei normaler Aktivität allmählich löst.",
+                    },
+                ],
+            },
+            {
+                title: "Sollte ich Blutverdünner nehmen?",
+                content: [
+                    {
+                        text: "Eine Achillessehnenruptur ist eine relativ hochriskante Verletzung für die Entwicklung einer Blockade in den Beinvenen. Aus diesem Grund werden oft Blutverdünner empfohlen. Injektionen oder Tabletten können verwendet werden. Verschiedene Krankenhäuser haben verschiedene Richtlinien in dieser Hinsicht. Niemand weiß wirklich die beste Dauer, um Blutverdünner zu nehmen. Nach einer neuen Hüft- oder Knieoperation werden oft Blutverdünner für 6 Wochen empfohlen und viele Fuß- und Knöchelchirurgen empfehlen diese Dauer der vorbeugenden Behandlung für Achillessehnenruptur-Patienten.",
+                    },
+                    {
+                        text: "Wenn Sie keine Blutverdünner erhalten haben, dann ist 150mg Aspirin pro Tag etwas, das Sie in Betracht ziehen könnten, bis Sie das Problem mit Ihrem Spezialisten besprechen.",
+                    },
+                    {
+                        text: "Denken Sie daran, dass es auch mit Blutverdünnern möglich ist (obwohl sehr selten), eine Thrombose/blockierte Vene zu entwickeln. Schwellungen des gesamten Beins bis zum Knie sollten eine medizinische Überprüfung veranlassen, auch wenn schmerzlos.",
+                    },
+                ],
+            },
+        ],
+    },
+    it: {
+        title: "Trova la tua risposta:",
+        answers: [
+            {
+                title: "Cosa succederà al pronto soccorso dopo una rottura di Achille?",
+                content: [
+                    {
+                        text: "La tua lesione sarà valutata e se si sospetta una rottura del tendine di Achille, sarai messo in posizione di punta con (solitamente) un gesso fasciato in posizione. Prima di visitare il pronto soccorso, conferma i segni della lesione nella nostra ",
+                    },
+                    {
+                        text: "lista di controllo dei sintomi della rottura di Achille",
+                        href: "/it/FAQs/is-my-achilles-ruptured",
+                    },
+                    {
+                        text: ". Questo è così che nella parte posteriore della tua gamba i due estremi del tendine strappato si siedano insieme e possano iniziare a guarire. Potresti essere equipaggiato con uno stivale che incorpora un tacco alto invece. Dovresti ricevere stampelle per aiutarti a camminare.",
+                    },
+                    {
+                        text: "La medicina anticoagulante è solitamente consigliata per prevenire una vena bloccata (trombosi). Sono fatti accordi per farti vedere uno specialista per ulteriori cure.",
+                    },
+                ],
+            },
+            {
+                title: "Cosa farà lo specialista?",
+                content: [
+                    {
+                        text: "Quando sei visto dallo specialista, il gesso è rimosso per permettere alla lesione di essere rivalutata e la diagnosi confermata. Occasionalmente il tendine di Achille è normale e una lesione simile più minore (es. strappo del muscolo del polpaccio) è trovata invece. A volte non c'è rottura, solo tendinite dell'Achille.",
+                    },
+                    {
+                        text: "Spesso viene esegita un'ecografia. Questo non è per controllare la diagnosi, ma per assicurarsi che, in posizione di punta, i due estremi del tendine si incontrino. Occasionalmente (circa 10% delle volte) non lo fanno. Sangue o altro tessuto può entrare tra gli estremi del tendine. Questa situazione porta a una discussione riguardo i meriti della chirurgia. L'obiettivo della chirurgia è rimuovere i detriti tra i due estremi del tendine e cucirli insieme per permettere la guarigione. La riparazione non è forte. La riabilitazione è la stessa per i tendini riparati chirurgicamente che per quelli gestiti senza operazione.",
+                    },
+                    {
+                        text: "L'ecografia controlla anche che non ci sia trombosi (blocco della vena della gamba) nella gamba. Dopo l'ecografia uno stivale speciale con cunei del tallone o cerniere è adattato per sostituire il gesso. Questo deve essere indossato per un totale di 10 settimane, per permettere al tendine di guarire. Durante questo periodo la postura di punta è mantenuta nello stivale. Se rimuovi lo stivale e ti alzi, la caviglia si piegherà verso l'alto e il tendine in riparazione è strappato di nuovo.",
+                    },
+                    {
+                        text: "Dormire nello stivale caldo e pesante è il reclamo più comune dei pazienti che si riprendono da una rottura del tendine di Achille. La ",
+                    },
+                    {
+                        text: "Stecca per rottura di Achille",
+                        href: "https://thetismedical.com/splint",
+                    },
+                    {
+                        text: " appositamente progettata di Thetis Medical risolve questi problemi.",
+                    },
+                    {
+                        text: "Il recupero è come il gioco Serpenti e Scale – ogni settimana ti vede più vicino al traguardo. Ma un piccolo errore è come atterrare sul serpente grande che ti riporta direttamente all'inizio, con una nuova rottura.",
+                    },
+                ],
+            },
+            {
+                title: "Quanti controlli?",
+                content: [
+                    {
+                        text: "Un appuntamento in clinica può essere raccomandato dopo 5 settimane per controllare la guarigione e dare istruzioni per il graduale aggiustamento dello stivale. Il rinvio al fisio è organizzato. Ulteriori scansioni non sono routinariamente richieste.",
+                    },
+                    {
+                        text: "A seconda del tipo di stivale che stai usando, ora sono richieste istruzioni riguardo il cambiamento dei cunei del tallone o l'aggiustamento della cerniera. La posizione del piede è gradualmente aggiustata finché stai camminando quasi piatto nel tuo stivale (settimana 8-10). Dopo 10 settimane il tuo tendine è sufficientemente ben guarito per discontinare lo stivale e iniziare la fisioterapia. Tuttavia, il tendine non ha ancora raggiunto la forza completa. È consigliabile mettere lo stivale se stai andando da qualche parte affollato, dove il terreno è imprevedibile o se c'è qualche altra ragione per cui potresti inciampare. La nuova rottura del tendine in questa fase di recupero è estremamente frustrante.",
+                    },
+                ],
+            },
+            {
+                title: "Quando dovrei vedere un fisio?",
+                content: [
+                    {
+                        text: "La fisioterapia inizia 9-10 settimane dopo la lesione. Un protocollo di riabilitazione specifico è usato dal team di fisioterapia. Costruire la forza muscolare del polpaccio è l'obiettivo chiave. Questo richiede molti esercizi tra le visite al fisioterapista. È importante NON fare allungamenti vigorosi (anche se il tendine si sente un po' stretto) perché il tendine può allungarsi troppo, risultando in perdita di potere a lungo termine nella gamba. Puoi aspettarti che qualsiasi tensione si risolva gradualmente nel tempo e con attività normale.",
+                    },
+                ],
+            },
+            {
+                title: "Dovrei prendere anticoagulanti?",
+                content: [
+                    {
+                        text: "Una rottura di Achille è una lesione relativamente ad alto rischio per sviluppare un blocco nelle vene della gamba. Per questa ragione, gli anticoagulanti sono spesso raccomandati. Iniezioni o compresse possono essere usate. Ospedali diversi hanno politiche diverse in questo riguardo. Nessuno sa davvero la migliore durata per prendere anticoagulanti. Dopo una nuova operazione di anca o ginocchio gli anticoagulanti sono spesso raccomandati per 6 settimane e molti chirurghi del piede e della caviglia raccomandano questa durata di trattamento preventivo per pazienti con rottura di Achille.",
+                    },
+                    {
+                        text: "Se non ti è stato dato nessun anticoagulante allora 150mg di Aspirina al giorno è qualcosa che potresti considerare di prendere finché non discuti il problema con il tuo specialista.",
+                    },
+                    {
+                        text: "Ricorda che anche con anticoagulanti è possibile (anche se molto raro) sviluppare una trombosi/vena bloccata. Il gonfiore di tutta la gamba fino al ginocchio dovrebbe provocare revisione medica anche se indolore.",
+                    },
+                ],
+            },
+        ],
+    },
+};
+---
+
+<FAQsSection content={content[lang]} />
