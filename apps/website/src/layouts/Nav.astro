@@ -12,6 +12,7 @@ export interface Props {
 }
 
 const { lang = "en" } = Astro.props as Props;
+const currentPath = Astro.url.pathname;
 
 const content = {
     en: {
@@ -52,8 +53,7 @@ const t = content[lang];
                 class={buttonVariants({ variant: "default", size: "sm" })}
                 href="/buy-now">{t.buyNow}</a
             >
-            <LanguageSwitcher />
-            <MobileNav client:load lang={lang} />
+            <MobileNav client:load lang={lang} currentPath={currentPath} />
         </div>
     </div>
 </header>

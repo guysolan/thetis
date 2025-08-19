@@ -6,9 +6,13 @@ import {
 } from "../components/ui/accordion";
 import { Badge } from "../components/ui/badge";
 
-import { articles } from "@thetis/website/src/content/articles";
-import { productLinks } from "@/content/pages.tsx";
-import { contactLinks, partnerLinks } from "@/content/pages.tsx";
+import {
+  getArticleRoutesByLanguage,
+  getContactRoutesByLanguage,
+  getPartnerRoutesByLanguage,
+  getProductRoutesByLanguage,
+} from "@/content/routes.tsx";
+import nightSplintImage from "@/assets/night-splint/night_splint_bed_side.jpg";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Lang } from "../config/languages";
@@ -52,6 +56,19 @@ const content = {
 
 const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
   const t = content[lang];
+
+  // Get localized routes
+  const productLinks = getProductRoutesByLanguage(lang).map((link) => {
+    // Add image to the Achilles splint product
+    if (link.slug === "achilles-rupture-splint") {
+      return { ...link, image: nightSplintImage };
+    }
+    return link;
+  });
+  const partnerLinks = getPartnerRoutesByLanguage(lang);
+  const contactLinks = getContactRoutesByLanguage(lang);
+  const articleRoutes = getArticleRoutesByLanguage(lang);
+
   return (
     <Accordion type="single" collapsible>
       {/* Products */}
@@ -127,7 +144,7 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
         <AccordionTrigger>{t.patientGuides}</AccordionTrigger>
         <AccordionContent>
           <div className="flex flex-col gap-2">
-            {articles.map((article) => (
+            {articleRoutes.map((article) => (
               <a
                 key={article.href}
                 href={article.href}
@@ -146,7 +163,7 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
                     </p>
                   )}
                   <div className="flex flex-wrap gap-1 pt-2">
-                    {article.tags.map((tag) => (
+                    {article.tags?.map((tag) => (
                       <Badge
                         key={`${article.href}-${tag.words}`}
                         className={`${tag.color} text-black bg-opacity-80 font-light text-xs`}

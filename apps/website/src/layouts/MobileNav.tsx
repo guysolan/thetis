@@ -19,10 +19,13 @@ import { cn } from "../lib/utils";
 import NavAccordion from "./NavAccordion";
 import { ArrowRight } from "lucide-react";
 import Thetis from "./Thetis.tsx";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { getRouteBySlugAndLanguage } from "@/content/routes.tsx";
 import type { Lang } from "../config/languages.ts";
 
 interface MobileNavProps {
   lang: Lang;
+  currentPath?: string;
 }
 
 const content = {
@@ -53,8 +56,12 @@ const content = {
   },
 };
 
-export function MobileNav({ lang = "en" }: MobileNavProps) {
+export function MobileNav({ lang = "en", currentPath = "/" }: MobileNavProps) {
   const t = content[lang];
+
+  // Get localized routes
+  const buyNowRoute = getRouteBySlugAndLanguage("buy-now", lang);
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -65,18 +72,24 @@ export function MobileNav({ lang = "en" }: MobileNavProps) {
       <SheetContent className="p-4 w-[90vw]">
         <SheetHeader className="flex flex-row justify-between items-center">
           <Thetis />
-          <SheetClose
-            className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-          >
-            {t.close}
-          </SheetClose>
+          <div className="flex items-center gap-2">
+            <SheetClose
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+            >
+              {t.close}
+            </SheetClose>
+          </div>
         </SheetHeader>
-        <NavAccordion />
+        <div className="flex flex-row justify-between items-center pt-2">
+          <LanguageSwitcher currentPath={currentPath} />
+        </div>
+
+        <NavAccordion lang={lang} />
 
         <SheetFooter className="flex flex-col gap-y-4 mt-4">
           <SheetClose>
             <a
-              href="/buy-now"
+              href={buyNowRoute?.href || "/buy-now"}
               className={cn(
                 "w-full",
                 buttonVariants({ variant: "default", size: "lg" }),

@@ -1,5 +1,3 @@
-import nightSplintImage from "./night_splint_bed_side.jpg";
-import AchillesDrawing from "../assets/drawings/achilles-drawing.svg";
 import { type Language, languages } from "../config/languages";
 import type { ImageMetadata } from "astro";
 import {
@@ -9,8 +7,10 @@ import {
   HeartHandshake,
   Mail,
   Microscope,
+  Moon,
   Rewind,
   ShoppingCart,
+  Star,
   Stethoscope,
 } from "lucide-react";
 
@@ -156,8 +156,7 @@ export const productRoutes: BaseRoute[] = [
       "achilles-tendon-splint",
       "achilles-splint",
     ],
-    image: nightSplintImage,
-    icon: "Moon",
+    icon: <Moon />,
     variant: "outline",
   },
   {
@@ -184,7 +183,7 @@ export const productRoutes: BaseRoute[] = [
       it: "recensioni",
     },
     legacySlugs: ["customer-reviews", "testimonials", "feedback"],
-    icon: "Star",
+    icon: <Star />,
     variant: "outline",
   },
 ];
@@ -525,7 +524,6 @@ export const articleRoutes: BaseRoute[] = [
       { words: "Treatment", color: "bg-orange-200" },
       { words: "Recovery", color: "bg-purple-200" },
     ],
-    image: AchillesDrawing,
     icon: "Calendar",
   },
   {
@@ -557,7 +555,6 @@ export const articleRoutes: BaseRoute[] = [
       it: "FAQs/trattamento-rottura-achille",
     },
     tags: [{ words: "Treatment", color: "bg-orange-200" }],
-    image: AchillesDrawing,
     icon: "Activity",
   },
   {
@@ -620,7 +617,6 @@ export const articleRoutes: BaseRoute[] = [
       it: "FAQs/recupero-achille-strappato",
     },
     tags: [{ words: "Recovery", color: "bg-purple-200" }],
-    image: AchillesDrawing,
     icon: "Hourglass",
   },
   {
@@ -652,7 +648,6 @@ export const articleRoutes: BaseRoute[] = [
       it: "FAQs/cosa-succede-se-il-mio-achille-e-rotto",
     },
     tags: [{ words: "Treatment", color: "bg-orange-200" }],
-    image: AchillesDrawing,
     icon: "HelpCircle",
   },
   {
@@ -684,7 +679,6 @@ export const articleRoutes: BaseRoute[] = [
       it: "FAQs/vita-dopo-rottura-achille",
     },
     tags: [{ words: "Recovery", color: "bg-purple-200" }],
-    image: AchillesDrawing,
     icon: "Heart",
   },
 ];

@@ -3,7 +3,7 @@ import { languages } from "../src/config/languages";
 import { allBaseRoutes } from "../src/content/routes";
 
 test.describe("Route Testing", () => {
-    const baseUrl = "http://localhost:2121"; // Adjust if your dev server runs on different port
+    const baseUrl = "http://localhost:2122"; // Adjust if your dev server runs on different port
 
     // Test all routes for each language
     for (const language of languages) {
@@ -17,7 +17,7 @@ test.describe("Route Testing", () => {
                 const expectedTitle = route.title[language.code] ||
                     route.title.en;
 
-                test(`should load ${url}`, async ({ page }) => {
+                test(`should load ${url} (${route.slug})`, async ({ page }) => {
                     // Navigate to the page
                     await page.goto(url);
 
