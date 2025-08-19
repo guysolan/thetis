@@ -1,4 +1,5 @@
 import { type Language, languages } from "../config/languages";
+import { Activity, Calendar, Heart, HelpCircle, Hourglass } from "lucide-react";
 import type { ImageMetadata } from "astro";
 import {
   Box,
@@ -524,7 +525,7 @@ export const articleRoutes: BaseRoute[] = [
       { words: "Treatment", color: "bg-orange-200" },
       { words: "Recovery", color: "bg-purple-200" },
     ],
-    icon: "Calendar",
+    icon: <Calendar />,
   },
   {
     slug: "FAQs/achilles-tear-treatment",
@@ -555,7 +556,7 @@ export const articleRoutes: BaseRoute[] = [
       it: "FAQs/trattamento-rottura-achille",
     },
     tags: [{ words: "Treatment", color: "bg-orange-200" }],
-    icon: "Activity",
+    icon: <Activity />,
   },
   {
     slug: "FAQs/is-my-achilles-ruptured",
@@ -586,7 +587,7 @@ export const articleRoutes: BaseRoute[] = [
       it: "FAQs/il-mio-achille-e-rotto",
     },
     tags: [{ words: "Diagnosis", color: "bg-rose-100" }],
-    icon: "Stethoscope",
+    icon: <Stethoscope />,
   },
   {
     slug: "FAQs/torn-achilles-recovery",
@@ -617,7 +618,7 @@ export const articleRoutes: BaseRoute[] = [
       it: "FAQs/recupero-achille-strappato",
     },
     tags: [{ words: "Recovery", color: "bg-purple-200" }],
-    icon: "Hourglass",
+    icon: <Hourglass />,
   },
   {
     slug: "FAQs/what-happens-if-my-achilles-is-ruptured",
@@ -648,7 +649,7 @@ export const articleRoutes: BaseRoute[] = [
       it: "FAQs/cosa-succede-se-il-mio-achille-e-rotto",
     },
     tags: [{ words: "Treatment", color: "bg-orange-200" }],
-    icon: "HelpCircle",
+    icon: <HelpCircle />,
   },
   {
     slug: "FAQs/life-after-achilles-rupture",
@@ -679,7 +680,7 @@ export const articleRoutes: BaseRoute[] = [
       it: "FAQs/vita-dopo-rottura-achille",
     },
     tags: [{ words: "Recovery", color: "bg-purple-200" }],
-    icon: "Heart",
+    icon: <Heart />,
   },
 ];
 

@@ -11,11 +11,9 @@ const HighlightedParagraph = (
   return (
     <>
       {paragraph.map((item, i) => (
-        <>
-          {item.highlighted
-            ? <HighlightedWord key={item.text + i}>{item.text}</HighlightedWord>
-            : <span key={item.text + i}>{item.text}</span>}
-        </>
+        item.highlighted
+          ? <HighlightedWord key={item.text + i}>{item.text}</HighlightedWord>
+          : <span key={item.text + i}>{item.text}</span>
       ))}
     </>
   );

@@ -84,61 +84,55 @@ const currentContent = content[lang as keyof typeof content];
 
         <ComfortableRecoveryReviews lang={lang} />
 
+        <!-- Lazy load YouTube iframe -->
         <div class="relative mx-auto mt-8 w-full">
-            <iframe
-                class="shadow-lg mx-auto rounded-lg w-full max-w-[300px] md:hover:max-w-[60vw] md:max-w-[50vw] lg:hover:max-w-[70vw] hover:max-w-[80vw] aspect-video transition-all duration-300 cursor-pointer"
-                title="Night-Splint-Application"
-                src="https://www.youtube.com/embed/T09Xnwaqbm0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
+            <div
+                id="youtube-placeholder"
+                class="flex justify-center items-center bg-gray-200 shadow-lg mx-auto rounded-lg w-full max-w-[300px] md:max-w-[50vw] lg:max-w-[70vw] aspect-video cursor-pointer"
+                data-youtube-id="T09Xnwaqbm0"
             >
-            </iframe>
+                <div class="text-center">
+                    <div class="mb-2 text-4xl">▶️</div>
+                    <p class="text-gray-600 text-sm">Click to load video</p>
+                </div>
+            </div>
         </div>
 
         <NightSplintUsage lang={lang} />
 
         <NightSplintInstructions lang={lang} />
 
-        <Slide title="Sizing">
-            <SizeChart />
-        </Slide>
-
-        <SplintDownloads lang={lang} />
+        <NightSplintFAQs lang={lang} />
 
         <OrderYourSplint lang={lang} />
 
-        <Slide title="FAQs">
-            <NightSplintFAQs client:load />
-        </Slide>
+        <SplintDownloads lang={lang} />
+
+        <!-- Load reviews last since they're not critical for initial page load -->
+        <Reviews />
     </main>
 
     <script>
-        fetch("https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq")
-            .then((res) => res.json())
-            .then((response) => {
-                console.log("Country: ", response.country);
-                try {
-                    // Check if on Splint Page
-                    const shopify = document.getElementById(
-                        "shopify-buy-button-wrapper",
-                    );
-                    const amazon = document.getElementById(
-                        "amazon-buy-button-wrapper",
-                    );
+        // Lazy load YouTube iframe when user clicks on placeholder
+        document.addEventListener("DOMContentLoaded", () => {
+            const placeholder = document.getElementById("youtube-placeholder");
+            if (placeholder) {
+                placeholder.addEventListener("click", () => {
+                    const youtubeId =
+                        placeholder.getAttribute("data-youtube-id");
+                    const iframe = document.createElement("iframe");
+                    iframe.className =
+                        "shadow-lg mx-auto rounded-lg w-full max-w-[300px] md:hover:max-w-[60vw] md:max-w-[50vw] lg:hover:max-w-[70vw] hover:max-w-[80vw] aspect-video transition-all duration-300 cursor-pointer";
+                    iframe.title = "Night-Splint-Application";
+                    iframe.src = `https://www.youtube.com/embed/${youtubeId}`;
+                    iframe.allow =
+                        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                    iframe.allowFullscreen = true;
 
-                    if (response.country === "United Kingdom") {
-                        amazon?.remove();
-                    } else {
-                        shopify?.remove();
-                    }
-                } catch (error) {
-                    // console.log(error)
-                }
-            })
-            .catch((reason: any) => {
-                console.log(reason);
-                // console.log('Request failed');
-            });
+                    placeholder.parentNode?.replaceChild(iframe, placeholder);
+                });
+            }
+        });
     </script>
 
     <style>

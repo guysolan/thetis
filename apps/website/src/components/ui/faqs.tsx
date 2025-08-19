@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
 } from "@/components/ui/accordion";
+import { cn } from "@/lib/utils";
 
 export type FAQItem = {
   question: string;
@@ -50,7 +51,7 @@ const FAQs = ({
             question: q.question,
             answer: answerText,
           };
-        }),
+        })
       );
 
       // Create the FAQ schema
@@ -89,7 +90,7 @@ const FAQs = ({
   }, [faqs, withSchema]);
 
   return (
-    <Accordion className={className} type="multiple">
+    <Accordion className={cn("px-4 md:px-0", className)} type="multiple">
       {faqs.map((faq) => (
         <AccordionItem key={faq.category} value={faq.category} className="">
           <AccordionTrigger className="py-8 font-semibold text-neutral-900 text-xl">
