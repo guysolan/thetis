@@ -161,6 +161,42 @@ export const productRoutes: BaseRoute[] = [
     variant: "outline",
   },
   {
+    slug: "achilles-rupture-splint/large/right",
+    title: {
+      en: "Achilles Rupture Splint Large Right",
+    },
+    description: {
+      en: "Recovery quicker and more comfortably from achilles tendon rupture.",
+    },
+  },
+  {
+    slug: "achilles-rupture-splint/large/left",
+    title: {
+      en: "Achilles Rupture Splint Large Left",
+    },
+    description: {
+      en: "Recovery quicker and more comfortably from achilles tendon rupture.",
+    },
+  },
+  {
+    slug: "achilles-rupture-splint/small/right",
+    title: {
+      en: "Achilles Rupture Splint Small Right",
+    },
+    description: {
+      en: "Recovery quicker and more comfortably from achilles tendon rupture.",
+    },
+  },
+  {
+    slug: "achilles-rupture-splint/small/left",
+    title: {
+      en: "Achilles Rupture Splint Small Left",
+    },
+    description: {
+      en: "Recovery quicker and more comfortably from achilles tendon rupture.",
+    },
+  },
+  {
     slug: "reviews",
     title: {
       en: "Reviews",
