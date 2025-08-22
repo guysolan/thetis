@@ -60,9 +60,15 @@ async function detectUserRegion(): Promise<"us" | "uk"> {
 }
 
 export async function getStaticPaths() {
-    // For SSR, we don't need to pre-generate all paths
-    // The page will be rendered dynamically based on user location
-    return [];
+    // Generate paths for all size/side combinations
+    const sizes = ["large", "small"];
+    const sides = ["left", "right"];
+
+    return sizes.flatMap((size) =>
+        sides.map((side) => ({
+            params: { size, side },
+        })),
+    );
 }
 
 const { size, side } = Astro.params;
@@ -76,13 +82,11 @@ const url = new URL(Astro.request.url);
 const currentRegion = url.searchParams.get("region") as "us" | "uk" | null;
 const finalRegion = currentRegion || region;
 
-// If no region parameter is set, redirect to include the detected region
+// If no region parameter is set, use the detected region without redirecting
 if (!currentRegion) {
     console.log(
-        `No region parameter found, redirecting to include region: ${finalRegion}`,
+        `No region parameter found, using detected region: ${finalRegion}`,
     );
-    url.searchParams.set("region", finalRegion);
-    return Astro.redirect(url.pathname + url.search);
 }
 
 console.log(`Final region being used: ${finalRegion}`);
@@ -242,7 +246,7 @@ const variants = [
                             </div>
                         </div>
 
-                        <CheckWithCareTeam client:load />
+                        <CheckWithCareTeam lang="en" client:load />
 
                         <!-- Add to Cart Button -->
                         <div class="space-y-4">
@@ -274,7 +278,7 @@ const variants = [
                             }
                             <br />
 
-                            <FreeAndSecure />
+                            <FreeAndSecure lang="en" />
                         </div>
                     </div>
                 </div>
