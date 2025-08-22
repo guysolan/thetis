@@ -379,7 +379,7 @@ export const contactRoutes: BaseRoute[] = [
     variant: "outline",
     slugTranslations: {
       en: "order-wholesale",
-      de: "großhandel-bestellen",
+      de: "grosshandel-bestellen",
       fr: "commander-en-gros",
       es: "pedido-al-por-mayor",
       it: "ordina-all-ingrosso",
