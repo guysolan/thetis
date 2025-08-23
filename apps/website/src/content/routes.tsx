@@ -108,6 +108,7 @@ export interface BaseRoute {
   variant?: "default" | "outline";
   image?: ImageMetadata; // ImageMetadata
   tags?: Array<{ words: string; color: string }>;
+  subQuestions?: Record<string, Record<string, string>>; // Translated sub-questions for each language
 }
 
 // Resolved route with language-specific information
@@ -584,6 +585,47 @@ export const articleRoutes: BaseRoute[] = [
       it:
         "Naviga attraverso una guida completa dedicata alla comprensione delle opzioni di trattamento per un tendine di Achille rotto. Approfondisci aspetti come considerazioni chirurgiche, gestione del dolore post-operatorio e il percorso verso la guarigione.",
     },
+    subQuestions: {
+      en: {
+        q1: "How to treat a torn Achilles tendon / Op vs Non-Op?",
+        q2: "How long can you wait for Achilles tendon surgery?",
+        q3: "How long does Achilles tendon surgery take?",
+        q4: "Recovery from Achilles Rupture Surgery",
+        q5: "Pain after Achilles tendon rupture / surgery",
+      },
+      de: {
+        q1: "Wie behandelt man eine gerissene Achillessehne / OP vs Nicht-OP?",
+        q2: "Wie lange kann man mit einer Achillessehnen-OP warten?",
+        q3: "Wie lange dauert eine Achillessehnen-Operation?",
+        q4: "Genesung nach Achillessehnen-Operation",
+        q5: "Schmerzen nach Achillessehnenriss / Operation",
+      },
+      fr: {
+        q1:
+          "Comment traiter un tendon d'Achille déchiré / Opération vs Non-Op?",
+        q2:
+          "Combien de temps peut-on attendre pour une chirurgie du tendon d'Achille?",
+        q3: "Combien de temps dure une chirurgie du tendon d'Achille?",
+        q4: "Récupération après chirurgie de rupture d'Achille",
+        q5: "Douleur après rupture / chirurgie du tendon d'Achille",
+      },
+      es: {
+        q1: "¿Cómo tratar un tendón de Aquiles roto / Cirugía vs No Cirugía?",
+        q2:
+          "¿Cuánto tiempo se puede esperar para la cirugía del tendón de Aquiles?",
+        q3: "¿Cuánto dura la cirugía del tendón de Aquiles?",
+        q4: "Recuperación después de la cirugía de ruptura de Aquiles",
+        q5: "Dolor después de ruptura / cirugía del tendón de Aquiles",
+      },
+      it: {
+        q1: "Come trattare un tendine di Achille rotto / Operazione vs Non-Op?",
+        q2:
+          "Quanto tempo si può aspettare per la chirurgia del tendine di Achille?",
+        q3: "Quanto dura l'operazione del tendine di Achille?",
+        q4: "Recupero dopo chirurgia della rottura di Achille",
+        q5: "Dolore dopo rottura / chirurgia del tendine di Achille",
+      },
+    },
     slugTranslations: {
       en: "FAQs/achilles-tear-treatment",
       de: "FAQs/achillessehnenriss-behandlung",
@@ -614,6 +656,28 @@ export const articleRoutes: BaseRoute[] = [
         "Descubra todo lo que necesita para determinar si ha experimentado una ruptura del tendón de Aquiles. Aprenda sobre las causas, síntomas y la gravedad de la lesión.",
       it:
         "Scopri tutto quello che devi sapere per determinare se hai subito una rottura del tendine di Achille. Impara le cause, i sintomi e la gravità della lesione.",
+    },
+    subQuestions: {
+      en: {
+        q1: "Is my Achilles Ruptured?",
+        q2: "What happens when you tear your Achilles?",
+      },
+      de: {
+        q1: "Ist meine Achillessehne gerissen?",
+        q2: "Was passiert, wenn Sie Ihre Achillessehne reißen?",
+      },
+      fr: {
+        q1: "Mon tendon d'Achille est-il rompu?",
+        q2: "Que se passe-t-il quand vous déchirez votre tendon d'Achille?",
+      },
+      es: {
+        q1: "¿Está roto mi tendón de Aquiles?",
+        q2: "¿Qué sucede cuando te rompes el tendón de Aquiles?",
+      },
+      it: {
+        q1: "Il mio tendine di Achille è rotto?",
+        q2: "Cosa succede quando ti rompi il tendine di Achille?",
+      },
     },
     slugTranslations: {
       en: "FAQs/is-my-achilles-ruptured",
@@ -646,6 +710,41 @@ export const articleRoutes: BaseRoute[] = [
       it:
         "Trova una risorsa completa sul recupero di Achille strappato, che copre aspetti come la durata del recupero con o senza chirurgia, gessi versus stivali, e considerazioni sul sonno durante il recupero.",
     },
+    subQuestions: {
+      en: {
+        q1: "Walking casts vs boots",
+        q2: "Which Achilles tendon rupture boot is best?",
+        q3: "How to sleep with torn Achilles tendon?",
+        q4: "How long for an Achilles tendon rupture to heal?",
+      },
+      de: {
+        q1: "Gehgips vs. Stiefel",
+        q2: "Welcher Stiefel ist am besten für einen Achillessehnenriss?",
+        q3: "Wie schläft man mit gerissener Achillessehne?",
+        q4: "Wie lange dauert die Heilung eines Achillessehnenrisses?",
+      },
+      fr: {
+        q1: "Plâtres de marche vs bottes",
+        q2:
+          "Quelle botte est la meilleure pour une rupture du tendon d'Achille?",
+        q3: "Comment dormir avec un tendon d'Achille déchiré?",
+        q4:
+          "Combien de temps faut-il pour guérir une rupture du tendon d'Achille?",
+      },
+      es: {
+        q1: "Yesos vs botas para caminar",
+        q2: "¿Qué bota es mejor para una ruptura del tendón de Aquiles?",
+        q3: "¿Cómo dormir con un tendón de Aquiles roto?",
+        q4: "¿Cuánto tarda en sanar una ruptura del tendón de Aquiles?",
+      },
+      it: {
+        q1: "Gessi vs stivali per camminare",
+        q2: "Quale stivale è migliore per una rottura del tendine di Achille?",
+        q3: "Come dormire con un tendine di Achille rotto?",
+        q4:
+          "Quanto tempo ci vuole per guarire una rottura del tendine di Achille?",
+      },
+    },
     slugTranslations: {
       en: "FAQs/torn-achilles-recovery",
       de: "FAQs/achillessehnenriss-genesung",
@@ -677,6 +776,43 @@ export const articleRoutes: BaseRoute[] = [
       it:
         "Ottieni informazioni su cosa aspettarti se hai un tendine di Achille rotto, inclusi il trattamento iniziale al pronto soccorso, le raccomandazioni di fisioterapia e il numero di controlli richiesti.",
     },
+    subQuestions: {
+      en: {
+        q1: "What will happen in A&E?",
+        q2: "What will the specialist do?",
+        q3: "How many check-ups?",
+        q4: "When should I see a physio?",
+        q5: "Should I take blood-thinners?",
+      },
+      de: {
+        q1: "Was passiert in der Notaufnahme?",
+        q2: "Was wird der Spezialist tun?",
+        q3: "Wie viele Kontrolluntersuchungen?",
+        q4: "Wann sollte ich zur Physiotherapie gehen?",
+        q5: "Sollte ich Blutverdünner nehmen?",
+      },
+      fr: {
+        q1: "Que se passera-t-il aux urgences?",
+        q2: "Que fera le spécialiste?",
+        q3: "Combien de contrôles?",
+        q4: "Quand dois-je voir un kinésithérapeute?",
+        q5: "Dois-je prendre des anticoagulants?",
+      },
+      es: {
+        q1: "¿Qué sucederá en urgencias?",
+        q2: "¿Qué hará el especialista?",
+        q3: "¿Cuántos chequeos?",
+        q4: "¿Cuándo debo ver un fisioterapeuta?",
+        q5: "¿Debo tomar anticoagulantes?",
+      },
+      it: {
+        q1: "Cosa succederà al pronto soccorso?",
+        q2: "Cosa farà lo specialista?",
+        q3: "Quanti controlli?",
+        q4: "Quando devo vedere un fisioterapista?",
+        q5: "Devo prendere anticoagulanti?",
+      },
+    },
     slugTranslations: {
       en: "FAQs/what-happens-if-my-achilles-is-ruptured",
       de: "FAQs/achillessehnenriss-folgen",
@@ -707,6 +843,38 @@ export const articleRoutes: BaseRoute[] = [
         "Descubra información sobre la vida después de una ruptura de Aquiles, incluyendo cuándo puede reanudar caminar, trabajar y participar en deportes.",
       it:
         "Scopri informazioni sulla vita dopo una rottura di Achille, inclusi quando puoi riprendere a camminare, lavorare e praticare sport.",
+    },
+    subQuestions: {
+      en: {
+        q1: "Life after Achilles tendon rupture",
+        q2: "When can I play sport again?",
+        q3: "When can I go back to physical work?",
+        q4: "When can I walk after Achilles rupture?",
+      },
+      de: {
+        q1: "Leben nach Achillessehnenriss",
+        q2: "Wann kann ich wieder Sport treiben?",
+        q3: "Wann kann ich wieder körperlich arbeiten?",
+        q4: "Wann kann ich nach einem Achillessehnenriss wieder gehen?",
+      },
+      fr: {
+        q1: "La vie après une rupture du tendon d'Achille",
+        q2: "Quand puis-je reprendre le sport?",
+        q3: "Quand puis-je reprendre le travail physique?",
+        q4: "Quand puis-je marcher après une rupture d'Achille?",
+      },
+      es: {
+        q1: "La vida después de una ruptura del tendón de Aquiles",
+        q2: "¿Cuándo puedo volver a hacer deporte?",
+        q3: "¿Cuándo puedo volver al trabajo físico?",
+        q4: "¿Cuándo puedo caminar después de una ruptura de Aquiles?",
+      },
+      it: {
+        q1: "La vita dopo una rottura del tendine di Achille",
+        q2: "Quando posso riprendere lo sport?",
+        q3: "Quando posso tornare al lavoro fisico?",
+        q4: "Quando posso camminare dopo una rottura di Achille?",
+      },
     },
     slugTranslations: {
       en: "FAQs/life-after-achilles-rupture",

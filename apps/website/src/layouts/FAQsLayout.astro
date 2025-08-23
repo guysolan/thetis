@@ -34,7 +34,7 @@ import ShareControls from "@/components/research/ShareControls";
     <main class="relative flex flex-col gap-4 print:w-full print:max-w-none">
         <Article title={title} />
         <slot />
-        <OtherArticles />
+        <OtherArticles lang={lang} />
         <ShareControls client:load />
     </main>
 </Layout>
