@@ -1,4 +1,5 @@
 import React from "react";
+import type { DocumentOptions } from "../../../../documents/schema";
 
 interface BankAccount {
   currency: string;
@@ -103,9 +104,14 @@ const bankAccounts: BankAccount[] = [
 const PaymentDetails = ({
   orderId,
   currency,
-}: { orderId: number; currency: string }) => {
+  paymentOptions,
+}: { 
+  orderId: number; 
+  currency: string;
+  paymentOptions: DocumentOptions['payment'];
+}) => {
   const filteredAccounts = bankAccounts.filter((account) => {
-    if (currency === "USD" || currency === "GBP" || currency === "EUR") {
+    if (currency === "USD" || currency === "GBP" || currency === "EUR" || currency === "CAD") {
       return account.currency === currency;
     }
     return account.currency === "GBP"; // Default to GBP for other currencies
@@ -120,16 +126,49 @@ const PaymentDetails = ({
     }
   };
 
-  const renderBankDetails = (title: string, details: BankDetail[]) => (
-    <div key={title}>
-      <h4>{title}</h4>
-      {details.map((detail) => (
-        <p key={detail.label}>
-          {detail.label}: {detail.value}
-        </p>
-      ))}
-    </div>
-  );
+  const shouldShowPaymentMethod = (title: string): boolean => {
+    switch (title) {
+      case "UK - Local":
+        return paymentOptions.ukLocal;
+      case "Global - Swift":
+        return paymentOptions.globalSwift;
+      case "CAD - Global - Swift":
+        return paymentOptions.cadDomestic;
+      case "European Economic Area Transfer":
+        return paymentOptions.europeaEconomicArea;
+      case "Non-EEA Transfer":
+        return paymentOptions.nonEEA;
+      case "USA - Local Transfer":
+        return paymentOptions.usaLocal;
+      default:
+        return true;
+    }
+  };
+
+  const renderBankDetails = (title: string, details: BankDetail[]) => {
+    if (!shouldShowPaymentMethod(title)) {
+      return null;
+    }
+    
+    return (
+      <div key={title}>
+        <h4>{title}</h4>
+        {details.map((detail) => (
+          <p key={detail.label}>
+            {detail.label}: {detail.value}
+          </p>
+        ))}
+      </div>
+    );
+  };
+
+  const hasAnyPaymentMethods = filteredAccounts.some((account) => {
+    const hasLocal = account.local && shouldShowPaymentMethod(account.local.title);
+    const hasInternational = Array.isArray(account.international) 
+      ? account.international.some(intl => shouldShowPaymentMethod(intl.title))
+      : account.international && shouldShowPaymentMethod(account.international.title);
+    return hasLocal || hasInternational;
+  });
 
   return (
     <section>
@@ -138,27 +177,31 @@ const PaymentDetails = ({
       </h2>
       <h4>Payment Reference: #{orderId?.toString().padStart(4, "0")}</h4>
       <section>
-        {filteredAccounts.map((account) => (
-          <section key={account.currency}>
-            {account.local && (
-              <div>
-                {renderBankDetails(account.local.title, account.local.details)}
-              </div>
-            )}
-            {Array.isArray(account.international) ? (
-              account.international.map((intl) =>
-                renderBankDetails(intl.title, intl.details),
-              )
-            ) : (
-              <div>
-                {renderBankDetails(
-                  account.international[0].title,
-                  account.international[0].details,
-                )}
-              </div>
-            )}
-          </section>
-        ))}
+        {hasAnyPaymentMethods ? (
+          filteredAccounts.map((account) => (
+            <section key={account.currency}>
+              {account.local && (
+                <div>
+                  {renderBankDetails(account.local.title, account.local.details)}
+                </div>
+              )}
+              {Array.isArray(account.international) ? (
+                account.international.map((intl) =>
+                  renderBankDetails(intl.title, intl.details),
+                )
+              ) : account.international ? (
+                <div>
+                  {renderBankDetails(
+                    account.international.title,
+                    account.international.details,
+                  )}
+                </div>
+              ) : null}
+            </section>
+          ))
+        ) : (
+          <p className="text-gray-500 italic">No payment methods selected</p>
+        )}
         <div>
           <h3>Address</h3>
           <p>

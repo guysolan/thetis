@@ -56,9 +56,15 @@ const DocumentOptionsPopover = ({
       shipping: search?.to?.shipping ?? true,
       contact: search?.to?.contact ?? true,
     },
-    payment:
-      search?.payment ??
-      (documentType === "invoice" || documentType === "commercialInvoice"),
+    payment: {
+      show: search?.payment?.show ?? (documentType === "invoice" || documentType === "commercialInvoice"),
+      ukLocal: search?.payment?.ukLocal ?? true,
+      globalSwift: search?.payment?.globalSwift ?? true,
+      cadDomestic: search?.payment?.cadDomestic ?? true,
+      europeaEconomicArea: search?.payment?.europeaEconomicArea ?? true,
+      nonEEA: search?.payment?.nonEEA ?? true,
+      usaLocal: search?.payment?.usaLocal ?? true,
+    },
     showExporterDetails:
       search?.showExporterDetails ?? documentType === "commercialInvoice",
     showFDADetails:
@@ -95,6 +101,8 @@ const DocumentOptionsPopover = ({
           newOptions.from = { ...newOptions.from, [child]: value };
         } else if (parent === "to") {
           newOptions.to = { ...newOptions.to, [child]: value };
+        } else if (parent === "payment") {
+          newOptions.payment = { ...newOptions.payment, [child]: value };
         }
 
         // Handle special cases
@@ -129,10 +137,21 @@ const DocumentOptionsPopover = ({
             contact: false,
           };
         }
+        if (key === "payment.show" && !value) {
+          newOptions.payment = {
+            ...newOptions.payment,
+            show: false,
+            ukLocal: false,
+            globalSwift: false,
+            cadDomestic: false,
+            europeaEconomicArea: false,
+            nonEEA: false,
+            usaLocal: false,
+          };
+        }
       } else {
         // Handle direct boolean properties
-        if (key === "payment") newOptions.payment = value;
-        else if (key === "total") newOptions.total = value;
+        if (key === "total") newOptions.total = value;
         else if (key === "showSignature") newOptions.showSignature = value;
         else if (key === "showPackages") newOptions.showPackages = value;
         else if (key === "showShippingItems")
@@ -174,7 +193,15 @@ const DocumentOptionsPopover = ({
         shipping: pendingOptions.to.shipping,
         contact: pendingOptions.to.contact,
       },
-      payment: pendingOptions.payment,
+      payment: {
+        show: pendingOptions.payment.show,
+        ukLocal: pendingOptions.payment.ukLocal,
+        globalSwift: pendingOptions.payment.globalSwift,
+        cadDomestic: pendingOptions.payment.cadDomestic,
+        europeaEconomicArea: pendingOptions.payment.europeaEconomicArea,
+        nonEEA: pendingOptions.payment.nonEEA,
+        usaLocal: pendingOptions.payment.usaLocal,
+      },
       total: pendingOptions.total,
       showSignature: pendingOptions.showSignature,
       showPackages: pendingOptions.showPackages,
@@ -461,12 +488,70 @@ const DocumentOptionsPopover = ({
                 <div className="flex justify-between items-center">
                   <label className="text-sm">Payment Details</label>
                   <Switch
-                    checked={pendingOptions.payment}
+                    checked={pendingOptions.payment.show}
                     onCheckedChange={(checked) =>
-                      updateOption("payment", checked)
+                      updateOption("payment.show", checked)
                     }
                   />
                 </div>
+                {pendingOptions.payment.show && (
+                  <div className="space-y-2 pl-4">
+                    <div className="flex justify-between items-center">
+                      <label className="text-sm">UK - Local</label>
+                      <Switch
+                        checked={pendingOptions.payment.ukLocal}
+                        onCheckedChange={(checked) =>
+                          updateOption("payment.ukLocal", checked)
+                        }
+                      />
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-sm">Global - Swift</label>
+                      <Switch
+                        checked={pendingOptions.payment.globalSwift}
+                        onCheckedChange={(checked) =>
+                          updateOption("payment.globalSwift", checked)
+                        }
+                      />
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-sm">Canada - Domestic Transfer</label>
+                      <Switch
+                        checked={pendingOptions.payment.cadDomestic}
+                        onCheckedChange={(checked) =>
+                          updateOption("payment.cadDomestic", checked)
+                        }
+                      />
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-sm">European Economic Area Transfer</label>
+                      <Switch
+                        checked={pendingOptions.payment.europeaEconomicArea}
+                        onCheckedChange={(checked) =>
+                          updateOption("payment.europeaEconomicArea", checked)
+                        }
+                      />
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-sm">Non-EEA Transfer</label>
+                      <Switch
+                        checked={pendingOptions.payment.nonEEA}
+                        onCheckedChange={(checked) =>
+                          updateOption("payment.nonEEA", checked)
+                        }
+                      />
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <label className="text-sm">USA - Local Transfer</label>
+                      <Switch
+                        checked={pendingOptions.payment.usaLocal}
+                        onCheckedChange={(checked) =>
+                          updateOption("payment.usaLocal", checked)
+                        }
+                      />
+                    </div>
+                  </div>
+                )}
                 <div className="flex justify-between items-center">
                   <label className="text-sm">Exporter Details</label>
                   <Switch
