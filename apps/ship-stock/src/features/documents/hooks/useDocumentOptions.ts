@@ -11,7 +11,7 @@ type DocumentType =
     | "shippingLabel";
 
 export const useDocumentOptions = (documentType: DocumentType) => {
-    const search = useSearch({ from: "/documents" }) as Partial<
+    const search = useSearch({ strict: false }) as Partial<
         DocumentOptions
     >;
 
@@ -228,7 +228,7 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                 Object.keys(PAYMENT_METHODS).map((method) => [
                     method,
                     search?.payment?.paymentMethods?.[method] ??
-                        defaults.payment.paymentMethods[method] ?? true,
+                        defaults.payment.paymentMethods?.[method] ?? true,
                 ]),
             ),
         },

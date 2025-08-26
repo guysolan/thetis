@@ -11,7 +11,11 @@ const OrdersPage = () => {
 
   return (
     <>
-      <DocumentControls documentType="invoice" orderNumber={order.order_id} />
+      <DocumentControls
+        documentType="invoice"
+        orderNumber={order.order_id}
+        currency={order.currency}
+      />
       <Document
         order={order}
         options={documentOptions}

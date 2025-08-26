@@ -1,205 +1,138 @@
 import React from "react";
 
-// Single source of truth for all payment methods
+// Single source of truth for simplified payment methods with URL-safe keys
 export const PAYMENT_METHODS = {
-  "UK - Local": "UK - Local",
-  "Global - Swift": "Global - Swift",
-  "Canada - Domestic Transfer": "Canada - Domestic Transfer",
-  "International - Swift": "International - Swift",
-  "European Economic Area Transfer": "European Economic Area Transfer",
-  "Non-EEA Transfer": "Non-EEA Transfer",
-  "USA - Local Transfer": "USA - Local Transfer",
+  eu_wise: "Euro",
+  canada_wise: "Canadian Dollar",
+  international: "International (GBP)",
+  us: "US Dollar",
+  uk: "UK Pound",
 } as const;
 
 export type PaymentMethodKey = keyof typeof PAYMENT_METHODS;
 
-interface BankAccount {
-  currency: string;
-  local?: {
-    title: string;
-    details: BankDetail[];
-  };
+// Helper function to get display name from URL-safe key
+export const getPaymentMethodDisplayName = (key: PaymentMethodKey): string => {
+  return PAYMENT_METHODS[key];
+};
+
+// Helper function to get URL-safe key from display name
+export const getPaymentMethodKey = (
+  displayName: string,
+): PaymentMethodKey | null => {
+  const entry = Object.entries(PAYMENT_METHODS).find(([_, value]) =>
+    value === displayName
+  );
+  return entry ? entry[0] as PaymentMethodKey : null;
+};
+
+type Paragraph = string;
+
+interface Section {
+  title: string;
+  lines: Paragraph[];
+}
+
+const sections: Record<PaymentMethodKey, Section> = {
+  eu_wise: {
+    title: "Euro",
+    lines: [
+      "Here are the EUR account details for Thetis Medical Ltd on Wise.",
+      "If you're sending money from a bank in SEPA, you can use these details to make a domestic transfer. If you're sending from somewhere else, make an international Swift transfer.",
+      "",
+      "Name: Thetis Medical Ltd",
+      "IBAN: BE55 9677 7079 8944",
+      "Swift/BIC: TRWIBEB1XXX",
+      "",
+      "Bank name and address: Wise, Rue du Trône 100, 3rd floor, Brussels, 1050, Belgium",
+    ],
+  },
+  canada_wise: {
+    title: "Canadian Dollar",
+    lines: [
+      "Here are the CAD account details for Thetis Medical Ltd on Wise.",
+      "If you're sending money from a bank in Canada, you can use these details to make a domestic transfer. If you're sending from somewhere else, make an international Swift transfer.",
+      "",
+      "Name: Thetis Medical Ltd",
+      "Account number: 200110848249",
+      "Institution number: 621",
+      "Transit number: 16001",
+      "Swift/BIC: TRWICAW1XXX",
+      "",
+      "Bank name and address: Wise Payments Canada Inc., 99 Bank Street, Suite 1420, Ottawa, ON, K1P 1H4, Canada",
+    ],
+  },
   international: {
-    title: string;
-    details: BankDetail[];
-  }[];
-}
-
-interface BankDetail {
-  label: string;
-  value: string;
-}
-
-const bankAccounts: BankAccount[] = [
-  {
-    currency: "GBP",
-    local: {
-      title: "UK - Local",
-      details: [
-        { label: "Recipient", value: "THETIS MEDICAL LTD" },
-        { label: "Account Number", value: "82556598" },
-        { label: "Sort Code", value: "04-00-75" },
-      ],
-    },
-    international: [
-      {
-        title: "Global - Swift",
-        details: [
-          { label: "Recipient", value: "THETIS MEDICAL LTD" },
-          { label: "Beneficiary", value: "THETIS MEDICAL LTD" },
-          { label: "IBAN", value: "GB33REVO00996957095509" },
-          { label: "BIC", value: "REVOGB21" },
-          { label: "Intermediary BIC", value: "CHASGB2L" },
-        ],
-      },
+    title: "International (GBP)",
+    lines: [
+      "Beneficiary: THETIS MEDICAL LTD",
+      "IBAN: GB33REVO00996957095509",
+      "BIC: REVOGB21",
+      "Intermediary BIC: CHASGB2L",
+      "Beneficiary address: 15 Leopold Street, B12 0UP, Birmingham, United Kingdom",
+      "Bank/Payment institution: Revolut Ltd",
+      "Bank/Payment institution address: 7 Westferry Circus, E14 4HD, London, United Kingdom",
     ],
   },
-  {
-    currency: "CAD",
-    local: {
-      title: "Canada - Domestic Transfer",
-      details: [
-        { label: "Recipient", value: "THETIS MEDICAL LTD" },
-        { label: "Account Number", value: "200110848249" },
-        { label: "Institution Number", value: "621" },
-        { label: "Transit Number", value: "16001" },
-      ],
-    },
-    international: [
-      {
-        title: "International - Swift",
-        details: [
-          { label: "Recipient", value: "THETIS MEDICAL LTD" },
-          { label: "Account Number", value: "200110848249" },
-          { label: "Swift/BIC", value: "TRWICAW1XXX" },
-        ],
-      },
+  us: {
+    title: "US Dollar",
+    lines: [
+      "Beneficiary: THETIS MEDICAL LTD",
+      "Account number: 253018127559",
+      "ACH routing number: 026013356",
+      "Wire routing number: 026013356",
+      "Beneficiary address: 15 Leopold Street, B12 0UP, Birmingham, United Kingdom",
+      "Bank/Payment institution: Metropolitan Commercial Bank",
+      "Bank/Payment institution address: 99 Park Ave, 10016, New York, United States",
     ],
   },
-  {
-    currency: "EUR",
-    international: [
-      {
-        title: "European Economic Area Transfer",
-        details: [
-          { label: "Recipient", value: "THETIS MEDICAL LTD" },
-          { label: "IBAN", value: "GB33REVO00996957095509" },
-          { label: "BIC", value: "REVOGB21" },
-        ],
-      },
-      {
-        title: "Non-EEA Transfer",
-        details: [
-          { label: "Recipient", value: "THETIS MEDICAL LTD" },
-          { label: "IBAN", value: "GB33REVO00996957095509" },
-          { label: "BIC", value: "REVOGB21" },
-          { label: "Intermediary BIC", value: "CHASDEFX" },
-        ],
-      },
+  uk: {
+    title: "UK Pound",
+    lines: [
+      "Beneficiary: THETIS MEDICAL LTD",
+      "Account number: 82556598",
+      "Sort code: 04-00-75",
+      "Beneficiary address: 15 Leopold Street, B12 0UP, Birmingham, United Kingdom",
+      "Bank/Payment institution: Revolut Ltd",
+      "Bank/Payment institution address: 7 Westferry Circus, E14 4HD, London, United Kingdom",
     ],
   },
-  {
-    currency: "USD",
-    local: {
-      title: "USA - Local Transfer",
-      details: [
-        { label: "Recipient", value: "THETIS MEDICAL LTD" },
-        { label: "Account Number", value: "218598687013" },
-        { label: "ACH Routing Number", value: "101019644" },
-        { label: "Wire Routing Number", value: "101019644" },
-      ],
-    },
-    international: [
-      {
-        title: "Global - Swift",
-        details: [
-          { label: "Recipient", value: "THETIS MEDICAL LTD" },
-          { label: "IBAN", value: "GB33REVO00996957095509" },
-          { label: "BIC", value: "REVOGB21" },
-          { label: "Intermediary BIC", value: "CHASGB2L" },
-        ],
-      },
-    ],
-  },
-];
+};
 
 interface PaymentDetailsProps {
   orderId: number;
   currency: string;
-  enabledPaymentMethods?: string[]; // Array of payment method titles to show
+  enabledPaymentMethods?: Record<PaymentMethodKey, boolean>; // Object mapping payment method keys to enabled status
 }
 
-// Helper function to get all available payment method titles for a currency
+// Helper: available methods per currency (for toggles visibility)
 export const getAvailablePaymentMethods = (
   currency: string,
 ): PaymentMethodKey[] => {
-  const supportedCurrency = ["USD", "GBP", "EUR", "CAD"].includes(currency)
-    ? currency
-    : "GBP";
-  const account = bankAccounts.find((acc) =>
-    acc.currency === supportedCurrency
-  );
-
-  if (!account) return [];
-
-  const methods: PaymentMethodKey[] = [];
-  if (account.local && account.local.title in PAYMENT_METHODS) {
-    methods.push(account.local.title as PaymentMethodKey);
-  }
-  if (account.international) {
-    account.international.forEach((intl) => {
-      if (intl.title in PAYMENT_METHODS) {
-        methods.push(intl.title as PaymentMethodKey);
-      }
-    });
-  }
-
-  return methods;
+  const c = (currency || "GBP").toUpperCase();
+  const map: Record<string, PaymentMethodKey[]> = {
+    CAD: ["canada_wise", "international"],
+    USD: ["us", "international"],
+    GBP: ["uk", "international"],
+    EUR: ["eu_wise", "international"],
+  };
+  return map[c] ?? ["international", "uk"];
 };
+
+const SectionBlock = ({ title, lines }: Section) => (
+  <div>
+    <h4>{title}</h4>
+    {lines.map((line) => <p key={line}>{line}</p>)}
+  </div>
+);
 
 const PaymentDetails = ({
   orderId,
   currency,
   enabledPaymentMethods,
 }: PaymentDetailsProps) => {
-  const filteredAccounts = bankAccounts.filter((account) => {
-    if (
-      currency === "USD" || currency === "GBP" || currency === "EUR" ||
-      currency === "CAD"
-    ) {
-      return account.currency === currency;
-    }
-    return account.currency === "GBP"; // Default to GBP for other currencies
-  });
-
-  const getBankAddress = (currency: string) => {
-    switch (currency) {
-      case "USD":
-        return "Lead Bank, 1801 Main Street, 64108, Kansas City, United States";
-      case "CAD":
-        return "Wise Payments Canada Inc., 99 Bank Street, Suite 1420, Ottawa, ON, K1P 1H4, Canada";
-      default:
-        return "Revolut Ltd 7 Westferry Circus, E14 4HD, London, United Kingdom";
-    }
-  };
-
-  const renderBankDetails = (title: string, details: BankDetail[]) => {
-    // If enabledPaymentMethods is provided, only show methods that are enabled
-    if (enabledPaymentMethods && !enabledPaymentMethods.includes(title)) {
-      return null;
-    }
-
-    return (
-      <div key={title}>
-        <h4>{title}</h4>
-        {details.map((detail) => (
-          <p key={detail.label}>
-            {detail.label}: {detail.value}
-          </p>
-        ))}
-      </div>
-    );
-  };
+  const isEnabled = (k: PaymentMethodKey) =>
+    !enabledPaymentMethods || enabledPaymentMethods[k] !== false;
 
   return (
     <section>
@@ -208,24 +141,13 @@ const PaymentDetails = ({
       </h2>
       <h4>Payment Reference: #{orderId?.toString().padStart(4, "0")}</h4>
       <section>
-        {filteredAccounts.map((account) => (
-          <section key={account.currency}>
-            {account.local &&
-              renderBankDetails(account.local.title, account.local.details)}
-            {Array.isArray(account.international) &&
-              account.international.map((intl) =>
-                renderBankDetails(intl.title, intl.details)
-              )}
-          </section>
-        ))}
-        <div>
-          <h3>Address</h3>
-          <p>
-            Recipient address: 15 Leopold Street, B12 0UP, Birmingham, United
-            Kingdom
-          </p>
-          <p>Bank Address: {getBankAddress(currency)}</p>
-        </div>
+        {isEnabled("eu_wise") && <SectionBlock {...sections.eu_wise} />}
+        {isEnabled("canada_wise") && <SectionBlock {...sections.canada_wise} />}
+        {isEnabled("international") && (
+          <SectionBlock {...sections.international} />
+        )}
+        {isEnabled("us") && <SectionBlock {...sections.us} />}
+        {isEnabled("uk") && <SectionBlock {...sections.uk} />}
       </section>
     </section>
   );

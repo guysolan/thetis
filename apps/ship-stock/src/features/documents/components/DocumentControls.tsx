@@ -7,7 +7,12 @@ import dayjs from "dayjs";
 const DocumentControls = ({
   documentType,
   orderNumber,
-}: { documentType?: keyof typeof documentOptions; orderNumber?: string }) => {
+  currency,
+}: {
+  documentType?: keyof typeof documentOptions;
+  orderNumber?: string;
+  currency?: string;
+}) => {
   const handlePrint = () => {
     const originalTitle = document.title;
     document.title = documentType
@@ -26,7 +31,10 @@ const DocumentControls = ({
     <>
       <div className="print:hidden top-4 right-4 z-10 fixed flex items-center gap-2">
         {documentType && documentType !== "shippingLabel" && (
-          <DocumentOptionsSheet documentType={documentType} />
+          <DocumentOptionsSheet
+            documentType={documentType}
+            currency={currency}
+          />
         )}
         <Button onClick={handlePrint}>Print</Button>
       </div>

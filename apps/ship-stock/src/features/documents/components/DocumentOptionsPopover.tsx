@@ -10,11 +10,19 @@ import {
 } from "@thetis/ui/sheet";
 import { Switch } from "@thetis/ui/switch";
 import { Settings } from "lucide-react";
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import {
+  useNavigate,
+  useRouteContext,
+  useSearch,
+} from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import type { DocumentOptions, InvoiceOptions } from "../schema";
 import { packingListSchema } from "../schema";
-import { PAYMENT_METHODS } from "../../orders/features/order-documents/components/PaymentDetails";
+import {
+  getAvailablePaymentMethods,
+  getPaymentMethodDisplayName,
+  PAYMENT_METHODS,
+} from "../../orders/features/order-documents/components/PaymentDetails";
 import {
   Accordion,
   AccordionContent,
@@ -31,8 +39,9 @@ type DocumentType =
 
 const DocumentOptionsSheet = ({
   documentType,
-}: { documentType: DocumentType }) => {
-  const search = useSearch({ from: "/documents" }) as Partial<DocumentOptions>;
+  currency,
+}: { documentType: DocumentType; currency?: string }) => {
+  const search = useSearch({ strict: false }) as Partial<DocumentOptions>;
   const navigate = useNavigate();
 
   // Get current values with sensible defaults
@@ -110,6 +119,11 @@ const DocumentOptionsSheet = ({
           newOptions.from = { ...newOptions.from, [child]: value };
         } else if (parent === "to") {
           newOptions.to = { ...newOptions.to, [child]: value };
+        } else if (parent === "paymentMethods") {
+          newOptions.payment.paymentMethods = {
+            ...newOptions.payment.paymentMethods,
+            [child]: value,
+          };
         }
 
         // Handle special cases
@@ -172,45 +186,10 @@ const DocumentOptionsSheet = ({
   };
 
   const saveChanges = () => {
-    // Create a new search object with proper types
-    const newSearch = {
-      shippingDetails: {
-        show: pendingOptions.shippingDetails.show,
-        reasonForExport: pendingOptions.shippingDetails.reasonForExport,
-        modeOfTransport: pendingOptions.shippingDetails.modeOfTransport,
-        incoterms: pendingOptions.shippingDetails.incoterms,
-        unitOfMeasurement: pendingOptions.shippingDetails.unitOfMeasurement,
-        shipmentNumber: pendingOptions.shippingDetails.shipmentNumber,
-        airwaybill: pendingOptions.shippingDetails.airwaybill,
-        referenceNumber: pendingOptions.shippingDetails.referenceNumber,
-      },
-      from: {
-        show: pendingOptions.from.show,
-        billing: pendingOptions.from.billing,
-        shipping: pendingOptions.from.shipping,
-        contact: pendingOptions.from.contact,
-      },
-      to: {
-        show: pendingOptions.to.show,
-        billing: pendingOptions.to.billing,
-        shipping: pendingOptions.to.shipping,
-        contact: pendingOptions.to.contact,
-      },
-      payment: pendingOptions.payment,
-      total: pendingOptions.total,
-      showSignature: pendingOptions.showSignature,
-      showPackages: pendingOptions.showPackages,
-      showShippingItems: pendingOptions.showShippingItems,
-      showExporterDetails: pendingOptions.showExporterDetails,
-      showFDADetails: pendingOptions.showFDADetails,
-      showExchangeRates: pendingOptions.showExchangeRates,
-      showCarriage: pendingOptions.showCarriage,
-    };
-
-    // Navigate with the new search params
-    // @ts-ignore - Complex TanStack Router typing issue
+    // Force TypeScript to accept our navigation by using @ts-ignore
     navigate({
-      search: newSearch,
+      // @ts-ignore - TanStack Router complex typing issue
+      search: pendingOptions,
     });
   };
 
@@ -513,7 +492,11 @@ const DocumentOptionsSheet = ({
                             key={method}
                             className="flex justify-between items-center"
                           >
-                            <label className="text-sm">{method}</label>
+                            <label className="text-sm">
+                              {getPaymentMethodDisplayName(
+                                method as keyof typeof PAYMENT_METHODS,
+                              )}
+                            </label>
                             <Switch
                               checked={enabled}
                               onCheckedChange={(checked) =>

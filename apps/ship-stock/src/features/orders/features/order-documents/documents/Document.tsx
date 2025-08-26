@@ -14,7 +14,9 @@ import Signature from "../components/signature";
 import ShippingDetails from "../components/ShippingDetails";
 import FinancialTransactions from "../../order-history/components/FinancialTransactions";
 import OrderTotal from "../components/OrderTotal";
-import PaymentDetails from "../components/PaymentDetails";
+import PaymentDetails, {
+  type PaymentMethodKey,
+} from "../components/PaymentDetails";
 import Heading from "../components/Heading";
 import ServicesTable from "../components/ServicesTable";
 import type { Currency } from "../../../../../constants/currencies";
@@ -95,11 +97,10 @@ const Document = ({ order, options, title }: DocumentProps) => {
         <PaymentDetails
           orderId={order.order_id}
           currency={order.currency}
-          enabledPaymentMethods={options.payment.paymentMethods
-            ? Object.entries(options.payment.paymentMethods)
-              .filter(([_, enabled]) => enabled)
-              .map(([method]) => method)
-            : undefined}
+          enabledPaymentMethods={options.payment.paymentMethods as Record<
+            PaymentMethodKey,
+            boolean
+          >}
         />
       )}
 
