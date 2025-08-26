@@ -1,11 +1,20 @@
 import { Button } from "@thetis/ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "@thetis/ui/popover";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@thetis/ui/sheet";
 import { Switch } from "@thetis/ui/switch";
 import { Settings } from "lucide-react";
-import { useSearch, useNavigate } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import type { DocumentOptions, InvoiceOptions } from "../schema";
 import { packingListSchema } from "../schema";
+import { PAYMENT_METHODS } from "../../orders/features/order-documents/components/PaymentDetails";
 import {
   Accordion,
   AccordionContent,
@@ -20,7 +29,7 @@ type DocumentType =
   | "packingList"
   | "shippingLabel";
 
-const DocumentOptionsPopover = ({
+const DocumentOptionsSheet = ({
   documentType,
 }: { documentType: DocumentType }) => {
   const search = useSearch({ from: "/documents" }) as Partial<DocumentOptions>;
@@ -40,8 +49,7 @@ const DocumentOptionsPopover = ({
     },
     showShippingItems: search?.showShippingItems ?? true,
     total: search?.total ?? true,
-    showCarriage:
-      search?.showCarriage ??
+    showCarriage: search?.showCarriage ??
       (documentType === "invoice" || documentType === "commercialInvoice"),
     showPackages: search?.showPackages ?? documentType === "packingList",
     from: {
@@ -56,15 +64,20 @@ const DocumentOptionsPopover = ({
       shipping: search?.to?.shipping ?? true,
       contact: search?.to?.contact ?? true,
     },
-    payment:
-      search?.payment ??
+    payment: search?.payment ??
       (documentType === "invoice" || documentType === "commercialInvoice"),
-    showExporterDetails:
-      search?.showExporterDetails ?? documentType === "commercialInvoice",
-    showFDADetails:
-      search?.showFDADetails ?? documentType === "commercialInvoice",
-    showExchangeRates:
-      search?.showExchangeRates ?? documentType === "commercialInvoice",
+    paymentMethods: Object.fromEntries(
+      Object.keys(PAYMENT_METHODS).map((method) => [
+        method,
+        search?.paymentMethods?.[method] ?? true,
+      ]),
+    ),
+    showExporterDetails: search?.showExporterDetails ??
+      documentType === "commercialInvoice",
+    showFDADetails: search?.showFDADetails ??
+      documentType === "commercialInvoice",
+    showExchangeRates: search?.showExchangeRates ??
+      documentType === "commercialInvoice",
     showSignature: search?.showSignature ?? true,
   };
 
@@ -131,18 +144,25 @@ const DocumentOptionsPopover = ({
         }
       } else {
         // Handle direct boolean properties
-        if (key === "payment") newOptions.payment = value;
-        else if (key === "total") newOptions.total = value;
+        if (key === "payment") {
+          newOptions.payment = value;
+        } else if (key.startsWith("paymentMethods.")) {
+          const methodName = key.replace("paymentMethods.", "");
+          newOptions.paymentMethods = {
+            ...newOptions.paymentMethods,
+            [methodName]: value,
+          };
+        } else if (key === "total") newOptions.total = value;
         else if (key === "showSignature") newOptions.showSignature = value;
         else if (key === "showPackages") newOptions.showPackages = value;
-        else if (key === "showShippingItems")
+        else if (key === "showShippingItems") {
           newOptions.showShippingItems = value;
-        else if (key === "showExporterDetails")
+        } else if (key === "showExporterDetails") {
           newOptions.showExporterDetails = value;
-        else if (key === "showFDADetails") newOptions.showFDADetails = value;
-        else if (key === "showExchangeRates")
+        } else if (key === "showFDADetails") newOptions.showFDADetails = value;
+        else if (key === "showExchangeRates") {
           newOptions.showExchangeRates = value;
-        else if (key === "showCarriage") newOptions.showCarriage = value;
+        } else if (key === "showCarriage") newOptions.showCarriage = value;
       }
 
       return newOptions;
@@ -175,6 +195,7 @@ const DocumentOptionsPopover = ({
         contact: pendingOptions.to.contact,
       },
       payment: pendingOptions.payment,
+      paymentMethods: pendingOptions.paymentMethods,
       total: pendingOptions.total,
       showSignature: pendingOptions.showSignature,
       showPackages: pendingOptions.showPackages,
@@ -186,14 +207,15 @@ const DocumentOptionsPopover = ({
     };
 
     // Navigate with the new search params
+    // @ts-ignore - Complex TanStack Router typing issue
     navigate({
       search: newSearch,
     });
   };
 
   return (
-    <Popover>
-      <PopoverTrigger asChild>
+    <Sheet>
+      <SheetTrigger asChild>
         <Button
           type="button"
           onClick={(e) => e.stopPropagation()}
@@ -202,333 +224,381 @@ const DocumentOptionsPopover = ({
         >
           <Settings size={20} />
         </Button>
-      </PopoverTrigger>
-      <PopoverContent
-        align="end"
-        side="bottom"
-        className="flex flex-col gap-3 p-4 w-72"
-      >
-        <h3 className="font-semibold">Document Options</h3>
+      </SheetTrigger>
+      <SheetContent className="w-[400px] sm:w-[500px]">
+        <SheetHeader className="mb-4 pb-4 border-b">
+          <SheetTitle>Document Options</SheetTitle>
+          <SheetDescription>
+            Customize what information appears on your document
+          </SheetDescription>
+        </SheetHeader>
+        <div className="flex flex-col gap-4 mb-4">
+          {/* Quick Access Controls */}
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full"
+            defaultValue="quick-options"
+          >
+            <AccordionItem value="quick-options">
+              <AccordionTrigger className="font-medium text-sm">
+                Quick Options
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <label className="font-medium text-sm">
+                      Total Amount
+                    </label>
+                    <Switch
+                      checked={pendingOptions.total}
+                      onCheckedChange={(checked) =>
+                        updateOption("total", checked)}
+                    />
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <label className="font-medium text-sm">Carriage</label>
+                    <Switch
+                      checked={pendingOptions.showCarriage}
+                      onCheckedChange={(checked) =>
+                        updateOption("showCarriage", checked)}
+                    />
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <label className="font-medium text-sm">
+                      Shipping Items
+                    </label>
+                    <Switch
+                      checked={pendingOptions.showShippingItems}
+                      onCheckedChange={(checked) =>
+                        updateOption("showShippingItems", checked)}
+                    />
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <label className="font-medium text-sm">
+                      Package Summary
+                    </label>
+                    <Switch
+                      checked={pendingOptions.showPackages}
+                      onCheckedChange={(checked) =>
+                        updateOption("showPackages", checked)}
+                    />
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="shipping-details">
+              <AccordionTrigger className="font-medium text-sm">
+                Shipping Details
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm underline">Show Section</label>
+                    <Switch
+                      checked={pendingOptions.shippingDetails.show}
+                      onCheckedChange={(checked) =>
+                        updateOption("shippingDetails.show", checked)}
+                    />
+                  </div>
+                  {pendingOptions.shippingDetails.show && (
+                    <div className="space-y-2 pl-4">
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Reason for Export</label>
+                        <Switch
+                          checked={pendingOptions.shippingDetails
+                            .reasonForExport}
+                          onCheckedChange={(checked) =>
+                            updateOption(
+                              "shippingDetails.reasonForExport",
+                              checked,
+                            )}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Mode of Transport</label>
+                        <Switch
+                          checked={pendingOptions.shippingDetails
+                            .modeOfTransport}
+                          onCheckedChange={(checked) =>
+                            updateOption(
+                              "shippingDetails.modeOfTransport",
+                              checked,
+                            )}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Incoterms</label>
+                        <Switch
+                          checked={pendingOptions.shippingDetails.incoterms}
+                          onCheckedChange={(checked) =>
+                            updateOption(
+                              "shippingDetails.incoterms",
+                              checked,
+                            )}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">
+                          Unit of Measurement
+                        </label>
+                        <Switch
+                          checked={pendingOptions.shippingDetails
+                            .unitOfMeasurement}
+                          onCheckedChange={(checked) =>
+                            updateOption(
+                              "shippingDetails.unitOfMeasurement",
+                              checked,
+                            )}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Shipment Number</label>
+                        <Switch
+                          checked={pendingOptions.shippingDetails
+                            .shipmentNumber}
+                          onCheckedChange={(checked) =>
+                            updateOption(
+                              "shippingDetails.shipmentNumber",
+                              checked,
+                            )}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Airwaybill</label>
+                        <Switch
+                          checked={pendingOptions.shippingDetails
+                            .airwaybill}
+                          onCheckedChange={(checked) =>
+                            updateOption(
+                              "shippingDetails.airwaybill",
+                              checked,
+                            )}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Reference Number</label>
+                        <Switch
+                          checked={pendingOptions.shippingDetails
+                            .referenceNumber}
+                          onCheckedChange={(checked) =>
+                            updateOption(
+                              "shippingDetails.referenceNumber",
+                              checked,
+                            )}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
 
-        {/* Quick Access Controls */}
-        <div className="space-y-2 pb-3 border-b">
-          <div className="flex justify-between items-center">
-            <label className="text-sm">Total Amount</label>
-            <Switch
-              checked={pendingOptions.total}
-              onCheckedChange={(checked) => updateOption("total", checked)}
-            />
-          </div>
-          <div className="flex justify-between items-center">
-            <label className="text-sm">Carriage</label>
-            <Switch
-              checked={pendingOptions.showCarriage}
-              onCheckedChange={(checked) =>
-                updateOption("showCarriage", checked)
-              }
-            />
-          </div>
-          <div className="flex justify-between items-center">
-            <label className="text-sm">Shipping Items List</label>
-            <Switch
-              checked={pendingOptions.showShippingItems}
-              onCheckedChange={(checked) =>
-                updateOption("showShippingItems", checked)
-              }
-            />
-          </div>
-          <div className="flex justify-between items-center">
-            <label className="text-sm">Package Summary</label>
-            <Switch
-              checked={pendingOptions.showPackages}
-              onCheckedChange={(checked) =>
-                updateOption("showPackages", checked)
-              }
-            />
-          </div>
+            <AccordionItem value="from-section">
+              <AccordionTrigger className="font-medium text-sm">
+                From Section
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm underline">Show Section</label>
+                    <Switch
+                      checked={pendingOptions.from.show}
+                      onCheckedChange={(checked) =>
+                        updateOption("from.show", checked)}
+                    />
+                  </div>
+                  {pendingOptions.from.show && (
+                    <div className="space-y-2 pl-4">
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Billing Address</label>
+                        <Switch
+                          checked={pendingOptions.from.billing}
+                          onCheckedChange={(checked) =>
+                            updateOption("from.billing", checked)}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Shipping Address</label>
+                        <Switch
+                          checked={pendingOptions.from.shipping}
+                          onCheckedChange={(checked) =>
+                            updateOption("from.shipping", checked)}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Contact Details</label>
+                        <Switch
+                          checked={pendingOptions.from.contact}
+                          onCheckedChange={(checked) =>
+                            updateOption("from.contact", checked)}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="to-section">
+              <AccordionTrigger className="font-medium text-sm">
+                To Section
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm underline">Show Section</label>
+                    <Switch
+                      checked={pendingOptions.to.show}
+                      onCheckedChange={(checked) =>
+                        updateOption("to.show", checked)}
+                    />
+                  </div>
+                  {pendingOptions.to.show && (
+                    <div className="space-y-2 pl-4">
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Billing Address</label>
+                        <Switch
+                          checked={pendingOptions.to.billing}
+                          onCheckedChange={(checked) =>
+                            updateOption("to.billing", checked)}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Shipping Address</label>
+                        <Switch
+                          checked={pendingOptions.to.shipping}
+                          onCheckedChange={(checked) =>
+                            updateOption("to.shipping", checked)}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Contact Details</label>
+                        <Switch
+                          checked={pendingOptions.to.contact}
+                          onCheckedChange={(checked) =>
+                            updateOption("to.contact", checked)}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="payment-details">
+              <AccordionTrigger className="font-medium text-sm">
+                Payment Details
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm underline">
+                      Show Section
+                    </label>
+                    <Switch
+                      checked={pendingOptions.payment}
+                      onCheckedChange={(checked) =>
+                        updateOption("payment", checked)}
+                    />
+                  </div>
+                  {pendingOptions.payment && (
+                    <div className="space-y-2 pl-4">
+                      {Object.entries(pendingOptions.paymentMethods).map((
+                        [method, enabled],
+                      ) => (
+                        <div
+                          key={method}
+                          className="flex justify-between items-center"
+                        >
+                          <label className="text-sm">{method}</label>
+                          <Switch
+                            checked={enabled}
+                            onCheckedChange={(checked) =>
+                              updateOption(
+                                `paymentMethods.${method}`,
+                                checked,
+                              )}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="exporter-details">
+              <AccordionTrigger className="font-medium text-sm">
+                Exporter Details
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm underline">
+                      Show Section
+                    </label>
+                    <Switch
+                      checked={pendingOptions.showExporterDetails}
+                      onCheckedChange={(checked) =>
+                        updateOption("showExporterDetails", checked)}
+                    />
+                  </div>
+                  {pendingOptions.showExporterDetails && (
+                    <div className="space-y-2 pl-4">
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">FDA Details</label>
+                        <Switch
+                          checked={pendingOptions.showFDADetails}
+                          onCheckedChange={(checked) =>
+                            updateOption("showFDADetails", checked)}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Exchange Rates</label>
+                        <Switch
+                          checked={pendingOptions.showExchangeRates}
+                          onCheckedChange={(checked) =>
+                            updateOption("showExchangeRates", checked)}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <label className="text-sm">Signature</label>
+                        <Switch
+                          checked={pendingOptions.showSignature}
+                          onCheckedChange={(checked) =>
+                            updateOption("showSignature", checked)}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
 
-        <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="shipping-details">
-            <AccordionTrigger className="font-medium text-sm">
-              Shipping Details
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <label className="text-sm">Show Section</label>
-                  <Switch
-                    checked={pendingOptions.shippingDetails.show}
-                    onCheckedChange={(checked) =>
-                      updateOption("shippingDetails.show", checked)
-                    }
-                  />
-                </div>
-                {pendingOptions.shippingDetails.show && (
-                  <div className="space-y-2 pl-4">
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm">Reason for Export</label>
-                      <Switch
-                        checked={pendingOptions.shippingDetails.reasonForExport}
-                        onCheckedChange={(checked) =>
-                          updateOption(
-                            "shippingDetails.reasonForExport",
-                            checked,
-                          )
-                        }
-                      />
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm">Mode of Transport</label>
-                      <Switch
-                        checked={pendingOptions.shippingDetails.modeOfTransport}
-                        onCheckedChange={(checked) =>
-                          updateOption(
-                            "shippingDetails.modeOfTransport",
-                            checked,
-                          )
-                        }
-                      />
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm">Incoterms</label>
-                      <Switch
-                        checked={pendingOptions.shippingDetails.incoterms}
-                        onCheckedChange={(checked) =>
-                          updateOption("shippingDetails.incoterms", checked)
-                        }
-                      />
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm">Unit of Measurement</label>
-                      <Switch
-                        checked={
-                          pendingOptions.shippingDetails.unitOfMeasurement
-                        }
-                        onCheckedChange={(checked) =>
-                          updateOption(
-                            "shippingDetails.unitOfMeasurement",
-                            checked,
-                          )
-                        }
-                      />
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm">Shipment Number</label>
-                      <Switch
-                        checked={pendingOptions.shippingDetails.shipmentNumber}
-                        onCheckedChange={(checked) =>
-                          updateOption(
-                            "shippingDetails.shipmentNumber",
-                            checked,
-                          )
-                        }
-                      />
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm">Airwaybill</label>
-                      <Switch
-                        checked={pendingOptions.shippingDetails.airwaybill}
-                        onCheckedChange={(checked) =>
-                          updateOption("shippingDetails.airwaybill", checked)
-                        }
-                      />
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm">Reference Number</label>
-                      <Switch
-                        checked={pendingOptions.shippingDetails.referenceNumber}
-                        onCheckedChange={(checked) =>
-                          updateOption(
-                            "shippingDetails.referenceNumber",
-                            checked,
-                          )
-                        }
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="from-section">
-            <AccordionTrigger className="font-medium text-sm">
-              From Section
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <label className="text-sm">Show Section</label>
-                  <Switch
-                    checked={pendingOptions.from.show}
-                    onCheckedChange={(checked) =>
-                      updateOption("from.show", checked)
-                    }
-                  />
-                </div>
-                {pendingOptions.from.show && (
-                  <div className="space-y-2 pl-4">
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm">Billing Address</label>
-                      <Switch
-                        checked={pendingOptions.from.billing}
-                        onCheckedChange={(checked) =>
-                          updateOption("from.billing", checked)
-                        }
-                      />
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm">Shipping Address</label>
-                      <Switch
-                        checked={pendingOptions.from.shipping}
-                        onCheckedChange={(checked) =>
-                          updateOption("from.shipping", checked)
-                        }
-                      />
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm">Contact Details</label>
-                      <Switch
-                        checked={pendingOptions.from.contact}
-                        onCheckedChange={(checked) =>
-                          updateOption("from.contact", checked)
-                        }
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="to-section">
-            <AccordionTrigger className="font-medium text-sm">
-              To Section
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <label className="text-sm">Show Section</label>
-                  <Switch
-                    checked={pendingOptions.to.show}
-                    onCheckedChange={(checked) =>
-                      updateOption("to.show", checked)
-                    }
-                  />
-                </div>
-                {pendingOptions.to.show && (
-                  <div className="space-y-2 pl-4">
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm">Billing Address</label>
-                      <Switch
-                        checked={pendingOptions.to.billing}
-                        onCheckedChange={(checked) =>
-                          updateOption("to.billing", checked)
-                        }
-                      />
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm">Shipping Address</label>
-                      <Switch
-                        checked={pendingOptions.to.shipping}
-                        onCheckedChange={(checked) =>
-                          updateOption("to.shipping", checked)
-                        }
-                      />
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <label className="text-sm">Contact Details</label>
-                      <Switch
-                        checked={pendingOptions.to.contact}
-                        onCheckedChange={(checked) =>
-                          updateOption("to.contact", checked)
-                        }
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="additional-options">
-            <AccordionTrigger className="font-medium text-sm">
-              Additional Options
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <label className="text-sm">Payment Details</label>
-                  <Switch
-                    checked={pendingOptions.payment}
-                    onCheckedChange={(checked) =>
-                      updateOption("payment", checked)
-                    }
-                  />
-                </div>
-                <div className="flex justify-between items-center">
-                  <label className="text-sm">Exporter Details</label>
-                  <Switch
-                    checked={pendingOptions.showExporterDetails}
-                    onCheckedChange={(checked) =>
-                      updateOption("showExporterDetails", checked)
-                    }
-                  />
-                </div>
-                <div className="flex justify-between items-center">
-                  <label className="text-sm">FDA Details</label>
-                  <Switch
-                    checked={pendingOptions.showFDADetails}
-                    onCheckedChange={(checked) =>
-                      updateOption("showFDADetails", checked)
-                    }
-                  />
-                </div>
-                <div className="flex justify-between items-center">
-                  <label className="text-sm">Exchange Rates</label>
-                  <Switch
-                    checked={pendingOptions.showExchangeRates}
-                    onCheckedChange={(checked) =>
-                      updateOption("showExchangeRates", checked)
-                    }
-                  />
-                </div>
-                <div className="flex justify-between items-center">
-                  <label className="text-sm">Signature</label>
-                  <Switch
-                    checked={pendingOptions.showSignature}
-                    onCheckedChange={(checked) =>
-                      updateOption("showSignature", checked)
-                    }
-                  />
-                </div>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-
-        <div className="flex gap-2 pt-2 border-t">
+        {/* Fixed bottom buttons */}
+        <SheetFooter>
           <Button
             variant="outline"
-            size="sm"
             onClick={() => setPendingOptions(initialOptions)}
             disabled={!hasChanges}
+            className="flex-1"
           >
             Reset
           </Button>
           <Button
-            size="sm"
             onClick={saveChanges}
             disabled={!hasChanges}
             className="flex-1"
           >
             Save Changes
           </Button>
-        </div>
-      </PopoverContent>
-    </Popover>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   );
 };
 
-export default DocumentOptionsPopover;
+export default DocumentOptionsSheet;

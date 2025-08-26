@@ -9,6 +9,7 @@ import ActionPopover from "@/components/ActionPopover";
 import { useDeleteOrder } from "../api/deleteOrder";
 import { DocumentLinks } from "./DocumentLinks";
 import { PaymentStatusSelect } from "./PaymentStatusSelect";
+import { DeliveryStatusSelect } from "./DeliveryStatusSelect";
 import { Link } from "@tanstack/react-router";
 import {
   AlertCircle,
@@ -34,11 +35,11 @@ interface ExistingOrdersProps {
   orders: OrderView[];
 }
 
-interface DeliveryStatusProps {
+interface DeliveryDatesDisplayProps {
   deliveryDatesJson: string | null;
 }
 
-const DeliveryStatus: React.FC<DeliveryStatusProps> = ({
+const DeliveryDatesDisplay: React.FC<DeliveryDatesDisplayProps> = ({
   deliveryDatesJson,
 }) => {
   // Parse the JSON string format: "[\"2025-05-22 22:00:00+00\",\"2025-05-26 22:00:00+00\"]"
@@ -59,69 +60,11 @@ const DeliveryStatus: React.FC<DeliveryStatusProps> = ({
     return null;
   };
 
-  // Helper function to determine delivery status
-  const getDeliveryStatus = (
-    deliveryDates: [string | null, string | null] | null,
-  ) => {
-    if (!deliveryDates || (!deliveryDates[0] && !deliveryDates[1])) {
-      return { status: "no-dates", icon: null, color: "", bgColor: "" };
-    }
-
-    const now = dayjs();
-    const startDate = deliveryDates[0] ? dayjs(deliveryDates[0]) : null;
-    const endDate = deliveryDates[1] ? dayjs(deliveryDates[1]) : null;
-
-    // If we have an end date and we're past it, consider it delivered
-    if (endDate && now.isAfter(endDate)) {
-      return {
-        status: "delivered",
-        icon: CheckCircle,
-        color: "text-green-700 dark:text-green-300",
-        bgColor: "bg-green-100 dark:bg-green-900/30",
-      };
-    }
-
-    // If we have a start date and we're within the delivery window
-    if (
-      startDate &&
-      now.isAfter(startDate) &&
-      (!endDate || now.isBefore(endDate))
-    ) {
-      return {
-        status: "in-transit",
-        icon: Truck,
-        color: "text-blue-700 dark:text-blue-300",
-        bgColor: "bg-blue-100 dark:bg-blue-900/30",
-      };
-    }
-
-    // If we haven't reached the start date yet
-    if (startDate && now.isBefore(startDate)) {
-      return {
-        status: "scheduled",
-        icon: Clock,
-        color: "text-orange-700 dark:text-orange-300",
-        bgColor: "bg-orange-100 dark:bg-orange-900/30",
-      };
-    }
-
-    // If we're past the end date but no clear delivery status
-    return {
-      status: "overdue",
-      icon: AlertCircle,
-      color: "text-red-700 dark:text-red-300",
-      bgColor: "bg-red-100 dark:bg-red-900/30",
-    };
-  };
-
   const deliveryDates = parseDeliveryDates(deliveryDatesJson);
 
   if (!deliveryDates || (!deliveryDates[0] && !deliveryDates[1])) {
     return null;
   }
-
-  const deliveryStatus = getDeliveryStatus(deliveryDates);
-  const StatusIcon = deliveryStatus.icon;
 
   // Format dates as "D MMM" (e.g., "5 May")
   const formatDate = (date: string) => dayjs(date).format("D MMM");
@@ -136,10 +79,8 @@ const DeliveryStatus: React.FC<DeliveryStatusProps> = ({
     : "";
 
   return (
-    <div
-      className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium ${deliveryStatus.bgColor} ${deliveryStatus.color}`}
-    >
-      {StatusIcon && <StatusIcon size={12} />}
+    <div className="inline-flex items-center gap-1.5 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-full font-medium text-gray-700 dark:text-gray-300 text-xs">
+      <Calendar size={12} />
       <span>{dateText}</span>
     </div>
   );
@@ -276,7 +217,11 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                   currentStatus={order.payment_status || "unpaid"}
                 />
               )}
-              <DeliveryStatus
+              <DeliveryStatusSelect
+                orderId={order.order_id}
+                currentStatus={order.delivery_status || "pending"}
+              />
+              <DeliveryDatesDisplay
                 deliveryDatesJson={order.delivery_dates || null}
               />
             </div>

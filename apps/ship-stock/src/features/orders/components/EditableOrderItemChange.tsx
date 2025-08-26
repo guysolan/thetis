@@ -9,16 +9,22 @@ import { Combobox, ComboboxOption } from "@/components/Combobox";
 import { OrderItemChangeWithDetails } from "../api/selectOrderById";
 import { useUpdateOrderItemChange } from "../api/updateOrderItemChange";
 
-const orderItemChangeSchema = z.object({
+// Input schema (what the form uses)
+const orderItemChangeInputSchema = z.object({
     price: z.coerce.number().min(0).nullable().optional(),
     tax: z.coerce.number().min(0).nullable().optional(),
     lot_number: z.string().nullable().optional(),
-    package_item_change_id: z.string().nullable().optional().transform((val) =>
-        val === "" || val === null ? null : Number(val)
+    package_item_change_id: z.string().optional(),
+});
+
+// Output schema (what gets sent to API after transformation)
+const orderItemChangeSchema = orderItemChangeInputSchema.extend({
+    package_item_change_id: z.string().optional().transform((val) =>
+        val === "" || val === null || val === undefined ? null : Number(val)
     ),
 });
 
-type OrderItemChangeFormData = z.infer<typeof orderItemChangeSchema>;
+type OrderItemChangeFormData = z.infer<typeof orderItemChangeInputSchema>;
 
 interface EditableOrderItemChangeProps {
     orderItemChange: OrderItemChangeWithDetails;
@@ -34,21 +40,34 @@ export const EditableOrderItemChange = ({
     const updateOrderItemChange = useUpdateOrderItemChange(orderId);
 
     const form = useForm<OrderItemChangeFormData>({
-        resolver: zodResolver(orderItemChangeSchema),
+        resolver: zodResolver(orderItemChangeInputSchema),
         defaultValues: {
             price: orderItemChange.price,
             tax: orderItemChange.tax,
             lot_number: orderItemChange.lot_number,
             package_item_change_id:
-                orderItemChange.package_item_change_id?.toString() || null,
+                orderItemChange.package_item_change_id !== null &&
+                    orderItemChange.package_item_change_id !== undefined
+                    ? orderItemChange.package_item_change_id.toString()
+                    : "",
         },
     });
 
     const onSubmit = async (data: OrderItemChangeFormData) => {
+        // Transform the package_item_change_id from string to number
+        const transformedData = {
+            ...data,
+            package_item_change_id: data.package_item_change_id === "" ||
+                    data.package_item_change_id === null ||
+                    data.package_item_change_id === undefined
+                ? null
+                : Number(data.package_item_change_id),
+        };
+
         await updateOrderItemChange.mutateAsync({
             order_id: orderItemChange.order_id,
             item_change_id: orderItemChange.item_change_id,
-            ...data,
+            ...transformedData,
         });
     };
 
@@ -91,7 +110,7 @@ export const EditableOrderItemChange = ({
                                 name="package_item_change_id"
                                 label="Package Item"
                                 options={itemOptions}
-                                placeholder="Select package item..."
+                                placeholder="No package item selected"
                                 searchPlaceholder="Search packages..."
                                 emptyMessage="No packages found."
                             />

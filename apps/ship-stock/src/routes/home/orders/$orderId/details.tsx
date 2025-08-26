@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
-import { useSelectOrderById } from "@/features/orders/api/selectOrderById";
+import {
+    OrderWithDetails,
+    useSelectOrderById,
+} from "@/features/orders/api/selectOrderById";
 import { useSelectAddresses } from "@/features/stockpiles/api/selectAddresses";
 import { useSelectItems } from "@/features/items/api/selectItems";
 import { EditableOrderItemChange } from "@/features/orders/components/EditableOrderItemChange";
@@ -33,7 +36,9 @@ type FlowItem = {
 };
 
 // Helper function to create flow items
-const createFlows = (orderItemChanges: any[]): FlowItem[] => {
+const createFlows = (
+    orderItemChanges: OrderWithDetails["order_item_changes"],
+): FlowItem[] => {
     const positiveChanges = orderItemChanges.filter(
         (change) => change.item_changes.quantity_change > 0,
     );
@@ -116,14 +121,34 @@ function RouteComponent() {
         [addresses],
     );
 
-    // Convert items to combobox options (for package items)
-    const itemOptions: ComboboxOption[] = React.useMemo(
-        () =>
-            items?.map((item) => ({
-                value: item.id.toString(),
-                label: item.name,
-            })) || [],
-        [items],
+    // Convert item_changes from this order to combobox options for package selection
+    const packageItemOptions: ComboboxOption[] = React.useMemo(
+        () => {
+            if (!order) return [];
+
+            // Get all item_changes from this order that could be packages
+            // The package_item_change_id references item_changes.id, not items.id
+            const itemChangeOptions = order.order_item_changes
+                .map((orderItemChange) => ({
+                    value: orderItemChange.item_change_id.toString(),
+                    label: `${orderItemChange.item_changes.items.name} (${
+                        orderItemChange.item_changes.quantity_change > 0
+                            ? "+"
+                            : ""
+                    }${orderItemChange.item_changes.quantity_change} @ ${
+                        orderItemChange.item_changes.addresses?.name ||
+                        "Unknown Address"
+                    })`,
+                    itemChange: orderItemChange.item_changes,
+                }))
+                // Remove duplicates by item_change_id
+                .filter((option, index, self) =>
+                    index === self.findIndex((o) => o.value === option.value)
+                );
+
+            return itemChangeOptions;
+        },
+        [order],
     );
 
     // Group order item changes by item_id
@@ -153,41 +178,10 @@ function RouteComponent() {
     return (
         <div className="space-y-6 mx-auto p-6 container">
             {/* Order Header */}
-            <Card>
-                <CardHeader>
-                    <CardTitle className="flex justify-between items-center">
-                        <span>Order #{order.id}</span>
-                        <Badge variant="outline">{order.order_type}</Badge>
-                    </CardTitle>
-                    <div className="gap-4 grid grid-cols-2 md:grid-cols-4 text-sm">
-                        <div>
-                            <p className="font-medium">Order Date</p>
-                            <p className="text-muted-foreground">
-                                {new Date(order.order_date)
-                                    .toLocaleDateString()}
-                            </p>
-                        </div>
-                        <div>
-                            <p className="font-medium">Currency</p>
-                            <p className="text-muted-foreground">
-                                {order.currency || "N/A"}
-                            </p>
-                        </div>
-                        <div>
-                            <p className="font-medium">Carriage</p>
-                            <p className="text-muted-foreground">
-                                {order.carriage}
-                            </p>
-                        </div>
-                        <div>
-                            <p className="font-medium">Payment Status</p>
-                            <p className="text-muted-foreground">
-                                {order.payment_status || "N/A"}
-                            </p>
-                        </div>
-                    </div>
-                </CardHeader>
-            </Card>
+            <section className="flex items-center gap-2">
+                <h1 className="font-bold text-2xl">Order #{order.id}</h1>
+                <Badge variant="outline">{order.order_type}</Badge>
+            </section>
 
             {/* Editable Order Information */}
             <EditableOrder order={order} />
@@ -336,7 +330,7 @@ function RouteComponent() {
                                                                 <EditableOrderItemChange
                                                                     orderItemChange={orderItemChange}
                                                                     orderId={orderId}
-                                                                    itemOptions={itemOptions}
+                                                                    itemOptions={packageItemOptions}
                                                                 />
                                                             </div>
 

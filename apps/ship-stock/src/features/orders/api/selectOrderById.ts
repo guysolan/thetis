@@ -24,7 +24,8 @@ export interface OrderWithDetails {
     airwaybill: string | null;
     delivery_dates: string | null;
     payment_status: string | null;
-    order_form_values: any | null;
+    delivery_status: string | null;
+    order_form_values: Record<string, unknown> | null;
     reference_number: string | null;
     order_item_changes: OrderItemChangeWithDetails[];
 }

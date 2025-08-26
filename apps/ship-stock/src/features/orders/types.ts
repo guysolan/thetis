@@ -50,6 +50,7 @@ export interface OrderView {
     carriage?: number;
     currency: string;
     payment_status?: string;
+    delivery_status?: string;
     items: OrderItemInView[];
     from_address: Address["Row"];
     to_address: Address["Row"];

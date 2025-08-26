@@ -92,7 +92,15 @@ const Document = ({ order, options, title }: DocumentProps) => {
       )}
 
       {options.payment && (
-        <PaymentDetails orderId={order.order_id} currency={order.currency} />
+        <PaymentDetails
+          orderId={order.order_id}
+          currency={order.currency}
+          enabledPaymentMethods={options.paymentMethods
+            ? Object.entries(options.paymentMethods)
+              .filter(([_, enabled]) => enabled)
+              .map(([method]) => method)
+            : undefined}
+        />
       )}
 
       {options.showExporterDetails && <ExporterDetails />}

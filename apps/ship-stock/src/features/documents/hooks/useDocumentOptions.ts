@@ -1,6 +1,7 @@
 import { useSearch } from "@tanstack/react-router";
 import type { DocumentOptions } from "../schema";
 import { packingListSchema } from "../schema";
+import { PAYMENT_METHODS } from "../../orders/features/order-documents/components/PaymentDetails";
 
 type DocumentType =
     | "commercialInvoice"
@@ -49,6 +50,7 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                     showFDADetails: false,
                     showExchangeRates: false,
                     showServicesTable: true,
+                    showCarriage: false,
                 };
             case "commercialInvoice":
                 return {
@@ -189,6 +191,12 @@ export const useDocumentOptions = (documentType: DocumentType) => {
             contact: search?.to?.contact ?? defaults.to.contact,
         },
         payment: search?.payment ?? defaults.payment ?? false,
+        paymentMethods: Object.fromEntries(
+            Object.keys(PAYMENT_METHODS).map((method) => [
+                method,
+                search?.paymentMethods?.[method] ?? true,
+            ]),
+        ),
         total: search?.total ?? defaults.total ?? true,
         showSignature: search?.showSignature ?? true,
         showPackages: search?.showPackages ?? defaults.showPackages ?? false,
@@ -202,6 +210,7 @@ export const useDocumentOptions = (documentType: DocumentType) => {
             defaults.showExchangeRates ?? false,
         showServicesTable: search?.showServicesTable ??
             defaults.showServicesTable ?? true,
+        showCarriage: search?.showCarriage ?? defaults.showCarriage ?? false,
     };
 
     return documentOptions;

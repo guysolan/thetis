@@ -54,7 +54,7 @@ export const Combobox = ({
             control={control}
             name={name}
             render={({ field }) => (
-                <FormItem className={cn("flex flex-col", className)}>
+                <FormItem className={cn("pt-4 flex flex-col", className)}>
                     {label && <FormLabel>{label}</FormLabel>}
                     <Popover open={open} onOpenChange={setOpen}>
                         <PopoverTrigger asChild>
@@ -69,11 +69,13 @@ export const Combobox = ({
                                         !field.value && "text-muted-foreground",
                                     )}
                                 >
-                                    {field.value
-                                        ? options.find((option) =>
-                                            option.value === field.value
-                                        )?.label
-                                        : placeholder}
+                                    <span className="truncate">
+                                        {field.value
+                                            ? options.find((option) =>
+                                                option.value === field.value
+                                            )?.label
+                                            : placeholder}
+                                    </span>
                                     <ChevronsUpDown className="opacity-50 ml-2 w-4 h-4 shrink-0" />
                                 </Button>
                             </FormControl>
@@ -97,17 +99,23 @@ export const Combobox = ({
                                                     );
                                                     setOpen(false);
                                                 }}
+                                                className="flex items-center"
                                             >
                                                 <Check
                                                     className={cn(
-                                                        "mr-2 h-4 w-4",
+                                                        "mr-2 h-4 w-4 shrink-0",
                                                         field.value ===
                                                                 option.value
                                                             ? "opacity-100"
                                                             : "opacity-0",
                                                     )}
                                                 />
-                                                {option.label}
+                                                <span
+                                                    className="truncate"
+                                                    title={option.label}
+                                                >
+                                                    {option.label}
+                                                </span>
                                             </CommandItem>
                                         ))}
                                     </CommandGroup>

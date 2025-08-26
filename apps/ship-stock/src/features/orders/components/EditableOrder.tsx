@@ -6,13 +6,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@thetis/ui/card";
 import { Button } from "@thetis/ui/button";
 import Input from "@/components/Input";
 import Select from "@/components/Select";
-import Textarea from "@/components/Textarea";
 import { OrderWithDetails } from "../api/selectOrderById";
 import { useUpdateOrder } from "../api/updateOrder";
 import DatePicker from "../../../components/DatePicker";
+import DateRangePicker from "../../../components/DateRangePicker";
 import { ReasonForExportSelect } from "./ReasonForExportSelect";
 import { UnitOfMeasurementSelect } from "./UnitOfMeasurement";
 import { ModeOfTransportSelect } from "./ModeOfTransportSelect";
+import { PaymentStatusSelect } from "./PaymentStatusSelect";
+import { DeliveryStatusSelect } from "./DeliveryStatusSelect";
 const orderSchema = z.object({
     order_type: z.string().optional(),
     order_date: z.string().optional(),
@@ -25,6 +27,8 @@ const orderSchema = z.object({
     shipment_number: z.string().nullable().optional(),
     airwaybill: z.string().nullable().optional(),
     payment_status: z.string().nullable().optional(),
+    delivery_status: z.string().nullable().optional(),
+    delivery_dates: z.array(z.string()).nullable().optional(),
     reference_number: z.string().nullable().optional(),
 });
 
@@ -48,13 +52,6 @@ const currencyOptions = [
     { label: "EUR", value: "EUR" },
 ];
 
-const paymentStatusOptions = [
-    { label: "Unpaid", value: "unpaid" },
-    { label: "Paid", value: "paid" },
-    { label: "Pending", value: "pending" },
-    { label: "Cancelled", value: "cancelled" },
-];
-
 export const EditableOrder = ({ order }: EditableOrderProps) => {
     const updateOrder = useUpdateOrder();
 
@@ -62,7 +59,9 @@ export const EditableOrder = ({ order }: EditableOrderProps) => {
         resolver: zodResolver(orderSchema),
         defaultValues: {
             order_type: order.order_type,
-            order_date: order.order_date.split("T")[0], // Convert to date format
+            order_date: order.order_date
+                ? order.order_date.split("T")[0]
+                : undefined, // Convert to date format with null check
             carriage: order.carriage,
             currency: order.currency,
             reason_for_export: order.reason_for_export,
@@ -72,14 +71,38 @@ export const EditableOrder = ({ order }: EditableOrderProps) => {
             shipment_number: order.shipment_number,
             airwaybill: order.airwaybill,
             payment_status: order.payment_status,
+            delivery_status: order.delivery_status,
+            delivery_dates: order.delivery_dates
+                ? (() => {
+                    try {
+                        // Parse PostgreSQL tstzrange format: "[\"2025-05-22 22:00:00+00\",\"2025-05-26 22:00:00+00\"]"
+                        const parsed = JSON.parse(order.delivery_dates);
+                        if (Array.isArray(parsed) && parsed.length === 2) {
+                            return parsed;
+                        }
+                    } catch (error) {
+                        console.warn("Failed to parse delivery_dates:", error);
+                    }
+                    return undefined;
+                })()
+                : undefined,
             reference_number: order.reference_number,
         },
     });
 
     const onSubmit = async (data: OrderFormData) => {
+        // Convert delivery_dates array back to PostgreSQL range format if it exists
+        const formattedData = {
+            ...data,
+            delivery_dates:
+                data.delivery_dates && Array.isArray(data.delivery_dates)
+                    ? JSON.stringify(data.delivery_dates)
+                    : data.delivery_dates,
+        };
+
         await updateOrder.mutateAsync({
             id: order.id,
-            ...data,
+            ...formattedData,
         });
     };
 
@@ -94,17 +117,14 @@ export const EditableOrder = ({ order }: EditableOrderProps) => {
                         onSubmit={form.handleSubmit(onSubmit)}
                         className="space-y-6"
                     >
-                        {/* Basic Order Info */}
-                        <div className="gap-4 grid grid-cols-1 md:grid-cols-3">
+                        {/* Basic Order Information */}
+                        <div className="gap-6 grid grid-cols-1 lg:grid-cols-3">
                             <Select
                                 name="order_type"
                                 label="Order Type"
                                 options={orderTypeOptions}
                             />
-                            <DatePicker
-                                name="order_date"
-                                label="Order Date"
-                            />
+
                             <Input
                                 name="carriage"
                                 label="Carriage"
@@ -112,29 +132,28 @@ export const EditableOrder = ({ order }: EditableOrderProps) => {
                                 step="0.01"
                                 placeholder="0.00"
                             />
-                        </div>
-
-                        {/* Financial Info */}
-                        <div className="gap-4 grid grid-cols-1 md:grid-cols-3">
                             <Select
                                 name="currency"
                                 label="Currency"
                                 options={currencyOptions}
                             />
-                            <Select
-                                name="payment_status"
-                                label="Payment Status"
-                                options={paymentStatusOptions}
-                            />
-                            <Input
-                                name="reference_number"
-                                label="Reference Number"
-                                placeholder="Enter reference number"
-                            />
                         </div>
 
-                        {/* Shipping Info */}
-                        <div className="gap-4 grid grid-cols-1 md:grid-cols-3">
+                        {/* Financial & Status Information */}
+                        <div className="gap-6 grid grid-cols-1 lg:grid-cols-3">
+                            <DatePicker
+                                name="order_date"
+                                label="Order Date"
+                            />
+                            <DateRangePicker
+                                name="delivery_dates"
+                                label="Delivery Dates"
+                            />
+                            <UnitOfMeasurementSelect />
+                        </div>
+
+                        {/* Shipping & Documentation */}
+                        <div className="gap-6 grid grid-cols-1 lg:grid-cols-3">
                             <Input
                                 name="shipment_number"
                                 label="Shipment Number"
@@ -145,18 +164,46 @@ export const EditableOrder = ({ order }: EditableOrderProps) => {
                                 label="Airwaybill"
                                 placeholder="Enter airwaybill number"
                             />
-                            <ReasonForExportSelect />
+                            <Input
+                                name="reference_number"
+                                label="Reference Number"
+                                placeholder="Enter reference number"
+                            />
                         </div>
 
-                        {/* Trade Info */}
-                        <div className="gap-4 grid grid-cols-1 md:grid-cols-3">
+                        {/* Trade & Export Information */}
+                        <div className="gap-6 grid grid-cols-1 lg:grid-cols-3">
+                            <ReasonForExportSelect />
                             <Input
                                 name="incoterms"
                                 label="Incoterms"
                                 placeholder="Enter incoterms"
                             />
                             <ModeOfTransportSelect />
-                            <UnitOfMeasurementSelect />
+                        </div>
+
+                        {/* Delivery Information */}
+                        <div className="gap-6 grid grid-cols-1 lg:grid-cols-2">
+                            <div className="space-y-2">
+                                <label className="font-medium text-sm">
+                                    Payment Status
+                                </label>
+                                <PaymentStatusSelect
+                                    orderId={order.id}
+                                    currentStatus={order.payment_status ||
+                                        "unpaid"}
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="font-medium text-sm">
+                                    Delivery Status
+                                </label>
+                                <DeliveryStatusSelect
+                                    orderId={order.id}
+                                    currentStatus={order.delivery_status ||
+                                        "pending"}
+                                />
+                            </div>
                         </div>
 
                         <Button

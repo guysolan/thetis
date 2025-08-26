@@ -1,5 +1,18 @@
 import React from "react";
 
+// Single source of truth for all payment methods
+export const PAYMENT_METHODS = {
+  "UK - Local": "UK - Local",
+  "Global - Swift": "Global - Swift",
+  "Canada - Domestic Transfer": "Canada - Domestic Transfer",
+  "International - Swift": "International - Swift",
+  "European Economic Area Transfer": "European Economic Area Transfer",
+  "Non-EEA Transfer": "Non-EEA Transfer",
+  "USA - Local Transfer": "USA - Local Transfer",
+} as const;
+
+export type PaymentMethodKey = keyof typeof PAYMENT_METHODS;
+
 interface BankAccount {
   currency: string;
   local?: {
@@ -43,15 +56,25 @@ const bankAccounts: BankAccount[] = [
   },
   {
     currency: "CAD",
-    international: {
-      title: "CAD - Global - Swift",
+    local: {
+      title: "Canada - Domestic Transfer",
       details: [
         { label: "Recipient", value: "THETIS MEDICAL LTD" },
-        { label: "IBAN", value: "GB33REVO00996957095509" },
-        { label: "BIC", value: "REVOGB21" },
-        { label: "Intermediary BIC", value: "BARCGB22" },
+        { label: "Account Number", value: "200110848249" },
+        { label: "Institution Number", value: "621" },
+        { label: "Transit Number", value: "16001" },
       ],
     },
+    international: [
+      {
+        title: "International - Swift",
+        details: [
+          { label: "Recipient", value: "THETIS MEDICAL LTD" },
+          { label: "Account Number", value: "200110848249" },
+          { label: "Swift/BIC", value: "TRWICAW1XXX" },
+        ],
+      },
+    ],
   },
   {
     currency: "EUR",
@@ -100,12 +123,50 @@ const bankAccounts: BankAccount[] = [
   },
 ];
 
+interface PaymentDetailsProps {
+  orderId: number;
+  currency: string;
+  enabledPaymentMethods?: string[]; // Array of payment method titles to show
+}
+
+// Helper function to get all available payment method titles for a currency
+export const getAvailablePaymentMethods = (
+  currency: string,
+): PaymentMethodKey[] => {
+  const supportedCurrency = ["USD", "GBP", "EUR", "CAD"].includes(currency)
+    ? currency
+    : "GBP";
+  const account = bankAccounts.find((acc) =>
+    acc.currency === supportedCurrency
+  );
+
+  if (!account) return [];
+
+  const methods: PaymentMethodKey[] = [];
+  if (account.local && account.local.title in PAYMENT_METHODS) {
+    methods.push(account.local.title as PaymentMethodKey);
+  }
+  if (account.international) {
+    account.international.forEach((intl) => {
+      if (intl.title in PAYMENT_METHODS) {
+        methods.push(intl.title as PaymentMethodKey);
+      }
+    });
+  }
+
+  return methods;
+};
+
 const PaymentDetails = ({
   orderId,
   currency,
-}: { orderId: number; currency: string }) => {
+  enabledPaymentMethods,
+}: PaymentDetailsProps) => {
   const filteredAccounts = bankAccounts.filter((account) => {
-    if (currency === "USD" || currency === "GBP" || currency === "EUR") {
+    if (
+      currency === "USD" || currency === "GBP" || currency === "EUR" ||
+      currency === "CAD"
+    ) {
       return account.currency === currency;
     }
     return account.currency === "GBP"; // Default to GBP for other currencies
@@ -115,48 +176,46 @@ const PaymentDetails = ({
     switch (currency) {
       case "USD":
         return "Lead Bank, 1801 Main Street, 64108, Kansas City, United States";
+      case "CAD":
+        return "Wise Payments Canada Inc., 99 Bank Street, Suite 1420, Ottawa, ON, K1P 1H4, Canada";
       default:
         return "Revolut Ltd 7 Westferry Circus, E14 4HD, London, United Kingdom";
     }
   };
 
-  const renderBankDetails = (title: string, details: BankDetail[]) => (
-    <div key={title}>
-      <h4>{title}</h4>
-      {details.map((detail) => (
-        <p key={detail.label}>
-          {detail.label}: {detail.value}
-        </p>
-      ))}
-    </div>
-  );
+  const renderBankDetails = (title: string, details: BankDetail[]) => {
+    // If enabledPaymentMethods is provided, only show methods that are enabled
+    if (enabledPaymentMethods && !enabledPaymentMethods.includes(title)) {
+      return null;
+    }
+
+    return (
+      <div key={title}>
+        <h4>{title}</h4>
+        {details.map((detail) => (
+          <p key={detail.label}>
+            {detail.label}: {detail.value}
+          </p>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <section>
-      <h2 className="mb-1 font-medium text-lg text-neutral-900">
+      <h2 className="mb-1 font-medium text-neutral-900 text-lg">
         Payment Information
       </h2>
       <h4>Payment Reference: #{orderId?.toString().padStart(4, "0")}</h4>
       <section>
         {filteredAccounts.map((account) => (
           <section key={account.currency}>
-            {account.local && (
-              <div>
-                {renderBankDetails(account.local.title, account.local.details)}
-              </div>
-            )}
-            {Array.isArray(account.international) ? (
+            {account.local &&
+              renderBankDetails(account.local.title, account.local.details)}
+            {Array.isArray(account.international) &&
               account.international.map((intl) =>
-                renderBankDetails(intl.title, intl.details),
-              )
-            ) : (
-              <div>
-                {renderBankDetails(
-                  account.international[0].title,
-                  account.international[0].details,
-                )}
-              </div>
-            )}
+                renderBankDetails(intl.title, intl.details)
+              )}
           </section>
         ))}
         <div>

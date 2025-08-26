@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { PAYMENT_METHODS } from "../orders/features/order-documents/components/PaymentDetails";
 
 export const baseDocumentOptions = {
   from: [
@@ -96,6 +97,17 @@ export const documentOptionsSchema = z.object({
     contact: z.boolean().default(true),
   }),
   payment: z.boolean().default(false),
+  paymentMethods: z.object(
+    Object.fromEntries(
+      Object.keys(PAYMENT_METHODS).map(
+        (method) => [method, z.boolean().default(true)],
+      ),
+    ),
+  ).default(
+    Object.fromEntries(
+      Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
+    ),
+  ),
   total: z.boolean().default(true),
   showSignature: z.boolean().default(true),
   showPackages: z.boolean().default(false),

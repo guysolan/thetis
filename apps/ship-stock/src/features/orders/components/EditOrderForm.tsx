@@ -17,6 +17,7 @@ import Textarea from "../../../components/Textarea";
 import { IncotermsSelect } from "./IncotermsSelect";
 import { ModeOfTransportSelect } from "./ModeOfTransportSelect";
 import { UnitOfMeasurementSelect } from "./UnitOfMeasurement";
+import { DeliveryStatusSelect } from "./DeliveryStatusSelect";
 
 const editOrderSchema = z.object({
   order_type: z.enum(orderTypes),
@@ -28,6 +29,7 @@ const editOrderSchema = z.object({
   mode_of_transport: z.string().optional(),
   incoterms: z.string().optional(),
   unit_of_measurement: z.string().optional(),
+  delivery_status: z.string().optional(),
 });
 
 const EditOrderForm = ({ order }: { order: OrderView }) => {
@@ -43,6 +45,7 @@ const EditOrderForm = ({ order }: { order: OrderView }) => {
       mode_of_transport: order.mode_of_transport,
       incoterms: order.incoterms,
       unit_of_measurement: order.unit_of_measurement,
+      delivery_status: order.delivery_status,
     },
   });
 
@@ -74,6 +77,13 @@ const EditOrderForm = ({ order }: { order: OrderView }) => {
         <ModeOfTransportSelect />
         <IncotermsSelect />
         <UnitOfMeasurementSelect />
+        <div className="space-y-2">
+          <label className="font-medium text-sm">Delivery Status</label>
+          <DeliveryStatusSelect
+            orderId={order.order_id}
+            currentStatus={order.delivery_status || "pending"}
+          />
+        </div>
         <Button
           onClick={() => {
             console.log(form.formState.errors);
