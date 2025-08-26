@@ -16,9 +16,18 @@ type InputProps = {
     step?: string;
     disabled?: boolean;
     className?: string;
+    placeholder?: string;
 };
 const Input = (
-    { name, label, type = "text", step, disabled = false, className }: InputProps,
+    {
+        name,
+        label,
+        type = "text",
+        step,
+        disabled = false,
+        className,
+        placeholder,
+    }: InputProps,
 ) => {
     const { control } = useFormContext();
 
@@ -37,11 +46,13 @@ const Input = (
                             disabled={disabled}
                             type={type}
                             step={step}
+                            placeholder={placeholder}
                             {...field}
                             value={field.value ?? ""}
                             className={cn(
-                                type === "number" && "[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
-                                className
+                                type === "number" &&
+                                    "[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
+                                className,
                             )}
                             onChange={(e) =>
                                 type === "number"

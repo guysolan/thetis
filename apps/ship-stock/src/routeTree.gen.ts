@@ -21,8 +21,9 @@ import { Route as HomeDirectoryImport } from './routes/home/directory'
 import { Route as HomeBuildImport } from './routes/home/build'
 import { Route as HomeStockIndexImport } from './routes/home/stock/index'
 import { Route as HomeOrdersIndexImport } from './routes/home/orders/index'
-import { Route as HomeOrdersOrderIdImport } from './routes/home/orders/$orderId'
+import { Route as HomeOrdersOrderIdIndexImport } from './routes/home/orders/$orderId/index'
 import { Route as HomeStockHistoryAddressIdImport } from './routes/home/stock/history.$addressId'
+import { Route as HomeOrdersOrderIdDetailsImport } from './routes/home/orders/$orderId/details'
 import { Route as DocumentsOrdersOrderIdStocktakeReportImport } from './routes/documents/orders/$orderId/stocktake-report'
 import { Route as DocumentsOrdersOrderIdShippingLabelImport } from './routes/documents/orders/$orderId/shipping-label'
 import { Route as DocumentsOrdersOrderIdPurchaseOrderImport } from './routes/documents/orders/$orderId/purchase-order'
@@ -92,15 +93,21 @@ const HomeOrdersIndexRoute = HomeOrdersIndexImport.update({
   getParentRoute: () => HomeRoute,
 } as any)
 
-const HomeOrdersOrderIdRoute = HomeOrdersOrderIdImport.update({
-  id: '/orders/$orderId',
-  path: '/orders/$orderId',
+const HomeOrdersOrderIdIndexRoute = HomeOrdersOrderIdIndexImport.update({
+  id: '/orders/$orderId/',
+  path: '/orders/$orderId/',
   getParentRoute: () => HomeRoute,
 } as any)
 
 const HomeStockHistoryAddressIdRoute = HomeStockHistoryAddressIdImport.update({
   id: '/stock/history/$addressId',
   path: '/stock/history/$addressId',
+  getParentRoute: () => HomeRoute,
+} as any)
+
+const HomeOrdersOrderIdDetailsRoute = HomeOrdersOrderIdDetailsImport.update({
+  id: '/orders/$orderId/details',
+  path: '/orders/$orderId/details',
   getParentRoute: () => HomeRoute,
 } as any)
 
@@ -206,13 +213,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeIndexImport
       parentRoute: typeof HomeImport
     }
-    '/home/orders/$orderId': {
-      id: '/home/orders/$orderId'
-      path: '/orders/$orderId'
-      fullPath: '/home/orders/$orderId'
-      preLoaderRoute: typeof HomeOrdersOrderIdImport
-      parentRoute: typeof HomeImport
-    }
     '/home/orders/': {
       id: '/home/orders/'
       path: '/orders'
@@ -269,11 +269,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocumentsOrdersOrderIdStocktakeReportImport
       parentRoute: typeof DocumentsImport
     }
+    '/home/orders/$orderId/details': {
+      id: '/home/orders/$orderId/details'
+      path: '/orders/$orderId/details'
+      fullPath: '/home/orders/$orderId/details'
+      preLoaderRoute: typeof HomeOrdersOrderIdDetailsImport
+      parentRoute: typeof HomeImport
+    }
     '/home/stock/history/$addressId': {
       id: '/home/stock/history/$addressId'
       path: '/stock/history/$addressId'
       fullPath: '/home/stock/history/$addressId'
       preLoaderRoute: typeof HomeStockHistoryAddressIdImport
+      parentRoute: typeof HomeImport
+    }
+    '/home/orders/$orderId/': {
+      id: '/home/orders/$orderId/'
+      path: '/orders/$orderId'
+      fullPath: '/home/orders/$orderId'
+      preLoaderRoute: typeof HomeOrdersOrderIdIndexImport
       parentRoute: typeof HomeImport
     }
   }
@@ -312,20 +326,22 @@ interface HomeRouteChildren {
   HomeBuildRoute: typeof HomeBuildRoute
   HomeDirectoryRoute: typeof HomeDirectoryRoute
   HomeIndexRoute: typeof HomeIndexRoute
-  HomeOrdersOrderIdRoute: typeof HomeOrdersOrderIdRoute
   HomeOrdersIndexRoute: typeof HomeOrdersIndexRoute
   HomeStockIndexRoute: typeof HomeStockIndexRoute
+  HomeOrdersOrderIdDetailsRoute: typeof HomeOrdersOrderIdDetailsRoute
   HomeStockHistoryAddressIdRoute: typeof HomeStockHistoryAddressIdRoute
+  HomeOrdersOrderIdIndexRoute: typeof HomeOrdersOrderIdIndexRoute
 }
 
 const HomeRouteChildren: HomeRouteChildren = {
   HomeBuildRoute: HomeBuildRoute,
   HomeDirectoryRoute: HomeDirectoryRoute,
   HomeIndexRoute: HomeIndexRoute,
-  HomeOrdersOrderIdRoute: HomeOrdersOrderIdRoute,
   HomeOrdersIndexRoute: HomeOrdersIndexRoute,
   HomeStockIndexRoute: HomeStockIndexRoute,
+  HomeOrdersOrderIdDetailsRoute: HomeOrdersOrderIdDetailsRoute,
   HomeStockHistoryAddressIdRoute: HomeStockHistoryAddressIdRoute,
+  HomeOrdersOrderIdIndexRoute: HomeOrdersOrderIdIndexRoute,
 }
 
 const HomeRouteWithChildren = HomeRoute._addFileChildren(HomeRouteChildren)
@@ -339,7 +355,6 @@ export interface FileRoutesByFullPath {
   '/home/directory': typeof HomeDirectoryRoute
   '/test/stock-history': typeof TestStockHistoryRoute
   '/home/': typeof HomeIndexRoute
-  '/home/orders/$orderId': typeof HomeOrdersOrderIdRoute
   '/home/orders': typeof HomeOrdersIndexRoute
   '/home/stock': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
@@ -348,7 +363,9 @@ export interface FileRoutesByFullPath {
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
+  '/home/orders/$orderId/details': typeof HomeOrdersOrderIdDetailsRoute
   '/home/stock/history/$addressId': typeof HomeStockHistoryAddressIdRoute
+  '/home/orders/$orderId': typeof HomeOrdersOrderIdIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -359,7 +376,6 @@ export interface FileRoutesByTo {
   '/home/directory': typeof HomeDirectoryRoute
   '/test/stock-history': typeof TestStockHistoryRoute
   '/home': typeof HomeIndexRoute
-  '/home/orders/$orderId': typeof HomeOrdersOrderIdRoute
   '/home/orders': typeof HomeOrdersIndexRoute
   '/home/stock': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
@@ -368,7 +384,9 @@ export interface FileRoutesByTo {
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
+  '/home/orders/$orderId/details': typeof HomeOrdersOrderIdDetailsRoute
   '/home/stock/history/$addressId': typeof HomeStockHistoryAddressIdRoute
+  '/home/orders/$orderId': typeof HomeOrdersOrderIdIndexRoute
 }
 
 export interface FileRoutesById {
@@ -381,7 +399,6 @@ export interface FileRoutesById {
   '/home/directory': typeof HomeDirectoryRoute
   '/test/stock-history': typeof TestStockHistoryRoute
   '/home/': typeof HomeIndexRoute
-  '/home/orders/$orderId': typeof HomeOrdersOrderIdRoute
   '/home/orders/': typeof HomeOrdersIndexRoute
   '/home/stock/': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
@@ -390,7 +407,9 @@ export interface FileRoutesById {
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
+  '/home/orders/$orderId/details': typeof HomeOrdersOrderIdDetailsRoute
   '/home/stock/history/$addressId': typeof HomeStockHistoryAddressIdRoute
+  '/home/orders/$orderId/': typeof HomeOrdersOrderIdIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -404,7 +423,6 @@ export interface FileRouteTypes {
     | '/home/directory'
     | '/test/stock-history'
     | '/home/'
-    | '/home/orders/$orderId'
     | '/home/orders'
     | '/home/stock'
     | '/documents/orders/$orderId/commercial-invoice'
@@ -413,7 +431,9 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
     | '/documents/orders/$orderId/stocktake-report'
+    | '/home/orders/$orderId/details'
     | '/home/stock/history/$addressId'
+    | '/home/orders/$orderId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -423,7 +443,6 @@ export interface FileRouteTypes {
     | '/home/directory'
     | '/test/stock-history'
     | '/home'
-    | '/home/orders/$orderId'
     | '/home/orders'
     | '/home/stock'
     | '/documents/orders/$orderId/commercial-invoice'
@@ -432,7 +451,9 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
     | '/documents/orders/$orderId/stocktake-report'
+    | '/home/orders/$orderId/details'
     | '/home/stock/history/$addressId'
+    | '/home/orders/$orderId'
   id:
     | '__root__'
     | '/'
@@ -443,7 +464,6 @@ export interface FileRouteTypes {
     | '/home/directory'
     | '/test/stock-history'
     | '/home/'
-    | '/home/orders/$orderId'
     | '/home/orders/'
     | '/home/stock/'
     | '/documents/orders/$orderId/commercial-invoice'
@@ -452,7 +472,9 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
     | '/documents/orders/$orderId/stocktake-report'
+    | '/home/orders/$orderId/details'
     | '/home/stock/history/$addressId'
+    | '/home/orders/$orderId/'
   fileRoutesById: FileRoutesById
 }
 
@@ -509,10 +531,11 @@ export const routeTree = rootRoute
         "/home/build",
         "/home/directory",
         "/home/",
-        "/home/orders/$orderId",
         "/home/orders/",
         "/home/stock/",
-        "/home/stock/history/$addressId"
+        "/home/orders/$orderId/details",
+        "/home/stock/history/$addressId",
+        "/home/orders/$orderId/"
       ]
     },
     "/login": {
@@ -531,10 +554,6 @@ export const routeTree = rootRoute
     },
     "/home/": {
       "filePath": "home/index.tsx",
-      "parent": "/home"
-    },
-    "/home/orders/$orderId": {
-      "filePath": "home/orders/$orderId.tsx",
       "parent": "/home"
     },
     "/home/orders/": {
@@ -569,8 +588,16 @@ export const routeTree = rootRoute
       "filePath": "documents/orders/$orderId/stocktake-report.tsx",
       "parent": "/documents"
     },
+    "/home/orders/$orderId/details": {
+      "filePath": "home/orders/$orderId/details.tsx",
+      "parent": "/home"
+    },
     "/home/stock/history/$addressId": {
       "filePath": "home/stock/history.$addressId.tsx",
+      "parent": "/home"
+    },
+    "/home/orders/$orderId/": {
+      "filePath": "home/orders/$orderId/index.tsx",
       "parent": "/home"
     }
   }

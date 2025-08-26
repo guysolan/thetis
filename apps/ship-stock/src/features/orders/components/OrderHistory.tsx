@@ -229,7 +229,8 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                   title={`Order ${order.order_id}`}
                   deleteFunction={() => deleteOrder(order.order_id)}
                 >
-                  <Button
+                  {
+                    /* <Button
                     asChild
                     variant="ghost"
                     size="sm"
@@ -241,6 +242,22 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                     >
                       <Edit size={20} />
                       Edit
+                    </Link>
+                  </Button> */
+                  }
+                  <Button
+                    asChild
+                    variant="ghost"
+                    size="sm"
+                    className="justify-start px-2 w-full"
+                  >
+                    <Link
+                      className="flex flex-row items-center gap-2 !text-sm"
+                      to="/home/orders/$orderId/details"
+                      params={{ orderId: order.order_id.toString() }}
+                    >
+                      <Edit size={20} />
+                      Edit Details
                     </Link>
                   </Button>
                   <DocumentLinks

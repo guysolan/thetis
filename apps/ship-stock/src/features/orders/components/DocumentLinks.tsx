@@ -1,5 +1,12 @@
 import { Button } from "@thetis/ui/button";
-import { Banknote, ExternalLink, FileText, Receipt, Tag } from "lucide-react";
+import {
+  Banknote,
+  Clipboard,
+  ExternalLink,
+  FileText,
+  Receipt,
+  Tag,
+} from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { OrderType } from "../types";
 
@@ -25,7 +32,7 @@ const documents: DocumentConfig[] = [
   {
     path: "packing-list",
     label: "Packing List",
-    icon: <Tag size={20} />,
+    icon: <Clipboard size={20} />,
     showFor: ["shipment", "sale"],
   },
   {
