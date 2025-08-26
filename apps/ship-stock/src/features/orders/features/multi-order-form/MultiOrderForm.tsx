@@ -27,9 +27,11 @@ import EditCard from "../../../../components/EditCard";
 import { Card, CardContent, CardHeader } from "@thetis/ui/card";
 import PackageStockItems from "../order-forms/components/PackageStockItems";
 import SellPreview from "./SellPreview";
-import BuyPreview from "./BuyPreview";
+import BuyPreview, { OrderItem, PackageItem } from "./BuyPreview";
 import ShipmentPreview from "./ShipmentPreview";
 import { useEffect, useRef } from "react";
+import { usePublicUser } from "../../../auth/hooks/usePublicUser";
+import { useUserCompany } from "../../../companies/hooks/useUserCompany";
 
 type Schema = z.infer<typeof schema>;
 
@@ -45,11 +47,19 @@ export function MultiOrderForm({
   defaultOrderFormValues,
 }: MultiOrderFormProps) {
   const companyId = useMyCompanyId();
+  const { data: publicUser, isLoading: isLoadingUser } = usePublicUser();
+  const { data: companyUser, isLoading: isLoadingCompany } = useUserCompany(
+    publicUser?.id,
+  );
+
+  // Wait for user and company data to load before initializing form
+  const isLoading = isLoadingUser || isLoadingCompany;
+  const effectiveCompanyId = companyUser?.company_id?.toString() ?? "";
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: defaultOrderFormValues ?? {
-      order_date: new Date(),
+      order_date: new Date().toISOString().split("T")[0], // Use string format to avoid hydration issues
       unit_of_measurement: "metric",
       currency: defaultCurrency,
       order_type: defaultOrderType ?? "sale",
@@ -57,17 +67,70 @@ export function MultiOrderForm({
       consumed_items: [],
       produced_items: [],
       package_items: [],
-      to_company_id: companyId,
-      from_company_id: companyId,
+      to_company_id: effectiveCompanyId,
+      from_company_id: effectiveCompanyId,
       mode: "package",
       carriage: 0,
     },
   });
 
-  // Use useWatch to prevent infinite loops
-  const orderType = useWatch({ control: form.control, name: "order_type" });
+  // Show loading state while data is being fetched
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center p-8">
+        <div className="text-center">
+          <div className="mx-auto mb-4 border-gray-900 border-b-2 rounded-full w-8 h-8 animate-spin" />
+          <p className="text-gray-600">Loading form...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Use useWatch to prevent infinite loops - consolidate multiple watches
+  const watchedValues = useWatch({
+    control: form.control,
+    name: [
+      "order_type",
+      "mode",
+      "order_items",
+      "package_items",
+      "consumed_items",
+      "produced_items",
+      "from_items",
+      "to_items",
+    ],
+  });
+
+  const [
+    orderType,
+    mode,
+    orderItems,
+    packageItems,
+    consumedItems,
+    producedItems,
+    fromItems,
+    toItems,
+  ] = watchedValues || [];
+
+  // Provide safe defaults for watched values
+  const safeOrderType = orderType || defaultOrderType || "sale";
+  const safeMode = mode || "package";
+  const safeOrderItems = orderItems || [];
+  const safePackageItems = packageItems || [];
+  const safeConsumedItems = consumedItems || [];
+  const safeProducedItems = producedItems || [];
+  const safeFromItems = fromItems || [];
+  const safeToItems = toItems || [];
 
   const previousOrderTypeRef = useRef<Schema["order_type"] | null>(null);
+
+  // Update company IDs when company data loads
+  useEffect(() => {
+    if (effectiveCompanyId && !defaultOrderFormValues) {
+      form.setValue("to_company_id", effectiveCompanyId);
+      form.setValue("from_company_id", effectiveCompanyId);
+    }
+  }, [effectiveCompanyId, form, defaultOrderFormValues]);
 
   useEffect(() => {
     // Only clear arrays if orderType actually changed and is different from the previous value
@@ -83,20 +146,7 @@ export function MultiOrderForm({
     }
   }, [orderType, form]);
 
-  const mode = useWatch({ control: form.control, name: "mode" });
-  const orderItems = useWatch({ control: form.control, name: "order_items" }) ||
-    [];
-  const packageItems =
-    useWatch({ control: form.control, name: "package_items" }) || [];
-  const consumedItems =
-    useWatch({ control: form.control, name: "consumed_items" }) || [];
-  const producedItems =
-    useWatch({ control: form.control, name: "produced_items" }) || [];
-  const fromItems = useWatch({ control: form.control, name: "from_items" }) ||
-    [];
-  const toItems = useWatch({ control: form.control, name: "to_items" }) || [];
-
-  const { mutate: createOrder } = useCreateOrder(orderType);
+  const { mutate: createOrder } = useCreateOrder(safeOrderType);
 
   const scrollToTop = () => {
     document.getElementById("order-form")?.scrollIntoView({
@@ -126,33 +176,31 @@ export function MultiOrderForm({
 
   // Get the appropriate preview component based on order type
   const getPreviewContent = () => {
-    const safeMode = mode || "direct";
-
-    switch (orderType) {
+    switch (safeOrderType) {
       case "sale":
         return (
           <SellPreview
-            orderItems={orderItems}
-            packageItems={packageItems}
+            orderItems={safeOrderItems as OrderItem[]}
+            packageItems={safePackageItems as PackageItem[]}
             mode={safeMode}
           />
         );
       case "purchase":
         return (
           <BuyPreview
-            orderItems={orderItems}
-            producedItems={producedItems}
-            consumedItems={consumedItems}
-            packageItems={packageItems}
+            orderItems={safeOrderItems as OrderItem[]}
+            producedItems={safeProducedItems}
+            consumedItems={safeConsumedItems}
+            packageItems={safePackageItems as PackageItem[]}
             mode={safeMode}
           />
         );
       case "shipment":
         return (
           <ShipmentPreview
-            fromItems={fromItems}
-            toItems={toItems}
-            packageItems={packageItems}
+            fromItems={safeFromItems as OrderItem[]}
+            toItems={safeToItems as OrderItem[]}
+            packageItems={safePackageItems as PackageItem[]}
             mode={safeMode}
           />
         );
@@ -163,7 +211,7 @@ export function MultiOrderForm({
 
   // Get the appropriate form fields based on order type
   const getFormFields = () => {
-    switch (orderType) {
+    switch (safeOrderType) {
       case "purchase":
         return <BuyFormFields />;
       case "sale":
@@ -183,11 +231,11 @@ export function MultiOrderForm({
         onSubmit={form.handleSubmit(handleSubmit, () => scrollToTop())}
       >
         <OrderDetails />
-        <BuyerSeller isShipment={orderType === "shipment"} />
+        <BuyerSeller isShipment={safeOrderType === "shipment"} />
 
         <EditCard
           title={`${
-            orderType?.charAt(0).toUpperCase() + orderType?.slice(1)
+            safeOrderType?.charAt(0).toUpperCase() + safeOrderType?.slice(1)
           } Order`}
           previewContent={getPreviewContent()}
         >
@@ -201,7 +249,7 @@ export function MultiOrderForm({
                   value: type,
                 }))}
               />
-              {orderType !== "sale" && (
+              {safeOrderType !== "sale" && (
                 <Select
                   label="Item Type"
                   name="item_type"

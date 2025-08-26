@@ -1,26 +1,12 @@
 import type { PricedOrderItem } from "./schema";
 import PackagePreview from "./PackagePreview";
 import { useSelectItemsView } from "../../../items/api/selectItemsView";
+import { OrderItem, PackageItem } from "./BuyPreview";
 
 interface ShipmentPreviewProps {
-  fromItems: Array<{
-    item_type: "product" | "part";
-    item_id: string;
-    quantity_change: number;
-    item_name?: string;
-    package_item_change_id?: number;
-  }>;
-  toItems: Array<{
-    item_type: "product" | "part";
-    item_id: string;
-    quantity_change: number;
-    item_name?: string;
-    package_item_change_id?: number;
-  }>;
-  packageItems: Array<{
-    package_id: string;
-    package_item_change_id: number;
-  }>;
+  fromItems: OrderItem[];
+  toItems: OrderItem[];
+  packageItems: PackageItem[];
   mode: "package" | "direct";
 }
 

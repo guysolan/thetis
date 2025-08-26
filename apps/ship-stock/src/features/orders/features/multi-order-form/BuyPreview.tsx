@@ -1,24 +1,27 @@
 import type { PricedOrderItem } from "./schema";
 import PackagePreview from "./PackagePreview";
+export type OrderItem = {
+  item_type: "product" | "part" | "package" | "stocktake" | "service";
+  item_id?: string;
+  package_id?: string;
+  quantity_change: number;
+  item_price?: number;
+  item_total?: number;
+  item_name?: string;
+  package_item_change_id?: number;
+  package_items?: PricedOrderItem[];
+};
+
+export type PackageItem = {
+  package_id: string;
+  package_item_change_id: number;
+};
 
 interface BuyPreviewProps {
-  orderItems: Array<{
-    item_type: "product" | "part" | "package" | "stocktake";
-    item_id?: string;
-    package_id?: string;
-    quantity_change: number;
-    item_price?: number;
-    item_total?: number;
-    item_name?: string;
-    package_item_change_id?: number;
-    package_items?: PricedOrderItem[];
-  }>;
+  orderItems: OrderItem[];
   producedItems: PricedOrderItem[];
   consumedItems: PricedOrderItem[];
-  packageItems: Array<{
-    package_id: string;
-    package_item_change_id: number;
-  }>;
+  packageItems: PackageItem[];
   mode: "package" | "direct";
 }
 
