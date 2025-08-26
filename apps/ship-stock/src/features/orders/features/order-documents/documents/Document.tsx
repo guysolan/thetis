@@ -91,8 +91,12 @@ const Document = ({ order, options, title }: DocumentProps) => {
         />
       )}
 
-      {options.payment && (
-        <PaymentDetails orderId={order.order_id} currency={order.currency} />
+      {options.payment.show && (
+        <PaymentDetails 
+          orderId={order.order_id} 
+          currency={order.currency} 
+          paymentOptions={options.payment}
+        />
       )}
 
       {options.showExporterDetails && <ExporterDetails />}
