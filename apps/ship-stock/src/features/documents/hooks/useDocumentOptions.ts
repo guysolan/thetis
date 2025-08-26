@@ -43,7 +43,15 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                         contact: true,
                     },
                     total: false,
-                    payment: false,
+                    payment: {
+                        show: false,
+                        paymentMethods: Object.fromEntries(
+                            Object.keys(PAYMENT_METHODS).map((method) => [
+                                method,
+                                true,
+                            ]),
+                        ),
+                    },
                     showPackages: true,
                     showShippingItems: false,
                     showExporterDetails: false,
@@ -76,7 +84,15 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                         shipping: true,
                         contact: true,
                     },
-                    payment: false,
+                    payment: {
+                        show: false,
+                        paymentMethods: Object.fromEntries(
+                            Object.keys(PAYMENT_METHODS).map((method) => [
+                                method,
+                                true,
+                            ]),
+                        ),
+                    },
                     showExporterDetails: true,
                     showFDADetails: true,
                     showExchangeRates: true,
@@ -107,7 +123,15 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                         shipping: true,
                         contact: true,
                     },
-                    payment: true,
+                    payment: {
+                        show: true,
+                        paymentMethods: Object.fromEntries(
+                            Object.keys(PAYMENT_METHODS).map((method) => [
+                                method,
+                                true,
+                            ]),
+                        ),
+                    },
                     showExporterDetails: false,
                     showFDADetails: false,
                     showExchangeRates: false,
@@ -142,7 +166,15 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                         shipping: true,
                         contact: true,
                     },
-                    payment: false,
+                    payment: {
+                        show: false,
+                        paymentMethods: Object.fromEntries(
+                            Object.keys(PAYMENT_METHODS).map((method) => [
+                                method,
+                                true,
+                            ]),
+                        ),
+                    },
                     showExporterDetails: false,
                     showFDADetails: false,
                     showExchangeRates: false,
@@ -190,13 +222,16 @@ export const useDocumentOptions = (documentType: DocumentType) => {
             shipping: search?.to?.shipping ?? defaults.to.shipping,
             contact: search?.to?.contact ?? defaults.to.contact,
         },
-        payment: search?.payment ?? defaults.payment ?? false,
-        paymentMethods: Object.fromEntries(
-            Object.keys(PAYMENT_METHODS).map((method) => [
-                method,
-                search?.paymentMethods?.[method] ?? true,
-            ]),
-        ),
+        payment: {
+            show: search?.payment?.show ?? defaults.payment.show ?? false,
+            paymentMethods: Object.fromEntries(
+                Object.keys(PAYMENT_METHODS).map((method) => [
+                    method,
+                    search?.payment?.paymentMethods?.[method] ??
+                        defaults.payment.paymentMethods[method] ?? true,
+                ]),
+            ),
+        },
         total: search?.total ?? defaults.total ?? true,
         showSignature: search?.showSignature ?? true,
         showPackages: search?.showPackages ?? defaults.showPackages ?? false,

@@ -64,14 +64,16 @@ const DocumentOptionsSheet = ({
       shipping: search?.to?.shipping ?? true,
       contact: search?.to?.contact ?? true,
     },
-    payment: search?.payment ??
-      (documentType === "invoice" || documentType === "commercialInvoice"),
-    paymentMethods: Object.fromEntries(
-      Object.keys(PAYMENT_METHODS).map((method) => [
-        method,
-        search?.paymentMethods?.[method] ?? true,
-      ]),
-    ),
+    payment: {
+      show: search?.payment?.show ??
+        (documentType === "invoice" || documentType === "commercialInvoice"),
+      paymentMethods: Object.fromEntries(
+        Object.keys(PAYMENT_METHODS).map((method) => [
+          method,
+          search?.payment?.paymentMethods?.[method] ?? true,
+        ]),
+      ),
+    },
     showExporterDetails: search?.showExporterDetails ??
       documentType === "commercialInvoice",
     showFDADetails: search?.showFDADetails ??
@@ -145,11 +147,11 @@ const DocumentOptionsSheet = ({
       } else {
         // Handle direct boolean properties
         if (key === "payment") {
-          newOptions.payment = value;
+          newOptions.payment.show = value;
         } else if (key.startsWith("paymentMethods.")) {
           const methodName = key.replace("paymentMethods.", "");
-          newOptions.paymentMethods = {
-            ...newOptions.paymentMethods,
+          newOptions.payment.paymentMethods = {
+            ...newOptions.payment.paymentMethods,
             [methodName]: value,
           };
         } else if (key === "total") newOptions.total = value;
@@ -195,7 +197,6 @@ const DocumentOptionsSheet = ({
         contact: pendingOptions.to.contact,
       },
       payment: pendingOptions.payment,
-      paymentMethods: pendingOptions.paymentMethods,
       total: pendingOptions.total,
       showSignature: pendingOptions.showSignature,
       showPackages: pendingOptions.showPackages,
@@ -497,31 +498,32 @@ const DocumentOptionsSheet = ({
                       Show Section
                     </label>
                     <Switch
-                      checked={pendingOptions.payment}
+                      checked={pendingOptions.payment.show}
                       onCheckedChange={(checked) =>
                         updateOption("payment", checked)}
                     />
                   </div>
-                  {pendingOptions.payment && (
+                  {pendingOptions.payment.show && (
                     <div className="space-y-2 pl-4">
-                      {Object.entries(pendingOptions.paymentMethods).map((
-                        [method, enabled],
-                      ) => (
-                        <div
-                          key={method}
-                          className="flex justify-between items-center"
-                        >
-                          <label className="text-sm">{method}</label>
-                          <Switch
-                            checked={enabled}
-                            onCheckedChange={(checked) =>
-                              updateOption(
-                                `paymentMethods.${method}`,
-                                checked,
-                              )}
-                          />
-                        </div>
-                      ))}
+                      {Object.entries(pendingOptions.payment.paymentMethods)
+                        .map((
+                          [method, enabled],
+                        ) => (
+                          <div
+                            key={method}
+                            className="flex justify-between items-center"
+                          >
+                            <label className="text-sm">{method}</label>
+                            <Switch
+                              checked={enabled}
+                              onCheckedChange={(checked) =>
+                                updateOption(
+                                  `paymentMethods.${method}`,
+                                  checked,
+                                )}
+                            />
+                          </div>
+                        ))}
                     </div>
                   )}
                 </div>
