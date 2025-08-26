@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { selectOrderByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderViewById";
+import { selectOrderViewByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderViewById";
 import StocktakeReport from "../../../../features/orders/features/order-documents/documents/StocktakeReport";
 
 const OrdersPage = () => {
@@ -13,7 +13,7 @@ export const Route = createFileRoute(
   component: OrdersPage,
   loader: async ({ context, params }) => {
     const order = await context.queryClient.ensureQueryData(
-      selectOrderByIdQueryOptions(params.orderId),
+      selectOrderViewByIdQueryOptions(params.orderId),
     );
     return { order };
   },

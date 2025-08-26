@@ -18,7 +18,7 @@ export const selectOrderFormValuesById = async (id: string) => {
   return data;
 };
 
-export const selectOrderById = async (id: string) => {
+export const selectOrderViewById = async (id: string) => {
   const { data, error } = await supabase
     .from("orders_view")
     .select("*")
@@ -31,12 +31,12 @@ export const selectOrderById = async (id: string) => {
   return data;
 };
 
-export const selectOrderByIdQueryOptions = (id: string) => {
+export const selectOrderViewByIdQueryOptions = (id: string) => {
   return queryOptions({
-    queryKey: ["select-order", id],
-    queryFn: () => selectOrderById(id),
+    queryKey: ["select-order-view", id],
+    queryFn: () => selectOrderViewById(id),
   });
 };
 
-export const useSelectOrderById = (id: string) =>
-  useSuspenseQuery(selectOrderByIdQueryOptions(id));
+export const useSelectOrderViewById = (id: string) =>
+  useSuspenseQuery(selectOrderViewByIdQueryOptions(id));

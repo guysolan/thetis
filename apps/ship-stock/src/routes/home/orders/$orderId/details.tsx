@@ -107,6 +107,12 @@ const renderFlowBadge = (
 function RouteComponent() {
     const { orderId } = Route.useParams();
     const { data: order } = useSelectOrderById(orderId);
+    
+    // Type assertion to ensure we have the correct data structure
+    if (order && !order.order_item_changes) {
+        console.error('Received incorrect data structure - missing order_item_changes', order);
+        throw new Error('Data structure mismatch: Expected OrderWithDetails but received different structure');
+    }
     const { data: addresses } = useSelectAddresses();
     const { data: items } = useSelectItems();
 
