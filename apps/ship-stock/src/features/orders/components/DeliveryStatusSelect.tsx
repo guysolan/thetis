@@ -5,7 +5,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@thetis/ui/select";
-import { useUpdateOrder } from "@/features/orders/api/updateOrder";
+import { useUpdateOrder } from "../api/updateOrder";
 import { cn } from "@/lib/utils";
 import {
     AlertTriangle,

@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import { PricedOrderItem } from "../../../features/multi-order-form/schema";
+import { PricedOrderItem } from "../../multi-order-form/schema";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView";
 
 type OrderItemWithTotal = PricedOrderItem & {
