@@ -1,13 +1,11 @@
-import { useSellForm } from "../order-forms/features/sell-form/hooks/useSellForm";
-import StockItems from "../order-forms/components/StockItems";
-import { StockValidationAlert } from "../order-forms/components/StockValidationAlert";
-import Select from "../../../../components/Select";
+import { useSellForm } from "../../hooks/useSellForm";
+import StockItems from "../../components/StockItems";
+import { StockValidationAlert } from "../../components/StockValidationAlert";
 import useCompanyDefaults from "../../../companies/hooks/useCompanyDefaults";
-import SellPackages from "../order-forms/features/sell-form/components/SellPackages";
 import { useFormContext } from "react-hook-form";
-import PackageStockItems from "../order-forms/components/PackageStockItems";
-import { useMemo, useEffect } from "react";
-import type { OrderItem } from "../order-forms/schema";
+import PackageStockItems from "../../components/PackageStockItems";
+import { useEffect, useMemo } from "react";
+import type { OrderItem } from "../../schema";
 
 const SellFormFields = () => {
   const { watch, setValue } = useFormContext();

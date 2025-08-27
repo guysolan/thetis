@@ -106,11 +106,14 @@ const renderFlowBadge = (
 
 function RouteComponent() {
     const { orderId } = Route.useParams();
-    const { data: order } = useSelectOrderById(orderId);
-    const { data: addresses } = useSelectAddresses();
-    const { data: items } = useSelectItems();
+    const { data: order, isLoading: orderLoading } = useSelectOrderById(
+        orderId,
+    );
+    const { data: addresses, isLoading: addressesLoading } =
+        useSelectAddresses();
+    const { data: items, isLoading: itemsLoading } = useSelectItems();
 
-    // Convert addresses to combobox options
+    // Convert addresses to combobox options - must be called before early returns
     const addressOptions: ComboboxOption[] = React.useMemo(
         () =>
             addresses?.map((address) => ({
@@ -171,8 +174,25 @@ function RouteComponent() {
         }>);
     }, [order]);
 
-    if (!order) {
+    // Type assertion to ensure we have the correct data structure
+    if (order && !order.order_item_changes) {
+        console.error(
+            "Received incorrect data structure - missing order_item_changes",
+            order,
+        );
+        throw new Error(
+            "Data structure mismatch: Expected OrderWithDetails but received different structure",
+        );
+    }
+
+    // Show loading state while any data is loading
+    if (orderLoading || addressesLoading || itemsLoading) {
         return <div>Loading...</div>;
+    }
+
+    // Ensure we have all required data before rendering
+    if (!order || !addresses || !items) {
+        return <div>Loading data...</div>;
     }
 
     return (

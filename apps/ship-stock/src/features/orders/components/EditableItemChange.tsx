@@ -9,14 +9,20 @@ import { Combobox, ComboboxOption } from "@/components/Combobox";
 import { OrderItemChangeWithDetails } from "../api/selectOrderById";
 import { useUpdateItemChange } from "../api/updateItemChange";
 
-const itemChangeSchema = z.object({
+// Input schema (what the form uses)
+const itemChangeInputSchema = z.object({
     quantity_change: z.coerce.number().optional(),
-    address_id: z.string().nullable().optional().transform((val) =>
-        val === "" || val === null ? null : Number(val)
+    address_id: z.string().optional(),
+});
+
+// Output schema (what gets sent to API after transformation)
+const itemChangeSchema = itemChangeInputSchema.extend({
+    address_id: z.string().optional().transform((val) =>
+        val === "" || val === null || val === undefined ? null : Number(val)
     ),
 });
 
-type ItemChangeFormData = z.infer<typeof itemChangeSchema>;
+type ItemChangeFormData = z.infer<typeof itemChangeInputSchema>;
 
 interface EditableItemChangeProps {
     orderItemChange: OrderItemChangeWithDetails;
@@ -33,19 +39,33 @@ export const EditableItemChange = ({
     const itemChange = orderItemChange.item_changes;
 
     const form = useForm<ItemChangeFormData>({
-        resolver: zodResolver(itemChangeSchema),
+        resolver: zodResolver(itemChangeInputSchema),
         defaultValues: {
             quantity_change: itemChange.quantity_change,
-            address_id: itemChange.address_id?.toString() || null,
+            address_id: itemChange.address_id?.toString() || "",
         },
     });
 
     const onSubmit = async (data: ItemChangeFormData) => {
+        // Transform the address_id from string to number
+        const transformedData = {
+            ...data,
+            address_id: data.address_id === "" || data.address_id === null ||
+                    data.address_id === undefined
+                ? null
+                : Number(data.address_id),
+        };
+
         await updateItemChange.mutateAsync({
             id: itemChange.id,
-            ...data,
+            ...transformedData,
         });
     };
+
+    // Ensure form is ready before rendering
+    if (!form) {
+        return <div>Loading form...</div>;
+    }
 
     return (
         <Card className="mb-4">

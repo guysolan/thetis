@@ -3,7 +3,7 @@ import { supabase } from "../../../lib/supabase";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { selectOrdersQueryKey } from "../features/order-history/api/selectOrders";
 import { selectStockpilesQueryKey } from "../../stockpiles/api/selectStockpiles";
-import { CreateOrderType } from "../features/order-forms/utils/formatCreateOrderArguments";
+import { CreateOrderType } from "../utils/formatCreateOrderArguments";
 
 const createStocktakeOrder = async (formData: CreateOrderType) => {
     const { data: result, error } = await supabase.rpc(

@@ -15,6 +15,8 @@ import { UnitOfMeasurementSelect } from "./UnitOfMeasurement";
 import { ModeOfTransportSelect } from "./ModeOfTransportSelect";
 import { PaymentStatusSelect } from "./PaymentStatusSelect";
 import { DeliveryStatusSelect } from "./DeliveryStatusSelect";
+import { IncotermsSelect } from "./IncotermsSelect";
+
 const orderSchema = z.object({
     order_type: z.string().optional(),
     order_date: z.string().optional(),
@@ -61,7 +63,7 @@ export const EditableOrder = ({ order }: EditableOrderProps) => {
             order_type: order.order_type,
             order_date: order.order_date
                 ? order.order_date.split("T")[0]
-                : undefined, // Convert to date format with null check
+                : undefined,
             carriage: order.carriage,
             currency: order.currency,
             reason_for_export: order.reason_for_export,
@@ -75,7 +77,6 @@ export const EditableOrder = ({ order }: EditableOrderProps) => {
             delivery_dates: order.delivery_dates
                 ? (() => {
                     try {
-                        // Parse PostgreSQL tstzrange format: "[\"2025-05-22 22:00:00+00\",\"2025-05-26 22:00:00+00\"]"
                         const parsed = JSON.parse(order.delivery_dates);
                         if (Array.isArray(parsed) && parsed.length === 2) {
                             return parsed;
@@ -91,7 +92,6 @@ export const EditableOrder = ({ order }: EditableOrderProps) => {
     });
 
     const onSubmit = async (data: OrderFormData) => {
-        // Convert delivery_dates array back to PostgreSQL range format if it exists
         const formattedData = {
             ...data,
             delivery_dates:
@@ -124,7 +124,6 @@ export const EditableOrder = ({ order }: EditableOrderProps) => {
                                 label="Order Type"
                                 options={orderTypeOptions}
                             />
-
                             <Input
                                 name="carriage"
                                 label="Carriage"
@@ -174,11 +173,7 @@ export const EditableOrder = ({ order }: EditableOrderProps) => {
                         {/* Trade & Export Information */}
                         <div className="gap-6 grid grid-cols-1 lg:grid-cols-3">
                             <ReasonForExportSelect />
-                            <Input
-                                name="incoterms"
-                                label="Incoterms"
-                                placeholder="Enter incoterms"
-                            />
+                            <IncotermsSelect />
                             <ModeOfTransportSelect />
                         </div>
 

@@ -54,7 +54,7 @@ export const Combobox = ({
             control={control}
             name={name}
             render={({ field }) => (
-                <FormItem className={cn("pt-4 flex flex-col", className)}>
+                <FormItem className={cn(" flex flex-col", className)}>
                     {label && <FormLabel>{label}</FormLabel>}
                     <Popover open={open} onOpenChange={setOpen}>
                         <PopoverTrigger asChild>

@@ -102,14 +102,14 @@ type AnyOrderItem =
 	};
 
 // Only map items with a valid item_type
-const isValidOrderItem = (item: any) =>
+const isValidOrderItem = (item: { item_type?: string }) =>
 	item.item_type === "product" ||
 	item.item_type === "part" ||
 	item.item_type === "service" ||
 	item.item_type === "package" ||
 	item.item_type === "stocktake";
 
-function extractOrderItems(
+export function extractOrderItems(
 	orderItems: OrderItemWithTotal[] | undefined,
 	mode: "package" | "direct" | undefined,
 	order_type?: "sale" | "purchase" | "shipment" | "stocktake",
@@ -146,7 +146,7 @@ function extractOrderItems(
 }
 
 // Updated function to handle the different item types from the schema
-const mapToFormOrderItem = (item: any): FormOrderItem => {
+const mapToFormOrderItem = (item: Record<string, unknown>): FormOrderItem => {
 	console.log(
 		"🔍 mapToFormOrderItem - Input item:",
 		JSON.stringify(item, null, 2),
@@ -158,15 +158,20 @@ const mapToFormOrderItem = (item: any): FormOrderItem => {
 		console.log("📦 mapToFormOrderItem - Processing package item");
 		// For package items, we need to extract the package_id as item_id
 		const result = {
-			item_id: item.package_id || "",
+			item_id: String(item.package_id || ""),
 			item_type: "package" as ItemType,
 			quantity_change: Number(item.quantity_change ?? 0),
 			item_price: Number(item.item_price ?? 0),
 			item_tax: Number(item.item_tax ?? 0),
 			item_total: Number(item.item_total ?? 0),
 			package_item_id: undefined,
-			package_item_change_id: item.package_item_change_id ?? null,
-			lot_number: item.lot_number,
+			package_item_change_id:
+				typeof item.package_item_change_id === "number"
+					? item.package_item_change_id
+					: null,
+			lot_number: typeof item.lot_number === "string"
+				? item.lot_number
+				: undefined,
 		};
 		console.log("📦 Package item mapped:", JSON.stringify(result, null, 2));
 		return result;
@@ -180,9 +185,15 @@ const mapToFormOrderItem = (item: any): FormOrderItem => {
 		item_price: Number(item.item_price ?? 0),
 		item_tax: Number(item.item_tax ?? 0),
 		item_total: Number(item.item_total ?? 0),
-		package_item_id: item.package_item_id,
-		package_item_change_id: item.package_item_change_id ?? null,
-		lot_number: item.lot_number,
+		package_item_id: typeof item.package_item_id === "string"
+			? item.package_item_id
+			: undefined,
+		package_item_change_id: typeof item.package_item_change_id === "number"
+			? item.package_item_change_id
+			: null,
+		lot_number: typeof item.lot_number === "string"
+			? item.lot_number
+			: undefined,
 	};
 	console.log("🔍 Regular item mapped:", JSON.stringify(result, null, 2));
 	return result;
@@ -354,7 +365,9 @@ function processSellFormData(
 		JSON.stringify(extractedOrderItems, null, 2),
 	);
 
-	const itemChangesResult: FormatOrderItemChanges[] = extractedOrderItems.map(
+	// For sales, we need to create item changes for both FROM and TO addresses
+	// Items leaving the seller's address (negative quantity)
+	const fromItemChanges: FormatOrderItemChanges[] = extractedOrderItems.map(
 		(i) => ({
 			item_id: i.item_id,
 			quantity_change: -Math.abs(i.quantity_change), // Make quantity negative for sales (items leaving stock)
@@ -367,6 +380,26 @@ function processSellFormData(
 			lot_number: i.lot_number,
 		}),
 	);
+
+	// Items arriving at the buyer's address (positive quantity)
+	const toItemChanges: FormatOrderItemChanges[] = extractedOrderItems.map(
+		(i) => ({
+			item_id: i.item_id,
+			quantity_change: Math.abs(i.quantity_change), // Keep quantity positive for items arriving
+			item_price: i.item_price ?? 0,
+			item_tax: i.item_tax ?? 0,
+			address_id: formData.to_shipping_address_id,
+			item_type: i.item_type as ItemType,
+			package_item_id: i.package_item_id,
+			package_item_change_id: i.package_item_change_id,
+			lot_number: i.lot_number,
+		}),
+	);
+
+	const itemChangesResult: FormatOrderItemChanges[] = [
+		...fromItemChanges,
+		...toItemChanges,
+	];
 
 	console.log(
 		"💰 processSellFormData - FINAL RESULT:",

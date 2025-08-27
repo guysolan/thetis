@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@thetis/ui/card";
 import { Lock, Unlock } from "lucide-react";
-import PriceItems from "../features/order-forms/components/PriceItems";
+import PriceItems from "./PriceItems";
 import { cn } from "../../../lib/utils";
 import {
   Select,
@@ -29,13 +29,13 @@ const LockCard = ({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="locked">
-              <span className="flex flex-row gap-2 pr-2 text-base text-neutral-800">
+              <span className="flex flex-row gap-2 pr-2 text-neutral-800 text-base">
                 <Lock size={20} />
                 Locked
               </span>
             </SelectItem>
             <SelectItem value="unlocked">
-              <span className="flex flex-row gap-2 pr-2 text-base text-neutral-800">
+              <span className="flex flex-row gap-2 pr-2 text-neutral-800 text-base">
                 <Unlock size={20} />
                 Unlocked
               </span>

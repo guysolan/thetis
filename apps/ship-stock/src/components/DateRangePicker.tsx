@@ -33,9 +33,9 @@ const DateRangePicker = ({ name, label, className }: DateRangePickerProps) => {
         // Convert array to DateRange object for the calendar
         const dateRange = field.value
           ? {
-              from: field.value[0] ? new Date(field.value[0]) : undefined,
-              to: field.value[1] ? new Date(field.value[1]) : undefined,
-            }
+            from: field.value[0] ? new Date(field.value[0]) : undefined,
+            to: field.value[1] ? new Date(field.value[1]) : undefined,
+          }
           : undefined;
 
         // Convert DateRange back to array on change
@@ -63,24 +63,27 @@ const DateRangePicker = ({ name, label, className }: DateRangePickerProps) => {
                 <FormControl>
                   <Button
                     variant={"outline"}
+                    type="button"
                     className={cn(
                       "w-full pl-3 pr-3 text-left font-normal flex items-center justify-between gap-2",
                       !dateRange?.from && "text-muted-foreground",
                     )}
                   >
                     <span className="flex-1 text-left">
-                      {dateRange?.from ? (
-                        dateRange.to ? (
-                          <>
-                            {format(dateRange.from, "LLL dd, y")} -{" "}
-                            {format(dateRange.to, "LLL dd, y")}
-                          </>
-                        ) : (
-                          format(dateRange.from, "LLL dd, y")
+                      {dateRange?.from
+                        ? (
+                          dateRange.to
+                            ? (
+                              <>
+                                {format(dateRange.from, "LLL dd, y")} -{" "}
+                                {format(dateRange.to, "LLL dd, y")}
+                              </>
+                            )
+                            : (
+                              format(dateRange.from, "LLL dd, y")
+                            )
                         )
-                      ) : (
-                        <span>Pick a date range</span>
-                      )}
+                        : <span>Pick a date range</span>}
                     </span>
                     <CalendarIcon className="flex-shrink-0 ml-2 w-4 h-4" />
                   </Button>

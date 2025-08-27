@@ -5,7 +5,7 @@ import { Button } from "@thetis/ui/button";
 import AmazonStock from "@/features/stockpiles/components/AmazonWarehouses";
 import { Tabs, TabsContent, TabsTrigger } from "@thetis/ui/tabs";
 import Stockpiles from "@/features/stockpiles/components/Stockpiles";
-import StocktakeForm from "@/features/orders/features/order-forms/features/stocktake-form/StocktakeForm";
+import StocktakeForm from "@/features/orders/features/stocktake-form/StocktakeForm";
 import TabsHeader from "@/components/TabsHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@thetis/ui/card";
 import { useSelectStockpiles } from "@/features/stockpiles/api/selectStockpiles";

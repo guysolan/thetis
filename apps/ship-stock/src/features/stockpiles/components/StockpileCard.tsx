@@ -11,7 +11,7 @@ import { Button } from "@thetis/ui/button";
 import { Badge } from "@thetis/ui/badge";
 import { Pencil } from "lucide-react";
 import ItemsMiniTable from "../../items/components/ItemsMiniTable";
-import StocktakeForm from "../../orders/features/order-forms/features/stocktake-form/StocktakeForm";
+import StocktakeForm from "../../orders/features/stocktake-form/StocktakeForm";
 import { Stockpile } from "../types";
 import AddressForm from "./AddressForm";
 import { useSelectAddresses } from "../api/selectAddresses";
@@ -54,26 +54,29 @@ const StockpileCard = ({ stockpile }: Props) => {
 
       <CardContent>
         {/* <ItemsTable items={stockpile.items} /> */}
-        {isEditing ? (
-          <StocktakeForm
-            onSuccess={() => setIsEditing(false)}
-            isInline={true}
-            orderItems={stockpile?.items?.map((i) => ({
-              item_id: String(i.item_id),
-              quantity_before: i.item_quantity,
-              quantity_after: i.item_quantity < 0 ? 0 : i.item_quantity,
-              quantity_change: i.item_quantity < 0 ? -i.item_quantity : 0,
-              item_type: i.item_type,
-            }))}
-            addressId={String(stockpile.stockpile_id)}
-          />
-        ) : (
-          <ItemsMiniTable items={stockpile?.items} />
-        )}
+        {isEditing
+          ? (
+            <StocktakeForm
+              onSuccess={() => setIsEditing(false)}
+              isInline={true}
+              orderItems={stockpile?.items?.map((i) => ({
+                item_id: String(i.item_id),
+                quantity_before: i.item_quantity,
+                quantity_after: i.item_quantity < 0 ? 0 : i.item_quantity,
+                quantity_change: i.item_quantity < 0 ? -i.item_quantity : 0,
+                item_type: i.item_type,
+              }))}
+              addressId={String(stockpile.stockpile_id)}
+            />
+          )
+          : <ItemsMiniTable items={stockpile?.items} />}
       </CardContent>
       <CardFooter className="flex flex-row justify-between items-center gap-4">
         {isEditing && (
-          <Button variant="outline" onClick={() => setIsEditing(false)}>
+          <Button
+            variant="outline"
+            onClick={() => setIsEditing(false)}
+          >
             Cancel
           </Button>
         )}

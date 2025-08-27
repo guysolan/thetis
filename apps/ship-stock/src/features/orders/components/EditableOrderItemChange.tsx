@@ -71,6 +71,11 @@ export const EditableOrderItemChange = ({
         });
     };
 
+    // Ensure form is ready before rendering
+    if (!form) {
+        return <div>Loading form...</div>;
+    }
+
     return (
         <Card className="mb-4">
             <CardHeader>

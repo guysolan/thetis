@@ -2,11 +2,7 @@ import React from "react";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { Button } from "@thetis/ui/button";
 import { Calendar } from "@thetis/ui/calendar";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@thetis/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@thetis/ui/popover";
 import {
     FormControl,
     FormField,
@@ -40,6 +36,7 @@ const DatePicker = ({ name, label }: DatePickerProps) => {
                             <FormControl>
                                 <Button
                                     variant={"outline"}
+                                    type="button"
                                     className={cn(
                                         "w-full pl-3 text-left font-normal",
                                         !field.value && "text-muted-foreground",

@@ -1,10 +1,10 @@
-import StockItems from "../order-forms/components/StockItems";
-import { StockValidationAlert } from "../order-forms/components/StockValidationAlert";
-import { useBuyForm } from "../order-forms/features/buy-form/useBuyForm";
+import StockItems from "../../components/StockItems";
+import { StockValidationAlert } from "../../components/StockValidationAlert";
+import { useBuyForm } from "../../hooks/useBuyForm";
 import useCompanyDefaults from "../../../companies/hooks/useCompanyDefaults";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useEffect, useRef } from "react";
-import PackageStockItems from "../order-forms/components/PackageStockItems";
+import PackageStockItems from "../../components/PackageStockItems";
 
 const BuyFormFields = () => {
   const form = useFormContext();
