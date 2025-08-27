@@ -5,9 +5,7 @@ import AchillesRuptureWords from "../assets/branding/achilles-rupture-words.svg"
 ---
 
 <header>
-	<nav
-		class="flex md:flex-row flex-col justify-between items-center pt-6 md:pt-0"
-	>
+	<nav class="flex flex-row justify-between items-center">
 		<a
 			href="/"
 			class="w-fit text-gray-700 hover:text-gray-900 hover:underline"
@@ -18,12 +16,9 @@ import AchillesRuptureWords from "../assets/branding/achilles-rupture-words.svg"
 				width={180}
 			/>
 		</a>
-		<div class="flex justify-center items-center gap-1 nav-tabs">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/patients">Patients</HeaderLink>
-			<HeaderLink href="/clinicians">Clinicians</HeaderLink>
-			<HeaderLink href="/coming-soon">Coming Soon</HeaderLink>
-		</div>
+		<HeaderLink class="py-4 text-slate-700" href="/">
+			Back to Blog
+		</HeaderLink>
 	</nav>
 </header>
 <style>

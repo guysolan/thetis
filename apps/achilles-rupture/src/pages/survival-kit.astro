@@ -3,6 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE } from "../consts";
+import HeaderBackToBlog from '../components/HeaderBackToBlog.astro';
 
 // Comprehensive product list for survival kit
 const survivalKitProducts = [
@@ -19,7 +20,7 @@ const survivalKitProducts = [
         tags: ["mobility", "protection", "recovery"],
         imagePath: "/images/aircast-vs-vacoped.png",
         description: "The ONLY essential item. Clinical research shows early protected weight-bearing with proper plantarflexion leads to better outcomes and prevents re-rupture.",
-        features: ["Maintains plantarflexion", "68-80% tendon load reduction", "Evidence-based protection"]
+        features: ["Maintains plantarflexion (tip-toe position)", "Prevents re-rupture during healing", "Evidence-based protection"]
     },
     
     // Recommended Items
@@ -35,7 +36,7 @@ const survivalKitProducts = [
         tags: ["sleep", "recovery", "protection"],
         imagePath: "/images/thetis-night-splint-side.jpg",
         description: "The only night splint specifically designed for Achilles rupture recovery. Patented in 2024.",
-        features: ["Purpose-built for sleep", "Surgeon endorsed", "Prevents re-injury"]
+        features: ["Purpose-built for sleep", "Surgeon endorsed", "Safe, comfortable and hygienic"]
     },
     {
         priority: "recommended",
@@ -166,6 +167,20 @@ const survivalKitProducts = [
         imagePath: "/images/boot-liner.jpg",
         description: "Removable, washable liners to keep your boot fresh and comfortable.",
         features: ["Removable", "Washable", "Odor control"]
+    },
+    {
+        priority: "optional",
+        name: "Heel Wedge Insoles",
+        category: "Comfort",
+        priceRange: "$15-30",
+        keyBenefit: "Provide additional heel elevation and comfort inside your boot",
+        actionUrl: "https://www.amazon.com/s?k=heel+wedge+achilles+shoe+insert+insole",
+        actionText: "Browse",
+        isExternal: true,
+        tags: ["comfort", "elevation", "support"],
+        imagePath: "/images/heel-lifts.jpg",
+        description: "Additional heel elevation inserts that can be used inside your boot for extra comfort and support.",
+        features: ["Adjustable height", "Easy to insert", "Comfortable padding"]
     }
 ];
 
@@ -176,7 +191,7 @@ const comfortItems = survivalKitProducts.filter(item => item.priority === "comfo
 const optionalItems = survivalKitProducts.filter(item => item.priority === "optional");
 
 const pageTitle = "Achilles Rupture Survival Kit | Essential Products for Recovery";
-const pageDescription = "The essential products you need for Achilles rupture recovery. Simple, clear recommendations for what works.";
+const pageDescription = "The life changing products you need for Achilles rupture recovery. Simple, clear recommendations for what works.";
 
 // Enhanced Schema.org structured data
 const schemaData = {
@@ -348,7 +363,7 @@ const schemaData = {
         </style>
     </head>
     <body>
-        <Header />
+        <HeaderBackToBlog        />
 
         <main id="main-content">
             <section class="mx-auto px-4 py-12 max-w-6xl container">
@@ -358,7 +373,7 @@ const schemaData = {
                         🎒 Achilles Rupture Survival Kit
                     </h1>
                     <p class="mb-8 text-gray-600 text-xl">
-                        The essential products you need for recovery. Simple, clear, and proven to work.
+                        The life changing products you need for recovery. Simple, clear, and proven to work.
                     </p>
                 </div>
 
@@ -367,7 +382,7 @@ const schemaData = {
                 <!-- Essential Products -->
                 <section class="mb-16">
                     <h2 class="mb-8 font-bold text-3xl text-center">🥇 Essential Items</h2>
-                    <p class="mb-8 text-gray-600 text-center">You can't recover without these</p>
+                    <p class="mb-8 text-gray-600 text-center">The Cornerstone of Achilles Rupture Recovery</p>
                     <div class="space-y-8">
                         {essentialItems.map((item) => (
                             <div class="p-6 product-card">
