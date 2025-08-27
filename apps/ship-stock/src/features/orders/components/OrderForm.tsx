@@ -1,11 +1,11 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@thetis/ui/tabs";
 import BuyForm from "../features/order-forms/features/buy-form/BuyForm";
 import { Banknote, Info, ShoppingCart, Truck } from "lucide-react";
-import ShipmentForm from "../features/order-forms/features/shipment-form/ShipmentForm";
+import { MultiOrderForm } from "../features/multi-order-form/MultiOrderForm";
 import { Alert, AlertDescription, AlertTitle } from "@thetis/ui/alert";
 import SellForm from "../features/order-forms/features/sell-form/components/SellForm";
 import type { OrderTab } from "../../../routes/home/orders";
-import SaleForm from "../features/order-forms/features/sale-form/SaleForm";
+
 import { OrderSettings } from "../features/order-forms/features/order-settings/components/OrderSettings";
 
 export const OrderForm: React.FC = ({
@@ -67,7 +67,7 @@ export const OrderForm: React.FC = ({
             where you keep stock.
           </AlertDescription>
         </Alert>
-        <ShipmentForm />
+        <MultiOrderForm defaultOrderType="shipment" />
       </TabsContent>
     </Tabs>
   );

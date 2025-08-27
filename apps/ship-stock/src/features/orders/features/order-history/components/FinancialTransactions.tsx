@@ -7,7 +7,7 @@ import {
     TableHeader,
     TableRow,
 } from "@thetis/ui/table";
-import type { OrderView } from "@/features/orders/types";
+import type { OrderView } from "../../../types";
 import type { Currency as CurrencyType } from '../../../../../constants/currencies';
 import NumberFlow from '@number-flow/react';
 /**

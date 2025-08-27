@@ -1,6 +1,6 @@
 import React from "react";
 import { useMemo } from "react";
-import type { OrderView } from "@/features/orders/types";
+import type { OrderView } from "../../../types";
 import {
   Table,
   TableBody,

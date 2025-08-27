@@ -1,5 +1,5 @@
 import React from "react";
-import { OrderView } from "@/features/orders/types";
+import { OrderView } from "../../../types";
 const Contact = ({ contact }: { contact: OrderView["to_contact"] }) => {
   return (
     <div>
