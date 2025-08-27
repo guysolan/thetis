@@ -14,4 +14,4 @@ const InfluencialResearchVideo: React.FC = () => {
     );
 };
 
-export default SurgeryVsNonSurgeryVideo;
+export default InfluencialResearchVideo;
