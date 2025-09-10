@@ -13,12 +13,18 @@ import { useUpdateItemChange } from "../api/updateItemChange";
 const itemChangeInputSchema = z.object({
     quantity_change: z.coerce.number().optional(),
     address_id: z.string().optional(),
+    item_id: z.string().optional(),
 });
 
 // Output schema (what gets sent to API after transformation)
 const itemChangeSchema = itemChangeInputSchema.extend({
     address_id: z.string().optional().transform((val) =>
         val === "" || val === null || val === undefined ? null : Number(val)
+    ),
+    item_id: z.string().optional().transform((val) =>
+        val === "" || val === null || val === undefined
+            ? undefined
+            : Number(val)
     ),
 });
 
@@ -28,12 +34,14 @@ interface EditableItemChangeProps {
     orderItemChange: OrderItemChangeWithDetails;
     orderId: string;
     addressOptions: ComboboxOption[];
+    itemOptions: ComboboxOption[];
 }
 
 export const EditableItemChange = ({
     orderItemChange,
     orderId,
     addressOptions,
+    itemOptions,
 }: EditableItemChangeProps) => {
     const updateItemChange = useUpdateItemChange(orderId);
     const itemChange = orderItemChange.item_changes;
@@ -43,17 +51,22 @@ export const EditableItemChange = ({
         defaultValues: {
             quantity_change: itemChange.quantity_change,
             address_id: itemChange.address_id?.toString() || "",
+            item_id: itemChange.item_id?.toString() || "",
         },
     });
 
     const onSubmit = async (data: ItemChangeFormData) => {
-        // Transform the address_id from string to number
+        // Transform the address_id and item_id from string to number
         const transformedData = {
             ...data,
             address_id: data.address_id === "" || data.address_id === null ||
                     data.address_id === undefined
                 ? null
                 : Number(data.address_id),
+            item_id: data.item_id === "" || data.item_id === null ||
+                    data.item_id === undefined
+                ? undefined
+                : Number(data.item_id),
         };
 
         await updateItemChange.mutateAsync({
@@ -99,6 +112,16 @@ export const EditableItemChange = ({
                                 placeholder="Select address..."
                                 searchPlaceholder="Search addresses..."
                                 emptyMessage="No addresses found."
+                            />
+                        </div>
+                        <div className="gap-4 grid grid-cols-1">
+                            <Combobox
+                                name="item_id"
+                                label="Item"
+                                options={itemOptions}
+                                placeholder="Select item..."
+                                searchPlaceholder="Search items..."
+                                emptyMessage="No items found."
                             />
                         </div>
                         <Button

@@ -7,6 +7,7 @@ export interface UpdateItemChangeData {
     id: number;
     quantity_change?: number;
     address_id?: number | null;
+    item_id?: number;
 }
 
 export const updateItemChange = async (data: UpdateItemChangeData) => {

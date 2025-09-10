@@ -154,6 +154,16 @@ function RouteComponent() {
         [order],
     );
 
+    // Convert items to combobox options for item selection
+    const itemOptions: ComboboxOption[] = React.useMemo(
+        () =>
+            items?.map((item) => ({
+                value: item.id.toString(),
+                label: `${item.name}${item.sku ? ` (${item.sku})` : ""}`,
+            })) || [],
+        [items],
+    );
+
     // Group order item changes by item_id
     const groupedOrderItems = React.useMemo(() => {
         if (!order) return {};
@@ -364,6 +374,7 @@ function RouteComponent() {
                                                                     orderItemChange={orderItemChange}
                                                                     orderId={orderId}
                                                                     addressOptions={addressOptions}
+                                                                    itemOptions={itemOptions}
                                                                 />
                                                             </div>
                                                         </div>

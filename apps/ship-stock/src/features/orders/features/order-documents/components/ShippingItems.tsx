@@ -20,8 +20,10 @@ type ItemDetails = {
   tax?: number;
 };
 
-type GroupedItem = OrderView["items"][number] &
-  ItemDetails & {
+type GroupedItem =
+  & OrderView["items"][number]
+  & ItemDetails
+  & {
     totalQuantity: number;
     totalPrice: number;
   };
@@ -33,41 +35,41 @@ const ShippingItems = ({
   const { data: items } = useSelectItemsView();
 
   // Group items by item_id and sum their quantities and totals
-  const groupedItems = orderItems
-    .filter((orderItem) => orderItem.quantity > 0)
-    .reduce(
-      (acc, orderItem) => {
-        const itemDetails = items.find(
-          (item) => item.item_id === orderItem.item_id,
-        );
+  const groupedItems = orderItems.reduce(
+    (acc, orderItem) => {
+      const itemDetails = items.find(
+        (item) => item.item_id === orderItem.item_id,
+      );
 
-        if (!acc[orderItem.item_id]) {
-          const price = orderItem.price ?? 0;
-          const quantity = orderItem.quantity;
-          const taxRate = orderItem?.tax ?? 0;
-          const totalPrice = quantity * price * (1 + taxRate);
+      if (!acc[orderItem.item_id]) {
+        const price = orderItem.price ?? 0;
+        const quantity = orderItem.quantity;
+        const taxRate = orderItem?.tax ?? 0;
+        const totalPrice = quantity * price * (1 + taxRate);
 
-          acc[orderItem.item_id] = {
-            ...orderItem,
-            ...itemDetails,
-            totalQuantity: quantity,
-            totalPrice,
-          } as GroupedItem;
-        } else {
-          const price = orderItem.price ?? 0;
-          const quantity = orderItem.quantity;
-          const taxRate = orderItem?.tax ?? 0;
-          const itemTotal = quantity * price * (1 + taxRate);
+        acc[orderItem.item_id] = {
+          ...orderItem,
+          ...itemDetails,
+          totalQuantity: quantity,
+          totalPrice,
+        } as GroupedItem;
+      } else {
+        const price = orderItem.price ?? 0;
+        const quantity = orderItem.quantity;
+        const taxRate = orderItem?.tax ?? 0;
+        const itemTotal = quantity * price * (1 + taxRate);
 
-          acc[orderItem.item_id].totalQuantity += quantity;
-          acc[orderItem.item_id].totalPrice += itemTotal;
-        }
-        return acc;
-      },
-      {} as Record<string, GroupedItem>,
-    );
+        acc[orderItem.item_id].totalQuantity += quantity;
+        acc[orderItem.item_id].totalPrice += itemTotal;
+      }
+      return acc;
+    },
+    {} as Record<string, GroupedItem>,
+  );
 
-  const invoiceItems = Object.values(groupedItems);
+  const invoiceItems = Object.values(groupedItems).filter(
+    (item) => item.totalQuantity > 0,
+  );
 
   return (
     <Table>
