@@ -752,7 +752,11 @@ const content: Record<Lang, FAQCategory[]> = {
 
 const NightSplintFAQs = ({ lang = "en" }: { lang?: Lang }) => {
     const faqs = content[lang];
-    return <FAQs faqs={faqs} className="sm:px-2 w-full max-w-xl" />;
+    return (
+        <section class="flex flex-col items-center py-16">
+            <FAQs faqs={faqs} className="sm:px-2 w-full max-w-xl" />
+        </section>
+    );
 };
 
 export default NightSplintFAQs;

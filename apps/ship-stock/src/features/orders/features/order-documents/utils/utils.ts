@@ -6,11 +6,11 @@ export const prepareOrderItems = (order: OrderView) => {
     );
 
     if (order.order_type === "sale") {
-        return noPackagesOrServices?.filter((item) => item.quantity > 0)?.map((
+        return noPackagesOrServices?.filter((item) => item.quantity < 0)?.map((
             item,
         ) => ({
             ...item,
-            quantity: (item.quantity),
+            quantity: Math.abs(item.quantity),
         }));
     }
     if (order.order_type === "purchase") {

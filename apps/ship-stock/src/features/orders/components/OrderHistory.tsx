@@ -254,39 +254,6 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
               )}
             </div>
 
-            {/* Financial Information */}
-            {!["stocktake", "shipment"].includes(order.order_type) && (
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <DollarSign size={16} className="text-gray-500" />
-                  <span className="font-semibold text-gray-900 dark:text-white text-lg">
-                    <NumberFlow
-                      value={order.total_value as number}
-                      format={{
-                        style: "currency",
-                        currency: order.currency,
-                      }}
-                    />
-                  </span>
-                </div>
-                {order?.carriage && order.carriage > 0 && (
-                  <div className="flex items-center gap-2">
-                    <Truck size={14} className="text-gray-500" />
-                    <span className="text-gray-600 dark:text-gray-400 text-sm">
-                      Carriage:{" "}
-                      <NumberFlow
-                        value={order.carriage}
-                        format={{
-                          style: "currency",
-                          currency: order.currency,
-                        }}
-                      />
-                    </span>
-                  </div>
-                )}
-              </div>
-            )}
-
             {/* Expanded Content */}
             {isExpanded && (
               <div className="mt-6 pt-6 border-gray-200 dark:border-gray-700 border-t">

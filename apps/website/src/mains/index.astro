@@ -56,9 +56,7 @@ const currentContent = content[lang as keyof typeof content];
     image={currentContent.image}
     lang={lang}
 >
-    <main
-        class="flex flex-col justify-center items-center bg-white dark:bg-black mx-auto mb-24 w-full"
-    >
+    <main class="space-y-16">
         <LandingHero lang={lang} />
 
         <Reviews />

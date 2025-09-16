@@ -68,7 +68,7 @@ const ShippingItems = ({
   );
 
   const invoiceItems = Object.values(groupedItems).filter(
-    (item) => item.totalQuantity > 0,
+    (item) => item.totalQuantity !== 0,
   );
 
   return (

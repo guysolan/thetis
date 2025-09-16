@@ -23,7 +23,7 @@ function ProfessionalOpinionsCarousel({ lang = "en" }: { lang: Lang }) {
   }));
 
   return (
-    <div className="relative py-12 md:py-24 max-w-screen lg:max-w-5xl m x-auto">
+    <section className="relative mx-auto py-12 md:py-24 max-w-screen lg:max-w-5xl m x-auto">
       <div className="flex flex-col justify-center items-center mx-auto">
         <div className="space-y-4 md:space-y-6 mb-8 md:mb-16 text-center">
           <h2 className="font-semibold text-2xl md:text-3xl lg:text-4xl leading-tight">
@@ -78,14 +78,14 @@ function ProfessionalOpinionsCarousel({ lang = "en" }: { lang: Lang }) {
           <a
             href="/reviews"
             className={cn(
-              "underline underline-offset-2 text-primary text-base md:text-xl",
+              "text-primary text-base md:text-xl underline underline-offset-2",
             )}
           >
             {content.cta.link}
           </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

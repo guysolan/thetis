@@ -14,9 +14,22 @@ const OrderTotal = ({
   order: OrderView;
   showCarriage?: boolean;
 }) => {
+  const itemTotal = order.item_total_value ?? 0;
+  const carriageAmount = showCarriage ? (order.carriage ?? 0) : 0;
+  const grandTotal = itemTotal + carriageAmount;
+
   return (
     <Table>
       <TableBody>
+        <TableRow className="border-t text-neutral-800">
+          <TableHead>Subtotal</TableHead>
+          <TableCell className="w-1/6 font-medium text-right">
+            <NumberFlow
+              value={itemTotal}
+              format={{ style: "currency", currency: order.currency }}
+            />
+          </TableCell>
+        </TableRow>
         {showCarriage && (
           <TableRow className="border-t text-neutral-800">
             <TableHead>Carriage</TableHead>
@@ -32,7 +45,7 @@ const OrderTotal = ({
           <TableHead className="text-neutral-900 text-lg">Total</TableHead>
           <TableCell className="w-1/6 font-medium text-neutral-900 text-lg text-right">
             <NumberFlow
-              value={order.total_value ?? 0}
+              value={grandTotal}
               format={{ style: "currency", currency: order.currency }}
             />
           </TableCell>
