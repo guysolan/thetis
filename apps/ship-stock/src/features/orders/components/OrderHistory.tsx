@@ -24,6 +24,7 @@ import {
   Edit,
   Package,
   Send,
+  Settings,
   ShoppingCart,
   Truck,
   User,
@@ -142,7 +143,8 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
-                    Order #{order.order_id}
+                    {order.order_type.charAt(0).toUpperCase() +
+                      order.order_type.slice(1)} #{order.order_id}
                   </h3>
                   <div className="flex items-center gap-2 mt-1">
                     <Calendar size={14} className="text-gray-500" />
@@ -170,22 +172,21 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                   title={`Order ${order.order_id}`}
                   deleteFunction={() => deleteOrder(order.order_id)}
                 >
-                  {
-                    /* <Button
+                  <Button
                     asChild
                     variant="ghost"
                     size="sm"
-                    className="flex justify-start items-center gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 px-3 w-full text-sm"
+                    className="justify-start px-2 w-full"
                   >
                     <Link
+                      className="flex flex-row items-center gap-2 !text-sm"
                       to="/home/orders/$orderId"
                       params={{ orderId: order.order_id.toString() }}
                     >
                       <Edit size={20} />
-                      Edit
+                      Edit Order
                     </Link>
-                  </Button> */
-                  }
+                  </Button>
                   <Button
                     asChild
                     variant="ghost"
@@ -197,7 +198,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                       to="/home/orders/$orderId/details"
                       params={{ orderId: order.order_id.toString() }}
                     >
-                      <Edit size={20} />
+                      <Settings size={20} />
                       Edit Details
                     </Link>
                   </Button>
@@ -217,10 +218,12 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                   currentStatus={order.payment_status || "unpaid"}
                 />
               )}
-              <DeliveryStatusSelect
-                orderId={order.order_id}
-                currentStatus={order.delivery_status || "pending"}
-              />
+              {!["stocktake"].includes(order.order_type) && (
+                <DeliveryStatusSelect
+                  orderId={order.order_id}
+                  currentStatus={order.delivery_status || "pending"}
+                />
+              )}
               <DeliveryDatesDisplay
                 deliveryDatesJson={order.delivery_dates || null}
               />
