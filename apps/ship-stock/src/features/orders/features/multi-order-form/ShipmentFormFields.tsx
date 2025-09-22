@@ -62,7 +62,6 @@ const ShipmentFormFields = () => {
       )}
 
       <StockItems
-        // readOnly={true}
         showPrice={true}
         showTax={true}
         allowedTypes={["product", "part"]}
