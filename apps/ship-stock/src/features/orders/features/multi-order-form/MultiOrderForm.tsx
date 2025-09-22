@@ -54,6 +54,10 @@ export function MultiOrderForm({
       from_company_id: companyId,
       mode: "package",
       carriage: 0,
+      delivery_dates: [
+        new Date(),
+        new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      ],
     },
   });
 
