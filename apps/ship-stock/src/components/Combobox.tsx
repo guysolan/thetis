@@ -54,7 +54,7 @@ export const Combobox = ({
             control={control}
             name={name}
             render={({ field }) => (
-                <FormItem className={cn(" flex flex-col", className)}>
+                <FormItem className={cn("flex flex-col", className)}>
                     {label && <FormLabel>{label}</FormLabel>}
                     <Popover open={open} onOpenChange={setOpen}>
                         <PopoverTrigger asChild>
@@ -65,7 +65,7 @@ export const Combobox = ({
                                     disabled={disabled}
                                     aria-expanded={open}
                                     className={cn(
-                                        "w-full justify-between",
+                                        "justify-between w-full",
                                         !field.value && "text-muted-foreground",
                                     )}
                                 >
@@ -89,13 +89,13 @@ export const Combobox = ({
                                         {options.map((option) => (
                                             <CommandItem
                                                 key={option.value}
-                                                value={option.value}
-                                                onSelect={(currentValue) => {
+                                                value={option.label}
+                                                onSelect={() => {
                                                     field.onChange(
-                                                        currentValue ===
+                                                        option.value ===
                                                                 field.value
                                                             ? ""
-                                                            : currentValue,
+                                                            : option.value,
                                                     );
                                                     setOpen(false);
                                                 }}
@@ -103,7 +103,7 @@ export const Combobox = ({
                                             >
                                                 <Check
                                                     className={cn(
-                                                        "mr-2 h-4 w-4 shrink-0",
+                                                        "mr-2 w-4 h-4 shrink-0",
                                                         field.value ===
                                                                 option.value
                                                             ? "opacity-100"
