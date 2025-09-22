@@ -25,7 +25,7 @@ const PackageSummary = ({ items }: { items: OrderView["items"] }) => {
   console.log("package summary", packageGroups);
 
   return (
-    <div className="mb-8">
+    <>
       {Object.entries(packageGroups).map(
         ([packageItemChangeId, groupItems], index) => (
           <Package
@@ -36,7 +36,7 @@ const PackageSummary = ({ items }: { items: OrderView["items"] }) => {
           />
         ),
       )}
-    </div>
+    </>
   );
 };
 

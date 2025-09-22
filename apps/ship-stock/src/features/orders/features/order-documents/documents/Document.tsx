@@ -4,7 +4,7 @@ import OrderDescription from "../components/OrderDescription";
 import OrderTitle from "../components/OrderTitle";
 import FDADetails from "../components/FDADetails";
 import ExporterDetails from "../components/ExporterDetails";
-import ShippingItems from "../components/ShippingItems";
+import ItemsWithPricing from "../components/ItemsWithPricing";
 import { prepareOrderItems } from "../utils/utils";
 import PackageSummary from "../components/PackageSummary";
 import BuyerSeller from "../components/BuyerSeller";
@@ -13,7 +13,6 @@ import { DocumentOptions } from "../../../../documents/schema";
 import Signature from "../components/signature";
 import ShippingDetails from "../components/ShippingDetails";
 import FinancialTransactions from "../../order-history/components/FinancialTransactions";
-import OrderTotal from "../components/OrderTotal";
 import PaymentDetails, {
   type PaymentMethodKey,
 } from "../components/PaymentDetails";
@@ -21,6 +20,7 @@ import Heading from "../components/Heading";
 import ServicesTable from "../components/ServicesTable";
 import type { Currency } from "../../../../../constants/currencies";
 import OrderItems from "../components/OrderItems";
+import ItemsManifest from "../components/ItemsManifest";
 
 type DocumentType =
   | "commercialInvoice"
@@ -71,16 +71,17 @@ const Document = ({ order, options, title }: DocumentProps) => {
       )}
 
       {options.showShippingItems && (
-        <ShippingItems
+        <ItemsWithPricing
           currency={order.currency as Currency}
           orderItems={prepareOrderItems(order)}
+          order={order}
         />
       )}
 
       <ServicesTable order={order} currency={order.currency as Currency} />
 
-      {options.total && (
-        <OrderTotal order={order} showCarriage={options.showCarriage} />
+      {(options as any).showItemsManifest && (
+        <ItemsManifest orderItems={prepareOrderItems(order)} />
       )}
 
       {options.showPackages && <PackageSummary items={order.items} />}

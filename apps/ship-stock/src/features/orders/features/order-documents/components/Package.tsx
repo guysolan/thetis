@@ -27,8 +27,8 @@ const Package = ({ packageItemChangeId, items, index }: PackageProps) => {
   if (!packageDetails) return null;
 
   return (
-    <div className="mb-6">
-      <div className="">
+    <section className="">
+      <div className="space-y-2">
         <h2 className="mb-2 font-semibold text-black text-xl">
           Package {index + 1}
         </h2>
@@ -36,15 +36,15 @@ const Package = ({ packageItemChangeId, items, index }: PackageProps) => {
           {packageDetails.height &&
             packageDetails.width &&
             packageDetails.depth && (
-              <Badge
-                className="gap-x-2 space-x-2 px-3 py-1.5"
-                variant="outline"
-              >
-                <BoxIcon size={16} />
-                {packageDetails.height} × {packageDetails.width} ×{" "}
-                {packageDetails.depth}
-              </Badge>
-            )}
+            <Badge
+              className="gap-x-2 space-x-2 px-3 py-1.5"
+              variant="outline"
+            >
+              <BoxIcon size={16} />
+              {packageDetails.height} × {packageDetails.width} ×{" "}
+              {packageDetails.depth}
+            </Badge>
+          )}
           {packageDetails.weight && (
             <Badge className="gap-x-2 space-x-2 px-3 py-1.5" variant="outline">
               <Weight size={16} />
@@ -74,7 +74,7 @@ const Package = ({ packageItemChangeId, items, index }: PackageProps) => {
             ))}
         </TableBody>
       </Table>
-    </div>
+    </section>
   );
 };
 export default Package;

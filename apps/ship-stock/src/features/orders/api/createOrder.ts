@@ -412,70 +412,123 @@ function processSellFormData(
 const processShipmentFormData = (
 	formData: MultiOrderFormData,
 ): FormatOrderItemChanges[] => {
-	console.log(
-		"🚢 processShipmentFormData - START",
-	);
-	console.log(
-		"🚢 from_items length:",
-		formData.from_items?.length ?? 0,
-	);
-	console.log(
-		"🚢 order_items length:",
-		formData.order_items?.length ?? 0,
-	);
-	console.log(
-		"🚢 to_items length:",
-		formData.to_items?.length ?? 0,
-	);
-	console.log(
-		"🚢 package_items length:",
-		formData.package_items?.length ?? 0,
-	);
-	console.log(
-		"🚢 mode:",
-		formData.mode,
-	);
+	const debugLog = {
+		function: "processShipmentFormData",
+		input: {
+			mode: formData.mode,
+			from_items_length: formData.from_items?.length ?? 0,
+			to_items_length: formData.to_items?.length ?? 0,
+			order_items_length: formData.order_items?.length ?? 0,
+			package_items_length: formData.package_items?.length ?? 0,
+			package_items: formData.package_items?.map((pkg) => ({
+				package_id: pkg.package_id,
+				package_item_change_id: pkg.package_item_change_id,
+			})) || [],
+		},
+		processing: {
+			from_items: [],
+			to_items: [],
+			filtered_counts: {
+				from_items_before: 0,
+				from_items_after: 0,
+				to_items_before: 0,
+				to_items_after: 0,
+			},
+		},
+		result: null,
+	};
 
-	const fromItems = (formData.from_items || []).map((item) => {
-		console.log("🚢 Processing from_item:", JSON.stringify(item, null, 2));
-		const mapped = mapToFormOrderItem(item);
-		const result = {
-			...mapped,
-			address_id: formData.from_shipping_address_id,
-			quantity_change: Number(mapped.quantity_change ?? 0),
-		};
-		console.log("🚢 From item processed:", JSON.stringify(result, null, 2));
-		return result;
-	});
+	debugLog.processing.filtered_counts.from_items_before =
+		(formData.from_items || []).length;
 
-	const orderItemsInternal = (formData.order_items || []).map((
-		item,
-	) => {
-		console.log("🚢 Processing order_item:", JSON.stringify(item, null, 2));
-		const mapped = mapToFormOrderItem(item);
-		const result = {
-			...mapped,
-			address_id: formData.to_shipping_address_id,
-			quantity_change: Number(mapped.quantity_change ?? 0),
-		};
-		console.log(
-			"🚢 Order item processed:",
-			JSON.stringify(result, null, 2),
-		);
-		return result;
-	});
+	const fromItems = (formData.from_items || [])
+		.filter((item) => {
+			// In package mode, only include items with package_item_change_id to avoid duplicates
+			if (formData.mode === "package") {
+				if (item.package_item_change_id == null) return false;
 
-	const toItems = (formData.to_items || []).map((item) => {
-		console.log("🚢 Processing to_item:", JSON.stringify(item, null, 2));
-		const mapped = mapToFormOrderItem(item);
-		const result = {
-			...mapped,
-			address_id: formData.to_shipping_address_id,
-			quantity_change: Number(mapped.quantity_change ?? 0),
-		};
-		console.log("🚢 To item processed:", JSON.stringify(result, null, 2));
-		return result;
-	});
+				// Also verify the package_item_change_id exists in package_items
+				const packageExists = (formData.package_items || []).some(
+					(pkg) =>
+						pkg.package_item_change_id ===
+							item.package_item_change_id,
+				);
+				return packageExists;
+			}
+			return true;
+		})
+		.map((item) => {
+			const mapped = mapToFormOrderItem(item);
+			const result = {
+				...mapped,
+				address_id: formData.from_shipping_address_id,
+				quantity_change: Number(mapped.quantity_change ?? 0),
+			};
+			debugLog.processing.from_items.push({
+				input: item,
+				output: result,
+			});
+			return result;
+		});
+
+	debugLog.processing.filtered_counts.from_items_after = fromItems.length;
+
+	// For shipments in package mode, order_items are duplicates of to_items
+	// For shipments in direct mode, order_items should be processed
+	const orderItemsInternal = formData.mode === "package"
+		? []
+		: (formData.order_items || []).map((item) => {
+			console.log(
+				"🚢 Processing order_item:",
+				JSON.stringify(item, null, 2),
+			);
+			const mapped = mapToFormOrderItem(item);
+			const result = {
+				...mapped,
+				address_id: formData.to_shipping_address_id,
+				quantity_change: Number(mapped.quantity_change ?? 0),
+			};
+			console.log(
+				"🚢 Order item processed:",
+				JSON.stringify(result, null, 2),
+			);
+			return result;
+		});
+
+	debugLog.processing.filtered_counts.to_items_before =
+		(formData.to_items || []).length;
+
+	const toItems = (formData.to_items || [])
+		.filter((item) => {
+			// In package mode, only include items with package_item_change_id to avoid duplicates
+			if (formData.mode === "package") {
+				if (item.package_item_change_id == null) return false;
+
+				// Also verify the package_item_change_id exists in package_items
+				const packageExists = (formData.package_items || []).some(
+					(pkg) =>
+						pkg.package_item_change_id ===
+							item.package_item_change_id,
+				);
+				return packageExists;
+			}
+			return true;
+		})
+		.map((item) => {
+			const mapped = mapToFormOrderItem(item);
+			const result = {
+				...mapped,
+				address_id: formData.to_shipping_address_id,
+				quantity_change: Number(mapped.quantity_change ?? 0),
+			};
+			debugLog.processing.to_items.push({
+				input: item,
+				output: result,
+			});
+			return result;
+		});
+
+	debugLog.processing.filtered_counts.to_items_after = toItems.length;
 
 	const result: FormatOrderItemChanges[] = [
 		...fromItems.map((item) => ({
@@ -512,11 +565,23 @@ const processShipmentFormData = (
 			lot_number: item.lot_number,
 		})),
 	];
-	console.log(
-		"🚢 processShipmentFormData - FINAL RESULT:",
-		result.length,
-		JSON.stringify(result, null, 2),
-	);
+
+	debugLog.result = {
+		total_items: result.length,
+		items_by_package: result.reduce((acc, item) => {
+			const packageId = item.package_item_change_id || "no_package";
+			if (!acc[packageId]) acc[packageId] = [];
+			acc[packageId].push({
+				item_id: item.item_id,
+				quantity_change: item.quantity_change,
+				address_id: item.address_id,
+			});
+			return acc;
+		}, {} as Record<string, any[]>),
+		all_items: result,
+	};
+
+	console.log("🚢 SHIPMENT DEBUG LOG:", JSON.stringify(debugLog, null, 2));
 	return result;
 };
 
@@ -622,30 +687,13 @@ export const useCreateOrder = (orderTypeParam: string) => {
 
 	return useMutation({
 		mutationFn: async (formData: MultiOrderFormData & { id?: number }) => {
-			console.log("🚀 =================================");
-			console.log("🚀 useCreateOrder - MUTATION START");
-			console.log("🚀 =================================");
 			console.log(
-				"🚀 formData keys:",
-				Object.keys(formData),
-			);
-			console.log(
-				"🚀 formData.order_type:",
-				formData.order_type,
-			);
-			console.log(
-				"🚀 formData.order_items length:",
-				formData.order_items?.length ?? 0,
+				"🚀 Form submission data:",
+				JSON.stringify(formData, null, 2),
 			);
 
-			console.log("🔄 Calling processMultiOrderFormDataLocal...");
 			const processedInputUntyped = processMultiOrderFormDataLocal(
 				formData,
-			);
-			console.log("✅ processMultiOrderFormDataLocal completed");
-			console.log(
-				"🔍 processedInputUntyped type:",
-				typeof processedInputUntyped,
 			);
 
 			let processedInput: CreateOrderType;

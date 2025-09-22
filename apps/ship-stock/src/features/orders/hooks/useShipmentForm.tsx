@@ -43,11 +43,19 @@ export const useShipmentForm = () => {
       stockpileItems,
     });
 
-    if (!orderItems?.length || !items || !fromShippingAddressId) {
+    // Only reset items if we're missing critical dependencies
+    // Don't reset if orderItems is empty in package mode (which is expected)
+    if (!items || !fromShippingAddressId) {
       console.log("Resetting items due to missing dependencies");
       setValue("from_items", []);
       setValue("to_items", []);
       setValue("display_items", []);
+      return;
+    }
+
+    // If orderItems is empty, don't process but don't clear existing items either
+    if (!orderItems?.length) {
+      console.log("No order items to process, keeping existing items");
       return;
     }
 

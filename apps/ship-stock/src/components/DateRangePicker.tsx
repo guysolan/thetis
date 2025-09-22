@@ -33,8 +33,26 @@ const DateRangePicker = ({ name, label, className }: DateRangePickerProps) => {
         // Convert array to DateRange object for the calendar
         const dateRange = field.value
           ? {
-            from: field.value[0] ? new Date(field.value[0]) : undefined,
-            to: field.value[1] ? new Date(field.value[1]) : undefined,
+            from: field.value[0]
+              ? (() => {
+                try {
+                  const date = new Date(field.value[0]);
+                  return isNaN(date.getTime()) ? undefined : date;
+                } catch {
+                  return undefined;
+                }
+              })()
+              : undefined,
+            to: field.value[1]
+              ? (() => {
+                try {
+                  const date = new Date(field.value[1]);
+                  return isNaN(date.getTime()) ? undefined : date;
+                } catch {
+                  return undefined;
+                }
+              })()
+              : undefined,
           }
           : undefined;
 
@@ -65,7 +83,7 @@ const DateRangePicker = ({ name, label, className }: DateRangePickerProps) => {
                     variant={"outline"}
                     type="button"
                     className={cn(
-                      "w-full pl-3 pr-3 text-left font-normal flex items-center justify-between gap-2",
+                      "flex justify-between items-center gap-2 pr-3 pl-3 w-full font-normal text-left",
                       !dateRange?.from && "text-muted-foreground",
                     )}
                   >
@@ -75,12 +93,29 @@ const DateRangePicker = ({ name, label, className }: DateRangePickerProps) => {
                           dateRange.to
                             ? (
                               <>
-                                {format(dateRange.from, "LLL dd, y")} -{" "}
-                                {format(dateRange.to, "LLL dd, y")}
+                                {(() => {
+                                  try {
+                                    return format(dateRange.from, "LLL dd, y");
+                                  } catch {
+                                    return "Invalid date";
+                                  }
+                                })()} - {(() => {
+                                  try {
+                                    return format(dateRange.to, "LLL dd, y");
+                                  } catch {
+                                    return "Invalid date";
+                                  }
+                                })()}
                               </>
                             )
                             : (
-                              format(dateRange.from, "LLL dd, y")
+                              (() => {
+                                try {
+                                  return format(dateRange.from, "LLL dd, y");
+                                } catch {
+                                  return "Invalid date";
+                                }
+                              })()
                             )
                         )
                         : <span>Pick a date range</span>}
