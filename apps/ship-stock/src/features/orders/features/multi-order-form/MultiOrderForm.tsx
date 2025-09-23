@@ -22,7 +22,7 @@ import EditCard from "../../../../components/EditCard";
 import SellPreview from "./SellPreview";
 import BuyPreview from "./BuyPreview";
 import ShipmentPreview from "./ShipmentPreview";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 type Schema = z.infer<typeof schema>;
 
@@ -37,9 +37,7 @@ export function MultiOrderForm({
   defaultOrderType,
   defaultOrderFormValues,
 }: MultiOrderFormProps) {
-  // All hooks must be called before any conditional rendering
   const companyId = useMyCompanyId();
-  const [isClient, setIsClient] = useState(false);
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -64,11 +62,7 @@ export function MultiOrderForm({
   });
 
   // Use useWatch to prevent infinite loops
-  const orderType = useWatch({
-    control: form.control,
-    name: "order_type",
-    defaultValue: defaultOrderType || "sale",
-  });
+  const orderType = useWatch({ control: form.control, name: "order_type" });
 
   const previousOrderTypeRef = useRef<Schema["order_type"] | null>(null);
 
@@ -86,11 +80,7 @@ export function MultiOrderForm({
     }
   }, [orderType, form]);
 
-  const mode = useWatch({
-    control: form.control,
-    name: "mode",
-    defaultValue: "package",
-  });
+  const mode = useWatch({ control: form.control, name: "mode" });
   const orderItems = useWatch({ control: form.control, name: "order_items" }) ||
     [];
   const packageItems =
@@ -104,24 +94,6 @@ export function MultiOrderForm({
   const toItems = useWatch({ control: form.control, name: "to_items" }) || [];
 
   const { mutate: createOrder } = useCreateOrder(orderType);
-
-  // Ensure component only renders on client side to avoid hydration issues
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // Guard against null form control in production or SSR
-  if (!form?.control || !isClient) {
-    return (
-      <div className="flex justify-center items-center min-h-[400px]">
-        <div className="text-center">
-          <div className="mx-auto mb-4 border-b-2 border-blue-600 rounded-full w-8 h-8 animate-spin">
-          </div>
-          <p className="text-gray-600">Loading order form...</p>
-        </div>
-      </div>
-    );
-  }
 
   const scrollToTop = () => {
     document.getElementById("order-form")?.scrollIntoView({
