@@ -6,11 +6,16 @@ import PackageStockItems from "../../components/PackageStockItems";
 import { useEffect, useRef } from "react";
 
 const ShipmentFormFields = () => {
-  useShipmentForm();
-  // useCompanyDefaults({ fieldName: "from_company_id" });
-
   const { control } = useFormContext();
   const form = useFormContext();
+
+  // Guard against null form in production
+  if (!form?.control || !control) {
+    return <div>Loading shipment form...</div>;
+  }
+
+  useShipmentForm();
+  // useCompanyDefaults({ fieldName: "from_company_id" });
 
   // Use useWatch to prevent infinite loops
   const mode = useWatch({

@@ -8,6 +8,12 @@ import PackageStockItems from "../../components/PackageStockItems";
 
 const BuyFormFields = () => {
   const form = useFormContext();
+
+  // Guard against null form in production
+  if (!form?.control) {
+    return <div>Loading buy form...</div>;
+  }
+
   const { updateBuyForm } = useBuyForm();
 
   useCompanyDefaults({ fieldName: "to_company_id" });

@@ -46,8 +46,24 @@ export const Combobox = ({
     disabled = false,
     className,
 }: ComboboxProps) => {
-    const { control } = useFormContext();
+    const form = useFormContext();
     const [open, setOpen] = useState(false);
+
+    // Guard against null form in production
+    if (!form?.control) {
+        return (
+            <div className={className}>
+                {label && (
+                    <label className="font-medium text-sm">{label}</label>
+                )}
+                <div className="bg-transparent px-3 py-2 border border-neutral-200 w-full h-9 text-sm">
+                    Loading...
+                </div>
+            </div>
+        );
+    }
+
+    const { control } = form;
 
     return (
         <FormField

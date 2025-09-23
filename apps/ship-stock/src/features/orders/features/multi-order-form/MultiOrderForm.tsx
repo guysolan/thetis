@@ -62,7 +62,11 @@ export function MultiOrderForm({
   });
 
   // Use useWatch to prevent infinite loops
-  const orderType = useWatch({ control: form.control, name: "order_type" });
+  const orderType = useWatch({
+    control: form.control,
+    name: "order_type",
+    defaultValue: defaultOrderType || "sale",
+  });
 
   const previousOrderTypeRef = useRef<Schema["order_type"] | null>(null);
 
@@ -80,7 +84,11 @@ export function MultiOrderForm({
     }
   }, [orderType, form]);
 
-  const mode = useWatch({ control: form.control, name: "mode" });
+  const mode = useWatch({
+    control: form.control,
+    name: "mode",
+    defaultValue: "package",
+  });
   const orderItems = useWatch({ control: form.control, name: "order_items" }) ||
     [];
   const packageItems =
@@ -94,6 +102,11 @@ export function MultiOrderForm({
   const toItems = useWatch({ control: form.control, name: "to_items" }) || [];
 
   const { mutate: createOrder } = useCreateOrder(orderType);
+
+  // Guard against null form control in production
+  if (!form?.control) {
+    return <div>Loading form...</div>;
+  }
 
   const scrollToTop = () => {
     document.getElementById("order-form")?.scrollIntoView({

@@ -6,6 +6,15 @@ import { getCurrentQuantity } from "@/features/stock-history/utils";
 
 export const useStocktakeForm = (name: string, address_name: string) => {
     const form = useFormContext();
+
+    // Guard against null form in production
+    if (!form?.control) {
+        return {
+            selectedAddress: null,
+            stockpileItems: null,
+        };
+    }
+
     const { data: stockpileItems } = useSelectItemsByAddress();
     const { data: inventoryHistory } = useSelectInventoryHistory();
 
