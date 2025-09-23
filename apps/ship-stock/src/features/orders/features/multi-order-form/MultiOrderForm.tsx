@@ -37,25 +37,9 @@ export function MultiOrderForm({
   defaultOrderType,
   defaultOrderFormValues,
 }: MultiOrderFormProps) {
+  // All hooks must be called before any conditional rendering
   const companyId = useMyCompanyId();
   const [isClient, setIsClient] = useState(false);
-
-  // Ensure component only renders on client side to avoid hydration issues
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) {
-    return (
-      <div className="flex justify-center items-center min-h-[400px]">
-        <div className="text-center">
-          <div className="mx-auto mb-4 border-b-2 border-blue-600 rounded-full w-8 h-8 animate-spin">
-          </div>
-          <p className="text-gray-600">Loading order form...</p>
-        </div>
-      </div>
-    );
-  }
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -121,9 +105,22 @@ export function MultiOrderForm({
 
   const { mutate: createOrder } = useCreateOrder(orderType);
 
-  // Guard against null form control in production
-  if (!form?.control) {
-    return <div>Loading form...</div>;
+  // Ensure component only renders on client side to avoid hydration issues
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Guard against null form control in production or SSR
+  if (!form?.control || !isClient) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <div className="text-center">
+          <div className="mx-auto mb-4 border-b-2 border-blue-600 rounded-full w-8 h-8 animate-spin">
+          </div>
+          <p className="text-gray-600">Loading order form...</p>
+        </div>
+      </div>
+    );
   }
 
   const scrollToTop = () => {
