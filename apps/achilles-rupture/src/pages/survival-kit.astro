@@ -12,9 +12,15 @@ const survivalKitProducts = [
         priority: "essential",
         name: "Walking Boot",
         category: "Essential",
-        priceRange: "$150-300",
+        priceRange: {
+            us: "$150-300",
+            gb: "£120-240"
+        },
         keyBenefit: "Maintains plantarflexion to protect your healing tendon and prevent re-rupture",
-        actionUrl: "/articles/aircast-vs-vacoped-comparison",
+        actionUrl: {
+            us: "/articles/aircast-vs-vacoped",
+            gb: "/articles/aircast-vs-vacoped"
+        },
         actionText: "Compare Options",
         isExternal: false,
         tags: ["mobility", "protection", "recovery"],
@@ -28,9 +34,15 @@ const survivalKitProducts = [
         priority: "recommended",
         name: "Thetis Night Splint",
         category: "Sleep",
-        priceRange: "$90-120",
+        priceRange: {
+            us: "$90-120",
+            gb: "£60-70"
+        },
         keyBenefit: "Sleep soundly knowing your Achilles is protected and healing in the optimal position",
-        actionUrl: "https://thetismedical.com/night-splint",
+        actionUrl: {
+            us: "https://thetismedical.com/night-splint",
+            gb: "https://thetismedical.com/night-splint"
+        },
         actionText: "Buy Now",
         isExternal: true,
         tags: ["sleep", "recovery", "protection"],
@@ -42,9 +54,15 @@ const survivalKitProducts = [
         priority: "recommended",
         name: "EVENup Leveler",
         category: "Mobility",
-        priceRange: "$35-40",
+        priceRange: {
+            us: "$40-$50",
+            gb: "£35-£40"
+        },
         keyBenefit: "Walk naturally and prevent back pain by keeping your hips level",
-        actionUrl: "https://www.amazon.com/EVENup-Shoe-Balancer-Leveler-Large/dp/B08FX2T2TF?sr=8-1",
+        actionUrl: {
+            us: "https://www.amazon.com/EVENup-Shoe-Balancer-Leveler-Large/dp/B08FX2T2TF?sr=8-1",
+            gb: "https://www.amazon.co.uk/EVENup-Shoe-Balancer-Leveler-Large/dp/B08FX3YPWQ?th=1"
+        },
         actionText: "Buy",
         isExternal: true,
         tags: ["mobility", "comfort", "posture"],
@@ -58,9 +76,15 @@ const survivalKitProducts = [
         priority: "comfort",
         name: "Elevation Wedge",
         category: "Recovery",
-        priceRange: "$45-75",
+        priceRange: {
+          us: "$25-$70",
+            gb: "£15-£45"
+        },
         keyBenefit: "Speed up healing and reduce swelling with proper elevation",
-        actionUrl: "https://www.amazon.com/MEGCXIT-Elevation-Circulation-Swelling-23-6%C3%9716-8%C3%978/dp/B0D31CCML3?sr=8-9",
+        actionUrl: {
+            us: "https://www.amazon.com/MEGCXIT-Elevation-Circulation-Swelling-23-6%C3%9716-8%C3%978/dp/B0D31CCML3?sr=8-9",
+            gb: "https://www.amazon.co.uk/s?k=leg+elevation+pillow+wedge"
+        },
         actionText: "Buy",
         isExternal: true,
         tags: ["recovery", "swelling", "comfort"],
@@ -72,9 +96,15 @@ const survivalKitProducts = [
         priority: "comfort",
         name: "Crutch Handles",
         category: "Comfort",
-        priceRange: "$20-35",
+        priceRange: {
+            us: "$20-35",
+            gb: "£6-15"
+        },
         keyBenefit: "Reduce hand pain and fatigue by up to 40% while using crutches",
-        actionUrl: "https://www.amazon.com/Crutch-Crutches-Replacement-Medical-Handgrips/dp/B09872TVZL?sr=8-6",
+        actionUrl: {
+            us: "https://www.amazon.com/Crutch-Crutches-Replacement-Medical-Handgrips/dp/B09872TVZL?sr=8-6",
+            gb: "https://www.amazon.co.uk/s?k=crutch+handles+soft+grips"
+        },
         actionText: "Buy",
         isExternal: true,
         tags: ["mobility", "comfort", "pain-relief"],
@@ -86,9 +116,15 @@ const survivalKitProducts = [
         priority: "comfort",
         name: "Merino Wool Socks",
         category: "Comfort",
-        priceRange: "$20-35",
+        priceRange: {
+            us: "$20-35",
+            gb: "£10-£25"
+        },
         keyBenefit: "Stay comfortable all day with temperature-regulating, moisture-wicking socks",
-        actionUrl: "https://www.amazon.com/s?k=merino+wool+socks",
+        actionUrl: {
+            us: "https://www.amazon.com/s?k=merino+wool+socks",
+            gb: "https://www.amazon.co.uk/s?k=merino+wool+socks"
+        },
         actionText: "Browse",
         isExternal: true,
         tags: ["comfort", "temperature", "hygiene"],
@@ -102,9 +138,15 @@ const survivalKitProducts = [
         priority: "optional",
         name: "Waterproof Boot Cover",
         category: "Hygiene",
-        priceRange: "$25-45",
+        priceRange: {
+            us: "$25-$45",
+            gb: "£20-£25"
+        },
         keyBenefit: "Shower with confidence and keep your boot dry and fresh",
-        actionUrl: "https://www.amazon.com/Qinaoco-Waterproof-Non-Slip-Watertight-Protector/dp/B0BZ43M5RD?sr=8-6",
+        actionUrl: {
+            us: "https://www.amazon.com/Qinaoco-Waterproof-Non-Slip-Watertight-Protector/dp/B0BZ43M5RD?sr=8-6",
+            gb: "https://limboproducts.co.uk/product/limbo-full-leg-m100/"
+        },
         actionText: "Buy",
         isExternal: true,
         tags: ["hygiene", "showering", "protection"],
@@ -116,9 +158,15 @@ const survivalKitProducts = [
         priority: "optional",
         name: "Antifungal Powder",
         category: "Hygiene",
-        priceRange: "$12-20",
+        priceRange: {
+            us: "$12-20",
+            gb: "£6-12"
+        },
         keyBenefit: "Prevent infections and keep your foot fresh during recovery",
-        actionUrl: "https://www.amazon.com/Micro-Guard-Miconazole-Nitrate-Powder-Antifungal/dp/B006HSREVC?sr=8-9",
+        actionUrl: {
+            us: "https://www.amazon.com/Micro-Guard-Miconazole-Nitrate-Powder-Antifungal/dp/B006HSREVC?sr=8-9",
+            gb: "https://www.amazon.co.uk/s?k=antifungal+powder+feet"
+        },
         actionText: "Buy",
         isExternal: true,
         tags: ["hygiene", "prevention", "comfort"],
@@ -130,9 +178,15 @@ const survivalKitProducts = [
         priority: "optional",
         name: "Knee Scooter",
         category: "Mobility",
-        priceRange: "$189-330",
+        priceRange: {
+            us: "$189-$330",
+            gb: "£100-£220"
+        },
         keyBenefit: "Move freely and independently without crutch fatigue",
-        actionUrl: "https://www.amazon.com/KneeRover-Steerable-Scooter-Crutches-Alternative/dp/B006G0M77C?sr=1-18",
+        actionUrl: {
+            us: "https://www.amazon.com/KneeRover-Steerable-Scooter-Crutches-Alternative/dp/B006G0M77C?sr=1-18",
+            gb: "https://www.amazon.co.uk/s?k=knee+scooter+walker"
+        },
         actionText: "Buy",
         isExternal: true,
         tags: ["mobility", "independence", "comfort"],
@@ -144,9 +198,15 @@ const survivalKitProducts = [
         priority: "optional",
         name: "TheraBand Resistance Bands",
         category: "Rehab",
-        priceRange: "$9-17",
+        priceRange: {
+            us: "$12-20",
+            gb: "£10-15"
+        },
         keyBenefit: "Build strength safely with progressive resistance training",
-        actionUrl: "https://www.amazon.com/THERABAND-Latex-Yellow-Red-Green/dp/B000LX4KRA",
+        actionUrl: {
+            us: "https://www.amazon.com/THERABAND-Latex-Yellow-Red-Green/dp/B000LX4KRA",
+            gb: "https://www.amazon.co.uk/THERABAND-Latex-Yellow-Red-Green/dp/B000LX4KRA"
+        },
         actionText: "Buy",
         isExternal: true,
         tags: ["rehab", "strength", "recovery"],
@@ -156,11 +216,17 @@ const survivalKitProducts = [
     },
     {
         priority: "optional",
-        name: "Boot Liner",
+        name: "Boot Liner (VACOped)",
         category: "Comfort",
-        priceRange: "$40",
+        priceRange: {
+            us: "$40",
+            gb: "£40"
+        },
         keyBenefit: "Keep your boot fresh and comfortable with removable, washable liners",
-        actionUrl: "https://www.amazon.com/Liner-Achilles-Fracture-Orthosis-VACOcast/dp/B00PYI93U6?sr=8-6",
+        actionUrl: {
+            us: "https://opedmedical.com/product/liner-black-grey-for-vacoped-achilles-injury-fracture-and-vacocast-fracture-walking-boot-orthoses/",
+            gb: "https://oped-uk.com/product/vacoped-vacocast-liner/"
+        },
         actionText: "Buy",
         isExternal: true,
         tags: ["comfort", "hygiene", "protection"],
@@ -172,9 +238,15 @@ const survivalKitProducts = [
         priority: "optional",
         name: "Heel Wedge Insoles",
         category: "Comfort",
-        priceRange: "$15-30",
+        priceRange: {
+            us: "$15-30",
+            gb: "£10"
+        },
         keyBenefit: "Provide additional heel elevation and comfort inside your boot",
-        actionUrl: "https://www.amazon.com/s?k=heel+wedge+achilles+shoe+insert+insole",
+        actionUrl: {
+            us: "https://www.amazon.com/s?k=heel+wedge+achilles+shoe+insert+insole",
+            gb: "https://www.amazon.co.uk/Shoe-Heel-Lift-Inserts-Pain/dp/B0C1G9GLGX/ref=sr_1_19_sspa?dib=eyJ2IjoiMSJ9.w8K1Tzh9GOXoZ6DdTNAeb64BGgR3MU1ASEjh4qzWGY6dC_MgqgTAzR-pJDT6oWjO8HhIrmf1_WM5g1g3tG00qVenjUM0KUFsAG4QAJ2SCA4bbt6oMSMMVyzt59aoWDsTnZxi9cwvqGKkxBofcz2IS1vPfvjTmC4_MuhoqhY993CBA4SjMUgGuZQckgSgzWkLWNQFQvntUYbL8ZPvWRQLmjSRXGDX95904et6kl5NJWSqCg6DaVcrinMFbeqnjmH0duUZgn2fp6sgyq4dkLOCGwc0nlaZZji8kz-czy4Jrlw.DyH2dV8enhE6oVYHheWSKalKM-WQyUa_M8hNqP_0MEw&dib_tag=se&keywords=heel+wedge+shoe+insert+insole&qid=1758631152&rnid=184306031&sr=8-19-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGY&th=1"
+        },
         actionText: "Browse",
         isExternal: true,
         tags: ["comfort", "elevation", "support"],
@@ -216,10 +288,10 @@ const schemaData = {
                     },
                     offers: {
                         "@type": "Offer",
-                        price: item.priceRange.replace("$", "").split("-")[0],
+                        price: item.priceRange.us.replace("$", "").split("-")[0],
                         priceCurrency: "USD",
                         availability: "https://schema.org/InStock",
-                        url: item.actionUrl
+                        url: item.actionUrl.us
                     },
                     image: item.imagePath,
                     additionalProperty: item.features?.map(feature => ({
@@ -246,7 +318,7 @@ const schemaData = {
                     name: "How much should I expect to spend on recovery equipment?",
                     acceptedAnswer: {
                         "@type": "Answer",
-                        text: "Essential items cost $240-420, recommended items add $80-115, and comfort items add $40-70. Total investment for everything you need is typically $300-500."
+                        text: "Essential items cost $240-420 (£190-335), recommended items add $125-160 (£98-127), and comfort items add $85-145 (£67-116). Total investment for everything you need is typically $450-725 (£355-575)."
                     }
                 }
             ]
@@ -375,6 +447,18 @@ const schemaData = {
                     <p class="mb-8 text-gray-600 text-xl">
                         The life changing products you need for recovery. Simple, clear, and proven to work.
                     </p>
+                    
+                    <!-- Location Selector -->
+                    <div class="flex justify-center items-center gap-3 mb-8">
+                        <span class="text-gray-600">Where are you shopping?</span>
+                        <select 
+                            id="location-selector" 
+                            class="bg-white px-3 py-2 border border-gray-300 focus:border-blue-500 rounded-md focus:ring-2 focus:ring-blue-500 text-gray-900"
+                        >
+                            <option value="us">🇺🇸 United States</option>
+                            <option value="gb">🇬🇧 United Kingdom</option>
+                        </select>
+                    </div>
                 </div>
 
 
@@ -427,12 +511,18 @@ const schemaData = {
 
                                         <div class="flex justify-between items-center">
                                             <div>
-                                                <p class="font-bold text-gray-900 text-xl">{item.priceRange}</p>
+                                                <p class="font-bold text-gray-900 text-xl product-price" 
+                                                   data-us-price={item.priceRange.us} 
+                                                   data-gb-price={item.priceRange.gb}>
+                                                    {item.priceRange.us}
+                                                </p>
                                                 <p class="text-gray-500 text-sm">Price range</p>
                                             </div>
                                             <a
-                                                href={item.actionUrl}
-                                                class="btn btn-primary"
+                                                href={item.actionUrl.us}
+                                                class="btn btn-primary product-link"
+                                                data-us-url={item.actionUrl.us}
+                                                data-gb-url={item.actionUrl.gb}
                                                 target={item.isExternal ? "_blank" : undefined}
                                                 rel={item.isExternal ? "noopener noreferrer" : undefined}
                                             >
@@ -512,12 +602,18 @@ const schemaData = {
 
                                         <div class="flex justify-between items-center">
                                             <div>
-                                                <p class="font-bold text-gray-900 text-xl">{item.priceRange}</p>
+                                                <p class="font-bold text-gray-900 text-xl product-price" 
+                                                   data-us-price={item.priceRange.us} 
+                                                   data-gb-price={item.priceRange.gb}>
+                                                    {item.priceRange.us}
+                                                </p>
                                                 <p class="text-gray-500 text-sm">Price range</p>
                                             </div>
                                             <a
-                                                href={item.actionUrl}
-                                                class="btn btn-primary"
+                                                href={item.actionUrl.us}
+                                                class="btn btn-primary product-link"
+                                                data-us-url={item.actionUrl.us}
+                                                data-gb-url={item.actionUrl.gb}
                                                 target={item.isExternal ? "_blank" : undefined}
                                                 rel={item.isExternal ? "noopener noreferrer" : undefined}
                                             >
@@ -577,10 +673,16 @@ const schemaData = {
                                     </ul>
                                 )}
                                 <div class="flex justify-between items-center">
-                                    <p class="font-bold text-gray-900">{item.priceRange}</p>
+                                    <p class="font-bold text-gray-900 product-price" 
+                                       data-us-price={item.priceRange.us} 
+                                       data-gb-price={item.priceRange.gb}>
+                                        {item.priceRange.us}
+                                    </p>
                                     <a
-                                        href={item.actionUrl}
-                                        class="btn btn-secondary"
+                                        href={item.actionUrl.us}
+                                        class="btn btn-secondary product-link"
+                                        data-us-url={item.actionUrl.us}
+                                        data-gb-url={item.actionUrl.gb}
                                         target={item.isExternal ? "_blank" : undefined}
                                         rel={item.isExternal ? "noopener noreferrer" : undefined}
                                     >
@@ -638,10 +740,16 @@ const schemaData = {
                                     </ul>
                                 )}
                                 <div class="flex justify-between items-center">
-                                    <p class="font-bold text-gray-900">{item.priceRange}</p>
+                                    <p class="font-bold text-gray-900 product-price" 
+                                       data-us-price={item.priceRange.us} 
+                                       data-gb-price={item.priceRange.gb}>
+                                        {item.priceRange.us}
+                                    </p>
                                     <a
-                                        href={item.actionUrl}
-                                        class="btn btn-secondary"
+                                        href={item.actionUrl.us}
+                                        class="btn btn-secondary product-link"
+                                        data-us-url={item.actionUrl.us}
+                                        data-gb-url={item.actionUrl.gb}
                                         target={item.isExternal ? "_blank" : undefined}
                                         rel={item.isExternal ? "noopener noreferrer" : undefined}
                                     >
@@ -683,5 +791,69 @@ const schemaData = {
             </section>
         </main>
         <Footer />
+        
+        <script>
+            // Location handling
+            function getLocationFromURL() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const location = urlParams.get('location');
+                return location === 'gb' ? 'gb' : 'us'; // Default to US
+            }
+            
+            function setLocationInURL(location: string) {
+                const url = new URL(window.location.href);
+                url.searchParams.set('location', location);
+                window.history.replaceState({}, '', url.toString());
+            }
+            
+            function updateProductLinks(location: string) {
+                const productLinks = document.querySelectorAll('.product-link');
+                productLinks.forEach(link => {
+                    const anchorLink = link as HTMLAnchorElement;
+                    const usUrl = anchorLink.getAttribute('data-us-url');
+                    const gbUrl = anchorLink.getAttribute('data-gb-url');
+                    if (usUrl && gbUrl) {
+                        anchorLink.href = location === 'gb' ? gbUrl : usUrl;
+                    }
+                });
+            }
+            
+            function updateProductPrices(location: string) {
+                const productPrices = document.querySelectorAll('.product-price');
+                productPrices.forEach(priceElement => {
+                    const usPrice = priceElement.getAttribute('data-us-price');
+                    const gbPrice = priceElement.getAttribute('data-gb-price');
+                    if (usPrice && gbPrice) {
+                        priceElement.textContent = location === 'gb' ? gbPrice : usPrice;
+                    }
+                });
+            }
+            
+            // Initialize on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                const currentLocation = getLocationFromURL();
+                const selector = document.getElementById('location-selector') as HTMLSelectElement;
+                
+                if (selector) {
+                    // Set selector to current location
+                    selector.value = currentLocation;
+                    
+                    // Update all product links and prices
+                    updateProductLinks(currentLocation);
+                    updateProductPrices(currentLocation);
+                    
+                    // Handle location changes
+                    selector.addEventListener('change', function(e) {
+                        const target = e.target as HTMLSelectElement;
+                        if (target) {
+                            const newLocation = target.value;
+                            setLocationInURL(newLocation);
+                            updateProductLinks(newLocation);
+                            updateProductPrices(newLocation);
+                        }
+                    });
+                }
+            });
+        </script>
     </body>
 </html>
