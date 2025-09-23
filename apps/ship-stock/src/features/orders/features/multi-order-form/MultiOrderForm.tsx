@@ -22,7 +22,7 @@ import EditCard from "../../../../components/EditCard";
 import SellPreview from "./SellPreview";
 import BuyPreview from "./BuyPreview";
 import ShipmentPreview from "./ShipmentPreview";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Schema = z.infer<typeof schema>;
 
@@ -38,6 +38,24 @@ export function MultiOrderForm({
   defaultOrderFormValues,
 }: MultiOrderFormProps) {
   const companyId = useMyCompanyId();
+  const [isClient, setIsClient] = useState(false);
+
+  // Ensure component only renders on client side to avoid hydration issues
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <div className="text-center">
+          <div className="mx-auto mb-4 border-b-2 border-blue-600 rounded-full w-8 h-8 animate-spin">
+          </div>
+          <p className="text-gray-600">Loading order form...</p>
+        </div>
+      </div>
+    );
+  }
 
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
