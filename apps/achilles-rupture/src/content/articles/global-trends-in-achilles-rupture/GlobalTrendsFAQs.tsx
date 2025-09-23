@@ -1,7 +1,8 @@
 import React from "react";
-import FAQs, { type FAQCategory } from "@thetis/ui/faqs";
+import CategorizedFAQs from "../../../components/CategorizedFAQs";
+import type { CategorizedFAQsProp } from "../../../components/CategorizedFAQs";
 
-const globalTrendsFaqs: FAQCategory[] = [
+const globalTrendsFaqs: CategorizedFAQsProp[] = [
   {
     category: "Incidence & Risk Factors",
     questions: [
@@ -121,7 +122,11 @@ const globalTrendsFaqs: FAQCategory[] = [
 ];
 
 const GlobalTrendsFAQs = () => {
-  return <FAQs faqs={globalTrendsFaqs} className="sm:px-2 py-4 w-full" />;
+  return (
+    <CategorizedFAQs
+      categories={globalTrendsFaqs}
+    />
+  );
 };
 
 export default GlobalTrendsFAQs;

@@ -1,7 +1,9 @@
 import React from "react";
-import FAQs, { type FAQCategory } from "@thetis/ui/faqs";
+import CategorizedFAQs from "../../../components/CategorizedFAQs";
+import type { CategorizedFAQsProp } from "../../../components/CategorizedFAQs";
+import FAQs from "../../../components/FAQs";
 
-const sixEssentialItemsFaqs: FAQCategory[] = [
+const sixEssentialItemsFaqs: CategorizedFAQsProp[] = [
   {
     category: "Walking Boots",
     questions: [
@@ -76,7 +78,11 @@ const sixEssentialItemsFaqs: FAQCategory[] = [
 ];
 
 const SixEssentialItemsFAQs = () => {
-  return <FAQs faqs={sixEssentialItemsFaqs} className="sm:px-2 py-4 w-full" />;
+  return (
+    <CategorizedFAQs
+      categories={sixEssentialItemsFaqs}
+    />
+  );
 };
 
 export default SixEssentialItemsFAQs;
