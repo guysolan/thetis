@@ -2,51 +2,87 @@
 import HeaderLink from "./HeaderLink.astro";
 import { Image } from "astro:assets";
 import AchillesRuptureWords from "../assets/branding/achilles-rupture-words.svg";
+import MobileMenuButton from "./MobileMenuButton.tsx";
 ---
 
 <header>
-	<nav
-		class="flex md:flex-row flex-col justify-between items-center pt-6 md:pt-0"
-	>
+	<nav class="flex justify-between items-center px-4 py-4 md:py-0 md:px-6">
 		<a
 			href="/"
-			class="w-fit text-gray-700 hover:text-gray-900 hover:underline"
+			class="flex-shrink-0 text-gray-700 hover:text-gray-900 transition-colors"
 		>
 			<Image
 				src={AchillesRuptureWords}
 				alt="Achilles Rupture"
 				width={180}
+				class="h-8 md:h-10"
 			/>
 		</a>
-		<div class="flex justify-center items-center gap-1 nav-tabs">
+		
+		<!-- Mobile menu button -->
+		<MobileMenuButton client:load />
+		
+		<!-- Desktop navigation -->
+		<div class="hidden md:flex items-center gap-2 nav-tabs">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/patients">Patients</HeaderLink>
 			<HeaderLink href="/clinicians">Clinicians</HeaderLink>
 			<HeaderLink href="/coming-soon">Coming Soon</HeaderLink>
 		</div>
 	</nav>
+	
+	<!-- Mobile navigation menu -->
+	<div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+		<div class="px-4 py-2 flex flex-col space-y-1">
+			<HeaderLink href="/" class="block py-3 px-2 text-lg">Home</HeaderLink>
+			<HeaderLink href="/patients" class="block py-3 px-2 text-lg">Patients</HeaderLink>
+			<HeaderLink href="/clinicians" class="block py-3 px-2 text-lg">Clinicians</HeaderLink>
+			<HeaderLink href="/coming-soon" class="block py-3 px-2 text-lg">Coming Soon</HeaderLink>
+		</div>
+	</div>
 </header>
+
+
 <style>
 	header {
-		margin: 0;
-		padding: 0 1em;
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		position: sticky;
+		top: 0;
+		z-index: 50;
 	}
 
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
 	.nav-tabs a {
 		padding: 1em 0.5em;
 		color: var(--black);
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
+		transition: all 0.2s ease;
 	}
+	
+	.nav-tabs a:hover {
+		background-color: rgba(var(--gray-light), 0.3);
+	}
+	
 	.nav-tabs a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
+	}
+	
+	/* Mobile menu styles */
+	#mobile-menu a {
+		color: var(--black);
+		text-decoration: none;
+		transition: background-color 0.2s ease;
+		border-radius: 6px;
+	}
+	
+	#mobile-menu a:hover {
+		background-color: rgba(var(--gray-light), 0.5);
+	}
+	
+	#mobile-menu a.active {
+		background-color: rgba(var(--accent), 0.1);
+		color: var(--accent);
 	}
 </style>

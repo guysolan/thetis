@@ -6,6 +6,9 @@ import ContentListing from "../../components/ContentListing.astro";
 import EquipmentBanner from "../../components/EquipmentBanner.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
+import Titles from "../../components/Titles.astro";
+import { ArrowRight } from "lucide-astro";
+import SurvivalKitBadge from "../../components/SurvivalKitBadge.astro";
 
 const articles = await getCollection("article");
 const articlePosts = articles
@@ -35,14 +38,19 @@ const articlePosts = articles
         />
     </head>
     <body>
-        <EquipmentBanner />
         <Header />
-        <main id="main-content">
-            <ContentListing
-                posts={articlePosts}
+        <main
+            id="main-content"
+            class="mx-auto px-4 py-8 max-w-[1400px] flex flex-col gap-8 items-center justify-center"
+        >
+            <SurvivalKitBadge />
+
+            <Titles
                 title="Achilles Rupture Articles for Patients"
-                excludeTags={["draft"]}
+                subtitle="If you have ruptured your Achilles, you are not alone and you can recover. These articles are for patients and focus on what to do day to day, how to stay comfortable, how rehab works, and what to expect from treatment and equipment choices, so you can move forward with confidence."
             />
+
+            <ContentListing posts={articlePosts} excludeTags={["draft"]} />
         </main>
         <Footer />
     </body>

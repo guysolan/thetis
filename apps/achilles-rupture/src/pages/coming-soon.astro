@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import { render } from 'astro:content';
 import UpvoteForm from '../components/UpvoteForm.astro';
 import SuggestionForm from '../components/SuggestionForm.astro';
+import Titles from '../components/Titles.astro';
 
 export async function getStaticPaths() {
     const posts = await getCollection('article');
@@ -27,8 +28,10 @@ const draftArticles = allDraftArticles.filter(article => article.data.status ===
 <Layout title='Upcoming Articles'>
     <main id="main-content">
         <div class="mx-auto px-4 py-8 max-w-[1400px]">
-            <h1 class="mb-8 font-bold text-4xl text-center">✍️ Help Shape Our Content</h1>
-            <p class="mb-8 font-medium text-2xl text-center text-gray-600">Vote for articles for us to write next, or suggest your own.</p>
+            <Titles
+                title="✍️ Help Shape Our Content"
+                subtitle="Vote for articles for us to write next, or suggest your own."
+            />
             <div class="gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {draftArticles.map((article) => (
                     <div class="flex flex-col border-gray-200 hover:border-gray-300 bg-white hover:shadow-lg p-6 border rounded-lg h-full transition-all">
@@ -41,7 +44,7 @@ const draftArticles = allDraftArticles.filter(article => article.data.status ===
             </div>
 
             <div class="mt-12 pt-8 border-t">
-                <h2 class="mb-8 font-bold text-3xl text-center">Have Another Topic Suggestion? 💡</h2>
+                <h2 class="mb-8 font-bold text-2xl text-center">Have Another Topic Suggestion? 💡</h2>
                 <SuggestionForm />
             </div>
         </div>
