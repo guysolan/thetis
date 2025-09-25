@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@thetis/ui/select";
 import calculateItemTotal from "../utils/calculateItemTotal";
+import { Combobox } from "@/components/Combobox";
 import { useSelectItemsView } from "../../items/api/selectItemsView";
 import { Input } from "@thetis/ui/input";
 
@@ -249,22 +250,21 @@ const StockItemRowCells = ({
         </TableCell>
       )}
       <TableCell className="w-1/4 truncate">
-        <Select value={itemId} onValueChange={handleItemChange}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select an item" />
-          </SelectTrigger>
-          <SelectContent>
-            {items
-              ?.filter((item) =>
-                item.item_type === itemType
-              )
-              .map((item) => (
-                <SelectItem key={item.item_id} value={String(item.item_id)}>
-                  {item.item_name}
-                </SelectItem>
-              ))}
-          </SelectContent>
-        </Select>
+        <Combobox
+          name={`${name}.${index}.item_id`}
+          placeholder="Select an item..."
+          searchPlaceholder="Search items..."
+          emptyMessage="No items found"
+          options={items
+            ?.filter((item) =>
+              item.item_type === itemType
+            )
+            .sort((a, b) => a.item_name.localeCompare(b.item_name))
+            .map((item) => ({
+              value: String(item.item_id),
+              label: item.item_name,
+            })) || []}
+        />
       </TableCell>
       <TableCell>
         <Input

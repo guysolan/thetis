@@ -278,17 +278,26 @@ const PackageStockItems = ({
 
   // Sync quantities between to_items and from_items
   useEffect(() => {
+    // Add a flag to prevent sync during form initialization
+    let isInitializing = true;
+    const initTimeout = setTimeout(() => {
+      isInitializing = false;
+    }, 100); // Allow form to settle before starting sync
+
     const syncQuantities = () => {
+      // Prevent sync during form initialization to avoid circular updates
+      if (isInitializing) return;
+
       const toItems = form.watch("to_items") || [];
       const fromItems = form.watch("from_items") || [];
 
       // Only sync if both arrays have items and are for shipment orders
       if (toItems.length === 0 && fromItems.length === 0) return;
 
-      // Create a map of package_item_change_id to quantity for to_items
+      // Create a map using unique item identifier (item_id + package_item_change_id)
       const toItemsMap = new Map(
         toItems.map((item) => [
-          item.package_item_change_id,
+          `${item.item_id}-${item.package_item_change_id}`,
           item.quantity_change,
         ]),
       );
@@ -296,7 +305,9 @@ const PackageStockItems = ({
       // Update from_items to match to_items quantities (with opposite sign)
       // Only update items that exist in both arrays to avoid erasing package items
       const updatedFromItems = fromItems.map((item) => {
-        const toQuantity = toItemsMap.get(item.package_item_change_id);
+        const toQuantity = toItemsMap.get(
+          `${item.item_id}-${item.package_item_change_id}`,
+        );
         if (toQuantity !== undefined) {
           return {
             ...item,
@@ -311,18 +322,33 @@ const PackageStockItems = ({
       if (
         JSON.stringify(currentFromItems) !== JSON.stringify(updatedFromItems)
       ) {
-        form.setValue("from_items", updatedFromItems);
+        // Use silent update to prevent triggering other watchers
+        form.setValue("from_items", updatedFromItems, {
+          shouldDirty: false,
+          shouldValidate: false,
+        });
       }
+    };
+
+    // Debounce the sync to prevent rapid successive updates
+    let syncTimeout: NodeJS.Timeout;
+    const debouncedSync = () => {
+      clearTimeout(syncTimeout);
+      syncTimeout = setTimeout(syncQuantities, 50);
     };
 
     // Only watch for changes in shipment-related fields
     const subscription = form.watch((value, { name }) => {
       if (name?.startsWith("to_items") || name?.startsWith("from_items")) {
-        syncQuantities();
+        debouncedSync();
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      clearTimeout(initTimeout);
+      clearTimeout(syncTimeout);
+      subscription.unsubscribe();
+    };
   }, [form]);
 
   const updatePackageId = (newValue: string, index: number) => {

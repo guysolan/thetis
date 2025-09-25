@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import NumberFlowCell from "../../components/NumberFlowCell";
 import { FormProvider } from "react-hook-form";
 import NumberFlow from "@number-flow/react";
+import { Combobox } from "@/components/Combobox";
 
 interface StocktakeItemsFormFieldsProps {
   name: string;
@@ -74,14 +75,18 @@ const StocktakeItemsFormFields = ({
                 </TableCell>
               )}
               <TableCell>
-                <Select
+                <Combobox
                   name={`${name}.${index}.item_id`}
+                  placeholder="Select an item..."
+                  searchPlaceholder="Search items..."
+                  emptyMessage="No items found"
                   options={items
                     ?.filter(
                       (item) =>
                         item.item_type ===
                           form.watch(`${name}.${index}.item_type`),
                     )
+                    .sort((a, b) => a.item_name.localeCompare(b.item_name))
                     .map((item) => ({
                       label: item.item_name,
                       value: String(item.item_id),

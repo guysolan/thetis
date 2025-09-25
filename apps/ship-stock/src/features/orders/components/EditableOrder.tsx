@@ -19,7 +19,7 @@ import { IncotermsSelect } from "./IncotermsSelect";
 
 const orderSchema = z.object({
     order_type: z.string().optional(),
-    order_date: z.string().optional(),
+    order_date: z.union([z.string(), z.date()]).optional(),
     carriage: z.coerce.number().min(0).optional(),
     currency: z.string().nullable().optional(),
     reason_for_export: z.string().nullable().optional(),
@@ -179,26 +179,32 @@ export const EditableOrder = ({ order }: EditableOrderProps) => {
 
                         {/* Delivery Information */}
                         <div className="gap-6 grid grid-cols-1 lg:grid-cols-2">
-                            <div className="space-y-2">
-                                <label className="font-medium text-sm">
-                                    Payment Status
-                                </label>
-                                <PaymentStatusSelect
-                                    orderId={order.id}
-                                    currentStatus={order.payment_status ||
-                                        "unpaid"}
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="font-medium text-sm">
-                                    Delivery Status
-                                </label>
-                                <DeliveryStatusSelect
-                                    orderId={order.id}
-                                    currentStatus={order.delivery_status ||
-                                        "pending"}
-                                />
-                            </div>
+                            {!["stocktake", "shipment"].includes(
+                                order.order_type,
+                            ) && (
+                                <div className="space-y-2">
+                                    <label className="font-medium text-sm">
+                                        Payment Status
+                                    </label>
+                                    <PaymentStatusSelect
+                                        orderId={order.id}
+                                        currentStatus={order.payment_status ||
+                                            "unpaid"}
+                                    />
+                                </div>
+                            )}
+                            {!["stocktake"].includes(order.order_type) && (
+                                <div className="space-y-2">
+                                    <label className="font-medium text-sm">
+                                        Delivery Status
+                                    </label>
+                                    <DeliveryStatusSelect
+                                        orderId={order.id}
+                                        currentStatus={order.delivery_status ||
+                                            "pending"}
+                                    />
+                                </div>
+                            )}
                         </div>
 
                         <Button

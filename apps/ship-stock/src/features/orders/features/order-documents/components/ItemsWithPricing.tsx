@@ -31,7 +31,12 @@ type GroupedItem =
 const ItemsWithPricing = ({
   orderItems,
   currency,
-}: { orderItems: OrderView["items"]; currency: Currency }) => {
+  order,
+}: {
+  orderItems: OrderView["items"];
+  currency: Currency;
+  order: OrderView;
+}) => {
   const { data: items } = useSelectItemsView();
 
   // For shipment orders, show only items being shipped (positive quantities)
@@ -73,6 +78,14 @@ const ItemsWithPricing = ({
   const invoiceItems = Object.values(groupedItems).filter(
     (item) => item.totalQuantity > 0,
   );
+
+  // Calculate totals
+  const itemTotal = invoiceItems.reduce(
+    (sum, item) => sum + item.totalPrice,
+    0,
+  );
+  const carriageAmount = order.carriage ?? 0;
+  const grandTotal = itemTotal + carriageAmount;
 
   return (
     <Table>
@@ -117,15 +130,32 @@ const ItemsWithPricing = ({
             </TableCell>
           </TableRow>
         ))}
-        <TableRow className="font-semibold">
-          <TableCell className="text-black">Total</TableCell>
+        <TableRow className="border-t text-neutral-800">
+          <TableCell className="text-black">Subtotal</TableCell>
           <TableCell colSpan={6} />
           <TableCell className="text-black text-right">
             <NumberFlow
-              value={invoiceItems.reduce(
-                (sum, item) => sum + item.totalPrice,
-                0,
-              )}
+              value={itemTotal}
+              format={{ style: "currency", currency: currency }}
+            />
+          </TableCell>
+        </TableRow>
+        <TableRow className="border-t text-neutral-800">
+          <TableCell className="text-black">Carriage</TableCell>
+          <TableCell colSpan={6} />
+          <TableCell className="text-black text-right">
+            <NumberFlow
+              value={carriageAmount}
+              format={{ style: "currency", currency: currency }}
+            />
+          </TableCell>
+        </TableRow>
+        <TableRow className="border-t">
+          <TableCell className="font-semibold text-black">Total</TableCell>
+          <TableCell colSpan={6} />
+          <TableCell className="font-semibold text-black text-right">
+            <NumberFlow
+              value={grandTotal}
               format={{ style: "currency", currency: currency }}
             />
           </TableCell>

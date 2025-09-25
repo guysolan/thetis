@@ -8,7 +8,14 @@ import { useEffect, useMemo } from "react";
 import type { OrderItem } from "../../schema";
 
 const SellFormFields = () => {
-  const { watch, setValue } = useFormContext();
+  const form = useFormContext();
+
+  // Guard against null form in production
+  if (!form?.control) {
+    return <div>Loading sell form...</div>;
+  }
+
+  const { watch, setValue } = form;
   const mode = watch("mode");
   const orderItems = watch("order_items") || [];
 

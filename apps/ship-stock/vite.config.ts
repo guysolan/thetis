@@ -11,4 +11,19 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  optimizeDeps: {
+    include: ["react-hook-form", "@hookform/resolvers", "react", "react-dom"],
+  },
+  build: {
+    target: "es2020",
+    rollupOptions: {
+      external: [],
+      output: {
+        manualChunks: {
+          "react-vendor": ["react", "react-dom"],
+          "form-vendor": ["react-hook-form", "@hookform/resolvers"],
+        },
+      },
+    },
+  },
 });

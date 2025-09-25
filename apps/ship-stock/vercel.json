@@ -1,10 +1,36 @@
 {
+  "framework": "vite",
+  "buildCommand": "bun run build",
+  "outputDirectory": "dist",
+  "installCommand": "bun install --frozen-lockfile",
   "git": {
     "deploymentEnabled": {
-      "main": false,
+      "main": true,
       "dev": false,
       "preview": false
     }
   },
+  "functions": {
+    "app/**": {
+      "runtime": "nodejs20.x",
+      "memory": 1024
+    }
+  },
+  "env": {
+    "NODE_ENV": "production",
+    "SKIP_ENV_VALIDATION": "true",
+    "NODE_OPTIONS": "--max-old-space-size=4096"
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control", 
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
   "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }]
 }

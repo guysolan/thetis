@@ -12,6 +12,7 @@ import { useSelectStockpiles } from "@/features/stockpiles/api/selectStockpiles"
 import { StockpileView } from "@/features/stockpiles/types";
 import { useSelectInventoryHistory } from "@/features/stock-history/api/selectInventoryHistory";
 import { getCurrentQuantity } from "@/features/stock-history/utils";
+import StockCheckDialog from "@/components/StockCheckDialog";
 
 interface StockpileItem {
   item_id: number;
@@ -48,19 +49,26 @@ const ItemsPage = () => {
                     <CardTitle className="font-bold text-xl">
                       {stockpile.stockpile_name}
                     </CardTitle>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() =>
-                        navigate({
-                          to: "/home/stock/history/$addressId",
-                          params: {
-                            addressId: stockpile.stockpile_id?.toString() || "",
-                          },
-                        })}
-                    >
-                      View History
-                    </Button>
+                    <div className="flex gap-2">
+                      <StockCheckDialog
+                        addressId={stockpile.stockpile_id?.toString() || ""}
+                        stockpileName={stockpile.stockpile_name || ""}
+                      />
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          navigate({
+                            to: "/home/stock/history/$addressId",
+                            params: {
+                              addressId: stockpile.stockpile_id?.toString() ||
+                                "",
+                            },
+                          })}
+                      >
+                        View History
+                      </Button>
+                    </div>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">

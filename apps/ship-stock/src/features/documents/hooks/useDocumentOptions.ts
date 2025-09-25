@@ -42,7 +42,6 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                         shipping: true,
                         contact: true,
                     },
-                    total: false,
                     payment: {
                         show: false,
                         paymentMethods: Object.fromEntries(
@@ -54,11 +53,11 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                     },
                     showPackages: true,
                     showShippingItems: false,
+                    showItemsManifest: true,
                     showExporterDetails: false,
                     showFDADetails: false,
                     showExchangeRates: false,
                     showServicesTable: true,
-                    showCarriage: false,
                 };
             case "commercialInvoice":
                 return {
@@ -85,7 +84,7 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                         contact: true,
                     },
                     payment: {
-                        show: false,
+                        show: true,
                         paymentMethods: Object.fromEntries(
                             Object.keys(PAYMENT_METHODS).map((method) => [
                                 method,
@@ -93,11 +92,13 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                             ]),
                         ),
                     },
+                    showPackages: false,
+                    showShippingItems: true,
+                    showItemsManifest: true,
                     showExporterDetails: true,
                     showFDADetails: true,
                     showExchangeRates: true,
                     showServicesTable: true,
-                    showCarriage: true,
                 };
             case "invoice":
                 return {
@@ -132,15 +133,14 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                             ]),
                         ),
                     },
+                    showPackages: false,
+                    showShippingItems: true,
+                    showItemsManifest: true,
                     showExporterDetails: false,
                     showFDADetails: false,
                     showExchangeRates: false,
-                    total: true,
                     showSignature: true,
-                    showPackages: false,
-                    showShippingItems: true,
                     showServicesTable: true,
-                    showCarriage: true,
                 };
             default:
                 return {
@@ -175,15 +175,14 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                             ]),
                         ),
                     },
+                    showPackages: false,
+                    showShippingItems: true,
+                    showItemsManifest: true,
                     showExporterDetails: false,
                     showFDADetails: false,
                     showExchangeRates: false,
-                    total: true,
                     showSignature: true,
-                    showPackages: false,
-                    showShippingItems: true,
                     showServicesTable: true,
-                    showCarriage: false,
                 };
         }
     };
@@ -232,11 +231,12 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                 ]),
             ),
         },
-        total: search?.total ?? defaults.total ?? true,
-        showSignature: search?.showSignature ?? true,
+        showSignature: search?.showSignature ?? defaults.showSignature ?? true,
         showPackages: search?.showPackages ?? defaults.showPackages ?? false,
         showShippingItems: search?.showShippingItems ??
             defaults.showShippingItems ?? true,
+        showItemsManifest: (search as any)?.showItemsManifest ??
+            defaults.showItemsManifest ?? true,
         showExporterDetails: search?.showExporterDetails ??
             defaults.showExporterDetails ?? false,
         showFDADetails: search?.showFDADetails ?? defaults.showFDADetails ??
@@ -245,7 +245,6 @@ export const useDocumentOptions = (documentType: DocumentType) => {
             defaults.showExchangeRates ?? false,
         showServicesTable: search?.showServicesTable ??
             defaults.showServicesTable ?? true,
-        showCarriage: search?.showCarriage ?? defaults.showCarriage ?? false,
     };
 
     return documentOptions;

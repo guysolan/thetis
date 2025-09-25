@@ -19,10 +19,9 @@ export const baseDocumentOptions = {
 export const purchaseOrderOptions = {
   ...baseDocumentOptions,
   additional: [
-    { id: "showPackages", label: "Packages" },
-    { id: "showShippingItems", label: "Shipping Items" },
-    { id: "carriage", label: "Carriage" },
-    { id: "total", label: "Total Amount" },
+    { id: "showItemsManifest", label: "Items" },
+    { id: "showShippingItems", label: "Items with Pricing" },
+    { id: "showPackages", label: "Package Summary" },
   ],
 };
 
@@ -30,19 +29,19 @@ export const invoiceOptions = {
   ...baseDocumentOptions,
   additional: [
     { id: "payment", label: "Payment Information" },
-    { id: "carriage", label: "Carriage" },
-    { id: "total", label: "Total Amount" },
+    { id: "showItemsManifest", label: "Items" },
+    { id: "showShippingItems", label: "Items with Pricing" },
+    { id: "showPackages", label: "Package Summary" },
   ],
 };
 
 export const commercialInvoiceOptions = {
   ...baseDocumentOptions,
   additional: [
-    { id: "showPackages", label: "Packages" },
-    { id: "showShippingItems", label: "Shipping Items" },
+    { id: "showItemsManifest", label: "Items" },
+    { id: "showShippingItems", label: "Items with Pricing" },
+    { id: "showPackages", label: "Package Summary" },
     { id: "payment", label: "Payment Information" },
-    { id: "carriage", label: "Carriage" },
-    { id: "total", label: "Total Amount" },
     { id: "showFDA", label: "FDA Information" },
     { id: "showExporter", label: "Exporter Information" },
     { id: "showExchangeRates", label: "Exchange Rates" },
@@ -53,11 +52,10 @@ export const commercialInvoiceOptions = {
 export const packingListOptions = {
   ...baseDocumentOptions,
   additional: [
-    { id: "showPackages", label: "Packages" },
-    { id: "showShippingItems", label: "Shipping Items" },
+    { id: "showItemsManifest", label: "Items" },
+    { id: "showShippingItems", label: "Items with Pricing" },
+    { id: "showPackages", label: "Package Summary" },
     { id: "payment", label: "Payment Information" },
-    { id: "carriage", label: "Carriage" },
-    { id: "total", label: "Total Amount" },
     { id: "showFDA", label: "FDA Information" },
     { id: "showExporter", label: "Exporter Information" },
     { id: "showExchangeRates", label: "Exchange Rates" },
@@ -115,21 +113,20 @@ export const documentOptionsSchema = z.object({
       Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
     ),
   }),
-  total: z.boolean().default(true),
   showSignature: z.boolean().default(true),
   showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
+  showItemsManifest: z.boolean().default(true),
   showServicesTable: z.boolean().default(true),
   showExporterDetails: z.boolean().default(false),
   showFDADetails: z.boolean().default(false),
   showExchangeRates: z.boolean().default(false),
-  showCarriage: z.boolean().default(false),
 });
 
 export const purchaseOrderOptionsSchema = documentOptionsSchema.extend({
-  carriage: z.boolean().default(false),
   showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
+  showItemsManifest: z.boolean().default(true),
   showServicesTable: z.boolean().default(true),
   payment: z.object({
     show: z.boolean().default(false),
@@ -199,8 +196,8 @@ export const commercialInvoiceSchema = documentOptionsSchema.extend({
   showExchangeRates: z.boolean().default(true),
   showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
+  showItemsManifest: z.boolean().default(true),
   showSignature: z.boolean().default(true),
-  showCarriage: z.boolean().default(true),
   paymentMethods: z.object(
     Object.fromEntries(
       Object.keys(PAYMENT_METHODS).map(
@@ -253,7 +250,25 @@ export const commercialInvoiceSchema = documentOptionsSchema.extend({
     shipping: true,
     contact: true,
   }),
-  payment: z.boolean().default(false),
+  payment: z.object({
+    show: z.boolean().default(false),
+    paymentMethods: z.object(
+      Object.fromEntries(
+        Object.keys(PAYMENT_METHODS).map(
+          (method) => [method, z.boolean().default(true)],
+        ),
+      ),
+    ).default(
+      Object.fromEntries(
+        Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
+      ),
+    ),
+  }).default({
+    show: false,
+    paymentMethods: Object.fromEntries(
+      Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
+    ),
+  }),
 });
 
 export const invoiceOptionsSchema = documentOptionsSchema.extend({
@@ -278,10 +293,10 @@ export const invoiceOptionsSchema = documentOptionsSchema.extend({
   }),
   showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
+  showItemsManifest: z.boolean().default(true),
   showExporterDetails: z.boolean().default(false),
   showFDADetails: z.boolean().default(false),
   showExchangeRates: z.boolean().default(false),
-  showCarriage: z.boolean().default(true),
   shippingDetails: z.object({
     show: z.boolean().default(true),
     reasonForExport: z.boolean().default(true),
@@ -331,6 +346,7 @@ export const packingListSchema = documentOptionsSchema.extend({
   showExchangeRates: z.boolean().default(false),
   showPackages: z.boolean().default(true),
   showShippingItems: z.boolean().default(false),
+  showItemsManifest: z.boolean().default(true),
   showSignature: z.boolean().default(true),
   payment: z.object({
     show: z.boolean().default(false),

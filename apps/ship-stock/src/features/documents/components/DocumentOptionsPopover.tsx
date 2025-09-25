@@ -57,9 +57,7 @@ const DocumentOptionsSheet = ({
       referenceNumber: search?.shippingDetails?.referenceNumber ?? true,
     },
     showShippingItems: search?.showShippingItems ?? true,
-    total: search?.total ?? true,
-    showCarriage: search?.showCarriage ??
-      (documentType === "invoice" || documentType === "commercialInvoice"),
+    showItemsManifest: (search as any)?.showItemsManifest ?? true,
     showPackages: search?.showPackages ?? documentType === "packingList",
     from: {
       show: search?.from?.show ?? true,
@@ -168,17 +166,18 @@ const DocumentOptionsSheet = ({
             ...newOptions.payment.paymentMethods,
             [methodName]: value,
           };
-        } else if (key === "total") newOptions.total = value;
-        else if (key === "showSignature") newOptions.showSignature = value;
+        } else if (key === "showSignature") newOptions.showSignature = value;
         else if (key === "showPackages") newOptions.showPackages = value;
         else if (key === "showShippingItems") {
           newOptions.showShippingItems = value;
+        } else if (key === "showItemsManifest") {
+          newOptions.showItemsManifest = value;
         } else if (key === "showExporterDetails") {
           newOptions.showExporterDetails = value;
         } else if (key === "showFDADetails") newOptions.showFDADetails = value;
         else if (key === "showExchangeRates") {
           newOptions.showExchangeRates = value;
-        } else if (key === "showCarriage") newOptions.showCarriage = value;
+        }
       }
 
       return newOptions;
@@ -228,25 +227,17 @@ const DocumentOptionsSheet = ({
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <label className="font-medium text-sm">
-                      Total Amount
+                      Items
                     </label>
                     <Switch
-                      checked={pendingOptions.total}
+                      checked={pendingOptions.showItemsManifest}
                       onCheckedChange={(checked) =>
-                        updateOption("total", checked)}
-                    />
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <label className="font-medium text-sm">Carriage</label>
-                    <Switch
-                      checked={pendingOptions.showCarriage}
-                      onCheckedChange={(checked) =>
-                        updateOption("showCarriage", checked)}
+                        updateOption("showItemsManifest", checked)}
                     />
                   </div>
                   <div className="flex justify-between items-center">
                     <label className="font-medium text-sm">
-                      Shipping Items
+                      Items with Pricing
                     </label>
                     <Switch
                       checked={pendingOptions.showShippingItems}

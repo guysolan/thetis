@@ -30,7 +30,7 @@ const StockMovements = ({ orderItems }: { orderItems: OrderView["items"] }) => {
         lot_number: item.lot_number,
       }));
 
-    // Group by item_id first
+    // Group by item_id and aggregate quantities properly
     const itemTransfers = mappedItems.reduce(
       (acc, item) => {
         const key = item.item_id;
@@ -39,25 +39,44 @@ const StockMovements = ({ orderItems }: { orderItems: OrderView["items"] }) => {
             item_id: item.item_id,
             item_name: item.item_name,
             item_type: item.item_type,
-            quantity: Math.abs(item.quantity),
-            from_location: item.quantity < 0 ? item.warehouse_name : null,
-            to_location: item.quantity > 0 ? item.warehouse_name : null,
+            positive_quantity: 0,
+            negative_quantity: 0,
+            from_locations: [],
+            to_locations: [],
             lot_number: item.lot_number,
           };
+        }
+
+        // Accumulate quantities and locations
+        if (item.quantity < 0) {
+          acc[key].negative_quantity += Math.abs(item.quantity);
+          if (!acc[key].from_locations.includes(item.warehouse_name)) {
+            acc[key].from_locations.push(item.warehouse_name);
+          }
         } else {
-          // If we find a matching opposite movement, populate the other location
-          if (item.quantity < 0) {
-            acc[key].from_location = item.warehouse_name;
-          } else {
-            acc[key].to_location = item.warehouse_name;
+          acc[key].positive_quantity += item.quantity;
+          if (!acc[key].to_locations.includes(item.warehouse_name)) {
+            acc[key].to_locations.push(item.warehouse_name);
           }
         }
+
         return acc;
       },
       {} as Record<string, any>,
     );
 
-    return Object.values(itemTransfers);
+    // Convert to final format
+    const finalTransfers = Object.values(itemTransfers).map((item) => ({
+      item_id: item.item_id,
+      item_name: item.item_name,
+      item_type: item.item_type,
+      quantity: Math.max(item.positive_quantity, item.negative_quantity), // Use the higher quantity
+      from_location: item.from_locations.join(", ") || "-",
+      to_location: item.to_locations.join(", ") || "-",
+      lot_number: item.lot_number,
+    }));
+
+    return finalTransfers;
   }, [orderItems]);
 
   return (
