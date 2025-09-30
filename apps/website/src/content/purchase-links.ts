@@ -69,6 +69,12 @@ const purchaseLinks = {
         "SR":
             "https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php",
     },
+    PT: {
+        "LL": "https://orthodirect.pt/product/tala-noturna-tendao-de-aquiles/",
+        "LR": "https://orthodirect.pt/product/tala-noturna-tendao-de-aquiles/",
+        "SL": "https://orthodirect.pt/product/tala-noturna-tendao-de-aquiles/",
+        "SR": "https://orthodirect.pt/product/tala-noturna-tendao-de-aquiles/",
+    },
 };
 
 export default purchaseLinks;

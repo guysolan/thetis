@@ -6,6 +6,7 @@ import RoyalSurrey from "@/content/partners/images/royal-surrey.png";
 import StJohnAndStElizabeth from "@/content/partners/images/st-john-and-st-elizabeth-hospital.svg";
 import LondonFootAndAnkleCentre from "@/content/partners/images/london-foot-and-ankle-centre.jpg";
 import BlackrockHealth from "@/content/partners/images/blackrock-health.png";
+import OrthoDirect from "@/content/partners/images/ortho-direct.png";
 
 export const partners = [
     {
@@ -63,5 +64,12 @@ export const partners = [
         url: "https://www.londonfootandanklecentre.co.uk/",
         country: "GB",
         category: "clinic",
+    },
+    {
+        name: "Ortho Direct",
+        image: OrthoDirect,
+        url: "https://www.orthodirect.pt/",
+        country: "PT",
+        category: "distributor",
     },
 ];
