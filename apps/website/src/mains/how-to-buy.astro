@@ -11,26 +11,389 @@ import "@thetis/ui/globals.css";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
 
+// Translation content
+const howToBuyTranslations: Record<string, any> = {
+    en: {
+        title: "How to Buy - Thetis Medical Achilles Splints",
+        description:
+            "Find where to buy Thetis Medical Achilles splints in your country. Available on Amazon and direct from our website.",
+        pageTitle: "How to Buy",
+        pageSubtitle:
+            "Find the perfect Achilles splint for your recovery. Available worldwide through Amazon and our direct store.",
+        availableInCountries: "Available in",
+        countries: "countries",
+        selectCountry: "Select Your Country",
+        allCountries: "All Countries",
+        countryNames: {
+            US: "United States",
+            UK: "United Kingdom",
+            CA: "Canada",
+            DE: "Germany",
+            IT: "Italy",
+            FR: "France",
+            BE: "Belgium",
+            NL: "Netherlands",
+            PL: "Poland",
+            ES: "Spain",
+            AU: "Australia",
+            PT: "Portugal",
+        },
+        sizeNames: {
+            LL: "Large Left",
+            LR: "Large Right",
+            SL: "Small Left",
+            SR: "Small Right",
+        },
+        buyNow: "Buy Now",
+        amazonPurchase: "Amazon Purchase",
+        amazonDescription:
+            "Most countries can purchase through Amazon for fast, reliable shipping and easy returns.",
+        amazonFeatures: {
+            fastShipping: "Fast Prime shipping",
+            easyReturns: "Easy returns",
+            customerReviews: "Customer reviews",
+        },
+        directPurchase: "Direct Purchase",
+        directDescription:
+            "Purchase directly from our website for personalized support and direct customer service.",
+        directFeatures: {
+            directSupport: "Direct support",
+            expertGuidance: "Expert guidance",
+            medicalExpertise: "Medical expertise",
+        },
+        partnerPurchase: "Partner Purchase",
+        partnerDescription:
+            "Purchase through our trusted partner networks for local availability and regional support.",
+        partnerFeatures: {
+            localAvailability: "Local availability",
+            regionalSupport: "Regional support",
+            trustedPartners: "Trusted partners",
+        },
+        sizeGuide: "Size Guide",
+        largeSplint: "Large Splint",
+        largeSplintDescription:
+            "For patients with larger feet or those who prefer more room. Suitable for shoe sizes 9+ (US) or 42+ (EU).",
+        largeSplintFeatures: [
+            "More comfortable for larger feet",
+            "Extra padding and support",
+            "Better for extended wear",
+        ],
+        smallSplint: "Small Splint",
+        smallSplintDescription:
+            "For patients with smaller feet. Suitable for shoe sizes 8 and below (US) or 41 and below (EU).",
+        smallSplintFeatures: [
+            "Snug fit for smaller feet",
+            "Lightweight and compact",
+            "Easier to wear in shoes",
+        ],
+    },
+    de: {
+        title: "Wie man kauft - Thetis Medical Achilles Schienen",
+        description:
+            "Finden Sie heraus, wo Sie Thetis Medical Achilles Schienen in Ihrem Land kaufen können. Verfügbar bei Amazon und direkt von unserer Website.",
+        pageTitle: "Wie man kauft",
+        pageSubtitle:
+            "Finden Sie die perfekte Achilles-Schiene für Ihre Genesung. Weltweit verfügbar über Amazon und unseren direkten Store.",
+        availableInCountries: "Verfügbar in",
+        countries: "Ländern",
+        selectCountry: "Wählen Sie Ihr Land",
+        allCountries: "Alle Länder",
+        countryNames: {
+            US: "Vereinigte Staaten",
+            UK: "Vereinigtes Königreich",
+            CA: "Kanada",
+            DE: "Deutschland",
+            IT: "Italien",
+            FR: "Frankreich",
+            BE: "Belgien",
+            NL: "Niederlande",
+            PL: "Polen",
+            ES: "Spanien",
+            AU: "Australien",
+            PT: "Portugal",
+        },
+        sizeNames: {
+            LL: "Groß Links",
+            LR: "Groß Rechts",
+            SL: "Klein Links",
+            SR: "Klein Rechts",
+        },
+        buyNow: "Jetzt kaufen",
+        amazonPurchase: "Amazon-Kauf",
+        amazonDescription:
+            "Die meisten Länder können über Amazon kaufen für schnellen, zuverlässigen Versand und einfache Rücksendungen.",
+        amazonFeatures: {
+            fastShipping: "Schneller Prime-Versand",
+            easyReturns: "Einfache Rücksendungen",
+            customerReviews: "Kundenbewertungen",
+        },
+        directPurchase: "Direktkauf",
+        directDescription:
+            "Kaufen Sie direkt von unserer Website für personalisierte Unterstützung und direkten Kundenservice.",
+        directFeatures: {
+            directSupport: "Direkte Unterstützung",
+            expertGuidance: "Expertenberatung",
+            medicalExpertise: "Medizinische Expertise",
+        },
+        partnerPurchase: "Partner-Kauf",
+        partnerDescription:
+            "Kaufen Sie über unsere vertrauenswürdigen Partner-Netzwerke für lokale Verfügbarkeit und regionale Unterstützung.",
+        partnerFeatures: {
+            localAvailability: "Lokale Verfügbarkeit",
+            regionalSupport: "Regionale Unterstützung",
+            trustedPartners: "Vertrauenswürdige Partner",
+        },
+        sizeGuide: "Größenführer",
+        largeSplint: "Große Schiene",
+        largeSplintDescription:
+            "Für Patienten mit größeren Füßen oder die mehr Platz bevorzugen. Geeignet für Schuhgrößen 9+ (US) oder 42+ (EU).",
+        largeSplintFeatures: [
+            "Komfortabler für größere Füße",
+            "Extra Polsterung und Unterstützung",
+            "Besser für längere Tragezeiten",
+        ],
+        smallSplint: "Kleine Schiene",
+        smallSplintDescription:
+            "Für Patienten mit kleineren Füßen. Geeignet für Schuhgrößen 8 und darunter (US) oder 41 und darunter (EU).",
+        smallSplintFeatures: [
+            "Enge Passform für kleinere Füße",
+            "Leicht und kompakt",
+            "Einfacher in Schuhen zu tragen",
+        ],
+    },
+    fr: {
+        title: "Comment acheter - Thetis Medical Attelles d'Achille",
+        description:
+            "Trouvez où acheter les attelles d'Achille Thetis Medical dans votre pays. Disponible sur Amazon et directement sur notre site web.",
+        pageTitle: "Comment acheter",
+        pageSubtitle:
+            "Trouvez l'attelle d'Achille parfaite pour votre rétablissement. Disponible dans le monde entier via Amazon et notre magasin direct.",
+        availableInCountries: "Disponible dans",
+        countries: "pays",
+        selectCountry: "Sélectionnez votre pays",
+        allCountries: "Tous les pays",
+        countryNames: {
+            US: "États-Unis",
+            UK: "Royaume-Uni",
+            CA: "Canada",
+            DE: "Allemagne",
+            IT: "Italie",
+            FR: "France",
+            BE: "Belgique",
+            NL: "Pays-Bas",
+            PL: "Pologne",
+            ES: "Espagne",
+            AU: "Australie",
+            PT: "Portugal",
+        },
+        sizeNames: {
+            LL: "Grand Gauche",
+            LR: "Grand Droite",
+            SL: "Petit Gauche",
+            SR: "Petit Droite",
+        },
+        buyNow: "Acheter maintenant",
+        amazonPurchase: "Achat Amazon",
+        amazonDescription:
+            "La plupart des pays peuvent acheter via Amazon pour un expédition rapide et fiable et des retours faciles.",
+        amazonFeatures: {
+            fastShipping: "Expédition Prime rapide",
+            easyReturns: "Retours faciles",
+            customerReviews: "Avis clients",
+        },
+        directPurchase: "Achat direct",
+        directDescription:
+            "Achetez directement sur notre site web pour un support personnalisé et un service client direct.",
+        directFeatures: {
+            directSupport: "Support direct",
+            expertGuidance: "Conseils d'experts",
+            medicalExpertise: "Expertise médicale",
+        },
+        partnerPurchase: "Achat partenaire",
+        partnerDescription:
+            "Achetez via nos réseaux de partenaires de confiance pour une disponibilité locale et un support régional.",
+        partnerFeatures: {
+            localAvailability: "Disponibilité locale",
+            regionalSupport: "Support régional",
+            trustedPartners: "Partenaires de confiance",
+        },
+        sizeGuide: "Guide des tailles",
+        largeSplint: "Grande attelle",
+        largeSplintDescription:
+            "Pour les patients avec des pieds plus grands ou ceux qui préfèrent plus d'espace. Convient aux tailles de chaussures 9+ (US) ou 42+ (EU).",
+        largeSplintFeatures: [
+            "Plus confortable pour les pieds plus grands",
+            "Rembourrage et support supplémentaires",
+            "Mieux pour le port prolongé",
+        ],
+        smallSplint: "Petite attelle",
+        smallSplintDescription:
+            "Pour les patients avec des pieds plus petits. Convient aux tailles de chaussures 8 et moins (US) ou 41 et moins (EU).",
+        smallSplintFeatures: [
+            "Ajustement serré pour les pieds plus petits",
+            "Léger et compact",
+            "Plus facile à porter dans les chaussures",
+        ],
+    },
+    es: {
+        title: "Cómo comprar - Thetis Medical Férulas de Aquiles",
+        description:
+            "Encuentra dónde comprar las férulas de Aquiles Thetis Medical en tu país. Disponible en Amazon y directamente desde nuestro sitio web.",
+        pageTitle: "Cómo comprar",
+        pageSubtitle:
+            "Encuentra la férula de Aquiles perfecta para tu recuperación. Disponible mundialmente a través de Amazon y nuestra tienda directa.",
+        availableInCountries: "Disponible en",
+        countries: "países",
+        selectCountry: "Selecciona tu país",
+        allCountries: "Todos los países",
+        countryNames: {
+            US: "Estados Unidos",
+            UK: "Reino Unido",
+            CA: "Canadá",
+            DE: "Alemania",
+            IT: "Italia",
+            FR: "Francia",
+            BE: "Bélgica",
+            NL: "Países Bajos",
+            PL: "Polonia",
+            ES: "España",
+            AU: "Australia",
+            PT: "Portugal",
+        },
+        sizeNames: {
+            LL: "Grande Izquierda",
+            LR: "Grande Derecha",
+            SL: "Pequeña Izquierda",
+            SR: "Pequeña Derecha",
+        },
+        buyNow: "Comprar ahora",
+        amazonPurchase: "Compra en Amazon",
+        amazonDescription:
+            "La mayoría de los países pueden comprar a través de Amazon para envío rápido y confiable y devoluciones fáciles.",
+        amazonFeatures: {
+            fastShipping: "Envío Prime rápido",
+            easyReturns: "Devoluciones fáciles",
+            customerReviews: "Reseñas de clientes",
+        },
+        directPurchase: "Compra directa",
+        directDescription:
+            "Compra directamente desde nuestro sitio web para soporte personalizado y servicio al cliente directo.",
+        directFeatures: {
+            directSupport: "Soporte directo",
+            expertGuidance: "Orientación experta",
+            medicalExpertise: "Experiencia médica",
+        },
+        partnerPurchase: "Compra de socio",
+        partnerDescription:
+            "Compra a través de nuestras redes de socios de confianza para disponibilidad local y soporte regional.",
+        partnerFeatures: {
+            localAvailability: "Disponibilidad local",
+            regionalSupport: "Soporte regional",
+            trustedPartners: "Socios de confianza",
+        },
+        sizeGuide: "Guía de tallas",
+        largeSplint: "Férula grande",
+        largeSplintDescription:
+            "Para pacientes con pies más grandes o aquellos que prefieren más espacio. Adecuado para tallas de zapatos 9+ (US) o 42+ (EU).",
+        largeSplintFeatures: [
+            "Más cómodo para pies más grandes",
+            "Relleno y soporte extra",
+            "Mejor para uso prolongado",
+        ],
+        smallSplint: "Férula pequeña",
+        smallSplintDescription:
+            "Para pacientes con pies más pequeños. Adecuado para tallas de zapatos 8 y menores (US) o 41 y menores (EU).",
+        smallSplintFeatures: [
+            "Ajuste ceñido para pies más pequeños",
+            "Ligero y compacto",
+            "Más fácil de usar en zapatos",
+        ],
+    },
+    it: {
+        title: "Come acquistare - Thetis Medical Férula di Achille",
+        description:
+            "Trova dove acquistare le férula di Achille Thetis Medical nel tuo paese. Disponibile su Amazon e direttamente dal nostro sito web.",
+        pageTitle: "Come acquistare",
+        pageSubtitle:
+            "Trova la férula di Achille perfetta per la tua guarigione. Disponibile in tutto il mondo tramite Amazon e il nostro negozio diretto.",
+        availableInCountries: "Disponibile in",
+        countries: "paesi",
+        selectCountry: "Seleziona il tuo paese",
+        allCountries: "Tutti i paesi",
+        countryNames: {
+            US: "Stati Uniti",
+            UK: "Regno Unito",
+            CA: "Canada",
+            DE: "Germania",
+            IT: "Italia",
+            FR: "Francia",
+            BE: "Belgio",
+            NL: "Paesi Bassi",
+            PL: "Polonia",
+            ES: "Spagna",
+            AU: "Australia",
+            PT: "Portogallo",
+        },
+        sizeNames: {
+            LL: "Grande Sinistra",
+            LR: "Grande Destra",
+            SL: "Piccola Sinistra",
+            SR: "Piccola Destra",
+        },
+        buyNow: "Acquista ora",
+        amazonPurchase: "Acquisto Amazon",
+        amazonDescription:
+            "La maggior parte dei paesi può acquistare tramite Amazon per spedizione veloce e affidabile e resi facili.",
+        amazonFeatures: {
+            fastShipping: "Spedizione Prime veloce",
+            easyReturns: "Resi facili",
+            customerReviews: "Recensioni clienti",
+        },
+        directPurchase: "Acquisto diretto",
+        directDescription:
+            "Acquista direttamente dal nostro sito web per supporto personalizzato e servizio clienti diretto.",
+        directFeatures: {
+            directSupport: "Supporto diretto",
+            expertGuidance: "Guida esperta",
+            medicalExpertise: "Competenza medica",
+        },
+        partnerPurchase: "Acquisto partner",
+        partnerDescription:
+            "Acquista tramite le nostre reti di partner fidati per disponibilità locale e supporto regionale.",
+        partnerFeatures: {
+            localAvailability: "Disponibilità locale",
+            regionalSupport: "Supporto regionale",
+            trustedPartners: "Partner fidati",
+        },
+        sizeGuide: "Guida alle taglie",
+        largeSplint: "Férula grande",
+        largeSplintDescription:
+            "Per pazienti con piedi più grandi o quelli che preferiscono più spazio. Adatto per taglie di scarpe 9+ (US) o 42+ (EU).",
+        largeSplintFeatures: [
+            "Più comodo per piedi più grandi",
+            "Imbottitura e supporto extra",
+            "Meglio per l'uso prolungato",
+        ],
+        smallSplint: "Férula piccola",
+        smallSplintDescription:
+            "Per pazienti con piedi più piccoli. Adatto per taglie di scarpe 8 e sotto (US) o 41 e sotto (EU).",
+        smallSplintFeatures: [
+            "Vestibilità aderente per piedi più piccoli",
+            "Leggero e compatto",
+            "Più facile da indossare nelle scarpe",
+        ],
+    },
+};
+
+// Get translated content
+const t = howToBuyTranslations[lang] || howToBuyTranslations.en;
+
 // Get country from URL search params
 const url = new URL(Astro.request.url);
 const selectedCountry = url.searchParams.get("country")?.toUpperCase();
 
 // Get all available countries
 const countries = Object.keys(purchaseLinks);
-const countryNames: Record<string, string> = {
-    US: "United States",
-    UK: "United Kingdom",
-    CA: "Canada",
-    DE: "Germany",
-    IT: "Italy",
-    FR: "France",
-    BE: "Belgium",
-    NL: "Netherlands",
-    PL: "Poland",
-    ES: "Spain",
-    AU: "Australia",
-    PT: "Portugal",
-};
 
 // Get the links to display
 const linksToShow =
@@ -46,8 +409,8 @@ const linksToShow =
 <ThetisSchema slot="head" />
 
 <Layout
-    title="How to Buy - Thetis Medical Achilles Splints"
-    description="Find where to buy Thetis Medical Achilles splints in your country. Available on Amazon and direct from our website."
+    title={t.title}
+    description={t.description}
     image="https://thetismedical.com/images/night-splint.png"
     lang={lang}
 >
@@ -61,17 +424,20 @@ const linksToShow =
                     <h1
                         class="mb-6 font-semibold text-neutral-800 text-3xl md:text-4xl lg:text-5xl"
                     >
-                        How to Buy
+                        {t.pageTitle}
                     </h1>
                     <p class="mx-auto mb-8 max-w-3xl text-neutral-600 text-xl">
-                        Find the perfect Achilles splint for your recovery.
-                        Available worldwide through Amazon and our direct store.
+                        {t.pageSubtitle}
                     </p>
                     <div
                         class="flex justify-center items-center gap-4 text-neutral-500"
                     >
                         <Globe className="w-5 h-5" />
-                        <span>Available in {countries.length} countries</span>
+                        <span
+                            >{t.availableInCountries}
+                            {countries.length}
+                            {t.countries}</span
+                        >
                     </div>
                 </div>
             </div>
@@ -89,7 +455,7 @@ const linksToShow =
                         <h2
                             class="mb-4 sm:mb-0 font-semibold text-neutral-900 text-2xl"
                         >
-                            Select Your Country
+                            {t.selectCountry}
                         </h2>
                         <div class="flex gap-2">
                             <button
@@ -104,7 +470,7 @@ const linksToShow =
                                     "transition-all duration-200",
                                 )}
                             >
-                                All Countries
+                                {t.allCountries}
                             </button>
                         </div>
                     </div>
@@ -128,7 +494,11 @@ const linksToShow =
                                             {country}
                                         </div>
                                         <div class="opacity-75 text-xs">
-                                            {countryNames[country]}
+                                            {
+                                                t.countryNames[
+                                                    country as keyof typeof t.countryNames
+                                                ]
+                                            }
                                         </div>
                                     </div>
                                 </button>
@@ -145,20 +515,22 @@ const linksToShow =
                                         <div class="flex items-center gap-3 mb-4">
                                             <MapPin className="w-5 h-5 text-primary" />
                                             <h3 class="font-semibold text-neutral-900 text-xl">
-                                                {countryNames[country]} (
-                                                {country})
+                                                {
+                                                    t.countryNames[
+                                                        country as keyof typeof t.countryNames
+                                                    ]
+                                                }{" "}
+                                                ({country})
                                             </h3>
                                         </div>
 
                                         <div class="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
                                             {Object.entries(links).map(
                                                 ([size, url]) => {
-                                                    const sizeName = {
-                                                        LL: "Large Left",
-                                                        LR: "Large Right",
-                                                        SL: "Small Left",
-                                                        SR: "Small Right",
-                                                    }[size];
+                                                    const sizeName =
+                                                        t.sizeNames[
+                                                            size as keyof typeof t.sizeNames
+                                                        ];
 
                                                     const urlString =
                                                         url as string;
@@ -210,7 +582,7 @@ const linksToShow =
                                                                 )}
                                                             >
                                                                 <ShoppingCart className="w-4 h-4" />
-                                                                Buy Now
+                                                                {t.buyNow}
                                                                 <ExternalLink className="w-4 h-4" />
                                                             </a>
                                                         </div>
@@ -234,24 +606,23 @@ const linksToShow =
                     class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 border border-blue-200 rounded-2xl"
                 >
                     <h3 class="mb-4 font-semibold text-blue-900 text-2xl">
-                        Amazon Purchase
+                        {t.amazonPurchase}
                     </h3>
                     <p class="mb-4 text-blue-800">
-                        Most countries can purchase through Amazon for fast,
-                        reliable shipping and easy returns.
+                        {t.amazonDescription}
                     </p>
                     <ul class="space-y-2 text-blue-700">
                         <li class="flex items-center gap-2">
                             <div class="bg-blue-500 rounded-full w-2 h-2"></div>
-                            Fast Prime shipping
+                            {t.amazonFeatures.fastShipping}
                         </li>
                         <li class="flex items-center gap-2">
                             <div class="bg-blue-500 rounded-full w-2 h-2"></div>
-                            Easy returns
+                            {t.amazonFeatures.easyReturns}
                         </li>
                         <li class="flex items-center gap-2">
                             <div class="bg-blue-500 rounded-full w-2 h-2"></div>
-                            Customer reviews
+                            {t.amazonFeatures.customerReviews}
                         </li>
                     </ul>
                 </div>
@@ -260,27 +631,26 @@ const linksToShow =
                     class="bg-gradient-to-br from-green-50 to-green-100 p-8 border border-green-200 rounded-2xl"
                 >
                     <h3 class="mb-4 font-semibold text-green-900 text-2xl">
-                        Direct Purchase
+                        {t.directPurchase}
                     </h3>
                     <p class="mb-4 text-green-800">
-                        Purchase directly from our website for personalized
-                        support and direct customer service.
+                        {t.directDescription}
                     </p>
                     <ul class="space-y-2 text-green-700">
                         <li class="flex items-center gap-2">
                             <div class="bg-green-500 rounded-full w-2 h-2">
                             </div>
-                            Direct support
+                            {t.directFeatures.directSupport}
                         </li>
                         <li class="flex items-center gap-2">
                             <div class="bg-green-500 rounded-full w-2 h-2">
                             </div>
-                            Expert guidance
+                            {t.directFeatures.expertGuidance}
                         </li>
                         <li class="flex items-center gap-2">
                             <div class="bg-green-500 rounded-full w-2 h-2">
                             </div>
-                            Medical expertise
+                            {t.directFeatures.medicalExpertise}
                         </li>
                     </ul>
                 </div>
@@ -289,27 +659,26 @@ const linksToShow =
                     class="bg-gradient-to-br from-purple-50 to-purple-100 p-8 border border-purple-200 rounded-2xl"
                 >
                     <h3 class="mb-4 font-semibold text-purple-900 text-2xl">
-                        Partner Purchase
+                        {t.partnerPurchase}
                     </h3>
                     <p class="mb-4 text-purple-800">
-                        Purchase through our trusted partner networks for local
-                        availability and regional support.
+                        {t.partnerDescription}
                     </p>
                     <ul class="space-y-2 text-purple-700">
                         <li class="flex items-center gap-2">
                             <div class="bg-purple-500 rounded-full w-2 h-2">
                             </div>
-                            Local availability
+                            {t.partnerFeatures.localAvailability}
                         </li>
                         <li class="flex items-center gap-2">
                             <div class="bg-purple-500 rounded-full w-2 h-2">
                             </div>
-                            Regional support
+                            {t.partnerFeatures.regionalSupport}
                         </li>
                         <li class="flex items-center gap-2">
                             <div class="bg-purple-500 rounded-full w-2 h-2">
                             </div>
-                            Trusted partners
+                            {t.partnerFeatures.trustedPartners}
                         </li>
                     </ul>
                 </div>
@@ -324,36 +693,37 @@ const linksToShow =
                 <h2
                     class="mb-6 font-semibold text-neutral-900 text-2xl text-center"
                 >
-                    Size Guide
+                    {t.sizeGuide}
                 </h2>
                 <div class="gap-8 grid md:grid-cols-2">
                     <div>
                         <h3 class="mb-4 font-semibold text-neutral-900 text-lg">
-                            Large Splint
+                            {t.largeSplint}
                         </h3>
                         <p class="mb-4 text-neutral-600">
-                            For patients with larger feet or those who prefer
-                            more room. Suitable for shoe sizes 9+ (US) or 42+
-                            (EU).
+                            {t.largeSplintDescription}
                         </p>
                         <ul class="space-y-2 text-neutral-700">
-                            <li>• More comfortable for larger feet</li>
-                            <li>• Extra padding and support</li>
-                            <li>• Better for extended wear</li>
+                            {
+                                t.largeSplintFeatures.map((feature: string) => (
+                                    <li>• {feature}</li>
+                                ))
+                            }
                         </ul>
                     </div>
                     <div>
                         <h3 class="mb-4 font-semibold text-neutral-900 text-lg">
-                            Small Splint
+                            {t.smallSplint}
                         </h3>
                         <p class="mb-4 text-neutral-600">
-                            For patients with smaller feet. Suitable for shoe
-                            sizes 8 and below (US) or 41 and below (EU).
+                            {t.smallSplintDescription}
                         </p>
                         <ul class="space-y-2 text-neutral-700">
-                            <li>• Snug fit for smaller feet</li>
-                            <li>• Lightweight and compact</li>
-                            <li>• Easier to wear in shoes</li>
+                            {
+                                t.smallSplintFeatures.map((feature: string) => (
+                                    <li>• {feature}</li>
+                                ))
+                            }
                         </ul>
                     </div>
                 </div>
