@@ -1,0 +1,10 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow query parameter pages
+Disallow: /*?tag=
+
+# Sitemap
+Sitemap: https://achilles-rupture.com/sitemap-index.xml
+

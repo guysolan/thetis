@@ -6,11 +6,19 @@ interface Props {
 	title: string;
 	description: string;
 	image?: string;
+	canonicalURL?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const {
+	title,
+	description,
+	image = "/achilles-rupture.jpg",
+	canonicalURL,
+} = Astro.props;
 
-const { title, description, image = "/achilles-rupture.jpg" } = Astro.props;
+// Generate canonical URL from current page if not provided
+const finalCanonicalURL =
+	canonicalURL || new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!-- Global Metadata -->
@@ -35,7 +43,7 @@ const { title, description, image = "/achilles-rupture.jpg" } = Astro.props;
 />
 
 <!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
+<link rel="canonical" href={finalCanonicalURL} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

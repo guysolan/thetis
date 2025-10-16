@@ -8,5 +8,12 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   site: "https://achilles-rupture.com",
-  integrations: [sitemap(), tailwind(), mdx(), react()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('?tag=')
+    }),
+    tailwind(),
+    mdx(),
+    react()
+  ],
 });
