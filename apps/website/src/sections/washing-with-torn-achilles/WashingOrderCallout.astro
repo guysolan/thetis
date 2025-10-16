@@ -1,0 +1,219 @@
+---
+import BuyNowCallout from "@/components/products/night-splint/BuyNowCallout.astro";
+import HighlightedWord from "@/components/HighlightedWord.tsx";
+import type { Lang } from "@/config/languages.ts";
+import { getRouteBySlugAndLanguage } from "@/content/routes.tsx";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const buyNowRoute = getRouteBySlugAndLanguage("splint", lang);
+const wholesaleRoute = getRouteBySlugAndLanguage("order-wholesale", lang);
+
+const content: Record<
+    Lang,
+    {
+        title: string;
+        buttonText: string;
+        secondaryButtonText: string;
+        body: { highlighted: boolean; text: string }[];
+    }
+> = {
+    en: {
+        title: "Get Rid of That Stinky Boot Foot",
+        buttonText: "Buy Now",
+        secondaryButtonText: "Order for Clinic",
+        body: [
+            {
+                highlighted: false,
+                text: "Finally ",
+            },
+            {
+                highlighted: true,
+                text: "clean your foot properly",
+            },
+            {
+                highlighted: false,
+                text: " with our waterproof splint. No more trapped, ",
+            },
+            {
+                highlighted: true,
+                text: "smelly toes",
+            },
+            {
+                highlighted: false,
+                text: ". Shower with ",
+            },
+            {
+                highlighted: true,
+                text: "actual Achilles support",
+            },
+            {
+                highlighted: false,
+                text: ", not just a boot cover.",
+            },
+        ],
+    },
+    de: {
+        title: "Werden Sie den stinkenden Stiefelfuß los",
+        buttonText: "Jetzt Kaufen",
+        secondaryButtonText: "Für Klinik Bestellen",
+        body: [
+            {
+                highlighted: false,
+                text: "Endlich ",
+            },
+            {
+                highlighted: true,
+                text: "Ihren Fuß richtig reinigen",
+            },
+            {
+                highlighted: false,
+                text: " mit unserer wasserdichten Schiene. Keine gefangenen, ",
+            },
+            {
+                highlighted: true,
+                text: "stinkenden Zehen",
+            },
+            {
+                highlighted: false,
+                text: " mehr. Duschen Sie mit ",
+            },
+            {
+                highlighted: true,
+                text: "echter Achillessehnen-Unterstützung",
+            },
+            {
+                highlighted: false,
+                text: ", nicht nur einer Stiefelabdeckung.",
+            },
+        ],
+    },
+    fr: {
+        title: "Débarrassez-vous de ce pied puant de botte",
+        buttonText: "Acheter Maintenant",
+        secondaryButtonText: "Commander pour Clinique",
+        body: [
+            {
+                highlighted: false,
+                text: "Enfin ",
+            },
+            {
+                highlighted: true,
+                text: "nettoyez votre pied correctement",
+            },
+            {
+                highlighted: false,
+                text: " avec notre attelle imperméable. Plus d'",
+            },
+            {
+                highlighted: true,
+                text: "orteils malodorants",
+            },
+            {
+                highlighted: false,
+                text: " piégés. Douchez-vous avec un ",
+            },
+            {
+                highlighted: true,
+                text: "vrai soutien d'Achille",
+            },
+            {
+                highlighted: false,
+                text: ", pas juste un couvre-botte.",
+            },
+        ],
+    },
+    es: {
+        title: "Deshágase de ese pie de bota apestoso",
+        buttonText: "Comprar Ahora",
+        secondaryButtonText: "Pedir para Clínica",
+        body: [
+            {
+                highlighted: false,
+                text: "Finalmente ",
+            },
+            {
+                highlighted: true,
+                text: "limpie su pie correctamente",
+            },
+            {
+                highlighted: false,
+                text: " con nuestra férula impermeable. Se acabaron los ",
+            },
+            {
+                highlighted: true,
+                text: "dedos malolientes",
+            },
+            {
+                highlighted: false,
+                text: " atrapados. Dúchese con ",
+            },
+            {
+                highlighted: true,
+                text: "soporte real de Aquiles",
+            },
+            {
+                highlighted: false,
+                text: ", no solo una cubierta de bota.",
+            },
+        ],
+    },
+    it: {
+        title: "Liberati di quel piede puzzolente dallo stivale",
+        buttonText: "Compra Ora",
+        secondaryButtonText: "Ordina per Clinica",
+        body: [
+            {
+                highlighted: false,
+                text: "Finalmente ",
+            },
+            {
+                highlighted: true,
+                text: "pulisci il tuo piede correttamente",
+            },
+            {
+                highlighted: false,
+                text: " con la nostra stecca impermeabile. Basta con le ",
+            },
+            {
+                highlighted: true,
+                text: "dita puzzolenti",
+            },
+            {
+                highlighted: false,
+                text: " intrappolate. Fai la doccia con un ",
+            },
+            {
+                highlighted: true,
+                text: "vero supporto dell'Achille",
+            },
+            {
+                highlighted: false,
+                text: ", non solo una copertura.",
+            },
+        ],
+    },
+};
+---
+
+<BuyNowCallout
+    buttonText={content[lang].buttonText}
+    buttonHref={buyNowRoute?.href || "/splint"}
+    secondaryButtonText={content[lang].secondaryButtonText}
+    secondaryButtonHref={wholesaleRoute?.href || "/order-wholesale"}
+>
+    <span slot="title">{content[lang].title}</span>
+    <span slot="body">
+        {
+            content[lang].body.map((item) => (
+                <span>
+                    {item.highlighted ? (
+                        <HighlightedWord>{item.text}</HighlightedWord>
+                    ) : (
+                        item.text
+                    )}
+                </span>
+            ))
+        }
+    </span>
+</BuyNowCallout>

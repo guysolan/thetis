@@ -1,0 +1,327 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import type { Lang } from "@/config/languages.ts";
+import SwimmingSplintSchema from "@/schemas/SwimmingSplintSchema.astro";
+import SwimmingHero from "@/sections/swimming-with-torn-achilles/SwimmingHero.astro";
+import AquaticRehabBenefits from "@/sections/swimming-with-torn-achilles/AquaticRehabBenefits.astro";
+import SwimmingSafetyGuidelines from "@/sections/swimming-with-torn-achilles/SwimmingSafetyGuidelines.astro";
+import SwimmingFAQs from "@/sections/swimming-with-torn-achilles/SwimmingFAQs";
+import SwimmingOrderCallout from "@/sections/swimming-with-torn-achilles/SwimmingOrderCallout.astro";
+import Reviews from "@/components/reviews/InfiniteReviews.astro";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content = {
+    en: {
+        title: "Can I Swim with a Torn Achilles? | Safe Aquatic Exercise During Recovery",
+        description:
+            "Yes, you can swim safely with a torn Achilles using the Thetis waterproof splint. Designed for aquatic activities and water-based rehabilitation.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "Can I ", highlighted: false },
+                { text: "Swim", highlighted: true },
+                { text: " with a Torn Achilles?", highlighted: false },
+            ],
+            description:
+                "Yes! Safely swim in pools or the sea with your torn Achilles. The natural swimming motion keeps your foot plantar flexed (pointed), making it safe in combination with our splint.",
+        },
+        benefits: {
+            title: [
+                {
+                    text: "Why Swimming is Ideal for ",
+                    highlighted: false,
+                },
+                { text: "Achilles Recovery", highlighted: true },
+            ],
+            description:
+                "Your foot naturally stays in the safe plantar flexed position while swimming",
+            features: [
+                {
+                    title: "Natural Foot Position",
+                    description:
+                        "Flutter kick and swimming strokes keep your foot naturally pointed (plantar flexed) - the safe position for healing",
+                },
+                {
+                    title: "Maintain Fitness",
+                    description:
+                        "Stay fit during recovery - it's hard to exercise with one leg, but swimming allows you to stay active safely",
+                },
+                {
+                    title: "Better Than Boot Covers",
+                    description:
+                        "Unlike Limbo covers that just protect your boot, our splint actually supports your Achilles while being fine with water",
+                },
+                {
+                    title: "Works in Pools & Sea",
+                    description:
+                        "Our splint handles water well (though not fully waterproof), keeping your Achilles supported in pools and sea",
+                },
+            ],
+        },
+        safetyGuidelines: {
+            title: [
+                { text: "Swimming ", highlighted: false },
+                { text: "Safety Guidelines", highlighted: true },
+            ],
+            subtitle: "Important precautions for safe aquatic activity",
+        },
+    },
+    de: {
+        title: "Kann ich mit gerissener Achillessehne schwimmen? | Sichere Wasserübungen",
+        description:
+            "Ja, Sie können sicher schwimmen mit Achillessehnenruptur mit der wasserdichten Thetis-Schiene. Entwickelt für Wasseraktivitäten und wasserbasierte Rehabilitation.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                {
+                    text: "Kann ich mit gerissener Achillessehne ",
+                    highlighted: false,
+                },
+                { text: "schwimmen", highlighted: true },
+                { text: "?", highlighted: false },
+            ],
+            description:
+                "Ja! Sicher schwimmen im Pool oder Meer mit Ihrer Achillessehnenruptur. Die natürliche Schwimmbewegung hält Ihren Fuß plantar flektiert (spitz), was es mit unserer wasserdichten Schiene perfekt sicher macht.",
+        },
+        benefits: {
+            title: [
+                {
+                    text: "Warum Schwimmen ideal ist für ",
+                    highlighted: false,
+                },
+                { text: "Achillessehnen-Erholung", highlighted: true },
+            ],
+            description:
+                "Ihr Fuß bleibt natürlich in der sicheren plantar flektierten Position beim Schwimmen",
+            features: [
+                {
+                    title: "Natürliche Fußposition",
+                    description:
+                        "Flatterstoß und Schwimmbewegungen halten Ihren Fuß natürlich spitz (plantar flektiert) - die sichere Position für die Heilung",
+                },
+                {
+                    title: "Fitness erhalten",
+                    description:
+                        "Bleiben Sie fit während der Genesung - es ist schwer mit einem Bein zu trainieren, aber Schwimmen ermöglicht sicheres Aktivbleiben",
+                },
+                {
+                    title: "Besser als Stiefelabdeckungen",
+                    description:
+                        "Anders als Limbo-Abdeckungen, die nur Ihren Stiefel schützen, stützt unsere Schiene Ihre Achillessehne und verträgt Wasser gut",
+                },
+                {
+                    title: "Funktioniert in Pools & Meer",
+                    description:
+                        "Unsere Schiene verträgt Wasser gut (nicht vollständig wasserdicht), hält Ihre Achillessehne in Pools und Meer gestützt",
+                },
+            ],
+        },
+        safetyGuidelines: {
+            title: [
+                { text: "Schwimm-", highlighted: false },
+                { text: "Sicherheitsrichtlinien", highlighted: true },
+            ],
+            subtitle:
+                "Wichtige Vorsichtsmaßnahmen für sichere Wasseraktivitäten",
+        },
+    },
+    fr: {
+        title: "Puis-je nager avec un Achille déchiré? | Exercice aquatique sûr",
+        description:
+            "Oui, vous pouvez nager en toute sécurité avec une rupture d'Achille en utilisant l'attelle imperméable Thetis. Conçue pour les activités aquatiques et la rééducation en milieu aquatique.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "Puis-je ", highlighted: false },
+                { text: "nager", highlighted: true },
+                { text: " avec un Achille déchiré?", highlighted: false },
+            ],
+            description:
+                "Oui! Nagez en toute sécurité dans les piscines ou la mer avec votre rupture d'Achille. Le mouvement naturel de natation garde votre pied en flexion plantaire (pointé), ce qui est parfaitement sûr avec notre attelle.",
+        },
+        benefits: {
+            title: [
+                {
+                    text: "Pourquoi la natation est idéale pour la ",
+                    highlighted: false,
+                },
+                { text: "récupération d'Achille", highlighted: true },
+            ],
+            description:
+                "Votre pied reste naturellement dans la position sûre en flexion plantaire pendant la natation",
+            features: [
+                {
+                    title: "Position Naturelle du Pied",
+                    description:
+                        "Le battement de jambes et les mouvements de natation gardent votre pied naturellement pointé (flexion plantaire) - la position sûre pour la guérison",
+                },
+                {
+                    title: "Maintenir la Forme",
+                    description:
+                        "Restez en forme pendant la récupération - c'est difficile de s'exercer avec une jambe, mais la natation vous permet de rester actif en toute sécurité",
+                },
+                {
+                    title: "Mieux que les Couvres de Botte",
+                    description:
+                        "Contrairement aux couvres Limbo qui protègent seulement votre botte, notre attelle soutient réellement votre Achille tout en résistant bien à l'eau",
+                },
+                {
+                    title: "Fonctionne en Piscine & Mer",
+                    description:
+                        "Notre attelle résiste bien à l'eau (pas complètement imperméable mais suffisant), gardant votre Achille soutenu dans les piscines et la mer",
+                },
+            ],
+        },
+        safetyGuidelines: {
+            title: [
+                { text: "Consignes de ", highlighted: false },
+                { text: "Sécurité pour la Natation", highlighted: true },
+            ],
+            subtitle:
+                "Précautions importantes pour une activité aquatique sûre",
+        },
+    },
+    es: {
+        title: "¿Puedo nadar con Aquiles desgarrado? | Ejercicio acuático seguro",
+        description:
+            "Sí, puede nadar de forma segura con rotura de Aquiles usando la férula impermeable Thetis. Diseñada para actividades acuáticas y rehabilitación acuática.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "¿Puedo ", highlighted: false },
+                { text: "nadar", highlighted: true },
+                { text: " con Aquiles desgarrado?", highlighted: false },
+            ],
+            description:
+                "¡Sí! Nade de forma segura en piscinas o el mar con su rotura de Aquiles. El movimiento natural de natación mantiene su pie en flexión plantar (puntiagudo), haciéndolo perfectamente seguro con nuestra férula.",
+        },
+        benefits: {
+            title: [
+                {
+                    text: "Por qué nadar es ideal para ",
+                    highlighted: false,
+                },
+                { text: "recuperación de Aquiles", highlighted: true },
+            ],
+            description:
+                "Su pie permanece naturalmente en la posición segura de flexión plantar durante la natación",
+            features: [
+                {
+                    title: "Posición Natural del Pie",
+                    description:
+                        "La patada flutter y los movimientos de natación mantienen su pie naturalmente puntiagudo (flexión plantar) - la posición segura para la curación",
+                },
+                {
+                    title: "Mantener la Condición Física",
+                    description:
+                        "Manténgase en forma durante la recuperación - es difícil hacer ejercicio con una pierna, pero nadar le permite mantenerse activo de forma segura",
+                },
+                {
+                    title: "Mejor que Cubiertas de Bota",
+                    description:
+                        "A diferencia de las cubiertas Limbo que solo protegen su bota, nuestra férula realmente apoya su Aquiles mientras maneja bien el agua",
+                },
+                {
+                    title: "Funciona en Piscinas y Mar",
+                    description:
+                        "Nuestra férula maneja bien el agua (aunque no completamente impermeable), manteniendo su Aquiles apoyado en piscinas y mar",
+                },
+            ],
+        },
+        safetyGuidelines: {
+            title: [
+                { text: "Pautas de ", highlighted: false },
+                { text: "Seguridad para Nadar", highlighted: true },
+            ],
+            subtitle: "Precauciones importantes para actividad acuática segura",
+        },
+    },
+    it: {
+        title: "Posso nuotare con Achille lacerato? | Esercizio acquatico sicuro",
+        description:
+            "Sì, puoi nuotare in sicurezza con la rottura dell'Achille usando la stecca impermeabile Thetis. Progettata per attività acquatiche e riabilitazione in acqua.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "Posso ", highlighted: false },
+                { text: "nuotare", highlighted: true },
+                { text: " con Achille lacerato?", highlighted: false },
+            ],
+            description:
+                "Sì! Nuota in sicurezza in piscine o mare con la tua rottura dell'Achille. Il movimento naturale del nuoto mantiene il piede in flessione plantare (puntato), rendendolo perfettamente sicuro con la nostra stecca.",
+        },
+        benefits: {
+            title: [
+                {
+                    text: "Perché il nuoto è ideale per il ",
+                    highlighted: false,
+                },
+                { text: "recupero dell'Achille", highlighted: true },
+            ],
+            description:
+                "Il tuo piede rimane naturalmente nella posizione sicura di flessione plantare durante il nuoto",
+            features: [
+                {
+                    title: "Posizione Naturale del Piede",
+                    description:
+                        "Il battito di gambe flutter e i movimenti di nuoto mantengono il piede naturalmente puntato (flessione plantare) - la posizione sicura per la guarigione",
+                },
+                {
+                    title: "Mantieni la Forma",
+                    description:
+                        "Rimani in forma durante il recupero - è difficile esercitarsi con una gamba, ma il nuoto ti permette di rimanere attivo in sicurezza",
+                },
+                {
+                    title: "Meglio delle Coperture per Stivali",
+                    description:
+                        "A differenza delle coperture Limbo che proteggono solo lo stivale, la nostra stecca supporta effettivamente il tuo Achille gestendo bene l'acqua",
+                },
+                {
+                    title: "Funziona in Piscine e Mare",
+                    description:
+                        "La nostra stecca gestisce bene l'acqua (non completamente impermeabile), mantenendo il tuo Achille supportato in piscine e mare",
+                },
+            ],
+        },
+        safetyGuidelines: {
+            title: [
+                { text: "Linee guida di ", highlighted: false },
+                { text: "Sicurezza per il Nuoto", highlighted: true },
+            ],
+            subtitle: "Precauzioni importanti per attività acquatica sicura",
+        },
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<Fragment slot="head">
+    <SwimmingSplintSchema />
+    <slot name="head" />
+</Fragment>
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    image={currentContent.image}
+    lang={lang}
+>
+    <main>
+        <SwimmingHero lang={lang} content={currentContent.hero} />
+
+        <AquaticRehabBenefits lang={lang} content={currentContent.benefits} />
+
+        <SwimmingSafetyGuidelines
+            lang={lang}
+            content={currentContent.safetyGuidelines}
+        />
+
+        <Reviews />
+
+        <SwimmingFAQs lang={lang} client:load />
+
+        <SwimmingOrderCallout lang={lang} />
+    </main>
+</Layout>

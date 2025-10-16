@@ -1,0 +1,122 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import type { Lang } from "@/config/languages.ts";
+import HygieneSplintSchema from "@/schemas/HygieneSplintSchema.astro";
+import HygieneHero from "@/sections/hygiene-with-torn-achilles/HygieneHero.astro";
+import HygieneReasons from "@/sections/hygiene-with-torn-achilles/HygieneReasons.astro";
+import HygieneFAQs from "@/sections/hygiene-with-torn-achilles/HygieneFAQs";
+import HygieneOrderCallout from "@/sections/hygiene-with-torn-achilles/HygieneOrderCallout.astro";
+import SleepInYourWellies from "@/components/SleepInYourWellies.tsx";
+import Reviews from "@/components/reviews/InfiniteReviews.astro";
+import KeyFeatures from "@/sections/achilles-rupture-splint/KeyFeatures.astro";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content = {
+    en: {
+        title: "Keep Your Bed Clean During Achilles Rupture Recovery | Hygienic Night Splint",
+        description:
+            "Stop dirty boots ruining your sheets. The Thetis night splint has a washable, removable liner that keeps your bed clean and hygienic during Achilles rupture recovery.",
+        image: "https://thetismedical.com/images/night-splint/Thetis%20Medical%20Achilles%20Rupture%20Night%20Splint%20In%20Bed.jpg",
+        hero: {
+            title: [
+                { text: "Keep Your ", highlighted: false },
+                { text: "Bed Clean", highlighted: true },
+                { text: " During Recovery", highlighted: false },
+            ],
+            description:
+                "Stop worrying about dirty boots in your bed. The Thetis night splint features a removable, washable liner that keeps your sheets clean and fresh throughout your Achilles rupture recovery.",
+        },
+    },
+    de: {
+        title: "Halten Sie Ihr Bett sauber während der Achillessehnenruptur-Erholung | Hygienische Nachtschiene",
+        description:
+            "Stoppen Sie schmutzige Stiefel, die Ihre Laken ruinieren. Die Thetis-Nachtschiene hat eine waschbare, herausnehmbare Innenschicht, die Ihr Bett während der Achillessehnenruptur-Erholung sauber und hygienisch hält.",
+        image: "https://thetismedical.com/images/night-splint/Thetis%20Medical%20Achilles%20Rupture%20Night%20Splint%20In%20Bed.jpg",
+        hero: {
+            title: [
+                { text: "Halten Sie Ihr ", highlighted: false },
+                { text: "Bett sauber", highlighted: true },
+                { text: " während der Erholung", highlighted: false },
+            ],
+            description:
+                "Hören Sie auf, sich um schmutzige Stiefel in Ihrem Bett zu sorgen. Die Thetis-Nachtschiene verfügt über eine herausnehmbare, waschbare Innenschicht, die Ihre Laken während Ihrer Achillessehnenruptur-Erholung sauber und frisch hält.",
+        },
+    },
+    fr: {
+        title: "Gardez votre lit propre pendant la récupération de la rupture d'Achille | Attelle de nuit hygiénique",
+        description:
+            "Arrêtez les bottes sales qui abîment vos draps. L'attelle de nuit Thetis a une doublure amovible et lavable qui garde votre lit propre et hygiénique pendant la récupération de la rupture d'Achille.",
+        image: "https://thetismedical.com/images/night-splint/Thetis%20Medical%20Achilles%20Rupture%20Night%20Splint%20In%20Bed.jpg",
+        hero: {
+            title: [
+                { text: "Gardez votre ", highlighted: false },
+                { text: "lit propre", highlighted: true },
+                { text: " pendant la récupération", highlighted: false },
+            ],
+            description:
+                "Arrêtez de vous inquiéter des bottes sales dans votre lit. L'attelle de nuit Thetis dispose d'une doublure amovible et lavable qui garde vos draps propres et frais tout au long de votre récupération de la rupture d'Achille.",
+        },
+    },
+    es: {
+        title: "Mantenga su cama limpia durante la recuperación de rotura de Aquiles | Férula nocturna higiénica",
+        description:
+            "Deje de que las botas sucias arruinen sus sábanas. La férula nocturna Thetis tiene un forro extraíble y lavable que mantiene su cama limpia e higiénica durante la recuperación de la rotura de Aquiles.",
+        image: "https://thetismedical.com/images/night-splint/Thetis%20Medical%20Achilles%20Rupture%20Night%20Splint%20In%20Bed.jpg",
+        hero: {
+            title: [
+                { text: "Mantenga su ", highlighted: false },
+                { text: "cama limpia", highlighted: true },
+                { text: " durante la recuperación", highlighted: false },
+            ],
+            description:
+                "Deje de preocuparse por las botas sucias en su cama. La férula nocturna Thetis cuenta con un forro extraíble y lavable que mantiene sus sábanas limpias y frescas durante su recuperación de la rotura de Aquiles.",
+        },
+    },
+    it: {
+        title: "Mantieni il tuo letto pulito durante il recupero dalla rottura dell'Achille | Stecca notturna igienica",
+        description:
+            "Ferma gli stivali sporchi che rovinano le tue lenzuola. La stecca notturna Thetis ha un rivestimento rimovibile e lavabile che mantiene il tuo letto pulito e igienico durante il recupero dalla rottura dell'Achille.",
+        image: "https://thetismedical.com/images/night-splint/Thetis%20Medical%20Achilles%20Rupture%20Night%20Splint%20In%20Bed.jpg",
+        hero: {
+            title: [
+                { text: "Mantieni il tuo ", highlighted: false },
+                { text: "letto pulito", highlighted: true },
+                { text: " durante il recupero", highlighted: false },
+            ],
+            description:
+                "Smetti di preoccuparti degli stivali sporchi nel tuo letto. La stecca notturna Thetis dispone di un rivestimento rimovibile e lavabile che mantiene le tue lenzuola pulite e fresche durante il tuo recupero dalla rottura dell'Achille.",
+        },
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<Fragment slot="head">
+    <HygieneSplintSchema />
+    <slot name="head" />
+</Fragment>
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    image={currentContent.image}
+    lang={lang}
+>
+    <main>
+        <HygieneHero lang={lang} content={currentContent.hero} />
+
+        <SleepInYourWellies client:load />
+
+        <HygieneReasons lang={lang} />
+
+        <Reviews />
+
+        <HygieneFAQs lang={lang} client:load />
+
+        <HygieneOrderCallout lang={lang} />
+
+        <Reviews />
+    </main>
+</Layout>

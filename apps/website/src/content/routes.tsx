@@ -162,42 +162,6 @@ export const productRoutes: BaseRoute[] = [
     variant: "outline",
   },
   {
-    slug: "achilles-rupture-splint/large/right",
-    title: {
-      en: "Achilles Rupture Splint Large Right",
-    },
-    description: {
-      en: "Recovery quicker and more comfortably from achilles tendon rupture.",
-    },
-  },
-  {
-    slug: "achilles-rupture-splint/large/left",
-    title: {
-      en: "Achilles Rupture Splint Large Left",
-    },
-    description: {
-      en: "Recovery quicker and more comfortably from achilles tendon rupture.",
-    },
-  },
-  {
-    slug: "achilles-rupture-splint/small/right",
-    title: {
-      en: "Achilles Rupture Splint Small Right",
-    },
-    description: {
-      en: "Recovery quicker and more comfortably from achilles tendon rupture.",
-    },
-  },
-  {
-    slug: "achilles-rupture-splint/small/left",
-    title: {
-      en: "Achilles Rupture Splint Small Left",
-    },
-    description: {
-      en: "Recovery quicker and more comfortably from achilles tendon rupture.",
-    },
-  },
-  {
     slug: "reviews",
     title: {
       en: "Reviews",
@@ -222,6 +186,110 @@ export const productRoutes: BaseRoute[] = [
     },
     legacySlugs: ["customer-reviews", "testimonials", "feedback"],
     icon: <Star />,
+    variant: "outline",
+  },
+  {
+    slug: "sleeping-with-torn-achilles",
+    title: {
+      en: "Sleeping with Achilles Rupture",
+      de: "Schlafen mit Achillessehnenruptur",
+      fr: "Dormir avec Rupture d'Achille",
+      es: "Dormir con Rotura de Aquiles",
+      it: "Dormire con Rottura di Achille",
+    },
+    description: {
+      en:
+        "Remove the heavy boot at night. Sleep safely with proper plantarflexion.",
+      de:
+        "Entfernen Sie den schweren Stiefel nachts. Schlafen Sie sicher mit richtiger Plantarflexion.",
+      fr:
+        "Retirez la botte lourde la nuit. Dormez en toute sécurité avec la bonne flexion plantaire.",
+      es:
+        "Quítese la bota pesada por la noche. Duerma de forma segura con flexión plantar adecuada.",
+      it:
+        "Rimuovi lo stivale pesante di notte. Dormi in sicurezza con la corretta flessione plantare.",
+    },
+    variant: "outline",
+  },
+  {
+    slug: "washing-with-torn-achilles",
+    title: {
+      en: "Washing with Achilles Rupture",
+      de: "Waschen mit Achillessehnenruptur",
+      fr: "Se Laver avec Rupture d'Achille",
+      es: "Lavarse con Rotura de Aquiles",
+      it: "Lavarsi con Rottura di Achille",
+    },
+    description: {
+      en: "Safer and more convenient than Limbo covers for showering.",
+      de: "Sicherer und bequemer als Limbo-Abdeckungen zum Duschen.",
+      fr: "Plus sûr et pratique que les couvres Limbo pour se doucher.",
+      es: "Más seguro y conveniente que las cubiertas Limbo para ducharse.",
+      it: "Più sicuro e conveniente delle coperture Limbo per la doccia.",
+    },
+    variant: "outline",
+  },
+  {
+    slug: "swimming-with-torn-achilles",
+    title: {
+      en: "Swimming with Achilles Rupture",
+      de: "Schwimmen mit Achillessehnenruptur",
+      fr: "Nager avec Rupture d'Achille",
+      es: "Nadar con Rotura de Aquiles",
+      it: "Nuotare con Rottura di Achille",
+    },
+    description: {
+      en: "Safe aquatic exercise and water therapy during recovery.",
+      de: "Sichere Wasserübungen und Wassertherapie während der Genesung.",
+      fr:
+        "Exercice aquatique sûr et thérapie par l'eau pendant la récupération.",
+      es:
+        "Ejercicio acuático seguro y terapia acuática durante la recuperación.",
+      it: "Esercizio acquatico sicuro e terapia acquatica durante il recupero.",
+    },
+    variant: "outline",
+  },
+  {
+    slug: "hygiene-with-torn-achilles",
+    title: {
+      en: "Hygiene with Achilles Rupture",
+      de: "Hygiene mit Achillessehnenruptur",
+      fr: "Hygiène avec Rupture d'Achille",
+      es: "Higiene con Rotura de Aquiles",
+      it: "Igiene con Rottura di Achille",
+    },
+    description: {
+      en: "Keep your bed clean during recovery with washable liner.",
+      de:
+        "Halten Sie Ihr Bett während der Genesung mit waschbarer Innenschicht sauber.",
+      fr:
+        "Gardez votre lit propre pendant la récupération avec doublure lavable.",
+      es: "Mantenga su cama limpia durante la recuperación con forro lavable.",
+      it:
+        "Mantieni il tuo letto pulito durante il recupero con rivestimento lavabile.",
+    },
+    variant: "outline",
+  },
+  {
+    slug: "products-for-torn-achilles",
+    title: {
+      en: "Products for Achilles Rupture",
+      de: "Produkte für Achillessehnenruptur",
+      fr: "Produits pour Rupture d'Achille",
+      es: "Productos para Rotura de Aquiles",
+      it: "Prodotti per Rottura di Achille",
+    },
+    description: {
+      en: "Complete recovery solution, better than VACOped and generic boots.",
+      de:
+        "Komplette Erholungslösung, besser als VACOped und generische Stiefel.",
+      fr:
+        "Solution de récupération complète, meilleure que VACOped et bottes génériques.",
+      es:
+        "Solución de recuperación completa, mejor que VACOped y botas genéricas.",
+      it:
+        "Soluzione di recupero completa, migliore di VACOped e stivali generici.",
+    },
     variant: "outline",
   },
 ];

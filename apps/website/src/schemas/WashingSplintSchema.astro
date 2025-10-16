@@ -1,0 +1,77 @@
+---
+import { Schema } from "astro-seo-schema";
+---
+
+<Schema
+    item={{
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Product",
+                name: "Waterproof Achilles Rupture Splint",
+                image: [
+                    "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+                ],
+                description:
+                    "Safer and more convenient than Limbo covers. Waterproof support designed specifically for Achilles rupture recovery while washing and showering.",
+                sku: "7B-QYCY-8JID",
+                gtin13: "5065005394047",
+                brand: {
+                    "@type": "Brand",
+                    name: "Thetis Medical",
+                },
+                aggregateRating: {
+                    "@type": "AggregateRating",
+                    reviewCount: "170",
+                    ratingValue: "4.6",
+                },
+            },
+            {
+                "@type": "FAQPage",
+                mainEntity: [
+                    {
+                        "@type": "Question",
+                        name: "Can I shower with an Achilles rupture?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "Yes, with the Thetis waterproof splint you can safely shower while protecting your healing Achilles tendon. It's safer and more convenient than generic limbo covers because it's designed specifically for Achilles rupture support.",
+                        },
+                    },
+                    {
+                        "@type": "Question",
+                        name: "Is the splint better than a Limbo cover for washing?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "Yes, the Thetis splint provides actual support while being waterproof, unlike limbo covers which only keep your boot dry. Our splint maintains proper foot position for safety while allowing comfortable washing.",
+                        },
+                    },
+                    {
+                        "@type": "Question",
+                        name: "How do I wash with a torn Achilles?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "Use the Thetis waterproof night splint which allows you to shower or bathe safely. Remove your heavy boot, wear the lightweight waterproof splint, and wash with confidence knowing your Achilles is properly supported.",
+                        },
+                    },
+                ],
+            },
+            {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                    {
+                        "@type": "ListItem",
+                        position: 1,
+                        name: "Home",
+                        item: "https://thetismedical.com",
+                    },
+                    {
+                        "@type": "ListItem",
+                        position: 2,
+                        name: "Washing with Torn Achilles",
+                        item: "https://thetismedical.com/washing-with-torn-achilles",
+                    },
+                ],
+            },
+        ],
+    }}
+/>

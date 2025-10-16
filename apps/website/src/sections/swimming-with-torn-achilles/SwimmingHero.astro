@@ -1,0 +1,69 @@
+---
+import HighlightedParagraph from "@/components/HighlightedParagraph";
+import FreeAndSecure from "@/components/buy-button/FreeAndSecure.tsx";
+import CheckWithCareTeam from "@/components/buy-button/CheckWithCareTeam.tsx";
+import BuyButtonVariants from "../../components/products/buy-button/BuyButtonVariants.tsx";
+import { Image } from "astro:assets";
+import ColorGradient from "@/components/ColorGradient.astro";
+import nightSplint from "@/assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
+import ReviewsLink from "@/components/ReviewsLink.tsx";
+import WorkInHealthcare from "@/components/products/night-splint/WorkInHealthcare.astro";
+import type { Lang } from "../../config/languages";
+
+interface Props {
+    lang: Lang;
+    content: {
+        title: any;
+        description: string;
+    };
+}
+
+const { lang = "en", content } = Astro.props;
+---
+
+<ColorGradient>
+    <div class="mx-auto px-4 max-w-7xl text-center">
+        <div class="lg:hidden flex flex-col gap-4">
+            <h1
+                class="mb-6 mx-w-4xl font-semibold text-gray-900 text-4xl md:text-5xl leading-[105%] md:leading-[120%]"
+            >
+                <HighlightedParagraph paragraph={content.title} client:load />
+            </h1>
+            <p class="mx-auto mb-8 max-w-3xl text-gray-700 text-xl">
+                {content.description}
+            </p>
+        </div>
+        <div class="flex lg:flex-row flex-col gap-4 lg:gap-8 my-2">
+            <Image
+                height={1000}
+                width={666}
+                class="relative shadow-lg group-hover:shadow-xl rounded-lg w-full lg:max-w-[45vw] h-full max-h-[100vw] object-cover group-hover:scale-[102%] transition-all duration-300"
+                src={nightSplint}
+                alt="Waterproof Splint for Swimming with Achilles Rupture"
+            />
+
+            <div class="space-y-2 w-full text-left">
+                <div class="hidden lg:flex flex-col gap-6">
+                    <h1
+                        class="mx-w-4xl font-semibold text-gray-900 text-4xl md:text-5xl leading-[105%] md:leading-[120%]"
+                    >
+                        <HighlightedParagraph
+                            paragraph={content.title}
+                            client:load
+                        />
+                    </h1>
+                    <p class="mx-auto max-w-3xl text-gray-700 text-xl">
+                        {content.description}
+                    </p>
+                </div>
+                <ReviewsLink size="lg" lang={lang} />
+                <CheckWithCareTeam className="mt-2" client:load lang={lang} />
+                <BuyButtonVariants client:load lang={lang} />
+            </div>
+        </div>
+        <div class="flex flex-col gap-16 pt-8">
+            <FreeAndSecure lang={lang} />
+            <WorkInHealthcare lang={lang} />
+        </div>
+    </div>
+</ColorGradient>

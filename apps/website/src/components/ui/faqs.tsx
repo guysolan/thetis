@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
+import UnnestedFAQs from "@/components/ui/unnested-faqs";
 
 export type FAQItem = {
   question: string;
@@ -97,22 +98,7 @@ const FAQs = ({
             {faq.category}
           </AccordionTrigger>
           <AccordionContent>
-            <Accordion type="single" collapsible>
-              {faq.questions.map((question) => (
-                <AccordionItem
-                  className="last:border-b-0"
-                  key={question.question}
-                  value={question.question}
-                >
-                  <AccordionTrigger className="font-semibold leading-loose">
-                    {question.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-lg leading-loose">
-                    {question.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <UnnestedFAQs faqs={faq.questions} className="" />
           </AccordionContent>
         </AccordionItem>
       ))}

@@ -1,0 +1,179 @@
+---
+import BuyNowCallout from "@/components/products/night-splint/BuyNowCallout.astro";
+import HighlightedWord from "@/components/HighlightedWord.tsx";
+import type { Lang } from "@/config/languages.ts";
+import { getRouteBySlugAndLanguage } from "@/content/routes.tsx";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const buyNowRoute = getRouteBySlugAndLanguage("splint", lang);
+const wholesaleRoute = getRouteBySlugAndLanguage("order-wholesale", lang);
+
+const content: Record<
+    Lang,
+    {
+        title: string;
+        buttonText: string;
+        secondaryButtonText: string;
+        body: { highlighted: boolean; text: string }[];
+    }
+> = {
+    en: {
+        title: "Sleep Better Tonight",
+        buttonText: "Buy Now",
+        secondaryButtonText: "Order for Clinic",
+        body: [
+            {
+                highlighted: false,
+                text: "You deserve a ",
+            },
+            {
+                highlighted: true,
+                text: "good night's sleep",
+            },
+            {
+                highlighted: false,
+                text: " during recovery. Remove that heavy boot and finally get the ",
+            },
+            {
+                highlighted: true,
+                text: "rest you need",
+            },
+            {
+                highlighted: false,
+                text: " to heal properly.",
+            },
+        ],
+    },
+    de: {
+        title: "Heute Nacht besser schlafen",
+        buttonText: "Jetzt Kaufen",
+        secondaryButtonText: "Für Klinik Bestellen",
+        body: [
+            {
+                highlighted: false,
+                text: "Sie verdienen eine ",
+            },
+            {
+                highlighted: true,
+                text: "gute Nachtruhe",
+            },
+            {
+                highlighted: false,
+                text: " während der Genesung. Entfernen Sie diesen schweren Stiefel und bekommen Sie endlich die ",
+            },
+            {
+                highlighted: true,
+                text: "Ruhe, die Sie brauchen",
+            },
+            {
+                highlighted: false,
+                text: ", um richtig zu heilen.",
+            },
+        ],
+    },
+    fr: {
+        title: "Dormez mieux ce soir",
+        buttonText: "Acheter Maintenant",
+        secondaryButtonText: "Commander pour Clinique",
+        body: [
+            {
+                highlighted: false,
+                text: "Vous méritez une ",
+            },
+            {
+                highlighted: true,
+                text: "bonne nuit de sommeil",
+            },
+            {
+                highlighted: false,
+                text: " pendant la récupération. Retirez cette botte lourde et obtenez enfin le ",
+            },
+            {
+                highlighted: true,
+                text: "repos dont vous avez besoin",
+            },
+            {
+                highlighted: false,
+                text: " pour bien guérir.",
+            },
+        ],
+    },
+    es: {
+        title: "Duerma mejor esta noche",
+        buttonText: "Comprar Ahora",
+        secondaryButtonText: "Pedir para Clínica",
+        body: [
+            {
+                highlighted: false,
+                text: "Mereces una ",
+            },
+            {
+                highlighted: true,
+                text: "buena noche de sueño",
+            },
+            {
+                highlighted: false,
+                text: " durante la recuperación. Quítate esa bota pesada y obtén finalmente el ",
+            },
+            {
+                highlighted: true,
+                text: "descanso que necesitas",
+            },
+            {
+                highlighted: false,
+                text: " para sanar adecuadamente.",
+            },
+        ],
+    },
+    it: {
+        title: "Dormi meglio stasera",
+        buttonText: "Compra Ora",
+        secondaryButtonText: "Ordina per Clinica",
+        body: [
+            {
+                highlighted: false,
+                text: "Meriti una ",
+            },
+            {
+                highlighted: true,
+                text: "buona notte di sonno",
+            },
+            {
+                highlighted: false,
+                text: " durante il recupero. Rimuovi quello stivale pesante e ottieni finalmente il ",
+            },
+            {
+                highlighted: true,
+                text: "riposo di cui hai bisogno",
+            },
+            {
+                highlighted: false,
+                text: " per guarire correttamente.",
+            },
+        ],
+    },
+};
+---
+
+<BuyNowCallout
+    buttonText={content[lang].buttonText}
+    buttonHref={buyNowRoute?.href || "/splint"}
+    secondaryButtonText={content[lang].secondaryButtonText}
+    secondaryButtonHref={wholesaleRoute?.href || "/order-wholesale"}
+>
+    <span slot="title">{content[lang].title}</span>
+    <span slot="body">
+        {
+            content[lang].body.map((item) => (
+                <span>
+                    {item.highlighted ? (
+                        <HighlightedWord>{item.text}</HighlightedWord>
+                    ) : (
+                        item.text
+                    )}
+                </span>
+            ))
+        }
+    </span>
+</BuyNowCallout>

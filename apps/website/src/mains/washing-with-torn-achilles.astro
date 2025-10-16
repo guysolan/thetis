@@ -1,0 +1,278 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import type { Lang } from "@/config/languages.ts";
+import WashingSplintSchema from "@/schemas/WashingSplintSchema.astro";
+import WashingHero from "@/sections/washing-with-torn-achilles/WashingHero.astro";
+import LimboComparison from "@/sections/washing-with-torn-achilles/LimboComparison.astro";
+import ShoweringSteps from "@/sections/washing-with-torn-achilles/ShoweringSteps.astro";
+import WashingFAQs from "@/sections/washing-with-torn-achilles/WashingFAQs";
+import WashingOrderCallout from "@/sections/washing-with-torn-achilles/WashingOrderCallout.astro";
+import Reviews from "@/components/reviews/InfiniteReviews.astro";
+import KeyFeatures from "@/sections/achilles-rupture-splint/KeyFeatures.astro";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content = {
+    en: {
+        title: "Washing with Torn Achilles | Clean Your Stinky Boot Foot Safely",
+        description:
+            "Shower safely and clean that stinky boot foot. Our Achilles rupture splint lets you actually wash your foot - not just keep your boot dry like a cover. Plus, you can sleep in it too.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "Washing with a ", highlighted: false },
+                { text: "Torn Achilles", highlighted: true },
+                { text: "?", highlighted: false },
+            ],
+            description:
+                "Shower safely and finally clean that stinky boot foot. Instead of buying a cover just to keep your boot dry, wear our splint so you can actually clean your foot too. P.S. You can sleep in it as well.",
+        },
+        comparison: {
+            title: [
+                {
+                    text: "Thetis Splint vs Waterproof Boot Covers",
+                    highlighted: false,
+                },
+            ],
+            subtitle:
+                "Why being able to clean your foot makes all the difference",
+            comparison: {
+                thetis: {
+                    title: "Thetis Waterproof Splint",
+                    features: [
+                        "Actually clean your foot - gets wet and washed",
+                        "Maintains plantarflexion for safety",
+                        "Waterproof AND supportive",
+                        "Purpose-built for Achilles rupture",
+                        "Comfortable for extended wear",
+                    ],
+                },
+                limbo: {
+                    title: "Generic Waterproof Covers",
+                    features: [
+                        "Cannot clean your foot - stays trapped in boot",
+                        "Foot remains dirty and smelly",
+                        "Requires wearing heavy boot in shower",
+                        "Not designed for Achilles injury",
+                        "Awkward and difficult to put on",
+                    ],
+                },
+            },
+        },
+    },
+    de: {
+        title: "Waschen mit gerissener Achillessehne | Reinigen Sie Ihren stinkenden Stiefelfuß sicher",
+        description:
+            "Duschen Sie sicher und reinigen Sie diesen stinkenden Stiefelfuß. Unsere Achillessehnenruptur-Schiene ermöglicht es Ihnen, Ihren Fuß tatsächlich zu waschen - nicht nur den Stiefel trocken zu halten wie eine Abdeckung. Außerdem können Sie darin schlafen.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "Waschen mit einer ", highlighted: false },
+                { text: "gerissenen Achillessehne", highlighted: true },
+                { text: "?", highlighted: false },
+            ],
+            description:
+                "Duschen Sie sicher und reinigen Sie endlich diesen stinkenden Stiefelfuß. Anstatt eine Abdeckung zu kaufen, nur um Ihren Stiefel trocken zu halten, tragen Sie unsere Schiene, damit Sie Ihren Fuß auch wirklich reinigen können. P.S. Sie können auch darin schlafen.",
+        },
+        comparison: {
+            title: [
+                {
+                    text: "Thetis-Schiene vs. wasserdichte Stiefelabdeckungen",
+                    highlighted: false,
+                },
+            ],
+            subtitle:
+                "Warum die Möglichkeit, Ihren Fuß zu reinigen, den Unterschied macht",
+            comparison: {
+                thetis: {
+                    title: "Thetis wasserdichte Schiene",
+                    features: [
+                        "Reinigen Sie Ihren Fuß tatsächlich - wird nass und gewaschen",
+                        "Erhält Plantarflexion für Sicherheit",
+                        "Wasserdicht UND unterstützend",
+                        "Speziell für Achillessehnenruptur entwickelt",
+                        "Bequem für längeres Tragen",
+                    ],
+                },
+                limbo: {
+                    title: "Generische wasserdichte Abdeckungen",
+                    features: [
+                        "Kann den Fuß nicht reinigen - bleibt im Stiefel gefangen",
+                        "Fuß bleibt schmutzig und riecht",
+                        "Erfordert das Tragen eines schweren Stiefels in der Dusche",
+                        "Nicht für Achillessehnen-Verletzungen konzipiert",
+                        "Umständlich und schwer anzuziehen",
+                    ],
+                },
+            },
+        },
+    },
+    fr: {
+        title: "Se laver avec un Achille déchiré | Nettoyez votre pied de botte malodorant en toute sécurité",
+        description:
+            "Douchez-vous en toute sécurité et nettoyez ce pied de botte malodorant. Notre attelle de rupture d'Achille vous permet de vraiment laver votre pied - pas seulement garder votre botte au sec comme une couverture. En plus, vous pouvez dormir avec.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "Se laver avec un ", highlighted: false },
+                { text: "Achille déchiré", highlighted: true },
+                { text: "?", highlighted: false },
+            ],
+            description:
+                "Douchez-vous en toute sécurité et nettoyez enfin ce pied de botte malodorant. Au lieu d'acheter une couverture juste pour garder votre botte au sec, portez notre attelle pour pouvoir vraiment nettoyer votre pied aussi. P.S. Vous pouvez aussi dormir avec.",
+        },
+        comparison: {
+            title: [
+                {
+                    text: "Attelle Thetis vs Couvres Imperméables",
+                    highlighted: false,
+                },
+            ],
+            subtitle:
+                "Pourquoi pouvoir nettoyer votre pied fait toute la différence",
+            comparison: {
+                thetis: {
+                    title: "Attelle Imperméable Thetis",
+                    features: [
+                        "Nettoyez vraiment votre pied - il est mouillé et lavé",
+                        "Maintient la flexion plantaire pour la sécurité",
+                        "Imperméable ET de soutien",
+                        "Conçu spécialement pour la rupture d'Achille",
+                        "Confortable pour un port prolongé",
+                    ],
+                },
+                limbo: {
+                    title: "Couvres Imperméables Génériques",
+                    features: [
+                        "Ne peut pas nettoyer votre pied - reste piégé dans la botte",
+                        "Le pied reste sale et malodorant",
+                        "Nécessite de porter une botte lourde sous la douche",
+                        "Pas conçu pour les blessures d'Achille",
+                        "Maladroit et difficile à mettre",
+                    ],
+                },
+            },
+        },
+    },
+    es: {
+        title: "Lavarse con Aquiles desgarrado | Limpie su apestoso pie de bota de forma segura",
+        description:
+            "Dúchese de forma segura y limpie ese apestoso pie de bota. Nuestra férula de ruptura de Aquiles le permite lavar realmente su pie - no solo mantener su bota seca como una cubierta. Además, puede dormir con ella.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "¿Lavarse con ", highlighted: false },
+                { text: "Aquiles desgarrado", highlighted: true },
+                { text: "?", highlighted: false },
+            ],
+            description:
+                "Dúchese de forma segura y limpie finalmente ese apestoso pie de bota. En lugar de comprar una cubierta solo para mantener su bota seca, use nuestra férula para poder limpiar realmente su pie también. P.D. También puede dormir con ella.",
+        },
+        comparison: {
+            title: [
+                {
+                    text: "Férula Thetis vs Cubiertas Impermeables",
+                    highlighted: false,
+                },
+            ],
+            subtitle: "Por qué poder limpiar su pie marca toda la diferencia",
+            comparison: {
+                thetis: {
+                    title: "Férula Impermeable Thetis",
+                    features: [
+                        "Limpie realmente su pie - se moja y se lava",
+                        "Mantiene la flexión plantar para la seguridad",
+                        "Impermeable Y de soporte",
+                        "Diseñada específicamente para rotura de Aquiles",
+                        "Cómoda para uso prolongado",
+                    ],
+                },
+                limbo: {
+                    title: "Cubiertas Impermeables Genéricas",
+                    features: [
+                        "No puede limpiar su pie - queda atrapado en la bota",
+                        "El pie permanece sucio y maloliente",
+                        "Requiere usar bota pesada en la ducha",
+                        "No diseñado para lesiones de Aquiles",
+                        "Incómodo y difícil de poner",
+                    ],
+                },
+            },
+        },
+    },
+    it: {
+        title: "Lavarsi con Achille lacerato | Pulisci il tuo puzzolente piede da stivale in sicurezza",
+        description:
+            "Fai la doccia in sicurezza e pulisci quel puzzolente piede da stivale. La nostra stecca per rottura dell'Achille ti permette di lavare davvero il piede - non solo mantenere lo stivale asciutto come una copertura. Inoltre, puoi dormirci dentro.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "Lavarsi con ", highlighted: false },
+                { text: "Achille lacerato", highlighted: true },
+                { text: "?", highlighted: false },
+            ],
+            description:
+                "Fai la doccia in sicurezza e pulisci finalmente quel puzzolente piede da stivale. Invece di comprare una copertura solo per mantenere lo stivale asciutto, indossa la nostra stecca così puoi pulire davvero anche il piede. P.S. Puoi anche dormirci dentro.",
+        },
+        comparison: {
+            title: [
+                {
+                    text: "Stecca Thetis vs Coperture Impermeabili",
+                    highlighted: false,
+                },
+            ],
+            subtitle: "Perché poter pulire il piede fa tutta la differenza",
+            comparison: {
+                thetis: {
+                    title: "Stecca Impermeabile Thetis",
+                    features: [
+                        "Pulisci davvero il piede - si bagna e si lava",
+                        "Mantiene la flessione plantare per la sicurezza",
+                        "Impermeabile E di supporto",
+                        "Progettata appositamente per la rottura dell'Achille",
+                        "Comoda per l'uso prolungato",
+                    ],
+                },
+                limbo: {
+                    title: "Coperture Impermeabili Generiche",
+                    features: [
+                        "Non può pulire il piede - rimane intrappolato nello stivale",
+                        "Il piede rimane sporco e puzzolente",
+                        "Richiede di indossare uno stivale pesante sotto la doccia",
+                        "Non progettato per lesioni dell'Achille",
+                        "Scomodo e difficile da indossare",
+                    ],
+                },
+            },
+        },
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<Fragment slot="head">
+    <WashingSplintSchema />
+    <slot name="head" />
+</Fragment>
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    image={currentContent.image}
+    lang={lang}
+>
+    <main>
+        <WashingHero lang={lang} content={currentContent.hero} />
+
+        <ShoweringSteps lang={lang} />
+
+        <LimboComparison lang={lang} content={currentContent.comparison} />
+
+        <Reviews />
+
+        <WashingFAQs lang={lang} client:load />
+
+        <WashingOrderCallout lang={lang} />
+    </main>
+</Layout>

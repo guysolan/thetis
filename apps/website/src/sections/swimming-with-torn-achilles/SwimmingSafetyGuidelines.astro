@@ -1,0 +1,281 @@
+---
+import type { Lang } from "@/config/languages.ts";
+import HighlightedParagraph from "@/components/HighlightedParagraph.tsx";
+import ColorGradientInOut from "@/components/ColorGradientInOut.astro";
+
+interface Props {
+    lang: Lang;
+    content: {
+        title: any;
+        subtitle: string;
+    };
+}
+
+const { content, lang } = Astro.props;
+
+const guidelineContent = {
+    en: {
+        safetyTitle: "Essential Safety Rules",
+        rule1Title: "Always get medical clearance first",
+        rule1Text:
+            "Get clearance from your surgeon or physiotherapist before swimming.",
+        rule2Title: "Never put weight on your injured foot",
+        rule2Text:
+            "Use a pool ladder, sit and slide in, or have assistance when getting in and out.",
+        rule3Title: "Wait for wound healing",
+        rule3Text:
+            "Make sure your surgical incision is fully healed before entering water.",
+        whyTitle: "Why Swimming is Perfect for Achilles Recovery",
+        whyText:
+            "Your foot naturally stays in plantar flexion (pointed toes) during swimming—exactly the safe position for Achilles healing. The flutter kick maintains this protective position, and you can stay fit during recovery when exercising with one leg is otherwise difficult.",
+        whereTitle: "Where to Swim",
+        poolTitle: "Pools (Recommended)",
+        poolText:
+            "The safest choice. Calm water, pool edge for support, and controlled environment make entry and exit easier.",
+        seaTitle: "Sea (Be Cautious)",
+        seaText:
+            "Possible but requires extra care. Watch for waves. Always rinse splint with fresh water after to remove salt.",
+        vsTitle: "Why Our Splint Beats Boot Covers",
+        vsText: "Limbo covers only protect your boot—you'd still wear that heavy, uncomfortable boot in the water. Our splint actually supports your Achilles tendon while handling water well. Lightweight, comfortable, and therapeutic.",
+        factTitle: "Did you know?",
+        factText:
+            "Some surgeons make custom swimming splints for their patients using moldable plastic and neoprene. It shows swimming with Achilles support isn't just possible—it's recommended by medical professionals. You're welcome to try making one yourself, but our professionally designed splint makes it much easier.",
+        maintenanceTitle: "After Swimming",
+        maintenanceText:
+            "Rinse your splint with fresh water and let it air dry. That's it!",
+    },
+    de: {
+        safetyTitle: "Wesentliche Sicherheitsregeln",
+        rule1Title: "Holen Sie sich immer zuerst die ärztliche Freigabe",
+        rule1Text:
+            "Holen Sie sich die Freigabe Ihres Chirurgen oder Physiotherapeuten.",
+        rule2Title: "Niemals Gewicht auf den verletzten Fuß legen",
+        rule2Text:
+            "Nutzen Sie eine Poolleiter, setzen und rutschen Sie hinein, oder lassen Sie sich helfen.",
+        rule3Title: "Warten Sie auf Wundheilung",
+        rule3Text:
+            "Stellen Sie sicher, dass Ihre Operationsnaht vollständig verheilt ist.",
+        whyTitle: "Warum Schwimmen perfekt für die Achillessehnen-Genesung ist",
+        whyText:
+            "Ihr Fuß bleibt beim Schwimmen natürlich in Plantarflexion (Zehenspitzen) - genau die sichere Position. Der Flatterstoß hält diese Schutzposition bei, und Sie können fit bleiben, wenn Übungen mit einem Bein sonst schwierig sind.",
+        whereTitle: "Wo schwimmen",
+        poolTitle: "Pools (Empfohlen)",
+        poolText:
+            "Die sicherste Wahl. Ruhiges Wasser, Poolrand zur Unterstützung und kontrollierte Umgebung.",
+        seaTitle: "Meer (Vorsichtig sein)",
+        seaText:
+            "Möglich, aber erfordert zusätzliche Vorsicht. Achten Sie auf Wellen. Spülen Sie die Schiene danach mit Süßwasser ab.",
+        vsTitle: "Warum unsere Schiene besser ist als Stiefelabdeckungen",
+        vsText: "Limbo-Abdeckungen schützen nur Ihren Stiefel—Sie würden immer noch diesen schweren Stiefel im Wasser tragen. Unsere Schiene unterstützt tatsächlich Ihre Achillessehne. Leicht, bequem und therapeutisch.",
+        factTitle: "Wussten Sie?",
+        factText:
+            "Einige Chirurgen machen individuelle Schwimmschienen für ihre Patienten mit formbarem Kunststoff und Neopren. Es zeigt, dass Schwimmen mit Achillessehnen-Unterstützung nicht nur möglich ist - es wird von Medizinern empfohlen. Sie können gerne versuchen, eine selbst zu machen, aber unsere professionell gestaltete Schiene macht es viel einfacher.",
+        maintenanceTitle: "Nach dem Schwimmen",
+        maintenanceText:
+            "Spülen Sie Ihre Schiene mit Süßwasser ab und lassen Sie sie an der Luft trocknen. Das war's!",
+    },
+    fr: {
+        safetyTitle: "Règles de sécurité essentielles",
+        rule1Title: "Obtenez toujours une autorisation médicale d'abord",
+        rule1Text:
+            "Obtenez l'autorisation de votre chirurgien ou physiothérapeute.",
+        rule2Title: "Ne jamais mettre de poids sur le pied blessé",
+        rule2Text:
+            "Utilisez une échelle, asseyez-vous et glissez, ou faites-vous aider.",
+        rule3Title: "Attendez la guérison de la plaie",
+        rule3Text: "Assurez-vous que votre incision est complètement guérie.",
+        whyTitle:
+            "Pourquoi la natation est parfaite pour la récupération d'Achille",
+        whyText:
+            "Votre pied reste naturellement en flexion plantaire (orteils pointés) pendant la natation - exactement la position sûre. Le battement de jambes maintient cette position protectrice, et vous pouvez rester en forme quand l'exercice à une jambe est difficile.",
+        whereTitle: "Où nager",
+        poolTitle: "Piscines (Recommandé)",
+        poolText:
+            "Le choix le plus sûr. Eau calme, bord de piscine pour support et environnement contrôlé.",
+        seaTitle: "Mer (Soyez prudent)",
+        seaText:
+            "Possible mais nécessite une attention supplémentaire. Attention aux vagues. Rincez l'attelle à l'eau douce après.",
+        vsTitle: "Pourquoi notre attelle est meilleure que les couvre-bottes",
+        vsText: "Les couvres Limbo protègent seulement votre botte—vous porteriez encore cette botte lourde dans l'eau. Notre attelle soutient réellement votre tendon d'Achille. Légère, confortable et thérapeutique.",
+        factTitle: "Le saviez-vous?",
+        factText:
+            "Certains chirurgiens fabriquent des attelles de natation personnalisées pour leurs patients avec du plastique et du néoprène. Cela montre que nager avec un soutien d'Achille n'est pas seulement possible—c'est recommandé. Vous pouvez essayer d'en fabriquer une, mais notre attelle professionnelle est beaucoup plus facile.",
+        maintenanceTitle: "Après la natation",
+        maintenanceText:
+            "Rincez votre attelle à l'eau douce et laissez sécher à l'air. C'est tout!",
+    },
+    es: {
+        safetyTitle: "Reglas de seguridad esenciales",
+        rule1Title: "Obtenga siempre autorización médica primero",
+        rule1Text: "Obtenga autorización de su cirujano o fisioterapeuta.",
+        rule2Title: "Nunca ponga peso en su pie lesionado",
+        rule2Text:
+            "Use una escalera de piscina, siéntese y deslícese, o pida ayuda.",
+        rule3Title: "Espere la curación de la herida",
+        rule3Text: "Asegúrese de que su incisión esté completamente curada.",
+        whyTitle: "Por qué nadar es perfecto para la recuperación del Aquiles",
+        whyText:
+            "Su pie permanece naturalmente en flexión plantar (dedos puntiagudos) durante la natación - exactamente la posición segura. La patada flutter mantiene esta posición protectora, y puede mantenerse en forma cuando hacer ejercicio con una pierna es difícil.",
+        whereTitle: "Dónde nadar",
+        poolTitle: "Piscinas (Recomendado)",
+        poolText:
+            "La opción más segura. Agua tranquila, borde para apoyo y entorno controlado.",
+        seaTitle: "Mar (Sea cuidadoso)",
+        seaText:
+            "Posible pero requiere cuidado extra. Cuidado con las olas. Enjuague la férula con agua dulce después.",
+        vsTitle: "Por qué nuestra férula es mejor que las cubiertas de bota",
+        vsText: "Las cubiertas Limbo solo protegen su bota—aún usaría esa bota pesada en el agua. Nuestra férula realmente apoya su tendón de Aquiles. Ligera, cómoda y terapéutica.",
+        factTitle: "¿Sabía?",
+        factText:
+            "Algunos cirujanos hacen férulas de natación personalizadas para sus pacientes con plástico moldeable y neopreno. Muestra que nadar con soporte de Aquiles no solo es posible—es recomendado. Puede intentar hacer una, pero nuestra férula profesional es mucho más fácil.",
+        maintenanceTitle: "Después de nadar",
+        maintenanceText:
+            "Enjuague su férula con agua dulce y déjela secar al aire. ¡Eso es todo!",
+    },
+    it: {
+        safetyTitle: "Regole di sicurezza essenziali",
+        rule1Title: "Ottieni sempre l'autorizzazione medica prima",
+        rule1Text:
+            "Ottieni l'autorizzazione dal tuo chirurgo o fisioterapista.",
+        rule2Title: "Mai mettere peso sul piede ferito",
+        rule2Text: "Usa una scala, siediti e scivola, o fatti aiutare.",
+        rule3Title: "Aspetta la guarigione della ferita",
+        rule3Text: "Assicurati che l'incisione sia completamente guarita.",
+        whyTitle: "Perché il nuoto è perfetto per il recupero dell'Achille",
+        whyText:
+            "Il tuo piede rimane naturalmente in flessione plantare (dita puntate) durante il nuoto - esattamente la posizione sicura. Il battito mantiene questa posizione protettiva, e puoi rimanere in forma quando l'esercizio con una gamba è difficile.",
+        whereTitle: "Dove nuotare",
+        poolTitle: "Piscine (Raccomandato)",
+        poolText:
+            "La scelta più sicura. Acqua calma, bordo per supporto e ambiente controllato.",
+        seaTitle: "Mare (Fai attenzione)",
+        seaText:
+            "Possibile ma richiede attenzione extra. Attenzione alle onde. Sciacqua la stecca con acqua dolce dopo.",
+        vsTitle: "Perché la nostra stecca è meglio delle coperture",
+        vsText: "Le coperture Limbo proteggono solo lo stivale—indosseresti ancora quello stivale pesante in acqua. La nostra stecca supporta effettivamente il tuo tendine. Leggera, confortevole e terapeutica.",
+        factTitle: "Lo sapevi?",
+        factText:
+            "Alcuni chirurghi fanno stecche da nuoto personalizzate per i loro pazienti con plastica modellabile e neoprene. Mostra che nuotare con supporto dell'Achille non è solo possibile—è raccomandato. Puoi provare a farne una, ma la nostra stecca professionale è molto più facile.",
+        maintenanceTitle: "Dopo il nuoto",
+        maintenanceText:
+            "Sciacqua la tua stecca con acqua dolce e lascia asciugare all'aria. È tutto!",
+    },
+};
+
+const currentContent = guidelineContent[lang] || guidelineContent.en;
+---
+
+<div class="mx-auto px-4 py-16 container">
+    <div class="mx-auto mb-16 max-w-3xl text-center">
+        <h2
+            class="mb-4 font-semibold text-neutral-950 text-3xl md:text-4xl leading-[120%]"
+        >
+            <HighlightedParagraph paragraph={content.title} />
+        </h2>
+        <p class="text-gray-800 text-lg leading-relaxed">
+            {content.subtitle}
+        </p>
+    </div>
+
+    <div class="space-y-16 mx-auto max-w-4xl">
+        <!-- Critical Safety -->
+        <div>
+            <h3 class="mb-6 font-semibold text-neutral-900 text-2xl">
+                {currentContent.safetyTitle}
+            </h3>
+            <div class="space-y-4">
+                <div class="pl-4 border-red-500 border-l-4">
+                    <p class="font-semibold text-neutral-900 text-lg">
+                        {currentContent.rule1Title}
+                    </p>
+                    <p class="mt-1 text-gray-700">
+                        {currentContent.rule1Text}
+                    </p>
+                </div>
+
+                <div class="pl-4 border-red-500 border-l-4">
+                    <p class="font-semibold text-neutral-900 text-lg">
+                        {currentContent.rule2Title}
+                    </p>
+                    <p class="mt-1 text-gray-700">
+                        {currentContent.rule2Text}
+                    </p>
+                </div>
+
+                <div class="pl-4 border-orange-500 border-l-4">
+                    <p class="font-semibold text-neutral-900 text-lg">
+                        {currentContent.rule3Title}
+                    </p>
+                    <p class="mt-1 text-gray-700">
+                        {currentContent.rule3Text}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why It Works -->
+        <div>
+            <h3 class="mb-4 font-semibold text-neutral-900 text-2xl">
+                {currentContent.whyTitle}
+            </h3>
+            <p class="text-gray-700 text-lg leading-relaxed">
+                {currentContent.whyText}
+            </p>
+        </div>
+
+        <!-- Pool vs Sea -->
+        <div>
+            <h3 class="mb-6 font-semibold text-neutral-900 text-2xl">
+                {currentContent.whereTitle}
+            </h3>
+            <div class="gap-8 grid md:grid-cols-2">
+                <div>
+                    <p class="mb-2 font-semibold text-neutral-900 text-lg">
+                        🏊‍♂️ {currentContent.poolTitle}
+                    </p>
+                    <p class="text-gray-700">
+                        {currentContent.poolText}
+                    </p>
+                </div>
+                <div>
+                    <p class="mb-2 font-semibold text-neutral-900 text-lg">
+                        🌊 {currentContent.seaTitle}
+                    </p>
+                    <p class="text-gray-700">
+                        {currentContent.seaText}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Splint vs Limbo -->
+        <div>
+            <h3 class="mb-4 font-semibold text-neutral-900 text-2xl">
+                {currentContent.vsTitle}
+            </h3>
+            <p class="mb-4 text-gray-700 text-lg leading-relaxed">
+                {currentContent.vsText}
+            </p>
+        </div>
+
+        <!-- Interesting Fact -->
+        <div class="bg-primary/5 p-8 border-primary border-l-4 rounded-r">
+            <p class="mb-2 font-semibold text-neutral-900 text-lg">
+                💡 {currentContent.factTitle}
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+                {currentContent.factText}
+            </p>
+        </div>
+
+        <!-- Maintenance -->
+        <div>
+            <p class="mb-2 font-semibold text-neutral-900 text-lg">
+                💧 {currentContent.maintenanceTitle}
+            </p>
+            <p class="text-gray-700">
+                {currentContent.maintenanceText}
+            </p>
+        </div>
+    </div>
+</div>

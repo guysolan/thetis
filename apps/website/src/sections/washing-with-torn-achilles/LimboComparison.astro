@@ -1,0 +1,104 @@
+---
+import type { Lang } from "@/config/languages.ts";
+import HighlightedParagraph from "@/components/HighlightedParagraph.tsx";
+
+interface Props {
+    lang: Lang;
+    content: {
+        title: any;
+        subtitle: string;
+        comparison: {
+            thetis: { title: string; features: string[] };
+            limbo: { title: string; features: string[] };
+        };
+    };
+}
+
+const { content } = Astro.props;
+---
+
+<div class="bg-gradient-to-b from-white to-primary/15 pt-16 h-40"></div>
+<section class="bg-primary/15">
+    <div class="mx-auto px-4 container">
+        <div class="mx-auto mb-12 max-w-3xl text-center">
+            <h2
+                class="mb-4 font-semibold text-neutral-950 text-3xl md:text-4xl leading-[120%]"
+            >
+                <HighlightedParagraph paragraph={content.title} />
+            </h2>
+            <p class="text-gray-800 text-lg leading-relaxed">
+                {content.subtitle}
+            </p>
+        </div>
+
+        <div class="gap-8 grid md:grid-cols-2 mx-auto max-w-5xl">
+            <!-- Thetis Splint -->
+            <div
+                class="relative bg-white shadow-lg p-8 border-2 border-primary rounded-xl"
+            >
+                <div
+                    class="top-0 right-0 absolute bg-primary px-4 py-1 rounded-tr-lg rounded-bl-lg font-semibold text-white text-xs uppercase"
+                >
+                    Recommended
+                </div>
+                <h3 class="mb-6 font-bold text-primary text-2xl">
+                    {content.comparison.thetis.title}
+                </h3>
+                <ul class="space-y-3">
+                    {
+                        content.comparison.thetis.features.map((feature) => (
+                            <li class="flex items-start gap-3">
+                                <svg
+                                    class="flex-shrink-0 mt-1 w-5 h-5 text-green-500"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M5 13l4 4L19 7"
+                                    />
+                                </svg>
+                                <span class="text-gray-700">{feature}</span>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <!-- Limbo Cover -->
+            <div
+                class="bg-gray-50 shadow-md p-8 border border-gray-200 rounded-xl"
+            >
+                <h3 class="mb-6 font-bold text-gray-700 text-2xl">
+                    {content.comparison.limbo.title}
+                </h3>
+                <ul class="space-y-3">
+                    {
+                        content.comparison.limbo.features.map((feature) => (
+                            <li class="flex items-start gap-3">
+                                <svg
+                                    class="flex-shrink-0 mt-1 w-5 h-5 text-red-500"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                                <span class="text-gray-600">{feature}</span>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="bg-gradient-to-b from-primary/15 to-white mb-24 h-40"></div>

@@ -1,0 +1,398 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import type { Lang } from "@/config/languages.ts";
+import SleepingSplintSchema from "@/schemas/SleepingSplintSchema.astro";
+import SleepingHero from "@/sections/sleeping-with-torn-achilles/SleepingHero.astro";
+import RemoveBootBenefits from "@/sections/sleeping-with-torn-achilles/RemoveBootBenefits.astro";
+import SleepingFAQs from "@/sections/sleeping-with-torn-achilles/SleepingFAQs";
+import SleepingOrderCallout from "@/sections/sleeping-with-torn-achilles/SleepingOrderCallout.astro";
+import Reviews from "@/components/reviews/InfiniteReviews.astro";
+import KeyFeatures from "@/sections/achilles-rupture-splint/KeyFeatures.astro";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content = {
+    en: {
+        title: "Can't Sleep with a Torn Achilles? Sleep Safely Without the Boot",
+        description:
+            "Sleep safely and comfortably without your heavy walking boot. The Thetis night splint maintains a safe position while being lightweight and breathable.",
+        image: "https://thetismedical.com/images/night-splint/Thetis%20Medical%20Achilles%20Rupture%20Night%20Splint%20In%20Bed.jpg",
+        hero: {
+            title: [
+                { text: "Can't Sleep with a ", highlighted: false },
+                { text: "Torn Achilles", highlighted: true },
+                { text: "?", highlighted: false },
+            ],
+            description:
+                "You deserve a good night's sleep during your recovery. Remove that heavy boot at night and sleep safely in a safe position with our lightweight, breathable night splint designed specifically for Achilles rupture recovery.",
+        },
+        benefits: {
+            title: [
+                {
+                    text: "Finally Sleep Comfortably During Recovery",
+                    highlighted: false,
+                },
+            ],
+            subtitle:
+                "The lightweight alternative to sleeping in your heavy boot",
+            cards: [
+                {
+                    title: [
+                        { text: "Sleep Better Tonight", highlighted: false },
+                    ],
+                    description:
+                        "Experience the difference in your sleep quality. ",
+                    quote: "The boot was making sleep impossible! It felt like a torture chamber at night.",
+                },
+                {
+                    title: [{ text: "Light & Breathable", highlighted: false }],
+                    description:
+                        "Unlike the heavy boot, our splint keeps you cool and comfortable. ",
+                    quote: "So much easier than the big boot. Finally lets your leg breathe!",
+                },
+                {
+                    title: [
+                        { text: "Safe Achilles Healing", highlighted: false },
+                    ],
+                    description: "Maintains a safe position for recovery. ",
+                    quote: "Works perfect to keep my foot in a safe position. Sleep is critical to recovery.",
+                    link: {
+                        text: "3000 patients, no complications",
+                        href: "/evidence/safety",
+                    },
+                },
+                {
+                    title: [
+                        { text: "Surgeon-Approved Design", highlighted: false },
+                    ],
+                    description: "Trusted by medical professionals. ",
+                    quote: "My surgeon, who also has an MA in engineering, gave his approval after reviewing the design.",
+                    link: {
+                        text: "Read more clinician reviews",
+                        href: "/reviews?filter=clinician",
+                    },
+                },
+            ],
+        },
+    },
+    de: {
+        title: "Können Sie nicht mit einer gerissenen Achillessehne schlafen? Schlafen Sie sicher ohne Stiefel",
+        description:
+            "Schlafen Sie sicher und bequem ohne Ihren schweren Gehstiefel. Die Thetis-Nachtschiene erhält eine sichere Position bei gleichzeitig leichtem und atmungsaktivem Design.",
+        image: "https://thetismedical.com/images/night-splint/Thetis%20Medical%20Achilles%20Rupture%20Night%20Splint%20In%20Bed.jpg",
+        hero: {
+            title: [
+                { text: "Können Sie nicht mit einer ", highlighted: false },
+                { text: "gerissenen Achillessehne", highlighted: true },
+                { text: " schlafen?", highlighted: false },
+            ],
+            description:
+                "Sie verdienen eine gute Nachtruhe während Ihrer Genesung. Entfernen Sie diesen schweren Stiefel nachts und schlafen Sie sicher in einer sicheren Position mit unserer leichten, atmungsaktiven Nachtschiene.",
+        },
+        benefits: {
+            title: [
+                {
+                    text: "Endlich bequem schlafen während der Erholung",
+                    highlighted: false,
+                },
+            ],
+            subtitle:
+                "Die leichte Alternative zum Schlafen im schweren Stiefel",
+            cards: [
+                {
+                    title: [
+                        {
+                            text: "Schlafen Sie heute Nacht besser",
+                            highlighted: false,
+                        },
+                    ],
+                    description:
+                        "Erleben Sie den Unterschied in Ihrer Schlafqualität. ",
+                    quote: "Der Stiefel machte das Schlafen unmöglich! Es fühlte sich nachts wie eine Folterkammer an.",
+                },
+                {
+                    title: [
+                        { text: "Leicht & Atmungsaktiv", highlighted: false },
+                    ],
+                    description:
+                        "Anders als der schwere Stiefel hält unsere Schiene Sie kühl und bequem. ",
+                    quote: "So viel einfacher als der große Stiefel. Lässt Ihr Bein endlich atmen!",
+                },
+                {
+                    title: [
+                        {
+                            text: "Sichere Achilles-Heilung",
+                            highlighted: false,
+                        },
+                    ],
+                    description:
+                        "Behält die optimale Position für die Erholung bei. ",
+                    quote: "Funktioniert perfekt, um meinen Fuß in Plantarflexion zu halten. Schlaf ist entscheidend für die Erholung.",
+                    link: {
+                        text: "3000 Patienten, keine Komplikationen",
+                        href: "/evidence/safety",
+                    },
+                },
+                {
+                    title: [
+                        {
+                            text: "Chirurgisch genehmigtes Design",
+                            highlighted: false,
+                        },
+                    ],
+                    description: "Vertraut von medizinischen Fachkräften. ",
+                    quote: "Mein Chirurg, der auch einen MA in Ingenieurwesen hat, gab seine Zustimmung nach der Überprüfung des Designs.",
+                    link: {
+                        text: "Weitere Kliniker-Bewertungen lesen",
+                        href: "/reviews?filter=clinician",
+                    },
+                },
+            ],
+        },
+    },
+    fr: {
+        title: "Vous ne pouvez pas dormir avec un Achille déchiré? Dormez en sécurité sans la botte",
+        description:
+            "Dormez en toute sécurité et confortablement sans votre lourde botte de marche. L'attelle de nuit Thetis maintient une position sûre tout en étant légère et respirante.",
+        image: "https://thetismedical.com/images/night-splint/Thetis%20Medical%20Achilles%20Rupture%20Night%20Splint%20In%20Bed.jpg",
+        hero: {
+            title: [
+                {
+                    text: "Vous ne pouvez pas dormir avec un ",
+                    highlighted: false,
+                },
+                { text: "Achille déchiré", highlighted: true },
+                { text: "?", highlighted: false },
+            ],
+            description:
+                "Vous méritez une bonne nuit de sommeil pendant votre récupération. Retirez cette botte lourde la nuit et dormez en toute sécurité dans une position sûre avec notre attelle de nuit légère et respirante.",
+        },
+        benefits: {
+            title: [
+                {
+                    text: "Enfin dormir confortablement pendant la récupération",
+                    highlighted: false,
+                },
+            ],
+            subtitle:
+                "L'alternative légère pour dormir dans votre botte lourde",
+            cards: [
+                {
+                    title: [
+                        { text: "Dormez mieux ce soir", highlighted: false },
+                    ],
+                    description:
+                        "Découvrez la différence dans votre qualité de sommeil. ",
+                    quote: "La botte rendait le sommeil impossible ! On aurait dit une chambre de torture la nuit.",
+                },
+                {
+                    title: [{ text: "Léger et respirant", highlighted: false }],
+                    description:
+                        "Contrairement à la botte lourde, notre attelle vous garde au frais et à l'aise. ",
+                    quote: "Tellement plus facile que la grosse botte. Laisse enfin votre jambe respirer !",
+                },
+                {
+                    title: [
+                        {
+                            text: "Guérison sûre du tendon d'Achille",
+                            highlighted: false,
+                        },
+                    ],
+                    description:
+                        "Maintient une position optimale pour la récupération. ",
+                    quote: "Fonctionne parfaitement pour maintenir mon pied en flexion plantaire. Le sommeil est essentiel à la récupération.",
+                    link: {
+                        text: "3000 patients, aucune complication",
+                        href: "/evidence/safety",
+                    },
+                },
+                {
+                    title: [
+                        {
+                            text: "Conception approuvée par les chirurgiens",
+                            highlighted: false,
+                        },
+                    ],
+                    description: "Reconnu par les professionnels de la santé. ",
+                    quote: "Mon chirurgien, qui a également une maîtrise en ingénierie, a donné son approbation après avoir examiné la conception.",
+                    link: {
+                        text: "Lire plus d'avis de cliniciens",
+                        href: "/reviews?filter=clinician",
+                    },
+                },
+            ],
+        },
+    },
+    es: {
+        title: "¿No puede dormir con un Aquiles desgarrado? Duerma seguro sin la bota",
+        description:
+            "Duerma de forma segura y cómoda sin su pesada bota de caminar. La férula nocturna Thetis mantiene una posición segura mientras es ligera y transpirable.",
+        image: "https://thetismedical.com/images/night-splint/Thetis%20Medical%20Achilles%20Rupture%20Night%20Splint%20In%20Bed.jpg",
+        hero: {
+            title: [
+                { text: "¿No puede dormir con un ", highlighted: false },
+                { text: "Aquiles desgarrado", highlighted: true },
+                { text: "?", highlighted: false },
+            ],
+            description:
+                "Te mereces una buena noche de sueño durante tu recuperación. Quítate esa bota pesada por la noche y duerme de forma segura en una posición segura con nuestra férula nocturna ligera y transpirable.",
+        },
+        benefits: {
+            title: [
+                {
+                    text: "Finalmente duerma cómodamente durante la recuperación",
+                    highlighted: false,
+                },
+            ],
+            subtitle: "La alternativa ligera para dormir con su pesada bota",
+            cards: [
+                {
+                    title: [
+                        { text: "Duerma mejor esta noche", highlighted: false },
+                    ],
+                    description:
+                        "Experimente la diferencia en la calidad de su sueño. ",
+                    quote: "¡La bota hacía imposible dormir! Parecía una cámara de tortura por la noche.",
+                },
+                {
+                    title: [
+                        { text: "Ligero y Transpirable", highlighted: false },
+                    ],
+                    description:
+                        "A diferencia de la bota pesada, nuestra férula le mantiene fresco y cómodo. ",
+                    quote: "Mucho más fácil que la bota grande. ¡Por fin deja respirar a tu pierna!",
+                },
+                {
+                    title: [
+                        {
+                            text: "Curación segura del tendón de Aquiles",
+                            highlighted: false,
+                        },
+                    ],
+                    description:
+                        "Mantiene la posición óptima para la recuperación. ",
+                    quote: "Funciona perfectamente para mantener mi pie en flexión plantar. El sueño es crucial para la recuperación.",
+                    link: {
+                        text: "3000 pacientes, sin complicaciones",
+                        href: "/evidence/safety",
+                    },
+                },
+                {
+                    title: [
+                        {
+                            text: "Diseño aprobado por cirujanos",
+                            highlighted: false,
+                        },
+                    ],
+                    description:
+                        "Con la confianza de los profesionales médicos. ",
+                    quote: "Mi cirujano, que también tiene un máster en ingeniería, dio su aprobación tras revisar el diseño.",
+                    link: {
+                        text: "Leer más opiniones de médicos",
+                        href: "/reviews?filter=clinician",
+                    },
+                },
+            ],
+        },
+    },
+    it: {
+        title: "Non riesci a dormire con un Achille lacerato? Dormi in sicurezza senza lo stivale",
+        description:
+            "Dormi in sicurezza e comodamente senza il tuo pesante stivale da passeggio. La stecca notturna Thetis mantiene una posizione sicura pur essendo leggera e traspirante.",
+        image: "https://thetismedical.com/images/night-splint/Thetis%20Medical%20Achilles%20Rupture%20Night%20Splint%20In%20Bed.jpg",
+        hero: {
+            title: [
+                { text: "Non riesci a dormire con un ", highlighted: false },
+                { text: "Achille lacerato", highlighted: true },
+                { text: "?", highlighted: false },
+            ],
+            description:
+                "Ti meriti una buona notte di sonno durante il recupero. Rimuovi quello stivale pesante di notte e dormi in sicurezza in una posizione sicura con la nostra stecca notturna leggera e traspirante.",
+        },
+        benefits: {
+            title: [
+                {
+                    text: "Finalmente dormi comodamente durante il recupero",
+                    highlighted: false,
+                },
+            ],
+            subtitle: "L'alternativa leggera al dormire con il pesante stivale",
+            cards: [
+                {
+                    title: [
+                        { text: "Dormi meglio stanotte", highlighted: false },
+                    ],
+                    description:
+                        "Sperimenta la differenza nella qualità del tuo sonno. ",
+                    quote: "Lo stivale rendeva impossibile dormire! Sembrava una camera di tortura di notte.",
+                },
+                {
+                    title: [
+                        { text: "Leggero e Traspirante", highlighted: false },
+                    ],
+                    description:
+                        "A differenza del pesante stivale, la nostra stecca ti mantiene fresco e comodo. ",
+                    quote: "Molto più facile del grande stivale. Finalmente lascia respirare la tua gamba!",
+                },
+                {
+                    title: [
+                        {
+                            text: "Guarigione sicura del tendine d'Achille",
+                            highlighted: false,
+                        },
+                    ],
+                    description:
+                        "Mantiene la posizione ottimale per il recupero. ",
+                    quote: "Funziona perfettamente per mantenere il mio piede in flessione plantare. Il sonno è fondamentale per il recupero.",
+                    link: {
+                        text: "3000 pazienti, nessuna complicazione",
+                        href: "/evidence/safety",
+                    },
+                },
+                {
+                    title: [
+                        {
+                            text: "Design approvato dai chirurghi",
+                            highlighted: false,
+                        },
+                    ],
+                    description: "Fidato dai professionisti medici. ",
+                    quote: "Il mio chirurgo, che ha anche una laurea magistrale in ingegneria, ha dato la sua approvazione dopo aver esaminato il design.",
+                    link: {
+                        text: "Leggi più recensioni di medici",
+                        href: "/reviews?filter=clinician",
+                    },
+                },
+            ],
+        },
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<Fragment slot="head">
+    <SleepingSplintSchema />
+    <slot name="head" />
+</Fragment>
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    image={currentContent.image}
+    lang={lang}
+>
+    <main>
+        <SleepingHero lang={lang} content={currentContent.hero} />
+
+        <RemoveBootBenefits lang={lang} content={currentContent.benefits} />
+
+        <Reviews />
+
+        <SleepingFAQs lang={lang} client:load />
+
+        <SleepingOrderCallout lang={lang} />
+
+        <Reviews />
+    </main>
+</Layout>
