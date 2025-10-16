@@ -25,7 +25,7 @@ const ReviewsMasonry = ({ lang = "en" }: Props) => {
 
   const content = {
     en: {
-      title: "Hear it from the horse's mouth...",
+      title: "Trusted by Athletes, Patients & Surgeons",
       all: "All",
       athletes: "Athletes",
       clinicians: "Clinicians",
@@ -34,7 +34,7 @@ const ReviewsMasonry = ({ lang = "en" }: Props) => {
       showMore: "Show More",
     },
     es: {
-      title: "Escúchalo de primera mano...",
+      title: "Confiado por Atletas, Pacientes y Cirujanos",
       all: "Todos",
       athletes: "Atletas",
       clinicians: "Médicos",
@@ -43,7 +43,7 @@ const ReviewsMasonry = ({ lang = "en" }: Props) => {
       showMore: "Mostrar Más",
     },
     fr: {
-      title: "Écoutez-le de la bouche du cheval...",
+      title: "Approuvé par les Athlètes, Patients et Chirurgiens",
       all: "Tous",
       athletes: "Athlètes",
       clinicians: "Cliniciens",
@@ -52,7 +52,7 @@ const ReviewsMasonry = ({ lang = "en" }: Props) => {
       showMore: "Afficher Plus",
     },
     de: {
-      title: "Hören Sie es aus erster Hand...",
+      title: "Vertraut von Athleten, Patienten & Chirurgen",
       all: "Alle",
       athletes: "Athleten",
       clinicians: "Kliniker",
@@ -61,7 +61,7 @@ const ReviewsMasonry = ({ lang = "en" }: Props) => {
       showMore: "Mehr Anzeigen",
     },
     it: {
-      title: "Ascoltalo dalla bocca del cavallo...",
+      title: "Affidato da Atleti, Pazienti e Chirurghi",
       all: "Tutti",
       athletes: "Atleti",
       clinicians: "Medici",

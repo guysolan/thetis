@@ -11,7 +11,7 @@ export const content = {
                 "Finally, a comfortable solution for sleep. Designed alongside surgeons to protect your healing Achilles tendon while you get the rest you need.",
         },
         reviewsLink: {
-            basedOn: "Over 150 5 Star Reviews",
+            basedOn: "Over 200 Verified Reviews",
         },
         checkWithCareTeam: {
             button: "Check with care team before buying",
@@ -59,7 +59,7 @@ export const content = {
                 "Endlich eine bequeme Lösung für den Schlaf. Entwickelt zusammen mit Chirurgen, um Ihre heilende Achillessehne zu schützen, während Sie die Ruhe bekommen, die Sie brauchen.",
         },
         reviewsLink: {
-            basedOn: "Über 150 5-Sterne-Bewertungen",
+            basedOn: "Über 200 verifizierte Bewertungen",
         },
         checkWithCareTeam: {
             button: "Vor dem Kauf mit dem Pflegeteam abklären",
@@ -110,7 +110,7 @@ export const content = {
                 "Enfin, une solution confortable pour dormir. Conçue en collaboration avec des chirurgiens pour protéger votre tendon d'Achille en guérison pendant que vous obtenez le repos dont vous avez besoin.",
         },
         reviewsLink: {
-            basedOn: "Plus de 150 avis 5 étoiles",
+            basedOn: "Plus de 200 avis vérifiés",
         },
         checkWithCareTeam: {
             button: "Vérifiez auprès de l'équipe de soins avant d'acheter",
@@ -160,7 +160,7 @@ export const content = {
                 "Finalmente, una solución cómoda para dormir. Diseñada junto con cirujanos para proteger su tendón de Aquiles en curación mientras obtiene el descanso que necesita.",
         },
         reviewsLink: {
-            basedOn: "Más de 150 reseñas de 5 estrellas",
+            basedOn: "Más de 200 reseñas verificadas",
         },
         checkWithCareTeam: {
             button: "Consulte con el equipo de atención antes de comprar",
@@ -210,7 +210,7 @@ export const content = {
                 "Finalmente, una soluzione comoda per dormire. Progettata insieme ai chirurghi per proteggere il tuo tendine di Achille in guarigione mentre ottieni il riposo di cui hai bisogno.",
         },
         reviewsLink: {
-            basedOn: "Oltre 150 recensioni 5 stelle",
+            basedOn: "Oltre 200 recensioni verificate",
         },
         checkWithCareTeam: {
             button: "Controlla con il team di assistenza prima di acquistare",
