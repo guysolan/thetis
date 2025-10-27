@@ -29,7 +29,7 @@ const OrderDescription = ({
     return null;
   };
 
-  const deliveryDateRange = parseDeliveryDates(deliveryDates);
+  const deliveryDateRange = parseDeliveryDates(deliveryDates ?? null);
   const hasDeliveryDates = deliveryDateRange &&
     (deliveryDateRange[0] || deliveryDateRange[1]);
 
