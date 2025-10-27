@@ -24,6 +24,20 @@ const PackageSummary = ({ items }: { items: OrderView["items"] }) => {
   );
   console.log("package summary", packageGroups);
 
+  // If no packages, show placeholder
+  if (uniquePackageIds.length === 0) {
+    return (
+      <div className="mt-8">
+        <h2 className="mb-4 font-semibold text-lg">Package Breakdown</h2>
+        <div className="bg-muted/50 p-8 border border-border rounded-lg text-center">
+          <p className="text-muted-foreground text-sm">
+            No packages defined for this order
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       {Object.entries(packageGroups).map(

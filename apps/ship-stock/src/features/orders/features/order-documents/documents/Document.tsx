@@ -17,10 +17,10 @@ import PaymentDetails, {
   type PaymentMethodKey,
 } from "../components/PaymentDetails";
 import Heading from "../components/Heading";
-import ServicesTable from "../components/ServicesTable";
 import type { Currency } from "../../../../../constants/currencies";
 import OrderItems from "../components/OrderItems";
 import ItemsManifest from "../components/ItemsManifest";
+import Financials from "../components/Financials";
 
 type DocumentType =
   | "commercialInvoice"
@@ -44,7 +44,7 @@ interface DocumentProps {
   documentType: DocumentType;
 }
 
-const Document = ({ order, options, title }: DocumentProps) => {
+const Document = ({ order, options, title, documentType }: DocumentProps) => {
   return (
     <>
       <Heading />
@@ -55,6 +55,7 @@ const Document = ({ order, options, title }: DocumentProps) => {
         currency={order.currency}
         orderId={order.order_id}
         orderDate={order.order_date as string}
+        deliveryDates={order.delivery_dates}
       />
 
       {options.shippingDetails?.show && (
@@ -70,6 +71,13 @@ const Document = ({ order, options, title }: DocumentProps) => {
         />
       )}
 
+      {(options as any).showFinancials && (
+        <Financials
+          order={order}
+          currency={order.currency as Currency}
+        />
+      )}
+
       {options.showShippingItems && (
         <ItemsWithPricing
           currency={order.currency as Currency}
@@ -77,8 +85,6 @@ const Document = ({ order, options, title }: DocumentProps) => {
           order={order}
         />
       )}
-
-      <ServicesTable order={order} currency={order.currency as Currency} />
 
       {(options as any).showItemsManifest && (
         <ItemsManifest orderItems={prepareOrderItems(order)} />

@@ -56,8 +56,8 @@ const ItemsManifest = ({ orderItems }: { orderItems: OrderView["items"] }) => {
     );
 
     return (
-        <div className="mb-6">
-            <h3 className="mb-3 font-semibold text-black text-lg">Items Manifest</h3>
+        <div className="mt-8">
+            <h2 className="mb-4 font-semibold text-lg">Items Manifest</h2>
             <Table>
                 <TableHeader>
                     <TableRow>

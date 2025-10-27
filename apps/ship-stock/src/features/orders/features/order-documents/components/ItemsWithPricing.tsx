@@ -41,7 +41,10 @@ const ItemsWithPricing = ({
 
   // For shipment orders, show only items being shipped (positive quantities)
   // For other orders, group items by item_id and sum their quantities and totals
-  const filteredItems = orderItems.filter((item) => item.quantity > 0);
+  // Filter out services and items with no pricing
+  const filteredItems = orderItems.filter(
+    (item) => item.quantity > 0 && item.item_type !== "service",
+  );
 
   const groupedItems = filteredItems.reduce(
     (acc, orderItem) => {
@@ -79,6 +82,20 @@ const ItemsWithPricing = ({
     (item) => item.totalQuantity > 0,
   );
 
+  // If no items with pricing, show placeholder
+  if (invoiceItems.length === 0) {
+    return (
+      <div className="mt-8">
+        <h2 className="mb-4 font-semibold text-lg">Items with Costing</h2>
+        <div className="bg-muted/50 p-8 border border-border rounded-lg text-center">
+          <p className="text-muted-foreground text-sm">
+            No items with pricing available for this order
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   // Calculate totals
   const itemTotal = invoiceItems.reduce(
     (sum, item) => sum + item.totalPrice,
@@ -88,80 +105,75 @@ const ItemsWithPricing = ({
   const grandTotal = itemTotal + carriageAmount;
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="text-black">Description</TableHead>
-          <TableHead className="text-black">SKU</TableHead>
-          <TableHead className="text-black">Country of Origin</TableHead>
-          <TableHead className="text-black">HS Code</TableHead>
-          <TableHead className="text-black text-right">Quantity</TableHead>
-          <TableHead className="text-black text-right">Unit Price</TableHead>
-          <TableHead className="text-black text-right">Tax Rate</TableHead>
-          <TableHead className="text-black text-right">Total</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {invoiceItems.map((item) => (
-          <TableRow key={item.item_id}>
-            <TableCell className="text-black">{item.item_name}</TableCell>
-            <TableCell className="text-black">{item.sku}</TableCell>
-            <TableCell className="text-black">
-              {item.country_of_origin}
-            </TableCell>
-            <TableCell className="text-black">{item.hs_code}</TableCell>
-            <TableCell className="text-black text-right">
-              {item.totalQuantity}
-            </TableCell>
-            <TableCell className="text-black text-right">
+    <div className="mt-8">
+      <h2 className="mb-4 font-semibold text-lg">Items with Costing</h2>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="text-black">Description</TableHead>
+            <TableHead className="text-black">SKU</TableHead>
+            <TableHead className="text-black">Country of Origin</TableHead>
+            <TableHead className="text-black">HS Code</TableHead>
+            <TableHead className="text-black text-right">Quantity</TableHead>
+            <TableHead className="text-black text-right">Unit Price</TableHead>
+            <TableHead className="text-black text-right">Tax Rate</TableHead>
+            <TableHead className="text-black text-right">Total</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {invoiceItems.map((item) => (
+            <TableRow key={item.item_id}>
+              <TableCell className="text-black">{item.item_name}</TableCell>
+              <TableCell className="text-black">{item.sku}</TableCell>
+              <TableCell className="text-black">
+                {item.country_of_origin}
+              </TableCell>
+              <TableCell className="text-black">{item.hs_code}</TableCell>
+              <TableCell className="text-black text-right">
+                {item.totalQuantity}
+              </TableCell>
+              <TableCell className="text-black text-right">
+                <NumberFlow
+                  value={item.price ?? 0}
+                  format={{ style: "currency", currency: currency }}
+                />
+              </TableCell>
+              <TableCell className="text-black text-right">
+                {(item.tax ?? 0) * 100}%
+              </TableCell>
+              <TableCell className="text-black text-right">
+                <NumberFlow
+                  value={item.totalPrice}
+                  format={{ style: "currency", currency: currency }}
+                />
+              </TableCell>
+            </TableRow>
+          ))}
+          {carriageAmount > 0 && (
+            <TableRow className="border-t text-neutral-800">
+              <TableCell className="text-black">Carriage</TableCell>
+              <TableCell colSpan={6} />
+              <TableCell className="text-black text-right">
+                <NumberFlow
+                  value={carriageAmount}
+                  format={{ style: "currency", currency: currency }}
+                />
+              </TableCell>
+            </TableRow>
+          )}
+          <TableRow className="border-t">
+            <TableCell className="font-semibold text-black">Total</TableCell>
+            <TableCell colSpan={6} />
+            <TableCell className="font-semibold text-black text-right">
               <NumberFlow
-                value={item.price ?? 0}
-                format={{ style: "currency", currency: currency }}
-              />
-            </TableCell>
-            <TableCell className="text-black text-right">
-              {(item.tax ?? 0) * 100}%
-            </TableCell>
-            <TableCell className="text-black text-right">
-              <NumberFlow
-                value={item.totalPrice}
+                value={grandTotal}
                 format={{ style: "currency", currency: currency }}
               />
             </TableCell>
           </TableRow>
-        ))}
-        <TableRow className="border-t text-neutral-800">
-          <TableCell className="text-black">Subtotal</TableCell>
-          <TableCell colSpan={6} />
-          <TableCell className="text-black text-right">
-            <NumberFlow
-              value={itemTotal}
-              format={{ style: "currency", currency: currency }}
-            />
-          </TableCell>
-        </TableRow>
-        <TableRow className="border-t text-neutral-800">
-          <TableCell className="text-black">Carriage</TableCell>
-          <TableCell colSpan={6} />
-          <TableCell className="text-black text-right">
-            <NumberFlow
-              value={carriageAmount}
-              format={{ style: "currency", currency: currency }}
-            />
-          </TableCell>
-        </TableRow>
-        <TableRow className="border-t">
-          <TableCell className="font-semibold text-black">Total</TableCell>
-          <TableCell colSpan={6} />
-          <TableCell className="font-semibold text-black text-right">
-            <NumberFlow
-              value={grandTotal}
-              format={{ style: "currency", currency: currency }}
-            />
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 

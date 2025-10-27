@@ -27,9 +27,9 @@ const Package = ({ packageItemChangeId, items, index }: PackageProps) => {
   if (!packageDetails) return null;
 
   return (
-    <section className="">
+    <section className="mt-8">
       <div className="space-y-2">
-        <h2 className="mb-2 font-semibold text-black text-xl">
+        <h2 className="mb-4 font-semibold text-lg">
           Package {index + 1}
         </h2>
         <div className="flex gap-2">

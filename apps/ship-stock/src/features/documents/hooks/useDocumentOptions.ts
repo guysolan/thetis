@@ -57,7 +57,6 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                     showExporterDetails: false,
                     showFDADetails: false,
                     showExchangeRates: false,
-                    showServicesTable: true,
                 };
             case "commercialInvoice":
                 return {
@@ -98,7 +97,6 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                     showExporterDetails: true,
                     showFDADetails: true,
                     showExchangeRates: true,
-                    showServicesTable: true,
                 };
             case "invoice":
                 return {
@@ -140,7 +138,6 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                     showFDADetails: false,
                     showExchangeRates: false,
                     showSignature: true,
-                    showServicesTable: true,
                 };
             default:
                 return {
@@ -182,7 +179,6 @@ export const useDocumentOptions = (documentType: DocumentType) => {
                     showFDADetails: false,
                     showExchangeRates: false,
                     showSignature: true,
-                    showServicesTable: true,
                 };
         }
     };
@@ -243,9 +239,12 @@ export const useDocumentOptions = (documentType: DocumentType) => {
             false,
         showExchangeRates: search?.showExchangeRates ??
             defaults.showExchangeRates ?? false,
-        showServicesTable: search?.showServicesTable ??
-            defaults.showServicesTable ?? true,
     };
 
-    return documentOptions;
+    // Add extended options for purchase orders
+    return {
+        ...documentOptions,
+        showFinancials: (search as any)?.showFinancials ??
+            (defaults as any).showFinancials ?? true,
+    } as DocumentOptions;
 };

@@ -29,6 +29,17 @@ const ItemsPage = () => {
 
   return (
     <div className="space-y-6">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="font-bold text-2xl">Stock Management</h1>
+        <Button
+          onClick={() =>
+            navigate({
+              to: "/home/stock/calculator",
+            })}
+        >
+          Stock Forecast Calculator
+        </Button>
+      </div>
       <Tabs defaultValue="stockpiles">
         <TabsHeader
           tabsList={

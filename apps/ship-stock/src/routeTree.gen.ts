@@ -19,6 +19,7 @@ import { Route as HomeDirectoryRouteImport } from './routes/home/directory'
 import { Route as HomeBuildRouteImport } from './routes/home/build'
 import { Route as HomeStockIndexRouteImport } from './routes/home/stock/index'
 import { Route as HomeOrdersIndexRouteImport } from './routes/home/orders/index'
+import { Route as HomeStockCalculatorRouteImport } from './routes/home/stock/calculator'
 import { Route as HomeOrdersOrderIdIndexRouteImport } from './routes/home/orders/$orderId/index'
 import { Route as HomeStockHistoryAddressIdRouteImport } from './routes/home/stock/history.$addressId'
 import { Route as HomeOrdersOrderIdDetailsRouteImport } from './routes/home/orders/$orderId/details'
@@ -77,6 +78,11 @@ const HomeStockIndexRoute = HomeStockIndexRouteImport.update({
 const HomeOrdersIndexRoute = HomeOrdersIndexRouteImport.update({
   id: '/orders/',
   path: '/orders/',
+  getParentRoute: () => HomeRoute,
+} as any)
+const HomeStockCalculatorRoute = HomeStockCalculatorRouteImport.update({
+  id: '/stock/calculator',
+  path: '/stock/calculator',
   getParentRoute: () => HomeRoute,
 } as any)
 const HomeOrdersOrderIdIndexRoute = HomeOrdersOrderIdIndexRouteImport.update({
@@ -142,6 +148,7 @@ export interface FileRoutesByFullPath {
   '/home/directory': typeof HomeDirectoryRoute
   '/test/stock-history': typeof TestStockHistoryRoute
   '/home/': typeof HomeIndexRoute
+  '/home/stock/calculator': typeof HomeStockCalculatorRoute
   '/home/orders': typeof HomeOrdersIndexRoute
   '/home/stock': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
@@ -162,6 +169,7 @@ export interface FileRoutesByTo {
   '/home/directory': typeof HomeDirectoryRoute
   '/test/stock-history': typeof TestStockHistoryRoute
   '/home': typeof HomeIndexRoute
+  '/home/stock/calculator': typeof HomeStockCalculatorRoute
   '/home/orders': typeof HomeOrdersIndexRoute
   '/home/stock': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
@@ -184,6 +192,7 @@ export interface FileRoutesById {
   '/home/directory': typeof HomeDirectoryRoute
   '/test/stock-history': typeof TestStockHistoryRoute
   '/home/': typeof HomeIndexRoute
+  '/home/stock/calculator': typeof HomeStockCalculatorRoute
   '/home/orders/': typeof HomeOrdersIndexRoute
   '/home/stock/': typeof HomeStockIndexRoute
   '/documents/orders/$orderId/commercial-invoice': typeof DocumentsOrdersOrderIdCommercialInvoiceRoute
@@ -207,6 +216,7 @@ export interface FileRouteTypes {
     | '/home/directory'
     | '/test/stock-history'
     | '/home/'
+    | '/home/stock/calculator'
     | '/home/orders'
     | '/home/stock'
     | '/documents/orders/$orderId/commercial-invoice'
@@ -227,6 +237,7 @@ export interface FileRouteTypes {
     | '/home/directory'
     | '/test/stock-history'
     | '/home'
+    | '/home/stock/calculator'
     | '/home/orders'
     | '/home/stock'
     | '/documents/orders/$orderId/commercial-invoice'
@@ -248,6 +259,7 @@ export interface FileRouteTypes {
     | '/home/directory'
     | '/test/stock-history'
     | '/home/'
+    | '/home/stock/calculator'
     | '/home/orders/'
     | '/home/stock/'
     | '/documents/orders/$orderId/commercial-invoice'
@@ -339,6 +351,13 @@ declare module '@tanstack/react-router' {
       path: '/orders'
       fullPath: '/home/orders'
       preLoaderRoute: typeof HomeOrdersIndexRouteImport
+      parentRoute: typeof HomeRoute
+    }
+    '/home/stock/calculator': {
+      id: '/home/stock/calculator'
+      path: '/stock/calculator'
+      fullPath: '/home/stock/calculator'
+      preLoaderRoute: typeof HomeStockCalculatorRouteImport
       parentRoute: typeof HomeRoute
     }
     '/home/orders/$orderId/': {
@@ -438,6 +457,7 @@ interface HomeRouteChildren {
   HomeBuildRoute: typeof HomeBuildRoute
   HomeDirectoryRoute: typeof HomeDirectoryRoute
   HomeIndexRoute: typeof HomeIndexRoute
+  HomeStockCalculatorRoute: typeof HomeStockCalculatorRoute
   HomeOrdersIndexRoute: typeof HomeOrdersIndexRoute
   HomeStockIndexRoute: typeof HomeStockIndexRoute
   HomeOrdersOrderIdDetailsRoute: typeof HomeOrdersOrderIdDetailsRoute
@@ -449,6 +469,7 @@ const HomeRouteChildren: HomeRouteChildren = {
   HomeBuildRoute: HomeBuildRoute,
   HomeDirectoryRoute: HomeDirectoryRoute,
   HomeIndexRoute: HomeIndexRoute,
+  HomeStockCalculatorRoute: HomeStockCalculatorRoute,
   HomeOrdersIndexRoute: HomeOrdersIndexRoute,
   HomeStockIndexRoute: HomeStockIndexRoute,
   HomeOrdersOrderIdDetailsRoute: HomeOrdersOrderIdDetailsRoute,

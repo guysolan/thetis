@@ -56,7 +56,9 @@ const DocumentOptionsSheet = ({
       airwaybill: search?.shippingDetails?.airwaybill ?? true,
       referenceNumber: search?.shippingDetails?.referenceNumber ?? true,
     },
-    showShippingItems: search?.showShippingItems ?? true,
+    showFinancials: (search as any)?.showFinancials ??
+      documentType === "purchaseOrder",
+    showShippingItems: search?.showShippingItems ?? false,
     showItemsManifest: (search as any)?.showItemsManifest ?? true,
     showPackages: search?.showPackages ?? documentType === "packingList",
     from: {
@@ -168,7 +170,9 @@ const DocumentOptionsSheet = ({
           };
         } else if (key === "showSignature") newOptions.showSignature = value;
         else if (key === "showPackages") newOptions.showPackages = value;
-        else if (key === "showShippingItems") {
+        else if (key === "showFinancials") {
+          newOptions.showFinancials = value;
+        } else if (key === "showShippingItems") {
           newOptions.showShippingItems = value;
         } else if (key === "showItemsManifest") {
           newOptions.showItemsManifest = value;
@@ -224,31 +228,61 @@ const DocumentOptionsSheet = ({
                 Quick Options
               </AccordionTrigger>
               <AccordionContent>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <label className="font-medium text-sm">
-                      Items
-                    </label>
+                <div className="space-y-4">
+                  <div className="flex justify-between items-start gap-3">
+                    <div className="flex-1">
+                      <label className="block font-medium text-sm">
+                        Financials
+                      </label>
+                      <p className="mt-0.5 text-muted-foreground text-xs">
+                        Items and services with pricing, tax, and totals
+                      </p>
+                    </div>
+                    <Switch
+                      checked={pendingOptions.showFinancials}
+                      onCheckedChange={(checked) =>
+                        updateOption("showFinancials", checked)}
+                    />
+                  </div>
+                  <div className="flex justify-between items-start gap-3">
+                    <div className="flex-1">
+                      <label className="block font-medium text-sm">
+                        Items Manifest
+                      </label>
+                      <p className="mt-0.5 text-muted-foreground text-xs">
+                        Item names, SKU, origin, HS codes, and quantities
+                      </p>
+                    </div>
                     <Switch
                       checked={pendingOptions.showItemsManifest}
                       onCheckedChange={(checked) =>
                         updateOption("showItemsManifest", checked)}
                     />
                   </div>
-                  <div className="flex justify-between items-center">
-                    <label className="font-medium text-sm">
-                      Items with Pricing
-                    </label>
+                  <div className="flex justify-between items-start gap-3">
+                    <div className="flex-1">
+                      <label className="block font-medium text-sm">
+                        Items with Costing
+                      </label>
+                      <p className="mt-0.5 text-muted-foreground text-xs">
+                        Items manifest with unit prices and line totals
+                      </p>
+                    </div>
                     <Switch
                       checked={pendingOptions.showShippingItems}
                       onCheckedChange={(checked) =>
                         updateOption("showShippingItems", checked)}
                     />
                   </div>
-                  <div className="flex justify-between items-center">
-                    <label className="font-medium text-sm">
-                      Package Summary
-                    </label>
+                  <div className="flex justify-between items-start gap-3">
+                    <div className="flex-1">
+                      <label className="block font-medium text-sm">
+                        Package Breakdown
+                      </label>
+                      <p className="mt-0.5 text-muted-foreground text-xs">
+                        Physical package details with dimensions and contents
+                      </p>
+                    </div>
                     <Switch
                       checked={pendingOptions.showPackages}
                       onCheckedChange={(checked) =>
