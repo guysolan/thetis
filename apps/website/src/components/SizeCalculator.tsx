@@ -23,7 +23,6 @@ const content = {
     footLengthCm: "Foot Length (cm)",
     footLengthIn: "Foot Length (inches)",
     small: "Small",
-    medium: "Medium",
     large: "Large",
   },
   de: {
@@ -35,7 +34,6 @@ const content = {
     footLengthCm: "Fußlänge (cm)",
     footLengthIn: "Fußlänge (Zoll)",
     small: "Klein",
-    medium: "Mittel",
     large: "Groß",
   },
   fr: {
@@ -47,7 +45,6 @@ const content = {
     footLengthCm: "Longueur du pied (cm)",
     footLengthIn: "Longueur du pied (pouces)",
     small: "Petit",
-    medium: "Moyen",
     large: "Grand",
   },
   es: {
@@ -59,7 +56,6 @@ const content = {
     footLengthCm: "Longitud del pie (cm)",
     footLengthIn: "Longitud del pie (pulgadas)",
     small: "Pequeño",
-    medium: "Mediano",
     large: "Grande",
   },
   it: {
@@ -71,7 +67,6 @@ const content = {
     footLengthCm: "Lunghezza del piede (cm)",
     footLengthIn: "Lunghezza del piede (pollici)",
     small: "Piccolo",
-    medium: "Medio",
     large: "Grande",
   },
 };
@@ -93,18 +88,13 @@ const SizeCalculator: React.FC<SizeCalculatorProps> = ({ lang = "en" }) => {
         <TableBody>
           <TableRow>
             <TableCell>{t.small}</TableCell>
-            <TableCell>22-24</TableCell>
-            <TableCell>8.7-9.4</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>{t.medium}</TableCell>
-            <TableCell>24.5-26.5</TableCell>
-            <TableCell>9.6-10.4</TableCell>
+            <TableCell>&lt; 26.5</TableCell>
+            <TableCell>&lt; 10.4</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>{t.large}</TableCell>
-            <TableCell>27-29</TableCell>
-            <TableCell>10.6-11.4</TableCell>
+            <TableCell>&ge; 26.5</TableCell>
+            <TableCell>&ge; 10.4</TableCell>
           </TableRow>
         </TableBody>
       </Table>
