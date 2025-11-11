@@ -10,9 +10,17 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+    dedupe: ["react", "react-dom", "react-hook-form"],
   },
   optimizeDeps: {
-    include: ["react-hook-form", "@hookform/resolvers", "react", "react-dom"],
+    include: [
+      "react-hook-form",
+      "@hookform/resolvers",
+      "react",
+      "react-dom",
+      "next-themes",
+      "sonner",
+    ],
   },
   build: {
     target: "es2020",
@@ -24,6 +32,9 @@ export default defineConfig({
           "form-vendor": ["react-hook-form", "@hookform/resolvers"],
         },
       },
+    },
+    commonjsOptions: {
+      include: [/node_modules/, /packages/],
     },
   },
 });

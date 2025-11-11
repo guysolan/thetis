@@ -9,7 +9,9 @@
     "build:prod": "dotenv -e .env.prod vite build --mode prod",
     "serve": "vite preview",
     "serve:prod": "dotenv -e .env.prod vite preview --mode prod",
-    "start": "vite"
+    "start": "vite",
+    "deploy": "cd ../.. && vercel deploy --prod --yes",
+    "deploy:preview": "cd ../.. && vercel deploy --yes"
   },
   "dependencies": {
     "@hookform/devtools": "^4.3.1",

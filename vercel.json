@@ -5,5 +5,27 @@
       "dev": false,
       "preview": false
     }
-  }
+  },
+  "buildCommand": "cd apps/ship-stock && bun run build",
+  "outputDirectory": "apps/ship-stock/dist",
+  "installCommand": "bun install",
+  "framework": null,
+  "ignoreCommand": "exit 0",
+  "build": {
+    "env": {
+      "ENABLE_TURBO_INSTALL": "0"
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

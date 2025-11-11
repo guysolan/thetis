@@ -10,12 +10,6 @@
       "preview": false
     }
   },
-  "functions": {
-    "app/**": {
-      "runtime": "nodejs20.x",
-      "memory": 1024
-    }
-  },
   "env": {
     "NODE_ENV": "production",
     "SKIP_ENV_VALIDATION": "true",
@@ -32,5 +26,5 @@
       ]
     }
   ],
-  "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
