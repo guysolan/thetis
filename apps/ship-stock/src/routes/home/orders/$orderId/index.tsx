@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MultiOrderForm } from "@/features/orders/features/multi-order-form/MultiOrderForm";
+import { MultiOrderFormTanStack } from "@/features/orders/features/multi-order-form/MultiOrderFormTanStack";
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { selectOrderFormValuesById } from "@/features/orders/features/order-history/api/selectOrderViewById";
 import { MultiOrderFormData } from "@/features/orders/features/multi-order-form/schema";
@@ -54,7 +54,7 @@ function RouteComponent() {
       <h1 className="mb-6 font-bold text-2xl">
         {isNewOrder ? "Create New Order" : "Edit Order"}
       </h1>
-      <MultiOrderForm
+      <MultiOrderFormTanStack
         orderId={isNewOrder ? undefined : orderId}
         defaultOrderFormValues={order?.order_form_values
           ? {

@@ -78,11 +78,6 @@ const PackagePreview = ({
                       ${packageTotal.toFixed(2)}
                     </Badge>
                   )}
-                  {isEmpty && (
-                    <Badge variant="outline" className="text-gray-500 text-xs">
-                      Empty
-                    </Badge>
-                  )}
                 </div>
 
                 {/* Package name if available */}
@@ -92,42 +87,36 @@ const PackagePreview = ({
                   </div>
                 )}
 
-                {/* Package items list or empty state */}
-                {isEmpty
-                  ? (
-                    <div className="py-2 text-center">
-                      <div className="text-gray-500 text-xs">No items</div>
-                    </div>
-                  )
-                  : (
-                    <div className="space-y-1">
-                      <div className="space-y-1 max-h-20 overflow-y-auto">
-                        {packageOrderItems.map((item) => {
-                          const itemDetails = itemsView?.find(
-                            (i) => String(i.item_id) === item.item_id,
-                          );
-                          return (
-                            <div
-                              key={`${item.item_id}-${item.item_name}-${item.package_item_change_id}`}
-                              className="text-gray-700 text-xs"
-                            >
-                              <div className="font-medium">
-                                {itemDetails?.item_name ||
-                                  item.item_name ||
-                                  `Item ${item.item_id}`} ×{" "}
-                                {Math.abs(item.quantity_change || 0)}
-                              </div>
-                              {showValue && item.item_total && (
-                                <div className="mt-0.5 text-gray-600">
-                                  ${item.item_total.toFixed(2)}
-                                </div>
-                              )}
+                {/* Package items list */}
+                {!isEmpty && (
+                  <div className="space-y-1">
+                    <div className="space-y-1 max-h-20 overflow-y-auto">
+                      {packageOrderItems.map((item) => {
+                        const itemDetails = itemsView?.find(
+                          (i) => String(i.item_id) === item.item_id,
+                        );
+                        return (
+                          <div
+                            key={`${item.item_id}-${item.item_name}-${item.package_item_change_id}`}
+                            className="text-gray-700 text-xs"
+                          >
+                            <div className="font-medium">
+                              {itemDetails?.item_name ||
+                                item.item_name ||
+                                `Item ${item.item_id}`} ×{" "}
+                              {Math.abs(item.quantity_change || 0)}
                             </div>
-                          );
-                        })}
-                      </div>
+                            {showValue && item.item_total && (
+                              <div className="mt-0.5 text-gray-600">
+                                ${item.item_total.toFixed(2)}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
-                  )}
+                  </div>
+                )}
 
                 {/* Package dimensions */}
                 {selectedPackage && (
@@ -157,22 +146,6 @@ const PackagePreview = ({
           );
         })}
       </div>
-
-      {showValue && totalValue > 0 && (
-        <div className="pt-2 border-gray-200 border-t">
-          <div className="flex justify-between items-center">
-            <span className="font-medium text-gray-700 text-sm">
-              Total Value:
-            </span>
-            <Badge
-              variant="default"
-              className="px-2 py-1 font-semibold text-base"
-            >
-              ${totalValue.toFixed(2)}
-            </Badge>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

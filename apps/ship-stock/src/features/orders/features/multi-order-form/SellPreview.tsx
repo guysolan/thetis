@@ -85,10 +85,8 @@ const SellPreview = ({ orderItems, packageItems, mode }: SellPreviewProps) => {
             {totalValue > 0 && (
               <div className="pt-3 border-gray-200 border-t">
                 <div className="flex justify-between items-center">
-                  <span className="font-medium text-gray-700 text-sm">
-                    Order Total:
-                  </span>
-                  <span className="font-semibold text-green-600 text-lg">
+                  <span className="text-sm">Order Total:</span>
+                  <span className="font-bold">
                     ${totalValue.toFixed(2)}
                   </span>
                 </div>
