@@ -239,7 +239,7 @@ const StockItemRowCells = ({
             <SelectContent>
               {packageItems.map((item, index) => (
                 <SelectItem
-                  key={item.package_item_change_id}
+                  key={`package-${index}-${item.package_item_change_id}`}
                   value={String(item.package_item_change_id)}
                 >
                   Package {index + 1}

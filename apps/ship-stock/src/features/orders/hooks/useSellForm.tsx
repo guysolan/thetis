@@ -27,6 +27,7 @@ export const useSellForm = () => {
                 item_name: item?.item_name,
                 item_type: item?.item_type || "product",
                 quantity_change: -Number(orderItem.quantity_change),
+                package_item_change_id: orderItem.package_item_change_id,
             };
         });
 

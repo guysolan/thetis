@@ -117,6 +117,7 @@ function processOrderItems(producedItems: ItemChange[], items: ItemView[]) {
       item_name: itemInView.item_name,
       item_type: itemInView.item_type,
       quantity_change: producedItem.quantity_change,
+      package_item_change_id: producedItem.package_item_change_id,
     });
 
     // 1.a.i. If it's a part, add to order_items
@@ -138,12 +139,12 @@ function processOrderItems(producedItems: ItemChange[], items: ItemView[]) {
     // 1.b. Process each component
     (itemInView.components || []).forEach((component) => {
       const requiredQuantity = calculateRequiredQuantity(
-        component.component_quantity,
+        Number(component.component_quantity),
         producedItem.quantity_change,
       );
-
+      if (!component) return;
       // 1.b.i. If component is a service, add to order_items
-      if (component.component_type === "service") {
+      if (component?.component_type === "service") {
         orderItems.push({
           item_id: String(component.component_id),
           quantity_change: requiredQuantity,
@@ -163,6 +164,7 @@ function processOrderItems(producedItems: ItemChange[], items: ItemView[]) {
           item_name: component.component_name,
           item_type: "part",
           quantity_change: -requiredQuantity,
+          package_item_change_id: producedItem.package_item_change_id,
         });
       }
     });

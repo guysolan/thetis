@@ -37,7 +37,7 @@ export type OrderItemInView = {
     "item_name": string;
     "item_type": string;
     "package_item_change_id"?: string;
-    address: Address;
+    address: Address["Row"];
 };
 export interface OrderView {
     order_form_value: MultiOrderFormData;

@@ -1,401 +1,169 @@
-import { createFileRoute } from "@tanstack/react-router";
-import React from "react";
-import {
-    OrderWithDetails,
-    useSelectOrderById,
-} from "@/features/orders/api/selectOrderById";
-import { useSelectAddresses } from "@/features/stockpiles/api/selectAddresses";
-import { useSelectItems } from "@/features/items/api/selectItems";
-import { EditableOrderItemChange } from "@/features/orders/components/EditableOrderItemChange";
-import { EditableItemChange } from "@/features/orders/components/EditableItemChange";
-import { EditableOrder } from "@/features/orders/components/EditableOrder";
-import { ComboboxOption } from "@/components/Combobox";
-import { Card, CardContent, CardHeader, CardTitle } from "@thetis/ui/card";
-import { Badge } from "@thetis/ui/badge";
-import { Separator } from "@thetis/ui/separator";
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@thetis/ui/accordion";
-import { ArrowRight } from "lucide-react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { selectOrderFormValuesById } from "@/features/orders/features/order-history/api/selectOrderViewById";
+import { MultiOrderFormData } from "@/features/orders/features/multi-order-form/schema";
+import { useEffect, useMemo } from "react";
+import { OrderFormStepper, type Step } from "@/components/OrderFormStepper";
+import { OrderFormNavigation } from "@/components/OrderFormNavigation";
+import { OrderDetailsPage } from "@/features/orders/features/multi-order-form/pages/OrderDetailsPage";
+import { useForm as useTanStackForm } from "@tanstack/react-form";
+import { saveOrderDetails } from "@/features/orders/api/saveOrderPage";
+import { toast } from "sonner";
+import { orderDetailsSchema } from "@/features/orders/features/multi-order-form/pages/validationSchemas";
 
-export const Route = createFileRoute("/home/orders/$orderId/details")({
-    component: RouteComponent,
+const STEPS: Step[] = [
+  { number: 1, label: "Details", key: "details" },
+  { number: 2, label: "Companies", key: "companies" },
+  { number: 3, label: "Items", key: "items" },
+  { number: 4, label: "Logistics", key: "logistics" },
+];
+
+const getDefaultNewOrder = (): MultiOrderFormData => ({
+  order_type: "sale",
+  order_date: new Date().toISOString(),
+  from_company_id: "",
+  from_billing_address_id: "",
+  from_shipping_address_id: "",
+  to_company_id: "",
+  to_billing_address_id: "",
+  to_shipping_address_id: "",
+  company_id: "",
+  unit_of_measurement: "metric",
+  currency: "GBP",
+  carriage: 0,
+  delivery_dates: [null, null],
+  package_items: [],
+  order_items: [],
+  consumed_items: [],
+  produced_items: [],
+  from_items: [],
+  to_items: [],
+  reason_for_export: null,
+  shipment_number: null,
+  airwaybill: null,
+  mode_of_transport: null,
+  incoterms: null,
+  mode: "direct",
+  item_type: "product",
 });
 
-// Types for flow display
-type FlowItem = {
-    quantity: number;
-    price: number;
-    from?: string;
-    to?: string;
-    address?: string;
-    isStandalone?: boolean;
-};
-
-// Helper function to create flow items
-const createFlows = (
-    orderItemChanges: OrderWithDetails["order_item_changes"],
-): FlowItem[] => {
-    const positiveChanges = orderItemChanges.filter(
-        (change) => change.item_changes.quantity_change > 0,
-    );
-    const negativeChanges = orderItemChanges.filter(
-        (change) => change.item_changes.quantity_change < 0,
-    );
-
-    const flows: FlowItem[] = [];
-
-    if (positiveChanges.length > 0 && negativeChanges.length > 0) {
-        negativeChanges.forEach((negChange) => {
-            positiveChanges.forEach((posChange) => {
-                flows.push({
-                    quantity: Math.abs(negChange.item_changes.quantity_change),
-                    price: negChange.price || posChange.price || 0,
-                    from: negChange.item_changes.addresses?.name || "Unknown",
-                    to: posChange.item_changes.addresses?.name || "Unknown",
-                });
-            });
-        });
-    } else {
-        orderItemChanges.forEach((change) => {
-            flows.push({
-                quantity: change.item_changes.quantity_change,
-                price: change.price || 0,
-                address: change.item_changes.addresses?.name || "Unknown",
-                isStandalone: true,
-            });
-        });
-    }
-
-    return flows;
-};
-
-// Helper function to render flow badge
-const renderFlowBadge = (
-    flow: FlowItem,
-    currency: string,
-    itemId: string,
-    idx: number,
-) => {
-    if (flow.isStandalone) {
-        return (
-            <Badge variant="outline" className="text-xs">
-                {flow.quantity > 0 ? "+" : ""}
-                {flow.quantity} units @ {currency}
-                {flow.price.toFixed(2)} • {flow.address}
-            </Badge>
-        );
-    }
-
-    return (
-        <div className="flex items-center gap-2 text-sm">
-            <Badge variant="outline">
-                {flow.quantity} units @ {flow.price.toFixed(2)} {currency}
-            </Badge>
-            <span className="font-medium text-muted-foreground">
-                {flow.from}
-            </span>
-            <ArrowRight className="w-3 h-3 text-muted-foreground" />
-            <span className="font-medium text-muted-foreground">{flow.to}</span>
-        </div>
-    );
-};
+export const Route = createFileRoute("/home/orders/$orderId/details")({
+  component: RouteComponent,
+});
 
 function RouteComponent() {
-    const { orderId } = Route.useParams();
-    const { data: order, isLoading: orderLoading } = useSelectOrderById(
-        orderId,
-    );
-    const { data: addresses, isLoading: addressesLoading } =
-        useSelectAddresses();
-    const { data: items, isLoading: itemsLoading } = useSelectItems();
+  const { orderId } = Route.useParams();
+  const navigate = useNavigate();
+  const isNewOrder = orderId === "new";
 
-    // Convert addresses to combobox options - must be called before early returns
-    const addressOptions: ComboboxOption[] = React.useMemo(
-        () =>
-            addresses?.map((address) => ({
-                value: address.id.toString(),
-                label: address.name || `${address.line_1}, ${address.city}` ||
-                    "Unnamed Address",
-            })) || [],
-        [addresses],
-    );
+  const defaultNewOrder = useMemo(() => getDefaultNewOrder(), []);
 
-    // Convert item_changes from this order to combobox options for package selection
-    const packageItemOptions: ComboboxOption[] = React.useMemo(
-        () => {
-            if (!order) return [];
+  const { data: order } = useSuspenseQuery({
+    queryKey: ["select-order", orderId],
+    queryFn: () => {
+      if (isNewOrder) {
+        return { order_form_values: defaultNewOrder };
+      }
+      return selectOrderFormValuesById(orderId);
+    },
+  });
 
-            // Get all item_changes from this order that could be packages
-            // The package_item_change_id references item_changes.id, not items.id
-            const itemChangeOptions = order.order_item_changes
-                .map((orderItemChange) => ({
-                    value: orderItemChange.item_change_id.toString(),
-                    label: `${orderItemChange.item_changes.items.name} (${
-                        orderItemChange.item_changes.quantity_change > 0
-                            ? "+"
-                            : ""
-                    }${orderItemChange.item_changes.quantity_change} @ ${
-                        orderItemChange.item_changes.addresses?.name ||
-                        "Unknown Address"
-                    })`,
-                    itemChange: orderItemChange.item_changes,
-                }))
-                // Remove duplicates by item_change_id
-                .filter((option, index, self) =>
-                    index === self.findIndex((o) => o.value === option.value)
-                );
+  const defaultValues = useMemo(() => {
+    if (!order?.order_form_values) return getDefaultNewOrder();
 
-            return itemChangeOptions;
-        },
-        [order],
-    );
+    const formValues = {
+      ...order.order_form_values,
+      order_type: order.order_form_values.order_type || "sale",
+    };
 
-    // Convert items to combobox options for item selection
-    const itemOptions: ComboboxOption[] = React.useMemo(
-        () =>
-            items?.map((item) => ({
-                value: item.id.toString(),
-                label: `${item.name}${item.sku ? ` (${item.sku})` : ""}`,
-            })) || [],
-        [items],
-    );
+    // Parse delivery_dates if it's a JSON string
+    if (formValues.delivery_dates) {
+      if (typeof formValues.delivery_dates === "string") {
+        try {
+          formValues.delivery_dates = JSON.parse(formValues.delivery_dates);
+        } catch (e) {
+          console.error("Failed to parse delivery_dates:", e);
+          formValues.delivery_dates = [null, null];
+        }
+      }
 
-    // Group order item changes by item_id
-    const groupedOrderItems = React.useMemo(() => {
-        if (!order) return {};
-
-        return order.order_item_changes.reduce((acc, orderItemChange) => {
-            const itemId = orderItemChange.item_changes.items.id;
-            if (!acc[itemId]) {
-                acc[itemId] = {
-                    item: orderItemChange.item_changes.items,
-                    orderItemChanges: [],
-                };
-            }
-            acc[itemId].orderItemChanges.push(orderItemChange);
-            return acc;
-        }, {} as Record<number, {
-            item: typeof order.order_item_changes[0]["item_changes"]["items"];
-            orderItemChanges: typeof order.order_item_changes;
-        }>);
-    }, [order]);
-
-    // Type assertion to ensure we have the correct data structure
-    if (order && !order.order_item_changes) {
-        console.error(
-            "Received incorrect data structure - missing order_item_changes",
-            order,
-        );
-        throw new Error(
-            "Data structure mismatch: Expected OrderWithDetails but received different structure",
-        );
+      // Ensure it's an array
+      if (!Array.isArray(formValues.delivery_dates)) {
+        formValues.delivery_dates = [null, null];
+      }
     }
 
-    // Show loading state while any data is loading
-    if (orderLoading || addressesLoading || itemsLoading) {
-        return <div>Loading...</div>;
+    return formValues;
+  }, [order?.order_form_values]);
+
+  const form = useTanStackForm({
+    defaultValues,
+  });
+
+  // Update form when order data changes
+  useEffect(() => {
+    if (defaultValues && order?.order_form_values) {
+      // Set all values including nested ones
+      Object.entries(defaultValues).forEach(([key, value]) => {
+        form.setFieldValue(key as any, value as never, { dontValidate: true });
+      });
+    }
+  }, [order?.order_form_values, form]);
+
+  const handleNext = async () => {
+    const values = form.state.values;
+
+    // Validate
+    const validationResult = orderDetailsSchema.safeParse(values);
+    if (!validationResult.success) {
+      const errorMessages = validationResult.error?.errors
+        .map((e) => e.message)
+        .join(", ");
+      toast.error(
+        `Please fix validation errors: ${errorMessages || "Invalid data"}`,
+      );
+      return;
     }
 
-    // Ensure we have all required data before rendering
-    if (!order || !addresses || !items) {
-        return <div>Loading data...</div>;
+    try {
+      const savedOrderId = await saveOrderDetails({
+        order_type: values.order_type,
+        order_date: values.order_date,
+        currency: values.currency,
+        delivery_dates: values.delivery_dates,
+        unit_of_measurement: values.unit_of_measurement,
+        orderId: isNewOrder ? undefined : Number(orderId),
+      });
+      toast.success("Order details saved");
+      navigate({ to: `/home/orders/${savedOrderId}/companies` });
+    } catch (error) {
+      console.error("Error saving order details:", error);
+      toast.error(
+        `Failed to save: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
+      );
     }
+  };
 
-    return (
-        <div className="space-y-6 mx-auto p-6 container">
-            {/* Order Header */}
-            <section className="flex items-center gap-2">
-                <h1 className="font-bold text-2xl">Order #{order.id}</h1>
-                <Badge variant="outline">{order.order_type}</Badge>
-            </section>
+  return (
+    <div className="mx-auto">
+      <h1 className="mb-6 font-bold text-2xl">
+        {isNewOrder ? "Create New Order" : "Edit Order"}
+      </h1>
 
-            {/* Editable Order Information */}
-            <EditableOrder order={order} />
+      <div className="flex flex-col gap-y-6 w-full">
+        <OrderFormStepper
+          steps={STEPS}
+          currentStep={1}
+          onStepClick={undefined}
+        />
 
-            {/* Order Items */}
-            <Card>
-                <CardHeader>
-                    <CardTitle>Order Items</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <Accordion type="multiple" className="space-y-4 w-full">
-                        {Object.entries(groupedOrderItems).map(
-                            ([itemId, { item, orderItemChanges }]) => {
-                                const flows = createFlows(orderItemChanges);
-
-                                return (
-                                    <AccordionItem
-                                        key={itemId}
-                                        value={itemId}
-                                        className=""
-                                    >
-                                        <AccordionTrigger className="px-4 py-4">
-                                            <div className="flex justify-between items-center mr-4 w-full">
-                                                <div className="flex items-center gap-2">
-                                                    <Badge
-                                                        variant="outline"
-                                                        className="text-xs"
-                                                    >
-                                                        {item.type}
-                                                    </Badge>
-                                                    <span className="font-semibold text-base">
-                                                        {item.name}
-                                                    </span>
-                                                    {item.sku && (
-                                                        <span className="text-muted-foreground text-sm">
-                                                            ({item.sku})
-                                                        </span>
-                                                    )}
-                                                </div>
-
-                                                {/* Flow display moved to right */}
-                                                <div className="flex items-center gap-2">
-                                                    {flows.map((flow, idx) => (
-                                                        <div
-                                                            key={`flow-${itemId}-${idx}-${flow.quantity}`}
-                                                            className="flex items-center gap-2"
-                                                        >
-                                                            {renderFlowBadge(
-                                                                flow,
-                                                                order
-                                                                    .currency ||
-                                                                    "£",
-                                                                itemId,
-                                                                idx,
-                                                            )}
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </AccordionTrigger>
-                                        <AccordionContent className="px-4 pb-4">
-                                            <div className="space-y-6">
-                                                {/* Item Information */}
-                                                <Card>
-                                                    <CardHeader>
-                                                        <CardTitle className="text-base">
-                                                            Item Information
-                                                        </CardTitle>
-                                                    </CardHeader>
-                                                    <CardContent>
-                                                        <div className="gap-4 grid grid-cols-2 md:grid-cols-4 text-sm">
-                                                            <div>
-                                                                <p className="font-medium">
-                                                                    Name
-                                                                </p>
-                                                                <p className="text-muted-foreground">
-                                                                    {item.name}
-                                                                </p>
-                                                            </div>
-                                                            <div>
-                                                                <p className="font-medium">
-                                                                    SKU
-                                                                </p>
-                                                                <p className="text-muted-foreground">
-                                                                    {item.sku ||
-                                                                        "N/A"}
-                                                                </p>
-                                                            </div>
-                                                            <div>
-                                                                <p className="font-medium">
-                                                                    Base Price
-                                                                </p>
-                                                                <p className="text-muted-foreground">
-                                                                    {item
-                                                                        .price ||
-                                                                        "N/A"}
-                                                                </p>
-                                                            </div>
-                                                            <div>
-                                                                <p className="font-medium">
-                                                                    HS Code
-                                                                </p>
-                                                                <p className="text-muted-foreground">
-                                                                    {item
-                                                                        .hs_code ||
-                                                                        "N/A"}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </CardContent>
-                                                </Card>
-
-                                                {/* Order Item Changes for this item */}
-                                                {orderItemChanges.map((
-                                                    orderItemChange,
-                                                    changeIndex,
-                                                ) => (
-                                                    <div
-                                                        key={`${orderItemChange.order_id}-${orderItemChange.item_change_id}`}
-                                                        className="space-y-4"
-                                                    >
-                                                        <div className="flex items-center gap-2">
-                                                            <h4 className="font-medium text-md">
-                                                                Change
-                                                                #{changeIndex +
-                                                                    1}
-                                                            </h4>
-                                                            <Badge
-                                                                variant="outline"
-                                                                className="text-xs"
-                                                            >
-                                                                Qty:{" "}
-                                                                {orderItemChange
-                                                                    .item_changes
-                                                                    .quantity_change}
-                                                            </Badge>
-                                                        </div>
-
-                                                        <div className="gap-6 grid md:grid-cols-2">
-                                                            {/* Order Item Change */}
-                                                            <div>
-                                                                <h5 className="mb-3 font-medium text-sm">
-                                                                    Order Item
-                                                                    Details
-                                                                </h5>
-                                                                <EditableOrderItemChange
-                                                                    orderItemChange={orderItemChange}
-                                                                    orderId={orderId}
-                                                                    itemOptions={packageItemOptions}
-                                                                />
-                                                            </div>
-
-                                                            {/* Item Change */}
-                                                            <div>
-                                                                <h5 className="mb-3 font-medium text-sm">
-                                                                    Item Change
-                                                                    Details
-                                                                </h5>
-                                                                <EditableItemChange
-                                                                    orderItemChange={orderItemChange}
-                                                                    orderId={orderId}
-                                                                    addressOptions={addressOptions}
-                                                                    itemOptions={itemOptions}
-                                                                />
-                                                            </div>
-                                                        </div>
-
-                                                        {changeIndex <
-                                                                orderItemChanges
-                                                                        .length -
-                                                                    1 && (
-                                                            <Separator className="my-4" />
-                                                        )}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </AccordionContent>
-                                    </AccordionItem>
-                                );
-                            },
-                        )}
-                    </Accordion>
-                </CardContent>
-            </Card>
+        <div className="flex flex-col gap-y-4">
+          <OrderDetailsPage form={form} />
+          <OrderFormNavigation onNext={handleNext} />
         </div>
-    );
+      </div>
+    </div>
+  );
 }

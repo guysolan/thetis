@@ -220,21 +220,21 @@ const Financials = ({
                         </TableRow>
                     ))}
                     {carriageAmount > 0 && (
-                        <TableRow className="border-t text-neutral-800">
+                    <TableRow className="border-t text-neutral-800">
                             <TableCell className="text-black">
                                 Carriage
-                            </TableCell>
-                            <TableCell colSpan={3} />
-                            <TableCell className="text-black text-right">
-                                <NumberFlow
-                                    value={carriageAmount}
-                                    format={{
-                                        style: "currency",
-                                        currency: currency,
-                                    }}
-                                />
-                            </TableCell>
-                        </TableRow>
+                        </TableCell>
+                        <TableCell colSpan={3} />
+                        <TableCell className="text-black text-right">
+                            <NumberFlow
+                                value={carriageAmount}
+                                format={{
+                                    style: "currency",
+                                    currency: currency,
+                                }}
+                            />
+                        </TableCell>
+                    </TableRow>
                     )}
                     <TableRow className="border-t">
                         <TableCell className="font-semibold text-black">

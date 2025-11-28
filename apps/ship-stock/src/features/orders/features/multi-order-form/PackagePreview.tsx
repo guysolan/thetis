@@ -57,7 +57,7 @@ const PackagePreview = ({
 
           return (
             <div
-              key={`${pkg.package_id}-${pkg.package_item_change_id}`}
+              key={`package-${index}-${pkg.package_id}-${pkg.package_item_change_id}`}
               className={`p-3 rounded-sm border-2 ${borderColor} ${
                 isEmpty
                   ? "bg-gray-100/50 border-dashed"
@@ -91,13 +91,13 @@ const PackagePreview = ({
                 {!isEmpty && (
                   <div className="space-y-1">
                     <div className="space-y-1 max-h-20 overflow-y-auto">
-                      {packageOrderItems.map((item) => {
+                      {packageOrderItems.map((item, itemIndex) => {
                         const itemDetails = itemsView?.find(
                           (i) => String(i.item_id) === item.item_id,
                         );
                         return (
                           <div
-                            key={`${item.item_id}-${item.item_name}-${item.package_item_change_id}`}
+                            key={`package-${index}-item-${itemIndex}-${item.item_id}-${item.package_item_change_id}`}
                             className="text-gray-700 text-xs"
                           >
                             <div className="font-medium">

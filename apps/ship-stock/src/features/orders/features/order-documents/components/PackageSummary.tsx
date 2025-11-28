@@ -43,7 +43,7 @@ const PackageSummary = ({ items }: { items: OrderView["items"] }) => {
       {Object.entries(packageGroups).map(
         ([packageItemChangeId, groupItems], index) => (
           <Package
-            key={packageItemChangeId}
+            key={`package-summary-${index}-${packageItemChangeId}`}
             packageItemChangeId={packageItemChangeId}
             items={groupItems}
             index={index}

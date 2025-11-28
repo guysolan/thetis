@@ -187,21 +187,6 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                       Edit Order
                     </Link>
                   </Button>
-                  <Button
-                    asChild
-                    variant="ghost"
-                    size="sm"
-                    className="justify-start px-2 w-full"
-                  >
-                    <Link
-                      className="flex flex-row items-center gap-2 !text-sm"
-                      to="/home/orders/$orderId/details"
-                      params={{ orderId: order.order_id.toString() }}
-                    >
-                      <Settings size={20} />
-                      Edit Details
-                    </Link>
-                  </Button>
                   <DocumentLinks
                     orderId={order.order_id.toString()}
                     orderType={order.order_type as OrderType}

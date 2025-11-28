@@ -22,7 +22,11 @@ import { Route as HomeOrdersIndexRouteImport } from './routes/home/orders/index'
 import { Route as HomeStockCalculatorRouteImport } from './routes/home/stock/calculator'
 import { Route as HomeOrdersOrderIdIndexRouteImport } from './routes/home/orders/$orderId/index'
 import { Route as HomeStockHistoryAddressIdRouteImport } from './routes/home/stock/history.$addressId'
+import { Route as HomeOrdersOrderIdViewRouteImport } from './routes/home/orders/$orderId/view'
+import { Route as HomeOrdersOrderIdLogisticsRouteImport } from './routes/home/orders/$orderId/logistics'
+import { Route as HomeOrdersOrderIdItemsRouteImport } from './routes/home/orders/$orderId/items'
 import { Route as HomeOrdersOrderIdDetailsRouteImport } from './routes/home/orders/$orderId/details'
+import { Route as HomeOrdersOrderIdCompaniesRouteImport } from './routes/home/orders/$orderId/companies'
 import { Route as DocumentsOrdersOrderIdStocktakeReportRouteImport } from './routes/documents/orders/$orderId/stocktake-report'
 import { Route as DocumentsOrdersOrderIdShippingLabelRouteImport } from './routes/documents/orders/$orderId/shipping-label'
 import { Route as DocumentsOrdersOrderIdPurchaseOrderRouteImport } from './routes/documents/orders/$orderId/purchase-order'
@@ -96,10 +100,32 @@ const HomeStockHistoryAddressIdRoute =
     path: '/stock/history/$addressId',
     getParentRoute: () => HomeRoute,
   } as any)
+const HomeOrdersOrderIdViewRoute = HomeOrdersOrderIdViewRouteImport.update({
+  id: '/orders/$orderId/view',
+  path: '/orders/$orderId/view',
+  getParentRoute: () => HomeRoute,
+} as any)
+const HomeOrdersOrderIdLogisticsRoute =
+  HomeOrdersOrderIdLogisticsRouteImport.update({
+    id: '/orders/$orderId/logistics',
+    path: '/orders/$orderId/logistics',
+    getParentRoute: () => HomeRoute,
+  } as any)
+const HomeOrdersOrderIdItemsRoute = HomeOrdersOrderIdItemsRouteImport.update({
+  id: '/orders/$orderId/items',
+  path: '/orders/$orderId/items',
+  getParentRoute: () => HomeRoute,
+} as any)
 const HomeOrdersOrderIdDetailsRoute =
   HomeOrdersOrderIdDetailsRouteImport.update({
     id: '/orders/$orderId/details',
     path: '/orders/$orderId/details',
+    getParentRoute: () => HomeRoute,
+  } as any)
+const HomeOrdersOrderIdCompaniesRoute =
+  HomeOrdersOrderIdCompaniesRouteImport.update({
+    id: '/orders/$orderId/companies',
+    path: '/orders/$orderId/companies',
     getParentRoute: () => HomeRoute,
   } as any)
 const DocumentsOrdersOrderIdStocktakeReportRoute =
@@ -157,7 +183,11 @@ export interface FileRoutesByFullPath {
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
+  '/home/orders/$orderId/companies': typeof HomeOrdersOrderIdCompaniesRoute
   '/home/orders/$orderId/details': typeof HomeOrdersOrderIdDetailsRoute
+  '/home/orders/$orderId/items': typeof HomeOrdersOrderIdItemsRoute
+  '/home/orders/$orderId/logistics': typeof HomeOrdersOrderIdLogisticsRoute
+  '/home/orders/$orderId/view': typeof HomeOrdersOrderIdViewRoute
   '/home/stock/history/$addressId': typeof HomeStockHistoryAddressIdRoute
   '/home/orders/$orderId': typeof HomeOrdersOrderIdIndexRoute
 }
@@ -178,7 +208,11 @@ export interface FileRoutesByTo {
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
+  '/home/orders/$orderId/companies': typeof HomeOrdersOrderIdCompaniesRoute
   '/home/orders/$orderId/details': typeof HomeOrdersOrderIdDetailsRoute
+  '/home/orders/$orderId/items': typeof HomeOrdersOrderIdItemsRoute
+  '/home/orders/$orderId/logistics': typeof HomeOrdersOrderIdLogisticsRoute
+  '/home/orders/$orderId/view': typeof HomeOrdersOrderIdViewRoute
   '/home/stock/history/$addressId': typeof HomeStockHistoryAddressIdRoute
   '/home/orders/$orderId': typeof HomeOrdersOrderIdIndexRoute
 }
@@ -201,7 +235,11 @@ export interface FileRoutesById {
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
+  '/home/orders/$orderId/companies': typeof HomeOrdersOrderIdCompaniesRoute
   '/home/orders/$orderId/details': typeof HomeOrdersOrderIdDetailsRoute
+  '/home/orders/$orderId/items': typeof HomeOrdersOrderIdItemsRoute
+  '/home/orders/$orderId/logistics': typeof HomeOrdersOrderIdLogisticsRoute
+  '/home/orders/$orderId/view': typeof HomeOrdersOrderIdViewRoute
   '/home/stock/history/$addressId': typeof HomeStockHistoryAddressIdRoute
   '/home/orders/$orderId/': typeof HomeOrdersOrderIdIndexRoute
 }
@@ -225,7 +263,11 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
     | '/documents/orders/$orderId/stocktake-report'
+    | '/home/orders/$orderId/companies'
     | '/home/orders/$orderId/details'
+    | '/home/orders/$orderId/items'
+    | '/home/orders/$orderId/logistics'
+    | '/home/orders/$orderId/view'
     | '/home/stock/history/$addressId'
     | '/home/orders/$orderId'
   fileRoutesByTo: FileRoutesByTo
@@ -246,7 +288,11 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
     | '/documents/orders/$orderId/stocktake-report'
+    | '/home/orders/$orderId/companies'
     | '/home/orders/$orderId/details'
+    | '/home/orders/$orderId/items'
+    | '/home/orders/$orderId/logistics'
+    | '/home/orders/$orderId/view'
     | '/home/stock/history/$addressId'
     | '/home/orders/$orderId'
   id:
@@ -268,7 +314,11 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/purchase-order'
     | '/documents/orders/$orderId/shipping-label'
     | '/documents/orders/$orderId/stocktake-report'
+    | '/home/orders/$orderId/companies'
     | '/home/orders/$orderId/details'
+    | '/home/orders/$orderId/items'
+    | '/home/orders/$orderId/logistics'
+    | '/home/orders/$orderId/view'
     | '/home/stock/history/$addressId'
     | '/home/orders/$orderId/'
   fileRoutesById: FileRoutesById
@@ -374,11 +424,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeStockHistoryAddressIdRouteImport
       parentRoute: typeof HomeRoute
     }
+    '/home/orders/$orderId/view': {
+      id: '/home/orders/$orderId/view'
+      path: '/orders/$orderId/view'
+      fullPath: '/home/orders/$orderId/view'
+      preLoaderRoute: typeof HomeOrdersOrderIdViewRouteImport
+      parentRoute: typeof HomeRoute
+    }
+    '/home/orders/$orderId/logistics': {
+      id: '/home/orders/$orderId/logistics'
+      path: '/orders/$orderId/logistics'
+      fullPath: '/home/orders/$orderId/logistics'
+      preLoaderRoute: typeof HomeOrdersOrderIdLogisticsRouteImport
+      parentRoute: typeof HomeRoute
+    }
+    '/home/orders/$orderId/items': {
+      id: '/home/orders/$orderId/items'
+      path: '/orders/$orderId/items'
+      fullPath: '/home/orders/$orderId/items'
+      preLoaderRoute: typeof HomeOrdersOrderIdItemsRouteImport
+      parentRoute: typeof HomeRoute
+    }
     '/home/orders/$orderId/details': {
       id: '/home/orders/$orderId/details'
       path: '/orders/$orderId/details'
       fullPath: '/home/orders/$orderId/details'
       preLoaderRoute: typeof HomeOrdersOrderIdDetailsRouteImport
+      parentRoute: typeof HomeRoute
+    }
+    '/home/orders/$orderId/companies': {
+      id: '/home/orders/$orderId/companies'
+      path: '/orders/$orderId/companies'
+      fullPath: '/home/orders/$orderId/companies'
+      preLoaderRoute: typeof HomeOrdersOrderIdCompaniesRouteImport
       parentRoute: typeof HomeRoute
     }
     '/documents/orders/$orderId/stocktake-report': {
@@ -460,7 +538,11 @@ interface HomeRouteChildren {
   HomeStockCalculatorRoute: typeof HomeStockCalculatorRoute
   HomeOrdersIndexRoute: typeof HomeOrdersIndexRoute
   HomeStockIndexRoute: typeof HomeStockIndexRoute
+  HomeOrdersOrderIdCompaniesRoute: typeof HomeOrdersOrderIdCompaniesRoute
   HomeOrdersOrderIdDetailsRoute: typeof HomeOrdersOrderIdDetailsRoute
+  HomeOrdersOrderIdItemsRoute: typeof HomeOrdersOrderIdItemsRoute
+  HomeOrdersOrderIdLogisticsRoute: typeof HomeOrdersOrderIdLogisticsRoute
+  HomeOrdersOrderIdViewRoute: typeof HomeOrdersOrderIdViewRoute
   HomeStockHistoryAddressIdRoute: typeof HomeStockHistoryAddressIdRoute
   HomeOrdersOrderIdIndexRoute: typeof HomeOrdersOrderIdIndexRoute
 }
@@ -472,7 +554,11 @@ const HomeRouteChildren: HomeRouteChildren = {
   HomeStockCalculatorRoute: HomeStockCalculatorRoute,
   HomeOrdersIndexRoute: HomeOrdersIndexRoute,
   HomeStockIndexRoute: HomeStockIndexRoute,
+  HomeOrdersOrderIdCompaniesRoute: HomeOrdersOrderIdCompaniesRoute,
   HomeOrdersOrderIdDetailsRoute: HomeOrdersOrderIdDetailsRoute,
+  HomeOrdersOrderIdItemsRoute: HomeOrdersOrderIdItemsRoute,
+  HomeOrdersOrderIdLogisticsRoute: HomeOrdersOrderIdLogisticsRoute,
+  HomeOrdersOrderIdViewRoute: HomeOrdersOrderIdViewRoute,
   HomeStockHistoryAddressIdRoute: HomeStockHistoryAddressIdRoute,
   HomeOrdersOrderIdIndexRoute: HomeOrdersOrderIdIndexRoute,
 }

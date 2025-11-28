@@ -40,6 +40,13 @@ export function MultiOrderFormTanStack({
 }: MultiOrderFormTanStackProps) {
     const companyId = useMyCompanyId();
 
+    // Create stable date references
+    const stableOrderDate = React.useMemo(() => new Date(), []);
+    const stableDeliveryDates = React.useMemo<[Date, Date]>(() => [
+        new Date(),
+        new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    ], []);
+
     const defaultValues = React.useMemo<Schema>(() => {
         const base: Schema = {
             order_form_values: {},
@@ -54,16 +61,13 @@ export function MultiOrderFormTanStack({
             from_contact_id: "",
             company_id: companyId ?? "",
             item_type: undefined,
-            order_date: new Date(),
+            order_date: stableOrderDate,
             order_type: defaultOrderType ?? "sale",
             mode: "package",
             currency: defaultCurrency,
             carriage: 0,
             reference_number: null,
-            delivery_dates: [
-                new Date(),
-                new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-            ],
+            delivery_dates: stableDeliveryDates,
             reason_for_export: null,
             shipment_number: null,
             airwaybill: null,
@@ -95,7 +99,13 @@ export function MultiOrderFormTanStack({
             delivery_dates: defaultOrderFormValues.delivery_dates ??
                 base.delivery_dates,
         };
-    }, [companyId, defaultOrderFormValues, defaultOrderType]);
+    }, [
+        companyId,
+        stableOrderDate,
+        stableDeliveryDates,
+        JSON.stringify(defaultOrderFormValues),
+        defaultOrderType,
+    ]);
 
     const form = useTanStackForm({
         defaultValues,

@@ -146,7 +146,9 @@ export function extractOrderItems(
 }
 
 // Updated function to handle the different item types from the schema
-const mapToFormOrderItem = (item: Record<string, unknown>): FormOrderItem => {
+export const mapToFormOrderItem = (
+	item: Record<string, unknown>,
+): FormOrderItem => {
 	console.log(
 		"🔍 mapToFormOrderItem - Input item:",
 		JSON.stringify(item, null, 2),
@@ -199,7 +201,7 @@ const mapToFormOrderItem = (item: Record<string, unknown>): FormOrderItem => {
 	return result;
 };
 
-const processBuyFormData = (
+export const processBuyFormData = (
 	formData: MultiOrderFormData,
 ): FormatOrderItemChanges[] => {
 	console.log(
@@ -297,7 +299,7 @@ const processBuyFormData = (
 	return orderItemsResult;
 };
 
-function processSellFormData(
+export function processSellFormData(
 	formData: MultiOrderFormData,
 ): FormatOrderItemChanges[] {
 	console.log(
@@ -409,7 +411,7 @@ function processSellFormData(
 	return itemChangesResult;
 }
 
-const processShipmentFormData = (
+export const processShipmentFormData = (
 	formData: MultiOrderFormData,
 ): FormatOrderItemChanges[] => {
 	const debugLog = {
@@ -613,29 +615,49 @@ const formatCreateOrderArgumentsLocal = (
 			] as [string | null, string | null]
 			: null;
 
+	// Helper function to convert empty strings to null
+	const toNullIfEmpty = (value: any): any => {
+		if (value === "" || value === undefined) return null;
+		return value;
+	};
+
+	console.log("🏗️ formatCreateOrderArgumentsLocal - INPUT formData:", {
+		from_company_id: formData.from_company_id,
+		to_company_id: formData.to_company_id,
+		from_billing_address_id: formData.from_billing_address_id,
+		from_shipping_address_id: formData.from_shipping_address_id,
+		to_billing_address_id: formData.to_billing_address_id,
+		to_shipping_address_id: formData.to_shipping_address_id,
+		company_id: formData.company_id,
+	});
+
 	const result = {
-		order_id: formData.order_id ?? null,
+		order_id: toNullIfEmpty(formData.order_id),
 		order_type: formData.order_type,
 		order_date: dayjs(formData.order_date)?.toISOString() ??
 			dayjs().toISOString(),
 		order_items: orderItems,
-		from_company_id: formData.from_company_id ?? null,
-		from_billing_address_id: formData.from_billing_address_id ?? null,
-		from_shipping_address_id: formData.from_shipping_address_id ?? null,
-		to_company_id: formData.to_company_id ?? null,
-		to_billing_address_id: formData.to_billing_address_id ?? null,
-		to_shipping_address_id: formData.to_shipping_address_id ?? null,
-		to_contact_id: formData.to_contact_id ?? null,
-		from_contact_id: formData.from_contact_id ?? null,
+		from_company_id: toNullIfEmpty(formData.from_company_id),
+		from_billing_address_id: toNullIfEmpty(
+			formData.from_billing_address_id,
+		),
+		from_shipping_address_id: toNullIfEmpty(
+			formData.from_shipping_address_id,
+		),
+		to_company_id: toNullIfEmpty(formData.to_company_id),
+		to_billing_address_id: toNullIfEmpty(formData.to_billing_address_id),
+		to_shipping_address_id: toNullIfEmpty(formData.to_shipping_address_id),
+		to_contact_id: toNullIfEmpty(formData.to_contact_id),
+		from_contact_id: toNullIfEmpty(formData.from_contact_id),
 		currency: validCurrency,
 		carriage: formData.carriage ?? 0,
-		reason_for_export: formData.reason_for_export ?? null,
-		shipment_number: formData.shipment_number ?? null,
-		airwaybill: formData.airwaybill ?? null,
-		mode_of_transport: formData.mode_of_transport ?? null,
-		incoterms: formData.incoterms ?? null,
-		unit_of_measurement: formData.unit_of_measurement ?? null,
-		company_id: formData.company_id ?? null,
+		reason_for_export: toNullIfEmpty(formData.reason_for_export),
+		shipment_number: toNullIfEmpty(formData.shipment_number),
+		airwaybill: toNullIfEmpty(formData.airwaybill),
+		mode_of_transport: toNullIfEmpty(formData.mode_of_transport),
+		incoterms: toNullIfEmpty(formData.incoterms),
+		unit_of_measurement: toNullIfEmpty(formData.unit_of_measurement),
+		company_id: toNullIfEmpty(formData.company_id),
 		delivery_dates: deliveryDates,
 	};
 
@@ -881,37 +903,54 @@ export const useCreateOrder = (orderTypeParam: string) => {
 				upsertedOrderData = newOrder;
 			} else {
 				console.log("➕ CREATING new order");
+
+				const insertData = {
+					order_type: processedInput.order_type,
+					order_date: processedInput.order_date,
+					from_company_id: processedInput.from_company_id,
+					to_company_id: processedInput.to_company_id,
+					from_contact_id: processedInput.from_contact_id,
+					to_contact_id: processedInput.to_contact_id,
+					from_billing_address_id:
+						processedInput.from_billing_address_id,
+					from_shipping_address_id:
+						processedInput.from_shipping_address_id,
+					to_billing_address_id: processedInput.to_billing_address_id,
+					to_shipping_address_id:
+						processedInput.to_shipping_address_id,
+					currency: processedInput.currency,
+					carriage: processedInput.carriage,
+					reason_for_export: processedInput.reason_for_export,
+					shipment_number: processedInput.shipment_number,
+					airwaybill: processedInput.airwaybill,
+					mode_of_transport: processedInput.mode_of_transport,
+					incoterms: processedInput.incoterms,
+					unit_of_measurement: processedInput.unit_of_measurement,
+					company_id: processedInput.company_id,
+					order_form_values: formValuesWithoutOrderId,
+					delivery_dates: processedInput.delivery_dates,
+				};
+
+				console.log("📝 INSERT DATA (checking for empty strings):", {
+					from_company_id: insertData.from_company_id,
+					to_company_id: insertData.to_company_id,
+					from_billing_address_id: insertData.from_billing_address_id,
+					from_shipping_address_id:
+						insertData.from_shipping_address_id,
+					to_billing_address_id: insertData.to_billing_address_id,
+					to_shipping_address_id: insertData.to_shipping_address_id,
+					company_id: insertData.company_id,
+					types: {
+						from_company_id: typeof insertData.from_company_id,
+						to_company_id: typeof insertData.to_company_id,
+						company_id: typeof insertData.company_id,
+					},
+				});
+
 				const { data: newOrder, error: insertOrderError } =
 					await supabase
 						.from("orders")
-						.insert({
-							order_type: processedInput.order_type,
-							order_date: processedInput.order_date,
-							from_company_id: processedInput.from_company_id,
-							to_company_id: processedInput.to_company_id,
-							from_contact_id: processedInput.from_contact_id,
-							to_contact_id: processedInput.to_contact_id,
-							from_billing_address_id:
-								processedInput.from_billing_address_id,
-							from_shipping_address_id:
-								processedInput.from_shipping_address_id,
-							to_billing_address_id:
-								processedInput.to_billing_address_id,
-							to_shipping_address_id:
-								processedInput.to_shipping_address_id,
-							currency: processedInput.currency,
-							carriage: processedInput.carriage,
-							reason_for_export: processedInput.reason_for_export,
-							shipment_number: processedInput.shipment_number,
-							airwaybill: processedInput.airwaybill,
-							mode_of_transport: processedInput.mode_of_transport,
-							incoterms: processedInput.incoterms,
-							unit_of_measurement:
-								processedInput.unit_of_measurement,
-							company_id: processedInput.company_id,
-							order_form_values: formValuesWithoutOrderId,
-							delivery_dates: processedInput.delivery_dates,
-						})
+						.insert(insertData)
 						.select()
 						.single<AppOrderType>();
 
@@ -920,6 +959,7 @@ export const useCreateOrder = (orderTypeParam: string) => {
 						"❌ Error inserting new order:",
 						insertOrderError,
 					);
+					console.error("❌ Failed insert data was:", insertData);
 					throw insertOrderError;
 				}
 				console.log(
@@ -974,14 +1014,30 @@ export const useCreateOrder = (orderTypeParam: string) => {
 			);
 
 			// Use formData.package_items directly (not filtered from order_items)
-			const packageItems = formData.order_type === "sale"
-				? []
-				: (formData.package_items || []);
-			// All items in processedInput.order_items are regular items
-			const regularItems = processedInput.order_items;
+			// Package items should be processed for all order types if they exist
+			const packageItems = formData.package_items || [];
+
+			// Filter out empty/invalid items before processing
+			const regularItems = processedInput.order_items.filter(
+				(item) =>
+					item.item_id &&
+					item.item_id.trim() !== "" &&
+					item.quantity_change !== 0 &&
+					item.address_id,
+			);
 
 			console.log("📦 Package items to process:", packageItems.length);
-			console.log("📋 Regular items to process:", regularItems.length);
+			console.log(
+				"📋 Regular items to process (after filtering):",
+				regularItems.length,
+			);
+			console.log(
+				"📋 Regular items filtered out:",
+				processedInput.order_items.length - regularItems.length,
+			);
+
+			// Map to track package_item_change_id from form data to actual item_changes.id
+			const packageItemChangeIdMap = new Map<number | null, number>();
 
 			// First, insert package items with their package_item_change_id as the ID
 			if (packageItems.length > 0) {
@@ -997,6 +1053,10 @@ export const useCreateOrder = (orderTypeParam: string) => {
 							`📦 Package item ${index + 1} details:`,
 							JSON.stringify(packageItem, null, 2),
 						);
+
+						// Store the original package_item_change_id from form data
+						const originalPackageItemChangeId =
+							packageItem.package_item_change_id;
 
 						// Generate a new ID if package_item_change_id is null
 						const itemChangeId =
@@ -1035,6 +1095,17 @@ export const useCreateOrder = (orderTypeParam: string) => {
 							throw itemChangeError;
 						}
 
+						// Map the original package_item_change_id to the actual item_changes.id
+						if (originalPackageItemChangeId !== null) {
+							packageItemChangeIdMap.set(
+								originalPackageItemChangeId,
+								itemChange.id,
+							);
+							console.log(
+								`📦 Mapped package_item_change_id ${originalPackageItemChangeId} -> item_changes.id ${itemChange.id}`,
+							);
+						}
+
 						console.log(
 							`✅ Created/Updated package item_change with ID ${itemChange.id} for package item ${
 								index + 1
@@ -1054,7 +1125,7 @@ export const useCreateOrder = (orderTypeParam: string) => {
 								price: 0, // Packages typically have no price in this context
 								tax: 0,
 								package_item_id: undefined,
-								package_item_change_id: itemChangeId, // Use the same ID we generated/used
+								package_item_change_id: itemChange.id, // Use the actual item_changes.id
 								lot_number: undefined, // Package items don't have lot numbers
 							}, { onConflict: "order_id,item_change_id" });
 
@@ -1079,6 +1150,10 @@ export const useCreateOrder = (orderTypeParam: string) => {
 
 				await Promise.all(packageItemPromises);
 				console.log("✅ All package items processed successfully!");
+				console.log(
+					`📦 Package item change ID map:`,
+					Array.from(packageItemChangeIdMap.entries()),
+				);
 			}
 
 			// Then, insert regular items with auto-generated IDs
@@ -1170,6 +1245,31 @@ export const useCreateOrder = (orderTypeParam: string) => {
 							}`,
 						);
 
+						// Resolve package_item_change_id: use mapped value if it exists, otherwise null
+						let resolvedPackageItemChangeId: number | null = null;
+						if (
+							item.package_item_change_id !== null &&
+							item.package_item_change_id !== undefined
+						) {
+							const mappedId = packageItemChangeIdMap.get(
+								item.package_item_change_id,
+							);
+							if (mappedId !== undefined) {
+								resolvedPackageItemChangeId = mappedId;
+								console.log(
+									`📋 Resolved package_item_change_id ${item.package_item_change_id} -> ${mappedId} for regular item ${
+										index + 1
+									}`,
+								);
+							} else {
+								console.warn(
+									`⚠️ package_item_change_id ${item.package_item_change_id} not found in map for regular item ${
+										index + 1
+									}, setting to null`,
+								);
+							}
+						}
+
 						console.log(
 							`📋 Upserting regular order_item_change for item ${
 								index + 1
@@ -1184,7 +1284,7 @@ export const useCreateOrder = (orderTypeParam: string) => {
 								tax: item.item_tax,
 								package_item_id: item.package_item_id,
 								package_item_change_id:
-									item.package_item_change_id,
+									resolvedPackageItemChangeId,
 								lot_number: item.lot_number,
 							}, { onConflict: "order_id,item_change_id" });
 
