@@ -12,7 +12,6 @@ import ExchangeRates from "../components/ExchangeRates";
 import { DocumentOptions } from "../../../../documents/schema";
 import Signature from "../components/signature";
 import ShippingDetails from "../components/ShippingDetails";
-import FinancialTransactions from "../../order-history/components/FinancialTransactions";
 import PaymentDetails, {
   type PaymentMethodKey,
 } from "../components/PaymentDetails";

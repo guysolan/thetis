@@ -2,7 +2,7 @@ import React from "react";
 import type { OrderView } from "../../../types";
 import OrderDescription from "../components/OrderDescription";
 import OrderTitle from "../components/OrderTitle";
-import StockMovements from '../../order-history/components/StockMovements';
+import ItemsManifest from "../components/ItemsManifest";
 
 const StocktakeReport = ({ order }: { order: OrderView }) => {
     return (
@@ -13,13 +13,7 @@ const StocktakeReport = ({ order }: { order: OrderView }) => {
                 orderId={order.order_id}
                 orderDate={order.order_date as string}
             />
-
-            <StockMovements
-                orderItems={order.items}
-                from={order.from_shipping_address}
-                to={order.to_shipping_address}
-            />
-
+            <ItemsManifest orderItems={order.items} />
         </>
     );
 };
