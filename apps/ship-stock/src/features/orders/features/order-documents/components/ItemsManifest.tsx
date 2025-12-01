@@ -69,6 +69,7 @@ const ItemsManifest = ({ orderItems }: { orderItems: OrderView["items"] }) => {
                             Country of Origin
                         </TableHead>
                         <TableHead className="text-black">HS Code</TableHead>
+                        <TableHead className="text-black">Lot Number</TableHead>
                         <TableHead className="text-black text-right">
                             Quantity
                         </TableHead>
@@ -89,6 +90,9 @@ const ItemsManifest = ({ orderItems }: { orderItems: OrderView["items"] }) => {
                             <TableCell className="text-black">
                                 {item.hs_code}
                             </TableCell>
+                            <TableCell className="text-black">
+                                {item.lot_number}
+                            </TableCell>
                             <TableCell className="text-black text-right">
                                 {item.totalQuantity}
                             </TableCell>
@@ -98,7 +102,7 @@ const ItemsManifest = ({ orderItems }: { orderItems: OrderView["items"] }) => {
                         <TableCell className="text-black">
                             Total Items
                         </TableCell>
-                        <TableCell colSpan={3} />
+                        <TableCell colSpan={4} />
                         <TableCell className="text-black text-right">
                             {contentItems.reduce(
                                 (sum, item) => sum + item.totalQuantity,
