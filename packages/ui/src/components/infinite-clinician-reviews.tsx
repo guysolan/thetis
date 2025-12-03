@@ -2,7 +2,7 @@
 
 import { cn } from "../utils";
 import React, { useEffect, useState } from "react";
-import getUnicodeFlagIcon from "country-flag-icons/unicode";
+import getUnicodeFlagIcon from "../utils/country-flag-unicode";
 
 export const InfiniteClinicianReviews = ({
   items,

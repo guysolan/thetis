@@ -2,7 +2,7 @@
 
 import { cn } from "../utils";
 import React, { useEffect, useState } from "react";
-import getUnicodeFlagIcon from "country-flag-icons/unicode";
+import getUnicodeFlagIcon from "../utils/country-flag-unicode";
 import StarIcon from "./star";
 export const InfiniteMovingCards = ({
   items,

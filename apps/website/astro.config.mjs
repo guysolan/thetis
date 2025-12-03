@@ -35,12 +35,6 @@ export default defineConfig({
   output: "server",
   adapter: vercel(),
   vite: {
-    resolve: {
-      conditions: ["import", "module", "browser", "default"],
-      alias: {
-        "country-flag-icons/unicode": "country-flag-icons/unicode/index.js",
-      },
-    },
     build: {
       rollupOptions: {
         external: ["googleapis"],
