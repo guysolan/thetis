@@ -10,7 +10,6 @@
   "outputDirectory": "apps/ship-stock/dist",
   "installCommand": "bun install",
   "framework": null,
-  "ignoreCommand": "git rev-parse --verify HEAD~1 >/dev/null 2>&1 && git diff --quiet HEAD~1 HEAD -- apps/ship-stock || exit 1",
   "build": {
     "env": {
       "ENABLE_TURBO_INSTALL": "0"
