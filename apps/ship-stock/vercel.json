@@ -3,6 +3,7 @@
   "buildCommand": "bun run build",
   "outputDirectory": "dist",
   "installCommand": "bun install --frozen-lockfile",
+  "ignoreCommand": "exit 0",
   "git": {
     "deploymentEnabled": {
       "main": true,
