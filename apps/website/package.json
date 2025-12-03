@@ -82,6 +82,7 @@
     "react-hook-form": "^7.60.0",
     "react-responsive-masonry": "2.7.1",
     "react-slick": "^0.30.3",
+    "recharts": "^2.15.1",
     "remark-toc": "^8.0.1",
     "resend": "^4.1.2",
     "schema-dts": "^1.1.2",
