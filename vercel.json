@@ -10,7 +10,7 @@
   "outputDirectory": "apps/ship-stock/dist",
   "installCommand": "bun install",
   "framework": null,
-  "ignoreCommand": "exit 0",
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet apps/ship-stock",
   "build": {
     "env": {
       "ENABLE_TURBO_INSTALL": "0"
