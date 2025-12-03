@@ -1,0 +1,55 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AffiliatesTermsContent from "../../sections/affiliates/AffiliatesTermsContent.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Thetis Medical - Affiliate Program Terms & Conditions",
+        description:
+            "Terms and conditions for Thetis Medical affiliate program. Important legal information regarding participation in our affiliate program.",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+    de: {
+        title: "Thetis Medical - Affiliate-Programm Geschäftsbedingungen",
+        description:
+            "Geschäftsbedingungen für das Thetis Medical Affiliate-Programm. Wichtige rechtliche Informationen zur Teilnahme an unserem Affiliate-Programm.",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+    fr: {
+        title: "Thetis Medical - Conditions Générales du Programme d'Affiliation",
+        description:
+            "Conditions générales du programme d'affiliation Thetis Medical. Informations légales importantes concernant la participation à notre programme d'affiliation.",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+    es: {
+        title: "Thetis Medical - Términos y Condiciones del Programa de Afiliados",
+        description:
+            "Términos y condiciones del programa de afiliados de Thetis Medical. Información legal importante sobre la participación en nuestro programa de afiliados.",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+    it: {
+        title: "Thetis Medical - Termini e Condizioni del Programma di Affiliazione",
+        description:
+            "Termini e condizioni del programma di affiliazione Thetis Medical. Informazioni legali importanti riguardo alla partecipazione al nostro programma di affiliazione.",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    image={currentContent.image}
+    lang={lang}
+>
+    <main class="bg-gradient-to-b from-primary/25 to-white w-full min-h-screen">
+        <div class="mx-auto px-4 py-16 max-w-4xl container">
+            <AffiliatesTermsContent lang={lang} />
+        </div>
+    </main>
+</Layout>

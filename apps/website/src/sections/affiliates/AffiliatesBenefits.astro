@@ -1,0 +1,116 @@
+---
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Three Ways You Win",
+        benefit1Title: "Make Patients Happier",
+        benefit1Description:
+            "Provide your patients with a clinically proven solution that improves their recovery experience. Better sleep, less discomfort, and faster healing lead to higher patient satisfaction.",
+        benefit2Title: "Save Patients Money & Hassle",
+        benefit2Description:
+            "Your patients get 10% off with your discount code, and they don't have to search for the right product. You provide them with a trusted, easy-to-order solution delivered directly to their door.",
+        benefit3Title: "Get Paid",
+        benefit3Description:
+            "Earn 10% commission on every sale you refer. Your personalized discount code (your surname in CAPS) makes it easy for patients to use, and you get paid automatically.",
+    },
+    de: {
+        title: "Drei Wege, wie Sie gewinnen",
+        benefit1Title: "Patienten glücklicher machen",
+        benefit1Description:
+            "Bieten Sie Ihren Patienten eine klinisch erprobte Lösung, die ihre Genesungserfahrung verbessert. Besserer Schlaf, weniger Beschwerden und schnellere Heilung führen zu höherer Patientenzufriedenheit.",
+        benefit2Title: "Patienten Geld und Mühe sparen",
+        benefit2Description:
+            "Ihre Patienten erhalten 10% Rabatt mit Ihrem Rabattcode und müssen nicht nach dem richtigen Produkt suchen. Sie bieten ihnen eine vertrauenswürdige, einfach zu bestellende Lösung, die direkt zu ihnen geliefert wird.",
+        benefit3Title: "Bezahlt werden",
+        benefit3Description:
+            "Verdienen Sie 10% Provision für jeden von Ihnen vermittelten Verkauf. Ihr personalisierter Rabattcode (Ihr Nachname in GROSSBUCHSTABEN) macht es Patienten leicht zu verwenden, und Sie werden automatisch bezahlt.",
+    },
+    fr: {
+        title: "Trois Façons de Gagner",
+        benefit1Title: "Rendre les Patients Plus Heureux",
+        benefit1Description:
+            "Offrez à vos patients une solution cliniquement prouvée qui améliore leur expérience de récupération. Un meilleur sommeil, moins d'inconfort et une guérison plus rapide conduisent à une satisfaction accrue des patients.",
+        benefit2Title: "Économiser de l'Argent et des Tracas aux Patients",
+        benefit2Description:
+            "Vos patients bénéficient de 10% de réduction avec votre code de réduction, et ils n'ont pas à chercher le bon produit. Vous leur fournissez une solution de confiance, facile à commander, livrée directement à leur porte.",
+        benefit3Title: "Être Payé",
+        benefit3Description:
+            "Gagnez 10% de commission sur chaque vente que vous référez. Votre code de réduction personnalisé (votre nom de famille en MAJUSCULES) facilite l'utilisation par les patients, et vous êtes payé automatiquement.",
+    },
+    es: {
+        title: "Tres Formas de Ganar",
+        benefit1Title: "Hacer Más Felices a los Pacientes",
+        benefit1Description:
+            "Proporcione a sus pacientes una solución clínicamente probada que mejora su experiencia de recuperación. Mejor sueño, menos molestias y curación más rápida conducen a una mayor satisfacción del paciente.",
+        benefit2Title: "Ahorrar Dinero y Molestias a los Pacientes",
+        benefit2Description:
+            "Sus pacientes obtienen un 10% de descuento con su código de descuento, y no tienen que buscar el producto correcto. Usted les proporciona una solución confiable y fácil de ordenar entregada directamente a su puerta.",
+        benefit3Title: "Recibir Pago",
+        benefit3Description:
+            "Gane un 10% de comisión en cada venta que refiera. Su código de descuento personalizado (su apellido en MAYÚSCULAS) facilita su uso por parte de los pacientes, y usted recibe el pago automáticamente.",
+    },
+    it: {
+        title: "Tre Modi per Vincere",
+        benefit1Title: "Rendere i Pazienti Più Felici",
+        benefit1Description:
+            "Fornisci ai tuoi pazienti una soluzione clinicamente provata che migliora la loro esperienza di guarigione. Sonno migliore, meno disagio e guarigione più rapida portano a una maggiore soddisfazione del paziente.",
+        benefit2Title: "Risparmiare Denaro e Problemi ai Pazienti",
+        benefit2Description:
+            "I tuoi pazienti ottengono il 10% di sconto con il tuo codice sconto e non devono cercare il prodotto giusto. Fornisci loro una soluzione affidabile e facile da ordinare consegnata direttamente alla loro porta.",
+        benefit3Title: "Essere Pagato",
+        benefit3Description:
+            "Guadagna il 10% di commissione su ogni vendita che riferisci. Il tuo codice sconto personalizzato (il tuo cognome in MAIUSCOLE) rende facile l'uso da parte dei pazienti e vieni pagato automaticamente.",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<section class="mx-auto px-4 py-16 max-w-7xl container">
+    <h2
+        class="mb-12 font-semibold text-neutral-950 dark:text-neutral-50 text-3xl md:text-4xl"
+    >
+        {currentContent.title}
+    </h2>
+
+    <div class="gap-8 grid md:grid-cols-3">
+        <div
+            class="bg-white dark:bg-neutral-900 shadow-sm p-8 border border-gray-200 dark:border-neutral-800 rounded-lg"
+        >
+            <div class="mb-4 text-4xl">😊</div>
+            <h3 class="mb-3 font-semibold text-primary text-xl">
+                {currentContent.benefit1Title}
+            </h3>
+            <p class="text-gray-700 dark:text-neutral-300 leading-relaxed">
+                {currentContent.benefit1Description}
+            </p>
+        </div>
+
+        <div
+            class="bg-white dark:bg-neutral-900 shadow-sm p-8 border border-gray-200 dark:border-neutral-800 rounded-lg"
+        >
+            <div class="mb-4 text-4xl">💰</div>
+            <h3 class="mb-3 font-semibold text-primary text-xl">
+                {currentContent.benefit2Title}
+            </h3>
+            <p class="text-gray-700 dark:text-neutral-300 leading-relaxed">
+                {currentContent.benefit2Description}
+            </p>
+        </div>
+
+        <div
+            class="bg-white dark:bg-neutral-900 shadow-sm p-8 border border-gray-200 dark:border-neutral-800 rounded-lg"
+        >
+            <div class="mb-4 text-4xl">💵</div>
+            <h3 class="mb-3 font-semibold text-primary text-xl">
+                {currentContent.benefit3Title}
+            </h3>
+            <p class="text-gray-700 dark:text-neutral-300 leading-relaxed">
+                {currentContent.benefit3Description}
+            </p>
+        </div>
+    </div>
+</section>

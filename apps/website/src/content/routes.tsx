@@ -408,6 +408,37 @@ export const partnerRoutes: BaseRoute[] = [
       it: "prove",
     },
   },
+  {
+    slug: "affiliates",
+    title: {
+      en: "Affiliate Program",
+      de: "Affiliate-Programm",
+      fr: "Programme d'Affiliation",
+      es: "Programa de Afiliados",
+      it: "Programma di Affiliazione",
+    },
+    description: {
+      en:
+        "Join our affiliate program and earn 10% commission while helping your patients save.",
+      de:
+        "Werden Sie unser Affiliate-Partner und verdienen Sie 10% Provision, während Sie Ihren Patienten helfen, zu sparen.",
+      fr:
+        "Rejoignez notre programme d'affiliation et gagnez 10% de commission tout en aidant vos patients à économiser.",
+      es:
+        "Únase a nuestro programa de afiliados y gane un 10% de comisión mientras ayuda a sus pacientes a ahorrar.",
+      it:
+        "Unisciti al nostro programma di affiliazione e guadagna il 10% di commissione mentre aiuti i tuoi pazienti a risparmiare.",
+    },
+    icon: <Handshake />,
+    variant: "outline",
+    slugTranslations: {
+      en: "affiliates",
+      de: "affiliate-programm",
+      fr: "programme-affiliation",
+      es: "programa-afiliados",
+      it: "programma-affiliazione",
+    },
+  },
 ];
 
 // Contact routes

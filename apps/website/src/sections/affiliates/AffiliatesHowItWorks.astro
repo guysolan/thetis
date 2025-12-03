@@ -1,0 +1,223 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "How It Works",
+        step1Title: "Sign Up",
+        step1Description:
+            "Click the registration button below to sign up for our affiliate program through Bixgrow. The registration process is quick and straightforward.",
+        step2Title: "Get Your Discount Code",
+        step2Description:
+            "Once approved, you'll receive your personalized discount code. Your discount code will be your surname in CAPS (e.g., if your surname is Smith, your code is SMITH).",
+        step3Title: "Share with Patients",
+        step3Description:
+            "Share your discount code or affiliate link with your patients. They'll get 10% off their purchase when they use your code.",
+        step4Title: "Earn Commission",
+        step4Description:
+            "When your patients make a purchase using your code or link, you'll automatically earn 10% commission. Track all your referrals and earnings in your personal dashboard.",
+        step5Title: "Get Paid",
+        step5Description:
+            "Receive periodic payouts for your commissions. All sales are tracked automatically through the Bixgrow system.",
+        ctaButton: "Register Now",
+        ctaLink: "https://f560c3-4.bixgrow.com/register",
+    },
+    de: {
+        title: "So funktioniert es",
+        step1Title: "Anmelden",
+        step1Description:
+            "Klicken Sie auf die Registrierungsschaltfläche unten, um sich über Bixgrow für unser Affiliate-Programm anzumelden. Der Registrierungsprozess ist schnell und unkompliziert.",
+        step2Title: "Erhalten Sie Ihren Rabattcode",
+        step2Description:
+            "Nach der Genehmigung erhalten Sie Ihren personalisierten Rabattcode. Ihr Rabattcode wird Ihr Nachname in GROSSBUCHSTABEN sein (z.B. wenn Ihr Nachname Müller ist, ist Ihr Code MÜLLER).",
+        step3Title: "Mit Patienten teilen",
+        step3Description:
+            "Teilen Sie Ihren Rabattcode oder Affiliate-Link mit Ihren Patienten. Sie erhalten 10% Rabatt auf ihren Kauf, wenn sie Ihren Code verwenden.",
+        step4Title: "Provision verdienen",
+        step4Description:
+            "Wenn Ihre Patienten einen Kauf mit Ihrem Code oder Link tätigen, verdienen Sie automatisch 10% Provision. Verfolgen Sie alle Ihre Empfehlungen und Einnahmen in Ihrem persönlichen Dashboard.",
+        step5Title: "Ausgezahlt werden",
+        step5Description:
+            "Erhalten Sie periodische Auszahlungen für Ihre Provisionen. Alle Verkäufe werden automatisch über das Bixgrow-System verfolgt.",
+        ctaButton: "Jetzt registrieren",
+        ctaLink: "https://f560c3-4.bixgrow.com/register",
+    },
+    fr: {
+        title: "Comment ça marche",
+        step1Title: "S'inscrire",
+        step1Description:
+            "Cliquez sur le bouton d'inscription ci-dessous pour vous inscrire à notre programme d'affiliation via Bixgrow. Le processus d'inscription est rapide et simple.",
+        step2Title: "Obtenez votre code de réduction",
+        step2Description:
+            "Une fois approuvé, vous recevrez votre code de réduction personnalisé. Votre code de réduction sera votre nom de famille en MAJUSCULES (par exemple, si votre nom est Martin, votre code est MARTIN).",
+        step3Title: "Partager avec les patients",
+        step3Description:
+            "Partagez votre code de réduction ou votre lien d'affiliation avec vos patients. Ils bénéficieront de 10% de réduction sur leur achat lorsqu'ils utiliseront votre code.",
+        step4Title: "Gagner une commission",
+        step4Description:
+            "Lorsque vos patients effectuent un achat en utilisant votre code ou votre lien, vous gagnerez automatiquement 10% de commission. Suivez toutes vos références et vos gains dans votre tableau de bord personnel.",
+        step5Title: "Être payé",
+        step5Description:
+            "Recevez des paiements périodiques pour vos commissions. Toutes les ventes sont suivies automatiquement via le système Bixgrow.",
+        ctaButton: "S'inscrire maintenant",
+        ctaLink: "https://f560c3-4.bixgrow.com/register",
+    },
+    es: {
+        title: "Cómo funciona",
+        step1Title: "Registrarse",
+        step1Description:
+            "Haga clic en el botón de registro a continuación para inscribirse en nuestro programa de afiliados a través de Bixgrow. El proceso de registro es rápido y sencillo.",
+        step2Title: "Obtenga su código de descuento",
+        step2Description:
+            "Una vez aprobado, recibirá su código de descuento personalizado. Su código de descuento será su apellido en MAYÚSCULAS (por ejemplo, si su apellido es García, su código es GARCÍA).",
+        step3Title: "Compartir con pacientes",
+        step3Description:
+            "Comparta su código de descuento o enlace de afiliado con sus pacientes. Obtendrán un 10% de descuento en su compra cuando usen su código.",
+        step4Title: "Ganar comisión",
+        step4Description:
+            "Cuando sus pacientes realicen una compra usando su código o enlace, automáticamente ganará un 10% de comisión. Rastree todas sus referencias y ganancias en su panel personal.",
+        step5Title: "Recibir pago",
+        step5Description:
+            "Reciba pagos periódicos por sus comisiones. Todas las ventas se rastrean automáticamente a través del sistema Bixgrow.",
+        ctaButton: "Registrarse ahora",
+        ctaLink: "https://f560c3-4.bixgrow.com/register",
+    },
+    it: {
+        title: "Come funziona",
+        step1Title: "Iscriviti",
+        step1Description:
+            "Clicca sul pulsante di registrazione qui sotto per iscriverti al nostro programma di affiliazione tramite Bixgrow. Il processo di registrazione è veloce e semplice.",
+        step2Title: "Ottieni il tuo codice sconto",
+        step2Description:
+            "Una volta approvato, riceverai il tuo codice sconto personalizzato. Il tuo codice sconto sarà il tuo cognome in MAIUSCOLE (ad esempio, se il tuo cognome è Rossi, il tuo codice è ROSSI).",
+        step3Title: "Condividi con i pazienti",
+        step3Description:
+            "Condividi il tuo codice sconto o link di affiliazione con i tuoi pazienti. Otterranno il 10% di sconto sul loro acquisto quando usano il tuo codice.",
+        step4Title: "Guadagna commissione",
+        step4Description:
+            "Quando i tuoi pazienti effettuano un acquisto usando il tuo codice o link, guadagnerai automaticamente il 10% di commissione. Traccia tutte le tue referenze e guadagni nel tuo pannello personale.",
+        step5Title: "Ricevi pagamento",
+        step5Description:
+            "Ricevi pagamenti periodici per le tue commissioni. Tutte le vendite sono tracciate automaticamente tramite il sistema Bixgrow.",
+        ctaButton: "Registrati ora",
+        ctaLink: "https://f560c3-4.bixgrow.com/register",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<section class="mx-auto px-4 py-16 max-w-7xl container">
+    <h2
+        class="mb-12 font-semibold text-neutral-950 dark:text-neutral-50 text-3xl md:text-4xl"
+    >
+        {currentContent.title}
+    </h2>
+
+    <div class="space-y-8 mb-12">
+        <div class="flex gap-6">
+            <div
+                class="flex flex-shrink-0 justify-center items-center bg-primary rounded-full w-8 h-8 font-semibold text-white text-sm"
+            >
+                1
+            </div>
+            <div>
+                <h3
+                    class="mb-2 font-semibold text-neutral-950 dark:text-neutral-50 text-2xl md:text-3xl"
+                >
+                    {currentContent.step1Title}
+                </h3>
+                <p class="text-gray-700 dark:text-neutral-300 text-lg">
+                    {currentContent.step1Description}
+                </p>
+            </div>
+        </div>
+
+        <div class="flex gap-6">
+            <div
+                class="flex flex-shrink-0 justify-center items-center bg-primary rounded-full w-8 h-8 font-semibold text-white text-sm"
+            >
+                2
+            </div>
+            <div>
+                <h3
+                    class="mb-2 font-semibold text-neutral-950 dark:text-neutral-50 text-2xl md:text-3xl"
+                >
+                    {currentContent.step2Title}
+                </h3>
+                <p class="text-gray-700 dark:text-neutral-300 text-lg">
+                    {currentContent.step2Description}
+                </p>
+            </div>
+        </div>
+
+        <div class="flex gap-6">
+            <div
+                class="flex flex-shrink-0 justify-center items-center bg-primary rounded-full w-8 h-8 font-semibold text-white text-sm"
+            >
+                3
+            </div>
+            <div>
+                <h3
+                    class="mb-2 font-semibold text-neutral-950 dark:text-neutral-50 text-2xl md:text-3xl"
+                >
+                    {currentContent.step3Title}
+                </h3>
+                <p class="text-gray-700 dark:text-neutral-300 text-lg">
+                    {currentContent.step3Description}
+                </p>
+            </div>
+        </div>
+
+        <div class="flex gap-6">
+            <div
+                class="flex flex-shrink-0 justify-center items-center bg-primary rounded-full w-8 h-8 font-semibold text-white text-sm"
+            >
+                4
+            </div>
+            <div>
+                <h3
+                    class="mb-2 font-semibold text-neutral-950 dark:text-neutral-50 text-2xl md:text-3xl"
+                >
+                    {currentContent.step4Title}
+                </h3>
+                <p class="text-gray-700 dark:text-neutral-300 text-lg">
+                    {currentContent.step4Description}
+                </p>
+            </div>
+        </div>
+
+        <div class="flex gap-6">
+            <div
+                class="flex flex-shrink-0 justify-center items-center bg-primary rounded-full w-8 h-8 font-semibold text-white text-sm"
+            >
+                5
+            </div>
+            <div>
+                <h3
+                    class="mb-2 font-semibold text-neutral-950 dark:text-neutral-50 text-2xl md:text-3xl"
+                >
+                    {currentContent.step5Title}
+                </h3>
+                <p class="text-gray-700 dark:text-neutral-300 text-lg">
+                    {currentContent.step5Description}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-center">
+        <a
+            href={currentContent.ctaLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={cn(buttonVariants({ size: "lg", variant: "default" }))}
+        >
+            {currentContent.ctaButton}
+        </a>
+    </div>
+</section>
