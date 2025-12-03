@@ -2,6 +2,9 @@
   "name": "@thetis/website",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "astro dev --port=2122 --toolbar=false",
     "start": "astro dev --toolbar=false",
