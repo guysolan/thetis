@@ -116,6 +116,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
+    "country-flag-icons": "^1.5.16",
     "embla-carousel-react": "^8.5.2",
     "lucide-react": "^0.483.0",
     "react-hook-form": "7.60.0",
