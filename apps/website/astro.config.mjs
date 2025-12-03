@@ -33,7 +33,9 @@ export default defineConfig({
     tailwind(),
   ],
   output: "server",
-  adapter: vercel(),
+  adapter: vercel({
+    runtime: "nodejs24.x",
+  }),
   vite: {
     build: {
       rollupOptions: {
