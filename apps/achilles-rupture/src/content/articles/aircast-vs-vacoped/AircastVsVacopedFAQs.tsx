@@ -12,7 +12,7 @@ const aircastVsVacopedFaqs: FAQItem[] = [
   {
     question: "How long should I wear the walking boot?",
     answer:
-      "Most rehabilitation protocols recommend wearing the walking boot for 8-10 weeks. The SMART Method protocol suggests full equinus (30° plantarflexion) for the first 5 weeks, followed by gradual reduction in plantarflexion angle. Your healthcare provider will guide you through the specific timeline based on your healing progress. The boot should be worn during the day, while a night splint is recommended for sleeping.",
+      "Most rehabilitation protocols recommend wearing the walking boot for 10-12 weeks. The SMART Method protocol suggests full equinus (30° plantarflexion) for the first 5 weeks, followed by gradual reduction in plantarflexion angle. Your healthcare provider will guide you through the specific timeline based on your healing progress. The boot should be worn during the day, while a night splint is recommended for sleeping.",
   },
   {
     question: "How do I know which walking boot is right for me?",
@@ -22,7 +22,7 @@ const aircastVsVacopedFaqs: FAQItem[] = [
   {
     question: "Can I drive while wearing the walking boot?",
     answer:
-      "Neither boot is recommended for driving. If you must drive, you should only do so in an automatic car using your non-injured foot for the pedals. You must check with your insurance provider and doctor first, as driving with a walking boot may invalidate your insurance and could be dangerous. Never drive if you feel unsafe or if your doctor advises against it. The Aircast's lighter weight may make it slightly more manageable, but both boots can significantly affect your ability to drive safely.",
+      "If your right Achilles is in the boot you cannot drive. If the rupture is to your left Achilles you may use your right foot to drive an automatic car, as long as the boot stays clear of the pedals. Check with your insurance provider and healthcare specialist.",
   },
   {
     question: "How often should I adjust the boot's angle?",
@@ -38,11 +38,6 @@ const aircastVsVacopedFaqs: FAQItem[] = [
     question: "Do I need both the boot and the night splint?",
     answer:
       "Yes, they serve different purposes. The boot is for daytime use and walking, while the night splint is designed for sleeping. The night splint is more comfortable for sleep and helps prevent issues associated with sleeping in a boot, such as overheating and discomfort.",
-  },
-  {
-    question: "What angle should the night splint be set to?",
-    answer:
-      "The recommended angle varies by protocol, but typically starts at 15-25° plantarflexion. Your healthcare provider will specify the exact angle based on your injury and recovery stage. The angle may be adjusted as your recovery progresses.",
   },
   {
     question: "How do I shower with the walking boot?",
@@ -67,7 +62,7 @@ const aircastVsVacopedFaqs: FAQItem[] = [
   {
     question: "When can I start physical therapy?",
     answer:
-      "Physical therapy typically begins after the initial immobilization period, usually around 6-8 weeks post-injury. However, some protocols include early gentle exercises. Your healthcare provider will determine the appropriate timing based on your healing progress and the specific rehabilitation protocol being followed.",
+      "There is increasing evidence that early physio, when still in the boot, improves outcome. Traditionally physio has been used mainly from week 10. Your healthcare provider will determine the appropriate timing based on your healing progress and the specific rehabilitation protocol being followed.",
   },
   {
     question: "How long until I can return to sports?",
