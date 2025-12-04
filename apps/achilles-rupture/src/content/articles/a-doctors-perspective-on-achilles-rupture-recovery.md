@@ -9,7 +9,7 @@ audience: ["clinician"]
 heroImage: "/images/surgeons.jpeg"
 ---
 
-# A Doctor's Perspective on Achilles Ruptur Recovery
+# A Doctor's Perspective on Achilles Rupture Recovery
 
 An Achilles tendon rupture is a devastating blow to a patient's daily routine and athletic aspirations. The recovery process, nevertheless, does not need to be an exasperating experience. Knowledge of the recovery process and the science behind it is important for clinicians to facilitate their patients' recovery experience.
 
