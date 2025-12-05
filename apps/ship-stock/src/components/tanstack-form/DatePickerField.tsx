@@ -33,6 +33,7 @@ export function DatePickerField<TFormData>({
                     <Button
                         variant={"outline"}
                         type="button"
+                        aria-invalid={field.state.meta.errors.length > 0}
                         className={cn(
                             "pl-3 w-full font-normal text-left",
                             !field.state.value && "text-muted-foreground",

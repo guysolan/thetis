@@ -26,6 +26,27 @@ export function DateRangePickerField<TFormData>({
     const field = useField({
         name: name as any,
         form,
+        validators: {
+            onChange: ({ value }) => {
+                // If value exists, both dates must be present
+                if (value && Array.isArray(value)) {
+                    const [start, end] = value;
+                    if (
+                        start !== null && start !== undefined &&
+                        (end === null || end === undefined)
+                    ) {
+                        return "Please select both start and end dates for the delivery date range";
+                    }
+                    if (
+                        end !== null && end !== undefined &&
+                        (start === null || start === undefined)
+                    ) {
+                        return "Please select both start and end dates for the delivery date range";
+                    }
+                }
+                return undefined;
+            },
+        },
     });
 
     // Convert array to DateRange object for the calendar
@@ -79,9 +100,12 @@ export function DateRangePickerField<TFormData>({
                     <Button
                         variant={"outline"}
                         type="button"
+                        aria-invalid={field.state.meta.errors.length > 0}
                         className={cn(
                             "flex justify-between items-center gap-2 pr-3 pl-3 w-full font-normal text-left",
                             !dateRange?.from && "text-muted-foreground",
+                            field.state.meta.errors.length > 0 &&
+                                "border-destructive",
                         )}
                     >
                         <span className="flex-1 text-left">

@@ -26,6 +26,8 @@ import {
 	pricingSummarySchema,
 } from "./pages/validationSchemas";
 import { Button } from "@thetis/ui/button";
+import { Alert, AlertDescription, AlertTitle } from "@thetis/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 type Schema = z.infer<typeof schema>;
 
@@ -54,6 +56,9 @@ export function MultiPageOrderForm({
 		orderId ? Number.parseInt(orderId) : undefined,
 	);
 	const [isSaving, setIsSaving] = React.useState(false);
+	const [validationErrors, setValidationErrors] = React.useState<
+		Array<{ field: string; message: string }>
+	>([]);
 
 	// Create stable date references
 	const stableOrderDate = React.useMemo(() => new Date(), []);
@@ -183,8 +188,63 @@ export function MultiPageOrderForm({
 				validationResult = pricingSummarySchema.safeParse(values);
 			}
 
-			if (!validationResult.success) {
-				const errorMessages = validationResult.error?.errors
+			if (!validationResult.success && validationResult.error) {
+				console.log("Validation failed:", validationResult.error);
+				console.log("Form values:", values);
+				console.log("Errors:", validationResult.error.errors);
+				
+				// Set errors on form fields so they display visually
+				const formattedErrors: Array<{ field: string; message: string }> = [];
+				validationResult.error.errors.forEach((error) => {
+					// Get field name from error path - handle both array paths and string paths
+					const fieldName = error.path.length > 0 
+						? (error.path[0] as string)
+						: "unknown";
+					
+					console.log("Setting error for field:", fieldName, "Path:", error.path, "Message:", error.message);
+					
+					// Try setting the error directly on the field
+					try {
+						// TanStack Form stores errors as strings, FieldError handles both strings and objects
+						form.setFieldMeta(fieldName as any, (prev: any) => {
+							console.log("Previous meta for", fieldName, ":", prev);
+							const newMeta = {
+								...prev,
+								errors: [error.message],
+							};
+							console.log("New meta for", fieldName, ":", newMeta);
+							return newMeta;
+						});
+						
+						// Also try to validate the field to trigger error display
+						form.validateField(fieldName as any, "change");
+					} catch (err) {
+						console.error("Error setting field meta:", err);
+					}
+
+					// Format field name for display
+					const displayField = error.path
+						.map((part) =>
+							String(part)
+								.replace(/_/g, " ")
+								.replace(/([A-Z])/g, " $1")
+								.replace(/^\w/, (c) => c.toUpperCase())
+								.replace(/\b\w/g, (c) => c.toUpperCase())
+								.trim(),
+						)
+						.join(" › ");
+
+					formattedErrors.push({
+						field: displayField,
+						message: error.message,
+					});
+				});
+
+				setValidationErrors(formattedErrors);
+				console.log("Set validation errors:", formattedErrors);
+				console.log("validationErrors state should now have", formattedErrors.length, "errors");
+
+				const errorMessages = validationResult.error.errors
 					.map((e) => e.message)
 					.join(", ");
 				toast.error(
@@ -192,6 +252,9 @@ export function MultiPageOrderForm({
 				);
 				return;
 			}
+
+			// Clear validation errors on successful validation
+			setValidationErrors([]);
 		} catch (error) {
 			console.error("Validation error:", error);
 			toast.error("Please fix validation errors before continuing");
@@ -274,6 +337,7 @@ export function MultiPageOrderForm({
 
 	const handlePrevious = () => {
 		if (currentPage > 1 && !isSaving) {
+			setValidationErrors([]);
 			setCurrentPage(currentPage - 1);
 		}
 	};
@@ -282,6 +346,7 @@ export function MultiPageOrderForm({
 		if (isSaving) return;
 		// Only allow navigating to completed steps (steps before current)
 		if (stepNumber < currentPage) {
+			setValidationErrors([]);
 			setCurrentPage(stepNumber);
 		}
 	};
@@ -309,6 +374,23 @@ export function MultiPageOrderForm({
 				currentStep={currentPage}
 				onStepClick={handleStepClick}
 			/>
+
+			{validationErrors.length > 0 && (
+				<Alert variant="destructive">
+					<AlertCircle className="w-4 h-4" />
+					<AlertTitle>Validation Errors</AlertTitle>
+					<AlertDescription>
+						<ul className="space-y-1 mt-2 pl-4 list-disc">
+							{validationErrors.map((error, index) => (
+								<li key={index}>
+									<span className="font-medium">{error.field}:</span>{" "}
+									{error.message}
+								</li>
+							))}
+						</ul>
+					</AlertDescription>
+				</Alert>
+			)}
 
 			<div className="flex flex-col gap-y-4">
 				{renderCurrentPage()}

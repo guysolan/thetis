@@ -44,6 +44,7 @@ export function InputField<TFormData>({
                 step={step}
                 placeholder={placeholder}
                 value={field.state.value ?? ""}
+                aria-invalid={field.state.meta.errors.length > 0}
                 className={cn(
                     type === "number" &&
                         "[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",

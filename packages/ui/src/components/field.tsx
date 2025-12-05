@@ -187,27 +187,40 @@ function FieldError({
   errors,
   ...props
 }: React.ComponentProps<"div"> & {
-  errors?: Array<{ message?: string } | undefined>;
+  errors?: Array<{ message?: string } | string | undefined>;
 }) {
   const content = useMemo(() => {
     if (children) {
       return children;
     }
 
-    if (!errors) {
+    if (!errors || errors.length === 0) {
       return null;
     }
 
-    if (errors?.length === 1 && errors[0]?.message) {
-      return errors[0].message;
+    // Handle both string errors and object errors
+    const errorMessages = errors
+      .map((error) => {
+        if (typeof error === "string") {
+          return error;
+        }
+        return error?.message;
+      })
+      .filter((msg): msg is string => Boolean(msg));
+
+    if (errorMessages.length === 0) {
+      return null;
+    }
+
+    if (errorMessages.length === 1) {
+      return errorMessages[0];
     }
 
     return (
       <ul className="flex flex-col gap-1 ml-4 list-disc">
-        {errors.map(
-          (error, index) =>
-            error?.message && <li key={index}>{error.message}</li>,
-        )}
+        {errorMessages.map((message, index) => (
+          <li key={index}>{message}</li>
+        ))}
       </ul>
     );
   }, [children, errors]);

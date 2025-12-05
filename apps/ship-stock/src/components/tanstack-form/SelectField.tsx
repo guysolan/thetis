@@ -67,7 +67,10 @@ export function SelectField<TFormData>({
                 onValueChange={(value) => field.handleChange(value)}
                 value={String(field.state.value ?? "")}
             >
-                <SelectTrigger className="capitalize">
+                <SelectTrigger
+                    className="capitalize"
+                    aria-invalid={field.state.meta.errors.length > 0}
+                >
                     <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent>
