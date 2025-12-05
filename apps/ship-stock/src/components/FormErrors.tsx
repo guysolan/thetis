@@ -59,8 +59,18 @@ const FormErrors = ({
           return [];
         });
       } else if (value && typeof value === "object") {
+        // Try to safely stringify if it's a simple object that looks like an error but isn't one of the above
+        if (Object.keys(value).length === 0) return [];
+        
         // Recursively process nested objects
         return processErrors(value, currentPath);
+      }
+      // Handle string errors (sometimes errors are just strings)
+      if (typeof value === "string") {
+          return [{
+              field: currentPath,
+              message: value
+          }];
       }
       return [];
     });

@@ -204,7 +204,19 @@ function FieldError({
         if (typeof error === "string") {
           return error;
         }
-        return error?.message;
+        if (typeof error === "object" && error?.message) {
+          return error.message;
+        }
+        // Handle stringifiable objects that might not have message
+        if (error && typeof error === "object") {
+             // Try to safely stringify or ignore
+             try {
+                 return JSON.stringify(error);
+             } catch {
+                 return null;
+             }
+        }
+        return null;
       })
       .filter((msg): msg is string => Boolean(msg));
 

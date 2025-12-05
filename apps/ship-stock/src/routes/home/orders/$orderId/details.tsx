@@ -10,6 +10,8 @@ import { useForm as useTanStackForm } from "@tanstack/react-form";
 import { saveOrderDetails } from "@/features/orders/api/saveOrderPage";
 import { toast } from "sonner";
 import { orderDetailsSchema } from "@/features/orders/features/multi-order-form/pages/validationSchemas";
+import { zodValidator } from "@tanstack/zod-form-adapter";
+import { ValidationSummary } from "@/components/ValidationSummary";
 
 const STEPS: Step[] = [
   { number: 1, label: "Details", key: "details" },
@@ -98,6 +100,31 @@ function RouteComponent() {
 
   const form = useTanStackForm({
     defaultValues,
+    validatorAdapter: zodValidator(),
+    validators: {
+      onChange: orderDetailsSchema,
+    },
+    onSubmit: async ({ value: values }) => {
+      try {
+        const savedOrderId = await saveOrderDetails({
+          order_type: values.order_type,
+          order_date: values.order_date,
+          currency: values.currency,
+          delivery_dates: values.delivery_dates,
+          unit_of_measurement: values.unit_of_measurement,
+          orderId: isNewOrder ? undefined : Number(orderId),
+        });
+        toast.success("Order details saved");
+        navigate({ to: `/home/orders/${savedOrderId}/companies` });
+      } catch (error) {
+        console.error("Error saving order details:", error);
+        toast.error(
+          `Failed to save: ${
+            error instanceof Error ? error.message : "Unknown error"
+          }`,
+        );
+      }
+    },
   });
 
   // Update form when order data changes
@@ -111,39 +138,7 @@ function RouteComponent() {
   }, [order?.order_form_values, form]);
 
   const handleNext = async () => {
-    const values = form.state.values;
-
-    // Validate
-    const validationResult = orderDetailsSchema.safeParse(values);
-    if (!validationResult.success) {
-      const errorMessages = validationResult.error?.errors
-        .map((e) => e.message)
-        .join(", ");
-      toast.error(
-        `Please fix validation errors: ${errorMessages || "Invalid data"}`,
-      );
-      return;
-    }
-
-    try {
-      const savedOrderId = await saveOrderDetails({
-        order_type: values.order_type,
-        order_date: values.order_date,
-        currency: values.currency,
-        delivery_dates: values.delivery_dates,
-        unit_of_measurement: values.unit_of_measurement,
-        orderId: isNewOrder ? undefined : Number(orderId),
-      });
-      toast.success("Order details saved");
-      navigate({ to: `/home/orders/${savedOrderId}/companies` });
-    } catch (error) {
-      console.error("Error saving order details:", error);
-      toast.error(
-        `Failed to save: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
-      );
-    }
+    form.handleSubmit();
   };
 
   return (
@@ -160,6 +155,7 @@ function RouteComponent() {
         />
 
         <div className="flex flex-col gap-y-4">
+          <ValidationSummary form={form} />
           <OrderDetailsPage form={form} />
           <OrderFormNavigation onNext={handleNext} />
         </div>

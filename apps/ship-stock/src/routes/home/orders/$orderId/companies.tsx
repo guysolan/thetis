@@ -10,6 +10,8 @@ import { useForm as useTanStackForm } from "@tanstack/react-form";
 import { saveOrderCompanies } from "@/features/orders/api/saveOrderPage";
 import { toast } from "sonner";
 import { companiesAddressesSchema } from "@/features/orders/features/multi-order-form/pages/validationSchemas";
+import { ValidationSummary } from "@/components/ValidationSummary";
+import useMyCompanyId from "@/features/companies/hooks/useMyCompanyId";
 
 const STEPS: Step[] = [
     { number: 1, label: "Details", key: "details" },
@@ -25,6 +27,7 @@ export const Route = createFileRoute("/home/orders/$orderId/companies")({
 function RouteComponent() {
     const { orderId } = Route.useParams();
     const navigate = useNavigate();
+    const companyId = useMyCompanyId();
 
     const { data: order } = useSuspenseQuery({
         queryKey: ["select-order", orderId],
@@ -32,56 +35,51 @@ function RouteComponent() {
     });
 
     const defaultValues = useMemo(() => {
-        if (!order?.order_form_values) return undefined;
+        if (!order?.order_form_values) {
+            return {
+                company_id: companyId,
+            };
+        }
         return {
             ...order.order_form_values,
             order_type: order.order_form_values.order_type || "sale",
+            company_id: order.order_form_values.company_id || companyId,
         };
-    }, [order?.order_form_values]);
+    }, [order?.order_form_values, companyId]);
 
     const form = useTanStackForm({
         defaultValues: defaultValues || {},
+        validators: {
+            onChange: companiesAddressesSchema,
+        },
+        onSubmit: async ({ value: values }: { value: MultiOrderFormData }) => {
+            try {
+                await saveOrderCompanies(Number(orderId), {
+                    from_company_id: values.from_company_id,
+                    to_company_id: values.to_company_id,
+                    from_billing_address_id: values.from_billing_address_id,
+                    from_shipping_address_id: values.from_shipping_address_id,
+                    to_billing_address_id: values.to_billing_address_id,
+                    to_shipping_address_id: values.to_shipping_address_id,
+                    from_contact_id: values.from_contact_id,
+                    to_contact_id: values.to_contact_id,
+                    company_id: values.company_id,
+                });
+                toast.success("Companies & addresses saved");
+                navigate({ to: `/home/orders/${orderId}/items` });
+            } catch (error) {
+                console.error("Error saving companies:", error);
+                toast.error(
+                    `Failed to save: ${
+                        error instanceof Error ? error.message : "Unknown error"
+                    }`,
+                );
+            }
+        },
     });
 
     const handleNext = async () => {
-        const values = form.state.values;
-
-        // Validate
-        const validationResult = companiesAddressesSchema.safeParse(values);
-        if (!validationResult.success) {
-            const errorMessages = validationResult.error?.errors
-                .map((e) => e.message)
-                .join(", ");
-            toast.error(
-                `Please fix validation errors: ${
-                    errorMessages || "Invalid data"
-                }`,
-            );
-            return;
-        }
-
-        try {
-            await saveOrderCompanies(Number(orderId), {
-                from_company_id: values.from_company_id,
-                to_company_id: values.to_company_id,
-                from_billing_address_id: values.from_billing_address_id,
-                from_shipping_address_id: values.from_shipping_address_id,
-                to_billing_address_id: values.to_billing_address_id,
-                to_shipping_address_id: values.to_shipping_address_id,
-                from_contact_id: values.from_contact_id,
-                to_contact_id: values.to_contact_id,
-                company_id: values.company_id,
-            });
-            toast.success("Companies & addresses saved");
-            navigate({ to: `/home/orders/${orderId}/items` });
-        } catch (error) {
-            console.error("Error saving companies:", error);
-            toast.error(
-                `Failed to save: ${
-                    error instanceof Error ? error.message : "Unknown error"
-                }`,
-            );
-        }
+        form.handleSubmit();
     };
 
     const handlePrevious = () => {
@@ -109,6 +107,7 @@ function RouteComponent() {
                 />
 
                 <div className="flex flex-col gap-y-4">
+                    <ValidationSummary form={form} />
                     <CompaniesAddressesPage form={form} />
                     <OrderFormNavigation
                         onPrevious={handlePrevious}

@@ -10,6 +10,8 @@ import { useForm as useTanStackForm } from "@tanstack/react-form";
 import { saveOrderItems } from "@/features/orders/api/saveOrderPage";
 import { toast } from "sonner";
 import { itemsSchema } from "@/features/orders/features/multi-order-form/pages/validationSchemas";
+import { zodValidator } from "@tanstack/zod-form-adapter";
+import { ValidationSummary } from "@/components/ValidationSummary";
 
 const STEPS: Step[] = [
   { number: 1, label: "Details", key: "details" },
@@ -32,51 +34,61 @@ function RouteComponent() {
   });
 
   const defaultValues = useMemo(() => {
-    if (!order?.order_form_values) return undefined;
+    if (!order?.order_form_values) {
+      return {
+        package_items: [],
+        order_items: [],
+        consumed_items: [],
+        produced_items: [],
+        from_items: [],
+        to_items: [],
+        mode: "direct",
+      };
+    }
     return {
       ...order.order_form_values,
       order_type: order.order_form_values.order_type || "sale",
+      package_items: order.order_form_values.package_items || [],
+      order_items: order.order_form_values.order_items || [],
+      consumed_items: order.order_form_values.consumed_items || [],
+      produced_items: order.order_form_values.produced_items || [],
+      from_items: order.order_form_values.from_items || [],
+      to_items: order.order_form_values.to_items || [],
+      mode: order.order_form_values.mode || "direct",
     };
   }, [order?.order_form_values]);
 
   const form = useTanStackForm({
     defaultValues: defaultValues || {},
+    validatorAdapter: zodValidator(),
+    validators: {
+      onChange: itemsSchema,
+    },
+    onSubmit: async ({ value: values }) => {
+      // Debug: Log addresses being used
+      console.log("📍 Addresses in form values:", {
+        from_shipping_address_id: values.from_shipping_address_id,
+        to_shipping_address_id: values.to_shipping_address_id,
+        order_type: values.order_type,
+      });
+
+      try {
+        await saveOrderItems(Number(orderId), values);
+        toast.success("Items saved");
+        navigate({ to: `/home/orders/${orderId}/logistics` });
+      } catch (error) {
+        console.error("Error saving items:", error);
+        toast.error(
+          `Failed to save: ${
+            error instanceof Error ? error.message : "Unknown error"
+          }`,
+        );
+      }
+    },
   });
 
   const handleNext = async () => {
-    const values = form.state.values;
-
-    // Debug: Log addresses being used
-    console.log("📍 Addresses in form values:", {
-      from_shipping_address_id: values.from_shipping_address_id,
-      to_shipping_address_id: values.to_shipping_address_id,
-      order_type: values.order_type,
-    });
-
-    // Validate
-    const validationResult = itemsSchema.safeParse(values);
-    if (!validationResult.success) {
-      const errorMessages = validationResult.error?.errors
-        .map((e) => e.message)
-        .join(", ");
-      toast.error(
-        `Please fix validation errors: ${errorMessages || "Invalid data"}`,
-      );
-      return;
-    }
-
-    try {
-      await saveOrderItems(Number(orderId), values);
-      toast.success("Items saved");
-      navigate({ to: `/home/orders/${orderId}/logistics` });
-    } catch (error) {
-      console.error("Error saving items:", error);
-      toast.error(
-        `Failed to save: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
-      );
-    }
+    form.handleSubmit();
   };
 
   const handlePrevious = () => {
@@ -104,6 +116,7 @@ function RouteComponent() {
         />
 
         <div className="flex flex-col gap-y-4">
+          <ValidationSummary form={form} />
           <ItemsPageSimple form={form} />
           <OrderFormNavigation
             onPrevious={handlePrevious}

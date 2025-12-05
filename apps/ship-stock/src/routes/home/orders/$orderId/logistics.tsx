@@ -13,6 +13,8 @@ import { pricingSummarySchema } from "@/features/orders/features/multi-order-for
 import { openDefaultDocument } from "@/features/orders/features/order-documents/utils/openDefaultDocument";
 import { selectOrdersQueryKey } from "@/features/orders/features/order-history/api/selectOrders";
 import { selectStockpilesQueryKey } from "@/features/stockpiles/api/selectStockpiles";
+import { zodValidator } from "@tanstack/zod-form-adapter";
+import { ValidationSummary } from "@/components/ValidationSummary";
 
 const STEPS: Step[] = [
   { number: 1, label: "Details", key: "details" },
@@ -45,56 +47,49 @@ function RouteComponent() {
 
   const form = useTanStackForm({
     defaultValues: defaultValues || {},
+    validatorAdapter: zodValidator(),
+    validators: {
+      onChange: pricingSummarySchema,
+    },
+    onSubmit: async ({ value: values }) => {
+      try {
+        await saveOrderPricing(Number(orderId), {
+          carriage: values.carriage,
+          shipment_number: values.shipment_number,
+          airwaybill: values.airwaybill,
+          mode_of_transport: values.mode_of_transport,
+          incoterms: values.incoterms,
+          reason_for_export: values.reason_for_export,
+          reference_number: values.reference_number,
+        });
+        toast.success("Order completed successfully");
+
+        // Invalidate queries
+        queryClient.invalidateQueries({
+          queryKey: selectOrdersQueryKey as unknown as readonly unknown[],
+        });
+        queryClient.invalidateQueries({
+          queryKey: selectStockpilesQueryKey as unknown as readonly unknown[],
+        });
+
+        // Open document and navigate
+        if (orderId) {
+          openDefaultDocument(Number(orderId), values.order_type);
+        }
+        navigate({ to: "/home/orders" });
+      } catch (error) {
+        console.error("Error completing order:", error);
+        toast.error(
+          `Failed to complete order: ${
+            error instanceof Error ? error.message : "Unknown error"
+          }`,
+        );
+      }
+    },
   });
 
   const handleComplete = async () => {
-    const values = form.state.values;
-
-    // Validate
-    const validationResult = pricingSummarySchema.safeParse(values);
-    if (!validationResult.success) {
-      const errorMessages = validationResult.error?.errors
-        .map((e) => e.message)
-        .join(", ");
-      toast.error(
-        `Please fix validation errors: ${errorMessages || "Invalid data"}`,
-      );
-      return;
-    }
-
-    try {
-      await saveOrderPricing(Number(orderId), {
-        carriage: values.carriage,
-        shipment_number: values.shipment_number,
-        airwaybill: values.airwaybill,
-        mode_of_transport: values.mode_of_transport,
-        incoterms: values.incoterms,
-        reason_for_export: values.reason_for_export,
-        reference_number: values.reference_number,
-      });
-      toast.success("Order completed successfully");
-
-      // Invalidate queries
-      queryClient.invalidateQueries({
-        queryKey: selectOrdersQueryKey as unknown as readonly unknown[],
-      });
-      queryClient.invalidateQueries({
-        queryKey: selectStockpilesQueryKey as unknown as readonly unknown[],
-      });
-
-      // Open document and navigate
-      if (orderId) {
-        openDefaultDocument(Number(orderId), values.order_type);
-      }
-      navigate({ to: "/home/orders" });
-    } catch (error) {
-      console.error("Error completing order:", error);
-      toast.error(
-        `Failed to complete order: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
-      );
-    }
+    form.handleSubmit();
   };
 
   const handlePrevious = () => {
@@ -122,6 +117,7 @@ function RouteComponent() {
         />
 
         <div className="flex flex-col gap-y-4">
+          <ValidationSummary form={form} />
           <PricingSummaryPage form={form} />
           <OrderFormNavigation
             onPrevious={handlePrevious}
