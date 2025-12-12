@@ -37,6 +37,8 @@ Hospitals where, for Achilles tendon ruptures, the Thetis Trauma splint is used 
 
 Walking in an orthopaedic boot is a good way to boost circulation, and thereby reduce the risk of a blood clot. Speeding up this first phase of recovery can therefore only help to prevent blood clots.
 
+Many surgeons use an ultrasound scan to determine if the ruptured tendon is suitable for non-surgical treatment (90%) or would be better repaired with an operation (10%). At the time of this tendon scan the veins in the legs can be checked to ensure that no clot has developed.
+
 However, one factor that does not seem to affect the rate of DVT is early physiotherapy or the use of a boot with hinges.
 
 ![The Achilles Tendon Rupture Trauma Splint from Thetis Medical](https://www.thetismedical.com/images/trauma-splint.jpg)
@@ -57,7 +59,37 @@ One hospital that switched from injections to tablets saw the chances of thrombo
 
 The British Foot and Ankle Society [(www.bofas.org.uk)](http://www.bofas.org.uk) has recently completed a national study of thrombosis problems after surgery or injury to the foot and ankle. Achilles rupture patients were a special group in this study. This special category for Achilles rupture shows that foot and ankle surgeons recognise the raised risk that this type of injury brings.
 
-The FATE study results will be published in the next few months.
+**Observational Study**
+
+<p style="text-align: center;"><strong>Injury.</strong></p>
+
+<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em style="color: #333;">2025 Mar;56(3):112212.</em></strong></p>
+
+<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em style="color: #333;">doi: 10.1016/j.injury.2025.112212. Epub 2025 Feb 12.</em></strong></p>
+
+<strong><em style="color: #333;">Incidence of venous thromboembolism following achilles tendon rupture. Data from the UK foot and ankle thrombo-embolism (UK-FATE) audit</em></strong>
+
+![UK-FATE Study Article](/images/cover.tif.jpg)
+
+<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em>Matthew Solan¹, Samuel Briggs-Price², Linzy Houchen-Wolloff³, Karan Malhotra⁴, Lyndon Mason⁵, Jitendra Mangwani⁶; UK FATE Collaborative</em></strong></p>
+
+<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em style="color: #333;">Affiliations Expand</em></strong></p>
+
+<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em style="color: #333;">PMID: 39961162</em></strong></p>
+
+<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em><s style="color: #333;">DOI: 10.1016/j.injury.2025.112212</s></em></strong></p>
+
+<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em style="color: #333;">Free article</em></strong></p>
+
+<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em style="color: #333;">Abstract</em></strong></p>
+
+<strong><em style="color: #333;">Introduction:</em></strong> Achilles tendon rupture (ATR) carries a high risk of venous thrombo-embolism (VTE) whether the injury is managed surgically or non-operatively. This study reports symptomatic VTE rate following ATR. The influence of patient demographics, treatment type and use of chemical thromboprophylaxis is examined.
+
+<strong><em style="color: #333;">Materials and methods:</em></strong> Observational cohort study. The data is from a multi-centre, prospective, national audit of patients from 68 participating United Kingdom centres. Data was prospectively collected from hospital records. The study was conducted between June and November 2022, with a 3-month follow up.
+
+<strong><em style="color: #333;">Results:</em></strong> Of 11,363 participants in the National Audit, 9.5 % (n = 1084) had experienced an ATR. Management strategies included both non-surgical (74 %) and surgical (26 %). Following ATR, the VTE rate was 3.69 % (n = 40) compared to 0.57 % (n = 59) for other foot and ankle surgeries. Participants who developed symptomatic VTE after ATR were older than those who did not (mean age 54 years (95 %CI 50.5 - 54.7) vs 48 years (95 %CI 47.3 - 49.1)). There was no significant difference in VTE events due to participant sex, ethnicity or number of comorbidities. Differences in treatment regimen, such as weight-bearing status and immobilisation strategy, showed no significant difference in symptomatic VTE events between groups.
+
+<strong><em style="color: #333;">Conclusion:</em></strong> After ATR, patients are 6.5-times more likely to experience symptomatic VTE than those recovering from surgery for other foot and ankle pathology. There was no significant difference in symptomatic VTE rate after ATR with specific chemical prophylaxis or early mobilisation strategies.
 
 In at least one hospital, routinely using tablets instead of injections for prevention, there were zero cases where a thrombosis problem was detected within 6 months of the Achilles rupture.
 

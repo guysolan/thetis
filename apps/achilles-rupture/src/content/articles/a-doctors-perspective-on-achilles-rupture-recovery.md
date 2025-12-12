@@ -1,5 +1,5 @@
 ---
-title: "A doctor's perspective on Achilles rupture recovery"
+title: "A Doctor's perspective on Achilles rupture recovery"
 status: "published"
 description: "A medical professional's insights into Achilles tendon rupture recovery process"
 publishedAt: "June 17 2025"
@@ -21,25 +21,23 @@ In this article, we will discuss the critical stages of Achilles rupture recover
 
 ### Clinical Tests and Imaging
 
-Diagnosis of a primary Achilles tendon rupture relies on imaging and clinical assessment. One of the most common is the Thompson test, which assesses the continuity of the Achilles tendon. The test is done by squeezing the calf muscles and observing if the foot will move, which would be a sign of a functional tendon [3].
+Diagnosis of a primary Achilles tendon rupture relies on clinical assessment. A scan may help planning but does not "make the diagnosis". The Simmonds (UK) or Thompson (US) test is almost perfect as a means to assess the continuity of the Achilles tendon in the acute setting. The test is done by squeezing the calf muscles and observing if the foot will move, which would be a sign of a functional tendon [3].
 
-The Matles test, another modified version of the Thompson test, is also helpful in confirming the rupture when the patient is prone and the ankle is neutral. Palpation of the gap in the tendon is also a helpful diagnostic aid, particularly in more extensive ruptures [4].
+The Matles test, assessing the resting tone of the calf by looking at the two feet when the prone patient flexes both knees to 90 degrees, is also helpful. Palpation of the gap in the tendon is also a helpful diagnostic aid, particularly in more extensive ruptures [4].
 
-Imaging techniques such as MRI and ultrasound are very useful in diagnosis and also in ascertaining the grade of the injury. Shear Wave Elastography is also under investigation as a new non-invasive method for identifying early degeneration of tendons, even before rupture [5].
+Imaging techniques such as MRI and ultrasound are very useful in ascertaining the grade of the injury. Shear Wave Elastography is also under investigation as a new non-invasive method for identifying early degeneration of tendons, even before rupture [5].
 
 ### Non-Surgical versus Surgical Management
 
-Achilles tendon rupture management has moved towards non-surgical treatment based on high-level evidence for early mobilization. The SMART protocol, a functional treatment, shows comparable results to surgery with fewer complications such as infection and re-rupture [6].
-
-For patients with degenerative tendon changes or those who are low-activity, an Achilles rupture splint offers greater support and mobility during immobilization. However, there is a divide in practice between public and private healthcare settings, with private healthcare often opting for more surgical interventions. In athletes, particularly those who need to return to sport, certain surgeries, such as tendon anchoring procedures, are employed to reattach the tendon to the bone, promoting faster and more secure recovery.
+Achilles tendon rupture management has moved towards non-surgical treatment based on high-level evidence for early mobilization. The SMART protocol, a functional treatment plan, shows comparable results to surgery with fewer complications such as infection and similar rates of re-rupture [6].
 
 ## Early Recovery Phase (Weeks 1–6)
 
 The initial six weeks are focused on the recovery of the tendon and the prevention of complications. Plantarflexion walking boot is normally used to functionally immobilize and reduce tension on the tendon. Gradual weight-bearing begins under protocols like SMART and grows from partial to full weight-bearing [7].
 
-Two commonly used boots during this phase are the Aircast with wedges and the VACOped which allows a dynamic range of motion. Each offers different levels of support and mobility. The choice of boot can significantly influence recovery experience [8]. The patient's recovery must be evaluated by clinicians regularly to allow proper healing and prevent complications.
+Two commonly used boots during this phase are the Aircast with wedges and the VACOped which allows a dynamic range of motion. Each offers different levels of support and mobility. The choice of boot can significantly influence recovery experience, though there is no evidence for better clinical outcomes [8]. The patient's recovery must be evaluated by clinicians regularly to allow proper healing and prevent complications.
 
-Many patients find sleeping in the boot uncomfortable. Additional purchases such as the Thetis Medical Achilles rupture Splint, the OPED Even-Up or a Limbo waterproof cover, can be useful adjuncts. It's important to note that a splint is not a replacement for the walking boot but can be used in conjunction to enhance mobility.
+Many patients find sleeping in the boot uncomfortable. Additional purchases, such as the Thetis Medical Achilles rupture Splint, the OPED Even-Up or a Limbo waterproof cover, can be useful adjuncts. It's important to note that a splint is not a replacement for the walking boot but can be used in conjunction, when resting/sleeping, to improve the overall recovery experience.
 
 Early controlled range-of-motion exercises are started to prevent stiffness and tendon elongation. Adherence to the rehabilitation protocol must be maintained to prevent re-rupture and allow proper progression to the subsequent phase of recovery [7].
 
@@ -49,7 +47,7 @@ As the tendon heals, the focus is on recovering strength and function. Concentri
 
 Retraining of gait must also be done to correct compensatory movement that could occur. Therapists must rehabilitate patients to relearn proper biomechanics and symmetry to their gait [7].
 
-Balance and proprioception exercises, such as single-leg stands, BOSU ball exercises, and balance board drills, are added to improve coordination and reduce the risk of falling [10]. At this stage, the patient's recovery is observed from time to time, and the rehabilitation program is adjusted to avoid reinjury or overuse. The patient must be educated to inform the therapists of any pain or overuse symptoms in doing these drills.
+Balance and proprioception exercises, such as single-leg stance, BOSU ball exercises, and balance board drills, are added to improve coordination and reduce the risk of falling [10]. At this stage, the patient's recovery is observed, and the rehabilitation program is adjusted to avoid reinjury or overuse. The patient must be educated to inform the therapists of any pain or overuse symptoms in doing these drills.
 
 ## Late Recovery Phase (Weeks 13–24)
 
@@ -63,19 +61,19 @@ Psychological readiness is also required. Patients need to be reassured that the
 
 ## New Technologies in the Treatment of Achilles Tendon
 
-Emerging technologies are taking center stage in Achilles tendon management. Shear Wave Elastography, a non-invasive imaging method, quantifies tendon stiffness and can identify early degenerative changes. Therefore, it helps clinicians take proactive actions [5].
+Emerging technologies are taking centre stage in Achilles tendon management. Shear Wave Elastography, a non-invasive imaging method, quantifies tendon stiffness and can identify early degenerative changes. Therefore, it helps clinicians take proactive actions [5].
 
-Regenerative treatments such as exosome therapy and Mesenchymal Stem Cells (MSCs) are being researched as ways to maximize Achilles tendon healing [13]. Experimental though they are, they can prove to be components of individualized treatment protocols for patients with extensive tendon damage or not responding to standard rehabilitation.
+Regenerative treatments such as exosome therapy and Mesenchymal Stem Cells (MSCs) are being researched as ways to maximize Achilles tendon healing [13]. Experimental though they are, they may one day prove to be components of individualized treatment protocols for patients with extensive tendon damage or not responding to standard rehabilitation.
 
 ## Long-Term Outcomes
 
-In the top athletes, recovery to full sport could be prolonged because of issues such as tendinous stretching or decreased strength. Psychological issues, such as fear of re-injury, can also impact the time to recovery.
+In the top athletes, recovery to full sport could be prolonged because of issues such as tendon stretching or decreased strength. Psychological issues, such as fear of re-injury, can also impact the time to recovery.
 
 There must be ongoing follow-up care, both functional and psychological, to verify that the patient is healing as expected. Proper education and establishment of expectations are centrally important to long-term success.
 
 ## The Bottom Line
 
-Recovery from Achilles rupture has come a long way; today, evidence supports nonoperative management and early mobilization, though surgery still offers a faster road back to sport which offers advantages to athletes. With ongoing knowledge of the newest techniques of rehabilitation, clinicians are able to provide the best care for their patients. A well-organized treatment plan provides the maximum recovery and eliminates the likelihood of complications.
+Recovery from Achilles rupture has come a long way-; today, evidence supports nonoperative management and early mobilization. Surgery may offer a faster road back to sport with advantages to athletes, but the risks of complications are 3 times higher. With ongoing knowledge of the newest techniques of rehabilitation, clinicians are able to provide the best care for their patients. A well-organized treatment plan provides the maximum recovery and eliminates the likelihood of complications.
 
 ## FAQs
 
@@ -85,7 +83,7 @@ Severe tenderness, swelling, bruising, and inability to stand on tiptoes.
 
 ### Which is the optimal treatment: surgery or conservative management?
 
-Nonoperative treatment and early rehabilitation are effective for many. However, many developed countries often favor surgery due to healthcare systems and patient needs. This makes the choice context-dependent.
+Nonoperative treatment and early rehabilitation are effective for many. However, many developed countries still favour surgery. This makes the choice context-dependent.
 
 ### How quickly does it take to heal from an Achilles tendon rupture?
 
@@ -93,7 +91,7 @@ Recovery typically takes 6-12 months, depending on severity and rehabilitation r
 
 ### How do you reduce the risk of re-injury?
 
-The key is to follow a structured rehabilitative protocol, such as SMART (Standardized Multimodal Achilles Rehabilitation Treatment), along with progressive loading. Additionally, psychological readiness also contributes a lot to the risk of injury.
+The key is to follow a structured rehabilitative protocol, such as that in the SMART study, along with progressive loading. Additionally, psychological readiness also contributes a lot to the risk of injury.
 
 ## Sources
 
