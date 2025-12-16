@@ -63,12 +63,12 @@ const Package = ({ packageItemChangeId, items, index }: PackageProps) => {
         </TableHeader>
         <TableBody>
           {items
-            .filter((item) => item.quantity < 0)
+            .filter((item) => item.quantity > 0 && item.item_type !== "package")
             .map((item) => (
               <TableRow key={item.item_id}>
                 <TableCell className="text-black">{item.item_name}</TableCell>
                 <TableCell className="text-black">
-                  {Math.abs(item.quantity)}
+                  {item.quantity}
                 </TableCell>
               </TableRow>
             ))}
