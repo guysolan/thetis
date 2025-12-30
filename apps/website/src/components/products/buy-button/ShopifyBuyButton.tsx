@@ -21,7 +21,7 @@ const ShopifyBuyButton: React.FC<ShopifyBuyButtonProps> = ({
 
     const ShopifyBuyInit = () => {
       const client = (window as any).ShopifyBuy.buildClient({
-        domain: "thetismedical.myshopify.com",
+        domain: "shop.thetismedical.com",
         storefrontAccessToken: "784883c28d6484a8804b44ae00adfb99",
       });
 

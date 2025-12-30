@@ -14,10 +14,10 @@ let US_URL = "https://www.amazon.com/dp/B09N5KH4F3?ref=myi_title_dp";
 // }
 
 const urls = {
-  US_home: "https://thetismedical.myshopify.com/",
-  US_product: "https://thetismedical.myshopify.com/",
-  UK_product: "https://thetismedical.myshopify.com/",
-  UK_home: "https://thetismedical.myshopify.com/",
+  US_home: "https://shop.thetismedical.com/",
+  US_product: "https://shop.thetismedical.com/",
+  UK_product: "https://shop.thetismedical.com/",
+  UK_home: "https://shop.thetismedical.com/",
 };
 
 fetch("https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq")
