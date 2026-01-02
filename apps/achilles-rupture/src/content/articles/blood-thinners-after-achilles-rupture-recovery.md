@@ -15,7 +15,7 @@ heroImage: "/images/blood.webp"
 
 A thrombosis is a blood clot in a vein that blocks the circulation, usually in the leg (DVT = deep vein thrombosis). It manifests as swelling and discomfort. Thrombosis has the potential to cause serious illness (even death) if the clot in the vein spreads to the heart or lungs. This spread is called a pulmonary embolus (PE).
 
-!<https://images.unsplash.com/photo-1581594294883-5109c202942f?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb>
+![](/images/thrombosi.jpg)
 
 Any injury or operation can be complicated by thrombosis. This is partly because when you are resting the injured leg (particularly if plastered or using crutches) the circulation is slow. This is one factor that makes the blood clot.
 
@@ -49,39 +49,27 @@ The Achilles Tendon Rupture Trauma Splint from Thetis Medical
 
 Another way to help reduce the chances of thrombosis problems is to use blood thinning medication. Daily injections are frequently used. This is fine for a week or two, and for some injuries that is all that is required. However, the risk of thrombosis is thought to last longer in cases of Achilles tendon rupture. Blood thinners may therefore be prescribed for an extended period e.g. 6 weeks.
 
-!<https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb>
+![](/images/medicine.jpg)
 
 Six weeks of injections is a lot to put up with. The injections sting and they bruise the injected area. Thankfully there are tablets that do the same job. The problem is that these are not officially licensed for use after Achilles tendon rupture. Your hospital would be required to have special permission from pharmacy to "bend the rules" – even though using the pills instead of injections is no more costly and is only common sense.
 
-One hospital that switched from injections to tablets saw the chances of thrombosis fall from 6% to 0% in Achilles tendon rupture patients (<https://www.bofas.org.uk/clinician/news-events/news-events-reader/dvt-and-achilles-tendon-rupture-a-better-pill-to-swallow>)
+One hospital that switched from injections to tablets saw the chances of thrombosis fall from 6% to 0% in Achilles tendon rupture patients ([www.bofas.org.uk](https://www.bofas.org.uk/clinician/news-events/news-events-reader/dvt-and-achilles-tendon-rupture-a-better-pill-to-swallow))
 
 ## **NEW Thrombosis Study in the UK (FATE Study)**
 
 The British Foot and Ankle Society [(www.bofas.org.uk)](http://www.bofas.org.uk) has recently completed a national study of thrombosis problems after surgery or injury to the foot and ankle. Achilles rupture patients were a special group in this study. This special category for Achilles rupture shows that foot and ankle surgeons recognise the raised risk that this type of injury brings.
 
-**Observational Study**
-
-<p style="text-align: center;"><strong>Injury.</strong></p>
-
-<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em style="color: #333;">2025 Mar;56(3):112212.</em></strong></p>
-
-<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em style="color: #333;">doi: 10.1016/j.injury.2025.112212. Epub 2025 Feb 12.</em></strong></p>
-
-<strong><em style="color: #333;">Incidence of venous thromboembolism following achilles tendon rupture. Data from the UK foot and ankle thrombo-embolism (UK-FATE) audit</em></strong>
+## **Incidence of venous thromboembolism following achilles tendon rupture. Data from the UK foot and ankle thrombo-embolism (UK-FATE) audit**
 
 ![UK-FATE Study Article](/images/cover.tif.jpg)
 
 <p style="margin-top: 1em; margin-bottom: 1em;"><strong><em>Matthew Solan¹, Samuel Briggs-Price², Linzy Houchen-Wolloff³, Karan Malhotra⁴, Lyndon Mason⁵, Jitendra Mangwani⁶; UK FATE Collaborative</em></strong></p>
+Affiliations Expand
+PMID: 39961162
+DOI: 10.1016/j.injury.2025.112212
+Free article
 
-<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em style="color: #333;">Affiliations Expand</em></strong></p>
-
-<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em style="color: #333;">PMID: 39961162</em></strong></p>
-
-<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em><s style="color: #333;">DOI: 10.1016/j.injury.2025.112212</s></em></strong></p>
-
-<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em style="color: #333;">Free article</em></strong></p>
-
-<p style="margin-top: 1em; margin-bottom: 1em;"><strong><em style="color: #333;">Abstract</em></strong></p>
+## **Abstract**
 
 <strong><em style="color: #333;">Introduction:</em></strong> Achilles tendon rupture (ATR) carries a high risk of venous thrombo-embolism (VTE) whether the injury is managed surgically or non-operatively. This study reports symptomatic VTE rate following ATR. The influence of patient demographics, treatment type and use of chemical thromboprophylaxis is examined.
 
