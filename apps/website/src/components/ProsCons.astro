@@ -13,20 +13,28 @@ interface Props {
 
 const { title, points } = Astro.props;
 ---
+
 <div class="space-y-4">
   {title && <p class="px-8 text-base">{title}</p>}
   <div class="flex flex-col gap-2">
-    {points.map((point, index) => (
-      <div key={index} class="flex items-center gap-3 text-lg">
-        <span class={cn("flex-shrink-0 p-1 rounded-full flex items-center justify-center text-white", point.type === "pro" ? "bg-green-500" : "bg-red-500")}>
-          {point.type === "pro" ? (
-            <Check strokeWidth={1.5}  size={18} />
-          ) : (
-            <X strokeWidth={1.5} size={18} />
-          )}
-        </span>
-        <span>{point.text}</span>
-      </div>
-    ))}
+    {
+      points.map((point, index) => (
+        <div key={index} class="flex items-center gap-3 text-lg">
+          <span
+            class={cn(
+              "flex flex-shrink-0 justify-center items-center p-1 rounded-full text-white",
+              point.type === "pro" ? "bg-primary" : "bg-red-500",
+            )}
+          >
+            {point.type === "pro" ? (
+              <Check strokeWidth={1.5} size={18} />
+            ) : (
+              <X strokeWidth={1.5} size={18} />
+            )}
+          </span>
+          <span>{point.text}</span>
+        </div>
+      ))
+    }
   </div>
 </div>

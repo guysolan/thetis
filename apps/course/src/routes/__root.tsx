@@ -17,8 +17,14 @@ import {
   SheetTrigger,
 } from "@thetis/ui/sheet";
 import type { QueryClient } from "@tanstack/react-query";
-import { BookOpen, ExternalLink, Loader2, Menu, Star } from "lucide-react";
-import { cn } from "../lib/utils";
+import {
+  BookOpen,
+  ExternalLink,
+  Loader2,
+  Menu,
+  Star,
+} from "../../$node_modules/lucide-react/dist/lucide-react.js";
+import { cn } from "../lib/utils.js";
 
 function RouterSpinner() {
   const isLoading = useRouterState({ select: (s) => s.status === "pending" });

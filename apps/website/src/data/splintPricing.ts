@@ -69,6 +69,41 @@ export const retailPrice = 130;
 export const hcpcsCode = "Q4051";
 export const altCptCode = "29425";
 
+// Retail pricing for individual splint by region
+export const retailPricing = {
+    UK: {
+        price: 63.99,
+        currency: "GBP",
+        symbol: "£",
+        formatted: "£63.99",
+    },
+    US: {
+        price: 93.99,
+        currency: "USD",
+        symbol: "$",
+        formatted: "$93.99",
+    },
+    // Default for other regions (use USD)
+    default: {
+        price: 93.99,
+        currency: "USD",
+        symbol: "$",
+        formatted: "$93.99",
+    },
+} as const;
+
+// Get price by country code
+export function getRetailPriceByCountry(countryCode: string | null): typeof retailPricing.UK {
+    if (countryCode === "GB" || countryCode === "UK") {
+        return retailPricing.UK;
+    }
+    if (countryCode === "US") {
+        return retailPricing.US;
+    }
+    // For all other countries, use USD as default
+    return retailPricing.default;
+}
+
 // Helper function to get a pack by size
 export function getPackBySize(size: string) {
     return packSizes.find((pack) => pack.value === size) || packSizes[0];

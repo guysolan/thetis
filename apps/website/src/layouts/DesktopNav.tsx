@@ -20,14 +20,17 @@ const contentWidth = "min-w-[min(50vw,700px)]";
 import {
   getArticleRoutesByLanguage,
   getContactRoutesByLanguage,
-  getGuidePageRoutesByLanguage,
+  getCourseRoutesByLanguage,
   getPartnerRoutesByLanguage,
   getProductRoutesByLanguage,
+  getRecoveryPhaseRoutesByLanguage,
   getRouteBySlugAndLanguage,
   navigationContent,
 } from "../content/routes.tsx";
 import ReviewsLink from "../components/ReviewsLink.tsx";
+import { useShopifyPrice } from "../hooks/use-shopify-price";
 import type { Lang } from "../config/languages.ts";
+import { BookOpen, Calendar, GraduationCap, Mail, Star } from "lucide-react";
 
 interface DesktopNavProps {
   lang: Lang;
@@ -39,13 +42,13 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
   const articles = getArticleRoutesByLanguage(lang);
   const partnerLinks = getPartnerRoutesByLanguage(lang);
   const contactLinks = getContactRoutesByLanguage(lang);
-  const guideLinks = getGuidePageRoutesByLanguage(lang);
+  const courseLinks = getCourseRoutesByLanguage(lang);
+  const recoveryPhases = getRecoveryPhaseRoutesByLanguage(lang);
 
   // Get dynamic URLs for the current language
   const splintRoute = getRouteBySlugAndLanguage("splint", lang);
   const buyNowRoute = getRouteBySlugAndLanguage("buy-now", lang);
   const wholesaleRoute = getRouteBySlugAndLanguage("order-wholesale", lang);
-  const guideRoute = getRouteBySlugAndLanguage("guide", lang);
 
   return (
     <>
@@ -66,13 +69,18 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
                   {t.coursesDescription}
                 </p>
               </div>
-              <div className="gap-4 grid grid-cols-2">
-                {guideLinks.map((link) => (
-                  <LinkCard
-                    key={link.href}
-                    {...link}
-                    variant={link.variant || "outline"}
-                    icon={link.icon}
+              <div className="gap-4 grid grid-cols-3">
+                {courseLinks.map((course, index) => (
+                  <CourseCard
+                    key={course.href}
+                    title={course.title}
+                    description={course.description}
+                    href={course.href}
+                    variant={index === 0
+                      ? "free"
+                      : index === 2
+                      ? "premium"
+                      : "paid"}
                   />
                 ))}
               </div>
@@ -103,33 +111,49 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
               {t.patientGuides}
             </NavigationMenuTrigger>
             <NavigationMenuContent
-              className={cn("gap-4 grid grid-cols-2 p-4", contentWidth)}
+              className={cn("flex gap-6 p-6", contentWidth)}
             >
-              {articles.map((article) => (
-                <ListItem
-                  key={article.href}
-                  title={article.title}
-                  href={article.href}
-                  className="hover:bg-neutral-100 p-4 border border-neutral-200 rounded-lg"
-                >
-                  <p className="dark:text-neutral-200 text-sm line-clamp-2">
-                    {article.description}
-                  </p>
+              {/* FAQs Column */}
+              <div className="flex-1">
+                <h4 className="mb-3 font-semibold text-neutral-900 dark:text-neutral-100 text-sm uppercase tracking-wide">
+                  FAQs
+                </h4>
+                <div className="flex flex-col gap-1">
+                  {articles.map((article) => (
+                    <NavigationMenuLink key={article.href} asChild>
+                      <a
+                        href={article.href}
+                        className="block hover:bg-neutral-100 dark:hover:bg-neutral-800 p-2 rounded-md text-neutral-700 dark:text-neutral-300 text-sm transition-colors"
+                      >
+                        {article.title}
+                      </a>
+                    </NavigationMenuLink>
+                  ))}
+                </div>
+              </div>
 
-                  <div className="flex flex-wrap gap-1 pt-2">
-                    {article.tags?.map((tag) => {
-                      return (
-                        <Badge
-                          key={`${article.href}-${tag.words}`}
-                          className={`${tag.color} text-black bg-opacity-80 font-light text-xs`}
-                        >
-                          {tag.words}
-                        </Badge>
-                      );
-                    })}
-                  </div>
-                </ListItem>
-              ))}
+              {/* Divider */}
+              <div className="bg-neutral-200 dark:bg-neutral-700 w-px" />
+
+              {/* Recovery Timeline Column */}
+              <div className="flex-1">
+                <h4 className="mb-3 font-semibold text-neutral-900 dark:text-neutral-100 text-sm uppercase tracking-wide">
+                  Recovery Timeline
+                </h4>
+                <div className="flex flex-col gap-1">
+                  {recoveryPhases.map((phase) => (
+                    <NavigationMenuLink key={phase.href} asChild>
+                      <a
+                        href={phase.href}
+                        className="flex items-center gap-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 p-2 rounded-md text-neutral-700 dark:text-neutral-300 text-sm transition-colors"
+                      >
+                        <Calendar className="w-4 h-4 text-primary shrink-0" />
+                        <span className="line-clamp-1">{phase.title}</span>
+                      </a>
+                    </NavigationMenuLink>
+                  ))}
+                </div>
+              </div>
             </NavigationMenuContent>
           </NavigationMenuItem>
 
@@ -321,6 +345,76 @@ const LinkCard = ({
   );
 };
 
+const CourseCard = ({
+  title,
+  description,
+  href,
+  variant = "paid",
+}: {
+  title: string;
+  description: string;
+  href: string;
+  variant: "free" | "paid" | "premium";
+}) => {
+  return (
+    <NavigationMenuLink asChild>
+      <a
+        className={cn(
+          "flex flex-col p-4 border-2 rounded-xl h-full transition-all duration-300",
+          variant === "free" &&
+            "border-primary/30 dark:border-primary/40 bg-primary/10 dark:bg-primary/20 hover:border-primary/50 hover:bg-primary/20",
+          variant === "paid" &&
+            "border-primary/20 bg-white dark:bg-neutral-800 hover:border-primary/50 hover:bg-neutral-50",
+          variant === "premium" &&
+            "border-amber-300 dark:border-amber-700 bg-amber-50/50 dark:bg-amber-950/30 hover:border-amber-400 hover:bg-amber-50",
+        )}
+        href={href}
+      >
+        <div className="flex items-center gap-2 mb-2">
+          {variant === "free" && (
+            <div className="flex justify-center items-center bg-primary/20 dark:bg-primary/30 rounded-lg w-8 h-8">
+              <Mail className="w-4 h-4 text-primary dark:text-primary/80" />
+            </div>
+          )}
+          {variant === "paid" && (
+            <div className="flex justify-center items-center bg-primary/10 rounded-lg w-8 h-8">
+              <BookOpen className="w-4 h-4 text-primary" />
+            </div>
+          )}
+          {variant === "premium" && (
+            <div className="flex justify-center items-center bg-amber-100 dark:bg-amber-900 rounded-lg w-8 h-8">
+              <GraduationCap className="w-4 h-4 text-amber-700 dark:text-amber-300" />
+            </div>
+          )}
+          <span
+            className={cn(
+              "px-2 py-0.5 rounded font-semibold text-xs",
+              variant === "free" &&
+                "bg-primary/20 dark:bg-primary/30 text-primary dark:text-primary/80",
+              variant === "paid" &&
+                "bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400",
+              variant === "premium" &&
+                "bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300",
+            )}
+          >
+            {variant === "free"
+              ? "FREE"
+              : variant === "premium"
+              ? "£99"
+              : "£29"}
+          </span>
+        </div>
+        <h3 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+          {title}
+        </h3>
+        <p className="text-neutral-600 dark:text-neutral-400 text-xs line-clamp-2">
+          {description}
+        </p>
+      </a>
+    </NavigationMenuLink>
+  );
+};
+
 type ProductLinkProps = {
   title: string;
   description: string;
@@ -345,6 +439,8 @@ const ProductLink = ({
   lang = "en",
 }: ProductLinkProps) => {
   const t = navigationContent[lang];
+  const { formattedPrice, isLoading } = useShopifyPrice();
+
   return (
     <div className="flex md:flex-row flex-col gap-6">
       {/* Product image - square and prominent */}
@@ -371,12 +467,30 @@ const ProductLink = ({
             {description}
           </p>
 
+          {/* Price display */}
+          <div className="mb-2">
+            {isLoading
+              ? (
+                <div className="bg-neutral-200 dark:bg-neutral-700 rounded w-20 h-7 animate-pulse" />
+              )
+              : (
+                <div className="flex items-baseline gap-2">
+                  <span className="font-bold text-neutral-900 dark:text-neutral-100 text-2xl">
+                    {formattedPrice}
+                  </span>
+                  <span className="font-medium text-primary dark:text-primary/80 text-sm">
+                    + Free Shipping
+                  </span>
+                </div>
+              )}
+          </div>
+
           {/* Reviews snippet */}
           <ReviewsLink size="sm" variant="background" lang={lang} />
         </div>
 
         {/* Action buttons */}
-        <div className="flex gap-3">
+        <div className="flex gap-3 mt-3">
           <a
             href={buyUrl}
             className={cn(buttonVariants({ variant: "default" }))}

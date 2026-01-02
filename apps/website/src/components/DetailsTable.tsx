@@ -89,7 +89,7 @@ const DetailsTable = ({ splint }: { splint: SplintData }) => {
                             className={[
                                 "inline-flex items-center px-2 py-1 rounded-full text-sm font-medium",
                                 splint.availability === "in_stock"
-                                    ? "bg-green-100 text-green-800 border border-green-200"
+                                    ? "bg-primary/20 text-primary border border-primary/30"
                                     : "bg-red-100 text-red-800 border border-red-200",
                             ].join(" ")}
                         >

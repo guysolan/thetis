@@ -744,11 +744,11 @@ export default function RequestAReturn(
 
     const renderCompleteStage = () => (
         <div className="space-y-6">
-            <div className="bg-green-50 p-6 border border-green-200 rounded-lg">
-                <h3 className="mb-3 font-semibold text-green-800 text-lg">
+            <div className="bg-primary/10 p-6 border border-primary/30 rounded-lg">
+                <h3 className="mb-3 font-semibold text-primary text-lg">
                     ✅ Return Request Submitted Successfully
                 </h3>
-                <p className="text-green-700">
+                <p className="text-neutral-700">
                     Thank you for your return request. We'll review it and get
                     back to you within 24 hours.
                 </p>

@@ -2,6 +2,7 @@
 import HighlightedWord from "../../HighlightedWord";
 import { Image } from "astro:assets";
 import nightSplint from "@/components/products/images/night-splint/night_splint_bed_top_square.jpg";
+import PriceDisplay from "@/components/PriceDisplay";
 import type { Lang } from "../../../config/languages";
 import { getRouteBySlugAndLanguage } from "../../../content/routes";
 
@@ -89,6 +90,7 @@ const buttonText = buyNowRoute?.title || currentContent.buttonText;
         <p class="mx-auto max-w-3xl text-gray-700 text-lg">
             {currentContent.description}
         </p>
+        <PriceDisplay size="md" client:load />
         <a
             href={buttonUrl}
             class="inline-block bg-primary px-4 py-2 rounded font-semibold text-white"

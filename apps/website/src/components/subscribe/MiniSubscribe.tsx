@@ -90,26 +90,30 @@ export default function MiniSubscribe() {
           type="submit"
           disabled={isSubmitting || isSuccess}
         >
-          {isSubmitting ? (
-            <>
-              <span className="animate-pulse">Downloading...</span>
-            </>
-          ) : isSuccess ? (
-            <>
-              <Check size={16} />
-              <span>Downloaded!</span>
-            </>
-          ) : (
-            <>
-              <Download size={16} />
-              <span>Get the eBook</span>
-            </>
-          )}
+          {isSubmitting
+            ? (
+              <>
+                <span className="animate-pulse">Downloading...</span>
+              </>
+            )
+            : isSuccess
+            ? (
+              <>
+                <Check size={16} />
+                <span>Downloaded!</span>
+              </>
+            )
+            : (
+              <>
+                <Download size={16} />
+                <span>Get the eBook</span>
+              </>
+            )}
         </Button>
       </form>
 
       {isSuccess && (
-        <div className="flex items-center gap-1 mt-2 text-green-600 text-sm">
+        <div className="flex items-center gap-1 mt-2 text-primary text-sm">
           <Check size={14} />
           <span>eBook downloaded! Check your downloads folder.</span>
         </div>

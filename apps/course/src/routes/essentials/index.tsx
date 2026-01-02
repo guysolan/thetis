@@ -1,10 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { formatWeekDay, sections } from "@/content/course/sections";
-import { BookOpen, ChevronRight, Clock, Star } from "lucide-react";
+import {
+  BookOpen,
+  ChevronRight,
+  Clock,
+  Mail,
+} from "../../../$node_modules/lucide-react/dist/lucide-react.js";
 import { cn } from "@/lib/utils";
+import { Button } from "@thetis/ui/button";
+import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 
-export const Route = createFileRoute("/professionals/")({
-  component: ProfessionalsIndexPage,
+export const Route = createFileRoute("/essentials/")({
+  component: EssentialsIndexPage,
 });
 
 // Group sections by phase based on days_after_rupture ranges
@@ -18,7 +25,7 @@ const phases = [
   { name: "Week 26+: Return to Sport", minDay: 190, maxDay: 999 },
 ];
 
-function ProfessionalsIndexPage() {
+function EssentialsIndexPage() {
   return (
     <div className="bg-background min-h-screen">
       <div className="mx-auto px-4 sm:px-6 py-16 max-w-4xl">
@@ -35,16 +42,25 @@ function ProfessionalsIndexPage() {
         {/* Header */}
         <div className="mb-16">
           <div className="inline-flex items-center gap-2 bg-primary/10 mb-4 px-3 py-1 rounded-full font-medium text-primary text-sm">
-            <Star className="fill-current w-4 h-4 text-primary" />
-            Professionals Course
+            <BookOpen className="w-4 h-4" />
+            Essentials Course
           </div>
           <h1 className="mb-4 font-bold text-foreground text-3xl md:text-5xl tracking-tight">
-            Achilles Recovery <span className="text-primary">Professional</span>
+            Achilles Recovery Essentials
           </h1>
-          <p className="max-w-2xl text-muted-foreground text-lg md:text-xl">
-            Everything in Essentials, plus expert-led deep dives and advanced
-            recovery hacks from specialist surgeons and physios.
+          <p className="mb-6 max-w-2xl text-muted-foreground text-lg md:text-xl">
+            {sections.length}{" "}
+            lessons covering your complete journey from injury to return to
+            sport.
           </p>
+          <EmailSignupDialog
+            trigger={
+              <Button variant="outline" className="gap-2">
+                <Mail className="w-4 h-4" />
+                Get Free Recovery Emails
+              </Button>
+            }
+          />
         </div>
 
         {/* Section List */}
@@ -61,7 +77,7 @@ function ProfessionalsIndexPage() {
             return (
               <div key={phaseIndex} className="relative">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="flex justify-center items-center bg-primary shadow-sm rounded-xl w-10 h-10 font-bold text-primary-foreground">
+                  <div className="flex justify-center items-center bg-primary rounded-xl w-10 h-10 font-bold text-primary-foreground">
                     {phaseIndex + 1}
                   </div>
                   <h2 className="font-bold text-foreground text-xl md:text-2xl">

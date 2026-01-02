@@ -1,5 +1,12 @@
 import { type Language, languages } from "../config/languages";
-import { Activity, Calendar, Heart, HelpCircle, Hourglass } from "lucide-react";
+import {
+  Activity,
+  Calendar,
+  Heart,
+  HelpCircle,
+  Hourglass,
+  List,
+} from "lucide-react";
 import type { ImageMetadata } from "astro";
 import {
   BookOpen,
@@ -146,7 +153,104 @@ export interface Route {
   slug: string;
 }
 
-// Guide page routes (internal pages on thetismedical.com/guide/)
+// Course routes (paid and free courses at /course/)
+export const courseRoutes: BaseRoute[] = [
+  {
+    slug: "course/emails",
+    title: {
+      en: "Email Course",
+      de: "E-Mail-Kurs",
+      fr: "Cours par Email",
+      es: "Curso por Email",
+      it: "Corso Email",
+    },
+    description: {
+      en:
+        "Free personalized emails timed to your injury date. Recovery guidance arrives exactly when you need it.",
+      de:
+        "Kostenlose personalisierte E-Mails basierend auf Ihrem Verletzungsdatum. Genesungsanleitung kommt genau dann, wenn Sie sie brauchen.",
+      fr:
+        "Emails personnalisés gratuits basés sur votre date de blessure. Les conseils arrivent exactement quand vous en avez besoin.",
+      es:
+        "Correos personalizados gratuitos basados en tu fecha de lesión. La orientación llega exactamente cuando la necesitas.",
+      it:
+        "Email personalizzate gratuite basate sulla tua data di infortunio. I consigli arrivano esattamente quando ne hai bisogno.",
+    },
+    slugTranslations: {
+      en: "course/emails",
+      de: "kurs/emails",
+      fr: "cours/emails",
+      es: "curso/emails",
+      it: "corso/emails",
+    },
+    icon: <Mail />,
+    variant: "outline",
+  },
+  {
+    slug: "course/essentials",
+    title: {
+      en: "Essentials Course",
+      de: "Grundlagen-Kurs",
+      fr: "Cours Essentiels",
+      es: "Curso Esenciales",
+      it: "Corso Fondamentali",
+    },
+    description: {
+      en:
+        "31 structured lessons covering every stage of Achilles rupture recovery. Expert guidance for £29.",
+      de:
+        "31 strukturierte Lektionen zu jeder Phase der Achillessehnenruptur-Genesung. Expertenführung für 29 €.",
+      fr:
+        "31 leçons structurées couvrant chaque étape de la récupération de rupture d'Achille. Conseils d'experts pour 29 €.",
+      es:
+        "31 lecciones estructuradas que cubren cada etapa de la recuperación de rotura de Aquiles. Orientación experta por 29 €.",
+      it:
+        "31 lezioni strutturate che coprono ogni fase del recupero dalla rottura di Achille. Guida esperta per 29 €.",
+    },
+    slugTranslations: {
+      en: "course/essentials",
+      de: "kurs/grundlagen",
+      fr: "cours/essentiels",
+      es: "curso/esenciales",
+      it: "corso/fondamentali",
+    },
+    icon: <List />,
+    variant: "default",
+  },
+  {
+    slug: "course/professionals",
+    title: {
+      en: "Professional Course",
+      de: "Professioneller Kurs",
+      fr: "Cours Professionnel",
+      es: "Curso Profesional",
+      it: "Corso Professionale",
+    },
+    description: {
+      en:
+        "Expert video lessons and personalized guidance from specialist surgeons. Premium recovery for £99.",
+      de:
+        "Experten-Videolektionen und persönliche Anleitung von Fachärzten. Premium-Genesung für 99 €.",
+      fr:
+        "Leçons vidéo d'experts et conseils personnalisés de chirurgiens spécialistes. Récupération premium pour 99 €.",
+      es:
+        "Lecciones en video de expertos y orientación personalizada de cirujanos especialistas. Recuperación premium por 99 €.",
+      it:
+        "Lezioni video di esperti e guida personalizzata da chirurghi specialisti. Recupero premium per 99 €.",
+    },
+    slugTranslations: {
+      en: "course/professionals",
+      de: "kurs/professionell",
+      fr: "cours/professionnel",
+      es: "curso/profesional",
+      it: "corso/professionale",
+    },
+    icon: <GraduationCap />,
+    variant: "default",
+  },
+];
+
+// Guide page routes (kept for backwards compatibility, now redirects to /course/)
 export const guidePageRoutes: BaseRoute[] = [
   {
     slug: "guide/articles",
@@ -178,99 +282,6 @@ export const guidePageRoutes: BaseRoute[] = [
     },
     icon: <BookOpen />,
     variant: "outline",
-  },
-  {
-    slug: "guide/emails",
-    title: {
-      en: "Email Course",
-      de: "E-Mail-Kurs",
-      fr: "Cours par Email",
-      es: "Curso por Email",
-      it: "Corso Email",
-    },
-    description: {
-      en:
-        "Free personalized emails timed to your injury date. Recovery guidance arrives exactly when you need it.",
-      de:
-        "Kostenlose personalisierte E-Mails basierend auf Ihrem Verletzungsdatum. Genesungsanleitung kommt genau dann, wenn Sie sie brauchen.",
-      fr:
-        "Emails personnalisés gratuits basés sur votre date de blessure. Les conseils arrivent exactement quand vous en avez besoin.",
-      es:
-        "Correos personalizados gratuitos basados en tu fecha de lesión. La orientación llega exactamente cuando la necesitas.",
-      it:
-        "Email personalizzate gratuite basate sulla tua data di infortunio. I consigli arrivano esattamente quando ne hai bisogno.",
-    },
-    slugTranslations: {
-      en: "guide/emails",
-      de: "leitfaden/emails",
-      fr: "guide/emails",
-      es: "guia/emails",
-      it: "guida/emails",
-    },
-    icon: <Mail />,
-    variant: "outline",
-  },
-  {
-    slug: "guide/essentials",
-    title: {
-      en: "Essentials Course",
-      de: "Grundlagen-Kurs",
-      fr: "Cours Essentiels",
-      es: "Curso Esenciales",
-      it: "Corso Fondamentali",
-    },
-    description: {
-      en:
-        "31 structured lessons covering every stage of Achilles rupture recovery. Expert guidance for £29.",
-      de:
-        "31 strukturierte Lektionen zu jeder Phase der Achillessehnenruptur-Genesung. Expertenführung für 29 €.",
-      fr:
-        "31 leçons structurées couvrant chaque étape de la récupération de rupture d'Achille. Conseils d'experts pour 29 €.",
-      es:
-        "31 lecciones estructuradas que cubren cada etapa de la recuperación de rotura de Aquiles. Orientación experta por 29 €.",
-      it:
-        "31 lezioni strutturate che coprono ogni fase del recupero dalla rottura di Achille. Guida esperta per 29 €.",
-    },
-    slugTranslations: {
-      en: "guide/essentials",
-      de: "leitfaden/grundlagen",
-      fr: "guide/essentiels",
-      es: "guia/esenciales",
-      it: "guida/fondamentali",
-    },
-    icon: <BookOpen />,
-    variant: "default",
-  },
-  {
-    slug: "guide/professionals",
-    title: {
-      en: "Professional Course",
-      de: "Professioneller Kurs",
-      fr: "Cours Professionnel",
-      es: "Curso Profesional",
-      it: "Corso Professionale",
-    },
-    description: {
-      en:
-        "Expert video lessons and personalized guidance from specialist surgeons. Premium recovery for £99.",
-      de:
-        "Experten-Videolektionen und persönliche Anleitung von Fachärzten. Premium-Genesung für 99 €.",
-      fr:
-        "Leçons vidéo d'experts et conseils personnalisés de chirurgiens spécialistes. Récupération premium pour 99 €.",
-      es:
-        "Lecciones en video de expertos y orientación personalizada de cirujanos especialistas. Recuperación premium por 99 €.",
-      it:
-        "Lezioni video di esperti e guida personalizzata da chirurghi specialisti. Recupero premium per 99 €.",
-    },
-    slugTranslations: {
-      en: "guide/professionals",
-      de: "leitfaden/professionell",
-      fr: "guide/professionnel",
-      es: "guia/profesional",
-      it: "guida/professionale",
-    },
-    icon: <GraduationCap />,
-    variant: "default",
   },
 ];
 
@@ -488,40 +499,38 @@ export const recoveryPhaseRoutes: BaseRoute[] = [
   },
 ];
 
-// Legacy course routes (redirects to guide pages)
-export const courseRoutes: BaseRoute[] = [
-  {
-    slug: "courses",
-    title: {
-      en: "Recovery Courses",
-      de: "Genesungskurse",
-      fr: "Cours de Récupération",
-      es: "Cursos de Recuperación",
-      it: "Corsi di Recupero",
-    },
-    description: {
-      en:
-        "Expert-led courses to guide you through every step of your Achilles rupture recovery.",
-      de:
-        "Expertenkurse, die Sie durch jeden Schritt Ihrer Achillessehnenruptur-Genesung führen.",
-      fr:
-        "Cours dirigés par des experts pour vous guider à chaque étape de votre récupération de rupture d'Achille.",
-      es:
-        "Cursos dirigidos por expertos para guiarte en cada paso de tu recuperación de la rotura de Aquiles.",
-      it:
-        "Corsi guidati da esperti per accompagnarti in ogni fase del tuo recupero dalla rottura di Achille.",
-    },
-    slugTranslations: {
-      en: "courses",
-      de: "kurse",
-      fr: "cours",
-      es: "cursos",
-      it: "corsi",
-    },
-    icon: <GraduationCap />,
-    variant: "default",
+// Legacy course index route (redirects to /course/)
+export const legacyCourseRoute: BaseRoute = {
+  slug: "courses",
+  title: {
+    en: "Recovery Courses",
+    de: "Genesungskurse",
+    fr: "Cours de Récupération",
+    es: "Cursos de Recuperación",
+    it: "Corsi di Recupero",
   },
-];
+  description: {
+    en:
+      "Expert-led courses to guide you through every step of your Achilles rupture recovery.",
+    de:
+      "Expertenkurse, die Sie durch jeden Schritt Ihrer Achillessehnenruptur-Genesung führen.",
+    fr:
+      "Cours dirigés par des experts pour vous guider à chaque étape de votre récupération de rupture d'Achille.",
+    es:
+      "Cursos dirigidos por expertos para guiarte en cada paso de tu recuperación de la rotura de Aquiles.",
+    it:
+      "Corsi guidati da esperti per accompagnarti in ogni fase del tuo recupero dalla rottura di Achille.",
+  },
+  slugTranslations: {
+    en: "courses",
+    de: "kurse",
+    fr: "cours",
+    es: "cursos",
+    it: "corsi",
+  },
+  icon: <GraduationCap />,
+  variant: "default",
+};
 
 // External guide routes (hosted on guide.thetismedical.com)
 export const guideRoutes = {
@@ -1648,6 +1657,7 @@ export const allBaseRoutes: BaseRoute[] = [
   ...guidePageRoutes,
   ...recoveryPhaseRoutes,
   ...courseRoutes,
+  legacyCourseRoute,
   ...productRoutes,
   ...partnerRoutes,
   ...contactRoutes,

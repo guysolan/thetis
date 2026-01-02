@@ -1,16 +1,5 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import CourseCTA from "@/components/CTA/CourseCTA.astro";
-import EmailCTA from "@/components/CTA/EmailCTA.astro";
-import {
-    ArrowLeft,
-    ArrowRight,
-    Calendar,
-    Moon,
-    ShoppingCart,
-} from "lucide-react";
+import GuideLayout from "@/layouts/GuideLayout.astro";
 
 // Define the phase mapping
 const phases = [
@@ -95,191 +84,101 @@ if (!article) {
 }
 
 const { frontmatter, default: Content } = article;
-
-// Get prev/next phases
-const prevPhase = currentPhaseIndex > 0 ? phases[currentPhaseIndex - 1] : null;
-const nextPhase = currentPhaseIndex < phases.length - 1 ? phases[currentPhaseIndex + 1] : null;
 ---
 
-<Layout
+<GuideLayout
     title={`${frontmatter.title} | Thetis Medical`}
     description={frontmatter.description}
-    image="https://thetismedical.com/images/night-splint.png"
     lang="en"
+    currentPhaseIndex={currentPhaseIndex}
+    phases={phases}
 >
-    <main>
-        <!-- Header -->
-        <div class="bg-gradient-to-b from-primary/5 to-transparent py-8 md:py-12">
-            <div class="mx-auto px-4 max-w-4xl">
-                <a
-                    href="/guide"
-                    class="inline-flex items-center gap-2 mb-4 text-primary hover:underline text-sm"
-                >
-                    <ArrowLeft className="w-4 h-4" />
-                    Back to Recovery Guide
-                </a>
-                
-                <div class="flex items-center gap-2 mb-4">
-                    <Calendar className="w-5 h-5 text-primary" />
-                    <span class="font-medium text-primary text-sm uppercase tracking-widest">
-                        Phase {currentPhaseIndex + 1} of {phases.length}
-                    </span>
-                </div>
-                
-                <h1 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl">
-                    {currentPhase.title}
-                </h1>
-                
-                <p class="text-neutral-600 dark:text-neutral-400 text-lg">
-                    {frontmatter.description}
-                </p>
+    <!-- Header -->
+    <div class="py-8 md:py-10">
+        <div class="mx-auto px-4 max-w-3xl">
+            <p class="mb-2 text-neutral-500 dark:text-neutral-400 text-sm">
+                Phase {currentPhaseIndex + 1} of {phases.length}
+            </p>
+
+            <h1
+                class="mb-3 font-semibold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
+            >
+                {currentPhase.title}
+            </h1>
+
+            <p class="text-neutral-600 dark:text-neutral-400">
+                {frontmatter.description}
+            </p>
+        </div>
+    </div>
+
+    <!-- Article Content -->
+    <article class="pb-10 md:pb-14">
+        <div class="mx-auto px-4 max-w-3xl">
+            <div class="article-content">
+                <Content />
             </div>
         </div>
-
-        <!-- Article Content -->
-        <article class="py-8 md:py-12">
-            <div class="mx-auto px-4 max-w-4xl">
-                <div class="dark:prose-invert prose prose-neutral prose-lg max-w-none">
-                    <Content />
-                </div>
-            </div>
-        </article>
-
-        <!-- Splint Callout -->
-        <section class="py-8 md:py-12">
-            <div class="mx-auto px-4 max-w-4xl">
-                <div class="bg-primary/5 p-6 border border-primary/20 rounded-xl">
-                    <div class="flex md:flex-row flex-col items-center gap-6">
-                        <div class="flex-1">
-                            <h3 class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
-                                Struggling to sleep in your boot?
-                            </h3>
-                            <p class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm">
-                                The <strong>Thetis Night Splint</strong> is designed specifically for sleeping — lightweight, breathable, and maintains the correct position while you rest.
-                            </p>
-                            <div class="flex flex-wrap gap-3">
-                                <a
-                                    href="/achilles-rupture-splint"
-                                    class={cn(
-                                        buttonVariants({
-                                            variant: "default",
-                                            size: "sm",
-                                        }),
-                                        "gap-2",
-                                    )}
-                                >
-                                    <Moon className="w-4 h-4" />
-                                    Learn More
-                                </a>
-                                <a
-                                    href="/buy-now"
-                                    class={cn(
-                                        buttonVariants({
-                                            variant: "outline",
-                                            size: "sm",
-                                        }),
-                                        "gap-2",
-                                    )}
-                                >
-                                    <ShoppingCart className="w-4 h-4" />
-                                    Shop Now
-                                </a>
-                            </div>
-                        </div>
-                        <div class="w-32 shrink-0">
-                            <img
-                                src="/images/night-splint.png"
-                                alt="Thetis Night Splint"
-                                class="rounded-lg"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Email CTA -->
-        <EmailCTA lang="en" variant="full" />
-
-        <!-- Course CTA -->
-        <CourseCTA lang="en" variant="full" />
-
-        <!-- Prev/Next Navigation -->
-        <section class="py-8 md:py-12 border-neutral-200 dark:border-neutral-700 border-t">
-            <div class="mx-auto px-4 max-w-4xl">
-                <div class="flex justify-between items-center gap-4">
-                    {prevPhase ? (
-                        <a
-                            href={`/guide/${prevPhase.slug}`}
-                            class="flex items-center gap-2 hover:text-primary transition-colors group"
-                        >
-                            <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
-                            <div class="text-left">
-                                <div class="text-neutral-500 text-xs uppercase">Previous</div>
-                                <div class="font-medium text-neutral-900 dark:text-neutral-100">{prevPhase.shortTitle}</div>
-                            </div>
-                        </a>
-                    ) : (
-                        <div />
-                    )}
-                    
-                    {nextPhase ? (
-                        <a
-                            href={`/guide/${nextPhase.slug}`}
-                            class="flex items-center gap-2 hover:text-primary transition-colors group text-right"
-                        >
-                            <div>
-                                <div class="text-neutral-500 text-xs uppercase">Next</div>
-                                <div class="font-medium text-neutral-900 dark:text-neutral-100">{nextPhase.shortTitle}</div>
-                            </div>
-                            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                        </a>
-                    ) : (
-                        <a
-                            href="/guide"
-                            class="flex items-center gap-2 hover:text-primary transition-colors group text-right"
-                        >
-                            <div>
-                                <div class="text-neutral-500 text-xs uppercase">Complete</div>
-                                <div class="font-medium text-neutral-900 dark:text-neutral-100">Back to Guide</div>
-                            </div>
-                            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                        </a>
-                    )}
-                </div>
-            </div>
-        </section>
-    </main>
-</Layout>
+    </article>
+</GuideLayout>
 
 <style is:global>
-    /* Prose styling enhancements */
-    .prose h2 {
-        @apply mt-12 mb-4 pb-2 border-b border-neutral-200 dark:border-neutral-700;
+    .article-content {
+        @apply text-neutral-700 dark:text-neutral-300 leading-relaxed;
     }
-    
-    .prose h3 {
-        @apply mt-8 mb-3;
+
+    /* Hide the first h1 from markdown as we show it in the header */
+    .article-content > h1:first-child {
+        @apply hidden;
     }
-    
-    .prose ul, .prose ol {
-        @apply my-4;
+
+    /* Also hide the first paragraph if it immediately follows the hidden h1 (often intro text we already show) */
+    .article-content > h1:first-child + p {
+        @apply hidden;
     }
-    
-    .prose li {
-        @apply my-1;
+
+    .article-content h1 {
+        @apply mt-10 mb-4 font-semibold text-neutral-900 dark:text-neutral-100 text-2xl;
     }
-    
-    .prose blockquote {
-        @apply bg-amber-50 dark:bg-amber-900/20 border-amber-500 rounded-r-lg;
+
+    .article-content h2 {
+        @apply mt-10 mb-4 font-semibold text-neutral-900 dark:text-neutral-100 text-xl;
     }
-    
-    .prose strong {
-        @apply text-neutral-900 dark:text-neutral-100;
+
+    .article-content h3 {
+        @apply mt-6 mb-3 font-medium text-neutral-900 dark:text-neutral-100 text-lg;
     }
-    
-    .prose a {
+
+    .article-content p {
+        @apply mb-4;
+    }
+
+    .article-content ul,
+    .article-content ol {
+        @apply mb-4 pl-5;
+    }
+
+    .article-content ul {
+        @apply list-disc;
+    }
+
+    .article-content ol {
+        @apply list-decimal;
+    }
+
+    .article-content li {
+        @apply mb-2;
+    }
+
+    .article-content a {
         @apply text-primary hover:underline;
     }
-</style>
 
+    .article-content strong {
+        @apply font-medium text-neutral-900 dark:text-neutral-100;
+    }
+
+    .article-content blockquote {
+        @apply my-4 pl-4 border-neutral-300 dark:border-neutral-600 border-l-2 text-neutral-600 dark:text-neutral-400 italic;
+    }
+</style>

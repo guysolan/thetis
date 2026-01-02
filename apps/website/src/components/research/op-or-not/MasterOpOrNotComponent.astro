@@ -111,7 +111,7 @@ function getUnicodeFlagIcon(code) {
             </li>
             <li class="mr-2" role="presentation">
                 <button
-                    class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600"
+                    class="inline-block p-4 border-transparent hover:border-gray-300 border-b-2 rounded-t-lg hover:text-gray-600"
                     id="overview-tab"
                     data-tabs-target="#overview"
                     type="button"
@@ -127,7 +127,7 @@ function getUnicodeFlagIcon(code) {
             </li>
             <li class="mr-2" role="presentation">
                 <button
-                    class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600"
+                    class="inline-block p-4 border-transparent hover:border-gray-300 border-b-2 rounded-t-lg hover:text-gray-600"
                     id="data-visualization-tab"
                     data-tabs-target="#data-visualization"
                     type="button"
@@ -144,7 +144,7 @@ function getUnicodeFlagIcon(code) {
 
             <li role="presentation">
                 <button
-                    class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600"
+                    class="inline-block p-4 border-transparent hover:border-gray-300 border-b-2 rounded-t-lg hover:text-gray-600"
                     id="detailed-report-tab"
                     data-tabs-target="#detailed-report"
                     type="button"
@@ -260,7 +260,7 @@ function getUnicodeFlagIcon(code) {
                     >
                         <div class="flex items-center mb-2">
                             <div
-                                class="flex justify-center items-center bg-green-100 mr-3 rounded-full w-8 h-8 text-green-600"
+                                class="flex justify-center items-center bg-primary/20 mr-3 rounded-full w-8 h-8 text-primary"
                             >
                                 <Hammer size={16} />
                             </div>
@@ -275,7 +275,7 @@ function getUnicodeFlagIcon(code) {
                         <div class="flex flex-wrap gap-2">
                             {
                                 surgicalApproachGroups.low.map((country) => (
-                                    <span class="inline-flex items-center bg-green-50 px-2 py-1 rounded-full font-medium text-green-800 text-xs">
+                                    <span class="inline-flex items-center bg-primary/10 px-2 py-1 rounded-full font-medium text-primary text-xs">
                                         {country.code && (
                                             <span class="mr-1">
                                                 {getUnicodeFlagIcon(
@@ -355,7 +355,7 @@ function getUnicodeFlagIcon(code) {
                                             <td class="px-6 py-4">
                                                 {country.trendDirection ===
                                                 "decreasing" ? (
-                                                    <span class="inline-flex items-center text-green-700">
+                                                    <span class="inline-flex items-center text-primary">
                                                         <TrendingDown
                                                             size={16}
                                                             class="mr-1"

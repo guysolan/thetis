@@ -1,0 +1,223 @@
+---
+import type { Lang } from "@/config/languages";
+import Layout from "./Layout.astro";
+import CourseCTA from "@/components/CTA/CourseCTA.astro";
+import { cn } from "@/lib/utils";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { EmailSignupDialog } from "@thetis/ui/email-signup-dialog";
+
+interface Phase {
+    slug: string;
+    shortTitle: string;
+}
+
+export interface Props {
+    title: string;
+    description: string;
+    lang?: Lang;
+    currentPhaseIndex: number;
+    phases: Phase[];
+}
+
+const {
+    title,
+    description,
+    lang = "en",
+    currentPhaseIndex,
+    phases,
+} = Astro.props;
+
+const prevPhase = currentPhaseIndex > 0 ? phases[currentPhaseIndex - 1] : null;
+const nextPhase =
+    currentPhaseIndex < phases.length - 1
+        ? phases[currentPhaseIndex + 1]
+        : null;
+---
+
+<Layout
+    title={title}
+    description={description}
+    image="https://thetismedical.com/images/night-splint.png"
+    lang={lang}
+>
+    <div class="min-h-screen">
+        <!-- Sticky Top Bar -->
+        <div
+            class="bg-white/95 dark:bg-neutral-900/95 backdrop-blur mt-12 mb-6"
+        >
+            <div class="mx-auto px-4 max-w-3xl">
+                <!-- Navigation Row -->
+                <div class="flex justify-between items-center h-12">
+                    <!-- Prev -->
+                    {
+                        prevPhase ? (
+                            <a
+                                href={`/guide/${prevPhase.slug}`}
+                                class="flex items-center gap-1 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 text-sm"
+                            >
+                                <ArrowLeft className="w-4 h-4" />
+                                <span class="hidden sm:inline">
+                                    {prevPhase.shortTitle}
+                                </span>
+                            </a>
+                        ) : (
+                            <a
+                                href="/guide/articles"
+                                class="flex items-center gap-1 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 text-sm"
+                            >
+                                <ArrowLeft className="w-4 h-4" />
+                                <span class="hidden sm:inline">All Guides</span>
+                            </a>
+                        )
+                    }
+
+                    <!-- Phase Indicator -->
+                    <div class="flex items-center gap-1">
+                        {
+                            phases.map((phase, i) => (
+                                <a
+                                    href={`/guide/${phase.slug}`}
+                                    class={cn(
+                                        "rounded-full w-2 h-2 transition-colors",
+                                        i === currentPhaseIndex
+                                            ? "bg-primary"
+                                            : "bg-neutral-300 dark:bg-neutral-600 hover:bg-neutral-400 dark:hover:bg-neutral-500",
+                                    )}
+                                    title={phase.shortTitle}
+                                />
+                            ))
+                        }
+                    </div>
+
+                    <!-- Next -->
+                    {
+                        nextPhase ? (
+                            <a
+                                href={`/guide/${nextPhase.slug}`}
+                                class="flex items-center gap-1 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 text-sm"
+                            >
+                                <span class="hidden sm:inline">
+                                    {nextPhase.shortTitle}
+                                </span>
+                                <ArrowRight className="w-4 h-4" />
+                            </a>
+                        ) : (
+                            <a
+                                href="/guide/articles"
+                                class="flex items-center gap-1 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 text-sm"
+                            >
+                                <span class="hidden sm:inline">All Guides</span>
+                                <ArrowRight className="w-4 h-4" />
+                            </a>
+                        )
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Course CTA Banner -->
+        <div
+            class="bg-primary/5 dark:bg-primary/10 mx-auto px-4 py-4 border border-primary/20 rounded-md max-w-3xl"
+        >
+            <div class="mx-auto">
+                <div
+                    class="flex sm:flex-row flex-col justify-between items-center gap-3"
+                >
+                    <div class="sm:text-left text-center">
+                        <p
+                            class="font-medium text-neutral-900 dark:text-neutral-100 text-sm"
+                        >
+                            Get free recovery tips timed to your injury
+                        </p>
+                        <p
+                            class="text-neutral-600 dark:text-neutral-400 text-xs"
+                        >
+                            We'll email you the right guidance exactly when you
+                            need it
+                        </p>
+                    </div>
+                    <EmailSignupDialog
+                        client:only="react"
+                        triggerText="Sign Up Free"
+                        triggerClassName="bg-primary hover:bg-primary/90 text-white shrink-0"
+                        title="Free Recovery Email Course"
+                        description="Enter your email and when you ruptured. We'll send personalized recovery tips timed to your healing phase."
+                        submitText="Start Free Course"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main>
+            <slot />
+        </main>
+
+        <!-- Course CTA (Essentials/Professionals) -->
+        <CourseCTA lang={lang} variant="full" />
+
+        <!-- Bottom Navigation -->
+        <nav
+            class="bg-white dark:bg-neutral-900 py-6 border-neutral-200 dark:border-neutral-800 border-t"
+        >
+            <div class="mx-auto px-4 max-w-3xl">
+                <div class="flex justify-between items-center">
+                    {
+                        prevPhase ? (
+                            <a
+                                href={`/guide/${prevPhase.slug}`}
+                                class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 dark:hover:text-neutral-100 dark:text-neutral-400"
+                            >
+                                <ArrowLeft className="w-4 h-4" />
+                                <div class="text-left">
+                                    <div class="text-neutral-400 text-xs">
+                                        Previous
+                                    </div>
+                                    <div class="text-sm">
+                                        {prevPhase.shortTitle}
+                                    </div>
+                                </div>
+                            </a>
+                        ) : (
+                            <div />
+                        )
+                    }
+
+                    <a
+                        href="/guide/articles"
+                        class="text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 text-sm"
+                    >
+                        All Guides
+                    </a>
+
+                    {
+                        nextPhase ? (
+                            <a
+                                href={`/guide/${nextPhase.slug}`}
+                                class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 dark:hover:text-neutral-100 dark:text-neutral-400"
+                            >
+                                <div class="text-right">
+                                    <div class="text-neutral-400 text-xs">
+                                        Next
+                                    </div>
+                                    <div class="text-sm">
+                                        {nextPhase.shortTitle}
+                                    </div>
+                                </div>
+                                <ArrowRight className="w-4 h-4" />
+                            </a>
+                        ) : (
+                            <div />
+                        )
+                    }
+                </div>
+            </div>
+        </nav>
+    </div>
+</Layout>
+
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+</style>

@@ -8,7 +8,7 @@ export const content = {
                 { highlighted: true, text: "Rupture" },
             ],
             description:
-                "Finally, a comfortable solution for sleep. Designed alongside surgeons to protect your healing Achilles tendon while you get the rest you need.",
+                "A patented, lightweight splint designed with surgeons. Sleep comfortably while keeping your Achilles protected.",
         },
         reviewsLink: {
             basedOn: "Over 200 Verified Reviews",
@@ -56,7 +56,7 @@ export const content = {
                 { highlighted: true, text: "Achillessehnenruptur" },
             ],
             description:
-                "Endlich eine bequeme Lösung für den Schlaf. Entwickelt zusammen mit Chirurgen, um Ihre heilende Achillessehne zu schützen, während Sie die Ruhe bekommen, die Sie brauchen.",
+                "Eine patentierte, leichte Schiene, entwickelt mit Chirurgen. Schlafen Sie bequem und halten Sie Ihre Achillessehne geschützt.",
         },
         reviewsLink: {
             basedOn: "Über 200 verifizierte Bewertungen",
@@ -107,7 +107,7 @@ export const content = {
                 { highlighted: false, text: " du tendon d'Achille" },
             ],
             description:
-                "Enfin, une solution confortable pour dormir. Conçue en collaboration avec des chirurgiens pour protéger votre tendon d'Achille en guérison pendant que vous obtenez le repos dont vous avez besoin.",
+                "Une attelle brevetée et légère, conçue avec des chirurgiens. Dormez confortablement tout en protégeant votre tendon d'Achille.",
         },
         reviewsLink: {
             basedOn: "Plus de 200 avis vérifiés",
@@ -157,7 +157,7 @@ export const content = {
                 { highlighted: false, text: " del tendón de Aquiles" },
             ],
             description:
-                "Finalmente, una solución cómoda para dormir. Diseñada junto con cirujanos para proteger su tendón de Aquiles en curación mientras obtiene el descanso que necesita.",
+                "Una férula patentada y ligera, diseñada con cirujanos. Duerma cómodamente mientras mantiene su tendón de Aquiles protegido.",
         },
         reviewsLink: {
             basedOn: "Más de 200 reseñas verificadas",
@@ -207,7 +207,7 @@ export const content = {
                 { highlighted: false, text: " del tendine di Achille" },
             ],
             description:
-                "Finalmente, una soluzione comoda per dormire. Progettata insieme ai chirurghi per proteggere il tuo tendine di Achille in guarigione mentre ottieni il riposo di cui hai bisogno.",
+                "Una férula brevettata e leggera, progettata con chirurghi. Dormi comodamente mantenendo il tendine d'Achille protetto.",
         },
         reviewsLink: {
             basedOn: "Oltre 200 recensioni verificate",

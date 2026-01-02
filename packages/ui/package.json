@@ -77,6 +77,11 @@
     "./icons": "./src/components/icons.tsx",
     "./infinite-moving-cards": "./src/components/infinite-moving-cards.tsx",
     "./logo": "./src/components/logo.tsx",
+    "./date-picker": "./src/components/date-picker.tsx",
+    "./email-signup-dialog": "./src/components/email-signup-dialog.tsx",
+    "./pricing-card": "./src/components/pricing-card.tsx",
+    "./feature-card": "./src/components/feature-card.tsx",
+    "./section-header": "./src/components/section-header.tsx",
     "./tailwind.config": "./tailwind.config.ts",
     "./postcss": "./postcss.config.js"
   },

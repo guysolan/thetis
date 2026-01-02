@@ -22,7 +22,7 @@ import {
   Lightbulb,
   Square,
   XCircle,
-} from "lucide-react";
+} from "../../../$node_modules/lucide-react/dist/lucide-react.js";
 import { cn } from "@/lib/utils";
 
 // Parse simple markdown: **bold** and *italic*

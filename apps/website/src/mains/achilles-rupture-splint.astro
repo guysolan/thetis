@@ -10,12 +10,14 @@ import NightSplintHero from "@/sections/achilles-rupture-splint/NightSplintHero.
 import ValuePropositions from "@/sections/achilles-rupture-splint/ValuePropositions.astro";
 import KeyFeatures from "@/sections/achilles-rupture-splint/KeyFeatures.astro";
 import Reviews from "@/components/reviews/InfiniteReviews.astro";
-import SplintIntro from "@/sections/achilles-rupture-splint/SplintIntro.astro";
 import ReadyForRelief from "@/sections/achilles-rupture-splint/ReadyForRelief.astro";
 import ComfortableRecoveryReviews from "@/sections/achilles-rupture-splint/ComfortableRecoveryReviews.astro";
 import OrderYourSplint from "@/sections/achilles-rupture-splint/OrderYourSplint.astro";
 import SleepInYourWelliesSection from "@/sections/achilles-rupture-splint/SleepInYourWelliesSection.astro";
 import SplintDownloads from "@/sections/achilles-rupture-splint/SplintDownloads.astro";
+import StickyAddToCart from "@/components/StickyAddToCart.tsx";
+import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
+import ComparisonTable from "@/components/ComparisonTable.tsx";
 import type { Lang } from "@/config/languages.ts";
 
 const { lang = "en" } = Astro.props as { lang?: Lang };
@@ -70,7 +72,12 @@ const currentContent = content[lang as keyof typeof content];
     <main>
         <NightSplintHero lang={lang} />
 
-        <SplintIntro lang={lang} />
+        <!-- Comparison Table: Night Splint vs Boot - right after hero -->
+        <section class="py-16 md:py-20">
+            <div class="mx-auto px-4 max-w-4xl">
+                <ComparisonTable lang={lang} client:load />
+            </div>
+        </section>
 
         <SleepInYourWelliesSection />
 
@@ -108,8 +115,11 @@ const currentContent = content[lang as keyof typeof content];
 
         <SplintDownloads lang={lang} />
 
-        <!-- Load reviews last since they're not critical for initial page load -->
-        <Reviews />
+        <!-- Sticky Add to Cart -->
+        <StickyAddToCart lang={lang} client:load />
+
+        <!-- Exit Intent Popup -->
+        <ExitIntentPopup client:load />
     </main>
 
     <script>

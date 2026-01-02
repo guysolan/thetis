@@ -92,7 +92,7 @@ const ShopifyBuyButton: React.FC<ShopifyBuyButtonProps> = ({
                 },
               },
               text: {
-                button: "Add to cart",
+                button: "Sleep Better Tonight",
               },
               googleFonts: ["Raleway"],
             },
@@ -169,7 +169,7 @@ const ShopifyBuyButton: React.FC<ShopifyBuyButtonProps> = ({
               },
               googleFonts: ["Raleway"],
               text: {
-                button: "Add to cart",
+                button: "Sleep Better Tonight",
               },
             },
             option: {

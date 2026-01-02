@@ -9,8 +9,15 @@ import {
 } from "@/content/course/sections";
 import { ContentRenderer } from "@/components/course";
 import type { SectionContent } from "@/components/course/types";
-import { ArrowLeft, ArrowRight, BookOpen, Clock } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  Clock,
+  Mail,
+} from "../../../../../../$node_modules/lucide-react/dist/lucide-react.js";
 import { cn } from "@/lib/utils";
+import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 
 // Dynamic import for section content
 async function loadSectionContent(
@@ -129,6 +136,22 @@ function SectionPage() {
       <article className="mb-12 section-card">
         <ContentRenderer content={content} />
       </article>
+
+      {/* Email Signup CTA */}
+      <div className="bg-muted/50 mb-12 p-6 border border-border rounded-2xl">
+        <div className="flex sm:flex-row flex-col sm:items-center gap-4">
+          <div className="flex-1">
+            <h3 className="mb-1 font-semibold text-foreground">
+              Get personalized recovery emails
+            </h3>
+            <p className="text-muted-foreground text-sm">
+              Receive guidance timed to your injury date, exactly when you need
+              it
+            </p>
+          </div>
+          <EmailSignupDialog />
+        </div>
+      </div>
 
       {/* Navigation */}
       <nav className="flex sm:flex-row flex-col gap-4 pt-8 border-border border-t">

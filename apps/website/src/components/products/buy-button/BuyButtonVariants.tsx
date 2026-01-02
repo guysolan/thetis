@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import WhatSizeAmI from "../../WhatSizeAmI";
 import { useUserCountry } from "@/hooks/use-user-country";
 import { content as allContent } from "../night-splint/content";
+import UrgencyMessage from "../../UrgencyMessage";
+import MoneyBackGuarantee from "../../MoneyBackGuarantee";
 import type { Lang } from "../../../config/languages";
 
 interface BuyButtonVariantsProps {
@@ -34,7 +36,7 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
   lang = "en",
 }) => {
   const [currentSize, setCurrentSize] = useState<Size | undefined>("large");
-  const [currentSide, setCurrentSide] = useState<Side | undefined>("right");
+  const [currentSide, setCurrentSide] = useState<Side | undefined>("left");
   const [key, setKey] = useState(() => Date.now());
   const [isInitialRender, setIsInitialRender] = useState(true);
   const { country, isLoading: isCountryLoading } = useUserCountry();
@@ -122,10 +124,10 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
         </div>
       </div>
 
-      <div className="mb-8 h-16">
+      <div className="mb-4">
         {isCountryLoading
           ? (
-            <div className="mt-8 font-medium text-neutral-950 text-lg md:text-xl lg:text-left text-center italic">
+            <div className="mt-4 font-medium text-neutral-950 text-lg md:text-xl lg:text-left text-center italic">
               {t.checkingAvailability}
             </div>
           )
@@ -156,10 +158,16 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
             </div>
           )
           : (
-            <div className="mt-8 font-medium text-neutral-950 text-lg md:text-xl lg:text-left text-center italic animate-bounce">
+            <div className="mt-4 font-medium text-neutral-600 text-base lg:text-left text-center">
               {t.selectionPrompt}
             </div>
           )}
+      </div>
+
+      {/* Trust signals - compact row */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-4 pt-4 border-neutral-200 dark:border-neutral-700 border-t">
+        <UrgencyMessage lang={lang} variant="compact" />
+        <MoneyBackGuarantee lang={lang} variant="badge" />
       </div>
     </div>
   );

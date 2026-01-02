@@ -1,5 +1,7 @@
 ---
 import { buttonVariants } from "../../../components/ui/button";
+import PriceDisplay from "@/components/PriceDisplay";
+
 const { buttonText, buttonHref, secondaryButtonText, secondaryButtonHref } =
     Astro.props;
 ---
@@ -12,6 +14,9 @@ const { buttonText, buttonHref, secondaryButtonText, secondaryButtonHref } =
     </div>
     <div class="mb-2 text-gray-800 dark:text-gray-200 text-lg">
         <slot name="body" />
+    </div>
+    <div class="flex justify-center mb-2">
+        <PriceDisplay size="lg" client:load />
     </div>
     <div class="flex sm:flex-row flex-col justify-center gap-2 w-full">
         <a
