@@ -1,9 +1,11 @@
 import type { SectionContent } from "@/components/course/types";
+import SnapRuptureExperience from "../../../assets/snap-rupture-experience.jpeg";
 
 export const metadata = {
   slug: "week-0-day-0-emergency-care",
   title: "Emergency Care & Initial Assessment",
-  description: "What just happened, A&E expectations, and immediate first steps",
+  description:
+    "What just happened, A&E expectations, and immediate first steps",
   week: 0,
   day: 0,
   section_number: 1,
@@ -11,23 +13,39 @@ export const metadata = {
 
 export const content: SectionContent = {
   intro:
-    "If you're reading this, you've likely just experienced one of the most distinctive injuries in medicine — a ruptured Achilles tendon. That unmistakable \"pop\" or \"snap\" followed by difficulty walking has brought you here. This guide will walk you through everything you need to know about your first steps.",
+    'If you\'re reading this, you\'ve likely just experienced one of the most distinctive injuries in medicine — a ruptured Achilles tendon. That unmistakable "pop" or "snap" followed by difficulty walking has brought you here. **You will get through this.** Millions of people have recovered fully — this guide shows you how, step by step.',
 
   blocks: [
     {
+      type: "heading",
+      level: 2,
+      text: "Quick action plan (first 24 hours)",
+    },
+    {
+      type: "text",
+      content: "If you only read one section, read this.",
+    },
+    {
+      type: "alert",
+      variant: "danger",
+      title: "If you haven't been assessed yet",
+      content:
+        "**Go to A&E/ER or urgent care today** for assessment and immobilisation. The first priority is to **protect the tendon** (foot held pointed-down) and get you a plan for follow-up care.",
+    },
+    {
       type: "dos-donts",
       dos: [
-        "**Protect the tendon 24/7:** Keep your foot in the pointed-down position your clinician set (cast/splint/boot)",
-        "**Assume you're non-weight-bearing unless told otherwise:** Use crutches and move slowly",
-        "**Elevate** your ankle above heart level as much as possible",
-        "**Know the clot red flags** (DVT/PE) and seek urgent care if they appear",
-        "**Arrange follow-up** (fracture clinic/orthopaedics) if it hasn't been booked",
+        "**Protect the tendon 24/7:** Keep your foot in the **pointed-down** position your clinician set (cast/splint/boot).",
+        "**Assume you're non-weight-bearing unless told otherwise:** Use crutches and move slowly.",
+        "**Elevate** your ankle above heart level as much as possible.",
+        "**Know the blood clot red flags** and seek urgent care if they appear (**DVT = clot in the leg**, **PE = clot in the lungs**).",
+        "**Arrange follow-up** (fracture clinic/orthopaedics) if it hasn't been booked.",
       ],
       donts: [
-        "**Don't stretch** your Achilles / calf",
-        "**Don't walk barefoot** or \"test it\" without protection",
-        "**Don't remove the cast/splint/boot** unless your team explicitly told you it's safe",
-        "**Don't ignore** new calf pain, chest pain, breathlessness, or one-leg swelling",
+        "**Don't stretch** your Achilles / calf.",
+        '**Don\'t walk barefoot** or "test it" without protection.',
+        "**Don't remove the cast/splint/boot** unless your team explicitly told you it's safe.",
+        "**Don't ignore** new calf pain, chest pain, breathlessness, or one-leg swelling.",
       ],
     },
     {
@@ -36,6 +54,12 @@ export const content: SectionContent = {
       title: "Safety Note",
       content:
         "Protocols vary by country/hospital. Use this guide to understand what's typical, but follow your clinician's instructions if they differ.",
+    },
+    {
+      type: "tip",
+      title: "Recovery timeline (the short version)",
+      content:
+        "Full recovery typically takes **6–12 months**, but you'll be walking without crutches much sooner (often by weeks 6–10). We'll break this down week by week — don't try to skip ahead.",
     },
     {
       type: "section",
@@ -52,9 +76,36 @@ export const content: SectionContent = {
             "The Achilles tendon is the largest and strongest tendon in your body, connecting your calf muscle to your heel bone. When it ruptures, the tendon fibres tear — think of it like a rope that has frayed and snapped. This disconnects your powerful calf muscle from your heel, which is why you suddenly can't push off the ground properly or stand on your tiptoes.",
         },
         {
+          type: "tip",
+          title: "Simple way to picture healing",
+          content:
+            "In the early weeks, your job is to keep the two torn ends of the “rope” **lined up and close together**. Stretching or walking without protection is like pulling the rope ends apart — it makes healing slower and riskier.",
+        },
+        {
+          type: "illustration-prompt",
+          title: "Achilles rupture = snapped rope (why pointed-down matters)",
+          filename_suggestion: "achilles-rope-ends-pointed-down.png",
+          alt_text:
+            "Simple diagram showing a snapped rope (Achilles) and how a pointed-down foot brings the rope ends closer together",
+          prompt:
+            `Create a Tintin-style ligne claire medical infographic (clean-line European comic style) with flat colors and crisp outlines on a white background with Thetis green accents (#29a680). Do NOT include Tintin characters, props, logos, or recognisable copyrighted icons. No gore, no realistic tissue, no scary imagery.
+
+Scene: side view of a lower leg, ankle, and heel. Show a simplified “rope” representing the Achilles tendon with a clear snapped gap.
+
+Panel A (left): foot neutral (90 degrees). Rope ends are separated with a visible gap. Label: "Foot neutral = tendon ends further apart".
+
+Panel B (right): foot pointed down (plantarflexed). Rope ends are closer and nearly touching. Label: "Foot pointed down = tendon ends closer (better for healing)".
+
+Add a small note below: "Early recovery goal: keep the ends close and protected".
+
+Keep labels minimal and readable. Use simple arrows. No brand logos.`,
+          notes:
+            "Use this near the 'rope ends' explanation to make the 'don’t stretch / keep pointed-down' concept instantly clear.",
+        },
+        {
           type: "heading",
           level: 3,
-          text: "The \"Snap\" — Why It Happened and What It Means",
+          text: 'The "Snap" — Why It Happened and What It Means',
         },
         {
           type: "text",
@@ -64,10 +115,10 @@ export const content: SectionContent = {
           type: "list",
           style: "bullet",
           items: [
-            "A sudden \"pop\" or \"snap\" sound",
+            'A sudden "pop" or "snap" sound',
             "Feeling like someone kicked or hit the back of your ankle",
             "Immediate difficulty walking",
-            "A sensation that something has \"given way\"",
+            'A sensation that something has "given way"',
           ],
         },
         {
@@ -80,7 +131,29 @@ export const content: SectionContent = {
           variant: "info",
           title: "Important",
           content:
-            "Partial tears can happen, but the classic \"pop / kicked in the back of the ankle\" story is strongly associated with a rupture. If you felt that distinctive snap, treat it as a rupture until a clinician confirms otherwise.",
+            'Partial tears can happen (they’re **uncommon**), but the classic "pop / kicked in the back of the ankle" story is strongly associated with a full rupture. If you felt that distinctive snap, treat it as a rupture until a clinician confirms otherwise.',
+        },
+        {
+          type: "card",
+          title: "If someone mentions a “gap” (e.g. “4 cm gap”)",
+          description: "What that usually means — in plain English.",
+          variant: "muted",
+          content: [
+            {
+              type: "text",
+              content:
+                "Clinicians sometimes measure the distance between the torn tendon ends on **ultrasound** and describe it as a “gap” (often in centimetres, like **4 cm**). Think of it like a snapped rope: the “gap” is how far apart the two ends are **in that position**.",
+            },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "Gap size can look different depending on **how pointed-down your foot is** during the scan.",
+                "What matters clinically is often whether the ends **come together** when your foot is held pointed down in a cast/boot/splint.",
+                "Don’t panic if you hear a number — it’s one piece of the puzzle, and your specialist will interpret it in context.",
+              ],
+            },
+          ],
         },
         {
           type: "heading",
@@ -95,7 +168,7 @@ export const content: SectionContent = {
           type: "list",
           style: "bullet",
           items: [
-            "The \"pop\" or \"snap\" sensation during activity",
+            'The "pop" or "snap" sensation during activity',
             "Sudden pain at the back of the ankle",
             "Inability to stand on tiptoe on the affected leg",
             "A gap or indent you can feel in the tendon",
@@ -111,6 +184,14 @@ export const content: SectionContent = {
       ],
     },
     {
+      type: "image",
+      src: SnapRuptureExperience,
+      alt:
+        "The snap rupture experience - what it feels like when your Achilles tendon ruptures",
+      caption:
+        "Many describe the moment of rupture as feeling like being kicked in the back of the ankle",
+    },
+    {
       type: "section",
       title: "Emergency Room & Initial Care",
       content: [
@@ -122,7 +203,8 @@ export const content: SectionContent = {
               content: [
                 {
                   type: "text",
-                  content: "When you arrive at A&E, here's the typical process:",
+                  content:
+                    "When you arrive at A&E, here's the typical process:",
                 },
                 {
                   type: "list",
@@ -130,7 +212,7 @@ export const content: SectionContent = {
                   items: [
                     "**Triage:** You'll be assessed and categorised by urgency. An Achilles rupture isn't life-threatening, so you may wait, but you will be seen.",
                     "**Physical Examination:** A doctor will perform the Thompson test (also called the Simmonds test) — they'll squeeze your calf while you lie face-down. In a healthy tendon, this makes your foot point downward. If your Achilles is ruptured, your foot won't move.",
-                    "**Immobilisation:** Your foot will be placed in a \"tip-toe\" position (plantarflexion) to bring the torn tendon ends closer together. This is typically done with a plaster backslab, a trauma splint, or in some cases, a walking boot from the start.",
+                    '**Immobilisation:** Your foot will be placed in a "tip-toe" position (plantarflexion) to bring the torn tendon ends closer together. This is typically done with a plaster backslab, a trauma splint, or in some cases, a walking boot from the start.',
                     "**Crutches:** You'll be given crutches to keep weight off your injured leg.",
                     "**Referral:** You'll be referred to an orthopaedic specialist or fracture clinic for further assessment, typically within 1-3 weeks.",
                   ],
@@ -173,7 +255,7 @@ export const content: SectionContent = {
                 {
                   type: "text",
                   content:
-                    "Your foot needs to be held in a pointed position (equinus) to allow the torn tendon ends to heal back together. This is non-negotiable in the first weeks.",
+                    "Your foot needs to be held in a **pointed-down position** (sometimes clinicians call this *equinus*). This brings the torn ends closer together so they can heal. This is non-negotiable in the first weeks.",
                 },
                 {
                   type: "heading",
@@ -254,25 +336,68 @@ export const content: SectionContent = {
             },
           ],
         },
+        {
+          type: "illustration-prompt",
+          title: "A&E / ER flow for Achilles rupture (simple timeline)",
+          filename_suggestion: "er-flow-achilles-rupture.png",
+          alt_text:
+            "Simple step-by-step timeline of what typically happens in A&E/ER after an Achilles rupture",
+          prompt:
+            `Create a Tintin-style ligne claire infographic (clean-line European comic style) with flat colors and crisp outlines on a white background with Thetis green accents (#29a680). Do NOT include Tintin characters, props, logos, or recognisable copyrighted icons. No photos, no gore.
+
+Layout: horizontal 5-step timeline with icons and very short labels (max 6 words each). Title: "What happens in A&E/ER".
+
+Steps (left to right):
+1) "Triage"
+2) "Exam (calf squeeze test)"
+3) "Foot pointed down (splint/cast)"
+4) "Crutches + safety"
+5) "Referral to fracture clinic"
+
+Include a small foot icon showing "pointed down" at step 3.
+
+Keep text minimal, friendly, and readable on mobile.`,
+          notes:
+            "This helps anxious patients know what to expect and reduces overwhelm.",
+        },
+        {
+          type: "card",
+          title: "What happens next?",
+          description: "A simple timeline so you know what's coming.",
+          content: [
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Today–Week 1:** Protect the tendon, control swelling, learn crutches.",
+                "**Weeks 1–3:** You'll see a specialist / fracture clinic to confirm the plan (boot vs splint, weight-bearing guidance, rehab plan).",
+                "**Weeks 1–3:** You'll also start thinking about the big decision: surgical vs non-surgical treatment (we cover this in the next phase).",
+              ],
+            },
+          ],
+        },
       ],
     },
     {
       type: "card",
       title: "Questions to Ask at A&E / Fracture Clinic",
-      description: "Write these down on your phone and bring them to your appointment.",
+      description:
+        "Write these down on your phone and bring them to your appointment.",
       variant: "default",
       content: [
         {
           type: "list",
           style: "bullet",
           items: [
-            "**Diagnosis:** \"Is this a confirmed rupture? Do I need ultrasound?\"",
-            "**Position:** \"What ankle angle should I be in (how pointed-down) and for how long?\"",
-            "**Weight-bearing:** \"Am I non-weight-bearing, partial, or weight-bearing as tolerated?\"",
-            "**Clot prevention:** \"Am I getting VTE prophylaxis? For how long? What symptoms should trigger urgent help?\"",
-            "**Follow-up:** \"When is my fracture clinic/orthopaedics appointment, and who do I contact if it hasn't been booked?\"",
-            "**Hygiene:** \"Can I remove anything to wash/shower, or should I use a waterproof cover only?\"",
-            "**Work note:** \"Can you provide a fit note/sick note today?\"",
+            '**Diagnosis:** "Is this a confirmed rupture? Do I need ultrasound?"',
+            '**Gap size:** "If you measured a gap (e.g. 4 cm), does it close when my foot is pointed down? What does that mean for my plan?"',
+            '**Position:** "What ankle angle should I be in (how pointed-down) and for how long?"',
+            '**Weight-bearing:** "Am I non-weight-bearing, partial, or weight-bearing as tolerated?"',
+            '**Clot prevention:** "Am I getting VTE prophylaxis? For how long? What symptoms should trigger urgent help?"',
+            '**Follow-up:** "When is my fracture clinic/orthopaedics appointment, and who do I contact if it hasn\'t been booked?"',
+            '**After-hours:** "What should I do if I can\'t reach you after hours?"',
+            '**Hygiene:** "Can I remove anything to wash/shower, or should I use a waterproof cover only?"',
+            '**Work note:** "Can you provide a fit note/sick note today?"',
           ],
         },
       ],

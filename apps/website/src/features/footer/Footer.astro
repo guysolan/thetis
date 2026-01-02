@@ -9,6 +9,8 @@ import {
   productRoutes,
   partnerRoutes,
   contactRoutes,
+  guidePageRoutes,
+  guideRoutes,
 } from "../../content/routes.tsx";
 import type { Lang } from "../../config/languages.ts";
 
@@ -20,7 +22,15 @@ const { lang = "en" } = Astro.props as Props;
 
 const localizedRoutes = getRoutesByLanguage(lang);
 
-// Filter routes by category
+// Filter routes by category - use guide page routes
+const guidePageLinks = localizedRoutes.filter((route) => {
+  const baseRoute = guidePageRoutes.find(
+    (gr) =>
+      gr.slugTranslations?.[lang] === route.slug || gr.slug === route.slug,
+  );
+  return !!baseRoute;
+});
+
 const productLinks = localizedRoutes.filter((route) => {
   // Find the base route that matches this translated route
   const baseRoute = productRoutes.find(
@@ -58,7 +68,52 @@ const getSectionTitle = (routes: any[], sectionSlug: string) => {
   return route?.title?.[lang] || route?.title?.en || sectionSlug;
 };
 
+const guideSectionTitles: Record<Lang, string> = {
+  en: "Recovery Guide",
+  de: "Genesungsleitfaden",
+  fr: "Guide de Récupération",
+  es: "Guía de Recuperación",
+  it: "Guida al Recupero",
+};
+
+// External guide links (to guide.thetismedical.com)
+const externalGuideLinks = [
+  {
+    href: guideRoutes.essentials.href,
+    title:
+      guideRoutes.essentials.title[lang] || guideRoutes.essentials.title.en,
+    description:
+      guideRoutes.essentials.description[lang] ||
+      guideRoutes.essentials.description.en,
+  },
+  {
+    href: guideRoutes.professionals.href,
+    title:
+      guideRoutes.professionals.title[lang] ||
+      guideRoutes.professionals.title.en,
+    description:
+      guideRoutes.professionals.description[lang] ||
+      guideRoutes.professionals.description.en,
+  },
+];
+
+const externalGuideSectionTitles: Record<Lang, string> = {
+  en: "Full Courses",
+  de: "Vollständige Kurse",
+  fr: "Cours Complets",
+  es: "Cursos Completos",
+  it: "Corsi Completi",
+};
+
 const footerLinks = {
+  guide: {
+    title: guideSectionTitles[lang],
+    links: guidePageLinks,
+  },
+  externalGuides: {
+    title: externalGuideSectionTitles[lang],
+    links: externalGuideLinks,
+  },
   company: {
     title: getSectionTitle(contactRoutes, "contact"),
     links: contactLinks,
@@ -112,6 +167,33 @@ const socials: Array<{
           title={footerLinks.products.title}
           links={footerLinks.products.links}
         />
+        <!-- Recovery Guide (internal links) -->
+        <FooterBlock
+          title={footerLinks.guide.title}
+          links={footerLinks.guide.links}
+        />
+        <!-- Full Courses (external links) -->
+        <div class="space-y-3">
+          <h3 class="font-semibold text-lg">
+            {footerLinks.externalGuides.title}
+          </h3>
+          <ul class="space-y-2">
+            {
+              footerLinks.externalGuides.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-gray-300 hover:text-white text-sm transition-colors"
+                  >
+                    {link.title} ↗
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </div>
 
       <!-- Patient Guides -->

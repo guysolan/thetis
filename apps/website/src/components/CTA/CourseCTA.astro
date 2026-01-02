@@ -1,0 +1,330 @@
+---
+import { buttonVariants } from "../ui/button";
+import { cn } from "../../lib/utils";
+import type { Lang } from "@/config/languages";
+import { BookOpen, ArrowRight, Check, Star, ExternalLink } from "lucide-react";
+
+interface Props {
+    lang?: Lang;
+    variant?: "full" | "compact" | "inline";
+}
+
+const { lang = "en", variant = "full" } = Astro.props;
+
+const content = {
+    en: {
+        tagline: "Recovery Programs",
+        heading: "Simplify your Recovery",
+        description:
+            "Choose the program that best fits your journey back to life, work, and sport after an Achilles rupture.",
+        essentials: {
+            title: "Essentials",
+            description: "31 easily digestible lessons to guide you through each stage of recovery.",
+            price: "£29",
+            features: [
+                "Questions for your surgeon",
+                "Physio Exercises",
+                "Illustrations for easy understanding",
+                "Product recommendations",
+            ],
+            cta: "Start Now",
+        },
+        professionals: {
+            title: "Professionals",
+            description: "Advanced recovery strategies and expert-led video lessons for elite results.",
+            price: "£99",
+            features: [
+                "Everything in Essentials",
+                "Specialist Surgeon video lessons",
+                "8 recovery hacks",
+            ],
+            cta: "Go Pro",
+        },
+        compactHeading: "Want expert guidance for your recovery?",
+        compactCTA: "Explore Recovery Programs",
+        inlineText: "Get structured guidance with our",
+        inlineLinkText: "recovery programs",
+    },
+    de: {
+        tagline: "Genesungsprogramme",
+        heading: "Vereinfachen Sie Ihre Genesung",
+        description:
+            "Wählen Sie das Programm, das am besten zu Ihrem Weg zurück ins Leben, zur Arbeit und zum Sport nach einer Achillessehnenruptur passt.",
+        essentials: {
+            title: "Grundlagen",
+            description: "31 leicht verdauliche Lektionen, die Sie durch jede Phase der Genesung führen.",
+            price: "29 €",
+            features: [
+                "Fragen an Ihren Chirurgen",
+                "Physio-Übungen",
+                "Illustrationen zum leichten Verständnis",
+                "Produktempfehlungen",
+            ],
+            cta: "Jetzt starten",
+        },
+        professionals: {
+            title: "Professionell",
+            description: "Fortgeschrittene Genesungsstrategien und von Experten geleitete Videolektionen.",
+            price: "99 €",
+            features: [
+                "Alles aus Grundlagen",
+                "Facharzt-Videolektionen",
+                "8 Genesungs-Hacks",
+            ],
+            cta: "Pro werden",
+        },
+        compactHeading: "Möchten Sie Expertenführung für Ihre Genesung?",
+        compactCTA: "Genesungsprogramme entdecken",
+        inlineText: "Erhalten Sie strukturierte Anleitung mit unseren",
+        inlineLinkText: "Genesungsprogrammen",
+    },
+    fr: {
+        tagline: "Programmes de Récupération",
+        heading: "Simplifiez votre récupération",
+        description:
+            "Choisissez le programme qui correspond le mieux à votre retour à la vie, au travail et au sport après une rupture du tendon d'Achille.",
+        essentials: {
+            title: "Essentiels",
+            description: "31 leçons faciles à digérer pour vous guider à chaque étape de la récupération.",
+            price: "29 €",
+            features: [
+                "Questions pour votre chirurgien",
+                "Exercices de physiothérapie",
+                "Illustrations pour une compréhension facile",
+                "Recommandations de produits",
+            ],
+            cta: "Commencer",
+        },
+        professionals: {
+            title: "Professionnel",
+            description: "Stratégies de récupération avancées et cours vidéo dirigés par des experts.",
+            price: "99 €",
+            features: [
+                "Tout dans Essentiels",
+                "Cours vidéo de chirurgiens spécialistes",
+                "8 astuces de récupération",
+            ],
+            cta: "Passer Pro",
+        },
+        compactHeading: "Vous voulez des conseils d'experts pour votre récupération?",
+        compactCTA: "Découvrir les programmes",
+        inlineText: "Obtenez des conseils structurés avec nos",
+        inlineLinkText: "programmes de récupération",
+    },
+    es: {
+        tagline: "Programas de Recuperación",
+        heading: "Simplifica tu recuperación",
+        description:
+            "Elige el programa que mejor se adapte a tu regreso a la vida, al trabajo y al deporte después de una rotura del tendón de Aquiles.",
+        essentials: {
+            title: "Esenciales",
+            description: "31 lecciones fáciles de digerir que te guían a través de cada etapa de la recuperación.",
+            price: "29 €",
+            features: [
+                "Preguntas para tu cirujano",
+                "Ejercicios de fisioterapia",
+                "Ilustraciones para fácil comprensión",
+                "Recomendaciones de productos",
+            ],
+            cta: "Empezar ahora",
+        },
+        professionals: {
+            title: "Profesional",
+            description: "Estrategias avanzadas de recuperación y lecciones en video dirigidas por expertos.",
+            price: "99 €",
+            features: [
+                "Todo en Esenciales",
+                "Lecciones en video de cirujanos especialistas",
+                "8 trucos de recuperación",
+            ],
+            cta: "Ser Pro",
+        },
+        compactHeading: "¿Quieres orientación experta para tu recuperación?",
+        compactCTA: "Explorar programas",
+        inlineText: "Obtén orientación estructurada con nuestros",
+        inlineLinkText: "programas de recuperación",
+    },
+    it: {
+        tagline: "Programmi di Recupero",
+        heading: "Semplifica il tuo recupero",
+        description:
+            "Scegli il programma che meglio si adatta al tuo ritorno alla vita, al lavoro e allo sport dopo una rottura del tendine di Achille.",
+        essentials: {
+            title: "Fondamentali",
+            description: "31 lezioni facilmente digeribili che ti guidano attraverso ogni fase del recupero.",
+            price: "29 €",
+            features: [
+                "Domande per il tuo chirurgo",
+                "Esercizi di fisioterapia",
+                "Illustrazioni per una facile comprensione",
+                "Raccomandazioni sui prodotti",
+            ],
+            cta: "Inizia ora",
+        },
+        professionals: {
+            title: "Professionale",
+            description: "Strategie di recupero avanzate e lezioni video guidate da esperti.",
+            price: "99 €",
+            features: [
+                "Tutto in Fondamentali",
+                "Lezioni video di chirurghi specialisti",
+                "8 trucchi di recupero",
+            ],
+            cta: "Diventa Pro",
+        },
+        compactHeading: "Vuoi una guida esperta per il tuo recupero?",
+        compactCTA: "Esplora i programmi",
+        inlineText: "Ottieni una guida strutturata con i nostri",
+        inlineLinkText: "programmi di recupero",
+    },
+};
+
+const t = content[lang];
+---
+
+{variant === "full" && (
+    <section class="dark:bg-neutral-900 py-16 md:py-24">
+        <div class="mx-auto px-4 sm:px-6 max-w-5xl">
+            <!-- Hero -->
+            <div class="mb-12 text-center">
+                <div class="inline-flex items-center gap-2 bg-primary/10 mb-6 px-4 py-1.5 rounded-full font-medium text-primary text-sm uppercase tracking-wide">
+                    <BookOpen className="w-4 h-4" />
+                    {t.tagline}
+                </div>
+                <h2 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl tracking-tight">
+                    {t.heading}
+                </h2>
+                <p class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg">
+                    {t.description}
+                </p>
+            </div>
+
+            <!-- Course Cards -->
+            <div class="gap-8 grid md:grid-cols-2 mx-auto max-w-4xl">
+                <!-- Essentials Card -->
+                <a 
+                    href="https://guide.thetismedical.com/essentials"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group relative flex flex-col bg-white hover:bg-neutral-50 dark:bg-neutral-800 dark:hover:bg-neutral-750 p-8 border border-neutral-200 hover:border-primary/50 dark:border-neutral-700 rounded-3xl transition-all duration-300"
+                >
+                    <div class="mb-6">
+                        <h3 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-primary text-2xl transition-colors">
+                            {t.essentials.title}
+                        </h3>
+                        <p class="text-neutral-600 dark:text-neutral-400">
+                            {t.essentials.description}
+                        </p>
+                    </div>
+
+                    <div class="flex-1">
+                        <ul class="space-y-3 mb-8">
+                            {t.essentials.features.map((feature) => (
+                                <li class="flex items-center gap-3 text-neutral-700 dark:text-neutral-300 text-sm">
+                                    <div class="flex justify-center items-center bg-primary/10 rounded-full w-5 h-5 text-primary shrink-0">
+                                        <Check className="w-3 h-3" />
+                                    </div>
+                                    {feature}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-auto pt-6 border-neutral-200 dark:border-neutral-700 border-t">
+                        <span class="font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
+                            {t.essentials.price}
+                        </span>
+                        <div class="flex items-center gap-2 font-medium text-primary text-sm transition-transform group-hover:translate-x-1">
+                            {t.essentials.cta}
+                            <ArrowRight className="w-4 h-4" />
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Professionals Card -->
+                <a 
+                    href="https://guide.thetismedical.com/professionals"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group relative flex flex-col bg-white hover:bg-neutral-50 dark:bg-neutral-800 dark:hover:bg-neutral-750 p-8 border border-neutral-200 hover:border-primary/50 dark:border-neutral-700 rounded-3xl transition-all duration-300"
+                >
+                    <div class="flex items-center gap-2 mb-2">
+                        <Star className="fill-amber-500 w-4 h-4 text-amber-500" />
+                        <span class="font-medium text-amber-600 dark:text-amber-400 text-xs uppercase tracking-wide">Premium</span>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-primary text-2xl transition-colors">
+                            {t.professionals.title}
+                        </h3>
+                        <p class="text-neutral-600 dark:text-neutral-400">
+                            {t.professionals.description}
+                        </p>
+                    </div>
+
+                    <div class="flex-1">
+                        <ul class="space-y-3 mb-8">
+                            {t.professionals.features.map((feature) => (
+                                <li class="flex items-center gap-3 text-neutral-700 dark:text-neutral-300 text-sm">
+                                    <div class="flex justify-center items-center bg-primary/10 rounded-full w-5 h-5 text-primary shrink-0">
+                                        <Check className="w-3 h-3" />
+                                    </div>
+                                    {feature}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-auto pt-6 border-neutral-200 dark:border-neutral-700 border-t">
+                        <span class="font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
+                            {t.professionals.price}
+                        </span>
+                        <div class="flex items-center gap-2 font-medium text-primary text-sm transition-transform group-hover:translate-x-1">
+                            {t.professionals.cta}
+                            <ArrowRight className="w-4 h-4" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+)}
+
+{variant === "compact" && (
+    <div class="bg-neutral-50 dark:bg-neutral-800 my-8 p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+        <div class="flex sm:flex-row flex-col justify-between items-center gap-4">
+            <div class="flex items-center gap-3 sm:text-left text-center">
+                <div class="flex justify-center items-center bg-primary/10 rounded-lg w-10 h-10 shrink-0">
+                    <BookOpen className="w-5 h-5 text-primary" />
+                </div>
+                <p class="font-semibold text-neutral-900 dark:text-neutral-100">
+                    {t.compactHeading}
+                </p>
+            </div>
+            <a 
+                href="https://guide.thetismedical.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class={cn(buttonVariants({ variant: "default", size: "default" }), "whitespace-nowrap gap-2")}
+            >
+                {t.compactCTA}
+                <ExternalLink className="w-4 h-4" />
+            </a>
+        </div>
+    </div>
+)}
+
+{variant === "inline" && (
+    <p class="bg-primary/5 my-4 p-4 border-primary border-l-4 rounded-lg text-neutral-600 dark:text-neutral-400">
+        {t.inlineText}{" "}
+        <a 
+            href="https://guide.thetismedical.com" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 font-medium text-primary hover:underline"
+        >
+            {t.inlineLinkText}
+            <ExternalLink className="w-3 h-3" />
+        </a>.
+    </p>
+)}
+

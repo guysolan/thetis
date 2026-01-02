@@ -5,27 +5,28 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils";
 
 const buttonVariants = cva(
-  "inline-flex justify-center items-center disabled:opacity-50 focus-visible:ring-1 focus-visible:ring-neutral-950 dark:focus-visible:ring-neutral-300 w-fit font-medium text-sm whitespace-nowrap transition-colors disabled:pointer-events-none focus-visible:outline-none",
+  "inline-flex justify-center items-center disabled:opacity-50 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ring-offset-background focus-visible:ring-offset-2 font-semibold hover:scale-[1.02] transition-colors cursor-pointer disabled:pointer-events-none",
   {
     variants: {
       variant: {
-        default:
-          "bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
-          "bg-red-500 text-neutral-50  hover:bg-red-500/90 dark:bg-red-900 dark:text-neutral-50 dark:hover:bg-red-900/90",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border border-neutral-200 bg-white dark:text-neutral-50 hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
+          "border border-foreground text-foreground bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-neutral-200 text-neutral-900 dark:text-neutral-50 hover:bg-neutral-100/80 dark:bg-neutral-800 dark:text-neutral-50 dark:hover:bg-neutral-800/80",
-        ghost:
-          "hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
-        link: "text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50",
+          "bg-primary/10 border border-primary/25 text-primary hover:bg-primary/20",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-foreground underline-offset-4 underline hover:text-primary",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 px-3 text-xs",
-        lg: "h-10 px-8",
-        icon: "h-9 w-9",
+        default: "h-10 rounded-sm px-4 py-2 text-base",
+        md: "h-10 rounded-sm px-4 py-2 text-base",
+        xs: "rounded-sm px-2 py-1 text-xs w-fit",
+        sm: "h-9 rounded-sm px-3 text-sm w-fit",
+        lg: "md:h-12 rounded-sm md:px-8 text-base h-10 px-6",
+        xl: "h-14 px-10 text-lg rounded-sm",
+        icon: "h-10 w-10",
       },
     },
     defaultVariants: {
@@ -36,7 +37,8 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }

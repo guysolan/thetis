@@ -20,77 +20,90 @@ const phases = [
 
 function EssentialsIndexPage() {
   return (
-    <div className="mx-auto px-4 sm:px-6 py-12 max-w-4xl">
-      {/* Header */}
-      <div className="mb-12">
-        <div className="inline-flex items-center gap-2 bg-blue-100 mb-4 px-3 py-1 rounded-full font-medium text-blue-800 text-sm">
-          <BookOpen className="w-4 h-4" />
-          Essentials Course
+    <div className="bg-background min-h-screen">
+      <div className="mx-auto px-4 sm:px-6 py-16 max-w-4xl">
+        <Link
+          to="/"
+          className="group inline-flex items-center gap-2 mb-12 text-muted-foreground hover:text-primary transition-colors"
+        >
+          <div className="transition-transform group-hover:-translate-x-1">
+            <ChevronRight className="w-4 h-4 rotate-180" />
+          </div>
+          Back to Programs
+        </Link>
+
+        {/* Header */}
+        <div className="mb-16">
+          <div className="inline-flex items-center gap-2 bg-primary/10 mb-4 px-3 py-1 rounded-full font-medium text-primary text-sm">
+            <BookOpen className="w-4 h-4" />
+            Essentials Course
+          </div>
+          <h1 className="mb-4 font-bold text-foreground text-3xl md:text-5xl tracking-tight">
+            Achilles Recovery Essentials
+          </h1>
+          <p className="max-w-2xl text-muted-foreground text-lg md:text-xl">
+            {sections.length}{" "}
+            lessons covering your complete journey from injury to return to
+            sport.
+          </p>
         </div>
-        <h1 className="mb-4 font-serif font-semibold text-slate-900 text-3xl md:text-4xl">
-          Achilles Recovery Essentials
-        </h1>
-        <p className="text-slate-600 text-lg">
-          {sections.length}{" "}
-          sections covering your complete recovery journey from injury to return
-          to sport.
-        </p>
-      </div>
 
-      {/* Section List */}
-      <div className="space-y-8">
-        {phases.map((phase, phaseIndex) => {
-          const phaseSections = sections.filter(
-            (s) =>
-              s.days_after_rupture >= phase.minDay &&
-              s.days_after_rupture <= phase.maxDay,
-          );
+        {/* Section List */}
+        <div className="space-y-12">
+          {phases.map((phase, phaseIndex) => {
+            const phaseSections = sections.filter(
+              (s) =>
+                s.days_after_rupture >= phase.minDay &&
+                s.days_after_rupture <= phase.maxDay,
+            );
 
-          if (phaseSections.length === 0) return null;
+            if (phaseSections.length === 0) return null;
 
-          return (
-            <div key={phaseIndex}>
-              <h2 className="flex items-center gap-2 mb-4 font-semibold text-slate-900 text-lg">
-                <div className="flex justify-center items-center bg-blue-600 rounded-full w-7 h-7 font-bold text-white text-sm">
-                  {phaseIndex + 1}
+            return (
+              <div key={phaseIndex} className="relative">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="flex justify-center items-center bg-primary rounded-xl w-10 h-10 font-bold text-primary-foreground">
+                    {phaseIndex + 1}
+                  </div>
+                  <h2 className="font-bold text-foreground text-xl md:text-2xl">
+                    {phase.name}
+                  </h2>
                 </div>
-                {phase.name}
-              </h2>
-              <div className="space-y-2">
-                {phaseSections.map((section, i) => (
-                  <Link
-                    key={section.slug}
-                    to="/essentials/week/$week/day/$day"
-                    params={{
-                      week: String(section.week),
-                      day: String(section.day),
-                    }}
-                    className={cn(
-                      "group flex items-center gap-4 bg-white hover:bg-blue-50/50 p-4 border border-slate-100 hover:border-blue-200 rounded-xl transition-all",
-                    )}
-                  >
-                    <div className="flex justify-center items-center bg-slate-100 group-hover:bg-blue-100 rounded-lg w-10 h-10 font-semibold text-slate-600 group-hover:text-blue-700 text-sm transition-colors shrink-0">
-                      {section.section_number}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-slate-900 group-hover:text-blue-900 transition-colors">
-                        {section.title}
-                      </h3>
-                      <p className="text-slate-500 text-sm truncate">
-                        {section.description}
-                      </p>
-                    </div>
-                    <div className="hidden sm:flex items-center gap-2 text-slate-400 text-sm">
-                      <Clock className="w-4 h-4" />
-                      {formatWeekDay(section.week, section.day)}
-                    </div>
-                    <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-blue-500 transition-colors" />
-                  </Link>
-                ))}
+
+                <div className="gap-3 grid">
+                  {phaseSections.map((section) => (
+                    <Link
+                      key={section.slug}
+                      to="/essentials/week/$week/day/$day"
+                      params={{
+                        week: String(section.week),
+                        day: String(section.day),
+                      }}
+                      className="group flex items-center gap-4 bg-card hover:bg-muted/50 p-5 border border-border hover:border-primary/30 rounded-2xl transition-all"
+                    >
+                      <div className="flex justify-center items-center bg-muted group-hover:bg-primary/10 rounded-xl w-12 h-12 font-bold text-muted-foreground group-hover:text-primary transition-colors shrink-0">
+                        {section.section_number}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                          {section.title}
+                        </h3>
+                        <p className="text-muted-foreground text-sm truncate">
+                          {section.description}
+                        </p>
+                      </div>
+                      <div className="hidden sm:flex items-center gap-2 font-medium text-muted-foreground text-xs uppercase tracking-wider">
+                        <Clock className="w-3.5 h-3.5" />
+                        {formatWeekDay(section.week, section.day)}
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-muted-foreground/30 group-hover:text-primary transition-colors" />
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );

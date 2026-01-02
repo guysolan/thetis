@@ -6,6 +6,7 @@ import FAQAccordion from "../../components/research/FaqSchemaAccordion.astro";
 import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
 import type { Lang } from "../../config/languages";
 import { content } from "../../content/FAQs/achilles-rupture-timeline-content.ts";
+import CourseCTA from "../../components/CTA/CourseCTA.astro";
 
 interface Props {
   lang: Lang;
@@ -35,10 +36,9 @@ const t = content[lang];
         ))
       }
     </div>
-
-    <NightSplintAdvert lang={lang} />
-
+    <CourseCTA lang={lang} variant="full" />
     <FAQAccordion faqs={t.faqs} />
+    <NightSplintAdvert lang={lang} />
   </section>
 </FAQsLayout>
 

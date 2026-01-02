@@ -4,43 +4,44 @@ import ThetisSchema from "@/schemas/ThetisSchema.astro";
 import LandingHero from "@/sections/index/LandingHero.astro";
 import Reviews from "@/components/reviews/InfiniteReviews.astro";
 import "@thetis/ui/globals.css";
-import ProductTimeline from "@/sections/index/ProductTimeline.astro";
 import ProfessionalOpinionsCarousel from "@/sections/index/ProfessionalOpinionsCarousel";
 import ComplianceLogos from "@/sections/index/compliance/ComplianceLogos.astro";
 import NightSplintFAQs from "@/sections/achilles-rupture-splint/SplintFAQs.tsx";
+import ThetisMythology from "@/sections/index/ThetisMythology.astro";
+import WhatWeOffer from "@/sections/index/WhatWeOffer.astro";
 import type { Lang } from "@/config/languages.ts";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
 
 const content = {
     en: {
-        title: "Thetis Medical - Achilles Splint Specialists",
+        title: "Thetis Medical - Better Sleep, Faster Achilles Recovery",
         description:
-            "Medical device company specializing in splints for injured Achilles Tendons. We sell an Achilles Rupture Splint and a Trauma Splint.",
+            "Our patented night splint lets you ditch the boot at bedtime. Free recovery courses guide you week-by-week. Trusted by 5,000+ patients and recommended by leading surgeons.",
         image: "https://thetismedical.com/images/night-splint.png",
     },
     fr: {
-        title: "Thetis Medical - Spécialistes de l'attelle d'Achille",
+        title: "Thetis Medical - Mieux dormir, récupérer plus vite",
         description:
-            "Entreprise de dispositifs médicaux spécialisés dans les attelles pour les blessures du tendon d'Achille. Nous vendons une attelle de rupture d'Achille et une attelle de traumatisme.",
+            "Notre attelle de nuit brevetée vous permet d'enlever la botte au coucher. Des cours de récupération gratuits vous guident semaine après semaine. Approuvé par 5 000+ patients.",
         image: "https://thetismedical.com/images/night-splint.png",
     },
     de: {
-        title: "Thetis Medical - Achillessehnenriss-Spezialisten",
+        title: "Thetis Medical - Besser schlafen, schneller erholen",
         description:
-            "Medizinische Unternehmen, das sich auf Splints für verletzte Achillessehnen spezialisiert hat. Wir verkaufen eine Achillessehnenriss-Schiene und eine Trauma-Schiene.",
+            "Unsere patentierte Nachtschiene lässt Sie den Stiefel nachts ablegen. Kostenlose Genesungskurse begleiten Sie Woche für Woche. Vertrauen von 5.000+ Patienten.",
         image: "https://thetismedical.com/images/night-splint.png",
     },
     es: {
-        title: "Thetis Medical - Especialistas en Férula de Rotura del Tendón de Aquiles",
+        title: "Thetis Medical - Dormir mejor, recuperarse más rápido",
         description:
-            "Empresa de dispositivos médicos especializados en férulas para lesiones de tendón de Aquiles. Vendemos una férula de rotura de tendón de Aquiles y una férula de traumatismo.",
+            "Nuestra férula nocturna patentada te permite dejar la bota a la hora de dormir. Cursos de recuperación gratuitos te guían semana a semana. Confianza de 5.000+ pacientes.",
         image: "https://thetismedical.com/images/night-splint.png",
     },
     it: {
-        title: "Thetis Medical - Specializzati nelle férulas per la rottura del tendine di Achille",
+        title: "Thetis Medical - Dormire meglio, recuperare più velocemente",
         description:
-            "Azienda di dispositivi medici specializzati nelle férulas per le lesioni del tendine di Achille. Vendiamo una férula per la rottura del tendine di Achille e una férula per la traumatologia.",
+            "Il nostro tutore notturno brevettato ti permette di togliere lo stivale prima di dormire. Corsi di recupero gratuiti ti guidano settimana dopo settimana. Scelto da 5.000+ pazienti.",
         image: "https://thetismedical.com/images/night-splint.png",
     },
 };
@@ -57,16 +58,25 @@ const currentContent = content[lang as keyof typeof content];
     lang={lang}
 >
     <main class="space-y-16">
+        <!-- 1. Hook: Better Sleep, Faster Recovery -->
         <LandingHero lang={lang} />
 
+        <!-- 2. Social Proof: Patient Reviews -->
         <Reviews />
 
+        <!-- 3. Trust Signals: Compliance & Certifications -->
         <ComplianceLogos />
 
-        <ProductTimeline lang={lang} />
+        <!-- 4. Brand Story: Who We Are (establishes mission before selling) -->
+        <ThetisMythology lang={lang} />
 
+        <!-- 5. What We Offer: Products + Education (clear value prop) -->
+        <WhatWeOffer lang={lang} />
+
+        <!-- 6. Expert Endorsements: Professional Validation -->
         <ProfessionalOpinionsCarousel lang={lang} client:load />
 
+        <!-- 7. FAQ: Answer Remaining Questions -->
         <NightSplintFAQs lang={lang} client:load />
     </main>
 </Layout>

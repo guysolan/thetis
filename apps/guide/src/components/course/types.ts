@@ -93,6 +93,22 @@ export interface SectionBlock {
   content: ContentBlock[];
 }
 
+export interface ImageBlock {
+  type: "image";
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+export interface IllustrationPromptBlock {
+  type: "illustration-prompt";
+  title: string;
+  prompt: string;
+  filename_suggestion?: string;
+  alt_text?: string;
+  notes?: string;
+}
+
 // Union of all content block types
 export type ContentBlock =
   | TextBlock
@@ -107,11 +123,12 @@ export type ContentBlock =
   | TipBlock
   | TableBlock
   | CardBlock
-  | SectionBlock;
+  | SectionBlock
+  | ImageBlock
+  | IllustrationPromptBlock;
 
 // Section content definition
 export interface SectionContent {
   intro?: string;
   blocks: ContentBlock[];
 }
-

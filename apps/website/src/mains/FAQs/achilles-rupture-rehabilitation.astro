@@ -3,6 +3,7 @@ import AchillesRuptureRehabilitationSection from "../../sections/FAQs/achilles-r
 import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
 import FAQsLayout from "../../layouts/FAQsLayout.astro";
 import type { Lang } from "../../config/languages";
+import CourseCTA from "../../components/CTA/CourseCTA.astro";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
 
@@ -42,5 +43,6 @@ const currentContent = content[lang];
     description={currentContent.description}
 >
     <AchillesRuptureRehabilitationSection lang={lang} />
+    <CourseCTA lang={lang} variant="full" />
     <NightSplintAdvert lang={lang} />
 </FAQsLayout>

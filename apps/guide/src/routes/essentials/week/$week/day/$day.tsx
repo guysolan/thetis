@@ -1,20 +1,20 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import {
-  sections,
-  getSectionByWeekDay,
+  formatWeekDay,
   getNextSection,
   getPrevSection,
-  formatWeekDay,
+  getSectionByWeekDay,
   type SectionMetadata,
+  sections,
 } from "@/content/course/sections";
 import { ContentRenderer } from "@/components/course";
 import type { SectionContent } from "@/components/course/types";
-import { ArrowLeft, ArrowRight, Clock, BookOpen } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Dynamic import for section content
 async function loadSectionContent(
-  slug: string
+  slug: string,
 ): Promise<{ metadata: SectionMetadata; content: SectionContent } | null> {
   try {
     const module = await import(
@@ -56,18 +56,18 @@ export const Route = createFileRoute("/essentials/week/$week/day/$day")({
   },
   component: SectionPage,
   notFoundComponent: () => (
-    <div className="mx-auto max-w-4xl px-4 sm:px-6 py-12 text-center">
-      <h1 className="font-serif text-3xl font-semibold text-slate-900 mb-4">
+    <div className="mx-auto px-4 sm:px-6 py-12 max-w-4xl text-center">
+      <h1 className="mb-4 font-semibold text-foreground text-3xl">
         Section Not Found
       </h1>
-      <p className="text-slate-600 mb-6">
+      <p className="mb-6 text-muted-foreground">
         This section doesn't exist or hasn't been created yet.
       </p>
       <Link
         to="/essentials"
-        className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800"
+        className="inline-flex items-center gap-2 text-primary hover:text-primary/80"
       >
-        <ArrowLeft className="h-4 w-4" />
+        <ArrowLeft className="w-4 h-4" />
         Back to Course
       </Link>
     </div>
@@ -79,24 +79,24 @@ function SectionPage() {
   const totalSections = sections.length;
 
   return (
-    <div className="mx-auto max-w-4xl px-4 sm:px-6 py-8 md:py-12">
+    <div className="mx-auto px-4 sm:px-6 py-8 md:py-12 max-w-4xl">
       {/* Breadcrumb & Progress */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <div className="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-4 mb-8">
         <Link
           to="/essentials"
-          className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 transition-colors"
+          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground text-sm transition-colors"
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="w-4 h-4" />
           Back to Course
         </Link>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 text-sm text-slate-500">
-            <Clock className="h-4 w-4" />
+          <div className="flex items-center gap-2 text-muted-foreground text-sm">
+            <Clock className="w-4 h-4" />
             {formatWeekDay(section.week, section.day)}
           </div>
-          <div className="h-4 w-px bg-slate-200" />
-          <div className="flex items-center gap-2 text-sm text-slate-500">
-            <BookOpen className="h-4 w-4" />
+          <div className="bg-border w-px h-4" />
+          <div className="flex items-center gap-2 text-muted-foreground text-sm">
+            <BookOpen className="w-4 h-4" />
             {section.section_number} of {totalSections}
           </div>
         </div>
@@ -104,9 +104,9 @@ function SectionPage() {
 
       {/* Progress Bar */}
       <div className="mb-8">
-        <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+        <div className="bg-muted rounded-full w-full h-1.5 overflow-hidden">
           <div
-            className="h-full bg-blue-600 rounded-full transition-all duration-500"
+            className="bg-primary rounded-full h-full transition-all duration-500"
             style={{
               width: `${(section.section_number / totalSections) * 100}%`,
             }}
@@ -116,69 +116,68 @@ function SectionPage() {
 
       {/* Section Header */}
       <header className="mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm font-medium mb-4">
+        <div className="inline-flex items-center gap-2 bg-primary/10 mb-4 px-3 py-1 rounded-full font-medium text-primary text-sm">
           Section {section.section_number}
         </div>
-        <h1 className="font-serif text-3xl md:text-4xl font-semibold text-slate-900 mb-4 tracking-tight">
+        <h1 className="mb-4 font-semibold text-foreground text-3xl md:text-4xl tracking-tight">
           {section.title}
         </h1>
-        <p className="text-lg text-slate-600">{section.description}</p>
+        <p className="text-muted-foreground text-lg">{section.description}</p>
       </header>
 
       {/* Content */}
-      <article className="section-card mb-12">
+      <article className="mb-12 section-card">
         <ContentRenderer content={content} />
       </article>
 
       {/* Navigation */}
-      <nav className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-slate-200">
-        {prevSection ? (
-          <Link
-            to="/essentials/week/$week/day/$day"
-            params={{
-              week: String(prevSection.week),
-              day: String(prevSection.day),
-            }}
-            className={cn(
-              "flex-1 group flex items-center gap-4 p-4 rounded-xl border border-slate-200 hover:border-blue-200 hover:bg-blue-50/50 transition-all"
-            )}
-          >
-            <ArrowLeft className="h-5 w-5 text-slate-400 group-hover:text-blue-500" />
-            <div className="flex-1 min-w-0">
-              <div className="text-sm text-slate-500">Previous</div>
-              <div className="font-semibold text-slate-900 truncate group-hover:text-blue-900">
-                {prevSection.title}
+      <nav className="flex sm:flex-row flex-col gap-4 pt-8 border-border border-t">
+        {prevSection
+          ? (
+            <Link
+              to="/essentials/week/$week/day/$day"
+              params={{
+                week: String(prevSection.week),
+                day: String(prevSection.day),
+              }}
+              className={cn(
+                "group flex flex-1 items-center gap-4 hover:bg-muted/50 p-4 border border-border hover:border-primary/30 rounded-xl transition-all",
+              )}
+            >
+              <ArrowLeft className="w-5 h-5 text-muted-foreground group-hover:text-primary" />
+              <div className="flex-1 min-w-0">
+                <div className="text-muted-foreground text-sm">Previous</div>
+                <div className="font-semibold text-foreground group-hover:text-primary truncate">
+                  {prevSection.title}
+                </div>
               </div>
-            </div>
-          </Link>
-        ) : (
-          <div className="flex-1" />
-        )}
+            </Link>
+          )
+          : <div className="flex-1" />}
 
-        {nextSection ? (
-          <Link
-            to="/essentials/week/$week/day/$day"
-            params={{
-              week: String(nextSection.week),
-              day: String(nextSection.day),
-            }}
-            className={cn(
-              "flex-1 group flex items-center gap-4 p-4 rounded-xl border border-slate-200 hover:border-blue-200 hover:bg-blue-50/50 transition-all text-right"
-            )}
-          >
-            <div className="flex-1 min-w-0">
-              <div className="text-sm text-slate-500">Next</div>
-              <div className="font-semibold text-slate-900 truncate group-hover:text-blue-900">
-                {nextSection.title}
+        {nextSection
+          ? (
+            <Link
+              to="/essentials/week/$week/day/$day"
+              params={{
+                week: String(nextSection.week),
+                day: String(nextSection.day),
+              }}
+              className={cn(
+                "group flex flex-1 items-center gap-4 hover:bg-muted/50 p-4 border border-border hover:border-primary/30 rounded-xl text-right transition-all",
+              )}
+            >
+              <div className="flex-1 min-w-0">
+                <div className="text-muted-foreground text-sm">Next</div>
+                <div className="font-semibold text-foreground group-hover:text-primary truncate">
+                  {nextSection.title}
+                </div>
               </div>
-            </div>
-            <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-blue-500" />
-          </Link>
-        ) : (
-          <div className="flex-1" />
-        )}
+              <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary" />
+            </Link>
+          )
+          : <div className="flex-1" />}
       </nav>
     </div>
   );
 }
-

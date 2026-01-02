@@ -4,6 +4,7 @@ import FAQsLayout from "../../layouts/FAQsLayout.astro";
 import IsMyAchillesRupturedSection from "@/sections/FAQs/is-my-achilles-ruptured.astro";
 import type { Lang } from "../../config/languages";
 import IsMyAchillesRupturedFaqsSection from "@/sections/FAQs/is-my-achilles-ruptured-faqs.astro";
+import CourseCTA from "../../components/CTA/CourseCTA.astro";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
 
@@ -44,7 +45,7 @@ const currentContent = content[lang];
     lang={lang}
 >
     <IsMyAchillesRupturedSection lang={lang} />
-
+    <CourseCTA lang={lang} variant="full" />
     <NightSplintAdvert lang={lang} />
 
     <IsMyAchillesRupturedFaqsSection lang={lang} />

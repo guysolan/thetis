@@ -2,13 +2,23 @@ import {
   createRootRouteWithContext,
   Link,
   Outlet,
+  useMatchRoute,
   useRouterState,
 } from "@tanstack/react-router";
 import { Toaster } from "@thetis/ui/sonner";
+import { Button } from "@thetis/ui/button";
+import { Logo } from "@thetis/ui/logo";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTrigger,
+} from "@thetis/ui/sheet";
 import type { QueryClient } from "@tanstack/react-query";
-import { Loader2, Menu, X } from "lucide-react";
+import { BookOpen, ExternalLink, Loader2, Menu, Star } from "lucide-react";
 import { cn } from "../lib/utils";
-import { useState } from "react";
 
 function RouterSpinner() {
   const isLoading = useRouterState({ select: (s) => s.status === "pending" });
@@ -16,76 +26,158 @@ function RouterSpinner() {
     <Loader2
       size={32}
       className={cn(
-        "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin text-blue-500",
-        isLoading ? "block" : "hidden"
+        "top-1/2 left-1/2 fixed text-primary -translate-x-1/2 -translate-y-1/2 animate-spin",
+        isLoading ? "block" : "hidden",
       )}
     />
   );
 }
 
-function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+const navLinks = [
+  {
+    title: "Essentials",
+    href: "/essentials",
+    icon: BookOpen,
+  },
+  {
+    title: "Professionals",
+    href: "/professionals",
+    icon: Star,
+  },
+];
+
+function DesktopNav() {
+  const matchRoute = useMatchRoute();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-lg">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <div className="flex h-16 items-center justify-between">
+    <nav className="flex items-center gap-1">
+      {navLinks.map((link) => {
+        const isActive = matchRoute({ to: link.href, fuzzy: true });
+        return (
+          <Link
+            key={link.href}
+            to={link.href}
+            className={cn(
+              "inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-colors",
+              isActive
+                ? "bg-primary/10 text-primary"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground",
+            )}
+          >
+            <link.icon className="w-4 h-4" />
+            {link.title}
+          </Link>
+        );
+      })}
+      <a
+        href="https://thetismedical.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 hover:bg-muted px-4 py-2 rounded-lg font-medium text-muted-foreground hover:text-foreground text-sm transition-colors"
+      >
+        Thetis Medical
+        <ExternalLink className="w-3.5 h-3.5" />
+      </a>
+    </nav>
+  );
+}
+
+function MobileNav() {
+  const matchRoute = useMatchRoute();
+
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="outline" size="sm">
+          <Menu className="mr-2 w-4 h-4" />
+          Menu
+        </Button>
+      </SheetTrigger>
+      <SheetContent className="p-6 w-[85vw]">
+        <SheetHeader className="flex flex-row justify-between items-center mb-6">
           <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 shadow-sm">
-              <span className="text-lg font-bold text-white">T</span>
+            <div className="flex justify-center items-center bg-primary p-1.5 rounded-xl w-9 h-9">
+              <Logo className="w-6 h-6 text-primary-foreground" />
             </div>
-            <span className="font-serif text-xl font-semibold text-slate-900">
+            <span className="font-semibold text-foreground text-lg">
               Recovery Guide
             </span>
           </Link>
+        </SheetHeader>
 
-          <nav className="hidden md:flex items-center gap-6">
-            <Link
-              to="/essentials"
-              className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Essentials Course
-            </Link>
+        <nav className="flex flex-col gap-2">
+          {navLinks.map((link) => {
+            const isActive = matchRoute({ to: link.href, fuzzy: true });
+            return (
+              <SheetClose key={link.href} asChild>
+                <Link
+                  to={link.href}
+                  className={cn(
+                    "flex items-center gap-3 p-4 border rounded-xl transition-colors",
+                    isActive
+                      ? "bg-primary/10 border-primary/30 text-primary"
+                      : "border-border hover:bg-muted",
+                  )}
+                >
+                  <div
+                    className={cn(
+                      "flex justify-center items-center rounded-lg w-10 h-10 shrink-0",
+                      isActive
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-primary/10 text-primary",
+                    )}
+                  >
+                    <link.icon className="w-5 h-5" />
+                  </div>
+                  <span className="font-semibold">{link.title}</span>
+                </Link>
+              </SheetClose>
+            );
+          })}
+        </nav>
+
+        <SheetFooter className="mt-8">
+          <SheetClose asChild>
             <a
               href="https://thetismedical.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+              className="flex justify-center items-center gap-2 bg-muted p-3 rounded-lg font-medium text-muted-foreground hover:text-foreground text-sm transition-colors"
             >
-              Thetis Medical
+              Visit Thetis Medical
+              <ExternalLink className="w-4 h-4" />
             </a>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  );
+}
+
+function Header() {
+  return (
+    <header className="top-0 z-50 sticky bg-background/80 backdrop-blur-lg border-border border-b w-full">
+      <div className="mx-auto px-4 sm:px-6 max-w-5xl">
+        <div className="flex justify-between items-center h-16">
+          <Link to="/" className="flex items-center gap-2">
+            <div className="flex justify-center items-center bg-primary shadow-sm p-1.5 rounded-xl w-9 h-9">
+              <Logo className="w-6 h-6 text-primary-foreground" />
+            </div>
+            <span className="font-semibold text-foreground text-xl">
+              Recovery Guide
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-2">
+            <DesktopNav />
           </nav>
 
-          <button
-            type="button"
-            className="md:hidden p-2 text-slate-600"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-slate-200">
-            <nav className="flex flex-col gap-4">
-              <Link
-                to="/essentials"
-                className="text-sm font-medium text-slate-600 hover:text-slate-900"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Essentials Course
-              </Link>
-              <a
-                href="https://thetismedical.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-medium text-slate-600 hover:text-slate-900"
-              >
-                Thetis Medical
-              </a>
-            </nav>
+          {/* Mobile Navigation */}
+          <div className="md:hidden">
+            <MobileNav />
           </div>
-        )}
+        </div>
       </div>
     </header>
   );
@@ -93,18 +185,18 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-slate-50 mt-auto">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 py-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+    <footer className="bg-muted/30 mt-auto border-border border-t">
+      <div className="mx-auto px-4 sm:px-6 py-8 max-w-5xl">
+        <div className="flex md:flex-row flex-col justify-between items-center gap-4">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-700">
-              <span className="text-sm font-bold text-white">T</span>
+            <div className="flex justify-center items-center bg-primary p-1.5 rounded-lg w-8 h-8">
+              <Logo className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="font-serif text-lg font-semibold text-slate-900">
+            <span className="font-semibold text-foreground text-lg">
               Thetis Medical
             </span>
           </div>
-          <p className="text-sm text-slate-500">
+          <p className="text-muted-foreground text-sm">
             © {new Date().getFullYear()} Thetis Medical. All rights reserved.
           </p>
         </div>
@@ -118,22 +210,19 @@ export const Route = createRootRouteWithContext<{
 }>()({
   component: RootComponent,
   notFoundComponent: () => (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1 flex items-center justify-center">
+      <main className="flex flex-1 justify-center items-center">
         <div className="text-center">
-          <h1 className="font-serif text-4xl font-semibold text-slate-900 mb-4">
+          <h1 className="mb-4 font-semibold text-foreground text-4xl">
             Page Not Found
           </h1>
-          <p className="text-slate-600 mb-6">
+          <p className="mb-6 text-muted-foreground">
             The page you're looking for doesn't exist.
           </p>
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
-          >
-            Go Home
-          </Link>
+          <Button asChild>
+            <Link to="/">Go Home</Link>
+          </Button>
         </div>
       </main>
       <Footer />
@@ -143,7 +232,7 @@ export const Route = createRootRouteWithContext<{
 
 function RootComponent() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">
         <Outlet />
@@ -154,4 +243,3 @@ function RootComponent() {
     </div>
   );
 }
-

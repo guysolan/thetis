@@ -9,6 +9,7 @@ import { Badge } from "../components/ui/badge";
 import {
   getArticleRoutesByLanguage,
   getContactRoutesByLanguage,
+  getCourseRoutesByLanguage,
   getPartnerRoutesByLanguage,
   getProductRoutesByLanguage,
 } from "@/content/routes.tsx";
@@ -23,31 +24,36 @@ interface NavAccordionProps {
 
 const content = {
   en: {
-    ourProduct: "Our Product",
+    courses: "Courses",
+    ourProduct: "Products",
     professionals: "Professionals",
     patientGuides: "Patient Guides",
     contactUs: "Contact Us",
   },
   de: {
-    ourProduct: "Unser Produkt",
+    courses: "Kurse",
+    ourProduct: "Produkte",
     professionals: "Fachkräfte",
     patientGuides: "Patientenleitfäden",
     contactUs: "Kontaktiere uns",
   },
   fr: {
-    ourProduct: "Notre Produit",
+    courses: "Cours",
+    ourProduct: "Produits",
     professionals: "Professionnels",
     patientGuides: "Guides du Patient",
     contactUs: "Contactez-nous",
   },
   es: {
-    ourProduct: "Nuestro Producto",
+    courses: "Cursos",
+    ourProduct: "Productos",
     professionals: "Profesionales",
     patientGuides: "Guías del Paciente",
     contactUs: "Contáctenos",
   },
   it: {
-    ourProduct: "Il Nostro Prodotto",
+    courses: "Corsi",
+    ourProduct: "Prodotti",
     professionals: "Professionisti",
     patientGuides: "Guide del Paziente",
     contactUs: "Contattaci",
@@ -58,6 +64,7 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
   const t = content[lang];
 
   // Get localized routes
+  const courseLinks = getCourseRoutesByLanguage(lang);
   const productLinks = getProductRoutesByLanguage(lang).map((link) => {
     // Add image to the Achilles splint product
     if (link.slug === "achilles-rupture-splint") {
@@ -71,6 +78,25 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
 
   return (
     <Accordion type="single" collapsible>
+      {/* Courses */}
+      <AccordionItem value="courses">
+        <AccordionTrigger>{t.courses}</AccordionTrigger>
+        <AccordionContent>
+          <div className="flex flex-col gap-2">
+            {courseLinks.map((course) => (
+              <IconLink
+                key={course.href}
+                href={course.href}
+                icon={course.icon}
+                title={course.title}
+                description={course.description}
+                variant={course.variant}
+              />
+            ))}
+          </div>
+        </AccordionContent>
+      </AccordionItem>
+
       {/* Products */}
       <AccordionItem value="products">
         <AccordionTrigger>{t.ourProduct}</AccordionTrigger>
@@ -189,7 +215,7 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
                 key={contact.href}
                 href={contact.href}
                 className={cn(
-                  "flex items-center gap-2 p-3 rounded-sm border transition-colors duration-300",
+                  "flex items-center gap-2 p-3 border rounded-sm transition-colors duration-300",
                   contact.variant === "default"
                     ? "bg-gradient-to-tr from-primary/10 to-primary/20 dark:from-primary/5 dark:to-primary/10 text-primary hover:bg-primary/15 dark:hover:bg-primary/20 hover:text-primary-dark border-primary/20 dark:border-primary/10"
                     : "border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100",
@@ -241,7 +267,7 @@ const IconLink = ({
     <a
       href={href}
       className={cn(
-        "flex items-center gap-2 p-3 rounded-sm border transition-colors duration-300",
+        "flex items-center gap-2 p-3 border rounded-sm transition-colors duration-300",
         variant === "default"
           ? "bg-gradient-to-tr from-primary/10 to-primary/20 dark:from-primary/5 dark:to-primary/10 text-primary hover:bg-primary/15 dark:hover:bg-primary/20 hover:text-primary-dark border-primary/20 dark:border-primary/10"
           : "border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100",

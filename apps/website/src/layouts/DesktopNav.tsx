@@ -20,6 +20,7 @@ const contentWidth = "min-w-[min(50vw,700px)]";
 import {
   getArticleRoutesByLanguage,
   getContactRoutesByLanguage,
+  getGuidePageRoutesByLanguage,
   getPartnerRoutesByLanguage,
   getProductRoutesByLanguage,
   getRouteBySlugAndLanguage,
@@ -38,11 +39,13 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
   const articles = getArticleRoutesByLanguage(lang);
   const partnerLinks = getPartnerRoutesByLanguage(lang);
   const contactLinks = getContactRoutesByLanguage(lang);
+  const guideLinks = getGuidePageRoutesByLanguage(lang);
 
   // Get dynamic URLs for the current language
   const splintRoute = getRouteBySlugAndLanguage("splint", lang);
   const buyNowRoute = getRouteBySlugAndLanguage("buy-now", lang);
   const wholesaleRoute = getRouteBySlugAndLanguage("order-wholesale", lang);
+  const guideRoute = getRouteBySlugAndLanguage("guide", lang);
 
   return (
     <>
@@ -50,7 +53,35 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
         <NavigationMenuList className={cn("justify-end", contentWidth)}>
           <NavigationMenuItem>
             <NavigationMenuTrigger>
-              {t.ourProduct}
+              {t.courses}
+            </NavigationMenuTrigger>
+            <NavigationMenuContent
+              className={cn("flex flex-col gap-4 p-6", contentWidth)}
+            >
+              <div className="mb-2">
+                <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
+                  {t.coursesTitle}
+                </h3>
+                <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+                  {t.coursesDescription}
+                </p>
+              </div>
+              <div className="gap-4 grid grid-cols-2">
+                {guideLinks.map((link) => (
+                  <LinkCard
+                    key={link.href}
+                    {...link}
+                    variant={link.variant || "outline"}
+                    icon={link.icon}
+                  />
+                ))}
+              </div>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>
+              {t.ourProducts}
             </NavigationMenuTrigger>
             <NavigationMenuContent className={cn("p-6", contentWidth)}>
               <ProductLink
@@ -72,7 +103,7 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
               {t.patientGuides}
             </NavigationMenuTrigger>
             <NavigationMenuContent
-              className={cn("grid grid-cols-2 p-4 gap-4", contentWidth)}
+              className={cn("gap-4 grid grid-cols-2 p-4", contentWidth)}
             >
               {articles.map((article) => (
                 <ListItem
@@ -107,7 +138,7 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
               {t.professionals}
             </NavigationMenuTrigger>
             <NavigationMenuContent
-              className={cn("p-6 flex flex-col gap-2", contentWidth)}
+              className={cn("flex flex-col gap-2 p-6", contentWidth)}
             >
               <div className="gap-4 grid grid-cols-2">
                 {partnerLinks.map((link) => (
@@ -132,7 +163,7 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
               {t.contact}
             </NavigationMenuTrigger>
             <NavigationMenuContent
-              className={cn("p-6 flex flex-col gap-2", contentWidth)}
+              className={cn("flex flex-col gap-2 p-6", contentWidth)}
             >
               <div className="flex flex-row gap-4">
                 <div className="flex flex-col flex-1 gap-4">
@@ -183,7 +214,7 @@ const ListItem = React.forwardRef<
       <a
         ref={ref}
         className={cn(
-          "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+          "block space-y-1 hover:bg-accent focus:bg-accent p-3 rounded-md outline-none no-underline leading-none transition-colors hover:text-accent-foreground focus:text-accent-foreground select-none",
           className,
         )}
         {...props}
@@ -264,7 +295,7 @@ const LinkCard = ({
     <NavigationMenuLink asChild>
       <a
         className={cn(
-          "rounded-lg p-4 border-primary/20 border flex flex-row gap-2 items-center h-full w-full transition-colors duration-300",
+          "flex flex-row items-center gap-2 p-4 border border-primary/20 rounded-lg w-full h-full transition-colors duration-300",
           variant === "default" &&
             "bg-gradient-to-tr from-primary/10 to-primary/20 text-primary hover:bg-primary/15 hover:text-primary-dark",
           variant === "outline" &&
@@ -283,7 +314,7 @@ const LinkCard = ({
           >
             {title}
           </h3>
-          <p className={cn("text-sm text-neutral-500")}>{description}</p>
+          <p className={cn("text-neutral-500 text-sm")}>{description}</p>
         </div>
       </a>
     </NavigationMenuLink>

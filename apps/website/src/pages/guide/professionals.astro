@@ -1,0 +1,486 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import HighlightedWord from "@/components/HighlightedWord";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import {
+    Moon,
+    ShoppingCart,
+    ExternalLink,
+    BookOpen,
+    GraduationCap,
+    Check,
+    Star,
+    Video,
+    Users,
+    Target,
+    ArrowRight,
+    Mail,
+} from "lucide-react";
+
+const professionalFeatures = [
+    "Everything in Essentials (31 lessons)",
+    "Specialist surgeon video lessons",
+    "8 recovery hacks from elite athletes",
+    "Return-to-sport protocols",
+    "Personalized exercise progressions",
+    "Direct access to recovery experts",
+    "Community support forum",
+    "Priority email support",
+];
+
+const essentialsFeatures = [
+    "31 structured lessons",
+    "Questions for your surgeon",
+    "Physio exercises with illustrations",
+    "Product recommendations",
+    "Boot comparison guide",
+    "Week-by-week timeline",
+];
+
+const videoTopics = [
+    {
+        title: "Surgery vs Conservative Treatment",
+        description: "Expert surgeon explains when surgery is truly needed and when conservative treatment works best.",
+    },
+    {
+        title: "Optimal Rehabilitation Protocols",
+        description: "Evidence-based exercise progressions for each stage of recovery.",
+    },
+    {
+        title: "Return to Sport Assessment",
+        description: "How to know when you're truly ready to return to running and sport.",
+    },
+    {
+        title: "Preventing Re-rupture",
+        description: "Key strategies to minimize your risk of re-injury long-term.",
+    },
+];
+---
+
+<Layout
+    title="Professional Recovery Course - Expert-Led Video Lessons | Thetis Medical"
+    description="Premium Achilles rupture recovery course with specialist surgeon video lessons, personalized guidance, and return-to-sport protocols. Expert support for optimal recovery."
+    image="https://thetismedical.com/images/night-splint.png"
+    lang="en"
+>
+    <main>
+        <ColorGradient>
+            <div class="mx-auto px-4 py-16 md:py-24 max-w-4xl text-center">
+                <span
+                    class="inline-flex items-center gap-2 bg-amber-100 dark:bg-amber-900 mb-4 px-3 py-1 rounded-full font-semibold text-amber-800 dark:text-amber-200 text-sm"
+                >
+                    <Star className="w-4 h-4 fill-current" />
+                    Premium Course
+                </span>
+                <h1
+                    class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-4xl md:text-5xl"
+                >
+                    <HighlightedWord>Professional</HighlightedWord> Recovery
+                </h1>
+                <p
+                    class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg md:text-xl"
+                >
+                    Expert-led video lessons and personalized guidance for those who want the best possible recovery. From specialist surgeons and elite sports physios.
+                </p>
+
+                <!-- Price -->
+                <div class="mb-8">
+                    <span class="font-bold text-neutral-900 dark:text-neutral-100 text-4xl">£99</span>
+                    <span class="text-neutral-500 dark:text-neutral-400 text-lg"> one-time</span>
+                </div>
+
+                <!-- CTA buttons -->
+                <div class="flex sm:flex-row flex-col justify-center gap-4">
+                    <a
+                        href="https://guide.thetismedical.com/professionals"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class={cn(
+                            buttonVariants({
+                                variant: "default",
+                                size: "lg",
+                            }),
+                            "justify-center gap-2",
+                        )}
+                    >
+                        <ExternalLink className="w-4 h-4" />
+                        Start Professional Course
+                    </a>
+                    <a
+                        href="/guide/essentials"
+                        class={cn(
+                            buttonVariants({
+                                variant: "outline",
+                                size: "lg",
+                            }),
+                            "justify-center gap-2",
+                        )}
+                    >
+                        <BookOpen className="w-4 h-4" />
+                        Compare with Essentials
+                    </a>
+                </div>
+            </div>
+        </ColorGradient>
+
+        <!-- What's Included -->
+        <section class="py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-4xl">
+                <div class="mb-12 text-center">
+                    <h2 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl">
+                        What's Included
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400">
+                        Everything you need for an elite-level recovery.
+                    </p>
+                </div>
+
+                <div class="gap-4 grid md:grid-cols-2">
+                    {professionalFeatures.map((feature) => (
+                        <div class="flex items-center gap-3 bg-neutral-50 dark:bg-neutral-800 p-4 rounded-xl">
+                            <div class="flex justify-center items-center bg-amber-100 dark:bg-amber-900 rounded-full w-8 h-8 shrink-0">
+                                <Check className="w-4 h-4 text-amber-700 dark:text-amber-300" />
+                            </div>
+                            <span class="text-neutral-700 dark:text-neutral-300">{feature}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Lessons -->
+        <section class="bg-neutral-50 dark:bg-neutral-900 py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-5xl">
+                <div class="mb-12 text-center">
+                    <div class="flex justify-center items-center gap-2 mb-4">
+                        <Video className="w-6 h-6 text-primary" />
+                        <span class="font-medium text-primary text-sm uppercase tracking-widest">Video Content</span>
+                    </div>
+                    <h2 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl">
+                        Expert Video Lessons
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400">
+                        Learn directly from specialist orthopaedic surgeons and sports physiotherapists.
+                    </p>
+                </div>
+
+                <div class="gap-6 grid md:grid-cols-2">
+                    {videoTopics.map((topic) => (
+                        <div class="bg-white dark:bg-neutral-800 p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="flex justify-center items-center bg-primary/10 rounded-lg w-10 h-10">
+                                    <Video className="w-5 h-5 text-primary" />
+                                </div>
+                                <h3 class="font-semibold text-neutral-900 dark:text-neutral-100">
+                                    {topic.title}
+                                </h3>
+                            </div>
+                            <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+                                {topic.description}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison -->
+        <section class="py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-5xl">
+                <div class="mb-12 text-center">
+                    <h2 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl">
+                        Essentials vs Professional
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400">
+                        Choose the course that's right for your recovery goals.
+                    </p>
+                </div>
+
+                <div class="gap-8 grid md:grid-cols-2 mx-auto max-w-4xl">
+                    <!-- Essentials -->
+                    <div class="bg-white dark:bg-neutral-800 p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
+                        <div class="mb-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <BookOpen className="w-5 h-5 text-primary" />
+                            </div>
+                            <h3 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-2xl">
+                                Essentials
+                            </h3>
+                            <p class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm">
+                                Complete recovery guidance for most patients.
+                            </p>
+                            <div class="font-bold text-neutral-900 dark:text-neutral-100 text-3xl">
+                                £29
+                            </div>
+                        </div>
+
+                        <ul class="space-y-3 mb-8">
+                            {essentialsFeatures.map((feature) => (
+                                <li class="flex items-center gap-3 text-neutral-700 dark:text-neutral-300 text-sm">
+                                    <Check className="w-4 h-4 text-primary shrink-0" />
+                                    {feature}
+                                </li>
+                            ))}
+                        </ul>
+
+                        <a
+                            href="/guide/essentials"
+                            class={cn(
+                                buttonVariants({
+                                    variant: "outline",
+                                    size: "default",
+                                }),
+                                "w-full justify-center gap-2",
+                            )}
+                        >
+                            Learn More
+                            <ArrowRight className="w-4 h-4" />
+                        </a>
+                    </div>
+
+                    <!-- Professional -->
+                    <div class="relative bg-white dark:bg-neutral-800 p-8 border-2 border-primary rounded-2xl">
+                        <div class="top-0 right-4 absolute bg-primary px-3 py-1 rounded-b-lg font-semibold text-white text-xs">
+                            RECOMMENDED
+                        </div>
+                        <div class="mb-6">
+                            <div class="flex items-center gap-2 mb-2">
+                                <GraduationCap className="w-5 h-5 text-primary" />
+                                <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+                            </div>
+                            <h3 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-2xl">
+                                Professional
+                            </h3>
+                            <p class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm">
+                                Elite recovery with expert video guidance.
+                            </p>
+                            <div class="font-bold text-neutral-900 dark:text-neutral-100 text-3xl">
+                                £99
+                            </div>
+                        </div>
+
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3 text-neutral-700 dark:text-neutral-300 text-sm">
+                                <Check className="w-4 h-4 text-primary shrink-0" />
+                                <strong>Everything in Essentials</strong>
+                            </li>
+                            <li class="flex items-center gap-3 text-neutral-700 dark:text-neutral-300 text-sm">
+                                <Check className="w-4 h-4 text-primary shrink-0" />
+                                Surgeon video lessons
+                            </li>
+                            <li class="flex items-center gap-3 text-neutral-700 dark:text-neutral-300 text-sm">
+                                <Check className="w-4 h-4 text-primary shrink-0" />
+                                8 recovery hacks
+                            </li>
+                            <li class="flex items-center gap-3 text-neutral-700 dark:text-neutral-300 text-sm">
+                                <Check className="w-4 h-4 text-primary shrink-0" />
+                                Return-to-sport protocols
+                            </li>
+                            <li class="flex items-center gap-3 text-neutral-700 dark:text-neutral-300 text-sm">
+                                <Check className="w-4 h-4 text-primary shrink-0" />
+                                Expert support access
+                            </li>
+                        </ul>
+
+                        <a
+                            href="https://guide.thetismedical.com/professionals"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class={cn(
+                                buttonVariants({
+                                    variant: "default",
+                                    size: "default",
+                                }),
+                                "w-full justify-center gap-2",
+                            )}
+                        >
+                            Start Professional
+                            <ExternalLink className="w-4 h-4" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who Is This For -->
+        <section class="bg-neutral-50 dark:bg-neutral-900 py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-4xl">
+                <div class="mb-12 text-center">
+                    <h2 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl">
+                        Who Is Professional For?
+                    </h2>
+                </div>
+
+                <div class="gap-6 grid md:grid-cols-3">
+                    <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl text-center">
+                        <div class="flex justify-center items-center bg-primary/10 mx-auto mb-4 rounded-full w-12 h-12">
+                            <Target className="w-6 h-6 text-primary" />
+                        </div>
+                        <h3 class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
+                            Athletes
+                        </h3>
+                        <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+                            Return to sport with confidence using sport-specific protocols.
+                        </p>
+                    </div>
+                    <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl text-center">
+                        <div class="flex justify-center items-center bg-primary/10 mx-auto mb-4 rounded-full w-12 h-12">
+                            <Users className="w-6 h-6 text-primary" />
+                        </div>
+                        <h3 class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
+                            Active Individuals
+                        </h3>
+                        <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+                            Get back to running, hiking, and fitness faster with expert guidance.
+                        </p>
+                    </div>
+                    <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl text-center">
+                        <div class="flex justify-center items-center bg-primary/10 mx-auto mb-4 rounded-full w-12 h-12">
+                            <Star className="w-6 h-6 text-primary" />
+                        </div>
+                        <h3 class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
+                            Optimal Recovery Seekers
+                        </h3>
+                        <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+                            Those who want the best possible outcome from their recovery.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Splint Mention -->
+        <section class="py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-4xl">
+                <div class="bg-white dark:bg-neutral-800 shadow-lg p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
+                    <div class="flex md:flex-row flex-col items-center gap-8">
+                        <div class="flex-1">
+                            <span class="inline-flex items-center bg-primary/10 mb-4 px-3 py-1 rounded-full font-semibold text-primary text-sm">
+                                Complete Your Recovery Kit
+                            </span>
+                            <h3 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-2xl">
+                                Thetis Night Splint
+                            </h3>
+                            <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+                                Pair your course with the <strong>Thetis Night Splint</strong> for comfortable sleep and safe showering throughout your recovery.
+                            </p>
+                            <div class="flex flex-wrap gap-3">
+                                <a
+                                    href="/achilles-rupture-splint"
+                                    class={cn(
+                                        buttonVariants({
+                                            variant: "default",
+                                            size: "default",
+                                        }),
+                                        "gap-2",
+                                    )}
+                                >
+                                    <Moon className="w-4 h-4" />
+                                    Learn About the Splint
+                                </a>
+                                <a
+                                    href="/buy-now"
+                                    class={cn(
+                                        buttonVariants({
+                                            variant: "outline",
+                                            size: "default",
+                                        }),
+                                        "gap-2",
+                                    )}
+                                >
+                                    <ShoppingCart className="w-4 h-4" />
+                                    Shop Now
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex-1 max-w-xs">
+                            <img
+                                src="/images/night-splint.png"
+                                alt="Thetis Achilles Rupture Night Splint"
+                                class="shadow-md rounded-xl"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Not Ready? Try Free -->
+        <section class="py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-2xl text-center">
+                <div class="bg-neutral-50 dark:bg-neutral-800 p-8 rounded-2xl">
+                    <Mail className="mx-auto mb-4 w-10 h-10 text-primary" />
+                    <h2 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-2xl">
+                        Want to Try Before You Buy?
+                    </h2>
+                    <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+                        Start with our free email course. Get weekly recovery tips delivered to your inbox, then upgrade when you're ready.
+                    </p>
+                    <a
+                        href="/guide"
+                        class={cn(
+                            buttonVariants({
+                                variant: "outline",
+                                size: "default",
+                            }),
+                            "gap-2",
+                        )}
+                    >
+                        <Mail className="w-4 h-4" />
+                        Try Free Course First
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="bg-primary/5 py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-2xl text-center">
+                <h2
+                    class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl"
+                >
+                    Ready for Elite Recovery?
+                </h2>
+                <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+                    Get expert video guidance, return-to-sport protocols, and personalized support.
+                </p>
+                <p class="mb-8 font-bold text-neutral-900 dark:text-neutral-100 text-3xl">
+                    £99 <span class="font-normal text-neutral-500 text-lg">one-time</span>
+                </p>
+                <div class="flex sm:flex-row flex-col justify-center gap-4">
+                    <a
+                        href="https://guide.thetismedical.com/professionals"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class={cn(
+                            buttonVariants({
+                                variant: "default",
+                                size: "lg",
+                            }),
+                            "justify-center gap-2",
+                        )}
+                    >
+                        <ExternalLink className="w-4 h-4" />
+                        Start Professional Course
+                    </a>
+                    <a
+                        href="/guide/essentials"
+                        class={cn(
+                            buttonVariants({
+                                variant: "outline",
+                                size: "lg",
+                            }),
+                            "justify-center gap-2",
+                        )}
+                    >
+                        <BookOpen className="w-4 h-4" />
+                        Or Start with Essentials (£29)
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
+

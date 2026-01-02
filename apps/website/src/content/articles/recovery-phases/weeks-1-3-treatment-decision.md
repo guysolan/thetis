@@ -85,6 +85,18 @@ Not everyone needs imaging, but it's increasingly common and can be very helpful
 
 If ultrasound shows the tendon ends come together well when your foot is pointed down, non-surgical treatment is usually an excellent option.
 
+### What does “a 4cm gap” actually mean?
+
+Patients often hear a number like **“4cm gap”** and understandably panic. Here’s the plain-English version:
+
+- The Achilles tendon has torn and the two ends can sit apart — like the ends of a snapped rope.
+- On ultrasound, the clinician may measure the distance between the ends and describe it as a “gap”.
+- **That number can change depending on foot position.** If your foot is scanned more neutral vs more pointed down, the ends can look further apart or closer together.
+
+**The practical question to ask is:** “Does the gap close (or mostly close) when my foot is pointed down in the boot/cast position?”
+
+Gap size is one factor in the decision, but it’s not the only one. Your specialist will weigh it alongside your activity goals, tendon quality, and the overall risk/benefit of surgery vs non-surgical care.
+
 [GRAPHIC: Ultrasound image showing ruptured Achilles tendon]
 
 ---

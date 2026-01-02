@@ -24,8 +24,7 @@ export default defineConfig({
       },
     },
     commonjsOptions: {
-      include: [/node_modules/, /packages/],
+      include: [/packages/],
     },
   },
 });
-

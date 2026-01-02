@@ -15,11 +15,13 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@thetis/ui/alert";
 import {
   AlertTriangle,
+  Check,
   CheckCircle2,
-  XCircle,
+  CheckSquare,
   Info,
   Lightbulb,
-  Check,
+  Square,
+  XCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -62,9 +64,7 @@ function ListBlockComponent({
   const Tag = style === "numbered" ? "ol" : "ul";
   return (
     <Tag>
-      {items.map((item, i) => (
-        <li key={i}>{parseInlineMarkdown(item)}</li>
-      ))}
+      {items.map((item, i) => <li key={i}>{parseInlineMarkdown(item)}</li>)}
     </Tag>
   );
 }
@@ -79,10 +79,10 @@ function AlertBlockComponent({
   content: string;
 }) {
   const icons = {
-    info: <Info className="h-4 w-4" />,
-    warning: <AlertTriangle className="h-4 w-4" />,
-    success: <CheckCircle2 className="h-4 w-4" />,
-    danger: <XCircle className="h-4 w-4" />,
+    info: <Info className="w-4 h-4" />,
+    warning: <AlertTriangle className="w-4 h-4" />,
+    success: <CheckCircle2 className="w-4 h-4" />,
+    danger: <XCircle className="w-4 h-4" />,
   };
 
   const styles = {
@@ -109,7 +109,9 @@ function AlertBlockComponent({
   return (
     <Alert className={cn("my-6", styles[variant])}>
       {icons[variant]}
-      {title && <AlertTitle className={titleStyles[variant]}>{title}</AlertTitle>}
+      {title && (
+        <AlertTitle className={titleStyles[variant]}>{title}</AlertTitle>
+      )}
       <AlertDescription className={contentStyles[variant]}>
         {parseInlineMarkdown(content)}
       </AlertDescription>
@@ -123,10 +125,10 @@ function FAQBlockComponent({
   items: { question: string; answer: string }[];
 }) {
   return (
-    <Accordion type="single" collapsible className="w-full my-6">
+    <Accordion type="single" collapsible className="my-6 w-full">
       {items.map((item, i) => (
         <AccordionItem key={i} value={`faq-${i}`}>
-          <AccordionTrigger className="text-left font-semibold">
+          <AccordionTrigger className="font-semibold text-left">
             {item.question}
           </AccordionTrigger>
           <AccordionContent className="prose-course">
@@ -144,10 +146,10 @@ function AccordionBlockComponent({
   items: { title: string; content: ContentBlock[] }[];
 }) {
   return (
-    <Accordion type="single" collapsible className="w-full my-6">
+    <Accordion type="single" collapsible className="my-6 w-full">
       {items.map((item, i) => (
         <AccordionItem key={i} value={`accordion-${i}`}>
-          <AccordionTrigger className="text-left text-lg font-semibold">
+          <AccordionTrigger className="font-semibold text-lg text-left">
             {item.title}
           </AccordionTrigger>
           <AccordionContent className="prose-course">
@@ -179,16 +181,13 @@ function ChecklistBlockComponent({
         <ul className="space-y-2">
           {items.map((item, i) => (
             <li key={i} className="flex items-start gap-3">
-              <div
-                className={cn(
-                  "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border",
-                  item.checked
-                    ? "border-green-500 bg-green-500 text-white"
-                    : "border-slate-300"
+              {item.checked
+                ? (
+                  <CheckSquare className="mt-0.5 w-5 h-5 text-primary shrink-0" />
+                )
+                : (
+                  <CheckSquare className="mt-0.5 w-5 h-5 text-muted-foreground shrink-0" />
                 )}
-              >
-                {item.checked && <Check className="h-3 w-3" />}
-              </div>
               <span>{parseInlineMarkdown(item.text)}</span>
             </li>
           ))}
@@ -206,28 +205,25 @@ function DosDontsBlockComponent({
   donts: string[];
 }) {
   return (
-    <Card className="my-6 border-blue-200 bg-gradient-to-br from-blue-50 to-white">
-      <CardContent className="pt-6 space-y-4">
+    <Card className="bg-gradient-to-br from-primary/5 to-background my-6 border-primary/20">
+      <CardContent className="space-y-4 pt-6">
         <div>
-          <h4 className="font-semibold text-green-800 flex items-center gap-2 mb-2">
-            <CheckCircle2 className="h-4 w-4" />
+          <h4 className="flex items-center gap-2 mb-2 font-semibold text-green-800">
+            <CheckCircle2 className="w-4 h-4" />
             Do
           </h4>
-          <ul className="space-y-2 text-slate-700">
-            {dos.map((item, i) => (
-              <li key={i}>{parseInlineMarkdown(item)}</li>
-            ))}
+          <ul className="space-y-2 text-foreground/80">
+            {dos.map((item, i) => <li key={i}>{parseInlineMarkdown(item)}</li>)}
           </ul>
         </div>
         <div>
-          <h4 className="font-semibold text-red-800 flex items-center gap-2 mb-2">
-            <XCircle className="h-4 w-4" />
+          <h4 className="flex items-center gap-2 mb-2 font-semibold text-red-800">
+            <XCircle className="w-4 h-4" />
             Don't
           </h4>
-          <ul className="space-y-2 text-slate-700">
-            {donts.map((item, i) => (
-              <li key={i}>{parseInlineMarkdown(item)}</li>
-            ))}
+          <ul className="space-y-2 text-foreground/80">
+            {donts.map((item, i) => <li key={i}>{parseInlineMarkdown(item)}
+            </li>)}
           </ul>
         </div>
       </CardContent>
@@ -246,7 +242,9 @@ function QuoteBlockComponent({
     <blockquote className="my-6">
       {parseInlineMarkdown(text)}
       {author && (
-        <footer className="mt-2 text-sm text-slate-500">— {author}</footer>
+        <footer className="mt-2 text-muted-foreground text-sm">
+          — {author}
+        </footer>
       )}
     </blockquote>
   );
@@ -260,11 +258,11 @@ function TipBlockComponent({
   content: string;
 }) {
   return (
-    <div className="my-6 p-4 bg-blue-50 rounded-lg border border-blue-100 flex gap-3">
-      <Lightbulb className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
+    <div className="flex gap-3 bg-primary/10 my-6 p-4 border border-primary/20 rounded-lg">
+      <Lightbulb className="mt-0.5 w-5 h-5 text-primary shrink-0" />
       <div>
-        {title && <p className="font-semibold text-blue-900 mb-1">{title}</p>}
-        <p className="text-blue-800">{parseInlineMarkdown(content)}</p>
+        {title && <p className="mb-1 font-semibold text-foreground">{title}</p>}
+        <p className="text-foreground/80">{parseInlineMarkdown(content)}</p>
       </div>
     </div>
   );
@@ -279,13 +277,13 @@ function TableBlockComponent({
 }) {
   return (
     <div className="my-6 overflow-x-auto">
-      <table className="w-full border-collapse text-sm">
+      <table className="w-full text-sm border-collapse">
         <thead>
-          <tr className="bg-slate-100">
+          <tr className="bg-muted">
             {headers.map((header, i) => (
               <th
                 key={i}
-                className="border border-slate-200 px-4 py-2 text-left font-semibold"
+                className="px-4 py-2 border border-border font-semibold text-left"
               >
                 {header}
               </th>
@@ -294,9 +292,12 @@ function TableBlockComponent({
         </thead>
         <tbody>
           {rows.map((row, i) => (
-            <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
+            <tr
+              key={i}
+              className={i % 2 === 0 ? "bg-background" : "bg-muted/50"}
+            >
               {row.map((cell, j) => (
-                <td key={j} className="border border-slate-200 px-4 py-2">
+                <td key={j} className="px-4 py-2 border border-border">
                   {parseInlineMarkdown(cell)}
                 </td>
               ))}
@@ -321,8 +322,9 @@ function CardBlockComponent({
 }) {
   const variantStyles = {
     default: "",
-    highlight: "border-blue-200 bg-gradient-to-br from-blue-50 to-white",
-    muted: "bg-slate-50",
+    highlight:
+      "border-primary/20 bg-gradient-to-br from-primary/5 to-background",
+    muted: "bg-muted/50",
   };
 
   return (
@@ -351,9 +353,104 @@ function SectionBlockComponent({
     <section className="my-8">
       {title && <h2>{title}</h2>}
       {content.map((block, i) => (
-        <ContentBlockRenderer key={i} block={block} />
+        <ContentBlockRenderer
+          key={i}
+          block={block}
+        />
       ))}
     </section>
+  );
+}
+
+function ImageBlockComponent({
+  src,
+  alt,
+  caption,
+}: {
+  src: string;
+  alt: string;
+  caption?: string;
+}) {
+  return (
+    <figure className="my-8">
+      <img
+        src={src}
+        alt={alt}
+        className="shadow-md rounded-xl w-full"
+      />
+      {caption && (
+        <figcaption className="mt-3 text-muted-foreground text-sm text-center">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
+function IllustrationPromptBlockComponent({
+  title,
+  prompt,
+  filename_suggestion,
+  alt_text,
+  notes,
+}: {
+  title: string;
+  prompt: string;
+  filename_suggestion?: string;
+  alt_text?: string;
+  notes?: string;
+}) {
+  return (
+    <Card className="bg-primary/5 my-6 border-2 border-primary/30 border-dashed">
+      <CardHeader>
+        <CardTitle className="text-base md:text-lg">
+          Illustration to generate: {title}
+        </CardTitle>
+        <CardDescription>
+          Copy/paste the prompt below into your image generator.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="bg-background p-4 border border-border rounded-lg">
+          <p className="mb-2 text-muted-foreground text-xs uppercase tracking-wide">
+            Image prompt
+          </p>
+          <pre className="text-sm leading-relaxed whitespace-pre-wrap">
+            {prompt}
+          </pre>
+        </div>
+
+        {(filename_suggestion || alt_text) && (
+          <div className="gap-3 grid md:grid-cols-2">
+            {filename_suggestion && (
+              <div className="bg-background p-4 border border-border rounded-lg">
+                <p className="mb-2 text-muted-foreground text-xs uppercase tracking-wide">
+                  Suggested filename
+                </p>
+                <p className="font-mono text-sm">{filename_suggestion}</p>
+              </div>
+            )}
+            {alt_text && (
+              <div className="bg-background p-4 border border-border rounded-lg">
+                <p className="mb-2 text-muted-foreground text-xs uppercase tracking-wide">
+                  Suggested alt text
+                </p>
+                <p className="text-sm">{alt_text}</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {notes && (
+          <div className="bg-background p-4 border border-border rounded-lg">
+            <p className="mb-2 text-muted-foreground text-xs uppercase tracking-wide">
+              Notes
+            </p>
+            <p className="text-sm">{notes}</p>
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }
 
@@ -379,7 +476,12 @@ function ContentBlockRenderer({ block }: { block: ContentBlock }) {
     case "accordion":
       return <AccordionBlockComponent items={block.items} />;
     case "checklist":
-      return <ChecklistBlockComponent title={block.title} items={block.items} />;
+      return (
+        <ChecklistBlockComponent
+          title={block.title}
+          items={block.items}
+        />
+      );
     case "dos-donts":
       return <DosDontsBlockComponent dos={block.dos} donts={block.donts} />;
     case "quote":
@@ -398,7 +500,27 @@ function ContentBlockRenderer({ block }: { block: ContentBlock }) {
         />
       );
     case "section":
-      return <SectionBlockComponent title={block.title} content={block.content} />;
+      return (
+        <SectionBlockComponent title={block.title} content={block.content} />
+      );
+    case "image":
+      return (
+        <ImageBlockComponent
+          src={block.src}
+          alt={block.alt}
+          caption={block.caption}
+        />
+      );
+    case "illustration-prompt":
+      return (
+        <IllustrationPromptBlockComponent
+          title={block.title}
+          prompt={block.prompt}
+          filename_suggestion={block.filename_suggestion}
+          alt_text={block.alt_text}
+          notes={block.notes}
+        />
+      );
     default:
       return null;
   }
@@ -407,9 +529,9 @@ function ContentBlockRenderer({ block }: { block: ContentBlock }) {
 // Main content renderer
 export function ContentRenderer({ content }: { content: SectionContent }) {
   return (
-    <div className="prose-course space-y-6">
+    <div className="space-y-6 prose-course">
       {content.intro && (
-        <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
+        <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
           {parseInlineMarkdown(content.intro)}
         </p>
       )}
@@ -421,4 +543,3 @@ export function ContentRenderer({ content }: { content: SectionContent }) {
 }
 
 export { ContentBlockRenderer };
-
