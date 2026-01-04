@@ -1,4 +1,5 @@
 // Product and Variant definitions for upsell logic
+import { COURSE_URL } from "../env";
 
 // Night Splint variants
 export const SPLINT_VARIANTS = {
@@ -34,7 +35,7 @@ export const UPSELL_PRODUCTS = {
         description: "31 lessons to guide your recovery",
         price: "£29.99",
         image: "/images/course-essentials.jpg",
-        href: "/course/essentials",
+        href: `${COURSE_URL}/standard`,
         variantId: COURSE_VARIANTS.ESSENTIALS,
         canAddToCart: true,
     },
@@ -43,7 +44,7 @@ export const UPSELL_PRODUCTS = {
         description: "Complete guide for clinicians",
         price: "£79.99",
         image: "/images/course-professionals.jpg",
-        href: "/course/professionals",
+        href: `${COURSE_URL}/premium`,
         variantId: COURSE_VARIANTS.PROFESSIONALS,
         canAddToCart: true,
     },
@@ -71,9 +72,10 @@ export function getUpsellSuggestions(
     const suggestions: typeof UPSELL_PRODUCTS[keyof typeof UPSELL_PRODUCTS][] =
         [];
 
-    // If has splint but no courses, suggest essentials course
+    // If has splint but no courses, suggest standard course only (premium coming soon)
     if (hasSplint && !hasCourse) {
         suggestions.push(UPSELL_PRODUCTS.essentialsCourse);
+        // Premium course is coming soon - don't suggest it
     }
 
     // If has course but no splint, suggest splint
@@ -81,11 +83,7 @@ export function getUpsellSuggestions(
         suggestions.push(UPSELL_PRODUCTS.splint);
     }
 
-    // If has essentials but not professionals, could suggest professionals
-    if (hasEssentials && !hasProfessionals) {
-        suggestions.push(UPSELL_PRODUCTS.professionalsCourse);
-    }
+    // Premium course is coming soon - don't suggest upgrading from essentials
 
     return suggestions;
 }
-

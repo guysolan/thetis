@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, GraduationCap, Mail } from "lucide-react";
+import { BookOpen, ExternalLink, GraduationCap, Mail } from "lucide-react";
 import { PricingCard } from "@thetis/ui/pricing-card";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
-import { ShopifyCourseBuyButton } from "@/components/ShopifyCourseBuyButton";
-import { useCoursePrice } from "@/hooks/use-course-price";
-import { SHOPIFY_PRODUCTS } from "@/lib/shopify";
+import { Button } from "@thetis/ui/button";
+import { WEBSITE_URL } from "@/lib/env";
 
 function CourseCard({
   title,
@@ -18,7 +17,7 @@ function CourseCard({
   showRibbon,
   ribbonText,
   courseType,
-  productId,
+  shopUrl,
 }: {
   title: string;
   description: string;
@@ -30,20 +29,16 @@ function CourseCard({
   icon: React.ReactNode;
   showRibbon?: boolean;
   ribbonText?: string;
-  courseType: "essentials" | "professionals";
-  productId: string;
+  courseType: "standard" | "premium";
+  shopUrl: string;
 }) {
-  const { formattedPrice, isLoading } = useCoursePrice(courseType);
-
   return (
     <div className="flex flex-col h-full">
       <Link to={link} className="flex-1">
         <PricingCard
           title={title}
           description={description}
-          price={formattedPrice ||
-            (courseType === "essentials" ? "£29.99" : "£79.99")}
-          priceSuffix="one-time"
+          price=""
           variant={variant}
           badge={badge}
           features={features}
@@ -55,12 +50,12 @@ function CourseCard({
         />
       </Link>
       <div className="mt-6" onClick={(e) => e.stopPropagation()}>
-        <ShopifyCourseBuyButton
-          productId={productId}
-          buttonText={`Buy ${title} Course`}
-          showPrice={false}
-          className="w-full"
-        />
+        <a href={shopUrl} target="_blank" rel="noopener noreferrer">
+          <Button className="gap-2 w-full">
+            Buy {title} Course
+            <ExternalLink className="w-4 h-4" />
+          </Button>
+        </a>
       </div>
     </div>
   );
@@ -93,7 +88,7 @@ function HomePage() {
           {/* Course Cards */}
           <div className="gap-8 grid md:grid-cols-2 mx-auto max-w-4xl">
             <CourseCard
-              title="Essentials"
+              title="Standard"
               description="31 easily digestible lessons to guide you through each stage of recovery."
               variant="standard"
               badge="POPULAR"
@@ -103,31 +98,30 @@ function HomePage() {
                 "Product recommendations",
                 "Boot comparison guide",
               ]}
-              link="/essentials"
-              ctaText="Start Essentials"
+              link="/standard"
+              ctaText="Start Standard"
               icon={<BookOpen className="w-full h-full" />}
-              courseType="essentials"
-              productId={SHOPIFY_PRODUCTS.ESSENTIALS_COURSE}
+              courseType="standard"
+              shopUrl={`${WEBSITE_URL}/course/standard`}
             />
             <CourseCard
-              title="Professional"
+              title="Premium"
               description="Advanced recovery strategies and expert-led video lessons for elite results."
               variant="premium"
               badge="PREMIUM"
               showRibbon={true}
               ribbonText="BEST VALUE"
               features={[
-                "Everything in Essentials",
+                "Everything in Standard",
                 "Specialist surgeon video lessons",
                 "8 recovery hacks from elite athletes",
                 "Return-to-sport protocols",
-                "Priority expert support",
               ]}
-              link="/professionals"
-              ctaText="Go Professional"
+              link="/premium"
+              ctaText="Go Premium"
               icon={<GraduationCap className="w-full h-full" />}
-              courseType="professionals"
-              productId={SHOPIFY_PRODUCTS.PROFESSIONALS_COURSE}
+              courseType="premium"
+              shopUrl={`${WEBSITE_URL}/course/premium`}
             />
           </div>
         </div>

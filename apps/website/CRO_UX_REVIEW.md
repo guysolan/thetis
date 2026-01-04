@@ -240,7 +240,7 @@ This review identifies 20 strategic improvements across conversion optimization 
 - Add "Complete your recovery kit" bundle suggestions
 - Implement "You may also need" based on recovery phase
 - Show "Patients who bought this also bought" in cart
-- Add "Upgrade to Professional Course" CTA for Essentials buyers
+- Add "Upgrade to Pro Course" CTA for Essentials buyers
 
 **Current Implementation:** `/apps/website/src/lib/shopify/products.ts`  
 **Enhancement:** Add more sophisticated recommendation logic

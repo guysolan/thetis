@@ -15,6 +15,7 @@ import {
     Check,
     ArrowRight,
     Mail,
+    Star,
 } from "lucide-react";
 import CourseBuyButton from "@/components/CourseBuyButton";
 import {
@@ -64,10 +65,37 @@ const whatYoullLearn = [
             "Transitioning out of the boot, building strength, and returning to normal life.",
     },
 ];
+
+const essentialsFeatures = [
+    "31 structured lessons",
+    "Questions for your surgeon",
+    "Physio exercises with illustrations",
+    "Product recommendations",
+    "Boot comparison guide",
+];
+
+const professionalFeatures = [
+    "Everything in Standard (31 lessons)",
+    "Specialist surgeon video lessons",
+    "8 recovery hacks from elite athletes",
+    "Return-to-sport protocols",
+    "Personalized exercise progressions",
+    "Direct access to recovery experts",
+    "Community support forum",
+    "Priority email support",
+];
+
+// Fetch price for Professional course
+const professionalPriceData = await fetchCoursePrice(
+    SHOPIFY_COURSE_PRODUCTS.PROFESSIONALS_COURSE,
+    "GB",
+);
+const professionalFormattedPrice =
+    professionalPriceData?.formattedPrice || "£99";
 ---
 
 <Layout
-    title="Recovery Essentials - Complete Recovery Guide | Thetis Medical"
+    title="Recovery Standard - Complete Recovery Guide | Thetis Medical"
     description="31 lessons covering every stage of Achilles rupture recovery. Expert guidance, physio exercises, and practical tips. Start your journey with confidence."
     image="https://thetismedical.com/images/night-splint.png"
     lang="en"
@@ -84,7 +112,7 @@ const whatYoullLearn = [
                 <h1
                     class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-4xl md:text-5xl"
                 >
-                    <HighlightedWord>Recovery</HighlightedWord> Essentials
+                    <HighlightedWord>Recovery</HighlightedWord> Standard
                 </h1>
                 <p
                     class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg md:text-xl"
@@ -171,220 +199,158 @@ const whatYoullLearn = [
             </div>
         </section>
 
-        <!-- Why We're Called Thetis -->
-        <section
-            class="bg-gradient-to-b from-primary/5 to-transparent py-12 md:py-16"
-        >
-            <div class="mx-auto px-4 max-w-3xl text-center">
-                <p
-                    class="mb-2 font-medium text-primary text-xs uppercase tracking-widest"
-                >
-                    Why we're called Thetis
-                </p>
-                <h2
-                    class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
-                >
-                    Named after <HighlightedWord
-                        >Achilles' Mother</HighlightedWord
-                    >
-                </h2>
-                <p
-                    class="text-neutral-600 dark:text-neutral-400 text-base leading-relaxed"
-                >
-                    In Greek mythology, Thetis was a sea nymph who protected her
-                    son Achilles. We carry that spirit forward — helping you
-                    through every step of recovery.
-                </p>
-            </div>
-        </section>
-
-        <!-- The Sleeping Problem -->
-        <section class="bg-neutral-50 dark:bg-neutral-900 py-12 md:py-16">
-            <div class="mx-auto px-4 max-w-4xl">
+        <!-- Comparison -->
+        <section class="py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-5xl">
                 <div class="mb-8 text-center">
                     <h2
                         class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
                     >
-                        The Sleeping Problem Nobody Mentions
+                        Standard vs Premium
                     </h2>
                     <p
-                        class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400"
+                        class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400 text-sm"
                     >
-                        Both Aircast and VACOped boots are hot, heavy, and
-                        uncomfortable to sleep in. But removing your boot at
-                        night risks re-rupture. There's a better solution.
+                        Choose the course that's right for your recovery goals.
                     </p>
                 </div>
 
-                <div
-                    class="bg-white dark:bg-neutral-800 shadow-md p-6 md:p-8 rounded-xl"
-                >
-                    <div class="flex md:flex-row flex-col items-center gap-6">
-                        <div class="flex-1">
-                            <span
-                                class="inline-flex items-center bg-primary/10 mb-3 px-3 py-1 rounded-full font-semibold text-primary text-xs"
-                            >
-                                Recommended by Specialists
-                            </span>
+                <div class="gap-6 grid md:grid-cols-2 mx-auto max-w-4xl">
+                    <!-- Standard -->
+                    <div
+                        class="relative bg-white dark:bg-neutral-800 p-6 border-2 border-primary rounded-xl"
+                    >
+                        <div
+                            class="top-0 right-3 absolute bg-primary px-2 py-1 rounded-b-md font-semibold text-white text-xs"
+                        >
+                            POPULAR
+                        </div>
+                        <div class="mb-5">
+                            <div class="flex items-center gap-2 mb-2">
+                                <BookOpen className="w-4 h-4 text-primary" />
+                            </div>
                             <h3
-                                class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-xl md:text-2xl"
+                                class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl"
                             >
-                                Thetis Achilles Rupture Splint
+                                Standard
                             </h3>
                             <p
-                                class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm"
+                                class="mb-3 text-neutral-600 dark:text-neutral-400 text-sm"
                             >
-                                The <strong>Thetis Night Splint</strong> is specifically
-                                designed for sleeping. It's lightweight, breathable,
-                                and maintains the correct plantarflexed position.
+                                Complete recovery guidance for most patients.
                             </p>
-                            <ul class="space-y-2 mb-4">
-                                <li
-                                    class="flex items-start gap-2 text-neutral-600 dark:text-neutral-400 text-sm"
-                                >
-                                    <Moon
-                                        className="flex-shrink-0 mt-0.5 w-4 h-4 text-primary"
-                                    />
-                                    <span
-                                        ><strong>Sleep comfortably</strong> — much
-                                        lighter than your walking boot</span
-                                    >
-                                </li>
-                                <li
-                                    class="flex items-start gap-2 text-neutral-600 dark:text-neutral-400 text-sm"
-                                >
-                                    <Droplets
-                                        className="flex-shrink-0 mt-0.5 w-4 h-4 text-primary"
-                                    />
-                                    <span
-                                        ><strong>Shower safely</strong> — maintains
-                                        protection while washing</span
-                                    >
-                                </li>
-                                <li
-                                    class="flex items-start gap-2 text-neutral-600 dark:text-neutral-400 text-sm"
-                                >
-                                    <ShoppingCart
-                                        className="flex-shrink-0 mt-0.5 w-4 h-4 text-primary"
-                                    />
-                                    <span
-                                        ><strong>Washable liner</strong> — better
-                                        hygiene than boot liners</span
-                                    >
-                                </li>
-                            </ul>
-                            <a
-                                href="/achilles-rupture-splint"
-                                class={cn(
-                                    buttonVariants({
-                                        variant: "default",
-                                        size: "sm",
-                                    }),
-                                    "gap-2",
-                                )}
+                            <div
+                                class="font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
                             >
-                                Learn More
-                            </a>
-                        </div>
-                        <div class="flex-1 max-w-xs">
-                            <img
-                                src="/images/night-splint.png"
-                                alt="Thetis Achilles Rupture Night Splint"
-                                class="shadow-md rounded-xl"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- What You'll Learn -->
-        <section class="py-12 md:py-16">
-            <div class="mx-auto px-4 max-w-4xl">
-                <h2
-                    class="mb-8 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl text-center"
-                >
-                    What You'll Learn
-                </h2>
-                <div class="gap-4 grid md:grid-cols-2">
-                    {
-                        whatYoullLearn.map((item) => (
-                            <div class="bg-neutral-50 dark:bg-neutral-800 p-5 rounded-lg">
-                                <h3 class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
-                                    {item.title}
-                                </h3>
-                                <p class="text-neutral-600 dark:text-neutral-400 text-sm">
-                                    {item.description}
-                                </p>
+                                {formattedPrice}
                             </div>
-                        ))
-                    }
-                </div>
-            </div>
-        </section>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            {
+                                essentialsFeatures.map((feature) => (
+                                    <li class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm">
+                                        <Check className="w-4 h-4 text-primary shrink-0" />
+                                        {feature}
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                        <CourseBuyButton
+                            productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                            variant="default"
+                            className="justify-center w-full"
+                            client:load
+                        >
+                            Add to Cart
+                        </CourseBuyButton>
+                    </div>
 
-        <!-- Choosing Your Boot -->
-        <section class="bg-neutral-50 dark:bg-neutral-900 py-12 md:py-16">
-            <div class="mx-auto px-4 max-w-4xl">
-                <h2
-                    class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl text-center"
-                >
-                    Choosing Your Walking Boot
-                </h2>
-                <p
-                    class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-sm text-center"
-                >
-                    The Essentials course includes a detailed comparison of
-                    Aircast and VACOped boots.
-                </p>
-                <div class="gap-4 grid md:grid-cols-2 mb-6">
-                    <div class="bg-white dark:bg-neutral-800 p-5 rounded-lg">
-                        <h3
-                            class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100"
-                        >
-                            Aircast
-                        </h3>
-                        <p
-                            class="mb-3 text-neutral-600 dark:text-neutral-400 text-sm"
-                        >
-                            Lightweight, affordable (~£120), uses removable
-                            wedges.
-                        </p>
-                        <ul
-                            class="space-y-1 text-neutral-600 dark:text-neutral-400 text-xs"
-                        >
-                            <li>✓ Budget-friendly</li>
-                            <li>✓ Easy to adjust</li>
-                            <li>✗ Not waterproof</li>
+                    <!-- Premium -->
+                    <div
+                        class="bg-white dark:bg-neutral-800 p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl"
+                    >
+                        <div class="mb-5">
+                            <div class="flex items-center gap-2 mb-2">
+                                <GraduationCap
+                                    className="w-4 h-4 text-primary"
+                                />
+                                <Star
+                                    className="fill-amber-500 w-3.5 h-3.5 text-amber-500"
+                                />
+                            </div>
+                            <h3
+                                class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl"
+                            >
+                                Premium
+                            </h3>
+                            <p
+                                class="mb-3 text-neutral-600 dark:text-neutral-400 text-sm"
+                            >
+                                Elite recovery with expert video guidance.
+                            </p>
+                            <div
+                                class="inline-flex items-center gap-2 bg-primary/10 dark:bg-primary/20 mb-3 px-3 py-1 rounded-full font-bold text-primary text-xs"
+                            >
+                                <span>🚀</span>
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            <li
+                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm"
+                            >
+                                <Check
+                                    className="w-4 h-4 text-primary shrink-0"
+                                />
+                                <strong>Everything in Standard</strong>
+                            </li>
+                            <li
+                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm"
+                            >
+                                <Check
+                                    className="w-4 h-4 text-primary shrink-0"
+                                />
+                                Surgeon video lessons
+                            </li>
+                            <li
+                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm"
+                            >
+                                <Check
+                                    className="w-4 h-4 text-primary shrink-0"
+                                />
+                                8 recovery hacks
+                            </li>
+                            <li
+                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm"
+                            >
+                                <Check
+                                    className="w-4 h-4 text-primary shrink-0"
+                                />
+                                Return-to-sport protocols
+                            </li>
+                            <li
+                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm"
+                            >
+                                <Check
+                                    className="w-4 h-4 text-primary shrink-0"
+                                />
+                                Expert support access
+                            </li>
                         </ul>
-                    </div>
-                    <div class="bg-white dark:bg-neutral-800 p-5 rounded-lg">
-                        <h3
-                            class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100"
+                        <a
+                            href="/course/premium"
+                            class={cn(
+                                buttonVariants({
+                                    variant: "outline",
+                                    size: "default",
+                                }),
+                                "justify-center w-full cursor-pointer",
+                            )}
                         >
-                            VACOped
-                        </h3>
-                        <p
-                            class="mb-3 text-neutral-600 dark:text-neutral-400 text-sm"
-                        >
-                            Premium (~£300), hinged mechanism with adjustable
-                            range.
-                        </p>
-                        <ul
-                            class="space-y-1 text-neutral-600 dark:text-neutral-400 text-xs"
-                        >
-                            <li>✓ Better ankle position</li>
-                            <li>✓ May preserve muscle better</li>
-                            <li>✓ Waterproof (with setup)</li>
-                        </ul>
+                            Learn More
+                        </a>
                     </div>
                 </div>
-                <p
-                    class="text-neutral-600 dark:text-neutral-400 text-sm text-center"
-                >
-                    <strong>Pro tip:</strong> Whichever boot you use, the Thetis
-                    night splint makes sleeping and showering much easier.
-                </p>
             </div>
         </section>
 
@@ -416,55 +382,6 @@ const whatYoullLearn = [
                     >
                         <Mail className="w-4 h-4" />
                         Try Free Course First
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final CTA -->
-        <section class="bg-primary/5 py-12 md:py-16">
-            <div class="mx-auto px-4 max-w-2xl text-center">
-                <h2
-                    class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
-                >
-                    Ready to Start Your Recovery?
-                </h2>
-                <p class="mb-4 text-neutral-600 dark:text-neutral-400">
-                    Access all 31 lessons and learn everything you need for a
-                    successful recovery.
-                </p>
-                <p
-                    class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-3xl"
-                    id="course-price-bottom"
-                >
-                    {formattedPrice}
-                    <span class="font-normal text-neutral-500 text-lg"
-                        >one-time</span
-                    >
-                </p>
-                <div
-                    class="flex sm:flex-row flex-col justify-center items-center gap-4"
-                >
-                    <CourseBuyButton
-                        productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
-                        variant="link"
-                        className="text-lg"
-                        client:load
-                    >
-                        Add to Cart
-                    </CourseBuyButton>
-                    <a
-                        href="/buy-now"
-                        class={cn(
-                            buttonVariants({
-                                variant: "outline",
-                                size: "lg",
-                            }),
-                            "justify-center gap-2",
-                        )}
-                    >
-                        <ShoppingCart className="w-4 h-4" />
-                        Shop Recovery Products
                     </a>
                 </div>
             </div>

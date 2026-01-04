@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Check, ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { cn } from "../utils";
 
 export interface PricingCardProps {
@@ -57,10 +57,10 @@ function PricingCard({
   const Card = href ? "a" : "div";
   const cardProps = href
     ? {
-        href,
-        target: external ? "_blank" : undefined,
-        rel: external ? "noopener noreferrer" : undefined,
-      }
+      href,
+      target: external ? "_blank" : undefined,
+      rel: external ? "noopener noreferrer" : undefined,
+    }
     : {};
 
   const variantStyles = {
@@ -103,12 +103,12 @@ function PricingCard({
       {...cardProps}
       onClick={onClick}
       className={cn(
-        "group relative flex flex-col p-6 md:p-8 rounded-2xl border-2 transition-all duration-300 h-full",
+        "group relative flex flex-col p-6 md:p-8 border-2 rounded-2xl h-full transition-all duration-300",
         styles.border,
         styles.bg,
         styles.hoverBorder,
         href && "cursor-pointer",
-        className
+        className,
       )}
     >
       {/* Ribbon for premium tier */}
@@ -124,7 +124,7 @@ function PricingCard({
           <div
             className={cn(
               "flex justify-center items-center rounded-xl w-14 h-14 shrink-0",
-              styles.iconBg
+              styles.iconBg,
             )}
           >
             <div className={cn("w-7 h-7", styles.iconColor)}>{icon}</div>
@@ -136,13 +136,13 @@ function PricingCard({
               className={cn(
                 "inline-block mb-1 px-2 py-0.5 rounded font-semibold text-xs uppercase tracking-wide",
                 styles.badgeBg,
-                styles.badgeColor
+                styles.badgeColor,
               )}
             >
               {badge}
             </span>
           )}
-          <h3 className="font-semibold text-foreground text-xl group-hover:text-primary transition-colors">
+          <h3 className="font-semibold text-foreground group-hover:text-primary text-xl transition-colors">
             {title}
           </h3>
         </div>
@@ -152,7 +152,7 @@ function PricingCard({
       <p className="mb-6 text-muted-foreground text-sm">{description}</p>
 
       {/* Features list */}
-      <ul className="space-y-3 mb-6 flex-grow">
+      <ul className="flex-grow space-y-3 mb-6">
         {features.map((feature, index) => (
           <li
             key={index}
@@ -160,8 +160,8 @@ function PricingCard({
           >
             <div
               className={cn(
-                "flex justify-center items-center rounded-full w-5 h-5 shrink-0 mt-0.5",
-                styles.iconBg
+                "flex justify-center items-center mt-0.5 rounded-full w-5 h-5 shrink-0",
+                styles.iconBg,
               )}
             >
               <Check className={cn("w-3 h-3", styles.checkColor)} />
@@ -171,21 +171,23 @@ function PricingCard({
         ))}
       </ul>
 
-      {/* Price */}
-      <div className="mb-4">
-        <span className="font-bold text-foreground text-3xl">{price}</span>
-        {priceSuffix && (
-          <span className="ml-1 text-muted-foreground text-sm">
-            {priceSuffix}
-          </span>
-        )}
-      </div>
+      {/* Price - only show if provided */}
+      {price && (
+        <div className="mb-4">
+          <span className="font-bold text-foreground text-3xl">{price}</span>
+          {priceSuffix && (
+            <span className="ml-1 text-muted-foreground text-sm">
+              {priceSuffix}
+            </span>
+          )}
+        </div>
+      )}
 
       {/* CTA */}
       <div
         className={cn(
           "flex items-center font-medium text-sm transition-transform group-hover:translate-x-1",
-          variant === "premium" ? "text-primary" : styles.iconColor
+          variant === "premium" ? "text-primary" : styles.iconColor,
         )}
       >
         {ctaText}
@@ -198,4 +200,3 @@ function PricingCard({
 PricingCard.displayName = "PricingCard";
 
 export { PricingCard };
-

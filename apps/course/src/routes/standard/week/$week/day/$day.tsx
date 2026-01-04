@@ -40,7 +40,7 @@ async function loadSectionContent(
   }
 }
 
-export const Route = createFileRoute("/essentials/week/$week/day/$day")({
+export const Route = createFileRoute("/standard/week/$week/day/$day")({
   loader: async ({ params }) => {
     const week = parseInt(params.week);
     const day = parseInt(params.day);
@@ -75,7 +75,7 @@ export const Route = createFileRoute("/essentials/week/$week/day/$day")({
         This section doesn't exist or hasn't been created yet.
       </p>
       <Link
-        to="/essentials"
+        to="/standard"
         className="inline-flex items-center gap-2 text-primary hover:text-primary/80"
       >
         <ArrowLeft className="w-4 h-4" />
@@ -108,7 +108,7 @@ function SectionPage() {
       {/* Breadcrumb & Progress */}
       <div className="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-4 mb-8">
         <Link
-          to="/essentials"
+          to="/standard"
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground text-sm transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />

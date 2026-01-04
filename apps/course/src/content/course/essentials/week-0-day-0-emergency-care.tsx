@@ -1,5 +1,6 @@
 import type { SectionContent } from "@/components/course/types";
 import SnapRuptureExperience from "../../../assets/snap-rupture-experience.jpeg";
+import AchillesRopeEndsPointedDown from "../../../assets/achilles-rope-ends-pointed-down.png";
 
 export const metadata = {
   slug: "week-0-day-0-emergency-care",
@@ -82,25 +83,12 @@ export const content: SectionContent = {
             "In the early weeks, your job is to keep the two torn ends of the “rope” **lined up and close together**. Stretching or walking without protection is like pulling the rope ends apart — it makes healing slower and riskier.",
         },
         {
-          type: "illustration-prompt",
-          title: "Achilles rupture = snapped rope (why pointed-down matters)",
-          filename_suggestion: "achilles-rope-ends-pointed-down.png",
-          alt_text:
+          type: "image",
+          src: AchillesRopeEndsPointedDown,
+          alt:
             "Simple diagram showing a snapped rope (Achilles) and how a pointed-down foot brings the rope ends closer together",
-          prompt:
-            `Create a Tintin-style ligne claire medical infographic (clean-line European comic style) with flat colors and crisp outlines on a white background with Thetis green accents (#29a680). Do NOT include Tintin characters, props, logos, or recognisable copyrighted icons. No gore, no realistic tissue, no scary imagery.
-
-Scene: side view of a lower leg, ankle, and heel. Show a simplified “rope” representing the Achilles tendon with a clear snapped gap.
-
-Panel A (left): foot neutral (90 degrees). Rope ends are separated with a visible gap. Label: "Foot neutral = tendon ends further apart".
-
-Panel B (right): foot pointed down (plantarflexed). Rope ends are closer and nearly touching. Label: "Foot pointed down = tendon ends closer (better for healing)".
-
-Add a small note below: "Early recovery goal: keep the ends close and protected".
-
-Keep labels minimal and readable. Use simple arrows. No brand logos.`,
-          notes:
-            "Use this near the 'rope ends' explanation to make the 'don’t stretch / keep pointed-down' concept instantly clear.",
+          caption:
+            "Why pointed-down matters: keeping the tendon ends close together helps healing",
         },
         {
           type: "heading",
@@ -335,30 +323,6 @@ Keep labels minimal and readable. Use simple arrows. No brand logos.`,
               ],
             },
           ],
-        },
-        {
-          type: "illustration-prompt",
-          title: "A&E / ER flow for Achilles rupture (simple timeline)",
-          filename_suggestion: "er-flow-achilles-rupture.png",
-          alt_text:
-            "Simple step-by-step timeline of what typically happens in A&E/ER after an Achilles rupture",
-          prompt:
-            `Create a Tintin-style ligne claire infographic (clean-line European comic style) with flat colors and crisp outlines on a white background with Thetis green accents (#29a680). Do NOT include Tintin characters, props, logos, or recognisable copyrighted icons. No photos, no gore.
-
-Layout: horizontal 5-step timeline with icons and very short labels (max 6 words each). Title: "What happens in A&E/ER".
-
-Steps (left to right):
-1) "Triage"
-2) "Exam (calf squeeze test)"
-3) "Foot pointed down (splint/cast)"
-4) "Crutches + safety"
-5) "Referral to fracture clinic"
-
-Include a small foot icon showing "pointed down" at step 3.
-
-Keep text minimal, friendly, and readable on mobile.`,
-          notes:
-            "This helps anxious patients know what to expect and reduces overwhelm.",
         },
         {
           type: "card",

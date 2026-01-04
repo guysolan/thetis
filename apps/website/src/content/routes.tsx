@@ -23,6 +23,7 @@ import {
   Star,
   Stethoscope,
 } from "lucide-react";
+import { COURSE_URL } from "../lib/env";
 
 // Navigation content for DesktopNav
 export const navigationContent = {
@@ -187,13 +188,13 @@ export const courseRoutes: BaseRoute[] = [
     variant: "outline",
   },
   {
-    slug: "course/essentials",
+    slug: "course/standard",
     title: {
-      en: "Essentials Course",
-      de: "Grundlagen-Kurs",
-      fr: "Cours Essentiels",
-      es: "Curso Esenciales",
-      it: "Corso Fondamentali",
+      en: "Standard Course",
+      de: "Standard-Kurs",
+      fr: "Cours Standard",
+      es: "Curso Estándar",
+      it: "Corso Standard",
     },
     description: {
       en:
@@ -208,42 +209,42 @@ export const courseRoutes: BaseRoute[] = [
         "31 lezioni strutturate che coprono ogni fase del recupero dalla rottura di Achille. Guida esperta per 29 €.",
     },
     slugTranslations: {
-      en: "course/essentials",
-      de: "kurs/grundlagen",
-      fr: "cours/essentiels",
-      es: "curso/esenciales",
-      it: "corso/fondamentali",
+      en: "course/standard",
+      de: "kurs/standard",
+      fr: "cours/standard",
+      es: "curso/estandar",
+      it: "corso/standard",
     },
     icon: <List />,
     variant: "default",
   },
   {
-    slug: "course/professionals",
+    slug: "course/premium",
     title: {
-      en: "Professional Course",
-      de: "Professioneller Kurs",
-      fr: "Cours Professionnel",
-      es: "Curso Profesional",
-      it: "Corso Professionale",
+      en: "Premium Course",
+      de: "Premium-Kurs",
+      fr: "Cours Premium",
+      es: "Curso Premium",
+      it: "Corso Premium",
     },
     description: {
       en:
-        "Expert video lessons and personalized guidance from specialist surgeons. Premium recovery for £99.",
+        "Expert video lessons and personalized guidance from specialist surgeons. Coming soon!",
       de:
-        "Experten-Videolektionen und persönliche Anleitung von Fachärzten. Premium-Genesung für 99 €.",
+        "Experten-Videolektionen und persönliche Anleitung von Fachärzten. Kommt bald!",
       fr:
-        "Leçons vidéo d'experts et conseils personnalisés de chirurgiens spécialistes. Récupération premium pour 99 €.",
+        "Leçons vidéo d'experts et conseils personnalisés de chirurgiens spécialistes. Bientôt disponible!",
       es:
-        "Lecciones en video de expertos y orientación personalizada de cirujanos especialistas. Recuperación premium por 99 €.",
+        "Lecciones en video de expertos y orientación personalizada de cirujanos especialistas. ¡Próximamente!",
       it:
-        "Lezioni video di esperti e guida personalizzata da chirurghi specialisti. Recupero premium per 99 €.",
+        "Lezioni video di esperti e guida personalizzata da chirurghi specialisti. In arrivo!",
     },
     slugTranslations: {
-      en: "course/professionals",
-      de: "kurs/professionell",
-      fr: "cours/professionnel",
-      es: "curso/profesional",
-      it: "corso/professionale",
+      en: "course/premium",
+      de: "kurs/premium",
+      fr: "cours/premium",
+      es: "curso/premium",
+      it: "corso/premium",
     },
     icon: <GraduationCap />,
     variant: "default",
@@ -534,8 +535,8 @@ export const legacyCourseRoute: BaseRoute = {
 
 // External guide routes (hosted on guide.thetismedical.com)
 export const guideRoutes = {
-  essentials: {
-    href: "https://guide.thetismedical.com/essentials",
+  standard: {
+    href: `${COURSE_URL}/standard`,
     title: {
       en: "Patient Recovery Guide",
       de: "Patienten-Genesungsleitfaden",
@@ -557,8 +558,8 @@ export const guideRoutes = {
     },
     icon: <BookOpen />,
   },
-  professionals: {
-    href: "https://guide.thetismedical.com/professionals",
+  premium: {
+    href: `${COURSE_URL}/premium`,
     title: {
       en: "Clinician Guide",
       de: "Klinikerleitfaden",

@@ -134,21 +134,6 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
             </AddToCartButton>
           )}
       </div>
-
-      {/* Trust signals - compact row */}
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-4 pt-4 border-neutral-200 dark:border-neutral-700 border-t">
-        <UrgencyMessage lang={lang} variant="compact" />
-        <MoneyBackGuarantee lang={lang} variant="badge" />
-      </div>
-
-      {/* Prominent Guarantee Badge */}
-      <div className="mt-4">
-        <MoneyBackGuarantee
-          lang={lang}
-          variant="inline"
-          className="justify-center"
-        />
-      </div>
     </div>
   );
 };

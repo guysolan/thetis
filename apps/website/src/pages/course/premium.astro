@@ -13,8 +13,6 @@ import {
     Check,
     Star,
     Video,
-    Users,
-    Target,
     ArrowRight,
     Mail,
 } from "lucide-react";
@@ -32,7 +30,7 @@ const priceData = await fetchCoursePrice(
 const formattedPrice = priceData?.formattedPrice || "£99";
 
 const professionalFeatures = [
-    "Everything in Essentials (31 lessons)",
+    "Everything in Standard (31 lessons)",
     "Specialist surgeon video lessons",
     "8 recovery hacks from elite athletes",
     "Return-to-sport protocols",
@@ -48,7 +46,6 @@ const essentialsFeatures = [
     "Physio exercises with illustrations",
     "Product recommendations",
     "Boot comparison guide",
-    "Week-by-week timeline",
 ];
 
 const videoTopics = [
@@ -76,7 +73,7 @@ const videoTopics = [
 ---
 
 <Layout
-    title="Professional Recovery Course - Expert-Led Video Lessons | Thetis Medical"
+    title="Premium Recovery Course - Expert-Led Video Lessons | Thetis Medical"
     description="Premium Achilles rupture recovery course with specialist surgeon video lessons, personalized guidance, and return-to-sport protocols. Expert support for optimal recovery."
     image="https://thetismedical.com/images/night-splint.png"
     lang="en"
@@ -90,10 +87,16 @@ const videoTopics = [
                     <Star className="fill-current w-4 h-4" />
                     Premium Course
                 </span>
+                <div
+                    class="inline-flex items-center gap-2 bg-primary/10 dark:bg-primary/20 mb-6 px-4 py-2 rounded-full font-bold text-primary text-sm"
+                >
+                    <span>🚀</span>
+                    <span>Coming Soon</span>
+                </div>
                 <h1
                     class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-4xl md:text-5xl"
                 >
-                    <HighlightedWord>Professional</HighlightedWord> Recovery
+                    <HighlightedWord>Premium</HighlightedWord> Recovery
                 </h1>
                 <p
                     class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg md:text-xl"
@@ -103,35 +106,42 @@ const videoTopics = [
                     surgeons and elite sports physios.
                 </p>
 
-                <!-- Price -->
-                <div class="mb-8">
-                    <span
-                        class="font-bold text-neutral-900 dark:text-neutral-100 text-4xl"
-                        id="course-price"
+                <!-- Coming Soon Message -->
+                <div
+                    class="bg-amber-50 dark:bg-amber-950/30 mb-8 p-6 border-2 border-amber-200 dark:border-amber-800 rounded-xl"
+                >
+                    <p
+                        class="mb-2 font-semibold text-amber-900 dark:text-amber-200 text-lg"
                     >
-                        {formattedPrice}
-                    </span>
-                    <span
-                        class="text-neutral-500 dark:text-neutral-400 text-lg"
-                    >
-                        one-time</span
-                    >
+                        Premium Course Coming Soon!
+                    </p>
+                    <p class="text-amber-800 dark:text-amber-300 text-sm">
+                        We're putting the finishing touches on our premium
+                        course with expert video lessons, advanced recovery
+                        protocols, and personalized guidance. Sign up below to
+                        be notified when it launches.
+                    </p>
                 </div>
 
                 <!-- CTA buttons -->
                 <div
                     class="flex sm:flex-row flex-col justify-center items-center gap-4"
                 >
-                    <CourseBuyButton
-                        productId={SHOPIFY_COURSE_PRODUCTS.PROFESSIONALS_COURSE}
-                        variant="link"
-                        className="text-lg"
-                        client:load
-                    >
-                        Add to Cart
-                    </CourseBuyButton>
                     <a
-                        href="/course/essentials"
+                        href="/course/standard"
+                        class={cn(
+                            buttonVariants({
+                                variant: "default",
+                                size: "lg",
+                            }),
+                            "justify-center gap-2",
+                        )}
+                    >
+                        <BookOpen className="w-4 h-4" />
+                        Start with Standard Course
+                    </a>
+                    <a
+                        href="/course/standard"
                         class={cn(
                             buttonVariants({
                                 variant: "outline",
@@ -140,8 +150,7 @@ const videoTopics = [
                             "justify-center gap-2",
                         )}
                     >
-                        <BookOpen className="w-4 h-4" />
-                        Compare with Essentials
+                        Compare Courses
                     </a>
                 </div>
             </div>
@@ -232,7 +241,7 @@ const videoTopics = [
                     <h2
                         class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
                     >
-                        Essentials vs Professional
+                        Standard vs Premium
                     </h2>
                     <p
                         class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400 text-sm"
@@ -242,7 +251,7 @@ const videoTopics = [
                 </div>
 
                 <div class="gap-6 grid md:grid-cols-2 mx-auto max-w-4xl">
-                    <!-- Essentials -->
+                    <!-- Standard -->
                     <div
                         class="bg-white dark:bg-neutral-800 p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl"
                     >
@@ -253,10 +262,10 @@ const videoTopics = [
                             <h3
                                 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl"
                             >
-                                Essentials
+                                Standard
                             </h3>
                             <p
-                                class="mb-3 text-neutral-600 dark:text-neutral-400 text-xs"
+                                class="mb-3 text-neutral-600 dark:text-neutral-400 text-sm"
                             >
                                 Complete recovery guidance for most patients.
                             </p>
@@ -269,29 +278,24 @@ const videoTopics = [
                         <ul class="space-y-2 mb-6">
                             {
                                 essentialsFeatures.map((feature) => (
-                                    <li class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-xs">
-                                        <Check className="w-3.5 h-3.5 text-primary shrink-0" />
+                                    <li class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm">
+                                        <Check className="w-4 h-4 text-primary shrink-0" />
                                         {feature}
                                     </li>
                                 ))
                             }
                         </ul>
-                        <a
-                            href="/course/essentials"
-                            class={cn(
-                                buttonVariants({
-                                    variant: "outline",
-                                    size: "sm",
-                                }),
-                                "w-full justify-center gap-2",
-                            )}
+                        <CourseBuyButton
+                            productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                            variant="outline"
+                            className="justify-center w-full"
+                            client:load
                         >
-                            Learn More
-                            <ArrowRight className="w-3.5 h-3.5" />
-                        </a>
+                            Add to Cart
+                        </CourseBuyButton>
                     </div>
 
-                    <!-- Professional -->
+                    <!-- Premium -->
                     <div
                         class="relative bg-white dark:bg-neutral-800 p-6 border-2 border-primary rounded-xl"
                     >
@@ -312,10 +316,10 @@ const videoTopics = [
                             <h3
                                 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl"
                             >
-                                Professional
+                                Premium
                             </h3>
                             <p
-                                class="mb-3 text-neutral-600 dark:text-neutral-400 text-xs"
+                                class="mb-3 text-neutral-600 dark:text-neutral-400 text-sm"
                             >
                                 Elite recovery with expert video guidance.
                             </p>
@@ -327,196 +331,54 @@ const videoTopics = [
                         </div>
                         <ul class="space-y-2 mb-6">
                             <li
-                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-xs"
+                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm"
                             >
                                 <Check
-                                    className="w-3.5 h-3.5 text-primary shrink-0"
+                                    className="w-4 h-4 text-primary shrink-0"
                                 />
-                                <strong>Everything in Essentials</strong>
+                                <strong>Everything in Standard</strong>
                             </li>
                             <li
-                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-xs"
+                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm"
                             >
                                 <Check
-                                    className="w-3.5 h-3.5 text-primary shrink-0"
+                                    className="w-4 h-4 text-primary shrink-0"
                                 />
                                 Surgeon video lessons
                             </li>
                             <li
-                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-xs"
+                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm"
                             >
                                 <Check
-                                    className="w-3.5 h-3.5 text-primary shrink-0"
+                                    className="w-4 h-4 text-primary shrink-0"
                                 />
                                 8 recovery hacks
                             </li>
                             <li
-                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-xs"
+                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm"
                             >
                                 <Check
-                                    className="w-3.5 h-3.5 text-primary shrink-0"
+                                    className="w-4 h-4 text-primary shrink-0"
                                 />
                                 Return-to-sport protocols
                             </li>
                             <li
-                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-xs"
+                                class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm"
                             >
                                 <Check
-                                    className="w-3.5 h-3.5 text-primary shrink-0"
+                                    className="w-4 h-4 text-primary shrink-0"
                                 />
                                 Expert support access
                             </li>
                         </ul>
                         <CourseBuyButton
                             productId={SHOPIFY_COURSE_PRODUCTS.PROFESSIONALS_COURSE}
-                            variant="link"
-                            className="justify-center w-full text-lg"
+                            variant="default"
+                            className="justify-center w-full"
                             client:load
                         >
                             Add to Cart
                         </CourseBuyButton>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Who Is This For -->
-        <section class="bg-neutral-50 dark:bg-neutral-900 py-12 md:py-16">
-            <div class="mx-auto px-4 max-w-4xl">
-                <div class="mb-8 text-center">
-                    <h2
-                        class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
-                    >
-                        Who Is Professional For?
-                    </h2>
-                </div>
-                <div class="gap-4 grid md:grid-cols-3">
-                    <div
-                        class="bg-white dark:bg-neutral-800 p-5 rounded-lg text-center"
-                    >
-                        <div
-                            class="flex justify-center items-center bg-primary/10 mx-auto mb-3 rounded-full w-10 h-10"
-                        >
-                            <Target className="w-5 h-5 text-primary" />
-                        </div>
-                        <h3
-                            class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm"
-                        >
-                            Athletes
-                        </h3>
-                        <p
-                            class="text-neutral-600 dark:text-neutral-400 text-xs"
-                        >
-                            Return to sport with confidence using sport-specific
-                            protocols.
-                        </p>
-                    </div>
-                    <div
-                        class="bg-white dark:bg-neutral-800 p-5 rounded-lg text-center"
-                    >
-                        <div
-                            class="flex justify-center items-center bg-primary/10 mx-auto mb-3 rounded-full w-10 h-10"
-                        >
-                            <Users className="w-5 h-5 text-primary" />
-                        </div>
-                        <h3
-                            class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm"
-                        >
-                            Active Individuals
-                        </h3>
-                        <p
-                            class="text-neutral-600 dark:text-neutral-400 text-xs"
-                        >
-                            Get back to running, hiking, and fitness with expert
-                            guidance.
-                        </p>
-                    </div>
-                    <div
-                        class="bg-white dark:bg-neutral-800 p-5 rounded-lg text-center"
-                    >
-                        <div
-                            class="flex justify-center items-center bg-primary/10 mx-auto mb-3 rounded-full w-10 h-10"
-                        >
-                            <Star className="w-5 h-5 text-primary" />
-                        </div>
-                        <h3
-                            class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm"
-                        >
-                            Optimal Recovery Seekers
-                        </h3>
-                        <p
-                            class="text-neutral-600 dark:text-neutral-400 text-xs"
-                        >
-                            Those who want the best possible outcome from their
-                            recovery.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Splint Mention -->
-        <section class="py-12 md:py-16">
-            <div class="mx-auto px-4 max-w-4xl">
-                <div
-                    class="bg-white dark:bg-neutral-800 shadow-md p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl"
-                >
-                    <div class="flex md:flex-row flex-col items-center gap-6">
-                        <div class="flex-1">
-                            <span
-                                class="inline-flex items-center bg-primary/10 mb-3 px-3 py-1 rounded-full font-semibold text-primary text-xs"
-                            >
-                                Complete Your Recovery Kit
-                            </span>
-                            <h3
-                                class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-xl"
-                            >
-                                Thetis Night Splint
-                            </h3>
-                            <p
-                                class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm"
-                            >
-                                Pair your course with the <strong
-                                    >Thetis Night Splint</strong
-                                > for comfortable sleep and safe showering throughout
-                                your recovery.
-                            </p>
-                            <div class="flex flex-wrap gap-2">
-                                <a
-                                    href="/achilles-rupture-splint"
-                                    class={cn(
-                                        buttonVariants({
-                                            variant: "default",
-                                            size: "sm",
-                                        }),
-                                        "gap-2",
-                                    )}
-                                >
-                                    <Moon className="w-4 h-4" />
-                                    Learn More
-                                </a>
-                                <a
-                                    href="/buy-now"
-                                    class={cn(
-                                        buttonVariants({
-                                            variant: "outline",
-                                            size: "sm",
-                                        }),
-                                        "gap-2",
-                                    )}
-                                >
-                                    <ShoppingCart className="w-4 h-4" />
-                                    Shop Now
-                                </a>
-                            </div>
-                        </div>
-                        <div class="flex-1 max-w-xs">
-                            <img
-                                src="/images/night-splint.png"
-                                alt="Thetis Achilles Rupture Night Splint"
-                                class="shadow-md rounded-xl"
-                            />
-                        </div>
                     </div>
                 </div>
             </div>
@@ -551,54 +413,6 @@ const videoTopics = [
                     >
                         <Mail className="w-4 h-4" />
                         Try Free Course First
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final CTA -->
-        <section class="bg-primary/5 py-12 md:py-16">
-            <div class="mx-auto px-4 max-w-2xl text-center">
-                <h2
-                    class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
-                >
-                    Ready for Elite Recovery?
-                </h2>
-                <p class="mb-4 text-neutral-600 dark:text-neutral-400">
-                    Get expert video guidance, return-to-sport protocols, and
-                    personalized support.
-                </p>
-                <p
-                    class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-3xl"
-                >
-                    {formattedPrice}
-                    <span class="font-normal text-neutral-500 text-lg"
-                        >one-time</span
-                    >
-                </p>
-                <div
-                    class="flex sm:flex-row flex-col justify-center items-center gap-4"
-                >
-                    <CourseBuyButton
-                        productId={SHOPIFY_COURSE_PRODUCTS.PROFESSIONALS_COURSE}
-                        variant="link"
-                        className="text-lg"
-                        client:load
-                    >
-                        Add to Cart
-                    </CourseBuyButton>
-                    <a
-                        href="/course/essentials"
-                        class={cn(
-                            buttonVariants({
-                                variant: "outline",
-                                size: "lg",
-                            }),
-                            "justify-center gap-2",
-                        )}
-                    >
-                        <BookOpen className="w-4 h-4" />
-                        Or Start with Essentials
                     </a>
                 </div>
             </div>

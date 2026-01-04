@@ -15,7 +15,7 @@ import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 import { useCourseProgress } from "@/hooks/use-course-progress";
 import { WEBSITE_URL } from "@/lib/env";
 
-export const Route = createFileRoute("/essentials/")({
+export const Route = createFileRoute("/standard/")({
   component: StandardIndexPage,
 });
 
@@ -81,28 +81,6 @@ function StandardIndexPage() {
               </p>
             </div>
           )}
-
-          <div className="flex flex-wrap items-center gap-4">
-            <a
-              href={`${WEBSITE_URL}/course/standard`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 min-w-[200px]"
-            >
-              <Button className="gap-2 w-full">
-                Buy Standard Course
-                <ExternalLink className="w-4 h-4" />
-              </Button>
-            </a>
-            <EmailSignupDialog
-              trigger={
-                <Button variant="outline" className="gap-2">
-                  <Mail className="w-4 h-4" />
-                  Get Free Recovery Emails
-                </Button>
-              }
-            />
-          </div>
         </div>
 
         {/* Section List */}
@@ -141,7 +119,7 @@ function StandardIndexPage() {
                         className={cn(
                           "group flex items-center gap-4 p-5 border rounded-2xl transition-all",
                           isComplete
-                            ? "bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-700 hover:border-green-400 dark:hover:border-green-600"
+                            ? "bg-primary/10 dark:bg-primary/20 border-primary/30 dark:border-primary/40 hover:border-primary/50 dark:hover:border-primary/60"
                             : "bg-card hover:bg-muted/50 border-border hover:border-primary/30",
                         )}
                       >
@@ -149,7 +127,7 @@ function StandardIndexPage() {
                           className={cn(
                             "flex justify-center items-center rounded-xl w-12 h-12 font-bold transition-colors shrink-0",
                             isComplete
-                              ? "bg-green-500 text-white"
+                              ? "bg-primary text-primary-foreground"
                               : "bg-muted group-hover:bg-primary/10 text-muted-foreground group-hover:text-primary",
                           )}
                         >
@@ -163,14 +141,14 @@ function StandardIndexPage() {
                               className={cn(
                                 "font-semibold transition-colors",
                                 isComplete
-                                  ? "text-green-700 dark:text-green-300"
+                                  ? "text-primary"
                                   : "text-foreground group-hover:text-primary",
                               )}
                             >
                               {section.title}
                             </h3>
                             {isComplete && (
-                              <span className="inline-flex items-center gap-1 bg-green-100 dark:bg-green-900 px-2 py-0.5 rounded font-semibold text-green-700 dark:text-green-300 text-xs">
+                              <span className="inline-flex items-center gap-1 bg-primary/20 dark:bg-primary/30 px-2 py-0.5 rounded font-semibold text-primary text-xs">
                                 <CheckCircle2 className="w-3 h-3" />
                                 Done
                               </span>
@@ -188,7 +166,7 @@ function StandardIndexPage() {
                           className={cn(
                             "w-5 h-5 transition-colors",
                             isComplete
-                              ? "text-green-500 dark:text-green-400"
+                              ? "text-primary"
                               : "text-muted-foreground/30 group-hover:text-primary",
                           )}
                         />

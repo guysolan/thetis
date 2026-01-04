@@ -213,7 +213,9 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <CartIcon />
+      <div className="pr-2 pl-1">
+        <CartIcon />
+      </div>
     </>
   );
 }
@@ -391,7 +393,7 @@ const CourseCard = ({
             {variant === "free"
               ? "FREE"
               : variant === "premium"
-              ? "£99"
+              ? "COMING SOON"
               : "£29"}
           </span>
         </div>

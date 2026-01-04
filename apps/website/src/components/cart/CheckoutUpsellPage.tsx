@@ -15,6 +15,14 @@ import {
 import { formatPrice } from "@/lib/shopify/storefront";
 import { getUpsellSuggestions } from "@/lib/shopify/products";
 import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@thetis/ui/accordion";
+import { courseData } from "@/lib/course-data";
+import { cn } from "@/lib/utils";
+import {
     ArrowRight,
     Check,
     Loader2,
@@ -23,6 +31,7 @@ import {
     ShieldCheck,
     ShoppingBag,
     Sparkles,
+    Video,
     X,
 } from "lucide-react";
 
@@ -42,8 +51,11 @@ export function CheckoutUpsellPage() {
     // Get variant IDs from cart
     const cartVariantIds = cartLines.map((line) => line.merchandise.id);
 
-    // Get upsell suggestions
-    const upsellSuggestions = getUpsellSuggestions(cartVariantIds);
+    // Get upsell suggestions (filter out premium course - coming soon)
+    const upsellSuggestions = getUpsellSuggestions(cartVariantIds).filter(
+        (product) =>
+            product.variantId !== "gid://shopify/ProductVariant/52265315828040",
+    );
 
     // If no cart, redirect to home
     useEffect(() => {
@@ -185,6 +197,9 @@ export function CheckoutUpsellPage() {
                                 const isAdded = addedItems.includes(
                                     product.variantId,
                                 );
+                                const isCourse = product.variantId.includes(
+                                    "522653",
+                                );
 
                                 return (
                                     <div
@@ -206,7 +221,7 @@ export function CheckoutUpsellPage() {
                                                 <p className="mb-4 text-neutral-500 dark:text-neutral-400 text-sm">
                                                     {product.description}
                                                 </p>
-                                                <div className="flex justify-between items-center">
+                                                <div className="flex justify-between items-center mb-2">
                                                     <span className="font-bold text-primary text-xl">
                                                         {product.price}
                                                     </span>
@@ -238,6 +253,183 @@ export function CheckoutUpsellPage() {
                                                             </Button>
                                                         )}
                                                 </div>
+                                                {/* Course Info Accordion */}
+                                                {isCourse && (() => {
+                                                    const isEssentials = product
+                                                        .variantId.includes(
+                                                            "52265314353480",
+                                                        );
+                                                    const isProfessionals =
+                                                        product.variantId
+                                                            .includes(
+                                                                "52265315828040",
+                                                            );
+                                                    const courseType =
+                                                        isEssentials
+                                                            ? "standard"
+                                                            : isProfessionals
+                                                            ? "premium"
+                                                            : null;
+                                                    const course = courseType
+                                                        ? courseData[courseType]
+                                                        : null;
+
+                                                    if (!course) return null;
+
+                                                    return (
+                                                        <Accordion
+                                                            type="single"
+                                                            collapsible
+                                                            className="mt-2 w-full"
+                                                        >
+                                                            <AccordionItem
+                                                                value="course-info"
+                                                                className="border-none"
+                                                            >
+                                                                <AccordionTrigger className="py-2 font-medium text-primary text-sm hover:no-underline">
+                                                                    Learn more
+                                                                    about this
+                                                                    course
+                                                                </AccordionTrigger>
+                                                                <AccordionContent className="pt-2 pb-0">
+                                                                    <div className="space-y-4">
+                                                                        {/* Description */}
+                                                                        <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+                                                                            {course
+                                                                                .description}
+                                                                        </p>
+
+                                                                        {/* Features */}
+                                                                        <div>
+                                                                            <h5 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                                                                What's
+                                                                                Included
+                                                                            </h5>
+                                                                            <div className="space-y-1.5">
+                                                                                {course
+                                                                                    .features
+                                                                                    .map(
+                                                                                        (
+                                                                                            feature,
+                                                                                            index,
+                                                                                        ) => (
+                                                                                            <div
+                                                                                                key={index}
+                                                                                                className="flex items-start gap-2"
+                                                                                            >
+                                                                                                <Check className="mt-0.5 w-3.5 h-3.5 text-primary shrink-0" />
+                                                                                                <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+                                                                                                    {feature}
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        ),
+                                                                                    )}
+                                                                            </div>
+                                                                        </div>
+
+                                                                        {/* What You'll Learn (Standard) or Video Topics (Premium) */}
+                                                                        {courseType ===
+                                                                                "standard" &&
+                                                                            "whatYoullLearn" in
+                                                                                course &&
+                                                                            course
+                                                                                .whatYoullLearn &&
+                                                                            (
+                                                                                <div>
+                                                                                    <h5 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                                                                        What
+                                                                                        You'll
+                                                                                        Learn
+                                                                                    </h5>
+                                                                                    <div className="space-y-2">
+                                                                                        {course
+                                                                                            .whatYoullLearn
+                                                                                            .map(
+                                                                                                (
+                                                                                                    item:
+                                                                                                        {
+                                                                                                            title:
+                                                                                                                string;
+                                                                                                            description:
+                                                                                                                string;
+                                                                                                        },
+                                                                                                    index:
+                                                                                                        number,
+                                                                                                ) => (
+                                                                                                    <div
+                                                                                                        key={index}
+                                                                                                        className="bg-neutral-50 dark:bg-neutral-800 p-3 rounded text-sm"
+                                                                                                    >
+                                                                                                        <h6 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                                                                                            {item
+                                                                                                                .title}
+                                                                                                        </h6>
+                                                                                                        <p className="text-neutral-600 dark:text-neutral-400 text-xs">
+                                                                                                            {item
+                                                                                                                .description}
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                ),
+                                                                                            )}
+                                                                                    </div>
+                                                                                </div>
+                                                                            )}
+
+                                                                        {courseType ===
+                                                                                "premium" &&
+                                                                            "videoTopics" in
+                                                                                course &&
+                                                                            course
+                                                                                .videoTopics &&
+                                                                            (
+                                                                                <div>
+                                                                                    <div className="flex items-center gap-2 mb-2">
+                                                                                        <Video className="w-4 h-4 text-primary" />
+                                                                                        <h5 className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                                                                            Expert
+                                                                                            Video
+                                                                                            Lessons
+                                                                                        </h5>
+                                                                                    </div>
+                                                                                    <div className="space-y-2">
+                                                                                        {course
+                                                                                            .videoTopics
+                                                                                            .map(
+                                                                                                (
+                                                                                                    topic:
+                                                                                                        {
+                                                                                                            title:
+                                                                                                                string;
+                                                                                                            description:
+                                                                                                                string;
+                                                                                                        },
+                                                                                                    index:
+                                                                                                        number,
+                                                                                                ) => (
+                                                                                                    <div
+                                                                                                        key={index}
+                                                                                                        className="bg-neutral-50 dark:bg-neutral-800 p-3 rounded text-sm"
+                                                                                                    >
+                                                                                                        <h6 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                                                                                            {topic
+                                                                                                                .title}
+                                                                                                        </h6>
+                                                                                                        <p className="text-neutral-600 dark:text-neutral-400 text-xs">
+                                                                                                            {topic
+                                                                                                                .description}
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                ),
+                                                                                            )}
+                                                                                    </div>
+                                                                                </div>
+                                                                            )}
+                                                                    </div>
+                                                                </AccordionContent>
+                                                            </AccordionItem>
+                                                        </Accordion>
+                                                    );
+                                                })()}
                                             </div>
                                         </div>
 
@@ -320,14 +512,14 @@ export function CheckoutUpsellPage() {
                     </div>
 
                     {/* Satisfaction Guarantee and Free Shipping */}
-                    <div className="space-y-2 bg-neutral-50 dark:bg-neutral-800 mb-4 px-4 py-3 rounded-lg">
-                        <p className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm text-center">
+                    <div className="space-y-2 bg-neutral-50 dark:bg-neutral-800 mb-4 px-4 py-3 rounded-lg text-md">
+                        <p className="font-semibold text-neutral-900 dark:text-neutral-100 text-center">
                             100% Satisfaction Guarantee Or Your Money Back!
                         </p>
-                        <p className="font-medium text-primary text-sm text-center">
+                        <p className="font-medium text-primary text-center">
                             ✓ Free shipping included
                         </p>
-                        <p className="font-bold text-primary text-sm text-center">
+                        <p className="font-bold text-primary text-center">
                             5,000+ Patients Trust Thetis
                         </p>
                     </div>

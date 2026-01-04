@@ -12,7 +12,7 @@ import { Button } from "@thetis/ui/button";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 import { WEBSITE_URL } from "@/lib/env";
 
-export const Route = createFileRoute("/professionals/")({
+export const Route = createFileRoute("/premium/")({
   component: PremiumIndexPage,
 });
 
@@ -51,7 +51,7 @@ function PremiumIndexPage() {
             Achilles Recovery <span className="text-primary">Premium</span>
           </h1>
           <p className="mb-6 max-w-2xl text-muted-foreground text-lg md:text-xl">
-            Everything in Essentials, plus expert-led deep dives and advanced
+            Everything in Standard, plus expert-led deep dives and advanced
             recovery hacks from specialist surgeons and physios.
           </p>
         </div>

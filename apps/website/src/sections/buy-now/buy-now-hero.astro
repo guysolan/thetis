@@ -5,6 +5,7 @@ import ReviewsLink from "@/components/ReviewsLink";
 import CheckWithCareTeam from "@/components/buy-button/CheckWithCareTeam";
 import BuyButtonVariants from "@/components/products/buy-button/BuyButtonVariants";
 import PriceDisplay from "@/components/PriceDisplay";
+import TrustClaims from "@/components/TrustClaims";
 import type { Lang } from "@/config/languages.ts";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
@@ -75,6 +76,14 @@ const currentContent = content[lang as keyof typeof content];
                 <ReviewsLink lang={lang} size="lg" />
                 <CheckWithCareTeam lang={lang} client:load />
                 <BuyButtonVariants lang={lang} client:load />
+                <div class="mt-4">
+                    <TrustClaims
+                        align="left"
+                        lang={lang}
+                        variant="compact"
+                        client:load
+                    />
+                </div>
             </div>
         </div>
     </div>
