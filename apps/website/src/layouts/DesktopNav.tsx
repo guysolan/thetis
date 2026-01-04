@@ -14,6 +14,7 @@ import * as React from "react";
 
 import { Badge } from "../components/ui/badge";
 import { Button, buttonVariants } from "../components/ui/button";
+import { CartIcon } from "../components/cart/CartIcon";
 
 const contentWidth = "min-w-[min(50vw,700px)]";
 
@@ -56,39 +57,6 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
         <NavigationMenuList className={cn("justify-end", contentWidth)}>
           <NavigationMenuItem>
             <NavigationMenuTrigger>
-              {t.courses}
-            </NavigationMenuTrigger>
-            <NavigationMenuContent
-              className={cn("flex flex-col gap-4 p-6", contentWidth)}
-            >
-              <div className="mb-2">
-                <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
-                  {t.coursesTitle}
-                </h3>
-                <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                  {t.coursesDescription}
-                </p>
-              </div>
-              <div className="gap-4 grid grid-cols-3">
-                {courseLinks.map((course, index) => (
-                  <CourseCard
-                    key={course.href}
-                    title={course.title}
-                    description={course.description}
-                    href={course.href}
-                    variant={index === 0
-                      ? "free"
-                      : index === 2
-                      ? "premium"
-                      : "paid"}
-                  />
-                ))}
-              </div>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>
               {t.ourProducts}
             </NavigationMenuTrigger>
             <NavigationMenuContent className={cn("p-6", contentWidth)}>
@@ -111,47 +79,75 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
               {t.patientGuides}
             </NavigationMenuTrigger>
             <NavigationMenuContent
-              className={cn("flex gap-6 p-6", contentWidth)}
+              className={cn("flex flex-col gap-6 p-6", contentWidth)}
             >
-              {/* FAQs Column */}
-              <div className="flex-1">
+              {/* Courses Row */}
+              <div>
                 <h4 className="mb-3 font-semibold text-neutral-900 dark:text-neutral-100 text-sm uppercase tracking-wide">
-                  FAQs
+                  Courses
                 </h4>
-                <div className="flex flex-col gap-1">
-                  {articles.map((article) => (
-                    <NavigationMenuLink key={article.href} asChild>
-                      <a
-                        href={article.href}
-                        className="block hover:bg-neutral-100 dark:hover:bg-neutral-800 p-2 rounded-md text-neutral-700 dark:text-neutral-300 text-sm transition-colors"
-                      >
-                        {article.title}
-                      </a>
-                    </NavigationMenuLink>
+                <div className="gap-4 grid grid-cols-3">
+                  {courseLinks.map((course, index) => (
+                    <CourseCard
+                      key={course.href}
+                      title={course.title}
+                      description={course.description}
+                      href={course.href}
+                      variant={index === 0
+                        ? "free"
+                        : index === 2
+                        ? "premium"
+                        : "paid"}
+                    />
                   ))}
                 </div>
               </div>
 
               {/* Divider */}
-              <div className="bg-neutral-200 dark:bg-neutral-700 w-px" />
+              <div className="bg-neutral-200 dark:bg-neutral-700 w-full h-px" />
 
-              {/* Recovery Timeline Column */}
-              <div className="flex-1">
-                <h4 className="mb-3 font-semibold text-neutral-900 dark:text-neutral-100 text-sm uppercase tracking-wide">
-                  Recovery Timeline
-                </h4>
-                <div className="flex flex-col gap-1">
-                  {recoveryPhases.map((phase) => (
-                    <NavigationMenuLink key={phase.href} asChild>
-                      <a
-                        href={phase.href}
-                        className="flex items-center gap-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 p-2 rounded-md text-neutral-700 dark:text-neutral-300 text-sm transition-colors"
-                      >
-                        <Calendar className="w-4 h-4 text-primary shrink-0" />
-                        <span className="line-clamp-1">{phase.title}</span>
-                      </a>
-                    </NavigationMenuLink>
-                  ))}
+              {/* FAQs and Recovery Timeline Columns */}
+              <div className="flex gap-6">
+                {/* FAQs Column */}
+                <div className="flex-1">
+                  <h4 className="mb-3 font-semibold text-neutral-900 dark:text-neutral-100 text-sm uppercase tracking-wide">
+                    FAQs
+                  </h4>
+                  <div className="flex flex-col gap-1">
+                    {articles.map((article) => (
+                      <NavigationMenuLink key={article.href} asChild>
+                        <a
+                          href={article.href}
+                          className="block hover:bg-neutral-100 dark:hover:bg-neutral-800 p-2 rounded-md text-neutral-700 dark:text-neutral-300 text-sm transition-colors"
+                        >
+                          {article.title}
+                        </a>
+                      </NavigationMenuLink>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="bg-neutral-200 dark:bg-neutral-700 w-px" />
+
+                {/* Recovery Timeline Column */}
+                <div className="flex-1">
+                  <h4 className="mb-3 font-semibold text-neutral-900 dark:text-neutral-100 text-sm uppercase tracking-wide">
+                    Recovery Timeline
+                  </h4>
+                  <div className="flex flex-col gap-1">
+                    {recoveryPhases.map((phase) => (
+                      <NavigationMenuLink key={phase.href} asChild>
+                        <a
+                          href={phase.href}
+                          className="flex items-center gap-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 p-2 rounded-md text-neutral-700 dark:text-neutral-300 text-sm transition-colors"
+                        >
+                          <Calendar className="w-4 h-4 text-primary shrink-0" />
+                          <span className="line-clamp-1">{phase.title}</span>
+                        </a>
+                      </NavigationMenuLink>
+                    ))}
+                  </div>
                 </div>
               </div>
             </NavigationMenuContent>
@@ -180,7 +176,7 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
           <NavigationMenuItem>
             <NavigationMenuTrigger
               className={cn(
-                buttonVariants({ variant: "outline", size: "md" }),
+                buttonVariants({ variant: "ghost", size: "md" }),
                 "font-normal ml-2",
               )}
             >
@@ -217,12 +213,7 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <a
-        href={buyNowRoute?.href || "/buy-now"}
-        className={cn(buttonVariants({ variant: "default", size: "md" }))}
-      >
-        <span className="font-semibold text-nowrap">{t.buyNow}</span>
-      </a>
+      <CartIcon />
     </>
   );
 }

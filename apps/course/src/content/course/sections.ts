@@ -1,3 +1,5 @@
+export type SectionStatus = "todo" | "drafting" | "drafting";
+
 export interface SectionMetadata {
   slug: string;
   title: string;
@@ -8,6 +10,7 @@ export interface SectionMetadata {
   days_after_rupture: number; // Calculated as week * 7 + day
   email_number: number;
   course_type: "essentials" | "pro";
+  status: SectionStatus;
 }
 
 // Helper to create section with auto-calculated days_after_rupture
@@ -18,6 +21,7 @@ function createSection(
   slug: string,
   title: string,
   description: string,
+  status: SectionStatus = "todo",
 ): SectionMetadata {
   return {
     slug,
@@ -29,6 +33,7 @@ function createSection(
     days_after_rupture: week * 7 + day,
     email_number: section_number,
     course_type: "essentials",
+    status,
   };
 }
 
@@ -41,6 +46,7 @@ export const sections: SectionMetadata[] = [
     "week-0-day-0-emergency-care",
     "Emergency Care & Initial Assessment",
     "What just happened, A&E expectations, and immediate first steps",
+    "drafting",
   ),
   createSection(
     2,
@@ -49,6 +55,7 @@ export const sections: SectionMetadata[] = [
     "week-0-day-1-blood-clot-prevention",
     "Blood Clot Prevention - Critical Information",
     "Understanding DVT/PE risk and blood thinners",
+    "drafting",
   ),
   createSection(
     3,
@@ -57,6 +64,7 @@ export const sections: SectionMetadata[] = [
     "week-0-day-3-home-setup",
     "Setting Up Your Recovery Station",
     "Home setup, elevation, ice protocol, and survival tips",
+    "drafting",
   ),
 
   // Week 1: Days 0, 3
@@ -67,6 +75,7 @@ export const sections: SectionMetadata[] = [
     "week-1-day-0-first-week-checklist",
     "Week 1 Checklist & What's Normal",
     "Normal vs concerning symptoms, questions for clinic, essential purchases",
+    "drafting",
   ),
   createSection(
     5,
@@ -75,6 +84,7 @@ export const sections: SectionMetadata[] = [
     "week-1-day-3-specialist-appointment",
     "Your Specialist Appointment",
     "What to expect at orthopaedics, physical examination, and imaging",
+    "drafting",
   ),
 
   // Week 2: Days 0, 4
@@ -85,6 +95,7 @@ export const sections: SectionMetadata[] = [
     "week-2-day-0-treatment-decision",
     "Surgery vs Non-Surgical Treatment",
     "Understanding your options, UKSTAR trial findings, and making your decision",
+    "drafting",
   ),
   createSection(
     7,
@@ -93,6 +104,7 @@ export const sections: SectionMetadata[] = [
     "week-2-day-4-your-walking-boot",
     "Your Walking Boot - The Foundation",
     "Aircast vs VACOped, fitting your boot, and understanding wedges",
+    "drafting",
   ),
 
   // Week 3: Day 0

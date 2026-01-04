@@ -11,58 +11,53 @@ const content = {
         title: "Named after",
         highlight: "Achilles' Mother",
         description:
-            "In Greek mythology, Thetis was a sea nymph who devoted herself to protecting her son Achilles. When he was injured, she was always there — caring for him, guiding his recovery, and ensuring he could return to strength.",
+            "In Greek mythology, Thetis was a sea nymph who protected her son Achilles. When he was injured, she helped guide his recovery.",
         connection:
-            "We carry that spirit forward. When you rupture your Achilles tendon, we're here to help you through every step — with better products for sleeping and free education to guide your recovery.",
+            "We carry that spirit forward. When you rupture your Achilles tendon, we're here to help — with better products for sleeping and free education to guide your recovery.",
     },
     de: {
         tagline: "Unsere Mission",
         title: "Benannt nach",
         highlight: "Achilles' Mutter",
         description:
-            "In der griechischen Mythologie war Thetis eine Meeresnymphe, die sich dem Schutz ihres Sohnes Achilles widmete. Wenn er verletzt war, war sie immer da — kümmerte sich um ihn, begleitete seine Genesung und sorgte dafür, dass er wieder zu Kräften kam.",
+            "In der griechischen Mythologie war Thetis eine Meeresnymphe, die ihren Sohn Achilles schützte. Wenn er verletzt war, half sie bei seiner Genesung.",
         connection:
-            "Diesen Geist tragen wir weiter. Wenn Sie Ihre Achillessehne reißen, sind wir bei jedem Schritt für Sie da — mit besseren Produkten zum Schlafen und kostenloser Bildung, um Ihre Genesung zu begleiten.",
+            "Diesen Geist tragen wir weiter. Wenn Sie Ihre Achillessehne reißen, sind wir für Sie da — mit besseren Produkten zum Schlafen und kostenloser Bildung, um Ihre Genesung zu begleiten.",
     },
     fr: {
         tagline: "Notre Mission",
         title: "Nommé d'après",
         highlight: "la mère d'Achille",
         description:
-            "Dans la mythologie grecque, Thétis était une nymphe marine qui se consacrait à protéger son fils Achille. Quand il était blessé, elle était toujours là — prenant soin de lui, guidant sa récupération et s'assurant qu'il puisse retrouver sa force.",
+            "Dans la mythologie grecque, Thétis était une nymphe marine qui protégeait son fils Achille. Quand il était blessé, elle l'aidait dans sa récupération.",
         connection:
-            "Nous portons cet esprit. Lorsque vous vous rompez le tendon d'Achille, nous sommes là pour vous accompagner à chaque étape — avec de meilleurs produits pour dormir et une éducation gratuite pour guider votre récupération.",
+            "Nous portons cet esprit. Lorsque vous vous rompez le tendon d'Achille, nous sommes là pour vous aider — avec de meilleurs produits pour dormir et une éducation gratuite pour guider votre récupération.",
     },
     es: {
         tagline: "Nuestra Misión",
         title: "Nombrado por",
         highlight: "la madre de Aquiles",
         description:
-            "En la mitología griega, Tetis era una ninfa marina que se dedicó a proteger a su hijo Aquiles. Cuando estaba herido, ella siempre estaba ahí — cuidándolo, guiando su recuperación y asegurándose de que pudiera recuperar su fuerza.",
+            "En la mitología griega, Tetis era una ninfa marina que protegía a su hijo Aquiles. Cuando estaba herido, ella ayudaba en su recuperación.",
         connection:
-            "Llevamos ese espíritu adelante. Cuando te rompes el tendón de Aquiles, estamos aquí para ayudarte en cada paso — con mejores productos para dormir y educación gratuita para guiar tu recuperación.",
+            "Llevamos ese espíritu adelante. Cuando te rompes el tendón de Aquiles, estamos aquí para ayudarte — con mejores productos para dormir y educación gratuita para guiar tu recuperación.",
     },
     it: {
         tagline: "La Nostra Missione",
         title: "Il nome viene da",
         highlight: "la madre di Achille",
         description:
-            "Nella mitologia greca, Teti era una ninfa marina che si dedicò a proteggere suo figlio Achille. Quando era ferito, lei era sempre lì — prendendosi cura di lui, guidando la sua guarigione e assicurandosi che potesse tornare in forza.",
+            "Nella mitologia greca, Teti era una ninfa marina che proteggeva suo figlio Achille. Quando era ferito, lei aiutava nella sua guarigione.",
         connection:
-            "Portiamo avanti questo spirito. Quando ti rompi il tendine di Achille, siamo qui per aiutarti in ogni passo — con prodotti migliori per dormire e formazione gratuita per guidare il tuo recupero.",
+            "Portiamo avanti questo spirito. Quando ti rompi il tendine di Achille, siamo qui per aiutarti — con prodotti migliori per dormire e formazione gratuita per guidare il tuo recupero.",
     },
 };
 
 const t = content[lang];
 ---
 
-<section class="bg-gradient-to-b from-primary/5 to-transparent py-16 md:py-24">
+<section class="bg-primary/10 dark:bg-primary/20 py-16 md:py-24">
     <div class="mx-auto px-4 max-w-4xl text-center">
-        <div
-            class="flex justify-center items-center bg-primary/10 mx-auto mb-6 rounded-full w-16 h-16"
-        >
-            <Heart className="w-8 h-8 text-primary" />
-        </div>
         <p
             class="mb-4 font-medium text-primary text-sm uppercase tracking-widest"
         >
@@ -75,11 +70,11 @@ const t = content[lang];
             <HighlightedWord>{t.highlight}</HighlightedWord>
         </h2>
         <p
-            class="mb-4 text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed"
+            class="mb-4 text-neutral-600 dark:text-neutral-400 text-base leading-relaxed"
         >
             {t.description}
         </p>
-        <p class="font-medium text-neutral-700 dark:text-neutral-300 text-lg">
+        <p class="text-neutral-700 dark:text-neutral-300 text-base">
             {t.connection}
         </p>
     </div>

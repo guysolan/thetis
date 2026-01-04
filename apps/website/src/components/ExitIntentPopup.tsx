@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
-import { ArrowRight, Gift, Mail, X } from "lucide-react";
+import { ArrowRight, Mail, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -112,74 +112,76 @@ const ExitIntentPopup: React.FC<ExitIntentPopupProps> = ({ className }) => {
   return (
     <div
       className={cn(
-        "z-50 fixed inset-0 flex justify-center items-center bg-black/60 p-4 animate-in duration-300 fade-in",
+        "z-50 fixed inset-0 flex justify-center items-center bg-black/40 backdrop-blur-sm p-4 animate-in duration-200 fade-in",
         className,
       )}
       onClick={(e) => {
         if (e.target === e.currentTarget) handleClose();
       }}
     >
-      <div className="relative bg-white dark:bg-neutral-900 shadow-2xl rounded-2xl w-full max-w-md overflow-hidden animate-in duration-300 zoom-in-95">
+      <div className="relative bg-white dark:bg-neutral-900 shadow-xl border border-neutral-200 dark:border-neutral-800 rounded-xl w-full max-w-sm overflow-hidden animate-in duration-200 zoom-in-95">
         {/* Close button */}
         <button
           onClick={handleClose}
-          className="top-4 right-4 z-10 absolute text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+          className="top-3 right-3 z-10 absolute hover:bg-neutral-100 dark:hover:bg-neutral-800 p-1 rounded-full text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
           aria-label="Close"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
-
-        {/* Header gradient */}
-        <div className="bg-gradient-to-br from-primary to-primary/80 px-6 py-8 text-white text-center">
-          <div className="flex justify-center mb-4">
-            <div className="bg-white/20 p-4 rounded-full">
-              <Gift className="w-8 h-8" />
-            </div>
-          </div>
-          <h2 className="mb-2 font-bold text-2xl">
-            Wait! Don't leave empty-handed
-          </h2>
-          <p className="text-primary-foreground/80">
-            Get our free recovery email course
-          </p>
-        </div>
 
         {/* Content */}
         <div className="p-6">
           {isSubmitted
             ? (
               <div className="py-4 text-center">
-                <div className="flex justify-center items-center bg-primary/20 dark:bg-primary/30 mx-auto mb-4 rounded-full w-16 h-16">
-                  <Mail className="w-8 h-8 text-primary dark:text-primary/80" />
+                <div className="flex justify-center items-center bg-primary/10 dark:bg-primary/20 mx-auto mb-4 rounded-full w-12 h-12">
+                  <Mail className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
+                <h3 className="mb-1 font-medium text-neutral-900 dark:text-neutral-100">
                   You're all set!
                 </h3>
-                <p className="text-neutral-600 dark:text-neutral-400">
+                <p className="text-neutral-500 dark:text-neutral-400 text-sm">
                   Redirecting you to the course...
                 </p>
               </div>
             )
             : (
               <>
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-start gap-3">
-                    <span className="mt-0.5 text-primary">✓</span>
-                    <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-                      Week-by-week recovery guidance timed to your injury
-                    </span>
+                {/* Header */}
+                <div className="mb-5 text-center">
+                  <div className="flex justify-center items-center bg-primary/10 dark:bg-primary/20 mx-auto mb-3 rounded-full w-10 h-10">
+                    <Mail className="w-5 h-5 text-primary" />
                   </div>
-                  <div className="flex items-start gap-3">
-                    <span className="mt-0.5 text-primary">✓</span>
-                    <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-                      Expert tips on what to expect at each stage
+                  <h2 className="font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
+                    Free Recovery Email Course
+                  </h2>
+                  <p className="mt-1 text-neutral-500 dark:text-neutral-400 text-sm">
+                    Get guidance timed to your recovery phase
+                  </p>
+                  <p className="mt-2 font-medium text-primary text-xs">
+                    Join 5,000+ patients who sleep better
+                  </p>
+                </div>
+
+                {/* Benefits */}
+                <div className="space-y-2 mb-5 text-sm">
+                  <div className="flex items-center gap-2.5 text-neutral-600 dark:text-neutral-300">
+                    <span className="flex-shrink-0 font-medium text-primary text-xs">
+                      ✓
                     </span>
+                    Week-by-week tips for your injury stage
                   </div>
-                  <div className="flex items-start gap-3">
-                    <span className="mt-0.5 text-primary">✓</span>
-                    <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-                      Completely free - no strings attached
+                  <div className="flex items-center gap-2.5 text-neutral-600 dark:text-neutral-300">
+                    <span className="flex-shrink-0 font-medium text-primary text-xs">
+                      ✓
                     </span>
+                    Expert guidance on what to expect
+                  </div>
+                  <div className="flex items-center gap-2.5 text-neutral-600 dark:text-neutral-300">
+                    <span className="flex-shrink-0 font-medium text-primary text-xs">
+                      ✓
+                    </span>
+                    Completely free, no strings attached
                   </div>
                 </div>
 
@@ -190,12 +192,12 @@ const ExitIntentPopup: React.FC<ExitIntentPopupProps> = ({ className }) => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
                     required
-                    className="dark:bg-neutral-800 px-4 py-3 border border-neutral-300 focus:border-transparent dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100"
+                    className="bg-neutral-50 dark:bg-neutral-800 px-3 py-2.5 border border-neutral-200 focus:border-primary dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 text-sm"
                   />
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="gap-2 bg-primary hover:bg-primary/90 py-3 w-full text-primary-foreground"
+                    className="gap-2 w-full"
                   >
                     {isSubmitting
                       ? (
@@ -212,9 +214,9 @@ const ExitIntentPopup: React.FC<ExitIntentPopupProps> = ({ className }) => {
 
                 <button
                   onClick={handleClose}
-                  className="mt-3 w-full text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 dark:text-neutral-400 text-sm text-center transition-colors"
+                  className="mt-4 w-full text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 text-xs text-center transition-colors"
                 >
-                  No thanks, I'll figure it out myself
+                  No thanks
                 </button>
               </>
             )}

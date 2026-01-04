@@ -126,6 +126,7 @@ function EmailSignupDialog({
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="h-11"
+                            autoComplete="email"
                             required
                             disabled={isSubmitting}
                         />

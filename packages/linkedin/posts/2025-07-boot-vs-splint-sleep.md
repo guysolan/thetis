@@ -14,10 +14,10 @@ type: "Story"
 > “It made a massive difference to getting a good night's rest.” – *DSM*, USA  
 > “Total game changer for sleeping while recovering!” – *Chad*, USA
 
-Clinicians: better sleep 👉 better healing (growth hormone peaks in deep sleep).
+Clinicians: better sleep 👉 better patient comfort and quality of life.
 
 Do you still prescribe **boot-in-bed** or give patients a splint option?
 
 ¹Internal analysis of review keywords “sleep” (patients.ts dataset, Feb 2023 – May 2025).
 
-#PatientComfort #AchillesRupture #SleepScience
+# PatientComfort #AchillesRupture #SleepScience

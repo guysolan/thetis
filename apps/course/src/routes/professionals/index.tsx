@@ -1,15 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { formatWeekDay, sections } from "@/content/course/sections";
-import {
-  BookOpen,
-  ChevronRight,
-  Clock,
-  Mail,
-  Star,
-} from "../../../$node_modules/lucide-react/dist/lucide-react.js";
-import { cn } from "@/lib/utils";
+import { BookOpen, ChevronRight, Clock, Mail, Star } from "lucide-react";
 import { Button } from "@thetis/ui/button";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
+import { ShopifyCourseBuyButton } from "@/components/ShopifyCourseBuyButton";
+import { useCoursePrice } from "@/hooks/use-course-price";
+import { SHOPIFY_PRODUCTS } from "@/lib/shopify";
 
 export const Route = createFileRoute("/professionals/")({
   component: ProfessionalsIndexPage,
@@ -27,6 +23,8 @@ const phases = [
 ];
 
 function ProfessionalsIndexPage() {
+  const { formattedPrice, isLoading } = useCoursePrice("professionals");
+
   return (
     <div className="bg-background min-h-screen">
       <div className="mx-auto px-4 sm:px-6 py-16 max-w-4xl">
@@ -53,14 +51,24 @@ function ProfessionalsIndexPage() {
             Everything in Essentials, plus expert-led deep dives and advanced
             recovery hacks from specialist surgeons and physios.
           </p>
-          <EmailSignupDialog
-            trigger={
-              <Button variant="outline" className="gap-2">
-                <Mail className="w-4 h-4" />
-                Get Free Recovery Emails
-              </Button>
-            }
-          />
+          <div className="flex flex-wrap items-center gap-4">
+            <ShopifyCourseBuyButton
+              productId={SHOPIFY_PRODUCTS.PROFESSIONALS_COURSE}
+              buttonText="Buy Professionals Course"
+              showPrice={true}
+              price={formattedPrice}
+              isLoading={isLoading}
+              className="flex-1 min-w-[200px]"
+            />
+            <EmailSignupDialog
+              trigger={
+                <Button variant="outline" className="gap-2">
+                  <Mail className="w-4 h-4" />
+                  Get Free Recovery Emails
+                </Button>
+              }
+            />
+          </div>
         </div>
 
         {/* Section List */}

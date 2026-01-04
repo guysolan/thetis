@@ -22,7 +22,7 @@ import {
   Lightbulb,
   Square,
   XCircle,
-} from "../../../$node_modules/lucide-react/dist/lucide-react.js";
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Parse simple markdown: **bold** and *italic*
@@ -387,6 +387,31 @@ function ImageBlockComponent({
   );
 }
 
+function ProductImageBlockComponent({
+  src,
+  alt,
+  caption,
+}: {
+  src: string;
+  alt: string;
+  caption?: string;
+}) {
+  return (
+    <figure className="inline-block my-4 max-w-[200px]">
+      <img
+        src={src}
+        alt={alt}
+        className="shadow-sm rounded-lg w-full"
+      />
+      {caption && (
+        <figcaption className="mt-2 text-muted-foreground text-xs text-center">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
 function IllustrationPromptBlockComponent({
   title,
   prompt,
@@ -519,6 +544,14 @@ function ContentBlockRenderer({ block }: { block: ContentBlock }) {
           filename_suggestion={block.filename_suggestion}
           alt_text={block.alt_text}
           notes={block.notes}
+        />
+      );
+    case "product-image":
+      return (
+        <ProductImageBlockComponent
+          src={block.src}
+          alt={block.alt}
+          caption={block.caption}
         />
       );
     default:

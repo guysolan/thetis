@@ -37,7 +37,7 @@ export const navigationContent = {
     orderWholesale: "Order Wholesale",
     productTitle: "Achilles Tendon Rupture Splint",
     productDescription:
-      "Improve recovery time and comfort after Achilles tendon rupture",
+      "Improve comfort during recovery after Achilles tendon rupture",
     coursesTitle: "Recovery Courses",
     coursesDescription:
       "Expert-led courses to guide you through every step of your Achilles recovery",

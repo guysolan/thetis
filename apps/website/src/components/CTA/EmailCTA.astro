@@ -114,8 +114,12 @@ const t = content[lang];
                             name="email"
                             required
                             placeholder={t.emailPlaceholder}
-                            class="dark:bg-neutral-700 px-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100 text-center"
+                            autocomplete="email"
+                            class="dark:bg-neutral-700 px-4 py-3 border border-neutral-300 invalid:border-red-300 dark:border-neutral-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary invalid:focus:ring-red-500 w-full text-neutral-900 dark:text-neutral-100 text-center transition-colors"
                         />
+                        <p class="hidden mt-1 text-red-500 text-xs text-center">
+                            Please enter a valid email address
+                        </p>
                     </div>
                     <button
                         type="submit"

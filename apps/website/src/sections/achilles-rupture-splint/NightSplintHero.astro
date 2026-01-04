@@ -5,10 +5,13 @@ import BuyButtonVariants from "../../components/products/buy-button/BuyButtonVar
 import { Image } from "astro:assets";
 import ColorGradient from "@/components/ColorGradient.astro";
 import nightSplint from "@/assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
+// White close-up image path - check if it exists in public folder
+const nightSplintWhitePath = "/images/night_splint_white_close.jpg";
 import ReviewsLink from "@/components/ReviewsLink.tsx";
 import WorkInHealthcare from "@/components/products/night-splint/WorkInHealthcare.astro";
 import { content } from "@/components/products/night-splint/content.ts";
 import PriceDisplay from "@/components/PriceDisplay.tsx";
+import { ProductImageGallery } from "@/components/products/ProductImageGallery";
 import type { Lang } from "../../config/languages";
 
 interface Props {
@@ -32,14 +35,20 @@ const t = content[lang]?.hero || content.en.hero;
     </div>
 
     <div class="flex lg:flex-row flex-col gap-6 lg:gap-10">
-      <!-- Product Image -->
+      <!-- Product Image Gallery -->
       <div class="lg:w-1/2">
-        <Image
-          height={1000}
-          width={666}
-          class="shadow-xl rounded-xl w-full h-auto object-cover"
-          src={nightSplint}
-          alt="Achilles Tendon Rupture Night Splint"
+        <ProductImageGallery
+          images={[
+            {
+              src: nightSplint.src,
+              alt: "Achilles Tendon Rupture Night Splint on bed",
+            },
+            {
+              src: nightSplintWhitePath,
+              alt: "Close-up view of Thetis Night Splint",
+            },
+          ]}
+          client:load
         />
       </div>
 

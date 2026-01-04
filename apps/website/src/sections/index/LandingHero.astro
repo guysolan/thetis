@@ -16,7 +16,7 @@ const content = {
     en: {
         tagline: "Trusted by 5,000+ patients",
         highlightedWord: "Better Sleep.",
-        title: "Faster Recovery.",
+        title: "Better Comfort.",
         description:
             "Our patented night splint lets you ditch the boot at bedtime, and our recovery courses guide you week-by-week from injury to full strength. Recommended by leading surgeons and loved by patients worldwide.",
         exploreCourses: "Start Free Course",
@@ -34,7 +34,7 @@ const content = {
     de: {
         tagline: "Vertrauen von 5.000+ Patienten",
         highlightedWord: "Besser schlafen.",
-        title: "Schneller erholen.",
+        title: "Besserer Komfort.",
         description:
             "Unsere patentierte Nachtschiene lässt Sie den Stiefel nachts ablegen, und unsere Genesungskurse begleiten Sie Woche für Woche von der Verletzung bis zur vollen Stärke. Von führenden Chirurgen empfohlen und von Patienten weltweit geschätzt.",
         exploreCourses: "Kostenlosen Kurs starten",
@@ -52,7 +52,7 @@ const content = {
     fr: {
         tagline: "Approuvé par 5 000+ patients",
         highlightedWord: "Mieux dormir.",
-        title: "Récupérer plus vite.",
+        title: "Meilleur confort.",
         description:
             "Notre attelle de nuit brevetée vous permet d'enlever la botte au coucher, et nos cours de récupération vous guident semaine après semaine de la blessure à la pleine forme. Recommandé par les meilleurs chirurgiens et adoré par les patients du monde entier.",
         exploreCourses: "Commencer le cours gratuit",
@@ -70,7 +70,7 @@ const content = {
     es: {
         tagline: "Confianza de 5.000+ pacientes",
         highlightedWord: "Dormir mejor.",
-        title: "Recuperarse más rápido.",
+        title: "Mejor comodidad.",
         description:
             "Nuestra férula nocturna patentada te permite dejar la bota a la hora de dormir, y nuestros cursos de recuperación te guían semana a semana desde la lesión hasta la plena forma. Recomendado por cirujanos líderes y amado por pacientes en todo el mundo.",
         exploreCourses: "Comenzar curso gratuito",
@@ -88,7 +88,7 @@ const content = {
     it: {
         tagline: "Scelto da 5.000+ pazienti",
         highlightedWord: "Dormire meglio.",
-        title: "Recuperare più velocemente.",
+        title: "Maggiore comfort.",
         description:
             "Il nostro tutore notturno brevettato ti permette di togliere lo stivale prima di dormire, e i nostri corsi di recupero ti guidano settimana dopo settimana dall'infortunio alla piena forma. Raccomandato dai migliori chirurghi e amato dai pazienti di tutto il mondo.",
         exploreCourses: "Inizia corso gratuito",
@@ -154,35 +154,45 @@ const t = content[lang as keyof typeof content];
                 <!-- LARGE SCREENS ONLY -->
                 <div class="hidden lg:flex sm:flex-row flex-col gap-4">
                     <a
-                        class={cn(
-                            buttonVariants({ size: "lg", variant: "default" }),
-                        )}
-                        href="/courses">{t.exploreCourses}</a
-                    >
-                    <a
                         href="/night-splint"
                         class={cn(
-                            buttonVariants({ size: "lg", variant: "outline" }),
+                            buttonVariants({ size: "lg", variant: "default" }),
                             "w-full sm:w-auto text-center",
                         )}
                     >
                         {t.shopProducts}
                     </a>
+                    <a
+                        class={cn(
+                            buttonVariants({ size: "lg", variant: "outline" }),
+                            "w-full sm:w-auto text-center",
+                        )}
+                        href="/courses">{t.exploreCourses}</a
+                    >
                 </div>
 
                 <div
-                    class="flex flex-row flex-wrap items-start sm:items-center gap-x-4 gap-y-2 px-2 text-gray-600 text-base"
+                    class="flex flex-row flex-wrap items-start sm:items-center gap-x-6 gap-y-3 px-2 text-gray-700 dark:text-gray-300 text-base"
                 >
                     {
                         t.benefits.map((benefit) => (
-                            <div class="flex items-center gap-2">
-                                <span class="text-primary dark:text-primary">
-                                    &#10003;
+                            <div class="flex items-center gap-2 font-medium">
+                                <span class="font-bold text-primary dark:text-primary">
+                                    ✓
                                 </span>
                                 {benefit}
                             </div>
                         ))
                     }
+                </div>
+
+                <!-- Trust Indicators -->
+                <div
+                    class="flex flex-wrap items-center gap-4 pt-2 text-gray-600 dark:text-gray-400 text-sm"
+                >
+                    <span class="font-medium">✓ Free shipping</span>
+                    <span class="font-medium">✓ 30-day guarantee</span>
+                    <span class="font-medium">✓ Surgeon fact-checked</span>
                 </div>
 
                 <div class="pt-8 md:pt-2">

@@ -2,48 +2,69 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { BookOpen, GraduationCap, Mail } from "lucide-react";
 import { PricingCard } from "@thetis/ui/pricing-card";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
+import { ShopifyCourseBuyButton } from "@/components/ShopifyCourseBuyButton";
+import { useCoursePrice } from "@/hooks/use-course-price";
+import { SHOPIFY_PRODUCTS } from "@/lib/shopify";
 
-const courses = [
-  {
-    title: "Essentials",
-    description:
-      "31 easily digestible lessons to guide you through each stage of recovery.",
-    price: "£29",
-    priceSuffix: "one-time",
-    variant: "standard" as const,
-    badge: "POPULAR",
-    features: [
-      "Questions for your surgeon",
-      "Physio exercises with illustrations",
-      "Product recommendations",
-      "Boot comparison guide",
-    ],
-    link: "/essentials",
-    ctaText: "Start Essentials",
-    icon: <BookOpen className="w-full h-full" />,
-  },
-  {
-    title: "Professional",
-    description:
-      "Advanced recovery strategies and expert-led video lessons for elite results.",
-    price: "£99",
-    priceSuffix: "one-time",
-    variant: "premium" as const,
-    badge: "PREMIUM",
-    showRibbon: true,
-    ribbonText: "BEST VALUE",
-    features: [
-      "Everything in Essentials",
-      "Specialist surgeon video lessons",
-      "8 recovery hacks from elite athletes",
-      "Return-to-sport protocols",
-      "Priority expert support",
-    ],
-    link: "/professionals",
-    ctaText: "Go Professional",
-    icon: <GraduationCap className="w-full h-full" />,
-  },
-];
+function CourseCard({
+  title,
+  description,
+  variant,
+  badge,
+  features,
+  link,
+  ctaText,
+  icon,
+  showRibbon,
+  ribbonText,
+  courseType,
+  productId,
+}: {
+  title: string;
+  description: string;
+  variant: "standard" | "premium";
+  badge: string;
+  features: string[];
+  link: string;
+  ctaText: string;
+  icon: React.ReactNode;
+  showRibbon?: boolean;
+  ribbonText?: string;
+  courseType: "essentials" | "professionals";
+  productId: string;
+}) {
+  const { formattedPrice, isLoading } = useCoursePrice(courseType);
+
+  return (
+    <div className="flex flex-col h-full">
+      <Link to={link} className="flex-1">
+        <PricingCard
+          title={title}
+          description={description}
+          price={formattedPrice ||
+            (courseType === "essentials" ? "£29.99" : "£79.99")}
+          priceSuffix="one-time"
+          variant={variant}
+          badge={badge}
+          features={features}
+          ctaText={ctaText}
+          icon={icon}
+          showRibbon={showRibbon}
+          ribbonText={ribbonText}
+          className="h-full"
+        />
+      </Link>
+      <div className="mt-6" onClick={(e) => e.stopPropagation()}>
+        <ShopifyCourseBuyButton
+          productId={productId}
+          buttonText={`Buy ${title} Course`}
+          showPrice={false}
+          className="w-full"
+        />
+      </div>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -71,24 +92,43 @@ function HomePage() {
 
           {/* Course Cards */}
           <div className="gap-8 grid md:grid-cols-2 mx-auto max-w-4xl">
-            {courses.map((course) => (
-              <Link key={course.link} to={course.link} className="block h-full">
-                <PricingCard
-                  title={course.title}
-                  description={course.description}
-                  price={course.price}
-                  priceSuffix={course.priceSuffix}
-                  variant={course.variant}
-                  badge={course.badge}
-                  features={course.features}
-                  ctaText={course.ctaText}
-                  icon={course.icon}
-                  showRibbon={course.showRibbon}
-                  ribbonText={course.ribbonText}
-                  className="h-full"
-                />
-              </Link>
-            ))}
+            <CourseCard
+              title="Essentials"
+              description="31 easily digestible lessons to guide you through each stage of recovery."
+              variant="standard"
+              badge="POPULAR"
+              features={[
+                "Questions for your surgeon",
+                "Physio exercises with illustrations",
+                "Product recommendations",
+                "Boot comparison guide",
+              ]}
+              link="/essentials"
+              ctaText="Start Essentials"
+              icon={<BookOpen className="w-full h-full" />}
+              courseType="essentials"
+              productId={SHOPIFY_PRODUCTS.ESSENTIALS_COURSE}
+            />
+            <CourseCard
+              title="Professional"
+              description="Advanced recovery strategies and expert-led video lessons for elite results."
+              variant="premium"
+              badge="PREMIUM"
+              showRibbon={true}
+              ribbonText="BEST VALUE"
+              features={[
+                "Everything in Essentials",
+                "Specialist surgeon video lessons",
+                "8 recovery hacks from elite athletes",
+                "Return-to-sport protocols",
+                "Priority expert support",
+              ]}
+              link="/professionals"
+              ctaText="Go Professional"
+              icon={<GraduationCap className="w-full h-full" />}
+              courseType="professionals"
+              productId={SHOPIFY_PRODUCTS.PROFESSIONALS_COURSE}
+            />
           </div>
         </div>
       </div>

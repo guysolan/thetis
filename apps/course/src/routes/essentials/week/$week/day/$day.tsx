@@ -9,13 +9,7 @@ import {
 } from "@/content/course/sections";
 import { ContentRenderer } from "@/components/course";
 import type { SectionContent } from "@/components/course/types";
-import {
-  ArrowLeft,
-  ArrowRight,
-  BookOpen,
-  Clock,
-  Mail,
-} from "../../../../../../$node_modules/lucide-react/dist/lucide-react.js";
+import { ArrowLeft, ArrowRight, BookOpen, Clock, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 

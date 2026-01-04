@@ -17,14 +17,9 @@ import {
   SheetTrigger,
 } from "@thetis/ui/sheet";
 import type { QueryClient } from "@tanstack/react-query";
-import {
-  BookOpen,
-  ExternalLink,
-  Loader2,
-  Menu,
-  Star,
-} from "../../$node_modules/lucide-react/dist/lucide-react.js";
+import { BookOpen, ExternalLink, Loader2, Menu, Star } from "lucide-react";
 import { cn } from "../lib/utils.js";
+import { useCoursePrice } from "@/hooks/use-course-price";
 
 function RouterSpinner() {
   const isLoading = useRouterState({ select: (s) => s.status === "pending" });
@@ -44,13 +39,90 @@ const navLinks = [
     title: "Essentials",
     href: "/essentials",
     icon: BookOpen,
+    courseType: "essentials" as const,
   },
   {
     title: "Professionals",
     href: "/professionals",
     icon: Star,
+    courseType: "professionals" as const,
   },
 ];
+
+function NavLinkWithPrice({
+  link,
+  isActive,
+  isMobile = false,
+}: {
+  link: (typeof navLinks)[number];
+  isActive: boolean;
+  isMobile?: boolean;
+}) {
+  const { formattedPrice, isLoading } = useCoursePrice(link.courseType);
+
+  if (isMobile) {
+    return (
+      <SheetClose asChild>
+        <Link
+          to={link.href}
+          className={cn(
+            "flex items-center gap-3 p-4 border rounded-xl transition-colors",
+            isActive
+              ? "bg-primary/10 border-primary/30 text-primary"
+              : "border-border hover:bg-muted",
+          )}
+        >
+          <div
+            className={cn(
+              "flex justify-center items-center rounded-lg w-10 h-10 shrink-0",
+              isActive
+                ? "bg-primary text-primary-foreground"
+                : "bg-primary/10 text-primary",
+            )}
+          >
+            <link.icon className="w-5 h-5" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="font-semibold">{link.title}</div>
+            {isLoading
+              ? <div className="bg-muted mt-1 rounded w-16 h-4 animate-pulse" />
+              : (
+                <div className="text-muted-foreground text-sm">
+                  {formattedPrice ||
+                    (link.courseType === "essentials" ? "£29.99" : "£79.99")}
+                </div>
+              )}
+          </div>
+        </Link>
+      </SheetClose>
+    );
+  }
+
+  return (
+    <Link
+      to={link.href}
+      className={cn(
+        "inline-flex flex-col items-start gap-1 px-4 py-2 rounded-lg font-medium text-sm transition-colors",
+        isActive
+          ? "bg-primary/10 text-primary"
+          : "text-muted-foreground hover:bg-muted hover:text-foreground",
+      )}
+    >
+      <div className="flex items-center gap-2">
+        <link.icon className="w-4 h-4" />
+        <span>{link.title}</span>
+      </div>
+      {isLoading
+        ? <div className="bg-muted rounded w-12 h-3 animate-pulse" />
+        : (
+          <span className="text-muted-foreground text-xs">
+            {formattedPrice ||
+              (link.courseType === "essentials" ? "£29.99" : "£79.99")}
+          </span>
+        )}
+    </Link>
+  );
+}
 
 function DesktopNav() {
   const matchRoute = useMatchRoute();
@@ -60,19 +132,11 @@ function DesktopNav() {
       {navLinks.map((link) => {
         const isActive = matchRoute({ to: link.href, fuzzy: true });
         return (
-          <Link
+          <NavLinkWithPrice
             key={link.href}
-            to={link.href}
-            className={cn(
-              "inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-colors",
-              isActive
-                ? "bg-primary/10 text-primary"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground",
-            )}
-          >
-            <link.icon className="w-4 h-4" />
-            {link.title}
-          </Link>
+            link={link}
+            isActive={!!isActive}
+          />
         );
       })}
       <a
@@ -115,29 +179,12 @@ function MobileNav() {
           {navLinks.map((link) => {
             const isActive = matchRoute({ to: link.href, fuzzy: true });
             return (
-              <SheetClose key={link.href} asChild>
-                <Link
-                  to={link.href}
-                  className={cn(
-                    "flex items-center gap-3 p-4 border rounded-xl transition-colors",
-                    isActive
-                      ? "bg-primary/10 border-primary/30 text-primary"
-                      : "border-border hover:bg-muted",
-                  )}
-                >
-                  <div
-                    className={cn(
-                      "flex justify-center items-center rounded-lg w-10 h-10 shrink-0",
-                      isActive
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-primary/10 text-primary",
-                    )}
-                  >
-                    <link.icon className="w-5 h-5" />
-                  </div>
-                  <span className="font-semibold">{link.title}</span>
-                </Link>
-              </SheetClose>
+              <NavLinkWithPrice
+                key={link.href}
+                link={link}
+                isActive={!!isActive}
+                isMobile={true}
+              />
             );
           })}
         </nav>

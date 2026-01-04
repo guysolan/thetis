@@ -6,11 +6,13 @@ import FooterBlock from "./FooterBlock.astro";
 import { ThemeToggle } from "../../components/theme/ThemeToggle";
 import {
   getRoutesByLanguage,
+  getCourseRoutesByLanguage,
+  getArticleRoutesByLanguage,
+  getRecoveryPhaseRoutesByLanguage,
   productRoutes,
   partnerRoutes,
   contactRoutes,
   guidePageRoutes,
-  guideRoutes,
 } from "../../content/routes.tsx";
 import type { Lang } from "../../config/languages.ts";
 
@@ -76,43 +78,10 @@ const guideSectionTitles: Record<Lang, string> = {
   it: "Guida al Recupero",
 };
 
-// External guide links (to guide.thetismedical.com)
-const externalGuideLinks = [
-  {
-    href: guideRoutes.essentials.href,
-    title:
-      guideRoutes.essentials.title[lang] || guideRoutes.essentials.title.en,
-    description:
-      guideRoutes.essentials.description[lang] ||
-      guideRoutes.essentials.description.en,
-  },
-  {
-    href: guideRoutes.professionals.href,
-    title:
-      guideRoutes.professionals.title[lang] ||
-      guideRoutes.professionals.title.en,
-    description:
-      guideRoutes.professionals.description[lang] ||
-      guideRoutes.professionals.description.en,
-  },
-];
-
-const externalGuideSectionTitles: Record<Lang, string> = {
-  en: "Full Courses",
-  de: "Vollständige Kurse",
-  fr: "Cours Complets",
-  es: "Cursos Completos",
-  it: "Corsi Completi",
-};
-
 const footerLinks = {
   guide: {
     title: guideSectionTitles[lang],
     links: guidePageLinks,
-  },
-  externalGuides: {
-    title: externalGuideSectionTitles[lang],
-    links: externalGuideLinks,
   },
   company: {
     title: getSectionTitle(contactRoutes, "contact"),
@@ -155,7 +124,7 @@ const socials: Array<{
 <Slide background="black" className="print:hidden mt-24">
   <footer class="w-full text-white">
     <div
-      class="gap-8 lg:gap-12 grid grid-cols-1 lg:grid-cols-3 lg:text-left text-center"
+      class="gap-8 lg:gap-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:text-left text-center"
     >
       <!-- Company & Products -->
       <div class="space-y-8">
@@ -172,36 +141,72 @@ const socials: Array<{
           title={footerLinks.guide.title}
           links={footerLinks.guide.links}
         />
-        <!-- Full Courses (external links) -->
-        <div class="space-y-3">
-          <h3 class="font-semibold text-lg">
-            {footerLinks.externalGuides.title}
+      </div>
+
+      <!-- Patient Guides -->
+      <div class="space-y-8">
+        <!-- Courses -->
+        <div>
+          <h3 class="mb-3 font-semibold text-lg lg:text-left text-center">
+            Courses
           </h3>
-          <ul class="space-y-2">
+          <ul class="space-y-3">
             {
-              footerLinks.externalGuides.links.map((link) => (
+              getCourseRoutesByLanguage(lang).map((course) => (
                 <li>
                   <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-gray-300 hover:text-white text-sm transition-colors"
+                    href={course.href}
+                    class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
                   >
-                    {link.title} ↗
+                    {course.title}
                   </a>
                 </li>
               ))
             }
           </ul>
         </div>
-      </div>
 
-      <!-- Patient Guides -->
-      <div>
-        <FooterBlock
-          title={footerLinks.patientGuides.title}
-          links={footerLinks.patientGuides.links}
-        />
+        <!-- FAQs -->
+        <div>
+          <h3 class="mb-3 font-semibold text-lg lg:text-left text-center">
+            FAQs
+          </h3>
+          <ul class="space-y-3">
+            {
+              getArticleRoutesByLanguage(lang).map((article) => (
+                <li>
+                  <a
+                    href={article.href}
+                    class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
+                  >
+                    {article.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Recovery Timeline -->
+        <div>
+          <h3 class="mb-3 font-semibold text-lg lg:text-left text-center">
+            Recovery Timeline
+          </h3>
+          <ul class="space-y-3">
+            {
+              getRecoveryPhaseRoutesByLanguage(lang).map((phase) => (
+                <li>
+                  <a
+                    href={phase.href}
+                    class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
+                  >
+                    {phase.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </div>
 
       <!-- Partners & Contact -->
@@ -212,7 +217,7 @@ const socials: Array<{
         />
 
         <div class="space-y-4">
-          <h3 class="font-semibold text-lg">{stayInTouchTitles[lang]}</h3>
+          <h3 class="font-semibold text-lg lg:text-left text-center">{stayInTouchTitles[lang]}</h3>
           <FooterEmailCTA />
 
           <div class="flex flex-col items-center lg:items-start gap-y-4">

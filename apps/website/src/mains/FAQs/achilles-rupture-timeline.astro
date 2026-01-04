@@ -80,6 +80,7 @@ const guidePhases = [
             <Fragment slot="item">
               <h2 class="mb-2 font-semibold text-xl">{block.title}</h2>
               <div set:html={block.content} />
+              <a href={`guide/${block.slug}`}>Learn More</a>
             </Fragment>
           </TimelineBlock>
         ))

@@ -78,25 +78,6 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
 
   return (
     <Accordion type="single" collapsible>
-      {/* Courses */}
-      <AccordionItem value="courses">
-        <AccordionTrigger>{t.courses}</AccordionTrigger>
-        <AccordionContent>
-          <div className="flex flex-col gap-2">
-            {courseLinks.map((course) => (
-              <IconLink
-                key={course.href}
-                href={course.href}
-                icon={course.icon}
-                title={course.title}
-                description={course.description}
-                variant={course.variant}
-              />
-            ))}
-          </div>
-        </AccordionContent>
-      </AccordionItem>
-
       {/* Products */}
       <AccordionItem value="products">
         <AccordionTrigger>{t.ourProduct}</AccordionTrigger>
@@ -200,6 +181,17 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
                   </div>
                 </div>
               </a>
+            ))}
+            {/* Courses */}
+            {courseLinks.map((course) => (
+              <IconLink
+                key={course.href}
+                href={course.href}
+                icon={course.icon}
+                title={course.title}
+                description={course.description}
+                variant={course.variant}
+              />
             ))}
           </div>
         </AccordionContent>

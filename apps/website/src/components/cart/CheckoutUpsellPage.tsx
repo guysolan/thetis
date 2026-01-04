@@ -1,0 +1,387 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { useStore } from "@nanostores/react";
+import { Button } from "@thetis/ui/button";
+import {
+    $cartLines,
+    $checkoutUrl,
+    $isLoading,
+    $subtotal,
+    addToCart,
+    initializeCart,
+    removeItem,
+} from "@/lib/shopify/cart-store";
+import { formatPrice } from "@/lib/shopify/storefront";
+import { getUpsellSuggestions } from "@/lib/shopify/products";
+import {
+    ArrowRight,
+    Check,
+    Loader2,
+    Lock,
+    Shield,
+    ShieldCheck,
+    ShoppingBag,
+    Sparkles,
+    X,
+} from "lucide-react";
+
+export function CheckoutUpsellPage() {
+    const cartLines = useStore($cartLines);
+    const subtotal = useStore($subtotal);
+    const isLoading = useStore($isLoading);
+    const checkoutUrl = useStore($checkoutUrl);
+    const [isAdding, setIsAdding] = useState(false);
+    const [addedItems, setAddedItems] = useState<string[]>([]);
+    const [isRemoving, setIsRemoving] = useState<string | null>(null);
+
+    useEffect(() => {
+        initializeCart();
+    }, []);
+
+    // Get variant IDs from cart
+    const cartVariantIds = cartLines.map((line) => line.merchandise.id);
+
+    // Get upsell suggestions
+    const upsellSuggestions = getUpsellSuggestions(cartVariantIds);
+
+    // If no cart, redirect to home
+    useEffect(() => {
+        if (isLoading) return;
+
+        const timer = setTimeout(() => {
+            if (cartLines.length === 0) {
+                window.location.href = "/";
+            }
+        }, 1000);
+
+        return () => clearTimeout(timer);
+    }, [cartLines.length, isLoading]);
+
+    const handleAddItem = async (variantId: string) => {
+        setIsAdding(true);
+        try {
+            await addToCart(variantId, 1);
+            setAddedItems((prev) => [...prev, variantId]);
+        } catch (error) {
+            console.error("Failed to add upsell item:", error);
+        } finally {
+            setIsAdding(false);
+        }
+    };
+
+    const handleContinueToCheckout = () => {
+        if (checkoutUrl) {
+            window.location.href = checkoutUrl;
+        }
+    };
+
+    const handleContinueShopping = () => {
+        window.location.href = "/buy-now";
+    };
+
+    const handleRemoveItem = async (lineId: string) => {
+        setIsRemoving(lineId);
+        try {
+            await removeItem(lineId);
+        } catch (error) {
+            console.error("Failed to remove item:", error);
+        } finally {
+            setIsRemoving(null);
+        }
+    };
+
+    const primaryUpsell = upsellSuggestions.length > 0
+        ? upsellSuggestions[0]
+        : null;
+    const isSplintUpsell = primaryUpsell
+        ? primaryUpsell.variantId.includes("47494539")
+        : false; // Splint variant IDs start with this
+
+    return (
+        <main className="bg-neutral-50 dark:bg-neutral-900 px-4 py-12 min-h-screen">
+            <div className="mx-auto max-w-2xl">
+                {/* Header */}
+                <div className="mb-8 text-center">
+                    <div className="flex justify-center items-center gap-2 mb-4">
+                        <ShoppingBag className="w-6 h-6 text-primary" />
+                        <h1 className="font-bold text-neutral-900 dark:text-neutral-100 text-3xl">
+                            Review Your Order
+                        </h1>
+                    </div>
+                    <p className="mx-auto max-w-xl text-neutral-600 dark:text-neutral-400 text-lg">
+                        Review your items below and add any additional products
+                        before checkout.
+                    </p>
+                </div>
+
+                {/* Current Cart Items */}
+                <div className="space-y-3 mb-8">
+                    <h2 className="mb-4 font-semibold text-neutral-900 dark:text-neutral-100 text-xl">
+                        Your Cart
+                    </h2>
+                    {cartLines.map((line) => {
+                        const lineTotal = (
+                            parseFloat(line.merchandise.price.amount) *
+                            line.quantity
+                        ).toFixed(2);
+                        const variantTitle = line.merchandise.title !==
+                                "Default Title"
+                            ? line.merchandise.title
+                            : "";
+
+                        return (
+                            <div
+                                key={line.id}
+                                className="flex justify-between items-start gap-4 bg-white dark:bg-neutral-800 p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg"
+                            >
+                                <div className="flex-1 min-w-0">
+                                    <p className="font-medium text-neutral-900 dark:text-neutral-100 text-sm">
+                                        {line.merchandise.product.title}
+                                    </p>
+                                    {variantTitle && (
+                                        <p className="mt-0.5 text-neutral-500 dark:text-neutral-400 text-xs">
+                                            {variantTitle}
+                                        </p>
+                                    )}
+                                    <div className="flex items-center gap-4 mt-2">
+                                        <p className="text-neutral-500 dark:text-neutral-400 text-xs">
+                                            Qty: {line.quantity}
+                                        </p>
+                                        <span className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                            {formatPrice(
+                                                lineTotal,
+                                                line.merchandise.price
+                                                    .currencyCode,
+                                            )}
+                                        </span>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={() => handleRemoveItem(line.id)}
+                                    disabled={isRemoving === line.id}
+                                    className="disabled:opacity-50 p-2 text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                                    aria-label="Remove item"
+                                >
+                                    {isRemoving === line.id
+                                        ? (
+                                            <Loader2 className="w-4 h-4 animate-spin" />
+                                        )
+                                        : <X className="w-4 h-4" />}
+                                </button>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                {/* Upsell Products */}
+                {upsellSuggestions.length > 0 && (
+                    <div className="mb-8">
+                        <h2 className="mb-4 font-semibold text-neutral-900 dark:text-neutral-100 text-xl">
+                            Recommended Additions
+                        </h2>
+                        <div className="space-y-4">
+                            {upsellSuggestions.map((product) => {
+                                const isAdded = addedItems.includes(
+                                    product.variantId,
+                                );
+
+                                return (
+                                    <div
+                                        key={product.variantId}
+                                        className={`p-6 rounded-xl border-2 transition-all bg-white dark:bg-neutral-800 ${
+                                            isAdded
+                                                ? "border-green-500 bg-green-50 dark:bg-green-900/20"
+                                                : "border-primary/30 hover:border-primary shadow-sm"
+                                        }`}
+                                    >
+                                        <div className="flex items-start gap-4">
+                                            <div className="flex justify-center items-center bg-neutral-100 dark:bg-neutral-700 rounded-lg w-24 h-24 shrink-0">
+                                                <ShoppingBag className="w-10 h-10 text-neutral-400" />
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <h3 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
+                                                    {product.title}
+                                                </h3>
+                                                <p className="mb-4 text-neutral-500 dark:text-neutral-400 text-sm">
+                                                    {product.description}
+                                                </p>
+                                                <div className="flex justify-between items-center">
+                                                    <span className="font-bold text-primary text-xl">
+                                                        {product.price}
+                                                    </span>
+                                                    {isAdded
+                                                        ? (
+                                                            <span className="flex items-center gap-2 font-medium text-green-600 dark:text-green-400">
+                                                                <Check className="w-5 h-5" />
+                                                                Added to Order
+                                                            </span>
+                                                        )
+                                                        : (
+                                                            <Button
+                                                                size="default"
+                                                                onClick={() =>
+                                                                    handleAddItem(
+                                                                        product
+                                                                            .variantId,
+                                                                    )}
+                                                                disabled={isAdding ||
+                                                                    !product
+                                                                        .canAddToCart}
+                                                            >
+                                                                {isAdding
+                                                                    ? (
+                                                                        <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                                                                    )
+                                                                    : null}
+                                                                Add to Order
+                                                            </Button>
+                                                        )}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Benefits */}
+                                        {!isAdded &&
+                                            primaryUpsell &&
+                                            product === primaryUpsell && (
+                                            <div className="mt-6 pt-6 border-primary/20 border-t">
+                                                <ul className="space-y-3">
+                                                    {isSplintUpsell
+                                                        ? (
+                                                            <>
+                                                                <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
+                                                                    <Check className="w-5 h-5 text-primary shrink-0" />
+                                                                    Sleep
+                                                                    comfortably
+                                                                    without the
+                                                                    heavy boot
+                                                                </li>
+                                                                <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
+                                                                    <Check className="w-5 h-5 text-primary shrink-0" />
+                                                                    Shower
+                                                                    safely with
+                                                                    protection
+                                                                </li>
+                                                                <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
+                                                                    <Check className="w-5 h-5 text-primary shrink-0" />
+                                                                    Trusted by
+                                                                    5,000+
+                                                                    patients
+                                                                </li>
+                                                            </>
+                                                        )
+                                                        : (
+                                                            <>
+                                                                <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
+                                                                    <Check className="w-5 h-5 text-primary shrink-0" />
+                                                                    31
+                                                                    structured
+                                                                    lessons
+                                                                </li>
+                                                                <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
+                                                                    <Check className="w-5 h-5 text-primary shrink-0" />
+                                                                    Boot
+                                                                    comparison
+                                                                    guide
+                                                                </li>
+                                                                <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
+                                                                    <Check className="w-5 h-5 text-primary shrink-0" />
+                                                                    Week-by-week
+                                                                    timeline
+                                                                </li>
+                                                            </>
+                                                        )}
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
+
+                {/* Order Summary & Actions */}
+                <div className="bg-white dark:bg-neutral-800 shadow-sm p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+                    {/* Order Total */}
+                    <div className="flex justify-between items-center mb-6 pb-6 border-neutral-200 dark:border-neutral-700 border-b">
+                        <span className="font-medium text-neutral-600 dark:text-neutral-400 text-lg">
+                            Order Total
+                        </span>
+                        <span className="font-bold text-neutral-900 dark:text-neutral-100 text-3xl">
+                            {subtotal
+                                ? formatPrice(
+                                    subtotal.amount,
+                                    subtotal.currencyCode,
+                                )
+                                : "£0.00"}
+                        </span>
+                    </div>
+
+                    {/* Satisfaction Guarantee and Free Shipping */}
+                    <div className="space-y-2 bg-neutral-50 dark:bg-neutral-800 mb-4 px-4 py-3 rounded-lg">
+                        <p className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm text-center">
+                            100% Satisfaction Guarantee Or Your Money Back!
+                        </p>
+                        <p className="font-medium text-primary text-sm text-center">
+                            ✓ Free shipping included
+                        </p>
+                        <p className="font-bold text-primary text-sm text-center">
+                            5,000+ Patients Trust Thetis
+                        </p>
+                    </div>
+
+                    {/* Trust Badges */}
+                    <div className="flex flex-wrap justify-center items-center gap-3 mb-6 pb-4 border-neutral-200 dark:border-neutral-700 border-b">
+                        <div className="flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400 text-xs">
+                            <Lock className="w-3.5 h-3.5" />
+                            <span>Secure Checkout</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400 text-xs">
+                            <Shield className="w-3.5 h-3.5" />
+                            <span>PCI Compliant</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-green-600 dark:text-green-500 text-xs">
+                            <ShieldCheck className="w-3.5 h-3.5" />
+                            <span>30-Day Guarantee</span>
+                        </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="space-y-3">
+                        <Button
+                            onClick={handleContinueToCheckout}
+                            size="lg"
+                            className="w-full"
+                            disabled={isLoading}
+                        >
+                            {isLoading
+                                ? (
+                                    <>
+                                        <Loader2 className="mr-2 w-5 h-5 animate-spin" />
+                                        Loading...
+                                    </>
+                                )
+                                : (
+                                    <>
+                                        Continue to Checkout
+                                        <ArrowRight className="ml-2 w-5 h-5" />
+                                    </>
+                                )}
+                        </Button>
+
+                        <button
+                            onClick={handleContinueShopping}
+                            className="py-2 w-full text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 text-sm text-center underline underline-offset-2"
+                        >
+                            Continue Shopping
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    );
+}
+
+export default CheckoutUpsellPage;

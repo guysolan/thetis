@@ -1,14 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { formatWeekDay, sections } from "@/content/course/sections";
-import {
-  BookOpen,
-  ChevronRight,
-  Clock,
-  Mail,
-} from "../../../$node_modules/lucide-react/dist/lucide-react.js";
+import { BookOpen, ChevronRight, Clock, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@thetis/ui/button";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
+import { ShopifyCourseBuyButton } from "@/components/ShopifyCourseBuyButton";
+import { useCoursePrice } from "@/hooks/use-course-price";
+import { SHOPIFY_PRODUCTS } from "@/lib/shopify";
 
 export const Route = createFileRoute("/essentials/")({
   component: EssentialsIndexPage,
@@ -26,6 +24,8 @@ const phases = [
 ];
 
 function EssentialsIndexPage() {
+  const { formattedPrice, isLoading } = useCoursePrice("essentials");
+
   return (
     <div className="bg-background min-h-screen">
       <div className="mx-auto px-4 sm:px-6 py-16 max-w-4xl">
@@ -53,14 +53,24 @@ function EssentialsIndexPage() {
             lessons covering your complete journey from injury to return to
             sport.
           </p>
-          <EmailSignupDialog
-            trigger={
-              <Button variant="outline" className="gap-2">
-                <Mail className="w-4 h-4" />
-                Get Free Recovery Emails
-              </Button>
-            }
-          />
+          <div className="flex flex-wrap items-center gap-4">
+            <ShopifyCourseBuyButton
+              productId={SHOPIFY_PRODUCTS.ESSENTIALS_COURSE}
+              buttonText="Buy Essentials Course"
+              showPrice={true}
+              price={formattedPrice}
+              isLoading={isLoading}
+              className="flex-1 min-w-[200px]"
+            />
+            <EmailSignupDialog
+              trigger={
+                <Button variant="outline" className="gap-2">
+                  <Mail className="w-4 h-4" />
+                  Get Free Recovery Emails
+                </Button>
+              }
+            />
+          </div>
         </div>
 
         {/* Section List */}

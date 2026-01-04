@@ -16,7 +16,7 @@ interface StickyAddToCartProps {
 const content = {
   en: {
     title: "Night Splint",
-    cta: "Sleep Better Tonight",
+    cta: "Buy Now",
     reviews: "4.6 based on 150+ reviews",
     freeShipping: "Free Shipping",
   },

@@ -6,6 +6,7 @@ import { cn } from "../lib/utils";
 import Thetis from "./Thetis.tsx";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import type { Lang } from "@/config/languages";
+import { CartIcon } from "../components/cart/CartIcon";
 
 export interface Props {
     lang: Lang;
@@ -13,26 +14,6 @@ export interface Props {
 
 const { lang = "en" } = Astro.props as Props;
 const currentPath = Astro.url.pathname;
-
-const content = {
-    en: {
-        buyNow: "Buy Now",
-    },
-    de: {
-        buyNow: "Jetzt kaufen",
-    },
-    fr: {
-        buyNow: "Acheter maintenant",
-    },
-    es: {
-        buyNow: "Comprar ahora",
-    },
-    it: {
-        buyNow: "Compra ora",
-    },
-};
-
-const t = content[lang];
 ---
 
 <header
@@ -48,11 +29,8 @@ const t = content[lang];
 
     <div class="lg:hidden flex justify-between items-center w-full">
         <Thetis lang={lang} />
-        <div class="flex gap-x-2">
-            <a
-                class={buttonVariants({ variant: "default", size: "sm" })}
-                href="/buy-now">{t.buyNow}</a
-            >
+        <div class="flex items-center gap-x-2">
+            <CartIcon client:load />
             <MobileNav client:load lang={lang} currentPath={currentPath} />
         </div>
     </div>

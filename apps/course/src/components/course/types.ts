@@ -109,6 +109,13 @@ export interface IllustrationPromptBlock {
   notes?: string;
 }
 
+export interface ProductImageBlock {
+  type: "product-image";
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
 // Union of all content block types
 export type ContentBlock =
   | TextBlock
@@ -125,7 +132,8 @@ export type ContentBlock =
   | CardBlock
   | SectionBlock
   | ImageBlock
-  | IllustrationPromptBlock;
+  | IllustrationPromptBlock
+  | ProductImageBlock;
 
 // Section content definition
 export interface SectionContent {

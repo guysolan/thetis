@@ -30,15 +30,21 @@ export default defineConfig({
     partytown(),
     react(),
     markdownIntegration(),
-    tailwind(),
+    tailwind({ applyBaseStyles: false }),
   ],
   output: "server",
   adapter: vercel(),
   vite: {
+    resolve: {
+      dedupe: ["react", "react-dom"],
+    },
     build: {
       rollupOptions: {
         external: ["googleapis"],
       },
+    },
+    ssr: {
+      noExternal: ["nanostores", "@nanostores/react"],
     },
   },
 });

@@ -9,6 +9,7 @@ import ComplianceLogos from "@/sections/index/compliance/ComplianceLogos.astro";
 import NightSplintFAQs from "@/sections/achilles-rupture-splint/SplintFAQs.tsx";
 import ThetisMythology from "@/sections/index/ThetisMythology.astro";
 import WhatWeOffer from "@/sections/index/WhatWeOffer.astro";
+import OurTeam from "@/sections/index/OurTeam.astro";
 import type { Lang } from "@/config/languages.ts";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
@@ -58,25 +59,28 @@ const currentContent = content[lang as keyof typeof content];
     lang={lang}
 >
     <main class="space-y-16">
-        <!-- 1. Hook: Better Sleep, Faster Recovery -->
+        <!-- 1. Hook: Better Sleep, Better Comfort -->
         <LandingHero lang={lang} />
 
         <!-- 2. Social Proof: Patient Reviews -->
         <Reviews />
 
-        <!-- 3. Trust Signals: Compliance & Certifications -->
-        <ComplianceLogos />
-
-        <!-- 4. Brand Story: Who We Are (establishes mission before selling) -->
-        <ThetisMythology lang={lang} />
-
-        <!-- 5. What We Offer: Products + Education (clear value prop) -->
+        <!-- 3. What We Offer: Products + Education (clear value prop) -->
         <WhatWeOffer lang={lang} />
 
-        <!-- 6. Expert Endorsements: Professional Validation -->
+        <!-- 4. Trust Signals: Compliance & Certifications -->
+        <ComplianceLogos />
+
+        <!-- 5. Our Team: Family Story (establishes credibility) -->
+        <OurTeam lang={lang} />
+
+        <!-- 6. Brand Story: Who We Are (establishes mission before selling) -->
+        <ThetisMythology lang={lang} />
+
+        <!-- 7. Expert Endorsements: Professional Validation -->
         <ProfessionalOpinionsCarousel lang={lang} client:load />
 
-        <!-- 7. FAQ: Answer Remaining Questions -->
+        <!-- 8. FAQ: Answer Remaining Questions -->
         <NightSplintFAQs lang={lang} client:load />
     </main>
 </Layout>
