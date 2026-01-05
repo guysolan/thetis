@@ -1,12 +1,22 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types";
 
-type Props = HTMLAttributes<'a'>;
+type Props = HTMLAttributes<"a">;
 
 const { href, class: className, ...props } = Astro.props;
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
-const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "");
+const normalizedPathname =
+	pathname.endsWith("/") && pathname !== "/"
+		? pathname.slice(0, -1)
+		: pathname;
+const normalizedHref =
+	href.endsWith("/") && href !== "/" ? href.slice(0, -1) : href;
+
+// Check if active: exact match or if href matches the first segment of pathname
+const subpath = normalizedPathname.match(/[^\/]+/g);
+const firstSegment = subpath?.[0] ? `/${subpath[0]}` : "/";
+const isActive =
+	normalizedHref === normalizedPathname || normalizedHref === firstSegment;
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}>

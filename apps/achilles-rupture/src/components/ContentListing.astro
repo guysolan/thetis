@@ -1,9 +1,10 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import LinkText from "./LinkText.astro";
+import { ArticleSearch } from "./ArticleSearch";
 
 interface Props {
-    posts: (CollectionEntry<"guide" | "article"> & { type: string })[];
+    posts: (CollectionEntry<"article"> & { type: string })[];
     title: string;
     subtitle?: string;
     showSurvivalKitCallout?: boolean;
@@ -18,16 +19,28 @@ const {
     excludeTags = [],
 } = Astro.props;
 
-// Get the selected tag from URL params and ensure it's a string
+// Get the selected tag and audience from URL params
 const selectedTag = Astro.url.searchParams.get("tag") || "all";
+const selectedAudience = Astro.url.searchParams.get("audience") || "all";
 
-// Filter posts based on selected tag
-const filteredPosts =
-    selectedTag === "all"
-        ? posts
-        : posts.filter(
-              (post) => post.data.tags && post.data.tags.includes(selectedTag),
-          );
+// Filter posts based on selected tag and audience
+let filteredPosts = posts;
+
+if (selectedTag !== "all") {
+    filteredPosts = filteredPosts.filter(
+        (post) => post.data.tags && post.data.tags.includes(selectedTag as any),
+    );
+}
+
+if (selectedAudience !== "all") {
+    filteredPosts = filteredPosts.filter(
+        (post) =>
+            post.data.audience &&
+            post.data.audience.includes(
+                selectedAudience as "patient" | "clinician",
+            ),
+    );
+}
 
 // Base tags configuration
 const baseTagsConfig = [
@@ -51,56 +64,274 @@ const tags = baseTagsConfig.filter(
         availableTagsFromPosts.includes(tag.word) &&
         !excludeTags.includes(tag.word),
 );
+
+// Serialize ALL posts data for client-side filtering (not just filtered ones)
+// This allows search to work across all posts regardless of tag/audience filter
+const postsData = JSON.stringify(
+    posts.map((post) => ({
+        id: post.id,
+        type: post.type,
+        title: post.data.title,
+        description: post.data.description,
+        tags: post.data.tags || [],
+        audience: post.data.audience || [],
+    })),
+);
 ---
 
-<script>
-    // Get all article cards and tag links
-    const articleCards = document.querySelectorAll(".article-card");
-    const tagLinks = document.querySelectorAll("#filter-nav a");
+<script define:vars={{ postsData }}>
+    // Wait for DOM to be ready
+    function initFiltering() {
+        // Parse posts data
+        const allPosts = JSON.parse(postsData);
+        let currentSearchQuery = "";
+        let currentTag =
+            new URLSearchParams(window.location.search).get("tag") || "all";
+        let currentAudience =
+            new URLSearchParams(window.location.search).get("audience") ||
+            "all";
 
-    // Shuffle feature removed
+        // Get all article cards and filter links
+        const articleCards = document.querySelectorAll(".article-card");
+        const tagLinks = document.querySelectorAll("#filter-nav a");
+        const audienceLinks = document.querySelectorAll("#audience-filter a");
+        const articlesContainer = document.getElementById("articles-container");
+        const searchResultsCount = document.getElementById(
+            "search-results-count",
+        );
 
-    // Add click event listeners to tag links
-    tagLinks.forEach((link) => {
-        link.addEventListener("click", (e) => {
-            e.preventDefault();
-            const tag = new URL(link.href).searchParams.get("tag") || "all";
+        if (!articlesContainer || articleCards.length === 0) {
+            console.warn("Articles container or cards not found");
+            return;
+        }
 
-            // Update URL without page reload
-            const newUrl =
-                tag === "all"
-                    ? window.location.pathname
-                    : `${window.location.pathname}?tag=${tag}`;
-            history.pushState({}, "", newUrl);
+        // Function to filter articles based on search query, tag, and audience
+        function filterArticles() {
+            if (!articlesContainer) return;
 
-            // Update active state of links
-            tagLinks.forEach((l) => {
-                l.classList.toggle("bg-gray-800", l.href === link.href);
-                l.classList.toggle("text-white", l.href === link.href);
-                l.setAttribute(
-                    "aria-current",
-                    l.href === link.href ? "page" : undefined,
+            let filtered = allPosts;
+
+            // Apply tag filter
+            if (currentTag !== "all") {
+                filtered = filtered.filter(
+                    (post) => post.tags && post.tags.includes(currentTag),
                 );
-            });
+            }
 
-            // Filter articles
+            // Apply audience filter
+            if (currentAudience !== "all") {
+                filtered = filtered.filter(
+                    (post) =>
+                        post.audience &&
+                        post.audience.includes(currentAudience),
+                );
+            }
+
+            // Apply search filter
+            if (currentSearchQuery.trim()) {
+                const query = currentSearchQuery.toLowerCase().trim();
+                filtered = filtered.filter((post) => {
+                    const titleMatch = post.title.toLowerCase().includes(query);
+                    const descriptionMatch = post.description
+                        .toLowerCase()
+                        .includes(query);
+                    return titleMatch || descriptionMatch;
+                });
+            }
+
+            // Update search results count
+            if (searchResultsCount) {
+                if (currentSearchQuery.trim()) {
+                    searchResultsCount.textContent = `Found ${filtered.length} ${filtered.length === 1 ? "article" : "articles"}`;
+                    searchResultsCount.style.display = "block";
+                } else {
+                    searchResultsCount.style.display = "none";
+                }
+            }
+
+            // Show/hide article cards
             articleCards.forEach((card) => {
-                if (tag === "all") {
+                const postPath = card.closest("a")?.getAttribute("href");
+                if (!postPath) return;
+
+                const post = filtered.find((p) => {
+                    const expectedPath = `/${p.type}s/${p.id}`;
+                    return postPath === expectedPath;
+                });
+
+                if (post) {
                     card.parentElement.style.display = "block";
                 } else {
-                    const cardTags = card.dataset.tags?.split(" ") || [];
-                    card.parentElement.style.display = cardTags.includes(tag)
-                        ? "block"
-                        : "none";
+                    card.parentElement.style.display = "none";
                 }
             });
+
+            // Show "no results" message if needed
+            let noResultsMsg = document.getElementById("no-results-message");
+            if (filtered.length === 0) {
+                if (!noResultsMsg && articlesContainer) {
+                    noResultsMsg = document.createElement("div");
+                    noResultsMsg.id = "no-results-message";
+                    noResultsMsg.className =
+                        "col-span-full text-center py-12 text-gray-600";
+                    noResultsMsg.innerHTML = `
+                        <p class="mb-2 text-xl">No articles found</p>
+                        <p class="text-sm">Try adjusting your search or filter criteria</p>
+                    `;
+                    articlesContainer.appendChild(noResultsMsg);
+                }
+            } else if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+        }
+
+        // Listen for search changes from React component
+        window.addEventListener("articleSearchChange", function (e) {
+            const customEvent = e;
+            if (
+                customEvent &&
+                customEvent.detail &&
+                customEvent.detail.query !== undefined
+            ) {
+                currentSearchQuery = customEvent.detail.query;
+                filterArticles();
+            }
         });
-    });
+
+        // Helper function to update URL with current filters
+        function updateURL() {
+            const params = new URLSearchParams();
+            if (currentTag !== "all") params.set("tag", currentTag);
+            if (currentAudience !== "all")
+                params.set("audience", currentAudience);
+            const queryString = params.toString();
+            const newUrl = queryString
+                ? `${window.location.pathname}?${queryString}`
+                : window.location.pathname;
+            history.pushState({}, "", newUrl);
+        }
+
+        // Add click event listeners to tag links
+        tagLinks.forEach((link) => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                const tag = new URL(link.href).searchParams.get("tag") || "all";
+                currentTag = tag;
+                updateURL();
+
+                // Update active state of links
+                tagLinks.forEach((l) => {
+                    if (l.href === link.href) {
+                        l.classList.add("bg-gray-800", "text-white");
+                        l.classList.remove("border-gray-300", "text-gray-700");
+                        l.setAttribute("aria-current", "page");
+                    } else {
+                        l.classList.remove("bg-gray-800", "text-white");
+                        l.classList.add("border-gray-300", "text-gray-700");
+                        l.removeAttribute("aria-current");
+                    }
+                });
+
+                // Filter articles
+                filterArticles();
+            });
+        });
+
+        // Add click event listeners to audience links
+        audienceLinks.forEach((link) => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                const audience =
+                    new URL(link.href).searchParams.get("audience") || "all";
+                currentAudience = audience;
+                updateURL();
+
+                // Update active state of links
+                audienceLinks.forEach((l) => {
+                    if (l.href === link.href) {
+                        l.classList.add("bg-gray-800", "text-white");
+                        l.classList.remove("border-gray-300", "text-gray-700");
+                        l.setAttribute("aria-current", "page");
+                    } else {
+                        l.classList.remove("bg-gray-800", "text-white");
+                        l.classList.add("border-gray-300", "text-gray-700");
+                        l.removeAttribute("aria-current");
+                    }
+                });
+
+                // Filter articles
+                filterArticles();
+            });
+        });
+
+        // Initial filter
+        filterArticles();
+    }
+
+    // Run when DOM is ready
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initFiltering);
+    } else {
+        // DOM already ready
+        initFiltering();
+    }
 </script>
 
-<div class="w-full border border-gray-200 rounded-xl bg-gray-50 p-4">
+<div class="bg-gray-50 p-6 border border-gray-200 rounded-xl w-full">
+    <ArticleSearch client:load />
+    <div
+        id="search-results-count"
+        class="mb-4 font-medium text-gray-700 text-base"
+        style="display: none;"
+    >
+    </div>
     <nav aria-label="Content filter" id="filter-nav" class="mb-6 w-full">
-        <div class="w-full p-0">
+        <div class="p-0 w-full">
+            <div class="mb-3 text-gray-600 text-sm">Filter by audience</div>
+            <div
+                class="flex md:flex-row flex-col items-start gap-3 mb-6 w-full"
+                role="group"
+                aria-label="Article audience"
+                id="audience-filter"
+            >
+                <div
+                    class="flex flex-wrap justify-center items-center gap-3 w-full"
+                >
+                    <a
+                        href={Astro.url.pathname}
+                        class={`border-gray-300 hover:border-gray-400 hover:bg-gray-200 px-3.5 py-1.5 border rounded-full hover:text-black transition-all cursor-pointer text-gray-700 no-underline text-[0.95rem] ${selectedAudience === "all" ? "bg-gray-800 text-white" : ""}`}
+                        aria-current={selectedAudience === "all"
+                            ? "page"
+                            : undefined}
+                        aria-label="Show all articles"
+                        title="Show all articles"
+                    >
+                        👥 All
+                    </a>
+                    <a
+                        href={`${Astro.url.pathname}?audience=patient`}
+                        class={`border-gray-400 hover-border-gray-500 capitalize hover:bg-gray-200 px-3.5 py-1.5 border rounded-full hover:text-black transition-all cursor-pointer text-gray-700 no-underline text-[0.95rem] ${selectedAudience === "patient" ? "bg-gray-800 text-white" : ""}`}
+                        aria-current={selectedAudience === "patient"
+                            ? "page"
+                            : undefined}
+                        aria-label="Patient filter"
+                        title="Patient filter"
+                    >
+                        🏥 Patients
+                    </a>
+                    <a
+                        href={`${Astro.url.pathname}?audience=clinician`}
+                        class={`border-gray-400 hover-border-gray-500 capitalize hover:bg-gray-200 px-3.5 py-1.5 border rounded-full hover:text-black transition-all cursor-pointer text-gray-700 no-underline text-[0.95rem] ${selectedAudience === "clinician" ? "bg-gray-800 text-white" : ""}`}
+                        aria-current={selectedAudience === "clinician"
+                            ? "page"
+                            : undefined}
+                        aria-label="Clinician filter"
+                        title="Clinician filter"
+                    >
+                        👨‍⚕️ Clinicians
+                    </a>
+                </div>
+            </div>
             <div class="mb-3 text-gray-600 text-sm">
                 Browse articles by topic
             </div>
@@ -110,10 +341,12 @@ const tags = baseTagsConfig.filter(
                 aria-label="Article topics"
             >
                 <div
-                    class="flex flex-wrap items-center justify-center gap-3 w-full"
+                    class="flex flex-wrap justify-center items-center gap-3 w-full"
                 >
                     <a
-                        href={Astro.url.pathname}
+                        href={selectedAudience === "all"
+                            ? Astro.url.pathname
+                            : `${Astro.url.pathname}?audience=${selectedAudience}`}
                         class={`border-gray-300 hover:border-gray-400 hover:bg-gray-200 px-3.5 py-1.5 border rounded-full hover:text-black transition-all cursor-pointer text-gray-700 no-underline text-[0.95rem] ${selectedTag === "all" ? "bg-gray-800 text-white" : ""}`}
                         aria-current={selectedTag === "all"
                             ? "page"
@@ -124,19 +357,27 @@ const tags = baseTagsConfig.filter(
                         📚 All <span class="hidden md:inline">Articles</span>
                     </a>
                     {
-                        tags.map(({ word, icon }) => (
-                            <a
-                                href={`${Astro.url.pathname}?tag=${word}`}
-                                class={`border-gray-400 hover-border-gray-500 capitalize hover:bg-gray-200 px-3.5 py-1.5 border rounded-full hover:text-black transition-all cursor-pointer text-gray-700 no-underline text-[0.95rem] ${selectedTag === word ? "bg-gray-800 text-white" : ""}`}
-                                aria-current={
-                                    selectedTag === word ? "page" : undefined
-                                }
-                                aria-label={`${word} filter`}
-                                title={`${word} filter`}
-                            >
-                                {icon} {word}
-                            </a>
-                        ))
+                        tags.map(({ word, icon }) => {
+                            const tagUrl =
+                                selectedAudience === "all"
+                                    ? `${Astro.url.pathname}?tag=${word}`
+                                    : `${Astro.url.pathname}?tag=${word}&audience=${selectedAudience}`;
+                            return (
+                                <a
+                                    href={tagUrl}
+                                    class={`border-gray-400 hover-border-gray-500 capitalize hover:bg-gray-200 px-3.5 py-1.5 border rounded-full hover:text-black transition-all cursor-pointer text-gray-700 no-underline text-[0.95rem] ${selectedTag === word ? "bg-gray-800 text-white" : ""}`}
+                                    aria-current={
+                                        selectedTag === word
+                                            ? "page"
+                                            : undefined
+                                    }
+                                    aria-label={`${word} filter`}
+                                    title={`${word} filter`}
+                                >
+                                    {icon} {word}
+                                </a>
+                            );
+                        })
                     }
                 </div>
             </div>
@@ -155,6 +396,7 @@ const tags = baseTagsConfig.filter(
                     <article
                         class="flex flex-col bg-white hover:shadow-lg p-6 border border-gray-200 hover:border-gray-300 rounded-lg h-full transition-all hover:-translate-y-1 duration-200 ease-in-out article-card"
                         data-tags={post.data.tags?.join(" ")}
+                        data-post-id={`${post.type}s/${post.id}`}
                     >
                         <header>
                             <h2 class="mb-3 font-semibold text-gray-800 text-2xl">

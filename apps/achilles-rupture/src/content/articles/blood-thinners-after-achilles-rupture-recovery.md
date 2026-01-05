@@ -111,8 +111,6 @@ In at least one hospital, routinely using tablets instead of injections for prev
 
 **Comment:** Despite the notion that early muscle activity would bring a better recovery, this paper showed no benefit from Early Controlled Motion
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a4984ac8-b2ba-48fc-8c6b-db26db2f3e50/Untitled.png)
-
 3) Deep venous thrombosis after Achilles tendon rupture is associated with poor patient-reported outcome
 
 [Simon Svedman](https://link.springer.com/article/10.1007/s00167-020-05945-2#auth-Simon-Svedman), [Gunnar Edman](https://link.springer.com/article/10.1007/s00167-020-05945-2#auth-Gunnar-Edman) & [Paul W. Ackermann](https://link.springer.com/article/10.1007/s00167-020-05945-2#auth-Paul_W_-Ackermann)

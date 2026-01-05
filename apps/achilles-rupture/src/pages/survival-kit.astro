@@ -3,7 +3,6 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE } from "../consts";
-import HeaderBackToBlog from '../components/HeaderBackToBlog.astro';
 
 // Comprehensive product list for survival kit
 const survivalKitProducts = [
@@ -435,7 +434,7 @@ const schemaData = {
         </style>
     </head>
     <body>
-        <HeaderBackToBlog        />
+        <Header />
 
         <main id="main-content">
             <section class="mx-auto px-4 py-12 max-w-6xl container">

@@ -6,7 +6,7 @@ import MobileMenuButton from "./MobileMenuButton.tsx";
 ---
 
 <header>
-	<nav class="flex justify-between items-center px-4 py-4 md:py-0 md:px-6">
+	<nav class="flex justify-between items-center px-4 md:px-6 py-4 md:py-0">
 		<a
 			href="/"
 			class="flex-shrink-0 text-gray-700 hover:text-gray-900 transition-colors"
@@ -18,30 +18,36 @@ import MobileMenuButton from "./MobileMenuButton.tsx";
 				class="h-8 md:h-10"
 			/>
 		</a>
-		
+
 		<!-- Mobile menu button -->
 		<MobileMenuButton client:load />
-		
+
 		<!-- Desktop navigation -->
 		<div class="hidden md:flex items-center gap-2 nav-tabs">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/patients">Patients</HeaderLink>
-			<HeaderLink href="/clinicians">Clinicians</HeaderLink>
+			<HeaderLink href="/articles">Articles</HeaderLink>
+			<HeaderLink href="/survival-kit">Survival Kit</HeaderLink>
 			<HeaderLink href="/coming-soon">Coming Soon</HeaderLink>
 		</div>
 	</nav>
-	
+
 	<!-- Mobile navigation menu -->
-	<div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
-		<div class="px-4 py-2 flex flex-col space-y-1">
-			<HeaderLink href="/" class="block py-3 px-2 text-lg">Home</HeaderLink>
-			<HeaderLink href="/patients" class="block py-3 px-2 text-lg">Patients</HeaderLink>
-			<HeaderLink href="/clinicians" class="block py-3 px-2 text-lg">Clinicians</HeaderLink>
-			<HeaderLink href="/coming-soon" class="block py-3 px-2 text-lg">Coming Soon</HeaderLink>
+	<div
+		id="mobile-menu"
+		class="hidden md:hidden bg-white border-gray-200 border-t"
+	>
+		<div class="flex flex-col space-y-1 px-4 py-2">
+			<HeaderLink href="/articles" class="block px-2 py-3 text-lg"
+				>Articles</HeaderLink
+			>
+			<HeaderLink href="/survival-kit" class="block px-2 py-3 text-lg"
+				>Survival Kit</HeaderLink
+			>
+			<HeaderLink href="/coming-soon" class="block px-2 py-3 text-lg"
+				>Coming Soon</HeaderLink
+			>
 		</div>
 	</div>
 </header>
-
 
 <style>
 	header {
@@ -59,16 +65,16 @@ import MobileMenuButton from "./MobileMenuButton.tsx";
 		text-decoration: none;
 		transition: all 0.2s ease;
 	}
-	
+
 	.nav-tabs a:hover {
 		background-color: rgba(var(--gray-light), 0.3);
 	}
-	
+
 	.nav-tabs a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
 	}
-	
+
 	/* Mobile menu styles */
 	#mobile-menu a {
 		color: var(--black);
@@ -76,11 +82,11 @@ import MobileMenuButton from "./MobileMenuButton.tsx";
 		transition: background-color 0.2s ease;
 		border-radius: 6px;
 	}
-	
+
 	#mobile-menu a:hover {
 		background-color: rgba(var(--gray-light), 0.5);
 	}
-	
+
 	#mobile-menu a.active {
 		background-color: rgba(var(--accent), 0.1);
 		color: var(--accent);
