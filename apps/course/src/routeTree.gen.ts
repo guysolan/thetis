@@ -13,9 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as StandardIndexRouteImport } from './routes/standard/index'
 import { Route as ProfessionalsIndexRouteImport } from './routes/professionals/index'
 import { Route as PremiumIndexRouteImport } from './routes/premium/index'
-import { Route as EssentialsIndexRouteImport } from './routes/essentials/index'
 import { Route as StandardWeekWeekDayDayRouteImport } from './routes/standard/week/$week/day/$day'
-import { Route as EssentialsWeekWeekDayDayRouteImport } from './routes/essentials/week/$week/day/$day'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -37,88 +35,63 @@ const PremiumIndexRoute = PremiumIndexRouteImport.update({
   path: '/premium/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EssentialsIndexRoute = EssentialsIndexRouteImport.update({
-  id: '/essentials/',
-  path: '/essentials/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const StandardWeekWeekDayDayRoute = StandardWeekWeekDayDayRouteImport.update({
   id: '/standard/week/$week/day/$day',
   path: '/standard/week/$week/day/$day',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EssentialsWeekWeekDayDayRoute =
-  EssentialsWeekWeekDayDayRouteImport.update({
-    id: '/essentials/week/$week/day/$day',
-    path: '/essentials/week/$week/day/$day',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/essentials': typeof EssentialsIndexRoute
   '/premium': typeof PremiumIndexRoute
   '/professionals': typeof ProfessionalsIndexRoute
   '/standard': typeof StandardIndexRoute
-  '/essentials/week/$week/day/$day': typeof EssentialsWeekWeekDayDayRoute
   '/standard/week/$week/day/$day': typeof StandardWeekWeekDayDayRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/essentials': typeof EssentialsIndexRoute
   '/premium': typeof PremiumIndexRoute
   '/professionals': typeof ProfessionalsIndexRoute
   '/standard': typeof StandardIndexRoute
-  '/essentials/week/$week/day/$day': typeof EssentialsWeekWeekDayDayRoute
   '/standard/week/$week/day/$day': typeof StandardWeekWeekDayDayRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/essentials/': typeof EssentialsIndexRoute
   '/premium/': typeof PremiumIndexRoute
   '/professionals/': typeof ProfessionalsIndexRoute
   '/standard/': typeof StandardIndexRoute
-  '/essentials/week/$week/day/$day': typeof EssentialsWeekWeekDayDayRoute
   '/standard/week/$week/day/$day': typeof StandardWeekWeekDayDayRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/essentials'
     | '/premium'
     | '/professionals'
     | '/standard'
-    | '/essentials/week/$week/day/$day'
     | '/standard/week/$week/day/$day'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/essentials'
     | '/premium'
     | '/professionals'
     | '/standard'
-    | '/essentials/week/$week/day/$day'
     | '/standard/week/$week/day/$day'
   id:
     | '__root__'
     | '/'
-    | '/essentials/'
     | '/premium/'
     | '/professionals/'
     | '/standard/'
-    | '/essentials/week/$week/day/$day'
     | '/standard/week/$week/day/$day'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  EssentialsIndexRoute: typeof EssentialsIndexRoute
   PremiumIndexRoute: typeof PremiumIndexRoute
   ProfessionalsIndexRoute: typeof ProfessionalsIndexRoute
   StandardIndexRoute: typeof StandardIndexRoute
-  EssentialsWeekWeekDayDayRoute: typeof EssentialsWeekWeekDayDayRoute
   StandardWeekWeekDayDayRoute: typeof StandardWeekWeekDayDayRoute
 }
 
@@ -152,13 +125,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PremiumIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/essentials/': {
-      id: '/essentials/'
-      path: '/essentials'
-      fullPath: '/essentials'
-      preLoaderRoute: typeof EssentialsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/standard/week/$week/day/$day': {
       id: '/standard/week/$week/day/$day'
       path: '/standard/week/$week/day/$day'
@@ -166,23 +132,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StandardWeekWeekDayDayRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/essentials/week/$week/day/$day': {
-      id: '/essentials/week/$week/day/$day'
-      path: '/essentials/week/$week/day/$day'
-      fullPath: '/essentials/week/$week/day/$day'
-      preLoaderRoute: typeof EssentialsWeekWeekDayDayRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  EssentialsIndexRoute: EssentialsIndexRoute,
   PremiumIndexRoute: PremiumIndexRoute,
   ProfessionalsIndexRoute: ProfessionalsIndexRoute,
   StandardIndexRoute: StandardIndexRoute,
-  EssentialsWeekWeekDayDayRoute: EssentialsWeekWeekDayDayRoute,
   StandardWeekWeekDayDayRoute: StandardWeekWeekDayDayRoute,
 }
 export const routeTree = rootRouteImport

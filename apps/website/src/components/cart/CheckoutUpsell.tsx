@@ -52,7 +52,8 @@ export function CheckoutUpsell({
     const handleAddItem = async (variantId: string) => {
         setIsAdding(true);
         try {
-            await addToCart(variantId, 1);
+            // Don't open cart sheet when adding from checkout
+            await addToCart(variantId, 1, false);
             setAddedItems((prev) => [...prev, variantId]);
         } catch (error) {
             console.error("Failed to add upsell item:", error);
@@ -65,19 +66,19 @@ export function CheckoutUpsell({
     const isSplintUpsell = primaryUpsell.variantId.includes("47494539"); // Splint variant IDs start with this
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-            <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+        <div className="z-50 fixed inset-0 flex justify-center items-center bg-black/60 backdrop-blur-sm p-4">
+            <div className="bg-white dark:bg-neutral-900 shadow-2xl rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
                 {/* Header */}
-                <div className="flex items-center justify-between p-6 border-b border-neutral-200 dark:border-neutral-700">
+                <div className="flex justify-between items-center p-6 border-neutral-200 dark:border-neutral-700 border-b">
                     <div className="flex items-center gap-2">
                         <Sparkles className="w-5 h-5 text-primary" />
-                        <h2 className="text-xl font-bold text-neutral-900 dark:text-neutral-100">
+                        <h2 className="font-bold text-neutral-900 dark:text-neutral-100 text-xl">
                             Complete Your Recovery
                         </h2>
                     </div>
                     <button
                         onClick={onClose}
-                        className="p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-full transition-colors"
+                        className="hover:bg-neutral-100 dark:hover:bg-neutral-800 p-2 rounded-full transition-colors"
                         aria-label="Close"
                     >
                         <X className="w-5 h-5 text-neutral-500" />
@@ -86,7 +87,7 @@ export function CheckoutUpsell({
 
                 {/* Content */}
                 <div className="p-6">
-                    <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+                    <p className="mb-6 text-neutral-600 dark:text-neutral-400">
                         {isSplintUpsell
                             ? "80% of Achilles patients struggle to sleep in their boot. Add our night splint for better rest during recovery."
                             : "Get the most out of your recovery with our comprehensive course. 31 lessons to guide you from injury to full strength."}
@@ -109,23 +110,23 @@ export function CheckoutUpsell({
                                     }`}
                                 >
                                     <div className="flex items-start gap-4">
-                                        <div className="w-20 h-20 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center shrink-0">
+                                        <div className="flex justify-center items-center bg-neutral-100 dark:bg-neutral-800 rounded-lg w-20 h-20 shrink-0">
                                             <ShoppingBag className="w-8 h-8 text-neutral-400" />
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">
                                                 {product.title}
                                             </h3>
-                                            <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+                                            <p className="mt-1 text-neutral-500 dark:text-neutral-400 text-sm">
                                                 {product.description}
                                             </p>
-                                            <div className="flex items-center justify-between mt-3">
-                                                <span className="text-lg font-bold text-primary">
+                                            <div className="flex justify-between items-center mt-3">
+                                                <span className="font-bold text-primary text-lg">
                                                     {product.price}
                                                 </span>
                                                 {isAdded
                                                     ? (
-                                                        <span className="flex items-center gap-1 text-green-600 font-medium text-sm">
+                                                        <span className="flex items-center gap-1 font-medium text-green-600 text-sm">
                                                             <Check className="w-4 h-4" />
                                                             Added
                                                         </span>
@@ -157,24 +158,24 @@ export function CheckoutUpsell({
 
                                     {/* Benefits */}
                                     {!isAdded && product === primaryUpsell && (
-                                        <div className="mt-4 pt-4 border-t border-primary/20">
+                                        <div className="mt-4 pt-4 border-primary/20 border-t">
                                             <ul className="space-y-2">
                                                 {isSplintUpsell
                                                     ? (
                                                         <>
-                                                            <li className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                                            <li className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 text-sm">
                                                                 <Check className="w-4 h-4 text-primary shrink-0" />
                                                                 Sleep
                                                                 comfortably
                                                                 without the
                                                                 heavy boot
                                                             </li>
-                                                            <li className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                                            <li className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 text-sm">
                                                                 <Check className="w-4 h-4 text-primary shrink-0" />
                                                                 Shower safely
                                                                 with protection
                                                             </li>
-                                                            <li className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                                            <li className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 text-sm">
                                                                 <Check className="w-4 h-4 text-primary shrink-0" />
                                                                 Trusted by
                                                                 5,000+ patients
@@ -183,17 +184,17 @@ export function CheckoutUpsell({
                                                     )
                                                     : (
                                                         <>
-                                                            <li className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                                            <li className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 text-sm">
                                                                 <Check className="w-4 h-4 text-primary shrink-0" />
                                                                 31 structured
                                                                 lessons
                                                             </li>
-                                                            <li className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                                            <li className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 text-sm">
                                                                 <Check className="w-4 h-4 text-primary shrink-0" />
                                                                 Boot comparison
                                                                 guide
                                                             </li>
-                                                            <li className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                                            <li className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 text-sm">
                                                                 <Check className="w-4 h-4 text-primary shrink-0" />
                                                                 Week-by-week
                                                                 timeline
@@ -210,13 +211,13 @@ export function CheckoutUpsell({
                 </div>
 
                 {/* Footer */}
-                <div className="p-6 border-t border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 rounded-b-2xl">
+                <div className="bg-neutral-50 dark:bg-neutral-800/50 p-6 border-neutral-200 dark:border-neutral-700 border-t rounded-b-2xl">
                     {/* Updated subtotal */}
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex justify-between items-center mb-4">
                         <span className="text-neutral-600 dark:text-neutral-400">
                             Order Total
                         </span>
-                        <span className="text-xl font-bold text-neutral-900 dark:text-neutral-100">
+                        <span className="font-bold text-neutral-900 dark:text-neutral-100 text-xl">
                             {subtotal
                                 ? formatPrice(
                                     subtotal.amount,
@@ -235,17 +236,17 @@ export function CheckoutUpsell({
                         >
                             {isLoading
                                 ? (
-                                    <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                                    <Loader2 className="mr-2 w-5 h-5 animate-spin" />
                                 )
                                 : (
-                                    <ArrowRight className="w-5 h-5 mr-2" />
+                                    <ArrowRight className="mr-2 w-5 h-5" />
                                 )}
                             Continue to Checkout
                         </Button>
 
                         <button
                             onClick={onClose}
-                            className="w-full text-center text-sm text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 underline underline-offset-2"
+                            className="w-full text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 text-sm text-center underline underline-offset-2"
                         >
                             Continue Shopping
                         </button>

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { formatWeekDay, sections } from "@/content/course/sections";
 import {
+  ArrowLeft,
   BookOpen,
   CheckCircle2,
   ChevronRight,
@@ -10,6 +11,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@thetis/ui/button";
+import { Checkbox } from "@thetis/ui/checkbox";
 import { Progress } from "@thetis/ui/progress";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 import { useCourseProgress } from "@/hooks/use-course-progress";
@@ -31,7 +33,12 @@ const phases = [
 ];
 
 function StandardIndexPage() {
-  const { isLessonComplete, getCompletionPercentage } = useCourseProgress();
+  const {
+    isLessonComplete,
+    markLessonComplete,
+    markLessonIncomplete,
+    getCompletionPercentage,
+  } = useCourseProgress();
   const completionPercentage = getCompletionPercentage(sections.length);
 
   return (
@@ -39,11 +46,9 @@ function StandardIndexPage() {
       <div className="mx-auto px-4 sm:px-6 py-16 max-w-4xl">
         <Link
           to="/"
-          className="group inline-flex items-center gap-2 mb-12 text-muted-foreground hover:text-primary transition-colors"
+          className="inline-flex items-center gap-2 mb-12 text-muted-foreground hover:text-foreground text-sm transition-colors"
         >
-          <div className="transition-transform group-hover:-translate-x-1">
-            <ChevronRight className="w-4 h-4 rotate-180" />
-          </div>
+          <ArrowLeft className="w-4 h-4" />
           Back to Programs
         </Link>
 
@@ -109,13 +114,8 @@ function StandardIndexPage() {
                   {phaseSections.map((section) => {
                     const isComplete = isLessonComplete(section.slug);
                     return (
-                      <Link
+                      <div
                         key={section.slug}
-                        to="/standard/week/$week/day/$day"
-                        params={{
-                          week: String(section.week),
-                          day: String(section.day),
-                        }}
                         className={cn(
                           "group flex items-center gap-4 p-5 border rounded-2xl transition-all",
                           isComplete
@@ -124,53 +124,80 @@ function StandardIndexPage() {
                         )}
                       >
                         <div
-                          className={cn(
-                            "flex justify-center items-center rounded-xl w-12 h-12 font-bold transition-colors shrink-0",
-                            isComplete
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-muted group-hover:bg-primary/10 text-muted-foreground group-hover:text-primary",
-                          )}
+                          onClick={(e) => e.stopPropagation()}
+                          className="cursor-pointer shrink-0"
                         >
-                          {isComplete ? <CheckCircle2 className="w-6 h-6" /> : (
-                            section.section_number
-                          )}
+                          <Checkbox
+                            checked={isComplete}
+                            onCheckedChange={(checked) => {
+                              if (checked) {
+                                markLessonComplete(section.slug);
+                              } else {
+                                markLessonIncomplete(section.slug);
+                              }
+                            }}
+                            className="data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-primary-foreground"
+                          />
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2">
-                            <h3
-                              className={cn(
-                                "font-semibold transition-colors",
-                                isComplete
-                                  ? "text-primary"
-                                  : "text-foreground group-hover:text-primary",
-                              )}
-                            >
-                              {section.title}
-                            </h3>
-                            {isComplete && (
-                              <span className="inline-flex items-center gap-1 bg-primary/20 dark:bg-primary/30 px-2 py-0.5 rounded font-semibold text-primary text-xs">
-                                <CheckCircle2 className="w-3 h-3" />
-                                Done
-                              </span>
+                        <Link
+                          to="/standard/week/$week/day/$day"
+                          params={{
+                            week: String(section.week),
+                            day: String(section.day),
+                          }}
+                          className="flex flex-1 items-center gap-4 min-w-0"
+                        >
+                          <div
+                            className={cn(
+                              "flex justify-center items-center rounded-xl w-12 h-12 font-bold transition-colors shrink-0",
+                              isComplete
+                                ? "bg-primary text-primary-foreground"
+                                : "bg-muted group-hover:bg-primary/10 text-muted-foreground group-hover:text-primary",
                             )}
+                          >
+                            {isComplete
+                              ? <CheckCircle2 className="w-6 h-6" />
+                              : (
+                                section.section_number
+                              )}
                           </div>
-                          <p className="text-muted-foreground text-sm truncate">
-                            {section.description}
-                          </p>
-                        </div>
-                        <div className="hidden sm:flex items-center gap-2 font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                          <Clock className="w-3.5 h-3.5" />
-                          {formatWeekDay(section.week, section.day)}
-                        </div>
-                        <ChevronRight
-                          className={cn(
-                            "w-5 h-5 transition-colors",
-                            isComplete
-                              ? "text-primary"
-                              : "text-muted-foreground/30 group-hover:text-primary",
-                          )}
-                        />
-                      </Link>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              <h3
+                                className={cn(
+                                  "font-semibold transition-colors",
+                                  isComplete
+                                    ? "text-primary"
+                                    : "text-foreground group-hover:text-primary",
+                                )}
+                              >
+                                {section.title}
+                              </h3>
+                              {isComplete && (
+                                <span className="inline-flex items-center gap-1 bg-primary/20 dark:bg-primary/30 px-2 py-0.5 rounded font-semibold text-primary text-xs">
+                                  <CheckCircle2 className="w-3 h-3" />
+                                  Done
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-muted-foreground text-sm truncate">
+                              {section.description}
+                            </p>
+                          </div>
+                          <div className="hidden sm:flex items-center gap-2 font-medium text-muted-foreground text-xs uppercase tracking-wider">
+                            <Clock className="w-3.5 h-3.5" />
+                            {formatWeekDay(section.week, section.day)}
+                          </div>
+                          <ChevronRight
+                            className={cn(
+                              "w-5 h-5 transition-colors",
+                              isComplete
+                                ? "text-primary"
+                                : "text-muted-foreground/30 group-hover:text-primary",
+                            )}
+                          />
+                        </Link>
+                      </div>
                     );
                   })}
                 </div>

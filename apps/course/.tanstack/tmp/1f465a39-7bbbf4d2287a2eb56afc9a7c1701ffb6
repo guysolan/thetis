@@ -38,7 +38,7 @@ function HomePage() {
                             </p>
                             <div className="flex sm:flex-row flex-col justify-center gap-4">
                                 <Button asChild size="lg">
-                                    <Link to="/essentials">
+                                    <Link to="/standard">
                                         Start the Course
                                         <ArrowRight className="ml-2 w-4 h-4" />
                                     </Link>

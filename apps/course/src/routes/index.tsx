@@ -131,11 +131,11 @@ function HomePage() {
       <div className="bg-muted/30 border-border border-t">
         <div className="mx-auto px-4 sm:px-6 py-16 max-w-5xl">
           <div className="flex md:flex-row flex-col items-center gap-8 bg-card p-8 border border-border rounded-2xl">
-            <div className="flex justify-center items-center bg-green-100 dark:bg-green-900 rounded-xl w-16 h-16 shrink-0">
-              <Mail className="w-8 h-8 text-green-700 dark:text-green-300" />
+            <div className="flex justify-center items-center bg-primary/10 dark:bg-primary/20 rounded-xl w-16 h-16 shrink-0">
+              <Mail className="w-8 h-8 text-primary" />
             </div>
             <div className="flex-1 md:text-left text-center">
-              <span className="inline-block bg-green-100 dark:bg-green-900 mb-2 px-2 py-0.5 rounded font-semibold text-green-700 dark:text-green-300 text-xs">
+              <span className="inline-block bg-primary/10 dark:bg-primary/20 mb-2 px-2 py-0.5 rounded font-semibold text-primary text-xs">
                 FREE
               </span>
               <h3 className="mb-2 font-semibold text-foreground text-xl">
@@ -148,7 +148,7 @@ function HomePage() {
             </div>
             <EmailSignupDialog
               triggerText="Get Free Emails"
-              triggerClassName="bg-green-600 hover:bg-green-700 text-white"
+              triggerClassName="bg-primary hover:bg-primary/90 text-primary-foreground"
             />
           </div>
         </div>

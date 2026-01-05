@@ -34,6 +34,8 @@ import {
     Video,
     X,
 } from "lucide-react";
+import TrustClaims from "../TrustClaims";
+import { PaymentIcons } from "../PaymentIcons";
 
 export function CheckoutUpsellPage() {
     const cartLines = useStore($cartLines);
@@ -73,7 +75,8 @@ export function CheckoutUpsellPage() {
     const handleAddItem = async (variantId: string) => {
         setIsAdding(true);
         try {
-            await addToCart(variantId, 1);
+            // Don't open cart sheet when adding from checkout page
+            await addToCart(variantId, 1, false);
             setAddedItems((prev) => [...prev, variantId]);
         } catch (error) {
             console.error("Failed to add upsell item:", error);
@@ -501,7 +504,7 @@ export function CheckoutUpsellPage() {
                         <span className="font-medium text-neutral-600 dark:text-neutral-400 text-lg">
                             Order Total
                         </span>
-                        <span className="font-bold text-neutral-900 dark:text-neutral-100 text-3xl">
+                        <span className="font-bold text-neutral-800 dark:text-neutral-100 text-xl">
                             {subtotal
                                 ? formatPrice(
                                     subtotal.amount,
@@ -511,37 +514,10 @@ export function CheckoutUpsellPage() {
                         </span>
                     </div>
 
-                    {/* Satisfaction Guarantee and Free Shipping */}
-                    <div className="space-y-2 bg-neutral-50 dark:bg-neutral-800 mb-4 px-4 py-3 rounded-lg text-md">
-                        <p className="font-semibold text-neutral-900 dark:text-neutral-100 text-center">
-                            100% Satisfaction Guarantee Or Your Money Back!
-                        </p>
-                        <p className="font-medium text-primary text-center">
-                            ✓ Free shipping included
-                        </p>
-                        <p className="font-bold text-primary text-center">
-                            5,000+ Patients Trust Thetis
-                        </p>
-                    </div>
-
-                    {/* Trust Badges */}
-                    <div className="flex flex-wrap justify-center items-center gap-3 mb-6 pb-4 border-neutral-200 dark:border-neutral-700 border-b">
-                        <div className="flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400 text-xs">
-                            <Lock className="w-3.5 h-3.5" />
-                            <span>Secure Checkout</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400 text-xs">
-                            <Shield className="w-3.5 h-3.5" />
-                            <span>PCI Compliant</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-green-600 dark:text-green-500 text-xs">
-                            <ShieldCheck className="w-3.5 h-3.5" />
-                            <span>30-Day Guarantee</span>
-                        </div>
-                    </div>
-
                     {/* Action Buttons */}
-                    <div className="space-y-3">
+                    <div className="space-y-6">
+                        {/* Trust Badges */}
+
                         <Button
                             onClick={handleContinueToCheckout}
                             size="lg"
@@ -563,14 +539,11 @@ export function CheckoutUpsellPage() {
                                 )}
                         </Button>
 
-                        <button
-                            onClick={handleContinueShopping}
-                            className="py-2 w-full text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 text-sm text-center underline underline-offset-2"
-                        >
-                            Continue Shopping
-                        </button>
+                        <PaymentIcons className="justify-center" />
                     </div>
                 </div>
+
+                <TrustClaims className="mt-6" variant="expanded" />
             </div>
         </main>
     );

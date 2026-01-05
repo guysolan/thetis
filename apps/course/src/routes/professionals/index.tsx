@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { formatWeekDay, sections } from "@/content/course/sections";
 import {
+  ArrowLeft,
   BookOpen,
   ChevronRight,
   Clock,
@@ -33,11 +34,9 @@ function PremiumIndexPage() {
       <div className="mx-auto px-4 sm:px-6 py-16 max-w-4xl">
         <Link
           to="/"
-          className="group inline-flex items-center gap-2 mb-12 text-muted-foreground hover:text-primary transition-colors"
+          className="inline-flex items-center gap-2 mb-12 text-muted-foreground hover:text-foreground text-sm transition-colors"
         >
-          <div className="transition-transform group-hover:-translate-x-1">
-            <ChevronRight className="w-4 h-4 rotate-180" />
-          </div>
+          <ArrowLeft className="w-4 h-4" />
           Back to Programs
         </Link>
 

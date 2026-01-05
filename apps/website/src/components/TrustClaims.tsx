@@ -6,6 +6,7 @@ interface TrustClaimsProps {
     lang?: Lang;
     align?: "left" | "center";
     variant?: "compact" | "expanded";
+    className?: string;
 }
 
 const content = {
@@ -45,6 +46,7 @@ export function TrustClaims({
     lang = "en",
     variant = "compact",
     align = "center",
+    className,
 }: TrustClaimsProps) {
     const t = content[lang];
 
@@ -54,6 +56,7 @@ export function TrustClaims({
                 className={cn(
                     "bg-neutral-50 dark:bg-neutral-800 px-3 py-2 rounded-lg",
                     align === "left" ? "text-left" : "text-center",
+                    className,
                 )}
             >
                 <p
@@ -91,6 +94,7 @@ export function TrustClaims({
                 className={cn(
                     "space-y-2 bg-neutral-50 dark:bg-neutral-800 px-4 py-3 rounded-lg",
                     align === "left" ? "text-left" : "text-center",
+                    className,
                 )}
             >
                 <p

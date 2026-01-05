@@ -80,6 +80,7 @@ export async function initializeCart(): Promise<Cart | null> {
 export async function addToCart(
     variantId: string,
     quantity: number = 1,
+    shouldOpenCart: boolean = true,
 ): Promise<Cart> {
     $isLoading.set(true);
     $error.set(null);
@@ -103,7 +104,11 @@ export async function addToCart(
 
         $cart.set(updatedCart);
         $isLoading.set(false);
-        openCart(); // Open cart drawer after adding item
+
+        // Only open cart drawer if explicitly requested (defaults to true for backwards compatibility)
+        if (shouldOpenCart) {
+            openCart();
+        }
 
         return updatedCart;
     } catch (error) {

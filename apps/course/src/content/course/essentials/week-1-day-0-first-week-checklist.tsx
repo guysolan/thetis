@@ -54,7 +54,7 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Week 1 essentials (simple checklist)",
+            title: "Week 1 standard (simple checklist)",
             content: [
                 {
                     type: "checklist",

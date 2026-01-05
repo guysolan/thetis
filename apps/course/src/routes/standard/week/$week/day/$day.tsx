@@ -29,7 +29,7 @@ async function loadSectionContent(
 ): Promise<{ metadata: SectionMetadata; content: SectionContent } | null> {
   try {
     const module = await import(
-      `@/content/course/essentials/${slug}.tsx`
+      `@/content/course/standard/${slug}.tsx`
     );
     return {
       metadata: module.metadata,

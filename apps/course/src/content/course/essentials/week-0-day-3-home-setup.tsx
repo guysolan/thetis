@@ -64,7 +64,7 @@ export const content: SectionContent = {
                     type: "tip",
                     title: "Tiny change, big payoff",
                     content:
-                        "Put essentials (water, pain meds, charger, wet wipes) in a single tray/basket. You’ll be shocked how hard “just grabbing one thing” becomes on crutches.",
+                        "Put standard (water, pain meds, charger, wet wipes) in a single tray/basket. You’ll be shocked how hard “just grabbing one thing” becomes on crutches.",
                 },
             ],
         },
