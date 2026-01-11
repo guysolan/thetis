@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, ExternalLink, GraduationCap, Mail } from "lucide-react";
+import { BookOpen, GraduationCap, Mail } from "lucide-react";
 import { PricingCard } from "@thetis/ui/pricing-card";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
-import { Button } from "@thetis/ui/button";
-import { WEBSITE_URL } from "@/lib/env";
+import { ShopifyCourseBuyButton } from "@/components/ShopifyCourseBuyButton";
+import { useCoursePrice } from "@/hooks/use-course-price";
+import { SHOPIFY_PRODUCTS } from "@/lib/shopify";
 
 function CourseCard({
   title,
@@ -17,7 +18,7 @@ function CourseCard({
   showRibbon,
   ribbonText,
   courseType,
-  shopUrl,
+  productId,
 }: {
   title: string;
   description: string;
@@ -29,16 +30,20 @@ function CourseCard({
   icon: React.ReactNode;
   showRibbon?: boolean;
   ribbonText?: string;
-  courseType: "standard" | "premium";
-  shopUrl: string;
+  courseType: "essentials" | "professionals";
+  productId: string;
 }) {
+  const { formattedPrice, isLoading } = useCoursePrice(courseType);
+
   return (
     <div className="flex flex-col h-full">
       <Link to={link} className="flex-1">
         <PricingCard
           title={title}
           description={description}
-          price=""
+          price={formattedPrice ||
+            (courseType === "essentials" ? "£29.99" : "£79.99")}
+          priceSuffix="one-time"
           variant={variant}
           badge={badge}
           features={features}
@@ -50,12 +55,12 @@ function CourseCard({
         />
       </Link>
       <div className="mt-6" onClick={(e) => e.stopPropagation()}>
-        <a href={shopUrl} target="_blank" rel="noopener noreferrer">
-          <Button className="gap-2 w-full">
-            Buy {title} Course
-            <ExternalLink className="w-4 h-4" />
-          </Button>
-        </a>
+        <ShopifyCourseBuyButton
+          productId={productId}
+          buttonText={`Buy ${title} Course`}
+          showPrice={false}
+          className="w-full"
+        />
       </div>
     </div>
   );
@@ -88,7 +93,7 @@ function HomePage() {
           {/* Course Cards */}
           <div className="gap-8 grid md:grid-cols-2 mx-auto max-w-4xl">
             <CourseCard
-              title="Standard"
+              title="Essentials"
               description="31 easily digestible lessons to guide you through each stage of recovery."
               variant="standard"
               badge="POPULAR"
@@ -98,30 +103,31 @@ function HomePage() {
                 "Product recommendations",
                 "Boot comparison guide",
               ]}
-              link="/standard"
-              ctaText="Start Standard"
+              link="/essentials"
+              ctaText="Start Essentials"
               icon={<BookOpen className="w-full h-full" />}
-              courseType="standard"
-              shopUrl={`${WEBSITE_URL}/course/standard`}
+              courseType="essentials"
+              productId={SHOPIFY_PRODUCTS.ESSENTIALS_COURSE}
             />
             <CourseCard
-              title="Premium"
+              title="Professional"
               description="Advanced recovery strategies and expert-led video lessons for elite results."
               variant="premium"
               badge="PREMIUM"
               showRibbon={true}
               ribbonText="BEST VALUE"
               features={[
-                "Everything in Standard",
+                "Everything in Essentials",
                 "Specialist surgeon video lessons",
                 "8 recovery hacks from elite athletes",
                 "Return-to-sport protocols",
+                "Priority expert support",
               ]}
-              link="/premium"
-              ctaText="Go Premium"
+              link="/professionals"
+              ctaText="Go Professional"
               icon={<GraduationCap className="w-full h-full" />}
-              courseType="premium"
-              shopUrl={`${WEBSITE_URL}/course/premium`}
+              courseType="professionals"
+              productId={SHOPIFY_PRODUCTS.PROFESSIONALS_COURSE}
             />
           </div>
         </div>
@@ -131,11 +137,11 @@ function HomePage() {
       <div className="bg-muted/30 border-border border-t">
         <div className="mx-auto px-4 sm:px-6 py-16 max-w-5xl">
           <div className="flex md:flex-row flex-col items-center gap-8 bg-card p-8 border border-border rounded-2xl">
-            <div className="flex justify-center items-center bg-primary/10 dark:bg-primary/20 rounded-xl w-16 h-16 shrink-0">
-              <Mail className="w-8 h-8 text-primary" />
+            <div className="flex justify-center items-center bg-green-100 dark:bg-green-900 rounded-xl w-16 h-16 shrink-0">
+              <Mail className="w-8 h-8 text-green-700 dark:text-green-300" />
             </div>
             <div className="flex-1 md:text-left text-center">
-              <span className="inline-block bg-primary/10 dark:bg-primary/20 mb-2 px-2 py-0.5 rounded font-semibold text-primary text-xs">
+              <span className="inline-block bg-green-100 dark:bg-green-900 mb-2 px-2 py-0.5 rounded font-semibold text-green-700 dark:text-green-300 text-xs">
                 FREE
               </span>
               <h3 className="mb-2 font-semibold text-foreground text-xl">
@@ -148,7 +154,7 @@ function HomePage() {
             </div>
             <EmailSignupDialog
               triggerText="Get Free Emails"
-              triggerClassName="bg-primary hover:bg-primary/90 text-primary-foreground"
+              triggerClassName="bg-green-600 hover:bg-green-700 text-white"
             />
           </div>
         </div>

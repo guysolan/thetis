@@ -8,17 +8,18 @@ import AthletesBadges from "@/components/AthletesBadges.astro";
 import HighlightedWord from "@/components/HighlightedWord.tsx";
 import HoverImageLink from "@/components/HoverImageLink.astro";
 import ColorGradient from "@/components/ColorGradient.astro";
+import HeroTestimonialCarousel from "@/components/HeroTestimonialCarousel";
 import type { Lang } from "@/config/languages.ts";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
 
 const content = {
     en: {
-        tagline: "Trusted by 5,000+ patients",
-        highlightedWord: "Better Sleep.",
-        title: "Better Comfort.",
+        tagline: "TRUSTED BY 5000+ PATIENTS",
+        highlightedWord: "Better",
+        title: "Achilles Rupture Recovery",
         description:
-            "Our patented night splint lets you ditch the boot at bedtime, and our recovery courses guide you week-by-week from injury to full strength. Recommended by leading surgeons and loved by patients worldwide.",
+            "We offer a splint and lessons to make your experience recovering from a torn Achilles better.",
         exploreCourses: "Start Free Course",
         shopProducts: "Shop Night Splint",
         benefits: ["Free shipping", "30-day guarantee", "Surgeon approved"],

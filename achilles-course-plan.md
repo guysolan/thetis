@@ -195,10 +195,16 @@ CREATE TABLE public.users (
 CREATE TABLE public.enrollments (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES public.users(id) ON DELETE CASCADE,
-  course_type TEXT NOT NULL, -- 'essentials', 'pro'
+  course_type TEXT NOT NULL, -- 'essentials', 'professionals'
+  -- Stripe fields (for Stripe payments)
   stripe_checkout_session_id TEXT UNIQUE,
   stripe_customer_id TEXT,
   stripe_price_id TEXT, -- Reference to Stripe price (for records)
+  -- Shopify fields (for Shopify payments - Stage 4.5)
+  shopify_order_id TEXT,
+  shopify_order_number TEXT,
+  shopify_customer_email TEXT,
+  -- Common fields
   status TEXT NOT NULL DEFAULT 'active',
   purchased_at TIMESTAMPTZ DEFAULT NOW(),
   created_at TIMESTAMPTZ DEFAULT NOW()
@@ -239,6 +245,7 @@ CREATE TABLE public.stripe_webhook_events (
 -- Indexes
 CREATE INDEX idx_enrollments_user_id ON public.enrollments(user_id);
 CREATE INDEX idx_enrollments_stripe_session ON public.enrollments(stripe_checkout_session_id);
+CREATE INDEX idx_enrollments_shopify_order ON public.enrollments(shopify_order_id);
 CREATE INDEX idx_user_progress_user_id ON public.user_progress(user_id);
 CREATE INDEX idx_user_progress_section ON public.user_progress(user_id, section_slug);
 CREATE INDEX idx_email_queue_scheduled ON public.email_queue(scheduled_for, status);
@@ -381,17 +388,159 @@ CREATE POLICY "Users can view own progress" ON public.user_progress
 
 ---
 
+## Stage 4.5: Website E-commerce Enhancements
+
+**Goal**: Add discount codes, bundles, and Shopify integration for course access. These features enhance the main website (`apps/website/`) shopping experience.
+
+### 24. In-Cart Discount Code Application
+
+- [ ] Add `applyDiscountCode()` function to `apps/website/src/lib/shopify/storefront.ts`
+  - Use Shopify `cartDiscountCodesApply` mutation
+  - Handle validation errors (invalid code, expired, etc.)
+- [ ] Update `CART_FRAGMENT` to include discount information:
+  - `discountCodes` array
+  - `discountAllocations` in cost breakdown
+- [ ] Add discount code input field to `CartSheet` component
+  - Text input with "Apply" button
+  - Show applied discount codes
+  - Display discount amount in cart total
+  - Allow removing discount codes
+- [ ] Add `removeDiscountCode()` function for removing codes
+- [ ] Update cart store (`cart-store.ts`) to handle discount state
+- [ ] Test discount code application with various codes
+
+**Files to modify:**
+
+- `apps/website/src/lib/shopify/storefront.ts` - Add discount mutations
+- `apps/website/src/lib/shopify/cart-store.ts` - Add discount actions
+- `apps/website/src/components/cart/CartSheet.tsx` - Add discount UI
+
+### 25. Product Bundles
+
+- [ ] Create bundle definitions in `apps/website/src/lib/shopify/products.ts`
+  - "Complete Recovery Bundle" (Splint + Essentials Course)
+  - "Professional Bundle" (Splint + Professionals Course)
+  - Define bundle items with variant IDs and quantities
+- [ ] Add `addBundleToCart()` function to `storefront.ts`
+  - Accept array of bundle items
+  - Create cart with all items or add to existing cart
+- [ ] Create `BundleCard` component for displaying bundles
+  - Show bundle name, description, savings amount
+  - "Add Bundle to Cart" button
+  - Display individual products included
+- [ ] Add bundle sections to product pages
+  - Show bundles on splint product pages
+  - Show bundles on course pages
+- [ ] Update upsell logic to suggest bundles when appropriate
+
+**Files to create/modify:**
+
+- `apps/website/src/lib/shopify/products.ts` - Add bundle definitions
+- `apps/website/src/lib/shopify/storefront.ts` - Add bundle function
+- `apps/website/src/components/products/BundleCard.tsx` - New component
+- `apps/website/src/components/products/BundlesAndRecommendations.tsx` - Update to include bundles
+
+### 26. Shopify Webhook Integration for Course Access
+
+**Goal**: Link Shopify orders to Supabase users for course access. Users purchase courses via Shopify, webhook grants access in Supabase.
+
+- [ ] Create Supabase Edge Function: `shopify-order-webhook`
+  - Location: `packages/amazon/supabase/functions/shopify-order-webhook/` (or create new location)
+  - Verify Shopify webhook signature
+  - Handle `orders/create` and `orders/paid` events
+- [ ] Update Supabase schema for Shopify integration:
+
+  ```sql
+  -- Add to enrollments table
+  ALTER TABLE public.enrollments ADD COLUMN shopify_order_id TEXT;
+  ALTER TABLE public.enrollments ADD COLUMN shopify_order_number TEXT;
+  ALTER TABLE public.enrollments ADD COLUMN shopify_customer_email TEXT;
+  
+  -- Add index
+  CREATE INDEX idx_enrollments_shopify_order ON public.enrollments(shopify_order_id);
+  ```
+
+- [ ] Implement webhook handler logic:
+  - Extract order data from webhook payload
+  - Check if order contains course products (variant IDs)
+  - Map Shopify variant IDs to course types:
+    - `52265314353480` → 'essentials'
+    - `52265315828040` → 'professionals'
+  - Find or create user by email in Supabase
+  - Create enrollment record with Shopify order reference
+  - Handle idempotency (check if enrollment already exists)
+- [ ] Set up Shopify webhook in Shopify admin:
+  - Webhook URL: `https://[your-supabase-project].supabase.co/functions/v1/shopify-order-webhook`
+  - Events: `orders/create`, `orders/paid`
+  - Format: JSON
+- [ ] Test webhook with Shopify CLI or test orders
+
+**Files to create:**
+
+- `packages/amazon/supabase/functions/shopify-order-webhook/index.ts` - Webhook handler
+- `apps/website/src/lib/shopify/webhook-types.ts` - TypeScript types for Shopify webhook payloads
+
+### 27. User Account Linking (Shopify → Supabase)
+
+- [ ] Create order verification page (`/verify-order`)
+  - User enters Shopify order number
+  - User enters email used for order
+  - Verify order exists and contains course product
+  - If verified, create/update Supabase user and enrollment
+- [ ] Add "Link Order" functionality to course app
+  - If user not enrolled, show "Link Your Order" option
+  - Redirect to verification page
+- [ ] Update enrollment check logic
+  - Check both Stripe enrollments (from Stage 4) and Shopify enrollments
+  - `hasAccess()` function should query both sources
+- [ ] Handle edge cases:
+  - User purchases via Shopify but hasn't signed up yet
+  - User signs up with different email than Shopify order
+  - Order verification fallback if webhook fails
+
+**Files to create/modify:**
+
+- `apps/website/src/pages/verify-order.astro` - Order verification page
+- `apps/course/src/lib/enrollment.ts` - Update to check Shopify enrollments
+- `apps/course/src/routes/verify-order.tsx` - Course app verification page
+
+### 28. Course Access Gating (Shopify Orders)
+
+- [ ] Update `hasAccess()` function in course app
+  - Query `enrollments` table for active enrollment
+  - Check both `stripe_checkout_session_id` (Stripe) and `shopify_order_id` (Shopify)
+  - Return true if either exists and status is 'active'
+- [ ] Add enrollment check to course routes
+  - Protect `/essentials/*` routes
+  - Protect `/professionals/*` routes
+  - Show "Purchase to access" message if not enrolled
+  - Redirect to purchase page or order verification
+- [ ] Create enrollment status component
+  - Show which course user has access to
+  - Display purchase date
+  - Link to order details if available
+
+**Files to modify:**
+
+- `apps/course/src/lib/enrollment.ts` - Update access check logic
+- `apps/course/src/routes/essentials/**/*.tsx` - Add enrollment gates
+- `apps/course/src/routes/professionals/**/*.tsx` - Add enrollment gates
+
+**✅ Stage 4.5 Complete**: Discount codes work in cart, bundles available, Shopify orders grant course access
+
+---
+
 ## Stage 5: Email Templates & Content
 
 **Goal**: Create email templates that match section content. No sending yet.
 
-### 24. Email package setup
+### 29. Email package setup
 
 - [ ] Create `packages/guide-email/` or use existing `packages/email/`
 - [ ] Set up Resend client
 - [ ] Create email template components (matching section content)
 
-### 25. Email templates
+### 30. Email templates
 
 - [ ] Create base email template (header, footer, Thetis branding)
 - [ ] Create section email template that:
@@ -402,7 +551,7 @@ CREATE POLICY "Users can view own progress" ON public.user_progress
 - [ ] Add unsubscribe link
 - [ ] Style emails to match website design
 
-### 26. Email content matching
+### 31. Email content matching
 
 - [ ] Ensure email content exactly matches section TSX component content
 - [ ] Create utility to convert TSX component to email HTML
@@ -417,7 +566,7 @@ CREATE POLICY "Users can view own progress" ON public.user_progress
 
 **Goal**: Automate email sending based on rupture date and schedule.
 
-### 27. Email queueing logic (webhook)
+### 32. Email queueing logic (webhook)
 
 - [ ] In webhook handler, after creating enrollment:
   - Import section config from codebase (sections.ts)
@@ -426,7 +575,7 @@ CREATE POLICY "Users can view own progress" ON public.user_progress
   - Insert into `email_queue` table with section_slug
 - [ ] Handle case where user enrolls mid-course (only queue future emails)
 
-### 28. Trigger.dev job setup
+### 33. Trigger.dev job setup
 
 - [ ] Create Trigger.dev job in `packages/jobs/trigger/`
 - [ ] Job: "Send Course Emails"
@@ -441,21 +590,21 @@ CREATE POLICY "Users can view own progress" ON public.user_progress
   - Update `email_queue` status to 'sent'
   - Handle failures (update to 'failed', log error)
 
-### 29. Email scheduling logic
+### 34. Email scheduling logic
 
 - [ ] Calculate which emails to send based on rupture_date
 - [ ] If user enrolls at week 4, only queue emails from day 28 onwards
 - [ ] Skip past emails (don't send retroactively)
 - [ ] Test email queueing with various rupture dates
 
-### 30. Email sending automation
+### 35. Email sending automation
 
 - [ ] Schedule Trigger.dev job to run every hour (or appropriate frequency)
 - [ ] Add retry logic for failed emails
 - [ ] Add email sending logs/analytics
 - [ ] Test end-to-end: purchase → webhook → queue → send
 
-### 31. Email preferences
+### 36. Email preferences
 
 - [ ] Add toggle in dashboard to enable/disable email course
 - [ ] Update `users.email_course_enabled` field
@@ -467,7 +616,7 @@ CREATE POLICY "Users can view own progress" ON public.user_progress
 
 ## Final Steps
 
-### 32. Testing
+### 37. Testing
 
 - [ ] Test all routes work correctly
 - [ ] Test authentication flow
@@ -476,7 +625,7 @@ CREATE POLICY "Users can view own progress" ON public.user_progress
 - [ ] Test email queueing and sending
 - [ ] Test with various rupture dates (past, present, future)
 
-### 33. Deployment
+### 38. Deployment
 
 - [ ] Set up Vercel project for `guide.thetismedical.com`
 - [ ] Configure environment variables
@@ -484,7 +633,7 @@ CREATE POLICY "Users can view own progress" ON public.user_progress
 - [ ] Configure Stripe webhook URL (production)
 - [ ] Deploy and test production
 
-### 34. Documentation
+### 39. Documentation
 
 - [ ] Document environment variables needed
 - [ ] Document Stripe webhook setup
@@ -505,4 +654,9 @@ PUBLIC_STRIPE_PUBLISHABLE_KEY=
 PUBLIC_SUPABASE_URL=
 PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=  # For webhook
+
+# Shopify (for Stage 4.5)
+SHOPIFY_STOREFRONT_ACCESS_TOKEN=
+SHOPIFY_DOMAIN=shop.thetismedical.com
+SHOPIFY_WEBHOOK_SECRET=  # For verifying Shopify webhooks
 ```

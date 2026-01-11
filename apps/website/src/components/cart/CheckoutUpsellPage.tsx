@@ -87,6 +87,18 @@ export function CheckoutUpsellPage() {
 
     const handleContinueToCheckout = () => {
         if (checkoutUrl) {
+            // Apply discount code if available (for Amazon customers)
+            const discountCode = sessionStorage.getItem("amazonDiscountCode");
+            if (discountCode) {
+                try {
+                    const url = new URL(checkoutUrl);
+                    url.searchParams.set("discount", discountCode);
+                    window.location.href = url.toString();
+                    return;
+                } catch {
+                    // If URL parsing fails, use original URL
+                }
+            }
             window.location.href = checkoutUrl;
         }
     };

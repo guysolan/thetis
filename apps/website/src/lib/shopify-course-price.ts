@@ -2,13 +2,13 @@
 const SHOPIFY_DOMAIN = "shop.thetismedical.com";
 const STOREFRONT_ACCESS_TOKEN = "784883c28d6484a8804b44ae00adfb99";
 
-// Product and Variant IDs for courses
+// Product IDs
 export const SHOPIFY_COURSE_PRODUCTS = {
     ESSENTIALS_COURSE: "9846187786568",
     PROFESSIONALS_COURSE: "9846188081480",
 } as const;
 
-// Variant IDs (courses are single-variant products)
+// Variant IDs (GIDs)
 export const SHOPIFY_COURSE_VARIANTS = {
     ESSENTIALS_COURSE: "gid://shopify/ProductVariant/52265314353480",
     PROFESSIONALS_COURSE: "gid://shopify/ProductVariant/52265315828040",

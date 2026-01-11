@@ -2,6 +2,10 @@
 
 You are writing a **single day's lesson** for patients recovering from an Achilles tendon rupture. This is one of **31 short articles** — keep it focused and avoid repeating content from other lessons.
 
+### ⚠️ Critical: Use Consistent Positions
+
+**Before writing, review** [`achilles-recovery-positions.md`](.cursor/commands/achilles-recovery-positions.md) for the agreed-upon positions on all contentious aspects of Achilles rupture recovery. **You must use these positions consistently** across all lessons. If a position conflicts with a clinician's protocol, note that guidance varies by clinician/country and patients should follow their medical instructions.
+
 ### Audience
 
 - **Lay people**, often in shock, anxious, sleep-deprived, and in pain.
@@ -184,6 +188,7 @@ Skip images for:
 
 ## Checklist before submitting a lesson
 
+- [ ] **Reviewed [`achilles-recovery-positions.md`](.cursor/commands/achilles-recovery-positions.md)** and used consistent positions throughout
 - [ ] Intro includes hope anchor (early lessons)
 - [ ] Emotional validation where appropriate
 - [ ] Jargon is defined in plain English

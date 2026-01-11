@@ -31,7 +31,22 @@ export const $cartLines = computed(
 
 export const $subtotal = computed($cart, (cart) => cart?.cost?.subtotalAmount);
 
-export const $checkoutUrl = computed($cart, (cart) => cart?.checkoutUrl);
+export const $checkoutUrl = computed($cart, (cart) => {
+    const baseUrl = cart?.checkoutUrl;
+    if (!baseUrl) return null;
+
+    // Check for discount code in sessionStorage (for Amazon customers)
+    if (typeof window !== "undefined") {
+        const discountCode = sessionStorage.getItem("amazonDiscountCode");
+        if (discountCode) {
+            const url = new URL(baseUrl);
+            url.searchParams.set("discount", discountCode);
+            return url.toString();
+        }
+    }
+
+    return baseUrl;
+});
 
 // Actions
 export function openCart() {

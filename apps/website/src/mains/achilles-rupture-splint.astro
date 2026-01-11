@@ -15,6 +15,7 @@ import ComfortableRecoveryReviews from "@/sections/achilles-rupture-splint/Comfo
 import OrderYourSplint from "@/sections/achilles-rupture-splint/OrderYourSplint.astro";
 import SleepInYourWelliesSection from "@/sections/achilles-rupture-splint/SleepInYourWelliesSection.astro";
 import SplintDownloads from "@/sections/achilles-rupture-splint/SplintDownloads.astro";
+import SplintTimeline from "@/sections/achilles-rupture-splint/SplintTimeline.astro";
 import StickyAddToCart from "@/components/StickyAddToCart.tsx";
 import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
 import ComparisonTable from "@/components/ComparisonTable.tsx";
@@ -107,6 +108,9 @@ const currentContent = content[lang as keyof typeof content];
         <ReadyForRelief lang={lang} />
 
         <ComfortableRecoveryReviews lang={lang} />
+
+        <!-- Splint Timeline -->
+        <SplintTimeline lang={lang} />
 
         <!-- Lazy load YouTube iframe -->
         <div class="relative mx-auto mt-8 w-full">

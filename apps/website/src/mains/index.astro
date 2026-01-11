@@ -4,12 +4,12 @@ import ThetisSchema from "@/schemas/ThetisSchema.astro";
 import LandingHero from "@/sections/index/LandingHero.astro";
 import Reviews from "@/components/reviews/InfiniteReviews.astro";
 import "@thetis/ui/globals.css";
-import ProfessionalOpinionsCarousel from "@/sections/index/ProfessionalOpinionsCarousel";
-import ComplianceLogos from "@/sections/index/compliance/ComplianceLogos.astro";
-import NightSplintFAQs from "@/sections/achilles-rupture-splint/SplintFAQs.tsx";
-import ThetisMythology from "@/sections/index/ThetisMythology.astro";
-import WhatWeOffer from "@/sections/index/WhatWeOffer.astro";
+import InteractiveChoice from "@/sections/index/InteractiveChoice";
+import WhyThetis from "@/sections/index/WhyThetis.astro";
 import OurTeam from "@/sections/index/OurTeam.astro";
+import ProfessionalOpinionsCarousel from "@/sections/index/ProfessionalOpinionsCarousel";
+import OurImpact from "@/sections/index/OurImpact.astro";
+import FinalCTA from "@/sections/index/FinalCTA.astro";
 import type { Lang } from "@/config/languages.ts";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
@@ -59,29 +59,29 @@ const currentContent = content[lang as keyof typeof content];
     lang={lang}
 >
     <main class="space-y-16">
-        <!-- 1. Hook: Better Sleep, Better Comfort -->
+        <!-- 1. Hero Section with Testimonial Carousel -->
         <LandingHero lang={lang} />
 
         <!-- 2. Social Proof: Patient Reviews -->
         <Reviews />
 
-        <!-- 3. What We Offer: Products + Education (clear value prop) -->
-        <WhatWeOffer lang={lang} />
+        <!-- 3. Why Thetis Section - Build trust early -->
+        <WhyThetis lang={lang} />
 
-        <!-- 4. Trust Signals: Compliance & Certifications -->
-        <ComplianceLogos />
-
-        <!-- 5. Our Team: Family Story (establishes credibility) -->
+        <!-- 4. Our Story Section - Build trust early -->
         <OurTeam lang={lang} />
 
-        <!-- 6. Brand Story: Who We Are (establishes mission before selling) -->
-        <ThetisMythology lang={lang} />
-
-        <!-- 7. Expert Endorsements: Professional Validation -->
+        <!-- 5. Professional Opinions - Build credibility before problem identification -->
         <ProfessionalOpinionsCarousel lang={lang} client:load />
 
-        <!-- 8. FAQ: Answer Remaining Questions -->
-        <NightSplintFAQs lang={lang} client:load />
+        <!-- 6. Interactive Choice Section - Problem → Solution -->
+        <InteractiveChoice client:load />
+
+        <!-- 7. Our Impact - General stats after solution -->
+        <OurImpact lang={lang} />
+
+        <!-- 8. Final CTA Section -->
+        <FinalCTA lang={lang} />
     </main>
 </Layout>
 

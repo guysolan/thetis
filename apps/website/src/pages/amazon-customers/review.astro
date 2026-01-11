@@ -1,0 +1,149 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import HighlightedWord from "@/components/HighlightedWord";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Video, Upload, Check, ArrowLeft, DollarSign } from "lucide-react";
+import { VideoReviewForm } from "@/components/VideoReviewForm";
+---
+
+<Layout
+    title="Submit Video Review - Earn $10 Cashback | Thetis Medical"
+    description="Upload your video review of our night splint and earn $10 cashback if approved. Help others while earning back!"
+    image="https://thetismedical.com/images/night-splint.png"
+    lang="en"
+>
+    <main>
+        <ColorGradient>
+            <div class="mx-auto px-4 py-16 md:py-24 max-w-4xl text-center">
+                <a
+                    href="/amazon-customers"
+                    class="inline-flex items-center gap-2 mb-6 font-medium text-primary hover:text-primary/80 text-sm"
+                >
+                    <ArrowLeft className="w-4 h-4" />
+                    Back to Special Offers
+                </a>
+                <div
+                    class="inline-flex items-center gap-2 bg-primary/10 dark:bg-primary/20 mb-4 px-4 py-2 rounded-full font-semibold text-primary text-sm"
+                >
+                    <DollarSign className="w-4 h-4" />
+                    Earn $10 Cashback
+                </div>
+                <h1
+                    class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-4xl md:text-5xl"
+                >
+                    Submit Your <HighlightedWord>Video Review</HighlightedWord>
+                </h1>
+                <p
+                    class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg md:text-xl"
+                >
+                    Share your experience with our night splint and help others
+                    on their recovery journey. If your video is approved, you'll
+                    receive $10 cashback.
+                </p>
+            </div>
+        </ColorGradient>
+
+        <!-- Review Guidelines -->
+        <section class="py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-3xl">
+                <div
+                    class="bg-primary/10 dark:bg-primary/20 mb-8 p-6 border border-primary/20 dark:border-primary/30 rounded-xl"
+                >
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-xl"
+                    >
+                        Review Guidelines
+                    </h2>
+                    <ul
+                        class="space-y-3 text-neutral-700 dark:text-neutral-300"
+                    >
+                        <li class="flex items-start gap-3">
+                            <Check
+                                className="mt-0.5 w-5 h-5 text-primary shrink-0"
+                            />
+                            <span>
+                                Video should be at least 30 seconds long
+                            </span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <Check
+                                className="mt-0.5 w-5 h-5 text-primary shrink-0"
+                            />
+                            <span>
+                                Share honest feedback about your experience with
+                                the splint
+                            </span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <Check
+                                className="mt-0.5 w-5 h-5 text-primary shrink-0"
+                            />
+                            <span>
+                                Show how you use the splint (optional but
+                                helpful)
+                            </span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <Check
+                                className="mt-0.5 w-5 h-5 text-primary shrink-0"
+                            />
+                            <span>
+                                Keep it respectful and appropriate for all
+                                audiences
+                            </span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <Check
+                                className="mt-0.5 w-5 h-5 text-primary shrink-0"
+                            />
+                            <span>
+                                Reviews are typically approved within 3-5
+                                business days
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Upload Form -->
+                <div
+                    class="bg-white dark:bg-neutral-800 shadow-lg p-8 border border-neutral-200 dark:border-neutral-700 rounded-xl"
+                >
+                    <VideoReviewForm client:load />
+                </div>
+
+                <!-- What Happens Next -->
+                <div
+                    class="bg-neutral-50 dark:bg-neutral-900 mt-8 p-6 rounded-xl"
+                >
+                    <h3
+                        class="mb-4 font-semibold text-neutral-900 dark:text-neutral-100 text-lg"
+                    >
+                        What Happens Next?
+                    </h3>
+                    <ol
+                        class="space-y-3 text-neutral-600 dark:text-neutral-400 text-sm list-decimal list-inside"
+                    >
+                        <li>
+                            We'll review your video submission (usually within
+                            3-5 business days)
+                        </li>
+                        <li>
+                            If approved, you'll receive an email with
+                            instructions to claim your $10 cashback
+                        </li>
+                        <li>
+                            Cashback is paid via PayPal or bank transfer within
+                            7-10 business days
+                        </li>
+                        <li>
+                            Your review may be featured on our website (with
+                            your permission)
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

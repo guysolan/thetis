@@ -9,7 +9,7 @@ export interface SectionMetadata {
   section_number: number;
   days_after_rupture: number; // Calculated as week * 7 + day
   email_number: number;
-  course_type: "standard" | "premium";
+  course_type: "essentials" | "pro";
   status: SectionStatus;
 }
 
@@ -32,7 +32,7 @@ function createSection(
     section_number,
     days_after_rupture: week * 7 + day,
     email_number: section_number,
-    course_type: "standard",
+    course_type: "essentials",
     status,
   };
 }
@@ -370,7 +370,7 @@ export function getSectionByWeekDay(
 }
 
 export function getSectionsByCourseType(
-  courseType: "standard" | "premium",
+  courseType: "essentials" | "pro",
 ): SectionMetadata[] {
   return sections.filter((s) => s.course_type === courseType);
 }

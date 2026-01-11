@@ -19,7 +19,7 @@ import {
 import type { QueryClient } from "@tanstack/react-query";
 import { BookOpen, ExternalLink, Loader2, Menu, Star } from "lucide-react";
 import { cn } from "../lib/utils.js";
-import { WEBSITE_URL } from "@/lib/env";
+import { useCoursePrice } from "@/hooks/use-course-price";
 
 function RouterSpinner() {
   const isLoading = useRouterState({ select: (s) => s.status === "pending" });
@@ -36,20 +36,20 @@ function RouterSpinner() {
 
 const navLinks = [
   {
-    title: "Standard",
-    href: "/standard",
+    title: "Essentials",
+    href: "/essentials",
     icon: BookOpen,
-    courseType: "standard" as const,
+    courseType: "essentials" as const,
   },
   {
-    title: "Premium",
-    href: "/premium",
+    title: "Professionals",
+    href: "/professionals",
     icon: Star,
-    courseType: "premium" as const,
+    courseType: "professionals" as const,
   },
 ];
 
-function NavLink({
+function NavLinkWithPrice({
   link,
   isActive,
   isMobile = false,
@@ -58,6 +58,8 @@ function NavLink({
   isActive: boolean;
   isMobile?: boolean;
 }) {
+  const { formattedPrice, isLoading } = useCoursePrice(link.courseType);
+
   if (isMobile) {
     return (
       <SheetClose asChild>
@@ -82,6 +84,14 @@ function NavLink({
           </div>
           <div className="flex-1 min-w-0">
             <div className="font-semibold">{link.title}</div>
+            {isLoading
+              ? <div className="bg-muted mt-1 rounded w-16 h-4 animate-pulse" />
+              : (
+                <div className="text-muted-foreground text-sm">
+                  {formattedPrice ||
+                    (link.courseType === "essentials" ? "£29.99" : "£79.99")}
+                </div>
+              )}
           </div>
         </Link>
       </SheetClose>
@@ -92,14 +102,24 @@ function NavLink({
     <Link
       to={link.href}
       className={cn(
-        "inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-colors",
+        "inline-flex flex-col items-start gap-1 px-4 py-2 rounded-lg font-medium text-sm transition-colors",
         isActive
           ? "bg-primary/10 text-primary"
           : "text-muted-foreground hover:bg-muted hover:text-foreground",
       )}
     >
-      <link.icon className="w-4 h-4" />
-      <span>{link.title}</span>
+      <div className="flex items-center gap-2">
+        <link.icon className="w-4 h-4" />
+        <span>{link.title}</span>
+      </div>
+      {isLoading
+        ? <div className="bg-muted rounded w-12 h-3 animate-pulse" />
+        : (
+          <span className="text-muted-foreground text-xs">
+            {formattedPrice ||
+              (link.courseType === "essentials" ? "£29.99" : "£79.99")}
+          </span>
+        )}
     </Link>
   );
 }
@@ -112,7 +132,7 @@ function DesktopNav() {
       {navLinks.map((link) => {
         const isActive = matchRoute({ to: link.href, fuzzy: true });
         return (
-          <NavLink
+          <NavLinkWithPrice
             key={link.href}
             link={link}
             isActive={!!isActive}
@@ -120,7 +140,7 @@ function DesktopNav() {
         );
       })}
       <a
-        href={WEBSITE_URL}
+        href="https://thetismedical.com"
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-1.5 hover:bg-muted px-4 py-2 rounded-lg font-medium text-muted-foreground hover:text-foreground text-sm transition-colors"
@@ -159,7 +179,7 @@ function MobileNav() {
           {navLinks.map((link) => {
             const isActive = matchRoute({ to: link.href, fuzzy: true });
             return (
-              <NavLink
+              <NavLinkWithPrice
                 key={link.href}
                 link={link}
                 isActive={!!isActive}
@@ -172,7 +192,7 @@ function MobileNav() {
         <SheetFooter className="mt-8">
           <SheetClose asChild>
             <a
-              href={WEBSITE_URL}
+              href="https://thetismedical.com"
               target="_blank"
               rel="noopener noreferrer"
               className="flex justify-center items-center gap-2 bg-muted p-3 rounded-lg font-medium text-muted-foreground hover:text-foreground text-sm transition-colors"

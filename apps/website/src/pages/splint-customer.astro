@@ -1,0 +1,494 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import HighlightedWord from "@/components/HighlightedWord";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import {
+    Mail,
+    BookOpen,
+    GraduationCap,
+    Check,
+    Star,
+    Video,
+    ArrowRight,
+    Gift,
+    DollarSign,
+    Sparkles,
+} from "lucide-react";
+import CourseBuyButton from "@/components/CourseBuyButton";
+import {
+    fetchCoursePrice,
+    SHOPIFY_COURSE_PRODUCTS,
+} from "@/lib/shopify-course-price";
+import { EmailCourseForm } from "@/components/EmailCourseForm";
+
+// Product IDs with fallback
+const PRODUCT_IDS = {
+    ESSENTIALS_COURSE:
+        SHOPIFY_COURSE_PRODUCTS?.ESSENTIALS_COURSE || "9846187786568",
+    PROFESSIONALS_COURSE:
+        SHOPIFY_COURSE_PRODUCTS?.PROFESSIONALS_COURSE || "9846188081480",
+};
+
+// Fetch prices
+const standardPriceData = await fetchCoursePrice(
+    PRODUCT_IDS.ESSENTIALS_COURSE,
+    "GB",
+);
+const premiumPriceData = await fetchCoursePrice(
+    PRODUCT_IDS.PROFESSIONALS_COURSE,
+    "GB",
+);
+
+// Calculate discounted prices (20% off)
+const standardPrice = standardPriceData?.amount
+    ? parseFloat(standardPriceData.amount)
+    : 29.99;
+const premiumPrice = premiumPriceData?.amount
+    ? parseFloat(premiumPriceData.amount)
+    : 99;
+
+const standardDiscounted = standardPrice * 0.8;
+const premiumDiscounted = premiumPrice * 0.8;
+
+const currencyCode = standardPriceData?.currencyCode || "GBP";
+
+const formatter = new Intl.NumberFormat(
+    currencyCode === "GBP" ? "en-GB" : "en-US",
+    {
+        style: "currency",
+        currency: currencyCode,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    },
+);
+
+const standardFormatted = formatter.format(standardPrice);
+const premiumFormatted = formatter.format(premiumPrice);
+const standardDiscountedFormatted = formatter.format(standardDiscounted);
+const premiumDiscountedFormatted = formatter.format(premiumDiscounted);
+
+const discountCode = "SPLINT20"; // 20% discount code for Splint customers
+---
+
+<Layout
+    title="Special Offers for Splint Customers | Thetis Medical"
+    description="Exclusive 20% discount on recovery courses, free email guidance, and $10 cashback for video reviews. Special offers for Splint splint customers."
+    image="https://thetismedical.com/images/night-splint.png"
+    lang="en"
+>
+    <main>
+        <ColorGradient>
+            <div class="mx-auto px-4 py-16 md:py-24 max-w-4xl text-center">
+                <div
+                    class="inline-flex items-center gap-2 bg-primary/10 dark:bg-primary/20 mb-4 px-4 py-2 rounded-full font-semibold text-primary text-sm"
+                >
+                    <Gift className="w-4 h-4" />
+                    Exclusive Offers for Splint Customers
+                </div>
+                <h1
+                    class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-4xl md:text-5xl"
+                >
+                    Thank You for Your <HighlightedWord
+                        >Purchase</HighlightedWord
+                    >
+                </h1>
+                <p
+                    class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg md:text-xl"
+                >
+                    As a thank you for purchasing our night splint, we're
+                    offering you exclusive benefits to help with your recovery
+                    journey. Follow these steps below right away to maximize
+                    your recovery and unlock special rewards.
+                </p>
+            </div>
+        </ColorGradient>
+
+        <!-- Step-by-Step Guide -->
+        <section class="py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-5xl">
+                <!-- Step 1: Email Course -->
+                <div
+                    id="step-1"
+                    class="bg-white dark:bg-neutral-800 shadow-lg mb-8 p-8 border-2 border-primary rounded-xl"
+                >
+                    <div class="flex md:flex-row flex-col items-start gap-6">
+                        <div
+                            class="flex justify-center items-center bg-primary rounded-full w-16 h-16 font-bold text-white text-2xl shrink-0"
+                        >
+                            1
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <Mail className="w-6 h-6 text-primary" />
+                                <h3
+                                    class="font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
+                                >
+                                    Get Free Personalized Email Guidance
+                                </h3>
+                            </div>
+                            <p
+                                class="mb-6 text-neutral-600 dark:text-neutral-400"
+                            >
+                                Sign up for our free email course and receive
+                                personalized recovery tips timed perfectly to
+                                your injury date. Week 4 advice arrives in week
+                                4 — automatically.
+                            </p>
+                            <div
+                                class="bg-primary/10 dark:bg-primary/20 mb-6 p-4 rounded-lg"
+                            >
+                                <EmailCourseForm client:load />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Courses with Discount -->
+                <div
+                    class="bg-white dark:bg-neutral-800 shadow-lg mb-8 p-8 border-2 border-primary/30 dark:border-primary/50 rounded-xl"
+                >
+                    <div class="flex md:flex-row flex-col items-start gap-6">
+                        <div
+                            class="flex justify-center items-center bg-primary rounded-full w-16 h-16 font-bold text-white text-2xl shrink-0"
+                        >
+                            2
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <BookOpen className="w-6 h-6 text-primary" />
+                                <h3
+                                    class="font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
+                                >
+                                    Upgrade Your Recovery with 20% Off
+                                </h3>
+                            </div>
+                            <p
+                                class="mb-6 text-neutral-600 dark:text-neutral-400"
+                            >
+                                Get comprehensive recovery guidance with our
+                                structured courses. Use code{" "}
+                                <span
+                                    class="bg-primary/10 dark:bg-primary/20 px-2 py-1 rounded font-mono font-bold text-primary"
+                                >
+                                    {discountCode}
+                                </span>{" "}
+                                at checkout for 20% off.
+                            </p>
+
+                            <div class="gap-6 grid md:grid-cols-2">
+                                <!-- Standard Course -->
+                                <div
+                                    class="bg-neutral-50 dark:bg-neutral-900 p-6 border border-neutral-200 dark:border-neutral-700 rounded-lg"
+                                >
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <BookOpen
+                                            className="w-5 h-5 text-primary"
+                                        />
+                                        <h4
+                                            class="font-bold text-neutral-900 dark:text-neutral-100 text-xl"
+                                        >
+                                            Standard Course
+                                        </h4>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="flex items-baseline gap-2">
+                                            <span
+                                                class="text-neutral-400 dark:text-neutral-500 text-lg line-through"
+                                            >
+                                                {standardFormatted}
+                                            </span>
+                                            <span
+                                                class="font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
+                                            >
+                                                {standardDiscountedFormatted}
+                                            </span>
+                                        </div>
+                                        <p
+                                            class="mt-1 font-semibold text-primary text-sm"
+                                        >
+                                            Save{" "}
+                                            {
+                                                formatter.format(
+                                                    standardPrice -
+                                                        standardDiscounted,
+                                                )
+                                            }
+                                        </p>
+                                    </div>
+                                    <ul
+                                        class="space-y-2 mb-4 text-neutral-600 dark:text-neutral-400 text-sm"
+                                    >
+                                        <li class="flex items-center gap-2">
+                                            <Check
+                                                className="w-4 h-4 text-primary shrink-0"
+                                            />
+                                            31 structured lessons
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <Check
+                                                className="w-4 h-4 text-primary shrink-0"
+                                            />
+                                            Questions for your surgeon
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <Check
+                                                className="w-4 h-4 text-primary shrink-0"
+                                            />
+                                            Physio exercises
+                                        </li>
+                                    </ul>
+                                    <CourseBuyButton
+                                        productId={PRODUCT_IDS.ESSENTIALS_COURSE}
+                                        variant="default"
+                                        className="justify-center w-full"
+                                        client:load
+                                    >
+                                        Add to Cart
+                                    </CourseBuyButton>
+                                    <p
+                                        class="mt-2 text-neutral-500 dark:text-neutral-400 text-xs text-center"
+                                    >
+                                        Use code {discountCode} at checkout
+                                    </p>
+                                </div>
+
+                                <!-- Premium Course -->
+                                <div
+                                    class="relative bg-neutral-50 dark:bg-neutral-900 p-6 border-2 border-primary rounded-lg"
+                                >
+                                    <div
+                                        class="top-0 right-3 absolute bg-primary px-2 py-1 rounded-b-md font-semibold text-white text-xs"
+                                    >
+                                        BEST VALUE
+                                    </div>
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <GraduationCap
+                                            className="w-5 h-5 text-primary"
+                                        />
+                                        <Star
+                                            className="fill-primary w-4 h-4 text-primary"
+                                        />
+                                        <h4
+                                            class="font-bold text-neutral-900 dark:text-neutral-100 text-xl"
+                                        >
+                                            Premium Course
+                                        </h4>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="flex items-baseline gap-2">
+                                            <span
+                                                class="text-neutral-400 dark:text-neutral-500 text-lg line-through"
+                                            >
+                                                {premiumFormatted}
+                                            </span>
+                                            <span
+                                                class="font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
+                                            >
+                                                {premiumDiscountedFormatted}
+                                            </span>
+                                        </div>
+                                        <p
+                                            class="mt-1 font-semibold text-primary text-sm"
+                                        >
+                                            Save{" "}
+                                            {
+                                                formatter.format(
+                                                    premiumPrice -
+                                                        premiumDiscounted,
+                                                )
+                                            }
+                                        </p>
+                                    </div>
+                                    <ul
+                                        class="space-y-2 mb-4 text-neutral-600 dark:text-neutral-400 text-sm"
+                                    >
+                                        <li class="flex items-center gap-2">
+                                            <Check
+                                                className="w-4 h-4 text-primary shrink-0"
+                                            />
+                                            Everything in Standard
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <Check
+                                                className="w-4 h-4 text-primary shrink-0"
+                                            />
+                                            Surgeon video lessons
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <Check
+                                                className="w-4 h-4 text-primary shrink-0"
+                                            />
+                                            Expert support
+                                        </li>
+                                    </ul>
+                                    <CourseBuyButton
+                                        productId={PRODUCT_IDS.PROFESSIONALS_COURSE}
+                                        variant="default"
+                                        className="justify-center w-full"
+                                        client:load
+                                    >
+                                        Add to Cart
+                                    </CourseBuyButton>
+                                    <p
+                                        class="mt-2 text-neutral-500 dark:text-neutral-400 text-xs text-center"
+                                    >
+                                        Use code {discountCode} at checkout
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Video Review Cashback -->
+                <div
+                    class="bg-white dark:bg-neutral-800 shadow-lg p-8 border-2 border-primary/30 dark:border-primary/50 rounded-xl"
+                >
+                    <div class="flex md:flex-row flex-col items-start gap-6">
+                        <div
+                            class="flex justify-center items-center bg-primary rounded-full w-16 h-16 font-bold text-white text-2xl shrink-0"
+                        >
+                            3
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <DollarSign className="w-6 h-6 text-primary" />
+                                <h3
+                                    class="font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
+                                >
+                                    Earn $10 Cashback for Your Video Review
+                                </h3>
+                            </div>
+                            <p
+                                class="mb-6 text-neutral-600 dark:text-neutral-400"
+                            >
+                                Share your recovery journey with a video review.
+                                If approved, you'll receive $10 cashback via
+                                PayPal or bank transfer. Help others while
+                                earning back!
+                            </p>
+                            <div
+                                class="bg-primary/10 dark:bg-primary/20 mb-6 p-4 rounded-lg"
+                            >
+                                <div class="flex items-start gap-3 mb-4">
+                                    <Video
+                                        className="mt-0.5 w-5 h-5 text-primary shrink-0"
+                                    />
+                                    <div>
+                                        <h4
+                                            class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100"
+                                        >
+                                            What We're Looking For:
+                                        </h4>
+                                        <ul
+                                            class="space-y-1 text-neutral-600 dark:text-neutral-400 text-sm"
+                                        >
+                                            <li class="flex items-start gap-2">
+                                                <Check
+                                                    className="mt-0.5 w-4 h-4 text-primary shrink-0"
+                                                />
+                                                <span>
+                                                    Honest feedback about your
+                                                    experience with the splint
+                                                </span>
+                                            </li>
+                                            <li class="flex items-start gap-2">
+                                                <Check
+                                                    className="mt-0.5 w-4 h-4 text-primary shrink-0"
+                                                />
+                                                <span>
+                                                    Video showing how you use
+                                                    the splint (optional but
+                                                    helpful)
+                                                </span>
+                                            </li>
+                                            <li class="flex items-start gap-2">
+                                                <Check
+                                                    className="mt-0.5 w-4 h-4 text-primary shrink-0"
+                                                />
+                                                <span>
+                                                    At least 30 seconds long
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <a
+                                    href="/splint-customers/review"
+                                    class={cn(
+                                        buttonVariants({
+                                            variant: "default",
+                                            size: "lg",
+                                        }),
+                                        "gap-2 w-full justify-center",
+                                    )}
+                                >
+                                    <Video className="w-4 h-4" />
+                                    Upload Your Video Review
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary CTA -->
+        <section class="bg-neutral-50 dark:bg-neutral-900 py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-3xl text-center">
+                <Sparkles className="mx-auto mb-4 w-12 h-12 text-primary" />
+                <h2
+                    class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
+                >
+                    Ready to Accelerate Your Recovery?
+                </h2>
+                <p class="mb-6 text-neutral-600 dark:text-neutral-400 text-lg">
+                    Start with the free email course, upgrade to a comprehensive
+                    course with 20% off, and earn cashback with your review.
+                </p>
+                <div
+                    class="flex sm:flex-row flex-col justify-center items-center gap-4"
+                >
+                    <a
+                        href="#step-1"
+                        class={cn(
+                            buttonVariants({
+                                variant: "default",
+                                size: "lg",
+                            }),
+                            "gap-2",
+                        )}
+                    >
+                        <Mail className="w-4 h-4" />
+                        Start with Free Email Course
+                    </a>
+                    <a
+                        href="/course/standard"
+                        class={cn(
+                            buttonVariants({
+                                variant: "outline",
+                                size: "lg",
+                            }),
+                            "gap-2",
+                        )}
+                    >
+                        <BookOpen className="w-4 h-4" />
+                        View All Courses
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Script to apply discount code at checkout -->
+    <script define:vars={{ discountCode }}>
+        {
+            // Store discount code in sessionStorage for checkout
+            if (typeof window !== "undefined") {
+                sessionStorage.setItem("splintDiscountCode", discountCode);
+            }
+        }
+    </script>
+</Layout>

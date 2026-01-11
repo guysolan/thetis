@@ -1,0 +1,202 @@
+---
+// Course Buy Button Component
+// Accept productId as a prop
+const { productId } = Astro.props;
+
+// Create a unique ID for the component instance
+const componentId = `course-buy-button-${productId}-${Math.floor(Math.random() * 10000000000)}`;
+---
+
+<div id={componentId} class="flex justify-center w-full"></div>
+
+<style>
+    /* Fix Shopify buy button wrapper margin */
+    #${componentId} .shopify-buy__btn-wrapper {
+        margin-top: 0 !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Match button styles to UI package */
+    #${componentId} .shopify-buy__btn {
+        /* Base styles from button.tsx */
+        display: inline-flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        border-radius: 0.125rem !important; /* rounded-sm */
+        font-weight: 600 !important; /* font-semibold */
+        transition: all 0.2s !important;
+        cursor: pointer !important;
+        
+        /* Size: lg from button.tsx */
+        height: 2.5rem !important; /* h-10 on mobile, md:h-12 on desktop */
+        padding-left: 1.5rem !important; /* px-6 */
+        padding-right: 1.5rem !important;
+        font-size: 1rem !important; /* text-base */
+        
+        /* Variant: default from button.tsx */
+        background-color: hsl(161, 60%, 40%) !important; /* bg-primary */
+        color: white !important; /* text-primary-foreground */
+        
+        /* Hover */
+        opacity: 1 !important;
+    }
+
+    #${componentId} .shopify-buy__btn:hover {
+        background-color: hsl(161, 60%, 36%) !important; /* hover:bg-primary/90 */
+        transform: scale(1.02) !important; /* hover:scale-[1.02] */
+    }
+
+    #${componentId} .shopify-buy__btn:focus {
+        outline: 2px solid transparent !important;
+        outline-offset: 2px !important;
+        box-shadow: 0 0 0 2px hsl(161, 60%, 40%), 0 0 0 4px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    @media (min-width: 768px) {
+        #${componentId} .shopify-buy__btn {
+            height: 3rem !important; /* md:h-12 */
+            padding-left: 2rem !important; /* md:px-8 */
+            padding-right: 2rem !important;
+        }
+    }
+</style>
+
+<script define:vars={{ productId, componentId }}>
+    /*<![CDATA[*/
+    (function () {
+        var scriptURL =
+            "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js";
+        if (window.ShopifyBuy) {
+            if (window.ShopifyBuy.UI) {
+                ShopifyBuyInit();
+            } else {
+                loadScript();
+            }
+        } else {
+            loadScript();
+        }
+        function loadScript() {
+            var script = document.createElement("script");
+            script.async = true;
+            script.src = scriptURL;
+            (
+                document.getElementsByTagName("head")[0] ||
+                document.getElementsByTagName("body")[0]
+            ).appendChild(script);
+            script.onload = ShopifyBuyInit;
+        }
+        function ShopifyBuyInit() {
+            var client = ShopifyBuy.buildClient({
+                domain: "shop.thetismedical.com",
+                storefrontAccessToken: "784883c28d6484a8804b44ae00adfb99",
+            });
+            ShopifyBuy.UI.onReady(client).then(function (ui) {
+                if (!document.getElementById(componentId)) return;
+
+                ui.createComponent("product", {
+                    id: productId,
+                    node: document.getElementById(componentId),
+                    moneyFormat: "%C2%A3%7B%7Bamount%7D%7D",
+                    options: {
+                        product: {
+                            contents: {
+                                img: false,
+                                title: false,
+                                price: false,
+                                options: false,
+                                select: false,
+                                button: true,
+                            },
+                            styles: {
+                                product: {
+                                    "@media (min-width: 601px)": {
+                                        "max-width": "100%",
+                                        "margin-left": "0px",
+                                        "margin-bottom": "0px",
+                                    },
+                                    "text-align": "center",
+                                },
+                                button: {
+                                    "font-family": "inherit",
+                                    "font-size": "16px",
+                                    "font-weight": "600",
+                                    "padding-top": "0",
+                                    "padding-bottom": "0",
+                                    "height": "2.5rem",
+                                    ":hover": {
+                                        "background-color": "hsl(161, 60%, 36%)",
+                                        "transform": "scale(1.02)",
+                                    },
+                                    "background-color": "hsl(161, 60%, 40%)",
+                                    ":focus": {
+                                        "background-color": "hsl(161, 60%, 36%)",
+                                    },
+                                    "border-radius": "0.125rem",
+                                    "padding-left": "1.5rem",
+                                    "padding-right": "1.5rem",
+                                    "@media (min-width: 768px)": {
+                                        "height": "3rem",
+                                        "padding-left": "2rem",
+                                        "padding-right": "2rem",
+                                    },
+                                },
+                                buttonWrapper: {
+                                    "margin-top": "0",
+                                    "display": "flex",
+                                    "justify-content": "center",
+                                    "align-items": "center",
+                                },
+                            },
+              text: {
+                button: "Start Now",
+              },
+                        },
+                        cart: {
+                            styles: {
+                                button: {
+                                    "font-family": "inherit",
+                                    "font-size": "16px",
+                                    "padding-top": "14px",
+                                    "padding-bottom": "14px",
+                                    ":hover": {
+                                        "background-color":
+                                            "hsl(161, 60%, 40%, 0.9)",
+                                    },
+                                    "background-color": "hsl(161, 60%, 40%)",
+                                    ":focus": {
+                                        "background-color":
+                                            "hsl(161, 60%, 40%, 0.9)",
+                                    },
+                                    "border-radius": "8px",
+                                },
+                            },
+                            text: {
+                                total: "Subtotal",
+                                button: "Checkout",
+                            },
+                        },
+                        toggle: {
+                            styles: {
+                                toggle: {
+                                    "font-family": "inherit",
+                                    "background-color": "hsl(161, 60%, 40%)",
+                                    ":hover": {
+                                        "background-color":
+                                            "hsl(161, 60%, 40%, 0.9)",
+                                    },
+                                    ":focus": {
+                                        "background-color":
+                                            "hsl(161, 60%, 40%, 0.9)",
+                                    },
+                                },
+                            },
+                        },
+                    },
+                });
+            });
+        }
+    })();
+    /*]]>*/
+</script>

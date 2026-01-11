@@ -15,7 +15,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By now, you should be in your walking boot — your constant companion for the next 8–12 weeks. Getting the fit right and understanding how wedges work makes a huge difference to your comfort and recovery. This lesson covers the practical essentials: fitting, wedges, and what to wear on your other foot.",
+        "By now, you should be in your walking boot — your constant companion for the next 8–12 weeks. Getting the fit right and understanding how wedges work makes a huge difference to your comfort and recovery. This lesson covers the practical standard: fitting, wedges, and what to wear on your other foot.",
 
     blocks: [
         {
@@ -25,7 +25,7 @@ export const content: SectionContent = {
         },
         {
             type: "checklist",
-            title: "Boot essentials",
+            title: "Boot standard",
             items: [
                 {
                     text:

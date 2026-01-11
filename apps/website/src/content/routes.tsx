@@ -187,9 +187,9 @@ export const courseRoutes: BaseRoute[] = [
     variant: "outline",
   },
   {
-    slug: "course/essentials",
+    slug: "course/standard",
     title: {
-      en: "Essentials Course",
+      en: "standard Course",
       de: "Grundlagen-Kurs",
       fr: "Cours Essentiels",
       es: "Curso Esenciales",
@@ -208,7 +208,7 @@ export const courseRoutes: BaseRoute[] = [
         "31 lezioni strutturate che coprono ogni fase del recupero dalla rottura di Achille. Guida esperta per 29 €.",
     },
     slugTranslations: {
-      en: "course/essentials",
+      en: "course/standard",
       de: "kurs/grundlagen",
       fr: "cours/essentiels",
       es: "curso/esenciales",
@@ -534,8 +534,8 @@ export const legacyCourseRoute: BaseRoute = {
 
 // External guide routes (hosted on guide.thetismedical.com)
 export const guideRoutes = {
-  essentials: {
-    href: "https://guide.thetismedical.com/essentials",
+  standard: {
+    href: "https://guide.thetismedical.com/standard",
     title: {
       en: "Patient Recovery Guide",
       de: "Patienten-Genesungsleitfaden",
@@ -557,8 +557,8 @@ export const guideRoutes = {
     },
     icon: <BookOpen />,
   },
-  professionals: {
-    href: "https://guide.thetismedical.com/professionals",
+  premium: {
+    href: "https://guide.thetismedical.com/premium",
     title: {
       en: "Clinician Guide",
       de: "Klinikerleitfaden",
@@ -568,7 +568,7 @@ export const guideRoutes = {
     },
     description: {
       en:
-        "Evidence-based protocols and resources for healthcare professionals managing Achilles rupture patients.",
+        "Evidence-based protocols and resources by healthcare professionals managing Achilles rupture patients.",
       de:
         "Evidenzbasierte Protokolle und Ressourcen für Gesundheitsfachkräfte, die Achillessehnenruptur-Patienten betreuen.",
       fr:
@@ -755,9 +755,9 @@ export const productRoutes: BaseRoute[] = [
 // Partner routes
 export const partnerRoutes: BaseRoute[] = [
   {
-    slug: "professionals",
+    slug: "premium",
     title: {
-      en: "Professionals",
+      en: "Premium",
       de: "Fachkräfte",
       fr: "Professionnels",
       es: "Profesionales",

@@ -6,9 +6,9 @@ const { lang = "en" } = Astro.props as { lang: Lang };
 
 const content = {
     en: {
-        tagline: "Who We Are",
-        title: "A Family",
-        highlight: "Dedicated to Your Recovery",
+        tagline: "Our Story",
+        title: "Our Story.",
+        highlight: "",
         description:
             "Thetis Medical started when Matt told his son about the troubles all his patients have sleeping in a boot after an achilles rupture. Guy 3D printed the first prototypes, and Caty sewed them together. Today, we're a family business combining medical expertise with innovative design.",
         foundingStory:
@@ -196,7 +196,6 @@ const getIcon = (iconName: string) => {
                 class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl"
             >
                 {t.title}
-                <span class="text-primary">{t.highlight}</span>
             </h2>
             <p
                 class="mx-auto mb-6 max-w-3xl text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed"
@@ -239,6 +238,24 @@ const getIcon = (iconName: string) => {
             >
                 {t.connection}
             </p>
+        </div>
+
+        <!-- Links -->
+        <div class="flex flex-wrap justify-center gap-4 mt-8">
+            <a
+                href="/achilles-rupture-splint"
+                class="font-medium text-primary hover:underline"
+            >
+                Our Products
+            </a>
+            <span class="text-neutral-400">•</span>
+            <a href="/course" class="font-medium text-primary hover:underline">
+                Our Courses
+            </a>
+            <span class="text-neutral-400">•</span>
+            <a href="/reviews" class="font-medium text-primary hover:underline">
+                Patient Stories
+            </a>
         </div>
     </div>
 </section>

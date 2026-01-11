@@ -255,7 +255,7 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Foot hygiene essentials",
+                    title: "Foot hygiene standard",
                     variant: "muted",
                     content: [
                         {
