@@ -119,7 +119,7 @@ function formatPrice(amount: string, currencyCode: string): string {
 }
 
 export function useCoursePrice(
-  courseType: "essentials" | "professionals",
+  courseType: "standard" | "premium" | "essentials" | "professionals",
 ): UseCoursePriceResult {
   const [price, setPrice] = useState<ShopifyPrice | null>(null);
   const [formattedPrice, setFormattedPrice] = useState<string | null>(null);
@@ -131,10 +131,11 @@ export function useCoursePrice(
 
     async function loadPrice() {
       try {
+        // Map course types to product IDs (supporting both old and new names)
         const productId =
-          courseType === "essentials"
-            ? SHOPIFY_PRODUCTS.ESSENTIALS_COURSE
-            : SHOPIFY_PRODUCTS.PROFESSIONALS_COURSE;
+          courseType === "standard" || courseType === "essentials"
+            ? SHOPIFY_PRODUCTS.STANDARD_COURSE
+            : SHOPIFY_PRODUCTS.PREMIUM_COURSE;
 
         // Detect the user's country
         const countryCode = await detectCountry();
@@ -151,14 +152,13 @@ export function useCoursePrice(
           );
         } else {
           // Fallback to static prices if API fails
-          const fallbackPrice =
-            courseType === "essentials"
-              ? countryCode === "US"
-                ? "$29.99"
-                : "£29.99"
-              : countryCode === "US"
-              ? "$79.99"
-              : "£79.99";
+          const isStandard = courseType === "standard" ||
+            courseType === "essentials";
+          const fallbackPrice = isStandard
+            ? countryCode === "US" ? "$29.99" : "£29.99"
+            : countryCode === "US"
+            ? "$79.99"
+            : "£79.99";
 
           setFormattedPrice(fallbackPrice);
           setPrice({
@@ -172,8 +172,9 @@ export function useCoursePrice(
           err instanceof Error ? err.message : "Failed to load price",
         );
         // Fallback
-        const fallbackPrice =
-          courseType === "essentials" ? "£29.99" : "£79.99";
+        const isStandard = courseType === "standard" ||
+          courseType === "essentials";
+        const fallbackPrice = isStandard ? "£29.99" : "£79.99";
         setFormattedPrice(fallbackPrice);
         setPrice({
           amount: fallbackPrice.replace(/[£$]/g, ""),
@@ -197,4 +198,3 @@ export function useCoursePrice(
 }
 
 export { detectCountry, fetchCoursePrice, formatPrice };
-

@@ -1,10 +1,76 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, GraduationCap, Mail } from "lucide-react";
-import { PricingCard } from "@thetis/ui/pricing-card";
+import {
+  BookOpen,
+  CheckCircle2,
+  ExternalLink,
+  GraduationCap,
+  Lock,
+  Mail,
+  Star,
+} from "lucide-react";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
-import { ShopifyCourseBuyButton } from "@/components/ShopifyCourseBuyButton";
-import { useCoursePrice } from "@/hooks/use-course-price";
-import { SHOPIFY_PRODUCTS } from "@/lib/shopify";
+import { useCourseUnlock } from "@/hooks/use-course-unlock";
+import { useCourseProgress } from "@/hooks/use-course-progress";
+import { Card } from "@thetis/ui/card";
+import { Button } from "@thetis/ui/button";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@thetis/ui/chart";
+import { Cell, Pie, PieChart } from "recharts";
+import { sections } from "@/content/course/sections";
+import { WEBSITE_URL } from "@/lib/env";
+import { cn } from "@/lib/utils";
+
+function CourseProgressChart({
+  percentage,
+}: {
+  percentage: number;
+}) {
+  const data = [
+    { name: "completed", value: percentage, fill: "hsl(var(--primary))" },
+    { name: "remaining", value: 100 - percentage, fill: "hsl(var(--muted))" },
+  ];
+
+  return (
+    <div className="relative w-[50px] h-[50px] shrink-0">
+      <ChartContainer
+        config={{
+          completed: {
+            label: "Completed",
+            color: "hsl(var(--primary))",
+          },
+          remaining: {
+            label: "Remaining",
+            color: "hsl(var(--muted))",
+          },
+        }}
+        className="w-[50px] h-[50px]"
+      >
+        <PieChart>
+          <Pie
+            data={data}
+            cx="50%"
+            cy="50%"
+            innerRadius={18}
+            outerRadius={25}
+            startAngle={90}
+            endAngle={-270}
+            dataKey="value"
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.fill} />
+            ))}
+          </Pie>
+        </PieChart>
+      </ChartContainer>
+      <div className="top-1/2 left-1/2 absolute flex flex-col justify-center items-center -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        <span className="font-bold text-primary text-sm">{percentage}%</span>
+      </div>
+    </div>
+  );
+}
 
 function CourseCard({
   title,
@@ -18,7 +84,6 @@ function CourseCard({
   showRibbon,
   ribbonText,
   courseType,
-  productId,
 }: {
   title: string;
   description: string;
@@ -30,39 +95,150 @@ function CourseCard({
   icon: React.ReactNode;
   showRibbon?: boolean;
   ribbonText?: string;
-  courseType: "essentials" | "professionals";
-  productId: string;
+  courseType: "standard" | "premium";
 }) {
-  const { formattedPrice, isLoading } = useCoursePrice(courseType);
+  const { isUnlocked } = useCourseUnlock();
+  const { getCompletionPercentage } = useCourseProgress();
+  const unlocked = isUnlocked(courseType);
+
+  // Get sections for this course type
+  const courseSections = sections.filter(
+    (s) => s.course_type === courseType,
+  );
+  const completionPercentage = unlocked
+    ? getCompletionPercentage(courseSections.length)
+    : 0;
+
+  const variantStyles = {
+    standard: {
+      border: "border-primary/30 dark:border-primary/40",
+      bg: "bg-white dark:bg-neutral-800",
+      hoverBorder: "hover:border-primary/60 dark:hover:border-primary",
+      iconBg: "bg-primary/10",
+      iconColor: "text-primary",
+      badgeBg: "bg-neutral-100 dark:bg-neutral-700",
+      badgeColor: "text-neutral-600 dark:text-neutral-300",
+      checkColor: "text-primary",
+    },
+    premium: {
+      border: "border-primary dark:border-primary",
+      bg: "bg-white dark:bg-neutral-800",
+      hoverBorder: "hover:border-primary dark:hover:border-primary",
+      iconBg: "bg-amber-100 dark:bg-amber-900",
+      iconColor: "text-amber-700 dark:text-amber-300",
+      badgeBg: "bg-amber-100 dark:bg-amber-900",
+      badgeColor: "text-amber-700 dark:text-amber-300",
+      checkColor: "text-primary",
+    },
+  };
+
+  const styles = variantStyles[variant];
 
   return (
-    <div className="flex flex-col h-full">
-      <Link to={link} className="flex-1">
-        <PricingCard
-          title={title}
-          description={description}
-          price={formattedPrice ||
-            (courseType === "essentials" ? "£29.99" : "£79.99")}
-          priceSuffix="one-time"
-          variant={variant}
-          badge={badge}
-          features={features}
-          ctaText={ctaText}
-          icon={icon}
-          showRibbon={showRibbon}
-          ribbonText={ribbonText}
-          className="h-full"
-        />
-      </Link>
-      <div className="mt-6" onClick={(e) => e.stopPropagation()}>
-        <ShopifyCourseBuyButton
-          productId={productId}
-          buttonText={`Buy ${title} Course`}
-          showPrice={false}
-          className="w-full"
-        />
+    <Card
+      className={cn(
+        "group relative flex flex-col p-6 md:p-8 border-2 rounded-2xl h-full transition-all duration-300",
+        styles.border,
+        styles.bg,
+        unlocked && styles.hoverBorder,
+      )}
+    >
+      {/* Ribbon for premium tier */}
+      {showRibbon && (
+        <div className="top-0 right-4 absolute bg-primary px-3 py-1 rounded-b-lg font-semibold text-white text-xs">
+          {ribbonText}
+        </div>
+      )}
+
+      {/* Header with icon and badge */}
+      <div className="flex items-center gap-4 mb-4">
+        {icon && (
+          <div
+            className={cn(
+              "flex justify-center items-center rounded-xl w-14 h-14 shrink-0",
+              styles.iconBg,
+            )}
+          >
+            <div className={cn("w-7 h-7", styles.iconColor)}>{icon}</div>
+          </div>
+        )}
+        <div className="flex-1">
+          {badge && (
+            <span
+              className={cn(
+                "inline-block mb-1 px-2 py-0.5 rounded font-semibold text-xs uppercase tracking-wide",
+                styles.badgeBg,
+                styles.badgeColor,
+              )}
+            >
+              {badge}
+            </span>
+          )}
+          <h3 className="font-semibold text-foreground group-hover:text-primary text-xl transition-colors">
+            {title}
+          </h3>
+        </div>
+        {unlocked
+          ? <CourseProgressChart percentage={completionPercentage} />
+          : (
+            <div className="flex justify-center items-center w-[50px] h-[50px] shrink-0">
+              <Lock className="w-5 h-5 text-muted-foreground" />
+            </div>
+          )}
       </div>
-    </div>
+
+      {/* Description */}
+      <p className="mb-6 text-muted-foreground text-sm">{description}</p>
+
+      {/* Features list */}
+      <ul className="flex-grow space-y-3 mb-6">
+        {features.map((feature, index) => (
+          <li
+            key={index}
+            className="flex items-start gap-3 text-foreground text-sm"
+          >
+            <div
+              className={cn(
+                "flex justify-center items-center mt-0.5 rounded-full w-5 h-5 shrink-0",
+                styles.iconBg,
+              )}
+            >
+              <CheckCircle2 className={cn("w-3 h-3", styles.checkColor)} />
+            </div>
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* CTA */}
+      {unlocked
+        ? (
+          <Link to={link}>
+            <Button
+              className="w-full"
+              variant={variant === "premium" ? "default" : "outline"}
+            >
+              {ctaText}
+            </Button>
+          </Link>
+        )
+        : (
+          <Button
+            asChild
+            className="w-full"
+            variant={variant === "premium" ? "default" : "outline"}
+          >
+            <a
+              href={`${WEBSITE_URL}/course/${courseType}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Buy to Unlock
+              <ExternalLink className="ml-2 w-4 h-4" />
+            </a>
+          </Button>
+        )}
+    </Card>
   );
 }
 
@@ -93,7 +269,7 @@ function HomePage() {
           {/* Course Cards */}
           <div className="gap-8 grid md:grid-cols-2 mx-auto max-w-4xl">
             <CourseCard
-              title="Essentials"
+              title="Standard"
               description="31 easily digestible lessons to guide you through each stage of recovery."
               variant="standard"
               badge="POPULAR"
@@ -103,31 +279,27 @@ function HomePage() {
                 "Product recommendations",
                 "Boot comparison guide",
               ]}
-              link="/essentials"
-              ctaText="Start Essentials"
+              link="/standard"
+              ctaText="Start Standard Course"
               icon={<BookOpen className="w-full h-full" />}
-              courseType="essentials"
-              productId={SHOPIFY_PRODUCTS.ESSENTIALS_COURSE}
+              courseType="standard"
             />
             <CourseCard
-              title="Professional"
+              title="Premium"
               description="Advanced recovery strategies and expert-led video lessons for elite results."
               variant="premium"
               badge="PREMIUM"
               showRibbon={true}
               ribbonText="BEST VALUE"
               features={[
-                "Everything in Essentials",
+                "Everything in Standard",
                 "Specialist surgeon video lessons",
-                "8 recovery hacks from elite athletes",
-                "Return-to-sport protocols",
-                "Priority expert support",
+                "Exercise videos from professional physios",
               ]}
-              link="/professionals"
-              ctaText="Go Professional"
-              icon={<GraduationCap className="w-full h-full" />}
-              courseType="professionals"
-              productId={SHOPIFY_PRODUCTS.PROFESSIONALS_COURSE}
+              link="/premium"
+              ctaText="Start Premium Course"
+              icon={<Star className="w-full h-full" />}
+              courseType="premium"
             />
           </div>
         </div>
@@ -137,11 +309,11 @@ function HomePage() {
       <div className="bg-muted/30 border-border border-t">
         <div className="mx-auto px-4 sm:px-6 py-16 max-w-5xl">
           <div className="flex md:flex-row flex-col items-center gap-8 bg-card p-8 border border-border rounded-2xl">
-            <div className="flex justify-center items-center bg-green-100 dark:bg-green-900 rounded-xl w-16 h-16 shrink-0">
-              <Mail className="w-8 h-8 text-green-700 dark:text-green-300" />
+            <div className="flex justify-center items-center bg-primary/10 dark:bg-primary/20 rounded-xl w-16 h-16 shrink-0">
+              <Mail className="w-8 h-8 text-primary dark:text-primary/80" />
             </div>
             <div className="flex-1 md:text-left text-center">
-              <span className="inline-block bg-green-100 dark:bg-green-900 mb-2 px-2 py-0.5 rounded font-semibold text-green-700 dark:text-green-300 text-xs">
+              <span className="inline-block bg-primary/10 dark:bg-primary/20 mb-2 px-2 py-0.5 rounded font-semibold text-primary dark:text-primary/80 text-xs">
                 FREE
               </span>
               <h3 className="mb-2 font-semibold text-foreground text-xl">
@@ -152,10 +324,7 @@ function HomePage() {
                 right information arrives exactly when you need it.
               </p>
             </div>
-            <EmailSignupDialog
-              triggerText="Get Free Emails"
-              triggerClassName="bg-green-600 hover:bg-green-700 text-white"
-            />
+            <EmailSignupDialog triggerText="Get Free Emails" />
           </div>
         </div>
       </div>

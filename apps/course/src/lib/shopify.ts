@@ -2,6 +2,9 @@
 // Get product IDs from Shopify admin: Products > [Product] > Product ID (numeric)
 
 export const SHOPIFY_PRODUCTS = {
+    STANDARD_COURSE: "9846187786568",
+    PREMIUM_COURSE: "9846188081480",
+    // Legacy names for backwards compatibility
     ESSENTIALS_COURSE: "9846187786568",
     PROFESSIONALS_COURSE: "9846188081480",
 } as const;

@@ -6,16 +6,11 @@ import {
   CheckCircle2,
   ChevronRight,
   Clock,
-  ExternalLink,
-  Mail,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@thetis/ui/button";
-import { Checkbox } from "@thetis/ui/checkbox";
 import { Progress } from "@thetis/ui/progress";
-import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 import { useCourseProgress } from "@/hooks/use-course-progress";
-import { WEBSITE_URL } from "@/lib/env";
 
 export const Route = createFileRoute("/standard/")({
   component: StandardIndexPage,
@@ -117,42 +112,21 @@ function StandardIndexPage() {
                       <div
                         key={section.slug}
                         className={cn(
-                          "group flex items-center gap-4 p-5 border rounded-2xl transition-all",
+                          "group relative flex flex-col gap-4 p-5 border rounded-2xl transition-all",
                           isComplete
-                            ? "bg-primary/10 dark:bg-primary/20 border-primary/30 dark:border-primary/40 hover:border-primary/50 dark:hover:border-primary/60"
-                            : "bg-card hover:bg-muted/50 border-border hover:border-primary/30",
+                            ? "bg-primary/5 dark:bg-primary/10 border-primary/20 dark:border-primary/30"
+                            : "bg-card border-border",
                         )}
                       >
-                        <div
-                          onClick={(e) => e.stopPropagation()}
-                          className="cursor-pointer shrink-0"
-                        >
-                          <Checkbox
-                            checked={isComplete}
-                            onCheckedChange={(checked) => {
-                              if (checked) {
-                                markLessonComplete(section.slug);
-                              } else {
-                                markLessonIncomplete(section.slug);
-                              }
-                            }}
-                            className="data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-primary-foreground"
-                          />
-                        </div>
-                        <Link
-                          to="/standard/week/$week/day/$day"
-                          params={{
-                            week: String(section.week),
-                            day: String(section.day),
-                          }}
-                          className="flex flex-1 items-center gap-4 min-w-0"
-                        >
+                        {/* Main Content */}
+                        <div className="flex items-center gap-4">
+                          {/* Section Number/Status Icon */}
                           <div
                             className={cn(
                               "flex justify-center items-center rounded-xl w-12 h-12 font-bold transition-colors shrink-0",
                               isComplete
                                 ? "bg-primary text-primary-foreground"
-                                : "bg-muted group-hover:bg-primary/10 text-muted-foreground group-hover:text-primary",
+                                : "bg-muted text-muted-foreground",
                             )}
                           >
                             {isComplete
@@ -161,42 +135,73 @@ function StandardIndexPage() {
                                 section.section_number
                               )}
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
-                              <h3
-                                className={cn(
-                                  "font-semibold transition-colors",
-                                  isComplete
-                                    ? "text-primary"
-                                    : "text-foreground group-hover:text-primary",
+
+                          {/* Content */}
+                          <div className="flex flex-1 items-center gap-4 min-w-0">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex flex-wrap items-center gap-2 mb-1">
+                                <h3
+                                  className={cn(
+                                    "font-semibold transition-colors",
+                                    isComplete
+                                      ? "text-primary"
+                                      : "text-foreground",
+                                  )}
+                                >
+                                  {section.title}
+                                </h3>
+                                {isComplete && (
+                                  <span className="inline-flex items-center gap-1 bg-primary/20 dark:bg-primary/30 px-2 py-0.5 rounded font-semibold text-primary text-xs">
+                                    <CheckCircle2 className="w-3 h-3" />
+                                    Done
+                                  </span>
                                 )}
-                              >
-                                {section.title}
-                              </h3>
-                              {isComplete && (
-                                <span className="inline-flex items-center gap-1 bg-primary/20 dark:bg-primary/30 px-2 py-0.5 rounded font-semibold text-primary text-xs">
-                                  <CheckCircle2 className="w-3 h-3" />
-                                  Done
-                                </span>
-                              )}
+                              </div>
+                              <p className="text-muted-foreground text-sm line-clamp-1">
+                                {section.description}
+                              </p>
                             </div>
-                            <p className="text-muted-foreground text-sm truncate">
-                              {section.description}
-                            </p>
+                            <div className="hidden sm:flex items-center gap-2 font-medium text-muted-foreground text-xs uppercase tracking-wider shrink-0">
+                              <Clock className="w-3.5 h-3.5" />
+                              {formatWeekDay(section.week, section.day)}
+                            </div>
                           </div>
-                          <div className="hidden sm:flex items-center gap-2 font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                            <Clock className="w-3.5 h-3.5" />
-                            {formatWeekDay(section.week, section.day)}
-                          </div>
-                          <ChevronRight
-                            className={cn(
-                              "w-5 h-5 transition-colors",
-                              isComplete
-                                ? "text-primary"
-                                : "text-muted-foreground/30 group-hover:text-primary",
-                            )}
-                          />
-                        </Link>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex justify-end items-center gap-2">
+                          <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              if (isComplete) {
+                                markLessonIncomplete(section.slug);
+                              } else {
+                                markLessonComplete(section.slug);
+                              }
+                            }}
+                          >
+                            {isComplete ? "Unmark as Done" : "Mark as Done"}
+                          </Button>
+                          <Button
+                            variant="default"
+                            size="sm"
+                            asChild
+                          >
+                            <Link
+                              to="/standard/week/$week/day/$day"
+                              params={{
+                                week: String(section.week),
+                                day: String(section.day),
+                              }}
+                            >
+                              Open
+                              <ChevronRight className="ml-1 w-4 h-4" />
+                            </Link>
+                          </Button>
+                        </div>
                       </div>
                     );
                   })}

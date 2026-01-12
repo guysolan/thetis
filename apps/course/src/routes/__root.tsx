@@ -19,7 +19,6 @@ import {
 import type { QueryClient } from "@tanstack/react-query";
 import { BookOpen, ExternalLink, Loader2, Menu, Star } from "lucide-react";
 import { cn } from "../lib/utils.js";
-import { useCoursePrice } from "@/hooks/use-course-price";
 
 function RouterSpinner() {
   const isLoading = useRouterState({ select: (s) => s.status === "pending" });
@@ -36,16 +35,16 @@ function RouterSpinner() {
 
 const navLinks = [
   {
-    title: "Essentials",
-    href: "/essentials",
+    title: "Standard",
+    href: "/standard",
     icon: BookOpen,
-    courseType: "essentials" as const,
+    courseType: "standard" as const,
   },
   {
-    title: "Professionals",
-    href: "/professionals",
+    title: "Premium",
+    href: "/premium",
     icon: Star,
-    courseType: "professionals" as const,
+    courseType: "premium" as const,
   },
 ];
 
@@ -58,8 +57,6 @@ function NavLinkWithPrice({
   isActive: boolean;
   isMobile?: boolean;
 }) {
-  const { formattedPrice, isLoading } = useCoursePrice(link.courseType);
-
   if (isMobile) {
     return (
       <SheetClose asChild>
@@ -84,14 +81,6 @@ function NavLinkWithPrice({
           </div>
           <div className="flex-1 min-w-0">
             <div className="font-semibold">{link.title}</div>
-            {isLoading
-              ? <div className="bg-muted mt-1 rounded w-16 h-4 animate-pulse" />
-              : (
-                <div className="text-muted-foreground text-sm">
-                  {formattedPrice ||
-                    (link.courseType === "essentials" ? "£29.99" : "£79.99")}
-                </div>
-              )}
           </div>
         </Link>
       </SheetClose>
@@ -112,14 +101,6 @@ function NavLinkWithPrice({
         <link.icon className="w-4 h-4" />
         <span>{link.title}</span>
       </div>
-      {isLoading
-        ? <div className="bg-muted rounded w-12 h-3 animate-pulse" />
-        : (
-          <span className="text-muted-foreground text-xs">
-            {formattedPrice ||
-              (link.courseType === "essentials" ? "£29.99" : "£79.99")}
-          </span>
-        )}
     </Link>
   );
 }

@@ -1,7 +1,8 @@
 import type { SectionContent } from "@/components/course/types";
-import QueenInHeels from "../../../assets/queen-in-heels.png";
+import BootAngleProgression from "../../../assets/boot-angle-progression.png";
 import AircastBootWithWedges from "../../../assets/aircast-boot-with-wedges.png";
 import VacopedBootStandalone from "../../../assets/vacoped-boot-standalone.jpeg";
+import BootFittingGuide from "../../../assets/boot-fitting-guide.png";
 
 export const metadata = {
     slug: "week-2-day-4-your-walking-boot",
@@ -57,6 +58,13 @@ export const content: SectionContent = {
                     type: "text",
                     content:
                         "A poorly fitted boot causes problems: pressure sores, rubbing, and poor tendon protection. Take time to get it right.",
+                },
+                {
+                    type: "image",
+                    src: BootFittingGuide,
+                    alt: "Side view diagram of a walking boot showing proper fit points: heel positioned at back, one finger space between heel and boot, straps tightened bottom to top, toe wiggle room, and no pressure points",
+                    caption:
+                        "Proper boot fit: check heel position, strap tightness, and toe room",
                 },
                 {
                     type: "card",
@@ -206,8 +214,8 @@ export const content: SectionContent = {
                 },
                 {
                     type: "image",
-                    src: QueenInHeels,
-                    alt: "Four-panel progression showing gradual reduction of foot angle from very pointed down (weeks 2-4) to medium angle (weeks 5-7) to lower angle (weeks 8-10) to neutral/flat (week 11 onwards)",
+                    src: BootAngleProgression,
+                    alt: "Four-panel medical diagram showing side view of leg in walking boot, demonstrating gradual angle reduction from maximum plantarflexion (weeks 2-4, 30-45 degrees) to medium angle (weeks 5-7, ~20-25 degrees) to lower angle (weeks 8-10, ~10-15 degrees) to neutral position (week 11+, 0 degrees)",
                     caption:
                         "The recovery mechanism: your foot gradually moves from very pointed down to neutral as you heal",
                 },
