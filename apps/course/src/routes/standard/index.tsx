@@ -16,16 +16,89 @@ export const Route = createFileRoute("/standard/")({
   component: StandardIndexPage,
 });
 
-// Group sections by phase based on days_after_rupture ranges
-const phases = [
-  { name: "Week 0-1: Emergency & First Steps", minDay: 0, maxDay: 13 },
-  { name: "Weeks 2-3: Treatment Decision", minDay: 14, maxDay: 27 },
-  { name: "Weeks 4-7: Progressive Recovery", minDay: 28, maxDay: 55 },
-  { name: "Weeks 8-10: Final Boot Phase", minDay: 56, maxDay: 77 },
-  { name: "Weeks 11-14: Boot Transition", minDay: 78, maxDay: 104 },
-  { name: "Weeks 15-26: Strengthening", minDay: 105, maxDay: 189 },
-  { name: "Week 26+: Return to Sport", minDay: 190, maxDay: 999 },
-];
+// Chapter display names - map folder names to human-readable titles
+const chapterDisplayNames: Record<
+  string,
+  { name: string; description: string }
+> = {
+  emergency: {
+    name: "Emergency Care",
+    description: "Immediate needs after rupture",
+  },
+  treatment: {
+    name: "Treatment Decision",
+    description: "Understanding your options",
+  },
+  boot: {
+    name: "Boot & Equipment",
+    description: "Living with your boot and managing recovery",
+  },
+  practical: {
+    name: "Practical Life",
+    description: "Work, driving, and daily life",
+  },
+  transition: {
+    name: "Boot Transition",
+    description: "Moving out of your boot",
+  },
+  physiotherapy: {
+    name: "Physiotherapy",
+    description: "Rebuilding strength and function",
+  },
+  recovery: {
+    name: "Recovery & Strengthening",
+    description: "Building fitness and returning to activities",
+  },
+  advanced: {
+    name: "Advanced Activities",
+    description: "Running, jumping, and return to sport",
+  },
+  "long-term": {
+    name: "Long-Term Recovery",
+    description: "Life after Achilles rupture",
+  },
+};
+
+// Auto-group sections by chapter (derived from folder structure)
+function groupSectionsByChapter(): Array<{
+  chapter: string;
+  name: string;
+  description: string;
+  sections: typeof sections;
+}> {
+  const grouped = sections.reduce(
+    (acc, section) => {
+      const chapter = section.chapter;
+      if (!acc[chapter]) {
+        acc[chapter] = [];
+      }
+      acc[chapter].push(section);
+      return acc;
+    },
+    {} as Record<string, typeof sections>,
+  );
+
+  // Convert to array and sort chapters by their first section's position
+  return Object.entries(grouped)
+    .map(([chapter, sections]) => {
+      const displayInfo = chapterDisplayNames[chapter] || {
+        name: chapter.charAt(0).toUpperCase() + chapter.slice(1),
+        description: "",
+      };
+      return {
+        chapter,
+        name: displayInfo.name,
+        description: displayInfo.description,
+        sections: sections.sort((a, b) => a.section_number - b.section_number),
+      };
+    })
+    .sort((a, b) => {
+      // Sort chapters by the first section's number in each chapter
+      const aFirst = a.sections[0]?.section_number || 0;
+      const bFirst = b.sections[0]?.section_number || 0;
+      return aFirst - bFirst;
+    });
+}
 
 function StandardIndexPage() {
   const {
@@ -85,28 +158,29 @@ function StandardIndexPage() {
 
         {/* Section List */}
         <div className="space-y-12">
-          {phases.map((phase, phaseIndex) => {
-            const phaseSections = sections.filter(
-              (s) =>
-                s.days_after_rupture >= phase.minDay &&
-                s.days_after_rupture <= phase.maxDay,
-            );
-
-            if (phaseSections.length === 0) return null;
+          {groupSectionsByChapter().map((chapterGroup, chapterIndex) => {
+            if (chapterGroup.sections.length === 0) return null;
 
             return (
-              <div key={phaseIndex} className="relative">
-                <div className="flex items-center gap-4 mb-6">
+              <div key={chapterGroup.chapter} className="relative">
+                <div className="flex items-center gap-4 mb-2">
                   <div className="flex justify-center items-center bg-primary rounded-xl w-10 h-10 font-bold text-primary-foreground">
-                    {phaseIndex + 1}
+                    {chapterIndex + 1}
                   </div>
-                  <h2 className="font-bold text-foreground text-xl md:text-2xl">
-                    {phase.name}
-                  </h2>
+                  <div>
+                    <h2 className="font-bold text-foreground text-xl md:text-2xl">
+                      {chapterGroup.name}
+                    </h2>
+                    {chapterGroup.description && (
+                      <p className="mt-1 text-muted-foreground text-sm">
+                        {chapterGroup.description}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
                 <div className="gap-3 grid">
-                  {phaseSections.map((section) => {
+                  {chapterGroup.sections.map((section) => {
                     const isComplete = isLessonComplete(section.slug);
                     return (
                       <div
@@ -161,9 +235,21 @@ function StandardIndexPage() {
                                 {section.description}
                               </p>
                             </div>
-                            <div className="hidden sm:flex items-center gap-2 font-medium text-muted-foreground text-xs uppercase tracking-wider shrink-0">
-                              <Clock className="w-3.5 h-3.5" />
-                              {formatWeekDay(section.week, section.day)}
+                            <div className="hidden sm:flex flex-col items-end gap-1 shrink-0">
+                              {section.timing && (
+                                <div className="flex items-center gap-2 max-w-[200px] font-medium text-muted-foreground text-xs">
+                                  <Clock className="w-3.5 h-3.5 shrink-0" />
+                                  <span className="text-right line-clamp-2">
+                                    {section.timing.when_useful}
+                                  </span>
+                                </div>
+                              )}
+                              {section.week !== undefined &&
+                                section.day !== undefined && (
+                                <div className="flex items-center gap-2 font-medium text-muted-foreground text-xs uppercase tracking-wider">
+                                  {formatWeekDay(section.week, section.day)}
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -191,10 +277,9 @@ function StandardIndexPage() {
                             asChild
                           >
                             <Link
-                              to="/standard/week/$week/day/$day"
+                              to="/standard/$slug"
                               params={{
-                                week: String(section.week),
-                                day: String(section.day),
+                                slug: section.slug,
                               }}
                             >
                               Open

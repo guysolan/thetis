@@ -12,7 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StandardIndexRouteImport } from './routes/standard/index'
 import { Route as PremiumIndexRouteImport } from './routes/premium/index'
-import { Route as StandardWeekWeekDayDayRouteImport } from './routes/standard/week/$week/day/$day'
+import { Route as StandardSlugRouteImport } from './routes/standard/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,49 +29,44 @@ const PremiumIndexRoute = PremiumIndexRouteImport.update({
   path: '/premium/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const StandardWeekWeekDayDayRoute = StandardWeekWeekDayDayRouteImport.update({
-  id: '/standard/week/$week/day/$day',
-  path: '/standard/week/$week/day/$day',
+const StandardSlugRoute = StandardSlugRouteImport.update({
+  id: '/standard/$slug',
+  path: '/standard/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/standard/$slug': typeof StandardSlugRoute
   '/premium': typeof PremiumIndexRoute
   '/standard': typeof StandardIndexRoute
-  '/standard/week/$week/day/$day': typeof StandardWeekWeekDayDayRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/standard/$slug': typeof StandardSlugRoute
   '/premium': typeof PremiumIndexRoute
   '/standard': typeof StandardIndexRoute
-  '/standard/week/$week/day/$day': typeof StandardWeekWeekDayDayRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/standard/$slug': typeof StandardSlugRoute
   '/premium/': typeof PremiumIndexRoute
   '/standard/': typeof StandardIndexRoute
-  '/standard/week/$week/day/$day': typeof StandardWeekWeekDayDayRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/premium' | '/standard' | '/standard/week/$week/day/$day'
+  fullPaths: '/' | '/standard/$slug' | '/premium' | '/standard'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/premium' | '/standard' | '/standard/week/$week/day/$day'
-  id:
-    | '__root__'
-    | '/'
-    | '/premium/'
-    | '/standard/'
-    | '/standard/week/$week/day/$day'
+  to: '/' | '/standard/$slug' | '/premium' | '/standard'
+  id: '__root__' | '/' | '/standard/$slug' | '/premium/' | '/standard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  StandardSlugRoute: typeof StandardSlugRoute
   PremiumIndexRoute: typeof PremiumIndexRoute
   StandardIndexRoute: typeof StandardIndexRoute
-  StandardWeekWeekDayDayRoute: typeof StandardWeekWeekDayDayRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -97,11 +92,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PremiumIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/standard/week/$week/day/$day': {
-      id: '/standard/week/$week/day/$day'
-      path: '/standard/week/$week/day/$day'
-      fullPath: '/standard/week/$week/day/$day'
-      preLoaderRoute: typeof StandardWeekWeekDayDayRouteImport
+    '/standard/$slug': {
+      id: '/standard/$slug'
+      path: '/standard/$slug'
+      fullPath: '/standard/$slug'
+      preLoaderRoute: typeof StandardSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -109,9 +104,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  StandardSlugRoute: StandardSlugRoute,
   PremiumIndexRoute: PremiumIndexRoute,
   StandardIndexRoute: StandardIndexRoute,
-  StandardWeekWeekDayDayRoute: StandardWeekWeekDayDayRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

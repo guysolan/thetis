@@ -35,7 +35,13 @@ function getInputImages(inputDir: string): Array<{
     > = [];
 
     // Prioritize mike-and-doc.png as the primary character reference
+    // Also prioritize aircast-vs-vacoped-reference.png for boot images
+    // Prioritize tintin-style for medical diagrams
     const primaryReference = "mike-and-doc.png";
+    const bootReference = "aircast-vs-vacoped-reference.png";
+    const tintinReference = "tintin-style-blood-clots.png";
+    const vacopedAngleReference = "vacoped-angle-changing.jpg";
+    const wedgeReference = "wedge.jpg";
 
     for (const file of files) {
         const ext = path.extname(file).toLowerCase();
@@ -57,6 +63,13 @@ function getInputImages(inputDir: string): Array<{
 
         if (file.toLowerCase() === primaryReference.toLowerCase()) {
             images.unshift(imageData); // Add mike-and-doc.png first
+        } else if (file.toLowerCase() === tintinReference.toLowerCase()) {
+            images.push(imageData); // Add tintin reference second
+        } else if (file.toLowerCase() === vacopedAngleReference.toLowerCase() || 
+                   file.toLowerCase() === wedgeReference.toLowerCase()) {
+            images.push(imageData); // Add mechanism references
+        } else if (file.toLowerCase() === bootReference.toLowerCase()) {
+            images.push(imageData); // Add boot reference
         } else {
             otherImages.push(imageData);
         }
@@ -135,11 +148,45 @@ async function main() {
             const hasMikeAndDoc = referenceImages.some((img) =>
                 img.filename.toLowerCase() === "mike-and-doc.png"
             );
+            const hasBootReference = referenceImages.some((img) =>
+                img.filename.toLowerCase() === "aircast-vs-vacoped-reference.png"
+            );
+            const hasTintinReference = referenceImages.some((img) =>
+                img.filename.toLowerCase() === "tintin-style-blood-clots.png"
+            );
+            const hasVacopedAngle = referenceImages.some((img) =>
+                img.filename.toLowerCase() === "vacoped-angle-changing.jpg"
+            );
+            const hasWedgeReference = referenceImages.some((img) =>
+                img.filename.toLowerCase() === "wedge.jpg"
+            );
 
             if (hasMikeAndDoc) {
+                let bootInstruction = "";
+                if (hasBootReference) {
+                    bootInstruction = "\n\nCRITICAL: Use 'aircast-vs-vacoped-reference.png' as the EXACT reference for boot appearance. Match the boot styles, colors, straps, mechanisms, and overall design EXACTLY as shown in that reference. The Aircast boot should match the left boot in the reference (light gray/white with oval cutouts, three straps, dial/pump mechanism). The VACOped boot should match the right boot in the reference (dark gray with teal accents, skeletal frame, four straps, teal buttons/labels).";
+                }
                 parts.push({
                     text:
-                        "CRITICAL: Use 'mike-and-doc.png' as the PRIMARY character reference. This image shows the exact doctor and patient characters you must use. Match their appearance, style, and level of detail EXACTLY. The doctor is in Thetis green scrubs and crocs. The patient (Grant) is a 40-year-old white male, slim, average height. Use this reference for ALL character appearances.\n\nIMPORTANT: Grant can wear VACOped, Aircast (black boot), or other boots - all are valid treatment options. Show variety across different images to reinforce that all boot types are acceptable. Grant should ONLY wear ONE boot on the injured foot - the other foot must be in a regular shoe (white Stan Smiths for day scenes).",
+                        "CRITICAL: Use 'mike-and-doc.png' as the PRIMARY character reference. This image shows the exact doctor and patient characters you must use. Match their appearance, style, and level of detail EXACTLY. The doctor is in Thetis green scrubs and crocs. The patient (Grant) is a 40-year-old white male, slim, average height. Use this reference for ALL character appearances.\n\nIMPORTANT: Grant can wear VACOped, Aircast (black boot), or other boots - all are valid treatment options. Show variety across different images to reinforce that all boot types are acceptable. Grant should ONLY wear ONE boot on the injured foot - the other foot must be in a regular shoe (white Stan Smiths for day scenes)." +
+                        bootInstruction,
+                });
+            } else if (hasTintinReference) {
+                let styleInstruction = "CRITICAL: Use 'tintin-style-blood-clots.png' as the EXACT style reference. Match the illustration style, line work, color palette, and level of detail EXACTLY. This is a simplified, clean medical illustration style with clear lines, minimal shading, and educational clarity.";
+                let mechanismInstruction = "";
+                if (hasVacopedAngle) {
+                    mechanismInstruction += "\n\nCRITICAL: Use 'vacoped-angle-changing.jpg' to understand how VACOped's high heel/rocker sole changes the angle. Show the wedge-shaped sole (thick heel, thin toe) clearly - this is what creates the plantarflexion angle.";
+                }
+                if (hasWedgeReference) {
+                    mechanismInstruction += "\n\nCRITICAL: Use 'wedge.jpg' to understand how wedges work in Aircast boots. Show the white foam wedges stacked under the heel clearly - these are what create the plantarflexion angle for Aircast.";
+                }
+                parts.push({
+                    text: styleInstruction + mechanismInstruction,
+                });
+            } else if (hasBootReference) {
+                parts.push({
+                    text:
+                        "CRITICAL: Use 'aircast-vs-vacoped-reference.png' as the EXACT reference for boot appearance. Match the boot styles, colors, straps, mechanisms, and overall design EXACTLY as shown in that reference. The Aircast boot should match the left boot in the reference (light gray/white with oval cutouts, three straps, dial/pump mechanism). The VACOped boot should match the right boot in the reference (dark gray with teal accents, skeletal frame, four straps, teal buttons/labels).",
                 });
             } else {
                 parts.push({
@@ -157,15 +204,28 @@ async function main() {
                 });
             }
 
+            let bootReminder = "";
+            if (hasBootReference) {
+                bootReminder = "\n\nREMINDER: Match boot appearance EXACTLY to 'aircast-vs-vacoped-reference.png' - Aircast (left) and VACOped (right) styles must be precise.";
+            }
+            let styleReminder = "";
+            if (hasTintinReference) {
+                styleReminder = "\n\nCRITICAL: Match the Tintin illustration style - simplified, clean lines, minimal detail, educational clarity. Reduce unnecessary detail, focus on the key mechanisms.";
+            }
+            let mechanismReminder = "";
+            if (hasVacopedAngle && hasWedgeReference) {
+                mechanismReminder = "\n\nKEY FOCUS: Show how VACOped's high heel/rocker sole (thick heel, thin toe) creates the angle, and how Aircast's wedges stacked under the heel create the angle. These are the KEY mechanisms - simplify everything else.";
+            }
+
             if (hasMikeAndDoc) {
                 parts.push({
                     text:
-                        `Now generate an image based on this prompt. CRITICAL: Use the characters from 'mike-and-doc.png' EXACTLY - same doctor, same patient (Grant), same style, same level of detail. Match their appearance precisely.\n\nIMPORTANT: Grant can wear VACOped, Aircast (black boot), or other boots - all are valid treatment options. Grant should ONLY wear ONE boot on the injured foot - the other foot must be in a regular shoe (white Stan Smiths for day scenes).\n\n${prompt}`,
+                        `Now generate an image based on this prompt. CRITICAL: Use the characters from 'mike-and-doc.png' EXACTLY - same doctor, same patient (Grant), same style, same level of detail. Match their appearance precisely.\n\nIMPORTANT: Grant can wear VACOped, Aircast (black boot), or other boots - all are valid treatment options. Grant should ONLY wear ONE boot on the injured foot - the other foot must be in a regular shoe (white Stan Smiths for day scenes).${bootReminder}${styleReminder}${mechanismReminder}\n\n${prompt}`,
                 });
             } else {
                 parts.push({
                     text:
-                        `Now generate an image based on this prompt, using the reference style and characters above.\n\nIMPORTANT: The patient (Grant) can wear VACOped, Aircast (black boot), or other boots - all are valid treatment options. Grant should ONLY wear ONE boot on the injured foot - the other foot must be in a regular shoe.\n\n${prompt}`,
+                        `Now generate an image based on this prompt, using the reference style and characters above.\n\nIMPORTANT: The patient (Grant) can wear VACOped, Aircast (black boot), or other boots - all are valid treatment options. Grant should ONLY wear ONE boot on the injured foot - the other foot must be in a regular shoe.${bootReminder}${styleReminder}${mechanismReminder}\n\n${prompt}`,
                 });
             }
         } else {
