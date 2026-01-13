@@ -3,3 +3,5 @@ For my Astro files please remember to use imports wrapped in --- like:
 ---
 import { buttonVariants } from "../../../components/ui/button";
 ---
+
+Never use green colors - always use primary color instead. Progress (completed count) and position (current section) are independent concepts.

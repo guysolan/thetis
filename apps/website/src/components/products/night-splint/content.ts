@@ -8,7 +8,7 @@ export const content = {
                 { highlighted: true, text: "Rupture" },
             ],
             description:
-                "A patented, lightweight splint designed with surgeons. Sleep comfortably while keeping your Achilles protected.",
+                "Finally, a comfortable solution for sleep. Designed alongside surgeons to protect your healing Achilles tendon while you get the rest you need.",
         },
         reviewsLink: {
             basedOn: "Over 200 Verified Reviews",

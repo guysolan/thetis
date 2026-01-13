@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import ProperGaitPattern from "../../../assets/proper-gait-pattern.png";
+import ForceThroughTendonWalking from "../../../assets/force-through-tendon-walking.png";
 
 export const metadata = {
     slug: "week-6-day-0-walking-progress",
@@ -85,6 +85,40 @@ export const content: SectionContent = {
                     ],
                 },
                 {
+                    type: "image",
+                    src: ForceThroughTendonWalking,
+                    alt: "Comparison diagram showing force through Achilles tendon: walking in boot (~1x body weight) vs walking without boot (~3.2x body weight)",
+                    caption:
+                        "Force through your tendon: the boot protects you by reducing force from 3.2x to 1x body weight",
+                },
+                {
+                    type: "card",
+                    title: "Why gradual progression matters",
+                    description: "Understanding the force difference.",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "When you walk, force goes through your Achilles tendon. The difference between walking in a boot and walking without one is dramatic:",
+                        },
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "**Walking in boot**: ~1x body weight through tendon — this is manageable for a healing tendon",
+                                "**Walking without boot**: ~3.2x body weight through tendon — this is **3.2 times more force**",
+                                "**The transition**: Your tendon needs time to strengthen before it can handle full walking forces",
+                            ],
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "This is why gradual progression matters. Your boot protects your tendon by reducing the force from 3.2x to 1x body weight. As your tendon heals and strengthens, you gradually transition from boot to shoes, giving your tendon time to adapt to increasing forces.",
+                        },
+                    ],
+                },
+                {
                     type: "tip",
                     title: "Simple analogy",
                     content:
@@ -101,13 +135,7 @@ export const content: SectionContent = {
                     content:
                         "Your walking pattern (gait) matters. A good gait protects your tendon, prevents other injuries, and helps you recover faster. A poor gait can cause back pain, hip pain, and slow your recovery. **Important:** Your boot adds 3-5cm of height to one leg, creating uneven hips. Use an **EVENup shoe leveler** on your uninjured foot to maintain proper alignment and prevent back, hip, and knee pain.",
                 },
-                {
-                    type: "image",
-                    src: ProperGaitPattern,
-                    alt: "Three-panel sequence showing correct gait pattern: 1) Heel strike - heel touches ground first, 2) Foot flat - full foot contact with weight rolling through, 3) Toe-off - only toes touching ground, pushing off",
-                    caption:
-                        "Proper gait pattern: heel-to-toe walking in three stages - heel strike, foot flat, toe-off",
-                },
+
                 {
                     type: "card",
                     title: "What good gait looks like",

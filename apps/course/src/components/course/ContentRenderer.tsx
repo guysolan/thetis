@@ -24,16 +24,32 @@ import {
   XCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "@tanstack/react-router";
+import { RehabProtocolTable } from "./RehabProtocolTable";
 
-// Parse simple markdown: **bold** and *italic*
+// Parse simple markdown: **bold**, *italic*, and [link text](url)
 function parseInlineMarkdown(text: string): React.ReactNode {
-  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
+  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\([^)]+\))/g);
   return parts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return <strong key={i}>{part.slice(2, -2)}</strong>;
     }
-    if (part.startsWith("*") && part.endsWith("*")) {
+    if (part.startsWith("*") && part.endsWith("*") && !part.startsWith("**")) {
       return <em key={i}>{part.slice(1, -1)}</em>;
+    }
+    // Match markdown links: [text](url)
+    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      const [, linkText, url] = linkMatch;
+      return (
+        <Link
+          key={i}
+          to={url}
+          className="text-primary underline hover:text-primary/80"
+        >
+          {linkText}
+        </Link>
+      );
     }
     return part;
   });
@@ -479,6 +495,20 @@ function IllustrationPromptBlockComponent({
   );
 }
 
+function RehabProtocolTableBlockComponent() {
+  return (
+    <div className="my-8">
+      <RehabProtocolTable />
+      <p className="mt-4 text-muted-foreground text-sm">
+        <strong>Note:</strong> This protocol is a general guideline. Your
+        specific rehabilitation program will be tailored to your protocol,
+        healing progress, and your clinician's assessment. Always follow your
+        clinician's specific instructions.
+      </p>
+    </div>
+  );
+}
+
 // Main block renderer
 function ContentBlockRenderer({ block }: { block: ContentBlock }) {
   switch (block.type) {
@@ -554,6 +584,8 @@ function ContentBlockRenderer({ block }: { block: ContentBlock }) {
           caption={block.caption}
         />
       );
+    case "rehab-protocol-table":
+      return <RehabProtocolTableBlockComponent />;
     default:
       return null;
   }

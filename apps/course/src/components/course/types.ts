@@ -116,6 +116,10 @@ export interface ProductImageBlock {
   caption?: string;
 }
 
+export interface RehabProtocolTableBlock {
+  type: "rehab-protocol-table";
+}
+
 // Union of all content block types
 export type ContentBlock =
   | TextBlock
@@ -133,7 +137,8 @@ export type ContentBlock =
   | SectionBlock
   | ImageBlock
   | IllustrationPromptBlock
-  | ProductImageBlock;
+  | ProductImageBlock
+  | RehabProtocolTableBlock;
 
 // Section content definition
 export interface SectionContent {

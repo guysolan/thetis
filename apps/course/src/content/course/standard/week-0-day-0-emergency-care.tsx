@@ -1,6 +1,7 @@
 import type { SectionContent } from "@/components/course/types";
 import SnapRuptureExperience from "../../../assets/snap-rupture-experience.jpeg";
 import AchillesRopeEndsPointedDown from "../../../assets/achilles-rope-ends-pointed-down.png";
+import HowRupturesHappen from "../../../assets/how-ruptures-happen.png";
 
 export const metadata = {
   slug: "week-0-day-0-emergency-care",
@@ -95,6 +96,47 @@ export const content: SectionContent = {
           type: "heading",
           level: 3,
           text: 'The "Snap" — Why It Happened and What It Means',
+        },
+        {
+          type: "text",
+          content:
+            "Understanding how ruptures happen can help reduce anxiety and guilt. **It's not your fault** — ruptures often occur during normal, everyday activities, not because you did something wrong.",
+        },
+        {
+          type: "image",
+          src: HowRupturesHappen,
+          alt:
+            "Educational infographic showing how Achilles tendon ruptures happen: tissue fatigue accumulates over time from normal activities, leading to rupture during a seemingly normal, submaximal activity",
+          caption:
+            "How ruptures happen: fatigue accumulates invisibly over time, then a normal activity triggers the rupture",
+        },
+        {
+          type: "card",
+          title: "The tissue fatigue explanation",
+          description: "Why normal activities can cause rupture.",
+          variant: "muted",
+          content: [
+            {
+              type: "text",
+              content:
+                "Think of it like a **rope that's been used many times**. Each normal activity (walking, stepping back, light exercise) adds tiny amounts of fatigue to the tendon. Over days and weeks, this fatigue accumulates invisibly — like the **tip of an iceberg**.",
+            },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Submaximal activities** (normal step-backs, walking) cause fatigue to build up over time",
+                "**The rupture happens** during a seemingly normal activity — not a maximal effort like jumping",
+                "**It's not your fault** — the tendon was already weakened by accumulated fatigue",
+                "**Examples**: Professional athletes like Kevin Durant ruptured during normal step-backs, not during maximal jumps",
+              ],
+            },
+            {
+              type: "text",
+              content:
+                "The Achilles tendon is the strongest tendon in your body, but **tissue fatigue** is the critical factor. This is why ruptures can happen during activities you've done thousands of times before.",
+            },
+          ],
         },
         {
           type: "text",

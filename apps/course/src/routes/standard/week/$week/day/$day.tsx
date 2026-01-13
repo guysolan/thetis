@@ -7,18 +7,15 @@ import {
   type SectionMetadata,
   sections,
 } from "@/content/course/sections";
-import { ContentRenderer } from "@/components/course";
+import { ContentRenderer, CourseProgressTracker } from "@/components/course";
 import type { SectionContent } from "@/components/course/types";
 import {
   ArrowLeft,
   ArrowRight,
-  BookOpen,
   CheckCircle2,
   Clock,
-  Mail,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Progress } from "@thetis/ui/progress";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 import { useCourseProgress } from "@/hooks/use-course-progress";
 import { useEffect } from "react";
@@ -95,6 +92,7 @@ function SectionPage() {
   } = useCourseProgress();
   const isComplete = isLessonComplete(section.slug);
   const completionPercentage = getCompletionPercentage(totalSections);
+  const completedCount = sections.filter((s) => isLessonComplete(s.slug)).length;
 
   // Mark lesson as complete when viewed
   useEffect(() => {
@@ -105,7 +103,7 @@ function SectionPage() {
 
   return (
     <div className="mx-auto px-4 sm:px-6 py-8 md:py-12 max-w-4xl">
-      {/* Breadcrumb & Progress */}
+      {/* Breadcrumb */}
       <div className="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-4 mb-8">
         <Link
           to="/standard"
@@ -119,29 +117,18 @@ function SectionPage() {
             <Clock className="w-4 h-4" />
             {formatWeekDay(section.week, section.day)}
           </div>
-          <div className="bg-border w-px h-4" />
-          <div className="flex items-center gap-2 text-muted-foreground text-sm">
-            <BookOpen className="w-4 h-4" />
-            {section.section_number} of {totalSections}
-          </div>
         </div>
       </div>
 
-      {/* Progress Bar */}
-      <div className="mb-8">
-        <div className="flex justify-between items-center mb-2">
-          <span className="font-medium text-foreground text-sm">
-            Course Progress
-          </span>
-          <span className="font-semibold text-primary text-sm">
-            {completionPercentage}% Complete
-          </span>
-        </div>
-        <Progress value={completionPercentage} />
-        <p className="mt-1 text-muted-foreground text-xs">
-          {sections.filter((s) => isLessonComplete(s.slug)).length} of{" "}
-          {totalSections} lessons completed
-        </p>
+      {/* Progress Tracker */}
+      <div className="mb-8 bg-muted/50 p-4 border border-border rounded-xl">
+        <CourseProgressTracker
+          currentSectionNumber={section.section_number}
+          totalSections={totalSections}
+          completedCount={completedCount}
+          completionPercentage={completionPercentage}
+          sections={sections}
+        />
       </div>
 
       {/* Section Header */}

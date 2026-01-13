@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import PrePhysioPrep from "../../../assets/pre-physio-prep.png";
+import RehabProtocolTimeline from "../../../assets/rehab-protocol-timeline.png";
 
 export const metadata = {
     slug: "week-9-day-0-pre-physio-prep",
@@ -48,68 +48,113 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Understanding Physiotherapy",
+            title: "Phase 1 Exercises: What You Should Have Done",
             content: [
-                {
-                    type: "image",
-                    src: PrePhysioPrep,
-                    alt: "Educational diagram showing what physiotherapy involves for Achilles rupture recovery: assessment, exercises, manual therapy, education, and progress tracking",
-                    caption:
-                        "Physiotherapy helps rebuild strength, mobility, balance, and function after Achilles rupture",
-                },
                 {
                     type: "text",
                     content:
-                        "Physiotherapy (physio) is where you rebuild what the injury took away: strength, mobility, balance, and function. Think of it like **rebuilding a house** — the boot phase was the foundation, physio is building the walls and roof.",
+                        "During the immobilization period (weeks 0-6), you should have been doing exercises to build strength while your tendon heals. By Week 9, you're either continuing these exercises or catching up if you haven't started yet. This section reviews what Phase 1 exercises involve and why they matter.",
                 },
                 {
                     type: "card",
-                    title: "What physio involves",
-                    description: "What to expect.",
+                    title: "Seated calf raise progression",
+                    description: "The foundation of Phase 1 exercises.",
                     variant: "default",
                     content: [
+                        {
+                            type: "text",
+                            content:
+                                "Seated calf raises are done with your boot removed (boot stays on for everything else). You start light and gradually increase the load:",
+                        },
                         {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Assessment** — evaluating your strength, mobility, and function",
-                                "**Exercises** — specific exercises to rebuild strength and mobility",
-                                "**Manual therapy** — hands-on techniques to improve movement",
-                                "**Education** — learning about your recovery and how to help yourself",
-                                "**Progress tracking** — monitoring your improvement over time",
+                                "**Week 2-3**: Start with body weight or leg weight only — get used to the movement",
+                                "**Week 3+**: Add load gradually — start with 10-15kg on your knee, progress to 0.8-1x body weight",
+                                "**Position**: Foot in plantarflexion (pointed down) — this is the safe position, cannot re-rupture",
+                                "**Target**: Build up to holding body weight in plantarflexion position",
                             ],
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "These exercises are done **out of boot** (boot removed for exercises only). The boot protects your tendon for everything else — walking, sleeping, daily activities.",
                         },
                     ],
                 },
                 {
                     type: "card",
-                    title: "Why physio matters",
-                    description: "It's essential for recovery.",
+                    title: "Standing progression (Weeks 8-10)",
+                    description: "Moving from seated to standing.",
                     variant: "muted",
                     content: [
                         {
                             type: "text",
                             content:
-                                "Your tendon heals on its own, but your muscles, balance, and movement patterns don't. Physio helps you rebuild these. Without physio, you may heal but never regain full function. With physio, you maximize your recovery potential.",
+                                "Once you can hold ~50% body weight seated, you progress to standing exercises:",
                         },
                         {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Rebuilds strength** — muscles weaken during immobilization",
-                                "**Restores mobility** — ankle stiffness needs addressing",
-                                "**Improves balance** — balance is often affected",
-                                "**Corrects movement patterns** — prevents bad habits",
-                                "**Guides progression** — ensures you progress safely",
+                                "**Start with two feet** — standing isometric holds for safety",
+                                "**Prevent collapse** — avoid letting your foot fall into dorsiflexion (toes up)",
+                                "**Target**: Hold body weight in plantarflexion position (isometric)",
+                                "**Challenge**: This is achievable for many, but challenging for heavier individuals",
                             ],
                         },
                     ],
                 },
                 {
-                    type: "tip",
-                    title: "Simple analogy",
+                    type: "card",
+                    title: "Intrinsic foot work",
+                    description: "Starting from Week 2.",
+                    variant: "muted",
+                    content: [
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "**Toe spreading** — helps with proprioception and foot awareness",
+                                "**Short foot exercises** — activates foot muscles",
+                                "**Why it matters**: Your foot feels strange after being in a boot — these exercises help restore awareness",
+                            ],
+                        },
+                    ],
+                },
+                {
+                    type: "alert",
+                    variant: "info",
+                    title: "Important",
                     content:
-                        "Think of physio like **learning to drive again** after not driving for months. You know how to drive, but you're rusty. A driving instructor (physiotherapist) helps you remember the skills, correct bad habits, and build confidence. You still do the work, but they guide you.",
+                        "These exercises are done **out of boot** but in a **safe position** (plantarflexion). Your boot stays on for everything else. If you haven't started these exercises yet, it's not too late — begin now with guidance from your clinician or physiotherapist.",
+                },
+            ],
+        },
+        {
+            type: "section",
+            title: "Complete Rehabilitation Protocol Reference",
+            content: [
+                {
+                    type: "text",
+                    content:
+                        "You first saw the rehabilitation protocol table in [Week 2 Day 4](/standard/week/2/day/4) when you started Phase 1 exercises. As you prepare for physiotherapy, here's the complete protocol again for reference. This is your **source of truth** for understanding what each phase involves, what exercises to do, and what outcomes to aim for.",
+                },
+                {
+                    type: "image",
+                    src: RehabProtocolTimeline,
+                    alt: "Educational infographic showing the four phases of rehabilitation: Phase 1 Immobilization (weeks 0-6), Phase 2 Post-immobilization (weeks 6-12), Phase 3 Single leg capacity (weeks 12-18), Phase 4 Power and return to sport (weeks 18+)",
+                    caption:
+                        "The four phases of recovery: you've completed Phase 1, entering Phase 2",
+                },
+                {
+                    type: "rehab-protocol-table",
+                },
+                {
+                    type: "text",
+                    content:
+                        "You've completed **Phase 1 (Immobilization Period)** and are now preparing for **Phase 2 (Post-Immobilization Period)**. This protocol shows the progression through all phases. Your physiotherapist will guide you through Phase 2 and beyond, but understanding the full picture helps you see where you're going and why each phase matters.",
                 },
             ],
         },

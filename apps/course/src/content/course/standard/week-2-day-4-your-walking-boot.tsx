@@ -433,6 +433,77 @@ export const content: SectionContent = {
         },
         {
             type: "section",
+            title: "Starting Exercises: Phase 1 (Immobilization Period)",
+            content: [
+                {
+                    type: "text",
+                    content:
+                        "Now that you're in your boot, you can start doing exercises to build strength while your tendon heals. These exercises are done **with your boot removed** (boot stays on for everything else). The table below shows the complete rehabilitation protocol — this is your **source of truth** for understanding what exercises to do and when.",
+                },
+                {
+                    type: "rehab-protocol-table",
+                },
+                {
+                    type: "card",
+                    title: "Phase 1 exercises: What to start now (Week 2-3)",
+                    description: "Exercises you can begin immediately.",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "During Phase 1 (immobilization period, weeks 0-6), you'll do seated calf raises with your boot removed. Here's how to start:",
+                        },
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "**Week 2-3**: Start with body weight or leg weight only — remove boot, sit with foot in plantarflexion (pointed down), push through big toe and lift heel. Get used to the movement.",
+                                "**Week 3+**: Add load gradually — start with 10-15kg on your knee, progress to 0.8-1x body weight",
+                                "**Position**: Foot must be in plantarflexion (pointed down) — this is the safe position, cannot re-rupture",
+                                "**Target**: Build up to holding body weight in plantarflexion position",
+                            ],
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "These exercises are done **out of boot** (boot removed for exercises only). Your boot stays on for everything else — walking, sleeping, daily activities. The boot protects your tendon; exercises strengthen it safely.",
+                        },
+                    ],
+                },
+                {
+                    type: "card",
+                    title: "Intrinsic foot work (Start Week 2)",
+                    description: "Simple exercises for foot awareness.",
+                    variant: "muted",
+                    content: [
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "**Toe spreading** — helps with proprioception and foot awareness",
+                                "**Short foot exercises** — activates foot muscles",
+                                "**Why it matters**: Your foot feels strange after being in a boot — these exercises help restore awareness",
+                            ],
+                        },
+                    ],
+                },
+                {
+                    type: "alert",
+                    variant: "info",
+                    title: "Important",
+                    content:
+                        "Always check with your clinician before starting exercises. Some protocols start exercises earlier (Week 2), others later. Follow your clinician's specific guidance. Exercises must be done in plantarflexion (foot pointed down) — this is the safe position.",
+                },
+                {
+                    type: "text",
+                    content:
+                        "The rehabilitation protocol table above shows all phases of recovery. You're currently in **Phase 1 (Immobilization Period)**. As you progress, you'll move through Phase 2 (Post-Immobilization), Phase 3 (Single Leg Capacity), Phase 4 (Single Leg Power), and finally Phase 5 (Return to Sport). You can refer back to this table throughout your recovery to see where you are and what's coming next.",
+                },
+            ],
+        },
+        {
+            type: "section",
             title: "What's normal vs what's urgent",
             content: [
                 {

@@ -1,5 +1,8 @@
 import type { SectionContent } from "@/components/course/types";
 import TendonStrengthTimeline from "../../../assets/tendon-strength-timeline.png";
+import WhenToRemoveBoot from "../../../assets/when-to-remove-boot.png";
+import ReRuptureRiskTimeline from "../../../assets/re-rupture-risk-timeline.png";
+import ProtectedWalkingAfterBoot from "../../../assets/protected-walking-after-boot.png";
 
 export const metadata = {
     slug: "week-8-day-0-final-boot-phase",
@@ -181,6 +184,14 @@ export const content: SectionContent = {
                         "Boot removal is coming — usually around Week 10-12. This is exciting, but it's also a transition that needs preparation. Your foot has been protected for weeks, and suddenly it won't be.",
                 },
                 {
+                    type: "image",
+                    src: WhenToRemoveBoot,
+                    alt:
+                        "Educational infographic showing when to remove boot: time-based removal (8 weeks) vs strength-based removal (11-12 weeks), criteria checklist, and why strength matters more than time",
+                    caption:
+                        "When to remove your boot: strength-based removal is safer than time-based removal",
+                },
+                {
                     type: "card",
                     title: "What to expect",
                     description: "The transition from boot to shoes.",
@@ -223,6 +234,42 @@ export const content: SectionContent = {
                     title: "Gradual weaning",
                     content:
                         "Some protocols allow gradual weaning — wearing the boot less and less over 1-2 weeks. This can make the transition easier. Start with a few hours a day without the boot, gradually increase. Always follow your clinician's specific protocol.",
+                },
+                {
+                    type: "image",
+                    src: ProtectedWalkingAfterBoot,
+                    alt:
+                        "Educational infographic showing protected walking techniques after boot removal: heel wedge (1.2cm), reduced step length, partial weight-bearing if limping, and why these techniques prevent elongation",
+                    caption:
+                        "Protected walking techniques: heel wedge, shorter steps, and partial weight-bearing protect your healing tendon",
+                },
+                {
+                    type: "card",
+                    title: "Protected walking techniques",
+                    description: "How to walk safely after boot removal.",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "When you first remove your boot, your tendon is still vulnerable. Protected walking techniques help prevent elongation — the biggest risk after boot removal.",
+                        },
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "**Heel wedge (1.2cm)**: Use a heel lift in your shoe to reduce tendon stretch during walking",
+                                "**Reduced step length**: Take shorter steps than normal to reduce force through your tendon",
+                                "**Partial weight-bearing if limping**: If you're limping, use crutches or reduce weight on the injured foot",
+                                "**Gradual progression**: Increase step length and weight-bearing as your strength improves",
+                            ],
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "These techniques are especially important in the first few weeks after boot removal. Your physiotherapist will guide you on when to progress.",
+                        },
+                    ],
                 },
             ],
         },

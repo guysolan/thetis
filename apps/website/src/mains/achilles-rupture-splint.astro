@@ -15,11 +15,20 @@ import ComfortableRecoveryReviews from "@/sections/achilles-rupture-splint/Comfo
 import OrderYourSplint from "@/sections/achilles-rupture-splint/OrderYourSplint.astro";
 import SleepInYourWelliesSection from "@/sections/achilles-rupture-splint/SleepInYourWelliesSection.astro";
 import SplintDownloads from "@/sections/achilles-rupture-splint/SplintDownloads.astro";
-import SplintTimeline from "@/sections/achilles-rupture-splint/SplintTimeline.astro";
 import StickyAddToCart from "@/components/StickyAddToCart.tsx";
 import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import { BundlesAndRecommendations } from "@/components/products/BundlesAndRecommendations";
+import { patients } from "@/components/reviews/content/patients";
+import { athletes } from "@/components/reviews/content/athletes";
+import { translatedClinicians } from "@/components/reviews/content/professional-opinions";
+import SurgeonsCarousel from "@/components/SurgeonsCarousel";
+import AthletesBadges from "@/components/AthletesBadges.astro";
+import { Image as AstroImage } from "astro:assets";
+import Review1Image from "@/assets/review-1.png";
+import Review2Image from "@/assets/review-2.png";
+import Review3Image from "@/assets/review-3.png";
+import ColorGradientInOut from "@/components/ColorGradientInOut.astro";
 import type { Lang } from "@/config/languages.ts";
 
 const { lang = "en" } = Astro.props as { lang?: Lang };
@@ -81,6 +90,79 @@ const currentContent = content[lang as keyof typeof content];
             />
         </div>
         <NightSplintHero lang={lang} />
+
+        <!-- Patient Reviews - Early Social Proof -->
+        <section class="bg-white py-16 md:py-20">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-12 text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                    >
+                        Join 5,000+ Patients Who've Found Relief
+                    </h2>
+                    <p class="mb-6 text-neutral-600 text-lg">
+                        Real reviews from real patients recovering from Achilles
+                        rupture
+                    </p>
+                </div>
+                <div class="mb-8">
+                    <Reviews />
+                </div>
+                <!-- Featured Patient Reviews -->
+                <div class="gap-6 grid md:grid-cols-3 mt-12">
+                    {
+                        patients
+                            .filter((p) => p.is_pinned)
+                            .slice(0, 3)
+                            .map((review, index) => {
+                                const reviewImages = [
+                                    Review1Image,
+                                    Review2Image,
+                                    Review3Image,
+                                ];
+                                const reviewImage =
+                                    reviewImages[index] || Review1Image;
+                                return (
+                                    <div class="bg-neutral-50 p-6 border-2 border-primary/20 rounded-lg">
+                                        <div class="flex items-start gap-3 mb-4">
+                                            <AstroImage
+                                                src={reviewImage}
+                                                alt={review.name}
+                                                class="flex-shrink-0 rounded-full w-12 h-12 object-cover"
+                                                width={48}
+                                                height={48}
+                                            />
+                                            <div class="flex-1 min-w-0">
+                                                <p class="font-semibold text-neutral-900 text-sm">
+                                                    {review.name}
+                                                </p>
+                                                <p class="text-neutral-600 text-xs">
+                                                    {review.country}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <p class="mb-2 text-neutral-700 text-sm italic leading-relaxed">
+                                            "
+                                            {review.short ||
+                                                review.body.slice(0, 150)}
+                                            "
+                                        </p>
+                                        <div class="flex gap-1">
+                                            {Array.from({ length: 5 }).map(
+                                                () => (
+                                                    <span class="text-yellow-400 text-sm">
+                                                        ★
+                                                    </span>
+                                                ),
+                                            )}
+                                        </div>
+                                    </div>
+                                );
+                            })
+                    }
+                </div>
+            </div>
+        </section>
 
         <!-- Who This Is For Section -->
         <section class="bg-neutral-50 py-16 md:py-20">
@@ -303,16 +385,99 @@ const currentContent = content[lang as keyof typeof content];
             </div>
         </section>
 
-        <!-- Bundles & Frequently Bought Together -->
-        <section class="bg-neutral-50 dark:bg-neutral-900 py-12 md:py-16">
-            <div class="mx-auto px-4 max-w-4xl">
-                <BundlesAndRecommendations lang={lang} client:load />
+        <SleepInYourWelliesSection />
+
+        <!-- Athlete Testimonials -->
+        <section class="bg-neutral-50 py-16 md:py-20">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-12 text-center">
+                    <p
+                        class="mb-4 font-medium text-primary text-sm uppercase tracking-widest"
+                    >
+                        TRUSTED BY ATHLETES
+                    </p>
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                    >
+                        What <span class="text-primary">Elite Athletes</span> Say
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
+                        Professional athletes trust Thetis Night Splint for
+                        their recovery
+                    </p>
+                </div>
+                <div class="mb-8">
+                    <AthletesBadges />
+                </div>
+                <div class="gap-6 grid md:grid-cols-2 lg:grid-cols-3 mt-12">
+                    {
+                        athletes.slice(0, 3).map((athlete) => (
+                            <div class="bg-white shadow-sm p-6 border-2 border-primary/20 rounded-lg">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <AstroImage
+                                        src={athlete.image}
+                                        alt={athlete.name}
+                                        class="flex-shrink-0 rounded-full w-14 h-14 object-cover"
+                                        width={56}
+                                        height={56}
+                                    />
+                                    <div class="flex-1 min-w-0">
+                                        <p class="font-semibold text-neutral-900 text-base">
+                                            {athlete.name}
+                                        </p>
+                                        <p class="text-neutral-600 text-sm">
+                                            {athlete.description}
+                                        </p>
+                                    </div>
+                                </div>
+                                <p class="mb-2 font-bold text-neutral-900 text-lg">
+                                    {athlete.title}
+                                </p>
+                                <p class="text-neutral-700 text-sm italic leading-relaxed">
+                                    "{athlete.short}"
+                                </p>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
         </section>
 
-        <SleepInYourWelliesSection />
-
-        <Reviews />
+        <!-- Clinician Testimonials -->
+        <ColorGradientInOut size="lg">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-12 text-center">
+                    <p
+                        class="mb-4 font-medium text-primary text-sm uppercase tracking-widest"
+                    >
+                        PROFESSIONAL ENDORSEMENTS
+                    </p>
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                    >
+                        Trusted by <span class="text-primary"
+                            >Leading Surgeons</span
+                        >
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
+                        Our innovative solutions have earned the trust of
+                        healthcare professionals worldwide
+                    </p>
+                </div>
+                <div class="mb-8">
+                    <SurgeonsCarousel client:load />
+                </div>
+                <div class="mt-8 text-center">
+                    <a
+                        href="/reviews"
+                        class="inline-flex items-center gap-2 font-semibold text-primary text-lg hover:underline transition-colors"
+                    >
+                        Read More Professional Reviews
+                        <span class="text-xl">→</span>
+                    </a>
+                </div>
+            </div>
+        </ColorGradientInOut>
 
         <ValuePropositions lang={lang} />
 
@@ -321,9 +486,6 @@ const currentContent = content[lang as keyof typeof content];
         <ReadyForRelief lang={lang} />
 
         <ComfortableRecoveryReviews lang={lang} />
-
-        <!-- Splint Timeline -->
-        <SplintTimeline lang={lang} />
 
         <!-- Lazy load YouTube iframe -->
         <div class="relative mx-auto mt-8 w-full">
@@ -344,6 +506,13 @@ const currentContent = content[lang as keyof typeof content];
         <NightSplintInstructions lang={lang} />
 
         <NightSplintFAQs client:load lang={lang} />
+
+        <!-- Bundles & Frequently Bought Together - Moved to end -->
+        <section class="bg-neutral-50 dark:bg-neutral-900 py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-4xl">
+                <BundlesAndRecommendations lang={lang} client:load />
+            </div>
+        </section>
 
         <OrderYourSplint lang={lang} />
 
