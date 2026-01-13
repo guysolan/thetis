@@ -1,5 +1,7 @@
 import type { SectionContent } from "@/components/course/types";
 import RehabProtocolTimeline from "../../../assets/rehab-protocol-timeline.png";
+import Phase1ExercisesOverview from "../../../assets/phase-1-exercises-overview.png";
+import ExerciseLoadProgression from "../../../assets/exercise-load-progression.png";
 
 export const metadata = {
     slug: "week-9-day-0-pre-physio-prep",
@@ -54,6 +56,20 @@ export const content: SectionContent = {
                     type: "text",
                     content:
                         "During the immobilization period (weeks 0-6), you should have been doing exercises to build strength while your tendon heals. By Week 9, you're either continuing these exercises or catching up if you haven't started yet. This section reviews what Phase 1 exercises involve and why they matter.",
+                },
+                {
+                    type: "image",
+                    src: Phase1ExercisesOverview,
+                    alt: "Infographic showing Phase 1 exercises: seated calf raise progression, load progression from 10kg to body weight, standing progression from weeks 8-10, and intrinsic foot work",
+                    caption:
+                        "Phase 1 exercises overview: what you should have done during immobilization and can continue doing",
+                },
+                {
+                    type: "image",
+                    src: ExerciseLoadProgression,
+                    alt: "Infographic showing exercise load progression: seated calf raise with load, force through tendon at different angles, target of 1.5x body weight for walking readiness",
+                    caption:
+                        "Exercise load progression: building strength safely with progressive loading",
                 },
                 {
                     type: "card",

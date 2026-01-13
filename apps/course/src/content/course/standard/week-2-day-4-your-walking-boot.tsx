@@ -3,6 +3,7 @@ import BootAngleProgression from "../../../assets/boot-angle-progression.png";
 import AircastBootWithWedges from "../../../assets/aircast-boot-with-wedges.png";
 import VacopedBootStandalone from "../../../assets/vacoped-boot-standalone.jpeg";
 import BootFittingGuide from "../../../assets/boot-fitting-guide.png";
+import BootForceComparison from "../../../assets/boot-force-comparison.png";
 
 export const metadata = {
     slug: "week-2-day-4-your-walking-boot",
@@ -317,11 +318,18 @@ export const content: SectionContent = {
                                         "Both boots are clinically effective — research shows similar outcomes. The choice often comes down to what's available, what your clinic uses, and cost.",
                                 },
                                 {
+                                    type: "image",
+                                    src: BootForceComparison,
+                                    alt: "Comparison diagram showing force control in VACOped vs Aircast boots, demonstrating why VACOped provides better force control but both boots work if used correctly",
+                                    caption:
+                                        "Boot force comparison: VACOped provides better force control, but all boots work if used correctly",
+                                },
+                                {
                                     type: "list",
                                     style: "bullet",
                                     items: [
                                         "**Aircast:** More common, typically provided by NHS, simpler mechanism, lower cost (~£80–150)",
-                                        "**VACOped:** More adjustable, allows controlled early movement, often requires private purchase (~£250–400)",
+                                        "**VACOped:** More adjustable, allows controlled early movement, better force control, often requires private purchase (~£250–400)",
                                         "**Both work:** The key is following your protocol correctly, not which boot you have",
                                     ],
                                 },

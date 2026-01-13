@@ -112,6 +112,13 @@ export const content: SectionContent = {
                     content:
                         "Think of your tendon like a **rope bridge** being rebuilt. At Week 8, it's strong enough for one person to walk across slowly, but not strong enough for running or jumping. You need to wait until it's fully rebuilt before you can use it normally. Patience now = stronger bridge later.",
                 },
+                {
+                    type: "image",
+                    src: ReRuptureRiskTimeline,
+                    alt: "Timeline diagram showing re-rupture risk periods: high-risk periods during early rehab and boot removal, why elongation is a bigger problem than re-rupture",
+                    caption:
+                        "Re-rupture risk timeline: understanding when risks are highest and why elongation matters more",
+                },
             ],
         },
         {
@@ -186,8 +193,7 @@ export const content: SectionContent = {
                 {
                     type: "image",
                     src: WhenToRemoveBoot,
-                    alt:
-                        "Educational infographic showing when to remove boot: time-based removal (8 weeks) vs strength-based removal (11-12 weeks), criteria checklist, and why strength matters more than time",
+                    alt: "Educational infographic showing when to remove boot: time-based removal (8 weeks) vs strength-based removal (11-12 weeks), criteria checklist, and why strength matters more than time",
                     caption:
                         "When to remove your boot: strength-based removal is safer than time-based removal",
                 },
@@ -238,8 +244,7 @@ export const content: SectionContent = {
                 {
                     type: "image",
                     src: ProtectedWalkingAfterBoot,
-                    alt:
-                        "Educational infographic showing protected walking techniques after boot removal: heel wedge (1.2cm), reduced step length, partial weight-bearing if limping, and why these techniques prevent elongation",
+                    alt: "Educational infographic showing protected walking techniques after boot removal: heel wedge (1.2cm), reduced step length, partial weight-bearing if limping, and why these techniques prevent elongation",
                     caption:
                         "Protected walking techniques: heel wedge, shorter steps, and partial weight-bearing protect your healing tendon",
                 },

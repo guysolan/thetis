@@ -1,0 +1,36 @@
+{
+  "overallScore": 7,
+  "accuracy": {
+    "score": 8,
+    "feedback": "The image accurately represents the key points from the course content related to boot fitting. It shows the heel position, finger space, strap order, and toe room clearly.",
+    "issues": [
+      "The image doesn't explicitly show the space behind the heel.",
+      "The representation of strap tightening order could be clearer with more detailed labeling."
+    ]
+  },
+  "style": {
+    "score": 7,
+    "feedback": "The style is consistent with patient education materials, using clear labeling and arrows. However, the labels could be more visually distinct from the arrows for clarity.",
+    "consistency": [
+      "The style matches the educational tone of the course material.",
+      "The use of arrows is consistent but could be more distinct in color from the text."
+    ]
+  },
+  "patientFriendliness": {
+    "score": 6,
+    "feedback": "The image is generally patient-friendly but could be improved for clarity. Labels are clear, but more visual distinction between elements would enhance comprehension.",
+    "strengths": [
+      "Clear labeling with numbered points helps guide the patient.",
+      "Use of arrows to indicate specific areas is effective."
+    ],
+    "improvements": [
+      "Enhance contrast between arrows and labels for clarity.",
+      "Illustrate the finger space behind the heel more explicitly."
+    ]
+  },
+  "recommendations": [
+    "Add a visual representation of the finger space behind the heel to enhance clarity.",
+    "Use different colors or styles for arrows and text to make labels stand out more prominently."
+  ],
+  "imagePath": "/Users/guysolan/Code/thetis/apps/course/src/assets/boot-fitting-guide.png"
+}

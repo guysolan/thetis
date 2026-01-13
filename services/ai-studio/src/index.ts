@@ -1,6 +1,10 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import fs from "fs";
 import path from "path";
+import { loadEnv } from "./load-env";
+
+// Load environment variables from .env file
+loadEnv();
 
 /**
  * Google Gemini Image Generation Service
@@ -75,8 +79,9 @@ async function main() {
             "\x1b[31mError: GOOGLE_GENERATIVE_AI_API_KEY is not set.\x1b[0m",
         );
         console.log(
-            "Please create a .env file in services/ai-studio/ with your API key.",
+            "Please create a .env file in services/ai-studio/ with:",
         );
+        console.log("  GOOGLE_GENERATIVE_AI_API_KEY=your-key-here");
         console.log("Get one at: https://aistudio.google.com/app/apikey");
         process.exit(1);
     }

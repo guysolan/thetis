@@ -1,84 +1,109 @@
-# Google AI Studio Image Generation
+# AI Studio
 
-A simple service to generate images using Google's Gemini model via the Generative AI API.
+Tools for generating and reviewing images for the Achilles rupture recovery course.
 
 ## Setup
 
-1. Get an API key from [Google AI Studio](https://aistudio.google.com/app/apikey).
-2. Create a `.env` file in this directory and add your key:
-
-   ```env
-   GOOGLE_GENERATIVE_AI_API_KEY=your_key_here
-   ```
-
-3. Install dependencies:
-
-   ```bash
-   bun install
-   ```
-
-## Usage
-
-### Generate New Images
-
-Run the generation script with a prompt:
+1. Install dependencies:
 
 ```bash
-bun generate "A futuristic hospital room for tendon rehabilitation"
+bun install
 ```
 
-The image will be saved in the `output/` directory.
-
-You can also specify an output filename:
+2. Create a `.env` file in this directory (`services/ai-studio/.env`):
 
 ```bash
-bun generate "Achilles tendon diagram" "achilles-diagram.png"
+# Copy the example file
+cp .env.example .env
+
+# Then edit .env and add your API keys:
+OPENAI_API_KEY=your-openai-api-key-here
+GOOGLE_GENERATIVE_AI_API_KEY=your-google-api-key-here
 ```
 
-### Review and Improve Existing Images
+The scripts will automatically load environment variables from the `.env` file:
 
-Review images for accuracy, safety, style, and compliance with recovery positions:
+- `OPENAI_API_KEY` - Used for image review (GPT-4 Vision)
+- `GOOGLE_GENERATIVE_AI_API_KEY` - Used for image generation (Gemini)
+
+## Image Review
+
+### Single Image Review
+
+Review a single image for medical accuracy, stylistic consistency, and patient-friendliness:
 
 ```bash
-bun run review path/to/image.png [output-name]
+bun src/review-image.ts <image-path> [context-file]
 ```
 
-This will:
+**Examples:**
 
-- Check for inaccuracies, safety issues, style problems, and position compliance
-- Generate an improved version if issues are found
-- Save as `original-name-2.png` (or your specified name)
-- Automatically uses `mike-and-doc.png` as the primary character reference for improved images
+```bash
+# Review an exercise image
+bun src/review-image.ts ../apps/course/src/assets/seated-calf-raise-week-12.png
 
-## Reference Images (Style/Character Consistency)
+# Review with course content context
+bun src/review-image.ts ../apps/achilles-rupture/public/images/lecture/39m22s.png ../apps/course/src/content/course/standard/week-12-day-0-key-exercises.tsx
+```
 
-Place any reference images in the `input/` folder. These will be automatically included in the generation request to guide the AI on style and characters.
+### Batch Review
 
-**CRITICAL: Character Reference**
+Review all images in a directory:
 
-The file `mike-and-doc.png` in the `input/` folder is the **primary character reference**. This image shows the exact doctor and patient characters that must be used in all generated images. The script will automatically prioritize this file and explicitly instruct the AI to match these characters exactly.
+```bash
+bun src/review-batch.ts <directory-path> [context-file]
+```
 
-- **Doctor:** Thetis green scrubs and crocs (as shown in mike-and-doc.png)
-- **Patient:** 40-year-old white male, slim, average height (as shown in mike-and-doc.png)
+**Examples:**
 
-**Supported formats:** `.png`, `.jpg`, `.jpeg`, `.webp`, `.gif`
+```bash
+# Review all lecture images
+bun src/review-batch.ts ../apps/achilles-rupture/public/images/lecture
 
-**Example workflow:**
+# Review all exercise images with context
+bun src/review-batch.ts ../apps/course/src/assets ../apps/course/src/content/course/standard/week-12-day-0-key-exercises.tsx
+```
 
-1. Ensure `mike-and-doc.png` is in the `input/` folder (it will be prioritized automatically)
-2. Add any additional reference images to `input/`:
+## Review Criteria
 
-   ```
-   input/
-   ├── mike-and-doc.png          # Primary character reference (required)
-   ├── product-reference.png      # Optional product/style references
-   └── style-guide.png            # Optional style guides
-   ```
+Each image is evaluated on three dimensions:
 
-3. Run generation — the AI will use mike-and-doc.png as the primary character reference:
+1. **Medical/Anatomical Accuracy (0-10)**
+   - Correct anatomy
+   - Accurate exercise positions/postures
+   - Correct medical devices (boots, splints)
+   - Safety concerns or incorrect techniques
 
-   ```bash
-   bun generate "A person learning to use crutches in a hospital corridor"
-   ```
+2. **Stylistic Consistency (0-10)**
+   - Matches expected style for patient education
+   - Consistency with other course materials
+   - Appropriate visual style (not too clinical, not too casual)
+   - Professional colors, lighting, and composition
 
-4. The generated image will maintain visual consistency with the characters from mike-and-doc.png.
+3. **Patient-Friendliness (0-10)**
+   - Clear and easy to understand
+   - Helpful and reassuring for patients
+   - Free of unnecessary medical jargon
+   - Shows proper form/technique clearly
+   - Encouraging and not intimidating
+
+## Output
+
+Reviews are saved as JSON files in the `reviews/` directory. Each review includes:
+
+- Overall score (0-10)
+- Detailed scores and feedback for each criterion
+- Specific issues, strengths, and improvements
+- Actionable recommendations
+
+Batch reviews also generate a summary JSON file with statistics.
+
+## Image Generation
+
+Generate images using Google Gemini:
+
+```bash
+bun src/index.ts "your prompt here" "output-filename.png"
+```
+
+Reference images in the `input/` folder will be automatically included to guide style and characters.

@@ -79,10 +79,77 @@ export const content: SectionContent = {
             "The **Achilles tendon** is the largest and strongest tendon in your body. A **tendon** is a tough band of tissue that connects muscle to bone. Your Achilles tendon connects your **calf muscle** (the muscles at the back of your lower leg) to your **heel bone** (also called the calcaneus). When it ruptures, the tendon fibres tear completely — think of it like a rope that has frayed and snapped. This disconnects your powerful calf muscle from your heel, which is why you suddenly can't push off the ground properly or stand on your tiptoes.",
         },
         {
+          type: "heading",
+          level: 3,
+          text: "Understanding Foot Movements: Plantarflexion and Dorsiflexion",
+        },
+        {
+          type: "text",
+          content:
+            "Throughout your recovery, you'll hear clinicians use terms like **plantarflexion** and **dorsiflexion**. Understanding these terms helps you follow instructions and protect your healing tendon.",
+        },
+        {
+          type: "card",
+          title: "Plantarflexion (Pointed Down)",
+          description: "The SAFE position for healing.",
+          variant: "highlight",
+          content: [
+            {
+              type: "text",
+              content:
+                "**Plantarflexion** means your foot is **pointed down**, like you're standing on tiptoes or pressing a gas pedal. This is the **safe position** for your healing tendon — it brings the torn ends closer together.",
+            },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Visual**: Your toes point down toward the ground",
+                "**Feels like**: Standing on tiptoes or pressing a gas pedal",
+                "**Why it's safe**: Keeps tendon ends together, prevents elongation",
+                "**When**: This is your position in the boot/cast for the first 8-12 weeks",
+              ],
+            },
+          ],
+        },
+        {
+          type: "card",
+          title: "Dorsiflexion (Toes Up)",
+          description: "The UNSAFE position early in recovery.",
+          variant: "muted",
+          content: [
+            {
+              type: "text",
+              content:
+                "**Dorsiflexion** means your foot is **pointed up**, with your toes moving toward your shin. This is **unsafe early in recovery** because it pulls the tendon ends apart.",
+            },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Visual**: Your toes point up toward your shin",
+                "**Feels like**: Pulling your foot back toward your leg",
+                "**Why it's dangerous**: Pulls tendon ends apart, causes elongation",
+                "**When safe**: Only after your tendon has healed and strengthened (weeks 12+)",
+              ],
+            },
+            {
+              type: "alert",
+              variant: "warning",
+              content:
+                "**Critical**: Don't let your toes come up (dorsiflexion) in the first 8-12 weeks. This is the golden rule — it pulls the tendon ends apart and disrupts healing.",
+            },
+          ],
+        },
+        {
+          type: "text",
+          content:
+            "**Simple memory aid**: **Plantar**flexion = **Point** down (both start with P). **Dors**iflexion = **Danger** early (both start with D). Your boot holds your foot in plantarflexion (pointed down) to protect your healing tendon.",
+        },
+        {
           type: "tip",
           title: "The Golden Rule: Keep the Ends Together",
           content:
-            "Think of recovery like a game of **snakes and ladders**. When you keep the two torn ends of the tendon **lined up and close together** (by keeping your foot pointed down), you're climbing a ladder — healing progresses forward. When you let your toes come up or stretch, you're sliding down a snake — the ends pull apart and healing is disrupted. **The #1 rule: don't let your toes come up.**",
+            "Think of recovery like a game of **snakes and ladders**. When you keep the two torn ends of the tendon **lined up and close together** (by keeping your foot pointed down — **plantarflexion**), you're climbing a ladder — healing progresses forward. When you let your toes come up (**dorsiflexion**) or stretch, you're sliding down a snake — the ends pull apart and healing is disrupted. **The #1 rule: don't let your toes come up.**",
         },
         {
           type: "image",

@@ -9,12 +9,7 @@ import {
 } from "@/content/course/sections";
 import { ContentRenderer, CourseProgressTracker } from "@/components/course";
 import type { SectionContent } from "@/components/course/types";
-import {
-  ArrowLeft,
-  ArrowRight,
-  CheckCircle2,
-  Clock,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 import { useCourseProgress } from "@/hooks/use-course-progress";
@@ -92,7 +87,8 @@ function SectionPage() {
   } = useCourseProgress();
   const isComplete = isLessonComplete(section.slug);
   const completionPercentage = getCompletionPercentage(totalSections);
-  const completedCount = sections.filter((s) => isLessonComplete(s.slug)).length;
+  const completedCount =
+    sections.filter((s) => isLessonComplete(s.slug)).length;
 
   // Mark lesson as complete when viewed
   useEffect(() => {
@@ -121,7 +117,7 @@ function SectionPage() {
       </div>
 
       {/* Progress Tracker */}
-      <div className="mb-8 bg-muted/50 p-4 border border-border rounded-xl">
+      <div className="bg-muted/50 mb-8 p-4 border border-border rounded-xl">
         <CourseProgressTracker
           currentSectionNumber={section.section_number}
           totalSections={totalSections}

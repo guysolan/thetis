@@ -7,10 +7,12 @@
   "scripts": {
     "generate": "bun src/index.ts",
     "review": "bun src/review-image.ts",
+    "review-batch": "bun src/review-batch.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.21.0"
+    "@google/generative-ai": "^0.21.0",
+    "openai": "^4.0.0"
   }
 }
 
