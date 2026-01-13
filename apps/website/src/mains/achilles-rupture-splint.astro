@@ -18,7 +18,6 @@ import SplintDownloads from "@/sections/achilles-rupture-splint/SplintDownloads.
 import SplintTimeline from "@/sections/achilles-rupture-splint/SplintTimeline.astro";
 import StickyAddToCart from "@/components/StickyAddToCart.tsx";
 import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
-import ComparisonTable from "@/components/ComparisonTable.tsx";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import { BundlesAndRecommendations } from "@/components/products/BundlesAndRecommendations";
 import type { Lang } from "@/config/languages.ts";
@@ -83,10 +82,224 @@ const currentContent = content[lang as keyof typeof content];
         </div>
         <NightSplintHero lang={lang} />
 
-        <!-- Comparison Table: Night Splint vs Boot - right after hero -->
-        <section class="py-16 md:py-20">
+        <!-- Who This Is For Section -->
+        <section class="bg-neutral-50 py-16 md:py-20">
             <div class="mx-auto px-4 max-w-4xl">
-                <ComparisonTable lang={lang} client:load />
+                <div class="mb-12 text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                    >
+                        Who This Is For
+                    </h2>
+                    <p class="text-neutral-600 text-lg">
+                        The Thetis Night Splint is specifically designed for
+                        Achilles tendon rupture recovery
+                    </p>
+                </div>
+                <div class="gap-6 grid md:grid-cols-2">
+                    <div
+                        class="bg-primary/5 p-6 border-2 border-primary/30 rounded-lg"
+                    >
+                        <h3
+                            class="flex items-center gap-2 mb-4 font-bold text-primary text-xl"
+                        >
+                            <span class="text-2xl">✓</span>
+                            Perfect For:
+                        </h3>
+                        <ul class="space-y-2 text-primary">
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1 text-primary">•</span>
+                                <span
+                                    >Achilles tendon rupture (complete tear)</span
+                                >
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1 text-primary">•</span>
+                                <span>Within 12 weeks of injury or surgery</span
+                                >
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1 text-primary">•</span>
+                                <span
+                                    >Approved by your surgeon for night use</span
+                                >
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1 text-primary">•</span>
+                                <span
+                                    >Struggling to sleep in your walking boot</span
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-red-50 p-6 border-2 border-red-200 rounded-lg"
+                    >
+                        <h3
+                            class="flex items-center gap-2 mb-4 font-bold text-red-900 text-xl"
+                        >
+                            <span class="text-2xl">✗</span>
+                            Not For:
+                        </h3>
+                        <ul class="space-y-2 text-red-800">
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1 text-red-600">•</span>
+                                <span>Achilles tendinitis or tendinopathy</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1 text-red-600">•</span>
+                                <span>More than 12 weeks post-injury</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1 text-red-600">•</span>
+                                <span>Other foot or ankle conditions</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="mt-1 text-red-600">•</span>
+                                <span>Not approved by your medical team</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 text-center">
+                    <p class="text-neutral-600">
+                        <strong>Always check with your surgeon first.</strong> This
+                        splint is specifically designed for Achilles rupture recovery
+                        and may not be suitable for other conditions.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table: Night Splint vs Boot -->
+        <section class="bg-white py-16 md:py-20 border-neutral-200 border-y">
+            <div class="mx-auto px-4 max-w-5xl">
+                <div class="mb-12 text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                    >
+                        Night Splint vs Boot: Side-by-Side Comparison
+                    </h2>
+                    <p class="text-neutral-600 text-lg">
+                        Both provide protection. Only one lets you sleep
+                        comfortably.
+                    </p>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-neutral-50 border-neutral-200 border-b-2"
+                            >
+                                <th
+                                    class="p-4 font-semibold text-neutral-900 text-left"
+                                >
+                                    Feature
+                                </th>
+                                <th
+                                    class="p-4 font-semibold text-red-900 text-center"
+                                >
+                                    Boot
+                                </th>
+                                <th
+                                    class="p-4 font-semibold text-primary text-center"
+                                >
+                                    Thetis Night Splint
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-neutral-200 border-b">
+                                <td class="p-4 font-medium text-neutral-900">
+                                    Weight
+                                </td>
+                                <td class="p-4 text-red-800 text-center">
+                                    1.5kg+
+                                </td>
+                                <td
+                                    class="p-4 font-semibold text-primary text-center"
+                                >
+                                    200g (90% lighter)
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-neutral-50/50 border-neutral-200 border-b"
+                            >
+                                <td class="p-4 font-medium text-neutral-900">
+                                    Breathability
+                                </td>
+                                <td class="p-4 text-red-800 text-center">
+                                    Enclosed, traps heat
+                                </td>
+                                <td
+                                    class="p-4 font-semibold text-primary text-center"
+                                >
+                                    Open design (exposes sole of foot and back
+                                    of leg)
+                                </td>
+                            </tr>
+                            <tr class="border-neutral-200 border-b">
+                                <td class="p-4 font-medium text-neutral-900">
+                                    Cleanliness
+                                </td>
+                                <td class="p-4 text-red-800 text-center">
+                                    Dirt and debris in bed
+                                </td>
+                                <td
+                                    class="p-4 font-semibold text-primary text-center"
+                                >
+                                    Clean (no dirt in bed)
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-neutral-50/50 border-neutral-200 border-b"
+                            >
+                                <td class="p-4 font-medium text-neutral-900">
+                                    Showering
+                                </td>
+                                <td class="p-4 text-red-800 text-center">
+                                    Cannot shower in it
+                                </td>
+                                <td
+                                    class="p-4 font-semibold text-primary text-center"
+                                >
+                                    Can shower in it
+                                </td>
+                            </tr>
+                            <tr class="border-neutral-200 border-b">
+                                <td class="p-4 font-medium text-neutral-900">
+                                    Use Period
+                                </td>
+                                <td class="p-4 text-neutral-700 text-center">
+                                    Weeks 0-12
+                                </td>
+                                <td class="p-4 text-neutral-700 text-center">
+                                    Weeks 0-12
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-primary/5 border-neutral-300 border-b-2"
+                            >
+                                <td class="p-4 font-medium text-neutral-900">
+                                    Healing Angle
+                                </td>
+                                <td class="p-4 text-neutral-700 text-center">
+                                    30° plantarflexion
+                                </td>
+                                <td class="p-4 text-neutral-700 text-center">
+                                    30° plantarflexion
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-8 text-center">
+                    <p class="text-neutral-600 text-sm">
+                        Both provide the same protection at the correct 30°
+                        healing angle. The splint is simply lighter, more
+                        breathable, and cleaner for sleeping.
+                    </p>
+                </div>
             </div>
         </section>
 

@@ -1676,9 +1676,15 @@ export function generateRouteForLanguage(
     baseRoute.slug;
 
   // Don't encode the slug - let the browser handle URL encoding naturally
-  const href = language.dir === "/"
-    ? `/${translatedSlug}`
-    : `${language.dir}/${translatedSlug}`;
+  // Handle empty slug (home route) specially to avoid double slashes
+  let href: string;
+  if (translatedSlug === "" || translatedSlug === undefined) {
+    href = language.dir === "/" ? "/" : language.dir;
+  } else {
+    href = language.dir === "/"
+      ? `/${translatedSlug}`
+      : `${language.dir}/${translatedSlug}`;
+  }
 
   return {
     href: href.replace(/\/+/g, "/").replace(/\/$/, "") || "/",

@@ -136,7 +136,7 @@ export const content: SectionContent = {
             variant: "info",
             title: "Which boot should I choose?",
             content:
-                "If your hospital provides a boot, use what they give you — both work. If you're buying privately: **VACOped** may be worth it for active patients who can afford it. **Aircast** is a practical choice if budget is a concern or you want something lightweight.",
+                "If your hospital provides a boot, use what they give you — **both work equally well**. VACOped, Aircast (black boot), or other boots — all are valid treatment options with similar outcomes. If you're buying privately: **VACOped** may be worth it for active patients who can afford it. **Aircast** is a practical choice if budget is a concern or you want something lightweight. The key is following your protocol correctly, not which boot you have.",
         },
         {
             type: "section",

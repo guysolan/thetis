@@ -164,27 +164,37 @@ Non-surgical (conservative) treatment involves:
 - Lower overall complication rate
 - Equally good long-term outcomes for most people
 
-### Re-rupture Rates: The Real Numbers (3.7% vs 9.8%)
+### Re-rupture Rates: The Real Numbers (2-4% Overall)
 
 This is where the numbers get interesting:
 
-**Historical data suggested:**
+**Modern evidence shows:**
 
-- Surgical repair: ~3.7% re-rupture rate
-- Non-surgical treatment: ~9.8% re-rupture rate
+- **Overall re-rupture rates are LOW: 2-4%** regardless of surgery or non-surgery
+- This is very different from ACL injuries (20% re-rupture rate)
+- The difference between surgical and non-surgical re-rupture rates is small
+- **Re-rupture is NOT the main problem** - elongation is the bigger concern
 
-**But modern protocols have changed this:**
+**When re-rupture typically occurs:**
 
-- When non-surgical treatment includes early weight-bearing and functional rehabilitation, re-rupture rates drop dramatically
-- The difference between surgical and non-surgical re-rupture rates is now as low as 1.6%
-- Some modern non-surgical protocols report re-rupture rates below 5%
+1. **Early rehab period** (weeks 0-8):
+   - Non-adherence to advice (taking boot off, walking without boot)
+   - Getting into dorsiflexion too early (especially with speed and eccentric contraction)
+
+2. **When first coming out of boot** (weeks 10-12):
+   - After 8-12 weeks in boot, patients think "we're done"
+   - Try to walk normally too quickly
+   - Tendon hasn't developed enough strength yet
+
+**The key message:** Re-rupture rates are very low regardless of treatment choice. The bigger focus should be on preventing elongation (tendon stretching), which is the real problem affecting long-term recovery.
 
 **The key factors that reduce re-rupture risk:**
 
 - Early functional weight-bearing in a boot (not prolonged casting)
-- Proper boot positioning (maintaining equinus)
+- Proper boot positioning (maintaining equinus/pointed position)
 - Compliance with wearing the boot 24/7
 - Following the rehabilitation protocol carefully
+- Not rushing boot removal (wait until tendon is strong enough)
 - Not rushing back to high-impact activities
 
 ### The UKSTAR Trial - What It Proved
@@ -385,15 +395,21 @@ This cannot be emphasised enough: **Your boot must be worn 24 hours a day, 7 day
 
 - One moment of unprotected dorsiflexion (foot bending up) can pull the healing tendon ends apart
 - This could cause the tendon to heal elongated (stretched out), reducing your final power
+- **Elongation is the biggest problem** affecting long-term recovery - more important than re-rupture risk
 - In the worst case, it could cause a re-rupture
 
 **The only exceptions:**
 
 - Showering (with specialist approval and extreme caution)
-- Physiotherapy exercises (when prescribed, much later)
+- **Early strengthening exercises** (when prescribed, typically from week 2-3 onwards)
+  - These are done OUT of the boot briefly, in a safe position (foot pointed down)
+  - Boot goes back on immediately after exercises
+  - This is part of modern "aggressive loading in safe positions" approach
 - Using a night splint (when approved by your specialist)
 
 **Recovery is like Snakes and Ladders:** Each week sees you closer to the finish. But one small mistake is like landing on the big snake - taking you right back to the beginning.
+
+**Modern approach:** Some protocols now include early strengthening exercises (from week 2-3) done out of the boot in safe positions. This builds tendon strength while protecting it. Your specialist will guide you on when and how to start these.
 
 ---
 

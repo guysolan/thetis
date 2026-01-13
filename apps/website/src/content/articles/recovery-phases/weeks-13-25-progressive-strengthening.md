@@ -101,32 +101,35 @@ The single-leg heel raise is THE benchmark exercise for Achilles rehabilitation.
 - A key return-to-sport criterion (25+ repetitions)
 - Measures progress objectively
 
-**Progression:**
+**Evidence-based progression with specific targets:**
 
 **Stage 1: Double-leg heel raises (weeks 10-14)**
 
 - Both feet on floor
 - Rise onto toes together
 - 2-3 sets of 15-25 reps
+- Target: 15 body weight single-leg calf raises on flat ground (end of Stage 2)
 
-**Stage 2: Weight-shift heel raises (weeks 14-18)**
+**Stage 2: Initial post-immobilization (weeks 12-18)**
 
-- Rise on both feet
-- Shift weight to injured side at top
-- Lower on both feet
-- 2-3 sets of 15-20 reps
+- Single-leg seated isotonic and isometric calf raises
+- **Target: 1.4x body weight MVIC** (seated, plantarflexion)
+- **Target: 1.2x body weight** seated isotonic
+- Double to single leg standing progressions
+- **Goal: 15 body weight single-leg calf raises** on flat ground
 
-**Stage 3: Single-leg heel raises with support (weeks 18-22)**
+**Stage 3: Single-leg capacity building (weeks 18-24)**
 
-- Rise on injured leg only
-- Use wall or counter for balance
-- 2-3 sets of 10-15 reps
+- Single-leg standing and seated isotonic (progressing load)
+- **Target: 2x body weight** plantarflexion isometric MVIC (seated)
+- Progressively introduce dorsiflexion using plates (1 inch, 1.5 inch, 2 inch)
+- Sled work as approaching targets
 
 **Stage 4: Single-leg heel raises unsupported (weeks 22+)**
 
 - No support
 - Full range of motion
-- Goal: 25+ repetitions
+- **Goal: 25+ repetitions** (key return-to-sport criterion)
 
 **Technique:**
 
@@ -138,11 +141,31 @@ The single-leg heel raise is THE benchmark exercise for Achilles rehabilitation.
 
 [GRAPHIC: Exercise progression pyramid showing stages of heel raise progression]
 
+### Progressive Dorsiflexion Introduction (Stage 3: Weeks 18-24)
+
+**Important:** Instead of aggressive stretching, dorsiflexion is introduced progressively through loaded exercises.
+
+**How it works:**
+
+- Use plates under your toes to create gradual dorsiflexion
+- Start with 10kg plate (~1 inch)
+- Progress to 1.5 inch plate
+- Then 2 inch plate
+- Do this in both knee bent and knee straight positions
+- **This replaces flexibility work** - flexibility comes naturally with loaded dorsiflexion
+
+**Why this approach:**
+
+- Loaded dorsiflexion is safer than passive stretching
+- Strengthens the tendon while improving range
+- No stretching per se - just progressive loading through range
+- Flexibility returns naturally as you do these exercises
+
 ### Eccentric Calf Drops (When Safe)
 
 Eccentric exercises (muscle lengthening under load) are particularly beneficial for tendon health.
 
-**When to start:** Usually week 16-20+, with physiotherapist approval
+**When to start:** Usually week 20-24+, with physiotherapist approval, after you've built good strength
 
 **The Alfredson Protocol (modified for rupture):**
 
@@ -701,15 +724,25 @@ Psychological recovery is as important as physical recovery.
 
 ### When can I start running?
 
-Running typically begins around weeks 16-24, but only when certain criteria are met:
+Running begins when you're **approaching Stage 3 targets** (not based on time alone). This is typically around weeks 18-24, but depends on meeting criteria:
 
-- 25+ single-leg heel raises on injured side
+**Criteria to start running:**
+
+- Approaching 2x body weight plantarflexion isometric MVIC
+- 15+ single-leg heel raises (working towards 25+)
 - Good balance and proprioception
 - Minimal or no pain with walking
 - Physiotherapist approval
-- Successful completion of a walk-jog programme
 
-Don't rush this - running too early is a common cause of setbacks.
+**Running progression:**
+
+- Start with **very slow shuffle** on flat ground (not AlterG)
+- **2-3 times per week** on usual training days
+- Training block: Isometric work → Run → Plyometric prep before run
+- **Build volume first**, then intensity later
+- Once approaching Stage 4 targets (more force, more strength), progress intensity
+
+**Important:** Running too early risks tendon elongation. The tendon needs to be strong enough to handle running forces (up to 3.2x body weight). Don't rush this - meeting strength criteria matters more than the calendar.
 
 ### Why is my calf still so much smaller than the other side?
 

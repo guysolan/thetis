@@ -15,6 +15,7 @@ import path from "path";
 function getInputImages(inputDir: string): Array<{
     mimeType: string;
     data: string;
+    filename: string;
 }> {
     if (!fs.existsSync(inputDir)) {
         return [];
@@ -23,7 +24,14 @@ function getInputImages(inputDir: string): Array<{
     const supportedExtensions = [".png", ".jpg", ".jpeg", ".webp", ".gif"];
     const files = fs.readdirSync(inputDir);
 
-    const images: Array<{ mimeType: string; data: string }> = [];
+    const images: Array<{ mimeType: string; data: string; filename: string }> =
+        [];
+    const otherImages: Array<
+        { mimeType: string; data: string; filename: string }
+    > = [];
+
+    // Prioritize mike-and-doc.png as the primary character reference
+    const primaryReference = "mike-and-doc.png";
 
     for (const file of files) {
         const ext = path.extname(file).toLowerCase();
@@ -41,11 +49,23 @@ function getInputImages(inputDir: string): Array<{
             ? "image/webp"
             : "image/jpeg";
 
-        images.push({ mimeType, data: base64Data });
-        console.log(`\x1b[33mReference image:\x1b[0m ${file}`);
+        const imageData = { mimeType, data: base64Data, filename: file };
+
+        if (file.toLowerCase() === primaryReference.toLowerCase()) {
+            images.unshift(imageData); // Add mike-and-doc.png first
+        } else {
+            otherImages.push(imageData);
+        }
     }
 
-    return images;
+    // Add mike-and-doc.png first, then other images
+    const allImages = [...images, ...otherImages];
+
+    allImages.forEach((img) => {
+        console.log(`\x1b[33mReference image:\x1b[0m ${img.filename}`);
+    });
+
+    return allImages;
 }
 
 async function main() {
@@ -107,10 +127,21 @@ async function main() {
 
         // Add reference images with instruction
         if (referenceImages.length > 0) {
-            parts.push({
-                text:
-                    "Use the following reference image(s) to guide the visual style and characters. Maintain consistency with these characters and art style:",
-            });
+            const hasMikeAndDoc = referenceImages.some((img) =>
+                img.filename.toLowerCase() === "mike-and-doc.png"
+            );
+
+            if (hasMikeAndDoc) {
+                parts.push({
+                    text:
+                        "CRITICAL: Use 'mike-and-doc.png' as the PRIMARY character reference. This image shows the exact doctor and patient characters you must use. Match their appearance, style, and level of detail EXACTLY. The doctor is in Thetis green scrubs and crocs. The patient (Grant) is a 40-year-old white male, slim, average height. Use this reference for ALL character appearances.\n\nIMPORTANT: Grant can wear VACOped, Aircast (black boot), or other boots - all are valid treatment options. Show variety across different images to reinforce that all boot types are acceptable. Grant should ONLY wear ONE boot on the injured foot - the other foot must be in a regular shoe (white Stan Smiths for day scenes).",
+                });
+            } else {
+                parts.push({
+                    text:
+                        "Use the following reference image(s) to guide the visual style and characters. Maintain consistency with these characters and art style:\n\nIMPORTANT: The patient (Grant) can wear VACOped, Aircast (black boot), or other boots - all are valid treatment options. Grant should ONLY wear ONE boot on the injured foot - the other foot must be in a regular shoe.",
+                });
+            }
 
             for (const img of referenceImages) {
                 parts.push({
@@ -121,12 +152,22 @@ async function main() {
                 });
             }
 
+            if (hasMikeAndDoc) {
+                parts.push({
+                    text:
+                        `Now generate an image based on this prompt. CRITICAL: Use the characters from 'mike-and-doc.png' EXACTLY - same doctor, same patient (Grant), same style, same level of detail. Match their appearance precisely.\n\nIMPORTANT: Grant can wear VACOped, Aircast (black boot), or other boots - all are valid treatment options. Grant should ONLY wear ONE boot on the injured foot - the other foot must be in a regular shoe (white Stan Smiths for day scenes).\n\n${prompt}`,
+                });
+            } else {
+                parts.push({
+                    text:
+                        `Now generate an image based on this prompt, using the reference style and characters above.\n\nIMPORTANT: The patient (Grant) can wear VACOped, Aircast (black boot), or other boots - all are valid treatment options. Grant should ONLY wear ONE boot on the injured foot - the other foot must be in a regular shoe.\n\n${prompt}`,
+                });
+            }
+        } else {
             parts.push({
                 text:
-                    `Now generate an image based on this prompt, using the reference style and characters above:\n\n${prompt}`,
+                    `IMPORTANT: If generating characters, use 'mike-and-doc.png' from the input folder as the character reference. The doctor is in Thetis green scrubs and crocs. The patient is a 40-year-old white male, slim, average height.\n\n${prompt}`,
             });
-        } else {
-            parts.push({ text: prompt });
         }
 
         // Generate content

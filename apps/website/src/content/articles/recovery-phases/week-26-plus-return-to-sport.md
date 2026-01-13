@@ -43,14 +43,20 @@ Many patients expect to be "finished" at 6 months. The reality is more nuanced.
 - Proprioception continues to improve
 - Mental confidence takes time to rebuild
 
-**The typical timeline:**
+**The typical timeline (evidence-based):**
 
-- 6 months: Return to sport consideration begins
-- 9 months: Most recreational athletes can return fully
-- 12 months: Most professional athletes return
-- 12-24 months: Final tendon maturation
+- **6 months:** Return to sport consideration begins (ambitious, not always recommended)
+- **7-8 months:** Realistic timeline for elite athletes (recommended)
+- **9 months:** Most recreational athletes can return fully
+- **12 months:** NBA standard and most professional athletes return (sensible approach)
+- **12-24 months:** Final tendon maturation
 
-**Important perspective:** Just because you CAN return to sport at 6 months doesn't mean you MUST. Taking longer is completely acceptable if you don't feel ready.
+**Important perspective:** 
+- Just because you CAN return to sport at 6 months doesn't mean you MUST
+- Taking longer is completely acceptable and often safer
+- The tendon healing must be respected - rushing leads to problems
+- Elite athletes may compress timelines, but this requires careful management
+- **12 months is sensible** for most people, especially for high-level sport
 
 ### The Year-Long Journey to Full Strength
 
@@ -71,6 +77,7 @@ Full recovery from Achilles rupture is measured in months and years, not weeks.
 - At 6 months, most people still have noticeable calf asymmetry
 - Full calf muscle recovery can take 12-18 months
 - Some permanent difference may persist (usually small)
+- **Ongoing calf strengthening is essential** - continue strengthening exercises long-term to maintain function
 
 [GRAPHIC: Long-term recovery curve showing strength percentage from 6 months to 24 months]
 

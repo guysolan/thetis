@@ -520,7 +520,16 @@ The transition out of the boot is both exciting and anxiety-provoking.
 
 ### When exactly can I stop wearing the boot?
 
-Most protocols recommend boot removal around weeks 10-12, but this varies by individual, protocol, and surgeon preference. Wait for specific instruction from your medical team - don't self-prescribe boot removal.
+**Evidence-based protocols** recommend boot removal at **11-12 weeks** (not 8 weeks) for most people. This is based on **force-based criteria**, not just time:
+
+- Your tendon needs to be strong enough to handle walking forces (~1.5x body weight)
+- This is assessed by your ability to do seated calf raises with significant weight
+- The goal is to reach 0.8-1x body weight through your knee in seated position
+- This creates ~2x body weight force in the Achilles, preparing it for walking
+
+**Traditional protocols** may remove the boot at 8 weeks, but research shows this may be too early if the tendon hasn't developed enough strength. The elongation-focused approach keeps you in the boot longer but loads you more aggressively while in it.
+
+Wait for specific instruction from your medical team - don't self-prescribe boot removal. The timing should be based on your tendon's strength, not just the calendar.
 
 ### Can I start physiotherapy before week 9-10?
 

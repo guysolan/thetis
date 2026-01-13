@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "generate": "bun src/index.ts",
+    "review": "bun src/review-image.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

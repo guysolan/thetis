@@ -328,7 +328,7 @@ export const content: SectionContent = {
                                 {
                                     type: "text",
                                     content:
-                                        "Don't worry if you have one or the other — both achieve the same goal. What matters is understanding **how your specific boot works** and following your protocol exactly.",
+                                        "Don't worry if you have one or the other — **all boot types (VACOped, Aircast, or others) achieve the same goal**. What matters is understanding **how your specific boot works** and following your protocol exactly. You'll see Grant (our patient character) wearing different boot types in different images — this is intentional to reinforce that all options are valid.",
                                 },
                             ],
                         },
