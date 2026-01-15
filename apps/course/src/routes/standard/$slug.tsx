@@ -269,7 +269,7 @@ function SectionPage() {
         {section.timing && (
           <div className="space-y-3 bg-primary/5 p-4 md:p-5 border border-primary/20 rounded-lg">
             <div>
-              <p className="mb-2 font-semibold text-primary text-sm">
+              <p className="mb-2 font-semibold text-primary text-base md:text-lg">
                 When this lesson is useful:
               </p>
               <p className="text-foreground text-sm leading-relaxed">
@@ -278,7 +278,7 @@ function SectionPage() {
             </div>
             {section.timing.triggers && section.timing.triggers.length > 0 && (
               <div>
-                <p className="mb-2 font-semibold text-primary text-sm">
+                <p className="mb-2 font-semibold text-primary text-base md:text-lg">
                   Useful when:
                 </p>
                 <ul className="space-y-1.5 text-foreground text-sm list-disc list-inside">
