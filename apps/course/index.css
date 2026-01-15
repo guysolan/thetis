@@ -1,0 +1,97 @@
+/* Import base globals from shared UI package */
+@import '@thetis/ui/globals.css';
+
+/* Guide-specific additions that extend the base theme */
+@layer base {
+  /* Override primary color to use Thetis green (matching website) */
+  :root {
+    /* Thetis green: #29a680 = 161 60% 40% */
+    --primary: 161 60% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary is lighter green */
+    --secondary: 162 46% 75%;
+    --secondary-foreground: 220.9 39.3% 11%;
+
+    /* Ring uses primary */
+    --ring: 161 60% 40%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Raleway', sans-serif;
+  }
+}
+
+/* Custom prose styles for course content */
+.prose-course {
+  @apply text-foreground leading-relaxed;
+}
+
+.prose-course h1 {
+  @apply text-3xl md:text-4xl font-semibold text-foreground mb-6 tracking-tight;
+}
+
+.prose-course h2 {
+  @apply text-2xl md:text-3xl font-semibold text-foreground mt-10 mb-4 tracking-tight;
+}
+
+.prose-course h3 {
+  @apply text-xl font-semibold text-foreground mt-8 mb-3;
+}
+
+.prose-course h4 {
+  @apply text-lg font-medium text-foreground mt-6 mb-2;
+}
+
+.prose-course p {
+  @apply mb-4 text-base md:text-lg;
+}
+
+.prose-course ul,
+.prose-course ol {
+  @apply mb-4 pl-6 space-y-2;
+}
+
+.prose-course li {
+  @apply text-base md:text-lg;
+}
+
+.prose-course ul li {
+  @apply list-disc;
+}
+
+.prose-course ol li {
+  @apply list-decimal;
+}
+
+.prose-course strong {
+  @apply font-semibold text-foreground;
+}
+
+.prose-course blockquote {
+  @apply border-l-4 border-primary pl-4 py-2 my-6 bg-secondary/50 rounded-r-lg italic text-muted-foreground;
+}
+
+.prose-course a {
+  @apply text-primary hover:text-primary/80 underline underline-offset-2;
+}
+
+/* Section card styles */
+.section-card {
+  @apply bg-card rounded-2xl shadow-sm border border-border p-6 md:p-8;
+}
+
+/* Week indicator badge */
+.week-badge {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary;
+}
+
+/* Progress indicator */
+.progress-ring {
+  @apply stroke-current text-primary;
+  stroke-linecap: round;
+}
