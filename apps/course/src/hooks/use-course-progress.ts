@@ -1,15 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
+import { sections } from "@/content/course/sections";
 
-const STORAGE_KEY = "thetis-course-progress";
+const STORAGE_KEY = "course-progress";
 
 interface CourseProgress {
-    completedLessons: string[]; // Array of lesson slugs
-    lastAccessed?: string; // ISO date string
+    completedLessons: string[];
+    currentBookmark: string | null; // The current position/bookmark in the course
 }
 
+// Get stored progress from localStorage
 function getStoredProgress(): CourseProgress {
     if (typeof window === "undefined") {
-        return { completedLessons: [] };
+        return { completedLessons: [], currentBookmark: null };
     }
 
     try {
@@ -21,9 +23,10 @@ function getStoredProgress(): CourseProgress {
         console.error("Failed to load course progress:", error);
     }
 
-    return { completedLessons: [] };
+    return { completedLessons: [], currentBookmark: null };
 }
 
+// Save progress to localStorage
 function saveProgress(progress: CourseProgress): void {
     if (typeof window === "undefined") return;
 
@@ -39,39 +42,35 @@ export function useCourseProgress() {
 
     // Load progress on mount
     useEffect(() => {
-        setProgress(getStoredProgress());
+        const stored = getStoredProgress();
+        setProgress(stored);
     }, []);
+
+    // Save to localStorage whenever progress changes
+    useEffect(() => {
+        saveProgress(progress);
+    }, [progress]);
 
     const markLessonComplete = useCallback((lessonSlug: string) => {
         setProgress((prev) => {
             if (prev.completedLessons.includes(lessonSlug)) {
                 return prev; // Already completed
             }
-
             const updated = {
-                ...prev,
                 completedLessons: [...prev.completedLessons, lessonSlug],
-                lastAccessed: new Date().toISOString(),
+                currentBookmark: lessonSlug, // Update bookmark to current lesson
             };
-
-            saveProgress(updated);
             return updated;
         });
     }, []);
 
     const markLessonIncomplete = useCallback((lessonSlug: string) => {
-        setProgress((prev) => {
-            const updated = {
-                ...prev,
-                completedLessons: prev.completedLessons.filter(
-                    (slug) => slug !== lessonSlug,
-                ),
-                lastAccessed: new Date().toISOString(),
-            };
-
-            saveProgress(updated);
-            return updated;
-        });
+        setProgress((prev) => ({
+            ...prev,
+            completedLessons: prev.completedLessons.filter(
+                (slug) => slug !== lessonSlug,
+            ),
+        }));
     }, []);
 
     const isLessonComplete = useCallback(
@@ -84,25 +83,38 @@ export function useCourseProgress() {
     const getCompletionPercentage = useCallback(
         (totalLessons: number): number => {
             if (totalLessons === 0) return 0;
-            return Math.round(
+            const percentage = Math.round(
                 (progress.completedLessons.length / totalLessons) * 100,
             );
+            return Math.min(percentage, 100);
         },
         [progress.completedLessons.length],
     );
 
     const clearProgress = useCallback(() => {
-        const cleared = { completedLessons: [] };
-        saveProgress(cleared);
-        setProgress(cleared);
+        setProgress({ completedLessons: [], currentBookmark: null });
+    }, []);
+
+    const getCurrentBookmark = useCallback((): string | null => {
+        return progress.currentBookmark;
+    }, [progress.currentBookmark]);
+
+    const setCurrentBookmark = useCallback((lessonSlug: string) => {
+        setProgress((prev) => ({
+            ...prev,
+            currentBookmark: lessonSlug,
+        }));
     }, []);
 
     return {
         completedLessons: progress.completedLessons,
+        currentBookmark: progress.currentBookmark,
         markLessonComplete,
         markLessonIncomplete,
         isLessonComplete,
         getCompletionPercentage,
         clearProgress,
+        getCurrentBookmark,
+        setCurrentBookmark,
     };
 }

@@ -1,12 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { formatWeekDay, sections } from "@/content/course/sections";
-import {
-  ArrowLeft,
-  BookOpen,
-  CheckCircle2,
-  ChevronRight,
-  Clock,
-} from "lucide-react";
+import { sections } from "@/content/course/sections";
+import { ArrowLeft, BookOpen, CheckCircle2, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@thetis/ui/button";
 import { Progress } from "@thetis/ui/progress";
@@ -16,88 +10,53 @@ export const Route = createFileRoute("/standard/")({
   component: StandardIndexPage,
 });
 
-// Chapter display names - map folder names to human-readable titles
+// Chapter display names - map folder names to human-readable titles (chronological order)
 const chapterDisplayNames: Record<
   string,
   { name: string; description: string }
 > = {
-  emergency: {
-    name: "Emergency Care",
-    description: "Immediate needs after rupture",
-  },
-  treatment: {
-    name: "Treatment Decision",
-    description: "Understanding your options",
-  },
-  boot: {
-    name: "Boot & Equipment",
-    description: "Living with your boot and managing recovery",
-  },
-  practical: {
+  "00-practical": {
     name: "Practical Life",
-    description: "Work, driving, and daily life",
+    description: "Throughout recovery - work, driving, and daily life",
   },
-  transition: {
+  "01-emergency": {
+    name: "Emergency Care",
+    description: "Days 0-3 - Immediate needs after rupture",
+  },
+  "02-early-treatment": {
+    name: "Early Treatment",
+    description: "Days 2-14 - Understanding your options and getting your boot",
+  },
+  "03-boot-phase": {
+    name: "Boot Phase",
+    description: "Days 14-56 - Living with your boot and managing recovery",
+  },
+  "04-transition": {
     name: "Boot Transition",
-    description: "Moving out of your boot",
+    description: "Days 74-98 - Moving out of your boot",
   },
-  physiotherapy: {
+  "05-physiotherapy": {
     name: "Physiotherapy",
-    description: "Rebuilding strength and function",
+    description: "Days 63-105 - Rebuilding strength and function",
   },
-  recovery: {
+  "06-recovery": {
     name: "Recovery & Strengthening",
-    description: "Building fitness and returning to activities",
+    description: "Days 84-160 - Building fitness and returning to activities",
   },
-  advanced: {
+  "07-advanced": {
     name: "Advanced Activities",
-    description: "Running, jumping, and return to sport",
+    description: "Days 200-220 - Running, jumping, and return to sport",
   },
-  "long-term": {
+  "08-long-term": {
     name: "Long-Term Recovery",
-    description: "Life after Achilles rupture",
+    description: "Days 180-240 - Life after Achilles rupture",
   },
 };
 
-// Auto-group sections by chapter (derived from folder structure)
-function groupSectionsByChapter(): Array<{
-  chapter: string;
-  name: string;
-  description: string;
-  sections: typeof sections;
-}> {
-  const grouped = sections.reduce(
-    (acc, section) => {
-      const chapter = section.chapter;
-      if (!acc[chapter]) {
-        acc[chapter] = [];
-      }
-      acc[chapter].push(section);
-      return acc;
-    },
-    {} as Record<string, typeof sections>,
-  );
-
-  // Convert to array and sort chapters by their first section's position
-  return Object.entries(grouped)
-    .map(([chapter, sections]) => {
-      const displayInfo = chapterDisplayNames[chapter] || {
-        name: chapter.charAt(0).toUpperCase() + chapter.slice(1),
-        description: "",
-      };
-      return {
-        chapter,
-        name: displayInfo.name,
-        description: displayInfo.description,
-        sections: sections.sort((a, b) => a.section_number - b.section_number),
-      };
-    })
-    .sort((a, b) => {
-      // Sort chapters by the first section's number in each chapter
-      const aFirst = a.sections[0]?.section_number || 0;
-      const bFirst = b.sections[0]?.section_number || 0;
-      return aFirst - bFirst;
-    });
+// Display sections in pure chronological order (by section_number)
+// Sections are already ordered chronologically in sections.ts
+function getChronologicalSections() {
+  return sections.sort((a, b) => a.section_number - b.section_number);
 }
 
 function StandardIndexPage() {
@@ -156,140 +115,95 @@ function StandardIndexPage() {
           )}
         </div>
 
-        {/* Section List */}
-        <div className="space-y-12">
-          {groupSectionsByChapter().map((chapterGroup, chapterIndex) => {
-            if (chapterGroup.sections.length === 0) return null;
-
+        {/* Section List - Chronological Order */}
+        <div className="gap-3 grid">
+          {getChronologicalSections().map((section) => {
+            const isComplete = isLessonComplete(section.slug);
+            const chapterInfo = chapterDisplayNames[section.chapter] || {
+              name: section.chapter,
+              description: "",
+            };
             return (
-              <div key={chapterGroup.chapter} className="relative">
-                <div className="flex items-center gap-4 mb-2">
-                  <div className="flex justify-center items-center bg-primary rounded-xl w-10 h-10 font-bold text-primary-foreground">
-                    {chapterIndex + 1}
+              <div
+                key={section.slug}
+                className={cn(
+                  "group relative flex flex-col gap-4 p-5 border rounded-2xl transition-all",
+                  isComplete
+                    ? "bg-primary/5 dark:bg-primary/10 border-primary/20 dark:border-primary/30"
+                    : "bg-card border-border",
+                )}
+              >
+                {/* Main Content */}
+                <div className="flex items-center gap-4">
+                  {/* Section Number/Status Icon */}
+                  <div
+                    className={cn(
+                      "flex justify-center items-center rounded-xl w-12 h-12 font-bold transition-colors shrink-0",
+                      isComplete
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted text-muted-foreground",
+                    )}
+                  >
+                    {isComplete ? <CheckCircle2 className="w-6 h-6" /> : (
+                      section.section_number
+                    )}
                   </div>
-                  <div>
-                    <h2 className="font-bold text-foreground text-xl md:text-2xl">
-                      {chapterGroup.name}
-                    </h2>
-                    {chapterGroup.description && (
-                      <p className="mt-1 text-muted-foreground text-sm">
-                        {chapterGroup.description}
+
+                  {/* Content */}
+                  <div className="flex flex-col flex-1 gap-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <h3
+                        className={cn(
+                          "font-semibold transition-colors",
+                          isComplete ? "text-primary" : "text-foreground",
+                        )}
+                      >
+                        {section.title}
+                      </h3>
+                      <span className="bg-muted px-2 py-0.5 rounded text-muted-foreground text-xs">
+                        {chapterInfo.name}
+                      </span>
+                    </div>
+                    {section.timing.when_useful && (
+                      <p className="text-muted-foreground text-sm">
+                        {section.timing.when_useful}
                       </p>
                     )}
                   </div>
                 </div>
 
-                <div className="gap-3 grid">
-                  {chapterGroup.sections.map((section) => {
-                    const isComplete = isLessonComplete(section.slug);
-                    return (
-                      <div
-                        key={section.slug}
-                        className={cn(
-                          "group relative flex flex-col gap-4 p-5 border rounded-2xl transition-all",
-                          isComplete
-                            ? "bg-primary/5 dark:bg-primary/10 border-primary/20 dark:border-primary/30"
-                            : "bg-card border-border",
-                        )}
-                      >
-                        {/* Main Content */}
-                        <div className="flex items-center gap-4">
-                          {/* Section Number/Status Icon */}
-                          <div
-                            className={cn(
-                              "flex justify-center items-center rounded-xl w-12 h-12 font-bold transition-colors shrink-0",
-                              isComplete
-                                ? "bg-primary text-primary-foreground"
-                                : "bg-muted text-muted-foreground",
-                            )}
-                          >
-                            {isComplete
-                              ? <CheckCircle2 className="w-6 h-6" />
-                              : (
-                                section.section_number
-                              )}
-                          </div>
-
-                          {/* Content */}
-                          <div className="flex flex-1 items-center gap-4 min-w-0">
-                            <div className="flex-1 min-w-0">
-                              <div className="flex flex-wrap items-center gap-2 mb-1">
-                                <h3
-                                  className={cn(
-                                    "font-semibold transition-colors",
-                                    isComplete
-                                      ? "text-primary"
-                                      : "text-foreground",
-                                  )}
-                                >
-                                  {section.title}
-                                </h3>
-                                {isComplete && (
-                                  <span className="inline-flex items-center gap-1 bg-primary/20 dark:bg-primary/30 px-2 py-0.5 rounded font-semibold text-primary text-xs">
-                                    <CheckCircle2 className="w-3 h-3" />
-                                    Done
-                                  </span>
-                                )}
-                              </div>
-                              <p className="text-muted-foreground text-sm line-clamp-1">
-                                {section.description}
-                              </p>
-                            </div>
-                            <div className="hidden sm:flex flex-col items-end gap-1 shrink-0">
-                              {section.timing && (
-                                <div className="flex items-center gap-2 max-w-[200px] font-medium text-muted-foreground text-xs">
-                                  <Clock className="w-3.5 h-3.5 shrink-0" />
-                                  <span className="text-right line-clamp-2">
-                                    {section.timing.when_useful}
-                                  </span>
-                                </div>
-                              )}
-                              {section.week !== undefined &&
-                                section.day !== undefined && (
-                                <div className="flex items-center gap-2 font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                                  {formatWeekDay(section.week, section.day)}
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Action Buttons */}
-                        <div className="flex justify-end items-center gap-2">
-                          <Button
-                            variant="secondary"
-                            size="sm"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              if (isComplete) {
-                                markLessonIncomplete(section.slug);
-                              } else {
-                                markLessonComplete(section.slug);
-                              }
-                            }}
-                          >
-                            {isComplete ? "Unmark as Done" : "Mark as Done"}
-                          </Button>
-                          <Button
-                            variant="default"
-                            size="sm"
-                            asChild
-                          >
-                            <Link
-                              to="/standard/$slug"
-                              params={{
-                                slug: section.slug,
-                              }}
-                            >
-                              Open
-                              <ChevronRight className="ml-1 w-4 h-4" />
-                            </Link>
-                          </Button>
-                        </div>
-                      </div>
-                    );
-                  })}
+                {/* Action Buttons */}
+                <div className="flex justify-end items-center gap-2">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      if (isComplete) {
+                        markLessonIncomplete(section.slug);
+                      } else {
+                        markLessonComplete(section.slug);
+                      }
+                    }}
+                  >
+                    {isComplete ? "Unmark as Done" : "Mark as Done"}
+                  </Button>
+                  <Button
+                    variant="default"
+                    size="sm"
+                    asChild
+                  >
+                    <Link
+                      to="/standard/$slug"
+                      params={{
+                        slug: section.slug,
+                      }}
+                    >
+                      Open
+                      <ChevronRight className="ml-1 w-4 h-4" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             );
