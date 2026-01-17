@@ -200,18 +200,6 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     },
     bloodClotPrevention.status || "drafting",
   ),
-  createSection(
-    "choosing-your-boot",
-    choosingYourBoot.title,
-    choosingYourBoot.description,
-    {
-      when_useful:
-        "When choosing or receiving your boot - understand your options",
-      triggers: ["when boot is prescribed", "if buying boot privately"],
-      approximate_days: 2,
-    },
-    choosingYourBoot.status || "drafting",
-  ),
 
   // WEEK 1 - First week
   createSection(
@@ -243,7 +231,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     specialistAppointment.status || "drafting",
   ),
 
-  // WEEK 2 - Treatment decisions and boot
+  // WEEK 2 - Treatment decisions
   createSection(
     "treatment-decision",
     treatmentDecision.title,
@@ -272,6 +260,24 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
       approximate_days: 14,
     },
     postSurgeryCare.status || "drafting",
+  ),
+
+  // WEEK 2+ - All boot content grouped together
+  createSection(
+    "choosing-your-boot",
+    choosingYourBoot.title,
+    choosingYourBoot.description,
+    {
+      when_useful:
+        "When you get your boot - understand your options and equipment",
+      triggers: [
+        "when boot is prescribed",
+        "if buying boot privately",
+        "when you receive boot",
+      ],
+      approximate_days: 14,
+    },
+    choosingYourBoot.status || "drafting",
   ),
   createSection(
     "your-walking-boot",

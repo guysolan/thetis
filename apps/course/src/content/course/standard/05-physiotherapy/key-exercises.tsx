@@ -4,7 +4,7 @@ import StandingTwoFootCalfRaiseWeek12 from "@/assets/standing-two-foot-calf-rais
 import SingleLegHeelRaiseWeek12 from "@/assets/single-leg-heel-raise-week-12.png";
 import TowelStretchWeek12 from "@/assets/towel-stretch-week-12.png";
 import ResistanceBandExerciseWeek12 from "@/assets/resistance-band-exercise-week-12.png";
-import BalanceTrainingWeek12 from "@/assets/balance-training-progression-week-12.png";
+import BalanceTrainingWeek12 from "@/assets/balance-training-week-12.png";
 import TheraBand from "@/assets/theraband.jpg";
 
 export const metadata = {

@@ -59,6 +59,12 @@ export const content: SectionContent = {
     },
     {
       type: "tip",
+      title: "Got a boot already?",
+      content:
+        "If you've been given a walking boot at A&E, don't worry — we cover **everything about boots** in detail later in the course (choosing, fitting, adjusting, sleeping, showering, and more). For now, just keep it on and keep your foot pointed down.",
+    },
+    {
+      type: "tip",
       title: "Recovery timeline (the short version)",
       content:
         "You'll be walking without crutches much sooner — often from **Week 2 onwards** (though you'll still need your boot). We'll break this down week by week — don't try to skip ahead.",

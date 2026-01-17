@@ -24,11 +24,7 @@ export const content: SectionContent = {
             items: [
                 {
                     text:
-<<<<<<< Current (Your changes)
                         "Meet Phase 3 exit criteria first — 25+ heel raises, pain-free walking, good balance",
-=======
-                        "Meet Phase 3 exit criteria first — [25+ heel raises](/standard/progressive-strengthening), pain-free walking, good balance",
->>>>>>> Incoming (Background Agent changes)
                 },
                 {
                     text:
