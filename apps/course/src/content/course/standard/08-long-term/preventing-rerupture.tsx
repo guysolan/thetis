@@ -57,7 +57,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Remember from Week 4 that re-rupture risk is **3-5%** — low but not negligible. Risk is highest during early rehab (weeks 0-8) and boot removal (weeks 8-12), but ongoing risk requires ongoing prevention. See Week 4 for the full timeline and details.",
+                        "Re-rupture risk is **3-5%** — low but not negligible. Risk is highest during early rehab (weeks 0-8) and boot removal (weeks 8-12), but ongoing risk requires ongoing prevention. See [Healing Process](/standard/healing-process) for the full timeline and details.",
                 },
                 {
                     type: "card",
@@ -348,9 +348,9 @@ export const content: SectionContent = {
                 {
                     type: "alert",
                     variant: "danger",
-                    title: "Get urgent help now",
+                    title: "Seek urgent care",
                     content:
-                        "**Severe pain** that doesn't ease — could indicate re-rupture. **New \"pop\" or snap** — if you feel or hear a new pop, stop immediately and seek urgent care. **Unable to bear weight** — can't put weight on your leg. **Sudden weakness** — your leg suddenly feels weak. **Signs of DVT (clot in the leg):** new calf pain/tenderness, one-leg calf swelling, calf redness/warmth. **Signs of PE (clot in the lungs):** chest pain, breathlessness, coughing blood, fainting.",
+                        "**Severe pain**, **new pop/snap**, **unable to bear weight**, **sudden weakness**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention).",
                 },
             ],
         },

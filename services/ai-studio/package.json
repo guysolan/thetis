@@ -8,6 +8,7 @@
     "generate": "bun src/index.ts",
     "review": "bun src/review-image.ts",
     "review-batch": "bun src/review-batch.ts",
+    "fix-image": "bun src/fix-image.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import RetroWalkingSequence from "@/assets/retro-walking-sequence.png";
 
 export const metadata = {
     slug: "walking-properly",
@@ -9,7 +10,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By Week 13, you're likely out of your boot and walking in regular shoes. But walking normally again isn't automatic — your body has learned to walk differently while protecting your injured leg. This lesson covers how to re-learn proper walking, why limping happens, and how to correct your gait pattern. You will get through this — relearning to walk is a process, but you'll get there.",
+        "By Week 13, you're likely out of your boot and walking in regular shoes. But walking normally again isn't automatic — your body has learned to walk differently while protecting your injured leg.",
     blocks: [
         {
             type: "heading",
@@ -33,7 +34,7 @@ export const content: SectionContent = {
                 },
                 {
                     text:
-                        "Use heel lifts if needed — 0.5-1cm heel lift helps protect your tendon initially",
+                        "Use [heel lifts](/standard/post-boot-period) if needed — 0.5-1cm heel lift helps protect your tendon initially",
                 },
                 {
                     text:
@@ -259,6 +260,75 @@ export const content: SectionContent = {
         },
         {
             type: "section",
+            title: "Retro Walking: Walking Backward",
+            content: [
+                {
+                    type: "text",
+                    content:
+                        "**Retro walking** (walking backward) is a helpful exercise for loading your Achilles tendon and working on eccentric calf strength. It's different from forward walking and provides unique benefits.",
+                },
+                {
+                    type: "card",
+                    title: "Why retro walking helps",
+                    description: "The benefits of walking backward.",
+                    variant: "highlight",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "**Eccentric calf loading** — walking backward loads your calf muscles eccentrically (controlled lowering), which strengthens your tendon.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Different movement pattern** — backward walking uses different muscles and movement patterns than forward walking, providing variety in your training.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Safe progression** — it's a controlled way to load your tendon without the impact of forward walking.",
+                        },
+                    ],
+                },
+                {
+                    type: "card",
+                    title: "How to do retro walking",
+                    description: "Step-by-step guidance.",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "image",
+                            src: RetroWalkingSequence,
+                            alt: "Sequence showing Grant performing retro walking exercise: stepping backward with injured leg, heel lowering to ground, then pushing off",
+                            caption:
+                                "Retro walking: walking backward loads the Achilles tendon eccentrically",
+                        },
+                        {
+                            type: "text",
+                            content: "**Technique:**",
+                        },
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "Start with short distances — 10-15 steps backward",
+                                "Step backward slowly, lowering your heel to the ground",
+                                "Push off with your injured leg — this provides eccentric loading",
+                                "Use support if needed — hold onto a wall or rail initially",
+                                "Progress gradually — increase distance as you get stronger",
+                            ],
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Important:** Perform retro walking while wearing shoes and a heel lift (if recommended) unless instructed otherwise by your physiotherapist.",
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            type: "section",
             title: "Step Length: Why It Matters",
             content: [
                 {
@@ -280,7 +350,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Short steps also increase risk of elongation** — your tendon needs appropriate loading to heal at the right length. Too little loading (from tiny steps) can contribute to elongation.",
+                                "**Short steps also increase risk of [elongation](/standard/healing-process)** — your tendon needs appropriate loading to heal at the right length. Too little loading (from tiny steps) can contribute to elongation.",
                         },
                     ],
                 },
@@ -433,9 +503,9 @@ export const content: SectionContent = {
                 {
                     type: "alert",
                     variant: "danger",
-                    title: "Get urgent help now",
+                    title: "Seek urgent care",
                     content:
-                        "**Severe pain** while walking that doesn't ease — walking shouldn't cause severe pain. **New \"pop\" or snap** — if you feel or hear a new pop, stop immediately and seek urgent care. **Falling** — if you fall and feel new pain or hear a pop, seek urgent care. **Signs of DVT (clot in the leg):** new calf pain/tenderness, one-leg calf swelling, calf redness/warmth. **Signs of PE (clot in the lungs):** chest pain, breathlessness, coughing blood, fainting.",
+                        "**Severe pain**, **new pop/snap**, **falling with new pain**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention).",
                 },
             ],
         },
@@ -480,7 +550,7 @@ export const content: SectionContent = {
                     items: [
                         "**This week:** Focus on proper heel-to-toe pattern and correcting limping",
                         "**Week 14:** We cover managing post-boot challenges — stiffness, swelling, and why not to stretch aggressively",
-                        "**Weeks 12-18:** Continue building strength and improving walking pattern",
+                        "**Weeks 12-26:** Continue building strength in Phase 3 and improving walking pattern",
                         "**After Phase 2:** You'll move to Phase 3 (single-leg capacity) — building power and preparing for return to sport",
                     ],
                 },
@@ -545,7 +615,7 @@ export const content: SectionContent = {
                         "**Heel-to-toe pattern** — land on your heel first, roll through, push off with toes",
                         "**Equal steps** — both legs should take similar-sized steps",
                         "**Practice daily** — consistency matters more than long sessions",
-                        "**Be patient** — relearning to walk takes time, but you'll get there",
+                        "**Be patient** — relearning to walk takes time",
                     ],
                 },
             ],

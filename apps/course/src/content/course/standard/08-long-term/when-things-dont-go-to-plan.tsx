@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import RecoveryProgressNonlinear from "@/assets/recovery-progress-nonlinear.png";
 
 export const metadata = {
     slug: "when-things-dont-go-to-plan",
@@ -10,8 +11,14 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By Week 34, most people are making good progress. But sometimes recovery doesn't go as planned. You might not be progressing as expected, or you might have concerns about your recovery. This lesson covers what to do when things don't go to plan: not progressing, tendon elongation, and when to seek further opinion. You will get through this — setbacks happen, but they can be managed.",
+        "By Week 34, most people are making good progress. But sometimes recovery doesn't go as planned. You might not be progressing as expected, or you might have concerns about your recovery.",
     blocks: [
+        {
+            type: "image",
+            src: RecoveryProgressNonlinear,
+            alt: "Graph showing non-linear recovery progress with dips and plateaus, titled 'Recovery Isn't Linear'",
+            caption: "Recovery isn't linear — setbacks are normal, the overall trend is what matters",
+        },
         {
             type: "heading",
             level: 2,
@@ -103,7 +110,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "**Tendon elongation** — when your tendon stretches too much during healing — is a concern. It affects function and can limit recovery.",
+                        "**[Tendon elongation](/standard/healing-process)** — when your tendon stretches too much during healing — is a concern. It affects function and can limit recovery.",
                 },
                 {
                     type: "card",
@@ -232,7 +239,7 @@ export const content: SectionContent = {
                     variant: "danger",
                     title: "Get urgent help now",
                     content:
-                        '**Severe pain** that doesn\'t ease — pain shouldn\'t be severe. **New "pop" or snap** — if you feel or hear a new pop, stop immediately and seek urgent care. **Unable to bear weight** — can\'t put weight on your leg.',
+                        "**Severe pain** that doesn't ease — pain shouldn't be severe. **New \"pop\" or snap** — if you feel or hear a new pop, stop immediately and seek urgent care. **Unable to bear weight** — can't put weight on your leg.",
                 },
             ],
         },
@@ -262,7 +269,7 @@ export const content: SectionContent = {
                     style: "bullet",
                     items: [
                         "**This week:** Assess your progress, talk to your physio about concerns",
-                        "**Week 38:** We cover full recovery and beyond — final thoughts and ongoing maintenance",
+                        "**Week 35+:** Life After Achilles Rupture — long-term perspective and ongoing care (coming up next)",
                         "**Ongoing:** Continue working on recovery, seek further opinion if needed",
                     ],
                 },

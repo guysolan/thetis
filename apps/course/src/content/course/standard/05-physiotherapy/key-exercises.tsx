@@ -4,7 +4,7 @@ import StandingTwoFootCalfRaiseWeek12 from "@/assets/standing-two-foot-calf-rais
 import SingleLegHeelRaiseWeek12 from "@/assets/single-leg-heel-raise-week-12.png";
 import TowelStretchWeek12 from "@/assets/towel-stretch-week-12.png";
 import ResistanceBandExerciseWeek12 from "@/assets/resistance-band-exercise-week-12.png";
-import BalanceTrainingWeek12 from "@/assets/balance-training-week-12-v3.png";
+import BalanceTrainingWeek12 from "@/assets/balance-training-progression-week-12.png";
 import TheraBand from "@/assets/theraband.jpg";
 
 export const metadata = {
@@ -68,7 +68,7 @@ export const content: SectionContent = {
                     variant: "info",
                     title: "Important",
                     content:
-                        "These exercises are for **Phase 2 (Weeks 10-12+)** after boot removal. If you're still in your boot, continue with Phase 1 exercises (seated calf raises in plantarflexion). For more information on Phase 2 goals and what to expect, see [Starting Physiotherapy](/standard/starting-physio).",
+                        "These exercises are for **Phase 2 (Weeks 10-12+)** after boot removal. If you're still in your boot, continue with Phase 1 exercises (seated calf raises with foot pointed down). For more information on Phase 2 goals and what to expect, see [Starting Physiotherapy](/standard/starting-physio).",
                 },
                 {
                     type: "card",
@@ -79,7 +79,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**What it does:** Strengthens your calf muscle while keeping your tendon in a safe position (plantarflexion — pointed down).",
+                                "**What it does:** Strengthens your calf muscle while keeping your tendon in a safe position ([plantarflexion](/standard/emergency-care) — foot pointed down).",
                         },
                         {
                             type: "text",
@@ -107,14 +107,14 @@ export const content: SectionContent = {
                             variant: "info",
                             title: "The force challenge",
                             content:
-                                "Walking creates approximately **3.2x your body weight** of force through your Achilles tendon. Most rehabilitation protocols don't prepare you adequately for this. By building strength in seated calf raises first (in the safe plantarflexion position), you develop tendon stiffness and strength to handle walking forces. This is why the 0.8-1x body weight target matters — it's preparing your tendon for the real-world demands of walking.",
+                                "Walking creates approximately **3.2x your body weight** of force through your Achilles tendon. Most rehabilitation protocols don't prepare you adequately for this. By building strength in seated calf raises first (with foot pointed down), you develop tendon stiffness and strength to handle walking forces. This is why the 0.8-1x body weight target matters — it's preparing your tendon for the real-world demands of walking.",
                         },
                         {
                             type: "image",
                             src: SeatedCalfRaiseWeek12,
-                            alt: "Grant performing seated calf raise exercise with weight on his knee, lifting heel, foot in plantarflexion position",
+                            alt: "Grant performing seated calf raise exercise with weight on his knee, lifting heel, foot pointed down",
                             caption:
-                                "Seated calf raise: correct form with foot in plantarflexion position",
+                                "Seated calf raise: correct form with foot pointed down",
                         },
                         {
                             type: "card",
@@ -158,7 +158,7 @@ export const content: SectionContent = {
                             type: "tip",
                             title: "Home alternative: The Scales Method",
                             content:
-                                "No force plate? Use **bathroom scales** to track your progress at home. Set up: place scales against a wall (or put a step behind you), stand with the ball of your foot on the scales, and push down into plantarflexion (toes pointed down) while holding the position for 5 seconds. Read the scale — this shows how much force you're producing. Start at around 80% of your body weight and work toward 100%+. This simple method gives you measurable feedback between physio sessions and shows you're getting stronger.",
+                                "No force plate? Use **bathroom scales** to track your progress at home. Set up: place scales against a wall (or put a step behind you), stand with the ball of your foot on the scales, and push down (toes pointed down) while holding the position for 5 seconds. Read the scale — this shows how much force you're producing. Start at around 80% of your body weight and work toward 100%+. This simple method gives you measurable feedback between physio sessions and shows you're getting stronger.",
                         },
                         {
                             type: "alert",
@@ -233,15 +233,15 @@ export const content: SectionContent = {
                                     type: "list",
                                     style: "bullet",
                                     items: [
-                                        "**Recreational athletes:** >1.0x body weight in dorsiflexion (toes up), >0.8x body weight in plantarflexion (toes down)",
-                                        "**Non-active individuals:** >0.4x body weight in dorsiflexion, >0.6x body weight in plantarflexion",
+                                        "**Recreational athletes:** >1.0x body weight with toes up, >0.8x body weight with toes down",
+                                        "**Non-active individuals:** >0.4x body weight with toes up, >0.6x body weight with toes down",
                                         "**Note:** Subtract 20-40% from these targets if testing with bent knee (bent knee is weaker)",
                                     ],
                                 },
                                 {
                                     type: "text",
                                     content:
-                                        "**Progression:** Start with double-leg holds in plantarflexion (easier) → progress to single-leg → gradually add dorsiflexion as wedges are removed from your boot. The plantarflexion position (toes pointed down) is harder to hold, so targets are slightly lower. Focus on gradual improvement rather than hitting numbers immediately.",
+                                        "**Progression:** Start with double-leg holds with toes down (easier) → progress to single-leg → gradually add toes-up positions as wedges are removed from your boot. The toes-down position is harder to hold, so targets are slightly lower. Focus on gradual improvement rather than hitting numbers immediately.",
                                 },
                             ],
                         },
@@ -350,7 +350,7 @@ export const content: SectionContent = {
                             type: "alert",
                             variant: "warning",
                             content:
-                                "**Gentle only.** This should feel like a stretch, not pain. Don't force it. Aggressive stretching can cause tendon elongation — your tendon needs to heal at the right length. If unsure, ask your physio.",
+                                "**Gentle only.** This should feel like a stretch, not pain. Don't force it. Aggressive stretching can cause [tendon elongation](/standard/healing-process) — your tendon needs to heal at the right length. If unsure, ask your physio.",
                         },
                     ],
                 },
@@ -376,7 +376,7 @@ export const content: SectionContent = {
                                 "Sit with your leg straight",
                                 "Loop resistance band around the ball of your foot",
                                 "Hold the band ends in your hands",
-                                "Push your foot down against the band (plantarflexion)",
+                                "Push your foot down against the band",
                                 "Hold for 2-3 seconds, release slowly",
                                 "Repeat 10-15 times, 2-3 sets",
                             ],
@@ -529,7 +529,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Why it's dangerous:** Your tendon isn't strong enough yet. Rushing can cause re-injury or elongation.",
+                                "**Why it's dangerous:** Your tendon isn't strong enough yet. Rushing can cause re-injury or [elongation](/standard/healing-process).",
                         },
                         {
                             type: "text",
@@ -635,9 +635,9 @@ export const content: SectionContent = {
                 {
                     type: "alert",
                     variant: "danger",
-                    title: "Get urgent help now",
+                    title: "Seek urgent care",
                     content:
-                        "**Severe pain** during exercises that doesn't ease — exercises shouldn't cause severe pain. **New \"pop\" or snap** — if you feel or hear a new pop, stop immediately and seek urgent care. **Signs of DVT (clot in the leg):** new calf pain/tenderness, one-leg calf swelling, calf redness/warmth. **Signs of PE (clot in the lungs):** chest pain, breathlessness, coughing blood, fainting. **Numb/blue/pale toes** — circulation problems. **Fever with rapidly spreading redness** — possible infection.",
+                        "**Severe pain**, **new pop/snap**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention). Also seek help for **numb/blue/pale toes** or **fever with spreading redness**.",
                 },
             ],
         },
@@ -688,7 +688,7 @@ export const content: SectionContent = {
                     items: [
                         "**This week:** Focus on mastering these exercises with proper form",
                         "**Week 13:** We cover re-learning to walk properly — gait training and correcting limping",
-                        "**Weeks 12-18:** Continue building strength, working toward Phase 2 goals",
+                        "**Weeks 12-26:** Continue building strength in Phase 3, working toward 25+ heel raises",
                         "**After Phase 2:** You'll move to Phase 3 (single-leg capacity) — building power and preparing for return to sport",
                     ],
                 },

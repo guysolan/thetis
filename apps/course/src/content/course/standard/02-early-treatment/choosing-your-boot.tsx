@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import AircastVsVacopedComparison from "@/assets/aircast-vs-vacoped-comparison.png";
 
 export const metadata = {
     slug: "choosing-your-boot",
@@ -13,6 +14,12 @@ export const content: SectionContent = {
         "Your walking boot is going to be your constant companion for the next 8-12 weeks. Understanding the options — and the essential accessories — makes a real difference to your comfort and recovery. Here's what you need to know.",
 
     blocks: [
+        {
+            type: "image",
+            src: AircastVsVacopedComparison,
+            alt: "Side-by-side comparison of Aircast and VACOped walking boots showing key features and prices",
+            caption: "Aircast vs VACOped — both work equally well, follow your protocol",
+        },
         {
             type: "section",
             title: "The two main boot options",
@@ -102,7 +109,7 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Better equinus position** — research suggests 48° vs 28° ankle plantarflexion",
+                                "**Better equinus position** — research suggests 48° vs 28° ankle angle (foot pointed down)",
                                 "**Dynamic recovery** — controlled range of motion may reduce muscle wasting",
                                 "**Waterproof** — can swim with proper setup (requires removing inner lining)",
                                 "**Vacuum-bead liner** — may help prevent pressure sores",

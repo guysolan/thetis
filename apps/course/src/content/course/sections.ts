@@ -13,6 +13,7 @@ import { metadata as bloodClotPrevention } from "./standard/01-emergency/blood-c
 import { metadata as choosingYourBoot } from "./standard/02-early-treatment/choosing-your-boot";
 import { metadata as specialistAppointment } from "./standard/02-early-treatment/specialist-appointment";
 import { metadata as treatmentDecision } from "./standard/02-early-treatment/treatment-decision";
+import { metadata as postSurgeryCare } from "./standard/02-early-treatment/post-surgery-care";
 
 // 03-boot-phase - Days 14-56
 import { metadata as yourWalkingBoot } from "./standard/03-boot-phase/your-walking-boot";
@@ -23,14 +24,11 @@ import { metadata as washingAndHygiene } from "./standard/03-boot-phase/washing-
 import { metadata as crutchesAndMobility } from "./standard/03-boot-phase/crutches-and-mobility";
 import { metadata as healingProcess } from "./standard/03-boot-phase/healing-process";
 import { metadata as nutritionForHealing } from "./standard/03-boot-phase/nutrition-for-healing";
-import { metadata as wedgeRemoval } from "./standard/03-boot-phase/wedge-removal";
 import { metadata as buildingStrengthInBoot } from "./standard/03-boot-phase/building-strength-in-boot";
 import { metadata as finalBootPhase } from "./standard/03-boot-phase/final-boot-phase";
 
 // 04-transition - Days 74-98
-import { metadata as bootTransition } from "./standard/04-transition/boot-transition";
-import { metadata as scarManagement } from "./standard/04-transition/scar-management";
-import { metadata as postBootChallenges } from "./standard/04-transition/post-boot-challenges";
+import { metadata as postBootPeriod } from "./standard/04-transition/post-boot-period";
 
 // 05-physiotherapy - Days 63-105
 import { metadata as startingPhysio } from "./standard/05-physiotherapy/starting-physio";
@@ -39,7 +37,6 @@ import { metadata as walkingProperly } from "./standard/05-physiotherapy/walking
 import { metadata as progressiveStrengthening } from "./standard/05-physiotherapy/progressive-strengthening";
 
 // 06-recovery - Days 84-160
-import { metadata as swimmingAndWaterActivities } from "./standard/06-recovery/swimming-and-water-activities";
 import { metadata as buildingCardio } from "./standard/06-recovery/building-cardio";
 import { metadata as functionalMilestones } from "./standard/06-recovery/functional-milestones";
 import { metadata as returningToLife } from "./standard/06-recovery/returning-to-life";
@@ -47,6 +44,7 @@ import { metadata as returningToLife } from "./standard/06-recovery/returning-to
 // 07-advanced - Days 200-220
 import { metadata as startingToRun } from "./standard/07-advanced/starting-to-run";
 import { metadata as plyometrics } from "./standard/07-advanced/plyometrics";
+import { metadata as returnToSport } from "./standard/07-advanced/return-to-sport";
 
 // 08-long-term - Days 180-240
 import { metadata as sixMonthMilestone } from "./standard/08-long-term/six-month-milestone";
@@ -78,7 +76,8 @@ export interface SectionMetadata {
 }
 
 // Map slugs to their chapter (folder name) - now organized chronologically
-const slugToChapter: Record<string, string> = {
+// This is the SINGLE SOURCE OF TRUTH for slug-to-folder mapping
+export const slugToChapter: Record<string, string> = {
   // 00-practical - Throughout recovery
   "first-week-checklist": "00-practical",
   "mental-health-recovery": "00-practical",
@@ -91,6 +90,7 @@ const slugToChapter: Record<string, string> = {
   "choosing-your-boot": "02-early-treatment",
   "specialist-appointment": "02-early-treatment",
   "treatment-decision": "02-early-treatment",
+  "post-surgery-care": "02-early-treatment",
   // 03-boot-phase - Days 14-56
   "your-walking-boot": "03-boot-phase",
   "boot-adjustment-and-care": "03-boot-phase",
@@ -100,26 +100,23 @@ const slugToChapter: Record<string, string> = {
   "crutches-and-mobility": "03-boot-phase",
   "healing-process": "03-boot-phase",
   "nutrition-for-healing": "03-boot-phase",
-  "wedge-removal": "03-boot-phase",
   "building-strength-in-boot": "03-boot-phase",
   "final-boot-phase": "03-boot-phase",
   // 04-transition - Days 74-98
-  "boot-transition": "04-transition",
-  "scar-management": "04-transition",
-  "post-boot-challenges": "04-transition",
+  "post-boot-period": "04-transition",
   // 05-physiotherapy - Days 63-105
   "starting-physio": "05-physiotherapy",
   "key-exercises": "05-physiotherapy",
   "walking-properly": "05-physiotherapy",
   "progressive-strengthening": "05-physiotherapy",
   // 06-recovery - Days 84-160
-  "swimming-and-water-activities": "06-recovery",
   "building-cardio": "06-recovery",
   "functional-milestones": "06-recovery",
   "returning-to-life": "06-recovery",
   // 07-advanced - Days 200-220
   "starting-to-run": "07-advanced",
   "plyometrics": "07-advanced",
+  "return-to-sport": "07-advanced",
   // 08-long-term - Days 180-240
   "six-month-milestone": "08-long-term",
   "preventing-rerupture": "08-long-term",
@@ -260,6 +257,23 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     treatmentDecision.status || "drafting",
   ),
   createSection(
+    "post-surgery-care",
+    postSurgeryCare.title,
+    postSurgeryCare.description,
+    {
+      when_useful:
+        "If you had surgery - wound care and scar management (weeks 2-4)",
+      triggers: [
+        "after surgery",
+        "wound care",
+        "scar management",
+        "when to shower",
+      ],
+      approximate_days: 14,
+    },
+    postSurgeryCare.status || "drafting",
+  ),
+  createSection(
     "your-walking-boot",
     yourWalkingBoot.title,
     yourWalkingBoot.description,
@@ -361,23 +375,6 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     nutritionForHealing.status || "drafting",
   ),
 
-  // WEEK 5 - Wedge removal
-  createSection(
-    "wedge-removal",
-    wedgeRemoval.title,
-    wedgeRemoval.description,
-    {
-      when_useful:
-        "When starting wedge removal protocol - usually around week 5",
-      triggers: [
-        "when clinician says to remove wedges",
-        "when protocol allows wedge removal",
-      ],
-      approximate_days: 35,
-    },
-    wedgeRemoval.status || "drafting",
-  ),
-
   // WEEK 6 - Building strength
   createSection(
     "building-strength-in-boot",
@@ -430,18 +427,21 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     drivingGuidelines.status || "drafting",
   ),
   createSection(
-    "boot-transition",
-    bootTransition.title,
-    bootTransition.description,
+    "post-boot-period",
+    postBootPeriod.title,
+    postBootPeriod.description,
     {
-      when_useful: "When transitioning out of boot - usually around week 10-12",
+      when_useful:
+        "When transitioning out of boot and managing post-boot challenges - usually around week 10-14",
       triggers: [
         "when clinician says to remove boot",
         "when preparing to walk in shoes",
+        "when experiencing stiffness or swelling after boot removal",
+        "when managing post-boot challenges",
       ],
       approximate_days: 74,
     },
-    bootTransition.status || "drafting",
+    postBootPeriod.status || "drafting",
   ),
 
   // WEEK 11-12 - Starting physio and post-boot
@@ -460,22 +460,6 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     startingPhysio.status || "drafting",
   ),
   createSection(
-    "scar-management",
-    scarManagement.title,
-    scarManagement.description,
-    {
-      when_useful:
-        "After boot removal or surgery - when wounds are fully healed (usually weeks 2-3 post-surgery or week 12-14)",
-      triggers: [
-        "when wounds are healed",
-        "when scar is visible",
-        "when starting scar care",
-      ],
-      approximate_days: 84,
-    },
-    scarManagement.status || "drafting",
-  ),
-  createSection(
     "key-exercises",
     keyExercises.title,
     keyExercises.description,
@@ -490,24 +474,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     },
     keyExercises.status || "drafting",
   ),
-  createSection(
-    "swimming-and-water-activities",
-    swimmingAndWaterActivities.title,
-    swimmingAndWaterActivities.description,
-    {
-      when_useful:
-        "When ready for swimming - usually week 12-14 (once wounds healed)",
-      triggers: [
-        "when wounds are healed",
-        "when cleared for swimming",
-        "when wanting cardio exercise",
-      ],
-      approximate_days: 84,
-    },
-    swimmingAndWaterActivities.status || "drafting",
-  ),
-
-  // WEEK 13-14 - Walking and post-boot challenges
+  // WEEK 13-14 - Walking properly
   createSection(
     "walking-properly",
     walkingProperly.title,
@@ -524,22 +491,6 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     },
     walkingProperly.status || "drafting",
   ),
-  createSection(
-    "post-boot-challenges",
-    postBootChallenges.title,
-    postBootChallenges.description,
-    {
-      when_useful: "After boot removal - managing new challenges",
-      triggers: [
-        "when boot is removed",
-        "when experiencing stiffness",
-        "when struggling with walking",
-      ],
-      approximate_days: 98,
-    },
-    postBootChallenges.status || "drafting",
-  ),
-
   // WEEK 15 - Progressive strengthening
   createSection(
     "progressive-strengthening",
@@ -653,22 +604,6 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     startingToRun.status || "drafting",
   ),
 
-  // WEEK 30 - New normal
-  createSection(
-    "new-normal",
-    newNormal.title,
-    newNormal.description,
-    {
-      when_useful: "Long-term perspective - understanding your new normal",
-      triggers: [
-        "when wondering about long-term",
-        "when adjusting to new normal",
-      ],
-      approximate_days: 210,
-    },
-    newNormal.status || "drafting",
-  ),
-
   // WEEK 31 - Plyometrics
   createSection(
     "plyometrics",
@@ -687,6 +622,24 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     plyometrics.status || "drafting",
   ),
 
+  // WEEK 32 - Return to Sport
+  createSection(
+    "return-to-sport",
+    returnToSport.title,
+    returnToSport.description,
+    {
+      when_useful:
+        "When preparing to return to sport - usually around week 30-32 (must meet criteria first)",
+      triggers: [
+        "when meeting return criteria",
+        "when cleared for sport",
+        "when preparing for return",
+      ],
+      approximate_days: 224,
+    },
+    returnToSport.status || "drafting",
+  ),
+
   // WEEK 34 - When things don't go to plan
   createSection(
     "when-things-dont-go-to-plan",
@@ -703,6 +656,24 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
       approximate_days: 240,
     },
     whenThingsDontGoToPlan.status || "drafting",
+  ),
+
+  // LONG-TERM - Life After Achilles Rupture (Final Section)
+  createSection(
+    "new-normal",
+    newNormal.title,
+    newNormal.description,
+    {
+      when_useful:
+        "Long-term perspective - understanding life after Achilles rupture",
+      triggers: [
+        "when wondering about long-term",
+        "when adjusting to new normal",
+        "when recovery phases are complete",
+      ],
+      approximate_days: 250,
+    },
+    newNormal.status || "drafting",
   ),
 ];
 

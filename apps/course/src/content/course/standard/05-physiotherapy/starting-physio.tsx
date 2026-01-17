@@ -11,7 +11,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "You've reached Week 11 — a major milestone. By now, you're likely starting physiotherapy or have just begun. This is where your recovery shifts from healing to rebuilding. It's exciting to finally be active again, but it can also feel overwhelming. You will get through this. This lesson explains what to expect in your first sessions, what Phase 2 goals look like, and why consistency matters more than perfection.",
+        "You've reached Week 11 — a major milestone. By now, you're likely starting physiotherapy or have just begun. This is where your recovery shifts from healing to rebuilding. It's exciting to finally be active again, but it can also feel overwhelming. This lesson explains what to expect in your first sessions, what **Phase 2: Transition** goals look like, and why consistency matters more than perfection.",
     blocks: [
         {
             type: "heading",
@@ -28,7 +28,7 @@ export const content: SectionContent = {
                 },
                 {
                     text:
-                        "Understand Phase 2 goals — know what you're working toward (25 single-leg heel raises, balance, strength)",
+                        "Understand Phase 2 goals — know what you're working toward (Walking normally, basic balance, early strength)",
                 },
                 {
                     text:
@@ -74,7 +74,7 @@ export const content: SectionContent = {
                             items: [
                                 "**Your story** — they'll ask about your injury, treatment (surgery vs non-surgical), recovery so far, any complications",
                                 "**Strength testing** — checking calf strength (often seated calf raises with weight, measuring MVIC — maximum voluntary isometric contraction)",
-                                "**Mobility assessment** — measuring ankle range of motion: dorsiflexion (toes up), plantarflexion (toes down)",
+                                "**Mobility assessment** — measuring ankle range of motion: [dorsiflexion](/standard/emergency-care) (toes up), [plantarflexion](/standard/emergency-care) (toes down)",
                                 "**Calf muscle size** — comparing injured leg to uninjured leg (atrophy assessment)",
                                 "**Balance** — standing balance, single-leg balance if safe",
                                 "**Gait analysis** — observing how you walk (in boot if still wearing it, or in shoes), looking for limping or compensatory patterns",
@@ -99,12 +99,12 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Your starting exercises** — what you'll do in clinic and at home (see [Key Exercises](/standard/key-exercises) for detailed instructions)",
+                                "**Your starting exercises** — what you'll do in clinic and at home (detailed instructions in next lesson)",
                                 "**Progression plan** — how exercises will get harder over time",
                                 "**Frequency** — how often you'll come to clinic (typically 1-2x per week initially)",
                                 "**Home program** — exercises to do between sessions (this is where most progress happens)",
-                                "**Phase 2 goals** — what you're aiming for (25 single-leg heel raises, 1.4x body weight strength, good balance)",
-                                "**Timeline** — how long Phase 2 typically takes (6-12 weeks)",
+                                "**Phase 2 goals** — what you're aiming for (Normal walking, 90% mobility, basic single-leg balance)",
+                                "**Timeline** — how long Phase 2 typically takes (2-4 weeks)",
                             ],
                         },
                     ],
@@ -138,12 +138,12 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Your Complete Rehabilitation Roadmap",
+            title: "Your Complete Recovery Roadmap",
             content: [
                 {
                     type: "text",
                     content:
-                        "Now that you're starting physiotherapy, it's time to understand the full rehabilitation roadmap. This table shows all phases from immobilization through to return to sport. **You'll refer back to this table throughout your recovery** to see where you are and what's coming next.",
+                        "Now that you're starting physiotherapy, it's important to understand where you are in the recovery journey. The four phases are: **Phase 1: Protection** (weeks 0-8), **Phase 2: Transition** (weeks 8-12), **Phase 3: Capacity** (weeks 12-26), and **Phase 4: Return to Sport** (weeks 26+). You're now entering Phase 2.",
                 },
                 {
                     type: "rehab-protocol-table",
@@ -157,7 +157,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "You're now in **Phase 2: Post-Immobilization Period** (weeks 6-12+). You've completed Phase 1 (immobilization), and now you're rebuilding strength, balance, and function. This is where active recovery begins.",
+                                "You're now in **Phase 2: Transition** (weeks 8-12). You've completed Phase 1 (Protection), and now you're rebuilding the ability to walk normally and move your ankle freely. This is where active recovery begins.",
                         },
                     ],
                 },
@@ -183,7 +183,7 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**15+ single-leg heel raises** — being able to do 15+ heel raises on your injured leg alone (target: 25+ for Phase 2 completion)",
-                                "**1.4x body weight MVIC** — maximum voluntary isometric contraction (seated, plantarflexion position)",
+                                "**1.4x body weight MVIC** — maximum voluntary isometric contraction (seated, foot pointed down)",
                                 "**1.2x body weight seated isotonic** — ability to do seated calf raises with 1.2x body weight",
                                 "**Good balance** — standing on one leg comfortably, maintaining balance",
                                 "**Protected to unprotected gait** — transitioning from protected walking (heel wedge, reduced step length) to normal walking",
@@ -210,7 +210,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Walking puts about 1.5x your body weight** through your Achilles tendon with each step. Your calf needs to be strong enough to handle this force safely. That's why the 1.4x body weight target matters — it ensures your tendon can handle walking without overstretching (elongation).",
+                                "**Walking puts about 1.5x your body weight** through your Achilles tendon with each step. Your calf needs to be strong enough to handle this force safely. That's why the 1.4x body weight target matters — it ensures your tendon can handle walking without overstretching ([elongation](/standard/healing-process)).",
                         },
                         {
                             type: "text",
@@ -229,7 +229,7 @@ export const content: SectionContent = {
                     src: Phase2Goals,
                     alt: "Infographic showing Phase 2 rehabilitation goals: 25 single-leg heel raises, 1.4x body weight strength, good balance, and protected to unprotected gait transition",
                     caption:
-                        "Phase 2 goals: what you're working toward in post-immobilization period",
+                        "Phase 2 goals: what you're working toward in the Transition phase",
                 },
             ],
         },
@@ -251,12 +251,12 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Safe: Isometric contraction in plantarflexion** — this means pushing your foot down (pointing your toes) against resistance while the ankle doesn't move. Examples: seated calf raises with weight, pressing foot down against resistance. This is safe because the tendon is in a shortened position and there's no stretching force.",
+                                "**Safe: Isometric contraction with foot pointed down** — this means pushing your foot down (pointing your toes) against resistance while the ankle doesn't move. Examples: seated calf raises with weight, pressing foot down against resistance. This is safe because the tendon is in a shortened position and there's no stretching force.",
                         },
                         {
                             type: "text",
                             content:
-                                "**Unsafe: Fast contraction in dorsiflexion** — this means any rapid movement or eccentric loading where your ankle bends upward (toes toward shin). Examples: hopping, jumping, running, fast walking without protection, quick stretching movements. This is unsafe because it puts rapid stretch forces through the healing tendon, which can cause elongation or re-rupture.",
+                                "**Unsafe: Fast contraction with toes up** — this means any rapid movement or eccentric loading where your ankle bends upward (toes toward shin). Examples: hopping, jumping, running, fast walking without protection, quick stretching movements. This is unsafe because it puts rapid stretch forces through the healing tendon, which can cause [elongation](/standard/healing-process) or re-rupture.",
                         },
                     ],
                 },
@@ -269,7 +269,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "During early recovery (Phase 1-2), your tendon is still healing and is vulnerable to elongation — permanent lengthening that reduces function. **Controlled, slow loading in a shortened position** (plantarflexion) stimulates healing without overstretching. **Fast, eccentric loading** (dorsiflexion during movement) puts dangerous stretch forces on the tendon before it's strong enough.",
+                                "During early recovery (Phase 1-2), your tendon is still healing and is vulnerable to [elongation](/standard/healing-process) — permanent lengthening that reduces function. **Controlled, slow loading in a shortened position** (foot pointed down) stimulates healing without overstretching. **Fast, eccentric loading** (toes up during movement) puts dangerous stretch forces on the tendon before it's strong enough.",
                         },
                         {
                             type: "text",
@@ -283,7 +283,7 @@ export const content: SectionContent = {
                     variant: "warning",
                     title: "Critical safety principle",
                     content:
-                        "During Phase 2, avoid any exercise that involves rapid ankle dorsiflexion (toes moving quickly toward shin). This includes hopping, jumping, running, or uncontrolled fast movements. Stick to controlled, isometric exercises in plantarflexion position. Your physiotherapist will tell you when it's safe to progress to dynamic movements.",
+                        "During Phase 2, avoid any exercise that involves rapid ankle movement with toes up (toes moving quickly toward shin). This includes hopping, jumping, running, or uncontrolled fast movements. Stick to controlled, isometric exercises with foot pointed down. Your physiotherapist will tell you when it's safe to progress to dynamic movements.",
                 },
             ],
         },
@@ -294,7 +294,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Your first exercises in physio will be gentle but purposeful. They're designed to rebuild strength and mobility safely using the safe loading principles above. For detailed instructions on how to perform each exercise correctly, see [Key Exercises](/standard/key-exercises).",
+                        "Your first exercises in physio will be gentle but purposeful. They're designed to rebuild strength and mobility safely using the safe loading principles above. Detailed instructions on how to perform each exercise correctly are covered in the next lesson.",
                 },
                 {
                     type: "card",
@@ -306,7 +306,7 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Seated calf raises (isometric plantarflexion)** — building strength safely using controlled, slow movements (you may have started these in Phase 1)",
+                                "**Seated calf raises** — building strength safely using controlled, slow movements with foot pointed down (you may have started these in Phase 1)",
                                 "**Balance exercises** — rebuilding proprioception and control (static positions, no rapid movements)",
                                 "**Gait training** — learning proper walking technique with protected loading (if out of boot)",
                                 "**Range of motion** — gentle, controlled ankle movements within safe ranges (if safe)",
@@ -316,7 +316,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "Your exercises will be tailored to your specific needs, protocol, and progress. What you do depends on whether you're still in a boot, how strong you are, and what your clinician recommends. All exercises should follow the safe loading principle: controlled isometric work in plantarflexion, avoiding fast dorsiflexion movements.",
+                                "Your exercises will be tailored to your specific needs, protocol, and progress. What you do depends on whether you're still in a boot, how strong you are, and what your clinician recommends. All exercises should follow the safe loading principle: controlled isometric work with foot pointed down, avoiding fast movements with toes up.",
                         },
                     ],
                 },
@@ -325,7 +325,7 @@ export const content: SectionContent = {
                     variant: "info",
                     title: "Important",
                     content:
-                        "For detailed exercise instructions with proper form, progression, and safety tips, see [Key Exercises](/standard/key-exercises). Don't compare yourself to others — your journey is unique.",
+                        "Detailed exercise instructions with proper form, progression, and safety tips are covered in the next lesson. Don't compare yourself to others — your journey is unique.",
                 },
             ],
         },
@@ -410,9 +410,9 @@ export const content: SectionContent = {
                 {
                     type: "alert",
                     variant: "danger",
-                    title: "Get urgent help now",
+                    title: "Seek urgent care",
                     content:
-                        "**Severe pain** during exercises that doesn't ease — physio shouldn't cause severe pain. **New \"pop\" or snap** — if you feel or hear a new pop, stop immediately and seek urgent care. **Signs of DVT (clot in the leg):** new calf pain/tenderness, one-leg calf swelling, calf redness/warmth. **Signs of PE (clot in the lungs):** chest pain, breathlessness, coughing blood, fainting. **Numb/blue/pale toes** — circulation problems. **Fever with rapidly spreading redness** — possible infection. **Severe swelling** that doesn't improve with elevation.",
+                        "**Severe pain**, **new pop/snap**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention). Also seek help for **numb/blue/pale toes**, **fever with spreading redness**, or **severe swelling**.",
                 },
             ],
         },
@@ -507,18 +507,18 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "What Happens Next",
+            title: "What's Next",
             content: [
                 {
                     type: "list",
                     style: "bullet",
                     items: [
                         "**This week:** Focus on consistency — do your exercises regularly, attend sessions",
-                        "**Week 12:** [Key Exercises](/standard/key-exercises) — detailed instructions for all Phase 2 exercises",
-                        "**Week 13:** [Walking Properly](/standard/walking-properly) — re-learning proper gait pattern",
-                        "**Week 15:** [Progressive Strengthening](/standard/progressive-strengthening) — building toward Phase 3",
-                        "**Weeks 12-18:** Continue building strength, working toward Phase 2 goals (25+ heel raises, 1.4x body weight)",
-                        "**After Phase 2:** You'll move to Phase 3 (single-leg capacity) — building power and preparing for return to sport",
+                        "**Week 12:** Key Exercises — detailed instructions for all Phase 2 exercises (coming up)",
+                        "**Week 13:** Walking Properly — re-learning proper gait pattern (coming up)",
+                        "**Week 15:** Progressive Strengthening — entering **Phase 3: Capacity** (coming up)",
+                        "**Weeks 12-26:** Continue building strength in Phase 3, working toward the 25+ heel raise milestone",
+                        "**After Phase 3:** You'll move to **Phase 4: Return to Sport** (running and power training)",
                     ],
                 },
             ],
@@ -561,7 +561,7 @@ export const content: SectionContent = {
                 {
                     question: "How long will Phase 2 take?",
                     answer:
-                        "Phase 2 typically lasts 6-12 weeks (weeks 6-12 after injury). But progress varies — some people move faster, others slower. Focus on consistent work rather than timelines. Your physio will assess when you're ready for Phase 3.",
+                        "Phase 2 typically lasts 4-6 weeks (weeks 8-12 after injury). But progress varies — some people move faster, others slower. Focus on meeting criteria rather than timelines. Your physio will assess when you're ready for Phase 3.",
                 },
                 {
                     question: "What if physio is painful?",

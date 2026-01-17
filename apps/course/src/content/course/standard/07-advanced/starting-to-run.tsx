@@ -11,7 +11,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By Week 28, you're likely thinking about running again. Running is a major milestone — it means you're getting back to higher-level activities. But starting to run requires careful progression. This lesson covers walk-jog progression, proper running technique, surface selection, and common pitfalls to avoid. You will get through this — running again is achievable with the right approach.",
+        "By Week 28, you're entering **Phase 4: Return to Sport**. Running is a major milestone — it means you're transitioning from building strength to building power and impact. But starting to run requires meeting strict criteria to protect your tendon.",
     blocks: [
         {
             type: "heading",
@@ -20,11 +20,15 @@ export const content: SectionContent = {
         },
         {
             type: "checklist",
-            title: "Starting to run basics",
+            title: "Phase 4: Starting to run basics",
             items: [
                 {
                     text:
-                        "Meet criteria first — 25+ heel raises, pain-free walking, good balance",
+<<<<<<< Current (Your changes)
+                        "Meet Phase 3 exit criteria first — 25+ heel raises, pain-free walking, good balance",
+=======
+                        "Meet Phase 3 exit criteria first — [25+ heel raises](/standard/progressive-strengthening), pain-free walking, good balance",
+>>>>>>> Incoming (Background Agent changes)
                 },
                 {
                     text:
@@ -55,7 +59,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Running is **criteria-based, not time-based**. You need to meet certain strength and function goals before starting. Don't rush — running too early increases re-rupture risk.",
+                        "Running is **criteria-based, not time-based**. You must meet the exit criteria for **Phase 3: Capacity** before starting. Don't rush — running too early on a weak tendon is a leading cause of re-rupture.",
                 },
                 {
                     type: "card",
@@ -182,15 +186,15 @@ export const content: SectionContent = {
                     content: [
                         {
                             type: "text",
-                            content: "**Heel-to-toe pattern:**",
+                            content: "**Natural foot strike:**",
                         },
                         {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "Land on your heel first",
-                                "Roll through your foot",
-                                "Push off with your toes",
+                                "Aim for a neutral midfoot landing",
+                                "Avoid landing heavily on your heel or excessively on your toes",
+                                "Focus on a soft, controlled contact with the ground",
                             ],
                         },
                         {
@@ -203,7 +207,7 @@ export const content: SectionContent = {
                             items: [
                                 "Take shorter strides initially",
                                 "Higher cadence (steps per minute)",
-                                "Reduces impact and stress",
+                                "Reduces impact and stress on the Achilles",
                             ],
                         },
                         {
@@ -222,9 +226,9 @@ export const content: SectionContent = {
                         {
                             type: "image",
                             src: RunningFormWeek28,
-                            alt: "Grant demonstrating proper running form with heel-to-toe pattern and short strides on grass surface",
+                            alt: "Grant demonstrating proper running form with controlled midfoot strike and short strides on grass surface",
                             caption:
-                                "Proper running form: heel-to-toe pattern with short, controlled strides",
+                                "Proper running form: controlled midfoot strike with short, light strides",
                         },
                     ],
                 },
@@ -380,9 +384,9 @@ export const content: SectionContent = {
                 {
                     type: "alert",
                     variant: "danger",
-                    title: "Get urgent help now",
+                    title: "Seek urgent care",
                     content:
-                        "**Severe pain** during or after running that doesn't ease — running shouldn't cause severe pain. **New \"pop\" or snap** — if you feel or hear a new pop, stop immediately and seek urgent care. **Unable to bear weight** — can't put weight on your leg. **Signs of DVT (clot in the leg):** new calf pain/tenderness, one-leg calf swelling, calf redness/warmth. **Signs of PE (clot in the lungs):** chest pain, breathlessness, coughing blood, fainting.",
+                        "**Severe pain**, **new pop/snap**, **unable to bear weight**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention).",
                 },
             ],
         },
@@ -394,7 +398,7 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**Meet criteria first** — don't start until you're ready",
+                        "**Meet Phase 3 criteria first** — don't start until you're ready",
                         "**Follow progression plan** — walk-jog intervals, build gradually",
                         "**Choose safe surfaces** — start with soft, flat surfaces",
                         "**Focus on form** — proper technique reduces stress",
@@ -425,10 +429,10 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**This week:** Start walk-jog progression if you meet criteria",
+                        "**This week:** Start walk-jog progression if you meet Phase 3 exit criteria",
                         "**Week 30:** We cover life after Achilles rupture — long-term expectations and care",
-                        "**Weeks 28-34:** Continue building running fitness gradually",
-                        "**After running:** You'll progress to plyometric training and return to sport",
+                        "**Weeks 28-34:** Continue building running fitness gradually within Phase 4",
+                        "**Next up:** You'll progress to **Plyometric Training** and eventually a full return to play",
                     ],
                 },
             ],

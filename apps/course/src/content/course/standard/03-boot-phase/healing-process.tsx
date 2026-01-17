@@ -13,7 +13,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By Week 4, you're probably asking: **'Is it healing? How long will this take?'** This lesson explains what's happening inside your tendon right now — and why patience is your best friend. Understanding the healing process helps you make sense of the timeline and avoid pushing too hard, too soon. **You will get through this.**",
+        "By Week 4, you're probably asking: **'Is it healing? How long will this take?'** This lesson explains what's happening inside your tendon right now — and why patience is your best friend. Understanding the healing process helps you make sense of the timeline and avoid pushing too hard, too soon.",
 
     blocks: [
         {
@@ -49,23 +49,23 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "The Three Phases of Tendon Healing",
+            title: "The Three Stages of Biological Healing",
             content: [
                 {
                     type: "text",
                     content:
-                        "Tendon healing happens in three overlapping phases. You're currently in the **proliferative phase** — the most critical period for building new tissue. Understanding these phases helps explain why certain activities are safe now, while others must wait.",
+                        "Tendon healing happens in three overlapping biological stages. You're currently in **Phase 1: Protection** of your recovery, but inside the tendon, you are in the **proliferative stage** — the most critical period for building new tissue.",
                 },
                 {
                     type: "image",
                     src: TendonHealingTimeline,
-                    alt: "Three-panel diagram showing tendon healing stages: inflammatory phase (weeks 1-2), proliferative phase (weeks 3-6), and remodelling phase (weeks 6-12)",
+                    alt: "Three-panel diagram showing biological healing stages: inflammatory stage (weeks 1-2), proliferative stage (weeks 3-6), and remodelling stage (weeks 6-12)",
                     caption:
-                        "Tendon healing timeline: inflammation → new tissue growth → strengthening",
+                        "Biological healing timeline: inflammation → new tissue growth → strengthening",
                 },
                 {
                     type: "card",
-                    title: "Phase 1: Inflammatory Phase (Weeks 1-2)",
+                    title: "Stage 1: Inflammation (Weeks 1-2)",
                     description: "The body's initial response to injury.",
                     variant: "muted",
                     content: [
@@ -80,15 +80,14 @@ export const content: SectionContent = {
                             items: [
                                 "**What's happening:** Blood vessels bring healing cells to the rupture site",
                                 "**What you feel:** Swelling, warmth, discomfort",
-                                "**Your job:** Protect the tendon, control swelling with elevation, avoid any stretching",
+                                "**Your job:** Focus on **Phase 1: Protection** goals: elevate, ice, and protect the tendon in your boot.",
                             ],
                         },
                     ],
                 },
                 {
                     type: "card",
-                    title:
-                        "Phase 2: Proliferative Phase (Weeks 3-6) — You Are Here",
+                    title: "Stage 2: Proliferation (Weeks 3-6) — You Are Here",
                     description: "New tissue bridges the gap.",
                     variant: "highlight",
                     content: [
@@ -103,7 +102,7 @@ export const content: SectionContent = {
                             items: [
                                 "**What's happening:** New collagen fibres are forming and connecting the tendon ends",
                                 "**What you feel:** Less swelling, less pain, but the tendon still feels weak",
-                                "**Your job:** Keep the tendon protected in the boot, follow your wedge protocol, don't test it",
+                                "**Your job:** Strict adherence to your boot protocol and wedge removal schedule.",
                                 "**Why it matters:** This new tissue is weak — stretching or loading it too early can tear it apart",
                             ],
                         },
@@ -117,7 +116,7 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Phase 3: Remodelling Phase (Weeks 6-12+)",
+                    title: "Stage 3: Remodelling (Weeks 6-12+)",
                     description: "The new tissue gets stronger.",
                     variant: "muted",
                     content: [
@@ -132,7 +131,7 @@ export const content: SectionContent = {
                             items: [
                                 "**What's happening:** Collagen fibres reorganise and strengthen",
                                 "**What you feel:** Gradual improvement in strength and function",
-                                "**Your job:** Follow progressive loading protocols, start physiotherapy when cleared",
+                                "**Your job:** Transition to **Phase 2: Transition** (walking out of the boot) and start physiotherapy.",
                             ],
                         },
                     ],
@@ -151,8 +150,7 @@ export const content: SectionContent = {
                 {
                     type: "image",
                     src: ReRuptureRiskTimeline,
-                    alt:
-                        "Timeline diagram showing re-rupture risk periods (early rehab weeks 0-8, boot removal weeks 8-12) and why elongation is the bigger problem than re-rupture",
+                    alt: "Timeline diagram showing re-rupture risk periods (early rehab weeks 0-8, boot removal weeks 8-12) and why elongation is the bigger problem than re-rupture",
                     caption:
                         "Re-rupture risk timeline: when risks are highest, and why elongation is the bigger concern",
                 },
@@ -197,8 +195,7 @@ export const content: SectionContent = {
                         {
                             type: "image",
                             src: TendonStiffnessAfterRupture,
-                            alt:
-                                "Educational infographic diagram showing healthy tendon (stiff) vs ruptured tendon (more compliant) and why elongation happens under the same load",
+                            alt: "Educational infographic diagram showing healthy tendon (stiff) vs ruptured tendon (more compliant) and why elongation happens under the same load",
                             caption:
                                 "Tendon stiffness after rupture: a more compliant tendon stretches more easily, leading to elongation",
                         },

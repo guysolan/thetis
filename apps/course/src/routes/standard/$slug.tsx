@@ -1,70 +1,22 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import {
-  formatWeekDay,
   getNextSection,
   getPrevSection,
   getSectionBySlug,
   type SectionMetadata,
   sections,
+  slugToChapter,
 } from "@/content/course/sections";
 import { ContentRenderer, CourseProgressTracker } from "@/components/course";
 import type { SectionContent } from "@/components/course/types";
-import { ArrowLeft, ArrowRight, CheckCircle2, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 import { useCourseProgress } from "@/hooks/use-course-progress";
 import { useEffect } from "react";
 
-// Map slugs to their chronological folders - dynamically generated from sections.ts
-// This ensures the mapping stays in sync with the actual sections
-const slugToFolder: Record<string, string> = {
-  // 00-practical - Throughout recovery
-  "first-week-checklist": "00-practical",
-  "mental-health-recovery": "00-practical",
-  "driving-guidelines": "00-practical",
-  "pain-management-throughout-recovery": "00-practical",
-  // 01-emergency - Days 0-3
-  "emergency-care": "01-emergency",
-  "blood-clot-prevention": "01-emergency",
-  // 02-early-treatment - Days 2-14
-  "choosing-your-boot": "02-early-treatment",
-  "specialist-appointment": "02-early-treatment",
-  "treatment-decision": "02-early-treatment",
-  // 03-boot-phase - Days 14-56
-  "your-walking-boot": "03-boot-phase",
-  "boot-adjustment-and-care": "03-boot-phase",
-  "boot-progression-protocol": "03-boot-phase",
-  "sleeping-with-boot": "03-boot-phase",
-  "washing-and-hygiene": "03-boot-phase",
-  "crutches-and-mobility": "03-boot-phase",
-  "healing-process": "03-boot-phase",
-  "nutrition-for-healing": "03-boot-phase",
-  "wedge-removal": "03-boot-phase",
-  "building-strength-in-boot": "03-boot-phase",
-  "final-boot-phase": "03-boot-phase",
-  // 04-transition - Days 74-98
-  "boot-transition": "04-transition",
-  "scar-management": "04-transition",
-  "post-boot-challenges": "04-transition",
-  // 05-physiotherapy - Days 63-105
-  "starting-physio": "05-physiotherapy",
-  "key-exercises": "05-physiotherapy",
-  "walking-properly": "05-physiotherapy",
-  "progressive-strengthening": "05-physiotherapy",
-  // 06-recovery - Days 84-160
-  "swimming-and-water-activities": "06-recovery",
-  "building-cardio": "06-recovery",
-  "functional-milestones": "06-recovery",
-  "returning-to-life": "06-recovery",
-  // 07-advanced - Days 200-220
-  "starting-to-run": "07-advanced",
-  "plyometrics": "07-advanced",
-  // 08-long-term - Days 180-240
-  "six-month-milestone": "08-long-term",
-  "preventing-rerupture": "08-long-term",
-  "new-normal": "08-long-term",
-  "when-things-dont-go-to-plan": "08-long-term",
-};
+// Use slugToChapter from sections.ts as the single source of truth
+const slugToFolder = slugToChapter;
 
 // Dynamic import for section content
 async function loadSectionContent(

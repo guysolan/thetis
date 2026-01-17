@@ -32,12 +32,10 @@ export const content: SectionContent = {
                         "Adjust straps correctly — tighten from bottom to top",
                 },
                 {
-                    text:
-                        "Check for pressure points — add padding if needed",
+                    text: "Check for pressure points — add padding if needed",
                 },
                 {
-                    text:
-                        "Keep boot clean — remove liner and wash regularly",
+                    text: "Keep boot clean — remove liner and wash regularly",
                 },
                 {
                     text:

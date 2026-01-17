@@ -133,8 +133,8 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**Phase 1 (Weeks 0-6):** Immobilization — protection and healing",
-                                "**Phase 2 (Weeks 6-12):** Post-immobilization — rebuilding strength and balance",
-                                "**Phase 3 (Weeks 12-18):** Single leg capacity — building endurance and function",
+                                "**Phase 2: Transition (Weeks 8-12):** Rebuilding strength and balance",
+                                "**Phase 3: Capacity (Weeks 12-26):** Building endurance and function",
                                 "**Phase 4 (Weeks 18+):** Single leg power — explosive strength and sport-specific training",
                                 "**Phase 5:** Return to sport — when you're ready",
                             ],

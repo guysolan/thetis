@@ -107,3 +107,33 @@ bun src/index.ts "your prompt here" "output-filename.png"
 ```
 
 Reference images in the `input/` folder will be automatically included to guide style and characters.
+
+## Image Fixing
+
+Make minor modifications to existing images:
+
+```bash
+bun src/fix-image.ts <input-image-path> "fix description" [output-filename.png]
+```
+
+**Examples:**
+
+```bash
+# Fix a text label
+bun src/fix-image.ts output/image.png "fix the text label to say 'Plantarflexion' instead of 'Plantar flexion'"
+
+# Remove an artifact
+bun src/fix-image.ts output/image.png "remove the small artifact in the top right corner"
+
+# Adjust an illustration
+bun src/fix-image.ts output/image.png "make the spring illustration slightly tighter" output/fixed-image.png
+```
+
+The script uses Google Gemini to make very minor modifications while keeping everything else exactly the same. Perfect for fixing small issues like:
+
+- Text corrections
+- Removing artifacts
+- Minor adjustments to illustrations
+- Fixing small details
+
+Output images are saved to the `output/` directory.

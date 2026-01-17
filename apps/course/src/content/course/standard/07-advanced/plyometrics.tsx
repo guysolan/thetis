@@ -25,7 +25,7 @@ export const content: SectionContent = {
             items: [
                 {
                     text:
-                        "Meet criteria first — 25+ heel raises, comfortable running, physio clearance",
+                        "Meet criteria first — [25+ heel raises](/standard/progressive-strengthening), comfortable running, physio clearance",
                 },
                 {
                     text:
@@ -285,6 +285,11 @@ export const content: SectionContent = {
                     style: "bullet",
                     items: [
                         "**This week:** Start plyometric training if you meet criteria",
+<<<<<<< Current (Your changes)
+                        "**Week 32:** [Return to Sport](/standard/return-to-sport) — criteria, process, and timeline for returning to your sport",
+=======
+                        "**Week 32:** Return to Sport — criteria, process, and timeline for returning to your sport (coming up)",
+>>>>>>> Incoming (Background Agent changes)
                         "**Week 34:** We cover when things don't go to plan — not progressing, seeking further opinion",
                         "**Weeks 31-38:** Continue building power and preparing for return to sport",
                         "**After plyometrics:** You'll progress to sport-specific training and return to sport",
