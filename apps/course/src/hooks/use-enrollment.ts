@@ -34,12 +34,13 @@ export function useEnrollment() {
             setLoading(true);
 
             try {
+                // Query by both shopify_customer_email and user_email to handle all cases
                 const { data, error } = await supabase
                     .from("enrollments")
                     .select(
                         "id, course_type, status, purchased_at, shopify_order_number",
                     )
-                    .eq("shopify_customer_email", email.toLowerCase())
+                    .or(`shopify_customer_email.eq.${email.toLowerCase()},user_email.eq.${email.toLowerCase()}`)
                     .eq("status", "active");
 
                 if (error) {

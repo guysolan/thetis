@@ -40,6 +40,7 @@ function ClaimPage() {
     const [verifying, setVerifying] = useState(true);
     const [orderValid, setOrderValid] = useState<boolean | null>(null);
     const [hasPurchase, setHasPurchase] = useState<boolean | null>(null);
+    const [hasAttemptedValidation, setHasAttemptedValidation] = useState(false);
     const [enrollmentInfo, setEnrollmentInfo] = useState<
         {
             courseType: string;
@@ -78,7 +79,7 @@ function ClaimPage() {
                     query = query.eq("shopify_order_number", orderNumber);
                 }
 
-                const { data, error } = await query.single();
+                const { data, error } = await query.maybeSingle();
 
                 // Debug logging
                 console.log("Claim page - checking purchase:", {
@@ -145,50 +146,60 @@ function ClaimPage() {
         }
     }, [success, isAuthenticated]);
 
-    // Auto-claim course when purchase is detected and email is entered
-    useEffect(() => {
-        const claimCourse = async () => {
-            if (
-                !hasPurchase || !email || isAuthenticated || loading ||
-                verifying
-            ) {
-                return;
-            }
-
-            // Just sign them in with email (store in localStorage)
-            signIn(email);
-            setSuccess(true);
-            setLoading(false);
-        };
-
-        claimCourse();
-    }, [
-        hasPurchase,
-        email,
-        isAuthenticated,
-        loading,
-        verifying,
-        signIn,
-    ]);
+    // Removed auto-claim - user must click button to validate
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
+        setHasAttemptedValidation(true);
         setLoading(true);
 
-        // If email has purchase, just sign them in
-        if (hasPurchase) {
-            signIn(email);
-            setSuccess(true);
+        const emailToCheck = email.toLowerCase().trim();
+        if (!emailToCheck) {
+            setError("Please enter your email address.");
             setLoading(false);
             return;
         }
 
-        // No purchase found - show error
-        setError(
-            "No purchase found for this email. Please check your email or contact support.",
-        );
-        setLoading(false);
+        // Check if email has purchase
+        try {
+            let query = supabase
+                .from("enrollments")
+                .select("course_type, shopify_order_number, status")
+                .or(`shopify_customer_email.eq.${emailToCheck},user_email.eq.${emailToCheck}`)
+                .eq("status", "active")
+                .limit(1);
+
+            // If we have order params, also match by order number
+            if (hasOrderParams && order) {
+                const orderNumber = order.startsWith("#")
+                    ? order
+                    : `#${order}`;
+                query = query.eq("shopify_order_number", orderNumber);
+            }
+
+            const { data, error: checkError } = await query.maybeSingle();
+
+            if (checkError || !data) {
+                // No purchase found - show error
+                setError(
+                    "No purchase found for this email. Please check your email or contact support.",
+                );
+                setLoading(false);
+                return;
+            }
+
+            // Purchase found - sign them in
+            signIn(emailToCheck);
+            setSuccess(true);
+            setLoading(false);
+        } catch (err) {
+            console.error("Failed to validate purchase:", err);
+            setError(
+                "An error occurred while validating your purchase. Please try again.",
+            );
+            setLoading(false);
+        }
     };
 
     if (authLoading || enrollmentLoading || verifying) {
@@ -341,28 +352,27 @@ function ClaimPage() {
                                     course.
                                 </p>
                             )}
-                            {!hasPurchase && email && !verifying && (
-                                <p className="mt-1 text-destructive text-xs">
-                                    No purchase found for this email. Please
-                                    check your email or contact support.
-                                </p>
-                            )}
                         </div>
 
-                        {error && (
+                        {error && hasAttemptedValidation && (
                             <p className="text-destructive text-sm">{error}</p>
+                        )}
+                        {!hasPurchase && email && !verifying && hasAttemptedValidation && !error && (
+                            <p className="mt-1 text-destructive text-xs">
+                                No purchase found for this email. Please check your email or contact support.
+                            </p>
                         )}
 
                         <Button
                             type="submit"
                             className="w-full"
-                            disabled={loading || !hasPurchase}
+                            disabled={loading || !email.trim()}
                         >
                             {loading
-                                ? "Processing..."
+                                ? "Validating..."
                                 : hasPurchase
                                 ? "Access Your Course"
-                                : "Check Email"}
+                                : "Validate Email"}
                         </Button>
 
                         {hasPurchase && enrollmentInfo && (

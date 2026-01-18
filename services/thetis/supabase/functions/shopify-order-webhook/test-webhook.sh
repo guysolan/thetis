@@ -19,7 +19,9 @@ else
     read SUPABASE_URL
   fi
   URL="$SUPABASE_URL/functions/v1/shopify-order-webhook"
-  ANON_KEY=""
+  # Production also needs anon key for testing (Supabase gateway requires auth)
+  # Get from: supabase projects api-keys --project-ref [ref]
+  ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvaG9zcmZibG1jbXB4aXhscmprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg3NTY2OTgsImV4cCI6MjA4NDMzMjY5OH0.3JlPNbOSUQwMeRPevQrhrLdSqMTCXx3Pp9CR78mESlE"
 fi
 
 if [ -z "$WEBHOOK_SECRET" ]; then
@@ -73,8 +75,8 @@ HEADERS=(
   -H "x-shopify-topic: orders/paid"
 )
 
-# Add Authorization header for local testing
-if [ "$ENV" = "local" ] && [ -n "$ANON_KEY" ]; then
+# Add Authorization header (required by Supabase gateway for both local and production)
+if [ -n "$ANON_KEY" ]; then
   HEADERS+=(-H "Authorization: Bearer $ANON_KEY")
 fi
 

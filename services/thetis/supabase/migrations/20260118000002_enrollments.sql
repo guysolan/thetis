@@ -2,7 +2,8 @@
 -- Links users (by email) to courses they've purchased via Shopify
 CREATE TABLE public.enrollments (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_email TEXT, -- Links to users.email
+  user_id UUID REFERENCES public.users(id) ON DELETE CASCADE, -- Links to users table
+  user_email TEXT, -- Optional: can be linked later if user creates account
   course_type TEXT NOT NULL CHECK (course_type IN ('standard', 'premium', 'essentials', 'professionals')),
   
   -- Shopify fields (primary payment method)
@@ -24,15 +25,12 @@ CREATE TABLE public.enrollments (
 -- Enable RLS
 ALTER TABLE public.enrollments ENABLE ROW LEVEL SECURITY;
 
--- Drop any old policies that might exist
-DROP POLICY IF EXISTS "Users can view own enrollments" ON public.enrollments;
-DROP POLICY IF EXISTS "Users can link own enrollments" ON public.enrollments;
-DROP POLICY IF EXISTS "Anon can view enrollments by email" ON public.enrollments;
-
--- Allow anon read access (filtered client-side by email)
+-- Allow anon read access by email (for course access checks)
+-- This allows unauthenticated users to check if they have enrollments
 CREATE POLICY "Anon can view enrollments by email" ON public.enrollments
   FOR SELECT
-  USING (true); -- Client-side filtering by shopify_customer_email
+  TO anon
+  USING (true); -- Client-side filtering by shopify_customer_email or user_email
 
 -- Service role can do everything (for webhooks)
 CREATE POLICY "Service role full access" ON public.enrollments

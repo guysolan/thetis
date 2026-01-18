@@ -66,6 +66,20 @@ interface ShopifyOrder {
 }
 
 Deno.serve(async (req) => {
+    // Handle CORS preflight requests
+    if (req.method === "OPTIONS") {
+        return new Response(null, {
+            status: 204,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "POST, OPTIONS",
+                "Access-Control-Allow-Headers":
+                    "Content-Type, x-shopify-hmac-sha256, x-shopify-webhook-id, x-shopify-topic, Authorization",
+                "Access-Control-Max-Age": "86400",
+            },
+        });
+    }
+
     // Only accept POST requests
     if (req.method !== "POST") {
         return new Response("Method not allowed", { status: 405 });
@@ -184,27 +198,44 @@ Deno.serve(async (req) => {
     const enrollmentsCreated: string[] = [];
     const errors: string[] = [];
 
-    // Check if user exists, create if not
-    let userEmail = customerEmail;
-    const { data: existingUser } = await supabase
-        .from("users")
-        .select("email")
-        .eq("email", customerEmail)
-        .single();
+    // Ensure user exists using database function (bypasses RLS)
+    let userExists = false;
+    let userCreated = false;
 
-    if (!existingUser) {
-        // Create user record
-        const { error: userError } = await supabase.from("users").insert({
-            email: customerEmail,
-            email_course_enabled: true,
+    const { data: userId, error: userError } = await supabase
+        .rpc("ensure_user", {
+            p_email: customerEmail,
+            p_email_course_enabled: true,
         });
 
-        if (userError) {
-            console.error("Failed to create user:", userError);
-            // Continue anyway - enrollment can still be created
-        } else {
-            console.log(`Created user record for ${customerEmail}`);
+    if (userError) {
+        console.error("Failed to ensure user:", userError);
+        errors.push(`User creation: ${userError.message}`);
+        // Continue anyway - enrollment can still be created
+    } else if (userId) {
+        // Check if user was just created or already existed
+        const { data: userData } = await supabase
+            .from("users")
+            .select("created_at")
+            .eq("id", userId)
+            .single();
+
+        // If created within last second, assume it was just created
+        if (userData) {
+            const createdAt = new Date(userData.created_at);
+            const now = new Date();
+            const diffSeconds = (now.getTime() - createdAt.getTime()) / 1000;
+            userCreated = diffSeconds < 2; // Created within last 2 seconds
         }
+
+        userExists = true;
+        console.log(
+            `${
+                userCreated
+                    ? "Created"
+                    : "Found existing"
+            } user record for ${customerEmail} (id: ${userId})`,
+        );
     }
 
     // Create enrollments for each course product
@@ -217,7 +248,7 @@ Deno.serve(async (req) => {
             .select("id")
             .eq("shopify_order_id", String(order.id))
             .eq("shopify_line_item_id", String(item.id))
-            .single();
+            .maybeSingle();
 
         if (existingEnrollment) {
             console.log(
@@ -226,18 +257,60 @@ Deno.serve(async (req) => {
             continue;
         }
 
-        // Create enrollment
+        // Create enrollment and link to user
+        const enrollmentData: Record<string, unknown> = {
+            course_type: courseType,
+            shopify_order_id: String(order.id),
+            shopify_order_number: `#${order.order_number}`,
+            shopify_customer_email: customerEmail,
+            shopify_line_item_id: String(item.id),
+            status: "active",
+            purchased_at: order.created_at,
+        };
+
+        // Link to user if user exists (either created now or already existed)
+        if (userExists && userId) {
+            enrollmentData.user_id = userId;
+            enrollmentData.user_email = customerEmail;
+        }
+
         const { error: enrollError } = await supabase.from("enrollments")
-            .insert({
-                user_email: userEmail, // Link to user
-                course_type: courseType,
-                shopify_order_id: String(order.id),
-                shopify_order_number: `#${order.order_number}`,
-                shopify_customer_email: customerEmail,
-                shopify_line_item_id: String(item.id),
-                status: "active",
-                purchased_at: order.created_at,
-            });
+            .insert(enrollmentData);
+
+        if (enrollError) {
+            // If error is about user_id or user_email column, try without them
+            if (
+                (enrollError.message.includes("user_id") ||
+                    enrollError.message.includes("user_email")) && userExists
+            ) {
+                console.log(
+                    "Retrying enrollment creation without user linking due to schema issue",
+                );
+                delete enrollmentData.user_id;
+                delete enrollmentData.user_email;
+                const { error: retryError } = await supabase.from("enrollments")
+                    .insert(enrollmentData);
+
+                if (retryError) {
+                    errors.push(`${courseType}: ${retryError.message}`);
+                } else {
+                    enrollmentsCreated.push(courseType);
+                    console.log(
+                        `Created enrollment for ${courseType} (user exists but enrollment not linked due to schema issue)`,
+                    );
+                }
+            } else {
+                errors.push(`${courseType}: ${enrollError.message}`);
+            }
+        } else {
+            enrollmentsCreated.push(courseType);
+            const linkedStatus = (userExists && userId)
+                ? ` (linked to user_id: ${userId})`
+                : " (will be linked on signup)";
+            console.log(
+                `Created enrollment for ${courseType}${linkedStatus} - Order #${order.order_number}, Email: ${customerEmail}`,
+            );
+        }
 
         if (enrollError) {
             console.error(
@@ -322,6 +395,8 @@ Deno.serve(async (req) => {
             message: "Webhook processed",
             order_number: order.order_number,
             customer_email: customerEmail,
+            user_created: userCreated,
+            user_exists: userExists,
             enrollments_created: enrollmentsCreated,
             errors: errors.length > 0 ? errors : undefined,
         }),

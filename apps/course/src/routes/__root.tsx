@@ -247,14 +247,14 @@ export const Route = createRootRouteWithContext<{
 
 function RootComponent() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <>
       <Header />
-      <main className="flex-1">
+      <main>
         <Outlet />
       </main>
       <Footer />
       <RouterSpinner />
       <Toaster />
-    </div>
+    </>
   );
 }
