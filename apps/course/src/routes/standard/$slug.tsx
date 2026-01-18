@@ -7,9 +7,15 @@ import {
   sections,
   slugToChapter,
 } from "@/content/course/sections";
-import { ContentRenderer, CourseProgressTracker } from "@/components/course";
+import {
+  ContentRenderer,
+  CoursePageLayout,
+  CourseProgressTracker,
+  CourseSectionHeader,
+  LessonCompletionButton,
+} from "@/components/course";
 import type { SectionContent } from "@/components/course/types";
-import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 import { useCourseProgress } from "@/hooks/use-course-progress";
@@ -48,6 +54,8 @@ async function loadSectionContent(
     return null;
   }
 }
+
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 export const Route = createFileRoute("/standard/$slug")({
   loader: async ({ params }) => {
@@ -91,7 +99,11 @@ export const Route = createFileRoute("/standard/$slug")({
       prevSection,
     };
   },
-  component: SectionPage,
+  component: () => (
+    <ProtectedRoute requiredCourse="standard">
+      <SectionPage />
+    </ProtectedRoute>
+  ),
   notFoundComponent: () => (
     <div className="mx-auto px-4 sm:px-6 py-12 max-w-4xl text-center">
       <h1 className="mb-4 font-semibold text-foreground text-3xl">
@@ -116,19 +128,49 @@ function SectionPage() {
   const totalSections = sections.length;
   const {
     markLessonComplete,
+    markLessonIncomplete,
     isLessonComplete,
     getCompletionPercentage,
+    setCurrentBookmark,
   } = useCourseProgress();
   const isComplete = isLessonComplete(section.slug);
   const completionPercentage = getCompletionPercentage(totalSections);
   const completedCount =
     sections.filter((s) => isLessonComplete(s.slug)).length;
 
-  // Mark lesson as complete when viewed
+  // Track section access (update last_accessed_at when section is viewed)
   useEffect(() => {
-    if (!isComplete) {
-      markLessonComplete(section.slug);
-    }
+    setCurrentBookmark(section.slug);
+  }, [section.slug, setCurrentBookmark]);
+
+  // Auto-mark lesson as complete when user scrolls through most of it
+  useEffect(() => {
+    if (isComplete) return; // Already completed
+
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollPercentage = (scrollTop + windowHeight) / documentHeight;
+
+      // Mark as complete when user scrolls through 75% of the content
+      if (scrollPercentage > 0.75) {
+        markLessonComplete(section.slug);
+        window.removeEventListener("scroll", handleScroll);
+      }
+    };
+
+    // Add a small delay before starting to track scroll
+    const timeoutId = setTimeout(() => {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      // Also check immediately in case content is short
+      handleScroll();
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [section.slug, isComplete, markLessonComplete]);
 
   // Scroll to top when section changes
@@ -137,27 +179,29 @@ function SectionPage() {
   }, [section.slug]);
 
   return (
-    <div className="mx-auto px-4 sm:px-6 py-8 md:py-12 max-w-4xl">
-      {/* Top Navigation */}
-      <div className="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-4 mb-6">
-        <Link
-          to="/standard"
-          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground text-sm transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Course
-        </Link>
-        {section.timing && (
-          <div className="flex items-center gap-2 text-muted-foreground text-sm">
-            <Clock className="w-4 h-4" />
-            {section.timing.when_useful}
-          </div>
-        )}
-      </div>
+    <CoursePageLayout>
+      <CourseSectionHeader
+        backTo="/standard"
+        backLabel="Back to Course"
+        rightAction={
+          <LessonCompletionButton
+            isComplete={isComplete}
+            onToggle={() => {
+              const currentSlug = section.slug;
+              const currentIsComplete = isLessonComplete(currentSlug);
+              if (currentIsComplete) {
+                markLessonIncomplete(currentSlug);
+              } else {
+                markLessonComplete(currentSlug);
+              }
+            }}
+          />
+        }
+      />
 
       {/* Top Navigation Buttons */}
       {(prevSection || nextSection) && (
-        <nav className="flex sm:flex-row flex-col gap-4 mb-8">
+        <nav className="flex sm:flex-row flex-col gap-4 mb-12">
           {prevSection
             ? (
               <Link
@@ -182,6 +226,12 @@ function SectionPage() {
               <Link
                 to="/standard/$slug"
                 params={{ slug: nextSection.slug }}
+                onClick={() => {
+                  // Mark current lesson as complete when navigating to next
+                  if (!isComplete) {
+                    markLessonComplete(section.slug);
+                  }
+                }}
                 className={cn(
                   "group flex flex-1 items-center gap-3 hover:bg-muted/50 p-3 border border-border hover:border-primary/30 rounded-lg transition-all",
                 )}
@@ -200,13 +250,14 @@ function SectionPage() {
       )}
 
       {/* Progress Tracker */}
-      <div className="bg-muted/50 mb-8 p-4 border border-border rounded-xl">
+      <div className="bg-muted/50 mb-12 p-4 border border-border rounded-xl">
         <CourseProgressTracker
           currentSectionNumber={section.section_number}
           totalSections={totalSections}
           completedCount={completedCount}
           completionPercentage={completionPercentage}
           sections={sections}
+          isSectionComplete={isLessonComplete}
         />
       </div>
 
@@ -293,6 +344,12 @@ function SectionPage() {
               <Link
                 to="/standard/$slug"
                 params={{ slug: nextSection.slug }}
+                onClick={() => {
+                  // Mark current lesson as complete when navigating to next
+                  if (!isComplete) {
+                    markLessonComplete(section.slug);
+                  }
+                }}
                 className={cn(
                   "group flex flex-1 items-center gap-4 hover:bg-muted/50 p-4 border border-border hover:border-primary/30 rounded-xl transition-all",
                 )}
@@ -309,6 +366,6 @@ function SectionPage() {
             : <div className="flex-1" />}
         </nav>
       )}
-    </div>
+    </CoursePageLayout>
   );
 }

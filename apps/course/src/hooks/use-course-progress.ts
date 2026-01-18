@@ -1,114 +1,220 @@
 import { useCallback, useEffect, useState } from "react";
-import { sections } from "@/content/course/sections";
+import { supabase } from "@/lib/supabase";
+import { useSimpleAuth } from "./use-simple-auth";
 
-const STORAGE_KEY = "course-progress";
-
-interface CourseProgress {
-    completedLessons: string[];
-    currentBookmark: string | null; // The current position/bookmark in the course
-}
-
-// Get stored progress from localStorage
-function getStoredProgress(): CourseProgress {
-    if (typeof window === "undefined") {
-        return { completedLessons: [], currentBookmark: null };
-    }
-
-    try {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-            return JSON.parse(stored);
-        }
-    } catch (error) {
-        console.error("Failed to load course progress:", error);
-    }
-
-    return { completedLessons: [], currentBookmark: null };
-}
-
-// Save progress to localStorage
-function saveProgress(progress: CourseProgress): void {
-    if (typeof window === "undefined") return;
-
-    try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-    } catch (error) {
-        console.error("Failed to save course progress:", error);
-    }
+interface UserProgress {
+    section_slug: string;
+    completed_at: string | null;
+    last_accessed_at: string;
 }
 
 export function useCourseProgress() {
-    const [progress, setProgress] = useState<CourseProgress>(getStoredProgress);
+    const { email } = useSimpleAuth();
+    const [completedLessons, setCompletedLessons] = useState<string[]>([]);
+    const [currentBookmark, setCurrentBookmarkState] = useState<string | null>(
+        null,
+    );
+    const [loading, setLoading] = useState(true);
 
-    // Load progress on mount
+    // Load progress from database on mount and when email changes
     useEffect(() => {
-        const stored = getStoredProgress();
-        setProgress(stored);
-    }, []);
+        if (!email) {
+            setCompletedLessons([]);
+            setCurrentBookmarkState(null);
+            setLoading(false);
+            return;
+        }
 
-    // Save to localStorage whenever progress changes
-    useEffect(() => {
-        saveProgress(progress);
-    }, [progress]);
+        const loadProgress = async () => {
+            try {
+                const { data, error } = await supabase
+                    .from("user_progress")
+                    .select("section_slug, completed_at, last_accessed_at")
+                    .eq("user_email", email.toLowerCase())
+                    .order("last_accessed_at", { ascending: false });
 
-    const markLessonComplete = useCallback((lessonSlug: string) => {
-        setProgress((prev) => {
-            if (prev.completedLessons.includes(lessonSlug)) {
-                return prev; // Already completed
+                if (error) {
+                    console.error("Error loading progress:", error);
+                    setCompletedLessons([]);
+                    setCurrentBookmarkState(null);
+                } else {
+                    const completed = (data || [])
+                        .filter((p) => p.completed_at !== null)
+                        .map((p) => p.section_slug);
+                    setCompletedLessons(completed);
+
+                    // Set bookmark to most recently accessed section
+                    if (data && data.length > 0) {
+                        setCurrentBookmarkState(data[0].section_slug);
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to load progress:", error);
+                setCompletedLessons([]);
+                setCurrentBookmarkState(null);
+            } finally {
+                setLoading(false);
             }
-            const updated = {
-                completedLessons: [...prev.completedLessons, lessonSlug],
-                currentBookmark: lessonSlug, // Update bookmark to current lesson
-            };
-            return updated;
-        });
-    }, []);
+        };
 
-    const markLessonIncomplete = useCallback((lessonSlug: string) => {
-        setProgress((prev) => ({
-            ...prev,
-            completedLessons: prev.completedLessons.filter(
-                (slug) => slug !== lessonSlug,
-            ),
-        }));
-    }, []);
+        loadProgress();
+    }, [email]);
+
+    const markLessonComplete = useCallback(
+        async (lessonSlug: string) => {
+            if (!email) return;
+
+            // Optimistically update UI
+            if (!completedLessons.includes(lessonSlug)) {
+                setCompletedLessons((prev) => [...prev, lessonSlug]);
+            }
+            setCurrentBookmarkState(lessonSlug);
+
+            // Save to database
+            try {
+                const { error } = await supabase
+                    .from("user_progress")
+                    .upsert(
+                        {
+                            user_email: email.toLowerCase(),
+                            section_slug: lessonSlug,
+                            completed_at: new Date().toISOString(),
+                            last_accessed_at: new Date().toISOString(),
+                        },
+                        {
+                            onConflict: "user_email,section_slug",
+                        },
+                    );
+
+                if (error) {
+                    console.error("Error saving progress:", error);
+                    // Revert optimistic update
+                    setCompletedLessons((prev) =>
+                        prev.filter((slug) => slug !== lessonSlug)
+                    );
+                }
+            } catch (error) {
+                console.error("Failed to save progress:", error);
+                // Revert optimistic update
+                setCompletedLessons((prev) =>
+                    prev.filter((slug) => slug !== lessonSlug)
+                );
+            }
+        },
+        [email, completedLessons],
+    );
+
+    const markLessonIncomplete = useCallback(
+        async (lessonSlug: string) => {
+            if (!email) return;
+
+            // Optimistically update UI
+            setCompletedLessons((prev) =>
+                prev.filter((slug) => slug !== lessonSlug)
+            );
+
+            // Update database (set completed_at to null)
+            try {
+                const { error } = await supabase
+                    .from("user_progress")
+                    .upsert(
+                        {
+                            user_email: email.toLowerCase(),
+                            section_slug: lessonSlug,
+                            completed_at: null,
+                            last_accessed_at: new Date().toISOString(),
+                        },
+                        {
+                            onConflict: "user_email,section_slug",
+                        },
+                    );
+
+                if (error) {
+                    console.error("Error updating progress:", error);
+                    // Revert optimistic update
+                    setCompletedLessons((prev) => [...prev, lessonSlug]);
+                }
+            } catch (error) {
+                console.error("Failed to update progress:", error);
+                // Revert optimistic update
+                setCompletedLessons((prev) => [...prev, lessonSlug]);
+            }
+        },
+        [email],
+    );
 
     const isLessonComplete = useCallback(
         (lessonSlug: string): boolean => {
-            return progress.completedLessons.includes(lessonSlug);
+            return completedLessons.includes(lessonSlug);
         },
-        [progress.completedLessons],
+        [completedLessons],
     );
 
     const getCompletionPercentage = useCallback(
         (totalLessons: number): number => {
             if (totalLessons === 0) return 0;
             const percentage = Math.round(
-                (progress.completedLessons.length / totalLessons) * 100,
+                (completedLessons.length / totalLessons) * 100,
             );
             return Math.min(percentage, 100);
         },
-        [progress.completedLessons.length],
+        [completedLessons.length],
     );
 
-    const clearProgress = useCallback(() => {
-        setProgress({ completedLessons: [], currentBookmark: null });
-    }, []);
+    const clearProgress = useCallback(async () => {
+        if (!email) return;
+
+        setCompletedLessons([]);
+        setCurrentBookmarkState(null);
+
+        // Clear from database
+        try {
+            const { error } = await supabase
+                .from("user_progress")
+                .delete()
+                .eq("user_email", email.toLowerCase());
+
+            if (error) {
+                console.error("Error clearing progress:", error);
+            }
+        } catch (error) {
+            console.error("Failed to clear progress:", error);
+        }
+    }, [email]);
 
     const getCurrentBookmark = useCallback((): string | null => {
-        return progress.currentBookmark;
-    }, [progress.currentBookmark]);
+        return currentBookmark;
+    }, [currentBookmark]);
 
-    const setCurrentBookmark = useCallback((lessonSlug: string) => {
-        setProgress((prev) => ({
-            ...prev,
-            currentBookmark: lessonSlug,
-        }));
-    }, []);
+    const setCurrentBookmark = useCallback(
+        async (lessonSlug: string) => {
+            if (!email) return;
+
+            // Update state
+            setCurrentBookmarkState(lessonSlug);
+
+            // Update last_accessed_at in database
+            try {
+                await supabase.from("user_progress").upsert(
+                    {
+                        user_email: email.toLowerCase(),
+                        section_slug: lessonSlug,
+                        last_accessed_at: new Date().toISOString(),
+                    },
+                    {
+                        onConflict: "user_email,section_slug",
+                    },
+                );
+            } catch (error) {
+                console.error("Failed to update bookmark:", error);
+            }
+        },
+        [email],
+    );
 
     return {
-        completedLessons: progress.completedLessons,
-        currentBookmark: progress.currentBookmark,
+        completedLessons,
+        currentBookmark,
         markLessonComplete,
         markLessonIncomplete,
         isLessonComplete,
@@ -116,5 +222,6 @@ export function useCourseProgress() {
         clearProgress,
         getCurrentBookmark,
         setCurrentBookmark,
+        loading,
     };
 }

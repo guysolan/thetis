@@ -15,6 +15,7 @@ interface CourseProgressTrackerProps {
   completedCount: number;
   completionPercentage: number;
   sections: SectionMetadata[];
+  isSectionComplete: (slug: string) => boolean;
   className?: string;
 }
 
@@ -24,6 +25,7 @@ export function CourseProgressTracker({
   completedCount,
   completionPercentage,
   sections,
+  isSectionComplete,
   className,
 }: CourseProgressTrackerProps) {
   const navigate = useNavigate();
@@ -82,9 +84,11 @@ export function CourseProgressTracker({
               {Array.from({ length: totalSections }, (_, index) => {
                 const sectionNumber = index + 1;
                 const section = sections[index];
-                const isCompleted = sectionNumber <= completedCount;
+                const isCompleted = section
+                  ? isSectionComplete(section.slug)
+                  : false;
                 const isCurrent = sectionNumber === currentSectionNumber;
-                const isUpcoming = sectionNumber > completedCount;
+                const isUpcoming = !isCompleted && !isCurrent;
 
                 if (!section) return null;
 
@@ -112,8 +116,8 @@ export function CourseProgressTracker({
                             "rounded-full w-3 h-3 transition-all duration-200",
                             isCompleted && "bg-primary",
                             isCurrent && !isCompleted &&
-                              "bg-primary/60 ring-2 ring-primary/40",
-                            isUpcoming && "bg-muted",
+                              "bg-primary/40 ring-2 ring-primary/40",
+                            isUpcoming && "bg-slate-300",
                           )}
                         />
                       </button>
