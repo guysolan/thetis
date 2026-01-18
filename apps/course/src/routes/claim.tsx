@@ -172,9 +172,7 @@ function ClaimPage() {
 
             // If we have order params, also match by order number
             if (hasOrderParams && order) {
-                const orderNumber = order.startsWith("#")
-                    ? order
-                    : `#${order}`;
+                const orderNumber = order.startsWith("#") ? order : `#${order}`;
                 query = query.eq("shopify_order_number", orderNumber);
             }
 
@@ -357,9 +355,11 @@ function ClaimPage() {
                         {error && hasAttemptedValidation && (
                             <p className="text-destructive text-sm">{error}</p>
                         )}
-                        {!hasPurchase && email && !verifying && hasAttemptedValidation && !error && (
+                        {!hasPurchase && email && !verifying &&
+                            hasAttemptedValidation && !error && (
                             <p className="mt-1 text-destructive text-xs">
-                                No purchase found for this email. Please check your email or contact support.
+                                No purchase found for this email. Please check
+                                your email or contact support.
                             </p>
                         )}
 
