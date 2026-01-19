@@ -29,7 +29,7 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "text-lg flex flex-1 text-left items-center justify-between py-4 font-medium transition-all hover:underline underline-offset-4 [&[data-state=open]>svg]:rotate-180",
+        "flex flex-1 justify-between items-center py-4 font-medium text-lg text-left hover:underline underline-offset-4 [&[data-state=open]>svg]:rotate-180 transition-all",
         className,
       )}
       {...props}
@@ -48,7 +48,7 @@ const AccordionContent = React.forwardRef<
   <AccordionPrimitive.Content
     ref={ref}
     className={cn(
-      "overflow-hidden text-left text-[1.25rem] transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
+      "overflow-hidden text-md text-left transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
       className,
     )}
     {...props}
@@ -68,4 +68,4 @@ export const NoAccordionLink = ({ title, href }) => {
   );
 };
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger };

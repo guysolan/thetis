@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => {
       dedupe: ["react", "react-dom"],
     },
     optimizeDeps: {
-      include: ["react", "react-dom", "sonner"],
+      include: ["react", "react-dom", "react/jsx-runtime", "sonner"],
     },
     build: {
       target: "es2020",
@@ -31,6 +31,7 @@ export default defineConfig(({ mode }) => {
       },
       commonjsOptions: {
         include: [/packages/],
+        transformMixedEsModules: true,
       },
     },
   };

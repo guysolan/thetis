@@ -1,5 +1,7 @@
 import type { SectionContent } from "@/components/course/types";
 import DvtVsPeLegToLungs from "@/assets/dvt-vs-pe-leg-to-lungs.png";
+import DvtDopplerScan from "@/assets/dvt-doppler-scan.png";
+import DvtSignsSymptoms from "@/assets/dvt-signs-symptoms.png";
 
 export const metadata = {
     slug: "blood-clot-prevention",
@@ -78,6 +80,35 @@ export const content: SectionContent = {
         },
         {
             type: "section",
+            title: "When clots can form: earlier than you might think",
+            content: [
+                {
+                    type: "text",
+                    content:
+                        "Research suggests that blood clots can sometimes be present **even before immobilisation begins**. A recent study found that in patients with acute Achilles rupture, about 4 in 10 had a clot detected on ultrasound **before** they were put in a cast or boot.",
+                },
+                {
+                    type: "image",
+                    src: DvtDopplerScan,
+                    alt: "Medical illustration showing a doctor performing a Doppler ultrasound on a patient's leg in an orthopedic boot, with ultrasound scans comparing normal veins to veins with thrombosis. Text overlay shows '42% DETECTED BEFORE THE BOOT' and 'Early Screening Saves Lives'.",
+                    caption: "Doppler ultrasound can detect clots before immobilisation begins",
+                },
+                {
+                    type: "text",
+                    content:
+                        "Most of these clots were found in the **muscular veins** (gastrocnemius or soleus muscles) of the calf. Importantly, many patients didn't have the classic risk factors we usually associate with clots.",
+                },
+                {
+                    type: "alert",
+                    variant: "info",
+                    title: "What this means for you",
+                    content:
+                        "This doesn't mean you should panic — but it does highlight why early awareness and screening matter. If your healthcare team suggests a Doppler ultrasound or blood thinner, they're being proactive about your safety.",
+                },
+            ],
+        },
+        {
+            type: "section",
             title: "Blood thinners: injections vs tablets",
             content: [
                 {
@@ -114,6 +145,12 @@ export const content: SectionContent = {
             type: "section",
             title: "Warning signs to watch for",
             content: [
+                {
+                    type: "image",
+                    src: DvtSignsSymptoms,
+                    alt: "Medical illustration comparing a normal leg with a leg affected by DVT, showing signs and symptoms including swelling, red or darkened skin, swollen veins, pain, and warm skin",
+                    caption: "DVT signs and symptoms to watch for",
+                },
                 {
                     type: "card",
                     title: "DVT (clot in the leg)",

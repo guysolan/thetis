@@ -1,16 +1,17 @@
 import type { SectionContent } from "@/components/course/types";
+import NutritionSummaryChecklist from "@/assets/nutrition-summary-checklist.png";
 
 export const metadata = {
     slug: "nutrition-for-healing",
     title: "Nutrition for Tendon Healing",
     description:
-        "Protein requirements, collagen supplementation, vitamins, and hydration for optimal recovery",
+        "Evidence-based nutrition guidance for Achilles rupture recovery",
     status: "drafting" as const,
 };
 
 export const content: SectionContent = {
     intro:
-        "Your body needs the right building blocks to heal your tendon. Good nutrition supports collagen production, tissue repair, and muscle building. Focus on protein, vitamin C, and hydration — you don't need to completely change your diet, just add the essentials.",
+        "The evidence for specific nutrition requirements after Achilles rupture is limited. Most research comes from general wound healing or tendon loading studies, not rupture recovery specifically. There's no strong evidence that increasing protein intake improves healing outcomes. The best approach is to eat a balanced, varied diet — you don't need to completely change your eating habits.",
     blocks: [
         {
             type: "heading",
@@ -23,76 +24,43 @@ export const content: SectionContent = {
             items: [
                 {
                     text:
-                        "Eat enough protein — 1-1.2g per kg body weight daily (70kg person = 70-85g)",
+                        "Eat a balanced diet — include fruits, vegetables, whole grains, and protein sources",
                 },
                 {
                     text:
-                        "Include vitamin C — essential for collagen (250-500mg daily from fruits/vegetables)",
+                        "Include vitamin C — essential for collagen (from fruits and vegetables)",
                 },
                 {
                     text:
-                        "Stay hydrated — 8-10 glasses of water daily (2-2.5 litres)",
+                        "Stay hydrated — drink water throughout the day",
                 },
                 {
                     text:
-                        "Eat protein at every meal — makes it easier to hit daily targets",
+                        "Don't overthink it — focus on variety rather than specific targets",
                 },
             ],
         },
         {
+            type: "image",
+            src: NutritionSummaryChecklist,
+            alt: "Nutrition checklist illustration showing a doctor and patient with a checklist highlighting Vitamin C, Collagen, Amino Acids, and Vitamin D for Achilles recovery",
+            caption: "Key nutrients for tendon healing",
+        },
+        {
             type: "section",
-            title: "Protein: The Foundation of Healing",
+            title: "What the evidence says about protein",
             content: [
+                {
+                    type: "alert",
+                    variant: "info",
+                    title: "No strong evidence for increased protein",
+                    content:
+                        "There's no high-quality research showing that increasing protein intake improves healing outcomes after Achilles rupture. Studies on protein and tendon healing mostly come from general wound healing or tendon loading research, not rupture recovery specifically. In the early weeks after rupture, collagen synthesis doesn't spike dramatically, so protein needs may not be elevated.",
+                },
                 {
                     type: "text",
                     content:
-                        "Protein is essential for tissue repair and muscle building. Your body needs more during recovery to rebuild your tendon and maintain muscle mass.",
-                },
-                {
-                    type: "card",
-                    title: "How much protein?",
-                    description: "Daily requirements.",
-                    variant: "highlight",
-                    content: [
-                        {
-                            type: "text",
-                            content:
-                                "**1-1.2g protein per kg body weight per day**",
-                        },
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "70kg person = 70-85g daily",
-                                "80kg person = 80-96g daily",
-                                "Spread throughout the day (15-25g per meal)",
-                            ],
-                        },
-                    ],
-                },
-                {
-                    type: "card",
-                    title: "Best protein sources",
-                    description: "High-quality options.",
-                    variant: "default",
-                    content: [
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "**Meat/poultry:** chicken, turkey, lean beef",
-                                "**Fish:** salmon, tuna, cod",
-                                "**Eggs, dairy:** Greek yogurt, milk, cheese",
-                                "**Plant-based:** lentils, chickpeas, tofu, nuts",
-                            ],
-                        },
-                    ],
-                },
-                {
-                    type: "tip",
-                    title: "Simple approach",
-                    content:
-                        "Aim for protein at every meal: eggs or yogurt for breakfast, chicken or fish for lunch, lean meat or legumes for dinner. Add nuts or a protein shake as snacks. This makes it easier to hit your target without counting every gram.",
+                        "A balanced diet that includes protein sources (meat, fish, eggs, dairy, legumes, or plant-based options) as part of your normal eating pattern is sufficient. There's no need to track protein grams or force yourself to eat more protein than usual.",
                 },
             ],
         },
@@ -134,7 +102,7 @@ export const content: SectionContent = {
                             items: [
                                 "**Omega-3 fatty acids:** Anti-inflammatory — fatty fish (salmon, mackerel), walnuts",
                                 "**Zinc:** Tissue repair — meat, shellfish, nuts",
-                                "**Vitamin D:** Bone and muscle health — sunlight, fatty fish",
+                                "**Vitamin D and Calcium:** Support bone-tendon integration and neuromuscular function — oily fish, fortified dairy, sunlight (for vitamin D)",
                             ],
                         },
                     ],
@@ -212,7 +180,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "There's growing evidence that collagen supplementation may support tendon healing, but it's not essential. A balanced diet with adequate protein usually provides what you need.",
+                        "There's growing evidence that collagen peptides may support tendon structure and recovery, especially when combined with loading exercises. A balanced diet with adequate protein usually provides what you need, but supplementation can be considered during recovery.",
                 },
                 {
                     type: "card",
@@ -275,17 +243,17 @@ export const content: SectionContent = {
                 {
                     question: "Do I need to take supplements?",
                     answer:
-                        "Not necessarily. A balanced diet with adequate protein, fruits, and vegetables usually provides what you need. Supplements like collagen or vitamin C can be helpful additions, but discuss with your healthcare team first.",
+                        "There's no strong evidence that supplements improve healing outcomes after Achilles rupture. A balanced diet usually provides what you need. If you're considering supplements like collagen or vitamin C, discuss with your healthcare team first.",
                 },
                 {
                     question: "Can I still eat my normal foods?",
                     answer:
-                        "Yes, absolutely. You don't need to completely change your diet. Focus on adding protein and nutrient-rich foods rather than eliminating everything you enjoy. Moderation is key.",
+                        "Yes, absolutely. There's no evidence that you need to change your diet significantly. Eat a balanced, varied diet as you normally would. If you're eating a reasonable mix of foods, you're likely getting what you need.",
                 },
                 {
-                    question: "How do I know if I'm eating enough protein?",
+                    question: "Do I need to track protein or other nutrients?",
                     answer:
-                        "Track your protein intake for a few days. Use an app or read labels and estimate. Aim for 1-1.2g per kg body weight. If you're consistently below this, add protein-rich foods to meals and snacks.",
+                        "No. There's no evidence that tracking protein intake improves healing outcomes. If you're eating a balanced diet with variety, you don't need to count grams or track specific nutrients. If you have concerns about your diet or a very restricted eating pattern, discuss with your healthcare team.",
                 },
             ],
         },
@@ -298,10 +266,10 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**Protein matters** — 1-1.2g per kg body weight daily",
+                        "**Eat a balanced diet** — variety is more important than specific targets",
                         "**Vitamin C is essential** — your body can't make collagen without it",
-                        "**Stay hydrated** — 8-10 glasses of water daily",
-                        "**Don't overthink it** — focus on adding good foods rather than eliminating everything",
+                        "**Stay hydrated** — drink water throughout the day",
+                        "**Don't overthink it** — there's no strong evidence for specific nutrition requirements",
                     ],
                 },
             ],
