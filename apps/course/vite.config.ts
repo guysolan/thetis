@@ -6,8 +6,8 @@ import path from "node:path";
 export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
   // Set third parameter to '' to load all env regardless of the `VITE_` prefix.
-  const env = loadEnv(mode, process.cwd(), '');
-  
+  const env = loadEnv(mode, process.cwd(), "");
+
   return {
     plugins: [TanStackRouterVite(), react()],
     resolve: {
@@ -28,11 +28,15 @@ export default defineConfig(({ mode }) => {
             "react-vendor": ["react", "react-dom"],
           },
         },
+        external: [],
       },
       commonjsOptions: {
-        include: [/packages/],
+        include: [/packages/, /node_modules/],
         transformMixedEsModules: true,
       },
+    },
+    ssr: {
+      noExternal: ["@tanstack/react-router"],
     },
   };
 });

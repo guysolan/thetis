@@ -91,7 +91,8 @@ export const content: SectionContent = {
                     type: "image",
                     src: DvtDopplerScan,
                     alt: "Medical illustration showing a doctor performing a Doppler ultrasound on a patient's leg in an orthopedic boot, with ultrasound scans comparing normal veins to veins with thrombosis. Text overlay shows '42% DETECTED BEFORE THE BOOT' and 'Early Screening Saves Lives'.",
-                    caption: "Doppler ultrasound can detect clots before immobilisation begins",
+                    caption:
+                        "Doppler ultrasound can detect clots before immobilisation begins",
                 },
                 {
                     type: "text",

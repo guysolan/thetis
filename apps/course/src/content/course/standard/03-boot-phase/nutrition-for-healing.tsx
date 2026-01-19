@@ -31,8 +31,7 @@ export const content: SectionContent = {
                         "Include vitamin C — essential for collagen (from fruits and vegetables)",
                 },
                 {
-                    text:
-                        "Stay hydrated — drink water throughout the day",
+                    text: "Stay hydrated — drink water throughout the day",
                 },
                 {
                     text:
