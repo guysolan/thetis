@@ -1,4 +1,3 @@
-import AircastVsAchilles from "../assets/blog/aircast-vs-vacoped.png";
 import AchillesDrawing from "../assets/drawings/achilles-drawing.svg";
 import {
   Hourglass,

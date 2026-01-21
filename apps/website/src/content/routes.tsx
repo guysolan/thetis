@@ -280,15 +280,12 @@ export const productRoutes: BaseRoute[] = [
       it: "Prodotti per Rottura di Achille",
     },
     description: {
-      en: "Complete recovery solution, better than VACOped and generic boots.",
-      de:
-        "Komplette Erholungslösung, besser als VACOped und generische Stiefel.",
+      en: "Complete recovery solution for Achilles rupture recovery.",
+      de: "Komplette Erholungslösung für die Genesung nach Achillessehnenruptur.",
       fr:
-        "Solution de récupération complète, meilleure que VACOped et bottes génériques.",
-      es:
-        "Solución de recuperación completa, mejor que VACOped y botas genéricas.",
-      it:
-        "Soluzione di recupero completa, migliore di VACOped e stivali generici.",
+        "Solution de récupération complète pour la rupture d'Achille.",
+      es: "Solución de recuperación completa para rotura de Aquiles.",
+      it: "Soluzione di recupero completa per la rottura dell'Achille.",
     },
     variant: "outline",
   },

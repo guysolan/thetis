@@ -173,7 +173,7 @@ export const journeyData: JourneyDataPoint[] = [
         countryId: "germany",
         timing: "Immediate evaluation in ER or direct orthopaedic referral",
         equipment:
-            "Preference for VACOped boot when available, otherwise plaster backslab. Crutches for non-weight-bearing.",
+            "Preference for a hinged orthopedic boot when available, otherwise plaster backslab. Crutches for non-weight-bearing.",
         clinicians:
             "Unfallchirurgen (trauma surgeons) often directly involved, even in emergency settings.",
     },
@@ -182,7 +182,7 @@ export const journeyData: JourneyDataPoint[] = [
         countryId: "france",
         timing: "Same day in ER or GP",
         equipment:
-            "Traditional plaster backslab most common, though some centers use VACOped boots. Crutches for non-weight-bearing.",
+            "Traditional plaster backslab most common, though some centers use hinged orthopedic boots. Crutches for non-weight-bearing.",
         clinicians:
             "Emergency physicians or GPs. Sometimes direct referral to orthopedic specialists.",
     },
@@ -457,7 +457,7 @@ export const journeyData: JourneyDataPoint[] = [
         description:
             "Early weight-bearing in ~75% of centers following UK STAR trial influence.",
         equipment:
-            "Removable boot with heel wedges. VACOped boots in ~30% of centers. ~10% still use plaster initially.",
+            "Removable boot with heel wedges. Hinged orthopedic boots in ~30% of centers. ~10% still use plaster initially.",
         clinicians:
             "Physiotherapists manage rehabilitation. Extended scope physiotherapists may lead entire non-surgical pathway in some centers.",
     },
@@ -468,7 +468,7 @@ export const journeyData: JourneyDataPoint[] = [
         description:
             "Structured rehabilitation with precise protocols. Non-weight-bearing typically 2-4 weeks.",
         equipment:
-            "VACOped boots common (~70%), allowing controlled range of motion. ~5% still use plaster initially.",
+            "Hinged orthopedic boots common (~70%), allowing controlled range of motion. ~5% still use plaster initially.",
         clinicians:
             "Physiotherapists work closely with orthopedic specialists throughout rehabilitation.",
     },
@@ -479,7 +479,7 @@ export const journeyData: JourneyDataPoint[] = [
         description:
             "Mix of traditional and accelerated protocols. Non-weight-bearing typically 3-6 weeks.",
         equipment:
-            "Removable boot or VACOped (~40%). ~25% still use plaster for initial 2-3 weeks.",
+            "Removable boot or hinged orthopedic boot (~40%). ~25% still use plaster for initial 2-3 weeks.",
         clinicians:
             "Kinésithérapeutes lead rehabilitation with regular orthopedic follow-up.",
     },
@@ -586,7 +586,7 @@ export const timelineComparison: TimelineComparison[] = [
 
 export const insights = [
     "The recovery timeline is remarkably similar across countries, with most differences being in healthcare system access rather than medical approach.",
-    "Germany and France appear to favor the VACOped boot system, which may offer more precise control than standard CAM/Aircast boots.",
+    "Germany and France appear to favor hinged orthopedic boot systems, which may offer more precise control than standard CAM/Aircast boots.",
     "The UK NHS system shows the longest potential delays for specialist referral (up to 6 weeks).",
     "Return to sport timelines are consistent (6-12 months) across all countries, suggesting this is based on biological healing rather than healthcare differences.",
     "Splints are more commonly used in the UK and US healthcare systems, while being less prevalent in continental European approaches.",
@@ -596,14 +596,14 @@ export const potentialInaccuracies = [
     "This data is based on typical pathways and may not reflect significant regional variations within countries, especially between major urban centers and rural areas.",
     "Treatment approaches can vary substantially between individual hospitals and clinicians even within the same region, which this overview cannot fully capture.",
     "The comparison relies partly on anecdotal evidence from practitioners rather than comprehensive statistical data across all healthcare facilities.",
-    "Access to specialized equipment like VACOped boots may be inconsistent even within countries where they're described as common.",
+    "Access to specialized equipment like hinged orthopedic boots may be inconsistent even within countries where they're described as common.",
     "Wait times for specialist referrals are presented as ranges but can vary dramatically based on local healthcare system capacity and patient prioritization.",
 ];
 
 export const equipmentTags: EquipmentTag[] = [
     {
-        id: "vacoped",
-        name: "VACOped Boot",
+        id: "hinged-orthopedic-boot",
+        name: "Hinged Orthopedic Boot",
         description: "Premium adjustable boot with precise angle control",
         color: "blue",
     },
@@ -636,13 +636,13 @@ export const equipmentTags: EquipmentTag[] = [
 export const equipmentUsage: EquipmentUsage[] = [
     // Initial Evaluation stage
     {
-        equipmentId: "vacoped",
+        equipmentId: "hinged-orthopedic-boot",
         countryId: "germany",
         stageId: "initial-evaluation",
         isCommon: true,
     },
     {
-        equipmentId: "vacoped",
+        equipmentId: "hinged-orthopedic-boot",
         countryId: "france",
         stageId: "initial-evaluation",
         isCommon: false,

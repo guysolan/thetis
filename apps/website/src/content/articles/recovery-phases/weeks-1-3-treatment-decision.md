@@ -232,9 +232,9 @@ The two most common boots are the Aircast and VACOped. Both can provide excellen
 **VACOped Boot:**
 
 | Feature | Details |
-|---------|---------|
+| ------- | ------- |
 | Mechanism | Hinged, adjustable range of motion |
-| Cost | £300-375 |
+| Cost | £250-350 |
 | Availability | Limited to some centres |
 | Ankle position | ~48° plantarflexion |
 | Waterproof | Yes (with liner modification) |
@@ -265,7 +265,7 @@ Your foot needs to be held in a pointed position (plantarflexion/equinus) to all
 **Typical progression:**
 
 | Week | Aircast Wedges | Approximate Angle |
-|------|----------------|-------------------|
+| ---- | ------------- | ---------------- |
 | 0-2 | 4 wedges | ~28-30° |
 | 3-4 | 3 wedges | ~22° |
 | 5-6 | 2 wedges | ~16° |
