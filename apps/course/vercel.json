@@ -1,4 +1,7 @@
 {
+  "installCommand": "cd ../.. && bun install",
+  "buildCommand": "cd ../.. && bun run build --filter=@thetis/guide",
+  "outputDirectory": "dist",
   "ignoreCommand": "[ \"$VERCEL_GIT_COMMIT_REF\" = \"course\" ] && exit 1 || git diff HEAD^ HEAD --quiet -- apps/course/ packages/ui/ turbo.json package.json bun.lockb",
   "git": {
     "deploymentEnabled": {
