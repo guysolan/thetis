@@ -1,5 +1,6 @@
 // Environment variables for cross-app linking
 // In Vite, public env vars must be prefixed with VITE_
+// Build trigger: 2026-01-22
 
 export const WEBSITE_URL = import.meta.env.VITE_WEBSITE_URL ||
     "https://thetismedical.com";
