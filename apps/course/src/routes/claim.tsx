@@ -166,7 +166,7 @@ function ClaimPage() {
             let query = supabase
                 .from("enrollments")
                 .select("course_type, shopify_order_number, status")
-                .or(`shopify_customer_email.eq.${emailToCheck},user_email.eq.${emailToCheck}`)
+                .eq("shopify_customer_email", emailToCheck)
                 .eq("status", "active")
                 .limit(1);
 
