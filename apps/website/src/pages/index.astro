@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import "@thetis/ui/globals.css";
 import NightSplintImage from "@/assets/night-splint/night-splint-bed-top-square.jpg";
 import NightSplintWhiteCloseSquare from "@/components/products/images/night-splint/night_splint_white_close_square.jpg";
-import FeaturedReviews from "@/components/reviews/FeaturedReviews";
+import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
 import ComplianceLogos from "@/sections/index/compliance/ComplianceLogos.astro";
 import { patients } from "@/components/reviews/content/patients";
 import { Image as AstroImage } from "astro:assets";
@@ -192,7 +192,28 @@ import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
         </section>
 
         <!-- Patient Reviews - Enhanced -->
-        <FeaturedReviews client:load />
+        <section class="bg-gradient-to-b from-white to-neutral-50 py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <h2 class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl">
+                        Trusted by 5,000+ Patients
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
+                        Real reviews from real patients who've found better sleep and faster recovery
+                    </p>
+                </div>
+                <EnhancedReviewCarousel client:load />
+                <div class="mt-8 text-center">
+                    <a
+                        href="/reviews"
+                        class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 px-6 py-3 rounded-lg font-semibold text-white transition-colors"
+                    >
+                        View All Reviews
+                        <span class="text-xl">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
 
         <!-- Problem Identification - Enhanced -->
         <section class="py-16 md:py-20">

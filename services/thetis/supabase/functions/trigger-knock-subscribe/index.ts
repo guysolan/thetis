@@ -46,7 +46,7 @@ Deno.serve(async (req) => {
   if (!KNOCK_API_KEY) {
     return new Response(
       JSON.stringify({ error: "KNOCK_API_KEY not configured" }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
+      { status: 500, headers: { "Content-Type": "application/json" } },
     );
   }
 
@@ -59,16 +59,18 @@ Deno.serve(async (req) => {
       console.log(`Ignoring ${type} event for users table`);
       return new Response(
         JSON.stringify({ message: `Ignoring ${type} event` }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
+        { status: 200, headers: { "Content-Type": "application/json" } },
       );
     }
 
     // Skip if user has disabled email course
     if (record.email_course_enabled === false) {
-      console.log(`User ${record.email} has email_course_enabled=false, skipping`);
+      console.log(
+        `User ${record.email} has email_course_enabled=false, skipping`,
+      );
       return new Response(
         JSON.stringify({ message: "Email course disabled for user" }),
-        { status: 200, headers: { "Content-Type": "application/json" } }
+        { status: 200, headers: { "Content-Type": "application/json" } },
       );
     }
 
@@ -103,7 +105,7 @@ Deno.serve(async (req) => {
             signed_up_at: record.created_at || new Date().toISOString(),
           },
         }),
-      }
+      },
     );
 
     if (!knockResponse.ok) {
@@ -114,14 +116,14 @@ Deno.serve(async (req) => {
           error: "Failed to trigger Knock workflow",
           details: errorText,
         }),
-        { status: 500, headers: { "Content-Type": "application/json" } }
+        { status: 500, headers: { "Content-Type": "application/json" } },
       );
     }
 
     const knockData = await knockResponse.json();
     console.log(
       `Knock workflow triggered successfully for ${record.email}:`,
-      knockData.workflow_run_id
+      knockData.workflow_run_id,
     );
 
     return new Response(
@@ -138,7 +140,7 @@ Deno.serve(async (req) => {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
-      }
+      },
     );
   } catch (error) {
     console.error("Error in trigger-knock-subscribe function:", error);
@@ -147,7 +149,7 @@ Deno.serve(async (req) => {
         error: "Internal server error",
         details: error.message,
       }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
+      { status: 500, headers: { "Content-Type": "application/json" } },
     );
   }
 });

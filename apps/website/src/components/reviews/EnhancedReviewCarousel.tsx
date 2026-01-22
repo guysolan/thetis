@@ -18,11 +18,51 @@ import { patients } from "./content/patients";
 
 const pinnedReviews = patients.filter((review) => review.is_pinned);
 
-// Calculate average rating
-const averageRating = pinnedReviews.length > 0
-  ? (pinnedReviews.reduce((sum, r) => sum + (r.stars || 5), 0) /
-    pinnedReviews.length).toFixed(1)
-  : "5.0";
+// Star component for full stars
+const FullStar = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24">
+    <path
+      d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+      fill="#facc15"
+      stroke="#f59e0b"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+// Partial star (60% filled for 4.6 rating)
+const PartialStar = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24">
+    <defs>
+      <clipPath id="yellowPartCarousel">
+        <rect x="0" y="0" width="14.4" height="24" />
+      </clipPath>
+      <clipPath id="greyPartCarousel">
+        <rect x="14.4" y="0" width="9.6" height="24" />
+      </clipPath>
+    </defs>
+    <path
+      d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+      fill="#facc15"
+      stroke="#f59e0b"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      clipPath="url(#yellowPartCarousel)"
+    />
+    <path
+      d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+      fill="#d1d5db"
+      stroke="#9ca3af"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      clipPath="url(#greyPartCarousel)"
+    />
+  </svg>
+);
 
 export default function EnhancedReviewCarousel() {
   return (
@@ -30,16 +70,22 @@ export default function EnhancedReviewCarousel() {
       {/* Review Summary Stats */}
       <div className="mb-8 text-center">
         <div className="inline-flex items-center gap-3 bg-primary/10 mb-3 px-6 py-3 rounded-full">
-          <div className="flex items-center gap-1">
-            <Star className="fill-yellow-400 w-5 h-5 text-yellow-400" />
+          <div className="flex items-center gap-1.5">
+            <div className="flex">
+              <FullStar size={20} />
+              <FullStar size={20} />
+              <FullStar size={20} />
+              <FullStar size={20} />
+              <PartialStar size={20} />
+            </div>
             <span className="font-bold text-neutral-900 text-2xl">
-              {averageRating}
+              4.6
             </span>
           </div>
           <div className="bg-neutral-300 w-px h-6" />
           <div className="text-left">
             <div className="font-semibold text-neutral-900 text-sm">
-              &gt;200 5 star reviews
+              Based on 200+ reviews
             </div>
           </div>
         </div>
