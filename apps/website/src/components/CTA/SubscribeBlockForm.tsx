@@ -171,7 +171,7 @@ export function SubscribeBlockForm({
                         placeholder="Phone (optional)"
                         autoComplete="tel"
                         disabled={isSubmitting}
-                        className="flex-1 bg-white dark:bg-neutral-800 disabled:opacity-50 px-3 py-2.5 border border-neutral-200 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary min-w-0 sm:max-w-[140px] text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 text-sm"
+                        className="flex-1 bg-white dark:bg-neutral-800 disabled:opacity-50 px-3 py-2.5 border border-neutral-200 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary min-w-0 max-w-[140px] sm:max-w-[200px] text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 text-sm"
                     />
                     <button
                         type="submit"
