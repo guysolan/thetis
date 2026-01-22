@@ -9,21 +9,5 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    preserveSymlinks: true,
-  },
-  optimizeDeps: {
-    include: ["@thetis/ui > *"],
-  },
-  build: {
-    commonjsOptions: {
-      include: [/@thetis\/ui/, /node_modules/],
-    },
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          "react-vendor": ["react", "react-dom"],
-        },
-      },
-    },
   },
 });

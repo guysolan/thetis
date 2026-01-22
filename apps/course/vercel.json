@@ -1,9 +1,0 @@
-{
-  "framework": "vite",
-  "git": {
-    "deploymentEnabled": {
-      "main": true,
-      "course": true
-    }
-  }
-}
