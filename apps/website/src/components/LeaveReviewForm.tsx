@@ -1,8 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { AlertCircle, Check, Loader2, Upload, Video, Image, Star } from "lucide-react";
+import {
+    AlertCircle,
+    Check,
+    Image,
+    Loader2,
+    Star,
+    Upload,
+    Video,
+} from "lucide-react";
 
 // Currency detection
 const getCurrency = async () => {
@@ -26,7 +34,8 @@ type ProductType = "splint" | "course";
 const PRODUCTS = {
     splint: {
         name: "Achilles Night Splint",
-        description: "Share your experience using the night splint for recovery",
+        description:
+            "Share your experience using the night splint for recovery",
     },
     course: {
         name: "Achilles Recovery Course",
@@ -53,17 +62,19 @@ export function LeaveReviewForm() {
         if (productParam === "course" || productParam === "splint") {
             setProduct(productParam);
         }
-        
+
         // Detect currency
-        getCurrency().then(curr => {
+        getCurrency().then((curr) => {
             setCurrency(curr);
             const cashbackLabel = document.getElementById("cashback-label");
             if (cashbackLabel) {
-                cashbackLabel.textContent = `(cashback for videos with spoken review only)`;
+                cashbackLabel.textContent =
+                    `(cashback for videos with spoken review only)`;
             }
             const uploadText = document.getElementById("upload-cashback-text");
             if (uploadText) {
-                uploadText.textContent = `Cashback only for videos with spoken review (${curr.symbol}${curr.amount})`;
+                uploadText.textContent =
+                    `Cashback only for videos with spoken review (${curr.symbol}${curr.amount})`;
             }
         });
     }, []);
@@ -76,12 +87,12 @@ export function LeaveReviewForm() {
         for (const file of selectedFiles) {
             const isVideo = file.type.startsWith("video/");
             const isImage = file.type.startsWith("image/");
-            
+
             if (!isVideo && !isImage) {
                 setError("Please upload only photos or videos");
                 return;
             }
-            
+
             if (file.size > 100 * 1024 * 1024) {
                 setError("Each file must be less than 100MB");
                 return;
@@ -105,26 +116,31 @@ export function LeaveReviewForm() {
 
         try {
             const formData = new FormData();
-            formData.append("_subject", `New ${PRODUCTS[product].name} Review from ${name}`);
+            formData.append(
+                "_subject",
+                `New ${PRODUCTS[product].name} Review from ${name}`,
+            );
             formData.append("product", PRODUCTS[product].name);
             formData.append("name", name);
             formData.append("email", email);
             formData.append("rating", rating.toString());
             formData.append("review", reviewText);
-            
+
             // Determine media type and cashback eligibility
-            const hasVideos = files.some(f => f.type.startsWith("video/"));
-            const hasPhotos = files.some(f => f.type.startsWith("image/"));
+            const hasVideos = files.some((f) => f.type.startsWith("video/"));
+            const hasPhotos = files.some((f) => f.type.startsWith("image/"));
             let mediaStatus = "No media";
             if (hasVideos && hasPhotos) {
-                mediaStatus = "Videos and photos - cashback eligible if video has spoken review";
+                mediaStatus =
+                    "Videos and photos - cashback eligible if video has spoken review";
             } else if (hasVideos) {
-                mediaStatus = "Videos only - cashback eligible if video has spoken review";
+                mediaStatus =
+                    "Videos only - cashback eligible if video has spoken review";
             } else if (hasPhotos) {
                 mediaStatus = "Photos only - not eligible for cashback";
             }
             formData.append("has_media", mediaStatus);
-            
+
             // Attach files to the form
             files.forEach((file, index) => {
                 formData.append(`file_${index + 1}`, file);
@@ -163,21 +179,39 @@ export function LeaveReviewForm() {
                     Thank You for Your Review!
                 </p>
                 <p className="mb-4 text-neutral-700 dark:text-neutral-300">
-                    Your review of the {PRODUCTS[product].name} has been submitted successfully.
+                    Your review of the {PRODUCTS[product].name}{" "}
+                    has been submitted successfully.
                 </p>
-                {files.some(f => f.type.startsWith("video/")) ? (
-                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                        We'll review your submission within 3-5 business days. If your video includes a spoken review (30+ seconds), you'll receive an email with instructions to claim your <strong>{currency.symbol}{currency.amount} cashback</strong> once approved.
-                    </p>
-                ) : files.length > 0 ? (
-                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                        Thank you for your photos! Note that cashback is only available for video reviews with spoken content. We'll review your submission within 3-5 business days.
-                    </p>
-                ) : (
-                    <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                        Thank you for your feedback! To earn cashback, make sure to include a video with spoken review (30+ seconds) in future submissions.
-                    </p>
-                )}
+                {files.some((f) => f.type.startsWith("video/"))
+                    ? (
+                        <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+                            We'll review your submission within 3-5 business
+                            days. If your video includes a spoken review (30+
+                            seconds), you'll receive an email with instructions
+                            to claim your{" "}
+                            <strong>
+                                {currency.symbol}
+                                {currency.amount} cashback
+                            </strong>{" "}
+                            once approved.
+                        </p>
+                    )
+                    : files.length > 0
+                    ? (
+                        <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+                            Thank you for your photos! Note that cashback is
+                            only available for video reviews with spoken
+                            content. We'll review your submission within 3-5
+                            business days.
+                        </p>
+                    )
+                    : (
+                        <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+                            Thank you for your feedback! To earn cashback, make
+                            sure to include a video with spoken review (30+
+                            seconds) in future submissions.
+                        </p>
+                    )}
             </div>
         );
     }
@@ -187,7 +221,8 @@ export function LeaveReviewForm() {
             {/* Product Selector */}
             <div>
                 <label className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100">
-                    What are you reviewing? <span className="text-red-500">*</span>
+                    What are you reviewing?{" "}
+                    <span className="text-red-500">*</span>
                 </label>
                 <div className="gap-4 grid grid-cols-2">
                     <button
@@ -307,7 +342,9 @@ export function LeaveReviewForm() {
                     required
                     rows={5}
                     className="bg-white dark:bg-neutral-800 px-4 py-2 border border-neutral-300 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100"
-                    placeholder={`Share your experience with the ${PRODUCTS[product].name}...`}
+                    placeholder={`Share your experience with the ${
+                        PRODUCTS[product].name
+                    }...`}
                 />
             </div>
 
@@ -318,10 +355,21 @@ export function LeaveReviewForm() {
                     className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100"
                 >
                     Photos or Videos{" "}
-                    <span className="font-normal text-primary" id="cashback-label">(cashback for videos with spoken review only)</span>
+                    <span
+                        className="font-normal text-primary"
+                        id="cashback-label"
+                    >
+                        (cashback for videos with spoken review only)
+                    </span>
                 </label>
                 <p className="mb-2 text-neutral-500 dark:text-neutral-400 text-sm">
-                    You can upload <strong>photos or videos</strong>. <strong>Cashback is only available for video reviews with spoken content</strong> (minimum 30 seconds of speaking). Photo-only reviews do not qualify for cashback.
+                    You can upload <strong>photos or videos</strong>.{" "}
+                    <strong>
+                        Cashback is only available for video reviews with spoken
+                        content
+                    </strong>{" "}
+                    (minimum 30 seconds of speaking). Photo-only reviews do not
+                    qualify for cashback.
                 </p>
                 <div className="relative">
                     <input
@@ -333,48 +381,68 @@ export function LeaveReviewForm() {
                         className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
                     />
                     <div className="flex justify-center items-center bg-white hover:bg-neutral-50 dark:bg-neutral-800 dark:hover:bg-neutral-700 px-4 py-8 border-2 border-neutral-300 focus-within:border-primary dark:border-neutral-700 border-dashed rounded-lg focus-within:ring-2 focus-within:ring-primary transition-colors">
-                        {files.length > 0 ? (
-                            <div className="text-center">
-                                <div className="flex justify-center mb-2">
-                                    {files.some(f => f.type.startsWith("video/")) ? (
-                                        <Video className="w-6 h-6 text-primary" />
-                                    ) : (
-                                        <Image className="w-6 h-6 text-primary" />
-                                    )}
-                                </div>
-                                <p className="font-medium text-neutral-900 dark:text-neutral-100">
-                                    {files.length} file{files.length > 1 ? "s" : ""} selected
-                                </p>
-                                <p className="text-neutral-500 dark:text-neutral-400 text-sm">
-                                    {files.map((f) => f.name).join(", ")}
-                                </p>
-                                {files.some(f => f.type.startsWith("video/")) ? (
-                                    <p className="mt-2 font-medium text-primary text-xs">
-                                        ✓ Video may be eligible for cashback (if it includes spoken review)
+                        {files.length > 0
+                            ? (
+                                <div className="text-center">
+                                    <div className="flex justify-center mb-2">
+                                        {files.some((f) =>
+                                                f.type.startsWith("video/")
+                                            )
+                                            ? (
+                                                <Video className="w-6 h-6 text-primary" />
+                                            )
+                                            : (
+                                                <Image className="w-6 h-6 text-primary" />
+                                            )}
+                                    </div>
+                                    <p className="font-medium text-neutral-900 dark:text-neutral-100">
+                                        {files.length}{" "}
+                                        file{files.length > 1 ? "s" : ""}{" "}
+                                        selected
                                     </p>
-                                ) : (
-                                    <p className="mt-2 font-medium text-neutral-500 dark:text-neutral-400 text-xs">
-                                        ⚠️ Photos do not qualify for cashback
+                                    <p className="text-neutral-500 dark:text-neutral-400 text-sm">
+                                        {files.map((f) => f.name).join(", ")}
                                     </p>
-                                )}
-                            </div>
-                        ) : (
-                            <div className="text-center">
-                                <div className="flex justify-center gap-3 mb-2">
-                                    <Image className="w-8 h-8 text-neutral-400" />
-                                    <Video className="w-8 h-8 text-neutral-400" />
+                                    {files.some((f) =>
+                                            f.type.startsWith("video/")
+                                        )
+                                        ? (
+                                            <p className="mt-2 font-medium text-primary text-xs">
+                                                ✓ Video may be eligible for
+                                                cashback (if it includes spoken
+                                                review)
+                                            </p>
+                                        )
+                                        : (
+                                            <p className="mt-2 font-medium text-neutral-500 dark:text-neutral-400 text-xs">
+                                                ⚠️ Photos do not qualify for
+                                                cashback
+                                            </p>
+                                        )}
                                 </div>
-                                <p className="font-medium text-neutral-900 dark:text-neutral-100">
-                                    Click to upload photos or videos
-                                </p>
-                                <p className="text-neutral-500 dark:text-neutral-400 text-sm">
-                                    Photos: JPG, PNG • Videos: MP4, MOV (30+ sec for cashback) • Max 100MB each
-                                </p>
-                                <p className="mt-2 font-medium text-primary text-xs" id="upload-cashback-text">
-                                    Cashback only for videos with spoken review
-                                </p>
-                            </div>
-                        )}
+                            )
+                            : (
+                                <div className="text-center">
+                                    <div className="flex justify-center gap-3 mb-2">
+                                        <Image className="w-8 h-8 text-neutral-400" />
+                                        <Video className="w-8 h-8 text-neutral-400" />
+                                    </div>
+                                    <p className="font-medium text-neutral-900 dark:text-neutral-100">
+                                        Click to upload photos or videos
+                                    </p>
+                                    <p className="text-neutral-500 dark:text-neutral-400 text-sm">
+                                        Photos: JPG, PNG • Videos: MP4, MOV (30+
+                                        sec for cashback) • Max 100MB each
+                                    </p>
+                                    <p
+                                        className="mt-2 font-medium text-primary text-xs"
+                                        id="upload-cashback-text"
+                                    >
+                                        Cashback only for videos with spoken
+                                        review
+                                    </p>
+                                </div>
+                            )}
                     </div>
                 </div>
             </div>
@@ -382,7 +450,9 @@ export function LeaveReviewForm() {
             {error && (
                 <div className="flex items-start gap-2 bg-red-50 dark:bg-red-900/20 p-3 border border-red-200 dark:border-red-800 rounded-lg">
                     <AlertCircle className="mt-0.5 w-5 h-5 text-red-600 dark:text-red-400 shrink-0" />
-                    <p className="text-red-800 dark:text-red-200 text-sm">{error}</p>
+                    <p className="text-red-800 dark:text-red-200 text-sm">
+                        {error}
+                    </p>
                 </div>
             )}
 
@@ -392,23 +462,27 @@ export function LeaveReviewForm() {
                 className="gap-2 w-full"
                 disabled={isSubmitting}
             >
-                {isSubmitting ? (
-                    <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        Submitting...
-                    </>
-                ) : (
-                    <>
-                        <Star className="w-4 h-4" />
-                        Submit Review
-                    </>
-                )}
+                {isSubmitting
+                    ? (
+                        <>
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                            Submitting...
+                        </>
+                    )
+                    : (
+                        <>
+                            <Star className="w-4 h-4" />
+                            Submit Review
+                        </>
+                    )}
             </Button>
 
             <p className="text-neutral-500 dark:text-neutral-400 text-xs text-center">
-                By submitting, you agree that your review may be featured on our website
-                (with your permission). Cashback ({currency.symbol}{currency.amount}) is only available for approved
-                video reviews with spoken content and will be processed within 7-10 business days.
+                By submitting, you agree that your review may be featured on our
+                website (with your permission). Cashback ({currency.symbol}
+                {currency.amount}) is only available for approved video reviews
+                with spoken content and will be processed within 7-10 business
+                days.
             </p>
         </form>
     );
