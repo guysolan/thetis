@@ -11,7 +11,13 @@ export default defineConfig({
     },
     preserveSymlinks: true,
   },
+  optimizeDeps: {
+    include: ["@thetis/ui > *"],
+  },
   build: {
+    commonjsOptions: {
+      include: [/@thetis\/ui/, /node_modules/],
+    },
     rollupOptions: {
       output: {
         manualChunks: {

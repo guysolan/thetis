@@ -1,6 +1,5 @@
 {
   "framework": "vite",
-  "installCommand": "bun install --backend=hardlink",
   "git": {
     "deploymentEnabled": {
       "main": true,
