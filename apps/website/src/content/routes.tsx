@@ -158,7 +158,7 @@ export const courseRoutes: BaseRoute[] = [
   {
     slug: "course",
     title: {
-      en: "Recovery Essentials Course",
+      en: "Recovery Course",
       de: "Grundlagen-Kurs",
       fr: "Cours Essentiels",
       es: "Curso Esenciales",

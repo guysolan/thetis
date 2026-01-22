@@ -54,16 +54,16 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
     <div className={`text-left w-full flex flex-col ${className}`}>
       <div className="flex flex-col justify-start items-start my-4 w-full">
         <WhatSizeAmI lang={lang} />
-        <div className="flex flex-wrap gap-3 items-center">
+        <div className="flex flex-wrap items-center gap-3">
           {/* Size selector */}
-          <div className="inline-flex items-center bg-neutral-100 dark:bg-neutral-800 p-0.5 rounded-md h-8">
+          <div className="inline-flex items-center gap-0.5 bg-white dark:bg-neutral-800 px-0.5 py-0.5 border border-neutral-200 rounded-md h-8">
             {sizes.map((size) => (
               <button
                 key={size}
                 type="button"
                 onClick={() => setCurrentSize(size)}
                 aria-pressed={currentSize === size}
-                className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1 text-xs font-medium transition-all ${
+                className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1 text-md font-medium transition-all ${
                   currentSize === size
                     ? "bg-primary text-white shadow-sm"
                     : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300"
@@ -75,14 +75,14 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
           </div>
 
           {/* Side selector */}
-          <div className="inline-flex items-center bg-neutral-100 dark:bg-neutral-800 p-0.5 rounded-md h-8">
+          <div className="inline-flex items-center gap-0.5 bg-white dark:bg-neutral-800 px-0.5 py-0.5 border border-neutral-200 rounded-md h-8">
             {sides.map((side) => (
               <button
                 key={side}
                 type="button"
                 onClick={() => setCurrentSide(side)}
                 aria-pressed={currentSide === side}
-                className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1 text-xs font-medium transition-all ${
+                className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1 text-md font-medium transition-all ${
                   currentSide === side
                     ? "bg-primary text-white shadow-sm"
                     : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300"

@@ -13,6 +13,7 @@ import {
 } from "@/lib/shopify/cart-store";
 import { formatPrice } from "@/lib/shopify/storefront";
 import { getUpsellSuggestions, UPSELL_PRODUCTS } from "@/lib/shopify/products";
+import { useVariantPrice } from "@/hooks/use-variant-price";
 import {
     ArrowRight,
     Check,
@@ -99,6 +100,11 @@ export function CheckoutUpsell({
                             const isAdded = addedItems.includes(
                                 product.variantId,
                             );
+                            
+                            // Fetch price dynamically
+                            const { formattedPrice, isLoading: isLoadingPrice } = useVariantPrice(
+                                product.variantId,
+                            );
 
                             return (
                                 <div
@@ -121,9 +127,13 @@ export function CheckoutUpsell({
                                                 {product.description}
                                             </p>
                                             <div className="flex justify-between items-center mt-3">
-                                                <span className="font-bold text-primary text-lg">
-                                                    {product.price}
-                                                </span>
+                                                {isLoadingPrice ? (
+                                                    <div className="h-6 w-20 bg-neutral-200 dark:bg-neutral-700 rounded animate-pulse" />
+                                                ) : (
+                                                    <span className="font-bold text-primary text-lg">
+                                                        {formattedPrice || "—"}
+                                                    </span>
+                                                )}
                                                 {isAdded
                                                     ? (
                                                         <span className="flex items-center gap-1 font-medium text-green-600 text-sm">

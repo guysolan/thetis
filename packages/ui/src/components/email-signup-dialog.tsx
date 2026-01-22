@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { Calendar as CalendarIcon, Phone } from "lucide-react";
 import { Mail } from "lucide-react";
 import { cn } from "../utils";
 import { Button } from "./button";
@@ -40,8 +40,14 @@ export interface EmailSignupDialogProps {
     submitText?: string;
     /** Callback when form is submitted */
     onSubmit?: (
-        data: { email: string; ruptureDate: Date },
+        data: { email: string; phone?: string; ruptureDate: Date },
     ) => void | Promise<void>;
+    /** Show phone input field */
+    showPhone?: boolean;
+    /** Label for the phone input */
+    phoneLabel?: string;
+    /** Placeholder for the phone input */
+    phonePlaceholder?: string;
     /** Callback when dialog open state changes */
     onOpenChange?: (open: boolean) => void;
     /** Controlled open state */
@@ -65,9 +71,13 @@ function EmailSignupDialog({
     onOpenChange,
     open: controlledOpen,
     triggerText = "Get Recovery Emails",
+    showPhone = false,
+    phoneLabel = "Phone (optional, for SMS tips)",
+    phonePlaceholder = "+1 (555) 123-4567",
 }: EmailSignupDialogProps) {
     const [internalOpen, setInternalOpen] = React.useState(false);
     const [email, setEmail] = React.useState("");
+    const [phone, setPhone] = React.useState("");
     const [ruptureDate, setRuptureDate] = React.useState<Date | undefined>(
         undefined,
     );
@@ -86,10 +96,15 @@ function EmailSignupDialog({
 
         setIsSubmitting(true);
         try {
-            await onSubmit?.({ email, ruptureDate });
+            await onSubmit?.({
+                email,
+                phone: phone.trim() || undefined,
+                ruptureDate,
+            });
             setOpen(false);
             // Reset form
             setEmail("");
+            setPhone("");
             setRuptureDate(undefined);
         } catch (error) {
             console.error("Error submitting email signup:", error);
@@ -131,6 +146,23 @@ function EmailSignupDialog({
                             disabled={isSubmitting}
                         />
                     </div>
+                    {showPhone && (
+                        <div className="space-y-2">
+                            <Label htmlFor="email-signup-phone">
+                                {phoneLabel}
+                            </Label>
+                            <Input
+                                id="email-signup-phone"
+                                type="tel"
+                                placeholder={phonePlaceholder}
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                className="h-11"
+                                autoComplete="tel"
+                                disabled={isSubmitting}
+                            />
+                        </div>
+                    )}
                     <div className="space-y-2">
                         <Label>{dateLabel}</Label>
                         <Popover
@@ -166,8 +198,7 @@ function EmailSignupDialog({
                                         setRuptureDate(date);
                                         setCalendarOpen(false);
                                     }}
-                                    disabled={(date) =>
-                                        date > new Date() ||
+                                    disabled={(date) => date > new Date() ||
                                         date < new Date("2020-01-01")}
                                     initialFocus
                                 />

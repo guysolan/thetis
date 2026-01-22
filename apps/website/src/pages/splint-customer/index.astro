@@ -4,14 +4,7 @@ import ColorGradient from "@/components/ColorGradient.astro";
 import HighlightedWord from "@/components/HighlightedWord";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import {
-    BookOpen,
-    Check,
-    Star,
-    Video,
-    Banknote,
-    Gift,
-} from "lucide-react";
+import { BookOpen, Check, Star, Video, Banknote, Gift } from "lucide-react";
 import CourseBuyButton from "@/components/CourseBuyButton";
 import {
     fetchCoursePrice,
@@ -58,13 +51,15 @@ const discountCode = "SPLINT20";
                 <h1
                     class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-4xl md:text-5xl"
                 >
-                    Thank You for Your <HighlightedWord>Purchase</HighlightedWord>
+                    Thank You for Your <HighlightedWord
+                        >Purchase</HighlightedWord
+                    >
                 </h1>
                 <p
                     class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg md:text-xl"
                 >
-                    As a thank you, enjoy <strong>20% off</strong> our Achilles
-                    Recovery Course. Use code{" "}
+                    As a thank you, enjoy <strong>20% off</strong> our Achilles Recovery
+                    Course. Use code{" "}
                     <span
                         class="bg-primary/10 dark:bg-primary/20 px-2 py-1 rounded font-mono font-bold text-primary"
                     >
@@ -94,7 +89,7 @@ const discountCode = "SPLINT20";
                         surgeon-reviewed content to support your recovery.
                     </p>
 
-                    <div class="mb-6 flex flex-wrap items-baseline gap-2">
+                    <div class="flex flex-wrap items-baseline gap-2 mb-6">
                         <span
                             class="text-neutral-400 dark:text-neutral-500 text-lg line-through"
                         >
@@ -110,7 +105,9 @@ const discountCode = "SPLINT20";
                         </span>
                     </div>
 
-                    <ul class="space-y-2 mb-6 text-neutral-600 dark:text-neutral-400 text-sm">
+                    <ul
+                        class="space-y-2 mb-6 text-neutral-600 dark:text-neutral-400 text-sm"
+                    >
                         <li class="flex items-center gap-2">
                             <Check className="w-4 h-4 text-primary shrink-0" />
                             31 structured lessons
@@ -133,7 +130,7 @@ const discountCode = "SPLINT20";
                         productId={PRODUCT_ID}
                         variant="default"
                         size="lg"
-                        className="w-full justify-center gap-2"
+                        className="justify-center gap-2 w-full"
                         client:load
                     >
                         Add to Cart
@@ -151,7 +148,7 @@ const discountCode = "SPLINT20";
         <!-- Earn cashback: leave review -->
         <section class="bg-neutral-50 dark:bg-neutral-900 py-12 md:py-16">
             <div class="mx-auto px-4 max-w-2xl text-center">
-                <div class="flex items-center justify-center gap-2 mb-4">
+                <div class="flex justify-center items-center gap-2 mb-4">
                     <Video className="w-5 h-5 text-primary" />
                     <h3
                         class="font-bold text-neutral-900 dark:text-neutral-100 text-xl"
@@ -164,7 +161,9 @@ const discountCode = "SPLINT20";
                     approved, you'll receive cashback via PayPal or bank
                     transfer.
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-3">
+                <div
+                    class="flex sm:flex-row flex-col justify-center items-center gap-3"
+                >
                     <a
                         href="/leave-review"
                         class={cn(
@@ -190,7 +189,7 @@ const discountCode = "SPLINT20";
                     Already approved?
                     <a
                         href="/splint-customer/claim-cashback"
-                        class="ml-1 text-primary hover:underline font-medium"
+                        class="ml-1 font-medium text-primary hover:underline"
                     >
                         Claim your cashback
                     </a>

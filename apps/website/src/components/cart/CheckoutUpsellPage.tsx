@@ -12,7 +12,8 @@ import {
     initializeCart,
     removeItem,
 } from "@/lib/shopify/cart-store";
-import { formatPrice, getVariantPrice } from "@/lib/shopify/storefront";
+import { formatPrice } from "@/lib/shopify/storefront";
+import { useVariantPrice } from "@/hooks/use-variant-price";
 import { getUpsellSuggestions } from "@/lib/shopify/products";
 import {
     Accordion,
@@ -166,8 +167,10 @@ export function CheckoutUpsellPage() {
                                 {line.merchandise.product.featuredImage?.url
                                     ? (
                                         <img
-                                            src={line.merchandise.product.featuredImage.url}
-                                            alt={line.merchandise.product.featuredImage.altText ||
+                                            src={line.merchandise.product
+                                                .featuredImage.url}
+                                            alt={line.merchandise.product
+                                                .featuredImage.altText ||
                                                 line.merchandise.product.title}
                                             className="border border-neutral-200 dark:border-neutral-700 rounded-md w-20 h-20 object-cover shrink-0"
                                         />
@@ -238,9 +241,11 @@ export function CheckoutUpsellPage() {
                                         product={product}
                                         isAdded={isAdded}
                                         isCourse={isCourse}
-                                        isPrimaryUpsell={product === primaryUpsell}
+                                        isPrimaryUpsell={product ===
+                                            primaryUpsell}
                                         isSplintUpsell={isSplintUpsell}
-                                        onAdd={() => handleAddItem(product.variantId)}
+                                        onAdd={() =>
+                                            handleAddItem(product.variantId)}
                                         isAdding={isAdding}
                                     />
                                 );
@@ -306,7 +311,7 @@ interface UpsellProductCardProps {
     product: {
         title: string;
         description: string;
-        price: string;
+        price: string | null; // Fetched dynamically via useVariantPrice hook
         image?: string;
         href: string;
         variantId: string;
@@ -329,62 +334,11 @@ function UpsellProductCard({
     onAdd,
     isAdding,
 }: UpsellProductCardProps) {
-    const [price, setPrice] = useState<string | null>(null);
-    const [isLoadingPrice, setIsLoadingPrice] = useState(true);
-
-    // Fetch price from Shopify API (same pattern as CartSheet)
-    useEffect(() => {
-        let isMounted = true;
-
-        async function loadPrice() {
-            setIsLoadingPrice(true);
-            try {
-                // Detect country (same approach as useShopifyPrice hook)
-                let countryCode = "GB";
-                try {
-                    const geoResponse = await fetch("https://ipapi.co/json/");
-                    if (geoResponse.ok) {
-                        const geoData = await geoResponse.json();
-                        countryCode = geoData.country_code || "GB";
-                    }
-                } catch (e) {
-                    // Fallback to GB if geo detection fails
-                    console.error("Failed to detect country:", e);
-                }
-
-                // Fetch price from Shopify Storefront API
-                const priceData = await getVariantPrice(
-                    product.variantId,
-                    countryCode,
-                );
-                
-                if (!isMounted) return;
-
-                if (priceData) {
-                    setPrice(priceData.formattedPrice);
-                } else {
-                    // Fallback to static price from product data if API fails
-                    setPrice(product.price);
-                }
-            } catch (error) {
-                console.error("Failed to load variant price:", error);
-                if (isMounted) {
-                    // Fallback to static price from product data if API fails
-                    setPrice(product.price);
-                }
-            } finally {
-                if (isMounted) {
-                    setIsLoadingPrice(false);
-                }
-            }
-        }
-
-        loadPrice();
-
-        return () => {
-            isMounted = false;
-        };
-    }, [product.variantId, product.price]);
+    // Fetch price from Shopify API using hook (same pattern as BuyButtonVariants/useShopifyPrice)
+    const { formattedPrice, isLoading: isLoadingPrice } = useVariantPrice(
+        product.variantId,
+        product.price || undefined,
+    );
 
     const isEssentials = product.variantId.includes("52265314353480");
     const isProfessionals = product.variantId.includes("52265315828040");
@@ -423,7 +377,7 @@ function UpsellProductCard({
                                         Loading...
                                     </span>
                                 )
-                                : price || product.price}
+                                : formattedPrice || product.price}
                         </span>
                         {isAdded
                             ? (
@@ -515,7 +469,8 @@ function UpsellProductCard({
                                                                 {item.title}
                                                             </h6>
                                                             <p className="text-neutral-600 dark:text-neutral-400 text-xs">
-                                                                {item.description}
+                                                                {item
+                                                                    .description}
                                                             </p>
                                                         </div>
                                                     ))}
@@ -549,7 +504,8 @@ function UpsellProductCard({
                                                                 {topic.title}
                                                             </h6>
                                                             <p className="text-neutral-600 dark:text-neutral-400 text-xs">
-                                                                {topic.description}
+                                                                {topic
+                                                                    .description}
                                                             </p>
                                                         </div>
                                                     ))}

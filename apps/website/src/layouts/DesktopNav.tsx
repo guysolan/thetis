@@ -15,7 +15,7 @@ import * as React from "react";
 import { buttonVariants } from "../components/ui/button";
 import { CartIcon } from "../components/cart/CartIcon";
 
-const contentWidth = "w-full min-w-[500px] max-w-[600px]";
+const contentWidth = "w-full lg:min-w-[800px] max-w-[1000px]";
 
 import {
   getArticleRoutesByLanguage,
@@ -23,6 +23,7 @@ import {
   getCourseRoutesByLanguage,
   getPartnerRoutesByLanguage,
   getProductRoutesByLanguage,
+  getRecoveryPhaseRoutesByLanguage,
   getRouteBySlugAndLanguage,
   navigationContent,
 } from "../content/routes.tsx";
@@ -57,7 +58,7 @@ const LinkCard = ({
         {icon && (
           <div
             className={cn(
-              "flex justify-center items-center rounded-md w-10 h-10 shrink-0 transition-colors",
+              "flex justify-center items-center rounded-md w-10 h-10 transition-colors shrink-0",
               variant === "default" &&
                 "bg-primary/10 text-primary group-hover:bg-primary/20",
               variant === "outline" &&
@@ -80,7 +81,7 @@ const LinkCard = ({
           </h3>
           <p
             className={cn(
-              "text-xs leading-relaxed line-clamp-2",
+              "text-xs line-clamp-2 leading-relaxed",
               variant === "default" && "text-primary/70",
               variant === "outline" &&
                 "text-neutral-600 dark:text-neutral-400",
@@ -101,68 +102,81 @@ interface DesktopNavProps {
 function DesktopNav({ lang = "en" }: DesktopNavProps) {
   const t = navigationContent[lang];
   // Get localized routes
-  const productLinks = getProductRoutesByLanguage(lang);
   const partnerLinks = getPartnerRoutesByLanguage(lang);
   const contactLinks = getContactRoutesByLanguage(lang);
   const articleLinks = getArticleRoutesByLanguage(lang);
-  const courseLinks = getCourseRoutesByLanguage(lang).filter(
-    (course) => !course.href.includes("/course/professionals"),
-  );
+  const recoveryPhaseLinks = getRecoveryPhaseRoutesByLanguage(lang);
 
   // Get dynamic URLs for the current language
-  const splintRoute = getRouteBySlugAndLanguage("splint", lang);
+  const splintRoute = getRouteBySlugAndLanguage(
+    "achilles-rupture-splint",
+    lang,
+  );
   const courseRoute = getRouteBySlugAndLanguage("course", lang);
 
   return (
     <>
       <NavigationMenu className="flex-1 max-w-full">
-        <NavigationMenuList className="flex items-center gap-1 flex-wrap">
-          {/* Products - Dropdown */}
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>
-              {t.ourProducts}
-            </NavigationMenuTrigger>
-            <NavigationMenuContent className={cn("p-5", contentWidth)}>
-              <div className="gap-4 grid sm:grid-cols-2 grid-cols-1">
-                {productLinks.map((link) => (
-                  <LinkCard
-                    key={link.href}
-                    {...link}
-                    variant={link.variant || "outline"}
-                    icon={link.icon}
-                  />
-                ))}
-              </div>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+        <NavigationMenuList className="flex flex-wrap items-center gap-1">
+          {/* Course - Direct Link */}
+          {courseRoute && (
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                href={courseRoute.href}
+                className={navigationMenuTriggerStyle()}
+              >
+                {courseRoute.title}
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          )}
 
-          {/* Patient Guides - Dropdown (Articles + Courses) */}
+          {/* Achilles Rupture Splint - Direct Link */}
+          {splintRoute && (
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                href={splintRoute.href}
+                className={navigationMenuTriggerStyle()}
+              >
+                {splintRoute.title}
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          )}
+
+          {/* Learning Resources - Dropdown (FAQs + Timeline) */}
           <NavigationMenuItem>
             <NavigationMenuTrigger>
               {t.patientGuides}
             </NavigationMenuTrigger>
             <NavigationMenuContent className={cn("p-5", contentWidth)}>
               <div className="flex sm:flex-row flex-col gap-4">
-                <div className="flex flex-col flex-1 gap-3 min-w-0">
-                  {/* Articles */}
+                <div className="flex flex-col flex-1 gap-2 min-w-0">
+                  <h3 className="mb-2 font-semibold text-neutral-600 dark:text-neutral-400 text-sm">
+                    FAQs
+                  </h3>
                   {articleLinks.map((link) => (
-                    <LinkCard
-                      key={link.href}
-                      {...link}
-                      variant={link.variant || "outline"}
-                      icon={link.icon}
-                    />
+                    <NavigationMenuLink key={link.href} asChild>
+                      <a
+                        href={link.href}
+                        className="block py-1 text-neutral-700 hover:text-primary dark:hover:text-primary dark:text-neutral-300 text-base transition-colors"
+                      >
+                        {link.title}
+                      </a>
+                    </NavigationMenuLink>
                   ))}
                 </div>
-                <div className="flex flex-col flex-1 gap-3 min-w-0">
-                  {/* Courses */}
-                  {courseLinks.map((link) => (
-                    <LinkCard
-                      key={link.href}
-                      {...link}
-                      variant={link.variant || "outline"}
-                      icon={link.icon}
-                    />
+                <div className="flex flex-col flex-1 gap-2 min-w-0">
+                  <h3 className="mb-2 font-semibold text-neutral-600 dark:text-neutral-400 text-sm">
+                    Timeline of Recovery
+                  </h3>
+                  {recoveryPhaseLinks.map((link) => (
+                    <NavigationMenuLink key={link.href} asChild>
+                      <a
+                        href={link.href}
+                        className="block py-1 text-neutral-700 hover:text-primary dark:hover:text-primary dark:text-neutral-300 text-base transition-colors"
+                      >
+                        {link.title}
+                      </a>
+                    </NavigationMenuLink>
                   ))}
                 </div>
               </div>
@@ -175,7 +189,7 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
               {t.professionals}
             </NavigationMenuTrigger>
             <NavigationMenuContent className={cn("p-5", contentWidth)}>
-              <div className="gap-4 grid sm:grid-cols-2 grid-cols-1">
+              <div className="gap-4 grid grid-cols-1 sm:grid-cols-2">
                 {partnerLinks.map((link) => (
                   <LinkCard
                     key={link.href}

@@ -23,7 +23,8 @@ import {
     removeItem,
     updateQuantity,
 } from "@/lib/shopify/cart-store";
-import { formatPrice, getVariantPrice } from "@/lib/shopify/storefront";
+import { formatPrice } from "@/lib/shopify/storefront";
+import { useVariantPrice } from "@/hooks/use-variant-price";
 import { getUpsellSuggestions } from "@/lib/shopify/products";
 import {
     Check,
@@ -278,11 +279,13 @@ interface CartLineItemProps {
 
 function CartLineItem({ line, onUpdateQuantity, onRemove }: CartLineItemProps) {
     const [isUpdating, setIsUpdating] = React.useState(false);
-    const [currentPrice, setCurrentPrice] = React.useState<{
-        amount: string;
-        currencyCode: string;
-        formattedPrice: string;
-    } | null>(null);
+    const [currentPrice, setCurrentPrice] = React.useState<
+        {
+            amount: string;
+            currencyCode: string;
+            formattedPrice: string;
+        } | null
+    >(null);
     const [isLoadingPrice, setIsLoadingPrice] = React.useState(true);
 
     // Fetch current price from Shopify API based on user's location
@@ -350,7 +353,11 @@ function CartLineItem({ line, onUpdateQuantity, onRemove }: CartLineItemProps) {
         return () => {
             isMounted = false;
         };
-    }, [line.merchandise.id, line.merchandise.price.amount, line.merchandise.price.currencyCode]);
+    }, [
+        line.merchandise.id,
+        line.merchandise.price.amount,
+        line.merchandise.price.currencyCode,
+    ]);
 
     const handleQuantityChange = async (newQuantity: number) => {
         if (newQuantity < 0) return;
@@ -499,65 +506,15 @@ interface UpsellItemProps {
 
 function UpsellItem({ product }: UpsellItemProps) {
     const [isAdding, setIsAdding] = useState(false);
-    const [price, setPrice] = useState<string | null>(null);
-    const [isLoadingPrice, setIsLoadingPrice] = useState(true);
     const isCourse = product.variantId.includes("522653");
     const isEssentials = product.variantId.includes("52265314353480");
     const isProfessionals = product.variantId.includes("52265315828040");
 
-    // Fetch price from Shopify API (same pattern as PriceDisplay/useShopifyPrice)
-    useEffect(() => {
-        let isMounted = true;
-
-        async function loadPrice() {
-            setIsLoadingPrice(true);
-            try {
-                // Detect country (same approach as useShopifyPrice hook)
-                let countryCode = "GB";
-                try {
-                    const geoResponse = await fetch("https://ipapi.co/json/");
-                    if (geoResponse.ok) {
-                        const geoData = await geoResponse.json();
-                        countryCode = geoData.country_code || "GB";
-                    }
-                } catch (e) {
-                    // Fallback to GB if geo detection fails
-                    console.error("Failed to detect country:", e);
-                }
-
-                // Fetch price from Shopify Storefront API
-                const priceData = await getVariantPrice(
-                    product.variantId,
-                    countryCode,
-                );
-
-                if (!isMounted) return;
-
-                if (priceData) {
-                    setPrice(priceData.formattedPrice);
-                } else {
-                    // Fallback to static price from product data if API fails
-                    setPrice(product.price);
-                }
-            } catch (error) {
-                console.error("Failed to load variant price:", error);
-                if (isMounted) {
-                    // Fallback to static price from product data if API fails
-                    setPrice(product.price);
-                }
-            } finally {
-                if (isMounted) {
-                    setIsLoadingPrice(false);
-                }
-            }
-        }
-
-        loadPrice();
-
-        return () => {
-            isMounted = false;
-        };
-    }, [product.variantId, product.price]);
+    // Fetch price from Shopify API using hook (same pattern as BuyButtonVariants/useShopifyPrice)
+    const { formattedPrice, isLoading: isLoadingPrice } = useVariantPrice(
+        product.variantId,
+        product.price,
+    );
 
     const handleAdd = async () => {
         if (!product.canAddToCart) {
@@ -604,7 +561,7 @@ function UpsellItem({ product }: UpsellItemProps) {
                                     Loading...
                                 </span>
                             )
-                            : price || product.price}
+                            : formattedPrice || product.price}
                     </span>
                 </div>
                 <Button
