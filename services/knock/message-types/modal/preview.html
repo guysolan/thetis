@@ -1,0 +1,103 @@
+<style>
+  .modal {
+    background: #FFFFFF;
+    padding: 24px;
+    border-radius: 8px;
+    border: 0.5px solid #E0E1E6;
+    box-shadow: 0px 12px 20px rgba(28, 32, 36, 0.1);
+    gap: 16px;
+    max-width: 560px;
+  }
+  .modal__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .modal__close {
+    padding: 8px;
+    border: none;
+    background: none;
+    line-height: 0;
+  }
+  .modal__title {
+    color: #1C2024;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+    padding: 4px 0;
+  }
+  .modal__body {
+    color: #60646C;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+  .modal__image {
+    display: block;
+    margin-top: 16px;
+    max-width: 100%;
+    height: auto;
+  }
+  .modal__footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+    flex-wrap: nowrap;
+  }
+  .modal__btn {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    border-radius: 6px;
+    padding: 8px 16px;
+    border: 0.5px solid #1C2024;
+    background: #1C2024;
+    color: #FCFCFD;
+    flex: 1;
+  }
+  .modal__btn--secondary {
+    border-color: #D9D9E0;
+    background: #FFFFFF;
+    color: #1C2024;
+  }
+</style>
+<div class="modal">
+  <div class="modal__header">
+    <div class="modal__title">
+      {{ title }}
+    </div>
+    {% if dismissible %}
+      <button class="modal__close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+          <g fill="#60646C" fill-rule="evenodd" clip-rule="evenodd">
+            <path d="M14.03 3.97a.75.75 0 0 1 0 1.06l-9 9a.75.75 0 0 1-1.06-1.06l9-9a.75.75 0 0 1 1.06 0Z"/>
+            <path d="M3.97 3.97a.75.75 0 0 1 1.06 0l9 9a.75.75 0 1 1-1.06 1.06l-9-9a.75.75 0 0 1 0-1.06Z"/>
+          </g>
+        </svg>
+      </button>
+    {% endif %}
+  </div>
+  <div class="modal__body">
+    {{ body }}
+  </div>
+  {% if image.url != blank %}
+    <img class="modal__image" src="{{ image.url }}" alt="{{ image.alt }}">
+  {% endif %}
+  {% if variant == "single-action" or variant == "multi-action" %}
+    <div class="modal__footer">
+      <button class="modal__btn">
+        {{ primary_button.text }}
+      </button>
+
+    {% if variant == "multi-action" %}
+      <button class="modal__btn modal__btn--secondary">
+        {{ secondary_button.text }}
+      </button>
+    {% endif %}
+    </div>
+  {% endif %}
+</div>

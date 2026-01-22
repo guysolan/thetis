@@ -1,0 +1,279 @@
+{
+  "name": "Subscribe",
+  "steps": [
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 0 - Who is Thetis",
+      "ref": "email_1",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Welcome to Thetis",
+        "visual_blocks@": "email_1/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_1",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 1
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 1 - Protect the tendon",
+      "ref": "email_2",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Protect the tendon (toes down)",
+        "visual_blocks@": "email_2/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_2",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 2
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 3 - Questions for specialist",
+      "ref": "email_3",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Essential questions for your specialist appointment",
+        "visual_blocks@": "email_3/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_3",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 2
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 5 - Helpful products",
+      "ref": "email_4",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Essential items and mobility tips",
+        "visual_blocks@": "email_4/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_4",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 2
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 7 - Treatment options",
+      "ref": "email_5",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Understanding treatment options",
+        "visual_blocks@": "email_5/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_5",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 2
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 9 - Boot basics",
+      "ref": "email_6",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Your walking boot basics",
+        "visual_blocks@": "email_6/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_6",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 1
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 10 - Week 1 routine",
+      "ref": "email_7",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Week 1 routine + what's normal",
+        "visual_blocks@": "email_7/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_7",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 7
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 21 - Mobility and daily life",
+      "ref": "email_8",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Why your gait feels weird (and tips to help)",
+        "visual_blocks@": "email_8/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_8",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 14
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 35 - Preparing for physio",
+      "ref": "email_9",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Getting ready to rebuild strength",
+        "visual_blocks@": "email_9/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_9",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 14
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 49 - Preparing for boot removal",
+      "ref": "email_11",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Preparing for life after the boot",
+        "visual_blocks@": "email_11/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_10",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 21
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 70 - Week 10 check-in",
+      "ref": "email_10",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "How far you've come",
+        "visual_blocks@": "email_10/visual_blocks.json"
+      },
+      "type": "channel"
+    }
+  ],
+  "trigger_frequency": "every_trigger",
+  "__readonly": {
+    "environment": "development",
+    "key": "subscribe",
+    "active": true,
+    "valid": true,
+    "created_at": "2026-01-22T17:33:13.962419Z"
+  },
+  "$schema": "https://schemas.knock.app/cli/workflow.json"
+}

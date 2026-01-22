@@ -30,35 +30,39 @@ const content = {
 export function BundlesAndRecommendations({
     lang = "en",
 }: BundlesAndRecommendationsProps) {
-    const t = lang in content ? content[lang as keyof typeof content] : content.en;
+    const t = lang in content
+        ? content[lang as keyof typeof content]
+        : content.en;
     const [isAdding, setIsAdding] = React.useState<string | null>(null);
-    
+
     // Fetch prices dynamically
     const courseVariantId = "gid://shopify/ProductVariant/52265314353480";
     const splintVariantId = "gid://shopify/ProductVariant/47494539673928";
-    const { formattedPrice: coursePrice, isLoading: coursePriceLoading } = useVariantPrice(courseVariantId);
-    const { formattedPrice: splintPrice, isLoading: splintPriceLoading } = useVariantPrice(splintVariantId);
-    
+    const { formattedPrice: coursePrice, isLoading: coursePriceLoading } =
+        useVariantPrice(courseVariantId);
+    const { formattedPrice: splintPrice, isLoading: splintPriceLoading } =
+        useVariantPrice(splintVariantId);
+
     // Calculate bundle price (splint + course)
     const bundlePrice = React.useMemo(() => {
         if (!splintPrice || !coursePrice) return null;
         // Parse prices and add them
-        const splintAmount = parseFloat(splintPrice.replace(/[^0-9.]/g, ''));
-        const courseAmount = parseFloat(coursePrice.replace(/[^0-9.]/g, ''));
+        const splintAmount = parseFloat(splintPrice.replace(/[^0-9.]/g, ""));
+        const courseAmount = parseFloat(coursePrice.replace(/[^0-9.]/g, ""));
         const total = splintAmount + courseAmount;
-        
+
         // Format based on currency (assume same currency for both)
-        const currency = splintPrice.includes('£') ? 'GBP' : 'USD';
-        const symbol = currency === 'GBP' ? '£' : '$';
+        const currency = splintPrice.includes("£") ? "GBP" : "USD";
+        const symbol = currency === "GBP" ? "£" : "$";
         return `${symbol}${total.toFixed(2)}`;
     }, [splintPrice, coursePrice]);
-    
+
     // Calculate original price (for strikethrough)
     const originalPrice = React.useMemo(() => {
         if (!bundlePrice) return null;
-        const bundleAmount = parseFloat(bundlePrice.replace(/[^0-9.]/g, ''));
+        const bundleAmount = parseFloat(bundlePrice.replace(/[^0-9.]/g, ""));
         const original = bundleAmount + 10; // Add £10/$10 for original price
-        const currency = bundlePrice.includes('£') ? '£' : '$';
+        const currency = bundlePrice.includes("£") ? "£" : "$";
         return `${currency}${original.toFixed(2)}`;
     }, [bundlePrice]);
 
@@ -102,13 +106,15 @@ export function BundlesAndRecommendations({
                             <p className="mt-0.5 text-neutral-500 dark:text-neutral-400 text-xs">
                                 30+ lessons to guide your recovery
                             </p>
-                            {coursePriceLoading ? (
-                                <div className="mt-1 h-4 w-16 bg-neutral-200 dark:bg-neutral-700 rounded animate-pulse" />
-                            ) : (
-                                <span className="inline-block mt-1 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-                                    {coursePrice || "—"}
-                                </span>
-                            )}
+                            {coursePriceLoading
+                                ? (
+                                    <div className="bg-neutral-200 dark:bg-neutral-700 mt-1 rounded w-16 h-4 animate-pulse" />
+                                )
+                                : (
+                                    <span className="inline-block mt-1 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                        {coursePrice || "—"}
+                                    </span>
+                                )}
                         </div>
                         <Button
                             size="sm"
@@ -157,24 +163,28 @@ export function BundlesAndRecommendations({
 
                 <div className="flex justify-between items-center">
                     <div>
-                        {splintPriceLoading || coursePriceLoading ? (
-                            <div className="h-6 w-24 bg-neutral-200 dark:bg-neutral-700 rounded animate-pulse" />
-                        ) : bundlePrice ? (
-                            <>
-                                <span className="font-bold text-neutral-900 dark:text-neutral-100 text-xl">
-                                    {bundlePrice}
-                                </span>
-                                {originalPrice && (
-                                    <span className="ml-2 text-neutral-500 dark:text-neutral-400 text-sm line-through">
-                                        {originalPrice}
+                        {splintPriceLoading || coursePriceLoading
+                            ? (
+                                <div className="bg-neutral-200 dark:bg-neutral-700 rounded w-24 h-6 animate-pulse" />
+                            )
+                            : bundlePrice
+                            ? (
+                                <>
+                                    <span className="font-bold text-neutral-900 dark:text-neutral-100 text-xl">
+                                        {bundlePrice}
                                     </span>
-                                )}
-                            </>
-                        ) : (
-                            <span className="font-bold text-neutral-900 dark:text-neutral-100 text-xl">
-                                —
-                            </span>
-                        )}
+                                    {originalPrice && (
+                                        <span className="ml-2 text-neutral-500 dark:text-neutral-400 text-sm line-through">
+                                            {originalPrice}
+                                        </span>
+                                    )}
+                                </>
+                            )
+                            : (
+                                <span className="font-bold text-neutral-900 dark:text-neutral-100 text-xl">
+                                    —
+                                </span>
+                            )}
                     </div>
                     <Button
                         size="sm"

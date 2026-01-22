@@ -5,6 +5,11 @@ import { ArrowRight, Check, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/lib/supabase";
+import {
+  hasAnySubscription,
+  isEmailSubscribed,
+  markEmailAsSubscribed,
+} from "@/lib/subscription-storage";
 
 interface WelcomePopupProps {
   className?: string;
@@ -23,6 +28,11 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({
   const [error, setError] = useState("");
 
   useEffect(() => {
+    // Don't show if user has already subscribed
+    if (hasAnySubscription()) {
+      return;
+    }
+
     // Check if user has already seen this popup
     const hasSeenPopup = localStorage.getItem("welcomePopupSeen");
     if (hasSeenPopup) {
@@ -83,6 +93,7 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({
 
       // Upsert user to Supabase thetis database
       // This will create a new user or update existing one
+      // Note: We don't include 'id' - it will auto-generate via DEFAULT gen_random_uuid()
       const { data, error: supabaseError } = await supabase
         .from("users")
         .upsert(
@@ -94,14 +105,24 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({
           },
           {
             onConflict: "email",
+            ignoreDuplicates: false, // Update if exists
           },
         )
         .select();
 
       if (supabaseError) {
         console.error("Supabase error:", supabaseError);
-        throw new Error("Failed to save your information");
+        throw new Error(
+          supabaseError.message || "Failed to save your information",
+        );
       }
+
+      if (!data) {
+        throw new Error("No data returned from Supabase");
+      }
+
+      // Mark email as subscribed in localStorage
+      markEmailAsSubscribed(normalizedEmail);
 
       setIsSubmitted(true);
       localStorage.setItem("welcomePopupSeen", Date.now().toString());
@@ -111,7 +132,10 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({
         setIsVisible(false);
       }, 2000);
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      const errorMessage = err instanceof Error
+        ? err.message
+        : "Something went wrong. Please try again.";
+      setError(errorMessage);
       console.error("Error subscribing:", err);
     } finally {
       setIsSubmitting(false);

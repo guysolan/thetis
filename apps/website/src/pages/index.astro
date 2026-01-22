@@ -6,7 +6,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import "@thetis/ui/globals.css";
 import NightSplintImage from "@/assets/night-splint/night-splint-bed-top-square.jpg";
-import InfiniteReviews from "@/components/reviews/InfiniteReviews.astro";
+import NightSplintWhiteCloseSquare from "@/components/products/images/night-splint/night_splint_white_close_square.jpg";
+import FeaturedReviews from "@/components/reviews/FeaturedReviews";
 import ComplianceLogos from "@/sections/index/compliance/ComplianceLogos.astro";
 import { patients } from "@/components/reviews/content/patients";
 import { Image as AstroImage } from "astro:assets";
@@ -135,7 +136,7 @@ import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
 
                         <!-- Social Proof -->
                         <div
-                            class="flex justify-center lg:justify-start items-center gap-3 mb-6 text-neutral-500 text-sm"
+                            class="flex md:flex-row flex-col justify-center lg:justify-start items-center gap-3 mb-6 text-neutral-500 text-sm"
                         >
                             <div class="flex -space-x-2">
                                 <AstroImage
@@ -160,7 +161,8 @@ import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
                                     height={40}
                                 />
                             </div>
-                            <span class="font-semibold text-neutral-900"
+                            <span
+                                class="font-semibold text-neutral-900 md:text-left text-center"
                                 >Join 5,000+ patients sleeping better tonight</span
                             >
                         </div>
@@ -189,25 +191,8 @@ import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
             </div>
         </section>
 
-        <!-- Patient Reviews Carousel -->
-        <section class="bg-white py-12 md:py-16">
-            <div class="mx-auto px-4 max-w-7xl">
-                <div class="mb-8 text-center">
-                    <h2
-                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl"
-                    >
-                        Join 5,000+ Patients Who've Found Relief
-                    </h2>
-                    <p class="mb-6 text-neutral-600">
-                        Real reviews from real patients recovering from Achilles
-                        rupture
-                    </p>
-                </div>
-                <div class="mb-6">
-                    <InfiniteReviews />
-                </div>
-            </div>
-        </section>
+        <!-- Patient Reviews - Enhanced -->
+        <FeaturedReviews client:load />
 
         <!-- Problem Identification - Enhanced -->
         <section class="py-16 md:py-20">
@@ -445,8 +430,8 @@ import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
                     </div>
                     <div class="flex-shrink-0 w-full lg:w-1/2">
                         <Image
-                            src={NightSplintImage}
-                            alt="Thetis Night Splint in bed - patient sleeping comfortably"
+                            src={NightSplintWhiteCloseSquare}
+                            alt="Thetis Medical Night Splint - white background product shot"
                             class="shadow-lg rounded-lg w-full"
                         />
                         <!-- Athlete Testimonials -->

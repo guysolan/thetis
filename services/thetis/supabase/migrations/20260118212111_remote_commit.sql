@@ -16,11 +16,47 @@ DROP POLICY "Anon can update users by email" ON "public"."users";
 
 DROP POLICY "Anon can view users by email" ON "public"."users";
 
-ALTER TABLE "public"."user_progress"
-  DROP CONSTRAINT "user_progress_user_email_section_slug_key";
-
-ALTER TABLE "public"."users"
-  DROP CONSTRAINT "users_email_key";
+-- Drop constraints if they exist (idempotent)
+DO $$
+BEGIN
+  -- Drop user_progress constraint if it exists
+  IF EXISTS(
+    SELECT
+      1
+    FROM
+      pg_constraint
+    WHERE
+      conname = 'user_progress_user_email_section_slug_key'
+      AND conrelid = 'public.user_progress'::regclass) THEN
+  ALTER TABLE "public"."user_progress"
+    DROP CONSTRAINT "user_progress_user_email_section_slug_key";
+END IF;
+  -- Drop users_email_key constraint if it exists
+  IF EXISTS(
+    SELECT
+      1
+    FROM
+      pg_constraint
+    WHERE
+      conname = 'users_email_key'
+      AND conrelid = 'public.users'::regclass) THEN
+  ALTER TABLE "public"."users"
+    DROP CONSTRAINT "users_email_key";
+END IF;
+  -- Drop users_email_unique constraint if it exists
+  IF EXISTS(
+    SELECT
+      1
+    FROM
+      pg_constraint
+    WHERE
+      conname = 'users_email_unique'
+      AND conrelid = 'public.users'::regclass) THEN
+  ALTER TABLE "public"."users"
+    DROP CONSTRAINT "users_email_unique";
+END IF;
+END
+$$;
 
 DROP INDEX IF EXISTS "public"."idx_email_queue_user_email";
 

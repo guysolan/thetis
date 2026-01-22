@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 import { useCourseProgress } from "@/hooks/use-course-progress";
 import { useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 
 // Use slugToChapter from sections.ts as the single source of truth
 const slugToFolder = slugToChapter;
@@ -325,7 +326,7 @@ function SectionPage() {
                     need it
                   </p>
                 </div>
-                <EmailSignupDialog />
+                <EmailSignupDialog supabaseClient={supabase} />
               </div>
             </div>
 

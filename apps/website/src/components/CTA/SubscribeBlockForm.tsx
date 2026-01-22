@@ -1,11 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Loader2, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/lib/supabase";
+import {
+    hasAnySubscription,
+    markEmailAsSubscribed,
+} from "@/lib/subscription-storage";
 
 interface SubscribeBlockFormProps {
     variant?: "section" | "compact";
@@ -21,6 +25,12 @@ export function SubscribeBlockForm({
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [error, setError] = useState("");
+    const [isAlreadySubscribed, setIsAlreadySubscribed] = useState(false);
+
+    useEffect(() => {
+        // Check if user has already subscribed
+        setIsAlreadySubscribed(hasAnySubscription());
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -50,14 +60,25 @@ export function SubscribeBlockForm({
                     },
                     {
                         onConflict: "email",
+                        ignoreDuplicates: false, // Update if exists
                     },
                 )
                 .select();
 
             if (supabaseError) {
                 console.error("Supabase error:", supabaseError);
-                throw new Error("Failed to save your information");
+                throw new Error(
+                    supabaseError.message || "Failed to save your information",
+                );
             }
+
+            if (!data) {
+                throw new Error("No data returned from Supabase");
+            }
+
+            // Mark email as subscribed in localStorage
+            markEmailAsSubscribed(normalizedEmail);
+            setIsAlreadySubscribed(true);
 
             setIsSubmitted(true);
             // Reset form after success
@@ -67,14 +88,19 @@ export function SubscribeBlockForm({
                 setIsSubmitted(false);
             }, 3000);
         } catch (err) {
-            setError("Something went wrong. Please try again.");
+            setError(
+                err instanceof Error
+                    ? err.message
+                    : "Something went wrong. Please try again.",
+            );
             console.error("Error subscribing:", err);
         } finally {
             setIsSubmitting(false);
         }
     };
 
-    if (isSubmitted) {
+    // Show subscribed message if user has already subscribed
+    if (isAlreadySubscribed || isSubmitted) {
         return (
             <div
                 className={cn(
@@ -175,3 +201,6 @@ export function SubscribeBlockForm({
         </section>
     );
 }
+
+// Default export for Astro compatibility
+export default SubscribeBlockForm;

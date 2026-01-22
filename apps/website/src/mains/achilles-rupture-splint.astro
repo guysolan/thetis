@@ -10,12 +10,14 @@ import NightSplintHero from "@/sections/achilles-rupture-splint/NightSplintHero.
 import ValuePropositions from "@/sections/achilles-rupture-splint/ValuePropositions.astro";
 import KeyFeatures from "@/sections/achilles-rupture-splint/KeyFeatures.astro";
 import Reviews from "@/components/reviews/InfiniteReviews.astro";
+import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
 import OrderYourSplint from "@/sections/achilles-rupture-splint/OrderYourSplint.astro";
 import SplintDownloads from "@/sections/achilles-rupture-splint/SplintDownloads.astro";
 import StickyAddToCart from "@/components/StickyAddToCart.tsx";
 import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import SurgeonsCarousel from "@/components/SurgeonsCarousel";
+import AthletesCarousel from "@/components/AthletesCarousel";
 import { getRouteBySlugAndLanguage } from "@/content/routes";
 import { athletes } from "@/components/reviews/content/athletes";
 import { translatedClinicians } from "@/components/reviews/content/professional-opinions";
@@ -29,7 +31,6 @@ import {
     RotateCcw,
 } from "lucide-react";
 import { ReviewCard } from "@/components/reviews/ReviewCard.tsx";
-import WorkInHealthcare from "@/components/products/night-splint/WorkInHealthcare.astro";
 import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
 import type { Lang } from "@/config/languages.ts";
 
@@ -88,48 +89,82 @@ const currentContent = content[lang as keyof typeof content];
         <NightSplintHero lang={lang} />
 
         <!-- High-Impact Testimonial Quote -->
-        <section class="bg-gradient-to-b from-white to-primary/5 py-12">
+        <section class="bg-gradient-to-b from-white to-primary/5 py-6 md:py-12">
             <div class="mx-auto px-4 max-w-3xl text-center">
                 <blockquote
-                    class="mb-4 font-semibold text-neutral-900 text-2xl md:text-3xl italic"
+                    class="mb-4 font-semibold text-neutral-900 text-xl md:text-2xl lg:text-3xl italic"
                 >
                     "It made a massive difference to getting a good night's
                     rest."
                 </blockquote>
-                <p class="text-neutral-600">— Verified Patient, USA</p>
+                <p class="text-neutral-600 text-sm md:text-base">
+                    — Verified Patient, USA
+                </p>
             </div>
         </section>
 
         <!-- Social Proof - Reviews -->
-        <section class="bg-white py-16 md:py-20">
+        <section
+            class="bg-gradient-to-b from-white via-primary/5 to-white py-12 md:py-16 lg:py-20"
+        >
             <div class="mx-auto px-4 max-w-7xl">
-                <div class="mb-12 text-center">
+                <div class="mb-8 md:mb-12 text-center">
+                    <div
+                        class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full"
+                    >
+                        <Check className="w-4 md:w-5 h-4 md:h-5 text-primary" />
+                        <p
+                            class="font-medium text-primary text-xs md:text-sm uppercase tracking-widest"
+                        >
+                            TRUSTED BY THOUSANDS
+                        </p>
+                    </div>
                     <h2
-                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl lg:text-4xl"
                     >
                         Join 5,000+ Patients Who've Found Relief
                     </h2>
-                    <p class="mb-6 text-neutral-600 text-lg">
+                    <p class="mb-6 text-neutral-600 text-base md:text-lg">
                         Real reviews from real patients recovering from Achilles
                         rupture
                     </p>
                 </div>
                 <div class="mb-8">
-                    <Reviews />
+                    <EnhancedReviewCarousel client:load />
+                </div>
+                <div class="mt-8 text-center">
+                    <a
+                        href="/reviews"
+                        class="inline-flex items-center gap-2 hover:bg-primary px-6 py-3 border-2 border-primary rounded-lg font-semibold text-primary hover:text-white transition-colors"
+                    >
+                        View All Reviews
+                        <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </section>
 
         <!-- Who This Is For Section -->
-        <section class="bg-neutral-50 py-16 md:py-20">
+        <section class="bg-neutral-50 py-8 md:py-16 lg:py-20">
             <div class="mx-auto px-4 max-w-4xl">
-                <div class="mb-12 text-center">
+                <div class="mb-8 md:mb-12 text-center">
                     <h2
-                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl lg:text-4xl"
                     >
                         Who This Is For
                     </h2>
-                    <p class="text-neutral-600 text-lg">
+                    <p class="text-neutral-600 text-base md:text-lg">
                         The Thetis Night Splint is specifically designed for
                         Achilles tendon rupture recovery
                     </p>
@@ -211,16 +246,18 @@ const currentContent = content[lang as keyof typeof content];
 
         <!-- Guarantee Section -->
         <section
-            class="bg-primary/10 py-16 md:py-20 border-primary/30 border-y"
+            class="bg-primary/10 py-8 md:py-16 lg:py-20 border-primary/30 border-y"
         >
             <div class="mx-auto px-4 max-w-4xl">
                 <div class="mb-8 text-center">
                     <h2
-                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl"
+                        class="mb-4 font-bold text-neutral-900 text-xl md:text-2xl lg:text-3xl"
                     >
                         30-Day Money-Back Guarantee
                     </h2>
-                    <p class="mb-8 text-neutral-600 text-lg">
+                    <p
+                        class="mb-8 text-neutral-600 text-sm md:text-base lg:text-lg"
+                    >
                         Try the Thetis Night Splint risk-free. If it doesn't
                         improve your sleep quality, we'll refund your
                         purchase—no questions asked.
@@ -268,37 +305,41 @@ const currentContent = content[lang as keyof typeof content];
         </section>
 
         <!-- Comparison Table: Night Splint vs Boot -->
-        <section class="bg-white py-16 md:py-20 border-neutral-200 border-y">
+        <section
+            class="bg-white py-8 md:py-16 lg:py-20 border-neutral-200 border-y"
+        >
             <div class="mx-auto px-4 max-w-5xl">
-                <div class="mb-12 text-center">
+                <div class="mb-8 md:mb-12 text-center">
                     <h2
-                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl lg:text-4xl"
                     >
                         Night Splint vs Boot: Side-by-Side Comparison
                     </h2>
-                    <p class="text-neutral-600 text-lg">
+                    <p class="text-neutral-600 text-sm md:text-base lg:text-lg">
                         Both provide protection. Only one lets you sleep
                         comfortably.
                     </p>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full border-collapse">
+                <div class="-mx-4 px-2 md:px-4 overflow-x-auto">
+                    <table
+                        class="w-full min-w-[320px] md:min-w-[500px] text-sm md:text-base border-collapse"
+                    >
                         <thead>
                             <tr
                                 class="bg-neutral-50 border-neutral-200 border-b-2"
                             >
                                 <th
-                                    class="p-4 font-semibold text-neutral-900 text-left"
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-semibold text-neutral-900 text-xs md:text-sm text-left"
                                 >
                                     Feature
                                 </th>
                                 <th
-                                    class="p-4 font-semibold text-red-900 text-center"
+                                    class="px-2 md:px-3 py-2 md:py-3 font-semibold text-red-900 text-xs md:text-sm text-center"
                                 >
                                     Boot
                                 </th>
                                 <th
-                                    class="p-4 font-semibold text-primary text-center"
+                                    class="px-2 md:px-3 py-2 md:py-3 font-semibold text-primary text-xs md:text-sm text-center"
                                 >
                                     Thetis Night Splint
                                 </th>
@@ -306,102 +347,194 @@ const currentContent = content[lang as keyof typeof content];
                         </thead>
                         <tbody>
                             <tr class="border-neutral-200 border-b">
-                                <td class="p-4 font-medium text-neutral-900">
+                                <td
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-medium text-neutral-900 text-xs md:text-sm"
+                                >
                                     Weight
                                 </td>
-                                <td class="p-4 text-red-800 text-center">
-                                    <span class="text-2xl">✗</span>
-                                    <div class="mt-1">1.5kg+</div>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-red-800 text-center"
+                                >
+                                    <span class="text-xl md:text-2xl">✗</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">1.5kg+</span>
+                                        <span class="hidden md:inline"
+                                            >1.5kg+</span
+                                        >
+                                    </div>
                                 </td>
                                 <td
-                                    class="p-4 font-semibold text-primary text-center"
+                                    class="px-2 md:px-3 py-2 md:py-3 font-semibold text-primary text-center"
                                 >
-                                    <span class="text-2xl">✓</span>
-                                    <div class="mt-1">200g (90% lighter)</div>
+                                    <span class="text-xl md:text-2xl">✓</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">200g</span>
+                                        <span class="hidden md:inline"
+                                            >200g (90% lighter)</span
+                                        >
+                                    </div>
                                 </td>
                             </tr>
                             <tr
                                 class="bg-neutral-50/50 border-neutral-200 border-b"
                             >
-                                <td class="p-4 font-medium text-neutral-900">
+                                <td
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-medium text-neutral-900 text-xs md:text-sm"
+                                >
                                     Breathability
                                 </td>
-                                <td class="p-4 text-red-800 text-center">
-                                    <span class="text-2xl">✗</span>
-                                    <div class="mt-1">Enclosed, traps heat</div>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-red-800 text-center"
+                                >
+                                    <span class="text-xl md:text-2xl">✗</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">Enclosed</span>
+                                        <span class="hidden md:inline"
+                                            >Enclosed, traps heat</span
+                                        >
+                                    </div>
                                 </td>
                                 <td
-                                    class="p-4 font-semibold text-primary text-center"
+                                    class="px-2 md:px-3 py-2 md:py-3 font-semibold text-primary text-center"
                                 >
-                                    <span class="text-2xl">✓</span>
-                                    <div class="mt-1">
-                                        Open design (exposes sole of foot and
-                                        back of leg)
+                                    <span class="text-xl md:text-2xl">✓</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden"
+                                            >Open Design</span
+                                        >
+                                        <span class="hidden md:inline"
+                                            >Open design (exposes sole of foot
+                                            and back of leg)</span
+                                        >
                                     </div>
                                 </td>
                             </tr>
                             <tr class="border-neutral-200 border-b">
-                                <td class="p-4 font-medium text-neutral-900">
+                                <td
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-medium text-neutral-900 text-xs md:text-sm"
+                                >
                                     Cleanliness
                                 </td>
-                                <td class="p-4 text-red-800 text-center">
-                                    <span class="text-2xl">✗</span>
-                                    <div class="mt-1">
-                                        Dirt and debris in bed
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-red-800 text-center"
+                                >
+                                    <span class="text-xl md:text-2xl">✗</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">Dirty</span>
+                                        <span class="hidden md:inline"
+                                            >Dirt and debris in bed</span
+                                        >
                                     </div>
                                 </td>
                                 <td
-                                    class="p-4 font-semibold text-primary text-center"
+                                    class="px-2 md:px-3 py-2 md:py-3 font-semibold text-primary text-center"
                                 >
-                                    <span class="text-2xl">✓</span>
-                                    <div class="mt-1">
-                                        Clean (no dirt in bed)
+                                    <span class="text-xl md:text-2xl">✓</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">Clean</span>
+                                        <span class="hidden md:inline"
+                                            >Clean (no dirt in bed)</span
+                                        >
                                     </div>
                                 </td>
                             </tr>
                             <tr
                                 class="bg-neutral-50/50 border-neutral-200 border-b"
                             >
-                                <td class="p-4 font-medium text-neutral-900">
+                                <td
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-medium text-neutral-900 text-xs md:text-sm"
+                                >
                                     Showering
                                 </td>
-                                <td class="p-4 text-red-800 text-center">
-                                    <span class="text-2xl">✗</span>
-                                    <div class="mt-1">Cannot shower in it</div>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-red-800 text-center"
+                                >
+                                    <span class="text-xl md:text-2xl">✗</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">No</span>
+                                        <span class="hidden md:inline"
+                                            >Cannot shower in it</span
+                                        >
+                                    </div>
                                 </td>
                                 <td
-                                    class="p-4 font-semibold text-primary text-center"
+                                    class="px-2 md:px-3 py-2 md:py-3 font-semibold text-primary text-center"
                                 >
-                                    <span class="text-2xl">✓</span>
-                                    <div class="mt-1">Can shower in it</div>
+                                    <span class="text-xl md:text-2xl">✓</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">Yes</span>
+                                        <span class="hidden md:inline"
+                                            >Can shower in it</span
+                                        >
+                                    </div>
                                 </td>
                             </tr>
                             <tr class="border-neutral-200 border-b">
-                                <td class="p-4 font-medium text-neutral-900">
+                                <td
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-medium text-neutral-900 text-xs md:text-sm"
+                                >
                                     Use Period
                                 </td>
-                                <td class="p-4 text-neutral-700 text-center">
-                                    <span class="text-xl">=</span>
-                                    <div class="mt-1">Weeks 0-12</div>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-neutral-700 text-center"
+                                >
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        Weeks 0-12
+                                    </div>
                                 </td>
-                                <td class="p-4 text-neutral-700 text-center">
-                                    <span class="text-xl">=</span>
-                                    <div class="mt-1">Weeks 0-12</div>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-neutral-700 text-center"
+                                >
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        Weeks 0-12
+                                    </div>
                                 </td>
                             </tr>
                             <tr
                                 class="bg-primary/5 border-neutral-300 border-b-2"
                             >
-                                <td class="p-4 font-medium text-neutral-900">
+                                <td
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-medium text-neutral-900 text-xs md:text-sm"
+                                >
                                     Healing Angle
                                 </td>
-                                <td class="p-4 text-neutral-700 text-center">
-                                    <span class="text-xl">=</span>
-                                    <div class="mt-1">30° plantarflexion</div>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-neutral-700 text-center"
+                                >
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        30° plantarflexion
+                                    </div>
                                 </td>
-                                <td class="p-4 text-neutral-700 text-center">
-                                    <span class="text-xl">=</span>
-                                    <div class="mt-1">30° plantarflexion</div>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-neutral-700 text-center"
+                                >
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        30° plantarflexion
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -419,57 +552,40 @@ const currentContent = content[lang as keyof typeof content];
 
         <!-- Athlete Endorsements -->
         <section
-            class="bg-gradient-to-b from-white to-primary/5 py-16 md:py-24"
+            class="bg-gradient-to-b from-white to-primary/5 py-8 md:py-16 lg:py-24"
         >
             <div class="mx-auto px-4 max-w-7xl">
-                <div class="mb-12 text-center">
+                <div class="mb-8 md:mb-12 text-center">
                     <div
-                        class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full"
+                        class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-3 md:px-4 py-2 rounded-full"
                     >
-                        <Trophy className="w-5 h-5 text-primary" />
+                        <Trophy
+                            className="w-4 md:w-5 h-4 md:h-5 text-primary"
+                        />
                         <p
-                            class="font-medium text-primary text-sm uppercase tracking-widest"
+                            class="font-medium text-primary text-xs md:text-sm uppercase tracking-widest"
                         >
                             TRUSTED BY ELITE ATHLETES
                         </p>
                     </div>
                     <h2
-                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl lg:text-4xl"
                     >
                         Trusted by <span class="text-primary"
                             >Professional Athletes</span
                         >
                     </h2>
-                    <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
+                    <p
+                        class="mx-auto max-w-2xl text-neutral-600 text-sm md:text-base lg:text-lg"
+                    >
                         Elite athletes choose Thetis Night Splint for their
                         recovery. Lightweight, comfortable, and trusted by Team
                         GB athletes.
                     </p>
                 </div>
 
-                <!-- All Athlete Reviews -->
-                <div class="masonry-grid">
-                    {
-                        athletes.map((athlete) => {
-                            const athleteReview = {
-                                ...athlete,
-                                type: "athlete" as const,
-                                link: "",
-                                clinics: [],
-                                clinicImages: [],
-                                date: athlete.date || "2024-01-01",
-                            };
-                            return (
-                                <div class="masonry-item">
-                                    <ReviewCard
-                                        review={athleteReview}
-                                        client:load
-                                    />
-                                </div>
-                            );
-                        })
-                    }
-                </div>
+                <!-- Athlete Reviews - Carousel on mobile, masonry on desktop -->
+                <AthletesCarousel client:load />
             </div>
         </section>
 
@@ -500,36 +616,43 @@ const currentContent = content[lang as keyof typeof content];
 
         <!-- Surgeon Endorsements -->
         <section
-            class="bg-gradient-to-b from-primary/5 to-white py-16 md:py-24"
+            class="bg-gradient-to-b from-primary/5 to-white py-8 md:py-16 lg:py-24"
         >
             <div class="mx-auto px-4 max-w-7xl">
-                <div class="mb-12 text-center">
+                <div class="mb-8 md:mb-12 text-center">
                     <div
-                        class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full"
+                        class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-3 md:px-4 py-2 rounded-full"
                     >
-                        <Stethoscope className="w-5 h-5 text-primary" />
+                        <Stethoscope
+                            className="w-4 md:w-5 h-4 md:h-5 text-primary"
+                        />
                         <p
-                            class="font-medium text-primary text-sm uppercase tracking-widest"
+                            class="font-medium text-primary text-xs md:text-sm uppercase tracking-widest"
                         >
                             PROFESSIONAL ENDORSEMENTS
                         </p>
                     </div>
                     <h2
-                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl lg:text-4xl"
                     >
                         Trusted by <span class="text-primary"
                             >Leading Surgeons</span
                         >
                     </h2>
-                    <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
+                    <p
+                        class="mx-auto max-w-2xl text-neutral-600 text-base md:text-lg lg:text-xl"
+                    >
                         Healthcare professionals worldwide recommend Thetis
                         Night Splint for safe, effective Achilles rupture
                         recovery.
                     </p>
                 </div>
 
-                <!-- All Clinician Reviews -->
-                <div class="masonry-grid">
+                <!-- Clinician Reviews - Carousel on mobile, masonry on desktop -->
+                <div class="md:hidden">
+                    <SurgeonsCarousel client:load />
+                </div>
+                <div class="hidden md:block masonry-grid">
                     {
                         translatedClinicians.map((clinician) => {
                             const content =
@@ -564,15 +687,15 @@ const currentContent = content[lang as keyof typeof content];
         </section>
 
         <!-- What to Expect Next Morning -->
-        <section class="bg-white py-16 md:py-20">
+        <section class="hidden md:block bg-white py-8 md:py-16 lg:py-20">
             <div class="mx-auto px-4 max-w-5xl">
-                <div class="mb-12 text-center">
+                <div class="mb-8 md:mb-12 text-center">
                     <h2
-                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl lg:text-4xl"
                     >
                         What to Expect the Next Morning
                     </h2>
-                    <p class="text-neutral-600 text-lg">
+                    <p class="text-neutral-600 text-sm md:text-base lg:text-lg">
                         Wake up feeling the difference after your first night
                     </p>
                 </div>
@@ -617,20 +740,20 @@ const currentContent = content[lang as keyof typeof content];
 
         <!-- Quality Assurance Badges -->
         <section
-            class="bg-gradient-to-b from-white to-neutral-50 py-16 md:py-20"
+            class="bg-gradient-to-b from-white to-neutral-50 py-8 md:py-16 lg:py-20"
         >
             <div class="mx-auto px-4 max-w-5xl">
-                <div class="mb-12 text-center">
+                <div class="mb-8 md:mb-12 text-center">
                     <h2
-                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl"
+                        class="mb-4 font-bold text-neutral-900 text-xl md:text-2xl lg:text-3xl"
                     >
                         Trusted by Thousands
                     </h2>
-                    <p class="text-neutral-600 text-lg">
+                    <p class="text-neutral-600 text-sm md:text-base lg:text-lg">
                         Proven safety and effectiveness across the globe
                     </p>
                 </div>
-                <div class="gap-6 grid md:grid-cols-4">
+                <div class="gap-4 md:gap-6 grid grid-cols-2 md:grid-cols-4">
                     <div
                         class="bg-white shadow-sm p-6 border border-neutral-200 rounded-lg text-center"
                     >
@@ -675,22 +798,6 @@ const currentContent = content[lang as keyof typeof content];
             </div>
         </section>
 
-        <!-- Work in Healthcare Section -->
-        <section class="bg-neutral-50 py-12 md:py-16">
-            <div class="mx-auto px-4 max-w-7xl">
-                <div class="mx-auto max-w-4xl">
-                    <WorkInHealthcare lang={lang} />
-                </div>
-            </div>
-        </section>
-
-        <!-- Subscribe: recovery tips -->
-        <div class="bg-white dark:bg-neutral-950 py-10 md:py-12">
-            <div class="mx-auto px-4 max-w-3xl">
-                <SubscribeBlock source="splint_page" />
-            </div>
-        </div>
-
         <ValuePropositions lang={lang} />
 
         <KeyFeatures lang={lang} />
@@ -720,6 +827,13 @@ const currentContent = content[lang as keyof typeof content];
         </div>
 
         <SplintDownloads lang={lang} />
+
+        <!-- Subscribe: recovery tips -->
+        <div class="bg-neutral-50 dark:bg-neutral-950 py-4 md:py-6 lg:py-8">
+            <div class="mx-auto px-4 max-w-3xl">
+                <SubscribeBlock source="splint_page" />
+            </div>
+        </div>
 
         <!-- Sticky Add to Cart (adapted for both splint + course) -->
         <StickyAddToCart

@@ -82,13 +82,14 @@ export function MobileNav({ lang = "en", currentPath = "/" }: MobileNavProps) {
             </SheetClose>
           </div>
         </SheetHeader>
-        <div className="flex flex-row justify-between items-center pt-2">
-          <LanguageSwitcher currentPath={currentPath} />
-        </div>
 
         <NavAccordion lang={lang} />
 
         <SheetFooter className="flex flex-col gap-y-4 mt-4">
+          <div className="flex flex-row justify-between items-center pt-2">
+            <LanguageSwitcher currentPath={currentPath} />
+          </div>
+
           <SheetClose>
             <a
               href={splintRoute?.href || "/achilles-rupture-splint"}

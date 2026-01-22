@@ -8,6 +8,7 @@
     "typecheck": "tsc --noEmit",
     "build": "email build",
     "build:course-template": "bun emails/course/build-template.ts",
+    "build:recovery-tips-template": "bun emails/recovery-tips/build-template.ts",
     "start": "email start",
     "test-email": "bun broadcasts/sequence-1/test.tsx"
   },

@@ -19,6 +19,10 @@ import {
     DialogTrigger,
 } from "./dialog";
 
+// Type for Supabase client (to avoid importing @supabase/supabase-js in shared package)
+// Using any to allow flexibility with different Supabase client versions
+type SupabaseClient = any;
+
 export interface EmailSignupDialogProps {
     /** Custom trigger element - defaults to a button with "Get Recovery Emails" */
     trigger?: React.ReactNode;
@@ -54,6 +58,8 @@ export interface EmailSignupDialogProps {
     open?: boolean;
     /** Default trigger button text */
     triggerText?: string;
+    /** Optional Supabase client for direct database integration */
+    supabaseClient?: SupabaseClient;
 }
 
 function EmailSignupDialog({
@@ -74,6 +80,7 @@ function EmailSignupDialog({
     showPhone = false,
     phoneLabel = "Phone (optional, for SMS tips)",
     phonePlaceholder = "+1 (555) 123-4567",
+    supabaseClient,
 }: EmailSignupDialogProps) {
     const [internalOpen, setInternalOpen] = React.useState(false);
     const [email, setEmail] = React.useState("");
@@ -83,6 +90,7 @@ function EmailSignupDialog({
     );
     const [calendarOpen, setCalendarOpen] = React.useState(false);
     const [isSubmitting, setIsSubmitting] = React.useState(false);
+    const [error, setError] = React.useState("");
 
     const isControlled = controlledOpen !== undefined;
     const open = isControlled ? controlledOpen : internalOpen;
@@ -95,12 +103,57 @@ function EmailSignupDialog({
         if (!email || !ruptureDate) return;
 
         setIsSubmitting(true);
+        setError("");
+
         try {
-            await onSubmit?.({
-                email,
-                phone: phone.trim() || undefined,
-                ruptureDate,
-            });
+            // If custom onSubmit is provided, use it
+            if (onSubmit) {
+                await onSubmit({
+                    email,
+                    phone: phone.trim() || undefined,
+                    ruptureDate,
+                });
+            } else if (supabaseClient) {
+                // Use Supabase client directly
+                const normalizedEmail = email.toLowerCase().trim();
+                const phoneNumber = phone.trim() || null;
+                const ruptureDateStr = ruptureDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+
+                // Note: We don't include 'id' - it will auto-generate via DEFAULT gen_random_uuid()
+                const { data, error: supabaseError } = await supabaseClient
+                    .from("users")
+                    .upsert(
+                        {
+                            email: normalizedEmail,
+                            phone: phoneNumber,
+                            rupture_date: ruptureDateStr,
+                            email_course_enabled: true,
+                            updated_at: new Date().toISOString(),
+                        },
+                        {
+                            onConflict: "email",
+                            ignoreDuplicates: false, // Update if exists
+                        },
+                    )
+                    .select();
+
+                if (supabaseError) {
+                    console.error("Supabase error:", supabaseError);
+                    throw new Error(
+                        supabaseError.message ||
+                            "Failed to save your information",
+                    );
+                }
+
+                if (!data) {
+                    throw new Error("No data returned from Supabase");
+                }
+            } else {
+                throw new Error(
+                    "Either onSubmit callback or supabaseClient must be provided",
+                );
+            }
+
             setOpen(false);
             // Reset form
             setEmail("");
@@ -108,6 +161,11 @@ function EmailSignupDialog({
             setRuptureDate(undefined);
         } catch (error) {
             console.error("Error submitting email signup:", error);
+            setError(
+                error instanceof Error
+                    ? error.message
+                    : "Something went wrong. Please try again.",
+            );
         } finally {
             setIsSubmitting(false);
         }
@@ -198,13 +256,19 @@ function EmailSignupDialog({
                                         setRuptureDate(date);
                                         setCalendarOpen(false);
                                     }}
-                                    disabled={(date) => date > new Date() ||
+                                    disabled={(date) =>
+                                        date > new Date() ||
                                         date < new Date("2020-01-01")}
                                     initialFocus
                                 />
                             </PopoverContent>
                         </Popover>
                     </div>
+                    {error && (
+                        <p className="text-red-600 dark:text-red-400 text-sm">
+                            {error}
+                        </p>
+                    )}
                     <Button
                         type="submit"
                         className="w-full h-11"

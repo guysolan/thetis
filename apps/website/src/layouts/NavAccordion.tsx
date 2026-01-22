@@ -16,6 +16,7 @@ import {
   getRouteBySlugAndLanguage,
 } from "@/content/routes.tsx";
 import nightSplintImage from "@/assets/night-splint/night_splint_bed_side.jpg";
+import TendonStiffnessImage from "@/assets/tendon-stiffness-after-rupture.png";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Lang } from "../config/languages";
@@ -89,28 +90,7 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
   );
 
   return (
-    <div className="flex flex-col gap-2">
-      {/* Course - Direct Link */}
-      {courseRoute && (
-        <a
-          href={courseRoute.href}
-          className="flex items-center gap-2 hover:bg-neutral-100 hover:bg-primary/15 dark:hover:bg-neutral-800 dark:hover:bg-primary/20 bg-gradient-to-tr from-primary/10 dark:from-primary/5 to-primary/20 dark:to-primary/10 p-3 border border-primary/20 dark:border-primary/10 rounded-sm text-primary transition-colors duration-300"
-        >
-          <span className="flex justify-center items-center w-10 h-10">
-            {courseRoute.icon}
-          </span>
-          <div>
-            <h3 className="font-semibold text-primary text-base md:text-lg">
-              {courseRoute.title}
-            </h3>
-            <p className="text-primary/70 text-sm md:text-base">
-              {courseRoute.description}
-            </p>
-          </div>
-          <ArrowRight size={16} className="flex-shrink-0 ml-auto" />
-        </a>
-      )}
-
+    <div className="flex flex-col gap-2 pt-4">
       {/* Achilles Rupture Splint - Direct Link */}
       {splintRoute && (
         <a
@@ -132,6 +112,33 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
             {splintRoute.description && (
               <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base line-clamp-3">
                 {splintRoute.description}
+              </p>
+            )}
+          </div>
+        </a>
+      )}
+
+      {/* Course - Direct Link */}
+      {courseRoute && (
+        <a
+          href={courseRoute.href}
+          className="flex items-center gap-3 hover:bg-neutral-100 hover:bg-primary/15 dark:hover:bg-neutral-800 dark:hover:bg-primary/20 bg-gradient-to-tr from-primary/10 dark:from-primary/5 to-primary/20 dark:to-primary/10 p-3 border border-primary/20 dark:border-primary/10 rounded-sm text-primary transition-colors duration-300"
+        >
+          <div className="flex-shrink-0">
+            <img
+              src={TendonStiffnessImage.src}
+              alt={courseRoute.title}
+              className="brightness-110 rounded-sm w-32 h-32 object-cover"
+            />
+          </div>
+          <div className="flex flex-col flex-1 gap-1 p-4 overflow-hidden">
+            <span className="flex flex-row items-center gap-1 font-semibold text-neutral-900 dark:text-neutral-100 text-base md:text-lg !underline underline-offset-4 text-wrap">
+              {courseRoute.title}
+              <ArrowRight size={16} className="flex-shrink-0 ml-1" />
+            </span>
+            {courseRoute.description && (
+              <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base line-clamp-3">
+                {courseRoute.description}
               </p>
             )}
           </div>

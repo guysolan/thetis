@@ -148,17 +148,19 @@ const socials: Array<{
           <ul class="space-y-3">
             {
               getCourseRoutesByLanguage(lang)
-                .filter((course) => !course.href.includes("/course/professionals"))
+                .filter(
+                  (course) => !course.href.includes("/course/professionals"),
+                )
                 .map((course) => (
-                <li>
-                  <a
-                    href={course.href}
-                    class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
-                  >
-                    {course.title}
-                  </a>
-                </li>
-              ))
+                  <li>
+                    <a
+                      href={course.href}
+                      class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
+                    >
+                      {course.title}
+                    </a>
+                  </li>
+                ))
             }
           </ul>
         </div>
@@ -214,7 +216,9 @@ const socials: Array<{
         />
 
         <div class="space-y-4">
-          <h3 class="font-semibold text-lg lg:text-left text-center">{stayInTouchTitles[lang]}</h3>
+          <h3 class="font-semibold text-lg lg:text-left text-center">
+            {stayInTouchTitles[lang]}
+          </h3>
           <FooterEmailCTA />
 
           <div class="flex flex-col items-center lg:items-start gap-y-4">
