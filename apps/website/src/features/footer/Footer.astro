@@ -152,7 +152,9 @@ const socials: Array<{
           </h3>
           <ul class="space-y-3">
             {
-              getCourseRoutesByLanguage(lang).map((course) => (
+              getCourseRoutesByLanguage(lang)
+                .filter((course) => !course.href.includes("/course/professionals"))
+                .map((course) => (
                 <li>
                   <a
                     href={course.href}

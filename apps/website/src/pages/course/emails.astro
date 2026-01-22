@@ -2,6 +2,11 @@
 import Layout from "@/layouts/Layout.astro";
 import ColorGradient from "@/components/ColorGradient.astro";
 import { EmailCourseForm } from "@/components/EmailCourseForm";
+import CourseBuyButton from "@/components/CourseBuyButton";
+import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { BookOpen, Check, ArrowRight } from "lucide-react";
 ---
 
 <Layout
@@ -31,5 +36,125 @@ import { EmailCourseForm } from "@/components/EmailCourseForm";
                 <EmailCourseForm client:load />
             </div>
         </ColorGradient>
+
+        <!-- Upsell to Paid Course -->
+        <section class="bg-white dark:bg-neutral-900 py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-4xl">
+                <div
+                    class="bg-gradient-to-br from-primary/10 dark:from-primary/20 to-primary/5 dark:to-primary/10 p-8 md:p-12 border-2 border-primary/20 rounded-2xl"
+                >
+                    <div class="mb-8 text-center">
+                        <div
+                            class="inline-flex items-center gap-2 bg-primary/20 dark:bg-primary/30 mb-4 px-4 py-2 rounded-full"
+                        >
+                            <BookOpen className="w-5 h-5 text-primary" />
+                            <span
+                                class="font-semibold text-primary text-sm uppercase tracking-wide"
+                            >
+                                Upgrade to Complete Course
+                            </span>
+                        </div>
+                        <h2
+                            class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl"
+                        >
+                            Want More Detailed Guidance?
+                        </h2>
+                        <p
+                            class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg"
+                        >
+                            The free email course gives you the essentials.
+                            Upgrade to get 31 comprehensive lessons with
+                            exercises, checklists, and expert guidance—all in
+                            one place.
+                        </p>
+                    </div>
+
+                    <div class="gap-4 grid md:grid-cols-2 mb-8">
+                        <div
+                            class="flex items-start gap-3 bg-white dark:bg-neutral-800 p-4 rounded-lg"
+                        >
+                            <div
+                                class="flex justify-center items-center bg-primary/10 mt-0.5 rounded-full w-6 h-6 shrink-0"
+                            >
+                                <Check className="w-4 h-4 text-primary" />
+                            </div>
+                            <span
+                                class="text-neutral-700 dark:text-neutral-300 text-sm"
+                            >
+                                31 structured lessons with detailed guidance
+                            </span>
+                        </div>
+                        <div
+                            class="flex items-start gap-3 bg-white dark:bg-neutral-800 p-4 rounded-lg"
+                        >
+                            <div
+                                class="flex justify-center items-center bg-primary/10 mt-0.5 rounded-full w-6 h-6 shrink-0"
+                            >
+                                <Check className="w-4 h-4 text-primary" />
+                            </div>
+                            <span
+                                class="text-neutral-700 dark:text-neutral-300 text-sm"
+                            >
+                                Physio exercises with illustrations
+                            </span>
+                        </div>
+                        <div
+                            class="flex items-start gap-3 bg-white dark:bg-neutral-800 p-4 rounded-lg"
+                        >
+                            <div
+                                class="flex justify-center items-center bg-primary/10 mt-0.5 rounded-full w-6 h-6 shrink-0"
+                            >
+                                <Check className="w-4 h-4 text-primary" />
+                            </div>
+                            <span
+                                class="text-neutral-700 dark:text-neutral-300 text-sm"
+                            >
+                                Questions to ask your surgeon
+                            </span>
+                        </div>
+                        <div
+                            class="flex items-start gap-3 bg-white dark:bg-neutral-800 p-4 rounded-lg"
+                        >
+                            <div
+                                class="flex justify-center items-center bg-primary/10 mt-0.5 rounded-full w-6 h-6 shrink-0"
+                            >
+                                <Check className="w-4 h-4 text-primary" />
+                            </div>
+                            <span
+                                class="text-neutral-700 dark:text-neutral-300 text-sm"
+                            >
+                                Product recommendations & boot comparisons
+                            </span>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex sm:flex-row flex-col justify-center items-center gap-4"
+                    >
+                        <CourseBuyButton
+                            productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                            variant="default"
+                            className="shadow-lg font-bold text-lg"
+                            client:load
+                        >
+                            Get Complete Course
+                        </CourseBuyButton>
+                        <a
+                            href="/course"
+                            class={cn(
+                                buttonVariants({
+                                    variant: "outline",
+                                    size: "lg",
+                                }),
+                                "text-lg font-semibold",
+                            )}
+                        >
+                            Learn More
+                            <ArrowRight className="ml-2 w-4 h-4" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 </Layout>

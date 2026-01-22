@@ -43,7 +43,9 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
   const articles = getArticleRoutesByLanguage(lang);
   const partnerLinks = getPartnerRoutesByLanguage(lang);
   const contactLinks = getContactRoutesByLanguage(lang);
-  const courseLinks = getCourseRoutesByLanguage(lang);
+  const courseLinks = getCourseRoutesByLanguage(lang).filter(
+    (course) => !course.href.includes("/course/professionals"),
+  );
   const recoveryPhases = getRecoveryPhaseRoutesByLanguage(lang);
 
   // Get dynamic URLs for the current language
@@ -86,18 +88,14 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
                 <h4 className="mb-3 font-semibold text-neutral-900 dark:text-neutral-100 text-sm uppercase tracking-wide">
                   Courses
                 </h4>
-                <div className="gap-4 grid grid-cols-3">
+                <div className="gap-4 grid grid-cols-2">
                   {courseLinks.map((course, index) => (
                     <CourseCard
                       key={course.href}
                       title={course.title}
                       description={course.description}
                       href={course.href}
-                      variant={index === 0
-                        ? "free"
-                        : index === 2
-                        ? "premium"
-                        : "paid"}
+                      variant={index === 0 ? "free" : "paid"}
                     />
                   ))}
                 </div>

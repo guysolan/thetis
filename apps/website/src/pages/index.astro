@@ -5,7 +5,7 @@ import Image from "astro/components/Image.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import "@thetis/ui/globals.css";
-import NightSplintImage from "@/assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
+import NightSplintImage from "@/assets/night-splint/night-splint-bed-top-square.jpg";
 import InfiniteReviews from "@/components/reviews/InfiniteReviews.astro";
 import ComplianceLogos from "@/sections/index/compliance/ComplianceLogos.astro";
 import { patients } from "@/components/reviews/content/patients";
@@ -24,7 +24,7 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
 
 <Layout
     title="Thetis Medical - Sleep Better, Recovery Better"
-    description="Our patented night splint lets you ditch the boot at bedtime. Free recovery courses guide you week-by-week. Trusted by 5,000+ patients and recommended by leading surgeons."
+    description="Our patented night splint lets you ditch the boot at bedtime. Free recovery courses guide you week-by-week. Trusted by 5,000+ patients and over 10,000 people follow our recovery advice."
     image="https://thetismedical.com/images/night-splint.png"
     lang="en"
 >
@@ -208,9 +208,6 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
             </div>
         </section>
 
-        <!-- Compliance Badges -->
-        <ComplianceLogos />
-
         <!-- Problem Identification - Enhanced -->
         <section class="py-16 md:py-20">
             <div class="mx-auto px-4 max-w-5xl">
@@ -318,44 +315,6 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
                             > but weighs 90% less. Finally, sleep that actually helps
                             you recover.
                         </p>
-
-                        <!-- Quick Benefits Bar -->
-                        <div
-                            class="bg-primary/5 mb-8 p-6 border border-primary/20 rounded-lg"
-                        >
-                            <div class="gap-6 grid md:grid-cols-3 text-center">
-                                <div>
-                                    <p
-                                        class="mb-1 font-bold text-neutral-900 text-2xl"
-                                    >
-                                        200g
-                                    </p>
-                                    <p class="text-neutral-600 text-sm">
-                                        vs 1.5kg boot
-                                    </p>
-                                </div>
-                                <div>
-                                    <p
-                                        class="mb-1 font-bold text-neutral-900 text-2xl"
-                                    >
-                                        80%
-                                    </p>
-                                    <p class="text-neutral-600 text-sm">
-                                        better sleep quality
-                                    </p>
-                                </div>
-                                <div>
-                                    <p
-                                        class="mb-1 font-bold text-neutral-900 text-2xl"
-                                    >
-                                        100%
-                                    </p>
-                                    <p class="text-neutral-600 text-sm">
-                                        safe & surgeon approved
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- Key Benefits -->
                         <div class="space-y-4 mb-8">
@@ -699,7 +658,7 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
                         href="/course"
                         class="font-medium text-primary hover:underline"
                     >
-                        Free Courses
+                        Our Courses
                     </a>
                 </div>
             </div>
@@ -807,83 +766,8 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
             </div>
         </section>
 
-        <!-- FAQ Section -->
-        <section class="bg-white py-16 md:py-24">
-            <div class="mx-auto px-4 max-w-3xl">
-                <div class="mb-12 text-center">
-                    <h2
-                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
-                    >
-                        Frequently Asked Questions
-                    </h2>
-                    <p class="text-neutral-600">
-                        Everything you need to know before buying
-                    </p>
-                </div>
-                <div class="space-y-6">
-                    <details
-                        class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
-                    >
-                        <summary
-                            class="font-semibold text-neutral-900 text-lg cursor-pointer"
-                        >
-                            Is the night splint safe to use?
-                        </summary>
-                        <p class="mt-4 text-neutral-600">
-                            Yes. The Thetis Night Splint has been used by over
-                            5,000 patients with zero re-ruptures reported. It's
-                            surgeon-approved and maintains the same protective
-                            angle as your walking boot. Always check with your
-                            surgeon before use.
-                        </p>
-                    </details>
-                    <details
-                        class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
-                    >
-                        <summary
-                            class="font-semibold text-neutral-900 text-lg cursor-pointer"
-                        >
-                            Can I walk in the night splint?
-                        </summary>
-                        <p class="mt-4 text-neutral-600">
-                            No. The night splint is designed for lying down
-                            only. Always put your walking boot back on before
-                            getting out of bed. Keep your boot next to your bed
-                            for easy access.
-                        </p>
-                    </details>
-                    <details
-                        class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
-                    >
-                        <summary
-                            class="font-semibold text-neutral-900 text-lg cursor-pointer"
-                        >
-                            What if it doesn't work for me?
-                        </summary>
-                        <p class="mt-4 text-neutral-600">
-                            We offer a 30-day money-back guarantee. If you're
-                            not satisfied for any reason, return it for a full
-                            refund. No questions asked.
-                        </p>
-                    </details>
-                    <details
-                        class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
-                    >
-                        <summary
-                            class="font-semibold text-neutral-900 text-lg cursor-pointer"
-                        >
-                            Are the courses really free?
-                        </summary>
-                        <p class="mt-4 text-neutral-600">
-                            Yes! Our email course is completely free. We also
-                            offer premium courses (£29) with additional content,
-                            videos, and direct support. Start with the free
-                            course and upgrade if you want more.
-                        </p>
-                    </details>
-                </div>
-            </div>
-        </section>
+        <!-- Compliance Badges -->
+        <ComplianceLogos />
 
         <!-- Final CTA - Enhanced -->
         <ColorGradientInOut size="lg">

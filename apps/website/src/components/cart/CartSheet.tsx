@@ -23,7 +23,7 @@ import {
     removeItem,
     updateQuantity,
 } from "@/lib/shopify/cart-store";
-import { formatPrice } from "@/lib/shopify/storefront";
+import { formatPrice, getVariantPrice } from "@/lib/shopify/storefront";
 import { getUpsellSuggestions } from "@/lib/shopify/products";
 import {
     Check,
@@ -410,9 +410,56 @@ interface UpsellItemProps {
 
 function UpsellItem({ product }: UpsellItemProps) {
     const [isAdding, setIsAdding] = useState(false);
+    const [price, setPrice] = useState<string | null>(null);
+    const [isLoadingPrice, setIsLoadingPrice] = useState(true);
     const isCourse = product.variantId.includes("522653");
     const isEssentials = product.variantId.includes("52265314353480");
     const isProfessionals = product.variantId.includes("52265315828040");
+
+    // Fetch price from Shopify API
+    useEffect(() => {
+        let isMounted = true;
+
+        async function loadPrice() {
+            try {
+                // Detect country
+                let countryCode = "GB";
+                try {
+                    const geoResponse = await fetch("https://ipapi.co/json/");
+                    if (geoResponse.ok) {
+                        const geoData = await geoResponse.json();
+                        countryCode = geoData.country_code || "GB";
+                    }
+                } catch (e) {
+                    console.error("Failed to detect country:", e);
+                }
+
+                const priceData = await getVariantPrice(
+                    product.variantId,
+                    countryCode,
+                );
+                if (isMounted) {
+                    if (priceData) {
+                        setPrice(priceData.formattedPrice);
+                    }
+                    // Don't set fallback - only show price from Shopify
+                    setIsLoadingPrice(false);
+                }
+            } catch (error) {
+                console.error("Failed to load variant price:", error);
+                if (isMounted) {
+                    // Don't set fallback - keep loading or show nothing
+                    setIsLoadingPrice(false);
+                }
+            }
+        }
+
+        loadPrice();
+
+        return () => {
+            isMounted = false;
+        };
+    }, [product.variantId]);
 
     const handleAdd = async () => {
         if (!product.canAddToCart) {
@@ -452,7 +499,20 @@ function UpsellItem({ product }: UpsellItemProps) {
                         {product.description}
                     </p>
                     <span className="font-semibold text-primary text-sm">
-                        {product.price}
+                        {isLoadingPrice
+                            ? (
+                                <span className="inline-flex items-center gap-1">
+                                    <Loader2 className="w-3 h-3 animate-spin" />
+                                    Loading...
+                                </span>
+                            )
+                            : price
+                            ? price
+                            : (
+                                <span className="text-neutral-400">
+                                    Price unavailable
+                                </span>
+                            )}
                     </span>
                 </div>
                 <Button

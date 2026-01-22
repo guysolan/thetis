@@ -10,25 +10,17 @@ import NightSplintHero from "@/sections/achilles-rupture-splint/NightSplintHero.
 import ValuePropositions from "@/sections/achilles-rupture-splint/ValuePropositions.astro";
 import KeyFeatures from "@/sections/achilles-rupture-splint/KeyFeatures.astro";
 import Reviews from "@/components/reviews/InfiniteReviews.astro";
-import ReadyForRelief from "@/sections/achilles-rupture-splint/ReadyForRelief.astro";
-import ComfortableRecoveryReviews from "@/sections/achilles-rupture-splint/ComfortableRecoveryReviews.astro";
 import OrderYourSplint from "@/sections/achilles-rupture-splint/OrderYourSplint.astro";
-import SleepInYourWelliesSection from "@/sections/achilles-rupture-splint/SleepInYourWelliesSection.astro";
 import SplintDownloads from "@/sections/achilles-rupture-splint/SplintDownloads.astro";
 import StickyAddToCart from "@/components/StickyAddToCart.tsx";
 import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
 import Breadcrumb from "@/components/Breadcrumb.astro";
-import { BundlesAndRecommendations } from "@/components/products/BundlesAndRecommendations";
-import { patients } from "@/components/reviews/content/patients";
+import SurgeonsCarousel from "@/components/SurgeonsCarousel";
 import { athletes } from "@/components/reviews/content/athletes";
 import { translatedClinicians } from "@/components/reviews/content/professional-opinions";
-import SurgeonsCarousel from "@/components/SurgeonsCarousel";
-import AthletesBadges from "@/components/AthletesBadges.astro";
 import { Image as AstroImage } from "astro:assets";
-import Review1Image from "@/assets/review-1.png";
-import Review2Image from "@/assets/review-2.png";
-import Review3Image from "@/assets/review-3.png";
-import ColorGradientInOut from "@/components/ColorGradientInOut.astro";
+import { Trophy, Stethoscope } from "lucide-react";
+import { ReviewCard } from "@/components/reviews/ReviewCard.tsx";
 import type { Lang } from "@/config/languages.ts";
 
 const { lang = "en" } = Astro.props as { lang?: Lang };
@@ -91,7 +83,7 @@ const currentContent = content[lang as keyof typeof content];
         </div>
         <NightSplintHero lang={lang} />
 
-        <!-- Patient Reviews - Early Social Proof -->
+        <!-- Social Proof - Reviews -->
         <section class="bg-white py-16 md:py-20">
             <div class="mx-auto px-4 max-w-7xl">
                 <div class="mb-12 text-center">
@@ -107,59 +99,6 @@ const currentContent = content[lang as keyof typeof content];
                 </div>
                 <div class="mb-8">
                     <Reviews />
-                </div>
-                <!-- Featured Patient Reviews -->
-                <div class="gap-6 grid md:grid-cols-3 mt-12">
-                    {
-                        patients
-                            .filter((p) => p.is_pinned)
-                            .slice(0, 3)
-                            .map((review, index) => {
-                                const reviewImages = [
-                                    Review1Image,
-                                    Review2Image,
-                                    Review3Image,
-                                ];
-                                const reviewImage =
-                                    reviewImages[index] || Review1Image;
-                                return (
-                                    <div class="bg-neutral-50 p-6 border-2 border-primary/20 rounded-lg">
-                                        <div class="flex items-start gap-3 mb-4">
-                                            <AstroImage
-                                                src={reviewImage}
-                                                alt={review.name}
-                                                class="flex-shrink-0 rounded-full w-12 h-12 object-cover"
-                                                width={48}
-                                                height={48}
-                                            />
-                                            <div class="flex-1 min-w-0">
-                                                <p class="font-semibold text-neutral-900 text-sm">
-                                                    {review.name}
-                                                </p>
-                                                <p class="text-neutral-600 text-xs">
-                                                    {review.country}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <p class="mb-2 text-neutral-700 text-sm italic leading-relaxed">
-                                            "
-                                            {review.short ||
-                                                review.body.slice(0, 150)}
-                                            "
-                                        </p>
-                                        <div class="flex gap-1">
-                                            {Array.from({ length: 5 }).map(
-                                                () => (
-                                                    <span class="text-yellow-400 text-sm">
-                                                        ★
-                                                    </span>
-                                                ),
-                                            )}
-                                        </div>
-                                    </div>
-                                );
-                            })
-                    }
                 </div>
             </div>
         </section>
@@ -385,73 +324,103 @@ const currentContent = content[lang as keyof typeof content];
             </div>
         </section>
 
-        <SleepInYourWelliesSection />
-
-        <!-- Athlete Testimonials -->
-        <section class="bg-neutral-50 py-16 md:py-20">
+        <!-- Athlete Endorsements -->
+        <section
+            class="bg-gradient-to-b from-white to-primary/5 py-16 md:py-24"
+        >
             <div class="mx-auto px-4 max-w-7xl">
                 <div class="mb-12 text-center">
-                    <p
-                        class="mb-4 font-medium text-primary text-sm uppercase tracking-widest"
+                    <div
+                        class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full"
                     >
-                        TRUSTED BY ATHLETES
-                    </p>
+                        <Trophy className="w-5 h-5 text-primary" />
+                        <p
+                            class="font-medium text-primary text-sm uppercase tracking-widest"
+                        >
+                            TRUSTED BY ELITE ATHLETES
+                        </p>
+                    </div>
                     <h2
                         class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
                     >
-                        What <span class="text-primary">Elite Athletes</span> Say
+                        Trusted by <span class="text-primary"
+                            >Professional Athletes</span
+                        >
                     </h2>
                     <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
-                        Professional athletes trust Thetis Night Splint for
-                        their recovery
+                        Elite athletes choose Thetis Night Splint for their
+                        recovery. Lightweight, comfortable, and trusted by Team
+                        GB athletes.
                     </p>
                 </div>
-                <div class="mb-8">
-                    <AthletesBadges />
-                </div>
-                <div class="gap-6 grid md:grid-cols-2 lg:grid-cols-3 mt-12">
+
+                <!-- All Athlete Reviews -->
+                <div class="masonry-grid">
                     {
-                        athletes.slice(0, 3).map((athlete) => (
-                            <div class="bg-white shadow-sm p-6 border-2 border-primary/20 rounded-lg">
-                                <div class="flex items-start gap-4 mb-4">
-                                    <AstroImage
-                                        src={athlete.image}
-                                        alt={athlete.name}
-                                        class="flex-shrink-0 rounded-full w-14 h-14 object-cover"
-                                        width={56}
-                                        height={56}
+                        athletes.map((athlete) => {
+                            const athleteReview = {
+                                ...athlete,
+                                type: "athlete" as const,
+                                link: "",
+                                clinics: [],
+                                clinicImages: [],
+                                date: athlete.date || "2024-01-01",
+                            };
+                            return (
+                                <div class="masonry-item">
+                                    <ReviewCard
+                                        review={athleteReview}
+                                        client:load
                                     />
-                                    <div class="flex-1 min-w-0">
-                                        <p class="font-semibold text-neutral-900 text-base">
-                                            {athlete.name}
-                                        </p>
-                                        <p class="text-neutral-600 text-sm">
-                                            {athlete.description}
-                                        </p>
-                                    </div>
                                 </div>
-                                <p class="mb-2 font-bold text-neutral-900 text-lg">
-                                    {athlete.title}
-                                </p>
-                                <p class="text-neutral-700 text-sm italic leading-relaxed">
-                                    "{athlete.short}"
-                                </p>
-                            </div>
-                        ))
+                            );
+                        })
                     }
                 </div>
             </div>
         </section>
 
-        <!-- Clinician Testimonials -->
-        <ColorGradientInOut size="lg">
+        <style>
+            .masonry-grid {
+                columns: 1;
+                column-gap: 1.5rem;
+                width: 100%;
+            }
+
+            .masonry-grid > div {
+                margin-bottom: 1.5rem;
+                break-inside: avoid;
+            }
+
+            @media (min-width: 750px) {
+                .masonry-grid {
+                    columns: 2;
+                }
+            }
+
+            @media (min-width: 900px) {
+                .masonry-grid {
+                    columns: 3;
+                }
+            }
+        </style>
+
+        <!-- Surgeon Endorsements -->
+        <section
+            class="bg-gradient-to-b from-primary/5 to-white py-16 md:py-24"
+        >
             <div class="mx-auto px-4 max-w-7xl">
                 <div class="mb-12 text-center">
-                    <p
-                        class="mb-4 font-medium text-primary text-sm uppercase tracking-widest"
+                    <div
+                        class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full"
                     >
-                        PROFESSIONAL ENDORSEMENTS
-                    </p>
+                        <Stethoscope className="w-5 h-5 text-primary" />
+                        <p
+                            class="font-medium text-primary text-sm uppercase tracking-widest"
+                        >
+                            PROFESSIONAL ENDORSEMENTS
+                        </p>
+                    </div>
                     <h2
                         class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
                     >
@@ -460,32 +429,50 @@ const currentContent = content[lang as keyof typeof content];
                         >
                     </h2>
                     <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
-                        Our innovative solutions have earned the trust of
-                        healthcare professionals worldwide
+                        Healthcare professionals worldwide recommend Thetis
+                        Night Splint for safe, effective Achilles rupture
+                        recovery.
                     </p>
                 </div>
-                <div class="mb-8">
-                    <SurgeonsCarousel client:load />
-                </div>
-                <div class="mt-8 text-center">
-                    <a
-                        href="/reviews"
-                        class="inline-flex items-center gap-2 font-semibold text-primary text-lg hover:underline transition-colors"
-                    >
-                        Read More Professional Reviews
-                        <span class="text-xl">→</span>
-                    </a>
+
+                <!-- All Clinician Reviews -->
+                <div class="masonry-grid">
+                    {
+                        translatedClinicians.map((clinician) => {
+                            const content =
+                                clinician.content[lang] || clinician.content.en;
+                            const clinicianReview = {
+                                name: clinician.name,
+                                description: content.description,
+                                title: content.title,
+                                body: content.body,
+                                image: clinician.image,
+                                type: "clinician" as const,
+                                link: "",
+                                clinics: clinician.clinics || [],
+                                clinicImages: clinician.clinicImages || [],
+                                date: clinician.date || "2024-01-01",
+                                country: clinician.country,
+                                stars: 5,
+                                is_pinned: false,
+                            };
+                            return (
+                                <div class="masonry-item">
+                                    <ReviewCard
+                                        review={clinicianReview}
+                                        client:load
+                                    />
+                                </div>
+                            );
+                        })
+                    }
                 </div>
             </div>
-        </ColorGradientInOut>
+        </section>
 
         <ValuePropositions lang={lang} />
 
         <KeyFeatures lang={lang} />
-
-        <ReadyForRelief lang={lang} />
-
-        <ComfortableRecoveryReviews lang={lang} />
 
         <!-- Lazy load YouTube iframe -->
         <div class="relative mx-auto mt-8 w-full">
@@ -506,13 +493,6 @@ const currentContent = content[lang as keyof typeof content];
         <NightSplintInstructions lang={lang} />
 
         <NightSplintFAQs client:load lang={lang} />
-
-        <!-- Bundles & Frequently Bought Together - Moved to end -->
-        <section class="bg-neutral-50 dark:bg-neutral-900 py-12 md:py-16">
-            <div class="mx-auto px-4 max-w-4xl">
-                <BundlesAndRecommendations lang={lang} client:load />
-            </div>
-        </section>
 
         <OrderYourSplint lang={lang} />
 

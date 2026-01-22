@@ -64,7 +64,9 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
   const t = content[lang];
 
   // Get localized routes
-  const courseLinks = getCourseRoutesByLanguage(lang);
+  const courseLinks = getCourseRoutesByLanguage(lang).filter(
+    (course) => !course.href.includes("/course/professionals"),
+  );
   const productLinks = getProductRoutesByLanguage(lang).map((link) => {
     // Add image to the Achilles splint product
     if (link.slug === "achilles-rupture-splint") {

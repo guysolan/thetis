@@ -187,9 +187,9 @@ export const courseRoutes: BaseRoute[] = [
     variant: "outline",
   },
   {
-    slug: "course/standard",
+    slug: "course",
     title: {
-      en: "standard Course",
+      en: "Recovery Essentials Course",
       de: "Grundlagen-Kurs",
       fr: "Cours Essentiels",
       es: "Curso Esenciales",
@@ -208,13 +208,13 @@ export const courseRoutes: BaseRoute[] = [
         "31 lezioni strutturate che coprono ogni fase del recupero dalla rottura di Achille. Guida esperta per 29 €.",
     },
     slugTranslations: {
-      en: "course/standard",
-      de: "kurs/grundlagen",
-      fr: "cours/essentiels",
-      es: "curso/esenciales",
-      it: "corso/fondamentali",
+      en: "course",
+      de: "kurs",
+      fr: "cours",
+      es: "curso",
+      it: "corso",
     },
-    icon: <List />,
+    icon: <BookOpen />,
     variant: "default",
   },
   {
