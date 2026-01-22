@@ -16,14 +16,19 @@ import StickyAddToCart from "@/components/StickyAddToCart.tsx";
 import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import SurgeonsCarousel from "@/components/SurgeonsCarousel";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
 import { athletes } from "@/components/reviews/content/athletes";
 import { translatedClinicians } from "@/components/reviews/content/professional-opinions";
 import { Image as AstroImage } from "astro:assets";
-import { Trophy, Stethoscope } from "lucide-react";
+import { Trophy, Stethoscope, Check, Truck, ShieldCheck, RotateCcw } from "lucide-react";
 import { ReviewCard } from "@/components/reviews/ReviewCard.tsx";
+import WorkInHealthcare from "@/components/products/night-splint/WorkInHealthcare.astro";
+import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
 import type { Lang } from "@/config/languages.ts";
 
 const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const splintRoute = getRouteBySlugAndLanguage("splint", lang);
 
 const content = {
     en: {
@@ -73,15 +78,20 @@ const currentContent = content[lang as keyof typeof content];
     lang={lang}
 >
     <main>
-        <div class="mx-auto px-4 pt-4 max-w-7xl">
-            <Breadcrumb
-                items={[
-                    { label: "Products", href: "/products-for-torn-achilles" },
-                    { label: "Night Splint" },
-                ]}
-            />
-        </div>
         <NightSplintHero lang={lang} />
+
+        <!-- High-Impact Testimonial Quote -->
+        <section class="bg-gradient-to-b from-white to-primary/5 py-12">
+            <div class="mx-auto px-4 max-w-3xl text-center">
+                <blockquote
+                    class="mb-4 font-semibold text-neutral-900 text-2xl md:text-3xl italic"
+                >
+                    "It made a massive difference to getting a good night's
+                    rest."
+                </blockquote>
+                <p class="text-neutral-600">— Verified Patient, USA</p>
+            </div>
+        </section>
 
         <!-- Social Proof - Reviews -->
         <section class="bg-white py-16 md:py-20">
@@ -192,6 +202,64 @@ const currentContent = content[lang as keyof typeof content];
             </div>
         </section>
 
+        <!-- Guarantee Section -->
+        <section
+            class="bg-primary/10 py-16 md:py-20 border-primary/30 border-y"
+        >
+            <div class="mx-auto px-4 max-w-4xl">
+                <div class="mb-8 text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl"
+                    >
+                        30-Day Money-Back Guarantee
+                    </h2>
+                    <p class="mb-8 text-neutral-600 text-lg">
+                        Try the Thetis Night Splint risk-free. If it doesn't
+                        improve your sleep quality, we'll refund your
+                        purchase—no questions asked.
+                    </p>
+                </div>
+                <div class="gap-6 grid md:grid-cols-3">
+                    <div
+                        class="flex flex-col items-center gap-3 bg-white shadow-sm p-6 border border-primary/20 rounded-lg"
+                    >
+                        <div
+                            class="flex justify-center items-center bg-primary/10 rounded-full w-12 h-12"
+                        >
+                            <Truck className="w-6 h-6 text-primary" />
+                        </div>
+                        <span class="font-semibold text-neutral-900 text-sm"
+                            >Free shipping</span
+                        >
+                    </div>
+                    <div
+                        class="flex flex-col items-center gap-3 bg-white shadow-sm p-6 border border-primary/20 rounded-lg"
+                    >
+                        <div
+                            class="flex justify-center items-center bg-primary/10 rounded-full w-12 h-12"
+                        >
+                            <ShieldCheck className="w-6 h-6 text-primary" />
+                        </div>
+                        <span class="font-semibold text-neutral-900 text-sm"
+                            >30-day guarantee</span
+                        >
+                    </div>
+                    <div
+                        class="flex flex-col items-center gap-3 bg-white shadow-sm p-6 border border-primary/20 rounded-lg"
+                    >
+                        <div
+                            class="flex justify-center items-center bg-primary/10 rounded-full w-12 h-12"
+                        >
+                            <RotateCcw className="w-6 h-6 text-primary" />
+                        </div>
+                        <span class="font-semibold text-neutral-900 text-sm"
+                            >Easy returns</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Comparison Table: Night Splint vs Boot -->
         <section class="bg-white py-16 md:py-20 border-neutral-200 border-y">
             <div class="mx-auto px-4 max-w-5xl">
@@ -235,12 +303,14 @@ const currentContent = content[lang as keyof typeof content];
                                     Weight
                                 </td>
                                 <td class="p-4 text-red-800 text-center">
-                                    1.5kg+
+                                    <span class="text-2xl">✗</span>
+                                    <div class="mt-1">1.5kg+</div>
                                 </td>
                                 <td
                                     class="p-4 font-semibold text-primary text-center"
                                 >
-                                    200g (90% lighter)
+                                    <span class="text-2xl">✓</span>
+                                    <div class="mt-1">200g (90% lighter)</div>
                                 </td>
                             </tr>
                             <tr
@@ -250,13 +320,17 @@ const currentContent = content[lang as keyof typeof content];
                                     Breathability
                                 </td>
                                 <td class="p-4 text-red-800 text-center">
-                                    Enclosed, traps heat
+                                    <span class="text-2xl">✗</span>
+                                    <div class="mt-1">Enclosed, traps heat</div>
                                 </td>
                                 <td
                                     class="p-4 font-semibold text-primary text-center"
                                 >
-                                    Open design (exposes sole of foot and back
-                                    of leg)
+                                    <span class="text-2xl">✓</span>
+                                    <div class="mt-1">
+                                        Open design (exposes sole of foot and
+                                        back of leg)
+                                    </div>
                                 </td>
                             </tr>
                             <tr class="border-neutral-200 border-b">
@@ -264,12 +338,18 @@ const currentContent = content[lang as keyof typeof content];
                                     Cleanliness
                                 </td>
                                 <td class="p-4 text-red-800 text-center">
-                                    Dirt and debris in bed
+                                    <span class="text-2xl">✗</span>
+                                    <div class="mt-1">
+                                        Dirt and debris in bed
+                                    </div>
                                 </td>
                                 <td
                                     class="p-4 font-semibold text-primary text-center"
                                 >
-                                    Clean (no dirt in bed)
+                                    <span class="text-2xl">✓</span>
+                                    <div class="mt-1">
+                                        Clean (no dirt in bed)
+                                    </div>
                                 </td>
                             </tr>
                             <tr
@@ -279,12 +359,14 @@ const currentContent = content[lang as keyof typeof content];
                                     Showering
                                 </td>
                                 <td class="p-4 text-red-800 text-center">
-                                    Cannot shower in it
+                                    <span class="text-2xl">✗</span>
+                                    <div class="mt-1">Cannot shower in it</div>
                                 </td>
                                 <td
                                     class="p-4 font-semibold text-primary text-center"
                                 >
-                                    Can shower in it
+                                    <span class="text-2xl">✓</span>
+                                    <div class="mt-1">Can shower in it</div>
                                 </td>
                             </tr>
                             <tr class="border-neutral-200 border-b">
@@ -292,10 +374,12 @@ const currentContent = content[lang as keyof typeof content];
                                     Use Period
                                 </td>
                                 <td class="p-4 text-neutral-700 text-center">
-                                    Weeks 0-12
+                                    <span class="text-xl">=</span>
+                                    <div class="mt-1">Weeks 0-12</div>
                                 </td>
                                 <td class="p-4 text-neutral-700 text-center">
-                                    Weeks 0-12
+                                    <span class="text-xl">=</span>
+                                    <div class="mt-1">Weeks 0-12</div>
                                 </td>
                             </tr>
                             <tr
@@ -305,10 +389,12 @@ const currentContent = content[lang as keyof typeof content];
                                     Healing Angle
                                 </td>
                                 <td class="p-4 text-neutral-700 text-center">
-                                    30° plantarflexion
+                                    <span class="text-xl">=</span>
+                                    <div class="mt-1">30° plantarflexion</div>
                                 </td>
                                 <td class="p-4 text-neutral-700 text-center">
-                                    30° plantarflexion
+                                    <span class="text-xl">=</span>
+                                    <div class="mt-1">30° plantarflexion</div>
                                 </td>
                             </tr>
                         </tbody>
@@ -470,6 +556,134 @@ const currentContent = content[lang as keyof typeof content];
             </div>
         </section>
 
+        <!-- What to Expect Next Morning -->
+        <section class="bg-white py-16 md:py-20">
+            <div class="mx-auto px-4 max-w-5xl">
+                <div class="mb-12 text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                    >
+                        What to Expect the Next Morning
+                    </h2>
+                    <p class="text-neutral-600 text-lg">
+                        Wake up feeling the difference after your first night
+                    </p>
+                </div>
+                <div class="gap-8 grid md:grid-cols-3">
+                    <div class="text-center">
+                        <div class="mb-4 font-bold text-primary text-4xl">
+                            ✓
+                        </div>
+                        <h3 class="mb-2 font-semibold text-xl">
+                            Better Rested
+                        </h3>
+                        <p class="text-neutral-600">
+                            Sleep comfortably without the heavy boot. Wake up
+                            feeling refreshed and ready for the day.
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="mb-4 font-bold text-primary text-4xl">
+                            ✓
+                        </div>
+                        <h3 class="mb-2 font-semibold text-xl">Cleaner Bed</h3>
+                        <p class="text-neutral-600">
+                            No more dirt and debris from your walking boot. Keep
+                            your bed clean and comfortable.
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="mb-4 font-bold text-primary text-4xl">
+                            ✓
+                        </div>
+                        <h3 class="mb-2 font-semibold text-xl">
+                            Happier Partner
+                        </h3>
+                        <p class="text-neutral-600">
+                            Lightweight design means less disruption. Both of
+                            you can sleep peacefully through the night.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quality Assurance Badges -->
+        <section
+            class="bg-gradient-to-b from-white to-neutral-50 py-16 md:py-20"
+        >
+            <div class="mx-auto px-4 max-w-5xl">
+                <div class="mb-12 text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl"
+                    >
+                        Trusted by Thousands
+                    </h2>
+                    <p class="text-neutral-600 text-lg">
+                        Proven safety and effectiveness across the globe
+                    </p>
+                </div>
+                <div class="gap-6 grid md:grid-cols-4">
+                    <div
+                        class="bg-white shadow-sm p-6 border border-neutral-200 rounded-lg text-center"
+                    >
+                        <div class="mb-3 font-bold text-primary text-4xl">
+                            0
+                        </div>
+                        <p class="font-medium text-neutral-600 text-sm">
+                            Re-ruptures
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-6 border border-neutral-200 rounded-lg text-center"
+                    >
+                        <div class="mb-3 font-bold text-primary text-4xl">
+                            5,000+
+                        </div>
+                        <p class="font-medium text-neutral-600 text-sm">
+                            Patients
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-6 border border-neutral-200 rounded-lg text-center"
+                    >
+                        <div class="mb-3 font-bold text-primary text-4xl">
+                            9
+                        </div>
+                        <p class="font-medium text-neutral-600 text-sm">
+                            Countries
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-6 border border-neutral-200 rounded-lg text-center"
+                    >
+                        <div class="mb-3 font-bold text-primary text-4xl">
+                            2022
+                        </div>
+                        <p class="font-medium text-neutral-600 text-sm">
+                            Since
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work in Healthcare Section -->
+        <section class="bg-neutral-50 py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mx-auto max-w-4xl">
+                    <WorkInHealthcare lang={lang} />
+                </div>
+            </div>
+        </section>
+
+        <!-- Subscribe: recovery tips -->
+        <div class="bg-white dark:bg-neutral-950 py-10 md:py-12">
+            <div class="mx-auto px-4 max-w-3xl">
+                <SubscribeBlock source="splint_page" />
+            </div>
+        </div>
+
         <ValuePropositions lang={lang} />
 
         <KeyFeatures lang={lang} />
@@ -494,12 +708,19 @@ const currentContent = content[lang as keyof typeof content];
 
         <NightSplintFAQs client:load lang={lang} />
 
-        <OrderYourSplint lang={lang} />
+        <div id="order" class="scroll-mt-24">
+            <OrderYourSplint lang={lang} />
+        </div>
 
         <SplintDownloads lang={lang} />
 
-        <!-- Sticky Add to Cart -->
-        <StickyAddToCart lang={lang} client:load />
+        <!-- Sticky Add to Cart (adapted for both splint + course) -->
+        <StickyAddToCart
+            variant="splint"
+            lang={lang}
+            splintHref={splintRoute?.href || "/achilles-rupture-splint"}
+            client:load
+        />
 
         <!-- Exit Intent Popup -->
         <ExitIntentPopup client:load />

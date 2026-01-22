@@ -2,15 +2,13 @@
 import Layout from "@/layouts/Layout.astro";
 import ColorGradient from "@/components/ColorGradient.astro";
 import HighlightedWord from "@/components/HighlightedWord";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { Video, Upload, Check, ArrowLeft, DollarSign } from "lucide-react";
+import { Video, Check, ArrowLeft, Banknote, Image } from "lucide-react";
 import { VideoReviewForm } from "@/components/VideoReviewForm";
 ---
 
 <Layout
-    title="Submit Video Review - Earn $10 Cashback | Thetis Medical"
-    description="Upload your video review of our night splint and earn $10 cashback if approved. Help others while earning back!"
+    title="Submit Video Review - Earn £10/$15 Cashback | Thetis Medical"
+    description="Upload your video or photo review of our night splint and earn £10 / $15 cashback if approved. Help others while earning back!"
     image="https://thetismedical.com/images/night-splint.png"
     lang="en"
 >
@@ -18,7 +16,7 @@ import { VideoReviewForm } from "@/components/VideoReviewForm";
         <ColorGradient>
             <div class="mx-auto px-4 py-16 md:py-24 max-w-4xl text-center">
                 <a
-                    href="/amazon-customers"
+                    href="/splint-customer"
                     class="inline-flex items-center gap-2 mb-6 font-medium text-primary hover:text-primary/80 text-sm"
                 >
                     <ArrowLeft className="w-4 h-4" />
@@ -27,20 +25,20 @@ import { VideoReviewForm } from "@/components/VideoReviewForm";
                 <div
                     class="inline-flex items-center gap-2 bg-primary/10 dark:bg-primary/20 mb-4 px-4 py-2 rounded-full font-semibold text-primary text-sm"
                 >
-                    <DollarSign className="w-4 h-4" />
-                    Earn $10 Cashback
+                    <Banknote className="w-4 h-4" />
+                    Earn £10 / $15 Cashback
                 </div>
                 <h1
                     class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-4xl md:text-5xl"
                 >
-                    Submit Your <HighlightedWord>Video Review</HighlightedWord>
+                    Submit Your <HighlightedWord>Review</HighlightedWord>
                 </h1>
                 <p
                     class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg md:text-xl"
                 >
                     Share your experience with our night splint and help others
-                    on their recovery journey. If your video is approved, you'll
-                    receive $10 cashback.
+                    on their recovery journey. If your review is approved,
+                    you'll receive <strong>£10 or $15 cashback</strong>.
                 </p>
             </div>
         </ColorGradient>
@@ -64,7 +62,17 @@ import { VideoReviewForm } from "@/components/VideoReviewForm";
                                 className="mt-0.5 w-5 h-5 text-primary shrink-0"
                             />
                             <span>
-                                Video should be at least 30 seconds long
+                                <strong>Video:</strong> At least 30 seconds long
+                                showing your experience
+                            </span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <Check
+                                className="mt-0.5 w-5 h-5 text-primary shrink-0"
+                            />
+                            <span>
+                                <strong>Photos:</strong> Clear images of you using
+                                the splint (alternative to video)
                             </span>
                         </li>
                         <li class="flex items-start gap-3">
@@ -81,8 +89,8 @@ import { VideoReviewForm } from "@/components/VideoReviewForm";
                                 className="mt-0.5 w-5 h-5 text-primary shrink-0"
                             />
                             <span>
-                                Show how you use the splint (optional but
-                                helpful)
+                                Show how you use the splint (for sleeping,
+                                resting, etc.)
                             </span>
                         </li>
                         <li class="flex items-start gap-3">
@@ -92,15 +100,6 @@ import { VideoReviewForm } from "@/components/VideoReviewForm";
                             <span>
                                 Keep it respectful and appropriate for all
                                 audiences
-                            </span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <Check
-                                className="mt-0.5 w-5 h-5 text-primary shrink-0"
-                            />
-                            <span>
-                                Reviews are typically approved within 3-5
-                                business days
                             </span>
                         </li>
                     </ul>
@@ -126,12 +125,19 @@ import { VideoReviewForm } from "@/components/VideoReviewForm";
                         class="space-y-3 text-neutral-600 dark:text-neutral-400 text-sm list-decimal list-inside"
                     >
                         <li>
-                            We'll review your video submission (usually within
-                            3-5 business days)
+                            We'll review your submission (usually within 3-5
+                            business days)
                         </li>
                         <li>
-                            If approved, you'll receive an email with
-                            instructions to claim your $10 cashback
+                            If approved, you'll receive an email with a link to
+                            claim your cashback
+                        </li>
+                        <li>
+                            Complete the <a
+                                href="/splint-customer/claim-cashback"
+                                class="text-primary hover:underline"
+                                >cashback claim form</a
+                            > with your payment details
                         </li>
                         <li>
                             Cashback is paid via PayPal or bank transfer within
@@ -142,6 +148,22 @@ import { VideoReviewForm } from "@/components/VideoReviewForm";
                             your permission)
                         </li>
                     </ol>
+                </div>
+
+                <!-- Already submitted? -->
+                <div class="mt-8 text-center">
+                    <p
+                        class="mb-3 text-neutral-600 dark:text-neutral-400 text-sm"
+                    >
+                        Already submitted and approved?
+                    </p>
+                    <a
+                        href="/splint-customer/claim-cashback"
+                        class="inline-flex items-center gap-2 font-medium text-primary hover:text-primary/80"
+                    >
+                        <Banknote className="w-4 h-4" />
+                        Claim Your Cashback →
+                    </a>
                 </div>
             </div>
         </section>

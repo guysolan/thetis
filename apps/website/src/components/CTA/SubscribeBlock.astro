@@ -1,0 +1,79 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Mail } from "lucide-react";
+
+interface Props {
+    /** Optional variant: "section" (default) or "compact" */
+    variant?: "section" | "compact";
+    /** Formspree source tag for analytics */
+    source?: string;
+}
+
+const { variant = "section", source = "subscribe_block" } = Astro.props;
+---
+
+<section
+    class={cn(
+        "rounded-xl border border-primary/20 dark:border-primary/30",
+        variant === "section" &&
+            "bg-primary/5 dark:bg-primary/10 py-8 md:py-10 px-6 md:px-8",
+        variant === "compact" && "bg-primary/5 dark:bg-primary/10 p-5",
+    )}
+>
+    <div
+        class={cn(
+            "flex flex-col gap-4",
+            variant === "section" ? "max-w-xl" : "max-w-md",
+        )}
+    >
+        <div class="flex items-center gap-2">
+            <div
+                class="flex justify-center items-center bg-primary/10 dark:bg-primary/20 rounded-lg w-9 h-9 shrink-0"
+            >
+                <Mail className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+                <h3 class="font-semibold text-neutral-900 dark:text-neutral-100">
+                    Get recovery tips by email & SMS
+                </h3>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+                    Free guidance. Unsubscribe anytime.
+                </p>
+            </div>
+        </div>
+
+        <form
+            action="https://formspree.io/f/xbjvlval"
+            method="POST"
+            class="flex flex-col sm:flex-row gap-2 w-full"
+        >
+            <input type="hidden" name="_subject" value="Newsletter signup" />
+            <input type="hidden" name="source" value={source} />
+            <input
+                type="email"
+                name="email"
+                required
+                placeholder="Email"
+                autocomplete="email"
+                class="flex-1 min-w-0 bg-white dark:bg-neutral-800 px-3 py-2.5 border border-neutral-200 dark:border-neutral-700 rounded-lg text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+            <input
+                type="tel"
+                name="phone"
+                placeholder="Phone (optional)"
+                autocomplete="tel"
+                class="flex-1 min-w-0 bg-white dark:bg-neutral-800 px-3 py-2.5 border border-neutral-200 dark:border-neutral-700 rounded-lg text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-primary sm:max-w-[140px]"
+            />
+            <button
+                type="submit"
+                class={cn(
+                    buttonVariants({ variant: "default", size: "default" }),
+                    "shrink-0",
+                )}
+            >
+                Subscribe
+            </button>
+        </form>
+    </div>
+</section>

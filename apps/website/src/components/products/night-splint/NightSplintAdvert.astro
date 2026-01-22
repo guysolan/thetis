@@ -12,8 +12,8 @@ interface Props {
 
 const { lang = "en" } = Astro.props;
 
-// Get the buy-now route for the current language
-const buyNowRoute = getRouteBySlugAndLanguage("buy-now", lang);
+// Get the splint route for the current language
+const splintRoute = getRouteBySlugAndLanguage("splint", lang);
 
 const content = {
     en: {
@@ -54,8 +54,8 @@ const content = {
 };
 
 const currentContent = content[lang];
-const buttonUrl = buyNowRoute?.href || "/buy-now";
-const buttonText = buyNowRoute?.title || currentContent.buttonText;
+const buttonUrl = splintRoute?.href || "/achilles-rupture-splint";
+const buttonText = currentContent.buttonText;
 ---
 
 <div

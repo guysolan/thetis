@@ -54,53 +54,43 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
     <div className={`text-left w-full flex flex-col ${className}`}>
       <div className="flex flex-col justify-start items-start my-4 w-full">
         <WhatSizeAmI lang={lang} />
-        <div className="flex flex-wrap gap-x-6 gap-y-3">
+        <div className="flex flex-wrap gap-3 items-center">
           {/* Size selector */}
-          <div className="flex items-center gap-2">
-            <label className="text-neutral-500 dark:text-neutral-400 text-sm">
-              {t.size}:
-            </label>
-            <div className="inline-flex items-center bg-neutral-100 dark:bg-neutral-800 p-1 rounded-md h-9">
-              {sizes.map((size) => (
-                <button
-                  key={size}
-                  type="button"
-                  onClick={() => setCurrentSize(size)}
-                  aria-pressed={currentSize === size}
-                  className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all ${
-                    currentSize === size
-                      ? "bg-primary text-white shadow-sm"
-                      : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-neutral-50"
-                  }`}
-                >
-                  {size.charAt(0).toUpperCase() + size.slice(1)}
-                </button>
-              ))}
-            </div>
+          <div className="inline-flex items-center bg-neutral-100 dark:bg-neutral-800 p-0.5 rounded-md h-8">
+            {sizes.map((size) => (
+              <button
+                key={size}
+                type="button"
+                onClick={() => setCurrentSize(size)}
+                aria-pressed={currentSize === size}
+                className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1 text-xs font-medium transition-all ${
+                  currentSize === size
+                    ? "bg-primary text-white shadow-sm"
+                    : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300"
+                }`}
+              >
+                {size.charAt(0).toUpperCase() + size.slice(1)}
+              </button>
+            ))}
           </div>
 
           {/* Side selector */}
-          <div className="flex items-center gap-2">
-            <label className="text-neutral-500 dark:text-neutral-400 text-sm">
-              {t.side}:
-            </label>
-            <div className="inline-flex items-center bg-neutral-100 dark:bg-neutral-800 p-1 rounded-md h-9">
-              {sides.map((side) => (
-                <button
-                  key={side}
-                  type="button"
-                  onClick={() => setCurrentSide(side)}
-                  aria-pressed={currentSide === side}
-                  className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all ${
-                    currentSide === side
-                      ? "bg-primary text-white shadow-sm"
-                      : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-neutral-50"
-                  }`}
-                >
-                  {side.charAt(0).toUpperCase() + side.slice(1)}
-                </button>
-              ))}
-            </div>
+          <div className="inline-flex items-center bg-neutral-100 dark:bg-neutral-800 p-0.5 rounded-md h-8">
+            {sides.map((side) => (
+              <button
+                key={side}
+                type="button"
+                onClick={() => setCurrentSide(side)}
+                aria-pressed={currentSide === side}
+                className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1 text-xs font-medium transition-all ${
+                  currentSide === side
+                    ? "bg-primary text-white shadow-sm"
+                    : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300"
+                }`}
+              >
+                {side.charAt(0).toUpperCase() + side.slice(1)}
+              </button>
+            ))}
           </div>
         </div>
       </div>

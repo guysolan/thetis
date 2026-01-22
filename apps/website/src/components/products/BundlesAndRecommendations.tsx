@@ -22,11 +22,6 @@ const content = {
             title: "Frequently Bought Together",
             description: "Complete your recovery kit",
         },
-        freeCourse: {
-            title: "Free Recovery Email Course",
-            description: "Week-by-week guidance timed to your injury",
-            cta: "Get Free Course",
-        },
     },
 };
 
@@ -47,10 +42,6 @@ export function BundlesAndRecommendations({
         }
     };
 
-    const handleEmailCourse = () => {
-        window.location.href = "/course/emails";
-    };
-
     return (
         <div className="space-y-8">
             {/* Frequently Bought Together */}
@@ -66,35 +57,6 @@ export function BundlesAndRecommendations({
                 </p>
 
                 <div className="space-y-3">
-                    {/* Free Email Course */}
-                    <div className="flex items-center gap-4 bg-white dark:bg-neutral-800 p-4 border border-primary/20 rounded-lg">
-                        <div className="flex-shrink-0">
-                            <div className="flex justify-center items-center bg-primary/10 rounded-lg w-12 h-12">
-                                <Mail className="w-6 h-6 text-primary" />
-                            </div>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                            <h4 className="font-medium text-neutral-900 dark:text-neutral-100 text-sm">
-                                {t.freeCourse.title}
-                            </h4>
-                            <p className="mt-0.5 text-neutral-500 dark:text-neutral-400 text-xs">
-                                {t.freeCourse.description}
-                            </p>
-                            <span className="inline-block mt-1 font-semibold text-green-600 text-xs">
-                                FREE
-                            </span>
-                        </div>
-                        <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={handleEmailCourse}
-                            className="hover:bg-primary border-primary text-primary hover:text-white shrink-0"
-                        >
-                            {t.freeCourse.cta}
-                            <ArrowRight className="ml-1 w-3 h-3" />
-                        </Button>
-                    </div>
-
                     {/* Essentials Course */}
                     <div className="flex items-center gap-4 bg-white dark:bg-neutral-800 p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg">
                         <div className="flex-shrink-0">
@@ -155,10 +117,6 @@ export function BundlesAndRecommendations({
                     <div className="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
                         <span className="text-primary">✓</span>
                         <span>Recovery Essentials Course</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
-                        <span className="text-primary">✓</span>
-                        <span>Free Email Course</span>
                     </div>
                 </div>
 

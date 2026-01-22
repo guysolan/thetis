@@ -26,7 +26,7 @@ export const UPSELL_PRODUCTS = {
         description: "Sleep comfortably while your tendon heals",
         price: "£69.99",
         image: "/images/night_splint_square_small.jpg",
-        href: "/buy-now",
+        href: "/achilles-rupture-splint",
         variantId: SPLINT_VARIANTS["large-left"], // Default variant for upsell
         canAddToCart: true,
     },

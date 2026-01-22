@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { format } from "date-fns";
-import { CalendarIcon } from "@radix-ui/react-icons";
+import { Calendar as CalendarIcon } from "lucide-react";
 import { Mail } from "lucide-react";
 import { cn } from "../utils";
 import { Button } from "./button";

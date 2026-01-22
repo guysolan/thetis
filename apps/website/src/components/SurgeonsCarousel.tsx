@@ -9,8 +9,10 @@ import {
 } from "@thetis/ui/carousel";
 import { translatedClinicians } from "./reviews/content/professional-opinions";
 
+const navButtonBase =
+    "static flex justify-center items-center rounded-full border-2 border-primary bg-white text-primary shadow-md hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 disabled:opacity-40 disabled:pointer-events-none translate-x-0 translate-y-0 h-11 w-11 md:h-12 md:w-12 [&>svg]:w-5 [&>svg]:h-5";
+
 export default function SurgeonsCarousel() {
-    // Show all clinicians so there's content to scroll through
     const clinicians = translatedClinicians;
 
     return (
@@ -62,9 +64,17 @@ export default function SurgeonsCarousel() {
                             );
                         })}
                     </CarouselContent>
-                    <div className="flex justify-center gap-4 mt-6 pt-4 border-gray-200 border-t">
-                        <CarouselPrevious className="static rounded-full aspect-square rotate-90 translate-x-0 translate-y-0" />
-                        <CarouselNext className="static rounded-full aspect-square rotate-90 translate-x-0 translate-y-0" />
+                    <div className="flex justify-center gap-4 mt-6 pt-4 border-neutral-200 dark:border-neutral-700 border-t">
+                        <CarouselPrevious
+                            variant="ghost"
+                            size="icon"
+                            className={`${navButtonBase} rotate-90`}
+                        />
+                        <CarouselNext
+                            variant="ghost"
+                            size="icon"
+                            className={`${navButtonBase} rotate-90`}
+                        />
                     </div>
                 </Carousel>
             </div>
@@ -116,9 +126,17 @@ export default function SurgeonsCarousel() {
                             );
                         })}
                     </CarouselContent>
-                    <div className="flex justify-center gap-4 mt-6 pt-4 border-gray-200 border-t">
-                        <CarouselPrevious className="static rounded-full aspect-square translate-x-0 translate-y-0" />
-                        <CarouselNext className="static rounded-full aspect-square translate-x-0 translate-y-0" />
+                    <div className="flex justify-center gap-4 mt-6 pt-4 border-neutral-200 dark:border-neutral-700 border-t">
+                        <CarouselPrevious
+                            variant="ghost"
+                            size="icon"
+                            className={navButtonBase}
+                        />
+                        <CarouselNext
+                            variant="ghost"
+                            size="icon"
+                            className={navButtonBase}
+                        />
                     </div>
                 </Carousel>
             </div>

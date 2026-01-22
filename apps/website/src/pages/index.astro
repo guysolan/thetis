@@ -18,6 +18,7 @@ import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
 import ColorGradientInOut from "@/components/ColorGradientInOut.astro";
 import AthletesBadges from "@/components/AthletesBadges.astro";
 import SurgeonsCarousel from "@/components/SurgeonsCarousel";
+import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
 ---
 
 <ThetisSchema slot="head" />
@@ -561,26 +562,6 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-4">
-                                <div
-                                    class="flex flex-shrink-0 justify-center items-center bg-primary/10 rounded-lg w-10 h-10"
-                                >
-                                    <span class="font-bold text-primary text-xl"
-                                        >✓</span
-                                    >
-                                </div>
-                                <div>
-                                    <p
-                                        class="mb-1 font-semibold text-neutral-900"
-                                    >
-                                        Free Email Course Available
-                                    </p>
-                                    <p class="text-neutral-600 text-sm">
-                                        Start with our free course, or upgrade
-                                        for premium content and support.
-                                    </p>
-                                </div>
-                            </div>
                         </div>
 
                         <!-- Highlight Box -->
@@ -609,7 +590,7 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
                                 href="/course"
                                 class="inline-flex justify-center items-center px-4 font-semibold text-primary text-lg hover:underline"
                             >
-                                Start Free Email Course
+                                Learn More →
                             </a>
                         </div>
                     </div>
@@ -663,6 +644,13 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
                 </div>
             </div>
         </ColorGradientInOut>
+
+        <!-- Subscribe: recovery tips -->
+        <div class="bg-neutral-50 dark:bg-neutral-900 py-10 md:py-12">
+            <div class="mx-auto px-4 max-w-3xl">
+                <SubscribeBlock source="home_page" />
+            </div>
+        </div>
 
         <!-- Our Story - Enhanced -->
         <section class="py-16 md:py-24">
@@ -748,9 +736,11 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
                     <div
                         class="bg-white shadow-sm hover:shadow-md p-8 border-2 border-primary/20 rounded-lg transition-shadow"
                     >
-                        <p class="mb-2 font-bold text-primary text-4xl">100+</p>
+                        <p class="mb-2 font-bold text-primary text-4xl">
+                            20,000+
+                        </p>
                         <p class="font-semibold text-neutral-900">
-                            Research Papers Reviewed
+                            Achilles Rupture Readers
                         </p>
                         <p class="mt-2 text-neutral-600 text-sm">
                             Evidence-based recovery
@@ -761,7 +751,7 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
                     href="/course"
                     class="inline-block mb-8 font-semibold text-primary text-lg hover:underline"
                 >
-                    Get Email Course Free →
+                    View Recovery Course →
                 </a>
             </div>
         </section>
@@ -803,7 +793,7 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
                             "w-full sm:w-auto text-lg font-semibold",
                         )}
                     >
-                        Start Free Course
+                        View Recovery Course
                     </a>
                 </div>
                 <div class="flex flex-wrap justify-center gap-4 mb-6 text-sm">
@@ -888,7 +878,7 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
                     "flex-1 text-center",
                 )}
             >
-                Free Course
+                Recovery Course
             </a>
         </div>
     </div>

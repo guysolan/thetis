@@ -52,7 +52,7 @@ export default function ConfusedSection() {
                             href="/course"
                             className="inline-flex justify-center items-center font-semibold text-primary text-lg hover:underline"
                         >
-                            Get Email Course Free
+                            Learn More →
                         </a>
                     </div>
 
@@ -73,13 +73,6 @@ export default function ConfusedSection() {
                                 className="text-primary hover:underline"
                             >
                                 Standard Course
-                            </a>
-                            <span className="text-neutral-300">•</span>
-                            <a
-                                href="/course/premium"
-                                className="text-primary hover:underline"
-                            >
-                                Premium Course
                             </a>
                             <span className="text-neutral-300">•</span>
                             <a

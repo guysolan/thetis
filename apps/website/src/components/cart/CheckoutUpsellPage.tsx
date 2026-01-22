@@ -12,7 +12,7 @@ import {
     initializeCart,
     removeItem,
 } from "@/lib/shopify/cart-store";
-import { formatPrice } from "@/lib/shopify/storefront";
+import { formatPrice, getVariantPrice } from "@/lib/shopify/storefront";
 import { getUpsellSuggestions } from "@/lib/shopify/products";
 import {
     Accordion,
@@ -104,7 +104,7 @@ export function CheckoutUpsellPage() {
     };
 
     const handleContinueShopping = () => {
-        window.location.href = "/buy-now";
+        window.location.href = "/achilles-rupture-splint";
     };
 
     const handleRemoveItem = async (lineId: string) => {
@@ -162,6 +162,22 @@ export function CheckoutUpsellPage() {
                                 key={line.id}
                                 className="flex justify-between items-start gap-4 bg-white dark:bg-neutral-800 p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg"
                             >
+                                {/* Product Image */}
+                                {line.merchandise.product.featuredImage?.url
+                                    ? (
+                                        <img
+                                            src={line.merchandise.product.featuredImage.url}
+                                            alt={line.merchandise.product.featuredImage.altText ||
+                                                line.merchandise.product.title}
+                                            className="border border-neutral-200 dark:border-neutral-700 rounded-md w-20 h-20 object-cover shrink-0"
+                                        />
+                                    )
+                                    : (
+                                        <div className="flex justify-center items-center bg-neutral-200 dark:bg-neutral-700 rounded-md w-20 h-20 shrink-0">
+                                            <ShoppingBag className="w-8 h-8 text-neutral-400" />
+                                        </div>
+                                    )}
+
                                 <div className="flex-1 min-w-0">
                                     <p className="font-medium text-neutral-900 dark:text-neutral-100 text-sm">
                                         {line.merchandise.product.title}
@@ -187,7 +203,7 @@ export function CheckoutUpsellPage() {
                                 <button
                                     onClick={() => handleRemoveItem(line.id)}
                                     disabled={isRemoving === line.id}
-                                    className="disabled:opacity-50 p-2 text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                                    className="disabled:opacity-50 p-2 text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors shrink-0"
                                     aria-label="Remove item"
                                 >
                                     {isRemoving === line.id
@@ -217,292 +233,16 @@ export function CheckoutUpsellPage() {
                                 );
 
                                 return (
-                                    <div
+                                    <UpsellProductCard
                                         key={product.variantId}
-                                        className={`p-6 rounded-xl border-2 transition-all bg-white dark:bg-neutral-800 ${
-                                            isAdded
-                                                ? "border-green-500 bg-green-50 dark:bg-green-900/20"
-                                                : "border-primary/30 hover:border-primary shadow-sm"
-                                        }`}
-                                    >
-                                        <div className="flex items-start gap-4">
-                                            <div className="flex justify-center items-center bg-neutral-100 dark:bg-neutral-700 rounded-lg w-24 h-24 shrink-0">
-                                                <ShoppingBag className="w-10 h-10 text-neutral-400" />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <h3 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
-                                                    {product.title}
-                                                </h3>
-                                                <p className="mb-4 text-neutral-500 dark:text-neutral-400 text-sm">
-                                                    {product.description}
-                                                </p>
-                                                <div className="flex justify-between items-center mb-2">
-                                                    <span className="font-bold text-primary text-xl">
-                                                        {product.price}
-                                                    </span>
-                                                    {isAdded
-                                                        ? (
-                                                            <span className="flex items-center gap-2 font-medium text-green-600 dark:text-green-400">
-                                                                <Check className="w-5 h-5" />
-                                                                Added to Order
-                                                            </span>
-                                                        )
-                                                        : (
-                                                            <Button
-                                                                size="default"
-                                                                onClick={() =>
-                                                                    handleAddItem(
-                                                                        product
-                                                                            .variantId,
-                                                                    )}
-                                                                disabled={isAdding ||
-                                                                    !product
-                                                                        .canAddToCart}
-                                                            >
-                                                                {isAdding
-                                                                    ? (
-                                                                        <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-                                                                    )
-                                                                    : null}
-                                                                Add to Order
-                                                            </Button>
-                                                        )}
-                                                </div>
-                                                {/* Course Info Accordion */}
-                                                {isCourse && (() => {
-                                                    const isEssentials = product
-                                                        .variantId.includes(
-                                                            "52265314353480",
-                                                        );
-                                                    const isProfessionals =
-                                                        product.variantId
-                                                            .includes(
-                                                                "52265315828040",
-                                                            );
-                                                    const courseType =
-                                                        isEssentials
-                                                            ? "standard"
-                                                            : isProfessionals
-                                                            ? "premium"
-                                                            : null;
-                                                    const course = courseType
-                                                        ? courseData[courseType]
-                                                        : null;
-
-                                                    if (!course) return null;
-
-                                                    return (
-                                                        <Accordion
-                                                            type="single"
-                                                            collapsible
-                                                            className="mt-2 w-full"
-                                                        >
-                                                            <AccordionItem
-                                                                value="course-info"
-                                                                className="border-none"
-                                                            >
-                                                                <AccordionTrigger className="py-2 font-medium text-primary text-sm hover:no-underline">
-                                                                    Learn more
-                                                                    about this
-                                                                    course
-                                                                </AccordionTrigger>
-                                                                <AccordionContent className="pt-2 pb-0">
-                                                                    <div className="space-y-4">
-                                                                        {/* Description */}
-                                                                        <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                                                                            {course
-                                                                                .description}
-                                                                        </p>
-
-                                                                        {/* Features */}
-                                                                        <div>
-                                                                            <h5 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-                                                                                What's
-                                                                                Included
-                                                                            </h5>
-                                                                            <div className="space-y-1.5">
-                                                                                {course
-                                                                                    .features
-                                                                                    .map(
-                                                                                        (
-                                                                                            feature,
-                                                                                            index,
-                                                                                        ) => (
-                                                                                            <div
-                                                                                                key={index}
-                                                                                                className="flex items-start gap-2"
-                                                                                            >
-                                                                                                <Check className="mt-0.5 w-3.5 h-3.5 text-primary shrink-0" />
-                                                                                                <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-                                                                                                    {feature}
-                                                                                                </span>
-                                                                                            </div>
-                                                                                        ),
-                                                                                    )}
-                                                                            </div>
-                                                                        </div>
-
-                                                                        {/* What You'll Learn (Standard) or Video Topics (Premium) */}
-                                                                        {courseType ===
-                                                                                "standard" &&
-                                                                            "whatYoullLearn" in
-                                                                                course &&
-                                                                            course
-                                                                                .whatYoullLearn &&
-                                                                            (
-                                                                                <div>
-                                                                                    <h5 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-                                                                                        What
-                                                                                        You'll
-                                                                                        Learn
-                                                                                    </h5>
-                                                                                    <div className="space-y-2">
-                                                                                        {course
-                                                                                            .whatYoullLearn
-                                                                                            .map(
-                                                                                                (
-                                                                                                    item:
-                                                                                                        {
-                                                                                                            title:
-                                                                                                                string;
-                                                                                                            description:
-                                                                                                                string;
-                                                                                                        },
-                                                                                                    index:
-                                                                                                        number,
-                                                                                                ) => (
-                                                                                                    <div
-                                                                                                        key={index}
-                                                                                                        className="bg-neutral-50 dark:bg-neutral-800 p-3 rounded text-sm"
-                                                                                                    >
-                                                                                                        <h6 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-                                                                                                            {item
-                                                                                                                .title}
-                                                                                                        </h6>
-                                                                                                        <p className="text-neutral-600 dark:text-neutral-400 text-xs">
-                                                                                                            {item
-                                                                                                                .description}
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                ),
-                                                                                            )}
-                                                                                    </div>
-                                                                                </div>
-                                                                            )}
-
-                                                                        {courseType ===
-                                                                                "premium" &&
-                                                                            "videoTopics" in
-                                                                                course &&
-                                                                            course
-                                                                                .videoTopics &&
-                                                                            (
-                                                                                <div>
-                                                                                    <div className="flex items-center gap-2 mb-2">
-                                                                                        <Video className="w-4 h-4 text-primary" />
-                                                                                        <h5 className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-                                                                                            Expert
-                                                                                            Video
-                                                                                            Lessons
-                                                                                        </h5>
-                                                                                    </div>
-                                                                                    <div className="space-y-2">
-                                                                                        {course
-                                                                                            .videoTopics
-                                                                                            .map(
-                                                                                                (
-                                                                                                    topic:
-                                                                                                        {
-                                                                                                            title:
-                                                                                                                string;
-                                                                                                            description:
-                                                                                                                string;
-                                                                                                        },
-                                                                                                    index:
-                                                                                                        number,
-                                                                                                ) => (
-                                                                                                    <div
-                                                                                                        key={index}
-                                                                                                        className="bg-neutral-50 dark:bg-neutral-800 p-3 rounded text-sm"
-                                                                                                    >
-                                                                                                        <h6 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-                                                                                                            {topic
-                                                                                                                .title}
-                                                                                                        </h6>
-                                                                                                        <p className="text-neutral-600 dark:text-neutral-400 text-xs">
-                                                                                                            {topic
-                                                                                                                .description}
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                ),
-                                                                                            )}
-                                                                                    </div>
-                                                                                </div>
-                                                                            )}
-                                                                    </div>
-                                                                </AccordionContent>
-                                                            </AccordionItem>
-                                                        </Accordion>
-                                                    );
-                                                })()}
-                                            </div>
-                                        </div>
-
-                                        {/* Benefits */}
-                                        {!isAdded &&
-                                            primaryUpsell &&
-                                            product === primaryUpsell && (
-                                            <div className="mt-6 pt-6 border-primary/20 border-t">
-                                                <ul className="space-y-3">
-                                                    {isSplintUpsell
-                                                        ? (
-                                                            <>
-                                                                <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
-                                                                    <Check className="w-5 h-5 text-primary shrink-0" />
-                                                                    Sleep
-                                                                    comfortably
-                                                                    without the
-                                                                    heavy boot
-                                                                </li>
-                                                                <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
-                                                                    <Check className="w-5 h-5 text-primary shrink-0" />
-                                                                    Shower
-                                                                    safely with
-                                                                    protection
-                                                                </li>
-                                                                <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
-                                                                    <Check className="w-5 h-5 text-primary shrink-0" />
-                                                                    Trusted by
-                                                                    5,000+
-                                                                    patients
-                                                                </li>
-                                                            </>
-                                                        )
-                                                        : (
-                                                            <>
-                                                                <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
-                                                                    <Check className="w-5 h-5 text-primary shrink-0" />
-                                                                    31
-                                                                    structured
-                                                                    lessons
-                                                                </li>
-                                                                <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
-                                                                    <Check className="w-5 h-5 text-primary shrink-0" />
-                                                                    Boot
-                                                                    comparison
-                                                                    guide
-                                                                </li>
-                                                                <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
-                                                                    <Check className="w-5 h-5 text-primary shrink-0" />
-                                                                    Week-by-week
-                                                                    timeline
-                                                                </li>
-                                                            </>
-                                                        )}
-                                                </ul>
-                                            </div>
-                                        )}
-                                    </div>
+                                        product={product}
+                                        isAdded={isAdded}
+                                        isCourse={isCourse}
+                                        isPrimaryUpsell={product === primaryUpsell}
+                                        isSplintUpsell={isSplintUpsell}
+                                        onAdd={() => handleAddItem(product.variantId)}
+                                        isAdding={isAdding}
+                                    />
                                 );
                             })}
                         </div>
@@ -558,6 +298,313 @@ export function CheckoutUpsellPage() {
                 <TrustClaims className="mt-6" variant="expanded" />
             </div>
         </main>
+    );
+}
+
+// Upsell Product Card Component with Shopify API price fetching
+interface UpsellProductCardProps {
+    product: {
+        title: string;
+        description: string;
+        price: string;
+        image?: string;
+        href: string;
+        variantId: string;
+        canAddToCart?: boolean;
+    };
+    isAdded: boolean;
+    isCourse: boolean;
+    isPrimaryUpsell: boolean;
+    isSplintUpsell: boolean;
+    onAdd: () => void;
+    isAdding: boolean;
+}
+
+function UpsellProductCard({
+    product,
+    isAdded,
+    isCourse,
+    isPrimaryUpsell,
+    isSplintUpsell,
+    onAdd,
+    isAdding,
+}: UpsellProductCardProps) {
+    const [price, setPrice] = useState<string | null>(null);
+    const [isLoadingPrice, setIsLoadingPrice] = useState(true);
+
+    // Fetch price from Shopify API (same pattern as CartSheet)
+    useEffect(() => {
+        let isMounted = true;
+
+        async function loadPrice() {
+            setIsLoadingPrice(true);
+            try {
+                // Detect country (same approach as useShopifyPrice hook)
+                let countryCode = "GB";
+                try {
+                    const geoResponse = await fetch("https://ipapi.co/json/");
+                    if (geoResponse.ok) {
+                        const geoData = await geoResponse.json();
+                        countryCode = geoData.country_code || "GB";
+                    }
+                } catch (e) {
+                    // Fallback to GB if geo detection fails
+                    console.error("Failed to detect country:", e);
+                }
+
+                // Fetch price from Shopify Storefront API
+                const priceData = await getVariantPrice(
+                    product.variantId,
+                    countryCode,
+                );
+                
+                if (!isMounted) return;
+
+                if (priceData) {
+                    setPrice(priceData.formattedPrice);
+                } else {
+                    // Fallback to static price from product data if API fails
+                    setPrice(product.price);
+                }
+            } catch (error) {
+                console.error("Failed to load variant price:", error);
+                if (isMounted) {
+                    // Fallback to static price from product data if API fails
+                    setPrice(product.price);
+                }
+            } finally {
+                if (isMounted) {
+                    setIsLoadingPrice(false);
+                }
+            }
+        }
+
+        loadPrice();
+
+        return () => {
+            isMounted = false;
+        };
+    }, [product.variantId, product.price]);
+
+    const isEssentials = product.variantId.includes("52265314353480");
+    const isProfessionals = product.variantId.includes("52265315828040");
+    const courseType = isEssentials
+        ? "standard"
+        : isProfessionals
+        ? "premium"
+        : null;
+    const course = courseType ? courseData[courseType] : null;
+
+    return (
+        <div
+            className={`p-6 rounded-xl border-2 transition-all bg-white dark:bg-neutral-800 ${
+                isAdded
+                    ? "border-green-500 bg-green-50 dark:bg-green-900/20"
+                    : "border-primary/30 hover:border-primary shadow-sm"
+            }`}
+        >
+            <div className="flex items-start gap-4">
+                <div className="flex justify-center items-center bg-neutral-100 dark:bg-neutral-700 rounded-lg w-24 h-24 shrink-0">
+                    <ShoppingBag className="w-10 h-10 text-neutral-400" />
+                </div>
+                <div className="flex-1 min-w-0">
+                    <h3 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
+                        {product.title}
+                    </h3>
+                    <p className="mb-4 text-neutral-500 dark:text-neutral-400 text-sm">
+                        {product.description}
+                    </p>
+                    <div className="flex justify-between items-center mb-2">
+                        <span className="font-bold text-primary text-xl">
+                            {isLoadingPrice
+                                ? (
+                                    <span className="inline-flex items-center gap-1">
+                                        <Loader2 className="w-4 h-4 animate-spin" />
+                                        Loading...
+                                    </span>
+                                )
+                                : price || product.price}
+                        </span>
+                        {isAdded
+                            ? (
+                                <span className="flex items-center gap-2 font-medium text-green-600 dark:text-green-400">
+                                    <Check className="w-5 h-5" />
+                                    Added to Order
+                                </span>
+                            )
+                            : (
+                                <Button
+                                    size="default"
+                                    onClick={onAdd}
+                                    disabled={isAdding || !product.canAddToCart}
+                                >
+                                    {isAdding
+                                        ? (
+                                            <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                                        )
+                                        : null}
+                                    Add to Order
+                                </Button>
+                            )}
+                    </div>
+                    {/* Course Info Accordion */}
+                    {isCourse && course && (
+                        <Accordion
+                            type="single"
+                            collapsible
+                            className="mt-2 w-full"
+                        >
+                            <AccordionItem
+                                value="course-info"
+                                className="border-none"
+                            >
+                                <AccordionTrigger className="py-2 font-medium text-primary text-sm hover:no-underline">
+                                    Learn more about this course
+                                </AccordionTrigger>
+                                <AccordionContent className="pt-2 pb-0">
+                                    <div className="space-y-4">
+                                        {/* Description */}
+                                        <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+                                            {course.description}
+                                        </p>
+
+                                        {/* Features */}
+                                        <div>
+                                            <h5 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                                What's Included
+                                            </h5>
+                                            <div className="space-y-1.5">
+                                                {course.features.map((
+                                                    feature,
+                                                    index,
+                                                ) => (
+                                                    <div
+                                                        key={index}
+                                                        className="flex items-start gap-2"
+                                                    >
+                                                        <Check className="mt-0.5 w-3.5 h-3.5 text-primary shrink-0" />
+                                                        <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+                                                            {feature}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        {/* What You'll Learn (Standard) or Video Topics (Premium) */}
+                                        {courseType === "standard" &&
+                                            "whatYoullLearn" in course &&
+                                            course.whatYoullLearn && (
+                                            <div>
+                                                <h5 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                                    What You'll Learn
+                                                </h5>
+                                                <div className="space-y-2">
+                                                    {course.whatYoullLearn.map((
+                                                        item: {
+                                                            title: string;
+                                                            description: string;
+                                                        },
+                                                        index: number,
+                                                    ) => (
+                                                        <div
+                                                            key={index}
+                                                            className="bg-neutral-50 dark:bg-neutral-800 p-3 rounded text-sm"
+                                                        >
+                                                            <h6 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                                                {item.title}
+                                                            </h6>
+                                                            <p className="text-neutral-600 dark:text-neutral-400 text-xs">
+                                                                {item.description}
+                                                            </p>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {courseType === "premium" &&
+                                            "videoTopics" in course &&
+                                            course.videoTopics && (
+                                            <div>
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <Video className="w-4 h-4 text-primary" />
+                                                    <h5 className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                                        Expert Video Lessons
+                                                    </h5>
+                                                </div>
+                                                <div className="space-y-2">
+                                                    {course.videoTopics.map((
+                                                        topic: {
+                                                            title: string;
+                                                            description: string;
+                                                        },
+                                                        index: number,
+                                                    ) => (
+                                                        <div
+                                                            key={index}
+                                                            className="bg-neutral-50 dark:bg-neutral-800 p-3 rounded text-sm"
+                                                        >
+                                                            <h6 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                                                {topic.title}
+                                                            </h6>
+                                                            <p className="text-neutral-600 dark:text-neutral-400 text-xs">
+                                                                {topic.description}
+                                                            </p>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
+                    )}
+                </div>
+            </div>
+
+            {/* Benefits */}
+            {!isAdded && isPrimaryUpsell && (
+                <div className="mt-6 pt-6 border-primary/20 border-t">
+                    <ul className="space-y-3">
+                        {isSplintUpsell
+                            ? (
+                                <>
+                                    <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
+                                        <Check className="w-5 h-5 text-primary shrink-0" />
+                                        Sleep comfortably without the heavy boot
+                                    </li>
+                                    <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
+                                        <Check className="w-5 h-5 text-primary shrink-0" />
+                                        Shower safely with protection
+                                    </li>
+                                    <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
+                                        <Check className="w-5 h-5 text-primary shrink-0" />
+                                        Trusted by 5,000+ patients
+                                    </li>
+                                </>
+                            )
+                            : (
+                                <>
+                                    <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
+                                        <Check className="w-5 h-5 text-primary shrink-0" />
+                                        31 structured lessons
+                                    </li>
+                                    <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
+                                        <Check className="w-5 h-5 text-primary shrink-0" />
+                                        Boot comparison guide
+                                    </li>
+                                    <li className="flex items-center gap-3 text-neutral-600 dark:text-neutral-400">
+                                        <Check className="w-5 h-5 text-primary shrink-0" />
+                                        Week-by-week timeline
+                                    </li>
+                                </>
+                            )}
+                    </ul>
+                </div>
+            )}
+        </div>
     );
 }
 
