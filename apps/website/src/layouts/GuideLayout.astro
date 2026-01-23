@@ -1,220 +1,227 @@
 ---
-import type { Lang } from "@/config/languages";
 import Layout from "./Layout.astro";
+import type { Lang } from "@/config/languages";
+import { getAlternateRoutesForSlug } from "@/content/routes";
+import { Image } from "astro:assets";
+import AchillesRuptureDrawing from "@/assets/drawings/achilles-drawing.svg";
+import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
 import CourseCTA from "@/components/CTA/CourseCTA.astro";
+import NightSplintAdvert from "@/components/products/night-splint/NightSplintAdvert.astro";
+import ShareControls from "@/components/research/ShareControls";
+import { ContentRenderer } from "@/components/guide/ContentRenderer";
+import type { GuideContent } from "@/components/guide/types";
+import { Calendar, ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { EmailSignupDialog } from "@thetis/ui/email-signup-dialog";
-
-interface Phase {
-    slug: string;
-    shortTitle: string;
-}
+import { buttonVariants } from "@/components/ui/button";
 
 export interface Props {
     title: string;
     description: string;
     lang?: Lang;
-    currentPhaseIndex: number;
-    phases: Phase[];
+    slug: string;
+    content: GuideContent;
 }
 
-const {
-    title,
-    description,
-    lang = "en",
-    currentPhaseIndex,
-    phases,
-} = Astro.props;
+const { title, description, lang = "en", slug, content } = Astro.props;
 
-const prevPhase = currentPhaseIndex > 0 ? phases[currentPhaseIndex - 1] : null;
-const nextPhase =
-    currentPhaseIndex < phases.length - 1
-        ? phases[currentPhaseIndex + 1]
-        : null;
+// Get current year dynamically
+const currentYear = new Date().getFullYear();
+
+// Add year to title for SEO
+const titleWithYear = `${title} (${currentYear} Guide)`;
+
+// Get alternate language URLs for hreflang tags
+const alternates = getAlternateRoutesForSlug(slug, lang);
+const alternateLanguages = alternates.map(alt => ({
+    lang: alt.lang,
+    url: `https://thetismedical.com${alt.href}`
+}));
+
+// Define all guide phases for navigation
+const guidePhases = [
+    { slug: "guide/weeks-0-1", title: "Week 0-1", shortTitle: "First Week" },
+    { slug: "guide/weeks-1-3", title: "Weeks 1-3", shortTitle: "Treatment Decision" },
+    { slug: "guide/weeks-4-6", title: "Weeks 4-6", shortTitle: "Progressive Recovery" },
+    { slug: "guide/weeks-7-9", title: "Weeks 7-9", shortTitle: "Final Boot Phase" },
+    { slug: "guide/weeks-10-12", title: "Weeks 10-12", shortTitle: "Boot Transition" },
+    { slug: "guide/weeks-13-25", title: "Weeks 13-25", shortTitle: "Strengthening" },
+    { slug: "guide/week-26-plus", title: "Week 26+", shortTitle: "Return to Sport" },
+];
+
+// Find current, previous, and next phases
+const currentIndex = guidePhases.findIndex(p => p.slug === slug);
+const prevPhase = currentIndex > 0 ? guidePhases[currentIndex - 1] : null;
+const nextPhase = currentIndex < guidePhases.length - 1 ? guidePhases[currentIndex + 1] : null;
 ---
 
 <Layout
-    title={title}
+    title={titleWithYear}
     description={description}
-    image="https://thetismedical.com/images/night-splint.png"
+    image="https://thetismedical.com/images/achilles-drawing-image.png"
     lang={lang}
+    alternateLanguages={alternateLanguages}
 >
-    <div class="min-h-screen">
-        <!-- Sticky Top Bar -->
-        <div
-            class="bg-white/95 dark:bg-neutral-900/95 backdrop-blur mt-12 mb-6"
-        >
-            <div class="mx-auto px-4 max-w-3xl">
-                <!-- Navigation Row -->
-                <div class="flex justify-between items-center h-12">
-                    <!-- Prev -->
-                    {
-                        prevPhase ? (
-                            <a
-                                href={`/guide/${prevPhase.slug}`}
-                                class="flex items-center gap-1 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 text-sm"
-                            >
-                                <ArrowLeft className="w-4 h-4" />
-                                <span class="hidden sm:inline">
-                                    {prevPhase.shortTitle}
-                                </span>
-                            </a>
-                        ) : (
-                            <a
-                                href="/guide/articles"
-                                class="flex items-center gap-1 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 text-sm"
-                            >
-                                <ArrowLeft className="w-4 h-4" />
-                                <span class="hidden sm:inline">All Guides</span>
-                            </a>
-                        )
-                    }
-
-                    <!-- Phase Indicator -->
-                    <div class="flex items-center gap-1">
-                        {
-                            phases.map((phase, i) => (
-                                <a
-                                    href={`/guide/${phase.slug}`}
-                                    class={cn(
-                                        "rounded-full w-2 h-2 transition-colors",
-                                        i === currentPhaseIndex
-                                            ? "bg-primary"
-                                            : "bg-neutral-300 dark:bg-neutral-600 hover:bg-neutral-400 dark:hover:bg-neutral-500",
-                                    )}
-                                    title={phase.shortTitle}
-                                />
-                            ))
-                        }
+    <main class="relative flex flex-col gap-4 print:w-full print:max-w-none">
+        <!-- Hero Section with Title and Subscribe -->
+        <section class="bg-gradient-to-b from-primary/5 to-white">
+            <div class="flex lg:flex-row flex-col justify-between items-center gap-8 mx-auto px-4 py-12 max-w-7xl">
+                <div class="flex-1 max-w-2xl">
+                    <!-- Breadcrumb -->
+                    <div class="flex items-center gap-2 mb-4 text-sm text-neutral-500">
+                        <a href="/guide" class="hover:text-primary transition-colors">Recovery Guide</a>
+                        <span>→</span>
+                        <span class="text-neutral-700">{guidePhases[currentIndex]?.title || "Guide"}</span>
                     </div>
-
-                    <!-- Next -->
-                    {
-                        nextPhase ? (
-                            <a
-                                href={`/guide/${nextPhase.slug}`}
-                                class="flex items-center gap-1 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 text-sm"
-                            >
-                                <span class="hidden sm:inline">
-                                    {nextPhase.shortTitle}
-                                </span>
-                                <ArrowRight className="w-4 h-4" />
-                            </a>
-                        ) : (
-                            <a
-                                href="/guide/articles"
-                                class="flex items-center gap-1 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 text-sm"
-                            >
-                                <span class="hidden sm:inline">All Guides</span>
-                                <ArrowRight className="w-4 h-4" />
-                            </a>
-                        )
-                    }
-                </div>
-            </div>
-        </div>
-
-        <!-- Course CTA Banner -->
-        <div
-            class="bg-primary/5 dark:bg-primary/10 mx-auto px-4 py-4 border border-primary/20 rounded-md max-w-3xl"
-        >
-            <div class="mx-auto">
-                <div
-                    class="flex sm:flex-row flex-col justify-between items-center gap-3"
-                >
-                    <div class="sm:text-left text-center">
-                        <p
-                            class="font-medium text-neutral-900 dark:text-neutral-100 text-sm"
-                        >
-                            Master your Achilles recovery
-                        </p>
-                        <p
-                            class="text-neutral-600 dark:text-neutral-400 text-xs"
-                        >
-                            31 expert lessons covering every phase of recovery
-                        </p>
+                    
+                    <!-- Phase Badge -->
+                    <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-1.5 rounded-full font-medium text-primary text-sm uppercase tracking-wide">
+                        <Calendar className="w-4 h-4" />
+                        {guidePhases[currentIndex]?.title || "Recovery Phase"}
                     </div>
-                    <a
-                        href="/course"
-                        class="bg-primary hover:bg-primary/90 px-4 py-2 rounded-md font-medium text-white text-sm shrink-0"
-                    >
-                        View Recovery Course
-                    </a>
+                    
+                    <h1 class="mb-6 font-bold text-neutral-900 text-3xl md:text-4xl lg:text-5xl leading-tight">{title}</h1>
+                    <p class="mb-8 text-neutral-600 text-lg">{description}</p>
+                    
+                    <SubscribeBlock source="guide_article" variant="compact" />
                 </div>
+                <Image 
+                    class="hidden lg:block flex-shrink-0 max-h-[50vh] object-contain" 
+                    height={500} 
+                    width={375} 
+                    src={AchillesRuptureDrawing} 
+                    alt="Achilles tendon illustration" 
+                />
             </div>
-        </div>
+        </section>
+
+        <!-- Phase Navigation Pills -->
+        <section class="bg-white border-neutral-200 border-b sticky top-0 z-40">
+            <div class="mx-auto px-4 max-w-7xl overflow-x-auto">
+                <nav class="flex gap-1 py-3">
+                    {guidePhases.map((phase, index) => (
+                        <a
+                            href={`/${phase.slug}`}
+                            class={cn(
+                                "flex-shrink-0 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap",
+                                phase.slug === slug
+                                    ? "bg-primary text-white"
+                                    : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 hover:text-neutral-900"
+                            )}
+                        >
+                            {phase.title}
+                        </a>
+                    ))}
+                </nav>
+            </div>
+        </section>
 
         <!-- Main Content -->
-        <main>
-            <slot />
-        </main>
+        <article class="mx-auto px-4 py-12 max-w-4xl w-full">
+            <ContentRenderer content={content} client:load />
+        </article>
 
-        <!-- Course CTA (Essentials/Professionals) -->
-        <CourseCTA lang={lang} variant="full" />
-
-        <!-- Bottom Navigation -->
-        <nav
-            class="bg-white dark:bg-neutral-900 py-6 border-neutral-200 dark:border-neutral-800 border-t"
-        >
-            <div class="mx-auto px-4 max-w-3xl">
-                <div class="flex justify-between items-center">
-                    {
-                        prevPhase ? (
-                            <a
-                                href={`/guide/${prevPhase.slug}`}
-                                class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 dark:hover:text-neutral-100 dark:text-neutral-400"
-                            >
-                                <ArrowLeft className="w-4 h-4" />
-                                <div class="text-left">
-                                    <div class="text-neutral-400 text-xs">
-                                        Previous
-                                    </div>
-                                    <div class="text-sm">
-                                        {prevPhase.shortTitle}
-                                    </div>
-                                </div>
-                            </a>
-                        ) : (
-                            <div />
-                        )
-                    }
-
-                    <a
-                        href="/guide/articles"
-                        class="text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 text-sm"
-                    >
-                        All Guides
-                    </a>
-
-                    {
-                        nextPhase ? (
-                            <a
-                                href={`/guide/${nextPhase.slug}`}
-                                class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 dark:hover:text-neutral-100 dark:text-neutral-400"
-                            >
-                                <div class="text-right">
-                                    <div class="text-neutral-400 text-xs">
-                                        Next
-                                    </div>
-                                    <div class="text-sm">
-                                        {nextPhase.shortTitle}
-                                    </div>
-                                </div>
-                                <ArrowRight className="w-4 h-4" />
-                            </a>
-                        ) : (
-                            <div />
-                        )
-                    }
+        <!-- Previous/Next Navigation -->
+        <section class="bg-neutral-50 py-12">
+            <div class="mx-auto px-4 max-w-4xl">
+                <div class="flex flex-col sm:flex-row justify-between gap-4">
+                    {prevPhase ? (
+                        <a
+                            href={`/${prevPhase.slug}`}
+                            class="flex items-center gap-3 bg-white hover:bg-primary/5 p-4 border border-neutral-200 hover:border-primary/30 rounded-xl transition-all group flex-1"
+                        >
+                            <div class="flex items-center justify-center w-10 h-10 bg-neutral-100 group-hover:bg-primary/10 rounded-full transition-colors">
+                                <ArrowLeft className="w-5 h-5 text-neutral-600 group-hover:text-primary" />
+                            </div>
+                            <div>
+                                <p class="text-sm text-neutral-500">Previous</p>
+                                <p class="font-semibold text-neutral-900 group-hover:text-primary transition-colors">{prevPhase.title}: {prevPhase.shortTitle}</p>
+                            </div>
+                        </a>
+                    ) : <div class="flex-1" />}
+                    
+                    {nextPhase ? (
+                        <a
+                            href={`/${nextPhase.slug}`}
+                            class="flex items-center justify-end gap-3 bg-white hover:bg-primary/5 p-4 border border-neutral-200 hover:border-primary/30 rounded-xl transition-all group flex-1 text-right"
+                        >
+                            <div>
+                                <p class="text-sm text-neutral-500">Next</p>
+                                <p class="font-semibold text-neutral-900 group-hover:text-primary transition-colors">{nextPhase.title}: {nextPhase.shortTitle}</p>
+                            </div>
+                            <div class="flex items-center justify-center w-10 h-10 bg-neutral-100 group-hover:bg-primary/10 rounded-full transition-colors">
+                                <ArrowRight className="w-5 h-5 text-neutral-600 group-hover:text-primary" />
+                            </div>
+                        </a>
+                    ) : <div class="flex-1" />}
                 </div>
             </div>
-        </nav>
-    </div>
+        </section>
+
+        <!-- All Phases Quick Links -->
+        <section class="py-12">
+            <div class="mx-auto px-4 max-w-4xl">
+                <div class="mb-8 text-center">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-1.5 rounded-full font-medium text-primary text-sm uppercase tracking-wide">
+                        <BookOpen className="w-4 h-4" />
+                        Complete Recovery Timeline
+                    </div>
+                    <h2 class="font-bold text-neutral-900 text-2xl md:text-3xl">All Recovery Phases</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-4">
+                    {guidePhases.map((phase) => (
+                        <a
+                            href={`/${phase.slug}`}
+                            class={cn(
+                                "flex items-center gap-3 p-4 rounded-xl border transition-all",
+                                phase.slug === slug
+                                    ? "bg-primary/5 border-primary/30"
+                                    : "bg-white border-neutral-200 hover:border-primary/30 hover:bg-primary/5"
+                            )}
+                        >
+                            <div class={cn(
+                                "flex items-center justify-center w-10 h-10 rounded-full text-sm font-bold",
+                                phase.slug === slug
+                                    ? "bg-primary text-white"
+                                    : "bg-neutral-100 text-neutral-600"
+                            )}>
+                                {guidePhases.indexOf(phase) + 1}
+                            </div>
+                            <div>
+                                <p class={cn(
+                                    "font-semibold",
+                                    phase.slug === slug ? "text-primary" : "text-neutral-900"
+                                )}>{phase.title}</p>
+                                <p class="text-sm text-neutral-500">{phase.shortTitle}</p>
+                            </div>
+                            {phase.slug === slug && (
+                                <span class="ml-auto text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">Current</span>
+                            )}
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Course CTA -->
+        <CourseCTA lang={lang} variant="full" />
+
+        <!-- Night Splint Advert -->
+        <NightSplintAdvert lang={lang} />
+
+        <!-- Share Controls -->
+        <ShareControls client:load />
+    </main>
 </Layout>
 
 <style>
     html {
         scroll-behavior: smooth;
+    }
+
+    @media print {
+        html {
+            scroll-behavior: auto;
+        }
     }
 </style>
