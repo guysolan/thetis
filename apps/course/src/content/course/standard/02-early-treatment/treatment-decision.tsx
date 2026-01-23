@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import SurgeryVsNonSurgicalOutcomes from "@/assets/surgery-vs-non-surgical-outcomes.png";
+import SurgeryVsNonSurgicalOutcomes from "@/assets/surgery-vs-non-surgical-outcomes-v1.png";
 
 export const metadata = {
     slug: "treatment-decision",

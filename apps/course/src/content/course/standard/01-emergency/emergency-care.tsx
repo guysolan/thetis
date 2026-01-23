@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import SnapRuptureExperience from "@/assets/snap-rupture-experience.jpeg";
+import SnapRuptureExperience from "@/assets/snap-rupture-experience-v1.jpeg";
 import AchillesRopeEndsPointedDown from "@/assets/tendon-gap.png";
 import HowRupturesHappen from "@/assets/how-ruptures-happen.png";
 
