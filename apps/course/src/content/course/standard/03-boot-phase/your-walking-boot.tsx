@@ -162,31 +162,31 @@ export const content: SectionContent = {
                                 },
                             ],
                         },
-                        {
-                            title: "Which is better?",
-                            content: [
-                                {
-                                    type: "text",
-                                    content:
-                                        "Both boots are clinically effective — research shows similar outcomes. **The key is following your protocol correctly, not which boot you have.** For a detailed comparison of costs and features, see [Choosing Your Boot](/standard/choosing-your-boot).",
-                                },
-                                {
-                                    type: "image",
-                                    src: BootForceComparison,
-                                    alt: "Comparison diagram showing force control in VACOped vs Aircast boots, demonstrating why VACOped provides better force control but both boots work if used correctly",
-                                    caption:
-                                        "Boot force comparison: VACOped provides better force control, but all boots work if used correctly",
-                                },
-                            ],
-                        },
                     ],
+                },
+                {
+                    type: "heading",
+                    level: 3,
+                    text: "Which is better?",
+                },
+                {
+                    type: "text",
+                    content:
+                        "Both boots are clinically effective — research shows similar outcomes. **The key is following your protocol correctly, not which boot you have.**",
+                },
+                {
+                    type: "image",
+                    src: BootForceComparison,
+                    alt: "Comparison diagram showing force control in VACOped vs Aircast boots, demonstrating why VACOped provides better force control but both boots work if used correctly",
+                    caption:
+                        "Boot force comparison: VACOped provides better force control, but all boots work if used correctly",
                 },
                 {
                     type: "alert",
                     variant: "info",
                     title: "Learn more",
                     content:
-                        "For help choosing between Aircast and VACOped boots, see [Choosing Your Boot](/standard/choosing-your-boot) which covers mechanisms, costs, and which might be right for you.",
+                        "For a detailed comparison of costs and features, see [Choosing Your Boot](/standard/choosing-your-boot) which covers mechanisms, costs, and which might be right for you.",
                 },
             ],
         },

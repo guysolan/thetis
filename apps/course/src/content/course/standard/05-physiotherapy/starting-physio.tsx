@@ -73,7 +73,7 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**Your story** — they'll ask about your injury, treatment (surgery vs non-surgical), recovery so far, any complications",
-                                "**Strength testing** — checking calf strength (often seated calf raises with weight, measuring MVIC — maximum voluntary isometric contraction)",
+                                "**Strength testing** — checking calf strength using seated calf raises with weight on your knee (measuring how much force you can generate)",
                                 "**Mobility assessment** — measuring ankle range of motion: [dorsiflexion](/standard/emergency-care) (toes up), [plantarflexion](/standard/emergency-care) (toes down)",
                                 "**Calf muscle size** — comparing injured leg to uninjured leg (atrophy assessment)",
                                 "**Balance** — standing balance, single-leg balance if safe",
@@ -183,8 +183,8 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**15+ single-leg heel raises** — being able to do 15+ heel raises on your injured leg alone (target: 25+ for Phase 2 completion)",
-                                "**1.4x body weight MVIC** — maximum voluntary isometric contraction (seated, foot pointed down)",
-                                "**1.2x body weight seated isotonic** — ability to do seated calf raises with 1.2x body weight",
+                                "**1.4x body weight MVIC** — see explanation below",
+                                "**1.2x body weight seated isotonic** — see explanation below",
                                 "**Good balance** — standing on one leg comfortably, maintaining balance",
                                 "**Protected to unprotected gait** — transitioning from protected walking (heel wedge, reduced step length) to normal walking",
                             ],
@@ -193,6 +193,44 @@ export const content: SectionContent = {
                             type: "text",
                             content:
                                 "These goals might sound daunting now, but they're achievable with consistent work. You don't need to hit them all immediately — progress happens gradually.",
+                        },
+                    ],
+                },
+                {
+                    type: "card",
+                    title: "What is MVIC and isotonic strength?",
+                    description: "Understanding the strength measurements.",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "These strength targets might sound technical, but they're simple once explained:",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**MVIC (Maximum Voluntary Isometric Contraction)** — This measures how hard you can push without movement. You sit with weight on your knee, point your toes down as hard as you can, and hold. The 'isometric' part means your ankle doesn't move — you're just pushing against resistance. Think of it like pushing against a wall — you're exerting force, but nothing moves.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**1.4x body weight MVIC target:** If you weigh 80kg, you should be able to push with 112kg of force (80 × 1.4 = 112). This is measured with special equipment at some physio clinics, or estimated by how much weight you can hold on your knee during a seated calf raise.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Isotonic exercise** — This is the opposite: movement with resistance. A seated calf raise where you lift your heel up and down with weight on your knee is isotonic — your ankle moves through a range of motion against resistance.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**1.2x body weight seated isotonic target:** If you weigh 80kg, you should be able to do seated calf raises with 96kg on your knee (80 × 1.2 = 96). In practice, this means stacking weights (dumbbells, plates, or a weighted bag) on your thigh while doing calf raises.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Why these numbers matter:** Walking puts about 1.5x your body weight through your Achilles with each step. These targets ensure your tendon is strong enough to handle walking safely. If you can push 1.4x body weight in a controlled seated position, your tendon can handle the forces of walking.",
                         },
                     ],
                 },
