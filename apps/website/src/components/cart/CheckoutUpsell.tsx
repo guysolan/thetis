@@ -13,6 +13,7 @@ import {
 } from "@/lib/shopify/cart-store";
 import { formatPrice } from "@/lib/shopify/storefront";
 import { getUpsellSuggestions, UPSELL_PRODUCTS } from "@/lib/shopify/products";
+import { useVariantPrice } from "@/hooks/use-variant-price";
 import {
     ArrowRight,
     Check,
@@ -100,6 +101,14 @@ export function CheckoutUpsell({
                                 product.variantId,
                             );
 
+                            // Fetch price dynamically
+                            const {
+                                formattedPrice,
+                                isLoading: isLoadingPrice,
+                            } = useVariantPrice(
+                                product.variantId,
+                            );
+
                             return (
                                 <div
                                     key={product.variantId}
@@ -121,9 +130,16 @@ export function CheckoutUpsell({
                                                 {product.description}
                                             </p>
                                             <div className="flex justify-between items-center mt-3">
-                                                <span className="font-bold text-primary text-lg">
-                                                    {product.price}
-                                                </span>
+                                                {isLoadingPrice
+                                                    ? (
+                                                        <div className="bg-neutral-200 dark:bg-neutral-700 rounded w-20 h-6 animate-pulse" />
+                                                    )
+                                                    : (
+                                                        <span className="font-bold text-primary text-lg">
+                                                            {formattedPrice ||
+                                                                "—"}
+                                                        </span>
+                                                    )}
                                                 {isAdded
                                                     ? (
                                                         <span className="flex items-center gap-1 font-medium text-green-600 text-sm">
@@ -238,9 +254,7 @@ export function CheckoutUpsell({
                                 ? (
                                     <Loader2 className="mr-2 w-5 h-5 animate-spin" />
                                 )
-                                : (
-                                    <ArrowRight className="mr-2 w-5 h-5" />
-                                )}
+                                : <ArrowRight className="mr-2 w-5 h-5" />}
                             Continue to Checkout
                         </Button>
 
@@ -258,4 +272,3 @@ export function CheckoutUpsell({
 }
 
 export default CheckoutUpsell;
-

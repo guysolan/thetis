@@ -2,12 +2,20 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { AlertCircle, Check, Loader2, Upload, Video } from "lucide-react";
+import {
+    AlertCircle,
+    Check,
+    Image,
+    Loader2,
+    Upload,
+    Video,
+} from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export function VideoReviewForm() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [videoFile, setVideoFile] = useState<File | null>(null);
+    const [files, setFiles] = useState<File[]>([]);
     const [reviewText, setReviewText] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -15,29 +23,35 @@ export function VideoReviewForm() {
     const [uploadProgress, setUploadProgress] = useState(0);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            // Validate file type
-            if (!file.type.startsWith("video/")) {
-                setError("Please upload a video file");
+        const selectedFiles = Array.from(e.target.files || []);
+        if (selectedFiles.length === 0) return;
+
+        // Validate files
+        for (const file of selectedFiles) {
+            // Check file type (videos and images)
+            const isVideo = file.type.startsWith("video/");
+            const isImage = file.type.startsWith("image/");
+            if (!isVideo && !isImage) {
+                setError("Please upload video or image files only");
                 return;
             }
             // Validate file size (max 100MB)
             if (file.size > 100 * 1024 * 1024) {
-                setError("Video file must be less than 100MB");
+                setError("Each file must be less than 100MB");
                 return;
             }
-            setVideoFile(file);
-            setError("");
         }
+
+        setFiles(selectedFiles);
+        setError("");
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
 
-        if (!videoFile) {
-            setError("Please select a video file");
+        if (files.length === 0) {
+            setError("Please select at least one file");
             return;
         }
 
@@ -45,37 +59,51 @@ export function VideoReviewForm() {
         setUploadProgress(0);
 
         try {
-            // Create FormData for file upload
-            const formData = new FormData();
-            formData.append("name", name);
-            formData.append("email", email);
-            formData.append("review", reviewText);
-            formData.append("video", videoFile);
+            const uploadedPaths: string[] = [];
+            const timestamp = Date.now();
+            const sanitizedEmail = email.replace(/[^a-zA-Z0-9]/g, "_");
 
-            // Simulate upload progress
-            const xhr = new XMLHttpRequest();
+            // Upload each file to Supabase storage
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const fileExt = file.name.split(".").pop();
+                const fileName =
+                    `${sanitizedEmail}_${timestamp}_${i}.${fileExt}`;
+                const filePath = `submissions/${fileName}`;
 
-            xhr.upload.addEventListener("progress", (event) => {
-                if (event.lengthComputable) {
-                    const percentComplete = (event.loaded / event.total) * 100;
-                    setUploadProgress(percentComplete);
+                const { error: uploadError } = await supabase.storage
+                    .from("video-reviews")
+                    .upload(filePath, file, {
+                        cacheControl: "3600",
+                        upsert: false,
+                    });
+
+                if (uploadError) {
+                    throw new Error(
+                        `Failed to upload file: ${uploadError.message}`,
+                    );
                 }
-            });
 
-            // For now, submit to Formspree or a similar service
-            // TODO: Replace with actual API endpoint
-            const response = await fetch("https://formspree.io/f/xrgwkooy", {
-                method: "POST",
-                body: formData,
-                headers: {
-                    Accept: "application/json",
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error("Failed to submit review");
+                uploadedPaths.push(filePath);
+                setUploadProgress(((i + 1) / files.length) * 80); // 80% for uploads
             }
 
+            // Save submission record to database
+            const { error: dbError } = await supabase
+                .from("video_review_submissions")
+                .insert({
+                    name,
+                    email,
+                    review_text: reviewText,
+                    video_path: uploadedPaths.join(","),
+                });
+
+            if (dbError) {
+                console.error("Database error:", dbError);
+                // Continue anyway - files are uploaded, we'll handle DB issues later
+            }
+
+            setUploadProgress(100);
             setIsSubmitted(true);
         } catch (err) {
             setError(
@@ -97,12 +125,20 @@ export function VideoReviewForm() {
                 <p className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
                     Thank You!
                 </p>
-                <p className="text-neutral-700 dark:text-neutral-300">
-                    Your video review has been submitted successfully. We'll
-                    review it within 3-5 business days. If approved, you'll
-                    receive an email with instructions to claim your $10
-                    cashback.
+                <p className="mb-4 text-neutral-700 dark:text-neutral-300">
+                    Your review has been submitted successfully. We'll review it
+                    within 3-5 business days.
                 </p>
+                <p className="mb-6 text-neutral-600 dark:text-neutral-400 text-sm">
+                    Once approved, you'll receive an email with a link to claim
+                    your cashback (£10 / $15).
+                </p>
+                <a
+                    href="/splint-customer"
+                    className="inline-flex items-center gap-2 font-medium text-primary hover:text-primary/80"
+                >
+                    ← Back to Special Offers
+                </a>
             </div>
         );
     }
@@ -154,46 +190,58 @@ export function VideoReviewForm() {
                     htmlFor="review"
                     className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100"
                 >
-                    Your Review <span className="text-red-500">*</span>
+                    Your Review{" "}
+                    <span className="text-neutral-500">(optional)</span>
                 </label>
                 <textarea
                     id="review"
                     value={reviewText}
                     onChange={(e) => setReviewText(e.target.value)}
-                    required
-                    rows={5}
+                    rows={4}
                     className="bg-white dark:bg-neutral-800 px-4 py-2 border border-neutral-300 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100"
-                    placeholder="Share your honest feedback about your experience with the night splint..."
+                    placeholder="Share any additional feedback about your experience with the night splint..."
                 />
             </div>
 
             <div>
                 <label
-                    htmlFor="video"
+                    htmlFor="files"
                     className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100"
                 >
-                    Video File <span className="text-red-500">*</span>
+                    Video or Photos <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                     <input
-                        id="video"
+                        id="files"
                         type="file"
-                        accept="video/*"
+                        accept="video/*,image/*"
                         onChange={handleFileChange}
+                        multiple
                         required
                         className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
                     />
                     <div className="flex justify-center items-center bg-white hover:bg-neutral-50 dark:bg-neutral-800 dark:hover:bg-neutral-700 px-4 py-8 border-2 border-neutral-300 focus-within:border-primary dark:border-neutral-700 border-dashed rounded-lg focus-within:ring-2 focus-within:ring-primary transition-colors">
-                        {videoFile
+                        {files.length > 0
                             ? (
                                 <div className="text-center">
-                                    <Video className="mx-auto mb-2 w-8 h-8 text-primary" />
+                                    <div className="flex justify-center gap-2 mb-2">
+                                        <Video className="w-6 h-6 text-primary" />
+                                        <Image className="w-6 h-6 text-primary" />
+                                    </div>
                                     <p className="font-medium text-neutral-900 dark:text-neutral-100">
-                                        {videoFile.name}
+                                        {files.length}{" "}
+                                        file{files.length > 1 ? "s" : ""}{" "}
+                                        selected
                                     </p>
                                     <p className="text-neutral-500 dark:text-neutral-400 text-sm">
-                                        {(videoFile.size / (1024 * 1024))
-                                            .toFixed(2)} MB
+                                        {files.map((f) => f.name).join(", ")}
+                                    </p>
+                                    <p className="mt-1 text-neutral-500 dark:text-neutral-400 text-xs">
+                                        Total:{" "}
+                                        {(files.reduce(
+                                            (sum, f) => sum + f.size,
+                                            0,
+                                        ) / (1024 * 1024)).toFixed(2)} MB
                                     </p>
                                 </div>
                             )
@@ -201,10 +249,11 @@ export function VideoReviewForm() {
                                 <div className="text-center">
                                     <Upload className="mx-auto mb-2 w-8 h-8 text-neutral-400" />
                                     <p className="font-medium text-neutral-900 dark:text-neutral-100">
-                                        Click to upload video
+                                        Click to upload video or photos
                                     </p>
                                     <p className="text-neutral-500 dark:text-neutral-400 text-sm">
-                                        Max 100MB • MP4, MOV, AVI, etc.
+                                        Max 100MB per file • MP4, MOV, JPG, PNG,
+                                        etc.
                                     </p>
                                 </div>
                             )}
@@ -238,7 +287,7 @@ export function VideoReviewForm() {
                 type="submit"
                 size="lg"
                 className="gap-2 w-full"
-                disabled={isSubmitting || !videoFile}
+                disabled={isSubmitting || files.length === 0}
             >
                 {isSubmitting
                     ? (
@@ -257,8 +306,8 @@ export function VideoReviewForm() {
 
             <p className="text-neutral-500 dark:text-neutral-400 text-xs text-center">
                 By submitting, you agree that your review may be featured on our
-                website (with your permission). Cashback will be processed
-                within 7-10 business days after approval.
+                website (with your permission). Cashback (£10 / $15) will be
+                processed within 7-10 business days after approval.
             </p>
         </form>
     );

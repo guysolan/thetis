@@ -13,75 +13,59 @@ const { lang = "en", variant = "full" } = Astro.props;
 
 const content = {
     en: {
-        tagline: "Free Recovery Guide",
-        heading: "Get Week-by-Week Recovery Tips",
+        tagline: "Recovery Course",
+        heading: "Master Your Achilles Recovery",
         description:
-            "Sign up for our free email course and receive expert guidance timed to your recovery phase. From the moment of injury to returning to sport.",
-        emailPlaceholder: "you@example.com",
-        cta: "Start Free Course",
-        privacy:
-            "We'll send weekly tips based on your injury date. Unsubscribe anytime.",
-        compactHeading: "Want weekly recovery tips delivered to your inbox?",
-        compactCTA: "Sign Up Free",
-        inlineText: "Get weekly recovery tips with our",
-        inlineLinkText: "free email course",
+            "Get 31 structured lessons covering every phase of recovery. From emergency care to returning to sport.",
+        cta: "View Recovery Course",
+        compactHeading: "Need help with your Achilles recovery?",
+        compactCTA: "View Recovery Course",
+        inlineText: "Get expert guidance with our",
+        inlineLinkText: "recovery course",
     },
     de: {
-        tagline: "Kostenloser Genesungsleitfaden",
-        heading: "Erhalten Sie wöchentliche Genesungstipps",
+        tagline: "Genesungskurs",
+        heading: "Meistern Sie Ihre Achilles-Genesung",
         description:
-            "Melden Sie sich für unseren kostenlosen E-Mail-Kurs an und erhalten Sie Expertenführung, die auf Ihre Genesungsphase abgestimmt ist.",
-        emailPlaceholder: "ihre@email.de",
-        cta: "Kostenlos starten",
-        privacy:
-            "Wir senden wöchentliche Tipps basierend auf Ihrem Verletzungsdatum. Jederzeit abmelden.",
-        compactHeading: "Möchten Sie wöchentliche Genesungstipps erhalten?",
-        compactCTA: "Kostenlos anmelden",
-        inlineText: "Erhalten Sie wöchentliche Tipps mit unserem",
-        inlineLinkText: "kostenlosen E-Mail-Kurs",
+            "Erhalten Sie 31 strukturierte Lektionen für jede Phase der Genesung. Von der Notfallversorgung bis zur Rückkehr zum Sport.",
+        cta: "Genesungskurs ansehen",
+        compactHeading: "Brauchen Sie Hilfe bei Ihrer Achilles-Genesung?",
+        compactCTA: "Genesungskurs ansehen",
+        inlineText: "Erhalten Sie Expertenführung mit unserem",
+        inlineLinkText: "Genesungskurs",
     },
     fr: {
-        tagline: "Guide de récupération gratuit",
-        heading: "Recevez des conseils de récupération hebdomadaires",
+        tagline: "Cours de récupération",
+        heading: "Maîtrisez votre récupération d'Achille",
         description:
-            "Inscrivez-vous à notre cours par email gratuit et recevez des conseils d'experts adaptés à votre phase de récupération.",
-        emailPlaceholder: "vous@example.com",
-        cta: "Commencer gratuitement",
-        privacy:
-            "Nous enverrons des conseils hebdomadaires basés sur la date de votre blessure. Désabonnez-vous à tout moment.",
-        compactHeading:
-            "Voulez-vous recevoir des conseils de récupération hebdomadaires?",
-        compactCTA: "S'inscrire gratuitement",
-        inlineText: "Recevez des conseils hebdomadaires avec notre",
-        inlineLinkText: "cours par email gratuit",
+            "Obtenez 31 leçons structurées couvrant chaque phase de récupération. Des soins d'urgence au retour au sport.",
+        cta: "Voir le cours",
+        compactHeading: "Besoin d'aide pour votre récupération d'Achille?",
+        compactCTA: "Voir le cours",
+        inlineText: "Obtenez des conseils d'experts avec notre",
+        inlineLinkText: "cours de récupération",
     },
     es: {
-        tagline: "Guía de recuperación gratuita",
-        heading: "Recibe consejos de recuperación semanales",
+        tagline: "Curso de recuperación",
+        heading: "Domina tu recuperación de Aquiles",
         description:
-            "Inscríbete en nuestro curso por email gratuito y recibe orientación experta adaptada a tu fase de recuperación.",
-        emailPlaceholder: "tu@email.com",
-        cta: "Empezar gratis",
-        privacy:
-            "Enviaremos consejos semanales basados en la fecha de tu lesión. Cancela en cualquier momento.",
-        compactHeading: "¿Quieres recibir consejos de recuperación semanales?",
-        compactCTA: "Inscribirse gratis",
-        inlineText: "Recibe consejos semanales con nuestro",
-        inlineLinkText: "curso por email gratuito",
+            "Obtén 31 lecciones estructuradas cubriendo cada fase de recuperación. Desde atención de emergencia hasta volver al deporte.",
+        cta: "Ver curso",
+        compactHeading: "¿Necesitas ayuda con tu recuperación de Aquiles?",
+        compactCTA: "Ver curso",
+        inlineText: "Obtén orientación experta con nuestro",
+        inlineLinkText: "curso de recuperación",
     },
     it: {
-        tagline: "Guida al recupero gratuita",
-        heading: "Ricevi consigli settimanali per il recupero",
+        tagline: "Corso di recupero",
+        heading: "Padroneggia il tuo recupero di Achille",
         description:
-            "Iscriviti al nostro corso email gratuito e ricevi una guida esperta adattata alla tua fase di recupero.",
-        emailPlaceholder: "tu@email.it",
-        cta: "Inizia gratis",
-        privacy:
-            "Invieremo consigli settimanali basati sulla data della tua lesione. Cancellati in qualsiasi momento.",
-        compactHeading: "Vuoi ricevere consigli di recupero settimanali?",
-        compactCTA: "Iscriviti gratis",
-        inlineText: "Ricevi consigli settimanali con il nostro",
-        inlineLinkText: "corso email gratuito",
+            "Ottieni 31 lezioni strutturate che coprono ogni fase del recupero. Dalle cure d'emergenza al ritorno allo sport.",
+        cta: "Vedi corso",
+        compactHeading: "Hai bisogno di aiuto con il tuo recupero di Achille?",
+        compactCTA: "Vedi corso",
+        inlineText: "Ottieni una guida esperta con il nostro",
+        inlineLinkText: "corso di recupero",
     },
 };
 
@@ -103,41 +87,19 @@ const t = content[lang];
                     {t.description}
                 </p>
 
-                <form
-                    class="space-y-4 mx-auto max-w-md"
-                    action="/api/subscribe"
-                    method="POST"
+                <a
+                    href="/course"
+                    class={cn(
+                        buttonVariants({
+                            variant: "default",
+                            size: "lg",
+                        }),
+                        "justify-center gap-2",
+                    )}
                 >
-                    <div>
-                        <input
-                            type="email"
-                            name="email"
-                            required
-                            placeholder={t.emailPlaceholder}
-                            autocomplete="email"
-                            class="dark:bg-neutral-700 px-4 py-3 border border-neutral-300 invalid:border-red-300 dark:border-neutral-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary invalid:focus:ring-red-500 w-full text-neutral-900 dark:text-neutral-100 text-center transition-colors"
-                        />
-                        <p class="hidden mt-1 text-red-500 text-xs text-center">
-                            Please enter a valid email address
-                        </p>
-                    </div>
-                    <button
-                        type="submit"
-                        class={cn(
-                            buttonVariants({
-                                variant: "default",
-                                size: "lg",
-                            }),
-                            "w-full justify-center gap-2",
-                        )}
-                    >
-                        <Mail className="w-4 h-4" />
-                        {t.cta}
-                    </button>
-                </form>
-                <p class="mt-4 text-neutral-500 dark:text-neutral-400 text-xs">
-                    {t.privacy}
-                </p>
+                    <ArrowRight className="w-4 h-4" />
+                    {t.cta}
+                </a>
             </div>
         </section>
     )

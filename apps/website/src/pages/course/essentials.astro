@@ -4,6 +4,7 @@ import ColorGradient from "@/components/ColorGradient.astro";
 import HighlightedWord from "@/components/HighlightedWord";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import StickyAddToCart from "@/components/StickyAddToCart";
 import {
     Moon,
     Droplets,
@@ -254,7 +255,7 @@ const whatYoullLearn = [
                             > for patients and clinicians. Recover with confidence.
                         </p>
                         <a
-                            href="/course/emails"
+                            href="/course"
                             class={cn(
                                 buttonVariants({
                                     variant: "outline",
@@ -264,7 +265,7 @@ const whatYoullLearn = [
                             )}
                         >
                             <BookOpen className="w-4 h-4" />
-                            Free Email Course
+                            Learn More
                         </a>
                     </div>
                 </div>
@@ -468,37 +469,6 @@ const whatYoullLearn = [
             </div>
         </section>
 
-        <!-- Not Ready? Try Free -->
-        <section class="py-16 md:py-24">
-            <div class="mx-auto px-4 max-w-2xl text-center">
-                <div class="bg-neutral-50 dark:bg-neutral-800 p-8 rounded-2xl">
-                    <Mail className="mx-auto mb-4 w-10 h-10 text-primary" />
-                    <h2
-                        class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
-                    >
-                        Not Ready to Commit?
-                    </h2>
-                    <p class="mb-6 text-neutral-600 dark:text-neutral-400">
-                        Start with our free email course. Get weekly recovery
-                        tips delivered to your inbox, based on your injury date.
-                    </p>
-                    <a
-                        href="/course/emails"
-                        class={cn(
-                            buttonVariants({
-                                variant: "outline",
-                                size: "default",
-                            }),
-                            "gap-2",
-                        )}
-                    >
-                        <Mail className="w-4 h-4" />
-                        Try Free Course First
-                    </a>
-                </div>
-            </div>
-        </section>
-
         <!-- Final CTA -->
         <section class="bg-primary/5 py-16 md:py-24">
             <div class="mx-auto px-4 max-w-2xl text-center">
@@ -525,7 +495,7 @@ const whatYoullLearn = [
                         productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
                     />
                     <a
-                        href="/buy-now"
+                        href="/achilles-rupture-splint"
                         class={cn(
                             buttonVariants({
                                 variant: "outline",
@@ -535,11 +505,13 @@ const whatYoullLearn = [
                         )}
                     >
                         <ShoppingCart className="w-4 h-4" />
-                        Shop Recovery Products
+                        View Night Splint
                     </a>
                 </div>
             </div>
         </section>
+
+        <StickyAddToCart variant="course" lang="en" client:load />
     </main>
 
     <!-- Client-side price update script -->

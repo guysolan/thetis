@@ -1,0 +1,14 @@
+---
+import { SubscribeBlockForm } from "./SubscribeBlockForm";
+
+interface Props {
+    /** Optional variant: "section" (default) or "compact" */
+    variant?: "section" | "compact";
+    /** Source tag for analytics */
+    source?: string;
+}
+
+const { variant = "section", source = "subscribe_block" } = Astro.props;
+---
+
+<SubscribeBlockForm variant={variant} source={source} client:load />

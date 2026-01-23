@@ -62,7 +62,7 @@ export function MobileNav({ lang = "en", currentPath = "/" }: MobileNavProps) {
   const { formattedPrice } = useShopifyPrice();
 
   // Get localized routes
-  const buyNowRoute = getRouteBySlugAndLanguage("buy-now", lang);
+  const splintRoute = getRouteBySlugAndLanguage("splint", lang);
 
   return (
     <Sheet>
@@ -82,16 +82,17 @@ export function MobileNav({ lang = "en", currentPath = "/" }: MobileNavProps) {
             </SheetClose>
           </div>
         </SheetHeader>
-        <div className="flex flex-row justify-between items-center pt-2">
-          <LanguageSwitcher currentPath={currentPath} />
-        </div>
 
         <NavAccordion lang={lang} />
 
         <SheetFooter className="flex flex-col gap-y-4 mt-4">
+          <div className="flex flex-row justify-between items-center pt-2">
+            <LanguageSwitcher currentPath={currentPath} />
+          </div>
+
           <SheetClose>
             <a
-              href={buyNowRoute?.href || "/buy-now"}
+              href={splintRoute?.href || "/achilles-rupture-splint"}
               className={cn(
                 "flex justify-center items-center gap-2 w-full",
                 buttonVariants({ variant: "default", size: "lg" }),

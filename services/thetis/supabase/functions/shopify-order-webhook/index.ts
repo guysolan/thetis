@@ -271,23 +271,18 @@ Deno.serve(async (req) => {
         // Link to user if user exists (either created now or already existed)
         if (userExists && userId) {
             enrollmentData.user_id = userId;
-            enrollmentData.user_email = customerEmail;
         }
 
         const { error: enrollError } = await supabase.from("enrollments")
             .insert(enrollmentData);
 
         if (enrollError) {
-            // If error is about user_id or user_email column, try without them
-            if (
-                (enrollError.message.includes("user_id") ||
-                    enrollError.message.includes("user_email")) && userExists
-            ) {
+            // If error is about user_id column, try without it
+            if (enrollError.message.includes("user_id") && userExists) {
                 console.log(
                     "Retrying enrollment creation without user linking due to schema issue",
                 );
                 delete enrollmentData.user_id;
-                delete enrollmentData.user_email;
                 const { error: retryError } = await supabase.from("enrollments")
                     .insert(enrollmentData);
 

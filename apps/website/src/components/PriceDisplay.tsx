@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useShopifyPrice } from "@/hooks/use-shopify-price";
-import { retailPricing } from "@/data/splintPricing";
 import { cn } from "@/lib/utils";
 
 interface PriceDisplayProps {
@@ -82,43 +81,6 @@ const PriceDisplay: React.FC<PriceDisplayProps> = ({
             </div>
             {showFreeShipping && (
                 <span className="mt-2 font-medium text-primary text-sm">
-                    Free Shipping in the UK and US
-                </span>
-            )}
-        </div>
-    );
-};
-
-// Static version for SSR (shows UK price by default)
-export const StaticPriceDisplay: React.FC<{
-    region?: "UK" | "US";
-    size?: "sm" | "md" | "lg" | "xl";
-    showFreeShipping?: boolean;
-    className?: string;
-}> = ({ region = "UK", size = "md", showFreeShipping = true, className }) => {
-    const pricing = retailPricing[region];
-
-    const sizeClasses = {
-        sm: "text-lg",
-        md: "text-2xl",
-        lg: "text-3xl",
-        xl: "text-4xl",
-    };
-
-    return (
-        <div className={cn("flex flex-col", className)}>
-            <div className="flex items-baseline gap-2">
-                <span
-                    className={cn(
-                        "font-bold text-neutral-900 dark:text-neutral-100",
-                        sizeClasses[size],
-                    )}
-                >
-                    {pricing.formatted}
-                </span>
-            </div>
-            {showFreeShipping && (
-                <span className="font-medium text-primary dark:text-primary/80 text-sm">
                     Free Shipping in the UK and US
                 </span>
             )}

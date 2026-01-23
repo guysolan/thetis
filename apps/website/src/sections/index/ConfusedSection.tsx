@@ -37,7 +37,7 @@ export default function ConfusedSection() {
 
                     <div className="flex sm:flex-row flex-col gap-4 mb-6">
                         <a
-                            href="/course/standard"
+                            href="/course"
                             className={cn(
                                 buttonVariants({
                                     variant: "default",
@@ -52,7 +52,7 @@ export default function ConfusedSection() {
                             href="/course"
                             className="inline-flex justify-center items-center font-semibold text-primary text-lg hover:underline"
                         >
-                            Get Email Course Free
+                            Learn More →
                         </a>
                     </div>
 
@@ -69,17 +69,10 @@ export default function ConfusedSection() {
                             </a>
                             <span className="text-neutral-300">•</span>
                             <a
-                                href="/course/standard"
+                                href="/course"
                                 className="text-primary hover:underline"
                             >
                                 Standard Course
-                            </a>
-                            <span className="text-neutral-300">•</span>
-                            <a
-                                href="/course/premium"
-                                className="text-primary hover:underline"
-                            >
-                                Premium Course
                             </a>
                             <span className="text-neutral-300">•</span>
                             <a

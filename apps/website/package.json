@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev --port=2122 --toolbar=false",
+    "dev:prod": "astro dev --port=2122 --toolbar=false --mode prod",
     "start": "astro dev --toolbar=false",
     "build": "astro build",
     "preview": "astro preview",

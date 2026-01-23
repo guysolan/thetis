@@ -1,374 +1,1047 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import ColorGradient from "@/components/ColorGradient.astro";
+import ColorGradientInOut from "@/components/ColorGradientInOut.astro";
 import HighlightedWord from "@/components/HighlightedWord";
-import NightSplintAdvert from "@/components/products/night-splint/NightSplintAdvert.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Image from "astro/components/Image.astro";
+import TendonStiffnessImage from "@/assets/tendon-stiffness-after-rupture.png";
+import CourseBuyButton from "@/components/CourseBuyButton";
+import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
+import InfiniteReviews from "@/components/reviews/InfiniteReviews.astro";
+import { Image as AstroImage } from "astro:assets";
+import Review1Image from "@/assets/review-1.png";
+import Review2Image from "@/assets/review-2.png";
+import Review3Image from "@/assets/review-3.png";
+import StickyAddToCart from "@/components/StickyAddToCart";
+import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
 import {
-    Mail,
-    BookOpen,
-    GraduationCap,
-    ArrowRight,
     Check,
     Star,
-    Clock,
-    Calendar,
-    Video,
+    Stethoscope,
+    Footprints,
+    TrendingUp,
     Zap,
+    Heart,
+    Users,
+    BookOpen,
+    GraduationCap,
+    ExternalLink,
+    X,
 } from "lucide-react";
+
+// Lesson previews organized by phase
+const lessonPreviews = [
+    {
+        phase: "Phase 1: Immobilization",
+        weeks: "Weeks 0-6",
+        icon: Stethoscope,
+        color: "from-primary to-primary/70",
+        bgColor: "bg-primary/5 dark:bg-primary/10",
+        borderColor: "border-primary/20 dark:border-primary/30",
+        lessons: [
+            "Emergency care: What just happened?",
+            "A&E expectations and what to ask",
+            "Blood clot prevention strategies",
+            "Choosing your walking boot",
+            "Setting up your recovery station",
+            "Proper elevation techniques",
+            "Sleeping solutions and positions",
+            "What's normal vs what's urgent",
+            "Managing pain and swelling",
+            "Early exercises (safe movements)",
+        ],
+    },
+    {
+        phase: "Phase 2: Post-Immobilization",
+        weeks: "Weeks 6-12",
+        icon: Footprints,
+        color: "from-primary/90 to-primary/60",
+        bgColor: "bg-primary/8 dark:bg-primary/12",
+        borderColor: "border-primary/25 dark:border-primary/35",
+        lessons: [
+            "Transitioning out of the boot",
+            "First steps without support",
+            "Progressive weight bearing",
+            "Early strengthening exercises",
+            "Balance and proprioception",
+            "Scar massage techniques",
+            "Range of motion exercises",
+            "Walking patterns and gait",
+        ],
+    },
+    {
+        phase: "Phase 3: Building Capacity",
+        weeks: "Weeks 12-18",
+        icon: TrendingUp,
+        color: "from-primary/80 to-primary/50",
+        bgColor: "bg-primary/10 dark:bg-primary/15",
+        borderColor: "border-primary/30 dark:border-primary/40",
+        lessons: [
+            "Single leg exercises",
+            "Calf raise progressions",
+            "Building endurance",
+            "Functional movements",
+            "Return to daily activities",
+            "Exercise load management",
+        ],
+    },
+    {
+        phase: "Phase 4: Power & Sport",
+        weeks: "Weeks 18+",
+        icon: Zap,
+        color: "from-primary/70 to-primary/40",
+        bgColor: "bg-primary/12 dark:bg-primary/18",
+        borderColor: "border-primary/35 dark:border-primary/45",
+        lessons: [
+            "Explosive strength training",
+            "Plyometric exercises",
+            "Sport-specific training",
+            "Return to running protocols",
+            "Performance testing",
+            "Long-term maintenance",
+        ],
+    },
+    {
+        phase: "Throughout Your Recovery",
+        weeks: "All Phases",
+        icon: Heart,
+        color: "from-primary to-primary/80",
+        bgColor: "bg-primary/5 dark:bg-primary/10",
+        borderColor: "border-primary/20 dark:border-primary/30",
+        lessons: [
+            "Questions for your surgeon",
+            "Product recommendations",
+            "Boot comparison guide",
+            "Sleep and washing solutions",
+            "Week-by-week timeline",
+            "When to seek urgent care",
+        ],
+    },
+];
 ---
 
 <Layout
-    title="Achilles Recovery Courses | Free & Paid Options | Thetis Medical"
-    description="Choose your path to Achilles rupture recovery. Free email course, Essentials (£29), or Professional (£99) with expert video guidance."
+    title="Complete Achilles Recovery Course - 31 Expert Lessons | Thetis Medical"
+    description="Master your Achilles rupture recovery with 31 structured lessons covering every phase. From emergency care to return to sport. Expert guidance, exercises, and practical tips."
     image="https://thetismedical.com/images/night-splint.png"
     lang="en"
 >
-    <main>
-        <ColorGradient>
-            <div class="mx-auto px-4 pt-8 md:pt-12 pb-16 md:pb-24 max-w-4xl text-center">
-                <span
-                    class="inline-flex items-center gap-2 bg-primary/10 mb-6 px-4 py-1.5 rounded-full font-medium text-primary text-sm uppercase tracking-wide"
-                >
-                    <GraduationCap className="w-4 h-4" />
-                    Recovery Programs
-                </span>
-                <h1
-                    class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-4xl md:text-5xl lg:text-6xl leading-tight"
-                >
-                    Your <HighlightedWord>Recovery</HighlightedWord> Journey Starts Here
-                </h1>
-                <p
-                    class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg md:text-xl leading-relaxed"
-                >
-                    Expert guidance for every stage of your Achilles rupture recovery.
-                    Start free or choose a structured course for deeper support.
-                </p>
-                <div class="flex flex-wrap justify-center gap-6 text-neutral-500 dark:text-neutral-400 text-sm">
-                    <div class="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-primary" />
-                        <span>6+ months of guidance</span>
+    <main class="space-y-16">
+        <!-- Hero Section - Matching Home Page Style -->
+        <section
+            class="bg-gradient-to-b from-primary/10 to-white py-16 md:py-24"
+        >
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="flex lg:flex-row flex-col items-center gap-12">
+                    <div class="flex-1 lg:text-left text-center">
+                        <!-- Social Proof Badge -->
+                        <div class="mb-6">
+                            <div
+                                class="inline-flex items-center gap-2 bg-primary/10 mb-3 px-4 py-2 rounded-full"
+                            >
+                                <Users className="w-4 h-4 text-primary" />
+                                <span
+                                    class="font-semibold text-primary text-sm uppercase tracking-wider"
+                                    >20,000+ Readers</span
+                                >
+                            </div>
+                        </div>
+                        <h1
+                            class="mb-4 font-bold text-neutral-900 text-4xl md:text-6xl leading-tight"
+                        >
+                            Master Your <span class="text-primary"
+                                >Achilles Recovery</span
+                            > with 31 Expert Lessons
+                        </h1>
+                        <p
+                            class="mx-auto lg:mx-0 mb-2 max-w-2xl text-neutral-600 text-lg md:text-xl leading-relaxed"
+                        >
+                            Everything you need to recover from Achilles
+                            rupture—all in one place.
+                            <strong class="text-neutral-900"
+                                >No more searching</strong
+                            > across multiple sources. Get expert guidance, exercises,
+                            and practical solutions week-by-week.
+                        </p>
+                        <p
+                            class="mx-auto lg:mx-0 mb-8 max-w-2xl text-neutral-500 text-base"
+                        >
+                            From emergency care to return to sport. All your
+                            recovery guidance in one convenient course.
+                        </p>
+
+                        <!-- Primary CTA -->
+                        <div
+                            class="flex sm:flex-row flex-col justify-center lg:justify-start gap-4 mb-6"
+                        >
+                            <CourseBuyButton
+                                productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                                variant="default"
+                                className="shadow-lg hover:shadow-xl w-full sm:w-auto font-bold text-lg transition-all"
+                                client:load
+                            >
+                                Add to Cart →
+                            </CourseBuyButton>
+                        </div>
+
+                        <!-- Trust Signals -->
+                        <div
+                            class="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 mb-4 text-neutral-600 text-sm"
+                        >
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-primary text-lg"
+                                    >✓</span
+                                >
+                                <span class="font-medium"
+                                    >31 structured lessons</span
+                                >
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-primary text-lg"
+                                    >✓</span
+                                >
+                                <span class="font-medium"
+                                    >Reviewed by foot & ankle specialists</span
+                                >
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-primary text-lg"
+                                    >✓</span
+                                >
+                                <span class="font-medium"
+                                    >Based on 100+ research articles</span
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Social Proof -->
+                        <div
+                            class="flex justify-center lg:justify-start items-center gap-3 mb-6 text-neutral-500 text-sm"
+                        >
+                            <div class="flex -space-x-2">
+                                <AstroImage
+                                    src={Review1Image}
+                                    alt="Patient review"
+                                    class="border-2 border-white rounded-full w-10 h-10 object-cover"
+                                    width={40}
+                                    height={40}
+                                />
+                                <AstroImage
+                                    src={Review2Image}
+                                    alt="Patient review"
+                                    class="border-2 border-white rounded-full w-10 h-10 object-cover"
+                                    width={40}
+                                    height={40}
+                                />
+                                <AstroImage
+                                    src={Review3Image}
+                                    alt="Patient review"
+                                    class="border-2 border-white rounded-full w-10 h-10 object-cover"
+                                    width={40}
+                                    height={40}
+                                />
+                            </div>
+                            <span class="font-semibold text-neutral-900"
+                                >Join 20,000+ people following Thetis recovery
+                                advice</span
+                            >
+                        </div>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <Video className="w-4 h-4 text-primary" />
-                        <span>Expert video lessons</span>
+                    <div class="flex-shrink-0 w-full lg:w-1/2">
+                        <div class="relative">
+                            <Image
+                                src={TendonStiffnessImage}
+                                alt="Tendon Stiffness After Rupture - Educational infographic explaining biomechanical differences"
+                                class="shadow-2xl rounded-xl w-full"
+                            />
+                        </div>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-primary" />
-                        <span>Timed to your injury</span>
-                    </div>
-                </div>
-                
-                <!-- Already purchased link -->
-                <div class="mt-8 pt-4 border-t border-primary/20">
-                    <a
-                        href="https://course.thetismedical.com/claim"
-                        class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-                    >
-                        <ArrowRight className="w-4 h-4" />
-                        Already purchased? Access your course →
-                    </a>
                 </div>
             </div>
-        </ColorGradient>
+        </section>
 
-        <!-- Three Course Options -->
+        <!-- What to Expect: Recovery Timeline -->
         <section class="py-16 md:py-24">
-            <div class="mx-auto px-4 max-w-6xl">
-                <div class="gap-8 grid md:grid-cols-3">
-                    <!-- Email Course (Free) -->
-                    <a
-                        href="/course/emails"
-                        class="group flex flex-col bg-white hover:bg-primary/5 dark:bg-neutral-800 dark:hover:bg-primary/10 hover:shadow-lg p-6 md:p-8 border-2 border-primary/30 hover:border-primary/50 dark:border-primary/40 dark:hover:border-primary/60 rounded-2xl h-full transition-all duration-300"
+            <div class="mx-auto px-4 max-w-5xl">
+                <div class="mb-12 text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl"
                     >
-                        <div class="flex items-center gap-4 mb-4">
-                            <div
-                                class="flex justify-center items-center bg-primary/20 dark:bg-primary/30 rounded-xl w-14 h-14"
-                            >
-                                <Mail
-                                    className="w-7 h-7 text-primary dark:text-primary/80"
-                                />
-                            </div>
-                            <div>
-                                <span
-                                    class="inline-block bg-primary/20 dark:bg-primary/30 mb-1 px-2 py-0.5 rounded font-semibold text-primary dark:text-primary/80 text-xs uppercase tracking-wide"
-                                >
-                                    FREE
-                                </span>
-                                <h3
-                                    class="font-semibold text-neutral-900 dark:group-hover:text-primary/80 dark:text-neutral-100 group-hover:text-primary text-xl transition-colors"
-                                >
-                                    Email Course
-                                </h3>
-                            </div>
-                        </div>
-
-                        <p class="mb-6 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
-                            Personalized emails timed to your injury date. The
-                            right information arrives exactly when you need it.
-                        </p>
-
-                        <ul class="flex-grow space-y-3 mb-6">
-                            <li class="flex items-start gap-3 text-neutral-600 dark:text-neutral-400 text-sm">
-                                <div class="flex justify-center items-center bg-primary/20 dark:bg-primary/30 mt-0.5 rounded-full w-5 h-5 shrink-0">
-                                    <Check className="w-3 h-3 text-primary dark:text-primary/80" />
-                                </div>
-                                6+ months of guidance
-                            </li>
-                            <li class="flex items-start gap-3 text-neutral-600 dark:text-neutral-400 text-sm">
-                                <div class="flex justify-center items-center bg-primary/20 dark:bg-primary/30 mt-0.5 rounded-full w-5 h-5 shrink-0">
-                                    <Check className="w-3 h-3 text-primary dark:text-primary/80" />
-                                </div>
-                                Timed to your injury date
-                            </li>
-                            <li class="flex items-start gap-3 text-neutral-600 dark:text-neutral-400 text-sm">
-                                <div class="flex justify-center items-center bg-primary/20 dark:bg-primary/30 mt-0.5 rounded-full w-5 h-5 shrink-0">
-                                    <Check className="w-3 h-3 text-primary dark:text-primary/80" />
-                                </div>
-                                Automatic delivery
-                            </li>
-                            <li class="flex items-start gap-3 text-neutral-600 dark:text-neutral-400 text-sm">
-                                <div class="flex justify-center items-center bg-primary/20 dark:bg-primary/30 mt-0.5 rounded-full w-5 h-5 shrink-0">
-                                    <Check className="w-3 h-3 text-primary dark:text-primary/80" />
-                                </div>
-                                Milestone reminders
-                            </li>
-                        </ul>
-
-                        <div class="mb-4">
-                            <span class="font-bold text-neutral-900 dark:text-neutral-100 text-3xl">Free</span>
-                        </div>
-
-                        <div class="flex items-center font-medium text-primary dark:text-primary/80 text-sm transition-transform group-hover:translate-x-1">
-                            Start Free
-                            <ArrowRight className="ml-2 w-4 h-4" />
-                        </div>
-                    </a>
-
-                    <!-- Essentials Course (£29) -->
-                    <a
-                        href="/course/essentials"
-                        class="group flex flex-col bg-white hover:bg-neutral-50 dark:bg-neutral-800 dark:hover:bg-neutral-750 hover:shadow-lg p-6 md:p-8 border-2 border-primary/30 hover:border-primary/60 dark:border-primary/40 dark:hover:border-primary rounded-2xl h-full transition-all duration-300"
+                        What to Expect from the Course
+                    </h2>
+                    <p
+                        class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400"
                     >
-                        <div class="flex items-center gap-4 mb-4">
-                            <div
-                                class="flex justify-center items-center bg-primary/10 rounded-xl w-14 h-14"
-                            >
-                                <BookOpen className="w-7 h-7 text-primary" />
-                            </div>
-                            <div>
-                                <span
-                                    class="inline-block bg-neutral-100 dark:bg-neutral-700 mb-1 px-2 py-0.5 rounded font-semibold text-neutral-600 dark:text-neutral-300 text-xs uppercase tracking-wide"
-                                >
-                                    POPULAR
-                                </span>
-                                <h3
-                                    class="font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-primary text-xl transition-colors"
-                                >
-                                    Essentials
-                                </h3>
-                            </div>
-                        </div>
-
-                        <p class="mb-6 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
-                            31 structured lessons with exercises, checklists,
-                            boot comparisons, and questions for your surgeon.
-                        </p>
-
-                        <ul class="flex-grow space-y-3 mb-6">
-                            <li class="flex items-start gap-3 text-neutral-600 dark:text-neutral-400 text-sm">
-                                <div class="flex justify-center items-center bg-primary/10 mt-0.5 rounded-full w-5 h-5 shrink-0">
-                                    <Check className="w-3 h-3 text-primary" />
-                                </div>
-                                31 structured lessons
-                            </li>
-                            <li class="flex items-start gap-3 text-neutral-600 dark:text-neutral-400 text-sm">
-                                <div class="flex justify-center items-center bg-primary/10 mt-0.5 rounded-full w-5 h-5 shrink-0">
-                                    <Check className="w-3 h-3 text-primary" />
-                                </div>
-                                Questions for your surgeon
-                            </li>
-                            <li class="flex items-start gap-3 text-neutral-600 dark:text-neutral-400 text-sm">
-                                <div class="flex justify-center items-center bg-primary/10 mt-0.5 rounded-full w-5 h-5 shrink-0">
-                                    <Check className="w-3 h-3 text-primary" />
-                                </div>
-                                Physio exercises with illustrations
-                            </li>
-                            <li class="flex items-start gap-3 text-neutral-600 dark:text-neutral-400 text-sm">
-                                <div class="flex justify-center items-center bg-primary/10 mt-0.5 rounded-full w-5 h-5 shrink-0">
-                                    <Check className="w-3 h-3 text-primary" />
-                                </div>
-                                Boot comparison guide
-                            </li>
-                        </ul>
-
-                        <div class="mb-4">
-                            <span class="font-bold text-neutral-900 dark:text-neutral-100 text-3xl">£29</span>
-                            <span class="ml-1 text-neutral-500 dark:text-neutral-400 text-sm">one-time</span>
-                        </div>
-
-                        <div class="flex items-center font-medium text-primary text-sm transition-transform group-hover:translate-x-1">
-                            Learn More
-                            <ArrowRight className="ml-2 w-4 h-4" />
-                        </div>
-                    </a>
-
-                    <!-- Pro Course (£99) -->
-                    <a
-                        href="/course/professionals"
-                        class="group relative flex flex-col bg-white hover:bg-neutral-50 dark:bg-neutral-800 dark:hover:bg-neutral-750 hover:shadow-xl p-6 md:p-8 border-2 border-primary hover:border-primary rounded-2xl h-full transition-all duration-300"
+                        Your recovery journey and the benefits you'll experience
+                        over the next 12+ months.
+                    </p>
+                </div>
+                <div class="relative">
+                    <!-- Timeline line -->
+                    <div
+                        class="hidden md:block top-0 bottom-0 left-1/2 absolute bg-primary/20 w-0.5 -translate-x-1/2"
                     >
-                        <div class="top-0 right-4 absolute bg-primary px-3 py-1 rounded-b-lg font-semibold text-white text-xs uppercase tracking-wide">
-                            BEST VALUE
-                        </div>
+                    </div>
 
-                        <div class="flex items-center gap-4 mb-4">
-                            <div
-                                class="flex justify-center items-center bg-amber-100 dark:bg-amber-900 rounded-xl w-14 h-14"
-                            >
-                                <GraduationCap
-                                    className="w-7 h-7 text-amber-700 dark:text-amber-300"
-                                />
-                            </div>
-                            <div>
-                                <div class="flex items-center gap-1 mb-1">
-                                    <Star className="fill-amber-500 w-3 h-3 text-amber-500" />
-                                    <span
-                                        class="font-semibold text-amber-600 dark:text-amber-400 text-xs uppercase tracking-wide"
+                    <div class="space-y-6 md:space-y-12">
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2 md:text-right">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
                                     >
-                                        PREMIUM
-                                    </span>
+                                        Week 0-1
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        Immediate Confidence & Clarity
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        Know what's normal vs urgent. Understand
+                                        emergency care and A&E expectations. Set
+                                        up your recovery station properly with
+                                        the right equipment.
+                                    </p>
                                 </div>
-                                <h3
-                                    class="font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-primary text-xl transition-colors"
+                            </div>
+                            <div
+                                class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                            >
+                                <div
+                                    class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
                                 >
-                                    Professional
-                                </h3>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2"></div>
+                        </div>
+
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2"></div>
+                            <div
+                                class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                            >
+                                <div
+                                    class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                >
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
+                                    >
+                                        Weeks 2-6
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        Better Pain Management & Sleep
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        Master proper elevation techniques and
+                                        pain management strategies. Get quality
+                                        sleep with proven positions and
+                                        solutions. Prevent complications like
+                                        blood clots.
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
-                        <p class="mb-6 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
-                            Expert video lessons from specialist surgeons,
-                            return-to-sport protocols, and priority support.
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2 md:text-right">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
+                                    >
+                                        Weeks 6-12
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        Walking Without Support
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        Transition safely out of your boot. Take
+                                        your first confident steps. Improve
+                                        balance and proprioception. Begin early
+                                        strengthening exercises.
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                            >
+                                <div
+                                    class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                >
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2"></div>
+                        </div>
+
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2"></div>
+                            <div
+                                class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                            >
+                                <div
+                                    class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                >
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
+                                    >
+                                        Months 3-4
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        Return to Daily Activities
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        Build functional movement capacity.
+                                        Return to normal daily activities with
+                                        confidence. Develop endurance and
+                                        exercise load management skills.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2 md:text-right">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
+                                    >
+                                        Months 4-6
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        Single Leg Strength
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        Master single leg exercises and calf
+                                        raise progressions. Build significant
+                                        strength in your affected leg. Improve
+                                        functional capacity for more demanding
+                                        activities.
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                            >
+                                <div
+                                    class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                >
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2"></div>
+                        </div>
+
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2"></div>
+                            <div
+                                class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                            >
+                                <div
+                                    class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                >
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
+                                    >
+                                        Months 6-9
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        Return to Running
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        Follow structured return-to-running
+                                        protocols. Begin sport-specific
+                                        training. Test your performance safely
+                                        with evidence-based protocols.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2 md:text-right">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
+                                    >
+                                        Months 9-12
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        Explosive Power & Plyometrics
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        Develop explosive strength through
+                                        advanced training. Master plyometric
+                                        exercises. Prepare for full return to
+                                        competitive sports and high-intensity
+                                        activities.
+                                    </p>
+                                </div>
+                                <div
+                                    class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                                >
+                                    <div
+                                        class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                    >
+                                    </div>
+                                </div>
+                                <div class="w-full md:w-1/2"></div>
+                            </div>
+
+                            <div class="relative flex items-center gap-8">
+                                <div class="w-full md:w-1/2"></div>
+                                <div
+                                    class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                                >
+                                    <div
+                                        class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                    >
+                                    </div>
+                                </div>
+                                <div class="w-full md:w-1/2">
+                                    <div
+                                        class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                    >
+                                        <div
+                                            class="mb-2 font-bold text-primary text-2xl"
+                                        >
+                                            12+ Months
+                                        </div>
+                                        <h3 class="mb-2 font-semibold text-xl">
+                                            Long-Term Maintenance & Full
+                                            Recovery
+                                        </h3>
+                                        <p
+                                            class="text-neutral-600 dark:text-neutral-400"
+                                        >
+                                            Maintain your strength and prevent
+                                            re-injury. Continue sport-specific
+                                            training. Enjoy full return to all
+                                            activities with confidence and
+                                            proper long-term care strategies.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Proof Banner -->
+            <section class="bg-primary/5 dark:bg-primary/10 py-8">
+                <div class="mx-auto px-4 max-w-6xl">
+                    <div
+                        class="flex flex-wrap justify-center items-center gap-6 md:gap-8 text-center"
+                    >
+                        <div class="flex items-center gap-2">
+                            <Stethoscope className="w-5 h-5 text-primary" />
+                            <span
+                                class="font-semibold text-neutral-900 dark:text-neutral-100"
+                            >
+                                Reviewed by Foot & Ankle Specialists
+                            </span>
+                        </div>
+                        <div class="hidden md:block bg-primary/20 w-px h-8">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <GraduationCap className="w-5 h-5 text-primary" />
+                            <span
+                                class="font-semibold text-neutral-900 dark:text-neutral-100"
+                            >
+                                Based on 100+ Research Articles
+                            </span>
+                        </div>
+                        <div class="hidden md:block bg-primary/20 w-px h-8">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <Users className="w-5 h-5 text-primary" />
+                            <span
+                                class="font-semibold text-neutral-900 dark:text-neutral-100"
+                            >
+                                20,000+ People Following Our Advice
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lesson Previews by Phase -->
+            <section
+                class="bg-gradient-to-b from-white dark:from-neutral-900 to-neutral-50 dark:to-neutral-950 py-16 md:py-24"
+            >
+                <div class="mx-auto px-4 max-w-7xl">
+                    <div class="mb-16 text-center">
+                        <h2
+                            class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl"
+                        >
+                            What You'll Learn: 31 Lessons Across 5 Phases
+                        </h2>
+                        <p
+                            class="mx-auto mb-4 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg"
+                        >
+                            Your complete recovery roadmap, from the moment of
+                            injury to returning to full activity.
                         </p>
+                        <p
+                            class="mx-auto max-w-2xl text-neutral-500 dark:text-neutral-500 text-sm"
+                        >
+                            Evidence-based content reviewed by foot & ankle
+                            specialists, based on 100+ research articles
+                        </p>
+                    </div>
 
-                        <ul class="flex-grow space-y-3 mb-6">
-                            <li class="flex items-start gap-3 text-neutral-600 dark:text-neutral-400 text-sm">
-                                <div class="flex justify-center items-center bg-primary/10 mt-0.5 rounded-full w-5 h-5 shrink-0">
-                                    <Check className="w-3 h-3 text-primary" />
-                                </div>
-                                <strong class="text-neutral-900 dark:text-neutral-100">Everything in Essentials</strong>
-                            </li>
-                            <li class="flex items-start gap-3 text-neutral-600 dark:text-neutral-400 text-sm">
-                                <div class="flex justify-center items-center bg-primary/10 mt-0.5 rounded-full w-5 h-5 shrink-0">
-                                    <Check className="w-3 h-3 text-primary" />
-                                </div>
-                                Surgeon video lessons
-                            </li>
-                            <li class="flex items-start gap-3 text-neutral-600 dark:text-neutral-400 text-sm">
-                                <div class="flex justify-center items-center bg-primary/10 mt-0.5 rounded-full w-5 h-5 shrink-0">
-                                    <Check className="w-3 h-3 text-primary" />
-                                </div>
-                                Return-to-sport protocols
-                            </li>
-                            <li class="flex items-start gap-3 text-neutral-600 dark:text-neutral-400 text-sm">
-                                <div class="flex justify-center items-center bg-primary/10 mt-0.5 rounded-full w-5 h-5 shrink-0">
-                                    <Check className="w-3 h-3 text-primary" />
-                                </div>
-                                Priority expert support
-                            </li>
-                        </ul>
+                    <div class="space-y-10">
+                        {
+                            lessonPreviews.map((phase, phaseIndex) => {
+                                const IconComponent = phase.icon;
+                                return (
+                                    <div
+                                        class={`${phase.bgColor} p-6 md:p-10 border-2 ${phase.borderColor} rounded-2xl shadow-sm hover:shadow-md transition-shadow`}
+                                    >
+                                        <div class="flex md:flex-row flex-col md:items-center gap-4 mb-8">
+                                            <div
+                                                class={`flex justify-center items-center bg-gradient-to-br ${phase.color} rounded-xl w-16 h-16 shrink-0 shadow-lg`}
+                                            >
+                                                <IconComponent className="w-8 h-8 text-white" />
+                                            </div>
+                                            <div class="flex-1">
+                                                <div class="flex flex-wrap items-center gap-3 mb-2">
+                                                    <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-xl md:text-2xl">
+                                                        {phase.phase}
+                                                    </h3>
+                                                    <span
+                                                        class={`inline-flex items-center px-3 py-1 bg-gradient-to-r ${phase.color} text-white text-xs font-semibold rounded-full`}
+                                                    >
+                                                        {phase.weeks}
+                                                    </span>
+                                                </div>
+                                                <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+                                                    {phase.lessons.length}{" "}
+                                                    lessons
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="gap-3 grid sm:grid-cols-2 lg:grid-cols-3">
+                                            {phase.lessons.map(
+                                                (lesson, lessonIndex) => (
+                                                    <div class="group flex items-start gap-3 md:bg-white md:dark:bg-neutral-900 md:hover:shadow-sm md:p-4 md:border md:border-neutral-200 md:hover:border-primary/50 md:dark:border-neutral-700 md:rounded-lg transition-all">
+                                                        <div
+                                                            class={`flex justify-center items-center bg-gradient-to-br ${phase.color} mt-0.5 rounded-full w-6 h-6 shrink-0 opacity-80 group-hover:opacity-100 transition-opacity`}
+                                                        >
+                                                            <Check className="w-3.5 h-3.5 text-white" />
+                                                        </div>
+                                                        <span class="font-medium text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
+                                                            {lesson}
+                                                        </span>
+                                                    </div>
+                                                ),
+                                            )}
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
 
-                        <div class="mb-4">
-                            <span class="font-bold text-neutral-900 dark:text-neutral-100 text-3xl">£99</span>
-                            <span class="ml-1 text-neutral-500 dark:text-neutral-400 text-sm">one-time</span>
+                    <!-- CTA after lessons -->
+                    <div class="mt-12 text-center">
+                        <p
+                            class="mb-6 text-neutral-600 dark:text-neutral-400 text-lg"
+                        >
+                            Ready to start your recovery journey?
+                        </p>
+                        <CourseBuyButton
+                            productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                            variant="default"
+                            className="shadow-lg font-bold text-lg"
+                            client:load
+                        >
+                            Add to Cart
+                        </CourseBuyButton>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Who's This Course For? -->
+            <section class="bg-neutral-50 dark:bg-neutral-900 py-16 md:py-24">
+                <div class="mx-auto px-4 max-w-4xl">
+                    <div class="mb-12 text-center">
+                        <h2
+                            class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl"
+                        >
+                            Who's This Course For?
+                        </h2>
+                        <p
+                            class="mx-auto mb-4 max-w-2xl text-neutral-600 dark:text-neutral-400"
+                        >
+                            Find out if this course is the right fit for your
+                            recovery journey.
+                        </p>
+                        <div
+                            class="flex flex-wrap justify-center items-center gap-4 text-neutral-500 dark:text-neutral-400 text-sm"
+                        >
+                            <div class="flex items-center gap-2">
+                                <Stethoscope className="w-4 h-4 text-primary" />
+                                <span>Reviewed by specialists</span>
+                            </div>
+                            <span>•</span>
+                            <div class="flex items-center gap-2">
+                                <GraduationCap
+                                    className="w-4 h-4 text-primary"
+                                />
+                                <span>100+ research articles</span>
+                            </div>
                         </div>
-
-                        <div class="flex items-center font-medium text-primary text-sm transition-transform group-hover:translate-x-1">
-                            Learn More
-                            <ArrowRight className="ml-2 w-4 h-4" />
+                    </div>
+                    <div class="gap-6 grid md:grid-cols-2">
+                        <div
+                            class="bg-white dark:bg-neutral-800 p-6 border-2 border-primary/30 rounded-lg"
+                        >
+                            <h3
+                                class="flex items-center gap-2 mb-4 font-bold text-primary text-xl"
+                            >
+                                <Check className="w-5 h-5" />
+                                Perfect For:
+                            </h3>
+                            <ul
+                                class="space-y-2 text-neutral-700 dark:text-neutral-300"
+                            >
+                                <li>
+                                    • Recently ruptured your Achilles tendon
+                                </li>
+                                <li>• Want clear, week-by-week guidance</li>
+                                <li>• Need questions to ask your surgeon</li>
+                                <li>
+                                    • Looking for evidence-based recovery advice
+                                </li>
+                                <li>
+                                    • Want to avoid common recovery mistakes
+                                </li>
+                            </ul>
                         </div>
-                    </a>
+                        <div
+                            class="bg-white dark:bg-neutral-800 p-6 border-2 border-neutral-300 dark:border-neutral-600 rounded-lg"
+                        >
+                            <h3
+                                class="flex items-center gap-2 mb-4 font-semibold text-neutral-900 dark:text-neutral-100 text-xl"
+                            >
+                                <X
+                                    className="w-5 h-5 text-neutral-600 dark:text-neutral-400"
+                                />
+                                Not For:
+                            </h3>
+                            <ul
+                                class="space-y-2 text-neutral-700 dark:text-neutral-300"
+                            >
+                                <li>• Achilles tendonitis/tendinopathy</li>
+                                <li>• Chronic tendon conditions</li>
+                                <li>• Non-rupture injuries</li>
+                            </ul>
+                            <p
+                                class="mt-4 text-neutral-500 dark:text-neutral-400 text-sm italic"
+                            >
+                                This course is specifically designed for
+                                complete Achilles tendon ruptures, not chronic
+                                tendon conditions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Subscribe: recovery tips -->
+            <div class="bg-neutral-50 dark:bg-neutral-900 py-10 md:py-12">
+                <div class="mx-auto px-4 max-w-3xl">
+                    <SubscribeBlock source="course_page" />
                 </div>
             </div>
-        </section>
 
-        <!-- Why Thetis Section -->
-        <section class="bg-gradient-to-b from-primary/5 to-transparent py-16 md:py-24">
-            <div class="mx-auto px-4 max-w-4xl text-center">
-                <p class="mb-4 font-medium text-primary text-sm uppercase tracking-widest">
-                    Why we're called Thetis
-                </p>
-                <h2 class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl">
-                    Named after <HighlightedWord>Achilles' Mother</HighlightedWord>
-                </h2>
-                <p class="mb-4 text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed">
-                    In Greek mythology, Thetis was a sea nymph who devoted
-                    herself to protecting her son Achilles. When he was injured,
-                    she was always there — caring for him, guiding his recovery,
-                    and ensuring he could return to strength.
-                </p>
-                <p class="font-medium text-neutral-700 dark:text-neutral-300 text-lg">
-                    We carry that spirit forward. When you rupture your Achilles
-                    tendon, we're here to help you through every step — just as
-                    Thetis cared for Achilles.
-                </p>
-            </div>
-        </section>
+            <!-- Patient Reviews -->
+            <section class="bg-white py-12 md:py-16">
+                <div class="mx-auto px-4 max-w-7xl">
+                    <div class="mb-8 text-center">
+                        <h2
+                            class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl"
+                        >
+                            Join 10,000+ People Following Thetis Recovery Advice
+                        </h2>
+                        <p class="mb-2 text-neutral-600">
+                            Real reviews from real people recovering from
+                            Achilles rupture
+                        </p>
+                        <p class="mb-6 text-neutral-500 text-sm">
+                            Course content reviewed by foot & ankle specialists
+                            • Based on 100+ research articles
+                        </p>
+                    </div>
 
-        <!-- Night Splint Advert -->
-        <NightSplintAdvert lang="en" />
+                    <!-- 5 Short Reviews -->
+                    <div
+                        class="gap-6 grid md:grid-cols-2 lg:grid-cols-3 mx-auto max-w-6xl"
+                    >
+                        <!-- Review 1 -->
+                        <div
+                            class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
+                        >
+                            <div class="flex items-center gap-1 mb-3">
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                            </div>
+                            <p class="text-neutral-700 text-sm italic">
+                                "The course gave me everything I needed in one
+                                place. No more googling at 2am wondering if my
+                                symptoms were normal."
+                            </p>
+                        </div>
 
-        <!-- Simple CTA -->
-        <section class="bg-neutral-50 dark:bg-neutral-900 py-16 md:py-24">
-            <div class="mx-auto px-4 max-w-2xl text-center">
-                <div class="flex justify-center items-center bg-primary/20 dark:bg-primary/30 mx-auto mb-6 rounded-full w-16 h-16">
-                    <Mail className="w-8 h-8 text-primary dark:text-primary/80" />
+                        <!-- Review 2 -->
+                        <div
+                            class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
+                        >
+                            <div class="flex items-center gap-1 mb-3">
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                            </div>
+                            <p class="text-neutral-700 text-sm italic">
+                                "Finally, clear guidance week by week. The
+                                exercises with illustrations were exactly what I
+                                needed."
+                            </p>
+                        </div>
+
+                        <!-- Review 3 -->
+                        <div
+                            class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
+                        >
+                            <div class="flex items-center gap-1 mb-3">
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                            </div>
+                            <p class="text-neutral-700 text-sm italic">
+                                "Worth every penny. The questions for my surgeon
+                                section helped me have better conversations with
+                                my doctor."
+                            </p>
+                        </div>
+
+                        <!-- Review 4 -->
+                        <div
+                            class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
+                        >
+                            <div class="flex items-center gap-1 mb-3">
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                            </div>
+                            <p class="text-neutral-700 text-sm italic">
+                                "I wish I had this from day one. The boot
+                                comparison guide saved me so much confusion."
+                            </p>
+                        </div>
+
+                        <!-- Review 5 -->
+                        <div
+                            class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
+                        >
+                            <div class="flex items-center gap-1 mb-3">
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                            </div>
+                            <p class="text-neutral-700 text-sm italic">
+                                "The week-by-week timeline kept me on track. I
+                                knew exactly what to expect and when."
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <h2
-                    class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
-                >
-                    Not Sure Where to Start?
-                </h2>
-                <p class="mb-8 text-neutral-600 dark:text-neutral-400 text-lg">
-                    Start with our free email course. We'll send you the right
-                    information at the right time based on your injury date.
-                </p>
-                <a
-                    href="/course/emails"
-                    class={cn(
-                        buttonVariants({
-                            variant: "default",
-                            size: "lg",
-                        }),
-                        "gap-2",
-                    )}
-                >
-                    <Mail className="w-4 h-4" />
-                    Start Free Email Course
-                </a>
-            </div>
+            </section>
+
+            <!-- Final CTA - Matching Home Page Style -->
+            <ColorGradientInOut size="lg">
+                <div class="mx-auto px-4 max-w-4xl text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                    >
+                        Ready to Master Your Recovery?
+                    </h2>
+                    <p
+                        class="mx-auto mb-6 max-w-2xl text-neutral-600 text-lg leading-relaxed"
+                    >
+                        Get instant access to all 31 lessons, exercises, and
+                        expert guidance. Join over 10,000 people who have
+                        everything they need for recovery in one convenient
+                        place.
+                    </p>
+                    <div
+                        class="flex flex-wrap justify-center items-center gap-4 mb-8 text-neutral-500 text-sm"
+                    >
+                        <div class="flex items-center gap-2">
+                            <Stethoscope className="w-4 h-4 text-primary" />
+                            <span>Reviewed by foot & ankle specialists</span>
+                        </div>
+                        <span>•</span>
+                        <div class="flex items-center gap-2">
+                            <GraduationCap className="w-4 h-4 text-primary" />
+                            <span>Based on 100+ research articles</span>
+                        </div>
+                    </div>
+                    <div
+                        class="flex sm:flex-row flex-col justify-center items-center gap-4 mb-8"
+                    >
+                        <CourseBuyButton
+                            productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                            variant="default"
+                            className="shadow-lg w-full sm:w-auto font-bold text-lg"
+                            client:load
+                        >
+                            Add to Cart →
+                        </CourseBuyButton>
+                    </div>
+                    <div
+                        class="flex flex-wrap justify-center gap-4 mb-6 text-sm"
+                    >
+                        <a
+                            href="https://course.thetismedical.com/claim"
+                            class="inline-flex items-center gap-2 font-medium text-primary hover:underline"
+                        >
+                            <ExternalLink className="w-4 h-4" />
+                            Already purchased? Access your course →
+                        </a>
+                    </div>
+                    <!-- Satisfaction Guarantee -->
+                    <div
+                        class="bg-primary/10 mt-8 p-6 border-2 border-primary/30 rounded-lg"
+                    >
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <div
+                                    class="flex justify-center items-center bg-primary rounded-full w-12 h-12"
+                                >
+                                    <span class="font-bold text-white text-xl"
+                                        >✓</span
+                                    >
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3
+                                    class="mb-2 font-bold text-neutral-900 text-lg"
+                                >
+                                    Money-Back Guarantee
+                                </h3>
+                                <p class="text-neutral-700">
+                                    If the course doesn't help you feel more
+                                    confident in your recovery, we'll refund
+                                    your purchase—no questions asked.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ColorGradientInOut>
+
+            <StickyAddToCart variant="course" lang="en" client:load />
         </section>
     </main>
 </Layout>
-
-<style>
-    /* Add smooth hover animations */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .animate-fade-in-up {
-        animation: fadeInUp 0.6s ease-out forwards;
-        opacity: 0;
-    }
-</style>
-

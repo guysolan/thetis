@@ -8,8 +8,18 @@ import SleepingFAQs from "@/sections/sleeping-with-torn-achilles/SleepingFAQs";
 import SleepingOrderCallout from "@/sections/sleeping-with-torn-achilles/SleepingOrderCallout.astro";
 import Reviews from "@/components/reviews/InfiniteReviews.astro";
 import KeyFeatures from "@/sections/achilles-rupture-splint/KeyFeatures.astro";
+import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
+import SurgeonsCarousel from "@/components/SurgeonsCarousel";
+import AthletesCarousel from "@/components/AthletesCarousel";
+import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
+import StickyAddToCart from "@/components/StickyAddToCart.tsx";
+import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
+import { Check, AlertTriangle, Moon, Brain, Heart, Zap, Bed } from "lucide-react";
+import ProductIntroduction from "@/sections/shared/ProductIntroduction.astro";
 
 const { lang = "en" } = Astro.props as { lang?: Lang };
+const splintRoute = getRouteBySlugAndLanguage("splint", lang);
 
 const content = {
     en: {
@@ -369,6 +379,317 @@ const content = {
 };
 
 const currentContent = content[lang as keyof typeof content];
+
+// Educational content about sleep and recovery
+const sleepContent = {
+    en: {
+        sectionTitle: "Why Sleep Matters for Achilles Healing",
+        sectionSubtitle: "Quality sleep is critical for tissue repair and recovery",
+        quote: "Sleeping in a walking boot is one of the hardest parts of recovery. Around 80% of patients struggle with sleep during this phase. The boot is heavy, rigid, hot, and feels like sleeping with a brick strapped to your leg.",
+        stats: {
+            title: "The Sleep Problem",
+            items: [
+                { stat: "Common", label: "sleep difficulties are frequently reported during boot phase" },
+                { stat: "Heavy", label: "walking boots are bulky and uncomfortable for sleeping" },
+                { stat: "24/7", label: "protection needed - even while sleeping" }
+            ]
+        },
+        benefits: [
+            {
+                title: "Tissue Repair",
+                description: "During deep sleep, your body releases growth hormone which supports tissue healing and recovery.",
+                icon: "heart"
+            },
+            {
+                title: "Pain Management",
+                description: "Quality sleep helps your body manage pain more effectively and supports overall healing.",
+                icon: "zap"
+            },
+            {
+                title: "Mental Health",
+                description: "Poor sleep can increase pain perception and affect mood. Good sleep helps you cope better with recovery.",
+                icon: "brain"
+            },
+            {
+                title: "Energy & Recovery",
+                description: "Rest is essential for healing. Quality sleep helps your body dedicate resources to recovery.",
+                icon: "moon"
+            }
+        ],
+        tips: {
+            title: "Sleep Tips for Boot Phase",
+            items: [
+                "Sleep on your back with leg elevated on pillows",
+                "Support your calf, not just your foot",
+                "Keep the room cool - boots trap heat",
+                "Use light bedding to prevent overheating",
+                "Keep crutches by the bed with a nightlight",
+                "Empty your bladder before bed to minimize trips"
+            ]
+        },
+        warning: {
+            title: "Critical Safety Warning",
+            text: "Removing your boot while sleeping is NOT safe and can cause serious damage. During the boot phase, you need protection 24/7 to keep the tendon ends together. Sleeping without protection is one of the most common causes of re-rupture or tendon elongation."
+        },
+        nightSplint: {
+            title: "The Night Splint Solution",
+            description: "A night splint (like the Thetis splint) is a lightweight device that keeps your foot in the correct angle while being much more comfortable than the full boot. It's specifically designed for sleeping and washing.",
+            benefits: [
+                "Much lighter than walking boot (hundreds of grams vs 1-2kg)",
+                "Open design allows foot to breathe",
+                "Maintains safe plantarflexion position",
+                "Usually allowed after week 2-3 (check with clinician)",
+                "Also allows foot washing"
+            ]
+        }
+    },
+    de: {
+        sectionTitle: "Warum Schlaf für die Achillessehnen-Heilung wichtig ist",
+        sectionSubtitle: "Qualitätsschlaf ist entscheidend für Gewebereparatur und Erholung",
+        quote: "Im Gehstiefel zu schlafen ist einer der schwierigsten Teile der Genesung. Etwa 80% der Patienten haben Schlafprobleme in dieser Phase.",
+        stats: {
+            title: "Das Schlafproblem",
+            items: [
+                { stat: "80%", label: "der Patienten haben Schlafprobleme während der Stiefelphase" },
+                { stat: "1-2kg", label: "Gewicht eines typischen Gehstiefels" },
+                { stat: "24/7", label: "Schutz benötigt - auch beim Schlafen" }
+            ]
+        },
+        benefits: [
+            {
+                title: "Gewebereparatur",
+                description: "Im Tiefschlaf setzt Ihr Körper Wachstumshormone frei, die für die Sehnenheilung essentiell sind.",
+                icon: "heart"
+            },
+            {
+                title: "Reduzierte Entzündung",
+                description: "Qualitätsschlaf hilft, Entzündungsreaktionen zu regulieren und fördert schnellere Heilung.",
+                icon: "zap"
+            },
+            {
+                title: "Psychische Gesundheit",
+                description: "Schlechter Schlaf erhöht die Schmerzwahrnehmung und beeinflusst die Stimmung.",
+                icon: "brain"
+            },
+            {
+                title: "Thromboseprophylaxe",
+                description: "Schlafmangel kann das Thromboserisiko erhöhen. Ausreichend Ruhe unterstützt die Durchblutung.",
+                icon: "moon"
+            }
+        ],
+        tips: {
+            title: "Schlaftipps für die Stiefelphase",
+            items: [
+                "Schlafen Sie auf dem Rücken mit erhöhtem Bein",
+                "Stützen Sie Ihre Wade, nicht nur den Fuß",
+                "Halten Sie den Raum kühl",
+                "Verwenden Sie leichte Bettwäsche",
+                "Halten Sie Krücken am Bett bereit",
+                "Leeren Sie Ihre Blase vor dem Schlafengehen"
+            ]
+        },
+        warning: {
+            title: "Kritische Sicherheitswarnung",
+            text: "Das Entfernen des Stiefels beim Schlafen ist NICHT sicher. Während der Stiefelphase benötigen Sie 24/7 Schutz."
+        },
+        nightSplint: {
+            title: "Die Nachtschienen-Lösung",
+            description: "Eine Nachtschiene ist ein leichtes Gerät, das Ihren Fuß im richtigen Winkel hält und viel bequemer als der volle Stiefel ist.",
+            benefits: [
+                "Viel leichter als Gehstiefel",
+                "Offenes Design lässt den Fuß atmen",
+                "Erhält sichere Plantarflexionsposition",
+                "Normalerweise nach Woche 2-3 erlaubt",
+                "Ermöglicht auch Fußwäsche"
+            ]
+        }
+    },
+    fr: {
+        sectionTitle: "Pourquoi le sommeil est important pour la guérison de l'Achille",
+        sectionSubtitle: "Un sommeil de qualité est essentiel pour la réparation des tissus",
+        quote: "Dormir dans une botte de marche est l'une des parties les plus difficiles de la récupération. Environ 80% des patients ont des problèmes de sommeil.",
+        stats: {
+            title: "Le problème du sommeil",
+            items: [
+                { stat: "80%", label: "des patients ont des problèmes de sommeil pendant la phase de botte" },
+                { stat: "1-2kg", label: "poids d'une botte de marche typique" },
+                { stat: "24/7", label: "protection nécessaire - même en dormant" }
+            ]
+        },
+        benefits: [
+            {
+                title: "Réparation des tissus",
+                description: "Pendant le sommeil profond, votre corps libère des hormones de croissance essentielles pour la guérison.",
+                icon: "heart"
+            },
+            {
+                title: "Inflammation réduite",
+                description: "Un sommeil de qualité aide à réguler les réponses inflammatoires.",
+                icon: "zap"
+            },
+            {
+                title: "Santé mentale",
+                description: "Un mauvais sommeil augmente la perception de la douleur et affecte l'humeur.",
+                icon: "brain"
+            },
+            {
+                title: "Prévention des caillots",
+                description: "Le manque de sommeil peut augmenter le risque de caillots.",
+                icon: "moon"
+            }
+        ],
+        tips: {
+            title: "Conseils de sommeil pour la phase de botte",
+            items: [
+                "Dormez sur le dos avec la jambe surélevée",
+                "Soutenez votre mollet, pas seulement le pied",
+                "Gardez la pièce fraîche",
+                "Utilisez une literie légère",
+                "Gardez les béquilles près du lit",
+                "Videz votre vessie avant de dormir"
+            ]
+        },
+        warning: {
+            title: "Avertissement de sécurité critique",
+            text: "Retirer votre botte pendant le sommeil N'EST PAS sûr. Vous avez besoin d'une protection 24/7."
+        },
+        nightSplint: {
+            title: "La solution de l'attelle de nuit",
+            description: "Une attelle de nuit est un dispositif léger qui maintient votre pied dans le bon angle tout en étant beaucoup plus confortable.",
+            benefits: [
+                "Beaucoup plus légère que la botte de marche",
+                "Design ouvert permet au pied de respirer",
+                "Maintient une position de flexion plantaire sûre",
+                "Généralement autorisée après la semaine 2-3",
+                "Permet aussi de laver le pied"
+            ]
+        }
+    },
+    es: {
+        sectionTitle: "Por qué el sueño importa para la curación del Aquiles",
+        sectionSubtitle: "El sueño de calidad es crítico para la reparación de tejidos",
+        quote: "Dormir con una bota de caminar es una de las partes más difíciles de la recuperación. Alrededor del 80% de los pacientes tienen problemas para dormir.",
+        stats: {
+            title: "El problema del sueño",
+            items: [
+                { stat: "80%", label: "de los pacientes tienen problemas de sueño durante la fase de bota" },
+                { stat: "1-2kg", label: "peso de una bota de caminar típica" },
+                { stat: "24/7", label: "protección necesaria - incluso durmiendo" }
+            ]
+        },
+        benefits: [
+            {
+                title: "Reparación de tejidos",
+                description: "Durante el sueño profundo, su cuerpo libera hormona de crecimiento esencial para la curación.",
+                icon: "heart"
+            },
+            {
+                title: "Inflamación reducida",
+                description: "El sueño de calidad ayuda a regular las respuestas inflamatorias.",
+                icon: "zap"
+            },
+            {
+                title: "Salud mental",
+                description: "El mal sueño aumenta la percepción del dolor y afecta el estado de ánimo.",
+                icon: "brain"
+            },
+            {
+                title: "Prevención de coágulos",
+                description: "La falta de sueño puede aumentar el riesgo de coágulos.",
+                icon: "moon"
+            }
+        ],
+        tips: {
+            title: "Consejos de sueño para la fase de bota",
+            items: [
+                "Duerma boca arriba con la pierna elevada",
+                "Apoye su pantorrilla, no solo el pie",
+                "Mantenga la habitación fresca",
+                "Use ropa de cama ligera",
+                "Mantenga las muletas cerca de la cama",
+                "Vacíe su vejiga antes de dormir"
+            ]
+        },
+        warning: {
+            title: "Advertencia de seguridad crítica",
+            text: "Quitarse la bota mientras duerme NO es seguro. Necesita protección 24/7."
+        },
+        nightSplint: {
+            title: "La solución de la férula nocturna",
+            description: "Una férula nocturna es un dispositivo ligero que mantiene su pie en el ángulo correcto siendo mucho más cómoda.",
+            benefits: [
+                "Mucho más ligera que la bota de caminar",
+                "Diseño abierto permite que el pie respire",
+                "Mantiene posición de flexión plantar segura",
+                "Generalmente permitida después de la semana 2-3",
+                "También permite lavar el pie"
+            ]
+        }
+    },
+    it: {
+        sectionTitle: "Perché il sonno è importante per la guarigione dell'Achille",
+        sectionSubtitle: "Il sonno di qualità è fondamentale per la riparazione dei tessuti",
+        quote: "Dormire con uno stivale da passeggio è una delle parti più difficili del recupero. Circa l'80% dei pazienti ha problemi di sonno.",
+        stats: {
+            title: "Il problema del sonno",
+            items: [
+                { stat: "80%", label: "dei pazienti ha problemi di sonno durante la fase dello stivale" },
+                { stat: "1-2kg", label: "peso di uno stivale da passeggio tipico" },
+                { stat: "24/7", label: "protezione necessaria - anche dormendo" }
+            ]
+        },
+        benefits: [
+            {
+                title: "Riparazione dei tessuti",
+                description: "Durante il sonno profondo, il corpo rilascia ormone della crescita essenziale per la guarigione.",
+                icon: "heart"
+            },
+            {
+                title: "Infiammazione ridotta",
+                description: "Il sonno di qualità aiuta a regolare le risposte infiammatorie.",
+                icon: "zap"
+            },
+            {
+                title: "Salute mentale",
+                description: "Il sonno scarso aumenta la percezione del dolore e influenza l'umore.",
+                icon: "brain"
+            },
+            {
+                title: "Prevenzione dei coaguli",
+                description: "La mancanza di sonno può aumentare il rischio di coaguli.",
+                icon: "moon"
+            }
+        ],
+        tips: {
+            title: "Consigli per dormire durante la fase dello stivale",
+            items: [
+                "Dormi sulla schiena con la gamba sollevata",
+                "Sostieni il polpaccio, non solo il piede",
+                "Mantieni la stanza fresca",
+                "Usa biancheria da letto leggera",
+                "Tieni le stampelle vicino al letto",
+                "Svuota la vescica prima di dormire"
+            ]
+        },
+        warning: {
+            title: "Avviso di sicurezza critico",
+            text: "Togliere lo stivale mentre dormi NON è sicuro. Hai bisogno di protezione 24/7."
+        },
+        nightSplint: {
+            title: "La soluzione della stecca notturna",
+            description: "Una stecca notturna è un dispositivo leggero che mantiene il piede nell'angolo corretto essendo molto più comoda.",
+            benefits: [
+                "Molto più leggera dello stivale da passeggio",
+                "Design aperto permette al piede di respirare",
+                "Mantiene posizione di flessione plantare sicura",
+                "Generalmente consentita dopo la settimana 2-3",
+                "Permette anche di lavare il piede"
+            ]
+        }
+    }
+};
+
+const currentSleepContent = sleepContent[lang as keyof typeof sleepContent] || sleepContent.en;
 ---
 
 <Fragment slot="head">
@@ -385,14 +706,181 @@ const currentContent = content[lang as keyof typeof content];
     <main>
         <SleepingHero lang={lang} content={currentContent.hero} />
 
+        <!-- Educational Section: Why Sleep Matters -->
+        <section id="education" class="bg-gradient-to-b from-white to-neutral-50 py-16 md:py-20">
+            <div class="mx-auto px-4 max-w-6xl">
+                <div class="mb-12 text-center">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full">
+                        <Moon className="w-4 h-4 text-primary" />
+                        <span class="font-medium text-primary text-sm uppercase tracking-wider">Sleep & Recovery</span>
+                    </div>
+                    <h2 class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl">
+                        {currentSleepContent.sectionTitle}
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
+                        {currentSleepContent.sectionSubtitle}
+                    </p>
+                </div>
+
+                <!-- Quote -->
+                <blockquote class="bg-primary/5 mx-auto mb-12 p-6 border-l-4 border-primary rounded-r-lg max-w-3xl">
+                    <p class="text-neutral-700 text-lg italic">
+                        "{currentSleepContent.quote}"
+                    </p>
+                </blockquote>
+
+                <!-- Stats -->
+                <div class="gap-6 grid md:grid-cols-3 mb-12">
+                    {currentSleepContent.stats.items.map((item) => (
+                        <div class="bg-white shadow-sm p-6 border border-neutral-200 rounded-xl text-center">
+                            <div class="mb-2 font-bold text-primary text-4xl">{item.stat}</div>
+                            <p class="text-neutral-600">{item.label}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <!-- Why Sleep Matters Cards -->
+                <div class="gap-6 grid md:grid-cols-2 lg:grid-cols-4 mb-12">
+                    {currentSleepContent.benefits.map((benefit) => (
+                        <div class="bg-white shadow-sm hover:shadow-md p-6 border border-neutral-200 rounded-xl transition-shadow">
+                            <div class="flex justify-center items-center bg-primary/10 mb-4 rounded-full w-12 h-12">
+                                {benefit.icon === "heart" && <Heart className="w-6 h-6 text-primary" />}
+                                {benefit.icon === "zap" && <Zap className="w-6 h-6 text-primary" />}
+                                {benefit.icon === "brain" && <Brain className="w-6 h-6 text-primary" />}
+                                {benefit.icon === "moon" && <Moon className="w-6 h-6 text-primary" />}
+                            </div>
+                            <h3 class="mb-2 font-semibold text-neutral-900 text-lg">{benefit.title}</h3>
+                            <p class="text-neutral-600 text-sm">{benefit.description}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <!-- Safety Warning -->
+                <div class="bg-red-50 mx-auto mb-12 p-6 border border-red-200 rounded-xl max-w-3xl">
+                    <div class="flex items-start gap-4">
+                        <AlertTriangle className="flex-shrink-0 w-6 h-6 text-red-600" />
+                        <div>
+                            <h4 class="mb-2 font-bold text-red-800">{currentSleepContent.warning.title}</h4>
+                            <p class="text-red-700">{currentSleepContent.warning.text}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Night Splint Solution -->
+                <div class="bg-primary/5 mx-auto p-6 md:p-8 border border-primary/20 rounded-xl max-w-4xl">
+                    <h3 class="flex items-center gap-2 mb-4 font-bold text-neutral-900 text-xl">
+                        <Bed className="w-6 h-6 text-primary" />
+                        {currentSleepContent.nightSplint.title}
+                    </h3>
+                    <p class="mb-6 text-neutral-700">{currentSleepContent.nightSplint.description}</p>
+                    <ul class="space-y-3">
+                        {currentSleepContent.nightSplint.benefits.map((item) => (
+                            <li class="flex items-start gap-3">
+                                <Check className="flex-shrink-0 mt-0.5 w-5 h-5 text-primary" />
+                                <span class="text-neutral-700">{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <!-- Sleep Tips -->
+                <div class="bg-white shadow-sm mx-auto mt-8 p-6 md:p-8 border border-neutral-200 rounded-xl max-w-3xl">
+                    <h3 class="flex items-center gap-2 mb-4 font-bold text-neutral-900 text-xl">
+                        <Moon className="w-6 h-6 text-primary" />
+                        {currentSleepContent.tips.title}
+                    </h3>
+                    <ul class="gap-3 grid md:grid-cols-2">
+                        {currentSleepContent.tips.items.map((item) => (
+                            <li class="flex items-start gap-3">
+                                <Check className="flex-shrink-0 mt-0.5 w-5 h-5 text-primary" />
+                                <span class="text-neutral-700">{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         <RemoveBootBenefits lang={lang} content={currentContent.benefits} />
 
-        <Reviews />
+        <!-- Product Introduction - Soft Sell -->
+        <ProductIntroduction lang={lang} variant="sleeping" />
+
+        <!-- Surgeon Endorsements -->
+        <section class="bg-white py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <h2 class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl">
+                        Trusted by Medical Professionals
+                    </h2>
+                    <p class="text-neutral-600">
+                        Surgeons and clinicians recommend the Thetis splint for safe sleeping
+                    </p>
+                </div>
+                <SurgeonsCarousel client:load />
+            </div>
+        </section>
+
+        <!-- Patient Reviews -->
+        <section class="bg-gradient-to-b from-white to-neutral-50 py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full">
+                        <Check className="w-4 h-4 text-primary" />
+                        <span class="font-medium text-primary text-sm uppercase tracking-wider">Real Patient Experiences</span>
+                    </div>
+                    <h2 class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl">
+                        What Patients Say About Sleep
+                    </h2>
+                </div>
+                <EnhancedReviewCarousel client:load />
+                <div class="mt-8 text-center">
+                    <a
+                        href="/reviews"
+                        class="inline-flex items-center gap-2 hover:bg-primary px-6 py-3 border-2 border-primary rounded-lg font-semibold text-primary hover:text-white transition-colors"
+                    >
+                        View All Reviews
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Athletes Section -->
+        <section class="bg-neutral-50 py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <h2 class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl">
+                        Trusted by Professional Athletes
+                    </h2>
+                    <p class="text-neutral-600">
+                        Athletes recovering from Achilles rupture trust the Thetis splint
+                    </p>
+                </div>
+                <AthletesCarousel client:load />
+            </div>
+        </section>
 
         <SleepingFAQs lang={lang} client:load />
 
-        <SleepingOrderCallout lang={lang} />
+        <!-- Subscribe Block -->
+        <div class="bg-neutral-50 py-8 md:py-12">
+            <div class="mx-auto px-4 max-w-3xl">
+                <SubscribeBlock source="sleeping_page" />
+            </div>
+        </div>
 
-        <Reviews />
+        <SleepingOrderCallout lang={lang} />
     </main>
+
+    <StickyAddToCart
+        variant="splint"
+        lang={lang}
+        splintHref={splintRoute?.href || "/achilles-rupture-splint"}
+        client:load
+    />
+
+    <ExitIntentPopup client:load />
 </Layout>

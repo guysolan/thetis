@@ -1,31 +1,38 @@
 ---
-import { buttonVariants } from '../ui/button'
-import { cn } from '../../lib/utils'
+import { buttonVariants } from "../ui/button";
+import { cn } from "../../lib/utils";
 ---
 
 <form
     autocomplete="on"
     action="https://formspree.io/f/xbjvlval"
     method="POST"
-    class="flex flex-col justify-center items-center mt-4 w-full"
+    class="flex flex-col justify-center items-center mt-4 w-full max-w-sm"
 >
-    <div class="flex gap-x-2 w-full max-w-sm">
+    <input type="hidden" name="_subject" value="Footer newsletter signup" />
+    <input type="hidden" name="source" value="footer_subscribe" />
+    <div class="flex flex-col gap-2 w-full">
         <input
-            class="border-2 border-gray-200 bg-black px-2 py-2 rounded-lg w-full h-10 lg:h-12 font-light text-sm text-white"
+            class="bg-black px-2 py-2 border-2 border-gray-200 rounded-lg w-full h-10 lg:h-12 font-light text-white placeholder:text-gray-400 text-sm"
             required
             name="email"
             type="email"
-            placeholder="Enter your email"
+            placeholder="Email"
+            autocomplete="email"
         />
-        <button
-            type="submit"
-            value="send"
-            class={cn(
-                buttonVariants({ size: 'sm' }),
-                'h-10 lg:h-12 md:w-24 lg:w-36'
-            )}
-        >
-            Send <i data-lucide-name="send"></i>
-        </button>
+        <input
+            class="bg-black px-2 py-2 border-2 border-gray-200 rounded-lg w-full h-10 lg:h-12 font-light text-white placeholder:text-gray-400 text-sm"
+            name="phone"
+            type="tel"
+            placeholder="Phone (optional, for SMS tips)"
+            autocomplete="tel"
+        />
     </div>
+    <button
+        type="submit"
+        value="send"
+        class={cn(buttonVariants({ size: "sm" }), "mt-3 w-full h-10 lg:h-12")}
+    >
+        Subscribe
+    </button>
 </form>

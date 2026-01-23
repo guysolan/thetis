@@ -77,7 +77,10 @@ interface CartLinesRemoveResponse {
     };
 }
 
-async function storefrontFetch<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
+async function storefrontFetch<T>(
+    query: string,
+    variables: Record<string, unknown> = {},
+): Promise<T> {
     const response = await fetch(STOREFRONT_API_URL, {
         method: "POST",
         headers: {
@@ -92,7 +95,7 @@ async function storefrontFetch<T>(query: string, variables: Record<string, unkno
     }
 
     const json = await response.json();
-    
+
     if (json.errors) {
         throw new Error(json.errors[0]?.message || "Unknown error");
     }
@@ -143,7 +146,10 @@ const CART_FRAGMENT = `
     }
 `;
 
-export async function createCart(variantId: string, quantity: number = 1): Promise<Cart> {
+export async function createCart(
+    variantId: string,
+    quantity: number = 1,
+): Promise<Cart> {
     const query = `
         mutation cartCreate($input: CartInput!) {
             cartCreate(input: $input) {
@@ -171,7 +177,7 @@ export async function createCart(variantId: string, quantity: number = 1): Promi
     };
 
     const data = await storefrontFetch<CartCreateResponse>(query, variables);
-    
+
     if (data.cartCreate.userErrors.length > 0) {
         throw new Error(data.cartCreate.userErrors[0].message);
     }
@@ -193,7 +199,11 @@ export async function getCart(cartId: string): Promise<Cart | null> {
     return data.cart;
 }
 
-export async function addToCart(cartId: string, variantId: string, quantity: number = 1): Promise<Cart> {
+export async function addToCart(
+    cartId: string,
+    variantId: string,
+    quantity: number = 1,
+): Promise<Cart> {
     const query = `
         mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
             cartLinesAdd(cartId: $cartId, lines: $lines) {
@@ -220,7 +230,7 @@ export async function addToCart(cartId: string, variantId: string, quantity: num
     };
 
     const data = await storefrontFetch<CartLinesAddResponse>(query, variables);
-    
+
     if (data.cartLinesAdd.userErrors.length > 0) {
         throw new Error(data.cartLinesAdd.userErrors[0].message);
     }
@@ -228,7 +238,11 @@ export async function addToCart(cartId: string, variantId: string, quantity: num
     return data.cartLinesAdd.cart;
 }
 
-export async function updateCartLine(cartId: string, lineId: string, quantity: number): Promise<Cart> {
+export async function updateCartLine(
+    cartId: string,
+    lineId: string,
+    quantity: number,
+): Promise<Cart> {
     const query = `
         mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
             cartLinesUpdate(cartId: $cartId, lines: $lines) {
@@ -254,8 +268,11 @@ export async function updateCartLine(cartId: string, lineId: string, quantity: n
         ],
     };
 
-    const data = await storefrontFetch<CartLinesUpdateResponse>(query, variables);
-    
+    const data = await storefrontFetch<CartLinesUpdateResponse>(
+        query,
+        variables,
+    );
+
     if (data.cartLinesUpdate.userErrors.length > 0) {
         throw new Error(data.cartLinesUpdate.userErrors[0].message);
     }
@@ -263,7 +280,10 @@ export async function updateCartLine(cartId: string, lineId: string, quantity: n
     return data.cartLinesUpdate.cart;
 }
 
-export async function removeFromCart(cartId: string, lineId: string): Promise<Cart> {
+export async function removeFromCart(
+    cartId: string,
+    lineId: string,
+): Promise<Cart> {
     const query = `
         mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
             cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
@@ -284,8 +304,11 @@ export async function removeFromCart(cartId: string, lineId: string): Promise<Ca
         lineIds: [lineId],
     };
 
-    const data = await storefrontFetch<CartLinesRemoveResponse>(query, variables);
-    
+    const data = await storefrontFetch<CartLinesRemoveResponse>(
+        query,
+        variables,
+    );
+
     if (data.cartLinesRemove.userErrors.length > 0) {
         throw new Error(data.cartLinesRemove.userErrors[0].message);
     }
@@ -301,5 +324,52 @@ export function formatPrice(amount: string, currencyCode: string): string {
     }).format(numericAmount);
 }
 
-export type { Cart, CartLine };
+interface VariantPriceResponse {
+    productVariant: {
+        price: {
+            amount: string;
+            currencyCode: string;
+        } | null;
+    } | null;
+}
 
+export async function getVariantPrice(
+    variantId: string,
+    countryCode: string = "GB",
+): Promise<
+    { amount: string; currencyCode: string; formattedPrice: string } | null
+> {
+    const query = `
+        query getVariantPrice($variantId: ID!, $country: CountryCode) @inContext(country: $country) {
+            productVariant(id: $variantId) {
+                price {
+                    amount
+                    currencyCode
+                }
+            }
+        }
+    `;
+
+    try {
+        const data = await storefrontFetch<VariantPriceResponse>(query, {
+            variantId,
+            country: countryCode,
+        });
+
+        const price = data.productVariant?.price;
+        if (!price) {
+            return null;
+        }
+
+        return {
+            amount: price.amount,
+            currencyCode: price.currencyCode,
+            formattedPrice: formatPrice(price.amount, price.currencyCode),
+        };
+    } catch (error) {
+        console.error("Failed to fetch variant price:", error);
+        return null;
+    }
+}
+
+export type { Cart, CartLine };

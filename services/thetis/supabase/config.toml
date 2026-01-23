@@ -7,6 +7,8 @@ port = 54321
 schemas = ["public", "graphql_public"]
 extra_search_path = ["public", "extensions"]
 max_rows = 1000
+# CORS is automatically handled for localhost origins in local development
+# For production, configure CORS in Supabase Dashboard
 
 [api.tls]
 enabled = false

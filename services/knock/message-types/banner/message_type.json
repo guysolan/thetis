@@ -1,0 +1,194 @@
+{
+  "description": "A banner at the top of our product.",
+  "icon_name": "Flag",
+  "name": "Banner",
+  "variants": [
+    {
+      "fields": [
+        {
+          "key": "title",
+          "label": "Title",
+          "settings": {
+            "default": "Banner title",
+            "required": true
+          },
+          "type": "text"
+        },
+        {
+          "key": "body",
+          "label": "Body",
+          "settings": {
+            "default": "Copy about a feature or an action that the user should be aware of.",
+            "required": true
+          },
+          "type": "markdown"
+        },
+        {
+          "key": "dismissible",
+          "label": "Dismissible?",
+          "settings": {
+            "default": true,
+            "required": false
+          },
+          "type": "boolean"
+        }
+      ],
+      "key": "default",
+      "name": "Default"
+    },
+    {
+      "fields": [
+        {
+          "key": "title",
+          "label": "Title",
+          "settings": {
+            "default": "Banner title",
+            "required": true
+          },
+          "type": "text"
+        },
+        {
+          "key": "body",
+          "label": "Body",
+          "settings": {
+            "default": "Copy about a feature or an action that the user should be aware of.",
+            "required": true
+          },
+          "type": "markdown"
+        },
+        {
+          "key": "dismissible",
+          "label": "Dismissible?",
+          "settings": {
+            "default": true,
+            "required": false
+          },
+          "type": "boolean"
+        },
+        {
+          "action": {
+            "key": "action",
+            "label": "Button action",
+            "settings": {
+              "default": "action",
+              "required": true
+            },
+            "type": "text"
+          },
+          "key": "primary_button",
+          "label": "Primary button",
+          "settings": {
+            "required": true
+          },
+          "text": {
+            "key": "text",
+            "label": "Button text",
+            "settings": {
+              "default": "Primary",
+              "required": true
+            },
+            "type": "text"
+          },
+          "type": "button"
+        }
+      ],
+      "key": "single-action",
+      "name": "Single-action"
+    },
+    {
+      "fields": [
+        {
+          "key": "title",
+          "label": "Title",
+          "settings": {
+            "default": "Banner title",
+            "required": true
+          },
+          "type": "text"
+        },
+        {
+          "key": "body",
+          "label": "Body",
+          "settings": {
+            "default": "Copy about a feature or an action that the user should be aware of.",
+            "required": true
+          },
+          "type": "markdown"
+        },
+        {
+          "key": "dismissible",
+          "label": "Dismissible?",
+          "settings": {
+            "default": true,
+            "required": false
+          },
+          "type": "boolean"
+        },
+        {
+          "action": {
+            "key": "action",
+            "label": "Button action",
+            "settings": {
+              "default": "action",
+              "required": true
+            },
+            "type": "text"
+          },
+          "key": "primary_button",
+          "label": "Primary button",
+          "settings": {
+            "required": true
+          },
+          "text": {
+            "key": "text",
+            "label": "Button text",
+            "settings": {
+              "default": "Primary",
+              "required": true
+            },
+            "type": "text"
+          },
+          "type": "button"
+        },
+        {
+          "action": {
+            "key": "action",
+            "label": "Button action",
+            "settings": {
+              "default": "action",
+              "required": true
+            },
+            "type": "text"
+          },
+          "key": "secondary_button",
+          "label": "Secondary button",
+          "settings": {
+            "required": true
+          },
+          "text": {
+            "key": "text",
+            "label": "Button text",
+            "settings": {
+              "default": "Secondary",
+              "required": true
+            },
+            "type": "text"
+          },
+          "type": "button"
+        }
+      ],
+      "key": "multi-action",
+      "name": "Multi-action"
+    }
+  ],
+  "preview@": "preview.html",
+  "__readonly": {
+    "key": "banner",
+    "valid": true,
+    "owner": "system",
+    "environment": "development",
+    "semver": "0.0.1",
+    "created_at": "2026-01-22T17:27:38.678022Z"
+  },
+  "$schema": "https://schemas.knock.app/cli/message-type.json"
+}

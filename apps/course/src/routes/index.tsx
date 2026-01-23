@@ -12,6 +12,7 @@ import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 import { useCourseProgress } from "@/hooks/use-course-progress";
 import { useSimpleAuth } from "@/hooks/use-simple-auth";
 import { useEnrollment } from "@/hooks/use-enrollment";
+import { supabase } from "@/lib/supabase";
 import { Card } from "@thetis/ui/card";
 import { Button } from "@thetis/ui/button";
 import {
@@ -378,7 +379,10 @@ function HomePage() {
                 right information arrives exactly when you need it.
               </p>
             </div>
-            <EmailSignupDialog triggerText="Get Free Emails" />
+            <EmailSignupDialog
+              triggerText="Get Free Emails"
+              supabaseClient={supabase}
+            />
           </div>
         </div>
       </div>

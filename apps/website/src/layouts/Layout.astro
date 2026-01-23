@@ -39,6 +39,7 @@ import Nav from "./Nav.astro";
 import Footer from "@/features/footer/Footer.astro";
 import { CartSheet } from "../components/cart/CartSheet";
 import DiscountPopup from "../components/DiscountPopup";
+import WelcomePopup from "../components/WelcomePopup";
 ---
 
 <!doctype html>
@@ -67,7 +68,7 @@ import DiscountPopup from "../components/DiscountPopup";
     <InstantlyPixel />
     {!hideNav && <Nav lang={lang} />}
     <CartSheet client:load />
-    <DiscountPopup client:load />
+    <WelcomePopup client:idle delaySeconds={5} />
     <slot />
     {!hideFooter && <Footer lang={lang} />}
     <script type="text/partytown" src="@/services/lucide.ts"></script>

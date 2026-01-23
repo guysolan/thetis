@@ -153,43 +153,12 @@ export interface Route {
   slug: string;
 }
 
-// Course routes (paid and free courses at /course/)
+// Course routes (paid courses at /course/)
 export const courseRoutes: BaseRoute[] = [
   {
-    slug: "course/emails",
+    slug: "course",
     title: {
-      en: "Email Course",
-      de: "E-Mail-Kurs",
-      fr: "Cours par Email",
-      es: "Curso por Email",
-      it: "Corso Email",
-    },
-    description: {
-      en:
-        "Free personalized emails timed to your injury date. Recovery guidance arrives exactly when you need it.",
-      de:
-        "Kostenlose personalisierte E-Mails basierend auf Ihrem Verletzungsdatum. Genesungsanleitung kommt genau dann, wenn Sie sie brauchen.",
-      fr:
-        "Emails personnalisés gratuits basés sur votre date de blessure. Les conseils arrivent exactement quand vous en avez besoin.",
-      es:
-        "Correos personalizados gratuitos basados en tu fecha de lesión. La orientación llega exactamente cuando la necesitas.",
-      it:
-        "Email personalizzate gratuite basate sulla tua data di infortunio. I consigli arrivano esattamente quando ne hai bisogno.",
-    },
-    slugTranslations: {
-      en: "course/emails",
-      de: "kurs/emails",
-      fr: "cours/emails",
-      es: "curso/emails",
-      it: "corso/emails",
-    },
-    icon: <Mail />,
-    variant: "outline",
-  },
-  {
-    slug: "course/standard",
-    title: {
-      en: "standard Course",
+      en: "Recovery Course",
       de: "Grundlagen-Kurs",
       fr: "Cours Essentiels",
       es: "Curso Esenciales",
@@ -208,13 +177,13 @@ export const courseRoutes: BaseRoute[] = [
         "31 lezioni strutturate che coprono ogni fase del recupero dalla rottura di Achille. Guida esperta per 29 €.",
     },
     slugTranslations: {
-      en: "course/standard",
-      de: "kurs/grundlagen",
-      fr: "cours/essentiels",
-      es: "curso/esenciales",
-      it: "corso/fondamentali",
+      en: "course",
+      de: "kurs",
+      fr: "cours",
+      es: "curso",
+      it: "corso",
     },
-    icon: <List />,
+    icon: <BookOpen />,
     variant: "default",
   },
   {
@@ -755,9 +724,9 @@ export const productRoutes: BaseRoute[] = [
 // Partner routes
 export const partnerRoutes: BaseRoute[] = [
   {
-    slug: "premium",
+    slug: "professionals",
     title: {
-      en: "Premium",
+      en: "Professionals",
       de: "Fachkräfte",
       fr: "Professionnels",
       es: "Profesionales",
@@ -928,29 +897,29 @@ export const contactRoutes: BaseRoute[] = [
     },
   },
   {
-    slug: "buy-now",
+    slug: "leave-review",
     title: {
-      en: "Buy Now",
-      de: "Jetzt kaufen",
-      fr: "Acheter maintenant",
-      es: "Comprar ahora",
-      it: "Compra ora",
+      en: "Leave a Review",
+      de: "Bewertung abgeben",
+      fr: "Laisser un avis",
+      es: "Dejar una reseña",
+      it: "Lascia una recensione",
     },
     description: {
-      en: "Purchase our Achilles rupture splint.",
-      de: "Kaufen Sie unsere Achillessehnenruptur-Schiene.",
-      fr: "Achetez notre attelle de rupture d'Achille.",
-      es: "Compre nuestra férula de ruptura de Aquiles.",
-      it: "Acquista la nostra férula per rottura di Achille.",
+      en: "Share your experience and earn cashback.",
+      de: "Teilen Sie Ihre Erfahrung und erhalten Sie Cashback.",
+      fr: "Partagez votre expérience et gagnez du cashback.",
+      es: "Comparte tu experiencia y gana cashback.",
+      it: "Condividi la tua esperienza e guadagna cashback.",
     },
-    icon: <ShoppingCart />,
+    icon: <Star />,
     variant: "default",
     slugTranslations: {
-      en: "buy-now",
-      de: "jetzt-kaufen",
-      fr: "acheter-maintenant",
-      es: "comprar-ahora",
-      it: "compra-ora",
+      en: "leave-review",
+      de: "bewertung-abgeben",
+      fr: "laisser-avis",
+      es: "dejar-resena",
+      it: "lascia-recensione",
     },
   },
   {

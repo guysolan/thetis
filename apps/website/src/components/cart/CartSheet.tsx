@@ -24,6 +24,7 @@ import {
     updateQuantity,
 } from "@/lib/shopify/cart-store";
 import { formatPrice } from "@/lib/shopify/storefront";
+import { useVariantPrice } from "@/hooks/use-variant-price";
 import { getUpsellSuggestions } from "@/lib/shopify/products";
 import {
     Check,
@@ -278,6 +279,85 @@ interface CartLineItemProps {
 
 function CartLineItem({ line, onUpdateQuantity, onRemove }: CartLineItemProps) {
     const [isUpdating, setIsUpdating] = React.useState(false);
+    const [currentPrice, setCurrentPrice] = React.useState<
+        {
+            amount: string;
+            currencyCode: string;
+            formattedPrice: string;
+        } | null
+    >(null);
+    const [isLoadingPrice, setIsLoadingPrice] = React.useState(true);
+
+    // Fetch current price from Shopify API based on user's location
+    React.useEffect(() => {
+        let isMounted = true;
+
+        async function loadPrice() {
+            setIsLoadingPrice(true);
+            try {
+                // Detect country
+                let countryCode = "GB";
+                try {
+                    const geoResponse = await fetch("https://ipapi.co/json/");
+                    if (geoResponse.ok) {
+                        const geoData = await geoResponse.json();
+                        countryCode = geoData.country_code || "GB";
+                    }
+                } catch (e) {
+                    console.error("Failed to detect country:", e);
+                }
+
+                // Fetch price from Shopify API
+                const priceData = await getVariantPrice(
+                    line.merchandise.id,
+                    countryCode,
+                );
+
+                if (!isMounted) return;
+
+                if (priceData) {
+                    setCurrentPrice(priceData);
+                } else {
+                    // Fallback to cart price if API fails
+                    setCurrentPrice({
+                        amount: line.merchandise.price.amount,
+                        currencyCode: line.merchandise.price.currencyCode,
+                        formattedPrice: formatPrice(
+                            line.merchandise.price.amount,
+                            line.merchandise.price.currencyCode,
+                        ),
+                    });
+                }
+            } catch (error) {
+                console.error("Failed to load variant price:", error);
+                if (isMounted) {
+                    // Fallback to cart price if API fails
+                    setCurrentPrice({
+                        amount: line.merchandise.price.amount,
+                        currencyCode: line.merchandise.price.currencyCode,
+                        formattedPrice: formatPrice(
+                            line.merchandise.price.amount,
+                            line.merchandise.price.currencyCode,
+                        ),
+                    });
+                }
+            } finally {
+                if (isMounted) {
+                    setIsLoadingPrice(false);
+                }
+            }
+        }
+
+        loadPrice();
+
+        return () => {
+            isMounted = false;
+        };
+    }, [
+        line.merchandise.id,
+        line.merchandise.price.amount,
+        line.merchandise.price.currencyCode,
+    ]);
 
     const handleQuantityChange = async (newQuantity: number) => {
         if (newQuantity < 0) return;
@@ -307,8 +387,18 @@ function CartLineItem({ line, onUpdateQuantity, onRemove }: CartLineItemProps) {
         ? line.merchandise.title
         : "";
 
+    // Use current price from API if available, otherwise fallback to cart price
+    const priceToUse = currentPrice || {
+        amount: line.merchandise.price.amount,
+        currencyCode: line.merchandise.price.currencyCode,
+        formattedPrice: formatPrice(
+            line.merchandise.price.amount,
+            line.merchandise.price.currencyCode,
+        ),
+    };
+
     const lineTotal = (
-        parseFloat(line.merchandise.price.amount) * line.quantity
+        parseFloat(priceToUse.amount) * line.quantity
     ).toFixed(2);
 
     return (
@@ -384,10 +474,16 @@ function CartLineItem({ line, onUpdateQuantity, onRemove }: CartLineItemProps) {
 
                     {/* Price */}
                     <span className="font-semibold">
-                        {formatPrice(
-                            lineTotal,
-                            line.merchandise.price.currencyCode,
-                        )}
+                        {isLoadingPrice
+                            ? (
+                                <span className="inline-flex items-center gap-1">
+                                    <Loader2 className="w-3 h-3 animate-spin" />
+                                </span>
+                            )
+                            : formatPrice(
+                                lineTotal,
+                                priceToUse.currencyCode,
+                            )}
                     </span>
                 </div>
             </div>
@@ -413,6 +509,12 @@ function UpsellItem({ product }: UpsellItemProps) {
     const isCourse = product.variantId.includes("522653");
     const isEssentials = product.variantId.includes("52265314353480");
     const isProfessionals = product.variantId.includes("52265315828040");
+
+    // Fetch price from Shopify API using hook (same pattern as BuyButtonVariants/useShopifyPrice)
+    const { formattedPrice, isLoading: isLoadingPrice } = useVariantPrice(
+        product.variantId,
+        product.price,
+    );
 
     const handleAdd = async () => {
         if (!product.canAddToCart) {
@@ -452,7 +554,14 @@ function UpsellItem({ product }: UpsellItemProps) {
                         {product.description}
                     </p>
                     <span className="font-semibold text-primary text-sm">
-                        {product.price}
+                        {isLoadingPrice
+                            ? (
+                                <span className="inline-flex items-center gap-1">
+                                    <Loader2 className="w-3 h-3 animate-spin" />
+                                    Loading...
+                                </span>
+                            )
+                            : formattedPrice || product.price}
                     </span>
                 </div>
                 <Button

@@ -20,20 +20,22 @@ export const COURSE_VARIANTS = {
 export const COURSE_VARIANT_IDS = Object.values(COURSE_VARIANTS);
 
 // Product info for upsells
+// Note: Prices are fetched dynamically using useVariantPrice hook
+// The price field is kept for TypeScript compatibility but should not be used for display
 export const UPSELL_PRODUCTS = {
     splint: {
         title: "Achilles Night Splint",
         description: "Sleep comfortably while your tendon heals",
-        price: "£69.99",
+        price: null as string | null, // Fetched dynamically via useVariantPrice hook
         image: "/images/night_splint_square_small.jpg",
-        href: "/buy-now",
+        href: "/achilles-rupture-splint",
         variantId: SPLINT_VARIANTS["large-left"], // Default variant for upsell
         canAddToCart: true,
     },
     essentialsCourse: {
-        title: "Recovery Essentials Course",
+        title: "Recovery Course",
         description: "31 lessons to guide your recovery",
-        price: "£29.99",
+        price: null as string | null, // Fetched dynamically via useVariantPrice hook
         image: "/images/course-essentials.jpg",
         href: `${COURSE_URL}/standard`,
         variantId: COURSE_VARIANTS.ESSENTIALS,
@@ -42,7 +44,7 @@ export const UPSELL_PRODUCTS = {
     professionalsCourse: {
         title: "Professionals Course",
         description: "Complete guide for clinicians",
-        price: "£79.99",
+        price: null as string | null, // Fetched dynamically via useVariantPrice hook
         image: "/images/course-professionals.jpg",
         href: `${COURSE_URL}/premium`,
         variantId: COURSE_VARIANTS.PROFESSIONALS,

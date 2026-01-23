@@ -136,11 +136,6 @@ const socials: Array<{
           title={footerLinks.products.title}
           links={footerLinks.products.links}
         />
-        <!-- Recovery Guide (internal links) -->
-        <FooterBlock
-          title={footerLinks.guide.title}
-          links={footerLinks.guide.links}
-        />
       </div>
 
       <!-- Patient Guides -->
@@ -152,16 +147,20 @@ const socials: Array<{
           </h3>
           <ul class="space-y-3">
             {
-              getCourseRoutesByLanguage(lang).map((course) => (
-                <li>
-                  <a
-                    href={course.href}
-                    class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
-                  >
-                    {course.title}
-                  </a>
-                </li>
-              ))
+              getCourseRoutesByLanguage(lang)
+                .filter(
+                  (course) => !course.href.includes("/course/professionals"),
+                )
+                .map((course) => (
+                  <li>
+                    <a
+                      href={course.href}
+                      class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
+                    >
+                      {course.title}
+                    </a>
+                  </li>
+                ))
             }
           </ul>
         </div>
@@ -217,7 +216,9 @@ const socials: Array<{
         />
 
         <div class="space-y-4">
-          <h3 class="font-semibold text-lg lg:text-left text-center">{stayInTouchTitles[lang]}</h3>
+          <h3 class="font-semibold text-lg lg:text-left text-center">
+            {stayInTouchTitles[lang]}
+          </h3>
           <FooterEmailCTA />
 
           <div class="flex flex-col items-center lg:items-start gap-y-4">
@@ -242,7 +243,9 @@ const socials: Array<{
     <div
       class="flex md:flex-row flex-col justify-center md:justify-between items-center mt-8 pt-6 border-gray-800 border-t"
     >
-      <p class="text-gray-300 text-base">&copy; Thetis Medical Ltd 2020-2025</p>
+      <p class="text-gray-300 text-base">
+        &copy; Thetis Medical Ltd 2020-{new Date().getFullYear()}
+      </p>
     </div>
 
     <div class="sr-only">
