@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import ScarMassageTechnique from "@/assets/scar-massage-technique.png";
+import ScarMassageTechnique from "@/assets/scar-massage-engaging-v1.png";
 
 export const metadata = {
     slug: "post-surgery-care",

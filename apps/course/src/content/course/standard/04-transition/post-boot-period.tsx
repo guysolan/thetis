@@ -1,5 +1,6 @@
 import type { SectionContent } from "@/components/course/types";
 import HeelLifts from "@/assets/heel-lifts.jpg";
+import GradualWeaningComparison from "@/assets/gradual-weaning-process-comparison-v1.png";
 
 export const metadata = {
     slug: "post-boot-period",
@@ -103,6 +104,14 @@ export const content: SectionContent = {
                         "**Day 5-6**: Majority of day in shoes, boot for longer walks",
                         "**Day 7+**: Full transition to shoes during the day",
                     ],
+                },
+                {
+                    type: "image",
+                    src: GradualWeaningComparison,
+                    alt:
+                        "Comparison diagram showing different approaches to gradually weaning out of the boot into shoes over 1-2 weeks",
+                    caption:
+                        "Gradual weaning from boot to shoes: compare typical schedules and choose the approach your clinician recommends.",
                 },
                 {
                     type: "tip",
