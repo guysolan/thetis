@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import SeatedCalfRaisePhase1 from "@/assets/seated-calf-raise-phase1.png";
+import SeatedCalfRaisePhase1 from "@/assets/seated-calf-raise-phase1-option-b5.png";
 
 export const metadata = {
     slug: "building-strength-in-boot",

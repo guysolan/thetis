@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import WedgeRemovalProgression from "@/assets/wedge-removal-progression.png";
+import WedgeRemovalProgression from "@/assets/wedge-removal-progression-cartoon.png";
 
 export const metadata = {
     slug: "boot-progression-protocol",

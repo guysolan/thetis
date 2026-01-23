@@ -1,7 +1,7 @@
 import type { SectionContent } from "@/components/course/types";
 import DvtVsPeLegToLungs from "@/assets/dvt-vs-pe-leg-to-lungs.png";
 import DvtDopplerScan from "@/assets/dvt-doppler-scan.png";
-import DvtSignsSymptoms from "@/assets/dvt-signs-symptoms.png";
+import DvtSignsSymptoms from "@/assets/dvt-signs-symptoms-tintin-v6.png";
 
 export const metadata = {
     slug: "blood-clot-prevention",
