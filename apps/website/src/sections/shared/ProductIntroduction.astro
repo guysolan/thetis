@@ -1,0 +1,318 @@
+---
+import { Image } from "astro:assets";
+import nightSplint from "@/assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
+import ReviewsLink from "@/components/ReviewsLink.tsx";
+import PriceDisplay from "@/components/PriceDisplay.tsx";
+import { Check, Moon, Droplets, ShieldCheck, Feather, Waves } from "lucide-react";
+import type { Lang } from "@/config/languages";
+
+interface Props {
+    lang: Lang;
+    variant: "sleeping" | "washing" | "swimming";
+}
+
+const { lang = "en", variant } = Astro.props;
+
+const content = {
+    en: {
+        sleeping: {
+            badge: "Why We Built This",
+            title: "We Made the Splint to Solve This Exact Problem",
+            description: "After hearing from thousands of patients struggling to sleep in their heavy boots, we designed a lightweight alternative that maintains protection while dramatically improving comfort.",
+            story: "The Thetis Night Splint was developed alongside orthopaedic surgeons specifically for Achilles rupture recovery. It's not a generic product adapted for this use - it's purpose-built for exactly what you're going through.",
+            features: [
+                { icon: "feather", text: "Weighs hundreds of grams, not 1-2kg like a boot" },
+                { icon: "moon", text: "Open design lets your foot breathe at night" },
+                { icon: "shield", text: "Maintains safe plantarflexion position" },
+                { icon: "droplets", text: "Waterproof - also use it for showering" }
+            ],
+            cta: "View product details",
+            safetyNote: "Always check with your medical team before using. Usually approved after week 2-3."
+        },
+        washing: {
+            badge: "Why We Built This",
+            title: "We Made the Splint to Solve This Exact Problem",
+            description: "After hearing from thousands of patients frustrated by not being able to wash properly, we designed a waterproof splint that lets you actually clean your foot - not just protect the boot.",
+            story: "Unlike generic waterproof covers that just keep your boot dry, the Thetis Splint lets you remove the boot entirely and wash your foot properly while maintaining Achilles protection.",
+            features: [
+                { icon: "droplets", text: "Fully waterproof - shower with confidence" },
+                { icon: "shield", text: "Maintains safe plantarflexion position" },
+                { icon: "moon", text: "Also perfect for sleeping" },
+                { icon: "feather", text: "Lightweight and easy to put on" }
+            ],
+            cta: "View product details",
+            safetyNote: "Always check with your medical team before using. Usually approved after week 2-3."
+        },
+        swimming: {
+            badge: "Why We Built This",
+            title: "We Made the Splint to Help You Stay Active",
+            description: "We know how frustrating it is to lose fitness during recovery. The Thetis Splint is waterproof so you can get back in the pool safely while maintaining Achilles protection.",
+            story: "Swimming is ideal for Achilles recovery because your foot naturally stays in the safe position. Our splint adds an extra layer of protection for those who want peace of mind in the water.",
+            features: [
+                { icon: "waves", text: "Handles pool and sea water well" },
+                { icon: "shield", text: "Maintains safe plantarflexion position" },
+                { icon: "moon", text: "Also perfect for sleeping" },
+                { icon: "droplets", text: "Quick-drying materials" }
+            ],
+            cta: "View product details",
+            safetyNote: "Always get medical clearance before swimming. Timing depends on your individual recovery."
+        }
+    },
+    de: {
+        sleeping: {
+            badge: "Warum wir das gebaut haben",
+            title: "Wir haben die Schiene entwickelt, um genau dieses Problem zu lösen",
+            description: "Nachdem wir von Tausenden von Patienten gehört haben, die Schwierigkeiten hatten, in ihren schweren Stiefeln zu schlafen, haben wir eine leichte Alternative entwickelt.",
+            story: "Die Thetis-Nachtschiene wurde zusammen mit orthopädischen Chirurgen speziell für die Achillessehnenruptur-Genesung entwickelt.",
+            features: [
+                { icon: "feather", text: "Wiegt nur Hunderte von Gramm, nicht 1-2kg" },
+                { icon: "moon", text: "Offenes Design lässt Ihren Fuß atmen" },
+                { icon: "shield", text: "Erhält sichere Plantarflexionsposition" },
+                { icon: "droplets", text: "Wasserdicht - auch zum Duschen geeignet" }
+            ],
+            cta: "Produktdetails anzeigen",
+            safetyNote: "Klären Sie immer mit Ihrem medizinischen Team ab. Normalerweise nach Woche 2-3 genehmigt."
+        },
+        washing: {
+            badge: "Warum wir das gebaut haben",
+            title: "Wir haben die Schiene entwickelt, um genau dieses Problem zu lösen",
+            description: "Nachdem wir von Tausenden von Patienten gehört haben, die frustriert waren, sich nicht richtig waschen zu können, haben wir eine wasserdichte Schiene entwickelt.",
+            story: "Im Gegensatz zu generischen wasserdichten Abdeckungen lässt die Thetis-Schiene Sie den Stiefel abnehmen und Ihren Fuß richtig waschen.",
+            features: [
+                { icon: "droplets", text: "Vollständig wasserdicht - duschen Sie mit Vertrauen" },
+                { icon: "shield", text: "Erhält sichere Plantarflexionsposition" },
+                { icon: "moon", text: "Auch perfekt zum Schlafen" },
+                { icon: "feather", text: "Leicht und einfach anzulegen" }
+            ],
+            cta: "Produktdetails anzeigen",
+            safetyNote: "Klären Sie immer mit Ihrem medizinischen Team ab. Normalerweise nach Woche 2-3 genehmigt."
+        },
+        swimming: {
+            badge: "Warum wir das gebaut haben",
+            title: "Wir haben die Schiene entwickelt, um Ihnen zu helfen, aktiv zu bleiben",
+            description: "Wir wissen, wie frustrierend es ist, während der Genesung an Fitness zu verlieren. Die Thetis-Schiene ist wasserdicht.",
+            story: "Schwimmen ist ideal für die Achillessehnen-Genesung, weil Ihr Fuß natürlich in der sicheren Position bleibt.",
+            features: [
+                { icon: "waves", text: "Verträgt Pool- und Meerwasser gut" },
+                { icon: "shield", text: "Erhält sichere Plantarflexionsposition" },
+                { icon: "moon", text: "Auch perfekt zum Schlafen" },
+                { icon: "droplets", text: "Schnell trocknende Materialien" }
+            ],
+            cta: "Produktdetails anzeigen",
+            safetyNote: "Holen Sie immer ärztliche Freigabe ein. Der Zeitpunkt hängt von Ihrer individuellen Genesung ab."
+        }
+    },
+    fr: {
+        sleeping: {
+            badge: "Pourquoi nous l'avons créé",
+            title: "Nous avons créé l'attelle pour résoudre exactement ce problème",
+            description: "Après avoir entendu des milliers de patients lutter pour dormir dans leurs bottes lourdes, nous avons conçu une alternative légère.",
+            story: "L'attelle de nuit Thetis a été développée avec des chirurgiens orthopédiques spécifiquement pour la récupération de rupture d'Achille.",
+            features: [
+                { icon: "feather", text: "Pèse des centaines de grammes, pas 1-2kg" },
+                { icon: "moon", text: "Design ouvert laisse votre pied respirer" },
+                { icon: "shield", text: "Maintient la position de flexion plantaire sûre" },
+                { icon: "droplets", text: "Imperméable - utilisez-la aussi pour la douche" }
+            ],
+            cta: "Voir les détails du produit",
+            safetyNote: "Consultez toujours votre équipe médicale. Généralement approuvé après la semaine 2-3."
+        },
+        washing: {
+            badge: "Pourquoi nous l'avons créé",
+            title: "Nous avons créé l'attelle pour résoudre exactement ce problème",
+            description: "Après avoir entendu des milliers de patients frustrés de ne pas pouvoir se laver correctement, nous avons conçu une attelle imperméable.",
+            story: "Contrairement aux couvres imperméables génériques, l'attelle Thetis vous permet de retirer la botte et de laver votre pied correctement.",
+            features: [
+                { icon: "droplets", text: "Totalement imperméable - douchez-vous en confiance" },
+                { icon: "shield", text: "Maintient la position de flexion plantaire sûre" },
+                { icon: "moon", text: "Parfait aussi pour dormir" },
+                { icon: "feather", text: "Légère et facile à mettre" }
+            ],
+            cta: "Voir les détails du produit",
+            safetyNote: "Consultez toujours votre équipe médicale. Généralement approuvé après la semaine 2-3."
+        },
+        swimming: {
+            badge: "Pourquoi nous l'avons créé",
+            title: "Nous avons créé l'attelle pour vous aider à rester actif",
+            description: "Nous savons à quel point il est frustrant de perdre sa forme pendant la récupération. L'attelle Thetis est imperméable.",
+            story: "La natation est idéale pour la récupération d'Achille car votre pied reste naturellement dans la position sûre.",
+            features: [
+                { icon: "waves", text: "Supporte bien l'eau de piscine et de mer" },
+                { icon: "shield", text: "Maintient la position de flexion plantaire sûre" },
+                { icon: "moon", text: "Parfait aussi pour dormir" },
+                { icon: "droplets", text: "Matériaux à séchage rapide" }
+            ],
+            cta: "Voir les détails du produit",
+            safetyNote: "Obtenez toujours l'autorisation médicale. Le moment dépend de votre récupération individuelle."
+        }
+    },
+    es: {
+        sleeping: {
+            badge: "Por qué lo creamos",
+            title: "Creamos la férula para resolver exactamente este problema",
+            description: "Después de escuchar a miles de pacientes luchando por dormir en sus botas pesadas, diseñamos una alternativa ligera.",
+            story: "La férula nocturna Thetis fue desarrollada junto con cirujanos ortopédicos específicamente para la recuperación de rotura de Aquiles.",
+            features: [
+                { icon: "feather", text: "Pesa cientos de gramos, no 1-2kg" },
+                { icon: "moon", text: "Diseño abierto permite que su pie respire" },
+                { icon: "shield", text: "Mantiene posición de flexión plantar segura" },
+                { icon: "droplets", text: "Impermeable - úsela también para ducharse" }
+            ],
+            cta: "Ver detalles del producto",
+            safetyNote: "Siempre consulte con su equipo médico. Generalmente aprobada después de la semana 2-3."
+        },
+        washing: {
+            badge: "Por qué lo creamos",
+            title: "Creamos la férula para resolver exactamente este problema",
+            description: "Después de escuchar a miles de pacientes frustrados por no poder lavarse correctamente, diseñamos una férula impermeable.",
+            story: "A diferencia de las cubiertas impermeables genéricas, la férula Thetis le permite quitarse la bota y lavar su pie correctamente.",
+            features: [
+                { icon: "droplets", text: "Totalmente impermeable - dúchese con confianza" },
+                { icon: "shield", text: "Mantiene posición de flexión plantar segura" },
+                { icon: "moon", text: "También perfecta para dormir" },
+                { icon: "feather", text: "Ligera y fácil de poner" }
+            ],
+            cta: "Ver detalles del producto",
+            safetyNote: "Siempre consulte con su equipo médico. Generalmente aprobada después de la semana 2-3."
+        },
+        swimming: {
+            badge: "Por qué lo creamos",
+            title: "Creamos la férula para ayudarle a mantenerse activo",
+            description: "Sabemos lo frustrante que es perder forma durante la recuperación. La férula Thetis es impermeable.",
+            story: "Nadar es ideal para la recuperación de Aquiles porque su pie permanece naturalmente en la posición segura.",
+            features: [
+                { icon: "waves", text: "Soporta bien el agua de piscina y mar" },
+                { icon: "shield", text: "Mantiene posición de flexión plantar segura" },
+                { icon: "moon", text: "También perfecta para dormir" },
+                { icon: "droplets", text: "Materiales de secado rápido" }
+            ],
+            cta: "Ver detalles del producto",
+            safetyNote: "Siempre obtenga autorización médica. El momento depende de su recuperación individual."
+        }
+    },
+    it: {
+        sleeping: {
+            badge: "Perché l'abbiamo creata",
+            title: "Abbiamo creato la stecca per risolvere esattamente questo problema",
+            description: "Dopo aver ascoltato migliaia di pazienti che lottavano per dormire con i loro stivali pesanti, abbiamo progettato un'alternativa leggera.",
+            story: "La stecca notturna Thetis è stata sviluppata insieme a chirurghi ortopedici specificamente per il recupero dalla rottura dell'Achille.",
+            features: [
+                { icon: "feather", text: "Pesa centinaia di grammi, non 1-2kg" },
+                { icon: "moon", text: "Design aperto lascia respirare il piede" },
+                { icon: "shield", text: "Mantiene posizione di flessione plantare sicura" },
+                { icon: "droplets", text: "Impermeabile - usala anche per la doccia" }
+            ],
+            cta: "Vedi dettagli prodotto",
+            safetyNote: "Consulta sempre il tuo team medico. Di solito approvata dopo la settimana 2-3."
+        },
+        washing: {
+            badge: "Perché l'abbiamo creata",
+            title: "Abbiamo creato la stecca per risolvere esattamente questo problema",
+            description: "Dopo aver ascoltato migliaia di pazienti frustrati dal non potersi lavare correttamente, abbiamo progettato una stecca impermeabile.",
+            story: "A differenza delle coperture impermeabili generiche, la stecca Thetis ti permette di togliere lo stivale e lavare il piede correttamente.",
+            features: [
+                { icon: "droplets", text: "Completamente impermeabile - fai la doccia con fiducia" },
+                { icon: "shield", text: "Mantiene posizione di flessione plantare sicura" },
+                { icon: "moon", text: "Perfetta anche per dormire" },
+                { icon: "feather", text: "Leggera e facile da indossare" }
+            ],
+            cta: "Vedi dettagli prodotto",
+            safetyNote: "Consulta sempre il tuo team medico. Di solito approvata dopo la settimana 2-3."
+        },
+        swimming: {
+            badge: "Perché l'abbiamo creata",
+            title: "Abbiamo creato la stecca per aiutarti a rimanere attivo",
+            description: "Sappiamo quanto sia frustrante perdere forma durante il recupero. La stecca Thetis è impermeabile.",
+            story: "Il nuoto è ideale per il recupero dell'Achille perché il piede rimane naturalmente nella posizione sicura.",
+            features: [
+                { icon: "waves", text: "Sopporta bene l'acqua di piscina e mare" },
+                { icon: "shield", text: "Mantiene posizione di flessione plantare sicura" },
+                { icon: "moon", text: "Perfetta anche per dormire" },
+                { icon: "droplets", text: "Materiali ad asciugatura rapida" }
+            ],
+            cta: "Vedi dettagli prodotto",
+            safetyNote: "Ottieni sempre l'autorizzazione medica. Il momento dipende dal tuo recupero individuale."
+        }
+    }
+};
+
+const currentContent = content[lang as keyof typeof content]?.[variant] || content.en[variant];
+---
+
+<section class="bg-gradient-to-b from-neutral-50 to-white py-16 md:py-20">
+    <div class="mx-auto px-4 max-w-6xl">
+        <!-- Badge -->
+        <div class="mb-8 text-center">
+            <div class="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
+                <ShieldCheck className="w-4 h-4 text-primary" />
+                <span class="font-medium text-primary text-sm uppercase tracking-wider">{currentContent.badge}</span>
+            </div>
+        </div>
+
+        <div class="gap-12 grid lg:grid-cols-2 items-center">
+            <!-- Product Image -->
+            <div class="order-2 lg:order-1">
+                <Image
+                    src={nightSplint}
+                    alt="Thetis Night Splint for Achilles Rupture Recovery"
+                    class="shadow-lg rounded-xl w-full"
+                    width={600}
+                    height={400}
+                />
+            </div>
+
+            <!-- Content -->
+            <div class="order-1 lg:order-2">
+                <h2 class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl">
+                    {currentContent.title}
+                </h2>
+                
+                <p class="mb-4 text-neutral-600 text-lg">
+                    {currentContent.description}
+                </p>
+
+                <p class="mb-6 text-neutral-600">
+                    {currentContent.story}
+                </p>
+
+                <!-- Features -->
+                <div class="space-y-3 mb-6">
+                    {currentContent.features.map((feature) => (
+                        <div class="flex items-start gap-3">
+                            <div class="flex justify-center items-center bg-primary/10 rounded-full w-8 h-8 flex-shrink-0">
+                                {feature.icon === "feather" && <Feather className="w-4 h-4 text-primary" />}
+                                {feature.icon === "moon" && <Moon className="w-4 h-4 text-primary" />}
+                                {feature.icon === "shield" && <ShieldCheck className="w-4 h-4 text-primary" />}
+                                {feature.icon === "droplets" && <Droplets className="w-4 h-4 text-primary" />}
+                                {feature.icon === "waves" && <Waves className="w-4 h-4 text-primary" />}
+                            </div>
+                            <span class="text-neutral-700">{feature.text}</span>
+                        </div>
+                    ))}
+                </div>
+
+                <!-- Price & Reviews -->
+                <div class="flex flex-col gap-2 mb-4">
+                    <PriceDisplay size="lg" showFreeShipping={true} client:load />
+                    <ReviewsLink size="md" lang={lang} />
+                </div>
+
+                <!-- Safety Note -->
+                <p class="mb-6 text-neutral-500 text-sm italic">
+                    {currentContent.safetyNote}
+                </p>
+
+                <!-- CTA -->
+                <a
+                    href="/achilles-rupture-splint"
+                    class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 px-6 py-3 rounded-lg font-semibold text-white transition-colors"
+                >
+                    {currentContent.cta}
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

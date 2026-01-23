@@ -8,8 +8,18 @@ import SwimmingSafetyGuidelines from "@/sections/swimming-with-torn-achilles/Swi
 import SwimmingFAQs from "@/sections/swimming-with-torn-achilles/SwimmingFAQs";
 import SwimmingOrderCallout from "@/sections/swimming-with-torn-achilles/SwimmingOrderCallout.astro";
 import Reviews from "@/components/reviews/InfiniteReviews.astro";
+import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
+import SurgeonsCarousel from "@/components/SurgeonsCarousel";
+import AthletesCarousel from "@/components/AthletesCarousel";
+import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
+import StickyAddToCart from "@/components/StickyAddToCart.tsx";
+import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
+import { Check, AlertTriangle, Waves, Calendar, Heart, Dumbbell, Brain, Timer } from "lucide-react";
+import ProductIntroduction from "@/sections/shared/ProductIntroduction.astro";
 
 const { lang = "en" } = Astro.props as { lang?: Lang };
+const splintRoute = getRouteBySlugAndLanguage("splint", lang);
 
 const content = {
     en: {
@@ -295,6 +305,387 @@ const content = {
 };
 
 const currentContent = content[lang as keyof typeof content];
+
+// Educational content about swimming and recovery
+const swimContent = {
+    en: {
+        sectionTitle: "When Can You Start Swimming?",
+        sectionSubtitle: "A timeline for safe return to aquatic activities",
+        quote: "Swimming is excellent cardiovascular exercise with minimal tendon loading. It's one of the safest ways to build fitness during recovery. The water supports your body weight, making it ideal for early cardio.",
+        timeline: {
+            title: "Swimming Timeline",
+            items: [
+                { week: "Week 10-12", activity: "Pool Walking", description: "Start with walking in waist-to-chest deep water. 10-15 minutes, 2-3 times per week." },
+                { week: "Week 12-14", activity: "Gentle Swimming", description: "Begin freestyle and backstroke. Start with 15-20 minutes. Avoid breaststroke initially." },
+                { week: "Week 16+", activity: "Full Swimming", description: "Longer swims, pool running, varied strokes. 20-30+ minutes, 3-4 times per week." }
+            ]
+        },
+        benefits: [
+            {
+                title: "Zero Impact",
+                description: "Water supports your body weight, eliminating impact stress on your healing tendon while allowing exercise.",
+                icon: "waves"
+            },
+            {
+                title: "Cardiovascular Fitness",
+                description: "Maintain or build cardio fitness during recovery when running and cycling aren't options.",
+                icon: "heart"
+            },
+            {
+                title: "Resistance Training",
+                description: "Water provides natural resistance for strengthening without weights or machines.",
+                icon: "dumbbell"
+            },
+            {
+                title: "Mental Health",
+                description: "Swimming improves mood and provides a sense of normalcy during the frustrating recovery period.",
+                icon: "brain"
+            }
+        ],
+        prerequisites: {
+            title: "Before You Swim",
+            items: [
+                "Get approval from your surgeon or physiotherapist",
+                "Surgical wounds must be fully healed (2-3 weeks post-surgery)",
+                "No open wounds or skin issues",
+                "Comfortable and confident in water",
+                "Boot phase typically completed (week 10-12)"
+            ]
+        },
+        strokes: {
+            title: "Swimming Strokes Guide",
+            items: [
+                { stroke: "Freestyle (Front Crawl)", status: "Excellent", note: "Minimal ankle movement, great for early return" },
+                { stroke: "Backstroke", status: "Good", note: "Gentle on ankle, good alternative" },
+                { stroke: "Breaststroke", status: "Caution", note: "May strain ankle initially, introduce gradually" },
+                { stroke: "Butterfly", status: "Avoid", note: "Too demanding initially, add later in recovery" }
+            ]
+        },
+        safety: {
+            title: "Safety Precautions",
+            avoid: [
+                "Push-off from wall with injured leg",
+                "Flip turns",
+                "Diving",
+                "Kicking too hard",
+                "Competitive swimming"
+            ],
+            do: [
+                "Start slowly (10-15 minutes)",
+                "Use pool steps (don't jump in)",
+                "Be careful on wet surfaces",
+                "Stay hydrated",
+                "Listen to your body"
+            ]
+        },
+        warning: {
+            title: "Important",
+            text: "Always get medical clearance before swimming. The timing depends on your individual recovery and whether you had surgery. Your surgeon or physiotherapist will advise when it's safe to start."
+        }
+    },
+    de: {
+        sectionTitle: "Wann können Sie mit dem Schwimmen beginnen?",
+        sectionSubtitle: "Ein Zeitplan für die sichere Rückkehr zu Wasseraktivitäten",
+        quote: "Schwimmen ist hervorragendes Herz-Kreislauf-Training mit minimaler Sehnenbelastung. Es ist eine der sichersten Möglichkeiten, während der Genesung fit zu bleiben.",
+        timeline: {
+            title: "Schwimm-Zeitplan",
+            items: [
+                { week: "Woche 10-12", activity: "Pool-Gehen", description: "Beginnen Sie mit Gehen in hüft- bis brusttiefem Wasser. 10-15 Minuten, 2-3 mal pro Woche." },
+                { week: "Woche 12-14", activity: "Sanftes Schwimmen", description: "Beginnen Sie mit Freistil und Rückenschwimmen. Starten Sie mit 15-20 Minuten." },
+                { week: "Woche 16+", activity: "Volles Schwimmen", description: "Längere Schwimmeinheiten, Pool-Laufen, verschiedene Stile. 20-30+ Minuten." }
+            ]
+        },
+        benefits: [
+            {
+                title: "Null Aufprall",
+                description: "Wasser trägt Ihr Körpergewicht und eliminiert Aufprallstress auf Ihre heilende Sehne.",
+                icon: "waves"
+            },
+            {
+                title: "Kardiovaskuläre Fitness",
+                description: "Erhalten oder verbessern Sie Ihre Ausdauer, wenn Laufen und Radfahren keine Option sind.",
+                icon: "heart"
+            },
+            {
+                title: "Widerstandstraining",
+                description: "Wasser bietet natürlichen Widerstand zur Kräftigung ohne Gewichte.",
+                icon: "dumbbell"
+            },
+            {
+                title: "Psychische Gesundheit",
+                description: "Schwimmen verbessert die Stimmung während der frustrierenden Genesungszeit.",
+                icon: "brain"
+            }
+        ],
+        prerequisites: {
+            title: "Bevor Sie schwimmen",
+            items: [
+                "Holen Sie die Genehmigung Ihres Chirurgen ein",
+                "Operationswunden müssen vollständig verheilt sein",
+                "Keine offenen Wunden oder Hautprobleme",
+                "Sicher und selbstbewusst im Wasser",
+                "Stiefelphase typischerweise abgeschlossen"
+            ]
+        },
+        strokes: {
+            title: "Schwimmstil-Guide",
+            items: [
+                { stroke: "Freistil (Kraulen)", status: "Ausgezeichnet", note: "Minimale Knöchelbewegung" },
+                { stroke: "Rückenschwimmen", status: "Gut", note: "Sanft zum Knöchel" },
+                { stroke: "Brustschwimmen", status: "Vorsicht", note: "Kann den Knöchel anfangs belasten" },
+                { stroke: "Schmetterling", status: "Vermeiden", note: "Anfangs zu anspruchsvoll" }
+            ]
+        },
+        safety: {
+            title: "Sicherheitsvorkehrungen",
+            avoid: [
+                "Abstoß von der Wand mit verletztem Bein",
+                "Rollwenden",
+                "Tauchen",
+                "Zu hartes Treten",
+                "Wettkampfschwimmen"
+            ],
+            do: [
+                "Langsam beginnen (10-15 Minuten)",
+                "Pool-Stufen benutzen",
+                "Vorsicht auf nassen Oberflächen",
+                "Hydriert bleiben",
+                "Auf Ihren Körper hören"
+            ]
+        },
+        warning: {
+            title: "Wichtig",
+            text: "Holen Sie immer ärztliche Freigabe ein, bevor Sie schwimmen. Der Zeitpunkt hängt von Ihrer individuellen Genesung ab."
+        }
+    },
+    fr: {
+        sectionTitle: "Quand pouvez-vous commencer à nager?",
+        sectionSubtitle: "Un calendrier pour un retour sûr aux activités aquatiques",
+        quote: "La natation est un excellent exercice cardiovasculaire avec une charge minimale sur le tendon. C'est l'un des moyens les plus sûrs de maintenir sa forme pendant la récupération.",
+        timeline: {
+            title: "Calendrier de natation",
+            items: [
+                { week: "Semaine 10-12", activity: "Marche en piscine", description: "Commencez par marcher dans l'eau à hauteur de taille à poitrine. 10-15 minutes, 2-3 fois par semaine." },
+                { week: "Semaine 12-14", activity: "Natation douce", description: "Commencez le crawl et le dos crawlé. Débutez avec 15-20 minutes." },
+                { week: "Semaine 16+", activity: "Natation complète", description: "Séances plus longues, course en piscine, styles variés. 20-30+ minutes." }
+            ]
+        },
+        benefits: [
+            {
+                title: "Zéro impact",
+                description: "L'eau supporte votre poids corporel, éliminant le stress d'impact sur votre tendon en guérison.",
+                icon: "waves"
+            },
+            {
+                title: "Forme cardiovasculaire",
+                description: "Maintenez ou développez votre cardio quand la course et le vélo ne sont pas possibles.",
+                icon: "heart"
+            },
+            {
+                title: "Entraînement en résistance",
+                description: "L'eau fournit une résistance naturelle pour le renforcement sans poids.",
+                icon: "dumbbell"
+            },
+            {
+                title: "Santé mentale",
+                description: "La natation améliore l'humeur pendant la période de récupération frustrante.",
+                icon: "brain"
+            }
+        ],
+        prerequisites: {
+            title: "Avant de nager",
+            items: [
+                "Obtenez l'approbation de votre chirurgien",
+                "Les plaies chirurgicales doivent être complètement cicatrisées",
+                "Pas de plaies ouvertes ou de problèmes de peau",
+                "À l'aise et confiant dans l'eau",
+                "Phase de botte généralement terminée"
+            ]
+        },
+        strokes: {
+            title: "Guide des nages",
+            items: [
+                { stroke: "Crawl", status: "Excellent", note: "Mouvement de cheville minimal" },
+                { stroke: "Dos crawlé", status: "Bon", note: "Doux pour la cheville" },
+                { stroke: "Brasse", status: "Prudence", note: "Peut solliciter la cheville initialement" },
+                { stroke: "Papillon", status: "Éviter", note: "Trop exigeant initialement" }
+            ]
+        },
+        safety: {
+            title: "Précautions de sécurité",
+            avoid: [
+                "Poussée du mur avec la jambe blessée",
+                "Virages culbutes",
+                "Plongeons",
+                "Coups de pied trop forts",
+                "Natation compétitive"
+            ],
+            do: [
+                "Commencer lentement (10-15 minutes)",
+                "Utiliser les marches de la piscine",
+                "Attention aux surfaces mouillées",
+                "Rester hydraté",
+                "Écouter votre corps"
+            ]
+        },
+        warning: {
+            title: "Important",
+            text: "Obtenez toujours une autorisation médicale avant de nager. Le moment dépend de votre récupération individuelle."
+        }
+    },
+    es: {
+        sectionTitle: "¿Cuándo puede empezar a nadar?",
+        sectionSubtitle: "Un cronograma para el regreso seguro a las actividades acuáticas",
+        quote: "Nadar es un excelente ejercicio cardiovascular con carga mínima en el tendón. Es una de las formas más seguras de mantener la forma durante la recuperación.",
+        timeline: {
+            title: "Cronograma de natación",
+            items: [
+                { week: "Semana 10-12", activity: "Caminar en piscina", description: "Comience caminando en agua de cintura a pecho. 10-15 minutos, 2-3 veces por semana." },
+                { week: "Semana 12-14", activity: "Natación suave", description: "Comience crol y espalda. Empiece con 15-20 minutos." },
+                { week: "Semana 16+", activity: "Natación completa", description: "Sesiones más largas, carrera en piscina, estilos variados. 20-30+ minutos." }
+            ]
+        },
+        benefits: [
+            {
+                title: "Cero impacto",
+                description: "El agua soporta su peso corporal, eliminando el estrés de impacto en su tendón en curación.",
+                icon: "waves"
+            },
+            {
+                title: "Condición cardiovascular",
+                description: "Mantenga o mejore su cardio cuando correr y andar en bici no son opciones.",
+                icon: "heart"
+            },
+            {
+                title: "Entrenamiento de resistencia",
+                description: "El agua proporciona resistencia natural para fortalecimiento sin pesas.",
+                icon: "dumbbell"
+            },
+            {
+                title: "Salud mental",
+                description: "Nadar mejora el ánimo durante el frustrante período de recuperación.",
+                icon: "brain"
+            }
+        ],
+        prerequisites: {
+            title: "Antes de nadar",
+            items: [
+                "Obtenga aprobación de su cirujano",
+                "Las heridas quirúrgicas deben estar completamente curadas",
+                "Sin heridas abiertas o problemas de piel",
+                "Cómodo y seguro en el agua",
+                "Fase de bota típicamente completada"
+            ]
+        },
+        strokes: {
+            title: "Guía de estilos de natación",
+            items: [
+                { stroke: "Crol", status: "Excelente", note: "Movimiento de tobillo mínimo" },
+                { stroke: "Espalda", status: "Bueno", note: "Suave para el tobillo" },
+                { stroke: "Braza", status: "Precaución", note: "Puede tensar el tobillo inicialmente" },
+                { stroke: "Mariposa", status: "Evitar", note: "Demasiado exigente inicialmente" }
+            ]
+        },
+        safety: {
+            title: "Precauciones de seguridad",
+            avoid: [
+                "Empuje de la pared con la pierna lesionada",
+                "Vueltas de campana",
+                "Clavados",
+                "Patadas muy fuertes",
+                "Natación competitiva"
+            ],
+            do: [
+                "Empezar lentamente (10-15 minutos)",
+                "Usar escaleras de la piscina",
+                "Cuidado en superficies mojadas",
+                "Mantenerse hidratado",
+                "Escuchar a su cuerpo"
+            ]
+        },
+        warning: {
+            title: "Importante",
+            text: "Siempre obtenga autorización médica antes de nadar. El momento depende de su recuperación individual."
+        }
+    },
+    it: {
+        sectionTitle: "Quando puoi iniziare a nuotare?",
+        sectionSubtitle: "Una linea temporale per il ritorno sicuro alle attività acquatiche",
+        quote: "Il nuoto è un eccellente esercizio cardiovascolare con carico minimo sul tendine. È uno dei modi più sicuri per mantenersi in forma durante il recupero.",
+        timeline: {
+            title: "Cronologia del nuoto",
+            items: [
+                { week: "Settimana 10-12", activity: "Camminata in piscina", description: "Inizia camminando in acqua da vita a petto. 10-15 minuti, 2-3 volte a settimana." },
+                { week: "Settimana 12-14", activity: "Nuoto leggero", description: "Inizia stile libero e dorso. Inizia con 15-20 minuti." },
+                { week: "Settimana 16+", activity: "Nuoto completo", description: "Sessioni più lunghe, corsa in piscina, stili vari. 20-30+ minuti." }
+            ]
+        },
+        benefits: [
+            {
+                title: "Zero impatto",
+                description: "L'acqua sostiene il peso corporeo, eliminando lo stress da impatto sul tendine in guarigione.",
+                icon: "waves"
+            },
+            {
+                title: "Forma cardiovascolare",
+                description: "Mantieni o migliora il cardio quando corsa e ciclismo non sono possibili.",
+                icon: "heart"
+            },
+            {
+                title: "Allenamento di resistenza",
+                description: "L'acqua fornisce resistenza naturale per il rafforzamento senza pesi.",
+                icon: "dumbbell"
+            },
+            {
+                title: "Salute mentale",
+                description: "Il nuoto migliora l'umore durante il frustrante periodo di recupero.",
+                icon: "brain"
+            }
+        ],
+        prerequisites: {
+            title: "Prima di nuotare",
+            items: [
+                "Ottieni l'approvazione del tuo chirurgo",
+                "Le ferite chirurgiche devono essere completamente guarite",
+                "Nessuna ferita aperta o problema della pelle",
+                "A proprio agio e sicuro in acqua",
+                "Fase dello stivale tipicamente completata"
+            ]
+        },
+        strokes: {
+            title: "Guida agli stili di nuoto",
+            items: [
+                { stroke: "Stile libero", status: "Eccellente", note: "Movimento della caviglia minimo" },
+                { stroke: "Dorso", status: "Buono", note: "Delicato per la caviglia" },
+                { stroke: "Rana", status: "Cautela", note: "Può sollecitare la caviglia inizialmente" },
+                { stroke: "Farfalla", status: "Evitare", note: "Troppo impegnativo inizialmente" }
+            ]
+        },
+        safety: {
+            title: "Precauzioni di sicurezza",
+            avoid: [
+                "Spinta dal muro con la gamba infortunata",
+                "Virate a capriola",
+                "Tuffi",
+                "Calci troppo forti",
+                "Nuoto competitivo"
+            ],
+            do: [
+                "Iniziare lentamente (10-15 minuti)",
+                "Usare le scale della piscina",
+                "Attenzione alle superfici bagnate",
+                "Rimanere idratati",
+                "Ascoltare il proprio corpo"
+            ]
+        },
+        warning: {
+            title: "Importante",
+            text: "Ottieni sempre l'autorizzazione medica prima di nuotare. Il momento dipende dal tuo recupero individuale."
+        }
+    }
+};
+
+const currentSwimContent = swimContent[lang as keyof typeof swimContent] || swimContent.en;
 ---
 
 <Fragment slot="head">
@@ -311,17 +702,205 @@ const currentContent = content[lang as keyof typeof content];
     <main>
         <SwimmingHero lang={lang} content={currentContent.hero} />
 
+        <!-- Educational Section: When Can You Swim -->
+        <section id="education" class="bg-gradient-to-b from-white to-neutral-50 py-16 md:py-20">
+            <div class="mx-auto px-4 max-w-6xl">
+                <div class="mb-12 text-center">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full">
+                        <Calendar className="w-4 h-4 text-primary" />
+                        <span class="font-medium text-primary text-sm uppercase tracking-wider">Recovery Timeline</span>
+                    </div>
+                    <h2 class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl">
+                        {currentSwimContent.sectionTitle}
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
+                        {currentSwimContent.sectionSubtitle}
+                    </p>
+                </div>
+
+                <!-- Quote -->
+                <blockquote class="bg-primary/5 mx-auto mb-12 p-6 border-l-4 border-primary rounded-r-lg max-w-3xl">
+                    <p class="text-neutral-700 text-lg italic">
+                        "{currentSwimContent.quote}"
+                    </p>
+                </blockquote>
+
+                <!-- Timeline -->
+                <div class="mb-12">
+                    <h3 class="mb-6 font-bold text-center text-neutral-900 text-xl">{currentSwimContent.timeline.title}</h3>
+                    <div class="gap-6 grid md:grid-cols-3">
+                        {currentSwimContent.timeline.items.map((item, index) => (
+                            <div class="relative bg-white shadow-sm p-6 border border-neutral-200 rounded-xl">
+                                <div class="flex justify-center items-center bg-primary mb-4 rounded-full w-10 h-10 font-bold text-white">
+                                    {index + 1}
+                                </div>
+                                <div class="mb-2 font-bold text-primary text-lg">{item.week}</div>
+                                <div class="mb-2 font-semibold text-neutral-900">{item.activity}</div>
+                                <p class="text-neutral-600 text-sm">{item.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <!-- Benefits of Swimming -->
+                <div class="gap-6 grid md:grid-cols-2 lg:grid-cols-4 mb-12">
+                    {currentSwimContent.benefits.map((benefit) => (
+                        <div class="bg-white shadow-sm hover:shadow-md p-6 border border-neutral-200 rounded-xl transition-shadow">
+                            <div class="flex justify-center items-center bg-primary/10 mb-4 rounded-full w-12 h-12">
+                                {benefit.icon === "waves" && <Waves className="w-6 h-6 text-primary" />}
+                                {benefit.icon === "heart" && <Heart className="w-6 h-6 text-primary" />}
+                                {benefit.icon === "dumbbell" && <Dumbbell className="w-6 h-6 text-primary" />}
+                                {benefit.icon === "brain" && <Brain className="w-6 h-6 text-primary" />}
+                            </div>
+                            <h3 class="mb-2 font-semibold text-neutral-900 text-lg">{benefit.title}</h3>
+                            <p class="text-neutral-600 text-sm">{benefit.description}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <!-- Prerequisites -->
+                <div class="bg-primary/5 mx-auto mb-8 p-6 md:p-8 border border-primary/20 rounded-xl max-w-3xl">
+                    <h3 class="flex items-center gap-2 mb-4 font-bold text-neutral-900 text-xl">
+                        <Check className="w-6 h-6 text-primary" />
+                        {currentSwimContent.prerequisites.title}
+                    </h3>
+                    <ul class="space-y-3">
+                        {currentSwimContent.prerequisites.items.map((item) => (
+                            <li class="flex items-start gap-3">
+                                <Check className="flex-shrink-0 mt-0.5 w-5 h-5 text-primary" />
+                                <span class="text-neutral-700">{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <!-- Swimming Strokes Guide -->
+                <div class="bg-white shadow-sm mx-auto mb-8 p-6 md:p-8 border border-neutral-200 rounded-xl max-w-4xl">
+                    <h3 class="flex items-center gap-2 mb-6 font-bold text-neutral-900 text-xl">
+                        <Waves className="w-6 h-6 text-primary" />
+                        {currentSwimContent.strokes.title}
+                    </h3>
+                    <div class="gap-4 grid md:grid-cols-2">
+                        {currentSwimContent.strokes.items.map((item) => (
+                            <div class={`p-4 rounded-lg border ${
+                                item.status === "Excellent" || item.status === "Ausgezeichnet" || item.status === "Excelente" || item.status === "Eccellente" ? "bg-green-50 border-green-200" :
+                                item.status === "Good" || item.status === "Gut" || item.status === "Bon" || item.status === "Bueno" || item.status === "Buono" ? "bg-blue-50 border-blue-200" :
+                                item.status === "Caution" || item.status === "Vorsicht" || item.status === "Prudence" || item.status === "Precaución" || item.status === "Cautela" ? "bg-amber-50 border-amber-200" :
+                                "bg-red-50 border-red-200"
+                            }`}>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-semibold text-neutral-900">{item.stroke}</span>
+                                    <span class={`text-xs font-medium px-2 py-1 rounded ${
+                                        item.status === "Excellent" || item.status === "Ausgezeichnet" || item.status === "Excelente" || item.status === "Eccellente" ? "bg-green-100 text-green-700" :
+                                        item.status === "Good" || item.status === "Gut" || item.status === "Bon" || item.status === "Bueno" || item.status === "Buono" ? "bg-blue-100 text-blue-700" :
+                                        item.status === "Caution" || item.status === "Vorsicht" || item.status === "Prudence" || item.status === "Precaución" || item.status === "Cautela" ? "bg-amber-100 text-amber-700" :
+                                        "bg-red-100 text-red-700"
+                                    }`}>{item.status}</span>
+                                </div>
+                                <p class="text-neutral-600 text-sm">{item.note}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <!-- Safety Warning -->
+                <div class="bg-amber-50 mx-auto p-6 border border-amber-200 rounded-xl max-w-3xl">
+                    <div class="flex items-start gap-4">
+                        <AlertTriangle className="flex-shrink-0 w-6 h-6 text-amber-600" />
+                        <div>
+                            <h4 class="mb-2 font-bold text-amber-800">{currentSwimContent.warning.title}</h4>
+                            <p class="text-amber-700">{currentSwimContent.warning.text}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <AquaticRehabBenefits lang={lang} content={currentContent.benefits} />
+
+        <!-- Product Introduction - Soft Sell -->
+        <ProductIntroduction lang={lang} variant="swimming" />
+
+        <!-- Surgeon Endorsements -->
+        <section class="bg-white py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <h2 class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl">
+                        Trusted by Medical Professionals
+                    </h2>
+                    <p class="text-neutral-600">
+                        Surgeons and clinicians recommend the Thetis splint for aquatic activities
+                    </p>
+                </div>
+                <SurgeonsCarousel client:load />
+            </div>
+        </section>
 
         <SwimmingSafetyGuidelines
             lang={lang}
             content={currentContent.safetyGuidelines}
         />
 
-        <Reviews />
+        <!-- Patient Reviews -->
+        <section class="bg-gradient-to-b from-white to-neutral-50 py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full">
+                        <Check className="w-4 h-4 text-primary" />
+                        <span class="font-medium text-primary text-sm uppercase tracking-wider">Real Patient Experiences</span>
+                    </div>
+                    <h2 class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl">
+                        What Patients Say About Swimming
+                    </h2>
+                </div>
+                <EnhancedReviewCarousel client:load />
+                <div class="mt-8 text-center">
+                    <a
+                        href="/reviews"
+                        class="inline-flex items-center gap-2 hover:bg-primary px-6 py-3 border-2 border-primary rounded-lg font-semibold text-primary hover:text-white transition-colors"
+                    >
+                        View All Reviews
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Athletes Section -->
+        <section class="bg-neutral-50 py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <h2 class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl">
+                        Trusted by Professional Athletes
+                    </h2>
+                    <p class="text-neutral-600">
+                        Athletes recovering from Achilles rupture trust the Thetis splint
+                    </p>
+                </div>
+                <AthletesCarousel client:load />
+            </div>
+        </section>
 
         <SwimmingFAQs lang={lang} client:load />
 
+        <!-- Subscribe Block -->
+        <div class="bg-neutral-50 py-8 md:py-12">
+            <div class="mx-auto px-4 max-w-3xl">
+                <SubscribeBlock source="swimming_page" />
+            </div>
+        </div>
+
         <SwimmingOrderCallout lang={lang} />
     </main>
+
+    <StickyAddToCart
+        variant="splint"
+        lang={lang}
+        splintHref={splintRoute?.href || "/achilles-rupture-splint"}
+        client:load
+    />
+
+    <ExitIntentPopup client:load />
 </Layout>
