@@ -313,11 +313,11 @@ const swimContent = {
         sectionSubtitle: "A timeline for safe return to aquatic activities",
         quote: "Swimming is excellent cardiovascular exercise with minimal tendon loading. It's one of the safest ways to build fitness during recovery. The water supports your body weight, making it ideal for early cardio.",
         timeline: {
-            title: "Swimming Timeline",
+            title: "Typical Swimming Timeline (varies by individual)",
             items: [
-                { week: "Week 10-12", activity: "Pool Walking", description: "Start with walking in waist-to-chest deep water. 10-15 minutes, 2-3 times per week." },
-                { week: "Week 12-14", activity: "Gentle Swimming", description: "Begin freestyle and backstroke. Start with 15-20 minutes. Avoid breaststroke initially." },
-                { week: "Week 16+", activity: "Full Swimming", description: "Longer swims, pool running, varied strokes. 20-30+ minutes, 3-4 times per week." }
+                { week: "After Boot Removal", activity: "Pool Walking", description: "Once your surgeon approves, start with walking in waist-deep water. Begin with short sessions." },
+                { week: "2-4 Weeks Later", activity: "Gentle Swimming", description: "Progress to freestyle and backstroke when comfortable. Start slowly and build up gradually." },
+                { week: "Ongoing", activity: "Full Swimming", description: "Gradually increase duration and try different strokes as your physiotherapist advises." }
             ]
         },
         benefits: [
@@ -345,20 +345,11 @@ const swimContent = {
         prerequisites: {
             title: "Before You Swim",
             items: [
-                "Get approval from your surgeon or physiotherapist",
-                "Surgical wounds must be fully healed (2-3 weeks post-surgery)",
+                "Get explicit approval from your surgeon or physiotherapist",
+                "Surgical wounds must be fully healed",
                 "No open wounds or skin issues",
                 "Comfortable and confident in water",
-                "Boot phase typically completed (week 10-12)"
-            ]
-        },
-        strokes: {
-            title: "Swimming Strokes Guide",
-            items: [
-                { stroke: "Freestyle (Front Crawl)", status: "Excellent", note: "Minimal ankle movement, great for early return" },
-                { stroke: "Backstroke", status: "Good", note: "Gentle on ankle, good alternative" },
-                { stroke: "Breaststroke", status: "Caution", note: "May strain ankle initially, introduce gradually" },
-                { stroke: "Butterfly", status: "Avoid", note: "Too demanding initially, add later in recovery" }
+                "Boot phase completed (timing varies by individual and treatment protocol)"
             ]
         },
         safety: {
@@ -427,15 +418,6 @@ const swimContent = {
                 "Stiefelphase typischerweise abgeschlossen"
             ]
         },
-        strokes: {
-            title: "Schwimmstil-Guide",
-            items: [
-                { stroke: "Freistil (Kraulen)", status: "Ausgezeichnet", note: "Minimale Knöchelbewegung" },
-                { stroke: "Rückenschwimmen", status: "Gut", note: "Sanft zum Knöchel" },
-                { stroke: "Brustschwimmen", status: "Vorsicht", note: "Kann den Knöchel anfangs belasten" },
-                { stroke: "Schmetterling", status: "Vermeiden", note: "Anfangs zu anspruchsvoll" }
-            ]
-        },
         safety: {
             title: "Sicherheitsvorkehrungen",
             avoid: [
@@ -500,15 +482,6 @@ const swimContent = {
                 "Pas de plaies ouvertes ou de problèmes de peau",
                 "À l'aise et confiant dans l'eau",
                 "Phase de botte généralement terminée"
-            ]
-        },
-        strokes: {
-            title: "Guide des nages",
-            items: [
-                { stroke: "Crawl", status: "Excellent", note: "Mouvement de cheville minimal" },
-                { stroke: "Dos crawlé", status: "Bon", note: "Doux pour la cheville" },
-                { stroke: "Brasse", status: "Prudence", note: "Peut solliciter la cheville initialement" },
-                { stroke: "Papillon", status: "Éviter", note: "Trop exigeant initialement" }
             ]
         },
         safety: {
@@ -577,15 +550,6 @@ const swimContent = {
                 "Fase de bota típicamente completada"
             ]
         },
-        strokes: {
-            title: "Guía de estilos de natación",
-            items: [
-                { stroke: "Crol", status: "Excelente", note: "Movimiento de tobillo mínimo" },
-                { stroke: "Espalda", status: "Bueno", note: "Suave para el tobillo" },
-                { stroke: "Braza", status: "Precaución", note: "Puede tensar el tobillo inicialmente" },
-                { stroke: "Mariposa", status: "Evitar", note: "Demasiado exigente inicialmente" }
-            ]
-        },
         safety: {
             title: "Precauciones de seguridad",
             avoid: [
@@ -650,15 +614,6 @@ const swimContent = {
                 "Nessuna ferita aperta o problema della pelle",
                 "A proprio agio e sicuro in acqua",
                 "Fase dello stivale tipicamente completata"
-            ]
-        },
-        strokes: {
-            title: "Guida agli stili di nuoto",
-            items: [
-                { stroke: "Stile libero", status: "Eccellente", note: "Movimento della caviglia minimo" },
-                { stroke: "Dorso", status: "Buono", note: "Delicato per la caviglia" },
-                { stroke: "Rana", status: "Cautela", note: "Può sollecitare la caviglia inizialmente" },
-                { stroke: "Farfalla", status: "Evitare", note: "Troppo impegnativo inizialmente" }
             ]
         },
         safety: {
@@ -772,35 +727,6 @@ const currentSwimContent = swimContent[lang as keyof typeof swimContent] || swim
                             </li>
                         ))}
                     </ul>
-                </div>
-
-                <!-- Swimming Strokes Guide -->
-                <div class="bg-white shadow-sm mx-auto mb-8 p-6 md:p-8 border border-neutral-200 rounded-xl max-w-4xl">
-                    <h3 class="flex items-center gap-2 mb-6 font-bold text-neutral-900 text-xl">
-                        <Waves className="w-6 h-6 text-primary" />
-                        {currentSwimContent.strokes.title}
-                    </h3>
-                    <div class="gap-4 grid md:grid-cols-2">
-                        {currentSwimContent.strokes.items.map((item) => (
-                            <div class={`p-4 rounded-lg border ${
-                                item.status === "Excellent" || item.status === "Ausgezeichnet" || item.status === "Excelente" || item.status === "Eccellente" ? "bg-green-50 border-green-200" :
-                                item.status === "Good" || item.status === "Gut" || item.status === "Bon" || item.status === "Bueno" || item.status === "Buono" ? "bg-blue-50 border-blue-200" :
-                                item.status === "Caution" || item.status === "Vorsicht" || item.status === "Prudence" || item.status === "Precaución" || item.status === "Cautela" ? "bg-amber-50 border-amber-200" :
-                                "bg-red-50 border-red-200"
-                            }`}>
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="font-semibold text-neutral-900">{item.stroke}</span>
-                                    <span class={`text-xs font-medium px-2 py-1 rounded ${
-                                        item.status === "Excellent" || item.status === "Ausgezeichnet" || item.status === "Excelente" || item.status === "Eccellente" ? "bg-green-100 text-green-700" :
-                                        item.status === "Good" || item.status === "Gut" || item.status === "Bon" || item.status === "Bueno" || item.status === "Buono" ? "bg-blue-100 text-blue-700" :
-                                        item.status === "Caution" || item.status === "Vorsicht" || item.status === "Prudence" || item.status === "Precaución" || item.status === "Cautela" ? "bg-amber-100 text-amber-700" :
-                                        "bg-red-100 text-red-700"
-                                    }`}>{item.status}</span>
-                                </div>
-                                <p class="text-neutral-600 text-sm">{item.note}</p>
-                            </div>
-                        ))}
-                    </div>
                 </div>
 
                 <!-- Safety Warning -->

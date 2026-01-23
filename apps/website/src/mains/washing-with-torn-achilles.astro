@@ -18,6 +18,8 @@ import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
 import { getRouteBySlugAndLanguage } from "@/content/routes";
 import { Check, AlertTriangle, Droplets, Wind, ThermometerSun, Footprints } from "lucide-react";
 import ProductIntroduction from "@/sections/shared/ProductIntroduction.astro";
+import { Image } from "astro:assets";
+import bathroomSafetyImage from "@/assets/bathroom-safety-achilles-crutches.png";
 
 const { lang = "en" } = Astro.props as { lang?: Lang };
 const splintRoute = getRouteBySlugAndLanguage("splint", lang);
@@ -539,6 +541,22 @@ const currentHygieneContent = hygieneContent[lang as keyof typeof hygieneContent
                             </li>
                         ))}
                     </ul>
+                </div>
+
+                <!-- Bathroom Safety Image -->
+                <div class="mx-auto mt-12 max-w-4xl">
+                    <div class="bg-white shadow-lg p-4 border border-neutral-200 rounded-xl">
+                        <Image
+                            src={bathroomSafetyImage}
+                            alt="Bathroom safety setup for Achilles rupture recovery - shower chair, non-slip mat, crutches stored upside-down"
+                            class="rounded-lg w-full"
+                            width={800}
+                            height={400}
+                        />
+                        <p class="mt-4 text-center text-neutral-600 text-sm">
+                            Essential bathroom safety setup: shower chair, non-slip mat, clear dry floor, and crutches stored upside-down for stability
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Safety Warning -->
