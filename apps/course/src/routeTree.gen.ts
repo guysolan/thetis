@@ -8,90 +8,38 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as ClaimRouteImport } from './routes/claim'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as StandardIndexRouteImport } from './routes/standard/index'
+import { Route as PremiumIndexRouteImport } from './routes/premium/index'
+import { Route as StandardSlugRouteImport } from './routes/standard/$slug'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as ClaimImport } from './routes/claim'
-import { Route as IndexImport } from './routes/index'
-import { Route as StandardIndexImport } from './routes/standard/index'
-import { Route as PremiumIndexImport } from './routes/premium/index'
-import { Route as StandardSlugImport } from './routes/standard/$slug'
-
-// Create/Update Routes
-
-const ClaimRoute = ClaimImport.update({
+const ClaimRoute = ClaimRouteImport.update({
   id: '/claim',
   path: '/claim',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const StandardIndexRoute = StandardIndexImport.update({
+const StandardIndexRoute = StandardIndexRouteImport.update({
   id: '/standard/',
   path: '/standard/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const PremiumIndexRoute = PremiumIndexImport.update({
+const PremiumIndexRoute = PremiumIndexRouteImport.update({
   id: '/premium/',
   path: '/premium/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const StandardSlugRoute = StandardSlugImport.update({
+const StandardSlugRoute = StandardSlugRouteImport.update({
   id: '/standard/$slug',
   path: '/standard/$slug',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/claim': {
-      id: '/claim'
-      path: '/claim'
-      fullPath: '/claim'
-      preLoaderRoute: typeof ClaimImport
-      parentRoute: typeof rootRoute
-    }
-    '/standard/$slug': {
-      id: '/standard/$slug'
-      path: '/standard/$slug'
-      fullPath: '/standard/$slug'
-      preLoaderRoute: typeof StandardSlugImport
-      parentRoute: typeof rootRoute
-    }
-    '/premium/': {
-      id: '/premium/'
-      path: '/premium'
-      fullPath: '/premium'
-      preLoaderRoute: typeof PremiumIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/standard/': {
-      id: '/standard/'
-      path: '/standard'
-      fullPath: '/standard'
-      preLoaderRoute: typeof StandardIndexImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -100,7 +48,6 @@ export interface FileRoutesByFullPath {
   '/premium': typeof PremiumIndexRoute
   '/standard': typeof StandardIndexRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/claim': typeof ClaimRoute
@@ -108,16 +55,14 @@ export interface FileRoutesByTo {
   '/premium': typeof PremiumIndexRoute
   '/standard': typeof StandardIndexRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/claim': typeof ClaimRoute
   '/standard/$slug': typeof StandardSlugRoute
   '/premium/': typeof PremiumIndexRoute
   '/standard/': typeof StandardIndexRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/' | '/claim' | '/standard/$slug' | '/premium' | '/standard'
@@ -132,13 +77,52 @@ export interface FileRouteTypes {
     | '/standard/'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ClaimRoute: typeof ClaimRoute
   StandardSlugRoute: typeof StandardSlugRoute
   PremiumIndexRoute: typeof PremiumIndexRoute
   StandardIndexRoute: typeof StandardIndexRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/claim': {
+      id: '/claim'
+      path: '/claim'
+      fullPath: '/claim'
+      preLoaderRoute: typeof ClaimRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/standard/': {
+      id: '/standard/'
+      path: '/standard'
+      fullPath: '/standard'
+      preLoaderRoute: typeof StandardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/premium/': {
+      id: '/premium/'
+      path: '/premium'
+      fullPath: '/premium'
+      preLoaderRoute: typeof PremiumIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/standard/$slug': {
+      id: '/standard/$slug'
+      path: '/standard/$slug'
+      fullPath: '/standard/$slug'
+      preLoaderRoute: typeof StandardSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -148,39 +132,6 @@ const rootRouteChildren: RootRouteChildren = {
   PremiumIndexRoute: PremiumIndexRoute,
   StandardIndexRoute: StandardIndexRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/claim",
-        "/standard/$slug",
-        "/premium/",
-        "/standard/"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/claim": {
-      "filePath": "claim.tsx"
-    },
-    "/standard/$slug": {
-      "filePath": "standard/$slug.tsx"
-    },
-    "/premium/": {
-      "filePath": "premium/index.tsx"
-    },
-    "/standard/": {
-      "filePath": "standard/index.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
