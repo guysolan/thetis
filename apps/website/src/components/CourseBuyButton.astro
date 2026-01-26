@@ -7,11 +7,11 @@ const { productId } = Astro.props;
 const componentId = `course-buy-button-${productId}-${Math.floor(Math.random() * 10000000000)}`;
 ---
 
-<div id={componentId} class="flex justify-center w-full"></div>
+<div id={componentId} class="course-buy-button flex justify-center w-full"></div>
 
 <style>
     /* Fix Shopify buy button wrapper margin */
-    #${componentId} .shopify-buy__btn-wrapper {
+    .course-buy-button :global(.shopify-buy__btn-wrapper) {
         margin-top: 0 !important;
         display: flex;
         justify-content: center;
@@ -19,7 +19,7 @@ const componentId = `course-buy-button-${productId}-${Math.floor(Math.random() *
     }
 
     /* Match button styles to UI package */
-    #${componentId} .shopify-buy__btn {
+    .course-buy-button :global(.shopify-buy__btn) {
         /* Base styles from button.tsx */
         display: inline-flex !important;
         justify-content: center !important;
@@ -43,19 +43,19 @@ const componentId = `course-buy-button-${productId}-${Math.floor(Math.random() *
         opacity: 1 !important;
     }
 
-    #${componentId} .shopify-buy__btn:hover {
+    .course-buy-button :global(.shopify-buy__btn:hover) {
         background-color: hsl(161, 60%, 36%) !important; /* hover:bg-primary/90 */
         transform: scale(1.02) !important; /* hover:scale-[1.02] */
     }
 
-    #${componentId} .shopify-buy__btn:focus {
+    .course-buy-button :global(.shopify-buy__btn:focus) {
         outline: 2px solid transparent !important;
         outline-offset: 2px !important;
         box-shadow: 0 0 0 2px hsl(161, 60%, 40%), 0 0 0 4px rgba(0, 0, 0, 0.1) !important;
     }
 
     @media (min-width: 768px) {
-        #${componentId} .shopify-buy__btn {
+        .course-buy-button :global(.shopify-buy__btn) {
             height: 3rem !important; /* md:h-12 */
             padding-left: 2rem !important; /* md:px-8 */
             padding-right: 2rem !important;
