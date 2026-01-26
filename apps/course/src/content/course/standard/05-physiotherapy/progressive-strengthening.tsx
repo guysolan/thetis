@@ -373,13 +373,6 @@ export const content: SectionContent = {
                             ],
                         },
                         {
-                            type: "image",
-                            src: IsomOvercomingSeatedCalf,
-                            alt: "Grant performing seated calf raise exercise with weight on his knees, foot pointed down on force plate platform",
-                            caption:
-                                "Seated calf raise: building toward advanced strength targets",
-                        },
-                        {
                             type: "text",
                             content: "**For standing exercises:**",
                         },

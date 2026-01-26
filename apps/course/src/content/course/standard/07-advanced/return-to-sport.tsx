@@ -1,6 +1,4 @@
 import type { SectionContent } from "@/components/course/types";
-import ReturnToSportProgression from "@/assets/return-to-sport-progression.png";
-import Symmetry85Percent from "@/assets/symmetry-85-percent.png";
 
 export const metadata = {
     slug: "return-to-sport",
@@ -90,13 +88,6 @@ export const content: SectionContent = {
                             type: "text",
                             content:
                                 "If you can perform 20 single-leg heel raises with 20 lbs on your uninjured side, you should be able to perform at least **17 repetitions** with the same weight on your injured side (17 ÷ 20 = 85%).",
-                        },
-                        {
-                            type: "image",
-                            src: Symmetry85Percent,
-                            alt: "Comparison showing Grant performing heel raises on uninjured leg (20 reps) vs injured leg (17 reps = 85%), demonstrating the 85% symmetry threshold for return to sport",
-                            caption:
-                                "85% symmetry: Your injured leg should perform at least 85% as well as your uninjured leg",
                         },
                     ],
                 },
@@ -240,13 +231,6 @@ export const content: SectionContent = {
                                 "**Reality check:** Not everyone reaches this stage. Some people return to sport but at a lower level. That's okay — being able to participate is success.",
                         },
                     ],
-                },
-                {
-                    type: "image",
-                    src: ReturnToSportProgression,
-                    alt: "Diagram showing return-to-sport progression: Stage 1 Modified Practice → Stage 2 Full Participation → Stage 3 Pre-Injury Level, with timeline and key milestones",
-                    caption:
-                        "Return-to-sport progression: A gradual continuum over several months",
                 },
             ],
         },

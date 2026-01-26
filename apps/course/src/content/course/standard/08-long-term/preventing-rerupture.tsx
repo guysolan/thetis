@@ -1,5 +1,4 @@
 import type { SectionContent } from "@/components/course/types";
-import WarmUpDynamicStretch from "@/assets/warm-up-dynamic-stretch.png";
 
 export const metadata = {
     slug: "preventing-rerupture",
@@ -197,13 +196,6 @@ export const content: SectionContent = {
                             type: "text",
                             content:
                                 "**Sport-specific movements:** — movements specific to your sport",
-                        },
-                        {
-                            type: "image",
-                            src: WarmUpDynamicStretch,
-                            alt: "Grant performing a dynamic warm-up with walking lunges before exercise",
-                            caption:
-                                "Dynamic warm-up: walking lunges help prepare your muscles and reduce injury risk",
                         },
                     ],
                 },

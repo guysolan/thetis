@@ -1,7 +1,4 @@
 import type { SectionContent } from "@/components/course/types";
-import HeelToToeWalkingSequence from "@/assets/heel-to-toe-walking-sequence.png";
-import StepLengthSpacing from "@/assets/step-length-spacing.png";
-import RetroWalkingTechniqueSequence from "@/assets/retro-walking-technique-sequence.png";
 
 export const metadata = {
     slug: "walking-properly",
@@ -90,13 +87,6 @@ export const content: SectionContent = {
                     type: "text",
                     content:
                         "Proper walking follows a **heel-to-toe pattern**. You land on your heel first, then roll through your foot, pushing off with your toes. This pattern distributes force evenly and protects your Achilles tendon.",
-                },
-                {
-                    type: "image",
-                    src: HeelToToeWalkingSequence,
-                    alt: "Three-panel diagram showing heel strike, roll through, and push off in normal walking",
-                    caption:
-                        "Heel-to-toe walking: heel strike → roll through → push off",
                 },
                 {
                     type: "card",
@@ -306,13 +296,6 @@ export const content: SectionContent = {
                     variant: "default",
                     content: [
                         {
-                            type: "image",
-                            src: RetroWalkingTechniqueSequence,
-                            alt: "Three-panel diagram showing retro walking steps: step back, lower heel, and push off",
-                            caption:
-                                "Retro walking: step back → lower heel → push off",
-                        },
-                        {
                             type: "text",
                             content: "**Technique:**",
                         },
@@ -344,13 +327,6 @@ export const content: SectionContent = {
                     type: "text",
                     content:
                         "Step length — how far you step with each foot — is crucial for proper walking. After being in a boot, you've likely shortened your steps. Now you need to lengthen them back to normal.",
-                },
-                {
-                    type: "image",
-                    src: StepLengthSpacing,
-                    alt: "Top-down diagram comparing short steps to normal equal steps, with spacing markers",
-                    caption:
-                        "Step length retraining: move from short steps to normal, equal steps",
                 },
                 {
                     type: "card",
