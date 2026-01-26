@@ -325,11 +325,11 @@ export function formatPrice(amount: string, currencyCode: string): string {
 }
 
 interface VariantPriceResponse {
-    productVariant: {
+    node: {
         price: {
             amount: string;
             currencyCode: string;
-        } | null;
+        };
     } | null;
 }
 
@@ -339,12 +339,15 @@ export async function getVariantPrice(
 ): Promise<
     { amount: string; currencyCode: string; formattedPrice: string } | null
 > {
+    // Use 'node' query since 'productVariant' is not available in Storefront API
     const query = `
         query getVariantPrice($variantId: ID!, $country: CountryCode) @inContext(country: $country) {
-            productVariant(id: $variantId) {
-                price {
-                    amount
-                    currencyCode
+            node(id: $variantId) {
+                ... on ProductVariant {
+                    price {
+                        amount
+                        currencyCode
+                    }
                 }
             }
         }
@@ -356,7 +359,7 @@ export async function getVariantPrice(
             country: countryCode,
         });
 
-        const price = data.productVariant?.price;
+        const price = data.node?.price;
         if (!price) {
             return null;
         }

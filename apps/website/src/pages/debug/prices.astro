@@ -56,10 +56,13 @@ async function detectCountry(): Promise<string> {
 }
 
 async function fetchPrice(variantId: string, country: string) {
+    // Use 'node' query since 'productVariant' is not available in Storefront API
     const query = `
         query getVariantPrice($variantId: ID!, $country: CountryCode) @inContext(country: $country) {
-            productVariant(id: $variantId) {
-                price { amount currencyCode }
+            node(id: $variantId) {
+                ... on ProductVariant {
+                    price { amount currencyCode }
+                }
             }
         }
     `;
@@ -75,7 +78,7 @@ async function fetchPrice(variantId: string, country: string) {
     
     const data = await response.json();
     return {
-        price: data.data?.productVariant?.price,
+        price: data.data?.node?.price,
         errors: data.errors,
     };
 }
