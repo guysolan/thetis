@@ -4,6 +4,7 @@ import {
     getCachedPrice,
     setCachedPrice,
 } from "@/lib/shopify/price-cache";
+import { SPLINT_VARIANTS, COURSE_VARIANTS } from "@/lib/shopify/products";
 
 interface UseVariantPriceResult {
     formattedPrice: string | null;
@@ -12,15 +13,16 @@ interface UseVariantPriceResult {
 }
 
 // Fallback prices for known products (used when API fails)
+// These should match your Shopify prices - update if prices change
 const FALLBACK_PRICES: Record<string, { GBP: string; USD: string }> = {
-    // Night Splint variants
-    "gid://shopify/ProductVariant/47494539673928": { GBP: "£63.99", USD: "$93.99" },
-    "gid://shopify/ProductVariant/47494539608392": { GBP: "£63.99", USD: "$93.99" },
-    "gid://shopify/ProductVariant/47494539706696": { GBP: "£63.99", USD: "$93.99" },
-    "gid://shopify/ProductVariant/47494539641160": { GBP: "£63.99", USD: "$93.99" },
+    // Night Splint variants (all same price)
+    [SPLINT_VARIANTS["large-left"]]: { GBP: "£63.99", USD: "$93.99" },
+    [SPLINT_VARIANTS["large-right"]]: { GBP: "£63.99", USD: "$93.99" },
+    [SPLINT_VARIANTS["small-left"]]: { GBP: "£63.99", USD: "$93.99" },
+    [SPLINT_VARIANTS["small-right"]]: { GBP: "£63.99", USD: "$93.99" },
     // Course variants
-    "gid://shopify/ProductVariant/52265314353480": { GBP: "£29.99", USD: "$39.99" },
-    "gid://shopify/ProductVariant/52265315828040": { GBP: "£99.99", USD: "$129.99" },
+    [COURSE_VARIANTS.ESSENTIALS]: { GBP: "£29.99", USD: "$39.99" },
+    [COURSE_VARIANTS.PROFESSIONALS]: { GBP: "£99.99", USD: "$129.99" },
 };
 
 // Detect user's country

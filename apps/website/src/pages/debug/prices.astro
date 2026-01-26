@@ -1,0 +1,164 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout title="Price Debug" description="Debug pricing API">
+    <main class="max-w-4xl mx-auto p-8">
+        <h1 class="text-3xl font-bold mb-8">Price API Debug</h1>
+        
+        <div id="results" class="space-y-4">
+            <p class="text-neutral-500">Loading prices...</p>
+        </div>
+        
+        <div class="mt-8 p-4 bg-neutral-100 rounded-lg">
+            <h2 class="font-bold mb-2">Expected Fallback Prices</h2>
+            <pre class="text-sm">
+Splint: £63.99 / $93.99
+Course Essentials: £29.99 / $39.99
+Course Professionals: £99.99 / $129.99
+            </pre>
+        </div>
+    </main>
+</Layout>
+
+<script>
+const SHOPIFY_DOMAIN = "shop.thetismedical.com";
+const STOREFRONT_ACCESS_TOKEN = "784883c28d6484a8804b44ae00adfb99";
+
+// These should match the values in @/lib/shopify/products.ts
+const variants = {
+    "Night Splint (Large Left)": "gid://shopify/ProductVariant/47494539673928",
+    "Night Splint (Large Right)": "gid://shopify/ProductVariant/47494539608392",
+    "Night Splint (Small Left)": "gid://shopify/ProductVariant/47494539706696",
+    "Night Splint (Small Right)": "gid://shopify/ProductVariant/47494539641160",
+    "Course - Essentials": "gid://shopify/ProductVariant/52265314353480",
+    "Course - Professionals": "gid://shopify/ProductVariant/52265315828040",
+};
+
+// Fallback prices (should match use-variant-price.ts)
+const EXPECTED_FALLBACKS = {
+    "Night Splint": { GBP: "£63.99", USD: "$93.99" },
+    "Course - Essentials": { GBP: "£29.99", USD: "$39.99" },
+    "Course - Professionals": { GBP: "£99.99", USD: "$129.99" },
+};
+
+async function detectCountry(): Promise<string> {
+    try {
+        const response = await fetch("https://ipapi.co/json/");
+        if (response.ok) {
+            const data = await response.json();
+            return data.country_code || "GB";
+        }
+    } catch (e) {
+        console.error("Country detection failed:", e);
+    }
+    return "GB";
+}
+
+async function fetchPrice(variantId: string, country: string) {
+    const query = `
+        query getVariantPrice($variantId: ID!, $country: CountryCode) @inContext(country: $country) {
+            productVariant(id: $variantId) {
+                price { amount currencyCode }
+            }
+        }
+    `;
+    
+    const response = await fetch(`https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Shopify-Storefront-Access-Token": STOREFRONT_ACCESS_TOKEN,
+        },
+        body: JSON.stringify({ query, variables: { variantId, country } }),
+    });
+    
+    const data = await response.json();
+    return {
+        price: data.data?.productVariant?.price,
+        errors: data.errors,
+    };
+}
+
+function formatPrice(amount: string, currencyCode: string): string {
+    return new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: currencyCode,
+    }).format(parseFloat(amount));
+}
+
+async function runTests() {
+    const resultsDiv = document.getElementById("results");
+    if (!resultsDiv) return;
+    
+    const country = await detectCountry();
+    
+    let html = `<p class="mb-4"><strong>Detected Country:</strong> ${country}</p>`;
+    html += `<table class="w-full border-collapse">
+        <thead>
+            <tr class="bg-neutral-200">
+                <th class="p-2 text-left border">Product</th>
+                <th class="p-2 text-left border">Variant ID</th>
+                <th class="p-2 text-left border">API Price</th>
+                <th class="p-2 text-left border">Status</th>
+            </tr>
+        </thead>
+        <tbody>`;
+    
+    for (const [name, variantId] of Object.entries(variants)) {
+        const result = await fetchPrice(variantId, country);
+        const price = result.price;
+        const status = price ? "✅ OK" : "❌ Failed";
+        const priceDisplay = price 
+            ? formatPrice(price.amount, price.currencyCode)
+            : result.errors?.[0]?.message || "No price returned";
+        
+        html += `
+            <tr>
+                <td class="p-2 border font-medium">${name}</td>
+                <td class="p-2 border text-xs font-mono">${variantId.split("/").pop()}</td>
+                <td class="p-2 border ${price ? "text-green-600 font-bold" : "text-red-600"}">${priceDisplay}</td>
+                <td class="p-2 border">${status}</td>
+            </tr>`;
+    }
+    
+    html += `</tbody></table>`;
+    
+    // Test both GB and US
+    html += `<h2 class="text-xl font-bold mt-8 mb-4">Compare GB vs US Prices</h2>`;
+    html += `<table class="w-full border-collapse">
+        <thead>
+            <tr class="bg-neutral-200">
+                <th class="p-2 text-left border">Product</th>
+                <th class="p-2 text-left border">GB Price</th>
+                <th class="p-2 text-left border">US Price</th>
+            </tr>
+        </thead>
+        <tbody>`;
+    
+    for (const [name, variantId] of Object.entries(variants)) {
+        const gbResult = await fetchPrice(variantId, "GB");
+        const usResult = await fetchPrice(variantId, "US");
+        
+        const gbPrice = gbResult.price 
+            ? formatPrice(gbResult.price.amount, gbResult.price.currencyCode) 
+            : "Error";
+        const usPrice = usResult.price 
+            ? formatPrice(usResult.price.amount, usResult.price.currencyCode) 
+            : "Error";
+        
+        html += `
+            <tr>
+                <td class="p-2 border font-medium">${name}</td>
+                <td class="p-2 border">${gbPrice}</td>
+                <td class="p-2 border">${usPrice}</td>
+            </tr>`;
+    }
+    
+    html += `</tbody></table>`;
+    
+    resultsDiv.innerHTML = html;
+}
+
+runTests();
+</script>
