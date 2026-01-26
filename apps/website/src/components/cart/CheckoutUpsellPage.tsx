@@ -306,6 +306,12 @@ export function CheckoutUpsellPage() {
     );
 }
 
+// Product images for upsells
+const UPSELL_IMAGES = {
+    splint: "/images/night_splint_bed_top_square.jpg",
+    course: "/images/tendon-gap.png",
+} as const;
+
 // Upsell Product Card Component with Shopify API price fetching
 interface UpsellProductCardProps {
     product: {
@@ -349,6 +355,10 @@ function UpsellProductCard({
         : null;
     const course = courseType ? courseData[courseType] : null;
 
+    // Determine the product image to show
+    const isSplint = product.variantId.includes("47494539");
+    const productImage = isSplint ? UPSELL_IMAGES.splint : isCourse ? UPSELL_IMAGES.course : product.image;
+
     return (
         <div
             className={`p-6 rounded-xl border-2 transition-all bg-white dark:bg-neutral-800 ${
@@ -358,9 +368,17 @@ function UpsellProductCard({
             }`}
         >
             <div className="flex items-start gap-4">
-                <div className="flex justify-center items-center bg-neutral-100 dark:bg-neutral-700 rounded-lg w-24 h-24 shrink-0">
-                    <ShoppingBag className="w-10 h-10 text-neutral-400" />
-                </div>
+                {productImage ? (
+                    <img
+                        src={productImage}
+                        alt={product.title}
+                        className="rounded-lg w-24 h-24 object-cover shrink-0 border border-neutral-200 dark:border-neutral-700"
+                    />
+                ) : (
+                    <div className="flex justify-center items-center bg-neutral-100 dark:bg-neutral-700 rounded-lg w-24 h-24 shrink-0">
+                        <ShoppingBag className="w-10 h-10 text-neutral-400" />
+                    </div>
+                )}
                 <div className="flex-1 min-w-0">
                     <h3 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
                         {product.title}
