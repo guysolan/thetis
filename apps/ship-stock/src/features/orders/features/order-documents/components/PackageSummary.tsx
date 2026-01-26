@@ -1,57 +1,56 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
 import { OrderView } from "../../../types";
+import Package from "./Package";
 
 const PackageSummary = ({ items }: { items: OrderView["items"] }) => {
-  const packageItems = items.filter((item) => item.item_type === "package");
-  if (!packageItems.length) return <></>;
+  // Get unique package_item_change_ids
+  console.log("package summary", items);
+  const uniquePackageIds = Array.from(
+    new Set(
+      items
+        ?.map((item) => item.package_item_change_id)
+        ?.filter((id): id is string => id !== undefined),
+    ),
+  );
 
-  const totalQuantity = packageItems.reduce(
-    (sum, item) => sum + Math.abs(item.quantity),
-    0,
+  // Group items by package_item_change_id
+  const packageGroups = uniquePackageIds?.reduce(
+    (groups, packageId) => {
+      groups[packageId] = items?.filter(
+        (item) => item.package_item_change_id === packageId,
+      );
+      return groups;
+    },
+    {} as Record<string, OrderView["items"]>,
   );
-  const totalWeight = packageItems.reduce(
-    (sum, item) => sum + item.weight * Math.abs(item.quantity),
-    0,
-  );
+  console.log("package summary", packageGroups);
+
+  // If no packages, show placeholder
+  if (uniquePackageIds.length === 0) {
+    return (
+      <div className="mt-8">
+        <h2 className="mb-4 font-semibold text-lg">Package Breakdown</h2>
+        <div className="bg-muted/50 p-8 border border-border rounded-lg text-center">
+          <p className="text-muted-foreground text-sm">
+            No packages defined for this order
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="mb-8">
-      <h3 className="mb-4 font-semibold">Package Summary</h3>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Package</TableHead>
-            <TableHead>Dimensions (cm)</TableHead>
-            <TableHead>Quantity</TableHead>
-            <TableHead>Weight (kg)</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {packageItems.map((item, index) => (
-            <TableRow key={index}>
-              <TableCell>{item.item_name}</TableCell>
-              <TableCell>
-                {item.height} x {item.width} x {item.depth}
-              </TableCell>
-              <TableCell>{Math.abs(item.quantity)}</TableCell>
-              <TableCell>{item.weight}</TableCell>
-            </TableRow>
-          ))}
-          <TableRow className="font-semibold">
-            <TableCell colSpan={2}>Total</TableCell>
-            <TableCell>{totalQuantity}</TableCell>
-            <TableCell>{totalWeight.toFixed(2)}</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </div>
+    <>
+      {Object.entries(packageGroups).map(
+        ([packageItemChangeId, groupItems], index) => (
+          <Package
+            key={`package-summary-${index}-${packageItemChangeId}`}
+            packageItemChangeId={packageItemChangeId}
+            items={groupItems}
+            index={index}
+          />
+        ),
+      )}
+    </>
   );
 };
 

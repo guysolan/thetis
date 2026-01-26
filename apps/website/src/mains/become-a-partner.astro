@@ -1,0 +1,11 @@
+---
+import ContactLayout from "@/layouts/FormLayout.astro";
+import BecomeAPartnerForm from "@/forms/BecomeAPartner.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+---
+
+<ContactLayout lang={lang}>
+    <BecomeAPartnerForm lang={lang} />
+</ContactLayout>

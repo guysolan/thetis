@@ -1,0 +1,23 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Article from "../../layouts/Article.astro";
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+	const posts = await getCollection("article");
+	return posts
+		.filter((post) => post.data.audience.includes("patient"))
+		.map((post) => ({
+			params: { slug: post.id },
+			props: post,
+		}));
+}
+type Props = CollectionEntry<"article">;
+
+const post = Astro.props;
+const { Content } = await render(post);
+---
+
+<Article {...post.data}>
+	<Content />
+</Article>

@@ -1,0 +1,56 @@
+---
+import FAQsLayout from "../../layouts/FAQsLayout.astro";
+import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
+import WhatHappensIfMyAchillesIsRupturedFaqsSection from "@/sections/FAQs/what-happens-if-my-achilles-is-ruptured-faqs.astro";
+import WhatHappensIfMyAchillesIsRupturedSection from "@/sections/FAQs/what-happens-if-my-achilles-is-ruptured.astro";
+import type { Lang } from "@/config/languages";
+import CourseCTA from "../../components/CTA/CourseCTA.astro";
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content: Record<Lang, { title: string; description: string }> = {
+    en: {
+        title: "What Happens After an Achilles Rupture? Hospital to Physio Timeline",
+        description:
+            "Step-by-step overview of what happens after an Achilles tendon rupture: A&E care, specialist ultrasound, boot fitting, check-ups, physiotherapy start, and blood-thinner advice.",
+    },
+
+    fr: {
+        title: "Qu'arrive-t-il après une rupture de l'Achille ? Chronologie du traitement",
+        description:
+            "Aperçu étape par étape des événements après une rupture du tendon d'Achille : soins en urgence, examen par échographie, ajustement des chaussures, examens réguliers, début de la physiothérapie et conseils sur les anticoagulants.",
+    },
+
+    de: {
+        title: "Was passiert nach einer Achillenruptur? Krankenhaus bis Physiotherapie",
+        description:
+            "Schritt für Schritt Übersicht über das, was nach einer Achillenruptur passiert: Notfallversorgung, Ultraschalluntersuchung, Schuhpass, Untersuchungen, Beginn der Physiotherapie und Ratgeber für Antikoagulanzien.",
+    },
+
+    es: {
+        title: "¿Qué sucede después de una ruptura del tendón de la pantorrilla? Cronología del tratamiento",
+        description:
+            "Resumen paso a paso de lo que sucede después de una ruptura del tendón de la pantorrilla: atención en emergencias, ecografía especializada, ajuste de botas, controles, inicio de la fisioterapia y consejos sobre anticoagulantes.",
+    },
+
+    it: {
+        title: "Cosa succede dopo una rottura del tendine dell'Achille? Cronologia del trattamento",
+        description:
+            "Panoramica passo passo di ciò che accade dopo una rottura del tendine dell'Achille: assistenza in emergenza, ecografia specializzata, adattamento delle scarpe, controlli, inizio della fisioterapia e consigli sugli anticoagulanti.",
+    },
+};
+
+const currentContent = content[lang];
+---
+
+<FAQsLayout
+    title={currentContent.title}
+    description={currentContent.description}
+    lang={lang}
+>
+    <WhatHappensIfMyAchillesIsRupturedSection lang={lang} />
+
+    <CourseCTA lang={lang} variant="full" />
+    <NightSplintAdvert lang={lang} />
+
+    <WhatHappensIfMyAchillesIsRupturedFaqsSection lang={lang} />
+</FAQsLayout>

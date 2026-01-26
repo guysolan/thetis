@@ -1,0 +1,10 @@
+{
+  "ignoreCommand": "git rev-list --count HEAD | grep -q '^1$' && exit 1 || git diff HEAD^ HEAD --quiet -- apps/website/ packages/ui/ turbo.json package.json bun.lockb",
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "dev": false,
+      "preview": false
+    }
+  }
+}

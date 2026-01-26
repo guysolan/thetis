@@ -1,0 +1,132 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { buttonVariants } from "@/components/ui/button";
+import ColorGradient from "@/components/ColorGradient.astro";
+import Slide from "@/components/Slide.astro";
+import HighlightedParagraph from "@/components/HighlightedParagraph";
+
+const landingPages = [
+    {
+        title: "Sleeping with Torn Achilles",
+        url: "/sleeping-with-torn-achilles",
+        description:
+            "Can't sleep with Achilles rupture? Remove the boot at night.",
+        adGroup: "Sleeping/Rest",
+        bidAmount: "$1.75 (Highest)",
+        emoji: "😴",
+    },
+    {
+        title: "Washing with Torn Achilles",
+        url: "/washing-with-torn-achilles",
+        description: "Safer and more convenient than Limbo covers.",
+        adGroup: "Washing/Showering",
+        bidAmount: "$0.90 (Medium)",
+        emoji: "🚿",
+    },
+    {
+        title: "Swimming with Torn Achilles",
+        url: "/swimming-with-torn-achilles",
+        description: "Yes, you can swim safely during recovery.",
+        adGroup: "Swimming",
+        bidAmount: "$0.40 (Lowest)",
+        emoji: "🏊",
+    },
+    {
+        title: "Hygiene with Torn Achilles",
+        url: "/hygiene-with-torn-achilles",
+        description: "Keep your bed clean during recovery.",
+        adGroup: "Hygiene/Dirty Bed",
+        bidAmount: "$0.60 (Low)",
+        emoji: "🛏️",
+    },
+    {
+        title: "Products for Torn Achilles",
+        url: "/products-for-torn-achilles",
+        description: "Complete recovery solution, better than VACOped.",
+        adGroup: "Core Purchase & Alternatives",
+        bidAmount: "$1.25 (Medium-High)",
+        emoji: "🛍️",
+    },
+];
+
+const heroTitle = [
+    { text: "Google Ads ", highlighted: false },
+    { text: "Landing Pages", highlighted: true },
+    { text: " Preview", highlighted: false },
+];
+---
+
+<Layout
+    title="Landing Pages Preview"
+    description="Preview all landing pages for Achilles rupture"
+    lang="en"
+>
+    <main>
+        <!-- Hero Section -->
+        <ColorGradient>
+            <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl container">
+                <div class="mb-12 text-center">
+                    <h1
+                        class="mb-6 font-semibold text-neutral-950 text-4xl md:text-5xl leading-[105%] md:leading-[120%]"
+                    >
+                        <HighlightedParagraph
+                            paragraph={heroTitle}
+                            client:load
+                        />
+                    </h1>
+                    <p class="mx-auto max-w-2xl text-gray-700 text-xl">
+                        Preview all landing pages
+                    </p>
+                </div>
+            </div>
+        </ColorGradient>
+
+        <!-- Landing Pages Grid -->
+        <section class="bg-white dark:bg-black py-16">
+            <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl container">
+                <div
+                    class="gap-8 grid md:grid-cols-2 lg:grid-cols-3 mx-auto max-w-6xl"
+                >
+                    {
+                        landingPages.map((page, index) => (
+                            <div class="group flex flex-col bg-white dark:bg-neutral-900 shadow-md hover:shadow-xl p-8 border border-gray-200 dark:border-neutral-800 rounded-xl hover:scale-[1.02] transition-all duration-300">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="text-4xl">{page.emoji}</span>
+                                    <div>
+                                        <h3 class="font-bold text-neutral-900 dark:text-neutral-50 text-xl">
+                                            {page.title}
+                                        </h3>
+                                    </div>
+                                </div>
+
+                                <p class="flex-grow mb-6 text-gray-600 dark:text-neutral-300">
+                                    {page.description}
+                                </p>
+
+                                <div class="flex gap-2">
+                                    <a
+                                        href={page.url}
+                                        class={buttonVariants({
+                                            className: "flex-1",
+                                        })}
+                                    >
+                                        View
+                                    </a>
+                                    <a
+                                        href={`${page.url}?region=uk`}
+                                        class={buttonVariants({
+                                            variant: "outline",
+                                            className: "flex-1",
+                                        })}
+                                    >
+                                        UK
+                                    </a>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

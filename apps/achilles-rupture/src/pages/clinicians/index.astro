@@ -1,0 +1,55 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ContentListing from "../../components/ContentListing.astro";
+import EquipmentBanner from "../../components/EquipmentBanner.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { getCollection } from "astro:content";
+import Titles from "../../components/Titles.astro";
+import SurvivalKitBadge from "../../components/SurvivalKitBadge.astro";
+
+const articles = await getCollection("article");
+const articlePosts = articles
+    .filter((post) => post.data.audience.includes("clinician"))
+    .filter((post) => post.data.status === "published")
+    .map((a) => ({ ...a, type: "article" }))
+    .sort(
+        (a, b) =>
+            new Date(b.data.publishedAt).getTime() -
+            new Date(a.data.publishedAt).getTime(),
+    );
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`Articles - ${SITE_TITLE}`}
+            description={SITE_DESCRIPTION}
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`Articles - ${SITE_TITLE}`} />
+        <meta property="og:description" content={SITE_DESCRIPTION} />
+        <link
+            rel="canonical"
+            href={new URL(Astro.url.pathname, Astro.site).toString()}
+        />
+    </head>
+    <body>
+        <Header />
+        <main
+            id="main-content"
+            class="mx-auto px-4 py-8 max-w-[1400px] flex flex-col gap-8 items-center justify-center"
+        >
+        <SurvivalKitBadge />
+
+            <Titles
+                title="Achilles Rupture Articles for Clinicians"
+                subtitle="Designed for clinicians delivering care. These articles summarise current practice and evidence across the pathway, from initial assessment and risk stratification to boot selection, protected weight bearing, rehab progression and when to consider surgery."
+            />
+            <ContentListing posts={articlePosts} excludeTags={["draft"]} />
+        </main>
+        <Footer />
+    </body>
+</html>

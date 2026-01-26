@@ -1,0 +1,311 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import type { Lang } from "@/config/languages.ts";
+import ProductsLandingSchema from "@/schemas/ProductsLandingSchema.astro";
+import ProductsHero from "@/sections/products-for-torn-achilles/ProductsHero.astro";
+import RecoveryKitOverview from "@/sections/products-for-torn-achilles/RecoveryKitOverview.astro";
+import ProductComparison from "@/sections/products-for-torn-achilles/ProductComparison.astro";
+import ProductsFAQs from "@/sections/products-for-torn-achilles/ProductsFAQs";
+import ProductsOrderCallout from "@/sections/products-for-torn-achilles/ProductsOrderCallout.astro";
+import Reviews from "@/components/reviews/InfiniteReviews.astro";
+import KeyFeatures from "@/sections/achilles-rupture-splint/KeyFeatures.astro";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content = {
+    en: {
+        title: "Achilles Rupture Recovery Products | Better Than VACOped & Generic Boots",
+        description:
+            "Attention Achilles Rupture Patients: Get the complete recovery solution. The Thetis night splint is superior to generic alternatives, designed specifically for your injury.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "Attention ", highlighted: false },
+                { text: "Achilles Rupture", highlighted: true },
+                { text: " Patients", highlighted: false },
+            ],
+            description:
+                "Get the complete recovery solution designed specifically for Achilles rupture, not generic foot injuries. Better sleep, faster healing, and superior comfort compared to alternatives like VACOped boots or generic splints.",
+        },
+        comparison: {
+            title: [
+                {
+                    text: "Thetis Splint vs Generic Alternatives",
+                    highlighted: false,
+                },
+            ],
+            subtitle: "Why our purpose-built design makes all the difference",
+            comparison: {
+                thetis: {
+                    title: "Thetis Medical Night Splint",
+                    features: [
+                        "Specifically designed for Achilles rupture recovery",
+                        "Patented design (2024)",
+                        "Surgeon-endorsed and clinically tested",
+                        "3,000+ patients, zero complications",
+                        "Lightweight and breathable for sleep",
+                        "Waterproof for showering",
+                        "Removable, washable liner for hygiene",
+                        "Maintains optimal plantarflexion",
+                    ],
+                },
+                alternatives: {
+                    title: "Generic Boots & Splints",
+                    features: [
+                        "Generic design for various foot injuries",
+                        "Not patented for Achilles rupture",
+                        "Limited clinical evidence",
+                        "Often heavy and uncomfortable for sleep",
+                        "May not be waterproof",
+                        "Difficult to keep clean",
+                        "One-size-fits-all approach",
+                        "Variable positioning accuracy",
+                    ],
+                },
+            },
+        },
+    },
+    de: {
+        title: "Achillessehnenruptur-Erholungsprodukte | Besser als VACOped & generische Stiefel",
+        description:
+            "Achtung Achillessehnenruptur-Patienten: Holen Sie sich die komplette Erholungslösung. Die Thetis-Nachtschiene ist generischen Alternativen überlegen und speziell für Ihre Verletzung konzipiert.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "Achtung ", highlighted: false },
+                { text: "Achillessehnenruptur", highlighted: true },
+                { text: " Patienten", highlighted: false },
+            ],
+            description:
+                "Holen Sie sich die komplette Erholungslösung, die speziell für Achillessehnenruptur entwickelt wurde, nicht für generische Fußverletzungen. Besserer Schlaf, schnellere Heilung und überlegener Komfort im Vergleich zu Alternativen wie VACOped-Stiefeln.",
+        },
+        comparison: {
+            title: [
+                {
+                    text: "Thetis-Schiene vs. generische Alternativen",
+                    highlighted: false,
+                },
+            ],
+            subtitle:
+                "Warum unser zweckgebundenes Design den Unterschied macht",
+            comparison: {
+                thetis: {
+                    title: "Thetis Medical Nachtschiene",
+                    features: [
+                        "Speziell für Achillessehnenruptur-Erholung entwickelt",
+                        "Patentiertes Design (2024)",
+                        "Von Chirurgen empfohlen und klinisch getestet",
+                        "3.000+ Patienten, null Komplikationen",
+                        "Leicht und atmungsaktiv für den Schlaf",
+                        "Wasserdicht zum Duschen",
+                        "Herausnehmbare, waschbare Innenschicht für Hygiene",
+                        "Erhält optimale Plantarflexion",
+                    ],
+                },
+                alternatives: {
+                    title: "Generische Stiefel & Schienen",
+                    features: [
+                        "Generisches Design für verschiedene Fußverletzungen",
+                        "Nicht für Achillessehnenruptur patentiert",
+                        "Begrenzte klinische Beweise",
+                        "Oft schwer und unbequem für den Schlaf",
+                        "Möglicherweise nicht wasserdicht",
+                        "Schwierig sauber zu halten",
+                        "Einheitsgröße-Ansatz",
+                        "Variable Positionierungsgenauigkeit",
+                    ],
+                },
+            },
+        },
+    },
+    fr: {
+        title: "Produits de récupération de rupture d'Achille | Mieux que VACOped & bottes génériques",
+        description:
+            "Attention patients atteints de rupture d'Achille: Obtenez la solution de récupération complète. L'attelle de nuit Thetis est supérieure aux alternatives génériques, conçue spécifiquement pour votre blessure.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "Attention ", highlighted: false },
+                {
+                    text: "patients atteints de rupture d'Achille",
+                    highlighted: true,
+                },
+                { text: "", highlighted: false },
+            ],
+            description:
+                "Obtenez la solution de récupération complète conçue spécifiquement pour la rupture d'Achille, pas pour les blessures génériques du pied. Meilleur sommeil, guérison plus rapide et confort supérieur par rapport aux alternatives comme les bottes VACOped.",
+        },
+        comparison: {
+            title: [
+                {
+                    text: "Attelle Thetis vs Alternatives génériques",
+                    highlighted: false,
+                },
+            ],
+            subtitle:
+                "Pourquoi notre conception sur mesure fait toute la différence",
+            comparison: {
+                thetis: {
+                    title: "Attelle de nuit Thetis Medical",
+                    features: [
+                        "Spécialement conçue pour la récupération de rupture d'Achille",
+                        "Design breveté (2024)",
+                        "Recommandée par les chirurgiens et testée cliniquement",
+                        "3 000+ patients, zéro complication",
+                        "Légère et respirante pour le sommeil",
+                        "Imperméable pour la douche",
+                        "Doublure amovible et lavable pour l'hygiène",
+                        "Maintient la flexion plantaire optimale",
+                    ],
+                },
+                alternatives: {
+                    title: "Bottes & Attelles génériques",
+                    features: [
+                        "Design générique pour diverses blessures du pied",
+                        "Non brevetée pour la rupture d'Achille",
+                        "Preuves cliniques limitées",
+                        "Souvent lourdes et inconfortables pour dormir",
+                        "Peut ne pas être imperméable",
+                        "Difficile à garder propre",
+                        "Approche universelle",
+                        "Précision de positionnement variable",
+                    ],
+                },
+            },
+        },
+    },
+    es: {
+        title: "Productos de recuperación de rotura de Aquiles | Mejor que VACOped y botas genéricas",
+        description:
+            "Atención pacientes con rotura de Aquiles: Obtenga la solución de recuperación completa. La férula nocturna Thetis es superior a las alternativas genéricas, diseñada específicamente para su lesión.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "Atención ", highlighted: false },
+                { text: "pacientes con rotura de Aquiles", highlighted: true },
+                { text: "", highlighted: false },
+            ],
+            description:
+                "Obtenga la solución de recuperación completa diseñada específicamente para rotura de Aquiles, no para lesiones genéricas del pie. Mejor sueño, curación más rápida y comodidad superior en comparación con alternativas como botas VACOped.",
+        },
+        comparison: {
+            title: [
+                {
+                    text: "Férula Thetis vs Alternativas genéricas",
+                    highlighted: false,
+                },
+            ],
+            subtitle: "Por qué nuestro diseño específico marca la diferencia",
+            comparison: {
+                thetis: {
+                    title: "Férula nocturna Thetis Medical",
+                    features: [
+                        "Diseñada específicamente para recuperación de rotura de Aquiles",
+                        "Diseño patentado (2024)",
+                        "Respaldada por cirujanos y clínicamente probada",
+                        "3,000+ pacientes, cero complicaciones",
+                        "Ligera y transpirable para dormir",
+                        "Impermeable para ducharse",
+                        "Forro extraíble y lavable para higiene",
+                        "Mantiene flexión plantar óptima",
+                    ],
+                },
+                alternatives: {
+                    title: "Botas y férulas genéricas",
+                    features: [
+                        "Diseño genérico para varias lesiones del pie",
+                        "No patentado para rotura de Aquiles",
+                        "Evidencia clínica limitada",
+                        "A menudo pesadas e incómodas para dormir",
+                        "Puede no ser impermeable",
+                        "Difícil de mantener limpia",
+                        "Enfoque de talla única",
+                        "Precisión de posicionamiento variable",
+                    ],
+                },
+            },
+        },
+    },
+    it: {
+        title: "Prodotti per il recupero dalla rottura dell'Achille | Meglio di VACOped e stivali generici",
+        description:
+            "Attenzione pazienti con rottura dell'Achille: Ottieni la soluzione di recupero completa. La stecca notturna Thetis è superiore alle alternative generiche, progettata specificamente per la tua lesione.",
+        image: "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+        hero: {
+            title: [
+                { text: "Attenzione ", highlighted: false },
+                {
+                    text: "pazienti con rottura dell'Achille",
+                    highlighted: true,
+                },
+                { text: "", highlighted: false },
+            ],
+            description:
+                "Ottieni la soluzione di recupero completa progettata specificamente per la rottura dell'Achille, non per lesioni generiche del piede. Sonno migliore, guarigione più rapida e comfort superiore rispetto ad alternative come gli stivali VACOped.",
+        },
+        comparison: {
+            title: [
+                {
+                    text: "Stecca Thetis vs Alternative generiche",
+                    highlighted: false,
+                },
+            ],
+            subtitle: "Perché il nostro design specifico fa la differenza",
+            comparison: {
+                thetis: {
+                    title: "Stecca notturna Thetis Medical",
+                    features: [
+                        "Progettata specificamente per il recupero dalla rottura dell'Achille",
+                        "Design brevettato (2024)",
+                        "Approvata dai chirurghi e testata clinicamente",
+                        "3.000+ pazienti, zero complicazioni",
+                        "Leggera e traspirante per dormire",
+                        "Impermeabile per la doccia",
+                        "Rivestimento rimovibile e lavabile per l'igiene",
+                        "Mantiene la flessione plantare ottimale",
+                    ],
+                },
+                alternatives: {
+                    title: "Stivali e stecche generici",
+                    features: [
+                        "Design generico per varie lesioni del piede",
+                        "Non brevettato per la rottura dell'Achille",
+                        "Prove cliniche limitate",
+                        "Spesso pesanti e scomodi per dormire",
+                        "Potrebbe non essere impermeabile",
+                        "Difficile da tenere pulito",
+                        "Approccio taglia unica",
+                        "Precisione di posizionamento variabile",
+                    ],
+                },
+            },
+        },
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<Fragment slot="head">
+    <ProductsLandingSchema />
+    <slot name="head" />
+</Fragment>
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    image={currentContent.image}
+    lang={lang}
+>
+    <main>
+        <ProductsHero lang={lang} content={currentContent.hero} />
+
+        <RecoveryKitOverview lang={lang} />
+
+        <Reviews />
+
+        <ProductsFAQs lang={lang} client:load />
+
+        <ProductsOrderCallout lang={lang} />
+    </main>
+</Layout>

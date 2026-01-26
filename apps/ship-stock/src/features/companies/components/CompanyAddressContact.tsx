@@ -1,19 +1,10 @@
-import { useState } from "react";
-import { Pencil } from "lucide-react";
-import { Button } from "@thetis/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@thetis/ui/card";
 import { useCompanyForm } from "../hooks/useCompanyForm";
 import { CompanySummaryView } from "./CompanySummaryView";
 import { CompanyAddressContactSelect } from "./CompanyAddressContactSelect";
 import { useCompanyAutoFill } from "../hooks/useCompanyAutoFill";
 import type { CompanyRow } from "../types";
 import { CompanyAddressContactErrors } from "./CompanyAddressContactErrors";
+import EditCard from "../../../components/EditCard";
 
 interface Props {
   direction: "to" | "from";
@@ -26,7 +17,6 @@ const CompanyAddressContact = ({
   title,
   defaultExpanded = true,
 }: Props) => {
-  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const {
     form,
     getFieldName,
@@ -68,51 +58,30 @@ const CompanyAddressContact = ({
   const companyId = form.watch(`${direction}_company_id`);
 
   return (
-    <Card className="">
-      <CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
-        <CardTitle className="font-medium text-base">
-          {title ?? (direction === "to" ? "To" : "From")}
-        </CardTitle>
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
-          <Pencil size={20} />
-        </Button>
-      </CardHeader>
-      <CardContent>
-        {isExpanded ? (
-          <CompanyAddressContactSelect
-            companyId={companyId}
-            getFieldName={getFieldName}
-            getAddressOptions={getAddressOptions}
-            getSelectedAddress={getSelectedAddress}
-            getContactOptions={getContactOptions}
-            getSelectedContact={getSelectedContact}
-            form={form}
-            onDone={() => setIsExpanded(false)}
-          />
-        ) : (
+    <EditCard
+      title={title ?? (direction === "to" ? "To" : "From")}
+      previewContent={
+        <>
           <CompanySummaryView
             selectedCompany={selectedCompany}
             shippingAddress={getSelectedAddress("shipping")}
             billingAddress={getSelectedAddress("billing")}
             contact={getSelectedContact()}
           />
-        )}
-      </CardContent>
-      <CardFooter>
-        {isExpanded ? (
-          <Button type="button" onClick={() => setIsExpanded(false)}>
-            Done
-          </Button>
-        ) : (
           <CompanyAddressContactErrors direction={direction} />
-        )}
-      </CardFooter>
-    </Card>
+        </>
+      }
+    >
+      <CompanyAddressContactSelect
+        companyId={companyId}
+        getFieldName={getFieldName}
+        getAddressOptions={getAddressOptions}
+        getSelectedAddress={getSelectedAddress}
+        getContactOptions={getContactOptions}
+        getSelectedContact={getSelectedContact}
+        form={form}
+      />
+    </EditCard>
   );
 };
 

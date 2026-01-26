@@ -1,0 +1,53 @@
+---
+import FaqSchemaAccordion from "../../components/research/FaqSchemaAccordion.astro";
+import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
+import FAQsLayout from "../../layouts/FAQsLayout.astro";
+import LifeAfterAchillesRuptureSection from "../../sections/FAQs/life-after-achilles-rupture.astro";
+import type { Lang } from "@/config/languages";
+import LifeAfterAchillesRuptureFaqs from "@/sections/FAQs/life-after-achilles-rupture-faqs.astro";
+import CourseCTA from "../../components/CTA/CourseCTA.astro";
+
+const { lang = "en" }: { lang?: Lang } = Astro.props;
+
+const content: Record<Lang, { title: string; description: string }> = {
+    en: {
+        title: "Life After Achilles Rupture: Recovery Tips, Walking Timeline & Activity Guide",
+        description:
+            "Detailed advice on life after an Achilles tendon rupture: walking timeline, return-to-sport guidelines, going back to work, and preventing re-rupture – plus practical recovery tips.",
+    },
+    fr: {
+        title: "Vie après la rupture de l'Achille : Conseils de récupération, Chronologie du retour à la marche & Guide d'activité",
+        description:
+            "Conseils détaillés sur la vie après une rupture du tendon d'Achille : chronologie du retour à la marche, recommandations pour le retour au sport, retour au travail et prévention de la re-rupture – plus des conseils pratiques pour la récupération.",
+    },
+    de: {
+        title: "Leben nach einer Achillenruptur: Rückkehr-Tipps, Zeitplan für die Gehbühne & Aktivitätsleitfaden",
+        description:
+            "Detaillierte Ratschläge für das Leben nach einer Achillenruptur: Zeitplan für die Gehbühne, Rückkehr-Tipps für Sport und Arbeit, sowie praktische Tipps für die Rekonvaleszenz.",
+    },
+    es: {
+        title: "Vida después de la ruptura del tendón de la pantorrilla: Consejos de recuperación, Cronología del retorno a la marcha & Guía de actividad",
+        description:
+            "Consejos detallados sobre la vida después de una ruptura del tendón de la pantorrilla: cronología del retorno a la marcha, recomendaciones para el retorno al deporte, retorno al trabajo y prevención de la re-ruptura – más consejos prácticos para la recuperación.",
+    },
+    it: {
+        title: "Vita dopo la rottura dell'Achille: Consigli di recupero, Cronologia del ritorno al cammino & Guida all'attività",
+        description:
+            "Consigli dettagliati sulla vita dopo una rottura del tendine dell'Achille: cronologia del ritorno al cammino, linee guida per il ritorno al sport, ritorno al lavoro e prevenzione della re-ruptura – più consigli pratici per la riabilitazione.",
+    },
+};
+
+const currentContent = content[lang];
+---
+
+<FAQsLayout
+    title={currentContent.title}
+    description={currentContent.description}
+    lang={lang}
+>
+    <LifeAfterAchillesRuptureSection lang={lang} />
+    <CourseCTA lang={lang} variant="full" />
+    <NightSplintAdvert lang={lang} />
+
+    <LifeAfterAchillesRuptureFaqs lang={lang} />
+</FAQsLayout>

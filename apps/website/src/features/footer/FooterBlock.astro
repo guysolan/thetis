@@ -1,7 +1,7 @@
 ---
 interface Props {
     title: string;
-    links: Array<{ href: string; label: string }>;
+    links: Array<{ href: string; title: string }>;
     columns?: 1 | 2;
 }
 
@@ -9,12 +9,19 @@ const { title, links, columns = 1 } = Astro.props;
 ---
 
 <div class="space-y-4">
-    <h3 class="font-semibold text-center text-lg lg:text-left">{title}</h3>
-    <div class={`${columns === 2 ? 'gap-3 grid grid-cols-1 md:grid-cols-2' : 'flex flex-col space-y-3'}`}>
-        {links.map((link) => (
-            <a href={link.href} class="text-base text-center text-gray-100 lg:text-left hover:text-gray-300 transition-colors">
-                {link.label}
-            </a>
-        ))}
+    <h3 class="font-semibold text-lg lg:text-left text-center">{title}</h3>
+    <div
+        class={`${columns === 2 ? "gap-3 grid grid-cols-1 md:grid-cols-2" : "flex flex-col space-y-3"}`}
+    >
+        {
+            links.map((link) => (
+                <a
+                    href={link.href}
+                    class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
+                >
+                    {link.title}
+                </a>
+            ))
+        }
     </div>
 </div>

@@ -1,28 +1,88 @@
-import { useShipmentForm } from "../order-forms/features/shipment-form/useShipmentForm";
-import ShipmentItems from "../order-forms/features/shipment-form/ShipmentItems";
-import { StockValidationAlert } from "../order-forms/components/StockValidationAlert";
-import StockItems from "../order-forms/components/StockItems";
-import useCompanyDefaults from "../../../companies/hooks/useCompanyDefaults";
+import { useShipmentForm } from "../../hooks/useShipmentForm";
+import { StockValidationAlert } from "../../components/StockValidationAlert";
+import StockItems from "../../components/StockItems";
+import { useFormContext, useWatch } from "react-hook-form";
+import PackageStockItems from "../../components/PackageStockItems";
+import { useEffect, useRef } from "react";
 
 const ShipmentFormFields = () => {
+  const { control } = useFormContext();
+  const form = useFormContext();
+
+  // Guard against null form in production
+  if (!form?.control || !control) {
+    return <div>Loading shipment form...</div>;
+  }
+
   useShipmentForm();
   // useCompanyDefaults({ fieldName: "from_company_id" });
 
+  // Use useWatch to prevent infinite loops
+  const mode = useWatch({
+    control,
+    name: "mode",
+    defaultValue: "package",
+  });
+
+  const toItems = useWatch({
+    control,
+    name: "to_items",
+    defaultValue: [],
+  });
+
+  // Use ref to track previous state and prevent unnecessary updates
+  const previousToItemsRef = useRef<string>("");
+
+  useEffect(() => {
+    if (mode === "direct" && toItems?.length > 0) {
+      const toItemsString = JSON.stringify(toItems);
+
+      // Only proceed if toItems actually changed
+      if (toItemsString !== previousToItemsRef.current) {
+        const currentFromItems = form.getValues("from_items");
+        const reverseItems = toItems.map((item) => ({
+          ...item,
+          quantity_change: -item.quantity_change,
+        }));
+
+        // Only update if the items are actually different
+        const hasChanged =
+          JSON.stringify(currentFromItems) !== JSON.stringify(reverseItems);
+
+        if (hasChanged) {
+          form.setValue("from_items", reverseItems, { shouldDirty: true });
+        }
+
+        previousToItemsRef.current = toItemsString;
+      }
+    }
+  }, [form, mode, toItems]);
+
   return (
     <>
-      <ShipmentItems />
       <StockValidationAlert />
 
+      {mode === "package" && (
+        <PackageStockItems itemsToUpdate={["from_items", "to_items"]} />
+      )}
+
       <StockItems
-        readOnly={true}
-        address_name="from_shipping_address_id"
-        name="from_items"
+        showPrice={true}
+        showTax={true}
+        allowedTypes={["product", "part"]}
+        packageMode={mode === "package"}
+        name="to_items"
+        address_name="to_shipping_address_id"
       />
 
       <StockItems
         readOnly={true}
-        name="to_items"
-        address_name="to_shipping_address_id"
+        allowedTypes={["product", "part"]}
+        showPrice={false}
+        showTax={false}
+        packageMode={mode === "package"}
+        address_name="from_shipping_address_id"
+        name="from_items"
       />
     </>
   );

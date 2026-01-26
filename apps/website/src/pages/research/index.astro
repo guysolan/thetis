@@ -1,0 +1,100 @@
+---
+import ColorGradient from "../../components/ColorGradient.astro";
+import Layout from "../../layouts/Layout.astro";
+import { ArrowRight, Users, Pill, Scale, Clock } from "lucide-astro";
+
+const resources = [
+    {
+        title: "Surgery or Non-Surgical Treatment?",
+        description:
+            "Evidence-based comparison of surgical vs non-surgical treatment approaches across different countries.",
+        href: "/research/operation-or-not",
+        icon: Scale,
+        audience: "both",
+    },
+    {
+        title: "Recovery Timeline Comparison",
+        description:
+            "International comparison of recovery protocols, timelines, and rehabilitation approaches.",
+        href: "/research/timeline-by-country",
+        icon: Clock,
+        audience: "both",
+    },
+    {
+        title: "Global Trends in the Incidence of Achilles Tendon Rupture",
+        description:
+            "Comprehensive analysis of global trends in Achilles tendon rupture incidence and the factors driving changes in occurrence rates.",
+        href: "/research/incidence",
+        icon: Users,
+        audience: "both",
+    },
+];
+---
+
+<Layout
+    title="Achilles Rupture Resources"
+    description="Comprehensive guide to Achilles tendon rupture treatment, recovery, and decision-making for patients and healthcare providers."
+>
+    <ColorGradient>
+        <div class="mx-auto max-w-3xl">
+            <h1 class="mb-6 font-bold text-4xl">Achilles Rupture Resources</h1>
+
+            <div class="mb-12">
+                <p class="mb-4 text-gray-700 text-lg">
+                    Whether you're a patient who recently experienced an
+                    Achilles tendon rupture or a healthcare provider seeking
+                    evidence-based information, these resources will help guide
+                    treatment decisions and recovery expectations.
+                </p>
+            </div>
+
+            <div class="gap-6 grid">
+                {
+                    resources.map((resource) => (
+                        <a
+                            href={resource.href}
+                            class="group block bg-white shadow-sm hover:shadow-md p-6 border border-gray-100 rounded-lg transition-shadow"
+                        >
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1">
+                                    <resource.icon class="w-6 h-6 text-emerald-600" />
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center">
+                                        <h2 class="font-semibold group-hover:text-emerald-600 text-xl transition-colors">
+                                            {resource.title}
+                                        </h2>
+                                        <ArrowRight class="opacity-0 group-hover:opacity-100 w-5 h-5 text-emerald-600 transition-opacity" />
+                                    </div>
+                                    <p class="mt-2 text-gray-600">
+                                        {resource.description}
+                                    </p>
+                                    <div class="mt-3">
+                                        {resource.audience === "patients" ? (
+                                            <span class="inline-flex items-center bg-blue-50 px-2 py-1 rounded-full font-medium text-blue-700 text-xs">
+                                                Patient Resource
+                                            </span>
+                                        ) : (
+                                            <span class="inline-flex items-center bg-emerald-50 px-2 py-1 rounded-full font-medium text-emerald-700 text-xs">
+                                                Patient & Provider Resource
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+    </ColorGradient>
+
+    <div class="bg-gray-50 mx-4 md:mx-auto mt-12 p-6 rounded-lg md:max-w-3xl">
+        <h2 class="mb-4 font-semibold text-xl">About These Resources</h2>
+        <p class="text-gray-700">
+            These research articles were originally compiled for Thetis
+            Medical's internal research and are now publicly available to
+            benefit the global medical community.
+        </p>
+    </div>
+</Layout>

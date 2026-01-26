@@ -1,106 +1,184 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import Article from '@/components/blog/Article.astro'
-import Subscribe from '@/components/Subscribe.astro'
-import FAQSection from '@/components/blog/FaqSection.astro'
-import SlideTitle from '@/components/SlideTitle.astro';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import DownloadList from '@/components/DownloadList.astro';
-import Slide from '../components/Slide.astro';
+import Layout from "../layouts/Layout.astro";
+import Article from "@/components/research/Article.astro";
+import FAQSection from "@/components/research/FaqSection.astro";
+import DownloadList from "@/components/DownloadList.astro";
+import Slide from "../components/Slide.astro";
+import Subscribe from "@/components/Subscribe.astro";
 
 const faqSections = [
     {
         title: "Achilles Rupture Timeline",
         links: [
-            { href: "./FAQs/achilles-rupture-timeline", text: "Achilles Rupture Timeline" }
+            {
+                href: "./FAQs/achilles-rupture-timeline",
+                text: "Achilles Rupture Timeline",
+            },
         ],
-        readMoreLink: "./FAQs/achilles-rupture-timeline"
+        readMoreLink: "./FAQs/achilles-rupture-timeline",
     },
     {
         title: "Is my Achilles Ruptured?",
         links: [
-            { href: "./FAQs/is-my-achilles-ruptured#q1", text: "Is my Achilles Ruptured?" },
-            { href: "./FAQs/is-my-achilles-ruptured#q2", text: "What happens when you tear your Achilles?" },
+            {
+                href: "./FAQs/is-my-achilles-ruptured#q1",
+                text: "Is my Achilles Ruptured?",
+            },
+            {
+                href: "./FAQs/is-my-achilles-ruptured#q2",
+                text: "What happens when you tear your Achilles?",
+            },
         ],
-        readMoreLink: "./FAQs/is-my-achilles-ruptured"
+        readMoreLink: "./FAQs/is-my-achilles-ruptured",
     },
     {
         title: "What happens if my Achilles is ruptured?",
         links: [
-            { href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q1", text: "What will happen in A&E?" },
-            { href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q2", text: "What will the specialist do?" },
-            { href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q3", text: "How many check-ups?" },
-            { href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q4", text: "When should I see a physio?" },
-            { href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q5", text: "Should I take blood-thinners?" }
+            {
+                href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q1",
+                text: "What will happen in A&E?",
+            },
+            {
+                href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q2",
+                text: "What will the specialist do?",
+            },
+            {
+                href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q3",
+                text: "How many check-ups?",
+            },
+            {
+                href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q4",
+                text: "When should I see a physio?",
+            },
+            {
+                href: "./FAQs/what-happens-if-my-achilles-is-ruptured#q5",
+                text: "Should I take blood-thinners?",
+            },
         ],
-        readMoreLink: "./FAQs/what-happens-if-my-achilles-is-ruptured"
+        readMoreLink: "./FAQs/what-happens-if-my-achilles-is-ruptured",
     },
     {
         title: "Achilles Tear Treatment",
         links: [
-            { href: "./FAQs/achilles-tear-treatment#q1", text: "How to treat a torn Achilles tendon / Op vs Non-Op?" },
-            { href: "./FAQs/achilles-tear-treatment#q2", text: "How long can you wait for Achilles tendon surgery?" },
-            { href: "./FAQs/achilles-tear-treatment#q3", text: "How long does Achilles tendon surgery take?" },
-            { href: "./FAQs/achilles-tear-treatment#q4", text: "Recovery from Achilles Rupture Surgery" },
-            { href: "./FAQs/achilles-tear-treatment#q5", text: "Pain after Achilles tendon rupture / surgery" },
+            {
+                href: "./FAQs/achilles-tear-treatment#q1",
+                text: "How to treat a torn Achilles tendon / Op vs Non-Op?",
+            },
+            {
+                href: "./FAQs/achilles-tear-treatment#q2",
+                text: "How long can you wait for Achilles tendon surgery?",
+            },
+            {
+                href: "./FAQs/achilles-tear-treatment#q3",
+                text: "How long does Achilles tendon surgery take?",
+            },
+            {
+                href: "./FAQs/achilles-tear-treatment#q4",
+                text: "Recovery from Achilles Rupture Surgery",
+            },
+            {
+                href: "./FAQs/achilles-tear-treatment#q5",
+                text: "Pain after Achilles tendon rupture / surgery",
+            },
             { href: "./FAQs/achilles-tear-treatment#q6", text: "Heel Pain" },
             { href: "./FAQs/achilles-tear-treatment#q7", text: "Calf Pain" },
             { href: "./FAQs/achilles-tear-treatment#q8", text: "Calf Spasm" },
             { href: "./FAQs/achilles-tear-treatment#q9", text: "Knee Pain" },
             { href: "./FAQs/achilles-tear-treatment#q10", text: "Nerve Pain" },
-            { href: "./FAQs/achilles-tear-treatment#q11", text: "Scar healing post-surgery" }
+            {
+                href: "./FAQs/achilles-tear-treatment#q11",
+                text: "Scar healing post-surgery",
+            },
         ],
-        readMoreLink: "./FAQs/achilles-tear-treatment"
+        readMoreLink: "./FAQs/achilles-tear-treatment",
     },
     {
         title: "Torn Achilles recovery",
         links: [
-            { href: "./FAQs/torn-achilles-recovery#q1", text: "Walking casts vs boots" },
-            { href: "./FAQs/torn-achilles-recovery#q2", text: "Which Achilles tendon rupture boot is best?" },
-            { href: "./FAQs/torn-achilles-recovery#q3", text: "How to sleep with torn Achilles tendon?" },
-            { href: "./FAQs/torn-achilles-recovery#q4", text: "How long for an Achilles tendon rupture to heal?" },
-            { href: "./FAQs/torn-achilles-recovery#q5", text: "Recovery time with and without surgery?" },
-            { href: "./FAQs/torn-achilles-recovery#q6", text: "Partial Achilles tear recovery" },
-            { href: "./FAQs/torn-achilles-recovery#q7", text: "Achilles tendon recovery/rehab exercises" }
+            {
+                href: "./FAQs/torn-achilles-recovery#q1",
+                text: "Walking casts vs boots",
+            },
+            {
+                href: "./FAQs/torn-achilles-recovery#q2",
+                text: "Which Achilles tendon rupture boot is best?",
+            },
+            {
+                href: "./FAQs/torn-achilles-recovery#q3",
+                text: "How to sleep with torn Achilles tendon?",
+            },
+            {
+                href: "./FAQs/torn-achilles-recovery#q4",
+                text: "How long for an Achilles tendon rupture to heal?",
+            },
+            {
+                href: "./FAQs/torn-achilles-recovery#q5",
+                text: "Recovery time with and without surgery?",
+            },
+            {
+                href: "./FAQs/torn-achilles-recovery#q6",
+                text: "Partial Achilles tear recovery",
+            },
+            {
+                href: "./FAQs/torn-achilles-recovery#q7",
+                text: "Achilles tendon recovery/rehab exercises",
+            },
         ],
-        readMoreLink: "./FAQs/torn-achilles-recovery"
+        readMoreLink: "./FAQs/torn-achilles-recovery",
     },
     {
         title: "Life After Achilles Tendon Rupture",
         links: [
-            { href: "./FAQs/life-after-achilles-rupture#q1", text: "Life after Achilles tendon rupture" },
-            { href: "./FAQs/life-after-achilles-rupture#q2", text: "When can I play sport again?" },
-            { href: "./FAQs/life-after-achilles-rupture#q3", text: "When can I go back to physical work?" },
-            { href: "./FAQs/life-after-achilles-rupture#q4", text: "When can I walk after Achilles rupture?" },
-            { href: "./FAQs/life-after-achilles-rupture#q5", text: "How to avoid re-rupture" }
+            {
+                href: "./FAQs/life-after-achilles-rupture#q1",
+                text: "Life after Achilles tendon rupture",
+            },
+            {
+                href: "./FAQs/life-after-achilles-rupture#q2",
+                text: "When can I play sport again?",
+            },
+            {
+                href: "./FAQs/life-after-achilles-rupture#q3",
+                text: "When can I go back to physical work?",
+            },
+            {
+                href: "./FAQs/life-after-achilles-rupture#q4",
+                text: "When can I walk after Achilles rupture?",
+            },
+            {
+                href: "./FAQs/life-after-achilles-rupture#q5",
+                text: "How to avoid re-rupture",
+            },
         ],
-        readMoreLink: "./FAQs/life-after-achilles-rupture"
+        readMoreLink: "./FAQs/life-after-achilles-rupture",
     },
     {
         title: "Evidence Based Recovery",
         links: [
-            { href: "./evidence-based-recovery#natural-healing", text: "Natural Healing" }
+            {
+                href: "./evidence-based-recovery#natural-healing",
+                text: "Natural Healing",
+            },
         ],
-        readMoreLink: "./evidence-based-recovery"
+        readMoreLink: "./evidence-based-recovery",
     },
     {
         title: "Surgeon's Little Gems",
         links: [],
         readMoreLink: "",
-        isComingSoon: true
-    }
+        isComingSoon: true,
+    },
 ];
 
 const downloads = [
     {
         href: "/images/documents/A Game of Snakes and Ladders Poster.pdf",
-        title: "Snakes and Ladders Poster"
+        title: "Snakes and Ladders Poster",
     },
     {
         href: "/images/documents/Achilles Rupture Information Sheet.pdf",
-        title: "Achilles Rupture Information Sheet"
-    }
+        title: "Achilles Rupture Information Sheet",
+    },
 ];
 ---
 
@@ -111,30 +189,31 @@ const downloads = [
 >
     <main>
         <Article title="Achilles Ruptures FAQs" />
-        
-        <Slide>
-        <div class="space-y-8 mx-auto max-w-4xl">
-            {faqSections.map((section, index) => (
-                <FAQSection 
-                    title={section.title}
-                    links={section.links}
-                    readMoreLink={section.readMoreLink}
-                />
-            ))}
 
-            <div class="other-articles">
-                <a href="../night-splint" class="article-to-night-splint explore"
-                    >Achilles Rupture Night Splint</a
-                >
-            </div>
-        </Slide>
         <Slide>
-                <DownloadList 
-                    title="Downloads"
-                    downloads={downloads}
-                />
-        </Slide>
+            <div class="space-y-8 mx-auto max-w-4xl">
+                {
+                    faqSections.map((section, index) => (
+                        <FAQSection
+                            title={section.title}
+                            links={section.links}
+                            readMoreLink={section.readMoreLink}
+                        />
+                    ))
+                }
+
+                <div class="other-articles">
+                    <a
+                        href="../night-splint"
+                        class="article-to-night-splint explore"
+                        >Achilles Rupture Splint</a
+                    >
+                </div>
+            </div>
+            <Slide>
+                <DownloadList title="Downloads" downloads={downloads} />
+            </Slide>
             <Subscribe />
-        </div>
+        </Slide>
     </main>
 </Layout>

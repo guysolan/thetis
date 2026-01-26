@@ -1,0 +1,293 @@
+---
+import type { Lang } from "@/config/languages.ts";
+import HighlightedParagraph from "@/components/HighlightedParagraph.tsx";
+import type { HighlightedParagraphProps } from "@/components/HighlightedParagraph.tsx";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content: Record<
+    Lang,
+    {
+        title: HighlightedParagraphProps;
+        description: string;
+        features: {
+            title: string;
+            description: string;
+        }[];
+    }
+> = {
+    en: {
+        title: [{ text: "Sleep Better Tonight", highlighted: true }],
+        description:
+            "The lightweight alternative that lets you rest comfortably while your tendon heals",
+        features: [
+            {
+                title: "90% Lighter Than Boots",
+                description: "200g vs 1.5kg+ — finally get the sleep you need",
+            },
+            {
+                title: "On in 30 Seconds",
+                description: "No complicated setup. Just strap it on and sleep",
+            },
+            {
+                title: "Same Protection",
+                description:
+                    "Maintains the exact 30° healing angle your surgeon requires",
+            },
+            {
+                title: "Breathe & Stay Clean",
+                description:
+                    "Open design means no sweaty feet or dirt in your bed",
+            },
+            {
+                title: "5,000+ Patients Trust It",
+                description:
+                    "Zero re-ruptures reported. Surgeon-approved safety",
+            },
+            {
+                title: "Shower-Ready",
+                description:
+                    "Wash it clean. No more worrying about keeping your boot dry",
+            },
+        ],
+    },
+    de: {
+        title: [
+            { text: "Einfaches ", highlighted: true },
+            { text: "Design", highlighted: false },
+        ],
+        description: "",
+        features: [
+            {
+                title: "Unter 200g",
+                description: "Wiegt nur einen Bruchteil Ihres Stiefels",
+            },
+            {
+                title: "Einfach An/Aus",
+                description: "Verstellbare Riemen für schnelles Anpassen",
+            },
+            {
+                title: "Korrekter Winkel",
+                description: "Hält Ihren Fuß in der richtigen Position",
+            },
+            {
+                title: "Atmungsaktiv",
+                description: "Belüftet mit waschbarem Futter",
+            },
+            {
+                title: "Bettfreundlich",
+                description: "Niedriges Profil, kein Volumen",
+            },
+            {
+                title: "Duschsicher",
+                description: "Wasserdichte Materialien",
+            },
+        ],
+    },
+    fr: {
+        title: [
+            { text: "Design ", highlighted: true },
+            { text: "Simple", highlighted: false },
+        ],
+        description: "",
+        features: [
+            {
+                title: "Moins de 200g",
+                description: "Pèse une fraction de votre botte",
+            },
+            {
+                title: "Facile à Mettre",
+                description: "Sangles ajustables pour un ajustement rapide",
+            },
+            {
+                title: "Angle Correct",
+                description: "Maintient votre pied dans la bonne position",
+            },
+            {
+                title: "Respirant",
+                description: "Ventilé avec doublure lavable",
+            },
+            {
+                title: "Adapté au Lit",
+                description: "Profil bas, pas de volume",
+            },
+            {
+                title: "Résistant à l'Eau",
+                description: "Matériaux imperméables",
+            },
+        ],
+    },
+    es: {
+        title: [
+            { text: "Diseño ", highlighted: true },
+            { text: "Simple", highlighted: false },
+        ],
+        description: "",
+        features: [
+            {
+                title: "Menos de 200g",
+                description: "Pesa una fracción de su bota",
+            },
+            {
+                title: "Fácil de Poner",
+                description: "Correas ajustables para un ajuste rápido",
+            },
+            {
+                title: "Ángulo Correcto",
+                description: "Mantiene su pie en la posición correcta",
+            },
+            {
+                title: "Transpirable",
+                description: "Ventilado con forro lavable",
+            },
+            {
+                title: "Amigable para la Cama",
+                description: "Perfil bajo, sin volumen",
+            },
+            {
+                title: "Resistente al Agua",
+                description: "Materiales impermeables",
+            },
+        ],
+    },
+    it: {
+        title: [
+            { text: "Design ", highlighted: true },
+            { text: "Semplice", highlighted: false },
+        ],
+        description: "",
+        features: [
+            {
+                title: "Meno di 200g",
+                description: "Pesa una frazione del tuo stivale",
+            },
+            {
+                title: "Facile da Indossare",
+                description: "Cinghie regolabili per una vestibilità rapida",
+            },
+            {
+                title: "Angolo Corretto",
+                description: "Mantiene il piede nella posizione giusta",
+            },
+            {
+                title: "Traspirante",
+                description: "Ventilato con fodera lavabile",
+            },
+            {
+                title: "Adatto al Letto",
+                description: "Profilo basso, nessun ingombro",
+            },
+            {
+                title: "Impermeabile",
+                description: "Materiali resistenti all'acqua",
+            },
+        ],
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<style>
+    .feature-card {
+        border-color: transparent;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .feature-card.highlighted {
+        border-color: hsl(161, 60%, 40%);
+    }
+    .feature-card.highlighted svg {
+        transition: all 0.5s ease-in-out;
+        scale: 1.1;
+    }
+</style>
+
+<section class="py-16">
+    <div class="mx-auto px-4 container">
+        <div class="mx-auto mb-12 max-w-3xl text-center">
+            <h2
+                class="mb-4 font-semibold text-neutral-950 dark:text-neutral-50 text-3xl md:text-4xl leading-[120%]"
+            >
+                <HighlightedParagraph paragraph={currentContent.title} />
+            </h2>
+            <p
+                class="text-gray-800 dark:text-neutral-200 text-lg leading-relaxed"
+            >
+                {currentContent.description}
+            </p>
+        </div>
+
+        <div
+            class="gap-8 grid md:grid-cols-3 mx-auto max-w-5xl"
+            id="feature-cards"
+        >
+            {
+                currentContent.features.map((feature, index) => {
+                    const icons = [
+                        // Lightweight Design
+                        `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>`,
+                        // Easy to Use
+                        `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>`,
+                        // Proper Positioning
+                        `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>`,
+                        // Breathable
+                        `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>`,
+                        // Sleep-Friendly
+                        `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>`,
+                        // Secure Support
+                        `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>`,
+                    ];
+
+                    return (
+                        <div class="p-6 border-2 border-transparent rounded-lg text-center transition-all duration-300 feature-card">
+                            <div class="flex justify-center items-center bg-primary/10 dark:bg-primary/20 mx-auto mb-4 rounded-full w-16 h-16">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    set:html={icons[index]}
+                                />
+                            </div>
+                            <h3 class="mb-2 font-semibold text-neutral-900 dark:text-neutral-50 text-lg">
+                                {feature.title}
+                            </h3>
+                            <p class="text-gray-600 dark:text-neutral-400">
+                                {feature.description}
+                            </p>
+                        </div>
+                    );
+                })
+            }
+        </div>
+    </div>
+</section>
+
+<script>
+    function highlightNextCard() {
+        const cards = document.querySelectorAll(".feature-card");
+        const currentIndex = Array.from(cards).findIndex((card) =>
+            card.classList.contains("highlighted"),
+        );
+
+        // Remove highlight from current card
+        if (currentIndex !== -1) {
+            cards[currentIndex].classList.remove("highlighted");
+        }
+
+        // Add highlight to next card
+        const nextIndex = (currentIndex + 1) % cards.length;
+        cards[nextIndex].classList.add("highlighted");
+    }
+
+    // Start with first card highlighted
+    const firstCard = document.querySelector(".feature-card");
+    if (firstCard) {
+        firstCard.classList.add("highlighted");
+    }
+
+    // Change highlight every 3 seconds
+    setInterval(highlightNextCard, 1000);
+</script>

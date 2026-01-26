@@ -1,0 +1,18 @@
+---
+import FormLayout from "@/layouts/FormLayout.astro";
+import RequestAReturnForm, { type FormStage } from "@/forms/RequestAReturn.tsx";
+import type { Lang } from "@/config/languages.ts";
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+// Get stage from URL parameters
+const url = new URL(Astro.request.url);
+const stageParam = url.searchParams.get("stage");
+const validStages = ["info", "reason", "details", "submit"];
+const initialStage = validStages.includes(stageParam || "")
+    ? stageParam
+    : "info";
+---
+
+<FormLayout lang={lang}>
+    <RequestAReturnForm client:load initialStage={initialStage as FormStage} />
+</FormLayout>

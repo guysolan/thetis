@@ -1,6 +1,13 @@
-Follow common PostgreSQL naming conventions:
-in_ for input parameters
-v_ for local variables
-t_ for temporary or table variables
-r_ for record variables (though v_ is also commonly used)
-out_ for output parameters when using OUT parameters
+For my Astro files please remember to use imports wrapped in --- like:
+
+---
+import { buttonVariants } from "../../../components/ui/button";
+---
+
+Never use green colors - always use primary color instead. Progress (completed count) and position (current section) are independent concepts.
+
+React components used in Astro with client:load (e.g. StickyAddToCart) must use default export. Named exports cause "Unable to render X because it is undefined" at runtime.
+
+Sticky nav: Use StickyAddToCart (bottom bar, appears on scroll) on both splint and course pages. It supports variant "splint" | "course", Course|Splint links, and product-specific CTAs. Adapt this component rather than adding a separate sticky nav.
+
+Course pages: standard.astro and premium.astro have been removed. Use /course and /course/essentials only.

@@ -5,6 +5,7 @@ import { Calendar } from "./calendar";
 import { Input } from "./input";
 import { Label } from "./label";
 import { Textarea } from "./textarea";
+import { InfiniteClinicianReviews } from "./infinite-clinician-reviews";
 import {
   Accordion,
   AccordionContent,
@@ -88,11 +89,11 @@ import {
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./hover-card";
 import {
   MultiSelector,
-  MultiSelectorTrigger,
-  MultiSelectorInput,
   MultiSelectorContent,
-  MultiSelectorList,
+  MultiSelectorInput,
   MultiSelectorItem,
+  MultiSelectorList,
+  MultiSelectorTrigger,
 } from "./multi-select";
 import {
   NavigationMenu,
@@ -184,6 +185,7 @@ const ui = {
   CardHeader,
   CardTitle,
   Command,
+  InfiniteClinicianReviews,
   Dialog,
   DialogContent,
   DialogDescription,

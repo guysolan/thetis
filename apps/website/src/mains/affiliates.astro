@@ -1,0 +1,62 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AffiliatesHero from "../sections/affiliates/AffiliatesHero.astro";
+import AffiliatesProductInfo from "../sections/affiliates/AffiliatesProductInfo.astro";
+import AffiliatesBenefits from "../sections/affiliates/AffiliatesBenefits.astro";
+import AffiliatesHowItWorks from "../sections/affiliates/AffiliatesHowItWorks.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Thetis Medical - Affiliate Program",
+        description:
+            "Join our affiliate program and earn 10% commission while helping your patients save 10% on their recovery. Get your personalized discount code (your surname in CAPS) and start referring today",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+    de: {
+        title: "Thetis Medical - Affiliate-Programm",
+        description:
+            "Werden Sie unser Affiliate-Partner und verdienen Sie 10% Provision, während Sie Ihren Patienten helfen, 10% bei ihrer Genesung zu sparen. Erhalten Sie Ihren personalisierten Rabattcode (Ihr Nachname in GROSSBUCHSTABEN) und beginnen Sie noch heute mit der Empfehlung.",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+    fr: {
+        title: "Thetis Medical - Programme d'Affiliation",
+        description:
+            "Rejoignez notre programme d'affiliation et gagnez 10% de commission tout en aidant vos patients à économiser 10% sur leur récupération. Obtenez votre code de réduction personnalisé (votre nom de famille en MAJUSCULES) et commencez à référer dès aujourd'hui.",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+    es: {
+        title: "Thetis Medical - Programa de Afiliados",
+        description:
+            "Únase a nuestro programa de afiliados y gane un 10% de comisión mientras ayuda a sus pacientes a ahorrar un 10% en su recuperación. Obtenga su código de descuento personalizado (su apellido en MAYÚSCULAS) y comience a referir hoy mismo.",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+    it: {
+        title: "Thetis Medical - Programma di Affiliazione",
+        description:
+            "Unisciti al nostro programma di affiliazione e guadagna il 10% di commissione mentre aiuti i tuoi pazienti a risparmiare il 10% sulla loro guarigione. Ottieni il tuo codice sconto personalizzato (il tuo cognome in MAIUSCOLE) e inizia a riferire oggi stesso.",
+        image: "https://thetismedical.com/images/night-splint.png",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    image={currentContent.image}
+    lang={lang}
+>
+    <main class="min-h-screen">
+        <AffiliatesHero lang={lang} />
+
+        <AffiliatesProductInfo lang={lang} />
+
+        <AffiliatesBenefits lang={lang} />
+
+        <AffiliatesHowItWorks lang={lang} />
+    </main>
+</Layout>

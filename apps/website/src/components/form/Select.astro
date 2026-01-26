@@ -1,31 +1,27 @@
 ---
-import { cn } from '../../lib/utils';
-
-export const selectStyle =
-  "rounded-sm focus:border-primary font-normal [&:checked]:accent-white focus:ring-primary border border-text-black text-base transition-all ease duration-100 delay-50 focus:ring-primary hover:ring-gray-400 ring-1 ring-transparent block w-full pl-3 pr-8 py-3 font-normal placeholder:text-gray-500 w-full rounded-lg bg-white/90 h-[54px]";
-
 interface Props {
     id?: string;
     name: string;
     required?: boolean;
     class?: string;
-    options: { value: string; label: string }[];
     placeholder?: string;
-    type?: string;
 }
 
-const { id, name, required, class: className, options, placeholder, type }: Props = Astro.props;
+const {
+    id,
+    name,
+    required,
+    placeholder,
+    class: className,
+}: Props = Astro.props;
 ---
 
 <select
     required={required}
     id={id}
     name={name}
-    type={type||'text'}
-    class={cn(selectStyle, className)}
+    class="block bg-white/90 p-3 pr-8 pl-10 focus:border-primary border-text-black rounded-lg rounded-sm ring-1 ring-transparent hover:ring-gray-400 focus:ring-primary focus:ring-primary w-full w-full font-normal font-normal text-base transition-all duration-100 delay-50 [&:checked]:accent-white ease"
 >
-    {placeholder && <option value="" disabled selected>{placeholder}</option>}
-    {options.map(option => (
-        <option value={option.value}>{option.label}</option>
-    ))}
+    <option value="">{placeholder || "Select an option"}</option>
+    <slot />
 </select>

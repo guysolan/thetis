@@ -1,0 +1,162 @@
+---
+import HighlightedParagraph from "@/components/HighlightedParagraph";
+import ColorGradient from "@/components/ColorGradient.astro";
+import type { Lang } from "../../config/languages";
+import { Moon, BedDouble, AlertTriangle, ArrowDown } from "lucide-react";
+
+interface Props {
+    lang: Lang;
+    content: {
+        title: any;
+        description: string;
+    };
+}
+
+const { lang = "en", content } = Astro.props;
+
+const heroContent = {
+    en: {
+        badge: "Common Recovery Challenge",
+        subtitle: "Sleep problems are the #1 complaint during Achilles recovery - you're not alone",
+        painPoints: [
+            "The boot is heavy, hot, and uncomfortable",
+            "You can't find a comfortable sleeping position",
+            "You're exhausted but can't get quality rest"
+        ],
+        stat: "80%",
+        statLabel: "of patients struggle with sleep during boot phase",
+        cta: "Learn how to sleep better",
+        stats: [
+            { number: "5,000+", label: "patients helped" },
+            { number: "0", label: "re-ruptures reported" }
+        ]
+    },
+    de: {
+        badge: "Häufige Genesungsherausforderung",
+        subtitle: "Schlafprobleme sind die häufigste Beschwerde während der Achillessehnen-Genesung - Sie sind nicht allein",
+        painPoints: [
+            "Der Stiefel ist schwer, heiß und unbequem",
+            "Sie finden keine bequeme Schlafposition",
+            "Sie sind erschöpft, können aber nicht gut schlafen"
+        ],
+        stat: "80%",
+        statLabel: "der Patienten haben Schlafprobleme während der Stiefelphase",
+        cta: "Erfahren Sie, wie Sie besser schlafen",
+        stats: [
+            { number: "5.000+", label: "Patienten geholfen" },
+            { number: "0", label: "Re-Rupturen gemeldet" }
+        ]
+    },
+    fr: {
+        badge: "Défi courant de récupération",
+        subtitle: "Les problèmes de sommeil sont la plainte n°1 pendant la récupération d'Achille - vous n'êtes pas seul",
+        painPoints: [
+            "La botte est lourde, chaude et inconfortable",
+            "Vous ne trouvez pas de position de sommeil confortable",
+            "Vous êtes épuisé mais ne pouvez pas bien vous reposer"
+        ],
+        stat: "80%",
+        statLabel: "des patients ont des problèmes de sommeil pendant la phase de botte",
+        cta: "Apprenez à mieux dormir",
+        stats: [
+            { number: "5 000+", label: "patients aidés" },
+            { number: "0", label: "re-ruptures signalées" }
+        ]
+    },
+    es: {
+        badge: "Desafío común de recuperación",
+        subtitle: "Los problemas de sueño son la queja #1 durante la recuperación del Aquiles - no está solo",
+        painPoints: [
+            "La bota es pesada, caliente e incómoda",
+            "No puede encontrar una posición cómoda para dormir",
+            "Está agotado pero no puede descansar bien"
+        ],
+        stat: "80%",
+        statLabel: "de los pacientes tienen problemas de sueño durante la fase de bota",
+        cta: "Aprenda a dormir mejor",
+        stats: [
+            { number: "5.000+", label: "pacientes ayudados" },
+            { number: "0", label: "re-rupturas reportadas" }
+        ]
+    },
+    it: {
+        badge: "Sfida comune del recupero",
+        subtitle: "I problemi di sonno sono la lamentela n°1 durante il recupero dell'Achille - non sei solo",
+        painPoints: [
+            "Lo stivale è pesante, caldo e scomodo",
+            "Non riesci a trovare una posizione comoda per dormire",
+            "Sei esausto ma non riesci a riposare bene"
+        ],
+        stat: "80%",
+        statLabel: "dei pazienti ha problemi di sonno durante la fase dello stivale",
+        cta: "Scopri come dormire meglio",
+        stats: [
+            { number: "5.000+", label: "pazienti aiutati" },
+            { number: "0", label: "ri-rotture segnalate" }
+        ]
+    }
+};
+
+const currentHeroContent = heroContent[lang as keyof typeof heroContent] || heroContent.en;
+---
+
+<ColorGradient>
+    <div class="mx-auto px-4 py-12 md:py-16 max-w-5xl text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 bg-primary/10 mb-6 px-4 py-2 rounded-full">
+            <Moon className="w-4 h-4 text-primary" />
+            <span class="font-medium text-primary text-sm uppercase tracking-wider">{currentHeroContent.badge}</span>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="mb-6 font-bold text-gray-900 text-4xl md:text-5xl lg:text-6xl leading-tight">
+            <HighlightedParagraph paragraph={content.title} client:load />
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="mx-auto mb-8 max-w-2xl text-gray-600 text-lg md:text-xl">
+            {currentHeroContent.subtitle}
+        </p>
+
+        <!-- Big Stat -->
+        <div class="bg-primary/5 mx-auto mb-8 p-6 border border-primary/20 rounded-xl max-w-md">
+            <div class="font-bold text-primary text-5xl md:text-6xl mb-2">{currentHeroContent.stat}</div>
+            <p class="text-gray-600">{currentHeroContent.statLabel}</p>
+        </div>
+
+        <!-- Pain Points -->
+        <div class="bg-amber-50 mx-auto mb-8 p-6 border border-amber-200 rounded-xl max-w-2xl">
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <AlertTriangle className="w-5 h-5 text-amber-600" />
+                <span class="font-semibold text-amber-800">Sound familiar?</span>
+            </div>
+            <ul class="space-y-3 text-left">
+                {currentHeroContent.painPoints.map((point) => (
+                    <li class="flex items-start gap-3">
+                        <span class="text-amber-600 mt-1">•</span>
+                        <span class="text-amber-700">{point}</span>
+                    </li>
+                ))}
+            </ul>
+        </div>
+
+        <!-- Stats -->
+        <div class="flex justify-center gap-8 mb-8">
+            {currentHeroContent.stats.map((stat) => (
+                <div class="text-center">
+                    <div class="font-bold text-primary text-2xl md:text-3xl">{stat.number}</div>
+                    <div class="text-gray-600 text-sm">{stat.label}</div>
+                </div>
+            ))}
+        </div>
+
+        <!-- CTA to scroll down -->
+        <a 
+            href="#education"
+            class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 px-6 py-3 rounded-lg font-semibold text-white transition-colors"
+        >
+            {currentHeroContent.cta}
+            <ArrowDown className="w-4 h-4" />
+        </a>
+    </div>
+</ColorGradient>

@@ -1,0 +1,21 @@
+---
+import Layout from "../../layouts/ArticleLayout.astro";
+import IncidenceInteractive from "../../components/research/incidence/IncidenceInteractive.astro";
+
+const title = "Global Trends in the Incidence of Achilles Tendon Rupture";
+const description =
+    "Comprehensive analysis of global trends in Achilles tendon rupture incidence and the factors driving changes in occurrence rates.";
+const createdAt = new Date("2025-05-25");
+const tags = ["science", "guides"] as ("science" | "guides")[];
+---
+
+<Layout
+    title={title}
+    description={description}
+    createdAt={createdAt}
+    tags={tags}
+>
+    <main class="mx-auto px-4 py-8 container">
+        <IncidenceInteractive />
+    </main>
+</Layout>

@@ -1,0 +1,66 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProfessionalsHero from "../sections/professionals/ProfessionalsHero.astro";
+import type { Lang } from "@/config/languages.ts";
+import ProfessionalOpinions from "../sections/professionals/ProfessionalOpinions.astro";
+import UseInER from "../sections/professionals/UseInER.astro";
+import SleepWithoutABoot from "../sections/professionals/SleepWithoutABoot.astro";
+import OrderForClinic from "../sections/professionals/OrderForClinic.astro";
+import ProfessionalDownloads from "../sections/professionals/ProfessionalDownloads.astro";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Thetis Medical - Professionals",
+        description:
+            "Medical device company specialising in splints for injured Achilles Tendons. We sell an Achilles Rupture Splint and a Trauma Splint.",
+        image: "https://thetismedical.com/images/evidence-based-recovery",
+    },
+    de: {
+        title: "Thetis Medical - Fachkräfte",
+        description:
+            "Medizintechnikunternehmen, das sich auf Schienen für verletzte Achillessehnen spezialisiert. Wir verkaufen eine Achillessehnenruptur-Schiene und eine Trauma-Schiene.",
+        image: "https://thetismedical.com/images/evidence-based-recovery",
+    },
+    fr: {
+        title: "Thetis Medical - Professionnels",
+        description:
+            "Entreprise de dispositifs médicaux spécialisée dans les attelles pour tendons d'Achille blessés. Nous vendons une attelle de rupture d'Achille et une attelle de traumatisme.",
+        image: "https://thetismedical.com/images/evidence-based-recovery",
+    },
+    es: {
+        title: "Thetis Medical - Profesionales",
+        description:
+            "Empresa de dispositivos médicos especializada en férulas para tendones de Aquiles lesionados. Vendemos una férula de ruptura de Aquiles y una férula de trauma.",
+        image: "https://thetismedical.com/images/evidence-based-recovery",
+    },
+    it: {
+        title: "Thetis Medical - Professionisti",
+        description:
+            "Azienda di dispositivi medici specializzata in férula per tendini di Achille feriti. Vendiamo una férula per rottura di Achille e una férula per trauma.",
+        image: "https://thetismedical.com/images/evidence-based-recovery",
+    },
+};
+---
+
+<Layout
+    title={content[lang].title}
+    description={content[lang].description}
+    image={content[lang].image}
+    lang={lang}
+>
+    <main class="">
+        <ProfessionalsHero lang={lang} />
+
+        <ProfessionalOpinions lang={lang} />
+
+        <UseInER lang={lang} />
+
+        <SleepWithoutABoot lang={lang} />
+
+        <OrderForClinic lang={lang} />
+
+        <ProfessionalDownloads lang={lang} />
+    </main>
+</Layout>

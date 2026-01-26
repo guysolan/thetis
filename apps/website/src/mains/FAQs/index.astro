@@ -1,0 +1,298 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Article from "@/components/research/Article.astro";
+import FAQSection from "@/components/research/FaqSection.astro";
+import DownloadList from "@/components/DownloadList.astro";
+import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
+import { articleRoutes, type BaseRoute } from "@/content/routes";
+import { languages } from "@/config/languages";
+
+import type { Lang } from "@/config/languages";
+
+interface Props {
+    lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+
+// Content translations
+const content: Record<
+    Lang,
+    {
+        title: string;
+        description: string;
+        downloads: string;
+        snakesAndLadders: string;
+        infoSheet: string;
+    }
+> = {
+    en: {
+        title: "Achilles Ruptures FAQs",
+        description:
+            "A comprehensive guide on if you have ruptured your Achilles tendon and questions including the timeline, diagnosis, treatment and recovery.",
+        downloads: "Downloads",
+        snakesAndLadders: "Snakes and Ladders Poster",
+        infoSheet: "Achilles Rupture Information Sheet",
+    },
+    de: {
+        title: "Achillessehnenriss FAQs",
+        description:
+            "Ein umfassender Leitfaden, wenn Sie Ihre Achillessehne gerissen haben, mit Fragen zu Zeitplan, Diagnose, Behandlung und Genesung.",
+        downloads: "Downloads",
+        snakesAndLadders: "Schlangen und Leitern Poster",
+        infoSheet: "Achillessehnenriss Informationsblatt",
+    },
+    fr: {
+        title: "FAQ sur les Ruptures d'Achille",
+        description:
+            "Un guide complet sur la rupture du tendon d'Achille avec des questions sur le calendrier, le diagnostic, le traitement et la récupération.",
+        downloads: "Téléchargements",
+        snakesAndLadders: "Poster Serpents et Échelles",
+        infoSheet: "Fiche d'Information sur la Rupture d'Achille",
+    },
+    es: {
+        title: "Preguntas Frecuentes sobre Rupturas de Aquiles",
+        description:
+            "Una guía completa sobre si te has roto el tendón de Aquiles y preguntas sobre el cronograma, diagnóstico, tratamiento y recuperación.",
+        downloads: "Descargas",
+        snakesAndLadders: "Póster de Serpientes y Escaleras",
+        infoSheet: "Hoja Informativa sobre Ruptura de Aquiles",
+    },
+    it: {
+        title: "FAQ sulle Rotture di Achille",
+        description:
+            "Una guida completa sulla rottura del tendine di Achille e domande su tempistica, diagnosi, trattamento e recupero.",
+        downloads: "Download",
+        snakesAndLadders: "Poster Serpenti e Scale",
+        infoSheet: "Scheda Informativa sulla Rottura di Achille",
+    },
+};
+
+const t = content[lang];
+
+// Group FAQ routes by their main topics
+const faqRoutes = articleRoutes.map((route) => ({
+    ...route,
+    title: route.title[lang] || route.title.en,
+    description: route.description[lang] || route.description.en,
+    href: route.slugTranslations?.[lang] || route.slug,
+}));
+
+interface FAQSectionData {
+    title: string;
+    links: Array<{ href: string; text: string }>;
+    readMoreLink: string;
+}
+
+// Create sections based on the routes
+// Helper function to get route and its sub-questions
+function getRouteAndQuestions(slug: string) {
+    const route = faqRoutes.find((r) => r.slug === slug);
+    const baseRoute = articleRoutes.find((r) => r.slug === slug);
+    const translatedSlug = baseRoute?.slugTranslations?.[lang] || slug;
+    return {
+        title: route?.title || baseRoute?.title.en || "",
+        href: `/${lang}/${translatedSlug}`,
+        subQuestions:
+            baseRoute?.subQuestions?.[lang] ||
+            baseRoute?.subQuestions?.en ||
+            {},
+    };
+}
+
+const faqSections: FAQSectionData[] = [
+    {
+        title: getRouteAndQuestions("FAQs/achilles-rupture-timeline").title,
+        links: [
+            {
+                href: getRouteAndQuestions("FAQs/achilles-rupture-timeline")
+                    .href,
+                text: getRouteAndQuestions("FAQs/achilles-rupture-timeline")
+                    .title,
+            },
+        ],
+        readMoreLink: getRouteAndQuestions("FAQs/achilles-rupture-timeline")
+            .href,
+    },
+    {
+        title: getRouteAndQuestions("FAQs/is-my-achilles-ruptured").title,
+        links: [
+            {
+                href: `${getRouteAndQuestions("FAQs/is-my-achilles-ruptured").href}#q1`,
+                text: getRouteAndQuestions("FAQs/is-my-achilles-ruptured")
+                    .subQuestions.q1,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/is-my-achilles-ruptured").href}#q2`,
+                text: getRouteAndQuestions("FAQs/is-my-achilles-ruptured")
+                    .subQuestions.q2,
+            },
+        ],
+        readMoreLink: getRouteAndQuestions("FAQs/is-my-achilles-ruptured").href,
+    },
+    {
+        title: getRouteAndQuestions(
+            "FAQs/what-happens-if-my-achilles-is-ruptured",
+        ).title,
+        links: [
+            {
+                href: `${getRouteAndQuestions("FAQs/what-happens-if-my-achilles-is-ruptured").href}#q1`,
+                text: getRouteAndQuestions(
+                    "FAQs/what-happens-if-my-achilles-is-ruptured",
+                ).subQuestions.q1,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/what-happens-if-my-achilles-is-ruptured").href}#q2`,
+                text: getRouteAndQuestions(
+                    "FAQs/what-happens-if-my-achilles-is-ruptured",
+                ).subQuestions.q2,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/what-happens-if-my-achilles-is-ruptured").href}#q3`,
+                text: getRouteAndQuestions(
+                    "FAQs/what-happens-if-my-achilles-is-ruptured",
+                ).subQuestions.q3,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/what-happens-if-my-achilles-is-ruptured").href}#q4`,
+                text: getRouteAndQuestions(
+                    "FAQs/what-happens-if-my-achilles-is-ruptured",
+                ).subQuestions.q4,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/what-happens-if-my-achilles-is-ruptured").href}#q5`,
+                text: getRouteAndQuestions(
+                    "FAQs/what-happens-if-my-achilles-is-ruptured",
+                ).subQuestions.q5,
+            },
+        ],
+        readMoreLink: getRouteAndQuestions(
+            "FAQs/what-happens-if-my-achilles-is-ruptured",
+        ).href,
+    },
+    {
+        title: getRouteAndQuestions("FAQs/achilles-tear-treatment").title,
+        links: [
+            {
+                href: `${getRouteAndQuestions("FAQs/achilles-tear-treatment").href}#q1`,
+                text: getRouteAndQuestions("FAQs/achilles-tear-treatment")
+                    .subQuestions.q1,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/achilles-tear-treatment").href}#q2`,
+                text: getRouteAndQuestions("FAQs/achilles-tear-treatment")
+                    .subQuestions.q2,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/achilles-tear-treatment").href}#q3`,
+                text: getRouteAndQuestions("FAQs/achilles-tear-treatment")
+                    .subQuestions.q3,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/achilles-tear-treatment").href}#q4`,
+                text: getRouteAndQuestions("FAQs/achilles-tear-treatment")
+                    .subQuestions.q4,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/achilles-tear-treatment").href}#q5`,
+                text: getRouteAndQuestions("FAQs/achilles-tear-treatment")
+                    .subQuestions.q5,
+            },
+        ],
+        readMoreLink: getRouteAndQuestions("FAQs/achilles-tear-treatment").href,
+    },
+    {
+        title: getRouteAndQuestions("FAQs/torn-achilles-recovery").title,
+        links: [
+            {
+                href: `${getRouteAndQuestions("FAQs/torn-achilles-recovery").href}#q1`,
+                text: getRouteAndQuestions("FAQs/torn-achilles-recovery")
+                    .subQuestions.q1,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/torn-achilles-recovery").href}#q2`,
+                text: getRouteAndQuestions("FAQs/torn-achilles-recovery")
+                    .subQuestions.q2,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/torn-achilles-recovery").href}#q3`,
+                text: getRouteAndQuestions("FAQs/torn-achilles-recovery")
+                    .subQuestions.q3,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/torn-achilles-recovery").href}#q4`,
+                text: getRouteAndQuestions("FAQs/torn-achilles-recovery")
+                    .subQuestions.q4,
+            },
+        ],
+        readMoreLink: getRouteAndQuestions("FAQs/torn-achilles-recovery").href,
+    },
+    {
+        title: getRouteAndQuestions("FAQs/life-after-achilles-rupture").title,
+        links: [
+            {
+                href: `${getRouteAndQuestions("FAQs/life-after-achilles-rupture").href}#q1`,
+                text: getRouteAndQuestions("FAQs/life-after-achilles-rupture")
+                    .subQuestions.q1,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/life-after-achilles-rupture").href}#q2`,
+                text: getRouteAndQuestions("FAQs/life-after-achilles-rupture")
+                    .subQuestions.q2,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/life-after-achilles-rupture").href}#q3`,
+                text: getRouteAndQuestions("FAQs/life-after-achilles-rupture")
+                    .subQuestions.q3,
+            },
+            {
+                href: `${getRouteAndQuestions("FAQs/life-after-achilles-rupture").href}#q4`,
+                text: getRouteAndQuestions("FAQs/life-after-achilles-rupture")
+                    .subQuestions.q4,
+            },
+        ],
+        readMoreLink: getRouteAndQuestions("FAQs/life-after-achilles-rupture")
+            .href,
+    },
+];
+
+const downloads = [
+    {
+        href: "/images/documents/A Game of Snakes and Ladders Poster.pdf",
+        title: t.snakesAndLadders,
+    },
+    {
+        href: "/images/documents/Achilles Rupture Information Sheet.pdf",
+        title: t.infoSheet,
+    },
+];
+---
+
+<Layout
+    title={t.title}
+    description={t.description}
+    image="https://thetismedical.com/images/achilles-drawing-image.png"
+    lang={lang}
+>
+    <main>
+        <Article title={t.title} />
+
+        <div class="space-y-8 mx-auto max-w-4xl">
+            {
+                faqSections.map((section, index) => (
+                    <FAQSection
+                        title={section.title}
+                        links={section.links}
+                        readMoreLink={section.readMoreLink}
+                    />
+                ))
+            }
+
+            <NightSplintAdvert lang={lang} />
+
+            <section class="bg-white mt-8">
+                <DownloadList title={t.downloads} downloads={downloads} />
+            </section>
+        </div>
+    </main>
+</Layout>

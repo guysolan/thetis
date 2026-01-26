@@ -5,9 +5,9 @@ import { Badge } from "../ui/badge";
 const renderStars = (count: number) => {
   return Array(count)
     .fill(null)
-    .map((_, idx) => (
+    .map((_, i) => (
       <svg
-        key={idx}
+        key={`star-${i}`}
         className="w-4 h-4 text-yellow-400"
         fill="currentColor"
         viewBox="0 0 20 20"
@@ -19,11 +19,20 @@ const renderStars = (count: number) => {
 
 const truncateText = (text: string, maxLength: number) => {
   if (text.length <= maxLength) return text;
-  return text?.slice(0, maxLength) + "...";
+  return `${text.slice(0, maxLength)}...`;
 };
 
 export function ReviewCard({ review }: { review: Review }) {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  // Extract image source
+  const getImageSrc = () => {
+    if (!review.image) return null;
+    // Handle different types of image data
+    if (typeof review.image === "string") return review.image;
+    if (review.image.src) return review.image.src;
+    return null;
+  };
 
   return (
     <div
@@ -36,37 +45,48 @@ export function ReviewCard({ review }: { review: Review }) {
           <div className="flex gap-1 mb-2">{renderStars(5)}</div>
           <Badge
             className="capitalize"
-            variant={review?.type === "patient" ? "outline" : "default"}
+            variant={review.type === "patient" ? "outline" : "default"}
           >
-            {review?.type}
+            {review.type}
           </Badge>
         </div>
-        <p className="my-2 font-semibold text-lg text-neutral-800">
+        <p className="my-2 font-semibold text-neutral-800 text-lg">
           {review.title}
         </p>
-        <div className="relative z-20">
-          <span className="review-text font-normal text-base text-neutral-900 leading-[1.6]">
+        <div className="z-20 relative">
+          <span className="font-normal text-neutral-900 text-base leading-[1.6] review-text">
             {isExpanded ? review.body : truncateText(review.body, 300)}
           </span>
           <br />
           {review.body.length > 300 && (
             <button
               type="button"
-              className="mt-2 font-semibold text-primary text-sm underline-offset-2 hover:underline"
+              className="mt-2 font-semibold text-primary text-sm hover:underline underline-offset-2"
               onClick={() => setIsExpanded(!isExpanded)}
             >
               {isExpanded ? "Show less" : "Show more"}
             </button>
           )}
         </div>
-        <div className="relative z-20 flex flex-col mt-6">
-          <span className="font-medium text-lg text-neutral-800">
-            {review.name}
-          </span>
-          <span className="mt-1 font-semibold text-base text-neutral-500">
-            {review.description ?? "Happy Customer"}
-          </span>
-          <span className="mt-1 text-neutral-400 text-sm">{review.date}</span>
+        <div className="flex items-center gap-4 mt-6">
+          {review.image && getImageSrc() && (
+            <img
+              src={getImageSrc() as string}
+              alt={review.name}
+              width={50}
+              height={50}
+              className="rounded-full w-16 h-16 object-cover object-top aspect-square"
+            />
+          )}
+          <div className="z-20 relative flex flex-col">
+            <span className="font-medium text-neutral-800 text-lg">
+              {review.name}
+            </span>
+            <span className="mt-1 font-semibold text-neutral-500 text-base">
+              {review.description ?? "Happy Customer"}
+            </span>
+            <span className="mt-1 text-neutral-400 text-sm">{review.date}</span>
+          </div>
         </div>
       </blockquote>
     </div>

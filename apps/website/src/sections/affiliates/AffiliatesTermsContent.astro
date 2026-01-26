@@ -1,0 +1,133 @@
+---
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Affiliate Program Terms & Conditions",
+        disclaimer1:
+            "This affiliate program is designed for legitimate referral purposes only. Participation in this program does not require, and should not influence, any medical decision-making or clinical recommendations.",
+        disclaimer2:
+            "Healthcare providers should consult with their legal counsel and compliance officers before participating in any referral or affiliate program to ensure compliance with applicable federal and state laws, including but not limited to the Anti-Kickback Statute (42 U.S.C. § 1320a-7b), the Stark Law (42 U.S.C. § 1395nn), and state equivalents.",
+        disclaimer3:
+            "Any payments or commissions received through this program may be subject to reporting requirements under the Physician Payments Sunshine Act (42 U.S.C. § 1320a-7h) and similar state disclosure laws. Participants are responsible for ensuring compliance with all applicable reporting obligations.",
+        disclaimer4:
+            "This program is not intended to, and does not, provide remuneration in exchange for referrals of items or services that may be reimbursable by federal healthcare programs (including Medicare, Medicaid, or TRICARE).",
+        disclaimer5:
+            "Thetis Medical reserves the right to modify, suspend, or terminate this affiliate program at any time and for any reason. Participation is subject to approval and ongoing compliance with program terms and applicable laws.",
+        disclaimer6:
+            "By participating in this program, you acknowledge that you have read, understood, and agree to comply with all applicable federal and state laws and regulations governing healthcare referrals and financial relationships.",
+        consultLegal:
+            "Healthcare providers are strongly encouraged to consult with legal counsel before participating.",
+    },
+    de: {
+        title: "Geschäftsbedingungen des Affiliate-Programms",
+        disclaimer1:
+            "Dieses Affiliate-Programm ist ausschließlich für legitime Empfehlungszwecke konzipiert. Die Teilnahme an diesem Programm erfordert keine und sollte keine medizinischen Entscheidungen oder klinischen Empfehlungen beeinflussen.",
+        disclaimer2:
+            "Gesundheitsdienstleister sollten sich vor der Teilnahme an einem Empfehlungs- oder Affiliate-Programm mit ihrem Rechtsbeistand und Compliance-Beauftragten beraten, um die Einhaltung der geltenden Bundes- und Landesgesetze sicherzustellen, einschließlich, aber nicht beschränkt auf das Anti-Kickback-Statut (42 U.S.C. § 1320a-7b), das Stark-Gesetz (42 U.S.C. § 1395nn) und entsprechende Landesgesetze.",
+        disclaimer3:
+            "Alle Zahlungen oder Provisionen, die über dieses Programm erhalten werden, können meldepflichtig sein gemäß dem Physician Payments Sunshine Act (42 U.S.C. § 1320a-7h) und ähnlichen staatlichen Offenlegungsgesetzen. Teilnehmer sind für die Einhaltung aller geltenden Meldepflichten verantwortlich.",
+        disclaimer4:
+            "Dieses Programm ist nicht dazu bestimmt und bietet keine Vergütung im Austausch für Empfehlungen von Artikeln oder Dienstleistungen, die von bundesstaatlichen Gesundheitsprogrammen (einschließlich Medicare, Medicaid oder TRICARE) erstattungsfähig sein können.",
+        disclaimer5:
+            "Thetis Medical behält sich das Recht vor, dieses Affiliate-Programm jederzeit und aus beliebigem Grund zu ändern, auszusetzen oder zu beenden. Die Teilnahme unterliegt der Genehmigung und laufenden Einhaltung der Programmregeln und geltenden Gesetze.",
+        disclaimer6:
+            "Durch die Teilnahme an diesem Programm bestätigen Sie, dass Sie alle geltenden Bundes- und Landesgesetze und -vorschriften bezüglich Gesundheitsempfehlungen und finanzieller Beziehungen gelesen, verstanden haben und sich damit einverstanden erklären, diese einzuhalten.",
+        consultLegal:
+            "Gesundheitsdienstleister werden dringend ermutigt, sich vor der Teilnahme mit einem Rechtsbeistand zu beraten.",
+    },
+    fr: {
+        title: "Conditions Générales du Programme d'Affiliation",
+        disclaimer1:
+            "Ce programme d'affiliation est conçu uniquement à des fins de référencement légitimes. La participation à ce programme n'exige pas et ne devrait pas influencer les décisions médicales ou les recommandations cliniques.",
+        disclaimer2:
+            "Les prestataires de soins de santé devraient consulter leur conseil juridique et leurs responsables de conformité avant de participer à tout programme de référencement ou d'affiliation pour assurer la conformité avec les lois fédérales et étatiques applicables, y compris, mais sans s'y limiter, la loi Anti-Kickback (42 U.S.C. § 1320a-7b), la loi Stark (42 U.S.C. § 1395nn) et les équivalents étatiques.",
+        disclaimer3:
+            "Tous les paiements ou commissions reçus par le biais de ce programme peuvent être soumis aux exigences de déclaration en vertu de la loi Physician Payments Sunshine Act (42 U.S.C. § 1320a-7h) et des lois de divulgation étatiques similaires. Les participants sont responsables de garantir la conformité avec toutes les obligations de déclaration applicables.",
+        disclaimer4:
+            "Ce programme n'est pas destiné à, et ne fournit pas, une rémunération en échange de références d'articles ou de services qui pourraient être remboursables par les programmes de santé fédéraux (y compris Medicare, Medicaid ou TRICARE).",
+        disclaimer5:
+            "Thetis Medical se réserve le droit de modifier, suspendre ou mettre fin à ce programme d'affiliation à tout moment et pour quelque raison que ce soit. La participation est soumise à l'approbation et à la conformité continue avec les conditions du programme et les lois applicables.",
+        disclaimer6:
+            "En participant à ce programme, vous reconnaissez avoir lu, compris et accepté de vous conformer à toutes les lois et réglementations fédérales et étatiques applicables régissant les références de soins de santé et les relations financières.",
+        consultLegal:
+            "Les prestataires de soins de santé sont fortement encouragés à consulter un conseil juridique avant de participer.",
+    },
+    es: {
+        title: "Términos y Condiciones del Programa de Afiliados",
+        disclaimer1:
+            "Este programa de afiliados está diseñado únicamente para fines de referencia legítimos. La participación en este programa no requiere, y no debe influir, en ninguna decisión médica o recomendación clínica.",
+        disclaimer2:
+            "Los proveedores de atención médica deben consultar con su asesor legal y oficiales de cumplimiento antes de participar en cualquier programa de referencia o afiliados para asegurar el cumplimiento de las leyes federales y estatales aplicables, incluyendo pero no limitado al Estatuto Anti-Kickback (42 U.S.C. § 1320a-7b), la Ley Stark (42 U.S.C. § 1395nn) y equivalentes estatales.",
+        disclaimer3:
+            "Cualquier pago o comisión recibido a través de este programa puede estar sujeto a requisitos de reporte bajo la Ley de Transparencia de Pagos a Médicos (42 U.S.C. § 1320a-7h) y leyes estatales de divulgación similares. Los participantes son responsables de asegurar el cumplimiento de todas las obligaciones de reporte aplicables.",
+        disclaimer4:
+            "Este programa no está destinado a, y no proporciona, remuneración a cambio de referencias de artículos o servicios que puedan ser reembolsables por programas de atención médica federales (incluyendo Medicare, Medicaid o TRICARE).",
+        disclaimer5:
+            "Thetis Medical se reserva el derecho de modificar, suspender o terminar este programa de afiliados en cualquier momento y por cualquier razón. La participación está sujeta a aprobación y cumplimiento continuo con los términos del programa y las leyes aplicables.",
+        disclaimer6:
+            "Al participar en este programa, usted reconoce que ha leído, entendido y acepta cumplir con todas las leyes y regulaciones federales y estatales aplicables que rigen las referencias de atención médica y las relaciones financieras.",
+        consultLegal:
+            "Se recomienda encarecidamente a los proveedores de atención médica que consulten con un asesor legal antes de participar.",
+    },
+    it: {
+        title: "Termini e Condizioni del Programma di Affiliazione",
+        disclaimer1:
+            "Questo programma di affiliazione è progettato esclusivamente per scopi di riferimento legittimi. La partecipazione a questo programma non richiede, e non dovrebbe influenzare, alcuna decisione medica o raccomandazione clinica.",
+        disclaimer2:
+            "I fornitori di assistenza sanitaria dovrebbero consultare il proprio consulente legale e gli ufficiali di conformità prima di partecipare a qualsiasi programma di riferimento o affiliazione per garantire la conformità con le leggi federali e statali applicabili, incluse ma non limitate allo Statuto Anti-Kickback (42 U.S.C. § 1320a-7b), la Legge Stark (42 U.S.C. § 1395nn) e equivalenti statali.",
+        disclaimer3:
+            "Qualsiasi pagamento o commissione ricevuta attraverso questo programma può essere soggetta a requisiti di segnalazione ai sensi del Physician Payments Sunshine Act (42 U.S.C. § 1320a-7h) e leggi statali di divulgazione simili. I partecipanti sono responsabili di garantire la conformità con tutti gli obblighi di segnalazione applicabili.",
+        disclaimer4:
+            "Questo programma non è destinato a, e non fornisce, remunerazione in cambio di riferimenti di articoli o servizi che potrebbero essere rimborsabili da programmi sanitari federali (inclusi Medicare, Medicaid o TRICARE).",
+        disclaimer5:
+            "Thetis Medical si riserva il diritto di modificare, sospendere o terminare questo programma di affiliazione in qualsiasi momento e per qualsiasi motivo. La partecipazione è soggetta ad approvazione e conformità continua con i termini del programma e le leggi applicabili.",
+        disclaimer6:
+            "Partecipando a questo programma, riconosci di aver letto, compreso e accettato di conformarti a tutte le leggi e regolamenti federali e statali applicabili che governano i riferimenti sanitari e le relazioni finanziarie.",
+        consultLegal:
+            "Si incoraggia vivamente i fornitori di assistenza sanitaria a consultare un consulente legale prima di partecipare.",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<div class="space-y-6 text-gray-800 dark:text-neutral-200 leading-relaxed">
+    <h1
+        class="mb-8 font-semibold text-neutral-950 dark:text-neutral-50 text-3xl md:text-4xl"
+    >
+        {currentContent.title}
+    </h1>
+
+    <div class="space-y-6">
+        <p>
+            <strong>{currentContent.disclaimer1}</strong>
+        </p>
+
+        <p>
+            {currentContent.disclaimer2}
+        </p>
+
+        <p>
+            {currentContent.disclaimer3}
+        </p>
+
+        <p>
+            {currentContent.disclaimer4}
+        </p>
+
+        <p>
+            {currentContent.disclaimer5}
+        </p>
+
+        <p>
+            {currentContent.disclaimer6}
+        </p>
+
+        <p class="mt-8 font-semibold text-primary">
+            {currentContent.consultLegal}
+        </p>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+---
+import HighlightedParagraph from "@/components/HighlightedParagraph.tsx";
+import BuyNowCallout from "@/components/products/night-splint/BuyNowCallout.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content: Record<
+    Lang,
+    {
+        title: { text: string; highlighted: boolean }[];
+        body: string;
+    }
+> = {
+    en: {
+        title: [
+            {
+                text: "Don't suffer through another sleepless night.",
+                highlighted: false,
+            },
+        ],
+        body: "Lightweight, easy to use, and trusted by thousands. Stop fighting your boot at night. Join 5,000+ patients sleeping better tonight.",
+    },
+    de: {
+        title: [
+            {
+                text: "Bereit für",
+                highlighted: false,
+            },
+            {
+                text: "besseren Schlaf?",
+                highlighted: true,
+            },
+        ],
+        body: "Leicht, einfach zu bedienen und von Tausenden vertraut. Hören Sie auf, nachts gegen Ihren Stiefel zu kämpfen.",
+    },
+    fr: {
+        title: [
+            {
+                text: "Prêt pour",
+                highlighted: false,
+            },
+            {
+                text: "mieux dormir ?",
+                highlighted: true,
+            },
+        ],
+        body: "Légère, facile à utiliser et approuvée par des milliers. Arrêtez de lutter contre votre botte la nuit.",
+    },
+    es: {
+        title: [
+            {
+                text: "¿Listo para",
+                highlighted: false,
+            },
+            {
+                text: "dormir mejor?",
+                highlighted: true,
+            },
+        ],
+        body: "Ligera, fácil de usar y confiable por miles. Deja de luchar contra tu bota por la noche.",
+    },
+    it: {
+        title: [
+            {
+                text: "Pronto per",
+                highlighted: false,
+            },
+            {
+                text: "dormire meglio?",
+                highlighted: true,
+            },
+        ],
+        body: "Leggera, facile da usare e affidabile per migliaia. Smetti di lottare con lo stivale di notte.",
+    },
+};
+---
+
+<BuyNowCallout buttonText="View Product" buttonHref="/achilles-rupture-splint">
+    <span slot="title">
+        <HighlightedParagraph paragraph={content[lang].title} />
+    </span>
+    <span slot="body">{content[lang].body}</span>
+</BuyNowCallout>

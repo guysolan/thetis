@@ -8,234 +8,96 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as MonthsRouteImport } from './routes/months'
+import { Route as InstructionsRouteImport } from './routes/instructions'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as SettlementsIndexRouteImport } from './routes/settlements/index'
+import { Route as SettlementsSavedRouteImport } from './routes/settlements/saved'
+import { Route as SettlementsReportRouteImport } from './routes/settlements/report'
+import { Route as SettlementsRegionsRouteImport } from './routes/settlements/regions'
+import { Route as SettlementsReportIndexRouteImport } from './routes/settlements/report/index'
+import { Route as SettlementsReportXmlRouteImport } from './routes/settlements/report/xml'
+import { Route as SettlementsReportSummaryRouteImport } from './routes/settlements/report/summary'
+import { Route as RegionYearMonthRouteImport } from './routes/$region.$year.$month'
+import { Route as SettlementsRegionCountryIndexRouteImport } from './routes/settlements/$region/$country/index'
+import { Route as SettlementsRegionCountryXmlRouteImport } from './routes/settlements/$region/$country/xml'
+import { Route as SettlementsRegionCountrySummaryRouteImport } from './routes/settlements/$region/$country/summary'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as MonthsImport } from './routes/months'
-import { Route as InstructionsImport } from './routes/instructions'
-import { Route as IndexImport } from './routes/index'
-import { Route as SettlementsIndexImport } from './routes/settlements/index'
-import { Route as SettlementsSavedImport } from './routes/settlements/saved'
-import { Route as SettlementsReportImport } from './routes/settlements/report'
-import { Route as SettlementsRegionsImport } from './routes/settlements/regions'
-import { Route as SettlementsReportIndexImport } from './routes/settlements/report/index'
-import { Route as SettlementsReportXmlImport } from './routes/settlements/report/xml'
-import { Route as SettlementsReportSummaryImport } from './routes/settlements/report/summary'
-import { Route as RegionYearMonthImport } from './routes/$region.$year.$month'
-import { Route as SettlementsRegionCountryIndexImport } from './routes/settlements/$region/$country/index'
-import { Route as SettlementsRegionCountryXmlImport } from './routes/settlements/$region/$country/xml'
-import { Route as SettlementsRegionCountrySummaryImport } from './routes/settlements/$region/$country/summary'
-
-// Create/Update Routes
-
-const MonthsRoute = MonthsImport.update({
+const MonthsRoute = MonthsRouteImport.update({
   id: '/months',
   path: '/months',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const InstructionsRoute = InstructionsImport.update({
+const InstructionsRoute = InstructionsRouteImport.update({
   id: '/instructions',
   path: '/instructions',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const SettlementsIndexRoute = SettlementsIndexImport.update({
+const SettlementsIndexRoute = SettlementsIndexRouteImport.update({
   id: '/settlements/',
   path: '/settlements/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const SettlementsSavedRoute = SettlementsSavedImport.update({
+const SettlementsSavedRoute = SettlementsSavedRouteImport.update({
   id: '/settlements/saved',
   path: '/settlements/saved',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const SettlementsReportRoute = SettlementsReportImport.update({
+const SettlementsReportRoute = SettlementsReportRouteImport.update({
   id: '/settlements/report',
   path: '/settlements/report',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const SettlementsRegionsRoute = SettlementsRegionsImport.update({
+const SettlementsRegionsRoute = SettlementsRegionsRouteImport.update({
   id: '/settlements/regions',
   path: '/settlements/regions',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const SettlementsReportIndexRoute = SettlementsReportIndexImport.update({
+const SettlementsReportIndexRoute = SettlementsReportIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => SettlementsReportRoute,
 } as any)
-
-const SettlementsReportXmlRoute = SettlementsReportXmlImport.update({
+const SettlementsReportXmlRoute = SettlementsReportXmlRouteImport.update({
   id: '/xml',
   path: '/xml',
   getParentRoute: () => SettlementsReportRoute,
 } as any)
-
-const SettlementsReportSummaryRoute = SettlementsReportSummaryImport.update({
-  id: '/summary',
-  path: '/summary',
-  getParentRoute: () => SettlementsReportRoute,
-} as any)
-
-const RegionYearMonthRoute = RegionYearMonthImport.update({
+const SettlementsReportSummaryRoute =
+  SettlementsReportSummaryRouteImport.update({
+    id: '/summary',
+    path: '/summary',
+    getParentRoute: () => SettlementsReportRoute,
+  } as any)
+const RegionYearMonthRoute = RegionYearMonthRouteImport.update({
   id: '/$region/$year/$month',
   path: '/$region/$year/$month',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
 const SettlementsRegionCountryIndexRoute =
-  SettlementsRegionCountryIndexImport.update({
+  SettlementsRegionCountryIndexRouteImport.update({
     id: '/settlements/$region/$country/',
     path: '/settlements/$region/$country/',
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => rootRouteImport,
   } as any)
-
 const SettlementsRegionCountryXmlRoute =
-  SettlementsRegionCountryXmlImport.update({
+  SettlementsRegionCountryXmlRouteImport.update({
     id: '/settlements/$region/$country/xml',
     path: '/settlements/$region/$country/xml',
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => rootRouteImport,
   } as any)
-
 const SettlementsRegionCountrySummaryRoute =
-  SettlementsRegionCountrySummaryImport.update({
+  SettlementsRegionCountrySummaryRouteImport.update({
     id: '/settlements/$region/$country/summary',
     path: '/settlements/$region/$country/summary',
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => rootRouteImport,
   } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/instructions': {
-      id: '/instructions'
-      path: '/instructions'
-      fullPath: '/instructions'
-      preLoaderRoute: typeof InstructionsImport
-      parentRoute: typeof rootRoute
-    }
-    '/months': {
-      id: '/months'
-      path: '/months'
-      fullPath: '/months'
-      preLoaderRoute: typeof MonthsImport
-      parentRoute: typeof rootRoute
-    }
-    '/settlements/regions': {
-      id: '/settlements/regions'
-      path: '/settlements/regions'
-      fullPath: '/settlements/regions'
-      preLoaderRoute: typeof SettlementsRegionsImport
-      parentRoute: typeof rootRoute
-    }
-    '/settlements/report': {
-      id: '/settlements/report'
-      path: '/settlements/report'
-      fullPath: '/settlements/report'
-      preLoaderRoute: typeof SettlementsReportImport
-      parentRoute: typeof rootRoute
-    }
-    '/settlements/saved': {
-      id: '/settlements/saved'
-      path: '/settlements/saved'
-      fullPath: '/settlements/saved'
-      preLoaderRoute: typeof SettlementsSavedImport
-      parentRoute: typeof rootRoute
-    }
-    '/settlements/': {
-      id: '/settlements/'
-      path: '/settlements'
-      fullPath: '/settlements'
-      preLoaderRoute: typeof SettlementsIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/$region/$year/$month': {
-      id: '/$region/$year/$month'
-      path: '/$region/$year/$month'
-      fullPath: '/$region/$year/$month'
-      preLoaderRoute: typeof RegionYearMonthImport
-      parentRoute: typeof rootRoute
-    }
-    '/settlements/report/summary': {
-      id: '/settlements/report/summary'
-      path: '/summary'
-      fullPath: '/settlements/report/summary'
-      preLoaderRoute: typeof SettlementsReportSummaryImport
-      parentRoute: typeof SettlementsReportImport
-    }
-    '/settlements/report/xml': {
-      id: '/settlements/report/xml'
-      path: '/xml'
-      fullPath: '/settlements/report/xml'
-      preLoaderRoute: typeof SettlementsReportXmlImport
-      parentRoute: typeof SettlementsReportImport
-    }
-    '/settlements/report/': {
-      id: '/settlements/report/'
-      path: '/'
-      fullPath: '/settlements/report/'
-      preLoaderRoute: typeof SettlementsReportIndexImport
-      parentRoute: typeof SettlementsReportImport
-    }
-    '/settlements/$region/$country/summary': {
-      id: '/settlements/$region/$country/summary'
-      path: '/settlements/$region/$country/summary'
-      fullPath: '/settlements/$region/$country/summary'
-      preLoaderRoute: typeof SettlementsRegionCountrySummaryImport
-      parentRoute: typeof rootRoute
-    }
-    '/settlements/$region/$country/xml': {
-      id: '/settlements/$region/$country/xml'
-      path: '/settlements/$region/$country/xml'
-      fullPath: '/settlements/$region/$country/xml'
-      preLoaderRoute: typeof SettlementsRegionCountryXmlImport
-      parentRoute: typeof rootRoute
-    }
-    '/settlements/$region/$country/': {
-      id: '/settlements/$region/$country/'
-      path: '/settlements/$region/$country'
-      fullPath: '/settlements/$region/$country'
-      preLoaderRoute: typeof SettlementsRegionCountryIndexImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
-
-interface SettlementsReportRouteChildren {
-  SettlementsReportSummaryRoute: typeof SettlementsReportSummaryRoute
-  SettlementsReportXmlRoute: typeof SettlementsReportXmlRoute
-  SettlementsReportIndexRoute: typeof SettlementsReportIndexRoute
-}
-
-const SettlementsReportRouteChildren: SettlementsReportRouteChildren = {
-  SettlementsReportSummaryRoute: SettlementsReportSummaryRoute,
-  SettlementsReportXmlRoute: SettlementsReportXmlRoute,
-  SettlementsReportIndexRoute: SettlementsReportIndexRoute,
-}
-
-const SettlementsReportRouteWithChildren =
-  SettlementsReportRoute._addFileChildren(SettlementsReportRouteChildren)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -253,7 +115,6 @@ export interface FileRoutesByFullPath {
   '/settlements/$region/$country/xml': typeof SettlementsRegionCountryXmlRoute
   '/settlements/$region/$country': typeof SettlementsRegionCountryIndexRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/instructions': typeof InstructionsRoute
@@ -269,9 +130,8 @@ export interface FileRoutesByTo {
   '/settlements/$region/$country/xml': typeof SettlementsRegionCountryXmlRoute
   '/settlements/$region/$country': typeof SettlementsRegionCountryIndexRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/instructions': typeof InstructionsRoute
   '/months': typeof MonthsRoute
@@ -287,7 +147,6 @@ export interface FileRoutesById {
   '/settlements/$region/$country/xml': typeof SettlementsRegionCountryXmlRoute
   '/settlements/$region/$country/': typeof SettlementsRegionCountryIndexRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
@@ -338,7 +197,6 @@ export interface FileRouteTypes {
     | '/settlements/$region/$country/'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   InstructionsRoute: typeof InstructionsRoute
@@ -353,6 +211,124 @@ export interface RootRouteChildren {
   SettlementsRegionCountryIndexRoute: typeof SettlementsRegionCountryIndexRoute
 }
 
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/months': {
+      id: '/months'
+      path: '/months'
+      fullPath: '/months'
+      preLoaderRoute: typeof MonthsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/instructions': {
+      id: '/instructions'
+      path: '/instructions'
+      fullPath: '/instructions'
+      preLoaderRoute: typeof InstructionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settlements/': {
+      id: '/settlements/'
+      path: '/settlements'
+      fullPath: '/settlements'
+      preLoaderRoute: typeof SettlementsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settlements/saved': {
+      id: '/settlements/saved'
+      path: '/settlements/saved'
+      fullPath: '/settlements/saved'
+      preLoaderRoute: typeof SettlementsSavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settlements/report': {
+      id: '/settlements/report'
+      path: '/settlements/report'
+      fullPath: '/settlements/report'
+      preLoaderRoute: typeof SettlementsReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settlements/regions': {
+      id: '/settlements/regions'
+      path: '/settlements/regions'
+      fullPath: '/settlements/regions'
+      preLoaderRoute: typeof SettlementsRegionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settlements/report/': {
+      id: '/settlements/report/'
+      path: '/'
+      fullPath: '/settlements/report/'
+      preLoaderRoute: typeof SettlementsReportIndexRouteImport
+      parentRoute: typeof SettlementsReportRoute
+    }
+    '/settlements/report/xml': {
+      id: '/settlements/report/xml'
+      path: '/xml'
+      fullPath: '/settlements/report/xml'
+      preLoaderRoute: typeof SettlementsReportXmlRouteImport
+      parentRoute: typeof SettlementsReportRoute
+    }
+    '/settlements/report/summary': {
+      id: '/settlements/report/summary'
+      path: '/summary'
+      fullPath: '/settlements/report/summary'
+      preLoaderRoute: typeof SettlementsReportSummaryRouteImport
+      parentRoute: typeof SettlementsReportRoute
+    }
+    '/$region/$year/$month': {
+      id: '/$region/$year/$month'
+      path: '/$region/$year/$month'
+      fullPath: '/$region/$year/$month'
+      preLoaderRoute: typeof RegionYearMonthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settlements/$region/$country/': {
+      id: '/settlements/$region/$country/'
+      path: '/settlements/$region/$country'
+      fullPath: '/settlements/$region/$country'
+      preLoaderRoute: typeof SettlementsRegionCountryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settlements/$region/$country/xml': {
+      id: '/settlements/$region/$country/xml'
+      path: '/settlements/$region/$country/xml'
+      fullPath: '/settlements/$region/$country/xml'
+      preLoaderRoute: typeof SettlementsRegionCountryXmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settlements/$region/$country/summary': {
+      id: '/settlements/$region/$country/summary'
+      path: '/settlements/$region/$country/summary'
+      fullPath: '/settlements/$region/$country/summary'
+      preLoaderRoute: typeof SettlementsRegionCountrySummaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
+}
+
+interface SettlementsReportRouteChildren {
+  SettlementsReportSummaryRoute: typeof SettlementsReportSummaryRoute
+  SettlementsReportXmlRoute: typeof SettlementsReportXmlRoute
+  SettlementsReportIndexRoute: typeof SettlementsReportIndexRoute
+}
+
+const SettlementsReportRouteChildren: SettlementsReportRouteChildren = {
+  SettlementsReportSummaryRoute: SettlementsReportSummaryRoute,
+  SettlementsReportXmlRoute: SettlementsReportXmlRoute,
+  SettlementsReportIndexRoute: SettlementsReportIndexRoute,
+}
+
+const SettlementsReportRouteWithChildren =
+  SettlementsReportRoute._addFileChildren(SettlementsReportRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   InstructionsRoute: InstructionsRoute,
@@ -366,80 +342,6 @@ const rootRouteChildren: RootRouteChildren = {
   SettlementsRegionCountryXmlRoute: SettlementsRegionCountryXmlRoute,
   SettlementsRegionCountryIndexRoute: SettlementsRegionCountryIndexRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/instructions",
-        "/months",
-        "/settlements/regions",
-        "/settlements/report",
-        "/settlements/saved",
-        "/settlements/",
-        "/$region/$year/$month",
-        "/settlements/$region/$country/summary",
-        "/settlements/$region/$country/xml",
-        "/settlements/$region/$country/"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/instructions": {
-      "filePath": "instructions.tsx"
-    },
-    "/months": {
-      "filePath": "months.tsx"
-    },
-    "/settlements/regions": {
-      "filePath": "settlements/regions.tsx"
-    },
-    "/settlements/report": {
-      "filePath": "settlements/report.tsx",
-      "children": [
-        "/settlements/report/summary",
-        "/settlements/report/xml",
-        "/settlements/report/"
-      ]
-    },
-    "/settlements/saved": {
-      "filePath": "settlements/saved.tsx"
-    },
-    "/settlements/": {
-      "filePath": "settlements/index.tsx"
-    },
-    "/$region/$year/$month": {
-      "filePath": "$region.$year.$month.tsx"
-    },
-    "/settlements/report/summary": {
-      "filePath": "settlements/report/summary.tsx",
-      "parent": "/settlements/report"
-    },
-    "/settlements/report/xml": {
-      "filePath": "settlements/report/xml.tsx",
-      "parent": "/settlements/report"
-    },
-    "/settlements/report/": {
-      "filePath": "settlements/report/index.tsx",
-      "parent": "/settlements/report"
-    },
-    "/settlements/$region/$country/summary": {
-      "filePath": "settlements/$region/$country/summary.tsx"
-    },
-    "/settlements/$region/$country/xml": {
-      "filePath": "settlements/$region/$country/xml.tsx"
-    },
-    "/settlements/$region/$country/": {
-      "filePath": "settlements/$region/$country/index.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

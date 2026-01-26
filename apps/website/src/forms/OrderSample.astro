@@ -1,0 +1,47 @@
+---
+import Label from "@/components/form/Label.astro";
+import Input from "@/components/form/Input.astro";
+import TextArea from "@/components/form/TextArea.astro";
+import FormWrap from "@/components/form/FormWrap.astro";
+---
+
+<FormWrap formId="xvggdoal">
+    <div class="space-y-8 w-full">
+        <h2
+            class="font-semibold text-neutral-950 text-2xl md:text-3xl leading-[105%]"
+        >
+            Achilles Rupture Splint Sample
+        </h2>
+        <div class="space-y-4">
+            <p class="text-gray-800 text-lg leading-relaxed">
+                Want your patients to be comfortable and safe while they heal?
+                We'll send you a free sample so you can experience its quality
+                and effectiveness firsthand.
+            </p>
+        </div>
+
+        <div class="space-y-6">
+            <div class="form-group">
+                <Label labelFor="email">Email Address</Label>
+                <Input name="email" type="email" required={true} />
+            </div>
+
+            <div class="form-group">
+                <Label labelFor="address">Shipping Address</Label>
+                <TextArea
+                    name="address"
+                    rows={3}
+                    required={true}
+                    placeholder="Please provide your complete shipping address"
+                />
+            </div>
+
+            <button
+                type="submit"
+                class="bg-primary hover:bg-primary/90 hover:shadow-md px-8 py-4 rounded-lg w-full md:w-auto font-medium text-white transition-all"
+            >
+                Request Achilles Splint Sample
+            </button>
+        </div>
+    </div>
+</FormWrap>

@@ -1,79 +1,103 @@
-import React, { useState } from "react";
-import { Input } from "@thetis/ui/input";
+import React from "react";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@thetis/ui/table";
+import type { Lang } from "../config/languages.ts";
 
-// Constants
-const sizeTypes = ["EU", "UK", "US Men", "US Women"] as const;
-const sizeGuide = [
-  { metric: "EU", threshold: 42, step: 1 },
-  { metric: "UK", threshold: 8, step: 0.5 },
-  { metric: "US Men", threshold: 9, step: 0.5 },
-  { metric: "US Women", threshold: 10.5, step: 0.5 },
-];
+interface SizeCalculatorProps {
+  lang: Lang;
+}
 
-// Types
-type SizeType = (typeof sizeTypes)[number];
-
-// Custom Hook
-const useSizeCalculator = (initialSizeType: SizeType) => {
-  const [sizeType, setSizeType] = useState<SizeType>(initialSizeType);
-  const [size, setSize] = useState<string>("");
-
-  const isValidSize = (input: string): boolean => {
-    const num = Number.parseFloat(input);
-    if (Number.isNaN(num)) return false;
-
-    const guide = sizeGuide.find((g) => g.metric === sizeType);
-    return num % guide!.step === 0;
-  };
-
-  const getSizeCategory = (value: number): string => {
-    const guide = sizeGuide.find((g) => g.metric === sizeType);
-    return value < guide!.threshold ? "Small" : "Large";
-  };
-
-  return { sizeType, setSizeType, size, setSize, isValidSize, getSizeCategory };
+const content = {
+  en: {
+    instruction:
+      "To find the right size, measure your foot from heel to toe and use the table below. If you are between sizes, we recommend choosing the larger size.",
+    caption: "If you need further assistance, please contact our support team.",
+    size: "Size",
+    footLengthCm: "Foot Length (cm)",
+    footLengthIn: "Foot Length (inches)",
+    small: "Small",
+    large: "Large",
+  },
+  de: {
+    instruction:
+      "Um die richtige Größe zu finden, messen Sie Ihren Fuß von der Ferse bis zu den Zehen und verwenden Sie die folgende Tabelle. Wenn Sie zwischen zwei Größen liegen, empfehlen wir, die größere Größe zu wählen.",
+    caption:
+      "Wenn Sie weitere Hilfe benötigen, wenden Sie sich bitte an unser Support-Team.",
+    size: "Größe",
+    footLengthCm: "Fußlänge (cm)",
+    footLengthIn: "Fußlänge (Zoll)",
+    small: "Klein",
+    large: "Groß",
+  },
+  fr: {
+    instruction:
+      "Pour trouver la bonne taille, mesurez votre pied du talon aux orteils et utilisez le tableau ci-dessous. Si vous êtes entre deux tailles, nous vous recommandons de choisir la plus grande.",
+    caption:
+      "Si vous avez besoin d'aide supplémentaire, veuillez contacter notre équipe de support.",
+    size: "Taille",
+    footLengthCm: "Longueur du pied (cm)",
+    footLengthIn: "Longueur du pied (pouces)",
+    small: "Petit",
+    large: "Grand",
+  },
+  es: {
+    instruction:
+      "Para encontrar la talla correcta, mida su pie desde el talón hasta la punta y use la tabla a continuación. Si está entre dos tallas, le recomendamos que elija la talla más grande.",
+    caption:
+      "Si necesita más ayuda, póngase en contacto con nuestro equipo de soporte.",
+    size: "Talla",
+    footLengthCm: "Longitud del pie (cm)",
+    footLengthIn: "Longitud del pie (pulgadas)",
+    small: "Pequeño",
+    large: "Grande",
+  },
+  it: {
+    instruction:
+      "Per trovare la taglia giusta, misura il tuo piede dal tallone alla punta e usa la tabella qui sotto. Se sei tra due taglie, ti consigliamo di scegliere la taglia più grande.",
+    caption:
+      "Se hai bisogno di ulteriore assistenza, contatta il nostro team di supporto.",
+    size: "Taglia",
+    footLengthCm: "Lunghezza del piede (cm)",
+    footLengthIn: "Lunghezza del piede (pollici)",
+    small: "Piccolo",
+    large: "Grande",
+  },
 };
 
-// Component
-const SizeCalculator = () => {
-  const { sizeType, setSizeType, size, setSize, isValidSize, getSizeCategory } =
-    useSizeCalculator("EU");
-  const [isCalculatorVisible, setIsCalculatorVisible] = useState(false);
-
-  const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSize(e.target.value);
-  };
-
+const SizeCalculator: React.FC<SizeCalculatorProps> = ({ lang = "en" }) => {
+  const t = content[lang];
   return (
-    <div className="space-y-2">
-      <div className="flex flex-row gap-4">
-        <select
-          className="border-neutral-200 bg-transparent bg-white px-3 py-2 border w-1/3 text-sm"
-          value={sizeType}
-          onChange={(e) => setSizeType(e.target.value as SizeType)}
-        >
-          {sizeTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-
-        <input
-          className="w-2/3"
-          type="number"
-          step={sizeGuide.find((g) => g.metric === sizeType)?.step.toString()}
-          value={size}
-          onChange={handleSizeChange}
-          placeholder={"Enter shoe size"}
-        />
-      </div>
-
-      {size && isValidSize(size) && (
-        <div className="border-2 border-primary bg-primary/10 p-4 rounded-lg font-medium text-center text-lg">
-          Your size is: {getSizeCategory(Number.parseFloat(size))}
-        </div>
-      )}
+    <div>
+      <p className="mb-4">{t.instruction}</p>
+      <Table>
+        <TableCaption>{t.caption}</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>{t.size}</TableHead>
+            <TableHead>{t.footLengthCm}</TableHead>
+            <TableHead>{t.footLengthIn}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell>{t.small}</TableCell>
+            <TableCell>&lt; 26.5</TableCell>
+            <TableCell>&lt; 10.4</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>{t.large}</TableCell>
+            <TableCell>&ge; 26.5</TableCell>
+            <TableCell>&ge; 10.4</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
     </div>
   );
 };

@@ -1,0 +1,47 @@
+---
+import ReviewCarousel from "@/components/reviews/ReviewCarousel";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content: Record<
+    Lang,
+    {
+        title: string;
+        body: string;
+    }
+> = {
+    en: {
+        title: "What Patients Say",
+        body: "",
+    },
+    de: {
+        title: "Was Patienten sagen",
+        body: "",
+    },
+    fr: {
+        title: "Ce que disent les patients",
+        body: "",
+    },
+    es: {
+        title: "Lo que dicen los pacientes",
+        body: "",
+    },
+    it: {
+        title: "Cosa dicono i pazienti",
+        body: "",
+    },
+};
+---
+
+<section class="flex flex-col items-center py-16">
+    <div class="flex flex-col items-center mx-auto px-8 md:px-0 text-center">
+        <h2 class="mb-6 font-semibold text-3xl">
+            {content[lang].title}
+        </h2>
+        <p class="mb-8 text-gray-700 text-xl">
+            {content[lang].body}
+        </p>
+    </div>
+    <ReviewCarousel client:load />
+</section>

@@ -1,36 +1,15 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import AchillesDrawing from '../assets/drawings/achilles-drawing.svg'
-import Image from 'astro/components/Image.astro'
+import Layout from "../layouts/Layout.astro";
+import AchillesDrawing from "../assets/drawings/achilles-drawing.svg";
+import Image from "astro/components/Image.astro";
+import FAQsLayout from "../layouts/FAQsLayout.astro";
 ---
 
-<Layout
+<FAQsLayout
     title="Achilles Rupture Evidence Based Recovery"
-    description="Medical device company specialising in splints for injured Achilles Tendons. We sell an Achilles Rupture Night Splint and a Trauma Splint."
-    image="https://thetismedical.com/images/achilles-drawing-image.png"
+    description="Medical device company specialising in splints for injured Achilles Tendons. We sell an Achilles Rupture Splint and a Trauma Splint."
 >
     <main data-barba="container" data-barba-namespace="home">
-        <section class="faq-landing">
-            <div class="faq-words">
-                <h1>Evidence based Achilles Rupture Recovery</h1>
-                <b>
-                    At Thetis Medical we believe that your Achilles injury
-                    should be treated in accordance with the best scientific
-                    data.
-                </b>
-                <div class="go-to-subscribe">
-                    <a href="./contact" class="go-to-subscribe explore"
-                        >Get in Touch</a
-                    >
-                </div>
-            </div>
-            <Image src={AchillesDrawing} alt="achilles-drawing" />
-        </section>
-        <div class="scroll">
-            <a href="#products">
-                <p>Scroll to Explore</p>
-            </a>
-        </div>
         <section id="natural-healing" class="article-wrap">
             <div class="evidence faq slide-title">
                 <h2>
@@ -104,4 +83,4 @@ import Image from 'astro/components/Image.astro'
             </section>
         </section>
     </main>
-</Layout>
+</FAQsLayout>

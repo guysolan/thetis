@@ -1,0 +1,183 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import HighlightedWord from "@/components/HighlightedWord";
+import Image from "astro/components/Image.astro";
+import NightSplintImage from "@/assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
+import ColorGradient from "@/components/ColorGradient.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Let your Achilles Rupture patients get some rest",
+        subtitle: "Earn While You Help",
+        description:
+            "Join our affiliate program and provide your Achilles rupture patients with a clinically proven, FDA-approved recovery solution. Make your patients happier, save them money and hassle, and earn 10% commission on every referral.",
+        ctaButton: "Sign Up Now - It's Free",
+        ctaLink: "https://f560c3-4.bixgrow.com/register",
+    },
+    de: {
+        title: "Lassen Sie Ihre Patienten mit Achillessehnenruptur sich ausruhen",
+        subtitle: "Verdienen Sie, während Sie helfen",
+        description:
+            "Werden Sie unser Affiliate-Partner und bieten Sie Ihren Patienten mit Achillessehnenruptur eine klinisch erprobte, FDA-zugelassene Erholungslösung. Machen Sie Ihre Patienten glücklicher, sparen Sie ihnen Geld und Mühe und verdienen Sie 10% Provision für jede Empfehlung.",
+        ctaButton: "Jetzt kostenlos anmelden",
+        ctaLink: "https://f560c3-4.bixgrow.com/register",
+    },
+    fr: {
+        title: "Laissez vos patients avec rupture d'Achille se reposer",
+        subtitle: "Gagnez Pendant Que Vous Aidez",
+        description:
+            "Rejoignez notre programme d'affiliation et offrez à vos patients atteints de rupture d'Achille une solution de récupération cliniquement prouvée et approuvée par la FDA. Rendez vos patients plus heureux, économisez-leur de l'argent et des tracas, et gagnez 10% de commission sur chaque référence.",
+        ctaButton: "S'inscrire maintenant - C'est gratuit",
+        ctaLink: "https://f560c3-4.bixgrow.com/register",
+    },
+    es: {
+        title: "Deje que sus pacientes con ruptura de Aquiles descansen",
+        subtitle: "Gane Mientras Ayuda",
+        description:
+            "Únase a nuestro programa de afiliados y proporcione a sus pacientes con ruptura de Aquiles una solución de recuperación clínicamente probada y aprobada por la FDA. Haga más felices a sus pacientes, ahorre dinero y molestias, y gane un 10% de comisión en cada referencia.",
+        ctaButton: "Regístrese ahora - Es gratis",
+        ctaLink: "https://f560c3-4.bixgrow.com/register",
+    },
+    it: {
+        title: "Lascia che i tuoi pazienti con rottura di Achille si riposino",
+        subtitle: "Guadagna Mentre Aiuti",
+        description:
+            "Unisciti al nostro programma di affiliazione e fornisci ai tuoi pazienti con rottura di Achille una soluzione di recupero clinicamente provata e approvata dalla FDA. Rendi i tuoi pazienti più felici, risparmia loro denaro e problemi, e guadagna il 10% di commissione su ogni referenza.",
+        ctaButton: "Iscriviti ora - È gratuito",
+        ctaLink: "https://f560c3-4.bixgrow.com/register",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<ColorGradient>
+    <section class="mx-auto px-4 pt-8 pb-16 max-w-7xl container">
+        <div
+            class="flex lg:flex-row flex-col justify-between items-center gap-8"
+        >
+            <!-- Left column (text content) -->
+            <div class="flex flex-col gap-y-6 lg:pr-16 lg:w-7/12">
+                <div>
+                    <p class="mb-2 font-semibold text-primary text-lg">
+                        {currentContent.subtitle}
+                    </p>
+                    <h1
+                        class="font-semibold text-neutral-950 dark:text-neutral-50 text-4xl md:text-6xl leading-[105%] md:leading-[120%]"
+                    >
+                        {currentContent.title}
+                    </h1>
+                </div>
+
+                <p
+                    class="text-gray-800 dark:text-neutral-200 text-lg leading-relaxed"
+                >
+                    {currentContent.description}
+                </p>
+
+                <!-- SMALL SCREENS ONLY -->
+                <div class="group lg:hidden block relative">
+                    <Image
+                        src={NightSplintImage}
+                        alt="Thetis Medical Achilles Rupture Night Splint"
+                        class="shadow-lg hover:shadow-2xl group-hover:brightness-[0.85] rounded-xl group-hover:rotate-1 group-hover:scale-[102%] transition-all duration-300"
+                    />
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <a
+                        href={currentContent.ctaLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class={cn(
+                            buttonVariants({ size: "lg", variant: "default" }),
+                        )}
+                    >
+                        {currentContent.ctaButton}
+                    </a>
+                    <p class="text-gray-600 dark:text-neutral-400 text-sm">
+                        {
+                            lang === "en" && (
+                                <>
+                                    By signing up, you agree to our{" "}
+                                    <a
+                                        href="/affiliates/terms"
+                                        class="text-primary hover:text-primary/80 underline"
+                                    >
+                                        Terms & Conditions
+                                    </a>
+                                </>
+                            )
+                        }
+                        {
+                            lang === "de" && (
+                                <>
+                                    Mit der Anmeldung stimmen Sie unseren{" "}
+                                    <a
+                                        href="/affiliates/terms"
+                                        class="text-primary hover:text-primary/80 underline"
+                                    >
+                                        Geschäftsbedingungen
+                                    </a>{" "}
+                                    zu
+                                </>
+                            )
+                        }
+                        {
+                            lang === "fr" && (
+                                <>
+                                    En vous inscrivant, vous acceptez nos{" "}
+                                    <a
+                                        href="/affiliates/terms"
+                                        class="text-primary hover:text-primary/80 underline"
+                                    >
+                                        Conditions Générales
+                                    </a>
+                                </>
+                            )
+                        }
+                        {
+                            lang === "es" && (
+                                <>
+                                    Al registrarse, acepta nuestros{" "}
+                                    <a
+                                        href="/affiliates/terms"
+                                        class="text-primary hover:text-primary/80 underline"
+                                    >
+                                        Términos y Condiciones
+                                    </a>
+                                </>
+                            )
+                        }
+                        {
+                            lang === "it" && (
+                                <>
+                                    Iscrivendoti, accetti i nostri{" "}
+                                    <a
+                                        href="/affiliates/terms"
+                                        class="text-primary hover:text-primary/80 underline"
+                                    >
+                                        Termini e Condizioni
+                                    </a>
+                                </>
+                            )
+                        }
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right column (image) - LARGE SCREENS ONLY -->
+            <div class="group hidden lg:block lg:w-5/12">
+                <Image
+                    src={NightSplintImage}
+                    alt="Thetis Medical Achilles Rupture Night Splint"
+                    class="shadow-lg hover:shadow-2xl group-hover:brightness-[0.85] rounded-xl group-hover:rotate-1 group-hover:scale-[102%] transition-all duration-300"
+                />
+            </div>
+        </div>
+    </section>
+</ColorGradient>

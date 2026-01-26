@@ -19,7 +19,7 @@ import {
 const Instructions = () => {
   return (
     <div className="flex flex-col mx-auto p-6 max-w-3xl">
-      <h1 className="mb-8 font-bold text-3xl text-zinc-900">Instructions</h1>
+      <h1 className="mb-8 font-bold text-zinc-900 text-3xl">Instructions</h1>
       <Card>
         <CardHeader>
           <CardTitle>VAT</CardTitle>
@@ -64,14 +64,14 @@ const Instructions = () => {
           <AccordionContent>
             <p>
               Go to{" "}
-              <Link
+              <a
                 target="_blank"
                 rel="noopener noreferrer"
-                to="https://www.paypal.com/reports/ppbalance"
+                href="https://www.paypal.com/reports/ppbalance"
                 className="text-blue-600 hover:text-blue-800 underline"
               >
                 reports/ppbalance
-              </Link>{" "}
+              </a>{" "}
               and click on "Transfer" in the left sidebar.
             </p>
           </AccordionContent>
@@ -82,14 +82,14 @@ const Instructions = () => {
           <AccordionContent>
             <p>
               Go to{" "}
-              <Link
+              <a
                 target="_blank"
                 rel="noopener noreferrer"
-                to="https://wise.com/balances/statements/standard"
+                href="https://wise.com/balances/statements/standard"
                 className="text-blue-600 hover:text-blue-800 underline"
               >
                 balances/statements/standard
-              </Link>{" "}
+              </a>{" "}
               and click on "Transfer" in the left sidebar.
             </p>
           </AccordionContent>
@@ -99,14 +99,14 @@ const Instructions = () => {
           <AccordionContent>
             <p>
               Go to{" "}
-              <Link
+              <a
                 target="_blank"
                 rel="noopener noreferrer"
-                to="https://business.revolut.com/transactions"
+                href="https://business.revolut.com/transactions"
                 className="text-blue-600 hover:text-blue-800 underline"
               >
                 transactions
-              </Link>{" "}
+              </a>{" "}
               and click on "Transfer" in the left sidebar.
             </p>
           </AccordionContent>
@@ -117,14 +117,14 @@ const Instructions = () => {
           <AccordionContent>
             <p className="mb-2">
               Go to{" "}
-              <Link
+              <a
                 target="_blank"
                 rel="noopener noreferrer"
-                to="https://sellercentral.amazon.com/payments/allstatements/index.html"
+                href="https://sellercentral.amazon.com/payments/allstatements/index.html"
                 className="text-blue-600 hover:text-blue-800 underline"
               >
                 payments/allstatements/index.html
-              </Link>
+              </a>
             </p>
             <p>
               or go to{" "}
@@ -134,6 +134,24 @@ const Instructions = () => {
               >
                 Settlements
               </Link>
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="shopify">
+          <AccordionTrigger>Shopify</AccordionTrigger>
+          <AccordionContent>
+            <p>
+              Go to{" "}
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://admin.shopify.com/store/f560c3-4/payments/payouts?link_source=search&selectedView=all"
+                className="text-blue-600 hover:text-blue-800 underline"
+              >
+                payments/payouts
+              </a>{" "}
+              and export the payout data.
             </p>
           </AccordionContent>
         </AccordionItem>

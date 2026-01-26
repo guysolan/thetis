@@ -1,0 +1,267 @@
+import React, { useMemo } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+
+import { cn } from "../utils";
+import { Label } from "./label";
+import { Separator } from "./separator";
+
+function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
+  return (
+    <fieldset
+      data-slot="field-set"
+      className={cn(
+        "flex flex-col gap-6",
+        "has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function FieldLegend({
+  className,
+  variant = "legend",
+  ...props
+}: React.ComponentProps<"legend"> & { variant?: "legend" | "label" }) {
+  return (
+    <legend
+      data-slot="field-legend"
+      data-variant={variant}
+      className={cn(
+        "mb-3 font-medium",
+        "data-[variant=legend]:text-base",
+        "data-[variant=label]:text-sm",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="field-group"
+      className={cn(
+        "@container/field-group group/field-group flex flex-col gap-7 [&>[data-slot=field-group]]:gap-4 data-[slot=checkbox-group]:gap-3 w-full",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+const fieldVariants = cva(
+  "group/field flex gap-3 w-full data-[invalid=true]:text-destructive",
+  {
+    variants: {
+      orientation: {
+        vertical: ["flex-col [&>*]:w-full [&>.sr-only]:w-auto"],
+        horizontal: [
+          "flex-row items-center",
+          "[&>[data-slot=field-label]]:flex-auto",
+          "has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px has-[>[data-slot=field-content]]:items-start",
+        ],
+        responsive: [
+          "@md/field-group:flex-row @md/field-group:items-center @md/field-group:[&>*]:w-auto flex-col [&>*]:w-full [&>.sr-only]:w-auto",
+          "@md/field-group:[&>[data-slot=field-label]]:flex-auto",
+          "@md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+        ],
+      },
+    },
+    defaultVariants: {
+      orientation: "vertical",
+    },
+  },
+);
+
+function Field({
+  className,
+  orientation = "vertical",
+  ...props
+}: React.ComponentProps<"div"> & VariantProps<typeof fieldVariants>) {
+  return (
+    <div
+      role="group"
+      data-slot="field"
+      data-orientation={orientation}
+      className={cn(fieldVariants({ orientation }), className)}
+      {...props}
+    />
+  );
+}
+
+function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="field-content"
+      className={cn(
+        "group/field-content flex flex-col flex-1 gap-1.5 leading-snug",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function FieldLabel({
+  className,
+  ...props
+}: React.ComponentProps<typeof Label>) {
+  return (
+    <Label
+      data-slot="field-label"
+      className={cn(
+        "group/field-label peer/field-label flex gap-2 group-data-[disabled=true]/field:opacity-50 w-fit leading-snug",
+        "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border [&>[data-slot=field]]:p-4",
+        "has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="field-label"
+      className={cn(
+        "flex items-center gap-2 group-data-[disabled=true]/field:opacity-50 w-fit font-medium text-sm leading-snug",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
+  return (
+    <p
+      data-slot="field-description"
+      className={cn(
+        "font-normal text-muted-foreground text-sm group-has-[[data-orientation=horizontal]]/field:text-balance leading-normal",
+        "nth-last-2:-mt-1 last:mt-0 [[data-variant=legend]+&]:-mt-1.5",
+        "[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function FieldSeparator({
+  children,
+  className,
+  ...props
+}: React.ComponentProps<"div"> & {
+  children?: React.ReactNode;
+}) {
+  return (
+    <div
+      data-slot="field-separator"
+      data-content={!!children}
+      className={cn(
+        "relative -my-2 group-data-[variant=outline]/field-group:-mb-2 h-5 text-sm",
+        className,
+      )}
+      {...props}
+    >
+      <Separator className="top-1/2 absolute inset-0" />
+      {children && (
+        <span
+          className="block relative bg-background mx-auto px-2 w-fit text-muted-foreground"
+          data-slot="field-separator-content"
+        >
+          {children}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function FieldError({
+  className,
+  children,
+  errors,
+  ...props
+}: React.ComponentProps<"div"> & {
+  errors?: Array<{ message?: string } | string | undefined>;
+}) {
+  const content = useMemo(() => {
+    if (children) {
+      return children;
+    }
+
+    if (!errors || errors.length === 0) {
+      return null;
+    }
+
+    // Handle both string errors and object errors
+    const errorMessages = errors
+      .map((error) => {
+        if (typeof error === "string") {
+          return error;
+        }
+        if (typeof error === "object" && error?.message) {
+          return error.message;
+        }
+        // Handle stringifiable objects that might not have message
+        if (error && typeof error === "object") {
+             // Try to safely stringify or ignore
+             try {
+                 return JSON.stringify(error);
+             } catch {
+                 return null;
+             }
+        }
+        return null;
+      })
+      .filter((msg): msg is string => Boolean(msg));
+
+    if (errorMessages.length === 0) {
+      return null;
+    }
+
+    if (errorMessages.length === 1) {
+      return errorMessages[0];
+    }
+
+    return (
+      <ul className="flex flex-col gap-1 ml-4 list-disc">
+        {errorMessages.map((message, index) => (
+          <li key={index}>{message}</li>
+        ))}
+      </ul>
+    );
+  }, [children, errors]);
+
+  if (!content) {
+    return null;
+  }
+
+  return (
+    <div
+      role="alert"
+      data-slot="field-error"
+      className={cn("font-normal text-destructive text-sm", className)}
+      {...props}
+    >
+      {content}
+    </div>
+  );
+}
+
+export {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet,
+  FieldTitle,
+};

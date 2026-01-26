@@ -1,0 +1,146 @@
+---
+import HighlightedParagraph from "@/components/HighlightedParagraph";
+import ColorGradient from "@/components/ColorGradient.astro";
+import type { Lang } from "../../config/languages";
+import { Bed, AlertTriangle, ArrowDown } from "lucide-react";
+
+interface Props {
+    lang: Lang;
+    content: {
+        title: any;
+        description: string;
+    };
+}
+
+const { lang = "en", content } = Astro.props;
+
+const heroContent = {
+    en: {
+        badge: "Common Recovery Frustration",
+        subtitle: "Your walking boot gets dirty during the day - and then you have to sleep in it",
+        painPoints: [
+            "The boot sole tracks dirt into your bed",
+            "You can't easily wash or change your boot",
+            "Your sheets and bedding get dirty quickly"
+        ],
+        cta: "Learn how to keep your bed clean",
+        stats: [
+            { number: "5,000+", label: "patients helped" },
+            { number: "0", label: "re-ruptures reported" }
+        ]
+    },
+    de: {
+        badge: "Häufige Genesungsfrustrationen",
+        subtitle: "Ihr Gehstiefel wird tagsüber schmutzig - und dann müssen Sie darin schlafen",
+        painPoints: [
+            "Die Stiefelsohle bringt Schmutz ins Bett",
+            "Sie können Ihren Stiefel nicht einfach waschen oder wechseln",
+            "Ihre Laken und Bettwäsche werden schnell schmutzig"
+        ],
+        cta: "Erfahren Sie, wie Sie Ihr Bett sauber halten",
+        stats: [
+            { number: "5.000+", label: "Patienten geholfen" },
+            { number: "0", label: "Re-Rupturen gemeldet" }
+        ]
+    },
+    fr: {
+        badge: "Frustration courante de récupération",
+        subtitle: "Votre botte de marche se salit pendant la journée - et ensuite vous devez dormir avec",
+        painPoints: [
+            "La semelle de la botte amène la saleté dans votre lit",
+            "Vous ne pouvez pas facilement laver ou changer votre botte",
+            "Vos draps et literie se salissent rapidement"
+        ],
+        cta: "Apprenez à garder votre lit propre",
+        stats: [
+            { number: "5 000+", label: "patients aidés" },
+            { number: "0", label: "re-ruptures signalées" }
+        ]
+    },
+    es: {
+        badge: "Frustración común de recuperación",
+        subtitle: "Su bota de caminar se ensucia durante el día - y luego tiene que dormir con ella",
+        painPoints: [
+            "La suela de la bota trae suciedad a su cama",
+            "No puede lavar o cambiar fácilmente su bota",
+            "Sus sábanas y ropa de cama se ensucian rápidamente"
+        ],
+        cta: "Aprenda a mantener su cama limpia",
+        stats: [
+            { number: "5.000+", label: "pacientes ayudados" },
+            { number: "0", label: "re-rupturas reportadas" }
+        ]
+    },
+    it: {
+        badge: "Frustrazione comune del recupero",
+        subtitle: "Il tuo stivale da passeggio si sporca durante il giorno - e poi devi dormirci",
+        painPoints: [
+            "La suola dello stivale porta sporco nel tuo letto",
+            "Non puoi lavare o cambiare facilmente lo stivale",
+            "Le tue lenzuola e biancheria da letto si sporcano rapidamente"
+        ],
+        cta: "Scopri come mantenere il tuo letto pulito",
+        stats: [
+            { number: "5.000+", label: "pazienti aiutati" },
+            { number: "0", label: "ri-rotture segnalate" }
+        ]
+    }
+};
+
+const currentHeroContent = heroContent[lang as keyof typeof heroContent] || heroContent.en;
+---
+
+<ColorGradient>
+    <div class="mx-auto px-4 py-12 md:py-16 max-w-5xl text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 bg-primary/10 mb-6 px-4 py-2 rounded-full">
+            <Bed className="w-4 h-4 text-primary" />
+            <span class="font-medium text-primary text-sm uppercase tracking-wider">{currentHeroContent.badge}</span>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="mb-6 font-bold text-gray-900 text-4xl md:text-5xl lg:text-6xl leading-tight">
+            <HighlightedParagraph paragraph={content.title} client:load />
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="mx-auto mb-8 max-w-2xl text-gray-600 text-lg md:text-xl">
+            {currentHeroContent.subtitle}
+        </p>
+
+        <!-- Pain Points -->
+        <div class="bg-amber-50 mx-auto mb-8 p-6 border border-amber-200 rounded-xl max-w-2xl">
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <AlertTriangle className="w-5 h-5 text-amber-600" />
+                <span class="font-semibold text-amber-800">Sound familiar?</span>
+            </div>
+            <ul class="space-y-3 text-left">
+                {currentHeroContent.painPoints.map((point) => (
+                    <li class="flex items-start gap-3">
+                        <span class="text-amber-600 mt-1">•</span>
+                        <span class="text-amber-700">{point}</span>
+                    </li>
+                ))}
+            </ul>
+        </div>
+
+        <!-- Stats -->
+        <div class="flex justify-center gap-8 mb-8">
+            {currentHeroContent.stats.map((stat) => (
+                <div class="text-center">
+                    <div class="font-bold text-primary text-2xl md:text-3xl">{stat.number}</div>
+                    <div class="text-gray-600 text-sm">{stat.label}</div>
+                </div>
+            ))}
+        </div>
+
+        <!-- CTA to scroll down -->
+        <a 
+            href="#education"
+            class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 px-6 py-3 rounded-lg font-semibold text-white transition-colors"
+        >
+            {currentHeroContent.cta}
+            <ArrowDown className="w-4 h-4" />
+        </a>
+    </div>
+</ColorGradient>

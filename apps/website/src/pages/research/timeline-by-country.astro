@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { AchillesRecoveryComparison } from "../../components/research/timeline-by-country/AchillesRecoveryComparison";
+
+// SEO metadata
+const title = "Achilles Rupture Recovery: International Comparison";
+const description =
+  "Compare Achilles tendon rupture recovery approaches across different countries, including treatment timelines, equipment used, and rehabilitation protocols.";
+---
+
+<Layout title={title} description={description}>
+  <main class="mx-auto mt-8 px-4 py-8 container">
+    <AchillesRecoveryComparison client:only />
+  </main>
+</Layout>

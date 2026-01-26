@@ -1,0 +1,718 @@
+---
+import OpOrNotBody from "./OpOrNotBody.astro";
+import OpOrNotByCountry from "./OpOrNotByCountry.astro";
+import OpOrNotCharts from "./OpOrNotCharts.astro";
+import {
+    Hammer,
+    Flag,
+    ChartBar,
+    FileText,
+    TrendingDown,
+    TrendingUp,
+} from "lucide-astro";
+import countryData from "./data.json";
+
+// Process data for overview table focusing only on surgical rates
+const countrySurgicalData = countryData.map((country) => {
+    // Get surgical rate years and values
+    const surgicalYears = Object.keys(country.surgical_rate || {})
+        .filter((k) => !isNaN(parseInt(k)))
+        .sort((a, b) => parseInt(b) - parseInt(a));
+
+    const latestSurgicalYear =
+        surgicalYears.length > 0 ? surgicalYears[0] : null;
+    const latestSurgicalRate = latestSurgicalYear
+        ? country.surgical_rate[latestSurgicalYear]
+        : null;
+
+    // Determine trend direction
+    let trendDirection = "neutral";
+    if (surgicalYears.length >= 2) {
+        const earliestYear = surgicalYears[surgicalYears.length - 1];
+        const earliestRate = country.surgical_rate[earliestYear];
+
+        if (latestSurgicalRate < earliestRate) {
+            trendDirection = "decreasing";
+        } else if (latestSurgicalRate > earliestRate) {
+            trendDirection = "increasing";
+        }
+    }
+
+    // Get surgical trend description
+    const surgicalTrend = country.surgical_rate?.trend || null;
+
+    return {
+        country: country.country,
+        code: country.code,
+        latestSurgicalRate,
+        latestSurgicalYear,
+        earliestYear:
+            surgicalYears.length > 1
+                ? surgicalYears[surgicalYears.length - 1]
+                : null,
+        earliestRate:
+            surgicalYears.length > 1
+                ? country.surgical_rate[surgicalYears[surgicalYears.length - 1]]
+                : null,
+        trendDirection,
+        surgicalTrend,
+        keyFinding: country.key_finding,
+    };
+});
+
+// Group countries by surgical approach tendency
+const surgicalApproachGroups = {
+    high: countrySurgicalData.filter(
+        (c) => c.latestSurgicalRate && c.latestSurgicalRate >= 70,
+    ),
+    medium: countrySurgicalData.filter(
+        (c) =>
+            c.latestSurgicalRate &&
+            c.latestSurgicalRate >= 30 &&
+            c.latestSurgicalRate < 70,
+    ),
+    low: countrySurgicalData.filter(
+        (c) => c.latestSurgicalRate && c.latestSurgicalRate < 30,
+    ),
+};
+
+function getUnicodeFlagIcon(code) {
+    try {
+        return require("country-flag-icons/unicode")(code);
+    } catch (error) {
+        return "";
+    }
+}
+---
+
+<div class="mx-auto px-2 sm:px-4 pb-8 max-w-5xl">
+    <!-- Tabs for different views -->
+    <div class="mb-8 border-gray-200 border-b">
+        <ul
+            class="flex flex-wrap -mb-px font-medium text-sm text-center"
+            id="tab-navigation"
+            role="tablist"
+        >
+            <li class="mr-2" role="presentation">
+                <button
+                    class="inline-block p-4 border-emerald-600 border-b-2 rounded-t-lg active"
+                    id="country-comparison-tab"
+                    data-tabs-target="#country-comparison"
+                    type="button"
+                    role="tab"
+                    aria-controls="country-comparison"
+                    aria-selected="true"
+                >
+                    <div class="flex items-center">
+                        <Flag class="mr-2" size={16} />
+                        <span>Country Treatment Map</span>
+                    </div>
+                </button>
+            </li>
+            <li class="mr-2" role="presentation">
+                <button
+                    class="inline-block p-4 border-transparent hover:border-gray-300 border-b-2 rounded-t-lg hover:text-gray-600"
+                    id="overview-tab"
+                    data-tabs-target="#overview"
+                    type="button"
+                    role="tab"
+                    aria-controls="overview"
+                    aria-selected="false"
+                >
+                    <div class="flex items-center">
+                        <Hammer class="mr-2" size={16} />
+                        <span>Surgical Overview</span>
+                    </div>
+                </button>
+            </li>
+            <li class="mr-2" role="presentation">
+                <button
+                    class="inline-block p-4 border-transparent hover:border-gray-300 border-b-2 rounded-t-lg hover:text-gray-600"
+                    id="data-visualization-tab"
+                    data-tabs-target="#data-visualization"
+                    type="button"
+                    role="tab"
+                    aria-controls="data-visualization"
+                    aria-selected="false"
+                >
+                    <div class="flex items-center">
+                        <ChartBar class="mr-2" size={16} />
+                        <span>Treatment Visualization</span>
+                    </div>
+                </button>
+            </li>
+
+            <li role="presentation">
+                <button
+                    class="inline-block p-4 border-transparent hover:border-gray-300 border-b-2 rounded-t-lg hover:text-gray-600"
+                    id="detailed-report-tab"
+                    data-tabs-target="#detailed-report"
+                    type="button"
+                    role="tab"
+                    aria-controls="detailed-report"
+                    aria-selected="false"
+                >
+                    <div class="flex items-center">
+                        <FileText class="mr-2" size={16} />
+                        <span>Detailed Report</span>
+                    </div>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Tab content -->
+    <div id="tab-content" class="w-full">
+        <!-- Country Comparison Tab -->
+        <div
+            class="block bg-gray-50 p-2 sm:p-4 rounded-lg w-full"
+            id="country-comparison"
+            role="tabpanel"
+            aria-labelledby="country-comparison-tab"
+        >
+            <OpOrNotByCountry />
+        </div>
+
+        <!-- Overview Tab -->
+        <div
+            class="hidden bg-gray-50 p-2 sm:p-4 rounded-lg w-full"
+            id="overview"
+            role="tabpanel"
+            aria-labelledby="overview-tab"
+        >
+            <div class="mb-6">
+                <h3 class="mb-3 font-semibold text-xl">
+                    Surgical Approach Groups
+                </h3>
+                <div class="gap-4 grid grid-cols-1 md:grid-cols-3">
+                    <div
+                        class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                    >
+                        <div class="flex items-center mb-2">
+                            <div
+                                class="flex justify-center items-center bg-red-100 mr-3 rounded-full w-8 h-8 text-red-600"
+                            >
+                                <Hammer size={16} />
+                            </div>
+                            <h4 class="font-medium">
+                                High Surgical Rate Countries
+                            </h4>
+                        </div>
+                        <p class="mb-3 text-gray-600 text-sm">
+                            Countries with strong preference for surgical
+                            treatment (70-95% of cases)
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            {
+                                surgicalApproachGroups.high.map((country) => (
+                                    <span class="inline-flex items-center bg-red-50 px-2 py-1 rounded-full font-medium text-red-800 text-xs">
+                                        {country.code && (
+                                            <span class="mr-1">
+                                                {getUnicodeFlagIcon(
+                                                    country.code,
+                                                )}
+                                            </span>
+                                        )}
+                                        {country.country} (
+                                        {country.latestSurgicalRate}%)
+                                    </span>
+                                ))
+                            }
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                    >
+                        <div class="flex items-center mb-2">
+                            <div
+                                class="flex justify-center items-center bg-amber-100 mr-3 rounded-full w-8 h-8 text-amber-600"
+                            >
+                                <Hammer size={16} />
+                            </div>
+                            <h4 class="font-medium">
+                                Mixed Approach Countries
+                            </h4>
+                        </div>
+                        <p class="mb-3 text-gray-600 text-sm">
+                            Countries using both surgical and non-surgical
+                            approaches (30-70% surgical)
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            {
+                                surgicalApproachGroups.medium.map((country) => (
+                                    <span class="inline-flex items-center bg-amber-50 px-2 py-1 rounded-full font-medium text-amber-800 text-xs">
+                                        {country.code && (
+                                            <span class="mr-1">
+                                                {getUnicodeFlagIcon(
+                                                    country.code,
+                                                )}
+                                            </span>
+                                        )}
+                                        {country.country} (
+                                        {country.latestSurgicalRate}%)
+                                    </span>
+                                ))
+                            }
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                    >
+                        <div class="flex items-center mb-2">
+                            <div
+                                class="flex justify-center items-center bg-primary/20 mr-3 rounded-full w-8 h-8 text-primary"
+                            >
+                                <Hammer size={16} />
+                            </div>
+                            <h4 class="font-medium">
+                                Low Surgical Rate Countries
+                            </h4>
+                        </div>
+                        <p class="mb-3 text-gray-600 text-sm">
+                            Countries primarily using non-surgical management
+                            (under 30% surgical)
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            {
+                                surgicalApproachGroups.low.map((country) => (
+                                    <span class="inline-flex items-center bg-primary/10 px-2 py-1 rounded-full font-medium text-primary text-xs">
+                                        {country.code && (
+                                            <span class="mr-1">
+                                                {getUnicodeFlagIcon(
+                                                    country.code,
+                                                )}
+                                            </span>
+                                        )}
+                                        {country.country} (
+                                        {country.latestSurgicalRate}%)
+                                    </span>
+                                ))
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="mb-3 font-semibold text-xl">
+                    Surgical Treatment Trends by Country
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-gray-700 text-sm text-left">
+                        <thead
+                            class="bg-gray-100 text-gray-700 text-xs uppercase"
+                        >
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Country</th>
+                                <th scope="col" class="px-6 py-3"
+                                    >Current Surgical Rate</th
+                                >
+                                <th scope="col" class="px-6 py-3"
+                                    >Historical Change</th
+                                >
+                                <th scope="col" class="px-6 py-3"
+                                    >Trend Direction</th
+                                >
+                                <th scope="col" class="px-6 py-3"
+                                    >Key Finding</th
+                                >
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                countrySurgicalData
+                                    .filter(
+                                        (c) => c.latestSurgicalRate !== null,
+                                    )
+                                    .sort(
+                                        (a, b) =>
+                                            b.latestSurgicalRate -
+                                            a.latestSurgicalRate,
+                                    )
+                                    .map((country) => (
+                                        <tr class="bg-white border-b">
+                                            <td class="flex items-center px-6 py-4 font-medium">
+                                                {country.code && (
+                                                    <span class="mr-2">
+                                                        {getUnicodeFlagIcon(
+                                                            country.code,
+                                                        )}
+                                                    </span>
+                                                )}
+                                                <span>{country.country}</span>
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {country.latestSurgicalRate
+                                                    ? `${country.latestSurgicalRate}% (${country.latestSurgicalYear})`
+                                                    : "Data not available"}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {country.earliestYear &&
+                                                country.earliestRate
+                                                    ? `${country.earliestRate}% (${country.earliestYear}) → ${country.latestSurgicalRate}% (${country.latestSurgicalYear})`
+                                                    : "Insufficient data"}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {country.trendDirection ===
+                                                "decreasing" ? (
+                                                    <span class="inline-flex items-center text-primary">
+                                                        <TrendingDown
+                                                            size={16}
+                                                            class="mr-1"
+                                                        />
+                                                        Decreasing surgical rate
+                                                    </span>
+                                                ) : country.trendDirection ===
+                                                  "increasing" ? (
+                                                    <span class="inline-flex items-center text-red-700">
+                                                        <TrendingUp
+                                                            size={16}
+                                                            class="mr-1"
+                                                        />
+                                                        Increasing surgical rate
+                                                    </span>
+                                                ) : (
+                                                    <span>
+                                                        Stable or insufficient
+                                                        data
+                                                    </span>
+                                                )}
+                                            </td>
+                                            <td class="px-6 py-4 max-w-xs truncate">
+                                                {country.keyFinding ||
+                                                    country.surgicalTrend ||
+                                                    "No key finding available"}
+                                            </td>
+                                        </tr>
+                                    ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="mb-3 font-semibold text-xl">Regional Insights</h3>
+                <div class="gap-4 grid grid-cols-1 md:grid-cols-2">
+                    <div
+                        class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                    >
+                        <h4 class="mb-2 font-medium">Scandinavian Countries</h4>
+                        <p class="text-gray-700 text-sm">
+                            Sweden, Denmark, and Finland show the most dramatic
+                            shift away from surgical management, with current
+                            surgical rates ranging from 14-20%. These countries
+                            were early adopters of evidence-based changes
+                            following high-quality studies showing comparable
+                            outcomes with well-managed non-operative protocols.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                    >
+                        <h4 class="mb-2 font-medium">Continental Europe</h4>
+                        <p class="text-gray-700 text-sm">
+                            France, Germany, and Italy maintain high surgical
+                            rates (80-92%) despite the same evidence being
+                            available. This suggests strong influence of medical
+                            tradition, training pathways, and healthcare system
+                            incentives in treatment decision-making.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                    >
+                        <h4 class="mb-2 font-medium">
+                            English-Speaking Countries
+                        </h4>
+                        <p class="text-gray-700 text-sm">
+                            The UK (5%) has shifted dramatically to
+                            non-operative management, while Canada (9%) shows a
+                            similar trend. Australia (35%) is transitioning but
+                            at a slower pace, and the US (70%) maintains a
+                            strong preference for surgical approaches despite
+                            similar healthcare systems and shared literature.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                    >
+                        <h4 class="mb-2 font-medium">Asia-Pacific</h4>
+                        <p class="text-gray-700 text-sm">
+                            Japan shows a counter-trend with increasing surgical
+                            treatment rates (67% to 72%), while South Korea
+                            maintains relatively high surgical rates (61%). This
+                            suggests cultural and regional factors may influence
+                            treatment beyond purely clinical considerations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="mb-3 font-semibold text-xl">
+                    Healthcare Economics and Surgical Decision-Making
+                </h3>
+                <div
+                    class="bg-white shadow-sm p-6 border border-gray-100 rounded-lg"
+                >
+                    <p class="mb-4 text-gray-700">
+                        Analysis of global treatment patterns reveals a striking
+                        correlation between healthcare payment models and the
+                        prevalence of surgical intervention for Achilles tendon
+                        ruptures. This relationship persists despite growing
+                        research indicating comparable outcomes between
+                        well-managed non-operative protocols and surgical
+                        repair.
+                    </p>
+
+                    <div class="mb-6 overflow-x-auto">
+                        <table class="w-full text-gray-700 text-sm">
+                            <thead
+                                class="bg-gray-100 text-gray-700 text-xs uppercase"
+                            >
+                                <tr>
+                                    <th scope="col" class="px-4 py-3"
+                                        >Healthcare System Type</th
+                                    >
+                                    <th scope="col" class="px-4 py-3"
+                                        >Representative Countries</th
+                                    >
+                                    <th scope="col" class="px-4 py-3"
+                                        >Surgical Rate</th
+                                    >
+                                    <th scope="col" class="px-4 py-3"
+                                        >Treatment Trend</th
+                                    >
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b">
+                                    <td class="px-4 py-3 font-medium"
+                                        >Nationalized healthcare with salaried
+                                        surgeons</td
+                                    >
+                                    <td class="px-4 py-3"
+                                        >Sweden, Finland, UK, Denmark</td
+                                    >
+                                    <td class="px-4 py-3 text-center">5-20%</td>
+                                    <td class="px-4 py-3"
+                                        >Strong shift toward non-operative
+                                        management since 2008-2010</td
+                                    >
+                                </tr>
+                                <tr class="bg-white border-b">
+                                    <td class="px-4 py-3 font-medium"
+                                        >Mixed systems with fee-for-service
+                                        elements</td
+                                    >
+                                    <td class="px-4 py-3"
+                                        >Australia, Canada, New Zealand</td
+                                    >
+                                    <td class="px-4 py-3 text-center">9-60%</td>
+                                    <td class="px-4 py-3"
+                                        >Gradual shift toward non-operative
+                                        management</td
+                                    >
+                                </tr>
+                                <tr class="bg-white border-b">
+                                    <td class="px-4 py-3 font-medium"
+                                        >Predominantly fee-for-service systems</td
+                                    >
+                                    <td class="px-4 py-3"
+                                        >US, France, Germany, Italy</td
+                                    >
+                                    <td class="px-4 py-3 text-center">70-92%</td
+                                    >
+                                    <td class="px-4 py-3"
+                                        >Minimal change or stable high surgical
+                                        rates despite evidence</td
+                                    >
+                                </tr>
+                                <tr class="bg-white border-b">
+                                    <td class="px-4 py-3 font-medium"
+                                        >Asian healthcare systems</td
+                                    >
+                                    <td class="px-4 py-3">Japan, South Korea</td
+                                    >
+                                    <td class="px-4 py-3 text-center">61-72%</td
+                                    >
+                                    <td class="px-4 py-3"
+                                        >Japan showing increasing surgical rates
+                                        (67% to 72%, 2010-2017)</td
+                                    >
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="mb-2 font-medium text-gray-800">
+                        Economic Influences on Treatment Selection:
+                    </h4>
+                    <ul class="space-y-2 mb-4 pl-5 text-gray-700 list-disc">
+                        <li>
+                            <strong>Scandinavian Approach:</strong> Sweden, Finland,
+                            and Denmark—countries with nationalized healthcare systems
+                            where surgeons typically receive salaries rather than
+                            fee-for-service payments—have experienced the most dramatic
+                            shifts away from surgical management. Sweden's surgical
+                            incidence decreased from 13.4 to 6.0 per 100,000 person-years
+                            between 2002 and 2021, with current surgical rates around
+                            14-15%<sup>16</sup>. Finland showed a similar
+                            decline from 13.6 to 4.9 per 100,000 person-years
+                            (1997-2019)<sup>30</sup>.
+                        </li>
+                        <li>
+                            <strong>Fee-for-Service Impact:</strong> Countries where
+                            surgeons are primarily reimbursed per procedure (US,
+                            France, Germany) maintain significantly higher surgical
+                            rates (70-92%) despite access to the same research evidence<sup
+                                >21,22,49</sup
+                            >. In France, 92% of acute Achilles tendon ruptures
+                            were treated surgically in 2018-2019<sup>21</sup>,
+                            while Germany reported rates above 88% as of 2018.
+                        </li>
+                        <li>
+                            <strong>Evidence Implementation Timing:</strong> The
+                            rapid adoption of non-operative management in the UK,
+                            Sweden, and Finland closely followed publication of key
+                            randomized controlled trials showing equivalent outcomes.
+                            These systems could implement evidence-based changes
+                            more rapidly due to centralized guidelines and absence
+                            of financial incentives favoring surgery<sup
+                                >16,39</sup
+                            >.
+                        </li>
+                        <li>
+                            <strong>Counter-Trend in Japan:</strong> Japan demonstrated
+                            an increase in surgical treatment rates from 67% in 2010
+                            to 72% in 2017<sup>42</sup>, despite having
+                            universal healthcare coverage. This suggests that
+                            while payment models are influential, other factors
+                            such as surgical training, cultural preferences, and
+                            practice traditions also play significant roles.
+                        </li>
+                    </ul>
+
+                    <h4 class="mb-2 font-medium text-gray-800">
+                        Economic Analysis:
+                    </h4>
+                    <p class="text-gray-700">
+                        The persistent high surgical rates in fee-for-service
+                        systems suggest financial incentives may influence
+                        treatment selection. A surgeon performing Achilles
+                        repair typically receives significantly higher
+                        compensation than for managing the same condition
+                        non-operatively, creating an inherent economic incentive
+                        that may consciously or unconsciously affect clinical
+                        decision-making.
+                    </p>
+                    <p class="mt-2 text-gray-700">
+                        Additionally, hospital systems and ambulatory surgery
+                        centers generate substantially more revenue from
+                        surgical cases than non-operative care, potentially
+                        influencing institutional protocols and practice
+                        patterns. This economic reality helps explain why
+                        countries with predominantly fee-for-service systems
+                        have been slower to adopt non-operative management
+                        despite mounting evidence supporting its efficacy.
+                    </p>
+                    <p class="mt-2 text-gray-700">
+                        In contrast, systems where physician compensation is not
+                        directly tied to procedure volume (such as in Sweden,
+                        Finland, and the UK) have more readily embraced
+                        non-operative management following evidence
+                        demonstrating comparable outcomes with lower
+                        complication rates<sup>16,30</sup>. These healthcare
+                        systems also typically implement standardized treatment
+                        guidelines more uniformly than decentralized
+                        fee-for-service systems.
+                    </p>
+
+                    <div class="bg-gray-50 mt-4 p-4 rounded-lg">
+                        <h5 class="mb-2 font-medium text-gray-800">
+                            Case Study: Australia's Transition
+                        </h5>
+                        <p class="text-gray-700 text-sm">
+                            Australia represents an interesting intermediate
+                            case with a mixed healthcare system. Following the
+                            publication of key research in 2010, Australia
+                            experienced a 68% decrease in surgical repairs
+                            between 2009 and 2014<sup>19</sup>. The surgical
+                            rate declined from 68% to 35%, suggesting that while
+                            economic incentives matter, evidence can drive
+                            significant practice changes even in systems with
+                            fee-for-service elements when supported by strong
+                            research and professional guidelines.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Visualization Tab -->
+        <div
+            class="hidden bg-gray-50 p-2 sm:p-4 rounded-lg"
+            id="data-visualization"
+            role="tabpanel"
+            aria-labelledby="data-visualization-tab"
+        >
+            <OpOrNotCharts />
+        </div>
+
+        <!-- Detailed Report Tab -->
+        <div
+            class="hidden bg-gray-50 p-2 sm:p-4 rounded-lg"
+            id="detailed-report"
+            role="tabpanel"
+            aria-labelledby="detailed-report-tab"
+        >
+            <OpOrNotBody />
+        </div>
+    </div>
+</div>
+
+<script>
+    // DOM elements for tabs
+    const tabButtons = document.querySelectorAll('[role="tab"]');
+    const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+
+    // Tab switching functionality
+    tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            // Deactivate all tabs
+            tabButtons.forEach((btn) => {
+                btn.classList.remove("active", "border-emerald-600");
+                btn.classList.add("border-transparent");
+                btn.setAttribute("aria-selected", "false");
+            });
+
+            tabPanels.forEach((panel) => {
+                panel.classList.add("hidden");
+            });
+
+            // Activate current tab
+            button.classList.add("active", "border-emerald-600");
+            button.classList.remove("border-transparent");
+            button.setAttribute("aria-selected", "true");
+
+            // Show current panel
+            const panelId = button
+                .getAttribute("data-tabs-target")
+                ?.substring(1);
+            if (panelId) {
+                const panel = document.getElementById(panelId);
+                if (panel) {
+                    panel.classList.remove("hidden");
+                }
+            }
+        });
+    });
+</script>
+
+<style>
+    #tab-navigation button.active {
+        color: #059669;
+        font-weight: 600;
+    }
+</style>

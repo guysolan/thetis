@@ -1,14 +1,14 @@
 export const products = [
     {
-        href: '/night-splint',
-        title: 'Night Splint',
+        href: "/splint",
+        title: "Achilles Rupture Splint",
         description:
-            'An Achilles rupture night splint to make sleeping more pleasant and bearable. The brace straps to the leg to prevent further tendon injury.',
+            "An Achilles rupture splint to make sleeping more pleasant and bearable and increase the speed of patients being seen by a specialist.",
     },
     {
-        href: '/trauma-splint',
-        title: 'Trauma Splint',
+        href: "/reviews",
+        title: "Reviews",
         description:
-            'An Achilles rupture splint designed to replace plaster of paris casts in A&E / Emergency Rooms. It can save patients and doctors costs by saving time.',
+            "Reviews from Athletes, Surgeons and patients who have used the Achilles Rupture Splint.",
     },
-]
+];

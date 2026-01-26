@@ -1,0 +1,78 @@
+---
+import { Schema } from "astro-seo-schema";
+---
+
+<Schema
+    item={{
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Product",
+                name: "Hygienic Achilles Rupture Night Splint",
+                image: [
+                    "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+                    "https://thetismedical.com/images/night-splint/Thetis%20Medical%20Achilles%20Rupture%20Night%20Splint%20In%20Bed.jpg",
+                ],
+                description:
+                    "Keep your bed clean during Achilles rupture recovery. Removable, washable design prevents dirt from your boot getting into your sheets.",
+                sku: "7B-QYCY-8JID",
+                gtin13: "5065005394047",
+                brand: {
+                    "@type": "Brand",
+                    name: "Thetis Medical",
+                },
+                aggregateRating: {
+                    "@type": "AggregateRating",
+                    reviewCount: "170",
+                    ratingValue: "4.6",
+                },
+            },
+            {
+                "@type": "FAQPage",
+                mainEntity: [
+                    {
+                        "@type": "Question",
+                        name: "How do I keep my bed clean with Achilles rupture?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "The Thetis night splint solves this problem by replacing your dirty walking boot at night. The splint has a removable, washable liner that keeps your bed clean and hygienic during recovery.",
+                        },
+                    },
+                    {
+                        "@type": "Question",
+                        name: "Can I wash the Achilles rupture splint?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "Yes, the Thetis splint features a removable liner that can be washed regularly. This maintains hygiene and prevents the dirt and sweat from your boot getting into your bed sheets.",
+                        },
+                    },
+                    {
+                        "@type": "Question",
+                        name: "Why is my bed getting dirty from my boot?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "Walking boots accumulate dirt, debris, and bacteria from daily use. When you sleep in your boot, this transfers to your bed. The Thetis night splint provides a clean, washable alternative for overnight protection.",
+                        },
+                    },
+                ],
+            },
+            {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                    {
+                        "@type": "ListItem",
+                        position: 1,
+                        name: "Home",
+                        item: "https://thetismedical.com",
+                    },
+                    {
+                        "@type": "ListItem",
+                        position: 2,
+                        name: "Hygiene with Torn Achilles",
+                        item: "https://thetismedical.com/hygiene-with-torn-achilles",
+                    },
+                ],
+            },
+        ],
+    }}
+/>

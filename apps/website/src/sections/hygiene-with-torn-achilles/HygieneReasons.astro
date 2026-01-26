@@ -1,0 +1,207 @@
+---
+import type { Lang } from "@/config/languages.ts";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+
+const content = {
+    en: {
+        title: "Why Sleeping in Your Walking Boot is Unhygienic",
+        subtitle:
+            "Your boot goes everywhere—why would you bring that into bed?",
+        reasons: [
+            {
+                title: "The Same Boot You Walk Everywhere",
+                text: "Think about it: your boot touches bathroom floors, public transport, hospital floors, dirty streets. Then you put that same boot in your bed where you sleep for 8 hours?",
+                icon: "🦠",
+            },
+            {
+                title: "Sweat and Bacteria Build-Up",
+                text: "Your foot sweats all day trapped in that boot. Without proper ventilation, bacteria multiply. That's what creates that distinctive boot smell.",
+                icon: "💦",
+            },
+            {
+                title: "Your Sheets Deserve Better",
+                text: "You wash your sheets to keep them clean and fresh. Why ruin them every night with a dirty boot that's been walking around all day?",
+                icon: "🛏️",
+            },
+            {
+                title: "Some Patients Buy TWO Boots",
+                text: "Yes, some people are so concerned about hygiene they buy two identical boots—one for outside, one for sleeping. That's £200-300 for a second boot when you could just get our splint.",
+                icon: "💸",
+            },
+        ],
+        solution: {
+            title: "The Simple Solution",
+            text: "Our night splint with removable, washable liner lets you keep your bed clean. Remove the boot before bed, wear the splint. Your sheets stay fresh, your foot stays supported, and you save money.",
+        },
+    },
+    de: {
+        title: "Warum das Schlafen im Gehstiefel unhygienisch ist",
+        subtitle:
+            "Ihr Stiefel geht überallhin—warum würden Sie das ins Bett bringen?",
+        reasons: [
+            {
+                title: "Derselbe Stiefel, mit dem Sie überall gehen",
+                text: "Denken Sie darüber nach: Ihr Stiefel berührt Badezimmerböden, öffentliche Verkehrsmittel, Krankenhausböden, schmutzige Straßen. Dann legen Sie denselben Stiefel in Ihr Bett, wo Sie 8 Stunden schlafen?",
+                icon: "🦠",
+            },
+            {
+                title: "Schweiß und Bakterienansammlung",
+                text: "Ihr Fuß schwitzt den ganzen Tag in diesem Stiefel. Ohne richtige Belüftung vermehren sich Bakterien. Das erzeugt diesen charakteristischen Stiefelgeruch.",
+                icon: "💦",
+            },
+            {
+                title: "Ihre Laken verdienen Besseres",
+                text: "Sie waschen Ihre Laken, um sie sauber und frisch zu halten. Warum sie jede Nacht mit einem schmutzigen Stiefel ruinieren?",
+                icon: "🛏️",
+            },
+            {
+                title: "Manche Patienten kaufen ZWEI Stiefel",
+                text: "Ja, manche Menschen sind so besorgt über Hygiene, dass sie zwei identische Stiefel kaufen—einen für draußen, einen zum Schlafen. Das sind 200-300€ für einen zweiten Stiefel, wenn Sie einfach unsere Schiene bekommen könnten.",
+                icon: "💸",
+            },
+        ],
+        solution: {
+            title: "Die einfache Lösung",
+            text: "Unsere Nachtschiene mit herausnehmbarer, waschbarer Innenschicht hält Ihr Bett sauber. Entfernen Sie den Stiefel vor dem Schlafengehen, tragen Sie die Schiene. Ihre Laken bleiben frisch, Ihr Fuß bleibt gestützt, und Sie sparen Geld.",
+        },
+    },
+    fr: {
+        title: "Pourquoi dormir dans votre botte de marche est unhygiénique",
+        subtitle: "Votre botte va partout—pourquoi l'amener dans votre lit?",
+        reasons: [
+            {
+                title: "La même botte avec laquelle vous marchez partout",
+                text: "Réfléchissez: votre botte touche les sols de salle de bain, les transports publics, les sols d'hôpital, les rues sales. Puis vous mettez cette même botte dans votre lit où vous dormez 8 heures?",
+                icon: "🦠",
+            },
+            {
+                title: "Accumulation de sueur et de bactéries",
+                text: "Votre pied transpire toute la journée piégé dans cette botte. Sans ventilation appropriée, les bactéries se multiplient. C'est ce qui crée cette odeur distinctive de botte.",
+                icon: "💦",
+            },
+            {
+                title: "Vos draps méritent mieux",
+                text: "Vous lavez vos draps pour les garder propres et frais. Pourquoi les ruiner chaque nuit avec une botte sale qui a marché partout?",
+                icon: "🛏️",
+            },
+            {
+                title: "Certains patients achètent DEUX bottes",
+                text: "Oui, certaines personnes sont tellement préoccupées par l'hygiène qu'elles achètent deux bottes identiques—une pour l'extérieur, une pour dormir. C'est 200-300€ pour une deuxième botte quand vous pourriez juste obtenir notre attelle.",
+                icon: "💸",
+            },
+        ],
+        solution: {
+            title: "La solution simple",
+            text: "Notre attelle de nuit avec doublure amovible et lavable garde votre lit propre. Retirez la botte avant de dormir, portez l'attelle. Vos draps restent frais, votre pied reste soutenu, et vous économisez de l'argent.",
+        },
+    },
+    es: {
+        title: "Por qué dormir en su bota de caminar es antihigiénico",
+        subtitle: "Su bota va a todas partes—¿por qué traerla a la cama?",
+        reasons: [
+            {
+                title: "La misma bota con la que camina por todas partes",
+                text: "Piénselo: su bota toca pisos de baño, transporte público, pisos de hospital, calles sucias. ¿Luego pone esa misma bota en su cama donde duerme 8 horas?",
+                icon: "🦠",
+            },
+            {
+                title: "Acumulación de sudor y bacterias",
+                text: "Su pie suda todo el día atrapado en esa bota. Sin ventilación adecuada, las bacterias se multiplican. Eso crea ese olor distintivo de bota.",
+                icon: "💦",
+            },
+            {
+                title: "Sus sábanas merecen algo mejor",
+                text: "Lava sus sábanas para mantenerlas limpias y frescas. ¿Por qué arruinarlas cada noche con una bota sucia que ha estado caminando todo el día?",
+                icon: "🛏️",
+            },
+            {
+                title: "Algunos pacientes compran DOS botas",
+                text: "Sí, algunas personas están tan preocupadas por la higiene que compran dos botas idénticas—una para afuera, una para dormir. Son 200-300€ por una segunda bota cuando podría simplemente obtener nuestra férula.",
+                icon: "💸",
+            },
+        ],
+        solution: {
+            title: "La solución simple",
+            text: "Nuestra férula nocturna con forro extraíble y lavable mantiene su cama limpia. Quítese la bota antes de dormir, use la férula. Sus sábanas permanecen frescas, su pie permanece apoyado, y ahorra dinero.",
+        },
+    },
+    it: {
+        title: "Perché dormire nello stivale da passeggio è anti-igienico",
+        subtitle: "Il tuo stivale va ovunque—perché portarlo a letto?",
+        reasons: [
+            {
+                title: "Lo stesso stivale con cui cammini ovunque",
+                text: "Pensaci: il tuo stivale tocca pavimenti di bagni, trasporti pubblici, pavimenti di ospedali, strade sporche. Poi metti quello stesso stivale nel tuo letto dove dormi 8 ore?",
+                icon: "🦠",
+            },
+            {
+                title: "Accumulo di sudore e batteri",
+                text: "Il tuo piede suda tutto il giorno intrappolato in quello stivale. Senza ventilazione adeguata, i batteri si moltiplicano. Questo crea quel caratteristico odore di stivale.",
+                icon: "💦",
+            },
+            {
+                title: "Le tue lenzuola meritano di meglio",
+                text: "Lavi le lenzuola per mantenerle pulite e fresche. Perché rovinarle ogni notte con uno stivale sporco che ha camminato tutto il giorno?",
+                icon: "🛏️",
+            },
+            {
+                title: "Alcuni pazienti comprano DUE stivali",
+                text: "Sì, alcune persone sono così preoccupate per l'igiene che comprano due stivali identici—uno per fuori, uno per dormire. Sono 200-300€ per un secondo stivale quando potresti semplicemente ottenere la nostra stecca.",
+                icon: "💸",
+            },
+        ],
+        solution: {
+            title: "La soluzione semplice",
+            text: "La nostra stecca notturna con rivestimento rimovibile e lavabile mantiene il tuo letto pulito. Rimuovi lo stivale prima di dormire, indossa la stecca. Le lenzuola rimangono fresche, il piede rimane supportato, e risparmi denaro.",
+        },
+    },
+};
+
+const currentContent = content[lang] || content.en;
+---
+
+<div class="mx-auto px-4 py-16 container">
+    <div class="mx-auto mb-12 max-w-3xl text-center">
+        <h2 class="mb-4 font-semibold text-neutral-950 text-3xl md:text-4xl">
+            {currentContent.title}
+        </h2>
+        <p class="text-gray-700 text-xl">
+            {currentContent.subtitle}
+        </p>
+    </div>
+
+    <div class="space-y-8 mx-auto max-w-4xl">
+        {
+            currentContent.reasons.map((reason) => (
+                <div class="bg-white p-6 border border-gray-200 rounded-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">{reason.icon}</div>
+                        <div class="flex-1">
+                            <h3 class="mb-2 font-semibold text-neutral-900 text-xl">
+                                {reason.title}
+                            </h3>
+                            <p class="text-gray-700 text-lg leading-relaxed">
+                                {reason.text}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            ))
+        }
+
+        <!-- Solution -->
+        <div class="bg-primary/5 p-8 border-primary border-l-4 rounded-r">
+            <h3 class="mb-3 font-bold text-neutral-900 text-2xl">
+                ✨ {currentContent.solution.title}
+            </h3>
+            <p class="text-gray-700 text-lg leading-relaxed">
+                {currentContent.solution.text}
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,436 @@
+---
+import type { Lang } from "@/config/languages.ts";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+
+const content = {
+    en: {
+        title: "What You Actually Need for Achilles Rupture Recovery",
+        subtitle: "The essential items and common products patients buy",
+        essentials: {
+            title: "The Two Essentials",
+            items: [
+                {
+                    name: "Walking Boot (Day)",
+                    description:
+                        "Protects your Achilles during the day while you're moving around. You'll get this from your hospital or surgeon.",
+                    icon: "👢",
+                },
+                {
+                    name: "Night Splint (Sleep)",
+                    description:
+                        "Our Thetis splint - lightweight and comfortable for sleeping. Maintains safe position without the heavy boot.",
+                    icon: "🌙",
+                    highlight: true,
+                },
+            ],
+        },
+        common: {
+            title: "Other Products Patients Often Search For",
+            intro: "You might be looking for one of these. Here's what you should know:",
+            items: [
+                {
+                    name: "EVENup Shoe Leveler",
+                    what: "Balances your hips when one foot is in a boot",
+                    reality:
+                        "Helpful for preventing back pain during the day. Costs £35-40.",
+                },
+                {
+                    name: "Limbo Waterproof Covers",
+                    what: "Keeps your boot dry in the shower",
+                    reality:
+                        "Our splint is better - it's waterproof AND supports your Achilles. With Limbo you still can't clean your foot.",
+                },
+                {
+                    name: "Elevation Wedge",
+                    what: "Pillow to elevate your leg and reduce swelling",
+                    reality:
+                        "Very useful in the first few weeks. Costs £15-45.",
+                },
+                {
+                    name: "VACOped Boot",
+                    what: "Premium walking boot alternative",
+                    reality:
+                        "Good boot but still heavy for sleeping. Costs £200+. Our night splint is the sleep solution.",
+                },
+                {
+                    name: "Generic Night Splints",
+                    what: "Standard foot/ankle splints",
+                    reality:
+                        "Not designed for Achilles rupture specifically. Ours is patented and purpose-built with zero complications in 3,000+ patients.",
+                },
+            ],
+        },
+        bottom: {
+            title: "The Bottom Line",
+            text: "You need a walking boot for the day (your surgeon provides this) and our night splint for sleeping. Everything else is optional extras based on your budget and comfort preferences.",
+        },
+    },
+    de: {
+        title: "Was Sie wirklich für die Achillessehnenruptur-Genesung brauchen",
+        subtitle: "Die wesentlichen Artikel und häufig gekaufte Produkte",
+        essentials: {
+            title: "Die zwei Wesentlichen",
+            items: [
+                {
+                    name: "Gehstiefel (Tag)",
+                    description:
+                        "Schützt Ihre Achillessehne tagsüber während Sie sich bewegen. Sie bekommen dies von Ihrem Krankenhaus oder Chirurgen.",
+                    icon: "👢",
+                },
+                {
+                    name: "Nachtschiene (Schlaf)",
+                    description:
+                        "Unsere Thetis-Schiene - leicht und bequem zum Schlafen. Erhält sichere Position ohne den schweren Stiefel.",
+                    icon: "🌙",
+                    highlight: true,
+                },
+            ],
+        },
+        common: {
+            title: "Andere Produkte, nach denen Patienten oft suchen",
+            intro: "Sie suchen vielleicht nach einem davon. Hier ist, was Sie wissen sollten:",
+            items: [
+                {
+                    name: "EVENup Schuhausgleich",
+                    what: "Gleicht Ihre Hüften aus, wenn ein Fuß im Stiefel ist",
+                    reality:
+                        "Hilfreich zur Vorbeugung von Rückenschmerzen tagsüber. Kostet £35-40.",
+                },
+                {
+                    name: "Limbo wasserdichte Abdeckungen",
+                    what: "Hält Ihren Stiefel in der Dusche trocken",
+                    reality:
+                        "Unsere Schiene ist besser - wasserdicht UND stützt Ihre Achillessehne. Mit Limbo können Sie Ihren Fuß immer noch nicht reinigen.",
+                },
+                {
+                    name: "Elevationskeil",
+                    what: "Kissen zum Hochlagern Ihres Beins und Reduzierung der Schwellung",
+                    reality:
+                        "Sehr nützlich in den ersten Wochen. Kostet £15-45.",
+                },
+                {
+                    name: "VACOped Stiefel",
+                    what: "Premium-Gehstiefel-Alternative",
+                    reality:
+                        "Guter Stiefel, aber immer noch schwer zum Schlafen. Kostet £200+. Unsere Nachtschiene ist die Schlaflösung.",
+                },
+                {
+                    name: "Generische Nachtschienen",
+                    what: "Standard Fuß-/Knöchelschienen",
+                    reality:
+                        "Nicht speziell für Achillessehnenruptur entwickelt. Unsere ist patentiert und zweckgebaut mit null Komplikationen bei 3.000+ Patienten.",
+                },
+            ],
+        },
+        bottom: {
+            title: "Das Fazit",
+            text: "Sie brauchen einen Gehstiefel für den Tag (Ihr Chirurg stellt dies bereit) und unsere Nachtschiene zum Schlafen. Alles andere sind optionale Extras basierend auf Ihrem Budget und Komfortvorlieben.",
+        },
+    },
+    fr: {
+        title: "Ce dont vous avez réellement besoin pour la récupération de rupture d'Achille",
+        subtitle: "Les articles essentiels et les produits couramment achetés",
+        essentials: {
+            title: "Les deux essentiels",
+            items: [
+                {
+                    name: "Botte de marche (Jour)",
+                    description:
+                        "Protège votre Achille pendant la journée quand vous bougez. Vous l'obtiendrez de votre hôpital ou chirurgien.",
+                    icon: "👢",
+                },
+                {
+                    name: "Attelle de nuit (Sommeil)",
+                    description:
+                        "Notre attelle Thetis - légère et confortable pour dormir. Maintient une position sûre sans la botte lourde.",
+                    icon: "🌙",
+                    highlight: true,
+                },
+            ],
+        },
+        common: {
+            title: "Autres produits que les patients recherchent souvent",
+            intro: "Vous cherchez peut-être l'un de ceux-ci. Voici ce que vous devez savoir:",
+            items: [
+                {
+                    name: "Niveleur de chaussure EVENup",
+                    what: "Équilibre vos hanches quand un pied est dans une botte",
+                    reality:
+                        "Utile pour prévenir les douleurs dorsales pendant la journée. Coûte £35-40.",
+                },
+                {
+                    name: "Couvres imperméables Limbo",
+                    what: "Garde votre botte sèche sous la douche",
+                    reality:
+                        "Notre attelle est meilleure - imperméable ET soutient votre Achille. Avec Limbo vous ne pouvez toujours pas nettoyer votre pied.",
+                },
+                {
+                    name: "Coussin d'élévation",
+                    what: "Oreiller pour élever votre jambe et réduire l'enflure",
+                    reality:
+                        "Très utile dans les premières semaines. Coûte £15-45.",
+                },
+                {
+                    name: "Botte VACOped",
+                    what: "Alternative de botte de marche premium",
+                    reality:
+                        "Bonne botte mais toujours lourde pour dormir. Coûte £200+. Notre attelle de nuit est la solution sommeil.",
+                },
+                {
+                    name: "Attelles de nuit génériques",
+                    what: "Attelles de pied/cheville standard",
+                    reality:
+                        "Pas spécifiquement conçues pour la rupture d'Achille. La nôtre est brevetée et spécialement conçue avec zéro complication sur 3 000+ patients.",
+                },
+            ],
+        },
+        bottom: {
+            title: "L'essentiel",
+            text: "Vous avez besoin d'une botte de marche pour la journée (votre chirurgien vous la fournit) et de notre attelle de nuit pour dormir. Tout le reste est des extras optionnels selon votre budget et préférences de confort.",
+        },
+    },
+    es: {
+        title: "Lo que realmente necesita para la recuperación de rotura de Aquiles",
+        subtitle: "Los artículos esenciales y productos comúnmente comprados",
+        essentials: {
+            title: "Los dos esenciales",
+            items: [
+                {
+                    name: "Bota de caminar (Día)",
+                    description:
+                        "Protege su Aquiles durante el día mientras se mueve. La obtendrá de su hospital o cirujano.",
+                    icon: "👢",
+                },
+                {
+                    name: "Férula nocturna (Sueño)",
+                    description:
+                        "Nuestra férula Thetis - ligera y cómoda para dormir. Mantiene posición segura sin la bota pesada.",
+                    icon: "🌙",
+                    highlight: true,
+                },
+            ],
+        },
+        common: {
+            title: "Otros productos que los pacientes suelen buscar",
+            intro: "Quizás esté buscando uno de estos. Esto es lo que debe saber:",
+            items: [
+                {
+                    name: "Nivelador de zapato EVENup",
+                    what: "Equilibra sus caderas cuando un pie está en una bota",
+                    reality:
+                        "Útil para prevenir dolor de espalda durante el día. Cuesta £35-40.",
+                },
+                {
+                    name: "Cubiertas impermeables Limbo",
+                    what: "Mantiene su bota seca en la ducha",
+                    reality:
+                        "Nuestra férula es mejor - impermeable Y apoya su Aquiles. Con Limbo aún no puede limpiar su pie.",
+                },
+                {
+                    name: "Cuña de elevación",
+                    what: "Almohada para elevar su pierna y reducir la hinchazón",
+                    reality: "Muy útil en las primeras semanas. Cuesta £15-45.",
+                },
+                {
+                    name: "Bota VACOped",
+                    what: "Alternativa de bota de caminar premium",
+                    reality:
+                        "Buena bota pero aún pesada para dormir. Cuesta £200+. Nuestra férula nocturna es la solución para dormir.",
+                },
+                {
+                    name: "Férulas nocturnas genéricas",
+                    what: "Férulas de pie/tobillo estándar",
+                    reality:
+                        "No diseñadas específicamente para rotura de Aquiles. La nuestra está patentada y construida específicamente con cero complicaciones en 3,000+ pacientes.",
+                },
+            ],
+        },
+        bottom: {
+            title: "En resumen",
+            text: "Necesita una bota de caminar para el día (su cirujano la proporciona) y nuestra férula nocturna para dormir. Todo lo demás son extras opcionales según su presupuesto y preferencias de comodidad.",
+        },
+    },
+    it: {
+        title: "Cosa ti serve davvero per il recupero dalla rottura dell'Achille",
+        subtitle: "Gli articoli essenziali e i prodotti comunemente acquistati",
+        essentials: {
+            title: "I due essenziali",
+            items: [
+                {
+                    name: "Stivale da passeggio (Giorno)",
+                    description:
+                        "Protegge il tuo Achille durante il giorno mentre ti muovi. Lo otterrai dal tuo ospedale o chirurgo.",
+                    icon: "👢",
+                },
+                {
+                    name: "Stecca notturna (Sonno)",
+                    description:
+                        "La nostra stecca Thetis - leggera e confortevole per dormire. Mantiene posizione sicura senza lo stivale pesante.",
+                    icon: "🌙",
+                    highlight: true,
+                },
+            ],
+        },
+        common: {
+            title: "Altri prodotti che i pazienti cercano spesso",
+            intro: "Forse stai cercando uno di questi. Ecco cosa dovresti sapere:",
+            items: [
+                {
+                    name: "Livellatore scarpe EVENup",
+                    what: "Bilancia i fianchi quando un piede è nello stivale",
+                    reality:
+                        "Utile per prevenire il mal di schiena durante il giorno. Costa £35-40.",
+                },
+                {
+                    name: "Coperture impermeabili Limbo",
+                    what: "Mantiene lo stivale asciutto sotto la doccia",
+                    reality:
+                        "La nostra stecca è migliore - impermeabile E supporta il tuo Achille. Con Limbo non puoi ancora pulire il piede.",
+                },
+                {
+                    name: "Cuscino di elevazione",
+                    what: "Cuscino per elevare la gamba e ridurre il gonfiore",
+                    reality: "Molto utile nelle prime settimane. Costa £15-45.",
+                },
+                {
+                    name: "Stivale VACOped",
+                    what: "Alternativa premium allo stivale da passeggio",
+                    reality:
+                        "Buono stivale ma ancora pesante per dormire. Costa £200+. La nostra stecca notturna è la soluzione per il sonno.",
+                },
+                {
+                    name: "Stecche notturne generiche",
+                    what: "Stecche piede/caviglia standard",
+                    reality:
+                        "Non progettate specificamente per rottura dell'Achille. La nostra è brevettata e costruita appositamente con zero complicazioni in 3.000+ pazienti.",
+                },
+            ],
+        },
+        bottom: {
+            title: "In sintesi",
+            text: "Hai bisogno di uno stivale da passeggio per il giorno (il tuo chirurgo lo fornisce) e della nostra stecca notturna per dormire. Tutto il resto sono extra opzionali in base al tuo budget e preferenze di comfort.",
+        },
+    },
+};
+
+const currentContent = content[lang] || content.en;
+---
+
+<section class="bg-white py-16">
+    <div class="mx-auto px-4 container">
+        <div class="mx-auto mb-12 max-w-3xl text-center">
+            <h2
+                class="mb-4 font-semibold text-neutral-950 text-3xl md:text-4xl"
+            >
+                {currentContent.title}
+            </h2>
+            <p class="text-gray-700 text-xl">
+                {currentContent.subtitle}
+            </p>
+        </div>
+
+        <!-- The Two Essentials -->
+        <div class="mx-auto mb-16 max-w-4xl">
+            <h3
+                class="mb-8 font-semibold text-neutral-900 text-2xl text-center"
+            >
+                {currentContent.essentials.title}
+            </h3>
+            <div class="gap-6 grid md:grid-cols-2">
+                {
+                    currentContent.essentials.items.map((item) => (
+                        <div
+                            class:list={[
+                                "p-6 border rounded-lg",
+                                item.highlight
+                                    ? "bg-primary/5 border-primary/30 ring-2 ring-primary/20"
+                                    : "bg-white border-gray-200",
+                            ]}
+                        >
+                            <div class="mb-4 text-4xl">{item.icon}</div>
+                            <h4 class="mb-3 font-semibold text-neutral-900 text-xl">
+                                {item.name}
+                            </h4>
+                            <p class="text-gray-700">{item.description}</p>
+                            {item.highlight && (
+                                <div class="mt-4 pt-4 border-primary/20 border-t">
+                                    <p class="font-medium text-primary text-sm">
+                                        ←{" "}
+                                        {lang === "en"
+                                            ? "This is what we make"
+                                            : lang === "de"
+                                              ? "Das ist was wir machen"
+                                              : lang === "fr"
+                                                ? "C'est ce que nous fabriquons"
+                                                : lang === "es"
+                                                  ? "Esto es lo que hacemos"
+                                                  : "Questo è ciò che facciamo"}
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- Other Common Products -->
+        <div class="mx-auto max-w-4xl">
+            <h3
+                class="mb-4 font-semibold text-neutral-900 text-2xl text-center"
+            >
+                {currentContent.common.title}
+            </h3>
+            <p class="mb-8 text-gray-600 text-center">
+                {currentContent.common.intro}
+            </p>
+
+            <div class="space-y-6">
+                {
+                    currentContent.common.items.map((item) => (
+                        <div class="bg-white shadow-sm hover:shadow-md p-6 border border-gray-200 rounded-xl transition-shadow">
+                            <div class="mb-4 font-semibold text-neutral-900 text-lg">
+                                {item.name}
+                            </div>
+                            <div class="gap-6 grid md:grid-cols-2">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <div class="mb-2 font-medium text-blue-900 text-sm uppercase tracking-wide">
+                                        What it is
+                                    </div>
+                                    <p class="text-gray-700 text-base leading-relaxed">
+                                        {item.what}
+                                    </p>
+                                </div>
+                                <div class="bg-primary/10 p-4 rounded-lg">
+                                    <div class="mb-2 font-medium text-primary text-sm uppercase tracking-wide">
+                                        Reality Check
+                                    </div>
+                                    <p class="text-gray-700 text-base leading-relaxed">
+                                        {item.reality}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- Bottom Line -->
+        <div class="mx-auto mt-12 max-w-3xl">
+            <div class="bg-primary/5 p-8 border-primary border-l-4 rounded-r">
+                <h3 class="mb-3 font-bold text-neutral-900 text-xl">
+                    ✅ {currentContent.bottom.title}
+                </h3>
+                <p class="text-gray-700 text-lg leading-relaxed">
+                    {currentContent.bottom.text}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

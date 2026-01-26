@@ -6,7 +6,7 @@ import useEmblaCarousel, {
 } from "embla-carousel-react";
 import { cn } from "../utils";
 import { Button } from "./button";
-import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -215,7 +215,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeftIcon className="w-4 h-4" />
+      <ChevronLeft className="w-4 h-4" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -242,7 +242,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRightIcon className="w-4 h-4" />
+      <ChevronRight className="w-4 h-4" />
       <span className="sr-only">Next slide</span>
     </Button>
   );

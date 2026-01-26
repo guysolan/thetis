@@ -1,0 +1,65 @@
+---
+import DownloadList from "@/components/DownloadList.astro";
+import type { Lang } from "../../config/languages";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const downloads = {
+    en: [
+        {
+            href: "/images/documents/A Game of Snakes and Ladders Poster.pdf",
+            title: "Snakes and Ladders Poster",
+        },
+        {
+            href: "/images/documents/Achilles Rupture Information Sheet.pdf",
+            title: "Achilles Rupture Information Sheet",
+        },
+    ],
+    es: [
+        {
+            href: "/images/documents/A Game of Snakes and Ladders Poster.pdf",
+            title: "Póster de Serpientes y Escaleras",
+        },
+        {
+            href: "/images/documents/Achilles Rupture Information Sheet.pdf",
+            title: "Hoja Informativa de Ruptura de Aquiles",
+        },
+    ],
+    fr: [
+        {
+            href: "/images/documents/A Game of Snakes and Ladders Poster.pdf",
+            title: "Affiche Serpents et Échelles",
+        },
+        {
+            href: "/images/documents/Achilles Rupture Information Sheet.pdf",
+            title: "Fiche d'Information sur la Rupture d'Achille",
+        },
+    ],
+    de: [
+        {
+            href: "/images/documents/A Game of Snakes and Ladders Poster.pdf",
+            title: "Schlangen und Leitern Poster",
+        },
+        {
+            href: "/images/documents/Achilles Rupture Information Sheet.pdf",
+            title: "Achillessehnenriss Informationsblatt",
+        },
+    ],
+    it: [
+        {
+            href: "/images/documents/A Game of Snakes and Ladders Poster.pdf",
+            title: "Poster Serpenti e Scale",
+        },
+        {
+            href: "/images/documents/Achilles Rupture Information Sheet.pdf",
+            title: "Scheda Informativa Rottura di Achille",
+        },
+    ],
+};
+
+const currentDownloads = downloads[lang] || downloads.en;
+---
+
+<section class="bg-white mt-8">
+    <DownloadList title="Downloads" downloads={currentDownloads} />
+</section>

@@ -1,0 +1,77 @@
+---
+import { Schema } from "astro-seo-schema";
+---
+
+<Schema
+    item={{
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Product",
+                name: "Achilles Rupture Splint for Swimming",
+                image: [
+                    "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+                ],
+                description:
+                    "Yes, you can swim safely during Achilles rupture recovery. Waterproof support designed for aquatic activities and water-based rehabilitation.",
+                sku: "7B-QYCY-8JID",
+                gtin13: "5065005394047",
+                brand: {
+                    "@type": "Brand",
+                    name: "Thetis Medical",
+                },
+                aggregateRating: {
+                    "@type": "AggregateRating",
+                    reviewCount: "170",
+                    ratingValue: "4.6",
+                },
+            },
+            {
+                "@type": "FAQPage",
+                mainEntity: [
+                    {
+                        "@type": "Question",
+                        name: "Can I swim with a torn Achilles?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "Yes, you can swim safely during Achilles rupture recovery with the Thetis waterproof splint. It maintains proper foot position in the pool while allowing you to benefit from low-impact aquatic exercise.",
+                        },
+                    },
+                    {
+                        "@type": "Question",
+                        name: "Is swimming good for Achilles rupture recovery?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "Swimming and water-based exercises can be excellent for Achilles rupture recovery as they provide low-impact movement and help maintain overall fitness. Always consult your healthcare provider and use proper support like the Thetis waterproof splint.",
+                        },
+                    },
+                    {
+                        "@type": "Question",
+                        name: "What should I wear in the pool with Achilles rupture?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "The Thetis waterproof night splint is designed for safe water activities during Achilles rupture recovery. It protects your healing tendon while being fully waterproof for pool, swimming, or aquatic therapy.",
+                        },
+                    },
+                ],
+            },
+            {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                    {
+                        "@type": "ListItem",
+                        position: 1,
+                        name: "Home",
+                        item: "https://thetismedical.com",
+                    },
+                    {
+                        "@type": "ListItem",
+                        position: 2,
+                        name: "Swimming with Torn Achilles",
+                        item: "https://thetismedical.com/swimming-with-torn-achilles",
+                    },
+                ],
+            },
+        ],
+    }}
+/>

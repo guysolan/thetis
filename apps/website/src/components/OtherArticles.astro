@@ -1,7 +1,42 @@
+---
+import type { Lang } from "@/config/languages";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const content: Record<Lang, { title: string }> = {
+  en: {
+    title: "More Articles on Achilles Rupture Recovery",
+  },
+  de: {
+    title: "Mehr Artikel über Achilles-Ruptur-Wiederherstellung",
+  },
+  es: {
+    title:
+      "Más artículos sobre la recuperación de la ruptura del tendón de Aquiles",
+  },
+  fr: {
+    title:
+      "Plus d'articles sur la récupération de la rupture du tendon d'Achille",
+  },
+  it: {
+    title:
+      "Altri articoli sulla riparazione della rottura del tendine di Achille",
+  },
+};
+
+// Get the localized route for "achilles-ruptures"
+const route = getRouteBySlugAndLanguage("achilles-ruptures", lang);
+---
+
 <section class="flex flex-col gap-4 px-8 py-24">
   <div class="text-xl text-center underline underline-offset-4">
-    <a href="../achilles-ruptures">
-      <h3>More Articles on Achilles Rupture Recovery</h3>
+    <a href={route?.href || `/${lang}/achilles-ruptures`}>
+      <h3>{content[lang].title}</h3>
     </a>
   </div>
 </section>

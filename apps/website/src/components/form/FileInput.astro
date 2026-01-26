@@ -1,17 +1,21 @@
 ---
-import { inputStyle } from './Input.astro'
-import { cn } from '../../lib/utils'
-import Label from './Label.astro'
-// class="block w-full text-sm border rounded-sm text-gray-900 border-black cursor-pointer bg-gray-50 focus:outline-none"
-// class="block w-full text-gray-900 border border-gray-300 rounded-sm cursor-pointer bg-gray-50 focus:outline-none ring-1 ring-transparent focus:ring-primary focus:border-primary hover:ring-gray-400 hover:border-gray-400"
+import { inputStyle } from "./Input.astro";
+import { cn } from "../../lib/utils";
+import Label from "./Label.astro";
 ---
 
 <Label labelFor="upload">Upload Images</Label>
-<input
-    class={cn(inputStyle, 'p-0')}
-    aria-describedby="return_image_help"
-    id="large_size"
-    type="file"
-    name="upload"
-    multiple
-/>
+<div class="relative">
+    <input
+        class={cn(
+            inputStyle,
+            "p-0 file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:ml-2 file:border-0 file:text-sm file:font-medium file:bg-primary file:text-white hover:file:bg-primary/90 file:cursor-pointer cursor-pointer",
+        )}
+        aria-describedby="return_image_help"
+        id="upload"
+        type="file"
+        name="upload"
+        multiple
+        accept="image/*"
+    />
+</div>

@@ -1,0 +1,310 @@
+---
+import HighlightedParagraph from "@/components/HighlightedParagraph.tsx";
+import { ExternalLink } from "lucide-astro";
+
+import type { Lang } from "@/config/languages.ts";
+import type { HighlightedParagraphProps } from "@/components/HighlightedParagraph.tsx";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content: Record<
+    Lang,
+    {
+        title: HighlightedParagraphProps;
+        subtitle: string;
+        cards: {
+            title: HighlightedParagraphProps;
+            description: string;
+            quote: string;
+            link?: { text: string; href: string };
+        }[];
+    }
+> = {
+    en: {
+        title: [
+            {
+                text: "Finally Sleep Comfortably During Recovery",
+                highlighted: false,
+            },
+        ],
+        subtitle: "The lightweight alternative to sleeping in your heavy boot",
+        cards: [
+            {
+                title: [{ text: "Sleep Better Tonight", highlighted: false }],
+                description: "",
+                quote: "The boot was making sleep impossible! It felt like a torture chamber at night.",
+            },
+            {
+                title: [{ text: "Light & Breathable", highlighted: false }],
+                description: "",
+                quote: "So much easier than the big boot. Finally lets your leg breathe!",
+            },
+            {
+                title: [
+                    { text: "Safe Achilles Healing", highlighted: false },
+                ],
+                description: "",
+                quote: "Works perfect to keep my foot in plantar flexion. Sleep is critical to recovery.",
+                link: {
+                    text: "3000 patients, no complications",
+                    href: "/evidence/safety",
+                },
+            },
+            {
+                title: [{ text: "Surgeon-Approved Design", highlighted: false }],
+                description: "",
+                quote: "My surgeon, who also has an MA in engineering, gave his approval after reviewing the design.",
+                link: {
+                    text: "Read more clinician reviews",
+                    href: "/reviews?filter=clinician",
+                },
+            },
+        ],
+    },
+    de: {
+        title: [
+            {
+                text: "Warum Patienten die Nachtschiene wählen",
+                highlighted: false,
+            },
+        ],
+        subtitle: "Die leichte Alternative zum Schlafen im schweren Stiefel",
+        cards: [
+            {
+                title: [
+                    {
+                        text: "Bequemer Schlaf",
+                        highlighted: false,
+                    },
+                ],
+                description: "",
+                quote: "Der Stiefel machte das Schlafen unmöglich! Es fühlte sich nachts wie eine Folterkammer an.",
+            },
+            {
+                title: [{ text: "Leicht & Atmungsaktiv", highlighted: false }],
+                description: "",
+                quote: "So viel einfacher als der große Stiefel. Lässt Ihr Bein endlich atmen!",
+            },
+            {
+                title: [
+                    { text: "Erhält Heilungsposition", highlighted: false },
+                ],
+                description: "",
+                quote: "Funktioniert perfekt, um meinen Fuß in Plantarflexion zu halten.",
+                link: {
+                    text: "5.000+ Patienten, keine Komplikationen",
+                    href: "/evidence/safety",
+                },
+            },
+            {
+                title: [
+                    {
+                        text: "Chirurgisch genehmigt",
+                        highlighted: false,
+                    },
+                ],
+                description: "",
+                quote: "Mein Chirurg gab seine Zustimmung nach der Überprüfung des Designs.",
+                link: {
+                    text: "Kliniker-Bewertungen lesen",
+                    href: "/reviews?filter=clinician",
+                },
+            },
+        ],
+    },
+    fr: {
+        title: [
+            {
+                text: "Pourquoi les patients choisissent l'attelle de nuit",
+                highlighted: false,
+            },
+        ],
+        subtitle: "L'alternative légère pour dormir dans votre botte lourde",
+        cards: [
+            {
+                title: [{ text: "Sommeil confortable", highlighted: false }],
+                description: "",
+                quote: "La botte rendait le sommeil impossible ! On aurait dit une chambre de torture la nuit.",
+            },
+            {
+                title: [{ text: "Léger et respirant", highlighted: false }],
+                description: "",
+                quote: "Tellement plus facile que la grosse botte. Laisse enfin votre jambe respirer !",
+            },
+            {
+                title: [
+                    {
+                        text: "Maintient la position de guérison",
+                        highlighted: false,
+                    },
+                ],
+                description: "",
+                quote: "Fonctionne parfaitement pour maintenir mon pied en flexion plantaire.",
+                link: {
+                    text: "5 000+ patients, aucune complication",
+                    href: "/evidence/safety",
+                },
+            },
+            {
+                title: [
+                    {
+                        text: "Approuvé par les chirurgiens",
+                        highlighted: false,
+                    },
+                ],
+                description: "",
+                quote: "Mon chirurgien a donné son approbation après avoir examiné la conception.",
+                link: {
+                    text: "Lire les avis de cliniciens",
+                    href: "/reviews?filter=clinician",
+                },
+            },
+        ],
+    },
+    es: {
+        title: [
+            {
+                text: "Por qué los pacientes eligen la férula nocturna",
+                highlighted: false,
+            },
+        ],
+        subtitle: "La alternativa ligera para dormir con su pesada bota",
+        cards: [
+            {
+                title: [{ text: "Sueño cómodo", highlighted: false }],
+                description: "",
+                quote: "¡La bota hacía imposible dormir! Parecía una cámara de tortura por la noche.",
+            },
+            {
+                title: [{ text: "Ligero y Transpirable", highlighted: false }],
+                description: "",
+                quote: "Mucho más fácil que la bota grande. ¡Por fin deja respirar a tu pierna!",
+            },
+            {
+                title: [
+                    {
+                        text: "Mantiene la posición de curación",
+                        highlighted: false,
+                    },
+                ],
+                description: "",
+                quote: "Funciona perfectamente para mantener mi pie en flexión plantar.",
+                link: {
+                    text: "5.000+ pacientes, sin complicaciones",
+                    href: "/evidence/safety",
+                },
+            },
+            {
+                title: [
+                    {
+                        text: "Aprobado por cirujanos",
+                        highlighted: false,
+                    },
+                ],
+                description: "",
+                quote: "Mi cirujano dio su aprobación tras revisar el diseño.",
+                link: {
+                    text: "Leer opiniones de médicos",
+                    href: "/reviews?filter=clinician",
+                },
+            },
+        ],
+    },
+    it: {
+        title: [
+            {
+                text: "Perché i pazienti scelgono la stecca notturna",
+                highlighted: false,
+            },
+        ],
+        subtitle: "L'alternativa leggera al dormire con il pesante stivale",
+        cards: [
+            {
+                title: [{ text: "Sonno confortevole", highlighted: false }],
+                description: "",
+                quote: "Lo stivale rendeva impossibile dormire! Sembrava una camera di tortura di notte.",
+            },
+            {
+                title: [{ text: "Leggero e Traspirante", highlighted: false }],
+                description: "",
+                quote: "Molto più facile del grande stivale. Finalmente lascia respirare la tua gamba!",
+            },
+            {
+                title: [
+                    {
+                        text: "Mantiene la posizione di guarigione",
+                        highlighted: false,
+                    },
+                ],
+                description: "",
+                quote: "Funziona perfettamente per mantenere il mio piede in flessione plantare.",
+                link: {
+                    text: "5.000+ pazienti, nessuna complicazione",
+                    href: "/evidence/safety",
+                },
+            },
+            {
+                title: [
+                    {
+                        text: "Approvato dai chirurghi",
+                        highlighted: false,
+                    },
+                ],
+                description: "",
+                quote: "Il mio chirurgo ha dato la sua approvazione dopo aver esaminato il design.",
+                link: {
+                    text: "Leggi recensioni di medici",
+                    href: "/reviews?filter=clinician",
+                },
+            },
+        ],
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<div class="bg-gradient-to-t from-primary/15 to-white h-24"></div>
+<div class="bg-primary/15 py-8 w-full">
+    <div class="mx-auto px-4 container">
+        <div class="mx-auto mb-12 max-w-3xl text-center">
+            <h2
+                class="mb-4 font-semibold text-neutral-950 dark:text-neutral-50 text-3xl md:text-4xl leading-[120%]"
+            >
+                <HighlightedParagraph paragraph={currentContent.title} />
+            </h2>
+            <p
+                class="text-gray-800 dark:text-neutral-200 text-lg leading-relaxed"
+            >
+                {currentContent.subtitle}
+            </p>
+        </div>
+
+        <div class="gap-8 grid md:grid-cols-2 mx-auto max-w-4xl">
+            {
+                currentContent.cards.map((card) => (
+                    <div class="group bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg p-6 rounded-lg transition-all duration-300">
+                        <h3 class="mb-3 font-semibold text-neutral-900 dark:text-neutral-50 text-xl">
+                            <HighlightedParagraph paragraph={card.title} />
+                        </h3>
+                        <p class="text-gray-600 dark:text-neutral-400">
+                            {card.description}
+                            <span class="italic">"{card.quote}"</span>
+                        </p>
+                        {card.link && (
+                            <a
+                                href={card.link.href}
+                                class="inline-flex items-center gap-1 mt-2 text-primary hover:text-primary/80 underline underline-offset-2 transition-colors"
+                            >
+                                <span>{card.link.text}</span>
+                                <ExternalLink class="w-4 h-4" />
+                            </a>
+                        )}
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</div>
+
+<div class="bg-gradient-to-b from-primary/15 to-white h-24"></div>

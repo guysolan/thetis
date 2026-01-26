@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "description": "Reddit Bot Multiple Accounts Configuration",
+  "accounts": [
+    {
+      "client_id": "IJo0XVRmMH3PXWHI4AmjWQ",
+      "client_secret": "L_OwW1P7LHfG8EHN-sTPtrt8mVDbNw",
+      "username": "Signal_Paper_8983",
+      "password": "Newspaper202!",
+      "api_key": "AIzaSyChh5l3KJZKmRI1A61u2rwC6ncrYWCpqMM"
+    }
+  ]
+}

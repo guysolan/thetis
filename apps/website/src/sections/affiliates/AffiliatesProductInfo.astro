@@ -1,0 +1,276 @@
+---
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Why Patients and Clinicians Love the Night Splint",
+        subtitle: "Trusted by Healthcare Professionals & Patients Worldwide",
+        patientQuote1: "Total game changer for sleeping while recovering!",
+        patientQuote1Author: "Chad",
+        patientQuote1Body:
+            "Finally got the restful sleep I needed. The cast and heavy dirty boot made sleep tough. If you're recovering from an achilles rupture buy this immediately.",
+        patientQuote2: "Life Saver!",
+        patientQuote2Author: "Brandon",
+        patientQuote2Body:
+            "This worked great and kept me from having to wear my big clunky walking boot to bed! So glad I found this. I couldn't sleep with that walking boot at night!! Great product.",
+        clinicianQuote1:
+            "A fantastic alternative to uncomfortable hospital boots for night wear",
+        clinicianQuote1Author: "Mr James Davis",
+        clinicianQuote1Role:
+            "Past President of the British Orthopaedic Foot and Ankle Society",
+        clinicianQuote1Body:
+            "When I tore my own Achilles tendon, the hardest part was wearing the hospital boot in bed. This splint is certain to improve the recovery experience for patients.",
+        clinicianQuote2:
+            "Setting a new standard in Achilles tendon rehabilitation",
+        clinicianQuote2Author: "Dr Robbie Ray",
+        clinicianQuote2Role: "Foot and Ankle Surgeon",
+        clinicianQuote2Body:
+            "A game-changer in my practice. The splint's design prioritizes both comfort and functionality, enabling controlled, progressive recovery.",
+        cta: "Learn More About the Product",
+        ctaLink: "/achilles-rupture-splint",
+    },
+    de: {
+        title: "Warum Patienten und Ärzte die Nachtschiene lieben",
+        subtitle: "Vertraut von Gesundheitsfachkräften & Patienten weltweit",
+        patientQuote1:
+            "Ein totaler Wendepunkt für den Schlaf während der Genesung!",
+        patientQuote1Author: "Chad",
+        patientQuote1Body:
+            "Endlich bekam ich den erholsamen Schlaf, den ich brauchte. Der Gips und der schwere, schmutzige Stiefel machten den Schlaf schwierig. Wenn Sie sich von einer Achillessehnenruptur erholen, kaufen Sie dies sofort.",
+        patientQuote2: "Lebensretter!",
+        patientQuote2Author: "Brandon",
+        patientQuote2Body:
+            "Das hat großartig funktioniert und mich davon abgehalten, meinen großen, klobigen Gehstiefel ins Bett zu tragen! So froh, dass ich das gefunden habe. Ich konnte mit diesem Gehstiefel nachts nicht schlafen!! Großartiges Produkt.",
+        clinicianQuote1:
+            "Eine fantastische Alternative zu unbequemen Krankenhausstiefeln für die Nacht",
+        clinicianQuote1Author: "Mr James Davis",
+        clinicianQuote1Role:
+            "Ehemaliger Präsident der British Orthopaedic Foot and Ankle Society",
+        clinicianQuote1Body:
+            "Als ich mir meine eigene Achillessehne riss, war das Schwierigste, den Krankenhausstiefel im Bett zu tragen. Diese Schiene wird das Genesungserlebnis für Patienten mit Sicherheit verbessern.",
+        clinicianQuote2:
+            "Ein neuer Standard in der Rehabilitation von Achillessehnen",
+        clinicianQuote2Author: "Dr Robbie Ray",
+        clinicianQuote2Role: "Fuß- und Sprunggelenkchirurg",
+        clinicianQuote2Body:
+            "Ein Wendepunkt in meiner Praxis. Das Design der Schiene priorisiert sowohl Komfort als auch Funktionalität und ermöglicht eine kontrollierte, fortschreitende Genesung.",
+        cta: "Mehr über das Produkt erfahren",
+        ctaLink: "/achilles-rupture-splint",
+    },
+    fr: {
+        title: "Pourquoi les Patients et les Cliniciens Adorent l'Attelle de Nuit",
+        subtitle:
+            "Approuvé par les Professionnels de la Santé & Patients du Monde Entier",
+        patientQuote1:
+            "Un changement total pour dormir pendant la récupération!",
+        patientQuote1Author: "Chad",
+        patientQuote1Body:
+            "J'ai enfin eu le sommeil réparateur dont j'avais besoin. Le plâtre et la botte lourde et sale ont rendu le sommeil difficile. Si vous vous remettez d'une rupture d'Achille, achetez ceci immédiatement.",
+        patientQuote2: "Sauveur de Vie!",
+        patientQuote2Author: "Brandon",
+        patientQuote2Body:
+            "Cela a très bien fonctionné et m'a évité de devoir porter ma grosse botte de marche encombrante au lit! Si content d'avoir trouvé ça. Je ne pouvais pas dormir avec cette botte de marche la nuit!! Excellent produit.",
+        clinicianQuote1:
+            "Une alternative fantastique aux bottes d'hôpital inconfortables pour la nuit",
+        clinicianQuote1Author: "Mr James Davis",
+        clinicianQuote1Role:
+            "Ancien président de la British Orthopaedic Foot and Ankle Society",
+        clinicianQuote1Body:
+            "Quand je me suis déchiré le tendon d'Achille, le plus difficile a été de porter la botte d'hôpital au lit. Cette attelle améliorera certainement l'expérience de récupération pour les patients.",
+        clinicianQuote2:
+            "Établir une nouvelle norme en matière de rééducation du tendon d'Achille",
+        clinicianQuote2Author: "Dr Robbie Ray",
+        clinicianQuote2Role: "Chirurgien du pied et de la cheville",
+        clinicianQuote2Body:
+            "Un changement de donne dans ma pratique. La conception de l'attelle privilégie à la fois le confort et la fonctionnalité, permettant une récupération contrôlée et progressive.",
+        cta: "En Savoir Plus sur le Produit",
+        ctaLink: "/achilles-rupture-splint",
+    },
+    es: {
+        title: "Por Qué los Pacientes y los Clínicos Aman la Férula Nocturna",
+        subtitle:
+            "Confiado por Profesionales de la Salud & Pacientes en Todo el Mundo",
+        patientQuote1: "¡Un cambio total para dormir durante la recuperación!",
+        patientQuote1Author: "Chad",
+        patientQuote1Body:
+            "Finalmente obtuve el sueño reparador que necesitaba. El yeso y la bota pesada y sucia hicieron que dormir fuera difícil. Si te estás recuperando de una ruptura de Aquiles, compra esto inmediatamente.",
+        patientQuote2: "¡Salvador de Vidas!",
+        patientQuote2Author: "Brandon",
+        patientQuote2Body:
+            "¡Esto funcionó muy bien y me evitó tener que usar mi bota de caminar grande y torpe en la cama! Tan contento de haber encontrado esto. ¡¡No podía dormir con esa bota de caminar por la noche!! Excelente producto.",
+        clinicianQuote1:
+            "Una fantástica alternativa a las incómodas botas de hospital para usar de noche",
+        clinicianQuote1Author: "Mr James Davis",
+        clinicianQuote1Role:
+            "Ex presidente de la Sociedad Británica de Pie y Tobillo Ortopédico",
+        clinicianQuote1Body:
+            "Cuando me rompí el tendón de Aquiles, la parte más difícil fue usar la bota del hospital en la cama. Esta férula seguramente mejorará la experiencia de recuperación de los pacientes.",
+        clinicianQuote2:
+            "Estableciendo un nuevo estándar en la rehabilitación del tendón de Aquiles",
+        clinicianQuote2Author: "Dr Robbie Ray",
+        clinicianQuote2Role: "Cirujano de pie y tobillo",
+        clinicianQuote2Body:
+            "Un cambio de juego en mi práctica. El diseño de la férula prioriza tanto la comodidad como la funcionalidad, permitiendo una recuperación controlada y progresiva.",
+        cta: "Aprende Más Sobre el Producto",
+        ctaLink: "/achilles-rupture-splint",
+    },
+    it: {
+        title: "Perché i Pazienti e i Clinici Amano il Tutore Notturno",
+        subtitle:
+            "Fidato da Professionisti Sanitari & Pazienti in Tutto il Mondo",
+        patientQuote1: "Un cambio totale per dormire durante la guarigione!",
+        patientQuote1Author: "Chad",
+        patientQuote1Body:
+            "Finalmente ho ottenuto il sonno ristoratore di cui avevo bisogno. Il gesso e lo stivale pesante e sporco hanno reso difficile dormire. Se ti stai riprendendo da una rottura di Achille, compra questo immediatamente.",
+        patientQuote2: "Salvatore di Vita!",
+        patientQuote2Author: "Brandon",
+        patientQuote2Body:
+            "Questo ha funzionato benissimo e mi ha evitato di dover indossare il mio grosso stivale da camminata ingombrante a letto! Così felice di aver trovato questo. Non riuscivo a dormire con quello stivale da camminata di notte!! Ottimo prodotto.",
+        clinicianQuote1:
+            "Una fantastica alternativa alle scomode botte ospedaliere per la notte",
+        clinicianQuote1Author: "Mr James Davis",
+        clinicianQuote1Role:
+            "Ex Presidente della Società Britannica di Piede e Caviglia Ortopedica",
+        clinicianQuote1Body:
+            "Quando mi sono rotto il tendine di Achille, la parte più difficile era indossare la bota dell'ospedale nel letto. Questa férula certamente migliorerà l'esperienza di recupero dei pazienti.",
+        clinicianQuote2:
+            "Stabilendo un nuovo standard nella riabilitazione del tendine di Achille",
+        clinicianQuote2Author: "Dr Robbie Ray",
+        clinicianQuote2Role: "Chirurgo del piede e della caviglia",
+        clinicianQuote2Body:
+            "Un cambio di gioco nella mia pratica. Il design della férula priorizza sia il comfort che la funzionalità, permettendo una guarigione controllata e progressiva.",
+        cta: "Scopri di Più sul Prodotto",
+        ctaLink: "/achilles-rupture-splint",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<section class="mx-auto px-4 py-16 max-w-7xl container">
+    <div class="space-y-12">
+        <div class="text-center">
+            <p class="mb-2 font-semibold text-primary text-lg">
+                {currentContent.subtitle}
+            </p>
+            <h2
+                class="mb-4 font-semibold text-neutral-950 dark:text-neutral-50 text-3xl md:text-4xl"
+            >
+                {currentContent.title}
+            </h2>
+        </div>
+
+        <!-- Patient Quotes -->
+        <div class="gap-8 grid md:grid-cols-2">
+            <div
+                class="bg-white dark:bg-neutral-900 shadow-sm p-6 border border-gray-200 dark:border-neutral-800 rounded-lg"
+            >
+                <div class="flex gap-1 mb-4">
+                    {
+                        Array.from({ length: 5 }).map(() => (
+                            <span class="text-yellow-400 text-xl">★</span>
+                        ))
+                    }
+                </div>
+                <h3
+                    class="mb-3 font-semibold text-neutral-950 dark:text-neutral-50 text-xl"
+                >
+                    "{currentContent.patientQuote1}"
+                </h3>
+                <p
+                    class="mb-4 text-gray-700 dark:text-neutral-300 leading-relaxed"
+                >
+                    {currentContent.patientQuote1Body}
+                </p>
+                <p class="font-semibold text-gray-600 dark:text-neutral-400">
+                    — {currentContent.patientQuote1Author}
+                </p>
+            </div>
+
+            <div
+                class="bg-white dark:bg-neutral-900 shadow-sm p-6 border border-gray-200 dark:border-neutral-800 rounded-lg"
+            >
+                <div class="flex gap-1 mb-4">
+                    {
+                        Array.from({ length: 5 }).map(() => (
+                            <span class="text-yellow-400 text-xl">★</span>
+                        ))
+                    }
+                </div>
+                <h3
+                    class="mb-3 font-semibold text-neutral-950 dark:text-neutral-50 text-xl"
+                >
+                    "{currentContent.patientQuote2}"
+                </h3>
+                <p
+                    class="mb-4 text-gray-700 dark:text-neutral-300 leading-relaxed"
+                >
+                    {currentContent.patientQuote2Body}
+                </p>
+                <p class="font-semibold text-gray-600 dark:text-neutral-400">
+                    — {currentContent.patientQuote2Author}
+                </p>
+            </div>
+        </div>
+
+        <!-- Clinician Quotes -->
+        <div class="gap-8 grid md:grid-cols-2">
+            <div
+                class="bg-primary/5 dark:bg-primary/10 shadow-sm p-6 border border-primary/20 dark:border-primary/30 rounded-lg"
+            >
+                <h3
+                    class="mb-3 font-semibold text-neutral-950 dark:text-neutral-50 text-xl"
+                >
+                    "{currentContent.clinicianQuote1}"
+                </h3>
+                <p
+                    class="mb-4 text-gray-700 dark:text-neutral-300 leading-relaxed"
+                >
+                    {currentContent.clinicianQuote1Body}
+                </p>
+                <div>
+                    <p class="font-semibold text-primary">
+                        {currentContent.clinicianQuote1Author}
+                    </p>
+                    <p class="text-gray-600 dark:text-neutral-400 text-sm">
+                        {currentContent.clinicianQuote1Role}
+                    </p>
+                </div>
+            </div>
+
+            <div
+                class="bg-primary/5 dark:bg-primary/10 shadow-sm p-6 border border-primary/20 dark:border-primary/30 rounded-lg"
+            >
+                <h3
+                    class="mb-3 font-semibold text-neutral-950 dark:text-neutral-50 text-xl"
+                >
+                    "{currentContent.clinicianQuote2}"
+                </h3>
+                <p
+                    class="mb-4 text-gray-700 dark:text-neutral-300 leading-relaxed"
+                >
+                    {currentContent.clinicianQuote2Body}
+                </p>
+                <div>
+                    <p class="font-semibold text-primary">
+                        {currentContent.clinicianQuote2Author}
+                    </p>
+                    <p class="text-gray-600 dark:text-neutral-400 text-sm">
+                        {currentContent.clinicianQuote2Role}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a
+                href={currentContent.ctaLink}
+                class="inline-block font-semibold text-primary hover:underline"
+            >
+                {currentContent.cta} →
+            </a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,323 @@
+---
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import HighlightedWord from "@/components/HighlightedWord";
+import type { Lang } from "@/config/languages.ts";
+import {
+    Moon,
+    GraduationCap,
+    BookOpen,
+    ShoppingCart,
+    ExternalLink,
+} from "lucide-react";
+import { COURSE_URL } from "@/lib/env";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        tagline: "How We Help",
+        title: {
+            part1: "Products + Education for",
+            highlight: "Complete Recovery",
+        },
+        description:
+            "We don't just sell a splint — we guide you through your entire recovery journey with free expert-led courses and innovative products designed for real comfort.",
+        products: {
+            icon: "moon",
+            title: "Achilles Rupture Splint",
+            description:
+                "Our patented Thetis Night Splint lets you ditch the heavy boot at bedtime. Sleep comfortably while keeping your Achilles protected in the correct healing position.",
+            benefits: [
+                "Lightweight & breathable",
+                "Maintains correct angle",
+                "Washable liner",
+                "Also works for showering",
+            ],
+            cta: "Shop Night Splint",
+            link: "/achilles-rupture-splint",
+        },
+        courses: {
+            icon: "graduation",
+            title: "Achilles Rupture Courses",
+            description:
+                "Week-by-week guidance from injury to full strength. Learn what to expect, avoid common mistakes, and understand your treatment options.",
+            benefits: [
+                "Standard Course: 31 structured lessons covering all recovery phases",
+                "Premium Course: Advanced recovery strategies for athletes",
+                "FAQs & Recovery Phases: Articles answering common questions",
+            ],
+            cta: "View Recovery Course",
+            link: `${COURSE_URL}/standard`,
+            external: true,
+        },
+    },
+    de: {
+        tagline: "Wie wir helfen",
+        title: {
+            part1: "Produkte + Bildung für",
+            highlight: "vollständige Genesung",
+        },
+        description:
+            "Wir verkaufen nicht nur eine Schiene — wir begleiten Sie durch Ihre gesamte Genesungsreise mit kostenlosen Expertenkursen und innovativen Produkten für echten Komfort.",
+        products: {
+            icon: "moon",
+            title: "Genesungsprodukte",
+            description:
+                "Unsere patentierte Thetis Nachtschiene lässt Sie den schweren Stiefel nachts ablegen. Schlafen Sie bequem, während Ihre Achillessehne in der richtigen Heilungsposition geschützt bleibt.",
+            benefits: [
+                "Leicht & atmungsaktiv",
+                "Hält den richtigen Winkel",
+                "Waschbares Futter",
+                "Auch zum Duschen geeignet",
+            ],
+            cta: "Nachtschiene kaufen",
+            link: "/achilles-rupture-splint",
+        },
+        courses: {
+            icon: "graduation",
+            title: "Genesungskurse",
+            description:
+                "Wöchentliche Anleitung von der Verletzung bis zur vollen Stärke. Erfahren Sie, was Sie erwartet, vermeiden Sie häufige Fehler und verstehen Sie Ihre Behandlungsoptionen.",
+            benefits: [
+                "Standard-Kurs: 31 strukturierte Lektionen für alle Genesungsphasen",
+                "Premium-Kurs: Fortgeschrittene Genesungsstrategien für Sportler",
+                "FAQs & Genesungsphasen: Artikel zu häufigen Fragen",
+            ],
+            cta: "Genesungskurs ansehen",
+            link: "https://guide.thetismedical.com/standard",
+            external: true,
+        },
+    },
+    fr: {
+        tagline: "Comment nous aidons",
+        title: {
+            part1: "Produits + Éducation pour une",
+            highlight: "récupération complète",
+        },
+        description:
+            "Nous ne vendons pas seulement une attelle — nous vous guidons tout au long de votre parcours de récupération avec des cours gratuits d'experts et des produits innovants conçus pour un vrai confort.",
+        products: {
+            icon: "moon",
+            title: "Produits de récupération",
+            description:
+                "Notre attelle de nuit Thetis brevetée vous permet d'enlever la lourde botte au coucher. Dormez confortablement tout en gardant votre Achille protégé dans la bonne position de guérison.",
+            benefits: [
+                "Léger & respirant",
+                "Maintient le bon angle",
+                "Doublure lavable",
+                "Aussi pour la douche",
+            ],
+            cta: "Acheter l'attelle de nuit",
+            link: "/achilles-rupture-splint",
+        },
+        courses: {
+            icon: "graduation",
+            title: "Cours de récupération",
+            description:
+                "Guide semaine par semaine de la blessure à la pleine forme. Apprenez à quoi vous attendre, évitez les erreurs courantes et comprenez vos options de traitement.",
+            benefits: [
+                "Cours Standard : 31 leçons structurées couvrant toutes les phases de récupération",
+                "Cours Premium : Stratégies de récupération avancées pour les athlètes",
+                "FAQs & Phases de récupération : Articles répondant aux questions courantes",
+            ],
+            cta: "Voir le cours de récupération",
+            link: "https://guide.thetismedical.com/standard",
+            external: true,
+        },
+    },
+    es: {
+        tagline: "Cómo ayudamos",
+        title: {
+            part1: "Productos + Educación para una",
+            highlight: "recuperación completa",
+        },
+        description:
+            "No solo vendemos una férula — te guiamos a través de todo tu viaje de recuperación con cursos gratuitos de expertos y productos innovadores diseñados para comodidad real.",
+        products: {
+            icon: "moon",
+            title: "Productos de recuperación",
+            description:
+                "Nuestra férula nocturna Thetis patentada te permite dejar la pesada bota a la hora de dormir. Duerme cómodamente mientras tu Aquiles se mantiene protegido en la posición correcta de curación.",
+            benefits: [
+                "Ligera y transpirable",
+                "Mantiene el ángulo correcto",
+                "Forro lavable",
+                "También para ducharse",
+            ],
+            cta: "Comprar férula nocturna",
+            link: "/achilles-rupture-splint",
+        },
+        courses: {
+            icon: "graduation",
+            title: "Cursos de recuperación",
+            description:
+                "Guía semana a semana desde la lesión hasta la plena forma. Aprende qué esperar, evita errores comunes y comprende tus opciones de tratamiento.",
+            benefits: [
+                "Curso Estándar: 31 lecciones estructuradas cubriendo todas las fases de recuperación",
+                "Curso Premium: Estrategias de recuperación avanzadas para atletas",
+                "FAQs y Fases de Recuperación: Artículos respondiendo preguntas comunes",
+            ],
+            cta: "Ver curso de recuperación",
+            link: "https://guide.thetismedical.com/standard",
+            external: true,
+        },
+    },
+    it: {
+        tagline: "Come aiutiamo",
+        title: {
+            part1: "Prodotti + Formazione per un",
+            highlight: "recupero completo",
+        },
+        description:
+            "Non vendiamo solo un tutore — ti guidiamo attraverso l'intero percorso di recupero con corsi gratuiti di esperti e prodotti innovativi progettati per un vero comfort.",
+        products: {
+            icon: "moon",
+            title: "Prodotti per il recupero",
+            description:
+                "Il nostro tutore notturno Thetis brevettato ti permette di togliere il pesante stivale prima di dormire. Dormi comodamente mentre il tuo Achille resta protetto nella corretta posizione di guarigione.",
+            benefits: [
+                "Leggero e traspirante",
+                "Mantiene l'angolo corretto",
+                "Fodera lavabile",
+                "Anche per la doccia",
+            ],
+            cta: "Acquista tutore notturno",
+            link: "/achilles-rupture-splint",
+        },
+        courses: {
+            icon: "graduation",
+            title: "Corsi di recupero",
+            description:
+                "Guida settimana per settimana dall'infortunio alla piena forma. Impara cosa aspettarti, evita errori comuni e comprendi le tue opzioni di trattamento.",
+            benefits: [
+                "Corso Standard: 31 lezioni strutturate che coprono tutte le fasi di recupero",
+                "Corso Premium: Strategie di recupero avanzate per atleti",
+                "FAQ e Fasi di Recupero: Articoli che rispondono a domande comuni",
+            ],
+            cta: "Vedi corso di recupero",
+            link: "https://guide.thetismedical.com/standard",
+            external: true,
+        },
+    },
+};
+
+const t = content[lang as keyof typeof content];
+---
+
+<section class="py-16 md:py-24">
+    <div class="mx-auto px-4 max-w-6xl">
+        <!-- Header -->
+        <div class="mb-12 text-center">
+            <p
+                class="mb-4 font-medium text-primary text-sm uppercase tracking-widest"
+            >
+                {t.tagline}
+            </p>
+            <h2
+                class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl"
+            >
+                {t.title.part1}
+                <HighlightedWord>{t.title.highlight}</HighlightedWord>
+            </h2>
+            <p
+                class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg"
+            >
+                {t.description}
+            </p>
+        </div>
+
+        <!-- Two Column Cards -->
+        <div class="gap-8 grid md:grid-cols-2">
+            <!-- Products Card -->
+            <div
+                class="bg-gradient-to-br from-primary/5 to-primary/10 p-8 border border-primary/20 rounded-2xl"
+            >
+                <div
+                    class="flex justify-center items-center bg-primary/20 mb-6 rounded-full w-14 h-14"
+                >
+                    <Moon className="w-7 h-7 text-primary" />
+                </div>
+                <h3
+                    class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
+                >
+                    {t.products.title}
+                </h3>
+                <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+                    {t.products.description}
+                </p>
+                <ul class="space-y-2 mb-6">
+                    {
+                        t.products.benefits.map((benefit) => (
+                            <li class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+                                <span class="text-primary">✓</span>
+                                {benefit}
+                            </li>
+                        ))
+                    }
+                </ul>
+                <a
+                    href={t.products.link}
+                    class={cn(
+                        buttonVariants({ variant: "default", size: "lg" }),
+                        "gap-2 w-full sm:w-auto justify-center",
+                    )}
+                >
+                    <ShoppingCart className="w-4 h-4" />
+                    {t.products.cta}
+                </a>
+            </div>
+
+            <!-- Courses Card -->
+            <div
+                class="bg-gradient-to-br from-blue-50 dark:from-blue-950/30 to-blue-100 dark:to-blue-900/30 p-8 border border-blue-200 dark:border-blue-800 rounded-2xl"
+            >
+                <div
+                    class="flex justify-center items-center bg-blue-200 dark:bg-blue-800 mb-6 rounded-full w-14 h-14"
+                >
+                    <GraduationCap
+                        className="w-7 h-7 text-blue-600 dark:text-blue-300"
+                    />
+                </div>
+                <h3
+                    class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
+                >
+                    {t.courses.title}
+                </h3>
+                <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+                    {t.courses.description}
+                </p>
+                <ul class="space-y-2 mb-6">
+                    {
+                        t.courses.benefits.map((benefit) => (
+                            <li class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+                                <span class="text-blue-600 dark:text-blue-400">
+                                    ✓
+                                </span>
+                                {benefit}
+                            </li>
+                        ))
+                    }
+                </ul>
+                <a
+                    href={t.courses.link}
+                    target={t.courses.external ? "_blank" : undefined}
+                    rel={t.courses.external ? "noopener noreferrer" : undefined}
+                    class={cn(
+                        buttonVariants({ variant: "outline", size: "lg" }),
+                        "gap-2 w-full sm:w-auto justify-center border-blue-300 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/50",
+                    )}
+                >
+                    {
+                        t.courses.external ? (
+                            <ExternalLink className="w-4 h-4" />
+                        ) : (
+                            <BookOpen className="w-4 h-4" />
+                        )
+                    }
+                    {t.courses.cta}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

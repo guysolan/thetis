@@ -1,0 +1,30 @@
+{
+  "overallScore": 9,
+  "accuracy": {
+    "score": 9,
+    "feedback": "The image accurately represents the comparison of different walking boots and their impact on Achilles tendon load. The graph provides a clear visual representation of force differences.",
+    "issues": []
+  },
+  "style": {
+    "score": 9,
+    "feedback": "The visual style is consistent with patient education materials. The colors and layout are professional and easy to understand.",
+    "consistency": [
+      "Consistent with course content",
+      "Professional layout"
+    ]
+  },
+  "patientFriendliness": {
+    "score": 9,
+    "feedback": "The image is clear and easy to understand for patients. It effectively communicates the differences in force control among the boots.",
+    "strengths": [
+      "Clear comparison",
+      "Simple graph"
+    ],
+    "improvements": []
+  },
+  "recommendations": [
+    "Ensure all terms used are explained in the course content",
+    "Consider adding brief explanations of each boot type"
+  ],
+  "imagePath": "/Users/guysolan/Code/thetis/apps/course/src/assets/boot-force-comparison.png"
+}

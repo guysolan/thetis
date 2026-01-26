@@ -1,29 +1,29 @@
 ---
-import { buttonVariants } from '../components/ui/button'
-import Layout from '../layouts/Layout.astro'
-import EmailInput from '@/components/form/EmailInput.astro'
-import IdInput from '@/components/form/IdInput.astro'
-import TextArea from '@/components/form/TextArea.astro'
-import FileInput from '@/components/form/FileInput.astro'
-import HelperText from '@/components/form/HelperText.astro'
-import Label from '@/components/form/Label.astro'
-import Select from '@/components/form/Select.astro'
+import { buttonVariants } from "../components/ui/button";
+import Layout from "../layouts/Layout.astro";
+import EmailInput from "@/components/form/EmailInput.astro";
+import IdInput from "@/components/form/IdInput.astro";
+import TextArea from "@/components/form/TextArea.astro";
+import FileInput from "@/components/form/FileInput.astro";
+import HelperText from "@/components/form/HelperText.astro";
+import Label from "@/components/form/Label.astro";
+import Select from "@/components/form/Select.astro";
 ---
 
 <Layout
     title="Thetis Medical - Reviews"
-    description="Medical device company specialising in splints for injured Achilles Tendons. We sell an Achilles Rupture Night Splint and a Trauma Splint."
+    description="Medical device company specialising in splints for injured Achilles Tendons. We sell an Achilles Rupture Splint and a Trauma Splint."
     image="https://thetismedical.com/images/evidence-based-recovery"
 >
-    <main class="flex flex-col gap-y-8 my-8 px-2 lg:px-0 py-12 w-full lg:w-8/12">
-        
-
+    <main
+        class="flex flex-col gap-y-8 my-8 px-2 lg:px-0 py-12 w-full lg:w-8/12"
+    >
         <h2 class="text-2xl">Write a Review</h2>
-            <p>
-                Thank you for using our product. Your feedback helps us improve our products
-                and helps other customers make informed decisions. Please share your
-                experience with us.
-            </p>
+        <p>
+            Thank you for using our product. Your feedback helps us improve our
+            products and helps other customers make informed decisions. Please
+            share your experience with us.
+        </p>
         <section>
             <form
                 action="https://formspree.io/f/myzkjqdy"
@@ -37,11 +37,14 @@ import Select from '@/components/form/Select.astro'
                         <Select
                             name="reviewer-type"
                             id="reviewer-type"
-                            class="border-input bg-background px-3 py-2 border rounded-md w-full"
+                            class="bg-background px-3 py-2 border border-input rounded-md w-full"
                             required
                             options={[
-                                { value: 'patient', label: 'Patient' },
-                                { value: 'clinician', label: 'Healthcare Professional' },
+                                { value: "patient", label: "Patient" },
+                                {
+                                    value: "clinician",
+                                    label: "Healthcare Professional",
+                                },
                             ]}
                         />
                     </div>
@@ -51,13 +54,16 @@ import Select from '@/components/form/Select.astro'
                 </div>
                 <div>
                     <Label labelFor="review-text">Your Review</Label>
-                    <TextArea name='review-text' placeholder='Please share your experience with the product. What worked well? What could be improved? Would you recommend it to others?'/>
+                    <TextArea
+                        name="review-text"
+                        placeholder="Please share your experience with the product. What worked well? What could be improved? Would you recommend it to others?"
+                    />
                 </div>
                 <button
                     class={buttonVariants({
-                        size: 'xl',
-                        variant: 'default',
-                        className: 'lg:w-fit',
+                        size: "xl",
+                        variant: "default",
+                        className: "lg:w-fit",
                     })}
                     type="submit">Submit Review</button
                 >

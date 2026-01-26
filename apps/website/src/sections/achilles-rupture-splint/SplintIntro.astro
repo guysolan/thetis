@@ -1,0 +1,308 @@
+---
+import type { Lang } from "../../config/languages";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+
+const content = {
+  en: {
+    title: "Sleeping with an Achilles Rupture: Your Two Safe Options",
+    intro:
+      "After an Achilles rupture, you must protect your tendon at night — sleeping without protection risks re-rupture and can undo weeks of healing. You have two safe options:",
+    warning: {
+      title: "Never sleep unprotected",
+      description:
+        "Sleeping without a boot or splint puts your healing tendon at serious risk. An unprotected foot can dorsiflex during sleep, potentially causing re-rupture.",
+    },
+    option1: {
+      title: "Option 1: Sleep in Your Boot",
+      description:
+        "Your walking boot provides protection, but at a cost. The weight (1.5kg+), bulk, and heat make quality sleep nearly impossible.",
+      warning: "Disrupts sleep quality — making recovery more challenging",
+    },
+    option2: {
+      title: "Option 2: Use Thetis Medical's Night Splint",
+      description:
+        "Our night splint provides the same tendon protection as your boot, but is designed specifically for comfortable sleep. Keep crutches by your bed for bathroom visits. The splint is:",
+      features: [
+        "Lightweight (under 200g) — a fraction of your boot's weight",
+        "Breathable — no more sweating through the night",
+        "Maintains the correct plantarflexion angle for healing",
+        "Surgeon-approved design with zero re-ruptures in 5,000+ patients",
+      ],
+      conclusion:
+        "Why suffer through 8-12 weeks of poor sleep? The splint gives you the same protection as your boot with dramatically better comfort.",
+      benefit: "Same protection. Better sleep.",
+    },
+  },
+  de: {
+    title: "Schlafen mit einem Achillessehnenriss: Ihre zwei sicheren Optionen",
+    intro:
+      "Nach einem Achillessehnenriss müssen Sie Ihre Sehne nachts schützen — Schlafen ohne Schutz riskiert einen erneuten Riss und kann wochenlange Heilung zunichte machen. Sie haben zwei sichere Optionen:",
+    warning: {
+      title: "Niemals ungeschützt schlafen",
+      description:
+        "Schlafen ohne Stiefel oder Schiene gefährdet Ihre heilende Sehne ernsthaft.",
+    },
+    option1: {
+      title: "Option 1: Schlafen Sie in Ihrem Stiefel",
+      description:
+        "Ihr Gehstiefel bietet Schutz, aber zu einem Preis. Das Gewicht (1,5kg+), die Größe und die Hitze machen qualitativ hochwertigen Schlaf nahezu unmöglich.",
+      warning: "Stört die Schlafqualität — macht die Genesung schwieriger",
+    },
+    option2: {
+      title: "Option 2: Verwenden Sie Thetis Medicals Nachtschiene",
+      description:
+        "Unsere Nachtschiene bietet denselben Sehnenschutz wie Ihr Stiefel, ist aber speziell für bequemen Schlaf konzipiert. Halten Sie Krücken neben Ihrem Bett für Toilettengänge bereit. Die Schiene ist:",
+      features: [
+        "Leicht (unter 200g) — ein Bruchteil des Gewichts Ihres Stiefels",
+        "Atmungsaktiv — kein nächtliches Schwitzen mehr",
+        "Hält den korrekten Plantarflexionswinkel für die Heilung",
+        "Von Chirurgen genehmigtes Design mit null erneuten Rissen bei 5.000+ Patienten",
+      ],
+      conclusion:
+        "Warum 8-12 Wochen schlechten Schlaf erleiden? Die Schiene bietet denselben Schutz wie Ihr Stiefel mit dramatisch besserem Komfort.",
+      benefit: "Gleicher Schutz. Besserer Schlaf.",
+    },
+  },
+  fr: {
+    title:
+      "Dormir avec une rupture du tendon d'Achille : Vos deux options sûres",
+    intro:
+      "Après une rupture du tendon d'Achille, vous devez protéger votre tendon la nuit — dormir sans protection risque une nouvelle rupture et peut annuler des semaines de guérison. Vous avez deux options sûres :",
+    warning: {
+      title: "Ne jamais dormir sans protection",
+      description:
+        "Dormir sans botte ou attelle met votre tendon en cours de guérison en danger sérieux.",
+    },
+    option1: {
+      title: "Option 1 : Dormir dans votre botte",
+      description:
+        "Votre botte de marche offre une protection, mais à un prix. Le poids (1,5kg+), l'encombrement et la chaleur rendent un sommeil de qualité presque impossible.",
+      warning:
+        "Perturbe la qualité du sommeil — rend la récupération plus difficile",
+    },
+    option2: {
+      title: "Option 2 : Utiliser l'attelle de nuit de Thetis Medical",
+      description:
+        "Notre attelle de nuit offre la même protection du tendon que votre botte, mais est conçue spécifiquement pour un sommeil confortable. Gardez des béquilles près de votre lit pour les visites aux toilettes. L'attelle est :",
+      features: [
+        "Légère (moins de 200g) — une fraction du poids de votre botte",
+        "Respirante — plus de transpiration nocturne",
+        "Maintient le bon angle de flexion plantaire pour la guérison",
+        "Design approuvé par les chirurgiens avec zéro nouvelle rupture chez 5 000+ patients",
+      ],
+      conclusion:
+        "Pourquoi souffrir de 8-12 semaines de mauvais sommeil ? L'attelle offre la même protection que votre botte avec un confort nettement supérieur.",
+      benefit: "Même protection. Meilleur sommeil.",
+    },
+  },
+  es: {
+    title:
+      "Dormir con una rotura del tendón de Aquiles: Sus dos opciones seguras",
+    intro:
+      "Después de una rotura del tendón de Aquiles, debe proteger su tendón por la noche — dormir sin protección arriesga una nueva ruptura y puede deshacer semanas de curación. Tiene dos opciones seguras:",
+    warning: {
+      title: "Nunca duerma sin protección",
+      description:
+        "Dormir sin bota o férula pone su tendón en curación en riesgo serio.",
+    },
+    option1: {
+      title: "Opción 1: Dormir con la bota",
+      description:
+        "Su bota para caminar proporciona protección, pero a un costo. El peso (1,5kg+), el volumen y el calor hacen que el sueño de calidad sea casi imposible.",
+      warning:
+        "Interrumpe la calidad del sueño — hace que la recuperación sea más difícil",
+    },
+    option2: {
+      title: "Opción 2: Usar la férula nocturna de Thetis Medical",
+      description:
+        "Nuestra férula nocturna proporciona la misma protección del tendón que su bota, pero está diseñada específicamente para dormir cómodamente. Mantenga las muletas junto a su cama para ir al baño. La férula es:",
+      features: [
+        "Ligera (menos de 200g) — una fracción del peso de su bota",
+        "Transpirable — no más sudoración nocturna",
+        "Mantiene el ángulo correcto de flexión plantar para la curación",
+        "Diseño aprobado por cirujanos con cero re-rupturas en más de 5,000 pacientes",
+      ],
+      conclusion:
+        "¿Por qué sufrir 8-12 semanas de mal sueño? La férula ofrece la misma protección que su bota con una comodidad drásticamente mejor.",
+      benefit: "Misma protección. Mejor sueño.",
+    },
+  },
+  it: {
+    title:
+      "Dormire con una rottura del tendine di Achille: Le tue due opzioni sicure",
+    intro:
+      "Dopo una rottura del tendine di Achille, devi proteggere il tuo tendine di notte — dormire senza protezione rischia una nuova rottura e può annullare settimane di guarigione. Hai due opzioni sicure:",
+    warning: {
+      title: "Mai dormire senza protezione",
+      description:
+        "Dormire senza stivale o férula mette il tuo tendine in guarigione a serio rischio.",
+    },
+    option1: {
+      title: "Opzione 1: Dormi con il tuo stivale",
+      description:
+        "Il tuo stivale da passeggio fornisce protezione, ma a un costo. Il peso (1,5kg+), il volume e il calore rendono quasi impossibile un sonno di qualità.",
+      warning:
+        "Disturba la qualità del sonno — rende il recupero più difficile",
+    },
+    option2: {
+      title: "Opzione 2: Usa la férula notturna di Thetis Medical",
+      description:
+        "La nostra férula notturna fornisce la stessa protezione del tendine del tuo stivale, ma è progettata specificamente per dormire comodamente. Tieni le stampelle accanto al letto per le visite al bagno. La férula è:",
+      features: [
+        "Leggera (meno di 200g) — una frazione del peso del tuo stivale",
+        "Traspirante — niente più sudorazione notturna",
+        "Mantiene l'angolo corretto di flessione plantare per la guarigione",
+        "Design approvato dai chirurghi con zero ri-rotture in oltre 5.000 pazienti",
+      ],
+      conclusion:
+        "Perché soffrire 8-12 settimane di cattivo sonno? La férula offre la stessa protezione del tuo stivale con un comfort drasticamente migliore.",
+      benefit: "Stessa protezione. Sonno migliore.",
+    },
+  },
+};
+
+const currentContent = content[lang];
+---
+
+<section class="py-16">
+  <div class="mx-auto px-4 container">
+    <div class="mx-auto max-w-4xl">
+      <div class="max-w-none prose prose-lg">
+        <p
+          class="mb-8 text-gray-700 dark:text-gray-300 text-xl text-center leading-relaxed"
+        >
+          {currentContent.intro}
+        </p>
+
+        <!-- Warning box -->
+        <div
+          class="bg-red-50 dark:bg-red-950/50 mb-12 p-6 border border-red-200 dark:border-red-800 rounded-xl"
+        >
+          <div class="flex items-start gap-4">
+            <div
+              class="flex-shrink-0 bg-red-100 dark:bg-red-900/50 p-2 rounded-full"
+            >
+              <svg
+                class="w-6 h-6 text-red-600 dark:text-red-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <h4 class="mb-1 font-bold text-red-800 dark:text-red-200 text-lg">
+                {currentContent.warning.title}
+              </h4>
+              <p class="text-red-700 dark:text-red-300">
+                {currentContent.warning.description}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gap-8 grid md:grid-cols-2 mb-12">
+          <!-- Option 1: Boot -->
+          <div
+            class="bg-white dark:bg-neutral-800 shadow-lg hover:shadow-xl p-8 border border-gray-200 dark:border-neutral-700 rounded-xl transition-all duration-300"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="flex justify-center items-center bg-red-100 dark:bg-red-900/30 mr-4 rounded-full w-12 h-12"
+              >
+                <span class="font-bold text-red-600 dark:text-red-400 text-xl"
+                  >1</span
+                >
+              </div>
+              <h3
+                class="font-bold text-neutral-900 dark:text-neutral-50 text-2xl"
+              >
+                {currentContent.option1.title}
+              </h3>
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+              {currentContent.option1.description}
+            </p>
+            <div
+              class="bg-red-50 dark:bg-red-900/20 mt-6 p-4 border-red-400 border-l-4 rounded-lg"
+            >
+              <p class="font-medium text-red-700 dark:text-red-300 text-sm">
+                ⚠️ {currentContent.option1.warning}
+              </p>
+            </div>
+          </div>
+
+          <!-- Option 2: Splint -->
+          <div
+            class="relative bg-white dark:bg-neutral-800 shadow-lg hover:shadow-xl p-8 border border-gray-200 dark:border-neutral-700 rounded-xl overflow-hidden transition-all duration-300"
+          >
+            <div
+              class="top-0 right-0 absolute bg-primary/10 rounded-full w-32 h-32 -translate-y-16 translate-x-16"
+            >
+            </div>
+            <div class="flex items-center mb-4">
+              <div
+                class="flex justify-center items-center bg-primary/20 dark:bg-primary/30 mr-4 rounded-full w-12 h-12"
+              >
+                <span
+                  class="font-bold text-primary dark:text-primary/80 text-xl"
+                  >2</span
+                >
+              </div>
+              <h3
+                class="font-bold text-neutral-900 dark:text-neutral-50 text-2xl"
+              >
+                {currentContent.option2.title}
+              </h3>
+            </div>
+            <p class="mb-6 text-gray-600 dark:text-gray-400 leading-relaxed">
+              {currentContent.option2.description}
+            </p>
+            <ul class="space-y-3 mb-6">
+              {
+                currentContent.option2.features.map((feature) => (
+                  <li class="flex items-start">
+                    <div class="flex-shrink-0 bg-primary mt-2 mr-3 rounded-full w-2 h-2" />
+                    <span class="text-gray-700 dark:text-gray-300">
+                      {feature}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+            <div
+              class="bg-primary/10 dark:bg-primary/20 p-4 border-primary border-l-4 rounded-lg"
+            >
+              <p class="font-medium text-primary dark:text-primary/80 text-sm">
+                ✅ {currentContent.option2.benefit}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div
+            class="inline-block bg-primary/10 dark:bg-primary/20 p-6 border border-primary/20 rounded-2xl"
+          >
+            <p
+              class="font-medium text-gray-700 dark:text-gray-300 text-lg leading-relaxed"
+            >
+              {currentContent.option2.conclusion}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

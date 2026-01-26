@@ -1,0 +1,52 @@
+---
+import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
+import FAQsLayout from "../../layouts/FAQsLayout.astro";
+import IsMyAchillesRupturedSection from "@/sections/FAQs/is-my-achilles-ruptured.astro";
+import type { Lang } from "../../config/languages";
+import IsMyAchillesRupturedFaqsSection from "@/sections/FAQs/is-my-achilles-ruptured-faqs.astro";
+import CourseCTA from "../../components/CTA/CourseCTA.astro";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Is My Achilles Ruptured?",
+        description:
+            "Check if you have an Achilles rupture with our symptom checklist.",
+    },
+    es: {
+        title: "¿Mi Aquiles está roto?",
+        description:
+            "Comprueba si tienes una ruptura del Aquiles con nuestra lista de síntomas.",
+    },
+    fr: {
+        title: "Est-ce que mon Achille est rompu ?",
+        description:
+            "Vérifiez si vous avez une rupture d'Achille avec notre liste de symptômes.",
+    },
+    de: {
+        title: "Ist mein Achilles verletzt?",
+        description:
+            "Überprüfen Sie, ob Sie einen Achillesriss haben, mit unserer Symptom-Checkliste.",
+    },
+    it: {
+        title: "Il mio Achille è rotto?",
+        description:
+            "Controlla se hai una rottura del tendine d'Achille con la nostra lista di sintomi.",
+    },
+};
+
+const currentContent = content[lang];
+---
+
+<FAQsLayout
+    title={currentContent.title}
+    description={currentContent.description}
+    lang={lang}
+>
+    <IsMyAchillesRupturedSection lang={lang} />
+    <CourseCTA lang={lang} variant="full" />
+    <NightSplintAdvert lang={lang} />
+
+    <IsMyAchillesRupturedFaqsSection lang={lang} />
+</FAQsLayout>

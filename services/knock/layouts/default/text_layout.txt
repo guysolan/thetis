@@ -1,0 +1,9 @@
+{{ vars.app_name }} ({{ vars.app_url }})
+
+{{ content }}
+
+--
+
+{{ vars.app_name }}
+
+{{ footer_links }}

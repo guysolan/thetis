@@ -1,5 +1,5 @@
 // ProsConsSentence.tsx
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { cn } from "@thetis/ui/cn";
 
 interface ProsConsSentenceProps {
@@ -15,13 +15,14 @@ export const ProsConsSentence: React.FC<ProsConsSentenceProps> = ({
   isPositive = true,
   highlightDuration = 1000,
 }) => {
-  const [currentHighlightIndex, setCurrentHighlightIndex] =
-    useState<number>(-1);
+  const [currentHighlightIndex, setCurrentHighlightIndex] = useState<number>(
+    -1,
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setCurrentHighlightIndex((prev) =>
-        prev >= keywords.length - 1 ? 0 : prev + 1,
+        prev >= keywords.length - 1 ? 0 : prev + 1
       );
     }, highlightDuration);
 
@@ -34,12 +35,11 @@ export const ProsConsSentence: React.FC<ProsConsSentenceProps> = ({
     keywords.forEach((keyword, index) => {
       const highlightClass = cn(
         "transition-all duration-700 ease-in-out",
-        isPositive ? "bg-green-500/50" : "bg-red-500/50",
+        isPositive ? "bg-primary/50" : "bg-red-500/50",
       );
-      const style =
-        index === currentHighlightIndex
-          ? `<span class="${highlightClass}">${keyword}</span>`
-          : keyword;
+      const style = index === currentHighlightIndex
+        ? `<span class="${highlightClass}">${keyword}</span>`
+        : keyword;
 
       result = result.replace(keyword, style);
     });

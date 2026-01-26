@@ -1,6 +1,6 @@
-let toUS = ['United States', 'Canada', 'Mexico']
+let toUS = ["United States", "Canada", "Mexico"];
 
-let US_URL = 'https://www.amazon.com/dp/B09N5KH4F3?ref=myi_title_dp'
+let US_URL = "https://www.amazon.com/dp/B09N5KH4F3?ref=myi_title_dp";
 
 // const urls = {
 //     US_home:
@@ -14,44 +14,42 @@ let US_URL = 'https://www.amazon.com/dp/B09N5KH4F3?ref=myi_title_dp'
 // }
 
 const urls = {
-    US_home: 'https://thetismedical.myshopify.com/',
-    US_product: 'https://thetismedical.myshopify.com/',
-    UK_product: 'https://thetismedical.myshopify.com/',
-    UK_home: 'https://thetismedical.myshopify.com/',
-}
+  US_home: "https://shop.thetismedical.com/",
+  US_product: "https://shop.thetismedical.com/",
+  UK_product: "https://shop.thetismedical.com/",
+  UK_home: "https://shop.thetismedical.com/",
+};
 
-fetch('https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq')
-    .then((res) => res.json())
-    .then((response) => {
-        console.log('Country: ', response.country)
-        try {
-            // Check if on Night Splint Page
-            const buyButton = document.getElementById('buy-button-wrapper')
+fetch("https://extreme-ip-lookup.com/json/?key=mRicTdUafjFRd3Ufqftq")
+  .then((res) => res.json())
+  .then((response) => {
+    console.log("Country: ", response.country);
+    try {
+      // Check if on Splint Page
+      const buyButton = document.getElementById("buy-button-wrapper");
 
-            if (response.country !== 'United Kingdom') {
-                buyButton.remove()
-            }
-            if (window.location.href.indexOf('night-splint') > -1) {
-                console.log('product')
-                if (toUS.includes(response.country)) {
-                    let product_link = document.getElementById(
-                        'order-night-product'
-                    )
-                    product_link.setAttribute('href', urls.US_product)
-                }
-                // If not on Night Splint Page
-            } else {
-                if (toUS.includes(response.country)) {
-                    console.log('home')
-                    console.log('US URL: ', urls.US_home)
-                    let link = document.getElementById('order-night-home')
-                    link.setAttribute('href', urls.US_home)
-                }
-            }
-        } catch (error) {
-            // console.log(error)
+      if (response.country !== "United Kingdom") {
+        buyButton.remove();
+      }
+      if (window.location.href.indexOf("night-splint") > -1) {
+        console.log("product");
+        if (toUS.includes(response.country)) {
+          let product_link = document.getElementById("order-night-product");
+          product_link.setAttribute("href", urls.US_product);
         }
-    })
-    .catch((data, status) => {
-        // console.log('Request failed');
-    })
+        // If not on Splint Page
+      } else {
+        if (toUS.includes(response.country)) {
+          console.log("home");
+          console.log("US URL: ", urls.US_home);
+          let link = document.getElementById("order-night-home");
+          link.setAttribute("href", urls.US_home);
+        }
+      }
+    } catch (error) {
+      // console.log(error)
+    }
+  })
+  .catch((data, status) => {
+    // console.log('Request failed');
+  });

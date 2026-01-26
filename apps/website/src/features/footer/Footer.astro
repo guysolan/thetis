@@ -2,50 +2,118 @@
 import Social from "@/components/icons/socials/Social";
 import Slide from "@/components/Slide.astro";
 import FooterEmailCTA from "@/components/CTA/FooterEmailCTA.astro";
-import FooterBlock from './FooterBlock.astro';
-import { ThemeToggle } from '../../components/theme/ThemeToggle';
+import FooterBlock from "./FooterBlock.astro";
+import { ThemeToggle } from "../../components/theme/ThemeToggle";
+import {
+  getRoutesByLanguage,
+  getCourseRoutesByLanguage,
+  getArticleRoutesByLanguage,
+  getRecoveryPhaseRoutesByLanguage,
+  productRoutes,
+  partnerRoutes,
+  contactRoutes,
+  guidePageRoutes,
+} from "../../content/routes.tsx";
+import type { Lang } from "../../config/languages.ts";
 
-const footerLinks = {
-  company: {
-    title: "Company",
-    links: [
-      { href: "../", label: "Home" },
-      { href: "../professionals", label: "Professionals" },
-      { href: "../contact", label: "Contact Us" },
-      { href: "../sitemap", label: "Sitemap" },
-    ]
-  },
-  products: {
-    title: "Products",
-    links: [
-      { href: "../night-splint", label: "Achilles Rupture Night Splint" },
-      { href: "../trauma-splint", label: "Achilles Rupture Trauma Splint" },
-    ]
-  },
-  patientGuides: {
-    title: "Patient Guides",
-    links: [
-      { href: "../achilles-ruptures", label: "Achilles Ruptures" },
-      { href: "../FAQs/achilles-rupture-timeline", label: "Achilles Rupture Timeline" },
-      { href: "../FAQs/is-my-achilles-ruptured", label: "Is my Achilles Ruptured?" },
-      { href: "../FAQs/what-happens-if-my-achilles-is-ruptured?", label: "What happens if my Achilles is ruptured?" },
-      { href: "../FAQs/achilles-tear-treatment", label: "Achilles Tear Treatment" },
-      { href: "../FAQs/torn-achilles-recovery", label: "Torn Achilles Recovery" },
-      { href: "../FAQs/life-after-achilles-rupture", label: "Life After Achilles Rupture" },
-      { href: "../evidence-based-recovery", label: "Evidence Based Recovery" },
-    ]
-  },
-  partners: {
-    title: "Partners",
-    links: [
-      { href: "/partners", label: "Partners" },
-      { href: "/order-wholesale", label: "Order Wholesale" },
-      { href: "/become-a-partner", label: "Become a Partner" },
-    ]
-  }
+export interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+
+const localizedRoutes = getRoutesByLanguage(lang);
+
+// Filter routes by category - use guide page routes
+const guidePageLinks = localizedRoutes.filter((route) => {
+  const baseRoute = guidePageRoutes.find(
+    (gr) =>
+      gr.slugTranslations?.[lang] === route.slug || gr.slug === route.slug,
+  );
+  return !!baseRoute;
+});
+
+const productLinks = localizedRoutes.filter((route) => {
+  // Find the base route that matches this translated route
+  const baseRoute = productRoutes.find(
+    (pr) =>
+      pr.slugTranslations?.[lang] === route.slug || pr.slug === route.slug,
+  );
+  return !!baseRoute;
+});
+
+const partnerLinks = localizedRoutes.filter((route) => {
+  // Find the base route that matches this translated route
+  const baseRoute = partnerRoutes.find(
+    (pr) =>
+      pr.slugTranslations?.[lang] === route.slug || pr.slug === route.slug,
+  );
+  return !!baseRoute;
+});
+
+const contactLinks = localizedRoutes.filter((route) => {
+  // Find the base route that matches this translated route
+  const baseRoute = contactRoutes.find(
+    (cr) =>
+      cr.slugTranslations?.[lang] === route.slug || cr.slug === route.slug,
+  );
+  return !!baseRoute;
+});
+
+const faqLinks = localizedRoutes.filter((route) =>
+  route.slug.startsWith("FAQs/"),
+);
+
+// Get section titles from routes.tsx content
+const getSectionTitle = (routes: any[], sectionSlug: string) => {
+  const route = routes.find((r) => r.slug === sectionSlug);
+  return route?.title?.[lang] || route?.title?.en || sectionSlug;
 };
 
-const socials = [
+const guideSectionTitles: Record<Lang, string> = {
+  en: "Recovery Guide",
+  de: "Genesungsleitfaden",
+  fr: "Guide de Récupération",
+  es: "Guía de Recuperación",
+  it: "Guida al Recupero",
+};
+
+const footerLinks = {
+  guide: {
+    title: guideSectionTitles[lang],
+    links: guidePageLinks,
+  },
+  company: {
+    title: getSectionTitle(contactRoutes, "contact"),
+    links: contactLinks,
+  },
+  products: {
+    title: getSectionTitle(productRoutes, "achilles-rupture-splint"),
+    links: productLinks,
+  },
+  patientGuides: {
+    title: "Patient Guides", // This is a generic title, not from a specific route
+    links: faqLinks,
+  },
+  professionals: {
+    title: getSectionTitle(partnerRoutes, "professionals"),
+    links: partnerLinks,
+  },
+};
+
+// Get "Stay in Touch" title based on language
+const stayInTouchTitles = {
+  en: "Stay in Touch",
+  de: "In Kontakt bleiben",
+  fr: "Restez en Contact",
+  es: "Manténgase en Contacto",
+  it: "Rimani in Contatto",
+};
+
+const socials: Array<{
+  mode: "mail" | "linkedin" | "instagram" | "facebook";
+  color: string;
+}> = [
   { mode: "mail", color: "white" },
   { mode: "linkedin", color: "white" },
   { mode: "instagram", color: "white" },
@@ -53,54 +121,135 @@ const socials = [
 ];
 ---
 
-<Slide background="black" className='print:hidden mt-24'>
-    <footer class="w-full text-white">
-        <div class="gap-8 lg:gap-12 grid grid-cols-1 lg:grid-cols-3 lg:text-left text-center">
-            <!-- Company & Products -->
-            <div class="space-y-8">
-                <FooterBlock title={footerLinks.company.title} links={footerLinks.company.links} />
-                <FooterBlock title={footerLinks.products.title} links={footerLinks.products.links} />
-            </div>
+<Slide background="black" className="print:hidden mt-24">
+  <footer class="w-full text-white">
+    <div
+      class="gap-8 lg:gap-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:text-left text-center"
+    >
+      <!-- Company & Products -->
+      <div class="space-y-8">
+        <FooterBlock
+          title={footerLinks.company.title}
+          links={footerLinks.company.links}
+        />
+        <FooterBlock
+          title={footerLinks.products.title}
+          links={footerLinks.products.links}
+        />
+      </div>
 
-            <!-- Patient Guides -->
-            <div>
-                <FooterBlock 
-                    title={footerLinks.patientGuides.title} 
-                    links={footerLinks.patientGuides.links}
-                />
-            </div>
-
-            <!-- Partners & Contact -->
-            <div class="space-y-8">
-                <FooterBlock title={footerLinks.partners.title} links={footerLinks.partners.links} />
-
-                <div class="space-y-4">
-                    <h3 class="font-semibold text-lg">Stay in Touch</h3>
-                    <FooterEmailCTA />
-
-                    <div class="flex flex-col items-center lg:items-start gap-y-4">
-                        <div class="flex justify-center lg:justify-start gap-4">
-                            {socials.map((social) => (
-                                <Social color='white' mode={social.mode} />
-                            ))}
-                        </div>
-                        <a 
-                            href="mailto:info@thetismedical.com" 
-                            class="font-semibold text-white hover:text-gray-300 text-base transition-colors"
-                        >
-                            info@thetismedical.com
-                        </a>
-                    </div>
-                </div>
-            </div>
+      <!-- Patient Guides -->
+      <div class="space-y-8">
+        <!-- Courses -->
+        <div>
+          <h3 class="mb-3 font-semibold text-lg lg:text-left text-center">
+            Courses
+          </h3>
+          <ul class="space-y-3">
+            {
+              getCourseRoutesByLanguage(lang)
+                .filter(
+                  (course) => !course.href.includes("/course/professionals"),
+                )
+                .map((course) => (
+                  <li>
+                    <a
+                      href={course.href}
+                      class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
+                    >
+                      {course.title}
+                    </a>
+                  </li>
+                ))
+            }
+          </ul>
         </div>
 
-        <div class="flex md:flex-row flex-col justify-center md:justify-between items-center mt-8 pt-6 border-gray-800 border-t">
-            <p class="text-gray-300 text-base">&copy; Thetis Medical Ltd 2020-2025</p>
+        <!-- FAQs -->
+        <div>
+          <h3 class="mb-3 font-semibold text-lg lg:text-left text-center">
+            FAQs
+          </h3>
+          <ul class="space-y-3">
+            {
+              getArticleRoutesByLanguage(lang).map((article) => (
+                <li>
+                  <a
+                    href={article.href}
+                    class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
+                  >
+                    {article.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
         </div>
 
-        <div class="sr-only">
-        <ThemeToggle />
+        <!-- Recovery Timeline -->
+        <div>
+          <h3 class="mb-3 font-semibold text-lg lg:text-left text-center">
+            Recovery Timeline
+          </h3>
+          <ul class="space-y-3">
+            {
+              getRecoveryPhaseRoutesByLanguage(lang).map((phase) => (
+                <li>
+                  <a
+                    href={phase.href}
+                    class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
+                  >
+                    {phase.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
         </div>
-    </footer>
+      </div>
+
+      <!-- Partners & Contact -->
+      <div class="space-y-8">
+        <FooterBlock
+          title={footerLinks.professionals.title}
+          links={footerLinks.professionals.links}
+        />
+
+        <div class="space-y-4">
+          <h3 class="font-semibold text-lg lg:text-left text-center">
+            {stayInTouchTitles[lang]}
+          </h3>
+          <FooterEmailCTA />
+
+          <div class="flex flex-col items-center lg:items-start gap-y-4">
+            <div class="flex justify-center lg:justify-start gap-4">
+              {
+                socials.map((social) => (
+                  <Social color="white" mode={social.mode} />
+                ))
+              }
+            </div>
+            <a
+              href="mailto:info@thetismedical.com"
+              class="font-semibold text-white hover:text-gray-300 text-base transition-colors"
+            >
+              info@thetismedical.com
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="flex md:flex-row flex-col justify-center md:justify-between items-center mt-8 pt-6 border-gray-800 border-t"
+    >
+      <p class="text-gray-300 text-base">
+        &copy; Thetis Medical Ltd 2020-{new Date().getFullYear()}
+      </p>
+    </div>
+
+    <div class="sr-only">
+      <ThemeToggle />
+    </div>
+  </footer>
 </Slide>

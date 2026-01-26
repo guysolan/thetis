@@ -1,0 +1,86 @@
+---
+const { frontmatter, article } = Astro.props;
+import dayjs from "dayjs";
+import Author from "./Author.astro";
+const date = dayjs(frontmatter?.last_edited_time).format("DD MMMM YYYY");
+---
+
+<script
+    type="text/partytown"
+    slot="head"
+    src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+
+<section class="pt-8 blog-landing">
+    <div class="blog-words">
+        <div>
+            <h1>{article?.title}</h1>
+            {
+                frontmatter?.author === "matthew solan" && (
+                    <Author imageAlt={frontmatter?.image_alt} />
+                )
+            }
+        </div>
+        <div class="details-and-shares">
+            <div>
+                {date} | {frontmatter?.read_time} minute read
+            </div>
+            <div class="shares">
+                <a
+                    href="#"
+                    id="site-link"
+                    class="https://thetismedical.com/FAQs/is-my-achilles-ruptured"
+                    onclick="copyToClipboard()"
+                >
+                    <img
+                        class="share-icon"
+                        src="/images/sharing-icon.svg"
+                        alt="Email Icon"
+                    />
+                </a>
+                <a
+                    href="mailto:?subject=Great%20article%20-%20Is%20my%20Achilles%20Ruptured%3F&body=https%3A%2F%2Fthetismedical.com%2FFAQs%2Fis-my-achilles-ruptured"
+                    target="_self"
+                    rel="noopener"
+                    aria-label="Share by E-Mail"
+                >
+                    <img
+                        class="share-icon"
+                        src="/images/icons/socials/social-media-email.svg"
+                        alt="Email Icon"
+                    />
+                </a>
+                <a
+                    href="https://twitter.com/intent/tweet/?text=Great%20article%20-%20Is%20my%20Achilles%20Ruptured%3F&url=https%3A%2F%2Fthetismedical.com%2FFAQs%2Fis-my-achilles-ruptured"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Share on Twitter"
+                >
+                    <img
+                        class="share-icon"
+                        src="/images/icons/socials/social-media-twitter.svg"
+                        alt="Twitter Icon"
+                    />
+                </a>
+                <a
+                    href="https://facebook.com/sharer/sharer.php?u=https%3A%2F%2Fthetismedical.com%2FFAQs%2Fis-my-achilles-ruptured"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Share on Facebook"
+                >
+                    <img
+                        class="share-icon"
+                        src="/images/icons/socials/social-media-facebook.svg"
+                        alt="Facebook Icon"
+                    />
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="main-img-wrap">
+        <img
+            class="blog-main-img"
+            src={frontmatter?.image}
+            alt={frontmatter?.image_alt}
+        />
+    </div>
+</section>

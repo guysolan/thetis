@@ -1,0 +1,121 @@
+---
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        tagline: "OUR IMPACT",
+        title: "Over 5000 Patients Helped.",
+        stats: [
+            "Available in 10 countries",
+            "Reviewed over 100 Achilles Rupture Papers",
+            "Written over 100,000 words of advice",
+        ],
+        cta: "View Recovery Course →",
+    },
+    de: {
+        tagline: "UNSERE AUSWIRKUNG",
+        title: "Über 5000 Patienten geholfen.",
+        stats: [
+            "Verfügbar in 10 Ländern",
+            "Über 100 Achillessehnenruptur-Papiere überprüft",
+            "Über 100.000 Wörter Beratung geschrieben",
+        ],
+        cta: "Genesungskurs ansehen →",
+    },
+    fr: {
+        tagline: "NOTRE IMPACT",
+        title: "Plus de 5000 patients aidés.",
+        stats: [
+            "Disponible dans 10 pays",
+            "Plus de 100 articles sur la rupture d'Achille examinés",
+            "Plus de 100 000 mots de conseils écrits",
+        ],
+        cta: "Voir le cours de récupération →",
+    },
+    es: {
+        tagline: "NUESTRO IMPACTO",
+        title: "Más de 5000 pacientes ayudados.",
+        stats: [
+            "Disponible en 10 países",
+            "Revisados más de 100 artículos sobre rotura de Aquiles",
+            "Escritos más de 100.000 palabras de consejos",
+        ],
+        cta: "Ver curso de recuperación →",
+    },
+    it: {
+        tagline: "IL NOSTRO IMPATTO",
+        title: "Oltre 5000 pazienti aiutati.",
+        stats: [
+            "Disponibile in 10 paesi",
+            "Recensiti oltre 100 articoli sulla rottura di Achille",
+            "Scritte oltre 100.000 parole di consigli",
+        ],
+        cta: "Vedi corso di recupero →",
+    },
+};
+
+const t = content[lang as keyof typeof content];
+---
+
+<section class="bg-primary/5 py-16 md:py-24">
+    <div class="mx-auto px-4 max-w-4xl text-center">
+        <p
+            class="mb-4 font-medium text-primary text-sm uppercase tracking-widest"
+        >
+            {t.tagline}
+        </p>
+        <h2
+            class="mb-8 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl"
+        >
+            {t.title}
+        </h2>
+        <div class="gap-6 grid md:grid-cols-3 mb-8">
+            {
+                t.stats.map((stat) => (
+                    <div class="bg-white dark:bg-neutral-800 p-6 border border-primary/20 rounded-lg">
+                        <p class="font-semibold text-neutral-900 dark:text-neutral-100">
+                            {stat}
+                        </p>
+                    </div>
+                ))
+            }
+        </div>
+        <a
+            href="/course"
+            class="inline-block font-semibold text-primary text-lg hover:underline"
+        >
+            {t.cta}
+        </a>
+        <div class="flex flex-wrap justify-center gap-4 mt-8">
+            <a
+                href="/reviews"
+                class="font-medium text-primary text-sm hover:underline"
+            >
+                Read Reviews
+            </a>
+            <span class="text-neutral-400">•</span>
+            <a
+                href="/research"
+                class="font-medium text-primary text-sm hover:underline"
+            >
+                View Research
+            </a>
+            <span class="text-neutral-400">•</span>
+            <a
+                href="/course"
+                class="font-medium text-primary text-sm hover:underline"
+            >
+                Explore Courses
+            </a>
+            <span class="text-neutral-400">•</span>
+            <a
+                href="/achilles-rupture-splint"
+                class="font-medium text-primary text-sm hover:underline"
+            >
+                Shop Products
+            </a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,132 @@
+---
+import FaqSchemaAccordion from "@/components/research/FaqSchemaAccordion.astro";
+import type { Lang } from "@/config/languages";
+
+const { lang } = Astro.props as { lang: Lang };
+
+const content: Record<Lang, { question: string; answer: string }[]> = {
+    en: [
+        {
+            question:
+                "What's better for Achilles recovery - walking casts or boots?",
+            answer: "Boots offer both advantages and disadvantages. The main benefit is that they can be removed for washing or scratching an itch. However, this removability is also a potential risk, as improper removal or misuse can lead to re-injury. While boots are convenient and safe when used correctly, cutting corners in their use may result in re-rupture of the tendon, requiring surgery and restarting the entire recovery process.",
+        },
+        {
+            question: "Which type of Achilles rupture boot should I choose?",
+            answer: "There are two main boot designs, both shaped to hold your ankle in a tip-toe position for healing: 1) Boots with wedges that lift the heel, which are gradually reduced during recovery, and 2) Boots with hinges that can be adjusted towards a flatter foot posture over time. Both types are equally effective for recovery, provided they fit well and are used properly.",
+        },
+        {
+            question: "How should I sleep with a torn Achilles tendon?",
+            answer: "It's essential to maintain a tip-toe position during sleep using either your boot or a specialized splint. Removing protection during sleep puts the healing tendon at high risk of re-injury. While sleeping in a boot can be uncomfortable and may dirty your bedding, solutions include using a detachable sole or placing the booted leg in an old pillowcase to protect both your bed and your other leg from scratches.",
+        },
+        {
+            question: "How long does Achilles tendon healing take?",
+            answer: "The healing process is lengthy, typically requiring 10 weeks in a plaster cast or boot, regardless of whether you have surgery or not. After this initial period, you can begin walking without the boot and start physiotherapy. However, the tendon isn't at full strength even then, and re-rupture is still possible. Competitive sports should be avoided for at least six months post-injury.",
+        },
+        {
+            question: "Is recovery faster with surgery?",
+            answer: "No, surgery does not accelerate recovery time. The purpose of surgery is simply to ensure proper alignment of the torn tendon ends for natural healing. The surgical stitches aren't strong enough to support body weight, and you'll still need the same protective period in a boot or cast as non-surgical treatment.",
+        },
+    ],
+    de: [
+        {
+            question:
+                "Was ist besser für die Achillessehnenheilung – Gehgips oder Stiefel?",
+            answer: "Stiefel haben sowohl Vor- als auch Nachteile. Der Hauptvorteil ist, dass sie zum Waschen oder Kratzen abgenommen werden können. Diese Abnehmbarkeit birgt jedoch auch ein Risiko, da unsachgemäßes Entfernen oder falsche Anwendung zu einer erneuten Verletzung führen kann. Richtig verwendet sind Stiefel praktisch und sicher, aber Nachlässigkeit kann zu einem erneuten Riss führen, der eine Operation und einen Neustart des gesamten Heilungsprozesses erforderlich macht.",
+        },
+        {
+            question: "Welche Art von Achillessehnenstiefel sollte ich wählen?",
+            answer: "Es gibt zwei Hauptdesigns, beide so geformt, dass der Fuß in einer Zehenspitzenposition für die Heilung gehalten wird: 1) Stiefel mit Keilen, die die Ferse anheben und im Laufe der Genesung schrittweise reduziert werden, und 2) Stiefel mit Scharnieren, die nach und nach zu einer flacheren Fußstellung eingestellt werden können. Beide Arten sind gleich wirksam, solange sie gut passen und korrekt verwendet werden.",
+        },
+        {
+            question:
+                "Wie sollte ich mit einer gerissenen Achillessehne schlafen?",
+            answer: "Es ist wichtig, auch im Schlaf eine Zehenspitzenposition beizubehalten – entweder mit dem Stiefel oder mit einer speziellen Schiene. Ohne Schutz ist die Sehne einem hohen Risiko einer erneuten Verletzung ausgesetzt. Obwohl das Schlafen im Stiefel unangenehm sein und das Bett verschmutzen kann, gibt es Lösungen wie eine abnehmbare Sohle oder das Einlegen des verletzten Beins im Stiefel in einen alten Kissenbezug, um Bett und anderes Bein zu schützen.",
+        },
+        {
+            question: "Wie lange dauert die Heilung einer Achillessehne?",
+            answer: "Der Heilungsprozess ist langwierig und erfordert in der Regel 10 Wochen in einem Gips oder Stiefel – unabhängig davon, ob eine Operation durchgeführt wurde oder nicht. Danach kann man ohne Stiefel laufen und mit Physiotherapie beginnen. Die Sehne ist jedoch noch nicht voll belastbar, und ein erneuter Riss ist weiterhin möglich. Leistungssport sollte mindestens sechs Monate nach der Verletzung vermieden werden.",
+        },
+        {
+            question: "Geht die Genesung mit einer Operation schneller?",
+            answer: "Nein, eine Operation beschleunigt die Genesung nicht. Ziel ist lediglich, die Enden der Sehne so zu fixieren, dass eine natürliche Heilung stattfinden kann. Die Nähte sind nicht stark genug, um das Körpergewicht zu tragen, und man benötigt dieselbe Schutzphase mit Gips oder Stiefel wie bei der nicht-operativen Behandlung.",
+        },
+    ],
+    fr: [
+        {
+            question:
+                "Quel est le meilleur pour la récupération du tendon d'Achille – plâtre de marche ou botte?",
+            answer: "Les bottes présentent à la fois des avantages et des inconvénients. Leur principal atout est qu’elles peuvent être retirées pour se laver ou se gratter. Cependant, cette amovibilité comporte aussi un risque, car un retrait inapproprié ou une mauvaise utilisation peut entraîner une nouvelle blessure. Utilisées correctement, elles sont pratiques et sûres, mais toute négligence peut provoquer une nouvelle rupture nécessitant une opération et un redémarrage complet de la récupération.",
+        },
+        {
+            question:
+                "Quel type de botte pour rupture du tendon d'Achille choisir?",
+            answer: "Il existe deux principaux types de bottes, toutes conçues pour maintenir la cheville en position pointe de pied : 1) Les bottes avec des cales sous le talon, qui sont progressivement réduites au cours de la récupération, et 2) Les bottes avec des charnières permettant d’ajuster progressivement vers une position plus plate. Les deux sont efficaces, à condition qu’elles soient bien adaptées et correctement utilisées.",
+        },
+        {
+            question: "Comment dormir avec un tendon d'Achille déchiré?",
+            answer: "Il est essentiel de garder la cheville en position pointe de pied pendant le sommeil, soit avec la botte, soit avec une attelle spécialisée. Retirer la protection la nuit expose le tendon à un risque élevé de re-blessure. Dormir avec la botte peut être inconfortable et salir les draps, mais des solutions existent : utiliser une semelle amovible ou placer la jambe bottée dans une vieille taie d’oreiller pour protéger le lit et l’autre jambe.",
+        },
+        {
+            question:
+                "Combien de temps dure la guérison d’un tendon d’Achille?",
+            answer: "Le processus de guérison est long, nécessitant généralement 10 semaines dans un plâtre ou une botte, que vous soyez opéré ou non. Après cette période initiale, vous pouvez marcher sans la botte et commencer la kinésithérapie. Toutefois, le tendon n’a pas encore retrouvé toute sa force et le risque de re-rupture existe toujours. Le sport de compétition doit être évité pendant au moins six mois après la blessure.",
+        },
+        {
+            question:
+                "La récupération est-elle plus rapide avec une opération?",
+            answer: "Non, la chirurgie n’accélère pas le temps de guérison. Son but est seulement d’assurer un bon alignement des extrémités du tendon pour permettre une cicatrisation naturelle. Les sutures ne sont pas assez solides pour supporter le poids du corps, et la période de protection avec une botte ou un plâtre reste nécessaire, comme pour un traitement non chirurgical.",
+        },
+    ],
+    es: [
+        {
+            question:
+                "¿Qué es mejor para la recuperación del tendón de Aquiles: yeso para caminar o bota?",
+            answer: "Las botas tienen ventajas e inconvenientes. El principal beneficio es que se pueden quitar para lavarse o rascarse. Sin embargo, esta posibilidad también representa un riesgo, ya que una extracción inadecuada o un mal uso puede provocar una nueva lesión. Bien utilizadas, son prácticas y seguras, pero la negligencia puede ocasionar una nueva rotura que requiera cirugía y reiniciar todo el proceso de recuperación.",
+        },
+        {
+            question:
+                "¿Qué tipo de bota para la rotura del tendón de Aquiles debo elegir?",
+            answer: "Existen dos diseños principales, ambos pensados para mantener el tobillo en posición de puntillas: 1) Botas con cuñas que elevan el talón, reducidas progresivamente durante la recuperación, y 2) Botas con bisagras que permiten ajustar gradualmente hacia una postura más plana. Ambos tipos son igualmente eficaces si se ajustan bien y se usan correctamente.",
+        },
+        {
+            question: "¿Cómo debo dormir con el tendón de Aquiles roto?",
+            answer: "Es fundamental mantener la posición de puntillas durante el sueño, ya sea con la bota o con una férula especializada. Quitar la protección al dormir pone el tendón en alto riesgo de una nueva lesión. Dormir con la bota puede ser incómodo y ensuciar la ropa de cama, pero existen soluciones como usar una suela desmontable o colocar la pierna con la bota dentro de una funda de almohada para proteger tanto la cama como la otra pierna.",
+        },
+        {
+            question: "¿Cuánto tarda en curarse el tendón de Aquiles?",
+            answer: "El proceso de curación es largo y suele requerir 10 semanas en un yeso o una bota, independientemente de si se ha operado o no. Después de este periodo inicial, se puede empezar a caminar sin la bota y comenzar la fisioterapia. Sin embargo, el tendón aún no ha recuperado toda su fuerza, y la re-rotura sigue siendo posible. Se debe evitar el deporte competitivo durante al menos seis meses tras la lesión.",
+        },
+        {
+            question: "¿La recuperación es más rápida con cirugía?",
+            answer: "No, la cirugía no acelera la recuperación. Su finalidad es únicamente garantizar una correcta alineación de los extremos del tendón para que pueda cicatrizar de forma natural. Los puntos de sutura no son lo suficientemente fuertes como para soportar el peso corporal, y se necesita el mismo periodo de protección con yeso o bota que en el tratamiento no quirúrgico.",
+        },
+    ],
+    it: [
+        {
+            question:
+                "Cosa è meglio per il recupero del tendine d'Achille: gesso da passeggio o tutore?",
+            answer: "I tutori hanno sia vantaggi che svantaggi. Il principale vantaggio è che possono essere tolti per lavarsi o grattarsi. Tuttavia, questa possibilità comporta anche un rischio, poiché una rimozione impropria o un uso scorretto può causare una nuova lesione. Usati correttamente, i tutori sono pratici e sicuri, ma la negligenza può portare a una nuova rottura che richiede un intervento chirurgico e un nuovo inizio del processo di guarigione.",
+        },
+        {
+            question:
+                "Quale tipo di tutore per rottura del tendine d'Achille dovrei scegliere?",
+            answer: "Esistono due modelli principali, entrambi progettati per mantenere la caviglia in posizione sulle punte: 1) Tutori con cunei che sollevano il tallone, ridotti gradualmente durante il recupero, e 2) Tutori con cerniere che consentono una regolazione progressiva verso una posizione più piatta. Entrambi i tipi sono ugualmente efficaci se ben adattati e usati correttamente.",
+        },
+        {
+            question: "Come devo dormire con il tendine d'Achille rotto?",
+            answer: "È fondamentale mantenere la posizione sulle punte durante il sonno, utilizzando il tutore o una stecca specializzata. Togliere la protezione durante la notte espone il tendine a un alto rischio di nuova lesione. Dormire con il tutore può essere scomodo e sporcare le lenzuola, ma ci sono soluzioni come usare una suola rimovibile o mettere la gamba ingessata in una vecchia federa per proteggere sia il letto che l’altra gamba.",
+        },
+        {
+            question: "Quanto tempo impiega a guarire il tendine d'Achille?",
+            answer: "Il processo di guarigione è lungo e richiede in genere 10 settimane in un gesso o in un tutore, indipendentemente dal fatto che si sia stati operati o meno. Dopo questo periodo iniziale si può iniziare a camminare senza il tutore e iniziare la fisioterapia. Tuttavia, il tendine non è ancora completamente forte e rimane il rischio di una nuova rottura. Lo sport competitivo va evitato per almeno sei mesi dopo l’infortunio.",
+        },
+        {
+            question: "Il recupero è più rapido con l’intervento chirurgico?",
+            answer: "No, l’intervento chirurgico non accelera i tempi di guarigione. Serve solo a garantire il corretto allineamento delle estremità del tendine per favorire la guarigione naturale. I punti di sutura non sono abbastanza resistenti da sostenere il peso del corpo, e sarà comunque necessario lo stesso periodo di protezione con gesso o tutore previsto dal trattamento non chirurgico.",
+        },
+    ],
+};
+---
+
+<FaqSchemaAccordion faqs={content[lang]} />

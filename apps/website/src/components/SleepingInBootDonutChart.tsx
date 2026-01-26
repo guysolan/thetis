@@ -55,14 +55,14 @@ export default function SleepingInBootDonutChart() {
   return (
     <div className="flex flex-col justify-center items-center">
       <h2 className="font-semibold text-3xl text-center">
-        <HighlightedWord>78%</HighlightedWord> of users need the Night Splint
-        for better sleep!
+        <HighlightedWord>78%</HighlightedWord> of users need the Splint for
+        better sleep!
       </h2>
 
       <div className="flex md:flex-row flex-col gap-4 md:gap-8 lg:gap-16 my-8">
         <div className="relative flex justify-center items-center">
           <Doughnut data={data} options={options} width={300} height={300} />
-          <p className="top-1/2 left-1/2 absolute flex justify-center items-center p-8 w-16 h-16 font-semibold text-4xl text-center transform -translate-x-1/2 -translate-y-1/2">
+          <p className="top-1/2 left-1/2 absolute flex justify-center items-center p-8 w-16 h-16 font-semibold text-4xl text-center -translate-x-1/2 -translate-y-1/2 transform">
             78%
           </p>
         </div>
@@ -70,7 +70,7 @@ export default function SleepingInBootDonutChart() {
           {data.labels.map((label, index) => (
             <li key={index} className="flex justify-center items-center">
               <span
-                className="inline-block border-neutral-300 mr-2 border rounded-md w-12 h-6"
+                className="inline-block mr-2 border border-neutral-300 rounded-md w-12 h-6"
                 style={{
                   backgroundColor: data.datasets[0].backgroundColor[index],
                 }}

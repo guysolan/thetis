@@ -2,8 +2,8 @@ import React from "react";
 
 const FDADetails = () => {
   return (
-    <section className="mt-8 py-4 border-t text-neutral-700 text-sm dark:text-neutral-300">
-      <h3 className="mb-1 font-medium text-lg text-neutral-900 dark:text-neutral-100">
+    <section className="mt-8 py-4 border-t text-black dark:text-neutral-300 text-sm">
+      <h3 className="mb-1 font-medium text-neutral-900 dark:text-neutral-100 text-lg">
         FDA Details
       </h3>
 

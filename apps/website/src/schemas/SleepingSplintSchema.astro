@@ -1,0 +1,78 @@
+---
+import { Schema } from "astro-seo-schema";
+---
+
+<Schema
+    item={{
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Product",
+                name: "Achilles Rupture Night Splint for Sleeping",
+                image: [
+                    "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+                    "https://thetismedical.com/images/night-splint/Thetis%20Medical%20Achilles%20Rupture%20Night%20Splint%20In%20Bed.jpg",
+                ],
+                description:
+                    "Remove the heavy boot at night. Sleep comfortably while maintaining optimal plantarflexion for Achilles rupture recovery.",
+                sku: "7B-QYCY-8JID",
+                gtin13: "5065005394047",
+                brand: {
+                    "@type": "Brand",
+                    name: "Thetis Medical",
+                },
+                aggregateRating: {
+                    "@type": "AggregateRating",
+                    reviewCount: "170",
+                    ratingValue: "4.6",
+                },
+            },
+            {
+                "@type": "FAQPage",
+                mainEntity: [
+                    {
+                        "@type": "Question",
+                        name: "Can I sleep without my boot after Achilles rupture?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "Yes, with the Thetis night splint you can safely remove your heavy boot and sleep comfortably. The splint maintains the necessary plantarflexion position to protect your healing Achilles tendon while being much lighter and more comfortable for sleep.",
+                        },
+                    },
+                    {
+                        "@type": "Question",
+                        name: "How does the night splint keep my Achilles safe while sleeping?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "The night splint is designed to maintain your foot in the optimal plantarflexion (pointed toe) position throughout the night. This position keeps tension off your healing Achilles tendon, preventing re-rupture while allowing comfortable sleep.",
+                        },
+                    },
+                    {
+                        "@type": "Question",
+                        name: "Is the night splint better than sleeping in my boot?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "Yes, the night splint is specifically designed for sleep. It's much lighter, more breathable, and allows better sleep quality compared to heavy walking boots. Over 3,000 patients have used it safely with no complications.",
+                        },
+                    },
+                ],
+            },
+            {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                    {
+                        "@type": "ListItem",
+                        position: 1,
+                        name: "Home",
+                        item: "https://thetismedical.com",
+                    },
+                    {
+                        "@type": "ListItem",
+                        position: 2,
+                        name: "Sleeping with Torn Achilles",
+                        item: "https://thetismedical.com/sleeping-with-torn-achilles",
+                    },
+                ],
+            },
+        ],
+    }}
+/>

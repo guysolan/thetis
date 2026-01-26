@@ -1,0 +1,80 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { allBaseRoutes, generateRouteForLanguage } from "../content/routes.tsx";
+import { languages, type Lang } from "../config/languages.ts";
+
+// Generate all routes in all languages
+const allRoutes = languages.flatMap((language) =>
+    allBaseRoutes.map((route) => generateRouteForLanguage(route, language)),
+);
+
+const { lang = "en" }: { lang?: Lang } = Astro.props;
+
+const content: Record<Lang, { title: string; description: string }> = {
+    en: {
+        title: "Thetis Medical Sitemap",
+        description:
+            "Medical device company specialising in splints for injured Achilles Tendons. We sell an Achilles Rupture Splint and a Trauma Splint.",
+    },
+    fr: {
+        title: "Plan du site de Thetis Medical",
+        description:
+            "Entreprise de dispositifs médicaux spécialisés dans les plâtrons pour les tendons du talon brisé. Nous vendons un plâtron de rupture de talon et un plâtron de traumatisme.",
+    },
+    de: {
+        title: "Thetis Medical Sitemap",
+        description:
+            "Medizinische Unternehmen, das sich auf Splints für verletzte Achillessehnen spezialisiert hat. Wir verkaufen einen Achilles-Ruptursplint und einen Traumasplint.",
+    },
+    es: {
+        title: "Plan del sitio web de Thetis Medical",
+        description:
+            "Empresa de dispositivos médicos especializados en plástros para lesiones de tendones de la cadera. Vendemos un plátro de ruptura de cadera y un plátro de traumatismo.",
+    },
+    it: {
+        title: "Piano del sito web di Thetis Medical",
+        description:
+            "Azienda di dispositivi medici specializzati in plastri per lesioni di tendini del ginocchio. Vendiamo un plastro di rottura del ginocchio e un plastro di traumatismo.",
+    },
+};
+---
+
+<Layout
+    title={content[lang].title}
+    description={content[lang].description}
+    image="https://thetismedical.com/images/dotty-logo"
+    lang={lang}
+>
+    <section class="flex flex-col mx-auto my-8 px-4 w-full max-w-[900px]">
+        <h1 class="mt-8 mb-4 font-semibold text-slate-900 text-3xl">
+            {content[lang].title}
+        </h1>
+        <p class="mb-8 text-gray-600">{content[lang].description}</p>
+
+        <div class="gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {
+                languages.map((language) => (
+                    <div>
+                        <h2 class="mb-4 font-semibold text-xl capitalize">
+                            {language.name}
+                        </h2>
+                        <ul class="space-y-2">
+                            {allRoutes
+                                .filter((route) => route.lang === language.code)
+                                .map((route) => (
+                                    <li>
+                                        <a
+                                            class="text-blue-600 hover:text-blue-800 hover:underline"
+                                            href={route.href}
+                                        >
+                                            {route.title}
+                                        </a>
+                                    </li>
+                                ))}
+                        </ul>
+                    </div>
+                ))
+            }
+        </div>
+    </section>
+</Layout>

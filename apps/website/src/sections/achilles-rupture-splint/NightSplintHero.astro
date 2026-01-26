@@ -1,0 +1,94 @@
+---
+import HighlightedParagraph from "@/components/HighlightedParagraph";
+import CheckWithCareTeam from "@/components/buy-button/CheckWithCareTeam.tsx";
+import BuyButtonVariants from "../../components/products/buy-button/BuyButtonVariants.tsx";
+import { Image } from "astro:assets";
+import ColorGradient from "@/components/ColorGradient.astro";
+import nightSplint from "@/assets/night-splint/night-splint-bed-top-square.jpg";
+// White close-up image path - check if it exists in public folder
+const nightSplintWhitePath = "/images/night_splint_white_close.jpg";
+import ReviewsLink from "@/components/ReviewsLink.tsx";
+import WorkInHealthcare from "@/components/products/night-splint/WorkInHealthcare.astro";
+import { content } from "@/components/products/night-splint/content.ts";
+import PriceDisplay from "@/components/PriceDisplay.tsx";
+import { ProductImageGallery } from "@/components/products/ProductImageGallery";
+import type { Lang } from "../../config/languages";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+const t = content[lang]?.hero || content.en.hero;
+---
+
+<ColorGradient>
+  <div class="mx-auto px-4 max-w-7xl text-center">
+    <!-- Mobile header only -->
+    <div class="lg:hidden flex flex-col gap-4 mb-4">
+      <h1 class="mx-w-4xl font-semibold text-gray-900 text-4xl leading-[105%]">
+        <HighlightedParagraph paragraph={t.title} client:load />
+      </h1>
+      <p class="mx-auto max-w-3xl text-gray-700 text-lg">
+        {t.description}
+      </p>
+    </div>
+
+    <div class="flex lg:flex-row flex-col gap-6 lg:gap-10">
+      <!-- Product Image Gallery -->
+      <div class="lg:w-1/2">
+        <ProductImageGallery
+          images={[
+            {
+              src: nightSplint.src,
+              alt: "Achilles Tendon Rupture Night Splint on bed",
+            },
+            {
+              src: nightSplintWhitePath,
+              alt: "Close-up view of Thetis Night Splint",
+            },
+          ]}
+          client:load
+        />
+      </div>
+
+      <!-- Product Info -->
+      <div class="flex flex-col pt-4 lg:w-1/2 text-left">
+        <!-- Desktop header only -->
+        <div class="hidden lg:block">
+          <!-- Social Proof Badge for Desktop -->
+          <div class="mb-4 text-left">
+            <div
+              class="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full"
+            >
+              <span
+                class="font-semibold text-primary text-sm uppercase tracking-wider"
+                >5,000+ Better Rested Patients</span
+              >
+            </div>
+          </div>
+          <h1
+            class="mb-4 font-semibold text-gray-900 text-4xl xl:text-5xl leading-tight"
+          >
+            <HighlightedParagraph paragraph={t.title} client:load />
+          </h1>
+          <p class="max-w-xl text-gray-600 text-lg">
+            {t.description}
+          </p>
+        </div>
+
+        <!-- Price & Reviews -->
+        <div class="flex flex-col gap-2 mt-2">
+          <PriceDisplay size="lg" showFreeShipping={true} client:load />
+          <ReviewsLink size="lg" lang={lang} />
+        </div>
+
+        <!-- Discrete care team note -->
+        <CheckWithCareTeam client:load lang={lang} />
+
+        <!-- Buy Options -->
+        <BuyButtonVariants client:load lang={lang} />
+      </div>
+    </div>
+  </div>
+</ColorGradient>

@@ -1,147 +1,192 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import LinkText from './LinkText.astro';
+import type { CollectionEntry } from "astro:content";
+import LinkText from "./LinkText.astro";
 
 interface Props {
-    posts: (CollectionEntry<'guide' | 'article'> & { type: string })[];
+    posts: (CollectionEntry<"guide" | "article"> & { type: string })[];
     title: string;
+    subtitle?: string;
+    showSurvivalKitCallout?: boolean;
     excludeTags?: string[];
 }
 
-const { posts, title, excludeTags = [] } = Astro.props;
+const {
+    posts,
+    title,
+    subtitle,
+    showSurvivalKitCallout = false,
+    excludeTags = [],
+} = Astro.props;
 
 // Get the selected tag from URL params and ensure it's a string
-const selectedTag = Astro.url.searchParams.get('tag') || 'all';
+const selectedTag = Astro.url.searchParams.get("tag") || "all";
 
 // Filter posts based on selected tag
-const filteredPosts = selectedTag === 'all' 
-    ? posts 
-    : posts.filter(post => post.data.tags && post.data.tags.includes(selectedTag));
+const filteredPosts =
+    selectedTag === "all"
+        ? posts
+        : posts.filter(
+              (post) => post.data.tags && post.data.tags.includes(selectedTag),
+          );
 
 // Base tags configuration
 const baseTagsConfig = [
-    { word: 'recovery', icon: '🏥' },
-    { word: 'comfort', icon: '🛌' },
-    { word: 'science', icon: '💡' },
-    { word: 'diagnosis', icon: '🔬' },
-    { word: 'equipment', icon: '🦿' },
-    { word: 'treatment', icon: '🎯' },
+    { word: "recovery", icon: "🏥" },
+    { word: "comfort", icon: "🛌" },
+    { word: "science", icon: "💡" },
+    { word: "diagnosis", icon: "🔬" },
+    { word: "equipment", icon: "🦿" },
+    { word: "treatment", icon: "🎯" },
+    { word: "rehabilitation", icon: "🦵" },
 ] as const;
 
 // Get all unique tags from posts
-const availableTagsFromPosts = [...new Set(posts.flatMap(post => post.data.tags || []))];
+const availableTagsFromPosts = [
+    ...new Set(posts.flatMap((post) => post.data.tags || [])),
+];
 
 // Filter tags based on what's actually used in posts and not excluded
-const tags = baseTagsConfig
-    .filter(tag => 
-        availableTagsFromPosts.includes(tag.word) && 
-        !excludeTags.includes(tag.word)
-    );
+const tags = baseTagsConfig.filter(
+    (tag) =>
+        availableTagsFromPosts.includes(tag.word) &&
+        !excludeTags.includes(tag.word),
+);
 ---
 
 <script>
     // Get all article cards and tag links
-    const articleCards = document.querySelectorAll('.article-card');
-    const tagLinks = document.querySelectorAll('#filter-nav a');
-    const shuffleButton = document.getElementById('shuffle-button');
-    const articlesContainer = document.getElementById('articles-container');
+    const articleCards = document.querySelectorAll(".article-card");
+    const tagLinks = document.querySelectorAll("#filter-nav a");
 
-    // Function to shuffle DOM elements
-    function shuffleNodes(parentNode) {
-        const elements = [...parentNode.children];
-        const shuffled = elements.sort(() => Math.random() - 0.5);
-        shuffled.forEach(node => parentNode.appendChild(node));
-    }
-
-    // Add shuffle button click handler
-    shuffleButton?.addEventListener('click', () => {
-        shuffleNodes(articlesContainer);
-    });
+    // Shuffle feature removed
 
     // Add click event listeners to tag links
-    tagLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+    tagLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
             e.preventDefault();
-            const tag = new URL(link.href).searchParams.get('tag') || 'all';
-            
+            const tag = new URL(link.href).searchParams.get("tag") || "all";
+
             // Update URL without page reload
-            const newUrl = tag === 'all' ? window.location.pathname : `${window.location.pathname}?tag=${tag}`;
-            history.pushState({}, '', newUrl);
+            const newUrl =
+                tag === "all"
+                    ? window.location.pathname
+                    : `${window.location.pathname}?tag=${tag}`;
+            history.pushState({}, "", newUrl);
 
             // Update active state of links
-            tagLinks.forEach(l => {
-                l.classList.toggle('bg-gray-800', l.href === link.href);
-                l.classList.toggle('text-white', l.href === link.href);
-                l.setAttribute('aria-current', l.href === link.href ? 'page' : undefined);
+            tagLinks.forEach((l) => {
+                l.classList.toggle("bg-gray-800", l.href === link.href);
+                l.classList.toggle("text-white", l.href === link.href);
+                l.setAttribute(
+                    "aria-current",
+                    l.href === link.href ? "page" : undefined,
+                );
             });
 
             // Filter articles
-            articleCards.forEach(card => {
-                if (tag === 'all') {
-                    card.parentElement.style.display = 'block';
+            articleCards.forEach((card) => {
+                if (tag === "all") {
+                    card.parentElement.style.display = "block";
                 } else {
-                    const cardTags = card.dataset.tags?.split(' ') || [];
-                    card.parentElement.style.display = cardTags.includes(tag) ? 'block' : 'none';
+                    const cardTags = card.dataset.tags?.split(" ") || [];
+                    card.parentElement.style.display = cardTags.includes(tag)
+                        ? "block"
+                        : "none";
                 }
             });
         });
     });
 </script>
 
-<div class="mx-auto px-4 py-8 max-w-[1400px]">
-    <h1 class="mb-8 font-bold text-4xl text-center text-gray-800">{title}</h1>
-    
-    <nav aria-label="Content filter" id="filter-nav" class="mb-12 w-full">
-        <div class="flex md:flex-row flex-col items-start gap-4 w-full">
-            <div class="flex flex-wrap items-center gap-4">
-                <a 
-                    href={Astro.url.pathname}
-                    class={`border-gray-300 hover:border-gray-400 hover:bg-gray-200 px-4 py-2 border rounded-full hover:text-black transition-all ${selectedTag === 'all' ? 'bg-gray-800 text-white' : ''}`}
-                    aria-current={selectedTag === 'all' ? 'page' : undefined}>
-                    📚 All
-                </a>
-                {tags.map(({ word, icon }) => (
-                    <a 
-                        href={`${Astro.url.pathname}?tag=${word}`}
-                        class={`border-gray-400 hover:border-gray-500 capitalize hover:bg-gray-200 px-4 py-2 border rounded-full hover:text-black transition-all ${selectedTag === word ? 'bg-gray-800 text-white' : ''}`}
-                        aria-current={selectedTag === word ? 'page' : undefined}>
-                        {icon} {word}
-                    </a>
-                ))}
+<div class="w-full border border-gray-200 rounded-xl bg-gray-50 p-4">
+    <nav aria-label="Content filter" id="filter-nav" class="mb-6 w-full">
+        <div class="w-full p-0">
+            <div class="mb-3 text-gray-600 text-sm">
+                Browse articles by topic
             </div>
-            <button
-                id="shuffle-button"
-                class="border-gray-300 hover:border-gray-400 bg-gray-200 hover:bg-gray-300 px-4 py-2 border rounded-full w-fit text-nowrap hover:text-black transition-all"
-                aria-label="Shuffle posts">
-                🎲 Shuffle
-            </button>
+            <div
+                class="flex md:flex-row flex-col items-start gap-3 w-full"
+                role="group"
+                aria-label="Article topics"
+            >
+                <div
+                    class="flex flex-wrap items-center justify-center gap-3 w-full"
+                >
+                    <a
+                        href={Astro.url.pathname}
+                        class={`border-gray-300 hover:border-gray-400 hover:bg-gray-200 px-3.5 py-1.5 border rounded-full hover:text-black transition-all cursor-pointer text-gray-700 no-underline text-[0.95rem] ${selectedTag === "all" ? "bg-gray-800 text-white" : ""}`}
+                        aria-current={selectedTag === "all"
+                            ? "page"
+                            : undefined}
+                        aria-label="Show all articles"
+                        title="Show all articles"
+                    >
+                        📚 All <span class="hidden md:inline">Articles</span>
+                    </a>
+                    {
+                        tags.map(({ word, icon }) => (
+                            <a
+                                href={`${Astro.url.pathname}?tag=${word}`}
+                                class={`border-gray-400 hover-border-gray-500 capitalize hover:bg-gray-200 px-3.5 py-1.5 border rounded-full hover:text-black transition-all cursor-pointer text-gray-700 no-underline text-[0.95rem] ${selectedTag === word ? "bg-gray-800 text-white" : ""}`}
+                                aria-current={
+                                    selectedTag === word ? "page" : undefined
+                                }
+                                aria-label={`${word} filter`}
+                                title={`${word} filter`}
+                            >
+                                {icon} {word}
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
         </div>
     </nav>
 
-    <div id="articles-container" class="gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" role="feed" aria-busy="false">
-        {filteredPosts.map(post => (
-            <a href={`/${post.type}s/${post.id}`} class="block group">
-                <article class="flex flex-col border-gray-200 hover:border-gray-300 bg-white hover:shadow-lg p-6 border rounded-lg h-full transition-all hover:-translate-y-1 duration-200 article-card ease-in-out" data-tags={post.data.tags?.join(' ')}>
-                    <header>
-                        <h2 class="mb-3 font-semibold text-2xl text-gray-800">
-                            {post.data.title}
-                        </h2>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            {post.data.tags?.map(tag => (
-                                <span class="bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded-md text-gray-700 text-sm transition-colors">
-                                    #{tag}
-                                </span>
-                            ))}
-                        </div>
-                    </header>
-                    <p class="mb-4 line-clamp-3 text-gray-600">{post.data.description}</p>
-                    <footer class="mt-auto">
-                        <LinkText>
-                            Read full {post.type}
-                        </LinkText>  
-                    </footer>
-                </article>
-            </a>
-        ))}
+    <div
+        id="articles-container"
+        class="gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+        role="feed"
+        aria-busy="false"
+    >
+        {
+            filteredPosts.map((post) => (
+                <a href={`/${post.type}s/${post.id}`} class="group block">
+                    <article
+                        class="flex flex-col bg-white hover:shadow-lg p-6 border border-gray-200 hover:border-gray-300 rounded-lg h-full transition-all hover:-translate-y-1 duration-200 ease-in-out article-card"
+                        data-tags={post.data.tags?.join(" ")}
+                    >
+                        <header>
+                            <h2 class="mb-3 font-semibold text-gray-800 text-2xl">
+                                {post.data.title}
+                            </h2>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                {post.data.tags?.map((tag) => {
+                                    const cfg =
+                                        tags.find((t) => t.word === tag) ||
+                                        baseTagsConfig.find(
+                                            (t) => t.word === tag,
+                                        );
+                                    return (
+                                        <span class="inline-flex items-center gap-2 px-3 py-1 border border-gray-300 rounded-full text-gray-700 text-sm">
+                                            <span>{cfg?.icon}</span>
+                                            <span class="capitalize">
+                                                {tag}
+                                            </span>
+                                        </span>
+                                    );
+                                })}
+                            </div>
+                        </header>
+                        <p class="mb-4 text-gray-600 line-clamp-3">
+                            {post.data.description}
+                        </p>
+                        <footer class="mt-auto">
+                            <LinkText>Read full {post.type}</LinkText>
+                        </footer>
+                    </article>
+                </a>
+            ))
+        }
     </div>
 </div>

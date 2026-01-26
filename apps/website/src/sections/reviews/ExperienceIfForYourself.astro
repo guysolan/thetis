@@ -1,0 +1,73 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import type { Lang } from "../../config/languages";
+import { getRouteBySlugAndLanguage } from "../../content/routes";
+
+interface Props {
+    lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+
+// Get the splint route for the current language
+const splintRoute = getRouteBySlugAndLanguage("splint", lang);
+
+const content = {
+    en: {
+        title: "Heard enough?",
+        description: "Experience it for yourself",
+        buttonText: "View Product",
+    },
+    es: {
+        title: "¿Has oído suficiente?",
+        description: "Experiméntalo por ti mismo",
+        buttonText: "Comprar Ahora",
+    },
+    fr: {
+        title: "En avez-vous assez entendu?",
+        description: "Vivez-le par vous-même",
+        buttonText: "Acheter Maintenant",
+    },
+    de: {
+        title: "Genug gehört?",
+        description: "Erleben Sie es selbst",
+        buttonText: "Jetzt Kaufen",
+    },
+    it: {
+        title: "Ne hai sentito abbastanza?",
+        description: "Sperimentalo tu stesso",
+        buttonText: "Compra Ora",
+    },
+};
+
+const currentContent = content[lang];
+const buttonUrl = splintRoute?.href || "/achilles-rupture-splint";
+const buttonText = currentContent.buttonText;
+---
+
+<section
+    class="group relative bg-gradient-to-tr from-primary/50 via-primary/20 to-primary/30 shadow-lg hover:shadow-xl mx-auto px-12 md:px-16 rounded-[2rem] max-w-[90vw] lg:max-w-screen-lg overflow-hidden transition-all duration-300"
+>
+    <div
+        class="z-10 relative flex flex-col justify-center items-center space-y-8 my-16 px-6 w-full h-full"
+    >
+        <div
+            class="flex flex-col justify-center items-center space-y-4 w-full max-w-[700px] text-center group-hover:scale-102 transition-all duration-300"
+        >
+            <h2 class="font-semibold text-neutral-900 text-3xl md:text-4xl">
+                {currentContent.title}
+            </h2>
+            <p class="max-w-[650px] text-neutral-700 text-lg md:text-xl">
+                {currentContent.description}
+            </p>
+        </div>
+
+        <a
+            href={buttonUrl}
+            class={cn(buttonVariants({ size: "lg", variant: "default" }))}
+        >
+            {buttonText}
+        </a>
+    </div>
+</section>

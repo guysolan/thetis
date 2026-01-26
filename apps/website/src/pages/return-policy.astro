@@ -1,0 +1,228 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { buttonVariants } from "../components/ui/button";
+import Slide from "../components/Slide.astro";
+---
+
+<Layout
+    title="Return Policy - Thetis Medical"
+    description="Our 30-day return policy for Thetis Medical products. Learn about returns, refunds, and our customer service process."
+>
+    <main class="">
+        <Slide title="Return Policy">
+            <div class="space-y-8 mx-auto max-w-4xl">
+                <div class="bg-white shadow-lg p-8 rounded-2xl">
+                    <h2 class="mb-6 font-semibold text-2xl">
+                        30-Day Return Policy
+                    </h2>
+                    <p class="mb-4 text-gray-700">
+                        We have a 30-day return policy, which means you have 30
+                        days after receiving your item to request a return.
+                    </p>
+
+                    <h3 class="mb-4 font-semibold text-xl">
+                        Return Requirements
+                    </h3>
+                    <p class="mb-4 text-gray-700">
+                        To be eligible for a return, your item must be in the
+                        same condition that you received it, unworn or unused,
+                        with tags, and in its original packaging.
+                    </p>
+
+                    <h3 class="mb-4 font-semibold text-xl">
+                        How to Start a Return
+                    </h3>
+                    <div class="space-y-4">
+                        <p class="text-gray-700">You can start a return by:</p>
+                        <ul class="space-y-2 pl-6 text-gray-700 list-disc">
+                            <li>
+                                Contacting us at <a
+                                    href="mailto:info@thetismedical.com"
+                                    class="text-primary hover:underline"
+                                    >info@thetismedical.com</a
+                                > with your order ID, reason for return, and photos
+                                if required
+                            </li>
+                            <li>Using our online returns form below</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-blue-50 mt-8 p-6 rounded-lg">
+                        <h4 class="mb-4 font-semibold text-lg">
+                            Quick Return Process
+                        </h4>
+                        <ol class="space-y-2 pl-6 text-gray-700 list-decimal">
+                            <li>
+                                Submit your return request with order details
+                            </li>
+                            <li>We'll review and approve your return</li>
+                            <li>We'll send you a return shipping label</li>
+                            <li>Ship your item back to us</li>
+                            <li>
+                                We'll process your refund within 10 business
+                                days
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="bg-white shadow-lg p-8 rounded-2xl">
+                    <h2 class="mb-6 font-semibold text-2xl">
+                        Damages and Issues
+                    </h2>
+                    <p class="mb-4 text-gray-700">
+                        Please inspect your order upon reception and contact us
+                        immediately if the item is defective, damaged, or if you
+                        receive the wrong item, so that we can evaluate the
+                        issue and make it right.
+                    </p>
+                </div>
+
+                <div class="bg-white shadow-lg p-8 rounded-2xl">
+                    <h2 class="mb-6 font-semibold text-2xl">
+                        Non-Returnable Items & Conditions
+                    </h2>
+
+                    <div class="mb-6">
+                        <h3 class="mb-4 font-semibold text-red-600 text-xl">
+                            🚫 Sorry, We Can't Accept These Returns
+                        </h3>
+                        <p class="mb-4 text-gray-700">
+                            We know it's not fun to hear "no," but these
+                            conditions make it impossible for us to resell the
+                            product or are outside our control:
+                        </p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="pl-4 border-red-500 border-l-4">
+                            <h4 class="mb-2 font-semibold text-lg">
+                                Doctor Didn't Approve? 😅
+                            </h4>
+                            <p class="mb-2 text-gray-700">
+                                We always recommend checking with your
+                                healthcare provider before purchasing.
+                                Unfortunately, if your doctor says "no thanks,"
+                                we can't accept that as a return reason. Your
+                                doctor knows best!
+                            </p>
+                        </div>
+
+                        <div class="pl-4 border-red-500 border-l-4">
+                            <h4 class="mb-2 font-semibold text-lg">
+                                Product Made Unsellable
+                            </h4>
+                            <p class="mb-2 text-gray-700">
+                                We need to be able to resell returned items to
+                                keep our prices low. These conditions make that
+                                impossible:
+                            </p>
+                            <ul class="space-y-2 pl-6 text-gray-700 list-disc">
+                                <li>
+                                    <strong>Stretched or curling straps:</strong
+                                    > Once stretched, they won't provide the proper
+                                    support
+                                </li>
+                                <li>
+                                    <strong
+                                        >Skin on straps or foam backing:</strong
+                                    > We love you, but we don't want your skin cells!
+                                    😄
+                                </li>
+                                <li>
+                                    <strong>Damaged packaging:</strong> We need ALL
+                                    parts back in good condition - it's like a puzzle,
+                                    every piece matters!
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="pl-4 border-red-500 border-l-4">
+                            <h4 class="mb-2 font-semibold text-lg">
+                                Other Non-Returnable Items
+                            </h4>
+                            <ul class="space-y-2 pl-6 text-gray-700 list-disc">
+                                <li>
+                                    Perishable goods (food, flowers, plants)
+                                </li>
+                                <li>
+                                    Custom products (special orders or
+                                    personalized items)
+                                </li>
+                                <li>Personal care goods (beauty products)</li>
+                                <li>
+                                    Hazardous materials, flammable liquids, or
+                                    gases
+                                </li>
+                                <li>Sale items or gift cards</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 mt-6 p-4 rounded-lg">
+                        <p class="text-gray-700 text-sm">
+                            💡 <strong>Pro tip:</strong> If you're unsure about your
+                            doctor's approval, just ask them first! It saves everyone
+                            time and keeps our friendship intact. 😊
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white shadow-lg p-8 rounded-2xl">
+                    <h2 class="mb-6 font-semibold text-2xl">
+                        European Union Returns
+                    </h2>
+                    <p class="mb-4 text-gray-700">
+                        If merchandise is being shipped into the European Union,
+                        you have the right to cancel or return your order within
+                        14 days, for any reason and without justification. Your
+                        item must be in the same condition that you received it,
+                        unworn or unused, with tags, and in its original
+                        packaging. You'll also need the receipt or proof of
+                        purchase.
+                    </p>
+                </div>
+
+                <div class="bg-white shadow-lg p-8 rounded-2xl">
+                    <h2 class="mb-6 font-semibold text-2xl">Refunds</h2>
+                    <p class="mb-4 text-gray-700">
+                        We will notify you once we've received and inspected
+                        your return, and let you know if the refund was approved
+                        or not. If approved, you'll be automatically refunded on
+                        your original payment method within 10 business days.
+                    </p>
+                    <p class="text-gray-700">
+                        Please remember it can take some time for your bank or
+                        credit card company to process and post the refund too.
+                        If more than 15 business days have passed since we've
+                        approved your return, please contact us at <a
+                            href="mailto:info@thetismedical.com"
+                            class="text-primary hover:underline"
+                            >info@thetismedical.com</a
+                        >.
+                    </p>
+                </div>
+
+                <!-- CTA Section -->
+                <div class="bg-primary/5 p-8 rounded-2xl text-center">
+                    <h3 class="mb-4 font-semibold text-xl">
+                        Ready to Start Your Return?
+                    </h3>
+                    <p class="mb-6 text-gray-700">
+                        Use our simple online form to submit your return request
+                        quickly and easily.
+                    </p>
+                    <a
+                        href="/returns"
+                        class={buttonVariants({
+                            size: "lg",
+                            className: "shadow-lg",
+                        })}
+                    >
+                        Start Return Process
+                    </a>
+                </div>
+            </div>
+        </Slide>
+    </main>
+</Layout>

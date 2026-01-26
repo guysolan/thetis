@@ -1,1 +1,31 @@
-{ "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }] }
+{
+  "framework": "vite",
+  "buildCommand": "bun run build",
+  "outputDirectory": "dist",
+  "installCommand": "bun install --frozen-lockfile",
+  "ignoreCommand": "git rev-list --count HEAD | grep -q '^1$' && exit 1 || git diff HEAD^ HEAD --quiet -- apps/ship-stock/ packages/ui/ turbo.json package.json bun.lockb",
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "dev": false,
+      "preview": false
+    }
+  },
+  "env": {
+    "NODE_ENV": "production",
+    "SKIP_ENV_VALIDATION": "true",
+    "NODE_OPTIONS": "--max-old-space-size=4096"
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control", 
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}

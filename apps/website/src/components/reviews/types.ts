@@ -1,13 +1,31 @@
-export interface Review {
+import type { ImageMetadata } from "astro";
+
+export type Review = {
     name: string;
-    description?: string;
-    date?: string;
-    image?: ImageMetadata;
-    link?: string;
-    stars?: number;
+    link: string;
+    description: string;
+    image: ImageMetadata;
     title: string;
-    body: string;
     short?: string;
+    body: string;
+    country: string;
+    clinics: string[];
+    clinicImages: string[];
+    date: string;
+    stars?: number;
     is_pinned?: boolean;
-    country: "US" | "CA" | "GB" | "DE" | "IT" | "FR" | "WLS" | "SCT" | "IRL" | "SE";
-}
+};
+import type { Lang } from "../../config/languages";
+
+export type ReviewContent = {
+    description: string;
+    title: string;
+    short?: string;
+    body: string;
+};
+
+export type TranslatedReview =
+    & Omit<Review, "description" | "title" | "short" | "body">
+    & {
+        content: Record<Lang, ReviewContent>;
+    };

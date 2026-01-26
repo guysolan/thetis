@@ -1,0 +1,51 @@
+---
+import FAQsLayout from "../../layouts/FAQsLayout.astro";
+import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
+import TornAchillesRecoverySection from "../../sections/FAQs/torn-achilles-recovery.astro";
+import type { Lang } from "@/config/languages";
+import TornAchillesRecoveryFaqsSection from "../../sections/FAQs/torn-achilles-recovery-faqs.astro";
+import CourseCTA from "../../components/CTA/CourseCTA.astro";
+const { lang = "en" }: { lang?: Lang } = Astro.props;
+
+const content: Record<Lang, { title: string; description: string }> = {
+    en: {
+        title: "Torn Achilles Recovery Guide: Boot vs Cast, Surgery Timeline & Sleeping Tips",
+        description:
+            "In-depth torn Achilles tendon recovery guide covering recovery time with and without surgery, the best walking boots, cast vs boot debate, sleep solutions, and rehab exercises.",
+    },
+    fr: {
+        title: "Guide de récupération de la rupture du tendon d'Achille : Botte ou plâtre, délais de chirurgie & conseils pour dormir",
+        description:
+            "Guide approfondi de la récupération après rupture du tendon d'Achille : durée de récupération avec ou sans chirurgie, meilleures bottes de marche, comparaison plâtre vs botte, solutions pour mieux dormir et exercices de rééducation.",
+    },
+    de: {
+        title: "Ratgeber zur Achillessehnenriss-Genesung: Schuh vs. Gips, Operationszeitplan & Schlaftipps",
+        description:
+            "Umfassender Ratgeber zur Genesung nach Achillessehnenriss: Erholungsdauer mit und ohne Operation, die besten Gehstiefel, Gips oder Schuh, Tipps zum Schlafen und Reha-Übungen.",
+    },
+    es: {
+        title: "Guía de recuperación de la rotura del tendón de Aquiles: Bota vs escayola, plazos de cirugía y consejos para dormir",
+        description:
+            "Guía detallada sobre la recuperación de la rotura del tendón de Aquiles: tiempo de recuperación con y sin cirugía, mejores botas ortopédicas, comparación entre escayola y bota, soluciones para dormir y ejercicios de rehabilitación.",
+    },
+    it: {
+        title: "Guida al recupero della rottura del tendine d'Achille: Tutore vs gesso, tempi chirurgici & consigli per dormire",
+        description:
+            "Guida approfondita al recupero dopo la rottura del tendine d'Achille: tempi di recupero con e senza intervento, migliori tutori per camminare, confronto tra gesso e tutore, soluzioni per il sonno ed esercizi di riabilitazione.",
+    },
+};
+
+const currentContent = content[lang];
+---
+
+<FAQsLayout
+    title={currentContent.title}
+    description={currentContent.description}
+    lang={lang}
+>
+    <TornAchillesRecoverySection lang={lang} />
+    <CourseCTA lang={lang} variant="full" />
+    <NightSplintAdvert lang={lang} />
+
+    <TornAchillesRecoveryFaqsSection lang={lang} />
+</FAQsLayout>

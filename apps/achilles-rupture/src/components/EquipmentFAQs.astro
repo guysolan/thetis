@@ -1,0 +1,179 @@
+---
+interface FAQ {
+    question: string;
+    answer: string;
+}
+
+const faqs: FAQ[] = [
+    {
+        question: "Why is the Thetis Night Splint rated #1?",
+        answer: 'It\'s the only night splint specifically designed for Achilles rupture recovery, addressing a critical gap in the market. Traditional boots are uncomfortable for sleep, leading to poor rest and potential re-injury risks. The Thetis splint has received endorsements from leading surgeons including the Past President of the British Orthopaedic Foot and Ankle Society (BOFAS), the UK\'s leading authority on foot and ankle surgery. Patients consistently report it\'s "worth every penny" and call it a "game changer" despite the premium price, praising the quality made in England design.',
+    },
+    {
+        question: "Do I need all these items?",
+        answer: "The walking boot and crutches are essential - you cannot recover without them. The night splint is highly recommended by both surgeons and patients for sleep comfort and preventing re-rupture during vulnerable sleep movements. Other items significantly improve quality of life during recovery but aren't strictly necessary. We recommend starting with the essentials and adding comfort items as you identify specific needs.",
+    },
+    {
+        question: "When should I buy these items?",
+        answer: 'Ideally, have the essential items ready as soon as possible after injury. As one patient said: "I wish I\'d gotten everything from the start. Adding items piecemeal as problems arose was frustrating and more expensive in the long run." The night splint becomes crucial once you start needing better sleep (usually within the first week). Other comfort items can be added as needed throughout your recovery journey.',
+    },
+    {
+        question: "Is the Thetis Night Splint worth the higher price?",
+        answer: 'Patient reviews consistently say yes. One patient wrote: "This has been a very worthwhile purchase. It\'s a good example of a small company that\'s identified a problem and provided a solution... worth every penny." Another said "It was fantastic being able to remove the boot and sleep comfortably." The splint is quality made in England with a patented design, and it\'s the only night splint specifically engineered for Achilles rupture recovery. Many patients report it\'s a "game changer" for getting proper sleep during recovery.',
+    },
+    {
+        question: "How long will I need these items?",
+        answer: 'Boot usage typically lasts 6-12 weeks depending on your treatment protocol. The night splint is useful throughout the immobilization phase and early rehabilitation. As Brandon (USA) noted: "This worked great and kept me from having to wear my big clunky walking boot to bed!" Items like the EVENup and crutch handles are needed as long as you\'re using crutches or the boot.',
+    },
+    {
+        question: "What do surgeons say about these recommendations?",
+        answer: 'Leading foot and ankle surgeons strongly support proper equipment. Dr. Robbie Ray states he has "found the Thetis splint particularly effective in bridging the gap between immobilization and active recovery." Mr. James Davis (Past President of BOFAS) specifically endorses the Thetis splint: "When I tore my own Achilles tendon, the hardest part of the recovery was having to wear the hospital boot in bed at night for many weeks. It is fantastic that Thetis Medical have produced this night-splint. It is certain to improve the recovery experience for patients."',
+    },
+    {
+        question:
+            "What's the difference between a walking boot and a night splint?",
+        answer: "A walking boot is designed for weight-bearing and mobility during the day, while a night splint is specifically for sleep. The walking boot is bulkier and less comfortable for sleeping, while the night splint is lightweight and designed for comfort during rest.",
+    },
+    {
+        question: "Why do I need an EVENup shoe leveler?",
+        answer: "The EVENup prevents back and hip pain by balancing your gait when wearing a walking boot. Without it, the height difference between your boot and regular shoe can cause significant discomfort and potential long-term issues.",
+    },
+    {
+        question: "Is a waterproof cover really necessary?",
+        answer: "Yes, a waterproof cover is essential for safe showering. It prevents your boot from getting wet, which can lead to skin issues, odors, and potential damage to the boot's materials. It's a small investment that protects your more expensive equipment.",
+    },
+    {
+        question: "What are the benefits of ergonomic crutch handles?",
+        answer: "Ergonomic crutch handles reduce hand and wrist pain by up to 40%. They distribute pressure more evenly across your palm and provide better grip, making crutch use more comfortable and reducing the risk of nerve damage.",
+    },
+    {
+        question: "When should I start using resistance bands?",
+        answer: "Resistance bands are typically introduced during the later stages of recovery, after your surgeon gives clearance. They help rebuild strength gradually and can be adjusted to different resistance levels as you progress.",
+    },
+    {
+        question: "Is a knee scooter worth the investment?",
+        answer: "A knee scooter can be a great alternative to crutches, especially for longer distances. It's more comfortable than crutches and allows you to carry items while moving. However, it's not suitable for all surfaces and may be challenging in tight spaces.",
+    },
+    {
+        question: "Why are merino wool socks recommended?",
+        answer: "Merino wool socks are naturally antimicrobial, temperature-regulating, and moisture-wicking. They help prevent odors and keep your foot comfortable in the boot, reducing the risk of skin issues during long-term wear.",
+    },
+    {
+        question: "What's the purpose of an elevation wedge?",
+        answer: "An elevation wedge helps reduce swelling by keeping your foot elevated above heart level. It's particularly useful during the early stages of recovery when swelling is most significant. Proper elevation can speed up healing and reduce discomfort.",
+    },
+    {
+        question: "How do I choose between different walking boots?",
+        answer: "The main factors to consider are adjustability, weight, and comfort. The Aircast and VACOped are both excellent choices, with the VACOped offering more adjustability but at a higher price point. Your surgeon's recommendation should be the primary factor in your decision.",
+    },
+    {
+        question: "What's the benefit of a cold therapy system?",
+        answer: "Cold therapy systems like the Breg Polar Care Wave provide consistent, controlled cold therapy that can reduce pain and swelling. They're more effective than ice packs because they maintain a constant temperature and can be used hands-free.",
+    },
+    {
+        question: "When should I use heel lifts?",
+        answer: "Heel lifts are useful when transitioning out of the boot, helping to gradually adjust to walking without the boot's height. They can also help if you experience any leg length discrepancy during recovery.",
+    },
+    {
+        question: "How do I maintain hygiene with the boot?",
+        answer: "Regular cleaning of the boot liner, using antifungal powder, and wearing moisture-wicking socks are key. The waterproof cover is essential for showering, and you should check your skin daily for any signs of irritation or infection.",
+    },
+    {
+        question:
+            "What's the difference between a quilted boot liner and regular socks?",
+        answer: "A quilted boot liner provides additional cushioning and protection against pressure points in the boot. It's more durable than regular socks and helps prevent skin irritation from the boot's interior surfaces.",
+    },
+];
+---
+
+<div class="space-y-4" id="equipment-faqs">
+    {
+        faqs.map((faq, index) => (
+            <div class="bg-gray-50 rounded-lg overflow-hidden faq-item">
+                <button
+                    class="flex justify-between items-center hover:bg-gray-100 p-6 w-full font-semibold text-left transition-colors faq-toggle"
+                    aria-expanded="false"
+                    aria-controls={`faq-answer-${index}`}
+                >
+                    <span>{faq.question}</span>
+                    <svg
+                        class="w-5 h-5 transition-transform faq-icon transform"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 9l-7 7-7-7"
+                        />
+                    </svg>
+                </button>
+                <div
+                    id={`faq-answer-${index}`}
+                    class="hidden px-6 pb-6 faq-content"
+                >
+                    <p class="text-gray-600">{faq.answer}</p>
+                </div>
+            </div>
+        ))
+    }
+</div>
+
+<script>
+    // Make FAQs interactive
+    document.addEventListener("DOMContentLoaded", () => {
+        const faqToggles = document.querySelectorAll(".faq-toggle");
+
+        faqToggles.forEach((toggle) => {
+            toggle.addEventListener("click", () => {
+                const content = toggle.nextElementSibling as HTMLElement | null;
+                const icon = toggle.querySelector(
+                    ".faq-icon",
+                ) as SVGElement | null;
+
+                if (!content || !icon) return;
+
+                const isExpanded =
+                    toggle.getAttribute("aria-expanded") === "true";
+
+                // Toggle the content
+                if (isExpanded) {
+                    content.classList.add("hidden");
+                    icon.classList.remove("rotate-180");
+                    toggle.setAttribute("aria-expanded", "false");
+                } else {
+                    content.classList.remove("hidden");
+                    icon.classList.add("rotate-180");
+                    toggle.setAttribute("aria-expanded", "true");
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    .faq-icon {
+        transition: transform 0.2s ease;
+    }
+
+    .rotate-180 {
+        transform: rotate(180deg);
+    }
+
+    .faq-content {
+        animation: slideDown 0.2s ease-out;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

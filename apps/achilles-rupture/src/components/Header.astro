@@ -1,52 +1,88 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import HeaderLink from "./HeaderLink.astro";
+import { Image } from "astro:assets";
+import AchillesRuptureWords from "../assets/branding/achilles-rupture-words.svg";
+import MobileMenuButton from "./MobileMenuButton.tsx";
 ---
 
 <header>
-	<nav class="flex md:flex-row flex-col justify-between items-center">
-		<h2 class="inline-block items-center gap-1 m-0 py-4 md:p-0 lg:p-0 pb-0 font-semibold text-center text-gray-700 text-xl md:text-left">
-			<a href="/" class="text-gray-700 hover:text-gray-900 hover:underline">{SITE_TITLE}</a>
-			<span>by</span>
-			<a href="https://thetismedical.com" target="_blank" class="inline-flex items-center text-gray-700 hover:text-gray-900 hover:underline group">
-				Thetis Medical
-				<svg xmlns="http://www.w3.org/2000/svg" class="opacity-0 group-hover:opacity-100 ml-0.5 w-4 h-4 transition-opacity" viewBox="0 0 20 20" fill="currentColor">
-					<path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-					<path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-				</svg>
-			</a>
-		</h2>
-		<div class="flex justify-center items-center gap-1 nav-tabs">
+	<nav class="flex justify-between items-center px-4 py-4 md:py-0 md:px-6">
+		<a
+			href="/"
+			class="flex-shrink-0 text-gray-700 hover:text-gray-900 transition-colors"
+		>
+			<Image
+				src={AchillesRuptureWords}
+				alt="Achilles Rupture"
+				width={180}
+				class="h-8 md:h-10"
+			/>
+		</a>
+		
+		<!-- Mobile menu button -->
+		<MobileMenuButton client:load />
+		
+		<!-- Desktop navigation -->
+		<div class="hidden md:flex items-center gap-2 nav-tabs">
 			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/guides">Guides</HeaderLink>
-			<HeaderLink href="/articles">Articles</HeaderLink>
+			<HeaderLink href="/patients">Patients</HeaderLink>
+			<HeaderLink href="/clinicians">Clinicians</HeaderLink>
 			<HeaderLink href="/coming-soon">Coming Soon</HeaderLink>
 		</div>
 	</nav>
+	
+	<!-- Mobile navigation menu -->
+	<div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+		<div class="px-4 py-2 flex flex-col space-y-1">
+			<HeaderLink href="/" class="block py-3 px-2 text-lg">Home</HeaderLink>
+			<HeaderLink href="/patients" class="block py-3 px-2 text-lg">Patients</HeaderLink>
+			<HeaderLink href="/clinicians" class="block py-3 px-2 text-lg">Clinicians</HeaderLink>
+			<HeaderLink href="/coming-soon" class="block py-3 px-2 text-lg">Coming Soon</HeaderLink>
+		</div>
+	</div>
 </header>
+
+
 <style>
 	header {
-		margin: 0;
-		padding: 0 1em;
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		position: sticky;
+		top: 0;
+		z-index: 50;
 	}
-	
-	
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
+
 	.nav-tabs a {
 		padding: 1em 0.5em;
 		color: var(--black);
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
+		transition: all 0.2s ease;
 	}
+	
+	.nav-tabs a:hover {
+		background-color: rgba(var(--gray-light), 0.3);
+	}
+	
 	.nav-tabs a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
 	}
-
+	
+	/* Mobile menu styles */
+	#mobile-menu a {
+		color: var(--black);
+		text-decoration: none;
+		transition: background-color 0.2s ease;
+		border-radius: 6px;
+	}
+	
+	#mobile-menu a:hover {
+		background-color: rgba(var(--gray-light), 0.5);
+	}
+	
+	#mobile-menu a.active {
+		background-color: rgba(var(--accent), 0.1);
+		color: var(--accent);
+	}
 </style>

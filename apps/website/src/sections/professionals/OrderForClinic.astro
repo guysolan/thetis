@@ -1,0 +1,92 @@
+---
+import BuyNowCallout from "@/components/products/night-splint/BuyNowCallout.astro";
+import HighlightedParagraph from "@/components/HighlightedParagraph";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Help Your Patients Recover in Comfort",
+        body: [
+            {
+                highlighted: false,
+                text: "Join other clinicians in allowing your patients to recover in comfort. Trusted by leading specialists, our splints ensure ",
+            },
+            { highlighted: true, text: "comfortable sleep" },
+            { highlighted: false, text: " and " },
+            { highlighted: true, text: "improved pathways" },
+            { highlighted: false, text: "." },
+        ],
+        buttonText: "Order for Clinic",
+    },
+    de: {
+        title: "Helfen Sie Ihren Patienten, sich in Komfort zu erholen",
+        body: [
+            {
+                highlighted: false,
+                text: "Schließen Sie sich anderen Klinikern an, um Ihren Patienten eine komfortable Genesung zu ermöglichen. Vertraut von führenden Spezialisten, unsere Schienen gewährleisten ",
+            },
+            { highlighted: true, text: "komfortablen Schlaf" },
+            { highlighted: false, text: " und " },
+            { highlighted: true, text: "verbesserte Wege" },
+            { highlighted: false, text: "." },
+        ],
+        buttonText: "Für Klinik bestellen",
+    },
+    fr: {
+        title: "Aidez vos patients à récupérer confortablement",
+        body: [
+            {
+                highlighted: false,
+                text: "Rejoignez d'autres cliniciens pour permettre à vos patients de récupérer confortablement. Approuvé par les meilleurs spécialistes, nos attelles assurent un ",
+            },
+            { highlighted: true, text: "sommeil confortable" },
+            { highlighted: false, text: " et des " },
+            { highlighted: true, text: "parcours améliorés" },
+            { highlighted: false, text: "." },
+        ],
+        buttonText: "Commander pour la clinique",
+    },
+    es: {
+        title: "Ayude a sus pacientes a recuperarse cómodamente",
+        body: [
+            {
+                highlighted: false,
+                text: "Únase a otros médicos para permitir que sus pacientes se recuperen cómodamente. Confiado por especialistas líderes, nuestras férulas aseguran ",
+            },
+            { highlighted: true, text: "sueño cómodo" },
+            { highlighted: false, text: " y " },
+            { highlighted: true, text: "caminos mejorados" },
+            { highlighted: false, text: "." },
+        ],
+        buttonText: "Ordenar para clínica",
+    },
+    it: {
+        title: "Aiuta i tuoi pazienti a recuperare in comfort",
+        body: [
+            {
+                highlighted: false,
+                text: "Unisciti ad altri clinici per permettere ai tuoi pazienti di recuperare in comfort. Fidato dai principali specialisti, le nostre férula assicurano ",
+            },
+            { highlighted: true, text: "sonno confortevole" },
+            { highlighted: false, text: " e " },
+            { highlighted: true, text: "percorsi migliorati" },
+            { highlighted: false, text: "." },
+        ],
+        buttonText: "Ordina per clinica",
+    },
+};
+
+const currentContent = content[lang] || content.en;
+---
+
+<BuyNowCallout
+    buttonText={currentContent.buttonText}
+    buttonHref="/order-wholesale"
+>
+    <span slot="title">{currentContent.title}</span>
+    <span slot="body">
+        <HighlightedParagraph paragraph={currentContent.body} client:load />
+    </span>
+</BuyNowCallout>

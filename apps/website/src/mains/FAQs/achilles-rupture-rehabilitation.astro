@@ -1,0 +1,48 @@
+---
+import AchillesRuptureRehabilitationSection from "../../sections/FAQs/achilles-rupture-rehabilitation.astro";
+import NightSplintAdvert from "../../components/products/night-splint/NightSplintAdvert.astro";
+import FAQsLayout from "../../layouts/FAQsLayout.astro";
+import type { Lang } from "../../config/languages";
+import CourseCTA from "../../components/CTA/CourseCTA.astro";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Achilles Rupture Rehabilitation: Complete Recovery Guide & Exercise Program",
+        description:
+            "Comprehensive Achilles rupture rehabilitation guide covering recovery phases, exercise programs, physiotherapy protocols, and return-to-sport progression for optimal recovery.",
+    },
+    es: {
+        title: "Rehabilitación de Ruptura de Aquiles: Guía Completa de Recuperación y Programa de Ejercicios",
+        description:
+            "Guía completa de rehabilitación de ruptura de Aquiles que cubre fases de recuperación, programas de ejercicios, protocolos de fisioterapia y progresión de retorno al deporte para una recuperación óptima.",
+    },
+    fr: {
+        title: "Rééducation de Rupture d'Achille : Guide Complet de Récupération et Programme d'Exercices",
+        description:
+            "Guide complet de rééducation de rupture d'Achille couvrant les phases de récupération, programmes d'exercices, protocoles de physiothérapie et progression de retour au sport pour une récupération optimale.",
+    },
+    de: {
+        title: "Achillessehnenriss-Rehabilitation: Vollständiger Genesungsleitfaden & Übungsprogramm",
+        description:
+            "Umfassender Achillessehnenriss-Rehabilitationsleitfaden mit Genesungsphasen, Übungsprogrammen, Physiotherapie-Protokollen und Rückkehr-zum-Sport-Progression für optimale Genesung.",
+    },
+    it: {
+        title: "Riabilitazione Rottura di Achille: Guida Completa al Recupero e Programma di Esercizi",
+        description:
+            "Guida completa alla riabilitazione della rottura di Achille che copre fasi di recupero, programmi di esercizi, protocolli di fisioterapia e progressione di ritorno allo sport per un recupero ottimale.",
+    },
+};
+
+const currentContent = content[lang];
+---
+
+<FAQsLayout
+    title={currentContent.title}
+    description={currentContent.description}
+>
+    <AchillesRuptureRehabilitationSection lang={lang} />
+    <CourseCTA lang={lang} variant="full" />
+    <NightSplintAdvert lang={lang} />
+</FAQsLayout>

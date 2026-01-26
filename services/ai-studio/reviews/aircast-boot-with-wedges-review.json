@@ -1,0 +1,30 @@
+{
+  "overallScore": 9,
+  "accuracy": {
+    "score": 9,
+    "feedback": "The image accurately represents the Aircast walking boot with heel wedge inserts, as described in the course content.",
+    "issues": []
+  },
+  "style": {
+    "score": 9,
+    "feedback": "The image is stylistically appropriate for patient education, with clear labeling and a professional appearance.",
+    "consistency": [
+      "Matches course content",
+      "Professional and clear"
+    ]
+  },
+  "patientFriendliness": {
+    "score": 9,
+    "feedback": "The image is clear and easy to understand, showing the boot and wedge inserts effectively.",
+    "strengths": [
+      "Clear labeling",
+      "Simple design"
+    ],
+    "improvements": []
+  },
+  "recommendations": [
+    "Ensure consistent labeling style across all images",
+    "Consider adding a brief caption for clarity"
+  ],
+  "imagePath": "/Users/guysolan/Code/thetis/apps/course/src/assets/aircast-boot-with-wedges.png"
+}

@@ -1,0 +1,148 @@
+---
+import Label from "@/components/form/Label.astro";
+import Input from "@/components/form/Input.astro";
+import TextArea from "@/components/form/TextArea.astro";
+import { NumberInput } from "@/components/form/NumberInput.tsx";
+import FormWrap from "@/components/form/FormWrap.astro";
+import OptOut from "@/components/form/OptOut.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+const content = {
+    en: {
+        title: "Wholesale Order Inquiry",
+        description:
+            "Interested in wholesale opportunities? Please fill out the form below and we'll get back to you with pricing and details.",
+        contactNameLabel: "Contact Name",
+        businessEmailLabel: "Business Email",
+        traumaSplintQuantityLabel: "Trauma Splint Quantity",
+        nightSplintQuantityLabel: "Splint Quantity",
+        orderDetailsLabel: "Order Details",
+        orderDetailsPlaceholder:
+            "Please include your estimated order quantity and any specific products you're interested in.",
+        submitButton: "Send Message",
+    },
+    de: {
+        title: "Großhandelsbestellung anfragen",
+        description:
+            "Interessiert an Großhandelsmöglichkeiten? Bitte füllen Sie das untenstehende Formular aus und wir melden uns mit Preisen und Details bei Ihnen.",
+        contactNameLabel: "Kontaktname",
+        businessEmailLabel: "Geschäfts-E-Mail",
+        traumaSplintQuantityLabel: "Trauma-Schiene Menge",
+        nightSplintQuantityLabel: "Schiene Menge",
+        orderDetailsLabel: "Bestelldetails",
+        orderDetailsPlaceholder:
+            "Bitte geben Sie Ihre geschätzte Bestellmenge und alle spezifischen Produkte an, die Sie interessieren.",
+        submitButton: "Nachricht senden",
+    },
+    fr: {
+        title: "Demande de Commande en Gros",
+        description:
+            "Intéressé par les opportunités de gros ? Veuillez remplir le formulaire ci-dessous et nous vous répondrons avec les prix et les détails.",
+        contactNameLabel: "Nom du contact",
+        businessEmailLabel: "E-mail professionnel",
+        traumaSplintQuantityLabel: "Quantité d'attelle de traumatisme",
+        nightSplintQuantityLabel: "Quantité d'attelle",
+        orderDetailsLabel: "Détails de la commande",
+        orderDetailsPlaceholder:
+            "Veuillez inclure votre quantité de commande estimée et tous les produits spécifiques qui vous intéressent.",
+        submitButton: "Envoyer le message",
+    },
+    es: {
+        title: "Consulta de Pedido al Por Mayor",
+        description:
+            "¿Interesado en oportunidades de venta al por mayor? Por favor complete el formulario a continuación y nos pondremos en contacto con usted con precios y detalles.",
+        contactNameLabel: "Nombre de contacto",
+        businessEmailLabel: "Correo electrónico comercial",
+        traumaSplintQuantityLabel: "Cantidad de férula de trauma",
+        nightSplintQuantityLabel: "Cantidad de férula",
+        orderDetailsLabel: "Detalles del pedido",
+        orderDetailsPlaceholder:
+            "Por favor incluya su cantidad de pedido estimada y cualquier producto específico que le interese.",
+        submitButton: "Enviar mensaje",
+    },
+    it: {
+        title: "Richiesta Ordine all'Ingrosso",
+        description:
+            "Interessato alle opportunità all'ingrosso? Compila il modulo qui sotto e ti risponderemo con prezzi e dettagli.",
+        contactNameLabel: "Nome del contatto",
+        businessEmailLabel: "Email aziendale",
+        traumaSplintQuantityLabel: "Quantità stecca trauma",
+        nightSplintQuantityLabel: "Quantità stecca",
+        orderDetailsLabel: "Dettagli ordine",
+        orderDetailsPlaceholder:
+            "Includi la quantità stimata del tuo ordine e tutti i prodotti specifici che ti interessano.",
+        submitButton: "Invia messaggio",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<FormWrap formId="xvggdoal">
+    <div class="space-y-8 w-full">
+        <h2
+            class="font-semibold text-neutral-950 text-2xl md:text-3xl leading-[105%]"
+        >
+            {currentContent.title}
+        </h2>
+        <p class="text-gray-800 text-lg leading-relaxed">
+            {currentContent.description}
+        </p>
+
+        <div class="space-y-6">
+            <div class="gap-6 grid md:grid-cols-2">
+                <div class="form-group">
+                    <Label labelFor="name"
+                        >{currentContent.contactNameLabel}</Label
+                    >
+                    <Input name="name" type="text" required={true} />
+                </div>
+
+                <div class="form-group">
+                    <Label labelFor="email"
+                        >{currentContent.businessEmailLabel}</Label
+                    >
+                    <Input name="email" type="email" required={true} />
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-6">
+                <NumberInput
+                    client:load
+                    id="traumaSplintQuantity"
+                    name="traumaSplintQuantity"
+                    label={currentContent.traumaSplintQuantityLabel}
+                />
+
+                <NumberInput
+                    client:load
+                    id="nightSplintQuantity"
+                    name="nightSplintQuantity"
+                    label={currentContent.nightSplintQuantityLabel}
+                />
+            </div>
+
+            <div class="form-group">
+                <Label labelFor="message"
+                    >{currentContent.orderDetailsLabel}</Label
+                >
+                <TextArea
+                    name="message"
+                    rows={4}
+                    maxlength={1000}
+                    placeholder={currentContent.orderDetailsPlaceholder}
+                />
+            </div>
+
+            <OptOut />
+
+            <button
+                type="submit"
+                class="bg-primary hover:bg-primary/90 hover:shadow-md px-8 py-4 rounded-lg w-full md:w-auto font-medium text-white transition-all"
+            >
+                {currentContent.submitButton}
+            </button>
+        </div>
+    </div>
+</FormWrap>

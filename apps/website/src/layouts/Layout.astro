@@ -1,54 +1,87 @@
 ---
+import type { Lang } from "@/config/languages";
+
 export interface Props {
   title: string;
   description: string;
   image?: string;
   bodyClass?: string;
   hideFooter?: boolean;
+  hideNav?: boolean;
   logoColor?: "black" | "white";
   name?: string;
+  lang: Lang;
+  alternateLanguages?: Array<{
+    lang: string;
+    url: string;
+  }>;
 }
 
 import { cn } from "../lib/utils";
 
-const { title, description, image, bodyClass, hideFooter, logoColor } =
-  Astro.props;
+const {
+  title,
+  description,
+  image,
+  bodyClass,
+  hideFooter,
+  hideNav,
+  logoColor,
+  lang = "en",
+  alternateLanguages = [],
+} = Astro.props;
 
+import InstantlyPixel from "./InstantlyPixel.astro";
 import GoogleTagHead from "./GoogleTagHead.astro";
 import GoogleTagBody from "./GoogleTagBody.astro";
 import BaseHead from "./BaseHead.astro";
 import Nav from "./Nav.astro";
 import Footer from "@/features/footer/Footer.astro";
-import ShopifyBuyButton2 from "../components/ShopifyBuyButton2.astro";
+import { CartSheet } from "../components/cart/CartSheet";
+import DiscountPopup from "../components/DiscountPopup";
+import WelcomePopup from "../components/WelcomePopup";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-       <meta charset="UTF-8">
-        <GoogleTagHead />
-        <BaseHead title={title} description={description} image={image} />
-        <slot name="head" />
-    </head>
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <GoogleTagHead />
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      lang={lang}
+      alternateLanguages={alternateLanguages}
+    />
+    <slot name="head" />
+  </head>
 
-    <body class={cn(bodyClass, 'pt-10 overflow-y-auto overflow-x-hidden')}>
-        <GoogleTagBody />
-        <ShopifyBuyButton2 />
+  <body
+    class={cn(
+      bodyClass,
+      hideNav ? "" : "pt-10",
+      "overflow-y-auto overflow-x-hidden",
+    )}
+  >
+    <GoogleTagBody />
+    <InstantlyPixel />
+    {!hideNav && <Nav lang={lang} />}
+    <CartSheet client:load />
+    <WelcomePopup client:idle delaySeconds={5} />
+    <slot />
+    {!hideFooter && <Footer lang={lang} />}
+    <script type="text/partytown" src="@/services/lucide.ts"></script>
+    <script type="text/partytown" src="@/services/location"></script>
+    <script
+      is:inline
+      defer
+      type="text/partytown"
+      src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
+    ></script>
 
-        <Nav />
-        <slot />
-        {!hideFooter && <Footer />}
-        <script type="text/partytown" src="@/services/lucide.ts"></script>
-        <script type="text/partytown" src="@/services/location"></script>
-        <script
-            is:inline
-            defer
-            type="text/partytown"
-            src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
-        ></script>
-
-   <script>
-        document.documentElement.classList.remove('dark');
+    <script>
+      document.documentElement.classList.remove("dark");
     </script>
-    </body>
+  </body>
 </html>

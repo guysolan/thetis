@@ -11,66 +11,119 @@ import {
 } from "@thetis/ui/table";
 import NumberFlow from "@number-flow/react";
 import type { Currency } from "../../../../../constants/currencies";
-const ShippingItems = ({
+
+type ItemDetails = {
+  item_name?: string;
+  sku?: string;
+  country_of_origin?: string;
+  hs_code?: string;
+  tax?: number;
+};
+
+type GroupedItem =
+  & OrderView["items"][number]
+  & ItemDetails
+  & {
+    totalQuantity: number;
+    totalPrice: number;
+  };
+
+const ItemsWithPricing = ({
   orderItems,
   currency,
 }: { orderItems: OrderView["items"]; currency: Currency }) => {
   const { data: items } = useSelectItemsView();
 
-  const invoiceItems = orderItems
-    .filter((orderItem) => orderItem.quantity > 0)
-    .map((orderItem) => {
+  // For shipment orders, show only items being shipped (positive quantities)
+  // For other orders, group items by item_id and sum their quantities and totals
+  const filteredItems = orderItems.filter((item) => item.quantity > 0);
+
+  const groupedItems = filteredItems.reduce(
+    (acc, orderItem) => {
       const itemDetails = items.find(
         (item) => item.item_id === orderItem.item_id,
       );
-      return {
-        ...orderItem,
-        ...itemDetails,
-      };
-    });
+
+      if (!acc[orderItem.item_id]) {
+        const price = orderItem.price ?? 0;
+        const quantity = orderItem.quantity;
+        const taxRate = orderItem?.tax ?? 0;
+        const totalPrice = quantity * price * (1 + taxRate);
+
+        acc[orderItem.item_id] = {
+          ...orderItem,
+          ...itemDetails,
+          totalQuantity: quantity,
+          totalPrice,
+        } as GroupedItem;
+      } else {
+        const price = orderItem.price ?? 0;
+        const quantity = orderItem.quantity;
+        const taxRate = orderItem?.tax ?? 0;
+        const itemTotal = quantity * price * (1 + taxRate);
+
+        acc[orderItem.item_id].totalQuantity += quantity;
+        acc[orderItem.item_id].totalPrice += itemTotal;
+      }
+      return acc;
+    },
+    {} as Record<string, GroupedItem>,
+  );
+
+  const invoiceItems = Object.values(groupedItems).filter(
+    (item) => item.totalQuantity > 0,
+  );
 
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Description</TableHead>
-          <TableHead>SKU</TableHead>
-          <TableHead>Country of Origin</TableHead>
-          <TableHead>HS Code</TableHead>
-          <TableHead className="text-right">Quantity</TableHead>
-          <TableHead className="text-right">Unit Price</TableHead>
-          <TableHead className="text-right">Total</TableHead>
+          <TableHead className="text-black">Description</TableHead>
+          <TableHead className="text-black">SKU</TableHead>
+          <TableHead className="text-black">Country of Origin</TableHead>
+          <TableHead className="text-black">HS Code</TableHead>
+          <TableHead className="text-black text-right">Quantity</TableHead>
+          <TableHead className="text-black text-right">Unit Price</TableHead>
+          <TableHead className="text-black text-right">Tax Rate</TableHead>
+          <TableHead className="text-black text-right">Total</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoiceItems.map((item, index) => (
-          <TableRow key={index}>
-            <TableCell>{item.item_name}</TableCell>
-            <TableCell>{item.sku}</TableCell>
-            <TableCell>{item.country_of_origin}</TableCell>
-            <TableCell>{item.hs_code}</TableCell>
-            <TableCell className="text-right">{item.quantity}</TableCell>
-            <TableCell className="text-right">
+        {invoiceItems.map((item) => (
+          <TableRow key={item.item_id}>
+            <TableCell className="text-black">{item.item_name}</TableCell>
+            <TableCell className="text-black">{item.sku}</TableCell>
+            <TableCell className="text-black">
+              {item.country_of_origin}
+            </TableCell>
+            <TableCell className="text-black">{item.hs_code}</TableCell>
+            <TableCell className="text-black text-right">
+              {item.totalQuantity}
+            </TableCell>
+            <TableCell className="text-black text-right">
               <NumberFlow
-                value={item.item_price ?? 0}
+                value={item.price ?? 0}
                 format={{ style: "currency", currency: currency }}
               />
             </TableCell>
-            <TableCell className="text-right">
+            <TableCell className="text-black text-right">
+              {(item.tax ?? 0) * 100}%
+            </TableCell>
+            <TableCell className="text-black text-right">
               <NumberFlow
-                value={item.quantity * (item.item_price ?? 0)}
+                value={item.totalPrice}
                 format={{ style: "currency", currency: currency }}
               />
             </TableCell>
           </TableRow>
         ))}
         <TableRow className="font-semibold">
-          <TableCell>Total</TableCell>
-          <TableCell colSpan={5} />
-          <TableCell className="text-right">
+          <TableCell className="text-black">Total</TableCell>
+          <TableCell colSpan={6} />
+          <TableCell className="text-black text-right">
             <NumberFlow
               value={invoiceItems.reduce(
-                (sum, item) => sum + item.quantity * (item.item_price ?? 0),
+                (sum, item) => sum + item.totalPrice,
                 0,
               )}
               format={{ style: "currency", currency: currency }}
@@ -82,4 +135,4 @@ const ShippingItems = ({
   );
 };
 
-export default ShippingItems;
+export default ItemsWithPricing;

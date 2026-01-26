@@ -10,6 +10,9 @@ export const patients: Review[] = [
       "It was fantastic being able to remove the boot and sleep comfortably",
     body:
       "Overall, it was fantastic being able to remove the boot and sleep comfortably. My one small complaint was that the bottom of the splint dug into my shin because there was no enough padding to cover the hard plastic part. I had to stuff tissues in-between the splint and my shin to stop it from hurting. The orthopaedic surgen I was seeing at Kings Hospital in Romford was absolutely useless. I tried to show him the splint and explain how it allowed me to remove the boot and he just got upset and didn't want to listen. Overall, they have a very back-in-the-days approach to achilles tendon tears, putting patients in thigh-high plaster and then knee-high plaster for about a month before they will go to the boot. I objected and said I just wanted the boot after 2 weeks because of the immobility of the plaster and this upset them.",
+    link: "",
+    clinics: [],
+    clinicImages: [],
   },
   {
     date: "2025-02-09",
@@ -18,7 +21,10 @@ export const patients: Review[] = [
     country: "US",
     title: "I believe the splint helped me greatly",
     body:
-      "I've had much success with the Achilles Night Splint. Here in the states, surgery is much more common as I was told I had a complete tear. I refused and was put in a cam boot. Finding the splint online, I tried it. Visiting back with the surgeon he said it is healing and I should start rehab straight away. I am now trying to rebuild the muscle. It's slow, but a positive process. I believe the splint helped me greatly. Thank you.",
+      "I've had much success with the Achilles Splint. Here in the states, surgery is much more common as I was told I had a complete tear. I refused and was put in a cam boot. Finding the splint online, I tried it. Visiting back with the surgeon he said it is healing and I should start rehab straight away. I am now trying to rebuild the muscle. It's slow, but a positive process. I believe the splint helped me greatly. Thank you.",
+    link: "",
+    clinics: [],
+    clinicImages: [],
   },
   {
     date: "2025-02-09",
@@ -27,7 +33,7 @@ export const patients: Review[] = [
     country: "US",
     title: "An essential and wonderful device",
     body:
-      "The Night Splint should be a Dr recommended accessory at the time a boot is prescribed to be worn for 24 hours a day. On my first day, after 15 minutes in bed with 'the boot'', I began looking online for suggestions and options. I quickly found the Thetis Medical, Night Splint with excellent reviews. I contacted my orthopedist n the morning and received approval to using the splint for sleeping, The splint arrived a day or two later and proved its worth that night, and for the following months as a viable sleeping splint. Thank you.",
+      "The Splint should be a Dr recommended accessory at the time a boot is prescribed. On my first day, after 15 minutes in bed with 'the boot'', I began looking online for suggestions and options. I quickly found the Thetis Medical, Splint with excellent reviews. I contacted my orthopedist n the morning and received approval to using the splint for sleeping, The splint arrived a day or two later and proved its worth that night, and for the following months as a viable sleeping splint. Thank you.",
   },
   {
     date: "2025-02-09",
@@ -36,7 +42,7 @@ export const patients: Review[] = [
     country: "US",
     title: "It made a massive difference to getting a good nights rest",
     body:
-      "It was extremely difficult getting any sleep whilst wearing a heavy boot. I found the night splint on line and bought it without reference to any of the professionals. It made a massive difference to getting a good nights rest. I would recommend it to anyone with a ruptured Achilles tendon.",
+      "It was extremely difficult getting any sleep whilst wearing a heavy boot. I found the splint on line and bought it without reference to any of the professionals. It made a massive difference to getting a good nights rest. I would recommend it to anyone with a ruptured Achilles tendon.",
   },
   {
     date: "2024-03-15",
@@ -45,7 +51,7 @@ export const patients: Review[] = [
     country: "US",
     title: "Worth it!",
     body:
-      "If you've ruptured your Achilles tendon... Commiserations! It's not fun. And it's not a quick recovery. You will have been given a Controlled Ankle Movement (CAM) boot and, after wearing it all day, there's no respite at night. Like me, you might find that sleeping in the boot is even harder than walking in it. It's hot. Things you don't notice during the day suddenly become impossible to ignore: a bit of pressure here, a bit of rubbing there. And you can't sleep. This is exactly what the night splint is designed to solve. And it works.\n\nAs others have noted, the splint is not cheap, but it's a niche product, made by a small company, and there's little scope for economies of scale. You're paying for the expertise that went into its design too. In my view, it's worth every penny. It took me a bit of fiddling around making minor adjustments to the position and tightness of the straps to get it comfortable. It's a case of balancing security and comfort. I prioritised security and, the first night, I had tightened the strap that goes under the foot a little too much and, as a result, the splint was pressing on the top of my foot too much for a whole night's comfort. I was also concerned that the strap at the heel might cause problems, but it hasn't. In the end, I've found that I'm actually having the heel strap a little tighter than the calf and foot straps and that's got the balance between security and comfort about right. I've still found that a cotton wool make-up pad, half under the splint, at the edge nearest my small, outer toes helps: everyone's feet are different and I found that was a bit of a pressure point. However, it's worth the effort: I've been able to sleep well and the splint has remained secure. The recovery of my Achilles tendon remains on track too.\n\nIn summary, then, this has been a very worthwhile purchase. It's a good example of a small company that's identified a problem and provided a solution. (Note: the Thetis website is also an excellent source of information about Achilles tendon injuries and recovery.) I would also suggest searching for the Evenup Shoe Balancer on Amazon: another helpful product but one that makes walking with a CAM boot a bit easier.",
+      "If you've ruptured your Achilles tendon... Commiserations! It's not fun. And it's not a quick recovery. You will have been given a Controlled Ankle Movement (CAM) boot and, after wearing it all day, there's no respite at night. Like me, you might find that sleeping in the boot is even harder than walking in it. It's hot. Things you don't notice during the day suddenly become impossible to ignore: a bit of pressure here, a bit of rubbing there. And you can't sleep. This is exactly what the splint is designed to solve. And it works.\n\nAs others have noted, the splint is not cheap, but it's a niche product, made by a small company, and there's little scope for economies of scale. You're paying for the expertise that went into its design too. In my view, it's worth every penny. It took me a bit of fiddling around making minor adjustments to the position and tightness of the straps to get it comfortable. It's a case of balancing security and comfort. I prioritised security and, the first night, I had tightened the strap that goes under the foot a little too much and, as a result, the splint was pressing on the top of my foot too much for a whole night's comfort. I was also concerned that the strap at the heel might cause problems, but it hasn't. In the end, I've found that I'm actually having the heel strap a little tighter than the calf and foot straps and that's got the balance between security and comfort about right. I've still found that a cotton wool make-up pad, half under the splint, at the edge nearest my small, outer toes helps: everyone's feet are different and I found that was a bit of a pressure point. However, it's worth the effort: I've been able to sleep well and the splint has remained secure. The recovery of my Achilles tendon remains on track too.\n\nIn summary, then, this has been a very worthwhile purchase. It's a good example of a small company that's identified a problem and provided a solution. (Note: the Thetis website is also an excellent source of information about Achilles tendon injuries and recovery.) I would also suggest searching for the Evenup Shoe Balancer on Amazon: another helpful product but one that makes walking with a CAM boot a bit easier.",
   },
   {
     country: "US",
@@ -111,7 +117,7 @@ export const patients: Review[] = [
     date: "2024-04-29",
     stars: 5,
     name: "Vivek",
-    title: "Perfect night splint for achilles injury recovery",
+    title: "Perfect splint for achilles injury recovery",
     body:
       "Works great to keep the achilles tendon in relaxed state when recovering from a achilles injury or post-op. It literally takes a few secs to put on and remove. I've been using it for a couple of weeks now and its working well. I take my boots off for the night and wear this while sleeping. Its comfortable as well. Highly recommend if you are in the recovery stage of an achilles rupture post-op and out of the cast.",
     short:
@@ -189,7 +195,7 @@ export const patients: Review[] = [
     name: "Millie",
     title: "Splint that does the job",
     body:
-      "I read the reviews for the night splint but nn one said much about foot size or leg length. As I am a size 3.5 (36) GB size feet and only 5 feet tall (short legs) I was rather undecided whether the small would fit as it is advertised smaller than a size 8 which is a lot bigger than I am. As you will see from the photo it fits perfectly and keeps my ruptured Achilles in place while I sleep. This is a great step forward (sorry about the pun) as although I had found a way of sleeping with my boot on, this works much better. It's lighter for a start and keeps my foot supported at the right angle. The splint sits in place with the straps done up and they don't need to be too tight to keep it secure. I wear an ankle support under it as my foot gets cold and this also seems to help keep it secure. I'm not sure about the size 8 cut off for sizing though, as I think someone with a longer leg, and bigger foot than me might need the large to get the ankle strap in the right place. You must not use the splint to weight-bear so I only use it for sleeping or resting. As a doctor and psychologist I've found my ruptured Achilles incredibly frustrating so having the splint offers a bit of comfort in miserable circumstances. The price reflects the special nature of the product, though I recognise that not everyone is as fortunate as I am and maybe totally reliant on NHS-provided aids. I found the splint through the Achilles rupture e book by Matthew Solan and if you are looking for good info on this injury the e book is definitely worth a read. If you are reading this because like me you have ruptured your Achilles I empathise and wish you well with your recovery. Please do follow your doctor's instructions to get it soonest mended.",
+      "I read the reviews for the splint but nn one said much about foot size or leg length. As I am a size 3.5 (36) GB size feet and only 5 feet tall (short legs) I was rather undecided whether the small would fit as it is advertised smaller than a size 8 which is a lot bigger than I am. As you will see from the photo it fits perfectly and keeps my ruptured Achilles in place while I sleep. This is a great step forward (sorry about the pun) as although I had found a way of sleeping with my boot on, this works much better. It's lighter for a start and keeps my foot supported at the right angle. The splint sits in place with the straps done up and they don't need to be too tight to keep it secure. I wear an ankle support under it as my foot gets cold and this also seems to help keep it secure. I'm not sure about the size 8 cut off for sizing though, as I think someone with a longer leg, and bigger foot than me might need the large to get the ankle strap in the right place. You must not use the splint to weight-bear so I only use it for sleeping or resting. As a doctor and psychologist I've found my ruptured Achilles incredibly frustrating so having the splint offers a bit of comfort in miserable circumstances. The price reflects the special nature of the product, though I recognise that not everyone is as fortunate as I am and maybe totally reliant on NHS-provided aids. I found the splint through the Achilles rupture e book by Matthew Solan and if you are looking for good info on this injury the e book is definitely worth a read. If you are reading this because like me you have ruptured your Achilles I empathise and wish you well with your recovery. Please do follow your doctor's instructions to get it soonest mended.",
   },
   {
     country: "US",
@@ -198,7 +204,7 @@ export const patients: Review[] = [
     name: "JDASA",
     title: "Well worth it, comfort and keeps it in place",
     body:
-      "After surgery and post op week 2 when the splint was removed, had a horrible night sleep with the night splint. Went and bought this. Expensive but man did it help. Also was able to wear it while sitting and doing work as long as I don't step down. Boot was to tiring for it to be comfortable all day.",
+      "After surgery and post op week 2 when the splint was removed, had a horrible night sleep with the splint. Went and bought this. Expensive but man did it help. Also was able to wear it while sitting and doing work as long as I don't step down. Boot was to tiring for it to be comfortable all day.",
   },
   {
     date: "2023-05-24",

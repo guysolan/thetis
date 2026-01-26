@@ -35,7 +35,7 @@ const AmazonSettlementReport = () => {
 import { ReportSearch } from "@/components/AmazonReportById";
 import { selectAmazonReportByIdQueryOptions } from "@/api/getAmazonReportById";
 
-export const Route = createFileRoute("/settlements/$region copy/summary")({
+export const Route = createFileRoute("/settlements/$region/$country/summary")({
   component: AmazonSettlementReport,
   validateSearch: (search: Record<string, unknown>): ReportSearch => {
     return {

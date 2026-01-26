@@ -1,0 +1,200 @@
+---
+import Slide from "@/components/Slide.astro";
+import Instruction from "./Instruction.astro";
+import { AlertCircle, Info } from "lucide-react";
+import instruction1 from "./instruction-1.svg";
+import instruction2 from "./instruction-2.svg";
+import instruction3 from "./instruction-3.svg";
+import instruction4 from "./instruction-4.svg";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content: Record<
+    Lang,
+    {
+        title: string;
+        instructions: {
+            step: string;
+            text: string;
+        }[];
+        warnings: {
+            doNotStand: string;
+            doNotOvertighten: string;
+        };
+    }
+> = {
+    en: {
+        title: "Instructions",
+        instructions: [
+            {
+                step: "1",
+                text: "Point toes then place shell on leg. Ensure you cover foot but not toes. Fastening patch sits over ankle joint.",
+            },
+            {
+                step: "2",
+                text: "Do up leg and foot straps firmly but not too tight.",
+            },
+            {
+                step: "3",
+                text: "Position heel in hole of the final (ankle) strap.",
+            },
+            {
+                step: "4",
+                text: "Fasten firmly but not too tight.",
+            },
+        ],
+        warnings: {
+            doNotStand: "DO NOT STAND OR WALK IN THE SPLINT.",
+            doNotOvertighten: "DO NOT OVERTIGHTEN THE STRAPS.",
+        },
+    },
+    de: {
+        title: "Anweisungen",
+        instructions: [
+            {
+                step: "1",
+                text: "Zehen anspitzen, dann Schale auf das Bein legen. Stellen Sie sicher, dass Sie den Fuß, aber nicht die Zehen abdecken. Der Verschlusspatch sitzt über dem Sprunggelenk.",
+            },
+            {
+                step: "2",
+                text: "Bein- und Fußriemen fest, aber nicht zu eng anziehen.",
+            },
+            {
+                step: "3",
+                text: "Ferse in das Loch des letzten (Knöchel-)Riemens positionieren.",
+            },
+            {
+                step: "4",
+                text: "Fest, aber nicht zu eng befestigen.",
+            },
+        ],
+        warnings: {
+            doNotStand: "NICHT IM SPLINT STEHEN ODER LAUFEN.",
+            doNotOvertighten: "DIE RIEMEN NICHT ÜBERANSPANNEN.",
+        },
+    },
+    fr: {
+        title: "Instructions",
+        instructions: [
+            {
+                step: "1",
+                text: "Pointez les orteils puis placez la coque sur la jambe. Assurez-vous de couvrir le pied mais pas les orteils. Le patch de fermeture se trouve sur l'articulation de la cheville.",
+            },
+            {
+                step: "2",
+                text: "Serrez fermement les sangles de jambe et de pied, mais pas trop serrées.",
+            },
+            {
+                step: "3",
+                text: "Positionnez le talon dans le trou de la sangle finale (cheville).",
+            },
+            {
+                step: "4",
+                text: "Fermez fermement mais pas trop serré.",
+            },
+        ],
+        warnings: {
+            doNotStand: "NE PAS SE TENIR DEBOUT OU MARCHER DANS L'ATTELLE.",
+            doNotOvertighten: "NE PAS TROP SERRER LES SANGLES.",
+        },
+    },
+    es: {
+        title: "Instrucciones",
+        instructions: [
+            {
+                step: "1",
+                text: "Apunte los dedos de los pies, luego coloque la carcasa en la pierna. Asegúrese de cubrir el pie pero no los dedos. El parche de cierre se encuentra sobre la articulación del tobillo.",
+            },
+            {
+                step: "2",
+                text: "Ajuste las correas de la pierna y el pie firmemente pero no demasiado apretadas.",
+            },
+            {
+                step: "3",
+                text: "Posicione el talón en el agujero de la correa final (tobillo).",
+            },
+            {
+                step: "4",
+                text: "Ajuste firmemente pero no demasiado apretado.",
+            },
+        ],
+        warnings: {
+            doNotStand: "NO SE PONGA DE PIE O CAMINE CON LA FÉRULA.",
+            doNotOvertighten: "NO APRIETE DEMASIADO LAS CORREAS.",
+        },
+    },
+    it: {
+        title: "Istruzioni",
+        instructions: [
+            {
+                step: "1",
+                text: "Punta le dita dei piedi, poi posiziona il guscio sulla gamba. Assicurati di coprire il piede ma non le dita. La patch di chiusura si trova sopra l'articolazione della caviglia.",
+            },
+            {
+                step: "2",
+                text: "Stringi le cinghie della gamba e del piede saldamente ma non troppo strette.",
+            },
+            {
+                step: "3",
+                text: "Posiziona il tallone nel foro della cinghia finale (caviglia).",
+            },
+            {
+                step: "4",
+                text: "Fissa saldamente ma non troppo stretto.",
+            },
+        ],
+        warnings: {
+            doNotStand: "NON STARE IN PIEDI O CAMMINARE CON LA STECCA.",
+            doNotOvertighten: "NON STRINGERE TROPPO LE CINGHIE.",
+        },
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<Slide title={currentContent.title}>
+    <div class="flex flex-col gap-8 mx-auto max-w-screen-lg">
+        <div class="gap-4 grid grid-cols-1 lg:grid-cols-2 p-4">
+            {
+                currentContent.instructions.map((instruction, index) => {
+                    const images = [
+                        instruction1,
+                        instruction2,
+                        instruction3,
+                        instruction4,
+                    ];
+                    return (
+                        <Instruction
+                            step={instruction.step}
+                            text={instruction.text}
+                            imageSrc={images[index] as unknown as string}
+                            imageAlt={`instructions image ${index + 1}`}
+                        />
+                    );
+                })
+            }
+        </div>
+        <div
+            class="flex md:flex-row flex-col justify-center items-center gap-4 mx-auto w-7/8 lg:w-3/4 text-center"
+        >
+            <div
+                class="flex justify-center items-center space-x-2 bg-red-100 p-4 border border-red-300 rounded-md font-semibold text-neutral-800"
+            >
+                <AlertCircle className="text-red-600" />
+                <h4 class="text-red-800 text-lg">
+                    {currentContent.warnings.doNotStand}
+                </h4>
+            </div>
+            <div
+                class="flex justify-center items-center space-x-2 bg-amber-100 p-4 border border-amber-300 rounded-md font-semibold text-neutral-800"
+            >
+                <Info className="text-amber-600" />
+                <h4 class="text-amber-800 text-lg">
+                    {currentContent.warnings.doNotOvertighten}
+                </h4>
+            </div>
+        </div>
+    </div>
+</Slide>

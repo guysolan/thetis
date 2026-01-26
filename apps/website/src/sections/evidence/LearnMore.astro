@@ -1,0 +1,63 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import type { Lang } from "@/config/languages.ts";
+import { getRouteBySlugAndLanguage } from "@/content/routes.tsx";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const content = {
+    en: {
+        title: "Want to Learn More?",
+        description:
+            "Contact us to discover how our evidence-based solutions can improve your patients' outcomes.",
+        buttonText: "Get in Touch",
+    },
+    de: {
+        title: "Mehr erfahren?",
+        description:
+            "Kontaktieren Sie uns, um zu erfahren, wie unsere evidence-based Lösungen Ihre Patienten-Ergebnisse verbessern können.",
+        buttonText: "Kontakt aufnehmen",
+    },
+    fr: {
+        title: "Voulez-vous en savoir plus ?",
+        description:
+            "Contactez-nous pour découvrir comment nos solutions basées sur l'évidence peuvent améliorer les résultats de vos patients.",
+        buttonText: "Contactez-nous",
+    },
+    es: {
+        title: "¿Quieres aprender más?",
+        description:
+            "Contacta con nosotros para descubrir cómo nuestras soluciones basadas en evidencia pueden mejorar los resultados de tus pacientes.",
+        buttonText: "Contacta con nosotros",
+    },
+    it: {
+        title: "Vuoi saperne di più?",
+        description:
+            "Contattaci per scoprire come le nostre soluzioni basate su evidenza possono migliorare i risultati dei tuoi pazienti.",
+        buttonText: "Contattaci",
+    },
+};
+
+const currentContent = content[lang];
+---
+
+<section class="mx-auto px-4 py-16 max-w-7xl container">
+    <div class="flex flex-col justify-center items-center text-center">
+        <h2
+            class="mb-6 font-semibold text-neutral-950 dark:text-neutral-50 text-3xl"
+        >
+            {currentContent.title}
+        </h2>
+        <p class="mb-8 max-w-2xl text-gray-800 dark:text-neutral-200 text-lg">
+            {currentContent.description}
+        </p>
+        <a
+            href={getRouteBySlugAndLanguage("contact", lang)?.href ||
+                "/contact"}
+            class={cn(buttonVariants({ size: "lg", variant: "default" }))}
+        >
+            {currentContent.buttonText}
+        </a>
+    </div>
+</section>

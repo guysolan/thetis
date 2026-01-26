@@ -5,53 +5,94 @@ import { currencyKeys } from "../../../../constants/currencies";
 const itemTypeSchema = z.enum([...itemTypes]);
 
 // Base item schema that all other item schemas extend from
-const baseItemSchema = z.object({
+export const baseItemSchema = z.object({
     item_id: z.string().min(1, "Please select an item"),
-    item_type: itemTypeSchema,
     quantity_change: z.coerce.number(),
+    lot_number: z.string().optional(),
+    package_item_change_id: z.number().nullable().default(null),
 });
 
 // Single schema for all priced items (consumed/produced)
-const pricedItemSchema = baseItemSchema.extend({
+export const pricedItemSchema = baseItemSchema.extend({
     item_price: z.coerce.number().optional(),
     item_tax: z.coerce.number().optional(),
     item_total: z.coerce.number().optional(),
 });
+export type PricedOrderItem = z.infer<typeof pricedItemSchema>;
 
 // Simplified package schemas
 const packageItemSchema = pricedItemSchema.extend({
-    item_type: z.literal("product"),
     quantity_change: z.coerce.number().min(1, "Quantity must be at least 1"),
 });
 
 const packageOrderItemSchema = z.object({
     item_type: z.literal("package"),
     package_id: z.string().min(1, "Package is required"),
-    package_quantity: z.coerce.number().min(1, "Quantity must be at least 1"),
     package_items: z.array(packageItemSchema).min(
         1,
         "Package must contain at least one item",
     ),
+    package_item_change_id: z.number().nullable().default(null),
 });
 
 // Combined order item schema
 const orderItemSchema = z.discriminatedUnion("item_type", [
-    baseItemSchema.extend({
-        item_type: z.enum(["product", "part"]),
+    z.object({
+        item_type: z.literal("product"),
+        item_id: z.string().min(1, "Please select an item"),
+        quantity_change: z.coerce.number(),
+        lot_number: z.string().optional(),
+        package_item_change_id: z.number().nullable().default(null),
         quantity_before: z.coerce.number().optional(),
         quantity_after: z.coerce.number().optional(),
+        item_price: z.coerce.number().optional(),
+        item_tax: z.coerce.number().optional(),
+        item_total: z.coerce.number().optional(),
+    }),
+    z.object({
+        item_type: z.literal("part"),
+        item_id: z.string().min(1, "Please select an item"),
+        quantity_change: z.coerce.number(),
+        lot_number: z.string().optional(),
+        package_item_change_id: z.number().nullable().default(null),
+        quantity_before: z.coerce.number().optional(),
+        quantity_after: z.coerce.number().optional(),
+        item_price: z.coerce.number().optional(),
+        item_tax: z.coerce.number().optional(),
+        item_total: z.coerce.number().optional(),
+    }),
+    z.object({
+        item_type: z.literal("service"),
+        item_id: z.string().min(1, "Please select an item"),
+        quantity_change: z.coerce.number(),
+        lot_number: z.string().optional(),
+        package_item_change_id: z.number().nullable().default(null),
+        quantity_before: z.coerce.number().optional(),
+        quantity_after: z.coerce.number().optional(),
+        item_price: z.coerce.number().optional(),
+        item_tax: z.coerce.number().optional(),
+        item_total: z.coerce.number().optional(),
     }),
     packageOrderItemSchema,
-    baseItemSchema.extend({
+    z.object({
         item_type: z.literal("stocktake"),
+        item_id: z.string().min(1, "Please select an item"),
+        quantity_change: z.coerce.number(),
+        lot_number: z.string().optional(),
+        package_item_change_id: z.number().nullable().default(null),
         quantity_before: z.coerce.number(),
         quantity_after: z.coerce.number(),
+        item_price: z.coerce.number().optional(),
+        item_tax: z.coerce.number().optional(),
+        item_total: z.coerce.number().optional(),
     }),
 ]);
 
 // Main form schema
 export const multiOrderFormSchema = z.object({
+    order_form_values: z.any(),
     // Address fields
+    order_id: z.string().optional().nullable(),
     from_company_id: z.string().min(1, "Company is required"),
     from_billing_address_id: z.string().min(1, "Billing address is required"),
     from_shipping_address_id: z.string().min(1, "Shipping address is required"),
@@ -61,21 +102,43 @@ export const multiOrderFormSchema = z.object({
     to_shipping_address_id: z.string().min(1, "Shipping address is required"),
     from_contact_id: z.string().min(1, "Contact is required").optional(),
     company_id: z.string().min(1, "Company is required"),
-    item_type: itemTypeSchema,
+    item_type: z.enum(["product", "part", "service", "package"]).optional(),
 
     // Order fields
-    order_date: z.date(),
+    order_date: z.union([z.string(), z.date()]),
     order_type: z.enum(["sale", "shipment", "purchase", "stocktake"]),
     mode: z.enum(["package", "direct"]).optional(),
     currency: z.enum(currencyKeys as [string, ...string[]]).default("GBP"),
     carriage: z.coerce.number().min(0).default(0),
+    reference_number: z.string().optional().nullable(),
+    delivery_dates: z.tuple([
+        z.union([z.string(), z.date()]).nullable(),
+        z.union([z.string(), z.date()]).nullable(),
+    ]).optional(),
+
+    // Additional
+    reason_for_export: z.string().optional().nullable(),
+    shipment_number: z.string().optional().nullable(),
+    airwaybill: z.string().optional().nullable(),
+    mode_of_transport: z.string().optional().nullable(),
+    incoterms: z.string().optional().nullable(),
+    unit_of_measurement: z.enum(["metric", "imperial"]),
 
     // Item arrays
-    order_items: z.array(pricedItemSchema).min(1),
+    order_items: z.array(orderItemSchema).optional(),
     consumed_items: z.array(pricedItemSchema).optional(),
     produced_items: z.array(pricedItemSchema).optional(),
     from_items: z.array(baseItemSchema).optional(),
     to_items: z.array(baseItemSchema).optional(),
+    package_items: z.array(
+        z.object({
+            package_item_change_id: z.number().min(
+                1,
+                "Package item change ID is required",
+            ).nullable().default(null),
+            package_id: z.string().min(1, "Package is required"),
+        }),
+    ).default([]),
 }).superRefine((data, ctx) => {
     if (data.order_type === "sale" && !data.consumed_items) {
         ctx.addIssue({
@@ -106,7 +169,9 @@ export const multiOrderFormSchema = z.object({
     }
     if (
         data.order_type === "stocktake" &&
-        !data.order_items.every((item) => item.item_type === "stocktake")
+        data.order_items?.every((item) =>
+            item.item_type === "part" || item.item_type === "product"
+        )
     ) {
         ctx.addIssue({
             path: ["order_items"],

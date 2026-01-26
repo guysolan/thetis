@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SizeChart from "@/components/SizeChart.astro";
+---
+
+<Layout title="Size Guide" description="Size Guide">
+    <main
+        class="flex flex-col gap-y-8 my-8 px-2 lg:px-0 py-12 w-full lg:w-8/12"
+    >
+        <section class="flex flex-col gap-y-8">
+            <h1 class="font-semibold text-3xl">Size Guide</h1>
+            <SizeChart />
+        </section>
+    </main>
+</Layout>

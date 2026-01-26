@@ -16,6 +16,7 @@ type InputProps = {
   step?: string;
   disabled?: boolean;
   className?: string;
+  placeholder?: string;
 };
 const Input = ({
   name,
@@ -24,6 +25,7 @@ const Input = ({
   step,
   disabled = false,
   className,
+  placeholder,
 }: InputProps) => {
   const { control } = useFormContext();
 
@@ -40,6 +42,7 @@ const Input = ({
           <FormControl>
             <TextareaWrap
               disabled={disabled}
+              placeholder={placeholder}
               {...field}
               value={field.value ?? ""}
               className={cn(
@@ -50,10 +53,9 @@ const Input = ({
               onChange={(e) =>
                 type === "number"
                   ? field.onChange(
-                      e.target.value === "" ? null : Number(e.target.value),
-                    )
-                  : field.onChange(e.target.value)
-              }
+                    e.target.value === "" ? null : Number(e.target.value),
+                  )
+                  : field.onChange(e.target.value)}
             />
           </FormControl>
         </FormItem>

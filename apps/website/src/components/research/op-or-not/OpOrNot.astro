@@ -1,0 +1,619 @@
+---
+import getUnicodeFlagIcon from "country-flag-icons/unicode";
+import { Clock, Hammer, ExternalLink, BarChart, LineChart } from "lucide-astro";
+import OpOrNotBody from "./OpOrNotBody.astro";
+import OpOrNotByCountry from "./OpOrNotByCountry.astro";
+
+// Importing the data for charts
+import countryData from "./data.json";
+
+// Process data for charts
+const countriesForSurgicalRateChart = countryData
+    .map((country) => {
+        // Extract the most recent year's surgical rate
+        const years = Object.keys(country.surgical_rate || {})
+            .filter((key) => !Number.isNaN(Number.parseInt(key)))
+            .sort((a, b) => Number.parseInt(b) - Number.parseInt(a));
+
+        const latestYear = years[0] || null;
+        const surgicalRateValue = latestYear
+            ? Number.parseFloat(
+                  country.surgical_rate[latestYear].replace("%", ""),
+              )
+            : null;
+
+        return {
+            country: country.country,
+            surgicalRate: surgicalRateValue,
+            year: latestYear,
+            trend: country.surgical_rate?.trend || null,
+        };
+    })
+    .filter((item) => item.surgicalRate !== null);
+
+// Sort by surgical rate for better visualization
+countriesForSurgicalRateChart.sort((a, b) => b.surgicalRate - a.surgicalRate);
+
+// Process incidence trend data
+const incidenceTrendData = countryData
+    .map((country) => {
+        if (!country.incidence) return null;
+
+        const years = Object.keys(country.incidence)
+            .filter((key) => !Number.isNaN(Number.parseInt(key)))
+            .sort((a, b) => Number.parseInt(a) - Number.parseInt(b));
+
+        if (years.length < 2) return null;
+
+        return {
+            country: country.country,
+            years: years,
+            values: years.map((year) => {
+                const value = country.incidence[year];
+                return Number.parseFloat(
+                    value
+                        .toString()
+                        .replace(" per 100,000", "")
+                        .replace(" per 100,000 person-years", ""),
+                );
+            }),
+        };
+    })
+    .filter((item) => item !== null);
+---
+
+<div class="mx-auto px-4 py-8 max-w-5xl">
+    <div class="mb-10 text-center">
+        <h2 class="mb-4 font-bold text-gray-900 text-3xl">
+            Achilles Tendon Rupture: Global Treatment Trends
+        </h2>
+        <p class="mx-auto max-w-3xl text-gray-600">
+            A comprehensive overview of global trends in Achilles tendon rupture
+            incidence and treatment approaches, combining data from multiple
+            international studies.
+        </p>
+    </div>
+
+    <!-- Tabs for different views -->
+    <div class="mb-8 border-gray-200 border-b">
+        <ul
+            class="flex flex-wrap -mb-px font-medium text-sm text-center"
+            id="tab-navigation"
+            role="tablist"
+        >
+            <li class="mr-2" role="presentation">
+                <button
+                    class="inline-block p-4 border-emerald-600 border-b-2 rounded-t-lg active"
+                    id="overview-tab"
+                    data-tabs-target="#overview"
+                    type="button"
+                    role="tab"
+                    aria-controls="overview"
+                    aria-selected="true"
+                >
+                    Overview
+                </button>
+            </li>
+            <li class="mr-2" role="presentation">
+                <button
+                    class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600"
+                    id="data-visualization-tab"
+                    data-tabs-target="#data-visualization"
+                    type="button"
+                    role="tab"
+                    aria-controls="data-visualization"
+                    aria-selected="false"
+                >
+                    Data Visualization
+                </button>
+            </li>
+            <li class="mr-2" role="presentation">
+                <button
+                    class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600"
+                    id="country-comparison-tab"
+                    data-tabs-target="#country-comparison"
+                    type="button"
+                    role="tab"
+                    aria-controls="country-comparison"
+                    aria-selected="false"
+                >
+                    Country Comparison
+                </button>
+            </li>
+            <li role="presentation">
+                <button
+                    class="inline-block p-4 hover:border-gray-300 border-transparent border-b-2 rounded-t-lg hover:text-gray-600"
+                    id="detailed-report-tab"
+                    data-tabs-target="#detailed-report"
+                    type="button"
+                    role="tab"
+                    aria-controls="detailed-report"
+                    aria-selected="false"
+                >
+                    Detailed Report
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Tab content -->
+    <div id="tab-content">
+        <!-- Overview Tab -->
+        <div
+            class="block bg-gray-50 p-4 rounded-lg"
+            id="overview"
+            role="tabpanel"
+            aria-labelledby="overview-tab"
+        >
+            <div class="mb-6">
+                <h3 class="mb-3 font-semibold text-xl">Key Findings</h3>
+                <div class="gap-4 grid grid-cols-1 md:grid-cols-3">
+                    <div
+                        class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                    >
+                        <div class="flex items-center mb-2">
+                            <LineChart
+                                class="mr-2 text-emerald-600"
+                                size={20}
+                            />
+                            <h4 class="font-medium">Increasing Incidence</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                            Achilles tendon rupture incidence has increased
+                            globally over the past decades, with rates as high
+                            as 41.7 per 100,000 person-years in Sweden.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                    >
+                        <div class="flex items-center mb-2">
+                            <Hammer class="mr-2 text-emerald-600" size={20} />
+                            <h4 class="font-medium">Treatment Evolution</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                            Many regions show a shift from surgical to
+                            non-surgical treatment, though surgical approaches
+                            remain dominant in the US, Japan, France, and Italy.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                    >
+                        <div class="flex items-center mb-2">
+                            <Clock class="mr-2 text-emerald-600" size={20} />
+                            <h4 class="font-medium">Comparable Outcomes</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                            Recent high-quality studies show comparable
+                            functional outcomes between surgical and
+                            well-managed non-operative protocols with early
+                            functional rehabilitation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="mb-3 font-semibold text-xl">Global Snapshot</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-gray-700 text-sm text-left">
+                        <thead
+                            class="bg-gray-100 text-gray-700 text-xs uppercase"
+                        >
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Country</th>
+                                <th scope="col" class="px-6 py-3"
+                                    >Current Approach</th
+                                >
+                                <th scope="col" class="px-6 py-3"
+                                    >Incidence Trend</th
+                                >
+                                <th scope="col" class="px-6 py-3"
+                                    >Surgical Rate Trend</th
+                                >
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                countryData.map((country) => (
+                                    <tr class="bg-white border-b">
+                                        <td class="flex items-center px-6 py-4 font-medium">
+                                            {country.country === "UK"
+                                                ? getUnicodeFlagIcon("GB")
+                                                : country.country ===
+                                                    "United States"
+                                                  ? getUnicodeFlagIcon("US")
+                                                  : country.country ===
+                                                      "United Kingdom"
+                                                    ? getUnicodeFlagIcon("GB")
+                                                    : getUnicodeFlagIcon(
+                                                          country.country
+                                                              ?.substring(0, 2)
+                                                              ?.toUpperCase(),
+                                                      )}
+                                            <span class="ml-2">
+                                                {country.country}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {country.surgical_rate?.trend ||
+                                                "Data not available"}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {country.incidence
+                                                ? Object.keys(country.incidence)
+                                                      .length > 1
+                                                    ? "Increasing"
+                                                    : "Data insufficient"
+                                                : "Data not available"}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {country.surgical_rate?.trend?.includes(
+                                                "decline",
+                                            )
+                                                ? "Declining"
+                                                : country.surgical_rate?.trend?.includes(
+                                                        "increase",
+                                                    )
+                                                  ? "Increasing"
+                                                  : country.surgical_rate?.trend?.includes(
+                                                          "stable",
+                                                      )
+                                                    ? "Stable"
+                                                    : "Variable"}
+                                        </td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Visualization Tab -->
+        <div
+            class="hidden bg-gray-50 p-4 rounded-lg"
+            id="data-visualization"
+            role="tabpanel"
+            aria-labelledby="data-visualization-tab"
+        >
+            <div class="gap-6 grid grid-cols-1 lg:grid-cols-2">
+                <div
+                    class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                >
+                    <h3 class="mb-4 font-semibold text-lg">
+                        Surgical Treatment Rates by Country
+                    </h3>
+                    <div class="h-80">
+                        <canvas id="surgicalRatesChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-gray-600 text-sm">
+                        Latest available surgical treatment rates across
+                        countries show significant variation in approaches to
+                        Achilles tendon rupture management.
+                    </p>
+                </div>
+
+                <div
+                    class="bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                >
+                    <h3 class="mb-4 font-semibold text-lg">
+                        Incidence Trends Over Time
+                    </h3>
+                    <div class="h-80">
+                        <canvas id="incidenceTrendChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-gray-600 text-sm">
+                        Most countries show increasing incidence of Achilles
+                        tendon ruptures over time, potentially due to aging
+                        populations and increased sports participation.
+                    </p>
+                </div>
+
+                <div
+                    class="col-span-1 lg:col-span-2 bg-white shadow-sm p-5 border border-gray-100 rounded-lg"
+                >
+                    <h3 class="mb-4 font-semibold text-lg">
+                        Correlation: Incidence vs. Surgical Treatment
+                    </h3>
+                    <div class="h-80">
+                        <canvas id="correlationChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-gray-600 text-sm">
+                        This scatter plot shows the relationship between
+                        incidence rates and surgical treatment preferences. Many
+                        countries with high incidence rates show decreasing
+                        surgical intervention, suggesting evidence-based shifts
+                        in treatment protocols.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Country Comparison Tab -->
+        <div
+            class="hidden bg-gray-50 p-4 rounded-lg"
+            id="country-comparison"
+            role="tabpanel"
+            aria-labelledby="country-comparison-tab"
+        >
+            <OpOrNotByCountry />
+        </div>
+
+        <!-- Detailed Report Tab -->
+        <div
+            class="hidden bg-gray-50 p-4 rounded-lg"
+            id="detailed-report"
+            role="tabpanel"
+            aria-labelledby="detailed-report-tab"
+        >
+            <OpOrNotBody />
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js Scripts -->
+<script>
+    // Import Chart.js
+    import Chart from "chart.js/auto";
+
+    // DOM elements for tabs
+    const tabButtons = document.querySelectorAll('[role="tab"]');
+    const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+
+    // Tab switching functionality
+    tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            // Deactivate all tabs
+            tabButtons.forEach((btn) => {
+                btn.classList.remove("active", "border-emerald-600");
+                btn.classList.add("border-transparent");
+                btn.setAttribute("aria-selected", "false");
+            });
+
+            tabPanels.forEach((panel) => {
+                panel.classList.add("hidden");
+            });
+
+            // Activate current tab
+            button.classList.add("active", "border-emerald-600");
+            button.classList.remove("border-transparent");
+            button.setAttribute("aria-selected", "true");
+
+            // Show current panel
+            const panelId = button
+                .getAttribute("data-tabs-target")
+                .substring(1);
+            document.getElementById(panelId).classList.remove("hidden");
+
+            // Initialize charts when data visualization tab is opened
+            if (panelId === "data-visualization") {
+                initializeCharts();
+            }
+        });
+    });
+
+    // Initialize charts
+    function initializeCharts() {
+        // Surgical Rates Chart
+        const surgicalRatesData = {
+            labels: [
+                "France",
+                "Italy",
+                "Germany",
+                "Japan",
+                "United States",
+                "Canada",
+                "Australia",
+                "United Kingdom",
+                "Finland",
+                "Sweden",
+                "Denmark",
+            ],
+            datasets: [
+                {
+                    label: "Surgical Treatment Rate (%)",
+                    data: [92, 80, 88.7, 72, 70, 9.2, 35, 5, 15.2, 14.4, 20.3],
+                    backgroundColor: "rgba(5, 150, 105, 0.7)",
+                    borderColor: "rgba(5, 150, 105, 1)",
+                    borderWidth: 1,
+                },
+            ],
+        };
+
+        const surgicalCtx = document.getElementById("surgicalRatesChart");
+        if (surgicalCtx) {
+            new Chart(surgicalCtx, {
+                type: "bar",
+                data: surgicalRatesData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: "Percentage (%)",
+                            },
+                        },
+                        x: {
+                            ticks: {
+                                autoSkip: false,
+                                maxRotation: 45,
+                                minRotation: 45,
+                            },
+                        },
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `Surgical rate: ${context.parsed.y}%`;
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+        }
+
+        // Incidence Trend Chart
+        const incidenceCtx = document.getElementById("incidenceTrendChart");
+        if (incidenceCtx) {
+            new Chart(incidenceCtx, {
+                type: "line",
+                data: {
+                    labels: ["2000", "2005", "2010", "2015", "2020"],
+                    datasets: [
+                        {
+                            label: "Sweden",
+                            data: [null, 28.8, 32.5, 38.6, 41.7],
+                            borderColor: "rgba(59, 130, 246, 1)",
+                            backgroundColor: "rgba(59, 130, 246, 0.1)",
+                            tension: 0.2,
+                        },
+                        {
+                            label: "Denmark",
+                            data: [26.95, null, 29.7, 31.17, null],
+                            borderColor: "rgba(239, 68, 68, 1)",
+                            backgroundColor: "rgba(239, 68, 68, 0.1)",
+                            tension: 0.2,
+                        },
+                        {
+                            label: "Finland",
+                            data: [17.3, 20.5, 25.0, 29.7, 32.3],
+                            borderColor: "rgba(16, 185, 129, 1)",
+                            backgroundColor: "rgba(16, 185, 129, 0.1)",
+                            tension: 0.2,
+                        },
+                        {
+                            label: "UK",
+                            data: [8.5, 9.7, 11.3, 15.7, 21.5],
+                            borderColor: "rgba(245, 158, 11, 1)",
+                            backgroundColor: "rgba(245, 158, 11, 0.1)",
+                            tension: 0.2,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: "Cases per 100,000 person-years",
+                            },
+                        },
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.dataset.label}: ${context.parsed.y || "No data"} per 100,000`;
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+        }
+
+        // Correlation Chart (Scatter)
+        const correlationCtx = document.getElementById("correlationChart");
+        if (correlationCtx) {
+            new Chart(correlationCtx, {
+                type: "scatter",
+                data: {
+                    datasets: [
+                        {
+                            label: "Sweden",
+                            data: [{ x: 41.7, y: 14.4 }],
+                            backgroundColor: "rgba(59, 130, 246, 0.7)",
+                        },
+                        {
+                            label: "Denmark",
+                            data: [{ x: 31.17, y: 20.3 }],
+                            backgroundColor: "rgba(239, 68, 68, 0.7)",
+                        },
+                        {
+                            label: "Finland",
+                            data: [{ x: 32.3, y: 15.2 }],
+                            backgroundColor: "rgba(16, 185, 129, 0.7)",
+                        },
+                        {
+                            label: "UK",
+                            data: [{ x: 21.5, y: 5 }],
+                            backgroundColor: "rgba(245, 158, 11, 0.7)",
+                        },
+                        {
+                            label: "Canada",
+                            data: [{ x: 29.3, y: 9.2 }],
+                            backgroundColor: "rgba(124, 58, 237, 0.7)",
+                        },
+                        {
+                            label: "US",
+                            data: [{ x: 21.3, y: 70 }],
+                            backgroundColor: "rgba(236, 72, 153, 0.7)",
+                        },
+                        {
+                            label: "France",
+                            data: [{ x: 21.3, y: 92 }],
+                            backgroundColor: "rgba(6, 182, 212, 0.7)",
+                        },
+                        {
+                            label: "Italy",
+                            data: [{ x: 19.8, y: 80 }],
+                            backgroundColor: "rgba(52, 211, 153, 0.7)",
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: "Incidence (per 100,000 person-years)",
+                            },
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: "Surgical Treatment Rate (%)",
+                            },
+                            min: 0,
+                            max: 100,
+                        },
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.dataset.label}: ${context.parsed.x} per 100,000, ${context.parsed.y}% surgical`;
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+        }
+    }
+</script>
+
+<style>
+    #tab-navigation button.active {
+        color: #059669;
+        font-weight: 600;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 300px;
+    }
+</style>

@@ -1,0 +1,65 @@
+---
+import type { Lang } from "@/config/languages.ts";
+import HighlightedParagraph from "@/components/HighlightedParagraph.tsx";
+
+interface Props {
+    lang: Lang;
+    content: {
+        title: any;
+        description: string;
+        features: Array<{
+            title: string;
+            description: string;
+        }>;
+    };
+}
+
+const { content } = Astro.props;
+
+const icons = [
+    `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>`,
+    `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>`,
+    `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>`,
+    `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>`,
+];
+---
+
+<section class="bg-white py-16">
+    <div class="mx-auto px-4 container">
+        <div class="mx-auto mb-12 max-w-3xl text-center">
+            <h2
+                class="mb-4 font-semibold text-neutral-950 text-3xl md:text-4xl leading-[120%]"
+            >
+                <HighlightedParagraph paragraph={content.title} />
+            </h2>
+            <p class="text-gray-800 text-lg leading-relaxed">
+                {content.description}
+            </p>
+        </div>
+
+        <div class="gap-8 grid md:grid-cols-2 lg:grid-cols-4 mx-auto max-w-6xl">
+            {
+                content.features.map((feature, index) => (
+                    <div class="group bg-gradient-to-br from-primary/5 hover:from-primary/10 to-primary/10 hover:to-primary/20 p-6 rounded-xl transition-all duration-300">
+                        <div class="flex justify-center items-center bg-white mx-auto mb-4 rounded-full w-16 h-16 group-hover:scale-110 transition-transform duration-300">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-8 h-8 text-primary"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                set:html={icons[index % icons.length]}
+                            />
+                        </div>
+                        <h3 class="mb-2 font-semibold text-neutral-900 text-lg text-center">
+                            {feature.title}
+                        </h3>
+                        <p class="text-gray-600 text-sm text-center">
+                            {feature.description}
+                        </p>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>

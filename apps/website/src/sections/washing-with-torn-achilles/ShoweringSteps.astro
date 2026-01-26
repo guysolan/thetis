@@ -1,0 +1,361 @@
+---
+import type { Lang } from "@/config/languages.ts";
+import HighlightedParagraph from "@/components/HighlightedParagraph.tsx";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+
+const content = {
+    en: {
+        title: [
+            { text: "How to Shower ", highlighted: false },
+            { text: "Safely with Your Splint", highlighted: true },
+        ],
+        subtitle: "A simple step-by-step guide to make showering easy and safe",
+        steps: [
+            {
+                number: 1,
+                title: "Prepare Your Setup",
+                description:
+                    "Place a sturdy shower stool inside the shower. Leave your crutches right outside the shower door where you can easily reach them.",
+                icon: "🪑",
+            },
+            {
+                number: 2,
+                title: "Get Into Position",
+                description:
+                    "Use your crutches to hop into the shower and sit down on the stool. Make sure you're seated comfortably before the next step.",
+                icon: "🚿",
+            },
+            {
+                number: 3,
+                title: "Switch Boot for Splint",
+                description:
+                    "While seated on the stool, remove your walking boot and put on the Thetis splint. Now you can shower with proper Achilles support.",
+                icon: "👟",
+            },
+            {
+                number: 4,
+                title: "Wash & Get Rid of That Smell",
+                description:
+                    "Finally! Properly wash your foot and leg that's been trapped in that stinky boot. The splint is waterproof, so you can clean thoroughly.",
+                icon: "🧼",
+            },
+            {
+                number: 5,
+                title: "Exit the Shower",
+                description:
+                    "Grab your crutches and carefully hop out of the shower while still wearing the splint.",
+                icon: "🚪",
+            },
+            {
+                number: 6,
+                title: "Dry & Swap Back",
+                description:
+                    "Dry off your splint and foot, then remove the splint and put your boot back on. You're all done!",
+                icon: "✅",
+            },
+        ],
+        tip: {
+            title: "Pro Tip",
+            description:
+                "The splint is waterproof but not fully submersible. It handles shower water perfectly fine. After use, just air dry it before storing.",
+        },
+    },
+    de: {
+        title: [
+            { text: "Wie man ", highlighted: false },
+            { text: "sicher mit Ihrer Schiene duscht", highlighted: true },
+        ],
+        subtitle:
+            "Eine einfache Schritt-für-Schritt-Anleitung für einfaches und sicheres Duschen",
+        steps: [
+            {
+                number: 1,
+                title: "Vorbereitung",
+                description:
+                    "Stellen Sie einen stabilen Duschhocker in die Dusche. Lassen Sie Ihre Krücken direkt vor der Duschtür, wo Sie sie leicht erreichen können.",
+                icon: "🪑",
+            },
+            {
+                number: 2,
+                title: "In Position gehen",
+                description:
+                    "Benutzen Sie Ihre Krücken, um in die Dusche zu hüpfen und setzen Sie sich auf den Hocker. Stellen Sie sicher, dass Sie bequem sitzen.",
+                icon: "🚿",
+            },
+            {
+                number: 3,
+                title: "Stiefel gegen Schiene tauschen",
+                description:
+                    "Entfernen Sie im Sitzen Ihren Gehstiefel und ziehen Sie die Thetis-Schiene an. Jetzt können Sie mit ordentlicher Achillessehnen-Unterstützung duschen.",
+                icon: "👟",
+            },
+            {
+                number: 4,
+                title: "Waschen & Geruch loswerden",
+                description:
+                    "Endlich! Waschen Sie Ihren Fuß und Ihr Bein, die in diesem stinkenden Stiefel gefangen waren, richtig. Die Schiene ist wasserdicht, also können Sie gründlich reinigen.",
+                icon: "🧼",
+            },
+            {
+                number: 5,
+                title: "Dusche verlassen",
+                description:
+                    "Greifen Sie Ihre Krücken und hüpfen Sie vorsichtig aus der Dusche, während Sie noch die Schiene tragen.",
+                icon: "🚪",
+            },
+            {
+                number: 6,
+                title: "Trocknen & zurück wechseln",
+                description:
+                    "Trocknen Sie Ihre Schiene und Ihren Fuß ab, dann entfernen Sie die Schiene und ziehen Ihren Stiefel wieder an. Fertig!",
+                icon: "✅",
+            },
+        ],
+        tip: {
+            title: "Profi-Tipp",
+            description:
+                "Die Schiene ist wasserdicht, aber nicht vollständig tauchfähig. Sie verträgt Duschwasser perfekt. Nach Gebrauch einfach an der Luft trocknen lassen.",
+        },
+    },
+    fr: {
+        title: [
+            { text: "Comment se doucher ", highlighted: false },
+            { text: "en toute sécurité avec votre attelle", highlighted: true },
+        ],
+        subtitle:
+            "Un guide simple étape par étape pour rendre la douche facile et sûre",
+        steps: [
+            {
+                number: 1,
+                title: "Préparez votre installation",
+                description:
+                    "Placez un tabouret de douche solide dans la douche. Laissez vos béquilles juste à l'extérieur de la porte de douche où vous pouvez facilement les atteindre.",
+                icon: "🪑",
+            },
+            {
+                number: 2,
+                title: "Mettez-vous en position",
+                description:
+                    "Utilisez vos béquilles pour sauter dans la douche et asseyez-vous sur le tabouret. Assurez-vous d'être confortablement assis.",
+                icon: "🚿",
+            },
+            {
+                number: 3,
+                title: "Échangez la botte contre l'attelle",
+                description:
+                    "Assis sur le tabouret, retirez votre botte de marche et mettez l'attelle Thetis. Maintenant vous pouvez vous doucher avec un bon soutien d'Achille.",
+                icon: "👟",
+            },
+            {
+                number: 4,
+                title: "Lavez-vous et débarrassez-vous de cette odeur",
+                description:
+                    "Enfin! Lavez correctement votre pied et votre jambe qui étaient piégés dans cette botte malodorante. L'attelle est imperméable, vous pouvez nettoyer en profondeur.",
+                icon: "🧼",
+            },
+            {
+                number: 5,
+                title: "Sortez de la douche",
+                description:
+                    "Prenez vos béquilles et sortez prudemment de la douche tout en portant l'attelle.",
+                icon: "🚪",
+            },
+            {
+                number: 6,
+                title: "Séchez et changez",
+                description:
+                    "Séchez votre attelle et votre pied, puis retirez l'attelle et remettez votre botte. C'est terminé!",
+                icon: "✅",
+            },
+        ],
+        tip: {
+            title: "Conseil Pro",
+            description:
+                "L'attelle est imperméable mais pas totalement submersible. Elle résiste parfaitement à l'eau de douche. Après utilisation, laissez-la simplement sécher à l'air.",
+        },
+    },
+    es: {
+        title: [
+            { text: "Cómo ducharse ", highlighted: false },
+            { text: "de forma segura con su férula", highlighted: true },
+        ],
+        subtitle:
+            "Una guía simple paso a paso para hacer que ducharse sea fácil y seguro",
+        steps: [
+            {
+                number: 1,
+                title: "Prepare su configuración",
+                description:
+                    "Coloque un taburete de ducha resistente dentro de la ducha. Deje sus muletas justo afuera de la puerta de la ducha donde pueda alcanzarlas fácilmente.",
+                icon: "🪑",
+            },
+            {
+                number: 2,
+                title: "Póngase en posición",
+                description:
+                    "Use sus muletas para saltar a la ducha y siéntese en el taburete. Asegúrese de estar sentado cómodamente antes del siguiente paso.",
+                icon: "🚿",
+            },
+            {
+                number: 3,
+                title: "Cambie la bota por la férula",
+                description:
+                    "Mientras está sentado en el taburete, quítese la bota de caminar y póngase la férula Thetis. Ahora puede ducharse con el soporte adecuado para el Aquiles.",
+                icon: "👟",
+            },
+            {
+                number: 4,
+                title: "Lávese y deshágase de ese olor",
+                description:
+                    "¡Por fin! Lave adecuadamente su pie y pierna que han estado atrapados en esa bota maloliente. La férula es impermeable, así que puede limpiar a fondo.",
+                icon: "🧼",
+            },
+            {
+                number: 5,
+                title: "Salga de la ducha",
+                description:
+                    "Agarre sus muletas y salga cuidadosamente de la ducha mientras aún usa la férula.",
+                icon: "🚪",
+            },
+            {
+                number: 6,
+                title: "Seque y cambie",
+                description:
+                    "Seque su férula y pie, luego quítese la férula y póngase la bota. ¡Ya terminó!",
+                icon: "✅",
+            },
+        ],
+        tip: {
+            title: "Consejo Pro",
+            description:
+                "La férula es impermeable pero no totalmente sumergible. Maneja perfectamente el agua de la ducha. Después de usar, simplemente déjela secar al aire.",
+        },
+    },
+    it: {
+        title: [
+            { text: "Come fare la doccia ", highlighted: false },
+            { text: "in sicurezza con la tua stecca", highlighted: true },
+        ],
+        subtitle:
+            "Una semplice guida passo-passo per rendere la doccia facile e sicura",
+        steps: [
+            {
+                number: 1,
+                title: "Prepara la configurazione",
+                description:
+                    "Metti uno sgabello da doccia robusto dentro la doccia. Lascia le stampelle proprio fuori dalla porta della doccia dove puoi raggiungerle facilmente.",
+                icon: "🪑",
+            },
+            {
+                number: 2,
+                title: "Mettiti in posizione",
+                description:
+                    "Usa le stampelle per saltare nella doccia e siediti sullo sgabello. Assicurati di essere seduto comodamente prima del prossimo passo.",
+                icon: "🚿",
+            },
+            {
+                number: 3,
+                title: "Cambia lo stivale con la stecca",
+                description:
+                    "Mentre sei seduto sullo sgabello, rimuovi lo stivale da passeggio e indossa la stecca Thetis. Ora puoi fare la doccia con il supporto adeguato per l'Achille.",
+                icon: "👟",
+            },
+            {
+                number: 4,
+                title: "Lavati e liberati di quell'odore",
+                description:
+                    "Finalmente! Lava correttamente il piede e la gamba che sono stati intrappolati in quello stivale puzzolente. La stecca è impermeabile, quindi puoi pulire a fondo.",
+                icon: "🧼",
+            },
+            {
+                number: 5,
+                title: "Esci dalla doccia",
+                description:
+                    "Prendi le stampelle e salta con attenzione fuori dalla doccia mentre indossi ancora la stecca.",
+                icon: "🚪",
+            },
+            {
+                number: 6,
+                title: "Asciuga e cambia",
+                description:
+                    "Asciuga la tua stecca e il piede, poi rimuovi la stecca e rimetti lo stivale. Hai finito!",
+                icon: "✅",
+            },
+        ],
+        tip: {
+            title: "Consiglio Pro",
+            description:
+                "La stecca è impermeabile ma non completamente sommergibile. Gestisce perfettamente l'acqua della doccia. Dopo l'uso, lasciala semplicemente asciugare all'aria.",
+        },
+    },
+};
+
+const currentContent = content[lang] || content.en;
+---
+
+<section class="bg-white py-16">
+    <div class="mx-auto px-4 container">
+        <div class="mx-auto mb-12 max-w-3xl text-center">
+            <h2
+                class="mb-4 font-semibold text-neutral-950 text-3xl md:text-4xl leading-[120%]"
+            >
+                <HighlightedParagraph paragraph={currentContent.title} />
+            </h2>
+            <p class="text-gray-700 text-lg">
+                {currentContent.subtitle}
+            </p>
+        </div>
+
+        <div class="space-y-6 mx-auto max-w-4xl">
+            {
+                currentContent.steps.map((step, index) => (
+                    <div
+                        class={`flex items-start gap-6 p-6 border rounded-lg ${
+                            index === 3
+                                ? "bg-blue-50 border-blue-200"
+                                : "bg-white border-gray-200"
+                        }`}
+                    >
+                        <div class="flex-shrink-0">
+                            <div class="flex justify-center items-center bg-primary/90 rounded-full w-10 h-10 font-bold text-white text-lg">
+                                {step.number}
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="mb-2 font-semibold text-neutral-900 text-xl">
+                                {step.title}
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                {step.description}
+                            </p>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+
+        <!-- Pro Tip -->
+        <div class="mx-auto mt-8 max-w-4xl">
+            <div
+                class="bg-gradient-to-r from-primary/5 to-primary/10 p-6 border border-primary/20 rounded-lg"
+            >
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl">💡</span>
+                    <div>
+                        <h4 class="mb-2 font-semibold text-neutral-900 text-lg">
+                            {currentContent.tip.title}
+                        </h4>
+                        <p class="text-gray-700">
+                            {currentContent.tip.description}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

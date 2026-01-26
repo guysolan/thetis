@@ -1,0 +1,1260 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ThetisSchema from "@/schemas/ThetisSchema.astro";
+import Image from "astro/components/Image.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import "@thetis/ui/globals.css";
+import NightSplintImage from "@/assets/night-splint/night-splint-bed-top-square.jpg";
+import NightSplintWhiteCloseSquare from "@/components/products/images/night-splint/night_splint_white_close_square.jpg";
+import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
+import ComplianceLogos from "@/sections/index/compliance/ComplianceLogos.astro";
+import { patients } from "@/components/reviews/content/patients";
+import { Image as AstroImage } from "astro:assets";
+import Review1Image from "@/assets/review-1.png";
+import Review2Image from "@/assets/review-2.png";
+import Review3Image from "@/assets/review-3.png";
+import CourseBuyButton from "@/components/CourseBuyButton";
+import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
+import ColorGradientInOut from "@/components/ColorGradientInOut.astro";
+import AthletesBadges from "@/components/AthletesBadges.astro";
+import SurgeonsCarousel from "@/components/SurgeonsCarousel";
+import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
+import type { Lang } from "@/config/languages";
+
+interface Props {
+    lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+
+const content = {
+    en: {
+        meta: {
+            title: "Thetis Medical - Sleep Better, Recovery Better",
+            description: "Our patented night splint lets you ditch the boot at bedtime. Free recovery courses guide you week-by-week. Trusted by 5,000+ patients and over 10,000 people follow our recovery advice.",
+        },
+        hero: {
+            trustBadge: "Trusted by 5000+ Patients",
+            title: "Sleep Better.",
+            titleHighlight: "Recover Better.",
+            subtitle: "The only night splint designed specifically for Achilles rupture recovery.",
+            subtitleBold: "Ditch the heavy boot at bedtime",
+            subtitleEnd: "and finally get the sleep you need.",
+            courseLine: "Plus free recovery courses to guide you week-by-week back to full strength.",
+            shopSplint: "Shop Night Splint →",
+            shopCourses: "Shop Courses",
+            freeShipping: "Free shipping worldwide",
+            moneyBack: "30-day money-back guarantee",
+            surgeonApproved: "Surgeon approved & recommended",
+            socialProof: "Join 5,000+ patients sleeping better tonight",
+            zeroReruptures: "Zero Re-ruptures",
+            inPatients: "in 5,000+ patients",
+        },
+        reviews: {
+            title: "Trusted by 5,000+ Patients",
+            subtitle: "Real reviews from real patients who've found better sleep and faster recovery",
+            viewAll: "View All Reviews",
+        },
+        problem: {
+            tagline: "What's Your Biggest Challenge?",
+            title: "We've helped thousands recover. What's holding you back?",
+            subtitle: "Choose your biggest challenge and we'll show you exactly how we can help.",
+            cantSleep: {
+                title: "I Can't Sleep",
+                description: "Tossing and turning in that heavy boot? You're not alone.",
+                cta: "See the solution →",
+            },
+            confused: {
+                title: "I'm Confused",
+                description: "Can't remember what your surgeon said? Get step-by-step guidance.",
+                cta: "Get clarity →",
+            },
+        },
+        sleepSolution: {
+            tagline: "SOLUTION FOR SLEEP",
+            title: "Don't suffer through another sleepless night.",
+            stat: "80% of patients struggle to sleep in the boot. You don't have to.",
+            description: "The Thetis Night Splint gives you",
+            descriptionBold: "the same protection as your boot",
+            descriptionEnd: "but weighs 90% less. Finally, sleep that actually helps you recover.",
+            benefit1Title: "Lightweight & Breathable",
+            benefit1Desc: "Under 200g vs 1.5kg boot. Your foot can breathe, reducing heat and sweating.",
+            benefit2Title: "Surgeon Approved & Safe",
+            benefit2Desc: "Zero re-ruptures in 5,000+ patients. Trusted by leading foot & ankle surgeons.",
+            benefit3Title: "Works for Showering Too",
+            benefit3Desc: "Keep your foot protected while washing. No more awkward showering positions.",
+            cta: "Shop Night Splint →",
+        },
+        surgeons: {
+            tagline: "PROFESSIONAL ENDORSEMENTS",
+            title: "Trusted by",
+            titleHighlight: "Leading Surgeons",
+            subtitle: "Our innovative solutions have earned the trust of healthcare professionals worldwide",
+            readMore: "Read More Professional Reviews",
+        },
+        guidanceSolution: {
+            tagline: "SOLUTION FOR GUIDANCE",
+            title: "No patient remembers everything their surgeon says. Get step-by-step guidance.",
+            description: "Our evidence-based recovery courses guide you week-by-week from injury to full strength. Written by medical professionals, reviewed by surgeons.",
+            benefit1Title: "Week-by-Week Guidance",
+            benefit1Desc: "Know exactly what to do each week. No guessing, no confusion.",
+            benefit2Title: "Evidence-Based Recovery",
+            benefit2Desc: "Based on 100+ research papers. Trusted by medical professionals.",
+            goalTitle: "Early Recovery Goal:",
+            goalDesc: "Keep the tendon ends close and protected. Our courses show you exactly how.",
+            addToBag: "Add to bag (£29)",
+            learnMore: "Learn More →",
+        },
+        whyThetis: {
+            title: "Why Thetis?",
+            para1: "In Greek mythology, Thetis was a sea nymph who protected her son Achilles. When he was injured, she helped guide his recovery.",
+            para2: "We carry that spirit forward. When you rupture your Achilles tendon, we're here to help — with better products for sleeping and free education to guide your recovery.",
+            ourProducts: "Our Products",
+            ourCourses: "Our Courses",
+        },
+        story: {
+            tagline: "Our Story",
+            title: "A Family Business Built on Real Experience",
+            para1: "Thetis Medical started when Matt, a foot and ankle surgeon, told his son Guy about the troubles all his patients have sleeping in a boot after an achilles rupture. Guy, a design engineer, 3D printed the first prototypes. Caty, a GP, sewed them together with Guy's Granny's sewing machine.",
+            para2: "That's how Thetis Medical was born — from a family kitchen table to helping thousands of patients worldwide. Every product is designed with medical insight, to make patient recovery more comfortable.",
+            promiseTitle: "Our Promise:",
+            promiseDesc: "We're not a faceless corporation. We're a family business that understands what you're going through. Every product and course is designed with real patient needs in mind.",
+        },
+        impact: {
+            tagline: "OUR IMPACT",
+            title: "Trusted by Thousands Worldwide",
+            stat1: "5,000+",
+            stat1Label: "Patients Helped",
+            stat1Desc: "Zero re-ruptures reported",
+            stat2: "10",
+            stat2Label: "Countries",
+            stat2Desc: "Available worldwide",
+            stat3: "20,000+",
+            stat3Label: "Achilles Rupture Readers",
+            stat3Desc: "Evidence-based recovery",
+            viewCourse: "View Recovery Course →",
+        },
+        finalCTA: {
+            title: "Ready to Improve Your Recovery?",
+            subtitle: "Join thousands of patients who've chosen better sleep and clearer guidance. Start your recovery journey today.",
+            shopSplint: "Shop Night Splint →",
+            or: "or",
+            viewCourse: "View Recovery Course",
+            readReviews: "Read Reviews",
+            viewAllCourses: "View All Courses",
+            learnAboutSplint: "Learn About Night Splint",
+            guaranteeTitle: "30-Day Money-Back Guarantee",
+            guaranteeDesc: "Try the Thetis Night Splint risk-free. If you're not completely satisfied for any reason, return it within 30 days for a full refund. No questions asked.",
+            footer: "✓ 30-day money-back guarantee • ✓ Free worldwide shipping • ✓ Surgeon approved",
+        },
+    },
+    de: {
+        meta: {
+            title: "Thetis Medical - Besser schlafen, besser erholen",
+            description: "Unsere patentierte Nachtschiene lässt Sie den Stiefel nachts ablegen. Kostenlose Genesungskurse begleiten Sie Woche für Woche. Vertrauen von 5.000+ Patienten.",
+        },
+        hero: {
+            trustBadge: "Vertrauen von 5000+ Patienten",
+            title: "Besser schlafen.",
+            titleHighlight: "Besser erholen.",
+            subtitle: "Die einzige Nachtschiene, die speziell für die Achillessehnenruptur-Genesung entwickelt wurde.",
+            subtitleBold: "Legen Sie den schweren Stiefel nachts ab",
+            subtitleEnd: "und bekommen Sie endlich den Schlaf, den Sie brauchen.",
+            courseLine: "Plus kostenlose Genesungskurse, die Sie Woche für Woche zurück zur vollen Stärke führen.",
+            shopSplint: "Nachtschiene kaufen →",
+            shopCourses: "Kurse ansehen",
+            freeShipping: "Kostenloser weltweiter Versand",
+            moneyBack: "30-Tage-Geld-zurück-Garantie",
+            surgeonApproved: "Von Chirurgen empfohlen",
+            socialProof: "Schließen Sie sich 5.000+ Patienten an, die heute Nacht besser schlafen",
+            zeroReruptures: "Null Re-Rupturen",
+            inPatients: "bei 5.000+ Patienten",
+        },
+        reviews: {
+            title: "Vertrauen von 5.000+ Patienten",
+            subtitle: "Echte Bewertungen von echten Patienten, die besseren Schlaf und schnellere Genesung gefunden haben",
+            viewAll: "Alle Bewertungen ansehen",
+        },
+        problem: {
+            tagline: "Was ist Ihre größte Herausforderung?",
+            title: "Wir haben Tausenden bei der Genesung geholfen. Was hält Sie zurück?",
+            subtitle: "Wählen Sie Ihre größte Herausforderung und wir zeigen Ihnen genau, wie wir helfen können.",
+            cantSleep: {
+                title: "Ich kann nicht schlafen",
+                description: "Wälzen Sie sich in diesem schweren Stiefel? Sie sind nicht allein.",
+                cta: "Lösung ansehen →",
+            },
+            confused: {
+                title: "Ich bin verwirrt",
+                description: "Können Sie sich nicht erinnern, was Ihr Chirurg gesagt hat? Holen Sie sich Schritt-für-Schritt-Anleitung.",
+                cta: "Klarheit bekommen →",
+            },
+        },
+        sleepSolution: {
+            tagline: "LÖSUNG FÜR SCHLAF",
+            title: "Leiden Sie nicht noch eine schlaflose Nacht.",
+            stat: "80% der Patienten kämpfen mit dem Schlafen im Stiefel. Das müssen Sie nicht.",
+            description: "Die Thetis Nachtschiene gibt Ihnen",
+            descriptionBold: "den gleichen Schutz wie Ihr Stiefel",
+            descriptionEnd: "aber wiegt 90% weniger. Endlich Schlaf, der Ihrer Genesung wirklich hilft.",
+            benefit1Title: "Leicht & Atmungsaktiv",
+            benefit1Desc: "Unter 200g vs 1,5kg Stiefel. Ihr Fuß kann atmen, reduziert Hitze und Schwitzen.",
+            benefit2Title: "Von Chirurgen zugelassen & sicher",
+            benefit2Desc: "Null Re-Rupturen bei 5.000+ Patienten. Vertrauen von führenden Fuß- und Sprunggelenk-Chirurgen.",
+            benefit3Title: "Funktioniert auch beim Duschen",
+            benefit3Desc: "Halten Sie Ihren Fuß beim Waschen geschützt. Keine unbequemen Duschpositionen mehr.",
+            cta: "Nachtschiene kaufen →",
+        },
+        surgeons: {
+            tagline: "PROFESSIONELLE EMPFEHLUNGEN",
+            title: "Vertrauen von",
+            titleHighlight: "führenden Chirurgen",
+            subtitle: "Unsere innovativen Lösungen haben das Vertrauen von Medizinern weltweit gewonnen",
+            readMore: "Mehr professionelle Bewertungen lesen",
+        },
+        guidanceSolution: {
+            tagline: "LÖSUNG FÜR ANLEITUNG",
+            title: "Kein Patient erinnert sich an alles, was sein Chirurg sagt. Holen Sie sich Schritt-für-Schritt-Anleitung.",
+            description: "Unsere evidenzbasierten Genesungskurse führen Sie Woche für Woche von der Verletzung zur vollen Stärke. Geschrieben von medizinischen Fachleuten, überprüft von Chirurgen.",
+            benefit1Title: "Wöchentliche Anleitung",
+            benefit1Desc: "Wissen Sie genau, was Sie jede Woche tun müssen. Kein Raten, keine Verwirrung.",
+            benefit2Title: "Evidenzbasierte Genesung",
+            benefit2Desc: "Basierend auf 100+ Forschungsarbeiten. Vertrauen von medizinischen Fachleuten.",
+            goalTitle: "Frühes Genesungsziel:",
+            goalDesc: "Halten Sie die Sehnenenden nahe und geschützt. Unsere Kurse zeigen Ihnen genau wie.",
+            addToBag: "In den Warenkorb (29€)",
+            learnMore: "Mehr erfahren →",
+        },
+        whyThetis: {
+            title: "Warum Thetis?",
+            para1: "In der griechischen Mythologie war Thetis eine Meeresnymphe, die ihren Sohn Achilles beschützte. Als er verletzt wurde, half sie bei seiner Genesung.",
+            para2: "Wir führen diesen Geist weiter. Wenn Sie Ihre Achillessehne rupturieren, sind wir hier, um zu helfen — mit besseren Produkten zum Schlafen und kostenloser Bildung, um Ihre Genesung zu begleiten.",
+            ourProducts: "Unsere Produkte",
+            ourCourses: "Unsere Kurse",
+        },
+        story: {
+            tagline: "Unsere Geschichte",
+            title: "Ein Familienunternehmen aus echter Erfahrung",
+            para1: "Thetis Medical begann, als Matt, ein Fuß- und Sprunggelenkchirurg, seinem Sohn Guy von den Schlafproblemen aller seiner Patienten im Stiefel nach einer Achillessehnenruptur erzählte. Guy, ein Designingenieur, druckte die ersten Prototypen. Caty, eine Hausärztin, nähte sie mit Guys Omas Nähmaschine zusammen.",
+            para2: "So wurde Thetis Medical geboren — vom Familienküchentisch zur Hilfe für Tausende von Patienten weltweit. Jedes Produkt ist mit medizinischem Einblick gestaltet, um die Genesung der Patienten komfortabler zu machen.",
+            promiseTitle: "Unser Versprechen:",
+            promiseDesc: "Wir sind kein gesichtsloses Unternehmen. Wir sind ein Familienunternehmen, das versteht, was Sie durchmachen. Jedes Produkt und jeder Kurs ist mit echten Patientenbedürfnissen im Sinn gestaltet.",
+        },
+        impact: {
+            tagline: "UNSERE WIRKUNG",
+            title: "Vertrauen von Tausenden weltweit",
+            stat1: "5.000+",
+            stat1Label: "Patienten geholfen",
+            stat1Desc: "Null Re-Rupturen berichtet",
+            stat2: "10",
+            stat2Label: "Länder",
+            stat2Desc: "Weltweit verfügbar",
+            stat3: "20.000+",
+            stat3Label: "Achillessehnen-Leser",
+            stat3Desc: "Evidenzbasierte Genesung",
+            viewCourse: "Genesungskurs ansehen →",
+        },
+        finalCTA: {
+            title: "Bereit, Ihre Genesung zu verbessern?",
+            subtitle: "Schließen Sie sich Tausenden von Patienten an, die besseren Schlaf und klarere Anleitung gewählt haben. Beginnen Sie Ihre Genesungsreise heute.",
+            shopSplint: "Nachtschiene kaufen →",
+            or: "oder",
+            viewCourse: "Genesungskurs ansehen",
+            readReviews: "Bewertungen lesen",
+            viewAllCourses: "Alle Kurse ansehen",
+            learnAboutSplint: "Über Nachtschiene erfahren",
+            guaranteeTitle: "30-Tage-Geld-zurück-Garantie",
+            guaranteeDesc: "Probieren Sie die Thetis Nachtschiene risikofrei. Wenn Sie aus irgendeinem Grund nicht vollständig zufrieden sind, senden Sie sie innerhalb von 30 Tagen für eine volle Rückerstattung zurück. Keine Fragen gestellt.",
+            footer: "✓ 30-Tage-Geld-zurück-Garantie • ✓ Kostenloser weltweiter Versand • ✓ Von Chirurgen empfohlen",
+        },
+    },
+    fr: {
+        meta: {
+            title: "Thetis Medical - Mieux dormir, mieux récupérer",
+            description: "Notre attelle de nuit brevetée vous permet d'enlever la botte au coucher. Des cours de récupération gratuits vous guident semaine après semaine. Approuvé par 5 000+ patients.",
+        },
+        hero: {
+            trustBadge: "Approuvé par 5000+ patients",
+            title: "Mieux dormir.",
+            titleHighlight: "Mieux récupérer.",
+            subtitle: "La seule attelle de nuit conçue spécifiquement pour la récupération de rupture du tendon d'Achille.",
+            subtitleBold: "Enlevez la botte lourde au coucher",
+            subtitleEnd: "et obtenez enfin le sommeil dont vous avez besoin.",
+            courseLine: "Plus des cours de récupération gratuits pour vous guider semaine après semaine vers une force complète.",
+            shopSplint: "Acheter l'attelle →",
+            shopCourses: "Voir les cours",
+            freeShipping: "Livraison mondiale gratuite",
+            moneyBack: "Garantie de remboursement de 30 jours",
+            surgeonApproved: "Approuvé et recommandé par les chirurgiens",
+            socialProof: "Rejoignez 5 000+ patients qui dorment mieux ce soir",
+            zeroReruptures: "Zéro re-ruptures",
+            inPatients: "chez 5 000+ patients",
+        },
+        reviews: {
+            title: "Approuvé par 5 000+ patients",
+            subtitle: "De vrais avis de vrais patients qui ont trouvé un meilleur sommeil et une récupération plus rapide",
+            viewAll: "Voir tous les avis",
+        },
+        problem: {
+            tagline: "Quel est votre plus grand défi?",
+            title: "Nous avons aidé des milliers de personnes à récupérer. Qu'est-ce qui vous retient?",
+            subtitle: "Choisissez votre plus grand défi et nous vous montrerons exactement comment nous pouvons vous aider.",
+            cantSleep: {
+                title: "Je ne peux pas dormir",
+                description: "Vous vous retournez dans cette botte lourde? Vous n'êtes pas seul.",
+                cta: "Voir la solution →",
+            },
+            confused: {
+                title: "Je suis confus",
+                description: "Vous ne vous souvenez pas de ce que votre chirurgien a dit? Obtenez des conseils étape par étape.",
+                cta: "Obtenir de la clarté →",
+            },
+        },
+        sleepSolution: {
+            tagline: "SOLUTION POUR LE SOMMEIL",
+            title: "Ne souffrez pas une autre nuit sans sommeil.",
+            stat: "80% des patients ont du mal à dormir avec la botte. Vous n'avez pas à le faire.",
+            description: "L'attelle de nuit Thetis vous donne",
+            descriptionBold: "la même protection que votre botte",
+            descriptionEnd: "mais pèse 90% de moins. Enfin, un sommeil qui aide vraiment votre récupération.",
+            benefit1Title: "Légère et respirante",
+            benefit1Desc: "Moins de 200g vs 1,5kg de botte. Votre pied peut respirer, réduisant la chaleur et la transpiration.",
+            benefit2Title: "Approuvée par les chirurgiens et sûre",
+            benefit2Desc: "Zéro re-ruptures chez 5 000+ patients. Approuvée par les principaux chirurgiens du pied et de la cheville.",
+            benefit3Title: "Fonctionne aussi pour la douche",
+            benefit3Desc: "Gardez votre pied protégé pendant le lavage. Plus de positions de douche inconfortables.",
+            cta: "Acheter l'attelle →",
+        },
+        surgeons: {
+            tagline: "RECOMMANDATIONS PROFESSIONNELLES",
+            title: "Approuvé par les",
+            titleHighlight: "chirurgiens de premier plan",
+            subtitle: "Nos solutions innovantes ont gagné la confiance des professionnels de santé du monde entier",
+            readMore: "Lire plus d'avis professionnels",
+        },
+        guidanceSolution: {
+            tagline: "SOLUTION POUR LES CONSEILS",
+            title: "Aucun patient ne se souvient de tout ce que son chirurgien dit. Obtenez des conseils étape par étape.",
+            description: "Nos cours de récupération basés sur les preuves vous guident semaine après semaine de la blessure à la force complète. Rédigés par des professionnels médicaux, revus par des chirurgiens.",
+            benefit1Title: "Conseils semaine par semaine",
+            benefit1Desc: "Sachez exactement quoi faire chaque semaine. Pas de devinettes, pas de confusion.",
+            benefit2Title: "Récupération basée sur les preuves",
+            benefit2Desc: "Basé sur plus de 100 articles de recherche. Approuvé par les professionnels médicaux.",
+            goalTitle: "Objectif de récupération précoce:",
+            goalDesc: "Gardez les extrémités du tendon proches et protégées. Nos cours vous montrent exactement comment.",
+            addToBag: "Ajouter au panier (29€)",
+            learnMore: "En savoir plus →",
+        },
+        whyThetis: {
+            title: "Pourquoi Thetis?",
+            para1: "Dans la mythologie grecque, Thétis était une nymphe marine qui protégeait son fils Achille. Quand il a été blessé, elle a aidé à guider sa guérison.",
+            para2: "Nous perpétuons cet esprit. Quand vous vous rupturez le tendon d'Achille, nous sommes là pour vous aider — avec de meilleurs produits pour dormir et une éducation gratuite pour guider votre récupération.",
+            ourProducts: "Nos produits",
+            ourCourses: "Nos cours",
+        },
+        story: {
+            tagline: "Notre histoire",
+            title: "Une entreprise familiale construite sur une vraie expérience",
+            para1: "Thetis Medical a commencé quand Matt, chirurgien du pied et de la cheville, a parlé à son fils Guy des difficultés de tous ses patients à dormir dans une botte après une rupture du tendon d'Achille. Guy, ingénieur en design, a imprimé en 3D les premiers prototypes. Caty, médecin généraliste, les a cousus ensemble avec la machine à coudre de la grand-mère de Guy.",
+            para2: "C'est ainsi que Thetis Medical est né — d'une table de cuisine familiale à l'aide de milliers de patients dans le monde. Chaque produit est conçu avec une vision médicale, pour rendre la récupération des patients plus confortable.",
+            promiseTitle: "Notre promesse:",
+            promiseDesc: "Nous ne sommes pas une société sans visage. Nous sommes une entreprise familiale qui comprend ce que vous traversez. Chaque produit et cours est conçu avec les vrais besoins des patients à l'esprit.",
+        },
+        impact: {
+            tagline: "NOTRE IMPACT",
+            title: "Approuvé par des milliers dans le monde",
+            stat1: "5 000+",
+            stat1Label: "Patients aidés",
+            stat1Desc: "Zéro re-ruptures signalées",
+            stat2: "10",
+            stat2Label: "Pays",
+            stat2Desc: "Disponible dans le monde entier",
+            stat3: "20 000+",
+            stat3Label: "Lecteurs sur l'Achille",
+            stat3Desc: "Récupération basée sur les preuves",
+            viewCourse: "Voir le cours de récupération →",
+        },
+        finalCTA: {
+            title: "Prêt à améliorer votre récupération?",
+            subtitle: "Rejoignez des milliers de patients qui ont choisi un meilleur sommeil et des conseils plus clairs. Commencez votre parcours de récupération aujourd'hui.",
+            shopSplint: "Acheter l'attelle →",
+            or: "ou",
+            viewCourse: "Voir le cours de récupération",
+            readReviews: "Lire les avis",
+            viewAllCourses: "Voir tous les cours",
+            learnAboutSplint: "En savoir plus sur l'attelle",
+            guaranteeTitle: "Garantie de remboursement de 30 jours",
+            guaranteeDesc: "Essayez l'attelle de nuit Thetis sans risque. Si vous n'êtes pas complètement satisfait pour quelque raison que ce soit, retournez-la dans les 30 jours pour un remboursement complet. Sans poser de questions.",
+            footer: "✓ Garantie de remboursement de 30 jours • ✓ Livraison mondiale gratuite • ✓ Approuvé par les chirurgiens",
+        },
+    },
+    es: {
+        meta: {
+            title: "Thetis Medical - Dormir mejor, recuperarse mejor",
+            description: "Nuestra férula nocturna patentada te permite dejar la bota a la hora de dormir. Cursos de recuperación gratuitos te guían semana a semana. Confianza de 5.000+ pacientes.",
+        },
+        hero: {
+            trustBadge: "Confianza de 5000+ pacientes",
+            title: "Dormir mejor.",
+            titleHighlight: "Recuperarse mejor.",
+            subtitle: "La única férula nocturna diseñada específicamente para la recuperación de ruptura del tendón de Aquiles.",
+            subtitleBold: "Deja la bota pesada a la hora de dormir",
+            subtitleEnd: "y finalmente obtén el sueño que necesitas.",
+            courseLine: "Más cursos de recuperación gratuitos para guiarte semana a semana hacia la fuerza completa.",
+            shopSplint: "Comprar férula →",
+            shopCourses: "Ver cursos",
+            freeShipping: "Envío mundial gratuito",
+            moneyBack: "Garantía de devolución de 30 días",
+            surgeonApproved: "Aprobado y recomendado por cirujanos",
+            socialProof: "Únete a 5.000+ pacientes que duermen mejor esta noche",
+            zeroReruptures: "Cero re-rupturas",
+            inPatients: "en 5.000+ pacientes",
+        },
+        reviews: {
+            title: "Confianza de 5.000+ pacientes",
+            subtitle: "Reseñas reales de pacientes reales que han encontrado mejor sueño y recuperación más rápida",
+            viewAll: "Ver todas las reseñas",
+        },
+        problem: {
+            tagline: "¿Cuál es tu mayor desafío?",
+            title: "Hemos ayudado a miles a recuperarse. ¿Qué te detiene?",
+            subtitle: "Elige tu mayor desafío y te mostraremos exactamente cómo podemos ayudar.",
+            cantSleep: {
+                title: "No puedo dormir",
+                description: "¿Dando vueltas en esa bota pesada? No estás solo.",
+                cta: "Ver la solución →",
+            },
+            confused: {
+                title: "Estoy confundido",
+                description: "¿No recuerdas lo que dijo tu cirujano? Obtén orientación paso a paso.",
+                cta: "Obtener claridad →",
+            },
+        },
+        sleepSolution: {
+            tagline: "SOLUCIÓN PARA EL SUEÑO",
+            title: "No sufras otra noche sin dormir.",
+            stat: "El 80% de los pacientes luchan por dormir con la bota. No tienes que hacerlo.",
+            description: "La férula nocturna Thetis te da",
+            descriptionBold: "la misma protección que tu bota",
+            descriptionEnd: "pero pesa un 90% menos. Finalmente, un sueño que realmente ayuda a tu recuperación.",
+            benefit1Title: "Ligera y transpirable",
+            benefit1Desc: "Menos de 200g vs 1,5kg de bota. Tu pie puede respirar, reduciendo el calor y la sudoración.",
+            benefit2Title: "Aprobada por cirujanos y segura",
+            benefit2Desc: "Cero re-rupturas en 5.000+ pacientes. Confianza de los principales cirujanos de pie y tobillo.",
+            benefit3Title: "También funciona para ducharse",
+            benefit3Desc: "Mantén tu pie protegido mientras te lavas. No más posiciones incómodas en la ducha.",
+            cta: "Comprar férula →",
+        },
+        surgeons: {
+            tagline: "RECOMENDACIONES PROFESIONALES",
+            title: "Confianza de",
+            titleHighlight: "cirujanos líderes",
+            subtitle: "Nuestras soluciones innovadoras han ganado la confianza de profesionales de la salud en todo el mundo",
+            readMore: "Leer más reseñas profesionales",
+        },
+        guidanceSolution: {
+            tagline: "SOLUCIÓN PARA ORIENTACIÓN",
+            title: "Ningún paciente recuerda todo lo que dice su cirujano. Obtén orientación paso a paso.",
+            description: "Nuestros cursos de recuperación basados en evidencia te guían semana a semana desde la lesión hasta la fuerza completa. Escritos por profesionales médicos, revisados por cirujanos.",
+            benefit1Title: "Orientación semana a semana",
+            benefit1Desc: "Sabe exactamente qué hacer cada semana. Sin adivinar, sin confusión.",
+            benefit2Title: "Recuperación basada en evidencia",
+            benefit2Desc: "Basado en más de 100 artículos de investigación. Confianza de profesionales médicos.",
+            goalTitle: "Objetivo de recuperación temprana:",
+            goalDesc: "Mantén los extremos del tendón cerca y protegidos. Nuestros cursos te muestran exactamente cómo.",
+            addToBag: "Añadir al carrito (29€)",
+            learnMore: "Saber más →",
+        },
+        whyThetis: {
+            title: "¿Por qué Thetis?",
+            para1: "En la mitología griega, Tetis era una ninfa marina que protegía a su hijo Aquiles. Cuando fue herido, ella ayudó a guiar su recuperación.",
+            para2: "Llevamos ese espíritu adelante. Cuando te rompes el tendón de Aquiles, estamos aquí para ayudar — con mejores productos para dormir y educación gratuita para guiar tu recuperación.",
+            ourProducts: "Nuestros productos",
+            ourCourses: "Nuestros cursos",
+        },
+        story: {
+            tagline: "Nuestra historia",
+            title: "Una empresa familiar construida con experiencia real",
+            para1: "Thetis Medical comenzó cuando Matt, cirujano de pie y tobillo, le contó a su hijo Guy sobre los problemas de todos sus pacientes para dormir con una bota después de una ruptura del tendón de Aquiles. Guy, ingeniero de diseño, imprimió en 3D los primeros prototipos. Caty, médica general, los cosió con la máquina de coser de la abuela de Guy.",
+            para2: "Así nació Thetis Medical — de una mesa de cocina familiar a ayudar a miles de pacientes en todo el mundo. Cada producto está diseñado con visión médica, para hacer la recuperación del paciente más cómoda.",
+            promiseTitle: "Nuestra promesa:",
+            promiseDesc: "No somos una corporación sin rostro. Somos una empresa familiar que entiende por lo que estás pasando. Cada producto y curso está diseñado pensando en las necesidades reales de los pacientes.",
+        },
+        impact: {
+            tagline: "NUESTRO IMPACTO",
+            title: "Confianza de miles en todo el mundo",
+            stat1: "5.000+",
+            stat1Label: "Pacientes ayudados",
+            stat1Desc: "Cero re-rupturas reportadas",
+            stat2: "10",
+            stat2Label: "Países",
+            stat2Desc: "Disponible en todo el mundo",
+            stat3: "20.000+",
+            stat3Label: "Lectores sobre Aquiles",
+            stat3Desc: "Recuperación basada en evidencia",
+            viewCourse: "Ver curso de recuperación →",
+        },
+        finalCTA: {
+            title: "¿Listo para mejorar tu recuperación?",
+            subtitle: "Únete a miles de pacientes que han elegido mejor sueño y orientación más clara. Comienza tu viaje de recuperación hoy.",
+            shopSplint: "Comprar férula →",
+            or: "o",
+            viewCourse: "Ver curso de recuperación",
+            readReviews: "Leer reseñas",
+            viewAllCourses: "Ver todos los cursos",
+            learnAboutSplint: "Conocer la férula",
+            guaranteeTitle: "Garantía de devolución de 30 días",
+            guaranteeDesc: "Prueba la férula nocturna Thetis sin riesgo. Si no estás completamente satisfecho por cualquier razón, devuélvela en 30 días para un reembolso completo. Sin preguntas.",
+            footer: "✓ Garantía de devolución de 30 días • ✓ Envío mundial gratuito • ✓ Aprobado por cirujanos",
+        },
+    },
+    it: {
+        meta: {
+            title: "Thetis Medical - Dormire meglio, recuperare meglio",
+            description: "Il nostro tutore notturno brevettato ti permette di togliere lo stivale prima di dormire. Corsi di recupero gratuiti ti guidano settimana dopo settimana. Scelto da 5.000+ pazienti.",
+        },
+        hero: {
+            trustBadge: "Scelto da 5000+ pazienti",
+            title: "Dormire meglio.",
+            titleHighlight: "Recuperare meglio.",
+            subtitle: "L'unico tutore notturno progettato specificamente per il recupero dalla rottura del tendine di Achille.",
+            subtitleBold: "Togli lo stivale pesante prima di dormire",
+            subtitleEnd: "e finalmente ottieni il sonno di cui hai bisogno.",
+            courseLine: "Più corsi di recupero gratuiti per guidarti settimana dopo settimana verso la piena forza.",
+            shopSplint: "Acquista tutore →",
+            shopCourses: "Vedi corsi",
+            freeShipping: "Spedizione mondiale gratuita",
+            moneyBack: "Garanzia di rimborso di 30 giorni",
+            surgeonApproved: "Approvato e raccomandato dai chirurghi",
+            socialProof: "Unisciti a 5.000+ pazienti che dormono meglio stanotte",
+            zeroReruptures: "Zero ri-rotture",
+            inPatients: "in 5.000+ pazienti",
+        },
+        reviews: {
+            title: "Scelto da 5.000+ pazienti",
+            subtitle: "Recensioni vere da pazienti veri che hanno trovato un sonno migliore e un recupero più veloce",
+            viewAll: "Vedi tutte le recensioni",
+        },
+        problem: {
+            tagline: "Qual è la tua più grande sfida?",
+            title: "Abbiamo aiutato migliaia a recuperare. Cosa ti trattiene?",
+            subtitle: "Scegli la tua più grande sfida e ti mostreremo esattamente come possiamo aiutare.",
+            cantSleep: {
+                title: "Non riesco a dormire",
+                description: "Ti rigiri in quello stivale pesante? Non sei solo.",
+                cta: "Vedi la soluzione →",
+            },
+            confused: {
+                title: "Sono confuso",
+                description: "Non ricordi cosa ha detto il tuo chirurgo? Ottieni una guida passo dopo passo.",
+                cta: "Ottieni chiarezza →",
+            },
+        },
+        sleepSolution: {
+            tagline: "SOLUZIONE PER IL SONNO",
+            title: "Non soffrire un'altra notte insonne.",
+            stat: "L'80% dei pazienti fatica a dormire con lo stivale. Tu non devi.",
+            description: "Il tutore notturno Thetis ti dà",
+            descriptionBold: "la stessa protezione del tuo stivale",
+            descriptionEnd: "ma pesa il 90% in meno. Finalmente, un sonno che aiuta davvero il tuo recupero.",
+            benefit1Title: "Leggero e traspirante",
+            benefit1Desc: "Meno di 200g vs 1,5kg di stivale. Il tuo piede può respirare, riducendo calore e sudorazione.",
+            benefit2Title: "Approvato dai chirurghi e sicuro",
+            benefit2Desc: "Zero ri-rotture in 5.000+ pazienti. Fiducia dai principali chirurghi del piede e della caviglia.",
+            benefit3Title: "Funziona anche per la doccia",
+            benefit3Desc: "Mantieni il piede protetto mentre ti lavi. Niente più posizioni scomode sotto la doccia.",
+            cta: "Acquista tutore →",
+        },
+        surgeons: {
+            tagline: "RACCOMANDAZIONI PROFESSIONALI",
+            title: "Fiducia da",
+            titleHighlight: "chirurghi leader",
+            subtitle: "Le nostre soluzioni innovative hanno guadagnato la fiducia dei professionisti sanitari in tutto il mondo",
+            readMore: "Leggi altre recensioni professionali",
+        },
+        guidanceSolution: {
+            tagline: "SOLUZIONE PER LA GUIDA",
+            title: "Nessun paziente ricorda tutto ciò che dice il suo chirurgo. Ottieni una guida passo dopo passo.",
+            description: "I nostri corsi di recupero basati su evidenze ti guidano settimana dopo settimana dall'infortunio alla piena forza. Scritti da professionisti medici, revisionati da chirurghi.",
+            benefit1Title: "Guida settimana per settimana",
+            benefit1Desc: "Sai esattamente cosa fare ogni settimana. Niente supposizioni, niente confusione.",
+            benefit2Title: "Recupero basato su evidenze",
+            benefit2Desc: "Basato su oltre 100 articoli di ricerca. Fiducia dai professionisti medici.",
+            goalTitle: "Obiettivo di recupero iniziale:",
+            goalDesc: "Mantieni le estremità del tendine vicine e protette. I nostri corsi ti mostrano esattamente come.",
+            addToBag: "Aggiungi al carrello (29€)",
+            learnMore: "Scopri di più →",
+        },
+        whyThetis: {
+            title: "Perché Thetis?",
+            para1: "Nella mitologia greca, Teti era una ninfa marina che proteggeva suo figlio Achille. Quando fu ferito, lei aiutò a guidare il suo recupero.",
+            para2: "Portiamo avanti quello spirito. Quando ti rompi il tendine di Achille, siamo qui per aiutare — con prodotti migliori per dormire e formazione gratuita per guidare il tuo recupero.",
+            ourProducts: "I nostri prodotti",
+            ourCourses: "I nostri corsi",
+        },
+        story: {
+            tagline: "La nostra storia",
+            title: "Un'azienda familiare costruita su esperienza reale",
+            para1: "Thetis Medical è iniziato quando Matt, chirurgo del piede e della caviglia, ha raccontato a suo figlio Guy dei problemi di tutti i suoi pazienti a dormire con uno stivale dopo una rottura del tendine di Achille. Guy, ingegnere progettista, ha stampato in 3D i primi prototipi. Caty, medico generico, li ha cuciti insieme con la macchina da cucire della nonna di Guy.",
+            para2: "Così è nata Thetis Medical — da un tavolo da cucina familiare all'aiuto di migliaia di pazienti in tutto il mondo. Ogni prodotto è progettato con visione medica, per rendere il recupero dei pazienti più confortevole.",
+            promiseTitle: "La nostra promessa:",
+            promiseDesc: "Non siamo una corporation senza volto. Siamo un'azienda familiare che capisce cosa stai attraversando. Ogni prodotto e corso è progettato pensando alle reali esigenze dei pazienti.",
+        },
+        impact: {
+            tagline: "IL NOSTRO IMPATTO",
+            title: "Fiducia da migliaia in tutto il mondo",
+            stat1: "5.000+",
+            stat1Label: "Pazienti aiutati",
+            stat1Desc: "Zero ri-rotture segnalate",
+            stat2: "10",
+            stat2Label: "Paesi",
+            stat2Desc: "Disponibile in tutto il mondo",
+            stat3: "20.000+",
+            stat3Label: "Lettori sull'Achille",
+            stat3Desc: "Recupero basato su evidenze",
+            viewCourse: "Vedi corso di recupero →",
+        },
+        finalCTA: {
+            title: "Pronto a migliorare il tuo recupero?",
+            subtitle: "Unisciti a migliaia di pazienti che hanno scelto un sonno migliore e una guida più chiara. Inizia il tuo percorso di recupero oggi.",
+            shopSplint: "Acquista tutore →",
+            or: "o",
+            viewCourse: "Vedi corso di recupero",
+            readReviews: "Leggi recensioni",
+            viewAllCourses: "Vedi tutti i corsi",
+            learnAboutSplint: "Scopri il tutore",
+            guaranteeTitle: "Garanzia di rimborso di 30 giorni",
+            guaranteeDesc: "Prova il tutore notturno Thetis senza rischi. Se non sei completamente soddisfatto per qualsiasi motivo, restituiscilo entro 30 giorni per un rimborso completo. Nessuna domanda.",
+            footer: "✓ Garanzia di rimborso di 30 giorni • ✓ Spedizione mondiale gratuita • ✓ Approvato dai chirurghi",
+        },
+    },
+};
+
+const t = content[lang];
+
+// Get localized product/splint URLs
+const splintUrl = lang === "en" ? "/achilles-rupture-splint" : 
+                  lang === "de" ? "/de/achillessehnenriss-schiene" :
+                  lang === "fr" ? "/fr/attelle-rupture-tendon-achille" :
+                  lang === "es" ? "/es/bota-ortopedica-tendon-aquiles" :
+                  "/it/tutore-rottura-tendine-achille";
+
+const reviewsUrl = lang === "en" ? "/reviews" :
+                   lang === "de" ? "/de/bewertungen" :
+                   lang === "fr" ? "/fr/avis" :
+                   lang === "es" ? "/es/resenas" :
+                   "/it/recensioni";
+---
+
+<ThetisSchema slot="head" />
+
+<Layout
+    title={t.meta.title}
+    description={t.meta.description}
+    image="https://thetismedical.com/images/night-splint.png"
+    lang={lang}
+>
+    <main class="space-y-16">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-b from-primary/10 to-white py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="flex lg:flex-row flex-col items-center gap-12">
+                    <div class="flex-1 lg:text-left text-center">
+                        <!-- Trust Badge -->
+                        <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full">
+                            <span class="font-bold text-primary text-lg">✓</span>
+                            <p class="font-semibold text-primary text-sm uppercase tracking-wide">
+                                {t.hero.trustBadge}
+                            </p>
+                        </div>
+
+                        <h1 class="mb-4 font-bold text-neutral-900 text-4xl md:text-6xl leading-tight">
+                            {t.hero.title} <span class="text-primary">{t.hero.titleHighlight}</span>
+                        </h1>
+                        <p class="mx-auto lg:mx-0 mb-2 max-w-2xl text-neutral-600 text-lg md:text-xl leading-relaxed">
+                            {t.hero.subtitle}
+                            <strong class="text-neutral-900"> {t.hero.subtitleBold}</strong>
+                            {t.hero.subtitleEnd}
+                        </p>
+                        <p class="mx-auto lg:mx-0 mb-8 max-w-2xl text-neutral-500 text-base">
+                            {t.hero.courseLine}
+                        </p>
+
+                        <!-- Primary CTAs -->
+                        <div class="flex sm:flex-row flex-col justify-center lg:justify-start gap-4 mb-6">
+                            <a
+                                href={splintUrl}
+                                class={cn(
+                                    buttonVariants({ size: "lg", variant: "default" }),
+                                    "w-full sm:w-auto text-lg font-bold shadow-lg hover:shadow-xl transition-all"
+                                )}
+                            >
+                                {t.hero.shopSplint}
+                            </a>
+                            <a
+                                href="/course"
+                                class={cn(
+                                    buttonVariants({ size: "lg", variant: "outline" }),
+                                    "w-full sm:w-auto text-lg font-semibold"
+                                )}
+                            >
+                                {t.hero.shopCourses}
+                            </a>
+                        </div>
+
+                        <!-- Trust Signals -->
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 mb-4 text-neutral-600 text-sm">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-primary text-lg">✓</span>
+                                <span class="font-medium">{t.hero.freeShipping}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-primary text-lg">✓</span>
+                                <span class="font-medium">{t.hero.moneyBack}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-primary text-lg">✓</span>
+                                <span class="font-medium">{t.hero.surgeonApproved}</span>
+                            </div>
+                        </div>
+
+                        <!-- Social Proof -->
+                        <div class="flex md:flex-row flex-col justify-center lg:justify-start items-center gap-3 mb-6 text-neutral-500 text-sm">
+                            <div class="flex -space-x-2">
+                                <AstroImage
+                                    src={Review1Image}
+                                    alt="Patient review"
+                                    class="border-2 border-white rounded-full w-10 h-10 object-cover"
+                                    width={40}
+                                    height={40}
+                                />
+                                <AstroImage
+                                    src={Review2Image}
+                                    alt="Patient review"
+                                    class="border-2 border-white rounded-full w-10 h-10 object-cover"
+                                    width={40}
+                                    height={40}
+                                />
+                                <AstroImage
+                                    src={Review3Image}
+                                    alt="Patient review"
+                                    class="border-2 border-white rounded-full w-10 h-10 object-cover"
+                                    width={40}
+                                    height={40}
+                                />
+                            </div>
+                            <span class="font-semibold text-neutral-900 md:text-left text-center">
+                                {t.hero.socialProof}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-full lg:w-1/2">
+                        <div class="relative">
+                            <Image
+                                src={NightSplintImage}
+                                alt="Thetis Medical Achilles Rupture Night Splint"
+                                class="shadow-2xl rounded-xl w-full"
+                            />
+                            <!-- Floating Trust Badge -->
+                            <div class="-right-4 -bottom-4 absolute bg-white shadow-lg p-4 border-2 border-primary/20 rounded-lg">
+                                <p class="font-bold text-primary text-sm">{t.hero.zeroReruptures}</p>
+                                <p class="text-neutral-600 text-xs">{t.hero.inPatients}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Patient Reviews -->
+        <section class="bg-gradient-to-b from-white to-neutral-50 py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <h2 class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl">
+                        {t.reviews.title}
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
+                        {t.reviews.subtitle}
+                    </p>
+                </div>
+                <EnhancedReviewCarousel client:load />
+                <div class="mt-8 text-center">
+                    <a
+                        href={reviewsUrl}
+                        class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 px-6 py-3 rounded-lg font-semibold text-white transition-colors"
+                    >
+                        {t.reviews.viewAll}
+                        <span class="text-xl">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Identification -->
+        <section class="py-16 md:py-20">
+            <div class="mx-auto px-4 max-w-5xl">
+                <div class="mb-12 text-center">
+                    <p class="mb-4 font-medium text-primary text-sm uppercase tracking-widest">
+                        {t.problem.tagline}
+                    </p>
+                    <h2 class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl">
+                        {t.problem.title}
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
+                        {t.problem.subtitle}
+                    </p>
+                </div>
+                <div class="gap-6 grid md:grid-cols-2">
+                    <a
+                        href="#cant-sleep"
+                        class="group bg-white hover:bg-primary/5 p-8 border-2 border-primary/30 hover:border-primary rounded-xl text-left transition-all"
+                    >
+                        <div class="flex items-start gap-4">
+                            <div class="flex flex-shrink-0 justify-center items-center bg-primary/10 group-hover:bg-primary/20 rounded-lg w-12 h-12 transition-colors">
+                                <span class="text-2xl">😴</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="mb-2 font-bold text-neutral-900 text-xl">
+                                    {t.problem.cantSleep.title}
+                                </h3>
+                                <p class="mb-4 text-neutral-600">
+                                    {t.problem.cantSleep.description}
+                                </p>
+                                <span class="font-semibold text-primary group-hover:underline">
+                                    {t.problem.cantSleep.cta}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <a
+                        href="#confused"
+                        class="group bg-white hover:bg-primary/5 p-8 border-2 border-primary/30 hover:border-primary rounded-xl text-left transition-all"
+                    >
+                        <div class="flex items-start gap-4">
+                            <div class="flex flex-shrink-0 justify-center items-center bg-primary/10 group-hover:bg-primary/20 rounded-lg w-12 h-12 transition-colors">
+                                <span class="text-2xl">🤔</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="mb-2 font-bold text-neutral-900 text-xl">
+                                    {t.problem.confused.title}
+                                </h3>
+                                <p class="mb-4 text-neutral-600">
+                                    {t.problem.confused.description}
+                                </p>
+                                <span class="font-semibold text-primary group-hover:underline">
+                                    {t.problem.confused.cta}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sleep Solution Section -->
+        <section id="cant-sleep" class="bg-neutral-50 py-16 md:py-20">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="flex lg:flex-row flex-col items-center gap-12">
+                    <div class="flex-1">
+                        <p class="mb-4 font-medium text-primary text-sm uppercase tracking-widest">
+                            {t.sleepSolution.tagline}
+                        </p>
+                        <h3 class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl">
+                            {t.sleepSolution.title}
+                        </h3>
+                        <p class="mb-4 font-semibold text-neutral-700 text-lg">
+                            {t.sleepSolution.stat}
+                        </p>
+                        <p class="mb-6 text-neutral-700 text-lg leading-relaxed">
+                            {t.sleepSolution.description} <strong>{t.sleepSolution.descriptionBold}</strong> {t.sleepSolution.descriptionEnd}
+                        </p>
+
+                        <!-- Key Benefits -->
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start gap-4">
+                                <div class="flex flex-shrink-0 justify-center items-center bg-primary/10 rounded-lg w-10 h-10">
+                                    <span class="font-bold text-primary text-xl">✓</span>
+                                </div>
+                                <div>
+                                    <p class="mb-1 font-semibold text-neutral-900">{t.sleepSolution.benefit1Title}</p>
+                                    <p class="text-neutral-600 text-sm">{t.sleepSolution.benefit1Desc}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="flex flex-shrink-0 justify-center items-center bg-primary/10 rounded-lg w-10 h-10">
+                                    <span class="font-bold text-primary text-xl">✓</span>
+                                </div>
+                                <div>
+                                    <p class="mb-1 font-semibold text-neutral-900">{t.sleepSolution.benefit2Title}</p>
+                                    <p class="text-neutral-600 text-sm">{t.sleepSolution.benefit2Desc}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="flex flex-shrink-0 justify-center items-center bg-primary/10 rounded-lg w-10 h-10">
+                                    <span class="font-bold text-primary text-xl">✓</span>
+                                </div>
+                                <div>
+                                    <p class="mb-1 font-semibold text-neutral-900">{t.sleepSolution.benefit3Title}</p>
+                                    <p class="text-neutral-600 text-sm">{t.sleepSolution.benefit3Desc}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Real Patient Reviews -->
+                        <div class="space-y-4 mb-8">
+                            {patients.filter((p) => p.is_pinned).slice(0, 3).map((review, index) => {
+                                const reviewImages = [Review1Image, Review2Image, Review3Image];
+                                const reviewImage = reviewImages[index] || Review1Image;
+                                return (
+                                    <div class="bg-white p-4 border border-primary/20 rounded-lg">
+                                        <div class="flex items-start gap-3">
+                                            <AstroImage
+                                                src={reviewImage}
+                                                alt={review.name}
+                                                class="flex-shrink-0 rounded-full w-12 h-12 object-cover"
+                                                width={48}
+                                                height={48}
+                                            />
+                                            <div class="flex-1">
+                                                <p class="mb-2 text-neutral-600 text-sm italic">
+                                                    "{review.short || review.body.slice(0, 150)}..."
+                                                </p>
+                                                <p class="font-semibold text-neutral-900 text-sm">
+                                                    — {review.name}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        <!-- CTAs -->
+                        <div class="flex sm:flex-row flex-col gap-4">
+                            <a
+                                href={splintUrl}
+                                class={cn(
+                                    buttonVariants({ variant: "default", size: "lg" }),
+                                    "justify-center text-lg font-bold"
+                                )}
+                            >
+                                {t.sleepSolution.cta}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-full lg:w-1/2">
+                        <Image
+                            src={NightSplintWhiteCloseSquare}
+                            alt="Thetis Medical Night Splint"
+                            class="shadow-lg rounded-lg w-full"
+                        />
+                        <!-- Athlete Testimonials -->
+                        <div class="hidden lg:block mt-6">
+                            <AthletesBadges />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Opinions -->
+        <ColorGradientInOut size="lg">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-12 text-center">
+                    <p class="mb-4 font-medium text-primary text-sm uppercase tracking-widest">
+                        {t.surgeons.tagline}
+                    </p>
+                    <h2 class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl">
+                        {t.surgeons.title} <span class="text-primary">{t.surgeons.titleHighlight}</span>
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
+                        {t.surgeons.subtitle}
+                    </p>
+                </div>
+                <div class="mb-8">
+                    <SurgeonsCarousel client:load />
+                </div>
+                <div class="mt-8 text-center">
+                    <a
+                        href={reviewsUrl}
+                        class="inline-flex items-center gap-2 font-semibold text-primary text-lg hover:underline transition-colors"
+                    >
+                        {t.surgeons.readMore}
+                        <span class="text-xl">→</span>
+                    </a>
+                </div>
+            </div>
+        </ColorGradientInOut>
+
+        <!-- Guidance Solution Section -->
+        <section id="confused" class="py-16 md:py-20">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="flex lg:flex-row-reverse flex-col items-center gap-12">
+                    <div class="flex-1">
+                        <p class="mb-4 font-medium text-primary text-sm uppercase tracking-widest">
+                            {t.guidanceSolution.tagline}
+                        </p>
+                        <h3 class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl">
+                            {t.guidanceSolution.title}
+                        </h3>
+                        <p class="mb-6 text-neutral-700 text-lg leading-relaxed">
+                            {t.guidanceSolution.description}
+                        </p>
+
+                        <!-- Key Benefits -->
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start gap-4">
+                                <div class="flex flex-shrink-0 justify-center items-center bg-primary/10 rounded-lg w-10 h-10">
+                                    <span class="font-bold text-primary text-xl">✓</span>
+                                </div>
+                                <div>
+                                    <p class="mb-1 font-semibold text-neutral-900">{t.guidanceSolution.benefit1Title}</p>
+                                    <p class="text-neutral-600 text-sm">{t.guidanceSolution.benefit1Desc}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="flex flex-shrink-0 justify-center items-center bg-primary/10 rounded-lg w-10 h-10">
+                                    <span class="font-bold text-primary text-xl">✓</span>
+                                </div>
+                                <div>
+                                    <p class="mb-1 font-semibold text-neutral-900">{t.guidanceSolution.benefit2Title}</p>
+                                    <p class="text-neutral-600 text-sm">{t.guidanceSolution.benefit2Desc}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Highlight Box -->
+                        <div class="bg-primary/5 mb-6 p-6 border-2 border-primary/20 rounded-lg">
+                            <p class="mb-2 font-bold text-neutral-900 text-lg">{t.guidanceSolution.goalTitle}</p>
+                            <p class="text-neutral-700 text-base">{t.guidanceSolution.goalDesc}</p>
+                        </div>
+
+                        <!-- CTAs -->
+                        <div class="flex sm:flex-row flex-col gap-4">
+                            <CourseBuyButton
+                                productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                                className="justify-center bg-primary font-bold text-lg"
+                                client:load
+                            >
+                                {t.guidanceSolution.addToBag}
+                            </CourseBuyButton>
+                            <a
+                                href="/course"
+                                class="inline-flex justify-center items-center px-4 font-semibold text-primary text-lg hover:underline"
+                            >
+                                {t.guidanceSolution.learnMore}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-full lg:w-1/2">
+                        <div class="bg-neutral-50 p-6 border border-primary/10 rounded-lg">
+                            <img
+                                src="/images/achilles-rope-ends-pointed-down.png"
+                                alt="Achilles tendon healing positions diagram"
+                                class="rounded-lg w-full"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Thetis -->
+        <ColorGradientInOut size="lg">
+            <div class="mx-auto px-4 max-w-4xl text-center">
+                <h2 class="mb-6 font-bold text-neutral-900 text-3xl md:text-4xl">
+                    {t.whyThetis.title}
+                </h2>
+                <p class="mb-4 text-neutral-600 text-base leading-relaxed">
+                    {t.whyThetis.para1}
+                </p>
+                <p class="mb-8 text-neutral-700 text-base">
+                    {t.whyThetis.para2}
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href={splintUrl} class="font-medium text-primary hover:underline">
+                        {t.whyThetis.ourProducts}
+                    </a>
+                    <span class="text-neutral-400">•</span>
+                    <a href="/course" class="font-medium text-primary hover:underline">
+                        {t.whyThetis.ourCourses}
+                    </a>
+                </div>
+            </div>
+        </ColorGradientInOut>
+
+        <!-- Subscribe: recovery tips -->
+        <div class="bg-neutral-50 dark:bg-neutral-900 py-10 md:py-12">
+            <div class="mx-auto px-4 max-w-3xl">
+                <SubscribeBlock source="home_page" lang={lang} />
+            </div>
+        </div>
+
+        <!-- Our Story -->
+        <section class="py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-4xl">
+                <p class="mb-4 font-medium text-primary text-sm text-center uppercase tracking-widest">
+                    {t.story.tagline}
+                </p>
+                <h2 class="mb-8 font-bold text-neutral-900 text-3xl md:text-4xl text-center">
+                    {t.story.title}
+                </h2>
+                <div class="mx-auto text-neutral-700 prose prose-lg">
+                    <p class="mb-6 text-lg">{t.story.para1}</p>
+                    <p class="mb-6 text-lg">{t.story.para2}</p>
+                    <div class="bg-primary/5 p-6 border border-primary/20 rounded-lg">
+                        <p class="mb-2 font-semibold text-neutral-900">{t.story.promiseTitle}</p>
+                        <p class="text-neutral-700">{t.story.promiseDesc}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Stats -->
+        <section class="bg-primary/5 py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-5xl text-center">
+                <p class="mb-4 font-medium text-primary text-sm uppercase tracking-widest">
+                    {t.impact.tagline}
+                </p>
+                <h2 class="mb-12 font-bold text-neutral-900 text-3xl md:text-4xl">
+                    {t.impact.title}
+                </h2>
+                <div class="gap-6 grid md:grid-cols-3 mb-12">
+                    <div class="bg-white shadow-sm hover:shadow-md p-8 border-2 border-primary/20 rounded-lg transition-shadow">
+                        <p class="mb-2 font-bold text-primary text-4xl">{t.impact.stat1}</p>
+                        <p class="font-semibold text-neutral-900">{t.impact.stat1Label}</p>
+                        <p class="mt-2 text-neutral-600 text-sm">{t.impact.stat1Desc}</p>
+                    </div>
+                    <div class="bg-white shadow-sm hover:shadow-md p-8 border-2 border-primary/20 rounded-lg transition-shadow">
+                        <p class="mb-2 font-bold text-primary text-4xl">{t.impact.stat2}</p>
+                        <p class="font-semibold text-neutral-900">{t.impact.stat2Label}</p>
+                        <p class="mt-2 text-neutral-600 text-sm">{t.impact.stat2Desc}</p>
+                    </div>
+                    <div class="bg-white shadow-sm hover:shadow-md p-8 border-2 border-primary/20 rounded-lg transition-shadow">
+                        <p class="mb-2 font-bold text-primary text-4xl">{t.impact.stat3}</p>
+                        <p class="font-semibold text-neutral-900">{t.impact.stat3Label}</p>
+                        <p class="mt-2 text-neutral-600 text-sm">{t.impact.stat3Desc}</p>
+                    </div>
+                </div>
+                <a href="/course" class="inline-block mb-8 font-semibold text-primary text-lg hover:underline">
+                    {t.impact.viewCourse}
+                </a>
+            </div>
+        </section>
+
+        <!-- Compliance Badges -->
+        <ComplianceLogos />
+
+        <!-- Final CTA -->
+        <ColorGradientInOut size="lg">
+            <div class="mx-auto px-4 max-w-4xl text-center">
+                <h2 class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl">
+                    {t.finalCTA.title}
+                </h2>
+                <p class="mx-auto mb-8 max-w-2xl text-neutral-600 text-lg leading-relaxed">
+                    {t.finalCTA.subtitle}
+                </p>
+                <div class="flex sm:flex-row flex-col justify-center items-center gap-4 mb-8">
+                    <a
+                        href={splintUrl}
+                        class={cn(
+                            buttonVariants({ size: "lg", variant: "default" }),
+                            "w-full sm:w-auto text-lg font-bold shadow-lg"
+                        )}
+                    >
+                        {t.finalCTA.shopSplint}
+                    </a>
+                    <span class="font-medium text-neutral-600">{t.finalCTA.or}</span>
+                    <a
+                        href="/course"
+                        class={cn(
+                            buttonVariants({ size: "lg", variant: "outline" }),
+                            "w-full sm:w-auto text-lg font-semibold"
+                        )}
+                    >
+                        {t.finalCTA.viewCourse}
+                    </a>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4 mb-6 text-sm">
+                    <a href={reviewsUrl} class="font-medium text-primary hover:underline">
+                        {t.finalCTA.readReviews}
+                    </a>
+                    <span class="text-neutral-400">•</span>
+                    <a href="/course" class="font-medium text-primary hover:underline">
+                        {t.finalCTA.viewAllCourses}
+                    </a>
+                    <span class="text-neutral-400">•</span>
+                    <a href={splintUrl} class="font-medium text-primary hover:underline">
+                        {t.finalCTA.learnAboutSplint}
+                    </a>
+                </div>
+                <!-- Prominent Guarantee -->
+                <div class="bg-primary/10 mt-8 p-6 border-2 border-primary/30 rounded-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0">
+                            <div class="flex justify-center items-center bg-primary rounded-full w-12 h-12">
+                                <span class="font-bold text-white text-xl">✓</span>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-left">
+                            <h3 class="mb-2 font-bold text-neutral-900 text-lg">
+                                {t.finalCTA.guaranteeTitle}
+                            </h3>
+                            <p class="text-neutral-700">{t.finalCTA.guaranteeDesc}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-6 border-primary/20 border-t">
+                    <p class="text-neutral-600 text-sm">{t.finalCTA.footer}</p>
+                </div>
+            </div>
+        </ColorGradientInOut>
+    </main>
+
+    <!-- Sticky CTA Bar (Mobile) -->
+    <div
+        id="sticky-cta"
+        class="lg:hidden right-0 bottom-0 left-0 z-50 fixed bg-white shadow-lg p-4 border-neutral-200 border-t"
+        style="display: none;"
+    >
+        <div class="flex gap-3 mx-auto max-w-md">
+            <a
+                href={splintUrl}
+                class={cn(
+                    buttonVariants({ size: "lg", variant: "default" }),
+                    "flex-1 text-center font-bold"
+                )}
+            >
+                {t.hero.shopSplint}
+            </a>
+            <a
+                href="/course"
+                class={cn(
+                    buttonVariants({ size: "lg", variant: "outline" }),
+                    "flex-1 text-center"
+                )}
+            >
+                {t.hero.shopCourses}
+            </a>
+        </div>
+    </div>
+</Layout>
+
+<script is:inline>
+    document.documentElement.classList.remove("dark");
+
+    if (typeof localStorage !== "undefined") {
+        localStorage.setItem("theme", "light");
+    }
+
+    // Show sticky CTA after scrolling
+    window.addEventListener("scroll", () => {
+        const stickyCta = document.getElementById("sticky-cta");
+        if (stickyCta && window.scrollY > 500) {
+            stickyCta.style.display = "block";
+        } else if (stickyCta) {
+            stickyCta.style.display = "none";
+        }
+    });
+</script>

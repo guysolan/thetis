@@ -1,0 +1,47 @@
+---
+import AchillesTearTreatmentSection from "@/sections/FAQs/achilles-tear-treatment.astro";
+import NightSplintAdvert from "@/components/products/night-splint/NightSplintAdvert.astro";
+import FAQsLayout from "@/layouts/FAQsLayout.astro";
+import type { Lang } from "../../config/languages";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Torn Achilles Treatment Pathway: Surgery vs Non-Surgical Options & Pain FAQs",
+        description:
+            "Clear guidance on treating a torn Achilles tendon – deciding between surgery or non-surgical management, operation timing, recovery pain levels, and rehabilitation timeline.",
+    },
+    es: {
+        title: "Vía de Tratamiento del Tendón de Aquiles Roto: Cirugía vs Opciones No Quirúrgicas y Preguntas Frecuentes sobre Dolor",
+        description:
+            "Orientación clara sobre el tratamiento de un tendón de Aquiles roto – decidir entre cirugía o manejo no quirúrgico, tiempo de operación, niveles de dolor durante la recuperación y cronograma de rehabilitación.",
+    },
+    fr: {
+        title: "Voie de Traitement de la Rupture du Tendon d'Achille : Chirurgie vs Options Non-Chirurgicales et FAQ sur la Douleur",
+        description:
+            "Conseils clairs sur le traitement d'une rupture du tendon d'Achille – décider entre chirurgie ou gestion non-chirurgicale, timing de l'opération, niveaux de douleur pendant la récupération et calendrier de rééducation.",
+    },
+    de: {
+        title: "Behandlungspfad für Achillessehnenriss: Operation vs Nicht-Chirurgische Optionen & Schmerz-FAQs",
+        description:
+            "Klare Anleitung zur Behandlung einer gerissenen Achillessehne – Entscheidung zwischen Operation oder nicht-chirurgischem Management, Operationszeitpunkt, Schmerzniveaus während der Erholung und Rehabilitationszeitplan.",
+    },
+    it: {
+        title: "Percorso di Trattamento della Rottura del Tendine d'Achille: Chirurgia vs Opzioni Non Chirurgiche e FAQ sul Dolore",
+        description:
+            "Guida chiara sul trattamento di una rottura del tendine d'Achille – decidere tra chirurgia o gestione non chirurgica, tempistica dell'operazione, livelli di dolore durante il recupero e cronoprogramma di riabilitazione.",
+    },
+};
+
+const currentContent = content[lang];
+---
+
+<FAQsLayout
+    title={currentContent.title}
+    description={currentContent.description}
+    lang={lang}
+>
+    <AchillesTearTreatmentSection lang={lang} />
+    <NightSplintAdvert lang={lang} />
+</FAQsLayout>

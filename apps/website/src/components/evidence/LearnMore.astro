@@ -1,0 +1,24 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+---
+
+<section class="mx-auto px-4 py-16 max-w-7xl container">
+    <div class="flex flex-col justify-center items-center text-center">
+        <h2
+            class="mb-6 font-semibold text-neutral-950 dark:text-neutral-50 text-3xl"
+        >
+            Want to Learn More?
+        </h2>
+        <p class="mb-8 max-w-2xl text-gray-800 dark:text-neutral-200 text-lg">
+            Contact us to discover how our evidence-based solutions can improve
+            your patients' outcomes.
+        </p>
+        <a
+            href="/contact"
+            class={cn(buttonVariants({ size: "lg", variant: "default" }))}
+        >
+            Get in Touch
+        </a>
+    </div>
+</section>

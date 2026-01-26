@@ -1,0 +1,203 @@
+---
+import Image from "astro/components/Image.astro";
+import { cn } from "@/lib/utils";
+import "@thetis/ui/globals.css";
+import NightSplintImage from "@/assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
+import { buttonVariants } from "@/components/ui/button";
+import AthletesBadges from "@/components/AthletesBadges.astro";
+import HighlightedWord from "@/components/HighlightedWord.tsx";
+import HoverImageLink from "@/components/HoverImageLink.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import HeroTestimonialCarousel from "@/components/HeroTestimonialCarousel";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        tagline: "TRUSTED BY 5000+ PATIENTS",
+        highlightedWord: "Better",
+        title: "Achilles Rupture Recovery",
+        description:
+            "We offer a splint and lessons to make your experience recovering from a torn Achilles better.",
+        exploreCourses: "View Recovery Course",
+        shopProducts: "Shop Night Splint",
+        benefits: ["Free shipping", "30-day guarantee", "Surgeon approved"],
+        hoverImageTitle: "Night Splint",
+        hoverImageDescription:
+            "Sleep comfortably while your achilles rupture heals.",
+        hoverImageLinkText: "Learn More",
+    },
+    de: {
+        tagline: "Vertrauen von 5.000+ Patienten",
+        highlightedWord: "Besser schlafen.",
+        title: "Besserer Komfort.",
+        description:
+            "Unsere patentierte Nachtschiene lässt Sie den Stiefel nachts ablegen, und unsere Genesungskurse begleiten Sie Woche für Woche von der Verletzung bis zur vollen Stärke. Von führenden Chirurgen empfohlen und von Patienten weltweit geschätzt.",
+        exploreCourses: "Genesungskurs ansehen",
+        shopProducts: "Nachtschiene kaufen",
+        benefits: [
+            "Kostenloser Genesungskurs",
+            "Patentierte Nachtschiene",
+            "Expertenberatung",
+        ],
+        hoverImageTitle: "Nachtschiene",
+        hoverImageDescription:
+            "Schlafen Sie bequem, während Ihre Achillessehnenruptur heilt.",
+        hoverImageLinkText: "Mehr erfahren",
+    },
+    fr: {
+        tagline: "Approuvé par 5 000+ patients",
+        highlightedWord: "Mieux dormir.",
+        title: "Meilleur confort.",
+        description:
+            "Notre attelle de nuit brevetée vous permet d'enlever la botte au coucher, et nos cours de récupération vous guident semaine après semaine de la blessure à la pleine forme. Recommandé par les meilleurs chirurgiens et adoré par les patients du monde entier.",
+        exploreCourses: "Voir le cours",
+        shopProducts: "Acheter l'attelle de nuit",
+        benefits: [
+            "Cours de récupération gratuit",
+            "Attelle de nuit brevetée",
+            "Conseils d'experts",
+        ],
+        hoverImageTitle: "Attelle de nuit",
+        hoverImageDescription:
+            "Dormez confortablement pendant que votre rupture du tendon d'Achille guérit.",
+        hoverImageLinkText: "En savoir plus",
+    },
+    es: {
+        tagline: "Confianza de 5.000+ pacientes",
+        highlightedWord: "Dormir mejor.",
+        title: "Mejor comodidad.",
+        description:
+            "Nuestra férula nocturna patentada te permite dejar la bota a la hora de dormir, y nuestros cursos de recuperación te guían semana a semana desde la lesión hasta la plena forma. Recomendado por cirujanos líderes y amado por pacientes en todo el mundo.",
+        exploreCourses: "Ver curso",
+        shopProducts: "Comprar férula nocturna",
+        benefits: [
+            "Curso de recuperación gratuito",
+            "Férula nocturna patentada",
+            "Orientación experta",
+        ],
+        hoverImageTitle: "Férula nocturna",
+        hoverImageDescription:
+            "Duerma cómodamente mientras se cura la rotura del tendón de Aquiles.",
+        hoverImageLinkText: "Saber más",
+    },
+    it: {
+        tagline: "Scelto da 5.000+ pazienti",
+        highlightedWord: "Dormire meglio.",
+        title: "Maggiore comfort.",
+        description:
+            "Il nostro tutore notturno brevettato ti permette di togliere lo stivale prima di dormire, e i nostri corsi di recupero ti guidano settimana dopo settimana dall'infortunio alla piena forma. Raccomandato dai migliori chirurghi e amato dai pazienti di tutto il mondo.",
+        exploreCourses: "Vedi corso",
+        shopProducts: "Acquista tutore notturno",
+        benefits: [
+            "Corso di recupero gratuito",
+            "Tutore notturno brevettato",
+            "Guida esperta",
+        ],
+        hoverImageTitle: "Tutore notturno",
+        hoverImageDescription:
+            "Dormi comodamente mentre guarisci la rottura del tendine di Achille.",
+        hoverImageLinkText: "Scopri di più",
+    },
+};
+
+const t = content[lang as keyof typeof content];
+---
+
+<ColorGradient>
+    <div class="mx-auto px-4 container">
+        <div
+            class="flex lg:flex-row flex-col justify-between items-center gap-8"
+        >
+            <!-- Left column (text content) -->
+            <div class="flex flex-col gap-y-6 lg:pr-16 lg:w-7/12">
+                <!-- Tagline -->
+                <p
+                    class="font-medium text-primary text-sm md:text-base uppercase tracking-widest"
+                >
+                    {t.tagline}
+                </p>
+
+                <h1
+                    class="font-semibold text-neutral-950 dark:text-neutral-50 text-4xl md:text-6xl leading-[105%] md:leading-[120%]"
+                >
+                    <HighlightedWord>{t.highlightedWord}</HighlightedWord>
+                    {t.title}
+                </h1>
+
+                <p
+                    class="text-gray-800 dark:text-neutral-200 text-lg leading-relaxed"
+                >
+                    {t.description}
+                </p>
+
+                <!-- SMALL SCREENS ONLY -->
+                <div class="lg:hidden block relative">
+                    <Image
+                        src={NightSplintImage}
+                        alt="Thetis Medical Achilles Rupture Splint"
+                        class="shadow-lg hover:shadow-2xl group-hover:brightness-[0.85] rounded-xl group-hover:scale-[102%] transition-all duration-300"
+                    />
+                    <a
+                        class={cn(
+                            buttonVariants({ size: "lg", variant: "default" }),
+                            "bottom-4 left-4 absolute",
+                        )}
+                        href="/courses">{t.exploreCourses}</a
+                    >
+                </div>
+
+                <!-- LARGE SCREENS ONLY -->
+                <div class="hidden lg:flex sm:flex-row flex-col gap-4">
+                    <a
+                        href="/night-splint"
+                        class={cn(
+                            buttonVariants({ size: "lg", variant: "default" }),
+                            "w-full sm:w-auto text-center",
+                        )}
+                    >
+                        {t.shopProducts}
+                    </a>
+                    <a
+                        class={cn(
+                            buttonVariants({ size: "lg", variant: "outline" }),
+                            "w-full sm:w-auto text-center",
+                        )}
+                        href="/courses">{t.exploreCourses}</a
+                    >
+                </div>
+
+                <div
+                    class="flex flex-row flex-wrap items-start sm:items-center gap-x-6 gap-y-3 px-2 text-gray-700 dark:text-gray-300 text-base"
+                >
+                    {
+                        t.benefits.map((benefit) => (
+                            <div class="flex items-center gap-2 font-medium">
+                                <span class="font-bold text-primary dark:text-primary">
+                                    ✓
+                                </span>
+                                {benefit}
+                            </div>
+                        ))
+                    }
+                </div>
+
+                <div class="pt-8 md:pt-2">
+                    <AthletesBadges />
+                </div>
+            </div>
+
+            <!-- Right column (image) -->
+            <HoverImageLink
+                image={NightSplintImage}
+                imageAlt="Thetis Medical Achilles Rupture Splint"
+                title={t.hoverImageTitle}
+                description={t.hoverImageDescription}
+                linkText={t.hoverImageLinkText}
+                linkHref="/night-splint"
+                className="hidden lg:block lg:w-5/12"
+            />
+        </div>
+    </div>
+</ColorGradient>

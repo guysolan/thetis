@@ -1,0 +1,1255 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Slide from "@/components/Slide.astro";
+import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
+import SizeChart from "@/components/SizeChart.jsx";
+import NightSplintFAQs from "@/sections/achilles-rupture-splint/SplintFAQs.tsx";
+import NightSplintUsage from "@/sections/achilles-rupture-splint/NightSplintUsage.astro";
+import NightSplintInstructions from "@/sections/achilles-rupture-splint/night-splint-instructions/index.astro";
+import NightSplintHero from "@/sections/achilles-rupture-splint/NightSplintHero.astro";
+import ValuePropositions from "@/sections/achilles-rupture-splint/ValuePropositions.astro";
+import KeyFeatures from "@/sections/achilles-rupture-splint/KeyFeatures.astro";
+import Reviews from "@/components/reviews/InfiniteReviews.astro";
+import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
+import OrderYourSplint from "@/sections/achilles-rupture-splint/OrderYourSplint.astro";
+import SplintDownloads from "@/sections/achilles-rupture-splint/SplintDownloads.astro";
+import StickyAddToCart from "@/components/StickyAddToCart.tsx";
+import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import SurgeonsCarousel from "@/components/SurgeonsCarousel";
+import AthletesCarousel from "@/components/AthletesCarousel";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
+import { athletes } from "@/components/reviews/content/athletes";
+import { translatedClinicians } from "@/components/reviews/content/professional-opinions";
+import { Image as AstroImage } from "astro:assets";
+import {
+    Trophy,
+    Stethoscope,
+    Check,
+    Truck,
+    ShieldCheck,
+    RotateCcw,
+} from "lucide-react";
+import { ReviewCard } from "@/components/reviews/ReviewCard.tsx";
+import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const splintRoute = getRouteBySlugAndLanguage("splint", lang);
+
+const content = {
+    en: {
+        title: "Achilles Tendon Rupture Splint",
+        description:
+            "Thetis Medical's Achilles rupture splint to make sleeping more pleasant and bearable. The brace straps to the leg to prevent further tendon injury.",
+        image: "https://thetismedical.com/images/night_splint_bed_top_square.jpg",
+        // High-impact quote
+        quote: "It made a massive difference to getting a good night's rest.",
+        quoteAuthor: "— Verified Patient, USA",
+        // Reviews section
+        trustedByThousands: "TRUSTED BY THOUSANDS",
+        joinPatients: "Join 5,000+ Patients Who've Found Relief",
+        realReviews: "Real reviews from real patients recovering from Achilles rupture",
+        viewAllReviews: "View All Reviews",
+        // Who this is for
+        whoThisIsFor: "Who This Is For",
+        whoThisIsForDesc: "The Thetis Night Splint is specifically designed for Achilles tendon rupture recovery",
+        perfectFor: "Perfect For:",
+        perfectForItems: [
+            "Achilles tendon rupture (complete tear)",
+            "Within 12 weeks of injury or surgery",
+            "Approved by your surgeon for night use",
+            "Struggling to sleep in your walking boot"
+        ],
+        notFor: "Not For:",
+        notForItems: [
+            "Achilles tendinitis or tendinopathy",
+            "More than 12 weeks post-injury",
+            "Other foot or ankle conditions",
+            "Not approved by your medical team"
+        ],
+        alwaysCheckSurgeon: "Always check with your surgeon first.",
+        splintSpecificallyDesigned: "This splint is specifically designed for Achilles rupture recovery and may not be suitable for other conditions.",
+        // Guarantee section
+        moneyBackGuarantee: "30-Day Money-Back Guarantee",
+        moneyBackDesc: "Try the Thetis Night Splint risk-free. If it doesn't improve your sleep quality, we'll refund your purchase—no questions asked.",
+        freeShipping: "Free shipping",
+        guarantee30Day: "30-day guarantee",
+        easyReturns: "Easy returns",
+        // Comparison table
+        comparisonTitle: "Night Splint vs Boot: Side-by-Side Comparison",
+        comparisonDesc: "Both provide protection. Only one lets you sleep comfortably.",
+        feature: "Feature",
+        boot: "Boot",
+        thetisSplint: "Thetis Night Splint",
+        weight: "Weight",
+        weightBootValue: "1.5kg+",
+        weightSplintValue: "200g",
+        weightSplintValueLong: "200g (90% lighter)",
+        breathability: "Breathability",
+        breathabilityBootShort: "Enclosed",
+        breathabilityBootLong: "Enclosed, traps heat",
+        breathabilitySplintShort: "Open Design",
+        breathabilitySplintLong: "Open design (exposes sole of foot and back of leg)",
+        cleanliness: "Cleanliness",
+        cleanlinessBootShort: "Dirty",
+        cleanlinessBootLong: "Dirt and debris in bed",
+        cleanlinessSplintShort: "Clean",
+        cleanlinessSplintLong: "Clean (no dirt in bed)",
+        showering: "Showering",
+        showeringBootShort: "No",
+        showeringBootLong: "Cannot shower in it",
+        showeringSplintShort: "Yes",
+        showeringSplintLong: "Can shower in it",
+        usePeriod: "Use Period",
+        healingAngle: "Healing Angle",
+        healingAngleValue: "30° plantarflexion",
+        comparisonNote: "Both provide the same protection at the correct 30° healing angle. The splint is simply lighter, more breathable, and cleaner for sleeping.",
+        // Athletes section
+        trustedByEliteAthletes: "TRUSTED BY ELITE ATHLETES",
+        trustedByProfAthletes: "Trusted by",
+        professionalAthletes: "Professional Athletes",
+        athletesDesc: "Elite athletes choose Thetis Night Splint for their recovery. Lightweight, comfortable, and trusted by Team GB athletes.",
+        // Surgeons section
+        professionalEndorsements: "PROFESSIONAL ENDORSEMENTS",
+        trustedByLeadingSurgeons: "Trusted by",
+        leadingSurgeons: "Leading Surgeons",
+        surgeonsDesc: "Healthcare professionals worldwide recommend Thetis Night Splint for safe, effective Achilles rupture recovery.",
+        // What to expect section
+        whatToExpect: "What to Expect the Next Morning",
+        whatToExpectDesc: "Wake up feeling the difference after your first night",
+        betterRested: "Better Rested",
+        betterRestedDesc: "Sleep comfortably without the heavy boot. Wake up feeling refreshed and ready for the day.",
+        cleanerBed: "Cleaner Bed",
+        cleanerBedDesc: "No more dirt and debris from your walking boot. Keep your bed clean and comfortable.",
+        happierPartner: "Happier Partner",
+        happierPartnerDesc: "Lightweight design means less disruption. Both of you can sleep peacefully through the night.",
+        // Quality assurance
+        trustedByThousandsTitle: "Trusted by Thousands",
+        provenSafety: "Proven safety and effectiveness across the globe",
+        reRuptures: "Re-ruptures",
+        patients: "Patients",
+        countries: "Countries",
+        since: "Since",
+        // Video
+        clickToLoadVideo: "Click to load video",
+    },
+    fr: {
+        title: "Attelle de Rupture du Tendon d'Achille",
+        description:
+            "L'attelle de rupture d'Achille de Thetis Medical pour rendre le sommeil plus agréable et supportable. L'orthèse se fixe à la jambe pour prévenir d'autres blessures du tendon.",
+        image: "https://thetismedical.com/images/night_splint_bed_top_square.jpg",
+        quote: "Cela a fait une énorme différence pour passer une bonne nuit de repos.",
+        quoteAuthor: "— Patient Vérifié, USA",
+        trustedByThousands: "APPROUVÉ PAR DES MILLIERS",
+        joinPatients: "Rejoignez plus de 5 000 patients qui ont trouvé un soulagement",
+        realReviews: "De vrais avis de vrais patients en convalescence après une rupture du tendon d'Achille",
+        viewAllReviews: "Voir tous les avis",
+        whoThisIsFor: "À qui s'adresse cette attelle",
+        whoThisIsForDesc: "L'attelle de nuit Thetis est spécialement conçue pour la récupération après une rupture du tendon d'Achille",
+        perfectFor: "Parfait pour :",
+        perfectForItems: [
+            "Rupture du tendon d'Achille (déchirure complète)",
+            "Dans les 12 semaines suivant la blessure ou la chirurgie",
+            "Approuvé par votre chirurgien pour une utilisation nocturne",
+            "Difficulté à dormir avec votre botte de marche"
+        ],
+        notFor: "Pas pour :",
+        notForItems: [
+            "Tendinite ou tendinopathie d'Achille",
+            "Plus de 12 semaines après la blessure",
+            "Autres affections du pied ou de la cheville",
+            "Non approuvé par votre équipe médicale"
+        ],
+        alwaysCheckSurgeon: "Consultez toujours votre chirurgien d'abord.",
+        splintSpecificallyDesigned: "Cette attelle est spécialement conçue pour la récupération après une rupture du tendon d'Achille et peut ne pas convenir à d'autres conditions.",
+        moneyBackGuarantee: "Garantie satisfait ou remboursé de 30 jours",
+        moneyBackDesc: "Essayez l'attelle de nuit Thetis sans risque. Si elle n'améliore pas la qualité de votre sommeil, nous vous rembourserons — sans poser de questions.",
+        freeShipping: "Livraison gratuite",
+        guarantee30Day: "Garantie 30 jours",
+        easyReturns: "Retours faciles",
+        comparisonTitle: "Attelle de nuit vs Botte : comparaison côte à côte",
+        comparisonDesc: "Les deux offrent une protection. Une seule vous permet de dormir confortablement.",
+        feature: "Caractéristique",
+        boot: "Botte",
+        thetisSplint: "Attelle de nuit Thetis",
+        weight: "Poids",
+        weightBootValue: "1,5 kg+",
+        weightSplintValue: "200 g",
+        weightSplintValueLong: "200 g (90 % plus légère)",
+        breathability: "Respirabilité",
+        breathabilityBootShort: "Fermée",
+        breathabilityBootLong: "Fermée, retient la chaleur",
+        breathabilitySplintShort: "Design ouvert",
+        breathabilitySplintLong: "Design ouvert (expose la plante du pied et l'arrière de la jambe)",
+        cleanliness: "Propreté",
+        cleanlinessBootShort: "Sale",
+        cleanlinessBootLong: "Saleté et débris dans le lit",
+        cleanlinessSplintShort: "Propre",
+        cleanlinessSplintLong: "Propre (pas de saleté dans le lit)",
+        showering: "Douche",
+        showeringBootShort: "Non",
+        showeringBootLong: "Impossible de se doucher avec",
+        showeringSplintShort: "Oui",
+        showeringSplintLong: "Peut se doucher avec",
+        usePeriod: "Période d'utilisation",
+        healingAngle: "Angle de guérison",
+        healingAngleValue: "30° de flexion plantaire",
+        comparisonNote: "Les deux offrent la même protection au bon angle de guérison de 30°. L'attelle est simplement plus légère, plus respirante et plus propre pour dormir.",
+        trustedByEliteAthletes: "APPROUVÉ PAR DES ATHLÈTES D'ÉLITE",
+        trustedByProfAthletes: "Approuvé par les",
+        professionalAthletes: "athlètes professionnels",
+        athletesDesc: "Les athlètes d'élite choisissent l'attelle de nuit Thetis pour leur récupération. Légère, confortable et approuvée par les athlètes de l'équipe GB.",
+        professionalEndorsements: "RECOMMANDATIONS PROFESSIONNELLES",
+        trustedByLeadingSurgeons: "Approuvé par les",
+        leadingSurgeons: "chirurgiens de premier plan",
+        surgeonsDesc: "Les professionnels de santé du monde entier recommandent l'attelle de nuit Thetis pour une récupération sûre et efficace après une rupture du tendon d'Achille.",
+        whatToExpect: "À quoi s'attendre le lendemain matin",
+        whatToExpectDesc: "Réveillez-vous en ressentant la différence dès la première nuit",
+        betterRested: "Mieux reposé",
+        betterRestedDesc: "Dormez confortablement sans la lourde botte. Réveillez-vous rafraîchi et prêt pour la journée.",
+        cleanerBed: "Lit plus propre",
+        cleanerBedDesc: "Plus de saleté et de débris de votre botte de marche. Gardez votre lit propre et confortable.",
+        happierPartner: "Partenaire plus heureux",
+        happierPartnerDesc: "Un design léger signifie moins de perturbations. Vous pouvez tous les deux dormir paisiblement toute la nuit.",
+        trustedByThousandsTitle: "Approuvé par des milliers",
+        provenSafety: "Sécurité et efficacité prouvées dans le monde entier",
+        reRuptures: "Re-ruptures",
+        patients: "Patients",
+        countries: "Pays",
+        since: "Depuis",
+        clickToLoadVideo: "Cliquez pour charger la vidéo",
+    },
+    de: {
+        title: "Achillessehnenriss-Schiene",
+        description:
+            "Die Achillessehnenriss-Schiene von Thetis Medical macht das Schlafen angenehmer und erträglicher. Die Orthese wird am Bein befestigt, um weitere Sehnenverletzungen zu verhindern.",
+        image: "https://thetismedical.com/images/night_splint_bed_top_square.jpg",
+        quote: "Es hat einen enormen Unterschied gemacht, um eine gute Nachtruhe zu bekommen.",
+        quoteAuthor: "— Verifizierter Patient, USA",
+        trustedByThousands: "VON TAUSENDEN VERTRAUT",
+        joinPatients: "Schließen Sie sich über 5.000 Patienten an, die Erleichterung gefunden haben",
+        realReviews: "Echte Bewertungen von echten Patienten, die sich von einem Achillessehnenriss erholen",
+        viewAllReviews: "Alle Bewertungen ansehen",
+        whoThisIsFor: "Für wen ist diese Schiene geeignet",
+        whoThisIsForDesc: "Die Thetis Nachtschiene wurde speziell für die Genesung nach einem Achillessehnenriss entwickelt",
+        perfectFor: "Perfekt für:",
+        perfectForItems: [
+            "Achillessehnenriss (vollständiger Riss)",
+            "Innerhalb von 12 Wochen nach Verletzung oder Operation",
+            "Von Ihrem Chirurgen für die nächtliche Verwendung zugelassen",
+            "Schwierigkeiten beim Schlafen mit Ihrem Gehstiefel"
+        ],
+        notFor: "Nicht geeignet für:",
+        notForItems: [
+            "Achillessehnenentzündung oder Tendinopathie",
+            "Mehr als 12 Wochen nach der Verletzung",
+            "Andere Fuß- oder Knöchelerkrankungen",
+            "Nicht von Ihrem medizinischen Team genehmigt"
+        ],
+        alwaysCheckSurgeon: "Konsultieren Sie immer zuerst Ihren Chirurgen.",
+        splintSpecificallyDesigned: "Diese Schiene wurde speziell für die Genesung nach einem Achillessehnenriss entwickelt und ist möglicherweise nicht für andere Erkrankungen geeignet.",
+        moneyBackGuarantee: "30-Tage-Geld-zurück-Garantie",
+        moneyBackDesc: "Testen Sie die Thetis Nachtschiene risikofrei. Wenn sie Ihre Schlafqualität nicht verbessert, erstatten wir Ihren Kauf — ohne Fragen.",
+        freeShipping: "Kostenloser Versand",
+        guarantee30Day: "30-Tage-Garantie",
+        easyReturns: "Einfache Rückgabe",
+        comparisonTitle: "Nachtschiene vs. Gehstiefel: Direktvergleich",
+        comparisonDesc: "Beide bieten Schutz. Nur eine lässt Sie bequem schlafen.",
+        feature: "Merkmal",
+        boot: "Gehstiefel",
+        thetisSplint: "Thetis Nachtschiene",
+        weight: "Gewicht",
+        weightBootValue: "1,5 kg+",
+        weightSplintValue: "200 g",
+        weightSplintValueLong: "200 g (90 % leichter)",
+        breathability: "Atmungsaktivität",
+        breathabilityBootShort: "Geschlossen",
+        breathabilityBootLong: "Geschlossen, speichert Wärme",
+        breathabilitySplintShort: "Offenes Design",
+        breathabilitySplintLong: "Offenes Design (legt Fußsohle und Beinrückseite frei)",
+        cleanliness: "Sauberkeit",
+        cleanlinessBootShort: "Schmutzig",
+        cleanlinessBootLong: "Schmutz und Ablagerungen im Bett",
+        cleanlinessSplintShort: "Sauber",
+        cleanlinessSplintLong: "Sauber (kein Schmutz im Bett)",
+        showering: "Duschen",
+        showeringBootShort: "Nein",
+        showeringBootLong: "Kann nicht damit duschen",
+        showeringSplintShort: "Ja",
+        showeringSplintLong: "Kann damit duschen",
+        usePeriod: "Verwendungszeitraum",
+        healingAngle: "Heilungswinkel",
+        healingAngleValue: "30° Plantarflexion",
+        comparisonNote: "Beide bieten den gleichen Schutz im korrekten 30°-Heilungswinkel. Die Schiene ist einfach leichter, atmungsaktiver und sauberer zum Schlafen.",
+        trustedByEliteAthletes: "VON SPITZENATHLETEN VERTRAUT",
+        trustedByProfAthletes: "Vertraut von",
+        professionalAthletes: "Profisportlern",
+        athletesDesc: "Spitzenathleten wählen die Thetis Nachtschiene für ihre Genesung. Leicht, bequem und von Team GB Athleten vertraut.",
+        professionalEndorsements: "PROFESSIONELLE EMPFEHLUNGEN",
+        trustedByLeadingSurgeons: "Vertraut von",
+        leadingSurgeons: "führenden Chirurgen",
+        surgeonsDesc: "Medizinische Fachkräfte weltweit empfehlen die Thetis Nachtschiene für eine sichere und effektive Genesung nach einem Achillessehnenriss.",
+        whatToExpect: "Was Sie am nächsten Morgen erwartet",
+        whatToExpectDesc: "Wachen Sie auf und spüren Sie den Unterschied nach Ihrer ersten Nacht",
+        betterRested: "Besser ausgeruht",
+        betterRestedDesc: "Schlafen Sie bequem ohne den schweren Gehstiefel. Wachen Sie erfrischt und bereit für den Tag auf.",
+        cleanerBed: "Saubereres Bett",
+        cleanerBedDesc: "Kein Schmutz und keine Ablagerungen mehr von Ihrem Gehstiefel. Halten Sie Ihr Bett sauber und komfortabel.",
+        happierPartner: "Glücklicherer Partner",
+        happierPartnerDesc: "Leichtes Design bedeutet weniger Störungen. Sie beide können die ganze Nacht friedlich schlafen.",
+        trustedByThousandsTitle: "Von Tausenden vertraut",
+        provenSafety: "Bewiesene Sicherheit und Wirksamkeit weltweit",
+        reRuptures: "Erneute Rupturen",
+        patients: "Patienten",
+        countries: "Länder",
+        since: "Seit",
+        clickToLoadVideo: "Klicken, um Video zu laden",
+    },
+    es: {
+        title: "Férula de Rotura del Tendón de Aquiles",
+        description:
+            "La férula de rotura de Aquiles de Thetis Medical para hacer el sueño más agradable y soportable. La ortesis se sujeta a la pierna para prevenir más lesiones del tendón.",
+        image: "https://thetismedical.com/images/night_splint_bed_top_square.jpg",
+        quote: "Hizo una gran diferencia para conseguir un buen descanso nocturno.",
+        quoteAuthor: "— Paciente Verificado, EE.UU.",
+        trustedByThousands: "CONFIADO POR MILES",
+        joinPatients: "Únete a más de 5,000 pacientes que han encontrado alivio",
+        realReviews: "Reseñas reales de pacientes reales recuperándose de una rotura del tendón de Aquiles",
+        viewAllReviews: "Ver todas las reseñas",
+        whoThisIsFor: "Para quién es esto",
+        whoThisIsForDesc: "La férula nocturna Thetis está diseñada específicamente para la recuperación de la rotura del tendón de Aquiles",
+        perfectFor: "Perfecto para:",
+        perfectForItems: [
+            "Rotura del tendón de Aquiles (desgarro completo)",
+            "Dentro de las 12 semanas de lesión o cirugía",
+            "Aprobado por tu cirujano para uso nocturno",
+            "Dificultad para dormir con tu bota de marcha"
+        ],
+        notFor: "No es para:",
+        notForItems: [
+            "Tendinitis o tendinopatía de Aquiles",
+            "Más de 12 semanas después de la lesión",
+            "Otras condiciones del pie o tobillo",
+            "No aprobado por tu equipo médico"
+        ],
+        alwaysCheckSurgeon: "Siempre consulta primero con tu cirujano.",
+        splintSpecificallyDesigned: "Esta férula está diseñada específicamente para la recuperación de rotura del tendón de Aquiles y puede no ser adecuada para otras condiciones.",
+        moneyBackGuarantee: "Garantía de devolución de dinero de 30 días",
+        moneyBackDesc: "Prueba la férula nocturna Thetis sin riesgo. Si no mejora la calidad de tu sueño, te reembolsaremos tu compra — sin preguntas.",
+        freeShipping: "Envío gratuito",
+        guarantee30Day: "Garantía de 30 días",
+        easyReturns: "Devoluciones fáciles",
+        comparisonTitle: "Férula nocturna vs Bota: comparación lado a lado",
+        comparisonDesc: "Ambas proporcionan protección. Solo una te permite dormir cómodamente.",
+        feature: "Característica",
+        boot: "Bota",
+        thetisSplint: "Férula nocturna Thetis",
+        weight: "Peso",
+        weightBootValue: "1,5 kg+",
+        weightSplintValue: "200 g",
+        weightSplintValueLong: "200 g (90% más ligera)",
+        breathability: "Transpirabilidad",
+        breathabilityBootShort: "Cerrada",
+        breathabilityBootLong: "Cerrada, atrapa el calor",
+        breathabilitySplintShort: "Diseño abierto",
+        breathabilitySplintLong: "Diseño abierto (expone la planta del pie y la parte posterior de la pierna)",
+        cleanliness: "Limpieza",
+        cleanlinessBootShort: "Sucia",
+        cleanlinessBootLong: "Suciedad y residuos en la cama",
+        cleanlinessSplintShort: "Limpia",
+        cleanlinessSplintLong: "Limpia (sin suciedad en la cama)",
+        showering: "Ducharse",
+        showeringBootShort: "No",
+        showeringBootLong: "No se puede duchar con ella",
+        showeringSplintShort: "Sí",
+        showeringSplintLong: "Se puede duchar con ella",
+        usePeriod: "Período de uso",
+        healingAngle: "Ángulo de curación",
+        healingAngleValue: "30° de flexión plantar",
+        comparisonNote: "Ambas proporcionan la misma protección en el ángulo de curación correcto de 30°. La férula es simplemente más ligera, más transpirable y más limpia para dormir.",
+        trustedByEliteAthletes: "CONFIADO POR ATLETAS DE ÉLITE",
+        trustedByProfAthletes: "Confiado por",
+        professionalAthletes: "atletas profesionales",
+        athletesDesc: "Los atletas de élite eligen la férula nocturna Thetis para su recuperación. Ligera, cómoda y confiada por los atletas del equipo GB.",
+        professionalEndorsements: "RECOMENDACIONES PROFESIONALES",
+        trustedByLeadingSurgeons: "Confiado por",
+        leadingSurgeons: "cirujanos líderes",
+        surgeonsDesc: "Los profesionales de la salud de todo el mundo recomiendan la férula nocturna Thetis para una recuperación segura y efectiva de la rotura del tendón de Aquiles.",
+        whatToExpect: "Qué esperar a la mañana siguiente",
+        whatToExpectDesc: "Despierta sintiendo la diferencia después de tu primera noche",
+        betterRested: "Mejor descansado",
+        betterRestedDesc: "Duerme cómodamente sin la pesada bota. Despierta sintiéndote renovado y listo para el día.",
+        cleanerBed: "Cama más limpia",
+        cleanerBedDesc: "No más suciedad y residuos de tu bota de marcha. Mantén tu cama limpia y cómoda.",
+        happierPartner: "Pareja más feliz",
+        happierPartnerDesc: "El diseño ligero significa menos interrupciones. Ambos pueden dormir tranquilamente toda la noche.",
+        trustedByThousandsTitle: "Confiado por miles",
+        provenSafety: "Seguridad y eficacia probadas en todo el mundo",
+        reRuptures: "Re-rupturas",
+        patients: "Pacientes",
+        countries: "Países",
+        since: "Desde",
+        clickToLoadVideo: "Haz clic para cargar el video",
+    },
+    it: {
+        title: "Férula per Rottura di Achille",
+        description:
+            "La férula per rottura di Achille di Thetis Medical per rendere il sonno più piacevole e supportabile. L'ortesi si fissa alla gamba per prevenire ulteriori lesioni del tendine.",
+        image: "https://thetismedical.com/images/night_splint_bed_top_square.jpg",
+        quote: "Ha fatto un'enorme differenza per riposare bene la notte.",
+        quoteAuthor: "— Paziente Verificato, USA",
+        trustedByThousands: "AFFIDATO DA MIGLIAIA",
+        joinPatients: "Unisciti a oltre 5.000 pazienti che hanno trovato sollievo",
+        realReviews: "Recensioni reali di pazienti reali in recupero da una rottura del tendine d'Achille",
+        viewAllReviews: "Vedi tutte le recensioni",
+        whoThisIsFor: "A chi è destinato",
+        whoThisIsForDesc: "La stecca notturna Thetis è progettata specificamente per il recupero dalla rottura del tendine d'Achille",
+        perfectFor: "Perfetto per:",
+        perfectForItems: [
+            "Rottura del tendine d'Achille (lacerazione completa)",
+            "Entro 12 settimane dall'infortunio o dall'intervento chirurgico",
+            "Approvato dal chirurgo per l'uso notturno",
+            "Difficoltà a dormire con lo stivale da camminata"
+        ],
+        notFor: "Non adatto per:",
+        notForItems: [
+            "Tendinite o tendinopatia d'Achille",
+            "Più di 12 settimane dopo l'infortunio",
+            "Altre condizioni del piede o della caviglia",
+            "Non approvato dal team medico"
+        ],
+        alwaysCheckSurgeon: "Consulta sempre prima il tuo chirurgo.",
+        splintSpecificallyDesigned: "Questa stecca è progettata specificamente per il recupero dalla rottura del tendine d'Achille e potrebbe non essere adatta per altre condizioni.",
+        moneyBackGuarantee: "Garanzia di rimborso di 30 giorni",
+        moneyBackDesc: "Prova la stecca notturna Thetis senza rischi. Se non migliora la qualità del sonno, ti rimborseremo l'acquisto — senza domande.",
+        freeShipping: "Spedizione gratuita",
+        guarantee30Day: "Garanzia 30 giorni",
+        easyReturns: "Resi facili",
+        comparisonTitle: "Stecca notturna vs Stivale: confronto fianco a fianco",
+        comparisonDesc: "Entrambi offrono protezione. Solo uno ti permette di dormire comodamente.",
+        feature: "Caratteristica",
+        boot: "Stivale",
+        thetisSplint: "Stecca notturna Thetis",
+        weight: "Peso",
+        weightBootValue: "1,5 kg+",
+        weightSplintValue: "200 g",
+        weightSplintValueLong: "200 g (90% più leggera)",
+        breathability: "Traspirabilità",
+        breathabilityBootShort: "Chiuso",
+        breathabilityBootLong: "Chiuso, trattiene il calore",
+        breathabilitySplintShort: "Design aperto",
+        breathabilitySplintLong: "Design aperto (espone la pianta del piede e il retro della gamba)",
+        cleanliness: "Pulizia",
+        cleanlinessBootShort: "Sporco",
+        cleanlinessBootLong: "Sporco e detriti nel letto",
+        cleanlinessSplintShort: "Pulito",
+        cleanlinessSplintLong: "Pulito (nessuno sporco nel letto)",
+        showering: "Doccia",
+        showeringBootShort: "No",
+        showeringBootLong: "Non si può fare la doccia con esso",
+        showeringSplintShort: "Sì",
+        showeringSplintLong: "Si può fare la doccia con essa",
+        usePeriod: "Periodo di utilizzo",
+        healingAngle: "Angolo di guarigione",
+        healingAngleValue: "30° di flessione plantare",
+        comparisonNote: "Entrambi forniscono la stessa protezione al corretto angolo di guarigione di 30°. La stecca è semplicemente più leggera, più traspirante e più pulita per dormire.",
+        trustedByEliteAthletes: "AFFIDATO DA ATLETI D'ÉLITE",
+        trustedByProfAthletes: "Affidato da",
+        professionalAthletes: "atleti professionisti",
+        athletesDesc: "Gli atleti d'élite scelgono la stecca notturna Thetis per il loro recupero. Leggera, comoda e affidabile per gli atleti del Team GB.",
+        professionalEndorsements: "RACCOMANDAZIONI PROFESSIONALI",
+        trustedByLeadingSurgeons: "Affidato da",
+        leadingSurgeons: "chirurghi leader",
+        surgeonsDesc: "I professionisti sanitari di tutto il mondo raccomandano la stecca notturna Thetis per un recupero sicuro ed efficace dalla rottura del tendine d'Achille.",
+        whatToExpect: "Cosa aspettarsi il mattino dopo",
+        whatToExpectDesc: "Svegliati sentendo la differenza dopo la prima notte",
+        betterRested: "Meglio riposato",
+        betterRestedDesc: "Dormi comodamente senza il pesante stivale. Svegliati rinfrescato e pronto per la giornata.",
+        cleanerBed: "Letto più pulito",
+        cleanerBedDesc: "Niente più sporco e detriti dal tuo stivale da camminata. Mantieni il letto pulito e confortevole.",
+        happierPartner: "Partner più felice",
+        happierPartnerDesc: "Il design leggero significa meno disturbi. Entrambi potete dormire tranquillamente tutta la notte.",
+        trustedByThousandsTitle: "Affidato da migliaia",
+        provenSafety: "Sicurezza ed efficacia comprovate in tutto il mondo",
+        reRuptures: "Ri-rotture",
+        patients: "Pazienti",
+        countries: "Paesi",
+        since: "Dal",
+        clickToLoadVideo: "Clicca per caricare il video",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content] || content.en;
+---
+
+<Fragment slot="head">
+    <NightSplintSchema />
+    <slot name="head" />
+</Fragment>
+
+<Layout
+    title={currentContent.title}
+    description={currentContent.description}
+    image={currentContent.image}
+    lang={lang}
+>
+    <main>
+        <NightSplintHero lang={lang} />
+
+        <!-- High-Impact Testimonial Quote -->
+        <section class="bg-gradient-to-b from-white to-primary/5 py-6 md:py-12">
+            <div class="mx-auto px-4 max-w-3xl text-center">
+                <blockquote
+                    class="mb-4 font-semibold text-neutral-900 text-xl md:text-2xl lg:text-3xl italic"
+                >
+                    "{currentContent.quote}"
+                </blockquote>
+                <p class="text-neutral-600 text-sm md:text-base">
+                    {currentContent.quoteAuthor}
+                </p>
+            </div>
+        </section>
+
+        <!-- Social Proof - Reviews -->
+        <section
+            class="bg-gradient-to-b from-white via-primary/5 to-white py-12 md:py-16 lg:py-20"
+        >
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 md:mb-12 text-center">
+                    <div
+                        class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full"
+                    >
+                        <Check className="w-4 md:w-5 h-4 md:h-5 text-primary" />
+                        <p
+                            class="font-medium text-primary text-xs md:text-sm uppercase tracking-widest"
+                        >
+                            {currentContent.trustedByThousands}
+                        </p>
+                    </div>
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl lg:text-4xl"
+                    >
+                        {currentContent.joinPatients}
+                    </h2>
+                    <p class="mb-6 text-neutral-600 text-base md:text-lg">
+                        {currentContent.realReviews}
+                    </p>
+                </div>
+                <div class="mb-8">
+                    <EnhancedReviewCarousel client:load />
+                </div>
+                <div class="mt-8 text-center">
+                    <a
+                        href="/reviews"
+                        class="inline-flex items-center gap-2 hover:bg-primary px-6 py-3 border-2 border-primary rounded-lg font-semibold text-primary hover:text-white transition-colors"
+                    >
+                        {currentContent.viewAllReviews}
+                        <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who This Is For Section -->
+        <section class="bg-neutral-50 py-8 md:py-16 lg:py-20">
+            <div class="mx-auto px-4 max-w-4xl">
+                <div class="mb-8 md:mb-12 text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl lg:text-4xl"
+                    >
+                        {currentContent.whoThisIsFor}
+                    </h2>
+                    <p class="text-neutral-600 text-base md:text-lg">
+                        {currentContent.whoThisIsForDesc}
+                    </p>
+                </div>
+                <div class="gap-6 grid md:grid-cols-2">
+                    <div
+                        class="bg-primary/5 p-6 border-2 border-primary/30 rounded-lg"
+                    >
+                        <h3
+                            class="flex items-center gap-2 mb-4 font-bold text-primary text-xl"
+                        >
+                            <span class="text-2xl">✓</span>
+                            {currentContent.perfectFor}
+                        </h3>
+                        <ul class="space-y-2 text-primary">
+                            {currentContent.perfectForItems.map((item: string) => (
+                                <li class="flex items-start gap-2">
+                                    <span class="mt-1 text-primary">•</span>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-red-50 p-6 border-2 border-red-200 rounded-lg"
+                    >
+                        <h3
+                            class="flex items-center gap-2 mb-4 font-bold text-red-900 text-xl"
+                        >
+                            <span class="text-2xl">✗</span>
+                            {currentContent.notFor}
+                        </h3>
+                        <ul class="space-y-2 text-red-800">
+                            {currentContent.notForItems.map((item: string) => (
+                                <li class="flex items-start gap-2">
+                                    <span class="mt-1 text-red-600">•</span>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 text-center">
+                    <p class="text-neutral-600">
+                        <strong>{currentContent.alwaysCheckSurgeon}</strong> {currentContent.splintSpecificallyDesigned}
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guarantee Section -->
+        <section
+            class="bg-primary/10 py-8 md:py-16 lg:py-20 border-primary/30 border-y"
+        >
+            <div class="mx-auto px-4 max-w-4xl">
+                <div class="mb-8 text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-xl md:text-2xl lg:text-3xl"
+                    >
+                        {currentContent.moneyBackGuarantee}
+                    </h2>
+                    <p
+                        class="mb-8 text-neutral-600 text-sm md:text-base lg:text-lg"
+                    >
+                        {currentContent.moneyBackDesc}
+                    </p>
+                </div>
+                <div class="gap-6 grid md:grid-cols-3">
+                    <div
+                        class="flex flex-col items-center gap-3 bg-white shadow-sm p-6 border border-primary/20 rounded-lg"
+                    >
+                        <div
+                            class="flex justify-center items-center bg-primary/10 rounded-full w-12 h-12"
+                        >
+                            <Truck className="w-6 h-6 text-primary" />
+                        </div>
+                        <span class="font-semibold text-neutral-900 text-sm"
+                            >{currentContent.freeShipping}</span
+                        >
+                    </div>
+                    <div
+                        class="flex flex-col items-center gap-3 bg-white shadow-sm p-6 border border-primary/20 rounded-lg"
+                    >
+                        <div
+                            class="flex justify-center items-center bg-primary/10 rounded-full w-12 h-12"
+                        >
+                            <ShieldCheck className="w-6 h-6 text-primary" />
+                        </div>
+                        <span class="font-semibold text-neutral-900 text-sm"
+                            >{currentContent.guarantee30Day}</span
+                        >
+                    </div>
+                    <div
+                        class="flex flex-col items-center gap-3 bg-white shadow-sm p-6 border border-primary/20 rounded-lg"
+                    >
+                        <div
+                            class="flex justify-center items-center bg-primary/10 rounded-full w-12 h-12"
+                        >
+                            <RotateCcw className="w-6 h-6 text-primary" />
+                        </div>
+                        <span class="font-semibold text-neutral-900 text-sm"
+                            >{currentContent.easyReturns}</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table: Night Splint vs Boot -->
+        <section
+            class="bg-white py-8 md:py-16 lg:py-20 border-neutral-200 border-y"
+        >
+            <div class="mx-auto px-4 max-w-5xl">
+                <div class="mb-8 md:mb-12 text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl lg:text-4xl"
+                    >
+                        {currentContent.comparisonTitle}
+                    </h2>
+                    <p class="text-neutral-600 text-sm md:text-base lg:text-lg">
+                        {currentContent.comparisonDesc}
+                    </p>
+                </div>
+                <div class="-mx-4 px-2 md:px-4 overflow-x-auto">
+                    <table
+                        class="w-full min-w-[320px] md:min-w-[500px] text-sm md:text-base border-collapse"
+                    >
+                        <thead>
+                            <tr
+                                class="bg-neutral-50 border-neutral-200 border-b-2"
+                            >
+                                <th
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-semibold text-neutral-900 text-xs md:text-sm text-left"
+                                >
+                                    {currentContent.feature}
+                                </th>
+                                <th
+                                    class="px-2 md:px-3 py-2 md:py-3 font-semibold text-red-900 text-xs md:text-sm text-center"
+                                >
+                                    {currentContent.boot}
+                                </th>
+                                <th
+                                    class="px-2 md:px-3 py-2 md:py-3 font-semibold text-primary text-xs md:text-sm text-center"
+                                >
+                                    {currentContent.thetisSplint}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-neutral-200 border-b">
+                                <td
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-medium text-neutral-900 text-xs md:text-sm"
+                                >
+                                    {currentContent.weight}
+                                </td>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-red-800 text-center"
+                                >
+                                    <span class="text-xl md:text-2xl">✗</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">{currentContent.weightBootValue}</span>
+                                        <span class="hidden md:inline"
+                                            >{currentContent.weightBootValue}</span
+                                        >
+                                    </div>
+                                </td>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 font-semibold text-primary text-center"
+                                >
+                                    <span class="text-xl md:text-2xl">✓</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">{currentContent.weightSplintValue}</span>
+                                        <span class="hidden md:inline"
+                                            >{currentContent.weightSplintValueLong}</span
+                                        >
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-neutral-50/50 border-neutral-200 border-b"
+                            >
+                                <td
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-medium text-neutral-900 text-xs md:text-sm"
+                                >
+                                    {currentContent.breathability}
+                                </td>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-red-800 text-center"
+                                >
+                                    <span class="text-xl md:text-2xl">✗</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">{currentContent.breathabilityBootShort}</span>
+                                        <span class="hidden md:inline"
+                                            >{currentContent.breathabilityBootLong}</span
+                                        >
+                                    </div>
+                                </td>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 font-semibold text-primary text-center"
+                                >
+                                    <span class="text-xl md:text-2xl">✓</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden"
+                                            >{currentContent.breathabilitySplintShort}</span
+                                        >
+                                        <span class="hidden md:inline"
+                                            >{currentContent.breathabilitySplintLong}</span
+                                        >
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-neutral-200 border-b">
+                                <td
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-medium text-neutral-900 text-xs md:text-sm"
+                                >
+                                    {currentContent.cleanliness}
+                                </td>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-red-800 text-center"
+                                >
+                                    <span class="text-xl md:text-2xl">✗</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">{currentContent.cleanlinessBootShort}</span>
+                                        <span class="hidden md:inline"
+                                            >{currentContent.cleanlinessBootLong}</span
+                                        >
+                                    </div>
+                                </td>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 font-semibold text-primary text-center"
+                                >
+                                    <span class="text-xl md:text-2xl">✓</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">{currentContent.cleanlinessSplintShort}</span>
+                                        <span class="hidden md:inline"
+                                            >{currentContent.cleanlinessSplintLong}</span
+                                        >
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-neutral-50/50 border-neutral-200 border-b"
+                            >
+                                <td
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-medium text-neutral-900 text-xs md:text-sm"
+                                >
+                                    {currentContent.showering}
+                                </td>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-red-800 text-center"
+                                >
+                                    <span class="text-xl md:text-2xl">✗</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">{currentContent.showeringBootShort}</span>
+                                        <span class="hidden md:inline"
+                                            >{currentContent.showeringBootLong}</span
+                                        >
+                                    </div>
+                                </td>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 font-semibold text-primary text-center"
+                                >
+                                    <span class="text-xl md:text-2xl">✓</span>
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        <span class="md:hidden">{currentContent.showeringSplintShort}</span>
+                                        <span class="hidden md:inline"
+                                            >{currentContent.showeringSplintLong}</span
+                                        >
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-neutral-200 border-b">
+                                <td
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-medium text-neutral-900 text-xs md:text-sm"
+                                >
+                                    {currentContent.usePeriod}
+                                </td>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-neutral-700 text-center"
+                                >
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        Weeks 0-12
+                                    </div>
+                                </td>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-neutral-700 text-center"
+                                >
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        Weeks 0-12
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr
+                                class="bg-primary/5 border-neutral-300 border-b-2"
+                            >
+                                <td
+                                    class="hidden md:table-cell px-2 md:px-3 py-2 md:py-3 font-medium text-neutral-900 text-xs md:text-sm"
+                                >
+                                    {currentContent.healingAngle}
+                                </td>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-neutral-700 text-center"
+                                >
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        {currentContent.healingAngleValue}
+                                    </div>
+                                </td>
+                                <td
+                                    class="px-2 md:px-3 py-2 md:py-3 text-neutral-700 text-center"
+                                >
+                                    <div
+                                        class="mt-0.5 md:mt-1 text-xs md:text-sm"
+                                    >
+                                        {currentContent.healingAngleValue}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-8 text-center">
+                    <p class="text-neutral-600 text-sm">
+                        {currentContent.comparisonNote}
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Athlete Endorsements -->
+        <section
+            class="bg-gradient-to-b from-white to-primary/5 py-8 md:py-16 lg:py-24"
+        >
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 md:mb-12 text-center">
+                    <div
+                        class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-3 md:px-4 py-2 rounded-full"
+                    >
+                        <Trophy
+                            className="w-4 md:w-5 h-4 md:h-5 text-primary"
+                        />
+                        <p
+                            class="font-medium text-primary text-xs md:text-sm uppercase tracking-widest"
+                        >
+                            {currentContent.trustedByEliteAthletes}
+                        </p>
+                    </div>
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl lg:text-4xl"
+                    >
+                        {currentContent.trustedByProfAthletes} <span class="text-primary"
+                            >{currentContent.professionalAthletes}</span
+                        >
+                    </h2>
+                    <p
+                        class="mx-auto max-w-2xl text-neutral-600 text-sm md:text-base lg:text-lg"
+                    >
+                        {currentContent.athletesDesc}
+                    </p>
+                </div>
+
+                <!-- Athlete Reviews - Carousel on mobile, masonry on desktop -->
+                <AthletesCarousel client:load />
+            </div>
+        </section>
+
+        <style>
+            .masonry-grid {
+                columns: 1;
+                column-gap: 1.5rem;
+                width: 100%;
+            }
+
+            .masonry-grid > div {
+                margin-bottom: 1.5rem;
+                break-inside: avoid;
+            }
+
+            @media (min-width: 750px) {
+                .masonry-grid {
+                    columns: 2;
+                }
+            }
+
+            @media (min-width: 900px) {
+                .masonry-grid {
+                    columns: 3;
+                }
+            }
+        </style>
+
+        <!-- Surgeon Endorsements -->
+        <section
+            class="bg-gradient-to-b from-primary/5 to-white py-8 md:py-16 lg:py-24"
+        >
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 md:mb-12 text-center">
+                    <div
+                        class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-3 md:px-4 py-2 rounded-full"
+                    >
+                        <Stethoscope
+                            className="w-4 md:w-5 h-4 md:h-5 text-primary"
+                        />
+                        <p
+                            class="font-medium text-primary text-xs md:text-sm uppercase tracking-widest"
+                        >
+                            {currentContent.professionalEndorsements}
+                        </p>
+                    </div>
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl lg:text-4xl"
+                    >
+                        {currentContent.trustedByLeadingSurgeons} <span class="text-primary"
+                            >{currentContent.leadingSurgeons}</span
+                        >
+                    </h2>
+                    <p
+                        class="mx-auto max-w-2xl text-neutral-600 text-base md:text-lg lg:text-xl"
+                    >
+                        {currentContent.surgeonsDesc}
+                    </p>
+                </div>
+
+                <!-- Clinician Reviews - Carousel on mobile, masonry on desktop -->
+                <div class="md:hidden">
+                    <SurgeonsCarousel client:load />
+                </div>
+                <div class="hidden md:block masonry-grid">
+                    {
+                        translatedClinicians.map((clinician) => {
+                            const content =
+                                clinician.content[lang] || clinician.content.en;
+                            const clinicianReview = {
+                                name: clinician.name,
+                                description: content.description,
+                                title: content.title,
+                                body: content.body,
+                                image: clinician.image,
+                                type: "clinician" as const,
+                                link: "",
+                                clinics: clinician.clinics || [],
+                                clinicImages: clinician.clinicImages || [],
+                                date: clinician.date || "2024-01-01",
+                                country: clinician.country,
+                                stars: 5,
+                                is_pinned: false,
+                            };
+                            return (
+                                <div class="masonry-item">
+                                    <ReviewCard
+                                        review={clinicianReview}
+                                        client:load
+                                    />
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- What to Expect Next Morning -->
+        <section class="hidden md:block bg-white py-8 md:py-16 lg:py-20">
+            <div class="mx-auto px-4 max-w-5xl">
+                <div class="mb-8 md:mb-12 text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl lg:text-4xl"
+                    >
+                        {currentContent.whatToExpect}
+                    </h2>
+                    <p class="text-neutral-600 text-sm md:text-base lg:text-lg">
+                        {currentContent.whatToExpectDesc}
+                    </p>
+                </div>
+                <div class="gap-8 grid md:grid-cols-3">
+                    <div class="text-center">
+                        <div class="mb-4 font-bold text-primary text-4xl">
+                            ✓
+                        </div>
+                        <h3 class="mb-2 font-semibold text-xl">
+                            {currentContent.betterRested}
+                        </h3>
+                        <p class="text-neutral-600">
+                            {currentContent.betterRestedDesc}
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="mb-4 font-bold text-primary text-4xl">
+                            ✓
+                        </div>
+                        <h3 class="mb-2 font-semibold text-xl">{currentContent.cleanerBed}</h3>
+                        <p class="text-neutral-600">
+                            {currentContent.cleanerBedDesc}
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="mb-4 font-bold text-primary text-4xl">
+                            ✓
+                        </div>
+                        <h3 class="mb-2 font-semibold text-xl">
+                            {currentContent.happierPartner}
+                        </h3>
+                        <p class="text-neutral-600">
+                            {currentContent.happierPartnerDesc}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quality Assurance Badges -->
+        <section
+            class="bg-gradient-to-b from-white to-neutral-50 py-8 md:py-16 lg:py-20"
+        >
+            <div class="mx-auto px-4 max-w-5xl">
+                <div class="mb-8 md:mb-12 text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-xl md:text-2xl lg:text-3xl"
+                    >
+                        {currentContent.trustedByThousandsTitle}
+                    </h2>
+                    <p class="text-neutral-600 text-sm md:text-base lg:text-lg">
+                        {currentContent.provenSafety}
+                    </p>
+                </div>
+                <div class="gap-4 md:gap-6 grid grid-cols-2 md:grid-cols-4">
+                    <div
+                        class="bg-white shadow-sm p-6 border border-neutral-200 rounded-lg text-center"
+                    >
+                        <div class="mb-3 font-bold text-primary text-4xl">
+                            0
+                        </div>
+                        <p class="font-medium text-neutral-600 text-sm">
+                            {currentContent.reRuptures}
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-6 border border-neutral-200 rounded-lg text-center"
+                    >
+                        <div class="mb-3 font-bold text-primary text-4xl">
+                            5,000+
+                        </div>
+                        <p class="font-medium text-neutral-600 text-sm">
+                            {currentContent.patients}
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-6 border border-neutral-200 rounded-lg text-center"
+                    >
+                        <div class="mb-3 font-bold text-primary text-4xl">
+                            9
+                        </div>
+                        <p class="font-medium text-neutral-600 text-sm">
+                            {currentContent.countries}
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-6 border border-neutral-200 rounded-lg text-center"
+                    >
+                        <div class="mb-3 font-bold text-primary text-4xl">
+                            2022
+                        </div>
+                        <p class="font-medium text-neutral-600 text-sm">
+                            {currentContent.since}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <ValuePropositions lang={lang} />
+
+        <KeyFeatures lang={lang} />
+
+        <!-- Lazy load YouTube iframe -->
+        <div class="relative mx-auto mt-8 w-full">
+            <div
+                id="youtube-placeholder"
+                class="flex justify-center items-center bg-gray-200 shadow-lg mx-auto rounded-lg w-full max-w-[300px] md:max-w-[50vw] lg:max-w-[70vw] aspect-video cursor-pointer"
+                data-youtube-id="T09Xnwaqbm0"
+            >
+                <div class="text-center">
+                    <div class="mb-2 text-4xl">▶️</div>
+                    <p class="text-gray-600 text-sm">{currentContent.clickToLoadVideo}</p>
+                </div>
+            </div>
+        </div>
+
+        <NightSplintUsage lang={lang} />
+
+        <NightSplintInstructions lang={lang} />
+
+        <NightSplintFAQs client:load lang={lang} />
+
+        <div id="order" class="scroll-mt-24">
+            <OrderYourSplint lang={lang} />
+        </div>
+
+        <SplintDownloads lang={lang} />
+
+        <!-- Subscribe: recovery tips -->
+        <div class="bg-neutral-50 dark:bg-neutral-950 py-4 md:py-6 lg:py-8">
+            <div class="mx-auto px-4 max-w-3xl">
+                <SubscribeBlock source="splint_page" lang={lang} />
+            </div>
+        </div>
+
+        <!-- Sticky Add to Cart (adapted for both splint + course) -->
+        <StickyAddToCart
+            variant="splint"
+            lang={lang}
+            splintHref={splintRoute?.href || "/achilles-rupture-splint"}
+            client:load
+        />
+
+        <!-- Exit Intent Popup -->
+        <ExitIntentPopup client:load />
+    </main>
+
+    <script>
+        // Lazy load YouTube iframe when user clicks on placeholder
+        document.addEventListener("DOMContentLoaded", () => {
+            const placeholder = document.getElementById("youtube-placeholder");
+            if (placeholder) {
+                placeholder.addEventListener("click", () => {
+                    const youtubeId =
+                        placeholder.getAttribute("data-youtube-id");
+                    const iframe = document.createElement("iframe");
+                    iframe.className =
+                        "shadow-lg mx-auto rounded-lg w-full max-w-[300px] md:hover:max-w-[60vw] md:max-w-[50vw] lg:hover:max-w-[70vw] hover:max-w-[80vw] aspect-video transition-all duration-300 cursor-pointer";
+                    iframe.title = "Night-Splint-Application";
+                    iframe.src = `https://www.youtube.com/embed/${youtubeId}`;
+                    iframe.allow =
+                        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                    iframe.allowFullscreen = true;
+
+                    placeholder.parentNode?.replaceChild(iframe, placeholder);
+                });
+            }
+        });
+    </script>
+
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+    </style>
+</Layout>

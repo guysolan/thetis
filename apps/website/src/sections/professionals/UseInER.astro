@@ -1,0 +1,88 @@
+---
+import FullImageCTA from "@/components/CTA/FullCTA.astro";
+import TraumaSplintImage from "@/components/products/images/trauma-splint/trauma_splint.jpg";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Use in A&E 🇬🇧 / ER 🇺🇲",
+        description:
+            "Our patented Achilles Rupture Splint, developed with orthopedic specialists, helps patients reach treatment plans promptly while maintaining the optimal 30° plantarflexed position for healing.",
+        paragraphs: [
+            "Our patented Achilles Rupture Splint, developed with orthopedic specialists, helps patients reach treatment plans promptly while maintaining the optimal 30° plantarflexed position for healing.",
+            "Thetis Achilles Splints make the diagnostic pathway more flexible and efficient. Plaster room visits are not required. Boots are not wasted. In one study the time from first presentation to definitive treatment decision was halved.",
+            "Available for reimbursement with HCPCS code Q4051.",
+        ],
+        primaryWords: "Order Now",
+        secondaryWords: "Learn More",
+        imageAlt: "Trauma Splint Image",
+    },
+    de: {
+        title: "Verwendung in der Notaufnahme 🇩🇪",
+        description:
+            "Unsere patentierte Achillessehnenruptur-Schiene, entwickelt mit orthopädischen Spezialisten, hilft Patienten, schnell Behandlungspläne zu erreichen und dabei die optimale 30°-Plantarflexionsposition für die Heilung beizubehalten.",
+        paragraphs: [
+            "Unsere patentierte Achillessehnenruptur-Schiene, entwickelt mit orthopädischen Spezialisten, hilft Patienten, schnell Behandlungspläne zu erreichen und dabei die optimale 30°-Plantarflexionsposition für die Heilung beizubehalten.",
+            "Thetis Achilles-Schienen machen den diagnostischen Weg flexibler und effizienter. Gipsraum-Besuche sind nicht erforderlich. Stiefel werden nicht verschwendet. In einer Studie wurde die Zeit von der ersten Vorstellung bis zur definitiven Behandlungsentscheidung halbiert.",
+            "Verfügbar für die Erstattung mit HCPCS-Code Q4051.",
+        ],
+        primaryWords: "Jetzt bestellen",
+        secondaryWords: "Mehr erfahren",
+        imageAlt: "Trauma-Schiene Bild",
+    },
+    fr: {
+        title: "Utilisation aux Urgences 🇫🇷",
+        description:
+            "Notre attelle de rupture d'Achille brevetée, développée avec des spécialistes orthopédiques, aide les patients à atteindre rapidement des plans de traitement tout en maintenant la position optimale de 30° de flexion plantaire pour la guérison.",
+        paragraphs: [
+            "Notre attelle de rupture d'Achille brevetée, développée avec des spécialistes orthopédiques, aide les patients à atteindre rapidement des plans de traitement tout en maintenant la position optimale de 30° de flexion plantaire pour la guérison.",
+            "Les attelles Achilles Thetis rendent le parcours diagnostique plus flexible et efficace. Les visites en salle de plâtre ne sont pas nécessaires. Les bottes ne sont pas gaspillées. Dans une étude, le temps entre la première présentation et la décision de traitement définitif a été réduit de moitié.",
+            "Disponible pour remboursement avec le code HCPCS Q4051.",
+        ],
+        primaryWords: "Commander maintenant",
+        secondaryWords: "En savoir plus",
+        imageAlt: "Image d'attelle de traumatisme",
+    },
+    es: {
+        title: "Uso en Urgencias 🇪🇸",
+        description:
+            "Nuestra férula de ruptura de Aquiles patentada, desarrollada con especialistas ortopédicos, ayuda a los pacientes a alcanzar planes de tratamiento rápidamente mientras mantiene la posición óptima de 30° de flexión plantar para la curación.",
+        paragraphs: [
+            "Nuestra férula de ruptura de Aquiles patentada, desarrollada con especialistas ortopédicos, ayuda a los pacientes a alcanzar planes de tratamiento rápidamente mientras mantiene la posición óptima de 30° de flexión plantar para la curación.",
+            "Las férulas Achilles de Thetis hacen que el camino diagnóstico sea más flexible y eficiente. No se requieren visitas a la sala de yeso. Las botas no se desperdician. En un estudio, el tiempo desde la primera presentación hasta la decisión de tratamiento definitivo se redujo a la mitad.",
+            "Disponible para reembolso con código HCPCS Q4051.",
+        ],
+        primaryWords: "Ordenar ahora",
+        secondaryWords: "Saber más",
+        imageAlt: "Imagen de férula de trauma",
+    },
+    it: {
+        title: "Uso in Pronto Soccorso 🇮🇹",
+        description:
+            "La nostra férula per rottura di Achille brevettata, sviluppata con specialisti ortopedici, aiuta i pazienti a raggiungere rapidamente piani di trattamento mantenendo la posizione ottimale di 30° di flessione plantare per la guarigione.",
+        paragraphs: [
+            "La nostra férula per rottura di Achille brevettata, sviluppata con specialisti ortopedici, aiuta i pazienti a raggiungere rapidamente piani di trattamento mantenendo la posizione ottimale di 30° di flessione plantare per la guarigione.",
+            "Le férula Achilles di Thetis rendono il percorso diagnostico più flessibile ed efficiente. Non sono necessarie visite alla sala gessi. Gli stivali non vengono sprecati. In uno studio, il tempo dalla prima presentazione alla decisione di trattamento definitivo è stato dimezzato.",
+            "Disponibile per rimborso con codice HCPCS Q4051.",
+        ],
+        primaryWords: "Ordina ora",
+        secondaryWords: "Scopri di più",
+        imageAlt: "Immagine férula trauma",
+    },
+};
+
+const currentContent = content[lang] || content.en;
+---
+
+<FullImageCTA
+    title={currentContent.title}
+    paragraph={currentContent.paragraphs}
+    primaryHref="/order-wholesale"
+    secondaryHref="/splint"
+    primaryWords={currentContent.primaryWords}
+    secondaryWords={currentContent.secondaryWords}
+    image={TraumaSplintImage}
+    imageAlt={currentContent.imageAlt}
+/>

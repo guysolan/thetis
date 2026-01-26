@@ -1,34 +1,101 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import ContentListing from '../components/ContentListing.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ContentListing from "../components/ContentListing.astro";
+import EquipmentBanner from "../components/EquipmentBanner.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
+import {ArrowRight} from 'lucide-astro';
+const articles = await getCollection("article");
 
-// Fetch all articles and guides
-const guides = await getCollection('guide');
-const articles = await getCollection('article');
-const allPosts = [...guides.map((g)=>({...g, type: 'guide'})), ...articles.map((a)=>({...a, type: 'article'}))].sort((a, b) => 
-    new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
-);
+const allPosts = articles
+    .filter((a) => a.data.status === "published")
+    .map((a) => ({
+        ...a,
+        type: "article",
+    }))
+    .sort((a, b) => {
+        const aTime = a.data.publishedAt ? new Date(a.data.publishedAt).getTime() : 0;
+        const bTime = b.data.publishedAt ? new Date(b.data.publishedAt).getTime() : 0;
+        return bTime - aTime;
+    });
+
+const title = "All the Achilles Rupture Info";
+const subtitle = "Clear advice, the latest updates, and the best kit to make your Achilles recovery easier";
+const showSurvivalKitCallout = true;
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={`${SITE_TITLE} - Recovery Guide & Resources`} description={SITE_DESCRIPTION} />
+        <BaseHead
+            title={`${SITE_TITLE} - Recovery Guide & Resources`}
+            description={SITE_DESCRIPTION}
+        />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={`${SITE_TITLE} - Recovery Guide & Resources`} />
+        <meta
+            property="og:title"
+            content={`${SITE_TITLE} - Recovery Guide & Resources`}
+        />
         <meta property="og:description" content={SITE_DESCRIPTION} />
-        <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).toString()} />
+        <link
+            rel="canonical"
+            href={new URL(Astro.url.pathname, Astro.site).toString()}
+        />
     </head>
     <body>
         <Header />
-        <main id="main-content">
-            <ContentListing 
+        <main id="main-content" class="mx-auto px-4 py-8 max-w-[1400px]">
+        
+        <!-- Hero Section -->
+        <section class="mx-auto max-w-4xl px-4 py-8 md:py-16 items-center text-center mb-20">
+            <div class="mx-auto mb-8 flex justify-center">
+                <svg
+                    class="w-36 h-36"
+                    width="160"
+                    height="160"
+                    viewBox="0 0 407 630"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    focusable="false"
+                    style="overflow:visible"
+                >
+                    <path d="M204.184 1C191.351 55.3333 158.784 174.7 131.184 217.5C96.6844 271 5.18436 313.5 2.68436 333C0.184358 352.5 1.68436 388 58.1844 425.5C114.684 463 105.185 500.5 113.185 536C121.185 571.5 125.185 608 172.185 609C219.185 610 286.685 616 286.685 591C286.685 566 267.185 556.5 235.685 551C204.184 545.5 192.685 533.5 192.685 493C192.685 452.5 192.685 423 190.185 406.5C187.685 390 189.185 320.5 202.185 299.5C215.185 278.5 297.685 158 324.185 131.5C350.685 105 397.685 28.5 405.185 12.5" stroke="black" stroke-width="12"/>
+                    <path  d="M58 309.625C80.3088 300.042 94.9033 287.75 110.54 267.125L112.811 276.5L120.317 267.125L125.946 274L134.703 270.875C130.533 280.25 114.062 300 81.5373 319M176.216 159C172.232 185.25 159.097 215.25 139.938 236.5V244.625L149.089 239L152.216 249L159.097 247.125C173.483 229.625 187.243 205.25 196 165.875" stroke="black" stroke-width="8"/>
+                </svg>
+            </div>
+            <h1 class="mb-6 font-bold text-gray-800 text-3xl md:text-5xl leading-tight">{title}</h1>
+            <p class="mb-8 mx-auto max-w-3xl text-gray-700 text-lg md:text-xl leading-relaxed">
+                {subtitle}
+            </p>
+            <div class="flex items-center justify-center gap-4">
+            <a
+                href="/survival-kit"
+                class="group inline-block flex items-center gap-2 hover:text-purple-50 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 text-base shadow-lg transition-colors"
+            >
+                View kit
+                <ArrowRight class="w-4 h-4 transform transition-transform duration-200 group-hover:translate-x-1" />
+            </a>
+            <a
+                href="#articles"
+                class="group inline-block flex items-center gap-2 border-2 border-gray-400 text-gray-800 font-semibold px-6 py-3 text-base bg-white hover:bg-gray-100 transition-colors"
+            >
+                View articles
+                <ArrowRight class="w-4 h-4 transform transition-transform duration-200 group-hover:translate-x-1" />
+            </a>
+            </div>
+        
+        </section>
+        
+        <!-- Articles Section -->
+            <div id="articles"></div>
+            <ContentListing
                 posts={allPosts}
-                title="🦿 Understanding Achilles Tendon Rupture Recovery"
+                title=""
+                subtitle=""
+                showSurvivalKitCallout={false}
             />
         </main>
         <Footer />

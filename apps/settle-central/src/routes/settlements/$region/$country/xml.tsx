@@ -35,7 +35,7 @@ const AmazonSettlementReport = () => {
 import { ReportSearch } from "@/components/AmazonReportById";
 
 export const Route = createFileRoute(
-  "/finances/amazon/settlements/$countryCode/$reportType copy/xml",
+  "/settlements/$region/$country/xml",
 )({
   component: AmazonSettlementReport,
   validateSearch: (search: Record<string, unknown>): ReportSearch => {

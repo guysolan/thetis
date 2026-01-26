@@ -1,11 +1,11 @@
 ---
-title: 'How Achilles rupture recovery has changed for the better'
-description: 'An overview of how treatment approaches for Achilles tendon ruptures have evolved over time, focusing on modern evidence-based recovery methods.'
-pubDate: '21 Jan 2025'
-updatedDate: '21 Jan 2025'
-status: 'draft'
-tags: ['treatment', 'recovery', 'science']
+title: "How Achilles Rupture Treatment Has Changed for the Better"
+description: "Evolution of Achilles tendon rupture treatment methods and improved outcomes"
+type: "article"
+tags: ["treatment", "science"]
+audience: ["patient", "clinician"]
 heroImage: '/images/trends.jpeg'
+status: "draft"
 ---
 
 History of Achilles tendon rupture (link to paper)

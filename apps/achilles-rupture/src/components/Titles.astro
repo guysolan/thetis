@@ -1,0 +1,19 @@
+---
+export interface Props {
+    title: string;
+    subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+
+<div class="flex flex-col gap-4 items-center justify-center my-6 md:my-24">
+<h1 class="font-bold text-gray-800 text-3xl md:text-5xl mx-auto leading-tight text-center">
+    {title}
+</h1>
+<p
+    class="mb-8 mx-auto max-w-3xl text-gray-700 text-md md:text-lg leading-relaxed text-center"
+>
+    {subtitle}
+</p>
+</div>

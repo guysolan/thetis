@@ -1,0 +1,23 @@
+---
+import Layout from "../../layouts/ArticleLayout.astro";
+import MasterOpOrNotComponent from "../../components/research/op-or-not/MasterOpOrNotComponent.astro";
+
+// SEO metadata
+const title =
+  "Global Approaches to Surgical Treatment of Achilles Tendon Ruptures";
+const description =
+  "A comprehensive analysis of international surgical trends for Achilles tendon rupture management, revealing significant variations in treatment preferences across countries.";
+const createdAt = new Date("2025-05-25");
+const tags = ["science", "guides"] as ("science" | "guides")[];
+---
+
+<Layout
+  title={title}
+  description={description}
+  createdAt={createdAt}
+  tags={tags}
+>
+  <main class="mx-auto px-4 py-8 container">
+    <MasterOpOrNotComponent />
+  </main></Layout
+>

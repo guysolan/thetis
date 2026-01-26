@@ -1,17 +1,24 @@
 import { Button } from "@thetis/ui/button";
 import * as changeCase from "change-case";
-import DocumentOptionsPopover from "./DocumentOptionsPopover";
+import DocumentOptionsSheet from "./DocumentOptionsPopover";
 import { documentOptions } from "../schema";
 import dayjs from "dayjs";
 
 const DocumentControls = ({
   documentType,
   orderNumber,
-}: { documentType?: keyof typeof documentOptions; orderNumber?: string }) => {
+  currency,
+}: {
+  documentType?: keyof typeof documentOptions;
+  orderNumber?: string;
+  currency?: string;
+}) => {
   const handlePrint = () => {
     const originalTitle = document.title;
     document.title = documentType
-      ? `${changeCase.snakeCase(documentType)}_${orderNumber}_${dayjs().format("YYYY-MM-DD")}`
+      ? `${changeCase.snakeCase(documentType)}_${orderNumber}_${
+        dayjs().format("YYYY-MM-DD")
+      }`
       : `document_${dayjs().format("YYYY-MM-DD")}`;
 
     window.print();
@@ -22,9 +29,12 @@ const DocumentControls = ({
 
   return (
     <>
-      <div className="top-4 right-4 fixed flex items-center gap-2 print:hidden">
+      <div className="print:hidden top-4 right-4 z-10 fixed flex items-center gap-2">
         {documentType && documentType !== "shippingLabel" && (
-          <DocumentOptionsPopover documentType={documentType} />
+          <DocumentOptionsSheet
+            documentType={documentType}
+            currency={currency}
+          />
         )}
         <Button onClick={handlePrint}>Print</Button>
       </div>
@@ -38,6 +48,11 @@ const DocumentControls = ({
             body {
               -webkit-print-color-adjust: exact !important;
               print-color-adjust: exact !important;
+              color: black !important;
+            }
+            * {
+              color: black !important;
+              text-color: black !important;
             }
           }
         `}

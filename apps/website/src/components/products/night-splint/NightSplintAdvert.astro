@@ -1,33 +1,101 @@
 ---
-import HighlightedWord from '../../HighlightedWord';
-import { Image } from 'astro:assets';
+import HighlightedWord from "../../HighlightedWord";
+import { Image } from "astro:assets";
 import nightSplint from "@/components/products/images/night-splint/night_splint_bed_top_square.jpg";
+import PriceDisplay from "@/components/PriceDisplay";
+import type { Lang } from "../../../config/languages";
+import { getRouteBySlugAndLanguage } from "../../../content/routes";
 
+interface Props {
+    lang: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+
+// Get the splint route for the current language
+const splintRoute = getRouteBySlugAndLanguage("splint", lang);
+
+const content = {
+    en: {
+        title: "Torn Achilles? Sleep Soundly with the Splint.",
+        highlightedWord: "Sleep Soundly",
+        description:
+            "The Splint is designed for comfort and to protect your healing Achilles.",
+        buttonText: "Buy Now",
+    },
+    es: {
+        title: "¿Aquiles roto? Duerme tranquilo con la Férula.",
+        highlightedWord: "Duerme tranquilo",
+        description:
+            "La Férula está diseñada para la comodidad y proteger tu Aquiles en curación.",
+        buttonText: "Comprar Ahora",
+    },
+    fr: {
+        title: "Achille déchiré ? Dormez paisiblement avec l'Attelle.",
+        highlightedWord: "Dormez paisiblement",
+        description:
+            "L'Attelle est conçue pour le confort et protéger votre Achille en guérison.",
+        buttonText: "Acheter Maintenant",
+    },
+    de: {
+        title: "Achillessehne gerissen? Schlafen Sie ruhig mit der Schiene.",
+        highlightedWord: "Schlafen Sie ruhig",
+        description:
+            "Die Schiene ist für Komfort und zum Schutz Ihrer heilenden Achillessehne konzipiert.",
+        buttonText: "Jetzt Kaufen",
+    },
+    it: {
+        title: "Achille rotto? Dormi tranquillamente con la Férula.",
+        highlightedWord: "Dormi tranquillamente",
+        description:
+            "La Férula è progettata per il comfort e proteggere il tuo Achille in guarigione.",
+        buttonText: "Compra Ora",
+    },
+};
+
+const currentContent = content[lang];
+const buttonUrl = splintRoute?.href || "/achilles-rupture-splint";
+const buttonText = currentContent.buttonText;
 ---
 
-<div class="flex md:flex-row flex-col gap-8 bg-primary/10 mx-auto my-8 mt-24 px-8 py-8 rounded-md max-w-4xl text-center">
-  
-   <Image
-            height={500}
-            width={500}
-            class="relative shadow-lg group-hover:shadow-xl rounded-lg w-full max-w-[350px] h-full max-h-[100vw] object-cover group-hover:scale-[102%] transition-all duration-300 30vw, 400px)]"
-            src={nightSplint}
-            alt="Night Splint Render"
-        />
-  <div class="space-y-4 md:space-y-8 w-full text-left">
-    <h2 class="mx-w-4xl font-semibold text-gray-900 text-2xl md:text-3xl leading-[120%]">
-        Torn Achilles? <HighlightedWord>Sleep Soundly</HighlightedWord> with the Night Splint.
-    </h2>
-    <p class="mx-auto max-w-3xl text-gray-700 text-lg">
-        The Night Splint is designed for comfort and to protect your healing Achilles.
-    </p>
-            <a
-                href="/buy-now"
-                class="inline-block bg-primary px-4 py-2 rounded font-semibold text-white"
-            >
-                Buy Now
-            </a>
-        </div>
-       
-       
+<div
+    class="flex md:flex-row flex-col gap-8 bg-primary/10 mx-auto my-8 mt-24 px-8 py-8 rounded-md max-w-4xl text-center"
+>
+    <Image
+        height={500}
+        width={500}
+        class="relative shadow-lg group-hover:shadow-xl rounded-lg w-full max-w-[350px] h-full max-h-[100vw] object-cover group-hover:scale-[102%] transition-all duration-300 30vw, 400px)]"
+        src={nightSplint}
+        alt="Splint Render"
+    />
+    <div class="space-y-4 md:space-y-8 w-full text-left">
+        <h2
+            class="mx-w-4xl font-semibold text-gray-900 text-2xl md:text-3xl leading-[120%]"
+        >
+            {
+                currentContent.title
+                    .split(currentContent.highlightedWord)
+                    .map((part, index, array) => (
+                        <>
+                            {part}
+                            {index < array.length - 1 && (
+                                <HighlightedWord>
+                                    {currentContent.highlightedWord}
+                                </HighlightedWord>
+                            )}
+                        </>
+                    ))
+            }
+        </h2>
+        <p class="mx-auto max-w-3xl text-gray-700 text-lg">
+            {currentContent.description}
+        </p>
+        <PriceDisplay size="md" client:load />
+        <a
+            href={buttonUrl}
+            class="inline-block bg-primary px-4 py-2 rounded font-semibold text-white"
+        >
+            {buttonText}
+        </a>
+    </div>
 </div>

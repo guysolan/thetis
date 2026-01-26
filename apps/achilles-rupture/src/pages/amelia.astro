@@ -1,0 +1,84 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ContentListing from "../components/ContentListing.astro";
+import EquipmentBanner from "../components/EquipmentBanner.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
+
+const articles = await getCollection("article");
+
+const allPosts = articles
+    .filter((a) => a.data.status === "published")
+    .map((a) => ({
+        ...a,
+        type: "article",
+    }))
+    .sort((a, b) => {
+        const aTime = a.data.publishedAt ? new Date(a.data.publishedAt).getTime() : 0;
+        const bTime = b.data.publishedAt ? new Date(b.data.publishedAt).getTime() : 0;
+        return bTime - aTime;
+    });
+
+const title = "Understanding Achilles Tendon Rupture Recovery";
+const subtitle = "Achilles tendon recovery is 100 times easier with the right guidance. This site supports you with clear, practical advice for every stage of your journey, from recovery tips and staying comfortable to the latest science, equipment and treatment options, so you can heal with confidence and get back to what you love.";
+const showSurvivalKitCallout = true;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`${SITE_TITLE} - Recovery Guide & Resources`}
+            description={SITE_DESCRIPTION}
+        />
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:title"
+            content={`${SITE_TITLE} - Recovery Guide & Resources`}
+        />
+        <meta property="og:description" content={SITE_DESCRIPTION} />
+        <link
+            rel="canonical"
+            href={new URL(Astro.url.pathname, Astro.site).toString()}
+        />
+    </head>
+    <body>
+        <Header />
+        <h1 class="mb-3 font-bold text-gray-800 text-5xl text-center mt-40">{title}</h1>
+        {subtitle && (
+            <p class="mb-10 mx-auto w-[93%] text-center text-gray-700 text-lg italic mt-4">
+                {subtitle}
+            </p>
+        )}
+    
+        {showSurvivalKitCallout && (
+            <section class="mb-8 mt-16 mx-auto w-fit border-purple-200 px-24 border-2 bg-purple-50 rounded-[12px] p-4 text-center">
+                <div class="mb-2 font-semibold text-purple-900">Achilles Rupture Survival Kit</div>
+                <p class="mb-3 mx-auto text-purple-900/90 text-sm ">
+                    A practical, clinician‑reviewed list of helpful equipment to make daily life and rehab easier.
+                </p>
+                
+                <a
+                    href="/survival-kit"
+                    class="inline-flex items-center bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-md font-semibold text-white text-sm transition-colors"
+                >
+                    View the kit
+                    <span class="ml-1">→</span>
+                </a>
+            </section>
+        )}
+    
+        <br class="h-24"></br>
+        <main id="main-content" class="mx-auto px-4 py-8 max-w-[1400px]">
+            <ContentListing
+                posts={allPosts}
+                title="Understanding Achilles Tendon Rupture Recovery"
+                subtitle="Achilles tendon recovery is 100 times easier with the right guidance. This site supports you with clear, practical advice for every stage of your journey, from recovery tips and staying comfortable to the latest science, equipment and treatment options, so you can heal with confidence and get back to what you love."
+                showSurvivalKitCallout={true}
+            />
+        </main>
+        <Footer />
+    </body>
+</html>

@@ -1,0 +1,206 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import HighlightedWord from "@/components/HighlightedWord";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { BookOpen, Check, Star, Video, Banknote, Gift } from "lucide-react";
+import CourseBuyButton from "@/components/CourseBuyButton";
+import {
+    fetchCoursePrice,
+    SHOPIFY_COURSE_PRODUCTS,
+} from "@/lib/shopify-course-price";
+
+const PRODUCT_ID = SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE;
+
+const priceData = await fetchCoursePrice(PRODUCT_ID, "GB");
+const fullPrice = priceData?.amount ? parseFloat(priceData.amount) : 29.99;
+const currencyCode = priceData?.currencyCode || "GBP";
+const discountedPrice = fullPrice * 0.8;
+
+const formatter = new Intl.NumberFormat(
+    currencyCode === "GBP" ? "en-GB" : "en-US",
+    {
+        style: "currency",
+        currency: currencyCode,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    },
+);
+
+const fullFormatted = formatter.format(fullPrice);
+const discountedFormatted = formatter.format(discountedPrice);
+const discountCode = "SPLINT20";
+---
+
+<Layout
+    title="Special Offer for Splint Customers | Thetis Medical"
+    description="Exclusive 20% off the Achilles Recovery Course. Use code SPLINT20 at checkout. Splint customer offer."
+    image="https://thetismedical.com/images/night-splint.png"
+    lang="en"
+>
+    <main>
+        <ColorGradient>
+            <div class="mx-auto px-4 py-16 md:py-24 max-w-4xl text-center">
+                <div
+                    class="inline-flex items-center gap-2 bg-primary/10 dark:bg-primary/20 mb-4 px-4 py-2 rounded-full font-semibold text-primary text-sm"
+                >
+                    <Gift className="w-4 h-4" />
+                    Exclusive Offer for Splint Customers
+                </div>
+                <h1
+                    class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-4xl md:text-5xl"
+                >
+                    Thank You for Your <HighlightedWord
+                        >Purchase</HighlightedWord
+                    >
+                </h1>
+                <p
+                    class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg md:text-xl"
+                >
+                    As a thank you, enjoy <strong>20% off</strong> our Achilles Recovery
+                    Course. Use code{" "}
+                    <span
+                        class="bg-primary/10 dark:bg-primary/20 px-2 py-1 rounded font-mono font-bold text-primary"
+                    >
+                        {discountCode}
+                    </span>{" "}
+                    at checkout.
+                </p>
+            </div>
+        </ColorGradient>
+
+        <!-- Course offer -->
+        <section class="py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-2xl">
+                <div
+                    class="bg-white dark:bg-neutral-800 shadow-lg p-8 border-2 border-primary/30 dark:border-primary/50 rounded-xl"
+                >
+                    <div class="flex items-center gap-3 mb-4">
+                        <BookOpen className="w-6 h-6 text-primary" />
+                        <h2
+                            class="font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
+                        >
+                            Achilles Recovery Course
+                        </h2>
+                    </div>
+                    <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+                        31 expert lessons, week-by-week guidance, and
+                        surgeon-reviewed content to support your recovery.
+                    </p>
+
+                    <div class="flex flex-wrap items-baseline gap-2 mb-6">
+                        <span
+                            class="text-neutral-400 dark:text-neutral-500 text-lg line-through"
+                        >
+                            {fullFormatted}
+                        </span>
+                        <span
+                            class="font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
+                        >
+                            {discountedFormatted}
+                        </span>
+                        <span class="font-semibold text-primary text-sm">
+                            (20% off with {discountCode})
+                        </span>
+                    </div>
+
+                    <ul
+                        class="space-y-2 mb-6 text-neutral-600 dark:text-neutral-400 text-sm"
+                    >
+                        <li class="flex items-center gap-2">
+                            <Check className="w-4 h-4 text-primary shrink-0" />
+                            31 structured lessons
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <Check className="w-4 h-4 text-primary shrink-0" />
+                            Questions for your surgeon
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <Check className="w-4 h-4 text-primary shrink-0" />
+                            Physio exercises with illustrations
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <Check className="w-4 h-4 text-primary shrink-0" />
+                            Week-by-week recovery timeline
+                        </li>
+                    </ul>
+
+                    <CourseBuyButton
+                        productId={PRODUCT_ID}
+                        variant="default"
+                        size="lg"
+                        className="justify-center gap-2 w-full"
+                        client:load
+                    >
+                        Add to Cart
+                    </CourseBuyButton>
+                    <p
+                        class="mt-3 text-neutral-500 dark:text-neutral-400 text-sm text-center"
+                    >
+                        Use code <strong>{discountCode}</strong> at checkout for
+                        20% off
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Earn cashback: leave review -->
+        <section class="bg-neutral-50 dark:bg-neutral-900 py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-2xl text-center">
+                <div class="flex justify-center items-center gap-2 mb-4">
+                    <Video className="w-5 h-5 text-primary" />
+                    <h3
+                        class="font-bold text-neutral-900 dark:text-neutral-100 text-xl"
+                    >
+                        Earn £10 / $15 Cashback for a Video Review
+                    </h3>
+                </div>
+                <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+                    Share your experience with a short video review. If
+                    approved, you'll receive cashback via PayPal or bank
+                    transfer.
+                </p>
+                <div
+                    class="flex sm:flex-row flex-col justify-center items-center gap-3"
+                >
+                    <a
+                        href="/leave-review"
+                        class={cn(
+                            buttonVariants({ variant: "default", size: "lg" }),
+                            "gap-2 w-full sm:w-auto",
+                        )}
+                    >
+                        <Star className="w-4 h-4" />
+                        Leave a Review
+                    </a>
+                    <a
+                        href="/splint-customer/claim-cashback"
+                        class={cn(
+                            buttonVariants({ variant: "outline", size: "lg" }),
+                            "gap-2 w-full sm:w-auto",
+                        )}
+                    >
+                        <Banknote className="w-4 h-4" />
+                        Claim Cashback
+                    </a>
+                </div>
+                <p class="mt-4 text-neutral-500 dark:text-neutral-400 text-sm">
+                    Already approved?
+                    <a
+                        href="/splint-customer/claim-cashback"
+                        class="ml-1 font-medium text-primary hover:underline"
+                    >
+                        Claim your cashback
+                    </a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script define:vars={{ discountCode }}>
+        if (typeof window !== "undefined") {
+            sessionStorage.setItem("splintDiscountCode", discountCode);
+        }
+    </script>
+</Layout>

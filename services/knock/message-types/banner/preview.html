@@ -1,0 +1,88 @@
+<style>
+  .banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFF;
+    padding: 16px 24px;
+    border-radius: 8px;
+    border: 0.5px solid #E0E1E6;
+    box-shadow: 0px 12px 20px rgba(28, 32, 36, 0.1);
+    gap: 16px;
+    min-width: 480px;
+  }
+  .banner__title {
+    color: #1C2024;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+  .banner__body {
+    color: #60646C;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+  .banner__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .banner__btn {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    border-radius: 6px;
+    padding: 8px 16px;
+    border: 0.5px solid #1C2024;
+    background: #1C2024;
+    color: #FCFCFD;
+  }
+  .banner__btn--secondary {
+    border-color: #D9D9E0;
+    background: #FFFFFF;
+    color: #1C2024;
+  }
+  .banner__close {
+    padding: 11px;
+    border: none;
+    background: none;
+    line-height: 0;
+  }
+</style>
+<div class="banner">
+  <div class="banner__message">
+    <div class="banner__title">
+      {{ title }}
+    </div>
+    <div class="banner__body">
+      {{ body }}
+    </div>
+  </div>
+  <div class="banner__actions">
+    {% if variant == "multi-action" %}
+      <button class="banner__btn banner__btn--secondary">
+        {{ secondary_button.text }}
+      </button>
+    {% endif %}
+
+    {% if variant == "single-action" or variant == "multi-action" %}
+      <button class="banner__btn">
+        {{ primary_button.text }}
+      </button>
+    {% endif %}
+
+    {% if dismissible %}
+      <button class="banner__close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none">
+          <g fill="#60646C" fill-rule="evenodd" clip-rule="evenodd">
+            <path d="M14.03 3.97a.75.75 0 0 1 0 1.06l-9 9a.75.75 0 0 1-1.06-1.06l9-9a.75.75 0 0 1 1.06 0Z"/>
+            <path d="M3.97 3.97a.75.75 0 0 1 1.06 0l9 9a.75.75 0 1 1-1.06 1.06l-9-9a.75.75 0 0 1 0-1.06Z"/>
+          </g>
+        </svg>
+      </button>
+    {% endif %}
+  </div>
+</div>

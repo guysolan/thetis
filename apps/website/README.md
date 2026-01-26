@@ -1,54 +1,50 @@
-# Astro Starter Kit: Basics
+# Thetis Medical Website
 
-```bash
-npm create astro@latest -- --template basics
-```
+## Project Structure & Prompting Guide
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+This project uses a component-based architecture that follows the DRY (Don't Repeat Yourself) principle. Understanding the folder structure and conventions will help you write effective prompts for code generation, refactoring, or documentation.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Folder Hierarchy
 
-![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
+The main folders are:
 
-## 🚀 Project Structure
+- `components`: Reusable UI elements (e.g., buttons, cards)
+- `sections`: Groups of components forming logical page sections
+- `mains`: Page-level containers that assemble sections and handle logic (usually take a `lang` prop for internationalization)
+- `pages`: Astro page files that render mains and handle routing
 
-Inside of your Astro project, you'll see the following folders and files:
+**Hierarchy:**
 
-...
-/
-├── public/
-│ └── favicon.svg
-├── src/
-│ ├── components/
-│ │ └── Card.astro
-│ ├── layouts/
-│ │ └── Layout.astro
-│ └── pages/
-│ └── index.astro
-└── package.json
-...
+- Components → used in Sections
+- Sections → used in Mains
+- Mains → used in Pages
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### Internationalization (i18n)
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- Each `main` typically receives a `lang` prop (e.g., `"en"`, `"es"`, `"de"`, `"fr"`, `"it"`).
+- This ensures consistent language handling across all pages.
+- For each language, there is a corresponding page:
+  - `pages/slug.astro` (English)
+  - `pages/es/slug-in-spanish.astro`
+  - `pages/de/slug-in-germany.astro`
+  - `pages/fr/slug-in-french.astro`
+  - `pages/it/slug-in-italian.astro`
 
-Any static assets, like images, can be placed in the `public/` directory.
+### Routing
 
-## 🧞 Commands
+- Navigation and route mapping are managed in `routes.tsx`.
+- This file is used to generate navigation elements (e.g., nav, footer) and to map over available routes.
 
-All commands are run from the root of the project, from a terminal:
+---
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `npm install`          | Installs dependencies                            |
-| `npm run dev`          | Starts local dev server at `localhost:3000`      |
-| `npm run build`        | Build your production site to `./dist/`          |
-| `npm run preview`      | Preview your build locally, before deploying     |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro --help` | Get help using the Astro CLI                     |
+## How to Use This Structure in Prompts
 
-## 👀 Want to learn more?
+- **When asking for a new feature or refactor:** Specify which folder(s) the change should affect (e.g., "Add a new section in `sections/` and use it in a main in `mains/`").
+- **For i18n support:** Indicate if the change should be language-aware and how the `lang` prop should be handled.
+- **For navigation or routing changes:** Reference `routes.tsx` and describe how routes should be updated or generated.
+- **For DRY and reusability:** Ask for logic or UI to be placed in `components/` or `sections/` as appropriate.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+**Example Prompt:**
+> "Create a new FAQ section in `sections/`, use it in a main in `mains/`, and ensure it supports all languages via the `lang` prop. Update navigation in `routes.tsx` to include the new page."
+
+Use this structure and these conventions to make your prompts clear and actionable for code generation or documentation tasks.

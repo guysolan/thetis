@@ -1,0 +1,88 @@
+---
+import Layout from "./Layout.astro";
+import dayjs from "dayjs";
+import type { Lang } from "../config/languages";
+
+type Props = {
+    title: string;
+    description: string;
+    createdAt: Date;
+    updatedAt?: Date;
+    heroImage?: string;
+    lang?: Lang;
+};
+
+const {
+    title,
+    description,
+    createdAt,
+    updatedAt,
+    heroImage,
+    lang = "en",
+} = Astro.props;
+
+const content = {
+    en: {
+        lastUpdated: "Last updated on",
+    },
+    de: {
+        lastUpdated: "Zuletzt aktualisiert am",
+    },
+    fr: {
+        lastUpdated: "Dernière mise à jour le",
+    },
+    es: {
+        lastUpdated: "Última actualización el",
+    },
+    it: {
+        lastUpdated: "Ultimo aggiornamento il",
+    },
+};
+
+const t = content[lang];
+---
+
+<Layout title={title} description={description} lang={lang}>
+    <main class="m-0 mx-auto w-full max-w-screen-xl">
+        {
+            (
+                <article class="prose-img:shadow-xl prose-img:border prose-img:border-gray-200/20 prose-img:rounded-xl prose-img:w-full prose-img:object-cover prose-img:aspect-square">
+                    <div class="mx-auto px-0 sm:px-4 w-full max-w-[1020px]">
+                        {heroImage && (
+                            <img
+                                width={1020}
+                                height={510}
+                                src={heroImage}
+                                alt=""
+                                class="shadow-xl my-4 sm:my-8 border border-gray-200/20 rounded-xl w-full object-cover aspect-[2/1]"
+                            />
+                        )}
+                    </div>
+                    <div class="mx-auto mt-4 sm:mt-8 sm:p-4 px-2 md:px-0 w-full text-gray-800">
+                        <div class="mb-4 py-2 sm:py-4 text-center">
+                            <div class="mb-2 pt-4 text-gray-600">
+                                {dayjs(createdAt).format("MMMM D, YYYY")}
+                                {updatedAt && (
+                                    <div class="text-gray-500 text-sm italic">
+                                        {t.lastUpdated}{" "}
+                                        {dayjs(updatedAt).format(
+                                            "MMMM D, YYYY",
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                            <h1 class="mb-2 sm:mb-4 font-bold text-gray-900 text-2xl sm:text-3xl leading-tight">
+                                {title}
+                            </h1>
+                            <p class="mx-auto max-w-4xl text-gray-600 text-base md:text-lg">
+                                {description}
+                            </p>
+                            <hr class="mx-auto mt-4 sm:mt-8 border-gray-200 w-2/3" />
+                        </div>
+                        <slot />
+                    </div>
+                </article>
+            )
+        }
+    </main>
+</Layout>

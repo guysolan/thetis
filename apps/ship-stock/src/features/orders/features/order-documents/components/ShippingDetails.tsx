@@ -14,7 +14,19 @@ interface ShippingDetails {
   unitOfMeasurement: string;
   shipmentNumber: string;
   airwaybill: string;
+  referenceNumber: string;
 }
+
+type ShippingDetailsOptions = {
+  show: boolean;
+  reasonForExport: boolean;
+  modeOfTransport: boolean;
+  incoterms: boolean;
+  unitOfMeasurement: boolean;
+  shipmentNumber: boolean;
+  airwaybill: boolean;
+  referenceNumber: boolean;
+};
 
 interface ShippingDetailItemProps {
   icon: React.ReactNode;
@@ -38,57 +50,92 @@ const ShippingDetailItem: React.FC<ShippingDetailItemProps> = ({
   </div>
 );
 
-const ShippingDetails: React.FC<ShippingDetails> = ({
+const ShippingDetails: React.FC<
+  ShippingDetails & { options?: ShippingDetailsOptions }
+> = ({
   reasonForExport,
   modeOfTransport,
   incoterms,
   unitOfMeasurement,
   shipmentNumber,
   airwaybill,
-}) => (
-  <div className="mt-6 p-4">
-    <h3 className="mb-4 font-bold text-gray-900 text-lg">Shipping Details</h3>
+  referenceNumber,
+  options = {
+    show: true,
+    reasonForExport: true,
+    modeOfTransport: true,
+    incoterms: true,
+    unitOfMeasurement: true,
+    shipmentNumber: true,
+    airwaybill: true,
+    referenceNumber: true,
+  },
+}) => {
+  if (!options.show) {
+    return null;
+  }
+
+  return (
     <div className="gap-4 grid grid-cols-2">
       <div className="space-y-3">
-        <ShippingDetailItem
-          icon={<FileText size={20} />}
-          label="Reason for Export"
-          value={reasonForExport}
-        />
-        <ShippingDetailItem
-          size={20}
-          icon={<Truck />}
-          label="Mode of Transport"
-          value={modeOfTransport}
-        />
-        <ShippingDetailItem
-          icon={<Globe2 size={20} />}
-          label="Incoterms"
-          value={incoterms}
-          valueClassName="uppercase"
-        />
+        {options.reasonForExport && (
+          <ShippingDetailItem
+            icon={<FileText size={20} />}
+            label="Reason for Export"
+            value={reasonForExport}
+          />
+        )}
+        {options.modeOfTransport && (
+          <ShippingDetailItem
+            icon={<Truck size={20} />}
+            label="Mode of Transport"
+            value={modeOfTransport}
+          />
+        )}
+        {options.incoterms && (
+          <ShippingDetailItem
+            icon={<Globe2 size={20} />}
+            label="Incoterms"
+            value={incoterms}
+            valueClassName="uppercase"
+          />
+        )}
+        {options.unitOfMeasurement && (
+          <ShippingDetailItem
+            icon={<Scale size={20} />}
+            label="Unit of Measurement"
+            value={unitOfMeasurement}
+          />
+        )}
       </div>
       <div className="space-y-3">
-        <ShippingDetailItem
-          icon={<Scale size={20} />}
-          label="Unit of Measurement"
-          value={unitOfMeasurement}
-        />
-        <ShippingDetailItem
-          icon={<Hash size={20} />}
-          label="Shipment Number"
-          value={shipmentNumber}
-          valueClassName=""
-        />
-        <ShippingDetailItem
-          icon={<PlaneTakeoff size={20} />}
-          label="Airway Bill"
-          value={airwaybill}
-          valueClassName=""
-        />
+        {options.shipmentNumber && (
+          <ShippingDetailItem
+            icon={<Hash size={20} />}
+            label="Shipment Number"
+            value={shipmentNumber}
+            valueClassName=""
+          />
+        )}
+        {options.airwaybill && (
+          <ShippingDetailItem
+            icon={<PlaneTakeoff size={20} />}
+            label="Airway Bill"
+            value={airwaybill}
+            valueClassName=""
+          />
+        )}
+        {options.referenceNumber && (
+          <ShippingDetailItem
+            icon={<Hash size={20} />}
+            label="Reference Number"
+            value={referenceNumber}
+            valueClassName=""
+          />
+        )}
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default ShippingDetails;

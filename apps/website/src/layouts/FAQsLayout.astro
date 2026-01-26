@@ -1,40 +1,54 @@
 ---
+import type { Lang } from "@/config/languages";
+
 export interface Props {
-    title: string
-    description: string
+    title: string;
+    description: string;
+    lang: Lang;
+    alternateLanguages?: Array<{
+        lang: string;
+        url: string;
+    }>;
 }
 
-const { title, description } = Astro.props
+const {
+    title,
+    description,
+    lang = "en",
+    alternateLanguages = [],
+} = Astro.props;
 
-import Layout from './Layout.astro'
-import OtherArticles from '@/components/OtherArticles.astro'
-import Subscribe from '@/components/Subscribe.astro'
-import Article from '@/components/blog/Article.astro'
-import NightSplintAdvert from '@/components/products/night-splint/NightSplintAdvert.astro'
-import ShareControls from '@/components/blog/ShareControls.tsx'
+import Layout from "./Layout.astro";
+import OtherArticles from "@/components/OtherArticles.astro";
+import Article from "@/components/research/Article.astro";
+import ShareControls from "@/components/research/ShareControls";
+import CourseCTA from "@/components/CTA/CourseCTA.astro";
+import NightSplintAdvert from "../components/products/night-splint/NightSplintAdvert.astro";
 ---
 
 <Layout
     title={title}
     description={description}
     image="https://thetismedical.com/images/achilles-drawing-image.png"
+    lang={lang}
+    alternateLanguages={alternateLanguages}
 >
     <main class="relative flex flex-col gap-4 print:w-full print:max-w-none">
         <Article title={title} />
         <slot />
-        <OtherArticles />
+        <OtherArticles lang={lang} />
         <ShareControls client:load />
     </main>
 </Layout>
 
 <style>
-html {
-    scroll-behavior: smooth;
-}
-
-@media print {
     html {
-        scroll-behavior: auto;
+        scroll-behavior: smooth;
     }
-}
+
+    @media print {
+        html {
+            scroll-behavior: auto;
+        }
+    }
 </style>

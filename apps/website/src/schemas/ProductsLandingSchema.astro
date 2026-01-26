@@ -1,0 +1,77 @@
+---
+import { Schema } from "astro-seo-schema";
+---
+
+<Schema
+    item={{
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Product",
+                name: "Achilles Rupture Recovery Products",
+                image: [
+                    "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
+                ],
+                description:
+                    "Complete Achilles rupture recovery solution. Better than VACOped and generic boots. Everything you need for safe, comfortable healing.",
+                sku: "7B-QYCY-8JID",
+                gtin13: "5065005394047",
+                brand: {
+                    "@type": "Brand",
+                    name: "Thetis Medical",
+                },
+                aggregateRating: {
+                    "@type": "AggregateRating",
+                    reviewCount: "170",
+                    ratingValue: "4.6",
+                },
+            },
+            {
+                "@type": "FAQPage",
+                mainEntity: [
+                    {
+                        "@type": "Question",
+                        name: "What products do I need for Achilles rupture recovery?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "The essential product is the Thetis night splint for safe overnight protection. Additionally, you may benefit from a walking boot for daytime, elevation wedges, and hygiene products. The Thetis splint is superior to VACOped and generic alternatives.",
+                        },
+                    },
+                    {
+                        "@type": "Question",
+                        name: "Is the Thetis splint better than VACOped?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "The Thetis night splint is specifically designed for overnight comfort and sleep, making it ideal for nighttime use. VACOped is a walking boot for daytime. Many patients use both - VACOped during the day and Thetis splint for comfortable sleep at night.",
+                        },
+                    },
+                    {
+                        "@type": "Question",
+                        name: "What makes Thetis Medical products different?",
+                        acceptedAnswer: {
+                            "@type": "Answer",
+                            text: "Thetis Medical products are designed specifically for Achilles rupture recovery, not generic foot injuries. Our night splint is the only one patented for this purpose, with surgeon endorsements and over 3,000 patients treated safely.",
+                        },
+                    },
+                ],
+            },
+            {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                    {
+                        "@type": "ListItem",
+                        position: 1,
+                        name: "Home",
+                        item: "https://thetismedical.com",
+                    },
+                    {
+                        "@type": "ListItem",
+                        position: 2,
+                        name: "Products for Torn Achilles",
+                        item: "https://thetismedical.com/products-for-torn-achilles",
+                    },
+                ],
+            },
+        ],
+    }}
+/>

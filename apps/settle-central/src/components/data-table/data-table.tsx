@@ -345,7 +345,7 @@ export function DataTable<TData, TValue>({
                 <DialogTitle>Export Selected Data</DialogTitle>
               </DialogHeader>
               <div className="space-y-4 py-4">
-                <div className="flex items-center space-x-4 hover:bg-accent p-4 border rounded-lg cursor-pointer">
+                <div className="flex items-center space-x-4 hover:bg-accent p-4 border rounded-sm cursor-pointer">
                   <div className="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
                     <FileText className="w-5 h-5 text-primary" />
                   </div>
@@ -367,7 +367,7 @@ export function DataTable<TData, TValue>({
                   </DialogTrigger>
                 </div>
 
-                <div className="flex items-center space-x-4 hover:bg-accent p-4 border rounded-lg cursor-pointer">
+                <div className="flex items-center space-x-4 hover:bg-accent p-4 border rounded-sm cursor-pointer">
                   <div className="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
                     <Table2 className="w-5 h-5 text-primary" />
                   </div>
@@ -389,7 +389,7 @@ export function DataTable<TData, TValue>({
                   </DialogTrigger>
                 </div>
 
-                <div className="flex items-center space-x-4 hover:bg-accent p-4 border rounded-lg cursor-pointer">
+                <div className="flex items-center space-x-4 hover:bg-accent p-4 border rounded-sm cursor-pointer">
                   <div className="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
                     <FileText className="w-5 h-5 text-primary" />
                   </div>
@@ -415,7 +415,7 @@ export function DataTable<TData, TValue>({
           </Dialog>
         </div>
       </div>
-      <div className="border rounded-md">
+      <div className="border rounded-sm">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

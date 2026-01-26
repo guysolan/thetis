@@ -1,11 +1,11 @@
 ---
-title: Do you have to sleep in a boot with a ruptured Achilles?
-status: 'draft'
-description: 'Do you have to sleep in a boot with a ruptured Achilles?'
-pubDate: 'Jan 21 2025'
-type: 'article'
-tags: ['equipment','recovery','comfort']
-heroImage: '/images/medical-boot.jpeg'
+title: "Do You Have to Sleep in a Boot with a Ruptured Achilles?"
+status: "draft"
+description: "Understanding the importance of night-time protection during Achilles rupture recovery"
+type: "article"
+tags: ["recovery", "equipment"]
+audience: ["patient"]
+heroImage: '/images/night-splint.jpeg'
 ---
 
 - Importance of toe-down 24/7

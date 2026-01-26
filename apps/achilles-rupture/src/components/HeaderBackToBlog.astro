@@ -1,0 +1,47 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+import { Image } from "astro:assets";
+import AchillesRuptureWords from "../assets/branding/achilles-rupture-words.svg";
+---
+
+<header>
+	<nav class="flex flex-row justify-between items-center">
+		<a
+			href="/"
+			class="w-fit text-gray-700 hover:text-gray-900 hover:underline"
+		>
+			<Image
+				src={AchillesRuptureWords}
+				alt="Achilles Rupture"
+				width={180}
+			/>
+		</a>
+		<HeaderLink class="py-4 text-slate-700" href="/">
+			Back to Blog
+		</HeaderLink>
+	</nav>
+</header>
+<style>
+	header {
+		margin: 0;
+		padding: 0 1em;
+		background: white;
+		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+	}
+
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.nav-tabs a {
+		padding: 1em 0.5em;
+		color: var(--black);
+		border-bottom: 4px solid transparent;
+		text-decoration: none;
+	}
+	.nav-tabs a.active {
+		text-decoration: none;
+		border-bottom-color: var(--accent);
+	}
+</style>

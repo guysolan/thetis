@@ -1,0 +1,157 @@
+---
+import HighlightedParagraph from "@/components/HighlightedParagraph";
+import ColorGradient from "@/components/ColorGradient.astro";
+import type { Lang } from "../../config/languages";
+import { Waves, HelpCircle, CheckCircle, ArrowDown } from "lucide-react";
+
+interface Props {
+    lang: Lang;
+    content: {
+        title: any;
+        description: string;
+    };
+}
+
+const { lang = "en", content } = Astro.props;
+
+const heroContent = {
+    en: {
+        badge: "Common Recovery Question",
+        subtitle: "Good news: swimming can be one of the best exercises during Achilles recovery",
+        answer: "Yes, you can!",
+        answerDetail: "Swimming is actually ideal for Achilles recovery - your foot naturally stays in the safe position while you get a great workout",
+        benefits: [
+            "Zero impact on your healing tendon",
+            "Maintain cardiovascular fitness",
+            "Natural foot position while swimming"
+        ],
+        cta: "Learn when and how to swim safely",
+        stats: [
+            { number: "5,000+", label: "patients helped" },
+            { number: "0", label: "re-ruptures reported" }
+        ]
+    },
+    de: {
+        badge: "Häufige Genesungsfrage",
+        subtitle: "Gute Nachrichten: Schwimmen kann eine der besten Übungen während der Achillessehnen-Genesung sein",
+        answer: "Ja, Sie können!",
+        answerDetail: "Schwimmen ist tatsächlich ideal für die Achillessehnen-Genesung - Ihr Fuß bleibt natürlich in der sicheren Position",
+        benefits: [
+            "Null Aufprall auf Ihre heilende Sehne",
+            "Kardiovaskuläre Fitness erhalten",
+            "Natürliche Fußposition beim Schwimmen"
+        ],
+        cta: "Erfahren Sie, wann und wie Sie sicher schwimmen",
+        stats: [
+            { number: "5.000+", label: "Patienten geholfen" },
+            { number: "0", label: "Re-Rupturen gemeldet" }
+        ]
+    },
+    fr: {
+        badge: "Question courante de récupération",
+        subtitle: "Bonne nouvelle: la natation peut être l'un des meilleurs exercices pendant la récupération d'Achille",
+        answer: "Oui, vous pouvez!",
+        answerDetail: "La natation est en fait idéale pour la récupération d'Achille - votre pied reste naturellement dans la position sûre",
+        benefits: [
+            "Zéro impact sur votre tendon en guérison",
+            "Maintenir la forme cardiovasculaire",
+            "Position naturelle du pied en nageant"
+        ],
+        cta: "Apprenez quand et comment nager en sécurité",
+        stats: [
+            { number: "5 000+", label: "patients aidés" },
+            { number: "0", label: "re-ruptures signalées" }
+        ]
+    },
+    es: {
+        badge: "Pregunta común de recuperación",
+        subtitle: "Buenas noticias: nadar puede ser uno de los mejores ejercicios durante la recuperación del Aquiles",
+        answer: "¡Sí, puede!",
+        answerDetail: "Nadar es ideal para la recuperación del Aquiles - su pie permanece naturalmente en la posición segura",
+        benefits: [
+            "Cero impacto en su tendón en curación",
+            "Mantener la condición cardiovascular",
+            "Posición natural del pie al nadar"
+        ],
+        cta: "Aprenda cuándo y cómo nadar de forma segura",
+        stats: [
+            { number: "5.000+", label: "pacientes ayudados" },
+            { number: "0", label: "re-rupturas reportadas" }
+        ]
+    },
+    it: {
+        badge: "Domanda comune sul recupero",
+        subtitle: "Buone notizie: il nuoto può essere uno dei migliori esercizi durante il recupero dell'Achille",
+        answer: "Sì, puoi!",
+        answerDetail: "Il nuoto è in realtà ideale per il recupero dell'Achille - il tuo piede rimane naturalmente nella posizione sicura",
+        benefits: [
+            "Zero impatto sul tendine in guarigione",
+            "Mantenere la forma cardiovascolare",
+            "Posizione naturale del piede nuotando"
+        ],
+        cta: "Scopri quando e come nuotare in sicurezza",
+        stats: [
+            { number: "5.000+", label: "pazienti aiutati" },
+            { number: "0", label: "ri-rotture segnalate" }
+        ]
+    }
+};
+
+const currentHeroContent = heroContent[lang as keyof typeof heroContent] || heroContent.en;
+---
+
+<ColorGradient>
+    <div class="mx-auto px-4 py-12 md:py-16 max-w-5xl text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 bg-primary/10 mb-6 px-4 py-2 rounded-full">
+            <Waves className="w-4 h-4 text-primary" />
+            <span class="font-medium text-primary text-sm uppercase tracking-wider">{currentHeroContent.badge}</span>
+        </div>
+
+        <!-- Main Title (Question) -->
+        <h1 class="mb-6 font-bold text-gray-900 text-4xl md:text-5xl lg:text-6xl leading-tight">
+            <HighlightedParagraph paragraph={content.title} client:load />
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="mx-auto mb-8 max-w-2xl text-gray-600 text-lg md:text-xl">
+            {currentHeroContent.subtitle}
+        </p>
+
+        <!-- Answer Box -->
+        <div class="bg-green-50 mx-auto mb-8 p-6 border border-green-200 rounded-xl max-w-2xl">
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <CheckCircle className="w-6 h-6 text-green-600" />
+                <span class="font-bold text-green-800 text-2xl">{currentHeroContent.answer}</span>
+            </div>
+            <p class="text-green-700 mb-4">{currentHeroContent.answerDetail}</p>
+            <ul class="space-y-2 text-left">
+                {currentHeroContent.benefits.map((benefit) => (
+                    <li class="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <span class="text-green-700">{benefit}</span>
+                    </li>
+                ))}
+            </ul>
+        </div>
+
+        <!-- Stats -->
+        <div class="flex justify-center gap-8 mb-8">
+            {currentHeroContent.stats.map((stat) => (
+                <div class="text-center">
+                    <div class="font-bold text-primary text-2xl md:text-3xl">{stat.number}</div>
+                    <div class="text-gray-600 text-sm">{stat.label}</div>
+                </div>
+            ))}
+        </div>
+
+        <!-- CTA to scroll down -->
+        <a 
+            href="#education"
+            class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 px-6 py-3 rounded-lg font-semibold text-white transition-colors"
+        >
+            {currentHeroContent.cta}
+            <ArrowDown className="w-4 h-4" />
+        </a>
+    </div>
+</ColorGradient>

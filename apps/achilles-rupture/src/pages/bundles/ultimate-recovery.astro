@@ -1,0 +1,213 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { equipmentList, bundles } from "../../content/equipment/equipment";
+
+const bundle = bundles.find((b) => b.name === "Ultimate Recovery")!;
+const bundleItems = equipmentList.filter((item) =>
+    bundle.features.includes(item.name),
+);
+
+const totalPrice = bundle.priceRange;
+---
+
+<Layout title="Ultimate Recovery Bundle - Achilles Recovery Equipment">
+    <main class="mx-auto px-4 py-8 max-w-6xl container">
+        <!-- Breadcrumb -->
+        <nav class="mb-6 text-sm">
+            <a
+                href="/recovery-equipment-guide"
+                class="text-purple-600 hover:underline">Equipment Guide</a
+            >
+            <span class="mx-2">/</span>
+            <span class="text-gray-600">Ultimate Recovery Bundle</span>
+        </nav>
+
+        <div class="flex items-center gap-3 mb-8">
+            <h1 class="font-bold text-4xl">Ultimate Recovery Bundle</h1>
+            <span
+                class="inline-block bg-purple-600 px-3 py-1 rounded-full font-semibold text-white text-sm"
+            >
+                Most Popular
+            </span>
+        </div>
+
+        <div class="gap-8 grid lg:grid-cols-3">
+            <!-- Products List -->
+            <div class="space-y-6 lg:col-span-2">
+                {
+                    bundleItems.map((item) => (
+                        <div
+                            class={`bg-white p-6 rounded-lg shadow ${item.name.includes("Night Splint") ? "border-2 border-purple-200" : "border border-gray-200"}`}
+                        >
+                            <div class="flex gap-4">
+                                <img
+                                    src={item.imagePath}
+                                    alt={item.name}
+                                    class="w-24 h-24 object-contain"
+                                />
+
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xl">
+                                            {item.priority === "essential"
+                                                ? "🥇"
+                                                : item.priority ===
+                                                    "recommended"
+                                                  ? "🥈"
+                                                  : item.priority === "comfort"
+                                                    ? "🥉"
+                                                    : "⭐"}
+                                        </span>
+                                        <h3 class="font-semibold text-lg">
+                                            {item.name}
+                                        </h3>
+                                    </div>
+                                    <p class="mb-3 text-gray-600 text-sm">
+                                        {item.keyBenefit}
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold">
+                                            {item.priceRange}
+                                        </span>
+                                        <div class="flex gap-2">
+                                            {item.name ===
+                                                "Thetis Night Splint" && (
+                                                <a
+                                                    href="https://www.amazon.com/dp/B09N5KH4F3"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="bg-gray-600 hover:bg-gray-700 px-3 py-1 rounded text-white text-sm transition-colors"
+                                                >
+                                                    Amazon
+                                                </a>
+                                            )}
+                                            <a
+                                                href={item.actionUrl}
+                                                target={
+                                                    item.isExternal
+                                                        ? "_blank"
+                                                        : undefined
+                                                }
+                                                rel={
+                                                    item.isExternal
+                                                        ? "noopener noreferrer"
+                                                        : undefined
+                                                }
+                                                class="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded text-white text-sm transition-colors"
+                                            >
+                                                {item.actionText}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Bundle Summary -->
+            <div class="lg:col-span-1">
+                <div
+                    class="top-4 sticky bg-purple-50 p-6 border-2 border-purple-200 rounded-lg"
+                >
+                    <h2 class="mb-4 font-bold text-2xl">Bundle Summary</h2>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span>{bundle.features.length} Recovery Items</span>
+                            <span class="font-semibold">{totalPrice}</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-6 pt-4 border-purple-200 border-t">
+                        <h3 class="mb-3 font-semibold">What You Get:</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Everything from Comfort Plus Bundle</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span
+                                    >Choose between Ergonomic Crutches or Knee
+                                    Scooter</span
+                                >
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Cold therapy for swelling control</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Resistance bands for rehab (week 6+)</span
+                                >
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✓</span>
+                                <span>Hygiene and comfort accessories</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white mb-6 p-4 rounded-lg">
+                        <p class="text-purple-900 text-sm">
+                            <strong>Why most popular?</strong> This bundle provides
+                            everything you need for a complete recovery journey,
+                            from initial injury through rehabilitation. The combination
+                            of mobility options, cold therapy, and rehab tools ensures
+                            optimal healing.
+                        </p>
+                    </div>
+
+                    <blockquote
+                        class="mb-6 pl-4 border-purple-600 border-l-4 text-gray-700 text-sm italic"
+                    >
+                        "The Thetis Night Splint is magnificent thinking and a
+                        huge contribution to wellbeing when the little things
+                        seem to be non trivial any more" - Zahi
+                    </blockquote>
+
+                    <a
+                        href="/recovery-equipment-guide"
+                        class="text-purple-600 text-sm hover:underline"
+                    >
+                        ← Back to Equipment Guide
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Story -->
+        <div
+            class="bg-gradient-to-r from-purple-50 to-blue-50 mt-12 p-8 rounded-xl"
+        >
+            <h3 class="mb-4 font-bold text-2xl">
+                Why Patients Choose Ultimate Recovery
+            </h3>
+            <div class="gap-6 grid md:grid-cols-2">
+                <div>
+                    <h4 class="mb-2 font-semibold">
+                        Complete Recovery Journey
+                    </h4>
+                    <p class="mb-4 text-gray-700">
+                        From initial injury through rehabilitation, this bundle
+                        provides all the tools needed for optimal healing. The
+                        combination of mobility options, cold therapy, and rehab
+                        tools ensures a comprehensive recovery.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="mb-2 font-semibold">
+                        Maximum Comfort & Support
+                    </h4>
+                    <p class="mb-4 text-gray-700">
+                        With both mobility options (crutches or scooter), cold
+                        therapy for swelling, and proper elevation, you'll have
+                        the best possible support throughout your recovery
+                        journey.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>

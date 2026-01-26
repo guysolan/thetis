@@ -1,19 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { selectOrderByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderById";
-import CommercialInvoice from "../../../../features/orders/features/order-documents/documents/CommercialInvoice";
+import { selectOrderViewByIdQueryOptions } from "../../../../features/orders/features/order-history/api/selectOrderViewById";
+import Document from "../../../../features/orders/features/order-documents/documents/Document";
 import { commercialInvoiceSchema } from "../../../../features/documents/schema";
 import DocumentControls from "../../../../features/documents/components/DocumentControls";
+import { useDocumentOptions } from "../../../../features/documents/hooks/useDocumentOptions";
 
 const OrdersPage = () => {
   const { order } = Route.useLoaderData();
-  const search = Route.useSearch();
+  const documentOptions = useDocumentOptions("commercialInvoice");
+
   return (
     <>
       <DocumentControls
         orderNumber={order.order_id}
         documentType="commercialInvoice"
       />
-      <CommercialInvoice order={order} options={search} />
+      <Document
+        order={order}
+        options={documentOptions}
+        title="Commercial Invoice"
+        documentType="commercialInvoice"
+      />
     </>
   );
 };
@@ -24,7 +31,7 @@ export const Route = createFileRoute(
   validateSearch: commercialInvoiceSchema,
   loader: async ({ context, params }) => {
     const order = await context.queryClient.ensureQueryData(
-      selectOrderByIdQueryOptions(params.orderId),
+      selectOrderViewByIdQueryOptions(params.orderId),
     );
     return { order };
   },

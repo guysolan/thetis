@@ -1,0 +1,17 @@
+---
+import { SubscribeBlockForm } from "./SubscribeBlockForm";
+import type { Lang } from "@/config/languages";
+
+interface Props {
+    /** Optional variant: "section" (default) or "compact" */
+    variant?: "section" | "compact";
+    /** Source tag for analytics */
+    source?: string;
+    /** Language code for translations */
+    lang?: Lang;
+}
+
+const { variant = "section", source = "subscribe_block", lang = "en" } = Astro.props;
+---
+
+<SubscribeBlockForm variant={variant} source={source} lang={lang} client:load />

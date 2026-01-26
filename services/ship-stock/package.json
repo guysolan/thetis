@@ -1,0 +1,26 @@
+{
+  "name": "@thetis/reddit-bot",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "update-supabase": "brew install supabase/tap/supabase",
+    "deploy": "supabase functions deploy",
+    "push": "git add . && git commit -m \"${1:-update}\" && git push && supabase db push",
+    "gen-types": "supabase gen types --lang=typescript --local > ./supabase/database.types.ts",
+    "serve": "supabase functions serve --env-file ./supabase/.env.local",
+    "secrets": "supabase secrets set --env-file ./supabase/.env.prod",
+    "diff": "supabase db diff -f \"$view\" --local --schema public,auth,storage",
+    "dev": "supabase start",
+    "login": "supabase login",
+    "migrate": "supabase migration up",
+    "seed": "supabase db seed generate && supabase db seed run",
+    "reset": "supabase db reset --local",
+    "generate": "supabase gen types --lang=typescript --local --schema public > ../../packages/supabase/src/types/db.ts"
+  },
+  "dependencies": {
+    "supabase": "^1.191.3"
+  },
+  "exports": {
+    "./types": "./supabase/database.types.ts"
+  }
+}
