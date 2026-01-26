@@ -11,6 +11,18 @@ interface UseVariantPriceResult {
     error: string | null;
 }
 
+// Fallback prices for known products (used when API fails)
+const FALLBACK_PRICES: Record<string, { GBP: string; USD: string }> = {
+    // Night Splint variants
+    "gid://shopify/ProductVariant/47494539673928": { GBP: "£63.99", USD: "$93.99" },
+    "gid://shopify/ProductVariant/47494539608392": { GBP: "£63.99", USD: "$93.99" },
+    "gid://shopify/ProductVariant/47494539706696": { GBP: "£63.99", USD: "$93.99" },
+    "gid://shopify/ProductVariant/47494539641160": { GBP: "£63.99", USD: "$93.99" },
+    // Course variants
+    "gid://shopify/ProductVariant/52265314353480": { GBP: "£29.99", USD: "$39.99" },
+    "gid://shopify/ProductVariant/52265315828040": { GBP: "£99.99", USD: "$129.99" },
+};
+
 // Detect user's country
 async function detectCountry(): Promise<string> {
     try {
@@ -23,6 +35,13 @@ async function detectCountry(): Promise<string> {
         console.error("Failed to detect country:", error);
     }
     return "GB";
+}
+
+// Get fallback price for a variant
+function getFallbackPrice(variantId: string, countryCode: string): string | null {
+    const prices = FALLBACK_PRICES[variantId];
+    if (!prices) return null;
+    return countryCode === "US" ? prices.USD : prices.GBP;
 }
 
 export function useVariantPrice(
@@ -39,10 +58,11 @@ export function useVariantPrice(
         async function loadPrice() {
             setIsLoading(true);
             setError(null);
+            
+            // Detect the user's country first (needed for fallback too)
+            const countryCode = await detectCountry();
+            
             try {
-                // Detect the user's country
-                const countryCode = await detectCountry();
-
                 // Check cache first
                 const cachedPrice = getCachedPrice(variantId, countryCode);
                 if (cachedPrice) {
@@ -66,8 +86,9 @@ export function useVariantPrice(
                     );
                     setFormattedPrice(priceData.formattedPrice);
                 } else {
-                    // Fallback to provided price or null
-                    setFormattedPrice(fallbackPrice || null);
+                    // Fallback to known prices or provided fallback
+                    const fallback = getFallbackPrice(variantId, countryCode) || fallbackPrice || null;
+                    setFormattedPrice(fallback);
                 }
             } catch (err) {
                 if (!isMounted) return;
@@ -75,8 +96,9 @@ export function useVariantPrice(
                     ? err.message
                     : "Failed to load price";
                 setError(errorMessage);
-                // Fallback to provided price or null
-                setFormattedPrice(fallbackPrice || null);
+                // Fallback to known prices or provided fallback
+                const fallback = getFallbackPrice(variantId, countryCode) || fallbackPrice || null;
+                setFormattedPrice(fallback);
             } finally {
                 if (isMounted) {
                     setIsLoading(false);

@@ -379,16 +379,13 @@ function UpsellProductCard({
                     <p className="mb-4 text-neutral-500 dark:text-neutral-400 text-sm">
                         {product.description}
                     </p>
-                    <div className="flex justify-between items-center mb-2">
+                    <div className="flex justify-between items-center">
                         <span className="font-bold text-primary text-xl">
                             {isLoadingPrice
                                 ? (
-                                    <span className="inline-flex items-center gap-1">
-                                        <Loader2 className="w-4 h-4 animate-spin" />
-                                        Loading...
-                                    </span>
+                                    <span className="inline-block bg-neutral-200 dark:bg-neutral-700 rounded w-16 h-6 animate-pulse" />
                                 )
-                                : formattedPrice || product.price}
+                                : formattedPrice}
                         </span>
                         {isAdded
                             ? (
@@ -412,8 +409,10 @@ function UpsellProductCard({
                                 </Button>
                             )}
                     </div>
-                    {/* Course Info Accordion */}
-                    {isCourse && course && (
+                </div>
+            </div>
+            {/* Course Info Accordion - full width below the product info */}
+            {isCourse && course && (
                         <Accordion
                             type="single"
                             collapsible
@@ -528,8 +527,6 @@ function UpsellProductCard({
                             </AccordionItem>
                         </Accordion>
                     )}
-                </div>
-            </div>
 
             {/* Benefits */}
             {!isAdded && isPrimaryUpsell && (

@@ -571,12 +571,9 @@ function UpsellItem({ product }: UpsellItemProps) {
                     <span className="font-semibold text-primary text-sm">
                         {isLoadingPrice
                             ? (
-                                <span className="inline-flex items-center gap-1">
-                                    <Loader2 className="w-3 h-3 animate-spin" />
-                                    Loading...
-                                </span>
+                                <span className="inline-block bg-neutral-200 rounded w-12 h-4 animate-pulse" />
                             )
-                            : formattedPrice || product.price}
+                            : formattedPrice}
                     </span>
                 </div>
                 <Button
