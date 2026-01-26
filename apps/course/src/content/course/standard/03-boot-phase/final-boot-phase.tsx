@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import TendonStrengthTimeline from "@/assets/tendon-strength-timeline-v6.png";
+import TendonStrengthTimeline from "@/assets/tendon-strength-timeline-tintin-v6.png";
 
 export const metadata = {
     slug: "final-boot-phase",

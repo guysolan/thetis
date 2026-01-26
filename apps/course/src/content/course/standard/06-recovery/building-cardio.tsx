@@ -336,6 +336,7 @@ export const content: SectionContent = {
                                 "**Technique:** Walk forward, backward, sideways",
                                 "**Benefits:** Water supports body weight, reduces impact",
                                 "**Progression:** Increase speed and duration gradually",
+                                "**Duration:** Start with 10-15 minutes, build to 20-30 minutes",
                             ],
                         },
                         {
@@ -345,13 +346,7 @@ export const content: SectionContent = {
                             caption:
                                 "Pool walking: the water supports your body weight, making it safe and low-impact",
                         },
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "**Duration:** Start with 10-15 minutes, build to 20-30 minutes",
-                            ],
-                        },
+                        
                     ],
                 },
                 {
