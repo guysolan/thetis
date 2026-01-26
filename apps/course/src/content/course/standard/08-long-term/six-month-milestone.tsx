@@ -10,7 +10,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "Six months. Half a year since your injury. This is a major milestone — you've come a long way. Your tendon has healed significantly, you're stronger, and you're likely thinking about return to sport. This lesson covers where your tendon is now, return-to-sport criteria, and psychological readiness. You will get through this — you're closer to full recovery than you think.",
+        "Six months. Half a year since your injury. This is a major milestone — you've come a long way. Your tendon has healed significantly, you're stronger, and you're likely thinking about return to sport.",
     blocks: [
         {
             type: "heading",
@@ -110,72 +110,48 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Key return-to-sport criteria",
+                    title: "Key return-to-sport criteria overview",
                     description: "What you need to achieve.",
                     variant: "highlight",
                     content: [
                         {
                             type: "text",
-                            content: "**Strength criteria:**",
+                            content: "**At 6 months, assess where you are:**",
                         },
                         {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "25+ single-leg heel raises — gold standard",
-                                "Ideally matching other side (>90% symmetry)",
-                                "2x body weight strength (for high-level sports)",
+                                "**25+ single-leg heel raises** — gold standard strength test",
+                                "**85% symmetry** — injured leg should perform at least 85% as well as uninjured leg",
+                                "**Pain-free activities** — walking, running, jumping without pain",
+                                "**Good balance** — single-leg balance 30+ seconds",
+                                "**Confidence** — psychological readiness to return",
                             ],
                         },
                         {
                             type: "text",
-                            content: "**Function criteria:**",
-                        },
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "Pain-free walking, running",
-                                "Good balance — single-leg balance 30+ seconds",
-                                "Confident stairs — up and down normally",
-                                "No limping",
-                            ],
-                        },
-                        {
-                            type: "text",
-                            content: "**Sport-specific criteria:**",
-                        },
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "Can perform sport-specific movements",
-                                "No pain during or after activity",
-                                "Confidence in movements",
-                            ],
+                            content:
+                                "**Important:** Most people need more than 6 months to meet these criteria. That's normal — don't rush.",
                         },
                     ],
                 },
                 {
                     type: "card",
-                    title: "Why criteria matter",
-                    description: "The science behind it.",
-                    variant: "muted",
+                    title: "Detailed return-to-sport guidance",
+                    description:
+                        "For comprehensive criteria and return process.",
+                    variant: "default",
                     content: [
                         {
                             type: "text",
                             content:
-                                "**Criteria reduce re-injury risk** — returning before you're ready increases risk of re-rupture or other injuries.",
+                                "Detailed return-to-sport criteria, the return process (modified practice → full participation → pre-injury level), and return-to-play statistics will be covered in a later lesson.",
                         },
                         {
                             type: "text",
                             content:
-                                "**Time alone isn't enough** — your tendon needs to be strong enough, not just healed enough time.",
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "**Your physio will assess** — they'll test your criteria and guide when you're ready.",
+                                "**Your physio will assess** your criteria and guide when you're ready to return. Don't return until you meet criteria — rushing increases re-injury risk.",
                         },
                     ],
                 },
@@ -188,7 +164,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Physical readiness is only half the story. **Psychological readiness** — feeling confident and mentally prepared — is equally important. Fear of re-injury (kinesiophobia) is common and can hold you back.",
+                        "Physical readiness is only half the story. **Psychological readiness** — feeling confident and mentally prepared — is equally important. Fear of re-injury (kinesiophobia) is common and can hold you back. See [Mental Health Recovery](/standard/mental-health-recovery) for coping strategies.",
                 },
                 {
                     type: "card",
@@ -263,9 +239,9 @@ export const content: SectionContent = {
                 {
                     type: "alert",
                     variant: "danger",
-                    title: "Get urgent help now",
+                    title: "Seek urgent care",
                     content:
-                        "**Severe pain** that doesn't ease — pain shouldn't be severe. **New \"pop\" or snap** — if you feel or hear a new pop, stop immediately and seek urgent care. **Signs of DVT (clot in the leg):** new calf pain/tenderness, one-leg calf swelling, calf redness/warmth. **Signs of PE (clot in the lungs):** chest pain, breathlessness, coughing blood, fainting.",
+                        "**Severe pain**, **new pop/snap**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention).",
                 },
             ],
         },
@@ -309,8 +285,9 @@ export const content: SectionContent = {
                     items: [
                         "**This week:** Assess your progress, work toward return-to-sport criteria",
                         "**Week 26:** We cover preventing re-rupture — risk factors, ongoing strengthening, warning signs",
-                        "**Weeks 25-30:** Continue building strength and function",
-                        "**After meeting criteria:** You'll gradually return to sport — starting with low-risk activities",
+                        "**Week 28:** Starting to Run — when ready to begin running (coming up)",
+                        "**Week 32:** Return to Sport — detailed criteria and return process (coming up)",
+                        "**Weeks 25-35:** Continue building strength and function, work toward return-to-sport criteria",
                     ],
                 },
             ],

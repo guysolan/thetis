@@ -4,7 +4,7 @@ import NightSplintAdvert from "../../components/products/night-splint/NightSplin
 import TornAchillesRecoverySection from "../../sections/FAQs/torn-achilles-recovery.astro";
 import type { Lang } from "@/config/languages";
 import TornAchillesRecoveryFaqsSection from "../../sections/FAQs/torn-achilles-recovery-faqs.astro";
-
+import CourseCTA from "../../components/CTA/CourseCTA.astro";
 const { lang = "en" }: { lang?: Lang } = Astro.props;
 
 const content: Record<Lang, { title: string; description: string }> = {
@@ -44,7 +44,7 @@ const currentContent = content[lang];
     lang={lang}
 >
     <TornAchillesRecoverySection lang={lang} />
-
+    <CourseCTA lang={lang} variant="full" />
     <NightSplintAdvert lang={lang} />
 
     <TornAchillesRecoveryFaqsSection lang={lang} />

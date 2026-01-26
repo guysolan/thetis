@@ -23,6 +23,9 @@
 
   body {
     font-family: 'Raleway', sans-serif;
+    /* Override globals.css overflow-y-scroll to allow natural scrolling */
+    overflow-y: auto !important;
+    overflow-x: hidden;
   }
 }
 

@@ -50,32 +50,17 @@ const CheckWithCareTeam = ({ className, lang = "en" }: Props) => {
 
   return (
     <>
-      <Button
-        variant="ghost"
+      <button
+        type="button"
         className={cn(
-          "flex items-center gap-2 font-medium text-primary text-base hover:text-primary/80 hover:bg-transparent transition-colors p-0 h-auto",
+          "flex items-center gap-1.5 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 dark:text-neutral-400 text-sm transition-colors",
           className,
         )}
-        onClick={() => {
-          console.log("Dialog trigger clicked");
-          setOpen(true);
-        }}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            console.log("Dialog trigger clicked");
-            setOpen(true);
-          }
-        }}
-        onKeyUp={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            console.log("Dialog trigger clicked");
-            setOpen(true);
-          }
-        }}
+        onClick={() => setOpen(true)}
       >
-        <Info className="w-4 h-4" />
-        <span className="underline">{t.button}</span>
-      </Button>
+        <Info className="w-3 h-3" />
+        <span className="hover:underline">{t.button}</span>
+      </button>
 
       {/* Modal */}
       {open && (

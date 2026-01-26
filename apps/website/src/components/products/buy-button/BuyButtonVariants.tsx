@@ -1,164 +1,127 @@
-import React, { useEffect, useState } from "react";
-import ShopifyBuyButton from "./ShopifyBuyButton";
-import { Button } from "@/components/ui/button";
+import React, { useState } from "react";
+import { AddToCartButton } from "@/components/cart";
+import { Button } from "@thetis/ui/button";
 import WhatSizeAmI from "../../WhatSizeAmI";
 import { useUserCountry } from "@/hooks/use-user-country";
 import { content as allContent } from "../night-splint/content";
+import UrgencyMessage from "../../UrgencyMessage";
+import MoneyBackGuarantee from "../../MoneyBackGuarantee";
 import type { Lang } from "../../../config/languages";
 
 interface BuyButtonVariantsProps {
   productId?: string;
   className?: string;
-  lang: Lang;
+  lang?: Lang;
 }
 
 type Size = "large" | "small";
 type Side = "left" | "right";
 
-const content = {
-  variants: {
-    size: ["large", "small"] as const,
-    side: ["left", "right"] as const,
-  },
-  variantIds: {
-    "large-left": "47494539673928",
-    "large-right": "47494539608392",
-    "small-left": "47494539706696",
-    "small-right": "47494539641160",
-  } as const,
+// Shopify Storefront API variant IDs (gid format)
+const VARIANT_IDS = {
+  "large-left": "gid://shopify/ProductVariant/47494539673928",
+  "large-right": "gid://shopify/ProductVariant/47494539608392",
+  "small-left": "gid://shopify/ProductVariant/47494539706696",
+  "small-right": "gid://shopify/ProductVariant/47494539641160",
 } as const;
 
 const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
-  productId = "8572432253256",
   className = "",
   lang = "en",
 }) => {
-  const [currentSize, setCurrentSize] = useState<Size | undefined>("large");
-  const [currentSide, setCurrentSide] = useState<Side | undefined>("right");
-  const [key, setKey] = useState(() => Date.now());
-  const [isInitialRender, setIsInitialRender] = useState(true);
+  const [currentSize, setCurrentSize] = useState<Size>("large");
+  const [currentSide, setCurrentSide] = useState<Side>("left");
   const { country, isLoading: isCountryLoading } = useUserCountry();
   const t = allContent[lang]?.buyButton || allContent.en.buyButton;
 
-  const variantIds = content.variantIds;
-
-  useEffect(() => {
-    if (isInitialRender) {
-      setIsInitialRender(false);
-      return;
-    }
-    setKey((prevKey) => prevKey + 1);
-  }, [currentSize, currentSide]);
-
-  const getVariantKey = (size?: Size, side?: Side): string => {
-    if (!size || !side) return "";
+  const getVariantKey = (size: Size, side: Side): keyof typeof VARIANT_IDS => {
     return `${size}-${side}`;
   };
 
-  const getAustralianDistributorUrl = (size?: Size, side?: Side): string => {
-    if (!size || !side) return "";
-    const sizeChar = size === "large" ? "L" : "S";
-    const sideChar = side === "left" ? "L" : "R";
+  const getAustralianDistributorUrl = (): string => {
     return "https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php";
   };
 
   const getCurrentVariantId = () => {
     const key = getVariantKey(currentSize, currentSide);
-    return key ? variantIds[key as keyof typeof variantIds] : undefined;
+    return VARIANT_IDS[key];
   };
 
-  const isSelectionComplete = currentSize && currentSide;
+  const sizes: Size[] = ["large", "small"];
+  const sides: Side[] = ["left", "right"];
 
   return (
     <div className={`text-left w-full flex flex-col ${className}`}>
       <div className="flex flex-col justify-start items-start my-4 w-full">
         <WhatSizeAmI lang={lang} />
-        <div className="space-y-4 w-full">
-          <div className="flex flex-col justify-start items-start space-y-2">
-            <label className="font-semibold text-neutral-600 text-base text-left">
-              {t.size}
-            </label>
-            <div className="flex gap-2 w-full">
-              {content.variants.size.map((size) => (
-                <Button
-                  key={size}
-                  variant={currentSize === size ? "default" : "outline"}
-                  onClick={() => setCurrentSize(size)}
-                  aria-pressed={currentSize === size}
-                  className={`flex-1 min-w-[100px] text-left ${
-                    currentSize === size
-                      ? "ring-2 ring-offset-2 ring-primary"
-                      : ""
-                  }`}
-                >
-                  {size.charAt(0).toUpperCase() + size.slice(1)}
-                </Button>
-              ))}
-            </div>
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Size selector */}
+          <div className="inline-flex items-center gap-0.5 bg-white dark:bg-neutral-800 px-0.5 py-0.5 border border-neutral-200 rounded-md h-8">
+            {sizes.map((size) => (
+              <button
+                key={size}
+                type="button"
+                onClick={() => setCurrentSize(size)}
+                aria-pressed={currentSize === size}
+                className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1 text-md font-medium transition-all ${
+                  currentSize === size
+                    ? "bg-primary text-white shadow-sm"
+                    : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300"
+                }`}
+              >
+                {size.charAt(0).toUpperCase() + size.slice(1)}
+              </button>
+            ))}
           </div>
 
-          <div className="flex flex-col justify-start items-start space-y-2">
-            <label className="font-semibold text-neutral-600 text-base text-left">
-              {t.side}
-            </label>
-            <div className="flex gap-2 w-full">
-              {content.variants.side.map((side) => (
-                <Button
-                  key={side}
-                  variant={currentSide === side ? "default" : "outline"}
-                  onClick={() => setCurrentSide(side)}
-                  aria-pressed={currentSide === side}
-                  className={`flex-1 min-w-[100px] text-left ${
-                    currentSide === side
-                      ? "ring-2 ring-offset-2 ring-primary"
-                      : ""
-                  }`}
-                >
-                  {side.charAt(0).toUpperCase() + side.slice(1)}
-                </Button>
-              ))}
-            </div>
+          {/* Side selector */}
+          <div className="inline-flex items-center gap-0.5 bg-white dark:bg-neutral-800 px-0.5 py-0.5 border border-neutral-200 rounded-md h-8">
+            {sides.map((side) => (
+              <button
+                key={side}
+                type="button"
+                onClick={() => setCurrentSide(side)}
+                aria-pressed={currentSide === side}
+                className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1 text-md font-medium transition-all ${
+                  currentSide === side
+                    ? "bg-primary text-white shadow-sm"
+                    : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300"
+                }`}
+              >
+                {side.charAt(0).toUpperCase() + side.slice(1)}
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="mb-8 h-16">
+      <div className="mb-4">
         {isCountryLoading
           ? (
-            <div className="mt-8 font-medium text-neutral-950 text-lg md:text-xl lg:text-left text-center italic">
+            <div className="mt-4 font-medium text-neutral-950 text-lg md:text-xl lg:text-left text-center italic">
               {t.checkingAvailability}
             </div>
           )
           : country === "AU" || country === "NZ"
           ? (
-            isSelectionComplete && (
-              <Button asChild className="mt-4 w-full">
-                <a
-                  href={getAustralianDistributorUrl(currentSize, currentSide)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {t.buyFromDistributor}
-                </a>
-              </Button>
-            )
-          )
-          : isSelectionComplete && getCurrentVariantId()
-          ? (
-            <div className="relative flex-col justify-start items-start mx-0 w-fit">
-              <ShopifyBuyButton
-                key={key}
-                productId={productId}
-                variantId={getCurrentVariantId() || ""}
-                position={currentSide || "left"}
-                size={currentSize || "small"}
-              />
-            </div>
+            <Button asChild className="mt-4 w-full">
+              <a
+                href={getAustralianDistributorUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t.buyFromDistributor}
+              </a>
+            </Button>
           )
           : (
-            <div className="mt-8 font-medium text-neutral-950 text-lg md:text-xl lg:text-left text-center italic animate-bounce">
-              {t.selectionPrompt}
-            </div>
+            <AddToCartButton
+              variantId={getCurrentVariantId()}
+              size="lg"
+              className="mt-4"
+            >
+              Add to Cart
+            </AddToCartButton>
           )}
       </div>
     </div>

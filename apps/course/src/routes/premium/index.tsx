@@ -1,9 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Clock, Play, Star, User, Video } from "lucide-react";
 import { WEBSITE_URL } from "@/lib/env";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 export const Route = createFileRoute("/premium/")({
-  component: PremiumIndexPage,
+  component: () => (
+    <ProtectedRoute requiredCourse="premium">
+      <PremiumIndexPage />
+    </ProtectedRoute>
+  ),
 });
 
 // Premium video lessons - expert-led deep dives

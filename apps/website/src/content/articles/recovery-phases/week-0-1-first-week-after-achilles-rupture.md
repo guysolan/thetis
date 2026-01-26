@@ -50,7 +50,9 @@ Most people describe the moment of rupture as:
 
 The initial pain from the rupture is often intense but typically subsides quickly - sometimes within minutes. This can be misleading, as the injury is serious even when the pain diminishes. The fact that you could walk (albeit with difficulty) to A&E doesn't mean the injury isn't severe.
 
-**Important:** Partial tears can happen, but the classic “pop / kicked in the back of the ankle” story is strongly associated with a rupture. If you felt that distinctive snap, treat it as a rupture until a clinician confirms otherwise.
+**Important:** Partial ruptures/tears can happen (they’re **uncommon**), but the classic “pop / kicked in the back of the ankle” story is strongly associated with a full rupture. If you felt that distinctive snap, treat it as a rupture until a clinician confirms otherwise.
+
+**If you hear “gap size” (e.g. “4cm gap”):** clinicians sometimes measure the distance between the torn tendon ends on **ultrasound**. Think of it like a snapped rope — the “gap” is how far apart the ends are **in that position**. What often matters most is whether the ends **come together** when the foot is held pointed down in a cast/boot/splint. Don’t panic if you hear a number — it’s one piece of the puzzle your specialist will interpret in context.
 
 ### Is It Definitely a Rupture?
 
@@ -138,6 +140,7 @@ Crutches are essential in Week 1. Your injured leg should bear minimal or no wei
 - Take your weight through your hands, not your armpits
 - Move crutches and injured leg together, then step through with your good leg
 - Go slowly - falling now would be a disaster
+- **Top Tip:** Lean your crutches **upside-down** (with the rubber grips on the floor) against the wall when not in use. The rubber handles provide much more friction than the plastic feet, preventing them from sliding and crashing to the floor.
 
 **Pro tip:** Keep a pair of crutches by your bed so you can safely get up during the night.
 

@@ -11,7 +11,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "Your first specialist appointment is coming up — usually within 1–2 weeks of injury. It's normal to feel anxious. This appointment is where you'll get a clear diagnosis, understand your options, and start building your recovery plan. **You will get through this.**",
+        "Your first specialist appointment is coming up — usually within 1–2 weeks of injury. It's normal to feel anxious. This appointment is where you'll get a clear diagnosis, understand your options, and start building your recovery plan.",
 
     blocks: [
         {
@@ -124,7 +124,7 @@ export const content: SectionContent = {
                                         {
                                             type: "text",
                                             content:
-                                                'Think of it like this: your calf muscle is connected to your heel bone by the Achilles tendon — like a puppet string. When the specialist squeezes your calf, it should pull the "string" and make your foot point downward. If the tendon is ruptured, the string is cut, so the foot doesn\'t move.',
+                                                'Your calf muscle is connected to your heel bone by the Achilles tendon — like a puppet string. When the specialist squeezes your calf, it should pull the "string" and make your foot point downward ([plantarflexion](/standard/emergency-care)). If the tendon is ruptured, the string is cut, so the foot doesn\'t move.',
                                         },
                                     ],
                                 },
@@ -250,9 +250,9 @@ export const content: SectionContent = {
                 {
                     type: "alert",
                     variant: "danger",
-                    title: "Get urgent help now",
+                    title: "Seek urgent care",
                     content:
-                        '**Possible DVT (clot in the leg):** new calf pain/tenderness, one-leg calf swelling, calf redness/warmth. **Possible PE (clot in the lungs):** chest pain, breathlessness, coughing blood, fainting. Also seek urgent help for **numb/blue/pale toes**, severe increasing pressure/pain in the cast/boot, fever with rapidly spreading redness, or a fall with a new "pop".',
+                        '**Severe pain**, **new pop/snap**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention). Also seek help for **numb/blue/pale toes**, severe pressure in cast/boot, or fever with spreading redness.',
                 },
             ],
         },
@@ -315,12 +315,6 @@ export const content: SectionContent = {
                         "**Next lesson:** We cover the **surgery vs non-surgical decision** in detail — including the UKSTAR trial findings.",
                         "**Upcoming weeks:** Boot fitting, wedge protocols, weight-bearing progression — we'll guide you through each stage.",
                     ],
-                },
-                {
-                    type: "tip",
-                    title: "Timeline reminder",
-                    content:
-                        "Full recovery typically takes **6–12 months**, but you'll be walking without crutches much sooner (often by weeks 6–10). We'll break this down week by week.",
                 },
             ],
         },

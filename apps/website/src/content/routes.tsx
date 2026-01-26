@@ -1,9 +1,18 @@
 import { type Language, languages } from "../config/languages";
-import { Activity, Calendar, Heart, HelpCircle, Hourglass } from "lucide-react";
+import {
+  Activity,
+  Calendar,
+  Heart,
+  HelpCircle,
+  Hourglass,
+  List,
+} from "lucide-react";
 import type { ImageMetadata } from "astro";
 import {
+  BookOpen,
   Box,
   ClipboardCheck,
+  GraduationCap,
   Handshake,
   HeartHandshake,
   Mail,
@@ -18,7 +27,8 @@ import {
 // Navigation content for DesktopNav
 export const navigationContent = {
   en: {
-    ourProduct: "Our Product",
+    ourProducts: "Products",
+    courses: "Courses",
     patientGuides: "Patient Guides",
     professionals: "Professionals",
     contact: "Contact",
@@ -27,10 +37,14 @@ export const navigationContent = {
     orderWholesale: "Order Wholesale",
     productTitle: "Achilles Tendon Rupture Splint",
     productDescription:
-      "Improve recovery time and comfort after Achilles tendon rupture",
+      "Improve comfort during recovery after Achilles tendon rupture",
+    coursesTitle: "Recovery Courses",
+    coursesDescription:
+      "Expert-led courses to guide you through every step of your Achilles recovery",
   },
   de: {
-    ourProduct: "Unser Produkt",
+    ourProducts: "Produkte",
+    courses: "Kurse",
     patientGuides: "Patientenleitfäden",
     professionals: "Fachkräfte",
     contact: "Kontakt",
@@ -40,9 +54,13 @@ export const navigationContent = {
     productTitle: "Achillessehnenruptur-Schiene",
     productDescription:
       "Verbessern Sie die Genesungszeit und den Komfort nach einer Achillessehnenruptur",
+    coursesTitle: "Genesungskurse",
+    coursesDescription:
+      "Expertenkurse, die Sie durch jeden Schritt Ihrer Achilles-Genesung führen",
   },
   fr: {
-    ourProduct: "Notre Produit",
+    ourProducts: "Produits",
+    courses: "Cours",
     patientGuides: "Guides du Patient",
     professionals: "Professionnels",
     contact: "Contact",
@@ -52,9 +70,13 @@ export const navigationContent = {
     productTitle: "Attelle de rupture du tendon d'Achille",
     productDescription:
       "Améliorez le temps de récupération et le confort après une rupture du tendon d'Achille",
+    coursesTitle: "Cours de récupération",
+    coursesDescription:
+      "Cours dirigés par des experts pour vous guider à chaque étape de votre récupération d'Achille",
   },
   es: {
-    ourProduct: "Nuestro Producto",
+    ourProducts: "Productos",
+    courses: "Cursos",
     patientGuides: "Guías del Paciente",
     professionals: "Profesionales",
     contact: "Contacto",
@@ -64,9 +86,13 @@ export const navigationContent = {
     productTitle: "Férula para rotura del tendón de Aquiles",
     productDescription:
       "Mejore el tiempo de recuperación y la comodidad después de la rotura del tendón de Aquiles",
+    coursesTitle: "Cursos de recuperación",
+    coursesDescription:
+      "Cursos dirigidos por expertos para guiarte en cada paso de tu recuperación de Aquiles",
   },
   it: {
-    ourProduct: "Il Nostro Prodotto",
+    ourProducts: "Prodotti",
+    courses: "Corsi",
     patientGuides: "Guide del Paziente",
     professionals: "Professionisti",
     contact: "Contatto",
@@ -76,6 +102,9 @@ export const navigationContent = {
     productTitle: "Férula per rottura del tendine di Achille",
     productDescription:
       "Migliora i tempi di recupero e il comfort dopo la rottura del tendine di Achille",
+    coursesTitle: "Corsi di recupero",
+    coursesDescription:
+      "Corsi guidati da esperti per accompagnarti in ogni fase del tuo recupero di Achille",
   },
 };
 
@@ -123,6 +152,404 @@ export interface Route {
   lang: string;
   slug: string;
 }
+
+// Course routes (paid courses at /course/)
+export const courseRoutes: BaseRoute[] = [
+  {
+    slug: "course",
+    title: {
+      en: "Recovery Course",
+      de: "Grundlagen-Kurs",
+      fr: "Cours Essentiels",
+      es: "Curso Esenciales",
+      it: "Corso Fondamentali",
+    },
+    description: {
+      en:
+        "31 structured lessons covering every stage of Achilles rupture recovery. Expert guidance for £29.",
+      de:
+        "31 strukturierte Lektionen zu jeder Phase der Achillessehnenruptur-Genesung. Expertenführung für 29 €.",
+      fr:
+        "31 leçons structurées couvrant chaque étape de la récupération de rupture d'Achille. Conseils d'experts pour 29 €.",
+      es:
+        "31 lecciones estructuradas que cubren cada etapa de la recuperación de rotura de Aquiles. Orientación experta por 29 €.",
+      it:
+        "31 lezioni strutturate che coprono ogni fase del recupero dalla rottura di Achille. Guida esperta per 29 €.",
+    },
+    slugTranslations: {
+      en: "course",
+      de: "kurs",
+      fr: "cours",
+      es: "curso",
+      it: "corso",
+    },
+    icon: <BookOpen />,
+    variant: "default",
+  },
+  {
+    slug: "course/professionals",
+    title: {
+      en: "Pro Course",
+      de: "Professioneller Kurs",
+      fr: "Cours Professionnel",
+      es: "Curso Profesional",
+      it: "Corso Professionale",
+    },
+    description: {
+      en:
+        "Expert video lessons and personalized guidance from specialist surgeons. Premium recovery for £99.",
+      de:
+        "Experten-Videolektionen und persönliche Anleitung von Fachärzten. Premium-Genesung für 99 €.",
+      fr:
+        "Leçons vidéo d'experts et conseils personnalisés de chirurgiens spécialistes. Récupération premium pour 99 €.",
+      es:
+        "Lecciones en video de expertos y orientación personalizada de cirujanos especialistas. Recuperación premium por 99 €.",
+      it:
+        "Lezioni video di esperti e guida personalizzata da chirurghi specialisti. Recupero premium per 99 €.",
+    },
+    slugTranslations: {
+      en: "course/professionals",
+      de: "kurs/professionell",
+      fr: "cours/professionnel",
+      es: "curso/profesional",
+      it: "corso/professionale",
+    },
+    icon: <GraduationCap />,
+    variant: "default",
+  },
+];
+
+// Guide page routes (kept for backwards compatibility, now redirects to /course/)
+export const guidePageRoutes: BaseRoute[] = [
+  {
+    slug: "guide/articles",
+    title: {
+      en: "Recovery Articles",
+      de: "Genesungsartikel",
+      fr: "Articles de Récupération",
+      es: "Artículos de Recuperación",
+      it: "Articoli di Recupero",
+    },
+    description: {
+      en:
+        "Free recovery guides for each phase of your Achilles rupture journey - from injury to returning to sport.",
+      de:
+        "Kostenlose Genesungsleitfäden für jede Phase Ihrer Achillessehnenruptur-Reise - von der Verletzung bis zur Rückkehr zum Sport.",
+      fr:
+        "Guides de récupération gratuits pour chaque phase de votre parcours de rupture d'Achille - de la blessure au retour au sport.",
+      es:
+        "Guías de recuperación gratuitas para cada fase de tu viaje de rotura de Aquiles - desde la lesión hasta volver al deporte.",
+      it:
+        "Guide di recupero gratuite per ogni fase del tuo percorso di rottura di Achille - dalla lesione al ritorno allo sport.",
+    },
+    slugTranslations: {
+      en: "guide/articles",
+      de: "leitfaden/artikel",
+      fr: "guide/articles",
+      es: "guia/articulos",
+      it: "guida/articoli",
+    },
+    icon: <BookOpen />,
+    variant: "outline",
+  },
+];
+
+// Recovery phase routes (timeline-based articles)
+export const recoveryPhaseRoutes: BaseRoute[] = [
+  {
+    slug: "guide/weeks-0-1",
+    title: {
+      en: "Week 0-1: First Week After Rupture",
+      de: "Woche 0-1: Erste Woche nach der Ruptur",
+      fr: "Semaine 0-1: Première Semaine Après la Rupture",
+      es: "Semana 0-1: Primera Semana Después de la Rotura",
+      it: "Settimana 0-1: Prima Settimana Dopo la Rottura",
+    },
+    description: {
+      en:
+        "Emergency care, A&E expectations, blood clot prevention, and essential first-week survival tips.",
+      de:
+        "Notfallversorgung, Erwartungen in der Notaufnahme, Blutgerinnselprävention und wichtige Überlebenstipps für die erste Woche.",
+      fr:
+        "Soins d'urgence, attentes aux urgences, prévention des caillots sanguins et conseils de survie essentiels pour la première semaine.",
+      es:
+        "Atención de emergencia, expectativas en urgencias, prevención de coágulos y consejos esenciales para la primera semana.",
+      it:
+        "Cure d'emergenza, aspettative al pronto soccorso, prevenzione dei coaguli e consigli essenziali per la prima settimana.",
+    },
+    slugTranslations: {
+      en: "guide/weeks-0-1",
+      de: "leitfaden/wochen-0-1",
+      fr: "guide/semaines-0-1",
+      es: "guia/semanas-0-1",
+      it: "guida/settimane-0-1",
+    },
+    icon: <Calendar />,
+  },
+  {
+    slug: "guide/weeks-1-3",
+    title: {
+      en: "Weeks 1-3: Treatment Decision",
+      de: "Wochen 1-3: Behandlungsentscheidung",
+      fr: "Semaines 1-3: Décision de Traitement",
+      es: "Semanas 1-3: Decisión de Tratamiento",
+      it: "Settimane 1-3: Decisione del Trattamento",
+    },
+    description: {
+      en:
+        "Surgery vs conservative treatment, choosing your walking boot, and setting up for recovery.",
+      de:
+        "Operation vs konservative Behandlung, Auswahl des Gehstiefels und Vorbereitung auf die Genesung.",
+      fr:
+        "Chirurgie vs traitement conservateur, choix de votre botte de marche et préparation à la récupération.",
+      es:
+        "Cirugía vs tratamiento conservador, elección de tu bota ortopédica y preparación para la recuperación.",
+      it:
+        "Chirurgia vs trattamento conservativo, scelta dello stivale da deambulazione e preparazione al recupero.",
+    },
+    slugTranslations: {
+      en: "guide/weeks-1-3",
+      de: "leitfaden/wochen-1-3",
+      fr: "guide/semaines-1-3",
+      es: "guia/semanas-1-3",
+      it: "guida/settimane-1-3",
+    },
+    icon: <Calendar />,
+  },
+  {
+    slug: "guide/weeks-4-6",
+    title: {
+      en: "Weeks 4-6: Progressive Recovery",
+      de: "Wochen 4-6: Progressive Genesung",
+      fr: "Semaines 4-6: Récupération Progressive",
+      es: "Semanas 4-6: Recuperación Progresiva",
+      it: "Settimane 4-6: Recupero Progressivo",
+    },
+    description: {
+      en:
+        "Weight bearing progression, early exercises, and managing daily life during recovery.",
+      de:
+        "Belastungsprogression, frühe Übungen und Bewältigung des Alltags während der Genesung.",
+      fr:
+        "Progression de la mise en charge, exercices précoces et gestion de la vie quotidienne pendant la récupération.",
+      es:
+        "Progresión del apoyo, ejercicios tempranos y gestión de la vida diaria durante la recuperación.",
+      it:
+        "Progressione del carico, esercizi precoci e gestione della vita quotidiana durante il recupero.",
+    },
+    slugTranslations: {
+      en: "guide/weeks-4-6",
+      de: "leitfaden/wochen-4-6",
+      fr: "guide/semaines-4-6",
+      es: "guia/semanas-4-6",
+      it: "guida/settimane-4-6",
+    },
+    icon: <Calendar />,
+  },
+  {
+    slug: "guide/weeks-7-9",
+    title: {
+      en: "Weeks 7-9: Final Boot Phase",
+      de: "Wochen 7-9: Letzte Stiefelphase",
+      fr: "Semaines 7-9: Phase Finale de la Botte",
+      es: "Semanas 7-9: Fase Final de la Bota",
+      it: "Settimane 7-9: Fase Finale dello Stivale",
+    },
+    description: {
+      en:
+        "Preparing to transition out of your boot, increasing activity, and building confidence.",
+      de:
+        "Vorbereitung auf den Übergang aus dem Stiefel, Steigerung der Aktivität und Aufbau von Vertrauen.",
+      fr:
+        "Préparation à la transition hors de la botte, augmentation de l'activité et renforcement de la confiance.",
+      es:
+        "Preparación para la transición fuera de la bota, aumento de la actividad y construcción de confianza.",
+      it:
+        "Preparazione alla transizione fuori dallo stivale, aumento dell'attività e costruzione della fiducia.",
+    },
+    slugTranslations: {
+      en: "guide/weeks-7-9",
+      de: "leitfaden/wochen-7-9",
+      fr: "guide/semaines-7-9",
+      es: "guia/semanas-7-9",
+      it: "guida/settimane-7-9",
+    },
+    icon: <Calendar />,
+  },
+  {
+    slug: "guide/weeks-10-12",
+    title: {
+      en: "Weeks 10-12: Boot Transition",
+      de: "Wochen 10-12: Stiefelübergang",
+      fr: "Semaines 10-12: Transition de la Botte",
+      es: "Semanas 10-12: Transición de la Bota",
+      it: "Settimane 10-12: Transizione dello Stivale",
+    },
+    description: {
+      en:
+        "Moving from boot to shoes, building strength, and returning to normal walking.",
+      de:
+        "Übergang vom Stiefel zu Schuhen, Kraftaufbau und Rückkehr zum normalen Gehen.",
+      fr:
+        "Passage de la botte aux chaussures, renforcement musculaire et retour à la marche normale.",
+      es:
+        "Transición de la bota a zapatos, construcción de fuerza y vuelta a caminar normal.",
+      it:
+        "Passaggio dallo stivale alle scarpe, costruzione della forza e ritorno alla camminata normale.",
+    },
+    slugTranslations: {
+      en: "guide/weeks-10-12",
+      de: "leitfaden/wochen-10-12",
+      fr: "guide/semaines-10-12",
+      es: "guia/semanas-10-12",
+      it: "guida/settimane-10-12",
+    },
+    icon: <Calendar />,
+  },
+  {
+    slug: "guide/weeks-13-25",
+    title: {
+      en: "Weeks 13-25: Progressive Strengthening",
+      de: "Wochen 13-25: Progressive Kräftigung",
+      fr: "Semaines 13-25: Renforcement Progressif",
+      es: "Semanas 13-25: Fortalecimiento Progresivo",
+      it: "Settimane 13-25: Rafforzamento Progressivo",
+    },
+    description: {
+      en:
+        "Building strength and endurance, returning to activities, and preventing re-injury.",
+      de:
+        "Aufbau von Kraft und Ausdauer, Rückkehr zu Aktivitäten und Vermeidung von Wiederverletzungen.",
+      fr:
+        "Développement de la force et de l'endurance, retour aux activités et prévention des rechutes.",
+      es:
+        "Construcción de fuerza y resistencia, vuelta a las actividades y prevención de nuevas lesiones.",
+      it:
+        "Costruzione di forza e resistenza, ritorno alle attività e prevenzione di nuove lesioni.",
+    },
+    slugTranslations: {
+      en: "guide/weeks-13-25",
+      de: "leitfaden/wochen-13-25",
+      fr: "guide/semaines-13-25",
+      es: "guia/semanas-13-25",
+      it: "guida/settimane-13-25",
+    },
+    icon: <Calendar />,
+  },
+  {
+    slug: "guide/week-26-plus",
+    title: {
+      en: "Week 26+: Return to Sport",
+      de: "Woche 26+: Rückkehr zum Sport",
+      fr: "Semaine 26+: Retour au Sport",
+      es: "Semana 26+: Vuelta al Deporte",
+      it: "Settimana 26+: Ritorno allo Sport",
+    },
+    description: {
+      en:
+        "Full recovery assessment, return to running and sport, and long-term outlook.",
+      de:
+        "Vollständige Genesungsbewertung, Rückkehr zum Laufen und Sport und langfristige Aussichten.",
+      fr:
+        "Évaluation de récupération complète, retour à la course et au sport, et perspectives à long terme.",
+      es:
+        "Evaluación de recuperación completa, vuelta a correr y al deporte, y perspectivas a largo plazo.",
+      it:
+        "Valutazione del recupero completo, ritorno alla corsa e allo sport, e prospettive a lungo termine.",
+    },
+    slugTranslations: {
+      en: "guide/week-26-plus",
+      de: "leitfaden/woche-26-plus",
+      fr: "guide/semaine-26-plus",
+      es: "guia/semana-26-plus",
+      it: "guida/settimana-26-plus",
+    },
+    icon: <Calendar />,
+  },
+];
+
+// Legacy course index route (redirects to /course/)
+export const legacyCourseRoute: BaseRoute = {
+  slug: "courses",
+  title: {
+    en: "Recovery Courses",
+    de: "Genesungskurse",
+    fr: "Cours de Récupération",
+    es: "Cursos de Recuperación",
+    it: "Corsi di Recupero",
+  },
+  description: {
+    en:
+      "Expert-led courses to guide you through every step of your Achilles rupture recovery.",
+    de:
+      "Expertenkurse, die Sie durch jeden Schritt Ihrer Achillessehnenruptur-Genesung führen.",
+    fr:
+      "Cours dirigés par des experts pour vous guider à chaque étape de votre récupération de rupture d'Achille.",
+    es:
+      "Cursos dirigidos por expertos para guiarte en cada paso de tu recuperación de la rotura de Aquiles.",
+    it:
+      "Corsi guidati da esperti per accompagnarti in ogni fase del tuo recupero dalla rottura di Achille.",
+  },
+  slugTranslations: {
+    en: "courses",
+    de: "kurse",
+    fr: "cours",
+    es: "cursos",
+    it: "corsi",
+  },
+  icon: <GraduationCap />,
+  variant: "default",
+};
+
+// External guide routes (hosted on guide.thetismedical.com)
+export const guideRoutes = {
+  standard: {
+    href: "https://guide.thetismedical.com/standard",
+    title: {
+      en: "Patient Recovery Guide",
+      de: "Patienten-Genesungsleitfaden",
+      fr: "Guide de Récupération Patient",
+      es: "Guía de Recuperación del Paciente",
+      it: "Guida al Recupero del Paziente",
+    },
+    description: {
+      en:
+        "Week-by-week guidance for Achilles rupture recovery - from injury to full mobility.",
+      de:
+        "Wöchentliche Anleitung für die Achillessehnenruptur-Genesung - von der Verletzung bis zur vollen Mobilität.",
+      fr:
+        "Guide semaine par semaine pour la récupération de rupture d'Achille - de la blessure à la mobilité complète.",
+      es:
+        "Guía semana a semana para la recuperación de rotura de Aquiles - desde la lesión hasta la movilidad completa.",
+      it:
+        "Guida settimana per settimana per il recupero dalla rottura di Achille - dalla lesione alla mobilità completa.",
+    },
+    icon: <BookOpen />,
+  },
+  premium: {
+    href: "https://guide.thetismedical.com/premium",
+    title: {
+      en: "Clinician Guide",
+      de: "Klinikerleitfaden",
+      fr: "Guide du Clinicien",
+      es: "Guía del Clínico",
+      it: "Guida del Clinico",
+    },
+    description: {
+      en:
+        "Evidence-based protocols and resources by healthcare professionals managing Achilles rupture patients.",
+      de:
+        "Evidenzbasierte Protokolle und Ressourcen für Gesundheitsfachkräfte, die Achillessehnenruptur-Patienten betreuen.",
+      fr:
+        "Protocoles et ressources basés sur les preuves pour les professionnels de santé gérant les patients avec rupture d'Achille.",
+      es:
+        "Protocolos y recursos basados en evidencia para profesionales de la salud que manejan pacientes con rotura de Aquiles.",
+      it:
+        "Protocolli e risorse basate su evidenze per i professionisti sanitari che gestiscono pazienti con rottura di Achille.",
+    },
+    icon: <Stethoscope />,
+  },
+};
 
 // Product routes
 export const productRoutes: BaseRoute[] = [
@@ -467,29 +894,29 @@ export const contactRoutes: BaseRoute[] = [
     },
   },
   {
-    slug: "buy-now",
+    slug: "leave-review",
     title: {
-      en: "Buy Now",
-      de: "Jetzt kaufen",
-      fr: "Acheter maintenant",
-      es: "Comprar ahora",
-      it: "Compra ora",
+      en: "Leave a Review",
+      de: "Bewertung abgeben",
+      fr: "Laisser un avis",
+      es: "Dejar una reseña",
+      it: "Lascia una recensione",
     },
     description: {
-      en: "Purchase our Achilles rupture splint.",
-      de: "Kaufen Sie unsere Achillessehnenruptur-Schiene.",
-      fr: "Achetez notre attelle de rupture d'Achille.",
-      es: "Compre nuestra férula de ruptura de Aquiles.",
-      it: "Acquista la nostra férula per rottura di Achille.",
+      en: "Share your experience and earn cashback.",
+      de: "Teilen Sie Ihre Erfahrung und erhalten Sie Cashback.",
+      fr: "Partagez votre expérience et gagnez du cashback.",
+      es: "Comparte tu experiencia y gana cashback.",
+      it: "Condividi la tua esperienza e guadagna cashback.",
     },
-    icon: <ShoppingCart />,
+    icon: <Star />,
     variant: "default",
     slugTranslations: {
-      en: "buy-now",
-      de: "jetzt-kaufen",
-      fr: "acheter-maintenant",
-      es: "comprar-ahora",
-      it: "compra-ora",
+      en: "leave-review",
+      de: "bewertung-abgeben",
+      fr: "laisser-avis",
+      es: "dejar-resena",
+      it: "lascia-recensione",
     },
   },
   {
@@ -1193,6 +1620,10 @@ export const legalRoutes: BaseRoute[] = [
 // All routes combined
 export const allBaseRoutes: BaseRoute[] = [
   ...routes,
+  ...guidePageRoutes,
+  ...recoveryPhaseRoutes,
+  ...courseRoutes,
+  legacyCourseRoute,
   ...productRoutes,
   ...partnerRoutes,
   ...contactRoutes,
@@ -1211,9 +1642,15 @@ export function generateRouteForLanguage(
     baseRoute.slug;
 
   // Don't encode the slug - let the browser handle URL encoding naturally
-  const href = language.dir === "/"
-    ? `/${translatedSlug}`
-    : `${language.dir}/${translatedSlug}`;
+  // Handle empty slug (home route) specially to avoid double slashes
+  let href: string;
+  if (translatedSlug === "" || translatedSlug === undefined) {
+    href = language.dir === "/" ? "/" : language.dir;
+  } else {
+    href = language.dir === "/"
+      ? `/${translatedSlug}`
+      : `${language.dir}/${translatedSlug}`;
+  }
 
   return {
     href: href.replace(/\/+/g, "/").replace(/\/$/, "") || "/",
@@ -1282,6 +1719,33 @@ export function getProductRoutesByLanguage(langCode: string): Route[] {
   if (!language) return [];
 
   return productRoutes.map((baseRoute) =>
+    generateRouteForLanguage(baseRoute, language)
+  );
+}
+
+export function getCourseRoutesByLanguage(langCode: string): Route[] {
+  const language = languages.find((lang) => lang.code === langCode);
+  if (!language) return [];
+
+  return courseRoutes.map((baseRoute) =>
+    generateRouteForLanguage(baseRoute, language)
+  );
+}
+
+export function getGuidePageRoutesByLanguage(langCode: string): Route[] {
+  const language = languages.find((lang) => lang.code === langCode);
+  if (!language) return [];
+
+  return guidePageRoutes.map((baseRoute) =>
+    generateRouteForLanguage(baseRoute, language)
+  );
+}
+
+export function getRecoveryPhaseRoutesByLanguage(langCode: string): Route[] {
+  const language = languages.find((lang) => lang.code === langCode);
+  if (!language) return [];
+
+  return recoveryPhaseRoutes.map((baseRoute) =>
     generateRouteForLanguage(baseRoute, language)
   );
 }
@@ -1417,5 +1881,14 @@ export const faqLinks = articleRoutes.map((route) =>
   generateRouteForLanguage(route, languages[0])
 );
 export const legalLinks = legalRoutes.map((route) =>
+  generateRouteForLanguage(route, languages[0])
+);
+export const courseLinks = courseRoutes.map((route) =>
+  generateRouteForLanguage(route, languages[0])
+);
+export const guidePageLinks = guidePageRoutes.map((route) =>
+  generateRouteForLanguage(route, languages[0])
+);
+export const recoveryPhaseLinks = recoveryPhaseRoutes.map((route) =>
   generateRouteForLanguage(route, languages[0])
 );

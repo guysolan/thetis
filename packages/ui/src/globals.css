@@ -11,6 +11,29 @@
   }
 }
 
+/* Reusable gradient utility classes */
+@layer components {
+  /* Primary color gradient - fades from primary to background (like ColorGradient.astro) */
+  .color-gradient {
+    @apply bg-gradient-to-b from-primary/25 to-background pt-16 w-full;
+  }
+
+  /* Gradient that fades in and out */
+  .color-gradient-in-out {
+    @apply bg-gradient-to-b from-background via-primary/25 to-background py-16 w-full;
+  }
+
+  /* Subtle primary gradient for cards/sections */
+  .color-gradient-subtle {
+    @apply bg-gradient-to-br from-primary/10 to-background;
+  }
+
+  /* Hero section gradient */
+  .color-gradient-hero {
+    @apply bg-gradient-to-b from-primary/15 via-primary/5 to-background;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

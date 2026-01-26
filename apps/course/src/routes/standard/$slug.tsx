@@ -1,70 +1,29 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import {
-  formatWeekDay,
   getNextSection,
   getPrevSection,
   getSectionBySlug,
   type SectionMetadata,
   sections,
+  slugToChapter,
 } from "@/content/course/sections";
-import { ContentRenderer, CourseProgressTracker } from "@/components/course";
+import {
+  ContentRenderer,
+  CoursePageLayout,
+  CourseProgressTracker,
+  CourseSectionHeader,
+  LessonCompletionButton,
+} from "@/components/course";
 import type { SectionContent } from "@/components/course/types";
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
 import { useCourseProgress } from "@/hooks/use-course-progress";
 import { useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 
-// Map slugs to their chronological folders - dynamically generated from sections.ts
-// This ensures the mapping stays in sync with the actual sections
-const slugToFolder: Record<string, string> = {
-  // 00-practical - Throughout recovery
-  "first-week-checklist": "00-practical",
-  "mental-health-recovery": "00-practical",
-  "driving-guidelines": "00-practical",
-  "pain-management-throughout-recovery": "00-practical",
-  // 01-emergency - Days 0-3
-  "emergency-care": "01-emergency",
-  "blood-clot-prevention": "01-emergency",
-  // 02-early-treatment - Days 2-14
-  "choosing-your-boot": "02-early-treatment",
-  "specialist-appointment": "02-early-treatment",
-  "treatment-decision": "02-early-treatment",
-  // 03-boot-phase - Days 14-56
-  "your-walking-boot": "03-boot-phase",
-  "boot-adjustment-and-care": "03-boot-phase",
-  "boot-progression-protocol": "03-boot-phase",
-  "sleeping-with-boot": "03-boot-phase",
-  "washing-and-hygiene": "03-boot-phase",
-  "crutches-and-mobility": "03-boot-phase",
-  "healing-process": "03-boot-phase",
-  "nutrition-for-healing": "03-boot-phase",
-  "wedge-removal": "03-boot-phase",
-  "building-strength-in-boot": "03-boot-phase",
-  "final-boot-phase": "03-boot-phase",
-  // 04-transition - Days 74-98
-  "boot-transition": "04-transition",
-  "scar-management": "04-transition",
-  "post-boot-challenges": "04-transition",
-  // 05-physiotherapy - Days 63-105
-  "starting-physio": "05-physiotherapy",
-  "key-exercises": "05-physiotherapy",
-  "walking-properly": "05-physiotherapy",
-  "progressive-strengthening": "05-physiotherapy",
-  // 06-recovery - Days 84-160
-  "swimming-and-water-activities": "06-recovery",
-  "building-cardio": "06-recovery",
-  "functional-milestones": "06-recovery",
-  "returning-to-life": "06-recovery",
-  // 07-advanced - Days 200-220
-  "starting-to-run": "07-advanced",
-  "plyometrics": "07-advanced",
-  // 08-long-term - Days 180-240
-  "six-month-milestone": "08-long-term",
-  "preventing-rerupture": "08-long-term",
-  "new-normal": "08-long-term",
-  "when-things-dont-go-to-plan": "08-long-term",
-};
+// Use slugToChapter from sections.ts as the single source of truth
+const slugToFolder = slugToChapter;
 
 // Dynamic import for section content
 async function loadSectionContent(
@@ -96,6 +55,8 @@ async function loadSectionContent(
     return null;
   }
 }
+
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 export const Route = createFileRoute("/standard/$slug")({
   loader: async ({ params }) => {
@@ -139,7 +100,11 @@ export const Route = createFileRoute("/standard/$slug")({
       prevSection,
     };
   },
-  component: SectionPage,
+  component: () => (
+    <ProtectedRoute requiredCourse="standard">
+      <SectionPage />
+    </ProtectedRoute>
+  ),
   notFoundComponent: () => (
     <div className="mx-auto px-4 sm:px-6 py-12 max-w-4xl text-center">
       <h1 className="mb-4 font-semibold text-foreground text-3xl">
@@ -164,19 +129,49 @@ function SectionPage() {
   const totalSections = sections.length;
   const {
     markLessonComplete,
+    markLessonIncomplete,
     isLessonComplete,
     getCompletionPercentage,
+    setCurrentBookmark,
   } = useCourseProgress();
   const isComplete = isLessonComplete(section.slug);
   const completionPercentage = getCompletionPercentage(totalSections);
   const completedCount =
     sections.filter((s) => isLessonComplete(s.slug)).length;
 
-  // Mark lesson as complete when viewed
+  // Track section access (update last_accessed_at when section is viewed)
   useEffect(() => {
-    if (!isComplete) {
-      markLessonComplete(section.slug);
-    }
+    setCurrentBookmark(section.slug);
+  }, [section.slug, setCurrentBookmark]);
+
+  // Auto-mark lesson as complete when user scrolls through most of it
+  useEffect(() => {
+    if (isComplete) return; // Already completed
+
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollPercentage = (scrollTop + windowHeight) / documentHeight;
+
+      // Mark as complete when user scrolls through 75% of the content
+      if (scrollPercentage > 0.75) {
+        markLessonComplete(section.slug);
+        window.removeEventListener("scroll", handleScroll);
+      }
+    };
+
+    // Add a small delay before starting to track scroll
+    const timeoutId = setTimeout(() => {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      // Also check immediately in case content is short
+      handleScroll();
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [section.slug, isComplete, markLessonComplete]);
 
   // Scroll to top when section changes
@@ -185,178 +180,213 @@ function SectionPage() {
   }, [section.slug]);
 
   return (
-    <div className="mx-auto px-4 sm:px-6 py-8 md:py-12 max-w-4xl">
-      {/* Top Navigation */}
-      <div className="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-4 mb-6">
-        <Link
-          to="/standard"
-          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground text-sm transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Course
-        </Link>
-        {section.timing && (
-          <div className="flex items-center gap-2 text-muted-foreground text-sm">
-            <Clock className="w-4 h-4" />
-            {section.timing.when_useful}
+    <CoursePageLayout>
+      <CourseSectionHeader
+        backTo="/standard"
+        backLabel="Back to Course"
+        rightAction={
+          <LessonCompletionButton
+            isComplete={isComplete}
+            onToggle={() => {
+              const currentSlug = section.slug;
+              const currentIsComplete = isLessonComplete(currentSlug);
+              if (currentIsComplete) {
+                markLessonIncomplete(currentSlug);
+              } else {
+                markLessonComplete(currentSlug);
+              }
+            }}
+          />
+        }
+      />
+
+      {/* Layout: Progress tracker left, content right on large screens */}
+      <div className="flex lg:flex-row flex-col gap-8 mb-12">
+        {/* Progress Tracker - Left side on large screens */}
+        <div className="lg:w-64 lg:shrink-0">
+          <div className="lg:top-20 lg:sticky lg:self-start bg-muted/50 p-4 border border-border rounded-xl lg:h-[calc(100vh-8rem)] lg:overflow-y-auto">
+            <CourseProgressTracker
+              currentSectionNumber={section.section_number}
+              totalSections={totalSections}
+              completedCount={completedCount}
+              completionPercentage={completionPercentage}
+              sections={sections}
+              isSectionComplete={isLessonComplete}
+            />
           </div>
-        )}
-      </div>
+        </div>
 
-      {/* Top Navigation Buttons */}
-      {(prevSection || nextSection) && (
-        <nav className="flex sm:flex-row flex-col gap-4 mb-8">
-          {prevSection
-            ? (
-              <Link
-                to="/standard/$slug"
-                params={{ slug: prevSection.slug }}
-                className={cn(
-                  "group flex flex-1 items-center gap-3 hover:bg-muted/50 p-3 border border-border hover:border-primary/30 rounded-lg transition-all",
-                )}
-              >
-                <ArrowLeft className="w-4 h-4 text-muted-foreground group-hover:text-primary shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <div className="text-muted-foreground text-xs">Previous</div>
-                  <div className="font-medium text-foreground group-hover:text-primary text-sm truncate">
-                    {prevSection.title}
-                  </div>
-                </div>
-              </Link>
-            )
-            : <div className="flex-1" />}
-          {nextSection
-            ? (
-              <Link
-                to="/standard/$slug"
-                params={{ slug: nextSection.slug }}
-                className={cn(
-                  "group flex flex-1 items-center gap-3 hover:bg-muted/50 p-3 border border-border hover:border-primary/30 rounded-lg transition-all",
-                )}
-              >
-                <div className="flex-1 min-w-0 text-right">
-                  <div className="text-muted-foreground text-xs">Next</div>
-                  <div className="font-medium text-foreground group-hover:text-primary text-sm truncate">
-                    {nextSection.title}
-                  </div>
-                </div>
-                <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary shrink-0" />
-              </Link>
-            )
-            : <div className="flex-1" />}
-        </nav>
-      )}
+        {/* Content Area - Right side on large screens */}
+        <div className="flex-1 min-w-0">
+          {/* Top Navigation Buttons */}
+          {(prevSection || nextSection) && (
+            <nav className="flex sm:flex-row flex-col gap-4 mb-12">
+              {prevSection
+                ? (
+                  <Link
+                    to="/standard/$slug"
+                    params={{ slug: prevSection.slug }}
+                    className={cn(
+                      "group flex flex-1 items-center gap-3 hover:bg-muted/50 p-3 border border-border hover:border-primary/30 rounded-lg transition-all",
+                    )}
+                  >
+                    <ArrowLeft className="w-4 h-4 text-muted-foreground group-hover:text-primary shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-muted-foreground text-xs">
+                        Previous
+                      </div>
+                      <div className="font-medium text-foreground group-hover:text-primary text-sm truncate">
+                        {prevSection.title}
+                      </div>
+                    </div>
+                  </Link>
+                )
+                : <div className="flex-1" />}
+              {nextSection
+                ? (
+                  <Link
+                    to="/standard/$slug"
+                    params={{ slug: nextSection.slug }}
+                    onClick={() => {
+                      // Mark current lesson as complete when navigating to next
+                      if (!isComplete) {
+                        markLessonComplete(section.slug);
+                      }
+                    }}
+                    className={cn(
+                      "group flex flex-1 items-center gap-3 hover:bg-muted/50 p-3 border border-border hover:border-primary/30 rounded-lg transition-all",
+                    )}
+                  >
+                    <div className="flex-1 min-w-0 text-right">
+                      <div className="text-muted-foreground text-xs">Next</div>
+                      <div className="font-medium text-foreground group-hover:text-primary text-sm truncate">
+                        {nextSection.title}
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary shrink-0" />
+                  </Link>
+                )
+                : <div className="flex-1" />}
+            </nav>
+          )}
 
-      {/* Progress Tracker */}
-      <div className="bg-muted/50 mb-8 p-4 border border-border rounded-xl">
-        <CourseProgressTracker
-          currentSectionNumber={section.section_number}
-          totalSections={totalSections}
-          completedCount={completedCount}
-          completionPercentage={completionPercentage}
-          sections={sections}
-        />
-      </div>
-
-      {/* Section Header */}
-      <header className="mb-10">
-        <h1 className="mb-3 font-semibold text-foreground text-3xl md:text-4xl tracking-tight">
-          {section.title}
-        </h1>
-        <p className="mb-4 text-muted-foreground text-lg">
-          {section.description}
-        </p>
-        {section.timing && (
-          <div className="space-y-3 bg-primary/5 p-4 md:p-5 border border-primary/20 rounded-lg">
-            <div>
-              <p className="mb-2 font-semibold text-primary text-sm">
-                When this lesson is useful:
+          {/* Main Content */}
+          <div>
+            {/* Section Header */}
+            <header className="mb-10">
+              <h1 className="mb-3 font-semibold text-foreground text-3xl md:text-4xl tracking-tight">
+                {section.title}
+              </h1>
+              <p className="mb-4 text-muted-foreground text-lg">
+                {section.description}
               </p>
-              <p className="text-foreground text-sm leading-relaxed">
-                {section.timing.when_useful}
-              </p>
-            </div>
-            {section.timing.triggers && section.timing.triggers.length > 0 && (
-              <div>
-                <p className="mb-2 font-semibold text-primary text-sm">
-                  Useful when:
-                </p>
-                <ul className="space-y-1.5 text-foreground text-sm list-disc list-inside">
-                  {section.timing.triggers.map((trigger, idx) => (
-                    <li key={idx} className="leading-relaxed">{trigger}</li>
-                  ))}
-                </ul>
+              {section.timing && (
+                <div className="space-y-3 bg-primary/5 p-4 md:p-5 border border-primary/20 rounded-lg">
+                  <div>
+                    <p className="mb-2 font-semibold text-primary text-base md:text-lg">
+                      When this lesson is useful:
+                    </p>
+                    <p className="text-foreground text-sm leading-relaxed">
+                      {section.timing.when_useful}
+                    </p>
+                  </div>
+                  {section.timing.triggers &&
+                    section.timing.triggers.length > 0 && (
+                    <div>
+                      <p className="mb-2 font-semibold text-primary text-base md:text-lg">
+                        Useful when:
+                      </p>
+                      <ul className="space-y-1.5 text-foreground text-sm list-disc list-inside">
+                        {section.timing.triggers.map((trigger, idx) => (
+                          <li key={idx} className="leading-relaxed">
+                            {trigger}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+            </header>
+
+            {/* Content */}
+            <article className="mb-12 section-card">
+              <ContentRenderer content={content} />
+            </article>
+
+            {/* Email Signup CTA */}
+            <div className="bg-muted/50 mb-12 p-6 border border-border rounded-2xl">
+              <div className="flex sm:flex-row flex-col sm:items-center gap-4">
+                <div className="flex-1">
+                  <h3 className="mb-1 font-semibold text-foreground">
+                    Get personalized recovery emails
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    Receive guidance timed to your injury date, exactly when you
+                    need it
+                  </p>
+                </div>
+                <EmailSignupDialog supabaseClient={supabase} />
               </div>
+            </div>
+
+            {/* Bottom Navigation */}
+            {(prevSection || nextSection) && (
+              <nav className="flex sm:flex-row flex-col gap-4 pt-8 border-border border-t">
+                {prevSection
+                  ? (
+                    <Link
+                      to="/standard/$slug"
+                      params={{ slug: prevSection.slug }}
+                      className={cn(
+                        "group flex flex-1 items-center gap-4 hover:bg-muted/50 p-4 border border-border hover:border-primary/30 rounded-xl transition-all",
+                      )}
+                    >
+                      <ArrowLeft className="w-5 h-5 text-muted-foreground group-hover:text-primary shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <div className="text-muted-foreground text-sm">
+                          Previous
+                        </div>
+                        <div className="font-semibold text-foreground group-hover:text-primary truncate">
+                          {prevSection.title}
+                        </div>
+                      </div>
+                    </Link>
+                  )
+                  : <div className="flex-1" />}
+
+                {nextSection
+                  ? (
+                    <Link
+                      to="/standard/$slug"
+                      params={{ slug: nextSection.slug }}
+                      onClick={() => {
+                        // Mark current lesson as complete when navigating to next
+                        if (!isComplete) {
+                          markLessonComplete(section.slug);
+                        }
+                      }}
+                      className={cn(
+                        "group flex flex-1 items-center gap-4 hover:bg-muted/50 p-4 border border-border hover:border-primary/30 rounded-xl transition-all",
+                      )}
+                    >
+                      <div className="flex-1 min-w-0 text-right">
+                        <div className="text-muted-foreground text-sm">
+                          Next
+                        </div>
+                        <div className="font-semibold text-foreground group-hover:text-primary truncate">
+                          {nextSection.title}
+                        </div>
+                      </div>
+                      <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary shrink-0" />
+                    </Link>
+                  )
+                  : <div className="flex-1" />}
+              </nav>
             )}
           </div>
-        )}
-      </header>
-
-      {/* Content */}
-      <article className="mb-12 section-card">
-        <ContentRenderer content={content} />
-      </article>
-
-      {/* Email Signup CTA */}
-      <div className="bg-muted/50 mb-12 p-6 border border-border rounded-2xl">
-        <div className="flex sm:flex-row flex-col sm:items-center gap-4">
-          <div className="flex-1">
-            <h3 className="mb-1 font-semibold text-foreground">
-              Get personalized recovery emails
-            </h3>
-            <p className="text-muted-foreground text-sm">
-              Receive guidance timed to your injury date, exactly when you need
-              it
-            </p>
-          </div>
-          <EmailSignupDialog />
         </div>
       </div>
-
-      {/* Bottom Navigation */}
-      {(prevSection || nextSection) && (
-        <nav className="flex sm:flex-row flex-col gap-4 pt-8 border-border border-t">
-          {prevSection
-            ? (
-              <Link
-                to="/standard/$slug"
-                params={{ slug: prevSection.slug }}
-                className={cn(
-                  "group flex flex-1 items-center gap-4 hover:bg-muted/50 p-4 border border-border hover:border-primary/30 rounded-xl transition-all",
-                )}
-              >
-                <ArrowLeft className="w-5 h-5 text-muted-foreground group-hover:text-primary shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <div className="text-muted-foreground text-sm">Previous</div>
-                  <div className="font-semibold text-foreground group-hover:text-primary truncate">
-                    {prevSection.title}
-                  </div>
-                </div>
-              </Link>
-            )
-            : <div className="flex-1" />}
-
-          {nextSection
-            ? (
-              <Link
-                to="/standard/$slug"
-                params={{ slug: nextSection.slug }}
-                className={cn(
-                  "group flex flex-1 items-center gap-4 hover:bg-muted/50 p-4 border border-border hover:border-primary/30 rounded-xl transition-all",
-                )}
-              >
-                <div className="flex-1 min-w-0 text-right">
-                  <div className="text-muted-foreground text-sm">Next</div>
-                  <div className="font-semibold text-foreground group-hover:text-primary truncate">
-                    {nextSection.title}
-                  </div>
-                </div>
-                <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary shrink-0" />
-              </Link>
-            )
-            : <div className="flex-1" />}
-        </nav>
-      )}
-    </div>
+    </CoursePageLayout>
   );
 }

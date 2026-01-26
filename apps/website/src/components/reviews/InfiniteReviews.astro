@@ -6,7 +6,8 @@ import ReviewCarousel from "./ReviewCarousel";
 ---
 
 <div
-  class="hidden left-0 relative lg:flex flex-col justify-center items-center py-8 rounded-md w-[100vw] overflow-hidden antialiased"
+  class="hidden relative lg:flex flex-col justify-center items-center py-8 rounded-md overflow-hidden antialiased"
+  style="width: 100vw; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%);"
 >
   <InfiniteMovingCards
     items={patients
@@ -19,13 +20,16 @@ import ReviewCarousel from "./ReviewCarousel";
 </div>
 
 <div
-  class="lg:hidden left-0 relative flex flex-col justify-center items-center py-8 rounded-md w-[100vw] overflow-hidden antialiased"
+  class="lg:hidden relative flex flex-col justify-center items-center py-8 rounded-md overflow-hidden antialiased"
+  style="width: 100vw; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%);"
 >
   <ReviewCarousel client:only />
 </div>
 
-<a
-  href="/reviews"
-  class="flex mx-auto px-4 pb-8 text-primary text-xl text-center hover:underline underline-offset-4"
-  >View all reviews</a
->
+<div class="flex justify-center items-center">
+  <a
+    href="/reviews"
+    class="flex mx-auto px-4 pb-8 text-primary text-xl text-center hover:underline underline-offset-4"
+    >View all reviews</a
+  >
+</div>

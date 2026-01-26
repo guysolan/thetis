@@ -1,0 +1,84 @@
+---
+import Layout from "./Layout.astro";
+import type { Lang } from "@/config/languages";
+import { Image } from "astro:assets";
+import AchillesRuptureDrawing from "@/assets/drawings/achilles-drawing.svg";
+import { Calendar, ArrowLeft, Globe } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+
+export interface Props {
+    title: string;
+    description: string;
+    lang: Lang;
+    englishSlug: string;
+}
+
+const { title, description, lang, englishSlug } = Astro.props;
+
+const langNames: Record<string, string> = {
+    de: "Deutsch",
+    fr: "Français",
+    es: "Español",
+    it: "Italiano",
+};
+---
+
+<Layout
+    title={title}
+    description={description}
+    lang={lang}
+>
+    <main class="relative flex flex-col gap-4">
+        <section class="bg-gradient-to-b from-primary/5 to-white min-h-[60vh] flex items-center">
+            <div class="flex lg:flex-row flex-col justify-between items-center gap-8 mx-auto px-4 py-12 max-w-7xl w-full">
+                <div class="flex-1 max-w-2xl text-center lg:text-left">
+                    <!-- Phase Badge -->
+                    <div class="inline-flex items-center gap-2 bg-amber-100 mb-4 px-4 py-1.5 rounded-full font-medium text-amber-700 text-sm uppercase tracking-wide">
+                        <Globe className="w-4 h-4" />
+                        {langNames[lang]} - Coming Soon
+                    </div>
+                    
+                    <h1 class="mb-6 font-bold text-neutral-900 text-3xl md:text-4xl lg:text-5xl leading-tight">{title}</h1>
+                    <p class="mb-8 text-neutral-600 text-lg">{description}</p>
+                    
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-8">
+                        <p class="text-amber-800 font-medium mb-2">
+                            {lang === "de" ? "Diese Seite wird bald übersetzt." :
+                             lang === "fr" ? "Cette page sera bientôt traduite." :
+                             lang === "es" ? "Esta página será traducida pronto." :
+                             lang === "it" ? "Questa pagina sarà presto tradotta." :
+                             "This page will be translated soon."}
+                        </p>
+                        <p class="text-amber-700 text-sm">
+                            {lang === "de" ? "In der Zwischenzeit können Sie die englische Version lesen." :
+                             lang === "fr" ? "En attendant, vous pouvez lire la version anglaise." :
+                             lang === "es" ? "Mientras tanto, puede leer la versión en inglés." :
+                             lang === "it" ? "Nel frattempo, puoi leggere la versione inglese." :
+                             "In the meantime, you can read the English version."}
+                        </p>
+                    </div>
+                    
+                    <a
+                        href={`/${englishSlug}`}
+                        class={cn(buttonVariants({ variant: "default", size: "lg" }), "gap-2")}
+                    >
+                        <ArrowLeft className="w-4 h-4" />
+                        {lang === "de" ? "Englische Version lesen" :
+                         lang === "fr" ? "Lire la version anglaise" :
+                         lang === "es" ? "Leer versión en inglés" :
+                         lang === "it" ? "Leggi la versione inglese" :
+                         "Read English Version"}
+                    </a>
+                </div>
+                <Image 
+                    class="hidden lg:block flex-shrink-0 max-h-[50vh] object-contain opacity-50" 
+                    height={500} 
+                    width={375} 
+                    src={AchillesRuptureDrawing} 
+                    alt="Achilles tendon illustration" 
+                />
+            </div>
+        </section>
+    </main>
+</Layout>

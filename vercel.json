@@ -6,6 +6,7 @@
       "preview": false
     }
   },
+  "installCommand": "bun install",
   "build": {
     "env": {
       "ENABLE_TURBO_INSTALL": "0"

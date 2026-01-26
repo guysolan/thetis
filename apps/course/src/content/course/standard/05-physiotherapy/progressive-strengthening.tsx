@@ -1,18 +1,19 @@
 import type { SectionContent } from "@/components/course/types";
 import IsomOvercomingSeatedCalf from "@/assets/isom-overcoming-seated-calf.png";
 import IsomYieldingStandingSeated from "@/assets/isom-yielding-standing-seated.png";
+import HeelRaiseProgression from "@/assets/heel-raise-progression.png";
 
 export const metadata = {
     slug: "progressive-strengthening",
     title: "Progressive Strengthening Begins",
     description:
-        "Single-leg heel raises, eccentric drops, and resistance training",
+        "Single-leg heel raises, seated calf strength, and resistance training",
     status: "drafting" as const,
 };
 
 export const content: SectionContent = {
     intro:
-        "By Week 15, you're well into Phase 2 and making real progress. Your walking is improving, and you're building strength. Now it's time to focus on progressive strengthening — making your exercises harder systematically. This lesson covers single-leg heel raises, eccentric drops, and resistance training. These exercises build the strength you need for Phase 3 and beyond.",
+        "By Week 15, you're well into **Phase 3: Capacity** and making real progress. Your walking is improving, and you're building strength. Now it's time to focus on progressive strengthening — making your exercises harder systematically. This lesson covers single-leg heel raises, seated calf strength, and resistance training. These exercises build the strength you need for Phase 4 and beyond.",
     blocks: [
         {
             type: "heading",
@@ -25,11 +26,11 @@ export const content: SectionContent = {
             items: [
                 {
                     text:
-                        "Master single-leg heel raises — work toward 25+ reps, this is the gold standard",
+                        "Master single-leg heel raises — work toward 15 reps on flat ground, this is the Phase 3 mid-point target",
                 },
                 {
                     text:
-                        "Start eccentric drops — controlled lowering is crucial for tendon strength",
+                        "Build seated calf strength — aim for 90% LSI (Limb Symmetry Index) or bodyweight targets (1.4x isometric, 1.2x isotonic)",
                 },
                 {
                     text:
@@ -51,39 +52,119 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Single-Leg Heel Raises: The Gold Standard",
+            title: "Why Progressive Strengthening Matters",
             content: [
                 {
                     type: "text",
                     content:
-                        "Single-leg heel raises are the **gold standard test** for Phase 2. Being able to do 25+ repetitions shows your calf is strong enough for normal walking and daily activities. Think of it as **passing a driving test** — once you can do it, you're ready for the next phase.",
+                        "Before diving into the exercises, it's important to understand **why** progressive strengthening is so critical in this phase. The answer: **preventing [tendon elongation](/standard/healing-process)** — the biggest obstacle to returning to sport and normal function.",
                 },
                 {
                     type: "card",
-                    title: "Why 25+ reps matters",
+                    title: "Understanding tendon elongation",
+                    description: "The biggest obstacle to recovery.",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "**Everyone gets some elongation** after an Achilles rupture. The healing tendon becomes longer, and the muscle becomes shorter. This is the **biggest obstacle** to returning to sport and normal function — you can't get your power back if the tendon is elongated.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**The goal:** Minimize elongation through proper strengthening. Strong tendon = less elongation = better outcomes. The exercises in this lesson help your physio track whether your tendon is maintaining its length and developing the right stiffness.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Critical window:** The first 16 weeks after injury. During this time, the muscle-tendon unit is most responsive to loading. While structural elongation (lengthening) of the tendon is generally permanent, you can significantly improve tendon **stiffness** and muscle **strength** to compensate. This is why progressive strengthening matters so much right now.",
+                        },
+                    ],
+                },
+                {
+                    type: "alert",
+                    variant: "info",
+                    content:
+                        "**Good news:** Your tendon is malleable — it can improve with the right loading over time. Consistent strengthening work now prevents elongation later. Every exercise session is protecting your tendon and improving your outcome.",
+                },
+            ],
+        },
+        {
+            type: "section",
+            title: "Single-Leg Heel Raises: The Phase 3 Target",
+            content: [
+                {
+                    type: "text",
+                    content:
+                        "Single-leg heel raises are a **key test** for Phase 3. Being able to do **15 repetitions** on flat ground shows your calf is strong enough for normal walking and daily activities. This is the milestone that shows you're ready for more advanced Phase 3 work.",
+                },
+                {
+                    type: "card",
+                    title: "Why 15 reps matters",
                     description: "The science behind the target.",
                     variant: "highlight",
                     content: [
                         {
                             type: "text",
                             content:
-                                "**25+ reps indicates strength** — your calf can produce enough force for normal function. This is the target that shows you're ready for Phase 3.",
+                                "**15 reps indicates functional strength** — your calf can produce enough force for normal walking and daily activities. This is the interim target within Phase 3 that shows you're ready for Stage 4 preparation.",
                         },
                         {
                             type: "text",
                             content:
-                                "**It's a functional test** — if you can do 25+ single-leg heel raises, your calf is strong enough for walking, stairs, and daily activities.",
+                                "**It's a functional test** — if you can do 15 single-leg heel raises on flat ground, your calf has the strength needed for protected walking and progressing to more advanced work.",
                         },
                         {
                             type: "text",
                             content:
-                                "**It's achievable** — this isn't an impossible goal. With consistent work, most people reach this target.",
+                                "**It's achievable** — this isn't an impossible goal. With consistent work, most people reach this target during Phase 3.",
                         },
                     ],
                 },
                 {
                     type: "card",
-                    title: "How to progress to 25+ reps",
+                    title: "Heel Raise Progression Pathway",
+                    description:
+                        "Building from double-leg to weighted single-leg.",
+                    variant: "highlight",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "Heel raises progress from basic to advanced. Follow this pathway to build strength systematically:",
+                        },
+                        {
+                            type: "image",
+                            src: HeelRaiseProgression,
+                            alt: "Four-panel progression showing heel raise exercises: double-leg floor, single-leg floor, single-leg deficit, weighted single-leg deficit",
+                            caption:
+                                "Heel raise progression: from double-leg to weighted single-leg deficit",
+                        },
+                        {
+                            type: "text",
+                            content: "**Progression order:**",
+                        },
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "**Double-leg floor** — Start here, build to 3 sets of 25 reps",
+                                "**Single-leg floor** — Progress when double-leg is easy, build to 3 sets of 15 reps",
+                                "**Single-leg deficit** — Add step/platform when single-leg floor is easy, build to 3 sets of 15 reps",
+                                "**Weighted single-leg deficit** — Add weight when deficit is easy, aim for 3-4 sets of 6-15 reps",
+                            ],
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Important:** Don't skip steps. Master each level before progressing to the next. Your physio will guide you on when to progress.",
+                        },
+                    ],
+                },
+                {
+                    type: "card",
+                    title: "How to progress to 15 reps",
                     description: "Building up gradually.",
                     variant: "default",
                     content: [
@@ -145,316 +226,65 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Eccentric Drops: Building Tendon Strength",
+            title: "Seated Calf Raises: Building Strength Safely",
             content: [
                 {
                     type: "text",
                     content:
-                        "Eccentric exercises — controlled lowering — are crucial for tendon strength. Think of it like **lowering a weight slowly** — the controlled lowering builds strength in a way that concentric (lifting) exercises don't.",
+                        "Seated calf raises are a **key exercise** for Phase 3. They allow you to load your calf safely while building the strength needed for walking and standing exercises. Your physio will track your progress using specific force targets.",
                 },
                 {
                     type: "card",
-                    title: "What eccentric drops are",
+                    title: "Phase 3 strength targets",
+                    description: "Two ways to measure your progress.",
+                    variant: "highlight",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "**1. Limb Symmetry Index (LSI):** The most practical target. Aim for **90% strength** in your injured leg compared to your healthy leg. If your healthy leg can push 100kg, your injured leg should target 90kg.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**2. Bodyweight Multipliers:** Used if your physio has force plates. **Isometric target:** 1.4x body weight MVIC (maximum voluntary isometric contraction — how hard you can push). **Isotonic target:** 1.2x body weight seated isotonic.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Why these targets:** Whether using LSI or bodyweight, these goals ensure your tendon has the stiffness needed to handle walking loads and prevent elongation.",
+                        },
+                        {
+                            type: "image",
+                            src: IsomOvercomingSeatedCalf,
+                            alt: "Grant performing seated calf raise exercise with weight on his knees, foot pointed down on force plate platform",
+                            caption:
+                                "Seated calf raise: building toward Phase 3 strength targets",
+                        },
+                    ],
+                },
+                {
+                    type: "card",
+                    title: "How seated calf raises work",
                     description: "Understanding the exercise.",
                     variant: "default",
                     content: [
                         {
                             type: "text",
                             content:
-                                "**Eccentric** means controlled lowering. For heel raises, this means rising up on both feet, then slowly lowering down on just your injured leg.",
+                                "**Isometric:** You push down as hard as you can and hold for 5 seconds. Your physio may measure this with force plates to track your progress objectively.",
                         },
                         {
                             type: "text",
-                            content: "**How to do it:**",
+                            content:
+                                "**Isotonic:** You lift weight through full range of motion. Start with weight on your knee, progress gradually toward your target.",
                         },
                         {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "Rise up onto your toes using both feet",
-                                "Lift your uninjured leg off the ground",
-                                "Slowly lower down on just your injured leg",
-                                "Take 3-5 seconds to lower — slow and controlled",
-                                "Repeat 10-15 times, 2-3 sets",
-                            ],
+                            type: "text",
+                            content:
+                                "**Progression:** Start with 10-15kg on your knee initially, progress gradually. Work toward 0.8-1x your body weight, then continue toward Phase 3 targets (1.4x BW isometric, 1.2x BW isotonic) before progressing to standing exercises.",
                         },
                     ],
-                },
-                {
-                    type: "card",
-                    title: "Why eccentric exercises matter",
-                    description: "The tendon strength benefit.",
-                    variant: "muted",
-                    content: [
-                        {
-                            type: "text",
-                            content:
-                                "**Eccentric loading strengthens tendons** — research shows eccentric exercises are particularly effective for tendon strength. They load your tendon in a controlled way that promotes healing and strength.",
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "**They're safe when done correctly** — controlled lowering is safer than explosive movements. Your physio will guide you on proper form.",
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "**They prepare you for Phase 3** — Phase 3 involves more dynamic movements. Eccentric strength provides the foundation.",
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            type: "section",
-            title: "Resistance Training Progression",
-            content: [
-                {
-                    type: "text",
-                    content:
-                        "As you get stronger, you need to add resistance to continue building strength. This is the **progressive overload principle** — to get stronger, you need to gradually increase the challenge.",
-                },
-                {
-                    type: "card",
-                    title: "How to progress resistance",
-                    description: "Ways to make exercises harder.",
-                    variant: "default",
-                    content: [
-                        {
-                            type: "text",
-                            content: "**For seated calf raises:**",
-                        },
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "Add weight on your knee — start with 5-10kg, progress gradually",
-                                "Target: build up to 0.8-1x your body weight",
-                                "Progress when you can do 15 reps easily",
-                            ],
-                        },
-                        {
-                            type: "image",
-                            src: IsomOvercomingSeatedCalf,
-                            alt: "Grant performing seated calf raise exercise with weight on his knees, foot in plantarflexion position on force plate platform",
-                            caption:
-                                "Seated calf raise: building toward advanced strength targets",
-                        },
-                        {
-                            type: "card",
-                            title: "Advanced Strength Testing: ISOM Overcoming",
-                            description:
-                                "How physios measure your maximum strength.",
-                            variant: "muted",
-                            content: [
-                                {
-                                    type: "text",
-                                    content:
-                                        "As you progress, your physio may measure your strength using **force plates** (ISOM overcoming test). You sit with your foot on the force plate and push down as hard as you can for 5 seconds. The force plate measures exactly how much force you produce.",
-                                },
-                                {
-                                    type: "text",
-                                    content:
-                                        "**Why it matters:** This objective measurement tracks your progress over time. You can see your strength improving in numbers — for example, going from 1.2x body weight to 1.8x body weight over several weeks shows clear progress.",
-                                },
-                                {
-                                    type: "text",
-                                    content:
-                                        "**Target goals (with bent knee):**",
-                                },
-                                {
-                                    type: "list",
-                                    style: "bullet",
-                                    items: [
-                                        "**Recreational athletes:** >2.0x body weight",
-                                        "**Non-active individuals:** >1.5x body weight",
-                                        "**Note:** Add 20-40% to these targets if testing with straight knee (straight knee is stronger)",
-                                    ],
-                                },
-                                {
-                                    type: "text",
-                                    content:
-                                        "These are long-term goals — work toward them gradually over months, not weeks. The most important thing is consistent progression, not hitting specific numbers on a particular timeline.",
-                                },
-                            ],
-                        },
-                        {
-                            type: "text",
-                            content: "**For standing exercises:**",
-                        },
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "Reduce support — hold with one hand instead of two",
-                                "Progress to no support",
-                                "Add weight (backpack, weight vest) when ready",
-                            ],
-                        },
-                        {
-                            type: "image",
-                            src: IsomYieldingStandingSeated,
-                            alt: "Grant performing standing isometric calf holds, showing progression from double-leg to single-leg in plantarflexion and dorsiflexion positions",
-                            caption:
-                                "Isometric holds: progressing from double-leg to single-leg",
-                        },
-                        {
-                            type: "card",
-                            title: "Advanced Strength Testing: ISOM Yielding",
-                            description:
-                                "How physios test your holding strength.",
-                            variant: "muted",
-                            content: [
-                                {
-                                    type: "text",
-                                    content:
-                                        "**ISOM yielding** tests your ability to hold a position against resistance. You rise up onto your toes, then hold that position with weight on your shoulders (like a barbell). You're preventing yourself from yielding (collapsing) under the load.",
-                                },
-                                {
-                                    type: "text",
-                                    content:
-                                        "**Why it matters:** This tests your ability to maintain a position under load — crucial for walking, running, and jumping. Unlike ISOM overcoming (maximum push), this tests your control and stability.",
-                                },
-                                {
-                                    type: "text",
-                                    content:
-                                        "**Target goals (with straight knee):**",
-                                },
-                                {
-                                    type: "list",
-                                    style: "bullet",
-                                    items: [
-                                        "**Recreational athletes:** >1.0x body weight in dorsiflexion (toes up), >0.8x body weight in plantarflexion (toes down)",
-                                        "**Non-active individuals:** >0.4x body weight in dorsiflexion, >0.6x body weight in plantarflexion",
-                                        "**Note:** Subtract 20-40% from these targets if testing with bent knee (bent knee is weaker)",
-                                    ],
-                                },
-                                {
-                                    type: "text",
-                                    content:
-                                        "**Progression:** Start with double-leg holds in plantarflexion → progress to single-leg → gradually add dorsiflexion as you advance. The plantarflexion position (toes pointed down) is harder to hold, so targets are slightly lower.",
-                                },
-                            ],
-                        },
-                        {
-                            type: "text",
-                            content: "**For resistance bands:**",
-                        },
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "Start with light resistance",
-                                "Progress to medium, then heavy",
-                                "Increase resistance when exercises feel easy",
-                            ],
-                        },
-                    ],
-                },
-                {
-                    type: "card",
-                    title: "Advanced Power Testing: Fast CONC Intent",
-                    description: "Measuring explosive strength and velocity.",
-                    variant: "muted",
-                    content: [
-                        {
-                            type: "text",
-                            content:
-                                "As you progress toward Phase 3 and return to sport, your physio may test your **power** using a fast concentric test. This measures how fast you can move, not just how much force you can produce. Speed matters for sports performance.",
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "**What it is:** You perform calf raises on a 10° incline platform with a **linear encoder** attached. The encoder measures how fast your heel moves (mean peak velocity in m/s). You go down, then explode up as fast as possible. This tests your calf's ability to generate force quickly — crucial for running, jumping, and sports.",
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "**Target goals (Fast CONC Intent test):**",
-                        },
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "**At body weight:** Athletes >0.8 m/s, Non-active >0.5 m/s",
-                                "**At 6RM load (~80% max):** Athletes >0.5 m/s, Non-active >0.3 m/s",
-                            ],
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "**Why it matters:** Strength alone isn't enough for sports. You need to be able to produce force *quickly*. This test shows whether you have the explosive power needed for running, cutting, and jumping. Most physios don't have this equipment, but if yours does, these targets help guide your return to sport.",
-                        },
-                        {
-                            type: "tip",
-                            title: "Alternative: Step stance test",
-                            content:
-                                "If your physio doesn't have a linear encoder or incline platform, you can use a **step platform** for calf raises. Stand with the ball of your foot on the step, heel hanging off the back. This provides greater range of motion and better simulates the incline test. Focus on explosive upward movement — push up as fast as you can.",
-                        },
-                    ],
-                },
-                {
-                    type: "card",
-                    title: "The Goldilocks zone",
-                    description: "Finding the right challenge level.",
-                    variant: "muted",
-                    content: [
-                        {
-                            type: "text",
-                            content:
-                                "**Too easy** — if you can do 20+ reps easily, it's time to add difficulty.",
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "**Too hard** — if you can only do 1-2 reps, it's too difficult. Reduce the challenge.",
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "**Just right** — 8-15 reps is the sweet spot. You should be able to complete all reps with good form, but it should be challenging.",
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            type: "section",
-            title: "Why These Tests Matter: The Elongation Connection",
-            content: [
-                {
-                    type: "text",
-                    content:
-                        "You might wonder why your physio uses these advanced tests (force plates, linear encoders, etc.). The answer: **preventing elongation** and ensuring your tendon heals at the right length with the right strength.",
-                },
-                {
-                    type: "card",
-                    title: "Understanding tendon elongation",
-                    description: "The biggest obstacle to recovery.",
-                    variant: "default",
-                    content: [
-                        {
-                            type: "text",
-                            content:
-                                "**Everyone gets some elongation** after an Achilles rupture. The healing tendon becomes longer, and the muscle becomes shorter. This is the **biggest obstacle** to returning to sport and normal function — you can't get your power back if the tendon is elongated.",
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "**The goal:** Minimize elongation through proper strengthening. These tests help your physio track whether your tendon is maintaining its length and developing the right stiffness. Strong tendon = less elongation = better outcomes.",
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "**Critical window:** The first 16 weeks after injury. During this time, elongation can be reversed with the right loading. After 16-20 weeks, the tendon becomes stiffer and harder to change. This is why progressive strengthening matters so much right now.",
-                        },
-                    ],
-                },
-                {
-                    type: "alert",
-                    variant: "info",
-                    content:
-                        "**Good news:** Your tendon is malleable — it can improve with the right loading over time. Consistent strengthening work now prevents elongation later. Every exercise session is protecting your tendon and improving your outcome.",
                 },
             ],
         },
@@ -515,6 +345,159 @@ export const content: SectionContent = {
         },
         {
             type: "section",
+            title: "Resistance Training: Adding Weight and Difficulty",
+            content: [
+                {
+                    type: "text",
+                    content:
+                        "As you get stronger, you need to add resistance to continue building strength. This is the **progressive overload principle** — to get stronger, you need to gradually increase the challenge.",
+                },
+                {
+                    type: "card",
+                    title: "How to add resistance",
+                    description: "Ways to make exercises harder.",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "text",
+                            content: "**For seated calf raises:**",
+                        },
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "Add weight on your knee — start with 10-15kg, progress gradually",
+                                "Target: build up to 0.8-1x your body weight",
+                                "Stage 2 targets: 1.4x body weight MVIC (isometric), 1.2x body weight isotonic",
+                                "Progress when you can do exercises easily with good form",
+                            ],
+                        },
+                        {
+                            type: "text",
+                            content: "**For standing exercises:**",
+                        },
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "Reduce support — hold with one hand instead of two",
+                                "Progress to no support",
+                                "Add weight (backpack, weight vest) when ready",
+                            ],
+                        },
+                        {
+                            type: "image",
+                            src: IsomYieldingStandingSeated,
+                            alt: "Grant performing standing isometric calf holds, showing progression from double-leg to single-leg with foot pointed down and up",
+                            caption:
+                                "Isometric holds: progressing from double-leg to single-leg",
+                        },
+                    ],
+                },
+                {
+                    type: "card",
+                    title: "Finding the right challenge level",
+                    description: "The Goldilocks zone.",
+                    variant: "muted",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "**Too easy** — if you can do 20+ reps easily, it's time to add difficulty.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Too hard** — if you can only do 1-2 reps, it's too difficult. Reduce the challenge.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Just right** — 8-15 reps is the sweet spot. You should be able to complete all reps with good form, but it should be challenging.",
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            type: "section",
+            title: "Advanced Testing: Understanding Your Physio's Measurements",
+            content: [
+                {
+                    type: "text",
+                    content:
+                        "As you progress, your physio may use advanced equipment to measure your strength objectively. Understanding these tests helps you see your progress in numbers and understand why they matter for preventing elongation.",
+                },
+                {
+                    type: "card",
+                    title: "ISOM Overcoming: Maximum Strength Test",
+                    description: "How physios measure your maximum strength.",
+                    variant: "muted",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "Your physio may measure your strength using **force plates** (ISOM overcoming test). You sit with your foot on the force plate and push down as hard as you can for 5 seconds. The force plate measures exactly how much force you produce.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Why it matters:** This objective measurement tracks your progress over time. You can see your strength improving in numbers — for example, going from 1.2x body weight to 1.8x body weight over several weeks shows clear progress.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Target goals (with bent knee, seated):**",
+                        },
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "**LSI target:** 90% symmetry compared to uninjured leg",
+                                "**Phase 3 BW target:** 1.4x body weight MVIC (seated, foot pointed down)",
+                                "**Phase 4 BW target:** 2.0x body weight MVIC (seated, foot pointed down)",
+                                "**Note:** These are long-term goals — work toward them gradually over months, not weeks",
+                            ],
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "These are long-term goals — work toward them gradually over months, not weeks. The most important thing is consistent progression, not hitting specific numbers on a particular timeline.",
+                        },
+                    ],
+                },
+                {
+                    type: "card",
+                    title: "ISOM Yielding: Holding Strength Test",
+                    description: "How physios test your control and stability.",
+                    variant: "muted",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "**ISOM yielding** tests your ability to hold a position against resistance. You rise up onto your toes, then hold that position with weight on your shoulders (like a barbell). You're preventing yourself from yielding (collapsing) under the load.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Why it matters:** This tests your ability to maintain a position under load — crucial for walking, running, and jumping. Unlike ISOM overcoming (maximum push), this tests your control and stability.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**What it measures:** Your ability to hold a position under load — crucial for walking, running, and jumping. This tests control and stability, unlike ISOM overcoming which tests maximum push.",
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "**Progression:** Start with double-leg holds with foot pointed down → progress to single-leg → gradually add toes-up positions as you advance. Your physio will guide you on specific targets based on your goals.",
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            type: "section",
             title: "What's Normal vs What's Urgent",
             content: [
                 {
@@ -538,9 +521,9 @@ export const content: SectionContent = {
                 {
                     type: "alert",
                     variant: "danger",
-                    title: "Get urgent help now",
+                    title: "Seek urgent care",
                     content:
-                        "**Severe pain** during exercises that doesn't ease — exercises shouldn't cause severe pain. **New \"pop\" or snap** — if you feel or hear a new pop, stop immediately and seek urgent care. **Signs of DVT (clot in the leg):** new calf pain/tenderness, one-leg calf swelling, calf redness/warmth. **Signs of PE (clot in the lungs):** chest pain, breathlessness, coughing blood, fainting.",
+                        "**Severe pain**, **new pop/snap**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention).",
                 },
             ],
         },
@@ -583,7 +566,7 @@ export const content: SectionContent = {
                     type: "tip",
                     title: "Home strength testing: The Scales Method",
                     content:
-                        "Can't get to physio for testing? Use **bathroom scales** at home to track strength between sessions. Place scales against a wall, stand with the ball of your foot on the scales, push down into plantarflexion (toes pointed) and hold for 5 seconds. Read the scale. Start at ~80% body weight, work toward 100%+. Test weekly to see progress. This was developed by Professor Peter Malliaras as a simple home alternative to force plates.",
+                        "Can't get to physio for testing? Use **bathroom scales** at home to track strength between sessions. Place scales against a wall, stand with the ball of your foot on the scales, push down (toes pointed) and hold for 5 seconds. Read the scale. Start at ~80% body weight, work toward 100%+. Test weekly to see progress. This was developed by Professor Peter Malliaras as a simple home alternative to force plates.",
                 },
             ],
         },
@@ -595,10 +578,10 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**This week:** Focus on progressive strengthening — building toward 25+ single-leg heel raises",
+                        "**This week:** Focus on progressive strengthening — building toward 15 single-leg heel raises and Phase 3 strength targets",
                         "**Week 17:** We cover building cardio without risk — swimming, bike, elliptical",
-                        "**Weeks 15-20:** Continue building strength, working toward Phase 2 goals",
-                        "**After Phase 2:** You'll move to Phase 3 (single-leg capacity) — building power and preparing for return to sport",
+                        "**Weeks 15-18:** Continue building strength, working toward Phase 3 goals (25+ heel raises, 1.4x body weight)",
+                        "**After Phase 3:** You'll move to **Phase 4: Return to Sport** (running and jumping progression)",
                     ],
                 },
             ],
@@ -615,11 +598,11 @@ export const content: SectionContent = {
                     style: "bullet",
                     items: [
                         '**Progression:** "When should I progress? How do I know I\'m ready?"',
-                        '**Single-leg heel raises:** "How many should I be able to do? How do I get to 25+?"',
-                        '**Eccentric drops:** "How do I do these correctly? When should I start?"',
+                        '**Single-leg heel raises:** "How many should I be able to do? How do I get to 15?"',
+                        '**Seated calf raises:** "What are my strength targets? How do I progress?"',
                         '**Resistance:** "How much weight should I use? When should I add more?"',
                         '**Challenges:** "I\'m struggling with [specific exercise]. What can I do?"',
-                        '**Timeline:** "How long until I reach Phase 2 goals?"',
+                        '**Timeline:** "How long until I reach Phase 3 goals?"',
                         '**After-hours:** "What should I do if I have concerns and can\'t reach you after hours?"',
                     ],
                 },
@@ -630,9 +613,9 @@ export const content: SectionContent = {
             items: [
                 {
                     question:
-                        "How long until I can do 25+ single-leg heel raises?",
+                        "How long until I can do 15 single-leg heel raises?",
                     answer:
-                        "It varies, but most people reach this goal within 4-8 weeks of starting progressive strengthening. Some reach it faster, some take longer. Focus on consistent work rather than timelines — you'll get there.",
+                        "It varies, but most people reach the interim Phase 3 target of 15 reps within 4-8 weeks of starting progressive strengthening. Some reach it faster, some take longer. Focus on consistent work rather than timelines.",
                 },
                 {
                     question:
@@ -661,7 +644,7 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**25+ single-leg heel raises is the goal** — this is the gold standard for Phase 2",
+                        "**15 single-leg heel raises is the mid-Phase 3 target** — 25 reps is the final goal",
                         "**Progress gradually** — don't rush ahead, follow your physio's guidance",
                         "**Track your progress** — seeing improvement helps you stay motivated",
                         "**Be patient** — strength builds gradually, consistency matters more than speed",

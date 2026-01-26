@@ -1,0 +1,216 @@
+---
+import { buttonVariants } from "../ui/button";
+import { cn } from "../../lib/utils";
+import type { Lang } from "@/config/languages";
+import { BookOpen, ArrowRight, Check, ExternalLink } from "lucide-react";
+import { COURSE_URL } from "@/lib/env";
+
+interface Props {
+    lang?: Lang;
+    variant?: "full" | "compact" | "inline";
+}
+
+const { lang = "en", variant = "full" } = Astro.props;
+
+const content = {
+    en: {
+        tagline: "Recovery Guide",
+        heading: "The Complete Achilles Recovery Course",
+        description:
+            "31 easily digestible lessons to guide you through each stage of recovery - from injury to return to sport.",
+        price: "£29",
+        features: [
+            "Week-by-week recovery timeline",
+            "Questions to ask your surgeon",
+            "Physio exercises with illustrations",
+            "Sleep, washing & daily life tips",
+            "Product recommendations",
+            "What to expect at each stage",
+        ],
+        cta: "Start the Course",
+        compactHeading: "Want expert guidance for your recovery?",
+        compactCTA: "Start the Recovery Course",
+        inlineText: "Get structured guidance with our",
+        inlineLinkText: "Achilles Recovery Course",
+    },
+    de: {
+        tagline: "Genesungsleitfaden",
+        heading: "Der komplette Achilles-Genesungskurs",
+        description:
+            "31 leicht verdauliche Lektionen, die Sie durch jede Phase der Genesung führen - von der Verletzung bis zur Rückkehr zum Sport.",
+        price: "29 €",
+        features: [
+            "Wöchentlicher Genesungszeitplan",
+            "Fragen an Ihren Chirurgen",
+            "Physio-Übungen mit Illustrationen",
+            "Tipps für Schlaf, Waschen & Alltag",
+            "Produktempfehlungen",
+            "Was Sie in jeder Phase erwartet",
+        ],
+        cta: "Kurs starten",
+        compactHeading: "Möchten Sie Expertenführung für Ihre Genesung?",
+        compactCTA: "Genesungskurs starten",
+        inlineText: "Erhalten Sie strukturierte Anleitung mit unserem",
+        inlineLinkText: "Achilles-Genesungskurs",
+    },
+    fr: {
+        tagline: "Guide de Récupération",
+        heading: "Le cours complet de récupération Achille",
+        description:
+            "31 leçons faciles à digérer pour vous guider à chaque étape de la récupération - de la blessure au retour au sport.",
+        price: "29 €",
+        features: [
+            "Chronologie de récupération semaine par semaine",
+            "Questions à poser à votre chirurgien",
+            "Exercices de physiothérapie illustrés",
+            "Conseils pour le sommeil, la toilette & la vie quotidienne",
+            "Recommandations de produits",
+            "À quoi s'attendre à chaque étape",
+        ],
+        cta: "Commencer le cours",
+        compactHeading: "Vous voulez des conseils d'experts pour votre récupération?",
+        compactCTA: "Commencer le cours de récupération",
+        inlineText: "Obtenez des conseils structurés avec notre",
+        inlineLinkText: "cours de récupération Achille",
+    },
+    es: {
+        tagline: "Guía de Recuperación",
+        heading: "El curso completo de recuperación del Aquiles",
+        description:
+            "31 lecciones fáciles de digerir que te guían a través de cada etapa de la recuperación - desde la lesión hasta el regreso al deporte.",
+        price: "29 €",
+        features: [
+            "Cronología de recuperación semana a semana",
+            "Preguntas para tu cirujano",
+            "Ejercicios de fisioterapia ilustrados",
+            "Consejos para dormir, higiene y vida diaria",
+            "Recomendaciones de productos",
+            "Qué esperar en cada etapa",
+        ],
+        cta: "Empezar el curso",
+        compactHeading: "¿Quieres orientación experta para tu recuperación?",
+        compactCTA: "Empezar el curso de recuperación",
+        inlineText: "Obtén orientación estructurada con nuestro",
+        inlineLinkText: "curso de recuperación del Aquiles",
+    },
+    it: {
+        tagline: "Guida al Recupero",
+        heading: "Il corso completo di recupero Achille",
+        description:
+            "31 lezioni facilmente digeribili che ti guidano attraverso ogni fase del recupero - dall'infortunio al ritorno allo sport.",
+        price: "29 €",
+        features: [
+            "Cronologia di recupero settimana per settimana",
+            "Domande da fare al chirurgo",
+            "Esercizi di fisioterapia illustrati",
+            "Consigli per sonno, igiene e vita quotidiana",
+            "Raccomandazioni sui prodotti",
+            "Cosa aspettarsi in ogni fase",
+        ],
+        cta: "Inizia il corso",
+        compactHeading: "Vuoi una guida esperta per il tuo recupero?",
+        compactCTA: "Inizia il corso di recupero",
+        inlineText: "Ottieni una guida strutturata con il nostro",
+        inlineLinkText: "corso di recupero Achille",
+    },
+};
+
+const t = content[lang];
+const courseUrl = `${COURSE_URL}/standard`;
+---
+
+{variant === "full" && (
+    <section class="dark:bg-neutral-900 py-16 md:py-24">
+        <div class="mx-auto px-4 sm:px-6 max-w-3xl">
+            <!-- Hero -->
+            <div class="mb-10 text-center">
+                <div class="inline-flex items-center gap-2 bg-primary/10 mb-6 px-4 py-1.5 rounded-full font-medium text-primary text-sm uppercase tracking-wide">
+                    <BookOpen className="w-4 h-4" />
+                    {t.tagline}
+                </div>
+                <h2 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl tracking-tight">
+                    {t.heading}
+                </h2>
+                <p class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg">
+                    {t.description}
+                </p>
+            </div>
+
+            <!-- Single Course Card -->
+            <a 
+                href={courseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group block bg-white hover:bg-neutral-50 dark:bg-neutral-800 dark:hover:bg-neutral-750 p-8 border border-neutral-200 hover:border-primary/50 dark:border-neutral-700 rounded-3xl transition-all duration-300"
+            >
+                <div class="gap-8 grid md:grid-cols-2">
+                    <div>
+                        <ul class="space-y-3">
+                            {t.features.map((feature) => (
+                                <li class="flex items-center gap-3 text-neutral-700 dark:text-neutral-300 text-sm">
+                                    <div class="flex justify-center items-center bg-primary/10 rounded-full w-5 h-5 text-primary shrink-0">
+                                        <Check className="w-3 h-3" />
+                                    </div>
+                                    {feature}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-col justify-center items-center text-center">
+                        <div class="mb-4">
+                            <span class="font-bold text-neutral-900 dark:text-neutral-100 text-4xl">
+                                {t.price}
+                            </span>
+                            <span class="text-neutral-500 text-sm ml-1">one-time</span>
+                        </div>
+                        <div class={cn(buttonVariants({ variant: "default", size: "lg" }), "gap-2 group-hover:bg-primary/90")}>
+                            {t.cta}
+                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+)}
+
+{variant === "compact" && (
+    <div class="bg-neutral-50 dark:bg-neutral-800 my-8 p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+        <div class="flex sm:flex-row flex-col justify-between items-center gap-4">
+            <div class="flex items-center gap-3 sm:text-left text-center">
+                <div class="flex justify-center items-center bg-primary/10 rounded-lg w-10 h-10 shrink-0">
+                    <BookOpen className="w-5 h-5 text-primary" />
+                </div>
+                <p class="font-semibold text-neutral-900 dark:text-neutral-100">
+                    {t.compactHeading}
+                </p>
+            </div>
+            <a 
+                href={courseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class={cn(buttonVariants({ variant: "default", size: "default" }), "whitespace-nowrap gap-2")}
+            >
+                {t.compactCTA}
+                <ExternalLink className="w-4 h-4" />
+            </a>
+        </div>
+    </div>
+)}
+
+{variant === "inline" && (
+    <p class="bg-primary/5 my-4 p-4 border-primary border-l-4 rounded-lg text-neutral-600 dark:text-neutral-400">
+        {t.inlineText}{" "}
+        <a 
+            href={courseUrl} 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 font-medium text-primary hover:underline"
+        >
+            {t.inlineLinkText}
+            <ExternalLink className="w-3 h-3" />
+        </a>.
+    </p>
+)}
+

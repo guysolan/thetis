@@ -4,7 +4,7 @@ import NightSplintAdvert from "../../components/products/night-splint/NightSplin
 import WhatHappensIfMyAchillesIsRupturedFaqsSection from "@/sections/FAQs/what-happens-if-my-achilles-is-ruptured-faqs.astro";
 import WhatHappensIfMyAchillesIsRupturedSection from "@/sections/FAQs/what-happens-if-my-achilles-is-ruptured.astro";
 import type { Lang } from "@/config/languages";
-
+import CourseCTA from "../../components/CTA/CourseCTA.astro";
 const { lang = "en" } = Astro.props as { lang: Lang };
 
 const content: Record<Lang, { title: string; description: string }> = {
@@ -49,6 +49,7 @@ const currentContent = content[lang];
 >
     <WhatHappensIfMyAchillesIsRupturedSection lang={lang} />
 
+    <CourseCTA lang={lang} variant="full" />
     <NightSplintAdvert lang={lang} />
 
     <WhatHappensIfMyAchillesIsRupturedFaqsSection lang={lang} />

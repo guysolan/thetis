@@ -1,6 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
 import PogoJumpWeek31 from "@/assets/pogos.png";
-import LandingTechniqueWeek31 from "@/assets/landing-technique-week-31.png";
 
 export const metadata = {
     slug: "plyometrics",
@@ -25,7 +24,7 @@ export const content: SectionContent = {
             items: [
                 {
                     text:
-                        "Meet criteria first — 25+ heel raises, comfortable running, physio clearance",
+                        "Meet criteria first — [25+ heel raises](/standard/progressive-strengthening), comfortable running, physio clearance",
                 },
                 {
                     text:
@@ -219,13 +218,6 @@ export const content: SectionContent = {
                                 "**Control the landing** — don't let your leg collapse",
                             ],
                         },
-                        {
-                            type: "image",
-                            src: LandingTechniqueWeek31,
-                            alt: "Grant demonstrating proper landing technique with knees bent, hips back, landing on balls of feet",
-                            caption:
-                                "Proper landing technique: soft landing with knees bent to absorb impact",
-                        },
                     ],
                 },
             ],
@@ -285,6 +277,7 @@ export const content: SectionContent = {
                     style: "bullet",
                     items: [
                         "**This week:** Start plyometric training if you meet criteria",
+                        "**Week 32:** Return to Sport — criteria, process, and timeline for returning to your sport (coming up)",
                         "**Week 34:** We cover when things don't go to plan — not progressing, seeking further opinion",
                         "**Weeks 31-38:** Continue building power and preparing for return to sport",
                         "**After plyometrics:** You'll progress to sport-specific training and return to sport",

@@ -1,8 +1,5 @@
 ---
 import IndexMain from "@/mains/index.astro";
-import type { Lang } from "@/config/languages.ts";
-
-const { lang = "en" } = Astro.props as { lang: Lang };
 ---
 
-<IndexMain lang={lang} />
+<IndexMain lang="en" />

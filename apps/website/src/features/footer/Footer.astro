@@ -6,9 +6,13 @@ import FooterBlock from "./FooterBlock.astro";
 import { ThemeToggle } from "../../components/theme/ThemeToggle";
 import {
   getRoutesByLanguage,
+  getCourseRoutesByLanguage,
+  getArticleRoutesByLanguage,
+  getRecoveryPhaseRoutesByLanguage,
   productRoutes,
   partnerRoutes,
   contactRoutes,
+  guidePageRoutes,
 } from "../../content/routes.tsx";
 import type { Lang } from "../../config/languages.ts";
 
@@ -20,7 +24,15 @@ const { lang = "en" } = Astro.props as Props;
 
 const localizedRoutes = getRoutesByLanguage(lang);
 
-// Filter routes by category
+// Filter routes by category - use guide page routes
+const guidePageLinks = localizedRoutes.filter((route) => {
+  const baseRoute = guidePageRoutes.find(
+    (gr) =>
+      gr.slugTranslations?.[lang] === route.slug || gr.slug === route.slug,
+  );
+  return !!baseRoute;
+});
+
 const productLinks = localizedRoutes.filter((route) => {
   // Find the base route that matches this translated route
   const baseRoute = productRoutes.find(
@@ -58,7 +70,19 @@ const getSectionTitle = (routes: any[], sectionSlug: string) => {
   return route?.title?.[lang] || route?.title?.en || sectionSlug;
 };
 
+const guideSectionTitles: Record<Lang, string> = {
+  en: "Recovery Guide",
+  de: "Genesungsleitfaden",
+  fr: "Guide de Récupération",
+  es: "Guía de Recuperación",
+  it: "Guida al Recupero",
+};
+
 const footerLinks = {
+  guide: {
+    title: guideSectionTitles[lang],
+    links: guidePageLinks,
+  },
   company: {
     title: getSectionTitle(contactRoutes, "contact"),
     links: contactLinks,
@@ -100,7 +124,7 @@ const socials: Array<{
 <Slide background="black" className="print:hidden mt-24">
   <footer class="w-full text-white">
     <div
-      class="gap-8 lg:gap-12 grid grid-cols-1 lg:grid-cols-3 lg:text-left text-center"
+      class="gap-8 lg:gap-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:text-left text-center"
     >
       <!-- Company & Products -->
       <div class="space-y-8">
@@ -115,11 +139,73 @@ const socials: Array<{
       </div>
 
       <!-- Patient Guides -->
-      <div>
-        <FooterBlock
-          title={footerLinks.patientGuides.title}
-          links={footerLinks.patientGuides.links}
-        />
+      <div class="space-y-8">
+        <!-- Courses -->
+        <div>
+          <h3 class="mb-3 font-semibold text-lg lg:text-left text-center">
+            Courses
+          </h3>
+          <ul class="space-y-3">
+            {
+              getCourseRoutesByLanguage(lang)
+                .filter(
+                  (course) => !course.href.includes("/course/professionals"),
+                )
+                .map((course) => (
+                  <li>
+                    <a
+                      href={course.href}
+                      class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
+                    >
+                      {course.title}
+                    </a>
+                  </li>
+                ))
+            }
+          </ul>
+        </div>
+
+        <!-- FAQs -->
+        <div>
+          <h3 class="mb-3 font-semibold text-lg lg:text-left text-center">
+            FAQs
+          </h3>
+          <ul class="space-y-3">
+            {
+              getArticleRoutesByLanguage(lang).map((article) => (
+                <li>
+                  <a
+                    href={article.href}
+                    class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
+                  >
+                    {article.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Recovery Timeline -->
+        <div>
+          <h3 class="mb-3 font-semibold text-lg lg:text-left text-center">
+            Recovery Timeline
+          </h3>
+          <ul class="space-y-3">
+            {
+              getRecoveryPhaseRoutesByLanguage(lang).map((phase) => (
+                <li>
+                  <a
+                    href={phase.href}
+                    class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
+                  >
+                    {phase.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </div>
 
       <!-- Partners & Contact -->
@@ -130,7 +216,9 @@ const socials: Array<{
         />
 
         <div class="space-y-4">
-          <h3 class="font-semibold text-lg">{stayInTouchTitles[lang]}</h3>
+          <h3 class="font-semibold text-lg lg:text-left text-center">
+            {stayInTouchTitles[lang]}
+          </h3>
           <FooterEmailCTA />
 
           <div class="flex flex-col items-center lg:items-start gap-y-4">
@@ -155,7 +243,9 @@ const socials: Array<{
     <div
       class="flex md:flex-row flex-col justify-center md:justify-between items-center mt-8 pt-6 border-gray-800 border-t"
     >
-      <p class="text-gray-300 text-base">&copy; Thetis Medical Ltd 2020-2025</p>
+      <p class="text-gray-300 text-base">
+        &copy; Thetis Medical Ltd 2020-{new Date().getFullYear()}
+      </p>
     </div>
 
     <div class="sr-only">

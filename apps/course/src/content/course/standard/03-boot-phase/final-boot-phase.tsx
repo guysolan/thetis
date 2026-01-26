@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import TendonStrengthTimeline from "@/assets/tendon-strength-timeline.png";
+import TendonStrengthTimeline from "@/assets/tendon-strength-timeline-v6.png";
 
 export const metadata = {
     slug: "final-boot-phase",
@@ -54,22 +54,9 @@ export const content: SectionContent = {
                         "Your tendon is now in the remodelling phase — the new tissue is organizing itself, getting stronger, and becoming more like normal tendon. Think of it like **concrete setting** — it's hard enough to walk on, but still needs time to fully cure.",
                 },
                 {
-                    type: "card",
-                    title: "What's happening inside",
-                    description: "The biology of remodelling.",
-                    variant: "muted",
-                    content: [
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "**New tissue organizing** — collagen fibers aligning properly",
-                                "**Getting stronger** — tendon strength increasing week by week",
-                                "**Still vulnerable** — not fully healed yet, can still be damaged",
-                                "**Approaching normal** — structure becoming more like healthy tendon",
-                            ],
-                        },
-                    ],
+                    type: "text",
+                    content:
+                        "For a detailed explanation of the healing stages, see [The Healing Process](/standard/healing-process).",
                 },
                 {
                     type: "image",
@@ -87,7 +74,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "By Week 8, your tendon has about **50-60% of its normal strength**. This is enough for walking with protection, but not enough for running, jumping, or sudden movements. The tendon continues strengthening over the next 6-12 months.",
+                                "By Week 8, your tendon has about **50-60% of its normal strength**. This is enough for walking with protection, but not enough for running, jumping, or sudden movements. The tendon continues strengthening gradually.",
                         },
                         {
                             type: "list",
@@ -110,7 +97,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "As we discussed in Week 4, re-rupture risk is **3-5%** — low but not negligible. Risk is highest during early rehab (weeks 0-8) and boot removal (weeks 8-12). Remember that elongation is the bigger concern because it affects your long-term function. See Week 4 for the full timeline and details.",
+                        "Re-rupture risk is **3-5%** — low but not negligible. Risk is highest during early rehab (weeks 0-8) and boot removal (weeks 8-12). Remember that [elongation](/standard/healing-process) is the bigger concern because it affects your long-term function. See [Healing Process](/standard/healing-process) for the full timeline and details.",
                 },
             ],
         },
@@ -182,63 +169,28 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Before we discuss boot removal, it's important to understand what comes next. You've been building strength in Phase 1, and now you're preparing for **Phase 2: Post-Immobilization Period** (weeks 6-12) and **Phase 3: Single Leg Capacity** (weeks 12-18). Understanding these phases helps you see why building strength now matters and what you're working toward. In next week's lesson [Starting Physiotherapy](/standard/starting-physio), you'll see the complete rehabilitation roadmap table that shows all phases in detail.",
+                        "Before we discuss boot removal, it's important to understand what comes next. You've been building strength in Phase 1, and now you're preparing for **Phase 2: Transition** (weeks 8-12) and **Phase 3: Capacity** (weeks 12-26). Understanding these phases helps you see why building strength now matters and what you're working toward.",
                 },
                 {
                     type: "card",
-                    title: "Phase 2: Post-Immobilization Period (Weeks 6-12)",
-                    description: "What happens after boot removal.",
+                    title: "Phase 2 and Phase 3 Overview",
+                    description: "What comes after boot removal.",
                     variant: "highlight",
                     content: [
                         {
                             type: "text",
                             content:
-                                "Phase 2 begins around the time you remove your boot (weeks 10-12) and continues for 6+ weeks. This is where you actively rebuild strength and function:",
-                        },
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "**Double to single leg isotonic calf raises** — progressing from two-leg to one-leg standing",
-                                "**Single leg seated isotonic/isometric calf raises** — building strength in seated position",
-                                "**Balance training** — standing on one leg, balance drills",
-                                "**Train unaffected leg** — 3x/week to maintain overall strength",
-                                "**Protected gait** — transitioning from protected walking to normal walking",
-                            ],
+                                "**Phase 2: Transition** (weeks 8-12) focuses on rebuilding strength and function: single-leg heel raises, balance training, and transitioning from protected to normal walking.",
                         },
                         {
                             type: "text",
                             content:
-                                "**Phase 2 Goals:** 15+ single-leg heel raises (target: 25+), 1.4x body weight MVIC, 1.2x body weight seated isotonic, good balance, protected to unprotected gait.",
-                        },
-                    ],
-                },
-                {
-                    type: "card",
-                    title: "Phase 3: Single Leg Capacity (Weeks 12-18)",
-                    description: "Building endurance and function.",
-                    variant: "default",
-                    content: [
-                        {
-                            type: "text",
-                            content:
-                                "After Phase 2, you'll move to Phase 3, which focuses on building capacity and preparing for higher-level activities:",
-                        },
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "**Single leg standing/seated isotonic** — continuing to build strength",
-                                "**Progressive dorsiflexion** — gradually introducing more range of motion (calf raises over plates, sled work)",
-                                "**Gait preparation** — hip and ankle focused drills",
-                                "**Plyometric preparation** — landing, jumping (low intensity)",
-                                "**Commence running** — when ready and meeting criteria",
-                            ],
+                                "**Phase 3: Capacity** (weeks 12-26) focuses on building capacity and preparing for higher-level activities: progressive strengthening, gait preparation, plyometric preparation, and running when ready.",
                         },
                         {
                             type: "text",
                             content:
-                                "**Phase 3 Goals:** 2+ body weight seated PF isometric, heel height limb symmetry index 80%, knee-to-wall limb symmetry index 80%.",
+                                "For detailed Phase 2 and Phase 3 goals, exercises, and progression, see [Starting Physiotherapy](/standard/starting-physio). That lesson includes the complete rehabilitation roadmap with all phases, goals, and timelines.",
                         },
                     ],
                 },
@@ -246,7 +198,7 @@ export const content: SectionContent = {
                     type: "tip",
                     title: "Why this matters now",
                     content:
-                        "Understanding Phase 2 and Phase 3 helps you see why building strength in Phase 1 is so important. The stronger you are when you remove your boot, the faster you'll progress through Phase 2 and Phase 3. Your physiotherapist will guide you through these phases, but knowing what's coming helps you stay motivated and understand the bigger picture.",
+                        "Understanding Phase 2 and Phase 3 helps you see why building strength in Phase 1 is so important. The stronger you are when you remove your boot, the faster you'll progress through Phase 2 and Phase 3. Your physiotherapist will guide you through these phases.",
                 },
             ],
         },
@@ -309,7 +261,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "The key insight: Your tendon needs to be strong enough to handle walking forces **before** you remove the boot. Removing it too early can lead to tendon elongation — when the tendon stretches too much and doesn't heal at the right length — which affects your long-term function.",
+                                "The key insight: Your tendon needs to be strong enough to handle walking forces **before** you remove the boot. Removing it too early can lead to [tendon elongation](/standard/healing-process) — when the tendon stretches too much and doesn't heal at the right length — which affects your long-term function.",
                         },
                     ],
                 },
@@ -551,9 +503,9 @@ export const content: SectionContent = {
                 {
                     type: "alert",
                     variant: "danger",
-                    title: "Get urgent help now",
+                    title: "Seek urgent care",
                     content:
-                        '**Possible DVT (clot in the leg):** new calf pain/tenderness, one-leg calf swelling, calf redness/warmth. **Possible PE (clot in the lungs):** chest pain, breathlessness, coughing blood, fainting. Also seek urgent help for **severe pain** when removing wedges, **numb/blue/pale toes**, severe pressure/pain, fever with rapidly spreading redness, or a fall with a new "pop".',
+                        '**Severe pain**, **new pop/snap**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention). Also seek help for **numb/blue/pale toes**, severe pressure/pain, or fever with spreading redness.',
                 },
             ],
         },

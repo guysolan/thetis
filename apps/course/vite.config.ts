@@ -8,24 +8,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "@assets": path.resolve(__dirname, "./src/assets"),
-    },
-    dedupe: ["react", "react-dom"],
-  },
-  optimizeDeps: {
-    include: ["react", "react-dom", "sonner"],
-  },
-  build: {
-    target: "es2020",
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          "react-vendor": ["react", "react-dom"],
-        },
-      },
-    },
-    commonjsOptions: {
-      include: [/packages/],
     },
   },
 });

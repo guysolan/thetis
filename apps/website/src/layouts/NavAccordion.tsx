@@ -9,10 +9,14 @@ import { Badge } from "../components/ui/badge";
 import {
   getArticleRoutesByLanguage,
   getContactRoutesByLanguage,
+  getCourseRoutesByLanguage,
   getPartnerRoutesByLanguage,
   getProductRoutesByLanguage,
+  getRecoveryPhaseRoutesByLanguage,
+  getRouteBySlugAndLanguage,
 } from "@/content/routes.tsx";
 import nightSplintImage from "@/assets/night-splint/night_splint_bed_side.jpg";
+import TendonStiffnessImage from "@/assets/tendon-stiffness-after-rupture.png";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Lang } from "../config/languages";
@@ -23,34 +27,49 @@ interface NavAccordionProps {
 
 const content = {
   en: {
-    ourProduct: "Our Product",
+    courses: "Courses",
+    ourProduct: "Products",
     professionals: "Professionals",
-    patientGuides: "Patient Guides",
+    patientGuides: "Learning Resources",
     contactUs: "Contact Us",
+    faqs: "FAQs",
+    timeline: "Timeline of Recovery",
   },
   de: {
-    ourProduct: "Unser Produkt",
+    courses: "Kurse",
+    ourProduct: "Produkte",
     professionals: "Fachkräfte",
-    patientGuides: "Patientenleitfäden",
+    patientGuides: "Lernressourcen",
     contactUs: "Kontaktiere uns",
+    faqs: "FAQs",
+    timeline: "Genesungszeitplan",
   },
   fr: {
-    ourProduct: "Notre Produit",
+    courses: "Cours",
+    ourProduct: "Produits",
     professionals: "Professionnels",
-    patientGuides: "Guides du Patient",
+    patientGuides: "Ressources d'Apprentissage",
     contactUs: "Contactez-nous",
+    faqs: "FAQs",
+    timeline: "Chronologie de Récupération",
   },
   es: {
-    ourProduct: "Nuestro Producto",
+    courses: "Cursos",
+    ourProduct: "Productos",
     professionals: "Profesionales",
-    patientGuides: "Guías del Paciente",
+    patientGuides: "Recursos de Aprendizaje",
     contactUs: "Contáctenos",
+    faqs: "FAQs",
+    timeline: "Cronología de Recuperación",
   },
   it: {
-    ourProduct: "Il Nostro Prodotto",
+    courses: "Corsi",
+    ourProduct: "Prodotti",
     professionals: "Professionisti",
-    patientGuides: "Guide del Paziente",
+    patientGuides: "Risorse di Apprendimento",
     contactUs: "Contattaci",
+    faqs: "FAQs",
+    timeline: "Cronologia del Recupero",
   },
 };
 
@@ -58,167 +77,198 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
   const t = content[lang];
 
   // Get localized routes
-  const productLinks = getProductRoutesByLanguage(lang).map((link) => {
-    // Add image to the Achilles splint product
-    if (link.slug === "achilles-rupture-splint") {
-      return { ...link, image: nightSplintImage };
-    }
-    return link;
-  });
   const partnerLinks = getPartnerRoutesByLanguage(lang);
   const contactLinks = getContactRoutesByLanguage(lang);
   const articleRoutes = getArticleRoutesByLanguage(lang);
+  const recoveryPhaseLinks = getRecoveryPhaseRoutesByLanguage(lang);
+
+  // Get direct links for Course and Splint
+  const courseRoute = getRouteBySlugAndLanguage("course", lang);
+  const splintRoute = getRouteBySlugAndLanguage(
+    "achilles-rupture-splint",
+    lang,
+  );
 
   return (
-    <Accordion type="single" collapsible>
-      {/* Products */}
-      <AccordionItem value="products">
-        <AccordionTrigger>{t.ourProduct}</AccordionTrigger>
-        <AccordionContent>
-          <div className="flex flex-col gap-4">
-            {productLinks.map((link) =>
-              link.image
-                ? (
+    <div className="flex flex-col gap-2 pt-4">
+      {/* Achilles Rupture Splint - Direct Link */}
+      {splintRoute && (
+        <a
+          href={splintRoute.href}
+          className="relative flex flex-row items-center bg-neutral-50 hover:bg-muted/80 active:bg-muted dark:bg-neutral-900 dark:hover:bg-neutral-800 shadow-sm hover:shadow-md active:shadow-inner border hover:border-neutral-400 active:border-neutral-500 dark:border-neutral-800 dark:hover:border-neutral-600 rounded-sm w-full overflow-hidden active:scale-[0.98] transition-all duration-150 cursor-pointer"
+        >
+          <div className="flex-shrink-0 p-4 pr-0">
+            <img
+              src={nightSplintImage.src}
+              alt={splintRoute.title}
+              className="brightness-110 rounded-sm w-32 h-32 object-cover"
+            />
+          </div>
+          <div className="flex flex-col flex-1 gap-1 p-4 overflow-hidden">
+            <span className="flex flex-row items-center gap-1 font-semibold text-neutral-900 dark:text-neutral-100 text-base md:text-lg !underline underline-offset-4 text-wrap">
+              {splintRoute.title}
+              <ArrowRight size={16} className="flex-shrink-0 ml-1" />
+            </span>
+            {splintRoute.description && (
+              <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base line-clamp-3">
+                {splintRoute.description}
+              </p>
+            )}
+          </div>
+        </a>
+      )}
+
+      {/* Course - Direct Link */}
+      {courseRoute && (
+        <a
+          href={courseRoute.href}
+          className="flex items-center gap-3 hover:bg-neutral-100 hover:bg-primary/15 dark:hover:bg-neutral-800 dark:hover:bg-primary/20 bg-gradient-to-tr from-primary/10 dark:from-primary/5 to-primary/20 dark:to-primary/10 p-3 border border-primary/20 dark:border-primary/10 rounded-sm text-primary transition-colors duration-300"
+        >
+          <div className="flex-shrink-0">
+            <img
+              src={TendonStiffnessImage.src}
+              alt={courseRoute.title}
+              className="brightness-110 rounded-sm w-32 h-32 object-cover"
+            />
+          </div>
+          <div className="flex flex-col flex-1 gap-1 p-4 overflow-hidden">
+            <span className="flex flex-row items-center gap-1 font-semibold text-neutral-900 dark:text-neutral-100 text-base md:text-lg !underline underline-offset-4 text-wrap">
+              {courseRoute.title}
+              <ArrowRight size={16} className="flex-shrink-0 ml-1" />
+            </span>
+            {courseRoute.description && (
+              <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base line-clamp-3">
+                {courseRoute.description}
+              </p>
+            )}
+          </div>
+        </a>
+      )}
+
+      <Accordion type="single" collapsible>
+        {/* Learning Resources - FAQs + Timeline */}
+        <AccordionItem value="learning-resources">
+          <AccordionTrigger>{t.patientGuides}</AccordionTrigger>
+          <AccordionContent>
+            <div className="flex flex-col gap-4">
+              {/* FAQs Section */}
+              <div className="flex flex-col gap-2">
+                <h3 className="mb-1 font-semibold text-neutral-600 dark:text-neutral-400 text-sm">
+                  {t.faqs}
+                </h3>
+                {articleRoutes.map((article) => (
                   <a
-                    key={link.href}
-                    href={link.href}
-                    className="relative flex flex-row items-center bg-neutral-50 hover:bg-muted/80 active:bg-muted dark:bg-neutral-900 dark:hover:bg-neutral-800 shadow-sm hover:shadow-md active:shadow-inner border hover:border-neutral-400 active:border-neutral-500 dark:border-neutral-800 dark:hover:border-neutral-600 rounded-sm w-full overflow-hidden active:scale-[0.98] transition-all duration-150 cursor-pointer"
+                    key={article.href}
+                    href={article.href}
+                    className="flex items-center gap-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 p-3 border border-neutral-200 dark:border-neutral-800 rounded-sm text-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100 dark:text-neutral-200 transition-colors duration-300"
                   >
-                    <div className="flex-shrink-0 p-4 pr-0">
-                      {link.image && (
-                        <img
-                          src={link.image.src}
-                          alt={link.title}
-                          className="brightness-110 rounded-sm w-32 h-32 object-cover"
-                        />
-                      )}
-                    </div>
-                    <div className="flex flex-col flex-1 gap-1 p-4 overflow-hidden">
-                      <span className="flex flex-row items-center gap-1 font-semibold text-neutral-900 dark:text-neutral-100 text-base md:text-lg !underline underline-offset-4 text-wrap">
-                        {link.title}
-                        <ArrowRight size={16} className="flex-shrink-0 ml-1" />
-                      </span>
-                      {link.description && (
-                        <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base line-clamp-3">
-                          {link.description}
+                    <span className="flex justify-center items-center w-10 h-10">
+                      {article.icon}
+                    </span>
+                    <div>
+                      <h3 className="font-semibold text-neutral-800 dark:text-neutral-200 text-base md:text-lg">
+                        {article.title}
+                      </h3>
+                      {article.description && (
+                        <p className="text-neutral-500 dark:text-neutral-400 text-sm md:text-base">
+                          {article.description}
                         </p>
                       )}
+                      <div className="flex flex-wrap gap-1 pt-2">
+                        {article.tags?.map((tag) => (
+                          <Badge
+                            key={`${article.href}-${tag.words}`}
+                            className={`${tag.color} text-black bg-opacity-80 font-light text-xs`}
+                          >
+                            {tag.words}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </a>
-                )
-                : (
+                ))}
+              </div>
+
+              {/* Timeline Section */}
+              <div className="flex flex-col gap-2">
+                <h3 className="mb-1 font-semibold text-neutral-600 dark:text-neutral-400 text-sm">
+                  {t.timeline}
+                </h3>
+                {recoveryPhaseLinks.map((link) => (
                   <IconLink
                     key={link.href}
                     href={link.href}
                     icon={link.icon}
                     title={link.title}
                     description={link.description}
+                    variant={link.variant}
                   />
-                )
-            )}
-          </div>
-        </AccordionContent>
-      </AccordionItem>
+                ))}
+              </div>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
 
-      {/* Partners */}
-      <AccordionItem value="partners">
-        <AccordionTrigger>{t.professionals}</AccordionTrigger>
-        <AccordionContent>
-          <div className="flex flex-col gap-2">
-            {partnerLinks.map((partner) => (
-              <IconLink
-                key={partner.href}
-                href={partner.href}
-                icon={partner.icon}
-                title={partner.title}
-                description={partner.description}
-                variant={partner.variant}
-              />
-            ))}
-          </div>
-        </AccordionContent>
-      </AccordionItem>
+        {/* Professionals */}
+        <AccordionItem value="professionals">
+          <AccordionTrigger>{t.professionals}</AccordionTrigger>
+          <AccordionContent>
+            <div className="flex flex-col gap-2">
+              {partnerLinks.map((partner) => (
+                <IconLink
+                  key={partner.href}
+                  href={partner.href}
+                  icon={partner.icon}
+                  title={partner.title}
+                  description={partner.description}
+                  variant={partner.variant}
+                />
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
 
-      {/* Patient Guides */}
-      <AccordionItem value="patient-guides">
-        <AccordionTrigger>{t.patientGuides}</AccordionTrigger>
-        <AccordionContent>
-          <div className="flex flex-col gap-2">
-            {articleRoutes.map((article) => (
-              <a
-                key={article.href}
-                href={article.href}
-                className="flex items-center gap-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 p-3 border border-neutral-200 dark:border-neutral-800 rounded-sm text-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100 dark:text-neutral-200 transition-colors duration-300"
-              >
-                <span className="flex justify-center items-center w-10 h-10">
-                  {article.icon}
-                </span>
-                <div>
-                  <h3 className="font-semibold text-neutral-800 dark:text-neutral-200 text-base md:text-lg">
-                    {article.title}
-                  </h3>
-                  {article.description && (
-                    <p className="text-neutral-500 dark:text-neutral-400 text-sm md:text-base">
-                      {article.description}
-                    </p>
+        {/* Contact */}
+        <AccordionItem value="contacts">
+          <AccordionTrigger>{t.contactUs}</AccordionTrigger>
+          <AccordionContent>
+            <div className="flex flex-col gap-2">
+              {contactLinks.map((contact) => (
+                <a
+                  key={contact.href}
+                  href={contact.href}
+                  className={cn(
+                    "flex items-center gap-2 p-3 border rounded-sm transition-colors duration-300",
+                    contact.variant === "default"
+                      ? "bg-gradient-to-tr from-primary/10 to-primary/20 dark:from-primary/5 dark:to-primary/10 text-primary hover:bg-primary/15 dark:hover:bg-primary/20 hover:text-primary-dark border-primary/20 dark:border-primary/10"
+                      : "border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100",
                   )}
-                  <div className="flex flex-wrap gap-1 pt-2">
-                    {article.tags?.map((tag) => (
-                      <Badge
-                        key={`${article.href}-${tag.words}`}
-                        className={`${tag.color} text-black bg-opacity-80 font-light text-xs`}
-                      >
-                        {tag.words}
-                      </Badge>
-                    ))}
+                >
+                  <span className="flex justify-center items-center w-10 h-10">
+                    {contact.icon && contact.icon}
+                  </span>
+                  <div>
+                    <h3
+                      className={cn(
+                        "font-semibold text-base md:text-lg",
+                        contact.variant === "default"
+                          ? "text-primary"
+                          : "text-neutral-800 dark:text-neutral-200",
+                      )}
+                    >
+                      {contact.title}
+                    </h3>
+                    <p className="text-neutral-500 dark:text-neutral-400 text-sm md:text-base">
+                      {contact.description}
+                    </p>
                   </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </AccordionContent>
-      </AccordionItem>
-
-      {/* Partners */}
-      <AccordionItem value="contacts">
-        <AccordionTrigger>{t.contactUs}</AccordionTrigger>
-        <AccordionContent>
-          <div className="flex flex-col gap-2">
-            {contactLinks.map((contact) => (
-              <a
-                key={contact.href}
-                href={contact.href}
-                className={cn(
-                  "flex items-center gap-2 p-3 rounded-sm border transition-colors duration-300",
-                  contact.variant === "default"
-                    ? "bg-gradient-to-tr from-primary/10 to-primary/20 dark:from-primary/5 dark:to-primary/10 text-primary hover:bg-primary/15 dark:hover:bg-primary/20 hover:text-primary-dark border-primary/20 dark:border-primary/10"
-                    : "border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100",
-                )}
-              >
-                <span className="flex justify-center items-center w-10 h-10">
-                  {contact.icon && contact.icon}
-                </span>
-                <div>
-                  <h3
-                    className={cn(
-                      "font-semibold text-base md:text-lg",
-                      contact.variant === "default"
-                        ? "text-primary"
-                        : "text-neutral-800 dark:text-neutral-200",
-                    )}
-                  >
-                    {contact.title}
-                  </h3>
-                  <p className="text-neutral-500 dark:text-neutral-400 text-sm md:text-base">
-                    {contact.description}
-                  </p>
-                </div>
-              </a>
-            ))}
-          </div>
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
+                </a>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
   );
 };
 
@@ -241,7 +291,7 @@ const IconLink = ({
     <a
       href={href}
       className={cn(
-        "flex items-center gap-2 p-3 rounded-sm border transition-colors duration-300",
+        "flex items-center gap-2 p-3 border rounded-sm transition-colors duration-300",
         variant === "default"
           ? "bg-gradient-to-tr from-primary/10 to-primary/20 dark:from-primary/5 dark:to-primary/10 text-primary hover:bg-primary/15 dark:hover:bg-primary/20 hover:text-primary-dark border-primary/20 dark:border-primary/10"
           : "border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100",

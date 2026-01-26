@@ -5,6 +5,7 @@ interface TimelineBlock {
   title: string;
   content: string;
   variant?: "neutral";
+  slug?: string;
 }
 
 interface Faq {
@@ -77,6 +78,7 @@ export const content: Record<Lang, Content> = {
               </ul>
             </li>
           </ul>`,
+        slug: "week-0-1-first-week-after-achilles-rupture",
       },
       {
         time: "Weeks 1-3",
@@ -137,6 +139,7 @@ export const content: Record<Lang, Content> = {
               </ul>
             </li>
           </ul>`,
+        slug: "weeks-1-3-treatment-decision",
       },
       {
         time: "Weeks 4-6",
@@ -175,6 +178,7 @@ export const content: Record<Lang, Content> = {
               </ul>
             </li>
           </ul>`,
+        slug: "weeks-4-6-progressive-recovery",
       },
       {
         time: "Weeks 7-9",
@@ -203,6 +207,7 @@ export const content: Record<Lang, Content> = {
               </ul>
             </li>
           </ul>`,
+        slug: "weeks-7-9-final-boot-phase",
       },
       {
         time: "Weeks 10-12",
@@ -231,6 +236,7 @@ export const content: Record<Lang, Content> = {
               </ul>
             </li>
           </ul>`,
+        slug: "weeks-10-12-boot-transition",
       },
       {
         time: "Weeks 13-25",
@@ -254,6 +260,7 @@ export const content: Record<Lang, Content> = {
               </ul>
             </li>
           </ul>`,
+        slug: "weeks-13-25-progressive-strengthening",
       },
       {
         time: "Week 26+",
@@ -287,6 +294,7 @@ export const content: Record<Lang, Content> = {
               </ul>
             </li>
           </ul>`,
+        slug: "week-26-plus-return-to-sport",
       },
       {
         time: "Notes",

@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import FunctionalMilestones2x2 from "@/assets/functional-milestones-2x2.png";
 
 export const metadata = {
     slug: "functional-milestones",
@@ -10,7 +11,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By Week 20, you're approaching the end of Phase 2 and entering Phase 3. This is a major milestone — you've come a long way. Now it's time to assess your functional milestones: can you walk pain-free? Do 25+ heel raises? Handle stairs confidently? These milestones show you're ready for the next phase. This lesson covers what these milestones mean, how to test them, and what to do if you haven't reached them yet.",
+        "By Week 20, you're reaching the end of **Phase 3: Capacity** and preparing for Phase 4. This is a major milestone — you've come a long way. Now it's time to assess your functional milestones: can you walk pain-free? Do 25+ heel raises? Handle stairs confidently? These milestones show you're ready for the next phase. This lesson covers what these milestones mean, how to test them, and what to do if you haven't reached them yet.",
     blocks: [
         {
             type: "heading",
@@ -23,7 +24,7 @@ export const content: SectionContent = {
             items: [
                 {
                     text:
-                        "Test your milestones — pain-free walking, 25+ heel raises, balance, stairs",
+                        "Test your Phase 3 milestones — pain-free walking, 25+ heel raises, balance, stairs",
                 },
                 {
                     text:
@@ -54,7 +55,14 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "These four milestones show you're ready for Phase 3 and return to higher-level activities. Think of them as **checkpoints** — passing them means you're ready for the next phase.",
+                        "These four milestones show you're ready for Phase 4 and return to higher-level activities. Think of them as **checkpoints** — passing them means you're ready for the next phase.",
+                },
+                {
+                    type: "image",
+                    src: FunctionalMilestones2x2,
+                    alt: "2x2 matrix showing the 4 key functional milestones: Pain-Free Walking (walk 10-15 min without pain), 25+ Heel Raises (single-leg heel raises), Good Balance (stand 30+ seconds on one leg), and Confident Stairs (up and down, one foot per step)",
+                    caption:
+                        "The 4 checkpoints that show you're ready for Phase 4",
                 },
                 {
                     type: "card",
@@ -117,7 +125,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Why it matters:** 25+ heel raises shows your calf is strong enough for higher-level activities. This is the gold standard for Phase 2 completion.",
+                                "**Why it matters:** 25+ heel raises shows your calf is strong enough for higher-level activities. This is the gold standard for **Phase 3: Capacity** completion.",
                         },
                     ],
                 },
@@ -299,9 +307,9 @@ export const content: SectionContent = {
                 {
                     type: "alert",
                     variant: "danger",
-                    title: "Get urgent help now",
+                    title: "Seek urgent care",
                     content:
-                        "**Severe pain** that doesn't ease — pain shouldn't be severe. **New \"pop\" or snap** — if you feel or hear a new pop, stop immediately and seek urgent care. **Signs of DVT (clot in the leg):** new calf pain/tenderness, one-leg calf swelling, calf redness/warmth. **Signs of PE (clot in the lungs):** chest pain, breathlessness, coughing blood, fainting.",
+                        "**Severe pain**, **new pop/snap**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention).",
                 },
             ],
         },
@@ -343,10 +351,10 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**This week:** Assess your functional milestones, work on gaps",
+                        "**This week:** Assess your Phase 3 functional milestones, work on gaps",
                         "**Week 22:** We cover returning to normal life — work, driving, household tasks",
                         "**Weeks 20-25:** Continue building strength and function",
-                        "**After Phase 2:** You'll move to Phase 3 (single-leg capacity) — building power and preparing for return to sport",
+                        "**After Phase 3:** You'll move to **Phase 4: Return to Sport** — starting to run and build power",
                     ],
                 },
             ],
@@ -390,12 +398,12 @@ export const content: SectionContent = {
                 {
                     question: "How long until I reach all milestones?",
                     answer:
-                        "It varies. Some people reach all milestones by Week 20, others take until Week 25-30 or longer. Focus on consistent work rather than timelines. You'll get there.",
+                        "It varies. Some people reach all milestones by Week 20, others take until Week 25-30 or longer. Focus on consistent work rather than timelines.",
                 },
                 {
                     question: "What happens after I reach all milestones?",
                     answer:
-                        "Once you reach Phase 2 milestones, you'll move to Phase 3 (single-leg capacity). This involves building power, plyometric training, and preparing for return to sport. Your physio will guide you.",
+                        "Once you reach Phase 3 milestones (including 25+ heel raises), you'll move to **Phase 4: Return to Sport**. This involves building power, starting a walk-jog progression, and eventually sport-specific agility training.",
                 },
             ],
         },

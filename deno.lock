@@ -1,8 +1,31 @@
 {
-  "version": "4",
+  "version": "5",
+  "redirects": {
+    "https://esm.sh/@supabase/node-fetch@^2.6.13?target=denonext": "https://esm.sh/@supabase/node-fetch@2.6.15?target=denonext",
+    "https://esm.sh/@supabase/node-fetch@^2.6.14?target=denonext": "https://esm.sh/@supabase/node-fetch@2.6.15?target=denonext",
+    "https://esm.sh/@supabase/supabase-js@2": "https://esm.sh/@supabase/supabase-js@2.58.0",
+    "https://esm.sh/tr46@~0.0.3?target=denonext": "https://esm.sh/tr46@0.0.3?target=denonext",
+    "https://esm.sh/webidl-conversions@^3.0.0?target=denonext": "https://esm.sh/webidl-conversions@3.0.1?target=denonext",
+    "https://esm.sh/whatwg-url@^5.0.0?target=denonext": "https://esm.sh/whatwg-url@5.0.0?target=denonext"
+  },
   "remote": {
+    "https://esm.sh/@supabase/auth-js@2.72.0/denonext/auth-js.mjs": "10cbbc4c0ecefc50d6405b050eb5f1e8569a48cb5946eac804509288861bea49",
+    "https://esm.sh/@supabase/functions-js@2.5.0/denonext/functions-js.mjs": "645db5cac9935930b4662d500fc70213d32d4717ca73d6fac0cb8127059a3f7a",
+    "https://esm.sh/@supabase/node-fetch@2.6.15/denonext/node-fetch.mjs": "0bae9052231f4f6dbccc7234d05ea96923dbf967be12f402764580b6bf9f713d",
+    "https://esm.sh/@supabase/node-fetch@2.6.15?target=denonext": "4d28c4ad97328403184353f68434f2b6973971507919e9150297413664919cf3",
+    "https://esm.sh/@supabase/postgrest-js@1.21.4/denonext/postgrest-js.mjs": "c3769b11ef02debc78ecf6ab4e152d3cf7dbd05bbbafeb72c160e76cc57cda3c",
+    "https://esm.sh/@supabase/realtime-js@2.15.5/denonext/realtime-js.mjs": "518bdc73c29b502ba4dcf7ce2dff0ff8c1cbd8e5978f7ea2435af8214ea45dd5",
+    "https://esm.sh/@supabase/storage-js@2.12.2/denonext/storage-js.mjs": "9d8c1d572691696db0294fe3a7c08991b63d704f56a1ec3d0d75907f417ca5e4",
+    "https://esm.sh/@supabase/supabase-js@2.58.0": "7dabd2478b8ee4e38a36544ae38af5f437d745f55bc52d6cb0841e57b21c32a4",
+    "https://esm.sh/@supabase/supabase-js@2.58.0/denonext/supabase-js.mjs": "a8631669bd5bf3242db4cd6b098270f250fc12672b787ac9801fa0d4a07aea65",
     "https://esm.sh/acorn@8.11.3": "362fd68550028bd4facae10c22d4d708984d293ae57f0207a8270a432a2f922c",
-    "https://esm.sh/acorn@8.11.3/denonext/acorn.mjs": "bd844dd72c01c61d6ca2d48271f3eb3dd9c55efd1caf98ffb7ab34c35634c2c3"
+    "https://esm.sh/acorn@8.11.3/denonext/acorn.mjs": "bd844dd72c01c61d6ca2d48271f3eb3dd9c55efd1caf98ffb7ab34c35634c2c3",
+    "https://esm.sh/tr46@0.0.3/denonext/tr46.mjs": "5753ec0a99414f4055f0c1f97691100f13d88e48a8443b00aebb90a512785fa2",
+    "https://esm.sh/tr46@0.0.3?target=denonext": "19cb9be0f0d418a0c3abb81f2df31f080e9540a04e43b0f699bce1149cba0cbb",
+    "https://esm.sh/webidl-conversions@3.0.1/denonext/webidl-conversions.mjs": "54b5c2d50a294853c4ccebf9d5ed8988c94f4e24e463d84ec859a866ea5fafec",
+    "https://esm.sh/webidl-conversions@3.0.1?target=denonext": "4e20318d50528084616c79d7b3f6e7f0fe7b6d09013bd01b3974d7448d767e29",
+    "https://esm.sh/whatwg-url@5.0.0/denonext/whatwg-url.mjs": "29b16d74ee72624c915745bbd25b617cfd2248c6af0f5120d131e232a9a9af79",
+    "https://esm.sh/whatwg-url@5.0.0?target=denonext": "f001a2cadf81312d214ca330033f474e74d81a003e21e8c5d70a1f46dc97b02d"
   },
   "workspace": {
     "packageJson": {
@@ -30,11 +53,41 @@
             "npm:@astrojs/sitemap@^3.2.1",
             "npm:@astrojs/tailwind@^5.1.5",
             "npm:astro@^5.5.5",
+            "npm:hamburger-react@^2.5.2",
             "npm:ismobilejs@^1.1.1",
+            "npm:lucide-astro@0.544",
+            "npm:lucide-react@0.483",
             "npm:react-dom@18.3.1",
             "npm:react@18.3.1",
             "npm:recharts@^2.15.1",
             "npm:tailwindcss@^3.4.17"
+          ]
+        }
+      },
+      "apps/course": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@supabase/supabase-js@^2.90.1",
+            "npm:@tanstack/react-query@^5.59.3",
+            "npm:@tanstack/react-router@^1.85.0",
+            "npm:@tanstack/router-vite-plugin@^1.84.4",
+            "npm:@types/react-dom@^18.2.18",
+            "npm:@types/react@^18.2.0",
+            "npm:@vitejs/plugin-react@^4.3.2",
+            "npm:autoprefixer@^10.4.20",
+            "npm:class-variance-authority@0.7",
+            "npm:clsx@^2.1.1",
+            "npm:date-fns@^4.1.0",
+            "npm:lucide-react@0.451",
+            "npm:postcss@^8.4.47",
+            "npm:react-dom@^18.2.0",
+            "npm:react@^18.3.1",
+            "npm:sonner@^1.5.0",
+            "npm:tailwind-merge@^2.5.3",
+            "npm:tailwindcss-animate@^1.0.7",
+            "npm:tailwindcss@^3.4.13",
+            "npm:typescript@^5.5.4",
+            "npm:vite@6.2.2"
           ]
         }
       },
@@ -94,16 +147,21 @@
         "packageJson": {
           "dependencies": [
             "npm:@hookform/devtools@^4.3.1",
-            "npm:@hookform/resolvers@^3.9.0",
+            "npm:@hookform/resolvers@^3.10.0",
             "npm:@number-flow/react@~0.4.1",
+            "npm:@radix-ui/react-icons@^1.3.0",
+            "npm:@radix-ui/react-label@^2.1.2",
+            "npm:@radix-ui/react-slot@^1.1.2",
             "npm:@supabase/auth-ui-react@~0.4.7",
             "npm:@supabase/auth-ui-shared@~0.1.8",
             "npm:@supabase/supabase-js@^2.45.4",
+            "npm:@tanstack/react-form@^1.23.8",
             "npm:@tanstack/react-query-devtools@^5.59.0",
             "npm:@tanstack/react-query@^5.59.3",
             "npm:@tanstack/react-router@^1.85.0",
             "npm:@tanstack/router-devtools@^1.85.0",
             "npm:@tanstack/router-vite-plugin@^1.84.4",
+            "npm:@tanstack/zod-form-adapter@~0.42.1",
             "npm:@types/file-saver@^2.0.7",
             "npm:@types/react-csv@^1.1.10",
             "npm:@types/react-dom@^18.2.18",
@@ -123,7 +181,7 @@
             "npm:react-csv@^2.2.2",
             "npm:react-day-picker@8.10.1",
             "npm:react-dom@^18.2.0",
-            "npm:react-hook-form@^7.53.0",
+            "npm:react-hook-form@^7.60.0",
             "npm:react-xml-viewer@^2.0.2",
             "npm:react@^18.3.1",
             "npm:recharts@^2.12.7",
@@ -134,7 +192,7 @@
             "npm:tailwindcss@^3.4.13",
             "npm:vite@6.2.2",
             "npm:vitest@^3.1.1",
-            "npm:zod@^3.23.8",
+            "npm:zod@^3.25.76",
             "npm:zustand@^5.0.1"
           ]
         }
@@ -150,7 +208,10 @@
             "npm:@astrojs/tailwind@5.1.2",
             "npm:@astrojs/vercel@8.0.7",
             "npm:@astropub/md@1",
+            "npm:@hookform/resolvers@^5.1.1",
+            "npm:@nanostores/react@~0.8.4",
             "npm:@notionhq/client@^2.2.3",
+            "npm:@playwright/test@^1.40.0",
             "npm:@radix-ui/react-accordion@^1.2.3",
             "npm:@radix-ui/react-alert-dialog@^1.1.6",
             "npm:@radix-ui/react-aspect-ratio@^1.1.2",
@@ -197,6 +258,7 @@
             "npm:lucide-react@0.469.0",
             "npm:lucide@0.475.0",
             "npm:marked@^4.3.0",
+            "npm:nanostores@~0.11.4",
             "npm:notion-page-to-html@^1.2.0",
             "npm:notion-to-md@^2.5.6",
             "npm:number-flow@~0.5.1",
@@ -206,9 +268,11 @@
             "npm:react-device-detect@^2.2.3",
             "npm:react-dom@18.3.1",
             "npm:react-error-boundary@5",
+            "npm:react-hook-form@^7.60.0",
             "npm:react-responsive-masonry@2.7.1",
             "npm:react-slick@~0.30.3",
             "npm:react@18.3.1",
+            "npm:recharts@^2.15.1",
             "npm:remark-toc@^8.0.1",
             "npm:resend@^4.1.2",
             "npm:schema-dts@^1.1.2",
@@ -217,14 +281,9 @@
             "npm:tailwind-merge@^3.0.1",
             "npm:tailwindcss-animate@^1.0.6",
             "npm:tailwindcss@^3.3.3",
-            "npm:vaul@^1.1.2"
-          ]
-        }
-      },
-      "packages/amazon": {
-        "packageJson": {
-          "dependencies": [
-            "npm:supabase@^1.191.3"
+            "npm:vaul@^1.1.2",
+            "npm:vitest@1",
+            "npm:zod@^4.0.5"
           ]
         }
       },
@@ -272,28 +331,17 @@
           ]
         }
       },
-      "packages/ship-stock": {
+      "packages/reddit-bot": {
         "packageJson": {
           "dependencies": [
             "npm:supabase@^1.191.3"
           ]
         }
       },
-      "packages/supabase": {
-        "packageJson": {
-          "dependencies": [
-            "npm:@supabase/ssr@~0.5.1",
-            "npm:@supabase/supabase-js@^2.45.3",
-            "npm:react@^18.3.1",
-            "npm:server-only@^0.0.1",
-            "npm:supabase@^1.191.3",
-            "npm:typescript@^5.5.4"
-          ]
-        }
-      },
       "packages/ui": {
         "packageJson": {
           "dependencies": [
+            "npm:@number-flow/react@~0.5.8",
             "npm:@radix-ui/react-accordion@^1.2.3",
             "npm:@radix-ui/react-alert-dialog@^1.1.6",
             "npm:@radix-ui/react-aspect-ratio@^1.1.2",
@@ -305,7 +353,7 @@
             "npm:@radix-ui/react-dropdown-menu@^2.1.6",
             "npm:@radix-ui/react-hover-card@^1.1.6",
             "npm:@radix-ui/react-icons@^1.3.2",
-            "npm:@radix-ui/react-label@^2.1.2",
+            "npm:@radix-ui/react-label@^2.1.8",
             "npm:@radix-ui/react-menubar@^1.1.6",
             "npm:@radix-ui/react-navigation-menu@^1.2.5",
             "npm:@radix-ui/react-popover@^1.1.6",
@@ -313,7 +361,7 @@
             "npm:@radix-ui/react-radio-group@^1.2.3",
             "npm:@radix-ui/react-scroll-area@^1.2.3",
             "npm:@radix-ui/react-select@^2.1.6",
-            "npm:@radix-ui/react-separator@^1.1.2",
+            "npm:@radix-ui/react-separator@^1.1.8",
             "npm:@radix-ui/react-slider@^1.2.3",
             "npm:@radix-ui/react-slot@^1.1.2",
             "npm:@radix-ui/react-switch@^1.1.3",
@@ -321,6 +369,7 @@
             "npm:@radix-ui/react-toast@^1.2.6",
             "npm:@radix-ui/react-toggle@^1.1.2",
             "npm:@radix-ui/react-tooltip@^1.1.8",
+            "npm:@tabler/icons-react@3",
             "npm:@tailwindcss/line-clamp@~0.4.4",
             "npm:@tiptap/extension-link@^2.10.3",
             "npm:@tiptap/extension-placeholder@^2.10.3",
@@ -332,20 +381,49 @@
             "npm:class-variance-authority@~0.7.1",
             "npm:clsx@^2.1.1",
             "npm:cmdk@^1.0.4",
+            "npm:country-flag-icons@^1.5.16",
+            "npm:date-fns@^4.1.0",
             "npm:embla-carousel-react@^8.5.2",
+            "npm:framer-motion@^11.18.2",
             "npm:lucide-react@0.483",
+            "npm:next-themes@0.3",
             "npm:postcss@^8.4.43",
+            "npm:react-day-picker@^8.10.1",
             "npm:react-dom@^18.3.1",
+            "npm:react-hook-form@7.60.0",
             "npm:react-icons@^5.4.0",
             "npm:react-lazy-load-image-component@^1.6.2",
             "npm:react@^18.3.1",
             "npm:recharts@^2.15.1",
+            "npm:sonner@^1.7.4",
             "npm:tailwind-merge@^3.0.1",
             "npm:tailwindcss-animate@^1.0.7",
             "npm:tailwindcss@^3.4.16",
             "npm:tiptap@^1.32.2",
             "npm:typescript@^5.5.4",
             "npm:vaul@^1.1.2"
+          ]
+        }
+      },
+      "services/ai-studio": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@google/generative-ai@0.21",
+            "npm:openai@4"
+          ]
+        }
+      },
+      "services/amazon": {
+        "packageJson": {
+          "dependencies": [
+            "npm:supabase@^1.191.3"
+          ]
+        }
+      },
+      "services/ship-stock": {
+        "packageJson": {
+          "dependencies": [
+            "npm:supabase@^1.191.3"
           ]
         }
       }

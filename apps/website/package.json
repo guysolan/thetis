@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev --port=2122 --toolbar=false",
+    "dev:prod": "astro dev --port=2122 --toolbar=false --mode prod",
     "start": "astro dev --toolbar=false",
     "build": "astro build",
     "preview": "astro preview",
@@ -95,7 +96,9 @@
     "tailwindcss": "^3.3.3",
     "tailwindcss-animate": "^1.0.6",
     "vaul": "^1.1.2",
-    "zod": "^4.0.5"
+    "zod": "^4.0.5",
+    "nanostores": "^0.11.4",
+    "@nanostores/react": "^0.8.4"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",

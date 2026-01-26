@@ -15,7 +15,24 @@ This is the moment you've been waiting for: life without the boot. Weeks 10-12 m
 
 ### When Is It Safe to Stop Wearing the Boot?
 
-Boot removal timing varies by protocol and individual, but most guidelines suggest around week 10 for beginning the transition.
+**Evidence-based protocols** recommend beginning boot removal around **weeks 11-12** (not week 8-10). This is based on **force-based criteria** rather than time alone.
+
+**Why the delay?**
+
+- Your tendon needs to handle ~1.5x body weight forces during walking
+- Early protocols removed boots at 8 weeks, but this may be too early
+- Research shows keeping the boot longer (with aggressive loading inside it) prevents elongation
+- The goal: Build tendon strength BEFORE exposing it to walking forces
+
+**Readiness criteria (your specialist will assess):**
+
+- Ability to do seated calf raises with 0.8-1x body weight on your knee
+- This creates ~2x body weight force in the Achilles tendon
+- Tendon has developed enough strength to tolerate walking
+- Swelling is well-controlled
+- You feel confident and ready
+
+**The principle:** More aggressive loading early in safe positions (plantarflexion), but more cautious with immobilization time. This prevents elongation while building strength.
 
 **Typical boot weaning protocol:**
 
@@ -148,22 +165,47 @@ Understanding the goals helps you stay focused and motivated.
 
 **Weeks 10-12 physiotherapy goals:**
 
-1. **Restore range of motion** - Gently improve ankle flexibility (especially dorsiflexion)
+1. **Protected walking** - Use heel wedge, reduced step length, partial weightbearing if limping
+   - Elongation can still happen in first few weeks of walking
+   - Protected walking protects healing tendon until strength develops
 
-2. **Begin calf activation** - Wake up the atrophied calf muscles with gentle exercises
+**Protected walking strategies:**
+
+- **Heel wedge:** Use a heel lift in your shoe initially (0.5-1cm)
+  - Eases transition from boot's heel elevation
+  - Reduces sudden stress on healing tendon
+  - Gradually reduce over 2-4 weeks
+
+- **Reduced step length:** Use step-to gait on unaffected side
+  - Shorter steps reduce force through the tendon
+  - Prevents overstretching
+
+- **Partial weightbearing:** Especially if you're limping
+  - If you can't push off properly, you're not ready for full weightbearing
+  - Use crutches for support until gait is normal
+
+- **Why this matters:** The tendon needs protection until it's developed enough strength. Protected walking prevents elongation during this vulnerable period.
+
+2. **Begin calf activation** - Continue building on early strengthening work
+   - Single-leg seated isotonic and isometric calf raises
+   - Target: 1.2x body weight seated isotonic
+   - Target: 1.4x body weight MVIC (maximal voluntary isometric contraction) seated
 
 3. **Improve balance** - Rebuild proprioception (body awareness) in the ankle
+   - Standing on one leg, balance drills
+   - Gait drills
 
 4. **Normalise gait** - Correct any limping or compensatory patterns
+   - Protected gait initially, weaning to unprotected during this period
 
 5. **Build confidence** - Psychological recovery is part of physical recovery
 
 **What goals are NOT for this phase:**
 
-- Heavy calf strengthening
+- Heavy calf strengthening (that comes later)
 - Running or impact activities
 - Sports-specific training
-- Aggressive stretching
+- Aggressive stretching (avoid for up to a year)
 - Maximum range of motion
 
 ### The Importance of Consistency
@@ -488,29 +530,33 @@ Some swelling is normal when you increase activity.
 
 ### The "Tight" Feeling - Don't Stretch Aggressively
 
-**This is critically important:** Do NOT aggressively stretch your Achilles tendon.
+**This is critically important:** Do NOT aggressively stretch your Achilles tendon. This is one of the most common mistakes that can cause permanent problems.
 
-**Why tightness is normal:**
+**Why tightness is normal and GOOD:**
 
-- Your tendon has healed in a shortened position (intentionally)
+- Your tendon has healed in a shortened position (intentionally - this is what we want!)
 - The healing tissue is naturally stiffer than the original
 - Scar tissue takes time to become supple
+- **A tight tendon is better than an elongated one** - tightness means it healed at the right length
 
 **Why aggressive stretching is dangerous:**
 
-- Could elongate the tendon (permanent weakness)
+- Could elongate the tendon (permanent weakness and loss of power)
 - Could damage healing tissue
 - Does NOT speed up recovery
 - Risks undoing months of careful healing
+- **Critical window:** After 16 weeks, elongation becomes very hard to reverse
 
 **The right approach:**
 
-- Gentle, physiotherapist-guided stretching only
-- Active exercises (like heel raises) that lengthen through movement
+- **Avoid passive stretching** for up to a year (or as your physio advises)
+- Active exercises (like heel raises) that lengthen through movement are safer
+- Gentle, physiotherapist-guided stretching only when approved
 - Allow time - 6-12 months for full flexibility return
 - "Low and slow" rather than "hard and fast"
+- Flexibility will come naturally as you do loaded dorsiflexion exercises (like calf raises over plates)
 
-**The rule of thumb:** If you're unsure whether a stretch is too aggressive, it probably is. Always err on the side of caution.
+**The rule:** If you're unsure whether a stretch is too aggressive, it probably is. Always err on the side of caution. Your tendon is malleable (can change) up to 12 months, but elongation is hard to reverse after 16 weeks.
 
 ---
 

@@ -1,0 +1,493 @@
+---
+import Layout from "../layouts/Layout.astro";
+import type { Lang } from "@/config/languages.ts";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import ColorGradient from "@/components/ColorGradient.astro";
+import HighlightedWord from "@/components/HighlightedWord";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Thetis Medical - Recovery Courses",
+        description:
+            "Expert-led courses to guide you through every step of your Achilles rupture recovery. From the essentials to returning to sport.",
+        image: "https://thetismedical.com/images/night-splint.png",
+        tagline: "Like Thetis guided Achilles",
+        heading: "Your Recovery",
+        headingHighlight: "Journey",
+        headingEnd: "Starts Here",
+        intro: "Just as the sea nymph Thetis watched over her son Achilles, we're here to guide you through every step of your Achilles rupture recovery with expert knowledge and unwavering support.",
+        courses: [
+            {
+                title: "Recovery Essentials",
+                price: "£29",
+                priceNote: "31 lessons",
+                description:
+                    "A comprehensive course covering every phase of Achilles rupture recovery. From emergency care to returning to sport.",
+                features: [
+                    "31 structured lessons",
+                    "Week-by-week recovery timeline",
+                    "Essential exercises for each stage",
+                    "Sleep and mobility tips",
+                    "What to expect at each milestone",
+                ],
+                cta: "View Course",
+                ctaHref: "/course",
+                highlighted: false,
+            },
+            {
+                title: "Pro Course",
+                price: "Premium",
+                priceNote: "Video course + support",
+                description:
+                    "An in-depth video course with personalized guidance from Achilles recovery experts. For those who want the best possible recovery.",
+                features: [
+                    "Everything in Recovery Essentials",
+                    "Detailed video demonstrations",
+                    "Personalized exercise plans",
+                    "Direct access to recovery experts",
+                    "Return-to-sport protocols",
+                    "Community support forum",
+                ],
+                cta: "Explore Full Course",
+                ctaHref: "/courses/professional",
+                highlighted: true,
+            },
+        ],
+        whyChoose: "Why Choose Thetis Courses?",
+        reasons: [
+            {
+                title: "Expert-Led",
+                description:
+                    "Created by Achilles rupture recovery specialists with decades of combined experience.",
+            },
+            {
+                title: "Evidence-Based",
+                description:
+                    "Every recommendation is backed by the latest medical research and clinical best practices.",
+            },
+            {
+                title: "Patient-Focused",
+                description:
+                    "Designed by people who understand the emotional and physical challenges of recovery.",
+            },
+            {
+                title: "Continuous Support",
+                description:
+                    "We're with you from day one through to your return to full activity.",
+            },
+        ],
+    },
+    de: {
+        title: "Thetis Medical - Genesungskurse",
+        description:
+            "Expertenkurse, die Sie durch jeden Schritt Ihrer Achillessehnenruptur-Genesung führen. Von den Grundlagen bis zur Rückkehr zum Sport.",
+        image: "https://thetismedical.com/images/night-splint.png",
+        tagline: "Wie Thetis Achilles führte",
+        heading: "Ihre Genesung",
+        headingHighlight: "Reise",
+        headingEnd: "beginnt hier",
+        intro: "So wie die Meeresnymphe Thetis über ihren Sohn Achilles wachte, begleiten wir Sie durch jeden Schritt Ihrer Achillessehnenruptur-Genesung mit Expertenwissen und unerschütterlicher Unterstützung.",
+        courses: [
+            {
+                title: "Genesungs-Grundlagen",
+                price: "Kostenlos",
+                priceNote: "E-Mail-Kurs",
+                description:
+                    "Ein umfassender E-Mail-Kurs zu den Grundlagen der Achillessehnenruptur-Genesung. Perfekt für den Einstieg.",
+                features: [
+                    "Woche-für-Woche Genesungszeitplan",
+                    "Wesentliche Übungen für jede Phase",
+                    "Schlaf- und Mobilitätstipps",
+                    "Was bei jedem Meilenstein zu erwarten ist",
+                    "Expertenberatung direkt in Ihren Posteingang",
+                ],
+                cta: "Kostenlosen Kurs starten",
+                ctaHref: "/de/kurse/grundlagen",
+                highlighted: false,
+            },
+            {
+                title: "Professioneller Kurs",
+                price: "Premium",
+                priceNote: "Videokurs + Unterstützung",
+                description:
+                    "Ein ausführlicher Videokurs mit persönlicher Anleitung von Experten für Achillessehnen-Genesung. Für die bestmögliche Genesung.",
+                features: [
+                    "Alles aus Genesungs-Grundlagen",
+                    "Detaillierte Video-Demonstrationen",
+                    "Personalisierte Übungspläne",
+                    "Direkter Zugang zu Genesungsexperten",
+                    "Protokolle zur Rückkehr zum Sport",
+                    "Community-Support-Forum",
+                ],
+                cta: "Vollständigen Kurs entdecken",
+                ctaHref: "/de/kurse/professionell",
+                highlighted: true,
+            },
+        ],
+        whyChoose: "Warum Thetis-Kurse wählen?",
+        reasons: [
+            {
+                title: "Expertengeführt",
+                description:
+                    "Erstellt von Spezialisten für Achillessehnenruptur-Genesung mit jahrzehntelanger Erfahrung.",
+            },
+            {
+                title: "Evidenzbasiert",
+                description:
+                    "Jede Empfehlung ist durch die neueste medizinische Forschung und klinische Best Practices gestützt.",
+            },
+            {
+                title: "Patientenfokussiert",
+                description:
+                    "Entwickelt von Menschen, die die emotionalen und körperlichen Herausforderungen der Genesung verstehen.",
+            },
+            {
+                title: "Kontinuierliche Unterstützung",
+                description:
+                    "Wir begleiten Sie vom ersten Tag bis zur Rückkehr zur vollen Aktivität.",
+            },
+        ],
+    },
+    fr: {
+        title: "Thetis Medical - Cours de Récupération",
+        description:
+            "Cours dirigés par des experts pour vous guider à chaque étape de votre récupération de rupture d'Achille. Des essentiels au retour au sport.",
+        image: "https://thetismedical.com/images/night-splint.png",
+        tagline: "Comme Thétis a guidé Achille",
+        heading: "Votre",
+        headingHighlight: "Parcours",
+        headingEnd: "de récupération commence ici",
+        intro: "Tout comme la nymphe marine Thétis veillait sur son fils Achille, nous sommes là pour vous guider à chaque étape de votre récupération de rupture d'Achille avec expertise et soutien indéfectible.",
+        courses: [
+            {
+                title: "Essentiels de récupération",
+                price: "Gratuit",
+                priceNote: "Cours par email",
+                description:
+                    "Un cours complet par email couvrant les fondamentaux de la récupération de rupture d'Achille. Parfait pour ceux qui débutent.",
+                features: [
+                    "Chronologie de récupération semaine par semaine",
+                    "Exercices essentiels pour chaque étape",
+                    "Conseils sommeil et mobilité",
+                    "Ce à quoi s'attendre à chaque étape",
+                    "Conseils d'experts livrés dans votre boîte mail",
+                ],
+                cta: "Commencer le cours gratuit",
+                ctaHref: "/fr/cours/essentiels",
+                highlighted: false,
+            },
+            {
+                title: "Cours professionnel",
+                price: "Premium",
+                priceNote: "Cours vidéo + accompagnement",
+                description:
+                    "Un cours vidéo approfondi avec conseils personnalisés d'experts en récupération d'Achille. Pour ceux qui veulent la meilleure récupération possible.",
+                features: [
+                    "Tout ce qui est dans Essentiels de récupération",
+                    "Démonstrations vidéo détaillées",
+                    "Plans d'exercices personnalisés",
+                    "Accès direct aux experts en récupération",
+                    "Protocoles de retour au sport",
+                    "Forum de soutien communautaire",
+                ],
+                cta: "Découvrir le cours complet",
+                ctaHref: "/fr/cours/professionnel",
+                highlighted: true,
+            },
+        ],
+        whyChoose: "Pourquoi choisir les cours Thetis?",
+        reasons: [
+            {
+                title: "Dirigé par des experts",
+                description:
+                    "Créé par des spécialistes de la récupération de rupture d'Achille avec des décennies d'expérience combinée.",
+            },
+            {
+                title: "Basé sur des preuves",
+                description:
+                    "Chaque recommandation est soutenue par les dernières recherches médicales et meilleures pratiques cliniques.",
+            },
+            {
+                title: "Centré sur le patient",
+                description:
+                    "Conçu par des personnes qui comprennent les défis émotionnels et physiques de la récupération.",
+            },
+            {
+                title: "Soutien continu",
+                description:
+                    "Nous sommes avec vous du premier jour jusqu'à votre retour à la pleine activité.",
+            },
+        ],
+    },
+    es: {
+        title: "Thetis Medical - Cursos de Recuperación",
+        description:
+            "Cursos dirigidos por expertos para guiarte en cada paso de tu recuperación de rotura de Aquiles. Desde los esenciales hasta volver al deporte.",
+        image: "https://thetismedical.com/images/night-splint.png",
+        tagline: "Como Tetis guió a Aquiles",
+        heading: "Tu",
+        headingHighlight: "Viaje",
+        headingEnd: "de recuperación comienza aquí",
+        intro: "Así como la ninfa marina Tetis cuidaba de su hijo Aquiles, estamos aquí para guiarte en cada paso de tu recuperación de rotura de Aquiles con conocimiento experto y apoyo inquebrantable.",
+        courses: [
+            {
+                title: "Esenciales de recuperación",
+                price: "Gratis",
+                priceNote: "Curso por email",
+                description:
+                    "Un curso completo por email que cubre los fundamentos de la recuperación de rotura de Aquiles. Perfecto para quienes recién comienzan.",
+                features: [
+                    "Cronología de recuperación semana a semana",
+                    "Ejercicios esenciales para cada etapa",
+                    "Consejos de sueño y movilidad",
+                    "Qué esperar en cada hito",
+                    "Orientación experta en tu bandeja de entrada",
+                ],
+                cta: "Comenzar curso gratuito",
+                ctaHref: "/es/cursos/esenciales",
+                highlighted: false,
+            },
+            {
+                title: "Curso profesional",
+                price: "Premium",
+                priceNote: "Curso de video + apoyo",
+                description:
+                    "Un curso de video en profundidad con orientación personalizada de expertos en recuperación de Aquiles. Para quienes quieren la mejor recuperación posible.",
+                features: [
+                    "Todo lo de Esenciales de recuperación",
+                    "Demostraciones en video detalladas",
+                    "Planes de ejercicios personalizados",
+                    "Acceso directo a expertos en recuperación",
+                    "Protocolos de regreso al deporte",
+                    "Foro de apoyo comunitario",
+                ],
+                cta: "Explorar curso completo",
+                ctaHref: "/es/cursos/profesional",
+                highlighted: true,
+            },
+        ],
+        whyChoose: "¿Por qué elegir cursos Thetis?",
+        reasons: [
+            {
+                title: "Dirigido por expertos",
+                description:
+                    "Creado por especialistas en recuperación de rotura de Aquiles con décadas de experiencia combinada.",
+            },
+            {
+                title: "Basado en evidencia",
+                description:
+                    "Cada recomendación está respaldada por la investigación médica más reciente y mejores prácticas clínicas.",
+            },
+            {
+                title: "Enfocado en el paciente",
+                description:
+                    "Diseñado por personas que entienden los desafíos emocionales y físicos de la recuperación.",
+            },
+            {
+                title: "Apoyo continuo",
+                description:
+                    "Estamos contigo desde el primer día hasta tu regreso a la actividad completa.",
+            },
+        ],
+    },
+    it: {
+        title: "Thetis Medical - Corsi di Recupero",
+        description:
+            "Corsi guidati da esperti per accompagnarti in ogni fase del tuo recupero dalla rottura di Achille. Dai fondamentali al ritorno allo sport.",
+        image: "https://thetismedical.com/images/night-splint.png",
+        tagline: "Come Teti guidò Achille",
+        heading: "Il Tuo",
+        headingHighlight: "Percorso",
+        headingEnd: "di recupero inizia qui",
+        intro: "Così come la ninfa marina Teti vegliava su suo figlio Achille, siamo qui per guidarti in ogni fase del tuo recupero dalla rottura di Achille con competenza esperta e supporto incrollabile.",
+        courses: [
+            {
+                title: "Fondamentali del recupero",
+                price: "Gratuito",
+                priceNote: "Corso email",
+                description:
+                    "Un corso email completo che copre i fondamenti del recupero dalla rottura di Achille. Perfetto per chi inizia il percorso.",
+                features: [
+                    "Cronologia del recupero settimana per settimana",
+                    "Esercizi essenziali per ogni fase",
+                    "Consigli su sonno e mobilità",
+                    "Cosa aspettarsi ad ogni traguardo",
+                    "Guida esperta consegnata nella tua casella email",
+                ],
+                cta: "Inizia corso gratuito",
+                ctaHref: "/it/corsi/fondamentali",
+                highlighted: false,
+            },
+            {
+                title: "Corso professionale",
+                price: "Premium",
+                priceNote: "Corso video + supporto",
+                description:
+                    "Un corso video approfondito con guida personalizzata da esperti di recupero di Achille. Per chi vuole il miglior recupero possibile.",
+                features: [
+                    "Tutto quello che c'è in Fondamentali del recupero",
+                    "Dimostrazioni video dettagliate",
+                    "Piani di esercizi personalizzati",
+                    "Accesso diretto agli esperti di recupero",
+                    "Protocolli di ritorno allo sport",
+                    "Forum di supporto della comunità",
+                ],
+                cta: "Esplora corso completo",
+                ctaHref: "/it/corsi/professionale",
+                highlighted: true,
+            },
+        ],
+        whyChoose: "Perché scegliere i corsi Thetis?",
+        reasons: [
+            {
+                title: "Guidato da esperti",
+                description:
+                    "Creato da specialisti del recupero dalla rottura di Achille con decenni di esperienza combinata.",
+            },
+            {
+                title: "Basato su evidenze",
+                description:
+                    "Ogni raccomandazione è supportata dalla più recente ricerca medica e dalle migliori pratiche cliniche.",
+            },
+            {
+                title: "Focalizzato sul paziente",
+                description:
+                    "Progettato da persone che comprendono le sfide emotive e fisiche del recupero.",
+            },
+            {
+                title: "Supporto continuo",
+                description:
+                    "Siamo con te dal primo giorno fino al tuo ritorno alla piena attività.",
+            },
+        ],
+    },
+};
+
+const t = content[lang];
+---
+
+<Layout title={t.title} description={t.description} image={t.image} lang={lang}>
+    <main>
+        <!-- Hero Section -->
+        <ColorGradient>
+            <div class="mx-auto px-4 py-16 md:py-24 max-w-5xl text-center">
+                <p
+                    class="mb-4 font-medium text-primary text-sm uppercase tracking-widest"
+                >
+                    {t.tagline}
+                </p>
+                <h1
+                    class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-4xl md:text-6xl"
+                >
+                    {t.heading}
+                    <HighlightedWord>{t.headingHighlight}</HighlightedWord>
+                    {t.headingEnd}
+                </h1>
+                <p
+                    class="mx-auto max-w-3xl text-neutral-600 dark:text-neutral-400 text-lg md:text-xl"
+                >
+                    {t.intro}
+                </p>
+            </div>
+        </ColorGradient>
+
+        <!-- Course Cards -->
+        <section class="bg-neutral-50 dark:bg-neutral-900 py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-5xl">
+                <div class="gap-8 grid md:grid-cols-2">
+                    {
+                        t.courses.map((course) => (
+                            <div
+                                class={cn(
+                                    "shadow-lg hover:shadow-xl p-8 rounded-2xl transition-all",
+                                    course.highlighted
+                                        ? "bg-gradient-to-br from-primary/10 via-primary/5 to-primary/15 border-2 border-primary/30 dark:border-primary/50"
+                                        : "bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700",
+                                )}
+                            >
+                                <div class="flex justify-between items-center mb-4">
+                                    <span
+                                        class={cn(
+                                            "inline-flex items-center px-3 py-1 rounded-full font-semibold text-sm",
+                                            course.highlighted
+                                                ? "bg-primary/20 text-primary"
+                                                : "bg-primary/20 text-primary dark:bg-primary/30 dark:text-primary/80",
+                                        )}
+                                    >
+                                        {course.price}
+                                    </span>
+                                    <span class="text-neutral-500 dark:text-neutral-400 text-sm">
+                                        {course.priceNote}
+                                    </span>
+                                </div>
+
+                                <h3 class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl">
+                                    {course.title}
+                                </h3>
+
+                                <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+                                    {course.description}
+                                </p>
+
+                                <ul class="space-y-3 mb-8">
+                                    {course.features.map((feature) => (
+                                        <li class="flex items-start gap-2 text-neutral-700 dark:text-neutral-300">
+                                            <span class="mt-1 text-primary">
+                                                ✓
+                                            </span>
+                                            <span>{feature}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <a
+                                    href={course.ctaHref}
+                                    class={cn(
+                                        buttonVariants({
+                                            variant: course.highlighted
+                                                ? "default"
+                                                : "outline",
+                                            size: "lg",
+                                        }),
+                                        "w-full justify-center",
+                                    )}
+                                >
+                                    {course.cta}
+                                </a>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-5xl">
+                <h2
+                    class="mb-12 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl text-center"
+                >
+                    {t.whyChoose}
+                </h2>
+
+                <div class="gap-6 grid sm:grid-cols-2 lg:grid-cols-4">
+                    {
+                        t.reasons.map((reason) => (
+                            <div class="p-6 text-center">
+                                <h3 class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
+                                    {reason.title}
+                                </h3>
+                                <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+                                    {reason.description}
+                                </p>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

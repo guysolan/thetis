@@ -1,0 +1,14 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { CheckoutUpsellPage } from "@/components/cart/CheckoutUpsellPage";
+---
+
+<Layout
+    title="Review Your Order | Thetis Medical"
+    description="Review your order and add any additional items before checkout"
+    lang="en"
+    hideNav
+    hideFooter
+>
+    <CheckoutUpsellPage client:load />
+</Layout>

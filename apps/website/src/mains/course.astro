@@ -1,0 +1,1780 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ColorGradientInOut from "@/components/ColorGradientInOut.astro";
+import HighlightedWord from "@/components/HighlightedWord";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Image from "astro/components/Image.astro";
+import TendonStiffnessImage from "@/assets/tendon-stiffness-after-rupture.png";
+import CourseBuyButton from "@/components/CourseBuyButton";
+import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
+import InfiniteReviews from "@/components/reviews/InfiniteReviews.astro";
+import { Image as AstroImage } from "astro:assets";
+import Review1Image from "@/assets/review-1.png";
+import Review2Image from "@/assets/review-2.png";
+import Review3Image from "@/assets/review-3.png";
+import StickyAddToCart from "@/components/StickyAddToCart";
+import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
+import type { Lang } from "@/config/languages";
+import {
+    Check,
+    Star,
+    Stethoscope,
+    Footprints,
+    TrendingUp,
+    Zap,
+    Heart,
+    Users,
+    BookOpen,
+    GraduationCap,
+    ExternalLink,
+    X,
+} from "lucide-react";
+
+interface Props {
+    lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+
+// Translations
+const translations = {
+    en: {
+        meta: {
+            title: "Complete Achilles Recovery Course - 31 Expert Lessons | Thetis Medical",
+            description: "Master your Achilles rupture recovery with 31 structured lessons covering every phase. From emergency care to return to sport. Expert guidance, exercises, and practical tips.",
+        },
+        hero: {
+            badge: "20,000+ Readers",
+            title: "Master Your",
+            titleHighlight: "Achilles Recovery",
+            titleEnd: "with 31 Expert Lessons",
+            subtitle: "The timeline tells you <em>when</em> things happen. This course tells you <strong>how to do them safely</strong>—so you don't end up back in surgery or with permanent weakness.",
+            subtitlePlain: "Avoid the mistakes that cause tendon elongation and re-rupture. Get expert guidance on exactly what to do—and what <em>not</em> to do—at every stage.",
+            cta: "Start Your Safe Recovery →",
+            trust1: "31 structured lessons",
+            trust2: "Reviewed by foot & ankle specialists",
+            trust3: "Based on 100+ research articles",
+            socialProof: "Join 20,000+ people following Thetis recovery advice",
+        },
+        mistakes: {
+            title: "Mistakes That Set Recovery Back Months",
+            subtitle: "These are the errors that lead to re-rupture, permanent weakness, or starting over from scratch.",
+            mistake1Title: "Removing wedges too early",
+            mistake1Desc: "→ Tendon elongation (permanent weakness)",
+            mistake2Title: "Wrong exercises at wrong time",
+            mistake2Desc: "→ Re-rupture risk",
+            mistake3Title: "Missing blood clot warning signs",
+            mistake3Desc: "→ Medical emergency",
+            mistake4Title: "Returning to sport without passing strength tests",
+            mistake4Desc: "→ Re-injury",
+            footer: "The course teaches you exactly how to avoid each of these—with clear guidance on what to do instead.",
+        },
+        timeline: {
+            title: "What to Expect from the Course",
+            subtitle: "Your recovery journey and the benefits you'll experience over the next 12+ months.",
+            week01: { title: "Immediate Confidence & Clarity", desc: "Know what's normal vs urgent. Understand emergency care and A&E expectations. Set up your recovery station properly with the right equipment.", teaser: "→ Learn the 3 questions your surgeon expects you to ask" },
+            week26: { title: "Better Pain Management & Sleep", desc: "Master proper elevation techniques and pain management strategies. Get quality sleep with proven positions and solutions. Prevent complications like blood clots.", teaser: "→ The biggest mistake people make in the non-weight-bearing phase" },
+            week612: { title: "Walking Without Support", desc: "Transition safely out of your boot. Take your first confident steps. Improve balance and proprioception. Begin early strengthening exercises.", teaser: "→ How to transition out of your boot without re-rupturing" },
+            month34: { title: "Return to Daily Activities", desc: "Build functional movement capacity. Return to normal daily activities with confidence. Develop endurance and exercise load management skills.", teaser: "→ The exercise progression that prevents permanent calf weakness" },
+            month46: { title: "Single Leg Strength", desc: "Master single leg exercises and calf raise progressions. Build significant strength in your affected leg. Improve functional capacity for more demanding activities.", teaser: "→ The strength test you must pass before running" },
+            month69: { title: "Return to Running", desc: "Follow structured return-to-running protocols. Begin sport-specific training. Test your performance safely with evidence-based protocols.", teaser: "→ When it's actually safe to run—and why most people rush it" },
+            month912: { title: "Explosive Power & Plyometrics", desc: "Develop explosive strength through advanced training. Master plyometric exercises. Prepare for full return to competitive sports and high-intensity activities." },
+            month12plus: { title: "Long-Term Maintenance & Full Recovery", desc: "Maintain your strength and prevent re-injury. Continue sport-specific training. Enjoy full return to all activities with confidence and proper long-term care strategies." },
+        },
+        socialBanner: {
+            specialists: "Reviewed by Foot & Ankle Specialists",
+            research: "Based on 100+ Research Articles",
+            readers: "20,000+ People Following Our Advice",
+        },
+        lessons: {
+            title: "What You'll Learn: 31 Lessons Across 5 Phases",
+            subtitle: "Your complete recovery roadmap, from the moment of injury to returning to full activity.",
+            subNote: "Evidence-based content reviewed by foot & ankle specialists, based on 100+ research articles",
+            lessonsWord: "lessons",
+            readyStart: "Ready to start your recovery journey?",
+            getFullPlan: "Get the Full Recovery Plan",
+        },
+        whoFor: {
+            title: "Who's This Course For?",
+            subtitle: "Find out if this course is the right fit for your recovery journey.",
+            reviewedBy: "Reviewed by specialists",
+            researchBased: "100+ research articles",
+            perfectFor: "Perfect For:",
+            perfectItems: [
+                "Recently ruptured your Achilles tendon",
+                "Want clear, week-by-week guidance",
+                "Need questions to ask your surgeon",
+                "Looking for evidence-based recovery advice",
+                "Want to avoid common recovery mistakes",
+            ],
+            notFor: "Not For:",
+            notItems: [
+                "Achilles tendonitis/tendinopathy",
+                "Chronic tendon conditions",
+                "Non-rupture injuries",
+            ],
+            notNote: "This course is specifically designed for complete Achilles tendon ruptures, not chronic tendon conditions.",
+        },
+        reviews: {
+            title: "Join 10,000+ People Following Thetis Recovery Advice",
+            subtitle: "Real reviews from real people recovering from Achilles rupture",
+            note: "Course content reviewed by foot & ankle specialists • Based on 100+ research articles",
+            review1: "The course gave me everything I needed in one place. No more googling at 2am wondering if my symptoms were normal.",
+            review2: "Finally, clear guidance week by week. The exercises with illustrations were exactly what I needed.",
+            review3: "Worth every penny. The questions for my surgeon section helped me have better conversations with my doctor.",
+            review4: "I wish I had this from day one. The boot comparison guide saved me so much confusion.",
+            review5: "The week-by-week timeline kept me on track. I knew exactly what to expect and when.",
+        },
+        finalCta: {
+            title: "Ready to Master Your Recovery?",
+            subtitle: "Get instant access to all 31 lessons, exercises, and expert guidance. Join over 10,000 people who have everything they need for recovery in one convenient place.",
+            reviewedBy: "Reviewed by foot & ankle specialists",
+            research: "Based on 100+ research articles",
+            cta: "Start Your Safe Recovery →",
+            alreadyPurchased: "Already purchased? Access your course →",
+            guaranteeTitle: "Money-Back Guarantee",
+            guaranteeDesc: "If the course doesn't help you feel more confident in your recovery, we'll refund your purchase—no questions asked.",
+        },
+        lessonPreviews: {
+            phase1: { phase: "Phase 1: Immobilization", weeks: "Weeks 0-6" },
+            phase2: { phase: "Phase 2: Post-Immobilization", weeks: "Weeks 6-12" },
+            phase3: { phase: "Phase 3: Building Capacity", weeks: "Weeks 12-18" },
+            phase4: { phase: "Phase 4: Power & Sport", weeks: "Weeks 18+" },
+            phase5: { phase: "Throughout Your Recovery", weeks: "All Phases" },
+            lessons1: [
+                "Emergency care: What just happened?",
+                "A&E expectations and what to ask",
+                "Blood clot prevention strategies",
+                "Choosing your walking boot",
+                "Setting up your recovery station",
+                "Proper elevation techniques",
+                "Sleeping solutions and positions",
+                "What's normal vs what's urgent",
+                "Managing pain and swelling",
+                "Early exercises (safe movements)",
+            ],
+            lessons2: [
+                "Transitioning out of the boot",
+                "First steps without support",
+                "Progressive weight bearing",
+                "Early strengthening exercises",
+                "Balance and proprioception",
+                "Scar massage techniques",
+                "Range of motion exercises",
+                "Walking patterns and gait",
+            ],
+            lessons3: [
+                "Single leg exercises",
+                "Calf raise progressions",
+                "Building endurance",
+                "Functional movements",
+                "Return to daily activities",
+                "Exercise load management",
+            ],
+            lessons4: [
+                "Explosive strength training",
+                "Plyometric exercises",
+                "Sport-specific training",
+                "Return to running protocols",
+                "Performance testing",
+                "Long-term maintenance",
+            ],
+            lessons5: [
+                "Questions for your surgeon",
+                "Product recommendations",
+                "Boot comparison guide",
+                "Sleep and washing solutions",
+                "Week-by-week timeline",
+                "When to seek urgent care",
+            ],
+        },
+    },
+    de: {
+        meta: {
+            title: "Vollständiger Achillessehnen-Genesungskurs - 31 Experten-Lektionen | Thetis Medical",
+            description: "Meistern Sie Ihre Achillessehnenruptur-Genesung mit 31 strukturierten Lektionen für jede Phase. Von der Notfallversorgung bis zur Rückkehr zum Sport.",
+        },
+        hero: {
+            badge: "20.000+ Leser",
+            title: "Meistern Sie Ihre",
+            titleHighlight: "Achilles-Genesung",
+            titleEnd: "mit 31 Experten-Lektionen",
+            subtitle: "Die Zeitleiste sagt Ihnen <em>wann</em> Dinge passieren. Dieser Kurs sagt Ihnen <strong>wie Sie sie sicher machen</strong>—damit Sie nicht wieder im OP landen oder dauerhafte Schwäche haben.",
+            subtitlePlain: "Vermeiden Sie die Fehler, die zu Sehnenverlängerung und Re-Ruptur führen. Erhalten Sie Expertenführung zu genau dem, was zu tun ist—und was <em>nicht</em> zu tun ist—in jeder Phase.",
+            cta: "Starten Sie Ihre sichere Genesung →",
+            trust1: "31 strukturierte Lektionen",
+            trust2: "Von Fuß- & Sprunggelenk-Spezialisten überprüft",
+            trust3: "Basierend auf 100+ Forschungsartikeln",
+            socialProof: "Schließen Sie sich 20.000+ Menschen an, die Thetis-Genesungsratschläge folgen",
+        },
+        mistakes: {
+            title: "Fehler, die die Genesung um Monate zurückwerfen",
+            subtitle: "Dies sind die Fehler, die zu Re-Ruptur, dauerhafter Schwäche oder Neuanfang führen.",
+            mistake1Title: "Keile zu früh entfernen",
+            mistake1Desc: "→ Sehnenverlängerung (dauerhafte Schwäche)",
+            mistake2Title: "Falsche Übungen zur falschen Zeit",
+            mistake2Desc: "→ Re-Ruptur-Risiko",
+            mistake3Title: "Blutgerinnsel-Warnsignale übersehen",
+            mistake3Desc: "→ Medizinischer Notfall",
+            mistake4Title: "Sport ohne Bestehen von Krafttests",
+            mistake4Desc: "→ Wiederverletzung",
+            footer: "Der Kurs lehrt Sie genau, wie Sie jeden dieser Fehler vermeiden—mit klarer Anleitung, was stattdessen zu tun ist.",
+        },
+        timeline: {
+            title: "Was Sie vom Kurs erwarten können",
+            subtitle: "Ihre Genesungsreise und die Vorteile, die Sie in den nächsten 12+ Monaten erleben werden.",
+            week01: { title: "Sofortiges Vertrauen & Klarheit", desc: "Wissen, was normal vs. dringend ist. Notfallversorgung und A&E-Erwartungen verstehen. Ihre Genesungsstation richtig mit der richtigen Ausrüstung einrichten.", teaser: "→ Lernen Sie die 3 Fragen, die Ihr Chirurg erwartet" },
+            week26: { title: "Besseres Schmerzmanagement & Schlaf", desc: "Meistern Sie richtige Hochlagerungstechniken und Schmerzmanagement-Strategien. Bekommen Sie Qualitätsschlaf mit bewährten Positionen und Lösungen. Verhindern Sie Komplikationen wie Blutgerinnsel.", teaser: "→ Der größte Fehler in der Phase ohne Belastung" },
+            week612: { title: "Gehen ohne Unterstützung", desc: "Übergang sicher aus Ihrem Stiefel. Machen Sie Ihre ersten sicheren Schritte. Verbessern Sie Balance und Propriozeption. Beginnen Sie frühe Kräftigungsübungen.", teaser: "→ Wie Sie ohne Re-Ruptur aus dem Stiefel wechseln" },
+            month34: { title: "Rückkehr zu täglichen Aktivitäten", desc: "Aufbau funktioneller Bewegungskapazität. Rückkehr zu normalen täglichen Aktivitäten mit Vertrauen. Entwicklung von Ausdauer und Belastungsmanagement-Fähigkeiten.", teaser: "→ Die Übungsprogression, die dauerhafte Wadenschwäche verhindert" },
+            month46: { title: "Einbein-Kraft", desc: "Meistern Sie Einbein-Übungen und Wadenheben-Progressionen. Bauen Sie signifikante Kraft in Ihrem betroffenen Bein auf.", teaser: "→ Der Krafttest, den Sie vor dem Laufen bestehen müssen" },
+            month69: { title: "Rückkehr zum Laufen", desc: "Folgen Sie strukturierten Rückkehr-zum-Laufen-Protokollen. Beginnen Sie sportspezifisches Training. Testen Sie Ihre Leistung sicher mit evidenzbasierten Protokollen.", teaser: "→ Wann es wirklich sicher ist zu laufen—und warum die meisten es überstürzen" },
+            month912: { title: "Explosivkraft & Plyometrie", desc: "Entwickeln Sie explosive Kraft durch fortgeschrittenes Training. Meistern Sie plyometrische Übungen. Bereiten Sie sich auf volle Rückkehr zum Wettkampfsport vor." },
+            month12plus: { title: "Langfristige Wartung & Volle Genesung", desc: "Erhalten Sie Ihre Kraft und verhindern Sie Wiederverletzungen. Setzen Sie sportspezifisches Training fort. Genießen Sie volle Rückkehr zu allen Aktivitäten mit Vertrauen." },
+        },
+        socialBanner: {
+            specialists: "Von Fuß- & Sprunggelenk-Spezialisten überprüft",
+            research: "Basierend auf 100+ Forschungsartikeln",
+            readers: "20.000+ Menschen folgen unseren Ratschlägen",
+        },
+        lessons: {
+            title: "Was Sie lernen werden: 31 Lektionen in 5 Phasen",
+            subtitle: "Ihre vollständige Genesungs-Roadmap, vom Moment der Verletzung bis zur Rückkehr zur vollen Aktivität.",
+            subNote: "Evidenzbasierter Inhalt, überprüft von Fuß- & Sprunggelenk-Spezialisten",
+            lessonsWord: "Lektionen",
+            readyStart: "Bereit, Ihre Genesungsreise zu beginnen?",
+            getFullPlan: "Holen Sie sich den vollständigen Genesungsplan",
+        },
+        whoFor: {
+            title: "Für wen ist dieser Kurs?",
+            subtitle: "Finden Sie heraus, ob dieser Kurs der richtige für Ihre Genesungsreise ist.",
+            reviewedBy: "Von Spezialisten überprüft",
+            researchBased: "100+ Forschungsartikel",
+            perfectFor: "Perfekt für:",
+            perfectItems: [
+                "Kürzlich Achillessehnenruptur erlitten",
+                "Wollen klare, wöchentliche Anleitung",
+                "Brauchen Fragen für Ihren Chirurgen",
+                "Suchen evidenzbasierte Genesungsratschläge",
+                "Wollen häufige Genesungsfehler vermeiden",
+            ],
+            notFor: "Nicht für:",
+            notItems: [
+                "Achillessehnenentzündung/Tendinopathie",
+                "Chronische Sehnenerkrankungen",
+                "Nicht-Ruptur-Verletzungen",
+            ],
+            notNote: "Dieser Kurs ist speziell für vollständige Achillessehnenrupturen konzipiert, nicht für chronische Sehnenerkrankungen.",
+        },
+        reviews: {
+            title: "Schließen Sie sich 10.000+ Menschen an, die Thetis-Genesungsratschläge folgen",
+            subtitle: "Echte Bewertungen von echten Menschen, die sich von Achillessehnenrupturen erholen",
+            note: "Kursinhalt von Fuß- & Sprunggelenk-Spezialisten überprüft • Basierend auf 100+ Forschungsartikeln",
+            review1: "Der Kurs gab mir alles, was ich an einem Ort brauchte. Kein Googeln mehr um 2 Uhr nachts.",
+            review2: "Endlich klare Anleitung Woche für Woche. Die Übungen mit Illustrationen waren genau das, was ich brauchte.",
+            review3: "Jeden Cent wert. Die Fragen für meinen Chirurgen halfen mir bei besseren Gesprächen mit meinem Arzt.",
+            review4: "Ich wünschte, ich hätte das von Tag eins gehabt. Der Stiefelvergleich hat mir so viel Verwirrung erspart.",
+            review5: "Die wöchentliche Zeitleiste hielt mich auf Kurs. Ich wusste genau, was zu erwarten war und wann.",
+        },
+        finalCta: {
+            title: "Bereit, Ihre Genesung zu meistern?",
+            subtitle: "Erhalten Sie sofortigen Zugang zu allen 31 Lektionen, Übungen und Expertenführung. Schließen Sie sich über 10.000 Menschen an, die alles haben, was sie für die Genesung an einem Ort brauchen.",
+            reviewedBy: "Von Fuß- & Sprunggelenk-Spezialisten überprüft",
+            research: "Basierend auf 100+ Forschungsartikeln",
+            cta: "Starten Sie Ihre sichere Genesung →",
+            alreadyPurchased: "Bereits gekauft? Zugang zu Ihrem Kurs →",
+            guaranteeTitle: "Geld-zurück-Garantie",
+            guaranteeDesc: "Wenn der Kurs Ihnen nicht hilft, sich sicherer in Ihrer Genesung zu fühlen, erstatten wir Ihren Kauf—ohne Fragen.",
+        },
+        lessonPreviews: {
+            phase1: { phase: "Phase 1: Immobilisierung", weeks: "Wochen 0-6" },
+            phase2: { phase: "Phase 2: Nach der Immobilisierung", weeks: "Wochen 6-12" },
+            phase3: { phase: "Phase 3: Kapazitätsaufbau", weeks: "Wochen 12-18" },
+            phase4: { phase: "Phase 4: Kraft & Sport", weeks: "Wochen 18+" },
+            phase5: { phase: "Während Ihrer gesamten Genesung", weeks: "Alle Phasen" },
+            lessons1: [
+                "Notfallversorgung: Was ist gerade passiert?",
+                "A&E-Erwartungen und was Sie fragen sollten",
+                "Strategien zur Blutgerinnselprävention",
+                "Auswahl Ihres Gehstiefels",
+                "Einrichtung Ihrer Genesungsstation",
+                "Richtige Hochlagerungstechniken",
+                "Schlaflösungen und -positionen",
+                "Was ist normal vs. was ist dringend",
+                "Schmerz- und Schwellungsmanagement",
+                "Frühe Übungen (sichere Bewegungen)",
+            ],
+            lessons2: [
+                "Übergang aus dem Stiefel",
+                "Erste Schritte ohne Unterstützung",
+                "Progressive Gewichtsbelastung",
+                "Frühe Kräftigungsübungen",
+                "Balance und Propriozeption",
+                "Narbenmassagetechniken",
+                "Bewegungsumfangsübungen",
+                "Gangmuster und Gangbild",
+            ],
+            lessons3: [
+                "Einbein-Übungen",
+                "Wadenheben-Progressionen",
+                "Ausdaueraufbau",
+                "Funktionelle Bewegungen",
+                "Rückkehr zu täglichen Aktivitäten",
+                "Übungsbelastungsmanagement",
+            ],
+            lessons4: [
+                "Explosives Krafttraining",
+                "Plyometrische Übungen",
+                "Sportspezifisches Training",
+                "Rückkehr-zum-Laufen-Protokolle",
+                "Leistungstests",
+                "Langfristige Wartung",
+            ],
+            lessons5: [
+                "Fragen für Ihren Chirurgen",
+                "Produktempfehlungen",
+                "Stiefelvergleichsführer",
+                "Schlaf- und Waschlösungen",
+                "Wöchentliche Zeitleiste",
+                "Wann Sie dringend Hilfe suchen sollten",
+            ],
+        },
+    },
+    fr: {
+        meta: {
+            title: "Cours complet de récupération d'Achille - 31 leçons d'experts | Thetis Medical",
+            description: "Maîtrisez votre récupération de rupture d'Achille avec 31 leçons structurées couvrant chaque phase. Des soins d'urgence au retour au sport.",
+        },
+        hero: {
+            badge: "20 000+ lecteurs",
+            title: "Maîtrisez votre",
+            titleHighlight: "récupération d'Achille",
+            titleEnd: "avec 31 leçons d'experts",
+            subtitle: "La chronologie vous dit <em>quand</em> les choses se passent. Ce cours vous dit <strong>comment les faire en toute sécurité</strong>—pour ne pas vous retrouver en chirurgie ou avec une faiblesse permanente.",
+            subtitlePlain: "Évitez les erreurs qui causent l'élongation du tendon et la re-rupture. Obtenez des conseils d'experts sur exactement quoi faire—et quoi <em>ne pas</em> faire—à chaque étape.",
+            cta: "Commencez votre récupération sécurisée →",
+            trust1: "31 leçons structurées",
+            trust2: "Revu par des spécialistes du pied et de la cheville",
+            trust3: "Basé sur 100+ articles de recherche",
+            socialProof: "Rejoignez 20 000+ personnes qui suivent les conseils de récupération Thetis",
+        },
+        mistakes: {
+            title: "Erreurs qui retardent la récupération de plusieurs mois",
+            subtitle: "Ce sont les erreurs qui mènent à la re-rupture, la faiblesse permanente ou recommencer à zéro.",
+            mistake1Title: "Retirer les cales trop tôt",
+            mistake1Desc: "→ Élongation du tendon (faiblesse permanente)",
+            mistake2Title: "Mauvais exercices au mauvais moment",
+            mistake2Desc: "→ Risque de re-rupture",
+            mistake3Title: "Manquer les signes d'alerte de caillot sanguin",
+            mistake3Desc: "→ Urgence médicale",
+            mistake4Title: "Retour au sport sans réussir les tests de force",
+            mistake4Desc: "→ Re-blessure",
+            footer: "Le cours vous apprend exactement comment éviter chacune de ces erreurs—avec des conseils clairs sur quoi faire à la place.",
+        },
+        timeline: {
+            title: "Ce que vous pouvez attendre du cours",
+            subtitle: "Votre parcours de récupération et les bénéfices que vous vivrez au cours des 12+ prochains mois.",
+            week01: { title: "Confiance et clarté immédiates", desc: "Savoir ce qui est normal vs urgent. Comprendre les soins d'urgence et les attentes aux urgences. Installer correctement votre station de récupération.", teaser: "→ Apprenez les 3 questions que votre chirurgien attend" },
+            week26: { title: "Meilleure gestion de la douleur et du sommeil", desc: "Maîtrisez les techniques d'élévation appropriées et les stratégies de gestion de la douleur. Dormez bien avec des positions et solutions éprouvées.", teaser: "→ La plus grande erreur en phase sans appui" },
+            week612: { title: "Marcher sans support", desc: "Transition en toute sécurité hors de votre botte. Faites vos premiers pas en confiance. Améliorez l'équilibre et la proprioception.", teaser: "→ Comment sortir de votre botte sans re-rupture" },
+            month34: { title: "Retour aux activités quotidiennes", desc: "Construire la capacité de mouvement fonctionnel. Retour aux activités quotidiennes normales avec confiance.", teaser: "→ La progression d'exercices qui prévient la faiblesse permanente du mollet" },
+            month46: { title: "Force sur une jambe", desc: "Maîtrisez les exercices sur une jambe et les progressions de mollet. Construisez une force significative dans votre jambe affectée.", teaser: "→ Le test de force que vous devez réussir avant de courir" },
+            month69: { title: "Retour à la course", desc: "Suivez les protocoles structurés de retour à la course. Commencez l'entraînement spécifique au sport.", teaser: "→ Quand c'est vraiment sûr de courir—et pourquoi la plupart se précipitent" },
+            month912: { title: "Puissance explosive et pliométrie", desc: "Développez la force explosive par l'entraînement avancé. Maîtrisez les exercices pliométriques." },
+            month12plus: { title: "Maintenance à long terme et récupération complète", desc: "Maintenez votre force et prévenez les re-blessures. Continuez l'entraînement spécifique au sport. Profitez du retour complet à toutes les activités." },
+        },
+        socialBanner: {
+            specialists: "Revu par des spécialistes du pied et de la cheville",
+            research: "Basé sur 100+ articles de recherche",
+            readers: "20 000+ personnes suivent nos conseils",
+        },
+        lessons: {
+            title: "Ce que vous apprendrez : 31 leçons en 5 phases",
+            subtitle: "Votre feuille de route complète de récupération, du moment de la blessure au retour à la pleine activité.",
+            subNote: "Contenu basé sur des preuves, revu par des spécialistes",
+            lessonsWord: "leçons",
+            readyStart: "Prêt à commencer votre parcours de récupération ?",
+            getFullPlan: "Obtenez le plan de récupération complet",
+        },
+        whoFor: {
+            title: "Pour qui est ce cours ?",
+            subtitle: "Découvrez si ce cours est adapté à votre parcours de récupération.",
+            reviewedBy: "Revu par des spécialistes",
+            researchBased: "100+ articles de recherche",
+            perfectFor: "Parfait pour :",
+            perfectItems: [
+                "Rupture récente du tendon d'Achille",
+                "Voulez des conseils clairs semaine par semaine",
+                "Avez besoin de questions à poser à votre chirurgien",
+                "Cherchez des conseils de récupération basés sur des preuves",
+                "Voulez éviter les erreurs courantes de récupération",
+            ],
+            notFor: "Pas pour :",
+            notItems: [
+                "Tendinite/tendinopathie d'Achille",
+                "Conditions tendineuses chroniques",
+                "Blessures non-ruptures",
+            ],
+            notNote: "Ce cours est spécifiquement conçu pour les ruptures complètes du tendon d'Achille, pas les conditions tendineuses chroniques.",
+        },
+        reviews: {
+            title: "Rejoignez 10 000+ personnes qui suivent les conseils de récupération Thetis",
+            subtitle: "De vrais avis de vraies personnes qui récupèrent d'une rupture d'Achille",
+            note: "Contenu du cours revu par des spécialistes • Basé sur 100+ articles de recherche",
+            review1: "Le cours m'a donné tout ce dont j'avais besoin en un seul endroit. Plus de recherches Google à 2h du matin.",
+            review2: "Enfin, des conseils clairs semaine par semaine. Les exercices avec illustrations étaient exactement ce dont j'avais besoin.",
+            review3: "Ça vaut chaque centime. La section des questions pour mon chirurgien m'a aidé à avoir de meilleures conversations.",
+            review4: "J'aurais aimé avoir ça dès le premier jour. Le guide de comparaison des bottes m'a épargné tant de confusion.",
+            review5: "La chronologie semaine par semaine m'a gardé sur la bonne voie. Je savais exactement à quoi m'attendre et quand.",
+        },
+        finalCta: {
+            title: "Prêt à maîtriser votre récupération ?",
+            subtitle: "Obtenez un accès instantané aux 31 leçons, exercices et conseils d'experts. Rejoignez plus de 10 000 personnes qui ont tout ce dont ils ont besoin pour récupérer en un seul endroit.",
+            reviewedBy: "Revu par des spécialistes du pied et de la cheville",
+            research: "Basé sur 100+ articles de recherche",
+            cta: "Commencez votre récupération sécurisée →",
+            alreadyPurchased: "Déjà acheté ? Accédez à votre cours →",
+            guaranteeTitle: "Garantie de remboursement",
+            guaranteeDesc: "Si le cours ne vous aide pas à vous sentir plus confiant dans votre récupération, nous vous remboursons—sans poser de questions.",
+        },
+        lessonPreviews: {
+            phase1: { phase: "Phase 1 : Immobilisation", weeks: "Semaines 0-6" },
+            phase2: { phase: "Phase 2 : Post-immobilisation", weeks: "Semaines 6-12" },
+            phase3: { phase: "Phase 3 : Renforcement", weeks: "Semaines 12-18" },
+            phase4: { phase: "Phase 4 : Puissance & Sport", weeks: "Semaines 18+" },
+            phase5: { phase: "Tout au long de votre récupération", weeks: "Toutes les phases" },
+            lessons1: [
+                "Soins d'urgence : Que s'est-il passé ?",
+                "Attentes aux urgences et questions à poser",
+                "Stratégies de prévention des caillots sanguins",
+                "Choisir votre botte de marche",
+                "Installer votre station de récupération",
+                "Techniques d'élévation appropriées",
+                "Solutions et positions de sommeil",
+                "Ce qui est normal vs ce qui est urgent",
+                "Gestion de la douleur et du gonflement",
+                "Exercices précoces (mouvements sûrs)",
+            ],
+            lessons2: [
+                "Transition hors de la botte",
+                "Premiers pas sans support",
+                "Mise en charge progressive",
+                "Exercices de renforcement précoces",
+                "Équilibre et proprioception",
+                "Techniques de massage des cicatrices",
+                "Exercices d'amplitude de mouvement",
+                "Schémas de marche et démarche",
+            ],
+            lessons3: [
+                "Exercices sur une jambe",
+                "Progressions de mollets",
+                "Développement de l'endurance",
+                "Mouvements fonctionnels",
+                "Retour aux activités quotidiennes",
+                "Gestion de la charge d'exercice",
+            ],
+            lessons4: [
+                "Entraînement de force explosive",
+                "Exercices pliométriques",
+                "Entraînement spécifique au sport",
+                "Protocoles de retour à la course",
+                "Tests de performance",
+                "Maintenance à long terme",
+            ],
+            lessons5: [
+                "Questions pour votre chirurgien",
+                "Recommandations de produits",
+                "Guide de comparaison de bottes",
+                "Solutions de sommeil et de lavage",
+                "Chronologie semaine par semaine",
+                "Quand chercher des soins urgents",
+            ],
+        },
+    },
+    es: {
+        meta: {
+            title: "Curso completo de recuperación de Aquiles - 31 lecciones de expertos | Thetis Medical",
+            description: "Domine su recuperación de rotura de Aquiles con 31 lecciones estructuradas que cubren cada fase. Desde la atención de emergencia hasta el regreso al deporte.",
+        },
+        hero: {
+            badge: "20,000+ lectores",
+            title: "Domine su",
+            titleHighlight: "recuperación de Aquiles",
+            titleEnd: "con 31 lecciones de expertos",
+            subtitle: "La línea de tiempo le dice <em>cuándo</em> suceden las cosas. Este curso le dice <strong>cómo hacerlas de manera segura</strong>—para no terminar de nuevo en cirugía o con debilidad permanente.",
+            subtitlePlain: "Evite los errores que causan elongación del tendón y re-rotura. Obtenga orientación experta sobre exactamente qué hacer—y qué <em>no</em> hacer—en cada etapa.",
+            cta: "Comience su recuperación segura →",
+            trust1: "31 lecciones estructuradas",
+            trust2: "Revisado por especialistas en pie y tobillo",
+            trust3: "Basado en 100+ artículos de investigación",
+            socialProof: "Únase a 20,000+ personas que siguen los consejos de recuperación de Thetis",
+        },
+        mistakes: {
+            title: "Errores que retrasan la recuperación meses",
+            subtitle: "Estos son los errores que llevan a la re-rotura, debilidad permanente o empezar de cero.",
+            mistake1Title: "Quitar las cuñas demasiado pronto",
+            mistake1Desc: "→ Elongación del tendón (debilidad permanente)",
+            mistake2Title: "Ejercicios incorrectos en el momento equivocado",
+            mistake2Desc: "→ Riesgo de re-rotura",
+            mistake3Title: "Ignorar las señales de advertencia de coágulo sanguíneo",
+            mistake3Desc: "→ Emergencia médica",
+            mistake4Title: "Volver al deporte sin pasar las pruebas de fuerza",
+            mistake4Desc: "→ Re-lesión",
+            footer: "El curso le enseña exactamente cómo evitar cada uno de estos—con orientación clara sobre qué hacer en su lugar.",
+        },
+        timeline: {
+            title: "Qué esperar del curso",
+            subtitle: "Su viaje de recuperación y los beneficios que experimentará en los próximos 12+ meses.",
+            week01: { title: "Confianza y claridad inmediatas", desc: "Saber qué es normal vs urgente. Entender la atención de emergencia y las expectativas de urgencias. Configurar correctamente su estación de recuperación.", teaser: "→ Aprenda las 3 preguntas que su cirujano espera" },
+            week26: { title: "Mejor manejo del dolor y sueño", desc: "Domine las técnicas de elevación adecuadas y estrategias de manejo del dolor. Duerma bien con posiciones y soluciones probadas.", teaser: "→ El mayor error en la fase sin carga de peso" },
+            week612: { title: "Caminar sin soporte", desc: "Transición segura fuera de su bota. Dé sus primeros pasos con confianza. Mejore el equilibrio y la propiocepción.", teaser: "→ Cómo salir de su bota sin re-rotura" },
+            month34: { title: "Volver a las actividades diarias", desc: "Construir capacidad de movimiento funcional. Volver a las actividades diarias normales con confianza.", teaser: "→ La progresión de ejercicios que previene la debilidad permanente del gemelo" },
+            month46: { title: "Fuerza de una pierna", desc: "Domine los ejercicios de una pierna y las progresiones de elevación de talón. Construya fuerza significativa en su pierna afectada.", teaser: "→ La prueba de fuerza que debe pasar antes de correr" },
+            month69: { title: "Volver a correr", desc: "Siga protocolos estructurados de regreso a correr. Comience el entrenamiento específico del deporte.", teaser: "→ Cuándo es realmente seguro correr—y por qué la mayoría se apresuran" },
+            month912: { title: "Potencia explosiva y pliometría", desc: "Desarrolle fuerza explosiva a través del entrenamiento avanzado. Domine los ejercicios pliométricos." },
+            month12plus: { title: "Mantenimiento a largo plazo y recuperación completa", desc: "Mantenga su fuerza y prevenga re-lesiones. Continúe el entrenamiento específico del deporte. Disfrute del regreso completo a todas las actividades." },
+        },
+        socialBanner: {
+            specialists: "Revisado por especialistas en pie y tobillo",
+            research: "Basado en 100+ artículos de investigación",
+            readers: "20,000+ personas siguen nuestros consejos",
+        },
+        lessons: {
+            title: "Lo que aprenderá: 31 lecciones en 5 fases",
+            subtitle: "Su hoja de ruta completa de recuperación, desde el momento de la lesión hasta el regreso a la actividad completa.",
+            subNote: "Contenido basado en evidencia, revisado por especialistas",
+            lessonsWord: "lecciones",
+            readyStart: "¿Listo para comenzar su viaje de recuperación?",
+            getFullPlan: "Obtenga el plan de recuperación completo",
+        },
+        whoFor: {
+            title: "¿Para quién es este curso?",
+            subtitle: "Descubra si este curso es el adecuado para su viaje de recuperación.",
+            reviewedBy: "Revisado por especialistas",
+            researchBased: "100+ artículos de investigación",
+            perfectFor: "Perfecto para:",
+            perfectItems: [
+                "Rotura reciente del tendón de Aquiles",
+                "Quiere orientación clara semana a semana",
+                "Necesita preguntas para hacer a su cirujano",
+                "Busca consejos de recuperación basados en evidencia",
+                "Quiere evitar errores comunes de recuperación",
+            ],
+            notFor: "No es para:",
+            notItems: [
+                "Tendinitis/tendinopatía de Aquiles",
+                "Condiciones tendíneas crónicas",
+                "Lesiones no-rotura",
+            ],
+            notNote: "Este curso está diseñado específicamente para roturas completas del tendón de Aquiles, no para condiciones tendíneas crónicas.",
+        },
+        reviews: {
+            title: "Únase a 10,000+ personas que siguen los consejos de recuperación de Thetis",
+            subtitle: "Reseñas reales de personas reales que se recuperan de rotura de Aquiles",
+            note: "Contenido del curso revisado por especialistas • Basado en 100+ artículos de investigación",
+            review1: "El curso me dio todo lo que necesitaba en un solo lugar. No más búsquedas en Google a las 2am.",
+            review2: "Finalmente, orientación clara semana a semana. Los ejercicios con ilustraciones eran exactamente lo que necesitaba.",
+            review3: "Vale cada centavo. La sección de preguntas para mi cirujano me ayudó a tener mejores conversaciones.",
+            review4: "Ojalá hubiera tenido esto desde el primer día. La guía de comparación de botas me ahorró tanta confusión.",
+            review5: "La línea de tiempo semana a semana me mantuvo en el camino. Sabía exactamente qué esperar y cuándo.",
+        },
+        finalCta: {
+            title: "¿Listo para dominar su recuperación?",
+            subtitle: "Obtenga acceso instantáneo a las 31 lecciones, ejercicios y orientación experta. Únase a más de 10,000 personas que tienen todo lo que necesitan para recuperarse en un solo lugar.",
+            reviewedBy: "Revisado por especialistas en pie y tobillo",
+            research: "Basado en 100+ artículos de investigación",
+            cta: "Comience su recuperación segura →",
+            alreadyPurchased: "¿Ya compró? Acceda a su curso →",
+            guaranteeTitle: "Garantía de devolución de dinero",
+            guaranteeDesc: "Si el curso no le ayuda a sentirse más confiado en su recuperación, le reembolsamos—sin preguntas.",
+        },
+        lessonPreviews: {
+            phase1: { phase: "Fase 1: Inmovilización", weeks: "Semanas 0-6" },
+            phase2: { phase: "Fase 2: Post-inmovilización", weeks: "Semanas 6-12" },
+            phase3: { phase: "Fase 3: Construcción de capacidad", weeks: "Semanas 12-18" },
+            phase4: { phase: "Fase 4: Potencia y deporte", weeks: "Semanas 18+" },
+            phase5: { phase: "Durante toda su recuperación", weeks: "Todas las fases" },
+            lessons1: [
+                "Atención de emergencia: ¿Qué acaba de pasar?",
+                "Expectativas de urgencias y qué preguntar",
+                "Estrategias de prevención de coágulos sanguíneos",
+                "Elegir su bota de marcha",
+                "Configurar su estación de recuperación",
+                "Técnicas de elevación adecuadas",
+                "Soluciones y posiciones para dormir",
+                "Qué es normal vs qué es urgente",
+                "Manejo del dolor e hinchazón",
+                "Ejercicios tempranos (movimientos seguros)",
+            ],
+            lessons2: [
+                "Transición fuera de la bota",
+                "Primeros pasos sin apoyo",
+                "Carga de peso progresiva",
+                "Ejercicios de fortalecimiento tempranos",
+                "Equilibrio y propiocepción",
+                "Técnicas de masaje de cicatrices",
+                "Ejercicios de rango de movimiento",
+                "Patrones de marcha y modo de andar",
+            ],
+            lessons3: [
+                "Ejercicios de una sola pierna",
+                "Progresiones de elevación de pantorrilla",
+                "Construcción de resistencia",
+                "Movimientos funcionales",
+                "Retorno a actividades diarias",
+                "Gestión de carga de ejercicio",
+            ],
+            lessons4: [
+                "Entrenamiento de fuerza explosiva",
+                "Ejercicios pliométricos",
+                "Entrenamiento específico del deporte",
+                "Protocolos de retorno a correr",
+                "Pruebas de rendimiento",
+                "Mantenimiento a largo plazo",
+            ],
+            lessons5: [
+                "Preguntas para su cirujano",
+                "Recomendaciones de productos",
+                "Guía de comparación de botas",
+                "Soluciones de sueño y lavado",
+                "Línea de tiempo semana a semana",
+                "Cuándo buscar atención urgente",
+            ],
+        },
+    },
+    it: {
+        meta: {
+            title: "Corso completo di recupero dell'Achille - 31 lezioni di esperti | Thetis Medical",
+            description: "Padroneggia il tuo recupero dalla rottura di Achille con 31 lezioni strutturate che coprono ogni fase. Dalle cure d'emergenza al ritorno allo sport.",
+        },
+        hero: {
+            badge: "20.000+ lettori",
+            title: "Padroneggia il tuo",
+            titleHighlight: "recupero dell'Achille",
+            titleEnd: "con 31 lezioni di esperti",
+            subtitle: "La cronologia ti dice <em>quando</em> le cose accadono. Questo corso ti dice <strong>come farle in sicurezza</strong>—per non finire di nuovo in chirurgia o con debolezza permanente.",
+            subtitlePlain: "Evita gli errori che causano l'allungamento del tendine e la ri-rottura. Ottieni guida esperta su esattamente cosa fare—e cosa <em>non</em> fare—in ogni fase.",
+            cta: "Inizia il tuo recupero sicuro →",
+            trust1: "31 lezioni strutturate",
+            trust2: "Revisionato da specialisti del piede e della caviglia",
+            trust3: "Basato su 100+ articoli di ricerca",
+            socialProof: "Unisciti a 20.000+ persone che seguono i consigli di recupero Thetis",
+        },
+        mistakes: {
+            title: "Errori che ritardano il recupero di mesi",
+            subtitle: "Questi sono gli errori che portano a ri-rottura, debolezza permanente o ricominciare da zero.",
+            mistake1Title: "Rimuovere i cunei troppo presto",
+            mistake1Desc: "→ Allungamento del tendine (debolezza permanente)",
+            mistake2Title: "Esercizi sbagliati al momento sbagliato",
+            mistake2Desc: "→ Rischio di ri-rottura",
+            mistake3Title: "Ignorare i segnali di allarme dei coaguli di sangue",
+            mistake3Desc: "→ Emergenza medica",
+            mistake4Title: "Ritorno allo sport senza superare i test di forza",
+            mistake4Desc: "→ Ri-infortunio",
+            footer: "Il corso ti insegna esattamente come evitare ciascuno di questi—con guida chiara su cosa fare invece.",
+        },
+        timeline: {
+            title: "Cosa aspettarsi dal corso",
+            subtitle: "Il tuo percorso di recupero e i benefici che sperimenterai nei prossimi 12+ mesi.",
+            week01: { title: "Fiducia e chiarezza immediate", desc: "Sapere cosa è normale vs urgente. Capire le cure d'emergenza e le aspettative del pronto soccorso. Impostare correttamente la tua stazione di recupero.", teaser: "→ Impara le 3 domande che il tuo chirurgo si aspetta" },
+            week26: { title: "Migliore gestione del dolore e sonno", desc: "Padroneggia le tecniche di elevazione appropriate e le strategie di gestione del dolore. Dormi bene con posizioni e soluzioni provate.", teaser: "→ Il più grande errore nella fase senza carico" },
+            week612: { title: "Camminare senza supporto", desc: "Transizione sicura fuori dallo stivale. Fai i tuoi primi passi con fiducia. Migliora equilibrio e propriocezione.", teaser: "→ Come uscire dallo stivale senza ri-rottura" },
+            month34: { title: "Ritorno alle attività quotidiane", desc: "Costruire capacità di movimento funzionale. Ritorno alle attività quotidiane normali con fiducia.", teaser: "→ La progressione di esercizi che previene la debolezza permanente del polpaccio" },
+            month46: { title: "Forza su una gamba", desc: "Padroneggia gli esercizi su una gamba e le progressioni di sollevamento del tallone. Costruisci forza significativa nella gamba interessata.", teaser: "→ Il test di forza che devi superare prima di correre" },
+            month69: { title: "Ritorno alla corsa", desc: "Segui protocolli strutturati di ritorno alla corsa. Inizia l'allenamento specifico per lo sport.", teaser: "→ Quando è davvero sicuro correre—e perché la maggior parte si affretta" },
+            month912: { title: "Potenza esplosiva e pliometria", desc: "Sviluppa forza esplosiva attraverso l'allenamento avanzato. Padroneggia gli esercizi pliometrici." },
+            month12plus: { title: "Manutenzione a lungo termine e recupero completo", desc: "Mantieni la tua forza e previeni ri-infortuni. Continua l'allenamento specifico per lo sport. Goditi il ritorno completo a tutte le attività." },
+        },
+        socialBanner: {
+            specialists: "Revisionato da specialisti del piede e della caviglia",
+            research: "Basato su 100+ articoli di ricerca",
+            readers: "20.000+ persone seguono i nostri consigli",
+        },
+        lessons: {
+            title: "Cosa imparerai: 31 lezioni in 5 fasi",
+            subtitle: "La tua tabella di marcia completa per il recupero, dal momento dell'infortunio al ritorno alla piena attività.",
+            subNote: "Contenuto basato su evidenze, revisionato da specialisti",
+            lessonsWord: "lezioni",
+            readyStart: "Pronto a iniziare il tuo percorso di recupero?",
+            getFullPlan: "Ottieni il piano di recupero completo",
+        },
+        whoFor: {
+            title: "Per chi è questo corso?",
+            subtitle: "Scopri se questo corso è giusto per il tuo percorso di recupero.",
+            reviewedBy: "Revisionato da specialisti",
+            researchBased: "100+ articoli di ricerca",
+            perfectFor: "Perfetto per:",
+            perfectItems: [
+                "Recente rottura del tendine di Achille",
+                "Vuoi guida chiara settimana per settimana",
+                "Hai bisogno di domande da fare al tuo chirurgo",
+                "Cerchi consigli di recupero basati su evidenze",
+                "Vuoi evitare errori comuni di recupero",
+            ],
+            notFor: "Non per:",
+            notItems: [
+                "Tendinite/tendinopatia di Achille",
+                "Condizioni tendinee croniche",
+                "Infortuni non-rottura",
+            ],
+            notNote: "Questo corso è specificamente progettato per rotture complete del tendine di Achille, non per condizioni tendinee croniche.",
+        },
+        reviews: {
+            title: "Unisciti a 10.000+ persone che seguono i consigli di recupero Thetis",
+            subtitle: "Recensioni vere da persone vere che si riprendono da rottura di Achille",
+            note: "Contenuto del corso revisionato da specialisti • Basato su 100+ articoli di ricerca",
+            review1: "Il corso mi ha dato tutto ciò di cui avevo bisogno in un unico posto. Niente più ricerche su Google alle 2 di notte.",
+            review2: "Finalmente, guida chiara settimana per settimana. Gli esercizi con illustrazioni erano esattamente ciò di cui avevo bisogno.",
+            review3: "Vale ogni centesimo. La sezione delle domande per il mio chirurgo mi ha aiutato ad avere conversazioni migliori.",
+            review4: "Avrei voluto avere questo dal primo giorno. La guida al confronto degli stivali mi ha risparmiato tanta confusione.",
+            review5: "La cronologia settimana per settimana mi ha tenuto in carreggiata. Sapevo esattamente cosa aspettarmi e quando.",
+        },
+        finalCta: {
+            title: "Pronto a padroneggiare il tuo recupero?",
+            subtitle: "Ottieni accesso immediato a tutte le 31 lezioni, esercizi e guida esperta. Unisciti a oltre 10.000 persone che hanno tutto ciò di cui hanno bisogno per il recupero in un unico posto.",
+            reviewedBy: "Revisionato da specialisti del piede e della caviglia",
+            research: "Basato su 100+ articoli di ricerca",
+            cta: "Inizia il tuo recupero sicuro →",
+            alreadyPurchased: "Già acquistato? Accedi al tuo corso →",
+            guaranteeTitle: "Garanzia di rimborso",
+            guaranteeDesc: "Se il corso non ti aiuta a sentirti più sicuro nel tuo recupero, ti rimborsiamo—senza domande.",
+        },
+        lessonPreviews: {
+            phase1: { phase: "Fase 1: Immobilizzazione", weeks: "Settimane 0-6" },
+            phase2: { phase: "Fase 2: Post-immobilizzazione", weeks: "Settimane 6-12" },
+            phase3: { phase: "Fase 3: Costruzione della capacità", weeks: "Settimane 12-18" },
+            phase4: { phase: "Fase 4: Potenza e sport", weeks: "Settimane 18+" },
+            phase5: { phase: "Durante tutto il recupero", weeks: "Tutte le fasi" },
+            lessons1: [
+                "Cure di emergenza: Cosa è successo?",
+                "Aspettative del pronto soccorso e cosa chiedere",
+                "Strategie di prevenzione dei coaguli di sangue",
+                "Scegliere il tuo stivale da camminata",
+                "Configurare la tua stazione di recupero",
+                "Tecniche di elevazione appropriate",
+                "Soluzioni e posizioni per dormire",
+                "Cosa è normale vs cosa è urgente",
+                "Gestione del dolore e del gonfiore",
+                "Esercizi precoci (movimenti sicuri)",
+            ],
+            lessons2: [
+                "Transizione fuori dallo stivale",
+                "Primi passi senza supporto",
+                "Carico di peso progressivo",
+                "Esercizi di rafforzamento precoci",
+                "Equilibrio e propriocezione",
+                "Tecniche di massaggio delle cicatrici",
+                "Esercizi di gamma di movimento",
+                "Schemi di camminata e andatura",
+            ],
+            lessons3: [
+                "Esercizi su una gamba",
+                "Progressioni di sollevamento del polpaccio",
+                "Costruzione della resistenza",
+                "Movimenti funzionali",
+                "Ritorno alle attività quotidiane",
+                "Gestione del carico di esercizio",
+            ],
+            lessons4: [
+                "Allenamento di forza esplosiva",
+                "Esercizi pliometrici",
+                "Allenamento specifico per lo sport",
+                "Protocolli di ritorno alla corsa",
+                "Test di prestazione",
+                "Manutenzione a lungo termine",
+            ],
+            lessons5: [
+                "Domande per il tuo chirurgo",
+                "Raccomandazioni sui prodotti",
+                "Guida comparativa degli stivali",
+                "Soluzioni per sonno e lavaggio",
+                "Cronologia settimana per settimana",
+                "Quando cercare cure urgenti",
+            ],
+        },
+    },
+};
+
+const t = translations[lang] || translations.en;
+
+// Lesson previews organized by phase - using translations
+const lessonPreviews = [
+    {
+        phase: t.lessonPreviews.phase1.phase,
+        weeks: t.lessonPreviews.phase1.weeks,
+        icon: Stethoscope,
+        color: "from-primary to-primary/70",
+        bgColor: "bg-primary/5 dark:bg-primary/10",
+        borderColor: "border-primary/20 dark:border-primary/30",
+        lessons: t.lessonPreviews.lessons1,
+    },
+    {
+        phase: t.lessonPreviews.phase2.phase,
+        weeks: t.lessonPreviews.phase2.weeks,
+        icon: Footprints,
+        color: "from-primary/90 to-primary/60",
+        bgColor: "bg-primary/8 dark:bg-primary/12",
+        borderColor: "border-primary/25 dark:border-primary/35",
+        lessons: t.lessonPreviews.lessons2,
+    },
+    {
+        phase: t.lessonPreviews.phase3.phase,
+        weeks: t.lessonPreviews.phase3.weeks,
+        icon: TrendingUp,
+        color: "from-primary/80 to-primary/50",
+        bgColor: "bg-primary/10 dark:bg-primary/15",
+        borderColor: "border-primary/30 dark:border-primary/40",
+        lessons: t.lessonPreviews.lessons3,
+    },
+    {
+        phase: t.lessonPreviews.phase4.phase,
+        weeks: t.lessonPreviews.phase4.weeks,
+        icon: Zap,
+        color: "from-primary/70 to-primary/40",
+        bgColor: "bg-primary/12 dark:bg-primary/18",
+        borderColor: "border-primary/35 dark:border-primary/45",
+        lessons: t.lessonPreviews.lessons4,
+    },
+    {
+        phase: t.lessonPreviews.phase5.phase,
+        weeks: t.lessonPreviews.phase5.weeks,
+        icon: Heart,
+        color: "from-primary to-primary/80",
+        bgColor: "bg-primary/5 dark:bg-primary/10",
+        borderColor: "border-primary/20 dark:border-primary/30",
+        lessons: t.lessonPreviews.lessons5,
+    },
+];
+---
+
+<Layout
+    title={t.meta.title}
+    description={t.meta.description}
+    image="https://thetismedical.com/images/night-splint.png"
+    lang={lang}
+>
+    <main class="space-y-16">
+        <!-- Hero Section - Matching Home Page Style -->
+        <section
+            class="bg-gradient-to-b from-primary/10 to-white py-16 md:py-24"
+        >
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="flex lg:flex-row flex-col items-center gap-12">
+                    <div class="flex-1 lg:text-left text-center">
+                        <!-- Social Proof Badge -->
+                        <div class="mb-6">
+                            <div
+                                class="inline-flex items-center gap-2 bg-primary/10 mb-3 px-4 py-2 rounded-full"
+                            >
+                                <Users className="w-4 h-4 text-primary" />
+                                <span
+                                    class="font-semibold text-primary text-sm uppercase tracking-wider"
+                                    >{t.hero.badge}</span
+                                >
+                            </div>
+                        </div>
+                        <h1
+                            class="mb-4 font-bold text-neutral-900 text-4xl md:text-6xl leading-tight"
+                        >
+                            {t.hero.title} <span class="text-primary"
+                                >{t.hero.titleHighlight}</span
+                            > {t.hero.titleEnd}
+                        </h1>
+                        <p
+                            class="mx-auto lg:mx-0 mb-4 max-w-2xl text-neutral-600 text-lg md:text-xl leading-relaxed"
+                            set:html={t.hero.subtitle}
+                        />
+                        <p
+                            class="mx-auto lg:mx-0 mb-8 max-w-2xl text-neutral-500 text-base"
+                            set:html={t.hero.subtitlePlain}
+                        />
+
+                        <!-- Primary CTA -->
+                        <div
+                            class="flex sm:flex-row flex-col justify-center lg:justify-start gap-4 mb-6"
+                        >
+                            <CourseBuyButton
+                                productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                                variant="default"
+                                className="shadow-lg hover:shadow-xl w-full sm:w-auto font-bold text-lg transition-all"
+                                client:load
+                            >
+                                {t.hero.cta}
+                            </CourseBuyButton>
+                        </div>
+
+                        <!-- Trust Signals -->
+                        <div
+                            class="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 mb-4 text-neutral-600 text-sm"
+                        >
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-primary text-lg"
+                                    >✓</span
+                                >
+                                <span class="font-medium"
+                                    >{t.hero.trust1}</span
+                                >
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-primary text-lg"
+                                    >✓</span
+                                >
+                                <span class="font-medium"
+                                    >{t.hero.trust2}</span
+                                >
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-primary text-lg"
+                                    >✓</span
+                                >
+                                <span class="font-medium"
+                                    >{t.hero.trust3}</span
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Social Proof -->
+                        <div
+                            class="flex justify-center lg:justify-start items-center gap-3 mb-6 text-neutral-500 text-sm"
+                        >
+                            <div class="flex -space-x-2">
+                                <AstroImage
+                                    src={Review1Image}
+                                    alt="Patient review"
+                                    class="border-2 border-white rounded-full w-10 h-10 object-cover"
+                                    width={40}
+                                    height={40}
+                                />
+                                <AstroImage
+                                    src={Review2Image}
+                                    alt="Patient review"
+                                    class="border-2 border-white rounded-full w-10 h-10 object-cover"
+                                    width={40}
+                                    height={40}
+                                />
+                                <AstroImage
+                                    src={Review3Image}
+                                    alt="Patient review"
+                                    class="border-2 border-white rounded-full w-10 h-10 object-cover"
+                                    width={40}
+                                    height={40}
+                                />
+                            </div>
+                            <span class="font-semibold text-neutral-900"
+                                >{t.hero.socialProof}</span
+                            >
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-full lg:w-1/2">
+                        <div class="relative">
+                            <Image
+                                src={TendonStiffnessImage}
+                                alt="Tendon Stiffness After Rupture - Educational infographic explaining biomechanical differences"
+                                class="shadow-2xl rounded-xl w-full"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Mistakes Section -->
+        <section class="bg-red-50 dark:bg-red-950/20 py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-4xl">
+                <div class="text-center mb-8">
+                    <h2 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl">
+                        {t.mistakes.title}
+                    </h2>
+                    <p class="text-neutral-600 dark:text-neutral-400">
+                        {t.mistakes.subtitle}
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4 mb-8">
+                    <div class="bg-white dark:bg-neutral-800 p-5 rounded-lg border border-red-200 dark:border-red-900/50">
+                        <div class="flex items-start gap-3">
+                            <X className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
+                            <div>
+                                <p class="font-semibold text-neutral-900 dark:text-neutral-100">{t.mistakes.mistake1Title}</p>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400">{t.mistakes.mistake1Desc}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-neutral-800 p-5 rounded-lg border border-red-200 dark:border-red-900/50">
+                        <div class="flex items-start gap-3">
+                            <X className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
+                            <div>
+                                <p class="font-semibold text-neutral-900 dark:text-neutral-100">{t.mistakes.mistake2Title}</p>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400">{t.mistakes.mistake2Desc}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-neutral-800 p-5 rounded-lg border border-red-200 dark:border-red-900/50">
+                        <div class="flex items-start gap-3">
+                            <X className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
+                            <div>
+                                <p class="font-semibold text-neutral-900 dark:text-neutral-100">{t.mistakes.mistake3Title}</p>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400">{t.mistakes.mistake3Desc}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-neutral-800 p-5 rounded-lg border border-red-200 dark:border-red-900/50">
+                        <div class="flex items-start gap-3">
+                            <X className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
+                            <div>
+                                <p class="font-semibold text-neutral-900 dark:text-neutral-100">{t.mistakes.mistake4Title}</p>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400">{t.mistakes.mistake4Desc}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center text-neutral-700 dark:text-neutral-300 font-medium">
+                    {t.mistakes.footer}
+                </p>
+            </div>
+        </section>
+
+        <!-- What to Expect: Recovery Timeline -->
+        <section class="py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-5xl">
+                <div class="mb-12 text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl"
+                    >
+                        {t.timeline.title}
+                    </h2>
+                    <p
+                        class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400"
+                    >
+                        {t.timeline.subtitle}
+                    </p>
+                </div>
+                <div class="relative">
+                    <!-- Timeline line -->
+                    <div
+                        class="hidden md:block top-0 bottom-0 left-1/2 absolute bg-primary/20 w-0.5 -translate-x-1/2"
+                    >
+                    </div>
+
+                    <div class="space-y-6 md:space-y-12">
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2 md:text-right">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
+                                    >
+                                        {lang === "en" ? "Week 0-1" : lang === "de" ? "Woche 0-1" : lang === "fr" ? "Semaine 0-1" : lang === "es" ? "Semana 0-1" : "Settimana 0-1"}
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        {t.timeline.week01.title}
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        {t.timeline.week01.desc}
+                                    </p>
+                                    <p class="mt-2 text-primary text-sm font-medium italic">
+                                        {t.timeline.week01.teaser}
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                            >
+                                <div
+                                    class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                >
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2"></div>
+                        </div>
+
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2"></div>
+                            <div
+                                class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                            >
+                                <div
+                                    class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                >
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
+                                    >
+                                        {lang === "en" ? "Weeks 2-6" : lang === "de" ? "Wochen 2-6" : lang === "fr" ? "Semaines 2-6" : lang === "es" ? "Semanas 2-6" : "Settimane 2-6"}
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        {t.timeline.week26.title}
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        {t.timeline.week26.desc}
+                                    </p>
+                                    <p class="mt-2 text-primary text-sm font-medium italic">
+                                        {t.timeline.week26.teaser}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2 md:text-right">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
+                                    >
+                                        {lang === "en" ? "Weeks 6-12" : lang === "de" ? "Wochen 6-12" : lang === "fr" ? "Semaines 6-12" : lang === "es" ? "Semanas 6-12" : "Settimane 6-12"}
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        {t.timeline.week612.title}
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        {t.timeline.week612.desc}
+                                    </p>
+                                    <p class="mt-2 text-primary text-sm font-medium italic">
+                                        {t.timeline.week612.teaser}
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                            >
+                                <div
+                                    class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                >
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2"></div>
+                        </div>
+
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2"></div>
+                            <div
+                                class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                            >
+                                <div
+                                    class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                >
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
+                                    >
+                                        {lang === "en" ? "Months 3-4" : lang === "de" ? "Monate 3-4" : lang === "fr" ? "Mois 3-4" : lang === "es" ? "Meses 3-4" : "Mesi 3-4"}
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        {t.timeline.month34.title}
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        {t.timeline.month34.desc}
+                                    </p>
+                                    <p class="mt-2 text-primary text-sm font-medium italic">
+                                        {t.timeline.month34.teaser}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2 md:text-right">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
+                                    >
+                                        {lang === "en" ? "Months 4-6" : lang === "de" ? "Monate 4-6" : lang === "fr" ? "Mois 4-6" : lang === "es" ? "Meses 4-6" : "Mesi 4-6"}
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        {t.timeline.month46.title}
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        {t.timeline.month46.desc}
+                                    </p>
+                                    <p class="mt-2 text-primary text-sm font-medium italic">
+                                        {t.timeline.month46.teaser}
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                            >
+                                <div
+                                    class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                >
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2"></div>
+                        </div>
+
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2"></div>
+                            <div
+                                class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                            >
+                                <div
+                                    class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                >
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
+                                    >
+                                        {lang === "en" ? "Months 6-9" : lang === "de" ? "Monate 6-9" : lang === "fr" ? "Mois 6-9" : lang === "es" ? "Meses 6-9" : "Mesi 6-9"}
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        {t.timeline.month69.title}
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        {t.timeline.month69.desc}
+                                    </p>
+                                    <p class="mt-2 text-primary text-sm font-medium italic">
+                                        {t.timeline.month69.teaser}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center gap-8">
+                            <div class="w-full md:w-1/2 md:text-right">
+                                <div
+                                    class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                >
+                                    <div
+                                        class="mb-2 font-bold text-primary text-2xl"
+                                    >
+                                        {lang === "en" ? "Months 9-12" : lang === "de" ? "Monate 9-12" : lang === "fr" ? "Mois 9-12" : lang === "es" ? "Meses 9-12" : "Mesi 9-12"}
+                                    </div>
+                                    <h3 class="mb-2 font-semibold text-xl">
+                                        {t.timeline.month912.title}
+                                    </h3>
+                                    <p
+                                        class="text-neutral-600 dark:text-neutral-400"
+                                    >
+                                        {t.timeline.month912.desc}
+                                    </p>
+                                </div>
+                                <div
+                                    class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                                >
+                                    <div
+                                        class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                    >
+                                    </div>
+                                </div>
+                                <div class="w-full md:w-1/2"></div>
+                            </div>
+
+                            <div class="relative flex items-center gap-8">
+                                <div class="w-full md:w-1/2"></div>
+                                <div
+                                    class="hidden md:block left-1/2 absolute -translate-x-1/2"
+                                >
+                                    <div
+                                        class="bg-primary border-4 border-white dark:border-neutral-900 rounded-full w-4 h-4"
+                                    >
+                                    </div>
+                                </div>
+                                <div class="w-full md:w-1/2">
+                                    <div
+                                        class="bg-white md:bg-transparent dark:bg-neutral-800 dark:md:bg-transparent p-4 md:p-0 border border-neutral-200 md:border-0 dark:border-neutral-700 rounded-lg md:rounded-none"
+                                    >
+                                        <div
+                                            class="mb-2 font-bold text-primary text-2xl"
+                                        >
+                                            {lang === "en" ? "12+ Months" : lang === "de" ? "12+ Monate" : lang === "fr" ? "12+ Mois" : lang === "es" ? "12+ Meses" : "12+ Mesi"}
+                                        </div>
+                                        <h3 class="mb-2 font-semibold text-xl">
+                                            {t.timeline.month12plus.title}
+                                        </h3>
+                                        <p
+                                            class="text-neutral-600 dark:text-neutral-400"
+                                        >
+                                            {t.timeline.month12plus.desc}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Proof Banner -->
+            <section class="bg-primary/5 dark:bg-primary/10 mt-24 py-8">
+                <div class="mx-auto px-4 max-w-6xl">
+                    <div
+                        class="flex flex-wrap justify-center items-center gap-6 md:gap-8 text-center"
+                    >
+                        <div class="flex items-center gap-2">
+                            <Stethoscope className="w-5 h-5 text-primary" />
+                            <span
+                                class="font-semibold text-neutral-900 dark:text-neutral-100"
+                            >
+                                {t.socialBanner.specialists}
+                            </span>
+                        </div>
+                        <div class="hidden md:block bg-primary/20 w-px h-8">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <GraduationCap className="w-5 h-5 text-primary" />
+                            <span
+                                class="font-semibold text-neutral-900 dark:text-neutral-100"
+                            >
+                                {t.socialBanner.research}
+                            </span>
+                        </div>
+                        <div class="hidden md:block bg-primary/20 w-px h-8">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <Users className="w-5 h-5 text-primary" />
+                            <span
+                                class="font-semibold text-neutral-900 dark:text-neutral-100"
+                            >
+                                {t.socialBanner.readers}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lesson Previews by Phase -->
+            <section
+                class="bg-gradient-to-b from-white dark:from-neutral-900 to-neutral-50 dark:to-neutral-950 py-16 md:py-24"
+            >
+                <div class="mx-auto px-4 max-w-7xl">
+                    <div class="mb-16 text-center">
+                        <h2
+                            class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl"
+                        >
+                            {t.lessons.title}
+                        </h2>
+                        <p
+                            class="mx-auto mb-4 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg"
+                        >
+                            {t.lessons.subtitle}
+                        </p>
+                        <p
+                            class="mx-auto max-w-2xl text-neutral-500 dark:text-neutral-500 text-sm"
+                        >
+                            {t.lessons.subNote}
+                        </p>
+                    </div>
+
+                    <div class="space-y-10">
+                        {
+                            lessonPreviews.map((phase, phaseIndex) => {
+                                const IconComponent = phase.icon;
+                                return (
+                                    <div
+                                        class={`${phase.bgColor} p-6 md:p-10 border-2 ${phase.borderColor} rounded-2xl shadow-sm hover:shadow-md transition-shadow`}
+                                    >
+                                        <div class="flex md:flex-row flex-col md:items-center gap-4 mb-8">
+                                            <div
+                                                class={`flex justify-center items-center bg-gradient-to-br ${phase.color} rounded-xl w-16 h-16 shrink-0 shadow-lg`}
+                                            >
+                                                <IconComponent className="w-8 h-8 text-white" />
+                                            </div>
+                                            <div class="flex-1">
+                                                <div class="flex flex-wrap items-center gap-3 mb-2">
+                                                    <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-xl md:text-2xl">
+                                                        {phase.phase}
+                                                    </h3>
+                                                    <span
+                                                        class={`inline-flex items-center px-3 py-1 bg-gradient-to-r ${phase.color} text-white text-xs font-semibold rounded-full`}
+                                                    >
+                                                        {phase.weeks}
+                                                    </span>
+                                                </div>
+                                                <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+                                                    {phase.lessons.length}{" "}
+                                                    lessons
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="gap-3 grid sm:grid-cols-2 lg:grid-cols-3">
+                                            {phase.lessons.map(
+                                                (lesson, lessonIndex) => (
+                                                    <div class="group flex items-start gap-3 md:bg-white md:dark:bg-neutral-900 md:hover:shadow-sm md:p-4 md:border md:border-neutral-200 md:hover:border-primary/50 md:dark:border-neutral-700 md:rounded-lg transition-all">
+                                                        <div
+                                                            class={`flex justify-center items-center bg-gradient-to-br ${phase.color} mt-0.5 rounded-full w-6 h-6 shrink-0 opacity-80 group-hover:opacity-100 transition-opacity`}
+                                                        >
+                                                            <Check className="w-3.5 h-3.5 text-white" />
+                                                        </div>
+                                                        <span class="font-medium text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
+                                                            {lesson}
+                                                        </span>
+                                                    </div>
+                                                ),
+                                            )}
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
+
+                    <!-- CTA after lessons -->
+                    <div class="mt-12 text-center">
+                        <p
+                            class="mb-6 text-neutral-600 dark:text-neutral-400 text-lg"
+                        >
+                            {t.lessons.readyStart}
+                        </p>
+                        <CourseBuyButton
+                            productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                            variant="default"
+                            className="shadow-lg font-bold text-lg"
+                            client:load
+                        >
+                            {t.lessons.getFullPlan}
+                        </CourseBuyButton>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Who's This Course For? -->
+            <section class="bg-neutral-50 dark:bg-neutral-900 py-16 md:py-24">
+                <div class="mx-auto px-4 max-w-4xl">
+                    <div class="mb-12 text-center">
+                        <h2
+                            class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl"
+                        >
+                            {t.whoFor.title}
+                        </h2>
+                        <p
+                            class="mx-auto mb-4 max-w-2xl text-neutral-600 dark:text-neutral-400"
+                        >
+                            {t.whoFor.subtitle}
+                        </p>
+                        <div
+                            class="flex flex-wrap justify-center items-center gap-4 text-neutral-500 dark:text-neutral-400 text-sm"
+                        >
+                            <div class="flex items-center gap-2">
+                                <Stethoscope className="w-4 h-4 text-primary" />
+                                <span>{t.whoFor.reviewedBy}</span>
+                            </div>
+                            <span>•</span>
+                            <div class="flex items-center gap-2">
+                                <GraduationCap
+                                    className="w-4 h-4 text-primary"
+                                />
+                                <span>{t.whoFor.researchBased}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gap-6 grid md:grid-cols-2">
+                        <div
+                            class="bg-white dark:bg-neutral-800 p-6 border-2 border-primary/30 rounded-lg"
+                        >
+                            <h3
+                                class="flex items-center gap-2 mb-4 font-bold text-primary text-xl"
+                            >
+                                <Check className="w-5 h-5" />
+                                {t.whoFor.perfectFor}
+                            </h3>
+                            <ul
+                                class="space-y-2 text-neutral-700 dark:text-neutral-300"
+                            >
+                                {t.whoFor.perfectItems.map((item: string) => (
+                                    <li>• {item}</li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-neutral-800 p-6 border-2 border-neutral-300 dark:border-neutral-600 rounded-lg"
+                        >
+                            <h3
+                                class="flex items-center gap-2 mb-4 font-semibold text-neutral-900 dark:text-neutral-100 text-xl"
+                            >
+                                <X
+                                    className="w-5 h-5 text-neutral-600 dark:text-neutral-400"
+                                />
+                                {t.whoFor.notFor}
+                            </h3>
+                            <ul
+                                class="space-y-2 text-neutral-700 dark:text-neutral-300"
+                            >
+                                {t.whoFor.notItems.map((item: string) => (
+                                    <li>• {item}</li>
+                                ))}
+                            </ul>
+                            <p
+                                class="mt-4 text-neutral-500 dark:text-neutral-400 text-sm italic"
+                            >
+                                {t.whoFor.notNote}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Subscribe: recovery tips -->
+            <div class="bg-neutral-50 dark:bg-neutral-900 py-10 md:py-12">
+                <div class="mx-auto px-4 max-w-3xl">
+                    <SubscribeBlock source="course_page" lang={lang} />
+                </div>
+            </div>
+
+            <!-- Patient Reviews -->
+            <section class="bg-white py-12 md:py-16">
+                <div class="mx-auto px-4 max-w-7xl">
+                    <div class="mb-8 text-center">
+                        <h2
+                            class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl"
+                        >
+                            {t.reviews.title}
+                        </h2>
+                        <p class="mb-2 text-neutral-600">
+                            {t.reviews.subtitle}
+                        </p>
+                        <p class="mb-6 text-neutral-500 text-sm">
+                            {t.reviews.note}
+                        </p>
+                    </div>
+
+                    <!-- 5 Short Reviews -->
+                    <div
+                        class="gap-6 grid md:grid-cols-2 lg:grid-cols-3 mx-auto max-w-6xl"
+                    >
+                        <!-- Review 1 -->
+                        <div
+                            class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
+                        >
+                            <div class="flex items-center gap-1 mb-3">
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                            </div>
+                            <p class="text-neutral-700 text-sm italic">
+                                "{t.reviews.review1}"
+                            </p>
+                        </div>
+
+                        <!-- Review 2 -->
+                        <div
+                            class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
+                        >
+                            <div class="flex items-center gap-1 mb-3">
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                            </div>
+                            <p class="text-neutral-700 text-sm italic">
+                                "{t.reviews.review2}"
+                            </p>
+                        </div>
+
+                        <!-- Review 3 -->
+                        <div
+                            class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
+                        >
+                            <div class="flex items-center gap-1 mb-3">
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                            </div>
+                            <p class="text-neutral-700 text-sm italic">
+                                "{t.reviews.review3}"
+                            </p>
+                        </div>
+
+                        <!-- Review 4 -->
+                        <div
+                            class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
+                        >
+                            <div class="flex items-center gap-1 mb-3">
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                            </div>
+                            <p class="text-neutral-700 text-sm italic">
+                                "{t.reviews.review4}"
+                            </p>
+                        </div>
+
+                        <!-- Review 5 -->
+                        <div
+                            class="bg-neutral-50 p-6 border border-neutral-200 rounded-lg"
+                        >
+                            <div class="flex items-center gap-1 mb-3">
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                                <Star
+                                    className="fill-amber-400 w-4 h-4 text-amber-400"
+                                />
+                            </div>
+                            <p class="text-neutral-700 text-sm italic">
+                                "{t.reviews.review5}"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final CTA - Matching Home Page Style -->
+            <ColorGradientInOut size="lg">
+                <div class="mx-auto px-4 max-w-4xl text-center">
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl"
+                    >
+                        {t.finalCta.title}
+                    </h2>
+                    <p
+                        class="mx-auto mb-6 max-w-2xl text-neutral-600 text-lg leading-relaxed"
+                    >
+                        {t.finalCta.subtitle}
+                    </p>
+                    <div
+                        class="flex flex-wrap justify-center items-center gap-4 mb-8 text-neutral-500 text-sm"
+                    >
+                        <div class="flex items-center gap-2">
+                            <Stethoscope className="w-4 h-4 text-primary" />
+                            <span>{t.finalCta.reviewedBy}</span>
+                        </div>
+                        <span>•</span>
+                        <div class="flex items-center gap-2">
+                            <GraduationCap className="w-4 h-4 text-primary" />
+                            <span>{t.finalCta.research}</span>
+                        </div>
+                    </div>
+                    <div
+                        class="flex sm:flex-row flex-col justify-center items-center gap-4 mb-8"
+                    >
+                        <CourseBuyButton
+                            productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                            variant="default"
+                            className="shadow-lg w-full sm:w-auto font-bold text-lg"
+                            client:load
+                        >
+                            {t.finalCta.cta}
+                        </CourseBuyButton>
+                    </div>
+                    <div
+                        class="flex flex-wrap justify-center gap-4 mb-6 text-sm"
+                    >
+                        <a
+                            href="https://course.thetismedical.com/claim"
+                            class="inline-flex items-center gap-2 font-medium text-primary hover:underline"
+                        >
+                            <ExternalLink className="w-4 h-4" />
+                            {t.finalCta.alreadyPurchased}
+                        </a>
+                    </div>
+                    <!-- Satisfaction Guarantee -->
+                    <div
+                        class="bg-primary/10 mt-8 p-6 border-2 border-primary/30 rounded-lg"
+                    >
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <div
+                                    class="flex justify-center items-center bg-primary rounded-full w-12 h-12"
+                                >
+                                    <span class="font-bold text-white text-xl"
+                                        >✓</span
+                                    >
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3
+                                    class="mb-2 font-bold text-neutral-900 text-lg"
+                                >
+                                    {t.finalCta.guaranteeTitle}
+                                </h3>
+                                <p class="text-neutral-700">
+                                    {t.finalCta.guaranteeDesc}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ColorGradientInOut>
+
+            <StickyAddToCart variant="course" lang={lang} client:load />
+        </section>
+    </main>
+</Layout>

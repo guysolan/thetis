@@ -1,0 +1,302 @@
+{
+  "description": "A modal with an overlay that displays in center of our application.",
+  "icon_name": "PictureInPicture",
+  "name": "Modal",
+  "variants": [
+    {
+      "fields": [
+        {
+          "key": "title",
+          "label": "Title",
+          "settings": {
+            "default": "Modal title",
+            "required": true
+          },
+          "type": "text"
+        },
+        {
+          "key": "body",
+          "label": "Body",
+          "settings": {
+            "default": "Contextual copy about what is being shown in the Modal. Use modals for broadcasts, timely updates, and messages with important calls to action.",
+            "required": true
+          },
+          "type": "markdown"
+        },
+        {
+          "action": {
+            "key": "action",
+            "label": "Image action",
+            "settings": {
+              "default": "",
+              "required": false
+            },
+            "type": "text"
+          },
+          "alt": {
+            "key": "alt",
+            "label": "Alt text",
+            "settings": {
+              "default": "",
+              "required": false
+            },
+            "type": "text"
+          },
+          "key": "image",
+          "label": "Image",
+          "settings": {
+            "description": "An image to display on the modal",
+            "required": false
+          },
+          "type": "image",
+          "url": {
+            "key": "url",
+            "label": "Image URL",
+            "settings": {
+              "default": "",
+              "required": false
+            },
+            "type": "url"
+          }
+        },
+        {
+          "key": "dismissible",
+          "label": "Dismissible?",
+          "settings": {
+            "default": true,
+            "required": false
+          },
+          "type": "boolean"
+        }
+      ],
+      "key": "default",
+      "name": "Default"
+    },
+    {
+      "fields": [
+        {
+          "key": "title",
+          "label": "Title",
+          "settings": {
+            "default": "Modal title",
+            "required": true
+          },
+          "type": "text"
+        },
+        {
+          "key": "body",
+          "label": "Body",
+          "settings": {
+            "default": "Contextual copy about what is being shown in the Modal. Use modals for broadcasts, timely updates, and messages with important calls to action.",
+            "required": true
+          },
+          "type": "markdown"
+        },
+        {
+          "action": {
+            "key": "action",
+            "label": "Image action",
+            "settings": {
+              "default": "",
+              "required": false
+            },
+            "type": "text"
+          },
+          "alt": {
+            "key": "alt",
+            "label": "Alt text",
+            "settings": {
+              "default": "",
+              "required": false
+            },
+            "type": "text"
+          },
+          "key": "image",
+          "label": "Image",
+          "settings": {
+            "description": "An image to display on the modal",
+            "required": false
+          },
+          "type": "image",
+          "url": {
+            "key": "url",
+            "label": "Image URL",
+            "settings": {
+              "default": "",
+              "required": false
+            },
+            "type": "url"
+          }
+        },
+        {
+          "key": "dismissible",
+          "label": "Dismissible?",
+          "settings": {
+            "default": true,
+            "required": false
+          },
+          "type": "boolean"
+        },
+        {
+          "action": {
+            "key": "action",
+            "label": "Button action",
+            "settings": {
+              "default": "action",
+              "required": true
+            },
+            "type": "text"
+          },
+          "key": "primary_button",
+          "label": "Primary button",
+          "settings": {
+            "required": true
+          },
+          "text": {
+            "key": "text",
+            "label": "Button text",
+            "settings": {
+              "default": "Primary",
+              "required": true
+            },
+            "type": "text"
+          },
+          "type": "button"
+        }
+      ],
+      "key": "single-action",
+      "name": "Single-action"
+    },
+    {
+      "fields": [
+        {
+          "key": "title",
+          "label": "Title",
+          "settings": {
+            "default": "Modal title",
+            "required": true
+          },
+          "type": "text"
+        },
+        {
+          "key": "body",
+          "label": "Body",
+          "settings": {
+            "default": "Contextual copy about what is being shown in the Modal. Use modals for broadcasts, timely updates, and messages with important calls to action.",
+            "required": true
+          },
+          "type": "markdown"
+        },
+        {
+          "action": {
+            "key": "action",
+            "label": "Image action",
+            "settings": {
+              "default": "",
+              "required": false
+            },
+            "type": "text"
+          },
+          "alt": {
+            "key": "alt",
+            "label": "Alt text",
+            "settings": {
+              "default": "",
+              "required": false
+            },
+            "type": "text"
+          },
+          "key": "image",
+          "label": "Image",
+          "settings": {
+            "description": "An image to display on the modal",
+            "required": false
+          },
+          "type": "image",
+          "url": {
+            "key": "url",
+            "label": "Image URL",
+            "settings": {
+              "default": "",
+              "required": false
+            },
+            "type": "url"
+          }
+        },
+        {
+          "key": "dismissible",
+          "label": "Dismissible?",
+          "settings": {
+            "default": true,
+            "required": false
+          },
+          "type": "boolean"
+        },
+        {
+          "action": {
+            "key": "action",
+            "label": "Button action",
+            "settings": {
+              "default": "action",
+              "required": true
+            },
+            "type": "text"
+          },
+          "key": "primary_button",
+          "label": "Primary button",
+          "settings": {
+            "required": true
+          },
+          "text": {
+            "key": "text",
+            "label": "Button text",
+            "settings": {
+              "default": "Primary",
+              "required": true
+            },
+            "type": "text"
+          },
+          "type": "button"
+        },
+        {
+          "action": {
+            "key": "action",
+            "label": "Button action",
+            "settings": {
+              "default": "action",
+              "required": true
+            },
+            "type": "text"
+          },
+          "key": "secondary_button",
+          "label": "Secondary button",
+          "settings": {
+            "required": true
+          },
+          "text": {
+            "key": "text",
+            "label": "Button text",
+            "settings": {
+              "default": "Secondary",
+              "required": true
+            },
+            "type": "text"
+          },
+          "type": "button"
+        }
+      ],
+      "key": "multi-action",
+      "name": "Multi-action"
+    }
+  ],
+  "preview@": "preview.html",
+  "__readonly": {
+    "key": "modal",
+    "valid": true,
+    "owner": "system",
+    "environment": "development",
+    "semver": "0.0.1",
+    "created_at": "2026-01-22T17:27:38.780211Z"
+  },
+  "$schema": "https://schemas.knock.app/cli/message-type.json"
+}

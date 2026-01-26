@@ -16,9 +16,19 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@thetis/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@thetis/ui/dropdown-menu";
 import type { QueryClient } from "@tanstack/react-query";
-import { BookOpen, ExternalLink, Loader2, Menu, Star } from "lucide-react";
+import { ExternalLink, Loader2, LogOut, Menu, User } from "lucide-react";
 import { cn } from "../lib/utils.js";
+import { useSimpleAuth } from "@/hooks/use-simple-auth";
+import { useEnrollment } from "@/hooks/use-enrollment";
 
 function RouterSpinner() {
   const isLoading = useRouterState({ select: (s) => s.status === "pending" });
@@ -33,93 +43,9 @@ function RouterSpinner() {
   );
 }
 
-const navLinks = [
-  {
-    title: "Standard",
-    href: "/standard",
-    icon: BookOpen,
-    courseType: "standard" as const,
-  },
-  {
-    title: "Premium",
-    href: "/premium",
-    icon: Star,
-    courseType: "premium" as const,
-  },
-];
-
-function NavLinkWithPrice({
-  link,
-  isActive,
-  isMobile = false,
-}: {
-  link: (typeof navLinks)[number];
-  isActive: boolean;
-  isMobile?: boolean;
-}) {
-  if (isMobile) {
-    return (
-      <SheetClose asChild>
-        <Link
-          to={link.href}
-          className={cn(
-            "flex items-center gap-3 p-4 border rounded-xl transition-colors",
-            isActive
-              ? "bg-primary/10 border-primary/30 text-primary"
-              : "border-border hover:bg-muted",
-          )}
-        >
-          <div
-            className={cn(
-              "flex justify-center items-center rounded-lg w-10 h-10 shrink-0",
-              isActive
-                ? "bg-primary text-primary-foreground"
-                : "bg-primary/10 text-primary",
-            )}
-          >
-            <link.icon className="w-5 h-5" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="font-semibold">{link.title}</div>
-          </div>
-        </Link>
-      </SheetClose>
-    );
-  }
-
-  return (
-    <Link
-      to={link.href}
-      className={cn(
-        "inline-flex flex-col items-start gap-1 px-4 py-2 rounded-lg font-medium text-sm transition-colors",
-        isActive
-          ? "bg-primary/10 text-primary"
-          : "text-muted-foreground hover:bg-muted hover:text-foreground",
-      )}
-    >
-      <div className="flex items-center gap-2">
-        <link.icon className="w-4 h-4" />
-        <span>{link.title}</span>
-      </div>
-    </Link>
-  );
-}
-
 function DesktopNav() {
-  const matchRoute = useMatchRoute();
-
   return (
     <nav className="flex items-center gap-1">
-      {navLinks.map((link) => {
-        const isActive = matchRoute({ to: link.href, fuzzy: true });
-        return (
-          <NavLinkWithPrice
-            key={link.href}
-            link={link}
-            isActive={!!isActive}
-          />
-        );
-      })}
       <a
         href="https://thetismedical.com"
         target="_blank"
@@ -134,8 +60,6 @@ function DesktopNav() {
 }
 
 function MobileNav() {
-  const matchRoute = useMatchRoute();
-
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -156,20 +80,6 @@ function MobileNav() {
           </Link>
         </SheetHeader>
 
-        <nav className="flex flex-col gap-2">
-          {navLinks.map((link) => {
-            const isActive = matchRoute({ to: link.href, fuzzy: true });
-            return (
-              <NavLinkWithPrice
-                key={link.href}
-                link={link}
-                isActive={!!isActive}
-                isMobile={true}
-              />
-            );
-          })}
-        </nav>
-
         <SheetFooter className="mt-8">
           <SheetClose asChild>
             <a
@@ -189,6 +99,9 @@ function MobileNav() {
 }
 
 function Header() {
+  const { email, loading: authLoading, signOut } = useSimpleAuth();
+  const { enrollments } = useEnrollment();
+
   return (
     <header className="top-0 z-50 sticky bg-background/80 backdrop-blur-lg border-border border-b w-full">
       <div className="mx-auto px-4 sm:px-6 max-w-5xl">
@@ -202,14 +115,82 @@ function Header() {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-2">
-            <DesktopNav />
-          </nav>
+          <div className="flex items-center gap-2">
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-2">
+              <DesktopNav />
+            </nav>
 
-          {/* Mobile Navigation */}
-          <div className="md:hidden">
-            <MobileNav />
+            {/* Auth Status */}
+            {!authLoading && (
+              <div className="flex items-center gap-2">
+                {email
+                  ? (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="sm" className="gap-2">
+                          <User className="w-4 h-4" />
+                          <span className="hidden sm:inline">{email}</span>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="w-56">
+                        <DropdownMenuLabel>
+                          <div className="flex flex-col space-y-1">
+                            <p className="font-medium text-sm">{email}</p>
+                            {enrollments.length > 0 && (
+                              <p className="text-muted-foreground text-xs">
+                                {enrollments.length}{" "}
+                                course{enrollments.length > 1 ? "s" : ""}{" "}
+                                enrolled
+                              </p>
+                            )}
+                          </div>
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        {enrollments.length > 0 && (
+                          <>
+                            <DropdownMenuLabel className="text-muted-foreground text-xs">
+                              Your Courses
+                            </DropdownMenuLabel>
+                            {enrollments.map((e) => (
+                              <DropdownMenuItem key={e.id} disabled>
+                                {e.course_type === "standard"
+                                  ? "Standard"
+                                  : e.course_type === "essentials"
+                                  ? "Essentials"
+                                  : "Professionals"}
+                              </DropdownMenuItem>
+                            ))}
+                            <DropdownMenuSeparator />
+                          </>
+                        )}
+                        <DropdownMenuItem
+                          onClick={() => {
+                            signOut();
+                            window.location.href = "/";
+                          }}
+                          className="text-destructive"
+                        >
+                          <LogOut className="mr-2 w-4 h-4" />
+                          Sign out
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  )
+                  : (
+                    <Button variant="outline" size="sm" asChild>
+                      <Link to="/claim" search={{ email: "", order: "" }}>
+                        Sign In
+                      </Link>
+                    </Button>
+                  )}
+              </div>
+            )}
+
+            {/* Mobile Navigation */}
+            <div className="md:hidden">
+              <MobileNav />
+            </div>
           </div>
         </div>
       </div>
@@ -266,14 +247,14 @@ export const Route = createRootRouteWithContext<{
 
 function RootComponent() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <>
       <Header />
-      <main className="flex-1">
+      <main>
         <Outlet />
       </main>
       <Footer />
       <RouterSpinner />
       <Toaster />
-    </div>
+    </>
   );
 }

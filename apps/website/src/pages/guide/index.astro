@@ -1,0 +1,255 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { recoveryPhaseRoutes } from "../../content/routes";
+import { Calendar, ArrowRight, BookOpen, Clock, CheckCircle } from "lucide-react";
+import { Image } from "astro:assets";
+import AchillesRuptureDrawing from "@/assets/drawings/achilles-drawing.svg";
+import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
+import CourseCTA from "@/components/CTA/CourseCTA.astro";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+
+// Enhanced phase data with more details
+const guidePhases = [
+    {
+        slug: "guide/weeks-0-1",
+        week: "Week 0-1",
+        title: "First Week After Rupture",
+        description: "Emergency care, A&E expectations, blood clot prevention, and essential survival tips.",
+        highlights: ["A&E process", "Pain management", "Blood clot prevention", "Essential equipment"],
+        color: "bg-red-500",
+    },
+    {
+        slug: "guide/weeks-1-3",
+        week: "Weeks 1-3",
+        title: "Treatment Decision",
+        description: "Surgery vs conservative treatment, choosing your walking boot, and setting up for recovery.",
+        highlights: ["Surgery vs non-surgical", "Choosing your boot", "Home setup", "Early expectations"],
+        color: "bg-orange-500",
+    },
+    {
+        slug: "guide/weeks-4-6",
+        week: "Weeks 4-6",
+        title: "Progressive Recovery",
+        description: "Weight bearing progression, wedge removal, and managing daily life challenges.",
+        highlights: ["Wedge removal", "Weight bearing", "Sleep tips", "Daily challenges"],
+        color: "bg-amber-500",
+    },
+    {
+        slug: "guide/weeks-7-9",
+        week: "Weeks 7-9",
+        title: "Final Boot Phase",
+        description: "Preparing to transition out of your boot, increasing activity, and building confidence.",
+        highlights: ["Final wedges", "Preparing for physio", "Work return", "Driving"],
+        color: "bg-yellow-500",
+    },
+    {
+        slug: "guide/weeks-10-12",
+        week: "Weeks 10-12",
+        title: "Boot Transition",
+        description: "Moving from boot to shoes, building strength, and returning to normal walking.",
+        highlights: ["Leaving the boot", "Shoe selection", "Starting physio", "Walking normally"],
+        color: "bg-lime-500",
+    },
+    {
+        slug: "guide/weeks-13-25",
+        week: "Weeks 13-25",
+        title: "Progressive Strengthening",
+        description: "Building strength and endurance, returning to activities, and preventing re-injury.",
+        highlights: ["Calf strengthening", "Cardio options", "Milestones", "Preventing setbacks"],
+        color: "bg-green-500",
+    },
+    {
+        slug: "guide/week-26-plus",
+        week: "Week 26+",
+        title: "Return to Sport",
+        description: "Full recovery assessment, return to running and sport, and long-term outlook.",
+        highlights: ["Return to running", "Sport-specific", "Preventing re-injury", "Long-term outlook"],
+        color: "bg-emerald-500",
+    },
+];
+---
+
+<Layout
+    title="Achilles Rupture Recovery Guide - Week by Week Timeline"
+    description="Complete week-by-week guide to Achilles tendon rupture recovery. From first week to return to sport, learn what to expect at each stage."
+    lang="en"
+>
+    <main class="space-y-0">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-b from-primary/10 to-white py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="flex lg:flex-row flex-col items-center gap-12">
+                    <div class="flex-1 lg:text-left text-center">
+                        <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full">
+                            <Calendar className="w-4 h-4 text-primary" />
+                            <span class="font-medium text-primary text-sm uppercase tracking-wider">Recovery Timeline</span>
+                        </div>
+                        <h1 class="mb-6 font-bold text-neutral-900 text-4xl md:text-5xl lg:text-6xl leading-tight">
+                            Achilles Rupture <span class="text-primary">Recovery Guide</span>
+                        </h1>
+                        <p class="mx-auto lg:mx-0 mb-8 max-w-2xl text-neutral-600 text-lg md:text-xl leading-relaxed">
+                            Your complete week-by-week guide to recovery. From the moment of injury to returning to full activity — 
+                            <strong class="text-neutral-900">evidence-based guidance</strong> at every stage.
+                        </p>
+                        
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
+                            <div class="flex items-center gap-2 text-neutral-600">
+                                <CheckCircle className="w-5 h-5 text-primary" />
+                                <span>7 detailed phases</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-neutral-600">
+                                <CheckCircle className="w-5 h-5 text-primary" />
+                                <span>Evidence-based</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-neutral-600">
+                                <CheckCircle className="w-5 h-5 text-primary" />
+                                <span>Surgeon reviewed</span>
+                            </div>
+                        </div>
+
+                        <a
+                            href="#phases"
+                            class={cn(
+                                buttonVariants({ size: "lg", variant: "default" }),
+                                "text-lg font-bold shadow-lg"
+                            )}
+                        >
+                            Start Reading →
+                        </a>
+                    </div>
+                    <div class="flex-shrink-0 w-full lg:w-2/5">
+                        <Image
+                            src={AchillesRuptureDrawing}
+                            alt="Achilles tendon illustration"
+                            class="w-full max-h-[50vh] object-contain"
+                            width={400}
+                            height={500}
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subscribe Block -->
+        <section class="bg-neutral-50 py-12">
+            <div class="mx-auto px-4 max-w-3xl">
+                <SubscribeBlock source="guide_index" lang="en" />
+            </div>
+        </section>
+
+        <!-- Timeline Overview -->
+        <section id="phases" class="py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-6xl">
+                <div class="mb-12 text-center">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-1.5 rounded-full font-medium text-primary text-sm uppercase tracking-wide">
+                        <BookOpen className="w-4 h-4" />
+                        Complete Timeline
+                    </div>
+                    <h2 class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl">
+                        Your Recovery Journey
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
+                        Click on any phase to read the complete guide for that stage of recovery.
+                    </p>
+                </div>
+
+                <!-- Timeline Cards -->
+                <div class="relative">
+                    <!-- Vertical Line (desktop) -->
+                    <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 via-yellow-500 to-green-500 transform -translate-x-1/2 rounded-full"></div>
+
+                    <div class="space-y-8 lg:space-y-12">
+                        {guidePhases.map((phase, index) => (
+                            <div class={cn(
+                                "relative lg:flex lg:items-center lg:gap-8",
+                                index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                            )}>
+                                <!-- Timeline Dot (desktop) -->
+                                <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 items-center justify-center">
+                                    <div class={cn("w-6 h-6 rounded-full border-4 border-white shadow-md", phase.color)}></div>
+                                </div>
+
+                                <!-- Card -->
+                                <a
+                                    href={`/${phase.slug}`}
+                                    class={cn(
+                                        "group block bg-white hover:bg-primary/5 p-6 md:p-8 border border-neutral-200 hover:border-primary/50 rounded-2xl transition-all shadow-sm hover:shadow-lg",
+                                        "lg:w-[calc(50%-2rem)]",
+                                        index % 2 === 0 ? "lg:mr-auto" : "lg:ml-auto"
+                                    )}
+                                >
+                                    <div class="flex items-start gap-4">
+                                        <!-- Week Badge -->
+                                        <div class={cn(
+                                            "flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-xl text-white font-bold text-sm",
+                                            phase.color
+                                        )}>
+                                            <div class="text-center leading-tight">
+                                                <div class="text-xs opacity-80">Week</div>
+                                                <div>{phase.week.replace("Week ", "").replace("Weeks ", "")}</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex-1 min-w-0">
+                                            <h3 class="mb-2 font-bold text-neutral-900 text-xl md:text-2xl group-hover:text-primary transition-colors">
+                                                {phase.title}
+                                            </h3>
+                                            <p class="mb-4 text-neutral-600">
+                                                {phase.description}
+                                            </p>
+
+                                            <!-- Highlights -->
+                                            <div class="flex flex-wrap gap-2 mb-4">
+                                                {phase.highlights.map((highlight) => (
+                                                    <span class="bg-neutral-100 group-hover:bg-primary/10 px-2 py-1 rounded text-neutral-600 text-xs font-medium transition-colors">
+                                                        {highlight}
+                                                    </span>
+                                                ))}
+                                            </div>
+
+                                            <div class="flex items-center gap-2 font-semibold text-primary">
+                                                Read Full Guide
+                                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Start Section -->
+        <section class="bg-primary/5 py-16">
+            <div class="mx-auto px-4 max-w-4xl text-center">
+                <h2 class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl">
+                    Not Sure Where to Start?
+                </h2>
+                <p class="mb-8 text-neutral-600 text-lg">
+                    Jump to the phase that matches where you are in your recovery journey.
+                </p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="/guide/weeks-0-1" class={cn(buttonVariants({ variant: "default" }), "gap-2")}>
+                        <Clock className="w-4 h-4" />
+                        Just Injured
+                    </a>
+                    <a href="/guide/weeks-4-6" class={cn(buttonVariants({ variant: "outline" }), "gap-2")}>
+                        In the Boot
+                    </a>
+                    <a href="/guide/weeks-10-12" class={cn(buttonVariants({ variant: "outline" }), "gap-2")}>
+                        Leaving the Boot
+                    </a>
+                    <a href="/guide/weeks-13-25" class={cn(buttonVariants({ variant: "outline" }), "gap-2")}>
+                        Doing Physio
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course CTA -->
+        <CourseCTA lang="en" variant="full" />
+    </main>
+</Layout>

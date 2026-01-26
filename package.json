@@ -28,7 +28,7 @@
     "typecheck": "turbo typecheck",
     "deploy:website": "vercel deploy ./apps/website --prod --build-env TURBO_FORCE=true"
   },
-  "workspaces": ["packages/*", "apps/*"],
+  "workspaces": ["packages/*", "apps/*", "services/*"],
   "dependencies": {
     "@astrojs/vercel": "^8.0.7",
     "@radix-ui/react-focus-scope": "^1.1.2",

@@ -1,6 +1,6 @@
 import type { SectionContent } from "@/components/course/types";
-import SnapRuptureExperience from "@/assets/snap-rupture-experience.jpeg";
-import AchillesRopeEndsPointedDown from "@/assets/achilles-rope-ends-pointed-down.png";
+import SnapRuptureExperience from "@/assets/snap-rupture-experience-v1.jpeg";
+import AchillesRopeEndsPointedDown from "@/assets/tendon-gap.png";
 import HowRupturesHappen from "@/assets/how-ruptures-happen.png";
 
 export const metadata = {
@@ -13,7 +13,7 @@ export const metadata = {
 
 export const content: SectionContent = {
   intro:
-    'If you\'re reading this, you\'ve likely just experienced one of the most distinctive injuries in medicine — a ruptured Achilles tendon. That unmistakable "pop" or "snap" followed by difficulty walking has brought you here. **You will get through this.** Millions of people have recovered fully — this guide shows you how, step by step.',
+    'If you\'re reading this, you\'ve likely just experienced one of the most distinctive injuries in medicine — a ruptured Achilles tendon. That unmistakable "pop" or "snap" followed by difficulty walking has brought you here. Millions of people have recovered fully — this guide shows you how, step by step.',
 
   blocks: [
     {
@@ -59,9 +59,15 @@ export const content: SectionContent = {
     },
     {
       type: "tip",
+      title: "Got a boot already?",
+      content:
+        "If you've been given a walking boot at A&E, don't worry — we cover **everything about boots** in detail later in the course (choosing, fitting, adjusting, sleeping, showering, and more). For now, just keep it on and keep your foot pointed down.",
+    },
+    {
+      type: "tip",
       title: "Recovery timeline (the short version)",
       content:
-        "Full recovery typically takes **6–12 months**, but you'll be walking without crutches much sooner — often from **Week 2 onwards** (though you'll still need your boot). We'll break this down week by week — don't try to skip ahead.",
+        "You'll be walking without crutches much sooner — often from **Week 2 onwards** (though you'll still need your boot). We'll break this down week by week — don't try to skip ahead.",
     },
     {
       type: "section",

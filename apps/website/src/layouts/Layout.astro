@@ -7,6 +7,7 @@ export interface Props {
   image?: string;
   bodyClass?: string;
   hideFooter?: boolean;
+  hideNav?: boolean;
   logoColor?: "black" | "white";
   name?: string;
   lang: Lang;
@@ -24,6 +25,7 @@ const {
   image,
   bodyClass,
   hideFooter,
+  hideNav,
   logoColor,
   lang = "en",
   alternateLanguages = [],
@@ -35,7 +37,9 @@ import GoogleTagBody from "./GoogleTagBody.astro";
 import BaseHead from "./BaseHead.astro";
 import Nav from "./Nav.astro";
 import Footer from "@/features/footer/Footer.astro";
-import ShopifyBuyButton2 from "../components/ShopifyBuyButton2.astro";
+import { CartSheet } from "../components/cart/CartSheet";
+import DiscountPopup from "../components/DiscountPopup";
+import WelcomePopup from "../components/WelcomePopup";
 ---
 
 <!doctype html>
@@ -53,11 +57,18 @@ import ShopifyBuyButton2 from "../components/ShopifyBuyButton2.astro";
     <slot name="head" />
   </head>
 
-  <body class={cn(bodyClass, "pt-10 overflow-y-auto overflow-x-hidden")}>
+  <body
+    class={cn(
+      bodyClass,
+      hideNav ? "" : "pt-10",
+      "overflow-y-auto overflow-x-hidden",
+    )}
+  >
     <GoogleTagBody />
-    <ShopifyBuyButton2 />
     <InstantlyPixel />
-    <Nav lang={lang} />
+    {!hideNav && <Nav lang={lang} />}
+    <CartSheet client:load />
+    <WelcomePopup client:idle delaySeconds={5} />
     <slot />
     {!hideFooter && <Footer lang={lang} />}
     <script type="text/partytown" src="@/services/lucide.ts"></script>

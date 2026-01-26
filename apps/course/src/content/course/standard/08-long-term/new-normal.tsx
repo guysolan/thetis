@@ -10,7 +10,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By Week 30, you're likely back to most normal activities. You're walking, maybe running, feeling more like yourself. But your tendon will never be exactly the same as before injury. This lesson covers what to expect long-term, how to manage expectations, and how to care for your tendon for life. You will get through this — life after Achilles rupture is different, but it can be good.",
+        "By Week 30, you're likely back to most normal activities. You're walking, maybe running, feeling more like yourself. But your tendon will never be exactly the same as before injury.",
     blocks: [
         {
             type: "heading",
@@ -157,7 +157,7 @@ export const content: SectionContent = {
                 {
                     type: "card",
                     title: "Ongoing strengthening",
-                    description: "Maintain strength long-term.",
+                    description: "Maintain strength long-term. See [Progressive Strengthening](/standard/progressive-strengthening) for exercise guidance.",
                     variant: "highlight",
                     content: [
                         {
@@ -278,9 +278,9 @@ export const content: SectionContent = {
                     style: "bullet",
                     items: [
                         "**This week:** Focus on long-term care and maintenance",
-                        "**Week 31:** We cover plyometric training and jumping — building power",
                         "**Ongoing:** Continue maintaining strength and following prevention strategies",
                         "**Long-term:** Life after Achilles rupture is ongoing — maintain strength and care",
+                        "**This is the final section** — you've completed the course. Continue following the guidance for long-term health.",
                     ],
                 },
             ],

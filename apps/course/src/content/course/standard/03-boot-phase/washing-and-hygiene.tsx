@@ -40,7 +40,7 @@ export const content: SectionContent = {
                 },
                 {
                     text:
-                        "Consider a night splint for washing — allows proper foot washing",
+                        "Consider a [night splint](/standard/sleeping-with-boot) for washing — allows proper foot washing",
                 },
                 {
                     text:
@@ -95,7 +95,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "A **night splint** (like the Thetis splint) is particularly useful for washing because it keeps your foot protected in the correct angle while allowing water to reach your skin. You can shower normally and let your foot dry before switching back to the boot.",
+                                "A **[night splint](/standard/sleeping-with-boot)** (like the Thetis splint) is particularly useful for washing because it keeps your foot protected in the correct angle while allowing water to reach your skin. You can shower normally and let your foot dry before switching back to the boot.",
                         },
                         {
                             type: "product-image",

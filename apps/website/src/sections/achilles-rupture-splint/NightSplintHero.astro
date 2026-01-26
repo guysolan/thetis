@@ -1,14 +1,17 @@
 ---
 import HighlightedParagraph from "@/components/HighlightedParagraph";
-import FreeAndSecure from "@/components/buy-button/FreeAndSecure.tsx";
 import CheckWithCareTeam from "@/components/buy-button/CheckWithCareTeam.tsx";
 import BuyButtonVariants from "../../components/products/buy-button/BuyButtonVariants.tsx";
 import { Image } from "astro:assets";
 import ColorGradient from "@/components/ColorGradient.astro";
-import nightSplint from "@/assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
+import nightSplint from "@/assets/night-splint/night-splint-bed-top-square.jpg";
+// White close-up image path - check if it exists in public folder
+const nightSplintWhitePath = "/images/night_splint_white_close.jpg";
 import ReviewsLink from "@/components/ReviewsLink.tsx";
 import WorkInHealthcare from "@/components/products/night-splint/WorkInHealthcare.astro";
 import { content } from "@/components/products/night-splint/content.ts";
+import PriceDisplay from "@/components/PriceDisplay.tsx";
+import { ProductImageGallery } from "@/components/products/ProductImageGallery";
 import type { Lang } from "../../config/languages";
 
 interface Props {
@@ -21,44 +24,71 @@ const t = content[lang]?.hero || content.en.hero;
 
 <ColorGradient>
   <div class="mx-auto px-4 max-w-7xl text-center">
-    <div class="lg:hidden flex flex-col gap-4">
-      <h1
-        class="mb-6 mx-w-4xl font-semibold text-gray-900 text-4xl md:text-5xl leading-[105%] md:leading-[120%]"
-      >
+    <!-- Mobile header only -->
+    <div class="lg:hidden flex flex-col gap-4 mb-4">
+      <h1 class="mx-w-4xl font-semibold text-gray-900 text-4xl leading-[105%]">
         <HighlightedParagraph paragraph={t.title} client:load />
       </h1>
-      <p class="mx-auto mb-8 max-w-3xl text-gray-700 text-xl">
+      <p class="mx-auto max-w-3xl text-gray-700 text-lg">
         {t.description}
       </p>
     </div>
-    <div class="flex lg:flex-row flex-col gap-4 lg:gap-8 my-2">
-      <Image
-        height={1000}
-        width={666}
-        class="relative shadow-lg group-hover:shadow-xl rounded-lg w-full lg:max-w-[45vw] h-full max-h-[100vw] object-cover group-hover:scale-[102%] transition-all duration-300"
-        src={nightSplint}
-        alt="Splint Render"
-      />
 
-      <div class="space-y-2 w-full text-left">
-        <div class="hidden lg:flex flex-col gap-6">
+    <div class="flex lg:flex-row flex-col gap-6 lg:gap-10">
+      <!-- Product Image Gallery -->
+      <div class="lg:w-1/2">
+        <ProductImageGallery
+          images={[
+            {
+              src: nightSplint.src,
+              alt: "Achilles Tendon Rupture Night Splint on bed",
+            },
+            {
+              src: nightSplintWhitePath,
+              alt: "Close-up view of Thetis Night Splint",
+            },
+          ]}
+          client:load
+        />
+      </div>
+
+      <!-- Product Info -->
+      <div class="flex flex-col pt-4 lg:w-1/2 text-left">
+        <!-- Desktop header only -->
+        <div class="hidden lg:block">
+          <!-- Social Proof Badge for Desktop -->
+          <div class="mb-4 text-left">
+            <div
+              class="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full"
+            >
+              <span
+                class="font-semibold text-primary text-sm uppercase tracking-wider"
+                >5,000+ Better Rested Patients</span
+              >
+            </div>
+          </div>
           <h1
-            class="mx-w-4xl font-semibold text-gray-900 text-4xl md:text-5xl leading-[105%] md:leading-[120%]"
+            class="mb-4 font-semibold text-gray-900 text-4xl xl:text-5xl leading-tight"
           >
             <HighlightedParagraph paragraph={t.title} client:load />
           </h1>
-          <p class="mx-auto max-w-3xl text-gray-700 text-xl">
+          <p class="max-w-xl text-gray-600 text-lg">
             {t.description}
           </p>
         </div>
-        <ReviewsLink size="lg" lang={lang} />
-        <CheckWithCareTeam className="mt-2" client:load lang={lang} />
+
+        <!-- Price & Reviews -->
+        <div class="flex flex-col gap-2 mt-2">
+          <PriceDisplay size="lg" showFreeShipping={true} client:load />
+          <ReviewsLink size="lg" lang={lang} />
+        </div>
+
+        <!-- Discrete care team note -->
+        <CheckWithCareTeam client:load lang={lang} />
+
+        <!-- Buy Options -->
         <BuyButtonVariants client:load lang={lang} />
       </div>
-    </div>
-    <div class="flex flex-col gap-16 pt-8">
-      <FreeAndSecure lang={lang} />
-      <WorkInHealthcare lang={lang} />
     </div>
   </div>
 </ColorGradient>

@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import AircastVsVacopedComparison from "@/assets/aircast-vs-vacoped-comparison.png";
 
 export const metadata = {
     slug: "choosing-your-boot",
@@ -10,17 +11,31 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "Your walking boot is going to be your constant companion for the next 8-12 weeks. Understanding the options — and the essential accessories — makes a real difference to your comfort and recovery. Here's what you need to know.",
+        "Your walking boot is going to be your constant companion for the next 8-12 weeks. Most hospitals will provide you with a boot — use what they give you. Understanding your boot and the essential accessories makes a real difference to your comfort and recovery.",
 
     blocks: [
         {
+            type: "alert",
+            variant: "info",
+            title: "Your hospital will usually provide a boot",
+            content:
+                "Most hospitals provide a walking boot as part of your treatment. **Use what they give you** — all boots used for Achilles rupture treatment work well when used correctly. This article focuses on the two most common boots (Aircast and VACOped), but there are other boots used for ATR treatment that work equally well.",
+        },
+        {
+            type: "image",
+            src: AircastVsVacopedComparison,
+            alt: "Side-by-side comparison of Aircast and VACOped walking boots showing key features and prices",
+            caption:
+                "Aircast vs VACOped — the two most common boots, but not the only options",
+        },
+        {
             type: "section",
-            title: "The two main boot options",
+            title: "The two most common boots",
             content: [
                 {
                     type: "text",
                     content:
-                        "Most hospitals offer either the **Aircast** or **VACOped** boot. Both work — but they work differently, and understanding the difference helps you get the most from whichever you have.",
+                        "The **Aircast** and **VACOped** are the most commonly provided boots, but other boots (like the Rebound Air, Össur Walker, or generic NHS boots) are also used and work well. If your hospital gives you a different boot, that's fine — the principles are the same.",
                 },
                 {
                     type: "card",
@@ -102,7 +117,7 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Better equinus position** — research suggests 48° vs 28° ankle plantarflexion",
+                                "**Better equinus position** — research suggests 48° vs 28° ankle angle (foot pointed down)",
                                 "**Dynamic recovery** — controlled range of motion may reduce muscle wasting",
                                 "**Waterproof** — can swim with proper setup (requires removing inner lining)",
                                 "**Vacuum-bead liner** — may help prevent pressure sores",
@@ -132,9 +147,9 @@ export const content: SectionContent = {
         {
             type: "alert",
             variant: "info",
-            title: "Which boot should I choose?",
+            title: "Which boot should I use?",
             content:
-                "If your hospital provides a boot, use what they give you — **both work equally well**. VACOped, Aircast (black boot), or other boots — all are valid treatment options with similar outcomes. If you're buying privately: **VACOped** may be worth it for active patients who can afford it. **Aircast** is a practical choice if budget is a concern or you want something lightweight. The key is following your protocol correctly, not which boot you have.",
+                "**Use what your hospital provides** — all boots used for ATR treatment work well. Aircast, VACOped, Rebound Air, Össur, or generic NHS boots — all are valid options with similar outcomes. If you're buying privately and have the budget, VACOped may offer some advantages. But the key is **following your protocol correctly**, not which boot you have.",
         },
         {
             type: "section",
@@ -143,7 +158,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Here's what nobody tells you upfront: **sleeping in your boot is miserable**. Both Aircast and VACOped are hot, heavy, and uncomfortable to sleep in. But tendon protection overnight is absolutely essential — removing your boot while sleeping is one of the most common causes of re-rupture.",
+                        "Here's what nobody tells you upfront: **sleeping in your boot is miserable**. Both Aircast and VACOped are hot, heavy, and uncomfortable to sleep in. But tendon protection overnight is absolutely essential — removing your boot while sleeping is one of the most common causes of re-rupture. We cover this in detail in [Sleeping with Your Boot](/standard/sleeping-with-boot).",
                 },
                 {
                     type: "card",
@@ -173,7 +188,7 @@ export const content: SectionContent = {
                     type: "tip",
                     title: "Showering options",
                     content:
-                        "For washing, you have two main options: **(1)** Wear a waterproof cover (like a Limbo) over your boot — this protects the boot but means you can't wash the foot itself. **(2)** Use the **Thetis night splint** which maintains the correct angle while allowing you to wash your foot and leg properly. Many patients find option 2 much more hygienic.",
+                        "For washing, you have two main options: **(1)** Wear a waterproof cover (like a Limbo) over your boot — this protects the boot but means you can't wash the foot itself. **(2)** Use the **Thetis night splint** which maintains the correct angle while allowing you to wash your foot and leg properly. We cover this in detail in [Washing & Hygiene](/standard/washing-and-hygiene).",
                 },
             ],
         },

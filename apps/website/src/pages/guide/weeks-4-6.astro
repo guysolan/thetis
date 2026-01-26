@@ -1,0 +1,12 @@
+---
+import GuideLayout from "@/layouts/GuideLayout.astro";
+import { metadata, content } from "@/content/guide/weeks-4-6";
+---
+
+<GuideLayout
+    title={metadata.title}
+    description={metadata.description}
+    slug={`guide/${metadata.slug}`}
+    lang="en"
+    content={content}
+/>

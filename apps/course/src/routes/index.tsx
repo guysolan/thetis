@@ -1,16 +1,18 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
 import {
+  ArrowRight,
   BookOpen,
   CheckCircle2,
   ExternalLink,
   GraduationCap,
   Lock,
   Mail,
-  Star,
 } from "lucide-react";
 import { EmailSignupDialog } from "@/components/EmailSignupDialog";
-import { useCourseUnlock } from "@/hooks/use-course-unlock";
 import { useCourseProgress } from "@/hooks/use-course-progress";
+import { useSimpleAuth } from "@/hooks/use-simple-auth";
+import { useEnrollment } from "@/hooks/use-enrollment";
+import { supabase } from "@/lib/supabase";
 import { Card } from "@thetis/ui/card";
 import { Button } from "@thetis/ui/button";
 import {
@@ -97,9 +99,12 @@ function CourseCard({
   ribbonText?: string;
   courseType: "standard" | "premium";
 }) {
-  const { isUnlocked } = useCourseUnlock();
-  const { getCompletionPercentage } = useCourseProgress();
-  const unlocked = isUnlocked(courseType);
+  const { email } = useSimpleAuth();
+  const { hasAccess } = useEnrollment();
+  const { getCompletionPercentage, isLessonComplete } = useCourseProgress();
+
+  // Check if user has access to this course
+  const unlocked = email ? hasAccess(courseType) : false;
 
   // Get sections for this course type
   const courseSections = sections.filter(
@@ -108,6 +113,34 @@ function CourseCard({
   const completionPercentage = unlocked
     ? getCompletionPercentage(courseSections.length)
     : 0;
+
+  // Get next incomplete lesson for enrolled users (only for standard course)
+  const nextLesson = unlocked && courseType === "standard"
+    ? courseSections.find((s) => {
+      if (!s.slug || typeof s.slug !== "string") {
+        console.warn("Section missing valid slug:", s);
+        return false;
+      }
+      return !isLessonComplete(s.slug);
+    })
+    : null;
+
+  // Debug: log nextLesson if it exists
+  if (nextLesson && process.env.NODE_ENV === "development") {
+    console.log("Next lesson:", nextLesson);
+  }
+
+  // Determine CTA text based on enrollment status
+  let displayCtaText = ctaText;
+  if (unlocked) {
+    if (nextLesson) {
+      displayCtaText = "Continue Learning";
+    } else if (completionPercentage === 100) {
+      displayCtaText = "Review Course";
+    } else {
+      displayCtaText = `Start ${title} Course`;
+    }
+  }
 
   const variantStyles = {
     standard: {
@@ -121,13 +154,13 @@ function CourseCard({
       checkColor: "text-primary",
     },
     premium: {
-      border: "border-primary dark:border-primary",
+      border: "border-primary/30 dark:border-primary/40",
       bg: "bg-white dark:bg-neutral-800",
-      hoverBorder: "hover:border-primary dark:hover:border-primary",
-      iconBg: "bg-amber-100 dark:bg-amber-900",
-      iconColor: "text-amber-700 dark:text-amber-300",
-      badgeBg: "bg-amber-100 dark:bg-amber-900",
-      badgeColor: "text-amber-700 dark:text-amber-300",
+      hoverBorder: "hover:border-primary/60 dark:hover:border-primary",
+      iconBg: "bg-primary/10",
+      iconColor: "text-primary",
+      badgeBg: "bg-neutral-100 dark:bg-neutral-700",
+      badgeColor: "text-neutral-600 dark:text-neutral-300",
       checkColor: "text-primary",
     },
   };
@@ -213,30 +246,43 @@ function CourseCard({
       {/* CTA */}
       {unlocked
         ? (
-          <Link to={link}>
-            <Button
-              className="w-full"
-              variant={variant === "premium" ? "default" : "outline"}
-            >
-              {ctaText}
-            </Button>
-          </Link>
+          nextLesson && nextLesson.slug && typeof nextLesson.slug === "string"
+            ? (
+              // @ts-ignore - Premium route exists but we only use standard here
+              <Link
+                to="/standard/$slug"
+                params={{ slug: nextLesson.slug }}
+              >
+                <Button
+                  className="w-full"
+                  variant="outline"
+                >
+                  {displayCtaText}
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+            )
+            : (
+              <Link to={link}>
+                <Button
+                  className="w-full"
+                  variant="outline"
+                >
+                  {displayCtaText}
+                </Button>
+              </Link>
+            )
         )
         : (
-          <Button
-            asChild
-            className="w-full"
-            variant={variant === "premium" ? "default" : "outline"}
-          >
-            <a
-              href={`${WEBSITE_URL}/course/${courseType}`}
-              target="_blank"
-              rel="noopener noreferrer"
+          <Link to="/claim" search={{ email: "", order: "" }}>
+            <Button
+              className="w-full"
+              variant="outline"
             >
-              Buy to Unlock
-              <ExternalLink className="ml-2 w-4 h-4" />
-            </a>
-          </Button>
+              {email ? "Claim Your Course" : "Sign In to Access"}
+              <Lock className="ml-2 w-4 h-4" />
+            </Button>
+          </Link>
         )}
     </Card>
   );
@@ -247,6 +293,12 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const { email, loading: authLoading } = useSimpleAuth();
+  const { enrollments, hasAccess, loading: enrollmentLoading } =
+    useEnrollment();
+  const { getCompletionPercentage, isLessonComplete } = useCourseProgress();
+
+  // Show landing page for everyone, but customize for enrolled users
   return (
     <div className="min-h-screen">
       {/* Hero with gradient background */}
@@ -257,17 +309,37 @@ function HomePage() {
               <BookOpen className="w-4 h-4" />
               Recovery Programs
             </div>
-            <h1 className="mb-6 font-bold text-foreground text-4xl md:text-6xl tracking-tight">
-              Simplify your <span className="text-primary">Recovery</span>
-            </h1>
-            <p className="mx-auto max-w-2xl text-muted-foreground text-lg md:text-xl">
-              Choose the program that best fits your journey back to life, work,
-              and sport after an Achilles rupture.
-            </p>
+            {email && enrollments.length > 0
+              ? (
+                <>
+                  <h1 className="mb-6 font-bold text-foreground text-4xl md:text-6xl tracking-tight">
+                    Welcome back{email
+                      ? `, ${
+                        email.split("@")[0].charAt(0).toUpperCase() +
+                        email.split("@")[0].slice(1)
+                      }`
+                      : ""}
+                  </h1>
+                  <p className="mx-auto max-w-2xl text-muted-foreground text-lg md:text-xl">
+                    Continue your recovery journey
+                  </p>
+                </>
+              )
+              : (
+                <>
+                  <h1 className="mb-6 font-bold text-foreground text-4xl md:text-6xl tracking-tight">
+                    Simplify your <span className="text-primary">Recovery</span>
+                  </h1>
+                  <p className="mx-auto max-w-2xl text-muted-foreground text-lg md:text-xl">
+                    Choose the program that best fits your journey back to life,
+                    work, and sport after an Achilles rupture.
+                  </p>
+                </>
+              )}
           </div>
 
-          {/* Course Cards */}
-          <div className="gap-8 grid md:grid-cols-2 mx-auto max-w-4xl">
+          {/* Course Card */}
+          <div className="flex justify-center mx-auto max-w-4xl">
             <CourseCard
               title="Standard"
               description="31 easily digestible lessons to guide you through each stage of recovery."
@@ -283,23 +355,6 @@ function HomePage() {
               ctaText="Start Standard Course"
               icon={<BookOpen className="w-full h-full" />}
               courseType="standard"
-            />
-            <CourseCard
-              title="Premium"
-              description="Advanced recovery strategies and expert-led video lessons for elite results."
-              variant="premium"
-              badge="PREMIUM"
-              showRibbon={true}
-              ribbonText="BEST VALUE"
-              features={[
-                "Everything in Standard",
-                "Specialist surgeon video lessons",
-                "Exercise videos from professional physios",
-              ]}
-              link="/premium"
-              ctaText="Start Premium Course"
-              icon={<Star className="w-full h-full" />}
-              courseType="premium"
             />
           </div>
         </div>
@@ -324,7 +379,10 @@ function HomePage() {
                 right information arrives exactly when you need it.
               </p>
             </div>
-            <EmailSignupDialog triggerText="Get Free Emails" />
+            <EmailSignupDialog
+              triggerText="Get Free Emails"
+              supabaseClient={supabase}
+            />
           </div>
         </div>
       </div>

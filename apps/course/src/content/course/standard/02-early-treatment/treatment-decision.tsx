@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import SurgeryVsNonSurgicalOutcomes from "@/assets/surgery-vs-non-surgical-outcomes.png";
+import SurgeryVsNonSurgicalOutcomes from "@/assets/surgery-vs-non-surgical-outcomes-v1.png";
 
 export const metadata = {
     slug: "treatment-decision",
@@ -342,9 +342,9 @@ export const content: SectionContent = {
                 {
                     type: "alert",
                     variant: "danger",
-                    title: "Get urgent help now",
+                    title: "Seek urgent care",
                     content:
-                        '**Possible DVT (clot in the leg):** new calf pain/tenderness, one-leg calf swelling, calf redness/warmth. **Possible PE (clot in the lungs):** chest pain, breathlessness, coughing blood, fainting. Also seek urgent help for **numb/blue/pale toes**, severe increasing pressure/pain in the cast/boot, fever with rapidly spreading redness, or a fall with a new "pop".',
+                        '**Severe pain**, **new pop/snap**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention). Also seek help for **numb/blue/pale toes**, severe pressure in cast/boot, or fever with spreading redness.',
                 },
             ],
         },

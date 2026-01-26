@@ -13,7 +13,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By now, you should be in your walking boot — your constant companion for the next 8–12 weeks. Understanding how your boot works and the differences between boot types helps you follow your protocol correctly. This lesson covers boot basics, Aircast vs VACOped, and how the angle system works. For fitting and care, see [Boot Adjustment and Care](/standard/boot-adjustment-and-care). For protocol details, see [Boot Progression Protocol](/standard/boot-progression-protocol).",
+        "By now, you should be in your walking boot — your constant companion for the next 8–12 weeks. Understanding how your boot works and the differences between boot types helps you follow your protocol correctly. This lesson covers boot basics, Aircast vs VACOped, and how the angle system works. Fitting, care, and protocol details are covered in the following lessons.",
 
     blocks: [
         {
@@ -39,11 +39,11 @@ export const content: SectionContent = {
                 },
                 {
                     text:
-                        "Check boot fit — see [Boot Adjustment and Care](/standard/boot-adjustment-and-care) for detailed fitting guidance",
+                        "Check boot fit — detailed fitting guidance in the next lesson",
                 },
                 {
                     text:
-                        "Follow your protocol — see [Boot Progression Protocol](/standard/boot-progression-protocol) for progression details",
+                        "Follow your protocol — progression details covered soon",
                 },
             ],
         },
@@ -54,7 +54,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Your walking boot holds your foot pointed down (plantarflexed) to keep the torn tendon ends close together. As the tendon heals, you gradually reduce this angle until your foot reaches a neutral position. Think of it like gradually lowering a platform.",
+                        "Your walking boot holds your foot pointed down ([plantarflexed](/standard/emergency-care)) to keep the torn tendon ends close together. As the tendon heals, you gradually reduce this angle until your foot reaches a neutral position. Think of it like gradually lowering a platform.",
                 },
                 {
                     type: "card",
@@ -147,7 +147,7 @@ export const content: SectionContent = {
                                     items: [
                                         "**How it works:** A dial-controlled hinge at the ankle sets the angle",
                                         "**The sole is a wedge** — thick at the heel, thin at the toe, creating the tip-toe angle",
-                                        "**Starting position:** Hinge locked at maximum plantarflexion (30°)",
+                                        "**Starting position:** Hinge locked at maximum angle (30° foot pointed down)",
                                         "**Progression:** Unlock the hinge gradually to allow more range of motion",
                                         "**Controlled movement:** Can be set to allow movement within a safe range (e.g., 30° to 15°)",
                                         "**End position:** Hinge unlocked for full range or locked at neutral",
@@ -162,45 +162,31 @@ export const content: SectionContent = {
                                 },
                             ],
                         },
-                        {
-                            title: "Which is better?",
-                            content: [
-                                {
-                                    type: "text",
-                                    content:
-                                        "Both boots are clinically effective — research shows similar outcomes. The choice often comes down to what's available, what your clinic uses, and cost.",
-                                },
-                                {
-                                    type: "image",
-                                    src: BootForceComparison,
-                                    alt: "Comparison diagram showing force control in VACOped vs Aircast boots, demonstrating why VACOped provides better force control but both boots work if used correctly",
-                                    caption:
-                                        "Boot force comparison: VACOped provides better force control, but all boots work if used correctly",
-                                },
-                                {
-                                    type: "list",
-                                    style: "bullet",
-                                    items: [
-                                        "**Aircast:** More common, typically provided by NHS, simpler mechanism, lower cost (~£80–150)",
-                                        "**VACOped:** More adjustable, allows controlled early movement, better force control, often requires private purchase (~£250–400)",
-                                        "**Both work:** The key is following your protocol correctly, not which boot you have",
-                                    ],
-                                },
-                                {
-                                    type: "text",
-                                    content:
-                                        "Don't worry if you have one or the other — **all boot types (VACOped, Aircast, or others) achieve the same goal**. What matters is understanding **how your specific boot works** and following your protocol exactly. You'll see Grant (our patient character) wearing different boot types in different images — this is intentional to reinforce that all options are valid.",
-                                },
-                            ],
-                        },
                     ],
+                },
+                {
+                    type: "heading",
+                    level: 3,
+                    text: "Which is better?",
+                },
+                {
+                    type: "text",
+                    content:
+                        "Both boots are clinically effective — research shows similar outcomes. **The key is following your protocol correctly, not which boot you have.**",
+                },
+                {
+                    type: "image",
+                    src: BootForceComparison,
+                    alt: "Comparison diagram showing force control in VACOped vs Aircast boots, demonstrating why VACOped provides better force control but both boots work if used correctly",
+                    caption:
+                        "Boot force comparison: VACOped provides better force control, but all boots work if used correctly",
                 },
                 {
                     type: "alert",
                     variant: "info",
                     title: "Learn more",
                     content:
-                        "For a detailed comparison of Aircast vs VACOped boots, including their mechanisms, costs, and which might be right for you, see our [comprehensive boot comparison guide](/articles/aircast-vs-vacoped).",
+                        "For a detailed comparison of costs and features, see [Choosing Your Boot](/standard/choosing-your-boot) which covers mechanisms, costs, and which might be right for you.",
                 },
             ],
         },
@@ -228,7 +214,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "→ See [Boot Adjustment and Care](/standard/boot-adjustment-and-care) for detailed guidance",
+                                "→ Detailed fitting guidance in the next lesson",
                         },
                     ],
                 },
@@ -247,7 +233,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "→ See [Boot Progression Protocol](/standard/boot-progression-protocol) for detailed guidance",
+                                "→ Protocol details covered in an upcoming lesson",
                         },
                     ],
                 },
@@ -272,7 +258,7 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Week 6:** Start Phase 1 exercises — see [Building Strength While in Boot](/standard/building-strength-in-boot) for detailed guidance on exercises, weight-bearing, and gait",
+                                "**Week 6:** Start Phase 1 exercises — detailed guidance on exercises, weight-bearing, and gait coming up",
                                 "**Weeks 6-8:** Continue building strength, progress weight-bearing",
                                 "**Week 8:** Learn about Phase 2 and Phase 3 goals — preparing for post-boot recovery",
                                 "**Weeks 10-12:** Boot removal and transition to Phase 2",

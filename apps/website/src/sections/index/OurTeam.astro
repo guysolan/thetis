@@ -1,0 +1,261 @@
+---
+import type { Lang } from "@/config/languages.ts";
+import { Users, Stethoscope, Heart, Code } from "lucide-react";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        tagline: "Our Story",
+        title: "Our Story.",
+        highlight: "",
+        description:
+            "Thetis Medical started when Matt told his son about the troubles all his patients have sleeping in a boot after an achilles rupture. Guy 3D printed the first prototypes, and Caty sewed them together. Today, we're a family business combining medical expertise with innovative design.",
+        foundingStory:
+            "Matt, a foot and ankle surgeon, noticed his patients needed a better solution for sleeping during Achilles recovery. Guy, a design engineer, 3D printed the first prototypes. Caty, a GP, sewed them together with Guy's Granny's sewing machine. That's how Thetis Medical was born.",
+        team: [
+            {
+                name: "Matt",
+                role: "Foot & Ankle Surgeon",
+                label: "Dad",
+                icon: "stethoscope",
+            },
+            {
+                name: "Caty",
+                role: "GP (Family Doctor)",
+                label: "Mum",
+                icon: "heart",
+            },
+            {
+                name: "Guy",
+                role: "Design Engineer",
+                label: "Son",
+                icon: "code",
+            },
+        ],
+        connection:
+            "From a family kitchen table to helping thousands of patients worldwide. Every product is designed with medical insight, to make patient recovery more comfortable.",
+    },
+    de: {
+        tagline: "Wer wir sind",
+        title: "Eine Familie",
+        highlight: "Ihrer Genesung gewidmet",
+        description:
+            "Thetis Medical begann, als Matt seinem Sohn von den Problemen erzählte, die alle seine Patienten beim Schlafen in einem Stiefel nach einer Achillessehnenruptur haben. Guy druckte die ersten Prototypen im 3D-Drucker, und Caty nähte sie zusammen. Heute sind wir ein Familienunternehmen, das medizinisches Fachwissen mit innovativem Design kombiniert.",
+        foundingStory:
+            "Matt, ein Fuß- und Sprunggelenkchirurg, bemerkte, dass seine Patienten eine bessere Lösung zum Schlafen während der Achillessehnen-Genesung brauchten. Guy, ein Konstrukteur, druckte die ersten Prototypen im 3D-Drucker. Caty, eine Hausärztin, nähte sie mit Guys Großmutters Nähmaschine zusammen. So entstand Thetis Medical.",
+        team: [
+            {
+                name: "Matt",
+                role: "Fuß- und Sprunggelenkchirurg",
+                label: "Vater",
+                icon: "stethoscope",
+            },
+            {
+                name: "Caty",
+                role: "Hausarzt",
+                label: "Mutter",
+                icon: "heart",
+            },
+            {
+                name: "Guy",
+                role: "Konstrukteur",
+                label: "Sohn",
+                icon: "code",
+            },
+        ],
+        connection:
+            "Von einem Familientisch bis zur Hilfe für Tausende von Patienten weltweit. Jedes Produkt wird mit medizinischem Einblick entwickelt, um die Genesung der Patienten angenehmer zu machen.",
+    },
+    fr: {
+        tagline: "Qui nous sommes",
+        title: "Une famille",
+        highlight: "dédiée à votre récupération",
+        description:
+            "Thetis Medical a commencé lorsque Matt a raconté à son fils les difficultés que tous ses patients ont à dormir dans une botte après une rupture du tendon d'Achille. Guy a imprimé les premiers prototypes en 3D, et Caty les a cousus ensemble. Aujourd'hui, nous sommes une entreprise familiale combinant expertise médicale et design innovant.",
+        foundingStory:
+            "Matt, chirurgien du pied et de la cheville, a remarqué que ses patients avaient besoin d'une meilleure solution pour dormir pendant la récupération d'Achille. Guy, ingénieur designer, a imprimé les premiers prototypes en 3D. Caty, médecin généraliste, les a cousus avec la machine à coudre de la grand-mère de Guy. C'est ainsi qu'est née Thetis Medical.",
+        team: [
+            {
+                name: "Matt",
+                role: "Chirurgien du pied et de la cheville",
+                label: "Papa",
+                icon: "stethoscope",
+            },
+            {
+                name: "Caty",
+                role: "Médecin généraliste",
+                label: "Maman",
+                icon: "heart",
+            },
+            {
+                name: "Guy",
+                role: "Ingénieur designer",
+                label: "Fils",
+                icon: "code",
+            },
+        ],
+        connection:
+            "D'une table de cuisine familiale à aider des milliers de patients dans le monde. Chaque produit est conçu avec un aperçu médical pour rendre la récupération des patients plus confortable.",
+    },
+    es: {
+        tagline: "Quiénes somos",
+        title: "Una familia",
+        highlight: "dedicada a tu recuperación",
+        description:
+            "Thetis Medical comenzó cuando Matt le contó a su hijo sobre los problemas que todos sus pacientes tienen para dormir en una bota después de una rotura del tendón de Aquiles. Guy imprimió los primeros prototipos en 3D, y Caty los cosió. Hoy somos un negocio familiar que combina experiencia médica con diseño innovador.",
+        foundingStory:
+            "Matt, cirujano de pie y tobillo, notó que sus pacientes necesitaban una mejor solución para dormir durante la recuperación de Aquiles. Guy, ingeniero de diseño, imprimió los primeros prototipos en 3D. Caty, médico de familia, los cosió con la máquina de coser de la abuela de Guy. Así nació Thetis Medical.",
+        team: [
+            {
+                name: "Matt",
+                role: "Cirujano de pie y tobillo",
+                label: "Papá",
+                icon: "stethoscope",
+            },
+            {
+                name: "Caty",
+                role: "Médico de familia",
+                label: "Mamá",
+                icon: "heart",
+            },
+            {
+                name: "Guy",
+                role: "Ingeniero de diseño",
+                label: "Hijo",
+                icon: "code",
+            },
+        ],
+        connection:
+            "De una mesa de cocina familiar a ayudar a miles de pacientes en todo el mundo. Cada producto está diseñado con conocimiento médico para hacer la recuperación de los pacientes más cómoda.",
+    },
+    it: {
+        tagline: "Chi siamo",
+        title: "Una famiglia",
+        highlight: "dedicata alla tua guarigione",
+        description:
+            "Thetis Medical è iniziata quando Matt ha raccontato a suo figlio dei problemi che tutti i suoi pazienti hanno nel dormire con uno stivale dopo una rottura del tendine di Achille. Guy ha stampato i primi prototipi in 3D e Caty li ha cuciti insieme. Oggi siamo un'azienda familiare che combina competenza medica con design innovativo.",
+        foundingStory:
+            "Matt, chirurgo del piede e della caviglia, ha notato che i suoi pazienti avevano bisogno di una soluzione migliore per dormire durante la guarigione di Achille. Guy, ingegnere progettista, ha stampato i primi prototipi in 3D. Caty, medico di famiglia, li ha cuciti con la macchina da cucire della nonna di Guy. Così è nata Thetis Medical.",
+        team: [
+            {
+                name: "Matt",
+                role: "Chirurgo del piede e della caviglia",
+                label: "Papà",
+                icon: "stethoscope",
+            },
+            {
+                name: "Caty",
+                role: "Medico di famiglia",
+                label: "Mamma",
+                icon: "heart",
+            },
+            {
+                name: "Guy",
+                role: "Ingegnere progettista",
+                label: "Figlio",
+                icon: "code",
+            },
+        ],
+        connection:
+            "Da un tavolo da cucina familiare ad aiutare migliaia di pazienti in tutto il mondo. Ogni prodotto è progettato con intuizione medica per rendere la guarigione dei pazienti più confortevole.",
+    },
+};
+
+const t = content[lang as keyof typeof content];
+
+const getIcon = (iconName: string) => {
+    switch (iconName) {
+        case "stethoscope":
+            return Stethoscope;
+        case "heart":
+            return Heart;
+        case "code":
+            return Code;
+        default:
+            return Users;
+    }
+};
+---
+
+<section class="bg-gradient-to-b from-primary/5 to-transparent py-16 md:py-24">
+    <div class="mx-auto px-4 max-w-6xl">
+        <!-- Header -->
+        <div class="mb-12 text-center">
+            <div
+                class="flex justify-center items-center bg-primary/10 mx-auto mb-6 rounded-full w-16 h-16"
+            >
+                <Users className="w-8 h-8 text-primary" />
+            </div>
+            <p
+                class="mb-4 font-medium text-primary text-sm uppercase tracking-widest"
+            >
+                {t.tagline}
+            </p>
+            <h2
+                class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl"
+            >
+                {t.title}
+            </h2>
+            <p
+                class="mx-auto mb-6 max-w-3xl text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed"
+            >
+                {t.description}
+            </p>
+        </div>
+
+        <!-- Team Members -->
+        <div class="gap-8 grid md:grid-cols-3 mb-12">
+            {
+                t.team.map((member) => {
+                    const IconComponent = getIcon(member.icon);
+                    return (
+                        <div class="bg-white dark:bg-neutral-800 hover:shadow-lg p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl text-center transition-shadow">
+                            <div class="flex justify-center items-center bg-primary/10 dark:bg-primary/20 mx-auto mb-4 rounded-full w-16 h-16">
+                                <IconComponent className="w-8 h-8 text-primary" />
+                            </div>
+                            <h3 class="mb-1 font-bold text-neutral-900 dark:text-neutral-100 text-xl">
+                                {member.name}
+                            </h3>
+                            <p class="mb-2 font-semibold text-primary text-xs uppercase tracking-wide">
+                                {member.label}
+                            </p>
+                            <p class="mb-3 font-medium text-neutral-700 dark:text-neutral-300 text-sm">
+                                {member.role}
+                            </p>
+                        </div>
+                    );
+                })
+            }
+        </div>
+
+        <!-- Connection Statement -->
+        <div
+            class="bg-primary/10 dark:bg-primary/20 p-6 md:p-8 border border-primary/20 dark:border-primary/30 rounded-xl text-center"
+        >
+            <p
+                class="font-medium text-neutral-700 dark:text-neutral-300 text-lg leading-relaxed"
+            >
+                {t.connection}
+            </p>
+        </div>
+
+        <!-- Links -->
+        <div class="flex flex-wrap justify-center gap-4 mt-8">
+            <a
+                href="/achilles-rupture-splint"
+                class="font-medium text-primary hover:underline"
+            >
+                Our Products
+            </a>
+            <span class="text-neutral-400">•</span>
+            <a href="/course" class="font-medium text-primary hover:underline">
+                Our Courses
+            </a>
+            <span class="text-neutral-400">•</span>
+            <a href="/reviews" class="font-medium text-primary hover:underline">
+                Patient Stories
+            </a>
+        </div>
+    </div>
+</section>

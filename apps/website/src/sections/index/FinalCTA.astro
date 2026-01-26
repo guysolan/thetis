@@ -1,0 +1,116 @@
+---
+import type { Lang } from "@/config/languages.ts";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Ready to improve your Achilles recovery?",
+        description:
+            "Choose the solution that fits your needs. Get better sleep with our night splint, or get step-by-step guidance with our recovery course.",
+        primaryCta: "Shop Night Splint",
+        primaryCtaLink: "/achilles-rupture-splint",
+        secondaryCta: "View Recovery Course",
+        secondaryCtaLink: "/course",
+        or: "or",
+    },
+    de: {
+        title: "Bereit, Ihre Achillessehnen-Genesung zu verbessern?",
+        description:
+            "Wählen Sie die Lösung, die zu Ihren Bedürfnissen passt. Schlafen Sie besser mit unserer Nachtschiene oder erhalten Sie Schritt-für-Schritt-Anleitung mit unserem Genesungskurs.",
+        primaryCta: "Nachtschiene kaufen",
+        primaryCtaLink: "/achilles-rupture-splint",
+        secondaryCta: "Genesungskurs ansehen",
+        secondaryCtaLink: "/course",
+        or: "oder",
+    },
+    fr: {
+        title: "Prêt à améliorer votre récupération d'Achille?",
+        description:
+            "Choisissez la solution qui correspond à vos besoins. Dormez mieux avec notre attelle de nuit, ou obtenez des conseils étape par étape avec notre cours de récupération.",
+        primaryCta: "Acheter l'attelle de nuit",
+        primaryCtaLink: "/achilles-rupture-splint",
+        secondaryCta: "Voir le cours de récupération",
+        secondaryCtaLink: "/course",
+        or: "ou",
+    },
+    es: {
+        title: "¿Listo para mejorar tu recuperación de Aquiles?",
+        description:
+            "Elige la solución que se adapte a tus necesidades. Duerme mejor con nuestra férula nocturna, u obtén orientación paso a paso con nuestro curso de recuperación.",
+        primaryCta: "Comprar férula nocturna",
+        primaryCtaLink: "/achilles-rupture-splint",
+        secondaryCta: "Ver curso de recuperación",
+        secondaryCtaLink: "/course",
+        or: "o",
+    },
+    it: {
+        title: "Pronto a migliorare il tuo recupero di Achille?",
+        description:
+            "Scegli la soluzione che si adatta alle tue esigenze. Dormi meglio con il nostro tutore notturno, o ottieni una guida passo dopo passo con il nostro corso di recupero.",
+        primaryCta: "Acquista tutore notturno",
+        primaryCtaLink: "/achilles-rupture-splint",
+        secondaryCta: "Vedi corso di recupero",
+        secondaryCtaLink: "/course",
+        or: "o",
+    },
+};
+
+const t = content[lang as keyof typeof content];
+---
+
+<section class="bg-primary/5 py-16 md:py-24">
+    <div class="mx-auto px-4 max-w-4xl text-center">
+        <h2
+            class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl"
+        >
+            {t.title}
+        </h2>
+        <p
+            class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed"
+        >
+            {t.description}
+        </p>
+        <div
+            class="flex sm:flex-row flex-col justify-center items-center gap-4 mb-8"
+        >
+            <a
+                href={t.primaryCtaLink}
+                class={cn(
+                    buttonVariants({ size: "lg", variant: "default" }),
+                    "w-full sm:w-auto",
+                )}
+            >
+                {t.primaryCta}
+            </a>
+            <span class="font-medium text-neutral-600">{t.or}</span>
+            <a
+                href={t.secondaryCtaLink}
+                class={cn(
+                    buttonVariants({ size: "lg", variant: "outline" }),
+                    "w-full sm:w-auto",
+                )}
+            >
+                {t.secondaryCta}
+            </a>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4 text-sm">
+            <a href="/reviews" class="font-medium text-primary hover:underline">
+                Read Reviews
+            </a>
+            <span class="text-neutral-400">•</span>
+            <a href="/course" class="font-medium text-primary hover:underline">
+                View All Courses
+            </a>
+            <span class="text-neutral-400">•</span>
+            <a
+                href="/achilles-rupture-splint"
+                class="font-medium text-primary hover:underline"
+            >
+                Learn About Night Splint
+            </a>
+        </div>
+    </div>
+</section>

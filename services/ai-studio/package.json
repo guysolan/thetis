@@ -1,0 +1,19 @@
+{
+  "name": "@thetis/ai-studio",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "generate": "bun src/index.ts",
+    "review": "bun src/review-image.ts",
+    "review-batch": "bun src/review-batch.ts",
+    "fix-image": "bun src/fix-image.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "openai": "^4.0.0"
+  }
+}
+

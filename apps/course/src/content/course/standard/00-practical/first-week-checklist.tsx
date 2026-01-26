@@ -133,8 +133,8 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**Phase 1 (Weeks 0-6):** Immobilization — protection and healing",
-                                "**Phase 2 (Weeks 6-12):** Post-immobilization — rebuilding strength and balance",
-                                "**Phase 3 (Weeks 12-18):** Single leg capacity — building endurance and function",
+                                "**Phase 2: Transition (Weeks 8-12):** Rebuilding strength and balance",
+                                "**Phase 3: Capacity (Weeks 12-26):** Building endurance and function",
                                 "**Phase 4 (Weeks 18+):** Single leg power — explosive strength and sport-specific training",
                                 "**Phase 5:** Return to sport — when you're ready",
                             ],
@@ -171,17 +171,21 @@ export const content: SectionContent = {
                 {
                     type: "card",
                     title: "Worth purchasing",
-                    description: "Not medical advice — just practical.",
                     variant: "default",
                     content: [
                         {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Waterproof cover** (like a Limbo) for showering over your boot/cast — note this means you won't wash the foot itself. Alternatively, a **Thetis night splint** maintains the correct angle while allowing you to wash your foot and leg.",
-                                "**Leg elevation wedge/pillow** (more comfortable than stacking pillows).",
-                                "A small **backpack/bum bag** (carrying things on crutches is hard).",
+                                "**Waterproof cover** (like a Limbo) for showering — we cover this in detail in [Washing & Hygiene](/standard/washing-and-hygiene)",
+                                "**Leg elevation wedge/pillow** — more comfortable than stacking pillows",
+                                "A small **backpack/bum bag** — we cover mobility aids in [Crutches & Mobility](/standard/crutches-and-mobility)",
                             ],
+                        },
+                        {
+                            type: "text",
+                            content:
+                                "We cover sleeping, washing, and mobility in detail later — for now, just get through Week 1.",
                         },
                     ],
                 },

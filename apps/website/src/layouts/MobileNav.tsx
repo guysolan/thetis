@@ -21,6 +21,7 @@ import { ArrowRight } from "lucide-react";
 import Thetis from "./Thetis.tsx";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { getRouteBySlugAndLanguage } from "@/content/routes.tsx";
+import { useShopifyPrice } from "../hooks/use-shopify-price";
 import type { Lang } from "../config/languages.ts";
 
 interface MobileNavProps {
@@ -58,9 +59,10 @@ const content = {
 
 export function MobileNav({ lang = "en", currentPath = "/" }: MobileNavProps) {
   const t = content[lang];
+  const { formattedPrice } = useShopifyPrice();
 
   // Get localized routes
-  const buyNowRoute = getRouteBySlugAndLanguage("buy-now", lang);
+  const splintRoute = getRouteBySlugAndLanguage("splint", lang);
 
   return (
     <Sheet>
@@ -80,22 +82,25 @@ export function MobileNav({ lang = "en", currentPath = "/" }: MobileNavProps) {
             </SheetClose>
           </div>
         </SheetHeader>
-        <div className="flex flex-row justify-between items-center pt-2">
-          <LanguageSwitcher currentPath={currentPath} />
-        </div>
 
         <NavAccordion lang={lang} />
 
         <SheetFooter className="flex flex-col gap-y-4 mt-4">
+          <div className="flex flex-row justify-between items-center pt-2">
+            <LanguageSwitcher currentPath={currentPath} />
+          </div>
+
           <SheetClose>
             <a
-              href={buyNowRoute?.href || "/buy-now"}
+              href={splintRoute?.href || "/achilles-rupture-splint"}
               className={cn(
-                "w-full",
+                "flex justify-center items-center gap-2 w-full",
                 buttonVariants({ variant: "default", size: "lg" }),
               )}
             >
               <span className="font-semibold text-nowrap">{t.buyNow}</span>
+              <span className="font-normal text-white/90">-</span>
+              <span className="font-semibold">{formattedPrice}</span>
             </a>
           </SheetClose>
           <div className="flex flex-wrap gap-x-6 mx-auto my-2">

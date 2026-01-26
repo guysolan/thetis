@@ -36,27 +36,35 @@ By weeks 4-6, your tendon has moved from the initial inflammatory phase into the
 
 ### Why These Weeks Are Critical for Tendon Length
 
-One of the most important factors for long-term success is maintaining the correct tendon length. If your tendon heals in an elongated (stretched) position, you'll permanently lose power in your ankle.
+**Tendon elongation is THE biggest problem** affecting long-term recovery from Achilles rupture. Understanding this helps you see why your protocol might seem cautious.
 
 **The problem with tendon elongation:**
 
-- Research shows that up to 10mm of tendon lengthening is tolerable
-- Beyond that, you start losing push-off power (ability to rise on tiptoes)
-- This loss is permanent - an elongated tendon won't shorten again
-- Even with good healing, an elongated tendon means reduced function
+- **Everyone gets some elongation** - it's unavoidable, but the amount matters
+- If your tendon heals too elongated (stretched), you'll permanently lose push-off power
+- This prevents return to sport and high-level activity
+- Research shows elongation is more important than re-rupture risk (which is low at 2-4%)
 
 **How elongation happens:**
 
-- Foot slipping into dorsiflexion (bending up) while the tendon is healing
-- Removing wedges too quickly
-- Not wearing the boot 24/7
-- Stretching or aggressive physiotherapy too early
+- Can occur at surgery (if positioned incorrectly)
+- During boot immobilization (if foot position isn't maintained)
+- After boot removal when walking (if tendon isn't strong enough)
+- Throughout the first 12 months - it's a "plastic" process that can go either way
 
-**Prevention:**
+**Critical window:**
 
-- Keep your boot on at all times
-- Follow the wedge removal schedule exactly (don't go faster)
-- Use a night splint only when approved by your specialist
+- **Up to 16 weeks**: Elongation can be reversed with proper loading
+- **After 16-20 weeks**: Tendon becomes stiffer, much harder to reverse elongation
+- This is why your protocol might keep you in the boot longer and delay wedge removal
+
+**Prevention strategies:**
+
+- Keep your boot on at all times (24/7)
+- Follow the wedge removal schedule exactly - don't speed up
+- Your protocol may delay wedges (6-7 weeks, 8-9 weeks, 10-11 weeks instead of 4, 6, 8)
+- Early aggressive strengthening in safe positions (plantarflexion) helps
+- Protected walking after boot removal (heel wedge, reduced step length)
 - Never stretch your Achilles during this phase
 
 ### The Danger of Cutting Corners
@@ -93,6 +101,8 @@ Wedge removal is an exciting milestone - each wedge removed means you're getting
 
 **Typical schedule (varies by protocol):**
 
+**Traditional accelerated protocol:**
+
 | Week | Wedges (Aircast) | Approximate Angle | Notes |
 |------|------------------|-------------------|-------|
 | 0-2 | 4 wedges | ~28-30° | Maximum protection |
@@ -100,6 +110,18 @@ Wedge removal is an exciting milestone - each wedge removed means you're getting
 | 5-6 | 2 wedges | ~16° | **You are here** |
 | 7-8 | 1 wedge | ~10° | Approaching neutral |
 | 9-10 | 0 wedges | Neutral | Final boot phase |
+
+**Evidence-based elongation-focused protocol (increasingly used):**
+
+| Week | Wedges (Aircast) | Approximate Angle | Notes |
+|------|------------------|-------------------|-------|
+| 0-6 | 4 wedges | ~28-30° | Maximum protection (longer) |
+| 6-7 | 3 wedges | ~22° | First reduction (delayed) |
+| 8-9 | 2 wedges | ~16° | Second reduction |
+| 10-11 | 1 wedge | ~10° | Approaching neutral |
+| 11-12 | 0 wedges | Neutral | Final boot phase before removal |
+
+**Why the delay?** Research shows that keeping your foot more pointed down for longer helps prevent tendon elongation (stretching), which is the biggest problem affecting long-term recovery. This protocol is more cautious with wedge removal but more aggressive with early strengthening exercises.
 
 **How to remove wedges:**
 
@@ -437,29 +459,53 @@ Weeks 4-6 can be mentally challenging. The initial "drama" of the injury has pas
 
 ---
 
-## Light Exercises You Can Do
+## Early Strengthening Exercises (Evidence-Based Approach)
 
-### Isometric Ankle Exercises (In Boot)
+### Why Early Loading Matters
 
-Even in weeks 4-6, you can start some very gentle exercises to maintain circulation and muscle activation. Always do these with your boot ON.
+Modern research shows that **aggressive loading early in safe positions** (with your foot pointed down) helps strengthen the tendon and prevent elongation. This is done OUT of the boot for exercises, but the boot goes back on immediately after.
 
-**Isometric ankle press:**
+**The key principle:** Load the tendon in plantarflexion (pointed down) - you cannot re-rupture in this position. This builds strength while protecting the healing tissue.
 
-- While seated with your boot on
-- Press the ball of your foot gently into the boot's footplate
-- Hold for 5-10 seconds
-- Release and repeat 10-15 times
-- This activates your calf without moving the ankle
+### Seated Calf Raises (Week 2-3 Onwards)
 
-**Toe scrunches:**
+**What this involves:**
 
-- Curl your toes down as if gripping the ground
-- Hold for 5 seconds
-- Release and spread toes
-- Repeat 15-20 times
-- Helps maintain intrinsic foot muscle strength
+- Remove boot briefly for exercises only (boot stays on for everything else)
+- Sit in a chair with your foot flat on the floor
+- Place weight on your knee (start with 10-15kg, progress to 0.8-1x your body weight)
+- Push through your big toe and lift your heel
+- Hold at the top, then lower slowly
+- This creates ~2x body weight force in your Achilles tendon (due to lever mechanics)
 
-**Important:** These are NOT aggressive exercises. They should feel like very gentle activation with no pain.
+**Progression:**
+
+- Week 2-3: Body weight only, get used to the movement
+- Week 3+: Add weight gradually (10kg, 15kg, 20kg...)
+- Target: 0.8-1x body weight on your knee by weeks 8-10
+- This prepares your tendon for walking (which requires ~1.5x body weight force)
+
+**Safety:** Always done seated, foot pointed down, with supervision initially. Your specialist will guide you on when to start and how to progress.
+
+### Standing Calf Holds (Weeks 8-10)
+
+Once you can hold about half your body weight seated, you may progress to standing:
+
+- Two feet initially for safety
+- Hold body weight in plantarflexion (isometric hold)
+- This is an aspirational target - many elite athletes achieve this
+- Prevents collapse into dorsiflexion (dangerous position)
+
+### Intrinsic Foot Work (From Week 2)
+
+**Toe spreading and short foot exercises:**
+
+- Helps with proprioception (body awareness)
+- Your foot has been swollen and immobile
+- Feels strange to put your foot down initially
+- Important for overall foot health
+
+**Important:** These exercises are done OUT of the boot briefly, but the boot goes back on immediately. You're not walking around without protection - just doing controlled exercises in a safe position.
 
 ### Maintaining Upper Body and Core Strength
 

@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import SeatedCalfRaisePhase1 from "@/assets/seated-calf-raise-phase1-option-b5.png";
 
 export const metadata = {
     slug: "building-strength-in-boot",
@@ -10,7 +11,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By Week 6, you can start Phase 1 exercises — seated calf raises with your boot removed. By Week 8, you're building strength and preparing for Phase 2 (post-immobilization period). Understanding what Phase 2 and Phase 3 involve helps you see where you're going and why building strength now matters. This lesson covers Phase 1 exercises, weight-bearing progression, and introduces Phase 2 and Phase 3 goals.",
+        "By Week 6, you can start Phase 1 exercises — seated calf raises with your boot removed. By Week 8, you're building strength and preparing for Phase 2: Transition. Understanding what Phase 2 and Phase 3 involve helps you see where you're going and why building strength now matters.",
     blocks: [
         {
             type: "heading",
@@ -68,11 +69,17 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Week 6**: Start with body weight or leg weight only — remove boot, sit with foot in plantarflexion (pointed down), push through big toe and lift heel. Get used to the movement.",
+                                "**Week 6**: Start with body weight or leg weight only — remove boot, sit with foot in [plantarflexion](/standard/emergency-care) (pointed down), push through big toe and lift heel. Get used to the movement.",
                                 "**Week 3+**: Add load gradually — start with 10-15kg on your knee, progress to 0.8-1x body weight",
-                                "**Position**: Foot must be in plantarflexion (pointed down) — this is the safe position, cannot re-rupture",
-                                "**Target**: Build up to holding body weight in plantarflexion position",
+                                "**Position**: Foot must be pointed down — this is the safe position",
+                                "**Target**: Build up to holding body weight in the pointed-down position",
                             ],
+                        },
+                        {
+                            type: "image",
+                            src: SeatedCalfRaisePhase1,
+                            alt: "Illustration showing seated calf raise exercise with weight on knee, foot pointed down",
+                            caption: "Seated calf raise — the key Phase 1 exercise",
                         },
                         {
                             type: "text",
@@ -103,7 +110,7 @@ export const content: SectionContent = {
                     variant: "info",
                     title: "Important",
                     content:
-                        "**Do not start exercises before Week 6** without your clinician's explicit approval. Your tendon needs time to begin healing before you start loading it. Always check with your clinician before starting exercises. Exercises must be done in plantarflexion (foot pointed down) — this is the safe position.",
+                        "**Do not start exercises before Week 6** without your clinician's explicit approval. Your tendon needs time to begin healing before you start loading it. Always check with your clinician before starting exercises. Exercises must be done with foot pointed down — this is the safe position.",
                 },
             ],
         },
@@ -114,32 +121,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Weight-bearing means putting weight through your injured foot. This happens gradually — you don't go from non-weight-bearing to full weight overnight. Think of it like **learning to walk again** — you start with support, gradually increase, and your body adapts.",
-                },
-                {
-                    type: "card",
-                    title: "The weight-bearing progression",
-                    description: "How you gradually increase weight.",
-                    variant: "muted",
-                    content: [
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "**Non-weight-bearing:** Foot doesn't touch the ground (weeks 0-2)",
-                                "**Touch-down weight-bearing:** Foot touches ground but no weight (weeks 2-4)",
-                                "**Partial weight-bearing:** Some weight, still using crutches (weeks 4-6)",
-                                "**Full weight-bearing:** All your weight, may still use crutches for balance (weeks 6-8)",
-                                "**Independent walking:** No crutches needed (weeks 8-10+)",
-                            ],
-                        },
-                        {
-                            type: "alert",
-                            variant: "info",
-                            content:
-                                "Timing varies significantly by protocol. Some protocols allow immediate weight-bearing as tolerated from day 1, others wait until week 4-6. Follow your clinician's specific instructions.",
-                        },
-                    ],
+                        "Weight-bearing means putting weight through your injured foot. This happens gradually — you don't go from non-weight-bearing to full weight overnight. For detailed information about weight-bearing progression schedules and protocols, see [Boot Progression Protocol](/standard/boot-progression-protocol).",
                 },
                 {
                     type: "card",
@@ -226,64 +208,23 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Phase 2 Goals: What Comes Next",
+            title: "What Comes Next: Phase 2 and Phase 3",
             content: [
                 {
                     type: "text",
                     content:
-                        "You're currently in **Phase 1 (Immobilization Period)**. As you build strength, you're preparing for **Phase 2: Post-Immobilization Period** (weeks 6-12). Understanding Phase 2 goals helps you see where you're going and why building strength now matters.",
+                        "You're currently in **Phase 1: Protection** (weeks 0-8). As you build strength, you're preparing for **Phase 2: Transition** (weeks 8-12) and eventually **Phase 3: Capacity** (weeks 12-26).",
                 },
                 {
                     type: "card",
-                    title: "Phase 2 goals: What you're working toward",
-                    description: "The targets for post-immobilization period.",
+                    title: "Learn more about Phase 2 and Phase 3",
+                    description: "Detailed goals and progression.",
                     variant: "highlight",
                     content: [
                         {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "**15+ single-leg heel raises** — being able to do 15+ heel raises on your injured leg alone (target: 25+ for Phase 2 completion)",
-                                "**1.4x body weight MVIC** — maximum voluntary isometric contraction (seated, plantarflexion position)",
-                                "**1.2x body weight seated isotonic** — ability to do seated calf raises with 1.2x body weight",
-                                "**Good balance** — standing on one leg comfortably, maintaining balance",
-                                "**Protected to unprotected gait** — transitioning from protected walking (heel wedge, reduced step length) to normal walking",
-                            ],
-                        },
-                        {
                             type: "text",
                             content:
-                                "These goals might sound daunting now, but they're achievable with consistent work. You don't need to hit them all immediately — progress happens gradually.",
-                        },
-                    ],
-                },
-                {
-                    type: "card",
-                    title: "Phase 3 preview: Single leg capacity",
-                    description: "What comes after Phase 2.",
-                    variant: "muted",
-                    content: [
-                        {
-                            type: "text",
-                            content:
-                                "After Phase 2, you'll move to **Phase 3: Single Leg Capacity** (weeks 12-18). This phase focuses on:",
-                        },
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "**2+ body weight seated PF isometric** — building even more strength",
-                                "**Heel height symmetry** — matching your other leg",
-                                "**Progressive dorsiflexion** — gradually introducing more range of motion",
-                                "**Gait preparation** — hip and ankle focused drills",
-                                "**Plyometric preparation** — low-intensity jumping and landing",
-                                "**Commence running** — when ready",
-                            ],
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "Understanding these phases helps you see the bigger picture. Right now, focus on Phase 1 exercises and building strength. Phase 2 and Phase 3 will come after boot removal, guided by your physiotherapist.",
+                                "For detailed information about Phase 2 and Phase 3 goals (strength targets, balance, gait progression), see the physiotherapy lessons coming up. Those lessons cover the complete goals in detail.",
                         },
                     ],
                 },
@@ -314,9 +255,9 @@ export const content: SectionContent = {
                 {
                     type: "alert",
                     variant: "danger",
-                    title: "Get urgent help now",
+                    title: "Seek urgent care",
                     content:
-                        '**Possible DVT (clot in the leg):** new calf pain/tenderness, one-leg calf swelling, calf redness/warmth. **Possible PE (clot in the lungs):** chest pain, breathlessness, coughing blood, fainting. Also seek urgent help for **severe pain** that doesn\'t improve with rest, **numb/blue/pale toes**, severe pressure/pain in the boot, fever with rapidly spreading redness, or a fall with a new "pop".',
+                        '**Severe pain**, **new pop/snap**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention). Also seek help for **numb/blue/pale toes**, severe pressure in boot, or fever with spreading redness.',
                 },
             ],
         },

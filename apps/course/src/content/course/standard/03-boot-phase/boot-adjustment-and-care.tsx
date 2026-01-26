@@ -32,12 +32,10 @@ export const content: SectionContent = {
                         "Adjust straps correctly — tighten from bottom to top",
                 },
                 {
-                    text:
-                        "Check for pressure points — add padding if needed",
+                    text: "Check for pressure points — add padding if needed",
                 },
                 {
-                    text:
-                        "Keep boot clean — remove liner and wash regularly",
+                    text: "Keep boot clean — remove liner and wash regularly",
                 },
                 {
                     text:
@@ -267,12 +265,17 @@ export const content: SectionContent = {
             title: "Living with your boot — practical tips",
             content: [
                 {
+                    type: "text",
+                    content:
+                        "We cover these topics in detail in dedicated articles — here's a quick overview:",
+                },
+                {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**Sleeping:** Most protocols require 24/7 wear, including at night. This is uncomfortable but essential. Consider a Thetis night splint for better sleep.",
-                        "**Showering:** Use a waterproof cover (like a Limbo) or switch to a night splint that maintains the angle while allowing you to wash your foot.",
-                        "**Walking:** Use crutches as instructed. Don't try to walk without them until your protocol allows.",
+                        "**Sleeping:** Most protocols require 24/7 wear. See [Sleeping with Your Boot](/standard/sleeping-with-boot) for solutions including the Thetis night splint.",
+                        "**Showering:** See [Washing & Hygiene](/standard/washing-and-hygiene) for safe showering options.",
+                        "**Walking:** See [Crutches & Mobility](/standard/crutches-and-mobility) for crutch technique and mobility aids.",
                         "**Skin care:** Check your skin daily for pressure points, redness, or rubbing. Use padding if needed.",
                         "**Cleaning:** Keep the boot clean. Remove the liner if possible and wash it regularly.",
                     ],

@@ -9,8 +9,20 @@ import WashingFAQs from "@/sections/washing-with-torn-achilles/WashingFAQs";
 import WashingOrderCallout from "@/sections/washing-with-torn-achilles/WashingOrderCallout.astro";
 import Reviews from "@/components/reviews/InfiniteReviews.astro";
 import KeyFeatures from "@/sections/achilles-rupture-splint/KeyFeatures.astro";
+import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
+import SurgeonsCarousel from "@/components/SurgeonsCarousel";
+import AthletesCarousel from "@/components/AthletesCarousel";
+import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
+import StickyAddToCart from "@/components/StickyAddToCart.tsx";
+import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
+import { Check, AlertTriangle, Droplets, Wind, ThermometerSun, Footprints } from "lucide-react";
+import ProductIntroduction from "@/sections/shared/ProductIntroduction.astro";
+import { Image } from "astro:assets";
+import bathroomSafetyImage from "@/assets/bathroom-safety-achilles-crutches.png";
 
 const { lang = "en" } = Astro.props as { lang?: Lang };
+const splintRoute = getRouteBySlugAndLanguage("splint", lang);
 
 const content = {
     en: {
@@ -249,6 +261,217 @@ const content = {
 };
 
 const currentContent = content[lang as keyof typeof content];
+
+// Educational content about foot hygiene
+const hygieneContent = {
+    en: {
+        sectionTitle: "Why Your Boot Foot Gets So Smelly",
+        sectionSubtitle: "Understanding the problem helps you solve it",
+        quote: "One of the most frustrating parts of boot life is not being able to wash your foot properly. Your foot is trapped in a boot 24/7, getting sweaty and uncomfortable.",
+        problems: [
+            {
+                title: "Skin Maceration",
+                description: "Your foot is trapped in a warm, moist environment 24/7. This causes skin to soften and break down, creating perfect conditions for bacterial growth.",
+                icon: "droplets"
+            },
+            {
+                title: "Bacterial Growth",
+                description: "Bacteria thrive in warm, damp conditions. Without proper washing, they multiply rapidly, causing that distinctive 'boot smell'.",
+                icon: "thermometer"
+            },
+            {
+                title: "No Air Circulation",
+                description: "Walking boots are designed for support, not breathability. Your foot can't breathe, trapping sweat and odor inside.",
+                icon: "wind"
+            },
+            {
+                title: "Fungal Risk",
+                description: "Prolonged moisture increases risk of athlete's foot and other fungal infections. Check your skin daily for redness or patches.",
+                icon: "footprints"
+            }
+        ],
+        tips: {
+            title: "Foot Hygiene Essentials",
+            items: [
+                "Use antifungal powder daily inside boot liner",
+                "Wear merino wool socks - antibacterial and temperature-regulating",
+                "Change socks daily (or twice if sweating heavily)",
+                "Air the boot out when resting",
+                "Check skin daily for redness, blisters, or fungal patches"
+            ]
+        },
+        warning: {
+            title: "Critical Safety Warning",
+            text: "Never remove the boot unsupported. If removing the boot to wash, keep your foot in a tip-toe position or supported by a splint. Do not let your foot go flat - this stretches the healing tendon and risks re-rupture."
+        }
+    },
+    de: {
+        sectionTitle: "Warum Ihr Stiefelfuß so riecht",
+        sectionSubtitle: "Das Problem zu verstehen hilft, es zu lösen",
+        quote: "Einer der frustrierendsten Teile des Stiefellebens ist, den Fuß nicht richtig waschen zu können. Ihr Fuß ist 24/7 in einem Stiefel gefangen, wird schwitzig und unbequem.",
+        problems: [
+            {
+                title: "Hautmazeration",
+                description: "Ihr Fuß ist 24/7 in einer warmen, feuchten Umgebung gefangen. Dies führt dazu, dass die Haut weich wird und sich abbaut.",
+                icon: "droplets"
+            },
+            {
+                title: "Bakterienwachstum",
+                description: "Bakterien gedeihen in warmen, feuchten Bedingungen. Ohne richtiges Waschen vermehren sie sich schnell.",
+                icon: "thermometer"
+            },
+            {
+                title: "Keine Luftzirkulation",
+                description: "Gehstiefel sind für Unterstützung konzipiert, nicht für Atmungsaktivität. Ihr Fuß kann nicht atmen.",
+                icon: "wind"
+            },
+            {
+                title: "Pilzrisiko",
+                description: "Längere Feuchtigkeit erhöht das Risiko von Fußpilz und anderen Pilzinfektionen.",
+                icon: "footprints"
+            }
+        ],
+        tips: {
+            title: "Fußhygiene-Grundlagen",
+            items: [
+                "Verwenden Sie täglich Antimykotikum-Puder im Stiefel",
+                "Tragen Sie Merino-Wollsocken - antibakteriell und temperaturregulierend",
+                "Wechseln Sie Socken täglich",
+                "Lüften Sie den Stiefel beim Ausruhen",
+                "Überprüfen Sie die Haut täglich auf Rötungen oder Pilzflecken"
+            ]
+        },
+        warning: {
+            title: "Kritische Sicherheitswarnung",
+            text: "Entfernen Sie den Stiefel niemals ohne Unterstützung. Halten Sie Ihren Fuß in Zehenspitzenposition oder durch eine Schiene gestützt."
+        }
+    },
+    fr: {
+        sectionTitle: "Pourquoi votre pied de botte sent si mauvais",
+        sectionSubtitle: "Comprendre le problème aide à le résoudre",
+        quote: "L'une des parties les plus frustrantes de la vie en botte est de ne pas pouvoir laver correctement votre pied. Votre pied est piégé dans une botte 24h/24.",
+        problems: [
+            {
+                title: "Macération cutanée",
+                description: "Votre pied est piégé dans un environnement chaud et humide 24h/24. Cela ramollit et dégrade la peau.",
+                icon: "droplets"
+            },
+            {
+                title: "Croissance bactérienne",
+                description: "Les bactéries prospèrent dans des conditions chaudes et humides. Sans lavage approprié, elles se multiplient rapidement.",
+                icon: "thermometer"
+            },
+            {
+                title: "Pas de circulation d'air",
+                description: "Les bottes de marche sont conçues pour le soutien, pas la respirabilité. Votre pied ne peut pas respirer.",
+                icon: "wind"
+            },
+            {
+                title: "Risque fongique",
+                description: "L'humidité prolongée augmente le risque de mycose et d'autres infections fongiques.",
+                icon: "footprints"
+            }
+        ],
+        tips: {
+            title: "Essentiels d'hygiène des pieds",
+            items: [
+                "Utilisez de la poudre antifongique quotidiennement",
+                "Portez des chaussettes en laine mérinos - antibactériennes",
+                "Changez de chaussettes quotidiennement",
+                "Aérez la botte au repos",
+                "Vérifiez la peau quotidiennement"
+            ]
+        },
+        warning: {
+            title: "Avertissement de sécurité critique",
+            text: "Ne retirez jamais la botte sans soutien. Gardez votre pied en position pointe ou soutenu par une attelle."
+        }
+    },
+    es: {
+        sectionTitle: "Por qué su pie de bota huele tan mal",
+        sectionSubtitle: "Entender el problema ayuda a resolverlo",
+        quote: "Una de las partes más frustrantes de la vida con bota es no poder lavar el pie correctamente. Su pie está atrapado en una bota 24/7.",
+        problems: [
+            {
+                title: "Maceración de la piel",
+                description: "Su pie está atrapado en un ambiente cálido y húmedo 24/7. Esto hace que la piel se ablande y se degrade.",
+                icon: "droplets"
+            },
+            {
+                title: "Crecimiento bacteriano",
+                description: "Las bacterias prosperan en condiciones cálidas y húmedas. Sin lavado adecuado, se multiplican rápidamente.",
+                icon: "thermometer"
+            },
+            {
+                title: "Sin circulación de aire",
+                description: "Las botas de caminar están diseñadas para soporte, no para transpirabilidad. Su pie no puede respirar.",
+                icon: "wind"
+            },
+            {
+                title: "Riesgo de hongos",
+                description: "La humedad prolongada aumenta el riesgo de pie de atleta y otras infecciones fúngicas.",
+                icon: "footprints"
+            }
+        ],
+        tips: {
+            title: "Esenciales de higiene del pie",
+            items: [
+                "Use polvo antifúngico diariamente",
+                "Use calcetines de lana merino - antibacterianos",
+                "Cambie los calcetines diariamente",
+                "Airee la bota al descansar",
+                "Revise la piel diariamente"
+            ]
+        },
+        warning: {
+            title: "Advertencia de seguridad crítica",
+            text: "Nunca quite la bota sin apoyo. Mantenga el pie en posición de puntillas o apoyado por una férula."
+        }
+    },
+    it: {
+        sectionTitle: "Perché il tuo piede da stivale puzza così tanto",
+        sectionSubtitle: "Capire il problema aiuta a risolverlo",
+        quote: "Una delle parti più frustranti della vita con lo stivale è non poter lavare correttamente il piede. Il tuo piede è intrappolato in uno stivale 24/7.",
+        problems: [
+            {
+                title: "Macerazione della pelle",
+                description: "Il tuo piede è intrappolato in un ambiente caldo e umido 24/7. Questo ammorbidisce e degrada la pelle.",
+                icon: "droplets"
+            },
+            {
+                title: "Crescita batterica",
+                description: "I batteri prosperano in condizioni calde e umide. Senza un lavaggio adeguato, si moltiplicano rapidamente.",
+                icon: "thermometer"
+            },
+            {
+                title: "Nessuna circolazione d'aria",
+                description: "Gli stivali da passeggio sono progettati per il supporto, non per la traspirabilità. Il tuo piede non può respirare.",
+                icon: "wind"
+            },
+            {
+                title: "Rischio fungino",
+                description: "L'umidità prolungata aumenta il rischio di piede d'atleta e altre infezioni fungine.",
+                icon: "footprints"
+            }
+        ],
+        tips: {
+            title: "Essenziali per l'igiene del piede",
+            items: [
+                "Usa polvere antimicotica quotidianamente",
+                "Indossa calzini in lana merino - antibatterici",
+                "Cambia i calzini quotidianamente",
+                "Arieggia lo stivale durante il riposo",
+                "Controlla la pelle quotidianamente"
+            ]
+        },
+        warning: {
+            title: "Avviso di sicurezza critico",
+            text: "Non rimuovere mai lo stivale senza supporto. Mantieni il piede in posizione sulle punte o supportato da una stecca."
+        }
+    }
+};
+
+const currentHygieneContent = hygieneContent[lang as keyof typeof hygieneContent] || hygieneContent.en;
 ---
 
 <Fragment slot="head">
@@ -265,14 +488,172 @@ const currentContent = content[lang as keyof typeof content];
     <main>
         <WashingHero lang={lang} content={currentContent.hero} />
 
+        <!-- Educational Section: Why Your Foot Gets Smelly -->
+        <section id="education" class="bg-gradient-to-b from-white to-neutral-50 py-16 md:py-20">
+            <div class="mx-auto px-4 max-w-6xl">
+                <div class="mb-12 text-center">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full">
+                        <Droplets className="w-4 h-4 text-primary" />
+                        <span class="font-medium text-primary text-sm uppercase tracking-wider">Understanding The Problem</span>
+                    </div>
+                    <h2 class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl">
+                        {currentHygieneContent.sectionTitle}
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 text-lg">
+                        {currentHygieneContent.sectionSubtitle}
+                    </p>
+                </div>
+
+                <!-- Quote -->
+                <blockquote class="bg-primary/5 mx-auto mb-12 p-6 border-l-4 border-primary rounded-r-lg max-w-3xl">
+                    <p class="text-neutral-700 text-lg italic">
+                        "{currentHygieneContent.quote}"
+                    </p>
+                </blockquote>
+
+                <!-- Problem Cards -->
+                <div class="gap-6 grid md:grid-cols-2 lg:grid-cols-4 mb-12">
+                    {currentHygieneContent.problems.map((problem) => (
+                        <div class="bg-white shadow-sm hover:shadow-md p-6 border border-neutral-200 rounded-xl transition-shadow">
+                            <div class="flex justify-center items-center bg-red-100 mb-4 rounded-full w-12 h-12">
+                                {problem.icon === "droplets" && <Droplets className="w-6 h-6 text-red-600" />}
+                                {problem.icon === "thermometer" && <ThermometerSun className="w-6 h-6 text-red-600" />}
+                                {problem.icon === "wind" && <Wind className="w-6 h-6 text-red-600" />}
+                                {problem.icon === "footprints" && <Footprints className="w-6 h-6 text-red-600" />}
+                            </div>
+                            <h3 class="mb-2 font-semibold text-neutral-900 text-lg">{problem.title}</h3>
+                            <p class="text-neutral-600 text-sm">{problem.description}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <!-- Tips Box -->
+                <div class="bg-primary/5 mx-auto p-6 md:p-8 border border-primary/20 rounded-xl max-w-3xl">
+                    <h3 class="flex items-center gap-2 mb-4 font-bold text-neutral-900 text-xl">
+                        <Check className="w-6 h-6 text-primary" />
+                        {currentHygieneContent.tips.title}
+                    </h3>
+                    <ul class="space-y-3">
+                        {currentHygieneContent.tips.items.map((item) => (
+                            <li class="flex items-start gap-3">
+                                <Check className="flex-shrink-0 mt-0.5 w-5 h-5 text-primary" />
+                                <span class="text-neutral-700">{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <!-- Bathroom Safety Image -->
+                <div class="mx-auto mt-12 max-w-4xl">
+                    <div class="bg-white shadow-lg p-4 border border-neutral-200 rounded-xl">
+                        <Image
+                            src={bathroomSafetyImage}
+                            alt="Bathroom safety setup for Achilles rupture recovery - shower chair, non-slip mat, crutches stored upside-down"
+                            class="rounded-lg w-full"
+                            width={800}
+                            height={400}
+                        />
+                        <p class="mt-4 text-center text-neutral-600 text-sm">
+                            Essential bathroom safety setup: shower chair, non-slip mat, clear dry floor, and crutches stored upside-down for stability
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Safety Warning -->
+                <div class="bg-amber-50 mx-auto mt-8 p-6 border border-amber-200 rounded-xl max-w-3xl">
+                    <div class="flex items-start gap-4">
+                        <AlertTriangle className="flex-shrink-0 w-6 h-6 text-amber-600" />
+                        <div>
+                            <h4 class="mb-2 font-bold text-amber-800">{currentHygieneContent.warning.title}</h4>
+                            <p class="text-amber-700">{currentHygieneContent.warning.text}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <ShoweringSteps lang={lang} />
+
+        <!-- Product Introduction - Soft Sell -->
+        <ProductIntroduction lang={lang} variant="washing" />
+
+        <!-- Surgeon Endorsements -->
+        <section class="bg-white py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <h2 class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl">
+                        Trusted by Medical Professionals
+                    </h2>
+                    <p class="text-neutral-600">
+                        Surgeons and clinicians recommend the Thetis splint for safe washing
+                    </p>
+                </div>
+                <SurgeonsCarousel client:load />
+            </div>
+        </section>
 
         <LimboComparison lang={lang} content={currentContent.comparison} />
 
-        <Reviews />
+        <!-- Patient Reviews -->
+        <section class="bg-gradient-to-b from-white to-neutral-50 py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full">
+                        <Check className="w-4 h-4 text-primary" />
+                        <span class="font-medium text-primary text-sm uppercase tracking-wider">Real Patient Experiences</span>
+                    </div>
+                    <h2 class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl">
+                        What Patients Say About Washing
+                    </h2>
+                </div>
+                <EnhancedReviewCarousel client:load />
+                <div class="mt-8 text-center">
+                    <a
+                        href="/reviews"
+                        class="inline-flex items-center gap-2 hover:bg-primary px-6 py-3 border-2 border-primary rounded-lg font-semibold text-primary hover:text-white transition-colors"
+                    >
+                        View All Reviews
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Athletes Section -->
+        <section class="bg-neutral-50 py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <h2 class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl">
+                        Trusted by Professional Athletes
+                    </h2>
+                    <p class="text-neutral-600">
+                        Athletes recovering from Achilles rupture trust the Thetis splint
+                    </p>
+                </div>
+                <AthletesCarousel client:load />
+            </div>
+        </section>
 
         <WashingFAQs lang={lang} client:load />
 
+        <!-- Subscribe Block -->
+        <div class="bg-neutral-50 py-8 md:py-12">
+            <div class="mx-auto px-4 max-w-3xl">
+                <SubscribeBlock source="washing_page" lang={lang} />
+            </div>
+        </div>
+
         <WashingOrderCallout lang={lang} />
     </main>
+
+    <StickyAddToCart
+        variant="splint"
+        lang={lang}
+        splintHref={splintRoute?.href || "/achilles-rupture-splint"}
+        client:load
+    />
+
+    <ExitIntentPopup client:load />
 </Layout>

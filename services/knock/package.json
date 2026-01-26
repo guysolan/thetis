@@ -1,0 +1,8 @@
+{
+    "name": "@thetis/knock",
+    "private": true,
+    "scripts": {
+        "push": "export $(cat .env | xargs) && knock push --knock-dir=.",
+        "pull": "export $(cat .env | xargs) && knock pull --knock-dir=."
+    }
+}
