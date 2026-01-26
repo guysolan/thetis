@@ -510,6 +510,9 @@ function UpsellItem({ product }: UpsellItemProps) {
     const isEssentials = product.variantId.includes("52265314353480");
     const isProfessionals = product.variantId.includes("52265315828040");
 
+    // Use product image from the product definition
+    const productImage = product.image;
+
     // Fetch price from Shopify API using hook (same pattern as BuyButtonVariants/useShopifyPrice)
     const { formattedPrice, isLoading: isLoadingPrice } = useVariantPrice(
         product.variantId,
@@ -546,6 +549,18 @@ function UpsellItem({ product }: UpsellItemProps) {
     return (
         <div className="flex flex-col gap-2 bg-primary/5 hover:bg-primary/10 p-3 border border-primary/20 rounded-lg transition-colors">
             <div className="flex items-center gap-3">
+                {/* Product Image */}
+                {productImage ? (
+                    <img
+                        src={productImage}
+                        alt={product.title}
+                        className="rounded-md w-14 h-14 object-cover shrink-0 border border-neutral-200"
+                    />
+                ) : (
+                    <div className="flex justify-center items-center bg-neutral-100 rounded-md w-14 h-14 shrink-0">
+                        <ShoppingBag className="w-6 h-6 text-neutral-400" />
+                    </div>
+                )}
                 <div className="flex-1 min-w-0">
                     <h4 className="font-medium text-neutral-900 text-sm truncate">
                         {product.title}

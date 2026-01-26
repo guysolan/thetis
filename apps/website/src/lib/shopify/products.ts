@@ -26,8 +26,8 @@ export const UPSELL_PRODUCTS = {
     splint: {
         title: "Achilles Night Splint",
         description: "Sleep comfortably while your tendon heals",
-        price: null as string | null, // Fetched dynamically via useVariantPrice hook
-        image: "/images/night_splint_square_small.jpg",
+        price: "", // Fetched dynamically via useVariantPrice hook
+        image: "/images/night_splint_bed_top_square.jpg",
         href: "/achilles-rupture-splint",
         variantId: SPLINT_VARIANTS["large-left"], // Default variant for upsell
         canAddToCart: true,
@@ -35,8 +35,8 @@ export const UPSELL_PRODUCTS = {
     essentialsCourse: {
         title: "Recovery Course",
         description: "31 lessons to guide your recovery",
-        price: null as string | null, // Fetched dynamically via useVariantPrice hook
-        image: "/images/course-essentials.jpg",
+        price: "", // Fetched dynamically via useVariantPrice hook
+        image: "/images/tendon-gap.png",
         href: `${COURSE_URL}/standard`,
         variantId: COURSE_VARIANTS.ESSENTIALS,
         canAddToCart: true,
@@ -44,8 +44,8 @@ export const UPSELL_PRODUCTS = {
     professionalsCourse: {
         title: "Professionals Course",
         description: "Complete guide for clinicians",
-        price: null as string | null, // Fetched dynamically via useVariantPrice hook
-        image: "/images/course-professionals.jpg",
+        price: "", // Fetched dynamically via useVariantPrice hook
+        image: "/images/tendon-gap.png",
         href: `${COURSE_URL}/premium`,
         variantId: COURSE_VARIANTS.PROFESSIONALS,
         canAddToCart: true,

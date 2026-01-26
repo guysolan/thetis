@@ -306,12 +306,6 @@ export function CheckoutUpsellPage() {
     );
 }
 
-// Product images for upsells
-const UPSELL_IMAGES = {
-    splint: "/images/night_splint_bed_top_square.jpg",
-    course: "/images/tendon-gap.png",
-} as const;
-
 // Upsell Product Card Component with Shopify API price fetching
 interface UpsellProductCardProps {
     product: {
@@ -355,9 +349,8 @@ function UpsellProductCard({
         : null;
     const course = courseType ? courseData[courseType] : null;
 
-    // Determine the product image to show
-    const isSplint = product.variantId.includes("47494539");
-    const productImage = isSplint ? UPSELL_IMAGES.splint : isCourse ? UPSELL_IMAGES.course : product.image;
+    // Use product image from the product definition
+    const productImage = product.image;
 
     return (
         <div
