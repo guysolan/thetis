@@ -11,15 +11,73 @@ import {
     markEmailAsSubscribed,
 } from "@/lib/subscription-storage";
 
+type Lang = "en" | "de" | "fr" | "es" | "it";
+
+const translations = {
+    en: {
+        subscribed: "You're subscribed! Check your inbox.",
+        title: "Get recovery tips by email & SMS",
+        subtitle: "Free guidance. Unsubscribe anytime.",
+        emailPlaceholder: "Email",
+        phonePlaceholder: "Phone (optional)",
+        subscribe: "Subscribe",
+        errorRequired: "Please enter your email address",
+        errorGeneric: "Something went wrong. Please try again.",
+    },
+    de: {
+        subscribed: "Sie sind angemeldet! Überprüfen Sie Ihren Posteingang.",
+        title: "Erhalten Sie Genesungstipps per E-Mail & SMS",
+        subtitle: "Kostenlose Anleitung. Jederzeit abmelden.",
+        emailPlaceholder: "E-Mail",
+        phonePlaceholder: "Telefon (optional)",
+        subscribe: "Anmelden",
+        errorRequired: "Bitte geben Sie Ihre E-Mail-Adresse ein",
+        errorGeneric: "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.",
+    },
+    fr: {
+        subscribed: "Vous êtes inscrit ! Vérifiez votre boîte de réception.",
+        title: "Recevez des conseils de récupération par email & SMS",
+        subtitle: "Conseils gratuits. Désabonnez-vous à tout moment.",
+        emailPlaceholder: "Email",
+        phonePlaceholder: "Téléphone (optionnel)",
+        subscribe: "S'inscrire",
+        errorRequired: "Veuillez entrer votre adresse email",
+        errorGeneric: "Une erreur s'est produite. Veuillez réessayer.",
+    },
+    es: {
+        subscribed: "¡Estás suscrito! Revisa tu bandeja de entrada.",
+        title: "Recibe consejos de recuperación por email y SMS",
+        subtitle: "Orientación gratuita. Cancela cuando quieras.",
+        emailPlaceholder: "Email",
+        phonePlaceholder: "Teléfono (opcional)",
+        subscribe: "Suscribirse",
+        errorRequired: "Por favor ingresa tu dirección de email",
+        errorGeneric: "Algo salió mal. Por favor intenta de nuevo.",
+    },
+    it: {
+        subscribed: "Sei iscritto! Controlla la tua casella di posta.",
+        title: "Ricevi consigli di recupero via email e SMS",
+        subtitle: "Guida gratuita. Annulla l'iscrizione in qualsiasi momento.",
+        emailPlaceholder: "Email",
+        phonePlaceholder: "Telefono (opzionale)",
+        subscribe: "Iscriviti",
+        errorRequired: "Per favore inserisci il tuo indirizzo email",
+        errorGeneric: "Qualcosa è andato storto. Per favore riprova.",
+    },
+};
+
 interface SubscribeBlockFormProps {
     variant?: "section" | "compact";
     source?: string;
+    lang?: Lang;
 }
 
 export function SubscribeBlockForm({
     variant = "section",
     source = "subscribe_block",
+    lang = "en",
 }: SubscribeBlockFormProps) {
+    const t = translations[lang] || translations.en;
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,7 +95,7 @@ export function SubscribeBlockForm({
         setError("");
 
         if (!email) {
-            setError("Please enter your email address");
+            setError(t.errorRequired);
             return;
         }
 
@@ -91,7 +149,7 @@ export function SubscribeBlockForm({
             setError(
                 err instanceof Error
                     ? err.message
-                    : "Something went wrong. Please try again.",
+                    : t.errorGeneric,
             );
             console.error("Error subscribing:", err);
         } finally {
@@ -114,7 +172,7 @@ export function SubscribeBlockForm({
                 <div className="flex items-center gap-2 text-primary">
                     <Mail className="w-4 h-4" />
                     <p className="font-medium text-sm">
-                        You're subscribed! Check your inbox.
+                        {t.subscribed}
                     </p>
                 </div>
             </div>
@@ -142,10 +200,10 @@ export function SubscribeBlockForm({
                     </div>
                     <div>
                         <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">
-                            Get recovery tips by email & SMS
+                            {t.title}
                         </h3>
                         <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                            Free guidance. Unsubscribe anytime.
+                            {t.subtitle}
                         </p>
                     </div>
                 </div>
@@ -159,7 +217,7 @@ export function SubscribeBlockForm({
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        placeholder="Email"
+                        placeholder={t.emailPlaceholder}
                         autoComplete="email"
                         disabled={isSubmitting}
                         className="flex-1 bg-white dark:bg-neutral-800 disabled:opacity-50 px-3 py-2.5 border border-neutral-200 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary min-w-0 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 text-sm"
@@ -168,7 +226,7 @@ export function SubscribeBlockForm({
                         type="tel"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        placeholder="Phone (optional)"
+                        placeholder={t.phonePlaceholder}
                         autoComplete="tel"
                         disabled={isSubmitting}
                         className="flex-1 bg-white dark:bg-neutral-800 disabled:opacity-50 px-3 py-2.5 border border-neutral-200 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary min-w-0 max-w-[140px] sm:max-w-[200px] text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 text-sm"
@@ -187,7 +245,7 @@ export function SubscribeBlockForm({
                         {isSubmitting
                             ? <Loader2 className="w-4 h-4 animate-spin" />
                             : (
-                                "Subscribe"
+                                t.subscribe
                             )}
                     </button>
                 </form>

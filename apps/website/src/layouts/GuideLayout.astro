@@ -82,7 +82,7 @@ const nextPhase = currentIndex < guidePhases.length - 1 ? guidePhases[currentInd
                     <h1 class="mb-6 font-bold text-neutral-900 text-3xl md:text-4xl lg:text-5xl leading-tight">{title}</h1>
                     <p class="mb-8 text-neutral-600 text-lg">{description}</p>
                     
-                    <SubscribeBlock source="guide_article" variant="compact" />
+                    <SubscribeBlock source="guide_article" variant="compact" lang={lang} />
                 </div>
                 <Image 
                     class="hidden lg:block flex-shrink-0 max-h-[50vh] object-contain" 
