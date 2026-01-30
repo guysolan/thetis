@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import DrivingRestrictions from "@/assets/driving-restrictions-v3-with-mike.png";
 
 export const metadata = {
     slug: "driving-guidelines",
@@ -42,6 +43,12 @@ export const content: SectionContent = {
                         "Safety first — when in doubt, don't drive",
                 },
             ],
+        },
+        {
+            type: "image",
+            src: DrivingRestrictions,
+            alt: "Comparison showing driving restrictions: Right leg injured (cannot drive while in boot, week 10-12 earliest) vs Left leg injured (potentially weeks 4-6 with automatic car)",
+            caption: "Driving restrictions depend on which leg is injured and your car type",
         },
         {
             type: "section",

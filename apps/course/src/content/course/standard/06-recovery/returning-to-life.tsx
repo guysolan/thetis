@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import ReturningToWork from "@/assets/returning-to-work-v3-split-panel-fixed.png";
 
 export const metadata = {
     slug: "returning-to-life",
@@ -42,6 +43,13 @@ export const content: SectionContent = {
                     type: "text",
                     content:
                         "By Week 22, many people have returned to work or are planning to. How this works depends on your job type and recovery progress.",
+                },
+                {
+                    type: "image",
+                    src: ReturningToWork,
+                    alt: "Week 22 infographic showing returning to work guidance: Desk jobs (Week 6-10 possible, take breaks, ergonomic setup), Physical jobs (modified duties, gradual return, follow clinician guidance), Household & Daily Life (safe activities like cooking, shopping, social; avoid/modify heavy lifting, ladders, prolonged standing), and Managing Energy (listen to your body, plan rest periods, don't overdo it)",
+                    caption:
+                        "Returning to work and daily life: guidance for desk jobs, physical jobs, household tasks, and managing energy",
                 },
                 {
                     type: "card",
