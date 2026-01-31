@@ -42,11 +42,36 @@
       "type": "channel"
     },
     {
+      "ref": "delay_2a",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 1
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 2 - Pain management",
+      "ref": "email_12",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Managing pain: what's normal vs when to worry",
+        "visual_blocks@": "email_12/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
       "ref": "delay_2",
       "settings": {
         "delay_for": {
           "unit": "days",
-          "value": 2
+          "value": 1
         }
       },
       "type": "delay"
@@ -167,11 +192,36 @@
       "type": "channel"
     },
     {
-      "ref": "delay_7",
+      "ref": "delay_7a",
       "settings": {
         "delay_for": {
           "unit": "days",
           "value": 7
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 17 - Returning to work",
+      "ref": "email_13",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Thinking about returning to work?",
+        "visual_blocks@": "email_13/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_7",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 4
         }
       },
       "type": "delay"
@@ -217,11 +267,36 @@
       "type": "channel"
     },
     {
+      "ref": "delay_9a",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 7
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 42 - Rerupture prevention",
+      "ref": "email_14",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Preventing rerupture: what you need to know",
+        "visual_blocks@": "email_14/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
       "ref": "delay_9",
       "settings": {
         "delay_for": {
           "unit": "days",
-          "value": 14
+          "value": 7
         }
       },
       "type": "delay"
@@ -230,14 +305,14 @@
       "channel_key": "knock-email",
       "channel_type": "email",
       "name": "Day 49 - Preparing for boot removal",
-      "ref": "email_11",
+      "ref": "email_10",
       "template": {
         "settings": {
           "attachment_key": "attachments",
           "layout_key": "default"
         },
         "subject": "Preparing for life after the boot",
-        "visual_blocks@": "email_11/visual_blocks.json"
+        "visual_blocks@": "email_10/visual_blocks.json"
       },
       "type": "channel"
     },
@@ -255,14 +330,14 @@
       "channel_key": "knock-email",
       "channel_type": "email",
       "name": "Day 70 - Week 10 check-in",
-      "ref": "email_10",
+      "ref": "email_11",
       "template": {
         "settings": {
           "attachment_key": "attachments",
           "layout_key": "default"
         },
         "subject": "How far you've come",
-        "visual_blocks@": "email_10/visual_blocks.json"
+        "visual_blocks@": "email_11/visual_blocks.json"
       },
       "type": "channel"
     }
