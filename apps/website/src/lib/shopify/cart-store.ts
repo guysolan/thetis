@@ -10,6 +10,7 @@ import {
     removeFromCart as removeFromCartApi,
     updateCartLine,
 } from "./storefront";
+import { trackAddToCart, trackRemoveFromCart } from "../analytics";
 
 export type { Cart } from "./storefront";
 
@@ -120,6 +121,24 @@ export async function addToCart(
         $cart.set(updatedCart);
         $isLoading.set(false);
 
+        // Track add_to_cart event for GA4
+        const addedLine = updatedCart.lines.edges.find(
+            (edge) => edge.node.merchandise.id === variantId,
+        );
+        if (addedLine) {
+            const item = addedLine.node;
+            trackAddToCart({
+                id: item.merchandise.id,
+                name: item.merchandise.product.title,
+                price: parseFloat(item.merchandise.price.amount),
+                quantity,
+                currency: item.merchandise.price.currencyCode,
+                variant: item.merchandise.title !== "Default Title"
+                    ? item.merchandise.title
+                    : undefined,
+            });
+        }
+
         // Only open cart drawer if explicitly requested (defaults to true for backwards compatibility)
         if (shouldOpenCart) {
             openCart();
@@ -169,6 +188,11 @@ export async function removeItem(lineId: string): Promise<Cart | null> {
     const currentCart = $cart.get();
     if (!currentCart?.id) return null;
 
+    // Get item info before removing for analytics tracking
+    const removedLine = currentCart.lines.edges.find(
+        (edge) => edge.node.id === lineId,
+    );
+
     $isLoading.set(true);
     $error.set(null);
 
@@ -176,6 +200,22 @@ export async function removeItem(lineId: string): Promise<Cart | null> {
         const updatedCart = await removeFromCartApi(currentCart.id, lineId);
         $cart.set(updatedCart);
         $isLoading.set(false);
+
+        // Track remove_from_cart event for GA4
+        if (removedLine) {
+            const item = removedLine.node;
+            trackRemoveFromCart({
+                id: item.merchandise.id,
+                name: item.merchandise.product.title,
+                price: parseFloat(item.merchandise.price.amount),
+                quantity: item.quantity,
+                currency: item.merchandise.price.currencyCode,
+                variant: item.merchandise.title !== "Default Title"
+                    ? item.merchandise.title
+                    : undefined,
+            });
+        }
+
         return updatedCart;
     } catch (error) {
         const message = error instanceof Error

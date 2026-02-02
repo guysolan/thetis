@@ -1369,6 +1369,28 @@ const currentContent = content[lang as keyof typeof content] || content.en;
     </main>
 
     <script>
+        // Track view_item event for GA4 e-commerce tracking
+        document.addEventListener("DOMContentLoaded", () => {
+            // Push view_item event to dataLayer
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ ecommerce: null }); // Clear previous ecommerce data
+            window.dataLayer.push({
+                event: "view_item",
+                ecommerce: {
+                    currency: "GBP",
+                    value: 49.99, // Default price, actual price varies by region
+                    items: [
+                        {
+                            item_id: "gid://shopify/ProductVariant/47494539673928",
+                            item_name: "Achilles Tendon Rupture Splint",
+                            price: 49.99,
+                            quantity: 1,
+                        },
+                    ],
+                },
+            });
+        });
+
         // Lazy load YouTube iframe when user clicks on placeholder
         document.addEventListener("DOMContentLoaded", () => {
             const placeholder = document.getElementById("youtube-placeholder");

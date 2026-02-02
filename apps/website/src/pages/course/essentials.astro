@@ -514,6 +514,36 @@ const whatYoullLearn = [
         <StickyAddToCart variant="course" lang="en" client:load />
     </main>
 
+    <!-- GA4 view_item tracking -->
+    <script
+        define:vars={{
+            variantId: "gid://shopify/ProductVariant/52265314353480",
+            itemName: "Recovery Essentials Course",
+            defaultPrice: 29.99,
+        }}
+    >
+        // Track view_item event for GA4
+        document.addEventListener("DOMContentLoaded", () => {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ ecommerce: null }); // Clear previous ecommerce data
+            window.dataLayer.push({
+                event: "view_item",
+                ecommerce: {
+                    currency: "GBP",
+                    value: defaultPrice,
+                    items: [
+                        {
+                            item_id: variantId,
+                            item_name: itemName,
+                            price: defaultPrice,
+                            quantity: 1,
+                        },
+                    ],
+                },
+            });
+        });
+    </script>
+
     <!-- Client-side price update script -->
     <script
         define:vars={{ productId: SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE }}

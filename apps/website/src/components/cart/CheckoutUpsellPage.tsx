@@ -37,6 +37,7 @@ import {
 } from "lucide-react";
 import TrustClaims from "../TrustClaims";
 import { PaymentIcons } from "../PaymentIcons";
+import { trackBeginCheckout } from "@/lib/analytics";
 
 export function CheckoutUpsellPage() {
     const cartLines = useStore($cartLines);
@@ -87,6 +88,22 @@ export function CheckoutUpsellPage() {
     };
 
     const handleContinueToCheckout = () => {
+        // Track begin_checkout event for GA4
+        if (cartLines.length > 0) {
+            trackBeginCheckout(
+                cartLines.map((line) => ({
+                    id: line.merchandise.id,
+                    name: line.merchandise.product.title,
+                    price: parseFloat(line.merchandise.price.amount),
+                    quantity: line.quantity,
+                    currency: line.merchandise.price.currencyCode,
+                    variant: line.merchandise.title !== "Default Title"
+                        ? line.merchandise.title
+                        : undefined,
+                })),
+            );
+        }
+
         if (checkoutUrl) {
             // Apply discount code if available (for Amazon customers)
             const discountCode = sessionStorage.getItem("amazonDiscountCode");
@@ -361,17 +378,19 @@ function UpsellProductCard({
             }`}
         >
             <div className="flex items-start gap-4">
-                {productImage ? (
-                    <img
-                        src={productImage}
-                        alt={product.title}
-                        className="rounded-lg w-24 h-24 object-cover shrink-0 border border-neutral-200 dark:border-neutral-700"
-                    />
-                ) : (
-                    <div className="flex justify-center items-center bg-neutral-100 dark:bg-neutral-700 rounded-lg w-24 h-24 shrink-0">
-                        <ShoppingBag className="w-10 h-10 text-neutral-400" />
-                    </div>
-                )}
+                {productImage
+                    ? (
+                        <img
+                            src={productImage}
+                            alt={product.title}
+                            className="border border-neutral-200 dark:border-neutral-700 rounded-lg w-24 h-24 object-cover shrink-0"
+                        />
+                    )
+                    : (
+                        <div className="flex justify-center items-center bg-neutral-100 dark:bg-neutral-700 rounded-lg w-24 h-24 shrink-0">
+                            <ShoppingBag className="w-10 h-10 text-neutral-400" />
+                        </div>
+                    )}
                 <div className="flex-1 min-w-0">
                     <h3 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
                         {product.title}
@@ -413,120 +432,120 @@ function UpsellProductCard({
             </div>
             {/* Course Info Accordion - full width below the product info */}
             {isCourse && course && (
-                        <Accordion
-                            type="single"
-                            collapsible
-                            className="mt-2 w-full"
-                        >
-                            <AccordionItem
-                                value="course-info"
-                                className="border-none"
-                            >
-                                <AccordionTrigger className="py-2 font-medium text-primary text-sm hover:no-underline">
-                                    Learn more about this course
-                                </AccordionTrigger>
-                                <AccordionContent className="pt-2 pb-0">
-                                    <div className="space-y-4">
-                                        {/* Description */}
-                                        <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                                            {course.description}
-                                        </p>
+                <Accordion
+                    type="single"
+                    collapsible
+                    className="mt-2 w-full"
+                >
+                    <AccordionItem
+                        value="course-info"
+                        className="border-none"
+                    >
+                        <AccordionTrigger className="py-2 font-medium text-primary text-sm hover:no-underline">
+                            Learn more about this course
+                        </AccordionTrigger>
+                        <AccordionContent className="pt-2 pb-0">
+                            <div className="space-y-4">
+                                {/* Description */}
+                                <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+                                    {course.description}
+                                </p>
 
-                                        {/* Features */}
-                                        <div>
-                                            <h5 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-                                                What's Included
-                                            </h5>
-                                            <div className="space-y-1.5">
-                                                {course.features.map((
-                                                    feature,
-                                                    index,
-                                                ) => (
-                                                    <div
-                                                        key={index}
-                                                        className="flex items-start gap-2"
-                                                    >
-                                                        <Check className="mt-0.5 w-3.5 h-3.5 text-primary shrink-0" />
-                                                        <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-                                                            {feature}
-                                                        </span>
-                                                    </div>
-                                                ))}
+                                {/* Features */}
+                                <div>
+                                    <h5 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                        What's Included
+                                    </h5>
+                                    <div className="space-y-1.5">
+                                        {course.features.map((
+                                            feature,
+                                            index,
+                                        ) => (
+                                            <div
+                                                key={index}
+                                                className="flex items-start gap-2"
+                                            >
+                                                <Check className="mt-0.5 w-3.5 h-3.5 text-primary shrink-0" />
+                                                <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+                                                    {feature}
+                                                </span>
                                             </div>
-                                        </div>
-
-                                        {/* What You'll Learn (Standard) or Video Topics (Premium) */}
-                                        {courseType === "standard" &&
-                                            "whatYoullLearn" in course &&
-                                            course.whatYoullLearn && (
-                                            <div>
-                                                <h5 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-                                                    What You'll Learn
-                                                </h5>
-                                                <div className="space-y-2">
-                                                    {course.whatYoullLearn.map((
-                                                        item: {
-                                                            title: string;
-                                                            description: string;
-                                                        },
-                                                        index: number,
-                                                    ) => (
-                                                        <div
-                                                            key={index}
-                                                            className="bg-neutral-50 dark:bg-neutral-800 p-3 rounded text-sm"
-                                                        >
-                                                            <h6 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-                                                                {item.title}
-                                                            </h6>
-                                                            <p className="text-neutral-600 dark:text-neutral-400 text-xs">
-                                                                {item
-                                                                    .description}
-                                                            </p>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-
-                                        {courseType === "premium" &&
-                                            "videoTopics" in course &&
-                                            course.videoTopics && (
-                                            <div>
-                                                <div className="flex items-center gap-2 mb-2">
-                                                    <Video className="w-4 h-4 text-primary" />
-                                                    <h5 className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-                                                        Expert Video Lessons
-                                                    </h5>
-                                                </div>
-                                                <div className="space-y-2">
-                                                    {course.videoTopics.map((
-                                                        topic: {
-                                                            title: string;
-                                                            description: string;
-                                                        },
-                                                        index: number,
-                                                    ) => (
-                                                        <div
-                                                            key={index}
-                                                            className="bg-neutral-50 dark:bg-neutral-800 p-3 rounded text-sm"
-                                                        >
-                                                            <h6 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-                                                                {topic.title}
-                                                            </h6>
-                                                            <p className="text-neutral-600 dark:text-neutral-400 text-xs">
-                                                                {topic
-                                                                    .description}
-                                                            </p>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
+                                        ))}
                                     </div>
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
-                    )}
+                                </div>
+
+                                {/* What You'll Learn (Standard) or Video Topics (Premium) */}
+                                {courseType === "standard" &&
+                                    "whatYoullLearn" in course &&
+                                    course.whatYoullLearn && (
+                                    <div>
+                                        <h5 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                            What You'll Learn
+                                        </h5>
+                                        <div className="space-y-2">
+                                            {course.whatYoullLearn.map((
+                                                item: {
+                                                    title: string;
+                                                    description: string;
+                                                },
+                                                index: number,
+                                            ) => (
+                                                <div
+                                                    key={index}
+                                                    className="bg-neutral-50 dark:bg-neutral-800 p-3 rounded text-sm"
+                                                >
+                                                    <h6 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                                        {item.title}
+                                                    </h6>
+                                                    <p className="text-neutral-600 dark:text-neutral-400 text-xs">
+                                                        {item
+                                                            .description}
+                                                    </p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {courseType === "premium" &&
+                                    "videoTopics" in course &&
+                                    course.videoTopics && (
+                                    <div>
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <Video className="w-4 h-4 text-primary" />
+                                            <h5 className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                                Expert Video Lessons
+                                            </h5>
+                                        </div>
+                                        <div className="space-y-2">
+                                            {course.videoTopics.map((
+                                                topic: {
+                                                    title: string;
+                                                    description: string;
+                                                },
+                                                index: number,
+                                            ) => (
+                                                <div
+                                                    key={index}
+                                                    className="bg-neutral-50 dark:bg-neutral-800 p-3 rounded text-sm"
+                                                >
+                                                    <h6 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                                                        {topic.title}
+                                                    </h6>
+                                                    <p className="text-neutral-600 dark:text-neutral-400 text-xs">
+                                                        {topic
+                                                            .description}
+                                                    </p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </AccordionContent>
+                    </AccordionItem>
+                </Accordion>
+            )}
 
             {/* Benefits */}
             {!isAdded && isPrimaryUpsell && (

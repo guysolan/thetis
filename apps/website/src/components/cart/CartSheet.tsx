@@ -46,6 +46,7 @@ import {
 } from "@thetis/ui/accordion";
 import { courseData } from "@/lib/course-data";
 import { cn } from "@/lib/utils";
+import { trackBeginCheckout } from "@/lib/analytics";
 
 export function CartSheet() {
     const cart = useStore($cart);
@@ -89,6 +90,22 @@ export function CartSheet() {
     };
 
     const handleCheckoutClick = () => {
+        // Track begin_checkout event for GA4
+        if (cartLines.length > 0) {
+            trackBeginCheckout(
+                cartLines.map((line) => ({
+                    id: line.merchandise.id,
+                    name: line.merchandise.product.title,
+                    price: parseFloat(line.merchandise.price.amount),
+                    quantity: line.quantity,
+                    currency: line.merchandise.price.currencyCode,
+                    variant: line.merchandise.title !== "Default Title"
+                        ? line.merchandise.title
+                        : undefined,
+                })),
+            );
+        }
+
         // If there are no upsell suggestions, go straight to Shopify checkout
         // Otherwise, go to the confirm page where user can add/remove items
         closeCart();
@@ -550,17 +567,19 @@ function UpsellItem({ product }: UpsellItemProps) {
         <div className="flex flex-col gap-2 bg-primary/5 hover:bg-primary/10 p-3 border border-primary/20 rounded-lg transition-colors">
             <div className="flex items-center gap-3">
                 {/* Product Image */}
-                {productImage ? (
-                    <img
-                        src={productImage}
-                        alt={product.title}
-                        className="rounded-md w-14 h-14 object-cover shrink-0 border border-neutral-200"
-                    />
-                ) : (
-                    <div className="flex justify-center items-center bg-neutral-100 rounded-md w-14 h-14 shrink-0">
-                        <ShoppingBag className="w-6 h-6 text-neutral-400" />
-                    </div>
-                )}
+                {productImage
+                    ? (
+                        <img
+                            src={productImage}
+                            alt={product.title}
+                            className="border border-neutral-200 rounded-md w-14 h-14 object-cover shrink-0"
+                        />
+                    )
+                    : (
+                        <div className="flex justify-center items-center bg-neutral-100 rounded-md w-14 h-14 shrink-0">
+                            <ShoppingBag className="w-6 h-6 text-neutral-400" />
+                        </div>
+                    )}
                 <div className="flex-1 min-w-0">
                     <h4 className="font-medium text-neutral-900 text-sm truncate">
                         {product.title}
