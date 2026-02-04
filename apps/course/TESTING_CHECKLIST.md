@@ -9,11 +9,11 @@
 - [x] Sign out functionality
 - [x] Protected routes redirect unauthenticated users
 
-### Enrollment & Access Control
-- [x] Enrollment checking by user_id and email
-- [x] Auto-linking enrollments when user signs up
+### Purchases & Access Control
+- [x] Purchase/course access checking by shopify_customer_email (and user_id when linked)
+- [x] Auto-linking purchases when user signs up (trigger on users insert)
 - [x] Course access gating (ProtectedRoute component)
-- [x] RLS policies for enrollment viewing
+- [x] RLS policies for purchases (anon can view)
 - [x] Seed data for testing (guy@thetismedical.com)
 
 ### Progress Tracking
@@ -34,10 +34,10 @@
 ## 🧪 Needs Testing
 
 ### End-to-End Flow
-- [ ] **Purchase → Webhook → Enrollment → Access**
+- [ ] **Purchase → Webhook → Purchases → Access**
   1. Create a test Shopify order with course product
   2. Verify webhook receives order
-  3. Check enrollment is created in Supabase
+  3. Check row is created in `purchases` table (Supabase)
   4. Sign in with order email
   5. Verify course access is granted
   6. Test accessing course content
@@ -52,19 +52,19 @@
 
 ### Edge Cases
 - [ ] User purchases course but hasn't signed up yet
-  - Enrollment should be created with email only
+  - Purchase row should be created with shopify_customer_email only
   - User should be able to sign up later and get access
 - [ ] User signs up with different email than Shopify order
-  - Should still link enrollment if email matches
+  - Should still link purchase if email matches
 - [ ] User completes lessons out of order
   - Progress stepper should show correct status
 - [ ] User marks lesson complete, then unmarks it
   - Should update database correctly
-- [ ] Multiple enrollments for same user
-  - Should show all enrolled courses in nav
+- [ ] Multiple course purchases for same user
+  - Should show all purchased courses in nav
 
 ### Premium Course
-- [ ] Test premium course enrollment
+- [ ] Test premium course purchase / access
 - [ ] Test premium course access gating
 - [ ] Verify premium routes work correctly
 - [ ] Test premium course progress tracking (if applicable)
@@ -73,7 +73,7 @@
 - [ ] Network errors when saving progress
 - [ ] Database connection errors
 - [ ] Invalid section slugs
-- [ ] Missing enrollment data
+- [ ] Missing purchase data (no row in purchases)
 - [ ] Expired auth sessions
 
 ## 🚧 Not Yet Implemented
@@ -87,7 +87,7 @@
 ### Order Verification Page (Optional)
 - [ ] Manual order linking page (`/verify-order`)
 - [ ] For cases where webhook fails
-- [ ] User enters order number + email to link enrollment
+- [ ] User enters order number + email to link/claim purchase
 
 ### Production Deployment
 - [ ] Set up production Supabase instance
@@ -101,7 +101,7 @@
 
 ### Scenario 1: New User Purchase Flow
 1. User purchases Standard course on Shopify
-2. Webhook creates enrollment with email
+2. Webhook creates purchase row with shopify_customer_email
 3. User receives email with magic link
 4. User clicks magic link → signs in
 5. User sees "Welcome back" dashboard
@@ -112,8 +112,8 @@
 ### Scenario 2: Existing User Purchase
 1. User is already signed up
 2. User purchases Premium course
-3. Webhook creates enrollment
-4. Enrollment auto-links to existing user account
+3. Webhook creates purchase
+4. Purchase auto-links to existing user account (trigger)
 5. User immediately sees Premium course access
 6. User can access Premium course
 
@@ -140,7 +140,7 @@
 - [ ] No TypeScript errors
 - [ ] All routes load correctly
 - [ ] Progress saves reliably
-- [ ] Enrollment checks are fast (< 500ms)
+- [ ] Purchase/access checks are fast (< 500ms)
 - [ ] UI is responsive on mobile
 - [ ] Loading states show appropriately
 - [ ] Error messages are user-friendly

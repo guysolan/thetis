@@ -18,12 +18,14 @@ Required in Supabase Dashboard → Project Settings → Edge Functions:
 
 ## Deployment
 
+This function is invoked by the database trigger via `pg_net` (no user JWT), so deploy with `--no-verify-jwt`:
+
 ```bash
-# Deploy the edge function
-supabase functions deploy trigger-knock-subscribe --project-ref kdgnytysuzxhnmpfvdfr
+# Deploy the edge function (--no-verify-jwt required: called from pg_net without a user token)
+supabase functions deploy trigger-knock-subscribe --no-verify-jwt
 
 # Set the secret
-supabase secrets set KNOCK_API_KEY=your_knock_api_key --project-ref kdgnytysuzxhnmpfvdfr
+supabase secrets set KNOCK_API_KEY=your_knock_api_key
 ```
 
 ## Database Setup

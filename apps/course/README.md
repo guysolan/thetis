@@ -71,7 +71,7 @@ The app will be available at `http://localhost:2222`
 The app uses Supabase for:
 
 - **Authentication**: Magic links and OTP codes
-- **Course Access**: Checking enrollments from Shopify orders
+- **Course Access**: Checking purchases from Shopify orders (course access via `purchases` table)
 - **Progress Tracking**: User progress through course sections
 
 ### Using Supabase Client
@@ -79,14 +79,14 @@ The app uses Supabase for:
 ```typescript
 import { supabase } from "@/lib/supabase";
 
-// Example: Check if user has access to a course
+// Example: Check if user has access to a course (use purchases table; product_slug: standard_course | premium_course)
 const { data } = await supabase
-  .from("enrollments")
+  .from("purchases")
   .select("*")
-  .eq("user_id", userId)
-  .eq("course_type", "standard")
+  .eq("shopify_customer_email", userEmail)
+  .eq("product_slug", "standard_course")
   .eq("status", "active")
-  .single();
+  .limit(1);
 ```
 
 ### Using Auth Hook

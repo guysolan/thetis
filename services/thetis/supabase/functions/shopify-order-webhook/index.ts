@@ -2,10 +2,6 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { createHmac } from "node:crypto";
 
-// Pre-rendered React Email template (built from packages/email/emails/course/course-access.tsx)
-// Run `bun packages/email/emails/course/build-template.ts` to regenerate
-import { renderCourseAccessEmail } from "./email-template.ts";
-
 // Shopify product IDs -> product_slug (extensible for splint, future products)
 // Add SPLINT_PRODUCT_ID in Supabase secrets when you have the ID from Shopify Admin
 function buildProductToSlug(): Record<string, string> {
@@ -20,9 +16,6 @@ function buildProductToSlug(): Record<string, string> {
 const PRODUCT_TO_SLUG = buildProductToSlug();
 
 const COURSE_SLUGS = ["standard_course", "premium_course"];
-function isCourseSlug(slug: string): boolean {
-    return COURSE_SLUGS.includes(slug);
-}
 
 // Verify Shopify webhook signature
 function verifyShopifyWebhook(
@@ -319,59 +312,6 @@ Deno.serve(async (req) => {
             error_message: errors.length > 0 ? errors.join("; ") : null,
         })
         .eq("event_id", webhookId);
-
-    // Send course access email if any course was purchased
-    const courseSlugsInOrder = productsOrdered.filter(isCourseSlug);
-    if (courseSlugsInOrder.length > 0) {
-        const COURSE_URL = Deno.env.get("COURSE_URL") ||
-            "https://course.thetismedical.com";
-        const claimUrl = `${COURSE_URL}/claim?email=${
-            encodeURIComponent(customerEmail)
-        }&order=${encodeURIComponent(`#${order.order_number}`)}`;
-        const firstCourseSlug = courseSlugsInOrder[0];
-        const courseTypeForEmail =
-            firstCourseSlug === "premium_course" ? "premium" : "standard";
-
-        const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-        if (RESEND_API_KEY) {
-            try {
-                const emailHtml = renderCourseAccessEmail({
-                    customerEmail,
-                    orderNumber: String(order.order_number),
-                    courseType: courseTypeForEmail,
-                    claimUrl,
-                });
-                const emailResponse = await fetch(
-                    "https://api.resend.com/emails",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Authorization": `Bearer ${RESEND_API_KEY}`,
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            from:
-                                "Thetis Medical <welcome@course.thetismedical.com>",
-                            to: [customerEmail],
-                            subject:
-                                "🎉 Your Achilles Recovery Course is Ready!",
-                            html: emailHtml,
-                        }),
-                    },
-                );
-                if (!emailResponse.ok) {
-                    const errorText = await emailResponse.text();
-                    console.error("Failed to send email:", errorText);
-                } else {
-                    console.log(`Course access email sent to ${customerEmail}`);
-                }
-            } catch (emailError) {
-                console.error("Error sending email:", emailError);
-            }
-        } else {
-            console.log("RESEND_API_KEY not set, skipping email send");
-        }
-    }
 
     // Trigger Knock post-purchase workflows (one per product type: course, splint)
     const KNOCK_API_KEY = Deno.env.get("KNOCK_API_KEY");
