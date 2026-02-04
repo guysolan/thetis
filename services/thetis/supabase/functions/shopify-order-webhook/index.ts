@@ -184,7 +184,9 @@ Deno.serve(async (req) => {
             (i) => `${i.product_id} (${i.title})`,
         );
         console.log(
-            `Order ${order.order_number} contains no tracked products. Line item product_ids: ${productIdsInOrder.join(", ")}. To track the splint, set SPLINT_PRODUCT_ID in Supabase secrets to the splint's Shopify product_id (e.g. from Admin → Products → splint → ID in URL).`,
+            `Order ${order.order_number} contains no tracked products. Line item product_ids: ${
+                productIdsInOrder.join(", ")
+            }. Tracked: courses 9846187786568, 9846188081480; splint 8572432253256.`,
         );
         await supabase
             .from("webhook_events")
@@ -315,9 +317,7 @@ Deno.serve(async (req) => {
     // Trigger Knock post-purchase workflows (one per product type: course, splint)
     const KNOCK_API_KEY = Deno.env.get("KNOCK_API_KEY");
     if (KNOCK_API_KEY && productsOrdered.length > 0) {
-        const hasCourse = productsOrdered.some((s) =>
-            COURSE_SLUGS.includes(s)
-        );
+        const hasCourse = productsOrdered.some((s) => COURSE_SLUGS.includes(s));
         const hasSplint = productsOrdered.includes("splint");
         const COURSE_URL = Deno.env.get("COURSE_URL") ||
             "https://course.thetismedical.com";
@@ -354,8 +354,14 @@ Deno.serve(async (req) => {
                         }),
                     },
                 );
-                if (!r.ok) console.error("Knock course trigger failed:", await r.text());
-                else console.log(`Knock post-purchase-course triggered for order #${order.order_number}`);
+                if (!r.ok) {
+                    console.error(
+                        "Knock course trigger failed:",
+                        await r.text(),
+                    );
+                } else {console.log(
+                        `Knock post-purchase-course triggered for order #${order.order_number}`,
+                    );}
             } catch (e) {
                 console.error("Knock course trigger error:", e);
             }
@@ -382,8 +388,14 @@ Deno.serve(async (req) => {
                         }),
                     },
                 );
-                if (!r.ok) console.error("Knock splint trigger failed:", await r.text());
-                else console.log(`Knock post-purchase-splint triggered for order #${order.order_number}`);
+                if (!r.ok) {
+                    console.error(
+                        "Knock splint trigger failed:",
+                        await r.text(),
+                    );
+                } else {console.log(
+                        `Knock post-purchase-splint triggered for order #${order.order_number}`,
+                    );}
             } catch (e) {
                 console.error("Knock splint trigger error:", e);
             }
