@@ -1,0 +1,79 @@
+{
+  "name": "Post-purchase (Splint)",
+  "steps": [
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 0 - Thank you",
+      "ref": "thank_you",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Thanks for your Thetis Splint",
+        "visual_blocks@": "thank_you/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_1",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 4
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 4 - Setup tips",
+      "ref": "tips",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Getting the most from your Thetis Splint",
+        "visual_blocks@": "tips/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_2",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 6
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 10 - Review ask",
+      "ref": "review_ask",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "How's the splint? Your feedback helps others",
+        "visual_blocks@": "review_ask/visual_blocks.json"
+      },
+      "type": "channel"
+    }
+  ],
+  "trigger_frequency": "every_trigger",
+  "__readonly": {
+    "environment": "development",
+    "key": "post-purchase-splint",
+    "active": true,
+    "valid": true,
+    "created_at": "2026-02-04T11:14:07.765488Z"
+  },
+  "$schema": "https://schemas.knock.app/cli/workflow.json"
+}

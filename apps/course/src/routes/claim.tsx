@@ -63,15 +63,15 @@ function ClaimPage() {
             }
 
             try {
-                // Check if enrollment exists for this email (with or without order number)
+                // Check if course purchase exists for this email (purchases table)
                 let query = supabase
-                    .from("enrollments")
-                    .select("course_type, shopify_order_number, status")
+                    .from("purchases")
+                    .select("product_slug, shopify_order_number, status")
                     .eq("shopify_customer_email", emailToCheck)
                     .eq("status", "active")
+                    .in("product_slug", ["standard_course", "premium_course"])
                     .limit(1);
 
-                // If we have order params, also match by order number
                 if (hasOrderParams && order) {
                     const orderNumber = order.startsWith("#")
                         ? order
@@ -81,7 +81,6 @@ function ClaimPage() {
 
                 const { data, error } = await query.maybeSingle();
 
-                // Debug logging
                 console.log("Claim page - checking purchase:", {
                     email: emailToCheck,
                     hasOrderParams,
@@ -91,19 +90,17 @@ function ClaimPage() {
                 });
 
                 if (error || !data) {
-                    // No purchase found
-                    console.log("No purchase found:", error);
                     setHasPurchase(false);
-                    if (hasOrderParams) {
-                        setOrderValid(false);
-                    }
+                    if (hasOrderParams) setOrderValid(false);
                 } else {
-                    // Purchase found!
-                    console.log("Purchase found!", data);
                     setHasPurchase(true);
                     setOrderValid(true);
+                    const courseType =
+                        data.product_slug === "premium_course"
+                            ? "premium"
+                            : "standard";
                     setEnrollmentInfo({
-                        courseType: data.course_type,
+                        courseType,
                         orderNumber: data.shopify_order_number,
                     });
                 }
@@ -161,16 +158,15 @@ function ClaimPage() {
             return;
         }
 
-        // Check if email has purchase
         try {
             let query = supabase
-                .from("enrollments")
-                .select("course_type, shopify_order_number, status")
+                .from("purchases")
+                .select("product_slug, shopify_order_number, status")
                 .eq("shopify_customer_email", emailToCheck)
                 .eq("status", "active")
+                .in("product_slug", ["standard_course", "premium_course"])
                 .limit(1);
 
-            // If we have order params, also match by order number
             if (hasOrderParams && order) {
                 const orderNumber = order.startsWith("#") ? order : `#${order}`;
                 query = query.eq("shopify_order_number", orderNumber);

@@ -8,7 +8,6 @@ import Slide from "../../../components/Slide.astro";
 import HighlightedWord from "../../../components/HighlightedWord";
 import ColorGradient from "../../../components/ColorGradient.astro";
 import FreeAndSecure from "../../../components/buy-button/FreeAndSecure";
-import LocationSelect from "../../../components/location/LocationSelect";
 import DetailsTable from "../../../components/DetailsTable";
 import CheckWithCareTeam from "../../../components/buy-button/CheckWithCareTeam";
 import {
@@ -16,42 +15,27 @@ import {
     getPurchaseUrl,
     directShipCountries,
 } from "../../../content/buy-button-content";
+import StickyAddToCart from "@/components/StickyAddToCart.tsx";
+import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
+import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
+import { ProductImageGallery } from "@/components/products/ProductImageGallery";
+import ReviewsLink from "@/components/ReviewsLink.tsx";
+import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
+import ValuePropositions from "@/sections/achilles-rupture-splint/ValuePropositions.astro";
+import KeyFeatures from "@/sections/achilles-rupture-splint/KeyFeatures.astro";
+import NightSplintFAQs from "@/sections/achilles-rupture-splint/SplintFAQs.tsx";
+import NightSplintUsage from "@/sections/achilles-rupture-splint/NightSplintUsage.astro";
+import NightSplintInstructions from "@/sections/achilles-rupture-splint/night-splint-instructions/index.astro";
+import AthletesCarousel from "@/components/AthletesCarousel";
+import SurgeonsCarousel from "@/components/SurgeonsCarousel";
+import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
+import SplintDownloads from "@/sections/achilles-rupture-splint/SplintDownloads.astro";
+import { Check, Truck, ShieldCheck, RotateCcw } from "lucide-react";
 
 export const prerender = false;
 
-// Function to detect user's country based on IP
-async function detectUserCountry(): Promise<string> {
-    try {
-        // Get the user's IP from the request headers
-        const forwardedFor = Astro.request.headers.get("x-forwarded-for");
-        const realIp = Astro.request.headers.get("x-real-ip");
-        const ip =
-            forwardedFor?.split(",")[0] ||
-            realIp ||
-            Astro.request.headers.get("cf-connecting-ip");
-
-        if (!ip) {
-            return "US";
-        }
-
-        // Use ipapi.co to get country information
-        const response = await fetch(`https://ipapi.co/${ip}/json/`);
-        const data = await response.json();
-
-        return data.country_code || "US";
-    } catch (error) {
-        console.error("Error detecting user country:", error);
-        return "US"; // Default to US
-    }
-}
-
-// Legacy function for region (us/uk) for existing code
-function countryToRegion(country: string): "us" | "uk" {
-    return country === "GB" ? "uk" : "us";
-}
-
 export async function getStaticPaths() {
-    // Generate paths for all size/side combinations
     const sizes = ["large", "small"];
     const sides = ["left", "right"];
 
@@ -64,42 +48,25 @@ export async function getStaticPaths() {
 
 const { size, side } = Astro.params;
 
-// Detect user's country
-const detectedCountry = await detectUserCountry();
-const region = countryToRegion(detectedCountry);
-
-// Set query parameter based on detected region (defaults to US)
 const url = new URL(Astro.request.url);
-const currentRegion = url.searchParams.get("region") as "us" | "uk" | null;
-const finalRegion = currentRegion || region;
+const region = (url.searchParams.get("region") as "us" | "uk" | null) || "us";
 
-// Check if user is in a country we ship to directly
-const isDirectShipCountry = directShipCountries.includes(detectedCountry);
+const countryForPurchase = region === "uk" ? "GB" : "US";
+const isDirectShipCountry = directShipCountries.includes(countryForPurchase);
 
-// Get purchase info for non-direct-ship countries
 const purchaseInfo = getPurchaseUrl(
-    detectedCountry,
+    countryForPurchase,
     size as "large" | "small",
     side as "left" | "right",
 );
 
-// Get translations
 const t = buyButtonContent.en;
 
-// Get splint data for the detected region
-const splintData = await getSplintData(finalRegion);
-console.log(
-    `Retrieved ${splintData.length} splint records for region: ${finalRegion}`,
-);
-console.log(`First splint price: ${splintData[0]?.price}`);
-
+const splintData = await getSplintData(region);
 const splint = splintData?.find(
     (d) =>
         d.size.toLowerCase() === size && d.title.toLowerCase().includes(side),
 );
-
-console.log(`Found splint: ${splint?.title}`);
-console.log(`Splint price: ${splint?.price}`);
 
 if (!splint) {
     return Astro.redirect("/404");
@@ -110,89 +77,93 @@ const checkoutLink = await getCheckoutLink(
     side as string,
 );
 
-// Generate variant URLs
 const variants = [
     { size: "large", side: "left", label: "Large Left" },
     { size: "large", side: "right", label: "Large Right" },
     { size: "small", side: "left", label: "Small Left" },
     { size: "small", side: "right", label: "Small Right" },
 ];
+
+const splintRoute = getRouteBySlugAndLanguage("splint", "en");
+
+const galleryImages = [
+    { src: splint["image link"], alt: splint.title },
+    {
+        src: "/images/night_splint_white_close.jpg",
+        alt: "Close-up view of Thetis Night Splint",
+    },
+];
 ---
 
-<Layout title={splint.title} description={splint.description} lang="en">
-    <main class="">
+<Fragment slot="head">
+    <NightSplintSchema />
+    <slot name="head" />
+</Fragment>
+
+<Layout
+    title={splint.title}
+    description="Lightweight ankle splint, 30° plantarflexion. Large or Small, Left or Right. Clinician approved. Free shipping. 30-day guarantee."
+    image={splint["image link"]}
+    lang="en"
+>
+    <main>
+        <!-- Hero - Traditional ecom PDP -->
         <ColorGradient>
-            <div class="mx-auto px-4 container">
-                <div
-                    class="items-center gap-12 grid grid-cols-1 lg:grid-cols-2"
-                >
-                    <!-- Product Image -->
-                    <div class="space-y-6">
-                        <img
-                            src={splint["image link"]}
-                            alt={splint.title}
-                            class="shadow-2xl rounded-2xl w-full"
+            <div id="order" class="mx-auto px-4 max-w-7xl scroll-mt-24">
+                <div class="flex lg:flex-row flex-col gap-6 lg:gap-10">
+                    <!-- Product Image Gallery -->
+                    <div class="lg:w-1/2">
+                        <ProductImageGallery
+                            images={galleryImages}
+                            client:load
                         />
                     </div>
 
                     <!-- Product Info -->
-                    <div class="space-y-8">
+                    <div class="flex flex-col lg:w-1/2">
                         <a
-                            href={`/splint?region=${finalRegion}`}
-                            class="text-primary hover:text-primary/80 text-sm underline"
+                            href={`/splint?region=${region}`}
+                            class="mb-2 text-primary hover:text-primary/80 text-sm underline"
                         >
-                            ← View all splint information and details
+                            ← View all splint options
                         </a>
-                        <!-- Region Selection -->
-                        <div class="flex flex-col gap-y-1">
-                            <label class="text-gray-600 text-sm">
-                                Select your region
-                            </label>
-                            <LocationSelect
-                                client:load
-                                finalRegion={finalRegion}
-                            />
+                        <div class="mb-4">
+                            <div
+                                class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full"
+                            >
+                                <span
+                                    class="font-semibold text-primary text-sm uppercase tracking-wider"
+                                    >5,000+ Better Rested Patients</span
+                                >
+                            </div>
                         </div>
-                        <div>
-                            <h1 class="mb-4 font-bold text-4xl leading-tight">
-                                Achilles Tendon <HighlightedWord
-                                    >Rupture</HighlightedWord
-                                > Splint
-                            </h1>
-                            <p class="mb-6 text-gray-600 text-xl">
-                                {
-                                    (size as string).charAt(0).toUpperCase() +
-                                        (size as string).slice(1)
-                                } Size • {
-                                    (side as string).charAt(0).toUpperCase() +
-                                        (side as string).slice(1)
-                                }
-                                Side
-                            </p>
-                        </div>
+                        <h1
+                            class="mb-2 font-semibold text-gray-900 text-3xl lg:text-4xl leading-tight"
+                        >
+                            Achilles Tendon <HighlightedWord
+                                >Rupture</HighlightedWord
+                            > Splint
+                        </h1>
 
-                        <!-- Size & Side Selection -->
-                        <div class="space-y-4">
-                            <h3 class="font-semibold text-lg">
-                                Select Your Size & Side
-                            </h3>
-                            <div class="flex flex-wrap gap-3">
+                        <!-- Variant Switcher -->
+                        <div class="space-y-2 mb-6">
+                            <h3 class="font-semibold text-base">Size & Side</h3>
+                            <div class="flex flex-wrap gap-2">
                                 {
                                     variants.map((variant) => {
                                         const isActive =
                                             variant.size === size &&
                                             variant.side === side;
-                                        const href = `/splint/${variant.size}/${variant.side}?region=${finalRegion}`;
-
+                                        const href = `/splint/${variant.size}/${variant.side}?region=${region}`;
                                         return (
                                             <a
                                                 href={href}
                                                 class:list={[
-                                                    "px-6 py-3 rounded-lg text-sm font-medium transition-all duration-200 border-2",
+                                                    "px-4 py-2 rounded-lg text-sm font-medium transition-all border-2",
                                                     {
-                                                        "bg-primary text-white border-primary shadow-lg":
+                                                        "bg-primary text-white border-primary":
                                                             isActive,
-                                                        "bg-white text-gray-700 border-gray-200 hover:border-primary/50 hover:shadow-md":
+                                                        "bg-white text-gray-700 border-gray-200 hover:border-primary/50":
                                                             !isActive,
                                                     },
                                                 ]}
@@ -205,55 +176,50 @@ const variants = [
                             </div>
                         </div>
 
-                        <!-- Price and Availability -->
-                        <div class="space-y-6">
-                            <div class="flex items-baseline gap-4">
-                                <span
-                                    class="font-semibold text-slate-900 text-2xl"
-                                    id="price-display">{splint.price}</span
-                                >
-                            </div>
-
-                            <div class="flex items-center gap-3">
-                                <span
-                                    class:list={[
-                                        "inline-flex items-center px-3 py-1 rounded-full text-sm font-medium",
-                                        {
-                                            "bg-primary/20 text-primary border border-primary/30":
-                                                splint.availability ===
-                                                "in_stock",
-                                            "bg-red-100 text-red-800 border border-red-200":
-                                                splint.availability !==
-                                                "in_stock",
-                                        },
-                                    ]}
-                                >
+                        <!-- Price -->
+                        <div class="flex items-baseline gap-4 mb-2">
+                            <span class="font-semibold text-slate-900 text-2xl"
+                                >{splint.price}</span
+                            >
+                            <span
+                                class:list={[
+                                    "inline-flex items-center px-3 py-1 rounded-full text-sm font-medium",
                                     {
-                                        splint.availability === "in_stock"
-                                            ? "✓ In Stock"
-                                            : "Out of Stock"
-                                    }
-                                </span>
-                                <span class="text-gray-600 text-sm"
-                                    >• Ready to ship within 24 hours</span
-                                >
-                            </div>
+                                        "bg-primary/20 text-primary border border-primary/30":
+                                            splint.availability === "in_stock",
+                                        "bg-red-100 text-red-800":
+                                            splint.availability !== "in_stock",
+                                    },
+                                ]}
+                            >
+                                {
+                                    splint.availability === "in_stock"
+                                        ? "✓ In Stock"
+                                        : "Out of Stock"
+                                }
+                            </span>
+                        </div>
+                        <p class="mb-4 text-gray-600 text-sm">
+                            Free shipping • Ready to ship within 24 hours
+                        </p>
+
+                        <ReviewsLink size="lg" lang="en" />
+
+                        <div class="mb-8">
+                            <CheckWithCareTeam lang="en" client:load />
                         </div>
 
-                        <CheckWithCareTeam lang="en" client:load />
-
-                        <!-- Add to Cart Button -->
-                        <div class="space-y-4">
+                        <!-- Add to Cart -->
+                        <div class="space-y-3">
                             {
                                 isDirectShipCountry ? (
-                                    // US or UK - show Shopify checkout
                                     checkoutLink ? (
                                         <a
                                             href={checkoutLink}
                                             class={buttonVariants({
                                                 size: "xl",
                                                 className:
-                                                    "w-full text-lg py-4 shadow-lg hover:shadow-xl transition-all duration-200",
+                                                    "w-full text-lg py-4 shadow-lg hover:shadow-xl transition-all",
                                             })}
                                         >
                                             {t.addToCart} - {splint.price}
@@ -264,7 +230,7 @@ const variants = [
                                                 size: "xl",
                                                 variant: "outline",
                                                 className:
-                                                    "w-full text-lg py-4 cursor-not-allowed",
+                                                    "w-full py-4 cursor-not-allowed",
                                             })}
                                             disabled
                                         >
@@ -272,7 +238,6 @@ const variants = [
                                         </button>
                                     )
                                 ) : purchaseInfo.type !== "how-to-buy" ? (
-                                    // Amazon or Partner country - show external link
                                     <a
                                         href={purchaseInfo.url}
                                         target="_blank"
@@ -280,7 +245,7 @@ const variants = [
                                         class={buttonVariants({
                                             size: "xl",
                                             className:
-                                                "w-full text-lg py-4 shadow-lg hover:shadow-xl transition-all duration-200 gap-2",
+                                                "w-full text-lg py-4 gap-2",
                                         })}
                                     >
                                         {t.buyNow}
@@ -292,8 +257,6 @@ const variants = [
                                             fill="none"
                                             stroke="currentColor"
                                             stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
                                             class="w-4 h-4"
                                         >
                                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -307,52 +270,468 @@ const variants = [
                                         </svg>
                                     </a>
                                 ) : (
-                                    // Unknown country - link to how-to-buy
                                     <a
                                         href="/how-to-buy"
                                         class={buttonVariants({
                                             size: "xl",
                                             variant: "outline",
-                                            className:
-                                                "w-full text-lg py-4 shadow-lg hover:shadow-xl transition-all duration-200",
+                                            className: "w-full py-4",
                                         })}
                                     >
                                         {t.viewOptions}
                                     </a>
                                 )
                             }
-                            <br />
-
-                            <FreeAndSecure lang="en" />
+                            <div class="pt-6">
+                                <FreeAndSecure lang="en" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </ColorGradient>
 
-        <!-- Description Section -->
-        <section class="bg-white py-16">
-            <div class="mx-auto px-4 container">
-                <div class="mx-auto max-w-4xl">
-                    <h2 class="mb-8 font-semibold text-3xl text-center">
-                        What Makes This <HighlightedWord
-                            >Splint Special</HighlightedWord
+        <!-- Testimonial Quote -->
+        <section class="bg-gradient-to-b from-white to-primary/5 py-6 md:py-12">
+            <div class="mx-auto px-4 max-w-3xl text-center">
+                <blockquote
+                    class="mb-4 font-semibold text-neutral-900 text-xl md:text-2xl italic"
+                >
+                    "It made a massive difference to getting a good night's
+                    rest."
+                </blockquote>
+                <p class="text-neutral-600 text-sm">— Verified Patient, USA</p>
+            </div>
+        </section>
+
+        <!-- Reviews -->
+        <section
+            class="bg-gradient-to-b from-white via-primary/5 to-white py-12 md:py-16"
+        >
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <div
+                        class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full"
+                    >
+                        <Check className="w-5 h-5 text-primary" />
+                        <p
+                            class="font-medium text-primary text-sm uppercase tracking-widest"
                         >
+                            TRUSTED BY THOUSANDS
+                        </p>
+                    </div>
+                    <h2
+                        class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl"
+                    >
+                        Join 5,000+ Patients Who've Found Relief
                     </h2>
-                    <div class="max-w-none prose prose-lg">
-                        <div
-                            class="text-gray-700 leading-relaxed whitespace-pre-wrap"
+                    <p class="text-neutral-600">
+                        Real reviews from real patients
+                    </p>
+                </div>
+                <EnhancedReviewCarousel client:load />
+                <div class="mt-8 text-center">
+                    <a
+                        href="/reviews"
+                        class="inline-flex items-center gap-2 hover:bg-primary px-6 py-3 border-2 border-primary rounded-lg font-semibold text-primary hover:text-white transition-colors"
+                    >
+                        View All Reviews
+                        <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            ><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 5l7 7-7 7"></path></svg
                         >
-                            {splint.description}
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guarantee -->
+        <section class="bg-primary/10 py-8 md:py-16 border-primary/30 border-y">
+            <div class="mx-auto px-4 max-w-4xl">
+                <h2
+                    class="mb-6 font-bold text-neutral-900 text-xl md:text-2xl text-center"
+                >
+                    30-Day Money-Back Guarantee
+                </h2>
+                <p class="mb-8 text-neutral-600 text-center">
+                    Try risk-free. If it doesn't improve your sleep quality,
+                    we'll refund your purchase—no questions asked.
+                </p>
+                <div class="gap-6 grid md:grid-cols-3">
+                    <div
+                        class="flex flex-col items-center gap-3 bg-white shadow-sm p-6 border border-primary/20 rounded-lg"
+                    >
+                        <div
+                            class="flex justify-center items-center bg-primary/10 rounded-full w-12 h-12"
+                        >
+                            <Truck className="w-6 h-6 text-primary" />
                         </div>
+                        <span class="font-semibold text-neutral-900 text-sm"
+                            >Free shipping</span
+                        >
+                    </div>
+                    <div
+                        class="flex flex-col items-center gap-3 bg-white shadow-sm p-6 border border-primary/20 rounded-lg"
+                    >
+                        <div
+                            class="flex justify-center items-center bg-primary/10 rounded-full w-12 h-12"
+                        >
+                            <ShieldCheck className="w-6 h-6 text-primary" />
+                        </div>
+                        <span class="font-semibold text-neutral-900 text-sm"
+                            >30-day guarantee</span
+                        >
+                    </div>
+                    <div
+                        class="flex flex-col items-center gap-3 bg-white shadow-sm p-6 border border-primary/20 rounded-lg"
+                    >
+                        <div
+                            class="flex justify-center items-center bg-primary/10 rounded-full w-12 h-12"
+                        >
+                            <RotateCcw className="w-6 h-6 text-primary" />
+                        </div>
+                        <span class="font-semibold text-neutral-900 text-sm"
+                            >Easy returns</span
+                        >
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Product Details Section -->
-        <Slide>
-            <DetailsTable splint={splint} />
-        </Slide>
+        <!-- Comparison Table -->
+        <section class="bg-white py-8 md:py-16 border-neutral-200 border-y">
+            <div class="mx-auto px-4 max-w-5xl">
+                <h2
+                    class="mb-4 font-bold text-neutral-900 text-2xl md:text-3xl text-center"
+                >
+                    Night Splint vs Boot: Side-by-Side
+                </h2>
+                <p class="mb-8 text-neutral-600 text-center">
+                    Both provide protection. Only one lets you sleep
+                    comfortably.
+                </p>
+                <div class="-mx-4 overflow-x-auto">
+                    <table class="w-full min-w-[320px] text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-neutral-50 border-b-2">
+                                <th
+                                    class="hidden md:table-cell px-3 py-3 font-semibold text-left"
+                                    >Feature</th
+                                >
+                                <th
+                                    class="px-3 py-3 font-semibold text-red-900 text-center"
+                                    >Boot</th
+                                >
+                                <th
+                                    class="px-3 py-3 font-semibold text-primary text-center"
+                                    >Thetis Splint</th
+                                >
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b"
+                                ><td
+                                    class="hidden md:table-cell px-3 py-3 font-medium"
+                                    >Weight</td
+                                ><td class="px-3 py-3 text-red-800 text-center"
+                                    >✗ 1.5kg+</td
+                                ><td
+                                    class="px-3 py-3 font-semibold text-primary text-center"
+                                    >✓ 200g</td
+                                ></tr
+                            >
+                            <tr class="bg-neutral-50/50 border-b"
+                                ><td
+                                    class="hidden md:table-cell px-3 py-3 font-medium"
+                                    >Breathability</td
+                                ><td class="px-3 py-3 text-red-800 text-center"
+                                    >✗ Enclosed</td
+                                ><td
+                                    class="px-3 py-3 font-semibold text-primary text-center"
+                                    >✓ Open design</td
+                                ></tr
+                            >
+                            <tr class="border-b"
+                                ><td
+                                    class="hidden md:table-cell px-3 py-3 font-medium"
+                                    >Cleanliness</td
+                                ><td class="px-3 py-3 text-red-800 text-center"
+                                    >✗ Dirt in bed</td
+                                ><td
+                                    class="px-3 py-3 font-semibold text-primary text-center"
+                                    >✓ Clean</td
+                                ></tr
+                            >
+                            <tr class="bg-neutral-50/50 border-b"
+                                ><td
+                                    class="hidden md:table-cell px-3 py-3 font-medium"
+                                    >Showering</td
+                                ><td class="px-3 py-3 text-red-800 text-center"
+                                    >✗ No</td
+                                ><td
+                                    class="px-3 py-3 font-semibold text-primary text-center"
+                                    >✓ Yes</td
+                                ></tr
+                            >
+                            <tr class="bg-primary/5 border-b-2"
+                                ><td
+                                    class="hidden md:table-cell px-3 py-3 font-medium"
+                                    >Healing Angle</td
+                                ><td class="px-3 py-3 text-center">30°</td><td
+                                    class="px-3 py-3 text-center">30°</td
+                                ></tr
+                            >
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Athletes -->
+        <section class="bg-gradient-to-b from-white to-primary/5 py-8 md:py-16">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <h2
+                        class="mb-2 font-bold text-neutral-900 text-2xl md:text-3xl"
+                    >
+                        Trusted by Professional Athletes
+                    </h2>
+                    <p class="text-neutral-600">
+                        Elite athletes choose Thetis Night Splint for their
+                        recovery
+                    </p>
+                </div>
+                <AthletesCarousel client:load />
+            </div>
+        </section>
+
+        <!-- Surgeons -->
+        <section class="bg-gradient-to-b from-primary/5 to-white py-8 md:py-16">
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 text-center">
+                    <h2
+                        class="mb-2 font-bold text-neutral-900 text-2xl md:text-3xl"
+                    >
+                        Trusted by Leading Surgeons
+                    </h2>
+                    <p class="text-neutral-600">
+                        Healthcare professionals worldwide recommend Thetis
+                        Night Splint
+                    </p>
+                </div>
+                <SurgeonsCarousel client:load />
+            </div>
+        </section>
+
+        <!-- Quality Badges -->
+        <section class="bg-white py-8 md:py-16">
+            <div class="mx-auto px-4 max-w-5xl">
+                <h2
+                    class="mb-8 font-bold text-neutral-900 text-xl md:text-2xl text-center"
+                >
+                    Trusted by Thousands
+                </h2>
+                <div class="gap-4 grid grid-cols-2 md:grid-cols-4">
+                    <div
+                        class="bg-white shadow-sm p-6 border border-neutral-200 rounded-lg text-center"
+                    >
+                        <div class="mb-2 font-bold text-primary text-4xl">
+                            0
+                        </div>
+                        <p class="font-medium text-neutral-600 text-sm">
+                            Re-ruptures
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-6 border border-neutral-200 rounded-lg text-center"
+                    >
+                        <div class="mb-2 font-bold text-primary text-4xl">
+                            5,000+
+                        </div>
+                        <p class="font-medium text-neutral-600 text-sm">
+                            Patients
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-6 border border-neutral-200 rounded-lg text-center"
+                    >
+                        <div class="mb-2 font-bold text-primary text-4xl">
+                            9
+                        </div>
+                        <p class="font-medium text-neutral-600 text-sm">
+                            Countries
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white shadow-sm p-6 border border-neutral-200 rounded-lg text-center"
+                    >
+                        <div class="mb-2 font-bold text-primary text-4xl">
+                            2022
+                        </div>
+                        <p class="font-medium text-neutral-600 text-sm">
+                            Since
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <ValuePropositions lang="en" />
+
+        <KeyFeatures lang="en" />
+
+        <!-- Product Details -->
+        <Slide><DetailsTable splint={splint} /></Slide>
+
+        <!-- Video -->
+        <div class="mx-auto px-4 max-w-4xl">
+            <div
+                id="youtube-placeholder"
+                class="group relative bg-neutral-900 shadow-lg mx-auto rounded-lg w-full max-w-3xl aspect-video overflow-hidden cursor-pointer"
+                data-youtube-id="T09Xnwaqbm0"
+            >
+                <img
+                    src="https://img.youtube.com/vi/T09Xnwaqbm0/hqdefault.jpg"
+                    alt="Night Splint Application Video"
+                    class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div
+                    class="absolute inset-0 flex justify-center items-center bg-black/30 group-hover:bg-black/40 transition-colors"
+                >
+                    <div
+                        class="flex justify-center items-center bg-white/95 group-hover:bg-white shadow-xl rounded-full w-16 md:w-20 h-16 md:h-20 group-hover:scale-110 transition-transform duration-200"
+                    >
+                        <svg
+                            class="ml-1 w-6 md:w-8 h-6 md:h-8 text-primary"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                        >
+                            <path d="M8 5v14l11-7z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <NightSplintUsage lang="en" />
+
+        <NightSplintInstructions lang="en" />
+
+        <NightSplintFAQs client:load lang="en" />
+
+        <SplintDownloads lang="en" />
+
+        <!-- Order CTA -->
+        <section class="py-12 md:py-16">
+            <div class="mx-auto px-4 max-w-3xl text-center">
+                <h2 class="mb-4 font-bold text-neutral-900 text-2xl">
+                    Order Your Splint Today
+                </h2>
+                <p class="mb-6 text-neutral-600">
+                    Free shipping. 30-day guarantee. Trusted by 5,000+ patients.
+                </p>
+                {
+                    isDirectShipCountry && checkoutLink ? (
+                        <a
+                            href={checkoutLink}
+                            class={buttonVariants({
+                                size: "xl",
+                                className: "inline-flex text-lg px-8 py-4",
+                            })}
+                        >
+                            {t.addToCart} - {splint.price}
+                        </a>
+                    ) : purchaseInfo.type !== "how-to-buy" ? (
+                        <a
+                            href={purchaseInfo.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class={buttonVariants({
+                                size: "xl",
+                                className:
+                                    "inline-flex text-lg px-8 py-4 gap-2",
+                            })}
+                        >
+                            {t.buyNow}
+                        </a>
+                    ) : (
+                        <a
+                            href="/how-to-buy"
+                            class={buttonVariants({
+                                size: "xl",
+                                variant: "outline",
+                                className: "inline-flex text-lg px-8 py-4",
+                            })}
+                        >
+                            {t.viewOptions}
+                        </a>
+                    )
+                }
+            </div>
+        </section>
+
+        <SubscribeBlock source="splint_page" lang="en" />
+
+        <StickyAddToCart
+            variant="splint"
+            lang="en"
+            splintHref={`/splint/${size}/${side}?region=${region}#order`}
+            client:load
+        />
+
+        <ExitIntentPopup client:load />
     </main>
+
+    <script
+        define:vars={{
+            region,
+            itemId: splint.id,
+            itemName: splint.title,
+            itemPrice: splint.price,
+        }}
+    >
+        document.addEventListener("DOMContentLoaded", () => {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ ecommerce: null });
+            const currency = region === "uk" ? "GBP" : "USD";
+            const value = region === "uk" ? 56.99 : 89.99;
+            window.dataLayer.push({
+                event: "view_item",
+                ecommerce: {
+                    currency,
+                    value,
+                    items: [
+                        {
+                            item_id: itemId,
+                            item_name: itemName,
+                            price: itemPrice,
+                            quantity: 1,
+                        },
+                    ],
+                },
+            });
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+            const placeholder = document.getElementById("youtube-placeholder");
+            if (placeholder) {
+                placeholder.addEventListener("click", () => {
+                    const id = placeholder.getAttribute("data-youtube-id");
+                    const iframe = document.createElement("iframe");
+                    iframe.className = "w-full aspect-video rounded-lg";
+                    iframe.src = `https://www.youtube.com/embed/${id}`;
+                    iframe.allow =
+                        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                    iframe.allowFullscreen = true;
+                    placeholder.parentNode?.replaceChild(iframe, placeholder);
+                });
+            }
+        });
+    </script>
 </Layout>

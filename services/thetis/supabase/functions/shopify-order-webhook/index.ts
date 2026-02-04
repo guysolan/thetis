@@ -6,11 +6,23 @@ import { createHmac } from "node:crypto";
 // Run `bun packages/email/emails/course/build-template.ts` to regenerate
 import { renderCourseAccessEmail } from "./email-template.ts";
 
-// Shopify product IDs mapped to course types
-const PRODUCT_TO_COURSE: Record<string, string> = {
-    "9846187786568": "standard", // Standard Course
-    "9846188081480": "premium", // Premium Course
-};
+// Shopify product IDs -> product_slug (extensible for splint, future products)
+// Add SPLINT_PRODUCT_ID in Supabase secrets when you have the ID from Shopify Admin
+function buildProductToSlug(): Record<string, string> {
+    const map: Record<string, string> = {
+        "9846187786568": "standard_course", // Standard / Essentials Course
+        "9846188081480": "premium_course", // Premium / Professionals Course
+    };
+    const splintId = Deno.env.get("SPLINT_PRODUCT_ID");
+    if (splintId) map[splintId] = "splint";
+    return map;
+}
+const PRODUCT_TO_SLUG = buildProductToSlug();
+
+const COURSE_SLUGS = ["standard_course", "premium_course"];
+function isCourseSlug(slug: string): boolean {
+    return COURSE_SLUGS.includes(slug);
+}
 
 // Verify Shopify webhook signature
 function verifyShopifyWebhook(
@@ -175,27 +187,25 @@ Deno.serve(async (req) => {
         console.error("Failed to log webhook event:", logError);
     }
 
-    // Find course products in the order
-    const courseItems = order.line_items.filter(
-        (item) => PRODUCT_TO_COURSE[String(item.product_id)],
+    // Find all tracked products in the order (courses, splint, future)
+    const trackedItems = order.line_items.filter(
+        (item) => PRODUCT_TO_SLUG[String(item.product_id)],
     );
 
-    if (courseItems.length === 0) {
-        console.log(`Order ${order.order_number} contains no course products`);
-        // Mark as processed even though no courses
+    if (trackedItems.length === 0) {
+        console.log(`Order ${order.order_number} contains no tracked products`);
         await supabase
             .from("webhook_events")
             .update({ processed: true, processed_at: new Date().toISOString() })
             .eq("event_id", webhookId);
-
         return new Response(
-            JSON.stringify({ message: "No course products in order" }),
+            JSON.stringify({ message: "No tracked products in order" }),
             { status: 200, headers: { "Content-Type": "application/json" } },
         );
     }
 
     const customerEmail = (order.customer?.email || order.email).toLowerCase();
-    const enrollmentsCreated: string[] = [];
+    const purchasesCreated: string[] = [];
     const errors: string[] = [];
 
     // Ensure user exists using database function (bypasses RLS)
@@ -238,28 +248,27 @@ Deno.serve(async (req) => {
         );
     }
 
-    // Create enrollments for each course product
-    for (const item of courseItems) {
-        const courseType = PRODUCT_TO_COURSE[String(item.product_id)];
+    // Create purchases for each tracked product (courses, splint, future)
+    for (const item of trackedItems) {
+        const productSlug = PRODUCT_TO_SLUG[String(item.product_id)];
 
-        // Check if enrollment already exists for this order + line item
-        const { data: existingEnrollment } = await supabase
-            .from("enrollments")
+        const { data: existingPurchase } = await supabase
+            .from("purchases")
             .select("id")
             .eq("shopify_order_id", String(order.id))
             .eq("shopify_line_item_id", String(item.id))
             .maybeSingle();
 
-        if (existingEnrollment) {
+        if (existingPurchase) {
             console.log(
-                `Enrollment already exists for order ${order.order_number}, item ${item.id}`,
+                `Purchase already exists for order ${order.order_number}, item ${item.id}`,
             );
+            purchasesCreated.push(productSlug);
             continue;
         }
 
-        // Create enrollment and link to user
-        const enrollmentData: Record<string, unknown> = {
-            course_type: courseType,
+        const purchaseData: Record<string, unknown> = {
+            product_slug: productSlug,
             shopify_order_id: String(order.id),
             shopify_order_number: `#${order.order_number}`,
             shopify_customer_email: customerEmail,
@@ -267,59 +276,39 @@ Deno.serve(async (req) => {
             status: "active",
             purchased_at: order.created_at,
         };
+        if (userExists && userId) purchaseData.user_id = userId;
 
-        // Link to user if user exists (either created now or already existed)
-        if (userExists && userId) {
-            enrollmentData.user_id = userId;
-        }
+        const { error: purchaseError } = await supabase
+            .from("purchases")
+            .insert(purchaseData);
 
-        const { error: enrollError } = await supabase.from("enrollments")
-            .insert(enrollmentData);
-
-        if (enrollError) {
-            // If error is about user_id column, try without it
-            if (enrollError.message.includes("user_id") && userExists) {
-                console.log(
-                    "Retrying enrollment creation without user linking due to schema issue",
-                );
-                delete enrollmentData.user_id;
-                const { error: retryError } = await supabase.from("enrollments")
-                    .insert(enrollmentData);
-
+        if (purchaseError) {
+            if (purchaseError.message.includes("user_id") && userExists) {
+                delete purchaseData.user_id;
+                const { error: retryError } = await supabase
+                    .from("purchases")
+                    .insert(purchaseData);
                 if (retryError) {
-                    errors.push(`${courseType}: ${retryError.message}`);
+                    errors.push(`${productSlug}: ${retryError.message}`);
                 } else {
-                    enrollmentsCreated.push(courseType);
+                    purchasesCreated.push(productSlug);
                     console.log(
-                        `Created enrollment for ${courseType} (user exists but enrollment not linked due to schema issue)`,
+                        `Created purchase for ${productSlug} - Order #${order.order_number}, Email: ${customerEmail}`,
                     );
                 }
             } else {
-                errors.push(`${courseType}: ${enrollError.message}`);
+                errors.push(`${productSlug}: ${purchaseError.message}`);
             }
         } else {
-            enrollmentsCreated.push(courseType);
-            const linkedStatus = (userExists && userId)
-                ? ` (linked to user_id: ${userId})`
-                : " (will be linked on signup)";
+            purchasesCreated.push(productSlug);
             console.log(
-                `Created enrollment for ${courseType}${linkedStatus} - Order #${order.order_number}, Email: ${customerEmail}`,
-            );
-        }
-
-        if (enrollError) {
-            console.error(
-                `Failed to create enrollment for ${courseType}:`,
-                enrollError,
-            );
-            errors.push(`${courseType}: ${enrollError.message}`);
-        } else {
-            enrollmentsCreated.push(courseType);
-            console.log(
-                `Created enrollment for ${courseType} - Order #${order.order_number}, Email: ${customerEmail}`,
+                `Created purchase for ${productSlug} - Order #${order.order_number}, Email: ${customerEmail}`,
             );
         }
     }
+
+    // Unique product slugs for this order (for Knock branching)
+    const productsOrdered = [...new Set(purchasesCreated)];
 
     // Mark webhook as processed
     await supabase
@@ -331,27 +320,27 @@ Deno.serve(async (req) => {
         })
         .eq("event_id", webhookId);
 
-    // Send course access email if enrollments were created
-    if (enrollmentsCreated.length > 0) {
+    // Send course access email if any course was purchased
+    const courseSlugsInOrder = productsOrdered.filter(isCourseSlug);
+    if (courseSlugsInOrder.length > 0) {
         const COURSE_URL = Deno.env.get("COURSE_URL") ||
             "https://course.thetismedical.com";
         const claimUrl = `${COURSE_URL}/claim?email=${
             encodeURIComponent(customerEmail)
         }&order=${encodeURIComponent(`#${order.order_number}`)}`;
+        const firstCourseSlug = courseSlugsInOrder[0];
+        const courseTypeForEmail =
+            firstCourseSlug === "premium_course" ? "premium" : "standard";
 
-        // Queue email (will be sent by email job)
-        // For now, we'll send it directly via Resend if available
         const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
         if (RESEND_API_KEY) {
             try {
-                // Use the React Email template
                 const emailHtml = renderCourseAccessEmail({
                     customerEmail,
                     orderNumber: String(order.order_number),
-                    courseType: enrollmentsCreated[0] || "standard",
+                    courseType: courseTypeForEmail,
                     claimUrl,
                 });
-
                 const emailResponse = await fetch(
                     "https://api.resend.com/emails",
                     {
@@ -361,7 +350,8 @@ Deno.serve(async (req) => {
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
-                            from: "Thetis Medical <info@thetismedical.com>",
+                            from:
+                                "Thetis Medical <welcome@course.thetismedical.com>",
                             to: [customerEmail],
                             subject:
                                 "🎉 Your Achilles Recovery Course is Ready!",
@@ -369,7 +359,6 @@ Deno.serve(async (req) => {
                         }),
                     },
                 );
-
                 if (!emailResponse.ok) {
                     const errorText = await emailResponse.text();
                     console.error("Failed to send email:", errorText);
@@ -378,11 +367,90 @@ Deno.serve(async (req) => {
                 }
             } catch (emailError) {
                 console.error("Error sending email:", emailError);
-                // Don't fail the webhook if email fails
             }
         } else {
             console.log("RESEND_API_KEY not set, skipping email send");
         }
+    }
+
+    // Trigger Knock post-purchase workflows (one per product type: course, splint)
+    const KNOCK_API_KEY = Deno.env.get("KNOCK_API_KEY");
+    if (KNOCK_API_KEY && productsOrdered.length > 0) {
+        const hasCourse = productsOrdered.some((s) =>
+            COURSE_SLUGS.includes(s)
+        );
+        const hasSplint = productsOrdered.includes("splint");
+        const COURSE_URL = Deno.env.get("COURSE_URL") ||
+            "https://course.thetismedical.com";
+        const REVIEW_URL = Deno.env.get("REVIEW_URL") ||
+            "https://www.thetismedical.com/leave-review";
+        const triggerData = {
+            order_id: String(order.id),
+            order_number: order.order_number,
+            customer_email: customerEmail,
+            purchased_at: order.created_at,
+            course_url: COURSE_URL,
+            review_url: REVIEW_URL,
+        };
+
+        if (hasCourse) {
+            try {
+                const r = await fetch(
+                    "https://api.knock.app/v1/workflows/post-purchase-course/trigger",
+                    {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${KNOCK_API_KEY}`,
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            recipients: [
+                                {
+                                    id: `order-${order.id}-course`,
+                                    email: customerEmail,
+                                },
+                            ],
+                            cancellation_key: `order-${order.id}-course`,
+                            data: triggerData,
+                        }),
+                    },
+                );
+                if (!r.ok) console.error("Knock course trigger failed:", await r.text());
+                else console.log(`Knock post-purchase-course triggered for order #${order.order_number}`);
+            } catch (e) {
+                console.error("Knock course trigger error:", e);
+            }
+        }
+        if (hasSplint) {
+            try {
+                const r = await fetch(
+                    "https://api.knock.app/v1/workflows/post-purchase-splint/trigger",
+                    {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${KNOCK_API_KEY}`,
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            recipients: [
+                                {
+                                    id: `order-${order.id}-splint`,
+                                    email: customerEmail,
+                                },
+                            ],
+                            cancellation_key: `order-${order.id}-splint`,
+                            data: triggerData,
+                        }),
+                    },
+                );
+                if (!r.ok) console.error("Knock splint trigger failed:", await r.text());
+                else console.log(`Knock post-purchase-splint triggered for order #${order.order_number}`);
+            } catch (e) {
+                console.error("Knock splint trigger error:", e);
+            }
+        }
+    } else if (productsOrdered.length > 0) {
+        console.log("KNOCK_API_KEY not set, skipping post-purchase workflows");
     }
 
     return new Response(
@@ -392,7 +460,8 @@ Deno.serve(async (req) => {
             customer_email: customerEmail,
             user_created: userCreated,
             user_exists: userExists,
-            enrollments_created: enrollmentsCreated,
+            purchases_created: purchasesCreated,
+            products_ordered: productsOrdered,
             errors: errors.length > 0 ? errors : undefined,
         }),
         { status: 200, headers: { "Content-Type": "application/json" } },

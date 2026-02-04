@@ -4,6 +4,13 @@ import { useSimpleAuth } from "./use-simple-auth";
 
 type CourseType = "standard" | "premium" | "essentials" | "professionals";
 
+const COURSE_SLUGS = ["standard_course", "premium_course"];
+
+/** Maps product_slug to display course_type */
+function slugToCourseType(slug: string): CourseType {
+    return slug === "premium_course" ? "premium" : "standard";
+}
+
 interface Enrollment {
     id: string;
     course_type: CourseType;
@@ -18,45 +25,46 @@ export function useEnrollment() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Wait for auth to finish loading before checking enrollments
-        if (authLoading) {
-            return;
-        }
-
+        if (authLoading) return;
         if (!email) {
             setEnrollments([]);
             setLoading(false);
             return;
         }
 
-        // Fetch enrollments by email
         const fetchEnrollments = async () => {
             setLoading(true);
-
             try {
                 const { data, error } = await supabase
-                    .from("enrollments")
+                    .from("purchases")
                     .select(
-                        "id, course_type, status, purchased_at, shopify_order_number",
+                        "id, product_slug, status, purchased_at, shopify_order_number",
                     )
                     .eq("shopify_customer_email", email.toLowerCase())
-                    .eq("status", "active");
+                    .eq("status", "active")
+                    .in("product_slug", COURSE_SLUGS);
 
                 if (error) {
-                    console.error("Error fetching enrollments:", error);
+                    console.error("Error fetching purchases (course):", error);
                     setEnrollments([]);
                 } else {
-                    setEnrollments(data || []);
-                    // Debug logging
+                    const mapped: Enrollment[] = (data || []).map((p) => ({
+                        id: p.id,
+                        course_type: slugToCourseType(p.product_slug),
+                        status: p.status,
+                        purchased_at: p.purchased_at,
+                        shopify_order_number: p.shopify_order_number,
+                    }));
+                    setEnrollments(mapped);
                     if (process.env.NODE_ENV === "development") {
-                        console.log("Enrollments loaded:", {
+                        console.log("Enrollments loaded (from purchases):", {
                             userEmail: email,
-                            enrollments: data || [],
+                            enrollments: mapped,
                         });
                     }
                 }
             } catch (err) {
-                console.error("Failed to fetch enrollments:", err);
+                console.error("Failed to fetch purchases (course):", err);
                 setEnrollments([]);
             } finally {
                 setLoading(false);
@@ -67,20 +75,15 @@ export function useEnrollment() {
     }, [email, authLoading]);
 
     const hasAccess = (courseType: CourseType): boolean => {
-        const hasAccessResult = enrollments.some(
-            (e) => e.course_type === courseType && e.status === "active",
+        const effective: CourseType =
+            courseType === "essentials"
+                ? "standard"
+                : courseType === "professionals"
+                    ? "premium"
+                    : courseType;
+        return enrollments.some(
+            (e) => e.course_type === effective && e.status === "active",
         );
-
-        // Debug logging in development
-        if (process.env.NODE_ENV === "development") {
-            console.log("hasAccess check:", {
-                courseType,
-                enrollments,
-                hasAccessResult,
-            });
-        }
-
-        return hasAccessResult;
     };
 
     const getEnrollments = (): Enrollment[] => {

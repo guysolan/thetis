@@ -29,16 +29,17 @@ const translations = {
         earnCashback: "Earn",
         cashbackSuffix: "cashback",
         forApproved: "for approved",
-        videoReviews: "video reviews with spoken content",
+        videoReviews: "video reviews with spoken content (minimum 10 seconds)",
+        perSecondTagline: "That's £1 per second!",
         cashbackTitle: "Earn Cashback for Video Reviews with Spoken Content",
         cashbackIntro: "You can submit",
         photosOrVideos: "photos or videos",
         submitA: "Submit a",
         videoReviewSpoken: "video review with spoken content",
-        minimum30: "(minimum 30 seconds of speaking) and receive",
+        minimum10: "(minimum 10 seconds of speaking) and receive",
         onceApproved: "once approved. Here's what we're looking for:",
         requirements: [
-            "Video review with spoken content (minimum 30 seconds of speaking) about your experience",
+            "Video review with spoken content (minimum 10 seconds of speaking) about your experience",
             "Honest feedback about the product and your recovery journey",
             "Your review may be featured on our website (with permission)",
         ],
@@ -67,16 +68,17 @@ const translations = {
         earnCashback: "Verdienen Sie",
         cashbackSuffix: "Cashback",
         forApproved: "für genehmigte",
-        videoReviews: "Video-Bewertungen mit gesprochenem Inhalt",
+        videoReviews: "Video-Bewertungen mit gesprochenem Inhalt (mind. 10 Sek.)",
+        perSecondTagline: "Das sind 1 € pro Sekunde!",
         cashbackTitle: "Cashback für Video-Bewertungen mit gesprochenem Inhalt",
         cashbackIntro: "Sie können",
         photosOrVideos: "Fotos oder Videos",
         submitA: "einreichen. Reichen Sie eine",
         videoReviewSpoken: "Video-Bewertung mit gesprochenem Inhalt",
-        minimum30: "(mindestens 30 Sekunden Sprechen) ein und erhalten Sie",
+        minimum10: "(mindestens 10 Sekunden Sprechen) ein und erhalten Sie",
         onceApproved: "nach Genehmigung. Das suchen wir:",
         requirements: [
-            "Video-Bewertung mit gesprochenem Inhalt (mindestens 30 Sekunden Sprechen) über Ihre Erfahrung",
+            "Video-Bewertung mit gesprochenem Inhalt (mindestens 10 Sekunden Sprechen) über Ihre Erfahrung",
             "Ehrliches Feedback zum Produkt und Ihrem Genesungsweg",
             "Ihre Bewertung kann auf unserer Website veröffentlicht werden (mit Erlaubnis)",
         ],
@@ -105,16 +107,17 @@ const translations = {
         earnCashback: "Gagnez",
         cashbackSuffix: "de cashback",
         forApproved: "pour les",
-        videoReviews: "avis vidéo approuvés avec contenu parlé",
+        videoReviews: "avis vidéo approuvés avec contenu parlé (min. 10 s)",
+        perSecondTagline: "Soit 1 € par seconde !",
         cashbackTitle: "Gagnez du Cashback pour les Avis Vidéo avec Contenu Parlé",
         cashbackIntro: "Vous pouvez soumettre des",
         photosOrVideos: "photos ou des vidéos",
         submitA: "Soumettez un",
         videoReviewSpoken: "avis vidéo avec contenu parlé",
-        minimum30: "(minimum 30 secondes de parole) et recevez",
+        minimum10: "(minimum 10 secondes de parole) et recevez",
         onceApproved: "une fois approuvé. Voici ce que nous recherchons :",
         requirements: [
-            "Avis vidéo avec contenu parlé (minimum 30 secondes de parole) sur votre expérience",
+            "Avis vidéo avec contenu parlé (minimum 10 secondes de parole) sur votre expérience",
             "Commentaires honnêtes sur le produit et votre parcours de récupération",
             "Votre avis peut être présenté sur notre site web (avec permission)",
         ],
@@ -143,16 +146,17 @@ const translations = {
         earnCashback: "Gana",
         cashbackSuffix: "de cashback",
         forApproved: "por",
-        videoReviews: "reseñas en video aprobadas con contenido hablado",
+        videoReviews: "reseñas en video aprobadas con contenido hablado (mín. 10 s)",
+        perSecondTagline: "¡Eso es 1 € por segundo!",
         cashbackTitle: "Gana Cashback por Reseñas en Video con Contenido Hablado",
         cashbackIntro: "Puedes enviar",
         photosOrVideos: "fotos o videos",
         submitA: "Envía una",
         videoReviewSpoken: "reseña en video con contenido hablado",
-        minimum30: "(mínimo 30 segundos hablando) y recibe",
+        minimum10: "(mínimo 10 segundos hablando) y recibe",
         onceApproved: "una vez aprobada. Esto es lo que buscamos:",
         requirements: [
-            "Reseña en video con contenido hablado (mínimo 30 segundos hablando) sobre tu experiencia",
+            "Reseña en video con contenido hablado (mínimo 10 segundos hablando) sobre tu experiencia",
             "Comentarios honestos sobre el producto y tu camino de recuperación",
             "Tu reseña puede aparecer en nuestro sitio web (con permiso)",
         ],
@@ -181,16 +185,17 @@ const translations = {
         earnCashback: "Guadagna",
         cashbackSuffix: "di cashback",
         forApproved: "per le",
-        videoReviews: "recensioni video approvate con contenuto parlato",
+        videoReviews: "recensioni video approvate con contenuto parlato (min. 10 s)",
+        perSecondTagline: "È 1 € al secondo!",
         cashbackTitle: "Guadagna Cashback per le Recensioni Video con Contenuto Parlato",
         cashbackIntro: "Puoi inviare",
         photosOrVideos: "foto o video",
         submitA: "Invia una",
         videoReviewSpoken: "recensione video con contenuto parlato",
-        minimum30: "(minimo 30 secondi di parlato) e ricevi",
+        minimum10: "(minimo 10 secondi di parlato) e ricevi",
         onceApproved: "una volta approvata. Ecco cosa cerchiamo:",
         requirements: [
-            "Recensione video con contenuto parlato (minimo 30 secondi di parlato) sulla tua esperienza",
+            "Recensione video con contenuto parlato (minimo 10 secondi di parlato) sulla tua esperienza",
             "Feedback onesto sul prodotto e sul tuo percorso di recupero",
             "La tua recensione potrebbe essere pubblicata sul nostro sito web (con permesso)",
         ],
@@ -252,6 +257,11 @@ const claimPath = claimPaths[lang] || claimPaths.en;
                         > {t.cashbackSuffix}</strong
                     > {t.forApproved} <strong>{t.videoReviews}</strong>.
                 </p>
+                <p
+                    class="mx-auto max-w-2xl font-semibold text-primary text-lg md:text-xl"
+                >
+                    {t.perSecondTagline}
+                </p>
             </div>
         </ColorGradient>
 
@@ -272,7 +282,7 @@ const claimPath = claimPaths[lang] || claimPaths.en;
                     <p class="mb-4 text-neutral-600 dark:text-neutral-400">
                         {t.cashbackIntro} <strong>{t.photosOrVideos}</strong>. {t.submitA}
                         <strong>{t.videoReviewSpoken}</strong>
-                        {t.minimum30} <strong id="cashback-amount-2"
+                        {t.minimum10} <strong id="cashback-amount-2"
                             ><span id="currency-2">{currency}</span><span
                                 id="amount-2">{amount}</span
                             > {t.cashbackSuffix}</strong

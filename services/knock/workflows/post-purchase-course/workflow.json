@@ -1,0 +1,79 @@
+{
+  "name": "Post-purchase (Course)",
+  "steps": [
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 0 - Thank you",
+      "ref": "thank_you",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Your Thetis Course is ready",
+        "visual_blocks@": "thank_you/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_1",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 2
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 2 - Getting started",
+      "ref": "tips",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Getting the most from your course",
+        "visual_blocks@": "tips/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_2",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 4
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "knock-email",
+      "channel_type": "email",
+      "name": "Day 6 - Review ask",
+      "ref": "review_ask",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "How's the course going? Your feedback helps others",
+        "visual_blocks@": "review_ask/visual_blocks.json"
+      },
+      "type": "channel"
+    }
+  ],
+  "trigger_frequency": "every_trigger",
+  "__readonly": {
+    "environment": "development",
+    "key": "post-purchase-course",
+    "active": true,
+    "valid": true,
+    "created_at": "2026-02-04T11:14:06.742583Z"
+  },
+  "$schema": "https://schemas.knock.app/cli/workflow.json"
+}
