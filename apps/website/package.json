@@ -10,7 +10,7 @@
     "dev:prod": "astro dev --port=2122 --toolbar=false --mode prod",
     "start": "astro dev --toolbar=false",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "astro dev",
     "astro": "astro",
     "test": "vitest",
     "test:e2e": "playwright test",

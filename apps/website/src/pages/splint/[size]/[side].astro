@@ -48,6 +48,17 @@ export async function getStaticPaths() {
 
 const { size, side } = Astro.params;
 
+const validSizes = ["large", "small"];
+const validSides = ["left", "right"];
+if (
+    !size ||
+    !side ||
+    !validSizes.includes(size) ||
+    !validSides.includes(side)
+) {
+    return Astro.redirect("/splint");
+}
+
 const url = new URL(Astro.request.url);
 const region = (url.searchParams.get("region") as "us" | "uk" | null) || "us";
 
@@ -62,11 +73,19 @@ const purchaseInfo = getPurchaseUrl(
 
 const t = buyButtonContent.en;
 
-const splintData = await getSplintData(region);
-const splint = splintData?.find(
-    (d) =>
-        d.size.toLowerCase() === size && d.title.toLowerCase().includes(side),
-);
+let splintData: SplintData[];
+try {
+    splintData = await getSplintData(region);
+} catch (err) {
+    console.error("[splint page] getSplintData failed:", err);
+    return Astro.redirect("/splint");
+}
+
+const splint = splintData?.find((d) => {
+    const dSize = typeof d.size === "string" ? d.size.toLowerCase() : "";
+    const dTitle = typeof d.title === "string" ? d.title.toLowerCase() : "";
+    return dSize === size && dTitle.includes(side);
+});
 
 if (!splint) {
     return Astro.redirect("/404");
@@ -86,8 +105,11 @@ const variants = [
 
 const splintRoute = getRouteBySlugAndLanguage("splint", "en");
 
+const splintImage =
+    splint["image link"] ||
+    "https://www.thetismedical.com/images/night_splint_bed_top_square.jpg";
 const galleryImages = [
-    { src: splint["image link"], alt: splint.title },
+    { src: splintImage, alt: splint.title || "Achilles Tendon Night Splint" },
     {
         src: "/images/night_splint_white_close.jpg",
         alt: "Close-up view of Thetis Night Splint",
@@ -101,9 +123,9 @@ const galleryImages = [
 </Fragment>
 
 <Layout
-    title={splint.title}
+    title={splint.title || "Achilles Tendon Night Splint"}
     description="Lightweight ankle splint, 30° plantarflexion. Large or Small, Left or Right. Clinician approved. Free shipping. 30-day guarantee."
-    image={splint["image link"]}
+    image={splintImage}
     lang="en"
 >
     <main>
