@@ -6,7 +6,7 @@ import { createHmac } from "node:crypto";
 const PRODUCT_TO_SLUG: Record<string, string> = {
     "9846187786568": "standard_course", // Standard / Essentials Course
     "9846188081480": "premium_course", // Premium / Professionals Course
-    "8013896130728": "splint", // Achilles Rupture Splint (all sizes/sides)
+    "8572432253256": "splint", // Achilles Rupture Splint (all sizes/sides)
 };
 
 const COURSE_SLUGS = ["standard_course", "premium_course"];

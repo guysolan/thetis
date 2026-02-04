@@ -14,7 +14,7 @@ export const SHOPIFY_COURSE_PRODUCTS = {
  *   SELECT payload->'line_items'->0->'product_id' FROM webhook_events WHERE (payload->>'order_number') = '1324' LIMIT 1;
  * Or Shopify Admin → Products → Achilles Rupture Splint → ID in URL.
  */
-export const SHOPIFY_SPLINT_PRODUCT_ID = "8013896130728";
+export const SHOPIFY_SPLINT_PRODUCT_ID = "8572432253256";
 
 // Variant IDs (GIDs)
 export const SHOPIFY_COURSE_VARIANTS = {
