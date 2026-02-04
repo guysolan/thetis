@@ -2,18 +2,12 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { createHmac } from "node:crypto";
 
-// Shopify product IDs -> product_slug (extensible for splint, future products)
-// Add SPLINT_PRODUCT_ID in Supabase secrets when you have the ID from Shopify Admin
-function buildProductToSlug(): Record<string, string> {
-    const map: Record<string, string> = {
-        "9846187786568": "standard_course", // Standard / Essentials Course
-        "9846188081480": "premium_course", // Premium / Professionals Course
-    };
-    const splintId = Deno.env.get("SPLINT_PRODUCT_ID");
-    if (splintId) map[splintId] = "splint";
-    return map;
-}
-const PRODUCT_TO_SLUG = buildProductToSlug();
+// Shopify product IDs -> product_slug. Keep splint in sync with SHOPIFY_SPLINT_PRODUCT_ID in apps/website/src/lib/shopify-course-price.ts
+const PRODUCT_TO_SLUG: Record<string, string> = {
+    "9846187786568": "standard_course", // Standard / Essentials Course
+    "9846188081480": "premium_course", // Premium / Professionals Course
+    "8013896130728": "splint", // Achilles Rupture Splint (all sizes/sides)
+};
 
 const COURSE_SLUGS = ["standard_course", "premium_course"];
 
@@ -186,7 +180,12 @@ Deno.serve(async (req) => {
     );
 
     if (trackedItems.length === 0) {
-        console.log(`Order ${order.order_number} contains no tracked products`);
+        const productIdsInOrder = order.line_items.map(
+            (i) => `${i.product_id} (${i.title})`,
+        );
+        console.log(
+            `Order ${order.order_number} contains no tracked products. Line item product_ids: ${productIdsInOrder.join(", ")}. To track the splint, set SPLINT_PRODUCT_ID in Supabase secrets to the splint's Shopify product_id (e.g. from Admin → Products → splint → ID in URL).`,
+        );
         await supabase
             .from("webhook_events")
             .update({ processed: true, processed_at: new Date().toISOString() })

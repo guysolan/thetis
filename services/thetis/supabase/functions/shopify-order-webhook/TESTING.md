@@ -23,10 +23,8 @@ Yes! Shopify has test/sandbox modes similar to Stripe. You can test webhooks usi
      - `SUPABASE_URL`
      - `SUPABASE_SERVICE_ROLE_KEY`
 
-3. **Course Products Created**
-   - Standard Course product ID: `9846187786568`
-   - Premium Course product ID: `9846188081480`
-   - Note: Update these IDs in `index.ts` to match your actual Shopify product IDs
+3. **Tracked products**
+   - Product IDs are in `index.ts`: Standard course `9846187786568`, Premium course `9846188081480`, Splint `8013896130728`. Keep splint in sync with `SHOPIFY_SPLINT_PRODUCT_ID` in `apps/website/src/lib/shopify-course-price.ts`.
 
 ## Setup Steps
 
