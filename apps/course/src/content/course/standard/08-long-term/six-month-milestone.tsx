@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import WhereYourTendonIsNow from "@/assets/where-your-tendon-is-now-v9-icon-based-fixed-fixed.png";
+import WhereYourTendonIsNow from "@/assets/where-your-tendon-is-now-6-months-v2-scar.png";
 import ReturnToSportCriteria from "@/assets/return-to-sport-criteria-v7-mike-checklist-fixed.png";
 
 export const metadata = {
