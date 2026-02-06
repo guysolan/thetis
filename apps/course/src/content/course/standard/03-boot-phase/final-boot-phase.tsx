@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import TendonStrengthTimeline from "@/assets/tendon-strength-timeline-v6.png";
+import TendonStrengthTimeline from "@/assets/tendon-strength-timeline-tintin-v6.png";
 
 export const metadata = {
     slug: "final-boot-phase",
@@ -505,7 +505,7 @@ export const content: SectionContent = {
                     variant: "danger",
                     title: "Seek urgent care",
                     content:
-                        '**Severe pain**, **new pop/snap**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention). Also seek help for **numb/blue/pale toes**, severe pressure/pain, or fever with spreading redness.',
+                        "**Severe pain**, **new pop/snap**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention). Also seek help for **numb/blue/pale toes**, severe pressure/pain, or fever with spreading redness.",
                 },
             ],
         },

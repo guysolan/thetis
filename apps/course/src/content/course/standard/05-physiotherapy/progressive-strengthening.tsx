@@ -1,7 +1,7 @@
 import type { SectionContent } from "@/components/course/types";
 import IsomOvercomingSeatedCalf from "@/assets/isom-overcoming-seated-calf.png";
 import IsomYieldingStandingSeated from "@/assets/isom-yielding-standing-seated.png";
-import HeelRaiseProgression from "@/assets/heel-raise-progression.png";
+import HeelRaiseProgression from "@/assets/heel-raise-progression-v1-fixed.png";
 
 export const metadata = {
     slug: "progressive-strengthening",

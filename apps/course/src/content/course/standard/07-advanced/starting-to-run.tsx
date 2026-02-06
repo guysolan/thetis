@@ -1,5 +1,6 @@
 import type { SectionContent } from "@/components/course/types";
 import RunningFormWeek28 from "@/assets/running-form-week-28.png";
+import WalkJogProgression from "@/assets/walk-jog-progression-v6.png";
 
 export const metadata = {
     slug: "starting-to-run",
@@ -93,6 +94,13 @@ export const content: SectionContent = {
                     type: "text",
                     content:
                         "**Walk-jog progression** is the safest way to start running. You gradually transition from walking to running, giving your tendon time to adapt.",
+                },
+                {
+                    type: "image",
+                    src: WalkJogProgression,
+                    alt: "Walk-jog progression infographic showing three stages: Week 1-2 walk only (15-20 min), Week 3-4 walk-jog intervals (progressing from 1 min jog/4 min walk to 4 min jog/1 min walk), and Week 5+ continuous run (5-10 min)",
+                    caption:
+                        "Walk-jog progression: the safe way to start running, gradually transitioning from walking to continuous running",
                 },
                 {
                     type: "card",

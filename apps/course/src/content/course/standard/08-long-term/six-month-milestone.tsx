@@ -1,4 +1,6 @@
 import type { SectionContent } from "@/components/course/types";
+import WhereYourTendonIsNow from "@/assets/where-your-tendon-is-now-6-months-v2-scar.png";
+import ReturnToSportCriteria from "@/assets/return-to-sport-criteria-v7-mike-checklist-fixed.png";
 
 export const metadata = {
     slug: "six-month-milestone",
@@ -57,6 +59,13 @@ export const content: SectionContent = {
                         "At 6 months, your tendon has healed significantly. Understanding where it is now helps you set realistic expectations.",
                 },
                 {
+                    type: "image",
+                    src: WhereYourTendonIsNow,
+                    alt: "Achilles tendon status at 6 months showing healed rupture site, tendon is stronger, normal thickening, still healing 12-18 months, with normal changes including calf asymmetry, stiffness, and gradual improvement",
+                    caption:
+                        "Where your tendon is now at 6 months: healing status and what's normal",
+                },
+                {
                     type: "card",
                     title: "Tendon healing status",
                     description: "What's happened so far.",
@@ -107,6 +116,13 @@ export const content: SectionContent = {
                     type: "text",
                     content:
                         "Return to sport is **criteria-based, not time-based**. You need to meet certain strength and function goals, not just wait for 6 months or 9 months. These criteria ensure you're ready and reduce re-injury risk.",
+                },
+                {
+                    type: "image",
+                    src: ReturnToSportCriteria,
+                    alt: "Return-to-sport criteria checklist showing 25+ single-leg heel raises, 85% symmetry, pain-free activities, good balance, and confidence, with note that most people need more than 6 months",
+                    caption:
+                        "Return-to-sport criteria: what you need to achieve before returning to sport",
                 },
                 {
                     type: "card",

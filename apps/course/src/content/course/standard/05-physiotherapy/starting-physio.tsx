@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import Phase2Goals from "@/assets/phase-2-goals-option-v6.png";
+import Phase2Goals from "@/assets/phase-2-goals-option-v1.png";
 
 export const metadata = {
     slug: "starting-physio",

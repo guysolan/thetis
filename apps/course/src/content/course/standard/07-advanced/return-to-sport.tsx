@@ -1,4 +1,6 @@
 import type { SectionContent } from "@/components/course/types";
+import ReturnToSportProgression from "@/assets/return-to-sport-progression.png";
+import Symmetry85Percent from "@/assets/return-to-sport-criteria-85-percent-combined.png";
 
 export const metadata = {
     slug: "return-to-sport",

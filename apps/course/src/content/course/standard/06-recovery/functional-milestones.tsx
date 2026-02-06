@@ -1,5 +1,6 @@
 import type { SectionContent } from "@/components/course/types";
 import FunctionalMilestones2x2 from "@/assets/functional-milestones-2x2.png";
+import FunctionalMilestonesV7 from "@/assets/functional-milestones-v7-alt2.png";
 
 export const metadata = {
     slug: "functional-milestones",
@@ -59,10 +60,10 @@ export const content: SectionContent = {
                 },
                 {
                     type: "image",
-                    src: FunctionalMilestones2x2,
-                    alt: "2x2 matrix showing the 4 key functional milestones: Pain-Free Walking (walk 10-15 min without pain), 25+ Heel Raises (single-leg heel raises), Good Balance (stand 30+ seconds on one leg), and Confident Stairs (up and down, one foot per step)",
+                    src: FunctionalMilestonesV7,
+                    alt: "Four-panel illustration showing the 4 key functional milestones: Pain-Free Walking (walks normally without pain or limp), 25+ Single Leg Heel Raises (able to do at least 25 strong single-leg raises), Good Balance (balances on one leg for 30 seconds without wobbling), and Confident Stairs (navigates stairs confidently, up and down, without assistance)",
                     caption:
-                        "The 4 checkpoints that show you're ready for Phase 4",
+                        "The 4 key functional milestones: what you're working toward",
                 },
                 {
                     type: "card",

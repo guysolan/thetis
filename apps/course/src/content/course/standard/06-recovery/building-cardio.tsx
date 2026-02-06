@@ -1,5 +1,7 @@
 import type { SectionContent } from "@/components/course/types";
 import PoolWalkingWeek12 from "@/assets/pool-walking-week-12.png";
+import SwimmingSafety from "@/assets/swimming-safety-v14.png";
+import SwimmingProgression from "@/assets/swimming-progression-v5-fixed.png";
 
 export const metadata = {
     slug: "building-cardio",
@@ -336,6 +338,7 @@ export const content: SectionContent = {
                                 "**Technique:** Walk forward, backward, sideways",
                                 "**Benefits:** Water supports body weight, reduces impact",
                                 "**Progression:** Increase speed and duration gradually",
+                                "**Duration:** Start with 10-15 minutes, build to 20-30 minutes",
                             ],
                         },
                         {
@@ -345,13 +348,7 @@ export const content: SectionContent = {
                             caption:
                                 "Pool walking: the water supports your body weight, making it safe and low-impact",
                         },
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "**Duration:** Start with 10-15 minutes, build to 20-30 minutes",
-                            ],
-                        },
+                        
                     ],
                 },
                 {
@@ -435,6 +432,13 @@ export const content: SectionContent = {
                         "Swimming is generally safe, but there are important safety considerations to protect your healing tendon.",
                 },
                 {
+                    type: "image",
+                    src: SwimmingSafety,
+                    alt: "Three-panel swimming safety guide showing what to avoid (push-off from wall, flip turns, diving, hard kicking, competitive swimming), precautions (use pool steps, start slowly, listen to body, careful on wet surfaces, stay hydrated), and monitoring (pain should not be significant, monitor swelling, some stiffness is normal, report concerns to clinician)",
+                    caption:
+                        "Swimming safety: what to avoid, precautions to take, and how to monitor your recovery",
+                },
+                {
                     type: "card",
                     title: "What to avoid",
                     description: "Activities to avoid initially.",
@@ -500,6 +504,13 @@ export const content: SectionContent = {
                     type: "text",
                     content:
                         "Start gently and progress gradually. Here's a typical progression plan:",
+                },
+                {
+                    type: "image",
+                    src: SwimmingProgression,
+                    alt: "Swimming progression plan showing three stages: Week 10-12 pool walking, Week 12-14 gentle swimming, and Week 16+ increased activity with duration, frequency, and focus for each stage",
+                    caption:
+                        "Swimming progression plan: start gently and progress gradually through pool walking, gentle swimming, and increased activity",
                 },
                 {
                     type: "card",
