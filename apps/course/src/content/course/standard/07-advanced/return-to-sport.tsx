@@ -1,6 +1,6 @@
 import type { SectionContent } from "@/components/course/types";
 import ReturnToSportProgression from "@/assets/return-to-sport-progression.png";
-import Symmetry85Percent from "@/assets/return-to-sport-criteria-85-percent-combined.png";
+import ReturnToSportCriteria85Percent from "@/assets/return-to-sport-criteria-85.png";
 
 export const metadata = {
     slug: "return-to-sport",
@@ -57,6 +57,13 @@ export const content: SectionContent = {
                     type: "text",
                     content:
                         "Return to sport is **criteria-based, not time-based**. You need to demonstrate specific strength and function goals before returning. This ensures you're ready and reduces re-injury risk.",
+                },
+                {
+                    type: "image",
+                    src: ReturnToSportCriteria85Percent,
+                    alt: "Return-to-sport criteria infographic showing the 85% symmetry rule for strength, hopping, and jumping tasks",
+                    caption:
+                        "Return-to-sport criteria: the 85% symmetry rule for strength, hopping, and jumping",
                 },
                 {
                     type: "card",
