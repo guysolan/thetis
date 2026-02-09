@@ -31,11 +31,11 @@ export function DatePickerField<TFormData>({
             <Popover>
                 <PopoverTrigger asChild>
                     <Button
-                        variant={"outline"}
+                        variant="outline"
                         type="button"
                         aria-invalid={field.state.meta.errors.length > 0}
                         className={cn(
-                            "pl-3 w-full font-normal text-left",
+                            "h-9 w-full font-normal text-sm text-left justify-start px-3",
                             !field.state.value && "text-muted-foreground",
                         )}
                     >

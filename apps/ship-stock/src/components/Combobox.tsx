@@ -65,7 +65,7 @@ export const Combobox = ({
                                     disabled={disabled}
                                     aria-expanded={open}
                                     className={cn(
-                                        "justify-between w-full",
+                                        "h-9 w-full justify-between font-normal text-sm px-3",
                                         !field.value && "text-muted-foreground",
                                     )}
                                 >

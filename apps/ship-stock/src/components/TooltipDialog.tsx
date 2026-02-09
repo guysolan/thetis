@@ -31,7 +31,11 @@ const TooltipDialog = ({ icon, tooltipText, children }: TooltipDialogProps) => {
         <Tooltip>
           <TooltipTrigger type="button">
             <DialogTrigger type="button" asChild>
-              <Button variant="outline" size="icon" type="button">
+              <Button
+                variant="outline"
+                type="button"
+                className="h-9 w-9 shrink-0 p-0 [&_svg]:size-4"
+              >
                 {icon}
               </Button>
             </DialogTrigger>

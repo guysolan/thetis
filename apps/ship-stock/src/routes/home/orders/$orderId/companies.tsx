@@ -42,7 +42,7 @@ function RouteComponent() {
         }
         return {
             ...order.order_form_values,
-            order_type: order.order_form_values.order_type || "sale",
+            order_type: order.order_form_values.order_type || "sell",
             company_id: order.order_form_values.company_id || companyId,
         };
     }, [order?.order_form_values, companyId]);
@@ -96,25 +96,18 @@ function RouteComponent() {
     };
 
     return (
-        <div className="mx-auto">
-            <h1 className="mb-6 font-bold text-2xl">Edit Order</h1>
-
-            <div className="flex flex-col gap-y-6 w-full">
-                <OrderFormStepper
-                    steps={STEPS}
-                    currentStep={2}
-                    onStepClick={handleStepClick}
-                />
-
-                <div className="flex flex-col gap-y-4">
-                    <ValidationSummary form={form} />
-                    <CompaniesAddressesPage form={form} />
-                    <OrderFormNavigation
-                        onPrevious={handlePrevious}
-                        onNext={handleNext}
-                    />
-                </div>
-            </div>
+        <div className="space-y-6">
+            <OrderFormStepper
+                steps={STEPS}
+                currentStep={2}
+                onStepClick={handleStepClick}
+            />
+            <ValidationSummary form={form} />
+            <CompaniesAddressesPage form={form} />
+            <OrderFormNavigation
+                onPrevious={handlePrevious}
+                onNext={handleNext}
+            />
         </div>
     );
 }

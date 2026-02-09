@@ -2,76 +2,70 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@thetis/ui/button";
 import { Tabs, TabsContent, TabsTrigger } from "@thetis/ui/tabs";
 import TabsHeader from "@/components/TabsHeader";
+import PageHeader from "@/components/PageHeader";
 import { Link } from "@tanstack/react-router";
-import { Grid3X3, Package, Plus, Send, ShoppingCart } from "lucide-react";
+import { Plus } from "lucide-react";
 
 import { OrderHistory } from "@/features/orders/components/OrderHistory";
 import { useSelectOrders } from "@/features/orders/features/order-history/api/selectOrders";
-import { v4 as uuidv4 } from "uuid";
+import { features } from "@/features/navigation/content";
 
-export type OrderTab = "sale" | "purchase" | "shipment" | "all";
-const tabs: OrderTab[] = ["all", "purchase", "sale", "shipment"];
+const tabConfig = features.orders.tabs;
 
-// Helper function to get tab icon
-const getTabIcon = (tab: OrderTab) => {
-  switch (tab) {
-    case "all":
-      return Grid3X3;
-    case "purchase":
-      return Package;
-    case "sale":
-      return ShoppingCart;
-    case "shipment":
-      return Send;
-    default:
-      return Grid3X3;
-  }
-};
+type OrderTab = (typeof tabConfig)[number]["value"];
 
-// Helper function to get tab label
-const getTabLabel = (tab: OrderTab) => {
-  return tab.charAt(0).toUpperCase() + tab.slice(1);
-};
+export type { OrderTab };
 
-const OrdersPage = () => {
+export const Route = createFileRoute("/home/orders/")({
+  component: OrdersPage,
+  validateSearch: (search: Record<string, unknown>): { tab: OrderTab } => ({
+    tab: (tabConfig.some((t) => t.value === search.tab)
+      ? search.tab
+      : "all") as OrderTab,
+  }),
+});
+
+function OrdersPage() {
+  const { tab } = Route.useSearch();
+  const navigate = Route.useNavigate();
   const { data: orders } = useSelectOrders();
+
+  const handleTabChange = (value: string | null) => {
+    if (value) {
+      navigate({ search: { tab: value as OrderTab }, replace: true });
+    }
+  };
+
+  const tabsList = tabConfig.map(({ value, label, icon: Icon }) => (
+    <TabsTrigger key={value} value={value}>
+      <Icon size={16} className="shrink-0" />
+      <span>{label}</span>
+    </TabsTrigger>
+  ));
 
   return (
     <>
-      <Tabs defaultValue="all" className="w-full">
-        <TabsHeader
-          tabsList={tabs.map((tab) => {
-            const TabIcon = getTabIcon(tab);
-            return (
-              <TabsTrigger
-                key={tab}
-                value={tab}
-                className="flex items-center gap-2 px-4"
-              >
-                <TabIcon size={16} />
-                <span className="hidden sm:inline">{getTabLabel(tab)}</span>
-              </TabsTrigger>
-            );
-          })}
-          actionButtons={
-            <Link to="/home/orders/$orderId" params={{ orderId: "new" }}>
-              <Button className="flex items-center gap-2">
-                <Plus size={16} />
-                <span className="hidden sm:inline">New Order</span>
-              </Button>
-            </Link>
-          }
-        />
+      <PageHeader title="Orders">
+        <Link to="/home/orders/$orderId" params={{ orderId: "new" }}>
+          <Button className="flex items-center gap-2">
+            <Plus size={16} />
+            <span className="hidden sm:inline">New Order</span>
+          </Button>
+        </Link>
+      </PageHeader>
 
-        {tabs?.map((tabValue) => (
+      <Tabs value={tab} onValueChange={handleTabChange} className="w-full">
+        <TabsHeader tabsList={tabsList} />
+
+        {tabConfig.map(({ value }) => (
           <TabsContent
             className="flex flex-col gap-4 w-full"
-            key={tabValue}
-            value={tabValue}
+            key={value}
+            value={value}
           >
             <OrderHistory
               orders={orders?.filter((order) =>
-                tabValue === "all" ? true : order.order_type === tabValue
+                value === "all" ? true : order.order_type === value
               )}
             />
           </TabsContent>
@@ -79,8 +73,4 @@ const OrdersPage = () => {
       </Tabs>
     </>
   );
-};
-
-export const Route = createFileRoute("/home/orders/")({
-  component: OrdersPage,
-});
+}

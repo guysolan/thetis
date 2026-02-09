@@ -45,8 +45,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/claim': typeof ClaimRoute
   '/standard/$slug': typeof StandardSlugRoute
-  '/premium': typeof PremiumIndexRoute
-  '/standard': typeof StandardIndexRoute
+  '/premium/': typeof PremiumIndexRoute
+  '/standard/': typeof StandardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -65,7 +65,7 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/claim' | '/standard/$slug' | '/premium' | '/standard'
+  fullPaths: '/' | '/claim' | '/standard/$slug' | '/premium/' | '/standard/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/claim' | '/standard/$slug' | '/premium' | '/standard'
   id:
@@ -104,14 +104,14 @@ declare module '@tanstack/react-router' {
     '/standard/': {
       id: '/standard/'
       path: '/standard'
-      fullPath: '/standard'
+      fullPath: '/standard/'
       preLoaderRoute: typeof StandardIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/premium/': {
       id: '/premium/'
       path: '/premium'
-      fullPath: '/premium'
+      fullPath: '/premium/'
       preLoaderRoute: typeof PremiumIndexRouteImport
       parentRoute: typeof rootRouteImport
     }

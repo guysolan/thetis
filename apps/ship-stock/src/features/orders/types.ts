@@ -3,11 +3,11 @@ import { Company } from "../companies/types";
 import { Contact } from "../contacts/types";
 
 export const orderTypes = [
-    "sale",
-    "shipment",
+    "sell",
+    "buy",
     "build",
-    "purchase",
-    "stocktake",
+    "ship",
+    "count",
 ] as const;
 
 import { Address } from "../stockpiles/types";

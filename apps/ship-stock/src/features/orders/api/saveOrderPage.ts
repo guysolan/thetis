@@ -10,6 +10,7 @@ import {
 	processBuyFormData,
 	processSellFormData,
 	processShipmentFormData,
+	processSimpleBuyFormData,
 } from "./createOrder";
 
 // Helper to convert empty strings to null
@@ -235,16 +236,32 @@ export async function saveOrderItems(
 	// Process items based on order type
 	let processedItems: FormatOrderItemChanges[] = [];
 
-	if (formData.order_type === "purchase") {
+	if (formData.order_type === "build") {
 		processedItems = processBuyFormData(formData);
-	} else if (formData.order_type === "sale") {
+	} else if (formData.order_type === "buy") {
+		processedItems = processSimpleBuyFormData(formData);
+	} else if (formData.order_type === "sell") {
 		processedItems = processSellFormData(formData);
-	} else if (formData.order_type === "shipment") {
+	} else if (formData.order_type === "ship") {
 		processedItems = processShipmentFormData(formData);
 	}
 
 	// Filter out empty/invalid items
-	const packageItems = formData.package_items || [];
+	const packageItems = (formData.package_items || []).filter(
+		(p): p is typeof p => {
+			const hasPackageId =
+				p.package_id != null && String(p.package_id).trim() !== "";
+			if (!hasPackageId) {
+				console.warn(
+					"⚠️ Skipping package item with missing package_id:",
+					p,
+				);
+				return false;
+			}
+			return true;
+		},
+	);
+
 	const regularItems = processedItems.filter(
 		(item) =>
 			item.item_id &&
@@ -252,6 +269,20 @@ export async function saveOrderItems(
 			item.quantity_change !== 0 &&
 			item.address_id,
 	);
+
+	// For buy orders, packages go to to_shipping_address_id; for everything else, from_shipping_address_id
+	const packageAddressId = formData.order_type === "buy"
+		? formData.to_shipping_address_id
+		: formData.from_shipping_address_id;
+
+	if (
+		(packageItems.length > 0 || regularItems.length > 0) &&
+		(packageAddressId == null || String(packageAddressId).trim() === "")
+	) {
+		throw new Error(
+			"Shipping address is required to save order items. Please complete the Companies step.",
+		);
+	}
 
 	console.log("📦 Package items to process:", packageItems.length);
 	console.log("📋 Regular items to process:", regularItems.length);
@@ -272,21 +303,33 @@ export async function saveOrderItems(
 	const packageItemChangeIdMap = new Map<number | null, number>();
 
 	// First, insert package items
-	if (packageItems.length > 0) {
+	const packageAddressIdNum =
+		packageAddressId != null ? Number(packageAddressId) : NaN;
+	if (packageItems.length > 0 && !Number.isNaN(packageAddressIdNum)) {
 		const packageItemPromises = packageItems.map(async (packageItem) => {
 			const originalPackageItemChangeId =
 				packageItem.package_item_change_id;
-			const itemChangeId = packageItem.package_item_change_id ||
+			const itemChangeId =
+				packageItem.package_item_change_id ??
 				Math.floor(Math.random() * 1000000);
+			const packageIdNum = Number(packageItem.package_id);
+			if (Number.isNaN(packageIdNum)) {
+				throw new Error(
+					`Invalid package_id for package item: ${packageItem.package_id}`,
+				);
+			}
 
 			const { data: itemChange, error: itemChangeError } = await supabase
 				.from("item_changes")
-				.upsert({
-					id: itemChangeId,
-					item_id: String(packageItem.package_id),
-					quantity_change: 1,
-					address_id: String(formData.from_shipping_address_id),
-				}, { onConflict: "id" })
+				.upsert(
+					{
+						id: itemChangeId,
+						item_id: packageIdNum,
+						quantity_change: 1,
+						address_id: packageAddressIdNum,
+					},
+					{ onConflict: "id" },
+				)
 				.select("id")
 				.single();
 
@@ -298,25 +341,26 @@ export async function saveOrderItems(
 				throw itemChangeError;
 			}
 
-			if (originalPackageItemChangeId !== null) {
+			if (originalPackageItemChangeId != null) {
 				packageItemChangeIdMap.set(
 					originalPackageItemChangeId,
 					itemChange.id,
 				);
 			}
 
-			// Create order_item_change for package
+			// Create order_item_change for package (omit optional null columns to avoid sending undefined)
 			const { error: orderItemChangeError } = await supabase
 				.from("order_item_changes")
-				.upsert({
-					order_id: orderId,
-					item_change_id: itemChange.id,
-					price: 0,
-					tax: 0,
-					package_item_id: undefined,
-					package_item_change_id: itemChange.id,
-					lot_number: undefined,
-				}, { onConflict: "order_id,item_change_id" });
+				.upsert(
+					{
+						order_id: orderId,
+						item_change_id: itemChange.id,
+						price: 0,
+						tax: 0,
+						package_item_change_id: itemChange.id,
+					},
+					{ onConflict: "order_id,item_change_id" },
+				);
 
 			if (orderItemChangeError) {
 				console.error(
@@ -335,15 +379,25 @@ export async function saveOrderItems(
 	if (regularItems.length > 0) {
 		const regularItemPromises = regularItems.map(async (item) => {
 			const itemChangeId = Math.floor(Math.random() * 1000000);
+			const itemIdNum = Number(item.item_id);
+			const addressIdNum = Number(item.address_id);
+			if (Number.isNaN(itemIdNum) || Number.isNaN(addressIdNum)) {
+				throw new Error(
+					`Invalid item_id or address_id for order item: item_id=${item.item_id}, address_id=${item.address_id}`,
+				);
+			}
 
 			const { data: itemChange, error: itemChangeError } = await supabase
 				.from("item_changes")
-				.upsert({
-					id: itemChangeId,
-					item_id: String(item.item_id),
-					quantity_change: item.quantity_change,
-					address_id: String(item.address_id),
-				}, { onConflict: "id" })
+				.upsert(
+					{
+						id: itemChangeId,
+						item_id: itemIdNum,
+						quantity_change: item.quantity_change,
+						address_id: addressIdNum,
+					},
+					{ onConflict: "id" },
+				)
 				.select("id")
 				.single();
 
@@ -373,18 +427,20 @@ export async function saveOrderItems(
 				}
 			}
 
-			// Create order_item_change
+			// Create order_item_change (use null for optional fields to avoid sending undefined)
 			const { error: orderItemChangeError } = await supabase
 				.from("order_item_changes")
-				.upsert({
-					order_id: orderId,
-					item_change_id: itemChange.id,
-					price: item.item_price,
-					tax: item.item_tax,
-					package_item_id: item.package_item_id,
-					package_item_change_id: resolvedPackageItemChangeId,
-					lot_number: item.lot_number,
-				}, { onConflict: "order_id,item_change_id" });
+				.upsert(
+					{
+						order_id: orderId,
+						item_change_id: itemChange.id,
+						price: item.item_price ?? 0,
+						tax: item.item_tax ?? 0,
+						package_item_change_id: resolvedPackageItemChangeId,
+						lot_number: item.lot_number ?? null,
+					},
+					{ onConflict: "order_id,item_change_id" },
+				);
 
 			if (orderItemChangeError) {
 				console.error(

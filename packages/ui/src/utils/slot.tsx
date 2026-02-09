@@ -7,11 +7,26 @@ interface SlotProps extends React.HTMLAttributes<HTMLElement> {
 const Slot = React.forwardRef<HTMLElement, SlotProps>(
   ({ children, ...props }, ref) => {
     if (React.isValidElement(children)) {
-      return React.cloneElement(children, {
+      const childProps = children.props as Record<string, unknown>;
+      const merged: Record<string, unknown> = {
         ...props,
-        ...children.props,
+        ...childProps,
         ref,
-      } as any);
+      };
+      // Merge event handlers so both trigger (e.g. popover) and child run
+      if (props.onClick != null || childProps.onClick != null) {
+        merged.onClick = (e: unknown) => {
+          (props.onClick as (e: unknown) => void)?.(e);
+          (childProps.onClick as (e: unknown) => void)?.(e);
+        };
+      }
+      if (props.onPointerDown != null || childProps.onPointerDown != null) {
+        merged.onPointerDown = (e: unknown) => {
+          (props.onPointerDown as (e: unknown) => void)?.(e);
+          (childProps.onPointerDown as (e: unknown) => void)?.(e);
+        };
+      }
+      return React.cloneElement(children, merged as any);
     }
     return null;
   },

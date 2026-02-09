@@ -41,11 +41,11 @@ interface EditableOrderProps {
 }
 
 const orderTypeOptions = [
-    { label: "Sale", value: "sale" },
-    { label: "Purchase", value: "purchase" },
-    { label: "Shipment", value: "shipment" },
+    { label: "Sell", value: "sell" },
+    { label: "Buy", value: "buy" },
     { label: "Build", value: "build" },
-    { label: "Stocktake", value: "stocktake" },
+    { label: "Ship", value: "ship" },
+    { label: "Count", value: "count" },
 ];
 
 const currencyOptions = [
@@ -179,7 +179,7 @@ export const EditableOrder = ({ order }: EditableOrderProps) => {
 
                         {/* Delivery Information */}
                         <div className="gap-6 grid grid-cols-1 lg:grid-cols-2">
-                            {!["stocktake", "shipment"].includes(
+                            {!["count", "ship"].includes(
                                 order.order_type,
                             ) && (
                                 <div className="space-y-2">
@@ -193,7 +193,7 @@ export const EditableOrder = ({ order }: EditableOrderProps) => {
                                     />
                                 </div>
                             )}
-                            {!["stocktake"].includes(order.order_type) && (
+                            {!["count"].includes(order.order_type) && (
                                 <div className="space-y-2">
                                     <label className="font-medium text-sm">
                                         Delivery Status

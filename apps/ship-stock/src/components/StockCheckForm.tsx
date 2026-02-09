@@ -14,7 +14,7 @@ const StockCheckForm: React.FC<StockCheckFormProps> = ({
     addressId,
     onSuccess,
 }) => {
-    const { mutate: createOrder } = useCreateOrder("stocktake");
+    const { mutate: createOrder } = useCreateOrder("count");
 
     const defaultValues = {
         order_id: null,
@@ -28,7 +28,7 @@ const StockCheckForm: React.FC<StockCheckFormProps> = ({
             },
         ],
         order_date: dayjs().toDate(),
-        order_type: "stocktake",
+        order_type: "count",
         to_shipping_address_id: addressId,
         address_id: addressId, // Set this for the StocktakeItems component
     };
@@ -39,7 +39,7 @@ const StockCheckForm: React.FC<StockCheckFormProps> = ({
         try {
             await createOrder({
                 ...formData,
-                order_type: "stocktake",
+                order_type: "count",
                 to_shipping_address_id: addressId,
             });
 

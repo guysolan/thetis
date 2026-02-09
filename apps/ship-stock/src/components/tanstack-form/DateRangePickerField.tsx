@@ -98,11 +98,11 @@ export function DateRangePickerField<TFormData>({
             <Popover>
                 <PopoverTrigger asChild>
                     <Button
-                        variant={"outline"}
+                        variant="outline"
                         type="button"
                         aria-invalid={field.state.meta.errors.length > 0}
                         className={cn(
-                            "flex justify-between items-center gap-2 pr-3 pl-3 w-full font-normal text-left",
+                            "h-9 flex justify-between items-center gap-2 px-3 w-full font-normal text-sm text-left",
                             !dateRange?.from && "text-muted-foreground",
                             field.state.meta.errors.length > 0 &&
                                 "border-destructive",

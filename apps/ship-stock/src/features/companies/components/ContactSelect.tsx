@@ -35,16 +35,18 @@ const ContactSelect = ({
     };
 
     return (
-        <div className="flex flex-row items-end gap-2 w-full">
-            <Select
-                label={label}
-                name={getFieldName("contact")}
-                options={getContactOptions()}
-            />
-            <div className="flex gap-2">
+        <div className="flex flex-row items-center gap-2 w-full">
+            <div className="flex-1 min-w-0">
+                <Select
+                    label={label}
+                    name={getFieldName("contact")}
+                    options={getContactOptions()}
+                />
+            </div>
+            <div className="flex shrink-0 gap-2">
                 {contactId && (
                     <TooltipDialog
-                        icon={<Pencil size={20} />}
+                        icon={<Pencil size={16} />}
                         tooltipText="Edit Contact"
                     >
                         <CompanyContactForm
@@ -56,7 +58,7 @@ const ContactSelect = ({
                     </TooltipDialog>
                 )}
                 <TooltipDialog
-                    icon={<Plus size={20} />}
+                    icon={<Plus size={16} />}
                     tooltipText="Add Contact"
                 >
                     <CompanyContactForm

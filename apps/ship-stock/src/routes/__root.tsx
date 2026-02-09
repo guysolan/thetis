@@ -46,7 +46,7 @@ function RootComponent() {
     <>
       <Outlet />
       <RouterSpinner />
-      <Toaster />
+      <Toaster position="top-right" />
       {/* <ReactQueryDevtools buttonPosition="top-right" /> */}
       {/* <TanStackRouterDevtools position="bottom-right" /> */}
     </>

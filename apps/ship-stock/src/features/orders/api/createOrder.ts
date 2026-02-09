@@ -88,7 +88,7 @@ type AnyOrderItem =
 		lot_number?: string;
 	}
 	| {
-		item_type: "product" | "part" | "service" | "stocktake";
+		item_type: "product" | "part" | "service" | "count";
 		item_id: string;
 		quantity_change: number;
 		lot_number?: string;
@@ -107,12 +107,12 @@ const isValidOrderItem = (item: { item_type?: string }) =>
 	item.item_type === "part" ||
 	item.item_type === "service" ||
 	item.item_type === "package" ||
-	item.item_type === "stocktake";
+	item.item_type === "count";
 
 export function extractOrderItems(
 	orderItems: OrderItemWithTotal[] | undefined,
 	mode: "package" | "direct" | undefined,
-	order_type?: "sale" | "purchase" | "shipment" | "stocktake",
+	order_type?: "sell" | "build" | "buy" | "ship" | "count",
 ): OrderItemWithTotal[] {
 	console.log("🔍 extractOrderItems - Input:", {
 		orderItemsLength: orderItems?.length ?? 0,
@@ -233,15 +233,26 @@ export const processBuyFormData = (
 			"🛒 Processing non-part items (consumed/produced/order items)",
 		);
 
-		// Process consumed items (from from_shipping_address_id)
+		// Process consumed items: negative = consumed at from_address, positive = produced at to_address
 		const consumed = (formData.consumed_items || [])
 			.map((item) => ({ ...item, item_type: "product" }))
 			.filter(isValidOrderItem)
 			.map(mapToFormOrderItem);
+		const consumedAtFrom = consumed.filter(
+			(item) => Number(item.quantity_change) < 0,
+		);
+		const producedAtTo = consumed.filter(
+			(item) => Number(item.quantity_change) > 0,
+		);
 		console.log(
-			"🛒 Consumed items:",
-			consumed.length,
-			JSON.stringify(consumed, null, 2),
+			"🛒 Consumed items (at from):",
+			consumedAtFrom.length,
+			JSON.stringify(consumedAtFrom, null, 2),
+		);
+		console.log(
+			"🛒 Produced items (at to):",
+			producedAtTo.length,
+			JSON.stringify(producedAtTo, null, 2),
 		);
 
 		// Process order items (need both FROM and TO entries)
@@ -259,10 +270,16 @@ export const processBuyFormData = (
 		);
 
 		item_changes_internal = [
-			// Consumed items come from from_shipping_address_id
-			...consumed.map((item) => ({
+			// Consumed (negative) at from_shipping_address_id
+			...consumedAtFrom.map((item) => ({
 				...item,
 				address_id: formData.from_shipping_address_id,
+			})),
+			// Produced (positive) at to_shipping_address_id
+			...producedAtTo.map((item) => ({
+				...item,
+				address_id: formData.to_shipping_address_id,
+				quantity_change: Number(item.quantity_change),
 			})),
 			// Add all order items to to_shipping_address_id
 			...order_items_mapped
@@ -409,6 +426,34 @@ export function processSellFormData(
 		JSON.stringify(itemChangesResult, null, 2),
 	);
 	return itemChangesResult;
+}
+
+/**
+ * Simple buy: order_items with positive quantity at to_shipping_address_id only.
+ * No consumption or production; opposite of sale (stock in at one address).
+ */
+export function processSimpleBuyFormData(
+	formData: MultiOrderFormData,
+): FormatOrderItemChanges[] {
+	const orderItems = (formData.order_items || [])
+		.map((item) => ({
+			...item,
+			item_type: item.item_type || "product",
+		}))
+		.filter(isValidOrderItem)
+		.map(mapToFormOrderItem);
+	const result: FormatOrderItemChanges[] = orderItems.map((item) => ({
+		item_id: item.item_id,
+		quantity_change: Math.abs(Number(item.quantity_change)),
+		item_price: item?.item_price ?? 0,
+		item_tax: item?.item_tax ?? 0,
+		address_id: formData.to_shipping_address_id,
+		item_type: item.item_type as ItemType,
+		package_item_id: item.package_item_id,
+		package_item_change_id: item.package_item_change_id ?? null,
+		lot_number: item.lot_number,
+	}));
+	return result;
 }
 
 export const processShipmentFormData = (
@@ -677,17 +722,20 @@ const processMultiOrderFormDataLocal = (
 	);
 
 	let itemChanges: FormatOrderItemChanges[] = [];
-	if (formData.order_type === "purchase") {
-		console.log("🔄 Processing PURCHASE order");
+	if (formData.order_type === "build") {
+		console.log("🔄 Processing BUILD order");
 		itemChanges = processBuyFormData(formData);
-	} else if (formData.order_type === "sale") {
-		console.log("🔄 Processing SALE order");
+	} else if (formData.order_type === "buy") {
+		console.log("🔄 Processing BUY order");
+		itemChanges = processSimpleBuyFormData(formData);
+	} else if (formData.order_type === "sell") {
+		console.log("🔄 Processing SELL order");
 		itemChanges = processSellFormData(formData);
-	} else if (formData.order_type === "shipment") {
-		console.log("🔄 Processing SHIPMENT order");
+	} else if (formData.order_type === "ship") {
+		console.log("🔄 Processing SHIP order");
 		itemChanges = processShipmentFormData(formData);
-	} else if (formData.order_type === "stocktake") {
-		console.log("🔄 Processing STOCKTAKE order - returning formData as-is");
+	} else if (formData.order_type === "count") {
+		console.log("🔄 Processing COUNT order - returning formData as-is");
 		return formData;
 	}
 
@@ -719,7 +767,7 @@ export const useCreateOrder = (orderTypeParam: string) => {
 			);
 
 			let processedInput: CreateOrderType;
-			if (formData.order_type === "stocktake") {
+			if (formData.order_type === "count") {
 				console.log("📊 Processing STOCKTAKE order specially");
 				const stocktakeFormData =
 					processedInputUntyped as MultiOrderFormData;

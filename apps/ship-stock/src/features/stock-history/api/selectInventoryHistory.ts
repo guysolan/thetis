@@ -15,10 +15,11 @@ const fetchInventoryHistory = async () => {
     return data.map((record) => ({
         ...record,
         order_type: record.order_type as
-            | "purchase"
-            | "sale"
-            | "shipment"
-            | "stocktake",
+            | "build"
+            | "buy"
+            | "sell"
+            | "ship"
+            | "count",
         items: record.items.map((item) => ({
             ...item,
             address_id: item.address_id || record.address_id,

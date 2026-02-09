@@ -106,14 +106,14 @@ export interface FileRoutesByFullPath {
   '/settlements/regions': typeof SettlementsRegionsRoute
   '/settlements/report': typeof SettlementsReportRouteWithChildren
   '/settlements/saved': typeof SettlementsSavedRoute
-  '/settlements': typeof SettlementsIndexRoute
+  '/settlements/': typeof SettlementsIndexRoute
   '/$region/$year/$month': typeof RegionYearMonthRoute
   '/settlements/report/summary': typeof SettlementsReportSummaryRoute
   '/settlements/report/xml': typeof SettlementsReportXmlRoute
   '/settlements/report/': typeof SettlementsReportIndexRoute
   '/settlements/$region/$country/summary': typeof SettlementsRegionCountrySummaryRoute
   '/settlements/$region/$country/xml': typeof SettlementsRegionCountryXmlRoute
-  '/settlements/$region/$country': typeof SettlementsRegionCountryIndexRoute
+  '/settlements/$region/$country/': typeof SettlementsRegionCountryIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -156,14 +156,14 @@ export interface FileRouteTypes {
     | '/settlements/regions'
     | '/settlements/report'
     | '/settlements/saved'
-    | '/settlements'
+    | '/settlements/'
     | '/$region/$year/$month'
     | '/settlements/report/summary'
     | '/settlements/report/xml'
     | '/settlements/report/'
     | '/settlements/$region/$country/summary'
     | '/settlements/$region/$country/xml'
-    | '/settlements/$region/$country'
+    | '/settlements/$region/$country/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -237,7 +237,7 @@ declare module '@tanstack/react-router' {
     '/settlements/': {
       id: '/settlements/'
       path: '/settlements'
-      fullPath: '/settlements'
+      fullPath: '/settlements/'
       preLoaderRoute: typeof SettlementsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -293,7 +293,7 @@ declare module '@tanstack/react-router' {
     '/settlements/$region/$country/': {
       id: '/settlements/$region/$country/'
       path: '/settlements/$region/$country'
-      fullPath: '/settlements/$region/$country'
+      fullPath: '/settlements/$region/$country/'
       preLoaderRoute: typeof SettlementsRegionCountryIndexRouteImport
       parentRoute: typeof rootRouteImport
     }

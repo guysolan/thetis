@@ -64,7 +64,7 @@ const StockItemRowCells = ({
   const price = form.watch(`${name}.${index}.item_price`) || 0;
   const tax = form.watch(`${name}.${index}.item_tax`) || 0;
   const address = form.watch("from_shipping_address_id");
-  const isSale = form.watch("order_type") === "sale";
+  const isSale = form.watch("order_type") === "sell";
   const { data: itemsView } = useSelectItemsView();
   const { data: stockItems } = useSelectItemsByAddress();
 
@@ -198,7 +198,7 @@ const StockItemRowCells = ({
         <TableCell>
           <Select value={itemType} onValueChange={handleItemTypeChange}>
             <SelectTrigger className="w-24 capitalize">
-              <SelectValue placeholder="Select an item" />
+              <SelectValue placeholder="Select type" />
             </SelectTrigger>
             <SelectContent>
               {allowedTypes.map((item) => (
@@ -249,10 +249,10 @@ const StockItemRowCells = ({
           </Select>
         </TableCell>
       )}
-      <TableCell className="w-1/4 truncate">
+      <TableCell>
         <Combobox
           name={`${name}.${index}.item_id`}
-          placeholder="Select an item..."
+          placeholder="Select item..."
           searchPlaceholder="Search items..."
           emptyMessage="No items found"
           options={items
@@ -273,7 +273,8 @@ const StockItemRowCells = ({
             form.setValue(`${name}.${index}.lot_number`, e.target.value);
             onUpdate?.();
           }}
-          placeholder="Enter LOT number"
+          placeholder="LOT #"
+          className="h-9 text-sm"
         />
       </TableCell>
       <NumberCell
@@ -325,30 +326,33 @@ const StockItemRowCells = ({
       )}
 
       <TableCell>
-        <div className="flex">
+        <div className="flex items-center">
           <Button
             type="button"
             onClick={() => onCopy(index)}
             variant="ghost"
-            className="px-2"
+            size="sm"
+            className="h-8 w-8 p-0"
           >
-            <Copy size={20} />
+            <Copy size={14} />
           </Button>
           <Button
             type="button"
             onClick={() => onRemove(index)}
             variant="ghost"
-            className="px-2 text-red-600 hover:text-red-700"
+            size="sm"
+            className="h-8 w-8 p-0 text-destructive hover:text-destructive"
           >
-            <Trash size={20} />
+            <Trash size={14} />
           </Button>
           <Button
             type="button"
             onClick={handleToggleLock}
             variant="ghost"
-            className="opacity-100 px-2"
+            size="sm"
+            className="h-8 w-8 p-0"
           >
-            {editable ? <Lock size={20} /> : <Unlock size={20} />}
+            {editable ? <Lock size={14} /> : <Unlock size={14} />}
           </Button>
         </div>
       </TableCell>

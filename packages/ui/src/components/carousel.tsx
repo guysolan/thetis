@@ -301,4 +301,5 @@ export {
   CarouselPrevious,
   CarouselNext,
   CarouselDots,
+  useCarousel,
 };

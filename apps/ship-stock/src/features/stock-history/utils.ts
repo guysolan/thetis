@@ -23,13 +23,13 @@ export function getOrderTypeBadgeVariant(
     orderType: string,
 ): string {
     switch (orderType) {
-        case "purchase":
+        case "build":
             return "bg-blue-100 text-blue-800 hover:bg-blue-200";
-        case "sale":
+        case "sell":
             return "bg-green-100 text-green-800 hover:bg-green-200";
-        case "shipment":
+        case "ship":
             return "bg-purple-100 text-purple-800 hover:bg-purple-200";
-        case "stocktake":
+        case "count":
             return "bg-orange-100 text-orange-800 hover:bg-orange-200";
         case "current":
             return "bg-rose-500 text-white hover:bg-rose-600";
@@ -151,7 +151,7 @@ export const filterItemsByType = (
         .sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically by name
 };
 
-// Get the latest quantity for each item
+// Get the latest quantity for each item (only up to today's date, excluding future orders)
 export const getCurrentQuantity = (
     itemId: number,
     inventoryHistory: InventoryHistoryRecord[],
@@ -160,9 +160,14 @@ export const getCurrentQuantity = (
     if (!inventoryHistory.length) return 0;
 
     const v_addressId = addressId ? Number(addressId) : null;
+    const today = dayjs().startOf("day");
 
-    // Find the most recent record that mentions this item with the matching address_id
+    // Find the most recent record up to today that mentions this item with the matching address_id
     for (const record of inventoryHistory) {
+        const recordDate = dayjs(record.transaction_date).startOf("day");
+        // Skip future-dated records
+        if (recordDate.isAfter(today)) continue;
+
         const itemEntry = record.items.find(
             (item) =>
                 item.id === itemId &&
@@ -170,7 +175,7 @@ export const getCurrentQuantity = (
         );
 
         if (itemEntry) {
-            // Return the quantity from the first (most recent) record mentioning this item
+            // Return the quantity from the first (most recent up to today) record mentioning this item
             return itemEntry.quantity;
         }
     }

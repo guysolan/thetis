@@ -75,7 +75,7 @@ const orderItemSchema = z.discriminatedUnion("item_type", [
     }),
     packageOrderItemSchema,
     z.object({
-        item_type: z.literal("stocktake"),
+        item_type: z.literal("count"),
         item_id: z.string().min(1, "Please select an item"),
         quantity_change: z.coerce.number(),
         lot_number: z.string().optional(),
@@ -106,7 +106,7 @@ export const multiOrderFormSchema = z.object({
 
     // Order fields
     order_date: z.union([z.string(), z.date()]),
-    order_type: z.enum(["sale", "shipment", "purchase", "stocktake"]),
+    order_type: z.enum(["sell", "buy", "build", "ship", "count"]),
     mode: z.enum(["package", "direct"]).optional(),
     currency: z.enum(currencyKeys as [string, ...string[]]).default("GBP"),
     carriage: z.coerce.number().min(0).default(0),
@@ -140,42 +140,42 @@ export const multiOrderFormSchema = z.object({
         }),
     ).default([]),
 }).superRefine((data, ctx) => {
-    if (data.order_type === "sale" && !data.consumed_items) {
+    if (data.order_type === "sell" && !data.consumed_items) {
         ctx.addIssue({
             path: ["consumed_items"],
-            message: "Consumed items are required for sale orders",
+            message: "Consumed items are required for sell orders",
             code: "custom",
         });
     }
     if (
-        data.order_type === "shipment" && (!data.from_items || !data.to_items)
+        data.order_type === "ship" && (!data.from_items || !data.to_items)
     ) {
         ctx.addIssue({
             path: ["from_items"],
-            message: "From items and to items are required for shipment orders",
+            message: "From items and to items are required for ship orders",
             code: "custom",
         });
     }
     if (
-        data.order_type === "purchase" &&
+        data.order_type === "build" &&
         (!data.produced_items || !data.consumed_items)
     ) {
         ctx.addIssue({
             path: ["produced_items"],
             message:
-                "Produced and consumed items are required for purchase orders",
+                "Produced and consumed items are required for build orders",
             code: "custom",
         });
     }
     if (
-        data.order_type === "stocktake" &&
+        data.order_type === "count" &&
         data.order_items?.every((item) =>
             item.item_type === "part" || item.item_type === "product"
         )
     ) {
         ctx.addIssue({
             path: ["order_items"],
-            message: "All items must be stocktake items for stocktake orders",
+            message: "All items must be count items for count orders",
             code: "custom",
         });
     }

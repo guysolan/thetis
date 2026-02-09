@@ -41,7 +41,15 @@ export const useBuyForm = () => {
 
   const updateBuyForm = () => {
     console.log("updateBuyForm");
-    if (!producedItems?.length || !items || !addressItems) {
+    if (!items || !addressItems) {
+      return;
+    }
+
+    // If no produced items, clear derived fields
+    if (!producedItems?.length) {
+      setValue("consumed_items", []);
+      setValue("order_items", []);
+      setValue("stock_levels", []);
       return;
     }
 
@@ -101,6 +109,28 @@ const consolidateConsumedItems = (items: ItemChange[]): ItemChange[] => {
   return Object.values(totals);
 };
 
+const consolidateOrderItems = (items: OrderItem[]): OrderItem[] => {
+  const totals = items.reduce(
+    (acc, item) => {
+      const key = item.item_id;
+      if (!acc[key]) {
+        acc[key] = { ...item };
+      } else {
+        acc[key].quantity_change += item.quantity_change;
+        acc[key].item_total = calculateItemTotal(
+          acc[key].item_price || 0,
+          acc[key].item_tax || 0.2,
+          acc[key].quantity_change,
+        );
+      }
+      return acc;
+    },
+    {} as Record<string, OrderItem>,
+  );
+
+  return Object.values(totals);
+};
+
 function processOrderItems(producedItems: ItemChange[], items: ItemView[]) {
   const consumedItems: ItemChange[] = [];
   const orderItems: OrderItem[] = [];
@@ -147,6 +177,7 @@ function processOrderItems(producedItems: ItemChange[], items: ItemView[]) {
       if (component?.component_type === "service") {
         orderItems.push({
           item_id: String(component.component_id),
+          item_name: component.component_name,
           quantity_change: requiredQuantity,
           item_price: component.component_price || 0,
           item_tax: component.component_tax || 0.2,
@@ -172,6 +203,8 @@ function processOrderItems(producedItems: ItemChange[], items: ItemView[]) {
 
   // Consolidate consumed items with same item_id
   const consolidatedConsumedItems = consolidateConsumedItems(consumedItems);
+  // Consolidate order items (services) with same item_id
+  const consolidatedOrderItems = consolidateOrderItems(orderItems);
 
-  return { consumedItems: consolidatedConsumedItems, orderItems };
+  return { consumedItems: consolidatedConsumedItems, orderItems: consolidatedOrderItems };
 }

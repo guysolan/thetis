@@ -29,7 +29,7 @@ const MyCompany = () => {
       value={companyUser?.company_id?.toString()}
       onValueChange={handleCompanyChange}
     >
-      <SelectTrigger className="w-[200px]">
+      <SelectTrigger className="w-full h-8 text-sm">
         <SelectValue placeholder="Select company" />
       </SelectTrigger>
       <SelectContent>

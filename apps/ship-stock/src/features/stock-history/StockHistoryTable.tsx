@@ -88,10 +88,14 @@ export const StockHistoryTable: React.FC<StockHistoryTableProps> = ({
   // Update table data when visible items change
   useEffect(() => {
     const data = getTableData(inventoryHistory, visibleItems, addressId);
-    // Sort data by transaction_date in descending order
-    const sortedData = [...data].sort((a, b) =>
-      dayjs(b.transaction_date).valueOf() - dayjs(a.transaction_date).valueOf()
-    );
+    // Sort data: "current" (order_id === 0) always first, then by transaction_date descending
+    const sortedData = [...data].sort((a, b) => {
+      // Current stock always appears first
+      if (a.order_id === 0) return -1;
+      if (b.order_id === 0) return 1;
+      // Otherwise sort by date descending
+      return dayjs(b.transaction_date).valueOf() - dayjs(a.transaction_date).valueOf();
+    });
     setTableData(sortedData);
   }, [inventoryHistory, visibleItems, addressId]);
 
