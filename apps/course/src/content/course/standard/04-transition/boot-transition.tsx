@@ -319,8 +319,8 @@ export const content: SectionContent = {
                             items: [
                                 "**Heel wedge (1.2cm)**: Use a heel lift in your shoe to reduce tendon stretch during walking",
                                 "**Reduced step length**: Take shorter steps than normal to reduce force through your tendon",
-                                "**Partial weight-bearing if limping**: If you're limping, use crutches or reduce weight on the injured foot",
-                                "**Gradual progression**: Increase step length and weight-bearing as your strength improves",
+                                "**Limited Weightbearing if limping**: If you're limping, use crutches or reduce weight on the injured foot",
+                                "**Gradual progression**: Increase step length and mobilisation as your strength improves",
                             ],
                         },
                         {
@@ -486,7 +486,7 @@ export const content: SectionContent = {
                         "**Choose the right shoes** — supportive, with heel-to-toe drop, room for heel lifts",
                         "**Use heel lifts initially** — 0.5-1cm, gradually reduce over 2-4 weeks",
                         "**Start small** — first steps indoors, short distances, build up gradually",
-                        "**Protected walking** — shorter steps, heel lifts, partial weight-bearing if limping",
+                        "**Protected walking** — shorter steps, heel lifts, Limited Weightbearing if limping",
                     ],
                 },
             ],

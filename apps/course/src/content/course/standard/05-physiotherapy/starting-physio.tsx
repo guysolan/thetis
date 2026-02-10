@@ -253,7 +253,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Protected walking is crucial** — even after boot removal, your tendon needs protection. Using heel wedges, reduced step length, and partial weightbearing (if limping) protects the healing tendon until strength develops. Elongation can still happen in the first few weeks of walking — protected walking prevents this.",
+                                "**Protected walking is crucial** — even after boot removal, your tendon needs protection. Using heel wedges, reduced step length, and Limited Weightbearing (if limping) protects the healing tendon until strength develops. Elongation can still happen in the first few weeks of walking — protected walking prevents this.",
                         },
                         {
                             type: "text",

@@ -334,7 +334,7 @@ export const content: SectionContent = {
                     style: "bullet",
                     items: [
                         "**Week 5:** We cover **wedge removal protocol** — when and how to remove wedges safely",
-                        "**Weeks 5-6:** You may start progressive weight-bearing (if your protocol allows)",
+                        "**Weeks 5-6:** You may progress mobilisation status (if your protocol allows)",
                         "**Weeks 6-8:** Transition toward walking without crutches",
                         "**Weeks 8-10:** Boot phase continues, but you'll be more mobile",
                     ],
@@ -362,7 +362,7 @@ export const content: SectionContent = {
                         '**Gap size:** "If you measured a gap, what does that mean for my recovery?"',
                         '**Tendon length:** "Is there any concern about tendon length?"',
                         '**Wedge removal:** "When should I start removing wedges? What\'s the protocol?"',
-                        '**Weight-bearing:** "When can I start putting weight through my foot?"',
+                        '**Mobilisation status:** "What is my weightbearing status? When can I start putting weight through my foot?"',
                         '**After-hours:** "What should I do if I can\'t reach you after hours?"',
                     ],
                 },
@@ -403,7 +403,7 @@ export const content: SectionContent = {
                     style: "bullet",
                     items: [
                         "**You're in the proliferative phase** — new tissue is actively being built",
-                        "**Patience now = better function later** — don't rush wedge removal or weight-bearing",
+                        "**Patience now = better function later** — don't rush wedge removal or mobilisation progression",
                         "**Healing is invisible** — trust the process, follow your protocol",
                         "**Protect the tendon length** — keep your foot in the correct position",
                     ],

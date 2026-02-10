@@ -222,13 +222,13 @@ export const content: SectionContent = {
                     type: "card",
                     title: "Boot Progression Protocol",
                     description:
-                        "Wedge removal schedule, weight-bearing progression, and angle changes",
+                        "Wedge removal schedule, mobilisation progression, and angle changes",
                     variant: "highlight",
                     content: [
                         {
                             type: "text",
                             content:
-                                "Understand your protocol schedule, when to reduce the angle, how to progress weight-bearing, and what to expect at each stage.",
+                                "Understand your protocol schedule, when to reduce the angle, how to progress mobilisation status, and what to expect at each stage.",
                         },
                         {
                             type: "text",
@@ -258,8 +258,8 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Week 6:** Start Phase 1 exercises — detailed guidance on exercises, weight-bearing, and gait coming up",
-                                "**Weeks 6-8:** Continue building strength, progress weight-bearing",
+                                "**Week 6:** Start Phase 1 exercises — detailed guidance on exercises, mobilisation, and gait coming up",
+                                "**Weeks 6-8:** Continue building strength, progress mobilisation status",
                                 "**Week 8:** Learn about Phase 2 and Phase 3 goals — preparing for post-boot recovery",
                                 "**Weeks 10-12:** Boot removal and transition to Phase 2",
                             ],

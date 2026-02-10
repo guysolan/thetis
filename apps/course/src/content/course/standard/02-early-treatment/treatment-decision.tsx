@@ -202,7 +202,7 @@ export const content: SectionContent = {
                                     items: [
                                         "Wearing a walking boot with heel wedges for approximately 10 weeks",
                                         "Gradually removing wedges to bring your foot to a neutral position",
-                                        "Progressive weight-bearing as your protocol allows",
+                                        "Progressive mobilisation as your protocol allows",
                                         "Same physiotherapy and strengthening as surgical patients",
                                     ],
                                 },
@@ -220,8 +220,8 @@ export const content: SectionContent = {
                                     type: "list",
                                     style: "bullet",
                                     items: [
-                                        "Weeks 0–2: Boot with maximum wedges, non-weight-bearing or partial weight-bearing",
-                                        "Weeks 2–10: Gradual wedge removal, progressive weight-bearing",
+                                        "Weeks 0–2: Boot with maximum wedges, Non Weightbearing or Limited Weightbearing",
+                                        "Weeks 2–10: Gradual wedge removal, progressive mobilisation",
                                         "Weeks 10–12: Transition out of boot, start physiotherapy",
                                         "Total recovery: 6–12 months (same as surgical)",
                                     ],
@@ -410,7 +410,7 @@ export const content: SectionContent = {
                     items: [
                         "**After you decide:** You'll be fitted for a boot (if not already) and given a clear protocol to follow",
                         "**Next lesson:** We cover **your walking boot** in detail — Aircast vs VACOped, fitting, and understanding wedges",
-                        "**Weeks ahead:** Whether you choose surgery or non-surgical, the recovery path is similar — boot phase, wedge removal, progressive weight-bearing, then physiotherapy",
+                        "**Weeks ahead:** Whether you choose surgery or non-surgical, the recovery path is similar — boot phase, wedge removal, progressive mobilisation, then physiotherapy",
                     ],
                 },
             ],

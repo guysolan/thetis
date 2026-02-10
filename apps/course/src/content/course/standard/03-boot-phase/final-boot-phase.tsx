@@ -80,7 +80,7 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Safe:** Walking with boot, gentle weight-bearing",
+                                "**Safe:** Walking with boot, appropriate mobilisation status",
                                 "**Safe:** Removing wedges gradually as protocol allows",
                                 "**Not safe:** Running, jumping, sudden movements",
                                 "**Not safe:** Removing boot early or skipping protection",

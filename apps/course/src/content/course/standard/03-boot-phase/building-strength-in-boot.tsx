@@ -5,7 +5,7 @@ export const metadata = {
     slug: "building-strength-in-boot",
     title: "Building Strength While in Boot",
     description:
-        "Phase 1 exercises, weight-bearing progression, and preparing for Phase 2",
+        "Phase 1 exercises, mobilisation progression, and preparing for Phase 2",
     status: "drafting" as const,
 };
 
@@ -28,7 +28,7 @@ export const content: SectionContent = {
                 },
                 {
                     text:
-                        "Follow weight-bearing protocol — progress gradually as your clinician allows",
+                        "Follow mobilisation protocol — progress gradually as your clinician allows",
                 },
                 {
                     text:
@@ -116,12 +116,12 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Understanding Weight-Bearing Progress",
+            title: "Understanding Mobilisation Progress",
             content: [
                 {
                     type: "text",
                     content:
-                        "Weight-bearing means putting weight through your injured foot. This happens gradually — you don't go from non-weight-bearing to full weight overnight. For detailed information about weight-bearing progression schedules and protocols, see [Boot Progression Protocol](/standard/boot-progression-protocol).",
+                        "Mobilisation means putting weight through your injured foot. This happens gradually — you don't go from Non Weightbearing to Unrestricted Weightbearing overnight. According to orthopaedic policy, your weightbearing status should be clearly documented with clinical justification, quantification (functional or distance restrictions), and duration. For detailed information about mobilisation progression schedules and protocols, see [Boot Progression Protocol](/standard/boot-progression-protocol).",
                 },
                 {
                     type: "card",
@@ -273,7 +273,7 @@ export const content: SectionContent = {
                     style: "bullet",
                     items: [
                         '**Exercises:** "When can I start Phase 1 exercises? What should I do?"',
-                        '**Weight-bearing:** "When can I start putting weight on my foot? What\'s my protocol?"',
+                        '**Mobilisation status:** "What is my weightbearing status? When can I start putting weight on my foot?"',
                         '**Gait:** "Is my walking pattern okay? What should I focus on?"',
                         '**Phase 2:** "When will I start Phase 2? What should I prepare for?"',
                         '**After-hours:** "What should I do if I can\'t reach you after hours?"',
@@ -291,7 +291,7 @@ export const content: SectionContent = {
                     style: "bullet",
                     items: [
                         "**Start Phase 1 exercises at Week 6** — seated calf raises build strength safely",
-                        "**Follow weight-bearing protocol** — don't rush ahead",
+                        "**Follow mobilisation protocol** — don't rush ahead",
                         "**Focus on good gait** — heel-to-toe pattern, use EVENup to prevent back/hip pain",
                         "**Understand Phase 2 goals** — know what you're working toward",
                         "**Be patient** — strength builds gradually",

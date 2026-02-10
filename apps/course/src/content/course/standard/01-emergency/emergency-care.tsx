@@ -36,7 +36,7 @@ export const content: SectionContent = {
       type: "dos-donts",
       dos: [
         "**Keep the tendon ends together 24/7:** Keep your foot in the **pointed-down** position your clinician set (cast/splint/boot). This is the #1 rule — don't let your toes come up.",
-        "**Assume you're non-weight-bearing unless told otherwise:** Use elbow crutches and move slowly. You'll likely be able to walk without crutches from Week 2 onwards, but follow your clinician's guidance.",
+        "**Assume you're Non Weightbearing unless told otherwise:** Use elbow crutches and move slowly. You'll likely be able to walk without crutches from Week 2 onwards, but follow your clinician's guidance.",
         "**Elevate** your ankle above heart level as much as possible.",
         "**Know the blood clot red flags** and seek urgent care if they appear. We'll explain what **DVT** (deep vein thrombosis = clot in the leg) and **PE** (pulmonary embolism = clot in the lungs) mean below, and how they relate to **VTE** (venous thromboembolism = the umbrella term for both).",
         "**Arrange follow-up** (fracture clinic/orthopaedics) if it hasn't been booked.",
@@ -558,7 +558,7 @@ export const content: SectionContent = {
               items: [
                 "**Today–Week 1:** Keep the tendon ends together (don't let your toes come up), control swelling, learn to use elbow crutches.",
                 "**Week 2 onwards:** You'll likely be able to walk without crutches, but you'll still need your boot to keep the ends together.",
-                "**Weeks 1–3:** You'll see a specialist / fracture clinic to confirm the plan (boot vs splint, weight-bearing guidance, rehab plan).",
+                "**Weeks 1–3:** You'll see a specialist / fracture clinic to confirm the plan (boot vs splint, mobilisation status guidance, rehab plan).",
                 "**Weeks 1–3:** You'll also start thinking about the big decision: surgical vs non-surgical treatment (we cover this in the next phase).",
               ],
             },
@@ -580,7 +580,7 @@ export const content: SectionContent = {
             '**Diagnosis:** "Is this a confirmed rupture? Do I need an ultrasound scan?"',
             '**Gap size:** "If you measured a gap (e.g. 4 cm), does it close when my foot is pointed down? What does that mean for keeping the ends together?"',
             '**Position:** "What ankle angle should I be in (how pointed-down) and for how long? How do I make sure I don\'t let my toes come up?"',
-            '**Weight-bearing:** "Am I non-weight-bearing, partial, or weight-bearing as tolerated? When can I walk without crutches?"',
+            '**Mobilisation status:** "What is my weightbearing status? Am I Non Weightbearing, Limited Weightbearing, or Unrestricted Weightbearing? When can I walk without crutches?"',
             '**Clot prevention:** "Am I getting VTE prophylaxis? What does that mean? For how long? What symptoms of DVT or PE should trigger urgent help?"',
             '**Follow-up:** "When is my fracture clinic/orthopaedics appointment, and who do I contact if it hasn\'t been booked?"',
             '**After-hours:** "What should I do if I can\'t reach you after hours?"',

@@ -204,7 +204,7 @@ export const content: SectionContent = {
                     question:
                         "If I accidentally put weight through my foot, does that cause clots?",
                     answer:
-                        "Brief accidental weight-bearing doesn't directly cause clots. Clot risk is mostly about immobilisation and reduced circulation over time. Focus on prevention: follow mobility instructions, keep moving safely within your limits, and take any prescribed blood thinners.",
+                        "Brief accidental weightbearing doesn't directly cause clots. Clot risk is mostly about immobilisation and reduced circulation over time. Focus on prevention: follow mobility instructions, keep moving safely within your limits, and take any prescribed blood thinners.",
                 },
                 {
                     question: "What if I missed a dose of blood thinner?",

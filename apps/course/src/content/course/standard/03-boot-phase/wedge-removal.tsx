@@ -332,8 +332,8 @@ export const content: SectionContent = {
                     style: "bullet",
                     items: [
                         "**This week:** Continue following your wedge removal protocol, one wedge at a time",
-                        "**Week 6:** We cover walking progress and transitioning to full weight-bearing",
-                        "**Weeks 6-8:** Continue wedge removal, may start progressive weight-bearing",
+                        "**Week 6:** We cover walking progress and transitioning to Unrestricted Weightbearing",
+                        "**Weeks 6-8:** Continue wedge removal, may progress mobilisation status",
                         "**Weeks 8-10:** Final wedges removed, foot approaches neutral position",
                     ],
                 },

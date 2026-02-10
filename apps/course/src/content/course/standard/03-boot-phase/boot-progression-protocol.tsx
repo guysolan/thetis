@@ -5,13 +5,13 @@ export const metadata = {
     slug: "boot-progression-protocol",
     title: "Boot Progression Protocol",
     description:
-        "Wedge removal schedule, weight-bearing progression, and angle changes",
+        "Wedge removal schedule, mobilisation progression, and angle changes",
     status: "drafting" as const,
 };
 
 export const content: SectionContent = {
     intro:
-        "Your boot protocol is the core of **Phase 1: Protection**. It involves gradually reducing the angle (removing wedges or adjusting the hinge) and progressing weight-bearing as your tendon heals.",
+        "Your boot protocol is the core of **Phase 1: Protection**. It involves gradually reducing the angle (removing wedges or adjusting the hinge) and progressing mobilisation status as your tendon heals.",
 
     blocks: [
         {
@@ -33,7 +33,7 @@ export const content: SectionContent = {
                 },
                 {
                     text:
-                        "Know your schedule — when to reduce angle and when to progress weight-bearing",
+                        "Know your schedule — when to reduce angle and when to progress mobilisation status",
                 },
                 {
                     text:
@@ -85,7 +85,7 @@ export const content: SectionContent = {
                                         "**Aircast:** All wedges in (usually 3–4 wedges stacked under heel)",
                                         "**VACOped:** Hinge locked at maximum angle setting",
                                         "**Goal:** Keep tendon ends as close as possible",
-                                        "**Weight-bearing:** Usually non-weight-bearing or minimal",
+                                        "**Mobilisation status:** Usually Non Weightbearing or Limited Weightbearing",
                                         "**Don't change anything yet** — follow your protocol exactly",
                                     ],
                                 },
@@ -389,16 +389,16 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Weight-bearing progression",
+            title: "Mobilisation and weightbearing progression",
             content: [
                 {
                     type: "text",
                     content:
-                        "As your tendon heals, you'll gradually progress from non-weight-bearing to full weight-bearing. This progression is separate from angle reduction but happens alongside it.",
+                        "As your tendon heals, you'll gradually progress from Non Weightbearing to Unrestricted Weightbearing. This progression is separate from angle reduction but happens alongside it. According to orthopaedic policy, weightbearing status should be clearly documented with clinical justification, quantification (functional or distance restrictions, not percentages), and duration.",
                 },
                 {
                     type: "card",
-                    title: "Typical weight-bearing schedule",
+                    title: "Typical mobilisation schedule",
                     description:
                         "General guidelines — follow your specific protocol.",
                     variant: "default",
@@ -407,11 +407,11 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Weeks 0–2:** Usually non-weight-bearing or toe-touch only",
-                                "**Weeks 2–4:** May start partial weight-bearing (25–50% of body weight)",
-                                "**Weeks 4–6:** Progress to full weight-bearing in boot",
-                                "**Weeks 6–8:** Full weight-bearing, may start walking without crutches",
-                                "**Weeks 8–10:** Continue full weight-bearing, preparing for boot removal",
+                                "**Weeks 0–2:** Usually Non Weightbearing or Limited Weightbearing",
+                                "**Weeks 2–4:** May progress to Limited Weightbearing with functional restrictions",
+                                "**Weeks 4–6:** Progress to Unrestricted Weightbearing in boot",
+                                "**Weeks 6–8:** Unrestricted Weightbearing, may start walking without crutches",
+                                "**Weeks 8–10:** Continue Unrestricted Weightbearing, preparing for boot removal",
                             ],
                         },
                         {
@@ -419,13 +419,13 @@ export const content: SectionContent = {
                             variant: "warning",
                             title: "Important",
                             content:
-                                "Weight-bearing progression varies by protocol. Some allow earlier weight-bearing, some require longer non-weight-bearing. **Follow your clinician's specific instructions** — don't progress faster than allowed.",
+                                "Mobilisation progression varies by protocol. Some allow earlier weightbearing, some require longer Non Weightbearing periods. **Follow your clinician's specific instructions** — don't progress faster than allowed. Your clinician will document your weightbearing status with clear clinical justification and functional restrictions.",
                         },
                     ],
                 },
                 {
                     type: "card",
-                    title: "How to progress weight-bearing safely",
+                    title: "How to progress mobilisation safely",
                     description: "Practical tips.",
                     variant: "muted",
                     content: [
@@ -433,9 +433,9 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Start gradually** — even when cleared for weight-bearing, start with small amounts",
-                                "**Use scales** — bathroom scales can help you gauge 25%, 50%, 75% weight-bearing",
-                                "**Listen to your body** — if it hurts, reduce weight",
+                                "**Start gradually** — even when cleared for weightbearing, start with limited functional activities",
+                                "**Follow functional restrictions** — your clinician will specify limitations (e.g., indoor only, no stairs, distance restrictions)",
+                                "**Listen to your body** — if it hurts, reduce activity level",
                                 "**Don't rush** — gradual progression is safer than sudden changes",
                                 "**Use crutches** — continue using crutches until cleared to walk without them",
                             ],
@@ -446,12 +446,12 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Combining angle reduction and weight-bearing",
+            title: "Combining angle reduction and mobilisation",
             content: [
                 {
                     type: "text",
                     content:
-                        "Angle reduction and weight-bearing progression happen together, but they're independent. You might reduce the angle while still non-weight-bearing, or you might be weight-bearing while still at maximum angle. Your protocol will guide both.",
+                        "Angle reduction and mobilisation progression happen together, but they're independent. You might reduce the angle while still Non Weightbearing, or you might be weightbearing while still at maximum angle. Your protocol will guide both.",
                 },
                 {
                     type: "card",
@@ -464,8 +464,8 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Conservative protocol:** Longer at maximum angle, slower weight-bearing progression",
-                                "**Accelerated protocol:** Faster angle reduction, earlier weight-bearing",
+                                "**Conservative protocol:** Longer at maximum angle, slower mobilisation progression",
+                                "**Accelerated protocol:** Faster angle reduction, earlier weightbearing",
                                 "**Your protocol:** May be anywhere between these — follow it exactly",
                             ],
                         },
@@ -495,7 +495,7 @@ export const content: SectionContent = {
                                 "**Reduced pain** — pain decreasing over time",
                                 "**Less swelling** — swelling improving",
                                 "**Comfortable at current angle** — no significant discomfort",
-                                "**Able to bear weight** — weight-bearing feels manageable",
+                                "**Able to bear weight** — weightbearing feels manageable",
                                 "**Following schedule** — keeping up with protocol timeline",
                             ],
                         },

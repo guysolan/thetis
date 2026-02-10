@@ -98,7 +98,7 @@ export const content: SectionContent = {
                         '**Diagnosis:** "Is this a confirmed rupture? Do I need ultrasound?"',
                         '**Gap size:** "If you measured a gap (e.g. 4 cm), does it close when my foot is pointed down? What does that mean for my plan?"',
                         '**Position:** "What ankle angle should I be in (how pointed-down) and for how long?"',
-                        '**Weight-bearing:** "Am I non-weight-bearing, partial, or weight-bearing as tolerated?"',
+                        '**Mobilisation status:** "What is my weightbearing status? Am I Non Weightbearing, Limited Weightbearing, or Unrestricted Weightbearing?"',
                         '**Clot prevention:** "Am I getting VTE prophylaxis? For how long? What symptoms should trigger urgent help?"',
                         '**Follow-up:** "When is my next appointment, and who do I contact with questions?"',
                         '**After-hours:** "What should I do if I can\'t reach you after hours?"',

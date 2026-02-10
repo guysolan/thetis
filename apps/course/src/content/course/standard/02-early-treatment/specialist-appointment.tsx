@@ -272,7 +272,7 @@ export const content: SectionContent = {
                         '**Treatment options:** "What are my options — surgical vs non-surgical? What do you recommend for me, and why?"',
                         '**Timeline to decide:** "How long do I have to make a decision? What happens if I need more time?"',
                         '**Current immobilisation:** "Is my current splint/boot correct, or do I need a change?"',
-                        '**Weight-bearing:** "Am I non-weight-bearing, partial, or weight-bearing as tolerated?"',
+                        '**Mobilisation status:** "What is my weightbearing status? Am I Non Weightbearing, Limited Weightbearing, or Unrestricted Weightbearing?"',
                         '**Blood thinners:** "Should I continue/start VTE prophylaxis? For how long?"',
                         '**Next appointment:** "When is my next appointment, and what happens then?"',
                         '**After-hours:** "What should I do if I can\'t reach you after hours?"',
@@ -313,7 +313,7 @@ export const content: SectionContent = {
                     items: [
                         "**After this appointment:** You'll have a clearer diagnosis and usually a conversation about treatment options (surgery vs non-surgical).",
                         "**Next lesson:** We cover the **surgery vs non-surgical decision** in detail — including the UKSTAR trial findings.",
-                        "**Upcoming weeks:** Boot fitting, wedge protocols, weight-bearing progression — we'll guide you through each stage.",
+                        "**Upcoming weeks:** Boot fitting, wedge protocols, mobilisation progression — we'll guide you through each stage.",
                     ],
                 },
             ],
