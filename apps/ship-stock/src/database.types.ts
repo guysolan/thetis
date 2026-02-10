@@ -995,7 +995,7 @@ export type Database = {
     Enums: {
       currency_type: "AUD" | "CAD" | "EUR" | "GBP" | "JPY" | "NZD" | "USD"
       item_type: "product" | "part" | "service" | "package"
-      order_type: "purchase" | "sale" | "shipment" | "stocktake"
+      order_type: "build" | "buy" | "count" | "purchase" | "sell" | "ship" | "sale" | "shipment" | "stocktake"
     }
     CompositeTypes: {
       [_ in never]: never

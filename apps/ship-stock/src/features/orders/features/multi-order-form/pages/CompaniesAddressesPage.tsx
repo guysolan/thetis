@@ -77,13 +77,13 @@ export function CompaniesAddressesPage({ form }: CompaniesAddressesPageProps) {
 					<h2 className="mb-2 font-semibold text-xl">
 						Companies & Addresses
 					</h2>
-					<p className="text-gray-600 text-sm">
+					<p className="text-muted-foreground text-sm">
 						Select the companies, addresses, and contacts for this
 						order
 					</p>
 				</div>
 
-				<BuyerSeller isShipment={orderType === "shipment"} />
+				<BuyerSeller isShipment={orderType === "ship"} />
 			</div>
 		</FormProvider>
 	);

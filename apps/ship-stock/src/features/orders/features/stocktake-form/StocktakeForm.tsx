@@ -31,7 +31,7 @@ const StocktakeForm = ({
       },
     ],
     order_date: dayjs().toDate(),
-    order_type: "stocktake",
+    order_type: "count",
     to_shipping_address_id: addressId,
   };
 

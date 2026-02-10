@@ -19,21 +19,23 @@ const CompanySelectAddEdit = ({ name }: Props) => {
   };
 
   return (
-    <div className="flex flex-row items-end gap-2 w-full">
-      <Select
-        label="Company"
-        name={name}
-        options={(companies || []).map((c) => ({
-          label: c.name,
-          value: String(c.id),
-        }))}
-      />
+    <div className="flex flex-row items-center gap-2 w-full">
+      <div className="flex-1 min-w-0">
+        <Select
+          label="Company"
+          name={name}
+          options={(companies || []).map((c) => ({
+            label: c.name,
+            value: String(c.id),
+          }))}
+        />
+      </div>
       {getSelectedCompany() && (
-        <TooltipDialog icon={<Pencil size={20} />} tooltipText={"Edit Company"}>
+        <TooltipDialog icon={<Pencil size={16} />} tooltipText="Edit Company">
           <CompanyForm company={getSelectedCompany()} />
         </TooltipDialog>
       )}
-      <TooltipDialog icon={<Plus size={20} />} tooltipText={"Add Company"}>
+      <TooltipDialog icon={<Plus size={16} />} tooltipText="Add Company">
         <CompanyForm />
       </TooltipDialog>
     </div>

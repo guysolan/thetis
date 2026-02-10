@@ -3,7 +3,7 @@ import { currencyKeys } from "../../../../../constants/currencies";
 
 // Page 1: Order Details validation
 export const orderDetailsSchema = z.object({
-	order_type: z.enum(["sale", "shipment", "purchase", "stocktake"]),
+	order_type: z.enum(["sell", "buy", "build", "ship", "count"]),
 	order_date: z.union([z.string(), z.date()]),
 	currency: z.enum(currencyKeys as [string, ...string[]]),
 	unit_of_measurement: z.enum(["metric", "imperial"]),
@@ -55,7 +55,7 @@ export const companiesAddressesSchema = z.object({
 
 // Page 3: Items validation (minimal - just check order_type exists)
 export const itemsSchema = z.object({
-	order_type: z.enum(["sale", "shipment", "purchase", "stocktake"]),
+	order_type: z.enum(["sell", "buy", "build", "ship", "count"]),
 	mode: z.enum(["package", "direct"]).optional(),
 });
 

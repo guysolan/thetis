@@ -25,12 +25,14 @@ import {
   Package,
   Send,
   Settings,
+  ShoppingBag,
   ShoppingCart,
   Truck,
   User,
   Wrench,
 } from "lucide-react";
 import { useState } from "react";
+import { Card } from "@thetis/ui/card";
 
 interface ExistingOrdersProps {
   orders: OrderView[];
@@ -90,15 +92,15 @@ const DeliveryDatesDisplay: React.FC<DeliveryDatesDisplayProps> = ({
 // Helper function to get order type icon
 const getOrderTypeIcon = (orderType: string) => {
   switch (orderType.toLowerCase()) {
-    case "sale":
+    case "sell":
       return ShoppingCart;
-    case "purchase":
-      return Package;
-    case "shipment":
-      return Send;
     case "build":
-      return Wrench;
-    case "stocktake":
+      return Package;
+    case "buy":
+      return ShoppingBag;
+    case "ship":
+      return Send;
+    case "count":
       return ClipboardList;
     default:
       return Package;
@@ -128,9 +130,9 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
         const isExpanded = expandedOrders.has(order.order_id);
 
         return (
-          <div
+          <Card
             key={order.order_id}
-            className="bg-white dark:bg-gray-900 shadow-sm hover:shadow-md p-6 border rounded-sm transition-shadow"
+            className="p-4 rounded-md"
           >
             {/* Header with Order Info and Actions */}
             <div className="flex justify-between items-start mb-4">
@@ -176,14 +178,14 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                     asChild
                     variant="ghost"
                     size="sm"
-                    className="justify-start px-2 w-full"
+                    className="justify-start gap-2 w-full font-normal text-sm"
                   >
                     <Link
-                      className="flex flex-row items-center gap-2 !text-sm"
+                      className="flex justify-start items-center gap-2 px-3 py-2 w-full"
                       to="/home/orders/$orderId"
                       params={{ orderId: order.order_id.toString() }}
                     >
-                      <Edit size={20} />
+                      <Edit size={16} />
                       Edit Order
                     </Link>
                   </Button>
@@ -197,13 +199,13 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
 
             {/* Badges */}
             <div className="flex flex-wrap gap-2 mb-4">
-              {!["stocktake", "shipment"].includes(order.order_type) && (
+              {!["count", "ship"].includes(order.order_type) && (
                 <PaymentStatusSelect
                   orderId={order.order_id}
                   currentStatus={order.payment_status || "unpaid"}
                 />
               )}
-              {!["stocktake"].includes(order.order_type) && (
+              {!["count"].includes(order.order_type) && (
                 <DeliveryStatusSelect
                   orderId={order.order_id}
                   currentStatus={order.delivery_status || "pending"}
@@ -248,7 +250,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({ orders }) => {
                 <OrderBreakdown order={order} />
               </div>
             )}
-          </div>
+          </Card>
         );
       })}
     </div>

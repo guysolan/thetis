@@ -10,8 +10,8 @@ interface OrderBreakdownProps {
 }
 
 const OrderBreakdown = ({ order }: OrderBreakdownProps) => {
-  const showFinancials = ["purchase", "sale"].includes(order.order_type);
-  const showStockMovements = !["stocktake"].includes(order.order_type);
+  const showFinancials = ["build", "buy", "sell"].includes(order.order_type);
+  const showStockMovements = !["count"].includes(order.order_type);
 
   // Use prepareOrderItems for manifest (filters to relevant quantities)
   const preparedItems = prepareOrderItems(order);

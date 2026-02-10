@@ -198,10 +198,9 @@ const DocumentOptionsSheet = ({
 
   return (
     <Sheet>
-      <SheetTrigger asChild>
+      <SheetTrigger>
         <Button
           type="button"
-          onClick={(e) => e.stopPropagation()}
           variant="outline"
           size="icon"
         >
@@ -248,7 +247,7 @@ const DocumentOptionsSheet = ({
                     <div className="flex-1">
                       <label className="block font-medium text-sm">
                         Items Manifest
-                    </label>
+                      </label>
                       <p className="mt-0.5 text-muted-foreground text-xs">
                         Item names, SKU, origin, HS codes, and quantities
                       </p>
@@ -263,7 +262,7 @@ const DocumentOptionsSheet = ({
                     <div className="flex-1">
                       <label className="block font-medium text-sm">
                         Items with Costing
-                    </label>
+                      </label>
                       <p className="mt-0.5 text-muted-foreground text-xs">
                         Items manifest with unit prices and line totals
                       </p>
@@ -278,7 +277,7 @@ const DocumentOptionsSheet = ({
                     <div className="flex-1">
                       <label className="block font-medium text-sm">
                         Package Breakdown
-                    </label>
+                      </label>
                       <p className="mt-0.5 text-muted-foreground text-xs">
                         Physical package details with dimensions and contents
                       </p>

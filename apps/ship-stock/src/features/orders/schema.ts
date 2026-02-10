@@ -95,19 +95,19 @@ const baseFormSchema = baseAddressSchema.extend({
 
 // Form schemas using composition
 export const saleFormSchema = baseFormSchema.extend({
-    order_type: z.literal("sale"),
+    order_type: z.literal("sell"),
     mode: z.enum(["package", "direct"]),
     consumed_items: z.array(pricedItemSchema),
 });
 
 export const shipmentFormSchema = baseFormSchema.extend({
-    order_type: z.literal("shipment"),
+    order_type: z.literal("ship"),
     from_items: z.array(baseItemSchema),
     to_items: z.array(baseItemSchema),
 });
 
-export const buyFormSchema = baseFormSchema.extend({
-    order_type: z.literal("purchase"),
+export const buildFormSchema = baseFormSchema.extend({
+    order_type: z.literal("build"),
     produced_items: z.array(pricedItemSchema),
     consumed_items: z.array(pricedItemSchema),
     order_items: z.array(pricedItemSchema),
@@ -116,13 +116,13 @@ export const buyFormSchema = baseFormSchema.extend({
 
 export const stockTakeFormSchema = z.object({
     to_shipping_address_id: z.coerce.number(),
-    order_type: z.literal("stocktake"),
+    order_type: z.literal("count"),
     order_items: z.array(stockTakeItemSchema),
     order_date: z.date(),
 });
 
 export type SaleFormData = z.infer<typeof saleFormSchema>;
-export type BuyFormData = z.infer<typeof buyFormSchema>;
+export type BuildFormData = z.infer<typeof buildFormSchema>;
 export type ShipmentFormData = z.infer<typeof shipmentFormSchema>;
 
 export type OrderItemChange = {

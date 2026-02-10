@@ -19,7 +19,7 @@ const SheetOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <Sheet.Backdrop
     className={cn(
-      "fixed inset-0 z-50 bg-black/80 data-[open]:animate-in data-[closed]:animate-out data-[closed]:fade-out-0 data-[open]:fade-in-0",
+      "z-50 fixed inset-0 bg-black/80 data-[closed]:animate-out data-[open]:animate-in data-[closed]:fade-out-0 data-[open]:fade-in-0",
       className,
     )}
     {...props}
@@ -33,10 +33,12 @@ const sheetVariants = cva(
   {
     variants: {
       side: {
-        top: "inset-x-0 top-0 border-b data-[closed]:slide-out-to-top data-[open]:slide-in-from-top",
+        top:
+          "inset-x-0 top-0 border-b data-[closed]:slide-out-to-top data-[open]:slide-in-from-top",
         bottom:
           "inset-x-0 bottom-0 border-t data-[closed]:slide-out-to-bottom data-[open]:slide-in-from-bottom",
-        left: "inset-y-0 left-0 h-full w-5/6 md:w-3/4 border-r data-[closed]:slide-out-to-left data-[open]:slide-in-from-left",
+        left:
+          "inset-y-0 left-0 h-full w-5/6 md:w-3/4 border-r data-[closed]:slide-out-to-left data-[open]:slide-in-from-left",
         right:
           "inset-y-0 right-0 h-full w-5/6 md:w-3/4  border-l data-[closed]:slide-out-to-right data-[open]:slide-in-from-right",
       },
@@ -48,7 +50,8 @@ const sheetVariants = cva(
 );
 
 interface SheetContentProps
-  extends React.ComponentPropsWithoutRef<typeof Sheet.Popup>,
+  extends
+    React.ComponentPropsWithoutRef<typeof Sheet.Popup>,
     VariantProps<typeof sheetVariants> {}
 
 const SheetContent = React.forwardRef<
@@ -59,10 +62,10 @@ const SheetContent = React.forwardRef<
     <SheetOverlay />
     <Sheet.Popup
       ref={ref}
-      className={cn(sheetVariants({ side }), className)}
+      className={cn("pointer-events-auto", sheetVariants({ side }), className)}
       {...props}
     >
-      <SheetClose className="top-4 right-4 absolute dark:data-[open]:bg-zinc-800 data-[open]:bg-zinc-100 opacity-70 hover:opacity-100 focus:ring-2 focus:ring-zinc-950 dark:focus:ring-zinc-300 ring-offset-white focus:ring-offset-2 dark:ring-offset-zinc-950 transition-opacity disabled:pointer-events-none focus:outline-none">
+      <SheetClose className="top-4 right-4 absolute data-[open]:bg-zinc-100 dark:data-[open]:bg-zinc-800 opacity-70 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-zinc-300 ring-offset-white focus:ring-offset-2 dark:ring-offset-zinc-950 transition-opacity disabled:pointer-events-none">
         <X size={20} />
         <span className="sr-only">Close</span>
       </SheetClose>
@@ -78,7 +81,7 @@ const SheetHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col space-y-2 text-center sm:text-left",
+      "flex flex-col space-y-2 sm:text-left text-center",
       className,
     )}
     {...props}
@@ -92,7 +95,7 @@ const SheetFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      "flex sm:flex-row flex-col-reverse sm:justify-end sm:space-x-2",
       className,
     )}
     {...props}
@@ -107,7 +110,7 @@ const SheetTitle = React.forwardRef<
   <Sheet.Title
     ref={ref}
     className={cn(
-      "text-lg font-semibold text-zinc-950 dark:text-zinc-50",
+      "font-semibold text-zinc-950 dark:text-zinc-50 text-lg",
       className,
     )}
     {...props}
@@ -121,21 +124,21 @@ const SheetDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <Sheet.Description
     ref={ref}
-    className={cn("text-sm text-zinc-500 dark:text-zinc-400", className)}
+    className={cn("text-zinc-500 dark:text-zinc-400 text-sm", className)}
     {...props}
   />
 ));
 SheetDescription.displayName = "SheetDescription";
 
 export {
-  SheetRoot as Sheet,
-  SheetPortal,
-  SheetOverlay,
-  SheetTrigger,
   SheetClose,
   SheetContent,
-  SheetHeader,
-  SheetFooter,
-  SheetTitle,
   SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetOverlay,
+  SheetPortal,
+  SheetRoot as Sheet,
+  SheetTitle,
+  SheetTrigger,
 };

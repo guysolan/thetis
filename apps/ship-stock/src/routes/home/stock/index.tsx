@@ -1,182 +1,241 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import Sheet from "@/components/Sheet";
-import { selectStockpilesQueryOptions } from "@/features/stockpiles/api/selectStockpiles";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import {
+	selectStockpilesQueryOptions,
+	useSelectStockpiles,
+} from "@/features/stockpiles/api/selectStockpiles";
+import {
+	selectInventoryHistoryQueryOptions,
+	useSelectInventoryHistory,
+} from "@/features/stock-history/api/selectInventoryHistory";
+import {
+	selectAmazonInventoryQueryOptions,
+	useAmazonInventoryOptional,
+} from "@/features/amazon/selectAmazonInventory";
 import { Button } from "@thetis/ui/button";
-import AmazonStock from "@/features/stockpiles/components/AmazonWarehouses";
 import { Tabs, TabsContent, TabsTrigger } from "@thetis/ui/tabs";
-import Stockpiles from "@/features/stockpiles/components/Stockpiles";
-import StocktakeForm from "@/features/orders/features/stocktake-form/StocktakeForm";
+import {
+	Sheet,
+	SheetContent,
+	SheetHeader,
+	SheetTitle,
+} from "@thetis/ui/sheet";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@thetis/ui/select";
+import StockTable from "@/features/stockpiles/components/StockTable";
+import { pivotStockData } from "@/features/stockpiles/utils/pivotStockData";
+import StockCheckForm from "@/components/StockCheckForm";
+import PageHeader from "@/components/PageHeader";
 import TabsHeader from "@/components/TabsHeader";
-import { Card, CardContent, CardHeader, CardTitle } from "@thetis/ui/card";
-import { useSelectStockpiles } from "@/features/stockpiles/api/selectStockpiles";
-import { StockpileView } from "@/features/stockpiles/types";
-import { useSelectInventoryHistory } from "@/features/stock-history/api/selectInventoryHistory";
-import { getCurrentQuantity } from "@/features/stock-history/utils";
-import StockCheckDialog from "@/components/StockCheckDialog";
-import { Switch } from "@thetis/ui/switch";
-import { Label } from "@thetis/ui/label";
-import { useState } from "react";
+import { features } from "@/features/navigation/content";
+import { useMemo, useState } from "react";
+import { Input } from "@thetis/ui/input";
+import { Calendar, ClipboardCheck, Search } from "lucide-react";
+import {
+	computeReorderPlan,
+	getDemandMultiplierForProduct,
+	getMonthName,
+	REORDER_PLAN_PRODUCT_NAMES,
+} from "@/features/stock-history/reorderPlanUtils";
+import type { StockRow } from "@/features/stockpiles/utils/pivotStockData";
+import type { LocationColumn } from "@/features/stockpiles/utils/pivotStockData";
 
-interface StockpileItem {
-  item_id: number;
-  item_name: string;
-  item_type: string;
-  item_quantity: number;
-  item_value: number;
+function computeReorderInfo(
+	rows: StockRow[],
+	columns: LocationColumn[],
+	stockpiles: { stockpile_id: number | null; stockpile_name: string | null }[] | undefined,
+): Map<number, { placeOrderBy: string; isDue: boolean; orderQty: number }> {
+	const map = new Map<number, { placeOrderBy: string; isDue: boolean; orderQty: number }>();
+	if (!stockpiles?.length) return map;
+
+	const mpd = stockpiles.find((s) => s.stockpile_name === "MPD");
+	const parkHouse = stockpiles.find((s) => s.stockpile_name === "Park House");
+	if (!mpd?.stockpile_id || !parkHouse?.stockpile_id) return map;
+
+	const mpdKey = columns.find((c) => c.addressId === mpd.stockpile_id)?.key;
+	const parkHouseKey = columns.find((c) => c.addressId === parkHouse.stockpile_id)?.key;
+	if (!mpdKey || !parkHouseKey) return map;
+
+	const now = new Date();
+	const startMonth = now.getMonth();
+	const startYear = now.getFullYear();
+	const productNameSet = new Set(REORDER_PLAN_PRODUCT_NAMES.map((n) => n.toLowerCase()));
+
+	for (const row of rows) {
+		if (!productNameSet.has(row.itemName.toLowerCase())) continue;
+
+		const combinedStock =
+			(row.locations[mpdKey] ?? 0) + (row.locations[parkHouseKey] ?? 0);
+		const plan = computeReorderPlan(combinedStock, startMonth, startYear, {
+			demandMultiplier: getDemandMultiplierForProduct(row.itemName),
+		});
+		const nextOrder = plan.orders.find((o) => o.isNextOrder);
+		if (!nextOrder || nextOrder.quantity <= 0) continue;
+
+		const { month, year } = nextOrder.placeOrderBy;
+		const placeOrderByStr = `${getMonthName(month)} ${year}`;
+		const isDue =
+			year < startYear || (year === startYear && month <= startMonth);
+
+		map.set(row.itemId, {
+			placeOrderBy: placeOrderByStr,
+			isDue,
+			orderQty: nextOrder.quantity,
+		});
+	}
+	return map;
 }
 
-const ItemsPage = () => {
-  const { data: stockpiles } = useSelectStockpiles();
-  const { data: inventoryHistory } = useSelectInventoryHistory();
-  const navigate = useNavigate();
-  const [showPrice, setShowPrice] = useState(false);
+const tabConfig = features.stock.tabs;
+type StockTab = (typeof tabConfig)[number]["value"];
 
-  return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="font-bold text-2xl">Stock Management</h1>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <Switch
-              id="price-toggle"
-              checked={showPrice}
-              onCheckedChange={setShowPrice}
-            />
-            <Label htmlFor="price-toggle" className="cursor-pointer">
-              Show Value
-            </Label>
-          </div>
-          <Button
-            onClick={() =>
-              navigate({
-                to: "/home/stock/calculator",
-              })}
-          >
-            Stock Forecast Calculator
-          </Button>
-        </div>
-      </div>
-      <Tabs defaultValue="stockpiles">
-        <TabsHeader
-          tabsList={
-            <>
-              <TabsTrigger value="stockpiles">Stockpiles</TabsTrigger>
-              <TabsTrigger value="amazon">Amazon</TabsTrigger>
-            </>
-          }
-        />
-        <TabsContent value="stockpiles">
-          <div className="gap-6 grid grid-cols-1 lg:grid-cols-2">
-            {stockpiles?.map((stockpile: StockpileView) => {
-              const items = (stockpile.items as unknown as StockpileItem[]) ||
-                [];
+const StockPage = () => {
+	const { tab } = Route.useSearch();
+	const navigate = Route.useNavigate();
+	const [search, setSearch] = useState("");
+	const { data: stockpiles } = useSelectStockpiles();
+	const { data: inventoryHistory } = useSelectInventoryHistory();
+	const { data: amazonInventory } = useAmazonInventoryOptional();
+	const { rows, columns } = useMemo(
+		() => pivotStockData(inventoryHistory, stockpiles, amazonInventory),
+		[inventoryHistory, stockpiles, amazonInventory],
+	);
 
-              const filteredItems = items.filter((item) => {
-                const currentQuantity = getCurrentQuantity(
-                  item.item_id,
-                  inventoryHistory || [],
-                  stockpile.stockpile_id,
-                );
-                return currentQuantity > 0;
-              });
+	const reorderInfo = useMemo(
+		() => computeReorderInfo(rows, columns, stockpiles),
+		[rows, columns, stockpiles],
+	);
 
-              const totalStockpileValue = filteredItems.reduce((sum, item) => {
-                const currentQuantity = getCurrentQuantity(
-                  item.item_id,
-                  inventoryHistory || [],
-                  stockpile.stockpile_id,
-                );
-                return sum + (currentQuantity * item.item_price);
-              }, 0);
+	const handleTabChange = (value: string | null) => {
+		if (value) {
+			navigate({ search: { tab: value as StockTab }, replace: true });
+		}
+	};
 
-              return (
-                <Card key={stockpile.stockpile_id}>
-                  <CardHeader className="flex flex-row justify-between items-center space-y-0 pb-2">
-                    <div>
-                      <CardTitle className="font-bold text-xl">
-                        {stockpile.stockpile_name}
-                      </CardTitle>
-                      {showPrice && (
-                        <div className="mt-1 text-gray-500 text-sm">
-                          Total Value: £{totalStockpileValue.toFixed(2)}
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex gap-2">
-                      <StockCheckDialog
-                        addressId={stockpile.stockpile_id?.toString() || ""}
-                        stockpileName={stockpile.stockpile_name || ""}
-                      />
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() =>
-                          navigate({
-                            to: "/home/stock/history/$addressId",
-                            params: {
-                              addressId: stockpile.stockpile_id?.toString() ||
-                                "",
-                            },
-                          })}
-                      >
-                        View History
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div className="text-gray-500 text-sm">
-                        {stockpile.stockpile_address}
-                      </div>
-                      <div className="gap-4 grid grid-cols-1 md:grid-cols-2">
-                        {filteredItems.map((item) => {
-                          const currentQuantity = getCurrentQuantity(
-                            item.item_id,
-                            inventoryHistory || [],
-                            stockpile.stockpile_id,
-                          );
-                          const totalValue = currentQuantity * item.item_price;
-                          return (
-                            <div
-                              key={item.item_id}
-                              className="flex justify-between items-center bg-gray-50 p-3 rounded-lg"
-                            >
-                              <div>
-                                <div className="font-medium">
-                                  {item.item_name}
-                                </div>
-                                <div className="text-gray-500 text-sm">
-                                  {item.item_type}
-                                </div>
-                              </div>
-                              <div className="font-semibold text-lg">
-                                {showPrice
-                                  ? `£${totalValue.toFixed(2)}`
-                                  : currentQuantity}
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        </TabsContent>
+	const tabsList = tabConfig.map(({ value, label, icon: Icon }) => (
+		<TabsTrigger key={value} value={value}>
+			<Icon size={16} className="shrink-0" />
+			<span>{label}</span>
+		</TabsTrigger>
+	));
 
-        <TabsContent value="amazon">
-          <AmazonStock />
-        </TabsContent>
-      </Tabs>
-    </div>
-  );
+	const [stockCountOpen, setStockCountOpen] = useState(false);
+	const [stockCountAddressId, setStockCountAddressId] = useState<string>("");
+
+	// Get unique addresses that hold stock from stockpiles
+	const stockAddresses = useMemo(() => {
+		if (!stockpiles) return [];
+		const seen = new Set<number>();
+		return stockpiles
+			.filter((s) => s.stockpile_id && !seen.has(s.stockpile_id) && seen.add(s.stockpile_id))
+			.map((s) => ({ id: String(s.stockpile_id), name: s.stockpile_name ?? `Location ${s.stockpile_id}` }));
+	}, [stockpiles]);
+
+	return (
+		<>
+			<PageHeader title="Stock">
+				<Button variant="outline" size="sm" onClick={() => setStockCountOpen(true)}>
+					<ClipboardCheck size={16} className="mr-1.5" />
+					Stock Count
+				</Button>
+				<Sheet open={stockCountOpen} onOpenChange={setStockCountOpen}>
+					<SheetContent className="sm:max-w-lg overflow-y-auto">
+						<SheetHeader>
+							<SheetTitle>Stock Count</SheetTitle>
+						</SheetHeader>
+						<div className="space-y-4 pt-4">
+							<Select value={stockCountAddressId} onValueChange={setStockCountAddressId}>
+								<SelectTrigger>
+									<SelectValue placeholder="Select location" />
+								</SelectTrigger>
+								<SelectContent>
+									{stockAddresses.map((addr) => (
+										<SelectItem key={addr.id} value={addr.id}>
+											{addr.name}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+							{stockCountAddressId && (
+								<StockCheckForm
+									key={stockCountAddressId}
+									addressId={stockCountAddressId}
+									onSuccess={() => {
+										setStockCountOpen(false);
+										setStockCountAddressId("");
+									}}
+								/>
+							)}
+						</div>
+					</SheetContent>
+				</Sheet>
+				<Button variant="outline" size="sm" asChild>
+					<Link to="/home/stock/reorder-plan">
+						<Calendar size={16} className="mr-1.5" />
+						Reorder Plan
+					</Link>
+				</Button>
+			</PageHeader>
+
+			<Tabs value={tab} onValueChange={handleTabChange} className="w-full">
+				<div className="flex items-center gap-4 w-full">
+					<div className="flex-1 min-w-0">
+						<TabsHeader tabsList={tabsList} />
+					</div>
+					<div className="relative w-48 shrink-0">
+						<Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+						<Input
+							placeholder="Search items..."
+							value={search}
+							onChange={(e) => setSearch(e.target.value)}
+							className="pl-9 h-9"
+						/>
+					</div>
+				</div>
+
+				{tabConfig.map(({ value }) => (
+					<TabsContent
+						key={value}
+						value={value}
+						className="flex flex-col gap-4 w-full"
+					>
+						<StockTable
+							rows={rows}
+							columns={columns}
+							inventoryHistory={inventoryHistory ?? []}
+							reorderInfo={reorderInfo}
+							typeFilter={value}
+							globalFilter={search}
+							onGlobalFilterChange={setSearch}
+						/>
+					</TabsContent>
+				))}
+			</Tabs>
+		</>
+	);
 };
 
 export const Route = createFileRoute("/home/stock/")({
-  component: ItemsPage,
-  loader: async ({ context }) => {
-    await context.queryClient.ensureQueryData(selectStockpilesQueryOptions());
-  },
+	component: StockPage,
+	validateSearch: (search: Record<string, unknown>): { tab: StockTab } => ({
+		tab: (tabConfig.some((t) => t.value === search.tab)
+			? search.tab
+			: "all") as StockTab,
+	}),
+	loader: async ({ context }) => {
+		// Amazon is optional - prefetch but don't block if it fails
+		context.queryClient.prefetchQuery(selectAmazonInventoryQueryOptions());
+		await Promise.all([
+			context.queryClient.ensureQueryData(
+				selectStockpilesQueryOptions(),
+			),
+			context.queryClient.ensureQueryData(
+				selectInventoryHistoryQueryOptions(),
+			),
+		]);
+	},
 });

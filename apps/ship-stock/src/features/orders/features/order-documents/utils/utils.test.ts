@@ -753,7 +753,7 @@ describe("prepareOrderItems", () => {
     it("should return exactly 3 items", () => {
         // Arrange
         const mockOrder: OrderView = {
-            order_type: "purchase",
+            order_type: "build",
             items: items,
         };
 

@@ -1,4 +1,4 @@
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { queryOptions, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "../../lib/supabase"; // Adjust the import path as needed
 
 interface stockpileData {
@@ -8,7 +8,7 @@ interface stockpileData {
     inbound: number;
 }
 
-interface AmazonInventory {
+export interface AmazonInventory {
     UsInventory: stockpileData[];
     CaInventory: stockpileData[];
     DeInventory: stockpileData[];
@@ -38,5 +38,13 @@ export const selectAmazonInventoryQueryOptions = () => {
     });
 };
 
+/** Suspense version - will throw on error and block rendering */
 export const useAmazonInventory = () =>
     useSuspenseQuery(selectAmazonInventoryQueryOptions());
+
+/** Non-suspense version - returns undefined data on error, never blocks the page */
+export const useAmazonInventoryOptional = () =>
+    useQuery({
+        ...selectAmazonInventoryQueryOptions(),
+        retry: 1,
+    });

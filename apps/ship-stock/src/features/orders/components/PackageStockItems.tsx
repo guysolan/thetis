@@ -253,9 +253,28 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
     }
   };
 
+  const removePackage = (index: number) => {
+    const packageItemChangeId = form.getValues(
+      `package_items.${index}.package_item_change_id`,
+    );
+
+    // Remove items belonging to this package from all target fields
+    itemsToUpdate.forEach((fieldName: ItemsToUpdate) => {
+      const currentItems = form.getValues(fieldName) || [];
+      const filtered = currentItems.filter(
+        (item: OrderItem) =>
+          item.package_item_change_id !== packageItemChangeId,
+      );
+      form.setValue(fieldName, filtered);
+    });
+
+    // Remove the package itself
+    remove(index);
+  };
+
   return {
     fields,
-    remove,
+    removePackage,
     addPackage,
     duplicatePackage,
     availablePackages,
@@ -269,7 +288,7 @@ const PackageStockItems = ({
   const form = useFormContext();
   const {
     fields,
-    remove,
+    removePackage,
     addPackage,
     duplicatePackage,
     availablePackages,
@@ -397,7 +416,7 @@ const PackageStockItems = ({
                       type="button"
                       variant="ghost"
                       size="icon"
-                      onClick={() => remove(index)}
+                      onClick={() => removePackage(index)}
                       className="-mt-2 -mr-2 w-8 h-8"
                     >
                       <Trash className="w-4 h-4" />

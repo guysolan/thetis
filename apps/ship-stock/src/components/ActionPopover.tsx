@@ -27,7 +27,6 @@ const ActionPopover = ({
         <Button
           className="dark:text-neutral-100"
           type="button"
-          onClick={(e) => e.stopPropagation()}
           variant="ghost"
           size="icon"
         >
@@ -37,16 +36,17 @@ const ActionPopover = ({
       <PopoverContent
         align="end"
         side="bottom"
-        className="z-30 flex flex-col gap-1 p-1"
+        className="z-30 flex flex-col gap-0.5 p-1.5 min-w-[11rem]"
       >
         {editForm && (
           <Sheet
             trigger={
               <Button
-                className="justify-start gap-2 px-2 w-full"
                 variant="ghost"
+                size="sm"
+                className="justify-start gap-2 px-3 py-2 w-full font-normal text-sm"
               >
-                <Edit size={20} />
+                <Edit size={16} />
                 Edit
               </Button>
             }
@@ -59,11 +59,12 @@ const ActionPopover = ({
 
         {onDuplicate && (
           <Button
-            onClick={onDuplicate}
-            className="justify-start gap-2 px-2"
             variant="ghost"
+            size="sm"
+            className="justify-start gap-2 px-3 py-2 w-full font-normal text-sm"
+            onClick={onDuplicate}
           >
-            <Copy size={20} />
+            <Copy size={16} />
             Duplicate
           </Button>
         )}
@@ -73,9 +74,10 @@ const ActionPopover = ({
             trigger={
               <Button
                 variant="ghost"
-                className="justify-start gap-2 px-2 w-full text-red-500 hover:text-red-600"
+                size="sm"
+                className="justify-start gap-2 hover:bg-red-50 dark:hover:bg-red-950/30 px-2 w-full font-normal text-red-600 hover:text-red-700 text-sm"
               >
-                <Trash2 size={20} />
+                <Trash2 size={16} />
                 Delete
               </Button>
             }

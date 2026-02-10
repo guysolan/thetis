@@ -25,7 +25,7 @@ const AddressSelectAddEdit = ({
     form.setValue(getFieldName("company"), String(companyId));
   };
   return (
-    <div className="flex flex-row items-end gap-2 w-full">
+    <div className="flex flex-row items-center gap-2 w-full">
       <div className="flex-1 min-w-0">
         <CompanyAddressSelect
           value={form.watch(getFieldName(type))}
@@ -35,9 +35,9 @@ const AddressSelectAddEdit = ({
           error={form.formState.errors[getFieldName(type)]?.message}
         />
       </div>
-      <div className="flex flex-shrink-0 gap-2">
+      <div className="flex shrink-0 gap-2">
         {getSelectedAddress(type) && (
-          <TooltipDialog icon={<Pencil size={20} />} tooltipText="Edit Address">
+          <TooltipDialog icon={<Pencil size={16} />} tooltipText="Edit Address">
             <AddressForm
               operation="upsert"
               companyId={form.watch(getFieldName("company"))}
@@ -46,7 +46,7 @@ const AddressSelectAddEdit = ({
             />
           </TooltipDialog>
         )}
-        <TooltipDialog icon={<Plus size={20} />} tooltipText="Add Address">
+        <TooltipDialog icon={<Plus size={16} />} tooltipText="Add Address">
           <AddressForm
             operation="insert"
             companyId={form.watch(getFieldName("company"))}

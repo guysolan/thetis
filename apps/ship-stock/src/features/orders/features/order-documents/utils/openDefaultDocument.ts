@@ -1,8 +1,8 @@
 const documentTypeMap = {
-    purchase: "purchase-order",
-    sale: "invoice",
-    shipment: "commercial-invoice",
-    stocktake: "stocktake-report",
+    build: "purchase-order",
+    sell: "invoice",
+    ship: "commercial-invoice",
+    count: "stocktake-report",
 };
 export const openDefaultDocument = (
     order_id: number,

@@ -10,9 +10,11 @@ const unitOfMeasurementOptions = [
 ];
 
 const orderTypeOptions = [
-	{ label: "Sale", value: "sale" },
-	{ label: "Purchase", value: "purchase" },
-	{ label: "Shipment", value: "shipment" },
+	{ label: "Sell", value: "sell" },
+	{ label: "Buy", value: "buy" },
+	{ label: "Build", value: "build" },
+	{ label: "Ship", value: "ship" },
+	{ label: "Count", value: "count" },
 ];
 
 type OrderDetailsPageProps = {
@@ -24,7 +26,7 @@ export function OrderDetailsPage({ form }: OrderDetailsPageProps) {
 		<div className="space-y-6">
 			<div>
 				<h2 className="mb-2 font-semibold text-xl">Order Details</h2>
-				<p className="text-gray-600 text-sm">
+				<p className="text-muted-foreground text-sm">
 					Enter the basic information for this order
 				</p>
 			</div>

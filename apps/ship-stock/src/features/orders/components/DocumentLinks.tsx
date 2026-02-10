@@ -26,32 +26,32 @@ const documents: DocumentConfig[] = [
   {
     path: "commercial-invoice",
     label: "Commercial Invoice",
-    icon: <Receipt size={20} />,
-    showFor: ["shipment", "sale"],
+    icon: <Receipt size={16} />,
+    showFor: ["ship", "sell"],
   },
   {
     path: "packing-list",
     label: "Packing List",
-    icon: <Clipboard size={20} />,
-    showFor: ["shipment", "sale"],
+    icon: <Clipboard size={16} />,
+    showFor: ["ship", "sell"],
   },
   {
     path: "shipping-label",
     label: "Shipping Label",
-    icon: <Tag size={20} />,
-    showFor: ["shipment", "sale"],
+    icon: <Tag size={16} />,
+    showFor: ["ship", "sell"],
   },
   {
     path: "purchase-order",
     label: "Purchase Order",
-    icon: <FileText size={20} />,
-    showFor: ["purchase"],
+    icon: <FileText size={16} />,
+    showFor: ["build"],
   },
   {
     path: "invoice",
     label: "Invoice",
-    icon: <Banknote size={20} />,
-    showFor: ["sale"],
+    icon: <Banknote size={16} />,
+    showFor: ["sell"],
   },
 ];
 
@@ -65,18 +65,20 @@ export const DocumentLinks = ({ orderId, orderType }: DocumentLinksProps) => {
             key={doc.path}
             asChild
             variant="ghost"
-            className="justify-between px-2 w-full"
+            size="sm"
+            className="justify-start gap-2 px-3 py-2 w-full font-normal text-sm"
           >
             <Link
+              className="flex items-center gap-2 w-full px-3 py-2"
               to={`/documents/orders/$orderId/${doc.path}`}
               params={{ orderId }}
               target="_blank"
               onClick={(e) => e.stopPropagation()}
             >
-              <span className="flex flex-row items-center gap-2">
+              <span className="flex items-center gap-2 shrink-0">
                 {doc.icon} {doc.label}
               </span>
-              <ExternalLink size={20} />
+              <ExternalLink size={14} className="opacity-70 ml-auto shrink-0" />
             </Link>
           </Button>
         ))}

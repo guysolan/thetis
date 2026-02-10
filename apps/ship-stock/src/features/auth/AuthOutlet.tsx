@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import { Outlet } from "@tanstack/react-router";
 import Authentication from "./Authentication";
+
 export default function AuthOutlet() {
   const [session, setSession] = useState(null);
 
@@ -25,8 +26,8 @@ export default function AuthOutlet() {
   }
 
   return (
-    <div className="p-4 w-full min-h-screen">
+    <main className="flex-1 overflow-auto p-6">
       <Outlet />
-    </div>
+    </main>
   );
 }
