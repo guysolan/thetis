@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import ReturningToWork from "@/assets/returning-to-work-v3-split-panel-fixed.png";
+import ReturningToWork from "@/assets/returning-to-work-v4-radial-v2.png";
 
 export const metadata = {
     slug: "returning-to-life",

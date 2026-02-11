@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import OngoingStrengthening from "@/assets/ongoing-strengthening-v15.png";
 
 export const metadata = {
     slug: "preventing-rerupture",
@@ -106,6 +107,13 @@ export const content: SectionContent = {
                     type: "text",
                     content:
                         "**Ongoing strength is your best defense against re-rupture.** Strong muscles protect your tendon. Don't stop strengthening just because you're back to activities.",
+                },
+                {
+                    type: "image",
+                    src: OngoingStrengthening,
+                    alt: "Infographic showing ongoing strengthening as the best defense against re-rupture, with anatomical diagrams showing weak vs strong calf muscles, and a four-step program: heel raises, adding resistance, continuing when back to sport, and making it a habit",
+                    caption:
+                        "Ongoing strengthening: your best defense against re-rupture",
                 },
                 {
                     type: "card",

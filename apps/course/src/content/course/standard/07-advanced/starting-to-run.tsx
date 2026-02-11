@@ -1,6 +1,6 @@
 import type { SectionContent } from "@/components/course/types";
 import RunningFormWeek28 from "@/assets/running-form-week-28.png";
-import WalkJogProgression from "@/assets/walk-jog-progression-v6.png";
+import WalkJogProgression from "@/assets/walk-jog-progression-v6-weeks-clarified.png";
 
 export const metadata = {
     slug: "starting-to-run",
