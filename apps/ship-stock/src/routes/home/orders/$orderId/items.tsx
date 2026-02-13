@@ -1,23 +1,26 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { selectOrderFormValuesById } from "@/features/orders/features/order-history/api/selectOrderViewById";
-import { MultiOrderFormData } from "@/features/orders/features/multi-order-form/schema";
 import { useMemo } from "react";
 import { OrderFormStepper, type Step } from "@/components/OrderFormStepper";
 import { OrderFormNavigation } from "@/components/OrderFormNavigation";
 import { ItemsPageSimple } from "@/features/orders/features/multi-order-form/pages/ItemsPageSimple";
-import { useForm as useTanStackForm } from "@tanstack/react-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { saveOrderItems } from "@/features/orders/api/saveOrderPage";
 import { toast } from "sonner";
 import { itemsSchema } from "@/features/orders/features/multi-order-form/pages/validationSchemas";
-import { zodValidator } from "@tanstack/zod-form-adapter";
-import { ValidationSummary } from "@/components/ValidationSummary";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const STEPS: Step[] = [
   { number: 1, label: "Details", key: "details" },
   { number: 2, label: "Companies", key: "companies" },
   { number: 3, label: "Items", key: "items" },
   { number: 4, label: "Logistics", key: "logistics" },
+];
+
+const STOCKTAKE_STEPS: Step[] = [
+  { number: 1, label: "Details", key: "details" },
+  { number: 2, label: "Items", key: "items" },
 ];
 
 export const Route = createFileRoute("/home/orders/$orderId/items")({
@@ -58,65 +61,93 @@ function RouteComponent() {
     };
   }, [order?.order_form_values]);
 
-  const form = useTanStackForm({
-    defaultValues: defaultValues || {},
-    validatorAdapter: zodValidator(),
-    validators: {
-      onChange: itemsSchema,
-    },
-    onSubmit: async ({ value: values }) => {
-      // Debug: Log addresses being used
-      console.log("📍 Addresses in form values:", {
-        from_shipping_address_id: values.from_shipping_address_id,
-        to_shipping_address_id: values.to_shipping_address_id,
-        order_type: values.order_type,
-      });
-
-      try {
-        await saveOrderItems(Number(orderId), values);
-        toast.success("Items saved");
-        navigate({ to: `/home/orders/${orderId}/logistics` });
-      } catch (error) {
-        console.error("Error saving items:", error);
-        toast.error(
-          `Failed to save: ${
-            error instanceof Error ? error.message : "Unknown error"
-          }`,
-        );
+  // Store original quantity changes for stocktakes (to calculate "before" values correctly)
+  const originalQuantityChanges = useMemo(() => {
+    if (!order?.order_form_values) return {};
+    const changes: Record<string, number> = {};
+    const items = order.order_form_values.order_items || [];
+    items.forEach((item: any, index: number) => {
+      if (item?.item_id && item?.quantity_change !== undefined) {
+        // Key by item_id and index to handle duplicate items
+        changes[`${item.item_id}-${index}`] = item.quantity_change;
       }
-    },
+    });
+    return changes;
+  }, [order?.order_form_values]);
+
+  const form = useForm({
+    defaultValues,
+    resolver: zodResolver(itemsSchema),
+    mode: "onChange",
   });
 
-  const handleNext = async () => {
-    form.handleSubmit();
+  const orderType = form.watch("order_type");
+  const isStocktake = orderType === "count";
+
+  const onSubmit = async (values: any) => {
+    try {
+      await saveOrderItems(Number(orderId), values);
+      toast.success("Items saved");
+      // Stocktakes don't have a logistics page, go back to orders list
+      if (isStocktake) {
+        navigate({ to: "/home/orders", search: { tab: "all" } });
+      } else {
+        navigate({ to: `/home/orders/${orderId}/logistics` });
+      }
+    } catch (error) {
+      console.error("Error saving items:", error);
+      toast.error(
+        `Failed to save: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
+      );
+    }
+  };
+
+  const handleNext = () => {
+    form.handleSubmit(onSubmit)();
   };
 
   const handlePrevious = () => {
-    navigate({ to: `/home/orders/${orderId}/companies` });
+    // Stocktakes go back to details, others go to companies
+    if (isStocktake) {
+      navigate({ to: `/home/orders/${orderId}/details` });
+    } else {
+      navigate({ to: `/home/orders/${orderId}/companies` });
+    }
   };
 
   const handleStepClick = (stepNumber: number) => {
-    const routes = ["details", "companies", "items", "logistics"];
-    const route = routes[stepNumber - 1];
-    if (stepNumber < 3) {
-      // Only allow going back
-      navigate({ to: `/home/orders/${orderId}/${route}` });
+    if (isStocktake) {
+      const routes = ["details", "items"];
+      const route = routes[stepNumber - 1];
+      if (stepNumber < 2) {
+        navigate({ to: `/home/orders/${orderId}/${route}` });
+      }
+    } else {
+      const routes = ["details", "companies", "items", "logistics"];
+      const route = routes[stepNumber - 1];
+      if (stepNumber < 3) {
+        navigate({ to: `/home/orders/${orderId}/${route}` });
+      }
     }
   };
 
   return (
-    <div className="space-y-6">
-      <OrderFormStepper
-        steps={STEPS}
-        currentStep={3}
-        onStepClick={handleStepClick}
-      />
-      <ValidationSummary form={form} />
-      <ItemsPageSimple form={form} />
-      <OrderFormNavigation
-        onPrevious={handlePrevious}
-        onNext={handleNext}
-      />
-    </div>
+    <FormProvider {...form}>
+      <div className="space-y-6">
+        <OrderFormStepper
+          steps={isStocktake ? STOCKTAKE_STEPS : STEPS}
+          currentStep={isStocktake ? 2 : 3}
+          onStepClick={handleStepClick}
+        />
+        <ItemsPageSimple originalQuantityChanges={originalQuantityChanges} />
+        <OrderFormNavigation
+          onPrevious={handlePrevious}
+          onNext={handleNext}
+          nextLabel={isStocktake ? "Save Stocktake" : "Save & Continue"}
+        />
+      </div>
+    </FormProvider>
   );
 }

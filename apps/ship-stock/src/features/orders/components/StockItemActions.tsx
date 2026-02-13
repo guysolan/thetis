@@ -16,7 +16,7 @@ const StockItemActions = ({
         <Button
           key={type}
           type="button"
-          variant="secondary"
+          variant="outline"
           size="sm"
           onClick={() => onAppend(type)}
           className="capitalize"

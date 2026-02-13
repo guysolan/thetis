@@ -34,6 +34,7 @@ interface ComboboxProps {
     emptyMessage?: string;
     disabled?: boolean;
     className?: string;
+    onChange?: (value: string) => void;
 }
 
 export const Combobox = ({
@@ -45,6 +46,7 @@ export const Combobox = ({
     emptyMessage = "No option found.",
     disabled = false,
     className,
+    onChange,
 }: ComboboxProps) => {
     const { control } = useFormContext();
     const [open, setOpen] = useState(false);
@@ -60,6 +62,8 @@ export const Combobox = ({
                         <PopoverTrigger asChild>
                             <FormControl>
                                 <Button
+                                    ref={field.ref}
+                                    name={field.name}
                                     variant="outline"
                                     role="combobox"
                                     disabled={disabled}
@@ -91,12 +95,13 @@ export const Combobox = ({
                                                 key={option.value}
                                                 value={option.label}
                                                 onSelect={() => {
-                                                    field.onChange(
+                                                    const newValue =
                                                         option.value ===
-                                                                field.value
+                                                            field.value
                                                             ? ""
-                                                            : option.value,
-                                                    );
+                                                            : option.value;
+                                                    field.onChange(newValue);
+                                                    onChange?.(newValue);
                                                     setOpen(false);
                                                 }}
                                                 className="flex items-center"

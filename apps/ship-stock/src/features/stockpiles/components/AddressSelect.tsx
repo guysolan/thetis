@@ -70,7 +70,7 @@ const AddressSelect = (
           >
             <FormControl>
               <div className="flex flex-row items-center gap-2">
-                <SelectTrigger>
+                <SelectTrigger ref={field.ref} name={field.name}>
                   <SelectValue placeholder="Select address" />
                 </SelectTrigger>
                 {isClearable && <Button

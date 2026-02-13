@@ -50,6 +50,8 @@ const NumberFlowCell = (props: NumberCellProps) => {
       )}
     >
       <Input
+        name={props.name}
+        id={`${props.name.replace(/\./g, "-")}-input`}
         focus={focus}
         blur={blur}
         format={props.format}

@@ -5,12 +5,13 @@ import { MultiOrderFormData } from "@/features/orders/features/multi-order-form/
 import { useMemo } from "react";
 import { OrderFormStepper, type Step } from "@/components/OrderFormStepper";
 import { OrderFormNavigation } from "@/components/OrderFormNavigation";
+import FormErrors from "@/components/FormErrors";
 import { CompaniesAddressesPage } from "@/features/orders/features/multi-order-form/pages/CompaniesAddressesPage";
-import { useForm as useTanStackForm } from "@tanstack/react-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { saveOrderCompanies } from "@/features/orders/api/saveOrderPage";
 import { toast } from "sonner";
 import { companiesAddressesSchema } from "@/features/orders/features/multi-order-form/pages/validationSchemas";
-import { ValidationSummary } from "@/components/ValidationSummary";
+import { zodResolver } from "@hookform/resolvers/zod";
 import useMyCompanyId from "@/features/companies/hooks/useMyCompanyId";
 
 const STEPS: Step[] = [
@@ -47,39 +48,39 @@ function RouteComponent() {
         };
     }, [order?.order_form_values, companyId]);
 
-    const form = useTanStackForm({
-        defaultValues: defaultValues || {},
-        validators: {
-            onChange: companiesAddressesSchema,
-        },
-        onSubmit: async ({ value: values }: { value: MultiOrderFormData }) => {
-            try {
-                await saveOrderCompanies(Number(orderId), {
-                    from_company_id: values.from_company_id,
-                    to_company_id: values.to_company_id,
-                    from_billing_address_id: values.from_billing_address_id,
-                    from_shipping_address_id: values.from_shipping_address_id,
-                    to_billing_address_id: values.to_billing_address_id,
-                    to_shipping_address_id: values.to_shipping_address_id,
-                    from_contact_id: values.from_contact_id,
-                    to_contact_id: values.to_contact_id,
-                    company_id: values.company_id,
-                });
-                toast.success("Companies & addresses saved");
-                navigate({ to: `/home/orders/${orderId}/items` });
-            } catch (error) {
-                console.error("Error saving companies:", error);
-                toast.error(
-                    `Failed to save: ${
-                        error instanceof Error ? error.message : "Unknown error"
-                    }`,
-                );
-            }
-        },
+    const form = useForm({
+        defaultValues,
+        resolver: zodResolver(companiesAddressesSchema),
+        mode: "onChange",
     });
 
-    const handleNext = async () => {
-        form.handleSubmit();
+    const onSubmit = async (values: MultiOrderFormData) => {
+        try {
+            await saveOrderCompanies(Number(orderId), {
+                from_company_id: values.from_company_id,
+                to_company_id: values.to_company_id,
+                from_billing_address_id: values.from_billing_address_id,
+                from_shipping_address_id: values.from_shipping_address_id,
+                to_billing_address_id: values.to_billing_address_id,
+                to_shipping_address_id: values.to_shipping_address_id,
+                from_contact_id: values.from_contact_id,
+                to_contact_id: values.to_contact_id,
+                company_id: values.company_id,
+            });
+            toast.success("Companies & addresses saved");
+            navigate({ to: `/home/orders/${orderId}/items` });
+        } catch (error) {
+            console.error("Error saving companies:", error);
+            toast.error(
+                `Failed to save: ${
+                    error instanceof Error ? error.message : "Unknown error"
+                }`,
+            );
+        }
+    };
+
+    const handleNext = () => {
+        form.handleSubmit(onSubmit)();
     };
 
     const handlePrevious = () => {
@@ -90,24 +91,25 @@ function RouteComponent() {
         const routes = ["details", "companies", "items", "logistics"];
         const route = routes[stepNumber - 1];
         if (stepNumber < 2) {
-            // Only allow going back
             navigate({ to: `/home/orders/${orderId}/${route}` });
         }
     };
 
     return (
-        <div className="space-y-6">
-            <OrderFormStepper
-                steps={STEPS}
-                currentStep={2}
-                onStepClick={handleStepClick}
-            />
-            <ValidationSummary form={form} />
-            <CompaniesAddressesPage form={form} />
-            <OrderFormNavigation
-                onPrevious={handlePrevious}
-                onNext={handleNext}
-            />
-        </div>
+        <FormProvider {...form}>
+            <div className="space-y-6">
+                <OrderFormStepper
+                    steps={STEPS}
+                    currentStep={2}
+                    onStepClick={handleStepClick}
+                />
+                <FormErrors title="Please fix the following:" />
+                <CompaniesAddressesPage />
+                <OrderFormNavigation
+                    onPrevious={handlePrevious}
+                    onNext={handleNext}
+                />
+            </div>
+        </FormProvider>
     );
 }

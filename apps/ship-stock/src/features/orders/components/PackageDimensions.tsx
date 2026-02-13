@@ -1,11 +1,17 @@
 import { Badge } from "@thetis/ui/badge";
 import { Box, Weight } from "lucide-react";
 import React from "react";
-import { Item } from "../../items/types";
 
-const PackageDimensions = ({
-  selectedPackage,
-}: { selectedPackage: Item["Row"] }) => {
+interface PackageDimensionsProps {
+  selectedPackage: {
+    height?: number | null;
+    width?: number | null;
+    depth?: number | null;
+    weight?: number | null;
+  };
+}
+
+const PackageDimensions = ({ selectedPackage }: PackageDimensionsProps) => {
   return (
     <div className="flex flex-wrap gap-2">
       {selectedPackage.height &&

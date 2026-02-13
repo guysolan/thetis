@@ -31,6 +31,8 @@ export async function saveOrderDetails(
 		delivery_dates?: [Date | string | null, Date | string | null] | null;
 		unit_of_measurement: MultiOrderFormData["unit_of_measurement"];
 		orderId?: number;
+		// For stocktakes
+		from_shipping_address_id?: string | null;
 	},
 ): Promise<number> {
 	console.log("📄 Page 1: Saving order details...", data);
@@ -43,17 +45,20 @@ export async function saveOrderDetails(
 		validCurrency = data.currency as Currency;
 	}
 
-	const deliveryDates: [string | null, string | null] | null =
-		data.delivery_dates
-			? [
-				data.delivery_dates[0]
-					? dayjs(data.delivery_dates[0]).toISOString()
-					: null,
-				data.delivery_dates[1]
-					? dayjs(data.delivery_dates[1]).toISOString()
-					: null,
-			] as [string | null, string | null]
-			: null;
+	// Process delivery dates - only create array if we have actual date values
+	// For stocktakes and cases where dates are not provided, use null
+	let deliveryDates: [string, string] | null = null;
+	if (data.delivery_dates && data.delivery_dates[0] && data.delivery_dates[1]) {
+		deliveryDates = [
+			dayjs(data.delivery_dates[0]).toISOString(),
+			dayjs(data.delivery_dates[1]).toISOString(),
+		];
+	}
+
+	// For stocktakes, we save the address in the details page
+	const fromShippingAddressId = data.from_shipping_address_id 
+		? Number(data.from_shipping_address_id) 
+		: null;
 
 	if (data.orderId) {
 		// Update existing order
@@ -65,6 +70,9 @@ export async function saveOrderDetails(
 				currency: validCurrency,
 				delivery_dates: deliveryDates,
 				unit_of_measurement: data.unit_of_measurement,
+				...(data.order_type === "count" && fromShippingAddressId 
+					? { from_shipping_address_id: fromShippingAddressId } 
+					: {}),
 			})
 			.eq("id", data.orderId)
 			.select()
@@ -91,7 +99,7 @@ export async function saveOrderDetails(
 				from_company_id: null,
 				to_company_id: null,
 				from_billing_address_id: null,
-				from_shipping_address_id: null,
+				from_shipping_address_id: fromShippingAddressId,
 				to_billing_address_id: null,
 				to_shipping_address_id: null,
 				company_id: null,
@@ -177,6 +185,10 @@ export async function saveOrderItems(
 		from_shipping_address_id: formData.from_shipping_address_id,
 		to_shipping_address_id: formData.to_shipping_address_id,
 		order_items_count: formData.order_items?.length ?? 0,
+		order_items_sample:
+			(formData.order_items?.length ?? 0) > 0
+				? JSON.stringify(formData.order_items[0], null, 2)
+				: null,
 	});
 
 	// Delete existing order_item_changes and item_changes for this order
@@ -244,6 +256,21 @@ export async function saveOrderItems(
 		processedItems = processSellFormData(formData);
 	} else if (formData.order_type === "ship") {
 		processedItems = processShipmentFormData(formData);
+	} else if (formData.order_type === "count") {
+		// Stocktake: order_items at from_shipping_address_id (count location)
+		const addressId = formData.from_shipping_address_id;
+		if (!addressId || String(addressId).trim() === "") {
+			console.warn("⚠️ saveOrderItems (count): missing from_shipping_address_id", formData);
+		}
+		processedItems = (formData.order_items || []).map((item) => {
+			const mapped = mapToFormOrderItem(item as Record<string, unknown>);
+			return {
+				...mapped,
+				address_id: String(addressId ?? ""),
+				package_item_change_id: mapped.package_item_change_id ?? null,
+			} as FormatOrderItemChanges;
+		});
+		console.log("📊 Count order processed items:", processedItems.length, JSON.stringify(processedItems, null, 2));
 	}
 
 	// Filter out empty/invalid items
@@ -262,13 +289,13 @@ export async function saveOrderItems(
 		},
 	);
 
-	const regularItems = processedItems.filter(
-		(item) =>
-			item.item_id &&
-			item.item_id.trim() !== "" &&
-			item.quantity_change !== 0 &&
-			item.address_id,
-	);
+	const regularItems = processedItems.filter((item) => {
+		const hasItem = item.item_id && String(item.item_id).trim() !== "";
+		const hasAddress = item.address_id && String(item.address_id).trim() !== "";
+		// For count orders, keep items with 0 change (record the count); for others skip 0
+		const hasQty = formData.order_type === "count" ? true : item.quantity_change !== 0;
+		return !!hasItem && hasQty && !!hasAddress;
+	});
 
 	// For buy orders, packages go to to_shipping_address_id; for everything else, from_shipping_address_id
 	const packageAddressId = formData.order_type === "buy"
@@ -285,7 +312,14 @@ export async function saveOrderItems(
 	}
 
 	console.log("📦 Package items to process:", packageItems.length);
-	console.log("📋 Regular items to process:", regularItems.length);
+	console.log("📋 Regular items to process:", regularItems.length, formData.order_type === "count" ? "(count)" : "");
+	if (regularItems.length === 0 && (formData.order_items?.length ?? 0) > 0) {
+		console.warn("⚠️ No regular items after filter – check item_id, address_id, and (for non-count) quantity_change", {
+			order_type: formData.order_type,
+			raw_count: formData.order_items?.length,
+			processed_count: processedItems.length,
+		});
+	}
 	console.log(
 		"📋 Regular items details:",
 		JSON.stringify(

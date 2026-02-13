@@ -1,8 +1,10 @@
-import { DatePickerField } from "../../../../../components/tanstack-form/DatePickerField";
-import { DateRangePickerField } from "../../../../../components/tanstack-form/DateRangePickerField";
-import { SelectField } from "../../../../../components/tanstack-form/SelectField";
+import DatePicker from "../../../../../components/DatePicker";
+import DateRangePicker from "../../../../../components/DateRangePicker";
+import Select from "../../../../../components/Select";
 import { currencyKeys } from "../../../../../constants/currencies";
 import { FieldGroup } from "@thetis/ui/field";
+import { useFormContext, useWatch } from "react-hook-form";
+import AddressSelect from "../../../../stockpiles/components/AddressSelect";
 
 const unitOfMeasurementOptions = [
 	{ label: "Metric", value: "metric" },
@@ -14,14 +16,47 @@ const orderTypeOptions = [
 	{ label: "Buy", value: "buy" },
 	{ label: "Build", value: "build" },
 	{ label: "Ship", value: "ship" },
-	{ label: "Count", value: "count" },
+	{ label: "Count (Stocktake)", value: "count" },
 ];
 
-type OrderDetailsPageProps = {
-	form: any;
-};
+export function OrderDetailsPage() {
+	const form = useFormContext();
+	const orderType = useWatch({ control: form.control, name: "order_type" });
+	const isStocktake = orderType === "count";
 
-export function OrderDetailsPage({ form }: OrderDetailsPageProps) {
+	if (isStocktake) {
+		return (
+			<div className="space-y-6">
+				<div>
+					<h2 className="mb-2 font-semibold text-xl">Stocktake Details</h2>
+					<p className="text-muted-foreground text-sm">
+						Record a stock count at a specific location
+					</p>
+				</div>
+
+				<FieldGroup>
+					<div className="gap-4 grid grid-cols-1 lg:grid-cols-2">
+						<Select
+							name="order_type"
+							label="Order Type"
+							options={orderTypeOptions}
+						/>
+						<DatePicker
+							name="order_date"
+							label="Count Date"
+						/>
+						<div className="lg:col-span-2">
+							<AddressSelect 
+								name="from_shipping_address_id" 
+								label="Location"
+							/>
+						</div>
+					</div>
+				</FieldGroup>
+			</div>
+		);
+	}
+
 	return (
 		<div className="space-y-6">
 			<div>
@@ -33,37 +68,32 @@ export function OrderDetailsPage({ form }: OrderDetailsPageProps) {
 
 			<FieldGroup>
 				<div className="gap-4 grid grid-cols-1 lg:grid-cols-2">
-					<SelectField
+					<Select
 						name="order_type"
 						label="Order Type"
-						form={form}
 						options={orderTypeOptions}
 					/>
-					<DatePickerField
+					<DatePicker
 						name="order_date"
 						label="Order Date"
-						form={form}
 					/>
-					<SelectField
+					<Select
 						name="currency"
 						label="Currency"
-						form={form}
 						options={currencyKeys.map((o) => ({
 							label: o,
 							value: o,
 						}))}
 					/>
-					<SelectField
+					<Select
 						name="unit_of_measurement"
 						label="Unit of Measurement"
-						form={form}
 						options={unitOfMeasurementOptions}
 					/>
 					<div className="lg:col-span-2">
-						<DateRangePickerField
+						<DateRangePicker
 							name="delivery_dates"
 							label="Delivery Date Range"
-							form={form}
 						/>
 					</div>
 				</div>

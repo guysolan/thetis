@@ -14,6 +14,8 @@ type Props = {
   focus?: () => void;
   blur?: (e: React.FocusEvent<HTMLDivElement>) => void;
   onChange?: (value: number) => void;
+  name?: string;
+  id?: string;
 };
 
 export default function Input({
@@ -27,6 +29,8 @@ export default function Input({
   focus,
   blur,
   onChange,
+  name,
+  id,
 }: Props) {
   // Track input value for direct editing
   const [inputValue, setInputValue] = React.useState(value.toString());
@@ -103,13 +107,15 @@ export default function Input({
           ? (
             <input
               type="text"
+              id={id}
+              name={name}
               className="bg-transparent focus:outline-none w-full text-center"
               value={inputValue}
               onChange={handleInputChange}
               onBlur={handleBlur}
               onKeyDown={handleKeyDown}
               onFocus={focus}
-              aria-label="Numeric value"
+              aria-label={name ? undefined : "Numeric value"}
             />
           )
           : (

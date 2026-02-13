@@ -255,6 +255,7 @@ const StockItemRowCells = ({
           placeholder="Select item..."
           searchPlaceholder="Search items..."
           emptyMessage="No items found"
+          onChange={handleItemChange}
           options={items
             ?.filter((item) =>
               item.item_type === itemType
@@ -268,6 +269,8 @@ const StockItemRowCells = ({
       </TableCell>
       <TableCell>
         <Input
+          id={`${name}-${index}-lot_number`}
+          name={`${name}.${index}.lot_number`}
           value={form.watch(`${name}.${index}.lot_number`) || ""}
           onChange={(e) => {
             form.setValue(`${name}.${index}.lot_number`, e.target.value);

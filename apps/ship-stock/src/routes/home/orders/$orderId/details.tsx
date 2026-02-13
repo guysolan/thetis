@@ -6,18 +6,22 @@ import { useEffect, useMemo } from "react";
 import { OrderFormStepper, type Step } from "@/components/OrderFormStepper";
 import { OrderFormNavigation } from "@/components/OrderFormNavigation";
 import { OrderDetailsPage } from "@/features/orders/features/multi-order-form/pages/OrderDetailsPage";
-import { useForm as useTanStackForm } from "@tanstack/react-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { saveOrderDetails } from "@/features/orders/api/saveOrderPage";
 import { toast } from "sonner";
 import { orderDetailsSchema } from "@/features/orders/features/multi-order-form/pages/validationSchemas";
-import { zodValidator } from "@tanstack/zod-form-adapter";
-import { ValidationSummary } from "@/components/ValidationSummary";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const STEPS: Step[] = [
   { number: 1, label: "Details", key: "details" },
   { number: 2, label: "Companies", key: "companies" },
   { number: 3, label: "Items", key: "items" },
   { number: 4, label: "Logistics", key: "logistics" },
+];
+
+const STOCKTAKE_STEPS: Step[] = [
+  { number: 1, label: "Details", key: "details" },
+  { number: 2, label: "Items", key: "items" },
 ];
 
 const getDefaultNewOrder = (): MultiOrderFormData => ({
@@ -98,59 +102,68 @@ function RouteComponent() {
     return formValues;
   }, [order?.order_form_values]);
 
-  const form = useTanStackForm({
+  const form = useForm({
     defaultValues,
-    validatorAdapter: zodValidator(),
-    validators: {
-      onChange: orderDetailsSchema,
-    },
-    onSubmit: async ({ value: values }) => {
-      try {
-        const savedOrderId = await saveOrderDetails({
-          order_type: values.order_type,
-          order_date: values.order_date,
-          currency: values.currency,
-          delivery_dates: values.delivery_dates,
-          unit_of_measurement: values.unit_of_measurement,
-          orderId: isNewOrder ? undefined : Number(orderId),
-        });
-        toast.success("Order details saved");
-        navigate({ to: `/home/orders/${savedOrderId}/companies` });
-      } catch (error) {
-        console.error("Error saving order details:", error);
-        toast.error(
-          `Failed to save: ${
-            error instanceof Error ? error.message : "Unknown error"
-          }`,
-        );
-      }
-    },
+    resolver: zodResolver(orderDetailsSchema),
+    mode: "onChange",
   });
 
   // Update form when order data changes
   useEffect(() => {
     if (defaultValues && order?.order_form_values) {
-      // Set all values including nested ones
-      Object.entries(defaultValues).forEach(([key, value]) => {
-        form.setFieldValue(key as any, value as never, { dontValidate: true });
-      });
+      form.reset(defaultValues);
     }
-  }, [order?.order_form_values, form]);
+  }, [order?.order_form_values]);
 
-  const handleNext = async () => {
-    form.handleSubmit();
+  const orderType = form.watch("order_type");
+  const isStocktake = orderType === "count";
+
+  const onSubmit = async (values: any) => {
+    try {
+      const savedOrderId = await saveOrderDetails({
+        order_type: values.order_type,
+        order_date: values.order_date,
+        currency: values.currency,
+        delivery_dates: values.delivery_dates,
+        unit_of_measurement: values.unit_of_measurement,
+        orderId: isNewOrder ? undefined : Number(orderId),
+        // For stocktakes, include the address
+        from_shipping_address_id: values.order_type === "count" 
+          ? values.from_shipping_address_id 
+          : undefined,
+      });
+      toast.success("Order details saved");
+      // Stocktakes skip companies and go directly to items
+      if (values.order_type === "count") {
+        navigate({ to: `/home/orders/${savedOrderId}/items` });
+      } else {
+        navigate({ to: `/home/orders/${savedOrderId}/companies` });
+      }
+    } catch (error) {
+      console.error("Error saving order details:", error);
+      toast.error(
+        `Failed to save: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
+      );
+    }
+  };
+
+  const handleNext = () => {
+    form.handleSubmit(onSubmit)();
   };
 
   return (
-    <div className="space-y-6">
-      <OrderFormStepper
-        steps={STEPS}
-        currentStep={1}
-        onStepClick={undefined}
-      />
-      <ValidationSummary form={form} />
-      <OrderDetailsPage form={form} />
-      <OrderFormNavigation onNext={handleNext} />
-    </div>
+    <FormProvider {...form}>
+      <div className="space-y-6">
+        <OrderFormStepper
+          steps={isStocktake ? STOCKTAKE_STEPS : STEPS}
+          currentStep={1}
+          onStepClick={undefined}
+        />
+        <OrderDetailsPage />
+        <OrderFormNavigation onNext={handleNext} />
+      </div>
+    </FormProvider>
   );
 }

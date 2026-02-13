@@ -5,7 +5,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@thetis/ui/select";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelectItemsView } from "../../items/api/selectItemsView";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Button } from "@thetis/ui/button";
@@ -23,6 +23,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import PackageDimensions from "./PackageDimensions";
 import PackageItemsBadges from "./PackageItemsBadges";
+import AddPackageDialog from "./AddPackageDialog";
 
 type ItemsToUpdate =
   | "order_items"
@@ -84,14 +85,8 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
     name: "package_items",
   });
 
-  const itemType = form.watch("item_type") ?? "product";
-
   const availablePackages = itemsView?.filter(
-    (item) =>
-      item.item_type === "package" &&
-      (item.components as PackageComponent[]).some(
-        (component) => component.component_type === itemType,
-      ),
+    (item) => item.item_type === "package",
   );
 
   const createPackageItems = (
@@ -209,6 +204,41 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
     });
   };
 
+  /** Add a package with the given id and populate items (used from Add Package dialog) */
+  const addPackageWithId = (packageId: string) => {
+    const lastId = lastItemChange?.id ?? 0;
+    const newPackageItemChangeId = lastId + packagesCount + 1;
+    append({
+      package_id: packageId,
+      package_item_change_id: newPackageItemChangeId,
+    });
+
+    const selectedPkg = availablePackages?.find(
+      (item) => String(item.item_id) === packageId,
+    );
+    if (selectedPkg?.components) {
+      const newItems = createPackageItems(
+        selectedPkg.components as PackageComponent[],
+        packageId,
+        newPackageItemChangeId,
+      );
+
+      itemsToUpdate.forEach((fieldName: ItemsToUpdate) => {
+        const formValues = form.getValues();
+        const currentItemsInThisField = formValues[fieldName] || [];
+        let itemsToAdd = newItems;
+        if (fieldName === "from_items") {
+          itemsToAdd = newItems.map((item) => ({
+            ...item,
+            quantity_change: -item.quantity_change,
+          }));
+        }
+        const updatedItems = [...currentItemsInThisField, ...itemsToAdd];
+        form.setValue(fieldName, updatedItems);
+      });
+    }
+  };
+
   const duplicatePackage = (index: number) => {
     const currentPackage = form.getValues(`package_items.${index}`);
     const lastId = lastItemChange?.id ?? 0;
@@ -276,6 +306,7 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
     fields,
     removePackage,
     addPackage,
+    addPackageWithId,
     duplicatePackage,
     availablePackages,
     updatePackage,
@@ -286,10 +317,11 @@ const PackageStockItems = ({
   itemsToUpdate = ["order_items"],
 }: PackageStockItemsProps) => {
   const form = useFormContext();
+  const [addDialogOpen, setAddDialogOpen] = useState(false);
   const {
     fields,
     removePackage,
-    addPackage,
+    addPackageWithId,
     duplicatePackage,
     availablePackages,
     updatePackage,
@@ -459,7 +491,7 @@ const PackageStockItems = ({
 
         <Card
           className="hover:border-primary/50 border-dashed rounded-none transition-colors cursor-pointer"
-          onClick={addPackage}
+          onClick={() => setAddDialogOpen(true)}
         >
           <CardContent className="flex flex-col justify-center items-center h-full min-h-[200px] text-muted-foreground">
             <Plus className="mb-2 w-8 h-8" />
@@ -467,6 +499,13 @@ const PackageStockItems = ({
           </CardContent>
         </Card>
       </div>
+
+      <AddPackageDialog
+        open={addDialogOpen}
+        onOpenChange={setAddDialogOpen}
+        packages={availablePackages ?? []}
+        onAdd={addPackageWithId}
+      />
     </div>
   );
 };

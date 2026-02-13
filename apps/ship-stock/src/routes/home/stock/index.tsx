@@ -34,7 +34,7 @@ import TabsHeader from "@/components/TabsHeader";
 import { features } from "@/features/navigation/content";
 import { useMemo, useState } from "react";
 import { Input } from "@thetis/ui/input";
-import { Calendar, ClipboardCheck, Search } from "lucide-react";
+import { Calendar, ClipboardCheck, Search, TrendingUp } from "lucide-react";
 import {
 	computeReorderPlan,
 	getDemandMultiplierForProduct,
@@ -173,6 +173,12 @@ const StockPage = () => {
 						</div>
 					</SheetContent>
 				</Sheet>
+				<Button variant="outline" size="sm" asChild>
+					<Link to="/home/stock/value">
+						<TrendingUp size={16} className="mr-1.5" />
+						Stock Value
+					</Link>
+				</Button>
 				<Button variant="outline" size="sm" asChild>
 					<Link to="/home/stock/reorder-plan">
 						<Calendar size={16} className="mr-1.5" />

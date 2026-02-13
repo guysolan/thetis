@@ -1,6 +1,6 @@
-import { InputField } from "../../../../../components/tanstack-form/InputField";
-import { SelectField } from "../../../../../components/tanstack-form/SelectField";
-import { SelectFieldWithInfo } from "../../../../../components/tanstack-form/SelectFieldWithInfo";
+import Input from "../../../../../components/Input";
+import Select from "../../../../../components/Select";
+import { SelectWithInfo } from "../../../../../components/SelectWithInfo";
 import { FieldGroup } from "@thetis/ui/field";
 
 const modeOfTransportOptions = [
@@ -116,11 +116,7 @@ const incotermsOptions = [
 	},
 ];
 
-type PricingSummaryPageProps = {
-	form: any; // TanStack Form
-};
-
-export function PricingSummaryPage({ form }: PricingSummaryPageProps) {
+export function PricingSummaryPage() {
 	return (
 		<div className="space-y-6">
 			<div>
@@ -134,50 +130,41 @@ export function PricingSummaryPage({ form }: PricingSummaryPageProps) {
 
 			<FieldGroup>
 				<div className="gap-4 grid grid-cols-1 lg:grid-cols-2">
-					<InputField
+					<Input
 						type="number"
 						name="carriage"
 						label="Carriage"
 						step="0.01"
-						form={form}
 					/>
-					<InputField
+					<Input
 						type="text"
 						name="shipment_number"
 						label="Shipment Number"
-						form={form}
 					/>
-					<InputField
+					<Input
 						type="text"
 						name="airwaybill"
 						label="Air Waybill"
-						form={form}
 					/>
-					<SelectField
+					<Select
 						name="mode_of_transport"
 						label="Mode of Transport"
-						form={form}
 						options={modeOfTransportOptions}
 					/>
-					<SelectFieldWithInfo
+					<SelectWithInfo
 						name="incoterms"
 						label="Incoterms"
-						form={form}
 						options={incotermsOptions}
-						placeholder="Select incoterms"
 					/>
-					<SelectFieldWithInfo
+					<SelectWithInfo
 						name="reason_for_export"
 						label="Reason for Export"
-						form={form}
 						options={reasonsForExport}
-						placeholder="Select reason for export"
 					/>
-					<InputField
+					<Input
 						type="text"
 						name="reference_number"
 						label="Reference Number"
-						form={form}
 					/>
 				</div>
 			</FieldGroup>

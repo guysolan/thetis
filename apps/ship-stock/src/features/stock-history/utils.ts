@@ -151,22 +151,25 @@ export const filterItemsByType = (
         .sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically by name
 };
 
-// Get the latest quantity for each item (only up to today's date, excluding future orders)
+// Get the latest quantity for each item up to a given date, excluding future orders.
+// asOfDate: when provided (e.g. stocktake order_date), return stock as of that date; otherwise use today.
 export const getCurrentQuantity = (
     itemId: number,
     inventoryHistory: InventoryHistoryRecord[],
     addressId?: number,
+    asOfDate?: string | Date | null,
 ): number => {
     if (!inventoryHistory.length) return 0;
 
     const v_addressId = addressId ? Number(addressId) : null;
-    const today = dayjs().startOf("day");
+    const cutoff = asOfDate
+        ? dayjs(asOfDate).startOf("day")
+        : dayjs().startOf("day");
 
-    // Find the most recent record up to today that mentions this item with the matching address_id
+    // Find the most recent record up to cutoff that mentions this item with the matching address_id
     for (const record of inventoryHistory) {
         const recordDate = dayjs(record.transaction_date).startOf("day");
-        // Skip future-dated records
-        if (recordDate.isAfter(today)) continue;
+        if (recordDate.isAfter(cutoff)) continue;
 
         const itemEntry = record.items.find(
             (item) =>
@@ -175,12 +178,10 @@ export const getCurrentQuantity = (
         );
 
         if (itemEntry) {
-            // Return the quantity from the first (most recent up to today) record mentioning this item
             return itemEntry.quantity;
         }
     }
 
-    // If no record mentions this item with the matching address_id, return 0
     return 0;
 };
 

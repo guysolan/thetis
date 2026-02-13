@@ -35,10 +35,13 @@ const DatePicker = ({ name, label }: DatePickerProps) => {
                         <PopoverTrigger asChild>
                             <FormControl>
                                 <Button
+                                    ref={field.ref}
+                                    name={field.name}
                                     variant={"outline"}
                                     type="button"
                                     className={cn(
                                         "w-full pl-3 text-left font-normal",
+                                        "hover:scale-100 active:scale-100 min-w-0",
                                         !field.value && "text-muted-foreground",
                                     )}
                                 >

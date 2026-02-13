@@ -25,7 +25,7 @@ const EditCard = ({
 
   return (
     <Card
-      className={`relative transition-all duration-300 ${
+      className={`relative transition-all duration-300 shadow-sm rounded-md ${
         !isEditing ? "cursor-pointer" : ""
       }`}
       onClick={() => !isEditing && setIsEditing(true)}
@@ -42,18 +42,26 @@ const EditCard = ({
           }}
           className="relative flex items-center gap-2"
         >
-          {isEditing ? (
-            <div className="relative w-5 h-5">
-              <Unlock size={18} className="absolute inset-0 text-neutral-600" />
-            </div>
-          ) : (
-            <>
-              <span className="text-sm">Edit</span>
+          {isEditing
+            ? (
               <div className="relative w-5 h-5">
-                <Lock size={18} className="absolute inset-0 text-neutral-600" />
+                <Unlock
+                  size={18}
+                  className="absolute inset-0 text-neutral-600"
+                />
               </div>
-            </>
-          )}
+            )
+            : (
+              <>
+                <span className="text-sm">Edit</span>
+                <div className="relative w-5 h-5">
+                  <Lock
+                    size={18}
+                    className="absolute inset-0 text-neutral-600"
+                  />
+                </div>
+              </>
+            )}
         </Button>
       </div>
 

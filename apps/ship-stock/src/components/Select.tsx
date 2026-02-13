@@ -71,7 +71,11 @@ const Select = ({
             value={field.value}
           >
             <FormControl>
-              <SelectTrigger className="capitalize">
+              <SelectTrigger
+                ref={field.ref}
+                name={field.name}
+                className="capitalize"
+              >
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
             </FormControl>

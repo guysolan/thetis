@@ -80,6 +80,8 @@ const DateRangePicker = ({ name, label, className }: DateRangePickerProps) => {
               <PopoverTrigger asChild>
                 <FormControl>
                   <Button
+                    ref={field.ref}
+                    name={field.name}
                     variant={"outline"}
                     type="button"
                     className={cn(

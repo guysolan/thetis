@@ -57,7 +57,7 @@ export function SelectWithInfo({
               value={field.value}
             >
               <FormControl>
-                <SelectTrigger>
+                <SelectTrigger ref={field.ref} name={field.name}>
                   <SelectValue placeholder="Select reason for export" />
                 </SelectTrigger>
               </FormControl>
