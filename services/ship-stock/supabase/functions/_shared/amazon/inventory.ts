@@ -31,29 +31,28 @@ export async function getFbaInventoryByCountryCode(countryCode: CountryCode) {
 const processInventory = (inventory: unknown) =>
     (inventory as { payload?: { inventorySummaries?: unknown[] } })?.payload
         ?.inventorySummaries?.map((item: Record<string, unknown>) => {
-            const details = (item.inventoryDetails || {}) as Record<
-                string,
-                number
-            >;
-            const fulfillableQuantity = details.fulfillableQuantity ?? 0;
-            const inboundWorkingQuantity = details.inboundWorkingQuantity ?? 0;
-            const inboundShippedQuantity = details.inboundShippedQuantity ?? 0;
-            const inboundReceivingQuantity = details.inboundReceivingQuantity ??
-                0;
+            const details = (item.inventoryDetails || {}) as Record<string, unknown>;
+            const fulfillableQuantity = Number(details.fulfillableQuantity) || 0;
+            const inboundWorkingQuantity = Number(details.inboundWorkingQuantity) || 0;
+            const inboundShippedQuantity = Number(details.inboundShippedQuantity) || 0;
+            const inboundReceivingQuantity = Number(details.inboundReceivingQuantity) || 0;
+            const reserved = details.reservedQuantity as Record<string, number> | undefined;
+            const fcTransfer = Number(reserved?.pendingTransshipmentQuantity) || 0;
+
+            const available = fulfillableQuantity;
+            const inbound = inboundReceivingQuantity +
+                inboundShippedQuantity +
+                inboundWorkingQuantity;
 
             return {
                 name: item.productName,
                 asin: item.asin,
                 sellerSku: item.sellerSku,
                 fnsku: item.fnsku,
-                total: fulfillableQuantity +
-                    inboundReceivingQuantity +
-                    inboundShippedQuantity +
-                    inboundWorkingQuantity,
-                available: fulfillableQuantity,
-                inbound: inboundReceivingQuantity +
-                    inboundShippedQuantity +
-                    inboundWorkingQuantity,
+                available,
+                inbound,
+                fcTransfer,
+                total: available + inbound + fcTransfer,
             };
         });
 

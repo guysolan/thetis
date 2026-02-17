@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@thetis/ui/card";
 import {
@@ -16,12 +17,6 @@ import {
 	AccordionTrigger,
 } from "@thetis/ui/accordion";
 import {
-	Carousel,
-	CarouselContent,
-	CarouselItem,
-	useCarousel,
-} from "@thetis/ui/carousel";
-import {
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
@@ -33,6 +28,11 @@ import {
 	selectStockpilesQueryOptions,
 	useSelectStockpiles,
 } from "@/features/stockpiles/api/selectStockpiles";
+import { useQuery } from "@tanstack/react-query";
+import {
+	selectOrdersQueryOptions,
+} from "@/features/orders/features/order-history/api/selectOrders";
+import type { OrderView } from "@/features/orders/types";
 import {
 	selectInventoryHistoryQueryOptions,
 	useSelectInventoryHistory,
@@ -43,6 +43,7 @@ import {
 	BUFFER_MONTHS,
 	computeReorderPlan,
 	computeRunOutAndOrderBy,
+	getDemandForMonth,
 	getDemandMultiplierForProduct,
 	getMonthName,
 	getUpcomingMonthsDemand,
@@ -51,13 +52,7 @@ import {
 	type ReorderPlanResult,
 } from "@/features/stock-history/reorderPlanUtils";
 import { Button } from "@thetis/ui/button";
-import {
-	ArrowLeft,
-	ChevronLeft,
-	ChevronRight,
-	Info,
-	Package,
-} from "lucide-react";
+import { ArrowLeft, Info, Package } from "lucide-react";
 
 // Fixed order: Small Right, Small Left, Large Right, Large Left
 const TARGET_PRODUCTS = [
@@ -67,48 +62,101 @@ const TARGET_PRODUCTS = [
 	{ name: "Night Splint - Large Left (Bag)", label: "Large Left" },
 ] as const;
 
-// Custom carousel controls component that uses the carousel context
-function CarouselControls() {
-	const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } =
-		useCarousel();
+/** Parse delivery_dates JSON and return end date as { month, year } and the Date, or null if invalid. */
+function parseDeliveryEndDate(
+	deliveryDates: string | null | undefined,
+): { month: number; year: number; date: Date } | null {
+	if (!deliveryDates) return null;
+	try {
+		const parsed = JSON.parse(deliveryDates as string);
+		if (!Array.isArray(parsed) || parsed.length < 2) return null;
+		const endStr = parsed[1];
+		if (!endStr) return null;
+		const d = new Date(endStr);
+		if (Number.isNaN(d.getTime())) return null;
+		return { month: d.getMonth(), year: d.getFullYear(), date: d };
+	} catch {
+		return null;
+	}
+}
 
-	return (
-		<div className="flex items-center gap-1">
-			<Button
-				variant="ghost"
-				size="icon"
-				onClick={scrollPrev}
-				disabled={!canScrollPrev}
-				className="w-8 h-8"
-			>
-				<ChevronLeft className="w-4 h-4" />
-				<span className="sr-only">Previous order</span>
-			</Button>
-			<Button
-				variant="ghost"
-				size="icon"
-				onClick={scrollNext}
-				disabled={!canScrollNext}
-				className="w-8 h-8"
-			>
-				<ChevronRight className="w-4 h-4" />
-				<span className="sr-only">Next order</span>
-			</Button>
-		</div>
-	);
+/** Build orders with delivery_dates in the future, sorted by delivery end date ascending. */
+function getUpcomingBuildOrders(orders: OrderView[] | undefined): OrderView[] {
+	if (!orders?.length) return [];
+	const now = new Date();
+	now.setHours(0, 0, 0, 0);
+	return orders
+		.filter((o) => o.order_type === "build")
+		.map((o) => ({ order: o, end: parseDeliveryEndDate(o.delivery_dates) }))
+		.filter((x): x is { order: OrderView; end: { month: number; year: number; date: Date } } => x.end != null && x.end.date >= now)
+		.sort((a, b) => a.end.date.getTime() - b.end.date.getTime())
+		.map((x) => x.order);
+}
+
+/** Get variant quantities (Small Right, Small Left, Large Right, Large Left) from order items (products only). */
+function getVariantQuantitiesFromOrder(order: OrderView): { label: string; orderQty: number }[] {
+	const nameToQty = new Map<string, number>();
+	for (const item of order.items ?? []) {
+		if (item.item_type !== "product") continue;
+		const name = (item.item_name ?? "").trim();
+		if (!name) continue;
+		const key = name.toLowerCase();
+		nameToQty.set(key, (nameToQty.get(key) ?? 0) + (item.quantity ?? 0));
+	}
+	return TARGET_PRODUCTS.map((t) => ({
+		label: t.label,
+		orderQty: nameToQty.get(t.name.toLowerCase()) ?? 0,
+	}));
+}
+
+/** Find an already-placed order (build/buy) delivering to MPD or Park House in the same month/year as the plan's next order. */
+function findPlacedOrderId(
+	orders: OrderView[] | undefined,
+	deliversBy: { month: number; year: number },
+	mpdId: number | null,
+	parkHouseId: number | null,
+): number | null {
+	if (!orders?.length || (mpdId == null && parkHouseId == null)) return null;
+	const targetMonth = deliversBy.month;
+	const targetYear = deliversBy.year;
+
+	for (const order of orders) {
+		if (order.order_type !== "build" && order.order_type !== "buy") continue;
+		const o = order as OrderView & { to_shipping_address?: { id?: number } };
+		const toId = o.to_address?.id ?? o.to_shipping_address?.id;
+		if (toId == null) continue;
+		if (String(toId) !== String(mpdId) && String(toId) !== String(parkHouseId)) continue;
+
+		const deliveryDates = order.delivery_dates;
+		if (!deliveryDates) continue;
+		try {
+			const parsed = JSON.parse(deliveryDates as string);
+			if (!Array.isArray(parsed) || parsed.length < 2) continue;
+			const endDate = parsed[1];
+			if (!endDate) continue;
+			const d = new Date(endDate);
+			if (d.getMonth() === targetMonth && d.getFullYear() === targetYear && order.order_id != null) {
+				return order.order_id;
+			}
+		} catch {
+			// ignore parse errors
+		}
+	}
+	return null;
 }
 
 const ReorderPlanPage = () => {
 	const { data: stockpiles } = useSelectStockpiles();
 	const { data: itemsByAddress } = useSelectItemsByAddress();
 	const { data: inventoryHistory } = useSelectInventoryHistory();
+	const { data: apiOrders } = useQuery(selectOrdersQueryOptions());
 
 	const mpd = stockpiles?.find((s) => s.stockpile_name === "MPD");
 	const parkHouse = stockpiles?.find((s) =>
 		s.stockpile_name === "Park House"
 	);
-	const mpdId = mpd?.stockpile_id;
-	const parkHouseId = parkHouse?.stockpile_id;
+	const mpdId = mpd?.stockpile_id ?? null;
+	const parkHouseId = parkHouse?.stockpile_id ?? null;
 
 	const products = itemsByAddress?.filter(
 		(item) =>
@@ -180,9 +228,116 @@ const ReorderPlanPage = () => {
 		};
 	});
 
-	// Find the next order index for carousel initial slide
-	const nextOrderIndex = ordersData.findIndex((o) => o.isNextOrder);
-	const initialSlide = nextOrderIndex >= 0 ? nextOrderIndex : 0;
+	const nextOrder = ordersData.find((o) => o.isNextOrder);
+	/** If the next order has already been placed, its real order_id from the database */
+	const placedOrderId = nextOrder
+		? findPlacedOrderId(apiOrders, nextOrder.deliversBy, mpdId, parkHouseId)
+		: null;
+
+	/** Build orders with delivery date in the future for the Upcoming orders table */
+	const upcomingBuildOrdersForTable = useMemo(() => {
+		const buildOrders = getUpcomingBuildOrders(apiOrders);
+		return buildOrders.map((order) => {
+			const variantQuantities = getVariantQuantitiesFromOrder(order);
+			const totalOrderQty = variantQuantities.reduce((s, v) => s + v.orderQty, 0);
+			const end = parseDeliveryEndDate(order.delivery_dates);
+			const orderDate = order.order_date ? new Date(order.order_date) : null;
+			return {
+				orderId: order.order_id,
+				placeOrderBy: orderDate
+					? { month: orderDate.getMonth(), year: orderDate.getFullYear() }
+					: null,
+				deliversBy: end ? { month: end.month, year: end.year } : null,
+				variantQuantities,
+				totalOrderQty,
+			};
+		});
+	}, [apiOrders]);
+
+	/** Latest delivery (month, year) among upcoming build orders, or null if none */
+	const latestUpcomingDelivery = useMemo(() => {
+		if (upcomingBuildOrdersForTable.length === 0) return null;
+		let maxMonth = -1;
+		let maxYear = -1;
+		for (const o of upcomingBuildOrdersForTable) {
+			if (o.deliversBy == null) continue;
+			const { month, year } = o.deliversBy;
+			if (year > maxYear || (year === maxYear && month > maxMonth)) {
+				maxYear = year;
+				maxMonth = month;
+			}
+		}
+		return maxMonth >= 0 ? { month: maxMonth, year: maxYear } : null;
+	}, [upcomingBuildOrdersForTable]);
+
+	/** Forecast: computed plan orders that deliver *after* the last upcoming build order */
+	const forecastOrdersForTable = useMemo(() => {
+		if (latestUpcomingDelivery == null) return ordersData;
+		const { month: lastM, year: lastY } = latestUpcomingDelivery;
+		return ordersData.filter((o) => {
+			const { month, year } = o.deliversBy;
+			return year > lastY || (year === lastY && month > lastM);
+		});
+	}, [ordersData, latestUpcomingDelivery]);
+
+	/** Deliveries by (year, month): real upcoming orders first, then forecast. Used for chart. */
+	const deliveriesByMonth = useMemo(() => {
+		const map = new Map<string, number>();
+		const add = (year: number, month: number, qty: number) => {
+			const key = `${year}-${month}`;
+			map.set(key, (map.get(key) ?? 0) + qty);
+		};
+		upcomingBuildOrdersForTable.forEach((o) => {
+			if (o.deliversBy) add(o.deliversBy.year, o.deliversBy.month, o.totalOrderQty);
+		});
+		forecastOrdersForTable.forEach((o) => {
+			add(o.deliversBy.year, o.deliversBy.month, o.totalOrderQty);
+		});
+		return map;
+	}, [upcomingBuildOrdersForTable, forecastOrdersForTable]);
+
+	/** Weekly projection: reduce by consumption each week, jump when production arrives (week containing 1st of month). 52 weeks. */
+	const stockProjectionWeeklyData = useMemo(() => {
+		if (totalStock <= 0) return [];
+		const startDate = new Date(startYear, startMonth, 1);
+		const totalWeeks = 52;
+		let stock = totalStock;
+		const points: { weekLabel: string; weekIndex: number; monthLabel: string; dateLabel: string; stock: number }[] = [];
+		for (let w = 0; w < totalWeeks; w++) {
+			const weekStart = new Date(startDate);
+			weekStart.setDate(weekStart.getDate() + w * 7);
+			let weekDemand = 0;
+			let hasFirstOfMonth = false;
+			let firstMonth = -1;
+			let firstYear = -1;
+			for (let d = 0; d < 7; d++) {
+				const day = new Date(weekStart);
+				day.setDate(day.getDate() + d);
+				const m = day.getMonth();
+				const y = day.getFullYear();
+				const daysInMonth = new Date(y, m + 1, 0).getDate();
+				weekDemand += getDemandForMonth(m) / daysInMonth;
+				if (day.getDate() === 1) {
+					hasFirstOfMonth = true;
+					firstMonth = m;
+					firstYear = y;
+				}
+			}
+			stock -= weekDemand;
+			stock = Math.max(0, stock);
+			if (hasFirstOfMonth && firstMonth >= 0) {
+				stock += deliveriesByMonth.get(`${firstYear}-${firstMonth}`) ?? 0;
+			}
+			points.push({
+				weekLabel: `W${w + 1}`,
+				weekIndex: w,
+				monthLabel: hasFirstOfMonth && firstMonth >= 0 ? getMonthName(firstMonth) : "",
+				dateLabel: `${weekStart.getDate()} ${getMonthName(weekStart.getMonth())} ${weekStart.getFullYear()}`,
+				stock: Math.round(stock),
+			});
+		}
+		return points;
+	}, [totalStock, deliveriesByMonth, startMonth, startYear]);
 
 	// For the "how it works" section
 	const runOutResult = computeRunOutAndOrderBy(totalStock, startMonth, startYear, {
@@ -193,10 +348,10 @@ const ReorderPlanPage = () => {
 	const runOutYear = runOutResult.runOutYear;
 
 	return (
-		<div className="space-y-6 mx-auto p-6 max-w-2xl">
+		<div className="space-y-6 mx-auto p-6 max-w-4xl">
 			<div className="flex items-center gap-4">
 				<Button variant="ghost" size="sm" asChild>
-					<Link to="/home/stock">
+					<Link to="/home/stock" search={{ tab: "all" }}>
 						<ArrowLeft className="mr-1 w-4 h-4" />
 						Stock
 					</Link>
@@ -210,125 +365,181 @@ const ReorderPlanPage = () => {
 							<Package className="w-5 h-5 text-primary" />
 						</div>
 						<div>
-							<CardTitle className="text-xl">
-								Next Order
-							</CardTitle>
+							<CardTitle className="text-xl">Reorder plan</CardTitle>
 							<p className="text-muted-foreground text-sm">
-								Based on {totalStock}{" "}
-								units in stock (MPD + Park House)
+								Based on {totalStock} units in stock (MPD + Park House)
 							</p>
 						</div>
 					</div>
 				</CardHeader>
-				<CardContent className="space-y-4">
-					{ordersData.length > 0
-						? (
-							<Carousel
-								opts={{ startIndex: initialSlide }}
-								className="w-full"
-							>
-								<CarouselContent className="-ml-0">
-									{ordersData.map((order) => (
-										<CarouselItem
-											key={order.orderIndex}
-											className="pl-0"
-										>
-											<div className="space-y-4">
-												<div className="flex justify-between items-center">
-													<div>
-														<h3 className="font-semibold text-lg">
-															Order #{order
-																.orderIndex}
-															{order
-																.isNextOrder &&
-																(
-																	<span className="ml-2 font-normal text-primary text-sm">
-																		(Next)
-																	</span>
-																)}
-														</h3>
-														<p className="mt-1 text-muted-foreground text-sm">
-															Place by{" "}
-															{getMonthName(
-																order
-																	.placeOrderBy
-																	.month,
-															)}{" "}
-															{order.placeOrderBy
-																.year} •{" "}
-															Delivers by{" "}
-															{getMonthName(
-																order.deliversBy
-																	.month,
-															)} {order.deliversBy
-																.year}
-														</p>
-													</div>
-													<CarouselControls />
-												</div>
-												<Table>
-													<TableHeader>
-														<TableRow>
-															<TableHead>
-																Variant
-															</TableHead>
-															<TableHead className="text-right">
-																Current Stock
-															</TableHead>
-															<TableHead className="text-right">
-																Order Qty
-															</TableHead>
-														</TableRow>
-													</TableHeader>
-													<TableBody>
-														{order.variantQuantities
-															.map((v) => (
-																<TableRow
-																	key={v
-																		.label}
-																>
-																	<TableCell className="font-medium">
-																		{v.label}
-																	</TableCell>
-																	<TableCell className="tabular-nums text-right">
-																		{v.currentStock}
-																	</TableCell>
-																	<TableCell className="font-semibold tabular-nums text-right">
-																		{v.orderQty}
-																	</TableCell>
-																</TableRow>
-															))}
-													</TableBody>
-													<TableFooter>
-														<TableRow>
-															<TableCell className="font-semibold">
-																Total
-															</TableCell>
-															<TableCell className="font-semibold tabular-nums text-right">
-																{totalStock}
-															</TableCell>
-															<TableCell className="font-bold tabular-nums text-lg text-right">
-																{order
-																	.totalOrderQty}
-															</TableCell>
-														</TableRow>
-													</TableFooter>
-												</Table>
-											</div>
-										</CarouselItem>
-									))}
-								</CarouselContent>
-							</Carousel>
-						)
-						: (
-							<p className="py-4 text-muted-foreground text-sm text-center">
-								No orders calculated.
-							</p>
-						)}
-
+				<CardContent className="space-y-6">
 					{totalStock === 0 && (
 						<p className="py-4 text-muted-foreground text-sm text-center">
 							No stock found at MPD or Park House.
+						</p>
+					)}
+
+					{ordersData.length > 0 && nextOrder && (
+						<>
+							{/* Next order summary block (like Amazon region summaries) */}
+							<div className="rounded-lg border p-3">
+								<h3 className="font-semibold text-sm mb-1">Next order</h3>
+								<p className="text-muted-foreground text-sm">
+									Place by {getMonthName(nextOrder.placeOrderBy.month)} {nextOrder.placeOrderBy.year} • Delivers by {getMonthName(nextOrder.deliversBy.month)} {nextOrder.deliversBy.year}
+								</p>
+								<p className="mt-1 text-sm font-medium">
+									Total: {nextOrder.totalOrderQty} units
+								</p>
+							</div>
+
+							{/* Current stock & order qty table */}
+							<div>
+								<h4 className="font-semibold mb-2">Next order</h4>
+								<div className="border rounded-md overflow-x-auto">
+									<Table>
+										<TableHeader>
+											<TableRow>
+												<TableHead className="w-[120px]">Variant</TableHead>
+												<TableHead className="text-right tabular-nums">Current stock</TableHead>
+												<TableHead className="text-right tabular-nums">Order qty</TableHead>
+											</TableRow>
+										</TableHeader>
+										<TableBody>
+											{nextOrder.variantQuantities.map((v) => (
+												<TableRow key={v.label}>
+													<TableCell className="font-medium">{v.label}</TableCell>
+													<TableCell className="tabular-nums text-right">{v.currentStock}</TableCell>
+													<TableCell className="font-semibold tabular-nums text-right">{v.orderQty}</TableCell>
+												</TableRow>
+											))}
+										</TableBody>
+										<TableFooter>
+											<TableRow>
+												<TableCell className="font-semibold">Total</TableCell>
+												<TableCell className="font-semibold tabular-nums text-right">{totalStock}</TableCell>
+												<TableCell className="font-bold tabular-nums text-right">{nextOrder.totalOrderQty}</TableCell>
+											</TableRow>
+										</TableFooter>
+									</Table>
+								</div>
+							</div>
+						</>
+					)}
+
+					{upcomingBuildOrdersForTable.length > 0 && (
+						<div>
+							<h4 className="font-semibold mb-2">Upcoming orders</h4>
+							<p className="text-muted-foreground text-sm mb-2">
+								Build orders with a delivery date in the future.
+							</p>
+							<div className="border rounded-md overflow-x-auto">
+								<Table>
+									<TableHeader>
+										<TableRow>
+											<TableHead className="w-[80px]">Order</TableHead>
+											<TableHead className="text-muted-foreground font-normal">Place by</TableHead>
+											<TableHead className="text-muted-foreground font-normal">Delivers by</TableHead>
+											<TableHead className="text-right tabular-nums">Small Right</TableHead>
+											<TableHead className="text-right tabular-nums">Small Left</TableHead>
+											<TableHead className="text-right tabular-nums">Large Right</TableHead>
+											<TableHead className="text-right tabular-nums">Large Left</TableHead>
+											<TableHead className="text-right tabular-nums font-semibold">Total</TableHead>
+										</TableRow>
+									</TableHeader>
+									<TableBody>
+										{upcomingBuildOrdersForTable.map((order) => (
+											<TableRow key={order.orderId}>
+												<TableCell className="font-medium">
+													<Link
+														to="/home/orders/$orderId/view"
+														params={{ orderId: String(order.orderId) }}
+														className="text-primary hover:underline"
+													>
+														#{order.orderId}
+													</Link>
+												</TableCell>
+												<TableCell className="text-muted-foreground text-sm">
+													{order.placeOrderBy
+														? `${getMonthName(order.placeOrderBy.month)} ${order.placeOrderBy.year}`
+														: "—"}
+												</TableCell>
+												<TableCell className="text-muted-foreground text-sm">
+													{order.deliversBy
+														? `${getMonthName(order.deliversBy.month)} ${order.deliversBy.year}`
+														: "—"}
+												</TableCell>
+												{order.variantQuantities.map((v) => (
+													<TableCell key={v.label} className="tabular-nums text-right">
+														{v.orderQty}
+													</TableCell>
+												))}
+												<TableCell className="font-semibold tabular-nums text-right">
+													{order.totalOrderQty}
+												</TableCell>
+											</TableRow>
+										))}
+									</TableBody>
+								</Table>
+							</div>
+						</div>
+					)}
+
+					{forecastOrdersForTable.length > 0 && (
+						<div>
+							<h4 className="font-semibold mb-2">Forecast: orders you&apos;ll need after that</h4>
+							<p className="text-muted-foreground text-sm mb-2">
+								Planned reorders based on current stock and demand (delivery after your upcoming build orders).
+							</p>
+							<div className="border rounded-md overflow-x-auto">
+								<Table>
+									<TableHeader>
+										<TableRow>
+											<TableHead className="w-[80px]">Order</TableHead>
+											<TableHead className="text-muted-foreground font-normal">Place by</TableHead>
+											<TableHead className="text-muted-foreground font-normal">Delivers by</TableHead>
+											<TableHead className="text-right tabular-nums">Small Right</TableHead>
+											<TableHead className="text-right tabular-nums">Small Left</TableHead>
+											<TableHead className="text-right tabular-nums">Large Right</TableHead>
+											<TableHead className="text-right tabular-nums">Large Left</TableHead>
+											<TableHead className="text-right tabular-nums font-semibold">Total</TableHead>
+										</TableRow>
+									</TableHeader>
+									<TableBody>
+										{forecastOrdersForTable.map((order) => (
+											<TableRow key={order.orderIndex}>
+												<TableCell className="font-medium">
+													{order.isNextOrder && placedOrderId != null
+														? `#${placedOrderId}`
+														: `#${order.orderIndex}`}
+													{order.isNextOrder && placedOrderId == null && (
+														<span className="ml-1.5 text-primary text-xs font-normal">(place next)</span>
+													)}
+												</TableCell>
+												<TableCell className="text-muted-foreground text-sm">
+													{getMonthName(order.placeOrderBy.month)} {order.placeOrderBy.year}
+												</TableCell>
+												<TableCell className="text-muted-foreground text-sm">
+													{getMonthName(order.deliversBy.month)} {order.deliversBy.year}
+												</TableCell>
+												{order.variantQuantities.map((v) => (
+													<TableCell key={v.label} className="tabular-nums text-right">
+														{v.orderQty}
+													</TableCell>
+												))}
+												<TableCell className="font-semibold tabular-nums text-right">
+													{order.totalOrderQty}
+												</TableCell>
+											</TableRow>
+										))}
+									</TableBody>
+								</Table>
+							</div>
+						</div>
+					)}
+
+					{ordersData.length === 0 && totalStock > 0 && (
+						<p className="py-4 text-muted-foreground text-sm text-center">
+							No orders calculated.
 						</p>
 					)}
 
@@ -378,11 +589,10 @@ const ReorderPlanPage = () => {
 												month extra stock
 											</li>
 											<li>
-												<strong>
-													Order multiples:
-												</strong>{" "}
-												Rounded up to nearest{" "}
-												{ORDER_QUANTITY_MULTIPLE}
+												<strong>Order multiples:</strong> Rounded up to nearest {ORDER_QUANTITY_MULTIPLE}
+											</li>
+											<li>
+												<strong>Build order:</strong> If you have a build order scheduled for delivery, plan the next reorder delivery for 2 months after that date.
 											</li>
 										</ul>
 									</div>
@@ -445,72 +655,61 @@ const ReorderPlanPage = () => {
 										</ChartContainer>
 									</div>
 
-									{/* Stock projection */}
-									{totalStock > 0 && (
+									{/* Stock projection with orders: bar = stock at end of each week; consumption per week then jumps when production hits */}
+									{stockProjectionWeeklyData.length > 0 && (
 										<div>
 											<h4 className="mb-2 font-semibold">
-												Stock Projection (if no order)
+												Stock projection with orders
 											</h4>
+											<p className="mb-2 text-muted-foreground text-xs">
+												Weekly consumption reduces the bar; production adds a jump in the week delivery arrives.
+											</p>
 											<ChartContainer
 												config={{
-													stock: {
-														label: "Stock",
-														color:
-															"hsl(var(--chart-1))",
-													},
+													stock: { label: "Stock", color: "hsl(var(--chart-1))" },
 												}}
-												className="w-full h-[140px]"
+												className="w-full h-[200px]"
 											>
 												<BarChart
-													data={runOutResult
-														.projectedStockByMonth}
-													margin={{
-														top: 8,
-														right: 8,
-														bottom: 0,
-														left: 0,
-													}}
+													data={stockProjectionWeeklyData}
+													margin={{ top: 8, right: 8, bottom: 0, left: 36 }}
 												>
 													<XAxis
-														dataKey="monthLabel"
+														dataKey="weekLabel"
 														tickLine={false}
 														axisLine={false}
 														tick={{ fontSize: 10 }}
-														tickFormatter={(v) =>
-															v.split(" ")[0]
-																?.slice(0, 1) ??
-																""}
+														tickFormatter={(_, i) => stockProjectionWeeklyData[i]?.monthLabel ?? ""}
 													/>
 													<YAxis
-														hide
-														domain={[0, "dataMax"]}
+														domain={[0, "auto"]}
+														tickLine={false}
+														axisLine={false}
+														tick={{ fontSize: 10 }}
+														width={28}
 													/>
 													<ChartTooltip
-														content={
-															<ChartTooltipContent className="bg-white dark:bg-neutral-900 border-neutral-200" />
-														}
-														cursor={{
-															fill:
-																"hsl(var(--neutral-200, 0 0% 90%))",
+														content={({ active, payload }) => {
+															if (!active || !payload?.length) return null;
+															const p = payload[0].payload as { dateLabel: string; stock: number };
+															return (
+																<ChartTooltipContent
+																	active={active}
+																	payload={payload}
+																	className="bg-white dark:bg-neutral-900 border-neutral-200"
+																	label={p.dateLabel}
+																/>
+															);
 														}}
+														cursor={{ fill: "hsl(var(--neutral-200, 0 0% 90%))" }}
 													/>
 													<Bar
 														dataKey="stock"
 														fill="var(--color-stock)"
-														radius={[4, 4, 0, 0]}
+														name="Stock"
 													/>
 												</BarChart>
 											</ChartContainer>
-											{runOutMonth != null &&
-												runOutYear != null && (
-												<p className="mt-2 text-destructive text-xs">
-													Stock would run out by{" "}
-													{getMonthName(runOutMonth)}
-													{" "}
-													{runOutYear}{" "}
-													without an order.
-												</p>
-											)}
 										</div>
 									)}
 
@@ -550,6 +749,7 @@ export const Route = createFileRoute("/home/stock/reorder-plan")({
 			context.queryClient.ensureQueryData(
 				selectInventoryHistoryQueryOptions(),
 			),
+			context.queryClient.prefetchQuery(selectOrdersQueryOptions()),
 		]);
 	},
 });

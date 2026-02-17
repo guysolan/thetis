@@ -21,6 +21,7 @@ import { Route as HomeStockIndexRouteImport } from './routes/home/stock/index'
 import { Route as HomeOrdersIndexRouteImport } from './routes/home/orders/index'
 import { Route as HomeStockValueRouteImport } from './routes/home/stock/value'
 import { Route as HomeStockReorderPlanRouteImport } from './routes/home/stock/reorder-plan'
+import { Route as HomeStockAmazonPlanRouteImport } from './routes/home/stock/amazon-plan'
 import { Route as HomeOrdersOrderIdIndexRouteImport } from './routes/home/orders/$orderId/index'
 import { Route as HomeStockHistoryAddressIdRouteImport } from './routes/home/stock/history.$addressId'
 import { Route as HomeOrdersOrderIdViewRouteImport } from './routes/home/orders/$orderId/view'
@@ -93,6 +94,11 @@ const HomeStockValueRoute = HomeStockValueRouteImport.update({
 const HomeStockReorderPlanRoute = HomeStockReorderPlanRouteImport.update({
   id: '/stock/reorder-plan',
   path: '/stock/reorder-plan',
+  getParentRoute: () => HomeRoute,
+} as any)
+const HomeStockAmazonPlanRoute = HomeStockAmazonPlanRouteImport.update({
+  id: '/stock/amazon-plan',
+  path: '/stock/amazon-plan',
   getParentRoute: () => HomeRoute,
 } as any)
 const HomeOrdersOrderIdIndexRoute = HomeOrdersOrderIdIndexRouteImport.update({
@@ -180,6 +186,7 @@ export interface FileRoutesByFullPath {
   '/home/directory': typeof HomeDirectoryRoute
   '/test/stock-history': typeof TestStockHistoryRoute
   '/home/': typeof HomeIndexRoute
+  '/home/stock/amazon-plan': typeof HomeStockAmazonPlanRoute
   '/home/stock/reorder-plan': typeof HomeStockReorderPlanRoute
   '/home/stock/value': typeof HomeStockValueRoute
   '/home/orders/': typeof HomeOrdersIndexRoute
@@ -206,6 +213,7 @@ export interface FileRoutesByTo {
   '/home/directory': typeof HomeDirectoryRoute
   '/test/stock-history': typeof TestStockHistoryRoute
   '/home': typeof HomeIndexRoute
+  '/home/stock/amazon-plan': typeof HomeStockAmazonPlanRoute
   '/home/stock/reorder-plan': typeof HomeStockReorderPlanRoute
   '/home/stock/value': typeof HomeStockValueRoute
   '/home/orders': typeof HomeOrdersIndexRoute
@@ -234,6 +242,7 @@ export interface FileRoutesById {
   '/home/directory': typeof HomeDirectoryRoute
   '/test/stock-history': typeof TestStockHistoryRoute
   '/home/': typeof HomeIndexRoute
+  '/home/stock/amazon-plan': typeof HomeStockAmazonPlanRoute
   '/home/stock/reorder-plan': typeof HomeStockReorderPlanRoute
   '/home/stock/value': typeof HomeStockValueRoute
   '/home/orders/': typeof HomeOrdersIndexRoute
@@ -263,6 +272,7 @@ export interface FileRouteTypes {
     | '/home/directory'
     | '/test/stock-history'
     | '/home/'
+    | '/home/stock/amazon-plan'
     | '/home/stock/reorder-plan'
     | '/home/stock/value'
     | '/home/orders/'
@@ -289,6 +299,7 @@ export interface FileRouteTypes {
     | '/home/directory'
     | '/test/stock-history'
     | '/home'
+    | '/home/stock/amazon-plan'
     | '/home/stock/reorder-plan'
     | '/home/stock/value'
     | '/home/orders'
@@ -316,6 +327,7 @@ export interface FileRouteTypes {
     | '/home/directory'
     | '/test/stock-history'
     | '/home/'
+    | '/home/stock/amazon-plan'
     | '/home/stock/reorder-plan'
     | '/home/stock/value'
     | '/home/orders/'
@@ -427,6 +439,13 @@ declare module '@tanstack/react-router' {
       path: '/stock/reorder-plan'
       fullPath: '/home/stock/reorder-plan'
       preLoaderRoute: typeof HomeStockReorderPlanRouteImport
+      parentRoute: typeof HomeRoute
+    }
+    '/home/stock/amazon-plan': {
+      id: '/home/stock/amazon-plan'
+      path: '/stock/amazon-plan'
+      fullPath: '/home/stock/amazon-plan'
+      preLoaderRoute: typeof HomeStockAmazonPlanRouteImport
       parentRoute: typeof HomeRoute
     }
     '/home/orders/$orderId/': {
@@ -554,6 +573,7 @@ interface HomeRouteChildren {
   HomeBuildRoute: typeof HomeBuildRoute
   HomeDirectoryRoute: typeof HomeDirectoryRoute
   HomeIndexRoute: typeof HomeIndexRoute
+  HomeStockAmazonPlanRoute: typeof HomeStockAmazonPlanRoute
   HomeStockReorderPlanRoute: typeof HomeStockReorderPlanRoute
   HomeStockValueRoute: typeof HomeStockValueRoute
   HomeOrdersIndexRoute: typeof HomeOrdersIndexRoute
@@ -571,6 +591,7 @@ const HomeRouteChildren: HomeRouteChildren = {
   HomeBuildRoute: HomeBuildRoute,
   HomeDirectoryRoute: HomeDirectoryRoute,
   HomeIndexRoute: HomeIndexRoute,
+  HomeStockAmazonPlanRoute: HomeStockAmazonPlanRoute,
   HomeStockReorderPlanRoute: HomeStockReorderPlanRoute,
   HomeStockValueRoute: HomeStockValueRoute,
   HomeOrdersIndexRoute: HomeOrdersIndexRoute,

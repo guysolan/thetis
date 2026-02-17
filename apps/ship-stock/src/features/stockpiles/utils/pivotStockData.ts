@@ -4,16 +4,29 @@ import { getCurrentQuantity, getAllItemsForAddress } from "../../stock-history/u
 
 interface AmazonStockpileData {
 	name: string;
-	total: number;
+	asin?: string;
+	sellerSku?: string;
+	/** Available (fulfillable) + inbound + fcTransfer; table shows this sum */
+	total?: number;
 	available: number;
 	inbound: number;
+	fcTransfer?: number;
 }
 
+/** Map Amazon seller SKU to internal product row name (for Night Splint variants) */
+const AMAZON_SKU_TO_INTERNAL_NAME: Record<string, string> = {
+	"TM-ATRNS-LL": "Night Splint - Large Left (Bag)",
+	"TM-ATRNS-LR": "Night Splint - Large Right (Bag)",
+	"TM-ATRNS-SL": "Night Splint - Small Left (Bag)",
+	"TM-ATRNS-SR": "Night Splint - Small Right (Bag)",
+};
+
+/** API returns "Amazon US", "Amazon CA", "Amazon DE", "Amazon UK" */
 interface AmazonInventory {
-	UsInventory: AmazonStockpileData[];
-	CaInventory: AmazonStockpileData[];
-	DeInventory: AmazonStockpileData[];
-	UkInventory: AmazonStockpileData[];
+	"Amazon US"?: AmazonStockpileData[];
+	"Amazon CA"?: AmazonStockpileData[];
+	"Amazon DE"?: AmazonStockpileData[];
+	"Amazon UK"?: AmazonStockpileData[];
 }
 
 export interface LocationColumn {
@@ -32,12 +45,18 @@ export interface StockRow {
 	total: number;
 }
 
-const AMAZON_REGION_LABELS: Record<string, string> = {
-	UsInventory: "Amazon US",
-	CaInventory: "Amazon CA",
-	DeInventory: "Amazon DE",
-	UkInventory: "Amazon UK",
-};
+/** Region keys as returned by the amazon-inventory edge function */
+const AMAZON_REGION_KEYS = ["Amazon US", "Amazon CA", "Amazon DE", "Amazon UK"] as const;
+
+/** Row names that are Amazon listing titles; exclude so we only show internal/DB item names */
+const AMAZON_TITLE_PREFIXES = [
+	"Achilles Tendon RUPTURE Night Splint, ONLY for COMPLETE Achilles tear - BEFORE PURCHASE:",
+	"Thetis Medical Nachtschiene für Achillessehnenruptur, NUR für VOLLSTÄNDIGE Achillessehnenruptur - VOR DEM KAUF:",
+];
+function isAmazonListingTitle(itemName: string): boolean {
+	const n = itemName.trim();
+	return AMAZON_TITLE_PREFIXES.some((p) => n.startsWith(p));
+}
 
 /**
  * Pivot inventory history + amazon inventory into a single table structure
@@ -63,12 +82,12 @@ export function pivotStockData(
 	// 2. Build Amazon location columns (only for regions that have data)
 	const amazonColumns: LocationColumn[] = [];
 	if (amazonInventory) {
-		for (const [regionKey, label] of Object.entries(AMAZON_REGION_LABELS)) {
-			const regionData =
-				amazonInventory[regionKey as keyof AmazonInventory];
+		for (const label of AMAZON_REGION_KEYS) {
+			const regionData = amazonInventory[label];
 			if (regionData && regionData.length > 0) {
+				const key = `amz_${label.replace(/\s+/g, "_")}`;
 				amazonColumns.push({
-					key: `amz_${regionKey}`,
+					key,
 					label,
 					addressId: null,
 					isAmazon: true,
@@ -121,40 +140,38 @@ export function pivotStockData(
 
 	// 4. Merge Amazon inventory into the item map
 	if (amazonInventory) {
-		for (const [regionKey, regionData] of Object.entries(amazonInventory)) {
-			if (!AMAZON_REGION_LABELS[regionKey]) continue;
-			const locationKey = `amz_${regionKey}`;
+		for (const label of AMAZON_REGION_KEYS) {
+			const regionData = amazonInventory[label];
+			if (!regionData?.length) continue;
+			const locationKey = `amz_${label.replace(/\s+/g, "_")}`;
 
 			for (const amazonItem of regionData as AmazonStockpileData[]) {
-				const matchedEntry = findMatchingItem(itemMap, amazonItem.name);
+				// Prefer SKU mapping so Amazon "Small Right" etc. matches internal "Night Splint - Small Right (Bag)"
+				const targetName =
+					amazonItem.sellerSku &&
+					AMAZON_SKU_TO_INTERNAL_NAME[amazonItem.sellerSku];
+				const matchedEntry = targetName
+					? findEntryByItemName(itemMap, targetName) ??
+						findMatchingItem(itemMap, amazonItem.name)
+					: findMatchingItem(itemMap, amazonItem.name);
 
+				// Only add Amazon qty to existing DB rows; show sum of available + inbound + fcTransfer
 				if (matchedEntry) {
+					const sum =
+						(amazonItem.total ?? 0) ||
+						(amazonItem.available ?? 0) +
+							(amazonItem.inbound ?? 0) +
+							(amazonItem.fcTransfer ?? 0);
 					matchedEntry.locations[locationKey] =
-						(matchedEntry.locations[locationKey] ?? 0) +
-						amazonItem.total;
-				} else {
-					// Create a new entry for unmatched Amazon items
-					const syntheticId = -(
-						hashString(amazonItem.name + regionKey) % 1000000
-					);
-					let entry = itemMap.get(syntheticId);
-					if (!entry) {
-						entry = {
-							itemName: amazonItem.name,
-							itemType: "product",
-							locations: {},
-						};
-						itemMap.set(syntheticId, entry);
-					}
-					entry.locations[locationKey] =
-						(entry.locations[locationKey] ?? 0) + amazonItem.total;
+						(matchedEntry.locations[locationKey] ?? 0) + sum;
 				}
 			}
 		}
 	}
 
-	// 5. Convert map to rows and compute totals
+	// 5. Convert map to rows, exclude Amazon listing titles, compute totals
 	const rows: StockRow[] = Array.from(itemMap.entries())
+		.filter(([, entry]) => !isAmazonListingTitle(entry.itemName))
 		.map(([itemId, entry]) => {
 			const total = Object.values(entry.locations).reduce(
 				(sum, qty) => sum + qty,
@@ -172,6 +189,23 @@ export function pivotStockData(
 		.sort((a, b) => a.itemName.localeCompare(b.itemName));
 
 	return { rows, columns: allColumns };
+}
+
+/** Find an entry by exact item name (case-insensitive). Used for SKU-mapped internal names. */
+function findEntryByItemName(
+	itemMap: Map<
+		number,
+		{ itemName: string; itemType: string; locations: Record<string, number> }
+	>,
+	itemName: string,
+): { locations: Record<string, number> } | null {
+	const normalised = itemName.toLowerCase().trim();
+	for (const entry of itemMap.values()) {
+		if (entry.itemName.toLowerCase().trim() === normalised) {
+			return entry;
+		}
+	}
+	return null;
 }
 
 /** Case-insensitive name matching between Amazon product names and internal items */
@@ -199,15 +233,4 @@ function findMatchingItem(
 	}
 
 	return null;
-}
-
-/** Simple string hash for generating synthetic IDs */
-function hashString(str: string): number {
-	let hash = 0;
-	for (let i = 0; i < str.length; i++) {
-		const char = str.charCodeAt(i);
-		hash = (hash << 5) - hash + char;
-		hash |= 0;
-	}
-	return Math.abs(hash);
 }

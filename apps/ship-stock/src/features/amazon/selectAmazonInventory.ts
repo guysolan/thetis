@@ -3,16 +3,20 @@ import { supabase } from "../../lib/supabase"; // Adjust the import path as need
 
 interface stockpileData {
     name: string;
-    total: number;
+    asin?: string;
+    sellerSku?: string;
+    total?: number;
     available: number;
     inbound: number;
+    fcTransfer?: number;
 }
 
+/** API returns keys "Amazon US", "Amazon CA", "Amazon DE", "Amazon UK" */
 export interface AmazonInventory {
-    UsInventory: stockpileData[];
-    CaInventory: stockpileData[];
-    DeInventory: stockpileData[];
-    UkInventory: stockpileData[];
+    "Amazon US"?: stockpileData[];
+    "Amazon CA"?: stockpileData[];
+    "Amazon DE"?: stockpileData[];
+    "Amazon UK"?: stockpileData[];
 }
 
 export const selectAmazonInventory = async (): Promise<

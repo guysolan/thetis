@@ -33,8 +33,7 @@ import PageHeader from "@/components/PageHeader";
 import TabsHeader from "@/components/TabsHeader";
 import { features } from "@/features/navigation/content";
 import { useMemo, useState } from "react";
-import { Input } from "@thetis/ui/input";
-import { Calendar, ClipboardCheck, Search, TrendingUp } from "lucide-react";
+import { Calendar, ClipboardCheck, Package, TrendingUp } from "lucide-react";
 import {
 	computeReorderPlan,
 	getDemandMultiplierForProduct,
@@ -96,7 +95,6 @@ type StockTab = (typeof tabConfig)[number]["value"];
 const StockPage = () => {
 	const { tab } = Route.useSearch();
 	const navigate = Route.useNavigate();
-	const [search, setSearch] = useState("");
 	const { data: stockpiles } = useSelectStockpiles();
 	const { data: inventoryHistory } = useSelectInventoryHistory();
 	const { data: amazonInventory } = useAmazonInventoryOptional();
@@ -138,7 +136,7 @@ const StockPage = () => {
 	return (
 		<>
 			<PageHeader title="Stock">
-				<Button variant="outline" size="sm" onClick={() => setStockCountOpen(true)}>
+				<Button variant="default" size="sm" onClick={() => setStockCountOpen(true)}>
 					<ClipboardCheck size={16} className="mr-1.5" />
 					Stock Count
 				</Button>
@@ -185,23 +183,16 @@ const StockPage = () => {
 						Reorder Plan
 					</Link>
 				</Button>
+				<Button variant="outline" size="sm" asChild>
+					<Link to="/home/stock/amazon-plan">
+						<Package size={16} className="mr-1.5" />
+						Amazon Plan
+					</Link>
+				</Button>
 			</PageHeader>
 
 			<Tabs value={tab} onValueChange={handleTabChange} className="w-full">
-				<div className="flex items-center gap-4 w-full">
-					<div className="flex-1 min-w-0">
-						<TabsHeader tabsList={tabsList} />
-					</div>
-					<div className="relative w-48 shrink-0">
-						<Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-						<Input
-							placeholder="Search items..."
-							value={search}
-							onChange={(e) => setSearch(e.target.value)}
-							className="pl-9 h-9"
-						/>
-					</div>
-				</div>
+				<TabsHeader tabsList={tabsList} />
 
 				{tabConfig.map(({ value }) => (
 					<TabsContent
@@ -211,12 +202,14 @@ const StockPage = () => {
 					>
 						<StockTable
 							rows={rows}
-							columns={columns}
+							columns={
+								value === "parts"
+									? columns.filter((c) => !c.isAmazon)
+									: columns
+							}
 							inventoryHistory={inventoryHistory ?? []}
 							reorderInfo={reorderInfo}
 							typeFilter={value}
-							globalFilter={search}
-							onGlobalFilterChange={setSearch}
 						/>
 					</TabsContent>
 				))}

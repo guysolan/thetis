@@ -130,17 +130,7 @@ export default function StockTable({
 					(row) => row.locations[loc.key] ?? 0,
 					{
 						id: loc.key,
-						header: () => (
-							<span
-								className={
-									loc.isAmazon
-										? "text-orange-600 dark:text-orange-400"
-										: ""
-								}
-							>
-								{loc.label}
-							</span>
-						),
+						header: loc.label,
 						cell: (info) => {
 							const val = info.getValue() as number;
 							return (
