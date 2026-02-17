@@ -3,6 +3,7 @@ import { Input } from "@thetis/ui/input";
 import { Button } from "../ui/button";
 import { supabase } from "@/lib/supabase";
 import { markEmailAsSubscribed } from "@/lib/subscription-storage";
+import { trackEmailSignup } from "@/lib/analytics";
 import { Check, Download } from "lucide-react";
 
 export default function MiniSubscribe() {
@@ -53,6 +54,8 @@ export default function MiniSubscribe() {
 
       // Mark email as subscribed in localStorage
       markEmailAsSubscribed(normalizedEmail);
+
+      trackEmailSignup("ebook_download");
 
       console.log("Successfully added to mailing list");
 

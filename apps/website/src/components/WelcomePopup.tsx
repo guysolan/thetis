@@ -10,6 +10,7 @@ import {
   isEmailSubscribed,
   markEmailAsSubscribed,
 } from "@/lib/subscription-storage";
+import { trackEmailSignup } from "@/lib/analytics";
 
 interface WelcomePopupProps {
   className?: string;
@@ -123,6 +124,8 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({
 
       // Mark email as subscribed in localStorage
       markEmailAsSubscribed(normalizedEmail);
+
+      trackEmailSignup("welcome_popup");
 
       setIsSubmitted(true);
       localStorage.setItem("welcomePopupSeen", Date.now().toString());

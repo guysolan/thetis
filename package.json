@@ -10,6 +10,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "build:ship-stock": "turbo build --filter=@thetis/ship-stock",
     "dev": "turbo dev --parallel",
     "dev:achilles-rupture": "turbo dev --filter=@thetis/achilles-rupture",
     "dev:ship-stock": "turbo dev --filter=@thetis/ship-stock",

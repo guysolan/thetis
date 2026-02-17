@@ -10,6 +10,7 @@ import {
     hasAnySubscription,
     markEmailAsSubscribed,
 } from "@/lib/subscription-storage";
+import { trackEmailSignup } from "@/lib/analytics";
 
 type Lang = "en" | "de" | "fr" | "es" | "it";
 
@@ -32,7 +33,8 @@ const translations = {
         phonePlaceholder: "Telefon (optional)",
         subscribe: "Anmelden",
         errorRequired: "Bitte geben Sie Ihre E-Mail-Adresse ein",
-        errorGeneric: "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.",
+        errorGeneric:
+            "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.",
     },
     fr: {
         subscribed: "Vous êtes inscrit ! Vérifiez votre boîte de réception.",
@@ -138,6 +140,8 @@ export function SubscribeBlockForm({
             markEmailAsSubscribed(normalizedEmail);
             setIsAlreadySubscribed(true);
 
+            trackEmailSignup(source);
+
             setIsSubmitted(true);
             // Reset form after success
             setTimeout(() => {
@@ -147,9 +151,7 @@ export function SubscribeBlockForm({
             }, 3000);
         } catch (err) {
             setError(
-                err instanceof Error
-                    ? err.message
-                    : t.errorGeneric,
+                err instanceof Error ? err.message : t.errorGeneric,
             );
             console.error("Error subscribing:", err);
         } finally {

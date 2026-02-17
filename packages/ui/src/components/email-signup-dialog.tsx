@@ -60,6 +60,8 @@ export interface EmailSignupDialogProps {
     triggerText?: string;
     /** Optional Supabase client for direct database integration */
     supabaseClient?: SupabaseClient;
+    /** Source label for analytics (e.g. "course_page"). Pushes sign_up + generate_lead to dataLayer when present. */
+    signupSource?: string;
 }
 
 function EmailSignupDialog({
@@ -81,6 +83,7 @@ function EmailSignupDialog({
     phoneLabel = "Phone (optional, for SMS tips)",
     phonePlaceholder = "+1 (555) 123-4567",
     supabaseClient,
+    signupSource = "email_signup_dialog",
 }: EmailSignupDialogProps) {
     const [internalOpen, setInternalOpen] = React.useState(false);
     const [email, setEmail] = React.useState("");
@@ -152,6 +155,25 @@ function EmailSignupDialog({
                 throw new Error(
                     "Either onSubmit callback or supabaseClient must be provided",
                 );
+            }
+
+            // Notify GA4 + Google Ads "Submit lead form" via dataLayer (GTM: fire on generate_lead)
+            if (
+                typeof window !== "undefined" &&
+                (window as Window & { dataLayer?: unknown[] }).dataLayer
+            ) {
+                const dl =
+                    (window as Window & { dataLayer: unknown[] }).dataLayer;
+                dl.push({
+                    event: "sign_up",
+                    method: "email",
+                    ...(signupSource && { signup_source: signupSource }),
+                });
+                dl.push({
+                    event: "generate_lead",
+                    conversion_type: "submit_lead_form",
+                    ...(signupSource && { lead_source: signupSource }),
+                });
             }
 
             setOpen(false);

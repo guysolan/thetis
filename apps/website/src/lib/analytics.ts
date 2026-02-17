@@ -157,6 +157,28 @@ export function trackBeginCheckout(items: {
 }
 
 /**
+ * Track when a user is added to the email list (newsletter / recovery tips signup).
+ * Pushes to dataLayer for GTM:
+ * - GA4: sign_up, generate_lead
+ * - Google Ads: use generate_lead to fire your "Submit lead form" conversion action
+ * @param source - Optional source of the signup (e.g. "subscribe_block", "welcome_popup", "ebook_download")
+ */
+export function trackEmailSignup(source?: string) {
+    const dataLayer = getDataLayer();
+    dataLayer.push({
+        event: "sign_up",
+        method: "email",
+        ...(source && { signup_source: source }),
+    });
+    // generate_lead = use in GTM to fire Google Ads "Submit lead form" conversion
+    dataLayer.push({
+        event: "generate_lead",
+        conversion_type: "submit_lead_form",
+        ...(source && { lead_source: source }),
+    });
+}
+
+/**
  * Track a completed purchase
  * Note: This should be called from the thank you page or webhook
  */

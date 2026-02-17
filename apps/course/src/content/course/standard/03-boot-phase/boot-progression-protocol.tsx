@@ -11,7 +11,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "Your boot protocol is the core of **Phase 1: Protection**. It involves gradually reducing the angle (removing wedges or adjusting the hinge) and progressing mobilisation status as your tendon heals.",
+        "Your boot protocol is the core of **Phase 1: Protection**. Most protocols keep you at maximum angle until **week 5**; then you reduce the angle in steps (remove wedges — bottom first — or adjust the hinge) at intervals set by your medical team. Usually the foot is fairly flat by **week 10**, then you progress out of the boot into a shoe with a heel lift. Mobilisation progresses alongside.",
 
     blocks: [
         {
@@ -71,12 +71,12 @@ export const content: SectionContent = {
                     type: "accordion",
                     items: [
                         {
-                            title: "Starting position (weeks 0–2)",
+                            title: "Starting position (weeks 0–5)",
                             content: [
                                 {
                                     type: "text",
                                     content:
-                                        "You'll start at **maximum angle** — foot very pointed down like standing on tip-toes. This is around 30–45 degrees of [plantarflexion](/standard/emergency-care) (foot pointed down).",
+                                        "You'll start at **maximum angle** — foot very pointed down like standing on tip-toes. This is around 30–45 degrees of [plantarflexion](/standard/emergency-care) (foot pointed down). **Most protocols keep you in this position until week 5.** Starting to reduce the angle too early can elongate the tendon and worsen outcomes.",
                                 },
                                 {
                                     type: "list",
@@ -86,27 +86,26 @@ export const content: SectionContent = {
                                         "**VACOped:** Hinge locked at maximum angle setting",
                                         "**Goal:** Keep tendon ends as close as possible",
                                         "**Mobilisation status:** Usually Non Weightbearing or Limited Weightbearing",
-                                        "**Don't change anything yet** — follow your protocol exactly",
+                                        "**Don't change anything yet** — stay at maximum angle until your medical team says to start reducing (typically week 5)",
                                     ],
                                 },
                             ],
                         },
                         {
-                            title: "Angle reduction protocol (weeks 2–10)",
+                            title: "Angle reduction protocol (from week 5)",
                             content: [
                                 {
                                     type: "text",
                                     content:
-                                        "Your specialist will give you a schedule for gradually reducing the angle. The timing is similar for both boot types:",
+                                        "From around **week 5**, your medical team will start you on **sequential** angle reduction. **Time intervals are set by your medical team** — they decide when you remove each wedge or adjust the hinge. For Aircast: remove the **bottom wedge first**, then the next, and so on. For VACOped: they'll guide hinge adjustments. Usually the foot is fairly flat (like in a shoe) by **week 10**. Then you progress out of the boot into a shoe with a heel lift.",
                                 },
                                 {
                                     type: "list",
                                     style: "bullet",
                                     items: [
-                                        "**Week 2–4:** Reduce angle by one step (remove one wedge, or unlock hinge one notch)",
-                                        "**Week 4–6:** Continue gradual reduction",
-                                        "**Week 6–8:** May reach neutral (0 degrees) or close to it",
-                                        "**Week 8–10:** May start transitioning out of boot",
+                                        "**From week 5:** Sequential removal of wedges (bottom one first) or hinge adjustment — **intervals set by your medical team**",
+                                        "**Week 5–10:** Gradual reduction; typically fairly flat (shoe-like position) by week 10",
+                                        "**After week 10:** Progress out of boot into a shoe with a heel lift, as guided by your clinician",
                                     ],
                                 },
                                 {
@@ -114,7 +113,7 @@ export const content: SectionContent = {
                                     variant: "info",
                                     title: "Important",
                                     content:
-                                        "Protocols vary widely. Some reduce faster, some slower. Some keep you at maximum angle longer. **Follow your specific protocol** — don't compare with others or rush ahead.",
+                                        "Do not start reducing the angle before your medical team says so. Starting too early (e.g. at week 2) can elongate the tendon. **Follow your specific protocol and the time intervals your team sets** — don't compare with others or rush ahead.",
                                 },
                             ],
                         },
@@ -155,12 +154,12 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "By Week 4-5, you're likely ready to start removing wedges from your boot — a sign that your tendon is healing. This gradual process brings your foot closer to a normal position, but it must be done carefully and at the right pace.",
+                        "From around **week 5**, most protocols allow you to start removing wedges from your boot — a sign that your tendon has had time to begin healing. This gradual process brings your foot closer to a normal position, but it must be done carefully, in sequence (bottom wedge first), and at the intervals set by your medical team.",
                 },
                 {
                     type: "image",
                     src: WedgeRemovalProgression,
-                    alt: "Four-panel diagram showing gradual wedge removal progression from weeks 2-10, demonstrating how foot angle reduces as wedges are removed",
+                    alt: "Four-panel diagram showing gradual wedge removal progression from week 5 onward, demonstrating how foot angle reduces as wedges are removed (usually fairly flat by week 10)",
                     caption:
                         "Wedge removal progression: gradual reduction of foot angle over time",
                 },
@@ -206,7 +205,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Timing varies significantly between protocols. Some start as early as week 3-4, others wait until week 5-6. **Never remove wedges without your clinician's approval.**",
+                        "**Most protocols do not start lowering the heel until week 5.** Starting earlier can elongate the tendon. Your medical team will tell you when to start and at what intervals to remove each wedge (bottom first) or adjust the hinge. **Never remove wedges without your clinician's approval.**",
                 },
                 {
                     type: "card",
@@ -217,17 +216,17 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Week 2-3:** Usually still in maximum angle with all wedges",
-                                "**Week 4-5:** Many protocols start removing first wedge",
-                                "**Week 6-7:** Continue removing wedges gradually",
-                                "**Week 8-10:** Final wedges removed, foot approaches neutral",
+                                "**Weeks 0–5:** Maximum angle with all wedges in (or hinge locked) — do not reduce angle yet",
+                                "**From week 5:** Start sequential wedge removal (bottom first) or hinge adjustment — **intervals set by your medical team**",
+                                "**By week 10:** Usually fairly flat (like a shoe)",
+                                "**After week 10:** Progress out of boot into a shoe with a heel lift",
                             ],
                         },
                         {
                             type: "alert",
                             variant: "warning",
                             content:
-                                "These are general guidelines. Your clinician will give you a specific protocol based on your healing progress, gap size, and treatment approach (surgical vs non-surgical).",
+                                "These are general guidelines. Your clinician will give you a specific protocol and time intervals based on your healing progress, gap size, and treatment approach (surgical vs non-surgical).",
                         },
                     ],
                 },
@@ -243,8 +242,8 @@ export const content: SectionContent = {
                             items: [
                                 "**Decreasing swelling** — less inflammation means healing is progressing",
                                 "**Less pain** — discomfort should be manageable",
-                                "**Time since injury** — most protocols start around week 4-5",
-                                "**Clinical assessment** — your clinician checks healing progress",
+                                "**Time since injury** — most protocols do not start until week 5",
+                                "**Clinical assessment** — your clinician checks healing progress and sets your schedule",
                             ],
                         },
                         {
@@ -408,10 +407,10 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**Weeks 0–2:** Usually Non Weightbearing or Limited Weightbearing",
-                                "**Weeks 2–4:** May progress to Limited Weightbearing with functional restrictions",
-                                "**Weeks 4–6:** Progress to Unrestricted Weightbearing in boot",
-                                "**Weeks 6–8:** Unrestricted Weightbearing, may start walking without crutches",
-                                "**Weeks 8–10:** Continue Unrestricted Weightbearing, preparing for boot removal",
+                                "**Weeks 2–5:** May progress to Limited Weightbearing with functional restrictions (angle stays at maximum until week 5)",
+                                "**Weeks 5–8:** Progress to Unrestricted Weightbearing in boot as angle reduces",
+                                "**Weeks 8–10:** Unrestricted Weightbearing, foot usually fairly flat; preparing for boot removal",
+                                "**After week 10:** Progress out of boot into a shoe with a heel lift",
                             ],
                         },
                         {
@@ -464,9 +463,9 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Conservative protocol:** Longer at maximum angle, slower mobilisation progression",
-                                "**Accelerated protocol:** Faster angle reduction, earlier weightbearing",
-                                "**Your protocol:** May be anywhere between these — follow it exactly",
+                                "**Conservative protocol:** May keep maximum angle beyond week 5, slower mobilisation progression",
+                                "**Standard protocol:** Start angle reduction from week 5, intervals set by your team; usually fairly flat by week 10, then shoe with heel lift",
+                                "**Your protocol:** May be anywhere between these — follow it exactly and the time intervals your medical team sets",
                             ],
                         },
                     ],
@@ -529,7 +528,7 @@ export const content: SectionContent = {
                     question:
                         "How do I know when to reduce the angle (remove a wedge or adjust the hinge)?",
                     answer:
-                        "Follow your protocol exactly. Your specialist will give you a schedule (e.g., 'remove one wedge every 2 weeks' for Aircast, or 'unlock to the next setting at week 4' for VACOped). Don't progress faster than instructed, even if you feel fine. The tendon needs time to heal at each angle before moving to the next.",
+                        "Follow your protocol exactly. Most protocols do not start reducing the angle until week 5. Your medical team will give you a schedule and set the time intervals (e.g., when to remove each wedge — bottom first — or adjust the hinge). Don't progress faster than instructed, even if you feel fine. Starting too early can elongate the tendon.",
                 },
                 {
                     question: "What if I reduce the angle and it hurts?",
@@ -594,13 +593,13 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**Never remove wedges without clinician approval** — timing is critical",
+                        "**Stay at maximum angle until week 5** — most protocols don't start lowering the heel before then; starting early can elongate the tendon",
+                        "**Never remove wedges without clinician approval** — time intervals are set by your medical team",
+                        "**Bottom wedge first** — then sequential removal (or hinge adjustment as instructed)",
+                        "**Usually fairly flat by week 10** — then progress out of boot into a shoe with a heel lift",
                         "**One wedge at a time** — gradual is safe, fast is risky",
-                        "**Watch for warning signs** — pain or swelling means slow down",
                         "**Put wedges back if needed** — it's okay to go slower",
-                        "**Follow your protocol exactly** — don't rush ahead",
                         "**Some discomfort is normal** — severe pain is not",
-                        "**Don't compare with others** — protocols vary widely",
                         "**When in doubt, ask** — contact your clinic if concerned",
                     ],
                 },

@@ -40,7 +40,7 @@ const DatePicker = ({ name, label }: DatePickerProps) => {
                                     variant={"outline"}
                                     type="button"
                                     className={cn(
-                                        "w-full pl-3 text-left font-normal",
+                                        "pl-3 w-full font-normal text-left",
                                         "hover:scale-100 active:scale-100 min-w-0",
                                         !field.value && "text-muted-foreground",
                                     )}
