@@ -2,7 +2,7 @@
   "name": "Post-purchase (Splint)",
   "steps": [
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 0 - Thank you",
       "ref": "thank_you",
@@ -27,7 +27,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 4 - Setup tips",
       "ref": "tips",
@@ -52,7 +52,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 10 - Review ask",
       "ref": "review_ask",

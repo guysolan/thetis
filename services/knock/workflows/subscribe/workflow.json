@@ -2,7 +2,7 @@
   "name": "Subscribe",
   "steps": [
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 0 - Who is Thetis",
       "ref": "email_1",
@@ -27,7 +27,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 1 - Protect the tendon",
       "ref": "email_2",
@@ -52,7 +52,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 2 - Pain management",
       "ref": "email_12",
@@ -77,7 +77,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 3 - Questions for specialist",
       "ref": "email_3",
@@ -102,7 +102,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 5 - Helpful products",
       "ref": "email_4",
@@ -127,7 +127,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 7 - Treatment options",
       "ref": "email_5",
@@ -152,7 +152,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 9 - Boot basics",
       "ref": "email_6",
@@ -177,7 +177,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 10 - Week 1 routine",
       "ref": "email_7",
@@ -202,7 +202,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 17 - Returning to work",
       "ref": "email_13",
@@ -227,7 +227,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 21 - Mobility and daily life",
       "ref": "email_8",
@@ -252,7 +252,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 35 - Preparing for physio",
       "ref": "email_9",
@@ -277,7 +277,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 42 - Rerupture prevention",
       "ref": "email_14",
@@ -302,7 +302,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 49 - Preparing for boot removal",
       "ref": "email_10",
@@ -327,7 +327,7 @@
       "type": "delay"
     },
     {
-      "channel_key": "knock-email",
+      "channel_key": "resend",
       "channel_type": "email",
       "name": "Day 70 - Week 10 check-in",
       "ref": "email_11",
