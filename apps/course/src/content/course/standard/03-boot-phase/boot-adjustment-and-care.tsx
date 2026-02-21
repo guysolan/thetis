@@ -29,6 +29,10 @@ export const content: SectionContent = {
                 },
                 {
                     text:
+                        "Aircast: inflate air cells for snug support — not over-inflated (causes pressure/numbness). VACOped: ensure vacuum seal holds; re-pump if boot feels loose.",
+                },
+                {
+                    text:
                         "Adjust straps correctly — tighten from bottom to top",
                 },
                 {
@@ -86,9 +90,46 @@ export const content: SectionContent = {
                 },
                 {
                     type: "tip",
-                    title: "Tiny change, big payoff",
+                    title: "Sock and foot care",
                     content:
-                        "Wear a thin sock or boot liner inside your boot. It reduces friction, absorbs sweat, and makes the boot more comfortable. Change it daily if possible.",
+                        "Wear a thin **cotton** sock (not nylon — nylon slips and doesn't absorb well). **Antifungal powder** on your foot reduces friction, absorbs moisture, and prevents athlete's foot in the warm boot environment — it's a good addition. Change socks daily. When putting your sock on, keep your foot **toes-down** — don't let your ankle go flat, as that stresses the healing tendon. Your foot should stay toes-down 24/7.",
+                },
+            ],
+        },
+        {
+            type: "section",
+            title: "Boot-specific adjustments",
+            content: [
+                {
+                    type: "text",
+                    content:
+                        "Aircast and VACOped boots have different adjustment features. Getting these right improves comfort and protection.",
+                },
+                {
+                    type: "card",
+                    title: "Aircast — air cells",
+                    description: "Inflatable bladders around the ankle.",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "The Aircast has **inflatable air cells** around the ankle. Use the pump to inflate them until the boot feels snug and supportive — but **stop before it's too tight**. Over-inflating causes pressure on your leg, numbness in your toes, or circulation problems. You should still be able to fit one finger between your heel and the back of the boot. If your toes go numb or feel cold, deflate slightly. Swelling changes through the day, so you may need to adjust.",
+                        },
+                    ],
+                },
+                {
+                    type: "card",
+                    title: "VACOped — vacuum liner",
+                    description: "Vacuum-bead system that moulds to your leg.",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "The VACOped has a **vacuum-bead liner** — you pump out the air to create a seal so the liner moulds to your leg. Follow the manufacturer's instructions to achieve a good seal. A proper vacuum fit reduces movement inside the boot and helps prevent pressure sores. **Check regularly:** if the boot feels loose, the liner is moving, or you notice a loss of support, re-pump to restore the vacuum. The seal can lose pressure over time.",
+                        },
+                    ],
                 },
             ],
         },
@@ -248,7 +289,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Odour control:** Use antifungal powder inside the boot, change socks daily, and air it out regularly.",
+                                "**Odour control:** Antifungal powder inside the boot prevents infections and keeps it fresh — change socks daily and air it out regularly.",
                         },
                     ],
                 },
@@ -276,6 +317,7 @@ export const content: SectionContent = {
                         "**Sleeping:** Most protocols require 24/7 wear. See [Sleeping with Your Boot](/standard/sleeping-with-boot) for solutions including the Thetis night splint.",
                         "**Showering:** See [Washing & Hygiene](/standard/washing-and-hygiene) for safe showering options.",
                         "**Walking:** See [Crutches & Mobility](/standard/crutches-and-mobility) for crutch technique and mobility aids.",
+                        "**Indoor cover:** A soft boot cover protects floors and reduces noise when walking indoors — [UK](https://www.amazon.co.uk/Pieces-Walking-Recovery-Reusable-Waterproof/dp/B09PG83J8H) | [US](https://www.amazon.com/MyShoeCovers-Fracture-Walking-Boot-Cover/dp/B075FC3T9B). Optional but many find it helpful.",
                         "**Skin care:** Check your skin daily for pressure points, redness, or rubbing. Use padding if needed.",
                         "**Cleaning:** Keep the boot clean. Remove the liner if possible and wash it regularly.",
                     ],
@@ -299,7 +341,7 @@ export const content: SectionContent = {
                                 "Some rubbing or pressure points (as long as they're not severe)",
                                 "Difficulty sleeping with the boot on",
                                 "Feeling frustrated or claustrophobic about 24/7 wear",
-                                "Back or hip pain from leg length difference (address with footwear)",
+                                "Back or hip pain from leg length difference — **normal**; use an EVENup shoe leveler to balance leg length",
                                 "Swelling that varies through the day",
                             ],
                         },

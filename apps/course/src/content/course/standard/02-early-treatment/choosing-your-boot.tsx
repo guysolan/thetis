@@ -19,7 +19,7 @@ export const content: SectionContent = {
             variant: "info",
             title: "Your hospital will usually provide a boot",
             content:
-                "Most hospitals provide a walking boot as part of your treatment. **Use what they give you** — all boots used for Achilles rupture treatment work well when used correctly. This article focuses on the two most common boots (Aircast and VACOped), but there are other boots used for ATR treatment that work equally well.",
+                "Most hospitals provide a walking boot as part of your treatment. **Use what they give you** — all boots used for Achilles rupture treatment work well when used correctly. This article focuses on the two most common boots ([Aircast](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html) and [VACOped](https://oped-uk.com/product/vacoped/)), but there are other boots used for ATR treatment that work equally well.",
         },
         {
             type: "image",
@@ -35,7 +35,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "The **Aircast** and **VACOped** are the most commonly provided boots, but other boots (like the Rebound Air, Össur Walker, or generic NHS boots) are also used and work well. If your hospital gives you a different boot, that's fine — the principles are the same.",
+                        "The **[Aircast](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html)** and **[VACOped](https://oped-uk.com/product/vacoped/)** are the most commonly provided boots, but other boots (like the Rebound Air, Össur Walker, or generic NHS boots) are also used and work well. If your hospital gives you a different boot, that's fine — the principles are the same.",
                 },
                 {
                     type: "card",
@@ -46,8 +46,8 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Aircast:** Uses removable wedges to set ankle angle. Lighter, cheaper (~£120), widely available. Not waterproof.",
-                                "**VACOped:** Uses a hinged mechanism with adjustable range of motion. Heavier, more expensive (~£300), may preserve muscle better. Waterproof (with fiddly setup).",
+                                "**[Aircast](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html):** Uses removable [wedges](https://www.healthandcare.co.uk/all-walker-boots/aircast-walker-boot-heel-support-wedges.html) to set ankle angle. Lighter, cheaper (~£120), widely available. Not waterproof.",
+                                "**[VACOped](https://oped-uk.com/product/vacoped/):** Uses a hinged mechanism with adjustable range of motion. Heavier, more expensive (~£300), may preserve muscle better. Waterproof (with fiddly setup).",
                             ],
                         },
                     ],
@@ -61,7 +61,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "The **Aircast AIRSELECT ELITE** is the most commonly provided boot in the NHS and many other health systems. It's lightweight, affordable, and easy to adjust.",
+                        "The **[Aircast AIRSELECT ELITE](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html)** is the most commonly provided boot in the NHS and many other health systems. It's lightweight, affordable, and easy to adjust.",
                 },
                 {
                     type: "card",
@@ -73,9 +73,9 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**Lightweight** — easier to move around",
-                                "**Inexpensive** — ~£120 + £20 for wedges",
+                                "**Inexpensive** — ~£120 + £20 for [wedges](https://www.healthandcare.co.uk/all-walker-boots/aircast-walker-boot-heel-support-wedges.html)",
                                 "**Widely available** — most hospitals stock them",
-                                "**Easy to adjust** — simple wedge removal as you progress",
+                                "**Easy to adjust** — simple [wedge](https://www.healthandcare.co.uk/all-walker-boots/aircast-walker-boot-heel-support-wedges.html) removal as you progress",
                             ],
                         },
                     ],
@@ -89,10 +89,10 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Not waterproof** — you'll need a Limbo cover for showering",
+                                "**Not waterproof** — you'll need a waterproof cover for showering (see [Washing & Hygiene](/standard/washing-and-hygiene))",
                                 "**Fixed position** — may cause more muscle wasting",
                                 "**Can cause lurching gait** — the step-change in angles can feel awkward",
-                                "**Wedges can cause foot sliding** — some people get toe pain",
+                                "**[Wedges](https://www.healthandcare.co.uk/all-walker-boots/aircast-walker-boot-heel-support-wedges.html) can cause foot sliding** — some people get toe pain; check wedges stay in place (self-adhesive wedges can help)",
                             ],
                         },
                     ],
@@ -106,7 +106,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "The **VACOped** is considered by some specialists to be the gold standard. It has a hinged mechanism that allows controlled movement within a safe range.",
+                        "The **[VACOped](https://oped-uk.com/product/vacoped/)** is considered by some specialists to be the gold standard. It has a hinged mechanism that allows controlled movement within a safe range.",
                 },
                 {
                     type: "card",
@@ -134,10 +134,10 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Expensive** — ~£300 vs £120 for Aircast",
+                                "**Expensive** — ~£300 vs £120 for [Aircast](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html)",
                                 "**Heavier and bulkier** — some find walking harder initially",
                                 "**Complex adjustment** — more challenging to set up",
-                                "**May need EVENup shoe leveler** — the thicker base can cause leg-length difference",
+                                "**May need EVENup shoe leveler** — both Aircast and VACOped create leg-length difference; EVENup prevents back/hip pain",
                             ],
                         },
                     ],
@@ -149,7 +149,7 @@ export const content: SectionContent = {
             variant: "info",
             title: "Which boot should I use?",
             content:
-                "**Use what your hospital provides** — all boots used for ATR treatment work well. Aircast, VACOped, Rebound Air, Össur, or generic NHS boots — all are valid options with similar outcomes. If you're buying privately and have the budget, VACOped may offer some advantages. But the key is **following your protocol correctly**, not which boot you have.",
+                "**Use what your hospital provides** — all boots used for ATR treatment work well. [Aircast](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html), [VACOped](https://oped-uk.com/product/vacoped/), Rebound Air, Össur, or generic NHS boots — all are valid options with similar outcomes. If you're buying privately and have the budget, VACOped may offer some advantages. But the key is **following your protocol correctly**, not which boot you have.",
         },
         {
             type: "section",
@@ -158,7 +158,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Here's what nobody tells you upfront: **sleeping in your boot is miserable**. Both Aircast and VACOped are hot, heavy, and uncomfortable to sleep in. But tendon protection overnight is absolutely essential — removing your boot while sleeping is one of the most common causes of re-rupture. We cover this in detail in [Sleeping with Your Boot](/standard/sleeping-with-boot).",
+                        "Here's what nobody tells you upfront: **sleeping in your boot is miserable**. Both [Aircast](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html) and [VACOped](https://oped-uk.com/product/vacoped/) are hot, heavy, and uncomfortable to sleep in. But tendon protection overnight is absolutely essential — removing your boot while sleeping is one of the most common causes of re-rupture. We cover this in detail in [Sleeping with Your Boot](/standard/sleeping-with-boot).",
                 },
                 {
                     type: "card",
@@ -202,30 +202,30 @@ export const content: SectionContent = {
                     items: [
                         {
                             text:
-                                "**Walking boot** (Aircast or VACOped) — usually provided by hospital",
+                                "**Walking boot** (Aircast or VACOped) — usually provided by hospital — [Aircast UK](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html) | [Aircast Amazon US](https://www.amazon.com/s?k=aircast+airselect+elite+walking+boot) | [VACOped UK](https://oped-uk.com/product/vacoped/) | [VACOped US](https://opedmedical.com/product/vacoped-short-achilles-injury-fracture-walking-boot/)",
                         },
                         {
                             text: "**Crutches** — usually provided by hospital",
                         },
                         {
                             text:
-                                "**Thetis Night Splint** — for comfortable, safe sleeping and showering",
+                                "**Thetis Night Splint** — for comfortable, safe sleeping and showering — [Buy](https://thetismedical.com/night-splint)",
                         },
                         {
                             text:
-                                "**Waterproof cover** (Limbo) — if using Aircast and want to shower with boot on",
+                                "**Waterproof cover** (Limbo) — if using Aircast and want to shower with boot on — [UK](https://limboproducts.co.uk/product/limbo-full-leg-m100/) | [US](https://www.amazon.com/Qinaoco-Waterproof-Non-Slip-Watertight-Protector/dp/B0BZ43M5RD); see [Washing & Hygiene](/standard/washing-and-hygiene)",
                         },
                         {
                             text:
-                                "**EVENup shoe leveler** — especially with VACOped to prevent back/hip pain",
+                                "**EVENup shoe leveler** — with both Aircast and VACOped to prevent back/hip pain from leg-length difference — [UK](https://www.amazon.co.uk/EVENup-Shoe-Balancer-Leveler-Large/dp/B08FX3YPWQ) | [US](https://www.amazon.com/EVENup-Shoe-Balancer-Leveler-Large/dp/B08FX2T2TF)",
                         },
                         {
                             text:
-                                "**Ergonomic crutch handles** — optional but reduces hand pain",
+                                "**Ergonomic crutch handles** — optional but reduces hand pain — [UK](https://www.amazon.co.uk/s?k=crutch+handles+soft+grips) | [US](https://www.amazon.com/Crutch-Crutches-Replacement-Medical-Handgrips/dp/B09872TVZL)",
                         },
                         {
                             text:
-                                "**Leg elevation wedge** — more comfortable than stacking pillows",
+                                "**Leg elevation wedge** — more comfortable than stacking pillows — [UK](https://www.amazon.co.uk/s?k=leg+elevation+pillow+wedge) | [US](https://www.amazon.com/MEGCXIT-Elevation-Circulation-Swelling-23-6%C3%9716-8%C3%978/dp/B0D31CCML3)",
                         },
                         {
                             text:
@@ -253,11 +253,12 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "Aircast boot: ~£116 / $150",
-                                "Wedges: ~£21 / $27",
-                                "Limbo waterproof cover: ~£23 / $30",
-                                "Thetis Night Splint: ~£65 / $93",
-                                "**Total: ~£225 / $300**",
+                                "Aircast boot: ~£116 / $150 — [UK](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html) | [Amazon US](https://www.amazon.com/s?k=aircast+airselect+elite+walking+boot)",
+                                "Wedges: ~£21 / $27 — [UK](https://www.healthandcare.co.uk/all-walker-boots/aircast-walker-boot-heel-support-wedges.html)",
+                                "Limbo waterproof cover: ~£23 / $30 — [UK](https://limboproducts.co.uk/product/limbo-full-leg-m100/) | [US](https://www.amazon.com/Qinaoco-Waterproof-Non-Slip-Watertight-Protector/dp/B0BZ43M5RD)",
+                                "EVENup shoe leveler: ~£28 / $36 — [UK](https://www.amazon.co.uk/EVENup-Shoe-Balancer-Leveler-Large/dp/B08FX3YPWQ) | [US](https://www.amazon.com/EVENup-Shoe-Balancer-Leveler-Large/dp/B08FX2T2TF)",
+                                "Thetis Night Splint: ~£65 / $93 — [Buy](https://thetismedical.com/night-splint)",
+                                "**Total: ~£250 / $330**",
                             ],
                         },
                     ],
@@ -271,10 +272,10 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "VACOped boot: ~£291 / $378",
-                                "Replacement liner (for swimming): ~£31 / $40",
-                                "EVENup shoe leveler: ~£28 / $36",
-                                "Thetis Night Splint: ~£65 / $93",
+                                "VACOped boot: ~£291 / $378 — [UK](https://oped-uk.com/product/vacoped/) | [US](https://opedmedical.com/product/vacoped-short-achilles-injury-fracture-walking-boot/)",
+                                "Replacement liner (for swimming): ~£31 / $40 — [UK](https://oped-uk.com/product/vacoped-vacocast-liner/) | [US](https://opedmedical.com/product/liner-black-grey-for-vacoped-achilles-injury-fracture-and-vacocast-fracture-walking-boot-orthoses/)",
+                                "EVENup shoe leveler: ~£28 / $36 — [UK](https://www.amazon.co.uk/EVENup-Shoe-Balancer-Leveler-Large/dp/B08FX3YPWQ) | [US](https://www.amazon.com/EVENup-Shoe-Balancer-Leveler-Large/dp/B08FX2T2TF)",
+                                "Thetis Night Splint: ~£65 / $93 — [Buy](https://thetismedical.com/night-splint)",
                                 "**Total: ~£415 / $547**",
                             ],
                         },
@@ -287,9 +288,9 @@ export const content: SectionContent = {
             items: [
                 {
                     question:
-                        "My hospital only offers Aircast — should I buy a VACOped privately?",
+                        "My hospital only offers [Aircast](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html) — should I buy a [VACOped](https://oped-uk.com/product/vacoped/) privately?",
                     answer:
-                        "Probably not necessary. Research shows both boots lead to similar long-term outcomes. The VACOped may have some biomechanical advantages, but the Aircast is a proven, effective option. Focus your budget on comfort items like the Thetis night splint instead.",
+                        "Probably not necessary. Research shows both boots lead to similar long-term outcomes. The [VACOped](https://oped-uk.com/product/vacoped/) may have some biomechanical advantages, but the [Aircast](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html) is a proven, effective option. Focus your budget on comfort items like the Thetis night splint instead.",
                 },
                 {
                     question: "Can I sleep without any boot or splint?",
@@ -299,7 +300,7 @@ export const content: SectionContent = {
                 {
                     question: "How do I shower without getting my boot wet?",
                     answer:
-                        "You have two options: **(1)** Use a waterproof cover (Limbo) over your boot — keeps the boot dry but you can't wash your foot. **(2)** Use the Thetis night splint — it maintains the correct angle while allowing you to wash your foot and leg. Option 2 is better for hygiene.",
+                        "You have two options: **(1)** Use a waterproof cover (Limbo) over your boot — keeps the boot dry but you can't wash your foot. **(2)** Use the Thetis night splint — it maintains the correct angle while allowing you to wash your foot and leg. Option 2 is better for hygiene. See [Washing & Hygiene](/standard/washing-and-hygiene) for full details.",
                 },
                 {
                     question: "When can I stop wearing protection at night?",
@@ -317,7 +318,7 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**Both Aircast and VACOped work** — use what your hospital provides",
+                        "**Both [Aircast](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html) and [VACOped](https://oped-uk.com/product/vacoped/) work** — use what your hospital provides",
                         "**Sleeping in your boot is miserable** — the Thetis night splint is a game-changer",
                         "**You need protection 24/7** — never remove your boot/splint without clinical guidance",
                         "**Budget for comfort items** — a night splint and proper shower solution are worth it",

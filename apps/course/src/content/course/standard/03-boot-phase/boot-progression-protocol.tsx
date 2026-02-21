@@ -268,8 +268,9 @@ export const content: SectionContent = {
                     type: "list",
                     style: "numbered",
                     items: [
-                        "**Check your protocol** — know exactly which wedge to remove and when",
-                        "**Remove one wedge at a time** — never remove multiple wedges at once",
+"**Check your protocol** — know exactly which wedge to remove and when",
+                                        "**Check wedges stay in place** — self-adhesive wedges can help prevent slipping; ensure they're secure each time you put the boot on",
+                                        "**Remove one wedge at a time** — never remove multiple wedges at once",
                         "**Do it when resting** — remove wedges when you're sitting or lying down, not while walking",
                         "**Keep your foot supported** — don't let your foot go flat unsupported",
                         "**Watch for problems** — increased pain, swelling, or discomfort means slow down",

@@ -39,6 +39,9 @@ export const content: SectionContent = {
                     text: "Don't get wound wet — until cleared by your surgeon (usually 2 weeks)",
                 },
                 {
+                    text: "Toes down 24/7 — never let your toes come up; one slip can mean rerupture",
+                },
+                {
                     text: "Attend follow-up — usually 2 weeks for wound check and suture removal",
                 },
                 {
@@ -69,7 +72,14 @@ export const content: SectionContent = {
                                 "**Don't touch** — avoid touching the wound area",
                                 "**Elevate** — helps reduce swelling around wound",
                                 "**Take prescribed antibiotics** — if given, complete the course",
+                                "**Toes down 24/7** — keep your foot pointed down at all times; letting toes come up risks rerupture",
                             ],
+                        },
+                        {
+                            type: "tip",
+                            title: "Snakes and ladders",
+                            content:
+                                "Think of recovery like a game of **snakes and ladders**. Keeping your foot pointed down (toes down) keeps the repaired tendon ends together — that's a ladder, healing moves forward. Letting your toes come up pulls the ends apart — that's a snake, and one snake can mean rerupture. **The golden rule: toes down 24/7.**",
                         },
                     ],
                 },
@@ -236,7 +246,7 @@ export const content: SectionContent = {
                 {
                     question: "When can I shower normally?",
                     answer:
-                        "Usually after your 2-week wound check, once your surgeon confirms the wound is healed. Until then, keep the wound dry — you can use a waterproof cover or take shallow baths keeping your leg out of the water.",
+                        "Usually after your 2-week wound check, once your surgeon confirms the wound is healed. Until then, keep the wound dry — you can use a waterproof cover or take shallow baths keeping your leg out of the water. **When you do shower: keep your toes down 24/7** — even in the shower. Sit if needed, and never let your foot relax into a toes-up position. One slip can mean rerupture.",
                 },
                 {
                     question: "When should I start scar massage?",
@@ -264,6 +274,7 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
+                        "**Toes down 24/7** — never let your toes come up; one slip can mean rerupture",
                         "**Keep wound dry for 2 weeks** — until cleared by surgeon",
                         "**Watch for infection** — spreading redness, warmth, pus, fever",
                         "**Start scar care at 2-3 weeks** — gentle massage with moisturizer",

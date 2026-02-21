@@ -111,8 +111,8 @@ export const content: SectionContent = {
                                     style: "bullet",
                                     items: [
                                         "**How it works:** Foam wedges (usually 3–4) stack under your heel inside the boot",
-                                        "**Starting position:** All wedges in = maximum tip-toe angle (30–45°)",
-                                        "**Progression:** Remove one wedge at a time, typically every 1–2 weeks",
+                                        "**Until week 5:** Keep all 3–4 wedges in — maximum tip-toe angle (30–45°)",
+                                        "**From week 5:** Remove one wedge at a time, at intervals set by your medical team",
                                         "**Each wedge:** Reduces the angle by about 6–8 degrees",
                                         "**End position:** No wedges = foot at neutral (0°)",
                                         "**The boot itself is rigid** — your foot doesn't move within it",
@@ -122,7 +122,7 @@ export const content: SectionContent = {
                                     type: "tip",
                                     title: "Key point",
                                     content:
-                                        "With an Aircast, your angle changes by **physically removing insoles**. The boot has no moving parts — it's like a rigid shell. Your wedge protocol tells you exactly when to remove each wedge.",
+                                        "With an Aircast, your angle changes by **physically removing insoles** — one wedge at a time, never multiple. The boot has no moving parts — it's like a rigid shell. Wedges stay in until week 5; your protocol tells you when to remove each one.",
                                 },
                             ],
                         },
@@ -159,6 +159,12 @@ export const content: SectionContent = {
                                     title: "Key point",
                                     content:
                                         "With a VACOped, your angle changes by **adjusting the hinge dial**. The boot allows controlled movement within whatever range you set. Some protocols use this to allow early gentle movement within a safe zone.",
+                                },
+                                {
+                                    type: "tip",
+                                    title: "Tips for hinges",
+                                    content:
+                                        "Keep the hinge locked at maximum angle until week 5. When your clinician says to start reducing, adjust the dial gradually — don't unlock too far too fast. Check the hinge setting each time you put the boot on. If you feel instability or over-stretch, lock it back to a more restricted range and contact your clinic.",
                                 },
                             ],
                         },
@@ -279,12 +285,17 @@ export const content: SectionContent = {
                 {
                     question: "Can I switch boot types?",
                     answer:
-                        "Generally no — once you start with one boot type, you should continue with it. Switching mid-recovery can disrupt your protocol. If you have concerns about your boot, discuss them with your clinician.",
+                        "Yes — you can switch between boot types (e.g. from Aircast to VACOped or vice versa) if needed. Discuss with your clinician first so they can align your protocol with the new boot. The angle and timing principles are the same; the mechanism differs.",
                 },
                 {
                     question: "What if I have a different boot brand?",
                     answer:
                         "Most walking boots work on similar principles. The key is understanding how YOUR specific boot controls the angle and following YOUR specific protocol. Ask your clinician to explain how your boot works.",
+                },
+                {
+                    question: "Do wedges from one brand fit a different boot?",
+                    answer:
+                        "Generally no — Aircast wedges are designed for Aircast boots and won't fit other brands. If you have a different wedge-based boot, use the wedges supplied with that boot or ask your clinician for compatible wedges. Don't try to use wedges from one brand in another.",
                 },
             ],
         },
