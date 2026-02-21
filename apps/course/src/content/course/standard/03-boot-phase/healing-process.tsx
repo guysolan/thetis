@@ -110,7 +110,7 @@ export const content: SectionContent = {
                             type: "tip",
                             title: "Simple analogy",
                             content:
-                                "Imagine gluing two pieces of rope together. The glue needs time to set. If you pull on it too early, it comes apart. Your tendon is like that glue — it needs weeks to become strong enough to handle stress.",
+                                "Your tendon is like a rope, and the healing is with biological glue — it needs weeks to become strong enough to handle everyday stresses. If you pull on it too early, it comes apart.",
                         },
                     ],
                 },
@@ -147,12 +147,13 @@ export const content: SectionContent = {
                     content:
                         "One of the biggest concerns patients have is: **'Will my tendon be too long?'** This is a valid worry, and understanding it helps explain why we don't rush things.",
                 },
+                // IMAGE TO UPDATE: Diagram should clearly show BOTH re-rupture (tendon tearing apart again) AND elongation (tendon healing too long) — current image may not show re-rupture clearly
                 {
                     type: "image",
                     src: ReRuptureRiskTimeline,
-                    alt: "Timeline diagram showing re-rupture risk periods (early rehab weeks 0-10, boot removal weeks 10-12) and why elongation is the bigger problem than re-rupture",
+                    alt: "Timeline diagram showing re-rupture (tendon tearing apart) and elongation (tendon healing too long) — risk periods for re-rupture (early rehab, boot removal) and why elongation affects long-term function",
                     caption:
-                        "Re-rupture risk timeline: when risks are highest, and why elongation is the bigger concern",
+                        "Re-rupture vs elongation: when risks are highest, and why elongation affects long-term function",
                 },
                 {
                     type: "card",
@@ -170,14 +171,14 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**Re-rupture risk (3-5%)**: Low but serious. Highest during early rehab (weeks 0-10) and boot removal (weeks 10-12)",
-                                "**Elongation risk**: Affects everyone to some degree. This is the **bigger problem** — it prevents return to sport and affects power",
-                                "**Key message**: Re-rupture is rare if you follow protocol, but elongation affects everyone and is harder to fix",
+                                "**Elongation risk**: A significant concern — if the tendon heals too long, it affects power and return to sport. Following your protocol helps minimise this.",
+                                "**Key message**: Re-rupture is rare if you follow protocol. Elongation is the bigger long-term concern because it's harder to fix once it happens.",
                             ],
                         },
                         {
                             type: "text",
                             content:
-                                "The good news: Following your protocol minimizes both risks. The infographic above shows when re-rupture risk is highest, but remember — **elongation is the bigger concern** because it affects your long-term function.",
+                                "The good news: Following your protocol minimizes both risks. The infographic above shows when re-rupture risk is highest. **Elongation** is the bigger long-term concern because it affects power and return to sport. Both are reduced by following your protocol.",
                         },
                     ],
                 },
@@ -208,11 +209,12 @@ export const content: SectionContent = {
                                 "**Altered walking pattern** — you may limp or push off less effectively",
                             ],
                         },
-                        {
-                            type: "text",
-                            content:
-                                "This is why your foot is held **pointed down** (plantarflexed) — it brings the tendon ends closer together so they heal at the right length.",
-                        },
+                {
+                    type: "text",
+                    content:
+                        "This is why your foot is held **pointed down** (plantarflexed, or in equinus) — it brings the tendon ends closer together so they heal at the right length.",
+                },
+                // IMAGE TO UPDATE: Add illustration showing equinus (tip-toe) position — foot pointed down, tendon ends brought close together
                     ],
                 },
                 {
@@ -248,7 +250,7 @@ export const content: SectionContent = {
                     type: "tip",
                     title: "Why we don't rush",
                     content:
-                        "Removing wedges too quickly or stretching the tendon too early can cause the ends to separate. This leads to a longer tendon and worse outcomes. Patience now = better function later.",
+                        "Removing wedges too quickly, stretching the tendon, or starting exercises too early can cause the ends to separate. This leads to a longer tendon and worse outcomes. Patience now = better function later.",
                 },
             ],
         },
@@ -267,7 +269,7 @@ export const content: SectionContent = {
                             items: [
                                 "**Less swelling** than Week 1 — this is good progress",
                                 "**Less pain** — most people feel much better than the first week",
-                                "**Feeling frustrated** — you're still in a boot, still on crutches, still limited",
+                                "**Feeling frustrated** — you're still in a boot, still limited",
                                 "**Wondering if it's healing** — you can't see inside, so it's normal to worry",
                                 "**Swelling that varies** — worse after activity, better after rest",
                                 "**Stiffness** when you move your foot (if allowed)",
@@ -335,7 +337,7 @@ export const content: SectionContent = {
                     items: [
                         "**Week 5:** We cover **wedge removal protocol** — when and how to remove wedges safely",
                         "**Weeks 5-6:** You may progress mobilisation status (if your protocol allows)",
-                        "**Weeks 6-8:** Transition toward walking without crutches",
+                        "**Crutches:** When you come off crutches varies widely — some protocols get patients off at week 2 or sooner, others later. Follow your clinician's guidance.",
                         "**Weeks 8-10:** Boot phase continues, but you'll be more mobile",
                     ],
                 },
@@ -343,7 +345,7 @@ export const content: SectionContent = {
                     type: "tip",
                     title: "Timeline reminder",
                     content:
-                        "Full recovery typically takes **6–12 months**, but you'll be walking without crutches much sooner (often by weeks 6–10). We'll break this down week by week.",
+                        "Full recovery typically takes **6–12 months**. Crutch use varies by protocol — some get off at week 2 or sooner, others later. We'll break the rest down week by week.",
                 },
             ],
         },

@@ -166,8 +166,13 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     recoveryRoadmap.title,
     recoveryRoadmap.description,
     {
-      when_useful: "Early in recovery — the big picture of your 9–12 month journey",
-      triggers: ["when you want an overview", "when planning ahead", "at any stage"],
+      when_useful:
+        "Early in recovery — the big picture of your 9–12 month journey",
+      triggers: [
+        "when you want an overview",
+        "when planning ahead",
+        "at any stage",
+      ],
       approximate_days: 0,
     },
     recoveryRoadmap.status || "drafting",
@@ -382,8 +387,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     nutritionForHealing.title,
     nutritionForHealing.description,
     {
-      when_useful:
-        "Throughout recovery - nutrition supports healing from week 4 onwards",
+      when_useful: "Throughout recovery - nutrition supports healing.",
       triggers: [
         "when starting recovery",
         "when building strength",

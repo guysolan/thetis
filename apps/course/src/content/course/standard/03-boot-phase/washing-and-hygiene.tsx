@@ -28,19 +28,31 @@ export const content: SectionContent = {
             items: [
                 {
                     text:
+                        "Sit when washing — never stand in the shower; use a shower stool",
+                },
+                {
+                    text:
+                        "Dry your foot thoroughly — hairdryer on cool setting after washing",
+                },
+                {
+                    text:
                         "Use antifungal powder daily — sprinkle inside boot liner to prevent infections",
                 },
                 {
                     text:
-                        "Wear merino wool socks — regulate temperature and reduce odour",
+                        "Wear cotton or merino socks (not nylon) — change daily",
                 },
                 {
                     text:
-                        "Set up bathroom safety — non-slip mat, shower stool, clear paths",
+                        "Set up bathroom safety — non-slip mat, shower stool, OT aids (long-handled sponge, grab bars)",
                 },
                 {
                     text:
-                        "Consider a [night splint](/standard/sleeping-with-boot) for washing — allows proper foot washing",
+                        "Consider a [night splint](/standard/sleeping-with-boot) for washing — allows proper foot washing while seated",
+                },
+                {
+                    text:
+                        "Keep foot toes-down when boot is off — never let ankle go flat",
                 },
                 {
                     text:
@@ -55,7 +67,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Slips in the bathroom are a common way people reinjure themselves. Set this up early to prevent accidents.",
+                        "Slips in the bathroom are a common way people reinjure themselves. **Always sit when washing** — never stand in the shower. Set this up early to prevent accidents.",
                 },
                 {
                     type: "image",
@@ -68,11 +80,14 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "Use a **non-slip mat**",
-                        "Consider a **shower stool/chair**",
-                        "Move toiletries to waist height so you're not bending/reaching",
-                        "Keep floors dry and clear of towels/clothes",
-                        "Store crutches upside-down (grips on floor) against the wall — the rubber handles provide friction so they don't slide",
+                        "**Shower stool/chair** — essential; sit for all washing, never stand",
+                        "**Non-slip mat** — inside shower and on bathroom floor",
+                        "**Long-handled sponge or body brush** — reach your foot and leg without bending",
+                        "**Grab bars** — by shower and toilet for stability when transferring",
+                        "**Bath board or transfer bench** — if you have a bath, sit on the edge to swing legs over safely",
+                        "**Move toiletries to waist height** — avoid bending and reaching",
+                        "**Keep floors dry and clear** — no towels or clothes on the floor",
+                        "**Store crutches upside-down** against the wall — the rubber **feet** (crutch tips), not the handles, provide friction so they don't slide",
                     ],
                 },
             ],
@@ -84,7 +99,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Your foot is trapped in a boot 24/7, getting sweaty and uncomfortable. Here are safe ways to wash your foot while keeping it protected.",
+                        "Your foot is trapped in a boot 24/7, getting sweaty and uncomfortable. **Always sit when washing** — use a shower stool. Keep your foot **toes-down** (pointed) whenever the boot is off during washing. Here are safe ways to wash your foot while keeping it protected.",
                 },
                 {
                     type: "card",
@@ -95,7 +110,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "A **[night splint](/standard/sleeping-with-boot)** (like the Thetis splint) is particularly useful for washing because it keeps your foot protected in the correct angle while allowing water to reach your skin. You can shower normally and let your foot dry before switching back to the boot.",
+                                "A **[night splint](/standard/sleeping-with-boot)** (like the Thetis splint) is particularly useful for washing because it keeps your foot protected in the correct angle (toes-down) while allowing water to reach your skin. **Sit** on a shower stool, shower normally, then dry your foot thoroughly (hairdryer on cool) before switching back to the boot.",
                         },
                         {
                             type: "product-image",
@@ -108,7 +123,7 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**Allows proper washing** — water reaches your skin, you can use soap",
-                                "**Maintains protection** — foot stays in correct angle (tip-toe position)",
+                                "**Maintains protection** — foot stays toes-down (tip-toe position) at all times",
                                 "**Better hygiene** — your foot actually gets clean, not just covered",
                                 "**Dries quickly** — open design allows air circulation",
                             ],
@@ -127,11 +142,16 @@ export const content: SectionContent = {
                     variant: "muted",
                     content: [
                         {
+                            type: "text",
+                            content:
+                                "**Sit** for all washing. Use OT aids to make it easier: a **long-handled sponge** or body brush lets you reach your foot without bending; a **basin** on a stool lets you wash your foot while seated with your leg supported. Keep your foot **toes-down** throughout.",
+                        },
+                        {
                             type: "list",
                             style: "bullet",
                             items: [
                                 "**Waterproof boot covers** — products like Limbo or dry cast covers let you shower with the boot on, but your foot stays enclosed and still gets sweaty",
-                                "**Seated washing** — sit on a shower stool, keep your leg out of the water, and wash your foot separately using a basin and cloth",
+                                "**Seated washing** — sit on a shower stool, keep your leg out of the water, and wash your foot separately using a basin and cloth. Use a long-handled sponge to reach your foot.",
                                 "**Baby wipes** — quick refresher for your foot between proper washes. Not a substitute for actual washing, but better than nothing",
                             ],
                         },
@@ -140,9 +160,9 @@ export const content: SectionContent = {
                 {
                     type: "alert",
                     variant: "warning",
-                    title: "Never remove the boot unsupported",
+                    title: "Never remove the boot unsupported — keep toes-down",
                     content:
-                        "If you're removing the boot to wash, you must keep your foot in a tip-toe position or supported by a splint. **Do not let your foot go flat** — this stretches the healing tendon and risks re-rupture. If you're unsure, ask your clinician to show you the safe technique.",
+                        "If you're removing the boot to wash, you must keep your foot **toes-down** (pointed) at all times, or supported by a splint. **Do not let your foot go flat** — this stretches the healing tendon and risks re-rupture. Sit when washing. If you're unsure, ask your clinician to show you the safe technique.",
                 },
             ],
         },
@@ -188,7 +208,7 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Merino wool socks** — naturally antibacterial, regulate temperature, and reduce odour far better than cotton. Many patients find them the single best quality-of-life upgrade during boot phase. Cost: £10–25 ($20–35).",
+                                "**Cotton or merino wool socks** — not nylon (nylon slips and doesn't absorb well). Merino is ideal: naturally antibacterial, regulates temperature, reduces odour. Cost: £10–25 ($20–35).",
                                 "**Change socks daily** — or twice daily if you're sweating heavily. Have several pairs ready.",
                                 "**Air the boot out** — when you're resting, loosen the straps and let air circulate. Remove the liner if possible and let it dry.",
                                 "**Check your skin** — look for red patches, blisters, or fungal patches (itchy, flaky, white skin between toes). Catch problems early.",
@@ -290,7 +310,7 @@ export const content: SectionContent = {
                             items: [
                                 "**Check daily** — look at your skin when you remove the boot (if allowed)",
                                 "**Keep clean** — wash your foot and leg daily if possible",
-                                "**Dry thoroughly** — moisture causes problems",
+                                "**Dry thoroughly** — moisture causes problems. Use a **hairdryer on cool setting** (never hot) to dry your foot after washing. Hot can damage skin or cause burns, especially with reduced sensation.",
                                 "**Use padding** — soft material under straps or pressure points",
                                 "**Change socks** — if you wear socks in the boot, change daily",
                                 "**Watch for problems** — redness, blisters, fungal patches (itchy, flaky skin)",
@@ -317,7 +337,7 @@ export const content: SectionContent = {
                 {
                     question: "How often should I wash my foot?",
                     answer:
-                        "Ideally daily, but this depends on your protocol. If you can use a night splint for washing, you can shower normally. If not, use seated washing or baby wipes between proper washes. The key is keeping your foot as clean as possible while maintaining protection.",
+                        "Ideally daily, but this depends on your protocol. If you can use a night splint for washing, sit on a shower stool and shower normally. If not, use seated washing (with a long-handled sponge and basin) or baby wipes between proper washes. Always sit when washing, keep your foot toes-down, and dry thoroughly with a hairdryer on cool. The key is keeping your foot as clean as possible while maintaining protection.",
                 },
             ],
         },

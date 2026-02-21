@@ -57,13 +57,13 @@ export const content: SectionContent = {
                 {
                     type: "card",
                     title: "The principle: gradual angle reduction",
-                    description: "A simple analogy to understand the system.",
+                    description: "Why we reduce the angle slowly.",
                     variant: "muted",
                     content: [
                         {
                             type: "text",
                             content:
-                                "Imagine your foot position as a **tower of blocks**. At the start, you need all the blocks to keep your foot pointed down — this brings the torn tendon ends close together. As the tendon heals, you remove blocks one by one (Aircast) or unlock the hinge step by step (VACOped), gradually bringing your foot to neutral. Do it too fast, and the tower collapses (tendon stretches or re-ruptures).",
+                                "Your foot starts very pointed down to protect the healing tendon. As new tissue forms and strengthens, you can gradually reduce the angle — either by removing wedges (Aircast) or adjusting the hinge (VACOped). The key is **gradual**: reduce too fast and you risk over-stretching or re-rupture; reduce at the right pace and the tendon adapts safely.",
                         },
                     ],
                 },
@@ -97,7 +97,7 @@ export const content: SectionContent = {
                                 {
                                     type: "text",
                                     content:
-                                        "From around **week 5**, your medical team will start you on **sequential** angle reduction. **Time intervals are set by your medical team** — they decide when you remove each wedge or adjust the hinge. For Aircast: remove the **bottom wedge first**, then the next, and so on. For VACOped: they'll guide hinge adjustments. Usually the foot is fairly flat (like in a shoe) by **week 10**. Then you progress out of the boot into a shoe with a heel lift.",
+                                        "**Most protocols start angle reduction at week 5.** Your medical team will start you on **sequential** angle reduction — **time intervals are set by your medical team**. For Aircast: remove the **bottom wedge first**, then the next, and so on. For VACOped: they'll guide hinge adjustments (unlocking the dial gradually). Usually the foot is fairly flat (like in a shoe) by **week 10**. Then you progress out of the boot into a shoe with a heel lift.",
                                 },
                                 {
                                     type: "list",
@@ -129,7 +129,7 @@ export const content: SectionContent = {
                                     type: "list",
                                     style: "bullet",
                                     items: [
-                                        "**More stress on the tendon** — the ends are slightly further apart",
+                                        "**More stress on the tendon** — you're putting slightly more stress on the healing tissue as the angle reduces; gradual reduction lets it adapt safely",
                                         "**You may feel more stretch** — this is normal, but shouldn't be severe pain",
                                         "**Your leg length changes** — you may need to adjust footwear on the other foot",
                                         "**You're one step closer to neutral** — this is good progress",
@@ -149,12 +149,12 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Wedge Removal: The Detailed Process",
+            title: "Angle reduction: wedges (Aircast) and hinge (VACOped)",
             content: [
                 {
                     type: "text",
                     content:
-                        "From around **week 5**, most protocols allow you to start removing wedges from your boot — a sign that your tendon has had time to begin healing. This gradual process brings your foot closer to a normal position, but it must be done carefully, in sequence (bottom wedge first), and at the intervals set by your medical team.",
+                        "**Most protocols start at week 5.** From then, you reduce the angle — either by removing wedges (Aircast) or adjusting the hinge (VACOped). The principle is the same: gradual reduction at intervals set by your medical team. Below we cover both boot types.",
                 },
                 {
                     type: "image",
@@ -165,47 +165,58 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Why we remove wedges gradually",
+                    title: "Aircast — why we remove wedges gradually",
                     description: "The tendon needs time to adapt.",
                     variant: "muted",
                     content: [
                         {
                             type: "text",
                             content:
-                                "Wedges hold your foot in a pointed-down position, keeping the torn tendon ends close together. As your tendon heals and new tissue forms, you can gradually reduce this angle. Think of it like **slowly letting out a rope** — you're giving the tendon more slack, but only when it's strong enough to handle it.",
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "Removing wedges too quickly can cause the tendon ends to separate, leading to a longer tendon and worse outcomes. Going too slowly keeps you in an uncomfortable position longer than necessary. Your clinician's protocol balances these risks.",
+                                "Wedges hold your foot in a pointed-down position. As your tendon heals and new tissue forms, you can gradually reduce this angle — remove the bottom wedge first, then the next. Reducing too quickly risks over-stretching or re-rupture. Your clinician's protocol balances safety with progress.",
                         },
                         {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Early weeks:** Maximum angle keeps ends closest together",
-                                "**Mid weeks:** Gradual reduction as new tissue strengthens",
+                                "**Early weeks:** Maximum angle; all wedges in",
+                                "**From week 5:** Gradual reduction, one wedge at a time (bottom first)",
                                 "**Later weeks:** Foot approaches neutral as healing progresses",
                             ],
                         },
                     ],
                 },
                 {
-                    type: "tip",
-                    title: "Simple analogy",
-                    content:
-                        "Imagine you're gluing two pieces of rope together. At first, you need to hold them very close. As the glue sets, you can gradually relax your grip — but if you let go too fast, the glue breaks. Wedge removal is like gradually relaxing your grip as the 'glue' (new tendon tissue) gets stronger.",
+                    type: "card",
+                    title: "VACOped — hinge adjustment",
+                    description: "Same principle, different mechanism.",
+                    variant: "muted",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "With a VACOped, you don't remove wedges — you **adjust the hinge dial**. From week 5, your clinician will guide you to unlock the hinge gradually, allowing more range of motion in steps. The principle is the same: gradual reduction at set intervals. Don't unlock too far too fast — follow your protocol exactly.",
+                        },
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "**Early weeks:** Hinge locked at maximum angle",
+                                "**From week 5:** Gradual hinge adjustment as instructed",
+                                "**Check the dial** — ensure it's set correctly each time you put the boot on",
+                            ],
+                        },
+                    ],
                 },
             ],
         },
         {
             type: "section",
-            title: "When to Start Removing Wedges",
+            title: "When to start reducing the angle",
             content: [
                 {
                     type: "text",
                     content:
-                        "**Most protocols do not start lowering the heel until week 5.** Starting earlier can elongate the tendon. Your medical team will tell you when to start and at what intervals to remove each wedge (bottom first) or adjust the hinge. **Never remove wedges without your clinician's approval.**",
+                        "**Most protocols do not start until week 5.** Starting earlier can elongate the tendon. Your medical team will tell you when to start and at what intervals to remove each wedge (Aircast, bottom first) or adjust the hinge (VACOped). **Never reduce the angle without your clinician's approval.**",
                 },
                 {
                     type: "card",
@@ -249,7 +260,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Important:** Even if you feel ready, don't remove wedges without your clinician's instruction. The timing is based on healing progress, not just how you feel.",
+                                "**Important:** Even if you feel ready, don't reduce the angle (remove wedges or adjust the hinge) without your clinician's instruction. The timing is based on healing progress, not just how you feel.",
                         },
                     ],
                 },
@@ -257,38 +268,28 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "How to Remove Wedges Safely",
+            title: "How to reduce the angle safely",
             content: [
                 {
                     type: "text",
                     content:
-                        "The process is usually straightforward, but doing it correctly matters. Here's how to do it safely:",
-                },
-                {
-                    type: "list",
-                    style: "numbered",
-                    items: [
-"**Check your protocol** — know exactly which wedge to remove and when",
-                                        "**Check wedges stay in place** — self-adhesive wedges can help prevent slipping; ensure they're secure each time you put the boot on",
-                                        "**Remove one wedge at a time** — never remove multiple wedges at once",
-                        "**Do it when resting** — remove wedges when you're sitting or lying down, not while walking",
-                        "**Keep your foot supported** — don't let your foot go flat unsupported",
-                        "**Watch for problems** — increased pain, swelling, or discomfort means slow down",
-                    ],
+                        "The process varies by boot type. Do it when resting (sitting or lying down), keep your foot supported, and watch for problems — increased pain, swelling, or discomfort means slow down.",
                 },
                 {
                     type: "card",
-                    title: "The safe technique",
-                    description: "Step-by-step process.",
+                    title: "Aircast — removing wedges",
+                    description: "Step-by-step.",
                     variant: "highlight",
                     content: [
                         {
                             type: "list",
                             style: "bullet",
                             items: [
+                                "**Check your protocol** — know exactly which wedge to remove and when",
+                                "**Check wedges stay in place** — self-adhesive wedges can help prevent slipping; ensure they're secure each time you put the boot on",
+                                "**Remove one wedge at a time** — never remove multiple wedges at once",
                                 "**Sit or lie down** — never remove wedges while standing",
-                                "**Loosen boot straps** — make it easier to access wedges",
-                                "**Remove the bottom wedge** — usually the first one removed (check your protocol)",
+                                "**Remove the bottom wedge first** — usually the first one (check your protocol)",
                                 "**Re-tighten straps** — ensure the boot fits snugly",
                                 "**Test gradually** — start with short periods, increase as tolerated",
                             ],
@@ -302,21 +303,39 @@ export const content: SectionContent = {
                     ],
                 },
                 {
+                    type: "card",
+                    title: "VACOped — adjusting the hinge",
+                    description: "Step-by-step.",
+                    variant: "highlight",
+                    content: [
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "**Check your protocol** — know when and how far to unlock the hinge",
+                                "**Adjust the dial gradually** — don't unlock too far in one step",
+                                "**Check the setting each time** — ensure the hinge is at the correct position when you put the boot on",
+                                "**If it feels unstable** — lock it back to a more restricted range and contact your clinic",
+                            ],
+                        },
+                    ],
+                },
+                {
                     type: "tip",
                     title: "Tiny change, big payoff",
                     content:
-                        "Remove wedges in the morning or during the day when you're active. This allows you to monitor how your tendon responds to the new angle throughout the day. If you experience significant pain or a feeling of over-stretching, you can easily put the wedge back and contact your clinic.",
+                        "Reduce the angle in the morning or during the day when you're active. This allows you to monitor how your tendon responds. If you experience significant pain or over-stretching, reverse the change (put the wedge back or lock the hinge) and contact your clinic.",
                 },
             ],
         },
         {
             type: "section",
-            title: "What to Expect During Wedge Removal",
+            title: "What to expect when you reduce the angle",
             content: [
                 {
                     type: "text",
                     content:
-                        "As you remove wedges, your foot angle changes. This can feel strange at first, and some discomfort is normal. Many people find it **feels tight as the heel gets lower** — that's expected; follow your team's schedule.",
+                        "As you reduce the angle (remove wedges or adjust the hinge), your foot position changes. This can feel strange at first, and some discomfort is normal. Many people find it **feels tight as the heel gets lower** — that's expected; follow your team's schedule.",
                 },
                 {
                     type: "card",
@@ -354,7 +373,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "If you experience any of these, **put the wedge back** and contact your clinician. It's better to go slower than risk re-injury.",
+                                "If you experience any of these, **reverse the change** (put the wedge back or lock the hinge) and contact your clinician. It's better to go slower than risk re-injury.",
                         },
                     ],
                 },
@@ -362,27 +381,27 @@ export const content: SectionContent = {
                     type: "tip",
                     title: "Progress isn't always linear",
                     content:
-                        "Some days you might feel ready to remove a wedge, other days you might need to put one back. This is normal. Healing isn't a straight line — listen to your body and follow your clinician's guidance.",
+                        "Some days you might feel ready to reduce the angle, other days you might need to reverse the change. This is normal. Healing isn't a straight line — listen to your body and follow your clinician's guidance.",
                 },
             ],
         },
         {
             type: "section",
-            title: "Practical Tips: Making Wedge Removal Easier",
+            title: "Practical tips",
             content: [
                 {
                     type: "text",
                     content:
-                        "A few simple strategies can make the wedge removal process smoother and more comfortable.",
+                        "A few simple strategies can make angle reduction smoother and more comfortable.",
                 },
                 {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**Remove wedges gradually** — don't rush the process, even if you feel ready",
-                        "**Elevate after removal** — helps reduce any swelling from the angle change",
+                        "**Reduce gradually** — don't rush, even if you feel ready (wedges: one at a time; hinge: small steps)",
+                        "**Elevate after each change** — helps reduce any swelling from the angle change",
                         "**Ice if needed** — if you get increased swelling, ice can help (always with a cloth barrier). Take the boot off to apply ice; keep your foot toes-down while icing.",
-                        "**Keep a log** — note when you removed each wedge and how you felt",
+                        "**Keep a log** — note when you made each change and how you felt",
                         "**Don't compare** — everyone's timeline is different, focus on your own progress",
                     ],
                 },
@@ -549,19 +568,19 @@ export const content: SectionContent = {
                         "Protocols vary widely between clinics and specialists. Some are more conservative, some are more accelerated. What matters is following YOUR specific protocol, not comparing with others. If you have concerns about your protocol, discuss them with your clinician.",
                 },
                 {
-                    question: "What if I accidentally removed too many wedges?",
+                    question: "What if I accidentally reduced the angle too much?",
                     answer:
-                        "Put the wedges back immediately. Don't walk on it until you've restored the correct angle. Contact your clinician to discuss — they may want to see you to check everything is okay. It's better to be safe than risk re-injury.",
+                        "Reverse the change immediately — put the wedges back (Aircast) or lock the hinge to a more restricted range (VACOped). Don't walk on it until you've restored the correct angle. Contact your clinician to discuss — they may want to see you to check everything is okay. It's better to be safe than risk re-injury.",
                 },
                 {
-                    question: "Can I remove wedges faster if I'm feeling good?",
+                    question: "Can I reduce the angle faster if I'm feeling good?",
                     answer:
-                        "No. Even if you feel great, follow your clinician's protocol. The timing is based on healing progress, not just how you feel. Removing wedges too quickly can cause the tendon ends to separate, leading to worse outcomes. Patience now = better function later.",
+                        "No. Even if you feel great, follow your clinician's protocol. The timing is based on healing progress, not just how you feel. Reducing too quickly risks over-stretching or re-rupture. Patience now = better function later.",
                 },
                 {
-                    question: "What if removing a wedge causes pain?",
+                    question: "What if reducing the angle causes pain?",
                     answer:
-                        "Some mild discomfort is normal. If you get significant pain, put the wedge back and wait longer. If pain persists even with the wedge back, contact your clinician. Don't push through severe pain — it's a sign to slow down.",
+                        "Some mild discomfort is normal. If you get significant pain, reverse the change (put the wedge back or lock the hinge) and wait longer. If pain persists even after reversing, contact your clinician. Don't push through severe pain — it's a sign to slow down.",
                 },
             ],
         },
@@ -576,11 +595,11 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        '**Timing:** "When should I start removing wedges? What\'s my specific protocol?"',
-                        '**Which wedge:** "Which wedge should I remove first? From the top or bottom?"',
-                        '**Pace:** "How often should I remove wedges? Weekly or every two weeks?"',
-                        '**Warning signs:** "What symptoms should make me put a wedge back or slow down?"',
-                        '**Pain:** "How much discomfort is normal when removing a wedge?"',
+                        '**Timing:** "When should I start reducing the angle? What\'s my specific protocol?"',
+                        '**Which wedge / hinge:** "Which wedge should I remove first? (Aircast) Or how do I adjust the hinge? (VACOped)"',
+                        '**Pace:** "How often should I reduce the angle? Weekly or every two weeks?"',
+                        '**Warning signs:** "What symptoms should make me reverse the change or slow down?"',
+                        '**Pain:** "How much discomfort is normal when reducing the angle?"',
                         '**After-hours:** "What should I do if I can\'t reach you after hours?"',
                     ],
                 },
@@ -600,7 +619,7 @@ export const content: SectionContent = {
                         "**Bottom wedge first** — then sequential removal (or hinge adjustment as instructed)",
                         "**Usually fairly flat by week 10** — then progress out of boot into a shoe with a heel lift",
                         "**One wedge at a time** — gradual is safe, fast is risky",
-                        "**Put wedges back if needed** — it's okay to go slower",
+                        "**Reverse the change if needed** — it's okay to go slower",
                         "**Some discomfort is normal** — severe pain is not",
                         "**When in doubt, ask** — contact your clinic if concerned",
                     ],

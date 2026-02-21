@@ -126,6 +126,60 @@ export const content: SectionContent = {
         },
         {
             type: "section",
+            title: "Alternative mobility aids — scooters and iWalk",
+            content: [
+                {
+                    type: "text",
+                    content:
+                        "Crutches aren't the only option. Some patients find **knee scooters** or the **iWalk** easier, especially if they struggle with crutch-related hand, wrist, or armpit pain.",
+                },
+                {
+                    type: "card",
+                    title: "Knee scooter",
+                    description: "Rolling platform for your knee.",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "**How it works:** You kneel on a padded platform and push with your good leg. Your injured leg stays in the boot, off the ground.",
+                                "**Pros:** Hands-free, no arm fatigue, easier for carrying things, good for longer distances",
+                                "**Cons:** Heavier, bulkier, not ideal for stairs or tight spaces; may not be suitable for all protocols (check with your clinician)",
+                                "**Cost:** £100–220 ($189–330). Available to buy or rent.",
+                            ],
+                        },
+                    ],
+                },
+                {
+                    type: "card",
+                    title: "iWalk (hands-free crutch)",
+                    description: "Lower-leg crutch that frees your hands.",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "**How it works:** A device that straps to your lower leg (below the knee) with a platform for your knee. Your injured leg is bent and non-weightbearing; you walk on your good leg while the iWalk supports the injured one.",
+                                "**Pros:** Hands completely free, more natural gait, easier for stairs than a knee scooter",
+                                "**Cons:** Learning curve, may not suit all body types or protocols; check with your clinician",
+                                "**Cost:** Similar to knee scooters. Available to buy or rent.",
+                            ],
+                        },
+                    ],
+                },
+                {
+                    type: "alert",
+                    variant: "info",
+                    title: "Check with your clinician",
+                    content:
+                        "Not all protocols allow knee scooters or iWalk — some require traditional crutches for specific reasons. Check before buying or renting.",
+                },
+            ],
+        },
+        {
+            type: "section",
             title: "Setting up your recovery station",
             content: [
                 {
@@ -156,7 +210,7 @@ export const content: SectionContent = {
                         },
                         {
                             text:
-                                "Top Tip: Lean crutches upside-down (grips on floor) against the wall — the rubber handles provide friction so they don't slide and fall over.",
+                                "Top Tip: Lean crutches upside-down against the wall — the rubber **feet** (crutch tips), not the handles, provide friction so they don't slide and fall over.",
                         },
                         {
                             text:

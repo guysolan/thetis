@@ -11,7 +11,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By Week 6, you can start Phase 1 exercises — seated calf raises with your boot removed. By Week 8, you're building strength and preparing for Phase 2: Transition. Understanding what Phase 2 and Phase 3 involve helps you see where you're going and why building strength now matters.",
+        "By Week 6, many protocols allow Phase 1 exercises — seated calf raises with your boot removed, **but only when protected** (heel wedge, support) or supervised. By Week 8, you're building strength and preparing for Phase 2: Transition. This lesson explains what to do and why — follow your clinician's protocol, don't skip ahead.",
     blocks: [
         {
             type: "heading",
@@ -24,7 +24,7 @@ export const content: SectionContent = {
             items: [
                 {
                     text:
-                        "Start Phase 1 exercises at Week 6 — seated calf raises with boot removed",
+                        "Phase 1 exercises only when protected (heel wedge) or supervised — check with clinician",
                 },
                 {
                     text:
@@ -36,7 +36,7 @@ export const content: SectionContent = {
                 },
                 {
                     text:
-                        "Understand Phase 2 goals — know what you're working toward (15+ single-leg heel raises, balance, strength)",
+                        "Understand Phase 2 goals — but don't skip ahead; follow your protocol",
                 },
                 {
                     text:
@@ -49,9 +49,16 @@ export const content: SectionContent = {
             title: "Phase 1 Exercises: Starting at Week 6",
             content: [
                 {
+                    type: "alert",
+                    variant: "warning",
+                    title: "Protection first",
+                    content:
+                        "**Seated exercises with boot removed** should only be done when your foot is in a **protected position** (e.g. heel wedge or support keeping it pointed down) **or when supervised** by your clinician or physiotherapist. Never remove the boot and let your foot go flat unsupported — that stresses the healing tendon.",
+                },
+                {
                     type: "text",
                     content:
-                        "**Week 6 is when you can start Phase 1 exercises** — seated calf raises with your boot removed. These exercises build strength while your tendon heals and are essential for your recovery. When you start physiotherapy around Week 11, you'll see the complete rehabilitation protocol table in [Starting Physiotherapy](/standard/starting-physio), which shows all phases from immobilization through to return to sport.",
+                        "**Week 6** is when many protocols allow Phase 1 exercises — seated calf raises with your boot removed. **Check with your clinician** before starting. These exercises build strength while your tendon heals. When you start physiotherapy around Week 11, you'll see the complete rehabilitation protocol in [Starting Physiotherapy](/standard/starting-physio).",
                 },
                 {
                     type: "card",
@@ -63,23 +70,24 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "Starting at Week 6, you can begin seated calf raises with your boot removed:",
+                                "**When to start:** Week 6 (or when your clinician says). **Protection:** Keep your foot in a protected position — use a heel wedge under your foot, or an open boot/splint that maintains the pointed-down angle. Some clinicians prefer you do these **supervised** initially. Starting at Week 6:",
                         },
                         {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Week 6**: Start with body weight or leg weight only — remove boot, sit with foot in [plantarflexion](/standard/emergency-care) (pointed down), push through big toe and lift heel. Get used to the movement.",
-                                "**Week 3+**: Add load gradually — start with 10-15kg on your knee, progress to 0.8-1x body weight",
-                                "**Position**: Foot must be pointed down — this is the safe position",
+                                "**Week 6**: Start with body weight or leg weight only — remove boot only when protected (heel wedge or supervised). Sit with foot in [plantarflexion](/standard/emergency-care) (pointed down), push through big toe and lift heel.",
+                                "**Week 7+**: Add load gradually — start with 10-15kg on your knee, progress to 0.8-1x body weight",
+                                "**Position**: Foot must stay pointed down — use heel wedge or support to maintain protection",
                                 "**Target**: Build up to holding body weight in the pointed-down position",
                             ],
                         },
+                        // IMAGE TO UPDATE: Illustration should show PROTECTION — heel wedge under foot, or foot clearly supported in plantarflexion. Current image may not show protection.
                         {
                             type: "image",
                             src: SeatedCalfRaisePhase1,
-                            alt: "Illustration showing seated calf raise exercise with weight on knee, foot pointed down",
-                            caption: "Seated calf raise — the key Phase 1 exercise",
+                            alt: "Illustration showing seated calf raise with heel wedge or support under foot to keep it pointed down (protected position), weight on knee",
+                            caption: "Seated calf raise — foot must stay in protected position (heel wedge or support)",
                         },
                         {
                             type: "text",
@@ -110,7 +118,7 @@ export const content: SectionContent = {
                     variant: "info",
                     title: "Important",
                     content:
-                        "**Do not start exercises before Week 6** without your clinician's explicit approval. Your tendon needs time to begin healing before you start loading it. Always check with your clinician before starting exercises. Exercises must be done with foot pointed down — this is the safe position.",
+                        "**Do not start exercises before Week 6** without your clinician's explicit approval. Exercises with boot removed require **protection** (heel wedge, support, or supervised setting). Always check with your clinician — they may want you supervised initially or will specify how to protect your foot.",
                 },
             ],
         },
@@ -216,6 +224,13 @@ export const content: SectionContent = {
                         "You're currently in **Phase 1: Protection** (weeks 0-10). As you build strength, you're preparing for **Phase 2: Transition** (weeks 10-12) and eventually **Phase 3: Capacity** (weeks 12-26). For the full 4-phase picture, see [The Achilles Recovery Roadmap](/standard/recovery-roadmap).",
                 },
                 {
+                    type: "alert",
+                    variant: "info",
+                    title: "Don't skip ahead",
+                    content:
+                        "This is to help you understand the journey — **don't rush ahead or skip phases**. Follow your clinician's protocol. Phase 2 and Phase 3 start when your clinician says you're ready, not before.",
+                },
+                {
                     type: "card",
                     title: "Learn more about Phase 2 and Phase 3",
                     description: "Detailed goals and progression.",
@@ -286,14 +301,15 @@ export const content: SectionContent = {
             title: "If you remember nothing else",
             variant: "highlight",
             content: [
-                {
-                    type: "list",
-                    style: "bullet",
-                    items: [
-                        "**Start Phase 1 exercises at Week 6** — seated calf raises build strength safely",
-                        "**Follow mobilisation protocol** — don't rush ahead",
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "**Phase 1 exercises only when protected or supervised** — heel wedge, support, or clinician supervision; never boot off with foot unsupported",
+                                "**Start at Week 6** (or when clinician says) — seated calf raises build strength safely",
+                                "**Follow mobilisation protocol** — don't rush ahead",
                         "**Focus on good gait** — heel-to-toe pattern, use EVENup to prevent back/hip pain",
-                        "**Understand Phase 2 goals** — know what you're working toward",
+                        "**Don't skip ahead** — Phase 2 starts when your clinician says you're ready",
                         "**Be patient** — strength builds gradually",
                     ],
                 },
