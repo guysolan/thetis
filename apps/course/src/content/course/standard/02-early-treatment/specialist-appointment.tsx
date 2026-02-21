@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import ThompsonTest from "@/assets/thompson-test.png";
+import SimmondsTest from "@/assets/thompson-test.png"; // IMAGE TO UPDATE: rename to simmonds-test.png
 
 export const metadata = {
     slug: "specialist-appointment",
@@ -110,15 +110,15 @@ export const content: SectionContent = {
                                     items: [
                                         "**Look** at both ankles — comparing swelling, bruising, and calf muscle bulk",
                                         "**Feel** (palpate) the tendon — checking for a gap or indent",
-                                        "**Squeeze your calf** (Thompson/Simmonds test) — in a healthy tendon, this makes your foot point down; in a rupture, it doesn't move",
+                                        "**Squeeze your calf** (Simmonds/Thompson test — the name varies by country) — in a healthy tendon, this makes your foot point down; in a rupture, it doesn't move",
                                         "**Compare both sides** — they may ask you to point your toes or stand on tiptoe (if safe)",
                                     ],
                                 },
                                 {
                                     type: "card",
-                                    title: "The Thompson test (calf squeeze)",
+                                    title: "The Simmonds/Thompson test (calf squeeze)",
                                     description:
-                                        "The key clinical test for Achilles rupture.",
+                                        "The key clinical test for Achilles rupture. Called the Simmonds test in the UK (where it was first described) and the Thompson test in the USA.",
                                     variant: "muted",
                                     content: [
                                         {
@@ -130,10 +130,10 @@ export const content: SectionContent = {
                                 },
                                 {
                                     type: "image",
-                                    src: ThompsonTest,
-                                    alt: "Side-by-side diagram showing the Thompson test: squeezing the calf makes the foot point down in a healthy tendon (plantarflexion), but no movement in a ruptured tendon",
+                                    src: SimmondsTest,
+                                    alt: "Side-by-side diagram showing the Simmonds/Thompson test: squeezing the calf makes the foot point down in a healthy tendon (plantarflexion), but no movement in a ruptured tendon",
                                     caption:
-                                        "The Thompson test — squeezing the calf should make your foot point down if the tendon is intact",
+                                        "The Simmonds/Thompson test — squeezing the calf should make your foot point down if the tendon is intact",
                                 },
                             ],
                         },
@@ -173,7 +173,7 @@ export const content: SectionContent = {
                                                 [
                                                     "What it shows",
                                                     "Tendon ends, gap, real-time movement",
-                                                    "More detail, better for complex cases",
+                                                    "Bones, joints, and ligaments as well as the Achilles tendon",
                                                 ],
                                                 [
                                                     "Who does it?",
@@ -185,7 +185,7 @@ export const content: SectionContent = {
                                         {
                                             type: "text",
                                             content:
-                                                "**Ultrasound** is the most common first-line imaging. **MRI** is sometimes used if the diagnosis is unclear or if surgery is being planned.",
+                                                "**Ultrasound** is the most common first-line imaging. **MRI** is not necessarily better — it simply shows different structures (bones, joints, ligaments) alongside the tendon. MRI is sometimes used if the diagnosis is unclear or if surgery is being planned.",
                                         },
                                     ],
                                 },
@@ -193,7 +193,7 @@ export const content: SectionContent = {
                                     type: "tip",
                                     title: 'What\'s a "gap" measurement?',
                                     content:
-                                        'On ultrasound, they may measure the distance between the torn tendon ends (e.g. "4 cm gap"). What matters clinically is often whether the ends **come together** when your foot is pointed down. A large gap with good apposition may still heal non-surgically. Don\'t panic at the number — ask what it means for your specific plan.',
+                                        'With an ultrasound scan, it is possible to measure the distance between the two torn ends of the tendon (the gap). The size of the gap when your foot is hanging loose does not really matter. What is more important is whether, when your foot is pushed into a tiptoe position, the gap reduces and the tendon ends sit nicely together. This is called **apposition**. If the tendon ends are together, they can heal extremely reliably without the need for surgery. Don\'t panic about the size of the gap that you may hear discussed — ask your doctors what this means for your specific treatment plan.',
                                 },
                             ],
                         },
@@ -342,7 +342,7 @@ export const content: SectionContent = {
                 {
                     question: "When can I drive / go back to work?",
                     answer:
-                        "We cover driving in a later section (typically weeks 8–10 for automatic cars on the left foot). Work depends on your job — desk roles may resume earlier with adjustments. Ask your specialist for a timeline specific to your situation.",
+                        "We cover driving in a later section. As a general rule, if your **left leg** is injured, you can drive an automatic with your right leg as soon as you are safe getting in and out of the car (assuming the boot does not get in the way of the pedals). If it is your **right leg**, or you have a **manual car**, driving will unfortunately have to wait approximately three months (unless you modify the pedals). Work depends on your job — desk roles may resume earlier with adjustments. Ask your specialist for a timeline specific to your situation.",
                 },
             ],
         },
