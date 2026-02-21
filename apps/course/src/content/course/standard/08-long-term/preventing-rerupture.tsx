@@ -56,7 +56,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Re-rupture risk is **3-5%** — low but not negligible. Risk is highest during early rehab (weeks 0-8) and boot removal (weeks 8-12), but ongoing risk requires ongoing prevention. See [Healing Process](/standard/healing-process) for the full timeline and details.",
+                        "Re-rupture risk is **3-5%** — low but not negligible. Risk is highest during early rehab (weeks 0-10) and boot removal (weeks 10-12), but ongoing risk requires ongoing prevention. See [Healing Process](/standard/healing-process) for the full timeline and details.",
                 },
                 {
                     type: "card",
@@ -68,7 +68,7 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Early rehab (weeks 0-8)** — tendon is weakest, high risk",
+                                "**Early rehab (weeks 0-10)** — tendon is weakest, high risk",
                                 "**Boot removal (weeks 10-12)** — sudden increase in loading",
                                 "**Return to sport too early** — before meeting criteria",
                                 "**Fatigue** — tired muscles can't protect tendon",

@@ -10,43 +10,97 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "Recovery is a marathon. We divide the 9–12 month journey into four phases based on criteria, not just the calendar.",
+        "Recovery is a marathon. Whether you've just been diagnosed or you're further along, this page gives you the full picture. We divide the 9–12 month journey into four phases based on criteria, not just the calendar.",
     blocks: [
         {
             type: "image",
             src: RecoveryRoadmap4Phases,
-            alt: "Infographic showing the 4 phases of Achilles recovery: Protection (Weeks 0-8), Transition (Weeks 8-12), Capacity (Weeks 12-26), and Return to Sport (Weeks 26+)",
+            alt: "Infographic showing the 4 phases of Achilles recovery: Protection (Weeks 0-10), Transition (Weeks 10-12), Capacity (Weeks 12-26), and Return to Sport (Weeks 26+)",
             caption: "The 4 phases of recovery — from protection to return to sport",
         },
         {
             type: "section",
-            title: "The 4 Phases of Recovery",
+            title: "The 4 Phases at a Glance",
             content: [
                 {
-                    type: "table",
-                    headers: ["Phase", "Focus", "Key Milestone"],
-                    rows: [
-                        [
-                            "**1: Protection**",
-                            "Protecting the healing tendon.",
-                            "End of boot protocol (Wk 8-10)",
-                        ],
-                        [
-                            "**2: Transition**",
-                            "Learning to walk normally.",
-                            "Pain-free walking (Wk 10-12)",
-                        ],
-                        [
-                            "**3: Capacity**",
-                            "Single-leg strength.",
-                            "25 Single-leg heel raises",
-                        ],
-                        [
-                            "**4: Return to Sport**",
-                            "Power and impact.",
-                            "Full competition (6-12m)",
-                        ],
+                    type: "text",
+                    content:
+                        "Each phase has a clear focus and a key milestone. You move on when you meet the criteria, not just when the calendar says.",
+                },
+                {
+                    type: "card",
+                    title: "1. Protection — Weeks 0–10",
+                    description: "In the boot: protecting the healing tendon",
+                    variant: "highlight",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "Your foot stays pointed down in the boot. Most protocols keep maximum angle until **week 5**, when wedge removal or hinge adjustment typically begins. The boot usually comes off around **week 10**.",
+                        },
+                        {
+                            type: "text",
+                            content: "**Key milestone:** End of boot protocol (week 8–10)",
+                        },
                     ],
+                },
+                {
+                    type: "card",
+                    title: "2. Transition — Weeks 10–12",
+                    description: "Out of the boot: learning to walk normally",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "First steps in shoes (often with a heel lift), rebuilding confidence and a normal walking pattern. Physiotherapy usually starts in this phase.",
+                        },
+                        {
+                            type: "text",
+                            content: "**Key milestone:** Pain-free walking (week 10–12)",
+                        },
+                    ],
+                },
+                {
+                    type: "card",
+                    title: "3. Capacity — Weeks 12–26",
+                    description: "Building single-leg strength",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "Progressive strengthening, balance, and function. The main target: enough strength to move safely to higher-impact activity.",
+                        },
+                        {
+                            type: "text",
+                            content: "**Key milestone:** 25 single-leg heel raises",
+                        },
+                    ],
+                },
+                {
+                    type: "card",
+                    title: "4. Return to Sport — Week 26+",
+                    description: "Power, impact, and full competition",
+                    variant: "default",
+                    content: [
+                        {
+                            type: "text",
+                            content:
+                                "Running, jumping, and sport-specific training. Return to full competition is typically 6–12 months after injury.",
+                        },
+                        {
+                            type: "text",
+                            content: "**Key milestone:** Full return to sport (when criteria met)",
+                        },
+                    ],
+                },
+                {
+                    type: "alert",
+                    variant: "info",
+                    title: "Week 5: a common pinch point",
+                    content:
+                        "Around **week 5** most protocols start lowering your heel (wedge removal or hinge adjustment). It often **feels tighter or more uncomfortable** as the foot comes down — that's normal. Don't rush; follow your team's schedule.",
                 },
             ],
         },

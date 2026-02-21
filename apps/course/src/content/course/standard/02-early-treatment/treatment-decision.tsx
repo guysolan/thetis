@@ -160,6 +160,7 @@ export const content: SectionContent = {
                                     type: "list",
                                     style: "bullet",
                                     items: [
+                                        "**Anaesthesia risks** — general and regional anaesthesia carry small risks",
                                         "**Wound infection** (2–4% risk) — can delay recovery",
                                         "**Wound healing problems** — may need additional treatment",
                                         "**Nerve damage** — can cause numbness or tingling (usually temporary)",
@@ -188,7 +189,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Non-surgical (also called conservative) treatment lets the tendon heal on its own, using a boot with wedges to hold your foot in the correct position.",
+                        "Non-surgical (also called conservative) treatment lets the tendon heal on its own, using a plaster cast or boot with wedges to hold your foot in the correct position.",
                 },
                 {
                     type: "accordion",
@@ -200,7 +201,7 @@ export const content: SectionContent = {
                                     type: "list",
                                     style: "bullet",
                                     items: [
-                                        "Wearing a walking boot with heel wedges for approximately 10 weeks",
+                                        "Wearing a plaster cast or walking boot with heel wedges for approximately 10 weeks",
                                         "Gradually removing wedges to bring your foot to a neutral position",
                                         "Progressive mobilisation as your protocol allows",
                                         "Same physiotherapy and strengthening as surgical patients",
@@ -220,7 +221,7 @@ export const content: SectionContent = {
                                     type: "list",
                                     style: "bullet",
                                     items: [
-                                        "Weeks 0–2: Boot with maximum wedges, Non Weightbearing or Limited Weightbearing",
+                                        "Weeks 0–2: Plaster cast or boot with maximum wedges, Non Weightbearing or Limited Weightbearing",
                                         "Weeks 2–10: Gradual wedge removal, progressive mobilisation",
                                         "Weeks 10–12: Transition out of boot, start physiotherapy",
                                         "Total recovery: 6–12 months (same as surgical)",
@@ -237,6 +238,7 @@ export const content: SectionContent = {
                                     style: "bullet",
                                     items: [
                                         "**No surgery risks** — no infection, no wound problems, no nerve damage",
+                                        "**No anaesthesia risks** — avoids the risks of general or regional anaesthesia",
                                         "**Lower overall complication rate**",
                                         "**No hospital stay** — can start treatment immediately",
                                         "**Lower cost** — no surgery or anaesthesia fees",
@@ -300,7 +302,7 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**Tendon ends come together well** — if the gap closes when your foot is pointed down",
-                                "**Want to avoid surgery risks** — infection, wound problems, nerve damage",
+                                "**Want to avoid surgery risks** — infection, wound problems, nerve damage, anaesthesia",
                                 "**Older or less active** — though non-surgical works well for active people too",
                                 "**Medical conditions** — if you have conditions that make surgery riskier",
                                 "**Cost concerns** — non-surgical is typically less expensive",

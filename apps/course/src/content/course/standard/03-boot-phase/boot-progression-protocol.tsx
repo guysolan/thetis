@@ -11,7 +11,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "Your boot protocol is the core of **Phase 1: Protection**. Most protocols keep you at maximum angle until **week 5**; then you reduce the angle in steps (remove wedges — bottom first — or adjust the hinge) at intervals set by your medical team. Usually the foot is fairly flat by **week 10**, then you progress out of the boot into a shoe with a heel lift. Mobilisation progresses alongside.",
+        "Your boot protocol is the core of **Phase 1: Protection**. (See [The Achilles Recovery Roadmap](/standard/recovery-roadmap) for the full 4-phase overview.) Most protocols keep you at maximum angle until **week 5**; then you reduce the angle in steps (remove wedges — bottom first — or adjust the hinge) at intervals set by your medical team. Usually the foot is fairly flat by **week 10**, then you progress out of the boot into a shoe with a heel lift. Mobilisation progresses alongside.",
 
     blocks: [
         {
@@ -315,7 +315,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "As you remove wedges, your foot angle changes. This can feel strange at first, and some discomfort is normal.",
+                        "As you remove wedges, your foot angle changes. This can feel strange at first, and some discomfort is normal. Many people find it **feels tight as the heel gets lower** — that's expected; follow your team's schedule.",
                 },
                 {
                     type: "card",
@@ -327,6 +327,7 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**Feeling different** — your foot will be in a new position, which feels odd initially",
+                                "**Tightness as the heel gets lower** — common around week 5 when angle reduction starts; usually normal",
                                 "**Mild discomfort** — some stretching sensation is normal as the angle changes",
                                 "**Temporary stiffness** — your ankle may feel stiffer for a day or two",
                                 "**Swelling variation** — slight increase in swelling is common and usually settles",
@@ -379,7 +380,7 @@ export const content: SectionContent = {
                     items: [
                         "**Remove wedges gradually** — don't rush the process, even if you feel ready",
                         "**Elevate after removal** — helps reduce any swelling from the angle change",
-                        "**Ice if needed** — if you get increased swelling, ice can help (always with a cloth barrier)",
+                        "**Ice if needed** — if you get increased swelling, ice can help (always with a cloth barrier). Take the boot off to apply ice; keep your foot toes-down while icing.",
                         "**Keep a log** — note when you removed each wedge and how you felt",
                         "**Don't compare** — everyone's timeline is different, focus on your own progress",
                     ],

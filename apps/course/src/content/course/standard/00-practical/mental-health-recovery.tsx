@@ -10,7 +10,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "Recovery from an Achilles rupture isn't just physical — it's psychological too. Frustration, anxiety, depression, and fear of re-injury are all normal parts of this journey. You're not alone in these feelings, and addressing your mental health is just as important as your physical recovery. This lesson helps you understand what's normal, when to seek help, and practical strategies for managing your mental health during recovery.",
+        "This lesson stands on its own — you don't need to have read any other lesson first. Recovery from an Achilles rupture isn't just physical — it's psychological too. Frustration, anxiety, depression, and fear of re-injury are all normal parts of this journey. You're not alone in these feelings, and addressing your mental health is just as important as your physical recovery. This lesson helps you understand what's normal, when to seek help, and practical strategies for managing your mental health during recovery.",
     blocks: [
         {
             type: "heading",
@@ -105,7 +105,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Why it happens:** Loss of activity, isolation, pain, disrupted sleep, feeling dependent on others.",
+                                "**Why it happens:** Loss of activity, isolation, disrupted sleep, feeling dependent on others.",
                         },
                         {
                             type: "list",
@@ -407,7 +407,7 @@ export const content: SectionContent = {
                 {
                     question: "Is it normal to feel depressed during recovery?",
                     answer:
-                        "Yes, it's very normal. Recovery is challenging — you've lost your normal activities, you're in pain, you're isolated, and progress feels slow. Occasional low mood is expected. However, if you're feeling persistently down, unable to function, or having thoughts of self-harm, seek professional help.",
+                        "Yes, it's very normal. Recovery is challenging — you've lost your normal activities, you're isolated, and progress feels slow. Occasional low mood is expected. However, if you're feeling persistently down, unable to function, or having thoughts of self-harm, seek professional help.",
                 },
                 {
                     question: "How do I deal with fear of re-injury?",

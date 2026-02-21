@@ -10,7 +10,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "Pain varies hugely between people. Some have intense pain at rupture that fades quickly; others have very little pain throughout. Both are normal. This lesson covers what to expect, when to be concerned, and how to manage pain at each stage.",
+        "This lesson stands on its own — you don't need to have read any other lesson first. Pain varies hugely between people. Some have intense pain at rupture that fades quickly; others have very little pain throughout. Both are normal. This lesson covers what to expect, when to be concerned, and how to manage pain at each stage.",
     blocks: [
         {
             type: "alert",
@@ -50,6 +50,11 @@ export const content: SectionContent = {
             title: "Pain at Different Stages",
             content: [
                 {
+                    type: "text",
+                    content:
+                        "Pain in the early phases is often thought of as **weeks 0–1** (acute) and **weeks 2–8** (boot phase). A key moment is **around week 5**, when many protocols start lowering the heel — it often feels tighter or more uncomfortable as the heel drops; that's normal.",
+                },
+                {
                     type: "table",
                     headers: ["Stage", "What to Expect", "Management"],
                     rows: [
@@ -59,8 +64,18 @@ export const content: SectionContent = {
                             "Pain medication, ice, elevation, rest",
                         ],
                         [
-                            "**Weeks 2-8**",
+                            "**Weeks 2-4**",
                             "Discomfort rather than severe pain. Pressure from boot, stiffness.",
+                            "Adjust straps, padding, medication if needed",
+                        ],
+                        [
+                            "**Around week 5**",
+                            "Many protocols start lowering the heel (wedge removal). It often **feels tight or more uncomfortable** as the heel gets lower — this is normal.",
+                            "Follow your team's schedule; don't remove wedges early. Ice if needed (boot off, toes down).",
+                        ],
+                        [
+                            "**Weeks 6-8**",
+                            "Continued angle reduction. Discomfort may ease as you adapt.",
                             "Adjust straps, padding, medication if needed",
                         ],
                         [
@@ -129,7 +144,7 @@ export const content: SectionContent = {
                     items: [
                         "**Paracetamol:** Safe, effective for most. Follow dosage instructions.",
                         "**Ibuprofen/naproxen:** Anti-inflammatories, help with pain and swelling. Check with doctor if on blood thinners.",
-                        "**Ice:** 15-20 minutes, wrapped in cloth, after activity or when swollen.",
+                        "**Ice:** 15-20 minutes, wrapped in cloth, after activity or when swollen. **Boot must be removed to apply ice** — you cannot ice properly through the boot. Keep your foot **toes-down (pointed)** while icing; **do not** let the ankle drift into a toes-up position, as that can stress the healing tendon.",
                         "**Elevation:** Ankle above heart level, especially after activity.",
                         "**Activity modification:** If pain increases, do less. Progress gradually.",
                     ],

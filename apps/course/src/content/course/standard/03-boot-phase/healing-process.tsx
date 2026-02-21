@@ -54,7 +54,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Tendon healing happens in three overlapping biological stages. You're currently in **Phase 1: Protection** of your recovery, but inside the tendon, you are in the **proliferative stage** — the most critical period for building new tissue.",
+                        "Tendon healing happens in three overlapping biological stages. You're currently in **Phase 1: Protection** of your recovery (see [The Achilles Recovery Roadmap](/standard/recovery-roadmap) for the full journey), but inside the tendon, you are in the **proliferative stage** — the most critical period for building new tissue.",
                 },
                 {
                     type: "image",
@@ -150,7 +150,7 @@ export const content: SectionContent = {
                 {
                     type: "image",
                     src: ReRuptureRiskTimeline,
-                    alt: "Timeline diagram showing re-rupture risk periods (early rehab weeks 0-8, boot removal weeks 8-12) and why elongation is the bigger problem than re-rupture",
+                    alt: "Timeline diagram showing re-rupture risk periods (early rehab weeks 0-10, boot removal weeks 10-12) and why elongation is the bigger problem than re-rupture",
                     caption:
                         "Re-rupture risk timeline: when risks are highest, and why elongation is the bigger concern",
                 },
@@ -169,7 +169,7 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Re-rupture risk (3-5%)**: Low but serious. Highest during early rehab (weeks 0-8) and boot removal (weeks 8-12)",
+                                "**Re-rupture risk (3-5%)**: Low but serious. Highest during early rehab (weeks 0-10) and boot removal (weeks 10-12)",
                                 "**Elongation risk**: Affects everyone to some degree. This is the **bigger problem** — it prevents return to sport and affects power",
                                 "**Key message**: Re-rupture is rare if you follow protocol, but elongation affects everyone and is harder to fix",
                             ],

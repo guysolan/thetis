@@ -143,7 +143,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Now that you're starting physiotherapy, it's important to understand where you are in the recovery journey. The four phases are: **Phase 1: Protection** (weeks 0-8), **Phase 2: Transition** (weeks 8-12), **Phase 3: Capacity** (weeks 12-26), and **Phase 4: Return to Sport** (weeks 26+). You're now entering Phase 2.",
+                        "Now that you're starting physiotherapy, it's important to understand where you are in the recovery journey. The four phases are: **Phase 1: Protection** (weeks 0-10), **Phase 2: Transition** (weeks 10-12), **Phase 3: Capacity** (weeks 12-26), and **Phase 4: Return to Sport** (weeks 26+). You're now entering Phase 2. For the full overview with key milestones, see [The Achilles Recovery Roadmap](/standard/recovery-roadmap).",
                 },
                 {
                     type: "rehab-protocol-table",
@@ -157,7 +157,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "You're now in **Phase 2: Transition** (weeks 8-12). You've completed Phase 1 (Protection), and now you're rebuilding the ability to walk normally and move your ankle freely. This is where active recovery begins.",
+                                "You're now in **Phase 2: Transition** (weeks 10-12). You've completed Phase 1 (Protection), and now you're rebuilding the ability to walk normally and move your ankle freely. This is where active recovery begins.",
                         },
                     ],
                 },
@@ -599,7 +599,7 @@ export const content: SectionContent = {
                 {
                     question: "How long will Phase 2 take?",
                     answer:
-                        "Phase 2 typically lasts 4-6 weeks (weeks 8-12 after injury). But progress varies — some people move faster, others slower. Focus on meeting criteria rather than timelines. Your physio will assess when you're ready for Phase 3.",
+                        "Phase 2 typically spans weeks 10-12 after injury. But progress varies — some people move faster, others slower. Focus on meeting criteria rather than timelines. Your physio will assess when you're ready for Phase 3.",
                 },
                 {
                     question: "What if physio is painful?",

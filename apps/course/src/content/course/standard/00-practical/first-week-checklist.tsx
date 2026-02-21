@@ -64,7 +64,7 @@ export const content: SectionContent = {
                         },
                         {
                             text:
-                                "Use ice for comfort during the first 3–4 days (if appropriate)",
+                                "Use ice for comfort during the first 3–4 days (if appropriate) — boot off to apply ice; keep foot toes-down while icing",
                         },
                         {
                             text:
@@ -126,23 +126,22 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "You're currently in **Phase 1: Immobilization Period** (weeks 0-6). Right now, your focus is on protecting your tendon and allowing it to heal. Exercises will start at Week 6, but for now, protection and healing are the priorities.",
+                                "You're currently in **Phase 1: Protection** (weeks 0-10). Right now, your focus is on protecting your tendon and allowing it to heal. Exercises will start around Week 6, but the boot usually stays on until around Week 10.",
                         },
                         {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Phase 1 (Weeks 0-6):** Immobilization — protection and healing",
-                                "**Phase 2: Transition (Weeks 8-12):** Rebuilding strength and balance",
+                                "**Phase 1: Protection (Weeks 0-10):** In the boot — protection and healing",
+                                "**Phase 2: Transition (Weeks 10-12):** Rebuilding strength and balance",
                                 "**Phase 3: Capacity (Weeks 12-26):** Building endurance and function",
-                                "**Phase 4 (Weeks 18+):** Single leg power — explosive strength and sport-specific training",
-                                "**Phase 5:** Return to sport — when you're ready",
+                                "**Phase 4: Return to Sport (Week 26+):** Power and full return when ready",
                             ],
                         },
                         {
                             type: "text",
                             content:
-                                "Don't worry about phases 2-5 yet. Focus on Week 1. When you start physiotherapy around Week 11, you'll get the full rehabilitation roadmap with specific exercises and goals for each phase.",
+                                "Don't worry about phases 2-5 yet. Focus on Week 1. For the full 4-phase overview (Protection, Transition, Capacity, Return to Sport), see [The Achilles Recovery Roadmap](/standard/recovery-roadmap). When you start physiotherapy around Week 11, you'll get specific exercises and goals for each phase.",
                         },
                     ],
                 },

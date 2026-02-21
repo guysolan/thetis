@@ -381,7 +381,7 @@ export const content: SectionContent = {
                         "**Start small** — begin with just a few steps, build up gradually",
                         "**Rest frequently** — your calf will tire quickly, rest when needed",
                         "**Elevate when resting** — helps control swelling",
-                        "**Ice if needed** — if swelling increases, ice can help",
+                        "**Ice if needed** — if swelling increases, ice can help (boot off to apply; keep foot toes-down while icing)",
                         "**Use crutches initially** — if you're limping significantly, use crutches for support",
                         "**Be patient** — this transition takes time, don't rush it",
                         "**Listen to your body** — if something doesn't feel right, slow down or rest",

@@ -213,7 +213,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "You're currently in **Phase 1: Protection** (weeks 0-8). As you build strength, you're preparing for **Phase 2: Transition** (weeks 8-12) and eventually **Phase 3: Capacity** (weeks 12-26).",
+                        "You're currently in **Phase 1: Protection** (weeks 0-10). As you build strength, you're preparing for **Phase 2: Transition** (weeks 10-12) and eventually **Phase 3: Capacity** (weeks 12-26). For the full 4-phase picture, see [The Achilles Recovery Roadmap](/standard/recovery-roadmap).",
                 },
                 {
                     type: "card",

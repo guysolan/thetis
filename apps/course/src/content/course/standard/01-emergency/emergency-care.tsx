@@ -67,7 +67,7 @@ export const content: SectionContent = {
       type: "tip",
       title: "Recovery timeline (the short version)",
       content:
-        "You'll be walking without crutches much sooner — often from **Week 2 onwards** (though you'll still need your boot). We'll break this down week by week — don't try to skip ahead.",
+        "You'll be walking without crutches much sooner — often from **Week 2 onwards** (though you'll still need your boot). For the full picture of all 4 phases (Protection → Transition → Capacity → Return to Sport), see [The Achilles Recovery Roadmap](/standard/recovery-roadmap). We'll break things down week by week — don't try to skip ahead.",
     },
     {
       type: "section",
@@ -340,7 +340,7 @@ export const content: SectionContent = {
                   items: [
                     "**Paracetamol:** This is the British name for the painkiller also known as acetaminophen. It's safe and effective for most people. Follow the dosage instructions on the packet.",
                     "**Ibuprofen or Naproxen:** These are **anti-inflammatories** (medications that reduce inflammation and swelling) that also help with pain. Check with your doctor if you have kidney issues, stomach problems, or are on **blood thinners** (medications that reduce blood clotting).",
-                    "**Ice:** Apply for 15-20 minutes every 2-3 hours during the first 48 hours (always with a cloth barrier to protect your skin — never put ice directly on your skin).",
+                    "**Ice:** Apply for 15-20 minutes every 2-3 hours during the first 48 hours (always with a cloth barrier — never put ice directly on your skin). **Take the boot off** to apply ice so it reaches the ankle. **Keep your foot toes-down** (pointed, as in the boot) while icing — don't let the foot drift up, as that can pull on the healing tendon.",
                     "**Elevation:** Keeping your leg raised above heart level reduces swelling and discomfort.",
                   ],
                 },

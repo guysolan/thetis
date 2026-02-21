@@ -12,7 +12,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "This is one of the most important sections in the early weeks. Achilles rupture + a leg being kept still in a cast/boot (called **immobilisation**) carries a higher risk of blood clots. The goal is simple: **reduce risk** and **spot warning signs early**.",
+        "This lesson stands on its own — you don't need to have read any other lesson first. This is one of the most important sections in the early weeks. Achilles rupture + a leg being kept still in a cast/boot (called **immobilisation**) carries a higher risk of blood clots. The goal is simple: **reduce risk** and **spot warning signs early**.",
 
     blocks: [
         {
@@ -25,9 +25,9 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**VTE**: “a blood clot in a vein” (the umbrella term).",
-                        "**DVT**: a clot in a **deep vein** of the leg (often the calf).",
-                        "**PE**: a clot that has travelled to the **lungs** (pulmonary embolism). This is the dangerous one.",
+                        "**VTE** = venous thrombo-embolism. Umbrella term for problems caused by blood clots.",
+                        "**DVT** = deep vein thrombosis.",
+                        "**PE** = pulmonary embolus.",
                     ],
                 },
             ],
@@ -74,7 +74,7 @@ export const content: SectionContent = {
                     type: "tip",
                     title: "Practical takeaway",
                     content:
-                        "If your hospital offers VTE prophylaxis (blood thinners), **take it exactly as prescribed**. If it wasn’t discussed, it’s reasonable to ask about it at your follow-up.",
+                        "If your hospital offers VTE prophylaxis (blood thinners), **take it exactly as prescribed**. If it wasn’t discussed, it’s reasonable to **ask about it immediately** — not at a follow-up, which might be weeks away.",
                 },
             ],
         },
@@ -90,9 +90,10 @@ export const content: SectionContent = {
                 {
                     type: "image",
                     src: DvtDopplerScan,
-                    alt: "Medical illustration showing a doctor performing a Doppler ultrasound on a patient's leg in an orthopedic boot, with ultrasound scans comparing normal veins to veins with thrombosis. Text overlay shows '42% DETECTED BEFORE THE BOOT' and 'Early Screening Saves Lives'.",
+                    alt: "Medical illustration: Doppler ultrasound scan of the back of the calf (not the knee), comparing normal veins to veins with thrombosis. Text overlay: '42% DETECTED BEFORE THE BOOT', 'Early Screening Saves Lives'.",
                     caption:
                         "Doppler ultrasound can detect clots before immobilisation begins",
+                    // IMAGE TO UPDATE: 42% cartoon — scan must be of back of calf, not of the knee.
                 },
                 {
                     type: "text",
@@ -149,8 +150,9 @@ export const content: SectionContent = {
                 {
                     type: "image",
                     src: DvtSignsSymptoms,
-                    alt: "Medical illustration comparing a normal leg with a leg affected by DVT, showing signs and symptoms including swelling, red or darkened skin, swollen veins, pain, and warm skin",
+                    alt: "Medical illustration comparing a normal leg with a leg affected by DVT, showing signs and symptoms: swelling, red or darkened skin, swollen veins, pain, warm skin. Patient in hospital/clinical attire (not jeans and trainers).",
                     caption: "DVT signs and symptoms to watch for",
+                    // IMAGE TO UPDATE: DVT cartoon — patient should be in hospital/clinical attire, not jeans and trainers.
                 },
                 {
                     type: "card",

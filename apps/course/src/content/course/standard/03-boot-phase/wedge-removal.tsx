@@ -11,7 +11,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By Week 5, you're likely ready to start removing wedges from your boot — a sign that your tendon is healing. This gradual process brings your foot closer to a normal position, but it must be done carefully and at the right pace. This lesson explains when to start, how to do it safely, and what to expect as your foot angle changes.",
+        "By Week 5, you're likely ready to start removing wedges from your boot — a sign that your tendon is healing. This gradual process brings your foot closer to a normal position, but it must be done carefully and at the right pace. Many people find that **as the heel gets lower it feels tighter or more uncomfortable** — that's normal. This lesson explains when to start, how to do it safely, and what to expect as your foot angle changes.",
 
     blocks: [
         {
@@ -208,7 +208,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "As you remove wedges, your foot angle changes. This can feel strange at first, and some discomfort is normal.",
+                        "As you remove wedges, your foot angle changes. This can feel strange at first, and some discomfort is normal. It often **feels tight as the heel gets lower** — that's expected; follow your team's schedule and don't rush.",
                 },
                 {
                     type: "card",
@@ -303,7 +303,7 @@ export const content: SectionContent = {
                     items: [
                         "**Remove wedges gradually** — don't rush the process, even if you feel ready",
                         "**Elevate after removal** — helps reduce any swelling from the angle change",
-                        "**Ice if needed** — if you get increased swelling, ice can help (always with a cloth barrier)",
+                        "**Ice if needed** — if you get increased swelling, ice can help (always with a cloth barrier). Take the boot off to apply ice; keep your foot toes-down while icing.",
                         "**Keep a log** — note when you removed each wedge and how you felt",
                         "**Don't compare** — everyone's timeline is different, focus on your own progress",
                     ],

@@ -97,7 +97,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Re-rupture risk is **3-5%** — low but not negligible. Risk is highest during early rehab (weeks 0-8) and boot removal (weeks 8-12). Remember that [elongation](/standard/healing-process) is the bigger concern because it affects your long-term function. See [Healing Process](/standard/healing-process) for the full timeline and details.",
+                        "Re-rupture risk is **3-5%** — low but not negligible. Risk is highest during early rehab (weeks 0-10) and boot removal (weeks 10-12). Remember that [elongation](/standard/healing-process) is the bigger concern because it affects your long-term function. See [Healing Process](/standard/healing-process) for the full timeline and details.",
                 },
             ],
         },
@@ -169,7 +169,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Before we discuss boot removal, it's important to understand what comes next. You've been building strength in Phase 1, and now you're preparing for **Phase 2: Transition** (weeks 8-12) and **Phase 3: Capacity** (weeks 12-26). Understanding these phases helps you see why building strength now matters and what you're working toward.",
+                        "Before we discuss boot removal, it's important to understand what comes next. You've been building strength in Phase 1, and now you're preparing for **Phase 2: Transition** (weeks 10-12) and **Phase 3: Capacity** (weeks 12-26). Understanding these phases helps you see why building strength now matters and what you're working toward.",
                 },
                 {
                     type: "card",
@@ -180,7 +180,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Phase 2: Transition** (weeks 8-12) focuses on rebuilding strength and function: single-leg heel raises, balance training, and transitioning from protected to normal walking.",
+                                "**Phase 2: Transition** (weeks 10-12) focuses on rebuilding strength and function: single-leg heel raises, balance training, and transitioning from protected to normal walking.",
                         },
                         {
                             type: "text",
@@ -190,7 +190,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "For detailed Phase 2 and Phase 3 goals, exercises, and progression, see [Starting Physiotherapy](/standard/starting-physio). That lesson includes the complete rehabilitation roadmap with all phases, goals, and timelines.",
+                                "For the full 4-phase journey and key milestones, see [The Achilles Recovery Roadmap](/standard/recovery-roadmap). For detailed Phase 2 and Phase 3 goals, exercises, and progression, see [Starting Physiotherapy](/standard/starting-physio).",
                         },
                     ],
                 },

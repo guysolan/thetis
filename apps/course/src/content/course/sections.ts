@@ -1,5 +1,6 @@
 // Import all course sections from chronological folders
 // 00-practical - Throughout recovery
+import { metadata as recoveryRoadmap } from "./standard/00-practical/recovery-roadmap";
 import { metadata as firstWeekChecklist } from "./standard/00-practical/first-week-checklist";
 import { metadata as mentalHealthRecovery } from "./standard/00-practical/mental-health-recovery";
 import { metadata as drivingGuidelines } from "./standard/00-practical/driving-guidelines";
@@ -79,6 +80,7 @@ export interface SectionMetadata {
 // This is the SINGLE SOURCE OF TRUTH for slug-to-folder mapping
 export const slugToChapter: Record<string, string> = {
   // 00-practical - Throughout recovery
+  "recovery-roadmap": "00-practical",
   "first-week-checklist": "00-practical",
   "mental-health-recovery": "00-practical",
   "driving-guidelines": "00-practical",
@@ -158,6 +160,17 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
       approximate_days: 0,
     },
     emergencyCare.status || "drafting",
+  ),
+  createSection(
+    "recovery-roadmap",
+    recoveryRoadmap.title,
+    recoveryRoadmap.description,
+    {
+      when_useful: "Early in recovery — the big picture of your 9–12 month journey",
+      triggers: ["when you want an overview", "when planning ahead", "at any stage"],
+      approximate_days: 0,
+    },
+    recoveryRoadmap.status || "drafting",
   ),
   createSection(
     "pain-management-throughout-recovery",
