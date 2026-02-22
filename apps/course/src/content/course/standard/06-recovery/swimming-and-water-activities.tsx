@@ -336,7 +336,7 @@ export const content: SectionContent = {
                 {
                     type: "card",
                     title: "Week 10-12: Pool walking",
-                    description: "Starting phase.",
+                    description: "Starting stage.",
                     variant: "default",
                     content: [
                         {

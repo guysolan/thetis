@@ -26,10 +26,10 @@ export const content: SectionContent = {
                     text:
                         "Continue following your protocol — don't rush ahead even if you feel ready",
                 },
-                {
-                    text:
-                        "Remove final wedges gradually — follow your clinician's schedule exactly",
-                },
+                        {
+                            text:
+                                "Remove final wedges (Aircast) or adjust hinge (VACOped) gradually — follow your clinician's schedule exactly",
+                        },
                 {
                     text:
                         "Monitor tendon strength — you'll feel it getting stronger",
@@ -61,9 +61,9 @@ export const content: SectionContent = {
                 {
                     type: "image",
                     src: TendonStrengthTimeline,
-                    alt: "Timeline diagram showing Mike progressing through recovery: Week 0-2 (0% strength) with boot on left foot, white Stan Smiths on right foot, using crutches; Week 4-6 (20-30% strength) with boot on left foot, white Stan Smiths on right foot, no crutches; Week 8 (50-60% strength) with boot on left foot, white Stan Smiths on right foot, walking without crutches; Week 12 (70-80% strength) walking without boot, both feet in white Stan Smiths; Month 12 (90-100% strength) running",
+                    alt: "Timeline diagram showing tendon strength progression: Week 0-2 (0% strength) non-weight-bearing; Week 4-6 (20-30% strength) limited weight-bearing; Week 8 (50-60% strength) unrestricted weight-bearing in boot; Week 12 (70-80% strength) transitioned to shoe; Month 12 (90-100% strength) return to sport",
                     caption:
-                        "Tendon strength progression: your tendon is getting stronger, but still needs protection",
+                        "Tendon strength progression: Week 0-2 (0%) non-weight-bearing → Week 4-6 (20-30%) limited weight-bearing → Week 8 (50-60%) unrestricted weight-bearing in boot → Week 12 (70-80%) transitioned to shoe → Month 12 (90-100%) return to sport",
                 },
                 {
                     type: "card",
@@ -103,23 +103,23 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Removing Final Wedges",
+            title: "Removing final wedges and adjusting the hinge (VACOped)",
             content: [
                 {
                     type: "text",
                     content:
-                        "By Week 8, you're likely removing your final wedges, bringing your foot closer to neutral. This is progress, but it's also when some people get impatient and rush ahead. Don't — the final wedges matter just as much as the first ones.",
+                        "By Week 8, you're likely removing your final wedges (Aircast) or adjusting the hinge (VACOped), reducing the angle. This is progress, but it's also when some people get impatient and rush ahead. Don't — the final wedges and hinge adjustments matter just as much as the first ones.",
                 },
                 {
                     type: "card",
-                    title: "Why final wedges matter",
-                    description: "They're not less important.",
+                    title: "Why final wedges and hinge adjustments matter",
+                    description: "We avoid going to full neutral.",
                     variant: "muted",
                     content: [
                         {
                             type: "text",
                             content:
-                                "The final wedges bring your foot to neutral — a position where the tendon is under more stress. Removing them too quickly can cause the tendon ends to separate, leading to a longer tendon and worse outcomes.",
+                                "We avoid full neutral. **With wedges (Aircast):** leave one wedge in. **With VACOped:** keep the hinge at 5°. You then transition to a **shoe with a heel lift** rather than going straight to flat. Going to full neutral too early puts more stress on the tendon. Removing wedges or unlocking the hinge too quickly can cause the tendon ends to separate, leading to a longer tendon and worse outcomes.",
                         },
                         {
                             type: "list",
@@ -136,7 +136,7 @@ export const content: SectionContent = {
                 {
                     type: "card",
                     title: "The safe approach",
-                    description: "How to remove final wedges.",
+                    description: "Wedges (Aircast) and hinge (VACOped).",
                     variant: "highlight",
                     content: [
                         {
@@ -144,10 +144,10 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**Follow protocol exactly** — don't accelerate even if you feel ready",
-                                "**One wedge at a time** — same rule as before",
+                                "**One wedge at a time** (Aircast) or **gradual hinge adjustment** (VACOped) — same rule as before",
                                 "**Watch for problems** — increased pain or swelling means slow down",
-                                "**Give time between removals** — usually 1-2 weeks between wedges",
-                                "**Don't skip to neutral** — gradual is safe, fast is risky",
+                                "**Give time between removals** — usually 1-2 weeks between wedges or hinge steps",
+                                "**Don't skip ahead** — gradual is safe, fast is risky",
                             ],
                         },
                     ],
@@ -157,40 +157,40 @@ export const content: SectionContent = {
                     variant: "warning",
                     title: "Common mistake",
                     content:
-                        "Many people feel ready to remove all wedges at once or skip straight to neutral. Don't. Even if you feel great, follow your protocol. The tendon needs time to adapt to each angle change. Rushing now can undo weeks of healing.",
+                        "Many people feel ready to remove all wedges at once or skip ahead. Don't. Even if you feel great, follow your protocol. The tendon needs time to adapt to each angle change. Rushing now can undo weeks of healing.",
                 },
             ],
         },
         {
             type: "section",
             title:
-                "Understanding Phase 2 and Phase 3: What Comes After Boot Removal",
+                "Understanding Stage 2 and Stage 3: What Comes After Boot Removal",
             content: [
                 {
                     type: "text",
                     content:
-                        "Before we discuss boot removal, it's important to understand what comes next. You've been building strength in Phase 1, and now you're preparing for **Phase 2: Transition** (weeks 10-12) and **Phase 3: Capacity** (weeks 12-26). Understanding these phases helps you see why building strength now matters and what you're working toward.",
+                        "Before we discuss boot removal, it's important to understand what comes next. You've been building strength in Stage 1, and now you're preparing for **Stage 2: Post-immobilization** (weeks 6-12) and **Stage 3: Single leg capacity** (weeks 18-24). Understanding these stages helps you see why building strength now matters and what you're working toward.",
                 },
                 {
                     type: "card",
-                    title: "Phase 2 and Phase 3 Overview",
+                    title: "Stage 2 and Stage 3 Overview",
                     description: "What comes after boot removal.",
                     variant: "highlight",
                     content: [
                         {
                             type: "text",
                             content:
-                                "**Phase 2: Transition** (weeks 10-12) focuses on rebuilding strength and function: single-leg heel raises, balance training, and transitioning from protected to normal walking.",
+                                "**Stage 2: Post-immobilization** (weeks 6-12) focuses on rebuilding strength and function: balance training, gait work, and transitioning from protected to normal walking. Single-leg heel raises come much later — not in Stage 2.",
                         },
                         {
                             type: "text",
                             content:
-                                "**Phase 3: Capacity** (weeks 12-26) focuses on building capacity and preparing for higher-level activities: progressive strengthening, gait preparation, plyometric preparation, and running when ready.",
+                                "**Stage 3: Single leg capacity** (weeks 18-24, not from 12 weeks) focuses on building capacity: progressive strengthening, gait preparation, plyometric preparation, and running when ready. Single-leg heel raises come later in recovery.",
                         },
                         {
                             type: "text",
                             content:
-                                "For the full 4-phase journey and key milestones, see [The Achilles Recovery Roadmap](/standard/recovery-roadmap). For detailed Phase 2 and Phase 3 goals, exercises, and progression, see [Starting Physiotherapy](/standard/starting-physio).",
+                                "These stages are based on evidence-based rehab frameworks (e.g. Malliaras, BOASt) that use criteria and timelines from the research. For the full 4-stage journey and key milestones, see [The Achilles Recovery Roadmap](/standard/recovery-roadmap). For detailed Stage 2 and Stage 3 goals, exercises, and progression, see [Starting Physiotherapy](/standard/starting-physio).",
                         },
                     ],
                 },
@@ -198,7 +198,7 @@ export const content: SectionContent = {
                     type: "tip",
                     title: "Why this matters now",
                     content:
-                        "Understanding Phase 2 and Phase 3 helps you see why building strength in Phase 1 is so important. The stronger you are when you remove your boot, the faster you'll progress through Phase 2 and Phase 3. Your physiotherapist will guide you through these phases.",
+                        "Understanding Stage 2 and Stage 3 helps you see why building strength in Stage 1 is so important. The stronger you are when you remove your boot, the faster you'll progress through Stage 2 and Stage 3. Your physiotherapist will guide you through these stages.",
                 },
             ],
         },
@@ -227,13 +227,13 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**Willets Protocol**: Uses heel raises (wedges) that gradually reduce in height — starting with 5cm heel raise (30°), reducing to 2.5cm (15°), then 1cm (5-10°), with boot removed at Week 8",
-                                "**LAMP/SMART (Vacoped) Protocol**: Uses an adjustable boot that gradually unlocks the angle — starting at 30° locked, progressing to 15-30° range, then 0-30° range, with boot removed at Week 8",
+                                "**LAMP/SMaRT (VACOped) Protocol**: Uses an adjustable boot that gradually unlocks the angle — starting at 30° locked, progressing to 15-30° range, then 0-30° range, with boot removed at **Week 10**",
                             ],
                         },
                         {
                             type: "text",
                             content:
-                                "Both protocols aim to gradually reduce the foot angle and remove the boot at Week 8. But here's the critical question: **Do they have adequate calf strength for walking at 8 weeks?**",
+                                "Both protocols aim to gradually reduce the foot angle. Boot removal timing varies — Willets at Week 8, SMaRT at Week 10. But here's the critical question: **Do they have adequate calf strength for walking when the boot comes off?**",
                         },
                     ],
                 },
@@ -337,7 +337,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "As you approach boot removal, you're also preparing for physiotherapy — the next phase of your recovery. Physio typically starts around Week 10-12 (after boot removal), though some protocols start earlier (Week 6-9) while still in the boot. Finding the right physiotherapist and knowing what to expect helps you prepare.",
+                        "As you approach boot removal, you're also preparing for physiotherapy — the next stage of your recovery. Physio typically starts around Week 10-12 (after boot removal), though some protocols start earlier (Week 6-9) while still in the boot. Finding the right physiotherapist and knowing what to expect helps you prepare.",
                 },
                 {
                     type: "card",
@@ -525,7 +525,7 @@ export const content: SectionContent = {
                         "**Stay patient** — you're almost there, don't rush now",
                         "**Follow protocol** — every week matters, especially the final ones",
                         "**Celebrate progress** — you've come a long way",
-                        "**Prepare for next phase** — boot removal is a new beginning, not just an end",
+                        "**Prepare for next stage** — boot removal is a new beginning, not just an end",
                         "**Stay positive** — you're in the home stretch",
                     ],
                 },

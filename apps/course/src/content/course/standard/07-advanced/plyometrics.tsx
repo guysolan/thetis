@@ -95,7 +95,7 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Phase 1: Simple jumps (weeks 1-2)",
+                    title: "Step 1: Simple jumps (weeks 1-2)",
                     description: "Building foundation.",
                     variant: "default",
                     content: [
@@ -136,7 +136,7 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Phase 2: Single-leg jumps (weeks 3-4)",
+                    title: "Step 2: Single-leg jumps (weeks 3-4)",
                     description: "Increasing difficulty.",
                     variant: "default",
                     content: [
@@ -170,7 +170,7 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Phase 3: Advanced movements (weeks 5+)",
+                    title: "Step 3: Advanced movements (weeks 5+)",
                     description: "Sport-specific training.",
                     variant: "muted",
                     content: [

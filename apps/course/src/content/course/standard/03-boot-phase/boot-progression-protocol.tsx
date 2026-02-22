@@ -11,7 +11,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "Your boot protocol is the core of **Phase 1: Protection**. (See [The Achilles Recovery Roadmap](/standard/recovery-roadmap) for the full 4-phase overview.) Most protocols keep you at maximum angle until **week 5**; then you reduce the angle in steps (remove wedges — bottom first — or adjust the hinge) at intervals set by your medical team. Usually the foot is fairly flat by **week 10**, then you progress out of the boot into a shoe with a heel lift. Mobilisation progresses alongside.",
+        "Your boot protocol is the core of **Stage 1: Immobilization**. (See [The Achilles Recovery Roadmap](/standard/recovery-roadmap) for the full 4-stage overview.) Most protocols keep you at maximum angle until **week 5**; then you reduce the angle in steps (remove wedges — bottom first — or adjust the hinge) at intervals set by your medical team. Usually the foot is fairly flat by **week 10**, then you progress out of the boot into a shoe with a heel lift. Mobilisation progresses alongside.",
 
     blocks: [
         {
@@ -21,7 +21,7 @@ export const content: SectionContent = {
         },
         {
             type: "checklist",
-            title: "Phase 1: Protocol essentials",
+            title: "Stage 1: Protocol essentials",
             items: [
                 {
                     text:

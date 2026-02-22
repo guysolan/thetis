@@ -115,33 +115,33 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Recovery happens in phases. You don't need to understand all the details right now — just know that there's a structured path forward. Your physiotherapist will guide you through each phase when the time is right.",
+                        "Recovery happens in stages. You don't need to understand all the details right now — just know that there's a structured path forward. Your physiotherapist will guide you through each stage when the time is right.",
                 },
                 {
                     type: "card",
                     title: "Where you are now",
-                    description: "Understanding your current phase.",
+                    description: "Understanding your current stage.",
                     variant: "highlight",
                     content: [
                         {
                             type: "text",
                             content:
-                                "You're currently in **Phase 1: Protection** (weeks 0-10). Right now, your focus is on protecting your tendon and allowing it to heal. Exercises will start around Week 6, but the boot usually stays on until around Week 10.",
+                                "You're currently in **Stage 1: Immobilization** (~6 weeks). Right now, your focus is on protecting your tendon and allowing it to heal. Exercises will start around Week 6, but the boot usually stays on until around Week 10 (protocol-dependent).",
                         },
                         {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Phase 1: Protection (Weeks 0-10):** In the boot — protection and healing",
-                                "**Phase 2: Transition (Weeks 10-12):** Rebuilding strength and balance",
-                                "**Phase 3: Capacity (Weeks 12-26):** Building endurance and function",
-                                "**Phase 4: Return to Sport (Week 26+):** Power and full return when ready",
+                                "**Stage 1: Immobilization (~6 weeks):** In the boot — protection and healing",
+                                "**Stage 2: Post-immobilization (weeks 6-12):** Rebuilding strength, 15 single-leg heel raises, balance",
+                                "**Stage 3: Single leg capacity (weeks 18-24):** Building endurance and function",
+                                "**Stage 4: Power development (weeks 24+):** Power and full return when ready",
                             ],
                         },
                         {
                             type: "text",
                             content:
-                                "Don't worry about phases 2-5 yet. Focus on Week 1. For the full 4-phase overview (Protection, Transition, Capacity, Return to Sport), see [The Achilles Recovery Roadmap](/standard/recovery-roadmap). When you start physiotherapy around Week 11, you'll get specific exercises and goals for each phase.",
+                                "Don't worry about stages 2-4 yet. Focus on Week 1. For the full 4-stage overview (Immobilization, Post-immobilization, Single leg capacity, Power development), see [The Achilles Recovery Roadmap](/standard/recovery-roadmap). When you start physiotherapy around Week 11, you'll get specific exercises and goals for each stage.",
                         },
                     ],
                 },

@@ -426,7 +426,7 @@ export const content: SectionContent = {
                         "**This week:** Focus on managing stiffness and swelling safely",
                         "**Week 15:** We cover progressive strengthening — single-leg heel raises, eccentric drops, and resistance training",
                         "**Weeks 12-18:** Continue building strength and improving function",
-                        "**After Phase 2:** You'll move to Phase 3 (single-leg capacity) — building power and preparing for return to sport",
+                        "**After Stage 2:** You'll move to Stage 3 (single-leg capacity) — building power and preparing for return to sport",
                     ],
                 },
             ],

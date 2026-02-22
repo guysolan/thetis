@@ -12,7 +12,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By Week 20, you're reaching the end of **Phase 3: Capacity** and preparing for Phase 4. This is a major milestone — you've come a long way. Now it's time to assess your functional milestones: can you walk pain-free? Do 25+ heel raises? Handle stairs confidently? These milestones show you're ready for the next phase. This lesson covers what these milestones mean, how to test them, and what to do if you haven't reached them yet.",
+        "By Week 20, you're reaching the end of **Stage 3: Single leg capacity** and preparing for Stage 4. This is a major milestone — you've come a long way. Now it's time to assess your functional milestones: can you walk pain-free? Do 25+ heel raises? Handle stairs confidently? These milestones show you're ready for the next stage. This lesson covers what these milestones mean, how to test them, and what to do if you haven't reached them yet.",
     blocks: [
         {
             type: "heading",
@@ -25,7 +25,7 @@ export const content: SectionContent = {
             items: [
                 {
                     text:
-                        "Test your Phase 3 milestones — pain-free walking, 25+ heel raises, balance, stairs",
+                        "Test your Stage 3 milestones — pain-free walking, 25+ heel raises, balance, stairs",
                 },
                 {
                     text:
@@ -56,7 +56,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "These four milestones show you're ready for Phase 4 and return to higher-level activities. Think of them as **checkpoints** — passing them means you're ready for the next phase.",
+                        "These four milestones show you're ready for Stage 4 and return to higher-level activities. Think of them as **checkpoints** — passing them means you're ready for the next stage.",
                 },
                 {
                     type: "image",
@@ -126,7 +126,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Why it matters:** 25+ heel raises shows your calf is strong enough for higher-level activities. This is the gold standard for **Phase 3: Capacity** completion.",
+                                "**Why it matters:** 25+ heel raises shows your calf is strong enough for higher-level activities. This is the gold standard for **Stage 3: Single leg capacity** completion.",
                         },
                     ],
                 },
@@ -352,10 +352,10 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**This week:** Assess your Phase 3 functional milestones, work on gaps",
+                        "**This week:** Assess your Stage 3 functional milestones, work on gaps",
                         "**Week 22:** We cover returning to normal life — work, driving, household tasks",
                         "**Weeks 20-25:** Continue building strength and function",
-                        "**After Phase 3:** You'll move to **Phase 4: Return to Sport** — starting to run and build power",
+                        "**After Stage 3:** You'll move to **Stage 4: Power development** — starting to run and build power",
                     ],
                 },
             ],
@@ -375,7 +375,7 @@ export const content: SectionContent = {
                         '**Gaps:** "I haven\'t reached [specific milestone]. What should I focus on?"',
                         '**Timeline:** "When should I reach these milestones? Is it normal to not reach them all yet?"',
                         '**Next steps:** "What should I work on next? What\'s my plan?"',
-                        '**Phase 3:** "When will I move to Phase 3? What does that involve?"',
+                        '**Stage 3:** "When will I move to Stage 3? What does that involve?"',
                         '**Concerns:** "I\'m worried about [specific concern]. Is this normal?"',
                         '**After-hours:** "What should I do if I have concerns and can\'t reach you after hours?"',
                     ],
@@ -404,7 +404,7 @@ export const content: SectionContent = {
                 {
                     question: "What happens after I reach all milestones?",
                     answer:
-                        "Once you reach Phase 3 milestones (including 25+ heel raises), you'll move to **Phase 4: Return to Sport**. This involves building power, starting a walk-jog progression, and eventually sport-specific agility training.",
+                        "Once you reach Stage 3 milestones (including 25+ heel raises), you'll move to **Stage 4: Power development**. This involves building power, starting a walk-jog progression, and eventually sport-specific agility training.",
                 },
             ],
         },

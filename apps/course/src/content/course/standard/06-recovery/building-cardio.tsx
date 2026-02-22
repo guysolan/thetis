@@ -515,7 +515,7 @@ export const content: SectionContent = {
                 {
                     type: "card",
                     title: "Week 10-12: Pool walking",
-                    description: "Starting phase.",
+                    description: "Starting stage.",
                     variant: "default",
                     content: [
                         {
@@ -729,7 +729,7 @@ export const content: SectionContent = {
                         "**This week:** Start building cardio with low-impact activities",
                         "**Week 20:** We cover functional milestones — pain-free walking, 25+ heel raises, balance tests",
                         "**Weeks 17-25:** Continue building strength and cardio fitness",
-                        "**After Phase 2:** You'll move to Phase 3 (single-leg capacity) — building power and preparing for return to sport",
+                        "**After Stage 2:** You'll move to Stage 3 (single-leg capacity) — building power and preparing for return to sport",
                     ],
                 },
             ],

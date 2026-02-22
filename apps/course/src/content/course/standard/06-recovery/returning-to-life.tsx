@@ -216,7 +216,7 @@ export const content: SectionContent = {
                     items: [
                         "**Week 25:** We cover the 6-month milestone — where your tendon is now",
                         "**Weeks 22-30:** Continue building strength and function",
-                        "**Phase 4:** Building power and preparing for return to sport",
+                        "**Stage 4:** Building power and preparing for return to sport",
                     ],
                 },
             ],

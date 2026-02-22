@@ -11,7 +11,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "You've reached Week 11 — a major milestone. By now, you're likely starting physiotherapy or have just begun. This is where your recovery shifts from healing to rebuilding. It's exciting to finally be active again, but it can also feel overwhelming. This lesson explains what to expect in your first sessions, what **Phase 2: Transition** goals look like, and why consistency matters more than perfection.",
+        "You've reached Week 11 — a major milestone. Physiotherapy typically starts around **boot removal (weeks 10–12)** — some protocols begin earlier (weeks 6–9) while still in the boot. This is where your recovery shifts from healing to rebuilding. It's exciting to finally be active again, but it can also feel overwhelming. This lesson explains what to expect in your first sessions, what **Stage 2: Post-immobilization** goals look like, and why consistency matters more than perfection.",
     blocks: [
         {
             type: "heading",
@@ -24,11 +24,15 @@ export const content: SectionContent = {
             items: [
                 {
                     text:
+                        "Recommended start: around boot removal (weeks 10–12) — some protocols start earlier (weeks 6–9) while still in boot",
+                },
+                {
+                    text:
                         "Attend your first session — bring questions, your boot if still wearing it, comfortable clothes",
                 },
                 {
                     text:
-                        "Understand Phase 2 goals — know what you're working toward (Walking normally, basic balance, early strength)",
+                        "Understand Stage 2 goals — know what you're working toward (Walking normally, basic balance, early strength)",
                 },
                 {
                     text:
@@ -103,8 +107,8 @@ export const content: SectionContent = {
                                 "**Progression plan** — how exercises will get harder over time",
                                 "**Frequency** — how often you'll come to clinic (typically 1-2x per week initially)",
                                 "**Home program** — exercises to do between sessions (this is where most progress happens)",
-                                "**Phase 2 goals** — what you're aiming for (Normal walking, 90% mobility, basic single-leg balance)",
-                                "**Timeline** — how long Phase 2 typically takes (2-4 weeks)",
+                                "**Stage 2 goals** — what you're aiming for (Normal walking, 90% mobility, basic single-leg balance)",
+                                "**Timeline** — how long Stage 2 typically takes (2-4 weeks)",
                             ],
                         },
                     ],
@@ -121,7 +125,7 @@ export const content: SectionContent = {
                             items: [
                                 "**Teaching proper walking technique** — if you're out of boot, learning heel-to-toe pattern",
                                 "**Introducing gentle range of motion exercises** — ankle pumps, circles (if safe)",
-                                "**Beginning isometric calf exercises** — seated calf raises with weight",
+                                "**Beginning isometric holds** — pressing foot down against resistance with no movement (like a plank for your calf); and **isotonic calf raises** — seated calf raises with weight (movement through range)",
                                 "**Setting up home exercise programme** — exercises to do daily",
                                 "**Scheduling follow-up appointments** — typically weekly or bi-weekly",
                             ],
@@ -143,7 +147,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Now that you're starting physiotherapy, it's important to understand where you are in the recovery journey. The four phases are: **Phase 1: Protection** (weeks 0-10), **Phase 2: Transition** (weeks 10-12), **Phase 3: Capacity** (weeks 12-26), and **Phase 4: Return to Sport** (weeks 26+). You're now entering Phase 2. For the full overview with key milestones, see [The Achilles Recovery Roadmap](/standard/recovery-roadmap).",
+                        "Now that you're starting physiotherapy, it's important to understand where you are in the recovery journey. The four stages are: **Stage 1: Immobilization** (~6 weeks), **Stage 2: Post-immobilization** (weeks 6-12), **Stage 3: Single leg capacity** (weeks 18-24), and **Stage 4: Power development** (weeks 24+). You're now entering Stage 2. For the full overview with key milestones, see [The Achilles Recovery Roadmap](/standard/recovery-roadmap).",
                 },
                 {
                     type: "rehab-protocol-table",
@@ -151,13 +155,13 @@ export const content: SectionContent = {
                 {
                     type: "card",
                     title: "Where you are now",
-                    description: "Understanding your current phase.",
+                    description: "Understanding your current stage.",
                     variant: "highlight",
                     content: [
                         {
                             type: "text",
                             content:
-                                "You're now in **Phase 2: Transition** (weeks 10-12). You've completed Phase 1 (Protection), and now you're rebuilding the ability to walk normally and move your ankle freely. This is where active recovery begins.",
+                                "You're now in **Stage 2: Post-immobilization** (weeks 6-12). You've completed Stage 1 (Immobilization), and now you're rebuilding the ability to walk normally and move your ankle freely. This is where active recovery begins.",
                         },
                     ],
                 },
@@ -165,24 +169,24 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Phase 2 Goals: What You're Working Toward",
+            title: "Stage 2 Goals: What You're Working Toward",
             content: [
                 {
                     type: "text",
                     content:
-                        "Looking at the table above, you can see what Phase 2 aims to achieve. Understanding your specific goals helps you see progress and stay motivated.",
+                        "Looking at the table above, you can see what Stage 2 aims to achieve. Understanding your specific goals helps you see progress and stay motivated.",
                 },
                 {
                     type: "card",
                     title: "The big goals",
-                    description: "What Phase 2 aims to achieve.",
+                    description: "What Stage 2 aims to achieve.",
                     variant: "highlight",
                     content: [
                         {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**15+ single-leg heel raises** — being able to do 15+ heel raises on your injured leg alone (target: 25+ for Phase 2 completion)",
+                                "**15+ single-leg heel raises** — being able to do 15+ heel raises on your injured leg alone (target: 25+ for Stage 2 completion)",
                                 "**1.4x body weight MVIC** — see explanation below",
                                 "**1.2x body weight seated isotonic** — see explanation below",
                                 "**Good balance** — standing on one leg comfortably, maintaining balance",
@@ -237,13 +241,13 @@ export const content: SectionContent = {
                 {
                     type: "card",
                     title: "Why these goals matter",
-                    description: "The science behind Phase 2.",
+                    description: "The science behind Stage 2.",
                     variant: "muted",
                     content: [
                         {
                             type: "text",
                             content:
-                                "Think of Phase 2 like **rebuilding a bridge**. Your tendon has healed (the bridge is repaired), but now you need to strengthen it to handle normal traffic (walking, daily activities).",
+                                "Think of Stage 2 like **rebuilding a bridge**. Your tendon has healed (the bridge is repaired), but now you need to strengthen it to handle normal traffic (walking, daily activities).",
                         },
                         {
                             type: "text",
@@ -265,9 +269,9 @@ export const content: SectionContent = {
                 {
                     type: "image",
                     src: Phase2Goals,
-                    alt: "Infographic showing Phase 2 rehabilitation goals: 25 single-leg heel raises, 1.4x body weight strength, good balance, and protected to unprotected gait transition",
+                    alt: "Infographic showing Stage 2 rehabilitation goals: 25 single-leg heel raises, 1.4x body weight strength, good balance, and protected to unprotected gait transition",
                     caption:
-                        "Phase 2 goals: what you're working toward in the Transition phase",
+                        "Stage 2 goals: what you're working toward in the Post-immobilization stage",
                 },
             ],
         },
@@ -289,7 +293,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Safe: Isometric contraction with foot pointed down** — this means pushing your foot down (pointing your toes) against resistance while the ankle doesn't move. Examples: seated calf raises with weight, pressing foot down against resistance. This is safe because the tendon is in a shortened position and there's no stretching force.",
+                                "**Safe: Isometric contraction with foot pointed down** — pushing your foot down (pointing your toes) against resistance while the ankle **doesn't move** — like a plank for your calf. **Isotonic** (movement) exercises like seated calf raises are also safe when done slowly with foot pointed down. Both are safe because the tendon is in a shortened position with no rapid stretching force.",
                         },
                         {
                             type: "text",
@@ -307,7 +311,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "During early recovery (Phase 1-2), your tendon is still healing and is vulnerable to [elongation](/standard/healing-process) — permanent lengthening that reduces function. **Controlled, slow loading in a shortened position** (foot pointed down) stimulates healing without overstretching. **Fast, eccentric loading** (toes up during movement) puts dangerous stretch forces on the tendon before it's strong enough.",
+                                "During early recovery (Stage 1-2), your tendon is still healing and is vulnerable to [elongation](/standard/healing-process) — permanent lengthening that reduces function. **Controlled, slow loading in a shortened position** (foot pointed down) stimulates healing without overstretching. **Fast, eccentric loading** (toes up during movement) puts dangerous stretch forces on the tendon before it's strong enough.",
                         },
                         {
                             type: "text",
@@ -321,7 +325,7 @@ export const content: SectionContent = {
                     variant: "warning",
                     title: "Critical safety principle",
                     content:
-                        "During Phase 2, avoid any exercise that involves rapid ankle movement with toes up (toes moving quickly toward shin). This includes hopping, jumping, running, or uncontrolled fast movements. Stick to controlled, isometric exercises with foot pointed down. Your physiotherapist will tell you when it's safe to progress to dynamic movements.",
+                        "During Stage 2, avoid any exercise that involves rapid ankle movement with toes up (toes moving quickly toward shin). This includes hopping, jumping, running, or uncontrolled fast movements. Stick to controlled exercises with foot pointed down — isometric holds (no movement) or slow isotonic calf raises (movement through range). Your physiotherapist will tell you when it's safe to progress to dynamic movements.",
                 },
             ],
         },
@@ -344,17 +348,17 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Seated calf raises** — building strength safely using controlled, slow movements with foot pointed down (you may have started these in Phase 1)",
+                                "**Seated calf raises** — building strength safely using controlled, slow movements with foot pointed down (you may have started these in Stage 1)",
                                 "**Balance exercises** — rebuilding proprioception and control (static positions, no rapid movements)",
                                 "**Gait training** — learning proper walking technique with protected loading (if out of boot)",
                                 "**Range of motion** — gentle, controlled ankle movements within safe ranges (if safe)",
-                                "**Intrinsic foot work** — continuing from Phase 1",
+                                "**Intrinsic foot work** — continuing from Stage 1",
                             ],
                         },
                         {
                             type: "text",
                             content:
-                                "Your exercises will be tailored to your specific needs, protocol, and progress. What you do depends on whether you're still in a boot, how strong you are, and what your clinician recommends. All exercises should follow the safe loading principle: controlled isometric work with foot pointed down, avoiding fast movements with toes up.",
+                                "Your exercises will be tailored to your specific needs, protocol, and progress. What you do depends on whether you're still in a boot, how strong you are, and what your clinician recommends. All exercises should follow the safe loading principle: controlled work with foot pointed down (isometric holds or slow isotonic movements), avoiding fast movements with toes up.",
                         },
                     ],
                 },
@@ -552,11 +556,11 @@ export const content: SectionContent = {
                     style: "bullet",
                     items: [
                         "**This week:** Focus on consistency — do your exercises regularly, attend sessions",
-                        "**Week 12:** Key Exercises — detailed instructions for all Phase 2 exercises (coming up)",
+                        "**Week 12:** Key Exercises — detailed instructions for all Stage 2 exercises (coming up)",
                         "**Week 13:** Walking Properly — re-learning proper gait pattern (coming up)",
-                        "**Week 15:** Progressive Strengthening — entering **Phase 3: Capacity** (coming up)",
-                        "**Weeks 12-26:** Continue building strength in Phase 3, working toward the 25+ heel raise milestone",
-                        "**After Phase 3:** You'll move to **Phase 4: Return to Sport** (running and power training)",
+                        "**Week 15:** Progressive Strengthening — entering **Stage 3: Single leg capacity** (coming up)",
+                        "**Weeks 12-26:** Continue building strength in Stage 3, working toward the 25+ heel raise milestone",
+                        "**After Stage 3:** You'll move to **Stage 4: Power development** (running and power training)",
                     ],
                 },
             ],
@@ -572,11 +576,11 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        '**Goals:** "What are my Phase 2 goals? How will we know I\'m progressing?"',
+                        '**Goals:** "What are my Stage 2 goals? How will we know I\'m progressing?"',
                         '**Frequency:** "How often should I come to clinic? How often should I do home exercises?"',
                         '**Pain:** "What level of discomfort is normal? When should I stop or modify exercises?"',
                         '**Progression:** "How will exercises get harder? What\'s the progression plan?"',
-                        '**Timeline:** "How long will Phase 2 take? What happens after?"',
+                        '**Timeline:** "How long will Stage 2 take? What happens after?"',
                         '**Home program:** "What exercises should I do at home? How do I know if I\'m doing them correctly?"',
                         '**After-hours:** "What should I do if I have concerns and can\'t reach you after hours?"',
                     ],
@@ -597,9 +601,9 @@ export const content: SectionContent = {
                         "Tell your physiotherapist. They can modify exercises, reduce difficulty, or break them into smaller steps. Everyone starts somewhere — don't compare yourself to others. Your physio will help you progress at your own pace.",
                 },
                 {
-                    question: "How long will Phase 2 take?",
+                    question: "How long will Stage 2 take?",
                     answer:
-                        "Phase 2 typically spans weeks 10-12 after injury. But progress varies — some people move faster, others slower. Focus on meeting criteria rather than timelines. Your physio will assess when you're ready for Phase 3.",
+                        "Stage 2 typically spans weeks 6-12 after injury. But progress varies — some people move faster, others slower. Focus on meeting criteria rather than timelines. Your physio will assess when you're ready for Stage 3.",
                 },
                 {
                     question: "What if physio is painful?",
@@ -618,7 +622,7 @@ export const content: SectionContent = {
                     style: "bullet",
                     items: [
                         "**Consistency beats perfection** — doing exercises regularly matters more than doing them perfectly",
-                        "**Phase 2 goals are achievable** — 15 heel raises, 1.4x body weight strength, good balance — you can do this",
+                        "**Stage 2 goals are achievable** — 15 heel raises, 1.4x body weight strength, good balance — you can do this",
                         "**Communicate openly** — tell your physio about pain, concerns, challenges",
                         "**Progress happens gradually** — be patient, track your progress, celebrate small wins",
                     ],

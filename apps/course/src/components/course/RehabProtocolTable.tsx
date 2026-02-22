@@ -16,11 +16,11 @@ export interface RehabStage {
 
 const rehabStages: RehabStage[] = [
     {
-        stage: "Phase 1: Protection",
-        weeks: "Weeks 0–8",
+        stage: "Stage 1: Immobilization",
+        weeks: "~6 weeks",
         whatYouDo: [
             "Seated calf raises (push down with foot pointed)",
-            "Standing calf work from Week 8–10",
+            "Standing calf work when protocol allows",
             "Boot on night and day",
         ],
         readyForNext: [
@@ -28,10 +28,11 @@ const rehabStages: RehabStage[] = [
         ],
     },
     {
-        stage: "Phase 2: Transition",
-        weeks: "Weeks 8–12",
+        stage: "Stage 2: Post-immobilization",
+        weeks: "Weeks 6–12",
         whatYouDo: [
             "Progress from two-leg to single-leg calf raises",
+            "15 single-leg calf raises (key target)",
             "Seated calf raises with weight",
             "Balance training 3×/week",
             "Learning to walk properly",
@@ -43,8 +44,8 @@ const rehabStages: RehabStage[] = [
         ],
     },
     {
-        stage: "Phase 3: Capacity",
-        weeks: "Weeks 12–26",
+        stage: "Stage 3: Single leg capacity",
+        weeks: "Weeks 18–24",
         whatYouDo: [
             "Single-leg calf raises (seated & standing)",
             "Gradually increase ankle flexibility",
@@ -59,8 +60,8 @@ const rehabStages: RehabStage[] = [
         ],
     },
     {
-        stage: "Phase 4: Power",
-        weeks: "Weeks 26+",
+        stage: "Stage 4: Power development",
+        weeks: "Weeks 24+",
         whatYouDo: [
             "Jumping progressions",
             "Hopping and plyometrics",
@@ -86,7 +87,7 @@ export function RehabProtocolTable() {
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-[180px] font-semibold">
-                            Phase
+                            Stage
                         </TableHead>
                         <TableHead className="w-[100px] font-semibold">
                             When
@@ -95,7 +96,7 @@ export function RehabProtocolTable() {
                             What You'll Do
                         </TableHead>
                         <TableHead className="font-semibold">
-                            Ready for Next Phase When...
+                            Ready for Next Stage When...
                         </TableHead>
                     </TableRow>
                 </TableHeader>

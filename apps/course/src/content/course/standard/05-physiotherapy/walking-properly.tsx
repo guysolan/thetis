@@ -33,7 +33,7 @@ export const content: SectionContent = {
                 },
                 {
                     text:
-                        "Use [heel lifts](/standard/post-boot-period) if needed — 0.5-1cm heel lift helps protect your tendon initially",
+                        "Use [heel lifts](/standard/post-boot-period) — 0.5-1cm heel lift helps protect your tendon initially",
                 },
                 {
                     text:
@@ -321,7 +321,7 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Step Length: Why It Matters",
+            title: "Why Step Length Matters",
             content: [
                 {
                     type: "text",
@@ -330,7 +330,7 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Why step length matters",
+                    title: "The science behind step length",
                     description: "The science behind it.",
                     variant: "muted",
                     content: [
@@ -542,8 +542,8 @@ export const content: SectionContent = {
                     items: [
                         "**This week:** Focus on proper heel-to-toe pattern and correcting limping",
                         "**Week 14:** We cover managing post-boot challenges — stiffness, swelling, and why not to stretch aggressively",
-                        "**Weeks 12-26:** Continue building strength in Phase 3 and improving walking pattern",
-                        "**After Phase 2:** You'll move to Phase 3 (single-leg capacity) — building power and preparing for return to sport",
+                        "**Weeks 12-26:** Continue building strength in Stage 3 and improving walking pattern",
+                        "**After Stage 2:** You'll move to Stage 3 (single-leg capacity) — building power and preparing for return to sport",
                     ],
                 },
             ],

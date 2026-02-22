@@ -252,7 +252,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Once you're comfortable in your boot, you'll start building strength. **At Week 6**, you can begin Phase 1 exercises — seated calf raises with your boot removed. These exercises are essential for preparing your tendon for boot removal and the next phases of recovery.",
+                        "Once you're comfortable in your boot, you'll start building strength. **At Week 6**, you can begin Stage 1 exercises — seated calf raises with your boot removed. These exercises are essential for preparing your tendon for boot removal and the next stages of recovery.",
                 },
                 {
                     type: "card",
@@ -264,10 +264,10 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Week 6:** Start Phase 1 exercises — detailed guidance on exercises, mobilisation, and gait coming up",
+                                "**Week 6:** Start Stage 1 exercises — detailed guidance on exercises, mobilisation, and gait coming up",
                                 "**Weeks 6-8:** Continue building strength, progress mobilisation status",
-                                "**Week 8:** Learn about Phase 2 and Phase 3 goals — preparing for post-boot recovery",
-                                "**Weeks 10-12:** Boot removal and transition to Phase 2",
+                                "**Week 8:** Learn about Stage 2 and Stage 3 goals — preparing for post-boot recovery",
+                                "**Weeks 10-12:** Boot removal and transition to Stage 2",
                             ],
                         },
                     ],

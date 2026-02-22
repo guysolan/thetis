@@ -67,7 +67,7 @@ export const content: SectionContent = {
       type: "tip",
       title: "Recovery timeline (the short version)",
       content:
-        "You'll be walking without crutches much sooner — often from **Week 2 onwards** (though you'll still need your boot). For the full picture of all 4 phases (Protection → Transition → Capacity → Return to Sport), see [The Achilles Recovery Roadmap](/standard/recovery-roadmap). We'll break things down week by week — don't try to skip ahead.",
+        "You'll be walking without crutches much sooner — often from **Week 2 onwards** (though you'll still need your boot). For the full picture of all 4 stages (Immobilization → Post-immobilization → Single leg capacity → Power development), see [The Achilles Recovery Roadmap](/standard/recovery-roadmap). We'll break things down week by week — don't try to skip ahead.",
     },
     {
       type: "section",
@@ -559,7 +559,7 @@ export const content: SectionContent = {
                 "**Today–Week 1:** Keep the tendon ends together (don't let your toes come up), control swelling, learn to use elbow crutches.",
                 "**Week 2 onwards:** You'll likely be able to walk without crutches, but you'll still need your boot to keep the ends together.",
                 "**Weeks 1–3:** You'll see a specialist / fracture clinic to confirm the plan (boot vs splint, mobilisation status guidance, rehab plan).",
-                "**Weeks 1–3:** You'll also start thinking about the big decision: surgical vs non-surgical treatment (we cover this in the next phase).",
+                "**Weeks 1–3:** You'll also start thinking about the big decision: surgical vs non-surgical treatment (we cover this in the next stage).",
               ],
             },
           ],

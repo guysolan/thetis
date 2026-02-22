@@ -13,7 +13,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By Week 15, you're well into **Phase 3: Capacity** and making real progress. Your walking is improving, and you're building strength. Now it's time to focus on progressive strengthening — making your exercises harder systematically. This lesson covers single-leg heel raises, seated calf strength, and resistance training. These exercises build the strength you need for Phase 4 and beyond.",
+        "By Week 15, you're well into **Stage 3: Single leg capacity** and making real progress. Your walking is improving, and you're building strength. Now it's time to focus on progressive strengthening — making your exercises harder systematically. This lesson covers single-leg heel raises, seated calf strength, and resistance training. These exercises build the strength you need for Stage 4 and beyond.",
     blocks: [
         {
             type: "heading",
@@ -26,7 +26,7 @@ export const content: SectionContent = {
             items: [
                 {
                     text:
-                        "Master single-leg heel raises — work toward 15 reps on flat ground, this is the Phase 3 mid-point target",
+                        "Master single-leg heel raises — work toward 15 reps on flat ground, this is the Stage 3 mid-point target",
                 },
                 {
                     text:
@@ -57,7 +57,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Before diving into the exercises, it's important to understand **why** progressive strengthening is so critical in this phase. The answer: **preventing [tendon elongation](/standard/healing-process)** — the biggest obstacle to returning to sport and normal function.",
+                        "Before diving into the exercises, it's important to understand **why** progressive strengthening is so critical in this stage. The answer: **preventing [tendon elongation](/standard/healing-process)** — the biggest obstacle to returning to sport and normal function.",
                 },
                 {
                     type: "card",
@@ -92,12 +92,12 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Single-Leg Heel Raises: The Phase 3 Target",
+            title: "Single-Leg Heel Raises: The Stage 3 Target",
             content: [
                 {
                     type: "text",
                     content:
-                        "Single-leg heel raises are a **key test** for Phase 3. Being able to do **15 repetitions** on flat ground shows your calf is strong enough for normal walking and daily activities. This is the milestone that shows you're ready for more advanced Phase 3 work.",
+                        "Single-leg heel raises are a **key test** for Stage 3. Being able to do **15 repetitions** on flat ground shows your calf is strong enough for normal walking and daily activities. This is the milestone that shows you're ready for more advanced Stage 3 work.",
                 },
                 {
                     type: "card",
@@ -108,7 +108,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**15 reps indicates functional strength** — your calf can produce enough force for normal walking and daily activities. This is the interim target within Phase 3 that shows you're ready for Stage 4 preparation.",
+                                "**15 reps indicates functional strength** — your calf can produce enough force for normal walking and daily activities. This is the interim target within Stage 3 that shows you're ready for Stage 4 preparation.",
                         },
                         {
                             type: "text",
@@ -118,7 +118,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**It's achievable** — this isn't an impossible goal. With consistent work, most people reach this target during Phase 3.",
+                                "**It's achievable** — this isn't an impossible goal. With consistent work, most people reach this target during Stage 3.",
                         },
                     ],
                 },
@@ -231,11 +231,11 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Seated calf raises are a **key exercise** for Phase 3. They allow you to load your calf safely while building the strength needed for walking and standing exercises. Your physio will track your progress using specific force targets.",
+                        "Seated calf raises are a **key exercise** for Stage 3. They allow you to load your calf safely while building the strength needed for walking and standing exercises. Your physio will track your progress using specific force targets.",
                 },
                 {
                     type: "card",
-                    title: "Phase 3 strength targets",
+                    title: "Stage 3 strength targets",
                     description: "Two ways to measure your progress.",
                     variant: "highlight",
                     content: [
@@ -259,7 +259,7 @@ export const content: SectionContent = {
                             src: IsomOvercomingSeatedCalf,
                             alt: "Grant performing seated calf raise exercise with weight on his knees, foot pointed down on force plate platform",
                             caption:
-                                "Seated calf raise: building toward Phase 3 strength targets",
+                                "Seated calf raise: building toward Stage 3 strength targets",
                         },
                     ],
                 },
@@ -282,7 +282,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Progression:** Start with 10-15kg on your knee initially, progress gradually. Work toward 0.8-1x your body weight, then continue toward Phase 3 targets (1.4x BW isometric, 1.2x BW isotonic) before progressing to standing exercises.",
+                                "**Progression:** Start with 10-15kg on your knee initially, progress gradually. Work toward 0.8-1x your body weight, then continue toward Stage 3 targets (1.4x BW isometric, 1.2x BW isotonic) before progressing to standing exercises.",
                         },
                     ],
                 },
@@ -454,8 +454,8 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "**LSI target:** 90% symmetry compared to uninjured leg",
-                                "**Phase 3 BW target:** 1.4x body weight MVIC (seated, foot pointed down)",
-                                "**Phase 4 BW target:** 2.0x body weight MVIC (seated, foot pointed down)",
+                                "**Stage 3 BW target:** 1.4x body weight MVIC (seated, foot pointed down)",
+                                "**Stage 4 BW target:** 2.0x body weight MVIC (seated, foot pointed down)",
                                 "**Note:** These are long-term goals — work toward them gradually over months, not weeks",
                             ],
                         },
@@ -578,10 +578,10 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**This week:** Focus on progressive strengthening — building toward 15 single-leg heel raises and Phase 3 strength targets",
+                        "**This week:** Focus on progressive strengthening — building toward 15 single-leg heel raises and Stage 3 strength targets",
                         "**Week 17:** We cover building cardio without risk — swimming, bike, elliptical",
-                        "**Weeks 15-18:** Continue building strength, working toward Phase 3 goals (25+ heel raises, 1.4x body weight)",
-                        "**After Phase 3:** You'll move to **Phase 4: Return to Sport** (running and jumping progression)",
+                        "**Weeks 15-18:** Continue building strength, working toward Stage 3 goals (25+ heel raises, 1.4x body weight)",
+                        "**After Stage 3:** You'll move to **Stage 4: Power development** (running and jumping progression)",
                     ],
                 },
             ],
@@ -602,7 +602,7 @@ export const content: SectionContent = {
                         '**Seated calf raises:** "What are my strength targets? How do I progress?"',
                         '**Resistance:** "How much weight should I use? When should I add more?"',
                         '**Challenges:** "I\'m struggling with [specific exercise]. What can I do?"',
-                        '**Timeline:** "How long until I reach Phase 3 goals?"',
+                        '**Timeline:** "How long until I reach Stage 3 goals?"',
                         '**After-hours:** "What should I do if I have concerns and can\'t reach you after hours?"',
                     ],
                 },
@@ -615,7 +615,7 @@ export const content: SectionContent = {
                     question:
                         "How long until I can do 15 single-leg heel raises?",
                     answer:
-                        "It varies, but most people reach the interim Phase 3 target of 15 reps within 4-8 weeks of starting progressive strengthening. Some reach it faster, some take longer. Focus on consistent work rather than timelines.",
+                        "It varies, but most people reach the interim Stage 3 target of 15 reps within 4-8 weeks of starting progressive strengthening. Some reach it faster, some take longer. Focus on consistent work rather than timelines.",
                 },
                 {
                     question:
@@ -644,7 +644,7 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**15 single-leg heel raises is the mid-Phase 3 target** — 25 reps is the final goal",
+                        "**15 single-leg heel raises is the mid-Stage 3 target** — 25 reps is the final goal",
                         "**Progress gradually** — don't rush ahead, follow your physio's guidance",
                         "**Track your progress** — seeing improvement helps you stay motivated",
                         "**Be patient** — strength builds gradually, consistency matters more than speed",

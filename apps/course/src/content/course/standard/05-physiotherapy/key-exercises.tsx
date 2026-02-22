@@ -1,7 +1,6 @@
 import type { SectionContent } from "@/components/course/types";
 import SeatedCalfRaiseWeek12 from "@/assets/seated-calf-raise-week-12.png";
 import StandingTwoFootCalfRaiseWeek12 from "@/assets/standing-two-foot-calf-raise-week-12.png";
-import SingleLegHeelRaiseWeek12 from "@/assets/single-leg-heel-raise-week-12.png";
 import TowelStretchWeek12 from "@/assets/towel-stretch-week-12.png";
 import ResistanceBandExerciseWeek12 from "@/assets/resistance-band-exercise-week-12.png";
 import BalanceTrainingWeek12 from "@/assets/balance-training-week-12.png";
@@ -9,15 +8,15 @@ import TheraBand from "@/assets/theraband.jpg";
 
 export const metadata = {
     slug: "key-exercises",
-    title: "The 6 Best Exercises for This Phase",
+    title: "The 5 Best Exercises for This Phase",
     description:
-        "Towel stretch, heel raises, resistance bands, and balance training",
+        "Towel stretch, seated heel raises, resistance bands, standing double-leg heel raises and balance training",
     status: "drafting" as const,
 };
 
 export const content: SectionContent = {
     intro:
-        "By Week 12, you're actively working on Phase 2 goals. Your physiotherapist has likely introduced several exercises, but understanding why each one matters helps you stay motivated and do them correctly. This lesson covers the 6 most important exercises for this phase — what they do, how to do them safely, and why they're essential for your recovery. These detailed instructions complement what your physiotherapist teaches you — use this as a reference guide for proper form and progression.",
+        "By Week 12, you're actively working on Phase 2 goals. Your physiotherapist has likely introduced several exercises, but understanding why each one matters helps you stay motivated and do them correctly. This lesson covers the 5 most important exercises for this phase — what they do, how to do them safely, and why they're essential for your recovery. These detailed instructions complement what your physiotherapist teaches you — use this as a reference guide for proper form and progression.",
     blocks: [
         {
             type: "heading",
@@ -56,7 +55,7 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "The 6 Essential Exercises for Phase 2",
+            title: "The 5 Essential Exercises for Phase 2",
             content: [
                 {
                     type: "text",
@@ -89,11 +88,11 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "Sit in a chair with your foot flat on the floor",
+                                "Sit in a chair with your feet on the floor, with heeled trainers or a wedge under the heel",
                                 "Place weight on your knee (start with 5-10kg, progress gradually)",
                                 "Push up onto your toes, lifting your heel",
                                 "Hold for 2-3 seconds",
-                                "Lower slowly and controlled",
+                                "Lower slowly and controlled back onto the wedge",
                                 "Repeat 10-15 times, 2-3 sets",
                             ],
                         },
@@ -188,6 +187,7 @@ export const content: SectionContent = {
                             style: "bullet",
                             items: [
                                 "Stand holding onto a wall or chair for support",
+                                "Shoes with a heel lift or heels on a block/wedge",
                                 "Feet hip-width apart, both feet on ground",
                                 "Rise up onto your toes, lifting both heels",
                                 "Hold for 2-3 seconds",
@@ -241,7 +241,7 @@ export const content: SectionContent = {
                                 {
                                     type: "text",
                                     content:
-                                        "**Progression:** Start with double-leg holds with toes down (easier) → progress to single-leg → gradually add toes-up positions as wedges are removed from your boot. The toes-down position is harder to hold, so targets are slightly lower. Focus on gradual improvement rather than hitting numbers immediately.",
+                                        "**Progression:** Start with double-leg holds with toes down (easier) → progress to single-leg. The toes-down position is harder to hold, so targets are slightly lower. Focus on gradual improvement rather than hitting numbers immediately.",
                                 },
                             ],
                         },
@@ -255,61 +255,7 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "3. Single-Leg Heel Raises",
-                    description: "The gold standard test.",
-                    variant: "highlight",
-                    content: [
-                        {
-                            type: "text",
-                            content:
-                                "**What it does:** Tests and builds single-leg strength — the ultimate goal for Phase 2. You're aiming for 25+ repetitions.",
-                        },
-                        {
-                            type: "text",
-                            content: "**How to do it:**",
-                        },
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "Stand holding onto a wall or chair for support",
-                                "Lift your uninjured leg off the ground",
-                                "Rise up onto your toes on your injured leg",
-                                "Hold for 1-2 seconds",
-                                "Lower slowly and controlled",
-                                "Start with however many you can do (even 1-2 is progress)",
-                                "Work toward 25+ reps",
-                            ],
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "**Why it matters:** This is the **gold standard test** for Phase 2. Being able to do 25+ single-leg heel raises shows your calf is strong enough for normal walking and daily activities.",
-                        },
-                        {
-                            type: "image",
-                            src: SingleLegHeelRaiseWeek12,
-                            alt: "Grant performing single-leg heel raise, standing on injured leg with uninjured leg lifted, holding wall for support",
-                            caption:
-                                "Single-leg heel raise: the gold standard test for Phase 2",
-                        },
-                        {
-                            type: "tip",
-                            title: "Progress tip",
-                            content:
-                                "Start with partial range — only go up halfway if full range is too hard. Build up gradually. Even doing 1-2 full heel raises is progress — celebrate small wins.",
-                        },
-                        {
-                            type: "tip",
-                            title: "Alternative option: Step stance",
-                            content:
-                                "If standing heel raises are too challenging, you can use a **step platform** as an alternative. Stand with the ball of your foot on the step and your heel hanging off the back. This provides a greater range of motion and can be easier to control. Hold onto a wall or railing for support. This is a good option if you're struggling with balance or need more control.",
-                        },
-                    ],
-                },
-                {
-                    type: "card",
-                    title: "4. Towel Stretch (Gentle)",
+                    title: "3. Towel Stretch (Gentle)",
                     description: "Improving flexibility safely.",
                     variant: "muted",
                     content: [
@@ -356,7 +302,7 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "5. Resistance Band Exercises",
+                    title: "4. Resistance Band Exercises",
                     description: "Building strength and control.",
                     variant: "default",
                     content: [
@@ -411,7 +357,7 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "6. Balance Training",
+                    title: "5. Balance Training",
                     description: "Rebuilding control and coordination.",
                     variant: "default",
                     content: [

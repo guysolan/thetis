@@ -317,7 +317,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "You can help by: assisting with wedge removal (especially if it requires removing the boot), helping monitor for warning signs, reminding about elevation after removal, and providing encouragement — this phase can feel slow, but it's important progress.",
+                                "You can help by: assisting with wedge removal (especially if it requires removing the boot), helping monitor for warning signs, reminding about elevation after removal, and providing encouragement — this stage can feel slow, but it's important progress.",
                         },
                     ],
                 },

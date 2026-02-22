@@ -54,7 +54,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Tendon healing happens in three overlapping biological stages. You're currently in **Phase 1: Protection** of your recovery (see [The Achilles Recovery Roadmap](/standard/recovery-roadmap) for the full journey), but inside the tendon, you are in the **proliferative stage** — the most critical period for building new tissue.",
+                        "Tendon healing happens in three overlapping biological stages. You're currently in **Stage 1: Immobilization** of your recovery (see [The Achilles Recovery Roadmap](/standard/recovery-roadmap) for the full journey), but inside the tendon, you are in the **proliferative stage** — the most critical period for building new tissue.",
                 },
                 {
                     type: "image",
@@ -80,7 +80,7 @@ export const content: SectionContent = {
                             items: [
                                 "**What's happening:** Blood vessels bring healing cells to the rupture site",
                                 "**What you feel:** Swelling, warmth, discomfort",
-                                "**Your job:** Focus on **Phase 1: Protection** goals: elevate, ice, and protect the tendon in your boot.",
+                                "**Your job:** Focus on **Stage 1: Immobilization** goals: elevate, ice, and protect the tendon in your boot.",
                             ],
                         },
                     ],
@@ -131,7 +131,7 @@ export const content: SectionContent = {
                             items: [
                                 "**What's happening:** Collagen fibres reorganise and strengthen",
                                 "**What you feel:** Gradual improvement in strength and function",
-                                "**Your job:** Transition to **Phase 2: Transition** (walking out of the boot) and start physiotherapy.",
+                                "**Your job:** Transition to **Stage 2: Post-immobilization** (walking out of the boot) and start physiotherapy.",
                             ],
                         },
                     ],

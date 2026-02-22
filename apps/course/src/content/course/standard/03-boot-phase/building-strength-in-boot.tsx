@@ -5,13 +5,13 @@ export const metadata = {
     slug: "building-strength-in-boot",
     title: "Building Strength While in Boot",
     description:
-        "Phase 1 exercises, mobilisation progression, and preparing for Phase 2",
+        "Stage 1 exercises, mobilisation progression, and preparing for Stage 2",
     status: "drafting" as const,
 };
 
 export const content: SectionContent = {
     intro:
-        "By Week 6, many protocols allow Phase 1 exercises — seated calf raises with your boot removed, **but only when protected** (heel wedge, support) or supervised. By Week 8, you're building strength and preparing for Phase 2: Transition. This lesson explains what to do and why — follow your clinician's protocol, don't skip ahead.",
+        "By Week 6, many protocols allow Stage 1 exercises — seated calf raises with your boot removed, **but only when protected** (heel wedge, support) or supervised. By Week 8, you're building strength and preparing for Stage 2: Post-immobilization. This lesson explains what to do and why — follow your clinician's protocol, don't skip ahead.",
     blocks: [
         {
             type: "heading",
@@ -24,7 +24,7 @@ export const content: SectionContent = {
             items: [
                 {
                     text:
-                        "Phase 1 exercises only when protected (heel wedge) or supervised — check with clinician",
+                        "Stage 1 exercises only when protected (heel wedge) or supervised — check with clinician",
                 },
                 {
                     text:
@@ -36,7 +36,7 @@ export const content: SectionContent = {
                 },
                 {
                     text:
-                        "Understand Phase 2 goals — but don't skip ahead; follow your protocol",
+                        "Understand Stage 2 goals — but don't skip ahead; follow your protocol",
                 },
                 {
                     text:
@@ -46,7 +46,7 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Phase 1 Exercises: Starting at Week 6",
+            title: "Stage 1 Exercises: Starting at Week 6",
             content: [
                 {
                     type: "alert",
@@ -58,11 +58,11 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "**Week 6** is when many protocols allow Phase 1 exercises — seated calf raises with your boot removed. **Check with your clinician** before starting. These exercises build strength while your tendon heals. When you start physiotherapy around Week 11, you'll see the complete rehabilitation protocol in [Starting Physiotherapy](/standard/starting-physio).",
+                        "**Week 6** is when many protocols allow Stage 1 exercises — seated calf raises with your boot removed. **Check with your clinician** before starting. These exercises build strength while your tendon heals. When you start physiotherapy around Week 11, you'll see the complete rehabilitation protocol in [Starting Physiotherapy](/standard/starting-physio).",
                 },
                 {
                     type: "card",
-                    title: "Phase 1 exercises: What to do",
+                    title: "Stage 1 exercises: What to do",
                     description:
                         "Exercises you can begin once your tendon has had time to heal.",
                     variant: "highlight",
@@ -216,30 +216,30 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "What Comes Next: Phase 2 and Phase 3",
+            title: "What Comes Next: Stage 2 and Stage 3",
             content: [
                 {
                     type: "text",
                     content:
-                        "You're currently in **Phase 1: Protection** (weeks 0-10). As you build strength, you're preparing for **Phase 2: Transition** (weeks 10-12) and eventually **Phase 3: Capacity** (weeks 12-26). For the full 4-phase picture, see [The Achilles Recovery Roadmap](/standard/recovery-roadmap).",
+                        "You're currently in **Stage 1: Immobilization** (~6 weeks). As you build strength, you're preparing for **Stage 2: Post-immobilization** (weeks 6-12) and eventually **Stage 3: Single leg capacity** (weeks 18-24). For the full 4-stage picture, see [The Achilles Recovery Roadmap](/standard/recovery-roadmap).",
                 },
                 {
                     type: "alert",
                     variant: "info",
                     title: "Don't skip ahead",
                     content:
-                        "This is to help you understand the journey — **don't rush ahead or skip phases**. Follow your clinician's protocol. Phase 2 and Phase 3 start when your clinician says you're ready, not before.",
+                        "This is to help you understand the journey — **don't rush ahead or skip stages**. Follow your clinician's protocol. Stage 2 and Stage 3 start when your clinician says you're ready, not before.",
                 },
                 {
                     type: "card",
-                    title: "Learn more about Phase 2 and Phase 3",
+                    title: "Learn more about Stage 2 and Stage 3",
                     description: "Detailed goals and progression.",
                     variant: "highlight",
                     content: [
                         {
                             type: "text",
                             content:
-                                "For detailed information about Phase 2 and Phase 3 goals (strength targets, balance, gait progression), see the physiotherapy lessons coming up. Those lessons cover the complete goals in detail.",
+                                "For detailed information about Stage 2 and Stage 3 goals (strength targets, balance, gait progression), see the physiotherapy lessons coming up. Those lessons cover the complete goals in detail.",
                         },
                     ],
                 },
@@ -287,10 +287,10 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        '**Exercises:** "When can I start Phase 1 exercises? What should I do?"',
+                        '**Exercises:** "When can I start Stage 1 exercises? What should I do?"',
                         '**Mobilisation status:** "What is my weightbearing status? When can I start putting weight on my foot?"',
                         '**Gait:** "Is my walking pattern okay? What should I focus on?"',
-                        '**Phase 2:** "When will I start Phase 2? What should I prepare for?"',
+                        '**Stage 2:** "When will I start Stage 2? What should I prepare for?"',
                         '**After-hours:** "What should I do if I can\'t reach you after hours?"',
                     ],
                 },
@@ -305,11 +305,11 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Phase 1 exercises only when protected or supervised** — heel wedge, support, or clinician supervision; never boot off with foot unsupported",
+                                "**Stage 1 exercises only when protected or supervised** — heel wedge, support, or clinician supervision; never boot off with foot unsupported",
                                 "**Start at Week 6** (or when clinician says) — seated calf raises build strength safely",
                                 "**Follow mobilisation protocol** — don't rush ahead",
                         "**Focus on good gait** — heel-to-toe pattern, use EVENup to prevent back/hip pain",
-                        "**Don't skip ahead** — Phase 2 starts when your clinician says you're ready",
+                        "**Don't skip ahead** — Stage 2 starts when your clinician says you're ready",
                         "**Be patient** — strength builds gradually",
                     ],
                 },

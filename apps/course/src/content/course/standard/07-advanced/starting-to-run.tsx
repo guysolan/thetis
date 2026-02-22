@@ -12,7 +12,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "By Week 28, you're entering **Phase 4: Return to Sport**. Running is a major milestone — it means you're transitioning from building strength to building power and impact. But starting to run requires meeting strict criteria to protect your tendon.",
+        "By Week 28, you're entering **Stage 4: Power development**. Running is a major milestone — it means you're transitioning from building strength to building power and impact. But starting to run requires meeting strict criteria to protect your tendon.",
     blocks: [
         {
             type: "heading",
@@ -21,11 +21,11 @@ export const content: SectionContent = {
         },
         {
             type: "checklist",
-            title: "Phase 4: Starting to run basics",
+            title: "Stage 4: Starting to run basics",
             items: [
                 {
                     text:
-                        "Meet Phase 3 exit criteria first — 25+ heel raises, pain-free walking, good balance",
+                        "Meet Stage 3 exit criteria first — 25+ heel raises, pain-free walking, good balance",
                 },
                 {
                     text:
@@ -56,7 +56,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Running is **criteria-based, not time-based**. You must meet the exit criteria for **Phase 3: Capacity** before starting. Don't rush — running too early on a weak tendon is a leading cause of re-rupture.",
+                        "Running is **criteria-based, not time-based**. You must meet the exit criteria for **Stage 3: Single leg capacity** before starting. Don't rush — running too early on a weak tendon is a leading cause of re-rupture.",
                 },
                 {
                     type: "card",
@@ -402,7 +402,7 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**Meet Phase 3 criteria first** — don't start until you're ready",
+                        "**Meet Stage 3 criteria first** — don't start until you're ready",
                         "**Follow progression plan** — walk-jog intervals, build gradually",
                         "**Choose safe surfaces** — start with soft, flat surfaces",
                         "**Focus on form** — proper technique reduces stress",
@@ -433,9 +433,9 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**This week:** Start walk-jog progression if you meet Phase 3 exit criteria",
+                        "**This week:** Start walk-jog progression if you meet Stage 3 exit criteria",
                         "**Week 30:** We cover life after Achilles rupture — long-term expectations and care",
-                        "**Weeks 28-34:** Continue building running fitness gradually within Phase 4",
+                        "**Weeks 28-34:** Continue building running fitness gradually within Stage 4",
                         "**Next up:** You'll progress to **Plyometric Training** and eventually a full return to play",
                     ],
                 },

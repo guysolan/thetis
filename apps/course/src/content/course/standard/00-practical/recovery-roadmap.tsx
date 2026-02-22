@@ -1,86 +1,87 @@
 import type { SectionContent } from "@/components/course/types";
+// IMAGE TO UPDATE: recovery-roadmap-4-phases.png — update to show 4 Stages (not Phases): Stage 1 Immobilization, Stage 2 Post-immobilization, Stage 3 Single leg capacity, Stage 4 Power development
 import RecoveryRoadmap4Phases from "@/assets/recovery-roadmap-4-phases.png";
 
 export const metadata = {
     slug: "recovery-roadmap",
     title: "The Achilles Recovery Roadmap",
-    description: "An overview of the 4 phases of your recovery journey",
+    description: "An overview of the 4 stages of your recovery journey",
     status: "drafting" as const,
 };
 
 export const content: SectionContent = {
     intro:
-        "Recovery is a marathon. Whether you've just been diagnosed or you're further along, this page gives you the full picture. We divide the 9–12 month journey into four phases based on criteria, not just the calendar.",
+        "Recovery is a marathon. Whether you've just been diagnosed or you're further along, this page gives you the full picture. We divide the 9–12 month journey into four stages based on criteria, not just the calendar.",
     blocks: [
         {
             type: "image",
             src: RecoveryRoadmap4Phases,
-            alt: "Infographic showing the 4 phases of Achilles recovery: Protection (Weeks 0-10), Transition (Weeks 10-12), Capacity (Weeks 12-26), and Return to Sport (Weeks 26+)",
-            caption: "The 4 phases of recovery — from protection to return to sport",
+            alt: "Infographic showing the 4 stages of Achilles recovery: Stage 1 Immobilization (weeks 0-6), Stage 2 Post-immobilization (weeks 6-12), Stage 3 Single leg capacity (weeks 18-24), Stage 4 Power development (weeks 24+)",
+            caption: "The 4 stages of recovery — from immobilization to return to sport",
         },
         {
             type: "section",
-            title: "The 4 Phases at a Glance",
+            title: "The 4 Stages at a Glance",
             content: [
                 {
                     type: "text",
                     content:
-                        "Each phase has a clear focus and a key milestone. You move on when you meet the criteria, not just when the calendar says.",
+                        "Each stage has a clear focus and a key milestone. You move on when you meet the criteria, not just when the calendar says.",
                 },
                 {
                     type: "card",
-                    title: "1. Protection — Weeks 0–10",
+                    title: "Stage 1: Immobilization — ~6 weeks",
                     description: "In the boot: protecting the healing tendon",
                     variant: "highlight",
                     content: [
                         {
                             type: "text",
                             content:
-                                "Your foot stays pointed down in the boot. Most protocols keep maximum angle until **week 5**, when wedge removal or hinge adjustment typically begins. The boot usually comes off around **week 10**.",
+                                "Your foot stays pointed down in the boot. Most protocols keep maximum angle until **week 5**, when wedge removal or hinge adjustment typically begins. Boot removal timing varies by protocol (often week 8–12).",
                         },
                         {
                             type: "text",
-                            content: "**Key milestone:** End of boot protocol (week 8–10)",
+                            content: "**Key milestone:** End of boot protocol",
                         },
                     ],
                 },
                 {
                     type: "card",
-                    title: "2. Transition — Weeks 10–12",
-                    description: "Out of the boot: learning to walk normally",
+                    title: "Stage 2: Post-immobilization — ~6 weeks (weeks 6–12)",
+                    description: "Out of the boot: rebuilding strength and function",
                     variant: "default",
                     content: [
                         {
                             type: "text",
                             content:
-                                "First steps in shoes (often with a heel lift), rebuilding confidence and a normal walking pattern. Physiotherapy usually starts in this phase.",
+                                "First steps in shoes (often with a heel lift), rebuilding confidence and a normal walking pattern. Physiotherapy usually starts in this stage. Targets include **15 single-leg calf raises**, 1.4x body weight strength, balance training.",
                         },
                         {
                             type: "text",
-                            content: "**Key milestone:** Pain-free walking (week 10–12)",
+                            content: "**Key milestone:** Pain-free walking, progressing toward 15+ heel raises",
                         },
                     ],
                 },
                 {
                     type: "card",
-                    title: "3. Capacity — Weeks 12–26",
-                    description: "Building single-leg strength",
+                    title: "Stage 3: Single leg capacity — ~6 weeks (weeks 18–24)",
+                    description: "Building single-leg strength and capacity",
                     variant: "default",
                     content: [
                         {
                             type: "text",
                             content:
-                                "Progressive strengthening, balance, and function. The main target: enough strength to move safely to higher-impact activity.",
+                                "Progressive strengthening, gait preparation, plyometric preparation. The main target: enough strength to move safely to higher-impact activity. Running when ready.",
                         },
                         {
                             type: "text",
-                            content: "**Key milestone:** 25 single-leg heel raises",
+                            content: "**Key milestone:** 25+ single-leg heel raises, ready for Stage 4",
                         },
                     ],
                 },
                 {
                     type: "card",
-                    title: "4. Return to Sport — Week 26+",
+                    title: "Stage 4: Power development — weeks 24+",
                     description: "Power, impact, and full competition",
                     variant: "default",
                     content: [
