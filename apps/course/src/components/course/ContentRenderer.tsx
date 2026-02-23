@@ -48,7 +48,7 @@ function parseInlineMarkdown(text: string): React.ReactNode {
         <Link
           key={i}
           to={url}
-          className="text-primary underline hover:text-primary/80"
+          className="text-primary hover:text-primary/80 underline"
         >
           {linkText}
         </Link>
@@ -503,10 +503,11 @@ function RehabProtocolTableBlockComponent() {
     <div className="my-8">
       <RehabProtocolTable />
       <p className="mt-4 text-muted-foreground text-sm">
-        <strong>Note:</strong> This protocol is a general guideline. Your
-        specific rehabilitation program will be tailored to your protocol,
-        healing progress, and your clinician's assessment. Always follow your
-        clinician's specific instructions.
+        <strong>Note:</strong>{" "}
+        This protocol is a general guideline. Your specific rehabilitation
+        program will be tailored to your protocol, healing progress, and your
+        clinician's assessment. Always follow your clinician's specific
+        instructions.
       </p>
     </div>
   );
@@ -514,7 +515,7 @@ function RehabProtocolTableBlockComponent() {
 
 function CertificateBlockComponent() {
   return (
-    <div className="my-10 p-8 md:p-12 bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 border-2 border-primary/30 rounded-2xl text-center">
+    <div className="bg-gradient-to-br from-primary/10 dark:from-primary/20 to-primary/5 dark:to-primary/10 my-10 p-8 md:p-12 border-2 border-primary/30 rounded-2xl text-center">
       <Award className="mx-auto mb-4 w-16 h-16 text-primary" />
       <h3 className="mb-2 font-bold text-foreground text-2xl md:text-3xl">
         Certificate of Completion
@@ -522,19 +523,20 @@ function CertificateBlockComponent() {
       <p className="mb-4 text-muted-foreground text-lg">
         Achilles Recovery Course
       </p>
-      <p className="mb-6 text-foreground font-medium">
+      <p className="mb-6 font-medium text-foreground">
         You have completed the full course and are equipped with the knowledge
         to support your recovery journey.
       </p>
-      <Link
-        to="/standard/certificate"
+      <a
+        href="/documents/certificate-of-completion.pdf"
+        download="Achilles-Recovery-Course-Certificate.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex justify-center items-center gap-2 h-12 px-8 rounded-sm bg-primary text-primary-foreground font-semibold hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="inline-flex justify-center items-center gap-2 bg-primary hover:bg-primary/90 px-8 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring h-12 font-semibold text-white"
       >
         <Download className="w-4 h-4" />
         Download Certificate
-      </Link>
+      </a>
     </div>
   );
 }

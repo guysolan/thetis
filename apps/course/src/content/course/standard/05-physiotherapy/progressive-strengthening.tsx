@@ -613,7 +613,7 @@ export const content: SectionContent = {
                     items: [
                         "**This week:** Focus on progressive strengthening — building toward 15 single-leg heel raises and Stage 3 strength targets",
                         "**Week 17:** We cover building cardio without risk — swimming, bike, elliptical",
-                        "**Weeks 15-18:** Continue building strength, working toward Stage 3 goals (25+ heel raises, 1.4x body weight)",
+                        "**Weeks 15-18:** Continue building strength, working toward Stage 3 goals (25+ heel raises, improving isometric strength)",
                         "**After Stage 3:** You'll move to **Stage 4: Power development** (running and jumping progression)",
                     ],
                 },

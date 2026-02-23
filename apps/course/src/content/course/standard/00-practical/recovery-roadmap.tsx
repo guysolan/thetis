@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-// IMAGE TO UPDATE: recovery-roadmap-4-phases.png — update to show 4 Stages (not Phases): Stage 1 Immobilization, Stage 2 Post-immobilization, Stage 3 Single leg capacity, Stage 4 Power development
+// IMAGE TO UPDATE: recovery-roadmap-4-phases.png — update to show 4 Stages (not Phases): Stage 1 Protection, Stage 2 Transition, Stage 3 Capacity, Stage 4 Return to Sport
 import RecoveryRoadmap4Phases from "@/assets/recovery-roadmap-4-phases.png";
 
 export const metadata = {
@@ -30,7 +30,7 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Stage 1: Immobilization — ~6 weeks",
+                    title: "Stage 1: Protection — ~10 weeks (weeks 0–10)",
                     description: "In the boot: protecting the healing tendon",
                     variant: "highlight",
                     content: [
@@ -47,31 +47,31 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Stage 2: Post-immobilization — ~6 weeks (weeks 6–12)",
-                    description: "Out of the boot: rebuilding strength and function",
+                    title: "Stage 2: Transition — ~2 weeks (weeks 10–12)",
+                    description: "Out of the boot: rebuilding a normal walking pattern",
                     variant: "default",
                     content: [
                         {
                             type: "text",
                             content:
-                                "First steps in shoes (often with a heel lift), rebuilding confidence and a normal walking pattern. Physiotherapy usually starts in this stage. Targets include **15 single-leg calf raises**, 1.4x body weight strength, balance training.",
+                                "First steps in shoes (often with a heel lift), rebuilding confidence and a normal walking pattern. Physiotherapy usually starts in this stage. Targets include **15+ double-leg heel raises**, 1.4x body weight strength (isometric), balance training.",
                         },
                         {
                             type: "text",
-                            content: "**Key milestone:** Pain-free walking, progressing toward 15+ heel raises",
+                            content: "**Key milestone:** Pain-free walking, 15+ double-leg heel raises",
                         },
                     ],
                 },
                 {
                     type: "card",
-                    title: "Stage 3: Single leg capacity — ~6 weeks (weeks 18–24)",
+                    title: "Stage 3: Capacity — ~14 weeks (weeks 12–26)",
                     description: "Building single-leg strength and capacity",
                     variant: "default",
                     content: [
                         {
                             type: "text",
                             content:
-                                "Progressive strengthening, gait preparation, plyometric preparation. The main target: enough strength to move safely to higher-impact activity. Running when ready.",
+                                "Progressive strengthening, gait preparation, plyometric preparation. Targets include 15 single-leg heel raises (mid-point). The main target: enough strength to move safely to higher-impact activity.",
                         },
                         {
                             type: "text",
@@ -81,7 +81,7 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Stage 4: Power development — weeks 24+",
+                    title: "Stage 4: Return to Sport — weeks 26+",
                     description: "Power, impact, and full competition",
                     variant: "default",
                     content: [

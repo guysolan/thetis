@@ -210,7 +210,7 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**15+ double-leg heel raises** — being able to do 15+ heel raises. Later comes injured leg alone (target: 25+ for Stage 2 completion)",
+                                "**15+ double-leg heel raises** — being able to do 15+ heel raises. Later comes injured leg alone (target: 25+ for Stage 3 completion)",
                                 "**1.4x body weight MVIC** — see explanation below",
                                 "**1.2x body weight seated isotonic** — see explanation below",
                                 "**Good balance** — standing on one leg comfortably, maintaining balance",

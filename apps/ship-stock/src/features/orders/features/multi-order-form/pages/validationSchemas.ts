@@ -53,6 +53,17 @@ export const orderDetailsSchema = z.object({
 			path: ["from_shipping_address_id"],
 		});
 	}
+
+	// For non-stocktake orders, require currency
+	if (data.order_type !== "count") {
+		if (!data.currency || !(currencyKeys as readonly string[]).includes(data.currency)) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message: "Please select a currency",
+				path: ["currency"],
+			});
+		}
+	}
 });
 
 // Page 2: Companies & Addresses validation
