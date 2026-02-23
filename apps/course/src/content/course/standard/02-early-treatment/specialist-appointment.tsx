@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import SimmondsTest from "@/assets/thompson-test.png"; // IMAGE TO UPDATE: rename to simmonds-test.png
 
 export const metadata = {
@@ -8,6 +8,32 @@ export const metadata = {
         "What to expect at orthopaedics, physical examination, and imaging",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question:
+            "What if my appointment is delayed beyond 2 weeks?",
+        answer:
+            "While earlier is generally better, a short delay (a few days) is unlikely to change outcomes significantly. If you're waiting more than 2 weeks and haven't been seen, contact the clinic to escalate. Keep protecting the tendon in the meantime.",
+    },
+    {
+        question:
+            "Do I need to decide on surgery at this appointment?",
+        answer:
+            "Not necessarily. Many clinics give you time to think — especially if both options are reasonable for your situation. Ask how long you have to decide and what information would help you choose.",
+    },
+    {
+        question:
+            "What if the specialist recommends something different from what A&E said?",
+        answer:
+            "This is normal. A&E focuses on initial stabilisation. The specialist has more time, expertise, and possibly imaging to refine the plan. If you're confused about why recommendations differ, ask for clarification.",
+    },
+    {
+        question: "When can I drive / go back to work?",
+        answer:
+            "We cover driving in a later section. As a general rule, if your **left leg** is injured, you can drive an automatic with your right leg as soon as you are safe getting in and out of the car (assuming the boot does not get in the way of the pedals). If it is your **right leg**, or you have a **manual car**, driving will unfortunately have to wait approximately three months (unless you modify the pedals). Work depends on your job — desk roles may resume earlier with adjustments. Ask your specialist for a timeline specific to your situation.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -320,31 +346,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question:
-                        "What if my appointment is delayed beyond 2 weeks?",
-                    answer:
-                        "While earlier is generally better, a short delay (a few days) is unlikely to change outcomes significantly. If you're waiting more than 2 weeks and haven't been seen, contact the clinic to escalate. Keep protecting the tendon in the meantime.",
-                },
-                {
-                    question:
-                        "Do I need to decide on surgery at this appointment?",
-                    answer:
-                        "Not necessarily. Many clinics give you time to think — especially if both options are reasonable for your situation. Ask how long you have to decide and what information would help you choose.",
-                },
-                {
-                    question:
-                        "What if the specialist recommends something different from what A&E said?",
-                    answer:
-                        "This is normal. A&E focuses on initial stabilisation. The specialist has more time, expertise, and possibly imaging to refine the plan. If you're confused about why recommendations differ, ask for clarification.",
-                },
-                {
-                    question: "When can I drive / go back to work?",
-                    answer:
-                        "We cover driving in a later section. As a general rule, if your **left leg** is injured, you can drive an automatic with your right leg as soon as you are safe getting in and out of the car (assuming the boot does not get in the way of the pedals). If it is your **right leg**, or you have a **manual car**, driving will unfortunately have to wait approximately three months (unless you modify the pedals). Work depends on your job — desk roles may resume earlier with adjustments. Ask your specialist for a timeline specific to your situation.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

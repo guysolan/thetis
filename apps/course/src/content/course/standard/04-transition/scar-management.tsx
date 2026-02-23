@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 
 export const metadata = {
     slug: "scar-management",
@@ -7,6 +7,29 @@ export const metadata = {
         "Understanding scar tissue, scar massage, bio-oil, and when to start scar management",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "When should I start scar massage?",
+        answer:
+            "Usually 2-3 weeks after surgery (once wounds are fully closed) or week 12-14 after boot removal. Always check with your clinician first — they'll assess when it's safe for you to start.",
+    },
+    {
+        question: "Does bio-oil really work?",
+        answer:
+            "Evidence for bio-oil specifically is limited, but keeping scars moisturized is generally helpful. Bio-oil can help keep scar tissue supple and may improve appearance over time. The most important thing is gentle scar massage, which you can do with bio-oil or any good moisturizer.",
+    },
+    {
+        question: "Will my scar ever look normal?",
+        answer:
+            "Scars improve over time but may never look exactly like normal skin. However, most scars become much less noticeable over 6-12 months. The most important thing is function — a thicker tendon usually works perfectly well even if it looks different.",
+    },
+    {
+        question: "Is a thicker tendon normal?",
+        answer:
+            "Yes, absolutely. Your tendon heals with scar tissue, which is often thicker than the original tendon. This is normal and doesn't necessarily affect function. Many people have excellent function despite a thicker tendon.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -409,28 +432,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "When should I start scar massage?",
-                    answer:
-                        "Usually 2-3 weeks after surgery (once wounds are fully closed) or week 12-14 after boot removal. Always check with your clinician first — they'll assess when it's safe for you to start.",
-                },
-                {
-                    question: "Does bio-oil really work?",
-                    answer:
-                        "Evidence for bio-oil specifically is limited, but keeping scars moisturized is generally helpful. Bio-oil can help keep scar tissue supple and may improve appearance over time. The most important thing is gentle scar massage, which you can do with bio-oil or any good moisturizer.",
-                },
-                {
-                    question: "Will my scar ever look normal?",
-                    answer:
-                        "Scars improve over time but may never look exactly like normal skin. However, most scars become much less noticeable over 6-12 months. The most important thing is function — a thicker tendon usually works perfectly well even if it looks different.",
-                },
-                {
-                    question: "Is a thicker tendon normal?",
-                    answer:
-                        "Yes, absolutely. Your tendon heals with scar tissue, which is often thicker than the original tendon. This is normal and doesn't necessarily affect function. Many people have excellent function despite a thicker tendon.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

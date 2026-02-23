@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import PogoJumpWeek31 from "@/assets/pogos.png";
 
 export const metadata = {
@@ -9,9 +9,22 @@ export const metadata = {
     status: "drafting" as const,
 };
 
+export const faqs: FAQItem[] = [
+    {
+        question: "When can I start plyometrics?",
+        answer:
+            "When you meet the criteria: 25+ single-leg heel raises, good balance, no pain, and physio clearance. Simple plyometrics (pogo jumps, two-foot jumps) often **start alongside running** — not only after running is fully established. Your physio will guide the timing.",
+    },
+    {
+        question: "What if plyometrics cause pain?",
+        answer:
+            "Some muscle soreness is normal, but severe pain is not. If plyometrics cause severe pain, stop and tell your physiotherapist. They can assess what's happening and modify your program.",
+    },
+];
+
 export const content: SectionContent = {
     intro:
-        "By Week 31, you're likely running and thinking about higher-level activities. Plyometric training — jumping and explosive movements — is the next step. This prepares you for return to sport and builds power. But plyometrics require careful progression. This lesson covers when to start, how to progress from simple jumps to sport-specific training, and how to do it safely.",
+        "By Week 31, you're likely running and thinking about higher-level activities. Plyometric training — jumping and explosive movements — often **starts alongside running**, not only after running is established. Simple plyometrics (pogo jumps, two-foot jumps) can begin as you start your walk-jog progression. This prepares you for return to sport and builds power. This lesson covers when to start, how to progress from simple jumps to sport-specific training, and how to do it safely.",
     blocks: [
         {
             type: "heading",
@@ -55,7 +68,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Plyometric training is **criteria-based, not time-based**. You need to meet certain strength and function goals before starting. Don't rush — plyometrics too early increases injury risk.",
+                        "Plyometric training is **criteria-based, not time-based**. Many protocols introduce simple plyometrics (pogo jumps, two-foot jumps) **alongside** the start of running — not only after running is fully established. You still need to meet strength and function goals first. Don't rush — plyometrics too early increases injury risk.",
                 },
                 {
                     type: "card",
@@ -307,18 +320,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "When can I start plyometrics?",
-                    answer:
-                        "When you meet the criteria: 25+ single-leg heel raises, comfortable running, good balance, no pain, and physio clearance. This is typically around 6-7 months, but it's criteria-based, not time-based.",
-                },
-                {
-                    question: "What if plyometrics cause pain?",
-                    answer:
-                        "Some muscle soreness is normal, but severe pain is not. If plyometrics cause severe pain, stop and tell your physiotherapist. They can assess what's happening and modify your program.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

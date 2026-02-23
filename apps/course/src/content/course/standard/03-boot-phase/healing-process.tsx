@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import TendonHealingTimeline from "@/assets/tendon-healing-timeline.png";
 import TendonStiffnessAfterRupture from "@/assets/tendon-stiffness-after-rupture.png";
 import ReRuptureRiskTimeline from "@/assets/rerupture-vs-elongation-comprehensive-v8.png";
@@ -7,9 +7,32 @@ export const metadata = {
     slug: "healing-process",
     title: "Understanding Your Healing Tendon",
     description:
-        "The proliferative phase, tendon length, and why patience matters",
+        "The proliferative stage, tendon length, and why patience matters",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "How do I know if my tendon is healing?",
+        answer:
+            "You can't see inside, but signs of good healing include: decreasing swelling, less pain, and following your protocol without complications. Your clinician will check progress with physical examination and sometimes ultrasound. Trust the process — healing is happening even when you can't see it.",
+    },
+    {
+        question: "What if I accidentally stretched my tendon?",
+        answer:
+            "If you accidentally let your foot go flat or stretched it briefly, don't panic. The risk is from repeated or prolonged stretching. Tell your clinician at your next appointment. If you felt a new 'pop' or sudden pain, seek urgent assessment.",
+    },
+    {
+        question: "Can I speed up healing?",
+        answer:
+            "Not really. Healing follows a biological timeline. What you can do is create the best conditions: protect the tendon, control swelling, eat well, sleep well, don't smoke. Pushing too hard actually slows healing by causing inflammation or re-injury.",
+    },
+    {
+        question: "When can I drive / go back to work?",
+        answer:
+            "This depends on which leg is injured, your job, and your clinician's guidance. We cover this in detail in Week 8. For now, assume you won't be driving if it's your right leg, and discuss work with your employer and clinician.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -123,7 +146,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "The new tissue you're building now will gradually reorganise and strengthen. Collagen fibres align along the direction of force, making the tendon progressively stronger. This phase continues for months.",
+                                "The new tissue you're building now will gradually reorganise and strengthen. Collagen fibres align along the direction of force, making the tendon progressively stronger. This stage continues for months.",
                         },
                         {
                             type: "list",
@@ -338,7 +361,7 @@ export const content: SectionContent = {
                         "**Week 5:** We cover **wedge removal protocol** — when and how to remove wedges safely",
                         "**Weeks 5-6:** You may progress mobilisation status (if your protocol allows)",
                         "**Crutches:** When you come off crutches varies widely — some protocols get patients off at week 2 or sooner, others later. Follow your clinician's guidance.",
-                        "**Weeks 8-10:** Boot phase continues, but you'll be more mobile",
+                        "**Weeks 8-10:** Boot stage continues, but you'll be more mobile",
                     ],
                 },
                 {
@@ -372,28 +395,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "How do I know if my tendon is healing?",
-                    answer:
-                        "You can't see inside, but signs of good healing include: decreasing swelling, less pain, and following your protocol without complications. Your clinician will check progress with physical examination and sometimes ultrasound. Trust the process — healing is happening even when you can't see it.",
-                },
-                {
-                    question: "What if I accidentally stretched my tendon?",
-                    answer:
-                        "If you accidentally let your foot go flat or stretched it briefly, don't panic. The risk is from repeated or prolonged stretching. Tell your clinician at your next appointment. If you felt a new 'pop' or sudden pain, seek urgent assessment.",
-                },
-                {
-                    question: "Can I speed up healing?",
-                    answer:
-                        "Not really. Healing follows a biological timeline. What you can do is create the best conditions: protect the tendon, control swelling, eat well, sleep well, don't smoke. Pushing too hard actually slows healing by causing inflammation or re-injury.",
-                },
-                {
-                    question: "When can I drive / go back to work?",
-                    answer:
-                        "This depends on which leg is injured, your job, and your clinician's guidance. We cover this in detail in Week 8. For now, assume you won't be driving if it's your right leg, and discuss work with your employer and clinician.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",
@@ -404,7 +406,7 @@ export const content: SectionContent = {
                     type: "list",
                     style: "bullet",
                     items: [
-                        "**You're in the proliferative phase** — new tissue is actively being built",
+                        "**You're in the proliferative stage** — new tissue is actively being built",
                         "**Patience now = better function later** — don't rush wedge removal or mobilisation progression",
                         "**Healing is invisible** — trust the process, follow your protocol",
                         "**Protect the tendon length** — keep your foot in the correct position",

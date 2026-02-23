@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import WedgeRemovalProgression from "@/assets/wedge-removal-progression-cartoon.png";
 
 export const metadata = {
@@ -8,6 +8,46 @@ export const metadata = {
         "Wedge removal schedule, mobilisation progression, and angle changes",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question:
+            "How do I know when to reduce the angle (remove a wedge or adjust the hinge)?",
+        answer:
+            "Follow your protocol exactly. Most protocols do not start reducing the angle until week 5. Your medical team will give you a schedule and set the time intervals (e.g., when to remove each wedge — bottom first — or adjust the hinge). Don't progress faster than instructed, even if you feel fine. Starting too early can elongate the tendon.",
+    },
+    {
+        question: "What if I reduce the angle and it hurts?",
+        answer:
+            "Some discomfort is normal when reducing the angle — you're putting slightly more stress on the tendon. However, severe pain is not normal. If you have severe pain, a new pop, or sudden loss of function, stop and contact your clinic. A little discomfort is expected; severe pain is a warning sign.",
+    },
+    {
+        question: "Can I progress faster than my protocol says?",
+        answer:
+            "No. Even if you feel fine, the tendon needs time to heal at each stage. Rushing ahead is one of the most common causes of re-rupture or tendon elongation. Follow your protocol exactly — your clinician designed it based on healing timelines.",
+    },
+    {
+        question:
+            "What if my protocol is different from what I read online?",
+        answer:
+            "Protocols vary widely between clinics and specialists. Some are more conservative, some are more accelerated. What matters is following YOUR specific protocol, not comparing with others. If you have concerns about your protocol, discuss them with your clinician.",
+    },
+    {
+        question: "What if I accidentally reduced the angle too much?",
+        answer:
+            "Reverse the change immediately — put the wedges back (Aircast) or lock the hinge to a more restricted range (VACOped). Don't walk on it until you've restored the correct angle. Contact your clinician to discuss — they may want to see you to check everything is okay. It's better to be safe than risk re-injury.",
+    },
+    {
+        question: "Can I reduce the angle faster if I'm feeling good?",
+        answer:
+            "No. Even if you feel great, follow your clinician's protocol. The timing is based on healing progress, not just how you feel. Reducing too quickly risks over-stretching or re-rupture. Patience now = better function later.",
+    },
+    {
+        question: "What if reducing the angle causes pain?",
+        answer:
+            "Some mild discomfort is normal. If you get significant pain, reverse the change (put the wedge back or lock the hinge) and wait longer. If pain persists even after reversing, contact your clinician. Don't push through severe pain — it's a sign to slow down.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -544,45 +584,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question:
-                        "How do I know when to reduce the angle (remove a wedge or adjust the hinge)?",
-                    answer:
-                        "Follow your protocol exactly. Most protocols do not start reducing the angle until week 5. Your medical team will give you a schedule and set the time intervals (e.g., when to remove each wedge — bottom first — or adjust the hinge). Don't progress faster than instructed, even if you feel fine. Starting too early can elongate the tendon.",
-                },
-                {
-                    question: "What if I reduce the angle and it hurts?",
-                    answer:
-                        "Some discomfort is normal when reducing the angle — you're putting slightly more stress on the tendon. However, severe pain is not normal. If you have severe pain, a new pop, or sudden loss of function, stop and contact your clinic. A little discomfort is expected; severe pain is a warning sign.",
-                },
-                {
-                    question: "Can I progress faster than my protocol says?",
-                    answer:
-                        "No. Even if you feel fine, the tendon needs time to heal at each stage. Rushing ahead is one of the most common causes of re-rupture or tendon elongation. Follow your protocol exactly — your clinician designed it based on healing timelines.",
-                },
-                {
-                    question:
-                        "What if my protocol is different from what I read online?",
-                    answer:
-                        "Protocols vary widely between clinics and specialists. Some are more conservative, some are more accelerated. What matters is following YOUR specific protocol, not comparing with others. If you have concerns about your protocol, discuss them with your clinician.",
-                },
-                {
-                    question: "What if I accidentally reduced the angle too much?",
-                    answer:
-                        "Reverse the change immediately — put the wedges back (Aircast) or lock the hinge to a more restricted range (VACOped). Don't walk on it until you've restored the correct angle. Contact your clinician to discuss — they may want to see you to check everything is okay. It's better to be safe than risk re-injury.",
-                },
-                {
-                    question: "Can I reduce the angle faster if I'm feeling good?",
-                    answer:
-                        "No. Even if you feel great, follow your clinician's protocol. The timing is based on healing progress, not just how you feel. Reducing too quickly risks over-stretching or re-rupture. Patience now = better function later.",
-                },
-                {
-                    question: "What if reducing the angle causes pain?",
-                    answer:
-                        "Some mild discomfort is normal. If you get significant pain, reverse the change (put the wedge back or lock the hinge) and wait longer. If pain persists even after reversing, contact your clinician. Don't push through severe pain — it's a sign to slow down.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import PoolWalkingWeek12 from "@/assets/pool-walking-week-12.png";
 
 export const metadata = {
@@ -8,6 +8,29 @@ export const metadata = {
         "When to start swimming, pool exercises, safety considerations, and benefits for recovery",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "When can I start swimming after Achilles rupture?",
+        answer:
+            "Typically week 12-14, but this depends on whether you had surgery and if wounds are fully healed. Non-surgical patients may start pool walking earlier (week 10-12). Always check with your clinician first — they'll assess when it's safe for you.",
+    },
+    {
+        question: "Can I swim if I had surgery?",
+        answer:
+            "Yes. Surgical wounds typically close by week 2-3 post-surgery. Swimming usually starts week 12-14 — by then wounds are long healed. The main factor is being cleared by your clinician and ready for pool activity (out of boot, etc.). Check with your surgeon before swimming.",
+    },
+    {
+        question: "What swimming strokes are safe?",
+        answer:
+            "Freestyle (front crawl) and backstroke are safest initially. Breaststroke may strain the ankle, so use caution. Avoid butterfly and flip turns initially. Start with gentle strokes and progress gradually.",
+    },
+    {
+        question: "Will swimming help my recovery?",
+        answer:
+            "Yes, swimming is excellent for recovery. It provides cardiovascular exercise with minimal tendon loading, helps maintain fitness, improves mood, and can be a stepping stone to return to other activities. It's one of the safest ways to exercise during recovery.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -63,7 +86,7 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Surgical wounds fully healed** — if you had surgery, wait 2-3 weeks until wounds are closed",
+                                "**Surgical wounds fully healed** — if you had surgery, wounds typically close by week 2-3 post-surgery; swimming usually starts week 12-14 when out of boot",
                                 "**Specialist approval** — check with your clinician first",
                                 "**No open wounds** — any skin issues must be resolved",
                                 "**Comfortable in water** — you need to be able to move safely",
@@ -441,28 +464,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "When can I start swimming after Achilles rupture?",
-                    answer:
-                        "Typically week 12-14, but this depends on whether you had surgery and if wounds are fully healed. Non-surgical patients may start pool walking earlier (week 10-12). Always check with your clinician first — they'll assess when it's safe for you.",
-                },
-                {
-                    question: "Can I swim if I had surgery?",
-                    answer:
-                        "Yes, but you need to wait until surgical wounds are fully healed (usually 2-3 weeks). The wound must be completely closed with no open areas. Check with your surgeon before swimming.",
-                },
-                {
-                    question: "What swimming strokes are safe?",
-                    answer:
-                        "Freestyle (front crawl) and backstroke are safest initially. Breaststroke may strain the ankle, so use caution. Avoid butterfly and flip turns initially. Start with gentle strokes and progress gradually.",
-                },
-                {
-                    question: "Will swimming help my recovery?",
-                    answer:
-                        "Yes, swimming is excellent for recovery. It provides cardiovascular exercise with minimal tendon loading, helps maintain fitness, improves mood, and can be a stepping stone to return to other activities. It's one of the safest ways to exercise during recovery.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import ThetisNightSplint from "@/assets/thetis-splint.jpg";
 import MerinoSocks from "@/assets/merino-socks.webp";
 import Antifungal from "@/assets/antifungal.jpg";
@@ -11,6 +11,19 @@ export const metadata = {
         "Washing safely, skin care, preventing infections, and bathroom safety",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "My foot smells terrible — is this normal?",
+        answer:
+            "Yes, unfortunately. Your foot is trapped in a warm, moist environment for weeks. Use antifungal powder daily, wear merino socks, change socks frequently, and air the boot out when resting. If you develop itchy, flaky skin between your toes or around your nails, you may have a fungal infection — treat it early with over-the-counter antifungal cream.",
+    },
+    {
+        question: "How often should I wash my foot?",
+        answer:
+            "Ideally daily, but this depends on your protocol. If you can use a night splint for washing, sit on a shower stool and shower normally. If not, use seated washing (with a long-handled sponge and basin) or baby wipes between proper washes. Always sit when washing, keep your foot toes-down, and dry thoroughly with a hairdryer on cool. The key is keeping your foot as clean as possible while maintaining protection.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -131,7 +144,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "Most protocols allow this once you're past the very early phase (usually after week 2-3). Check with your clinician first.",
+                                "Most protocols allow this once you're past the very early stage (usually after week 2-3). Check with your clinician first.",
                         },
                     ],
                 },
@@ -221,7 +234,7 @@ export const content: SectionContent = {
                     variant: "info",
                     title: "Why merino socks?",
                     content:
-                        "Merino wool wicks moisture, regulates temperature (warm when cold, cool when hot), and has natural antibacterial properties. Unlike cotton, it doesn't stay damp against your skin. Many patients find them the single best quality-of-life upgrade during boot phase.",
+                        "Merino wool wicks moisture, regulates temperature (warm when cold, cool when hot), and has natural antibacterial properties. Unlike cotton, it doesn't stay damp against your skin. Many patients find them the single best quality-of-life upgrade during the boot stage.",
                 },
             ],
         },
@@ -232,7 +245,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Swelling and skin issues are common during the boot phase. Your foot is trapped in a closed environment, and gravity causes fluid to pool. Here's how to manage these challenges.",
+                        "Swelling and skin issues are common during the boot stage. Your foot is trapped in a closed environment, and gravity causes fluid to pool. Here's how to manage these challenges.",
                 },
                 {
                     type: "card",
@@ -328,18 +341,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "My foot smells terrible — is this normal?",
-                    answer:
-                        "Yes, unfortunately. Your foot is trapped in a warm, moist environment for weeks. Use antifungal powder daily, wear merino socks, change socks frequently, and air the boot out when resting. If you develop itchy, flaky skin between your toes or around your nails, you may have a fungal infection — treat it early with over-the-counter antifungal cream.",
-                },
-                {
-                    question: "How often should I wash my foot?",
-                    answer:
-                        "Ideally daily, but this depends on your protocol. If you can use a night splint for washing, sit on a shower stool and shower normally. If not, use seated washing (with a long-handled sponge and basin) or baby wipes between proper washes. Always sit when washing, keep your foot toes-down, and dry thoroughly with a hairdryer on cool. The key is keeping your foot as clean as possible while maintaining protection.",
-                },
-            ],
+            items: faqs,
         },
     ],
 };

@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import AircastBootWithWedges from "@/assets/aircast-boot-with-wedges.png";
 import VacopedBootStandalone from "@/assets/vacoped-boot-standalone.jpeg";
 import BootForceComparison from "@/assets/boot-force-comparison.png";
@@ -10,6 +10,29 @@ export const metadata = {
         "Aircast vs VACOped, understanding how boots work, and boot basics",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "Do I need to know which boot I have?",
+        answer:
+            "Yes, understanding your boot type helps you follow your protocol correctly. If you're not sure, check with your clinician or look for removable wedges (Aircast) or a hinge dial (VACOped).",
+    },
+    {
+        question: "Can I switch boot types?",
+        answer:
+            "Yes — you can switch between boot types (e.g. from Aircast to VACOped or vice versa) if needed. Discuss with your clinician first so they can align your protocol with the new boot. The angle and timing principles are the same; the mechanism differs.",
+    },
+    {
+        question: "What if I have a different boot brand?",
+        answer:
+            "Most walking boots work on similar principles. The key is understanding how YOUR specific boot controls the angle and following YOUR specific protocol. Ask your clinician to explain how your boot works.",
+    },
+    {
+        question: "Do wedges from one brand fit a different boot?",
+        answer:
+            "Generally no — Aircast wedges are designed for Aircast boots and won't fit other brands. If you have a different wedge-based boot, use the wedges supplied with that boot or ask your clinician for compatible wedges. Don't try to use wedges from one brand in another.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -69,12 +92,6 @@ export const content: SectionContent = {
                                 "Think of it like this: when you point your toes down (like a ballet dancer), your calf muscle shortens and the Achilles tendon relaxes. This brings the torn ends closer together, allowing them to heal. Both the Aircast and VACOped achieve this — they just use **completely different mechanisms**.",
                         },
                     ],
-                },
-                {
-                    type: "tip",
-                    title: "Why this matters",
-                    content:
-                        "Think of it like a **tower of blocks**. At the start, you need all the blocks (maximum angle) to keep the tendon ends close. As the tendon heals and gets stronger, you can remove blocks (reduce the angle) safely. Remove them too fast, and the tower collapses (tendon stretches or re-ruptures).",
                 },
             ],
         },
@@ -276,28 +293,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "Do I need to know which boot I have?",
-                    answer:
-                        "Yes, understanding your boot type helps you follow your protocol correctly. If you're not sure, check with your clinician or look for removable wedges (Aircast) or a hinge dial (VACOped).",
-                },
-                {
-                    question: "Can I switch boot types?",
-                    answer:
-                        "Yes — you can switch between boot types (e.g. from Aircast to VACOped or vice versa) if needed. Discuss with your clinician first so they can align your protocol with the new boot. The angle and timing principles are the same; the mechanism differs.",
-                },
-                {
-                    question: "What if I have a different boot brand?",
-                    answer:
-                        "Most walking boots work on similar principles. The key is understanding how YOUR specific boot controls the angle and following YOUR specific protocol. Ask your clinician to explain how your boot works.",
-                },
-                {
-                    question: "Do wedges from one brand fit a different boot?",
-                    answer:
-                        "Generally no — Aircast wedges are designed for Aircast boots and won't fit other brands. If you have a different wedge-based boot, use the wedges supplied with that boot or ask your clinician for compatible wedges. Don't try to use wedges from one brand in another.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

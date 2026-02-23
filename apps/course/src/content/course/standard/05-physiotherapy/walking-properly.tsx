@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 
 export const metadata = {
     slug: "walking-properly",
@@ -6,6 +6,29 @@ export const metadata = {
     description: "Heel-to-toe pattern, correcting limping, and gait analysis",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "How long will it take to walk normally again?",
+        answer:
+            "It varies, but most people see significant improvement in 4-6 weeks after boot removal. Full normal walking (no limping, normal speed) typically takes 2-3 months. Focus on consistent practice rather than timelines — everyone progresses at their own pace.",
+    },
+    {
+        question: "Is it normal to still limp?",
+        answer:
+            "Yes, it's normal to limp initially after boot removal. Your body has learned protective patterns, and it takes time to unlearn them. Focus on proper form and be patient — limping will improve with practice and strength building.",
+    },
+    {
+        question: "Should I walk even if it's uncomfortable?",
+        answer:
+            "Some discomfort is normal, but severe pain is not. If walking causes severe pain, stop and tell your physiotherapist. They can assess what's happening and modify your program. Mild to moderate discomfort is expected as you rebuild strength.",
+    },
+    {
+        question: "How much should I walk each day?",
+        answer:
+            "Start with short walks (5-10 minutes) focusing on form. Gradually increase duration as you get stronger. Your physiotherapist will give you specific guidance based on your progress. Quality (proper form) matters more than quantity (distance).",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -572,28 +595,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "How long will it take to walk normally again?",
-                    answer:
-                        "It varies, but most people see significant improvement in 4-6 weeks after boot removal. Full normal walking (no limping, normal speed) typically takes 2-3 months. Focus on consistent practice rather than timelines — everyone progresses at their own pace.",
-                },
-                {
-                    question: "Is it normal to still limp?",
-                    answer:
-                        "Yes, it's normal to limp initially after boot removal. Your body has learned protective patterns, and it takes time to unlearn them. Focus on proper form and be patient — limping will improve with practice and strength building.",
-                },
-                {
-                    question: "Should I walk even if it's uncomfortable?",
-                    answer:
-                        "Some discomfort is normal, but severe pain is not. If walking causes severe pain, stop and tell your physiotherapist. They can assess what's happening and modify your program. Mild to moderate discomfort is expected as you rebuild strength.",
-                },
-                {
-                    question: "How much should I walk each day?",
-                    answer:
-                        "Start with short walks (5-10 minutes) focusing on form. Gradually increase duration as you get stronger. Your physiotherapist will give you specific guidance based on your progress. Quality (proper form) matters more than quantity (distance).",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

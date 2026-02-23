@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import PoolWalkingWeek12 from "@/assets/pool-walking-week-12.png";
 import SwimmingSafety from "@/assets/swimming-safety-v14.png";
 import SwimmingProgression from "@/assets/swimming-progression-v5-fixed.png";
@@ -10,6 +10,50 @@ export const metadata = {
         "Swimming, stationary bike, elliptical, and walking as exercise",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "When can I start running?",
+        answer:
+            "Running typically starts around 4-6 months after injury, but it's criteria-based, not time-based. You need to meet certain strength and function goals first (like 25+ single-leg heel raises). Your physiotherapist will assess when you're ready. Don't rush it — running too early risks re-injury.",
+    },
+    {
+        question: "Can I use a rowing machine?",
+        answer:
+            "Rowing can be safe if done correctly, but check with your physiotherapist first. The pulling motion is usually fine, but the leg push can stress your calf. Start with low resistance and short duration. Your physio can guide you on proper form.",
+    },
+    {
+        question: "How long should cardio sessions be?",
+        answer:
+            "Start with 10-15 minutes and build up gradually. Most people work toward 30+ minutes eventually, but this takes time. Focus on consistency rather than duration — doing 15 minutes regularly is better than doing 30 minutes sporadically.",
+    },
+    {
+        question: "What if cardio causes pain?",
+        answer:
+            "Some mild discomfort is normal, but severe pain is not. If cardio causes severe pain, stop and tell your physiotherapist. They can assess what's happening and modify your program. Don't push through severe pain.",
+    },
+    {
+        question:
+            "When can I start swimming after Achilles rupture?",
+        answer:
+            "Typically week 12-14, after boot removal and when your clinician clears you. Pool walking may start earlier (week 10-12) with approval. For surgical patients, wounds must be fully closed — they typically heal by week 2-3 post-surgery, so by week 12 you're well past that. Always check with your clinician first.",
+    },
+    {
+        question: "Can I swim if I had surgery?",
+        answer:
+            "Yes. Surgical wounds typically close by week 2-3 post-surgery. Swimming usually starts week 12-14 — by then wounds are long healed. The main factor is being cleared by your clinician and ready for pool activity (out of boot, etc.). Check with your surgeon before swimming.",
+    },
+    {
+        question: "What swimming strokes are safe?",
+        answer:
+            "Freestyle (front crawl) and backstroke are safest initially. Breaststroke may strain the ankle, so use caution. Avoid butterfly and flip turns initially. Start with gentle strokes and progress gradually.",
+    },
+    {
+        question: "Will swimming help my recovery?",
+        answer:
+            "Yes, swimming is excellent for recovery. It provides cardiovascular exercise with minimal tendon loading, helps maintain fitness, improves mood, and can be a stepping stone to return to other activities. It's one of the safest ways to exercise during recovery.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -122,7 +166,7 @@ export const content: SectionContent = {
                                 "Start with low resistance — focus on pedaling, not pushing hard",
                                 "Use flat pedals initially — avoid clip-in pedals that require pulling up",
                                 "Start with 10-15 minutes, build up gradually",
-                                "Keep your heel down — don't point your toes",
+                                "Pedal smoothly — avoid forcing heel down at the bottom of the stroke (can stretch the tendon)",
                             ],
                         },
                         {
@@ -154,7 +198,7 @@ export const content: SectionContent = {
                                 "Start with low resistance and slow speed",
                                 "Focus on smooth, controlled movements",
                                 "Start with 10-15 minutes, build up gradually",
-                                "Keep your heel down — don't push up onto your toes aggressively",
+                                "Avoid aggressive toe-pointing — keep movements controlled",
                             ],
                         },
                         {
@@ -220,36 +264,40 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Prerequisites",
-                    description: "What you need before starting.",
+                    title: "Typical timeline",
+                    description: "When most people can start.",
                     variant: "highlight",
                     content: [
+                        {
+                            type: "text",
+                            content:
+                                "**Swimming typically starts week 12-14** — after boot removal and when your clinician clears you. Pool walking may start earlier (week 10-12) with approval.",
+                        },
                         {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Surgical wounds fully healed** — if you had surgery, wait 2-3 weeks until wounds are closed",
-                                "**Specialist approval** — check with your clinician first",
-                                "**No open wounds** — any skin issues must be resolved",
-                                "**Comfortable in water** — you need to be able to move safely",
+                                "**Non-surgical:** Usually week 12-14 (after boot removal)",
+                                "**Surgical:** Usually week 12-14 (wounds are fully healed by then — they close around week 2-3 post-surgery)",
+                                "**Pool walking:** May start earlier (week 10-12) with clinician approval",
+                                "**Always check:** With your clinician first",
                             ],
                         },
                     ],
                 },
                 {
                     type: "card",
-                    title: "Typical timeline",
-                    description: "When most people can start.",
+                    title: "Prerequisites",
+                    description: "What you need before starting.",
                     variant: "default",
                     content: [
                         {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Non-surgical:** Usually week 12-14 (after boot removal)",
-                                "**Surgical:** Usually week 12-14 (once wounds fully healed)",
-                                "**Earlier:** Some people start pool walking earlier (week 10-12)",
-                                "**Always check:** With your clinician first",
+                                "**No open wounds** — surgical wounds must be fully closed (surgical patients: wounds typically close by week 2-3 post-surgery)",
+                                "**Specialist approval** — check with your clinician first",
+                                "**Comfortable in water** — you need to be able to move safely",
                             ],
                         },
                     ],
@@ -759,49 +807,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "When can I start running?",
-                    answer:
-                        "Running typically starts around 4-6 months after injury, but it's criteria-based, not time-based. You need to meet certain strength and function goals first (like 25+ single-leg heel raises). Your physiotherapist will assess when you're ready. Don't rush it — running too early risks re-injury.",
-                },
-                {
-                    question: "Can I use a rowing machine?",
-                    answer:
-                        "Rowing can be safe if done correctly, but check with your physiotherapist first. The pulling motion is usually fine, but the leg push can stress your calf. Start with low resistance and short duration. Your physio can guide you on proper form.",
-                },
-                {
-                    question: "How long should cardio sessions be?",
-                    answer:
-                        "Start with 10-15 minutes and build up gradually. Most people work toward 30+ minutes eventually, but this takes time. Focus on consistency rather than duration — doing 15 minutes regularly is better than doing 30 minutes sporadically.",
-                },
-                {
-                    question: "What if cardio causes pain?",
-                    answer:
-                        "Some mild discomfort is normal, but severe pain is not. If cardio causes severe pain, stop and tell your physiotherapist. They can assess what's happening and modify your program. Don't push through severe pain.",
-                },
-                {
-                    question:
-                        "When can I start swimming after Achilles rupture?",
-                    answer:
-                        "Typically week 12-14, but this depends on whether you had surgery and if wounds are fully healed. Non-surgical patients may start pool walking earlier (week 10-12). Always check with your clinician first — they'll assess when it's safe for you.",
-                },
-                {
-                    question: "Can I swim if I had surgery?",
-                    answer:
-                        "Yes, but you need to wait until surgical wounds are fully healed (usually 2-3 weeks). The wound must be completely closed with no open areas. Check with your surgeon before swimming.",
-                },
-                {
-                    question: "What swimming strokes are safe?",
-                    answer:
-                        "Freestyle (front crawl) and backstroke are safest initially. Breaststroke may strain the ankle, so use caution. Avoid butterfly and flip turns initially. Start with gentle strokes and progress gradually.",
-                },
-                {
-                    question: "Will swimming help my recovery?",
-                    answer:
-                        "Yes, swimming is excellent for recovery. It provides cardiovascular exercise with minimal tendon loading, helps maintain fitness, improves mood, and can be a stepping stone to return to other activities. It's one of the safest ways to exercise during recovery.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

@@ -5,6 +5,9 @@ import { metadata as firstWeekChecklist } from "./standard/00-practical/first-we
 import { metadata as mentalHealthRecovery } from "./standard/00-practical/mental-health-recovery";
 import { metadata as drivingGuidelines } from "./standard/00-practical/driving-guidelines";
 import { metadata as painManagementThroughoutRecovery } from "./standard/00-practical/pain-management-throughout-recovery";
+import { metadata as appendix1Faqs } from "./standard/00-practical/appendix-1-faqs";
+import { metadata as courseCompletion } from "./standard/00-practical/course-completion";
+import { metadata as courseFeedback } from "./standard/00-practical/course-feedback";
 
 // 01-emergency - Days 0-3
 import { metadata as emergencyCare } from "./standard/01-emergency/emergency-care";
@@ -85,6 +88,9 @@ export const slugToChapter: Record<string, string> = {
   "mental-health-recovery": "00-practical",
   "driving-guidelines": "00-practical",
   "pain-management-throughout-recovery": "00-practical",
+  "appendix-1-faqs": "00-practical",
+  "course-completion": "00-practical",
+  "course-feedback": "00-practical",
   // 01-emergency - Days 0-3
   "emergency-care": "01-emergency",
   "blood-clot-prevention": "01-emergency",
@@ -404,11 +410,11 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     buildingStrengthInBoot.title,
     buildingStrengthInBoot.description,
     {
-      when_useful: "When starting Phase 1 exercises - usually around week 6",
+      when_useful: "When starting Stage 1 exercises - usually around week 6",
       triggers: [
         "when starting exercises",
         "when progressing weight-bearing",
-        "when learning about Phase 2 and Phase 3",
+        "when learning about Stage 2 and Stage 3",
       ],
       approximate_days: 42,
     },
@@ -425,7 +431,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
       triggers: [
         "when removing final wedges",
         "when preparing for boot removal",
-        "when learning about Phase 2 and Phase 3",
+        "when learning about Stage 2 and Stage 3",
       ],
       approximate_days: 63,
     },
@@ -473,9 +479,10 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     startingPhysio.title,
     startingPhysio.description,
     {
-      when_useful: "When starting physiotherapy - usually around week 11",
+      when_useful:
+        "When starting physiotherapy out of boot - usually around week 11",
       triggers: [
-        "when first physio session is scheduled",
+        "when first physio session is scheduled post-boot",
         "when starting rehab",
       ],
       approximate_days: 77,
@@ -488,7 +495,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     keyExercises.description,
     {
       when_useful:
-        "During early physiotherapy - learn key exercises for this phase",
+        "During early physiotherapy - learn key exercises for this stage",
       triggers: [
         "when physio introduces exercises",
         "when doing home exercises",
@@ -520,7 +527,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     progressiveStrengthening.title,
     progressiveStrengthening.description,
     {
-      when_useful: "During strengthening phase - usually around week 15",
+      when_useful: "During strengthening stage - usually around week 15",
       triggers: [
         "when building strength",
         "when doing heel raises",
@@ -681,7 +688,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     whenThingsDontGoToPlan.status || "drafting",
   ),
 
-  // LONG-TERM - Life After Achilles Rupture (Final Section)
+  // LONG-TERM - Life After Achilles Rupture
   createSection(
     "new-normal",
     newNormal.title,
@@ -692,11 +699,54 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
       triggers: [
         "when wondering about long-term",
         "when adjusting to new normal",
-        "when recovery phases are complete",
+        "when recovery stages are complete",
       ],
       approximate_days: 250,
     },
     newNormal.status || "drafting",
+  ),
+
+  // COURSE COMPLETION - Congratulations & Certificate
+  createSection(
+    "course-completion",
+    courseCompletion.title,
+    courseCompletion.description,
+    {
+      when_useful: "When you've completed all course content",
+      triggers: ["course complete", "congratulations"],
+      approximate_days: 365,
+    },
+    courseCompletion.status || "drafting",
+  ),
+
+  // COURSE FEEDBACK - Questionnaire (before appendix)
+  createSection(
+    "course-feedback",
+    courseFeedback.title,
+    courseFeedback.description,
+    {
+      when_useful: "After completing the course",
+      triggers: ["share feedback", "course review"],
+      approximate_days: 365,
+    },
+    courseFeedback.status || "drafting",
+  ),
+
+  // APPENDIX - Reference
+  createSection(
+    "appendix-1-faqs",
+    appendix1Faqs.title,
+    appendix1Faqs.description,
+    {
+      when_useful: "Quick reference - all course FAQs in one place",
+      triggers: [
+        "when looking for a specific answer",
+        "when reviewing key questions",
+        "as reference",
+      ],
+      approximate_days: 365,
+    },
+    appendix1Faqs.status || "drafting",
   ),
 ];
 

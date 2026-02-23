@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import HeelLifts from "@/assets/heel-lifts.jpg";
 
 export const metadata = {
@@ -8,6 +8,30 @@ export const metadata = {
         "When it's safe, first steps in shoes, and choosing the right footwear",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "Can I remove my boot earlier if I feel ready?",
+        answer:
+            "No. Boot removal should be based on your tendon's strength, assessed by your clinician, not just how you feel. Removing the boot too early can cause tendon elongation or re-rupture. Wait for your clinician's clearance — they assess your readiness based on specific criteria.",
+    },
+    {
+        question: "What if I can't walk without limping?",
+        answer:
+            "Some limping initially is normal. If you're limping significantly, use crutches or reduce weight on your injured foot. Your physiotherapist will help you improve your walking pattern. If limping persists or worsens, contact your medical team.",
+    },
+    {
+        question: "How long will I need heel lifts?",
+        answer:
+            "Typically 2-4 weeks, gradually reducing from 1cm to 0.5cm to none. Your physiotherapist will guide you on when to reduce and remove them. Don't rush this — the gradual reduction helps your tendon adapt.",
+    },
+    {
+        question:
+            "What if my foot swells more after removing the boot?",
+        answer:
+            "Some increased swelling is normal initially — the boot provided compression. Elevate your foot when resting, ice if needed, and gradually increase time in shoes. If swelling is severe or doesn't improve, contact your medical team.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -448,29 +472,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "Can I remove my boot earlier if I feel ready?",
-                    answer:
-                        "No. Boot removal should be based on your tendon's strength, assessed by your clinician, not just how you feel. Removing the boot too early can cause tendon elongation or re-rupture. Wait for your clinician's clearance — they assess your readiness based on specific criteria.",
-                },
-                {
-                    question: "What if I can't walk without limping?",
-                    answer:
-                        "Some limping initially is normal. If you're limping significantly, use crutches or reduce weight on your injured foot. Your physiotherapist will help you improve your walking pattern. If limping persists or worsens, contact your medical team.",
-                },
-                {
-                    question: "How long will I need heel lifts?",
-                    answer:
-                        "Typically 2-4 weeks, gradually reducing from 1cm to 0.5cm to none. Your physiotherapist will guide you on when to reduce and remove them. Don't rush this — the gradual reduction helps your tendon adapt.",
-                },
-                {
-                    question:
-                        "What if my foot swells more after removing the boot?",
-                    answer:
-                        "Some increased swelling is normal initially — the boot provided compression. Elevate your foot when resting, ice if needed, and gradually increase time in shoes. If swelling is severe or doesn't improve, contact your medical team.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

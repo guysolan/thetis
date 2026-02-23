@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 
 export const metadata = {
     slug: "pain-management-throughout-recovery",
@@ -7,6 +7,24 @@ export const metadata = {
         "Understanding pain at different stages, when pain is normal vs concerning, and pain management strategies",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "I have very little pain — is that normal?",
+        answer:
+            "Yes. Pain varies hugely between people. Some have minimal pain after rupture and throughout recovery. This doesn't mean your injury is less serious — it just means your pain experience is different.",
+    },
+    {
+        question: "Is calf pain normal?",
+        answer:
+            "Calf cramping or spasms (intermittent, no swelling) are normal. However, calf pain with swelling affecting the whole lower leg could indicate a blood clot and needs immediate medical attention.",
+    },
+    {
+        question: "Should I take pain medication?",
+        answer:
+            "Yes, if you're in pain. Pain medication helps you rest and participate in recovery. Use as prescribed and don't exceed dosage.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -52,7 +70,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Pain in the early phases is often thought of as **weeks 0–1** (acute) and **weeks 2–8** (boot phase). A key moment is **around week 5**, when many protocols start lowering the heel — it often feels tighter or more uncomfortable as the heel drops; that's normal.",
+                        "Pain in the early stages is often thought of as **weeks 0–1** (acute) and **weeks 2–8** (boot stage). A key moment is **around week 5**, when many protocols start lowering the heel — it often feels tighter or more uncomfortable as the heel drops; that's normal.",
                 },
                 {
                     type: "table",
@@ -186,23 +204,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "I have very little pain — is that normal?",
-                    answer:
-                        "Yes. Pain varies hugely between people. Some have minimal pain after rupture and throughout recovery. This doesn't mean your injury is less serious — it just means your pain experience is different.",
-                },
-                {
-                    question: "Is calf pain normal?",
-                    answer:
-                        "Calf cramping or spasms (intermittent, no swelling) are normal. However, calf pain with swelling affecting the whole lower leg could indicate a blood clot and needs immediate medical attention.",
-                },
-                {
-                    question: "Should I take pain medication?",
-                    answer:
-                        "Yes, if you're in pain. Pain medication helps you rest and participate in recovery. Use as prescribed and don't exceed dosage.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

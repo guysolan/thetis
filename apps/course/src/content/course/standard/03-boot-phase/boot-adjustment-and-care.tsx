@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import BootFittingGuide from "@/assets/boot-fitting-guide.png";
 
 export const metadata = {
@@ -8,6 +8,25 @@ export const metadata = {
         "Fitting your boot, straps, padding, maintenance, and preventing problems",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question:
+            "What if my boot is rubbing or causing pressure sores?",
+        answer:
+            "First, check the fit — it may be too tight or not positioned correctly. Try padding the area with soft material. If it's severe or getting worse, contact your clinic. Don't just stop wearing the boot — you need protection, but you may need a different size or adjustment.",
+    },
+    {
+        question: "How often should I clean my boot?",
+        answer:
+            "Clean the liner weekly if possible, or more often if it gets sweaty or dirty. Wipe down the exterior as needed. The key is keeping it clean to prevent skin problems and odour.",
+    },
+    {
+        question: "Can I adjust the straps myself?",
+        answer:
+            "Yes, you should adjust straps yourself as needed throughout the day. Swelling changes, and straps may loosen. Just make sure they're snug but not too tight, and tighten from bottom to top.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -379,24 +398,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question:
-                        "What if my boot is rubbing or causing pressure sores?",
-                    answer:
-                        "First, check the fit — it may be too tight or not positioned correctly. Try padding the area with soft material. If it's severe or getting worse, contact your clinic. Don't just stop wearing the boot — you need protection, but you may need a different size or adjustment.",
-                },
-                {
-                    question: "How often should I clean my boot?",
-                    answer:
-                        "Clean the liner weekly if possible, or more often if it gets sweaty or dirty. Wipe down the exterior as needed. The key is keeping it clean to prevent skin problems and odour.",
-                },
-                {
-                    question: "Can I adjust the straps myself?",
-                    answer:
-                        "Yes, you should adjust straps yourself as needed throughout the day. Swelling changes, and straps may loosen. Just make sure they're snug but not too tight, and tighten from bottom to top.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

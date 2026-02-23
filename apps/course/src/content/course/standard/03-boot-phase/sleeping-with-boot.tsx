@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import ThetisNightSplint from "@/assets/night-splint-bed-top-square.jpg";
 
 export const metadata = {
@@ -8,9 +8,23 @@ export const metadata = {
     status: "drafting" as const,
 };
 
+export const faqs: FAQItem[] = [
+    {
+        question:
+            "Can I take the boot off to sleep if I use a night splint?",
+        answer:
+            "Usually yes, but check with your clinician first. Most protocols allow a night splint once you're past the very early stage (usually after week 2–3). The splint must maintain the correct angle — it's not the same as going unprotected. Never remove all protection while sleeping during the boot stage.",
+    },
+    {
+        question: "Will I ever sleep normally again?",
+        answer:
+            "Yes. Sleep improves significantly once you're out of the boot. Most people find sleep returns to normal within a few weeks of boot removal. Until then, focus on the strategies above to make sleep as bearable as possible.",
+    },
+];
+
 export const content: SectionContent = {
     intro:
-        "Sleeping in a walking boot is one of the hardest parts of recovery. Around 80% of patients struggle with sleep during this phase. The boot is heavy, rigid, hot, and feels like sleeping with a brick strapped to your leg. This lesson covers practical solutions: night splints, positioning strategies, and tips to make sleep more bearable.",
+        "Sleeping in a walking boot is one of the hardest parts of recovery. Around 80% of patients struggle with sleep during this stage. The boot is heavy, rigid, hot, and feels like sleeping with a brick strapped to your leg. This lesson covers practical solutions: night splints, positioning strategies, and tips to make sleep more bearable.",
 
     blocks: [
         {
@@ -51,7 +65,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Let's be honest: **sleeping in a walking boot is miserable**. The boot is heavy, rigid, hot, and feels like sleeping with a brick strapped to your leg. Around 80% of patients report significant sleep problems during this phase.",
+                        "Let's be honest: **sleeping in a walking boot is miserable**. The boot is heavy, rigid, hot, and feels like sleeping with a brick strapped to your leg. Around 80% of patients report significant sleep problems during this stage.",
                 },
                 {
                     type: "card",
@@ -108,7 +122,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Important:** Check with your clinician before using a night splint. Most protocols allow it once you're past the very early healing phase (usually after week 2–3), but some require 24/7 boot wear for longer.",
+                                "**Important:** Check with your clinician before using a night splint. Most protocols allow it once you're past the very early healing stage (usually after week 2–3), but some require 24/7 boot wear for longer.",
                         },
                     ],
                 },
@@ -124,7 +138,7 @@ export const content: SectionContent = {
                             title:
                                 "Critical: Never remove your boot while sleeping",
                             content:
-                                "**Removing your boot while sleeping is NOT safe and can cause serious damage.** During the boot phase, you need protection 24/7 to keep the tendon ends together. Sleeping without protection is one of the most common causes of re-rupture or tendon elongation. If you're struggling with sleep, use a night splint (with specialist approval) or try the strategies below — but never sleep without protection.",
+                                "**Removing your boot while sleeping is NOT safe and can cause serious damage.** During the boot stage, you need protection 24/7 to keep the tendon ends together. Sleeping without protection is one of the most common causes of re-rupture or tendon elongation. If you're struggling with sleep, use a night splint (with specialist approval) or try the strategies below — but never sleep without protection.",
                         },
                         {
                             type: "text",
@@ -208,19 +222,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question:
-                        "Can I take the boot off to sleep if I use a night splint?",
-                    answer:
-                        "Usually yes, but check with your clinician first. Most protocols allow a night splint once you're past the very early phase (usually after week 2–3). The splint must maintain the correct angle — it's not the same as going unprotected. Never remove all protection while sleeping during boot phase.",
-                },
-                {
-                    question: "Will I ever sleep normally again?",
-                    answer:
-                        "Yes. Sleep improves significantly once you're out of the boot. Most people find sleep returns to normal within a few weeks of boot removal. Until then, focus on the strategies above to make sleep as bearable as possible.",
-                },
-            ],
+            items: faqs,
         },
     ],
 };

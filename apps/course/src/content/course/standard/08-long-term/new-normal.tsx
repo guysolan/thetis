@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 
 export const metadata = {
     slug: "new-normal",
@@ -7,6 +7,29 @@ export const metadata = {
         "Your tendon will always be different, managing expectations, and long-term care",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "Will my tendon ever be the same?",
+        answer:
+            "No, your tendon will never be exactly the same as before injury. Permanent changes (thickening, asymmetry) are normal. But your tendon can function well despite these changes. Function matters more than appearance.",
+    },
+    {
+        question: "How long until full recovery?",
+        answer:
+            "Full recovery typically takes 12-18 months, but it's ongoing. You'll continue improving for months. Some permanent changes are normal and don't mean you're not recovered — they're just part of healing.",
+    },
+    {
+        question: "Do I need to maintain strength forever?",
+        answer:
+            "Ideally yes. Ongoing strength is your best defense against re-rupture and other problems. Continue strengthening exercises 2-3 times per week, even when back to sport. It becomes a habit.",
+    },
+    {
+        question: "Can I return to full activity?",
+        answer:
+            "Yes, many people return to full activity. It takes time and work, but full return is possible. Maintain strength, proper warm-ups, gradual progression, and listen to your body.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -147,6 +170,35 @@ export const content: SectionContent = {
         },
         {
             type: "section",
+            title: "The Other Leg",
+            content: [
+                {
+                    type: "text",
+                    content:
+                        "People who rupture one Achilles have a slightly higher risk of rupturing the other — around 5%. Your rehab should include **both legs**. Strengthen both calves, warm up both sides, and don't neglect the uninjured leg. Balanced strength supports good movement patterns and reduces risk.",
+                },
+            ],
+        },
+        {
+            type: "section",
+            title: "Tendon Tightness and Stretching",
+            content: [
+                {
+                    type: "text",
+                    content:
+                        "If your tendon feels a bit tight, that is **normal and often a good sign** — it will probably settle over time. Do not be tempted to stretch it aggressively.",
+                },
+                {
+                    type: "alert",
+                    variant: "warning",
+                    title: "Stretching guidance",
+                    content:
+                        "**No aggressive stretching for at least 6 months** — gentle mobility is fine, but avoid forcing a stretch. After 6 months, only stretch with approval from your specialist and physio. Tightness often settles — many people find it improves without aggressive stretching.",
+                },
+            ],
+        },
+        {
+            type: "section",
             title: "Long-Term Care: Maintaining Tendon Health",
             content: [
                 {
@@ -280,7 +332,7 @@ export const content: SectionContent = {
                         "**This week:** Focus on long-term care and maintenance",
                         "**Ongoing:** Continue maintaining strength and following prevention strategies",
                         "**Long-term:** Life after Achilles rupture is ongoing — maintain strength and care",
-                        "**This is the final section** — you've completed the course. Continue following the guidance for long-term health.",
+                        "**Next:** Congratulations and your certificate — you've completed the course content.",
                     ],
                 },
             ],
@@ -309,28 +361,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "Will my tendon ever be the same?",
-                    answer:
-                        "No, your tendon will never be exactly the same as before injury. Permanent changes (thickening, asymmetry) are normal. But your tendon can function well despite these changes. Function matters more than appearance.",
-                },
-                {
-                    question: "How long until full recovery?",
-                    answer:
-                        "Full recovery typically takes 12-18 months, but it's ongoing. You'll continue improving for months. Some permanent changes are normal and don't mean you're not recovered — they're just part of healing.",
-                },
-                {
-                    question: "Do I need to maintain strength forever?",
-                    answer:
-                        "Ideally yes. Ongoing strength is your best defense against re-rupture and other problems. Continue strengthening exercises 2-3 times per week, even when back to sport. It becomes a habit.",
-                },
-                {
-                    question: "Can I return to full activity?",
-                    answer:
-                        "Yes, many people return to full activity. It takes time and work, but full return is possible. Maintain strength, proper warm-ups, gradual progression, and listen to your body.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

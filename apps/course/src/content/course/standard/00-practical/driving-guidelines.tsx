@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import DrivingRestrictions from "@/assets/driving-restrictions-v3-with-mike.png";
 
 export const metadata = {
@@ -8,6 +8,29 @@ export const metadata = {
         "When you can drive, left vs right leg injury, automatic vs manual, and insurance considerations",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "When can I drive after Achilles rupture?",
+        answer:
+            "It depends on which leg is injured. Right leg injured: Week 10-12 earliest (after boot removal, automatic car). Left leg injured: Potentially weeks 4-6 with automatic car, if cleared by your clinician. Always check with your insurance company and get medical clearance first.",
+    },
+    {
+        question: "Can I drive while wearing my boot?",
+        answer:
+            "If your right leg is injured, no — you cannot drive while wearing the boot. If your left leg is injured and you have an automatic car, it may be possible, but you must be cleared by your clinician and insurance company. The boot must not interfere with pedals, and you must be able to perform an emergency stop.",
+    },
+    {
+        question: "Do I need to tell my insurance company?",
+        answer:
+            "Yes, absolutely. Check with your insurance company before driving with an injury. They may require medical clearance, and driving without proper coverage could invalidate your policy. Always check first.",
+    },
+    {
+        question: "What if I need to drive for work?",
+        answer:
+            "Discuss this with your employer and clinician. You may need temporary adjustments, alternative transport, or work from home options. Don't drive if you're not safe to do so — the consequences of an accident are far worse than missing work.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -398,28 +421,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "When can I drive after Achilles rupture?",
-                    answer:
-                        "It depends on which leg is injured. Right leg injured: Week 10-12 earliest (after boot removal, automatic car). Left leg injured: Potentially weeks 4-6 with automatic car, if cleared by your clinician. Always check with your insurance company and get medical clearance first.",
-                },
-                {
-                    question: "Can I drive while wearing my boot?",
-                    answer:
-                        "If your right leg is injured, no — you cannot drive while wearing the boot. If your left leg is injured and you have an automatic car, it may be possible, but you must be cleared by your clinician and insurance company. The boot must not interfere with pedals, and you must be able to perform an emergency stop.",
-                },
-                {
-                    question: "Do I need to tell my insurance company?",
-                    answer:
-                        "Yes, absolutely. Check with your insurance company before driving with an injury. They may require medical clearance, and driving without proper coverage could invalidate your policy. Always check first.",
-                },
-                {
-                    question: "What if I need to drive for work?",
-                    answer:
-                        "Discuss this with your employer and clinician. You may need temporary adjustments, alternative transport, or work from home options. Don't drive if you're not safe to do so — the consequences of an accident are far worse than missing work.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

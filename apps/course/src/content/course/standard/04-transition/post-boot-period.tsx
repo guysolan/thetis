@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import HeelLifts from "@/assets/heel-lifts.jpg";
 import GradualWeaningComparison from "@/assets/gradual-weaning-process-comparison-v1.png";
 
@@ -9,6 +9,29 @@ export const metadata = {
         "Leaving your boot, choosing footwear, managing stiffness and swelling, and avoiding aggressive stretching",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "Can I remove my boot earlier if I feel ready?",
+        answer:
+            "No. Boot removal should be based on your tendon's strength, assessed by your clinician. Removing too early can cause elongation or re-rupture.",
+    },
+    {
+        question: "How long will I need heel lifts?",
+        answer:
+            "Typically 2-4 weeks, gradually reducing. Your physio will guide when to reduce and remove them.",
+    },
+    {
+        question: "How long will stiffness last?",
+        answer:
+            "Stiffness improves significantly over 4-6 weeks after boot removal. Some mild stiffness can persist for months but improves gradually.",
+    },
+    {
+        question: "Can I keep using my night splint?",
+        answer:
+            "Yes — some patients like to continue using their [night splint](/standard/sleeping-with-boot) for a few weeks after boot removal. It's optional but can provide reassurance.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -289,28 +312,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "Can I remove my boot earlier if I feel ready?",
-                    answer:
-                        "No. Boot removal should be based on your tendon's strength, assessed by your clinician. Removing too early can cause elongation or re-rupture.",
-                },
-                {
-                    question: "How long will I need heel lifts?",
-                    answer:
-                        "Typically 2-4 weeks, gradually reducing. Your physio will guide when to reduce and remove them.",
-                },
-                {
-                    question: "How long will stiffness last?",
-                    answer:
-                        "Stiffness improves significantly over 4-6 weeks after boot removal. Some mild stiffness can persist for months but improves gradually.",
-                },
-                {
-                    question: "Can I keep using my night splint?",
-                    answer:
-                        "Yes — some patients like to continue using their [night splint](/standard/sleeping-with-boot) for a few weeks after boot removal. It's optional but can provide reassurance.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

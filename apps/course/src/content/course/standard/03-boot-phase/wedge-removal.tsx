@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import WedgeRemovalProgression from "@/assets/wedge-removal-progression.png";
 
 export const metadata = {
@@ -8,6 +8,29 @@ export const metadata = {
         "When and how to remove wedges, angle progression, and what to expect",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "What if I accidentally removed too many wedges?",
+        answer:
+            "Put the wedges back immediately. Don't walk on it until you've restored the correct angle. Contact your clinician to discuss — they may want to see you to check everything is okay. It's better to be safe than risk re-injury.",
+    },
+    {
+        question: "Can I remove wedges faster if I'm feeling good?",
+        answer:
+            "No. Even if you feel great, follow your clinician's protocol. The timing is based on healing progress, not just how you feel. Removing wedges too quickly can cause the tendon ends to separate, leading to worse outcomes. Patience now = better function later.",
+    },
+    {
+        question: "What if removing a wedge causes pain?",
+        answer:
+            "Some mild discomfort is normal. If you get significant pain, put the wedge back and wait longer. If pain persists even with the wedge back, contact your clinician. Don't push through severe pain — it's a sign to slow down.",
+    },
+    {
+        question: "When can I drive / go back to work?",
+        answer:
+            "This depends on which leg is injured, your job, and your clinician's guidance. We cover this in detail in Week 8. For now, assume you won't be driving if it's your right leg, and discuss work with your employer and clinician.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -368,28 +391,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "What if I accidentally removed too many wedges?",
-                    answer:
-                        "Put the wedges back immediately. Don't walk on it until you've restored the correct angle. Contact your clinician to discuss — they may want to see you to check everything is okay. It's better to be safe than risk re-injury.",
-                },
-                {
-                    question: "Can I remove wedges faster if I'm feeling good?",
-                    answer:
-                        "No. Even if you feel great, follow your clinician's protocol. The timing is based on healing progress, not just how you feel. Removing wedges too quickly can cause the tendon ends to separate, leading to worse outcomes. Patience now = better function later.",
-                },
-                {
-                    question: "What if removing a wedge causes pain?",
-                    answer:
-                        "Some mild discomfort is normal. If you get significant pain, put the wedge back and wait longer. If pain persists even with the wedge back, contact your clinician. Don't push through severe pain — it's a sign to slow down.",
-                },
-                {
-                    question: "When can I drive / go back to work?",
-                    answer:
-                        "This depends on which leg is injured, your job, and your clinician's guidance. We cover this in detail in Week 8. For now, assume you won't be driving if it's your right leg, and discuss work with your employer and clinician.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 
 export const metadata = {
     slug: "mental-health-recovery",
@@ -7,6 +7,29 @@ export const metadata = {
         "Managing frustration, anxiety, depression, and fear of re-injury during recovery",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "Is it normal to feel depressed during recovery?",
+        answer:
+            "Yes, it's very normal. Recovery is challenging — you've lost your normal activities, you're isolated, and progress feels slow. Occasional low mood is expected. However, if you're feeling persistently down, unable to function, or having thoughts of self-harm, seek professional help.",
+    },
+    {
+        question: "How do I deal with fear of re-injury?",
+        answer:
+            "Some fear is normal and healthy — it keeps you cautious. But excessive fear can slow recovery. Work with your physiotherapist to gradually expose yourself to activities, start with low-risk movements, and celebrate each step forward. Trust your physio's guidance — they know when you're ready.",
+    },
+    {
+        question: "I'm frustrated with slow progress — is this normal?",
+        answer:
+            "Absolutely. Recovery takes 6-12 months, and progress is gradual. You won't notice changes daily. This is normal, not slow. Track objective progress (what you can do now vs last week), celebrate small wins, and remind yourself this is temporary.",
+    },
+    {
+        question: "When should I seek professional mental health help?",
+        answer:
+            "If you're experiencing persistent low mood (2+ weeks), thoughts of self-harm, inability to function, or severe anxiety that interferes with daily life, seek professional help. Your GP can refer you to mental health services, or you can access private counselling or support groups.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -403,28 +426,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "Is it normal to feel depressed during recovery?",
-                    answer:
-                        "Yes, it's very normal. Recovery is challenging — you've lost your normal activities, you're isolated, and progress feels slow. Occasional low mood is expected. However, if you're feeling persistently down, unable to function, or having thoughts of self-harm, seek professional help.",
-                },
-                {
-                    question: "How do I deal with fear of re-injury?",
-                    answer:
-                        "Some fear is normal and healthy — it keeps you cautious. But excessive fear can slow recovery. Work with your physiotherapist to gradually expose yourself to activities, start with low-risk movements, and celebrate each step forward. Trust your physio's guidance — they know when you're ready.",
-                },
-                {
-                    question: "I'm frustrated with slow progress — is this normal?",
-                    answer:
-                        "Absolutely. Recovery takes 6-12 months, and progress is gradual. You won't notice changes daily. This is normal, not slow. Track objective progress (what you can do now vs last week), celebrate small wins, and remind yourself this is temporary.",
-                },
-                {
-                    question: "When should I seek professional mental health help?",
-                    answer:
-                        "If you're experiencing persistent low mood (2+ weeks), thoughts of self-harm, inability to function, or severe anxiety that interferes with daily life, seek professional help. Your GP can refer you to mental health services, or you can access private counselling or support groups.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

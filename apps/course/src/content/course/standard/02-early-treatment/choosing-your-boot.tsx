@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import AircastVsVacopedComparison from "@/assets/aircast-vs-vacoped-comparison.png";
 
 export const metadata = {
@@ -8,6 +8,30 @@ export const metadata = {
         "Aircast vs VACOped comparison, essential equipment, and product recommendations",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question:
+            "My hospital only offers [Aircast](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html) — should I buy a [VACOped](https://oped-uk.com/product/vacoped/) privately?",
+        answer:
+            "Probably not necessary. Research shows both boots lead to similar long-term outcomes. The [VACOped](https://oped-uk.com/product/vacoped/) may have some biomechanical advantages, but the [Aircast](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html) is a proven, effective option. Focus your budget on comfort items like the Thetis night splint instead.",
+    },
+    {
+        question: "Can I sleep without any boot or splint?",
+        answer:
+            "**No.** This is one of the most common ways people re-rupture or lengthen their tendon. You need protection 24/7 in the early weeks. The Thetis night splint makes overnight protection much more comfortable.",
+    },
+    {
+        question: "How do I shower without getting my boot wet?",
+        answer:
+            "You have two options: **(1)** Use a waterproof cover (Limbo) over your boot — keeps the boot dry but you can't wash your foot. **(2)** Use the Thetis night splint — it maintains the correct angle while allowing you to wash your foot and leg. Option 2 is better for hygiene. See [Washing & Hygiene](/standard/washing-and-hygiene) for full details.",
+    },
+    {
+        question: "When can I stop wearing protection at night?",
+        answer:
+            "This varies by protocol — typically somewhere between weeks 6-10, once you've transitioned to a neutral angle and your clinician confirms it's safe. Always follow your specific protocol rather than a general timeline.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -285,29 +309,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question:
-                        "My hospital only offers [Aircast](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html) — should I buy a [VACOped](https://oped-uk.com/product/vacoped/) privately?",
-                    answer:
-                        "Probably not necessary. Research shows both boots lead to similar long-term outcomes. The [VACOped](https://oped-uk.com/product/vacoped/) may have some biomechanical advantages, but the [Aircast](https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html) is a proven, effective option. Focus your budget on comfort items like the Thetis night splint instead.",
-                },
-                {
-                    question: "Can I sleep without any boot or splint?",
-                    answer:
-                        "**No.** This is one of the most common ways people re-rupture or lengthen their tendon. You need protection 24/7 in the early weeks. The Thetis night splint makes overnight protection much more comfortable.",
-                },
-                {
-                    question: "How do I shower without getting my boot wet?",
-                    answer:
-                        "You have two options: **(1)** Use a waterproof cover (Limbo) over your boot — keeps the boot dry but you can't wash your foot. **(2)** Use the Thetis night splint — it maintains the correct angle while allowing you to wash your foot and leg. Option 2 is better for hygiene. See [Washing & Hygiene](/standard/washing-and-hygiene) for full details.",
-                },
-                {
-                    question: "When can I stop wearing protection at night?",
-                    answer:
-                        "This varies by protocol — typically somewhere between weeks 6-10, once you've transitioned to a neutral angle and your clinician confirms it's safe. Always follow your specific protocol rather than a general timeline.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

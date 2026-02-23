@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import EvenUp from "@/assets/even-up.jpg";
 import SoftCrutchHandles from "@/assets/soft-crutch-handles.jpg";
 
@@ -9,6 +9,25 @@ export const metadata = {
         "Crutch comfort, EVENup, leg length difference, and making mobility easier",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "Do I really need gel covers for my crutches?",
+        answer:
+            "You'll probably be on crutches for 6–10 weeks. Gel covers cost £5–15 and prevent painful blisters, calluses, and hand fatigue. Most patients who don't use them wish they had. It's a small investment for weeks of comfort.",
+    },
+    {
+        question: "Do I need an EVENup?",
+        answer:
+            "If you're getting back pain, hip pain, or finding walking exhausting, try an EVENup. Many patients consider it essential. If you're not having issues, you may not need it. It's worth trying if you're experiencing secondary pain.",
+    },
+    {
+        question:
+            "How do I know if my crutches are the right height?",
+        answer:
+            "The top should be 2–3 finger widths below your armpit when standing. Handles should be at wrist level. Most crutches are adjustable — ask your clinician or physio to help you set them up correctly.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -267,24 +286,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "Do I really need gel covers for my crutches?",
-                    answer:
-                        "You'll probably be on crutches for 6–10 weeks. Gel covers cost £5–15 and prevent painful blisters, calluses, and hand fatigue. Most patients who don't use them wish they had. It's a small investment for weeks of comfort.",
-                },
-                {
-                    question: "Do I need an EVENup?",
-                    answer:
-                        "If you're getting back pain, hip pain, or finding walking exhausting, try an EVENup. Many patients consider it essential. If you're not having issues, you may not need it. It's worth trying if you're experiencing secondary pain.",
-                },
-                {
-                    question:
-                        "How do I know if my crutches are the right height?",
-                    answer:
-                        "The top should be 2–3 finger widths below your armpit when standing. Handles should be at wrist level. Most crutches are adjustable — ask your clinician or physio to help you set them up correctly.",
-                },
-            ],
+            items: faqs,
         },
     ],
 };

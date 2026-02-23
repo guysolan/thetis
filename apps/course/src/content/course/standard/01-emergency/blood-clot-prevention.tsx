@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import DvtVsPeLegToLungs from "@/assets/dvt-vs-pe-leg-to-lungs.png";
 import DvtDopplerScan from "@/assets/dvt-doppler-scan.png";
 import DvtSignsSymptoms from "@/assets/dvt-signs-symptoms-tintin-v6.png";
@@ -9,6 +9,25 @@ export const metadata = {
     description: "Understanding DVT/PE risk and blood thinners",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "Is swelling normal, or is it a clot?",
+        answer:
+            "Swelling is common after rupture and immobilisation. What's more concerning is **new** calf pain/tenderness, **one-leg** swelling that's noticeably worsening, or calf redness/warmth — especially if it feels different from your usual ankle swelling. When in doubt, get checked.",
+    },
+    {
+        question:
+            "If I accidentally put weight through my foot, does that cause clots?",
+        answer:
+            "Brief accidental weightbearing doesn't directly cause clots. Clot risk is mostly about immobilisation and reduced circulation over time. Focus on prevention: follow mobility instructions, keep moving safely within your limits, and take any prescribed blood thinners.",
+    },
+    {
+        question: "What if I missed a dose of blood thinner?",
+        answer:
+            "Take it as soon as you remember — unless it's almost time for your next dose (then skip the missed one). Don't double up. If you're unsure, call your pharmacy or clinic for advice.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -196,24 +215,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "Is swelling normal, or is it a clot?",
-                    answer:
-                        "Swelling is common after rupture and immobilisation. What's more concerning is **new** calf pain/tenderness, **one-leg** swelling that's noticeably worsening, or calf redness/warmth — especially if it feels different from your usual ankle swelling. When in doubt, get checked.",
-                },
-                {
-                    question:
-                        "If I accidentally put weight through my foot, does that cause clots?",
-                    answer:
-                        "Brief accidental weightbearing doesn't directly cause clots. Clot risk is mostly about immobilisation and reduced circulation over time. Focus on prevention: follow mobility instructions, keep moving safely within your limits, and take any prescribed blood thinners.",
-                },
-                {
-                    question: "What if I missed a dose of blood thinner?",
-                    answer:
-                        "Take it as soon as you remember — unless it's almost time for your next dose (then skip the missed one). Don't double up. If you're unsure, call your pharmacy or clinic for advice.",
-                },
-            ],
+            items: faqs,
         },
     ],
 };

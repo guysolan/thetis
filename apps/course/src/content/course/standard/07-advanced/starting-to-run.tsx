@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import RunningFormWeek28 from "@/assets/running-form-week-28.png";
 import WalkJogProgression from "@/assets/walk-jog-progression-v6.png";
 
@@ -9,6 +9,29 @@ export const metadata = {
         "Walk-jog progression, proper technique, surface selection, and avoiding pitfalls",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "When can I start running?",
+        answer:
+            "When you meet the criteria: 25+ single-leg heel raises, pain-free walking, good balance, confident stairs, and physio clearance. This is typically around 4-6 months, but it's criteria-based, not time-based. Don't rush — running too early risks re-rupture.",
+    },
+    {
+        question: "How long until I can run like before?",
+        answer:
+            "It varies, but rebuilding running fitness typically takes 2-3 months after you start. Be patient — you're rebuilding fitness and strength. Focus on gradual progression rather than timelines.",
+    },
+    {
+        question: "What if running causes pain?",
+        answer:
+            "Some muscle soreness is normal, but severe pain is not. If running causes severe pain, stop and tell your physiotherapist. They can assess what's happening and modify your program. Don't push through severe pain.",
+    },
+    {
+        question: "Can I run on hills?",
+        answer:
+            "Not initially. Hills increase stress on your tendon. Start with flat surfaces, progress to gentle hills gradually once you're comfortable with flat running. Your physio will guide you on when hills are safe.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -465,28 +488,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "When can I start running?",
-                    answer:
-                        "When you meet the criteria: 25+ single-leg heel raises, pain-free walking, good balance, confident stairs, and physio clearance. This is typically around 4-6 months, but it's criteria-based, not time-based. Don't rush — running too early risks re-rupture.",
-                },
-                {
-                    question: "How long until I can run like before?",
-                    answer:
-                        "It varies, but rebuilding running fitness typically takes 2-3 months after you start. Be patient — you're rebuilding fitness and strength. Focus on gradual progression rather than timelines.",
-                },
-                {
-                    question: "What if running causes pain?",
-                    answer:
-                        "Some muscle soreness is normal, but severe pain is not. If running causes severe pain, stop and tell your physiotherapist. They can assess what's happening and modify your program. Don't push through severe pain.",
-                },
-                {
-                    question: "Can I run on hills?",
-                    answer:
-                        "Not initially. Hills increase stress on your tendon. Start with flat surfaces, progress to gentle hills gradually once you're comfortable with flat running. Your physio will guide you on when hills are safe.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

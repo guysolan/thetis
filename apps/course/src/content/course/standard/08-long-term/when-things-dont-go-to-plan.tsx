@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import RecoveryProgressNonlinear from "@/assets/recovery-progress-nonlinear.png";
 
 export const metadata = {
@@ -8,6 +8,19 @@ export const metadata = {
         "Not progressing, tendon elongation, and when to seek further opinion",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "What if I'm not progressing?",
+        answer:
+            "Talk to your physiotherapist. They can assess why progress might be slow and help address problems. Be honest about what you're doing and not doing. Recovery takes time, but if concerns persist, consider seeking further opinion.",
+    },
+    {
+        question: "What is tendon elongation?",
+        answer:
+            "Tendon elongation means your tendon healed at a longer length than normal. This affects function but doesn't mean recovery is impossible. Strengthening can improve function despite elongation. If concerned, talk to your physio or seek specialist opinion.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -297,18 +310,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "What if I'm not progressing?",
-                    answer:
-                        "Talk to your physiotherapist. They can assess why progress might be slow and help address problems. Be honest about what you're doing and not doing. Recovery takes time, but if concerns persist, consider seeking further opinion.",
-                },
-                {
-                    question: "What is tendon elongation?",
-                    answer:
-                        "Tendon elongation means your tendon healed at a longer length than normal. This affects function but doesn't mean recovery is impossible. Strengthening can improve function despite elongation. If concerned, talk to your physio or seek specialist opinion.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

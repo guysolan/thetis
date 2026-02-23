@@ -1,17 +1,40 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import TendonStrengthTimeline from "@/assets/tendon-strength-timeline-tintin-v6.png";
 
 export const metadata = {
     slug: "final-boot-phase",
-    title: "The Final Boot Phase",
+    title: "The Final Boot Stage",
     description:
-        "Remodelling phase, tendon strength, and removing final wedges",
+        "Remodelling stage, tendon strength, and removing final wedges",
     status: "drafting" as const,
 };
 
+export const faqs: FAQItem[] = [
+    {
+        question: "Can I remove the boot early if I feel ready?",
+        answer:
+            "No. Even if you feel great, follow your clinician's protocol. The timing is based on healing progress, not just how you feel. Removing the boot too early can cause the tendon to stretch or re-rupture. Week 10-12 is standard timing for a reason.",
+    },
+    {
+        question: "What if I'm still in pain at Week 8?",
+        answer:
+            "Some pain is normal, but if you're still in significant pain, discuss this with your clinician. They may need to adjust your protocol, check for problems, or provide additional treatment. Don't assume pain is normal without checking.",
+    },
+    {
+        question: "How do I know if my tendon is strong enough?",
+        answer:
+            "Your clinician assesses this through examination, imaging, and your progress. You can't tell just by how you feel. Trust their assessment — they know what to look for. At Week 8, the tendon is typically strong enough for protected walking but not for full activity.",
+    },
+    {
+        question: "When can I drive / go back to work?",
+        answer:
+            "This depends on which leg is injured, your job, and your clinician's guidance. We cover this in detail in Week 10. Generally, you can't drive if it's your right leg until you can walk without crutches. Discuss work with your employer and clinician.",
+    },
+];
+
 export const content: SectionContent = {
     intro:
-        "By Week 8, you're in the final phase of boot wear. Your tendon is remodelling — the new tissue is getting stronger and more organized. This is exciting progress, but it's also a critical time. The tendon is still vulnerable, and rushing ahead can cause problems. Stay patient — you're almost there.",
+        "By Week 8, you're in the final stage of boot wear. Your tendon is remodelling — the new tissue is getting stronger and more organized. This is exciting progress, but it's also a critical time. The tendon is still vulnerable, and rushing ahead can cause problems. Stay patient — you're almost there.",
     blocks: [
         {
             type: "heading",
@@ -20,7 +43,7 @@ export const content: SectionContent = {
         },
         {
             type: "checklist",
-            title: "Final boot phase basics",
+            title: "Final boot stage basics",
             items: [
                 {
                     text:
@@ -46,12 +69,12 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "Understanding the Remodelling Phase",
+            title: "Understanding the Remodelling Stage",
             content: [
                 {
                     type: "text",
                     content:
-                        "Your tendon is now in the remodelling phase — the new tissue is organizing itself, getting stronger, and becoming more like normal tendon. Think of it like **concrete setting** — it's hard enough to walk on, but still needs time to fully cure.",
+                        "Your tendon is now in the remodelling stage — the new tissue is organizing itself, getting stronger, and becoming more like normal tendon. Think of it like **concrete setting** — it's hard enough to walk on, but still needs time to fully cure.",
                 },
                 {
                     type: "text",
@@ -583,28 +606,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "Can I remove the boot early if I feel ready?",
-                    answer:
-                        "No. Even if you feel great, follow your clinician's protocol. The timing is based on healing progress, not just how you feel. Removing the boot too early can cause the tendon to stretch or re-rupture. Week 10-12 is standard timing for a reason.",
-                },
-                {
-                    question: "What if I'm still in pain at Week 8?",
-                    answer:
-                        "Some pain is normal, but if you're still in significant pain, discuss this with your clinician. They may need to adjust your protocol, check for problems, or provide additional treatment. Don't assume pain is normal without checking.",
-                },
-                {
-                    question: "How do I know if my tendon is strong enough?",
-                    answer:
-                        "Your clinician assesses this through examination, imaging, and your progress. You can't tell just by how you feel. Trust their assessment — they know what to look for. At Week 8, the tendon is typically strong enough for protected walking but not for full activity.",
-                },
-                {
-                    question: "When can I drive / go back to work?",
-                    answer:
-                        "This depends on which leg is injured, your job, and your clinician's guidance. We cover this in detail in Week 10. Generally, you can't drive if it's your right leg until you can walk without crutches. Discuss work with your employer and clinician.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

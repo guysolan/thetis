@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import IsomOvercomingSeatedCalf from "@/assets/isom-overcoming-seated-calf.png";
 import IsomYieldingStandingSeated from "@/assets/isom-yielding-standing-seated.png";
 import HeelRaiseProgression from "@/assets/heel-raise-progression-v1-fixed.png";
@@ -10,6 +10,31 @@ export const metadata = {
         "Single-leg heel raises, seated calf strength, and resistance training",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question:
+            "How long until I can do 15 single-leg heel raises?",
+        answer:
+            "It varies, but most people reach the interim Stage 3 target of 15 reps within 4-8 weeks of starting progressive strengthening. Some reach it faster, some take longer. Focus on consistent work rather than timelines.",
+    },
+    {
+        question:
+            "What if I can only do 1-2 single-leg heel raises?",
+        answer:
+            "That's okay — everyone starts somewhere. Even doing 1-2 reps is progress. Build gradually — add 1-2 reps per week if possible. Use support initially, reduce support as you get stronger. Your physio will guide you.",
+    },
+    {
+        question: "How often should I do strengthening exercises?",
+        answer:
+            "Most programs involve exercises 3-4 times per week, with rest days between sessions. Your physiotherapist will give you a specific program. Consistency matters more than frequency — doing exercises regularly is better than doing them sporadically.",
+    },
+    {
+        question: "What if exercises are too easy?",
+        answer:
+            "Tell your physiotherapist. They can progress exercises, add difficulty, or introduce new challenges. But don't skip ahead on your own — progression needs to be safe and appropriate for your stage of recovery.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -30,7 +55,7 @@ export const content: SectionContent = {
                 },
                 {
                     text:
-                        "Build seated calf strength — aim for 90% LSI (Limb Symmetry Index) or bodyweight targets (1.4x isometric, 1.2x isotonic)",
+                        "Build seated calf strength — aim for 90% LSI (injured leg vs healthy leg) or bodyweight targets (1.4x isometric, 1.2x isotonic)",
                 },
                 {
                     text:
@@ -57,7 +82,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Before diving into the exercises, it's important to understand **why** progressive strengthening is so critical in this stage. The answer: **preventing [tendon elongation](/standard/healing-process)** — the biggest obstacle to returning to sport and normal function.",
+                        "Before diving into the exercises, it's important to understand **why** progressive strengthening is so critical in this stage. The answer: **preventing tendon elongation** — the biggest obstacle to returning to sport and normal function. ([Learn more about elongation](/standard/healing-process).)",
                 },
                 {
                     type: "card",
@@ -137,9 +162,9 @@ export const content: SectionContent = {
                         {
                             type: "image",
                             src: HeelRaiseProgression,
-                            alt: "Four-panel progression showing heel raise exercises: double-leg floor, single-leg floor, single-leg deficit, weighted single-leg deficit",
+                            alt: "Heel raise progression: double-leg floor and single-leg floor on flat ground",
                             caption:
-                                "Heel raise progression: from double-leg to weighted single-leg deficit",
+                                "Heel raise progression: double-leg to single-leg on flat ground",
                         },
                         {
                             type: "text",
@@ -149,11 +174,17 @@ export const content: SectionContent = {
                             type: "list",
                             style: "bullet",
                             items: [
-                                "**Double-leg floor** — Start here, build to 3 sets of 25 reps",
-                                "**Single-leg floor** — Progress when double-leg is easy, build to 3 sets of 15 reps",
-                                "**Single-leg deficit** — Add step/platform when single-leg floor is easy, build to 3 sets of 15 reps",
-                                "**Weighted single-leg deficit** — Add weight when deficit is easy, aim for 3-4 sets of 6-15 reps",
+                                "**Double-leg floor** — Start here on flat ground, build to 3 sets of 25 reps",
+                                "**Single-leg floor** — Progress when double-leg is easy, build to 3 sets of 15 reps on flat ground",
+                                "**Weighted single-leg floor** — Add weight (backpack, weight vest) when single-leg floor is easy, aim for 3-4 sets of 6-15 reps",
                             ],
+                        },
+                        {
+                            type: "alert",
+                            variant: "warning",
+                            title: "Avoid deficit heel raises",
+                            content:
+                                "**Do not do heel raises with your heel hanging off a step or platform** — this stretches the tendon at the bottom of the movement and can cause elongation. Many clinicians advise avoiding any stretching of the Achilles until at least 1 year post-injury. Stick to flat ground only.",
                         },
                         {
                             type: "text",
@@ -231,7 +262,14 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Seated calf raises are a **key exercise** for Stage 3. They allow you to load your calf safely while building the strength needed for walking and standing exercises. Your physio will track your progress using specific force targets.",
+                        "Seated calf raises are the **foundation** of your strength rebuilding. You do these **before** progressing to standing single-leg heel raises — they build tendon strength safely with your foot pointed down. Even when you're doing standing heel raises, seated work continues to matter for building maximum strength.",
+                },
+                {
+                    type: "alert",
+                    variant: "info",
+                    title: "Progression order",
+                    content:
+                        "**Seated calf raises come first.** Build strength here before standing single-leg heel raises. Your tendon needs to handle significant load in the seated position (0.8-1x body weight minimum) before it's ready for standing work. Your physio will tell you when you're ready to progress.",
                 },
                 {
                     type: "card",
@@ -242,12 +280,12 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**1. Limb Symmetry Index (LSI):** The most practical target. Aim for **90% strength** in your injured leg compared to your healthy leg. If your healthy leg can push 100kg, your injured leg should target 90kg.",
+                                "**1. LSI (Limb Symmetry Index):** Compares your injured leg to your healthy leg. Aim for **90% strength** — if your healthy leg can push 100kg, your injured leg should target 90kg. This is the most practical target for most people.",
                         },
                         {
                             type: "text",
                             content:
-                                "**2. Bodyweight Multipliers:** Used if your physio has force plates. **Isometric target:** 1.4x body weight MVIC (maximum voluntary isometric contraction — how hard you can push). **Isotonic target:** 1.2x body weight seated isotonic.",
+                                "**2. Bodyweight Multipliers:** Used if your physio has force plates. **Isometric target:** 1.4x body weight MVIC (also called MVC — maximum voluntary contraction — how hard you can push and hold). **Isotonic target:** 1.2x body weight seated isotonic.",
                         },
                         {
                             type: "text",
@@ -257,9 +295,9 @@ export const content: SectionContent = {
                         {
                             type: "image",
                             src: IsomOvercomingSeatedCalf,
-                            alt: "Grant performing seated calf raise exercise with weight on his knees, foot pointed down on force plate platform",
+                            alt: "Seated calf raise with weight on knee, foot pointed down — building strength safely before standing exercises",
                             caption:
-                                "Seated calf raise: building toward Stage 3 strength targets",
+                                "Seated calf raise: foot pointed down, weight on knee. Do this before progressing to standing single-leg heel raises.",
                         },
                     ],
                 },
@@ -272,17 +310,17 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Isometric:** You push down as hard as you can and hold for 5 seconds. Your physio may measure this with force plates to track your progress objectively.",
+                                "**Isometric:** You push down as hard as you can and hold for 3-5 seconds. Your physio may measure this with force plates (see ISOM Overcoming below) to track your progress objectively.",
                         },
                         {
                             type: "text",
                             content:
-                                "**Isotonic:** You lift weight through full range of motion. Start with weight on your knee, progress gradually toward your target.",
+                                "**Isotonic:** You lift weight through range of motion with your foot pointed down. Start with weight on your knee, progress gradually toward your target.",
                         },
                         {
                             type: "text",
                             content:
-                                "**Progression:** Start with 10-15kg on your knee initially, progress gradually. Work toward 0.8-1x your body weight, then continue toward Stage 3 targets (1.4x BW isometric, 1.2x BW isotonic) before progressing to standing exercises.",
+                                "**Progression:** Start with 10-15kg on your knee initially, progress gradually. Work toward 0.8-1x your body weight before standing exercises, then continue toward Stage 3 targets (1.4x BW isometric, 1.2x BW isotonic).",
                         },
                     ],
                 },
@@ -437,7 +475,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "Your physio may measure your strength using **force plates** (ISOM overcoming test). You sit with your foot on the force plate and push down as hard as you can for 5 seconds. The force plate measures exactly how much force you produce.",
+                                "**Overcoming isometrics** mean applying maximal force (100% effort) against an immovable object. You sit with your foot on a force plate and push down as hard as you can for 3-5 seconds. The force plate doesn't move — it measures exactly how much force you produce. This tests your maximum strength at that joint angle.",
                         },
                         {
                             type: "text",
@@ -447,22 +485,17 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Target goals (with bent knee, seated):**",
+                                "**Target goals (with bent knee, seated, foot pointed down):**",
                         },
                         {
                             type: "list",
                             style: "bullet",
                             items: [
                                 "**LSI target:** 90% symmetry compared to uninjured leg",
-                                "**Stage 3 BW target:** 1.4x body weight MVIC (seated, foot pointed down)",
-                                "**Stage 4 BW target:** 2.0x body weight MVIC (seated, foot pointed down)",
-                                "**Note:** These are long-term goals — work toward them gradually over months, not weeks",
+                                "**Stage 3 target:** 1.4x body weight MVIC/MVC (seated, foot pointed down)",
+                                "**Stage 4 target:** 2.0x body weight MVIC/MVC (seated, foot pointed down)",
+                                "**Note:** MVIC = Maximum Voluntary Isometric Contraction (MVC is sometimes used). These are long-term goals — work toward them gradually over months.",
                             ],
-                        },
-                        {
-                            type: "text",
-                            content:
-                                "These are long-term goals — work toward them gradually over months, not weeks. The most important thing is consistent progression, not hitting specific numbers on a particular timeline.",
                         },
                     ],
                 },
@@ -610,30 +643,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question:
-                        "How long until I can do 15 single-leg heel raises?",
-                    answer:
-                        "It varies, but most people reach the interim Stage 3 target of 15 reps within 4-8 weeks of starting progressive strengthening. Some reach it faster, some take longer. Focus on consistent work rather than timelines.",
-                },
-                {
-                    question:
-                        "What if I can only do 1-2 single-leg heel raises?",
-                    answer:
-                        "That's okay — everyone starts somewhere. Even doing 1-2 reps is progress. Build gradually — add 1-2 reps per week if possible. Use support initially, reduce support as you get stronger. Your physio will guide you.",
-                },
-                {
-                    question: "How often should I do strengthening exercises?",
-                    answer:
-                        "Most programs involve exercises 3-4 times per week, with rest days between sessions. Your physiotherapist will give you a specific program. Consistency matters more than frequency — doing exercises regularly is better than doing them sporadically.",
-                },
-                {
-                    question: "What if exercises are too easy?",
-                    answer:
-                        "Tell your physiotherapist. They can progress exercises, add difficulty, or introduce new challenges. But don't skip ahead on your own — progression needs to be safe and appropriate for your stage of recovery.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

@@ -120,6 +120,14 @@ export interface RehabProtocolTableBlock {
   type: "rehab-protocol-table";
 }
 
+export interface CertificateBlock {
+  type: "certificate";
+}
+
+export interface CourseFeedbackFormBlock {
+  type: "course-feedback-form";
+}
+
 // Union of all content block types
 export type ContentBlock =
   | TextBlock
@@ -138,7 +146,9 @@ export type ContentBlock =
   | ImageBlock
   | IllustrationPromptBlock
   | ProductImageBlock
-  | RehabProtocolTableBlock;
+  | RehabProtocolTableBlock
+  | CertificateBlock
+  | CourseFeedbackFormBlock;
 
 // Section content definition
 export interface SectionContent {

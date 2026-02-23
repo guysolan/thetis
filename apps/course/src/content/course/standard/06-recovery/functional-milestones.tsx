@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import FunctionalMilestones2x2 from "@/assets/functional-milestones-2x2.png";
 import FunctionalMilestonesV7 from "@/assets/functional-milestones-v7-alt2.png";
 
@@ -9,6 +9,30 @@ export const metadata = {
         "Pain-free walking, 25+ heel raises, balance tests, and stairs",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question:
+            "Is it normal to not reach all milestones at Week 20?",
+        answer:
+            "Yes, it's normal. Everyone progresses differently. Some people reach all milestones at Week 20, others take longer. The important thing is to know where you are and work on the gaps. Your physiotherapist will guide you.",
+    },
+    {
+        question: "What if I can only do 10 heel raises?",
+        answer:
+            "That's okay — you're making progress. Keep working on strength. Focus on progressive strengthening exercises. Your physio will guide you on how to build up to 25+. Consistency matters more than timelines.",
+    },
+    {
+        question: "How long until I reach all milestones?",
+        answer:
+            "It varies. Some people reach all milestones by Week 20, others take until Week 25-30 or longer. Focus on consistent work rather than timelines.",
+    },
+    {
+        question: "What happens after I reach all milestones?",
+        answer:
+            "Once you reach Stage 3 milestones (including 25+ heel raises), you'll move to **Stage 4: Power development**. This involves building power, starting a walk-jog progression, and eventually sport-specific agility training.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -384,29 +408,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question:
-                        "Is it normal to not reach all milestones at Week 20?",
-                    answer:
-                        "Yes, it's normal. Everyone progresses differently. Some people reach all milestones at Week 20, others take longer. The important thing is to know where you are and work on the gaps. Your physiotherapist will guide you.",
-                },
-                {
-                    question: "What if I can only do 10 heel raises?",
-                    answer:
-                        "That's okay — you're making progress. Keep working on strength. Focus on progressive strengthening exercises. Your physio will guide you on how to build up to 25+. Consistency matters more than timelines.",
-                },
-                {
-                    question: "How long until I reach all milestones?",
-                    answer:
-                        "It varies. Some people reach all milestones by Week 20, others take until Week 25-30 or longer. Focus on consistent work rather than timelines.",
-                },
-                {
-                    question: "What happens after I reach all milestones?",
-                    answer:
-                        "Once you reach Stage 3 milestones (including 25+ heel raises), you'll move to **Stage 4: Power development**. This involves building power, starting a walk-jog progression, and eventually sport-specific agility training.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

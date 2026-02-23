@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import SeatedCalfRaiseWeek12 from "@/assets/seated-calf-raise-week-12.png";
 import StandingTwoFootCalfRaiseWeek12 from "@/assets/standing-two-foot-calf-raise-week-12.png";
 import TowelStretchWeek12 from "@/assets/towel-stretch-week-12.png";
@@ -8,15 +8,39 @@ import TheraBand from "@/assets/theraband.jpg";
 
 export const metadata = {
     slug: "key-exercises",
-    title: "The 5 Best Exercises for This Phase",
+    title: "The 5 Best Exercises for This Stage",
     description:
         "Towel stretch, seated heel raises, resistance bands, standing double-leg heel raises and balance training",
     status: "drafting" as const,
 };
 
+export const faqs: FAQItem[] = [
+    {
+        question:
+            "How many times a day should I do these exercises?",
+        answer:
+            "Most exercises are done once a day, but your physiotherapist will give you a specific program. Some exercises (like ankle pumps) can be done multiple times throughout the day. Consistency matters more than frequency — doing exercises daily is better than doing them multiple times but inconsistently.",
+    },
+    {
+        question: "What if I can't do all the exercises?",
+        answer:
+            "That's normal — everyone starts somewhere. Do what you can, and work toward the others. Your physiotherapist will modify exercises based on your abilities. Even doing 1-2 reps of an exercise is progress. Don't compare yourself to others — your journey is unique.",
+    },
+    {
+        question: "How long should each exercise session take?",
+        answer:
+            "Typically 20-30 minutes, but this varies. Some days might be shorter, some longer. Focus on quality over duration — doing exercises correctly for 15 minutes is better than rushing through them for 30 minutes. Your physio will guide you on timing.",
+    },
+    {
+        question: "What if exercises are too easy?",
+        answer:
+            "Tell your physiotherapist. They can progress exercises, add difficulty, or introduce new challenges. But don't skip ahead on your own — progression needs to be safe and appropriate for your stage of recovery.",
+    },
+];
+
 export const content: SectionContent = {
     intro:
-        "By Week 12, you're actively working on Phase 2 goals. Your physiotherapist has likely introduced several exercises, but understanding why each one matters helps you stay motivated and do them correctly. This lesson covers the 5 most important exercises for this phase — what they do, how to do them safely, and why they're essential for your recovery. These detailed instructions complement what your physiotherapist teaches you — use this as a reference guide for proper form and progression.",
+        "By Week 12, you're actively working on Stage 2 goals. Your physiotherapist has likely introduced several exercises, but understanding why each one matters helps you stay motivated and do them correctly. This lesson covers the 5 most important exercises for this stage — what they do, how to do them safely, and why they're essential for your recovery. These detailed instructions complement what your physiotherapist teaches you — use this as a reference guide for proper form and progression.",
     blocks: [
         {
             type: "heading",
@@ -55,7 +79,7 @@ export const content: SectionContent = {
         },
         {
             type: "section",
-            title: "The 5 Essential Exercises for Phase 2",
+            title: "The 5 Essential Exercises for Stage 2",
             content: [
                 {
                     type: "text",
@@ -67,7 +91,7 @@ export const content: SectionContent = {
                     variant: "info",
                     title: "Important",
                     content:
-                        "These exercises are for **Phase 2 (Weeks 10-12+)** after boot removal. If you're still in your boot, continue with Phase 1 exercises (seated calf raises with foot pointed down). For more information on Phase 2 goals and what to expect, see [Starting Physiotherapy](/standard/starting-physio).",
+                        "These exercises are for **Stage 2 (Weeks 10-12+)** after boot removal. If you're still in your boot, continue with Stage 1 exercises (seated calf raises with foot pointed down). For more information on Stage 2 goals and what to expect, see [Starting Physiotherapy](/standard/starting-physio).",
                 },
                 {
                     type: "card",
@@ -125,12 +149,12 @@ export const content: SectionContent = {
                                 {
                                     type: "text",
                                     content:
-                                        "Some physiotherapists use **force plates** to measure your strength precisely. This is called **ISOM overcoming** — you sit with your foot on the force plate and push down as hard as you can for 5 seconds. The force plate measures exactly how much force you can produce.",
+                                        "**Overcoming isometrics** mean applying maximal force (100% effort) against an immovable object. You sit with your foot on a force plate and push down as hard as you can for 3-5 seconds. The force plate doesn't move — it measures exactly how much force you produce. This tests your maximum strength.",
                                 },
                                 {
                                     type: "text",
                                     content:
-                                        "**How it works:** You're pushing *against* the force plate (trying to overcome it), which measures your maximum strength. This is useful because it tracks your progress objectively — you can see your strength improving in numbers, not just how exercises feel.",
+                                        "**How it works:** You're pushing *against* the force plate (trying to overcome it). The plate is immovable, so it measures your maximum voluntary isometric contraction (MVIC, also called MVC). This tracks your progress objectively.",
                                 },
                                 {
                                     type: "text",
@@ -248,8 +272,9 @@ export const content: SectionContent = {
                         {
                             type: "alert",
                             variant: "warning",
+                            title: "Seated comes first",
                             content:
-                                "**Don't rush this.** Only progress to standing when you can do seated calf raises with significant weight (0.8-1x body weight). Your physio will tell you when you're ready.",
+                                "**Do seated calf raises before standing.** Only progress to standing when you can do seated calf raises with significant weight (0.8-1x body weight). Your physio will tell you when you're ready. Don't rush — building the foundation first protects your tendon.",
                         },
                     ],
                 },
@@ -295,8 +320,9 @@ export const content: SectionContent = {
                         {
                             type: "alert",
                             variant: "warning",
+                            title: "Conservative approach to stretching",
                             content:
-                                "**Gentle only.** This should feel like a stretch, not pain. Don't force it. Aggressive stretching can cause [tendon elongation](/standard/healing-process) — your tendon needs to heal at the right length. If unsure, ask your physio.",
+                                "**Gentle only** — this should feel like a mild stretch, not pain. Don't force it. Aggressive stretching can cause tendon elongation. Many clinicians advise **no stretching of the Achilles until at least 1 year** post-injury — check with your physio. ([Learn more about elongation](/standard/healing-process).)",
                         },
                     ],
                 },
@@ -634,8 +660,8 @@ export const content: SectionContent = {
                     items: [
                         "**This week:** Focus on mastering these exercises with proper form",
                         "**Week 13:** We cover re-learning to walk properly — gait training and correcting limping",
-                        "**Weeks 12-26:** Continue building strength in Phase 3, working toward 25+ heel raises",
-                        "**After Phase 2:** You'll move to Phase 3 (single-leg capacity) — building power and preparing for return to sport",
+                        "**Weeks 12-26:** Continue building strength in Stage 3, working toward 25+ heel raises",
+                        "**After Stage 2:** You'll move to Stage 3 (single-leg capacity) — building power and preparing for return to sport",
                     ],
                 },
             ],
@@ -664,29 +690,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question:
-                        "How many times a day should I do these exercises?",
-                    answer:
-                        "Most exercises are done once a day, but your physiotherapist will give you a specific program. Some exercises (like ankle pumps) can be done multiple times throughout the day. Consistency matters more than frequency — doing exercises daily is better than doing them multiple times but inconsistently.",
-                },
-                {
-                    question: "What if I can't do all the exercises?",
-                    answer:
-                        "That's normal — everyone starts somewhere. Do what you can, and work toward the others. Your physiotherapist will modify exercises based on your abilities. Even doing 1-2 reps of an exercise is progress. Don't compare yourself to others — your journey is unique.",
-                },
-                {
-                    question: "How long should each exercise session take?",
-                    answer:
-                        "Typically 20-30 minutes, but this varies. Some days might be shorter, some longer. Focus on quality over duration — doing exercises correctly for 15 minutes is better than rushing through them for 30 minutes. Your physio will guide you on timing.",
-                },
-                {
-                    question: "What if exercises are too easy?",
-                    answer:
-                        "Tell your physiotherapist. They can progress exercises, add difficulty, or introduce new challenges. But don't skip ahead on your own — progression needs to be safe and appropriate for your stage of recovery.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

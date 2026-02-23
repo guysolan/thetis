@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import ScarMassageTechnique from "@/assets/scar-massage-engaging-v1.png";
 
 export const metadata = {
@@ -8,6 +8,29 @@ export const metadata = {
         "Wound care, scar management, and what to expect after Achilles surgery",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "When can I shower normally?",
+        answer:
+            "Usually after your 2-week wound check, once your surgeon confirms the wound is healed. Until then, keep the wound dry — you can use a waterproof cover or take shallow baths keeping your leg out of the water. **When you do shower: keep your toes down 24/7** — even in the shower. Sit if needed, and never let your foot relax into a toes-up position. One slip can mean rerupture.",
+    },
+    {
+        question: "When should I start scar massage?",
+        answer:
+            "Usually 2-3 weeks after surgery, once the wound is fully closed with no scabs or open areas. Always check with your surgeon first.",
+    },
+    {
+        question: "Will my scar be visible?",
+        answer:
+            "Initially yes, but scars fade significantly over 6-12 months. Most Achilles scars are on the back of the ankle and not very noticeable once healed. Scar massage and sun protection can help appearance.",
+    },
+    {
+        question: "Is numbness around the scar normal?",
+        answer:
+            "Yes, very common. Small nerves are cut during surgery and take time to recover. Numbness usually improves over months but may persist in a small area around the scar.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -242,28 +265,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "When can I shower normally?",
-                    answer:
-                        "Usually after your 2-week wound check, once your surgeon confirms the wound is healed. Until then, keep the wound dry — you can use a waterproof cover or take shallow baths keeping your leg out of the water. **When you do shower: keep your toes down 24/7** — even in the shower. Sit if needed, and never let your foot relax into a toes-up position. One slip can mean rerupture.",
-                },
-                {
-                    question: "When should I start scar massage?",
-                    answer:
-                        "Usually 2-3 weeks after surgery, once the wound is fully closed with no scabs or open areas. Always check with your surgeon first.",
-                },
-                {
-                    question: "Will my scar be visible?",
-                    answer:
-                        "Initially yes, but scars fade significantly over 6-12 months. Most Achilles scars are on the back of the ankle and not very noticeable once healed. Scar massage and sun protection can help appearance.",
-                },
-                {
-                    question: "Is numbness around the scar normal?",
-                    answer:
-                        "Yes, very common. Small nerves are cut during surgery and take time to recover. Numbness usually improves over months but may persist in a small area around the scar.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

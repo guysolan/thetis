@@ -13,6 +13,7 @@ import { Route as ClaimRouteImport } from './routes/claim'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StandardIndexRouteImport } from './routes/standard/index'
 import { Route as PremiumIndexRouteImport } from './routes/premium/index'
+import { Route as StandardCertificateRouteImport } from './routes/standard/certificate'
 import { Route as StandardSlugRouteImport } from './routes/standard/$slug'
 
 const ClaimRoute = ClaimRouteImport.update({
@@ -35,6 +36,11 @@ const PremiumIndexRoute = PremiumIndexRouteImport.update({
   path: '/premium/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StandardCertificateRoute = StandardCertificateRouteImport.update({
+  id: '/standard/certificate',
+  path: '/standard/certificate',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StandardSlugRoute = StandardSlugRouteImport.update({
   id: '/standard/$slug',
   path: '/standard/$slug',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/claim': typeof ClaimRoute
   '/standard/$slug': typeof StandardSlugRoute
+  '/standard/certificate': typeof StandardCertificateRoute
   '/premium/': typeof PremiumIndexRoute
   '/standard/': typeof StandardIndexRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/claim': typeof ClaimRoute
   '/standard/$slug': typeof StandardSlugRoute
+  '/standard/certificate': typeof StandardCertificateRoute
   '/premium': typeof PremiumIndexRoute
   '/standard': typeof StandardIndexRoute
 }
@@ -60,19 +68,33 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/claim': typeof ClaimRoute
   '/standard/$slug': typeof StandardSlugRoute
+  '/standard/certificate': typeof StandardCertificateRoute
   '/premium/': typeof PremiumIndexRoute
   '/standard/': typeof StandardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/claim' | '/standard/$slug' | '/premium/' | '/standard/'
+  fullPaths:
+    | '/'
+    | '/claim'
+    | '/standard/$slug'
+    | '/standard/certificate'
+    | '/premium/'
+    | '/standard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/claim' | '/standard/$slug' | '/premium' | '/standard'
+  to:
+    | '/'
+    | '/claim'
+    | '/standard/$slug'
+    | '/standard/certificate'
+    | '/premium'
+    | '/standard'
   id:
     | '__root__'
     | '/'
     | '/claim'
     | '/standard/$slug'
+    | '/standard/certificate'
     | '/premium/'
     | '/standard/'
   fileRoutesById: FileRoutesById
@@ -81,6 +103,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ClaimRoute: typeof ClaimRoute
   StandardSlugRoute: typeof StandardSlugRoute
+  StandardCertificateRoute: typeof StandardCertificateRoute
   PremiumIndexRoute: typeof PremiumIndexRoute
   StandardIndexRoute: typeof StandardIndexRoute
 }
@@ -115,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PremiumIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/standard/certificate': {
+      id: '/standard/certificate'
+      path: '/standard/certificate'
+      fullPath: '/standard/certificate'
+      preLoaderRoute: typeof StandardCertificateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/standard/$slug': {
       id: '/standard/$slug'
       path: '/standard/$slug'
@@ -129,6 +159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ClaimRoute: ClaimRoute,
   StandardSlugRoute: StandardSlugRoute,
+  StandardCertificateRoute: StandardCertificateRoute,
   PremiumIndexRoute: PremiumIndexRoute,
   StandardIndexRoute: StandardIndexRoute,
 }

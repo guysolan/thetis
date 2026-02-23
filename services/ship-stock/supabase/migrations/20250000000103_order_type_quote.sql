@@ -1,5 +1,6 @@
 -- Add quote to order_type enum for quote documents
-ALTER TYPE order_type ADD VALUE IF NOT EXISTS 'quote';
+ALTER TYPE order_type
+    ADD VALUE IF NOT EXISTS 'quote';
 
 -- Add quote column to store price bands (qty -> price) and currency as JSON
 -- Example: {"price_bands": {"24": 10.50, "48": 9.00}, "currency": "GBP"}
@@ -10,6 +11,7 @@ COMMENT ON COLUMN orders.quote IS 'For quote orders: { price_bands: { "24": 10.5
 
 -- Recreate orders_view to include quote column
 DROP VIEW IF EXISTS public.orders_view;
+
 CREATE VIEW public.orders_view AS
 SELECT
     o.id AS order_id,
@@ -74,10 +76,10 @@ SELECT
             0::numeric
         END) + o.carriage AS total_value,
     jsonb_agg(jsonb_build_object('item_id', i.id, 'item_name', i.name, 'item_type', i.type, 'item_hs_code', i.hs_code, 'item_sku', i.sku, 'item_country_of_origin', i.country_of_origin, 'height', COALESCE(i.height, 0::numeric), 'width', COALESCE(i.width, 0::numeric), 'depth', COALESCE(i.depth, 0::numeric), 'weight', COALESCE(i.weight, 0::numeric), 'address', to_jsonb(a.*) - 'created_at'::text - 'updated_at'::text, 'quantity', ic.quantity_change, 'price', oic.price, 'tax', oic.tax, 'lot_number', oic.lot_number, 'package_item_change_id', oic.package_item_change_id, 'total', CASE WHEN o.order_type = 'sell'::order_type THEN
-            '-1'::integer::numeric * ic.quantity_change * oic.price *(1::numeric + COALESCE(oic.tax, 0::numeric))
-        ELSE
-            ic.quantity_change * oic.price *(1::numeric + COALESCE(oic.tax, 0::numeric))
-        END)) AS items
+                '-1'::integer::numeric * ic.quantity_change * oic.price *(1::numeric + COALESCE(oic.tax, 0::numeric))
+            ELSE
+                ic.quantity_change * oic.price *(1::numeric + COALESCE(oic.tax, 0::numeric))
+            END)) AS items
 FROM
     orders o
     LEFT JOIN companies from_company ON o.from_company_id = from_company.id
@@ -166,3 +168,4 @@ GROUP BY
     to_shipping_addr.country,
     to_shipping_addr.is_active,
     to_shipping_addr.holds_stock;
+

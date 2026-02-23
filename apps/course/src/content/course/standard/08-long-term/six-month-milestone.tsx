@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import WhereYourTendonIsNow from "@/assets/where-your-tendon-is-now-6-months-v2-scar.png";
 import ReturnToSportCriteria from "@/assets/return-to-sport-criteria-v7-mike-checklist-fixed.png";
 
@@ -9,6 +9,29 @@ export const metadata = {
         "Where your tendon is now, return-to-sport criteria, and psychological readiness",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "Am I ready to return to sport at 6 months?",
+        answer:
+            "It depends on whether you've met return-to-sport criteria. Most people need more than 6 months. Your physiotherapist will assess your strength, function, and readiness. Don't rush — criteria-based return is safer than time-based return.",
+    },
+    {
+        question: "Is it normal that my tendon is thicker?",
+        answer:
+            "Yes, tendon thickening is normal and permanent. It doesn't affect function. Your tendon will never be exactly the same as before injury, but it can function well.",
+    },
+    {
+        question: "What if I haven't met return-to-sport criteria?",
+        answer:
+            "That's normal — most people need more than 6 months. Continue strengthening, work on criteria, be patient. Your physio will guide you. Criteria-based return is safer than rushing.",
+    },
+    {
+        question: "I'm scared to return to sport. Is this normal?",
+        answer:
+            "Yes, some fear is normal. Fear of re-injury (kinesiophobia) is common. Build confidence gradually — start with low-risk activities, build strength, talk to your physio. If fear is severe, consider psychological support.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -332,28 +355,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "Am I ready to return to sport at 6 months?",
-                    answer:
-                        "It depends on whether you've met return-to-sport criteria. Most people need more than 6 months. Your physiotherapist will assess your strength, function, and readiness. Don't rush — criteria-based return is safer than time-based return.",
-                },
-                {
-                    question: "Is it normal that my tendon is thicker?",
-                    answer:
-                        "Yes, tendon thickening is normal and permanent. It doesn't affect function. Your tendon will never be exactly the same as before injury, but it can function well.",
-                },
-                {
-                    question: "What if I haven't met return-to-sport criteria?",
-                    answer:
-                        "That's normal — most people need more than 6 months. Continue strengthening, work on criteria, be patient. Your physio will guide you. Criteria-based return is safer than rushing.",
-                },
-                {
-                    question: "I'm scared to return to sport. Is this normal?",
-                    answer:
-                        "Yes, some fear is normal. Fear of re-injury (kinesiophobia) is common. Build confidence gradually — start with low-risk activities, build strength, talk to your physio. If fear is severe, consider psychological support.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

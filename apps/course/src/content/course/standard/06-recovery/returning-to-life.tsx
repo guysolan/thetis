@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import ReturningToWork from "@/assets/returning-to-work-v3-split-panel-fixed.png";
 
 export const metadata = {
@@ -8,9 +8,32 @@ export const metadata = {
     status: "drafting" as const,
 };
 
+export const faqs: FAQItem[] = [
+    {
+        question: "When can I return to work?",
+        answer:
+            "Desk jobs: usually **Week 2-6** with care team approval — many return as early as Week 2 if they can sit comfortably. Physical or active jobs: usually **Week 6+** with modified duties initially. Always follow your care team's advice — they'll assess when it's safe for you.",
+    },
+    {
+        question: "Why am I so tired?",
+        answer:
+            "Recovery takes energy. Your body is healing, exercises are tiring, and your fitness has decreased. Pace yourself, rest when needed, and sleep well.",
+    },
+    {
+        question: "When will I be back to normal activities?",
+        answer:
+            "Work and daily life: many return to desk work Week 2-6. Most normal activities (walking, household tasks, social) return over the first 3-4 months. Full return to sport takes longer — be patient.",
+    },
+    {
+        question: "When can I travel for work?",
+        answer:
+            "Desk-based travel (flights, meetings) may be possible Week 2-6 with care team approval — elevate your foot when possible, take breaks. Active travel (site visits, lots of walking) usually needs Week 6+. See [Driving Guidelines](/standard/driving-guidelines) for when you can drive.",
+    },
+];
+
 export const content: SectionContent = {
     intro:
-        "By Week 22, you're likely back to many normal activities. You're walking better, building strength, and feeling more like yourself. This lesson covers practical aspects of returning to work and daily life.",
+        "Returning to work and daily life is a key part of recovery. Most people go back to desk work within **Week 2-6** (with care team approval). Physical jobs typically need Week 6+ with modified duties. This lesson covers work, household tasks, travel, and managing energy — all with a conservative approach aligned with your care team's guidance.",
     blocks: [
         {
             type: "heading",
@@ -22,16 +45,20 @@ export const content: SectionContent = {
             title: "Returning to life basics",
             items: [
                 {
-                    text: "Gradually increase activity — don't rush back to everything at once",
+                    text:
+                        "Gradually increase activity — don't rush back to everything at once",
                 },
                 {
-                    text: "Listen to your body — rest when needed, don't push through fatigue",
+                    text:
+                        "Listen to your body — rest when needed, don't push through fatigue",
                 },
                 {
-                    text: "Manage energy — recovery takes energy, pace yourself",
+                    text:
+                        "Manage energy — recovery takes energy, pace yourself",
                 },
                 {
-                    text: "Stay consistent with exercises — don't stop just because you're back to normal activities",
+                    text:
+                        "Stay consistent with exercises — don't stop just because you're back to normal activities",
                 },
             ],
         },
@@ -42,21 +69,26 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "By Week 22, many people have returned to work or are planning to. How this works depends on your job type and recovery progress.",
+                        "When people return to work depends on your job type — **always follow your care team's advice**. They'll assess when it's safe for you.",
                 },
                 {
                     type: "image",
                     src: ReturningToWork,
-                    alt: "Week 22 infographic showing returning to work guidance: Desk jobs (Week 6-10 possible, take breaks, ergonomic setup), Physical jobs (modified duties, gradual return, follow clinician guidance), Household & Daily Life (safe activities like cooking, shopping, social; avoid/modify heavy lifting, ladders, prolonged standing), and Managing Energy (listen to your body, plan rest periods, don't overdo it)",
+                    alt: "Returning to work guidance: Desk jobs (Week 2-6 with approval), Physical/active jobs (Week 6+ with modified duties), and tips for managing work during recovery",
                     caption:
-                        "Returning to work and daily life: guidance for desk jobs, physical jobs, household tasks, and managing energy",
+                        "Returning to work: guidance for desk, physical, and active jobs",
                 },
                 {
                     type: "card",
                     title: "Desk jobs",
-                    description: "Usually possible by Week 6-10.",
+                    description: "Usually Week 2-6 with care team approval.",
                     variant: "default",
                     content: [
+                        {
+                            type: "text",
+                            content:
+                                "Many people return to desk work **Week 2-6** after injury, depending on pain, swelling, and whether they can sit comfortably. Some return as early as Week 2. Your care team will advise based on your situation.",
+                        },
                         {
                             type: "list",
                             style: "bullet",
@@ -70,10 +102,15 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Physical jobs",
-                    description: "Timing varies based on demands.",
+                    title: "Physical or active jobs",
+                    description: "Usually Week 6+ with modified duties.",
                     variant: "muted",
                     content: [
+                        {
+                            type: "text",
+                            content:
+                                "Jobs requiring standing, walking, or physical activity typically need **Week 6 or later**, with modified duties initially. Your care team will assess when you're ready.",
+                        },
                         {
                             type: "list",
                             style: "bullet",
@@ -81,6 +118,23 @@ export const content: SectionContent = {
                                 "**May need modified duties** — lighter duties initially",
                                 "**Gradual return** — start part-time, build up",
                                 "**Follow clinician guidance** — they'll assess when you're ready",
+                            ],
+                        },
+                    ],
+                },
+                {
+                    type: "card",
+                    title: "Travel for work",
+                    description: "Desk-based vs active travel.",
+                    variant: "muted",
+                    content: [
+                        {
+                            type: "list",
+                            style: "bullet",
+                            items: [
+                                "**Desk-based travel** (flights, meetings) — May be possible Week 2-6 with approval; elevate foot when possible, take breaks",
+                                "**Active travel** (site visits, walking) — Usually Week 6+; discuss with your care team",
+                                "**Driving** — See [Driving Guidelines](/standard/driving-guidelines) for when you can drive based on which leg is injured",
                             ],
                         },
                     ],
@@ -223,23 +277,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "When can I return to work?",
-                    answer:
-                        "Desk jobs: usually Week 6-10 if you can sit comfortably. Physical jobs: timing varies, may need modified duties initially. Your clinician will guide you.",
-                },
-                {
-                    question: "Why am I so tired?",
-                    answer:
-                        "Recovery takes energy. Your body is healing, exercises are tiring, and your fitness has decreased. Pace yourself, rest when needed, and sleep well.",
-                },
-                {
-                    question: "When will I be back to normal activities?",
-                    answer:
-                        "Most people return to most normal activities by 3-4 months. Full return to all activities (including sports) takes longer — be patient.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

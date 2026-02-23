@@ -15,9 +15,11 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@thetis/ui/alert";
 import {
   AlertTriangle,
+  Award,
   Check,
   CheckCircle2,
   CheckSquare,
+  Download,
   Info,
   Lightbulb,
   Square,
@@ -26,6 +28,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
 import { RehabProtocolTable } from "./RehabProtocolTable";
+import CourseFeedbackForm from "./CourseFeedbackForm";
 
 // Parse simple markdown: **bold**, *italic*, and [link text](url)
 function parseInlineMarkdown(text: string): React.ReactNode {
@@ -509,6 +512,37 @@ function RehabProtocolTableBlockComponent() {
   );
 }
 
+function CertificateBlockComponent() {
+  return (
+    <div className="my-10 p-8 md:p-12 bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 border-2 border-primary/30 rounded-2xl text-center">
+      <Award className="mx-auto mb-4 w-16 h-16 text-primary" />
+      <h3 className="mb-2 font-bold text-foreground text-2xl md:text-3xl">
+        Certificate of Completion
+      </h3>
+      <p className="mb-4 text-muted-foreground text-lg">
+        Achilles Recovery Course
+      </p>
+      <p className="mb-6 text-foreground font-medium">
+        You have completed the full course and are equipped with the knowledge
+        to support your recovery journey.
+      </p>
+      <Link
+        to="/standard/certificate"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex justify-center items-center gap-2 h-12 px-8 rounded-sm bg-primary text-primary-foreground font-semibold hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        <Download className="w-4 h-4" />
+        Download Certificate
+      </Link>
+    </div>
+  );
+}
+
+function CourseFeedbackFormBlockComponent() {
+  return <CourseFeedbackForm />;
+}
+
 // Main block renderer
 function ContentBlockRenderer({ block }: { block: ContentBlock }) {
   switch (block.type) {
@@ -586,6 +620,10 @@ function ContentBlockRenderer({ block }: { block: ContentBlock }) {
       );
     case "rehab-protocol-table":
       return <RehabProtocolTableBlockComponent />;
+    case "certificate":
+      return <CertificateBlockComponent />;
+    case "course-feedback-form":
+      return <CourseFeedbackFormBlockComponent />;
     default:
       return null;
   }

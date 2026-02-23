@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import ReturnToSportProgression from "@/assets/return-to-sport-progression.png";
 import ReturnToSportCriteria85Percent from "@/assets/return-to-sport-criteria-85.png";
 
@@ -10,9 +10,38 @@ export const metadata = {
     status: "drafting" as const,
 };
 
+export const faqs: FAQItem[] = [
+    {
+        question: "When can I return to sport?",
+        answer:
+            "When you meet return-to-sport criteria: 85% symmetry in strength, hopping, and jumping; 25+ heel raises; pain-free activities; good balance; and physio clearance. This is typically around 7-9 months, but it's criteria-based, not time-based.",
+    },
+    {
+        question: "What does 85% symmetry mean?",
+        answer:
+            "Your injured leg should perform at least 85% as well as your uninjured leg. For example, if you can do 20 heel raises with 20 lbs on your uninjured side, you should be able to do at least 17 reps with the same weight on your injured side.",
+    },
+    {
+        question: "How long does return to sport take?",
+        answer:
+            "Return to sport is a gradual process that takes several months. You'll start with modified practice, progress to full participation, and eventually (hopefully) reach pre-injury level. Don't expect to return immediately after meeting criteria.",
+    },
+    {
+        question: "What if I can't return to pre-injury level?",
+        answer:
+            "That's okay — not everyone returns to pre-injury level. Some return at a lower level, and that's still success. Being able to participate in your sport is the goal, even if it's at a different level than before.",
+    },
+    {
+        question:
+            "Should I stop strengthening exercises when I return to sport?",
+        answer:
+            "No — continue your strengthening program. Ongoing strength is crucial for preventing re-injury and maintaining gains. Continue heel raises and plyometrics 2-3 times per week.",
+    },
+];
+
 export const content: SectionContent = {
     intro:
-        "By Week 30-32, you've completed plyometric training and you're thinking about returning to your sport. Return to sport is a major milestone — but it's not just about time. You need to meet specific criteria and follow a gradual progression.",
+        "By Week 30-32, you've progressed through plyometric training and you're thinking about returning to your sport. Return to sport is a major milestone — but it's not just about time. You need to meet specific criteria and follow a gradual progression.",
     blocks: [
         {
             type: "heading",
@@ -462,34 +491,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "When can I return to sport?",
-                    answer:
-                        "When you meet return-to-sport criteria: 85% symmetry in strength, hopping, and jumping; 25+ heel raises; pain-free activities; good balance; and physio clearance. This is typically around 7-9 months, but it's criteria-based, not time-based.",
-                },
-                {
-                    question: "What does 85% symmetry mean?",
-                    answer:
-                        "Your injured leg should perform at least 85% as well as your uninjured leg. For example, if you can do 20 heel raises with 20 lbs on your uninjured side, you should be able to do at least 17 reps with the same weight on your injured side.",
-                },
-                {
-                    question: "How long does return to sport take?",
-                    answer:
-                        "Return to sport is a gradual process that takes several months. You'll start with modified practice, progress to full participation, and eventually (hopefully) reach pre-injury level. Don't expect to return immediately after meeting criteria.",
-                },
-                {
-                    question: "What if I can't return to pre-injury level?",
-                    answer:
-                        "That's okay — not everyone returns to pre-injury level. Some return at a lower level, and that's still success. Being able to participate in your sport is the goal, even if it's at a different level than before.",
-                },
-                {
-                    question:
-                        "Should I stop strengthening exercises when I return to sport?",
-                    answer:
-                        "No — continue your strengthening program. Ongoing strength is crucial for preventing re-injury and maintaining gains. Continue heel raises and plyometrics 2-3 times per week.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

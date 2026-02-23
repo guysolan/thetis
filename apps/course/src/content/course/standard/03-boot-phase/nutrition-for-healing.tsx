@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import NutritionSummaryChecklist from "@/assets/nutrition-summary-checklist.png";
 
 export const metadata = {
@@ -8,6 +8,24 @@ export const metadata = {
         "Evidence-based nutrition guidance for Achilles rupture recovery",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "Do I need to take supplements?",
+        answer:
+            "There's no strong evidence that supplements improve healing outcomes after Achilles rupture. A balanced diet usually provides what you need. If you're considering supplements like collagen or vitamin C, discuss with your healthcare team first.",
+    },
+    {
+        question: "Can I still eat my normal foods?",
+        answer:
+            "Yes, absolutely. There's no evidence that you need to change your diet significantly. Eat a balanced, varied diet as you normally would. If you're eating a reasonable mix of foods, you're likely getting what you need.",
+    },
+    {
+        question: "Do I need to track protein or other nutrients?",
+        answer:
+            "No. There's no evidence that tracking protein intake improves healing outcomes. If you're eating a balanced diet with variety, you don't need to count grams or track specific nutrients. If you have concerns about your diet or a very restricted eating pattern, discuss with your healthcare team.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -238,23 +256,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "Do I need to take supplements?",
-                    answer:
-                        "There's no strong evidence that supplements improve healing outcomes after Achilles rupture. A balanced diet usually provides what you need. If you're considering supplements like collagen or vitamin C, discuss with your healthcare team first.",
-                },
-                {
-                    question: "Can I still eat my normal foods?",
-                    answer:
-                        "Yes, absolutely. There's no evidence that you need to change your diet significantly. Eat a balanced, varied diet as you normally would. If you're eating a reasonable mix of foods, you're likely getting what you need.",
-                },
-                {
-                    question: "Do I need to track protein or other nutrients?",
-                    answer:
-                        "No. There's no evidence that tracking protein intake improves healing outcomes. If you're eating a balanced diet with variety, you don't need to count grams or track specific nutrients. If you have concerns about your diet or a very restricted eating pattern, discuss with your healthcare team.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 
 export const metadata = {
     slug: "post-boot-challenges",
@@ -7,6 +7,29 @@ export const metadata = {
         "Stiffness, swelling, and why you shouldn't stretch aggressively",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "How long will stiffness last?",
+        answer:
+            "Stiffness typically improves significantly over 4-6 weeks after boot removal, but some mild stiffness can persist for months. It's normal and improves gradually with activity. If stiffness is severe or getting worse, tell your physiotherapist.",
+    },
+    {
+        question: "Is it okay to stretch if I'm stiff?",
+        answer:
+            "Many clinicians advise no Achilles stretching until at least 1 year post-injury — check with your physio. If they recommend stretching, gentle movements only — never aggressive or forced. Ankle pumps and physio-guided movements are generally safe. Don't add stretches on your own.",
+    },
+    {
+        question: "How much swelling is normal?",
+        answer:
+            "Some swelling is normal, especially after activity. It should improve with elevation and rest. If swelling is severe, doesn't improve with elevation, or is getting worse, tell your physiotherapist. They can assess if there's a problem.",
+    },
+    {
+        question: "Should I use heat or ice?",
+        answer:
+            "Use heat for stiffness — it helps relax muscles and improve mobility. Use ice for swelling — it helps reduce inflammation. Your physiotherapist can give you specific guidance based on your situation.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -165,7 +188,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Your tendon is still healing** — at Week 14, your tendon is in the remodelling phase. It's stronger than it was, but it's still vulnerable to overstretching.",
+                                "**Your tendon is still healing** — at Week 14, your tendon is in the remodelling stage. It's stronger than it was, but it's still vulnerable to overstretching.",
                         },
                         {
                             type: "text",
@@ -175,13 +198,13 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Gentle stretching is safe** — gentle movements and stretches are fine. It's aggressive, forced stretching that's the problem.",
+                                "**Conservative approach:** Many clinicians advise **no stretching of the Achilles until at least 1 year** post-injury — check with your physio. If they do recommend stretching, gentle movements only — never aggressive or forced.",
                         },
                     ],
                 },
                 {
                     type: "card",
-                    title: "Safe stretching guidelines",
+                    title: "If your physio recommends stretching",
                     description: "What's okay to do.",
                     variant: "default",
                     content: [
@@ -455,28 +478,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "How long will stiffness last?",
-                    answer:
-                        "Stiffness typically improves significantly over 4-6 weeks after boot removal, but some mild stiffness can persist for months. It's normal and improves gradually with activity. If stiffness is severe or getting worse, tell your physiotherapist.",
-                },
-                {
-                    question: "Is it okay to stretch if I'm stiff?",
-                    answer:
-                        "Gentle stretching is okay, but avoid aggressive stretching. Gentle movements, ankle pumps, and physio-guided stretches are safe. Don't force stretches or hold them for long periods. Follow your physiotherapist's specific guidance.",
-                },
-                {
-                    question: "How much swelling is normal?",
-                    answer:
-                        "Some swelling is normal, especially after activity. It should improve with elevation and rest. If swelling is severe, doesn't improve with elevation, or is getting worse, tell your physiotherapist. They can assess if there's a problem.",
-                },
-                {
-                    question: "Should I use heat or ice?",
-                    answer:
-                        "Use heat for stiffness — it helps relax muscles and improve mobility. Use ice for swelling — it helps reduce inflammation. Your physiotherapist can give you specific guidance based on your situation.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

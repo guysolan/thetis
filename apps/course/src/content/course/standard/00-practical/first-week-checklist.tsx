@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 
 export const metadata = {
     slug: "first-week-checklist",
@@ -7,6 +7,29 @@ export const metadata = {
         "Normal vs concerning symptoms, questions for clinic, essential purchases",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "Is it normal that the pain reduced quickly?",
+        answer:
+            "Yes. The rupture itself can be extremely painful, but pain often settles quickly. That doesn't mean it's minor — the tendon is still ruptured and needs protection.",
+    },
+    {
+        question: "What if I accidentally put weight on my foot?",
+        answer:
+            "A brief accidental touch-down is common. Don't panic. Re-focus on your instructions. If you had a significant fall or you felt a new pop with sudden worsening pain/function, contact your team urgently.",
+    },
+    {
+        question: "Can I take the boot/cast off to shower?",
+        answer:
+            "**Plaster:** no. Use a waterproof cover (like a Limbo). **Boot/splint:** follow your protocol — many require 24/7 wear early on. For showering, this usually means either wearing a waterproof cover over the boot (so you won't wash the foot itself), or switching to a Thetis night splint that maintains the correct angle while allowing you to wash your foot and leg.",
+    },
+    {
+        question: "When can I drive / go back to work?",
+        answer:
+            "Driving: not yet — we cover this in a later section. Work: depends on your job. Desk jobs can sometimes resume early (with adjustments); physical roles take longer. Ask your clinician for a timeline.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -192,28 +215,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "Is it normal that the pain reduced quickly?",
-                    answer:
-                        "Yes. The rupture itself can be extremely painful, but pain often settles quickly. That doesn't mean it's minor — the tendon is still ruptured and needs protection.",
-                },
-                {
-                    question: "What if I accidentally put weight on my foot?",
-                    answer:
-                        "A brief accidental touch-down is common. Don't panic. Re-focus on your instructions. If you had a significant fall or you felt a new pop with sudden worsening pain/function, contact your team urgently.",
-                },
-                {
-                    question: "Can I take the boot/cast off to shower?",
-                    answer:
-                        "**Plaster:** no. Use a waterproof cover (like a Limbo). **Boot/splint:** follow your protocol — many require 24/7 wear early on. For showering, this usually means either wearing a waterproof cover over the boot (so you won't wash the foot itself), or switching to a Thetis night splint that maintains the correct angle while allowing you to wash your foot and leg.",
-                },
-                {
-                    question: "When can I drive / go back to work?",
-                    answer:
-                        "Driving: not yet — we cover this in a later section. Work: depends on your job. Desk jobs can sometimes resume early (with adjustments); physical roles take longer. Ask your clinician for a timeline.",
-                },
-            ],
+            items: faqs,
         },
     ],
 };

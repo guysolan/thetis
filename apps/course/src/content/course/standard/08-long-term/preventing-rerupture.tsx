@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 
 export const metadata = {
     slug: "preventing-rerupture",
@@ -7,6 +7,29 @@ export const metadata = {
         "Risk factors, ongoing strengthening, warm-up protocols, and warning signs",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "What's my risk of re-rupture?",
+        answer:
+            "Overall re-rupture risk is 3-5%. Risk is highest during early rehab and boot removal, but ongoing risk requires ongoing prevention. Maintaining strength, proper warm-ups, and gradual progression reduce risk significantly.",
+    },
+    {
+        question: "How long should I continue strengthening?",
+        answer:
+            "Long-term — ideally forever. Ongoing strength is your best defense against re-rupture. Continue single-leg heel raises and strengthening exercises 2-3 times per week, even when back to sport.",
+    },
+    {
+        question: "What if I feel a pop?",
+        answer:
+            "Stop immediately and seek urgent care. A new pop could indicate re-rupture. Don't wait — get assessed immediately. It's better to be cautious than risk further injury.",
+    },
+    {
+        question: "Can I ever stop worrying about re-rupture?",
+        answer:
+            "Risk decreases over time, but never goes to zero. However, maintaining strength, proper warm-ups, and gradual progression significantly reduce risk. Prevention becomes a habit, not a worry.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -51,12 +74,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Re-rupture risk is **3-5%** — low but not negligible. Understanding when risk is highest and what increases risk helps you stay safe.",
-                },
-                {
-                    type: "text",
-                    content:
-                        "Re-rupture risk is **3-5%** — low but not negligible. Risk is highest during early rehab (weeks 0-10) and boot removal (weeks 10-12), but ongoing risk requires ongoing prevention. See [Healing Process](/standard/healing-process) for the full timeline and details.",
+                        "Re-rupture risk is **3-5%** — low but not negligible. Risk is highest during early rehab (weeks 0-10) and boot removal (weeks 10-12), but ongoing risk requires ongoing prevention. Understanding when risk is highest and what increases it helps you stay safe. See [Healing Process](/standard/healing-process) for the full timeline and details.",
                 },
                 {
                     type: "card",
@@ -416,28 +434,7 @@ export const content: SectionContent = {
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "What's my risk of re-rupture?",
-                    answer:
-                        "Overall re-rupture risk is 3-5%. Risk is highest during early rehab and boot removal, but ongoing risk requires ongoing prevention. Maintaining strength, proper warm-ups, and gradual progression reduce risk significantly.",
-                },
-                {
-                    question: "How long should I continue strengthening?",
-                    answer:
-                        "Long-term — ideally forever. Ongoing strength is your best defense against re-rupture. Continue single-leg heel raises and strengthening exercises 2-3 times per week, even when back to sport.",
-                },
-                {
-                    question: "What if I feel a pop?",
-                    answer:
-                        "Stop immediately and seek urgent care. A new pop could indicate re-rupture. Don't wait — get assessed immediately. It's better to be cautious than risk further injury.",
-                },
-                {
-                    question: "Can I ever stop worrying about re-rupture?",
-                    answer:
-                        "Risk decreases over time, but never goes to zero. However, maintaining strength, proper warm-ups, and gradual progression significantly reduce risk. Prevention becomes a habit, not a worry.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

@@ -16,11 +16,11 @@ export interface RehabStage {
 
 const rehabStages: RehabStage[] = [
     {
-        stage: "Stage 1: Immobilization",
-        weeks: "~6 weeks",
+        stage: "Stage 1: Protection",
+        weeks: "Weeks 0–10",
         whatYouDo: [
             "Seated calf raises (push down with foot pointed)",
-            "Standing calf work when protocol allows",
+            "Standing calf work from Week 10",
             "Boot on night and day",
         ],
         readyForNext: [
@@ -28,26 +28,23 @@ const rehabStages: RehabStage[] = [
         ],
     },
     {
-        stage: "Stage 2: Post-immobilization",
-        weeks: "Weeks 6–12",
+        stage: "Stage 2: Transition",
+        weeks: "Weeks 10–12",
         whatYouDo: [
-            "Progress from two-leg to single-leg calf raises",
-            "15 single-leg calf raises (key target)",
             "Seated calf raises with weight",
             "Balance training 3×/week",
             "Learning to walk properly",
         ],
         readyForNext: [
-            "15+ single-leg heel raises (standing)",
             "Can push 1.4× body weight (seated)",
             "Walking without limping",
         ],
     },
     {
-        stage: "Stage 3: Single leg capacity",
-        weeks: "Weeks 18–24",
+        stage: "Stage 3: Capacity",
+        weeks: "Weeks 12–26",
         whatYouDo: [
-            "Single-leg calf raises (seated & standing)",
+            "Double then Single-leg calf raises (seated & standing)",
             "Gradually increase ankle flexibility",
             "Walking and gait exercises",
             "Prep for jumping and running",
@@ -60,8 +57,8 @@ const rehabStages: RehabStage[] = [
         ],
     },
     {
-        stage: "Stage 4: Power development",
-        weeks: "Weeks 24+",
+        stage: "Stage 4: Power",
+        weeks: "Weeks 26+",
         whatYouDo: [
             "Jumping progressions",
             "Hopping and plyometrics",
@@ -74,7 +71,7 @@ const rehabStages: RehabStage[] = [
     },
     {
         stage: "Return to Sport",
-        weeks: "When ready",
+        weeks: "When ready (Usually 8 months at best)",
         whatYouDo: ["Full sport-specific training and competition"],
         readyForNext: [],
     },

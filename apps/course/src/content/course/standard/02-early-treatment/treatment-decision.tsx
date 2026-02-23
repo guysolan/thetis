@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/components/course/types";
+import type { FAQItem, SectionContent } from "@/components/course/types";
 import SurgeryVsNonSurgicalOutcomes from "@/assets/surgery-vs-non-surgical-outcomes-v1.png";
 
 export const metadata = {
@@ -8,6 +8,30 @@ export const metadata = {
         "Understanding your options, UKSTAR trial findings, and making your decision",
     status: "drafting" as const,
 };
+
+export const faqs: FAQItem[] = [
+    {
+        question: "Can I change my mind after I've decided?",
+        answer:
+            "It depends on timing. If you've already had surgery, you can't undo it. If you're in non-surgical treatment and it's not working well, some people can switch to surgery, but this is less common. The best time to decide is early, with all the information. If you're unsure, ask for more time.",
+    },
+    {
+        question:
+            "What if my specialist recommends one thing but I prefer the other?",
+        answer:
+            "This is your body and your decision. Ask why they're recommending that option — there may be a good medical reason. If you still prefer the other option and it's medically reasonable, discuss it. A good specialist will respect your choice if both options are valid.",
+    },
+    {
+        question: "Will I recover faster with surgery?",
+        answer:
+            "The UKSTAR trial showed very similar recovery timelines. Some studies suggest surgery patients may return to work slightly earlier, but overall recovery time (6–12 months) is similar. The difference is usually small.",
+    },
+    {
+        question: "What if I can't afford surgery?",
+        answer:
+            "If you're in a public health system (like the NHS), cost shouldn't be a barrier — both options are available. If you're paying privately, non-surgical treatment is typically less expensive. Discuss financial concerns with your specialist — they may have options or payment plans.",
+    },
+];
 
 export const content: SectionContent = {
     intro:
@@ -412,36 +436,14 @@ export const content: SectionContent = {
                     items: [
                         "**After you decide:** You'll be fitted for a boot (if not already) and given a clear protocol to follow",
                         "**Next lesson:** We cover **your walking boot** in detail — Aircast vs VACOped, fitting, and understanding wedges",
-                        "**Weeks ahead:** Whether you choose surgery or non-surgical, the recovery path is similar — boot phase, wedge removal, progressive mobilisation, then physiotherapy",
+                        "**Weeks ahead:** Whether you choose surgery or non-surgical, the recovery path is similar — boot stage, wedge removal, progressive mobilisation, then physiotherapy",
                     ],
                 },
             ],
         },
         {
             type: "faq",
-            items: [
-                {
-                    question: "Can I change my mind after I've decided?",
-                    answer:
-                        "It depends on timing. If you've already had surgery, you can't undo it. If you're in non-surgical treatment and it's not working well, some people can switch to surgery, but this is less common. The best time to decide is early, with all the information. If you're unsure, ask for more time.",
-                },
-                {
-                    question:
-                        "What if my specialist recommends one thing but I prefer the other?",
-                    answer:
-                        "This is your body and your decision. Ask why they're recommending that option — there may be a good medical reason. If you still prefer the other option and it's medically reasonable, discuss it. A good specialist will respect your choice if both options are valid.",
-                },
-                {
-                    question: "Will I recover faster with surgery?",
-                    answer:
-                        "The UKSTAR trial showed very similar recovery timelines. Some studies suggest surgery patients may return to work slightly earlier, but overall recovery time (6–12 months) is similar. The difference is usually small.",
-                },
-                {
-                    question: "What if I can't afford surgery?",
-                    answer:
-                        "If you're in a public health system (like the NHS), cost shouldn't be a barrier — both options are available. If you're paying privately, non-surgical treatment is typically less expensive. Discuss financial concerns with your specialist — they may have options or payment plans.",
-                },
-            ],
+            items: faqs,
         },
         {
             type: "card",

@@ -280,7 +280,10 @@ function SectionPage() {
               <p className="mb-4 text-muted-foreground text-lg">
                 {section.description}
               </p>
-              {section.timing && (
+              {section.timing &&
+                !["course-completion", "course-feedback"].includes(
+                  section.slug,
+                ) && (
                 <div className="space-y-3 bg-primary/5 p-4 md:p-5 border border-primary/20 rounded-lg">
                   <div>
                     <p className="mb-2 font-semibold text-primary text-base md:text-lg">
