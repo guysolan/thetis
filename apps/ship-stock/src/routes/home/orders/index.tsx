@@ -7,7 +7,10 @@ import { Link } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
 
 import { OrderHistory } from "@/features/orders/components/OrderHistory";
-import { useSelectOrders } from "@/features/orders/features/order-history/api/selectOrders";
+import {
+  selectOrdersQueryOptions,
+  useSelectOrders,
+} from "@/features/orders/features/order-history/api/selectOrders";
 import { features } from "@/features/navigation/content";
 
 const tabConfig = features.orders.tabs;
@@ -19,10 +22,15 @@ export type { OrderTab };
 export const Route = createFileRoute("/home/orders/")({
   component: OrdersPage,
   validateSearch: (search: Record<string, unknown>): { tab: OrderTab } => ({
-    tab: (tabConfig.some((t) => t.value === search.tab)
+    tab: (tabConfig.some((t) =>
+        t.value === search.tab
+      )
       ? search.tab
       : "all") as OrderTab,
   }),
+  loader: async ({ context }) => {
+    await context.queryClient.ensureQueryData(selectOrdersQueryOptions());
+  },
 });
 
 function OrdersPage() {
@@ -64,9 +72,13 @@ function OrdersPage() {
             value={value}
           >
             <OrderHistory
-              orders={orders?.filter((order) =>
-                value === "all" ? true : order.order_type === value
-              )}
+              tab={value}
+              orders={orders?.filter((order) => {
+                if (value === "all") return true;
+                // Tab "quotes" maps to order_type "quote"
+                const matchType = value === "quotes" ? "quote" : value;
+                return order.order_type === matchType;
+              }) ?? []}
             />
           </TabsContent>
         ))}

@@ -53,6 +53,12 @@ const documents: DocumentConfig[] = [
     icon: <Banknote size={16} />,
     showFor: ["sell"],
   },
+  {
+    path: "quote",
+    label: "Quote",
+    icon: <FileText size={16} />,
+    showFor: ["quote"],
+  },
 ];
 
 export const DocumentLinks = ({ orderId, orderType }: DocumentLinksProps) => {

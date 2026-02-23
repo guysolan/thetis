@@ -18,6 +18,9 @@ type Props = {
   id?: string;
 };
 
+const displayValue = (n: number) =>
+  Number.isNaN(n) ? "0" : String(n);
+
 export default function Input({
   value = 0,
   min = Number.NEGATIVE_INFINITY,
@@ -33,7 +36,7 @@ export default function Input({
   id,
 }: Props) {
   // Track input value for direct editing
-  const [inputValue, setInputValue] = React.useState(value.toString());
+  const [inputValue, setInputValue] = React.useState(displayValue(value));
 
   // Update internal state when prop value changes
   React.useEffect(() => {
@@ -45,15 +48,6 @@ export default function Input({
     const newVal = Math.round((value + diff * step) * 1000000) / 1000000;
     const clampedVal = Math.min(Math.max(newVal, min), max);
     onChange?.(clampedVal);
-  };
-
-  // Format display value based on step precision
-  const displayValue = (val: number) => {
-    if (step < 1) {
-      const decimalPlaces = Math.max(0, -Math.floor(Math.log10(step)));
-      return val.toFixed(decimalPlaces);
-    }
-    return val.toString();
   };
 
   // Handle direct input changes
@@ -102,33 +96,40 @@ export default function Input({
         <Minus size={16} />
       </button>
 
-      <div className="min-w-12 text-center">
+      <div className="flex min-w-12 items-center justify-center gap-1">
         {editing
           ? (
-            <input
-              type="text"
-              id={id}
-              name={name}
-              className="bg-transparent focus:outline-none w-full text-center"
-              value={inputValue}
-              onChange={handleInputChange}
-              onBlur={handleBlur}
-              onKeyDown={handleKeyDown}
-              onFocus={focus}
-              aria-label={name ? undefined : "Numeric value"}
-            />
+            <>
+              <input
+                type="text"
+                id={id}
+                name={name}
+                className="bg-transparent focus:outline-none w-full text-center min-w-8"
+                value={inputValue}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
+                onFocus={focus}
+                aria-label={name ? undefined : "Numeric value"}
+              />
+              {suffix && (
+                <span className="text-muted-foreground shrink-0">{suffix}</span>
+              )}
+            </>
           )
           : (
             <div
               onClick={focus}
-              className="cursor-pointer"
+              className="flex cursor-pointer items-center justify-center gap-1"
               onKeyUp={focus}
               onKeyDown={focus}
             >
               {format ? <NumberFlow value={value} format={format} /> : (
                 displayValue(value)
               )}
-              {suffix && <span>{suffix}</span>}
+              {suffix && (
+                <span className="text-muted-foreground shrink-0">{suffix}</span>
+              )}
             </div>
           )}
       </div>

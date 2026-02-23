@@ -5,6 +5,7 @@ import {
   Building2,
   ClipboardList,
   FactoryIcon,
+  FileText,
   Grid3X3,
   Layers,
   MapPin,
@@ -48,9 +49,14 @@ export const features: Record<string, NavFeature> = {
       { value: "sell", label: "Sales", icon: ShoppingCart },
       { value: "ship", label: "Shipments", icon: Send },
       { value: "count", label: "Stocktakes", icon: ClipboardList },
+      { value: "quotes", label: "Quotes", icon: FileText },
     ],
     content: {
-      items: ["Create and track orders", "Sell, buy, build, ship, count", "Link to inventory"],
+      items: [
+        "Create and track orders",
+        "Sell, buy, build, ship, count",
+        "Link to inventory",
+      ],
     },
   },
   build: {
@@ -66,7 +72,11 @@ export const features: Record<string, NavFeature> = {
       { value: "package", label: "Packages", icon: Layers },
     ],
     content: {
-      items: ["Parts, products, services", "Packages and bundles", "Item catalog"],
+      items: [
+        "Parts, products, services",
+        "Packages and bundles",
+        "Item catalog",
+      ],
     },
   },
   stock: {
@@ -107,7 +117,10 @@ export function getFeatureBySlug(slug: string): NavFeature | undefined {
 }
 
 /** Resolve a tab value to its human-readable label within a feature */
-export function getTabLabel(featureSlug: string, tabValue: string): string | undefined {
+export function getTabLabel(
+  featureSlug: string,
+  tabValue: string,
+): string | undefined {
   const feature = getFeatureBySlug(featureSlug);
   return feature?.tabs.find((t) => t.value === tabValue)?.label;
 }

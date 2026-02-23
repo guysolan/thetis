@@ -16,8 +16,12 @@ const Company = ({ title, company }: Props) => {
         {company ? (
           <>
             <p>{company.name}</p>
-            <p>VAT: {company.tax_number}</p>
-            <p>Company No: {company.company_number}</p>
+            {company.tax_number && (
+              <p>VAT: {company.tax_number}</p>
+            )}
+            {company.company_number && (
+              <p>Company No: {company.company_number}</p>
+            )}
           </>
         ) : (
           <p>-</p>

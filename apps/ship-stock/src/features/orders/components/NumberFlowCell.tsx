@@ -8,6 +8,8 @@ import { cn } from "@thetis/ui/cn";
 interface NumberCellProps {
   name: string;
   step?: number;
+  min?: number;
+  max?: number;
   onChange?:
     | ((value: number) => void)
     | React.FormEventHandler<HTMLInputElement>;
@@ -56,6 +58,9 @@ const NumberFlowCell = (props: NumberCellProps) => {
         blur={blur}
         format={props.format}
         step={props.step}
+        min={props.min}
+        max={props.max}
+        suffix={props.suffix}
         onChange={handleValueChange}
         value={numericValue}
         editing={props.editable && isFocused}

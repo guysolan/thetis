@@ -10,7 +10,10 @@ import {
   TableRow,
 } from "@thetis/ui/table";
 import NumberFlow from "@number-flow/react";
-import type { Currency } from "../../../../../constants/currencies";
+import {
+    type Currency,
+    getCurrencyFormatOptions,
+} from "../../../../../constants/currencies";
 
 type ItemDetails = {
   item_name?: string;
@@ -74,6 +77,9 @@ const ItemsWithPricing = ({
     (item) => item.totalQuantity > 0,
   );
 
+  const { format: currencyFormat, locales: currencyLocales } =
+    getCurrencyFormatOptions(currency);
+
   return (
     <Table>
       <TableHeader>
@@ -103,7 +109,8 @@ const ItemsWithPricing = ({
             <TableCell className="text-black text-right">
               <NumberFlow
                 value={item.price ?? 0}
-                format={{ style: "currency", currency: currency }}
+                format={currencyFormat}
+                locales={currencyLocales}
               />
             </TableCell>
             <TableCell className="text-black text-right">
@@ -112,7 +119,8 @@ const ItemsWithPricing = ({
             <TableCell className="text-black text-right">
               <NumberFlow
                 value={item.totalPrice}
-                format={{ style: "currency", currency: currency }}
+                format={currencyFormat}
+                locales={currencyLocales}
               />
             </TableCell>
           </TableRow>
@@ -126,7 +134,8 @@ const ItemsWithPricing = ({
                 (sum, item) => sum + item.totalPrice,
                 0,
               )}
-              format={{ style: "currency", currency: currency }}
+              format={currencyFormat}
+              locales={currencyLocales}
             />
           </TableCell>
         </TableRow>

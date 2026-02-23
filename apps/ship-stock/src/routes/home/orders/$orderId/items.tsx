@@ -1,10 +1,12 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { selectOrderFormValuesById } from "@/features/orders/features/order-history/api/selectOrderViewById";
+import { PRICE_BAND_QUANTITIES } from "@/features/quotes/types";
 import { useMemo } from "react";
 import { OrderFormStepper, type Step } from "@/components/OrderFormStepper";
 import { OrderFormNavigation } from "@/components/OrderFormNavigation";
 import { ItemsPageSimple } from "@/features/orders/features/multi-order-form/pages/ItemsPageSimple";
+import { QuoteItemsPage } from "@/features/orders/features/multi-order-form/pages/QuoteItemsPage";
 import { FormProvider, useForm } from "react-hook-form";
 import { saveOrderItems } from "@/features/orders/api/saveOrderPage";
 import { toast } from "sonner";
@@ -46,9 +48,15 @@ function RouteComponent() {
         from_items: [],
         to_items: [],
         mode: "direct",
+        ...Object.fromEntries(
+          PRICE_BAND_QUANTITIES.flatMap((q) => [
+            [`quote_quantity_${q}`, q],
+            [`quote_price_${q}`, 0],
+          ]),
+        ),
       };
     }
-    return {
+    const base = {
       ...order.order_form_values,
       order_type: order.order_form_values.order_type || "sell",
       package_items: order.order_form_values.package_items || [],
@@ -58,7 +66,18 @@ function RouteComponent() {
       from_items: order.order_form_values.from_items || [],
       to_items: order.order_form_values.to_items || [],
       mode: order.order_form_values.mode || "direct",
+      // Ensure quote_quantity_* and quote_price_* exist for quote orders
+      ...Object.fromEntries(
+        PRICE_BAND_QUANTITIES.flatMap((q) => [
+          [
+            `quote_quantity_${q}`,
+            order.order_form_values?.[`quote_quantity_${q}`] ?? q,
+          ],
+          [`quote_price_${q}`, order.order_form_values?.[`quote_price_${q}`] ?? 0],
+        ]),
+      ),
     };
+    return base;
   }, [order?.order_form_values]);
 
   // Store original quantity changes for stocktakes (to calculate "before" values correctly)
@@ -83,6 +102,7 @@ function RouteComponent() {
 
   const orderType = form.watch("order_type");
   const isStocktake = orderType === "count";
+  const isQuote = orderType === "quote";
 
   const onSubmit = async (values: any) => {
     try {
@@ -141,7 +161,13 @@ function RouteComponent() {
           currentStep={isStocktake ? 2 : 3}
           onStepClick={handleStepClick}
         />
-        <ItemsPageSimple originalQuantityChanges={originalQuantityChanges} />
+        {isQuote
+          ? <QuoteItemsPage />
+          : (
+            <ItemsPageSimple
+              originalQuantityChanges={originalQuantityChanges}
+            />
+          )}
         <OrderFormNavigation
           onPrevious={handlePrevious}
           onNext={handleNext}

@@ -10,7 +10,10 @@ import {
   TableRow,
 } from "@thetis/ui/table";
 import NumberFlow from "@number-flow/react";
-import type { Currency } from "../../../../../constants/currencies";
+import {
+    type Currency,
+    getCurrencyFormatOptions,
+} from "../../../../../constants/currencies";
 
 type ItemDetails = {
   item_name?: string;
@@ -82,6 +85,9 @@ const ItemsWithPricing = ({
     (item) => item.totalQuantity > 0,
   );
 
+  const { format: currencyFormat, locales: currencyLocales } =
+    getCurrencyFormatOptions(currency);
+
   // If no items with pricing, show placeholder
   if (invoiceItems.length === 0) {
     return (
@@ -135,7 +141,8 @@ const ItemsWithPricing = ({
               <TableCell className="text-black text-right">
                 <NumberFlow
                   value={item.price ?? 0}
-                  format={{ style: "currency", currency: currency }}
+                  format={currencyFormat}
+                  locales={currencyLocales}
                 />
               </TableCell>
               <TableCell className="text-black text-right">
@@ -144,7 +151,8 @@ const ItemsWithPricing = ({
               <TableCell className="text-black text-right">
                 <NumberFlow
                   value={item.totalPrice}
-                  format={{ style: "currency", currency: currency }}
+                  format={currencyFormat}
+                  locales={currencyLocales}
                 />
               </TableCell>
             </TableRow>
@@ -156,7 +164,8 @@ const ItemsWithPricing = ({
               <TableCell className="text-black text-right">
                 <NumberFlow
                   value={carriageAmount}
-                  format={{ style: "currency", currency: currency }}
+                  format={currencyFormat}
+                  locales={currencyLocales}
                 />
               </TableCell>
             </TableRow>
@@ -167,7 +176,8 @@ const ItemsWithPricing = ({
             <TableCell className="font-semibold text-black text-right">
               <NumberFlow
                 value={grandTotal}
-                format={{ style: "currency", currency: currency }}
+                format={currencyFormat}
+                locales={currencyLocales}
               />
             </TableCell>
           </TableRow>

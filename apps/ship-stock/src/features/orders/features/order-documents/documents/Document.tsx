@@ -20,13 +20,19 @@ import type { Currency } from "../../../../../constants/currencies";
 import OrderItems from "../components/OrderItems";
 import ItemsManifest from "../components/ItemsManifest";
 import Financials from "../components/Financials";
+import { THETIS_QUOTE_FROM } from "../components/QuoteCompanyDetails";
+import QuoteDescription from "../components/QuoteDescription";
+import QuotePriceBands from "../components/QuotePriceBands";
+import QuoteRecommendation from "../components/QuoteRecommendation";
+import QuoteTerms from "../components/QuoteTerms";
 
 type DocumentType =
   | "commercialInvoice"
   | "purchaseOrder"
   | "invoice"
   | "packingList"
-  | "shippingLabel";
+  | "shippingLabel"
+  | "quote";
 
 interface DocumentProps {
   order: OrderView & {
@@ -44,6 +50,48 @@ interface DocumentProps {
 }
 
 const Document = ({ order, options, title, documentType }: DocumentProps) => {
+  if (documentType === "quote") {
+    const quoteData = order.quote;
+    const currency = (quoteData?.currency ?? order.currency ?? "GBP") as Currency;
+    const priceBands = quoteData?.price_bands ?? {};
+
+    return (
+      <>
+        <Heading />
+        <OrderTitle title={title} />
+        <QuoteDescription
+          orderDate={order.order_date as string}
+          quoteNumber={order.order_id}
+          currency={currency}
+        />
+        <BuyerSeller
+          order={{
+            ...order,
+            from_company: THETIS_QUOTE_FROM.company,
+            from_billing_address: THETIS_QUOTE_FROM.address,
+            from_shipping_address: THETIS_QUOTE_FROM.address,
+            from_contact: THETIS_QUOTE_FROM.contact,
+          }}
+          fromOptions={{
+            show: true,
+            billing: true,
+            shipping: true,
+            contact: true,
+          }}
+          toOptions={{
+            show: true,
+            billing: true,
+            shipping: true,
+            contact: true,
+          }}
+        />
+        <QuotePriceBands priceBands={priceBands} currency={currency} />
+        <QuoteRecommendation />
+        <QuoteTerms />
+      </>
+    );
+  }
+
   return (
     <>
       <Heading />

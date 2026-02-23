@@ -77,16 +77,26 @@ export type CurrencyFormatError =
   | { type: 'INVALID_AMOUNT'; message: string }
   | { type: 'FORMAT_ERROR'; message: string };
 
+/** Locale per currency so Intl displays the correct symbol (e.g. £ not $ for GBP) */
+export const currencyLocale: Record<Currency, string> = {
+    GBP: "en-GB",
+    USD: "en-US",
+    EUR: "de-DE",
+    AUD: "en-AU",
+    CAD: "en-CA",
+    JPY: "ja-JP",
+    NZD: "en-NZ",
+};
+
 export const formatCurrency = (amount: number, currencyCode: Currency): string | CurrencyFormatError => {
-    // Validate currency code
-    if (!currencies[currencyCode]) {
+    const code = currencyCode?.toString().toUpperCase() as Currency;
+    if (!currencies[code]) {
         return {
             type: 'INVALID_CURRENCY',
             message: `Invalid currency code: ${currencyCode}`
         };
     }
 
-    // Validate amount is a number
     if (typeof Number(amount) !== "number" || isNaN(Number(amount))) {
         return {
             type: 'INVALID_AMOUNT',
@@ -94,20 +104,34 @@ export const formatCurrency = (amount: number, currencyCode: Currency): string |
         };
     }
 
-    const currency = currencies[currencyCode];
+    const currency = currencies[code];
+    const locale = currencyLocale[code] ?? "en-GB";
     try {
-        return new Intl.NumberFormat("en-US", {
+        return new Intl.NumberFormat(locale, {
             style: "currency",
-            currency: currencyCode,
+            currency: code,
             minimumFractionDigits: currency.decimal_digits,
             maximumFractionDigits: currency.decimal_digits,
         }).format(amount);
     } catch (error) {
         return {
             type: 'FORMAT_ERROR',
-            message: `Failed to format currency: ${error.message}`
+            message: `Failed to format currency: ${(error as Error).message}`
         };
     }
-};  
+};
+
+/** Format + locale for NumberFlow so currency displays with correct symbol (e.g. £ not $ for GBP) */
+export function getCurrencyFormatOptions(currency: Currency): {
+    format: { style: "currency"; currency: Currency };
+    locales: string;
+} {
+    const code = (currency?.toString().toUpperCase() ?? "GBP") as Currency;
+    const locale = currencies[code] ? (currencyLocale[code] ?? "en-GB") : "en-GB";
+    return {
+        format: { style: "currency", currency: code },
+        locales: locale,
+    };
+}
 
 export const defaultCurrency: Currency = "GBP";

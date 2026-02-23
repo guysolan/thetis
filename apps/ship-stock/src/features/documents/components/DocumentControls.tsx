@@ -30,7 +30,7 @@ const DocumentControls = ({
   return (
     <>
       <div className="print:hidden top-4 right-4 z-10 fixed flex items-center gap-2">
-        {documentType && documentType !== "shippingLabel" && (
+        {documentType && documentType !== "shippingLabel" && documentType !== "quote" && (
           <DocumentOptionsSheet
             documentType={documentType}
             currency={currency}

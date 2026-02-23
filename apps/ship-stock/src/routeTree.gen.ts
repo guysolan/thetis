@@ -31,6 +31,7 @@ import { Route as HomeOrdersOrderIdDetailsRouteImport } from './routes/home/orde
 import { Route as HomeOrdersOrderIdCompaniesRouteImport } from './routes/home/orders/$orderId/companies'
 import { Route as DocumentsOrdersOrderIdStocktakeReportRouteImport } from './routes/documents/orders/$orderId/stocktake-report'
 import { Route as DocumentsOrdersOrderIdShippingLabelRouteImport } from './routes/documents/orders/$orderId/shipping-label'
+import { Route as DocumentsOrdersOrderIdQuoteRouteImport } from './routes/documents/orders/$orderId/quote'
 import { Route as DocumentsOrdersOrderIdPurchaseOrderRouteImport } from './routes/documents/orders/$orderId/purchase-order'
 import { Route as DocumentsOrdersOrderIdPackingListRouteImport } from './routes/documents/orders/$orderId/packing-list'
 import { Route as DocumentsOrdersOrderIdInvoiceRouteImport } from './routes/documents/orders/$orderId/invoice'
@@ -152,6 +153,12 @@ const DocumentsOrdersOrderIdShippingLabelRoute =
     path: '/orders/$orderId/shipping-label',
     getParentRoute: () => DocumentsRoute,
   } as any)
+const DocumentsOrdersOrderIdQuoteRoute =
+  DocumentsOrdersOrderIdQuoteRouteImport.update({
+    id: '/orders/$orderId/quote',
+    path: '/orders/$orderId/quote',
+    getParentRoute: () => DocumentsRoute,
+  } as any)
 const DocumentsOrdersOrderIdPurchaseOrderRoute =
   DocumentsOrdersOrderIdPurchaseOrderRouteImport.update({
     id: '/orders/$orderId/purchase-order',
@@ -195,6 +202,7 @@ export interface FileRoutesByFullPath {
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
   '/documents/orders/$orderId/packing-list': typeof DocumentsOrdersOrderIdPackingListRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
+  '/documents/orders/$orderId/quote': typeof DocumentsOrdersOrderIdQuoteRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
   '/home/orders/$orderId/companies': typeof HomeOrdersOrderIdCompaniesRoute
@@ -222,6 +230,7 @@ export interface FileRoutesByTo {
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
   '/documents/orders/$orderId/packing-list': typeof DocumentsOrdersOrderIdPackingListRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
+  '/documents/orders/$orderId/quote': typeof DocumentsOrdersOrderIdQuoteRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
   '/home/orders/$orderId/companies': typeof HomeOrdersOrderIdCompaniesRoute
@@ -251,6 +260,7 @@ export interface FileRoutesById {
   '/documents/orders/$orderId/invoice': typeof DocumentsOrdersOrderIdInvoiceRoute
   '/documents/orders/$orderId/packing-list': typeof DocumentsOrdersOrderIdPackingListRoute
   '/documents/orders/$orderId/purchase-order': typeof DocumentsOrdersOrderIdPurchaseOrderRoute
+  '/documents/orders/$orderId/quote': typeof DocumentsOrdersOrderIdQuoteRoute
   '/documents/orders/$orderId/shipping-label': typeof DocumentsOrdersOrderIdShippingLabelRoute
   '/documents/orders/$orderId/stocktake-report': typeof DocumentsOrdersOrderIdStocktakeReportRoute
   '/home/orders/$orderId/companies': typeof HomeOrdersOrderIdCompaniesRoute
@@ -281,6 +291,7 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/invoice'
     | '/documents/orders/$orderId/packing-list'
     | '/documents/orders/$orderId/purchase-order'
+    | '/documents/orders/$orderId/quote'
     | '/documents/orders/$orderId/shipping-label'
     | '/documents/orders/$orderId/stocktake-report'
     | '/home/orders/$orderId/companies'
@@ -308,6 +319,7 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/invoice'
     | '/documents/orders/$orderId/packing-list'
     | '/documents/orders/$orderId/purchase-order'
+    | '/documents/orders/$orderId/quote'
     | '/documents/orders/$orderId/shipping-label'
     | '/documents/orders/$orderId/stocktake-report'
     | '/home/orders/$orderId/companies'
@@ -336,6 +348,7 @@ export interface FileRouteTypes {
     | '/documents/orders/$orderId/invoice'
     | '/documents/orders/$orderId/packing-list'
     | '/documents/orders/$orderId/purchase-order'
+    | '/documents/orders/$orderId/quote'
     | '/documents/orders/$orderId/shipping-label'
     | '/documents/orders/$orderId/stocktake-report'
     | '/home/orders/$orderId/companies'
@@ -511,6 +524,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocumentsOrdersOrderIdShippingLabelRouteImport
       parentRoute: typeof DocumentsRoute
     }
+    '/documents/orders/$orderId/quote': {
+      id: '/documents/orders/$orderId/quote'
+      path: '/orders/$orderId/quote'
+      fullPath: '/documents/orders/$orderId/quote'
+      preLoaderRoute: typeof DocumentsOrdersOrderIdQuoteRouteImport
+      parentRoute: typeof DocumentsRoute
+    }
     '/documents/orders/$orderId/purchase-order': {
       id: '/documents/orders/$orderId/purchase-order'
       path: '/orders/$orderId/purchase-order'
@@ -547,6 +567,7 @@ interface DocumentsRouteChildren {
   DocumentsOrdersOrderIdInvoiceRoute: typeof DocumentsOrdersOrderIdInvoiceRoute
   DocumentsOrdersOrderIdPackingListRoute: typeof DocumentsOrdersOrderIdPackingListRoute
   DocumentsOrdersOrderIdPurchaseOrderRoute: typeof DocumentsOrdersOrderIdPurchaseOrderRoute
+  DocumentsOrdersOrderIdQuoteRoute: typeof DocumentsOrdersOrderIdQuoteRoute
   DocumentsOrdersOrderIdShippingLabelRoute: typeof DocumentsOrdersOrderIdShippingLabelRoute
   DocumentsOrdersOrderIdStocktakeReportRoute: typeof DocumentsOrdersOrderIdStocktakeReportRoute
 }
@@ -559,6 +580,7 @@ const DocumentsRouteChildren: DocumentsRouteChildren = {
     DocumentsOrdersOrderIdPackingListRoute,
   DocumentsOrdersOrderIdPurchaseOrderRoute:
     DocumentsOrdersOrderIdPurchaseOrderRoute,
+  DocumentsOrdersOrderIdQuoteRoute: DocumentsOrdersOrderIdQuoteRoute,
   DocumentsOrdersOrderIdShippingLabelRoute:
     DocumentsOrdersOrderIdShippingLabelRoute,
   DocumentsOrdersOrderIdStocktakeReportRoute:

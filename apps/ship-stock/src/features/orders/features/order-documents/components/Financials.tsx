@@ -10,7 +10,10 @@ import {
     TableRow,
 } from "@thetis/ui/table";
 import NumberFlow from "@number-flow/react";
-import type { Currency } from "../../../../../constants/currencies";
+import {
+    type Currency,
+    getCurrencyFormatOptions,
+} from "../../../../../constants/currencies";
 
 type ItemDetails = {
     item_name?: string;
@@ -134,7 +137,10 @@ const Financials = ({
     const carriageAmount = order.carriage ?? 0;
     const grandTotal = itemTotal + servicesTotal + carriageAmount;
 
-    const formatter = new Intl.NumberFormat("en-US", {
+    const { format: currencyFormat, locales: currencyLocales } =
+        getCurrencyFormatOptions(currency);
+
+    const formatter = new Intl.NumberFormat(currencyLocales, {
         style: "currency",
         currency: currency,
     });
@@ -180,10 +186,8 @@ const Financials = ({
                             <TableCell className="text-black text-right">
                                 <NumberFlow
                                     value={item.price ?? 0}
-                                    format={{
-                                        style: "currency",
-                                        currency: currency,
-                                    }}
+                                    format={currencyFormat}
+                                    locales={currencyLocales}
                                 />
                             </TableCell>
                             <TableCell className="text-black text-right">
@@ -192,10 +196,8 @@ const Financials = ({
                             <TableCell className="text-black text-right">
                                 <NumberFlow
                                     value={item.totalPrice}
-                                    format={{
-                                        style: "currency",
-                                        currency: currency,
-                                    }}
+                                    format={currencyFormat}
+                                    locales={currencyLocales}
                                 />
                             </TableCell>
                         </TableRow>
@@ -228,10 +230,8 @@ const Financials = ({
                         <TableCell className="text-black text-right">
                             <NumberFlow
                                 value={carriageAmount}
-                                format={{
-                                    style: "currency",
-                                    currency: currency,
-                                }}
+                                format={currencyFormat}
+                                locales={currencyLocales}
                             />
                         </TableCell>
                     </TableRow>
@@ -244,10 +244,8 @@ const Financials = ({
                         <TableCell className="font-semibold text-black text-right">
                             <NumberFlow
                                 value={grandTotal}
-                                format={{
-                                    style: "currency",
-                                    currency: currency,
-                                }}
+                                format={currencyFormat}
+                                locales={currencyLocales}
                             />
                         </TableCell>
                     </TableRow>

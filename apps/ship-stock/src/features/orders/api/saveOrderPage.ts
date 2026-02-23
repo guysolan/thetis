@@ -12,6 +12,7 @@ import {
 	processShipmentFormData,
 	processSimpleBuyFormData,
 } from "./createOrder";
+import { PRICE_BAND_QUANTITIES } from "../../quotes/types";
 
 // Helper to convert empty strings to null
 const toNullIfEmpty = (value: any): any => {
@@ -48,7 +49,9 @@ export async function saveOrderDetails(
 	// Process delivery dates - only create array if we have actual date values
 	// For stocktakes and cases where dates are not provided, use null
 	let deliveryDates: [string, string] | null = null;
-	if (data.delivery_dates && data.delivery_dates[0] && data.delivery_dates[1]) {
+	if (
+		data.delivery_dates && data.delivery_dates[0] && data.delivery_dates[1]
+	) {
 		deliveryDates = [
 			dayjs(data.delivery_dates[0]).toISOString(),
 			dayjs(data.delivery_dates[1]).toISOString(),
@@ -56,8 +59,8 @@ export async function saveOrderDetails(
 	}
 
 	// For stocktakes, we save the address in the details page
-	const fromShippingAddressId = data.from_shipping_address_id 
-		? Number(data.from_shipping_address_id) 
+	const fromShippingAddressId = data.from_shipping_address_id
+		? Number(data.from_shipping_address_id)
 		: null;
 
 	if (data.orderId) {
@@ -70,8 +73,8 @@ export async function saveOrderDetails(
 				currency: validCurrency,
 				delivery_dates: deliveryDates,
 				unit_of_measurement: data.unit_of_measurement,
-				...(data.order_type === "count" && fromShippingAddressId 
-					? { from_shipping_address_id: fromShippingAddressId } 
+				...(data.order_type === "count" && fromShippingAddressId
+					? { from_shipping_address_id: fromShippingAddressId }
 					: {}),
 			})
 			.eq("id", data.orderId)
@@ -185,10 +188,9 @@ export async function saveOrderItems(
 		from_shipping_address_id: formData.from_shipping_address_id,
 		to_shipping_address_id: formData.to_shipping_address_id,
 		order_items_count: formData.order_items?.length ?? 0,
-		order_items_sample:
-			(formData.order_items?.length ?? 0) > 0
-				? JSON.stringify(formData.order_items[0], null, 2)
-				: null,
+		order_items_sample: (formData.order_items?.length ?? 0) > 0
+			? JSON.stringify(formData.order_items[0], null, 2)
+			: null,
 	});
 
 	// Delete existing order_item_changes and item_changes for this order
@@ -260,7 +262,10 @@ export async function saveOrderItems(
 		// Stocktake: order_items at from_shipping_address_id (count location)
 		const addressId = formData.from_shipping_address_id;
 		if (!addressId || String(addressId).trim() === "") {
-			console.warn("⚠️ saveOrderItems (count): missing from_shipping_address_id", formData);
+			console.warn(
+				"⚠️ saveOrderItems (count): missing from_shipping_address_id",
+				formData,
+			);
 		}
 		processedItems = (formData.order_items || []).map((item) => {
 			const mapped = mapToFormOrderItem(item as Record<string, unknown>);
@@ -270,14 +275,18 @@ export async function saveOrderItems(
 				package_item_change_id: mapped.package_item_change_id ?? null,
 			} as FormatOrderItemChanges;
 		});
-		console.log("📊 Count order processed items:", processedItems.length, JSON.stringify(processedItems, null, 2));
+		console.log(
+			"📊 Count order processed items:",
+			processedItems.length,
+			JSON.stringify(processedItems, null, 2),
+		);
 	}
 
 	// Filter out empty/invalid items
 	const packageItems = (formData.package_items || []).filter(
 		(p): p is typeof p => {
-			const hasPackageId =
-				p.package_id != null && String(p.package_id).trim() !== "";
+			const hasPackageId = p.package_id != null &&
+				String(p.package_id).trim() !== "";
 			if (!hasPackageId) {
 				console.warn(
 					"⚠️ Skipping package item with missing package_id:",
@@ -291,9 +300,12 @@ export async function saveOrderItems(
 
 	const regularItems = processedItems.filter((item) => {
 		const hasItem = item.item_id && String(item.item_id).trim() !== "";
-		const hasAddress = item.address_id && String(item.address_id).trim() !== "";
+		const hasAddress = item.address_id &&
+			String(item.address_id).trim() !== "";
 		// For count orders, keep items with 0 change (record the count); for others skip 0
-		const hasQty = formData.order_type === "count" ? true : item.quantity_change !== 0;
+		const hasQty = formData.order_type === "count"
+			? true
+			: item.quantity_change !== 0;
 		return !!hasItem && hasQty && !!hasAddress;
 	});
 
@@ -312,13 +324,20 @@ export async function saveOrderItems(
 	}
 
 	console.log("📦 Package items to process:", packageItems.length);
-	console.log("📋 Regular items to process:", regularItems.length, formData.order_type === "count" ? "(count)" : "");
+	console.log(
+		"📋 Regular items to process:",
+		regularItems.length,
+		formData.order_type === "count" ? "(count)" : "",
+	);
 	if (regularItems.length === 0 && (formData.order_items?.length ?? 0) > 0) {
-		console.warn("⚠️ No regular items after filter – check item_id, address_id, and (for non-count) quantity_change", {
-			order_type: formData.order_type,
-			raw_count: formData.order_items?.length,
-			processed_count: processedItems.length,
-		});
+		console.warn(
+			"⚠️ No regular items after filter – check item_id, address_id, and (for non-count) quantity_change",
+			{
+				order_type: formData.order_type,
+				raw_count: formData.order_items?.length,
+				processed_count: processedItems.length,
+			},
+		);
 	}
 	console.log(
 		"📋 Regular items details:",
@@ -337,14 +356,14 @@ export async function saveOrderItems(
 	const packageItemChangeIdMap = new Map<number | null, number>();
 
 	// First, insert package items
-	const packageAddressIdNum =
-		packageAddressId != null ? Number(packageAddressId) : NaN;
+	const packageAddressIdNum = packageAddressId != null
+		? Number(packageAddressId)
+		: NaN;
 	if (packageItems.length > 0 && !Number.isNaN(packageAddressIdNum)) {
 		const packageItemPromises = packageItems.map(async (packageItem) => {
 			const originalPackageItemChangeId =
 				packageItem.package_item_change_id;
-			const itemChangeId =
-				packageItem.package_item_change_id ??
+			const itemChangeId = packageItem.package_item_change_id ??
 				Math.floor(Math.random() * 1000000);
 			const packageIdNum = Number(packageItem.package_id);
 			if (Number.isNaN(packageIdNum)) {
@@ -491,10 +510,43 @@ export async function saveOrderItems(
 
 	// Update order_form_values with current form data
 	const { order_id, ...formValuesWithoutOrderId } = formData;
+
+	// For quotes, also update the quote column with price bands from the form
+	const quotePayload = formData.order_type === "quote"
+		? (() => {
+			const priceBands: Record<string, number> = {};
+			for (const qty of PRICE_BAND_QUANTITIES) {
+				const priceVal =
+					(formData as Record<string, unknown>)[`quote_price_${qty}`];
+				const price = typeof priceVal === "string"
+					? parseFloat(priceVal)
+					: Number(priceVal);
+				if (!Number.isNaN(price) && price > 0) {
+					const qtyVal =
+						(formData as Record<string, unknown>)[`quote_quantity_${qty}`];
+					const quantity = typeof qtyVal === "string"
+						? parseInt(qtyVal, 10)
+						: Number(qtyVal);
+					const key = !Number.isNaN(quantity) && quantity > 0
+						? String(quantity)
+						: String(qty);
+					priceBands[key] = price;
+				}
+			}
+			return {
+				quote: {
+					price_bands: priceBands,
+					currency: formData.currency || "GBP",
+				},
+			};
+		})()
+		: {};
+
 	const { error: updateFormValuesError } = await supabase
 		.from("orders")
 		.update({
 			order_form_values: formValuesWithoutOrderId,
+			...quotePayload,
 		})
 		.eq("id", orderId);
 

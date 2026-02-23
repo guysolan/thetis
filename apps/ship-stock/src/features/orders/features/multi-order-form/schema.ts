@@ -106,7 +106,7 @@ export const multiOrderFormSchema = z.object({
 
     // Order fields
     order_date: z.union([z.string(), z.date()]),
-    order_type: z.enum(["sell", "buy", "build", "ship", "count"]),
+    order_type: z.enum(["sell", "buy", "build", "ship", "count", "quote"]),
     mode: z.enum(["package", "direct"]).optional(),
     currency: z.enum(currencyKeys as [string, ...string[]]).default("GBP"),
     carriage: z.coerce.number().min(0).default(0),

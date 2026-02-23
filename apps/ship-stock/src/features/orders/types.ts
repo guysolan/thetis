@@ -48,6 +48,7 @@ export interface OrderView {
     total_value?: number;
     carriage?: number;
     currency: string;
+    quote?: { price_bands: Record<string, number>; currency: string } | null;
     payment_status?: string;
     delivery_status?: string;
     items: OrderItemInView[];
@@ -57,6 +58,14 @@ export interface OrderView {
     to_company: Company["Row"];
     from_contact: Contact["Row"];
     to_contact: Contact["Row"];
+    /** From orders_view: resolved address when to_shipping_address_id is set */
+    to_shipping_address?: Address["Row"] | null;
+    /** From orders_view: resolved address when to_billing_address_id is set */
+    to_billing_address?: Address["Row"] | null;
+    /** From orders_view: resolved address when from_shipping_address_id is set */
+    from_shipping_address?: Address["Row"] | null;
+    /** From orders_view: resolved address when from_billing_address_id is set */
+    from_billing_address?: Address["Row"] | null;
 }
 import { OrderItem } from "./schema";
 import { ItemView } from "../../../items/types";

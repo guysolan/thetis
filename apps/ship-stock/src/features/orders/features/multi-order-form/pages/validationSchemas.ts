@@ -1,9 +1,10 @@
 import { z } from "zod";
 import { currencyKeys } from "../../../../../constants/currencies";
+import { PRICE_BAND_QUANTITIES } from "@/features/quotes/types";
 
 // Page 1: Order Details validation
 export const orderDetailsSchema = z.object({
-	order_type: z.enum(["sell", "buy", "build", "ship", "count"]),
+	order_type: z.enum(["sell", "buy", "build", "ship", "count", "quote"]),
 	order_date: z.union([z.string(), z.date()]),
 	currency: z.enum(currencyKeys as [string, ...string[]]).optional(),
 	unit_of_measurement: z.enum(["metric", "imperial"]).optional(),
@@ -17,12 +18,16 @@ export const orderDetailsSchema = z.object({
 	// For stocktakes
 	from_shipping_address_id: z.string().optional(),
 }).superRefine((data, ctx) => {
-	// For non-stocktake orders, require delivery dates
-	if (data.order_type !== "count") {
-		if (!data.delivery_dates || !Array.isArray(data.delivery_dates) || data.delivery_dates.length !== 2) {
+	// For non-stocktake, non-quote orders, require delivery dates
+	if (data.order_type !== "count" && data.order_type !== "quote") {
+		if (
+			!data.delivery_dates || !Array.isArray(data.delivery_dates) ||
+			data.delivery_dates.length !== 2
+		) {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
-				message: "Please select both start and end dates for the delivery date range",
+				message:
+					"Please select both start and end dates for the delivery date range",
 				path: ["delivery_dates"],
 			});
 			return;
@@ -33,12 +38,13 @@ export const orderDetailsSchema = z.object({
 		if (!hasStart || !hasEnd) {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
-				message: "Please select both start and end dates for the delivery date range",
+				message:
+					"Please select both start and end dates for the delivery date range",
 				path: ["delivery_dates"],
 			});
 		}
 	}
-	
+
 	// For stocktakes, require address
 	if (data.order_type === "count" && !data.from_shipping_address_id) {
 		ctx.addIssue({
@@ -75,10 +81,30 @@ export const companiesAddressesSchema = z.object({
 // validated output so saveOrderItems receives full form state.
 export const itemsSchema = z
 	.object({
-		order_type: z.enum(["sell", "buy", "build", "ship", "count"]),
+		order_type: z.enum(["sell", "buy", "build", "ship", "count", "quote"]),
 		mode: z.enum(["package", "direct"]).optional(),
 	})
-	.passthrough();
+	.passthrough()
+	.superRefine((data, ctx) => {
+		// For quotes, require at least one price band
+		if (data.order_type === "quote") {
+			const hasAnyPrice = PRICE_BAND_QUANTITIES.some((q) => {
+				const val =
+					(data as Record<string, unknown>)[`quote_price_${q}`];
+				const num = typeof val === "string"
+					? parseFloat(val)
+					: Number(val);
+				return !Number.isNaN(num) && num > 0;
+			});
+			if (!hasAnyPrice) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.custom,
+					message: "Enter at least one price",
+					path: ["quote_price_24"],
+				});
+			}
+		}
+	});
 
 // Page 4: Pricing & Summary validation (all optional)
 export const pricingSummarySchema = z.object({

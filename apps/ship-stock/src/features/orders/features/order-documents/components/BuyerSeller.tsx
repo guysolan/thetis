@@ -8,11 +8,13 @@ import Contact from "./Contact";
 interface BuyerSellerProps {
   order: OrderView;
   fromOptions: {
+    show?: boolean;
     billing: boolean;
     shipping: boolean;
     contact: boolean;
   };
   toOptions: {
+    show?: boolean;
     billing: boolean;
     shipping: boolean;
     contact: boolean;

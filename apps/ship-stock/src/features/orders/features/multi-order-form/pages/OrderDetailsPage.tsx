@@ -17,18 +17,22 @@ const orderTypeOptions = [
 	{ label: "Build", value: "build" },
 	{ label: "Ship", value: "ship" },
 	{ label: "Count (Stocktake)", value: "count" },
+	{ label: "Quote", value: "quote" },
 ];
 
 export function OrderDetailsPage() {
 	const form = useFormContext();
 	const orderType = useWatch({ control: form.control, name: "order_type" });
 	const isStocktake = orderType === "count";
+	const isQuote = orderType === "quote";
 
 	if (isStocktake) {
 		return (
 			<div className="space-y-6">
 				<div>
-					<h2 className="mb-2 font-semibold text-xl">Stocktake Details</h2>
+					<h2 className="mb-2 font-semibold text-xl">
+						Stocktake Details
+					</h2>
 					<p className="text-muted-foreground text-sm">
 						Record a stock count at a specific location
 					</p>
@@ -46,11 +50,48 @@ export function OrderDetailsPage() {
 							label="Count Date"
 						/>
 						<div className="lg:col-span-2">
-							<AddressSelect 
-								name="from_shipping_address_id" 
+							<AddressSelect
+								name="from_shipping_address_id"
 								label="Location"
 							/>
 						</div>
+					</div>
+				</FieldGroup>
+			</div>
+		);
+	}
+
+	if (isQuote) {
+		return (
+			<div className="space-y-6">
+				<div>
+					<h2 className="mb-2 font-semibold text-xl">
+						Quote Details
+					</h2>
+					<p className="text-muted-foreground text-sm">
+						Enter the basic information for this quote
+					</p>
+				</div>
+
+				<FieldGroup>
+					<div className="gap-4 grid grid-cols-1 lg:grid-cols-2">
+						<Select
+							name="order_type"
+							label="Order Type"
+							options={orderTypeOptions}
+						/>
+						<DatePicker
+							name="order_date"
+							label="Quote Date"
+						/>
+						<Select
+							name="currency"
+							label="Currency"
+							options={currencyKeys.map((o) => ({
+								label: o,
+								value: o,
+							}))}
+						/>
 					</div>
 				</FieldGroup>
 			</div>

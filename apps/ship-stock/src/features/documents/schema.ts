@@ -166,6 +166,7 @@ export const documentOptions = {
   invoice: invoiceOptions,
   packingList: packingListOptions,
   shippingLabel: {},
+  quote: {},
 };
 
 export const documentOptionsSchema = z.object({

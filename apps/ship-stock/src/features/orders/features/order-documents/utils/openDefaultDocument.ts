@@ -1,8 +1,9 @@
-const documentTypeMap = {
-    build: "purchase-order",
-    sell: "invoice",
-    ship: "commercial-invoice",
-    count: "stocktake-report",
+const documentTypeMap: Record<string, string> = {
+	build: "purchase-order",
+	sell: "invoice",
+	ship: "commercial-invoice",
+	count: "stocktake-report",
+	quote: "quote",
 };
 export const openDefaultDocument = (
     order_id: number,

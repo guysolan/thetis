@@ -7,6 +7,11 @@ import {
 } from "@thetis/ui/table";
 import type { OrderView } from "../../../types";
 import NumberFlow from "@number-flow/react";
+import {
+    type Currency,
+    getCurrencyFormatOptions,
+} from "../../../../../constants/currencies";
+
 const OrderTotal = ({
   order,
   showCarriage = true,
@@ -17,6 +22,8 @@ const OrderTotal = ({
   const itemTotal = order.item_total_value ?? 0;
   const carriageAmount = showCarriage ? (order.carriage ?? 0) : 0;
   const grandTotal = itemTotal + carriageAmount;
+  const { format: currencyFormat, locales: currencyLocales } =
+    getCurrencyFormatOptions((order.currency ?? "GBP") as Currency);
 
   return (
     <Table>
@@ -26,7 +33,8 @@ const OrderTotal = ({
           <TableCell className="w-1/6 font-medium text-right">
             <NumberFlow
               value={itemTotal}
-              format={{ style: "currency", currency: order.currency }}
+              format={currencyFormat}
+              locales={currencyLocales}
             />
           </TableCell>
         </TableRow>
@@ -36,7 +44,8 @@ const OrderTotal = ({
             <TableCell className="w-1/6 font-medium text-right">
               <NumberFlow
                 value={order.carriage ?? 0}
-                format={{ style: "currency", currency: order.currency }}
+                format={currencyFormat}
+                locales={currencyLocales}
               />
             </TableCell>
           </TableRow>
@@ -46,7 +55,8 @@ const OrderTotal = ({
           <TableCell className="w-1/6 font-medium text-neutral-900 text-lg text-right">
             <NumberFlow
               value={grandTotal}
-              format={{ style: "currency", currency: order.currency }}
+              format={currencyFormat}
+              locales={currencyLocales}
             />
           </TableCell>
         </TableRow>

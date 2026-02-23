@@ -13,12 +13,7 @@ import {
 } from "@/features/amazon/selectAmazonInventory";
 import { Button } from "@thetis/ui/button";
 import { Tabs, TabsContent, TabsTrigger } from "@thetis/ui/tabs";
-import {
-	Sheet,
-	SheetContent,
-	SheetHeader,
-	SheetTitle,
-} from "@thetis/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@thetis/ui/sheet";
 import {
 	Select,
 	SelectContent,
@@ -46,9 +41,14 @@ import type { LocationColumn } from "@/features/stockpiles/utils/pivotStockData"
 function computeReorderInfo(
 	rows: StockRow[],
 	columns: LocationColumn[],
-	stockpiles: { stockpile_id: number | null; stockpile_name: string | null }[] | undefined,
+	stockpiles:
+		| { stockpile_id: number | null; stockpile_name: string | null }[]
+		| undefined,
 ): Map<number, { placeOrderBy: string; isDue: boolean; orderQty: number }> {
-	const map = new Map<number, { placeOrderBy: string; isDue: boolean; orderQty: number }>();
+	const map = new Map<
+		number,
+		{ placeOrderBy: string; isDue: boolean; orderQty: number }
+	>();
 	if (!stockpiles?.length) return map;
 
 	const mpd = stockpiles.find((s) => s.stockpile_name === "MPD");
@@ -56,19 +56,23 @@ function computeReorderInfo(
 	if (!mpd?.stockpile_id || !parkHouse?.stockpile_id) return map;
 
 	const mpdKey = columns.find((c) => c.addressId === mpd.stockpile_id)?.key;
-	const parkHouseKey = columns.find((c) => c.addressId === parkHouse.stockpile_id)?.key;
+	const parkHouseKey = columns.find((c) =>
+		c.addressId === parkHouse.stockpile_id
+	)?.key;
 	if (!mpdKey || !parkHouseKey) return map;
 
 	const now = new Date();
 	const startMonth = now.getMonth();
 	const startYear = now.getFullYear();
-	const productNameSet = new Set(REORDER_PLAN_PRODUCT_NAMES.map((n) => n.toLowerCase()));
+	const productNameSet = new Set(
+		REORDER_PLAN_PRODUCT_NAMES.map((n) => n.toLowerCase()),
+	);
 
 	for (const row of rows) {
 		if (!productNameSet.has(row.itemName.toLowerCase())) continue;
 
-		const combinedStock =
-			(row.locations[mpdKey] ?? 0) + (row.locations[parkHouseKey] ?? 0);
+		const combinedStock = (row.locations[mpdKey] ?? 0) +
+			(row.locations[parkHouseKey] ?? 0);
 		const plan = computeReorderPlan(combinedStock, startMonth, startYear, {
 			demandMultiplier: getDemandMultiplierForProduct(row.itemName),
 		});
@@ -77,8 +81,8 @@ function computeReorderInfo(
 
 		const { month, year } = nextOrder.placeOrderBy;
 		const placeOrderByStr = `${getMonthName(month)} ${year}`;
-		const isDue =
-			year < startYear || (year === startYear && month <= startMonth);
+		const isDue = year < startYear ||
+			(year === startYear && month <= startMonth);
 
 		map.set(row.itemId, {
 			placeOrderBy: placeOrderByStr,
@@ -129,14 +133,24 @@ const StockPage = () => {
 		if (!stockpiles) return [];
 		const seen = new Set<number>();
 		return stockpiles
-			.filter((s) => s.stockpile_id && !seen.has(s.stockpile_id) && seen.add(s.stockpile_id))
-			.map((s) => ({ id: String(s.stockpile_id), name: s.stockpile_name ?? `Location ${s.stockpile_id}` }));
+			.filter((s) =>
+				s.stockpile_id && !seen.has(s.stockpile_id) &&
+				seen.add(s.stockpile_id)
+			)
+			.map((s) => ({
+				id: String(s.stockpile_id),
+				name: s.stockpile_name ?? `Location ${s.stockpile_id}`,
+			}));
 	}, [stockpiles]);
 
 	return (
 		<>
 			<PageHeader title="Stock">
-				<Button variant="default" size="sm" onClick={() => setStockCountOpen(true)}>
+				<Button
+					variant="default"
+					size="sm"
+					onClick={() => setStockCountOpen(true)}
+				>
 					<ClipboardCheck size={16} className="mr-1.5" />
 					Stock Count
 				</Button>
@@ -146,13 +160,19 @@ const StockPage = () => {
 							<SheetTitle>Stock Count</SheetTitle>
 						</SheetHeader>
 						<div className="space-y-4 pt-4">
-							<Select value={stockCountAddressId} onValueChange={setStockCountAddressId}>
+							<Select
+								value={stockCountAddressId}
+								onValueChange={setStockCountAddressId}
+							>
 								<SelectTrigger>
 									<SelectValue placeholder="Select location" />
 								</SelectTrigger>
 								<SelectContent>
 									{stockAddresses.map((addr) => (
-										<SelectItem key={addr.id} value={addr.id}>
+										<SelectItem
+											key={addr.id}
+											value={addr.id}
+										>
 											{addr.name}
 										</SelectItem>
 									))}
@@ -191,7 +211,11 @@ const StockPage = () => {
 				</Button>
 			</PageHeader>
 
-			<Tabs value={tab} onValueChange={handleTabChange} className="w-full">
+			<Tabs
+				value={tab}
+				onValueChange={handleTabChange}
+				className="w-full"
+			>
 				<TabsHeader tabsList={tabsList} />
 
 				{tabConfig.map(({ value }) => (
@@ -202,11 +226,9 @@ const StockPage = () => {
 					>
 						<StockTable
 							rows={rows}
-							columns={
-								value === "parts"
-									? columns.filter((c) => !c.isAmazon)
-									: columns
-							}
+							columns={value === "parts"
+								? columns.filter((c) => !c.isAmazon)
+								: columns}
 							inventoryHistory={inventoryHistory ?? []}
 							reorderInfo={reorderInfo}
 							typeFilter={value}

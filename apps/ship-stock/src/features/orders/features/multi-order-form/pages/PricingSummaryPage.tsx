@@ -2,6 +2,7 @@ import Input from "../../../../../components/Input";
 import Select from "../../../../../components/Select";
 import { SelectWithInfo } from "../../../../../components/SelectWithInfo";
 import { FieldGroup } from "@thetis/ui/field";
+import { useFormContext, useWatch } from "react-hook-form";
 
 const modeOfTransportOptions = [
 	{ label: "Sea", value: "sea" },
@@ -117,14 +118,20 @@ const incotermsOptions = [
 ];
 
 export function PricingSummaryPage() {
+	const form = useFormContext();
+	const orderType = useWatch({ control: form.control, name: "order_type" });
+	const isQuote = orderType === "quote";
+
 	return (
 		<div className="space-y-6">
 			<div>
 				<h2 className="mb-2 font-semibold text-xl">
-					Pricing & Summary
+					{isQuote ? "Complete Quote" : "Pricing & Summary"}
 				</h2>
 				<p className="text-gray-600 text-sm">
-					Review pricing and add shipping details
+					{isQuote
+						? "Add carriage if applicable"
+						: "Review pricing and add shipping details"}
 				</p>
 			</div>
 
@@ -136,36 +143,40 @@ export function PricingSummaryPage() {
 						label="Carriage"
 						step="0.01"
 					/>
-					<Input
-						type="text"
-						name="shipment_number"
-						label="Shipment Number"
-					/>
-					<Input
-						type="text"
-						name="airwaybill"
-						label="Air Waybill"
-					/>
-					<Select
-						name="mode_of_transport"
-						label="Mode of Transport"
-						options={modeOfTransportOptions}
-					/>
-					<SelectWithInfo
-						name="incoterms"
-						label="Incoterms"
-						options={incotermsOptions}
-					/>
-					<SelectWithInfo
-						name="reason_for_export"
-						label="Reason for Export"
-						options={reasonsForExport}
-					/>
-					<Input
-						type="text"
-						name="reference_number"
-						label="Reference Number"
-					/>
+					{!isQuote && (
+						<>
+							<Input
+								type="text"
+								name="shipment_number"
+								label="Shipment Number"
+							/>
+							<Input
+								type="text"
+								name="airwaybill"
+								label="Air Waybill"
+							/>
+							<Select
+								name="mode_of_transport"
+								label="Mode of Transport"
+								options={modeOfTransportOptions}
+							/>
+							<SelectWithInfo
+								name="incoterms"
+								label="Incoterms"
+								options={incotermsOptions}
+							/>
+							<SelectWithInfo
+								name="reason_for_export"
+								label="Reason for Export"
+								options={reasonsForExport}
+							/>
+							<Input
+								type="text"
+								name="reference_number"
+								label="Reference Number"
+							/>
+						</>
+					)}
 				</div>
 			</FieldGroup>
 		</div>

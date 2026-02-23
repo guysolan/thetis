@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { OrderFormStepper, type Step } from "@/components/OrderFormStepper";
 import { OrderFormNavigation } from "@/components/OrderFormNavigation";
 import { PricingSummaryPage } from "@/features/orders/features/multi-order-form/pages/PricingSummaryPage";
-import { useForm, FormProvider } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { saveOrderPricing } from "@/features/orders/api/saveOrderPage";
 import { toast } from "sonner";
 import { pricingSummarySchema } from "@/features/orders/features/multi-order-form/pages/validationSchemas";
@@ -48,6 +48,9 @@ function RouteComponent() {
     resolver: zodResolver(pricingSummarySchema),
     mode: "onChange",
   });
+
+  const orderType = form.watch("order_type");
+  const isQuote = orderType === "quote";
 
   const onSubmit = async (values: any) => {
     try {
@@ -113,7 +116,7 @@ function RouteComponent() {
         <OrderFormNavigation
           onPrevious={handlePrevious}
           onNext={handleComplete}
-          nextLabel="Complete Order"
+          nextLabel={isQuote ? "Complete Quote" : "Complete Order"}
         />
       </div>
     </FormProvider>
