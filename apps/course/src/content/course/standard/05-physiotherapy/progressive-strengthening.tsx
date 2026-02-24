@@ -43,7 +43,7 @@ export const content: SectionContent = {
         {
             type: "heading",
             level: 2,
-            text: "Quick action plan (this week)",
+            text: "Quick action plan",
         },
         {
             type: "checklist",

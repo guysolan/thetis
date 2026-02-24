@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-// IMAGE TO UPDATE: recovery-roadmap-4-phases.png — update to show 4 Stages (not Phases): Stage 1 Protection, Stage 2 Transition, Stage 3 Capacity, Stage 4 Return to Sport
+// IMAGE TO UPDATE: recovery-roadmap-4-phases.png — update to show 4 Stages (not Phases): Stage 1 Immobilization, Stage 2 Transition, Stage 3 Capacity, Stage 4 Return to Sport
 import RecoveryRoadmap4Phases from "@/assets/recovery-roadmap-4-phases.png";
 
 export const metadata = {
@@ -16,7 +16,7 @@ export const content: SectionContent = {
         {
             type: "image",
             src: RecoveryRoadmap4Phases,
-            alt: "Infographic showing the 4 stages of Achilles recovery: Stage 1 Immobilization (weeks 0-6), Stage 2 Post-immobilization (weeks 6-12), Stage 3 Single leg capacity (weeks 18-24), Stage 4 Power development (weeks 24+)",
+            alt: "Infographic showing the 4 stages of Achilles recovery: Stage 1 Immobilization (weeks 0-10), Stage 2 Transition (weeks 10-12), Stage 3 Single leg capacity (weeks 18-24), Stage 4 Power development (weeks 24+)",
             caption: "The 4 stages of recovery — from immobilization to return to sport",
         },
         {
@@ -30,7 +30,7 @@ export const content: SectionContent = {
                 },
                 {
                     type: "card",
-                    title: "Stage 1: Protection — ~10 weeks (weeks 0–10)",
+                    title: "Stage 1: Immobilization — ~10 weeks (weeks 0–10)",
                     description: "In the boot: protecting the healing tendon",
                     variant: "highlight",
                     content: [

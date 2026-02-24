@@ -19,7 +19,7 @@ export const content: SectionContent = {
     {
       type: "heading",
       level: 2,
-      text: "Quick action plan (first 24 hours)",
+      text: "Quick action plan",
     },
     {
       type: "text",

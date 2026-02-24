@@ -39,7 +39,7 @@ export const content: SectionContent = {
         {
             type: "heading",
             level: 2,
-            text: "Quick action plan (this week)",
+            text: "Quick action plan",
         },
         {
             type: "checklist",
@@ -166,7 +166,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Now that you're starting physiotherapy, it's important to understand where you are in the recovery journey. The four stages are: Stage 1: Protection (weeks 0-10), Stage 2: Transition (weeks 10-12), Stage 3: Capacity (weeks 12-26), and Stage 4: Return to Sport (weeks 26+). You're now entering Stage 2. For the full overview with key milestones, see [The Achilles Recovery Roadmap](/standard/recovery-roadmap).",
+                        "Now that you're starting physiotherapy, it's important to understand where you are in the recovery journey. The four stages are: Stage 1: Immobilization (weeks 0-10), Stage 2: Transition (weeks 10-12), Stage 3: Capacity (weeks 12-26), and Stage 4: Return to Sport (weeks 26+). You're now entering Stage 2. For the full overview with key milestones, see [The Achilles Recovery Roadmap](/standard/recovery-roadmap).",
                 },
                 {
                     type: "rehab-protocol-table",
