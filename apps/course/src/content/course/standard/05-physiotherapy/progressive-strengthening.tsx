@@ -184,7 +184,7 @@ export const content: SectionContent = {
                             variant: "warning",
                             title: "Avoid deficit heel raises",
                             content:
-                                "**Do not do heel raises with your heel hanging off a step or platform** — this stretches the tendon at the bottom of the movement and can cause elongation. Many clinicians advise avoiding any stretching of the Achilles until at least 1 year post-injury. Stick to flat ground only.",
+                                "**Do not do heel raises with your heel hanging off a step or platform** — a 'deficit' heel raise means stretching the tendon over the edge of a step at the bottom of the movement, which can cause elongation. Many clinicians advise avoiding any stretching of the Achilles until at least 1 year post-injury. Stick to flat ground only.",
                         },
                         {
                             type: "text",
@@ -280,7 +280,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**1. LSI (Limb Symmetry Index):** Compares your injured leg to your healthy leg. Aim for **90% strength** — if your healthy leg can push 100kg, your injured leg should target 90kg. This is the most practical target for most people.",
+                                "**1. LSI (Limb Symmetry Index):** Compares your injured leg strength to your healthy leg — expressed as a percentage. Aim for **90% strength** (if your healthy leg can push 100kg, your injured leg should target 90kg). This is the most practical target for most people.",
                         },
                         {
                             type: "text",

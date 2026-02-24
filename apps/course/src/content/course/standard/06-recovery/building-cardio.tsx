@@ -36,7 +36,7 @@ export const faqs: FAQItem[] = [
         question:
             "When can I start swimming after Achilles rupture?",
         answer:
-            "Typically week 12-14, after boot removal and when your clinician clears you. Pool walking may start earlier (week 10-12) with approval. For surgical patients, wounds must be fully closed — they typically heal by week 2-3 post-surgery, so by week 12 you're well past that. Always check with your clinician first.",
+            "Typically week 12-14, after boot removal and when your clinician clears you. Pool walking may start earlier (week 10-12) with approval. For surgical patients: wounds close by week 2-3, but that's wound healing only — you still wait until week 12-14 to swim. Always check with your clinician first.",
     },
     {
         question: "Can I swim if I had surgery?",
@@ -166,7 +166,7 @@ export const content: SectionContent = {
                                 "Start with low resistance — focus on pedaling, not pushing hard",
                                 "Use flat pedals initially — avoid clip-in pedals that require pulling up",
                                 "Start with 10-15 minutes, build up gradually",
-                                "Pedal smoothly — avoid forcing heel down at the bottom of the stroke (can stretch the tendon)",
+                                "Keep the ball of your foot on the pedal — avoid pushing your heel down at the bottom of the stroke, which stretches the tendon",
                             ],
                         },
                         {
@@ -260,7 +260,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "Swimming is safe for Achilles recovery, but timing matters. You need to wait until certain conditions are met.",
+                        "Swimming is safe for Achilles recovery, but timing matters. You need to wait until certain conditions are met. **Surgical wounds** typically close by week 2-3 post-surgery — but that doesn't mean you can swim then. You must wait until **week 12-14** after boot removal and clinician clearance.",
                 },
                 {
                     type: "card",
@@ -271,7 +271,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Swimming typically starts week 12-14** — after boot removal and when your clinician clears you. Pool walking may start earlier (week 10-12) with approval.",
+                                "**Swimming typically starts week 12-14** — after boot removal and when your clinician clears you. Pool walking may start earlier (week 10-12) with approval. For surgical patients: wounds close by week 2-3, but that's just wound healing — swimming waits until week 12-14.",
                         },
                         {
                             type: "list",

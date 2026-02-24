@@ -175,7 +175,7 @@ export const content: SectionContent = {
                 {
                     type: "text",
                     content:
-                        "People who rupture one Achilles have a slightly higher risk of rupturing the other — around 5%. Your rehab should include **both legs**. Strengthen both calves, warm up both sides, and don't neglect the uninjured leg. Balanced strength supports good movement patterns and reduces risk.",
+                        "People who rupture one Achilles have a slightly higher risk of rupturing the other — around **5%**. Your rehab should include **both legs**. Strengthen both calves, warm up both sides, and don't neglect the uninjured leg. Balanced strength supports good movement patterns and reduces risk. Rehab after one injury should include exercises for both legs.",
                 },
             ],
         },
@@ -193,7 +193,7 @@ export const content: SectionContent = {
                     variant: "warning",
                     title: "Stretching guidance",
                     content:
-                        "**No aggressive stretching for at least 6 months** — gentle mobility is fine, but avoid forcing a stretch. After 6 months, only stretch with approval from your specialist and physio. Tightness often settles — many people find it improves without aggressive stretching.",
+                        "**No aggressive stretching for at least 6 months** — gentle mobility is fine, but avoid forcing a stretch. Some clinicians advise avoiding stretches until 1 year post-injury. After 6 months, only stretch with approval from your specialist and physio. Tightness often settles — many people find it improves without aggressive stretching.",
                 },
             ],
         },

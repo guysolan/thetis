@@ -10,7 +10,7 @@ export const metadata = {
 
 export const content: SectionContent = {
     intro:
-        "This appendix collects key FAQs from each lesson in one place. Use it as a quick reference — or visit the relevant lesson for full context. Questions are organized by the lesson they appear in. More FAQs are available in each lesson.",
+        "This appendix is a **standalone reference resource** — you can use it without reading the full course. It collects key FAQs from each lesson in one place. Use it as a quick reference when you need a specific answer, or visit the relevant lesson for full context. Questions are organized by the lesson they appear in. More FAQs are available in each lesson.",
     blocks: [
         {
             type: "heading",

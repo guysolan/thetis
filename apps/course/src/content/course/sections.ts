@@ -54,6 +54,7 @@ import { metadata as returnToSport } from "./standard/07-advanced/return-to-spor
 import { metadata as sixMonthMilestone } from "./standard/08-long-term/six-month-milestone";
 import { metadata as preventingRerupture } from "./standard/08-long-term/preventing-rerupture";
 import { metadata as newNormal } from "./standard/08-long-term/new-normal";
+import { metadata as otherLeg } from "./standard/08-long-term/other-leg";
 import { metadata as whenThingsDontGoToPlan } from "./standard/08-long-term/when-things-dont-go-to-plan";
 
 export type SectionStatus = "todo" | "drafting";
@@ -129,6 +130,7 @@ export const slugToChapter: Record<string, string> = {
   "six-month-milestone": "08-long-term",
   "preventing-rerupture": "08-long-term",
   "new-normal": "08-long-term",
+  "other-leg": "08-long-term",
   "when-things-dont-go-to-plan": "08-long-term",
 };
 
@@ -704,6 +706,22 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
       approximate_days: 250,
     },
     newNormal.status || "drafting",
+  ),
+  createSection(
+    "other-leg",
+    otherLeg.title,
+    otherLeg.description,
+    {
+      when_useful:
+        "When wondering about risk to your other leg - rehab should include both",
+      triggers: [
+        "when wondering about other leg",
+        "when doing rehab",
+        "when strengthening",
+      ],
+      approximate_days: 200,
+    },
+    otherLeg.status || "drafting",
   ),
 
   // COURSE COMPLETION - Congratulations & Certificate

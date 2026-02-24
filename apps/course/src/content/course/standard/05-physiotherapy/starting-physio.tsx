@@ -317,7 +317,7 @@ export const content: SectionContent = {
                         {
                             type: "text",
                             content:
-                                "**Safe: Isometric contraction with foot pointed down** — this means pushing your foot down (pointing your toes) against resistance while the ankle doesn't move. Examples: seated calf raises with weight, pressing foot down against resistance. This is safe because the tendon is in a shortened position and there's no stretching force.",
+                                "**Safe: Isometric contraction with foot pointed down** — isometric means **no movement** (like holding a plank). You push your foot down against resistance and hold. Seated calf raises can be done isometrically (push and hold) or isotonically (lift and lower with weight). Both are safe when done with foot pointed down. This is safe because the tendon is in a shortened position and there's no stretching force.",
                         },
                         {
                             type: "text",
@@ -349,7 +349,7 @@ export const content: SectionContent = {
                     variant: "warning",
                     title: "Critical safety principle",
                     content:
-                        "During Stage 2, avoid any exercise that involves rapid ankle movement with toes up (toes moving quickly toward shin). This includes hopping, jumping, running, or uncontrolled fast movements. Stick to controlled, isometric exercises with foot pointed down. Your physiotherapist will tell you when it's safe to progress to dynamic movements.",
+                        "During Stage 2, avoid any exercise that involves rapid ankle movement with toes up (toes moving quickly toward shin). This includes hopping, jumping, running, or uncontrolled fast movements. Stick to controlled exercises with foot pointed down — isometric holds (push and hold, no movement) and slow seated calf raises. Your physiotherapist will tell you when it's safe to progress to dynamic movements.",
                 },
             ],
         },
