@@ -1,7 +1,7 @@
 import type { FAQItem, SectionContent } from "@/components/course/types";
 import TendonHealingTimeline from "@/assets/tendon-healing-timeline.png";
 import TendonStiffnessAfterRupture from "@/assets/tendon-stiffness-after-rupture.png";
-import ReRuptureRiskTimeline from "@/assets/rerupture-vs-elongation-comprehensive-v8.png";
+import ReRuptureRiskTimeline from "@/assets/rerupture-vs-elongation-comprehensive-v15.png";
 
 export const metadata = {
     slug: "healing-process",
@@ -232,12 +232,12 @@ export const content: SectionContent = {
                                 "**Altered walking pattern** — you may limp or push off less effectively",
                             ],
                         },
-                {
-                    type: "text",
-                    content:
-                        "This is why your foot is held **pointed down** (plantarflexed, or in equinus) — it brings the tendon ends closer together so they heal at the right length.",
-                },
-                // IMAGE TO UPDATE: Add illustration showing equinus (tip-toe) position — foot pointed down, tendon ends brought close together
+                        {
+                            type: "text",
+                            content:
+                                "This is why your foot is held **pointed down** (plantarflexed, or in equinus) — it brings the tendon ends closer together so they heal at the right length.",
+                        },
+                        // IMAGE TO UPDATE: Add illustration showing equinus (tip-toe) position — foot pointed down, tendon ends brought close together
                     ],
                 },
                 {

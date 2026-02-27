@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import SeatedCalfRaisePhase1 from "@/assets/seated-calf-raise-phase1-option-b5.png";
+import SeatedCalfRaisePhase1 from "@/assets/seated-protected-heel-raises.png";
 
 export const metadata = {
     slug: "building-strength-in-boot",
@@ -87,7 +87,8 @@ export const content: SectionContent = {
                             type: "image",
                             src: SeatedCalfRaisePhase1,
                             alt: "Illustration showing seated calf raise with heel wedge or support under foot to keep it pointed down (protected position), weight on knee",
-                            caption: "Seated calf raise — foot must stay in protected position (heel wedge or support)",
+                            caption:
+                                "Seated calf raise — foot must stay in protected position (heel wedge or support)",
                         },
                         {
                             type: "text",
@@ -272,7 +273,7 @@ export const content: SectionContent = {
                     variant: "danger",
                     title: "Seek urgent care",
                     content:
-                        '**Severe pain**, **new pop/snap**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention). Also seek help for **numb/blue/pale toes**, severe pressure in boot, or fever with spreading redness.',
+                        "**Severe pain**, **new pop/snap**, or **signs of blood clots** (calf swelling, chest pain, breathlessness) — [see warning signs](/standard/blood-clot-prevention). Also seek help for **numb/blue/pale toes**, severe pressure in boot, or fever with spreading redness.",
                 },
             ],
         },
@@ -301,13 +302,13 @@ export const content: SectionContent = {
             title: "If you remember nothing else",
             variant: "highlight",
             content: [
-                        {
-                            type: "list",
-                            style: "bullet",
-                            items: [
-                                "**Stage 1 exercises only when protected or supervised** — heel wedge, support, or clinician supervision; never boot off with foot unsupported",
-                                "**Start at Week 6** (or when clinician says) — seated calf raises build strength safely",
-                                "**Follow mobilisation protocol** — don't rush ahead",
+                {
+                    type: "list",
+                    style: "bullet",
+                    items: [
+                        "**Stage 1 exercises only when protected or supervised** — heel wedge, support, or clinician supervision; never boot off with foot unsupported",
+                        "**Start at Week 6** (or when clinician says) — seated calf raises build strength safely",
+                        "**Follow mobilisation protocol** — don't rush ahead",
                         "**Focus on good gait** — heel-to-toe pattern, use EVENup to prevent back/hip pain",
                         "**Don't skip ahead** — Stage 2 starts when your clinician says you're ready",
                         "**Be patient** — strength builds gradually",

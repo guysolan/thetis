@@ -1,6 +1,6 @@
 import type { FAQItem, SectionContent } from "@/components/course/types";
 import PoolWalkingWeek12 from "@/assets/pool-walking-week-12.png";
-import SwimmingSafety from "@/assets/swimming-safety-v14.png";
+import SwimmingSafety from "@/assets/swimming-safety-v16.png";
 import SwimmingProgression from "@/assets/swimming-progression-v5-fixed.png";
 
 export const metadata = {
@@ -33,8 +33,7 @@ export const faqs: FAQItem[] = [
             "Some mild discomfort is normal, but severe pain is not. If cardio causes severe pain, stop and tell your physiotherapist. They can assess what's happening and modify your program. Don't push through severe pain.",
     },
     {
-        question:
-            "When can I start swimming after Achilles rupture?",
+        question: "When can I start swimming after Achilles rupture?",
         answer:
             "Typically week 12-14, after boot removal and when your clinician clears you. Pool walking may start earlier (week 10-12) with approval. For surgical patients: wounds close by week 2-3, but that's wound healing only — you still wait until week 12-14 to swim. Always check with your clinician first.",
     },
@@ -396,7 +395,6 @@ export const content: SectionContent = {
                             caption:
                                 "Pool walking: the water supports your body weight, making it safe and low-impact",
                         },
-                        
                     ],
                 },
                 {
