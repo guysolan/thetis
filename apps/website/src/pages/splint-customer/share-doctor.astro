@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import ColorGradient from "@/components/ColorGradient.astro";
 import SplintCustomerSteps from "@/components/splint-customer/SplintCustomerSteps.astro";
 import LocationPrice from "@/components/splint-customer/LocationPrice";
+import WhatHappensNextAccordion from "@/components/splint-customer/WhatHappensNextAccordion";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Banknote, Mail } from "lucide-react";
@@ -104,6 +105,9 @@ const emailBodyBase64 = Buffer.from(emailBody, "utf-8").toString("base64");
                         </a>
                     </div>
                 </div>
+
+                <!-- What Happens Next -->
+                <WhatHappensNextAccordion variant="share-doctor" client:load />
             </div>
         </section>
     </main>

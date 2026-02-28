@@ -19,15 +19,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 0 - Who is Thetis (SMS)",
       "ref": "email_1_sms",
       "send_windows": [
@@ -151,15 +142,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 1 - Protect the tendon (SMS)",
       "ref": "email_2_sms",
       "send_windows": [
@@ -283,15 +265,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 2 - Pain management (SMS)",
       "ref": "email_12_sms",
       "send_windows": [
@@ -415,15 +388,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 3 - Questions for specialist (SMS)",
       "ref": "email_3_sms",
       "send_windows": [
@@ -547,15 +511,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 5 - Helpful products (SMS)",
       "ref": "email_4_sms",
       "send_windows": [
@@ -679,15 +634,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 7 - Treatment options (SMS)",
       "ref": "email_5_sms",
       "send_windows": [
@@ -811,15 +757,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 9 - Boot basics (SMS)",
       "ref": "email_6_sms",
       "send_windows": [
@@ -943,15 +880,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 10 - Week 1 routine (SMS)",
       "ref": "email_7_sms",
       "send_windows": [
@@ -1075,15 +1003,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 17 - Returning to work (SMS)",
       "ref": "email_13_sms",
       "send_windows": [
@@ -1207,15 +1126,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 21 - Mobility and daily life (SMS)",
       "ref": "email_8_sms",
       "send_windows": [
@@ -1339,15 +1249,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 35 - Preparing for physio (SMS)",
       "ref": "email_9_sms",
       "send_windows": [
@@ -1471,15 +1372,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 42 - Rerupture prevention (SMS)",
       "ref": "email_14_sms",
       "send_windows": [
@@ -1603,15 +1495,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 49 - Preparing for boot removal (SMS)",
       "ref": "email_10_sms",
       "send_windows": [
@@ -1735,15 +1618,6 @@
     {
       "channel_key": "twilio",
       "channel_type": "sms",
-      "conditions": {
-        "all": [
-          {
-            "argument": "true",
-            "operator": "equal_to",
-            "variable": "data.send_notification"
-          }
-        ]
-      },
       "name": "Day 70 - Week 10 check-in (SMS)",
       "ref": "email_11_sms",
       "send_windows": [

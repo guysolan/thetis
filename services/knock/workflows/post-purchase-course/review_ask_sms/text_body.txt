@@ -1,1 +1,7 @@
-How's the course? Leave a review & get £10/$15: {{ vars.review_url }} - Thetis
+We hope your Thetis Course is helping with your recovery.
+
+We’d really value your feedback. If you have a moment, please leave a review here: {{ vars.review_url }}
+
+Thank you for choosing Thetis.
+
+- Thetis

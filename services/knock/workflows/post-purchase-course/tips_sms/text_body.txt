@@ -1,1 +1,9 @@
-Course tip: Start with Emergency care & Week 1. Log in: {{ vars.course_url }} - Thetis
+A few tips to get the most from your course:
+
+1. Log in at {{ vars.course_url }}
+2. Start with 'Emergency care' and the 'Week 1 checklist'
+3. Work through the lessons at your own pace.
+
+Most importantly: keep your foot pointed down (plantarflexion) unless your clinician says otherwise. This keeps the tendon ends together.
+
+- Thetis

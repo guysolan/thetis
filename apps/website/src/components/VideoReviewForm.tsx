@@ -7,6 +7,7 @@ import {
     Check,
     Image,
     Loader2,
+    Star,
     Upload,
     Video,
 } from "lucide-react";
@@ -15,6 +16,7 @@ import { supabase } from "@/lib/supabase";
 export function VideoReviewForm() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [starRating, setStarRating] = useState<number | null>(null);
     const [files, setFiles] = useState<File[]>([]);
     const [reviewText, setReviewText] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -50,8 +52,8 @@ export function VideoReviewForm() {
         e.preventDefault();
         setError("");
 
-        if (files.length === 0) {
-            setError("Please select at least one file");
+        if (starRating == null || starRating < 1) {
+            setError("Please select a star rating");
             return;
         }
 
@@ -63,44 +65,49 @@ export function VideoReviewForm() {
             const timestamp = Date.now();
             const sanitizedEmail = email.replace(/[^a-zA-Z0-9]/g, "_");
 
-            // Upload each file to Supabase storage
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const fileExt = file.name.split(".").pop();
-                const fileName =
-                    `${sanitizedEmail}_${timestamp}_${i}.${fileExt}`;
-                const filePath = `submissions/${fileName}`;
+            // Upload files if any
+            if (files.length > 0) {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const fileExt = file.name.split(".").pop();
+                    const fileName =
+                        `${sanitizedEmail}_${timestamp}_${i}.${fileExt}`;
+                    const filePath = `submissions/${fileName}`;
 
-                const { error: uploadError } = await supabase.storage
-                    .from("video-reviews")
-                    .upload(filePath, file, {
-                        cacheControl: "3600",
-                        upsert: false,
-                    });
+                    const { error: uploadError } = await supabase.storage
+                        .from("video-reviews")
+                        .upload(filePath, file, {
+                            cacheControl: "3600",
+                            upsert: false,
+                        });
 
-                if (uploadError) {
-                    throw new Error(
-                        `Failed to upload file: ${uploadError.message}`,
-                    );
+                    if (uploadError) {
+                        throw new Error(
+                            `Failed to upload file: ${uploadError.message}`,
+                        );
+                    }
+
+                    uploadedPaths.push(filePath);
+                    setUploadProgress(((i + 1) / files.length) * 80);
                 }
-
-                uploadedPaths.push(filePath);
-                setUploadProgress(((i + 1) / files.length) * 80); // 80% for uploads
             }
 
-            // Save submission record to database
+            // Save submission (video_path optional; required for cashback). Store star rating in review_text so no DB migration needed.
+            const reviewTextWithRating =
+                `[Rating: ${starRating}/5]${reviewText ? `\n\n${reviewText}` : ""}`.trim() || null;
+
             const { error: dbError } = await supabase
                 .from("video_review_submissions")
                 .insert({
                     name,
                     email,
-                    review_text: reviewText,
-                    video_path: uploadedPaths.join(","),
+                    review_text: reviewTextWithRating,
+                    video_path: uploadedPaths.length > 0 ? uploadedPaths.join(",") : null,
                 });
 
             if (dbError) {
                 console.error("Database error:", dbError);
-                // Continue anyway - files are uploaded, we'll handle DB issues later
+                throw new Error("Failed to save your review. Please try again.");
             }
 
             setUploadProgress(100);
@@ -126,12 +133,10 @@ export function VideoReviewForm() {
                     Thank You!
                 </p>
                 <p className="mb-4 text-neutral-700 dark:text-neutral-300">
-                    Your review has been submitted successfully. We'll review it
-                    within 3-5 business days.
+                    Your review has been submitted successfully.
                 </p>
                 <p className="mb-6 text-neutral-600 dark:text-neutral-400 text-sm">
-                    Once approved, you'll receive an email with a link to claim
-                    your cashback (£10 / $15).
+                    If you included a video or photos, we'll review within 3-5 business days and, once approved, you'll receive an email to claim your cashback (£10 / $15). If you didn't add a video or photos, add one later via the same form to be eligible for cashback.
                 </p>
                 <a
                     href="/splint-customer/share-doctor"
@@ -186,6 +191,34 @@ export function VideoReviewForm() {
             </div>
 
             <div>
+                <label className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100">
+                    Star rating <span className="text-red-500">*</span>
+                </label>
+                <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((n) => (
+                        <button
+                            key={n}
+                            type="button"
+                            onClick={() => setStarRating(n)}
+                            className="p-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                            aria-label={`${n} star${n === 1 ? "" : "s"}`}
+                        >
+                            <Star
+                                className={`w-8 h-8 ${
+                                    starRating !== null && n <= starRating
+                                        ? "fill-amber-400 text-amber-400"
+                                        : "text-neutral-300 dark:text-neutral-600"
+                                }`}
+                            />
+                        </button>
+                    ))}
+                </div>
+                <p className="mt-1 text-neutral-500 dark:text-neutral-400 text-sm">
+                    1 = poor, 5 = excellent
+                </p>
+            </div>
+
+            <div>
                 <label
                     htmlFor="review"
                     className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100"
@@ -208,8 +241,12 @@ export function VideoReviewForm() {
                     htmlFor="files"
                     className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100"
                 >
-                    Video or Photos <span className="text-red-500">*</span>
+                    Video or photos{" "}
+                    <span className="text-neutral-500">(optional)</span>
                 </label>
+                <p className="mb-2 text-amber-700 dark:text-amber-400 text-sm font-medium">
+                    Required for cashback — we need a video (or photos) to approve your review and send £10/$15. You can submit your rating now and add a video later.
+                </p>
                 <div className="relative">
                     <input
                         id="files"
@@ -217,7 +254,6 @@ export function VideoReviewForm() {
                         accept="video/*,image/*"
                         onChange={handleFileChange}
                         multiple
-                        required
                         className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
                     />
                     <div className="flex justify-center items-center bg-white hover:bg-neutral-50 dark:bg-neutral-800 dark:hover:bg-neutral-700 px-4 py-8 border-2 border-neutral-300 focus-within:border-primary dark:border-neutral-700 border-dashed rounded-lg focus-within:ring-2 focus-within:ring-primary transition-colors">
@@ -287,7 +323,7 @@ export function VideoReviewForm() {
                 type="submit"
                 size="lg"
                 className="gap-2 w-full"
-                disabled={isSubmitting || files.length === 0}
+                disabled={isSubmitting || starRating == null}
             >
                 {isSubmitting
                     ? (

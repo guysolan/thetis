@@ -38,6 +38,9 @@ export const navigationContent = {
     productTitle: "Achilles Tendon Rupture Splint",
     productDescription:
       "Improve comfort during recovery after Achilles tendon rupture",
+    splintSeeProduct: "See product",
+    splintHowToBuy: "How to buy",
+    splintReviews: "Reviews",
     coursesTitle: "Recovery Courses",
     coursesDescription:
       "Expert-led courses to guide you through every step of your Achilles recovery",
@@ -54,6 +57,9 @@ export const navigationContent = {
     productTitle: "Achillessehnenruptur-Schiene",
     productDescription:
       "Verbessern Sie die Genesungszeit und den Komfort nach einer Achillessehnenruptur",
+    splintSeeProduct: "Produkt ansehen",
+    splintHowToBuy: "So kaufen Sie",
+    splintReviews: "Bewertungen",
     coursesTitle: "Genesungskurse",
     coursesDescription:
       "Expertenkurse, die Sie durch jeden Schritt Ihrer Achilles-Genesung führen",
@@ -70,6 +76,9 @@ export const navigationContent = {
     productTitle: "Attelle de rupture du tendon d'Achille",
     productDescription:
       "Améliorez le temps de récupération et le confort après une rupture du tendon d'Achille",
+    splintSeeProduct: "Voir le produit",
+    splintHowToBuy: "Comment acheter",
+    splintReviews: "Avis",
     coursesTitle: "Cours de récupération",
     coursesDescription:
       "Cours dirigés par des experts pour vous guider à chaque étape de votre récupération d'Achille",
@@ -86,6 +95,9 @@ export const navigationContent = {
     productTitle: "Férula para rotura del tendón de Aquiles",
     productDescription:
       "Mejore el tiempo de recuperación y la comodidad después de la rotura del tendón de Aquiles",
+    splintSeeProduct: "Ver producto",
+    splintHowToBuy: "Cómo comprar",
+    splintReviews: "Reseñas",
     coursesTitle: "Cursos de recuperación",
     coursesDescription:
       "Cursos dirigidos por expertos para guiarte en cada paso de tu recuperación de Aquiles",
@@ -102,6 +114,9 @@ export const navigationContent = {
     productTitle: "Férula per rottura del tendine di Achille",
     productDescription:
       "Migliora i tempi di recupero e il comfort dopo la rottura del tendine di Achille",
+    splintSeeProduct: "Vedi prodotto",
+    splintHowToBuy: "Come acquistare",
+    splintReviews: "Recensioni",
     coursesTitle: "Corsi di recupero",
     coursesDescription:
       "Corsi guidati da esperti per accompagnarti in ogni fase del tuo recupero di Achille",

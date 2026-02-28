@@ -56,15 +56,14 @@ export const buyButtonContent: Record<Lang, {
     },
 };
 
-// Countries where we use the Shopify direct checkout (UK only)
-export const shopifyCountries = ["GB", "UK"];
+// Countries where we use the Shopify direct checkout (UK and US)
+export const shopifyCountries = ["GB", "UK", "US"];
 
-// Countries we ship to directly (US uses Amazon, UK uses Shopify)
+// Countries we ship to directly
 export const directShipCountries = ["GB", "UK", "US"];
 
 // Countries with Amazon links
 export const amazonCountries = [
-    "US",
     "DE",
     "IT",
     "FR",
@@ -87,18 +86,18 @@ export function getPurchaseUrl(
     const sideCode = side === "left" ? "L" : "R";
     const variantCode = `${sizeCode}${sideCode}` as "LL" | "LR" | "SL" | "SR";
 
-    // UK uses Shopify
-    if (country === "GB" || country === "UK") {
+    // UK and US use Shopify / direct
+    if (country === "GB" || country === "UK" || country === "US") {
         return { url: "", type: "shopify" };
     }
 
     // Import purchase links dynamically to avoid circular deps
     const purchaseLinks: Record<string, Record<string, string>> = {
         US: {
-            LL: "https://www.amazon.com/dp/B09N5HBBKQ",
-            LR: "https://www.amazon.com/dp/B09N5MVY1Q",
-            SL: "https://www.amazon.com/dp/B09N5KH4F3",
-            SR: "https://www.amazon.com/dp/B09N58H79F",
+            LL: "https://www.thetismedical.com/splint/large/left?region=us",
+            LR: "https://www.thetismedical.com/splint/large/right?region=us",
+            SL: "https://www.thetismedical.com/splint/small/left?region=us",
+            SR: "https://www.thetismedical.com/splint/small/right?region=us",
         },
         CA: {
             LL: "https://swiftbrace.com/products/thetis-achilles-night-splint",

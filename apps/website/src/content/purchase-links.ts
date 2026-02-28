@@ -1,9 +1,9 @@
 const purchaseLinks = {
     US: {
-        "LL": "https://www.amazon.com/dp/B09N5HBBKQ",
-        "LR": "https://www.amazon.com/dp/B09N5MVY1Q",
-        "SL": "https://www.amazon.com/dp/B09N5KH4F3",
-        "SR": "https://www.amazon.com/dp/B09N58H79F",
+        "LL": "https://www.thetismedical.com/splint/large/left?region=us",
+        "LR": "https://www.thetismedical.com/splint/large/right?region=us",
+        "SL": "https://www.thetismedical.com/splint/small/left?region=us",
+        "SR": "https://www.thetismedical.com/splint/small/right?region=us",
     },
     UK: {
         "LL": "https://www.thetismedical.com/splint/large/left?region=uk",

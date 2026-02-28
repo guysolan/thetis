@@ -4,6 +4,7 @@ import ColorGradient from "@/components/ColorGradient.astro";
 import HighlightedWord from "@/components/HighlightedWord";
 import SplintCustomerSteps from "@/components/splint-customer/SplintCustomerSteps.astro";
 import LocationPrice from "@/components/splint-customer/LocationPrice";
+import WhatHappensNextAccordion from "@/components/splint-customer/WhatHappensNextAccordion";
 import { Check, Banknote } from "lucide-react";
 import { VideoReviewForm } from "@/components/VideoReviewForm";
 ---
@@ -51,6 +52,14 @@ import { VideoReviewForm } from "@/components/VideoReviewForm";
                     <ul
                         class="space-y-3 text-neutral-700 dark:text-neutral-300"
                     >
+                        <li class="flex items-start gap-3">
+                            <Check
+                                className="mt-0.5 w-5 h-5 text-primary shrink-0"
+                            />
+                            <span>
+                                <strong>To receive cashback:</strong> We need a video (or photos) with your review. You can submit a star rating and text first and add a video later.
+                            </span>
+                        </li>
                         <li class="flex items-start gap-3">
                             <Check
                                 className="mt-0.5 w-5 h-5 text-primary shrink-0"
@@ -107,42 +116,7 @@ import { VideoReviewForm } from "@/components/VideoReviewForm";
                 </div>
 
                 <!-- What Happens Next -->
-                <div
-                    class="bg-neutral-50 dark:bg-neutral-900 mt-8 p-6 rounded-xl"
-                >
-                    <h3
-                        class="mb-4 font-semibold text-neutral-900 dark:text-neutral-100 text-lg"
-                    >
-                        What Happens Next?
-                    </h3>
-                    <ol
-                        class="space-y-3 text-neutral-600 dark:text-neutral-400 text-sm list-decimal list-inside"
-                    >
-                        <li>
-                            We'll review your submission (usually within 3-5
-                            business days)
-                        </li>
-                        <li>
-                            If approved, you'll receive an email with a link to
-                            claim your cashback
-                        </li>
-                        <li>
-                            Complete the <a
-                                href="/splint-customer/claim-cashback"
-                                class="text-primary hover:underline"
-                                >cashback claim form</a
-                            > with your payment details
-                        </li>
-                        <li>
-                            Cashback is paid via PayPal or bank transfer within
-                            7-10 business days
-                        </li>
-                        <li>
-                            Your review may be featured on our website (with
-                            your permission)
-                        </li>
-                    </ol>
-                </div>
+                <WhatHappensNextAccordion variant="review" client:load />
 
                 <!-- Already submitted? -->
                 <div class="mt-8 text-center">

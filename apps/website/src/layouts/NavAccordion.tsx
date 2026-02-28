@@ -15,10 +15,11 @@ import {
   getRecoveryPhaseRoutesByLanguage,
   getRouteBySlugAndLanguage,
 } from "@/content/routes.tsx";
-import nightSplintImage from "@/assets/night-splint/night_splint_bed_side.jpg";
 import TendonStiffnessImage from "@/assets/tendon-stiffness-after-rupture.png";
-import { ArrowRight } from "lucide-react";
+import { MapPin, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+const splintImageSrc = "/images/night_splint_bed_top_square.jpg";
 import type { Lang } from "../config/languages";
 
 interface NavAccordionProps {
@@ -34,6 +35,11 @@ const content = {
     contactUs: "Contact Us",
     faqs: "FAQs",
     timeline: "Timeline of Recovery",
+    splintSeeProduct: "See product",
+    splintHowToBuy: "How to buy",
+    splintReviews: "Reviews",
+    howToBuyShort: "Where to buy",
+    reviewsShort: "Customer reviews",
   },
   de: {
     courses: "Kurse",
@@ -43,6 +49,11 @@ const content = {
     contactUs: "Kontaktiere uns",
     faqs: "FAQs",
     timeline: "Genesungszeitplan",
+    splintSeeProduct: "Produkt ansehen",
+    splintHowToBuy: "So kaufen Sie",
+    splintReviews: "Bewertungen",
+    howToBuyShort: "Kaufoptionen",
+    reviewsShort: "Kundenbewertungen",
   },
   fr: {
     courses: "Cours",
@@ -52,6 +63,11 @@ const content = {
     contactUs: "Contactez-nous",
     faqs: "FAQs",
     timeline: "Chronologie de Récupération",
+    splintSeeProduct: "Voir le produit",
+    splintHowToBuy: "Comment acheter",
+    splintReviews: "Avis",
+    howToBuyShort: "Où acheter",
+    reviewsShort: "Avis clients",
   },
   es: {
     courses: "Cursos",
@@ -61,6 +77,11 @@ const content = {
     contactUs: "Contáctenos",
     faqs: "FAQs",
     timeline: "Cronología de Recuperación",
+    splintSeeProduct: "Ver producto",
+    splintHowToBuy: "Cómo comprar",
+    splintReviews: "Reseñas",
+    howToBuyShort: "Dónde comprar",
+    reviewsShort: "Opiniones",
   },
   it: {
     courses: "Corsi",
@@ -70,6 +91,11 @@ const content = {
     contactUs: "Contattaci",
     faqs: "FAQs",
     timeline: "Cronologia del Recupero",
+    splintSeeProduct: "Vedi prodotto",
+    splintHowToBuy: "Come acquistare",
+    splintReviews: "Recensioni",
+    howToBuyShort: "Dove acquistare",
+    reviewsShort: "Recensioni clienti",
   },
 };
 
@@ -88,110 +114,118 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
     "achilles-rupture-splint",
     lang,
   );
+  const reviewsRoute = getRouteBySlugAndLanguage("reviews", lang);
+
+  const howToBuyHrefByLang: Record<string, string> = {
+    en: "/how-to-buy",
+    de: "/de/wie-kaufen",
+    fr: "/fr/comment-acheter",
+    es: "/es/como-comprar",
+    it: "/it/come-acquistare",
+  };
+  const howToBuyHref = howToBuyHrefByLang[lang] ?? "/how-to-buy";
 
   return (
     <div className="flex flex-col gap-2 pt-4">
-      {/* Achilles Rupture Splint - Direct Link */}
-      {splintRoute && (
-        <a
-          href={splintRoute.href}
-          className="relative flex flex-row items-center bg-neutral-50 hover:bg-muted/80 active:bg-muted dark:bg-neutral-900 dark:hover:bg-neutral-800 shadow-sm hover:shadow-md active:shadow-inner border hover:border-neutral-400 active:border-neutral-500 dark:border-neutral-800 dark:hover:border-neutral-600 rounded-sm w-full overflow-hidden active:scale-[0.98] transition-all duration-150 cursor-pointer"
-        >
-          <div className="flex-shrink-0 p-4 pr-0">
-            <img
-              src={nightSplintImage.src}
-              alt={splintRoute.title}
-              className="brightness-110 rounded-sm w-32 h-32 object-cover"
-            />
-          </div>
-          <div className="flex flex-col flex-1 gap-1 p-4 overflow-hidden">
-            <span className="flex flex-row items-center gap-1 font-semibold text-neutral-900 dark:text-neutral-100 text-base md:text-lg !underline underline-offset-4 text-wrap">
-              {splintRoute.title}
-              <ArrowRight size={16} className="flex-shrink-0 ml-1" />
-            </span>
-            {splintRoute.description && (
-              <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base line-clamp-3">
-                {splintRoute.description}
-              </p>
-            )}
-          </div>
-        </a>
-      )}
-
-      {/* Course - Direct Link */}
-      {courseRoute && (
-        <a
-          href={courseRoute.href}
-          className="flex items-center gap-3 hover:bg-neutral-100 hover:bg-primary/15 dark:hover:bg-neutral-800 dark:hover:bg-primary/20 bg-gradient-to-tr from-primary/10 dark:from-primary/5 to-primary/20 dark:to-primary/10 p-3 border border-primary/20 dark:border-primary/10 rounded-sm text-primary transition-colors duration-300"
-        >
-          <div className="flex-shrink-0">
-            <img
-              src={TendonStiffnessImage.src}
-              alt={courseRoute.title}
-              className="brightness-110 rounded-sm w-32 h-32 object-cover"
-            />
-          </div>
-          <div className="flex flex-col flex-1 gap-1 p-4 overflow-hidden">
-            <span className="flex flex-row items-center gap-1 font-semibold text-neutral-900 dark:text-neutral-100 text-base md:text-lg !underline underline-offset-4 text-wrap">
-              {courseRoute.title}
-              <ArrowRight size={16} className="flex-shrink-0 ml-1" />
-            </span>
-            {courseRoute.description && (
-              <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base line-clamp-3">
-                {courseRoute.description}
-              </p>
-            )}
-          </div>
-        </a>
-      )}
+      {/* Products: default-open accordion with splint card (sublinks: How to buy, Reviews) + course card */}
+      <Accordion type="single" collapsible defaultValue="products" className="gap-0">
+        <AccordionItem value="products" className="border-none">
+          <AccordionTrigger className="py-2 font-medium text-neutral-900 dark:text-neutral-100">
+            {t.ourProduct}
+          </AccordionTrigger>
+          <AccordionContent className="pb-2 pt-0">
+            <div className="flex flex-col gap-2">
+              {splintRoute && (
+                <div className="flex flex-col gap-0 rounded-sm border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+                  <ImageProductLink
+                    href={splintRoute.href}
+                    imageSrc={splintImageSrc}
+                    title={splintRoute.title}
+                    description={splintRoute.description ?? ""}
+                    nested
+                  />
+                  <div className="flex flex-col border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/30">
+                    <a
+                      href={howToBuyHref}
+                      className="flex items-center gap-2 py-2 px-3 pl-4 text-sm text-neutral-700 dark:text-neutral-300 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                    >
+                      <MapPin className="w-4 h-4 shrink-0" />
+                      {(t as Record<string, string>).howToBuyShort ?? "Where to buy"}
+                    </a>
+                    {reviewsRoute && (
+                      <a
+                        href={reviewsRoute.href}
+                        className="flex items-center gap-2 py-2 px-3 pl-4 text-sm text-neutral-700 dark:text-neutral-300 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors border-t border-neutral-200 dark:border-neutral-800"
+                      >
+                        <Star className="w-4 h-4 shrink-0" />
+                        {t.splintReviews}
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+              {courseRoute && (
+                <ImageProductLink
+                  href={courseRoute.href}
+                  imageSrc={TendonStiffnessImage.src}
+                  title={courseRoute.title}
+                  description={courseRoute.description ?? ""}
+                />
+              )}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
 
       <Accordion type="single" collapsible>
         {/* Learning Resources - FAQs + Timeline */}
         <AccordionItem value="learning-resources">
           <AccordionTrigger>{t.patientGuides}</AccordionTrigger>
           <AccordionContent>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               {/* FAQs Section */}
-              <div className="flex flex-col gap-2">
-                <h3 className="mb-1 font-semibold text-neutral-600 dark:text-neutral-400 text-sm">
+              <div className="flex flex-col gap-1.5">
+                <h3 className="mb-0.5 font-semibold text-neutral-600 dark:text-neutral-400 text-xs uppercase tracking-wide">
                   {t.faqs}
                 </h3>
                 {articleRoutes.map((article) => (
                   <a
                     key={article.href}
                     href={article.href}
-                    className="flex items-center gap-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 p-3 border border-neutral-200 dark:border-neutral-800 rounded-sm text-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100 dark:text-neutral-200 transition-colors duration-300"
+                    className="flex items-center gap-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 p-2 border border-neutral-200 dark:border-neutral-800 rounded-sm text-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100 dark:text-neutral-200 transition-colors duration-300"
                   >
-                    <span className="flex justify-center items-center w-10 h-10">
+                    <span className="flex justify-center items-center w-9 h-9 shrink-0">
                       {article.icon}
                     </span>
-                    <div>
-                      <h3 className="font-semibold text-neutral-800 dark:text-neutral-200 text-base md:text-lg">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-semibold text-neutral-800 dark:text-neutral-200 text-sm">
                         {article.title}
                       </h3>
                       {article.description && (
-                        <p className="text-neutral-500 dark:text-neutral-400 text-sm md:text-base">
+                        <p className="text-neutral-500 dark:text-neutral-400 text-xs line-clamp-1 mt-0.5">
                           {article.description}
                         </p>
                       )}
-                      <div className="flex flex-wrap gap-1 pt-2">
-                        {article.tags?.map((tag) => (
-                          <Badge
-                            key={`${article.href}-${tag.words}`}
-                            className={`${tag.color} text-black bg-opacity-80 font-light text-xs`}
-                          >
-                            {tag.words}
-                          </Badge>
-                        ))}
-                      </div>
+                      {article.tags && article.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {article.tags.map((tag) => (
+                            <Badge
+                              key={`${article.href}-${tag.words}`}
+                              className={`${tag.color} text-black bg-opacity-80 font-light text-xs`}
+                            >
+                              {tag.words}
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </a>
                 ))}
               </div>
 
               {/* Timeline Section */}
-              <div className="flex flex-col gap-2">
-                <h3 className="mb-1 font-semibold text-neutral-600 dark:text-neutral-400 text-sm">
+              <div className="flex flex-col gap-1.5">
+                <h3 className="mb-0.5 font-semibold text-neutral-600 dark:text-neutral-400 text-xs uppercase tracking-wide">
                   {t.timeline}
                 </h3>
                 {recoveryPhaseLinks.map((link) => (
@@ -202,6 +236,7 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
                     title={link.title}
                     description={link.description}
                     variant={link.variant}
+                    compact
                   />
                 ))}
               </div>
@@ -274,36 +309,84 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
 
 export default NavAccordion;
 
+const ImageProductLink = ({
+  href,
+  imageSrc,
+  title,
+  description,
+  nested = false,
+}: {
+  href: string;
+  imageSrc: string;
+  title: string;
+  description: string;
+  nested?: boolean;
+}) => (
+  <a
+    href={href}
+    className={cn(
+      "flex items-center gap-2 p-2 transition-colors duration-300",
+      !nested && "border border-neutral-200 dark:border-neutral-800 rounded-sm",
+      "text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100",
+    )}
+  >
+    <img
+      src={imageSrc}
+      alt=""
+      className="w-14 h-14 shrink-0 rounded object-cover"
+    />
+    <div className="min-w-0 flex-1">
+      <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+        {title}
+      </h3>
+      {description && (
+        <p className="text-neutral-500 dark:text-neutral-400 text-xs line-clamp-1 mt-0.5">
+          {description}
+        </p>
+      )}
+    </div>
+  </a>
+);
+
 const IconLink = ({
   href,
   icon,
   title,
   description,
   variant = "outline",
+  compact = false,
 }: {
   href: string;
   icon: React.ReactNode;
   title: string;
   description: string;
   variant?: "default" | "outline";
+  compact?: boolean;
 }) => {
   return (
     <a
       href={href}
       className={cn(
-        "flex items-center gap-2 p-3 border rounded-sm transition-colors duration-300",
+        "flex items-center gap-2 border rounded-sm transition-colors duration-300",
+        compact ? "p-2" : "p-3",
         variant === "default"
           ? "bg-gradient-to-tr from-primary/10 to-primary/20 dark:from-primary/5 dark:to-primary/10 text-primary hover:bg-primary/15 dark:hover:bg-primary/20 hover:text-primary-dark border-primary/20 dark:border-primary/10"
           : "border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100",
       )}
     >
-      <span className="flex justify-center items-center w-10 h-10">
+      <span
+        className={cn(
+          "flex justify-center items-center shrink-0",
+          compact ? "w-14 h-14" : "w-10 h-10",
+        )}
+      >
         {icon && icon}
       </span>
-      <div>
+      <div className="min-w-0 flex-1">
         <h3
           className={cn(
-            "font-semibold text-base md:text-lg",
+            "font-semibold",
+            compact ? "text-sm" : "text-base md:text-lg",
             variant === "default"
               ? "text-primary"
               : "text-neutral-800 dark:text-neutral-200",
@@ -311,7 +394,14 @@ const IconLink = ({
         >
           {title}
         </h3>
-        <p className="text-neutral-500 dark:text-neutral-400 text-sm md:text-base">
+        <p
+          className={cn(
+            "text-neutral-500 dark:text-neutral-400",
+            compact
+              ? "text-xs line-clamp-1 mt-0.5"
+              : "text-sm md:text-base",
+          )}
+        >
           {description}
         </p>
       </div>
