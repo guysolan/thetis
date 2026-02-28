@@ -1,0 +1,157 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import SplintCustomerSteps from "@/components/splint-customer/SplintCustomerSteps.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Gift, Check } from "lucide-react";
+import CourseBuyButton from "@/components/CourseBuyButton";
+import {
+    fetchCoursePrice,
+    SHOPIFY_COURSE_PRODUCTS,
+} from "@/lib/shopify-course-price";
+
+const PRODUCT_ID = SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE;
+
+const priceData = await fetchCoursePrice(PRODUCT_ID, "GB");
+const fullPrice = priceData?.amount ? parseFloat(priceData.amount) : 29.99;
+const currencyCode = priceData?.currencyCode || "GBP";
+const discountedPrice = fullPrice * 0.8;
+
+const formatter = new Intl.NumberFormat(
+    currencyCode === "GBP" ? "en-GB" : "en-US",
+    {
+        style: "currency",
+        currency: currencyCode,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    },
+);
+
+const fullFormatted = formatter.format(fullPrice);
+const discountedFormatted = formatter.format(discountedPrice);
+const discountCode = "SPLINT20";
+---
+
+<Layout
+    title="Special Offer for Splint Customers | Thetis Medical"
+    description="Exclusive 20% off the Achilles Recovery Course. Use code SPLINT20 at checkout. Splint customer offer."
+    image="https://thetismedical.com/images/night-splint.png"
+    lang="en"
+>
+    <main>
+        <ColorGradient>
+            <div class="mx-auto px-4 py-10 md:py-12 max-w-3xl text-center">
+                <SplintCustomerSteps currentStep={2} />
+                <div
+                    class="inline-flex items-center gap-2 bg-primary/10 dark:bg-primary/20 mb-3 px-3 py-1.5 rounded-full font-semibold text-primary text-sm"
+                >
+                    <Gift className="w-4 h-4" />
+                    Your offer
+                </div>
+                <h1
+                    class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
+                >
+                    20% off the Achilles Recovery Course
+                </h1>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+                    Use code{" "}
+                    <span
+                        class="bg-primary/10 dark:bg-primary/20 px-2 py-0.5 rounded font-mono font-bold text-primary"
+                    >
+                        {discountCode}
+                    </span>{" "}
+                    at checkout.
+                </p>
+            </div>
+        </ColorGradient>
+
+        <section class="pt-2 pb-8 md:pb-10">
+            <div class="mx-auto px-4 max-w-md">
+                <div
+                    class="bg-white dark:bg-neutral-800 shadow-lg p-5 border-2 border-primary/30 dark:border-primary/50 rounded-xl"
+                >
+                    <h2
+                        class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl"
+                    >
+                        Achilles Recovery Course
+                    </h2>
+                    <p
+                        class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm"
+                    >
+                        A comprehensive course covering every phase of Achilles
+                        rupture recovery. From emergency care to returning to
+                        sport.
+                    </p>
+
+                    <ul
+                        class="space-y-2 mb-4 text-neutral-600 dark:text-neutral-400 text-sm"
+                    >
+                        <li class="flex items-center gap-2">
+                            <Check className="w-4 h-4 text-primary shrink-0" />
+                            31 structured lessons
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <Check className="w-4 h-4 text-primary shrink-0" />
+                            Week-by-week recovery timeline and essential exercises
+                            for each stage
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <Check className="w-4 h-4 text-primary shrink-0" />
+                            Questions to ask your surgeon
+                        </li>
+                    </ul>
+                    <p
+                        class="mb-6 text-neutral-500 dark:text-neutral-500 text-xs"
+                    >
+                        Reviewed by foot & ankle specialists; based on 100+
+                        research articles.
+                    </p>
+
+                    <div class="flex flex-wrap items-baseline gap-2 mb-6">
+                        <span
+                            class="text-neutral-400 dark:text-neutral-500 text-base line-through"
+                        >
+                            {fullFormatted}
+                        </span>
+                        <span
+                            class="font-bold text-neutral-900 dark:text-neutral-100 text-xl"
+                        >
+                            {discountedFormatted}
+                        </span>
+                    </div>
+
+                    <div class="flex flex-col gap-3">
+                        <CourseBuyButton
+                            productId={PRODUCT_ID}
+                            variant="default"
+                            size="lg"
+                            className="justify-center w-full"
+                            client:load
+                        >
+                            Add to Cart
+                        </CourseBuyButton>
+                        <a
+                            href="/splint-customer/share-doctor"
+                            class={cn(
+                                buttonVariants({
+                                    variant: "ghost",
+                                    size: "lg",
+                                }),
+                                "justify-center w-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100",
+                            )}
+                        >
+                            No thanks, continue
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script define:vars={{ discountCode }}>
+        if (typeof window !== "undefined") {
+            sessionStorage.setItem("splintDiscountCode", discountCode);
+        }
+    </script>
+</Layout>

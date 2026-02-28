@@ -1,0 +1,74 @@
+---
+/**
+ * Step indicator for the splint-customer flow.
+ * currentStep: 1 = Enter email, 2 = Course offer, 3 = Share with doctor, 4 = Leave review, 5 = Claim cashback
+ */
+interface Props {
+    currentStep: 1 | 2 | 3 | 4 | 5;
+}
+
+const { currentStep } = Astro.props;
+
+const steps = [
+    { num: 1, label: "Enter email", href: "/splint-customer" },
+    { num: 2, label: "Course offer", href: "/splint-customer/course" },
+    {
+        num: 3,
+        label: "Share with doctor",
+        href: "/splint-customer/share-doctor",
+    },
+    { num: 4, label: "Leave review", href: "/splint-customer/review" },
+    { num: 5, label: "Claim Cash", href: "/splint-customer/claim-cashback" },
+];
+---
+
+<nav class="mx-auto mb-8" aria-label="Splint customer flow">
+    <ol
+        class="flex flex-wrap flex-shrink justify-center items-center gap-1.5 text-sm"
+        role="list"
+    >
+        {
+            steps.map((step, i) => {
+                const isActive = step.num === currentStep;
+                const isPast = step.num < currentStep;
+                const isFuture = step.num > currentStep;
+                const linkClass = [
+                    "flex items-center gap-1.5 rounded-full px-2.5 py-1.5 font-medium transition-colors shrink-0 text-nowrap",
+                    isActive &&
+                        "bg-primary text-primary-foreground ring-2 ring-primary ring-offset-2 dark:ring-offset-neutral-900",
+                    isPast &&
+                        "bg-primary/15 dark:bg-primary/20 text-primary hover:bg-primary/25",
+                    isFuture &&
+                        "text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800",
+                ]
+                    .filter(Boolean)
+                    .join(" ");
+                const badgeClass = [
+                    "flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold",
+                    isActive && "bg-primary-foreground/20",
+                    isPast && "bg-primary/30",
+                    isFuture && "bg-neutral-200 dark:bg-neutral-700",
+                ]
+                    .filter(Boolean)
+                    .join(" ");
+                return (
+                    <li class="shrink-0" role="listitem">
+                        <a
+                            href={step.href}
+                            class={linkClass}
+                            aria-current={isActive ? "step" : undefined}
+                            aria-label={step.label}
+                        >
+                            <span class={badgeClass}>
+                                {isPast ? "✓" : step.num}
+                            </span>
+                            <span class="hidden md:inline text-nowrap">
+                                {step.label}
+                            </span>
+                        </a>
+                    </li>
+                );
+            })
+        }
+    </ol>
+</nav>

@@ -15,6 +15,7 @@ import Review2Image from "@/assets/review-2.png";
 import Review3Image from "@/assets/review-3.png";
 import StickyAddToCart from "@/components/StickyAddToCart";
 import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
+import ClinicianCourseAccessDialog from "@/components/ClinicianCourseAccessDialog";
 import type { Lang } from "@/config/languages";
 import {
     Check,
@@ -179,6 +180,13 @@ const translations = {
             research: "Based on 100+ research articles",
             cta: "Start Your Safe Recovery →",
             alreadyPurchased: "Already purchased? Access your course →",
+            clinicianCta: "I'm a clinician – show me the course content",
+            clinicianDialogTitle: "Request course access",
+            clinicianDialogDescription:
+                "Leave your details and we'll email you about viewing the course content.",
+            clinicianNameLabel: "Name",
+            clinicianEmailLabel: "Email",
+            clinicianSubmit: "Request access",
             guaranteeTitle: "Money-Back Guarantee",
             guaranteeDesc:
                 "If the course doesn't help you feel more confident in your recovery, we'll refund your purchase—no questions asked.",
@@ -384,6 +392,13 @@ const translations = {
             research: "Basierend auf 100+ Forschungsartikeln",
             cta: "Starten Sie Ihre sichere Genesung →",
             alreadyPurchased: "Bereits gekauft? Zugang zu Ihrem Kurs →",
+            clinicianCta: "Ich bin Kliniker – Kursinhalte anzeigen",
+            clinicianDialogTitle: "Kurszugang anfordern",
+            clinicianDialogDescription:
+                "Hinterlassen Sie Ihre Daten und wir mailen Ihnen zur Kursansicht.",
+            clinicianNameLabel: "Name",
+            clinicianEmailLabel: "E-Mail",
+            clinicianSubmit: "Zugang anfordern",
             guaranteeTitle: "Geld-zurück-Garantie",
             guaranteeDesc:
                 "Wenn der Kurs Ihnen nicht hilft, sich sicherer in Ihrer Genesung zu fühlen, erstatten wir Ihren Kauf—ohne Fragen.",
@@ -591,6 +606,13 @@ const translations = {
             research: "Basé sur 100+ articles de recherche",
             cta: "Commencez votre récupération sécurisée →",
             alreadyPurchased: "Déjà acheté ? Accédez à votre cours →",
+            clinicianCta: "Je suis clinicien – voir le contenu du cours",
+            clinicianDialogTitle: "Demander l'accès au cours",
+            clinicianDialogDescription:
+                "Laissez vos coordonnées et nous vous enverrons un e-mail pour accéder au cours.",
+            clinicianNameLabel: "Nom",
+            clinicianEmailLabel: "E-mail",
+            clinicianSubmit: "Demander l'accès",
             guaranteeTitle: "Garantie de remboursement",
             guaranteeDesc:
                 "Si le cours ne vous aide pas à vous sentir plus confiant dans votre récupération, nous vous remboursons—sans poser de questions.",
@@ -806,6 +828,13 @@ const translations = {
             research: "Basado en 100+ artículos de investigación",
             cta: "Comience su recuperación segura →",
             alreadyPurchased: "¿Ya compró? Acceda a su curso →",
+            clinicianCta: "Soy clínico – mostrar contenido del curso",
+            clinicianDialogTitle: "Solicitar acceso al curso",
+            clinicianDialogDescription:
+                "Deje sus datos y le enviaremos un correo para ver el contenido del curso.",
+            clinicianNameLabel: "Nombre",
+            clinicianEmailLabel: "Correo electrónico",
+            clinicianSubmit: "Solicitar acceso",
             guaranteeTitle: "Garantía de devolución de dinero",
             guaranteeDesc:
                 "Si el curso no le ayuda a sentirse más confiado en su recuperación, le reembolsamos—sin preguntas.",
@@ -1018,6 +1047,13 @@ const translations = {
             research: "Basato su 100+ articoli di ricerca",
             cta: "Inizia il tuo recupero sicuro →",
             alreadyPurchased: "Già acquistato? Accedi al tuo corso →",
+            clinicianCta: "Sono un clinico – mostrami i contenuti del corso",
+            clinicianDialogTitle: "Richiedi accesso al corso",
+            clinicianDialogDescription:
+                "Lascia i tuoi dati e ti invieremo un'email per visualizzare il corso.",
+            clinicianNameLabel: "Nome",
+            clinicianEmailLabel: "Email",
+            clinicianSubmit: "Richiedi accesso",
             guaranteeTitle: "Garanzia di rimborso",
             guaranteeDesc:
                 "Se il corso non ti aiuta a sentirti più sicuro nel tuo recupero, ti rimborsiamo—senza domande.",
@@ -2176,7 +2212,7 @@ const lessonPreviews = [
                         </CourseBuyButton>
                     </div>
                     <div
-                        class="flex flex-wrap justify-center gap-4 mb-6 text-sm"
+                        class="flex flex-wrap justify-center items-center gap-4 mb-6 text-sm"
                     >
                         <a
                             href="https://course.thetismedical.com/claim"
@@ -2185,6 +2221,16 @@ const lessonPreviews = [
                             <ExternalLink className="w-4 h-4" />
                             {t.finalCta.alreadyPurchased}
                         </a>
+                        <ClinicianCourseAccessDialog
+                            triggerLabel={t.finalCta.clinicianCta}
+                            title={t.finalCta.clinicianDialogTitle}
+                            description={t.finalCta.clinicianDialogDescription}
+                            nameLabel={t.finalCta.clinicianNameLabel}
+                            emailLabel={t.finalCta.clinicianEmailLabel}
+                            submitLabel={t.finalCta.clinicianSubmit}
+                            redirectUrl={new URL(Astro.url.pathname, Astro.request.url).href}
+                            client:load
+                        />
                     </div>
                     <!-- Satisfaction Guarantee -->
                     <div

@@ -11,8 +11,71 @@
           "attachment_key": "attachments",
           "layout_key": "default"
         },
-        "subject": "Thanks for your Thetis Splint",
+        "subject": "Thanks for your choosing the Thetis Splint",
         "visual_blocks@": "thank_you/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "channel_key": "twilio",
+      "channel_type": "sms",
+      "conditions": {
+        "all": [
+          {
+            "argument": "true",
+            "operator": "equal_to",
+            "variable": "data.send_notification"
+          }
+        ]
+      },
+      "name": "Day 0 - Thank you (SMS)",
+      "ref": "thank_you_sms",
+      "send_windows": [
+        {
+          "day": "monday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "tuesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "wednesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "thursday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "friday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "saturday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "sunday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        }
+      ],
+      "template": {
+        "text_body@": "thank_you_sms/text_body.txt"
       },
       "type": "channel"
     },
@@ -31,6 +94,50 @@
       "channel_type": "email",
       "name": "Day 4 - Setup tips",
       "ref": "tips",
+      "send_windows": [
+        {
+          "day": "monday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "tuesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "wednesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "thursday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "friday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "saturday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "sunday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        }
+      ],
       "template": {
         "settings": {
           "attachment_key": "attachments",
@@ -38,6 +145,69 @@
         },
         "subject": "Getting the most from your Thetis Splint",
         "visual_blocks@": "tips/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "channel_key": "twilio",
+      "channel_type": "sms",
+      "conditions": {
+        "all": [
+          {
+            "argument": "true",
+            "operator": "equal_to",
+            "variable": "data.send_notification"
+          }
+        ]
+      },
+      "name": "Day 4 - Setup tips (SMS)",
+      "ref": "tips_sms",
+      "send_windows": [
+        {
+          "day": "monday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "tuesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "wednesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "thursday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "friday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "saturday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "sunday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        }
+      ],
+      "template": {
+        "text_body@": "tips_sms/text_body.txt"
       },
       "type": "channel"
     },
@@ -56,6 +226,50 @@
       "channel_type": "email",
       "name": "Day 10 - Review ask",
       "ref": "review_ask",
+      "send_windows": [
+        {
+          "day": "monday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "tuesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "wednesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "thursday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "friday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "saturday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "sunday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        }
+      ],
       "template": {
         "settings": {
           "attachment_key": "attachments",
@@ -63,6 +277,201 @@
         },
         "subject": "How's the splint? Your feedback helps others",
         "visual_blocks@": "review_ask/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "channel_key": "twilio",
+      "channel_type": "sms",
+      "conditions": {
+        "all": [
+          {
+            "argument": "true",
+            "operator": "equal_to",
+            "variable": "data.send_notification"
+          }
+        ]
+      },
+      "name": "Day 10 - Review ask (SMS)",
+      "ref": "review_ask_sms",
+      "send_windows": [
+        {
+          "day": "monday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "tuesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "wednesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "thursday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "friday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "saturday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "sunday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        }
+      ],
+      "template": {
+        "text_body@": "review_ask_sms/text_body.txt"
+      },
+      "type": "channel"
+    },
+    {
+      "ref": "delay_3",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 5
+        }
+      },
+      "type": "delay"
+    },
+    {
+      "channel_key": "resend",
+      "channel_type": "email",
+      "name": "Day 15 - Affiliate ask",
+      "ref": "affiliate_ask",
+      "send_windows": [
+        {
+          "day": "monday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "tuesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "wednesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "thursday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "friday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "saturday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "sunday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        }
+      ],
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": "default"
+        },
+        "subject": "Earn $50 — share this with your surgeon or physio",
+        "visual_blocks@": "affiliate_ask/visual_blocks.json"
+      },
+      "type": "channel"
+    },
+    {
+      "channel_key": "twilio",
+      "channel_type": "sms",
+      "conditions": {
+        "all": [
+          {
+            "argument": "true",
+            "operator": "equal_to",
+            "variable": "data.send_notification"
+          }
+        ]
+      },
+      "name": "Day 15 - Affiliate ask (SMS)",
+      "ref": "affiliate_ask_sms",
+      "send_windows": [
+        {
+          "day": "monday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "tuesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "wednesday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "thursday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "friday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "saturday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        },
+        {
+          "day": "sunday",
+          "from": "07:00:00",
+          "type": "send",
+          "until": "21:30:00"
+        }
+      ],
+      "template": {
+        "text_body@": "affiliate_ask_sms/text_body.txt"
       },
       "type": "channel"
     }

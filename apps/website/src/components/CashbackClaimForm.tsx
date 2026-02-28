@@ -7,9 +7,20 @@ import { AlertCircle, Banknote, Check, Loader2 } from "lucide-react";
 type PaymentMethod = "paypal" | "bank";
 type Currency = "GBP" | "USD";
 
+const AMOUNTS = {
+    GBP: { doctor: 40, review: 10 },
+    USD: { doctor: 50, review: 15 },
+} as const;
+
+function formatAmount(currency: Currency, value: number) {
+    return currency === "GBP" ? `£${value}` : `$${value}`;
+}
+
 export function CashbackClaimForm() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [claimDoctorSignUp, setClaimDoctorSignUp] = useState(false);
+    const [claimVideoReview, setClaimVideoReview] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("paypal");
     const [currency, setCurrency] = useState<Currency>("GBP");
     const [paypalEmail, setPaypalEmail] = useState("");
@@ -18,9 +29,18 @@ export function CashbackClaimForm() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [error, setError] = useState("");
 
+    const amounts = AMOUNTS[currency];
+    const total =
+        (claimDoctorSignUp ? amounts.doctor : 0) + (claimVideoReview ? amounts.review : 0);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
+
+        if (!claimDoctorSignUp && !claimVideoReview) {
+            setError("Please select at least one: doctor sign-up and/or video review");
+            return;
+        }
 
         if (paymentMethod === "paypal" && !paypalEmail) {
             setError("Please enter your PayPal email address");
@@ -35,14 +55,16 @@ export function CashbackClaimForm() {
         setIsSubmitting(true);
 
         try {
-            // Submit to Formspree contact form
+            const amountStr = formatAmount(currency, total);
             const formData = new FormData();
-            formData.append("_subject", `Cashback Claim Request - ${name}`);
+            formData.append("_subject", `Cashback Claim - ${amountStr} - ${name}`);
             formData.append("name", name);
             formData.append("email", email);
             formData.append("type", "cashback_claim");
             formData.append("currency", currency);
-            formData.append("amount", currency === "GBP" ? "£10" : "$15");
+            formData.append("amount", amountStr);
+            formData.append("claim_doctor_signup", claimDoctorSignUp ? "yes" : "no");
+            formData.append("claim_video_review", claimVideoReview ? "yes" : "no");
             formData.append("payment_method", paymentMethod);
 
             if (paymentMethod === "paypal") {
@@ -139,6 +161,41 @@ export function CashbackClaimForm() {
             </div>
 
             <div>
+                <label className="block mb-3 font-medium text-neutral-900 dark:text-neutral-100">
+                    What are you claiming for? <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-3">
+                    <label className="flex items-center gap-3 cursor-pointer p-3 border border-neutral-200 dark:border-neutral-700 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800/50">
+                        <input
+                            type="checkbox"
+                            checked={claimDoctorSignUp}
+                            onChange={(e) => setClaimDoctorSignUp(e.target.checked)}
+                            className="focus:ring-primary w-4 h-4 rounded text-primary"
+                        />
+                        <span className="text-neutral-700 dark:text-neutral-300">
+                            Doctor/physio sign-up — {formatAmount(currency, amounts.doctor)}
+                        </span>
+                    </label>
+                    <label className="flex items-center gap-3 cursor-pointer p-3 border border-neutral-200 dark:border-neutral-700 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800/50">
+                        <input
+                            type="checkbox"
+                            checked={claimVideoReview}
+                            onChange={(e) => setClaimVideoReview(e.target.checked)}
+                            className="focus:ring-primary w-4 h-4 rounded text-primary"
+                        />
+                        <span className="text-neutral-700 dark:text-neutral-300">
+                            Video review — {formatAmount(currency, amounts.review)}
+                        </span>
+                    </label>
+                </div>
+                {total > 0 && (
+                    <p className="mt-3 font-semibold text-neutral-900 dark:text-neutral-100">
+                        Total: {formatAmount(currency, total)}
+                    </p>
+                )}
+            </div>
+
+            <div>
                 <label className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100">
                     Preferred Currency <span className="text-red-500">*</span>
                 </label>
@@ -153,7 +210,7 @@ export function CashbackClaimForm() {
                             className="focus:ring-primary w-4 h-4 text-primary"
                         />
                         <span className="text-neutral-700 dark:text-neutral-300">
-                            £10 GBP
+                            GBP (£)
                         </span>
                     </label>
                     <label className="flex items-center gap-2 cursor-pointer">
@@ -166,7 +223,7 @@ export function CashbackClaimForm() {
                             className="focus:ring-primary w-4 h-4 text-primary"
                         />
                         <span className="text-neutral-700 dark:text-neutral-300">
-                            $15 USD
+                            USD ($)
                         </span>
                     </label>
                 </div>
@@ -263,7 +320,7 @@ export function CashbackClaimForm() {
                 type="submit"
                 size="lg"
                 className="gap-2 w-full"
-                disabled={isSubmitting}
+                disabled={isSubmitting || total === 0}
             >
                 {isSubmitting
                     ? (
@@ -275,15 +332,15 @@ export function CashbackClaimForm() {
                     : (
                         <>
                             <Banknote className="w-4 h-4" />
-                            Claim {currency === "GBP" ? "£10" : "$15"} Cashback
+                            Claim {formatAmount(currency, total)} Cashback
                         </>
                     )}
             </Button>
 
             <p className="text-neutral-500 dark:text-neutral-400 text-xs text-center">
-                Cashback is only available for approved video reviews. If your
-                review hasn't been approved yet, please wait for our
-                confirmation email.
+                Select what you're claiming for above. Doctor sign-up and video
+                review can be combined. Payment is sent once we've verified
+                your claim.
             </p>
         </form>
     );

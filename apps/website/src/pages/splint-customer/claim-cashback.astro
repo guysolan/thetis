@@ -2,7 +2,9 @@
 import Layout from "@/layouts/Layout.astro";
 import ColorGradient from "@/components/ColorGradient.astro";
 import HighlightedWord from "@/components/HighlightedWord";
-import { ArrowLeft, DollarSign, Banknote } from "lucide-react";
+import SplintCustomerSteps from "@/components/splint-customer/SplintCustomerSteps.astro";
+import LocationPrice from "@/components/splint-customer/LocationPrice";
+import { Banknote } from "lucide-react";
 import { CashbackClaimForm } from "@/components/CashbackClaimForm";
 ---
 
@@ -14,39 +16,32 @@ import { CashbackClaimForm } from "@/components/CashbackClaimForm";
 >
     <main>
         <ColorGradient>
-            <div class="mx-auto px-4 py-16 md:py-24 max-w-4xl text-center">
-                <a
-                    href="/splint-customer"
-                    class="inline-flex items-center gap-2 mb-6 font-medium text-primary hover:text-primary/80 text-sm"
-                >
-                    <ArrowLeft className="w-4 h-4" />
-                    Back to Special Offers
-                </a>
+            <div class="mx-auto px-4 py-10 md:py-12 max-w-3xl text-center">
+                <SplintCustomerSteps currentStep={5} />
                 <div
-                    class="inline-flex items-center gap-2 bg-primary/10 dark:bg-primary/20 mb-4 px-4 py-2 rounded-full font-semibold text-primary text-sm"
+                    class="inline-flex items-center gap-2 bg-primary/10 dark:bg-primary/20 mb-3 px-3 py-1.5 rounded-full font-semibold text-primary text-sm"
                 >
                     <Banknote className="w-4 h-4" />
                     Claim Your Reward
                 </div>
                 <h1
-                    class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-4xl md:text-5xl"
+                    class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
                 >
                     Claim Your <HighlightedWord>Cashback</HighlightedWord>
                 </h1>
-                <p
-                    class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg md:text-xl"
-                >
-                    Congratulations! Your video review has been approved.
-                    Complete the form below to receive your £10 / $15 cashback
-                    via PayPal or bank transfer.
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+                    Claim your cashback for doctor/physio sign-up and/or your
+                    approved video review. Select what applies below — <LocationPrice gbp={40} usd={50} client:load /> for doctor
+                    sign-up, <LocationPrice gbp={10} usd={15} client:load /> for video review (both = <LocationPrice gbp={50} usd={65} client:load />).
+                    Payment via PayPal or bank transfer.
                 </p>
             </div>
         </ColorGradient>
 
-        <section class="py-12 md:py-16">
+        <section class="pt-2 pb-8 md:pb-10">
             <div class="mx-auto px-4 max-w-2xl">
                 <div
-                    class="bg-white dark:bg-neutral-800 shadow-lg p-8 border border-neutral-200 dark:border-neutral-700 rounded-xl"
+                    class="bg-white dark:bg-neutral-800 shadow-lg p-6 border-2 border-primary/30 dark:border-primary/50 rounded-xl"
                 >
                     <CashbackClaimForm client:load />
                 </div>
@@ -63,8 +58,9 @@ import { CashbackClaimForm } from "@/components/CashbackClaimForm";
                         class="space-y-2 text-neutral-600 dark:text-neutral-400 text-sm"
                     >
                         <li>
-                            • Cashback amount: <strong>£10 GBP</strong> or <strong
-                                >$15 USD</strong>
+                            • Doctor/physio sign-up: <strong><LocationPrice gbp={40} usd={50} client:load /></strong>
+                            · Video review: <strong><LocationPrice gbp={10} usd={15} client:load /></strong>
+                            · Both: <strong><LocationPrice gbp={50} usd={65} client:load /></strong>
                         </li>
                         <li>• Payment methods: PayPal or Bank Transfer</li>
                         <li>

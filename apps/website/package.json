@@ -27,7 +27,9 @@
     "@astrojs/tailwind": "5.1.2",
     "@astrojs/vercel": "8.0.7",
     "@astropub/md": "^1.0.0",
+    "@formspree/react": "^3.0.0",
     "@hookform/resolvers": "^5.1.1",
+    "@nanostores/react": "^0.8.4",
     "@notionhq/client": "^2.2.3",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-alert-dialog": "^1.1.6",
@@ -75,6 +77,7 @@
     "lucide-astro": "0.473.0",
     "lucide-react": "0.469.0",
     "marked": "^4.3.0",
+    "nanostores": "^0.11.4",
     "notion-page-to-html": "^1.2.0",
     "notion-to-md": "^2.5.6",
     "number-flow": "^0.5.1",
@@ -96,9 +99,7 @@
     "tailwindcss": "^3.3.3",
     "tailwindcss-animate": "^1.0.6",
     "vaul": "^1.1.2",
-    "zod": "^4.0.5",
-    "nanostores": "^0.11.4",
-    "@nanostores/react": "^0.8.4"
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",

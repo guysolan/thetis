@@ -1,0 +1,1 @@
+Your Thetis Course is ready ({{ data.order_number }}). Log in: {{ vars.course_url }} - Thetis

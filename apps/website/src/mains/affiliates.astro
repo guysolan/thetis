@@ -1,43 +1,132 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Check } from "lucide-react";
 import AffiliatesHero from "../sections/affiliates/AffiliatesHero.astro";
 import AffiliatesProductInfo from "../sections/affiliates/AffiliatesProductInfo.astro";
 import AffiliatesBenefits from "../sections/affiliates/AffiliatesBenefits.astro";
 import AffiliatesHowItWorks from "../sections/affiliates/AffiliatesHowItWorks.astro";
+import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
+import SurgeonsCarousel from "@/components/SurgeonsCarousel";
 import type { Lang } from "@/config/languages.ts";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
+
+const reviewsUrl =
+    lang === "en"
+        ? "/reviews"
+        : lang === "de"
+          ? "/de/bewertungen"
+          : lang === "fr"
+            ? "/fr/avis"
+            : lang === "es"
+              ? "/es/resenas"
+              : "/it/recensioni";
 
 const content = {
     en: {
         title: "Thetis Medical - Affiliate Program",
         description:
-            "Join our affiliate program and earn 10% commission while helping your patients save 10% on their recovery. Get your personalized discount code (your surname in CAPS) and start referring today",
+            "Join our affiliate program and earn 20% commission while helping your patients save 20% on their recovery. Get your personalized discount code (your surname in CAPS) and start referring today",
         image: "https://thetismedical.com/images/night-splint.png",
+        reviews: {
+            tagline: "TRUSTED BY THOUSANDS",
+            title: "Trusted by 5,000+ Patients",
+            subtitle:
+                "Real reviews from real patients who've found better sleep and faster recovery",
+            viewAll: "View All Reviews",
+        },
+        surgeons: {
+            tagline: "PROFESSIONAL ENDORSEMENTS",
+            title: "Trusted by",
+            titleHighlight: "Leading Surgeons",
+            subtitle:
+                "Healthcare professionals worldwide recommend Thetis for Achilles rupture recovery.",
+            readMore: "Read More Professional Reviews",
+        },
     },
     de: {
         title: "Thetis Medical - Affiliate-Programm",
         description:
-            "Werden Sie unser Affiliate-Partner und verdienen Sie 10% Provision, während Sie Ihren Patienten helfen, 10% bei ihrer Genesung zu sparen. Erhalten Sie Ihren personalisierten Rabattcode (Ihr Nachname in GROSSBUCHSTABEN) und beginnen Sie noch heute mit der Empfehlung.",
+            "Werden Sie unser Affiliate-Partner und verdienen Sie 20% Provision, während Sie Ihren Patienten helfen, 20% bei ihrer Genesung zu sparen. Erhalten Sie Ihren personalisierten Rabattcode (Ihr Nachname in GROSSBUCHSTABEN) und beginnen Sie noch heute mit der Empfehlung.",
         image: "https://thetismedical.com/images/night-splint.png",
+        reviews: {
+            tagline: "VON TAUSENDEN VERTRAUT",
+            title: "Vertrauen von 5.000+ Patienten",
+            subtitle:
+                "Echte Bewertungen von echten Patienten, die besseren Schlaf und schnellere Genesung gefunden haben",
+            viewAll: "Alle Bewertungen ansehen",
+        },
+        surgeons: {
+            tagline: "PROFESSIONELLE EMPFEHLUNGEN",
+            title: "Vertrauen von",
+            titleHighlight: "führenden Chirurgen",
+            subtitle:
+                "Medizinische Fachkräfte weltweit empfehlen Thetis für die Genesung nach Achillessehnenriss.",
+            readMore: "Mehr professionelle Bewertungen lesen",
+        },
     },
     fr: {
         title: "Thetis Medical - Programme d'Affiliation",
         description:
-            "Rejoignez notre programme d'affiliation et gagnez 10% de commission tout en aidant vos patients à économiser 10% sur leur récupération. Obtenez votre code de réduction personnalisé (votre nom de famille en MAJUSCULES) et commencez à référer dès aujourd'hui.",
+            "Rejoignez notre programme d'affiliation et gagnez 20% de commission tout en aidant vos patients à économiser 20% sur leur récupération. Obtenez votre code de réduction personnalisé (votre nom de famille en MAJUSCULES) et commencez à référer dès aujourd'hui.",
         image: "https://thetismedical.com/images/night-splint.png",
+        reviews: {
+            tagline: "APPROUVÉ PAR DES MILLIERS",
+            title: "Approuvé par 5 000+ patients",
+            subtitle:
+                "De vrais avis de vrais patients qui ont trouvé un meilleur sommeil et une récupération plus rapide",
+            viewAll: "Voir tous les avis",
+        },
+        surgeons: {
+            tagline: "RECOMMANDATIONS PROFESSIONNELLES",
+            title: "Approuvé par les",
+            titleHighlight: "chirurgiens de premier plan",
+            subtitle:
+                "Les professionnels de santé du monde entier recommandent Thetis pour la récupération après rupture du tendon d'Achille.",
+            readMore: "Lire plus d'avis professionnels",
+        },
     },
     es: {
         title: "Thetis Medical - Programa de Afiliados",
         description:
-            "Únase a nuestro programa de afiliados y gane un 10% de comisión mientras ayuda a sus pacientes a ahorrar un 10% en su recuperación. Obtenga su código de descuento personalizado (su apellido en MAYÚSCULAS) y comience a referir hoy mismo.",
+            "Únase a nuestro programa de afiliados y gane un 20% de comisión mientras ayuda a sus pacientes a ahorrar un 20% en su recuperación. Obtenga su código de descuento personalizado (su apellido en MAYÚSCULAS) y comience a referir hoy mismo.",
         image: "https://thetismedical.com/images/night-splint.png",
+        reviews: {
+            tagline: "CONFIADO POR MILES",
+            title: "Confianza de 5.000+ pacientes",
+            subtitle:
+                "Reseñas reales de pacientes reales que han encontrado mejor sueño y recuperación más rápida",
+            viewAll: "Ver todas las reseñas",
+        },
+        surgeons: {
+            tagline: "RECOMENDACIONES PROFESIONALES",
+            title: "Confianza de",
+            titleHighlight: "cirujanos líderes",
+            subtitle:
+                "Los profesionales de la salud de todo el mundo recomiendan Thetis para la recuperación de la rotura del tendón de Aquiles.",
+            readMore: "Leer más reseñas profesionales",
+        },
     },
     it: {
         title: "Thetis Medical - Programma di Affiliazione",
         description:
-            "Unisciti al nostro programma di affiliazione e guadagna il 10% di commissione mentre aiuti i tuoi pazienti a risparmiare il 10% sulla loro guarigione. Ottieni il tuo codice sconto personalizzato (il tuo cognome in MAIUSCOLE) e inizia a riferire oggi stesso.",
+            "Unisciti al nostro programma di affiliazione e guadagna il 20% di commissione mentre aiuti i tuoi pazienti a risparmiare il 20% sulla loro guarigione. Ottieni il tuo codice sconto personalizzato (il tuo cognome in MAIUSCOLE) e inizia a riferire oggi stesso.",
         image: "https://thetismedical.com/images/night-splint.png",
+        reviews: {
+            tagline: "AFFIDATO DA MIGLIAIA",
+            title: "Scelto da 5.000+ pazienti",
+            subtitle:
+                "Recensioni vere da pazienti veri che hanno trovato un sonno migliore e un recupero più veloce",
+            viewAll: "Vedi tutte le recensioni",
+        },
+        surgeons: {
+            tagline: "RACCOMANDAZIONI PROFESSIONALI",
+            title: "Fiducia da",
+            titleHighlight: "chirurghi leader",
+            subtitle:
+                "I professionisti sanitari di tutto il mondo raccomandano Thetis per il recupero dalla rottura del tendine d'Achille.",
+            readMore: "Leggi altre recensioni professionali",
+        },
     },
 };
 
@@ -56,6 +145,96 @@ const currentContent = content[lang as keyof typeof content];
         <AffiliatesProductInfo lang={lang} />
 
         <AffiliatesBenefits lang={lang} />
+
+        <!-- Patient Reviews -->
+        <section
+            class="bg-gradient-to-b from-white via-primary/5 to-white py-12 md:py-16 lg:py-20"
+        >
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 md:mb-12 text-center">
+                    <div
+                        class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full"
+                    >
+                        <Check className="w-4 md:w-5 h-4 md:h-5 text-primary" />
+                        <p
+                            class="font-medium text-primary text-xs md:text-sm uppercase tracking-widest"
+                        >
+                            {currentContent.reviews.tagline}
+                        </p>
+                    </div>
+                    <h2
+                        class="mb-4 font-bold text-neutral-950 dark:text-neutral-50 text-2xl md:text-3xl lg:text-4xl"
+                    >
+                        {currentContent.reviews.title}
+                    </h2>
+                    <p class="mb-6 text-neutral-600 dark:text-neutral-400 text-base md:text-lg">
+                        {currentContent.reviews.subtitle}
+                    </p>
+                </div>
+                <div class="mb-8">
+                    <EnhancedReviewCarousel client:load />
+                </div>
+                <div class="mt-8 text-center">
+                    <a
+                        href={reviewsUrl}
+                        class="inline-flex items-center gap-2 hover:bg-primary px-6 py-3 border-2 border-primary rounded-lg font-semibold text-primary hover:text-white transition-colors"
+                    >
+                        {currentContent.reviews.viewAll}
+                        <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 5l7 7-7 7"
+                            />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clinician / Surgeon Endorsements -->
+        <section
+            class="bg-gradient-to-b from-primary/5 to-white py-12 md:py-16 lg:py-20"
+        >
+            <div class="mx-auto px-4 max-w-7xl">
+                <div class="mb-8 md:mb-12 text-center">
+                    <p
+                        class="font-medium text-primary text-xs md:text-sm uppercase tracking-widest mb-4"
+                    >
+                        {currentContent.surgeons.tagline}
+                    </p>
+                    <h2
+                        class="mb-4 font-bold text-neutral-950 dark:text-neutral-50 text-2xl md:text-3xl lg:text-4xl"
+                    >
+                        {currentContent.surgeons.title}
+                        <span class="text-primary">
+                            {currentContent.surgeons.titleHighlight}
+                        </span>
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400 text-base md:text-lg">
+                        {currentContent.surgeons.subtitle}
+                    </p>
+                </div>
+                <div class="mb-8">
+                    <SurgeonsCarousel client:load />
+                </div>
+                <div class="mt-8 text-center">
+                    <a
+                        href={reviewsUrl}
+                        class="inline-flex items-center gap-2 font-semibold text-primary text-lg hover:underline transition-colors"
+                    >
+                        {currentContent.surgeons.readMore}
+                        <span class="text-xl">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
 
         <AffiliatesHowItWorks lang={lang} />
     </main>

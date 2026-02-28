@@ -1,0 +1,143 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import SplintCustomerSteps from "@/components/splint-customer/SplintCustomerSteps.astro";
+import LocationPrice from "@/components/splint-customer/LocationPrice";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Banknote, Mail } from "lucide-react";
+
+// Pre-populated email body for sharing with clinician (same as affiliate_ask email)
+const emailBody = `Hi Dr [Name] / [Physio Name],
+
+I just bought the Thetis Achilles rupture splint to help me sleep and it's made a real difference. The company have a program where you can become an affiliate and give your patients 20% off and you get paid each time a patient buys one too! I would really appreciate it and think your patients would like it — please could you join and let me know once you're done?
+
+You can sign up here: https://thetismedical.com/affiliates
+
+Thanks for all the help with my recovery!`;
+const mailtoHref = `mailto:?body=${encodeURIComponent(emailBody)}`;
+// Base64 so we can pass to data attribute without serializing into script (avoids Astro load errors)
+const emailBodyBase64 = Buffer.from(emailBody, "utf-8").toString("base64");
+---
+
+<Layout
+    title="Share with Your Doctor – Earn $50 | Thetis Medical"
+    description="Share our affiliate program with your doctor or physio and get $50 when they sign up. We'll send you a pre-written email to forward."
+    image="https://thetismedical.com/images/night-splint.png"
+    lang="en"
+>
+    <main>
+        <ColorGradient>
+            <div class="mx-auto px-4 py-10 md:py-12 max-w-3xl text-center">
+                <SplintCustomerSteps currentStep={3} />
+                <div
+                    class="inline-flex items-center gap-2 bg-primary/10 dark:bg-primary/20 mb-3 px-3 py-1.5 rounded-full font-semibold text-primary text-sm"
+                >
+                    <Banknote className="w-4 h-4" />
+                    Get <LocationPrice gbp={40} usd={50} client:load /> when they sign up
+                </div>
+                <h1
+                    class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
+                >
+                    Share with your doctor, physio or their secretary
+                </h1>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+                    We'll send you <strong class="text-neutral-900 dark:text-neutral-100">
+                        <LocationPrice gbp={40} usd={50} client:load />
+                    </strong> when they sign up. One tap opens your email with a ready-to-send
+                    message — just add their address and send, then reply to our
+                    follow-up with their name.
+                </p>
+            </div>
+        </ColorGradient>
+
+        <section class="pt-2 pb-8 md:pb-10">
+            <div class="mx-auto px-4 max-w-md">
+                <div
+                    class="bg-white dark:bg-neutral-800 shadow-lg p-5 border-2 border-primary/30 dark:border-primary/50 rounded-xl"
+                >
+                    <div class="flex flex-col gap-3">
+                        <a
+                            href={mailtoHref}
+                            class={cn(
+                                buttonVariants({
+                                    variant: "default",
+                                    size: "lg",
+                                }),
+                                "justify-center w-full gap-2",
+                            )}
+                        >
+                            <Mail className="w-4 h-4" />
+                            Share with doctor, physio or secretary
+                        </a>
+                        <button
+                            type="button"
+                            id="copy-email-message-btn"
+                            data-email-body-base64={emailBodyBase64}
+                            class={cn(
+                                buttonVariants({
+                                    variant: "outline",
+                                    size: "lg",
+                                }),
+                                "justify-center w-full gap-2",
+                            )}
+                        >
+                            Copy message instead
+                        </button>
+                        <p
+                            class="text-neutral-500 dark:text-neutral-500 text-xs text-center"
+                        >
+                            If your email didn't open with the message, paste
+                            the copied text into a new email.
+                        </p>
+                        <a
+                            href="/splint-customer/review"
+                            class={cn(
+                                buttonVariants({
+                                    variant: "ghost",
+                                    size: "lg",
+                                }),
+                                "justify-center w-full text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100",
+                            )}
+                        >
+                            No thanks, continue
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script is:inline>
+        (function () {
+            function initCopyButton() {
+                var btn = document.getElementById("copy-email-message-btn");
+                if (!btn) return;
+                var base64 = btn.getAttribute("data-email-body-base64");
+                if (!base64) return;
+                btn.addEventListener("click", function () {
+                    try {
+                        var binary = atob(base64);
+                        var bytes = new Uint8Array(binary.length);
+                        for (var i = 0; i < binary.length; i++)
+                            bytes[i] = binary.charCodeAt(i);
+                        var text = new TextDecoder().decode(bytes);
+                        navigator.clipboard.writeText(text).then(function () {
+                            btn.textContent = "Copied!";
+                            setTimeout(function () {
+                                btn.textContent = "Copy message instead";
+                            }, 2000);
+                        });
+                    } catch (e) {
+                        console.error("Copy failed", e);
+                    }
+                });
+            }
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", initCopyButton);
+            } else {
+                initCopyButton();
+            }
+        })();
+    </script>
+</Layout>

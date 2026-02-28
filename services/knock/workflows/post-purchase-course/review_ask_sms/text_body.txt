@@ -1,0 +1,1 @@
+How's the course? Leave a review & get £10/$15: {{ vars.review_url }} - Thetis

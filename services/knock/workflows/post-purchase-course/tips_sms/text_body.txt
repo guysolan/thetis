@@ -1,0 +1,1 @@
+Course tip: Start with Emergency care & Week 1. Log in: {{ vars.course_url }} - Thetis

@@ -134,7 +134,7 @@ export function VideoReviewForm() {
                     your cashback (£10 / $15).
                 </p>
                 <a
-                    href="/splint-customer"
+                    href="/splint-customer/share-doctor"
                     className="inline-flex items-center gap-2 font-medium text-primary hover:text-primary/80"
                 >
                     ← Back to Special Offers
