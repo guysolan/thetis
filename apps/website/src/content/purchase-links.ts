@@ -12,10 +12,10 @@ const purchaseLinks = {
         "SR": "https://www.thetismedical.com/splint/small/right?region=uk",
     },
     CA: {
-        "LL": "https://www.amazon.ca/dp/B09N5HBBKQ",
-        "LR": "https://www.amazon.ca/dp/B09N5MVY1Q",
-        "SL": "https://www.amazon.ca/dp/B09N5KH4F3",
-        "SR": "https://www.amazon.ca/dp/B09N58H79F",
+        "LL": "https://swiftbrace.com/products/thetis-achilles-night-splint",
+        "LR": "https://swiftbrace.com/products/thetis-achilles-night-splint",
+        "SL": "https://swiftbrace.com/products/thetis-achilles-night-splint",
+        "SR": "https://swiftbrace.com/products/thetis-achilles-night-splint",
     },
     DE: {
         "LL": "https://www.amazon.de/dp/B09N5HBBKQ",

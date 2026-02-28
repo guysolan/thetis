@@ -65,7 +65,6 @@ export const directShipCountries = ["GB", "UK", "US"];
 // Countries with Amazon links
 export const amazonCountries = [
     "US",
-    "CA",
     "DE",
     "IT",
     "FR",
@@ -76,7 +75,7 @@ export const amazonCountries = [
 ];
 
 // Countries with partner distributors
-export const partnerCountries = ["AU", "NZ", "PT"];
+export const partnerCountries = ["AU", "NZ", "PT", "CA"];
 
 // Get the purchase URL for a specific country and variant
 export function getPurchaseUrl(
@@ -102,10 +101,10 @@ export function getPurchaseUrl(
             SR: "https://www.amazon.com/dp/B09N58H79F",
         },
         CA: {
-            LL: "https://www.amazon.ca/dp/B09N5HBBKQ",
-            LR: "https://www.amazon.ca/dp/B09N5MVY1Q",
-            SL: "https://www.amazon.ca/dp/B09N5KH4F3",
-            SR: "https://www.amazon.ca/dp/B09N58H79F",
+            LL: "https://swiftbrace.com/products/thetis-achilles-night-splint",
+            LR: "https://swiftbrace.com/products/thetis-achilles-night-splint",
+            SL: "https://swiftbrace.com/products/thetis-achilles-night-splint",
+            SR: "https://swiftbrace.com/products/thetis-achilles-night-splint",
         },
         DE: {
             LL: "https://www.amazon.de/dp/B09N5HBBKQ",

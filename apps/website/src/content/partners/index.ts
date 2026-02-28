@@ -1,12 +1,11 @@
 import ClubWarehouse from "@/content/partners/images/club-warehouse.jpg";
 import BraceOrthopaedic from "@/content/partners/images/brace-orthopaedic.png";
-import PedorthicsInMotion from "@/content/partners/images/pedorthics-in-motion.png";
+import OrthoDirect from "@/content/partners/images/ortho-direct.png";
 import EpsomAndStHelier from "@/content/partners/images/epsom-and-st-helier.png";
 import RoyalSurrey from "@/content/partners/images/royal-surrey.png";
 import StJohnAndStElizabeth from "@/content/partners/images/st-john-and-st-elizabeth-hospital.svg";
 import LondonFootAndAnkleCentre from "@/content/partners/images/london-foot-and-ankle-centre.jpg";
 import BlackrockHealth from "@/content/partners/images/blackrock-health.png";
-import OrthoDirect from "@/content/partners/images/ortho-direct.png";
 
 export const partners = [
     {
@@ -17,9 +16,16 @@ export const partners = [
         category: "distributor",
     },
     {
-        name: "Pedorthics in Motion",
-        image: PedorthicsInMotion,
-        url: "https://www.pedorthicsinmotion.com",
+        name: "SwiftBrace",
+        image: OrthoDirect,
+        url: "https://swiftbrace.com/products/thetis-achilles-night-splint",
+        country: "CA",
+        category: "distributor",
+    },
+    {
+        name: "Ortho Active",
+        image: OrthoDirect,
+        url: "https://orthoactive.com",
         country: "CA",
         category: "distributor",
     },
