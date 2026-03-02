@@ -1,7 +1,7 @@
 {
   "installCommand": "cd ../.. && bun install",
   "buildCommand": "cd ../.. && turbo build --filter=@thetis/website",
-  "ignoreCommand": "git rev-list --count HEAD | grep -q '^1$' && exit 1 || git diff HEAD^ HEAD --quiet -- apps/website/ packages/ui/ turbo.json package.json bun.lockb",
+  "ignoreCommand": "(git rev-list --count HEAD | grep -q '^1$' || git diff HEAD^ HEAD --quiet -- apps/website/ packages/ui/ turbo.json package.json bun.lockb) && exit 1 || exit 0",
   "git": {
     "deploymentEnabled": {
       "main": true,
