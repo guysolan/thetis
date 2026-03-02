@@ -1,0 +1,17 @@
+# Google Ads & CRO Rules
+
+Rules for managing Google Ads, keyword match types, and Conversion Rate Optimization (CRO).
+
+## Negative Keyword Match Types
+
+When adding to `.csv` files in `services/google-ads/negative-keyword-lists/`, use the following logic:
+
+- **BROAD keyword**: (Example: `tennis`, `fitness`). Use for topics **completely unrelated** to medical splints. Blocking "tennis" entirely stops all "tennis elbow" or "tennis shoes" searches.
+- **PHRASE "keyword"**: (Example: `"how to"`, `"videos"`, `"causes"`). Use to block **informational intent** where users are just researching. Phrases like "how to heal" are informational, but "best splint" is transactional.
+- **EXACT [keyword]**: (Example: `[free]`, `[definition]`, `[pain]`). Use for high-volume terms that **might be relevant** in a different phrase. Blocking `[free]` stops people looking for free stuff but *not* "free shipping on achilles boot."
+
+## CRO Best Practices
+
+1. **Analysis**: Use the Google Ads MCP server in Cursor to query live account data before making major budget shifts.
+2. **Negative Cleanup**: Prefer adding to domain-specific CSVs (e.g., `achilles_tendinopathy.csv`) over a single catch-all list where possible.
+3. **Intent over Volume**: Focus negative keywords on blocking "informational" intent (how, what, definition) to prioritize "transactional" intent (buy, price, boot, splint).
