@@ -6,7 +6,9 @@
       "preview": false
     }
   },
-  "installCommand": "bun install",
+  "installCommand": "bun install --ignore-scripts",
+  "buildCommand": "turbo build --filter=@thetis/website",
+  "outputDirectory": "apps/website/dist",
   "build": {
     "env": {
       "ENABLE_TURBO_INSTALL": "0"

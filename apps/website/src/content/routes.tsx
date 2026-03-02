@@ -613,11 +613,11 @@ export const productRoutes: BaseRoute[] = [
       it: "Recensioni",
     },
     description: {
-      en: "Read what our customers have to say about our products.",
-      de: "Lesen Sie, was unsere Kunden über unsere Produkte sagen.",
-      fr: "Lisez ce que nos clients disent de nos produits.",
-      es: "Lea lo que nuestros clientes dicen sobre nuestros productos.",
-      it: "Leggi cosa dicono i nostri clienti sui nostri prodotti.",
+      en: "Read why people love our products.",
+      de: "Lesen Sie, warum Menschen unsere Produkte lieben.",
+      fr: "Découvrez pourquoi nos produits plaisent tant.",
+      es: "Descubra por qué la gente adora nuestros productos.",
+      it: "Scopri perché le persone amano i nostri prodotti.",
     },
     slugTranslations: {
       en: "reviews",
@@ -723,9 +723,9 @@ export const productRoutes: BaseRoute[] = [
     },
     description: {
       en: "Complete recovery solution for Achilles rupture recovery.",
-      de: "Komplette Erholungslösung für die Genesung nach Achillessehnenruptur.",
-      fr:
-        "Solution de récupération complète pour la rupture d'Achille.",
+      de:
+        "Komplette Erholungslösung für die Genesung nach Achillessehnenruptur.",
+      fr: "Solution de récupération complète pour la rupture d'Achille.",
       es: "Solución de recuperación completa para rotura de Aquiles.",
       it: "Soluzione di recupero completa per la rottura dell'Achille.",
     },
@@ -857,16 +857,13 @@ export const partnerRoutes: BaseRoute[] = [
       it: "Programma di Affiliazione",
     },
     description: {
-      en:
-        "Join our affiliate program and earn 10% commission while helping your patients save.",
+      en: "Give your patients a discount and earn for referrals.",
       de:
-        "Werden Sie unser Affiliate-Partner und verdienen Sie 10% Provision, während Sie Ihren Patienten helfen, zu sparen.",
+        "Geben Sie Ihren Patienten einen Rabatt und verdienen Sie für Weiterempfehlungen.",
       fr:
-        "Rejoignez notre programme d'affiliation et gagnez 10% de commission tout en aidant vos patients à économiser.",
-      es:
-        "Únase a nuestro programa de afiliados y gane un 10% de comisión mientras ayuda a sus pacientes a ahorrar.",
-      it:
-        "Unisciti al nostro programma di affiliazione e guadagna il 10% di commissione mentre aiuti i tuoi pazienti a risparmiare.",
+        "Offrez une réduction à vos patients et gagnez pour vos recommandations.",
+      es: "Ofrezca descuento a sus pacientes y gane por referidos.",
+      it: "Offri uno sconto ai tuoi pazienti e guadagna con i referral.",
     },
     icon: <Handshake />,
     variant: "outline",

@@ -27,7 +27,7 @@
     "lint": "turbo lint && bun lint:repo",
     "lint:repo": "bunx sherif@latest",
     "typecheck": "turbo typecheck",
-    "deploy:website": "vercel deploy ./apps/website --prod --build-env TURBO_FORCE=true"
+    "deploy:website": "vercel deploy . --prod --build-env TURBO_FORCE=true --yes"
   },
   "workspaces": ["packages/*", "apps/*", "services/*"],
   "dependencies": {

@@ -72,7 +72,7 @@ const LinkCard = ({
         <div className="flex-1 min-w-0">
           <h3
             className={cn(
-              "mb-1.5 font-semibold text-sm leading-tight",
+              "mb-1.5 font-semibold text-md text-neutral-900 dark:text-neutral-100 leading-tight",
               variant === "default" && "text-primary",
               variant === "outline" &&
                 "text-neutral-900 dark:text-neutral-100",
@@ -82,7 +82,7 @@ const LinkCard = ({
           </h3>
           <p
             className={cn(
-              "text-xs line-clamp-2 leading-relaxed",
+              "text-sm line-clamp-2 leading-tight",
               variant === "default" && "text-primary/70",
               variant === "outline" &&
                 "text-neutral-600 dark:text-neutral-400",
@@ -148,8 +148,10 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
               <NavigationMenuTrigger>
                 {splintRoute.title}
               </NavigationMenuTrigger>
-              <NavigationMenuContent className={cn("p-5 min-w-[420px] w-[420px]")}>
-                <div className="grid grid-cols-1 gap-4">
+              <NavigationMenuContent
+                className={cn("p-5 w-[420px] min-w-[420px]", contentWidth)}
+              >
+                <div className="gap-4 grid grid-cols-1">
                   {/* Main: hero image + See product */}
                   <NavigationMenuLink asChild>
                     <a
@@ -159,7 +161,7 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
                         "hover:shadow-md border bg-primary/5 hover:bg-primary/10 border-primary/20 hover:border-primary/30",
                       )}
                     >
-                      <div className="w-28 h-28 shrink-0 overflow-hidden rounded-lg bg-neutral-200 dark:bg-neutral-700">
+                      <div className="bg-neutral-200 dark:bg-neutral-700 rounded-lg w-28 h-28 overflow-hidden shrink-0">
                         <img
                           src="/images/night_splint_bed_top_square.jpg"
                           alt=""
@@ -167,37 +169,38 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
                         />
                       </div>
                       <div className="flex flex-col justify-center min-w-0">
-                        <h3 className="font-semibold text-primary text-sm leading-tight mb-1">
-                          {(t as Record<string, string>).splintSeeProduct ?? "See product"}
+                        <h3 className="mb-1 font-semibold text-md text-primary leading-tight">
+                          {(t as Record<string, string>).splintSeeProduct ??
+                            "See product"}
                         </h3>
-                        <p className="text-xs text-primary/70 line-clamp-2 leading-relaxed">
+                        <p className="text-primary/70 text-sm line-clamp-2 leading-relaxed">
                           {splintRoute.description}
                         </p>
                       </div>
                     </a>
                   </NavigationMenuLink>
                   {/* How to buy + Reviews: same style as Professionals */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="gap-3 grid grid-cols-1 sm:grid-cols-2">
                     <LinkCard
-                      title={(t as Record<string, string>).splintHowToBuy ?? "How to buy"}
-                      description={
-                        lang === "en"
-                          ? "Find where to buy in your country."
-                          : lang === "de"
-                            ? "Finden Sie, wo Sie in Ihrem Land kaufen können."
-                            : lang === "fr"
-                              ? "Trouvez où acheter dans votre pays."
-                              : lang === "es"
-                                ? "Encuentra dónde comprar en tu país."
-                                : "Trova dove acquistare nel tuo paese."
-                      }
+                      title={(t as Record<string, string>).splintHowToBuy ??
+                        "How to buy"}
+                      description={lang === "en"
+                        ? "Find where to buy in your country."
+                        : lang === "de"
+                        ? "Finden Sie, wo Sie in Ihrem Land kaufen können."
+                        : lang === "fr"
+                        ? "Trouvez où acheter dans votre pays."
+                        : lang === "es"
+                        ? "Encuentra dónde comprar en tu país."
+                        : "Trova dove acquistare nel tuo paese."}
                       href={howToBuyHref}
                       icon={<MapPin className="w-5 h-5" />}
                       variant="outline"
                     />
                     {reviewsRoute && (
                       <LinkCard
-                        title={(t as Record<string, string>).splintReviews ?? "Reviews"}
+                        title={(t as Record<string, string>).splintReviews ??
+                          "Reviews"}
                         description={reviewsRoute.description}
                         href={reviewsRoute.href}
                         icon={<Star className="w-5 h-5" />}
