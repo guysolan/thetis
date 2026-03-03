@@ -11,7 +11,11 @@ import {
     Upload,
     Video,
 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+
+// Formspree form for splint-customer review (same pattern as LeaveReviewForm – no server code)
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnjpalkk";
+
+const MAX_FILE_MB = 10; // Formspree-friendly limit
 
 export function VideoReviewForm() {
     const [name, setName] = useState("");
@@ -22,24 +26,20 @@ export function VideoReviewForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [error, setError] = useState("");
-    const [uploadProgress, setUploadProgress] = useState(0);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFiles = Array.from(e.target.files || []);
         if (selectedFiles.length === 0) return;
 
-        // Validate files
         for (const file of selectedFiles) {
-            // Check file type (videos and images)
             const isVideo = file.type.startsWith("video/");
             const isImage = file.type.startsWith("image/");
             if (!isVideo && !isImage) {
                 setError("Please upload video or image files only");
                 return;
             }
-            // Validate file size (max 100MB)
-            if (file.size > 100 * 1024 * 1024) {
-                setError("Each file must be less than 100MB");
+            if (file.size > MAX_FILE_MB * 1024 * 1024) {
+                setError(`Each file must be less than ${MAX_FILE_MB}MB`);
                 return;
             }
         }
@@ -58,59 +58,29 @@ export function VideoReviewForm() {
         }
 
         setIsSubmitting(true);
-        setUploadProgress(0);
 
         try {
-            const uploadedPaths: string[] = [];
-            const timestamp = Date.now();
-            const sanitizedEmail = email.replace(/[^a-zA-Z0-9]/g, "_");
+            const formData = new FormData();
+            formData.set("_subject", "Splint customer review (cashback)");
+            formData.set("name", name);
+            formData.set("email", email);
+            formData.set("rating", String(starRating));
+            formData.set(
+                "review",
+                `[Rating: ${starRating}/5]${reviewText ? `\n\n${reviewText}` : ""}`.trim(),
+            );
+            files.forEach((file, i) => formData.set(`file_${i + 1}`, file));
 
-            // Upload files if any
-            if (files.length > 0) {
-                for (let i = 0; i < files.length; i++) {
-                    const file = files[i];
-                    const fileExt = file.name.split(".").pop();
-                    const fileName =
-                        `${sanitizedEmail}_${timestamp}_${i}.${fileExt}`;
-                    const filePath = `submissions/${fileName}`;
+            const res = await fetch(FORMSPREE_ENDPOINT, {
+                method: "POST",
+                body: formData,
+                headers: { Accept: "application/json" },
+            });
 
-                    const { error: uploadError } = await supabase.storage
-                        .from("video-reviews")
-                        .upload(filePath, file, {
-                            cacheControl: "3600",
-                            upsert: false,
-                        });
-
-                    if (uploadError) {
-                        throw new Error(
-                            `Failed to upload file: ${uploadError.message}`,
-                        );
-                    }
-
-                    uploadedPaths.push(filePath);
-                    setUploadProgress(((i + 1) / files.length) * 80);
-                }
+            if (!res.ok) {
+                throw new Error("Failed to submit review. Please try again.");
             }
 
-            // Save submission (video_path optional; required for cashback). Store star rating in review_text so no DB migration needed.
-            const reviewTextWithRating =
-                `[Rating: ${starRating}/5]${reviewText ? `\n\n${reviewText}` : ""}`.trim() || null;
-
-            const { error: dbError } = await supabase
-                .from("video_review_submissions")
-                .insert({
-                    name,
-                    email,
-                    review_text: reviewTextWithRating,
-                    video_path: uploadedPaths.length > 0 ? uploadedPaths.join(",") : null,
-                });
-
-            if (dbError) {
-                console.error("Database error:", dbError);
-                throw new Error("Failed to save your review. Please try again.");
-            }
-
-            setUploadProgress(100);
             setIsSubmitted(true);
         } catch (err) {
             setError(
@@ -121,7 +91,6 @@ export function VideoReviewForm() {
             console.error("Error submitting review:", err);
         } finally {
             setIsSubmitting(false);
-            setUploadProgress(0);
         }
     };
 
@@ -138,12 +107,19 @@ export function VideoReviewForm() {
                 <p className="mb-6 text-neutral-600 dark:text-neutral-400 text-sm">
                     If you included a video or photos, we'll review within 3-5 business days and, once approved, you'll receive an email to claim your cashback (£10 / $15). If you didn't add a video or photos, add one later via the same form to be eligible for cashback.
                 </p>
-                <a
-                    href="/splint-customer/share-doctor"
-                    className="inline-flex items-center gap-2 font-medium text-primary hover:text-primary/80"
-                >
-                    ← Back to Special Offers
-                </a>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                    <Button asChild size="lg" className="gap-2 w-full sm:w-auto">
+                        <a href="/splint-customer/claim-cashback">
+                            Claim Your Cashback →
+                        </a>
+                    </Button>
+                    <a
+                        href="/splint-customer/share-doctor"
+                        className="inline-flex items-center gap-2 font-medium text-primary hover:text-primary/80 text-sm"
+                    >
+                        ← Back to Special Offers
+                    </a>
+                </div>
             </div>
         );
     }
@@ -288,26 +264,13 @@ export function VideoReviewForm() {
                                         Click to upload video or photos
                                     </p>
                                     <p className="text-neutral-500 dark:text-neutral-400 text-sm">
-                                        Max 100MB per file • MP4, MOV, JPG, PNG,
+                                        Max {MAX_FILE_MB}MB per file • MP4, MOV, JPG, PNG,
                                         etc.
                                     </p>
                                 </div>
                             )}
                     </div>
                 </div>
-                {uploadProgress > 0 && uploadProgress < 100 && (
-                    <div className="mt-2">
-                        <div className="bg-neutral-200 dark:bg-neutral-700 rounded-full h-2 overflow-hidden">
-                            <div
-                                className="bg-primary h-full transition-all duration-300"
-                                style={{ width: `${uploadProgress}%` }}
-                            />
-                        </div>
-                        <p className="mt-1 text-neutral-500 dark:text-neutral-400 text-sm text-center">
-                            Uploading... {Math.round(uploadProgress)}%
-                        </p>
-                    </div>
-                )}
             </div>
 
             {error && (
@@ -329,7 +292,7 @@ export function VideoReviewForm() {
                     ? (
                         <>
                             <Loader2 className="w-4 h-4 animate-spin" />
-                            Uploading...
+                            Submitting...
                         </>
                     )
                     : (
