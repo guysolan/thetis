@@ -1,5 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
-import TendonHealingTimeline from "@/assets/tendon-healing-timeline.png";
+import TendonHealingTimeline from "@/assets/tendon-healing-timeline-equinus.png";
 import TendonStiffnessAfterRupture from "@/assets/tendon-stiffness-after-rupture.png";
 import ReRuptureRiskTimeline from "@/assets/rerupture-vs-elongation-comprehensive-v8.png";
 
