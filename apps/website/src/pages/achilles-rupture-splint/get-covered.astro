@@ -1,16 +1,14 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import Breadcrumb from "@/components/Breadcrumb.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
 import { buttonVariants } from "../../components/ui/button";
 import {
     CreditCard,
     FileText,
-    Stethoscope,
     ChevronDown,
     ArrowRight,
     ShieldCheck,
     Receipt,
-    CheckCircle2,
 } from "lucide-react";
 ---
 
@@ -20,20 +18,9 @@ import {
     description="Step-by-step guide to using HSA/FSA funds or filing for insurance reimbursement for the Thetis Achilles Rupture Night Splint."
     image="https://thetismedical.com/images/night_splint_bed_top_square.jpg"
 >
-    <main class="bg-white min-h-screen">
-        <div class="mx-auto px-4 py-8 md:py-12 max-w-3xl">
-            <Breadcrumb
-                items={[
-                    {
-                        label: "Achilles Rupture Splint",
-                        href: "/achilles-rupture-splint",
-                    },
-                    { label: "Get it covered (US)" },
-                ]}
-            />
-
-            <!-- Hero -->
-            <div class="mt-4 mb-10 text-center">
+    <main class="min-h-screen">
+        <ColorGradient>
+            <div class="mx-auto px-4 py-10 md:py-14 max-w-3xl text-center">
                 <div
                     class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full"
                 >
@@ -54,6 +41,9 @@ import {
                     each option step by step.
                 </p>
             </div>
+        </ColorGradient>
+
+        <div class="mx-auto px-4 py-8 md:py-12 max-w-3xl">
 
             <!-- 3 Paths -->
             <div class="space-y-6 mb-12">
