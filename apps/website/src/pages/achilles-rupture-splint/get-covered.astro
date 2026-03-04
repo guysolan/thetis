@@ -1,0 +1,512 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { buttonVariants } from "../../components/ui/button";
+import {
+    CreditCard,
+    FileText,
+    Stethoscope,
+    ChevronDown,
+    ArrowRight,
+    ShieldCheck,
+    Receipt,
+    CheckCircle2,
+} from "lucide-react";
+---
+
+<Layout
+    lang="en"
+    title="Get Your Night Splint Covered (US) | HSA, FSA & Insurance"
+    description="Step-by-step guide to using HSA/FSA funds or filing for insurance reimbursement for the Thetis Achilles Rupture Night Splint."
+    image="https://thetismedical.com/images/night_splint_bed_top_square.jpg"
+>
+    <main class="bg-white min-h-screen">
+        <div class="mx-auto px-4 py-8 md:py-12 max-w-3xl">
+            <Breadcrumb
+                items={[
+                    {
+                        label: "Achilles Rupture Splint",
+                        href: "/achilles-rupture-splint",
+                    },
+                    { label: "Get it covered (US)" },
+                ]}
+            />
+
+            <!-- Hero -->
+            <div class="mt-4 mb-10 text-center">
+                <div
+                    class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full"
+                >
+                    <ShieldCheck className="w-5 h-5 text-primary" />
+                    <span class="font-semibold text-primary text-sm"
+                        >US Patients</span
+                    >
+                </div>
+                <h1
+                    class="mb-3 font-bold text-neutral-900 text-2xl md:text-3xl"
+                >
+                    Get Your Night Splint Covered
+                </h1>
+                <p
+                    class="mx-auto max-w-xl text-neutral-600 text-base md:text-lg"
+                >
+                    Choose how you'd like to pay below. We'll walk you through
+                    each option step by step.
+                </p>
+            </div>
+
+            <!-- 3 Paths -->
+            <div class="space-y-6 mb-12">
+                <!-- PATH A: HSA/FSA Direct Pay -->
+                <details
+                    class="group bg-white shadow-sm border border-neutral-200 rounded-xl overflow-hidden"
+                    open
+                >
+                    <summary
+                        class="[&::-webkit-details-marker]:hidden flex items-center gap-4 p-5 md:p-6 cursor-pointer select-none list-none"
+                    >
+                        <div
+                            class="flex justify-center items-center bg-primary/10 rounded-lg w-11 h-11 shrink-0"
+                        >
+                            <CreditCard className="w-5 h-5 text-primary" />
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2
+                                class="font-bold text-neutral-900 text-base md:text-lg"
+                            >
+                                Option A: Pay with HSA or FSA card
+                            </h2>
+                            <p class="text-neutral-500 text-sm">
+                                Fastest — save 20–40% with pre-tax dollars
+                            </p>
+                        </div>
+                        <ChevronDown
+                            className="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform shrink-0"
+                        />
+                    </summary>
+                    <div class="px-5 md:px-6 pt-2 pb-6">
+                        <ol
+                            class="relative space-y-6 ml-5 border-primary/20 border-l-2"
+                        >
+                            <li class="relative pl-6">
+                                <span
+                                    class="top-0.5 -left-[13px] absolute flex justify-center items-center bg-primary rounded-full w-6 h-6 font-bold text-white text-xs"
+                                    >1</span
+                                >
+                                <h3 class="font-semibold text-neutral-900">
+                                    Check your card
+                                </h3>
+                                <p class="mt-1 text-neutral-600 text-sm">
+                                    Look for an HSA or FSA debit card from your
+                                    benefits provider (e.g. Optum, HealthEquity,
+                                    WageWorks). It works like a normal Visa or
+                                    Mastercard.
+                                </p>
+                            </li>
+                            <li class="relative pl-6">
+                                <span
+                                    class="top-0.5 -left-[13px] absolute flex justify-center items-center bg-primary rounded-full w-6 h-6 font-bold text-white text-xs"
+                                    >2</span
+                                >
+                                <h3 class="font-semibold text-neutral-900">
+                                    Order the splint
+                                </h3>
+                                <p class="mt-1 text-neutral-600 text-sm">
+                                    Use your HSA/FSA card at checkout. The
+                                    charge is deducted from your pre-tax
+                                    balance.
+                                </p>
+                            </li>
+                            <li class="relative pl-6">
+                                <span
+                                    class="top-0.5 -left-[13px] absolute flex justify-center items-center bg-primary rounded-full w-6 h-6 font-bold text-white text-xs"
+                                    >3</span
+                                >
+                                <h3 class="font-semibold text-neutral-900">
+                                    Keep your receipt
+                                </h3>
+                                <p class="mt-1 text-neutral-600 text-sm">
+                                    We email you an itemized receipt. Save it in
+                                    case your plan administrator asks for proof
+                                    of eligibility.
+                                </p>
+                            </li>
+                        </ol>
+                        <div
+                            class="bg-amber-50 mt-5 p-4 border border-amber-200 rounded-lg text-amber-800 text-sm"
+                        >
+                            <strong>Card declined?</strong> Some plans restrict which
+                            merchants can accept HSA/FSA cards. Pay with a regular
+                            card instead and follow <strong>Option B</strong> below
+                            to reimburse yourself.
+                        </div>
+                    </div>
+                </details>
+
+                <!-- PATH B: HSA/FSA Reimbursement -->
+                <details
+                    class="group bg-white shadow-sm border border-neutral-200 rounded-xl overflow-hidden"
+                >
+                    <summary
+                        class="[&::-webkit-details-marker]:hidden flex items-center gap-4 p-5 md:p-6 cursor-pointer select-none list-none"
+                    >
+                        <div
+                            class="flex justify-center items-center bg-primary/10 rounded-lg w-11 h-11 shrink-0"
+                        >
+                            <Receipt className="w-5 h-5 text-primary" />
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2
+                                class="font-bold text-neutral-900 text-base md:text-lg"
+                            >
+                                Option B: Reimburse yourself from HSA/FSA
+                            </h2>
+                            <p class="text-neutral-500 text-sm">
+                                Pay now, get money back from your pre-tax
+                                account
+                            </p>
+                        </div>
+                        <ChevronDown
+                            className="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform shrink-0"
+                        />
+                    </summary>
+                    <div class="px-5 md:px-6 pt-2 pb-6">
+                        <ol
+                            class="relative space-y-6 ml-5 border-primary/20 border-l-2"
+                        >
+                            <li class="relative pl-6">
+                                <span
+                                    class="top-0.5 -left-[13px] absolute flex justify-center items-center bg-primary rounded-full w-6 h-6 font-bold text-white text-xs"
+                                    >1</span
+                                >
+                                <h3 class="font-semibold text-neutral-900">
+                                    Order with any card
+                                </h3>
+                                <p class="mt-1 text-neutral-600 text-sm">
+                                    Use a personal credit or debit card at
+                                    checkout.
+                                </p>
+                            </li>
+                            <li class="relative pl-6">
+                                <span
+                                    class="top-0.5 -left-[13px] absolute flex justify-center items-center bg-primary rounded-full w-6 h-6 font-bold text-white text-xs"
+                                    >2</span
+                                >
+                                <h3 class="font-semibold text-neutral-900">
+                                    Get your itemized receipt
+                                </h3>
+                                <p class="mt-1 text-neutral-600 text-sm">
+                                    We email an itemized receipt with the
+                                    product name, date, and amount.
+                                </p>
+                            </li>
+                            <li class="relative pl-6">
+                                <span
+                                    class="top-0.5 -left-[13px] absolute flex justify-center items-center bg-primary rounded-full w-6 h-6 font-bold text-white text-xs"
+                                    >3</span
+                                >
+                                <h3 class="font-semibold text-neutral-900">
+                                    Submit a claim
+                                </h3>
+                                <p class="mt-1 text-neutral-600 text-sm">
+                                    Log in to your HSA/FSA portal or app and
+                                    file a reimbursement claim. Upload the
+                                    receipt. If they ask for a <strong
+                                        >Letter of Medical Necessity</strong
+                                    >, use the note from your surgeon (see
+                                    below).
+                                </p>
+                            </li>
+                            <li class="relative pl-6">
+                                <span
+                                    class="top-0.5 -left-[13px] absolute flex justify-center items-center bg-primary rounded-full w-6 h-6 font-bold text-white text-xs"
+                                    >4</span
+                                >
+                                <h3 class="font-semibold text-neutral-900">
+                                    Get paid back
+                                </h3>
+                                <p class="mt-1 text-neutral-600 text-sm">
+                                    Your provider reviews the claim and issues a
+                                    direct deposit or check, typically within a
+                                    few business days.
+                                </p>
+                            </li>
+                        </ol>
+                    </div>
+                </details>
+
+                <!-- PATH C: Insurance (out-of-network) -->
+                <details
+                    class="group bg-white shadow-sm border border-neutral-200 rounded-xl overflow-hidden"
+                >
+                    <summary
+                        class="[&::-webkit-details-marker]:hidden flex items-center gap-4 p-5 md:p-6 cursor-pointer select-none list-none"
+                    >
+                        <div
+                            class="flex justify-center items-center bg-primary/10 rounded-lg w-11 h-11 shrink-0"
+                        >
+                            <FileText className="w-5 h-5 text-primary" />
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2
+                                class="font-bold text-neutral-900 text-base md:text-lg"
+                            >
+                                Option C: File an out-of-network insurance claim
+                            </h2>
+                            <p class="text-neutral-500 text-sm">
+                                Submit billing codes to your health insurer for
+                                reimbursement
+                            </p>
+                        </div>
+                        <ChevronDown
+                            className="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform shrink-0"
+                        />
+                    </summary>
+                    <div class="px-5 md:px-6 pt-2 pb-6">
+                        <ol
+                            class="relative space-y-6 ml-5 border-primary/20 border-l-2"
+                        >
+                            <li class="relative pl-6">
+                                <span
+                                    class="top-0.5 -left-[13px] absolute flex justify-center items-center bg-primary rounded-full w-6 h-6 font-bold text-white text-xs"
+                                    >1</span
+                                >
+                                <h3 class="font-semibold text-neutral-900">
+                                    Order with any card
+                                </h3>
+                                <p class="mt-1 text-neutral-600 text-sm">
+                                    Pay at checkout. We are not an in-network
+                                    provider, so you pay upfront.
+                                </p>
+                            </li>
+                            <li class="relative pl-6">
+                                <span
+                                    class="top-0.5 -left-[13px] absolute flex justify-center items-center bg-primary rounded-full w-6 h-6 font-bold text-white text-xs"
+                                    >2</span
+                                >
+                                <h3 class="font-semibold text-neutral-900">
+                                    Get your itemized receipt
+                                </h3>
+                                <p class="mt-1 text-neutral-600 text-sm">
+                                    We send you an itemized receipt that works
+                                    as a "superbill" with:
+                                </p>
+                                <div
+                                    class="space-y-3 bg-neutral-50 mt-3 p-4 border border-neutral-200 rounded-lg text-sm"
+                                >
+                                    <div>
+                                        <span
+                                            class="font-semibold text-neutral-900"
+                                            >HCPCS code:</span
+                                        >
+                                        <span
+                                            class="ml-1 font-mono font-bold text-primary"
+                                            >L4397</span
+                                        >
+                                        <span class="text-neutral-600">
+                                            — Off-the-shelf ankle-foot orthosis</span
+                                        >
+                                        <p
+                                            class="mt-0.5 text-neutral-500 text-xs"
+                                        >
+                                            Add <strong>-RT</strong> (right) or <strong
+                                                >-LT</strong
+                                            > (left) if your insurer asks for a laterality
+                                            modifier.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <span
+                                            class="font-semibold text-neutral-900"
+                                            >ICD-10 diagnosis:</span
+                                        >
+                                        <p class="mt-1 text-neutral-600">
+                                            <strong>Spontaneous rupture:</strong
+                                            >
+                                            <span class="ml-1 font-mono"
+                                                >M66.361</span
+                                            > (right) /
+                                            <span class="font-mono"
+                                                >M66.362</span
+                                            > (left)
+                                        </p>
+                                        <p class="text-neutral-600">
+                                            <strong>Traumatic rupture:</strong>
+                                            <span class="ml-1 font-mono"
+                                                >S86.011A</span
+                                            > (right) /
+                                            <span class="font-mono"
+                                                >S86.012A</span
+                                            > (left)
+                                        </p>
+                                        <p
+                                            class="mt-1 text-neutral-500 text-xs"
+                                        >
+                                            Use whichever matches your doctor's
+                                            documentation. If unsure, ask your
+                                            doctor.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="relative pl-6">
+                                <span
+                                    class="top-0.5 -left-[13px] absolute flex justify-center items-center bg-primary rounded-full w-6 h-6 font-bold text-white text-xs"
+                                    >3</span
+                                >
+                                <h3 class="font-semibold text-neutral-900">
+                                    Get a Letter of Medical Necessity
+                                </h3>
+                                <p class="mt-1 text-neutral-600 text-sm">
+                                    Ask your surgeon or doctor for a note (or
+                                    use your existing referral) stating the
+                                    night splint is prescribed for your Achilles
+                                    rupture recovery. Insurers often require
+                                    this.
+                                </p>
+                            </li>
+                            <li class="relative pl-6">
+                                <span
+                                    class="top-0.5 -left-[13px] absolute flex justify-center items-center bg-primary rounded-full w-6 h-6 font-bold text-white text-xs"
+                                    >4</span
+                                >
+                                <h3 class="font-semibold text-neutral-900">
+                                    Submit to your insurer
+                                </h3>
+                                <p class="mt-1 text-neutral-600 text-sm">
+                                    File an out-of-network claim with your
+                                    health insurance. Attach the receipt,
+                                    billing codes, and Letter of Medical
+                                    Necessity. Most plans let you file online or
+                                    via their app.
+                                </p>
+                            </li>
+                            <li class="relative pl-6">
+                                <span
+                                    class="top-0.5 -left-[13px] absolute flex justify-center items-center bg-primary rounded-full w-6 h-6 font-bold text-white text-xs"
+                                    >5</span
+                                >
+                                <h3 class="font-semibold text-neutral-900">
+                                    Get reimbursed
+                                </h3>
+                                <p class="mt-1 text-neutral-600 text-sm">
+                                    Your insurer reviews and reimburses you
+                                    (amount depends on your plan's
+                                    out-of-network benefits and deductible).
+                                </p>
+                            </li>
+                        </ol>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Quick FAQ -->
+            <div class="space-y-4 mb-10">
+                <h2 class="font-bold text-neutral-900 text-lg">
+                    Common questions
+                </h2>
+                <details
+                    class="group border border-neutral-200 rounded-lg overflow-hidden"
+                >
+                    <summary
+                        class="[&::-webkit-details-marker]:hidden flex justify-between items-center p-4 font-medium text-neutral-900 text-sm cursor-pointer select-none list-none"
+                    >
+                        What is a Letter of Medical Necessity?
+                        <ChevronDown
+                            className="w-4 h-4 text-neutral-400 group-open:rotate-180 transition-transform shrink-0"
+                        />
+                    </summary>
+                    <p class="px-4 pb-4 text-neutral-600 text-sm">
+                        A short note from your doctor stating the night splint
+                        is medically necessary for your Achilles rupture
+                        recovery. Your surgeon's prescription or referral letter
+                        usually counts. Submit it with your claim if your
+                        insurer or HSA/FSA plan asks for one.
+                    </p>
+                </details>
+                <details
+                    class="group border border-neutral-200 rounded-lg overflow-hidden"
+                >
+                    <summary
+                        class="[&::-webkit-details-marker]:hidden flex justify-between items-center p-4 font-medium text-neutral-900 text-sm cursor-pointer select-none list-none"
+                    >
+                        What if my HSA/FSA card is declined at checkout?
+                        <ChevronDown
+                            className="w-4 h-4 text-neutral-400 group-open:rotate-180 transition-transform shrink-0"
+                        />
+                    </summary>
+                    <p class="px-4 pb-4 text-neutral-600 text-sm">
+                        Some plans restrict which merchants can charge HSA/FSA
+                        cards. Just pay with a regular card and follow <strong
+                            >Option B</strong
+                        > to reimburse yourself from your HSA/FSA after purchase.
+                    </p>
+                </details>
+                <details
+                    class="group border border-neutral-200 rounded-lg overflow-hidden"
+                >
+                    <summary
+                        class="[&::-webkit-details-marker]:hidden flex justify-between items-center p-4 font-medium text-neutral-900 text-sm cursor-pointer select-none list-none"
+                    >
+                        Will my insurance definitely cover it?
+                        <ChevronDown
+                            className="w-4 h-4 text-neutral-400 group-open:rotate-180 transition-transform shrink-0"
+                        />
+                    </summary>
+                    <p class="px-4 pb-4 text-neutral-600 text-sm">
+                        We can't guarantee approval—it depends on your plan. But
+                        orthopedic splints for a diagnosed condition are
+                        commonly covered, especially with proper documentation.
+                        Contact your insurer to check your out-of-network
+                        benefits before ordering if you want to be sure.
+                    </p>
+                </details>
+                <details
+                    class="group border border-neutral-200 rounded-lg overflow-hidden"
+                >
+                    <summary
+                        class="[&::-webkit-details-marker]:hidden flex justify-between items-center p-4 font-medium text-neutral-900 text-sm cursor-pointer select-none list-none"
+                    >
+                        I have a "Limited Purpose" FSA (LPFSA). Am I covered?
+                        <ChevronDown
+                            className="w-4 h-4 text-neutral-400 group-open:rotate-180 transition-transform shrink-0"
+                        />
+                    </summary>
+                    <p class="px-4 pb-4 text-neutral-600 text-sm">
+                        Limited Purpose FSAs typically only cover dental and
+                        vision expenses. A standard Health FSA or HSA is what
+                        covers orthopedic devices like this splint. Check with
+                        your plan administrator.
+                    </p>
+                </details>
+            </div>
+
+            <!-- Disclaimer -->
+            <p
+                class="mb-8 pt-6 border-neutral-200 border-t text-neutral-400 text-xs"
+            >
+                Reimbursement and eligibility depend on your individual plan.
+                Thetis Medical does not guarantee insurance approval. Always
+                verify coverage with your insurer or HSA/FSA administrator
+                before purchasing.
+            </p>
+
+            <!-- CTAs -->
+            <div class="flex flex-wrap items-center gap-4">
+                <a
+                    href="/achilles-rupture-splint"
+                    class={buttonVariants({ size: "lg" })}
+                >
+                    Order your splint
+                    <ArrowRight className="ml-1 w-4 h-4" />
+                </a>
+                <a
+                    href="/achilles-rupture-splint"
+                    class="inline-flex items-center gap-1 font-medium text-primary hover:text-primary/80 text-sm"
+                >
+                    ← Back to splint page
+                </a>
+            </div>
+        </div>
+    </main>
+</Layout>

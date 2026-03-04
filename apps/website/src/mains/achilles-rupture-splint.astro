@@ -13,6 +13,7 @@ import Reviews from "@/components/reviews/InfiniteReviews.astro";
 import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
 import OrderYourSplint from "@/sections/achilles-rupture-splint/OrderYourSplint.astro";
 import SplintDownloads from "@/sections/achilles-rupture-splint/SplintDownloads.astro";
+import SplintGetCoveredUS from "@/sections/achilles-rupture-splint/SplintGetCoveredUS.astro";
 import StickyAddToCart from "@/components/StickyAddToCart.tsx";
 import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
 import Breadcrumb from "@/components/Breadcrumb.astro";
@@ -783,6 +784,9 @@ const currentContent = content[lang as keyof typeof content] || content.en;
                 </div>
             </div>
         </section>
+
+        <!-- US only: HSA/FSA & reimbursement selling point -->
+        {lang === "en" && <SplintGetCoveredUS />}
 
         <!-- Comparison Table: Night Splint vs Boot -->
         <section
