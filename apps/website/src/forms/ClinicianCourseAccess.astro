@@ -1,0 +1,162 @@
+---
+import Label from "@/components/form/Label.astro";
+import Input from "@/components/form/Input.astro";
+import type { Lang } from "@/config/languages.ts";
+
+const { lang = "en" } = Astro.props as { lang: Lang };
+
+const content = {
+    en: {
+        title: "Clinician Course Access",
+        description: "Enter your details to receive access to the full course content for review.",
+        nameLabel: "Name",
+        emailLabel: "Professional Email",
+        submitButton: "Request Access",
+        sending: "Sending...",
+        successTitle: "Request Received",
+        successMessage: "Thank you — we'll send you course access shortly.",
+        errorMessage: "Something went wrong. Please try again or contact us directly.",
+    },
+    de: {
+        title: "Kliniker-Kurszugang",
+        description: "Geben Sie Ihre Daten ein, um Zugang zum vollständigen Kursinhalt zur Überprüfung zu erhalten.",
+        nameLabel: "Name",
+        emailLabel: "Berufliche E-Mail",
+        submitButton: "Zugang anfordern",
+        sending: "Wird gesendet...",
+        successTitle: "Anfrage erhalten",
+        successMessage: "Vielen Dank — wir senden Ihnen den Kurszugang in Kürze.",
+        errorMessage: "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.",
+    },
+    fr: {
+        title: "Accès au Cours pour Cliniciens",
+        description: "Entrez vos coordonnées pour recevoir l'accès au contenu complet du cours pour examen.",
+        nameLabel: "Nom",
+        emailLabel: "E-mail Professionnel",
+        submitButton: "Demander l'accès",
+        sending: "Envoi en cours...",
+        successTitle: "Demande reçue",
+        successMessage: "Merci — nous vous enverrons l'accès au cours sous peu.",
+        errorMessage: "Une erreur est survenue. Veuillez réessayer ou nous contacter directement.",
+    },
+    es: {
+        title: "Acceso al Curso para Clínicos",
+        description: "Ingrese sus datos para recibir acceso al contenido completo del curso para revisión.",
+        nameLabel: "Nombre",
+        emailLabel: "Correo Electrónico Profesional",
+        submitButton: "Solicitar Acceso",
+        sending: "Enviando...",
+        successTitle: "Solicitud recibida",
+        successMessage: "Gracias — le enviaremos el acceso al curso en breve.",
+        errorMessage: "Algo salió mal. Por favor, inténtelo de nuevo o contáctenos directamente.",
+    },
+    it: {
+        title: "Accesso al Corso per Clinici",
+        description: "Inserisci i tuoi dati per ricevere l'accesso al contenuto completo del corso per revisione.",
+        nameLabel: "Nome",
+        emailLabel: "Email Professionale",
+        submitButton: "Richiedi Accesso",
+        sending: "Invio in corso...",
+        successTitle: "Richiesta ricevuta",
+        successMessage: "Grazie — ti invieremo l'accesso al corso a breve.",
+        errorMessage: "Qualcosa è andato storto. Riprova o contattaci direttamente.",
+    },
+};
+
+const currentContent = content[lang as keyof typeof content];
+---
+
+<div id="clinician-access" class="scroll-mt-24">
+    <form
+        id="clinician-form"
+        autocomplete="on"
+        class="flex-grow border-0 lg:border-neutral-300 bg-transparent lg:bg-white/80 shadow-none lg:shadow-lg hover:lg:shadow-xl lg:backdrop-blur-sm lg:p-12 rounded-2xl w-full transition-all"
+    >
+        <input type="hidden" name="_subject" value="Clinician course access request" />
+        <div class="space-y-6 w-full">
+            <div class="space-y-2">
+                <h3 class="font-semibold text-neutral-950 text-xl md:text-2xl leading-tight">
+                    {currentContent.title}
+                </h3>
+                <p class="text-gray-700 text-base leading-relaxed">
+                    {currentContent.description}
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="form-group">
+                    <Label labelFor="name">{currentContent.nameLabel}</Label>
+                    <Input name="name" type="text" required={true} autocomplete="name" />
+                </div>
+
+                <div class="form-group">
+                    <Label labelFor="email">{currentContent.emailLabel}</Label>
+                    <Input required={true} name="email" type="email" autocomplete="email" />
+                </div>
+
+                <button
+                    id="clinician-submit"
+                    type="submit"
+                    class="bg-primary hover:bg-primary/90 hover:shadow-md px-6 py-3 rounded-lg w-full font-medium text-white transition-all"
+                >
+                    {currentContent.submitButton}
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div
+        id="clinician-success"
+        class="hidden space-y-3 py-8 text-center"
+    >
+        <div class="flex justify-center">
+            <svg class="w-12 h-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </div>
+        <h3 class="font-semibold text-neutral-950 text-xl md:text-2xl">
+            {currentContent.successTitle}
+        </h3>
+        <p class="text-gray-700 text-base leading-relaxed">
+            {currentContent.successMessage}
+        </p>
+    </div>
+
+    <p id="clinician-error" class="hidden mt-4 text-red-600 text-sm text-center">
+        {currentContent.errorMessage}
+    </p>
+</div>
+
+<script define:vars={{ sending: currentContent.sending, submitLabel: currentContent.submitButton }}>
+    const form = document.getElementById('clinician-form');
+    const btn = document.getElementById('clinician-submit');
+    const successEl = document.getElementById('clinician-success');
+    const errorEl = document.getElementById('clinician-error');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.textContent = sending;
+        errorEl.classList.add('hidden');
+
+        try {
+            const data = new FormData(form);
+            const res = await fetch('https://formspree.io/f/mzdawror', {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' },
+            });
+
+            if (res.ok) {
+                form.classList.add('hidden');
+                successEl.classList.remove('hidden');
+            } else {
+                throw new Error('Submission failed');
+            }
+        } catch {
+            btn.disabled = false;
+            btn.textContent = submitLabel;
+            errorEl.classList.remove('hidden');
+        }
+    });
+</script>

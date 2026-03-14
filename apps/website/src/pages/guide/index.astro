@@ -157,7 +157,7 @@ const guidePhases = [
                 <!-- Timeline Cards -->
                 <div class="relative">
                     <!-- Vertical Line (desktop) -->
-                    <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 via-yellow-500 to-green-500 transform -translate-x-1/2 rounded-full"></div>
+                    <div class="hidden lg:block top-0 bottom-0 left-1/2 absolute bg-gradient-to-b from-red-500 via-yellow-500 to-green-500 rounded-full w-1 -translate-x-1/2 transform"></div>
 
                     <div class="space-y-8 lg:space-y-12">
                         {guidePhases.map((phase, index) => (
@@ -166,15 +166,15 @@ const guidePhases = [
                                 index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                             )}>
                                 <!-- Timeline Dot (desktop) -->
-                                <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 items-center justify-center">
-                                    <div class={cn("w-6 h-6 rounded-full border-4 border-white shadow-md", phase.color)}></div>
+                                <div class="hidden left-1/2 absolute lg:flex justify-center items-center -translate-x-1/2 transform">
+                                    <div class={cn("shadow-md border-4 border-white rounded-full w-6 h-6", phase.color)}></div>
                                 </div>
 
                                 <!-- Card -->
                                 <a
                                     href={`/${phase.slug}`}
                                     class={cn(
-                                        "group block bg-white hover:bg-primary/5 p-6 md:p-8 border border-neutral-200 hover:border-primary/50 rounded-2xl transition-all shadow-sm hover:shadow-lg",
+                                        "group block bg-white hover:bg-primary/5 shadow-sm hover:shadow-lg p-6 md:p-8 border border-neutral-200 hover:border-primary/50 rounded-2xl transition-all",
                                         "lg:w-[calc(50%-2rem)]",
                                         index % 2 === 0 ? "lg:mr-auto" : "lg:ml-auto"
                                     )}
@@ -182,17 +182,17 @@ const guidePhases = [
                                     <div class="flex items-start gap-4">
                                         <!-- Week Badge -->
                                         <div class={cn(
-                                            "flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-xl text-white font-bold text-sm",
+                                            "flex flex-shrink-0 justify-center items-center rounded-xl w-14 h-14 font-bold text-white text-sm",
                                             phase.color
                                         )}>
                                             <div class="text-center leading-tight">
-                                                <div class="text-xs opacity-80">Week</div>
+                                                <div class="opacity-80 text-xs">Week</div>
                                                 <div>{phase.week.replace("Week ", "").replace("Weeks ", "")}</div>
                                             </div>
                                         </div>
 
                                         <div class="flex-1 min-w-0">
-                                            <h3 class="mb-2 font-bold text-neutral-900 text-xl md:text-2xl group-hover:text-primary transition-colors">
+                                            <h3 class="mb-2 font-bold text-neutral-900 group-hover:text-primary text-xl md:text-2xl transition-colors">
                                                 {phase.title}
                                             </h3>
                                             <p class="mb-4 text-neutral-600">
@@ -202,7 +202,7 @@ const guidePhases = [
                                             <!-- Highlights -->
                                             <div class="flex flex-wrap gap-2 mb-4">
                                                 {phase.highlights.map((highlight) => (
-                                                    <span class="bg-neutral-100 group-hover:bg-primary/10 px-2 py-1 rounded text-neutral-600 text-xs font-medium transition-colors">
+                                                    <span class="bg-neutral-100 group-hover:bg-primary/10 px-2 py-1 rounded font-medium text-neutral-600 text-xs transition-colors">
                                                         {highlight}
                                                     </span>
                                                 ))}
@@ -210,7 +210,7 @@ const guidePhases = [
 
                                             <div class="flex items-center gap-2 font-semibold text-primary">
                                                 Read Full Guide
-                                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                                             </div>
                                         </div>
                                     </div>

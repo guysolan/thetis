@@ -4,7 +4,7 @@ You are writing a **single day's lesson** for patients recovering from an Achill
 
 ### ⚠️ Critical: Use Consistent Positions
 
-**Before writing, review** [`achilles-recovery-positions.md`](.cursor/commands/achilles-recovery-positions.md) for the agreed-upon positions on all contentious aspects of Achilles rupture recovery. **You must use these positions consistently** across all lessons. If a position conflicts with a clinician's protocol, note that guidance varies by clinician/country and patients should follow their medical instructions.
+**Before writing, review** the clinical positions rule (`.cursor/rules/achilles-clinical-positions.mdc`) for the agreed-upon positions on all contentious aspects of Achilles rupture recovery. **You must use these positions consistently** across all lessons. If a position conflicts with a clinician's protocol, note that guidance varies by clinician/country and patients should follow their medical instructions.
 
 ### Audience
 
@@ -121,7 +121,7 @@ Always include these style instructions in your prompts:
 
 **REQUIRED STYLE PREFIX** (copy this at the start of every prompt):
 
-> Clean medical infographic, friendly and calming, high contrast, minimal text. Tintin-style ligne claire illustration (clean-line European comic style) with flat color fills, crisp outlines, simple shading, readable on mobile. Do NOT include Tintin characters, props, logos, or recognisable copyrighted icons. No gore, no needles shown unless necessary. White background with Thetis green accents (#29a680), subtle gray labels. 1:1 aspect ratio.
+> Clean medical infographic, friendly and calming, high contrast, minimal text. Tintin-style ligne claire illustration (clean-line European comic style) with flat color fills, crisp outlines, simple shading, readable on mobile. Do NOT include Tintin characters, props, logos, or recognisable copyrighted icons. No gore, no needles shown unless necessary. White background with Thetis primary color accents, subtle gray labels. 1:1 aspect ratio.
 
 **CONTENT GUIDELINES:**
 
@@ -135,7 +135,7 @@ Always include these style instructions in your prompts:
 **Step 1: Write the prompt**
 
 ```
-Clean medical infographic, friendly and calming, high contrast, minimal text. Tintin-style ligne claire illustration (clean-line European comic style) with flat color fills, crisp outlines, simple shading, readable on mobile. Do NOT include Tintin characters, props, logos, or recognisable copyrighted icons. No gore, no needles shown unless necessary. White background with Thetis green accents (#29a680), subtle gray labels. 1:1 aspect ratio.
+Clean medical infographic, friendly and calming, high contrast, minimal text. Tintin-style ligne claire illustration (clean-line European comic style) with flat color fills, crisp outlines, simple shading, readable on mobile. Do NOT include Tintin characters, props, logos, or recognisable copyrighted icons. No gore, no needles shown unless necessary. White background with Thetis primary color accents, subtle gray labels. 1:1 aspect ratio.
 
 Title text at top: "Blood clots: DVT vs PE". Left panel: a simple leg silhouette with a highlighted deep vein in the calf and a small dark-red "clot" icon; label: "DVT = clot in the leg". Right panel: simple lungs silhouette with a small "clot" icon in a lung artery; label: "PE = clot in the lungs (emergency)". Between panels, show a small arrow path from leg vein to heart to lungs, with label: "A clot can travel". Bottom strip: warning icons with short labels: "Chest pain", "Breathless", "Fainting", "One-leg calf swelling", "New calf pain". Keep text minimal, readable, and non-alarming.
 ```
@@ -188,7 +188,7 @@ Skip images for:
 
 ## Checklist before submitting a lesson
 
-- [ ] **Reviewed [`achilles-recovery-positions.md`](.cursor/commands/achilles-recovery-positions.md)** and used consistent positions throughout
+- [ ] **Reviewed clinical positions** (`.cursor/rules/achilles-clinical-positions.mdc`) and used consistent positions throughout
 - [ ] Intro includes hope anchor (early lessons)
 - [ ] Emotional validation where appropriate
 - [ ] Jargon is defined in plain English

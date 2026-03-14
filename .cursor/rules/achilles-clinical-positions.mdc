@@ -1,0 +1,70 @@
+---
+description: Canonical clinical positions for all Achilles rupture recovery content. Use these positions consistently across course lessons, FAQ pages, blog articles, and website copy.
+globs:
+  - apps/course/**
+  - apps/achilles-rupture/**
+  - apps/website/src/**/achilles*
+  - apps/website/src/**/FAQs/**
+  - apps/website/src/**/torn-achilles*
+  - apps/website/src/**/sleeping-with-torn*
+  - apps/website/src/**/swimming-with-torn*
+  - apps/website/src/**/washing-with-torn*
+  - apps/website/src/**/hygiene-with-torn*
+  - apps/website/src/**/products-for-torn*
+---
+
+# Achilles Recovery Clinical Positions - Single Source of Truth
+
+These are the final, agreed-upon positions for all contentious aspects of Achilles rupture recovery. Use these consistently across ALL content.
+
+## Treatment
+
+1. **Surgery vs Non-Surgical**: Non-surgical is first-line; surgery only for specific indications (large gap, elite athletes, etc.)
+2. **VACOped vs Aircast Boot**: Both produce excellent outcomes; compliance matters more than brand
+3. **Early Weight-Bearing**: Immediate weight-bearing as tolerated from day 1
+4. **Night Splint Timing**: From boot fitting (non-op), or 2 weeks post-surgery (wound healing)
+5. **Boot Removal**: Week 10-12, criteria-based within that window
+6. **Tendon Gap Size**: One factor among many (activity level, age, etc.)
+7. **Blood Thinners**: 4-6 weeks duration (through full equinus phase), oral tablets preferred for compliance
+8. **PRP Therapy**: Insufficient evidence, not recommended (Path 2 Trial)
+9. **Shock Wave Therapy**: Limited evidence, not recommended
+10. **Imaging**: Usually helpful but not always necessary
+
+## Rehabilitation
+
+11. **Physiotherapy Start**: Week 3-6 (early physio)
+12. **Aggressive Stretching**: AVOID until tendon fully healed (12-18 months). Tightness resolves naturally.
+13. **Wedge Removal**: Follow schedule exactly, never accelerate
+14. **Boot Weaning**: Gradual over 1-2 weeks (few hours/day increasing)
+15. **Heel Lifts During Transition**: Always use initially (0.5-1cm)
+16. **Eccentric vs Concentric**: To be determined (position #22 unresolved)
+17. **Orthotics**: Short-term only, wean off after transition
+
+## Milestones & Return
+
+18. **Single-Leg Heel Raises**: 25+ reps (gold standard), ideally >90% symmetry with other side
+19. **Return to Running**: Criteria-based only (25+ heel raises etc.), timing secondary
+20. **Return to Sport**: 9 months typical, but criteria-based not time-based. 85% symmetry for sport clearance.
+21. **Re-Rupture Rate**: 3-5% (low but not negligible)
+
+## Long-Term Expectations
+
+22. **Calf Asymmetry**: Some permanent difference is normal. Functional strength matters more than size.
+23. **Tendon Thickening**: Normal, permanent, doesn't affect function
+24. **Age / Activity Level**: Factors among many, neither is determinative alone
+
+## Supportive Care
+
+25. **Nutrition**: Helpful but not essential; balanced diet sufficient
+26. **Smoking/Lifestyle**: Important; lifestyle factors affect recovery
+27. **Elevation**: Only important post-surgery (2 weeks, 12 hrs/day)
+28. **Ice vs Heat**: Ice for swelling, heat for stiffness
+29. **Compression**: 2 weeks on opposite leg after surgery, otherwise not important
+30. **Psychological Support**: Important; address if present (kinesiophobia, anxiety, depression)
+
+## Usage Rules
+
+- **Consistency is critical** across all articles, lessons, and content
+- If a position conflicts with a clinician's protocol, note that guidance varies by clinician/country and patients should follow their own medical team
+- When evidence is unclear, use these positions as the standard
+- Position #16 (eccentric vs concentric) needs finalising before use in content

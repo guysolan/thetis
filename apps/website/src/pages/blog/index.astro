@@ -1,0 +1,87 @@
+---
+export const prerender = true;
+
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import ColorGradient from "../../components/ColorGradient.astro";
+import CourseCTA from "../../components/CTA/CourseCTA.astro";
+import dayjs from "dayjs";
+import { ArrowRight } from "lucide-astro";
+
+type BlogPost = CollectionEntry<"blog">;
+
+const posts = (await getCollection("blog"))
+    .filter((post: BlogPost) => post.data.status === "published")
+    .sort((a: BlogPost, b: BlogPost) => {
+        const dateA = a.data.publishedAt?.getTime() ?? 0;
+        const dateB = b.data.publishedAt?.getTime() ?? 0;
+        return dateB - dateA;
+    });
+---
+
+<Layout
+    title="Achilles Rupture Recovery Blog | Thetis Medical"
+    description="Evidence-based articles about Achilles tendon rupture recovery, treatment options, and rehabilitation. Written for patients by medical professionals."
+    lang="en"
+>
+    <ColorGradient>
+        <div class="mx-auto max-w-3xl">
+            <h1 class="mb-4 font-bold text-4xl">Recovery Blog</h1>
+            <p class="mb-12 text-gray-600 text-lg">
+                Evidence-based articles about Achilles tendon rupture recovery,
+                written in plain language for patients.
+            </p>
+
+            {posts.length === 0 && (
+                <p class="text-gray-500 text-center">
+                    Articles coming soon.
+                </p>
+            )}
+
+            <div class="gap-6 grid">
+                {posts.map((post: BlogPost) => (
+                    <a
+                        href={`/blog/${post.id}`}
+                        class="group flex md:flex-row flex-col gap-6 bg-white shadow-sm hover:shadow-md p-4 sm:p-6 border border-gray-100 rounded-xl transition-shadow"
+                    >
+                        {post.data.heroImage && (
+                            <img
+                                src={post.data.heroImage}
+                                alt={post.data.heroAlt ?? post.data.title}
+                                class="rounded-lg w-full md:w-48 h-32 md:h-auto object-cover aspect-[2/1] md:aspect-square shrink-0"
+                            />
+                        )}
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-center gap-2 mb-2">
+                                {post.data.publishedAt && (
+                                    <span class="text-gray-500 text-sm">
+                                        {dayjs(post.data.publishedAt).format("MMM D, YYYY")}
+                                    </span>
+                                )}
+                                {post.data.tags?.map((tag: string) => (
+                                    <span class="bg-primary/10 px-2 py-0.5 rounded-full text-primary text-xs capitalize">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                            <h2 class="mb-2 font-semibold group-hover:text-primary text-xl transition-colors">
+                                {post.data.title}
+                            </h2>
+                            <p class="text-gray-600 text-sm line-clamp-2">
+                                {post.data.description}
+                            </p>
+                            <div class="flex items-center gap-1 mt-3 text-primary text-sm">
+                                Read article
+                                <ArrowRight class="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </div>
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </ColorGradient>
+
+    <div class="mx-auto mt-8 max-w-3xl">
+        <CourseCTA lang="en" variant="full" />
+    </div>
+</Layout>

@@ -1,0 +1,377 @@
+---
+import Layout from "./Layout.astro";
+import NightSplintAdvert from "../components/products/night-splint/NightSplintAdvert.astro";
+import CourseCTA from "../components/CTA/CourseCTA.astro";
+import SubscribeBlock from "../components/CTA/SubscribeBlock.astro";
+import ShareControls from "../components/research/ShareControls";
+import dayjs from "dayjs";
+import type { Lang } from "../config/languages";
+import { ArrowLeft } from "lucide-astro";
+
+type Props = {
+    title: string;
+    description: string;
+    publishedAt?: Date;
+    updatedAt?: Date;
+    heroImage?: string;
+    heroAlt?: string;
+    tags?: string[];
+    source?: {
+        title?: string;
+        url?: string;
+        authors?: string;
+    };
+    faqs?: Array<{ question: string; answer: string }>;
+    lang?: Lang;
+};
+
+const {
+    title,
+    description,
+    publishedAt,
+    updatedAt,
+    heroImage,
+    heroAlt,
+    tags,
+    source,
+    faqs,
+    lang = "en",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteUrl = (Astro.site?.toString() ?? "https://thetismedical.com").replace(
+    /\/$/,
+    "",
+);
+
+const publisher = {
+    "@type": "Organization",
+    name: "Thetis Medical",
+    url: siteUrl,
+    logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/logo.png`,
+    },
+};
+
+const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    description,
+    image: heroImage ? new URL(heroImage, Astro.site).toString() : undefined,
+    datePublished: publishedAt?.toISOString(),
+    dateModified: (updatedAt ?? publishedAt)?.toISOString(),
+    author: publisher,
+    publisher,
+    mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": canonicalURL.toString(),
+    },
+    inLanguage: lang,
+    ...(tags?.length ? { keywords: tags.join(", ") } : {}),
+    ...(tags?.length ? { articleSection: tags[0] } : {}),
+};
+
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+        },
+        {
+            "@type": "ListItem",
+            position: 2,
+            name: "Blog",
+            item: `${siteUrl}/blog`,
+        },
+        {
+            "@type": "ListItem",
+            position: 3,
+            name: title,
+            item: canonicalURL.toString(),
+        },
+    ],
+};
+
+const faqSchema =
+    faqs && faqs.length > 0
+        ? {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: faqs.map((faq) => ({
+                  "@type": "Question",
+                  name: faq.question,
+                  acceptedAnswer: {
+                      "@type": "Answer",
+                      text: faq.answer,
+                  },
+              })),
+          }
+        : null;
+
+const schemas = [
+    articleSchema,
+    breadcrumbSchema,
+    ...(faqSchema ? [faqSchema] : []),
+];
+---
+
+<Layout title={title} description={description} image={heroImage} lang={lang}>
+    <Fragment slot="head">
+        {
+            schemas.map((schema) => (
+                <script
+                    type="application/ld+json"
+                    set:html={JSON.stringify(schema)}
+                />
+            ))
+        }
+    </Fragment>
+
+    <main class="relative flex flex-col print:w-full print:max-w-none">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-b from-primary/5 to-white">
+            <div class="mx-auto px-4 pt-24 pb-12 max-w-4xl">
+                <!-- Tags -->
+                {
+                    tags && tags.length > 0 && (
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            {tags.map((tag: string) => (
+                                <span class="inline-flex items-center bg-primary/10 px-3 py-1 rounded-full font-medium text-primary text-xs uppercase tracking-wide">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    )
+                }
+
+                <h1
+                    class="mb-4 font-bold text-neutral-900 text-3xl md:text-4xl lg:text-5xl leading-tight"
+                >
+                    {title}
+                </h1>
+
+                <p class="mb-6 max-w-3xl text-neutral-600 text-lg md:text-xl">
+                    {description}
+                </p>
+
+                {
+                    publishedAt && (
+                        <div class="text-neutral-500 text-sm">
+                            {dayjs(publishedAt).format("MMMM D, YYYY")}
+                            {updatedAt && (
+                                <span class="italic">
+                                    {" · Updated "}
+                                    {dayjs(updatedAt).format("MMMM D, YYYY")}
+                                </span>
+                            )}
+                        </div>
+                    )
+                }
+            </div>
+        </section>
+
+        <!-- Hero Image (outside gradient, full bleed) -->
+        {
+            heroImage && (
+                <div class="mx-auto -mt-2 mb-8 px-4 sm:px-8 w-full max-w-5xl">
+                    <img
+                        src={heroImage}
+                        alt={heroAlt ?? `Illustration for ${title}`}
+                        class="shadow-lg border border-neutral-200/50 rounded-2xl w-full"
+                    />
+                </div>
+            )
+        }
+
+        <!-- Article Content -->
+        <article class="mx-auto px-4 w-full max-w-4xl">
+            <div class="mx-auto max-w-3xl blog-content">
+                <slot />
+            </div>
+
+            <!-- Source Citation -->
+            {
+                source?.url && (
+                    <div class="mx-auto mt-10 pt-6 border-neutral-200 border-t max-w-3xl">
+                        <p class="text-neutral-500 text-sm">
+                            <strong class="text-neutral-700">
+                                Primary source:
+                            </strong>{" "}
+                            {source.authors && <span>{source.authors}. </span>}
+                            <a
+                                href={source.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-primary hover:underline"
+                            >
+                                {source.title ?? "View research"}
+                            </a>
+                        </p>
+                    </div>
+                )
+            }
+        </article>
+
+        <!-- Subscribe -->
+        <section class="mx-auto mt-16 px-4 w-full max-w-3xl">
+            <div class="bg-primary/5 p-8 rounded-2xl text-center">
+                <h3 class="mb-2 font-bold text-neutral-900 text-xl">
+                    Get recovery tips in your inbox
+                </h3>
+                <p class="mb-6 text-neutral-600 text-sm">
+                    Evidence-based advice for Achilles rupture recovery,
+                    delivered weekly.
+                </p>
+                <SubscribeBlock
+                    source="blog_article"
+                    variant="compact"
+                    lang={lang}
+                />
+            </div>
+        </section>
+
+        <!-- CTAs -->
+        <div class="mt-8">
+            <CourseCTA lang={lang} variant="full" />
+            <NightSplintAdvert lang={lang} />
+        </div>
+
+        <!-- Share -->
+        <ShareControls client:load />
+    </main>
+</Layout>
+
+<style is:global>
+    .blog-content {
+        color: #404040;
+        line-height: 1.75;
+        font-size: 1.125rem;
+    }
+
+    .blog-content h2 {
+        font-size: 1.5rem !important;
+        line-height: 1.3 !important;
+        font-weight: 700;
+        color: #171717;
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #f5f5f5;
+    }
+
+    .blog-content h3 {
+        font-size: 1.25rem !important;
+        line-height: 1.4 !important;
+        font-weight: 600;
+        color: #171717;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .blog-content p {
+        margin-bottom: 1.25rem;
+    }
+
+    .blog-content a {
+        color: hsl(161, 60%, 40%);
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .blog-content a:hover {
+        text-decoration: underline;
+    }
+
+    .blog-content strong {
+        color: #171717;
+        font-weight: 600;
+    }
+
+    .blog-content ul,
+    .blog-content ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .blog-content li {
+        margin-bottom: 0.5rem;
+    }
+
+    .blog-content ul li {
+        list-style-type: disc;
+    }
+
+    .blog-content ol li {
+        list-style-type: decimal;
+    }
+
+    .blog-content blockquote {
+        border-left: 3px solid hsl(161, 60%, 40%);
+        background: hsl(161, 60%, 40%, 0.05);
+        padding: 0.75rem 1rem;
+        border-radius: 0 0.5rem 0.5rem 0;
+        margin-bottom: 1.25rem;
+    }
+
+    .blog-content hr {
+        border-color: #e5e5e5;
+        margin: 2rem 0;
+    }
+
+    .blog-content img {
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        border: 1px solid rgba(229, 229, 229, 0.3);
+        width: 100%;
+        margin: 1.5rem 0;
+    }
+
+    .blog-content table {
+        width: 100%;
+        font-size: 0.875rem;
+        border: 1px solid #e5e5e5;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        border-collapse: collapse;
+        margin-bottom: 1.5rem;
+    }
+
+    .blog-content th {
+        background: #fafafa;
+        padding: 0.75rem;
+        text-align: left;
+        font-weight: 600;
+        color: #171717;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .blog-content td {
+        padding: 0.75rem;
+        border-top: 1px solid #f5f5f5;
+    }
+
+    .blog-content code {
+        background: #f5f5f5;
+        padding: 0.125rem 0.375rem;
+        border-radius: 0.25rem;
+        font-size: 0.875em;
+    }
+</style>
+
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+
+    @media print {
+        html {
+            scroll-behavior: auto;
+        }
+    }
+</style>

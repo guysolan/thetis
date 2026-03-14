@@ -4,8 +4,6 @@ import ColorGradientInOut from "@/components/ColorGradientInOut.astro";
 import HighlightedWord from "@/components/HighlightedWord";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import Image from "astro/components/Image.astro";
-import TendonStiffnessImage from "@/assets/tendon-stiffness-after-rupture.png";
 import CourseBuyButton from "@/components/CourseBuyButton";
 import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
 import InfiniteReviews from "@/components/reviews/InfiniteReviews.astro";
@@ -15,7 +13,7 @@ import Review2Image from "@/assets/review-2.png";
 import Review3Image from "@/assets/review-3.png";
 import StickyAddToCart from "@/components/StickyAddToCart";
 import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
-import ClinicianCourseAccessDialog from "@/components/ClinicianCourseAccessDialog";
+import ClinicianCourseAccess from "@/forms/ClinicianCourseAccess.astro";
 import type { Lang } from "@/config/languages";
 import {
     Check,
@@ -1297,9 +1295,9 @@ const lessonPreviews = [
                     </div>
                     <div class="flex-shrink-0 w-full lg:w-1/2">
                         <div class="relative">
-                            <Image
-                                src={TendonStiffnessImage}
-                                alt="Tendon Stiffness After Rupture - Educational infographic explaining biomechanical differences"
+                            <img
+                                src="/images/achilles-rope-ends-pointed-down.png"
+                                alt="Achilles tendon healing positions diagram"
                                 class="shadow-2xl rounded-xl w-full"
                             />
                         </div>
@@ -2221,16 +2219,12 @@ const lessonPreviews = [
                             <ExternalLink className="w-4 h-4" />
                             {t.finalCta.alreadyPurchased}
                         </a>
-                        <ClinicianCourseAccessDialog
-                            triggerLabel={t.finalCta.clinicianCta}
-                            title={t.finalCta.clinicianDialogTitle}
-                            description={t.finalCta.clinicianDialogDescription}
-                            nameLabel={t.finalCta.clinicianNameLabel}
-                            emailLabel={t.finalCta.clinicianEmailLabel}
-                            submitLabel={t.finalCta.clinicianSubmit}
-                            redirectUrl={new URL(Astro.url.pathname, Astro.request.url).href}
-                            client:load
-                        />
+                        <a
+                            href="#clinician-access"
+                            class="inline-flex items-center gap-2 px-4 py-2 border border-primary/30 rounded-md font-medium text-primary hover:bg-primary/5 transition-colors"
+                        >
+                            {t.finalCta.clinicianCta}
+                        </a>
                     </div>
                     <!-- Satisfaction Guarantee -->
                     <div
@@ -2260,6 +2254,11 @@ const lessonPreviews = [
                     </div>
                 </div>
             </ColorGradientInOut>
+
+            <!-- Clinician Access Form -->
+            <div class="mx-auto px-4 max-w-3xl">
+                <ClinicianCourseAccess lang={lang} />
+            </div>
 
             <StickyAddToCart variant="course" lang={lang} client:load />
         </section>

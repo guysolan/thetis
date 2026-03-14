@@ -1,0 +1,93 @@
+---
+title: "Night pain and poor sleep are among the most common early complaints after Achilles ruptur"
+status: "Editing"
+notion_id: "2e05c2ea-829a-8083-8fb8-e19b9773178b"
+category: "Tip for Clinicians"
+creation_date: "2026-01-06"
+---
+
+
+## Night pain and poor sleep are among the most common early complaints after Achilles rupture.
+
+
+In many cases, the driver is uncontrolled plantarflexion and sustained heel pressure overnight, rather than the rupture itself.
+
+
+A few small adjustments can make a meaningful difference in early recovery:
+
+
+🔹Maintain gentle plantarflexion at night
+
+
+Reduces passive tendon strain compared with a neutral or unsupported foot position.
+
+
+🔹Fully offload the heel
+
+
+Continuous heel contact increases focal pressure and night pain, particularly in casts or walking boots.
+
+
+🔹Use a removable night splint rather than a boot when appropriate
+
+
+Allows controlled positioning while improving comfort and sleep adherence.
+
+
+🔹Reinforce night positioning during early rehab reviews
+
+
+Patients often self adjust at night without realising the impact on symptoms.
+
+
+Poor sleep affects pain perception, rehabilitation engagement, and overall recovery. Night time positioning is a small detail, but one clinicians can often optimise easily.
+
+
+How much emphasis do you place on night positioning when counselling Achilles rupture patients?
+
+
+**#AchillesRupture** **#FootAndAnkle** **#Rehabilitation** **#SportsMedicine** **#ClinicalTips**
+
+
+## New: Graphics pick one the best for you (1, 2, 3, or 4)
+
+
+1.
+
+
+![heel-offloading-techniques.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/697e34eb-e2a6-4db7-9771-606d02bd1b53/46817569-4931-4b72-9e4a-36c33b4c1ce3/heel-offloading-techniques.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XRYI2C77%2F20260313%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260313T140304Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMX%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCohWad%2BvOeSttfGYO46hLJ5z%2FkqU48MQ2Q63icsq8uggIgKLsSTMiGihPAy9Dqvo5rRG8EPLhF6YWMVOl0aNFS1PUqiAQIjf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDP4J%2Bz5oGBxB2eWyLircAw1WoiUUZkgtxBqSBaqaWbz3qjc%2Fy7tGfiCqaaWJ8cylwg2frt0lpDOgq%2BNjYF2u90pqIk%2Fl9S5vLd%2FqhvcaAaOSDHx03TrpaY6eK02sc1tXWLXW%2FON52p37VQEj%2BnJnDLQJA4sGqHN4zaG5ipPVkiPwNtm5n%2Fe67oILMBHtQVAZiDkvn2vYe6jsriXIaYlvBB9KIpaG9gPI9IcrPOHqxbEbsZAwa9gYDlZelz7WcpJfOh2XlgyP%2BqcxGzhH1vON%2FbuZykqC%2Bjp%2Fm674L0kqk5ErctowBjLZh5478%2Bz6XDnu22GeukSA61TAx61AUUXc%2BHUPAAu3m1UpNfwZkdkASU49VwMHqLEe8msq6GVHsKV4izUaQnmVu%2FBpi2WN4tNvnrTICzCCCLSYueSdMkY24TRh3Zl%2FNE1Xwr%2FElLSVY3XZS2mdS6HFhxgmUIl2BkC74NpSm0%2FPIdWK0pd9P3s2nl%2FS6UltAjIjezlUsTjH6d5VlSsCUIDQG3VaEj%2Bu0Wmt7VLxmchWMVWspz5kc1yk9dK3KTUSbXV%2FgOO28nbXvkj6uSoEGhOYLi5bF8HQf0Ok3N7mchxj4RQP6AOm%2Bzqzm2oJar3mkkSaRM2XwiFnG0x5jmsjQEVvlcUpgBvhMO2C0M0GOqUBNL%2F0xLfTuhKl2LH3C8PxMhNQM9dl8w6ZUYZW8R2Tjm%2FoQu6x5O6oPkmCX4TExHEqhAOSm9EF%2FmoZIbnyErKuptHA2NRqarPC1eCQ25hcJgDOpeC5vhJcGzng%2FBYrcJZ5e%2FcVCzQApzYTFdXPB94ONs82zaBfP9BFFdMKm5VnW5tc9Qmy%2BvuFzfcoOz6CXh8aY5hzMunH45lMCywBEh0hqY842f%2B7&X-Amz-Signature=3413e5a0a2fb6053f9cdd36c01ebf63850f8b5a238e54b1aead1c635e7a3a909&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+
+2.
+
+
+![night-pain-sleep-solutions.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/697e34eb-e2a6-4db7-9771-606d02bd1b53/31183821-0935-4c4a-a5d9-d03593200676/night-pain-sleep-solutions.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XRYI2C77%2F20260313%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260313T140304Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMX%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCohWad%2BvOeSttfGYO46hLJ5z%2FkqU48MQ2Q63icsq8uggIgKLsSTMiGihPAy9Dqvo5rRG8EPLhF6YWMVOl0aNFS1PUqiAQIjf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDP4J%2Bz5oGBxB2eWyLircAw1WoiUUZkgtxBqSBaqaWbz3qjc%2Fy7tGfiCqaaWJ8cylwg2frt0lpDOgq%2BNjYF2u90pqIk%2Fl9S5vLd%2FqhvcaAaOSDHx03TrpaY6eK02sc1tXWLXW%2FON52p37VQEj%2BnJnDLQJA4sGqHN4zaG5ipPVkiPwNtm5n%2Fe67oILMBHtQVAZiDkvn2vYe6jsriXIaYlvBB9KIpaG9gPI9IcrPOHqxbEbsZAwa9gYDlZelz7WcpJfOh2XlgyP%2BqcxGzhH1vON%2FbuZykqC%2Bjp%2Fm674L0kqk5ErctowBjLZh5478%2Bz6XDnu22GeukSA61TAx61AUUXc%2BHUPAAu3m1UpNfwZkdkASU49VwMHqLEe8msq6GVHsKV4izUaQnmVu%2FBpi2WN4tNvnrTICzCCCLSYueSdMkY24TRh3Zl%2FNE1Xwr%2FElLSVY3XZS2mdS6HFhxgmUIl2BkC74NpSm0%2FPIdWK0pd9P3s2nl%2FS6UltAjIjezlUsTjH6d5VlSsCUIDQG3VaEj%2Bu0Wmt7VLxmchWMVWspz5kc1yk9dK3KTUSbXV%2FgOO28nbXvkj6uSoEGhOYLi5bF8HQf0Ok3N7mchxj4RQP6AOm%2Bzqzm2oJar3mkkSaRM2XwiFnG0x5jmsjQEVvlcUpgBvhMO2C0M0GOqUBNL%2F0xLfTuhKl2LH3C8PxMhNQM9dl8w6ZUYZW8R2Tjm%2FoQu6x5O6oPkmCX4TExHEqhAOSm9EF%2FmoZIbnyErKuptHA2NRqarPC1eCQ25hcJgDOpeC5vhJcGzng%2FBYrcJZ5e%2FcVCzQApzYTFdXPB94ONs82zaBfP9BFFdMKm5VnW5tc9Qmy%2BvuFzfcoOz6CXh8aY5hzMunH45lMCywBEh0hqY842f%2B7&X-Amz-Signature=d8a4424be25e443e7863053673543586bb3c4138eba67cc309cdf9a769d930ec&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+
+3.
+
+
+![night-splint-vs-boot-comparison.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/697e34eb-e2a6-4db7-9771-606d02bd1b53/6e1e6fb3-e683-46f8-93bf-28c246e95c62/night-splint-vs-boot-comparison.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XRYI2C77%2F20260313%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260313T140304Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMX%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCohWad%2BvOeSttfGYO46hLJ5z%2FkqU48MQ2Q63icsq8uggIgKLsSTMiGihPAy9Dqvo5rRG8EPLhF6YWMVOl0aNFS1PUqiAQIjf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDP4J%2Bz5oGBxB2eWyLircAw1WoiUUZkgtxBqSBaqaWbz3qjc%2Fy7tGfiCqaaWJ8cylwg2frt0lpDOgq%2BNjYF2u90pqIk%2Fl9S5vLd%2FqhvcaAaOSDHx03TrpaY6eK02sc1tXWLXW%2FON52p37VQEj%2BnJnDLQJA4sGqHN4zaG5ipPVkiPwNtm5n%2Fe67oILMBHtQVAZiDkvn2vYe6jsriXIaYlvBB9KIpaG9gPI9IcrPOHqxbEbsZAwa9gYDlZelz7WcpJfOh2XlgyP%2BqcxGzhH1vON%2FbuZykqC%2Bjp%2Fm674L0kqk5ErctowBjLZh5478%2Bz6XDnu22GeukSA61TAx61AUUXc%2BHUPAAu3m1UpNfwZkdkASU49VwMHqLEe8msq6GVHsKV4izUaQnmVu%2FBpi2WN4tNvnrTICzCCCLSYueSdMkY24TRh3Zl%2FNE1Xwr%2FElLSVY3XZS2mdS6HFhxgmUIl2BkC74NpSm0%2FPIdWK0pd9P3s2nl%2FS6UltAjIjezlUsTjH6d5VlSsCUIDQG3VaEj%2Bu0Wmt7VLxmchWMVWspz5kc1yk9dK3KTUSbXV%2FgOO28nbXvkj6uSoEGhOYLi5bF8HQf0Ok3N7mchxj4RQP6AOm%2Bzqzm2oJar3mkkSaRM2XwiFnG0x5jmsjQEVvlcUpgBvhMO2C0M0GOqUBNL%2F0xLfTuhKl2LH3C8PxMhNQM9dl8w6ZUYZW8R2Tjm%2FoQu6x5O6oPkmCX4TExHEqhAOSm9EF%2FmoZIbnyErKuptHA2NRqarPC1eCQ25hcJgDOpeC5vhJcGzng%2FBYrcJZ5e%2FcVCzQApzYTFdXPB94ONs82zaBfP9BFFdMKm5VnW5tc9Qmy%2BvuFzfcoOz6CXh8aY5hzMunH45lMCywBEh0hqY842f%2B7&X-Amz-Signature=2055066d8f218254b800eda58b993c1086cd06aa22559889eca19fe60e8826d2&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+
+### Improved:
+
+
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/697e34eb-e2a6-4db7-9771-606d02bd1b53/a30130b9-25e0-45e7-be9e-46435ceabaff/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XRYI2C77%2F20260313%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260313T140304Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMX%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCohWad%2BvOeSttfGYO46hLJ5z%2FkqU48MQ2Q63icsq8uggIgKLsSTMiGihPAy9Dqvo5rRG8EPLhF6YWMVOl0aNFS1PUqiAQIjf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDP4J%2Bz5oGBxB2eWyLircAw1WoiUUZkgtxBqSBaqaWbz3qjc%2Fy7tGfiCqaaWJ8cylwg2frt0lpDOgq%2BNjYF2u90pqIk%2Fl9S5vLd%2FqhvcaAaOSDHx03TrpaY6eK02sc1tXWLXW%2FON52p37VQEj%2BnJnDLQJA4sGqHN4zaG5ipPVkiPwNtm5n%2Fe67oILMBHtQVAZiDkvn2vYe6jsriXIaYlvBB9KIpaG9gPI9IcrPOHqxbEbsZAwa9gYDlZelz7WcpJfOh2XlgyP%2BqcxGzhH1vON%2FbuZykqC%2Bjp%2Fm674L0kqk5ErctowBjLZh5478%2Bz6XDnu22GeukSA61TAx61AUUXc%2BHUPAAu3m1UpNfwZkdkASU49VwMHqLEe8msq6GVHsKV4izUaQnmVu%2FBpi2WN4tNvnrTICzCCCLSYueSdMkY24TRh3Zl%2FNE1Xwr%2FElLSVY3XZS2mdS6HFhxgmUIl2BkC74NpSm0%2FPIdWK0pd9P3s2nl%2FS6UltAjIjezlUsTjH6d5VlSsCUIDQG3VaEj%2Bu0Wmt7VLxmchWMVWspz5kc1yk9dK3KTUSbXV%2FgOO28nbXvkj6uSoEGhOYLi5bF8HQf0Ok3N7mchxj4RQP6AOm%2Bzqzm2oJar3mkkSaRM2XwiFnG0x5jmsjQEVvlcUpgBvhMO2C0M0GOqUBNL%2F0xLfTuhKl2LH3C8PxMhNQM9dl8w6ZUYZW8R2Tjm%2FoQu6x5O6oPkmCX4TExHEqhAOSm9EF%2FmoZIbnyErKuptHA2NRqarPC1eCQ25hcJgDOpeC5vhJcGzng%2FBYrcJZ5e%2FcVCzQApzYTFdXPB94ONs82zaBfP9BFFdMKm5VnW5tc9Qmy%2BvuFzfcoOz6CXh8aY5hzMunH45lMCywBEh0hqY842f%2B7&X-Amz-Signature=2a4be9b3a9ac4ee7d99d54641a3af221ccee6c09de8d47d7d974fe8c7794979d&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+
+4.
+
+
+![night-positioning-checklist.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/697e34eb-e2a6-4db7-9771-606d02bd1b53/cba7cc16-7d52-415b-bed8-a937727d506a/night-positioning-checklist.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XRYI2C77%2F20260313%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260313T140304Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMX%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCohWad%2BvOeSttfGYO46hLJ5z%2FkqU48MQ2Q63icsq8uggIgKLsSTMiGihPAy9Dqvo5rRG8EPLhF6YWMVOl0aNFS1PUqiAQIjf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDP4J%2Bz5oGBxB2eWyLircAw1WoiUUZkgtxBqSBaqaWbz3qjc%2Fy7tGfiCqaaWJ8cylwg2frt0lpDOgq%2BNjYF2u90pqIk%2Fl9S5vLd%2FqhvcaAaOSDHx03TrpaY6eK02sc1tXWLXW%2FON52p37VQEj%2BnJnDLQJA4sGqHN4zaG5ipPVkiPwNtm5n%2Fe67oILMBHtQVAZiDkvn2vYe6jsriXIaYlvBB9KIpaG9gPI9IcrPOHqxbEbsZAwa9gYDlZelz7WcpJfOh2XlgyP%2BqcxGzhH1vON%2FbuZykqC%2Bjp%2Fm674L0kqk5ErctowBjLZh5478%2Bz6XDnu22GeukSA61TAx61AUUXc%2BHUPAAu3m1UpNfwZkdkASU49VwMHqLEe8msq6GVHsKV4izUaQnmVu%2FBpi2WN4tNvnrTICzCCCLSYueSdMkY24TRh3Zl%2FNE1Xwr%2FElLSVY3XZS2mdS6HFhxgmUIl2BkC74NpSm0%2FPIdWK0pd9P3s2nl%2FS6UltAjIjezlUsTjH6d5VlSsCUIDQG3VaEj%2Bu0Wmt7VLxmchWMVWspz5kc1yk9dK3KTUSbXV%2FgOO28nbXvkj6uSoEGhOYLi5bF8HQf0Ok3N7mchxj4RQP6AOm%2Bzqzm2oJar3mkkSaRM2XwiFnG0x5jmsjQEVvlcUpgBvhMO2C0M0GOqUBNL%2F0xLfTuhKl2LH3C8PxMhNQM9dl8w6ZUYZW8R2Tjm%2FoQu6x5O6oPkmCX4TExHEqhAOSm9EF%2FmoZIbnyErKuptHA2NRqarPC1eCQ25hcJgDOpeC5vhJcGzng%2FBYrcJZ5e%2FcVCzQApzYTFdXPB94ONs82zaBfP9BFFdMKm5VnW5tc9Qmy%2BvuFzfcoOz6CXh8aY5hzMunH45lMCywBEh0hqY842f%2B7&X-Amz-Signature=69bcc1eb439fcc8f153209a29d0eb6ac29fe8cc3bf809f432c98642cea60322e&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+
+## Supporting files
+
+
+![Night_splint_Info_page-0001.jpg](https://prod-files-secure.s3.us-west-2.amazonaws.com/697e34eb-e2a6-4db7-9771-606d02bd1b53/a9999609-f7e7-456c-9fa8-e91943134f2b/Night_splint_Info_page-0001.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XRYI2C77%2F20260313%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260313T140304Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMX%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCohWad%2BvOeSttfGYO46hLJ5z%2FkqU48MQ2Q63icsq8uggIgKLsSTMiGihPAy9Dqvo5rRG8EPLhF6YWMVOl0aNFS1PUqiAQIjf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDP4J%2Bz5oGBxB2eWyLircAw1WoiUUZkgtxBqSBaqaWbz3qjc%2Fy7tGfiCqaaWJ8cylwg2frt0lpDOgq%2BNjYF2u90pqIk%2Fl9S5vLd%2FqhvcaAaOSDHx03TrpaY6eK02sc1tXWLXW%2FON52p37VQEj%2BnJnDLQJA4sGqHN4zaG5ipPVkiPwNtm5n%2Fe67oILMBHtQVAZiDkvn2vYe6jsriXIaYlvBB9KIpaG9gPI9IcrPOHqxbEbsZAwa9gYDlZelz7WcpJfOh2XlgyP%2BqcxGzhH1vON%2FbuZykqC%2Bjp%2Fm674L0kqk5ErctowBjLZh5478%2Bz6XDnu22GeukSA61TAx61AUUXc%2BHUPAAu3m1UpNfwZkdkASU49VwMHqLEe8msq6GVHsKV4izUaQnmVu%2FBpi2WN4tNvnrTICzCCCLSYueSdMkY24TRh3Zl%2FNE1Xwr%2FElLSVY3XZS2mdS6HFhxgmUIl2BkC74NpSm0%2FPIdWK0pd9P3s2nl%2FS6UltAjIjezlUsTjH6d5VlSsCUIDQG3VaEj%2Bu0Wmt7VLxmchWMVWspz5kc1yk9dK3KTUSbXV%2FgOO28nbXvkj6uSoEGhOYLi5bF8HQf0Ok3N7mchxj4RQP6AOm%2Bzqzm2oJar3mkkSaRM2XwiFnG0x5jmsjQEVvlcUpgBvhMO2C0M0GOqUBNL%2F0xLfTuhKl2LH3C8PxMhNQM9dl8w6ZUYZW8R2Tjm%2FoQu6x5O6oPkmCX4TExHEqhAOSm9EF%2FmoZIbnyErKuptHA2NRqarPC1eCQ25hcJgDOpeC5vhJcGzng%2FBYrcJZ5e%2FcVCzQApzYTFdXPB94ONs82zaBfP9BFFdMKm5VnW5tc9Qmy%2BvuFzfcoOz6CXh8aY5hzMunH45lMCywBEh0hqY842f%2B7&X-Amz-Signature=f4efe40b4eb788ffb4643499b2b36aebffa9b36e54efab4fe6e6116ac1dcf0bf&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+
+[pdf]()
+

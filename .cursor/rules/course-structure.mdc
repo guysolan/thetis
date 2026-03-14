@@ -1,0 +1,87 @@
+---
+description: Course content structure map. Use this to find the right file when editing or creating Achilles recovery content. This is an index, not content -- read the actual files for details.
+globs:
+  - apps/course/**
+  - apps/achilles-rupture/**
+  - apps/website/src/**/FAQs/**
+---
+
+# Achilles Recovery Course Structure
+
+Content root: `apps/course/src/content/course/standard/`
+
+## 00-practical (cross-cutting, not phase-specific)
+- `recovery-roadmap.tsx`: 4-stage overview (Immobilisation → Transition → Capacity → Return to Sport)
+- `first-week-checklist.tsx`: Week 1 symptoms, red flags, essential purchases
+- `pain-management-throughout-recovery.tsx`: Pain at each stage, normal vs concerning, DVT vs calf pain
+- `mental-health-recovery.tsx`: Anxiety, depression, kinesiophobia, when to seek help
+- `driving-guidelines.tsx`: When to drive, left vs right leg, insurance
+- `appendix-1-faqs.tsx`: Central FAQ reference from all lessons
+- `course-completion.tsx` / `course-feedback.tsx`: Non-medical
+
+## 01-emergency (Week 0-1)
+- `emergency-care.tsx`: A&E, plantarflexion, Simmonds/Thompson test, immobilisation
+- `blood-clot-prevention.tsx`: DVT/PE risk, VTE prophylaxis, blood thinners, warning signs
+
+## 02-early-treatment (Weeks 1-3)
+- `treatment-decision.tsx`: UKSTAR trial, surgery vs non-surgical, risks/benefits
+- `specialist-appointment.tsx`: History, Simmonds test, ultrasound vs MRI, gap measurement
+- `choosing-your-boot.tsx`: Aircast vs VACOped, Thetis night splint, costs
+- `post-surgery-care.tsx`: Wound care, infection signs, scar massage (surgical patients only)
+
+## 03-boot-phase (Weeks 3-10)
+- `your-walking-boot.tsx`: How Aircast (wedges) and VACOped (hinge) work
+- `boot-adjustment-and-care.tsx`: Fit, straps, air cells, maintenance
+- `boot-progression-protocol.tsx`: Angle reduction from week 5, mobilisation, weightbearing
+- `wedge-removal.tsx`: When/how to remove wedges, warning signs
+- `healing-process.tsx`: Inflammation → proliferation → remodelling, re-rupture vs elongation
+- `sleeping-with-boot.tsx`: Night splint, positioning, temperature, 24/7 protection
+- `crutches-and-mobility.tsx`: Crutch use, EVENup, knee scooters, iWalk
+- `building-strength-in-boot.tsx`: Stage 1 exercises from Week 6 (seated calf raises with protection)
+- `nutrition-for-healing.tsx`: Protein, vitamin C, hydration, collagen
+- `washing-and-hygiene.tsx`: Bathroom safety, antifungal, merino socks, swelling
+- `final-boot-phase.tsx`: Remodelling, tendon strength at Week 8, preparing for physio
+
+## 04-transition (Weeks 10-12)
+- `boot-transition.tsx`: When to leave boot, weaning, shoe choice, heel lifts
+- `post-boot-period.tsx`: Boot removal criteria, gradual weaning, first steps
+- `post-boot-challenges.tsx`: Stiffness, swelling, avoiding aggressive stretching (elongation risk)
+- `scar-management.tsx`: Scar tissue, massage, bio-oil, sun protection
+
+## 05-physiotherapy (Weeks 10-24)
+- `starting-physio.tsx`: First session, Stage 2 goals (15+ double-leg heel raises, 1.4x BW MVIC)
+- `key-exercises.tsx`: Seated calf raises, standing heel raises, towel stretch, resistance bands, balance
+- `walking-properly.tsx`: Heel-to-toe gait, correcting limp, retro walking, heel lifts
+- `progressive-strengthening.tsx`: Single-leg targets (15 then 25 reps), LSI 90%, deficit heel raises
+
+## 06-recovery (Weeks 12-25)
+- `building-cardio.tsx`: Swimming, bike, elliptical, walk-jog progression
+- `swimming-and-water-activities.tsx`: When to start (weeks 12-14), pool walking, strokes
+- `returning-to-life.tsx`: Work (desk vs physical), household tasks, travel
+- `functional-milestones.tsx`: Pain-free walking, 25+ heel raises, balance, stairs (Stage 3 exit)
+
+## 07-advanced (Weeks 25+)
+- `starting-to-run.tsx`: Criteria, walk-jog progression, form, surface choice
+- `plyometrics.tsx`: When to start, pogo jumps → sport-specific, landing technique
+- `return-to-sport.tsx`: 85% symmetry rule, modified → full participation, 70-80% return rates
+
+## 08-long-term (6+ months)
+- `six-month-milestone.tsx`: Tendon status, return-to-sport criteria, psychological readiness
+- `preventing-rerupture.tsx`: 3-5% risk, ongoing strengthening, warm-ups, warning signs
+- `other-leg.tsx`: ~5% contralateral rupture risk
+- `when-things-dont-go-to-plan.tsx`: Slow progress, elongation, when to seek further opinion
+- `new-normal.tsx`: Permanent changes (thickening, asymmetry), long-term care
+
+## FAQ pages (website)
+Location: `apps/website/src/mains/FAQs/` (thin wrappers) → `apps/website/src/sections/FAQs/` (actual content)
+
+- `is-my-achilles-ruptured`: Symptoms, diagnosis, differential (tennis leg)
+- `what-happens-if-my-achilles-is-ruptured`: A&E, specialist, ultrasound, boot, blood thinners
+- `achilles-tear-treatment`: Surgery vs non-surgical, pain types, scar healing
+- `achilles-rupture-timeline`: Week-by-week timeline with guide phase links
+- `achilles-rupture-rehabilitation`: Exercise phases, rehab timeline, driving, running
+- `torn-achilles-recovery`: Boot vs cast, sleeping, healing time, partial tears
+- `life-after-achilles-rupture`: Return to sport/work, walking, re-rupture prevention
+
+## Blog articles
+Location: `apps/achilles-rupture/src/content/articles/` (md + mdx files)
