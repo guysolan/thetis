@@ -1,7 +1,8 @@
 {
-  "installCommand": "cd ../.. && bun install",
-  "buildCommand": "cd ../.. && turbo build --filter=@thetis/website",
-  "ignoreCommand": "(git rev-list --count HEAD | grep -q '^1$' || git diff HEAD^ HEAD --quiet -- apps/website/ packages/ui/ turbo.json package.json bun.lockb) && exit 1 || exit 0",
+  "installCommand": "cd ../.. && pnpm install",
+  "buildCommand": "cd ../.. && pnpm --filter @thetis/website build",
+  "outputDirectory": ".vercel/output",
+  "ignoreCommand": "(git rev-list --count HEAD | grep -q '^1$' || git diff HEAD^ HEAD --quiet -- apps/website/ packages/ui/ package.json pnpm-lock.yaml) && exit 1 || exit 0",
   "redirects": [
     { "source": "/courses", "destination": "/course", "permanent": true },
     { "source": "/courses/:path*", "destination": "/course", "permanent": true },
