@@ -1,42 +1,48 @@
 {
   "name": "thetis",
+  "type": "module",
   "devDependencies": {
-    "@biomejs/biome": "1.8.3",
     "@changesets/cli": "^2.27.1",
-    "turbo": "2.1.1",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vite-plus": "^0.1.13"
   },
-  "packageManager": "bun@1.1.26",
+  "packageManager": "pnpm@9.15.0",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "build:ship-stock": "turbo build --filter=@thetis/ship-stock",
-    "dev": "turbo dev --parallel",
-    "dev:achilles-rupture": "turbo dev --filter=@thetis/achilles-rupture",
-    "dev:ship-stock": "turbo dev --filter=@thetis/ship-stock",
-    "dev:website": "turbo dev --filter=@thetis/website",
-    "dev:email": "turbo dev --filter=@thetis/email",
+    "build": "vp run -r build",
+    "build:ship-stock": "vp run --filter @thetis/ship-stock build",
+    "dev": "vp run -r dev",
+    "dev:achilles-rupture": "vp run --filter @thetis/achilles-rupture dev",
+    "dev:ship-stock": "vp run --filter @thetis/ship-stock dev",
+    "dev:website": "vp run --filter @thetis/website dev",
+    "dev:email": "vp run --filter @thetis/email dev",
     "test-email": "ts-node packages/email/broadcasts/sequence-1/test.tsx",
-    "preview:website": "turbo preview --filter=@thetis/website",
-    "build:website": "turbo build --filter=@thetis/website",
-    "dev:settle-central": "turbo dev --filter=@thetis/settle-central",
-    "build:settle-central": "turbo build --filter=@thetis/settle-central",
+    "preview:website": "vp run --filter @thetis/website preview",
+    "build:website": "vp run --filter @thetis/website build",
+    "dev:settle-central": "vp run --filter @thetis/settle-central dev",
+    "build:settle-central": "vp run --filter @thetis/settle-central build",
     "clean": "git clean -xdf node_modules",
-    "clean:workspaces": "turbo clean",
-    "format": "biome format --write .",
-    "lint": "turbo lint && bun lint:repo",
-    "lint:repo": "bunx sherif@latest",
-    "typecheck": "turbo typecheck",
-    "deploy:website": "vercel deploy . --prod --build-env TURBO_FORCE=true --yes"
+    "clean:workspaces": "vp run -r clean",
+    "format": "vp fmt --write .",
+    "lint": "vp run -r lint",
+    "lint:repo": "pnpm exec sherif@latest",
+    "typecheck": "vp run -r typecheck",
+    "test": "vp run -r test",
+    "check": "vp check",
+    "deploy:website": "vercel deploy . --prod --yes"
   },
-  "workspaces": ["packages/*", "apps/*", "services/*"],
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "services/*",
+    "agents/*"
+  ],
   "dependencies": {
     "@astrojs/vercel": "^8.0.7",
     "@radix-ui/react-focus-scope": "^1.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "supabase": "^2.2.1",
-    "turborepo": "^0.0.1",
     "vercel": "^39.2.2"
   }
 }

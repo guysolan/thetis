@@ -7,14 +7,12 @@ export const MyEmail = ({ recipientName = "" }) => {
     <FootAndAnkle2
       heading1={
         <>
-          "The <HighlightedSpan>Best Piece</HighlightedSpan> of Rehab Kit No-One
-          Tells You About"
+          "The <HighlightedSpan>Best Piece</HighlightedSpan> of Rehab Kit No-One Tells You About"
         </>
       }
       heading2={
         <>
-          Introducing the <HighlightedSpan>Achilles Rupture</HighlightedSpan>{" "}
-          Night Splint
+          Introducing the <HighlightedSpan>Achilles Rupture</HighlightedSpan> Night Splint
         </>
       }
     />

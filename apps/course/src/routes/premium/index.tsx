@@ -83,8 +83,7 @@ const videoLessons = [
   },
   {
     id: 5,
-    title:
-      "Progressive Strengthening Protocols: Evidence-Based Exercise Progressions",
+    title: "Progressive Strengthening Protocols: Evidence-Based Exercise Progressions",
     instructor: "Specialist Physiotherapist",
     instructorType: "physio",
     duration: "20-22 min",
@@ -174,9 +173,8 @@ function PremiumIndexPage() {
             Achilles Recovery <span className="text-primary">Premium</span>
           </h1>
           <p className="mb-6 max-w-2xl text-muted-foreground text-lg md:text-xl">
-            Everything in Standard, plus 8 expert-led video lessons from
-            specialist surgeons and physios. Deep dives into the most critical
-            decision points and recovery strategies.
+            Everything in Standard, plus 8 expert-led video lessons from specialist surgeons and
+            physios. Deep dives into the most critical decision points and recovery strategies.
           </p>
         </div>
 
@@ -192,9 +190,7 @@ function PremiumIndexPage() {
                 <div className="flex justify-center items-center bg-primary/10 group-hover:bg-primary/20 rounded-xl w-full sm:w-32 h-32 transition-colors shrink-0">
                   <div className="flex flex-col items-center gap-2">
                     <Video className="w-8 h-8 text-primary" />
-                    <span className="font-medium text-primary text-xs">
-                      {lesson.duration}
-                    </span>
+                    <span className="font-medium text-primary text-xs">{lesson.duration}</span>
                   </div>
                 </div>
 
@@ -210,9 +206,11 @@ function PremiumIndexPage() {
                       </span>
                     </div>
                     <div className="flex items-center gap-1.5 text-muted-foreground">
-                      {lesson.instructorType === "surgeon"
-                        ? <User className="w-3.5 h-3.5" />
-                        : <Video className="w-3.5 h-3.5" />}
+                      {lesson.instructorType === "surgeon" ? (
+                        <User className="w-3.5 h-3.5" />
+                      ) : (
+                        <Video className="w-3.5 h-3.5" />
+                      )}
                       <span className="text-xs">{lesson.instructor}</span>
                     </div>
                   </div>
@@ -261,15 +259,11 @@ function PremiumIndexPage() {
               <Star className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h3 className="mb-2 font-semibold text-foreground">
-                Premium Course Coming Soon
-              </h3>
+              <h3 className="mb-2 font-semibold text-foreground">Premium Course Coming Soon</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                We're currently filming these expert video lessons with
-                specialist surgeons and physiotherapists. The Premium course
-                will launch in early 2025. In the meantime, the Standard course
-                provides comprehensive written guidance for your entire
-                recovery.
+                We're currently filming these expert video lessons with specialist surgeons and
+                physiotherapists. The Premium course will launch in early 2025. In the meantime, the
+                Standard course provides comprehensive written guidance for your entire recovery.
               </p>
               <div className="mt-4">
                 <a

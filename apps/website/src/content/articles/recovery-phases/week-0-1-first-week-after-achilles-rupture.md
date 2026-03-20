@@ -181,7 +181,7 @@ Your doctor will likely prescribe blood-thinning medication (thromboprophylaxis)
 - Once-daily tablet - much more convenient
 - Whether tablets are appropriate depends on your personal risk/bleeding profile and local protocol (some uses are “off-label” in some settings).[^nice-ng89]
 
-**Talk to your medical team** about which option is best for you. The key is that you take *something* - the risk is too high to ignore.
+**Talk to your medical team** about which option is best for you. The key is that you take _something_ - the risk is too high to ignore.
 
 ### Warning Signs to Watch For
 
@@ -453,9 +453,12 @@ Yes, swelling is completely normal and expected. It should gradually reduce over
 
 ## References
 
-[^ukfate]: **UK-FATE audit** — “Incidence of venous thromboembolism following Achilles tendon rupture. Data from the UK foot and ankle thrombo-embolism (UK-FATE) audit.” *PMID: 39961162*. (`https://pubmed.ncbi.nlm.nih.gov/39961162/`)
-[^maffulli1998]: Maffulli N, et al. “The clinical diagnosis of subcutaneous tear of the Achilles tendon. A prospective study in 174 patients.” *PMID: 9548122*. (`https://pubmed.ncbi.nlm.nih.gov/9548122/`)
-[^nice-ng89]: NICE guideline **NG89** — “Venous thromboembolism in over 16s: reducing the risk of hospital-acquired deep vein thrombosis or pulmonary embolism.” (Includes guidance on assessment and prophylaxis for lower limb immobilisation.) (`https://www.nice.org.uk/guidance/ng89`)
-[^ukstar]: Costa ML, et al. “Plaster cast versus functional brace for non-surgical treatment of Achilles tendon rupture (UKSTAR).” *PMID: 32035553*. (`https://pubmed.ncbi.nlm.nih.gov/32035553/`)
+[^ukfate]: **UK-FATE audit** — “Incidence of venous thromboembolism following Achilles tendon rupture. Data from the UK foot and ankle thrombo-embolism (UK-FATE) audit.” _PMID: 39961162_. (`https://pubmed.ncbi.nlm.nih.gov/39961162/`)
 
-*Continue to [Weeks 1-3: Treatment Decision Time](/recovery/weeks-1-3-treatment-decision) when you're ready to learn about the surgical vs non-surgical decision, walking boots, and what to expect at your specialist appointment.*
+[^maffulli1998]: Maffulli N, et al. “The clinical diagnosis of subcutaneous tear of the Achilles tendon. A prospective study in 174 patients.” _PMID: 9548122_. (`https://pubmed.ncbi.nlm.nih.gov/9548122/`)
+
+[^nice-ng89]: NICE guideline **NG89** — “Venous thromboembolism in over 16s: reducing the risk of hospital-acquired deep vein thrombosis or pulmonary embolism.” (Includes guidance on assessment and prophylaxis for lower limb immobilisation.) (`https://www.nice.org.uk/guidance/ng89`)
+
+[^ukstar]: Costa ML, et al. “Plaster cast versus functional brace for non-surgical treatment of Achilles tendon rupture (UKSTAR).” _PMID: 32035553_. (`https://pubmed.ncbi.nlm.nih.gov/32035553/`)
+
+_Continue to [Weeks 1-3: Treatment Decision Time](/recovery/weeks-1-3-treatment-decision) when you're ready to learn about the surgical vs non-surgical decision, walking boots, and what to expect at your specialist appointment._

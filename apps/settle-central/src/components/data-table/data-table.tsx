@@ -13,36 +13,12 @@ import {
   getFilteredRowModel,
 } from "@tanstack/react-table";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@thetis/ui/dialog";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@thetis/ui/dialog";
 import { Button } from "@thetis/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@thetis/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@thetis/ui/select";
 import { cn } from "@thetis/ui/cn";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-} from "@thetis/ui/command";
+import { Command, CommandEmpty, CommandGroup, CommandItem } from "@thetis/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@thetis/ui/popover";
 import {
   DropdownMenu,
@@ -50,16 +26,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@thetis/ui/dropdown-menu";
-import {
-  Globe2,
-  Store,
-  Filter,
-  Check,
-  MapPin,
-  ShoppingCart,
-  FileText,
-  Table2,
-} from "lucide-react";
+import { Globe2, Store, Filter, Check, MapPin, ShoppingCart, FileText, Table2 } from "lucide-react";
 import {
   DropdownMenuGroup,
   DropdownMenuItem,
@@ -79,16 +46,10 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-export function DataTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
-  );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
   const [openRegion, setOpenRegion] = React.useState(false);
   const [openMarketplace, setOpenMarketplace] = React.useState(false);
@@ -159,9 +120,7 @@ export function DataTable<TData, TValue>({
                   <DropdownMenuSubContent className="bg-white">
                     {["NA", "EUR", "ASIA"].map((region) => {
                       const selected = (
-                        (table
-                          .getColumn("region")
-                          ?.getFilterValue() as string[]) ?? []
+                        (table.getColumn("region")?.getFilterValue() as string[]) ?? []
                       ).includes(region.toLowerCase());
                       return (
                         <DropdownMenuItem
@@ -169,27 +128,19 @@ export function DataTable<TData, TValue>({
                           onSelect={(e) => {
                             e.preventDefault();
                             const currentValues =
-                              (table
-                                .getColumn("region")
-                                ?.getFilterValue() as string[]) ?? [];
+                              (table.getColumn("region")?.getFilterValue() as string[]) ?? [];
                             const newValues = selected
-                              ? currentValues.filter(
-                                  (value) => value !== region.toLowerCase(),
-                                )
+                              ? currentValues.filter((value) => value !== region.toLowerCase())
                               : [...currentValues, region.toLowerCase()];
                             table
                               .getColumn("region")
-                              ?.setFilterValue(
-                                newValues.length ? newValues : undefined,
-                              );
+                              ?.setFilterValue(newValues.length ? newValues : undefined);
                           }}
                         >
                           <div
                             className={cn(
                               "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
-                              selected
-                                ? "bg-primary text-primary-foreground"
-                                : "opacity-50",
+                              selected ? "bg-primary text-primary-foreground" : "opacity-50",
                             )}
                           >
                             {selected && <Check className="w-4 h-4" />}
@@ -219,9 +170,7 @@ export function DataTable<TData, TValue>({
                       "amazon.com.au",
                     ].map((marketplace) => {
                       const selected = (
-                        (table
-                          .getColumn("marketplace_name")
-                          ?.getFilterValue() as string[]) ?? []
+                        (table.getColumn("marketplace_name")?.getFilterValue() as string[]) ?? []
                       ).includes(marketplace.toLowerCase());
                       return (
                         <DropdownMenuItem
@@ -229,29 +178,21 @@ export function DataTable<TData, TValue>({
                           onSelect={(e) => {
                             e.preventDefault();
                             const currentValues =
-                              (table
-                                .getColumn("marketplace_name")
-                                ?.getFilterValue() as string[]) ?? [];
+                              (table.getColumn("marketplace_name")?.getFilterValue() as string[]) ??
+                              [];
                             const newValues = selected
-                              ? currentValues.filter(
-                                  (value) =>
-                                    value !== marketplace.toLowerCase(),
-                                )
+                              ? currentValues.filter((value) => value !== marketplace.toLowerCase())
                               : [...currentValues, marketplace.toLowerCase()];
                             table
                               .getColumn("marketplace_name")
-                              ?.setFilterValue(
-                                newValues.length ? newValues : undefined,
-                              );
+                              ?.setFilterValue(newValues.length ? newValues : undefined);
                           }}
                           className="hover:bg-accent cursor-pointer"
                         >
                           <div
                             className={cn(
                               "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
-                              selected
-                                ? "bg-primary text-primary-foreground"
-                                : "opacity-50",
+                              selected ? "bg-primary text-primary-foreground" : "opacity-50",
                             )}
                           >
                             {selected && <Check className="w-4 h-4" />}
@@ -267,9 +208,7 @@ export function DataTable<TData, TValue>({
               <DropdownMenuItem
                 onClick={() => {
                   table.getColumn("region")?.setFilterValue(undefined);
-                  table
-                    .getColumn("marketplace_name")
-                    ?.setFilterValue(undefined);
+                  table.getColumn("marketplace_name")?.setFilterValue(undefined);
                 }}
               >
                 Clear All Filters
@@ -307,16 +246,12 @@ export function DataTable<TData, TValue>({
                           <div
                             className={cn(
                               "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
-                              isVisible
-                                ? "bg-primary text-primary-foreground"
-                                : "opacity-50",
+                              isVisible ? "bg-primary text-primary-foreground" : "opacity-50",
                             )}
                           >
                             {isVisible && <Check className="w-4 h-4" />}
                           </div>
-                          <span className="capitalize">
-                            {changeCase.capitalCase(column.id)}
-                          </span>
+                          <span className="capitalize">{changeCase.capitalCase(column.id)}</span>
                         </CommandItem>
                       );
                     })}
@@ -350,18 +285,13 @@ export function DataTable<TData, TValue>({
                     <FileText className="w-5 h-5 text-primary" />
                   </div>
                   <div className="flex-1 space-y-1">
-                    <p className="font-medium text-sm leading-none">
-                      PDF Export
-                    </p>
+                    <p className="font-medium text-sm leading-none">PDF Export</p>
                     <p className="text-muted-foreground text-sm">
                       Export data in a formatted PDF document
                     </p>
                   </div>
                   <DialogTrigger asChild>
-                    <Button
-                      variant="outline"
-                      onClick={() => handleExport(["pdf"])}
-                    >
+                    <Button variant="outline" onClick={() => handleExport(["pdf"])}>
                       Export PDF
                     </Button>
                   </DialogTrigger>
@@ -372,18 +302,13 @@ export function DataTable<TData, TValue>({
                     <Table2 className="w-5 h-5 text-primary" />
                   </div>
                   <div className="flex-1 space-y-1">
-                    <p className="font-medium text-sm leading-none">
-                      CSV Export
-                    </p>
+                    <p className="font-medium text-sm leading-none">CSV Export</p>
                     <p className="text-muted-foreground text-sm">
                       Export data in a spreadsheet-compatible format
                     </p>
                   </div>
                   <DialogTrigger asChild>
-                    <Button
-                      variant="outline"
-                      onClick={() => handleExport(["csv"])}
-                    >
+                    <Button variant="outline" onClick={() => handleExport(["csv"])}>
                       Export CSV
                     </Button>
                   </DialogTrigger>
@@ -394,18 +319,13 @@ export function DataTable<TData, TValue>({
                     <FileText className="w-5 h-5 text-primary" />
                   </div>
                   <div className="flex-1 space-y-1">
-                    <p className="font-medium text-sm leading-none">
-                      Export Both
-                    </p>
+                    <p className="font-medium text-sm leading-none">Export Both</p>
                     <p className="text-muted-foreground text-sm">
                       Export data in both PDF and CSV formats
                     </p>
                   </div>
                   <DialogTrigger asChild>
-                    <Button
-                      variant="outline"
-                      onClick={() => handleExport(["pdf", "csv"])}
-                    >
+                    <Button variant="outline" onClick={() => handleExport(["pdf", "csv"])}>
                       Export Both
                     </Button>
                   </DialogTrigger>
@@ -425,10 +345,7 @@ export function DataTable<TData, TValue>({
                     <TableHead className="text-nowrap" key={header.id}>
                       {header.isPlaceholder
                         ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
+                        : flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>
                   );
                 })}
@@ -438,26 +355,17 @@ export function DataTable<TData, TValue>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
+                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell className="text-nowrap" key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                <TableCell colSpan={columns.length} className="h-24 text-center">
                   No results.
                 </TableCell>
               </TableRow>

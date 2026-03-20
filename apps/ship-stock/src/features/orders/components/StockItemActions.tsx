@@ -6,10 +6,7 @@ interface StockItemActionsProps {
   onAppend: (type: ItemType) => void;
 }
 
-const StockItemActions = ({
-  allowedTypes,
-  onAppend,
-}: StockItemActionsProps) => {
+const StockItemActions = ({ allowedTypes, onAppend }: StockItemActionsProps) => {
   return (
     <div className="flex gap-2 my-2">
       {allowedTypes.map((type) => (

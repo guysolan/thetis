@@ -77,8 +77,7 @@ const globalTrendsFaqs: CategorizedFAQsProp[] = [
     category: "Emerging Technologies",
     questions: [
       {
-        question:
-          "What new technologies are being developed for Achilles tendon treatment?",
+        question: "What new technologies are being developed for Achilles tendon treatment?",
         answer:
           "Several promising technologies are emerging: Shear Wave Elastography for early detection of tendon degeneration, Exosome Therapy for promoting tissue healing, and Mesenchymal Stem Cells (MSCs) for tendon regeneration. These technologies are currently being investigated in clinical trials and show potential for improving treatment outcomes.",
       },
@@ -122,11 +121,7 @@ const globalTrendsFaqs: CategorizedFAQsProp[] = [
 ];
 
 const GlobalTrendsFAQs = () => {
-  return (
-    <CategorizedFAQs
-      categories={globalTrendsFaqs}
-    />
-  );
+  return <CategorizedFAQs categories={globalTrendsFaqs} />;
 };
 
 export default GlobalTrendsFAQs;

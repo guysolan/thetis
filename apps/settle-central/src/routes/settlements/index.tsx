@@ -7,9 +7,7 @@ import { objectKeysToSnakeCase } from "../../lib/utils";
 export const Route = createFileRoute("/settlements/")({
   component: RouteComponent,
   loader: async ({ context }) => {
-    const reports = await context.queryClient.ensureQueryData(
-      selectAmazonReportsQueryOptions(),
-    );
+    const reports = await context.queryClient.ensureQueryData(selectAmazonReportsQueryOptions());
 
     const processedReports = objectKeysToSnakeCase(reports);
 
@@ -39,8 +37,7 @@ export const Route = createFileRoute("/settlements/")({
 
     return data.sort((a, b) => {
       return (
-        new Date(a.settlement_start_date).getTime() -
-        new Date(b.settlement_start_date).getTime()
+        new Date(a.settlement_start_date).getTime() - new Date(b.settlement_start_date).getTime()
       );
     });
   },

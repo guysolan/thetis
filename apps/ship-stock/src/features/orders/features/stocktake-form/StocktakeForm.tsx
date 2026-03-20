@@ -12,12 +12,7 @@ interface Props {
   isInline?: boolean;
   onSuccess?: () => void;
 }
-const StocktakeForm = ({
-  addressId,
-  orderItems,
-  isInline,
-  onSuccess,
-}: Props) => {
+const StocktakeForm = ({ addressId, orderItems, isInline, onSuccess }: Props) => {
   const { mutate: createOrder } = useCreateStocktakeOrder();
   const defaultValues = {
     order_id: null,
@@ -57,17 +52,17 @@ const StocktakeForm = ({
       defaultValues={defaultValues}
       onSubmit={handleSubmit}
     >
-      {isInline
-        ? (
-          <StocktakeItems
-            address_name="address_id"
-            defaultIsExpanded={true}
-            allowedTypes={["part", "product"]}
-            name="order_items"
-            inCard={true}
-          />
-        )
-        : <StocktakeFormFields />}
+      {isInline ? (
+        <StocktakeItems
+          address_name="address_id"
+          defaultIsExpanded={true}
+          allowedTypes={["part", "product"]}
+          name="order_items"
+          inCard={true}
+        />
+      ) : (
+        <StocktakeFormFields />
+      )}
     </BaseOrderForm>
   );
 };

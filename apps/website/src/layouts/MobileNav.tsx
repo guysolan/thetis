@@ -14,7 +14,7 @@ import {
 
 import { cn } from "../lib/utils";
 
-"client only";
+("client only");
 
 import NavAccordion from "./NavAccordion";
 import { ArrowRight } from "lucide-react";
@@ -75,9 +75,7 @@ export function MobileNav({ lang = "en", currentPath = "/" }: MobileNavProps) {
         <SheetHeader className="flex flex-row justify-between items-center">
           <Thetis />
           <div className="flex items-center gap-2">
-            <SheetClose
-              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-            >
+            <SheetClose className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
               {t.close}
             </SheetClose>
           </div>

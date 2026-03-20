@@ -22,8 +22,7 @@ import Layout from "./Layout.astro";
 import OtherArticles from "@/components/OtherArticles.astro";
 import Article from "@/components/research/Article.astro";
 import ShareControls from "@/components/research/ShareControls";
-import CourseCTA from "@/components/CTA/CourseCTA.astro";
-import NightSplintAdvert from "../components/products/night-splint/NightSplintAdvert.astro";
+import StickyAddToCart from "@/components/StickyAddToCart.tsx";
 ---
 
 <Layout
@@ -39,6 +38,12 @@ import NightSplintAdvert from "../components/products/night-splint/NightSplintAd
         <OtherArticles lang={lang} />
         <ShareControls client:load />
     </main>
+    <StickyAddToCart
+        variant="splint"
+        lang={lang}
+        splintHref={lang === "en" ? "/achilles-rupture-splint" : lang === "de" ? "/de/achillessehnenriss-schiene" : lang === "fr" ? "/fr/attelle-rupture-tendon-achille" : lang === "es" ? "/es/bota-ortopedica-tendon-aquiles" : "/it/tutore-rottura-tendine-achille"}
+        client:load
+    />
 </Layout>
 
 <style>

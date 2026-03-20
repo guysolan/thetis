@@ -15,21 +15,13 @@ import { useEnrollment } from "@/hooks/use-enrollment";
 import { supabase } from "@/lib/supabase";
 import { Card } from "@thetis/ui/card";
 import { Button } from "@thetis/ui/button";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@thetis/ui/chart";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@thetis/ui/chart";
 import { Cell, Pie, PieChart } from "recharts";
 import { sections } from "@/content/course/sections";
 import { WEBSITE_URL } from "@/lib/env";
 import { cn } from "@/lib/utils";
 
-function CourseProgressChart({
-  percentage,
-}: {
-  percentage: number;
-}) {
+function CourseProgressChart({ percentage }: { percentage: number }) {
   const data = [
     { name: "completed", value: percentage, fill: "hsl(var(--primary))" },
     { name: "remaining", value: 100 - percentage, fill: "hsl(var(--muted))" },
@@ -107,23 +99,20 @@ function CourseCard({
   const unlocked = email ? hasAccess(courseType) : false;
 
   // Get sections for this course type
-  const courseSections = sections.filter(
-    (s) => s.course_type === courseType,
-  );
-  const completionPercentage = unlocked
-    ? getCompletionPercentage(courseSections.length)
-    : 0;
+  const courseSections = sections.filter((s) => s.course_type === courseType);
+  const completionPercentage = unlocked ? getCompletionPercentage(courseSections.length) : 0;
 
   // Get next incomplete lesson for enrolled users (only for standard course)
-  const nextLesson = unlocked && courseType === "standard"
-    ? courseSections.find((s) => {
-      if (!s.slug || typeof s.slug !== "string") {
-        console.warn("Section missing valid slug:", s);
-        return false;
-      }
-      return !isLessonComplete(s.slug);
-    })
-    : null;
+  const nextLesson =
+    unlocked && courseType === "standard"
+      ? courseSections.find((s) => {
+          if (!s.slug || typeof s.slug !== "string") {
+            console.warn("Section missing valid slug:", s);
+            return false;
+          }
+          return !isLessonComplete(s.slug);
+        })
+      : null;
 
   // Debug: log nextLesson if it exists
   if (nextLesson && process.env.NODE_ENV === "development") {
@@ -211,13 +200,13 @@ function CourseCard({
             {title}
           </h3>
         </div>
-        {unlocked
-          ? <CourseProgressChart percentage={completionPercentage} />
-          : (
-            <div className="flex justify-center items-center w-[50px] h-[50px] shrink-0">
-              <Lock className="w-5 h-5 text-muted-foreground" />
-            </div>
-          )}
+        {unlocked ? (
+          <CourseProgressChart percentage={completionPercentage} />
+        ) : (
+          <div className="flex justify-center items-center w-[50px] h-[50px] shrink-0">
+            <Lock className="w-5 h-5 text-muted-foreground" />
+          </div>
+        )}
       </div>
 
       {/* Description */}
@@ -226,10 +215,7 @@ function CourseCard({
       {/* Features list */}
       <ul className="flex-grow space-y-3 mb-6">
         {features.map((feature, index) => (
-          <li
-            key={index}
-            className="flex items-start gap-3 text-foreground text-sm"
-          >
+          <li key={index} className="flex items-start gap-3 text-foreground text-sm">
             <div
               className={cn(
                 "flex justify-center items-center mt-0.5 rounded-full w-5 h-5 shrink-0",
@@ -244,46 +230,30 @@ function CourseCard({
       </ul>
 
       {/* CTA */}
-      {unlocked
-        ? (
-          nextLesson && nextLesson.slug && typeof nextLesson.slug === "string"
-            ? (
-              // @ts-ignore - Premium route exists but we only use standard here
-              <Link
-                to="/standard/$slug"
-                params={{ slug: nextLesson.slug }}
-              >
-                <Button
-                  className="w-full"
-                  variant="outline"
-                >
-                  {displayCtaText}
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-            )
-            : (
-              <Link to={link}>
-                <Button
-                  className="w-full"
-                  variant="outline"
-                >
-                  {displayCtaText}
-                </Button>
-              </Link>
-            )
-        )
-        : (
-          <Link to="/claim" search={{ email: "", order: "" }}>
-            <Button
-              className="w-full"
-              variant="outline"
-            >
-              {email ? "Claim Your Course" : "Sign In to Access"}
-              <Lock className="ml-2 w-4 h-4" />
+      {unlocked ? (
+        nextLesson && nextLesson.slug && typeof nextLesson.slug === "string" ? (
+          // @ts-ignore - Premium route exists but we only use standard here
+          <Link to="/standard/$slug" params={{ slug: nextLesson.slug }}>
+            <Button className="w-full" variant="outline">
+              {displayCtaText}
+              <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
           </Link>
-        )}
+        ) : (
+          <Link to={link}>
+            <Button className="w-full" variant="outline">
+              {displayCtaText}
+            </Button>
+          </Link>
+        )
+      ) : (
+        <Link to="/claim" search={{ email: "", order: "" }}>
+          <Button className="w-full" variant="outline">
+            {email ? "Claim Your Course" : "Sign In to Access"}
+            <Lock className="ml-2 w-4 h-4" />
+          </Button>
+        </Link>
+      )}
     </Card>
   );
 }
@@ -294,8 +264,7 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const { email, loading: authLoading } = useSimpleAuth();
-  const { enrollments, hasAccess, loading: enrollmentLoading } =
-    useEnrollment();
+  const { enrollments, hasAccess, loading: enrollmentLoading } = useEnrollment();
   const { getCompletionPercentage, isLessonComplete } = useCourseProgress();
 
   // Show landing page for everyone, but customize for enrolled users
@@ -309,33 +278,31 @@ function HomePage() {
               <BookOpen className="w-4 h-4" />
               Recovery Programs
             </div>
-            {email && enrollments.length > 0
-              ? (
-                <>
-                  <h1 className="mb-6 font-bold text-foreground text-4xl md:text-6xl tracking-tight">
-                    Welcome back{email
-                      ? `, ${
-                        email.split("@")[0].charAt(0).toUpperCase() +
-                        email.split("@")[0].slice(1)
+            {email && enrollments.length > 0 ? (
+              <>
+                <h1 className="mb-6 font-bold text-foreground text-4xl md:text-6xl tracking-tight">
+                  Welcome back
+                  {email
+                    ? `, ${
+                        email.split("@")[0].charAt(0).toUpperCase() + email.split("@")[0].slice(1)
                       }`
-                      : ""}
-                  </h1>
-                  <p className="mx-auto max-w-2xl text-muted-foreground text-lg md:text-xl">
-                    Continue your recovery journey
-                  </p>
-                </>
-              )
-              : (
-                <>
-                  <h1 className="mb-6 font-bold text-foreground text-4xl md:text-6xl tracking-tight">
-                    Simplify your <span className="text-primary">Recovery</span>
-                  </h1>
-                  <p className="mx-auto max-w-2xl text-muted-foreground text-lg md:text-xl">
-                    Choose the program that best fits your journey back to life,
-                    work, and sport after an Achilles rupture.
-                  </p>
-                </>
-              )}
+                    : ""}
+                </h1>
+                <p className="mx-auto max-w-2xl text-muted-foreground text-lg md:text-xl">
+                  Continue your recovery journey
+                </p>
+              </>
+            ) : (
+              <>
+                <h1 className="mb-6 font-bold text-foreground text-4xl md:text-6xl tracking-tight">
+                  Simplify your <span className="text-primary">Recovery</span>
+                </h1>
+                <p className="mx-auto max-w-2xl text-muted-foreground text-lg md:text-xl">
+                  Choose the program that best fits your journey back to life, work, and sport after
+                  an Achilles rupture.
+                </p>
+              </>
+            )}
           </div>
 
           {/* Course Card */}
@@ -375,14 +342,11 @@ function HomePage() {
                 Not ready to commit? Start with free emails
               </h3>
               <p className="text-muted-foreground">
-                Personalized recovery guidance timed to your injury date. The
-                right information arrives exactly when you need it.
+                Personalized recovery guidance timed to your injury date. The right information
+                arrives exactly when you need it.
               </p>
             </div>
-            <EmailSignupDialog
-              triggerText="Get Free Emails"
-              supabaseClient={supabase}
-            />
+            <EmailSignupDialog triggerText="Get Free Emails" supabaseClient={supabase} />
           </div>
         </div>
       </div>

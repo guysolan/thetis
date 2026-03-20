@@ -3,9 +3,7 @@ import { supabase } from "@/lib/supabase";
 import { Address } from "../types";
 
 export const selectAddresses = async () => {
-  const { data, error } = await supabase.from("addresses").select(
-    "*, companies(*)",
-  );
+  const { data, error } = await supabase.from("addresses").select("*, companies(*)");
 
   if (error) {
     throw error;

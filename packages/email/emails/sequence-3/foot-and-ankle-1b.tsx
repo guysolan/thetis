@@ -13,8 +13,7 @@ export const MyEmail = () => {
       }
       heading2={
         <>
-          The Night Splint That Makes{" "}
-          <HighlightedSpan>Patients Rave</HighlightedSpan> About Their{" "}
+          The Night Splint That Makes <HighlightedSpan>Patients Rave</HighlightedSpan> About Their{" "}
           <HighlightedSpan>Recovery Experience</HighlightedSpan>
         </>
       }

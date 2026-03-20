@@ -15,14 +15,10 @@ const Thetis = ({ lang }: ThetisProps) => {
     currentLanguage = languages.find((l) => l.code === lang) || languages[0];
   } else {
     // Detect from URL
-    const pathname = typeof window !== "undefined"
-      ? window.location.pathname
-      : "";
+    const pathname = typeof window !== "undefined" ? window.location.pathname : "";
     const segments = pathname.replace(/^\//, "").split("/");
     const possibleLangCode = segments[0];
-    const detectedLang = languages.find((lang) =>
-      lang.code === possibleLangCode
-    );
+    const detectedLang = languages.find((lang) => lang.code === possibleLangCode);
     if (detectedLang) {
       currentLanguage = detectedLang;
     }

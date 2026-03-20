@@ -26,14 +26,7 @@ type SelectProps = {
   className?: string;
   description?: string;
 };
-const Select = ({
-  name,
-  label,
-  options,
-  disabled,
-  className,
-  description,
-}: SelectProps) => {
+const Select = ({ name, label, options, disabled, className, description }: SelectProps) => {
   const { control } = useFormContext();
   return (
     <FormField
@@ -46,36 +39,21 @@ const Select = ({
             {description && (
               <Popover>
                 <PopoverTrigger asChild>
-                  <Button
-                    size="icon"
-                    variant="ghost"
-                    type="button"
-                    className="px-0 py-0"
-                  >
+                  <Button size="icon" variant="ghost" type="button" className="px-0 py-0">
                     <Info size={16} />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent>
-                  <FormDescription className="text-gray-500 text-sm">
-                    {description}
-                  </FormDescription>
+                  <FormDescription className="text-gray-500 text-sm">{description}</FormDescription>
                 </PopoverContent>
               </Popover>
             )}
           </FormLabel>
 
           <FormMessage />
-          <SelectWrap
-            disabled={disabled}
-            onValueChange={field.onChange}
-            value={field.value}
-          >
+          <SelectWrap disabled={disabled} onValueChange={field.onChange} value={field.value}>
             <FormControl>
-              <SelectTrigger
-                ref={field.ref}
-                name={field.name}
-                className="capitalize"
-              >
+              <SelectTrigger ref={field.ref} name={field.name} className="capitalize">
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
             </FormControl>
@@ -83,11 +61,7 @@ const Select = ({
               {options
                 .sort((a, b) => a.label.localeCompare(b.label))
                 .map((o) => (
-                  <SelectItem
-                    className="capitalize"
-                    key={o.value}
-                    value={o.value}
-                  >
+                  <SelectItem className="capitalize" key={o.value} value={o.value}>
                     {o.label}
                   </SelectItem>
                 ))}

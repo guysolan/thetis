@@ -5,16 +5,16 @@ export type HighlightedParagraphProps = {
   text: string;
 }[];
 
-const HighlightedParagraph = (
-  { paragraph }: { paragraph: HighlightedParagraphProps },
-) => {
+const HighlightedParagraph = ({ paragraph }: { paragraph: HighlightedParagraphProps }) => {
   return (
     <>
-      {paragraph.map((item, i) => (
-        item.highlighted
-          ? <HighlightedWord key={item.text + i}>{item.text}</HighlightedWord>
-          : <span key={item.text + i}>{item.text}</span>
-      ))}
+      {paragraph.map((item, i) =>
+        item.highlighted ? (
+          <HighlightedWord key={item.text + i}>{item.text}</HighlightedWord>
+        ) : (
+          <span key={item.text + i}>{item.text}</span>
+        ),
+      )}
     </>
   );
 };

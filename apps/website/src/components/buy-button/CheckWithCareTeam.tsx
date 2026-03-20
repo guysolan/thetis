@@ -94,33 +94,22 @@ const CheckWithCareTeam = ({ className, lang = "en" }: Props) => {
             </button>
 
             <div className="p-6">
-              <h2 className="mb-4 font-semibold text-black text-lg">
-                {t.modal.title}
-              </h2>
+              <h2 className="mb-4 font-semibold text-black text-lg">{t.modal.title}</h2>
 
               <div className="space-y-4 text-base">
-                <p className="text-gray-700">
-                  {t.modal.p1}
-                </p>
+                <p className="text-gray-700">{t.modal.p1}</p>
 
-                <p
-                  className="text-gray-700"
-                  dangerouslySetInnerHTML={{ __html: t.modal.p2 }}
-                />
+                <p className="text-gray-700" dangerouslySetInnerHTML={{ __html: t.modal.p2 }} />
 
                 <div className="bg-primary/10 p-4 border-primary/30 border-l-4 rounded-r-lg">
-                  <p className="mb-2 font-medium text-primary">
-                    {t.modal.whatToDo}
-                  </p>
+                  <p className="mb-2 font-medium text-primary">{t.modal.whatToDo}</p>
                   <p
                     className="text-primary"
                     dangerouslySetInnerHTML={{ __html: t.modal.evidence }}
                   />
                 </div>
 
-                <p className="text-gray-600 text-sm">
-                  {t.modal.p3}
-                </p>
+                <p className="text-gray-600 text-sm">{t.modal.p3}</p>
               </div>
             </div>
           </div>

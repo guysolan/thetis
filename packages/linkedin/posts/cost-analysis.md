@@ -7,7 +7,7 @@ Economic Study Insights:
 • Average direct surgical cost: $5,912 💵  
 • Employer time-loss cost: $3,740 📉  
 • Non-operative pathway saved $2,800 per patient 💳  
-• Out-of-pocket for uninsured: up to $9,400 😱  
+• Out-of-pocket for uninsured: up to $9,400 😱
 
 Helping patients balance PRICE with PERFORMANCE?
 

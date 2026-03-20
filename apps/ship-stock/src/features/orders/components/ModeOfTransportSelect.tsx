@@ -8,11 +8,5 @@ const modeOfTransport = [
 ];
 
 export function ModeOfTransportSelect() {
-  return (
-    <Select
-      name="mode_of_transport"
-      label="Mode of Transport"
-      options={modeOfTransport}
-    />
-  );
+  return <Select name="mode_of_transport" label="Mode of Transport" options={modeOfTransport} />;
 }

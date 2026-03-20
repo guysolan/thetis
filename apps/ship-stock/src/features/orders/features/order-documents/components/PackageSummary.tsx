@@ -15,9 +15,7 @@ const PackageSummary = ({ items }: { items: OrderView["items"] }) => {
   // Group items by package_item_change_id
   const packageGroups = uniquePackageIds?.reduce(
     (groups, packageId) => {
-      groups[packageId] = items?.filter(
-        (item) => item.package_item_change_id === packageId,
-      );
+      groups[packageId] = items?.filter((item) => item.package_item_change_id === packageId);
       return groups;
     },
     {} as Record<string, OrderView["items"]>,
@@ -30,9 +28,7 @@ const PackageSummary = ({ items }: { items: OrderView["items"] }) => {
       <div className="mt-8">
         <h2 className="mb-4 font-semibold text-lg">Package Breakdown</h2>
         <div className="bg-muted/50 p-8 border border-border rounded-lg text-center">
-          <p className="text-muted-foreground text-sm">
-            No packages defined for this order
-          </p>
+          <p className="text-muted-foreground text-sm">No packages defined for this order</p>
         </div>
       </div>
     );
@@ -40,16 +36,14 @@ const PackageSummary = ({ items }: { items: OrderView["items"] }) => {
 
   return (
     <>
-      {Object.entries(packageGroups).map(
-        ([packageItemChangeId, groupItems], index) => (
-          <Package
-            key={`package-summary-${index}-${packageItemChangeId}`}
-            packageItemChangeId={packageItemChangeId}
-            items={groupItems}
-            index={index}
-          />
-        ),
-      )}
+      {Object.entries(packageGroups).map(([packageItemChangeId, groupItems], index) => (
+        <Package
+          key={`package-summary-${index}-${packageItemChangeId}`}
+          packageItemChangeId={packageItemChangeId}
+          items={groupItems}
+          index={index}
+        />
+      ))}
     </>
   );
 };

@@ -12,6 +12,6 @@ As our first ever Thetis athlete, Andrew's feedback was crucial in developing ou
 
 Surgeons treating basketballers: Would you recommend the splint to your players? 🏀👇
 
- #SportsPerformance #AchillesRupture #TeamGB
+#SportsPerformance #AchillesRupture #TeamGB
 
 REPOST

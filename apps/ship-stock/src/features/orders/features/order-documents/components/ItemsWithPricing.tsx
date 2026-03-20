@@ -1,19 +1,9 @@
 import React from "react";
 import type { OrderView } from "../../../types";
 import { useSelectItemsView } from "../../../../items/api/selectItemsView";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 import NumberFlow from "@number-flow/react";
-import {
-    type Currency,
-    getCurrencyFormatOptions,
-} from "../../../../../constants/currencies";
+import { type Currency, getCurrencyFormatOptions } from "../../../../../constants/currencies";
 
 type ItemDetails = {
   item_name?: string;
@@ -23,10 +13,8 @@ type ItemDetails = {
   tax?: number;
 };
 
-type GroupedItem =
-  & OrderView["items"][number]
-  & ItemDetails
-  & {
+type GroupedItem = OrderView["items"][number] &
+  ItemDetails & {
     totalQuantity: number;
     totalPrice: number;
   };
@@ -51,9 +39,7 @@ const ItemsWithPricing = ({
 
   const groupedItems = filteredItems.reduce(
     (acc, orderItem) => {
-      const itemDetails = items.find(
-        (item) => item.item_id === orderItem.item_id,
-      );
+      const itemDetails = items.find((item) => item.item_id === orderItem.item_id);
 
       if (!acc[orderItem.item_id]) {
         const price = orderItem.price ?? 0;
@@ -81,12 +67,9 @@ const ItemsWithPricing = ({
     {} as Record<string, GroupedItem>,
   );
 
-  const invoiceItems = Object.values(groupedItems).filter(
-    (item) => item.totalQuantity > 0,
-  );
+  const invoiceItems = Object.values(groupedItems).filter((item) => item.totalQuantity > 0);
 
-  const { format: currencyFormat, locales: currencyLocales } =
-    getCurrencyFormatOptions(currency);
+  const { format: currencyFormat, locales: currencyLocales } = getCurrencyFormatOptions(currency);
 
   // If no items with pricing, show placeholder
   if (invoiceItems.length === 0) {
@@ -103,10 +86,7 @@ const ItemsWithPricing = ({
   }
 
   // Calculate totals
-  const itemTotal = invoiceItems.reduce(
-    (sum, item) => sum + item.totalPrice,
-    0,
-  );
+  const itemTotal = invoiceItems.reduce((sum, item) => sum + item.totalPrice, 0);
   const carriageAmount = order.carriage ?? 0;
   const grandTotal = itemTotal + carriageAmount;
 
@@ -131,13 +111,9 @@ const ItemsWithPricing = ({
             <TableRow key={item.item_id}>
               <TableCell className="text-black">{item.item_name}</TableCell>
               <TableCell className="text-black">{item.sku}</TableCell>
-              <TableCell className="text-black">
-                {item.country_of_origin}
-              </TableCell>
+              <TableCell className="text-black">{item.country_of_origin}</TableCell>
               <TableCell className="text-black">{item.hs_code}</TableCell>
-              <TableCell className="text-black text-right">
-                {item.totalQuantity}
-              </TableCell>
+              <TableCell className="text-black text-right">{item.totalQuantity}</TableCell>
               <TableCell className="text-black text-right">
                 <NumberFlow
                   value={item.price ?? 0}
@@ -145,9 +121,7 @@ const ItemsWithPricing = ({
                   locales={currencyLocales}
                 />
               </TableCell>
-              <TableCell className="text-black text-right">
-                {(item.tax ?? 0) * 100}%
-              </TableCell>
+              <TableCell className="text-black text-right">{(item.tax ?? 0) * 100}%</TableCell>
               <TableCell className="text-black text-right">
                 <NumberFlow
                   value={item.totalPrice}
@@ -159,8 +133,9 @@ const ItemsWithPricing = ({
           ))}
           {carriageAmount > 0 && (
             <TableRow className="border-t text-neutral-800">
-              <TableCell className="text-black">Carriage</TableCell>
-              <TableCell colSpan={6} />
+              <TableCell colSpan={7} className="text-black">
+                Carriage
+              </TableCell>
               <TableCell className="text-black text-right">
                 <NumberFlow
                   value={carriageAmount}
@@ -174,11 +149,7 @@ const ItemsWithPricing = ({
             <TableCell className="font-semibold text-black">Total</TableCell>
             <TableCell colSpan={6} />
             <TableCell className="font-semibold text-black text-right">
-              <NumberFlow
-                value={grandTotal}
-                format={currencyFormat}
-                locales={currencyLocales}
-              />
+              <NumberFlow value={grandTotal} format={currencyFormat} locales={currencyLocales} />
             </TableCell>
           </TableRow>
         </TableBody>

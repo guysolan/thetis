@@ -39,9 +39,7 @@ export const TimelineStage: React.FC<TimelineStageProps> = ({
         </div>
 
         {/* Country-specific data (right side on desktop) */}
-        <div
-          className={`${index % 2 === 0 ? "md:order-2 md:pl-12" : "md:pr-12"}`}
-        >
+        <div className={`${index % 2 === 0 ? "md:order-2 md:pl-12" : "md:pr-12"}`}>
           {selectedCountries.length === 1 ? (
             // Single country view
             <SingleCountryView

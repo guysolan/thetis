@@ -20,8 +20,7 @@ export const ShopifyCourseBuyButton: React.FC<ShopifyCourseBuyButtonProps> = ({
   const componentId = `course-buy-button-${productId}`;
 
   useEffect(() => {
-    const scriptURL =
-      "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js";
+    const scriptURL = "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js";
 
     const ShopifyBuyInit = () => {
       const client = (window as any).ShopifyBuy.buildClient({
@@ -137,9 +136,7 @@ export const ShopifyCourseBuyButton: React.FC<ShopifyCourseBuyButtonProps> = ({
     }
 
     return () => {
-      const existingScript = document.querySelector(
-        `script[src="${scriptURL}"]`,
-      );
+      const existingScript = document.querySelector(`script[src="${scriptURL}"]`);
       if (existingScript) {
         existingScript.remove();
       }
@@ -150,17 +147,11 @@ export const ShopifyCourseBuyButton: React.FC<ShopifyCourseBuyButtonProps> = ({
     <div className={className}>
       {showPrice && (
         <div className="mb-3 text-center">
-          {isLoading
-            ? (
-              <div className="bg-muted mx-auto rounded w-20 h-6 animate-pulse" />
-            )
-            : price
-            ? (
-              <div className="font-semibold text-foreground text-2xl">
-                {price}
-              </div>
-            )
-            : null}
+          {isLoading ? (
+            <div className="bg-muted mx-auto rounded w-20 h-6 animate-pulse" />
+          ) : price ? (
+            <div className="font-semibold text-foreground text-2xl">{price}</div>
+          ) : null}
         </div>
       )}
       <div id={componentId} />

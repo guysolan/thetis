@@ -10,8 +10,7 @@ const buttonVariants = cva(
       variant: {
         default:
           "!bg-primary text-primary-foreground dark:bg-primary dark:text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
           "border border-black text-black bg-background hover:bg-accent hover:text-accent-foreground dark:text-neutral-50 dark:border-neutral-50",
         secondary:
@@ -44,54 +43,41 @@ export interface ButtonProps extends VariantProps<typeof buttonVariants> {
   children?: React.ReactNode;
 }
 
-type ButtonElementProps = Omit<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  keyof ButtonProps
->;
-type AnchorElementProps = Omit<
-  React.AnchorHTMLAttributes<HTMLAnchorElement>,
-  keyof ButtonProps
->;
+type ButtonElementProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof ButtonProps>;
+type AnchorElementProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof ButtonProps>;
 
 const Button = React.forwardRef<
   HTMLButtonElement | HTMLAnchorElement,
   ButtonProps & (ButtonElementProps & AnchorElementProps)
->(
-  ({ className, variant, size, asChild = false, href, ...props }, ref) => {
-    if (asChild) {
-      return (
-        <Slot
-          className={cn(buttonVariants({ variant, size, className }))}
-          {...props}
-        />
-      );
-    }
+>(({ className, variant, size, asChild = false, href, ...props }, ref) => {
+  if (asChild) {
+    return <Slot className={cn(buttonVariants({ variant, size, className }))} {...props} />;
+  }
 
-    if (href) {
-      const { onClick, type, ...anchorProps } = props as AnchorElementProps & {
-        onClick?: () => void;
-        type?: string;
-      };
-      return (
-        <a
-          href={href}
-          className={cn(buttonVariants({ variant, size, className }))}
-          ref={ref as React.ForwardedRef<HTMLAnchorElement>}
-          {...anchorProps}
-        />
-      );
-    }
-
-    const buttonProps = props as ButtonElementProps;
+  if (href) {
+    const { onClick, type, ...anchorProps } = props as AnchorElementProps & {
+      onClick?: () => void;
+      type?: string;
+    };
     return (
-      <button
+      <a
+        href={href}
         className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref as React.ForwardedRef<HTMLButtonElement>}
-        {...buttonProps}
+        ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+        {...anchorProps}
       />
     );
-  },
-);
+  }
+
+  const buttonProps = props as ButtonElementProps;
+  return (
+    <button
+      className={cn(buttonVariants({ variant, size, className }))}
+      ref={ref as React.ForwardedRef<HTMLButtonElement>}
+      {...buttonProps}
+    />
+  );
+});
 Button.displayName = "Button";
 
 export { Button, buttonVariants };

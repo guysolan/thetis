@@ -1,8 +1,4 @@
-import {
-  queryOptions,
-  useQuery,
-  useSuspenseQuery,
-} from "@tanstack/react-query";
+import { queryOptions, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "../../../lib/supabase";
 
 export const selectItems = async () => {

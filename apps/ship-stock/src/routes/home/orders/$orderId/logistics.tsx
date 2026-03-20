@@ -81,9 +81,7 @@ function RouteComponent() {
     } catch (error) {
       console.error("Error completing order:", error);
       toast.error(
-        `Failed to complete order: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
+        `Failed to complete order: ${error instanceof Error ? error.message : "Unknown error"}`,
       );
     }
   };
@@ -107,11 +105,7 @@ function RouteComponent() {
   return (
     <FormProvider {...form}>
       <div className="space-y-6">
-        <OrderFormStepper
-          steps={STEPS}
-          currentStep={4}
-          onStepClick={handleStepClick}
-        />
+        <OrderFormStepper steps={STEPS} currentStep={4} onStepClick={handleStepClick} />
         <PricingSummaryPage />
         <OrderFormNavigation
           onPrevious={handlePrevious}

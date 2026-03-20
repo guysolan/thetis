@@ -65,12 +65,12 @@ These are two stages of the same problem:
 
 **Pulmonary Embolism (PE)** is what happens if part of that clot breaks free and travels through your bloodstream — via the heart — to your lungs. A PE blocks blood flow in the lungs and can be life-threatening. It requires **emergency medical treatment**.
 
-| | DVT (leg clot) | PE (lung clot) |
-| --- | --- | --- |
-| **Where** | Deep veins of the calf or thigh | Arteries of the lungs |
-| **Severity** | Painful but treatable | Medical emergency |
+|               | DVT (leg clot)                      | PE (lung clot)                       |
+| ------------- | ----------------------------------- | ------------------------------------ |
+| **Where**     | Deep veins of the calf or thigh     | Arteries of the lungs                |
+| **Severity**  | Painful but treatable               | Medical emergency                    |
 | **Key signs** | Calf pain, one-leg swelling, warmth | Breathlessness, chest pain, fainting |
-| **Action** | Contact your clinician urgently | Call emergency services immediately |
+| **Action**    | Contact your clinician urgently     | Call emergency services immediately  |
 
 ## How Common Are Blood Clots?
 
@@ -115,10 +115,10 @@ Most hospitals will assess your blood clot risk after an Achilles rupture and pr
 
 ### Common Options
 
-| Medication | Type | How it's taken | Typical duration |
-| --- | --- | --- | --- |
-| **Enoxaparin / Dalteparin** | Low molecular weight heparin (LMWH) | Daily injection (self-administered) | 4–6 weeks |
-| **Rivaroxaban** | Direct oral anticoagulant (DOAC) | Oral tablet | 4–6 weeks |
+| Medication                  | Type                                | How it's taken                      | Typical duration |
+| --------------------------- | ----------------------------------- | ----------------------------------- | ---------------- |
+| **Enoxaparin / Dalteparin** | Low molecular weight heparin (LMWH) | Daily injection (self-administered) | 4–6 weeks        |
+| **Rivaroxaban**             | Direct oral anticoagulant (DOAC)    | Oral tablet                         | 4–6 weeks        |
 
 Research from Saragas et al. (2017) found that switching from injections to oral rivaroxaban resulted in **just 1 DVT event in 28 patients (3.6%)** — and that patient admitted to not taking the medication. Oral tablets tend to have better compliance because patients find daily injections difficult to maintain.
 
@@ -185,9 +185,9 @@ The highest risk period is the first 3 months, particularly while you're immobil
 
 ## References
 
-1. Barfod KW, Nielsen EG, Olsen BH, et al. Risk of Deep Vein Thrombosis After Acute Achilles Tendon Rupture: A Secondary Analysis of a Randomized Controlled Trial. *Orthop J Sports Med.* 2020;8(4). [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC7222258/)
-2. Hashem M, Elbeshbeshy M, Khalafallah M, et al. Optimizing Venous Thromboembolism Prophylaxis in Achilles Tendon Rupture: A Systematic Review. *Cureus.* 2025;17(10):e95184. [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC12638070/)
-3. Nilsson-Helander K, Thurin A, Karlsson J, Eriksson BI. High incidence of deep venous thrombosis after Achilles tendon rupture: a prospective study. *Knee Surg Sports Traumatol Arthrosc.* 2009;17(10):1234-1238. [PubMed](https://pubmed.ncbi.nlm.nih.gov/19238360/)
-4. Lee C, Haarer F, Titheradge R, Iliopoulos E. Thromboembolic events during weightbearing vs nonweightbearing accelerated rehabilitation protocols for complete Achilles tendon ruptures. *Foot Ankle Orthop.* 2023;8. [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC10272654/)
-5. Saragas NP, Ferrao PN, Jacobson BF, et al. The benefit of pharmacological venous thromboprophylaxis in foot and ankle surgery. *S Afr Med J.* 2017;107:327-330. [PubMed](https://pubmed.ncbi.nlm.nih.gov/28395685/)
-6. Calder JDF, Freeman R, Domeij-Arverud E, et al. Meta-analysis and suggested guidelines for prevention of venous thromboembolism (VTE) in foot and ankle surgery. *Knee Surg Sports Traumatol Arthrosc.* 2016;24(4):1409-1420. [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC4823373/)
+1. Barfod KW, Nielsen EG, Olsen BH, et al. Risk of Deep Vein Thrombosis After Acute Achilles Tendon Rupture: A Secondary Analysis of a Randomized Controlled Trial. _Orthop J Sports Med._ 2020;8(4). [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC7222258/)
+2. Hashem M, Elbeshbeshy M, Khalafallah M, et al. Optimizing Venous Thromboembolism Prophylaxis in Achilles Tendon Rupture: A Systematic Review. _Cureus._ 2025;17(10):e95184. [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC12638070/)
+3. Nilsson-Helander K, Thurin A, Karlsson J, Eriksson BI. High incidence of deep venous thrombosis after Achilles tendon rupture: a prospective study. _Knee Surg Sports Traumatol Arthrosc._ 2009;17(10):1234-1238. [PubMed](https://pubmed.ncbi.nlm.nih.gov/19238360/)
+4. Lee C, Haarer F, Titheradge R, Iliopoulos E. Thromboembolic events during weightbearing vs nonweightbearing accelerated rehabilitation protocols for complete Achilles tendon ruptures. _Foot Ankle Orthop._ 2023;8. [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC10272654/)
+5. Saragas NP, Ferrao PN, Jacobson BF, et al. The benefit of pharmacological venous thromboprophylaxis in foot and ankle surgery. _S Afr Med J._ 2017;107:327-330. [PubMed](https://pubmed.ncbi.nlm.nih.gov/28395685/)
+6. Calder JDF, Freeman R, Domeij-Arverud E, et al. Meta-analysis and suggested guidelines for prevention of venous thromboembolism (VTE) in foot and ankle surgery. _Knee Surg Sports Traumatol Arthrosc._ 2016;24(4):1409-1420. [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC4823373/)

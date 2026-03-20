@@ -4,14 +4,7 @@ import { Button } from "@thetis/ui/button";
 import { Plus, Trash2 } from "lucide-react";
 import { useEffect } from "react";
 import { Badge } from "@thetis/ui/badge";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 import Select from "@/components/Select";
 import Input from "@/components/Input";
 import { StockValidationAlert } from "./StockValidationAlert";
@@ -64,9 +57,7 @@ const PackageItems = ({
 
     // Also remove any items that were part of this package
     const allItems = form.getValues(name) as PricedItem[];
-    const remainingItems = allItems.filter(
-      (item) => item.package_item_id !== packageId,
-    );
+    const remainingItems = allItems.filter((item) => item.package_item_id !== packageId);
 
     form.setValue(name, remainingItems, { shouldDirty: false });
   };
@@ -82,13 +73,11 @@ const PackageItems = ({
       <div className="flex flex-row gap-x-4 text-sm">
         <div className="flex gap-2">
           <Badge variant="default">
-            {selectedPackage.height} × {selectedPackage.width} ×{" "}
-            {selectedPackage.depth}{" "}
+            {selectedPackage.height} × {selectedPackage.width} × {selectedPackage.depth}{" "}
             {unitOfMeasurement === "metric" ? "cm" : "in"}
           </Badge>
           <Badge variant="outline">
-            {selectedPackage.weight}{" "}
-            {unitOfMeasurement === "metric" ? "kg" : "lb"}
+            {selectedPackage.weight} {unitOfMeasurement === "metric" ? "kg" : "lb"}
           </Badge>
         </div>
       </div>
@@ -110,9 +99,7 @@ const PackageItems = ({
               <div className="space-y-2">
                 {selectedPackage && (
                   <>
-                    <div className="font-medium">
-                      {selectedPackage.item_name}
-                    </div>
+                    <div className="font-medium">{selectedPackage.item_name}</div>
                     {getPackageDimensions(packageItem)}
                   </>
                 )}
@@ -145,12 +132,14 @@ const PackageItems = ({
                     <TableCell>
                       <Select
                         name={`${name}.${index}.item_id`}
-                        options={items
-                          ?.filter((item) => item.item_type === "package")
-                          .map((item) => ({
-                            label: item.item_name,
-                            value: String(item.item_id),
-                          })) || []}
+                        options={
+                          items
+                            ?.filter((item) => item.item_type === "package")
+                            .map((item) => ({
+                              label: item.item_name,
+                              value: String(item.item_id),
+                            })) || []
+                        }
                         disabled={readOnly}
                       />
                     </TableCell>
@@ -173,8 +162,7 @@ const PackageItems = ({
                     allowedTypes={["product", "part", "service"]}
                     showPrice={showPrice}
                     readOnly={readOnly}
-                    filter={(item: PricedItem) =>
-                      item.package_item_id === packageItem.item_id}
+                    filter={(item: PricedItem) => item.package_item_id === packageItem.item_id}
                   />
                 </div>
               )}
@@ -184,21 +172,13 @@ const PackageItems = ({
       })}
 
       {!readOnly && (
-        <Button
-          type="button"
-          variant="outline"
-          className="w-full"
-          onClick={addPackage}
-        >
+        <Button type="button" variant="outline" className="w-full" onClick={addPackage}>
           <Plus className="mr-2 w-4 h-4" />
           Add Package
         </Button>
       )}
 
-      <StockValidationAlert
-        itemsFieldName={name}
-        addressFieldName={address_name}
-      />
+      <StockValidationAlert itemsFieldName={name} addressFieldName={address_name} />
     </div>
   );
 };

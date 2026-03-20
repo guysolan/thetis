@@ -13,15 +13,12 @@ interface Props {
 
 const ReviewsMasonry = ({ lang = "en" }: Props) => {
   const [v_displayCount, setDisplayCount] = useState(9);
-  const [v_activeFilter, setActiveFilter] = useState<
-    "all" | "athlete" | "clinician" | "patient"
-  >(() => {
-    const params = new URLSearchParams(window.location.search);
-    return (
-      (params.get("filter") as "all" | "athlete" | "clinician" | "patient") ||
-      "all"
-    );
-  });
+  const [v_activeFilter, setActiveFilter] = useState<"all" | "athlete" | "clinician" | "patient">(
+    () => {
+      const params = new URLSearchParams(window.location.search);
+      return (params.get("filter") as "all" | "athlete" | "clinician" | "patient") || "all";
+    },
+  );
 
   const content = {
     en: {
@@ -92,8 +89,7 @@ const ReviewsMasonry = ({ lang = "en" }: Props) => {
       ...clinician,
       type: "clinician" as const,
       // Use the translated content for the current language
-      description: clinician.content[lang]?.description ||
-        clinician.content.en.description,
+      description: clinician.content[lang]?.description || clinician.content.en.description,
       title: clinician.content[lang]?.title || clinician.content.en.title,
       short: clinician.content[lang]?.short || clinician.content.en.short,
       body: clinician.content[lang]?.body || clinician.content.en.body,
@@ -113,9 +109,7 @@ const ReviewsMasonry = ({ lang = "en" }: Props) => {
     return [...athleteReviews, ...clinicianReviews, ...patientReviews];
   };
 
-  const [v_shuffledReviews, setShuffledReviews] = useState(
-    createMultilingualReviews(),
-  );
+  const [v_shuffledReviews, setShuffledReviews] = useState(createMultilingualReviews());
 
   // Update reviews when language changes
   useEffect(() => {
@@ -125,11 +119,7 @@ const ReviewsMasonry = ({ lang = "en" }: Props) => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     params.set("filter", v_activeFilter);
-    window.history.replaceState(
-      {},
-      "",
-      `${window.location.pathname}?${params.toString()}`,
-    );
+    window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
   }, [v_activeFilter]);
 
   const handleShuffle = () => {
@@ -177,19 +167,14 @@ const ReviewsMasonry = ({ lang = "en" }: Props) => {
             {currentContent.patients}
           </Button>
           <Button onClick={handleShuffle} variant="secondary" className="gap-2">
-            <span className="sr-only font-semibold">
-              {currentContent.shuffle}
-            </span>
+            <span className="sr-only font-semibold">{currentContent.shuffle}</span>
             <Shuffle size={20} />
           </Button>
         </div>
 
         <div className="z-10 relative masonry-grid py-8">
           {v_filteredReviews.slice(0, v_displayCount).map((review, index) => (
-            <div
-              className="masonry-item"
-              key={`${review.name}-${review.type}-${index}`}
-            >
+            <div className="masonry-item" key={`${review.name}-${review.type}-${index}`}>
               <ReviewCard review={review} />
             </div>
           ))}

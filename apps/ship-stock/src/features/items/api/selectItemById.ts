@@ -1,14 +1,9 @@
-import {
-  queryOptions,
-  useQuery,
-  useSuspenseQuery,
-} from "@tanstack/react-query";
+import { queryOptions, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "../../../lib/supabase";
 
 export const selectItemById = async (id: number | null) => {
   if (id === null) return null;
-  const { data, error } = await supabase.from("items").select("*").eq("id", id)
-    .single();
+  const { data, error } = await supabase.from("items").select("*").eq("id", id).single();
 
   if (error) {
     throw error;

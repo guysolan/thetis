@@ -5,7 +5,11 @@ const NumberCell = ({
   value,
   children,
   className,
-}: { value: number; children?: ReactNode; className?: string }) => {
+}: {
+  value: number;
+  children?: ReactNode;
+  className?: string;
+}) => {
   const formattedValue = (val: number) => {
     if (typeof val !== "number") return 0;
     if (Number.isInteger(val)) return val;

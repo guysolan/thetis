@@ -33,8 +33,7 @@ type RowData = AmazonReport & { is_saved: boolean };
 const ActionsCell = ({ report }: { report: RowData }) => {
   const isSaved = report.is_saved;
   const { mutate: downloadFile } = useDownloadFile();
-  const { mutate: saveReport, isPending: isSavingReport } =
-    useSaveAmazonReport();
+  const { mutate: saveReport, isPending: isSavingReport } = useSaveAmazonReport();
 
   return (
     <div className={cn("flex flex-row items-center pr-0")}>
@@ -57,10 +56,7 @@ const ActionsCell = ({ report }: { report: RowData }) => {
           <span className="sr-only">Open menu</span>
           <ChevronDown className="w-4 h-4" />
         </DropdownMenuTrigger>
-        <DropdownMenuContent
-          align="end"
-          className="bg-white dark:bg-black w-56"
-        >
+        <DropdownMenuContent align="end" className="bg-white dark:bg-black w-56">
           <DropdownMenuItem asChild>
             <Link
               className="cursor-pointer"
@@ -113,9 +109,7 @@ const ActionsCell = ({ report }: { report: RowData }) => {
             <>
               <EmailPdfDialog
                 path={report.storage_path}
-                reportDate={dayjs(report.settlement_start_date).format(
-                  "DD MMM YYYY",
-                )}
+                reportDate={dayjs(report.settlement_start_date).format("DD MMM YYYY")}
               >
                 <DropdownMenuItem className="cursor-pointer">
                   <Mail className="mr-2 w-4 h-4" />

@@ -10,11 +10,7 @@ import {
 } from "@thetis/ui/sheet";
 import { Switch } from "@thetis/ui/switch";
 import { Settings } from "lucide-react";
-import {
-  useNavigate,
-  useRouteContext,
-  useSearch,
-} from "@tanstack/react-router";
+import { useNavigate, useRouteContext, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import type { DocumentOptions, InvoiceOptions } from "../schema";
 import { packingListSchema } from "../schema";
@@ -23,12 +19,7 @@ import {
   getPaymentMethodDisplayName,
   PAYMENT_METHODS,
 } from "../../orders/features/order-documents/components/PaymentDetails";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@thetis/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@thetis/ui/accordion";
 
 type DocumentType =
   | "commercialInvoice"
@@ -40,7 +31,10 @@ type DocumentType =
 const DocumentOptionsSheet = ({
   documentType,
   currency,
-}: { documentType: DocumentType; currency?: string }) => {
+}: {
+  documentType: DocumentType;
+  currency?: string;
+}) => {
   const search = useSearch({ strict: false }) as Partial<DocumentOptions>;
   const navigate = useNavigate();
 
@@ -56,8 +50,7 @@ const DocumentOptionsSheet = ({
       airwaybill: search?.shippingDetails?.airwaybill ?? true,
       referenceNumber: search?.shippingDetails?.referenceNumber ?? true,
     },
-    showFinancials: (search as any)?.showFinancials ??
-      documentType === "purchaseOrder",
+    showFinancials: (search as any)?.showFinancials ?? documentType === "purchaseOrder",
     showShippingItems: search?.showShippingItems ?? false,
     showItemsManifest: (search as any)?.showItemsManifest ?? true,
     showPackages: search?.showPackages ?? documentType === "packingList",
@@ -74,7 +67,8 @@ const DocumentOptionsSheet = ({
       contact: search?.to?.contact ?? true,
     },
     payment: {
-      show: search?.payment?.show ??
+      show:
+        search?.payment?.show ??
         (documentType === "invoice" || documentType === "commercialInvoice"),
       paymentMethods: Object.fromEntries(
         Object.keys(PAYMENT_METHODS).map((method) => [
@@ -83,12 +77,9 @@ const DocumentOptionsSheet = ({
         ]),
       ),
     },
-    showExporterDetails: search?.showExporterDetails ??
-      documentType === "commercialInvoice",
-    showFDADetails: search?.showFDADetails ??
-      documentType === "commercialInvoice",
-    showExchangeRates: search?.showExchangeRates ??
-      documentType === "commercialInvoice",
+    showExporterDetails: search?.showExporterDetails ?? documentType === "commercialInvoice",
+    showFDADetails: search?.showFDADetails ?? documentType === "commercialInvoice",
+    showExchangeRates: search?.showExchangeRates ?? documentType === "commercialInvoice",
     showSignature: search?.showSignature ?? true,
   };
 
@@ -98,8 +89,7 @@ const DocumentOptionsSheet = ({
 
   // Update hasChanges whenever pendingOptions or initialOptions change
   useEffect(() => {
-    const hasPendingChanges =
-      JSON.stringify(pendingOptions) !== JSON.stringify(initialOptions);
+    const hasPendingChanges = JSON.stringify(pendingOptions) !== JSON.stringify(initialOptions);
     setHasChanges(hasPendingChanges);
   }, [pendingOptions, initialOptions]);
 
@@ -199,110 +189,82 @@ const DocumentOptionsSheet = ({
   return (
     <Sheet>
       <SheetTrigger>
-        <Button
-          type="button"
-          variant="outline"
-          size="icon"
-        >
+        <Button type="button" variant="outline" size="icon">
           <Settings size={20} />
         </Button>
       </SheetTrigger>
       <SheetContent className="w-[400px] sm:w-[500px]">
         <SheetHeader className="mb-4 pb-4 border-b">
           <SheetTitle>Document Options</SheetTitle>
-          <SheetDescription>
-            Customize what information appears on your document
-          </SheetDescription>
+          <SheetDescription>Customize what information appears on your document</SheetDescription>
         </SheetHeader>
         <div className="flex flex-col gap-4 mb-4">
           {/* Quick Access Controls */}
-          <Accordion
-            type="single"
-            collapsible
-            className="w-full"
-            defaultValue="quick-options"
-          >
+          <Accordion type="single" collapsible className="w-full" defaultValue="quick-options">
             <AccordionItem value="quick-options">
-              <AccordionTrigger className="font-medium text-sm">
-                Quick Options
-              </AccordionTrigger>
+              <AccordionTrigger className="font-medium text-sm">Quick Options</AccordionTrigger>
               <AccordionContent>
                 <div className="space-y-4">
                   <div className="flex justify-between items-start gap-3">
                     <div className="flex-1">
-                      <label className="block font-medium text-sm">
-                        Financials
-                      </label>
+                      <label className="block font-medium text-sm">Financials</label>
                       <p className="mt-0.5 text-muted-foreground text-xs">
                         Items and services with pricing, tax, and totals
                       </p>
                     </div>
                     <Switch
                       checked={pendingOptions.showFinancials}
-                      onCheckedChange={(checked) =>
-                        updateOption("showFinancials", checked)}
+                      onCheckedChange={(checked) => updateOption("showFinancials", checked)}
                     />
                   </div>
                   <div className="flex justify-between items-start gap-3">
                     <div className="flex-1">
-                      <label className="block font-medium text-sm">
-                        Items Manifest
-                      </label>
+                      <label className="block font-medium text-sm">Items Manifest</label>
                       <p className="mt-0.5 text-muted-foreground text-xs">
                         Item names, SKU, origin, HS codes, and quantities
                       </p>
                     </div>
                     <Switch
                       checked={pendingOptions.showItemsManifest}
-                      onCheckedChange={(checked) =>
-                        updateOption("showItemsManifest", checked)}
+                      onCheckedChange={(checked) => updateOption("showItemsManifest", checked)}
                     />
                   </div>
                   <div className="flex justify-between items-start gap-3">
                     <div className="flex-1">
-                      <label className="block font-medium text-sm">
-                        Items with Costing
-                      </label>
+                      <label className="block font-medium text-sm">Items with Costing</label>
                       <p className="mt-0.5 text-muted-foreground text-xs">
                         Items manifest with unit prices and line totals
                       </p>
                     </div>
                     <Switch
                       checked={pendingOptions.showShippingItems}
-                      onCheckedChange={(checked) =>
-                        updateOption("showShippingItems", checked)}
+                      onCheckedChange={(checked) => updateOption("showShippingItems", checked)}
                     />
                   </div>
                   <div className="flex justify-between items-start gap-3">
                     <div className="flex-1">
-                      <label className="block font-medium text-sm">
-                        Package Breakdown
-                      </label>
+                      <label className="block font-medium text-sm">Package Breakdown</label>
                       <p className="mt-0.5 text-muted-foreground text-xs">
                         Physical package details with dimensions and contents
                       </p>
                     </div>
                     <Switch
                       checked={pendingOptions.showPackages}
-                      onCheckedChange={(checked) =>
-                        updateOption("showPackages", checked)}
+                      onCheckedChange={(checked) => updateOption("showPackages", checked)}
                     />
                   </div>
                 </div>
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="shipping-details">
-              <AccordionTrigger className="font-medium text-sm">
-                Shipping Details
-              </AccordionTrigger>
+              <AccordionTrigger className="font-medium text-sm">Shipping Details</AccordionTrigger>
               <AccordionContent>
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <label className="text-sm underline">Show Section</label>
                     <Switch
                       checked={pendingOptions.shippingDetails.show}
-                      onCheckedChange={(checked) =>
-                        updateOption("shippingDetails.show", checked)}
+                      onCheckedChange={(checked) => updateOption("shippingDetails.show", checked)}
                     />
                   </div>
                   {pendingOptions.shippingDetails.show && (
@@ -310,25 +272,19 @@ const DocumentOptionsSheet = ({
                       <div className="flex justify-between items-center">
                         <label className="text-sm">Reason for Export</label>
                         <Switch
-                          checked={pendingOptions.shippingDetails
-                            .reasonForExport}
+                          checked={pendingOptions.shippingDetails.reasonForExport}
                           onCheckedChange={(checked) =>
-                            updateOption(
-                              "shippingDetails.reasonForExport",
-                              checked,
-                            )}
+                            updateOption("shippingDetails.reasonForExport", checked)
+                          }
                         />
                       </div>
                       <div className="flex justify-between items-center">
                         <label className="text-sm">Mode of Transport</label>
                         <Switch
-                          checked={pendingOptions.shippingDetails
-                            .modeOfTransport}
+                          checked={pendingOptions.shippingDetails.modeOfTransport}
                           onCheckedChange={(checked) =>
-                            updateOption(
-                              "shippingDetails.modeOfTransport",
-                              checked,
-                            )}
+                            updateOption("shippingDetails.modeOfTransport", checked)
+                          }
                         />
                       </div>
                       <div className="flex justify-between items-center">
@@ -336,60 +292,44 @@ const DocumentOptionsSheet = ({
                         <Switch
                           checked={pendingOptions.shippingDetails.incoterms}
                           onCheckedChange={(checked) =>
-                            updateOption(
-                              "shippingDetails.incoterms",
-                              checked,
-                            )}
+                            updateOption("shippingDetails.incoterms", checked)
+                          }
                         />
                       </div>
                       <div className="flex justify-between items-center">
-                        <label className="text-sm">
-                          Unit of Measurement
-                        </label>
+                        <label className="text-sm">Unit of Measurement</label>
                         <Switch
-                          checked={pendingOptions.shippingDetails
-                            .unitOfMeasurement}
+                          checked={pendingOptions.shippingDetails.unitOfMeasurement}
                           onCheckedChange={(checked) =>
-                            updateOption(
-                              "shippingDetails.unitOfMeasurement",
-                              checked,
-                            )}
+                            updateOption("shippingDetails.unitOfMeasurement", checked)
+                          }
                         />
                       </div>
                       <div className="flex justify-between items-center">
                         <label className="text-sm">Shipment Number</label>
                         <Switch
-                          checked={pendingOptions.shippingDetails
-                            .shipmentNumber}
+                          checked={pendingOptions.shippingDetails.shipmentNumber}
                           onCheckedChange={(checked) =>
-                            updateOption(
-                              "shippingDetails.shipmentNumber",
-                              checked,
-                            )}
+                            updateOption("shippingDetails.shipmentNumber", checked)
+                          }
                         />
                       </div>
                       <div className="flex justify-between items-center">
                         <label className="text-sm">Airwaybill</label>
                         <Switch
-                          checked={pendingOptions.shippingDetails
-                            .airwaybill}
+                          checked={pendingOptions.shippingDetails.airwaybill}
                           onCheckedChange={(checked) =>
-                            updateOption(
-                              "shippingDetails.airwaybill",
-                              checked,
-                            )}
+                            updateOption("shippingDetails.airwaybill", checked)
+                          }
                         />
                       </div>
                       <div className="flex justify-between items-center">
                         <label className="text-sm">Reference Number</label>
                         <Switch
-                          checked={pendingOptions.shippingDetails
-                            .referenceNumber}
+                          checked={pendingOptions.shippingDetails.referenceNumber}
                           onCheckedChange={(checked) =>
-                            updateOption(
-                              "shippingDetails.referenceNumber",
-                              checked,
-                            )}
+                            updateOption("shippingDetails.referenceNumber", checked)
+                          }
                         />
                       </div>
                     </div>
@@ -399,17 +339,14 @@ const DocumentOptionsSheet = ({
             </AccordionItem>
 
             <AccordionItem value="from-section">
-              <AccordionTrigger className="font-medium text-sm">
-                From Section
-              </AccordionTrigger>
+              <AccordionTrigger className="font-medium text-sm">From Section</AccordionTrigger>
               <AccordionContent>
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <label className="text-sm underline">Show Section</label>
                     <Switch
                       checked={pendingOptions.from.show}
-                      onCheckedChange={(checked) =>
-                        updateOption("from.show", checked)}
+                      onCheckedChange={(checked) => updateOption("from.show", checked)}
                     />
                   </div>
                   {pendingOptions.from.show && (
@@ -418,24 +355,21 @@ const DocumentOptionsSheet = ({
                         <label className="text-sm">Billing Address</label>
                         <Switch
                           checked={pendingOptions.from.billing}
-                          onCheckedChange={(checked) =>
-                            updateOption("from.billing", checked)}
+                          onCheckedChange={(checked) => updateOption("from.billing", checked)}
                         />
                       </div>
                       <div className="flex justify-between items-center">
                         <label className="text-sm">Shipping Address</label>
                         <Switch
                           checked={pendingOptions.from.shipping}
-                          onCheckedChange={(checked) =>
-                            updateOption("from.shipping", checked)}
+                          onCheckedChange={(checked) => updateOption("from.shipping", checked)}
                         />
                       </div>
                       <div className="flex justify-between items-center">
                         <label className="text-sm">Contact Details</label>
                         <Switch
                           checked={pendingOptions.from.contact}
-                          onCheckedChange={(checked) =>
-                            updateOption("from.contact", checked)}
+                          onCheckedChange={(checked) => updateOption("from.contact", checked)}
                         />
                       </div>
                     </div>
@@ -445,17 +379,14 @@ const DocumentOptionsSheet = ({
             </AccordionItem>
 
             <AccordionItem value="to-section">
-              <AccordionTrigger className="font-medium text-sm">
-                To Section
-              </AccordionTrigger>
+              <AccordionTrigger className="font-medium text-sm">To Section</AccordionTrigger>
               <AccordionContent>
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <label className="text-sm underline">Show Section</label>
                     <Switch
                       checked={pendingOptions.to.show}
-                      onCheckedChange={(checked) =>
-                        updateOption("to.show", checked)}
+                      onCheckedChange={(checked) => updateOption("to.show", checked)}
                     />
                   </div>
                   {pendingOptions.to.show && (
@@ -464,24 +395,21 @@ const DocumentOptionsSheet = ({
                         <label className="text-sm">Billing Address</label>
                         <Switch
                           checked={pendingOptions.to.billing}
-                          onCheckedChange={(checked) =>
-                            updateOption("to.billing", checked)}
+                          onCheckedChange={(checked) => updateOption("to.billing", checked)}
                         />
                       </div>
                       <div className="flex justify-between items-center">
                         <label className="text-sm">Shipping Address</label>
                         <Switch
                           checked={pendingOptions.to.shipping}
-                          onCheckedChange={(checked) =>
-                            updateOption("to.shipping", checked)}
+                          onCheckedChange={(checked) => updateOption("to.shipping", checked)}
                         />
                       </div>
                       <div className="flex justify-between items-center">
                         <label className="text-sm">Contact Details</label>
                         <Switch
                           checked={pendingOptions.to.contact}
-                          onCheckedChange={(checked) =>
-                            updateOption("to.contact", checked)}
+                          onCheckedChange={(checked) => updateOption("to.contact", checked)}
                         />
                       </div>
                     </div>
@@ -491,46 +419,33 @@ const DocumentOptionsSheet = ({
             </AccordionItem>
 
             <AccordionItem value="payment-details">
-              <AccordionTrigger className="font-medium text-sm">
-                Payment Details
-              </AccordionTrigger>
+              <AccordionTrigger className="font-medium text-sm">Payment Details</AccordionTrigger>
               <AccordionContent>
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
-                    <label className="text-sm underline">
-                      Show Section
-                    </label>
+                    <label className="text-sm underline">Show Section</label>
                     <Switch
                       checked={pendingOptions.payment.show}
-                      onCheckedChange={(checked) =>
-                        updateOption("payment", checked)}
+                      onCheckedChange={(checked) => updateOption("payment", checked)}
                     />
                   </div>
                   {pendingOptions.payment.show && (
                     <div className="space-y-2 pl-4">
-                      {Object.entries(pendingOptions.payment.paymentMethods)
-                        .map((
-                          [method, enabled],
-                        ) => (
-                          <div
-                            key={method}
-                            className="flex justify-between items-center"
-                          >
+                      {Object.entries(pendingOptions.payment.paymentMethods).map(
+                        ([method, enabled]) => (
+                          <div key={method} className="flex justify-between items-center">
                             <label className="text-sm">
-                              {getPaymentMethodDisplayName(
-                                method as keyof typeof PAYMENT_METHODS,
-                              )}
+                              {getPaymentMethodDisplayName(method as keyof typeof PAYMENT_METHODS)}
                             </label>
                             <Switch
                               checked={enabled}
                               onCheckedChange={(checked) =>
-                                updateOption(
-                                  `paymentMethods.${method}`,
-                                  checked,
-                                )}
+                                updateOption(`paymentMethods.${method}`, checked)
+                              }
                             />
                           </div>
-                        ))}
+                        ),
+                      )}
                     </div>
                   )}
                 </div>
@@ -538,19 +453,14 @@ const DocumentOptionsSheet = ({
             </AccordionItem>
 
             <AccordionItem value="exporter-details">
-              <AccordionTrigger className="font-medium text-sm">
-                Exporter Details
-              </AccordionTrigger>
+              <AccordionTrigger className="font-medium text-sm">Exporter Details</AccordionTrigger>
               <AccordionContent>
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
-                    <label className="text-sm underline">
-                      Show Section
-                    </label>
+                    <label className="text-sm underline">Show Section</label>
                     <Switch
                       checked={pendingOptions.showExporterDetails}
-                      onCheckedChange={(checked) =>
-                        updateOption("showExporterDetails", checked)}
+                      onCheckedChange={(checked) => updateOption("showExporterDetails", checked)}
                     />
                   </div>
                   {pendingOptions.showExporterDetails && (
@@ -559,24 +469,21 @@ const DocumentOptionsSheet = ({
                         <label className="text-sm">FDA Details</label>
                         <Switch
                           checked={pendingOptions.showFDADetails}
-                          onCheckedChange={(checked) =>
-                            updateOption("showFDADetails", checked)}
+                          onCheckedChange={(checked) => updateOption("showFDADetails", checked)}
                         />
                       </div>
                       <div className="flex justify-between items-center">
                         <label className="text-sm">Exchange Rates</label>
                         <Switch
                           checked={pendingOptions.showExchangeRates}
-                          onCheckedChange={(checked) =>
-                            updateOption("showExchangeRates", checked)}
+                          onCheckedChange={(checked) => updateOption("showExchangeRates", checked)}
                         />
                       </div>
                       <div className="flex justify-between items-center">
                         <label className="text-sm">Signature</label>
                         <Switch
                           checked={pendingOptions.showSignature}
-                          onCheckedChange={(checked) =>
-                            updateOption("showSignature", checked)}
+                          onCheckedChange={(checked) => updateOption("showSignature", checked)}
                         />
                       </div>
                     </div>
@@ -597,11 +504,7 @@ const DocumentOptionsSheet = ({
           >
             Reset
           </Button>
-          <Button
-            onClick={saveChanges}
-            disabled={!hasChanges}
-            className="flex-1"
-          >
+          <Button onClick={saveChanges} disabled={!hasChanges} className="flex-1">
             Save Changes
           </Button>
         </SheetFooter>

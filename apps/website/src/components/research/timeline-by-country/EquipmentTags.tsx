@@ -7,10 +7,7 @@ interface EquipmentTagsProps {
   stageId: string;
 }
 
-export const EquipmentTags: React.FC<EquipmentTagsProps> = ({
-  countryId,
-  stageId,
-}) => {
+export const EquipmentTags: React.FC<EquipmentTagsProps> = ({ countryId, stageId }) => {
   const countryEquipment = equipmentUsage.filter(
     (usage) => usage.countryId === countryId && usage.stageId === stageId,
   );
@@ -25,13 +22,7 @@ export const EquipmentTags: React.FC<EquipmentTagsProps> = ({
         const equipment = equipmentTags.find((e) => e.id === usage.equipmentId);
         if (!equipment) return null;
 
-        return (
-          <EquipmentTag
-            key={equipment.id}
-            equipment={equipment}
-            isCommon={usage.isCommon}
-          />
-        );
+        return <EquipmentTag key={equipment.id} equipment={equipment} isCommon={usage.isCommon} />;
       })}
     </div>
   );
@@ -59,22 +50,12 @@ const EquipmentTag: React.FC<EquipmentTagProps> = ({ equipment, isCommon }) => {
     >
       <span className="flex items-center gap-1">
         {isCommon ? (
-          <svg
-            className="w-3 h-3"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
+          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <circle cx="12" cy="12" r="10" strokeWidth="2" />
             <circle cx="12" cy="12" r="4" fill="currentColor" />
           </svg>
         ) : (
-          <svg
-            className="w-3 h-3"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
+          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <circle cx="12" cy="12" r="10" strokeWidth="2" />
           </svg>
         )}

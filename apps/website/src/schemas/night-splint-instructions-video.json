@@ -3,9 +3,7 @@
   "@type": "VideoObject",
   "name": "How to Apply the Achilles Rupture Splint",
   "description": "Step-by-step instructions for properly applying the Thetis Medical Splint",
-  "thumbnailUrl": [
-    "https://thetismedical.com/images/instructions-thumbnail.webp"
-  ],
+  "thumbnailUrl": ["https://thetismedical.com/images/instructions-thumbnail.webp"],
   "uploadDate": "2022-01-01T00:00:00Z",
   "contentUrl": "https://www.youtube.com/watch?v=T09Xnwaqbm0",
   "embedUrl": "https://www.youtube.com/embed/T09Xnwaqbm0",

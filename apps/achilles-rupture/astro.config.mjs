@@ -10,10 +10,10 @@ export default defineConfig({
   site: "https://achilles-rupture.com",
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('?tag=')
+      filter: (page) => !page.includes("?tag="),
     }),
     tailwind(),
     mdx(),
-    react()
+    react(),
   ],
 });

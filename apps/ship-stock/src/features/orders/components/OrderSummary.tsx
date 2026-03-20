@@ -7,10 +7,7 @@ export const OrderSummary = () => {
   const orderType = form.watch("order_type");
 
   const subtotal = orderItems.reduce((sum, item) => sum + item.item_total, 0);
-  const tax = orderItems.reduce(
-    (sum, item) => sum + item.item_total * (item.item_tax || 0),
-    0,
-  );
+  const tax = orderItems.reduce((sum, item) => sum + item.item_total * (item.item_tax || 0), 0);
   const total = subtotal + tax;
 
   return (

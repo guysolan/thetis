@@ -8,8 +8,7 @@ const sixEssentialItemsFaqs: CategorizedFAQsProp[] = [
     category: "Walking Boots",
     questions: [
       {
-        question:
-          "What is the most important piece of equipment for Achilles rupture recovery?",
+        question: "What is the most important piece of equipment for Achilles rupture recovery?",
         answer:
           "The walking boot is considered the cornerstone of recovery. Clinical research, including the UKSTAR trial (2020), shows that early protected weight-bearing in a suitable boot leads to better outcomes and faster recovery. Both the Aircast and VACOped boots are effective options, with the choice depending on your specific needs and budget.",
       },
@@ -78,11 +77,7 @@ const sixEssentialItemsFaqs: CategorizedFAQsProp[] = [
 ];
 
 const SixEssentialItemsFAQs = () => {
-  return (
-    <CategorizedFAQs
-      categories={sixEssentialItemsFaqs}
-    />
-  );
+  return <CategorizedFAQs categories={sixEssentialItemsFaqs} />;
 };
 
 export default SixEssentialItemsFAQs;

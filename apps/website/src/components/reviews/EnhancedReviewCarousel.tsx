@@ -78,15 +78,11 @@ export default function EnhancedReviewCarousel() {
               <FullStar size={20} />
               <PartialStar size={20} />
             </div>
-            <span className="font-bold text-neutral-900 text-2xl">
-              4.6
-            </span>
+            <span className="font-bold text-neutral-900 text-2xl">4.6</span>
           </div>
           <div className="bg-neutral-300 w-px h-6" />
           <div className="text-left">
-            <div className="font-semibold text-neutral-900 text-sm">
-              Based on 200+ reviews
-            </div>
+            <div className="font-semibold text-neutral-900 text-sm">Based on 200+ reviews</div>
           </div>
         </div>
       </div>
@@ -113,16 +109,10 @@ export default function EnhancedReviewCarousel() {
                         {Array(5)
                           .fill(null)
                           .map((_, i) => (
-                            <Star
-                              key={i}
-                              className="fill-yellow-400 w-4 h-4 text-yellow-400"
-                            />
+                            <Star key={i} className="fill-yellow-400 w-4 h-4 text-yellow-400" />
                           ))}
                       </div>
-                      <Badge
-                        variant="outline"
-                        className="border-primary/30 text-primary text-xs"
-                      >
+                      <Badge variant="outline" className="border-primary/30 text-primary text-xs">
                         <CheckCircle2 className="mr-1 w-3 h-3" />
                         Verified
                       </Badge>
@@ -133,9 +123,10 @@ export default function EnhancedReviewCarousel() {
                   </CardHeader>
                   <CardContent className="pb-4">
                     <p className="text-neutral-700 text-sm line-clamp-4 leading-relaxed">
-                      {(review as any).short || (review.body?.length > 200
-                        ? `${review.body.substring(0, 200)}...`
-                        : review.body)}
+                      {(review as any).short ||
+                        (review.body?.length > 200
+                          ? `${review.body.substring(0, 200)}...`
+                          : review.body)}
                     </p>
                   </CardContent>
                   <CardFooter className="flex items-center gap-3 pt-0 pb-4">
@@ -145,19 +136,14 @@ export default function EnhancedReviewCarousel() {
                       </div>
                       <div className="flex items-center gap-2 mt-0.5">
                         {review.country && (
-                          <span className="text-lg">
-                            {getUnicodeFlagIcon(review.country)}
-                          </span>
+                          <span className="text-lg">{getUnicodeFlagIcon(review.country)}</span>
                         )}
                         <span className="text-neutral-500 text-xs">
                           {review.date
-                            ? new Date(review.date).toLocaleDateString(
-                              "en-US",
-                              {
+                            ? new Date(review.date).toLocaleDateString("en-US", {
                                 month: "short",
                                 year: "numeric",
-                              },
-                            )
+                              })
                             : "Verified Patient"}
                         </span>
                       </div>

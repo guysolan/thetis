@@ -3,10 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { useSelectItemsByAddress } from "../../stockpiles/api/selectItemsByAddress";
 import { useSelectItemsView } from "../../items/api/selectItemsView";
 import { ItemChange, OrderItem } from "../types";
-import {
-  calculateRequiredQuantity,
-  findStockLevel,
-} from "../utils/processOrderForm";
+import { calculateRequiredQuantity, findStockLevel } from "../utils/processOrderForm";
 import calculateItemTotal from "../utils/calculateItemTotal";
 import { ItemView } from "../../items/types";
 
@@ -54,10 +51,7 @@ export const useBuyForm = () => {
     }
 
     // 1. Process all produced items and their components
-    const { consumedItems, orderItems } = processOrderItems(
-      producedItems,
-      items,
-    );
+    const { consumedItems, orderItems } = processOrderItems(producedItems, items);
 
     // 2. Find stock levels at selected address
     const addressStock = addressItems.filter(
@@ -66,12 +60,7 @@ export const useBuyForm = () => {
 
     // 3. Calculate before, during, and after quantities
     const stockLevels = consumedItems.map((item) => {
-      const currentStock = findStockLevel(
-        String(item.item_id),
-        addressStock,
-        producedItems,
-        items,
-      );
+      const currentStock = findStockLevel(String(item.item_id), addressStock, producedItems, items);
 
       return {
         item_id: String(item.item_id),
@@ -136,9 +125,7 @@ function processOrderItems(producedItems: ItemChange[], items: ItemView[]) {
   const orderItems: OrderItem[] = [];
 
   producedItems.forEach((producedItem) => {
-    const itemInView = items.find(
-      (p) => String(p.item_id) === String(producedItem.item_id),
-    );
+    const itemInView = items.find((p) => String(p.item_id) === String(producedItem.item_id));
     if (!itemInView) return;
 
     // 1.a. Add the produced item to consumed items
@@ -182,11 +169,7 @@ function processOrderItems(producedItems: ItemChange[], items: ItemView[]) {
           item_price: component.component_price || 0,
           item_tax: component.component_tax || 0.2,
           item_type: "service",
-          item_total: calculateItemTotal(
-            component.component_price || 0,
-            0.2,
-            requiredQuantity,
-          ),
+          item_total: calculateItemTotal(component.component_price || 0, 0.2, requiredQuantity),
         });
       } // 1.b.ii. If component is a part, subtract from consumed items
       else {

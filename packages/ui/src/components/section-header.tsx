@@ -32,13 +32,13 @@ function SectionHeader({
         "mb-12",
         align === "center" && "text-center",
         align === "left" && "text-left",
-        className
+        className,
       )}
     >
       {badge && (
         <div
           className={cn(
-            "inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-1.5 rounded-full font-medium text-primary text-sm uppercase tracking-wide"
+            "inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-1.5 rounded-full font-medium text-primary text-sm uppercase tracking-wide",
           )}
         >
           {badgeIcon}
@@ -50,10 +50,7 @@ function SectionHeader({
       </h2>
       {description && (
         <p
-          className={cn(
-            "text-muted-foreground text-lg",
-            align === "center" && "mx-auto max-w-2xl"
-          )}
+          className={cn("text-muted-foreground text-lg", align === "center" && "mx-auto max-w-2xl")}
         >
           {description}
         </p>
@@ -65,4 +62,3 @@ function SectionHeader({
 SectionHeader.displayName = "SectionHeader";
 
 export { SectionHeader };
-

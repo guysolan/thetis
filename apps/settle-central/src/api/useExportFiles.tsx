@@ -5,10 +5,7 @@ import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { Progress } from "@thetis/ui/progress";
 
-async function downloadZippedFolder(
-  fileNames: string[],
-  fileTypes: ("pdf" | "csv")[],
-) {
+async function downloadZippedFolder(fileNames: string[], fileTypes: ("pdf" | "csv")[]) {
   // Create array of all possible file combinations
   const filesToDownload = fileNames.flatMap((fileName) =>
     fileTypes.map((type) => `${fileName}.${type}`),
@@ -34,9 +31,7 @@ async function downloadZippedFolder(
       const {
         data: { signedUrl },
         error,
-      } = await supabase.storage
-        .from("amazon-reports")
-        .createSignedUrl(fileName, 60);
+      } = await supabase.storage.from("amazon-reports").createSignedUrl(fileName, 60);
 
       if (error || !signedUrl) {
         console.warn(`Failed to get signed URL for ${fileName}, skipping...`);
@@ -72,9 +67,7 @@ async function downloadZippedFolder(
 
 export const useExportFiles = () => {
   return useMutation({
-    mutationFn: (params: {
-      fileNames: string[];
-      fileTypes: ("pdf" | "csv")[];
-    }) => downloadZippedFolder(params.fileNames, params.fileTypes),
+    mutationFn: (params: { fileNames: string[]; fileTypes: ("pdf" | "csv")[] }) =>
+      downloadZippedFolder(params.fileNames, params.fileTypes),
   });
 };

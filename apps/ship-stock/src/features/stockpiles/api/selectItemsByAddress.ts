@@ -18,5 +18,4 @@ export const selectItemsByAddressQueryOptions = () => {
   });
 };
 
-export const useSelectItemsByAddress = () =>
-  useSuspenseQuery(selectItemsByAddressQueryOptions());
+export const useSelectItemsByAddress = () => useSuspenseQuery(selectItemsByAddressQueryOptions());

@@ -22,10 +22,7 @@ export const Route = createFileRoute("/standard/")({
 });
 
 // Chapter display names - map folder names to human-readable titles (chronological order)
-const chapterDisplayNames: Record<
-  string,
-  { name: string; description: string }
-> = {
+const chapterDisplayNames: Record<string, { name: string; description: string }> = {
   "00-practical": {
     name: "Practical Life",
     description: "Throughout recovery - work, driving, and daily life",
@@ -65,17 +62,11 @@ const chapterDisplayNames: Record<
 };
 
 function StandardIndexPage() {
-  const {
-    isLessonComplete,
-    markLessonComplete,
-    markLessonIncomplete,
-    getCompletionPercentage,
-  } = useCourseProgress();
+  const { isLessonComplete, markLessonComplete, markLessonIncomplete, getCompletionPercentage } =
+    useCourseProgress();
 
   // Filter sections to only show standard course sections
-  const standardSections = sections.filter(
-    (s) => s.course_type === "standard",
-  );
+  const standardSections = sections.filter((s) => s.course_type === "standard");
   const completionPercentage = getCompletionPercentage(standardSections.length);
 
   return (
@@ -91,17 +82,15 @@ function StandardIndexPage() {
         {completionPercentage > 0 && (
           <div className="bg-primary/10 mb-6 p-4 border border-primary/20 rounded-xl">
             <div className="flex justify-between items-center mb-2">
-              <span className="font-semibold text-foreground text-sm">
-                Your Progress
-              </span>
+              <span className="font-semibold text-foreground text-sm">Your Progress</span>
               <span className="font-bold text-primary text-sm">
                 {completionPercentage}% Complete
               </span>
             </div>
             <Progress value={completionPercentage} />
             <p className="mt-2 text-muted-foreground text-xs">
-              {standardSections.filter((s) => isLessonComplete(s.slug))
-                .length} of {standardSections.length} lessons completed
+              {standardSections.filter((s) => isLessonComplete(s.slug)).length} of{" "}
+              {standardSections.length} lessons completed
             </p>
           </div>
         )}
@@ -109,7 +98,8 @@ function StandardIndexPage() {
 
       {/* Section List - Chronological Order */}
       <div className="gap-3 grid">
-        {standardSections.sort((a, b) => a.section_number - b.section_number)
+        {standardSections
+          .sort((a, b) => a.section_number - b.section_number)
           .map((section) => {
             const isComplete = isLessonComplete(section.slug);
             const chapterInfo = chapterDisplayNames[section.chapter] || {
@@ -137,9 +127,7 @@ function StandardIndexPage() {
                         : "bg-muted text-muted-foreground",
                     )}
                   >
-                    {isComplete ? <CheckCircle2 className="w-6 h-6" /> : (
-                      section.section_number
-                    )}
+                    {isComplete ? <CheckCircle2 className="w-6 h-6" /> : section.section_number}
                   </div>
 
                   {/* Content */}
@@ -158,9 +146,7 @@ function StandardIndexPage() {
                       </span>
                     </div>
                     {section.timing.when_useful && (
-                      <p className="text-muted-foreground text-sm">
-                        {section.timing.when_useful}
-                      </p>
+                      <p className="text-muted-foreground text-sm">{section.timing.when_useful}</p>
                     )}
                   </div>
                 </div>
@@ -179,11 +165,7 @@ function StandardIndexPage() {
                       }
                     }}
                   />
-                  <Button
-                    variant="default"
-                    size="sm"
-                    asChild
-                  >
+                  <Button variant="default" size="sm" asChild>
                     <Link
                       to="/standard/$slug"
                       params={{

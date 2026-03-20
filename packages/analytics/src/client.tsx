@@ -1,8 +1,4 @@
-import {
-  OpenPanelComponent,
-  type PostEventPayload,
-  useOpenPanel,
-} from "@openpanel/nextjs";
+import { OpenPanelComponent, type PostEventPayload, useOpenPanel } from "@openpanel/nextjs";
 import { logger } from "@thetis/logger";
 
 const isProd = process.env.NODE_ENV === "production";

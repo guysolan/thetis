@@ -1,7 +1,7 @@
 /**
  * Script to render the CourseAccessEmail to HTML template
  * Run with: bun packages/email/emails/course/render.ts
- * 
+ *
  * This generates an HTML template with placeholders that can be used
  * in the Supabase Edge Function.
  */
@@ -17,7 +17,7 @@ async function main() {
       orderNumber: "{{ORDER_NUMBER}}",
       courseType: "{{COURSE_TYPE}}",
       claimUrl: "{{CLAIM_URL}}",
-    })
+    }),
   );
 
   console.log("=== RENDERED HTML TEMPLATE ===");

@@ -1,14 +1,7 @@
 import React from "react";
 import dayjs from "dayjs";
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 import {
   Card,
   CardContent,

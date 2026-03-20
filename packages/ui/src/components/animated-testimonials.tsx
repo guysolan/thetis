@@ -177,51 +177,49 @@ export const AnimatedTestimonials = ({
             <p className="text-base text-gray-500 dark:text-neutral-500">
               {testimonials[active].description}
             </p>
-            {testimonials[active].body
-              .split("\n\n")
-              .map((paragraph, pIndex) => (
-                <motion.p
-                  key={pIndex}
-                  className="mt-4 text-base text-gray-500 dark:text-neutral-300"
-                  initial={{
-                    opacity: 0,
-                    y: 20,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  transition={{
-                    duration: 0.3,
-                    ease: "easeInOut",
-                    delay: 0.2 * pIndex,
-                  }}
-                >
-                  {paragraph.split(" ").map((word, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{
-                        filter: "blur(10px)",
-                        opacity: 0,
-                        y: 5,
-                      }}
-                      animate={{
-                        filter: "blur(0px)",
-                        opacity: 1,
-                        y: 0,
-                      }}
-                      transition={{
-                        duration: 0.2,
-                        ease: "easeInOut",
-                        delay: 0.2 * pIndex + 0.02 * index,
-                      }}
-                      className="inline-block"
-                    >
-                      {word}&nbsp;
-                    </motion.span>
-                  ))}
-                </motion.p>
-              ))}
+            {testimonials[active].body.split("\n\n").map((paragraph, pIndex) => (
+              <motion.p
+                key={pIndex}
+                className="mt-4 text-base text-gray-500 dark:text-neutral-300"
+                initial={{
+                  opacity: 0,
+                  y: 20,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  duration: 0.3,
+                  ease: "easeInOut",
+                  delay: 0.2 * pIndex,
+                }}
+              >
+                {paragraph.split(" ").map((word, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{
+                      filter: "blur(10px)",
+                      opacity: 0,
+                      y: 5,
+                    }}
+                    animate={{
+                      filter: "blur(0px)",
+                      opacity: 1,
+                      y: 0,
+                    }}
+                    transition={{
+                      duration: 0.2,
+                      ease: "easeInOut",
+                      delay: 0.2 * pIndex + 0.02 * index,
+                    }}
+                    className="inline-block"
+                  >
+                    {word}&nbsp;
+                  </motion.span>
+                ))}
+              </motion.p>
+            ))}
           </motion.div>
           <div className="flex gap-4 mt-8">
             <button

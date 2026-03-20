@@ -4,10 +4,7 @@ import { Link, Img } from "@react-email/components";
 const Logo = () => {
   return (
     <div className="text-center">
-      <Link
-        className={"inline-block text-black"}
-        href="https://thetismedical.com"
-      >
+      <Link className={"inline-block text-black"} href="https://thetismedical.com">
         <span style={{ display: "inline-block", verticalAlign: "middle" }}>
           <Img
             src="https://thetismedical.com/favicon/android-chrome-192x192.png"

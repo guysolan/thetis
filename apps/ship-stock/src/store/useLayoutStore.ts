@@ -1,21 +1,21 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-type LayoutView = 'table' | 'cards'
+type LayoutView = "table" | "cards";
 
 interface LayoutStore {
-  view: LayoutView
-  setView: (view: LayoutView) => void
+  view: LayoutView;
+  setView: (view: LayoutView) => void;
 }
 
 export const useLayoutStore = create<LayoutStore>()(
   persist(
     (set) => ({
-      view: 'table',
+      view: "table",
       setView: (view) => set({ view }),
     }),
     {
-      name: 'layout-storage',
-    }
-  )
-) 
+      name: "layout-storage",
+    },
+  ),
+);

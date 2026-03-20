@@ -3,9 +3,7 @@
   "@type": "VideoObject",
   "name": "Achilles Rupture Splint Product Presentation",
   "description": "Detailed presentation of the Thetis Medical Achilles Rupture Splint, showcasing its features and benefits",
-  "thumbnailUrl": [
-    "https://thetismedical.com/images/presentation-thumbnail.avif"
-  ],
+  "thumbnailUrl": ["https://thetismedical.com/images/presentation-thumbnail.avif"],
   "uploadDate": "2022-10-01T00:00:00Z",
   "contentUrl": "https://www.youtube.com/watch?v=ndIB1WSqvow",
   "embedUrl": "https://www.youtube.com/embed/ndIB1WSqvow",

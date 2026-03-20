@@ -7,7 +7,7 @@ Study Highlights:
 • 90 % returned to play within 6 months 🗓️  
 • Average time to competition: 5.9 months ⏱️  
 • 12-month performance index: 95 % of pre-injury level 🏅  
-• Zero reruptures reported at 2-year follow-up ✅  
+• Zero reruptures reported at 2-year follow-up ✅
 
 Got a patient itching to compete again?
 

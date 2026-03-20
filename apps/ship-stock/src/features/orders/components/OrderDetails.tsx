@@ -81,9 +81,7 @@ const OrderDetails = () => {
             <div>
               <p className="text-gray-700 text-sm">Order Date</p>
               <p className="font-medium">
-                {orderDate
-                  ? dayjs(orderDate).format("DD/MM/YYYY")
-                  : "Not specified"}
+                {orderDate ? dayjs(orderDate).format("DD/MM/YYYY") : "Not specified"}
               </p>
             </div>
           </div>

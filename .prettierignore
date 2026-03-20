@@ -1,0 +1,17 @@
+node_modules
+dist
+.next
+.astro
+coverage
+.cursor
+*.lock
+*.lockb
+pnpm-lock.yaml
+**/routeTree.gen.ts
+**/*.gen.ts
+**/supabase/functions
+*.min.js
+*.min.css
+services/notion/output
+services/knock
+apps/website/src/**/*.html

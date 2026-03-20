@@ -12,9 +12,7 @@ import ExchangeRates from "../components/ExchangeRates";
 import { DocumentOptions } from "../../../../documents/schema";
 import Signature from "../components/signature";
 import ShippingDetails from "../components/ShippingDetails";
-import PaymentDetails, {
-  type PaymentMethodKey,
-} from "../components/PaymentDetails";
+import PaymentDetails, { type PaymentMethodKey } from "../components/PaymentDetails";
 import Heading from "../components/Heading";
 import type { Currency } from "../../../../../constants/currencies";
 import OrderItems from "../components/OrderItems";
@@ -119,10 +117,7 @@ const Document = ({ order, options, title, documentType }: DocumentProps) => {
       )}
 
       {(options as any).showFinancials && (
-        <Financials
-          order={order}
-          currency={order.currency as Currency}
-        />
+        <Financials order={order} currency={order.currency as Currency} />
       )}
 
       {options.showShippingItems && (
@@ -140,21 +135,16 @@ const Document = ({ order, options, title, documentType }: DocumentProps) => {
       {options.showPackages && <PackageSummary items={order.items} />}
 
       {(options.from.show || options.to.show) && (
-        <BuyerSeller
-          fromOptions={options.from}
-          toOptions={options.to}
-          order={order}
-        />
+        <BuyerSeller fromOptions={options.from} toOptions={options.to} order={order} />
       )}
 
       {options.payment.show && (
         <PaymentDetails
           orderId={order.order_id}
           currency={order.currency}
-          enabledPaymentMethods={options.payment.paymentMethods as Record<
-            PaymentMethodKey,
-            boolean
-          >}
+          enabledPaymentMethods={
+            options.payment.paymentMethods as Record<PaymentMethodKey, boolean>
+          }
         />
       )}
 

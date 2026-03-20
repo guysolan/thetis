@@ -1,16 +1,7 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableRow } from "@thetis/ui/table";
 import type { OrderView } from "../../../types";
 import NumberFlow from "@number-flow/react";
-import {
-    type Currency,
-    getCurrencyFormatOptions,
-} from "../../../../../constants/currencies";
+import { type Currency, getCurrencyFormatOptions } from "../../../../../constants/currencies";
 
 const OrderTotal = ({
   order,
@@ -22,8 +13,9 @@ const OrderTotal = ({
   const itemTotal = order.item_total_value ?? 0;
   const carriageAmount = showCarriage ? (order.carriage ?? 0) : 0;
   const grandTotal = itemTotal + carriageAmount;
-  const { format: currencyFormat, locales: currencyLocales } =
-    getCurrencyFormatOptions((order.currency ?? "GBP") as Currency);
+  const { format: currencyFormat, locales: currencyLocales } = getCurrencyFormatOptions(
+    (order.currency ?? "GBP") as Currency,
+  );
 
   return (
     <Table>
@@ -31,11 +23,7 @@ const OrderTotal = ({
         <TableRow className="border-t text-neutral-800">
           <TableHead>Subtotal</TableHead>
           <TableCell className="w-1/6 font-medium text-right">
-            <NumberFlow
-              value={itemTotal}
-              format={currencyFormat}
-              locales={currencyLocales}
-            />
+            <NumberFlow value={itemTotal} format={currencyFormat} locales={currencyLocales} />
           </TableCell>
         </TableRow>
         {showCarriage && (
@@ -53,11 +41,7 @@ const OrderTotal = ({
         <TableRow>
           <TableHead className="text-neutral-900 text-lg">Total</TableHead>
           <TableCell className="w-1/6 font-medium text-neutral-900 text-lg text-right">
-            <NumberFlow
-              value={grandTotal}
-              format={currencyFormat}
-              locales={currencyLocales}
-            />
+            <NumberFlow value={grandTotal} format={currencyFormat} locales={currencyLocales} />
           </TableCell>
         </TableRow>
       </TableBody>

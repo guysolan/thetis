@@ -48,9 +48,7 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({
             }`}
             onClick={() => toggleCountry(country.id)}
           >
-            <span className="flag-icon">
-              {getUnicodeFlagIcon(country.flagCode)}
-            </span>
+            <span className="flag-icon">{getUnicodeFlagIcon(country.flagCode)}</span>
             <span>{country.name}</span>
           </button>
         ))}

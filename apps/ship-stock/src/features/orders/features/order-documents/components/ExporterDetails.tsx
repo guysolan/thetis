@@ -26,11 +26,7 @@ const ExporterDetails = () => {
 
       <div className="flex flex-wrap gap-24">
         <DetailItem icon={Building2} label="UTR Number" value="1202928437" />
-        <DetailItem
-          icon={FileText}
-          label="EORI Number"
-          value="GB087773860000"
-        />
+        <DetailItem icon={FileText} label="EORI Number" value="GB087773860000" />
         <DetailItem icon={Receipt} label="VAT Number" value="GB412039441" />
       </div>
     </div>

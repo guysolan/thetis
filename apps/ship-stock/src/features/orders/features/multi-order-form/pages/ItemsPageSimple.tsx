@@ -18,21 +18,8 @@ import { useBuyForm } from "../../../hooks/useBuyForm";
 import { useSelectItemsView } from "../../../../items/api/selectItemsView";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@thetis/ui/select";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@thetis/ui/select";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -86,9 +73,7 @@ export function ItemsPageSimple({ originalQuantityChanges = {} }: ItemsPageSimpl
     name: "package_items",
   });
 
-  const availablePackages = itemsView?.filter(
-    (item) => item.item_type === "package",
-  ) || [];
+  const availablePackages = itemsView?.filter((item) => item.item_type === "package") || [];
 
   const [addPackageDialogOpen, setAddPackageDialogOpen] = React.useState(false);
 
@@ -114,11 +99,7 @@ export function ItemsPageSimple({ originalQuantityChanges = {} }: ItemsPageSimpl
   }, [isShipment, form]);
 
   // Determine which items array to use based on order type
-  type ItemsToUpdate =
-    | "order_items"
-    | "produced_items"
-    | "from_items"
-    | "to_items";
+  type ItemsToUpdate = "order_items" | "produced_items" | "from_items" | "to_items";
 
   const getItemsConfig = (): {
     itemsName: ItemsToUpdate;
@@ -205,8 +186,7 @@ export function ItemsPageSimple({ originalQuantityChanges = {} }: ItemsPageSimpl
       item_type: component.component_type,
       package_item_change_id: packageItemChangeId,
       item_tax: 0.2,
-      item_total: component.component_price * component.component_quantity *
-        1.2,
+      item_total: component.component_price * component.component_quantity * 1.2,
       quantity_before: 0,
       quantity_after: 0,
       lot_number: "",
@@ -225,9 +205,7 @@ export function ItemsPageSimple({ originalQuantityChanges = {} }: ItemsPageSimpl
 
     // If a package was selected, add its items
     if (packageId) {
-      const selectedPkg = availablePackages.find(
-        (item) => String(item.item_id) === packageId,
-      );
+      const selectedPkg = availablePackages.find((item) => String(item.item_id) === packageId);
 
       if (selectedPkg?.components) {
         const newItems = createPackageItems(
@@ -252,9 +230,7 @@ export function ItemsPageSimple({ originalQuantityChanges = {} }: ItemsPageSimpl
   };
 
   const handleRemovePackage = (index: number) => {
-    const packageItemChangeId = form.getValues(
-      `package_items.${index}.package_item_change_id`,
-    );
+    const packageItemChangeId = form.getValues(`package_items.${index}.package_item_change_id`);
 
     // Remove items belonging to this package from all target fields
     itemsConfig.packageItemsToUpdate.forEach((fieldName) => {
@@ -307,15 +283,11 @@ export function ItemsPageSimple({ originalQuantityChanges = {} }: ItemsPageSimpl
   };
 
   const handleUpdatePackage = (index: number, newPackageId: string) => {
-    const packageItemChangeId = form.getValues(
-      `package_items.${index}.package_item_change_id`,
-    );
+    const packageItemChangeId = form.getValues(`package_items.${index}.package_item_change_id`);
 
     form.setValue(`package_items.${index}.package_id`, newPackageId);
 
-    const selectedPkg = availablePackages.find(
-      (item) => String(item.item_id) === newPackageId,
-    );
+    const selectedPkg = availablePackages.find((item) => String(item.item_id) === newPackageId);
 
     itemsConfig.packageItemsToUpdate.forEach((fieldName) => {
       const currentItems = form.getValues(fieldName) || [];
@@ -432,17 +404,13 @@ export function ItemsPageSimple({ originalQuantityChanges = {} }: ItemsPageSimpl
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem
-                onClick={() => handleAddIndividualItem("product")}
-              >
+              <DropdownMenuItem onClick={() => handleAddIndividualItem("product")}>
                 Add Product
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => handleAddIndividualItem("part")}>
                 Add Part
               </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => handleAddIndividualItem("service")}
-              >
+              <DropdownMenuItem onClick={() => handleAddIndividualItem("service")}>
                 Add Service
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -451,54 +419,39 @@ export function ItemsPageSimple({ originalQuantityChanges = {} }: ItemsPageSimpl
       </div>
 
       {/* Package Groups - not shown for stocktakes */}
-      {showPackages && packageFields.map((field, pkgIndex) => {
-        const packageItemChangeId = form.watch(
-          `package_items.${pkgIndex}.package_item_change_id`,
-        );
-        const selectedPackageId = form.watch(
-          `package_items.${pkgIndex}.package_id`,
-        );
-        const selectedPackage = availablePackages.find(
-          (item) => String(item.item_id) === selectedPackageId,
-        );
-        const pkgItems = packageItemsMap.get(packageItemChangeId) || [];
-        const packageTotal = pkgItems.reduce(
-          (sum, { item }) => sum + (item.item_total || 0),
-          0,
-        );
+      {showPackages &&
+        packageFields.map((field, pkgIndex) => {
+          const packageItemChangeId = form.watch(
+            `package_items.${pkgIndex}.package_item_change_id`,
+          );
+          const selectedPackageId = form.watch(`package_items.${pkgIndex}.package_id`);
+          const selectedPackage = availablePackages.find(
+            (item) => String(item.item_id) === selectedPackageId,
+          );
+          const pkgItems = packageItemsMap.get(packageItemChangeId) || [];
+          const packageTotal = pkgItems.reduce((sum, { item }) => sum + (item.item_total || 0), 0);
 
-        return (
-          <div
-            key={field.id}
-            className="bg-card border rounded-lg overflow-hidden"
-          >
-            {/* Package Header */}
-            <div className="flex items-center gap-3 bg-primary/5 px-4 py-3 border-b">
-              <Package className="w-5 h-5 text-primary" />
-              {selectedPackage
-                ? (
+          return (
+            <div key={field.id} className="bg-card border rounded-lg overflow-hidden">
+              {/* Package Header */}
+              <div className="flex items-center gap-3 bg-primary/5 px-4 py-3 border-b">
+                <Package className="w-5 h-5 text-primary" />
+                {selectedPackage ? (
                   <>
-                    <span className="font-semibold text-primary">
-                      {selectedPackage.item_name}
-                    </span>
+                    <span className="font-semibold text-primary">{selectedPackage.item_name}</span>
                     <PackageDimensions selectedPackage={selectedPackage} />
                   </>
-                )
-                : (
+                ) : (
                   <Select
                     value={selectedPackageId || ""}
-                    onValueChange={(value) =>
-                      handleUpdatePackage(pkgIndex, value)}
+                    onValueChange={(value) => handleUpdatePackage(pkgIndex, value)}
                   >
                     <SelectTrigger className="bg-background w-56 h-8">
                       <SelectValue placeholder="Select a package..." />
                     </SelectTrigger>
                     <SelectContent>
                       {availablePackages.map((item) => (
-                        <SelectItem
-                          key={item.item_id}
-                          value={String(item.item_id)}
-                        >
+                        <SelectItem key={item.item_id} value={String(item.item_id)}>
                           {item.item_name}
                         </SelectItem>
                       ))}
@@ -506,224 +459,218 @@ export function ItemsPageSimple({ originalQuantityChanges = {} }: ItemsPageSimpl
                   </Select>
                 )}
 
-              <div className="flex items-center gap-3 ml-auto">
-                {showPrice && pkgItems.length > 0 && (
-                  <span className="font-semibold text-primary text-sm">
-                    {new Intl.NumberFormat(undefined, {
-                      style: "currency",
-                      currency: currency,
-                    }).format(packageTotal)}
-                  </span>
-                )}
-                <div className="flex items-center gap-1">
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => handleDuplicatePackage(pkgIndex)}
-                    className="w-8 h-8"
-                    title="Duplicate package"
-                  >
-                    <Copy className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => handleRemovePackage(pkgIndex)}
-                    className="w-8 h-8 text-muted-foreground hover:text-destructive"
-                    title="Remove package"
-                  >
-                    <Trash className="w-4 h-4" />
-                  </Button>
+                <div className="flex items-center gap-3 ml-auto">
+                  {showPrice && pkgItems.length > 0 && (
+                    <span className="font-semibold text-primary text-sm">
+                      {new Intl.NumberFormat(undefined, {
+                        style: "currency",
+                        currency: currency,
+                      }).format(packageTotal)}
+                    </span>
+                  )}
+                  <div className="flex items-center gap-1">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleDuplicatePackage(pkgIndex)}
+                      className="w-8 h-8"
+                      title="Duplicate package"
+                    >
+                      <Copy className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleRemovePackage(pkgIndex)}
+                      className="w-8 h-8 text-muted-foreground hover:text-destructive"
+                      title="Remove package"
+                    >
+                      <Trash className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Package Items */}
-            {(selectedPackage || pkgItems.length > 0) && (
-              <div className="px-4 py-4">
-                <Table className="border-none">
-                  <TableHeader>
-                    <TableRow className="hover:bg-transparent border-b">
-                      <TableHead className="font-medium text-muted-foreground text-xs">
-                        Item
-                      </TableHead>
-                      <TableHead className="w-28 font-medium text-muted-foreground text-xs">
-                        Lot #
-                      </TableHead>
-                      <TableHead className="w-24 font-medium text-muted-foreground text-xs text-center">
-                        Qty
-                      </TableHead>
-                      {showPrice && (
-                        <TableHead className="w-28 font-medium text-muted-foreground text-xs text-center">
-                          Price
+              {/* Package Items */}
+              {(selectedPackage || pkgItems.length > 0) && (
+                <div className="px-4 py-4">
+                  <Table className="border-none">
+                    <TableHeader>
+                      <TableRow className="hover:bg-transparent border-b">
+                        <TableHead className="font-medium text-muted-foreground text-xs">
+                          Item
                         </TableHead>
-                      )}
-                      {showTax && (
+                        <TableHead className="w-28 font-medium text-muted-foreground text-xs">
+                          Lot #
+                        </TableHead>
                         <TableHead className="w-24 font-medium text-muted-foreground text-xs text-center">
-                          Tax
+                          Qty
                         </TableHead>
-                      )}
-                      {showPrice && (
-                        <TableHead className="w-28 font-medium text-muted-foreground text-xs text-center">
-                          Total
+                        {showPrice && (
+                          <TableHead className="w-28 font-medium text-muted-foreground text-xs text-center">
+                            Price
+                          </TableHead>
+                        )}
+                        {showTax && (
+                          <TableHead className="w-24 font-medium text-muted-foreground text-xs text-center">
+                            Tax
+                          </TableHead>
+                        )}
+                        {showPrice && (
+                          <TableHead className="w-28 font-medium text-muted-foreground text-xs text-center">
+                            Total
+                          </TableHead>
+                        )}
+                        <TableHead className="w-20 font-medium text-muted-foreground text-xs text-center">
+                          Before
                         </TableHead>
-                      )}
-                      <TableHead className="w-20 font-medium text-muted-foreground text-xs text-center">
-                        Before
-                      </TableHead>
-                      <TableHead className="w-20 font-medium text-muted-foreground text-xs text-center">
-                        After
-                      </TableHead>
-                      <TableHead className="w-12"></TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {pkgItems.map(({ item, index: itemIndex }) => (
-                      <ItemTableRow
-                        key={`pkg-${pkgIndex}-item-${itemIndex}`}
-                        fieldName={itemsConfig.itemsName}
-                        index={itemIndex}
-                        showPrice={showPrice}
-                        showTax={showTax}
-                      />
-                    ))}
-                  </TableBody>
-                </Table>
-
-                {/* Add item to package */}
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => {
-                    const currentItems =
-                      form.getValues(itemsConfig.itemsName) || [];
-                    form.setValue(itemsConfig.itemsName, [
-                      ...currentItems,
-                      {
-                        item_type: "product",
-                        item_id: "",
-                        quantity_change: 1,
-                        item_price: 0,
-                        item_tax: defaultTax,
-                        item_total: 0,
-                        quantity_before: 0,
-                        quantity_after: 0,
-                        lot_number: "",
-                        package_item_change_id: packageItemChangeId,
-                      },
-                    ]);
-                  }}
-                  className="mt-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Plus className="mr-1 w-4 h-4" />
-                  Add item to package
-                </Button>
-              </div>
-            )}
-
-            {!selectedPackage && pkgItems.length === 0 && (
-              <div className="p-8 text-muted-foreground text-center">
-                <p className="text-sm">
-                  Select a package above to add its items
-                </p>
-              </div>
-            )}
-          </div>
-        );
-      })}
-
-      {/* Individual Items Section - no card wrapper for stocktakes */}
-      {(individualItems.length > 0 || packageFields.length === 0 || isStocktake) && (
-        isStocktake ? (
-          <div className="py-4">
-            {individualItems.length > 0
-              ? (
-                <Table className="[&_tr:first-child_th:last-child]:pr-0 [&_td:last-child]:pr-0 [&_td:first-child]:pl-0 [&_tr:first-child_th:first-child]:pl-0 border-collapse">
-                  <TableHeader>
-                    <TableRow className="hover:bg-transparent border-b">
-                      {isStocktake && (
-                        <TableHead className="w-24 font-medium text-muted-foreground text-xs">
-                          Type
+                        <TableHead className="w-20 font-medium text-muted-foreground text-xs text-center">
+                          After
                         </TableHead>
-                      )}
-                      <TableHead className="font-medium text-muted-foreground text-xs">
-                        Item
-                      </TableHead>
-                      <TableHead className="w-28 font-medium text-muted-foreground text-xs">
-                        Lot #
-                      </TableHead>
-                      {isStocktake ? (
-                        <>
-                          <TableHead className="w-24 font-medium text-muted-foreground text-xs text-center">
-                            Before
-                          </TableHead>
-                          <TableHead className="w-24 font-medium text-muted-foreground text-xs text-center">
-                            Counted
-                          </TableHead>
-                          <TableHead className="w-24 font-medium text-muted-foreground text-xs text-center">
-                            Change
-                          </TableHead>
-                        </>
-                      ) : (
-                        <>
-                          <TableHead className="w-24 font-medium text-muted-foreground text-xs text-center">
-                            Qty
-                          </TableHead>
-                          {showPrice && (
-                            <TableHead className="w-28 font-medium text-muted-foreground text-xs text-center">
-                              Price
-                            </TableHead>
-                          )}
-                          {showTax && (
-                            <TableHead className="w-24 font-medium text-muted-foreground text-xs text-center">
-                              Tax
-                            </TableHead>
-                          )}
-                          {showPrice && (
-                            <TableHead className="w-28 font-medium text-muted-foreground text-xs text-center">
-                              Total
-                            </TableHead>
-                          )}
-                          <TableHead className="w-20 font-medium text-muted-foreground text-xs text-center">
-                            Before
-                          </TableHead>
-                          <TableHead className="w-20 font-medium text-muted-foreground text-xs text-center">
-                            After
-                          </TableHead>
-                        </>
-                      )}
-                      <TableHead className="w-12"></TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {individualItems.map(({ item, index: itemIndex }) => {
-                      // Get original quantity change from the saved order data
-                      const originalKey = `${item.item_id}-${itemIndex}`;
-                      const originalChange = originalQuantityChanges[originalKey] ?? 0;
-                      return (
+                        <TableHead className="w-12"></TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {pkgItems.map(({ item, index: itemIndex }) => (
                         <ItemTableRow
-                          key={`individual-${itemIndex}`}
+                          key={`pkg-${pkgIndex}-item-${itemIndex}`}
                           fieldName={itemsConfig.itemsName}
                           index={itemIndex}
                           showPrice={showPrice}
                           showTax={showTax}
-                          isStocktake={isStocktake}
-                          originalQuantityChange={originalChange}
                         />
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-              )
-              : (
-                <p className="py-4 text-muted-foreground text-sm text-center">
-                  No individual items yet. Use "Add Item" above to add items
-                  outside of packages.
-                </p>
+                      ))}
+                    </TableBody>
+                  </Table>
+
+                  {/* Add item to package */}
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      const currentItems = form.getValues(itemsConfig.itemsName) || [];
+                      form.setValue(itemsConfig.itemsName, [
+                        ...currentItems,
+                        {
+                          item_type: "product",
+                          item_id: "",
+                          quantity_change: 1,
+                          item_price: 0,
+                          item_tax: defaultTax,
+                          item_total: 0,
+                          quantity_before: 0,
+                          quantity_after: 0,
+                          lot_number: "",
+                          package_item_change_id: packageItemChangeId,
+                        },
+                      ]);
+                    }}
+                    className="mt-2 text-muted-foreground hover:text-foreground"
+                  >
+                    <Plus className="mr-1 w-4 h-4" />
+                    Add item to package
+                  </Button>
+                </div>
               )}
+
+              {!selectedPackage && pkgItems.length === 0 && (
+                <div className="p-8 text-muted-foreground text-center">
+                  <p className="text-sm">Select a package above to add its items</p>
+                </div>
+              )}
+            </div>
+          );
+        })}
+
+      {/* Individual Items Section - no card wrapper for stocktakes */}
+      {(individualItems.length > 0 || packageFields.length === 0 || isStocktake) &&
+        (isStocktake ? (
+          <div className="py-4">
+            {individualItems.length > 0 ? (
+              <Table className="[&_tr:first-child_th:last-child]:pr-0 [&_td:last-child]:pr-0 [&_td:first-child]:pl-0 [&_tr:first-child_th:first-child]:pl-0 border-collapse">
+                <TableHeader>
+                  <TableRow className="hover:bg-transparent border-b">
+                    {isStocktake && (
+                      <TableHead className="w-24 font-medium text-muted-foreground text-xs">
+                        Type
+                      </TableHead>
+                    )}
+                    <TableHead className="font-medium text-muted-foreground text-xs">
+                      Item
+                    </TableHead>
+                    <TableHead className="w-28 font-medium text-muted-foreground text-xs">
+                      Lot #
+                    </TableHead>
+                    {isStocktake ? (
+                      <>
+                        <TableHead className="w-24 font-medium text-muted-foreground text-xs text-center">
+                          Before
+                        </TableHead>
+                        <TableHead className="w-24 font-medium text-muted-foreground text-xs text-center">
+                          Counted
+                        </TableHead>
+                        <TableHead className="w-24 font-medium text-muted-foreground text-xs text-center">
+                          Change
+                        </TableHead>
+                      </>
+                    ) : (
+                      <>
+                        <TableHead className="w-24 font-medium text-muted-foreground text-xs text-center">
+                          Qty
+                        </TableHead>
+                        {showPrice && (
+                          <TableHead className="w-28 font-medium text-muted-foreground text-xs text-center">
+                            Price
+                          </TableHead>
+                        )}
+                        {showTax && (
+                          <TableHead className="w-24 font-medium text-muted-foreground text-xs text-center">
+                            Tax
+                          </TableHead>
+                        )}
+                        {showPrice && (
+                          <TableHead className="w-28 font-medium text-muted-foreground text-xs text-center">
+                            Total
+                          </TableHead>
+                        )}
+                        <TableHead className="w-20 font-medium text-muted-foreground text-xs text-center">
+                          Before
+                        </TableHead>
+                        <TableHead className="w-20 font-medium text-muted-foreground text-xs text-center">
+                          After
+                        </TableHead>
+                      </>
+                    )}
+                    <TableHead className="w-12"></TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {individualItems.map(({ item, index: itemIndex }) => {
+                    // Get original quantity change from the saved order data
+                    const originalKey = `${item.item_id}-${itemIndex}`;
+                    const originalChange = originalQuantityChanges[originalKey] ?? 0;
+                    return (
+                      <ItemTableRow
+                        key={`individual-${itemIndex}`}
+                        fieldName={itemsConfig.itemsName}
+                        index={itemIndex}
+                        showPrice={showPrice}
+                        showTax={showTax}
+                        isStocktake={isStocktake}
+                        originalQuantityChange={originalChange}
+                      />
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            ) : (
+              <p className="py-4 text-muted-foreground text-sm text-center">
+                No individual items yet. Use "Add Item" above to add items outside of packages.
+              </p>
+            )}
 
             {/* Add individual item inline */}
             {individualItems.length > 0 && (
@@ -740,19 +687,13 @@ export function ItemsPageSimple({ originalQuantityChanges = {} }: ItemsPageSimpl
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem
-                    onClick={() => handleAddIndividualItem("product")}
-                  >
+                  <DropdownMenuItem onClick={() => handleAddIndividualItem("product")}>
                     Product
                   </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => handleAddIndividualItem("part")}
-                  >
+                  <DropdownMenuItem onClick={() => handleAddIndividualItem("part")}>
                     Part
                   </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => handleAddIndividualItem("service")}
-                  >
+                  <DropdownMenuItem onClick={() => handleAddIndividualItem("service")}>
                     Service
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -772,14 +713,14 @@ export function ItemsPageSimple({ originalQuantityChanges = {} }: ItemsPageSimpl
                   {new Intl.NumberFormat(undefined, {
                     style: "currency",
                     currency: currency,
-                  }).format(individualItems.reduce((sum, { item }) =>
-                    sum + (item.item_total || 0), 0))}
+                  }).format(
+                    individualItems.reduce((sum, { item }) => sum + (item.item_total || 0), 0),
+                  )}
                 </span>
               )}
             </div>
             <div className="px-4 py-4">
-            {individualItems.length > 0
-              ? (
+              {individualItems.length > 0 ? (
                 <Table className="[&_tr:first-child_th:last-child]:pr-0 [&_td:last-child]:pr-0 [&_td:first-child]:pl-0 [&_tr:first-child_th:first-child]:pl-0 border-collapse">
                   <TableHeader>
                     <TableRow className="hover:bg-transparent border-b">
@@ -834,49 +775,40 @@ export function ItemsPageSimple({ originalQuantityChanges = {} }: ItemsPageSimpl
                     })}
                   </TableBody>
                 </Table>
-              )
-              : (
+              ) : (
                 <p className="py-4 text-muted-foreground text-sm text-center">
-                  No individual items yet. Use "Add Item" above to add items
-                  outside of packages.
+                  No individual items yet. Use "Add Item" above to add items outside of packages.
                 </p>
               )}
-            {individualItems.length > 0 && (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="mt-2 text-muted-foreground hover:text-foreground"
-                  >
-                    <Plus className="mr-1 w-4 h-4" />
-                    Add item
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem
-                    onClick={() => handleAddIndividualItem("product")}
-                  >
-                    Product
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => handleAddIndividualItem("part")}
-                  >
-                    Part
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => handleAddIndividualItem("service")}
-                  >
-                    Service
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
+              {individualItems.length > 0 && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="mt-2 text-muted-foreground hover:text-foreground"
+                    >
+                      <Plus className="mr-1 w-4 h-4" />
+                      Add item
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem onClick={() => handleAddIndividualItem("product")}>
+                      Product
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleAddIndividualItem("part")}>
+                      Part
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleAddIndividualItem("service")}>
+                      Service
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
             </div>
           </div>
-        )
-      )}
+        ))}
 
       {/* Grand Total */}
       {showPrice && allItems.length > 0 && (
@@ -999,7 +931,17 @@ function ItemTableRow({
         form.setValue(`${prefix}.quantity_after`, after);
       }
     }
-  }, [isStocktake, itemId, inventoryHistory, stockItems, address, originalQuantityChange, form, prefix, orderDate]);
+  }, [
+    isStocktake,
+    itemId,
+    inventoryHistory,
+    stockItems,
+    address,
+    originalQuantityChange,
+    form,
+    prefix,
+    orderDate,
+  ]);
 
   const updateQuantities = (newQuantity: number) => {
     if (isStocktake) {
@@ -1020,17 +962,15 @@ function ItemTableRow({
   };
 
   const handleItemChange = (newItemId: string) => {
-    const item = itemsView?.find((i) =>
-      String(i.item_id) === String(newItemId)
-    );
-    
+    const item = itemsView?.find((i) => String(i.item_id) === String(newItemId));
+
     if (isStocktake) {
       // For stocktakes: before is current stock (excluding this order's contribution)
       const before = findItemQuantity(newItemId, true);
       // Default after to current stock (no change initially)
       const after = before;
       const change = 0;
-      
+
       form.setValue(`${prefix}.item_id`, newItemId);
       form.setValue(`${prefix}.quantity_before`, before);
       form.setValue(`${prefix}.quantity_after`, after);
@@ -1101,8 +1041,7 @@ function ItemTableRow({
     form.setValue(fieldName, [...currentItems, { ...itemToCopy }]);
   };
 
-  const filteredItems =
-    itemsView?.filter((item) => item.item_type === itemType) || [];
+  const filteredItems = itemsView?.filter((item) => item.item_type === itemType) || [];
 
   const lotNumber = form.watch(`${prefix}.lot_number`) || "";
 
@@ -1161,10 +1100,7 @@ function ItemTableRow({
           />
         </TableCell>
         <TableCell className="py-2 text-center">
-          <NumberFlow
-            value={quantityBefore}
-            className="text-muted-foreground text-sm"
-          />
+          <NumberFlow value={quantityBefore} className="text-muted-foreground text-sm" />
         </TableCell>
         <NumberCell
           name={`${prefix}.quantity_after`}
@@ -1180,8 +1116,8 @@ function ItemTableRow({
               quantityChange > 0
                 ? "text-green-600"
                 : quantityChange < 0
-                ? "text-red-500"
-                : "text-muted-foreground",
+                  ? "text-red-500"
+                  : "text-muted-foreground",
             )}
             value={quantityChange}
             format={{ signDisplay: "always" }}
@@ -1199,10 +1135,7 @@ function ItemTableRow({
                 <Copy className="mr-2 w-4 h-4" />
                 Duplicate
               </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={handleRemove}
-                className="text-destructive"
-              >
+              <DropdownMenuItem onClick={handleRemove} className="text-destructive">
                 <Trash className="mr-2 w-4 h-4" />
                 Remove
               </DropdownMenuItem>
@@ -1272,18 +1205,13 @@ function ItemTableRow({
         />
       )}
       <TableCell className="py-2 text-center">
-        <NumberFlow
-          value={quantityBefore}
-          className="text-muted-foreground text-sm"
-        />
+        <NumberFlow value={quantityBefore} className="text-muted-foreground text-sm" />
       </TableCell>
       <TableCell className="py-2 text-center">
         <NumberFlow
           className={cn(
             "text-sm",
-            quantityAfter < 0
-              ? "text-red-500 font-medium"
-              : "text-muted-foreground",
+            quantityAfter < 0 ? "text-red-500 font-medium" : "text-muted-foreground",
           )}
           value={quantityAfter}
         />
@@ -1300,10 +1228,7 @@ function ItemTableRow({
               <Copy className="mr-2 w-4 h-4" />
               Duplicate
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={handleRemove}
-              className="text-destructive"
-            >
+            <DropdownMenuItem onClick={handleRemove} className="text-destructive">
               <Trash className="mr-2 w-4 h-4" />
               Remove
             </DropdownMenuItem>
@@ -1350,8 +1275,7 @@ function BuildInventoryImpact() {
 /** Summary of items being removed from source location for shipments */
 function SourceLocationSummary() {
   const form = useFormContext();
-  const fromItems = useWatch({ control: form.control, name: "from_items" }) ||
-    [];
+  const fromItems = useWatch({ control: form.control, name: "from_items" }) || [];
   const { data: itemsView } = useSelectItemsView();
 
   if (fromItems.length === 0) {
@@ -1361,15 +1285,11 @@ function SourceLocationSummary() {
   return (
     <div className="space-y-2">
       {fromItems.map((item: any, idx: number) => {
-        const itemDetails = itemsView?.find(
-          (i) => String(i.item_id) === String(item.item_id),
-        );
+        const itemDetails = itemsView?.find((i) => String(i.item_id) === String(item.item_id));
         return (
           <div key={idx} className="flex justify-between py-1 text-sm">
             <span>{itemDetails?.item_name || "Unknown item"}</span>
-            <span className="font-medium text-red-500">
-              {item.quantity_change} units
-            </span>
+            <span className="font-medium text-red-500">{item.quantity_change} units</span>
           </div>
         );
       })}

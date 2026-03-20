@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "main": "src/index.ts",
-  "scripts": {
-    "clean": "rm -rf .turbo node_modules",
-    "lint": "biome check .",
-    "format": "biome format --write .",
-    "typecheck": "tsc --noEmit"
-  },
   "exports": {
     "./client": "./src/index.ts",
     "./ratelimit": "./src/ratelimit.ts"
+  },
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "lint": "vp lint",
+    "format": "vp fmt --write .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@upstash/ratelimit": "^2.0.2",

@@ -6,6 +6,6 @@ type: "Story"
 
 🏓 **Kim Daybell** – Team GB Para-table-tennis star and doctor:
 
-> “The splint has allowed me to get the sleep that is so vital … while giving surgical wounds a chance to breathe.” – *Kim Daybell*
+> “The splint has allowed me to get the sleep that is so vital … while giving surgical wounds a chance to breathe.” – _Kim Daybell_
 
 # SportsMedicine #SleepScience #AchillesRecovery

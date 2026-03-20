@@ -1,12 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@thetis/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@thetis/ui/card";
 import { features } from "../../features/navigation/content";
 import PageHeader from "@/components/PageHeader";
 

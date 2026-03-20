@@ -17,13 +17,9 @@ export const getPaymentMethodDisplayName = (key: PaymentMethodKey): string => {
 };
 
 // Helper function to get URL-safe key from display name
-export const getPaymentMethodKey = (
-  displayName: string,
-): PaymentMethodKey | null => {
-  const entry = Object.entries(PAYMENT_METHODS).find(([_, value]) =>
-    value === displayName
-  );
-  return entry ? entry[0] as PaymentMethodKey : null;
+export const getPaymentMethodKey = (displayName: string): PaymentMethodKey | null => {
+  const entry = Object.entries(PAYMENT_METHODS).find(([_, value]) => value === displayName);
+  return entry ? (entry[0] as PaymentMethodKey) : null;
 };
 
 type Paragraph = string;
@@ -106,9 +102,7 @@ interface PaymentDetailsProps {
 }
 
 // Helper: available methods per currency (for toggles visibility)
-export const getAvailablePaymentMethods = (
-  currency: string,
-): PaymentMethodKey[] => {
+export const getAvailablePaymentMethods = (currency: string): PaymentMethodKey[] => {
   const c = (currency || "GBP").toUpperCase();
   const map: Record<string, PaymentMethodKey[]> = {
     CAD: ["canada_wise", "international"],
@@ -122,30 +116,24 @@ export const getAvailablePaymentMethods = (
 const SectionBlock = ({ title, lines }: Section) => (
   <div>
     <h4>{title}</h4>
-    {lines.map((line) => <p key={line}>{line}</p>)}
+    {lines.map((line) => (
+      <p key={line}>{line}</p>
+    ))}
   </div>
 );
 
-const PaymentDetails = ({
-  orderId,
-  currency,
-  enabledPaymentMethods,
-}: PaymentDetailsProps) => {
+const PaymentDetails = ({ orderId, currency, enabledPaymentMethods }: PaymentDetailsProps) => {
   const isEnabled = (k: PaymentMethodKey) =>
     !enabledPaymentMethods || enabledPaymentMethods[k] !== false;
 
   return (
     <section>
-      <h2 className="mb-1 font-medium text-neutral-900 text-lg">
-        Payment Information
-      </h2>
+      <h2 className="mb-1 font-medium text-neutral-900 text-lg">Payment Information</h2>
       <h4>Payment Reference: #{orderId?.toString().padStart(4, "0")}</h4>
       <section>
         {isEnabled("eu_wise") && <SectionBlock {...sections.eu_wise} />}
         {isEnabled("canada_wise") && <SectionBlock {...sections.canada_wise} />}
-        {isEnabled("international") && (
-          <SectionBlock {...sections.international} />
-        )}
+        {isEnabled("international") && <SectionBlock {...sections.international} />}
         {isEnabled("us") && <SectionBlock {...sections.us} />}
         {isEnabled("uk") && <SectionBlock {...sections.uk} />}
       </section>

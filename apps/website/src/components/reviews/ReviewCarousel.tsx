@@ -1,13 +1,7 @@
 import * as React from "react";
 import getUnicodeFlagIcon from "country-flag-icons/unicode";
 import StarIcon from "@thetis/ui/star";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@thetis/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@thetis/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -33,10 +27,7 @@ export default function ReviewCarousel() {
           {reviews
             .filter((review) => review.is_pinned)
             .map((review, index) => (
-              <CarouselItem
-                key={review.name}
-                className="w-full md:basis-1/2 lg:basis-1/3"
-              >
+              <CarouselItem key={review.name} className="w-full md:basis-1/2 lg:basis-1/3">
                 <div className="p-2">
                   <Card className="bg-white shadow-lg rounded-sm">
                     <CardHeader className="pt-8 pb-2">

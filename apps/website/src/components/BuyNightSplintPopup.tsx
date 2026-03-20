@@ -17,9 +17,7 @@ export default function BuyNightSplintPopup() {
     >
       <DrawerDialogContent>
         <div className="space-y-4 w-full text-left">
-          <h3 className="font-semibold text-2xl lg:text-3xl">
-            Achilles Tendon Rupture Splint
-          </h3>
+          <h3 className="font-semibold text-2xl lg:text-3xl">Achilles Tendon Rupture Splint</h3>
           <BuyButtonVariants />
         </div>
       </DrawerDialogContent>

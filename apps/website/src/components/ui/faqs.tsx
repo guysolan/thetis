@@ -24,11 +24,7 @@ type FAQsProps = {
   withSchema?: boolean;
 };
 
-const FAQs = ({
-  faqs,
-  className = "px-4 md:px-0 w-full",
-  withSchema = true,
-}: FAQsProps) => {
+const FAQs = ({ faqs, className = "px-4 md:px-0 w-full", withSchema = true }: FAQsProps) => {
   useEffect(() => {
     if (!withSchema) return;
 
@@ -52,7 +48,7 @@ const FAQs = ({
             question: q.question,
             answer: answerText,
           };
-        })
+        }),
       );
 
       // Create the FAQ schema
@@ -78,9 +74,7 @@ const FAQs = ({
 
       // Clean up on unmount
       return () => {
-        const existingScript = document.querySelector(
-          "script[data-faq-schema]",
-        );
+        const existingScript = document.querySelector("script[data-faq-schema]");
         if (existingScript) {
           document.head.removeChild(existingScript);
         }

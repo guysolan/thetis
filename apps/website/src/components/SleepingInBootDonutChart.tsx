@@ -7,13 +7,7 @@ import type { ChartData } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const data: ChartData<"doughnut"> = {
-  labels: [
-    "Didn't Sleep Well",
-    "Took off Boot",
-    "Adjusted Boot at Night",
-    "Other",
-    "Slept OK",
-  ],
+  labels: ["Didn't Sleep Well", "Took off Boot", "Adjusted Boot at Night", "Other", "Slept OK"],
   datasets: [
     {
       data: [32, 24, 16, 4, 20],
@@ -55,8 +49,7 @@ export default function SleepingInBootDonutChart() {
   return (
     <div className="flex flex-col justify-center items-center">
       <h2 className="font-semibold text-3xl text-center">
-        <HighlightedWord>78%</HighlightedWord> of users need the Splint for
-        better sleep!
+        <HighlightedWord>78%</HighlightedWord> of users need the Splint for better sleep!
       </h2>
 
       <div className="flex md:flex-row flex-col gap-4 md:gap-8 lg:gap-16 my-8">

@@ -1,26 +1,26 @@
-import { Turn as Hamburger } from 'hamburger-react';
-import { useState, useEffect } from 'react';
+import { Turn as Hamburger } from "hamburger-react";
+import { useState, useEffect } from "react";
 
 export default function MobileMenuButton() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = (toggled: boolean) => {
     setIsOpen(toggled);
-    
+
     // Toggle the mobile menu visibility
-    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenu = document.getElementById("mobile-menu");
     if (mobileMenu) {
       if (toggled) {
-        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.remove("hidden");
       } else {
-        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.add("hidden");
       }
     }
   };
 
   return (
     <div className="md:hidden">
-      <Hamburger 
+      <Hamburger
         toggled={isOpen}
         toggle={handleToggle}
         direction="left"

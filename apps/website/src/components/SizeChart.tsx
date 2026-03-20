@@ -1,11 +1,4 @@
-import {
-  Table,
-  TableHead,
-  TableBody,
-  TableCell,
-  TableRow,
-  TableHeader,
-} from "@thetis/ui/table";
+import { Table, TableHead, TableBody, TableCell, TableRow, TableHeader } from "@thetis/ui/table";
 const sizes = {
   EU: 42,
   UK: 8,
@@ -39,12 +32,8 @@ const SizeChart = () => {
             >
               {key}
             </TableHead>
-            <TableCell className="px-6 py-4 font-normal text-base text-black">
-              &lt; {val}
-            </TableCell>
-            <TableCell className="px-6 py-4 font-normal text-base text-black">
-              &ge; {val}
-            </TableCell>
+            <TableCell className="px-6 py-4 font-normal text-base text-black">&lt; {val}</TableCell>
+            <TableCell className="px-6 py-4 font-normal text-base text-black">&ge; {val}</TableCell>
           </TableRow>
         ))}
       </TableBody>

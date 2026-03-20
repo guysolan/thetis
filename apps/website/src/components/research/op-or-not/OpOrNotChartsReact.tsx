@@ -15,14 +15,7 @@ import {
   Legend,
   Cell,
 } from "recharts";
-import {
-  Percent,
-  Users,
-  Activity,
-  Scissors,
-  Calendar,
-  BarChart as ChartIcon,
-} from "lucide-react";
+import { Percent, Users, Activity, Scissors, Calendar, BarChart as ChartIcon } from "lucide-react";
 import countryData from "./data.json";
 import getUnicodeFlagIcon from "country-flag-icons/unicode";
 
@@ -32,9 +25,7 @@ function getLatestYearData(data: Record<string, number | string>) {
     .filter((k) => !Number.isNaN(Number(k)))
     .map(Number)
     .sort((a, b) => b - a);
-  return years[0]
-    ? { year: years[0], value: Number(data[years[0].toString()]) }
-    : null;
+  return years[0] ? { year: years[0], value: Number(data[years[0].toString()]) } : null;
 }
 
 // Helper function for linear regression and projection
@@ -94,14 +85,8 @@ const countryPopulations: Record<string, number> = {
 const scatterData = countryData
   .map((country) => {
     // Proper type casting with unknown as intermediate step
-    const surgicalRate = country.surgical_rate as unknown as Record<
-      string,
-      number | string
-    >;
-    const incidence = country.incidence as unknown as Record<
-      string,
-      number | string
-    >;
+    const surgicalRate = country.surgical_rate as unknown as Record<string, number | string>;
+    const incidence = country.incidence as unknown as Record<string, number | string>;
 
     const latestSurgical = getLatestYearData(surgicalRate);
     const latestIncidence = getLatestYearData(incidence);
@@ -127,10 +112,7 @@ const scatterData = countryData
 // Prepare surgical trends data
 const surgicalTrendsData = countryData.map((country) => {
   // Proper type casting with unknown as intermediate step
-  const surgicalRate = country.surgical_rate as unknown as Record<
-    string,
-    number | string
-  >;
+  const surgicalRate = country.surgical_rate as unknown as Record<string, number | string>;
 
   // Get only numeric years from the data
   const years = Object.keys(surgicalRate)
@@ -167,9 +149,7 @@ export function OpOrNotCharts() {
     <div className="space-y-4 sm:space-y-8 w-full">
       {/* Scatter Plot */}
       <div className="bg-white shadow-sm p-3 sm:p-6 border border-gray-100 rounded-lg w-full">
-        <h3 className="mb-2 sm:mb-4 font-semibold text-lg">
-          Surgical Rates vs Incidence
-        </h3>
+        <h3 className="mb-2 sm:mb-4 font-semibold text-lg">Surgical Rates vs Incidence</h3>
         <div className="w-full h-[350px] sm:h-[400px]">
           <ResponsiveContainer width="100%" height="100%">
             <ScatterChart margin={{ top: 20, right: 5, bottom: 20, left: 5 }}>
@@ -195,16 +175,12 @@ export function OpOrNotCharts() {
                 content={({ payload }) => {
                   if (!payload?.[0]?.payload) return null;
                   const data = payload[0].payload;
-                  const countryCode =
-                    countryData.find((c) => c.country === data.name)?.code ||
-                    "";
+                  const countryCode = countryData.find((c) => c.country === data.name)?.code || "";
                   return (
                     <div className="bg-white shadow-sm p-3 border border-gray-200 rounded-lg">
                       <p className="font-semibold">
                         {countryCode && (
-                          <span className="mr-1">
-                            {getUnicodeFlagIcon(countryCode)}
-                          </span>
+                          <span className="mr-1">{getUnicodeFlagIcon(countryCode)}</span>
                         )}
                         {data.name}
                       </p>
@@ -222,20 +198,14 @@ export function OpOrNotCharts() {
                       </p>
                       <p className="flex items-center gap-2">
                         <Scissors className="w-4 h-4" />
-                        Annual Surgeries:{" "}
-                        {data.annualSurgeries.toLocaleString()}
+                        Annual Surgeries: {data.annualSurgeries.toLocaleString()}
                       </p>
                     </div>
                   );
                 }}
               />
 
-              <Scatter
-                name="Countries"
-                data={scatterData}
-                fill={chartGreen}
-                fillOpacity={1}
-              >
+              <Scatter name="Countries" data={scatterData} fill={chartGreen} fillOpacity={1}>
                 {scatterData.map((entry) => (
                   <Cell key={entry.name} r={entry.size} />
                 ))}
@@ -272,9 +242,7 @@ export function OpOrNotCharts() {
                   // Collect country entries that have actual data for this year
                   const validEntries = payload.filter((entry) => {
                     // Find the actual data point in the original country data
-                    const countryData = surgicalTrendsData.find(
-                      (c) => c.country === entry.name,
-                    );
+                    const countryData = surgicalTrendsData.find((c) => c.country === entry.name);
                     if (!countryData) return false;
 
                     // For 2025, show only projections
@@ -302,9 +270,7 @@ export function OpOrNotCharts() {
                           (c) => c.country === entry.name,
                         );
                         // Get the exact data point for this year
-                        const dataPoint = countryData?.data.find(
-                          (d) => d.year === year,
-                        );
+                        const dataPoint = countryData?.data.find((d) => d.year === year);
                         // Use the actual rate from the data point instead of entry.value
                         const value = dataPoint?.rate || 0;
                         const countryCode = countryData.country.code || "";
@@ -317,14 +283,9 @@ export function OpOrNotCharts() {
                           >
                             <Percent className="w-4 h-4" />
                             {countryCode && (
-                              <span className="mr-1">
-                                {getUnicodeFlagIcon(countryCode)}
-                              </span>
+                              <span className="mr-1">{getUnicodeFlagIcon(countryCode)}</span>
                             )}
-                            {entry.name}:{" "}
-                            {value <= 0.1
-                              ? "Negligible"
-                              : `${value.toFixed(1)}%`}
+                            {entry.name}: {value <= 0.1 ? "Negligible" : `${value.toFixed(1)}%`}
                             {"projected" in (dataPoint || {}) && " (Projected)"}
                           </p>
                         );
@@ -353,15 +314,10 @@ export function OpOrNotCharts() {
 
       {/* Bar Chart */}
       <div className="bg-white shadow-sm p-3 sm:p-6 border border-gray-100 rounded-lg w-full">
-        <h3 className="mb-2 sm:mb-4 font-semibold text-lg">
-          Latest Surgical Rates by Region
-        </h3>
+        <h3 className="mb-2 sm:mb-4 font-semibold text-lg">Latest Surgical Rates by Region</h3>
         <div className="w-full h-[350px] sm:h-[400px]">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              margin={{ top: 20, right: 5, bottom: 60, left: 5 }}
-              data={scatterData}
-            >
+            <BarChart margin={{ top: 20, right: 5, bottom: 60, left: 5 }} data={scatterData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                 dataKey="name"
@@ -369,11 +325,8 @@ export function OpOrNotCharts() {
                 textAnchor="end"
                 height={60}
                 tickFormatter={(value) => {
-                  const countryCode =
-                    countryData.find((c) => c.country === value)?.code || "";
-                  return countryCode
-                    ? `${getUnicodeFlagIcon(countryCode)} ${value}`
-                    : value;
+                  const countryCode = countryData.find((c) => c.country === value)?.code || "";
+                  return countryCode ? `${getUnicodeFlagIcon(countryCode)} ${value}` : value;
                 }}
               />
               <YAxis
@@ -388,17 +341,13 @@ export function OpOrNotCharts() {
                 content={({ payload }) => {
                   if (!payload?.length) return null;
                   const data = payload[0].payload;
-                  const countryCode =
-                    countryData.find((c) => c.country === data.name)?.code ||
-                    "";
+                  const countryCode = countryData.find((c) => c.country === data.name)?.code || "";
                   return (
                     <div className="bg-white shadow-sm p-3 border border-gray-200 rounded-lg">
                       <p className="flex items-center gap-2 font-semibold">
                         <Users className="w-4 h-4" />
                         {countryCode && (
-                          <span className="mr-1">
-                            {getUnicodeFlagIcon(countryCode)}
-                          </span>
+                          <span className="mr-1">{getUnicodeFlagIcon(countryCode)}</span>
                         )}
                         {data.name}
                       </p>
@@ -410,11 +359,7 @@ export function OpOrNotCharts() {
                   );
                 }}
               />
-              <Bar
-                dataKey="surgicalRate"
-                fill={chartGreen}
-                radius={[4, 4, 0, 0]}
-              />
+              <Bar dataKey="surgicalRate" fill={chartGreen} radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

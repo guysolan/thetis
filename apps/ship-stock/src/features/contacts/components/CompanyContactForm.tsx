@@ -25,12 +25,7 @@ interface Props {
   onSuccess?: (contactId: number) => void;
 }
 
-export default function CompanyContactForm({
-  contact,
-  operation,
-  companyId,
-  onSuccess,
-}: Props) {
+export default function CompanyContactForm({ contact, operation, companyId, onSuccess }: Props) {
   const { mutate: upsertContact } = useCompanyContactMutation(operation);
 
   const form = useForm<ContactFormData>({

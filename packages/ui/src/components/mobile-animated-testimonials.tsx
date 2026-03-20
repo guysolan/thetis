@@ -11,11 +11,7 @@ type Testimonial = {
   image?: { src: string };
 };
 
-export function MobileTestimonialCarousel({
-  testimonials,
-}: {
-  testimonials: Testimonial[];
-}) {
+export function MobileTestimonialCarousel({ testimonials }: { testimonials: Testimonial[] }) {
   const [active, setActive] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -52,12 +48,8 @@ export function MobileTestimonialCarousel({
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="font-bold text-lg text-neutral-900">
-                    {testimonial.name}
-                  </h3>
-                  <p className="text-base text-gray-500">
-                    {testimonial.description}
-                  </p>
+                  <h3 className="font-bold text-lg text-neutral-900">{testimonial.name}</h3>
+                  <p className="text-base text-gray-500">{testimonial.description}</p>
                   <div className="flex justify-start gap-4 mt-6">
                     <button onClick={handlePrev} className={cn(arrowStyle)}>
                       <IconArrowLeft size={16} />

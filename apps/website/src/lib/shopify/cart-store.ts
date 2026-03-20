@@ -3,12 +3,12 @@
 
 import { atom, computed } from "nanostores";
 import {
-    addToCart as addToCartApi,
-    type Cart,
-    createCart,
-    getCart,
-    removeFromCart as removeFromCartApi,
-    updateCartLine,
+  addToCart as addToCartApi,
+  type Cart,
+  createCart,
+  getCart,
+  removeFromCart as removeFromCartApi,
+  updateCartLine,
 } from "./storefront";
 import { trackAddToCart, trackRemoveFromCart } from "../analytics";
 
@@ -26,205 +26,182 @@ export const $error = atom<string | null>(null);
 export const $cartCount = computed($cart, (cart) => cart?.totalQuantity ?? 0);
 
 export const $cartLines = computed(
-    $cart,
-    (cart) => cart?.lines.edges.map((edge) => edge.node) ?? [],
+  $cart,
+  (cart) => cart?.lines.edges.map((edge) => edge.node) ?? [],
 );
 
 export const $subtotal = computed($cart, (cart) => cart?.cost?.subtotalAmount);
 
 export const $checkoutUrl = computed($cart, (cart) => {
-    const baseUrl = cart?.checkoutUrl;
-    if (!baseUrl) return null;
+  const baseUrl = cart?.checkoutUrl;
+  if (!baseUrl) return null;
 
-    // Check for discount code in sessionStorage (for Amazon customers)
-    if (typeof window !== "undefined") {
-        const discountCode = sessionStorage.getItem("amazonDiscountCode");
-        if (discountCode) {
-            const url = new URL(baseUrl);
-            url.searchParams.set("discount", discountCode);
-            return url.toString();
-        }
+  // Check for discount code in sessionStorage (for Amazon customers)
+  if (typeof window !== "undefined") {
+    const discountCode = sessionStorage.getItem("amazonDiscountCode");
+    if (discountCode) {
+      const url = new URL(baseUrl);
+      url.searchParams.set("discount", discountCode);
+      return url.toString();
     }
+  }
 
-    return baseUrl;
+  return baseUrl;
 });
 
 // Actions
 export function openCart() {
-    $isCartOpen.set(true);
+  $isCartOpen.set(true);
 }
 
 export function closeCart() {
-    $isCartOpen.set(false);
+  $isCartOpen.set(false);
 }
 
 export function toggleCart() {
-    $isCartOpen.set(!$isCartOpen.get());
+  $isCartOpen.set(!$isCartOpen.get());
 }
 
 export async function initializeCart(): Promise<Cart | null> {
-    if (typeof window === "undefined") return null;
+  if (typeof window === "undefined") return null;
 
-    // Don't re-initialize if we already have a cart
-    const currentCart = $cart.get();
-    if (currentCart) return currentCart;
+  // Don't re-initialize if we already have a cart
+  const currentCart = $cart.get();
+  if (currentCart) return currentCart;
 
-    $isLoading.set(true);
-    $error.set(null);
+  $isLoading.set(true);
+  $error.set(null);
 
-    try {
-        const cartId = localStorage.getItem(CART_ID_KEY);
-        if (cartId) {
-            const existingCart = await getCart(cartId);
-            if (existingCart) {
-                $cart.set(existingCart);
-                $isLoading.set(false);
-                return existingCart;
-            }
-            // Cart expired or invalid, remove from storage
-            localStorage.removeItem(CART_ID_KEY);
-        }
-    } catch (error) {
-        console.error("Error loading cart:", error);
-        localStorage.removeItem(CART_ID_KEY);
+  try {
+    const cartId = localStorage.getItem(CART_ID_KEY);
+    if (cartId) {
+      const existingCart = await getCart(cartId);
+      if (existingCart) {
+        $cart.set(existingCart);
+        $isLoading.set(false);
+        return existingCart;
+      }
+      // Cart expired or invalid, remove from storage
+      localStorage.removeItem(CART_ID_KEY);
     }
+  } catch (error) {
+    console.error("Error loading cart:", error);
+    localStorage.removeItem(CART_ID_KEY);
+  }
 
-    $isLoading.set(false);
-    return null;
+  $isLoading.set(false);
+  return null;
 }
 
 export async function addToCart(
-    variantId: string,
-    quantity: number = 1,
-    shouldOpenCart: boolean = true,
+  variantId: string,
+  quantity: number = 1,
+  shouldOpenCart: boolean = true,
 ): Promise<Cart> {
-    $isLoading.set(true);
-    $error.set(null);
+  $isLoading.set(true);
+  $error.set(null);
 
-    try {
-        const currentCart = $cart.get();
-        let updatedCart: Cart;
+  try {
+    const currentCart = $cart.get();
+    let updatedCart: Cart;
 
-        if (currentCart?.id) {
-            updatedCart = await addToCartApi(
-                currentCart.id,
-                variantId,
-                quantity,
-            );
-        } else {
-            updatedCart = await createCart(variantId, quantity);
-            if (typeof window !== "undefined") {
-                localStorage.setItem(CART_ID_KEY, updatedCart.id);
-            }
-        }
-
-        $cart.set(updatedCart);
-        $isLoading.set(false);
-
-        // Track add_to_cart event for GA4
-        const addedLine = updatedCart.lines.edges.find(
-            (edge) => edge.node.merchandise.id === variantId,
-        );
-        if (addedLine) {
-            const item = addedLine.node;
-            trackAddToCart({
-                id: item.merchandise.id,
-                name: item.merchandise.product.title,
-                price: parseFloat(item.merchandise.price.amount),
-                quantity,
-                currency: item.merchandise.price.currencyCode,
-                variant: item.merchandise.title !== "Default Title"
-                    ? item.merchandise.title
-                    : undefined,
-            });
-        }
-
-        // Only open cart drawer if explicitly requested (defaults to true for backwards compatibility)
-        if (shouldOpenCart) {
-            openCart();
-        }
-
-        return updatedCart;
-    } catch (error) {
-        const message = error instanceof Error
-            ? error.message
-            : "Failed to add to cart";
-        $error.set(message);
-        $isLoading.set(false);
-        throw error;
+    if (currentCart?.id) {
+      updatedCart = await addToCartApi(currentCart.id, variantId, quantity);
+    } else {
+      updatedCart = await createCart(variantId, quantity);
+      if (typeof window !== "undefined") {
+        localStorage.setItem(CART_ID_KEY, updatedCart.id);
+      }
     }
+
+    $cart.set(updatedCart);
+    $isLoading.set(false);
+
+    // Track add_to_cart event for GA4
+    const addedLine = updatedCart.lines.edges.find(
+      (edge) => edge.node.merchandise.id === variantId,
+    );
+    if (addedLine) {
+      const item = addedLine.node;
+      trackAddToCart({
+        id: item.merchandise.id,
+        name: item.merchandise.product.title,
+        price: parseFloat(item.merchandise.price.amount),
+        quantity,
+        currency: item.merchandise.price.currencyCode,
+        variant: item.merchandise.title !== "Default Title" ? item.merchandise.title : undefined,
+      });
+    }
+
+    // Only open cart drawer if explicitly requested (defaults to true for backwards compatibility)
+    if (shouldOpenCart) {
+      openCart();
+    }
+
+    return updatedCart;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Failed to add to cart";
+    $error.set(message);
+    $isLoading.set(false);
+    throw error;
+  }
 }
 
-export async function updateQuantity(
-    lineId: string,
-    quantity: number,
-): Promise<Cart | null> {
-    const currentCart = $cart.get();
-    if (!currentCart?.id) return null;
+export async function updateQuantity(lineId: string, quantity: number): Promise<Cart | null> {
+  const currentCart = $cart.get();
+  if (!currentCart?.id) return null;
 
-    $isLoading.set(true);
-    $error.set(null);
+  $isLoading.set(true);
+  $error.set(null);
 
-    try {
-        const updatedCart = await updateCartLine(
-            currentCart.id,
-            lineId,
-            quantity,
-        );
-        $cart.set(updatedCart);
-        $isLoading.set(false);
-        return updatedCart;
-    } catch (error) {
-        const message = error instanceof Error
-            ? error.message
-            : "Failed to update quantity";
-        $error.set(message);
-        $isLoading.set(false);
-        throw error;
-    }
+  try {
+    const updatedCart = await updateCartLine(currentCart.id, lineId, quantity);
+    $cart.set(updatedCart);
+    $isLoading.set(false);
+    return updatedCart;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Failed to update quantity";
+    $error.set(message);
+    $isLoading.set(false);
+    throw error;
+  }
 }
 
 export async function removeItem(lineId: string): Promise<Cart | null> {
-    const currentCart = $cart.get();
-    if (!currentCart?.id) return null;
+  const currentCart = $cart.get();
+  if (!currentCart?.id) return null;
 
-    // Get item info before removing for analytics tracking
-    const removedLine = currentCart.lines.edges.find(
-        (edge) => edge.node.id === lineId,
-    );
+  // Get item info before removing for analytics tracking
+  const removedLine = currentCart.lines.edges.find((edge) => edge.node.id === lineId);
 
-    $isLoading.set(true);
-    $error.set(null);
+  $isLoading.set(true);
+  $error.set(null);
 
-    try {
-        const updatedCart = await removeFromCartApi(currentCart.id, lineId);
-        $cart.set(updatedCart);
-        $isLoading.set(false);
+  try {
+    const updatedCart = await removeFromCartApi(currentCart.id, lineId);
+    $cart.set(updatedCart);
+    $isLoading.set(false);
 
-        // Track remove_from_cart event for GA4
-        if (removedLine) {
-            const item = removedLine.node;
-            trackRemoveFromCart({
-                id: item.merchandise.id,
-                name: item.merchandise.product.title,
-                price: parseFloat(item.merchandise.price.amount),
-                quantity: item.quantity,
-                currency: item.merchandise.price.currencyCode,
-                variant: item.merchandise.title !== "Default Title"
-                    ? item.merchandise.title
-                    : undefined,
-            });
-        }
-
-        return updatedCart;
-    } catch (error) {
-        const message = error instanceof Error
-            ? error.message
-            : "Failed to remove item";
-        $error.set(message);
-        $isLoading.set(false);
-        throw error;
+    // Track remove_from_cart event for GA4
+    if (removedLine) {
+      const item = removedLine.node;
+      trackRemoveFromCart({
+        id: item.merchandise.id,
+        name: item.merchandise.product.title,
+        price: parseFloat(item.merchandise.price.amount),
+        quantity: item.quantity,
+        currency: item.merchandise.price.currencyCode,
+        variant: item.merchandise.title !== "Default Title" ? item.merchandise.title : undefined,
+      });
     }
+
+    return updatedCart;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Failed to remove item";
+    $error.set(message);
+    $isLoading.set(false);
+    throw error;
+  }
 }
 
 // For backwards compatibility with existing event-based code
@@ -232,24 +209,22 @@ export async function removeItem(lineId: string): Promise<Cart | null> {
 export const emitCartOpen = openCart;
 export const emitCartClose = closeCart;
 export function getCartCache(): Cart | null {
-    return $cart.get();
+  return $cart.get();
 }
 
 // Subscription helpers for non-React usage
-export function subscribeToCartUpdates(
-    callback: (cart: Cart | null) => void,
-): () => void {
-    return $cart.subscribe(callback);
+export function subscribeToCartUpdates(callback: (cart: Cart | null) => void): () => void {
+  return $cart.subscribe(callback);
 }
 
 export function subscribeToCartOpen(callback: () => void): () => void {
-    return $isCartOpen.subscribe((isOpen) => {
-        if (isOpen) callback();
-    });
+  return $isCartOpen.subscribe((isOpen) => {
+    if (isOpen) callback();
+  });
 }
 
 export function subscribeToCartClose(callback: () => void): () => void {
-    return $isCartOpen.subscribe((isOpen) => {
-        if (!isOpen) callback();
-    });
+  return $isCartOpen.subscribe((isOpen) => {
+    if (!isOpen) callback();
+  });
 }

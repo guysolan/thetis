@@ -7,10 +7,6 @@ const unitOfMeasurement = [
 
 export function UnitOfMeasurementSelect() {
   return (
-    <Select
-      name="unit_of_measurement"
-      label="Unit of Measurement"
-      options={unitOfMeasurement}
-    />
+    <Select name="unit_of_measurement" label="Unit of Measurement" options={unitOfMeasurement} />
   );
 }

@@ -53,7 +53,9 @@ import { useEnrollment } from "@/hooks/use-enrollment";
 // Recommended: use the hook (reads from purchases)
 function MyComponent() {
   const { enrollments, hasAccess } = useEnrollment();
-  if (hasAccess("standard")) { /* ... */ }
+  if (hasAccess("standard")) {
+    /* ... */
+  }
 }
 
 // Direct query: use purchases table only

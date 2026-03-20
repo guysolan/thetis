@@ -13,7 +13,7 @@ Location Breakdown:
 
 Do you know any sports physios who should have a few Achilles tendon rupture splints in their bags?
 
- #SportsMedicine #Orthopedics #InjuryPrevention #Healthcare #Research
+#SportsMedicine #Orthopedics #InjuryPrevention #Healthcare #Research
 
 Source: <https://lnkd.in/dasGEs9P>
 Authors: Nicholas Lemme, MD Neill Li Brett Owens Steve DeFroda Justin Kleiner

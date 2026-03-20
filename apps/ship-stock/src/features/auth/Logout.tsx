@@ -3,18 +3,15 @@ import { Button } from "@thetis/ui/button"; // Assuming you're using a UI compon
 import { useLogout } from "./hooks/useLogout";
 
 export function Logout() {
-    const { data: user } = useAuth();
-    const { mutate: logout } = useLogout();
-    if (!user) {
-        return null;
-    }
+  const { data: user } = useAuth();
+  const { mutate: logout } = useLogout();
+  if (!user) {
+    return null;
+  }
 
-    return (
-        <Button
-            variant="outline"
-            onClick={logout}
-        >
-            Logout
-        </Button>
-    );
+  return (
+    <Button variant="outline" onClick={logout}>
+      Logout
+    </Button>
+  );
 }

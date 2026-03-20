@@ -16,9 +16,7 @@ const DocumentControls = ({
   const handlePrint = () => {
     const originalTitle = document.title;
     document.title = documentType
-      ? `${changeCase.snakeCase(documentType)}_${orderNumber}_${
-        dayjs().format("YYYY-MM-DD")
-      }`
+      ? `${changeCase.snakeCase(documentType)}_${orderNumber}_${dayjs().format("YYYY-MM-DD")}`
       : `document_${dayjs().format("YYYY-MM-DD")}`;
 
     window.print();
@@ -31,10 +29,7 @@ const DocumentControls = ({
     <>
       <div className="print:hidden top-4 right-4 z-10 fixed flex items-center gap-2">
         {documentType && documentType !== "shippingLabel" && documentType !== "quote" && (
-          <DocumentOptionsSheet
-            documentType={documentType}
-            currency={currency}
-          />
+          <DocumentOptionsSheet documentType={documentType} currency={currency} />
         )}
         <Button onClick={handlePrint}>Print</Button>
       </div>

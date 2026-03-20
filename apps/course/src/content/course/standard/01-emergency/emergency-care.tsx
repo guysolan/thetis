@@ -6,8 +6,7 @@ import HowRupturesHappen from "@/assets/how-ruptures-happen.png";
 export const metadata = {
   slug: "emergency-care",
   title: "Emergency Care & Initial Assessment",
-  description:
-    "What just happened, A&E expectations, and immediate first steps",
+  description: "What just happened, A&E expectations, and immediate first steps",
   status: "drafting" as const,
 };
 
@@ -159,8 +158,7 @@ export const content: SectionContent = {
         {
           type: "image",
           src: AchillesRopeEndsPointedDown,
-          alt:
-            "Simple diagram showing a snapped rope (Achilles) and how a pointed-down foot brings the rope ends closer together",
+          alt: "Simple diagram showing a snapped rope (Achilles) and how a pointed-down foot brings the rope ends closer together",
           caption:
             "Why pointed-down matters: keeping the tendon ends close together helps healing. Don't let your toes come up — that's the golden rule.",
         },
@@ -177,8 +175,7 @@ export const content: SectionContent = {
         {
           type: "image",
           src: HowRupturesHappen,
-          alt:
-            "Educational infographic showing how Achilles tendon ruptures happen: tissue fatigue accumulates over time from normal activities, leading to rupture during a seemingly normal, submaximal activity",
+          alt: "Educational infographic showing how Achilles tendon ruptures happen: tissue fatigue accumulates over time from normal activities, leading to rupture during a seemingly normal, submaximal activity",
           caption:
             "How ruptures happen: fatigue accumulates invisibly over time, then a normal activity triggers the rupture",
         },
@@ -289,8 +286,7 @@ export const content: SectionContent = {
     {
       type: "image",
       src: SnapRuptureExperience,
-      alt:
-        "The snap rupture experience - what it feels like when your Achilles tendon ruptures",
+      alt: "The snap rupture experience - what it feels like when your Achilles tendon ruptures",
       caption:
         "Many describe the moment of rupture as feeling like being kicked in the back of the ankle",
     },
@@ -389,8 +385,7 @@ export const content: SectionContent = {
                 {
                   type: "card",
                   title: "DVT (Deep Vein Thrombosis)",
-                  description:
-                    "A blood clot in a deep vein, usually in your leg",
+                  description: "A blood clot in a deep vein, usually in your leg",
                   variant: "default",
                   content: [
                     {
@@ -427,8 +422,7 @@ export const content: SectionContent = {
                     },
                     {
                       type: "text",
-                      content:
-                        "**Warning signs of PE (seek urgent medical help immediately):**",
+                      content: "**Warning signs of PE (seek urgent medical help immediately):**",
                     },
                     {
                       type: "list",
@@ -569,8 +563,7 @@ export const content: SectionContent = {
     {
       type: "card",
       title: "Questions to Ask at A&E / Fracture Clinic",
-      description:
-        "Write these down on your phone and bring them to your appointment.",
+      description: "Write these down on your phone and bring them to your appointment.",
       variant: "default",
       content: [
         {

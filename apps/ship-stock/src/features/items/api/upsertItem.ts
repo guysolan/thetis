@@ -4,11 +4,7 @@ import { toast } from "sonner";
 import { InsertItem, ItemRow } from "../types";
 
 export const upsertItem = async (item: InsertItem) => {
-  const { data, error } = await supabase
-    .from("items")
-    .upsert(item)
-    .select()
-    .single();
+  const { data, error } = await supabase.from("items").upsert(item).select().single();
 
   if (error) {
     throw error;

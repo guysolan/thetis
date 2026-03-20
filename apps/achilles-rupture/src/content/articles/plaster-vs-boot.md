@@ -6,7 +6,7 @@ publishedAt: "Feb 1 2025"
 type: "article"
 tags: ["treatment", "equipment"]
 audience: ["patient", "clinician"]
-heroImage: '/images/plaster-vs-boot.jpeg'
+heroImage: "/images/plaster-vs-boot.jpeg"
 ---
 
 ## Achilles Tendon Rupture Treatment: Key Takeaways
@@ -132,7 +132,7 @@ The findings of the UKSTAR trial have significant implications for companies tha
 
 Major brands in the functional brace market, such as **DJO Global (Aircast)**, **Össur**, **Breg**, and **VACOped**, may see increased demand for their products. These companies should consider:
 
-- **Highlighting the research:**  Marketing materials should emphasize the UKSTAR trial results, demonstrating the effectiveness and cost-effectiveness of functional braces.
+- **Highlighting the research:** Marketing materials should emphasize the UKSTAR trial results, demonstrating the effectiveness and cost-effectiveness of functional braces.
 - **Collaboration with healthcare providers:** Partnering with hospitals and clinics to offer training and resources on functional bracing protocols.
 - **Product Development**: Consider the role of adjunct products in the recovery process.
   - Night splints, like the [Thetis Medical Night Splint](https://www.thetismedical.com/splint/), can help maintain plantar-flexion during sleep.
@@ -145,32 +145,32 @@ Major brands in the functional brace market, such as **DJO Global (Aircast)**, *
 
 ## References
 
-1. Costa ML, Achten J, Marian IR, Dutton SJ, Lamb SE, Ollivere B, Maredza M, Petrou S, Kearney RS; UKSTAR trial collaborators. [Plaster cast versus functional brace for non-surgical treatment of Achilles tendon rupture (UKSTAR): a multicentre randomised controlled trial and economic evaluation](https://www.bmj.com/content/364/bmj.k5120). *The Lancet*, 2020;395(10222):441-448. doi: 10.1016/S0140-6736(19)32942-3.
+1. Costa ML, Achten J, Marian IR, Dutton SJ, Lamb SE, Ollivere B, Maredza M, Petrou S, Kearney RS; UKSTAR trial collaborators. [Plaster cast versus functional brace for non-surgical treatment of Achilles tendon rupture (UKSTAR): a multicentre randomised controlled trial and economic evaluation](https://www.bmj.com/content/364/bmj.k5120). _The Lancet_, 2020;395(10222):441-448. doi: 10.1016/S0140-6736(19)32942-3.
 
-2. Korkmaz M, Erkoc MF, Yolcu S, Balbaloglu O, Öztemur Z, Karaaslan F. [Weight bearing the same day versus non-weight bearing for 4 weeks in Achilles tendon rupture](https://www.ncbi.nlm.nih.gov/books/NBK430844/). *Journal of Orthopaedic Science*, 2015;20(4):513-516.
+2. Korkmaz M, Erkoc MF, Yolcu S, Balbaloglu O, Öztemur Z, Karaaslan F. [Weight bearing the same day versus non-weight bearing for 4 weeks in Achilles tendon rupture](https://www.ncbi.nlm.nih.gov/books/NBK430844/). _Journal of Orthopaedic Science_, 2015;20(4):513-516.
 
-3. Young SW, Patel A, Zhu M, Van Essen G, McNair P, Tomlinson C. [Weight-bearing in the nonoperative treatment of acute Achilles tendon ruptures: a randomized controlled trial](https://www.jbjs.org/reader.php?rsuite_id=1222149). *The Journal of Bone & Joint Surgery*, 2014;96(13):1073-1079.
+3. Young SW, Patel A, Zhu M, Van Essen G, McNair P, Tomlinson C. [Weight-bearing in the nonoperative treatment of acute Achilles tendon ruptures: a randomized controlled trial](https://www.jbjs.org/reader.php?rsuite_id=1222149). _The Journal of Bone & Joint Surgery_, 2014;96(13):1073-1079.
 
-4. Barfod KW, Hansen MS, Holmich P, Kristensen MT, Troelsen A. [Efficacy of early controlled motion of the ankle compared with immobilisation in non-operative treatment of patients with an acute Achilles tendon rupture](https://pmc.ncbi.nlm.nih.gov/articles/PMC4094105/). *British Journal of Sports Medicine*, 2019;53(24):1554-1560.
+4. Barfod KW, Hansen MS, Holmich P, Kristensen MT, Troelsen A. [Efficacy of early controlled motion of the ankle compared with immobilisation in non-operative treatment of patients with an acute Achilles tendon rupture](https://pmc.ncbi.nlm.nih.gov/articles/PMC4094105/). _British Journal of Sports Medicine_, 2019;53(24):1554-1560.
 
-5. Ochen Y, Beks RB, van Heijl M, Hietbrink F, Leenen LP, van der Velde D, Heng M, van der Meijden O, Groenwold RH, Houwert RM. [Operative treatment versus nonoperative treatment of Achilles tendon ruptures: systematic review and meta-analysis](https://www.bmj.com/content/364/bmj.k5120). *BMJ*, 2019;364:k5120. doi: 10.1136/bmj.k5120.
+5. Ochen Y, Beks RB, van Heijl M, Hietbrink F, Leenen LP, van der Velde D, Heng M, van der Meijden O, Groenwold RH, Houwert RM. [Operative treatment versus nonoperative treatment of Achilles tendon ruptures: systematic review and meta-analysis](https://www.bmj.com/content/364/bmj.k5120). _BMJ_, 2019;364:k5120. doi: 10.1136/bmj.k5120.
 
-6. American Academy of Orthopaedic Surgeons. [Management of Achilles Tendon Injuries: Evidence-Based Clinical Practice Guideline](https://www.aaos.org/aaosnow/2019/oct/research/research02/). *Journal of Bone and Joint Surgery*, 2022;104(1):e10. doi: 10.2106/JBJS.21.00952.
+6. American Academy of Orthopaedic Surgeons. [Management of Achilles Tendon Injuries: Evidence-Based Clinical Practice Guideline](https://www.aaos.org/aaosnow/2019/oct/research/research02/). _Journal of Bone and Joint Surgery_, 2022;104(1):e10. doi: 10.2106/JBJS.21.00952.
 
-7. Barfod KW, Bencke J, Lauridsen HB, Ban I, Ebskov L, Troelsen A. [Nonoperative, dynamic treatment of acute Achilles tendon rupture](https://pmc.ncbi.nlm.nih.gov/articles/PMC7031433/). *Journal of Foot and Ankle Surgery*, 2015;54(2):220-226.
+7. Barfod KW, Bencke J, Lauridsen HB, Ban I, Ebskov L, Troelsen A. [Nonoperative, dynamic treatment of acute Achilles tendon rupture](https://pmc.ncbi.nlm.nih.gov/articles/PMC7031433/). _Journal of Foot and Ankle Surgery_, 2015;54(2):220-226.
 
-8. Silbernagel KG, Hanlon S, Sprague A. [Current clinical concepts: conservative management of Achilles tendinopathy](https://www.physio-pedia.com/Achilles_tendon_repair). *Journal of Athletic Training*, 2020;55(5):438-447. doi: 10.4085/1062-6050-356-19.
+8. Silbernagel KG, Hanlon S, Sprague A. [Current clinical concepts: conservative management of Achilles tendinopathy](https://www.physio-pedia.com/Achilles_tendon_repair). _Journal of Athletic Training_, 2020;55(5):438-447. doi: 10.4085/1062-6050-356-19.
 
-9. Olsson N, Silbernagel KG, Eriksson BI, Sansone M, Brorsson A, Nilsson-Helander K, Karlsson J. [Stable surgical repair with accelerated rehabilitation versus nonsurgical treatment for acute Achilles tendon ruptures](https://pmc.ncbi.nlm.nih.gov/articles/PMC5136353/). *American Journal of Sports Medicine*, 2013;41(12):2867-2876.
+9. Olsson N, Silbernagel KG, Eriksson BI, Sansone M, Brorsson A, Nilsson-Helander K, Karlsson J. [Stable surgical repair with accelerated rehabilitation versus nonsurgical treatment for acute Achilles tendon ruptures](https://pmc.ncbi.nlm.nih.gov/articles/PMC5136353/). _American Journal of Sports Medicine_, 2013;41(12):2867-2876.
 
-10. Zellers JA, Carmont MR, Grävare Silbernagel K. [Return to sport after Achilles tendon rupture: a systematic review with meta-analysis](https://bjsm.bmj.com/content/56/9/515). *British Journal of Sports Medicine*, 2022;56(14):771-779. doi: 10.1136/bjsports-2019-100800.
+10. Zellers JA, Carmont MR, Grävare Silbernagel K. [Return to sport after Achilles tendon rupture: a systematic review with meta-analysis](https://bjsm.bmj.com/content/56/9/515). _British Journal of Sports Medicine_, 2022;56(14):771-779. doi: 10.1136/bjsports-2019-100800.
 
-11. Lantto I, Heikkinen J, Flinkkila T, Ohtonen P, Kangas J, Siira P, Leppilahti J. [Early functional treatment versus cast immobilization in tension after Achilles rupture repair](https://pmc.ncbi.nlm.nih.gov/articles/PMC5505598/). *American Journal of Sports Medicine*, 2015;43(9):2302-2309.
+11. Lantto I, Heikkinen J, Flinkkila T, Ohtonen P, Kangas J, Siira P, Leppilahti J. [Early functional treatment versus cast immobilization in tension after Achilles rupture repair](https://pmc.ncbi.nlm.nih.gov/articles/PMC5505598/). _American Journal of Sports Medicine_, 2015;43(9):2302-2309.
 
-12. Maffulli N, Oliva F, Maffulli GD, Migliorini F. [Slowed-down rehabilitation following percutaneous repair of Achilles tendon rupture](https://www.frontiersin.org/journals/surgery/articles/10.3389/fsurg.2024.1483584/full). *Foot & Ankle International*, 2022;43(2):244-252. doi: 10.1177/10711007211038594.
+12. Maffulli N, Oliva F, Maffulli GD, Migliorini F. [Slowed-down rehabilitation following percutaneous repair of Achilles tendon rupture](https://www.frontiersin.org/journals/surgery/articles/10.3389/fsurg.2024.1483584/full). _Foot & Ankle International_, 2022;43(2):244-252. doi: 10.1177/10711007211038594.
 
-13. Willits K, Amendola A, Bryant D, Mohtadi NG, Giffin JR, Fowler P, Kean CO, Kirkley A. [Operative versus nonoperative treatment of acute Achilles tendon ruptures](https://www.jbjs.org/summary.php?id=284&native=1). *Journal of Bone and Joint Surgery*, 2010;92(17):2767-2775. doi: 10.2106/JBJS.I.01401.
+13. Willits K, Amendola A, Bryant D, Mohtadi NG, Giffin JR, Fowler P, Kean CO, Kirkley A. [Operative versus nonoperative treatment of acute Achilles tendon ruptures](https://www.jbjs.org/summary.php?id=284&native=1). _Journal of Bone and Joint Surgery_, 2010;92(17):2767-2775. doi: 10.2106/JBJS.I.01401.
 
-14. Soroceanu A, Sidhwa F, Aarabi S, Kaufman A, Glazebrook M. [Surgical versus nonsurgical treatment of acute Achilles tendon rupture](https://pmc.ncbi.nlm.nih.gov/articles/PMC3509775/). *Journal of Bone and Joint Surgery*, 2012;94(23):2136-2143. doi: 10.2106/JBJS.K.00917.
+14. Soroceanu A, Sidhwa F, Aarabi S, Kaufman A, Glazebrook M. [Surgical versus nonsurgical treatment of acute Achilles tendon rupture](https://pmc.ncbi.nlm.nih.gov/articles/PMC3509775/). _Journal of Bone and Joint Surgery_, 2012;94(23):2136-2143. doi: 10.2106/JBJS.K.00917.
 
-15. Kannus P, Józsa L. [Histopathological changes preceding spontaneous rupture of a tendon](https://www.researchgate.net/publication/309713023_TREATMENT_OF_ACUTE_ACHILLES_TENDON_RUPTURES_A_META-ANALYSIS_OF_RANDOMIZED_CONTROLLED_TRIALS). *Journal of Bone and Joint Surgery*, 1991;73(10):1507-1525. doi: 10.2106/00004623-199173100-00009.
+15. Kannus P, Józsa L. [Histopathological changes preceding spontaneous rupture of a tendon](https://www.researchgate.net/publication/309713023_TREATMENT_OF_ACUTE_ACHILLES_TENDON_RUPTURES_A_META-ANALYSIS_OF_RANDOMIZED_CONTROLLED_TRIALS). _Journal of Bone and Joint Surgery_, 1991;73(10):1507-1525. doi: 10.2106/00004623-199173100-00009.

@@ -8,8 +8,7 @@ export const MyEmail = () => {
       quote={
         <>
           Setting a new standard in
-          <HighlightedSpan>Achilles Tendon Rupture</HighlightedSpan>{" "}
-          rehabilitation
+          <HighlightedSpan>Achilles Tendon Rupture</HighlightedSpan> rehabilitation
         </>
       }
       author={<>Mr Robbie Ray</>}

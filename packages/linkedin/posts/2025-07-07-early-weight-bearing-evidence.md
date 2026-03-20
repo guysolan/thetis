@@ -10,10 +10,10 @@ type: "Evidence"
 - **Return to sport:** similar 🏃‍♂️
 - **Time to work:** trend ↓
 
-Surgically repaired cohort? A 2023 RCT (Arch Orthop Trauma Surg, Deng *et al.*) showed **4.5 weeks vs 7.5 weeks** back to work—no extra complications.
+Surgically repaired cohort? A 2023 RCT (Arch Orthop Trauma Surg, Deng _et al._) showed **4.5 weeks vs 7.5 weeks** back to work—no extra complications.
 
 Take-home 📌 Controlled load + heel wedges beat bed rest.
 
 Is your protocol WBAT Day 1 yet?
 
- #EvidenceBased #AchillesRupture #Rehab
+#EvidenceBased #AchillesRupture #Rehab

@@ -10,10 +10,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
     "Missing required Supabase environment variables. Please ensure PUBLIC_SUPABASE_URL and PUBLIC_SUPABASE_ANON_KEY are defined in your .env file.",
   );
   console.error("PUBLIC_SUPABASE_URL:", supabaseUrl ? "Set" : "Missing");
-  console.error(
-    "PUBLIC_SUPABASE_ANON_KEY:",
-    supabaseAnonKey ? "Set" : "Missing",
-  );
+  console.error("PUBLIC_SUPABASE_ANON_KEY:", supabaseAnonKey ? "Set" : "Missing");
   throw new Error(
     "Missing required Supabase environment variables. Please ensure PUBLIC_SUPABASE_URL and PUBLIC_SUPABASE_ANON_KEY are defined in your .env file.",
   );
@@ -24,9 +21,7 @@ if (supabaseUrl.includes(":54323")) {
   console.error(
     "⚠️ WARNING: PUBLIC_SUPABASE_URL is pointing to Studio port (54323) instead of API port (54321).",
   );
-  console.error(
-    "This will cause CORS errors. Please update your .env file to use port 54321:",
-  );
+  console.error("This will cause CORS errors. Please update your .env file to use port 54321:");
   console.error("PUBLIC_SUPABASE_URL=http://127.0.0.1:54321");
   console.error("Current URL:", supabaseUrl);
 }

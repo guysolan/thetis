@@ -12,8 +12,7 @@ export function ProfessionalReview({
   lang: Lang;
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const content = professionalOpinionsContent[lang] ||
-    professionalOpinionsContent.en;
+  const content = professionalOpinionsContent[lang] || professionalOpinionsContent.en;
   const reviewContent = review.content[lang] || review.content.en;
 
   return (
@@ -32,13 +31,9 @@ export function ProfessionalReview({
           )}
           <div className="flex-col space-y-1">
             {review.name && (
-              <h3 className="flex font-bold text-neutral-900 text-lg">
-                {review.name}
-              </h3>
+              <h3 className="flex font-bold text-neutral-900 text-lg">{review.name}</h3>
             )}
-            <p className="flex text-gray-500 text-base">
-              {reviewContent.description}
-            </p>
+            <p className="flex text-gray-500 text-base">{reviewContent.description}</p>
             <a
               className="flex items-center gap-1 font-semibold text-primary text-sm"
               href={review.link}
@@ -52,9 +47,7 @@ export function ProfessionalReview({
         {/* Review content */}
         <div className="flex flex-col gap-2 pl-6 border-gray-200 border-l-4 italic">
           {reviewContent.title && (
-            <p className="font-semibold text-gray-800 text-base italic">
-              {reviewContent.title}
-            </p>
+            <p className="font-semibold text-gray-800 text-base italic">{reviewContent.title}</p>
           )}
           <div>
             <p

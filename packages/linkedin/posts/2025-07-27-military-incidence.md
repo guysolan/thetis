@@ -7,7 +7,7 @@ Epidemiologic Data (2006-2015):
 • Incidence: 26.2 per 100,000 person-years 🪖  
 • 88 % occurred during physical training 🏋️  
 • Service members ≥30 years old at 2× higher risk ⏲️  
-• Medical discharge rates: 12 % 📄  
+• Medical discharge rates: 12 % 📄
 
 Saving Achilles tendons saves missions.
 

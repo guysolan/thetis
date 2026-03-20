@@ -20,4 +20,4 @@ Try it → <https://thetismedical.com/research/timeline-by-country>
 
 What country should we add next? 🌏
 
- #DigitalHealth #PatientEducation #AchillesRupture
+#DigitalHealth #PatientEducation #AchillesRupture

@@ -1,23 +1,12 @@
 import { FieldArrayWithId, UseFormReturn } from "react-hook-form";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 import { Button } from "@thetis/ui/button";
 import { Check, Copy, Lock, Trash, Unlock } from "lucide-react";
 import Select from "@/components/Select";
 import Input from "@/components/Input";
 import NumberCell from "./NumberFlowCell";
 import ItemTypeSelect from "@/components/ItemTypeSelect";
-import {
-  ItemType,
-  StockItemFormData,
-  StockItemQuantities,
-} from "../features/order-forms/types";
+import { ItemType, StockItemFormData, StockItemQuantities } from "../features/order-forms/types";
 import { useEffect, useState } from "react";
 import NumberFlow from "@number-flow/react";
 import StockItemRowCells from "./StockItemRowCells";
@@ -59,51 +48,32 @@ const StockItemsFormFields = ({
     <Table>
       <TableHeader>
         <TableRow>
-          {allowedTypes.length > 1 && (
-            <TableHead className="w-[10%]">Type</TableHead>
-          )}
+          {allowedTypes.length > 1 && <TableHead className="w-[10%]">Type</TableHead>}
           {packageMode && (
-            <TableHead
-              className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-left`}
-            >
+            <TableHead className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-left`}>
               Package
             </TableHead>
           )}
-          <TableHead className={`${showPrice ? "w-[20%]" : "w-[30%]"}`}>
-            Item
-          </TableHead>
+          <TableHead className={`${showPrice ? "w-[20%]" : "w-[30%]"}`}>Item</TableHead>
           <TableHead className="w-[15%]">Lot Number</TableHead>
-          <TableHead
-            className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}
-          >
+          <TableHead className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}>
             Quantity
           </TableHead>
-          {showPrice && (
-            <TableHead className="w-[10%] text-center">Price</TableHead>
-          )}
-          {showTax && <TableHead className="w-[10%] text-center">Tax
-          </TableHead>}
-          {showPrice && (
-            <TableHead className="w-[10%] text-center">Total</TableHead>
-          )}
+          {showPrice && <TableHead className="w-[10%] text-center">Price</TableHead>}
+          {showTax && <TableHead className="w-[10%] text-center">Tax</TableHead>}
+          {showPrice && <TableHead className="w-[10%] text-center">Total</TableHead>}
           {showQuantity && (
-            <TableHead
-              className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}
-            >
+            <TableHead className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}>
               Before
             </TableHead>
           )}
           {showQuantity && (
-            <TableHead
-              className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}
-            >
+            <TableHead className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}>
               After
             </TableHead>
           )}
 
-          <TableHead
-            className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}
-          >
+          <TableHead className={`${showPrice ? "w-[10%]" : "w-[15%]"} text-center`}>
             <span className="sr-only">Actions</span>
           </TableHead>
         </TableRow>

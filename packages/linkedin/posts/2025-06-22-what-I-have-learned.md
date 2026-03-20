@@ -25,4 +25,4 @@ At Thetis Medical, we've been deep in the Achilles rupture rabbit hole. Here's w
 
 Your patients will thank you for reading this. Their sleep-deprived partners will thank us.
 
- #AchillesRupture #MedicalResearch #Healthcare #Orthopedics #PatientCare #ThetisMedical
+#AchillesRupture #MedicalResearch #Healthcare #Orthopedics #PatientCare #ThetisMedical

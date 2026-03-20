@@ -4,9 +4,7 @@ import { toast } from "sonner";
 import { selectItemsViewQueryKey } from "./selectItemsView";
 
 const deleteItem = async (id: number) => {
-  const { error } = await supabase
-    .from("items")
-    .delete().eq("id", id);
+  const { error } = await supabase.from("items").delete().eq("id", id);
 
   if (error) {
     throw error;

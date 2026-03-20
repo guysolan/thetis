@@ -80,12 +80,5 @@ export const useShipmentForm = () => {
     setValue("from_items", fromItems);
     setValue("to_items", toItems);
     setValue("display_items", displayItems);
-  }, [
-    orderItems,
-    items,
-    stockpileItems,
-    fromShippingAddressId,
-    toShippingAddressId,
-    setValue,
-  ]);
+  }, [orderItems, items, stockpileItems, fromShippingAddressId, toShippingAddressId, setValue]);
 };

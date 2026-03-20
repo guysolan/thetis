@@ -47,9 +47,9 @@ This document outlines recommendations to improve the landing page by:
 **Example Structure:**
 
 ```
-"Founded by [Name], a [credential] who experienced an Achilles rupture in [year]. 
-Frustrated by the lack of comfortable recovery options, [Name] developed the 
-Thetis Night Splint to help others sleep better during recovery. Today, we're 
+"Founded by [Name], a [credential] who experienced an Achilles rupture in [year].
+Frustrated by the lack of comfortable recovery options, [Name] developed the
+Thetis Night Splint to help others sleep better during recovery. Today, we're
 backed by leading orthopedic surgeons and trusted by 5,000+ patients worldwide."
 ```
 
@@ -74,9 +74,9 @@ backed by leading orthopedic surgeons and trusted by 5,000+ patients worldwide."
 **Suggested Copy Addition:**
 
 ```
-"Since [founding year], we've helped over 5,000 patients recover from Achilles 
-ruptures. Our products are recommended by orthopedic surgeons and used in 
-hospitals worldwide. The mythology of Thetis guides our mission, but medical 
+"Since [founding year], we've helped over 5,000 patients recover from Achilles
+ruptures. Our products are recommended by orthopedic surgeons and used in
+hospitals worldwide. The mythology of Thetis guides our mission, but medical
 excellence drives our products."
 ```
 
@@ -148,7 +148,7 @@ excellence drives our products."
 
 ```
 Problem: "Sleeping with a heavy boot is uncomfortable and disrupts recovery"
-Solution: "Our lightweight night splint lets you sleep comfortably while 
+Solution: "Our lightweight night splint lets you sleep comfortably while
 maintaining the correct healing angle"
 Result: "Better sleep = faster recovery"
 ```
@@ -323,13 +323,13 @@ Result: "Better sleep = faster recovery"
 
 **Comparison Table:**
 
-| Feature | Heavy Boot | Thetis Night Splint |
-|---------|------------|---------------------|
-| Weight | Heavy | Lightweight |
-| Sleep Quality | Poor | Excellent |
-| Breathability | Limited | High |
-| Washable | No | Yes |
-| Shower Use | Difficult | Easy |
+| Feature       | Heavy Boot | Thetis Night Splint |
+| ------------- | ---------- | ------------------- |
+| Weight        | Heavy      | Lightweight         |
+| Sleep Quality | Poor       | Excellent           |
+| Breathability | Limited    | High                |
+| Washable      | No         | Yes                 |
+| Shower Use    | Difficult  | Easy                |
 
 ### 3.4 Add "Success Stories" Section
 
@@ -447,10 +447,10 @@ Result: "Better sleep = faster recovery"
 ### Founder Story Template:
 
 ```
-[Name] experienced an Achilles rupture in [year] and struggled with the 
-uncomfortable recovery boot. As a [profession/background], [he/she] knew 
-there had to be a better way. After [research/development process], Thetis 
-Medical was born. Today, we're proud to help thousands of patients sleep 
+[Name] experienced an Achilles rupture in [year] and struggled with the
+uncomfortable recovery boot. As a [profession/background], [he/she] knew
+there had to be a better way. After [research/development process], Thetis
+Medical was born. Today, we're proud to help thousands of patients sleep
 better during their recovery.
 ```
 

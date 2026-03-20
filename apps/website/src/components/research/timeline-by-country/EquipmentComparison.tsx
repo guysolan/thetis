@@ -91,14 +91,7 @@ export const equipment: Equipment[] = [
 import React from "react";
 import type { Country } from "./types";
 import { getCountryById, getUnicodeFlagIcon } from "./utils";
-import {
-  AlignJustify,
-  SmilePlus,
-  Grid,
-  Briefcase,
-  Stethoscope,
-  Footprints,
-} from "lucide-react";
+import { AlignJustify, SmilePlus, Grid, Briefcase, Stethoscope, Footprints } from "lucide-react";
 
 interface EquipmentComparisonProps {
   selectedCountries: string[];
@@ -156,10 +149,7 @@ export const EquipmentComparison: React.FC<EquipmentComparisonProps> = ({
 
       <div className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {equipmentSections.map((section) => (
-          <div
-            key={section.id}
-            className="bg-gray-50 p-6 border border-gray-200 rounded-lg"
-          >
+          <div key={section.id} className="bg-gray-50 p-6 border border-gray-200 rounded-lg">
             <h3 className="flex items-center gap-2 mb-4 font-semibold text-xl">
               <span className="text-primary">{section.icon}</span>
               {section.title}
@@ -168,17 +158,13 @@ export const EquipmentComparison: React.FC<EquipmentComparisonProps> = ({
             <div className="space-y-4">
               {selectedCountries.map((countryId) => {
                 const country = getCountryById(countryId, countries);
-                const equipmentData = equipment.find(
-                  (e) => e.countryId === countryId,
-                );
+                const equipmentData = equipment.find((e) => e.countryId === countryId);
 
                 if (!country || !equipmentData) return null;
 
                 return (
                   <div key={countryId} className="flex items-start gap-2">
-                    <span className="mt-1 flag-icon">
-                      {getUnicodeFlagIcon(country.flagCode)}
-                    </span>
+                    <span className="mt-1 flag-icon">{getUnicodeFlagIcon(country.flagCode)}</span>
                     <div>
                       <p className="font-medium">{country.name}:</p>
                       <p>{equipmentData[section.dataKey]}</p>

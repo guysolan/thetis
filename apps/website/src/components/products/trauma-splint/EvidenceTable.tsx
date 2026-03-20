@@ -1,11 +1,4 @@
-import {
-  Table,
-  TableHead,
-  TableBody,
-  TableCell,
-  TableRow,
-  TableHeader,
-} from "@thetis/ui/table";
+import { Table, TableHead, TableBody, TableCell, TableRow, TableHeader } from "@thetis/ui/table";
 import React from "react";
 
 const evidenceData = [
@@ -46,12 +39,8 @@ const EvidenceTable = () => {
             >
               {item.type}
             </TableHead>
-            <TableCell className="px-6 py-4 font-normal text-black">
-              {item.meanDays}
-            </TableCell>
-            <TableCell className="px-6 py-4 font-normal text-black">
-              {item.maxDays}
-            </TableCell>
+            <TableCell className="px-6 py-4 font-normal text-black">{item.meanDays}</TableCell>
+            <TableCell className="px-6 py-4 font-normal text-black">{item.maxDays}</TableCell>
           </TableRow>
         ))}
       </TableBody>

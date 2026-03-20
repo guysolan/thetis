@@ -9,12 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@thetis/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@thetis/ui/accordion";
 import incidenceAndSurgeryData from "../../../data/incidence-and-surgery.json";
 
 import isMobile from "ismobilejs";
@@ -22,9 +17,7 @@ import isMobile from "ismobilejs";
 // Simplified placeholder component to show when chart fails to render
 const PlaceholderChart = () => (
   <div className="flex flex-col justify-center items-center bg-gray-50 p-4 border border-gray-200 rounded h-[300px]">
-    <div className="font-medium text-gray-500 text-lg text-center">
-      Chart data visualization
-    </div>
+    <div className="font-medium text-gray-500 text-lg text-center">Chart data visualization</div>
     <p className="mt-2 text-gray-400 text-sm text-center">
       View interactive data on rising Achilles rupture incidence (1994-2021)
     </p>
@@ -72,10 +65,7 @@ const processData = () => {
     const years = Array.from(yearsSet);
     const minYear = Math.min(...years);
     const maxYear = Math.max(...years);
-    const allYears = Array.from(
-      { length: maxYear - minYear + 1 },
-      (_, i) => minYear + i,
-    );
+    const allYears = Array.from({ length: maxYear - minYear + 1 }, (_, i) => minYear + i);
 
     // Group by year and calculate average
     const byYear = {};
@@ -119,10 +109,8 @@ const processData = () => {
 
         // Simple linear interpolation if we have data on both sides
         if (prevYear >= minYear && nextYear <= maxYear) {
-          const prevAvg = byYear[prevYear].totalIncidence /
-            byYear[prevYear].count;
-          const nextAvg = byYear[nextYear].totalIncidence /
-            byYear[nextYear].count;
+          const prevAvg = byYear[prevYear].totalIncidence / byYear[prevYear].count;
+          const nextAvg = byYear[nextYear].totalIncidence / byYear[nextYear].count;
           const ratio = (year - prevYear) / (nextYear - prevYear);
           const interpolated = prevAvg + ratio * (nextAvg - prevAvg);
 
@@ -136,9 +124,10 @@ const processData = () => {
     // Convert to chart data format
     return allYears.map((year) => {
       const yearData = byYear[year];
-      const avgIncidence = yearData.count > 0
-        ? parseFloat((yearData.totalIncidence / yearData.count).toFixed(1))
-        : null;
+      const avgIncidence =
+        yearData.count > 0
+          ? parseFloat((yearData.totalIncidence / yearData.count).toFixed(1))
+          : null;
 
       // Estimate world population for this year (in billions)
       const estimatedPopulation = 5.6 + (year - 1994) * 0.08; // Rough approximation
@@ -172,41 +161,33 @@ const CustomTooltip = ({ active, payload, label }) => {
       <div className="flex flex-col gap-y-1 bg-white shadow-md p-3 border border-gray-200 rounded max-w-[85vw] md:max-w-xs">
         <h4 className="mb-1 font-bold text-sm">{label}</h4>
 
-        {yearData.interpolated
-          ? (
-            <p className="text-gray-500 text-xs italic">
-              Interpolated data point
-            </p>
-          )
-          : null}
+        {yearData.interpolated ? (
+          <p className="text-gray-500 text-xs italic">Interpolated data point</p>
+        ) : null}
 
         {payload.map((entry, index) => (
           <p key={index} className="text-sm" style={{ color: entry.color }}>
             <span className="font-medium">{entry.name}:</span>
-            {entry.name === "Estimated Global Cases"
-              ? `${entry.value} million`
-              : entry.value}
+            {entry.name === "Estimated Global Cases" ? `${entry.value} million` : entry.value}
           </p>
         ))}
 
-        {yearData.countries && yearData.countries.length > 0
-          ? (
-            <div className="mt-1">
-              <p className="font-semibold text-xs">Source countries:</p>
-              <ul className="max-h-20 overflow-y-auto text-xs leading-tight">
-                {yearData.countries.map((country, i) => (
-                  <li
-                    key={i}
-                    className="truncate"
-                    title={`${country.country}: ${country.incidence} per 100,000`}
-                  >
-                    <strong>{country.country}:</strong> {country.incidence}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )
-          : null}
+        {yearData.countries && yearData.countries.length > 0 ? (
+          <div className="mt-1">
+            <p className="font-semibold text-xs">Source countries:</p>
+            <ul className="max-h-20 overflow-y-auto text-xs leading-tight">
+              {yearData.countries.map((country, i) => (
+                <li
+                  key={i}
+                  className="truncate"
+                  title={`${country.country}: ${country.incidence} per 100,000`}
+                >
+                  <strong>{country.country}:</strong> {country.incidence}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
     );
   }
@@ -281,111 +262,121 @@ export default function IncidenceAreaChart() {
       <h3 className="font-medium text-lg md:text-xl text-center">
         Rising Incidence of Achilles Tendon Ruptures
       </h3>
-      <p className="text-sm text-center">
-        Average incidence rates per 100,000 people (1994-2021)
-      </p>
+      <p className="text-sm text-center">Average incidence rates per 100,000 people (1994-2021)</p>
 
-      {hasError || chartData.length === 0
-        ? <PlaceholderChart />
-        : (
-          <div className="bg-white shadow-sm p-2 md:p-4 rounded-sm w-full h-[400px] md:h-[500px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart
-                data={chartData}
-                margin={isPhoneDevice
+      {hasError || chartData.length === 0 ? (
+        <PlaceholderChart />
+      ) : (
+        <div className="bg-white shadow-sm p-2 md:p-4 rounded-sm w-full h-[400px] md:h-[500px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart
+              data={chartData}
+              margin={
+                isPhoneDevice
                   ? { top: 15, right: 15, left: 5, bottom: 60 }
-                  : { top: 35, right: 75, left: 35, bottom: 30 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis
-                  dataKey="year"
-                  label={isPhoneDevice ? null : {
-                    value: "Year",
-                    position: "insideBottomRight",
-                    offset: -5,
-                  }}
-                  ticks={isPhoneDevice
-                    ? [1994, 2000, 2010, 2021]
-                    : chartData.map((d) => d.year)}
-                  interval={isPhoneDevice ? "preserveStartEnd" : 0}
-                  angle={-45}
-                  textAnchor="end"
-                  height={60}
-                  tick={{ fontSize: isPhoneDevice ? 10 : 12 }}
-                />
-                <YAxis
-                  yAxisId="left"
-                  label={isPhoneDevice ? null : {
-                    value: "Incidence per 100,000",
-                    angle: -90,
-                    position: "insideLeft",
-                    offset: 0,
-                    style: { textAnchor: "middle" },
-                  }}
-                  domain={[0, "auto"]}
-                  tick={{ fontSize: isPhoneDevice ? 10 : 12 }}
-                  width={isPhoneDevice ? 30 : 60}
-                />
-                <YAxis
-                  yAxisId="right"
-                  orientation="right"
-                  domain={[0, "auto"]}
-                  label={isPhoneDevice ? null : {
-                    value: "Global Cases (millions)",
-                    angle: 90,
-                    position: "insideRight",
-                    offset: -15,
-                    style: { textAnchor: "middle" },
-                  }}
-                  tickFormatter={(value) => `${value}`}
-                  tick={{ fontSize: isPhoneDevice ? 10 : 12 }}
-                  width={isPhoneDevice ? 30 : 65}
-                  hide={isPhoneDevice}
-                />
-                <Tooltip content={<CustomTooltip />} />
-                <Legend
-                  verticalAlign="top"
-                  height={36}
-                  wrapperStyle={{ fontSize: isPhoneDevice ? "10px" : "12px" }}
-                />
+                  : { top: 35, right: 75, left: 35, bottom: 30 }
+              }
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+              <XAxis
+                dataKey="year"
+                label={
+                  isPhoneDevice
+                    ? null
+                    : {
+                        value: "Year",
+                        position: "insideBottomRight",
+                        offset: -5,
+                      }
+                }
+                ticks={isPhoneDevice ? [1994, 2000, 2010, 2021] : chartData.map((d) => d.year)}
+                interval={isPhoneDevice ? "preserveStartEnd" : 0}
+                angle={-45}
+                textAnchor="end"
+                height={60}
+                tick={{ fontSize: isPhoneDevice ? 10 : 12 }}
+              />
+              <YAxis
+                yAxisId="left"
+                label={
+                  isPhoneDevice
+                    ? null
+                    : {
+                        value: "Incidence per 100,000",
+                        angle: -90,
+                        position: "insideLeft",
+                        offset: 0,
+                        style: { textAnchor: "middle" },
+                      }
+                }
+                domain={[0, "auto"]}
+                tick={{ fontSize: isPhoneDevice ? 10 : 12 }}
+                width={isPhoneDevice ? 30 : 60}
+              />
+              <YAxis
+                yAxisId="right"
+                orientation="right"
+                domain={[0, "auto"]}
+                label={
+                  isPhoneDevice
+                    ? null
+                    : {
+                        value: "Global Cases (millions)",
+                        angle: 90,
+                        position: "insideRight",
+                        offset: -15,
+                        style: { textAnchor: "middle" },
+                      }
+                }
+                tickFormatter={(value) => `${value}`}
+                tick={{ fontSize: isPhoneDevice ? 10 : 12 }}
+                width={isPhoneDevice ? 30 : 65}
+                hide={isPhoneDevice}
+              />
+              <Tooltip content={<CustomTooltip />} />
+              <Legend
+                verticalAlign="top"
+                height={36}
+                wrapperStyle={{ fontSize: isPhoneDevice ? "10px" : "12px" }}
+              />
+              <Area
+                yAxisId="left"
+                type="monotone"
+                dataKey="avgIncidence"
+                name="Average Incidence"
+                stroke="#8884d8"
+                fill="#8884d8"
+                fillOpacity={0.3}
+                connectNulls
+                activeDot={{
+                  r: isPhoneDevice ? 5 : 8,
+                  strokeWidth: 2,
+                  stroke: "#fff",
+                }}
+                strokeWidth={isPhoneDevice ? 1.5 : 2}
+              />
+              {!isPhoneDevice && (
                 <Area
-                  yAxisId="left"
+                  yAxisId="right"
                   type="monotone"
-                  dataKey="avgIncidence"
-                  name="Average Incidence"
-                  stroke="#8884d8"
-                  fill="#8884d8"
+                  dataKey="globalCases"
+                  name="Estimated Global Cases"
+                  stroke="#82ca9d"
+                  fill="#82ca9d"
                   fillOpacity={0.3}
                   connectNulls
                   activeDot={{
-                    r: isPhoneDevice ? 5 : 8,
+                    r: 6,
                     strokeWidth: 2,
                     stroke: "#fff",
                   }}
-                  strokeWidth={isPhoneDevice ? 1.5 : 2}
+                  unit=" million"
                 />
-                {!isPhoneDevice && (
-                  <Area
-                    yAxisId="right"
-                    type="monotone"
-                    dataKey="globalCases"
-                    name="Estimated Global Cases"
-                    stroke="#82ca9d"
-                    fill="#82ca9d"
-                    fillOpacity={0.3}
-                    connectNulls
-                    activeDot={{
-                      r: 6,
-                      strokeWidth: 2,
-                      stroke: "#fff",
-                    }}
-                    unit=" million"
-                  />
-                )}
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        )}
+              )}
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      )}
 
       <p className="mx-auto px-4 max-w-2xl text-gray-600 text-xs md:text-sm text-center">
         Data from national health registries and research studies across{" "}

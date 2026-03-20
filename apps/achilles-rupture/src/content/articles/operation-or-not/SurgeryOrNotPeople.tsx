@@ -12,28 +12,17 @@ export default function SurgeryOrNotPeople() {
   const NONSURGICAL_COMPLICATION_RATE = 1.6; // 1.6%
 
   // Calculate numbers for visualization
-  const surgicalReruptures = Math.round(
-    TOTAL_PEOPLE * (SURGICAL_RERUPTURE_RATE / 100),
-  );
-  const surgicalInfections = Math.round(
-    TOTAL_PEOPLE * (SURGICAL_INFECTION_RATE / 100),
-  );
+  const surgicalReruptures = Math.round(TOTAL_PEOPLE * (SURGICAL_RERUPTURE_RATE / 100));
+  const surgicalInfections = Math.round(TOTAL_PEOPLE * (SURGICAL_INFECTION_RATE / 100));
   const surgicalOtherComplications = Math.round(
     TOTAL_PEOPLE * (SURGICAL_OTHER_COMPLICATIONS / 100),
   );
-  const surgicalSuccess = TOTAL_PEOPLE -
-    surgicalReruptures -
-    surgicalInfections -
-    surgicalOtherComplications;
+  const surgicalSuccess =
+    TOTAL_PEOPLE - surgicalReruptures - surgicalInfections - surgicalOtherComplications;
 
-  const nonsurgicalReruptures = Math.round(
-    TOTAL_PEOPLE * (NONSURGICAL_RERUPTURE_RATE / 100),
-  );
-  const nonsurgicalComplications = Math.round(
-    TOTAL_PEOPLE * (NONSURGICAL_COMPLICATION_RATE / 100),
-  );
-  const nonsurgicalSuccess = TOTAL_PEOPLE - nonsurgicalReruptures -
-    nonsurgicalComplications;
+  const nonsurgicalReruptures = Math.round(TOTAL_PEOPLE * (NONSURGICAL_RERUPTURE_RATE / 100));
+  const nonsurgicalComplications = Math.round(TOTAL_PEOPLE * (NONSURGICAL_COMPLICATION_RATE / 100));
+  const nonsurgicalSuccess = TOTAL_PEOPLE - nonsurgicalReruptures - nonsurgicalComplications;
 
   // Helper function to render people icons in a 10x10 grid
   const renderPeopleGrid = (outcomes) => {
@@ -86,9 +75,7 @@ export default function SurgeryOrNotPeople() {
 
       {/* VS Divider for Mobile - Shown at top on mobile, hidden on desktop */}
       <div className="md:hidden flex justify-center mb-4">
-        <div className="bg-gray-100 px-4 py-2 rounded-full font-bold text-xl">
-          VS
-        </div>
+        <div className="bg-gray-100 px-4 py-2 rounded-full font-bold text-xl">VS</div>
       </div>
 
       <div className="flex md:flex-row flex-col justify-center md:items-center gap-6 md:gap-0">
@@ -125,8 +112,7 @@ export default function SurgeryOrNotPeople() {
             <div className="flex justify-between">
               <span className="font-semibold">Complications:</span>
               <span>
-                {surgicalOtherComplications} (
-                {SURGICAL_OTHER_COMPLICATIONS.toFixed(1)}%)
+                {surgicalOtherComplications} ({SURGICAL_OTHER_COMPLICATIONS.toFixed(1)}%)
               </span>
             </div>
             <div className="flex justify-between font-semibold">
@@ -138,9 +124,7 @@ export default function SurgeryOrNotPeople() {
 
         {/* VS Divider - Hidden on mobile, shown on desktop */}
         <div className="hidden md:flex flex-col justify-center items-center mx-2 md:mx-6">
-          <div className="bg-gray-100 px-6 py-4 rounded-full font-bold text-3xl">
-            VS
-          </div>
+          <div className="bg-gray-100 px-6 py-4 rounded-full font-bold text-3xl">VS</div>
         </div>
 
         {/* Non-Surgical Treatment */}
@@ -203,28 +187,19 @@ export default function SurgeryOrNotPeople() {
         <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-gray-200 border-t">
           <div className="gap-4 grid grid-cols-1 md:grid-cols-2">
             <div className="text-xs md:text-sm">
-              <span className="block mb-1 font-semibold">
-                Surgical complications:
-              </span>
-              <span className="text-gray-600">
-                Nerve damage, blood clots, wound healing
-              </span>
+              <span className="block mb-1 font-semibold">Surgical complications:</span>
+              <span className="text-gray-600">Nerve damage, blood clots, wound healing</span>
             </div>
             <div className="text-xs md:text-sm">
-              <span className="block mb-1 font-semibold">
-                Non-surgical complications:
-              </span>
-              <span className="text-gray-600">
-                Skin pressure, muscle atrophy, stiffness
-              </span>
+              <span className="block mb-1 font-semibold">Non-surgical complications:</span>
+              <span className="text-gray-600">Skin pressure, muscle atrophy, stiffness</span>
             </div>
           </div>
         </div>
       </div>
 
       <div className="mt-3 md:mt-4 py-2 w-full text-gray-600 text-xs md:text-base text-center">
-        Source: Meta-analysis of 29 studies including 15,862 patients (Ochen et
-        al., 2019)
+        Source: Meta-analysis of 29 studies including 15,862 patients (Ochen et al., 2019)
       </div>
     </div>
   );

@@ -23,10 +23,7 @@ export function ThemeToggle() {
         <TabsTrigger
           onClick={() => setThemeState("light")}
           value="light"
-          className={cn(
-            "h-8 w-8 p-0",
-            theme === "light" ? "bg-neutral-200" : "",
-          )}
+          className={cn("h-8 w-8 p-0", theme === "light" ? "bg-neutral-200" : "")}
         >
           <Sun size={20} />
           <span className="sr-only">Light</span>
@@ -34,10 +31,7 @@ export function ThemeToggle() {
         <TabsTrigger
           onClick={() => setThemeState("dark")}
           value="dark"
-          className={cn(
-            "h-8 w-8 p-0",
-            theme === "dark" ? "bg-neutral-200" : "",
-          )}
+          className={cn("h-8 w-8 p-0", theme === "dark" ? "bg-neutral-200" : "")}
         >
           <Moon size={20} />
           <span className="sr-only">Dark</span>

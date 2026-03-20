@@ -99,7 +99,7 @@ The key is to follow a structured rehabilitative protocol, such as that in the S
 2. [ScienceDirect - Achilles Tendon Rupture Epidemiology](https://www.sciencedirect.com/science/article/pii/S2059775423005916)
 3. [NCBI Bookshelf - Thompson Test](https://www.ncbi.nlm.nih.gov/books/NBK430844/)
 4. [PMC - Matles Test](https://pmc.ncbi.nlm.nih.gov/articles/PMC4264655/)
-5. [Academic Radiology - Shear Wave Elastography](https://www.academicradiology.org/article/S1076-6332(16)30091-5/abstract)
+5. [Academic Radiology - Shear Wave Elastography](<https://www.academicradiology.org/article/S1076-6332(16)30091-5/abstract>)
 6. [Bone & Joint - SMART Protocol](https://boneandjoint.org.uk/Article/10.1302/0301-620X.97B4.35314)
 7. [Thetis Medical - Achilles Rupture Timeline](https://www.thetismedical.com/FAQs/achilles-rupture-timeline)
 8. [Achilles Rupture - Boot Comparison](https://achilles-rupture.com/articles/aircast-vs-vacoped)

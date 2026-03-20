@@ -38,19 +38,14 @@ export function EditTextBlock({
 }: Props) {
   const [isEditing, setIsEditing] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-  const [content, setContent] = useState<JSONContent | null | undefined>(
-    initialContent,
-  );
+  const [content, setContent] = useState<JSONContent | null | undefined>(initialContent);
   const [name, setName] = useState(initialName);
   const [isSelectModalOpen, setIsSelectModalOpen] = useState(false);
 
   // Hooks
-  const { mutate: upsertTextBlock, isPending: isUpsertPending } =
-    useUpsertTextBlock();
-  const { mutate: updateOrderTextBlock, isPending: isUpdatePending } =
-    useUpdateOrderTextBlock();
-  const { mutate: deleteOrderTextBlock, isPending: isDeletePending } =
-    useDeleteOrderTextBlock();
+  const { mutate: upsertTextBlock, isPending: isUpsertPending } = useUpsertTextBlock();
+  const { mutate: updateOrderTextBlock, isPending: isUpdatePending } = useUpdateOrderTextBlock();
+  const { mutate: deleteOrderTextBlock, isPending: isDeletePending } = useDeleteOrderTextBlock();
 
   const handleChange = useCallback((newContent?: JSONContent | null) => {
     setContent(newContent);
@@ -74,15 +69,7 @@ export function EditTextBlock({
         position,
       });
     }
-  }, [
-    content,
-    name,
-    blockId,
-    orderId,
-    position,
-    upsertTextBlock,
-    updateOrderTextBlock,
-  ]);
+  }, [content, name, blockId, orderId, position, upsertTextBlock, updateOrderTextBlock]);
 
   const handleDelete = useCallback(() => {
     if (!blockId) return;
@@ -114,11 +101,7 @@ export function EditTextBlock({
               placeholder="Block name"
               className="flex-1"
             />
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setIsSelectModalOpen(true)}
-            >
+            <Button size="sm" variant="outline" onClick={() => setIsSelectModalOpen(true)}>
               Select Existing
             </Button>
             {blockId && (
@@ -142,23 +125,14 @@ export function EditTextBlock({
             >
               {isSaving ? "Saving..." : "Save"}
             </Button>
-            <Button
-              size="icon"
-              className="w-8 h-8"
-              variant="ghost"
-              onClick={closeEditor}
-            >
+            <Button size="icon" className="w-8 h-8" variant="ghost" onClick={closeEditor}>
               <X size={16} />
             </Button>
           </div>
         )}
         <Editor
           initialContent={initialContent}
-          className={cn(
-            "min-h-[100px]",
-            !showButtons && "bg-secondary/20",
-            className,
-          )}
+          className={cn("min-h-[100px]", !showButtons && "bg-secondary/20", className)}
           onChange={handleChange}
           onFocus={() => {
             setIsFocused(true);

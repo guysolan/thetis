@@ -7,14 +7,13 @@ export const MyEmail = () => {
     <FootAndAnkle1
       heading1={
         <>
-          Boost Revenue 💰 with Each{" "}
-          <HighlightedSpan>Achilles Rupture</HighlightedSpan> Patient
+          Boost Revenue 💰 with Each <HighlightedSpan>Achilles Rupture</HighlightedSpan> Patient
         </>
       }
       heading2={
         <>
-          Our Achilles rupture night splint creates happier patients 😊 and
-          generates additional clinic revenue 📈
+          Our Achilles rupture night splint creates happier patients 😊 and generates additional
+          clinic revenue 📈
         </>
       }
     />

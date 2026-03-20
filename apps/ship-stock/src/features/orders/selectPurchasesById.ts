@@ -1,16 +1,8 @@
-import {
-  queryOptions,
-  useQuery,
-  useSuspenseQuery,
-} from "@tanstack/react-query";
+import { queryOptions, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "../../lib/supabase";
 
 export const selectOrderById = async (id: string) => {
-  const { data, error } = await supabase
-    .from("orders")
-    .select("*")
-    .eq("id", id)
-    .single();
+  const { data, error } = await supabase.from("orders").select("*").eq("id", id).single();
 
   if (error) {
     throw error;
@@ -25,5 +17,4 @@ export const selectOrderByIdQueryOptions = (id: string) => {
   });
 };
 
-export const useSelectOrderById = (id: string) =>
-  useSuspenseQuery(selectOrderByIdQueryOptions(id));
+export const useSelectOrderById = (id: string) => useSuspenseQuery(selectOrderByIdQueryOptions(id));

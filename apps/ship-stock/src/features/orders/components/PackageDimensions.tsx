@@ -14,13 +14,10 @@ interface PackageDimensionsProps {
 const PackageDimensions = ({ selectedPackage }: PackageDimensionsProps) => {
   return (
     <div className="flex flex-wrap gap-2">
-      {selectedPackage.height &&
-        selectedPackage.width &&
-        selectedPackage.depth && (
+      {selectedPackage.height && selectedPackage.width && selectedPackage.depth && (
         <Badge variant="default" className="gap-x-2">
           <Box size={16} />
-          {selectedPackage.height} × {selectedPackage.width} ×{" "}
-          {selectedPackage.depth} cm
+          {selectedPackage.height} × {selectedPackage.width} × {selectedPackage.depth} cm
         </Badge>
       )}
       {selectedPackage.weight && selectedPackage.weight > 0 && (

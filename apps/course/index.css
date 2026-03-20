@@ -1,5 +1,5 @@
 /* Import base globals from shared UI package */
-@import '@thetis/ui/globals.css';
+@import "@thetis/ui/globals.css";
 
 /* Guide-specific additions that extend the base theme */
 @layer base {
@@ -22,7 +22,7 @@
   }
 
   body {
-    font-family: 'Raleway', sans-serif;
+    font-family: "Raleway", sans-serif;
     /* Override globals.css overflow-y-scroll to allow natural scrolling */
     overflow-y: auto !important;
     overflow-x: hidden;

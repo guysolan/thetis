@@ -9,6 +9,7 @@ import NightSplintImage from "@/assets/night-splint/night-splint-bed-top-square.
 import NightSplintWhiteCloseSquare from "@/components/products/images/night-splint/night_splint_white_close_square.jpg";
 import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
 import ComplianceLogos from "@/sections/index/compliance/ComplianceLogos.astro";
+import ExperienceIfForYourself from "@/sections/reviews/ExperienceIfForYourself.astro";
 import { patients } from "@/components/reviews/content/patients";
 import { Image as AstroImage } from "astro:assets";
 import Review1Image from "@/assets/review-1.png";
@@ -787,6 +788,9 @@ const reviewsUrl = lang === "en" ? "/reviews" :
                         {t.reviews.viewAll}
                         <span class="text-xl">→</span>
                     </a>
+                </div>
+                <div class="mt-12">
+                    <ExperienceIfForYourself lang={lang} />
                 </div>
             </div>
         </section>

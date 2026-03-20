@@ -14,13 +14,14 @@ Produces finished goods, consumes raw parts, and purchases services.
 **User inputs:** packages (or items directly) → populates `produced_items`.
 **Everything else is computed** by `useBuyForm`:
 
-| Computed field | Source | Description |
-|---|---|---|
-| `consumed_items` (negative) | Part components of produced items | Parts removed from `from_shipping_address_id` |
-| `consumed_items` (positive) | The produced items themselves | Products added to `to_shipping_address_id` |
-| `order_items` | Service components of produced items | Services with price/tax — the invoice line items |
+| Computed field              | Source                               | Description                                      |
+| --------------------------- | ------------------------------------ | ------------------------------------------------ |
+| `consumed_items` (negative) | Part components of produced items    | Parts removed from `from_shipping_address_id`    |
+| `consumed_items` (positive) | The produced items themselves        | Products added to `to_shipping_address_id`       |
+| `order_items`               | Service components of produced items | Services with price/tax — the invoice line items |
 
 **Example:** Build 2× Widget Package. Each Widget needs 3 Screws (part) + 1 Assembly (service).
+
 - Produced: +2 Widgets at factory
 - Consumed: -6 Screws from warehouse
 - Services: 2× Assembly (with cost)
@@ -47,10 +48,10 @@ Moves items between two locations.
 **User inputs:** packages or items → populates `to_items` (destination, positive qty).
 `from_items` is auto-mirrored (source, negative qty).
 
-| Field | Address | Qty |
-|---|---|---|
-| `to_items` | `to_shipping_address_id` | +N |
-| `from_items` | `from_shipping_address_id` | -N |
+| Field        | Address                    | Qty |
+| ------------ | -------------------------- | --- |
+| `to_items`   | `to_shipping_address_id`   | +N  |
+| `from_items` | `from_shipping_address_id` | -N  |
 
 ### Count
 
@@ -106,15 +107,16 @@ Every order item creates one `item_changes` row (the stock movement) linked to `
 
 `createOrder.ts` routes to the correct processor:
 
-| Order type | Processor | What it does |
-|---|---|---|
-| Build | `processBuyFormData` | Maps consumed_items (negative→from, positive→to) + order_items (services→to) |
-| Buy | `processSimpleBuyFormData` | Maps order_items with positive qty at to_shipping_address_id only |
-| Sell | `processSellFormData` | Maps order_items: negative at from_address, positive at to_address |
-| Ship | `processShipmentFormData` | Maps from_items (negative) + to_items (positive) |
-| Count | passthrough | Form data used directly |
+| Order type | Processor                  | What it does                                                                 |
+| ---------- | -------------------------- | ---------------------------------------------------------------------------- |
+| Build      | `processBuyFormData`       | Maps consumed_items (negative→from, positive→to) + order_items (services→to) |
+| Buy        | `processSimpleBuyFormData` | Maps order_items with positive qty at to_shipping_address_id only            |
+| Sell       | `processSellFormData`      | Maps order_items: negative at from_address, positive at to_address           |
+| Ship       | `processShipmentFormData`  | Maps from_items (negative) + to_items (positive)                             |
+| Count      | passthrough                | Form data used directly                                                      |
 
 `saveOrderPage.ts` then:
+
 1. Deletes existing item_changes for the order
 2. Upserts package item_changes (qty=1 per package)
 3. Upserts regular item_changes + order_item_changes with price/tax
@@ -123,12 +125,12 @@ Every order item creates one `item_changes` row (the stock movement) linked to `
 
 ## Key Files
 
-| File | Role |
-|---|---|
-| `hooks/useBuyForm.tsx` | Reactive hook (build only): watches `produced_items`, computes `consumed_items` + `order_items` |
-| `api/createOrder.ts` | Processors: `processBuyFormData` (build), `processSimpleBuyFormData` (buy), `processSellFormData`, `processShipmentFormData` |
-| `api/saveOrderPage.ts` | Persists item_changes + order_item_changes to DB |
-| `components/InventoryImpact.tsx` | Read-only stock impact display (before/change/after or cost view) |
-| `components/PackageStockItems.tsx` | Package picker; writes components into target form fields |
-| `components/StockItems.tsx` | Generic editable/read-only item list |
-| `features/multi-order-form/pages/ItemsPageSimple.tsx` | Unified items page; renders order-type-specific UI (sell, buy, build, ship, count) |
+| File                                                  | Role                                                                                                                         |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `hooks/useBuyForm.tsx`                                | Reactive hook (build only): watches `produced_items`, computes `consumed_items` + `order_items`                              |
+| `api/createOrder.ts`                                  | Processors: `processBuyFormData` (build), `processSimpleBuyFormData` (buy), `processSellFormData`, `processShipmentFormData` |
+| `api/saveOrderPage.ts`                                | Persists item_changes + order_item_changes to DB                                                                             |
+| `components/InventoryImpact.tsx`                      | Read-only stock impact display (before/change/after or cost view)                                                            |
+| `components/PackageStockItems.tsx`                    | Package picker; writes components into target form fields                                                                    |
+| `components/StockItems.tsx`                           | Generic editable/read-only item list                                                                                         |
+| `features/multi-order-form/pages/ItemsPageSimple.tsx` | Unified items page; renders order-type-specific UI (sell, buy, build, ship, count)                                           |

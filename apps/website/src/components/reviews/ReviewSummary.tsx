@@ -3,10 +3,7 @@ import statistics from "./review-statistics.json";
 
 const ReviewSummary = () => {
   // Calculate average rating
-  const totalReviews = Object.values(statistics).reduce(
-    (acc, curr) => acc + curr,
-    0,
-  );
+  const totalReviews = Object.values(statistics).reduce((acc, curr) => acc + curr, 0);
   const weightedSum = Object.entries(statistics).reduce(
     (acc, [rating, count]) => acc + Number(rating) * count,
     0,

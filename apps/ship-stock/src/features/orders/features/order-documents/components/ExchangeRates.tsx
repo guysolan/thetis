@@ -35,8 +35,7 @@ const ExchangeRates = ({
     : new Date().toISOString().split("T")[0];
 
   // Determine if we need historical data
-  const isHistorical =
-    new Date(formattedDate) < new Date(new Date().toISOString().split("T")[0]);
+  const isHistorical = new Date(formattedDate) < new Date(new Date().toISOString().split("T")[0]);
 
   // Use react-query to fetch and cache exchange rates
   const { data, isLoading, error } = useQuery({

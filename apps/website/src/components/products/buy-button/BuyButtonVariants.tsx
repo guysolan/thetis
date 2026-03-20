@@ -25,10 +25,7 @@ const VARIANT_IDS = {
   "small-right": "gid://shopify/ProductVariant/47494539641160",
 } as const;
 
-const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
-  className = "",
-  lang = "en",
-}) => {
+const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({ className = "", lang = "en" }) => {
   const [currentSize, setCurrentSize] = useState<Size>("large");
   const [currentSide, setCurrentSide] = useState<Side>("left");
   const { country, isLoading: isCountryLoading } = useUserCountry();
@@ -96,33 +93,21 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({
       </div>
 
       <div className="mb-4">
-        {isCountryLoading
-          ? (
-            <div className="mt-4 font-medium text-neutral-950 text-lg md:text-xl lg:text-left text-center italic">
-              {t.checkingAvailability}
-            </div>
-          )
-          : country === "AU" || country === "NZ"
-          ? (
-            <Button asChild className="mt-4 w-full">
-              <a
-                href={getAustralianDistributorUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t.buyFromDistributor}
-              </a>
-            </Button>
-          )
-          : (
-            <AddToCartButton
-              variantId={getCurrentVariantId()}
-              size="lg"
-              className="mt-4"
-            >
-              Add to Cart
-            </AddToCartButton>
-          )}
+        {isCountryLoading ? (
+          <div className="mt-4 font-medium text-neutral-950 text-lg md:text-xl lg:text-left text-center italic">
+            {t.checkingAvailability}
+          </div>
+        ) : country === "AU" || country === "NZ" ? (
+          <Button asChild className="mt-4 w-full">
+            <a href={getAustralianDistributorUrl()} target="_blank" rel="noopener noreferrer">
+              {t.buyFromDistributor}
+            </a>
+          </Button>
+        ) : (
+          <AddToCartButton variantId={getCurrentVariantId()} size="lg" className="mt-4">
+            Add to Cart
+          </AddToCartButton>
+        )}
       </div>
     </div>
   );

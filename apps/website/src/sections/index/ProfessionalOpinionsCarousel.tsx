@@ -15,8 +15,7 @@ import type { Lang } from "@/config/languages.ts";
 import HighlightedParagraph from "../../components/HighlightedParagraph.tsx";
 
 function ProfessionalOpinionsCarousel({ lang = "en" }: { lang: Lang }) {
-  const content = professionalOpinionsContent[lang] ||
-    professionalOpinionsContent.en;
+  const content = professionalOpinionsContent[lang] || professionalOpinionsContent.en;
   const clinicians = translatedClinicians.map((c) => ({
     ...c,
     ...(c.content[lang] || c.content.en),
@@ -44,10 +43,7 @@ function ProfessionalOpinionsCarousel({ lang = "en" }: { lang: Lang }) {
           >
             <CarouselContent>
               {translatedClinicians.map((review, index) => (
-                <CarouselItem
-                  key={review.name}
-                  className="max-w-[90vw] md:basis-1/2 lg:basis-1/3"
-                >
+                <CarouselItem key={review.name} className="max-w-[90vw] md:basis-1/2 lg:basis-1/3">
                   <ProfessionalReview review={review} lang={lang} />
                 </CarouselItem>
               ))}
@@ -72,14 +68,10 @@ function ProfessionalOpinionsCarousel({ lang = "en" }: { lang: Lang }) {
         </div>
 
         <div className="inline-flex md:flex-row flex-col justify-center items-center gap-1 mx-auto mt-8 md:mt-12 max-w-screen-lg text-lg text-center">
-          <p className="font-medium text-gray-600 text-base md:text-xl">
-            {content.cta.text}
-          </p>
+          <p className="font-medium text-gray-600 text-base md:text-xl">{content.cta.text}</p>
           <a
             href="/reviews"
-            className={cn(
-              "text-primary text-base md:text-xl underline underline-offset-2",
-            )}
+            className={cn("text-primary text-base md:text-xl underline underline-offset-2")}
           >
             {content.cta.link}
           </a>

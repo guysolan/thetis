@@ -94,17 +94,17 @@ The VACOped's hinge creates a true ankle bend, meaning the tendon position may b
 
 ## Quick Comparison
 
-| Feature | Aircast | VACOped |
-| --------- | --------- | --------- |
-| **How it works** | Removable heel wedges | Adjustable hinge dial |
-| **Ankle positioning** | 28° (via midfoot bend) | 48° (true ankle joint) |
-| **Approximate cost** | £120–£150 | £300 |
-| **Weight** | Lighter | Heavier |
-| **Waterproof** | No (cover needed) | Yes (with modification) |
-| **Availability** | Very common (NHS standard) | Less common, often self-funded |
-| **Ease of adjustment** | Simple — remove a wedge | Easy — turn a dial |
-| **Range of motion** | Fixed at each wedge level | Controlled ROM when unlocked |
-| **Sleeping** | Uncomfortable | Uncomfortable |
+| Feature                | Aircast                    | VACOped                        |
+| ---------------------- | -------------------------- | ------------------------------ |
+| **How it works**       | Removable heel wedges      | Adjustable hinge dial          |
+| **Ankle positioning**  | 28° (via midfoot bend)     | 48° (true ankle joint)         |
+| **Approximate cost**   | £120–£150                  | £300                           |
+| **Weight**             | Lighter                    | Heavier                        |
+| **Waterproof**         | No (cover needed)          | Yes (with modification)        |
+| **Availability**       | Very common (NHS standard) | Less common, often self-funded |
+| **Ease of adjustment** | Simple — remove a wedge    | Easy — turn a dial             |
+| **Range of motion**    | Fixed at each wedge level  | Controlled ROM when unlocked   |
+| **Sleeping**           | Uncomfortable              | Uncomfortable                  |
 
 ## What the Research Says
 
@@ -112,11 +112,11 @@ The VACOped's hinge creates a true ankle bend, meaning the tendon position may b
 
 A [study comparing ankle angles](https://pubmed.ncbi.nlm.nih.gov/28842105/) in both boots using weight-bearing X-rays found significant differences:
 
-| Boot | Ankle Angle (TTA) | Foot Angle (1MTA) | Notes |
-| ------ | ------------------- | ------------------- | ------- |
-| **Traditional Cast** | 56° | 74° | The gold standard position |
-| **VACOped** | 48° | 54° | Close to cast positioning |
-| **Aircast with wedges** | 28° | 37° | Much of the bend through the midfoot |
+| Boot                    | Ankle Angle (TTA) | Foot Angle (1MTA) | Notes                                |
+| ----------------------- | ----------------- | ----------------- | ------------------------------------ |
+| **Traditional Cast**    | 56°               | 74°               | The gold standard position           |
+| **VACOped**             | 48°               | 54°               | Close to cast positioning            |
+| **Aircast with wedges** | 28°               | 37°               | Much of the bend through the midfoot |
 
 The VACOped achieved roughly **48° of true ankle plantarflexion** — close to a traditional plaster cast (56°). The Aircast achieved about **28°**, with much of the bend happening through the midfoot rather than at the ankle joint itself.
 
@@ -166,23 +166,23 @@ Beyond the boot itself, you'll likely need a few extra items. Here's what a comp
 
 ### Aircast Setup
 
-| Item | UK (£) | US ($) |
-| ------ | -------- | -------- |
-| Aircast boot | 120 | 150 |
-| Heel wedges | 20 | 25 |
-| Waterproof cover | 23 | 30 |
-| [Night splint](/achilles-rupture-splint) | 65 | 93 |
-| **Total** | **~228** | **~298** |
+| Item                                     | UK (£)   | US ($)   |
+| ---------------------------------------- | -------- | -------- |
+| Aircast boot                             | 120      | 150      |
+| Heel wedges                              | 20       | 25       |
+| Waterproof cover                         | 23       | 30       |
+| [Night splint](/achilles-rupture-splint) | 65       | 93       |
+| **Total**                                | **~228** | **~298** |
 
 ### VACOped Setup
 
-| Item | UK (£) | US ($) |
-| ------ | -------- | -------- |
-| VACOped boot | 300 | 375 |
-| Replacement liner (for swimming) | 31 | 40 |
-| EVENup shoe leveler | 28 | 36 |
-| [Night splint](/achilles-rupture-splint) | 65 | 93 |
-| **Total** | **~424** | **~544** |
+| Item                                     | UK (£)   | US ($)   |
+| ---------------------------------------- | -------- | -------- |
+| VACOped boot                             | 300      | 375      |
+| Replacement liner (for swimming)         | 31       | 40       |
+| EVENup shoe leveler                      | 28       | 36       |
+| [Night splint](/achilles-rupture-splint) | 65       | 93       |
+| **Total**                                | **~424** | **~544** |
 
 Prices are approximate and vary by retailer and region. Many NHS patients receive the Aircast free of charge.
 
@@ -238,9 +238,9 @@ A sudden pop or snap, a feeling of being kicked in the back of the leg, immediat
 
 ## References
 
-1. Ellison P, Molloy A, Mason LW. Early Protected Weightbearing for Acute Ruptures of the Achilles Tendon: Do Commonly Used Orthoses Produce the Required Equinus? *J Foot Ankle Surg.* 2017;56(5):960-963. [PubMed](https://pubmed.ncbi.nlm.nih.gov/28842105/)
-2. Costa ML, et al. Plaster cast versus functional bracing for Achilles tendon rupture: the UKSTAR RCT. *Health Technol Assess.* 2020;24(8). [PubMed](https://pubmed.ncbi.nlm.nih.gov/33153987/)
-3. Maempel JF, et al. A Randomized Controlled Trial Comparing Traditional Plaster Cast Rehabilitation With Functional Walking Boot Rehabilitation for Acute Achilles Tendon Ruptures. *Am J Sports Med.* 2020;48(11):2755-2764. [PubMed](https://pubmed.ncbi.nlm.nih.gov/32816521/)
-4. Baxter JR, et al. Achilles Tendon Loading During Walking Differs Between Commonly Used Immobilizing Boots. *Foot Ankle Orthop.* 2022;7(4). [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC9661566/)
-5. Valkering KP, et al. Functional weightbearing mobilization after Achilles tendon rupture enhances early healing response. *Knee Surg Sports Traumatol Arthrosc.* 2017;25(6):1807-1814. [PubMed](https://pubmed.ncbi.nlm.nih.gov/27539402/)
-6. Hutchison AM, et al. The treatment of a rupture of the Achilles tendon using a dedicated management programme (SMART). *Bone Joint J.* 2015;97-B(4):510-515. [PubMed](https://pubmed.ncbi.nlm.nih.gov/25820890/)
+1. Ellison P, Molloy A, Mason LW. Early Protected Weightbearing for Acute Ruptures of the Achilles Tendon: Do Commonly Used Orthoses Produce the Required Equinus? _J Foot Ankle Surg._ 2017;56(5):960-963. [PubMed](https://pubmed.ncbi.nlm.nih.gov/28842105/)
+2. Costa ML, et al. Plaster cast versus functional bracing for Achilles tendon rupture: the UKSTAR RCT. _Health Technol Assess._ 2020;24(8). [PubMed](https://pubmed.ncbi.nlm.nih.gov/33153987/)
+3. Maempel JF, et al. A Randomized Controlled Trial Comparing Traditional Plaster Cast Rehabilitation With Functional Walking Boot Rehabilitation for Acute Achilles Tendon Ruptures. _Am J Sports Med._ 2020;48(11):2755-2764. [PubMed](https://pubmed.ncbi.nlm.nih.gov/32816521/)
+4. Baxter JR, et al. Achilles Tendon Loading During Walking Differs Between Commonly Used Immobilizing Boots. _Foot Ankle Orthop._ 2022;7(4). [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC9661566/)
+5. Valkering KP, et al. Functional weightbearing mobilization after Achilles tendon rupture enhances early healing response. _Knee Surg Sports Traumatol Arthrosc._ 2017;25(6):1807-1814. [PubMed](https://pubmed.ncbi.nlm.nih.gov/27539402/)
+6. Hutchison AM, et al. The treatment of a rupture of the Achilles tendon using a dedicated management programme (SMART). _Bone Joint J._ 2015;97-B(4):510-515. [PubMed](https://pubmed.ncbi.nlm.nih.gov/25820890/)

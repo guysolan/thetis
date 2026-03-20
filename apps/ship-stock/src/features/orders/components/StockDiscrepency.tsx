@@ -1,13 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import { useStocktakeDiscrepancy } from "../features/stocktake-form/useStocktakeDiscrepency";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 
 const StocktakeDiscrepancy = () => {
   const { control, setValue } = useFormContext();

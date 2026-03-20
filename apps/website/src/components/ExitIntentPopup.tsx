@@ -128,29 +128,20 @@ const ExitIntentPopup: React.FC<ExitIntentPopupProps> = ({ className }) => {
           {/* Benefits */}
           <div className="space-y-2 mb-5 text-sm">
             <div className="flex items-center gap-2.5 text-neutral-600 dark:text-neutral-300">
-              <span className="flex-shrink-0 font-medium text-primary text-xs">
-                ✓
-              </span>
+              <span className="flex-shrink-0 font-medium text-primary text-xs">✓</span>
               Week-by-week recovery guidance
             </div>
             <div className="flex items-center gap-2.5 text-neutral-600 dark:text-neutral-300">
-              <span className="flex-shrink-0 font-medium text-primary text-xs">
-                ✓
-              </span>
+              <span className="flex-shrink-0 font-medium text-primary text-xs">✓</span>
               Exercises with illustrations
             </div>
             <div className="flex items-center gap-2.5 text-neutral-600 dark:text-neutral-300">
-              <span className="flex-shrink-0 font-medium text-primary text-xs">
-                ✓
-              </span>
+              <span className="flex-shrink-0 font-medium text-primary text-xs">✓</span>
               Questions for your surgeon
             </div>
           </div>
 
-          <Button
-            onClick={handleViewCourse}
-            className="gap-2 w-full"
-          >
+          <Button onClick={handleViewCourse} className="gap-2 w-full">
             View Recovery Course
             <ArrowRight className="w-4 h-4" />
           </Button>

@@ -5,102 +5,102 @@ const STOREFRONT_ACCESS_TOKEN = "784883c28d6484a8804b44ae00adfb99";
 const STOREFRONT_API_URL = `https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`;
 
 interface CartLine {
+  id: string;
+  quantity: number;
+  merchandise: {
     id: string;
-    quantity: number;
-    merchandise: {
-        id: string;
-        title: string;
-        product: {
-            title: string;
-            featuredImage?: {
-                url: string;
-                altText?: string;
-            };
-        };
-        price: {
-            amount: string;
-            currencyCode: string;
-        };
+    title: string;
+    product: {
+      title: string;
+      featuredImage?: {
+        url: string;
+        altText?: string;
+      };
     };
+    price: {
+      amount: string;
+      currencyCode: string;
+    };
+  };
 }
 
 interface Cart {
-    id: string;
-    checkoutUrl: string;
-    totalQuantity: number;
-    cost: {
-        totalAmount: {
-            amount: string;
-            currencyCode: string;
-        };
-        subtotalAmount: {
-            amount: string;
-            currencyCode: string;
-        };
+  id: string;
+  checkoutUrl: string;
+  totalQuantity: number;
+  cost: {
+    totalAmount: {
+      amount: string;
+      currencyCode: string;
     };
-    lines: {
-        edges: Array<{
-            node: CartLine;
-        }>;
+    subtotalAmount: {
+      amount: string;
+      currencyCode: string;
     };
+  };
+  lines: {
+    edges: Array<{
+      node: CartLine;
+    }>;
+  };
 }
 
 interface CartResponse {
-    cart: Cart | null;
+  cart: Cart | null;
 }
 
 interface CartCreateResponse {
-    cartCreate: {
-        cart: Cart;
-        userErrors: Array<{ field: string[]; message: string }>;
-    };
+  cartCreate: {
+    cart: Cart;
+    userErrors: Array<{ field: string[]; message: string }>;
+  };
 }
 
 interface CartLinesAddResponse {
-    cartLinesAdd: {
-        cart: Cart;
-        userErrors: Array<{ field: string[]; message: string }>;
-    };
+  cartLinesAdd: {
+    cart: Cart;
+    userErrors: Array<{ field: string[]; message: string }>;
+  };
 }
 
 interface CartLinesUpdateResponse {
-    cartLinesUpdate: {
-        cart: Cart;
-        userErrors: Array<{ field: string[]; message: string }>;
-    };
+  cartLinesUpdate: {
+    cart: Cart;
+    userErrors: Array<{ field: string[]; message: string }>;
+  };
 }
 
 interface CartLinesRemoveResponse {
-    cartLinesRemove: {
-        cart: Cart;
-        userErrors: Array<{ field: string[]; message: string }>;
-    };
+  cartLinesRemove: {
+    cart: Cart;
+    userErrors: Array<{ field: string[]; message: string }>;
+  };
 }
 
 async function storefrontFetch<T>(
-    query: string,
-    variables: Record<string, unknown> = {},
+  query: string,
+  variables: Record<string, unknown> = {},
 ): Promise<T> {
-    const response = await fetch(STOREFRONT_API_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-Shopify-Storefront-Access-Token": STOREFRONT_ACCESS_TOKEN,
-        },
-        body: JSON.stringify({ query, variables }),
-    });
+  const response = await fetch(STOREFRONT_API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Shopify-Storefront-Access-Token": STOREFRONT_ACCESS_TOKEN,
+    },
+    body: JSON.stringify({ query, variables }),
+  });
 
-    if (!response.ok) {
-        throw new Error(`Storefront API error: ${response.statusText}`);
-    }
+  if (!response.ok) {
+    throw new Error(`Storefront API error: ${response.statusText}`);
+  }
 
-    const json = await response.json();
+  const json = await response.json();
 
-    if (json.errors) {
-        throw new Error(json.errors[0]?.message || "Unknown error");
-    }
+  if (json.errors) {
+    throw new Error(json.errors[0]?.message || "Unknown error");
+  }
 
-    return json.data;
+  return json.data;
 }
 
 const CART_FRAGMENT = `
@@ -146,11 +146,8 @@ const CART_FRAGMENT = `
     }
 `;
 
-export async function createCart(
-    variantId: string,
-    quantity: number = 1,
-): Promise<Cart> {
-    const query = `
+export async function createCart(variantId: string, quantity: number = 1): Promise<Cart> {
+  const query = `
         mutation cartCreate($input: CartInput!) {
             cartCreate(input: $input) {
                 cart {
@@ -165,28 +162,28 @@ export async function createCart(
         ${CART_FRAGMENT}
     `;
 
-    const variables = {
-        input: {
-            lines: [
-                {
-                    merchandiseId: variantId,
-                    quantity,
-                },
-            ],
+  const variables = {
+    input: {
+      lines: [
+        {
+          merchandiseId: variantId,
+          quantity,
         },
-    };
+      ],
+    },
+  };
 
-    const data = await storefrontFetch<CartCreateResponse>(query, variables);
+  const data = await storefrontFetch<CartCreateResponse>(query, variables);
 
-    if (data.cartCreate.userErrors.length > 0) {
-        throw new Error(data.cartCreate.userErrors[0].message);
-    }
+  if (data.cartCreate.userErrors.length > 0) {
+    throw new Error(data.cartCreate.userErrors[0].message);
+  }
 
-    return data.cartCreate.cart;
+  return data.cartCreate.cart;
 }
 
 export async function getCart(cartId: string): Promise<Cart | null> {
-    const query = `
+  const query = `
         query getCart($cartId: ID!) {
             cart(id: $cartId) {
                 ...CartFragment
@@ -195,16 +192,16 @@ export async function getCart(cartId: string): Promise<Cart | null> {
         ${CART_FRAGMENT}
     `;
 
-    const data = await storefrontFetch<CartResponse>(query, { cartId });
-    return data.cart;
+  const data = await storefrontFetch<CartResponse>(query, { cartId });
+  return data.cart;
 }
 
 export async function addToCart(
-    cartId: string,
-    variantId: string,
-    quantity: number = 1,
+  cartId: string,
+  variantId: string,
+  quantity: number = 1,
 ): Promise<Cart> {
-    const query = `
+  const query = `
         mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
             cartLinesAdd(cartId: $cartId, lines: $lines) {
                 cart {
@@ -219,31 +216,31 @@ export async function addToCart(
         ${CART_FRAGMENT}
     `;
 
-    const variables = {
-        cartId,
-        lines: [
-            {
-                merchandiseId: variantId,
-                quantity,
-            },
-        ],
-    };
+  const variables = {
+    cartId,
+    lines: [
+      {
+        merchandiseId: variantId,
+        quantity,
+      },
+    ],
+  };
 
-    const data = await storefrontFetch<CartLinesAddResponse>(query, variables);
+  const data = await storefrontFetch<CartLinesAddResponse>(query, variables);
 
-    if (data.cartLinesAdd.userErrors.length > 0) {
-        throw new Error(data.cartLinesAdd.userErrors[0].message);
-    }
+  if (data.cartLinesAdd.userErrors.length > 0) {
+    throw new Error(data.cartLinesAdd.userErrors[0].message);
+  }
 
-    return data.cartLinesAdd.cart;
+  return data.cartLinesAdd.cart;
 }
 
 export async function updateCartLine(
-    cartId: string,
-    lineId: string,
-    quantity: number,
+  cartId: string,
+  lineId: string,
+  quantity: number,
 ): Promise<Cart> {
-    const query = `
+  const query = `
         mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
             cartLinesUpdate(cartId: $cartId, lines: $lines) {
                 cart {
@@ -258,33 +255,27 @@ export async function updateCartLine(
         ${CART_FRAGMENT}
     `;
 
-    const variables = {
-        cartId,
-        lines: [
-            {
-                id: lineId,
-                quantity,
-            },
-        ],
-    };
+  const variables = {
+    cartId,
+    lines: [
+      {
+        id: lineId,
+        quantity,
+      },
+    ],
+  };
 
-    const data = await storefrontFetch<CartLinesUpdateResponse>(
-        query,
-        variables,
-    );
+  const data = await storefrontFetch<CartLinesUpdateResponse>(query, variables);
 
-    if (data.cartLinesUpdate.userErrors.length > 0) {
-        throw new Error(data.cartLinesUpdate.userErrors[0].message);
-    }
+  if (data.cartLinesUpdate.userErrors.length > 0) {
+    throw new Error(data.cartLinesUpdate.userErrors[0].message);
+  }
 
-    return data.cartLinesUpdate.cart;
+  return data.cartLinesUpdate.cart;
 }
 
-export async function removeFromCart(
-    cartId: string,
-    lineId: string,
-): Promise<Cart> {
-    const query = `
+export async function removeFromCart(cartId: string, lineId: string): Promise<Cart> {
+  const query = `
         mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
             cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
                 cart {
@@ -299,48 +290,43 @@ export async function removeFromCart(
         ${CART_FRAGMENT}
     `;
 
-    const variables = {
-        cartId,
-        lineIds: [lineId],
-    };
+  const variables = {
+    cartId,
+    lineIds: [lineId],
+  };
 
-    const data = await storefrontFetch<CartLinesRemoveResponse>(
-        query,
-        variables,
-    );
+  const data = await storefrontFetch<CartLinesRemoveResponse>(query, variables);
 
-    if (data.cartLinesRemove.userErrors.length > 0) {
-        throw new Error(data.cartLinesRemove.userErrors[0].message);
-    }
+  if (data.cartLinesRemove.userErrors.length > 0) {
+    throw new Error(data.cartLinesRemove.userErrors[0].message);
+  }
 
-    return data.cartLinesRemove.cart;
+  return data.cartLinesRemove.cart;
 }
 
 export function formatPrice(amount: string, currencyCode: string): string {
-    const numericAmount = parseFloat(amount);
-    return new Intl.NumberFormat("en-GB", {
-        style: "currency",
-        currency: currencyCode,
-    }).format(numericAmount);
+  const numericAmount = parseFloat(amount);
+  return new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: currencyCode,
+  }).format(numericAmount);
 }
 
 interface VariantPriceResponse {
-    node: {
-        price: {
-            amount: string;
-            currencyCode: string;
-        };
-    } | null;
+  node: {
+    price: {
+      amount: string;
+      currencyCode: string;
+    };
+  } | null;
 }
 
 export async function getVariantPrice(
-    variantId: string,
-    countryCode: string = "GB",
-): Promise<
-    { amount: string; currencyCode: string; formattedPrice: string } | null
-> {
-    // Use 'node' query since 'productVariant' is not available in Storefront API
-    const query = `
+  variantId: string,
+  countryCode: string = "GB",
+): Promise<{ amount: string; currencyCode: string; formattedPrice: string } | null> {
+  // Use 'node' query since 'productVariant' is not available in Storefront API
+  const query = `
         query getVariantPrice($variantId: ID!, $country: CountryCode) @inContext(country: $country) {
             node(id: $variantId) {
                 ... on ProductVariant {
@@ -353,26 +339,26 @@ export async function getVariantPrice(
         }
     `;
 
-    try {
-        const data = await storefrontFetch<VariantPriceResponse>(query, {
-            variantId,
-            country: countryCode,
-        });
+  try {
+    const data = await storefrontFetch<VariantPriceResponse>(query, {
+      variantId,
+      country: countryCode,
+    });
 
-        const price = data.node?.price;
-        if (!price) {
-            return null;
-        }
-
-        return {
-            amount: price.amount,
-            currencyCode: price.currencyCode,
-            formattedPrice: formatPrice(price.amount, price.currencyCode),
-        };
-    } catch (error) {
-        console.error("Failed to fetch variant price:", error);
-        return null;
+    const price = data.node?.price;
+    if (!price) {
+      return null;
     }
+
+    return {
+      amount: price.amount,
+      currencyCode: price.currencyCode,
+      formattedPrice: formatPrice(price.amount, price.currencyCode),
+    };
+  } catch (error) {
+    console.error("Failed to fetch variant price:", error);
+    return null;
+  }
 }
 
 export type { Cart, CartLine };

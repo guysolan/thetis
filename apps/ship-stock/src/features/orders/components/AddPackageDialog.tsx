@@ -34,10 +34,7 @@ export default function AddPackageDialog({
     return packages.filter(
       (p) =>
         (p.item_name ?? "").toLowerCase().includes(q) ||
-        (p.components ?? []).some(
-          (c) =>
-            (c.component_name ?? "").toLowerCase().includes(q),
-        ),
+        (p.components ?? []).some((c) => (c.component_name ?? "").toLowerCase().includes(q)),
     );
   }, [packages, search]);
 
@@ -53,8 +50,7 @@ export default function AddPackageDialog({
         <DialogHeader>
           <DialogTitle>Add package</DialogTitle>
           <DialogDescription>
-            Choose a package to add to this order. You can search by package name
-            or component name.
+            Choose a package to add to this order. You can search by package name or component name.
           </DialogDescription>
         </DialogHeader>
 
@@ -92,13 +88,7 @@ export default function AddPackageDialog({
   );
 }
 
-function PackageOption({
-  pkg,
-  onAdd,
-}: {
-  pkg: ItemView;
-  onAdd: () => void;
-}) {
+function PackageOption({ pkg, onAdd }: { pkg: ItemView; onAdd: () => void }) {
   const components = (pkg.components ?? []) as {
     component_name?: string;
     component_quantity?: number;
@@ -109,8 +99,7 @@ function PackageOption({
     pkg.width != null &&
     pkg.depth != null &&
     [pkg.height, pkg.width, pkg.depth].every((n) => n != null && Number(n) > 0);
-  const hasWeight =
-    pkg.weight != null && Number(pkg.weight) > 0;
+  const hasWeight = pkg.weight != null && Number(pkg.weight) > 0;
 
   return (
     <div className="flex items-start justify-between gap-3 p-3 rounded-lg border bg-card hover:bg-muted/30 transition-colors">
@@ -122,11 +111,7 @@ function PackageOption({
         {components.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mt-2">
             {components.map((c, i) => (
-              <Badge
-                key={i}
-                variant="secondary"
-                className="text-xs font-normal"
-              >
+              <Badge key={i} variant="secondary" className="text-xs font-normal">
                 {c.component_name} × {c.component_quantity ?? 1}
               </Badge>
             ))}
@@ -147,12 +132,7 @@ function PackageOption({
           )}
         </div>
       </div>
-      <Button
-        type="button"
-        size="sm"
-        onClick={onAdd}
-        className="shrink-0"
-      >
+      <Button type="button" size="sm" onClick={onAdd} className="shrink-0">
         Add
       </Button>
     </div>

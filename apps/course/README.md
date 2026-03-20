@@ -99,7 +99,7 @@ function MyComponent() {
 
   if (loading) return <div>Loading...</div>;
   if (!user) return <button onClick={() => signInWithMagicLink("user@example.com")}>Sign In</button>;
-  
+
   return (
     <div>
       <p>Welcome {user.email}</p>

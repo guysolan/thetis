@@ -15,11 +15,7 @@ interface OrderFormStepperProps {
 
 export type StageT = "future" | "current" | "past";
 
-export function OrderFormStepper({
-  steps,
-  currentStep,
-  onStepClick,
-}: OrderFormStepperProps) {
+export function OrderFormStepper({ steps, currentStep, onStepClick }: OrderFormStepperProps) {
   const currentIndex = steps.findIndex((s) => s.number === currentStep);
 
   return (
@@ -39,41 +35,27 @@ export function OrderFormStepper({
                 onClick={() => isClickable && onStepClick(step.number)}
                 className={cn(
                   "inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
-                  isCurrent &&
-                    "bg-primary/10 text-primary",
-                  isCompleted &&
-                    "text-muted-foreground hover:bg-muted hover:text-foreground",
-                  isFuture &&
-                    "text-muted-foreground/50 cursor-default",
+                  isCurrent && "bg-primary/10 text-primary",
+                  isCompleted && "text-muted-foreground hover:bg-muted hover:text-foreground",
+                  isFuture && "text-muted-foreground/50 cursor-default",
                   isClickable && "cursor-pointer",
                 )}
               >
                 <span
                   className={cn(
                     "flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold",
-                    isCurrent &&
-                      "bg-primary text-primary-foreground",
-                    isCompleted &&
-                      "bg-muted-foreground/20 text-muted-foreground",
-                    isFuture &&
-                      "bg-muted text-muted-foreground/50",
+                    isCurrent && "bg-primary text-primary-foreground",
+                    isCompleted && "bg-muted-foreground/20 text-muted-foreground",
+                    isFuture && "bg-muted text-muted-foreground/50",
                   )}
                 >
-                  {isCompleted ? (
-                    <Check strokeWidth={3} size={12} />
-                  ) : (
-                    step.number
-                  )}
+                  {isCompleted ? <Check strokeWidth={3} size={12} /> : step.number}
                 </span>
                 <span className="hidden sm:inline">{step.label}</span>
               </button>
 
               {index < steps.length - 1 && (
-                <ChevronRight
-                  size={14}
-                  className="shrink-0 text-muted-foreground/30"
-                  aria-hidden
-                />
+                <ChevronRight size={14} className="shrink-0 text-muted-foreground/30" aria-hidden />
               )}
             </li>
           );

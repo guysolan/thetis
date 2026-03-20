@@ -69,10 +69,7 @@ function RouteComponent() {
       // Ensure quote_quantity_* and quote_price_* exist for quote orders
       ...Object.fromEntries(
         PRICE_BAND_QUANTITIES.flatMap((q) => [
-          [
-            `quote_quantity_${q}`,
-            order.order_form_values?.[`quote_quantity_${q}`] ?? q,
-          ],
+          [`quote_quantity_${q}`, order.order_form_values?.[`quote_quantity_${q}`] ?? q],
           [`quote_price_${q}`, order.order_form_values?.[`quote_price_${q}`] ?? 0],
         ]),
       ),
@@ -116,11 +113,7 @@ function RouteComponent() {
       }
     } catch (error) {
       console.error("Error saving items:", error);
-      toast.error(
-        `Failed to save: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
-      );
+      toast.error(`Failed to save: ${error instanceof Error ? error.message : "Unknown error"}`);
     }
   };
 
@@ -161,13 +154,11 @@ function RouteComponent() {
           currentStep={isStocktake ? 2 : 3}
           onStepClick={handleStepClick}
         />
-        {isQuote
-          ? <QuoteItemsPage />
-          : (
-            <ItemsPageSimple
-              originalQuantityChanges={originalQuantityChanges}
-            />
-          )}
+        {isQuote ? (
+          <QuoteItemsPage />
+        ) : (
+          <ItemsPageSimple originalQuantityChanges={originalQuantityChanges} />
+        )}
         <OrderFormNavigation
           onPrevious={handlePrevious}
           onNext={handleNext}

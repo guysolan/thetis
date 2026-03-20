@@ -1,29 +1,23 @@
 {
-    "prettier.documentSelectors": [
-        "\"**/*.astro\"",
-        "**/*.astro"
-    ],
-    "[astro]": {
-        "editor.defaultFormatter": "astro-build.astro-vscode"
-    },
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "biomejs.biome"
-    },
-    "files.associations": {
-        "*.mdx": "markdown"
-    },
-    "typescript.tsdk": "node_modules\\typescript\\lib",
-    "files.exclude": {
-        "**/node_modules": true
-    },
-    "search.exclude": {
-        "**/node_modules": true
-    },
-    "[html]": {
-        "editor.defaultFormatter": "vscode.html-language-features"
-    },
-    "cSpell.words": [
-        "blatch",
-        "daybell"
-    ]
+  "prettier.documentSelectors": ["\"**/*.astro\"", "**/*.astro"],
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "files.associations": {
+    "*.mdx": "markdown"
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "search.exclude": {
+    "**/node_modules": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "cSpell.words": ["blatch", "daybell"]
 }

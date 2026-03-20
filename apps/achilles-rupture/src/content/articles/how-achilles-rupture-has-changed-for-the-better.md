@@ -4,7 +4,7 @@ description: "Evolution of Achilles tendon rupture treatment methods and improve
 type: "article"
 tags: ["treatment", "science"]
 audience: ["patient", "clinician"]
-heroImage: '/images/trends.jpeg'
+heroImage: "/images/trends.jpeg"
 status: "draft"
 ---
 

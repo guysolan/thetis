@@ -1,9 +1,5 @@
 import * as React from "react";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@thetis/ui/hover-card";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@thetis/ui/hover-card";
 import { File } from "lucide-react";
 import { Skeleton } from "@thetis/ui/skeleton";
 import { useQuery } from "@tanstack/react-query";
@@ -18,11 +14,7 @@ interface FilePreviewProps {
   previewSize?: number;
 }
 
-export function FilePreview({
-  fileName,
-  className,
-  previewSize = 400,
-}: FilePreviewProps) {
+export function FilePreview({ fileName, className, previewSize = 400 }: FilePreviewProps) {
   const [isHovering, setIsHovering] = React.useState(false);
 
   const { data: signedUrl } = useQuery({
@@ -43,9 +35,7 @@ export function FilePreview({
 
   return (
     <HoverCard onOpenChange={setIsHovering}>
-      <HoverCardTrigger
-        className={cn("flex flex-row items-center gap-2", className)}
-      >
+      <HoverCardTrigger className={cn("flex flex-row items-center gap-2", className)}>
         <File size={16} /> Preview
       </HoverCardTrigger>
 

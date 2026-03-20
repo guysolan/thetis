@@ -1,11 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@thetis/ui/form";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@thetis/ui/form";
 import {
   Select as SelectWrap,
   SelectContent,
@@ -46,16 +40,10 @@ export function SelectWithInfo({
       name={name}
       render={({ field }) => (
         <FormItem className={className}>
-          <FormLabel className={label ? "not-sr-only" : "sr-only"}>
-            {label ?? name}
-          </FormLabel>
+          <FormLabel className={label ? "not-sr-only" : "sr-only"}>{label ?? name}</FormLabel>
           <FormMessage />
           <div className="flex items-center gap-2">
-            <SelectWrap
-              disabled={disabled}
-              onValueChange={field.onChange}
-              value={field.value}
-            >
+            <SelectWrap disabled={disabled} onValueChange={field.onChange} value={field.value}>
               <FormControl>
                 <SelectTrigger ref={field.ref} name={field.name}>
                   <SelectValue placeholder="Select reason for export" />
@@ -74,9 +62,7 @@ export function SelectWithInfo({
                           )}
                         />
                       </PopoverTrigger>
-                      <PopoverContent className="p-2 w-80">
-                        {option.description}
-                      </PopoverContent>
+                      <PopoverContent className="p-2 w-80">{option.description}</PopoverContent>
                     </Popover>
                   </div>
                 ))}

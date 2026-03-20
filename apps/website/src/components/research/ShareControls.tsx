@@ -8,15 +8,7 @@ import {
   DrawerTrigger,
 } from "@/components/Drawer";
 import { Popover, PopoverContent, PopoverTrigger } from "@thetis/ui/popover";
-import {
-  ArrowUp,
-  Facebook,
-  Link,
-  Linkedin,
-  Printer,
-  Share2,
-  Twitter,
-} from "lucide-react";
+import { ArrowUp, Facebook, Link, Linkedin, Printer, Share2, Twitter } from "lucide-react";
 
 const ShareControls = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -45,18 +37,12 @@ const ShareControls = () => {
   const shareViaTwitter = () => {
     const text = encodeURIComponent(document.title);
     const url = encodeURIComponent(window.location.href);
-    window.open(
-      `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
-      "_blank",
-    );
+    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, "_blank");
   };
 
   const shareViaFacebook = () => {
     const url = encodeURIComponent(window.location.href);
-    window.open(
-      `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-      "_blank",
-    );
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, "_blank");
   };
 
   const shareViaLinkedin = () => {
@@ -78,25 +64,13 @@ const ShareControls = () => {
   const ShareContent = () => (
     <div className="flex flex-col gap-4 p-4">
       <div className="gap-2 grid grid-cols-3">
-        <Button
-          variant="secondary"
-          onClick={shareViaTwitter}
-          className="w-full"
-        >
+        <Button variant="secondary" onClick={shareViaTwitter} className="w-full">
           <Twitter size={20} />
         </Button>
-        <Button
-          variant="secondary"
-          onClick={shareViaFacebook}
-          className="w-full"
-        >
+        <Button variant="secondary" onClick={shareViaFacebook} className="w-full">
           <Facebook size={20} />
         </Button>
-        <Button
-          variant="secondary"
-          onClick={shareViaLinkedin}
-          className="w-full"
-        >
+        <Button variant="secondary" onClick={shareViaLinkedin} className="w-full">
           <Linkedin size={20} />
         </Button>
       </div>
@@ -104,11 +78,7 @@ const ShareControls = () => {
         <Share2 className="mr-2" size={20} />
         Share via Device
       </Button>
-      <Button
-        variant="outline"
-        onClick={copyToClipboard}
-        className="bg-white w-full"
-      >
+      <Button variant="outline" onClick={copyToClipboard} className="bg-white w-full">
         <Link className="mr-2" size={20} />
         Copy Link
       </Button>
@@ -118,53 +88,45 @@ const ShareControls = () => {
   return (
     <div
       className={`print:hidden md:top-[60vh] md:right-4 bottom-4 left-1/2 md:left-auto fixed flex flex-row md:flex-col gap-4 md:gap-2 -translate-x-1/2 md:translate-x-0 md:-translate-y-1/2 ${
-        isMobile
-          ? "bg-white p-2 rounded-full shadow-sm border border-neutral-300"
-          : ""
+        isMobile ? "bg-white p-2 rounded-full shadow-sm border border-neutral-300" : ""
       }`}
     >
-      {isMobile
-        ? (
-          <Drawer>
-            <DrawerTrigger asChild>
-              <Button
-                variant="default"
-                size="icon"
-                className="order-first rounded-full"
-                title="Share article"
-              >
-                <Share2 size={20} />
-              </Button>
-            </DrawerTrigger>
-            <DrawerContent>
-              <DrawerHeader>
-                <DrawerTitle>Share Article</DrawerTitle>
-              </DrawerHeader>
-              <ShareContent />
-            </DrawerContent>
-          </Drawer>
-        )
-        : (
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant="default"
-                size="icon"
-                className="order-first rounded-full"
-                title="Share article"
-              >
-                <Share2 size={20} />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent
-              className="rounded-sm w-sm"
-              align="start"
-              side="left"
+      {isMobile ? (
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button
+              variant="default"
+              size="icon"
+              className="order-first rounded-full"
+              title="Share article"
             >
-              <ShareContent />
-            </PopoverContent>
-          </Popover>
-        )}
+              <Share2 size={20} />
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Share Article</DrawerTitle>
+            </DrawerHeader>
+            <ShareContent />
+          </DrawerContent>
+        </Drawer>
+      ) : (
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant="default"
+              size="icon"
+              className="order-first rounded-full"
+              title="Share article"
+            >
+              <Share2 size={20} />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="rounded-sm w-sm" align="start" side="left">
+            <ShareContent />
+          </PopoverContent>
+        </Popover>
+      )}
 
       <Button
         variant="secondary"

@@ -1,10 +1,4 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@thetis/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@thetis/ui/dialog";
 import { useSelectTextBlocks } from "./useSelectTextBlocks";
 import { useUpdateOrderTextBlock } from "./useUpdateOrderTextBlock";
 import type { JSONContent } from "@tiptap/react";

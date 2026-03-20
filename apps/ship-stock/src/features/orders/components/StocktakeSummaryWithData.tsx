@@ -12,7 +12,11 @@ interface StocktakeSummaryWithDataProps {
  * with previous / counted / change. Used in OrderHistory expanded content.
  */
 export function StocktakeSummaryWithData({ order }: StocktakeSummaryWithDataProps) {
-  const { data: formData, isLoading, error } = useQuery({
+  const {
+    data: formData,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["select-order-form-values", order.order_id],
     queryFn: () => selectOrderFormValuesById(String(order.order_id)),
     enabled: order.order_type === "count",
@@ -35,8 +39,7 @@ export function StocktakeSummaryWithData({ order }: StocktakeSummaryWithDataProp
 
   if (orderItems?.length) {
     rows = orderItems.map((item) => ({
-      item_name:
-        nameByItemId.get(String(item.item_id)) ?? `Item ${item.item_id}`,
+      item_name: nameByItemId.get(String(item.item_id)) ?? `Item ${item.item_id}`,
       quantity_before: Number(item.quantity_before) ?? 0,
       quantity_after: Number(item.quantity_after) ?? 0,
       quantity_change: Number(item.quantity_change) ?? 0,

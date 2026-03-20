@@ -25,19 +25,25 @@ function ReviewsByType() {
       <TabsContent value="patient">
         {reviews
           .filter((r) => r.type === "patient")
-          .map((review, index) => <ReviewCard key={index} review={review} />)}
+          .map((review, index) => (
+            <ReviewCard key={index} review={review} />
+          ))}
       </TabsContent>
 
       <TabsContent value="athlete">
         {reviews
           .filter((r) => r.type === "athlete")
-          .map((review, index) => <ReviewCard key={index} review={review} />)}
+          .map((review, index) => (
+            <ReviewCard key={index} review={review} />
+          ))}
       </TabsContent>
 
       <TabsContent value="clinician">
         {reviews
           .filter((r) => r.type === "clinician")
-          .map((review, index) => <ReviewCard key={index} review={review} />)}
+          .map((review, index) => (
+            <ReviewCard key={index} review={review} />
+          ))}
       </TabsContent>
     </Tabs>
   );

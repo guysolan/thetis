@@ -8,13 +8,10 @@ import { saveAs } from "file-saver";
 async function downloadZippedFolder(countryCode: string) {
   try {
     // List files in the folder
-    const { data: files, error } = await supabase.storage
-      .from("amazon-reports")
-      .list(countryCode);
+    const { data: files, error } = await supabase.storage.from("amazon-reports").list(countryCode);
 
     if (error) throw error;
-    if (!files || files.length === 0)
-      throw new Error("No files found in the folder");
+    if (!files || files.length === 0) throw new Error("No files found in the folder");
 
     const zip = new JSZip();
 
@@ -26,8 +23,7 @@ async function downloadZippedFolder(countryCode: string) {
         .from("amazon-reports")
         .createSignedUrl(`${countryCode}/${file.name}`, 60); // 60 seconds expiry
 
-      if (!signedUrl)
-        throw new Error(`Failed to get signed URL for ${file.name}`);
+      if (!signedUrl) throw new Error(`Failed to get signed URL for ${file.name}`);
 
       const response = await fetch(signedUrl);
       const blob = await response.blob();

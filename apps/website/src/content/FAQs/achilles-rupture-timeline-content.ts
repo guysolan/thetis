@@ -341,14 +341,12 @@ export const content: Record<Lang, Content> = {
           "Around weeks 4-6, if you're having difficulty sleeping in the boot, your healthcare provider may recommend switching to a splint. The splint is lighter than the boot and helps maintain proper foot position during sleep while ensuring the tendon continues to heal correctly.",
       },
       {
-        question:
-          "When does physiotherapy typically begin in the recovery process?",
+        question: "When does physiotherapy typically begin in the recovery process?",
         answer:
           "Physiotherapy typically starts around weeks 10-12. This is when you'll begin transitioning out of the boot and start a guided exercise program focused on building calf muscle strength. It's important to follow your physiotherapist's guidance and avoid vigorous stretching exercises, even if the tendon feels tight.",
       },
       {
-        question:
-          "How long until I can return to sports after an Achilles rupture?",
+        question: "How long until I can return to sports after an Achilles rupture?",
         answer:
           "Most rehabilitation programs aim for a return to sports around 6 months (week 26+). However, this varies by individual and depends on your progress through rehabilitation. The focus during weeks 13-25 is on progressive strengthening and building endurance in the calf muscles, which is crucial for safe return to sports activities.",
       },
@@ -358,8 +356,7 @@ export const content: Record<Lang, Content> = {
           "Key milestones include: Week 1 (initial treatment and immobilization), Weeks 1-3 (treatment decision), Weeks 4-6 (possible transition to splint), Weeks 10-12 (starting physiotherapy and transitioning from the boot), Weeks 13-25 (progressive strengthening), and Week 26+ (gradual return to normal activities including sports).",
       },
       {
-        question:
-          "What precautions should I take to prevent re-rupture during recovery?",
+        question: "What precautions should I take to prevent re-rupture during recovery?",
         answer:
           "To prevent re-rupture, strictly follow your healthcare provider's instructions, especially during the first 12 weeks when the tendon is most vulnerable. Don't remove the boot unless instructed, avoid unsupported walking, and don't rush the rehabilitation process. When starting physiotherapy, avoid aggressive stretching and follow your exercise program carefully.",
       },
@@ -573,8 +570,7 @@ export const content: Record<Lang, Content> = {
       },
       {
         time: "Semana 26+",
-        title:
-          "Semanas 26+: Regreso a la actividad y recuperación a largo plazo",
+        title: "Semanas 26+: Regreso a la actividad y recuperación a largo plazo",
         content: `<ul class="space-y-6 list-none">
             <li>
               <span class="li-heading">Regreso a la actividad</span>
@@ -623,14 +619,12 @@ export const content: Record<Lang, Content> = {
     ],
     faqs: [
       {
-        question:
-          "¿Qué sucede en la primera semana después de una rotura de Aquiles?",
+        question: "¿Qué sucede en la primera semana después de una rotura de Aquiles?",
         answer:
           "En la primera semana, necesitará atención médica inmediata. Probablemente visitará Urgencias, donde le proporcionarán un tratamiento inicial para el dolor, le aplicarán una férula de trauma o un yeso para mantener el pie en posición de puntillas y le darán muletas. Se le puede recetar un medicamento anticoagulante para prevenir la trombosis. Se organizará una derivación a un especialista para recibir más atención.",
       },
       {
-        question:
-          "¿Cuándo debo tomar la decisión entre el tratamiento quirúrgico y no quirúrgico?",
+        question: "¿Cuándo debo tomar la decisión entre el tratamiento quirúrgico y no quirúrgico?",
         answer:
           "La decisión sobre el tratamiento generalmente se toma durante las semanas 1-3 después de consultar con un especialista. Realizarán un examen detallado y pueden solicitar imágenes (generalmente una ecografía) para verificar si los extremos del tendón están juntos. El tratamiento no quirúrgico es el más común, en el que el pie se mantiene en posición de puntillas con una bota. La cirugía se considera principalmente si hay un espacio significativo entre los extremos del tendón.",
       },
@@ -640,8 +634,7 @@ export const content: Record<Lang, Content> = {
           "Alrededor de las semanas 4-6, si tiene dificultades para dormir con la bota, su proveedor de atención médica puede recomendarle que cambie a una férula. La férula es más ligera que la bota y ayuda a mantener la posición adecuada del pie durante el sueño, al tiempo que garantiza que el tendón continúe sanando correctamente.",
       },
       {
-        question:
-          "¿Cuándo comienza típicamente la fisioterapia en el proceso de recuperación?",
+        question: "¿Cuándo comienza típicamente la fisioterapia en el proceso de recuperación?",
         answer:
           "La fisioterapia generalmente comienza alrededor de las semanas 10-12. Es entonces cuando comenzará a dejar la bota y comenzará un programa de ejercicios guiado centrado en fortalecer los músculos de la pantorrilla. Es importante seguir las indicaciones de su fisioterapeuta y evitar los ejercicios de estiramiento vigorosos, incluso si siente el tendón tenso.",
       },
@@ -652,8 +645,7 @@ export const content: Record<Lang, Content> = {
           "La mayoría de los programas de rehabilitación tienen como objetivo el regreso a los deportes alrededor de los 6 meses (semana 26+). Sin embargo, esto varía según el individuo y depende de su progreso en la rehabilitación. El enfoque durante las semanas 13-25 es el fortalecimiento progresivo y el desarrollo de la resistencia en los músculos de la pantorrilla, lo cual es crucial para un regreso seguro a las actividades deportivas.",
       },
       {
-        question:
-          "¿Cuáles son los hitos clave en la recuperación de la rotura de Aquiles?",
+        question: "¿Cuáles son los hitos clave en la recuperación de la rotura de Aquiles?",
         answer:
           "Los hitos clave incluyen: Semana 1 (tratamiento inicial e inmovilización), Semanas 1-3 (decisión del tratamiento), Semanas 4-6 (posible transición a una férula), Semanas 10-12 (inicio de la fisioterapia y transición de la bota), Semanas 13-25 (fortalecimiento progresivo) y Semana 26+ (regreso gradual a las actividades normales, incluidos los deportes).",
       },
@@ -664,8 +656,7 @@ export const content: Record<Lang, Content> = {
           "Para prevenir una nueva rotura, siga estrictamente las instrucciones de su proveedor de atención médica, especialmente durante las primeras 12 semanas, cuando el tendón es más vulnerable. No se quite la bota a menos que se lo indiquen, evite caminar sin apoyo y no se apresure en el proceso de rehabilitación. Al comenzar la fisioterapia, evite los estiramientos agresivos y siga su programa de ejercicios con cuidado.",
       },
       {
-        question:
-          "¿Cómo sé si mi tendón de Aquiles está sanando correctamente?",
+        question: "¿Cómo sé si mi tendón de Aquiles está sanando correctamente?",
         answer:
           "Su proveedor de atención médica controlará la curación a través de controles periódicos, especialmente durante las primeras 9 semanas. Los signos de una curación adecuada incluyen disminución del dolor, capacidad para soportar peso según las indicaciones en su bota y una mejora gradual del movimiento cuando se lo permitan. Sin embargo, recuerde que NO EXISTE tal cosa como un desgarro parcial; siga siempre las indicaciones de su especialista para una evaluación adecuada de la curación.",
       },
@@ -725,8 +716,7 @@ export const content: Record<Lang, Content> = {
       },
       {
         time: "Semaines 1-3",
-        title:
-          "Semaines 1–3 : Attelle de traumatologie et décision de traitement",
+        title: "Semaines 1–3 : Attelle de traumatologie et décision de traitement",
         content: `<ul class="space-y-6 list-none">
             <li>
               <span class="mt-2 pb-1 font-semibold"
@@ -875,8 +865,7 @@ export const content: Record<Lang, Content> = {
       },
       {
         time: "Semaine 26+",
-        title:
-          "Semaines 26+ : Retour à l'activité et récupération à long terme",
+        title: "Semaines 26+ : Retour à l'activité et récupération à long terme",
         content: `<ul class="space-y-6 list-none">
             <li>
               <span class="li-heading">Retour à l'activité</span>
@@ -925,8 +914,7 @@ export const content: Record<Lang, Content> = {
     ],
     faqs: [
       {
-        question:
-          "Que se passe-t-il la première semaine après une rupture du tendon d'Achille ?",
+        question: "Que se passe-t-il la première semaine après une rupture du tendon d'Achille ?",
         answer:
           "La première semaine, vous aurez besoin de soins médicaux immédiats. Vous vous rendrez probablement aux urgences où l'on vous administrera un traitement initial contre la douleur, on vous posera une attelle de traumatologie ou un plâtre pour maintenir votre pied en position de pointe et on vous donnera des béquilles. Un médicament anticoagulant peut être prescrit pour prévenir la thrombose. Une orientation vers un spécialiste sera organisée pour des soins supplémentaires.",
       },
@@ -966,8 +954,7 @@ export const content: Record<Lang, Content> = {
           "Pour éviter une nouvelle rupture, suivez scrupuleusement les instructions de votre professionnel de la santé, en particulier pendant les 12 premières semaines où le tendon est le plus vulnérable. Ne retirez pas la botte sans instruction, évitez de marcher sans soutien et ne précipitez pas le processus de rééducation. Lorsque vous commencez la physiothérapie, évitez les étirements agressifs et suivez attentivement votre programme d'exercices.",
       },
       {
-        question:
-          "Comment savoir si mon tendon d'Achille guérit correctement ?",
+        question: "Comment savoir si mon tendon d'Achille guérit correctement ?",
         answer:
           "Votre professionnel de la santé surveillera la guérison par des contrôles réguliers, en particulier pendant les 9 premières semaines. Les signes d'une bonne guérison comprennent une diminution de la douleur, la capacité de supporter du poids comme conseillé dans votre botte et une amélioration progressive du mouvement lorsque cela est autorisé. Cependant, n'oubliez pas qu'il n'existe PAS de déchirure partielle - suivez toujours les conseils de votre spécialiste pour une évaluation correcte de la guérison.",
       },
@@ -1225,8 +1212,7 @@ export const content: Record<Lang, Content> = {
     ],
     faqs: [
       {
-        question:
-          "Was passiert in der ersten Woche nach einem Achillessehnenriss?",
+        question: "Was passiert in der ersten Woche nach einem Achillessehnenriss?",
         answer:
           "In der ersten Woche benötigen Sie sofortige ärztliche Hilfe. Sie werden wahrscheinlich die Notaufnahme aufsuchen, wo Sie eine erste Schmerzbehandlung erhalten, eine Traumaschiene oder einen Gipsverband anlegen, um Ihren Fuß in einer Zehenspitzenposition zu halten, und Ihnen Krücken geben. Zur Vorbeugung einer Thrombose kann ein blutverdünnendes Medikament verschrieben werden. Zur weiteren Behandlung wird eine Überweisung an einen Spezialisten veranlasst.",
       },
@@ -1242,8 +1228,7 @@ export const content: Record<Lang, Content> = {
           "Etwa in den Wochen 4-6 kann Ihr Arzt Ihnen empfehlen, auf eine Schiene umzusteigen, wenn Sie Schwierigkeiten haben, im Stiefel zu schlafen. Die Schiene ist leichter als der Stiefel und hilft, die richtige Fußposition während des Schlafs beizubehalten und gleichzeitig sicherzustellen, dass die Sehne richtig heilt.",
       },
       {
-        question:
-          "Wann beginnt die Physiotherapie typischerweise im Genesungsprozess?",
+        question: "Wann beginnt die Physiotherapie typischerweise im Genesungsprozess?",
         answer:
           "Die Physiotherapie beginnt in der Regel etwa in den Wochen 10-12. Dann beginnen Sie, den Stiefel abzulegen und ein geführtes Übungsprogramm zu starten, das sich auf den Aufbau der Wadenmuskulatur konzentriert. Es ist wichtig, die Anweisungen Ihres Physiotherapeuten zu befolgen und kräftige Dehnübungen zu vermeiden, auch wenn sich die Sehne angespannt anfühlt.",
       },
@@ -1524,14 +1509,12 @@ export const content: Record<Lang, Content> = {
     ],
     faqs: [
       {
-        question:
-          "Cosa succede nella prima settimana dopo una rottura del tendine d'Achille?",
+        question: "Cosa succede nella prima settimana dopo una rottura del tendine d'Achille?",
         answer:
           "Nella prima settimana, avrai bisogno di cure mediche immediate. Probabilmente andrai al pronto soccorso dove ti forniranno una gestione iniziale del dolore, applicheranno una stecca traumatica o un gesso per mantenere il piede in posizione di punta e ti daranno delle stampelle. Potrebbe essere prescritto un farmaco anticoagulante per prevenire la trombosi. Verrà organizzato un invio a uno specialista per ulteriori cure.",
       },
       {
-        question:
-          "Quando devo prendere la decisione tra trattamento chirurgico e non chirurgico?",
+        question: "Quando devo prendere la decisione tra trattamento chirurgico e non chirurgico?",
         answer:
           "La decisione sul trattamento viene in genere presa durante le settimane 1-3 dopo aver consultato uno specialista. Eseguiranno un esame dettagliato e potrebbero richiedere un'ecografia per verificare se le estremità del tendine sono vicine. Il trattamento non chirurgico è il più comune, in cui il piede viene tenuto in posizione di punta con un tutore. L'intervento chirurgico viene preso in considerazione principalmente se c'è uno spazio significativo tra le estremità del tendine.",
       },
@@ -1541,8 +1524,7 @@ export const content: Record<Lang, Content> = {
           "Intorno alle settimane 4-6, se hai difficoltà a dormire con il tutore, il tuo medico potrebbe consigliarti di passare a una stecca. La stecca è più leggera del tutore e aiuta a mantenere la corretta posizione del piede durante il sonno, garantendo al contempo che il tendine continui a guarire correttamente.",
       },
       {
-        question:
-          "Quando inizia in genere la fisioterapia nel processo di recupero?",
+        question: "Quando inizia in genere la fisioterapia nel processo di recupero?",
         answer:
           "La fisioterapia inizia in genere intorno alle settimane 10-12. È allora che inizierai a togliere il tutore e ad avviare un programma di esercizi guidato incentrato sul rafforzamento dei muscoli del polpaccio. È importante seguire le indicazioni del fisioterapista ed evitare esercizi di stretching energici, anche se il tendine sembra teso.",
       },
@@ -1565,8 +1547,7 @@ export const content: Record<Lang, Content> = {
           "Per prevenire una nuova rottura, segui scrupolosamente le istruzioni del tuo medico, soprattutto durante le prime 12 settimane, quando il tendine è più vulnerabile. Non rimuovere il tutore se non indicato, evita di camminare senza supporto e non affrettare il processo di riabilitazione. Quando inizi la fisioterapia, evita lo stretching aggressivo e segui attentamente il tuo programma di esercizi.",
       },
       {
-        question:
-          "Come faccio a sapere se il mio tendine d'Achille sta guarendo correttamente?",
+        question: "Come faccio a sapere se il mio tendine d'Achille sta guarendo correttamente?",
         answer:
           "Il tuo medico monitorerà la guarigione attraverso controlli regolari, in particolare durante le prime 9 settimane. I segni di una corretta guarigione includono una diminuzione del dolore, la capacità di caricare il peso come consigliato nel tutore e un graduale miglioramento del movimento quando consentito. Tuttavia, ricorda che NON ESISTE una lesione parziale: segui sempre le indicazioni del tuo specialista per una corretta valutazione della guarigione.",
       },

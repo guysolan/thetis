@@ -29,12 +29,7 @@ export function LinkItem({ editor, open, setOpen }: LinkItemProps) {
     const url = formatUrlWithProtocol(value);
 
     if (url) {
-      editor
-        .chain()
-        .focus()
-        .extendMarkRange("link")
-        .setLink({ href: url })
-        .run();
+      editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
 
       setOpen(false);
     }
@@ -86,12 +81,7 @@ export function LinkItem({ editor, open, setOpen }: LinkItemProps) {
               <MdOutlineDelete className="size-4" />
             </Button>
           ) : (
-            <Button
-              size="icon"
-              className="size-7"
-              type="button"
-              onClick={handleSubmit}
-            >
+            <Button size="icon" className="size-7" type="button" onClick={handleSubmit}>
               <MdOutlineCheck className="size-4" />
             </Button>
           )}

@@ -11,7 +11,6 @@ import {
   Dumbbell,
 } from "lucide-react";
 export const articles = [
-
   {
     href: "/FAQs/achilles-rupture-timeline",
     title: "Achilles Rupture Timeline",

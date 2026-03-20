@@ -32,10 +32,7 @@ export function markEmailAsSubscribed(email: string): void {
 
     if (!subscribedEmails.includes(normalizedEmail)) {
       subscribedEmails.push(normalizedEmail);
-      localStorage.setItem(
-        SUBSCRIBED_EMAILS_KEY,
-        JSON.stringify(subscribedEmails),
-      );
+      localStorage.setItem(SUBSCRIBED_EMAILS_KEY, JSON.stringify(subscribedEmails));
     }
   } catch (error) {
     console.error("Error saving subscription status:", error);

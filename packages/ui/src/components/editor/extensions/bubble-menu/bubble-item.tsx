@@ -11,12 +11,7 @@ interface BubbleItemProps {
   children: React.ReactNode;
 }
 
-export function BubbleMenuItem({
-  editor,
-  action,
-  isActive,
-  children,
-}: BubbleItemProps) {
+export function BubbleMenuItem({ editor, action, isActive, children }: BubbleItemProps) {
   return (
     <BubbleMenuButton
       action={() => {

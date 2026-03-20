@@ -2,12 +2,7 @@ import { CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "@tanstack/react-router";
 import type { SectionMetadata } from "@/content/course/sections";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@thetis/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@thetis/ui/accordion";
 import { useEffect, useRef } from "react";
 
 interface CourseProgressTrackerProps {
@@ -107,15 +102,11 @@ export function CourseProgressTracker({
                 className={cn(
                   "flex justify-center items-center rounded-full w-6 h-6 font-semibold text-xs transition-all",
                   isCompleted && "bg-primary text-primary-foreground",
-                  isCurrent && !isCompleted &&
-                    "bg-primary/20 text-primary border-2 border-primary",
-                  isUpcoming &&
-                    "bg-muted text-muted-foreground border-2 border-border",
+                  isCurrent && !isCompleted && "bg-primary/20 text-primary border-2 border-primary",
+                  isUpcoming && "bg-muted text-muted-foreground border-2 border-border",
                 )}
               >
-                {isCompleted
-                  ? <CheckCircle2 className="w-4 h-4" />
-                  : <span>{sectionNumber}</span>}
+                {isCompleted ? <CheckCircle2 className="w-4 h-4" /> : <span>{sectionNumber}</span>}
               </div>
             </div>
 
@@ -132,9 +123,7 @@ export function CourseProgressTracker({
                 {section.title}
               </div>
               {isCurrent && (
-                <div className="mt-0.5 text-muted-foreground text-xs">
-                  Current lesson
-                </div>
+                <div className="mt-0.5 text-muted-foreground text-xs">Current lesson</div>
               )}
             </div>
           </button>
@@ -147,9 +136,7 @@ export function CourseProgressTracker({
     <div className={cn("space-y-4 w-full", className)}>
       {/* Vertical Progress Stepper */}
       {/* Desktop: Always visible */}
-      <div className="hidden lg:block">
-        {stepsList}
-      </div>
+      <div className="hidden lg:block">{stepsList}</div>
 
       {/* Mobile: Accordion wrapper */}
       <div className="lg:hidden">
@@ -158,9 +145,7 @@ export function CourseProgressTracker({
             <AccordionTrigger className="py-2 hover:no-underline">
               <span className="font-medium text-sm">See steps</span>
             </AccordionTrigger>
-            <AccordionContent className="pt-2 pb-0">
-              {stepsList}
-            </AccordionContent>
+            <AccordionContent className="pt-2 pb-0">{stepsList}</AccordionContent>
           </AccordionItem>
         </Accordion>
       </div>
@@ -168,12 +153,8 @@ export function CourseProgressTracker({
       {/* Progress Summary */}
       <div className="pt-4 border-border border-t">
         <div className="flex justify-between items-center mb-2">
-          <span className="font-medium text-foreground text-sm">
-            Progress
-          </span>
-          <span className="font-semibold text-primary text-sm">
-            {completionPercentage}%
-          </span>
+          <span className="font-medium text-foreground text-sm">Progress</span>
+          <span className="font-semibold text-primary text-sm">{completionPercentage}%</span>
         </div>
         <div className="bg-muted rounded-full h-2 overflow-hidden">
           <div

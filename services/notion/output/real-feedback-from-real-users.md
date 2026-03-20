@@ -12,30 +12,38 @@ creation_date: "2025-11-03"
 
 ## Content overview
 
+
 💬 _“Fits perfectly and keeps my ruptured Achilles in place while I sleep. It’s lighter than the boot and keeps my foot supported at the right angle. A great step forward!”_
 
+
 Thank you, **Milliemoofashionista 🇬🇧**, for sharing your experience and kind words. 🌙
+
 
 As both a doctor and psychologist, she knows how frustrating Achilles rupture recovery can be — and we’re proud that our splint made rest and healing a little easier.
 
 At **Thetis Medical**, we spent months in R&D perfecting the shape of our splint. The contoured plastic shell fits the top of the leg comfortably and prevents slipping — exactly what patients like Millie appreciate most. 👣💡
 
+
 If you treat **Achilles Tendon Ruptures**, let’s connect.
+
 
 ## ToDos
 
-- [ ]
-- [ ]
-- [ ]
+- [ ] 
+- [ ] 
+- [ ] 
 
 ## Notes
 
--
--
--
+- 
+- 
+- 
 
 ## Supporting files
 
-![LinkedIn_Reviews_%282%29.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/697e34eb-e2a6-4db7-9771-606d02bd1b53/68545991-9c1b-4d64-a79b-fd6f73c8fbf0/LinkedIn_Reviews_%282%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466ZDXUHM2T%2F20260313%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260313T140038Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMX%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAaoEWC5U4D4wWflyK4gsNbwPND5nf2WTpqyQ2lvdkzYAiEAi5vdKrGjCMO8FlDLX414cGOtMcE7vzBipQULqcSWKfgqiAQIjf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDPhn0l2ExDyut2gseSrcAwl%2FAB8GiU%2BVJALYj%2Bpj0D61CPcDi2LuxYD64eCF%2B94MbgLG2ECqI2Z%2FPUJECOAL7WqTBJLeofFDS97Or8me%2B8To1RNKol57jJibGWmkP3lxaplfYswhUqXm%2BnvrzBUnzk8ZsB1H2NOFzCoTCGJ%2BK1NGIOhyXSM5K6hZ7anm8hU1DXiH3IPsl06mJY5r7%2Bv9x%2FT7d7SdFAnldjAfjFDqNGsgiQXm%2BRhr%2BezhCjTG9fnyqCsgUe11RT9W1HsT6u1xzNjNqNyYZ%2FYnkKmA%2BcTkY%2FA80eUGu54b0WJoBWGIIWtrNOyYTeaZuxnsnv21pbMKnnYGJKYsX9lfPIBuaUEDcM2dQRsxLutmRemOJPhddtqeEferbKTvzf2x%2BFyStHXdI6P3vMEycGYLPCMrvysjloBiYDPjkCixw7J7nUEpqCxZPRSh7YyEKejZKoPEhbcN0zyeJxtqHjCeuiqrx6LpA2yFOs4oXNEVq7PiY0lrus9KKSgMe5NFkgT0BKrt68%2FksDxr2dQs1PF9Co7U1KbF2Ig3xmSVAoTzO6%2FUVjKJZMA%2BBs7EkOcbWaZEhCXPMBNr0FBuPlVJED8qvjZrA6En08Qr0Zhf2Ejs1AOFEbCRE%2FmP2cUvsOtAaImviMuIMN%2BB0M0GOqUBtWFbFOKLE%2Bh3B33vGNaq6i95t57E0QfgQ%2BI5p1crCKyHnqAHtWJJ499OGWRhGeoeF0vf8H0XaBDZrvXWVkdlYTQDSyoIVeLOEBUVRDdr1pUY2s06ZsLtVR1837MTMAXraK%2FRggjVTrB4yoU65ruS%2BnhZelXywrAKL6%2FZ0drgzJAba82y2QboDYSmGFGsvNjGxMUSAwovVcYnqMLV6nmnHxuSjm7d&X-Amz-Signature=0d4d640fea70c925ebaa02218740689c808d7a5a3519e8d52b6d49db93118705&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
+![LinkedIn_Reviews_%282%29.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/697e34eb-e2a6-4db7-9771-606d02bd1b53/68545991-9c1b-4d64-a79b-fd6f73c8fbf0/LinkedIn_Reviews_%282%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4666PLSIGS4%2F20260314%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260314T214815Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCQRappdaXhedExr7cEl%2Fj5hcyN2EfzuFeabVek8kdsHgIhAKrUpvKhyCLJU1A3N%2F6yYbIrhfqMJQs8FP%2F0BTJHs6gGKogECK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgzlKzRL0wJs8OR6Am4q3AN0etRbHSZdcxvfjKGjnwhp8axlCFES%2FJSlBXRJqLSr48VEpeQrn0J6Ex3oDaxqimDbYYE6NsxPhCkgBrEIv8TqA8LJrISFRSl9SAPavNaprija3pgsnmMq6mNesVtX3wwgAI6Uw1rkSIo763644sncpDl3DxJUocx%2F37CG%2FtgdfIXtAcpvwxoFvCF4Z79iUKALIpLBFrJR%2BYpH%2BeoVHu64xTY0dv3YFjgrkt4Wb%2Fod3LtNql0m8cxxIZPWczKDfT9HefIypc0je%2BxAVcVu0XjQ643LPmpHLKn0HzeBQW537b6cUWdmeuf5iWOURJjaHW1o43OAoT%2FUeOrnKJq%2BUUZq6ddPBXLqyYNHg5ADPvEYu9hlZCH6kGxgGzzdcd1H69w0Bqo%2Bmy7amThn18lblMdicUnh3xCbgJyKS7%2FgAFCH95XK4WnkPePE0BU28CgKsr1H5X9vLC8GKHahFYl1kTUMJjtbUgF%2F85JZoWDpy6tnn9DfeiD9668pPLHCoJeAMZQcOGHxCSLOonB9F5WDQuWzAIhC7NLhNhJCAPmxRudkv46VGB2VkPybdQb6ZT73pnaLQeHw7i3Gnthhmwir1ZvWOz90QUPiFg3NaycXY381fNaOjiwfHCvOs8e2CzDtp9fNBjqkAU1rLM89dFoSsGMuHH2zmpr6bkZ3EJvEiO98S96MvquhnxZpUZVePNyr6vRUMf6zSyAjxeLExswgpAHd%2FYn%2Bl8iIk04yqZN3cwpDV7Qfr6IYRd%2B8yGWFSsJNpDlpVEvPtrrxtcNYOQKJgqAcIoEBkw8EgIf5xh5Pi62iw2yNgCXV2hGh%2FC07dQPopK3rr9iP95bEeVrHDgb%2F9bj4Xk1xA5acK3Bh&X-Amz-Signature=c200a7f5eb9efd81dc9d629c25f5217a4b003345ce909bdea6a7a9721be3b3a9&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+
 
 [pdf]()
+

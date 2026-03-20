@@ -4,8 +4,7 @@ import type { FAQItem } from "../../../components/FAQs";
 
 const aircastVsVacopedFaqs: FAQItem[] = [
   {
-    question:
-      "What is the most important piece of equipment for Achilles rupture recovery?",
+    question: "What is the most important piece of equipment for Achilles rupture recovery?",
     answer:
       "The walking boot is considered essential for recovery. The UKSTAR trial (2020) found that early protected weight-bearing in a functional brace is a safe alternative to plaster casting. Both the Aircast and VACOped boots are commonly used options, with the choice depending on your specific needs, budget, and healthcare provider's recommendation.",
   },

@@ -26,22 +26,20 @@ const AmazonSettlementCard = ({
   region,
   country,
   report,
-}: { region: string; country: string; report: AmazonReport }) => {
+}: {
+  region: string;
+  country: string;
+  report: AmazonReport;
+}) => {
   const { mutate: downloadFile } = useDownloadFiles();
-  const { mutate: saveReport, isPending: isSavingReport } =
-    useSaveAmazonReport();
-  const { mutate: deleteReport, isPending: isDeletingReport } =
-    useDeleteAmazonReport();
+  const { mutate: saveReport, isPending: isSavingReport } = useSaveAmazonReport();
+  const { mutate: deleteReport, isPending: isDeletingReport } = useDeleteAmazonReport();
   const { data: downloadedReports } = useDownloadedAmazonReports();
-  const downloaded = downloadedReports?.find(
-    (r) => r.report_id === report.reportId,
-  );
+  const downloaded = downloadedReports?.find((r) => r.report_id === report.reportId);
   return (
     <Card key={report.reportId}>
       <CardHeader>
-        <CardTitle>
-          Settlement Report - {dayjs(report.dataEndTime).format("DD MMM YYYY")}
-        </CardTitle>
+        <CardTitle>Settlement Report - {dayjs(report.dataEndTime).format("DD MMM YYYY")}</CardTitle>
         {downloaded && (
           <>
             <CardDescription>{downloaded.storage_path}</CardDescription>
@@ -88,10 +86,7 @@ const AmazonSettlementCard = ({
               path={downloaded.storage_path}
               reportDate={dayjs(report.dataEndTime).format("YYYY-MM-DD")}
             />
-            <Button
-              variant="danger"
-              onClick={() => deleteReport({ reportId: report.reportId })}
-            >
+            <Button variant="danger" onClick={() => deleteReport({ reportId: report.reportId })}>
               {isDeletingReport ? "Deleting..." : "Delete"}
             </Button>
           </>

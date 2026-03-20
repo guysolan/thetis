@@ -1,11 +1,7 @@
 // ComparisonView.tsx
 import React from "react";
 import type { Country, JourneyDataPoint, Stage } from "./types";
-import {
-  getCountryById,
-  getUnicodeFlagIcon,
-  groupJourneyDataByProperty,
-} from "./utils";
+import { getCountryById, getUnicodeFlagIcon, groupJourneyDataByProperty } from "./utils";
 import { equipmentTags, equipmentUsage } from "./data";
 import { EquipmentTags } from "./EquipmentTags";
 
@@ -29,31 +25,19 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
     "timing",
   );
 
-  const equipmentGroups = stage.id !== "injury"
-    ? groupJourneyDataByProperty(
-      stage.id,
-      selectedCountries,
-      journeyData,
-      "equipment",
-    )
-    : {};
+  const equipmentGroups =
+    stage.id !== "injury"
+      ? groupJourneyDataByProperty(stage.id, selectedCountries, journeyData, "equipment")
+      : {};
 
-  const clinicianGroups = stage.id !== "injury"
-    ? groupJourneyDataByProperty(
-      stage.id,
-      selectedCountries,
-      journeyData,
-      "clinicians",
-    )
-    : {};
-  const descriptionGroups = stage.id === "injury"
-    ? groupJourneyDataByProperty(
-      stage.id,
-      selectedCountries,
-      journeyData,
-      "description",
-    )
-    : {};
+  const clinicianGroups =
+    stage.id !== "injury"
+      ? groupJourneyDataByProperty(stage.id, selectedCountries, journeyData, "clinicians")
+      : {};
+  const descriptionGroups =
+    stage.id === "injury"
+      ? groupJourneyDataByProperty(stage.id, selectedCountries, journeyData, "description")
+      : {};
 
   const ComparisonSection = ({
     title,
@@ -84,9 +68,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
                 return (
                   <div
                     key={countryId}
-                    className={`flex items-center gap-2 ${
-                      isEquipmentSection ? "flex-col" : ""
-                    }`}
+                    className={`flex items-center gap-2 ${isEquipmentSection ? "flex-col" : ""}`}
                   >
                     <div className="flex items-center gap-1.5 bg-primary/5 px-2 py-1 border border-primary/10 rounded-full text-sm">
                       <span className="text-base flag-icon">
@@ -120,9 +102,7 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
     return (
       <div className="flex flex-wrap justify-center gap-1.5">
         {countryEquipment.map((usage) => {
-          const equipment = equipmentTags.find(
-            (e) => e.id === usage.equipmentId,
-          );
+          const equipment = equipmentTags.find((e) => e.id === usage.equipmentId);
           if (!equipment) return null;
 
           return (
@@ -131,40 +111,32 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
               className={`
                 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium
                 ${
-                usage.isCommon
-                  ? "border border-primary/20"
-                  : "border border-dashed border-primary/20 opacity-75"
-              }
+                  usage.isCommon
+                    ? "border border-primary/20"
+                    : "border border-dashed border-primary/20 opacity-75"
+                }
                 transition-all duration-200
               `}
               style={{
                 backgroundColor: `var(--color-${equipment.color}-50)`,
                 color: `var(--color-${equipment.color}-900)`,
               }}
-              title={`${equipment.description}${
-                !usage.isCommon ? " (Occasionally used)" : ""
-              }`}
+              title={`${equipment.description}${!usage.isCommon ? " (Occasionally used)" : ""}`}
             >
-              {usage.isCommon
-                ? (
-                  <svg
-                    className="mr-1 w-2.5 h-2.5"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <circle cx="12" cy="12" r="8" />
-                  </svg>
-                )
-                : (
-                  <svg
-                    className="mr-1 w-2.5 h-2.5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <circle cx="12" cy="12" r="6" strokeWidth="2" />
-                  </svg>
-                )}
+              {usage.isCommon ? (
+                <svg className="mr-1 w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="8" />
+                </svg>
+              ) : (
+                <svg
+                  className="mr-1 w-2.5 h-2.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="12" cy="12" r="6" strokeWidth="2" />
+                </svg>
+              )}
               {equipment.name}
             </span>
           );

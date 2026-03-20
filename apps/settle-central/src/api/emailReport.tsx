@@ -4,12 +4,9 @@ import { EmailFormValue } from "../components/EmailPdfDialog";
 import { toast } from "sonner";
 
 const emailAmazonReport = async (values: EmailFormValue) => {
-  const { data, error } = await supabase.functions.invoke(
-    "email-amazon-report",
-    {
-      body: values,
-    },
-  );
+  const { data, error } = await supabase.functions.invoke("email-amazon-report", {
+    body: values,
+  });
   if (error) {
     throw new Error("Failed to send email");
   }

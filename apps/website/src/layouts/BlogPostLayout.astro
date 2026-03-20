@@ -4,6 +4,7 @@ import NightSplintAdvert from "../components/products/night-splint/NightSplintAd
 import CourseCTA from "../components/CTA/CourseCTA.astro";
 import SubscribeBlock from "../components/CTA/SubscribeBlock.astro";
 import ShareControls from "../components/research/ShareControls";
+import StickyAddToCart from "@/components/StickyAddToCart.tsx";
 import dayjs from "dayjs";
 import type { Lang } from "../config/languages";
 import { ArrowLeft } from "lucide-astro";
@@ -245,6 +246,12 @@ const schemas = [
         <!-- Share -->
         <ShareControls client:load />
     </main>
+    <StickyAddToCart
+        variant="splint"
+        lang={lang}
+        splintHref={lang === "en" ? "/achilles-rupture-splint" : lang === "de" ? "/de/achillessehnenriss-schiene" : lang === "fr" ? "/fr/attelle-rupture-tendon-achille" : lang === "es" ? "/es/bota-ortopedica-tendon-aquiles" : "/it/tutore-rottura-tendine-achille"}
+        client:load
+    />
 </Layout>
 
 <style is:global>

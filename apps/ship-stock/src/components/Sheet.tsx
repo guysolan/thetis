@@ -18,13 +18,7 @@ type SheetProps = {
   children: React.ReactNode;
   footer?: React.ReactNode;
 };
-const Sheet = ({
-  trigger,
-  children,
-  title,
-  description,
-  footer,
-}: SheetProps) => {
+const Sheet = ({ trigger, children, title, description, footer }: SheetProps) => {
   const closeRef = React.useRef<HTMLButtonElement>(null);
 
   return (
@@ -39,12 +33,7 @@ const Sheet = ({
           {children}
         </ScrollArea>
         <SheetFooter>{footer}</SheetFooter>
-        <SheetClose
-          id="close-sheet"
-          ref={closeRef}
-          data-component="sheet"
-          className="hidden"
-        />
+        <SheetClose id="close-sheet" ref={closeRef} data-component="sheet" className="hidden" />
       </SheetContent>
     </SheetWrap>
   );

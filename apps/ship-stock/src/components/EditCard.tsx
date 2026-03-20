@@ -10,12 +10,7 @@ interface EditCardProps {
   onDone?: () => void;
 }
 
-const EditCard = ({
-  title,
-  children,
-  previewContent,
-  onDone,
-}: EditCardProps) => {
+const EditCard = ({ title, children, previewContent, onDone }: EditCardProps) => {
   const [isEditing, setIsEditing] = useState(true);
 
   const handleDone = () => {
@@ -42,26 +37,18 @@ const EditCard = ({
           }}
           className="relative flex items-center gap-2"
         >
-          {isEditing
-            ? (
+          {isEditing ? (
+            <div className="relative w-5 h-5">
+              <Unlock size={18} className="absolute inset-0 text-neutral-600" />
+            </div>
+          ) : (
+            <>
+              <span className="text-sm">Edit</span>
               <div className="relative w-5 h-5">
-                <Unlock
-                  size={18}
-                  className="absolute inset-0 text-neutral-600"
-                />
+                <Lock size={18} className="absolute inset-0 text-neutral-600" />
               </div>
-            )
-            : (
-              <>
-                <span className="text-sm">Edit</span>
-                <div className="relative w-5 h-5">
-                  <Lock
-                    size={18}
-                    className="absolute inset-0 text-neutral-600"
-                  />
-                </div>
-              </>
-            )}
+            </>
+          )}
         </Button>
       </div>
 

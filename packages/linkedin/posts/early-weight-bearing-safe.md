@@ -7,7 +7,7 @@ Accelerated Rehabilitation Results:
 • Time to full weight-bearing: 2 weeks vs 6 weeks 🚶‍♂️💨  
 • No increase in rerupture (0 % vs 2 %) ✅  
 • DVT rate cut by TWO-THIRDS (3 % vs 9 %) 🩸  
-• 96 % patient satisfaction at 12 months 😃  
+• 96 % patient satisfaction at 12 months 😃
 
 Are your post-op protocols still stuck in neutral?
 

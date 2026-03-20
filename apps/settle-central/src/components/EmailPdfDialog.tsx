@@ -11,14 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@thetis/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@thetis/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@thetis/ui/form";
 import { Input } from "@thetis/ui/input";
 import { useEmailAmazonReport } from "../api/emailReport";
 import { Mail } from "lucide-react";
@@ -37,11 +30,7 @@ interface EmailReportDialogProps {
   children: React.ReactNode;
 }
 
-export function EmailPdfDialog({
-  path,
-  reportDate,
-  children,
-}: EmailReportDialogProps) {
+export function EmailPdfDialog({ path, reportDate, children }: EmailReportDialogProps) {
   const form = useForm<EmailFormValue>({
     resolver: zodResolver(emailFormSchema),
     defaultValues: {
@@ -63,9 +52,7 @@ export function EmailPdfDialog({
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Email Settlement Report</DialogTitle>
-          <DialogDescription>
-            Send the settlement report to an email address.
-          </DialogDescription>
+          <DialogDescription>Send the settlement report to an email address.</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

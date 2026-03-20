@@ -1,11 +1,4 @@
-import {
-  FileText,
-  Truck,
-  Globe2,
-  Scale,
-  Hash,
-  PlaneTakeoff,
-} from "lucide-react";
+import { FileText, Truck, Globe2, Scale, Hash, PlaneTakeoff } from "lucide-react";
 
 interface ShippingDetails {
   reasonForExport: string;
@@ -50,9 +43,7 @@ const ShippingDetailItem: React.FC<ShippingDetailItemProps> = ({
   </div>
 );
 
-const ShippingDetails: React.FC<
-  ShippingDetails & { options?: ShippingDetailsOptions }
-> = ({
+const ShippingDetails: React.FC<ShippingDetails & { options?: ShippingDetailsOptions }> = ({
   reasonForExport,
   modeOfTransport,
   incoterms,

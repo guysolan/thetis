@@ -33,14 +33,14 @@ By weeks 7-9, your tendon has entered the remodelling phase - the final and long
 
 Understanding your tendon's approximate strength helps set expectations:
 
-| Time Point | Approximate Strength (% of original) | Notes |
-|------------|--------------------------------------|-------|
-| Week 2 | ~10-15% | Very fragile |
-| Week 6 | ~30-40% | Stronger but still vulnerable |
-| Week 9 | ~50-60% | **You are approaching here** |
-| Week 12 | ~60-70% | Boot removed, early rehab |
-| 6 months | ~80-90% | Return to sport consideration |
-| 12 months | ~90-100% | Near full maturation |
+| Time Point | Approximate Strength (% of original) | Notes                         |
+| ---------- | ------------------------------------ | ----------------------------- |
+| Week 2     | ~10-15%                              | Very fragile                  |
+| Week 6     | ~30-40%                              | Stronger but still vulnerable |
+| Week 9     | ~50-60%                              | **You are approaching here**  |
+| Week 12    | ~60-70%                              | Boot removed, early rehab     |
+| 6 months   | ~80-90%                              | Return to sport consideration |
+| 12 months  | ~90-100%                             | Near full maturation          |
 
 **Important caveats:**
 
@@ -77,11 +77,11 @@ During weeks 7-9, you'll be removing your remaining wedges and approaching a neu
 
 **Typical progression:**
 
-| Week | Wedges | Angle | Status |
-|------|--------|-------|--------|
-| Week 7 | 1 wedge | ~10° | Final wedge |
-| Week 8-9 | 0 wedges | Neutral (0°) | Reaching neutral |
-| Week 10+ | Boot removal | - | Transition to shoes |
+| Week     | Wedges       | Angle        | Status              |
+| -------- | ------------ | ------------ | ------------------- |
+| Week 7   | 1 wedge      | ~10°         | Final wedge         |
+| Week 8-9 | 0 wedges     | Neutral (0°) | Reaching neutral    |
+| Week 10+ | Boot removal | -            | Transition to shoes |
 
 **How neutral position feels:**
 
@@ -402,20 +402,20 @@ Life doesn't stop during recovery, but it does need some adaptation.
 1. **Quality Resistance Bands (Theraband)**
    - Various resistances
    - Essential for upcoming physiotherapy
-   [PRODUCT LINK: Theraband Resistance Band Set]
+     [PRODUCT LINK: Theraband Resistance Band Set]
 
 2. **Supportive Shoes for Transition**
    - 10mm+ heel-to-toe drop (not flat shoes)
    - Good cushioning
    - Supportive heel counter
    - Lace-up preferred for adjustable fit
-   [PRODUCT LINK: Recommended Recovery Shoes]
+     [PRODUCT LINK: Recommended Recovery Shoes]
 
 3. **Heel Lifts for Regular Shoes**
    - To use when transitioning out of boot
    - Reduces sudden change in ankle angle
    - Usually 0.5-1cm height
-   [PRODUCT LINK: Gel Heel Lifts]
+     [PRODUCT LINK: Gel Heel Lifts]
 
 ### Other Helpful Items
 
@@ -578,6 +578,6 @@ Completely normal. Moving from the protected boot phase to active rehabilitation
 
 ---
 
-*Continue to [Weeks 10-12: Freedom from the Boot](/recovery/weeks-10-12-boot-transition) when you're ready to learn about transitioning to shoes, starting physiotherapy, and rebuilding your strength.*
+_Continue to [Weeks 10-12: Freedom from the Boot](/recovery/weeks-10-12-boot-transition) when you're ready to learn about transitioning to shoes, starting physiotherapy, and rebuilding your strength._
 
-*Return to [Weeks 4-6: Progressive Recovery](/recovery/weeks-4-6-progressive-recovery) if you need to review the earlier phase.*
+_Return to [Weeks 4-6: Progressive Recovery](/recovery/weeks-4-6-progressive-recovery) if you need to review the earlier phase._

@@ -1,17 +1,6 @@
 import type { ContentBlock, SectionContent } from "./types";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@thetis/ui/card";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@thetis/ui/accordion";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@thetis/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@thetis/ui/accordion";
 import { Alert, AlertDescription, AlertTitle } from "@thetis/ui/alert";
 import {
   AlertTriangle,
@@ -45,11 +34,7 @@ function parseInlineMarkdown(text: string): React.ReactNode {
     if (linkMatch) {
       const [, linkText, url] = linkMatch;
       return (
-        <Link
-          key={i}
-          to={url}
-          className="text-primary hover:text-primary/80 underline"
-        >
+        <Link key={i} to={url} className="text-primary hover:text-primary/80 underline">
           {linkText}
         </Link>
       );
@@ -62,28 +47,18 @@ function TextBlockComponent({ content }: { content: string }) {
   return <p>{parseInlineMarkdown(content)}</p>;
 }
 
-function HeadingBlockComponent({
-  level,
-  text,
-}: {
-  level: 2 | 3 | 4;
-  text: string;
-}) {
+function HeadingBlockComponent({ level, text }: { level: 2 | 3 | 4; text: string }) {
   const Tag = `h${level}` as keyof JSX.IntrinsicElements;
   return <Tag>{text}</Tag>;
 }
 
-function ListBlockComponent({
-  style,
-  items,
-}: {
-  style: "bullet" | "numbered";
-  items: string[];
-}) {
+function ListBlockComponent({ style, items }: { style: "bullet" | "numbered"; items: string[] }) {
   const Tag = style === "numbered" ? "ol" : "ul";
   return (
     <Tag>
-      {items.map((item, i) => <li key={i}>{parseInlineMarkdown(item)}</li>)}
+      {items.map((item, i) => (
+        <li key={i}>{parseInlineMarkdown(item)}</li>
+      ))}
     </Tag>
   );
 }
@@ -128,9 +103,7 @@ function AlertBlockComponent({
   return (
     <Alert className={cn("my-6", styles[variant])}>
       {icons[variant]}
-      {title && (
-        <AlertTitle className={titleStyles[variant]}>{title}</AlertTitle>
-      )}
+      {title && <AlertTitle className={titleStyles[variant]}>{title}</AlertTitle>}
       <AlertDescription className={contentStyles[variant]}>
         {parseInlineMarkdown(content)}
       </AlertDescription>
@@ -138,18 +111,12 @@ function AlertBlockComponent({
   );
 }
 
-function FAQBlockComponent({
-  items,
-}: {
-  items: { question: string; answer: string }[];
-}) {
+function FAQBlockComponent({ items }: { items: { question: string; answer: string }[] }) {
   return (
     <Accordion type="single" collapsible className="my-6 w-full">
       {items.map((item, i) => (
         <AccordionItem key={i} value={`faq-${i}`}>
-          <AccordionTrigger className="font-semibold text-left">
-            {item.question}
-          </AccordionTrigger>
+          <AccordionTrigger className="font-semibold text-left">{item.question}</AccordionTrigger>
           <AccordionContent className="prose-course">
             {parseInlineMarkdown(item.answer)}
           </AccordionContent>
@@ -200,13 +167,11 @@ function ChecklistBlockComponent({
         <ul className="space-y-2">
           {items.map((item, i) => (
             <li key={i} className="flex items-start gap-3">
-              {item.checked
-                ? (
-                  <CheckSquare className="mt-0.5 w-5 h-5 text-primary shrink-0" />
-                )
-                : (
-                  <CheckSquare className="mt-0.5 w-5 h-5 text-muted-foreground shrink-0" />
-                )}
+              {item.checked ? (
+                <CheckSquare className="mt-0.5 w-5 h-5 text-primary shrink-0" />
+              ) : (
+                <CheckSquare className="mt-0.5 w-5 h-5 text-muted-foreground shrink-0" />
+              )}
               <span>{parseInlineMarkdown(item.text)}</span>
             </li>
           ))}
@@ -216,13 +181,7 @@ function ChecklistBlockComponent({
   );
 }
 
-function DosDontsBlockComponent({
-  dos,
-  donts,
-}: {
-  dos: string[];
-  donts: string[];
-}) {
+function DosDontsBlockComponent({ dos, donts }: { dos: string[]; donts: string[] }) {
   return (
     <Card className="bg-gradient-to-br from-primary/5 to-background my-6 border-primary/20">
       <CardContent className="space-y-4 pt-6">
@@ -232,7 +191,9 @@ function DosDontsBlockComponent({
             Do
           </h4>
           <ul className="space-y-2 text-foreground/80">
-            {dos.map((item, i) => <li key={i}>{parseInlineMarkdown(item)}</li>)}
+            {dos.map((item, i) => (
+              <li key={i}>{parseInlineMarkdown(item)}</li>
+            ))}
           </ul>
         </div>
         <div>
@@ -241,8 +202,9 @@ function DosDontsBlockComponent({
             Don't
           </h4>
           <ul className="space-y-2 text-foreground/80">
-            {donts.map((item, i) => <li key={i}>{parseInlineMarkdown(item)}
-            </li>)}
+            {donts.map((item, i) => (
+              <li key={i}>{parseInlineMarkdown(item)}</li>
+            ))}
           </ul>
         </div>
       </CardContent>
@@ -250,32 +212,16 @@ function DosDontsBlockComponent({
   );
 }
 
-function QuoteBlockComponent({
-  text,
-  author,
-}: {
-  text: string;
-  author?: string;
-}) {
+function QuoteBlockComponent({ text, author }: { text: string; author?: string }) {
   return (
     <blockquote className="my-6">
       {parseInlineMarkdown(text)}
-      {author && (
-        <footer className="mt-2 text-muted-foreground text-sm">
-          — {author}
-        </footer>
-      )}
+      {author && <footer className="mt-2 text-muted-foreground text-sm">— {author}</footer>}
     </blockquote>
   );
 }
 
-function TipBlockComponent({
-  title,
-  content,
-}: {
-  title?: string;
-  content: string;
-}) {
+function TipBlockComponent({ title, content }: { title?: string; content: string }) {
   return (
     <div className="flex gap-3 bg-primary/10 my-6 p-4 border border-primary/20 rounded-lg">
       <Lightbulb className="mt-0.5 w-5 h-5 text-primary shrink-0" />
@@ -287,23 +233,14 @@ function TipBlockComponent({
   );
 }
 
-function TableBlockComponent({
-  headers,
-  rows,
-}: {
-  headers: string[];
-  rows: string[][];
-}) {
+function TableBlockComponent({ headers, rows }: { headers: string[]; rows: string[][] }) {
   return (
     <div className="my-6 overflow-x-auto">
       <table className="w-full text-sm border-collapse">
         <thead>
           <tr className="bg-muted">
             {headers.map((header, i) => (
-              <th
-                key={i}
-                className="px-4 py-2 border border-border font-semibold text-left"
-              >
+              <th key={i} className="px-4 py-2 border border-border font-semibold text-left">
                 {header}
               </th>
             ))}
@@ -311,10 +248,7 @@ function TableBlockComponent({
         </thead>
         <tbody>
           {rows.map((row, i) => (
-            <tr
-              key={i}
-              className={i % 2 === 0 ? "bg-background" : "bg-muted/50"}
-            >
+            <tr key={i} className={i % 2 === 0 ? "bg-background" : "bg-muted/50"}>
               {row.map((cell, j) => (
                 <td key={j} className="px-4 py-2 border border-border">
                   {parseInlineMarkdown(cell)}
@@ -341,8 +275,7 @@ function CardBlockComponent({
 }) {
   const variantStyles = {
     default: "",
-    highlight:
-      "border-primary/20 bg-gradient-to-br from-primary/5 to-background",
+    highlight: "border-primary/20 bg-gradient-to-br from-primary/5 to-background",
     muted: "bg-muted/50",
   };
 
@@ -361,21 +294,12 @@ function CardBlockComponent({
   );
 }
 
-function SectionBlockComponent({
-  title,
-  content,
-}: {
-  title?: string;
-  content: ContentBlock[];
-}) {
+function SectionBlockComponent({ title, content }: { title?: string; content: ContentBlock[] }) {
   return (
     <section className="my-8">
       {title && <h2>{title}</h2>}
       {content.map((block, i) => (
-        <ContentBlockRenderer
-          key={i}
-          block={block}
-        />
+        <ContentBlockRenderer key={i} block={block} />
       ))}
     </section>
   );
@@ -392,11 +316,7 @@ function ImageBlockComponent({
 }) {
   return (
     <figure className="my-8">
-      <img
-        src={src}
-        alt={alt}
-        className="shadow-md rounded-xl w-full"
-      />
+      <img src={src} alt={alt} className="shadow-md rounded-xl w-full" />
       {caption && (
         <figcaption className="mt-3 text-muted-foreground text-sm text-center">
           {caption}
@@ -417,11 +337,7 @@ function ProductImageBlockComponent({
 }) {
   return (
     <figure className="inline-block my-4 max-w-[200px]">
-      <img
-        src={src}
-        alt={alt}
-        className="shadow-sm rounded-lg w-full"
-      />
+      <img src={src} alt={alt} className="shadow-sm rounded-lg w-full" />
       {caption && (
         <figcaption className="mt-2 text-muted-foreground text-xs text-center">
           {caption}
@@ -447,21 +363,13 @@ function IllustrationPromptBlockComponent({
   return (
     <Card className="bg-primary/5 my-6 border-2 border-primary/30 border-dashed">
       <CardHeader>
-        <CardTitle className="text-base md:text-lg">
-          Illustration to generate: {title}
-        </CardTitle>
-        <CardDescription>
-          Copy/paste the prompt below into your image generator.
-        </CardDescription>
+        <CardTitle className="text-base md:text-lg">Illustration to generate: {title}</CardTitle>
+        <CardDescription>Copy/paste the prompt below into your image generator.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="bg-background p-4 border border-border rounded-lg">
-          <p className="mb-2 text-muted-foreground text-xs uppercase tracking-wide">
-            Image prompt
-          </p>
-          <pre className="text-sm leading-relaxed whitespace-pre-wrap">
-            {prompt}
-          </pre>
+          <p className="mb-2 text-muted-foreground text-xs uppercase tracking-wide">Image prompt</p>
+          <pre className="text-sm leading-relaxed whitespace-pre-wrap">{prompt}</pre>
         </div>
 
         {(filename_suggestion || alt_text) && (
@@ -487,9 +395,7 @@ function IllustrationPromptBlockComponent({
 
         {notes && (
           <div className="bg-background p-4 border border-border rounded-lg">
-            <p className="mb-2 text-muted-foreground text-xs uppercase tracking-wide">
-              Notes
-            </p>
+            <p className="mb-2 text-muted-foreground text-xs uppercase tracking-wide">Notes</p>
             <p className="text-sm">{notes}</p>
           </div>
         )}
@@ -503,11 +409,9 @@ function RehabProtocolTableBlockComponent() {
     <div className="my-8">
       <RehabProtocolTable />
       <p className="mt-4 text-muted-foreground text-sm">
-        <strong>Note:</strong>{" "}
-        This protocol is a general guideline. Your specific rehabilitation
-        program will be tailored to your protocol, healing progress, and your
-        clinician's assessment. Always follow your clinician's specific
-        instructions.
+        <strong>Note:</strong> This protocol is a general guideline. Your specific rehabilitation
+        program will be tailored to your protocol, healing progress, and your clinician's
+        assessment. Always follow your clinician's specific instructions.
       </p>
     </div>
   );
@@ -520,12 +424,10 @@ function CertificateBlockComponent() {
       <h3 className="mb-2 font-bold text-foreground text-2xl md:text-3xl">
         Certificate of Completion
       </h3>
-      <p className="mb-4 text-muted-foreground text-lg">
-        Achilles Recovery Course
-      </p>
+      <p className="mb-4 text-muted-foreground text-lg">Achilles Recovery Course</p>
       <p className="mb-6 font-medium text-foreground">
-        You have completed the full course and are equipped with the knowledge
-        to support your recovery journey.
+        You have completed the full course and are equipped with the knowledge to support your
+        recovery journey.
       </p>
       <a
         href="/documents/certificate-of-completion.pdf"
@@ -556,23 +458,14 @@ function ContentBlockRenderer({ block }: { block: ContentBlock }) {
       return <ListBlockComponent style={block.style} items={block.items} />;
     case "alert":
       return (
-        <AlertBlockComponent
-          variant={block.variant}
-          title={block.title}
-          content={block.content}
-        />
+        <AlertBlockComponent variant={block.variant} title={block.title} content={block.content} />
       );
     case "faq":
       return <FAQBlockComponent items={block.items} />;
     case "accordion":
       return <AccordionBlockComponent items={block.items} />;
     case "checklist":
-      return (
-        <ChecklistBlockComponent
-          title={block.title}
-          items={block.items}
-        />
-      );
+      return <ChecklistBlockComponent title={block.title} items={block.items} />;
     case "dos-donts":
       return <DosDontsBlockComponent dos={block.dos} donts={block.donts} />;
     case "quote":
@@ -591,17 +484,9 @@ function ContentBlockRenderer({ block }: { block: ContentBlock }) {
         />
       );
     case "section":
-      return (
-        <SectionBlockComponent title={block.title} content={block.content} />
-      );
+      return <SectionBlockComponent title={block.title} content={block.content} />;
     case "image":
-      return (
-        <ImageBlockComponent
-          src={block.src}
-          alt={block.alt}
-          caption={block.caption}
-        />
-      );
+      return <ImageBlockComponent src={block.src} alt={block.alt} caption={block.caption} />;
     case "illustration-prompt":
       return (
         <IllustrationPromptBlockComponent
@@ -613,13 +498,7 @@ function ContentBlockRenderer({ block }: { block: ContentBlock }) {
         />
       );
     case "product-image":
-      return (
-        <ProductImageBlockComponent
-          src={block.src}
-          alt={block.alt}
-          caption={block.caption}
-        />
-      );
+      return <ProductImageBlockComponent src={block.src} alt={block.alt} caption={block.caption} />;
     case "rehab-protocol-table":
       return <RehabProtocolTableBlockComponent />;
     case "certificate":

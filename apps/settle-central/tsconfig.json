@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "es2023"
-    ],
+    "lib": ["es2023"],
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "target": "ES2022",
@@ -11,9 +9,7 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   }
 }

@@ -6,12 +6,7 @@ import { UnitOfMeasurementSelect } from "./UnitOfMeasurement";
 import { useFormContext } from "react-hook-form";
 import EditCard from "@/components/EditCard";
 import ShippingDetails from "../features/order-documents/components/ShippingDetails";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@thetis/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@thetis/ui/accordion";
 
 const AdditionalFormFields = () => {
   const form = useFormContext();

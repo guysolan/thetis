@@ -1,13 +1,5 @@
 import * as React from "react";
-import {
-  Html,
-  Head,
-  Preview,
-  Body,
-  Container,
-  Text,
-  Font,
-} from "@react-email/components";
+import { Html, Head, Preview, Body, Container, Text, Font } from "@react-email/components";
 
 interface PlainTextEmailProps {
   subject?: string;

@@ -4,13 +4,7 @@ import { useStockQuantities } from "../hooks/useStockQuantities";
 import StockItemsFormFields from "./StockItemsFormFields";
 import StockItemsSummary from "./StockItemsSummary";
 import StockItemActions from "./StockItemActions";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@thetis/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@thetis/ui/card";
 import { Button } from "@thetis/ui/button";
 import { Pencil } from "lucide-react";
 import { useState } from "react";
@@ -47,9 +41,7 @@ const StockItems = ({
   const { fields, append, remove } = useFieldArray({ name });
   const { getItemQuantities } = useStockQuantities(name, address_name);
 
-  const address = addresses?.find(
-    (a) => String(a.id) === form.watch(address_name),
-  );
+  const address = addresses?.find((a) => String(a.id) === form.watch(address_name));
 
   const copyRow = (index: number) => {
     const rowToCopy = form.getValues(`${name}.${index}`);
@@ -87,26 +79,23 @@ const StockItems = ({
         )}
       </CardHeader>
       <CardContent>
-        {isExpanded && !readOnly
-          ? (
-            <div className="space-y-4">
-              <StockItemsFormFields
-                name={name}
-                fields={fields}
-                items={items || []}
-                form={form}
-                getItemQuantities={getItemQuantities}
-                onCopy={copyRow}
-                onRemove={remove}
-                allowedTypes={allowedTypes}
-              />
-              <StockItemActions
-                allowedTypes={allowedTypes}
-                onAppend={handleAppend}
-              />
-            </div>
-          )
-          : <StockItemsSummary name={name} addressName={address_name} />}
+        {isExpanded && !readOnly ? (
+          <div className="space-y-4">
+            <StockItemsFormFields
+              name={name}
+              fields={fields}
+              items={items || []}
+              form={form}
+              getItemQuantities={getItemQuantities}
+              onCopy={copyRow}
+              onRemove={remove}
+              allowedTypes={allowedTypes}
+            />
+            <StockItemActions allowedTypes={allowedTypes} onAppend={handleAppend} />
+          </div>
+        ) : (
+          <StockItemsSummary name={name} addressName={address_name} />
+        )}
       </CardContent>
       <CardFooter>
         <FormErrors

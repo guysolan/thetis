@@ -18,8 +18,7 @@ type Props = {
   id?: string;
 };
 
-const displayValue = (n: number) =>
-  Number.isNaN(n) ? "0" : String(n);
+const displayValue = (n: number) => (Number.isNaN(n) ? "0" : String(n));
 
 export default function Input({
   value = 0,
@@ -97,41 +96,33 @@ export default function Input({
       </button>
 
       <div className="flex min-w-12 items-center justify-center gap-1">
-        {editing
-          ? (
-            <>
-              <input
-                type="text"
-                id={id}
-                name={name}
-                className="bg-transparent focus:outline-none w-full text-center min-w-8"
-                value={inputValue}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                onKeyDown={handleKeyDown}
-                onFocus={focus}
-                aria-label={name ? undefined : "Numeric value"}
-              />
-              {suffix && (
-                <span className="text-muted-foreground shrink-0">{suffix}</span>
-              )}
-            </>
-          )
-          : (
-            <div
-              onClick={focus}
-              className="flex cursor-pointer items-center justify-center gap-1"
-              onKeyUp={focus}
-              onKeyDown={focus}
-            >
-              {format ? <NumberFlow value={value} format={format} /> : (
-                displayValue(value)
-              )}
-              {suffix && (
-                <span className="text-muted-foreground shrink-0">{suffix}</span>
-              )}
-            </div>
-          )}
+        {editing ? (
+          <>
+            <input
+              type="text"
+              id={id}
+              name={name}
+              className="bg-transparent focus:outline-none w-full text-center min-w-8"
+              value={inputValue}
+              onChange={handleInputChange}
+              onBlur={handleBlur}
+              onKeyDown={handleKeyDown}
+              onFocus={focus}
+              aria-label={name ? undefined : "Numeric value"}
+            />
+            {suffix && <span className="text-muted-foreground shrink-0">{suffix}</span>}
+          </>
+        ) : (
+          <div
+            onClick={focus}
+            className="flex cursor-pointer items-center justify-center gap-1"
+            onKeyUp={focus}
+            onKeyDown={focus}
+          >
+            {format ? <NumberFlow value={value} format={format} /> : displayValue(value)}
+            {suffix && <span className="text-muted-foreground shrink-0">{suffix}</span>}
+          </div>
+        )}
       </div>
 
       <button

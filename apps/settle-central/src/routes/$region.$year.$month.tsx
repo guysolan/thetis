@@ -114,14 +114,8 @@ const AmazonFinancesTable = ({
   const filteredAndSortedTransactions = [...transactions]
     .filter((transaction) => transaction.transactionType !== "Transfer")
     .sort((a, b) => {
-      const dateA = dayjs(
-        a.postedDate,
-        region === "EUR" ? "DD/MM/YYYY" : "MM/DD/YYYY",
-      );
-      const dateB = dayjs(
-        b.postedDate,
-        region === "EUR" ? "DD/MM/YYYY" : "MM/DD/YYYY",
-      );
+      const dateA = dayjs(a.postedDate, region === "EUR" ? "DD/MM/YYYY" : "MM/DD/YYYY");
+      const dateB = dayjs(b.postedDate, region === "EUR" ? "DD/MM/YYYY" : "MM/DD/YYYY");
       return dateB.isBefore(dateA) ? -1 : 1;
     });
 
@@ -134,8 +128,7 @@ const AmazonFinancesTable = ({
 
   // Update totalAmount calculation to use filtered transactions
   const totalAmount = filteredAndSortedTransactions.reduce(
-    (sum: number, transaction: Transaction) =>
-      sum + transaction.totalAmount.currencyAmount,
+    (sum: number, transaction: Transaction) => sum + transaction.totalAmount.currencyAmount,
     0,
   );
   const currencyCode = transactions[0]?.totalAmount.currencyCode || "USD";
@@ -175,12 +168,8 @@ const AmazonFinancesTable = ({
 
           return (
             <TableRow key={transaction.transactionId}>
-              <TableCell>
-                {new Date(transaction.postedDate).toLocaleDateString()}
-              </TableCell>
-              <TableCell>
-                {transaction.items?.map((item) => item.description).join(", ")}
-              </TableCell>
+              <TableCell>{new Date(transaction.postedDate).toLocaleDateString()}</TableCell>
+              <TableCell>{transaction.items?.map((item) => item.description).join(", ")}</TableCell>
               <TableCell>
                 <Badge variant="outline">{transaction.transactionType}</Badge>
               </TableCell>
@@ -191,22 +180,13 @@ const AmazonFinancesTable = ({
                 )}
               </TableCell>
               <TableCell className="text-right">
-                {formatCurrency(
-                  productCharges.currencyAmount,
-                  productCharges.currencyCode,
-                )}
+                {formatCurrency(productCharges.currencyAmount, productCharges.currencyCode)}
               </TableCell>
               <TableCell className="text-right">
-                {formatCurrency(
-                  amazonFees.currencyAmount,
-                  amazonFees.currencyCode,
-                )}
+                {formatCurrency(amazonFees.currencyAmount, amazonFees.currencyCode)}
               </TableCell>
               <TableCell className="text-right">
-                {formatCurrency(
-                  otherAmount,
-                  transaction.totalAmount.currencyCode,
-                )}
+                {formatCurrency(otherAmount, transaction.totalAmount.currencyCode)}
               </TableCell>
             </TableRow>
           );
@@ -215,9 +195,7 @@ const AmazonFinancesTable = ({
       <TableFooter>
         <TableRow>
           <TableCell colSpan={4}>Total</TableCell>
-          <TableCell className="text-right">
-            {formatCurrency(totalAmount, currencyCode)}
-          </TableCell>
+          <TableCell className="text-right">{formatCurrency(totalAmount, currencyCode)}</TableCell>
           <TableCell colSpan={3} />
         </TableRow>
       </TableFooter>
@@ -230,11 +208,7 @@ const AmazonFinancesPage = () => {
   return (
     <div className="p-4">
       <h1 className="mb-4 font-bold text-2xl">Amazon Financial Report</h1>
-      <AmazonFinancesTable
-        region={region}
-        year={Number(year)}
-        month={Number(month)}
-      />
+      <AmazonFinancesTable region={region} year={Number(year)} month={Number(month)} />
     </div>
   );
 };

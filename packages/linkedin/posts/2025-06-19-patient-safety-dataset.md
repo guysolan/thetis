@@ -13,7 +13,7 @@ Our theory is that because patients have a comfortable alternative to removing t
 
 What do you think?
 
- #PatientSafety #AchillesRupture
+#PatientSafety #AchillesRupture
 
 ## Personal Repost
 

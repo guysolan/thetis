@@ -1,26 +1,8 @@
 import type { ContentBlock, GuideContent } from "./types";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@thetis/ui/card";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@thetis/ui/accordion";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@thetis/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@thetis/ui/accordion";
 import { Alert, AlertDescription, AlertTitle } from "@thetis/ui/alert";
-import {
-  AlertTriangle,
-  CheckCircle2,
-  CheckSquare,
-  Info,
-  Lightbulb,
-  XCircle,
-} from "lucide-react";
+import { AlertTriangle, CheckCircle2, CheckSquare, Info, Lightbulb, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Parse simple markdown: **bold**, *italic*, and [link text](url)
@@ -38,11 +20,7 @@ function parseInlineMarkdown(text: string): React.ReactNode {
     if (linkMatch) {
       const [, linkText, url] = linkMatch;
       return (
-        <a
-          key={i}
-          href={url}
-          className="text-primary hover:text-primary/80 underline"
-        >
+        <a key={i} href={url} className="text-primary hover:text-primary/80 underline">
           {linkText}
         </a>
       );
@@ -52,20 +30,10 @@ function parseInlineMarkdown(text: string): React.ReactNode {
 }
 
 function TextBlockComponent({ content }: { content: string }) {
-  return (
-    <p className="mb-6 text-neutral-600 leading-relaxed">
-      {parseInlineMarkdown(content)}
-    </p>
-  );
+  return <p className="mb-6 text-neutral-600 leading-relaxed">{parseInlineMarkdown(content)}</p>;
 }
 
-function HeadingBlockComponent({
-  level,
-  text,
-}: {
-  level: 2 | 3 | 4;
-  text: string;
-}) {
+function HeadingBlockComponent({ level, text }: { level: 2 | 3 | 4; text: string }) {
   const styles = {
     2: "text-xl font-bold text-neutral-900 mt-10 mb-4 pb-2 border-b border-neutral-200",
     3: "text-lg font-semibold text-neutral-800 mt-8 mb-3",
@@ -76,13 +44,7 @@ function HeadingBlockComponent({
   return <Tag className={styles[level]}>{text}</Tag>;
 }
 
-function ListBlockComponent({
-  style,
-  items,
-}: {
-  style: "bullet" | "numbered";
-  items: string[];
-}) {
+function ListBlockComponent({ style, items }: { style: "bullet" | "numbered"; items: string[] }) {
   const Tag = style === "numbered" ? "ol" : "ul";
   const listStyles = style === "numbered" ? "list-decimal" : "list-disc";
 
@@ -135,20 +97,10 @@ function AlertBlockComponent({
   };
 
   return (
-    <Alert
-      className={cn("flex lg:flex-row flex-col gap-2 my-6", styles[variant])}
-    >
-      <div className={cn("w-6 h-6", titleStyles[variant])}>
-        {icons[variant]}
-      </div>
-      <div
-        className={cn(
-          "flex flex-col justify-start items-start gap-1",
-        )}
-      >
-        {title && (
-          <AlertTitle className={titleStyles[variant]}>{title}</AlertTitle>
-        )}
+    <Alert className={cn("flex lg:flex-row flex-col gap-2 my-6", styles[variant])}>
+      <div className={cn("w-6 h-6", titleStyles[variant])}>{icons[variant]}</div>
+      <div className={cn("flex flex-col justify-start items-start gap-1")}>
+        {title && <AlertTitle className={titleStyles[variant]}>{title}</AlertTitle>}
         <AlertDescription className={contentStyles[variant]}>
           {parseInlineMarkdown(content)}
         </AlertDescription>
@@ -157,11 +109,7 @@ function AlertBlockComponent({
   );
 }
 
-function FAQBlockComponent({
-  items,
-}: {
-  items: { question: string; answer: string }[];
-}) {
+function FAQBlockComponent({ items }: { items: { question: string; answer: string }[] }) {
   return (
     <Accordion type="single" collapsible className="my-6 w-full">
       {items.map((item, i) => (
@@ -225,9 +173,7 @@ function ChecklistBlockComponent({
                   item.checked ? "text-primary" : "text-neutral-400",
                 )}
               />
-              <span className="text-neutral-600">
-                {parseInlineMarkdown(item.text)}
-              </span>
+              <span className="text-neutral-600">{parseInlineMarkdown(item.text)}</span>
             </li>
           ))}
         </ul>
@@ -236,13 +182,7 @@ function ChecklistBlockComponent({
   );
 }
 
-function DosDontsBlockComponent({
-  dos,
-  donts,
-}: {
-  dos: string[];
-  donts: string[];
-}) {
+function DosDontsBlockComponent({ dos, donts }: { dos: string[]; donts: string[] }) {
   return (
     <Card className="bg-gradient-to-br from-primary/5 to-background my-6 border-primary/20">
       <CardContent className="space-y-4 pt-6">
@@ -279,51 +219,28 @@ function DosDontsBlockComponent({
   );
 }
 
-function QuoteBlockComponent({
-  text,
-  author,
-}: {
-  text: string;
-  author?: string;
-}) {
+function QuoteBlockComponent({ text, author }: { text: string; author?: string }) {
   return (
     <blockquote className="my-6 pl-4 border-primary/30 border-l-4 text-neutral-600 italic">
       <p className="mb-2">{parseInlineMarkdown(text)}</p>
-      {author && (
-        <footer className="text-neutral-500 text-sm not-italic">
-          — {author}
-        </footer>
-      )}
+      {author && <footer className="text-neutral-500 text-sm not-italic">— {author}</footer>}
     </blockquote>
   );
 }
 
-function TipBlockComponent({
-  title,
-  content,
-}: {
-  title?: string;
-  content: string;
-}) {
+function TipBlockComponent({ title, content }: { title?: string; content: string }) {
   return (
     <div className="flex gap-3 bg-primary/5 my-6 p-4 border border-primary/20 rounded-lg">
       <Lightbulb className="mt-0.5 w-5 h-5 text-primary shrink-0" />
       <div>
-        {title && <p className="mb-1 font-semibold text-neutral-800">{title}
-        </p>}
+        {title && <p className="mb-1 font-semibold text-neutral-800">{title}</p>}
         <p className="text-neutral-600">{parseInlineMarkdown(content)}</p>
       </div>
     </div>
   );
 }
 
-function TableBlockComponent({
-  headers,
-  rows,
-}: {
-  headers: string[];
-  rows: string[][];
-}) {
+function TableBlockComponent({ headers, rows }: { headers: string[]; rows: string[][] }) {
   return (
     <div className="my-6 border border-neutral-200 rounded-lg overflow-x-auto">
       <table className="w-full text-sm">
@@ -341,15 +258,9 @@ function TableBlockComponent({
         </thead>
         <tbody>
           {rows.map((row, i) => (
-            <tr
-              key={i}
-              className={i % 2 === 0 ? "bg-white" : "bg-neutral-50/50"}
-            >
+            <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-neutral-50/50"}>
               {row.map((cell, j) => (
-                <td
-                  key={j}
-                  className="px-4 py-3 border-neutral-100 border-b text-neutral-600"
-                >
+                <td key={j} className="px-4 py-3 border-neutral-100 border-b text-neutral-600">
                   {parseInlineMarkdown(cell)}
                 </td>
               ))}
@@ -374,8 +285,7 @@ function CardBlockComponent({
 }) {
   const variantStyles = {
     default: "",
-    highlight:
-      "border-primary/20 bg-gradient-to-br from-primary/5 to-background",
+    highlight: "border-primary/20 bg-gradient-to-br from-primary/5 to-background",
     muted: "bg-neutral-50",
   };
 
@@ -394,13 +304,7 @@ function CardBlockComponent({
   );
 }
 
-function SectionBlockComponent({
-  title,
-  content,
-}: {
-  title?: string;
-  content: ContentBlock[];
-}) {
+function SectionBlockComponent({ title, content }: { title?: string; content: ContentBlock[] }) {
   return (
     <section className="my-8">
       {title && (
@@ -409,10 +313,7 @@ function SectionBlockComponent({
         </h2>
       )}
       {content.map((block, i) => (
-        <ContentBlockRenderer
-          key={i}
-          block={block}
-        />
+        <ContentBlockRenderer key={i} block={block} />
       ))}
     </section>
   );
@@ -429,15 +330,9 @@ function ImageBlockComponent({
 }) {
   return (
     <figure className="my-8">
-      <img
-        src={src}
-        alt={alt}
-        className="shadow-sm rounded-lg w-full"
-      />
+      <img src={src} alt={alt} className="shadow-sm rounded-lg w-full" />
       {caption && (
-        <figcaption className="mt-3 text-neutral-500 text-sm text-center">
-          {caption}
-        </figcaption>
+        <figcaption className="mt-3 text-neutral-500 text-sm text-center">{caption}</figcaption>
       )}
     </figure>
   );
@@ -454,23 +349,14 @@ function ContentBlockRenderer({ block }: { block: ContentBlock }) {
       return <ListBlockComponent style={block.style} items={block.items} />;
     case "alert":
       return (
-        <AlertBlockComponent
-          variant={block.variant}
-          title={block.title}
-          content={block.content}
-        />
+        <AlertBlockComponent variant={block.variant} title={block.title} content={block.content} />
       );
     case "faq":
       return <FAQBlockComponent items={block.items} />;
     case "accordion":
       return <AccordionBlockComponent items={block.items} />;
     case "checklist":
-      return (
-        <ChecklistBlockComponent
-          title={block.title}
-          items={block.items}
-        />
-      );
+      return <ChecklistBlockComponent title={block.title} items={block.items} />;
     case "dos-donts":
       return <DosDontsBlockComponent dos={block.dos} donts={block.donts} />;
     case "quote":
@@ -489,17 +375,9 @@ function ContentBlockRenderer({ block }: { block: ContentBlock }) {
         />
       );
     case "section":
-      return (
-        <SectionBlockComponent title={block.title} content={block.content} />
-      );
+      return <SectionBlockComponent title={block.title} content={block.content} />;
     case "image":
-      return (
-        <ImageBlockComponent
-          src={block.src}
-          alt={block.alt}
-          caption={block.caption}
-        />
-      );
+      return <ImageBlockComponent src={block.src} alt={block.alt} caption={block.caption} />;
     default:
       return null;
   }

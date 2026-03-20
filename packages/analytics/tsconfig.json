@@ -3,18 +3,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@thetis/ui/*": [
-        "../ui/src/*"
-      ]
+      "@/*": ["./src/*"],
+      "@thetis/ui/*": ["../ui/src/*"]
     }
   },
-  "include": [
-    "."
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["."],
+  "exclude": ["node_modules"]
 }

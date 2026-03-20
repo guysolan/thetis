@@ -7,6 +7,7 @@ type: "Evidence"
 🕒 Short, sharp, effective.
 
 Routine:
+
 1. Seated ankle pumps × 30
 2. Towel stretch hold 20 s
 3. Foot circles 20 × each way

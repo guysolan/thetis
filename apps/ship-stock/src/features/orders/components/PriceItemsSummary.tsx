@@ -17,13 +17,9 @@ const PriceItemsSummary = ({ showPrice = false }: PriceItemsSummaryProps) => {
   return (
     <div className="space-y-2">
       {orderItems.map((item, index) => (
-        <div
-          key={item.item_id}
-          className="flex justify-between items-center text-sm"
-        >
+        <div key={item.item_id} className="flex justify-between items-center text-sm">
           <span>
-            {itemsView?.find((i) => String(i.item_id) === String(item.item_id))
-              ?.item_name}
+            {itemsView?.find((i) => String(i.item_id) === String(item.item_id))?.item_name}
             {" x "}
             {Math.abs(item.quantity_change)}
           </span>

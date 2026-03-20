@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@thetis/ui/form";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@thetis/ui/form";
 import { Textarea as TextareaWrap } from "@thetis/ui/textarea";
 import { useFormContext } from "react-hook-form";
 import { cn } from "@/lib/utils";
@@ -35,9 +29,7 @@ const Input = ({
       name={name}
       render={({ field }) => (
         <FormItem className="flex-grow w-full">
-          <FormLabel className={label ? "not-sr-only" : "sr-only"}>
-            {label}
-          </FormLabel>
+          <FormLabel className={label ? "not-sr-only" : "sr-only"}>{label}</FormLabel>
           <FormMessage />
           <FormControl>
             <TextareaWrap
@@ -52,10 +44,9 @@ const Input = ({
               )}
               onChange={(e) =>
                 type === "number"
-                  ? field.onChange(
-                    e.target.value === "" ? null : Number(e.target.value),
-                  )
-                  : field.onChange(e.target.value)}
+                  ? field.onChange(e.target.value === "" ? null : Number(e.target.value))
+                  : field.onChange(e.target.value)
+              }
             />
           </FormControl>
         </FormItem>

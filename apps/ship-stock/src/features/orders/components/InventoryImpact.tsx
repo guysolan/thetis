@@ -43,11 +43,9 @@ function LocationSection({ location }: { location: LocationImpact }) {
   const form = useFormContext();
   const orderDate = form.watch("order_date");
   const { fields } = useFieldArray({ name: location.fieldName });
-  const { getItemQuantities } = useStockQuantities(
-    location.fieldName,
-    location.addressName,
-    { orderDate: orderDate ?? undefined },
-  );
+  const { getItemQuantities } = useStockQuantities(location.fieldName, location.addressName, {
+    orderDate: orderDate ?? undefined,
+  });
 
   const currency = useWatch({
     control: form.control,
@@ -68,8 +66,7 @@ function LocationSection({ location }: { location: LocationImpact }) {
   // Build visible rows applying the sign filter
   const visibleRows = fields
     .map((field, index) => {
-      const quantityChange =
-        form.watch(`${location.fieldName}.${index}.quantity_change`) || 0;
+      const quantityChange = form.watch(`${location.fieldName}.${index}.quantity_change`) || 0;
 
       if (filter === "negative" && quantityChange >= 0) return null;
       if (filter === "positive" && quantityChange <= 0) return null;
@@ -82,8 +79,9 @@ function LocationSection({ location }: { location: LocationImpact }) {
       const quantities = getItemQuantities(itemId);
       const itemPrice = form.watch(`${location.fieldName}.${index}.item_price`) || 0;
       const itemTax = form.watch(`${location.fieldName}.${index}.item_tax`) || 0;
-      const itemTotal = form.watch(`${location.fieldName}.${index}.item_total`) ||
-        (quantityChange * itemPrice * (1 + itemTax));
+      const itemTotal =
+        form.watch(`${location.fieldName}.${index}.item_total`) ||
+        quantityChange * itemPrice * (1 + itemTax);
 
       return { field, itemId, itemName, quantityChange, quantities, itemPrice, itemTotal };
     })
@@ -92,9 +90,7 @@ function LocationSection({ location }: { location: LocationImpact }) {
   if (visibleRows.length === 0) return null;
 
   const IconComponent = showCost ? ShoppingCart : MapPin;
-  const grandTotal = showCost
-    ? visibleRows.reduce((sum, row) => sum + (row.itemTotal ?? 0), 0)
-    : 0;
+  const grandTotal = showCost ? visibleRows.reduce((sum, row) => sum + (row.itemTotal ?? 0), 0) : 0;
 
   return (
     <div>
@@ -127,25 +123,17 @@ function LocationSection({ location }: { location: LocationImpact }) {
         <TableBody>
           {visibleRows.map((row) => (
             <TableRow key={row.field.id}>
-              <TableCell className="text-sm font-medium py-2">
-                {row.itemName}
-              </TableCell>
+              <TableCell className="text-sm font-medium py-2">{row.itemName}</TableCell>
               {showCost ? (
                 <>
                   <TableCell className="text-sm text-center py-2">
                     {roundIfRequired(row.quantityChange)}
                   </TableCell>
                   <TableCell className="text-sm text-right py-2 text-muted-foreground">
-                    <NumberFlow
-                      value={row.itemPrice ?? 0}
-                      format={currencyFormat}
-                    />
+                    <NumberFlow value={row.itemPrice ?? 0} format={currencyFormat} />
                   </TableCell>
                   <TableCell className="text-sm text-right py-2 font-medium">
-                    <NumberFlow
-                      value={row.itemTotal ?? 0}
-                      format={currencyFormat}
-                    />
+                    <NumberFlow value={row.itemTotal ?? 0} format={currencyFormat} />
                   </TableCell>
                 </>
               ) : (
@@ -182,10 +170,7 @@ function LocationSection({ location }: { location: LocationImpact }) {
                 Total
               </TableCell>
               <TableCell className="text-sm text-right py-2 font-semibold">
-                <NumberFlow
-                  value={grandTotal}
-                  format={currencyFormat}
-                />
+                <NumberFlow value={grandTotal} format={currencyFormat} />
               </TableCell>
             </TableRow>
           </TableFooter>
@@ -195,15 +180,15 @@ function LocationSection({ location }: { location: LocationImpact }) {
   );
 }
 
-const InventoryImpact = ({
-  locations,
-  title = "Inventory Impact",
-}: InventoryImpactProps) => {
+const InventoryImpact = ({ locations, title = "Inventory Impact" }: InventoryImpactProps) => {
   return (
     <div className="rounded-lg border border-border bg-muted/30 p-4 space-y-4">
       <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
       {locations.map((location, index) => (
-        <LocationSection key={`${location.fieldName}-${location.filter ?? index}`} location={location} />
+        <LocationSection
+          key={`${location.fieldName}-${location.filter ?? index}`}
+          location={location}
+        />
       ))}
     </div>
   );

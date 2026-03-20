@@ -3,7 +3,9 @@ import { supabase } from "@/lib/supabase";
 import { OrderView } from "../../../types";
 
 export const selectOrders = async () => {
-  const { data, error } = await supabase.from("orders_view").select("*")
+  const { data, error } = await supabase
+    .from("orders_view")
+    .select("*")
     .order("order_date", { ascending: false })
     .returns<OrderView[]>();
 
@@ -22,5 +24,4 @@ export const selectOrdersQueryOptions = () => {
   });
 };
 
-export const useSelectOrders = () =>
-  useSuspenseQuery(selectOrdersQueryOptions());
+export const useSelectOrders = () => useSuspenseQuery(selectOrdersQueryOptions());

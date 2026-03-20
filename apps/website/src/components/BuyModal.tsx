@@ -15,9 +15,7 @@ export default function BuyModal() {
       triggerChildren={<span>Buy Now</span>}
     >
       <div className="space-y-4 w-full text-left">
-        <h3 className="font-semibold text-2xl lg:text-3xl">
-          Achilles Tendon Rupture Splint
-        </h3>
+        <h3 className="font-semibold text-2xl lg:text-3xl">Achilles Tendon Rupture Splint</h3>
         <BuyButtonVariants />
         <div className="flex flex-col justify-center items-center gap-4 md:gap-8">
           <FreeAndSecure />

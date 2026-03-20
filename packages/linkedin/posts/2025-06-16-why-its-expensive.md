@@ -25,10 +25,10 @@ So, why do we insist on it?
 
 💪 For us, the reasons are clear:
 
-* Supporting UK manufacturing jobs
-* Maintaining strict quality control
-* Reducing supply chain vulnerabilities
-* Contributing to a country which shares the companies values
+- Supporting UK manufacturing jobs
+- Maintaining strict quality control
+- Reducing supply chain vulnerabilities
+- Contributing to a country which shares the companies values
 
 ✨ The higher price is a trade-off we believe is worth making for a product made entirely in the UK. It's a core part of our identity.
 

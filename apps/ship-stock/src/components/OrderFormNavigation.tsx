@@ -35,13 +35,7 @@ export function OrderFormNavigation({
       </div>
       <div>
         {onNext && (
-          <Button
-            type="button"
-            onClick={onNext}
-            size="sm"
-            disabled={isLoading}
-            className="gap-2"
-          >
+          <Button type="button" onClick={onNext} size="sm" disabled={isLoading} className="gap-2">
             {nextLabel}
             <ArrowRight size={16} />
           </Button>

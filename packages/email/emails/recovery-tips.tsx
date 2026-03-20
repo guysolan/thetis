@@ -33,8 +33,8 @@ export const RecoveryTipsEmail = ({
         />
       </Head>
       <Preview>
-        Essential recovery tips and product recommendations for your Achilles
-        rupture recovery journey
+        Essential recovery tips and product recommendations for your Achilles rupture recovery
+        journey
       </Preview>
       <Tailwind>
         <Body className="bg-gray-50 mx-auto my-auto font-sans">
@@ -51,14 +51,12 @@ export const RecoveryTipsEmail = ({
 
             {/* Greeting */}
             <Section className="mt-8">
+              <Text className="text-[16px] text-gray-700 leading-[26px]">Hi {recipientName},</Text>
               <Text className="text-[16px] text-gray-700 leading-[26px]">
-                Hi {recipientName},
-              </Text>
-              <Text className="text-[16px] text-gray-700 leading-[26px]">
-                Recovering from an Achilles rupture can feel overwhelming, but
-                with the right approach and products, you can make significant
-                progress. Here are some essential tips and recommendations based
-                on what thousands of patients have found most helpful.
+                Recovering from an Achilles rupture can feel overwhelming, but with the right
+                approach and products, you can make significant progress. Here are some essential
+                tips and recommendations based on what thousands of patients have found most
+                helpful.
               </Text>
             </Section>
 
@@ -71,34 +69,31 @@ export const RecoveryTipsEmail = ({
               <Text className="mb-3 text-[15px] text-gray-700 leading-[24px]">
                 <strong>1. Protect Your Tendon at Night</strong>
                 <br />
-                Your Achilles tendon is most vulnerable during sleep when you
-                can't control your foot position. Sleeping without protection
-                risks re-rupture and can undo weeks of healing. Always use a
-                boot or specialized night splint when sleeping.
+                Your Achilles tendon is most vulnerable during sleep when you can't control your
+                foot position. Sleeping without protection risks re-rupture and can undo weeks of
+                healing. Always use a boot or specialized night splint when sleeping.
               </Text>
 
               <Text className="mb-3 text-[15px] text-gray-700 leading-[24px]">
                 <strong>2. Elevate and Ice Regularly</strong>
                 <br />
-                Elevate your leg above heart level for 20-30 minutes several
-                times a day, especially in the first few weeks. Combine with ice
-                packs to reduce swelling and pain.
+                Elevate your leg above heart level for 20-30 minutes several times a day, especially
+                in the first few weeks. Combine with ice packs to reduce swelling and pain.
               </Text>
 
               <Text className="mb-3 text-[15px] text-gray-700 leading-[24px]">
                 <strong>3. Follow Your Surgeon's Protocol</strong>
                 <br />
-                Every recovery is unique. Stick to your surgeon's specific
-                weight-bearing and movement guidelines. Don't rush the process -
-                healing takes time.
+                Every recovery is unique. Stick to your surgeon's specific weight-bearing and
+                movement guidelines. Don't rush the process - healing takes time.
               </Text>
 
               <Text className="mb-3 text-[15px] text-gray-700 leading-[24px]">
                 <strong>4. Prepare for Each Phase</strong>
                 <br />
-                Recovery happens in phases: non-weight bearing, partial weight
-                bearing, and full weight bearing. Understanding what to expect
-                in each phase helps you prepare mentally and physically.
+                Recovery happens in phases: non-weight bearing, partial weight bearing, and full
+                weight bearing. Understanding what to expect in each phase helps you prepare
+                mentally and physically.
               </Text>
             </Section>
 
@@ -109,34 +104,30 @@ export const RecoveryTipsEmail = ({
               </Heading>
 
               <Text className="mb-4 text-[15px] text-gray-700 leading-[24px]">
-                Based on feedback from thousands of patients, here are the
-                products that make the biggest difference:
+                Based on feedback from thousands of patients, here are the products that make the
+                biggest difference:
               </Text>
 
               <ul className="m-0 mb-4 pl-4 text-[15px] text-gray-700 leading-[26px] list-disc">
                 <li>
-                  <strong>Walking Boot:</strong>{" "}
-                  Essential for protection during the day. Your surgeon will
-                  recommend a specific type.
+                  <strong>Walking Boot:</strong> Essential for protection during the day. Your
+                  surgeon will recommend a specific type.
                 </li>
                 <li>
-                  <strong>Crutches:</strong>{" "}
-                  Necessary for non-weight bearing phases. Consider padded grips
-                  for comfort.
+                  <strong>Crutches:</strong> Necessary for non-weight bearing phases. Consider
+                  padded grips for comfort.
                 </li>
                 <li>
-                  <strong>Shoe Leveler:</strong>{" "}
-                  Prevents back, hip, and shoulder pain by equalizing leg length
-                  when wearing a boot.
+                  <strong>Shoe Leveler:</strong> Prevents back, hip, and shoulder pain by equalizing
+                  leg length when wearing a boot.
                 </li>
                 <li>
-                  <strong>Waterproof Boot Cover:</strong>{" "}
-                  Allows safe showering without removing your boot.
+                  <strong>Waterproof Boot Cover:</strong> Allows safe showering without removing
+                  your boot.
                 </li>
                 <li>
-                  <strong>Night Splint:</strong>{" "}
-                  Lightweight alternative to sleeping in your heavy boot (see
-                  below).
+                  <strong>Night Splint:</strong> Lightweight alternative to sleeping in your heavy
+                  boot (see below).
                 </li>
               </ul>
             </Section>
@@ -147,24 +138,18 @@ export const RecoveryTipsEmail = ({
                 🌙 Sleep Better with Our Night Splint
               </Heading>
               <Text className="mb-4 text-[15px] text-gray-700 leading-[24px]">
-                Sleeping in a heavy walking boot (1.5kg+) is miserable. That's
-                why we created the Thetis Night Splint - a lightweight,
-                breathable alternative that provides the same tendon protection
-                with dramatically better comfort.
+                Sleeping in a heavy walking boot (1.5kg+) is miserable. That's why we created the
+                Thetis Night Splint - a lightweight, breathable alternative that provides the same
+                tendon protection with dramatically better comfort.
               </Text>
               <Text className="mb-4 text-[15px] text-gray-700 leading-[24px]">
                 <strong>Key Benefits:</strong>
               </Text>
               <ul className="m-0 mb-4 pl-4 text-[15px] text-gray-700 leading-[26px] list-disc">
-                <li>
-                  Lightweight (under 200g) - a fraction of your boot's weight
-                </li>
+                <li>Lightweight (under 200g) - a fraction of your boot's weight</li>
                 <li>Breathable - no more sweating through the night</li>
                 <li>Maintains correct plantarflexion angle for healing</li>
-                <li>
-                  Surgeon-approved design with zero re-ruptures in 5,000+
-                  patients
-                </li>
+                <li>Surgeon-approved design with zero re-ruptures in 5,000+ patients</li>
                 <li>Washable liner for hygiene</li>
               </ul>
               <Section className="my-6 text-center">
@@ -186,26 +171,21 @@ export const RecoveryTipsEmail = ({
                 📚 Complete Your Recovery with Our Course
               </Heading>
               <Text className="mb-4 text-[15px] text-gray-700 leading-[24px]">
-                Recovery is more than just products - it's about understanding
-                what to expect, when to progress, and how to work with your care
-                team. Our comprehensive Achilles Recovery Course guides you
-                through every phase of recovery.
+                Recovery is more than just products - it's about understanding what to expect, when
+                to progress, and how to work with your care team. Our comprehensive Achilles
+                Recovery Course guides you through every phase of recovery.
               </Text>
               <Text className="mb-4 text-[15px] text-gray-700 leading-[24px]">
                 <strong>What's Included:</strong>
               </Text>
               <ul className="m-0 mb-4 pl-4 text-[15px] text-gray-700 leading-[26px] list-disc">
-                <li>
-                  31 easily digestible lessons covering your entire recovery
-                </li>
+                <li>31 easily digestible lessons covering your entire recovery</li>
                 <li>Step-by-step guidance for each recovery phase</li>
                 <li>Physiotherapy exercises with clear illustrations</li>
                 <li>Questions to ask your surgeon at each stage</li>
                 <li>Boot comparison guide to help you choose the right one</li>
                 <li>Product recommendations and recovery tips</li>
-                <li>
-                  Timeline-based content that matches your recovery progress
-                </li>
+                <li>Timeline-based content that matches your recovery progress</li>
               </ul>
               <Section className="my-6 text-center">
                 <Button
@@ -220,13 +200,12 @@ export const RecoveryTipsEmail = ({
             {/* Closing */}
             <Section className="mt-8 pt-6 border-gray-200 border-t">
               <Text className="text-[16px] text-gray-700 leading-[26px]">
-                Remember, recovery is a marathon, not a sprint. Be patient with
-                yourself, follow your surgeon's guidance, and use the right
-                tools to support your healing.
+                Remember, recovery is a marathon, not a sprint. Be patient with yourself, follow
+                your surgeon's guidance, and use the right tools to support your healing.
               </Text>
               <Text className="mt-4 text-[16px] text-gray-700 leading-[26px]">
-                If you have any questions about your recovery, feel free to
-                reply to this email. We're here to help.
+                If you have any questions about your recovery, feel free to reply to this email.
+                We're here to help.
               </Text>
               <Text className="mt-4 text-[16px] text-gray-700 leading-[26px]">
                 Wishing you a successful recovery,

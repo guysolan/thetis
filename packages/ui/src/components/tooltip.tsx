@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Tooltip } from "@base-ui/react/tooltip"
+import * as React from "react";
+import { Tooltip } from "@base-ui/react/tooltip";
 
-import { cn } from "../utils"
+import { cn } from "../utils";
 
-const TooltipProvider = Tooltip.Provider
+const TooltipProvider = Tooltip.Provider;
 
-const TooltipRoot = Tooltip.Root
+const TooltipRoot = Tooltip.Root;
 
-const TooltipTrigger = Tooltip.Trigger
+const TooltipTrigger = Tooltip.Trigger;
 
 const TooltipContent = React.forwardRef<
   HTMLDivElement,
@@ -23,13 +23,13 @@ const TooltipContent = React.forwardRef<
         ref={ref}
         className={cn(
           "z-50 overflow-hidden rounded-md bg-zinc-900 px-3 py-1.5 text-xs text-zinc-50 animate-in fade-in-0 zoom-in-95 data-[closed]:animate-out data-[closed]:fade-out-0 data-[closed]:zoom-out-95 dark:bg-zinc-50 dark:text-zinc-900",
-          className
+          className,
         )}
         {...props}
       />
     </Tooltip.Positioner>
   </Tooltip.Portal>
-))
-TooltipContent.displayName = "TooltipContent"
+));
+TooltipContent.displayName = "TooltipContent";
 
-export { TooltipRoot as Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }
+export { TooltipRoot as Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };

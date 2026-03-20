@@ -22,16 +22,10 @@ const OrderCarriage = () => {
   const previewContent = (
     <div className="flex flex-col gap-y-2">
       <p>
-        {deliveryDates[0]
-          ? dayjs(deliveryDates[0]).format("DD/MM/YYYY")
-          : "Not set"} - {deliveryDates[1]
-          ? dayjs(deliveryDates[1]).format("DD/MM/YYYY")
-          : "Not set"}
+        {deliveryDates[0] ? dayjs(deliveryDates[0]).format("DD/MM/YYYY") : "Not set"} -{" "}
+        {deliveryDates[1] ? dayjs(deliveryDates[1]).format("DD/MM/YYYY") : "Not set"}
       </p>
-      <NumberFlow
-        value={carriage || 0}
-        format={{ style: "currency", currency: currency }}
-      />
+      <NumberFlow value={carriage || 0} format={{ style: "currency", currency: currency }} />
     </div>
   );
 

@@ -117,62 +117,58 @@ const StickyAddToCart: React.FC<StickyAddToCartProps> = ({
       <div className="mx-auto px-4 py-3 max-w-7xl">
         <div className="flex justify-between items-center gap-4">
           <div className="flex flex-1 items-center gap-3 min-w-0">
-            {variant === "splint"
-              ? (
-                <>
-                  <img
-                    src="/images/night_splint_square_small.jpg"
-                    alt=""
-                    className="rounded-lg w-10 h-10 object-cover shrink-0"
-                  />
-                  <div className="min-w-0">
-                    <p className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm truncate">
-                      {productTitle || t.splintTitle}
-                    </p>
-                    <p className="font-medium text-primary text-xs">
-                      {formattedPrice} · {t.freeShipping}
-                    </p>
-                  </div>
-                </>
-              )
-              : (
+            {variant === "splint" ? (
+              <>
+                <img
+                  src="/images/night_splint_square_small.jpg"
+                  alt=""
+                  className="rounded-lg w-10 h-10 object-cover shrink-0"
+                />
                 <div className="min-w-0">
-                  <p className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-                    {t.courseTitle}
+                  <p className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm truncate">
+                    {productTitle || t.splintTitle}
                   </p>
-                  <p className="text-neutral-500 text-xs">
-                    31 expert lessons
+                  <p className="font-medium text-primary text-xs">
+                    {formattedPrice} · {t.freeShipping}
                   </p>
                 </div>
-              )}
+              </>
+            ) : (
+              <div className="min-w-0">
+                <p className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                  {t.courseTitle}
+                </p>
+                <p className="text-neutral-500 text-xs">31 expert lessons</p>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            {variant === "splint"
-              ? (
-                <button
-                  onClick={handleAddSplintToCart}
-                  disabled={isAdding}
-                  className={cn(
-                    buttonVariants({ variant: "default", size: "lg" }),
-                    "gap-2 disabled:opacity-50",
-                  )}
-                >
-                  {isAdding
-                    ? <Loader2 className="w-4 h-4 animate-spin" />
-                    : <ShoppingCart className="w-4 h-4" />}
-                  {isAdding ? "Adding..." : t.addToCart}
-                </button>
-              )
-              : (
-                <CourseBuyButton
-                  productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
-                  variant="default"
-                  size="lg"
-                >
-                  {t.addToCart}
-                </CourseBuyButton>
-              )}
+            {variant === "splint" ? (
+              <button
+                onClick={handleAddSplintToCart}
+                disabled={isAdding}
+                className={cn(
+                  buttonVariants({ variant: "default", size: "lg" }),
+                  "gap-2 disabled:opacity-50",
+                )}
+              >
+                {isAdding ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <ShoppingCart className="w-4 h-4" />
+                )}
+                {isAdding ? "Adding..." : t.addToCart}
+              </button>
+            ) : (
+              <CourseBuyButton
+                productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                variant="default"
+                size="lg"
+              >
+                {t.addToCart}
+              </CourseBuyButton>
+            )}
 
             <button
               onClick={scrollToTop}

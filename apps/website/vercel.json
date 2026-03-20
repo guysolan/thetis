@@ -2,6 +2,26 @@
   "installCommand": "cd ../.. && bun install",
   "buildCommand": "cd ../.. && turbo build --filter=@thetis/website",
   "ignoreCommand": "(git rev-list --count HEAD | grep -q '^1$' || git diff HEAD^ HEAD --quiet -- apps/website/ packages/ui/ turbo.json package.json bun.lockb) && exit 1 || exit 0",
+  "redirects": [
+    { "source": "/courses", "destination": "/course", "permanent": true },
+    { "source": "/courses/:path*", "destination": "/course", "permanent": true },
+    { "source": "/guide/articles", "destination": "/course", "permanent": true },
+    { "source": "/de/leitfaden/artikel", "destination": "/de/kurs", "permanent": true },
+    { "source": "/fr/guide/articles", "destination": "/fr/cours", "permanent": true },
+    { "source": "/es/guia/articulos", "destination": "/es/curso", "permanent": true },
+    { "source": "/it/guida/articoli", "destination": "/it/corso", "permanent": true },
+    { "source": "/returns-policy", "destination": "/return-policy", "permanent": true },
+    { "source": "/splint", "destination": "/achilles-rupture-splint", "permanent": true },
+    { "source": "/night-splint", "destination": "/achilles-rupture-splint", "permanent": true },
+    { "source": "/achilles-tendon-splint", "destination": "/achilles-rupture-splint", "permanent": true },
+    { "source": "/achilles-splint", "destination": "/achilles-rupture-splint", "permanent": true },
+    { "source": "/de/kurse", "destination": "/de/kurs", "permanent": true },
+    { "source": "/de/kurse/:path*", "destination": "/de/kurs", "permanent": true },
+    { "source": "/es/cursos", "destination": "/es/curso", "permanent": true },
+    { "source": "/es/cursos/:path*", "destination": "/es/curso", "permanent": true },
+    { "source": "/it/corsi", "destination": "/it/corso", "permanent": true },
+    { "source": "/it/corsi/:path*", "destination": "/it/corso", "permanent": true }
+  ],
   "git": {
     "deploymentEnabled": {
       "main": true,

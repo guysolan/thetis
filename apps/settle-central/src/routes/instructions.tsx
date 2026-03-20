@@ -1,20 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import React from "react";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@thetis/ui/accordion";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@thetis/ui/accordion";
 import { Card, CardHeader, CardTitle, CardContent } from "@thetis/ui/card";
-import {
-  Table,
-  TableHead,
-  TableHeader,
-  TableBody,
-  TableCell,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableHead, TableHeader, TableBody, TableCell, TableRow } from "@thetis/ui/table";
 
 const Instructions = () => {
   return (

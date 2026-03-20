@@ -30,7 +30,7 @@ Set-up
 
 If I couldn't code and hired programmers @ £50 per hour the R&D for the software would be
 
-1500 hours * £50 = £75,000
+1500 hours \* £50 = £75,000
 
 Ongoing
 

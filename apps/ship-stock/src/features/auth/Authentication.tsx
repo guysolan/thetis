@@ -40,10 +40,8 @@ export default function Authentication() {
             },
             className: {
               container: "w-full",
-              button:
-                "w-full bg-neutral-900 hover:bg-neutral-800 text-neutral-50",
-              input:
-                "w-full bg-neutral-50 border-neutral-200 focus:border-neutral-400",
+              button: "w-full bg-neutral-900 hover:bg-neutral-800 text-neutral-50",
+              input: "w-full bg-neutral-50 border-neutral-200 focus:border-neutral-400",
               label: "text-neutral-900",
               loader: "border-neutral-900",
               message: "text-neutral-900",

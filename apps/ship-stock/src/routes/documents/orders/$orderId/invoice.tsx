@@ -16,12 +16,7 @@ const OrdersPage = () => {
         orderNumber={order.order_id}
         currency={order.currency}
       />
-      <Document
-        order={order}
-        options={documentOptions}
-        title="Invoice"
-        documentType="invoice"
-      />
+      <Document order={order} options={documentOptions} title="Invoice" documentType="invoice" />
     </>
   );
 };

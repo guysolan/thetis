@@ -1,11 +1,4 @@
-import {
-  PieChart,
-  Pie,
-  ResponsiveContainer,
-  Cell,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { PieChart, Pie, ResponsiveContainer, Cell, Tooltip, Legend } from "recharts";
 import type { TooltipProps } from "recharts";
 import { useState, useEffect } from "react";
 import isMobile from "ismobilejs";
@@ -79,9 +72,7 @@ export default function GenderDistributionPieChart() {
             cx="50%"
             cy="45%"
             labelLine={true}
-            label={({ name, percent }) =>
-              `${name}: ${(percent * 100).toFixed(1)}%`
-            }
+            label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(1)}%`}
             outerRadius={isPhoneDevice ? 80 : 100}
             fill="#8884d8"
             dataKey="value"
@@ -104,8 +95,8 @@ export default function GenderDistributionPieChart() {
         </PieChart>
       </ResponsiveContainer>
       <p className="mt-8 text-gray-600 text-sm text-center">
-        Based on analysis of global research showing 4.83:1 male to female ratio
-        in Achilles tendon ruptures.
+        Based on analysis of global research showing 4.83:1 male to female ratio in Achilles tendon
+        ruptures.
       </p>
     </div>
   );

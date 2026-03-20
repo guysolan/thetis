@@ -9,10 +9,7 @@ const FDADetails = () => {
 
       <p>Manufacturer and Owner's name: THETIS MEDICAL LTD</p>
 
-      <p>
-        Manufacturer and Owner's complete address: 15 Leopold Street,
-        Birmingham, GB B12 0UP
-      </p>
+      <p>Manufacturer and Owner's complete address: 15 Leopold Street, Birmingham, GB B12 0UP</p>
 
       <p>Owner/Operator Number: 10084925</p>
 

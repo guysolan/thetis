@@ -6,7 +6,11 @@ const ItemTypeSelect = ({
   name,
   className,
   disabled,
-}: { name: string; className?: string; disabled?: boolean }) => {
+}: {
+  name: string;
+  className?: string;
+  disabled?: boolean;
+}) => {
   return (
     <Select
       name={name}

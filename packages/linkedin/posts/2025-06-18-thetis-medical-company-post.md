@@ -15,6 +15,6 @@ Understanding these variations is crucial for:
 
 Check out our interactive timeline and discover how your country's approach compares to others around the world.
 
- #AchillesRupture #MedicalResearch #Healthcare #Orthopedics #GlobalHealth #ThetisMedical
+#AchillesRupture #MedicalResearch #Healthcare #Orthopedics #GlobalHealth #ThetisMedical
 
 Try it → <https://thetismedical.com/research/timeline-by-country>

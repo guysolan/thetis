@@ -7,14 +7,14 @@ import { buttonVariants } from "@thetis/ui/button";
 const DownloadAmazonSettlementReport = ({
   countryCode,
   reportId,
-}: { countryCode: string; reportId: string }) => {
+}: {
+  countryCode: string;
+  reportId: string;
+}) => {
   const { data: csvData } = useAmazonReportByIdAsCSV(reportId, countryCode);
   return (
     <>
-      <CSVLink
-        data={csvData}
-        className={buttonVariants({ variant: "default" })}
-      >
+      <CSVLink data={csvData} className={buttonVariants({ variant: "default" })}>
         Download CSV
       </CSVLink>
       <CSVDownload data={csvData} target="_blank" className="sr-only" />

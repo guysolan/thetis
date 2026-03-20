@@ -3,12 +3,8 @@ import { Button } from "@thetis/ui/button";
 import { useDeleteAmazonReport } from "@/api/deleteAmazonReport";
 import { Trash2, Loader2 } from "lucide-react";
 
-const DeleteFolderButton = ({
-  disabled,
-  reportId,
-}: { disabled: boolean; reportId: string }) => {
-  const { mutate: deleteReport, isPending: isDeletingReport } =
-    useDeleteAmazonReport();
+const DeleteFolderButton = ({ disabled, reportId }: { disabled: boolean; reportId: string }) => {
+  const { mutate: deleteReport, isPending: isDeletingReport } = useDeleteAmazonReport();
   return (
     <Button
       variant="destructive"

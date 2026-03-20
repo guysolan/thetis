@@ -7,16 +7,16 @@ import StarterKit from "@tiptap/starter-kit";
 
 // Add your extensions here
 const extensions = [
-    StarterKit,
-    Underline,
-    Link.configure({
-        openOnClick: false,
-        autolink: true,
-        defaultProtocol: "https",
-    }),
+  StarterKit,
+  Underline,
+  Link.configure({
+    openOnClick: false,
+    autolink: true,
+    defaultProtocol: "https",
+  }),
 ];
 
 export function registerExtensions(options?: { placeholder?: string }) {
-    const { placeholder } = options ?? {};
-    return [...extensions, Placeholder.configure({ placeholder })];
+  const { placeholder } = options ?? {};
+  return [...extensions, Placeholder.configure({ placeholder })];
 }

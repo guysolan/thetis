@@ -68,12 +68,7 @@ const MoneyBackGuarantee: React.FC<MoneyBackGuaranteeProps> = ({
 
   if (variant === "badge") {
     return (
-      <div
-        className={cn(
-          "flex items-center gap-2 text-primary dark:text-primary/80",
-          className,
-        )}
-      >
+      <div className={cn("flex items-center gap-2 text-primary dark:text-primary/80", className)}>
         <Shield className="flex-shrink-0 w-4 h-4" />
         <span className="font-medium text-sm">{t.badge}</span>
       </div>
@@ -89,9 +84,7 @@ const MoneyBackGuarantee: React.FC<MoneyBackGuaranteeProps> = ({
         )}
       >
         <Shield className="w-4 h-4 text-primary dark:text-primary/80" />
-        <span className="font-medium text-primary dark:text-primary/80 text-sm">
-          {t.badge}
-        </span>
+        <span className="font-medium text-primary dark:text-primary/80 text-sm">{t.badge}</span>
       </div>
     );
   }
@@ -111,12 +104,8 @@ const MoneyBackGuarantee: React.FC<MoneyBackGuaranteeProps> = ({
           <h4 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-base">
             {t.title}
           </h4>
-          <p className="mb-2 text-neutral-700 dark:text-neutral-300 text-sm">
-            {t.description}
-          </p>
-          <p className="text-primary/70 dark:text-primary/60 text-xs">
-            {t.conditions}
-          </p>
+          <p className="mb-2 text-neutral-700 dark:text-neutral-300 text-sm">{t.description}</p>
+          <p className="text-primary/70 dark:text-primary/60 text-xs">{t.conditions}</p>
         </div>
       </div>
     </div>

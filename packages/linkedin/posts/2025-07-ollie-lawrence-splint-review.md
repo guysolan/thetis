@@ -6,9 +6,10 @@ type: "Story"
 
 📈 The list of pro athletes choosing night splints keeps growing. Latest: **Ollie Lawrence**, England Rugby.
 
-> "I've been sleeping in it since I came out the cast—**absolute game changer**." – *Ollie Lawrence* (athletes.ts)
+> "I've been sleeping in it since I came out the cast—**absolute game changer**." – _Ollie Lawrence_ (athletes.ts)
 
 Clinician takeaways:
+
 - Secures tendon during early rehab exercises 🏋️‍♂️
 - Replaces hot boot at night → temp ↓, comfort ↑
 - Compliance builds confidence—an intangible yet priceless KPI

@@ -25,42 +25,40 @@ const STOCKTAKE_STEPS: Step[] = [
   { number: 2, label: "Items", key: "items" },
 ];
 
-const getDefaultNewOrder = ():
-  & MultiOrderFormData
-  & Record<string, unknown> => ({
-    order_type: "sell",
-    order_date: new Date().toISOString(),
-    from_company_id: "",
-    from_billing_address_id: "",
-    from_shipping_address_id: "",
-    to_company_id: "",
-    to_billing_address_id: "",
-    to_shipping_address_id: "",
-    company_id: "",
-    unit_of_measurement: "metric",
-    currency: "GBP",
-    carriage: 0,
-    delivery_dates: [null, null],
-    package_items: [],
-    order_items: [],
-    consumed_items: [],
-    produced_items: [],
-    from_items: [],
-    to_items: [],
-    reason_for_export: null,
-    shipment_number: null,
-    airwaybill: null,
-    mode_of_transport: null,
-    incoterms: null,
-    mode: "direct",
-    item_type: "product",
-    ...Object.fromEntries(
-      PRICE_BAND_QUANTITIES.flatMap((q) => [
-        [`quote_quantity_${q}`, q],
-        [`quote_price_${q}`, 0],
-      ]),
-    ),
-  });
+const getDefaultNewOrder = (): MultiOrderFormData & Record<string, unknown> => ({
+  order_type: "sell",
+  order_date: new Date().toISOString(),
+  from_company_id: "",
+  from_billing_address_id: "",
+  from_shipping_address_id: "",
+  to_company_id: "",
+  to_billing_address_id: "",
+  to_shipping_address_id: "",
+  company_id: "",
+  unit_of_measurement: "metric",
+  currency: "GBP",
+  carriage: 0,
+  delivery_dates: [null, null],
+  package_items: [],
+  order_items: [],
+  consumed_items: [],
+  produced_items: [],
+  from_items: [],
+  to_items: [],
+  reason_for_export: null,
+  shipment_number: null,
+  airwaybill: null,
+  mode_of_transport: null,
+  incoterms: null,
+  mode: "direct",
+  item_type: "product",
+  ...Object.fromEntries(
+    PRICE_BAND_QUANTITIES.flatMap((q) => [
+      [`quote_quantity_${q}`, q],
+      [`quote_price_${q}`, 0],
+    ]),
+  ),
+});
 
 export const Route = createFileRoute("/home/orders/$orderId/details")({
   component: RouteComponent,
@@ -138,9 +136,7 @@ function RouteComponent() {
 
   const onSubmit = async (values: any) => {
     try {
-      let quoteData:
-        | { price_bands: Record<string, number>; currency: string }
-        | undefined;
+      let quoteData: { price_bands: Record<string, number>; currency: string } | undefined;
       if (values.order_type === "quote") {
         const priceBands: Record<string, number> = {};
         for (const qty of PRICE_BAND_QUANTITIES) {
@@ -148,12 +144,8 @@ function RouteComponent() {
           const num = typeof val === "string" ? parseFloat(val) : Number(val);
           if (!Number.isNaN(num) && num > 0) {
             const qtyVal = values[`quote_quantity_${qty}`];
-            const quantity = typeof qtyVal === "string"
-              ? parseInt(qtyVal, 10)
-              : Number(qtyVal);
-            const key = !Number.isNaN(quantity) && quantity > 0
-              ? String(quantity)
-              : String(qty);
+            const quantity = typeof qtyVal === "string" ? parseInt(qtyVal, 10) : Number(qtyVal);
+            const key = !Number.isNaN(quantity) && quantity > 0 ? String(quantity) : String(qty);
             priceBands[key] = num;
           }
         }
@@ -171,9 +163,8 @@ function RouteComponent() {
         unit_of_measurement: values.unit_of_measurement,
         orderId: isNewOrder ? undefined : Number(orderId),
         // For stocktakes, include the address
-        from_shipping_address_id: values.order_type === "count"
-          ? values.from_shipping_address_id
-          : undefined,
+        from_shipping_address_id:
+          values.order_type === "count" ? values.from_shipping_address_id : undefined,
         quote: quoteData,
         order_form_values: values,
       });
@@ -186,11 +177,7 @@ function RouteComponent() {
       }
     } catch (error) {
       console.error("Error saving order details:", error);
-      toast.error(
-        `Failed to save: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`,
-      );
+      toast.error(`Failed to save: ${error instanceof Error ? error.message : "Unknown error"}`);
     }
   };
 
@@ -203,11 +190,7 @@ function RouteComponent() {
   return (
     <FormProvider {...form}>
       <div className="space-y-6">
-        <OrderFormStepper
-          steps={steps}
-          currentStep={1}
-          onStepClick={undefined}
-        />
+        <OrderFormStepper steps={steps} currentStep={1} onStepClick={undefined} />
         <OrderDetailsPage />
         <OrderFormNavigation onNext={handleNext} />
       </div>

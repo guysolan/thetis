@@ -9,19 +9,18 @@ export type LocationCurrency = "GBP" | "USD";
  * navigator.language and timezone (no network request).
  */
 export function useLocationCurrency(): LocationCurrency {
-    const [currency, setCurrency] = useState<LocationCurrency>("GBP");
+  const [currency, setCurrency] = useState<LocationCurrency>("GBP");
 
-    useEffect(() => {
-        try {
-            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-            const lang = navigator.language || "";
-            const isUS =
-                lang.startsWith("en-US") || tz.startsWith("America/");
-            setCurrency(isUS ? "USD" : "GBP");
-        } catch {
-            setCurrency("GBP");
-        }
-    }, []);
+  useEffect(() => {
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+      const lang = navigator.language || "";
+      const isUS = lang.startsWith("en-US") || tz.startsWith("America/");
+      setCurrency(isUS ? "USD" : "GBP");
+    } catch {
+      setCurrency("GBP");
+    }
+  }, []);
 
-    return currency;
+  return currency;
 }

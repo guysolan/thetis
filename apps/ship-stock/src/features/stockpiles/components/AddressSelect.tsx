@@ -1,22 +1,10 @@
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@thetis/ui/form";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@thetis/ui/form";
 import { useFormContext } from "react-hook-form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@thetis/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@thetis/ui/select";
 import { X } from "lucide-react";
 import { Button } from "@thetis/ui/button";
-import { useSelectAddresses } from '../api/selectAddresses';
-import { useEffect } from 'react';
+import { useSelectAddresses } from "../api/selectAddresses";
+import { useEffect } from "react";
 
 interface Props {
   name?: string;
@@ -25,9 +13,13 @@ interface Props {
   companyId?: string;
   copyFromField?: string;
 }
-const AddressSelect = (
-  { name = "address_id", label, isClearable, companyId, copyFromField }: Props,
-) => {
+const AddressSelect = ({
+  name = "address_id",
+  label,
+  isClearable,
+  companyId,
+  copyFromField,
+}: Props) => {
   const form = useFormContext();
   const { data: addresses = [] } = useSelectAddresses(companyId);
 
@@ -54,45 +46,36 @@ const AddressSelect = (
           <div className="flex justify-between items-center">
             {label && <FormLabel>{label}</FormLabel>}
             {copyFromField && (
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={handleCopyFrom}
-              >
+              <Button type="button" variant="ghost" size="sm" onClick={handleCopyFrom}>
                 Copy from Billing
               </Button>
             )}
           </div>
-          <Select
-            onValueChange={field.onChange}
-            value={field.value}
-          >
+          <Select onValueChange={field.onChange} value={field.value}>
             <FormControl>
               <div className="flex flex-row items-center gap-2">
                 <SelectTrigger ref={field.ref} name={field.name}>
                   <SelectValue placeholder="Select address" />
                 </SelectTrigger>
-                {isClearable && <Button
-                  disabled={!field.value}
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    field.onChange(undefined);
-                  }}
-                  size="icon"
-                  variant="outline"
-                >
-                  <X size={20} />
-                </Button>}
+                {isClearable && (
+                  <Button
+                    disabled={!field.value}
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      field.onChange(undefined);
+                    }}
+                    size="icon"
+                    variant="outline"
+                  >
+                    <X size={20} />
+                  </Button>
+                )}
               </div>
             </FormControl>
             <SelectContent>
               {addresses.map((w) => (
-                <SelectItem
-                  key={`address_${w.id}`}
-                  value={w.id?.toString() ?? ""}
-                >
+                <SelectItem key={`address_${w.id}`} value={w.id?.toString() ?? ""}>
                   {w.name}
                 </SelectItem>
               ))}

@@ -5,19 +5,18 @@ import { cn } from "../utils";
 
 const TabsRoot = Tabs.Root;
 
-const TabsList = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentPropsWithoutRef<typeof Tabs.List>
->(({ className, ...props }, ref) => (
-  <Tabs.List
-    ref={ref}
-    className={cn(
-      "inline-flex h-9 items-center justify-center rounded-smp-1 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400",
-      className,
-    )}
-    {...props}
-  />
-));
+const TabsList = React.forwardRef<HTMLDivElement, React.ComponentPropsWithoutRef<typeof Tabs.List>>(
+  ({ className, ...props }, ref) => (
+    <Tabs.List
+      ref={ref}
+      className={cn(
+        "inline-flex h-9 items-center justify-center rounded-smp-1 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400",
+        className,
+      )}
+      {...props}
+    />
+  ),
+);
 TabsList.displayName = "TabsList";
 
 const TabsTrigger = React.forwardRef<

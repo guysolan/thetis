@@ -45,6 +45,7 @@ The main folders are:
 - **For DRY and reusability:** Ask for logic or UI to be placed in `components/` or `sections/` as appropriate.
 
 **Example Prompt:**
+
 > "Create a new FAQ section in `sections/`, use it in a main in `mains/`, and ensure it supports all languages via the `lang` prop. Update navigation in `routes.tsx` to include the new page."
 
 Use this structure and these conventions to make your prompts clear and actionable for code generation or documentation tasks.

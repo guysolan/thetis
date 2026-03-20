@@ -18,12 +18,7 @@ const OrderBreakdown = ({ order }: OrderBreakdownProps) => {
 
   return (
     <section className="flex flex-col gap-6">
-      {showFinancials && (
-        <Financials
-          order={order}
-          currency={order.currency as Currency}
-        />
-      )}
+      {showFinancials && <Financials order={order} currency={order.currency as Currency} />}
 
       {showStockMovements && <ItemsManifest orderItems={preparedItems} />}
 

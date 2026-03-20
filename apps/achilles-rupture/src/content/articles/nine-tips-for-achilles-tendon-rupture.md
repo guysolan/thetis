@@ -5,8 +5,8 @@ publishedAt: "Jan 10 2025"
 type: "article"
 tags: ["recovery", "treatment"]
 audience: ["patient"]
-status: 'draft'
-heroImage: '/images/idea.jpeg'
+status: "draft"
+heroImage: "/images/idea.jpeg"
 ---
 
 1. Blood Thinners

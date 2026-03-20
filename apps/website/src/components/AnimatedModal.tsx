@@ -92,10 +92,7 @@ export default function AnimatedModal({
 
           {footerContent && (
             <div
-              className={cn(
-                "flex justify-end p-4 bg-gray-100 dark:bg-neutral-900",
-                footerClass,
-              )}
+              className={cn("flex justify-end p-4 bg-gray-100 dark:bg-neutral-900", footerClass)}
             >
               {footerContent}
             </div>
@@ -134,8 +131,12 @@ export default function AnimatedModal({
         }
 
         @keyframes fade {
-          from { opacity: 0; }
-          to { opacity: 1; }
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
 
         @keyframes slide {

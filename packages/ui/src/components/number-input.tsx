@@ -20,9 +20,7 @@ export default function NumberInput({
   const [animated, setAnimated] = React.useState(true);
   // Hide the caret during transitions so you can't see it shifting around:
   const [showCaret, setShowCaret] = React.useState(true);
-  const handleInput: React.ChangeEventHandler<HTMLInputElement> = ({
-    currentTarget: el,
-  }) => {
+  const handleInput: React.ChangeEventHandler<HTMLInputElement> = ({ currentTarget: el }) => {
     setAnimated(false);
     let next = value;
     if (el.value === "") {
@@ -35,16 +33,15 @@ export default function NumberInput({
     el.value = String(next);
     onChange?.(next);
   };
-  const handlePointerDown =
-    (diff: number) => (event: React.PointerEvent<HTMLButtonElement>) => {
-      setAnimated(true);
-      if (event.pointerType === "mouse") {
-        event?.preventDefault();
-        inputRef.current?.focus();
-      }
-      const newVal = Math.min(Math.max(value + diff, min), max);
-      onChange?.(newVal);
-    };
+  const handlePointerDown = (diff: number) => (event: React.PointerEvent<HTMLButtonElement>) => {
+    setAnimated(true);
+    if (event.pointerType === "mouse") {
+      event?.preventDefault();
+      inputRef.current?.focus();
+    }
+    const newVal = Math.min(Math.max(value + diff, min), max);
+    onChange?.(newVal);
+  };
   return (
     <div className="flex items-stretch rounded-md ring ring-zinc-200 focus-within:ring-2 focus-within:ring-blue-500 dark:ring-zinc-800 font-semibold text-3xl transition-[box-shadow] group">
       <button

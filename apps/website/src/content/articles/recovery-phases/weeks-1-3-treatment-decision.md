@@ -211,6 +211,7 @@ Comparing plaster casting vs functional bracing (boot with early weight-bearing)
 - Significant cost savings with non-surgical approach
 
 **The recommendation:**
+
 > "Early weight-bearing in a functional brace is a safe and cost-effective alternative to plaster casting" - UKSTAR Trial, Lancet 2020
 
 **What this means for you:**
@@ -229,13 +230,13 @@ The two most common boots are the Aircast and VACOped. Both can provide excellen
 
 **Aircast Boot:**
 
-| Feature | Details |
-|---------|---------|
-| Mechanism | Fixed wedges that are removed over time |
-| Cost | £121-150 (+ £20-25 for wedges) |
-| Availability | Widely available |
-| Ankle position | ~28° plantarflexion |
-| Waterproof | No - needs a cover |
+| Feature        | Details                                 |
+| -------------- | --------------------------------------- |
+| Mechanism      | Fixed wedges that are removed over time |
+| Cost           | £121-150 (+ £20-25 for wedges)          |
+| Availability   | Widely available                        |
+| Ankle position | ~28° plantarflexion                     |
+| Waterproof     | No - needs a cover                      |
 
 **Pros:**
 
@@ -253,13 +254,13 @@ The two most common boots are the Aircast and VACOped. Both can provide excellen
 
 **VACOped Boot:**
 
-| Feature | Details |
-| ------- | ------- |
-| Mechanism | Hinged, adjustable range of motion |
-| Cost | £250-350 |
-| Availability | Limited to some centres |
-| Ankle position | ~48° plantarflexion |
-| Waterproof | Yes (with liner modification) |
+| Feature        | Details                            |
+| -------------- | ---------------------------------- |
+| Mechanism      | Hinged, adjustable range of motion |
+| Cost           | £250-350                           |
+| Availability   | Limited to some centres            |
+| Ankle position | ~48° plantarflexion                |
+| Waterproof     | Yes (with liner modification)      |
 
 **Pros:**
 
@@ -287,12 +288,12 @@ Your foot needs to be held in a pointed position (plantarflexion/equinus) to all
 **Typical progression:**
 
 | Week | Aircast Wedges | Approximate Angle |
-| ---- | ------------- | ---------------- |
-| 0-2 | 4 wedges | ~28-30° |
-| 3-4 | 3 wedges | ~22° |
-| 5-6 | 2 wedges | ~16° |
-| 7-8 | 1 wedge | ~10° |
-| 9-10 | 0 wedges | Neutral |
+| ---- | -------------- | ----------------- |
+| 0-2  | 4 wedges       | ~28-30°           |
+| 3-4  | 3 wedges       | ~22°              |
+| 5-6  | 2 wedges       | ~16°              |
+| 7-8  | 1 wedge        | ~10°              |
+| 9-10 | 0 wedges       | Neutral           |
 
 **Why this matters:**
 
@@ -446,6 +447,7 @@ A night splint designed specifically for Achilles rupture can be a game-changer 
 - Only for sleeping/resting - not for walking
 
 **What surgeons say:**
+
 > "It is fantastic that Thetis Medical have produced this night-splint. It is certain to improve the recovery experience for patients." - Mr. James Davis, Past President BOFAS
 
 [PRODUCT LINK: Thetis Night Splint]
@@ -492,41 +494,41 @@ Whether you're in a boot or night splint, here are strategies for better sleep:
 1. **Walking Boot** (if not provided by hospital)
    - Aircast or VACOped
    - Ensure you have the correct wedges
-   [PRODUCT LINK: Walking boots]
+     [PRODUCT LINK: Walking boots]
 
 2. **Night Splint** (for sleeping comfort from week 2-4)
    - Thetis Achilles Rupture Night Splint
    - Much more comfortable than sleeping in a boot
-   [PRODUCT LINK: Thetis Night Splint]
+     [PRODUCT LINK: Thetis Night Splint]
 
 3. **Shoe Leveler (EVENup)**
    - Prevents back, hip, and knee pain
    - Attaches to your non-injured foot's shoe
    - Essential once you're walking more
-   [PRODUCT LINK: EVENup Shoe Leveler]
+     [PRODUCT LINK: EVENup Shoe Leveler]
 
 4. **Waterproof Boot Cover**
    - For showering safely
    - Keeps the boot clean and dry
-   [PRODUCT LINK: LimbO Waterproof Cover]
+     [PRODUCT LINK: LimbO Waterproof Cover]
 
 ### Nice-to-Haves
 
 5. **Ergonomic Crutch Handle Covers**
    - Gel or foam padding
    - Reduces hand and wrist discomfort
-   [PRODUCT LINK: Crutch Handle Covers]
+     [PRODUCT LINK: Crutch Handle Covers]
 
 6. **Merino Wool Socks**
    - Moisture-wicking
    - Temperature regulating
    - More comfortable than cotton in the boot
-   [PRODUCT LINK: Merino Wool Socks]
+     [PRODUCT LINK: Merino Wool Socks]
 
 7. **Leg Elevation Wedge**
    - Better than stacking pillows
    - Consistent, comfortable elevation
-   [PRODUCT LINK: Leg Elevation Wedge]
+     [PRODUCT LINK: Leg Elevation Wedge]
 
 ---
 
@@ -645,6 +647,6 @@ Absolutely not. Follow your prescribed wedge removal schedule exactly. Removing 
 
 ---
 
-*Continue to [Weeks 4-6: Progressive Recovery](/recovery/weeks-4-6-progressive-recovery) when you're ready to learn about wedge removal, walking progress, and transitioning to a night splint.*
+_Continue to [Weeks 4-6: Progressive Recovery](/recovery/weeks-4-6-progressive-recovery) when you're ready to learn about wedge removal, walking progress, and transitioning to a night splint._
 
-*Return to [Week 0-1: Your First Week](/recovery/week-0-1-first-week-after-achilles-rupture) if you need to review the initial phase.*
+_Return to [Week 0-1: Your First Week](/recovery/week-0-1-first-week-after-achilles-rupture) if you need to review the initial phase._

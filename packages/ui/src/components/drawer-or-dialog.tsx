@@ -70,9 +70,7 @@ export function DrawerDialogContent({
         {title && (
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
-            {description && (
-              <DialogDescription>{description}</DialogDescription>
-            )}
+            {description && <DialogDescription>{description}</DialogDescription>}
           </DialogHeader>
         )}
         {children}

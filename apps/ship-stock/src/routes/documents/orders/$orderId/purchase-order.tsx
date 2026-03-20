@@ -11,10 +11,7 @@ const OrdersPage = () => {
 
   return (
     <>
-      <DocumentControls
-        documentType="purchaseOrder"
-        orderNumber={order.order_id}
-      />
+      <DocumentControls documentType="purchaseOrder" orderNumber={order.order_id} />
       <Document
         order={order}
         options={documentOptions}
@@ -24,9 +21,7 @@ const OrdersPage = () => {
     </>
   );
 };
-export const Route = createFileRoute(
-  "/documents/orders/$orderId/purchase-order",
-)({
+export const Route = createFileRoute("/documents/orders/$orderId/purchase-order")({
   component: OrdersPage,
   validateSearch: purchaseOrderOptionsSchema,
   loader: async ({ context, params }) => {

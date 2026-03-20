@@ -13,9 +13,7 @@ const AmazonFinancialReports = () => {
     <div>
       <CountryTabs country={country} />
       <div className="p-4">
-        <h1 className="mb-4 font-bold text-2xl">
-          Amazon {country} Settlements
-        </h1>
+        <h1 className="mb-4 font-bold text-2xl">Amazon {country} Settlements</h1>
         <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {reports
             .sort((a, b) => dayjs(b.dataEndTime).diff(dayjs(a.dataEndTime)))

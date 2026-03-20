@@ -10,9 +10,7 @@ interface NumberCellProps {
   step?: number;
   min?: number;
   max?: number;
-  onChange?:
-    | ((value: number) => void)
-    | React.FormEventHandler<HTMLInputElement>;
+  onChange?: ((value: number) => void) | React.FormEventHandler<HTMLInputElement>;
   format: Format;
   suffix?: string;
   editable?: boolean;

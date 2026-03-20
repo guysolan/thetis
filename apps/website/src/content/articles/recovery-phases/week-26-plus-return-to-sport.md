@@ -51,7 +51,8 @@ Many patients expect to be "finished" at 6 months. The reality is more nuanced.
 - **12 months:** NBA standard and most professional athletes return (sensible approach)
 - **12-24 months:** Final tendon maturation
 
-**Important perspective:** 
+**Important perspective:**
+
 - Just because you CAN return to sport at 6 months doesn't mean you MUST
 - Taking longer is completely acceptable and often safer
 - The tendon healing must be respected - rushing leads to problems
@@ -64,13 +65,13 @@ Full recovery from Achilles rupture is measured in months and years, not weeks.
 
 **Typical strength recovery trajectory:**
 
-| Time Point | Approximate Strength | Notes |
-|------------|---------------------|-------|
-| 3 months | 60-70% | Boot just removed |
-| 6 months | 80-90% | Return to sport consideration |
-| 9 months | 90-95% | Most recreational sport return |
-| 12 months | 95-100% | Near full recovery |
-| 18-24 months | 100%+ | Full maturation |
+| Time Point   | Approximate Strength | Notes                          |
+| ------------ | -------------------- | ------------------------------ |
+| 3 months     | 60-70%               | Boot just removed              |
+| 6 months     | 80-90%               | Return to sport consideration  |
+| 9 months     | 90-95%               | Most recreational sport return |
+| 12 months    | 95-100%              | Near full recovery             |
+| 18-24 months | 100%+                | Full maturation                |
 
 **Calf muscle recovery:**
 
@@ -97,7 +98,7 @@ Return to sport should be criteria-based, not time-based alone. These are the ke
    - Full range of motion, good quality
 
 2. **Isokinetic strength (if tested):**
-   - >90% limb symmetry
+   - > 90% limb symmetry
    - Often done with specialised equipment
 
 3. **Isometric strength:**
@@ -468,6 +469,7 @@ Calf strengthening should continue beyond return to sport - ideally permanently.
 - Add resistance as strength permits
 
 **Quote from expert:**
+
 > "Even after completing your rehab programme, continued calf strengthening is vital to maintain your function and prevent recurrence, especially if you stay active." - Joseph Norton, PT
 
 ### Warm-Up Protocols
@@ -695,7 +697,7 @@ Sometimes additional medical input is needed.
    - May provide proprioceptive feedback
    - Some people find them confidence-boosting
    - Not essential but preferred by some
-   [PRODUCT LINK: Achilles Compression Sleeves]
+     [PRODUCT LINK: Achilles Compression Sleeves]
 
 ### Ongoing Training
 
@@ -782,6 +784,6 @@ Welcome back.
 
 ---
 
-*Return to [Weeks 13-25: Progressive Strengthening](/recovery/weeks-13-25-progressive-strengthening) if you need to review the earlier phase.*
+_Return to [Weeks 13-25: Progressive Strengthening](/recovery/weeks-13-25-progressive-strengthening) if you need to review the earlier phase._
 
-*Start from the beginning at [Week 0-1: Your First Week](/recovery/week-0-1-first-week-after-achilles-rupture) if you want to review the full recovery journey.*
+_Start from the beginning at [Week 0-1: Your First Week](/recovery/week-0-1-first-week-after-achilles-rupture) if you want to review the full recovery journey._

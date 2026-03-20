@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@thetis/ui/form";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@thetis/ui/form";
 import { Switch as SwitchUI } from "@thetis/ui/switch";
 import { useFormContext } from "react-hook-form";
 
@@ -23,9 +17,7 @@ const Switch = ({ name, label, disabled = false }: SwitchProps) => {
       name={name}
       render={({ field }) => (
         <FormItem className="flex justify-between items-center gap-2">
-          <FormLabel className={label ? "not-sr-only" : "sr-only"}>
-            {label}
-          </FormLabel>
+          <FormLabel className={label ? "not-sr-only" : "sr-only"}>{label}</FormLabel>
           <FormControl>
             <SwitchUI
               id={name}

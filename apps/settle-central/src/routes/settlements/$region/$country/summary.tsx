@@ -46,10 +46,7 @@ export const Route = createFileRoute("/settlements/$region/$country/summary")({
   loader: async ({ context, params, deps }) => {
     const report = deps;
     const document = await context.queryClient.ensureQueryData(
-      selectAmazonReportByIdQueryOptions(
-        report.reportDocumentId,
-        params.region,
-      ),
+      selectAmazonReportByIdQueryOptions(report.reportDocumentId, params.region),
     );
     console.log(document);
     return {

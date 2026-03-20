@@ -6,7 +6,7 @@ publishedAt: "Feb 10 2025"
 type: "article"
 tags: ["science", "treatment"]
 audience: ["patient", "clinician"]
-heroImage: '/images/prp.jpg'
+heroImage: "/images/prp.jpg"
 ---
 
 ## Surgery is not always required for Achilles Tendon Rupture

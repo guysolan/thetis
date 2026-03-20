@@ -1,12 +1,5 @@
 import { UseFormReturn } from "react-hook-form";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 import Select from "@/components/Select";
 import ItemTypeSelect from "@/components/ItemTypeSelect";
 import { useEffect } from "react";
@@ -22,12 +15,7 @@ interface StocktakeItemsFormFieldsProps {
   form: UseFormReturn<any>;
 }
 
-const StocktakeItemsFormFields = ({
-  name,
-  fields,
-  items,
-  form,
-}: StocktakeItemsFormFieldsProps) => {
+const StocktakeItemsFormFields = ({ name, fields, items, form }: StocktakeItemsFormFieldsProps) => {
   const allowedTypes = ["part", "product"];
 
   // Watch all quantity_before and quantity_after values
@@ -38,10 +26,7 @@ const StocktakeItemsFormFields = ({
     if (!allFieldValues) return;
 
     allFieldValues.forEach((item, index) => {
-      if (
-        item.quantity_before !== undefined &&
-        item.quantity_after !== undefined
-      ) {
+      if (item.quantity_before !== undefined && item.quantity_after !== undefined) {
         const quantityBefore = Number(item.quantity_before) || 0;
         const quantityAfter = Number(item.quantity_after) || 0;
         const change = quantityAfter - quantityBefore;
@@ -80,32 +65,28 @@ const StocktakeItemsFormFields = ({
                   placeholder="Select an item..."
                   searchPlaceholder="Search items..."
                   emptyMessage="No items found"
-                  options={items
-                    ?.filter(
-                      (item) =>
-                        item.item_type ===
-                          form.watch(`${name}.${index}.item_type`),
-                    )
-                    .sort((a, b) => a.item_name.localeCompare(b.item_name))
-                    .map((item) => ({
-                      label: item.item_name,
-                      value: String(item.item_id),
-                    })) || []}
+                  options={
+                    items
+                      ?.filter(
+                        (item) => item.item_type === form.watch(`${name}.${index}.item_type`),
+                      )
+                      .sort((a, b) => a.item_name.localeCompare(b.item_name))
+                      .map((item) => ({
+                        label: item.item_name,
+                        value: String(item.item_id),
+                      })) || []
+                  }
                 />
               </TableCell>
               <TableCell className="text-center">
                 <NumberFlow
-                  value={Number(
-                    form.watch(`${name}.${index}.quantity_before`),
-                  ) || 0}
+                  value={Number(form.watch(`${name}.${index}.quantity_before`)) || 0}
                   format={{ style: "decimal", maximumFractionDigits: 0 }}
                 />
               </TableCell>
               <TableCell className="text-center">
                 <NumberFlow
-                  value={Number(
-                    form.watch(`${name}.${index}.quantity_change`),
-                  ) || 0}
+                  value={Number(form.watch(`${name}.${index}.quantity_change`)) || 0}
                   format={{ style: "decimal", maximumFractionDigits: 0 }}
                 />
               </TableCell>

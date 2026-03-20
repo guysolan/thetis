@@ -1,19 +1,10 @@
 import React from "react";
-import {
-  AlertTriangle,
-  Bandage,
-  CheckCircle,
-  Scale,
-  Scissors,
-  X,
-} from "lucide-react";
+import { AlertTriangle, Bandage, CheckCircle, Scale, Scissors, X } from "lucide-react";
 
 export default function TreatmentComparison() {
   return (
     <div className="bg-white shadow-md mx-auto my-8 p-4 sm:p-6 border border-gray-200 rounded-sm w-full">
-      <h2 className="mb-6 font-bold text-2xl text-center">
-        Surgical vs. Non-Surgical Treatment
-      </h2>
+      <h2 className="mb-6 font-bold text-2xl text-center">Surgical vs. Non-Surgical Treatment</h2>
 
       {/* Main comparison container */}
       <div className="flex lg:flex-row flex-col gap-6 w-full">
@@ -23,9 +14,7 @@ export default function TreatmentComparison() {
             <div className="flex justify-center mb-4">
               <Bandage className="w-12 h-12 text-blue-600" />
             </div>
-            <h3 className="mb-4 font-bold text-blue-800 text-xl text-center">
-              Non-Surgical
-            </h3>
+            <h3 className="mb-4 font-bold text-blue-800 text-xl text-center">Non-Surgical</h3>
 
             <div className="space-y-5">
               <div>
@@ -72,9 +61,7 @@ export default function TreatmentComparison() {
             <div className="flex justify-center mb-4">
               <Scissors className="w-12 h-12 text-gray-600" />
             </div>
-            <h3 className="mb-4 font-bold text-gray-800 text-xl text-center">
-              Surgical
-            </h3>
+            <h3 className="mb-4 font-bold text-gray-800 text-xl text-center">Surgical</h3>
 
             <div className="space-y-5">
               <div>
@@ -124,21 +111,18 @@ export default function TreatmentComparison() {
         <div className="flex justify-center mb-2">
           <Scale className="w-10 h-10 text-green-600" />
         </div>
-        <h2 className="mb-3 font-bold text-green-800 text-2xl">
-          Key Finding: Equivalent Outcomes
-        </h2>
+        <h2 className="mb-3 font-bold text-green-800 text-2xl">Key Finding: Equivalent Outcomes</h2>
         <p className="text-lg">
           When patients are appropriately selected, both approaches yield
-          <span className="font-bold">equivalent long-term results</span>{" "}
-          in terms of functional recovery and re-rupture rates.
+          <span className="font-bold">equivalent long-term results</span> in terms of functional
+          recovery and re-rupture rates.
         </p>
       </div>
 
       {/* Decision Factors - Simplified */}
       <div className="flex flex-col items-center mt-6 p-4">
         <h3 className="mb-3 font-semibold text-xl text-center">
-          Treatment selection should consider: age, activity level, and personal
-          preference
+          Treatment selection should consider: age, activity level, and personal preference
         </h3>
       </div>
     </div>

@@ -50,16 +50,13 @@ export default function ClinicianCourseAccessDialog({
           method="POST"
           className="mt-4 space-y-4"
         >
-          {redirectUrl ? (
-            <input type="hidden" name="_next" value={redirectUrl} />
-          ) : null}
-          <input
-            type="hidden"
-            name="_subject"
-            value="Clinician course access request"
-          />
+          {redirectUrl ? <input type="hidden" name="_next" value={redirectUrl} /> : null}
+          <input type="hidden" name="_subject" value="Clinician course access request" />
           <div>
-            <label htmlFor="clinician-name" className="block font-semibold text-sm text-neutral-700 dark:text-neutral-300 mb-1">
+            <label
+              htmlFor="clinician-name"
+              className="block font-semibold text-sm text-neutral-700 dark:text-neutral-300 mb-1"
+            >
               {nameLabel}
             </label>
             <input
@@ -71,7 +68,10 @@ export default function ClinicianCourseAccessDialog({
             />
           </div>
           <div>
-            <label htmlFor="clinician-email" className="block font-semibold text-sm text-neutral-700 dark:text-neutral-300 mb-1">
+            <label
+              htmlFor="clinician-email"
+              className="block font-semibold text-sm text-neutral-700 dark:text-neutral-300 mb-1"
+            >
               {emailLabel}
             </label>
             <input

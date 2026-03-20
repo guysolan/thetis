@@ -10,13 +10,7 @@ import NumberFlow from "@number-flow/react";
 import { useState } from "react";
 import { cn } from "@thetis/ui/cn";
 import { useSelectItemsByAddress } from "../../stockpiles/api/selectItemsByAddress";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@thetis/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@thetis/ui/select";
 import calculateItemTotal from "../utils/calculateItemTotal";
 import { Combobox } from "@/components/Combobox";
 import { useSelectItemsView } from "../../items/api/selectItemsView";
@@ -76,10 +70,7 @@ const StockItemRowCells = ({
     const itemInStock = stockItems?.find((item) => {
       const stockItemId = String(item.item_id).trim();
       const searchItemId = String(itemId).trim();
-      return (
-        stockItemId === searchItemId &&
-        String(item.address_id) === String(address)
-      );
+      return stockItemId === searchItemId && String(item.address_id) === String(address);
     });
     return itemInStock?.item_quantity ?? 0;
   };
@@ -108,9 +99,7 @@ const StockItemRowCells = ({
     const itemPrice = item?.item_price ?? 0;
     const itemTax = defaultTax;
     const itemTotal = calculateItemTotal(itemPrice, itemTax, change);
-    const packageItemChangeId = form.watch(
-      `${name}.${index}.package_item_change_id`,
-    );
+    const packageItemChangeId = form.watch(`${name}.${index}.package_item_change_id`);
 
     form.setValue(`${name}.${index}.item_id`, itemId);
     form.setValue(`${name}.${index}.quantity_before`, before);
@@ -120,10 +109,7 @@ const StockItemRowCells = ({
     form.setValue(`${name}.${index}.item_tax`, itemTax);
     form.setValue(`${name}.${index}.item_total`, itemTotal);
     if (packageItemChangeId) {
-      form.setValue(
-        `${name}.${index}.package_item_change_id`,
-        packageItemChangeId,
-      );
+      form.setValue(`${name}.${index}.package_item_change_id`, packageItemChangeId);
     }
     onUpdate?.();
   };
@@ -132,32 +118,21 @@ const StockItemRowCells = ({
     console.log(value);
     form.setValue(`${name}.${index}.quantity_change`, value);
     const calculatedTotal = (value || 0) * (price || 0) * (1 + (tax || 0));
-    form.setValue(
-      `${name}.${index}.item_total`,
-      Number(calculatedTotal.toFixed(2)),
-    );
+    form.setValue(`${name}.${index}.item_total`, Number(calculatedTotal.toFixed(2)));
     updateQuantities(index, value);
     onUpdate?.();
   };
 
   const handlePriceChange = (value: number) => {
     form.setValue(`${name}.${index}.item_price`, value);
-    const calculatedTotal = (quantityChange || 0) * (value || 0) *
-      (1 + (tax || 0));
-    form.setValue(
-      `${name}.${index}.item_total`,
-      Number(calculatedTotal.toFixed(2)),
-    );
+    const calculatedTotal = (quantityChange || 0) * (value || 0) * (1 + (tax || 0));
+    form.setValue(`${name}.${index}.item_total`, Number(calculatedTotal.toFixed(2)));
   };
 
   const handleTaxChange = (value: number) => {
     form.setValue(`${name}.${index}.item_tax`, value);
-    const calculatedTotal = (quantityChange || 0) * (price || 0) *
-      (1 + (value || 0));
-    form.setValue(
-      `${name}.${index}.item_total`,
-      Number(calculatedTotal.toFixed(2)),
-    );
+    const calculatedTotal = (quantityChange || 0) * (price || 0) * (1 + (value || 0));
+    form.setValue(`${name}.${index}.item_total`, Number(calculatedTotal.toFixed(2)));
   };
 
   const handleTotalChange = (value: number) => {
@@ -212,28 +187,19 @@ const StockItemRowCells = ({
       )}
       {packageMode && (
         <TableCell>
-          <Select
-            value={String(packageItemId)}
-            onValueChange={handlePackageItemChange}
-          >
+          <Select value={String(packageItemId)} onValueChange={handlePackageItemChange}>
             <SelectTrigger>
               <SelectValue placeholder="Select a package">
                 {packageItemId && packageItems && packageItems.length > 0
-                  ? (
-                    (() => {
+                  ? (() => {
                       const selectedPackageIndex = packageItems.findIndex(
-                        (item) =>
-                          String(item.package_item_change_id) ===
-                            String(packageItemId),
+                        (item) => String(item.package_item_change_id) === String(packageItemId),
                       );
                       return selectedPackageIndex >= 0
                         ? `Package ${selectedPackageIndex + 1}`
                         : "Select a package";
                     })()
-                  )
-                  : (
-                    "Select a package"
-                  )}
+                  : "Select a package"}
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
@@ -256,15 +222,15 @@ const StockItemRowCells = ({
           searchPlaceholder="Search items..."
           emptyMessage="No items found"
           onChange={handleItemChange}
-          options={items
-            ?.filter((item) =>
-              item.item_type === itemType
-            )
-            .sort((a, b) => a.item_name.localeCompare(b.item_name))
-            .map((item) => ({
-              value: String(item.item_id),
-              label: item.item_name,
-            })) || []}
+          options={
+            items
+              ?.filter((item) => item.item_type === itemType)
+              .sort((a, b) => a.item_name.localeCompare(b.item_name))
+              .map((item) => ({
+                value: String(item.item_id),
+                label: item.item_name,
+              })) || []
+          }
         />
       </TableCell>
       <TableCell>
@@ -321,10 +287,7 @@ const StockItemRowCells = ({
       )}
       {showQuantity && (
         <TableCell className="text-center">
-          <NumberFlow
-            className={quantityAfter < 0 ? "text-red-500" : ""}
-            value={quantityAfter}
-          />
+          <NumberFlow className={quantityAfter < 0 ? "text-red-500" : ""} value={quantityAfter} />
         </TableCell>
       )}
 

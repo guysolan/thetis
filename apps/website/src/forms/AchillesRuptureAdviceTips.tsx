@@ -16,9 +16,7 @@ const AchillesRuptureAdviceTips: React.FC = () => {
 
     //clear text areas
     for (let i = index; i <= maxTips; i++) {
-      const textarea = document.getElementById(
-        `tip${i}`,
-      ) as HTMLTextAreaElement | null;
+      const textarea = document.getElementById(`tip${i}`) as HTMLTextAreaElement | null;
       if (textarea) {
         textarea.value = "";
       }
@@ -45,10 +43,7 @@ const AchillesRuptureAdviceTips: React.FC = () => {
       {visibleTips >= 2 && (
         <div className="form-group tip-group" id="tip2Container">
           <div className="flex justify-between items-center">
-            <label
-              htmlFor="tip2"
-              className="font-semibold text-gray-700 text-md"
-            >
+            <label htmlFor="tip2" className="font-semibold text-gray-700 text-md">
               Tip #2
             </label>
             <button
@@ -74,10 +69,7 @@ const AchillesRuptureAdviceTips: React.FC = () => {
       {visibleTips >= 3 && (
         <div className="form-group tip-group" id="tip3Container">
           <div className="flex justify-between items-center">
-            <label
-              htmlFor="tip3"
-              className="font-semibold text-gray-700 text-md"
-            >
+            <label htmlFor="tip3" className="font-semibold text-gray-700 text-md">
               Tip #3
             </label>
             <button

@@ -7,7 +7,7 @@ Case-Control Study Results:
 • Smokers had 4.4× higher rupture odds 🔥  
 • Average rupture age 7 years younger in smokers ⏳  
 • Re-operation risk doubled (8 % vs 3 %) 🔄  
-• Time to healing delayed by 2 weeks ⌛  
+• Time to healing delayed by 2 weeks ⌛
 
 Know an athlete who still sneaks a cigarette?
 

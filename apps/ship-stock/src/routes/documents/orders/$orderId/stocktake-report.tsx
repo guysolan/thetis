@@ -7,9 +7,7 @@ const OrdersPage = () => {
 
   return <StocktakeReport order={order} />;
 };
-export const Route = createFileRoute(
-  "/documents/orders/$orderId/stocktake-report",
-)({
+export const Route = createFileRoute("/documents/orders/$orderId/stocktake-report")({
   component: OrdersPage,
   loader: async ({ context, params }) => {
     const order = await context.queryClient.ensureQueryData(

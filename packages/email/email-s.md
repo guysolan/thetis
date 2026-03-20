@@ -4,25 +4,25 @@
 
 - Metric to Boost Patient Satisfaction
 
-### Email 1 (*wait one week*)
+### Email 1 (_wait one week_)
 
 Let people know that we have a new product - the night splint.
 
 Learn more: <https://thetismedical.com>
 
-### Email 2 (*wait one week*)
+### Email 2 (_wait one week_)
 
 Show people that the splint is available in the USA.
 
 View product details: <https://thetismedical.com/night-splint>
 
-### Email 3 (*wait one week*)
+### Email 3 (_wait one week_)
 
 Show 3 surgeon testimonials.
 
 Learn more here: <https://thetismedical.com/reviews?role=clinician>
 
-### Email 4 (*wait one week*)
+### Email 4 (_wait one week_)
 
 Patients love the night splint PLUS they get a free guide on Achilles ruptures.
 
@@ -32,13 +32,13 @@ Download yours here: <https://thetismedical.com/achilles-rupture-guide?role=clin
 
 Show 10 patient testimonials.
 
-### Email 5 (*wait one week*)
+### Email 5 (_wait one week_)
 
 10 free samples in the states, give to a patient - hear how much they love it.
 
 <https://thetismedical.com/night-splint-free-sample>
 
-### Email 6 (*wait one week*)
+### Email 6 (_wait one week_)
 
 3 free samples left, give to a patient - hear how much they love it.
 

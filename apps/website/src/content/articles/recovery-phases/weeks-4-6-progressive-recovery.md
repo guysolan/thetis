@@ -103,23 +103,23 @@ Wedge removal is an exciting milestone - each wedge removed means you're getting
 
 **Traditional accelerated protocol:**
 
-| Week | Wedges (Aircast) | Approximate Angle | Notes |
-|------|------------------|-------------------|-------|
-| 0-2 | 4 wedges | ~28-30° | Maximum protection |
-| 3-4 | 3 wedges | ~22° | First reduction |
-| 5-6 | 2 wedges | ~16° | **You are here** |
-| 7-8 | 1 wedge | ~10° | Approaching neutral |
-| 9-10 | 0 wedges | Neutral | Final boot phase |
+| Week | Wedges (Aircast) | Approximate Angle | Notes               |
+| ---- | ---------------- | ----------------- | ------------------- |
+| 0-2  | 4 wedges         | ~28-30°           | Maximum protection  |
+| 3-4  | 3 wedges         | ~22°              | First reduction     |
+| 5-6  | 2 wedges         | ~16°              | **You are here**    |
+| 7-8  | 1 wedge          | ~10°              | Approaching neutral |
+| 9-10 | 0 wedges         | Neutral           | Final boot phase    |
 
 **Evidence-based elongation-focused protocol (increasingly used):**
 
-| Week | Wedges (Aircast) | Approximate Angle | Notes |
-|------|------------------|-------------------|-------|
-| 0-6 | 4 wedges | ~28-30° | Maximum protection (longer) |
-| 6-7 | 3 wedges | ~22° | First reduction (delayed) |
-| 8-9 | 2 wedges | ~16° | Second reduction |
-| 10-11 | 1 wedge | ~10° | Approaching neutral |
-| 11-12 | 0 wedges | Neutral | Final boot phase before removal |
+| Week  | Wedges (Aircast) | Approximate Angle | Notes                           |
+| ----- | ---------------- | ----------------- | ------------------------------- |
+| 0-6   | 4 wedges         | ~28-30°           | Maximum protection (longer)     |
+| 6-7   | 3 wedges         | ~22°              | First reduction (delayed)       |
+| 8-9   | 2 wedges         | ~16°              | Second reduction                |
+| 10-11 | 1 wedge          | ~10°              | Approaching neutral             |
+| 11-12 | 0 wedges         | Neutral           | Final boot phase before removal |
 
 **Why the delay?** Research shows that keeping your foot more pointed down for longer helps prevent tendon elongation (stretching), which is the biggest problem affecting long-term recovery. This protocol is more cautious with wedge removal but more aggressive with early strengthening exercises.
 
@@ -318,6 +318,7 @@ Switching from the boot to a night splint for sleeping can dramatically improve 
 - Easier to get comfortable
 
 **What patients say:**
+
 > "Switching to the night splint was life-changing. I finally got a proper night's sleep after weeks of struggling in the boot."
 
 ### Proper Use and Safety
@@ -563,34 +564,34 @@ Maintaining cardiovascular fitness is challenging but possible:
 1. **Night Splint** (if not already purchased)
    - Makes sleeping dramatically more comfortable
    - Only use Achilles-specific splint
-   [PRODUCT LINK: Thetis Night Splint]
+     [PRODUCT LINK: Thetis Night Splint]
 
 2. **Antifungal Powder**
    - Prevents fungal infections in the warm, moist boot environment
    - Apply daily
-   [PRODUCT LINK: Antifungal Powder]
+     [PRODUCT LINK: Antifungal Powder]
 
 3. **Merino Wool Socks**
    - Temperature regulating
    - Moisture-wicking
    - More comfortable than cotton
-   [PRODUCT LINK: Merino Wool Socks]
+     [PRODUCT LINK: Merino Wool Socks]
 
 4. **EVENup Shoe Leveler** (if not already purchased)
    - Essential for preventing back and hip pain
-   [PRODUCT LINK: EVENup Shoe Leveler]
+     [PRODUCT LINK: EVENup Shoe Leveler]
 
 ### Helpful Additions
 
 5. **Resistance Bands**
    - For upper body exercises
    - Various resistance levels
-   [PRODUCT LINK: Resistance Band Set]
+     [PRODUCT LINK: Resistance Band Set]
 
 6. **Compression Socks**
    - Help manage swelling
    - Wear on the injured leg when out of the boot briefly
-   [PRODUCT LINK: Compression Socks]
+     [PRODUCT LINK: Compression Socks]
 
 ---
 
@@ -701,6 +702,6 @@ Flying with an Achilles rupture is possible but requires precautions:
 
 ---
 
-*Continue to [Weeks 7-9: The Final Boot Phase](/recovery/weeks-7-9-final-boot-phase) when you're ready to learn about approaching neutral, preparing for physiotherapy, and life as you near boot removal.*
+_Continue to [Weeks 7-9: The Final Boot Phase](/recovery/weeks-7-9-final-boot-phase) when you're ready to learn about approaching neutral, preparing for physiotherapy, and life as you near boot removal._
 
-*Return to [Weeks 1-3: Treatment Decision](/recovery/weeks-1-3-treatment-decision) if you need to review the earlier phase.*
+_Return to [Weeks 1-3: Treatment Decision](/recovery/weeks-1-3-treatment-decision) if you need to review the earlier phase._

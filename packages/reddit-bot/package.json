@@ -2,6 +2,9 @@
   "name": "@thetis/ship-stock-api",
   "version": "0.0.1",
   "private": true,
+  "exports": {
+    "./types": "./supabase/database.types.ts"
+  },
   "scripts": {
     "update-supabase": "brew install supabase/tap/supabase",
     "deploy": "supabase functions deploy",
@@ -19,8 +22,5 @@
   },
   "dependencies": {
     "supabase": "^1.191.3"
-  },
-  "exports": {
-    "./types": "./supabase/database.types.ts"
   }
 }

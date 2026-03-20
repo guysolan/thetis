@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "./accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion";
 
 export type FAQItem = {
   question: string;
@@ -43,10 +38,12 @@ const FAQs = ({
           }));
         } else if (category.question && category.answer) {
           // Handle flat structure
-          return [{
-            question: category.question,
-            answer: category.answer,
-          }];
+          return [
+            {
+              question: category.question,
+              answer: category.answer,
+            },
+          ];
         }
         return [];
       });
@@ -87,9 +84,7 @@ const FAQs = ({
       document.head.appendChild(script);
 
       return () => {
-        const existingScript = document.querySelector(
-          "script[data-faq-schema]",
-        );
+        const existingScript = document.querySelector("script[data-faq-schema]");
         if (existingScript) {
           document.head.removeChild(existingScript);
         }
@@ -150,9 +145,7 @@ const FAQs = ({
               >
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-lg leading-loose">
-                {faq.answer}
-              </AccordionContent>
+              <AccordionContent className="text-lg leading-loose">{faq.answer}</AccordionContent>
             </AccordionItem>
           );
         }

@@ -16,11 +16,7 @@ export const SingleCountryView: React.FC<SingleCountryViewProps> = ({
   country,
   journeyData,
 }) => {
-  const data = getJourneyDataForStageAndCountry(
-    stage.id,
-    country.id,
-    journeyData,
-  );
+  const data = getJourneyDataForStageAndCountry(stage.id, country.id, journeyData);
 
   if (!data) {
     return <div>No data available</div>;
@@ -29,9 +25,7 @@ export const SingleCountryView: React.FC<SingleCountryViewProps> = ({
   return (
     <div className="bg-gray-50 p-4 border border-gray-200 rounded-lg">
       <div className="flex items-center gap-2 mb-2">
-        <span className="flag-icon">
-          {getUnicodeFlagIcon(country.flagCode)}
-        </span>
+        <span className="flag-icon">{getUnicodeFlagIcon(country.flagCode)}</span>
         <h4 className="font-medium">{country.name}</h4>
       </div>
 

@@ -120,9 +120,7 @@ const WhatSizeAmI = ({ lang = "en" }: Props) => {
               <div className="bg-primary/10 mt-4 p-4 rounded-md">
                 <p className="font-semibold text-center">
                   {tc.recommendedSize}{" "}
-                  <span className="text-primary text-lg">
-                    {recommendedSize}
-                  </span>
+                  <span className="text-primary text-lg">{recommendedSize}</span>
                 </p>
               </div>
             )}

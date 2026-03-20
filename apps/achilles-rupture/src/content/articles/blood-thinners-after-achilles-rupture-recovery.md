@@ -11,7 +11,7 @@ heroImage: "/images/blood.webp"
 
 **Key Message:** you should consider blood thinners after Achilles tendon rupture, and discuss with your medical team how long to take them for.
 
-*Thrombosis is common after Achilles tendon rupture.*
+_Thrombosis is common after Achilles tendon rupture._
 
 A thrombosis is a blood clot in a vein that blocks the circulation, usually in the leg (DVT = deep vein thrombosis). It manifests as swelling and discomfort. Thrombosis has the potential to cause serious illness (even death) if the clot in the vein spreads to the heart or lungs. This spread is called a pulmonary embolus (PE).
 
@@ -23,7 +23,7 @@ Of all lower leg injuries, Achilles tendon rupture is one with (probably) the hi
 
 Studies vary in the way they look for clots, and so the figures range widely. Some studies found a very low rate of thrombosis after Achilles rupture (even 0%); others, however, report that thrombosis can be detected in 60% of Achilles rupture patients.
 
-*Does it matter if I get a blood clot?*
+_Does it matter if I get a blood clot?_
 
 Some small clots clear up by themselves. Larger ones give leg swelling and if they break away and float into the lungs the effects can be devastating – including leading to death. There are also studies which show that patients who suffer a thrombosis during recovery from a healing Achilles tendon rupture fare worse in terms of their leg function in the long term.
 
@@ -95,7 +95,7 @@ In at least one hospital, routinely using tablets instead of injections for prev
 
 **References:**
 
-1) Incidence of Deep Vein Thrombosis and Pulmonary Embolism after Achilles Tendon Rupture
+1. Incidence of Deep Vein Thrombosis and Pulmonary Embolism after Achilles Tendon Rupture
 
 [Arush Patel](https://pubmed.ncbi.nlm.nih.gov/?term=Patel%20A%5BAuthor%5D), MD, [Brent Ogawa](https://pubmed.ncbi.nlm.nih.gov/?term=Ogawa%20B%5BAuthor%5D), MD, [Timothy Charlton](https://pubmed.ncbi.nlm.nih.gov/?term=Charlton%20T%5BAuthor%5D), MD, and [David Thordarson](https://pubmed.ncbi.nlm.nih.gov/?term=Thordarson%20D%5BAuthor%5D), MD
 
@@ -103,18 +103,18 @@ In at least one hospital, routinely using tablets instead of injections for prev
 
 **Comment:** DVT is common if you look for it. How many small clots are dangerous is unknown.
 
-2) Risk of Deep Vein Thrombosis After Acute Achilles Tendon Rupture: A Secondary Analysis of a Randomized Controlled Trial Comparing Early Controlled Motion of the Ankle Versus Immobilization
+2. Risk of Deep Vein Thrombosis After Acute Achilles Tendon Rupture: A Secondary Analysis of a Randomized Controlled Trial Comparing Early Controlled Motion of the Ankle Versus Immobilization
 
-[Kristoffer Weisskirchner Barfod](https://pubmed.ncbi.nlm.nih.gov/?term=Barfod%20KW%5BAuthor%5D), MD, PhD,*† [Emil Graakjær Nielsen](https://pubmed.ncbi.nlm.nih.gov/?term=Nielsen%20EG%5BAuthor%5D), MD,‡ [Beth Hærsted Olsen](https://pubmed.ncbi.nlm.nih.gov/?term=Olsen%20BH%5BAuthor%5D), MD,‡ [Pablo Gustavo Vinicoff](https://pubmed.ncbi.nlm.nih.gov/?term=Vinicoff%20PG%5BAuthor%5D), MD,‡ [Anders Troelsen](https://pubmed.ncbi.nlm.nih.gov/?term=Troelsen%20A%5BAuthor%5D), MD, PhD, DMSc,§ and [Per Holmich](https://pubmed.ncbi.nlm.nih.gov/?term=Holmich%20P%5BAuthor%5D), MD, DMSc†
+[Kristoffer Weisskirchner Barfod](https://pubmed.ncbi.nlm.nih.gov/?term=Barfod%20KW%5BAuthor%5D), MD, PhD,\*† [Emil Graakjær Nielsen](https://pubmed.ncbi.nlm.nih.gov/?term=Nielsen%20EG%5BAuthor%5D), MD,‡ [Beth Hærsted Olsen](https://pubmed.ncbi.nlm.nih.gov/?term=Olsen%20BH%5BAuthor%5D), MD,‡ [Pablo Gustavo Vinicoff](https://pubmed.ncbi.nlm.nih.gov/?term=Vinicoff%20PG%5BAuthor%5D), MD,‡ [Anders Troelsen](https://pubmed.ncbi.nlm.nih.gov/?term=Troelsen%20A%5BAuthor%5D), MD, PhD, DMSc,§ and [Per Holmich](https://pubmed.ncbi.nlm.nih.gov/?term=Holmich%20P%5BAuthor%5D), MD, DMSc†
 
 [Orthop J Sports Med.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7222258/) 2020 Apr; 8(4): 2325967120915909.
 
 **Comment:** Despite the notion that early muscle activity would bring a better recovery, this paper showed no benefit from Early Controlled Motion
 
-3) Deep venous thrombosis after Achilles tendon rupture is associated with poor patient-reported outcome
+3. Deep venous thrombosis after Achilles tendon rupture is associated with poor patient-reported outcome
 
 [Simon Svedman](https://link.springer.com/article/10.1007/s00167-020-05945-2#auth-Simon-Svedman), [Gunnar Edman](https://link.springer.com/article/10.1007/s00167-020-05945-2#auth-Gunnar-Edman) & [Paul W. Ackermann](https://link.springer.com/article/10.1007/s00167-020-05945-2#auth-Paul_W_-Ackermann)
 
-[*Knee Surgery, Sports Traumatology, Arthroscopy*](https://link.springer.com/journal/167) **volume 28**, pages3309–3317 (2020)
+[_Knee Surgery, Sports Traumatology, Arthroscopy_](https://link.springer.com/journal/167) **volume 28**, pages3309–3317 (2020)
 
 **Comment:** this study shows that patients with a DVT are more likely to have a poorer outcome from their Achilles rupture.

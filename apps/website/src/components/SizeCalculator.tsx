@@ -28,8 +28,7 @@ const content = {
   de: {
     instruction:
       "Um die richtige Größe zu finden, messen Sie Ihren Fuß von der Ferse bis zu den Zehen und verwenden Sie die folgende Tabelle. Wenn Sie zwischen zwei Größen liegen, empfehlen wir, die größere Größe zu wählen.",
-    caption:
-      "Wenn Sie weitere Hilfe benötigen, wenden Sie sich bitte an unser Support-Team.",
+    caption: "Wenn Sie weitere Hilfe benötigen, wenden Sie sich bitte an unser Support-Team.",
     size: "Größe",
     footLengthCm: "Fußlänge (cm)",
     footLengthIn: "Fußlänge (Zoll)",
@@ -50,8 +49,7 @@ const content = {
   es: {
     instruction:
       "Para encontrar la talla correcta, mida su pie desde el talón hasta la punta y use la tabla a continuación. Si está entre dos tallas, le recomendamos que elija la talla más grande.",
-    caption:
-      "Si necesita más ayuda, póngase en contacto con nuestro equipo de soporte.",
+    caption: "Si necesita más ayuda, póngase en contacto con nuestro equipo de soporte.",
     size: "Talla",
     footLengthCm: "Longitud del pie (cm)",
     footLengthIn: "Longitud del pie (pulgadas)",
@@ -61,8 +59,7 @@ const content = {
   it: {
     instruction:
       "Per trovare la taglia giusta, misura il tuo piede dal tallone alla punta e usa la tabella qui sotto. Se sei tra due taglie, ti consigliamo di scegliere la taglia più grande.",
-    caption:
-      "Se hai bisogno di ulteriore assistenza, contatta il nostro team di supporto.",
+    caption: "Se hai bisogno di ulteriore assistenza, contatta il nostro team di supporto.",
     size: "Taglia",
     footLengthCm: "Lunghezza del piede (cm)",
     footLengthIn: "Lunghezza del piede (pollici)",

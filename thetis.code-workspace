@@ -43,7 +43,7 @@
         },
         "typescript.tsdk": "node_modules/typescript/lib",
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "biomejs.biome",
+        "editor.defaultFormatter": "oxc.oxc-vscode",
         "[astro]": {
             "editor.defaultFormatter": "astro-build.astro-vscode"
         },

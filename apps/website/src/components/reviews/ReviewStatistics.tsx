@@ -4,10 +4,7 @@ import statistics from "./review-statistics.json";
 
 const ReviewStatistics = () => {
   // Calculate total reviews and percentages
-  const totalReviews = Object.values(statistics).reduce(
-    (acc, curr) => acc + curr,
-    0,
-  );
+  const totalReviews = Object.values(statistics).reduce((acc, curr) => acc + curr, 0);
 
   const getPercentage = (value: number) => {
     return ((value / totalReviews) * 100).toFixed(1);
@@ -30,9 +27,7 @@ const ReviewStatistics = () => {
             </div>
           </div>
         ))}
-      <div className="mt-4 text-gray-600 text-sm">
-        Based on {totalReviews} reviews
-      </div>
+      <div className="mt-4 text-gray-600 text-sm">Based on {totalReviews} reviews</div>
     </div>
   );
 };

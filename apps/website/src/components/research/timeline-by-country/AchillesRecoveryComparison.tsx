@@ -2,13 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { CountrySelector } from "./CountrySelector";
 import { TimelineStage } from "./TimelineStage";
-import {
-  countries,
-  stages,
-  journeyData,
-  insights,
-  potentialInaccuracies,
-} from "./data";
+import { countries, stages, journeyData, insights, potentialInaccuracies } from "./data";
 import { EquipmentComparison } from "./EquipmentComparison";
 
 export const AchillesRecoveryComparison: React.FC = () => {
@@ -30,9 +24,8 @@ export const AchillesRecoveryComparison: React.FC = () => {
         Achilles Rupture Recovery Around the World
       </h1>
       <p className="mb-8 text-lg">
-        This visual guide compares the typical Achilles tendon rupture recovery
-        journey across six countries, highlighting differences in treatment
-        approaches, timelines, and equipment used.
+        This visual guide compares the typical Achilles tendon rupture recovery journey across six
+        countries, highlighting differences in treatment approaches, timelines, and equipment used.
       </p>
 
       {/* Country selector */}
@@ -63,10 +56,7 @@ export const AchillesRecoveryComparison: React.FC = () => {
       </div>
 
       {/* Walking aids comparison */}
-      <EquipmentComparison
-        selectedCountries={selectedCountries}
-        countries={countries}
-      />
+      <EquipmentComparison selectedCountries={selectedCountries} countries={countries} />
 
       {/* Key insights and potential inaccuracies */}
       <div className="gap-8 grid grid-cols-1 md:grid-cols-2 mb-12">

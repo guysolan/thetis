@@ -11,10 +11,7 @@ const OrdersPage = () => {
 
   return (
     <>
-      <DocumentControls
-        orderNumber={order.order_id}
-        documentType="commercialInvoice"
-      />
+      <DocumentControls orderNumber={order.order_id} documentType="commercialInvoice" />
       <Document
         order={order}
         options={documentOptions}
@@ -24,9 +21,7 @@ const OrdersPage = () => {
     </>
   );
 };
-export const Route = createFileRoute(
-  "/documents/orders/$orderId/commercial-invoice",
-)({
+export const Route = createFileRoute("/documents/orders/$orderId/commercial-invoice")({
   component: OrdersPage,
   validateSearch: commercialInvoiceSchema,
   loader: async ({ context, params }) => {

@@ -1,9 +1,4 @@
-import {
-  createRootRouteWithContext,
-  Link,
-  Outlet,
-  useRouterState,
-} from "@tanstack/react-router";
+import { createRootRouteWithContext, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { Toaster } from "@thetis/ui/sonner";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -17,10 +12,7 @@ function RouterSpinner() {
   return (
     <Loader2
       size={40}
-      className={cn(
-        "fixed top-1/2 left-1/2 animate-spin",
-        isLoading ? "block" : "hidden",
-      )}
+      className={cn("fixed top-1/2 left-1/2 animate-spin", isLoading ? "block" : "hidden")}
     />
   );
 }

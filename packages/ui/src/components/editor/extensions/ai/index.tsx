@@ -25,8 +25,7 @@ const selectors = [
   {
     name: "Improve",
     icon: MdOutlineWrapText,
-    instructions:
-      "Improve text: Refine the text to improve clarity and professionalism.",
+    instructions: "Improve text: Refine the text to improve clarity and professionalism.",
   },
   {
     name: "Condense",
@@ -109,10 +108,7 @@ export function AIMenu({ onOpenChange, editor }: AIMenuProps) {
             </kbd>
           </div>
         ) : (
-          <BubbleMenuButton
-            action={() => setIsTypingPrompt(true)}
-            isActive={false}
-          >
+          <BubbleMenuButton action={() => setIsTypingPrompt(true)} isActive={false}>
             <div className="flex items-center space-x-1">
               <MdOutlineAutoAwesome className="size-3" />
               <span className="font-mono text-[11px]">Ask AI</span>
@@ -129,10 +125,7 @@ export function AIMenu({ onOpenChange, editor }: AIMenuProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2, delay: (index + 1) * 0.05 }}
           >
-            <BubbleMenuButton
-              action={() => handleGenerate(selector.instructions)}
-              isActive={false}
-            >
+            <BubbleMenuButton action={() => handleGenerate(selector.instructions)} isActive={false}>
               <div className="flex items-center space-x-1">
                 <selector.icon className="size-3" />
                 <span>{selector.name}</span>

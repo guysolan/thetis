@@ -1,20 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@thetis/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@thetis/ui/card";
 import { content } from "../features/website/content";
 import { Button } from "@thetis/ui/button";
-import {
-  CheckCircle,
-  Package,
-  FileText,
-  BarChart3,
-  ArrowRight,
-} from "lucide-react";
+import { CheckCircle, Package, FileText, BarChart3, ArrowRight } from "lucide-react";
 
 const ShipStockHome = () => {
   return (
@@ -49,9 +37,7 @@ const ShipStockHome = () => {
       {/* Problems Section with Cards */}
       <div className="py-20">
         <div className="mx-auto px-4 max-w-6xl">
-          <h2 className="mb-4 font-bold text-3xl text-center">
-            Common Challenges
-          </h2>
+          <h2 className="mb-4 font-bold text-3xl text-center">Common Challenges</h2>
           <p className="mx-auto mb-12 max-w-2xl text-gray-600 text-center">
             Businesses face these inventory management problems every day
           </p>
@@ -62,9 +48,7 @@ const ShipStockHome = () => {
                 className="bg-white shadow hover:shadow-lg border-none transition-all"
               >
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-primary text-xl">
-                    {problem.tagline}
-                  </CardTitle>
+                  <CardTitle className="text-primary text-xl">{problem.tagline}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="py-2 pl-4 border-primary/20 border-l-4 text-gray-600 italic">
@@ -82,8 +66,7 @@ const ShipStockHome = () => {
         <div className="mx-auto px-4 max-w-6xl">
           <h2 className="mb-4 font-bold text-3xl text-center">Key Benefits</h2>
           <p className="mx-auto mb-12 max-w-2xl text-gray-600 text-center">
-            Ship Stock provides powerful solutions to streamline your inventory
-            management
+            Ship Stock provides powerful solutions to streamline your inventory management
           </p>
           <div className="gap-8 grid md:grid-cols-3">
             {Object.entries(content.benefits).map(([key, benefit]) => (
@@ -94,28 +77,17 @@ const ShipStockHome = () => {
                 <div className="bg-primary h-2" />
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-2">
-                    {key === "stock" && (
-                      <Package className="w-6 h-6 text-primary" />
-                    )}
-                    {key === "documents" && (
-                      <FileText className="w-6 h-6 text-primary" />
-                    )}
-                    {key === "build" && (
-                      <BarChart3 className="w-6 h-6 text-primary" />
-                    )}
+                    {key === "stock" && <Package className="w-6 h-6 text-primary" />}
+                    {key === "documents" && <FileText className="w-6 h-6 text-primary" />}
+                    {key === "build" && <BarChart3 className="w-6 h-6 text-primary" />}
                     <CardTitle>{benefit.title}</CardTitle>
                   </div>
-                  <CardDescription className="text-base">
-                    {benefit.description}
-                  </CardDescription>
+                  <CardDescription className="text-base">{benefit.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3">
                     {benefit.bullets.map((bullet, index) => (
-                      <li
-                        key={`${index}-${bullet}`}
-                        className="flex items-start gap-2"
-                      >
+                      <li key={`${index}-${bullet}`} className="flex items-start gap-2">
                         <CheckCircle className="flex-shrink-0 mt-0.5 w-5 h-5 text-primary" />
                         <span>{bullet}</span>
                       </li>
@@ -131,20 +103,16 @@ const ShipStockHome = () => {
       {/* Testimonials Section */}
       <div className="py-20">
         <div className="mx-auto px-4 max-w-6xl">
-          <h2 className="mb-4 font-bold text-3xl text-center">
-            What Our Users Say
-          </h2>
+          <h2 className="mb-4 font-bold text-3xl text-center">What Our Users Say</h2>
           <p className="mx-auto mb-12 max-w-2xl text-gray-600 text-center">
-            Businesses of all sizes trust Ship Stock for their inventory
-            management
+            Businesses of all sizes trust Ship Stock for their inventory management
           </p>
           <div className="gap-6 grid md:grid-cols-2">
             <Card className="bg-white shadow border-none">
               <CardContent className="pt-6">
                 <p className="mb-6 text-gray-600 italic">
-                  "Ship Stock transformed our inventory management. We've
-                  reduced stockouts by 85% and our team saves 15 hours every
-                  week on paperwork."
+                  "Ship Stock transformed our inventory management. We've reduced stockouts by 85%
+                  and our team saves 15 hours every week on paperwork."
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="flex justify-center items-center bg-primary/20 rounded-full w-10 h-10 font-bold text-primary">
@@ -152,9 +120,7 @@ const ShipStockHome = () => {
                   </div>
                   <div>
                     <p className="font-medium">Jane Doe</p>
-                    <p className="text-gray-500 text-sm">
-                      Operations Manager, TechRetail
-                    </p>
+                    <p className="text-gray-500 text-sm">Operations Manager, TechRetail</p>
                   </div>
                 </div>
               </CardContent>
@@ -162,9 +128,8 @@ const ShipStockHome = () => {
             <Card className="bg-white shadow border-none">
               <CardContent className="pt-6">
                 <p className="mb-6 text-gray-600 italic">
-                  "The document management feature alone has saved us countless
-                  hours. Being able to link invoices directly to inventory items
-                  is a game-changer."
+                  "The document management feature alone has saved us countless hours. Being able to
+                  link invoices directly to inventory items is a game-changer."
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="flex justify-center items-center bg-primary/20 rounded-full w-10 h-10 font-bold text-primary">
@@ -172,9 +137,7 @@ const ShipStockHome = () => {
                   </div>
                   <div>
                     <p className="font-medium">Mike Smith</p>
-                    <p className="text-gray-500 text-sm">
-                      CEO, Manufacturing Solutions
-                    </p>
+                    <p className="text-gray-500 text-sm">CEO, Manufacturing Solutions</p>
                   </div>
                 </div>
               </CardContent>
@@ -190,8 +153,7 @@ const ShipStockHome = () => {
             Ready to streamline your inventory management?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-gray-700 text-lg">
-            Join thousands of businesses that have transformed their operations
-            with Ship Stock
+            Join thousands of businesses that have transformed their operations with Ship Stock
           </p>
           <Button size="lg" asChild>
             <Link to="/home">

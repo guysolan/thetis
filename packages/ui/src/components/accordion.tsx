@@ -11,12 +11,7 @@ type AccordionRootProps = AccordionPrimitive.Root.Props & {
   collapsible?: boolean;
 };
 
-function Accordion({
-  className,
-  type = "single",
-  collapsible,
-  ...props
-}: AccordionRootProps) {
+function Accordion({ className, type = "single", collapsible, ...props }: AccordionRootProps) {
   // Base UI uses `multiple`; single = only one open, and closing is always allowed
   const multiple = type === "multiple";
   return (
@@ -39,11 +34,7 @@ function AccordionItem({ className, ...props }: AccordionPrimitive.Item.Props) {
   );
 }
 
-function AccordionTrigger({
-  className,
-  children,
-  ...props
-}: AccordionPrimitive.Trigger.Props) {
+function AccordionTrigger({ className, children, ...props }: AccordionPrimitive.Trigger.Props) {
   return (
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
@@ -68,11 +59,7 @@ function AccordionTrigger({
   );
 }
 
-function AccordionContent({
-  className,
-  children,
-  ...props
-}: AccordionPrimitive.Panel.Props) {
+function AccordionContent({ className, children, ...props }: AccordionPrimitive.Panel.Props) {
   return (
     <AccordionPrimitive.Panel
       data-slot="accordion-content"

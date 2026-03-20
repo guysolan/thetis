@@ -2,6 +2,7 @@
 import Layout from "./Layout.astro";
 import Blog from "@/components/research/Blog.astro";
 import Subscribe from "@/components/Subscribe.astro";
+import StickyAddToCart from "@/components/StickyAddToCart.tsx";
 import { blogSchema } from "../schemas/blog-schema";
 import { Schema } from "astro-seo-schema";
 const { details } = Astro.props;
@@ -26,4 +27,5 @@ const { details } = Astro.props;
         </div>
         <Subscribe />
     </main>
+    <StickyAddToCart variant="splint" lang="en" client:load />
 </Layout>

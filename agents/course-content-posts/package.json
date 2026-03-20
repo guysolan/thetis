@@ -1,0 +1,19 @@
+{
+  "name": "@thetis/course-content-posts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "progress": "bun run src/progress.ts",
+    "generate": "bun run src/generate.ts",
+    "setup": "bun run src/setup.ts",
+    "push": "bun run src/push-to-notion.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "@google/generative-ai": "^0.21.0",
+    "@notionhq/client": "^2.2.15",
+    "notion-to-md": "^3.1.1",
+    "openai": "^4.0.0"
+  }
+}

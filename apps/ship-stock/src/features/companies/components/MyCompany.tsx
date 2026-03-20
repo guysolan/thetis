@@ -2,13 +2,7 @@ import { usePublicUser } from "@/features/auth/hooks/usePublicUser";
 import { useUserCompany } from "../hooks/useUserCompany";
 import { useUpdateUserCompany } from "../hooks/useChangeUserCompany";
 import { useSelectCompanies } from "../api/selectCompanies";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@thetis/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@thetis/ui/select";
 
 const MyCompany = () => {
   const { data: publicUser, isLoading: isLoadingUser } = usePublicUser();
@@ -25,10 +19,7 @@ const MyCompany = () => {
   if (isLoadingUser) return null;
 
   return (
-    <Select
-      value={companyUser?.company_id?.toString()}
-      onValueChange={handleCompanyChange}
-    >
+    <Select value={companyUser?.company_id?.toString()} onValueChange={handleCompanyChange}>
       <SelectTrigger className="w-full h-8 text-sm">
         <SelectValue placeholder="Select company" />
       </SelectTrigger>

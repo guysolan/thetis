@@ -22,11 +22,7 @@ export type { OrderTab };
 export const Route = createFileRoute("/home/orders/")({
   component: OrdersPage,
   validateSearch: (search: Record<string, unknown>): { tab: OrderTab } => ({
-    tab: (tabConfig.some((t) =>
-        t.value === search.tab
-      )
-      ? search.tab
-      : "all") as OrderTab,
+    tab: (tabConfig.some((t) => t.value === search.tab) ? search.tab : "all") as OrderTab,
   }),
   loader: async ({ context }) => {
     await context.queryClient.ensureQueryData(selectOrdersQueryOptions());
@@ -66,19 +62,17 @@ function OrdersPage() {
         <TabsHeader tabsList={tabsList} />
 
         {tabConfig.map(({ value }) => (
-          <TabsContent
-            className="flex flex-col gap-4 w-full"
-            key={value}
-            value={value}
-          >
+          <TabsContent className="flex flex-col gap-4 w-full" key={value} value={value}>
             <OrderHistory
               tab={value}
-              orders={orders?.filter((order) => {
-                if (value === "all") return true;
-                // Tab "quotes" maps to order_type "quote"
-                const matchType = value === "quotes" ? "quote" : value;
-                return order.order_type === matchType;
-              }) ?? []}
+              orders={
+                orders?.filter((order) => {
+                  if (value === "all") return true;
+                  // Tab "quotes" maps to order_type "quote"
+                  const matchType = value === "quotes" ? "quote" : value;
+                  return order.order_type === matchType;
+                }) ?? []
+              }
             />
           </TabsContent>
         ))}

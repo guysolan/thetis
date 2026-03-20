@@ -18,9 +18,7 @@ export async function getDatabaseData(client, databaseId) {
     const results = response?.results;
     console.log(results[2]?.properties?.Section?.select?.name);
 
-    const blogs = results?.filter(
-      (res) => res?.properties?.Section?.select?.name === "Blog",
-    );
+    const blogs = results?.filter((res) => res?.properties?.Section?.select?.name === "Blog");
 
     console.log(results?.length);
     console.log(blogs?.length);
@@ -37,9 +35,7 @@ export async function getPageData(pageId, client = NOTION_CLIENT) {
     if (response) {
       return {
         title: response?.properties?.Name?.title[0]?.plain_text,
-        cover: response?.cover?.file
-          ? response?.cover?.file?.url
-          : response?.cover?.external?.url,
+        cover: response?.cover?.file ? response?.cover?.file?.url : response?.cover?.external?.url,
         description: response?.properties?.description?.name,
         created_time: response?.created_time,
         last_edited_time: response?.last_edited_time,

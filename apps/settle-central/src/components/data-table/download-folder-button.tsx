@@ -4,7 +4,10 @@ import { FolderDown, Loader2 } from "lucide-react";
 const AmazonSettlementCard = ({
   disabled,
   storagePath,
-}: { disabled?: boolean; storagePath: string }) => {
+}: {
+  disabled?: boolean;
+  storagePath: string;
+}) => {
   const { mutate: downloadFile, isPending } = useDownloadFiles();
 
   return (

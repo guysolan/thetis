@@ -11,10 +11,7 @@ const OrdersPage = () => {
 
   return (
     <>
-      <DocumentControls
-        orderNumber={order.order_id}
-        documentType="packingList"
-      />
+      <DocumentControls orderNumber={order.order_id} documentType="packingList" />
       <Document
         order={order}
         options={documentOptions}
@@ -24,15 +21,13 @@ const OrdersPage = () => {
     </>
   );
 };
-export const Route = createFileRoute("/documents/orders/$orderId/packing-list")(
-  {
-    component: OrdersPage,
-    validateSearch: packingListSchema,
-    loader: async ({ context, params }) => {
-      const order = await context.queryClient.ensureQueryData(
-        selectOrderViewByIdQueryOptions(params.orderId),
-      );
-      return { order };
-    },
+export const Route = createFileRoute("/documents/orders/$orderId/packing-list")({
+  component: OrdersPage,
+  validateSearch: packingListSchema,
+  loader: async ({ context, params }) => {
+    const order = await context.queryClient.ensureQueryData(
+      selectOrderViewByIdQueryOptions(params.orderId),
+    );
+    return { order };
   },
-);
+});

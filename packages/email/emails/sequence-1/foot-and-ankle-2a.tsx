@@ -7,8 +7,8 @@ export const MyEmail = ({ recipientName = "" }) => {
     <FootAndAnkle3
       quote={
         <>
-          When I tore my own <HighlightedSpan>Achilles tendon</HighlightedSpan>,
-          the hardest part of the recovery was having to wear the hospital{" "}
+          When I tore my own <HighlightedSpan>Achilles tendon</HighlightedSpan>, the hardest part of
+          the recovery was having to wear the hospital{" "}
           <HighlightedSpan>boot in bed</HighlightedSpan>...
         </>
       }

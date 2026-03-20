@@ -36,13 +36,13 @@ This is the moment you've been waiting for: life without the boot. Weeks 10-12 m
 
 **Typical boot weaning protocol:**
 
-| Day | Activity |
-|-----|----------|
-| Day 1 | Wear shoes indoors for 1-2 hours, boot the rest of the time |
-| Day 2-3 | Increase to 3-4 hours in shoes |
-| Day 4-5 | Majority of the day in shoes |
-| Day 6-7 | Full transition to shoes during the day |
-| Night | May still use night splint for additional protection initially |
+| Day     | Activity                                                       |
+| ------- | -------------------------------------------------------------- |
+| Day 1   | Wear shoes indoors for 1-2 hours, boot the rest of the time    |
+| Day 2-3 | Increase to 3-4 hours in shoes                                 |
+| Day 4-5 | Majority of the day in shoes                                   |
+| Day 6-7 | Full transition to shoes during the day                        |
+| Night   | May still use night splint for additional protection initially |
 
 **Signs you're ready:**
 
@@ -568,18 +568,18 @@ Some swelling is normal when you increase activity.
    - 10mm+ heel drop
    - Good cushioning
    - Firm heel counter
-   [PRODUCT LINK: Recommended Recovery Shoes]
+     [PRODUCT LINK: Recommended Recovery Shoes]
 
 2. **Gel Heel Lifts**
    - 0.5-1cm height
    - Cushioned
    - Fit inside shoes
-   [PRODUCT LINK: Gel Heel Lifts]
+     [PRODUCT LINK: Gel Heel Lifts]
 
 3. **Resistance Bands (if not already owned)**
    - Multiple resistance levels
    - Quality brand (Theraband)
-   [PRODUCT LINK: Theraband Set]
+     [PRODUCT LINK: Theraband Set]
 
 ### Helpful Additions
 
@@ -715,6 +715,6 @@ Initially, no. Supportive shoes are recommended even at home during the transiti
 
 ---
 
-*Continue to [Weeks 13-25: Progressive Strengthening](/recovery/weeks-13-25-progressive-strengthening) when you're ready to learn about building strength, returning to normal activities, and progressing towards sport.*
+_Continue to [Weeks 13-25: Progressive Strengthening](/recovery/weeks-13-25-progressive-strengthening) when you're ready to learn about building strength, returning to normal activities, and progressing towards sport._
 
-*Return to [Weeks 7-9: Final Boot Phase](/recovery/weeks-7-9-final-boot-phase) if you need to review the earlier phase.*
+_Return to [Weeks 7-9: Final Boot Phase](/recovery/weeks-7-9-final-boot-phase) if you need to review the earlier phase._

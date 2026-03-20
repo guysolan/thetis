@@ -13,7 +13,8 @@ Snapshot 📸
 - **5-star reviews:** 100 + (Amazon & clinic portals)
 
 Favourite line so far?
-> “It made a massive difference to getting a good night's rest.” – *DSM*, USA (patients.ts)
+
+> “It made a massive difference to getting a good night's rest.” – _DSM_, USA (patients.ts)
 
 Every splint = one more patient sleeping boot-free. 💤
 

@@ -40,9 +40,7 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
     activeTab = undefined;
   }
 
-  const currentFeature = Object.values(features).find(
-    (f) => f.slug === currentSection,
-  );
+  const currentFeature = Object.values(features).find((f) => f.slug === currentSection);
 
   // Build breadcrumb segments: path segments + optional tab
   const allSegments = [...subSegments];
@@ -55,12 +53,7 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
   return (
     <header className="sticky top-0 z-10 flex items-center h-12 gap-3 px-4 border-b border-border bg-background shrink-0">
       {/* Mobile menu button */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="md:hidden h-8 w-8"
-        onClick={onMenuClick}
-      >
+      <Button variant="ghost" size="icon" className="md:hidden h-8 w-8" onClick={onMenuClick}>
         <Menu size={18} />
       </Button>
 
@@ -72,9 +65,7 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
               <DropdownMenuTrigger className="flex items-center gap-1.5 h-8 text-sm font-medium hover:text-foreground transition-colors">
                 {currentFeature ? (
                   <>
-                    <span className="[&_svg]:size-4 shrink-0">
-                      {currentFeature.icon}
-                    </span>
+                    <span className="[&_svg]:size-4 shrink-0">{currentFeature.icon}</span>
                     <span>{currentFeature.name}</span>
                     {sectionMenuOpen ? (
                       <ChevronUp size={14} className="text-muted-foreground shrink-0" />
@@ -90,9 +81,7 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
                 {Object.values(features).map((item) => (
                   <DropdownMenuItem key={item.name} asChild>
                     <Link to={item.href} className="flex items-center gap-2">
-                      <span className="[&_svg]:size-4 shrink-0">
-                        {item.icon}
-                      </span>
+                      <span className="[&_svg]:size-4 shrink-0">{item.icon}</span>
                       <span>{item.name}</span>
                     </Link>
                   </DropdownMenuItem>

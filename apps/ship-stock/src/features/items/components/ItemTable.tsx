@@ -1,14 +1,7 @@
 import { Badge } from "@thetis/ui/badge";
 import { useSelectItemsView } from "@/features/items/api/selectItemsView.ts";
 import type { ItemType, ItemView } from "@/features/items/types.ts";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 
 import ItemActionsPopover from "./ItemActionsPopover";
 import { defaultCurrency } from "../../../constants/currencies";

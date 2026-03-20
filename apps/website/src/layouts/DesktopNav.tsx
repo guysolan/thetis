@@ -60,8 +60,7 @@ const LinkCard = ({
           <div
             className={cn(
               "flex justify-center items-center rounded-md w-10 h-10 transition-colors shrink-0",
-              variant === "default" &&
-                "bg-primary/10 text-primary group-hover:bg-primary/20",
+              variant === "default" && "bg-primary/10 text-primary group-hover:bg-primary/20",
               variant === "outline" &&
                 "bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 group-hover:bg-neutral-200 dark:group-hover:bg-neutral-600",
             )}
@@ -74,8 +73,7 @@ const LinkCard = ({
             className={cn(
               "mb-1.5 font-semibold text-md text-neutral-900 dark:text-neutral-100 leading-tight",
               variant === "default" && "text-primary",
-              variant === "outline" &&
-                "text-neutral-900 dark:text-neutral-100",
+              variant === "outline" && "text-neutral-900 dark:text-neutral-100",
             )}
           >
             {title}
@@ -84,8 +82,7 @@ const LinkCard = ({
             className={cn(
               "text-sm line-clamp-2 leading-tight",
               variant === "default" && "text-primary/70",
-              variant === "outline" &&
-                "text-neutral-600 dark:text-neutral-400",
+              variant === "outline" && "text-neutral-600 dark:text-neutral-400",
             )}
           >
             {description}
@@ -109,10 +106,7 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
   const recoveryPhaseLinks = getRecoveryPhaseRoutesByLanguage(lang);
 
   // Get dynamic URLs for the current language
-  const splintRoute = getRouteBySlugAndLanguage(
-    "achilles-rupture-splint",
-    lang,
-  );
+  const splintRoute = getRouteBySlugAndLanguage("achilles-rupture-splint", lang);
   const reviewsRoute = getRouteBySlugAndLanguage("reviews", lang);
   const courseRoute = getRouteBySlugAndLanguage("course", lang);
 
@@ -133,10 +127,7 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
           {/* Course - Direct Link */}
           {courseRoute && (
             <NavigationMenuItem>
-              <NavigationMenuLink
-                href={courseRoute.href}
-                className={navigationMenuTriggerStyle()}
-              >
+              <NavigationMenuLink href={courseRoute.href} className={navigationMenuTriggerStyle()}>
                 {courseRoute.title}
               </NavigationMenuLink>
             </NavigationMenuItem>
@@ -145,12 +136,8 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
           {/* Achilles Rupture Splint - Dropdown: hero image + See product, How to buy, Reviews (LinkCard style) */}
           {splintRoute && (
             <NavigationMenuItem>
-              <NavigationMenuTrigger>
-                {splintRoute.title}
-              </NavigationMenuTrigger>
-              <NavigationMenuContent
-                className={cn("p-5 w-[420px] min-w-[420px]", contentWidth)}
-              >
+              <NavigationMenuTrigger>{splintRoute.title}</NavigationMenuTrigger>
+              <NavigationMenuContent className={cn("p-5 w-[420px] min-w-[420px]", contentWidth)}>
                 <div className="gap-4 grid grid-cols-1">
                   {/* Main: hero image + See product */}
                   <NavigationMenuLink asChild>
@@ -170,8 +157,7 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
                       </div>
                       <div className="flex flex-col justify-center min-w-0">
                         <h3 className="mb-1 font-semibold text-md text-primary leading-tight">
-                          {(t as Record<string, string>).splintSeeProduct ??
-                            "See product"}
+                          {(t as Record<string, string>).splintSeeProduct ?? "See product"}
                         </h3>
                         <p className="text-primary/70 text-sm line-clamp-2 leading-relaxed">
                           {splintRoute.description}
@@ -182,25 +168,25 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
                   {/* How to buy + Reviews: same style as Professionals */}
                   <div className="gap-3 grid grid-cols-1 sm:grid-cols-2">
                     <LinkCard
-                      title={(t as Record<string, string>).splintHowToBuy ??
-                        "How to buy"}
-                      description={lang === "en"
-                        ? "Find where to buy in your country."
-                        : lang === "de"
-                        ? "Finden Sie, wo Sie in Ihrem Land kaufen können."
-                        : lang === "fr"
-                        ? "Trouvez où acheter dans votre pays."
-                        : lang === "es"
-                        ? "Encuentra dónde comprar en tu país."
-                        : "Trova dove acquistare nel tuo paese."}
+                      title={(t as Record<string, string>).splintHowToBuy ?? "How to buy"}
+                      description={
+                        lang === "en"
+                          ? "Find where to buy in your country."
+                          : lang === "de"
+                            ? "Finden Sie, wo Sie in Ihrem Land kaufen können."
+                            : lang === "fr"
+                              ? "Trouvez où acheter dans votre pays."
+                              : lang === "es"
+                                ? "Encuentra dónde comprar en tu país."
+                                : "Trova dove acquistare nel tuo paese."
+                      }
                       href={howToBuyHref}
                       icon={<MapPin className="w-5 h-5" />}
                       variant="outline"
                     />
                     {reviewsRoute && (
                       <LinkCard
-                        title={(t as Record<string, string>).splintReviews ??
-                          "Reviews"}
+                        title={(t as Record<string, string>).splintReviews ?? "Reviews"}
                         description={reviewsRoute.description}
                         href={reviewsRoute.href}
                         icon={<Star className="w-5 h-5" />}
@@ -215,9 +201,7 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
 
           {/* Learning Resources - Dropdown (FAQs + Timeline) */}
           <NavigationMenuItem>
-            <NavigationMenuTrigger>
-              {t.patientGuides}
-            </NavigationMenuTrigger>
+            <NavigationMenuTrigger>{t.patientGuides}</NavigationMenuTrigger>
             <NavigationMenuContent className={cn("p-5", contentWidth)}>
               <div className="flex sm:flex-row flex-col gap-4">
                 <div className="flex flex-col flex-1 gap-2 min-w-0">
@@ -256,9 +240,7 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
 
           {/* Professionals - Dropdown */}
           <NavigationMenuItem>
-            <NavigationMenuTrigger>
-              {t.professionals}
-            </NavigationMenuTrigger>
+            <NavigationMenuTrigger>{t.professionals}</NavigationMenuTrigger>
             <NavigationMenuContent className={cn("p-5", contentWidth)}>
               <div className="gap-4 grid grid-cols-1 sm:grid-cols-2">
                 {partnerLinks.map((link) => (
@@ -275,9 +257,7 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
 
           {/* Contact - Dropdown */}
           <NavigationMenuItem>
-            <NavigationMenuTrigger>
-              {t.contact}
-            </NavigationMenuTrigger>
+            <NavigationMenuTrigger>{t.contact}</NavigationMenuTrigger>
             <NavigationMenuContent className={cn("p-5", contentWidth)}>
               <div className="flex sm:flex-row flex-col gap-4">
                 <div className="flex flex-col flex-1 gap-3 min-w-0">

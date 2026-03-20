@@ -16,7 +16,7 @@ async function main() {
       orderNumber: "{{ORDER_NUMBER}}",
       courseType: "{{COURSE_TYPE}}",
       claimUrl: "{{CLAIM_URL}}",
-    })
+    }),
   );
 
   // Escape backticks and $ for template literal
@@ -45,7 +45,7 @@ export function renderCourseAccessEmail(data: {
   // Output path - write to the Edge Function directory
   const outputPath = join(
     __dirname,
-    "../../../../services/thetis/supabase/functions/shopify-order-webhook/email-template.ts"
+    "../../../../services/thetis/supabase/functions/shopify-order-webhook/email-template.ts",
   );
 
   writeFileSync(outputPath, tsContent, "utf-8");

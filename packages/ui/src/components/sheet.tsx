@@ -33,12 +33,10 @@ const sheetVariants = cva(
   {
     variants: {
       side: {
-        top:
-          "inset-x-0 top-0 border-b data-[closed]:slide-out-to-top data-[open]:slide-in-from-top",
+        top: "inset-x-0 top-0 border-b data-[closed]:slide-out-to-top data-[open]:slide-in-from-top",
         bottom:
           "inset-x-0 bottom-0 border-t data-[closed]:slide-out-to-bottom data-[open]:slide-in-from-bottom",
-        left:
-          "inset-y-0 left-0 h-full w-5/6 md:w-3/4 border-r data-[closed]:slide-out-to-left data-[open]:slide-in-from-left",
+        left: "inset-y-0 left-0 h-full w-5/6 md:w-3/4 border-r data-[closed]:slide-out-to-left data-[open]:slide-in-from-left",
         right:
           "inset-y-0 right-0 h-full w-5/6 md:w-3/4  border-l data-[closed]:slide-out-to-right data-[open]:slide-in-from-right",
       },
@@ -50,54 +48,36 @@ const sheetVariants = cva(
 );
 
 interface SheetContentProps
-  extends
-    React.ComponentPropsWithoutRef<typeof Sheet.Popup>,
-    VariantProps<typeof sheetVariants> {}
+  extends React.ComponentPropsWithoutRef<typeof Sheet.Popup>, VariantProps<typeof sheetVariants> {}
 
-const SheetContent = React.forwardRef<
-  HTMLDivElement,
-  SheetContentProps
->(({ side = "right", className, children, ...props }, ref) => (
-  <SheetPortal>
-    <SheetOverlay />
-    <Sheet.Popup
-      ref={ref}
-      className={cn("pointer-events-auto", sheetVariants({ side }), className)}
-      {...props}
-    >
-      <SheetClose className="top-4 right-4 absolute data-[open]:bg-zinc-100 dark:data-[open]:bg-zinc-800 opacity-70 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-zinc-300 ring-offset-white focus:ring-offset-2 dark:ring-offset-zinc-950 transition-opacity disabled:pointer-events-none">
-        <X size={20} />
-        <span className="sr-only">Close</span>
-      </SheetClose>
-      {children}
-    </Sheet.Popup>
-  </SheetPortal>
-));
+const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
+  ({ side = "right", className, children, ...props }, ref) => (
+    <SheetPortal>
+      <SheetOverlay />
+      <Sheet.Popup
+        ref={ref}
+        className={cn("pointer-events-auto", sheetVariants({ side }), className)}
+        {...props}
+      >
+        <SheetClose className="top-4 right-4 absolute data-[open]:bg-zinc-100 dark:data-[open]:bg-zinc-800 opacity-70 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-zinc-950 dark:focus:ring-zinc-300 ring-offset-white focus:ring-offset-2 dark:ring-offset-zinc-950 transition-opacity disabled:pointer-events-none">
+          <X size={20} />
+          <span className="sr-only">Close</span>
+        </SheetClose>
+        {children}
+      </Sheet.Popup>
+    </SheetPortal>
+  ),
+);
 SheetContent.displayName = "SheetContent";
 
-const SheetHeader = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "flex flex-col space-y-2 sm:text-left text-center",
-      className,
-    )}
-    {...props}
-  />
+const SheetHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("flex flex-col space-y-2 sm:text-left text-center", className)} {...props} />
 );
 SheetHeader.displayName = "SheetHeader";
 
-const SheetFooter = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
+const SheetFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(
-      "flex sm:flex-row flex-col-reverse sm:justify-end sm:space-x-2",
-      className,
-    )}
+    className={cn("flex sm:flex-row flex-col-reverse sm:justify-end sm:space-x-2", className)}
     {...props}
   />
 );
@@ -109,10 +89,7 @@ const SheetTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <Sheet.Title
     ref={ref}
-    className={cn(
-      "font-semibold text-zinc-950 dark:text-zinc-50 text-lg",
-      className,
-    )}
+    className={cn("font-semibold text-zinc-950 dark:text-zinc-50 text-lg", className)}
     {...props}
   />
 ));

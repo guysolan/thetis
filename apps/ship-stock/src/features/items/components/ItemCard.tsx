@@ -71,11 +71,7 @@ const ItemCard = ({ item }: { item: ItemView }) => {
       </CardHeader>
       <CardContent>
         <ItemDetails item={item} />
-        <ItemComponents
-          stopEditing={() => setIsEditing(false)}
-          isEditing={isEditing}
-          item={item}
-        />
+        <ItemComponents stopEditing={() => setIsEditing(false)} isEditing={isEditing} item={item} />
       </CardContent>
     </Card>
   );

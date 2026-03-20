@@ -46,7 +46,7 @@ export interface LocationInfo {
  * Get unique locations from stockpiles that hold stock
  */
 export function getLocationsFromStockpiles(
-  stockpiles: StockpileView[] | undefined
+  stockpiles: StockpileView[] | undefined,
 ): LocationInfo[] {
   if (!stockpiles) return [];
 
@@ -72,13 +72,13 @@ function getItemQuantityAtDate(
   inventoryHistory: InventoryHistoryRecord[],
   itemId: number,
   addressId: number,
-  asOfDate: string
+  asOfDate: string,
 ): number {
   const cutoff = dayjs(asOfDate).endOf("day");
 
   // Sort history by date descending to find most recent first
   const sortedHistory = [...inventoryHistory].sort(
-    (a, b) => dayjs(b.transaction_date).valueOf() - dayjs(a.transaction_date).valueOf()
+    (a, b) => dayjs(b.transaction_date).valueOf() - dayjs(a.transaction_date).valueOf(),
   );
 
   for (const record of sortedHistory) {
@@ -86,7 +86,7 @@ function getItemQuantityAtDate(
     if (recordDate.isAfter(cutoff)) continue;
 
     const itemEntry = record.items.find(
-      (item) => item.id === itemId && item.address_id === addressId
+      (item) => item.id === itemId && item.address_id === addressId,
     );
 
     if (itemEntry) {
@@ -102,7 +102,7 @@ function getItemQuantityAtDate(
  * Filters out packages and services - only includes parts and products.
  */
 function getAllUniqueItems(
-  inventoryHistory: InventoryHistoryRecord[]
+  inventoryHistory: InventoryHistoryRecord[],
 ): Map<number, { id: number; name: string; type: string }> {
   const items = new Map<number, { id: number; name: string; type: string }>();
 
@@ -134,7 +134,7 @@ function getAllUniqueItems(
 export function calculateStockValueOverTime(
   inventoryHistory: InventoryHistoryRecord[],
   items: Item[],
-  stockpiles: StockpileView[] | undefined
+  stockpiles: StockpileView[] | undefined,
 ): { data: StockValueDataPoint[]; locations: LocationInfo[] } {
   if (!inventoryHistory.length || !items.length) {
     return { data: [], locations: [] };
@@ -156,9 +156,9 @@ export function calculateStockValueOverTime(
   const uniqueItems = getAllUniqueItems(inventoryHistory);
 
   // Get unique transaction dates, sorted ascending
-  const uniqueDates = [
-    ...new Set(inventoryHistory.map((r) => r.transaction_date)),
-  ].sort((a, b) => dayjs(a).valueOf() - dayjs(b).valueOf());
+  const uniqueDates = [...new Set(inventoryHistory.map((r) => r.transaction_date))].sort(
+    (a, b) => dayjs(a).valueOf() - dayjs(b).valueOf(),
+  );
 
   // For each date, calculate value per location by looking up each item's quantity
   const dataPoints: StockValueDataPoint[] = [];
@@ -180,12 +180,7 @@ export function calculateStockValueOverTime(
       let locationTotal = 0;
 
       for (const [itemId] of uniqueItems) {
-        const quantity = getItemQuantityAtDate(
-          inventoryHistory,
-          itemId,
-          loc.id,
-          date
-        );
+        const quantity = getItemQuantityAtDate(inventoryHistory, itemId, loc.id, date);
         // Clamp negative quantities to 0
         const clampedQty = Math.max(0, quantity);
         const price = priceMap.get(itemId) ?? 0;
@@ -216,7 +211,7 @@ export function getItemValueDetailsAtDate(
   inventoryHistory: InventoryHistoryRecord[],
   items: Item[],
   locations: LocationInfo[],
-  asOfDate: string
+  asOfDate: string,
 ): ItemValueDetail[] {
   if (!inventoryHistory.length || !items.length || !locations.length) {
     return [];
@@ -244,12 +239,7 @@ export function getItemValueDetailsAtDate(
     let totalValue = 0;
 
     for (const loc of locations) {
-      const quantity = getItemQuantityAtDate(
-        inventoryHistory,
-        itemId,
-        loc.id,
-        asOfDate
-      );
+      const quantity = getItemQuantityAtDate(inventoryHistory, itemId, loc.id, asOfDate);
       // Clamp negative quantities to 0
       const clampedQty = Math.max(0, quantity);
       const value = clampedQty * price;

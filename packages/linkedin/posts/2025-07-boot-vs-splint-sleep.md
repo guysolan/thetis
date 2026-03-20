@@ -7,12 +7,12 @@ type: "Story"
 😴 **Sleep heals – but bulky CAM boots hate bedtime.** We asked the last 100 Amazon reviewers:
 
 | Device worn at night | Avg comfort score¹ |
-|----------------------|--------------------|
-| Standard CAM boot | 3 / 10 |
-| Thetis Night Splint | 8 / 10 |
+| -------------------- | ------------------ |
+| Standard CAM boot    | 3 / 10             |
+| Thetis Night Splint  | 8 / 10             |
 
-> “It made a massive difference to getting a good night's rest.” – *DSM*, USA  
-> “Total game changer for sleeping while recovering!” – *Chad*, USA
+> “It made a massive difference to getting a good night's rest.” – _DSM_, USA  
+> “Total game changer for sleeping while recovering!” – _Chad_, USA
 
 Clinicians: better sleep 👉 better patient comfort and quality of life.
 

@@ -46,15 +46,9 @@ export const InfiniteMovingCards = ({
   const getDirection = () => {
     if (containerRef.current) {
       if (direction === "left") {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "forwards"
-        );
+        containerRef.current.style.setProperty("--animation-direction", "forwards");
       } else {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "reverse"
-        );
+        containerRef.current.style.setProperty("--animation-direction", "reverse");
       }
     }
   };
@@ -74,7 +68,7 @@ export const InfiniteMovingCards = ({
       ref={containerRef}
       className={cn(
         "scroller relative z-20  max-w-7xl overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
-        className
+        className,
       )}
     >
       <ul
@@ -82,15 +76,14 @@ export const InfiniteMovingCards = ({
         className={cn(
           " flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap",
           start && "animate-scroll ",
-          pauseOnHover && "hover:[animation-play-state:paused]"
+          pauseOnHover && "hover:[animation-play-state:paused]",
         )}
       >
         {items.map((item, idx) => (
           <li
             className="relative flex-shrink-0 border-slate-700 px-8 py-6 border border-b-0 rounded-2xl w-[350px] md:w-[450px] max-w-full"
             style={{
-              background:
-                "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
+              background: "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
             }}
             key={item.name}
           >

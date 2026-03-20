@@ -10,23 +10,13 @@ import {
 } from "@thetis/ui/chart";
 import { Card, CardContent, CardHeader, CardTitle } from "@thetis/ui/card";
 import { Button } from "@thetis/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 import { ArrowLeft, TrendingUp } from "lucide-react";
 import {
   selectInventoryHistoryQueryOptions,
   useSelectInventoryHistory,
 } from "@/features/stock-history/api/selectInventoryHistory";
-import {
-  selectItemsQueryOptions,
-  useSelectItems,
-} from "@/features/items/api/selectItems";
+import { selectItemsQueryOptions, useSelectItems } from "@/features/items/api/selectItems";
 import {
   selectStockpilesQueryOptions,
   useSelectStockpiles,
@@ -57,11 +47,7 @@ const StockValuePage = () => {
   const [hoveredData, setHoveredData] = useState<StockValueDataPoint | null>(null);
 
   const { data: chartData, locations } = useMemo(() => {
-    return calculateStockValueOverTime(
-      inventoryHistory ?? [],
-      items ?? [],
-      stockpiles
-    );
+    return calculateStockValueOverTime(inventoryHistory ?? [], items ?? [], stockpiles);
   }, [inventoryHistory, items, stockpiles]);
 
   // Build chart config dynamically based on locations
@@ -77,23 +63,19 @@ const StockValuePage = () => {
   }, [locations]);
 
   // Get current total value (latest data point)
-  const currentTotal = chartData.length > 0 
-    ? chartData[chartData.length - 1].total 
-    : 0;
+  const currentTotal = chartData.length > 0 ? chartData[chartData.length - 1].total : 0;
 
   // Get the date to show in the table (hovered or latest)
-  const selectedDate = hoveredData?.date ?? (chartData.length > 0 ? chartData[chartData.length - 1].date : null);
-  const selectedDateFormatted = hoveredData?.dateFormatted ?? (chartData.length > 0 ? chartData[chartData.length - 1].dateFormatted : "Current");
+  const selectedDate =
+    hoveredData?.date ?? (chartData.length > 0 ? chartData[chartData.length - 1].date : null);
+  const selectedDateFormatted =
+    hoveredData?.dateFormatted ??
+    (chartData.length > 0 ? chartData[chartData.length - 1].dateFormatted : "Current");
 
   // Get item details for the selected date
   const itemDetails = useMemo(() => {
     if (!selectedDate || !inventoryHistory?.length || !items?.length) return [];
-    return getItemValueDetailsAtDate(
-      inventoryHistory,
-      items,
-      locations,
-      selectedDate
-    );
+    return getItemValueDetailsAtDate(inventoryHistory, items, locations, selectedDate);
   }, [selectedDate, inventoryHistory, items, locations]);
 
   // Calculate totals for the table
@@ -181,11 +163,16 @@ const StockValuePage = () => {
                           {payload.map((entry, i) => {
                             const loc = locations.find((l) => l.key === entry.dataKey);
                             return (
-                              <div key={entry.dataKey} className="flex items-center justify-between gap-4">
+                              <div
+                                key={entry.dataKey}
+                                className="flex items-center justify-between gap-4"
+                              >
                                 <div className="flex items-center gap-2">
                                   <div
                                     className="h-2.5 w-2.5 rounded-full"
-                                    style={{ backgroundColor: CHART_COLORS[i % CHART_COLORS.length] }}
+                                    style={{
+                                      backgroundColor: CHART_COLORS[i % CHART_COLORS.length],
+                                    }}
                                   />
                                   <span className="text-sm text-muted-foreground">
                                     {loc?.name ?? entry.dataKey}
@@ -239,27 +226,19 @@ const StockValuePage = () => {
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {locations.map((loc, i) => {
                 const latestValue = chartData[chartData.length - 1][loc.key] as number;
-                const percentage = currentTotal > 0 
-                  ? ((latestValue / currentTotal) * 100).toFixed(1) 
-                  : "0";
+                const percentage =
+                  currentTotal > 0 ? ((latestValue / currentTotal) * 100).toFixed(1) : "0";
                 return (
-                  <div
-                    key={loc.key}
-                    className="flex items-center gap-3 p-3 rounded-lg border"
-                  >
+                  <div key={loc.key} className="flex items-center gap-3 p-3 rounded-lg border">
                     <div
                       className="w-3 h-3 rounded-full shrink-0"
                       style={{ backgroundColor: CHART_COLORS[i % CHART_COLORS.length] }}
                     />
                     <div className="flex-1 min-w-0">
                       <p className="font-medium truncate">{loc.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {percentage}% of total
-                      </p>
+                      <p className="text-sm text-muted-foreground">{percentage}% of total</p>
                     </div>
-                    <p className="font-semibold tabular-nums">
-                      {formatCurrencyValue(latestValue)}
-                    </p>
+                    <p className="font-semibold tabular-nums">{formatCurrencyValue(latestValue)}</p>
                   </div>
                 );
               })}
@@ -312,9 +291,7 @@ const StockValuePage = () => {
                             </span>
                           </TableCell>
                           {locations.map((loc) => {
-                            const locDetail = item.locations.find(
-                              (l) => l.locationId === loc.id
-                            );
+                            const locDetail = item.locations.find((l) => l.locationId === loc.id);
                             return (
                               <TableCell key={loc.id} className="text-right tabular-nums">
                                 {locDetail && locDetail.value > 0 ? (

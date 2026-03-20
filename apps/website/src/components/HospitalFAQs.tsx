@@ -1,12 +1,7 @@
 import React from "react";
 import FAQs from "@/components/ui/faqs";
 import type { FAQCategory } from "@/components/ui/faqs";
-import {
-  retailPrice,
-  hcpcsCode,
-  altCptCode,
-  shippingCostsUS,
-} from "@/data/splintPricing";
+import { retailPrice, hcpcsCode, altCptCode, shippingCostsUS } from "@/data/splintPricing";
 
 const hospitalFaqs: FAQCategory[] = [
   {
@@ -22,25 +17,22 @@ const hospitalFaqs: FAQCategory[] = [
         answer: (
           <>
             <p>
-              Our Achilles Rupture Splint serves two critical functions in the
-              treatment pathway:
+              Our Achilles Rupture Splint serves two critical functions in the treatment pathway:
             </p>
             <ol className="space-y-3 mt-3 pl-5 list-decimal">
               <li>
-                <strong>ER Immediate Care:</strong> Can be used in emergency
-                settings as an initial treatment option instead of applying a
-                cast, providing immediate stabilization while being more
-                comfortable for patients
+                <strong>ER Immediate Care:</strong> Can be used in emergency settings as an initial
+                treatment option instead of applying a cast, providing immediate stabilization while
+                being more comfortable for patients
               </li>
               <li>
-                <strong>Night Splint During Recovery:</strong> Used during weeks
-                2-12 of recovery to maintain proper foot position during sleep,
-                complementing daytime boot treatment
+                <strong>Night Splint During Recovery:</strong> Used during weeks 2-12 of recovery to
+                maintain proper foot position during sleep, complementing daytime boot treatment
               </li>
             </ol>
             <p className="mt-3">
-              This dual functionality makes it versatile across different
-              departments and treatment stages.
+              This dual functionality makes it versatile across different departments and treatment
+              stages.
             </p>
           </>
         ),
@@ -54,34 +46,27 @@ const hospitalFaqs: FAQCategory[] = [
         question: "Where should hospitals store the splints?",
         answer: (
           <>
-            <p>
-              Hospitals have two main options for storing and distributing
-              splints:
-            </p>
+            <p>Hospitals have two main options for storing and distributing splints:</p>
             <ul className="mt-3 pl-5 list-disc">
               <li>
-                <strong>Emergency Department:</strong> Keep a supply in the ER
-                for immediate use when diagnosing Achilles tendon ruptures,
-                allowing immediate treatment without the need for casting
+                <strong>Emergency Department:</strong> Keep a supply in the ER for immediate use
+                when diagnosing Achilles tendon ruptures, allowing immediate treatment without the
+                need for casting
               </li>
               <li>
-                <strong>Fracture Clinic/Orthopedic Department:</strong> Store
-                inventory here for follow-up appointments, where splints can be
-                either:
+                <strong>Fracture Clinic/Orthopedic Department:</strong> Store inventory here for
+                follow-up appointments, where splints can be either:
                 <ul className="mt-2 pl-5 list-disc">
                   <li>
-                    Provided to patients as part of their treatment plan
-                    (billable to insurance)
+                    Provided to patients as part of their treatment plan (billable to insurance)
                   </li>
-                  <li>
-                    Sold directly to patients at the suggested retail price
-                  </li>
+                  <li>Sold directly to patients at the suggested retail price</li>
                 </ul>
               </li>
             </ul>
             <p className="mt-3">
-              Many facilities choose to maintain inventory in both locations to
-              provide comprehensive care throughout the patient journey.
+              Many facilities choose to maintain inventory in both locations to provide
+              comprehensive care throughout the patient journey.
             </p>
           </>
         ),
@@ -95,17 +80,15 @@ const hospitalFaqs: FAQCategory[] = [
         question: "How do hospitals benefit financially?",
         answer: (
           <>
-            <p className="mb-4">
-              Hospitals can generate revenue in two primary ways:
-            </p>
+            <p className="mb-4">Hospitals can generate revenue in two primary ways:</p>
             <ol className="space-y-3 pl-5 list-decimal">
               <li>
                 <strong>Insurance Reimbursement:</strong> Bill using HCPCS code
                 {hcpcsCode} or CPT code {altCptCode}
               </li>
               <li>
-                <strong>Direct Patient Sales:</strong> Sell to patients at the
-                suggested retail price of ${retailPrice} per splint
+                <strong>Direct Patient Sales:</strong> Sell to patients at the suggested retail
+                price of ${retailPrice} per splint
               </li>
             </ol>
           </>
@@ -116,21 +99,20 @@ const hospitalFaqs: FAQCategory[] = [
         answer: (
           <>
             <p>
-              Our Achilles splints are classified as an Ankle Control Orthosis
-              and eligible for insurance reimbursement.
+              Our Achilles splints are classified as an Ankle Control Orthosis and eligible for
+              insurance reimbursement.
             </p>
             <p className="mt-3">
               <strong>HCPCS Code:</strong> {hcpcsCode}
             </p>
             <p className="mt-1">
-              <strong>Alternative Coding:</strong> Procedure code {altCptCode}{" "}
-              may also be applicable depending on the specific treatment
-              scenario.
+              <strong>Alternative Coding:</strong> Procedure code {altCptCode} may also be
+              applicable depending on the specific treatment scenario.
             </p>
 
             <i className="mt-3">
-              Always verify current reimbursement policies with specific
-              insurance providers as rates may vary.
+              Always verify current reimbursement policies with specific insurance providers as
+              rates may vary.
             </i>
           </>
         ),
@@ -145,8 +127,8 @@ const hospitalFaqs: FAQCategory[] = [
         answer: (
           <>
             <p>
-              Standard shipping times are 5-10 business days for continental US
-              addresses. Expedited shipping options are available upon request.
+              Standard shipping times are 5-10 business days for continental US addresses. Expedited
+              shipping options are available upon request.
             </p>
             <p className="mt-3">Shipping costs for US orders are:</p>
             <ul className="mt-2 pl-5 list-disc">
@@ -155,8 +137,8 @@ const hospitalFaqs: FAQCategory[] = [
               <li>Department Pack (72 units): ${shippingCostsUS["72"]}</li>
             </ul>
             <p className="mt-3">
-              International shipping is available for an additional fee. Please
-              contact us for details.
+              International shipping is available for an additional fee. Please contact us for
+              details.
             </p>
           </>
         ),
@@ -166,15 +148,12 @@ const hospitalFaqs: FAQCategory[] = [
         answer: (
           <>
             <p>
-              Need a different mix of sizes? We can customize your order to
-              match your facility's specific needs.
+              Need a different mix of sizes? We can customize your order to match your facility's
+              specific needs.
             </p>
             <p className="mt-3">
               Contact our healthcare team at{" "}
-              <a
-                href="mailto:info@thetismedical.com"
-                className="text-primary hover:underline"
-              >
+              <a href="mailto:info@thetismedical.com" className="text-primary hover:underline">
                 info@thetismedical.com
               </a>{" "}
               to discuss custom configurations.

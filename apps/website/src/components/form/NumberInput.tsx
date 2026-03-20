@@ -10,12 +10,7 @@ interface NumberInputProps {
   defaultValue?: number;
 }
 
-export function NumberInput({
-  id,
-  name,
-  label,
-  defaultValue = 0,
-}: NumberInputProps) {
+export function NumberInput({ id, name, label, defaultValue = 0 }: NumberInputProps) {
   const [value, setValue] = React.useState(defaultValue);
 
   const incrementValue = () => {
@@ -33,10 +28,7 @@ export function NumberInput({
 
   return (
     <div className="flex flex-row gap-4 w-full">
-      <label
-        htmlFor={id}
-        className="block w-full font-semibold text-base text-neutral-700"
-      >
+      <label htmlFor={id} className="block w-full font-semibold text-base text-neutral-700">
         {label}
       </label>
       <div className="flex justify-center items-center border-gray-400 focus-within:border-primary bg-white border rounded-sm hover:ring-gray-400 hover:ring-1 focus-within:ring-primary focus-within:ring-1 w-full min-w-60 font-semibold text-3xl transition-all duration-100 delay-50 ease">

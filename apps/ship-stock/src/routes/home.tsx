@@ -1,8 +1,5 @@
 import { useState } from "react";
-import {
-  createFileRoute,
-  createRootRouteWithContext,
-} from "@tanstack/react-router";
+import { createFileRoute, createRootRouteWithContext } from "@tanstack/react-router";
 import type { QueryClient } from "@tanstack/react-query";
 import AuthOutlet from "../features/auth/AuthOutlet";
 import SidebarContent from "../features/navigation/Sidebar";
@@ -27,10 +24,7 @@ function RootComponent() {
 
       {/* Mobile sidebar (sheet) */}
       <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-        <SheetContent
-          side="left"
-          className="bg-sidebar p-0 w-64 text-sidebar-foreground"
-        >
+        <SheetContent side="left" className="bg-sidebar p-0 w-64 text-sidebar-foreground">
           <SidebarContent />
         </SheetContent>
       </Sheet>

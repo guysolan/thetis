@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Heading,
-  Html,
-  Section,
-  Button,
-  Link,
-  Img,
-} from "@react-email/components";
+import { Heading, Html, Section, Button, Link, Img } from "@react-email/components";
 import Tailwind from "../tailwind";
 import HighlightedSpan from "../highlighted-span";
 import Unsubscribe from "../unsubscribe";
@@ -30,18 +23,13 @@ export const FootAndAnkle4 = ({ quote, author }: Props) => {
       >
         <Head />
 
-        <Heading
-          as="h1"
-          className="text-gray-900 text-3xl lg:text-4xl text-center"
-        >
+        <Heading as="h1" className="text-gray-900 text-3xl lg:text-4xl text-center">
           Want better <HighlightedSpan>Patient Satisfaction</HighlightedSpan>?
         </Heading>
         {/* Quote Section */}
         <Section className="px-8 py-10">
           <div className="relative mx-auto pl-6 border-gray-300 border-l-4 max-w-2xl">
-            <span className="-top-2 -left-3 absolute font-serif text-gray-300 text-7xl">
-              "
-            </span>
+            <span className="-top-2 -left-3 absolute font-serif text-gray-300 text-7xl">"</span>
             <blockquote className="mb-4 font-serif text-gray-900 text-2xl lg:text-3xl leading-relaxed">
               {quote}
             </blockquote>

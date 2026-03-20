@@ -4,13 +4,13 @@ import { toast } from "sonner";
 import { ItemComponentInsert } from "../types";
 
 export const upsertItemComponents = async (items: ItemComponentInsert[]) => {
-  const { error: deleteCurrentComponents } = await supabase.from(
-    "item_components",
-  ).delete().eq("item_id", Number(items[0].item_id));
+  const { error: deleteCurrentComponents } = await supabase
+    .from("item_components")
+    .delete()
+    .eq("item_id", Number(items[0].item_id));
 
   if (deleteCurrentComponents) throw deleteCurrentComponents;
-  const { data, error } = await supabase.from("item_components").insert(items)
-    .select();
+  const { data, error } = await supabase.from("item_components").insert(items).select();
 
   if (error) throw error;
   return data;

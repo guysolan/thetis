@@ -38,8 +38,7 @@ const incoterms = [
   },
   {
     name: "Free On Board (FOB)",
-    description:
-      "Seller loads goods onto ship. Risk transfers when goods pass ship's rail.",
+    description: "Seller loads goods onto ship. Risk transfers when goods pass ship's rail.",
   },
   {
     name: "Cost and Freight (CFR)",
@@ -58,7 +57,5 @@ const incoterms = [
 ];
 
 export function IncotermsSelect() {
-  return (
-    <SelectWithInfo name="incoterms" label="Incoterms" options={incoterms} />
-  );
+  return <SelectWithInfo name="incoterms" label="Incoterms" options={incoterms} />;
 }

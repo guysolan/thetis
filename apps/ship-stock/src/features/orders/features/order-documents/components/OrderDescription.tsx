@@ -12,9 +12,7 @@ const OrderDescription = ({
   deliveryDates?: string | null;
 }) => {
   // Parse delivery dates if it's a JSON string array
-  const parseDeliveryDates = (
-    jsonString: string | null,
-  ): [string | null, string | null] | null => {
+  const parseDeliveryDates = (jsonString: string | null): [string | null, string | null] | null => {
     if (!jsonString) return null;
 
     try {
@@ -30,8 +28,7 @@ const OrderDescription = ({
   };
 
   const deliveryDateRange = parseDeliveryDates(deliveryDates ?? null);
-  const hasDeliveryDates = deliveryDateRange &&
-    (deliveryDateRange[0] || deliveryDateRange[1]);
+  const hasDeliveryDates = deliveryDateRange && (deliveryDateRange[0] || deliveryDateRange[1]);
 
   // Format delivery date range
   const formatDeliveryDates = () => {
@@ -40,9 +37,9 @@ const OrderDescription = ({
     const [startDate, endDate] = deliveryDateRange;
 
     if (startDate && endDate) {
-      return `${new Date(startDate).toLocaleDateString()} - ${
-        new Date(endDate).toLocaleDateString()
-      }`;
+      return `${new Date(startDate).toLocaleDateString()} - ${new Date(
+        endDate,
+      ).toLocaleDateString()}`;
     } else if (startDate) {
       return `from ${new Date(startDate).toLocaleDateString()}`;
     } else if (endDate) {

@@ -36,10 +36,7 @@ const BuyerSeller = ({ order, fromOptions, toOptions }: BuyerSellerProps) => {
             />
           )}
           {toOptions.billing && (
-            <Address
-              title="Billing Address"
-              address={order.to_billing_address}
-            />
+            <Address title="Billing Address" address={order.to_billing_address} />
           )}
           {toOptions.contact && <Contact contact={order.to_contact} />}
         </div>
@@ -57,10 +54,7 @@ const BuyerSeller = ({ order, fromOptions, toOptions }: BuyerSellerProps) => {
             />
           )}
           {fromOptions.billing && (
-            <Address
-              title="Billing Address"
-              address={order.from_billing_address}
-            />
+            <Address title="Billing Address" address={order.from_billing_address} />
           )}
           {fromOptions.contact && <Contact contact={order.from_contact} />}
         </div>

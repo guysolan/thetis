@@ -2,11 +2,11 @@
 import FAQsLayout from "../../../layouts/FAQsLayout.astro";
 import FaqSchemaAccordion from "../../../components/research/FaqSchemaAccordion.astro";
 import NightSplintAdvert from "../../../components/products/night-splint/NightSplintAdvert.astro";
-import { getAlternateLanguages } from "../../../config/languages";
+import { getAlternateLanguagesForPath } from "../../../content/routes";
 
-// Language configuration
+// Language configuration - route-aware hreflang URLs
 const currentPath = Astro.url.pathname;
-const alternateLanguages = getAlternateLanguages(currentPath, "es");
+const alternateLanguages = getAlternateLanguagesForPath(currentPath, "es");
 ---
 
 <FAQsLayout

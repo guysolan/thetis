@@ -4,4 +4,4 @@ The Achilles rupture night splint: designed specifically for complete tears, it'
 
 Why aren't more patients using it? Awareness. Most patients and even some clinicians don't know this dedicated solution exists.
 
- #AchillesRupture #Orthopedics #PatientCare #MedicalInnovation
+#AchillesRupture #Orthopedics #PatientCare #MedicalInnovation

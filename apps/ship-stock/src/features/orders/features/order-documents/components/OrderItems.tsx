@@ -1,28 +1,22 @@
 import React from "react";
 import type { OrderView } from "../../../types";
 import { useSelectItemsView } from "../../../../items/api/selectItemsView";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 import NumberFlow from "@number-flow/react";
 import type { Currency } from "../../../../../constants/currencies";
 const OrderItems = ({
   orderItems,
   currency,
-}: { orderItems: OrderView["items"]; currency: Currency }) => {
+}: {
+  orderItems: OrderView["items"];
+  currency: Currency;
+}) => {
   const { data: items } = useSelectItemsView();
 
   const invoiceItems = orderItems
     .filter((orderItem) => orderItem.quantity > 0)
     .map((orderItem) => {
-      const itemDetails = items.find(
-        (item) => item.item_id === orderItem.item_id,
-      );
+      const itemDetails = items.find((item) => item.item_id === orderItem.item_id);
       return {
         ...orderItem,
         ...itemDetails,
@@ -43,9 +37,7 @@ const OrderItems = ({
           <TableRow key={item.item_id}>
             <TableCell className="text-black">{item.item_name}</TableCell>
             <TableCell className="text-black">{item.sku}</TableCell>
-            <TableCell className="text-black text-right">
-              {item.quantity}
-            </TableCell>
+            <TableCell className="text-black text-right">{item.quantity}</TableCell>
           </TableRow>
         ))}
       </TableBody>

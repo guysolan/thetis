@@ -1,11 +1,5 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@thetis/ui/tabs";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@thetis/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@thetis/ui/dialog";
 import { useState } from "react";
 
 const packSizes = [
@@ -61,9 +55,7 @@ export default function OrderTabs() {
       defaultValue="starter"
       className="w-full"
       onValueChange={(value) => {
-        setSelectedPack(
-          packSizes.find((pack) => pack.value === value) || packSizes[0],
-        );
+        setSelectedPack(packSizes.find((pack) => pack.value === value) || packSizes[0]);
       }}
     >
       <TabsList className="grid grid-cols-3 bg-gray-100/80 mb-8 p-1 rounded-sm w-full">
@@ -97,19 +89,14 @@ export default function OrderTabs() {
             </svg>
           </div>
           <div>
-            <h3 className="font-bold text-blue-800">
-              Reimbursement Information
-            </h3>
+            <h3 className="font-bold text-blue-800">Reimbursement Information</h3>
             <p className="text-blue-700">
-              HCPCS Code:{" "}
-              <span className="font-semibold">{reimbursementInfo.code}</span> -{" "}
+              HCPCS Code: <span className="font-semibold">{reimbursementInfo.code}</span> -{" "}
               {reimbursementInfo.description}
             </p>
             <p className="text-blue-700">
               Average Reimbursement:{" "}
-              <span className="font-semibold">
-                {reimbursementInfo.averageReimbursement}
-              </span>
+              <span className="font-semibold">{reimbursementInfo.averageReimbursement}</span>
             </p>
           </div>
         </div>
@@ -126,9 +113,7 @@ export default function OrderTabs() {
               />
               <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent rounded-sm">
                 <div className="p-6 text-white">
-                  <p className="mb-2 font-bold text-3xl">
-                    {pack.quantity} Units
-                  </p>
+                  <p className="mb-2 font-bold text-3xl">{pack.quantity} Units</p>
                   <p className="opacity-90 text-xl">Total: ${pack.total}</p>
                 </div>
               </div>
@@ -193,10 +178,7 @@ export default function OrderTabs() {
 
                 <h4 className="mb-2 font-semibold text-lg">Pack Contents:</h4>
                 {Object.entries(pack.splints).map(([key, { qty, name }]) => (
-                  <div
-                    key={key}
-                    className="flex items-center py-3 last:border-0 border-b"
-                  >
+                  <div key={key} className="flex items-center py-3 last:border-0 border-b">
                     <div className="flex-1">
                       <p className="font-medium">{name}</p>
                     </div>
@@ -239,9 +221,7 @@ function OrderDialog({ pack }: { pack: (typeof packSizes)[0] }) {
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div>
-            <label className="block mb-1 font-medium text-sm">
-              Healthcare Facility Name
-            </label>
+            <label className="block mb-1 font-medium text-sm">Healthcare Facility Name</label>
             <input
               type="text"
               required
@@ -251,9 +231,7 @@ function OrderDialog({ pack }: { pack: (typeof packSizes)[0] }) {
           </div>
           <div className="gap-4 grid grid-cols-2">
             <div>
-              <label className="block mb-1 font-medium text-sm">
-                Contact Person
-              </label>
+              <label className="block mb-1 font-medium text-sm">Contact Person</label>
               <input
                 type="text"
                 required
@@ -262,9 +240,7 @@ function OrderDialog({ pack }: { pack: (typeof packSizes)[0] }) {
               />
             </div>
             <div>
-              <label className="block mb-1 font-medium text-sm">
-                Department
-              </label>
+              <label className="block mb-1 font-medium text-sm">Department</label>
               <input
                 type="text"
                 required
@@ -283,9 +259,7 @@ function OrderDialog({ pack }: { pack: (typeof packSizes)[0] }) {
             />
           </div>
           <div>
-            <label className="block mb-1 font-medium text-sm">
-              Phone Number
-            </label>
+            <label className="block mb-1 font-medium text-sm">Phone Number</label>
             <input
               type="tel"
               required
@@ -294,9 +268,7 @@ function OrderDialog({ pack }: { pack: (typeof packSizes)[0] }) {
             />
           </div>
           <div>
-            <label className="block mb-1 font-medium text-sm">
-              Delivery Address
-            </label>
+            <label className="block mb-1 font-medium text-sm">Delivery Address</label>
             <textarea
               required
               className="p-2 border rounded-sm w-full"
@@ -307,9 +279,8 @@ function OrderDialog({ pack }: { pack: (typeof packSizes)[0] }) {
           <div className="bg-gray-50 p-3 rounded-sm text-gray-600 text-sm">
             <p>
               By submitting this form, you're requesting information about our{" "}
-              {pack.name.toLowerCase()}. Our team will contact you within one
-              business day to discuss payment options and confirm your order
-              details.
+              {pack.name.toLowerCase()}. Our team will contact you within one business day to
+              discuss payment options and confirm your order details.
             </p>
           </div>
           <button

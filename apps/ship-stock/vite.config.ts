@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig } from "vite-plus";
 import react from "@vitejs/plugin-react";
 import { TanStackRouterVite } from "@tanstack/router-vite-plugin";
 import path from "node:path";
@@ -27,9 +27,15 @@ export default defineConfig({
     rollupOptions: {
       external: [],
       output: {
-        manualChunks: {
-          "react-vendor": ["react", "react-dom"],
-          "form-vendor": ["react-hook-form", "@hookform/resolvers"],
+        // Vite 8/Rolldown: manualChunks must be a function
+        manualChunks: (id) => {
+          if (id.includes("node_modules/react/") || id.includes("node_modules/react-dom/"))
+            return "react-vendor";
+          if (
+            id.includes("node_modules/react-hook-form/") ||
+            id.includes("node_modules/@hookform/resolvers/")
+          )
+            return "form-vendor";
         },
       },
     },

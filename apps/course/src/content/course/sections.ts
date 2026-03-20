@@ -124,7 +124,7 @@ export const slugToChapter: Record<string, string> = {
   "returning-to-life": "06-recovery",
   // 07-advanced - Days 200-220
   "starting-to-run": "07-advanced",
-  "plyometrics": "07-advanced",
+  plyometrics: "07-advanced",
   "return-to-sport": "07-advanced",
   // 08-long-term - Days 180-240
   "six-month-milestone": "08-long-term",
@@ -174,13 +174,8 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     recoveryRoadmap.title,
     recoveryRoadmap.description,
     {
-      when_useful:
-        "Early in recovery — the big picture of your 9–12 month journey",
-      triggers: [
-        "when you want an overview",
-        "when planning ahead",
-        "at any stage",
-      ],
+      when_useful: "Early in recovery — the big picture of your 9–12 month journey",
+      triggers: ["when you want an overview", "when planning ahead", "at any stage"],
       approximate_days: 0,
     },
     recoveryRoadmap.status || "drafting",
@@ -201,8 +196,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     mentalHealthRecovery.title,
     mentalHealthRecovery.description,
     {
-      when_useful:
-        "Throughout recovery - when struggling mentally or emotionally",
+      when_useful: "Throughout recovery - when struggling mentally or emotionally",
       triggers: [
         "when feeling frustrated",
         "when feeling anxious",
@@ -233,8 +227,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     firstWeekChecklist.title,
     firstWeekChecklist.description,
     {
-      when_useful:
-        "During first week - know what's normal and what to watch for",
+      when_useful: "During first week - know what's normal and what to watch for",
       triggers: ["first week after injury"],
       approximate_days: 7,
     },
@@ -245,8 +238,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     specialistAppointment.title,
     specialistAppointment.description,
     {
-      when_useful:
-        "Before your specialist appointment - prepare questions and know what to expect",
+      when_useful: "Before your specialist appointment - prepare questions and know what to expect",
       triggers: [
         "When your appointment is scheduled (usually 1-3 weeks after injury)",
         "Before your first orthopaedic or fracture clinic visit",
@@ -263,8 +255,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     treatmentDecision.title,
     treatmentDecision.description,
     {
-      when_useful:
-        "When deciding between surgery and non-surgical treatment - usually week 1-3",
+      when_useful: "When deciding between surgery and non-surgical treatment - usually week 1-3",
       triggers: ["when discussing treatment options", "before making decision"],
       approximate_days: 14,
     },
@@ -275,14 +266,8 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     postSurgeryCare.title,
     postSurgeryCare.description,
     {
-      when_useful:
-        "If you had surgery - wound care and scar management (weeks 2-4)",
-      triggers: [
-        "after surgery",
-        "wound care",
-        "scar management",
-        "when to shower",
-      ],
+      when_useful: "If you had surgery - wound care and scar management (weeks 2-4)",
+      triggers: ["after surgery", "wound care", "scar management", "when to shower"],
       approximate_days: 14,
     },
     postSurgeryCare.status || "drafting",
@@ -294,13 +279,8 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     choosingYourBoot.title,
     choosingYourBoot.description,
     {
-      when_useful:
-        "When you get your boot - understand your options and equipment",
-      triggers: [
-        "when boot is prescribed",
-        "if buying boot privately",
-        "when you receive boot",
-      ],
+      when_useful: "When you get your boot - understand your options and equipment",
+      triggers: ["when boot is prescribed", "if buying boot privately", "when you receive boot"],
       approximate_days: 14,
     },
     choosingYourBoot.status || "drafting",
@@ -380,12 +360,8 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     healingProcess.title,
     healingProcess.description,
     {
-      when_useful:
-        "Around week 4 - understand what's happening inside your tendon",
-      triggers: [
-        "when wondering about healing progress",
-        "when feeling impatient",
-      ],
+      when_useful: "Around week 4 - understand what's happening inside your tendon",
+      triggers: ["when wondering about healing progress", "when feeling impatient"],
       approximate_days: 28,
     },
     healingProcess.status || "drafting",
@@ -396,11 +372,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     nutritionForHealing.description,
     {
       when_useful: "Throughout recovery - nutrition supports healing.",
-      triggers: [
-        "when starting recovery",
-        "when building strength",
-        "throughout recovery",
-      ],
+      triggers: ["when starting recovery", "when building strength", "throughout recovery"],
       approximate_days: 28,
     },
     nutritionForHealing.status || "drafting",
@@ -446,13 +418,8 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     drivingGuidelines.title,
     drivingGuidelines.description,
     {
-      when_useful:
-        "When considering driving - timing depends on which leg is injured",
-      triggers: [
-        "when considering driving",
-        "when planning to drive",
-        "when cleared for driving",
-      ],
+      when_useful: "When considering driving - timing depends on which leg is injured",
+      triggers: ["when considering driving", "when planning to drive", "when cleared for driving"],
       approximate_days: 70,
     },
     drivingGuidelines.status || "drafting",
@@ -481,12 +448,8 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     startingPhysio.title,
     startingPhysio.description,
     {
-      when_useful:
-        "When starting physiotherapy out of boot - usually around week 11",
-      triggers: [
-        "when first physio session is scheduled post-boot",
-        "when starting rehab",
-      ],
+      when_useful: "When starting physiotherapy out of boot - usually around week 11",
+      triggers: ["when first physio session is scheduled post-boot", "when starting rehab"],
       approximate_days: 77,
     },
     startingPhysio.status || "drafting",
@@ -496,12 +459,8 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     keyExercises.title,
     keyExercises.description,
     {
-      when_useful:
-        "During early physiotherapy - learn key exercises for this stage",
-      triggers: [
-        "when physio introduces exercises",
-        "when doing home exercises",
-      ],
+      when_useful: "During early physiotherapy - learn key exercises for this stage",
+      triggers: ["when physio introduces exercises", "when doing home exercises"],
       approximate_days: 84,
     },
     keyExercises.status || "drafting",
@@ -512,13 +471,8 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     walkingProperly.title,
     walkingProperly.description,
     {
-      when_useful:
-        "When learning to walk normally again - usually around week 13",
-      triggers: [
-        "when out of boot",
-        "when working on gait",
-        "when correcting limp",
-      ],
+      when_useful: "When learning to walk normally again - usually around week 13",
+      triggers: ["when out of boot", "when working on gait", "when correcting limp"],
       approximate_days: 91,
     },
     walkingProperly.status || "drafting",
@@ -530,11 +484,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     progressiveStrengthening.description,
     {
       when_useful: "During strengthening stage - usually around week 15",
-      triggers: [
-        "when building strength",
-        "when doing heel raises",
-        "when progressing exercises",
-      ],
+      triggers: ["when building strength", "when doing heel raises", "when progressing exercises"],
       approximate_days: 105,
     },
     progressiveStrengthening.status || "drafting",
@@ -547,11 +497,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     buildingCardio.description,
     {
       when_useful: "When ready for cardio exercise - usually around week 17",
-      triggers: [
-        "when cleared for cardio",
-        "when wanting to exercise",
-        "when building fitness",
-      ],
+      triggers: ["when cleared for cardio", "when wanting to exercise", "when building fitness"],
       approximate_days: 120,
     },
     buildingCardio.status || "drafting",
@@ -563,8 +509,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     functionalMilestones.title,
     functionalMilestones.description,
     {
-      when_useful:
-        "When working toward functional goals - usually around week 20",
+      when_useful: "When working toward functional goals - usually around week 20",
       triggers: ["when tracking progress", "when working toward milestones"],
       approximate_days: 140,
     },
@@ -577,13 +522,8 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     returningToLife.title,
     returningToLife.description,
     {
-      when_useful:
-        "When returning to normal activities - usually around week 22",
-      triggers: [
-        "when returning to work",
-        "when resuming normal life",
-        "when feeling stronger",
-      ],
+      when_useful: "When returning to normal activities - usually around week 22",
+      triggers: ["when returning to work", "when resuming normal life", "when feeling stronger"],
       approximate_days: 160,
     },
     returningToLife.status || "drafting",
@@ -606,13 +546,8 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     preventingRerupture.title,
     preventingRerupture.description,
     {
-      when_useful:
-        "When returning to activities - ongoing prevention strategies",
-      triggers: [
-        "when returning to sport",
-        "when increasing activity",
-        "ongoing",
-      ],
+      when_useful: "When returning to activities - ongoing prevention strategies",
+      triggers: ["when returning to sport", "when increasing activity", "ongoing"],
       approximate_days: 184,
     },
     preventingRerupture.status || "drafting",
@@ -642,13 +577,8 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     plyometrics.title,
     plyometrics.description,
     {
-      when_useful:
-        "When ready for jumping and plyometric training - usually around week 31",
-      triggers: [
-        "when cleared for jumping",
-        "when preparing for sport",
-        "when building power",
-      ],
+      when_useful: "When ready for jumping and plyometric training - usually around week 31",
+      triggers: ["when cleared for jumping", "when preparing for sport", "when building power"],
       approximate_days: 220,
     },
     plyometrics.status || "drafting",
@@ -678,8 +608,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     whenThingsDontGoToPlan.title,
     whenThingsDontGoToPlan.description,
     {
-      when_useful:
-        "If recovery isn't progressing as expected - when to seek help",
+      when_useful: "If recovery isn't progressing as expected - when to seek help",
       triggers: [
         "when not progressing",
         "when concerned about recovery",
@@ -696,8 +625,7 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     newNormal.title,
     newNormal.description,
     {
-      when_useful:
-        "Long-term perspective - understanding life after Achilles rupture",
+      when_useful: "Long-term perspective - understanding life after Achilles rupture",
       triggers: [
         "when wondering about long-term",
         "when adjusting to new normal",
@@ -712,13 +640,8 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
     otherLeg.title,
     otherLeg.description,
     {
-      when_useful:
-        "When wondering about risk to your other leg - rehab should include both",
-      triggers: [
-        "when wondering about other leg",
-        "when doing rehab",
-        "when strengthening",
-      ],
+      when_useful: "When wondering about risk to your other leg - rehab should include both",
+      triggers: ["when wondering about other leg", "when doing rehab", "when strengthening"],
       approximate_days: 200,
     },
     otherLeg.status || "drafting",
@@ -769,21 +692,17 @@ const sectionsWithoutNumbers: Omit<SectionMetadata, "section_number">[] = [
 ];
 
 // Auto-calculate section_number from array position
-export const sections: SectionMetadata[] = sectionsWithoutNumbers.map(
-  (section, index) => ({
-    ...section,
-    section_number: index + 1,
-  }),
-);
+export const sections: SectionMetadata[] = sectionsWithoutNumbers.map((section, index) => ({
+  ...section,
+  section_number: index + 1,
+}));
 
 // Helper functions
 export function getSectionBySlug(slug: string): SectionMetadata | undefined {
   return sections.find((s) => s.slug === slug);
 }
 
-export function getSectionsByCourseType(
-  courseType: "standard" | "premium",
-): SectionMetadata[] {
+export function getSectionsByCourseType(courseType: "standard" | "premium"): SectionMetadata[] {
   return sections.filter((s) => s.course_type === courseType);
 }
 
@@ -805,24 +724,15 @@ export function getSectionIndex(slug: string): number {
 
 // Get sections by trigger - useful for showing relevant content based on patient's situation
 export function getSectionsByTrigger(trigger: string): SectionMetadata[] {
-  return sections.filter(
-    (s) =>
-      s.timing.triggers?.some((t) =>
-        t.toLowerCase().includes(trigger.toLowerCase())
-      ),
+  return sections.filter((s) =>
+    s.timing.triggers?.some((t) => t.toLowerCase().includes(trigger.toLowerCase())),
   );
 }
 
 // Get sections useful at a specific time (approximate days after rupture)
-export function getSectionsByApproximateDays(
-  days: number,
-  range: number = 7,
-): SectionMetadata[] {
+export function getSectionsByApproximateDays(days: number, range: number = 7): SectionMetadata[] {
   return sections.filter((s) => {
     if (!s.timing.approximate_days) return false;
-    return (
-      s.timing.approximate_days >= days - range &&
-      s.timing.approximate_days <= days + range
-    );
+    return s.timing.approximate_days >= days - range && s.timing.approximate_days <= days + range;
   });
 }

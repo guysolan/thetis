@@ -1,9 +1,4 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@thetis/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@thetis/ui/accordion";
 import { Button } from "@thetis/ui/button";
 import type { OrderType, OrderView } from "../types";
 import dayjs from "dayjs";
@@ -42,12 +37,8 @@ interface DeliveryDatesDisplayProps {
   deliveryDatesJson: string | null;
 }
 
-const DeliveryDatesDisplay: React.FC<DeliveryDatesDisplayProps> = ({
-  deliveryDatesJson,
-}) => {
-  const parseDeliveryDates = (
-    jsonString: string | null,
-  ): [string | null, string | null] | null => {
+const DeliveryDatesDisplay: React.FC<DeliveryDatesDisplayProps> = ({ deliveryDatesJson }) => {
+  const parseDeliveryDates = (jsonString: string | null): [string | null, string | null] | null => {
     if (!jsonString) return null;
 
     try {
@@ -70,13 +61,14 @@ const DeliveryDatesDisplay: React.FC<DeliveryDatesDisplayProps> = ({
 
   const formatDate = (date: string) => dayjs(date).format("D MMM");
 
-  const dateText = deliveryDates[0] && deliveryDates[1]
-    ? `${formatDate(deliveryDates[0])} - ${formatDate(deliveryDates[1])}`
-    : deliveryDates[0]
-    ? `from ${formatDate(deliveryDates[0])}`
-    : deliveryDates[1]
-    ? `by ${formatDate(deliveryDates[1])}`
-    : "";
+  const dateText =
+    deliveryDates[0] && deliveryDates[1]
+      ? `${formatDate(deliveryDates[0])} - ${formatDate(deliveryDates[1])}`
+      : deliveryDates[0]
+        ? `from ${formatDate(deliveryDates[0])}`
+        : deliveryDates[1]
+          ? `by ${formatDate(deliveryDates[1])}`
+          : "";
 
   return (
     <div className="inline-flex items-center gap-1.5 bg-muted px-2.5 py-1 rounded-full font-medium text-muted-foreground text-xs">
@@ -106,10 +98,7 @@ const getOrderTypeIcon = (orderType: string) => {
 };
 
 function formatQuotePriceBandsSummary(
-  quoteData:
-    | { price_bands: Record<string, number>; currency: string }
-    | null
-    | undefined,
+  quoteData: { price_bands: Record<string, number>; currency: string } | null | undefined,
 ): string {
   if (!quoteData?.price_bands) return "No prices";
   const bands = Object.entries(quoteData.price_bands)
@@ -121,25 +110,13 @@ function formatQuotePriceBandsSummary(
   const last = bands[bands.length - 1];
   const currency = quoteData.currency ?? "GBP";
   const fmt = (n: number) =>
-    typeof formatCurrency(
-        quoteData!.price_bands[String(n)] ?? 0,
-        currency as "GBP",
-      ) ===
-        "string"
-      ? (formatCurrency(
-        quoteData!.price_bands[String(n)] ?? 0,
-        currency as "GBP",
-      ) as string)
+    typeof formatCurrency(quoteData!.price_bands[String(n)] ?? 0, currency as "GBP") === "string"
+      ? (formatCurrency(quoteData!.price_bands[String(n)] ?? 0, currency as "GBP") as string)
       : "";
-  return bands.length === 1
-    ? `${first} units @ ${fmt(first)}`
-    : `${first}–${last} units`;
+  return bands.length === 1 ? `${first} units @ ${fmt(first)}` : `${first}–${last} units`;
 }
 
-export const OrderHistory: React.FC<ExistingOrdersProps> = ({
-  tab,
-  orders,
-}) => {
+export const OrderHistory: React.FC<ExistingOrdersProps> = ({ tab, orders }) => {
   const { mutate: deleteOrder } = useDeleteOrder();
 
   return (
@@ -148,11 +125,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
         const OrderTypeIcon = getOrderTypeIcon(order.order_type);
 
         return (
-          <AccordionItem
-            key={order.order_id}
-            value={String(order.order_id)}
-            className="border-0"
-          >
+          <AccordionItem key={order.order_id} value={String(order.order_id)} className="border-0">
             <Card className="overflow-hidden">
               {/* Header */}
               <div className="flex items-center gap-4 p-4">
@@ -170,9 +143,8 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
                         : order.order_type === "quote"
                           ? `Quote #${order.order_id}`
                           : `${
-                            order.order_type.charAt(0).toUpperCase() +
-                            order.order_type.slice(1)
-                          } #${order.order_id}`}
+                              order.order_type.charAt(0).toUpperCase() + order.order_type.slice(1)
+                            } #${order.order_id}`}
                     </h3>
                     <span className="text-muted-foreground text-sm">
                       {dayjs(order.order_date as string).format("DD MMM YYYY")}
@@ -181,48 +153,32 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
 
                   {/* For count: location; for quote: price summary; for others: company names */}
                   <div className="flex items-center gap-3 mt-1 text-muted-foreground text-sm">
-                    {order.order_type === "count"
-                      ? (
-                        order.from_address?.name
-                          ? (
-                            <span className="inline-flex items-center gap-1.5 truncate">
-                              <MapPin
-                                size={14}
-                                className="text-muted-foreground shrink-0"
-                              />
-                              {order.from_address.name}
-                            </span>
-                          )
-                          : (
-                            <span className="text-muted-foreground/70">
-                              No location
-                            </span>
-                          )
+                    {order.order_type === "count" ? (
+                      order.from_address?.name ? (
+                        <span className="inline-flex items-center gap-1.5 truncate">
+                          <MapPin size={14} className="text-muted-foreground shrink-0" />
+                          {order.from_address.name}
+                        </span>
+                      ) : (
+                        <span className="text-muted-foreground/70">No location</span>
                       )
-                      : order.order_type === "quote"
-                        ? (
-                          <span>
-                            {order.currency}
-                            {" • "}
-                            {formatQuotePriceBandsSummary(order.quote)}
-                          </span>
-                        )
-                        : (
-                          <>
-                            {order.from_company?.name && (
-                              <span className="truncate">
-                                {order.from_company.name}
-                              </span>
-                            )}
-                            {order.from_company?.name && order.to_company?.name &&
-                              <span>→</span>}
-                            {order.to_company?.name && (
-                              <span className="truncate">
-                                {order.to_company.name}
-                              </span>
-                            )}
-                          </>
+                    ) : order.order_type === "quote" ? (
+                      <span>
+                        {order.currency}
+                        {" • "}
+                        {formatQuotePriceBandsSummary(order.quote)}
+                      </span>
+                    ) : (
+                      <>
+                        {order.from_company?.name && (
+                          <span className="truncate">{order.from_company.name}</span>
                         )}
+                        {order.from_company?.name && order.to_company?.name && <span>→</span>}
+                        {order.to_company?.name && (
+                          <span className="truncate">{order.to_company.name}</span>
+                        )}
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -278,8 +234,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
                       "hover:no-underline border-0",
                       "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0",
                     )}
-                  >
-                  </AccordionTrigger>
+                  ></AccordionTrigger>
                 </div>
               </div>
 
@@ -298,9 +253,7 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
                   />
                 )}
                 {order.order_type !== "count" && (
-                  <DeliveryDatesDisplay
-                    deliveryDatesJson={order.delivery_dates || null}
-                  />
+                  <DeliveryDatesDisplay deliveryDatesJson={order.delivery_dates || null} />
                 )}
               </div>
 
@@ -309,37 +262,35 @@ export const OrderHistory: React.FC<ExistingOrdersProps> = ({
                 <div className="border-t">
                   {/* Extra info bar - location for count, contact + delivery dates for others */}
                   <div className="flex flex-wrap items-center gap-2 bg-muted/30 px-4 py-2 text-muted-foreground text-sm">
-                    {order.order_type === "count"
-                      ? (
-                        order.from_address?.name && (
-                          <div className="flex items-center gap-1.5">
-                            <MapPin size={14} />
-                            <span>{order.from_address.name}</span>
-                          </div>
-                        )
+                    {order.order_type === "count" ? (
+                      order.from_address?.name && (
+                        <div className="flex items-center gap-1.5">
+                          <MapPin size={14} />
+                          <span>{order.from_address.name}</span>
+                        </div>
                       )
-                      : (
-                        <>
-                          {order.from_contact?.name && (
-                            <div className="flex items-center gap-1">
-                              <User size={14} />
-                              <span>{order.from_contact.name}</span>
-                            </div>
-                          )}
-                          <DeliveryDatesDisplay
-                            deliveryDatesJson={order.delivery_dates || null}
-                          />
-                        </>
-                      )}
+                    ) : (
+                      <>
+                        {order.from_contact?.name && (
+                          <div className="flex items-center gap-1">
+                            <User size={14} />
+                            <span>{order.from_contact.name}</span>
+                          </div>
+                        )}
+                        <DeliveryDatesDisplay deliveryDatesJson={order.delivery_dates || null} />
+                      </>
+                    )}
                   </div>
 
                   {/* Order breakdown: stocktake summary, quote summary, or full breakdown */}
                   <div className="p-4">
-                    {order.order_type === "count"
-                      ? <StocktakeSummaryWithData order={order} />
-                      : order.order_type === "quote"
-                        ? <QuoteBreakdown order={order} />
-                        : <OrderBreakdown order={order} />}
+                    {order.order_type === "count" ? (
+                      <StocktakeSummaryWithData order={order} />
+                    ) : order.order_type === "quote" ? (
+                      <QuoteBreakdown order={order} />
+                    ) : (
+                      <OrderBreakdown order={order} />
+                    )}
                   </div>
                 </div>
               </AccordionContent>

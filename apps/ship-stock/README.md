@@ -14,7 +14,7 @@ We want to keep the backend logic simple so quantity_change is always the real q
 
 e.g. if we sell 100 items for £10, we record -100 in quantity_change and £1000 in price.
 
-Sale price = quantity_change x item_price x *-1*
+Sale price = quantity*change x item_price x *-1\_
 
 e.g. if we buy 100 items for £10, we record -100 in quantity_change and £1000 in price.
 
@@ -22,6 +22,6 @@ Purchase price = quantity_change x item_price
 
 Therefore in the database we save
 
-order_type    quantity_change    price    total
-sale          -100               10       1000
-purchase      100                10       1000
+order_type quantity_change price total
+sale -100 10 1000
+purchase 100 10 1000

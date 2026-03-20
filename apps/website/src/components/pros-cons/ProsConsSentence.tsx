@@ -15,15 +15,11 @@ export const ProsConsSentence: React.FC<ProsConsSentenceProps> = ({
   isPositive = true,
   highlightDuration = 1000,
 }) => {
-  const [currentHighlightIndex, setCurrentHighlightIndex] = useState<number>(
-    -1,
-  );
+  const [currentHighlightIndex, setCurrentHighlightIndex] = useState<number>(-1);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setCurrentHighlightIndex((prev) =>
-        prev >= keywords.length - 1 ? 0 : prev + 1
-      );
+      setCurrentHighlightIndex((prev) => (prev >= keywords.length - 1 ? 0 : prev + 1));
     }, highlightDuration);
 
     return () => clearTimeout(timer);
@@ -37,9 +33,10 @@ export const ProsConsSentence: React.FC<ProsConsSentenceProps> = ({
         "transition-all duration-700 ease-in-out",
         isPositive ? "bg-primary/50" : "bg-red-500/50",
       );
-      const style = index === currentHighlightIndex
-        ? `<span class="${highlightClass}">${keyword}</span>`
-        : keyword;
+      const style =
+        index === currentHighlightIndex
+          ? `<span class="${highlightClass}">${keyword}</span>`
+          : keyword;
 
       result = result.replace(keyword, style);
     });
@@ -48,9 +45,7 @@ export const ProsConsSentence: React.FC<ProsConsSentenceProps> = ({
   };
 
   return (
-    <div className={cn("text-lg transition-all duration-700 ease-in-out")}>
-      {renderText()}
-    </div>
+    <div className={cn("text-lg transition-all duration-700 ease-in-out")}>{renderText()}</div>
   );
 };
 

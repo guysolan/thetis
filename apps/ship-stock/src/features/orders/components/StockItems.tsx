@@ -45,9 +45,7 @@ const StockItems = ({
   const { fields, append, remove } = useFieldArray({ name });
   const { getItemQuantities } = useStockQuantities(name, address_name);
 
-  const address = addresses?.find(
-    (a) => String(a.id) === form.watch(address_name),
-  );
+  const address = addresses?.find((a) => String(a.id) === form.watch(address_name));
 
   const copyRow = (index: number) => {
     const rowToCopy = form.getValues(`${name}.${index}`);
@@ -74,31 +72,28 @@ const StockItems = ({
         {title || `Stock Changes ${address?.name ? `(${address.name})` : ""}`}
       </h2>
 
-      {!readOnly
-        ? (
-          <>
-            <StockItemsFormFields
-              onUpdate={onUpdate}
-              showPrice={showPrice}
-              showTax={showTax}
-              showQuantity={showQuantity}
-              name={name}
-              fields={fields}
-              items={items || []}
-              getItemQuantities={getItemQuantities}
-              onCopy={copyRow}
-              onRemove={remove}
-              allowedTypes={allowedTypes}
-              packageMode={packageMode}
-              onToggleLock={() => {}}
-            />
-            <StockItemActions
-              allowedTypes={allowedTypes}
-              onAppend={handleAppend}
-            />
-          </>
-        )
-        : <StockItemsSummary name={name} addressName={address_name} />}
+      {!readOnly ? (
+        <>
+          <StockItemsFormFields
+            onUpdate={onUpdate}
+            showPrice={showPrice}
+            showTax={showTax}
+            showQuantity={showQuantity}
+            name={name}
+            fields={fields}
+            items={items || []}
+            getItemQuantities={getItemQuantities}
+            onCopy={copyRow}
+            onRemove={remove}
+            allowedTypes={allowedTypes}
+            packageMode={packageMode}
+            onToggleLock={() => {}}
+          />
+          <StockItemActions allowedTypes={allowedTypes} onAppend={handleAppend} />
+        </>
+      ) : (
+        <StockItemsSummary name={name} addressName={address_name} />
+      )}
 
       <div className="mt-4">
         <FormErrors

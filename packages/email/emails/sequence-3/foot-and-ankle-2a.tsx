@@ -13,12 +13,9 @@ export const MyEmail = () => {
       }
       heading2={
         <>
-          1. <HighlightedSpan>Save Staff Time</HighlightedSpan> = Quick
-          Application
-          <br /> 2. Easy removal ={" "}
-          <HighlightedSpan>Faster MRI Scans</HighlightedSpan>
-          <br /> 3. <HighlightedSpan>Better Sleep</HighlightedSpan> = Happy
-          Patients
+          1. <HighlightedSpan>Save Staff Time</HighlightedSpan> = Quick Application
+          <br /> 2. Easy removal = <HighlightedSpan>Faster MRI Scans</HighlightedSpan>
+          <br /> 3. <HighlightedSpan>Better Sleep</HighlightedSpan> = Happy Patients
         </>
       }
     />

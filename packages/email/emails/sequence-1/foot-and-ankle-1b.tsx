@@ -8,14 +8,14 @@ export const MyEmail = () => {
       heading1={
         <>
           <HighlightedSpan>80%</HighlightedSpan> of{" "}
-          <HighlightedSpan>Achilles Rupture</HighlightedSpan> patients: "I can't
-          sleep in this 🤬 boot!"
+          <HighlightedSpan>Achilles Rupture</HighlightedSpan> patients: "I can't sleep in this 🤬
+          boot!"
         </>
       }
       heading2={
         <>
-          Introducing a splint for <HighlightedSpan>Happier</HighlightedSpan>{" "}
-          Achilles Rupture <HighlightedSpan>Patients</HighlightedSpan>
+          Introducing a splint for <HighlightedSpan>Happier</HighlightedSpan> Achilles Rupture{" "}
+          <HighlightedSpan>Patients</HighlightedSpan>
         </>
       }
     />

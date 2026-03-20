@@ -3,4 +3,4 @@
 
 export const SITE_TITLE = "Achilles Rupture";
 export const SITE_DESCRIPTION =
-    "A guide to recovery and rehabilitation after an Achilles tendon rupture, including timelines for returning to activities and tips to avoid re-injury";
+  "A guide to recovery and rehabilitation after an Achilles tendon rupture, including timelines for returning to activities and tips to avoid re-injury";

@@ -7,10 +7,7 @@ const WantItForYourPatients = () => {
       Want to make it available for your patients?
       <br />
       Contact our founder{" "}
-      <Link
-        className="font-medium text-brand-600"
-        href="mailto:guy@thetismedical.com"
-      >
+      <Link className="font-medium text-brand-600" href="mailto:guy@thetismedical.com">
         guy@thetismedical.com
       </Link>
     </p>

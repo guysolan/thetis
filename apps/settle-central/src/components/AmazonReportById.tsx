@@ -1,11 +1,4 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@thetis/ui/card";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -107,9 +100,7 @@ const AmazonReportById = ({ summary }: { summary: SummaryData }) => {
             {dayjs(summary.settlement_start_date).format("DD MMM YYYY")} -{" "}
             {dayjs(summary.settlement_end_date).format("DD MMM YYYY")}
           </div>
-          <div>
-            Deposit date: {dayjs(summary.deposit_date).format("DD MMM YYYY")}
-          </div>
+          <div>Deposit date: {dayjs(summary.deposit_date).format("DD MMM YYYY")}</div>
         </div>
       </div>
 
@@ -124,9 +115,7 @@ const AmazonReportById = ({ summary }: { summary: SummaryData }) => {
         <TableBody>
           {financialSummary.map(({ label, value, indent }) => (
             <TableRow key={label}>
-              <TableCell
-                className={`text-left  ${indent ? "pl-8 font-light" : "font-medium"}`}
-              >
+              <TableCell className={`text-left  ${indent ? "pl-8 font-light" : "font-medium"}`}>
                 {label}
               </TableCell>
               <TableCell className="text-right">

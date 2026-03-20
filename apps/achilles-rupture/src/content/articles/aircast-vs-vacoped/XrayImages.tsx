@@ -6,9 +6,7 @@ export default function XrayImages({ className = "" }: XrayImagesProps) {
   return (
     <div className={`my-8 ${className}`}>
       <div className="flex flex-col items-center">
-        <h3 className="mb-4 font-semibold text-lg">
-          X-ray Comparison: VACOped vs Aircast
-        </h3>
+        <h3 className="mb-4 font-semibold text-lg">X-ray Comparison: VACOped vs Aircast</h3>
         <div className="gap-4 grid grid-cols-1 md:grid-cols-2 w-full">
           <div className="flex flex-col items-center">
             <img

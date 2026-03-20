@@ -23,9 +23,7 @@ async function downloadFiles({ path }: DownloadFileParams) {
       const fullFilename = `${filename}${ext}`;
       const {
         data: { signedUrl },
-      } = await supabase.storage
-        .from("amazon-reports")
-        .createSignedUrl(`${path}${ext}`, 60);
+      } = await supabase.storage.from("amazon-reports").createSignedUrl(`${path}${ext}`, 60);
 
       if (!signedUrl) {
         console.warn(`File not found: ${fullFilename}`);

@@ -25,7 +25,7 @@ export const guideSections: GuideSection[] = [
   { metadata: week26Plus.metadata, content: week26Plus.content },
 ];
 
-export const guidePhases = guideSections.map(s => ({
+export const guidePhases = guideSections.map((s) => ({
   slug: s.metadata.slug,
   title: s.metadata.title,
   description: s.metadata.description,
@@ -34,11 +34,11 @@ export const guidePhases = guideSections.map(s => ({
 }));
 
 export function getGuideBySlug(slug: string): GuideSection | undefined {
-  return guideSections.find(s => s.metadata.slug === slug);
+  return guideSections.find((s) => s.metadata.slug === slug);
 }
 
 export function getNextGuide(currentSlug: string): GuideMetadata | undefined {
-  const currentIndex = guideSections.findIndex(s => s.metadata.slug === currentSlug);
+  const currentIndex = guideSections.findIndex((s) => s.metadata.slug === currentSlug);
   if (currentIndex >= 0 && currentIndex < guideSections.length - 1) {
     return guideSections[currentIndex + 1].metadata;
   }
@@ -46,7 +46,7 @@ export function getNextGuide(currentSlug: string): GuideMetadata | undefined {
 }
 
 export function getPrevGuide(currentSlug: string): GuideMetadata | undefined {
-  const currentIndex = guideSections.findIndex(s => s.metadata.slug === currentSlug);
+  const currentIndex = guideSections.findIndex((s) => s.metadata.slug === currentSlug);
   if (currentIndex > 0) {
     return guideSections[currentIndex - 1].metadata;
   }

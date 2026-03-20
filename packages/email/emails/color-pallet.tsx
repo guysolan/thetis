@@ -1,11 +1,4 @@
-import {
-  Button,
-  Head,
-  Font,
-  Heading,
-  Html,
-  Img,
-} from "@react-email/components";
+import { Button, Head, Font, Heading, Html, Img } from "@react-email/components";
 import * as React from "react";
 import Tailwind from "../components/tailwind";
 
@@ -34,9 +27,7 @@ export const MyEmail = () => {
               key={shade}
               className={`w-64 h-16 bg-emerald-${shade} flex items-center justify-center mb-2 rounded`}
             >
-              <span
-                className={`${shade >= 500 ? "text-white" : "text-black"} font-bold`}
-              >
+              <span className={`${shade >= 500 ? "text-white" : "text-black"} font-bold`}>
                 emerald-{shade}
               </span>
             </div>

@@ -1,17 +1,27 @@
 {
   "name": "@thetis/ship-stock",
+  "version": "1.0.0",
   "private": true,
+  "description": "Orders relate to changes in item_quantities.",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "directories": {
+    "test": "test"
+  },
   "type": "module",
+  "main": "postcss.config.js",
   "scripts": {
-    "dev": "vite --port=2122",
-    "dev:prod": "vite --port=2122 --mode prod",
-    "build": "vite build",
-    "build:prod": "dotenv -e .env.prod vite build --mode prod",
-    "serve": "vite preview",
-    "serve:prod": "dotenv -e .env.prod vite preview --mode prod",
-    "start": "vite",
+    "dev": "vp dev --port=2122",
+    "dev:prod": "vp dev --port=2122 --mode prod",
+    "build": "vp build",
+    "build:prod": "dotenv -e .env.prod vp build --mode prod",
+    "serve": "vp preview",
+    "serve:prod": "dotenv -e .env.prod vp preview --mode prod",
+    "start": "vp dev",
     "deploy": "cd ../.. && vercel deploy --prod --yes",
-    "deploy:preview": "cd ../.. && vercel deploy --yes"
+    "deploy:preview": "cd ../.. && vercel deploy --yes",
+    "test": "vp test"
   },
   "dependencies": {
     "@hookform/devtools": "^4.3.1",
@@ -51,7 +61,7 @@
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.3",
     "tailwindcss-animate": "^1.0.7",
-    "vitest": "^3.1.1",
+    "vitest": "^4.1.0",
     "zod": "^3.25.76",
     "zustand": "^5.0.1"
   },
@@ -60,19 +70,10 @@
     "@types/file-saver": "^2.0.7",
     "@types/react-csv": "^1.1.10",
     "@types/react-dom": "^18.2.18",
-    "@vitejs/plugin-react": "^4.3.2",
+    "@vitejs/plugin-react": "^6.0.0",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
-    "vite": "6.2.2"
-  },
-  "description": "Orders relate to changes in item_quantities.",
-  "version": "1.0.0",
-  "main": "postcss.config.js",
-  "directories": {
-    "test": "test"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "vite": "^8.0.0"
+  }
 }

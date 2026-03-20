@@ -1,22 +1,10 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@thetis/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@thetis/ui/select";
 import React, { useEffect, useState } from "react";
 import { useSelectItemsView } from "../../items/api/selectItemsView";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Button } from "@thetis/ui/button";
 import { Box, Copy, Plus, Trash, Weight } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@thetis/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@thetis/ui/card";
 import { Badge } from "@thetis/ui/badge";
 import { Input } from "@thetis/ui/input";
 import { useQuery } from "@tanstack/react-query";
@@ -25,11 +13,7 @@ import PackageDimensions from "./PackageDimensions";
 import PackageItemsBadges from "./PackageItemsBadges";
 import AddPackageDialog from "./AddPackageDialog";
 
-type ItemsToUpdate =
-  | "order_items"
-  | "produced_items"
-  | "from_items"
-  | "to_items";
+type ItemsToUpdate = "order_items" | "produced_items" | "from_items" | "to_items";
 
 interface PackageComponent {
   component_id: number;
@@ -85,9 +69,7 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
     name: "package_items",
   });
 
-  const availablePackages = itemsView?.filter(
-    (item) => item.item_type === "package",
-  );
+  const availablePackages = itemsView?.filter((item) => item.item_type === "package");
 
   const createPackageItems = (
     packageComponents: PackageComponent[],
@@ -109,9 +91,7 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
     fieldName: ItemsToUpdate,
     shouldPreserveExisting: boolean = false,
   ) => {
-    const selectedPkg = availablePackages?.find(
-      (item) => String(item.item_id) === packageId,
-    );
+    const selectedPkg = availablePackages?.find((item) => String(item.item_id) === packageId);
 
     if (!selectedPkg?.components) return [];
 
@@ -127,8 +107,8 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
     const preservedItemsInField = shouldPreserveExisting
       ? currentItemsInThisField
       : currentItemsInThisField.filter(
-        (item) => item.package_item_change_id !== packageItemChangeId,
-      );
+          (item) => item.package_item_change_id !== packageItemChangeId,
+        );
 
     let itemsToSetForField = itemsFromPackage;
     if (fieldName === "from_items") {
@@ -143,9 +123,7 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
 
   const updatePackage = (index: number, newPackageId?: string) => {
     const currentPackageId = form.watch(`package_items.${index}.package_id`);
-    const packageItemChangeId = form.watch(
-      `package_items.${index}.package_item_change_id`,
-    );
+    const packageItemChangeId = form.watch(`package_items.${index}.package_item_change_id`);
 
     const targetPackageId = newPackageId || currentPackageId;
 
@@ -213,9 +191,7 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
       package_item_change_id: newPackageItemChangeId,
     });
 
-    const selectedPkg = availablePackages?.find(
-      (item) => String(item.item_id) === packageId,
-    );
+    const selectedPkg = availablePackages?.find((item) => String(item.item_id) === packageId);
     if (selectedPkg?.components) {
       const newItems = createPackageItems(
         selectedPkg.components as PackageComponent[],
@@ -284,16 +260,13 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
   };
 
   const removePackage = (index: number) => {
-    const packageItemChangeId = form.getValues(
-      `package_items.${index}.package_item_change_id`,
-    );
+    const packageItemChangeId = form.getValues(`package_items.${index}.package_item_change_id`);
 
     // Remove items belonging to this package from all target fields
     itemsToUpdate.forEach((fieldName: ItemsToUpdate) => {
       const currentItems = form.getValues(fieldName) || [];
       const filtered = currentItems.filter(
-        (item: OrderItem) =>
-          item.package_item_change_id !== packageItemChangeId,
+        (item: OrderItem) => item.package_item_change_id !== packageItemChangeId,
       );
       form.setValue(fieldName, filtered);
     });
@@ -313,9 +286,7 @@ const usePackageManagement = (itemsToUpdate: ItemsToUpdate[]) => {
   };
 };
 
-const PackageStockItems = ({
-  itemsToUpdate = ["order_items"],
-}: PackageStockItemsProps) => {
+const PackageStockItems = ({ itemsToUpdate = ["order_items"] }: PackageStockItemsProps) => {
   const form = useFormContext();
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const {
@@ -356,9 +327,7 @@ const PackageStockItems = ({
       // Update from_items to match to_items quantities (with opposite sign)
       // Only update items that exist in both arrays to avoid erasing package items
       const updatedFromItems = fromItems.map((item) => {
-        const toQuantity = toItemsMap.get(
-          `${item.item_id}-${item.package_item_change_id}`,
-        );
+        const toQuantity = toItemsMap.get(`${item.item_id}-${item.package_item_change_id}`);
         if (toQuantity !== undefined) {
           return {
             ...item,
@@ -370,9 +339,7 @@ const PackageStockItems = ({
 
       // Only set if there are actual changes to avoid unnecessary re-renders
       const currentFromItems = form.getValues("from_items") || [];
-      if (
-        JSON.stringify(currentFromItems) !== JSON.stringify(updatedFromItems)
-      ) {
+      if (JSON.stringify(currentFromItems) !== JSON.stringify(updatedFromItems)) {
         // Use silent update to prevent triggering other watchers
         form.setValue("from_items", updatedFromItems, {
           shouldDirty: false,
@@ -410,12 +377,8 @@ const PackageStockItems = ({
     <div className="space-y-4 py-4">
       <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {fields.map((field, index) => {
-          const selectedPackageId = form.watch(
-            `package_items.${index}.package_id`,
-          );
-          const packageItemChangeId = form.watch(
-            `package_items.${index}.package_item_change_id`,
-          );
+          const selectedPackageId = form.watch(`package_items.${index}.package_id`);
+          const packageItemChangeId = form.watch(`package_items.${index}.package_item_change_id`);
           const selectedPackage = availablePackages?.find(
             (item) => String(item.item_id) === selectedPackageId,
           );
@@ -429,9 +392,7 @@ const PackageStockItems = ({
             <Card key={field.id} className="rounded-none">
               <CardHeader className="pb-2">
                 <div className="flex justify-between items-start">
-                  <CardTitle className="text-base">
-                    Package {index + 1}
-                  </CardTitle>
+                  <CardTitle className="text-base">Package {index + 1}</CardTitle>
                   <div className="flex gap-1">
                     {selectedPackage && (
                       <Button
@@ -476,14 +437,10 @@ const PackageStockItems = ({
                     ))}
                   </SelectContent>
                 </Select>
-                {selectedPackage && (
-                  <PackageItemsBadges packageItems={packageItems} />
-                )}
+                {selectedPackage && <PackageItemsBadges packageItems={packageItems} />}
               </CardContent>
               <CardFooter>
-                {selectedPackage && (
-                  <PackageDimensions selectedPackage={selectedPackage} />
-                )}
+                {selectedPackage && <PackageDimensions selectedPackage={selectedPackage} />}
               </CardFooter>
             </Card>
           );

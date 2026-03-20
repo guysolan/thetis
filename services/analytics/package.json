@@ -1,0 +1,12 @@
+{
+  "name": "@thetis/analytics-ga4",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fetch": "bun run src/fetch.ts"
+  },
+  "dependencies": {
+    "@google-analytics/data": "^4.12.0"
+  }
+}

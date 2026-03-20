@@ -8,11 +8,7 @@ interface CourseSectionHeaderProps {
   rightAction?: ReactNode;
 }
 
-export function CourseSectionHeader({
-  backTo,
-  backLabel,
-  rightAction,
-}: CourseSectionHeaderProps) {
+export function CourseSectionHeader({ backTo, backLabel, rightAction }: CourseSectionHeaderProps) {
   return (
     <div className="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-4 mb-12">
       <Link

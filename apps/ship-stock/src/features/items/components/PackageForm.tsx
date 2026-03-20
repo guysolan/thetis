@@ -8,14 +8,7 @@ import Select from "@/components/Select";
 import { useUpsertItemComponents } from "../api/upsertItemComponents";
 import { useUpsertItem } from "../api/upsertItem";
 import { ItemType, itemTypes, ItemView } from "../types";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 import { useSelectItemsView } from "../api/selectItemsView";
 import ItemTypeSelect from "../../../components/ItemTypeSelect";
 import { Trash } from "lucide-react";
@@ -155,9 +148,7 @@ export function PackageForm({ item, showComponents = true, onSave }: Props) {
                       options={
                         itemsView
                           ?.filter(
-                            (ic) =>
-                              ic.item_type ===
-                              form.watch(`components.${index}.item_type`),
+                            (ic) => ic.item_type === form.watch(`components.${index}.item_type`),
                           )
                           .map((ic) => ({
                             label: ic.item_name,
@@ -167,10 +158,7 @@ export function PackageForm({ item, showComponents = true, onSave }: Props) {
                     />
                   </TableCell>
                   <TableCell>
-                    <Input
-                      name={`components.${index}.component_quantity`}
-                      type="number"
-                    />
+                    <Input name={`components.${index}.component_quantity`} type="number" />
                   </TableCell>
                   <TableCell>
                     <Button

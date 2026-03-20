@@ -12,11 +12,7 @@ interface Props {
   defaultExpanded?: boolean;
 }
 
-const CompanyAddressContact = ({
-  direction,
-  title,
-  defaultExpanded = true,
-}: Props) => {
+const CompanyAddressContact = ({ direction, title, defaultExpanded = true }: Props) => {
   const {
     form,
     getFieldName,

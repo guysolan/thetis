@@ -51,14 +51,14 @@ Resend +2
 
 ## Totals
 
-| Feature | MailerLite | Instantly.ai | Resend |
-|---------|------------|--------------|--------|
-| Domains | 0 | +6 | +8 |
-| Variables | +3 | +3 | 0 |
-| Tracking | +5 | +4 | +1 |
-| A/B Testing | +3 | +5 | +1 |
-| Analytics | +5 | +3 | +2 |
-| List Segmentation | +6 | +4 | +2 |
-| Pricing | -8 | -6 | -4 |
-| HTML | +5 | +4 | +2 |
-| **Total** | **+19** | **+23** | **+12** |
+| Feature           | MailerLite | Instantly.ai | Resend  |
+| ----------------- | ---------- | ------------ | ------- |
+| Domains           | 0          | +6           | +8      |
+| Variables         | +3         | +3           | 0       |
+| Tracking          | +5         | +4           | +1      |
+| A/B Testing       | +3         | +5           | +1      |
+| Analytics         | +5         | +3           | +2      |
+| List Segmentation | +6         | +4           | +2      |
+| Pricing           | -8         | -6           | -4      |
+| HTML              | +5         | +4           | +2      |
+| **Total**         | **+19**    | **+23**      | **+12** |

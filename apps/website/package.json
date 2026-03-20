@@ -1,10 +1,7 @@
 {
   "name": "@thetis/website",
-  "type": "module",
   "version": "0.0.1",
-  "engines": {
-    "node": "20.x"
-  },
+  "type": "module",
   "scripts": {
     "dev": "astro dev --port=2122 --toolbar=false",
     "dev:prod": "astro dev --port=2122 --toolbar=false --mode prod",
@@ -12,7 +9,7 @@
     "build": "astro build",
     "preview": "astro dev",
     "astro": "astro",
-    "test": "vitest",
+    "test": "vp test",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
@@ -106,6 +103,9 @@
     "@tailwindcss/line-clamp": "^0.4.4",
     "prettier": "3.5.1",
     "prettier-plugin-astro": "0.14.1",
-    "vitest": "^1.0.0"
+    "vitest": "^4.1.0"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }

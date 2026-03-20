@@ -41,20 +41,17 @@ async function fetchCoursePrice(
   `;
 
   try {
-    const response = await fetch(
-      `https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Shopify-Storefront-Access-Token": STOREFRONT_ACCESS_TOKEN,
-        },
-        body: JSON.stringify({
-          query,
-          variables: { country: countryCode },
-        }),
+    const response = await fetch(`https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Shopify-Storefront-Access-Token": STOREFRONT_ACCESS_TOKEN,
       },
-    );
+      body: JSON.stringify({
+        query,
+        variables: { country: countryCode },
+      }),
+    });
 
     if (!response.ok) {
       throw new Error(`Shopify API error: ${response.status}`);
@@ -102,11 +99,7 @@ function formatPrice(amount: string, currencyCode: string): string {
   const numAmount = parseFloat(amount);
 
   const formatter = new Intl.NumberFormat(
-    currencyCode === "GBP"
-      ? "en-GB"
-      : currencyCode === "USD"
-      ? "en-US"
-      : "en-GB",
+    currencyCode === "GBP" ? "en-GB" : currencyCode === "USD" ? "en-US" : "en-GB",
     {
       style: "currency",
       currency: currencyCode,
@@ -147,18 +140,17 @@ export function useCoursePrice(
 
         if (priceData) {
           setPrice(priceData);
-          setFormattedPrice(
-            formatPrice(priceData.amount, priceData.currencyCode),
-          );
+          setFormattedPrice(formatPrice(priceData.amount, priceData.currencyCode));
         } else {
           // Fallback to static prices if API fails
-          const isStandard = courseType === "standard" ||
-            courseType === "essentials";
+          const isStandard = courseType === "standard" || courseType === "essentials";
           const fallbackPrice = isStandard
-            ? countryCode === "US" ? "$29.99" : "£29.99"
+            ? countryCode === "US"
+              ? "$29.99"
+              : "£29.99"
             : countryCode === "US"
-            ? "$79.99"
-            : "£79.99";
+              ? "$79.99"
+              : "£79.99";
 
           setFormattedPrice(fallbackPrice);
           setPrice({
@@ -168,12 +160,9 @@ export function useCoursePrice(
         }
       } catch (err) {
         if (!isMounted) return;
-        setError(
-          err instanceof Error ? err.message : "Failed to load price",
-        );
+        setError(err instanceof Error ? err.message : "Failed to load price");
         // Fallback
-        const isStandard = courseType === "standard" ||
-          courseType === "essentials";
+        const isStandard = courseType === "standard" || courseType === "essentials";
         const fallbackPrice = isStandard ? "£29.99" : "£79.99";
         setFormattedPrice(fallbackPrice);
         setPrice({

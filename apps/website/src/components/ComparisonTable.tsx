@@ -13,8 +13,7 @@ interface ComparisonTableProps {
 const content = {
   en: {
     title: "Night Splint vs. Sleeping in Your Boot",
-    subtitle:
-      "80% of patients struggle to sleep when wearing their boot at night",
+    subtitle: "80% of patients struggle to sleep when wearing their boot at night",
     splint: "Thetis Night Splint",
     boot: "Medical Boot",
     features: [
@@ -125,13 +124,11 @@ const content = {
         boot: false,
       },
     ],
-    conclusion:
-      "Schließen Sie sich 5.000+ Patienten an, die mit der Nachtschiene besser schlafen",
+    conclusion: "Schließen Sie sich 5.000+ Patienten an, die mit der Nachtschiene besser schlafen",
   },
   fr: {
     title: "Attelle de Nuit vs. Dormir avec la Botte",
-    subtitle:
-      "80% des patients signalent un mauvais sommeil lorsqu'ils portent leur botte la nuit",
+    subtitle: "80% des patients signalent un mauvais sommeil lorsqu'ils portent leur botte la nuit",
     splint: "Attelle de Nuit Thetis",
     boot: "Botte Médicale",
     features: [
@@ -184,13 +181,11 @@ const content = {
         boot: false,
       },
     ],
-    conclusion:
-      "Rejoignez 5 000+ patients qui dorment mieux avec l'Attelle de Nuit",
+    conclusion: "Rejoignez 5 000+ patients qui dorment mieux avec l'Attelle de Nuit",
   },
   es: {
     title: "Férula Nocturna vs. Dormir con la Bota",
-    subtitle:
-      "El 80% de los pacientes reportan mal sueño cuando usan su bota por la noche",
+    subtitle: "El 80% de los pacientes reportan mal sueño cuando usan su bota por la noche",
     splint: "Férula Nocturna Thetis",
     boot: "Bota Médica",
     features: [
@@ -243,13 +238,11 @@ const content = {
         boot: false,
       },
     ],
-    conclusion:
-      "Únete a 5.000+ pacientes que duermen mejor con la Férula Nocturna",
+    conclusion: "Únete a 5.000+ pacientes que duermen mejor con la Férula Nocturna",
   },
   it: {
     title: "Férula Notturna vs. Dormire con lo Stivale",
-    subtitle:
-      "L'80% dei pazienti segnala un sonno scarso quando indossa lo stivale di notte",
+    subtitle: "L'80% dei pazienti segnala un sonno scarso quando indossa lo stivale di notte",
     splint: "Férula Notturna Thetis",
     boot: "Stivale Medico",
     features: [
@@ -302,15 +295,11 @@ const content = {
         boot: false,
       },
     ],
-    conclusion:
-      "Unisciti a 5.000+ pazienti che dormono meglio con la Férula Notturna",
+    conclusion: "Unisciti a 5.000+ pazienti che dormono meglio con la Férula Notturna",
   },
 };
 
-const ComparisonTable: React.FC<ComparisonTableProps> = ({
-  lang = "en",
-  className,
-}) => {
+const ComparisonTable: React.FC<ComparisonTableProps> = ({ lang = "en", className }) => {
   const t = content[lang];
 
   return (
@@ -319,9 +308,7 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({
         <h2 className="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl">
           {t.title}
         </h2>
-        <p className="text-neutral-600 dark:text-neutral-400">
-          {t.subtitle}
-        </p>
+        <p className="text-neutral-600 dark:text-neutral-400">{t.subtitle}</p>
       </div>
 
       <div className="overflow-x-auto">
@@ -335,9 +322,7 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({
                 <div className="font-semibold text-primary">{t.splint}</div>
               </th>
               <th className="bg-neutral-100 dark:bg-neutral-800 p-4 border-neutral-200 dark:border-neutral-700 border-b text-center">
-                <div className="font-semibold text-neutral-600 dark:text-neutral-400">
-                  {t.boot}
-                </div>
+                <div className="font-semibold text-neutral-600 dark:text-neutral-400">{t.boot}</div>
               </th>
             </tr>
           </thead>
@@ -349,35 +334,31 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({
               >
                 <td className="p-4">
                   <div className="flex items-center gap-2">
-                    {feature.icon && (
-                      <feature.icon className="w-4 h-4 text-neutral-400" />
-                    )}
-                    <span className="text-neutral-700 dark:text-neutral-300">
-                      {feature.name}
-                    </span>
+                    {feature.icon && <feature.icon className="w-4 h-4 text-neutral-400" />}
+                    <span className="text-neutral-700 dark:text-neutral-300">{feature.name}</span>
                   </div>
                 </td>
                 <td className="bg-primary/5 p-4 text-center">
                   <div className="flex flex-col items-center">
-                    {feature.splint
-                      ? <Check className="w-5 h-5 text-primary" />
-                      : <X className="w-5 h-5 text-neutral-300" />}
+                    {feature.splint ? (
+                      <Check className="w-5 h-5 text-primary" />
+                    ) : (
+                      <X className="w-5 h-5 text-neutral-300" />
+                    )}
                     {feature.splintNote && (
-                      <span className="mt-1 text-neutral-500 text-xs">
-                        {feature.splintNote}
-                      </span>
+                      <span className="mt-1 text-neutral-500 text-xs">{feature.splintNote}</span>
                     )}
                   </div>
                 </td>
                 <td className="p-4 text-center">
                   <div className="flex flex-col items-center">
-                    {feature.boot
-                      ? <Check className="w-5 h-5 text-primary" />
-                      : <X className="w-5 h-5 text-red-400" />}
+                    {feature.boot ? (
+                      <Check className="w-5 h-5 text-primary" />
+                    ) : (
+                      <X className="w-5 h-5 text-red-400" />
+                    )}
                     {feature.bootNote && (
-                      <span className="mt-1 text-neutral-500 text-xs">
-                        {feature.bootNote}
-                      </span>
+                      <span className="mt-1 text-neutral-500 text-xs">{feature.bootNote}</span>
                     )}
                   </div>
                 </td>
@@ -387,9 +368,7 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({
         </table>
       </div>
 
-      <p className="mt-6 font-medium text-primary text-center">
-        {t.conclusion}
-      </p>
+      <p className="mt-6 font-medium text-primary text-center">{t.conclusion}</p>
     </div>
   );
 };

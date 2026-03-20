@@ -18,4 +18,4 @@ We'd rather invest in UK manufacturing than pay to ship air around the world.
 
 Sustainability rarely gets a look-in in healthcare. What other changes would you like to see made? 🔽
 
- #Sustainability #MedTech #AchillesRupture
+#Sustainability #MedTech #AchillesRupture

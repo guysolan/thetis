@@ -80,15 +80,13 @@ export default function CertificatePage() {
               >
                 Certificate of Completion
               </h1>
-              <p className="text-muted-foreground text-xl md:text-2xl">
-                Achilles Recovery Course
-              </p>
+              <p className="text-muted-foreground text-xl md:text-2xl">Achilles Recovery Course</p>
             </div>
 
             <p className="text-foreground text-lg max-w-xl leading-relaxed">
-              This certifies that the recipient has completed the full Achilles Recovery
-              Course and is equipped with the knowledge to support their recovery journey
-              from injury through return to sport.
+              This certifies that the recipient has completed the full Achilles Recovery Course and
+              is equipped with the knowledge to support their recovery journey from injury through
+              return to sport.
             </p>
 
             <div className="mt-10 pt-8 border-t border-border w-full max-w-md">
@@ -100,12 +98,7 @@ export default function CertificatePage() {
         </div>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            size="lg"
-            onClick={handleDownload}
-            disabled={isDownloading}
-            className="gap-2"
-          >
+          <Button size="lg" onClick={handleDownload} disabled={isDownloading} className="gap-2">
             {isDownloading ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />

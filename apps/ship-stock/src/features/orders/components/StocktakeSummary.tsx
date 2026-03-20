@@ -1,11 +1,4 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 import { cn } from "@thetis/ui/cn";
 
 export interface StocktakeItemRow {
@@ -41,31 +34,21 @@ export function StocktakeSummary({ items, className }: StocktakeSummaryProps) {
 
   return (
     <div className={cn("space-y-2", className)}>
-      <h3 className="font-semibold text-sm text-foreground">
-        Stock count
-      </h3>
+      <h3 className="font-semibold text-sm text-foreground">Stock count</h3>
       <div className="rounded-md border overflow-hidden">
         <Table>
           <TableHeader>
             <TableRow className="bg-muted/50 hover:bg-muted/50">
               <TableHead className="font-medium text-xs">Item</TableHead>
-              <TableHead className="w-24 text-center font-medium text-xs">
-                Previous
-              </TableHead>
-              <TableHead className="w-24 text-center font-medium text-xs">
-                Counted
-              </TableHead>
-              <TableHead className="w-24 text-center font-medium text-xs">
-                Change
-              </TableHead>
+              <TableHead className="w-24 text-center font-medium text-xs">Previous</TableHead>
+              <TableHead className="w-24 text-center font-medium text-xs">Counted</TableHead>
+              <TableHead className="w-24 text-center font-medium text-xs">Change</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {items.map((row, index) => (
               <TableRow key={`${row.item_name}-${index}`}>
-                <TableCell className="font-medium text-sm">
-                  {row.item_name || "—"}
-                </TableCell>
+                <TableCell className="font-medium text-sm">{row.item_name || "—"}</TableCell>
                 <TableCell className="text-center tabular-nums text-sm text-muted-foreground">
                   {row.quantity_before}
                 </TableCell>

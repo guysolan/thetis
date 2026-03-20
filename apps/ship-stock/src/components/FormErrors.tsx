@@ -13,21 +13,14 @@ interface FormattedError {
   message: string;
 }
 
-const FormErrors = ({
-  title = "Form Errors",
-  fieldPrefix,
-  fields,
-}: FormErrorsProps) => {
+const FormErrors = ({ title = "Form Errors", fieldPrefix, fields }: FormErrorsProps) => {
   const { errors } = useFormState();
 
   if (!errors || Object.keys(errors).length === 0) {
     return null;
   }
 
-  const processErrors = (
-    errors: any,
-    prefix: string = "",
-  ): FormattedError[] => {
+  const processErrors = (errors: any, prefix: string = ""): FormattedError[] => {
     return Object.entries(errors).flatMap(([key, value]) => {
       const currentPath = prefix ? `${prefix}.${key}` : key;
 
@@ -61,16 +54,18 @@ const FormErrors = ({
       } else if (value && typeof value === "object") {
         // Try to safely stringify if it's a simple object that looks like an error but isn't one of the above
         if (Object.keys(value).length === 0) return [];
-        
+
         // Recursively process nested objects
         return processErrors(value, currentPath);
       }
       // Handle string errors (sometimes errors are just strings)
       if (typeof value === "string") {
-          return [{
-              field: currentPath,
-              message: value
-          }];
+        return [
+          {
+            field: currentPath,
+            message: value,
+          },
+        ];
       }
       return [];
     });

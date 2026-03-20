@@ -9,19 +9,13 @@ type Props = {
 const Company = ({ title, company }: Props) => {
   return (
     <section className="mb-4 text-neutral-700 text-sm dark:text-neutral-300">
-      <h2 className="mb-4 font-semibold text-lg text-neutral-900 dark:text-neutral-50">
-        {title}
-      </h2>
+      <h2 className="mb-4 font-semibold text-lg text-neutral-900 dark:text-neutral-50">{title}</h2>
       <div>
         {company ? (
           <>
             <p>{company.name}</p>
-            {company.tax_number && (
-              <p>VAT: {company.tax_number}</p>
-            )}
-            {company.company_number && (
-              <p>Company No: {company.company_number}</p>
-            )}
+            {company.tax_number && <p>VAT: {company.tax_number}</p>}
+            {company.company_number && <p>Company No: {company.company_number}</p>}
           </>
         ) : (
           <p>-</p>

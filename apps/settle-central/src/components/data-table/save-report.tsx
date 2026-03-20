@@ -3,15 +3,8 @@ import { AmazonReport } from "@/types";
 import { useSaveAmazonReport } from "@/api/saveAmazonReport";
 import { Loader2, Save } from "lucide-react";
 
-const SaveReportButton = ({
-  region,
-  report,
-}: {
-  region: string;
-  report: AmazonReport;
-}) => {
-  const { mutate: saveReport, isPending: isSavingReport } =
-    useSaveAmazonReport();
+const SaveReportButton = ({ region, report }: { region: string; report: AmazonReport }) => {
+  const { mutate: saveReport, isPending: isSavingReport } = useSaveAmazonReport();
 
   return (
     <>
@@ -25,11 +18,7 @@ const SaveReportButton = ({
           });
         }}
       >
-        {isSavingReport ? (
-          <Loader2 size={16} className="animate-spin" />
-        ) : (
-          <Save size={16} />
-        )}
+        {isSavingReport ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
         <span>Save Report</span>
       </Button>
     </>

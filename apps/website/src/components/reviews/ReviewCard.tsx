@@ -43,16 +43,11 @@ export function ReviewCard({ review }: { review: Review }) {
       <blockquote>
         <div className="flex justify-between items-center gap-2">
           <div className="flex gap-1 mb-2">{renderStars(5)}</div>
-          <Badge
-            className="capitalize"
-            variant={review.type === "patient" ? "outline" : "default"}
-          >
+          <Badge className="capitalize" variant={review.type === "patient" ? "outline" : "default"}>
             {review.type}
           </Badge>
         </div>
-        <p className="my-2 font-semibold text-neutral-800 text-lg">
-          {review.title}
-        </p>
+        <p className="my-2 font-semibold text-neutral-800 text-lg">{review.title}</p>
         <div className="z-20 relative">
           <span className="font-normal text-neutral-900 text-base leading-[1.6] review-text">
             {isExpanded ? review.body : truncateText(review.body, 300)}
@@ -79,9 +74,7 @@ export function ReviewCard({ review }: { review: Review }) {
             />
           )}
           <div className="z-20 relative flex flex-col">
-            <span className="font-medium text-neutral-800 text-lg">
-              {review.name}
-            </span>
+            <span className="font-medium text-neutral-800 text-lg">{review.name}</span>
             <span className="mt-1 font-semibold text-neutral-500 text-base">
               {review.description ?? "Happy Customer"}
             </span>

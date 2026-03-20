@@ -8,12 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@thetis/ui/dialog";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@thetis/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@thetis/ui/tooltip";
 import { ReactNode } from "react";
 
 interface TooltipDialogProps {

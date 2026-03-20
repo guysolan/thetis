@@ -57,12 +57,7 @@ export function CompanyAddressSelect({
 
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger
-        className={cn(
-          "w-full min-w-0",
-          error && "border-destructive",
-        )}
-      >
+      <SelectTrigger className={cn("w-full min-w-0", error && "border-destructive")}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

@@ -695,17 +695,17 @@ Psychological recovery is as important as physical recovery.
 1. **Progressive Resistance Bands (Full Set)**
    - Multiple resistance levels
    - For various exercises
-   [PRODUCT LINK: Complete Resistance Band Set]
+     [PRODUCT LINK: Complete Resistance Band Set]
 
 2. **Balance Board or BOSU**
    - For proprioception training
    - Progressive balance challenges
-   [PRODUCT LINK: Balance Training Equipment]
+     [PRODUCT LINK: Balance Training Equipment]
 
 3. **Foam Roller**
    - For calf and leg muscle release
    - Not directly on the Achilles tendon
-   [PRODUCT LINK: Foam Roller]
+     [PRODUCT LINK: Foam Roller]
 
 ### Footwear
 
@@ -798,6 +798,6 @@ When in doubt, stay at your current level longer rather than progressing too fas
 
 ---
 
-*Continue to [Week 26+: Return to Sport and Long-Term Recovery](/recovery/week-26-plus-return-to-sport) when you're ready to learn about running again, plyometrics, preventing re-rupture, and life after Achilles rupture.*
+_Continue to [Week 26+: Return to Sport and Long-Term Recovery](/recovery/week-26-plus-return-to-sport) when you're ready to learn about running again, plyometrics, preventing re-rupture, and life after Achilles rupture._
 
-*Return to [Weeks 10-12: Boot Transition](/recovery/weeks-10-12-boot-transition) if you need to review the earlier phase.*
+_Return to [Weeks 10-12: Boot Transition](/recovery/weeks-10-12-boot-transition) if you need to review the earlier phase._

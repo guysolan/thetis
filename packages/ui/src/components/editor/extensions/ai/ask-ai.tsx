@@ -9,11 +9,7 @@ type Props = {
 
 export function AskAI({ onSelect }: Props) {
   return (
-    <BubbleMenuButton
-      action={onSelect}
-      isActive={false}
-      className="flex items-center space-x-2"
-    >
+    <BubbleMenuButton action={onSelect} isActive={false} className="flex items-center space-x-2">
       <MdOutlineAutoAwesome className="size-4" />
     </BubbleMenuButton>
   );

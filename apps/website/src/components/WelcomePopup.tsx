@@ -17,10 +17,7 @@ interface WelcomePopupProps {
   delaySeconds?: number;
 }
 
-const WelcomePopup: React.FC<WelcomePopupProps> = ({
-  className,
-  delaySeconds = 5,
-}) => {
+const WelcomePopup: React.FC<WelcomePopupProps> = ({ className, delaySeconds = 5 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -113,9 +110,7 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({
 
       if (supabaseError) {
         console.error("Supabase error:", supabaseError);
-        throw new Error(
-          supabaseError.message || "Failed to save your information",
-        );
+        throw new Error(supabaseError.message || "Failed to save your information");
       }
 
       if (!data) {
@@ -135,9 +130,8 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({
         setIsVisible(false);
       }, 2000);
     } catch (err) {
-      const errorMessage = err instanceof Error
-        ? err.message
-        : "Something went wrong. Please try again.";
+      const errorMessage =
+        err instanceof Error ? err.message : "Something went wrong. Please try again.";
       setError(errorMessage);
       console.error("Error subscribing:", err);
     } finally {
@@ -186,115 +180,101 @@ const WelcomePopup: React.FC<WelcomePopupProps> = ({
 
         {/* Content */}
         <div className="p-8">
-          {isSubmitted
-            ? (
-              <div className="py-4 text-center">
-                <div className="flex justify-center items-center bg-primary/10 dark:bg-primary/20 mx-auto mb-4 rounded-full w-16 h-16">
-                  <Check className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
-                  You're on the list!
-                </h3>
-                <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                  Check your inbox—and phone—for recovery tips and exclusive
-                  offers.
-                </p>
+          {isSubmitted ? (
+            <div className="py-4 text-center">
+              <div className="flex justify-center items-center bg-primary/10 dark:bg-primary/20 mx-auto mb-4 rounded-full w-16 h-16">
+                <Check className="w-8 h-8 text-primary" />
               </div>
-            )
-            : (
-              <>
-                {/* Benefits */}
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="flex justify-center items-center bg-primary/10 rounded-full w-8 h-8 shrink-0">
-                      <Check className="w-4 h-4 text-primary" />
-                    </div>
-                    <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-                      Free recovery tips & exercises
-                    </span>
+              <h3 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
+                You're on the list!
+              </h3>
+              <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+                Check your inbox—and phone—for recovery tips and exclusive offers.
+              </p>
+            </div>
+          ) : (
+            <>
+              {/* Benefits */}
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex justify-center items-center bg-primary/10 rounded-full w-8 h-8 shrink-0">
+                    <Check className="w-4 h-4 text-primary" />
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="flex justify-center items-center bg-primary/10 rounded-full w-8 h-8 shrink-0">
-                      <Check className="w-4 h-4 text-primary" />
-                    </div>
-                    <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-                      Tips via email & SMS—we'll never spam you
-                    </span>
+                  <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+                    Free recovery tips & exercises
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="flex justify-center items-center bg-primary/10 rounded-full w-8 h-8 shrink-0">
+                    <Check className="w-4 h-4 text-primary" />
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="flex justify-center items-center bg-primary/10 rounded-full w-8 h-8 shrink-0">
-                      <Check className="w-4 h-4 text-primary" />
-                    </div>
-                    <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-                      Expert guidance from foot & ankle surgeons
-                    </span>
+                  <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+                    Tips via email & SMS—we'll never spam you
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="flex justify-center items-center bg-primary/10 rounded-full w-8 h-8 shrink-0">
+                    <Check className="w-4 h-4 text-primary" />
                   </div>
+                  <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+                    Expert guidance from foot & ankle surgeons
+                  </span>
+                </div>
+              </div>
+
+              {/* Form */}
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email address"
+                    required
+                    autoComplete="email"
+                    className="bg-neutral-50 dark:bg-neutral-800 px-4 py-3 border border-neutral-200 dark:border-neutral-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="Phone (optional, for SMS tips)"
+                    autoComplete="tel"
+                    className="bg-neutral-50 dark:bg-neutral-800 px-4 py-3 border border-neutral-200 dark:border-neutral-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400"
+                  />
                 </div>
 
-                {/* Form */}
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Email address"
-                      required
-                      autoComplete="email"
-                      className="bg-neutral-50 dark:bg-neutral-800 px-4 py-3 border border-neutral-200 dark:border-neutral-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="tel"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder="Phone (optional, for SMS tips)"
-                      autoComplete="tel"
-                      className="bg-neutral-50 dark:bg-neutral-800 px-4 py-3 border border-neutral-200 dark:border-neutral-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400"
-                    />
-                  </div>
+                {error && <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>}
 
-                  {error && (
-                    <p className="text-red-600 dark:text-red-400 text-sm">
-                      {error}
-                    </p>
+                <Button type="submit" size="lg" className="gap-2 w-full" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Subscribing...
+                    </>
+                  ) : (
+                    <>
+                      Get Free Recovery Tips
+                      <ArrowRight className="w-4 h-4" />
+                    </>
                   )}
+                </Button>
+              </form>
 
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="gap-2 w-full"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting
-                      ? (
-                        <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                          Subscribing...
-                        </>
-                      )
-                      : (
-                        <>
-                          Get Free Recovery Tips
-                          <ArrowRight className="w-4 h-4" />
-                        </>
-                      )}
-                  </Button>
-                </form>
+              <button
+                onClick={handleClose}
+                className="mt-4 w-full text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 text-sm text-center transition-colors"
+              >
+                No thanks, I'll recover on my own
+              </button>
 
-                <button
-                  onClick={handleClose}
-                  className="mt-4 w-full text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 text-sm text-center transition-colors"
-                >
-                  No thanks, I'll recover on my own
-                </button>
-
-                <p className="mt-4 text-neutral-400 dark:text-neutral-500 text-xs text-center">
-                  We'll email and text recovery tips. Unsubscribe anytime.
-                </p>
-              </>
-            )}
+              <p className="mt-4 text-neutral-400 dark:text-neutral-500 text-xs text-center">
+                We'll email and text recovery tips. Unsubscribe anytime.
+              </p>
+            </>
+          )}
         </div>
       </div>
     </div>

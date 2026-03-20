@@ -12,8 +12,7 @@ export const MyEmail = () => {
       }
       heading2={
         <>
-          Patient review of the{" "}
-          <HighlightedSpan>Achilles Rupture</HighlightedSpan> Night Splint 💤
+          Patient review of the <HighlightedSpan>Achilles Rupture</HighlightedSpan> Night Splint 💤
         </>
       }
     />

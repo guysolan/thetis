@@ -1,10 +1,4 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@thetis/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@thetis/ui/select";
 import { useUpdateOrder } from "@/features/orders/api/updateOrder";
 import { cn } from "@/lib/utils";
 
@@ -43,10 +37,7 @@ const statusConfig = {
 
 type PaymentStatus = keyof typeof statusConfig;
 
-export function PaymentStatusSelect({
-  orderId,
-  currentStatus,
-}: PaymentStatusSelectProps) {
+export function PaymentStatusSelect({ orderId, currentStatus }: PaymentStatusSelectProps) {
   const { mutate: updateOrder } = useUpdateOrder();
 
   const handleStatusChange = (newStatus: string) => {
@@ -57,11 +48,8 @@ export function PaymentStatusSelect({
   };
 
   // Get the status config with fallback to unpaid
-  const statusKey = (
-    currentStatus in statusConfig ? currentStatus : "unpaid"
-  ) as PaymentStatus;
-  const statusColor =
-    statusConfig[statusKey]?.color || statusConfig.unpaid.color;
+  const statusKey = (currentStatus in statusConfig ? currentStatus : "unpaid") as PaymentStatus;
+  const statusColor = statusConfig[statusKey]?.color || statusConfig.unpaid.color;
 
   return (
     <Select onValueChange={handleStatusChange} defaultValue={currentStatus}>
@@ -78,11 +66,7 @@ export function PaymentStatusSelect({
           <SelectItem
             key={status}
             value={status}
-            className={cn(
-              "rounded-full my-1 text-xs font-medium",
-              config.color,
-              config.hoverColor,
-            )}
+            className={cn("rounded-full my-1 text-xs font-medium", config.color, config.hoverColor)}
           >
             {config.label}
           </SelectItem>

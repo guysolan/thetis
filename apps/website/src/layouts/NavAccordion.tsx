@@ -110,10 +110,7 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
 
   // Get direct links for Course and Splint
   const courseRoute = getRouteBySlugAndLanguage("course", lang);
-  const splintRoute = getRouteBySlugAndLanguage(
-    "achilles-rupture-splint",
-    lang,
-  );
+  const splintRoute = getRouteBySlugAndLanguage("achilles-rupture-splint", lang);
   const reviewsRoute = getRouteBySlugAndLanguage("reviews", lang);
 
   const howToBuyHrefByLang: Record<string, string> = {
@@ -330,15 +327,9 @@ const ImageProductLink = ({
       "text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100",
     )}
   >
-    <img
-      src={imageSrc}
-      alt=""
-      className="w-14 h-14 shrink-0 rounded object-cover"
-    />
+    <img src={imageSrc} alt="" className="w-14 h-14 shrink-0 rounded object-cover" />
     <div className="min-w-0 flex-1">
-      <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
-        {title}
-      </h3>
+      <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">{title}</h3>
       {description && (
         <p className="text-neutral-500 dark:text-neutral-400 text-xs line-clamp-1 mt-0.5">
           {description}
@@ -387,9 +378,7 @@ const IconLink = ({
           className={cn(
             "font-semibold",
             compact ? "text-sm" : "text-base md:text-lg",
-            variant === "default"
-              ? "text-primary"
-              : "text-neutral-800 dark:text-neutral-200",
+            variant === "default" ? "text-primary" : "text-neutral-800 dark:text-neutral-200",
           )}
         >
           {title}
@@ -397,9 +386,7 @@ const IconLink = ({
         <p
           className={cn(
             "text-neutral-500 dark:text-neutral-400",
-            compact
-              ? "text-xs line-clamp-1 mt-0.5"
-              : "text-sm md:text-base",
+            compact ? "text-xs line-clamp-1 mt-0.5" : "text-sm md:text-base",
           )}
         >
           {description}

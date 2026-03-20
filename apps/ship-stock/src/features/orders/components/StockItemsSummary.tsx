@@ -1,12 +1,5 @@
 import { useFieldArray, useFormContext, UseFormReturn } from "react-hook-form";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@thetis/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@thetis/ui/table";
 import { Item } from "@/features/items/types";
 
 interface StockItemsSummaryProps {
@@ -41,9 +34,7 @@ const StockItemsSummary = ({ name, addressName }: StockItemsSummaryProps) => {
 
           return (
             <TableRow key={field.id}>
-              <TableCell className="font-medium">
-                {item?.item_name || "Not selected"}
-              </TableCell>
+              <TableCell className="font-medium">{item?.item_name || "Not selected"}</TableCell>
               <TableCell>{roundIfRequired(quantityChange || 0)}</TableCell>
               <TableCell>{roundIfRequired(quantities?.before || 0)}</TableCell>
               <TableCell>{roundIfRequired(quantities?.after || 0)}</TableCell>
@@ -52,10 +43,7 @@ const StockItemsSummary = ({ name, addressName }: StockItemsSummaryProps) => {
         })}
         {fields.length === 0 && (
           <TableRow>
-            <TableCell
-              colSpan={4}
-              className="text-muted-foreground text-center"
-            >
+            <TableCell colSpan={4} className="text-muted-foreground text-center">
               No items added
             </TableCell>
           </TableRow>

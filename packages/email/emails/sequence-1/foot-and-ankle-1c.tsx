@@ -13,8 +13,8 @@ export const MyEmail = () => {
       }
       heading2={
         <>
-          Finally, a <HighlightedSpan>Comfortable Solution</HighlightedSpan> for
-          Achilles Tendon Rupture Recovery
+          Finally, a <HighlightedSpan>Comfortable Solution</HighlightedSpan> for Achilles Tendon
+          Rupture Recovery
         </>
       }
     />

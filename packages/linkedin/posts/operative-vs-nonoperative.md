@@ -7,7 +7,7 @@ Multicenter RCT Findings:
 • Rerupture: 4 % (operative) vs 6 % (non-operative) ✂️  
 • Infection: 0 % vs 4 % 💉  
 • Return-to-Sport at 9 months: 78 % vs 74 % 🏃‍♂️  
-• No difference in calf strength at 1 year 🦵  
+• No difference in calf strength at 1 year 🦵
 
 Could your patients avoid the OR without sacrificing outcomes?
 

@@ -6,15 +6,11 @@ import ActionPopover from "@/components/ActionPopover";
 import { PlusCircle } from "lucide-react";
 import { Address } from "../types";
 
-const CompanyAddressBook = ({
-  addresses: companyAddresses,
-}: { addresses: Address["Row"][] }) => {
+const CompanyAddressBook = ({ addresses: companyAddresses }: { addresses: Address["Row"][] }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { mutate: deleteAddress } = useDeleteAddress();
 
-  const displayAddresses = isExpanded
-    ? companyAddresses
-    : companyAddresses.slice(0, 2);
+  const displayAddresses = isExpanded ? companyAddresses : companyAddresses.slice(0, 2);
 
   return (
     <div className="space-y-2">
@@ -36,9 +32,7 @@ const CompanyAddressBook = ({
                 title={address.name ?? "Address"}
                 editForm={<AddressForm operation="upsert" address={address} />}
                 deleteFunction={() => deleteAddress(address.id as number)}
-          
-          
-          />
+              />
             </div>
           </Card>
         ))}
@@ -50,9 +44,7 @@ const CompanyAddressBook = ({
           onClick={() => setIsExpanded(!isExpanded)}
           className="w-full text-center text-muted-foreground text-xs hover:text-primary"
         >
-          {isExpanded
-            ? "Show Less"
-            : `Show ${companyAddresses.length - 2} More`}
+          {isExpanded ? "Show Less" : `Show ${companyAddresses.length - 2} More`}
         </button>
       )}
     </div>

@@ -10,16 +10,8 @@ interface BuyerSellerProps {
 const BuyerSeller = ({ isShipment = false, order }: BuyerSellerProps) => {
   return (
     <div className="gap-4 grid grid-cols-1 lg:grid-cols-2">
-      <CompanyAddressContact
-        title="Buyer / Receiver"
-        direction="to"
-        defaultExpanded={!order}
-      />
-      <CompanyAddressContact
-        title="Seller / Sender"
-        direction="from"
-        defaultExpanded={!order}
-      />
+      <CompanyAddressContact title="Buyer / Receiver" direction="to" defaultExpanded={!order} />
+      <CompanyAddressContact title="Seller / Sender" direction="from" defaultExpanded={!order} />
     </div>
   );
 };

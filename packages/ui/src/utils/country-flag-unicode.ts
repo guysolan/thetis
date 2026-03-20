@@ -15,4 +15,3 @@ function getUnicodeFlagIcon(code: string): string {
 }
 
 export default getUnicodeFlagIcon;
-

@@ -42,9 +42,7 @@ const BulkOrders = ({ lang }: BulkOrdersProps) => {
       )}
       href={href}
     >
-      <span className="text-base underline underline-offset-2">
-        {currentContent.text}
-      </span>
+      <span className="text-base underline underline-offset-2">{currentContent.text}</span>
       <ArrowRight size={20} />
     </a>
   );

@@ -3,13 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --port=2112",
-    "build": "vite build",
-    "serve": "vite preview",
-    "start": "vite"
+    "dev": "vp dev --port=2112",
+    "build": "vp build",
+    "serve": "vp preview",
+    "start": "vp dev"
   },
   "dependencies": {
-    "@thetis/amazon": "*",
     "@hookform/devtools": "^4.3.1",
     "@hookform/resolvers": "^3.9.0",
     "@number-flow/react": "^0.4.1",
@@ -21,6 +20,7 @@
     "@tanstack/react-router": "^1.63.5",
     "@tanstack/react-table": "^8.20.6",
     "@tanstack/router-devtools": "^1.63.5",
+    "@thetis/amazon": "*",
     "@thetis/ui": "workspace:*",
     "change-case": "^5.4.4",
     "class-variance-authority": "^0.7.0",
@@ -44,7 +44,7 @@
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.3",
     "tailwindcss-animate": "^1.0.7",
-    "vitest": "^2.1.2",
+    "vitest": "^4.1.0",
     "zod": "^3.23.8",
     "zustand": "^5.0.1"
   },
@@ -53,10 +53,10 @@
     "@types/file-saver": "^2.0.7",
     "@types/react-csv": "^1.1.10",
     "@types/react-dom": "^18.2.18",
-    "@vitejs/plugin-react": "^4.3.2",
+    "@vitejs/plugin-react": "^6.0.0",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
-    "vite": "^5.4.8"
+    "vite": "^8.0.0"
   }
 }

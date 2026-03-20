@@ -192,25 +192,23 @@ export const documentOptionsSchema = z.object({
     shipping: z.boolean().default(true),
     contact: z.boolean().default(true),
   }),
-  payment: z.object({
-    show: z.boolean().default(false),
-    paymentMethods: z.object(
-      Object.fromEntries(
-        Object.keys(PAYMENT_METHODS).map(
-          (method) => [method, z.boolean().default(true)],
-        ),
-      ),
-    ).default(
-      Object.fromEntries(
+  payment: z
+    .object({
+      show: z.boolean().default(false),
+      paymentMethods: z
+        .object(
+          Object.fromEntries(
+            Object.keys(PAYMENT_METHODS).map((method) => [method, z.boolean().default(true)]),
+          ),
+        )
+        .default(Object.fromEntries(Object.keys(PAYMENT_METHODS).map((method) => [method, true]))),
+    })
+    .default({
+      show: false,
+      paymentMethods: Object.fromEntries(
         Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
       ),
-    ),
-  }).default({
-    show: false,
-    paymentMethods: Object.fromEntries(
-      Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
-    ),
-  }),
+    }),
   showSignature: z.boolean().default(true),
   showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
@@ -225,66 +223,70 @@ export const purchaseOrderOptionsSchema = documentOptionsSchema.extend({
   showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(false),
   showItemsManifest: z.boolean().default(true),
-  payment: z.object({
-    show: z.boolean().default(false),
-    paymentMethods: z.object(
-      Object.fromEntries(
-        Object.keys(PAYMENT_METHODS).map(
-          (method) => [method, z.boolean().default(true)],
-        ),
-      ),
-    ).default(
-      Object.fromEntries(
+  payment: z
+    .object({
+      show: z.boolean().default(false),
+      paymentMethods: z
+        .object(
+          Object.fromEntries(
+            Object.keys(PAYMENT_METHODS).map((method) => [method, z.boolean().default(true)]),
+          ),
+        )
+        .default(Object.fromEntries(Object.keys(PAYMENT_METHODS).map((method) => [method, true]))),
+    })
+    .default({
+      show: false,
+      paymentMethods: Object.fromEntries(
         Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
       ),
-    ),
-  }).default({
-    show: false,
-    paymentMethods: Object.fromEntries(
-      Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
-    ),
-  }),
-  shippingDetails: z.object({
-    show: z.boolean().default(true),
-    reasonForExport: z.boolean().default(true),
-    modeOfTransport: z.boolean().default(true),
-    incoterms: z.boolean().default(true),
-    unitOfMeasurement: z.boolean().default(true),
-    shipmentNumber: z.boolean().default(true),
-    airwaybill: z.boolean().default(true),
-    referenceNumber: z.boolean().default(true),
-  }).default({
-    show: true,
-    reasonForExport: true,
-    modeOfTransport: true,
-    incoterms: true,
-    unitOfMeasurement: true,
-    shipmentNumber: true,
-    airwaybill: true,
-    referenceNumber: true,
-  }),
-  from: z.object({
-    show: z.boolean().default(true),
-    billing: z.boolean().default(true),
-    shipping: z.boolean().default(true),
-    contact: z.boolean().default(true),
-  }).default({
-    show: true,
-    billing: true,
-    shipping: true,
-    contact: true,
-  }),
-  to: z.object({
-    show: z.boolean().default(true),
-    billing: z.boolean().default(true),
-    shipping: z.boolean().default(true),
-    contact: z.boolean().default(true),
-  }).default({
-    show: true,
-    billing: true,
-    shipping: true,
-    contact: true,
-  }),
+    }),
+  shippingDetails: z
+    .object({
+      show: z.boolean().default(true),
+      reasonForExport: z.boolean().default(true),
+      modeOfTransport: z.boolean().default(true),
+      incoterms: z.boolean().default(true),
+      unitOfMeasurement: z.boolean().default(true),
+      shipmentNumber: z.boolean().default(true),
+      airwaybill: z.boolean().default(true),
+      referenceNumber: z.boolean().default(true),
+    })
+    .default({
+      show: true,
+      reasonForExport: true,
+      modeOfTransport: true,
+      incoterms: true,
+      unitOfMeasurement: true,
+      shipmentNumber: true,
+      airwaybill: true,
+      referenceNumber: true,
+    }),
+  from: z
+    .object({
+      show: z.boolean().default(true),
+      billing: z.boolean().default(true),
+      shipping: z.boolean().default(true),
+      contact: z.boolean().default(true),
+    })
+    .default({
+      show: true,
+      billing: true,
+      shipping: true,
+      contact: true,
+    }),
+  to: z
+    .object({
+      show: z.boolean().default(true),
+      billing: z.boolean().default(true),
+      shipping: z.boolean().default(true),
+      contact: z.boolean().default(true),
+    })
+    .default({
+      show: true,
+      billing: true,
+      shipping: true,
+      contact: true,
+    }),
 });
 
 export const commercialInvoiceSchema = documentOptionsSchema.extend({
@@ -295,146 +297,150 @@ export const commercialInvoiceSchema = documentOptionsSchema.extend({
   showShippingItems: z.boolean().default(true),
   showItemsManifest: z.boolean().default(true),
   showSignature: z.boolean().default(true),
-  paymentMethods: z.object(
-    Object.fromEntries(
-      Object.keys(PAYMENT_METHODS).map(
-        (method) => [method, z.boolean().default(true)],
-      ),
-    ),
-  ).default(
-    Object.fromEntries(
-      Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
-    ),
-  ),
-  shippingDetails: z.object({
-    show: z.boolean().default(true),
-    reasonForExport: z.boolean().default(true),
-    modeOfTransport: z.boolean().default(true),
-    incoterms: z.boolean().default(true),
-    unitOfMeasurement: z.boolean().default(true),
-    shipmentNumber: z.boolean().default(true),
-    airwaybill: z.boolean().default(true),
-    referenceNumber: z.boolean().default(true),
-  }).default({
-    show: true,
-    reasonForExport: true,
-    modeOfTransport: true,
-    incoterms: true,
-    unitOfMeasurement: true,
-    shipmentNumber: true,
-    airwaybill: true,
-    referenceNumber: true,
-  }),
-  from: z.object({
-    show: z.boolean().default(true),
-    billing: z.boolean().default(true),
-    shipping: z.boolean().default(true),
-    contact: z.boolean().default(true),
-  }).default({
-    show: true,
-    billing: true,
-    shipping: true,
-    contact: true,
-  }),
-  to: z.object({
-    show: z.boolean().default(true),
-    billing: z.boolean().default(true),
-    shipping: z.boolean().default(true),
-    contact: z.boolean().default(true),
-  }).default({
-    show: true,
-    billing: true,
-    shipping: true,
-    contact: true,
-  }),
-  payment: z.object({
-    show: z.boolean().default(false),
-    paymentMethods: z.object(
+  paymentMethods: z
+    .object(
       Object.fromEntries(
-        Object.keys(PAYMENT_METHODS).map(
-          (method) => [method, z.boolean().default(true)],
-        ),
+        Object.keys(PAYMENT_METHODS).map((method) => [method, z.boolean().default(true)]),
       ),
-    ).default(
-      Object.fromEntries(
+    )
+    .default(Object.fromEntries(Object.keys(PAYMENT_METHODS).map((method) => [method, true]))),
+  shippingDetails: z
+    .object({
+      show: z.boolean().default(true),
+      reasonForExport: z.boolean().default(true),
+      modeOfTransport: z.boolean().default(true),
+      incoterms: z.boolean().default(true),
+      unitOfMeasurement: z.boolean().default(true),
+      shipmentNumber: z.boolean().default(true),
+      airwaybill: z.boolean().default(true),
+      referenceNumber: z.boolean().default(true),
+    })
+    .default({
+      show: true,
+      reasonForExport: true,
+      modeOfTransport: true,
+      incoterms: true,
+      unitOfMeasurement: true,
+      shipmentNumber: true,
+      airwaybill: true,
+      referenceNumber: true,
+    }),
+  from: z
+    .object({
+      show: z.boolean().default(true),
+      billing: z.boolean().default(true),
+      shipping: z.boolean().default(true),
+      contact: z.boolean().default(true),
+    })
+    .default({
+      show: true,
+      billing: true,
+      shipping: true,
+      contact: true,
+    }),
+  to: z
+    .object({
+      show: z.boolean().default(true),
+      billing: z.boolean().default(true),
+      shipping: z.boolean().default(true),
+      contact: z.boolean().default(true),
+    })
+    .default({
+      show: true,
+      billing: true,
+      shipping: true,
+      contact: true,
+    }),
+  payment: z
+    .object({
+      show: z.boolean().default(false),
+      paymentMethods: z
+        .object(
+          Object.fromEntries(
+            Object.keys(PAYMENT_METHODS).map((method) => [method, z.boolean().default(true)]),
+          ),
+        )
+        .default(Object.fromEntries(Object.keys(PAYMENT_METHODS).map((method) => [method, true]))),
+    })
+    .default({
+      show: false,
+      paymentMethods: Object.fromEntries(
         Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
       ),
-    ),
-  }).default({
-    show: false,
-    paymentMethods: Object.fromEntries(
-      Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
-    ),
-  }),
+    }),
 });
 
 export const invoiceOptionsSchema = documentOptionsSchema.extend({
-  payment: z.object({
-    show: z.boolean().default(true),
-    paymentMethods: z.object(
-      Object.fromEntries(
-        Object.keys(PAYMENT_METHODS).map(
-          (method) => [method, z.boolean().default(true)],
-        ),
-      ),
-    ).default(
-      Object.fromEntries(
+  payment: z
+    .object({
+      show: z.boolean().default(true),
+      paymentMethods: z
+        .object(
+          Object.fromEntries(
+            Object.keys(PAYMENT_METHODS).map((method) => [method, z.boolean().default(true)]),
+          ),
+        )
+        .default(Object.fromEntries(Object.keys(PAYMENT_METHODS).map((method) => [method, true]))),
+    })
+    .default({
+      show: true,
+      paymentMethods: Object.fromEntries(
         Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
       ),
-    ),
-  }).default({
-    show: true,
-    paymentMethods: Object.fromEntries(
-      Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
-    ),
-  }),
+    }),
   showPackages: z.boolean().default(false),
   showShippingItems: z.boolean().default(true),
   showItemsManifest: z.boolean().default(true),
   showExporterDetails: z.boolean().default(false),
   showFDADetails: z.boolean().default(false),
   showExchangeRates: z.boolean().default(false),
-  shippingDetails: z.object({
-    show: z.boolean().default(true),
-    reasonForExport: z.boolean().default(true),
-    modeOfTransport: z.boolean().default(true),
-    incoterms: z.boolean().default(true),
-    unitOfMeasurement: z.boolean().default(true),
-    shipmentNumber: z.boolean().default(true),
-    airwaybill: z.boolean().default(true),
-    referenceNumber: z.boolean().default(true),
-  }).default({
-    show: true,
-    reasonForExport: true,
-    modeOfTransport: true,
-    incoterms: true,
-    unitOfMeasurement: true,
-    shipmentNumber: true,
-    airwaybill: true,
-    referenceNumber: true,
-  }),
-  from: z.object({
-    show: z.boolean().default(true),
-    billing: z.boolean().default(true),
-    shipping: z.boolean().default(true),
-    contact: z.boolean().default(true),
-  }).default({
-    show: true,
-    billing: true,
-    shipping: true,
-    contact: true,
-  }),
-  to: z.object({
-    show: z.boolean().default(true),
-    billing: z.boolean().default(true),
-    shipping: z.boolean().default(true),
-    contact: z.boolean().default(true),
-  }).default({
-    show: true,
-    billing: true,
-    shipping: true,
-    contact: true,
-  }),
+  shippingDetails: z
+    .object({
+      show: z.boolean().default(true),
+      reasonForExport: z.boolean().default(true),
+      modeOfTransport: z.boolean().default(true),
+      incoterms: z.boolean().default(true),
+      unitOfMeasurement: z.boolean().default(true),
+      shipmentNumber: z.boolean().default(true),
+      airwaybill: z.boolean().default(true),
+      referenceNumber: z.boolean().default(true),
+    })
+    .default({
+      show: true,
+      reasonForExport: true,
+      modeOfTransport: true,
+      incoterms: true,
+      unitOfMeasurement: true,
+      shipmentNumber: true,
+      airwaybill: true,
+      referenceNumber: true,
+    }),
+  from: z
+    .object({
+      show: z.boolean().default(true),
+      billing: z.boolean().default(true),
+      shipping: z.boolean().default(true),
+      contact: z.boolean().default(true),
+    })
+    .default({
+      show: true,
+      billing: true,
+      shipping: true,
+      contact: true,
+    }),
+  to: z
+    .object({
+      show: z.boolean().default(true),
+      billing: z.boolean().default(true),
+      shipping: z.boolean().default(true),
+      contact: z.boolean().default(true),
+    })
+    .default({
+      show: true,
+      billing: true,
+      shipping: true,
+      contact: true,
+    }),
 });
 
 export const packingListSchema = documentOptionsSchema.extend({
@@ -445,66 +451,70 @@ export const packingListSchema = documentOptionsSchema.extend({
   showShippingItems: z.boolean().default(false),
   showItemsManifest: z.boolean().default(true),
   showSignature: z.boolean().default(true),
-  payment: z.object({
-    show: z.boolean().default(false),
-    paymentMethods: z.object(
-      Object.fromEntries(
-        Object.keys(PAYMENT_METHODS).map(
-          (method) => [method, z.boolean().default(true)],
-        ),
-      ),
-    ).default(
-      Object.fromEntries(
+  payment: z
+    .object({
+      show: z.boolean().default(false),
+      paymentMethods: z
+        .object(
+          Object.fromEntries(
+            Object.keys(PAYMENT_METHODS).map((method) => [method, z.boolean().default(true)]),
+          ),
+        )
+        .default(Object.fromEntries(Object.keys(PAYMENT_METHODS).map((method) => [method, true]))),
+    })
+    .default({
+      show: false,
+      paymentMethods: Object.fromEntries(
         Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
       ),
-    ),
-  }).default({
-    show: false,
-    paymentMethods: Object.fromEntries(
-      Object.keys(PAYMENT_METHODS).map((method) => [method, true]),
-    ),
-  }),
-  shippingDetails: z.object({
-    show: z.boolean().default(true),
-    reasonForExport: z.boolean().default(true),
-    modeOfTransport: z.boolean().default(true),
-    incoterms: z.boolean().default(true),
-    unitOfMeasurement: z.boolean().default(true),
-    shipmentNumber: z.boolean().default(true),
-    airwaybill: z.boolean().default(true),
-    referenceNumber: z.boolean().default(true),
-  }).default({
-    show: true,
-    reasonForExport: true,
-    modeOfTransport: true,
-    incoterms: true,
-    unitOfMeasurement: true,
-    shipmentNumber: true,
-    airwaybill: true,
-    referenceNumber: true,
-  }),
-  from: z.object({
-    show: z.boolean().default(true),
-    billing: z.boolean().default(true),
-    shipping: z.boolean().default(true),
-    contact: z.boolean().default(true),
-  }).default({
-    show: true,
-    billing: true,
-    shipping: true,
-    contact: true,
-  }),
-  to: z.object({
-    show: z.boolean().default(true),
-    billing: z.boolean().default(true),
-    shipping: z.boolean().default(true),
-    contact: z.boolean().default(true),
-  }).default({
-    show: true,
-    billing: true,
-    shipping: true,
-    contact: true,
-  }),
+    }),
+  shippingDetails: z
+    .object({
+      show: z.boolean().default(true),
+      reasonForExport: z.boolean().default(true),
+      modeOfTransport: z.boolean().default(true),
+      incoterms: z.boolean().default(true),
+      unitOfMeasurement: z.boolean().default(true),
+      shipmentNumber: z.boolean().default(true),
+      airwaybill: z.boolean().default(true),
+      referenceNumber: z.boolean().default(true),
+    })
+    .default({
+      show: true,
+      reasonForExport: true,
+      modeOfTransport: true,
+      incoterms: true,
+      unitOfMeasurement: true,
+      shipmentNumber: true,
+      airwaybill: true,
+      referenceNumber: true,
+    }),
+  from: z
+    .object({
+      show: z.boolean().default(true),
+      billing: z.boolean().default(true),
+      shipping: z.boolean().default(true),
+      contact: z.boolean().default(true),
+    })
+    .default({
+      show: true,
+      billing: true,
+      shipping: true,
+      contact: true,
+    }),
+  to: z
+    .object({
+      show: z.boolean().default(true),
+      billing: z.boolean().default(true),
+      shipping: z.boolean().default(true),
+      contact: z.boolean().default(true),
+    })
+    .default({
+      show: true,
+      billing: true,
+      shipping: true,
+      contact: true,
+    }),
 });
 
 export type CommercialInvoiceOptions = z.infer<typeof commercialInvoiceSchema>;

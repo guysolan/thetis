@@ -1,4 +1,4 @@
-Treat heel pain and Achilles ruptures? Warn your patients about misleading dorsiflexion splint photos 🤯 
+Treat heel pain and Achilles ruptures? Warn your patients about misleading dorsiflexion splint photos 🤯
 
 Anyone else noticed dorsiflexion splints (for Achilles Tendinitis/Plantar Fasciitis which need toes held up!) advertised with photos in PLANTARFLEXION (toes down)?! 🤦‍♀️
 
@@ -9,4 +9,3 @@ Dear shops & manufacturers: Show better photos! Let's not confuse patients any m
 hashtag#MedicalDevice hashtag#MarketingFail hashtag#PatientSafety hashtag#AchillesTendonitis hashtag#PlantarFasciitis hashtag#Healthcare hashtag#Physiotherapy hashtag#Podiatry
 
 Orthotix The Orthotix Clinic Breg Össur Orthomen, Inc. Enovis Enovis Foot & Ankle Performance Health DDP Medical Supply Henry Schein
-

@@ -6,12 +6,7 @@ import { Input } from "./input";
 import { Label } from "./label";
 import { Textarea } from "./textarea";
 import { InfiniteClinicianReviews } from "./infinite-clinician-reviews";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "./accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion";
 import { Alert, AlertDescription, AlertTitle } from "./alert";
 import {
   AlertDialog,
@@ -36,14 +31,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "./breadcrumb";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./card";
 import {
   Dialog,
   DialogContent,
@@ -141,12 +129,7 @@ import {
   TableRow,
 } from "./table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./tooltip";
 const ui = {
   Accordion,
   AccordionContent,

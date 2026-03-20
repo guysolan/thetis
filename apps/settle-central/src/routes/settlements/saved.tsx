@@ -1,13 +1,7 @@
 import React from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@thetis/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@thetis/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@thetis/ui/card";
 import { DollarSign, Euro, FolderArchive, FolderOpen } from "lucide-react";
 import { useDownloadFolder } from "@/api/useDownloadFolder";
 import { useAmazonReportsFromDb } from "../../api/selectAmazonReportsFromDb";

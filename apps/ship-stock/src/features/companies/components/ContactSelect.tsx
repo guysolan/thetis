@@ -5,72 +5,60 @@ import TooltipDialog from "../../../components/TooltipDialog";
 import { useSelectContacts } from "../../contacts/api/selectContacts";
 
 interface ContactSelectProps {
-    label: string;
-    getFieldName: (type: "contact" | "company") => string;
-    getContactOptions: () => { label: string; value: string }[];
-    getSelectedContact: () => any;
-    form: any;
+  label: string;
+  getFieldName: (type: "contact" | "company") => string;
+  getContactOptions: () => { label: string; value: string }[];
+  getSelectedContact: () => any;
+  form: any;
 }
 
 const ContactSelect = ({
-    label,
-    getFieldName,
-    getContactOptions,
-    getSelectedContact,
-    form,
+  label,
+  getFieldName,
+  getContactOptions,
+  getSelectedContact,
+  form,
 }: ContactSelectProps) => {
-    const { data: contacts } = useSelectContacts();
+  const { data: contacts } = useSelectContacts();
 
-    const companyId = form.watch(getFieldName("company"));
-    const contactId = form.watch(getFieldName("contact"));
-    const contact = contacts.find((c) => String(c.id) === String(contactId));
+  const companyId = form.watch(getFieldName("company"));
+  const contactId = form.watch(getFieldName("contact"));
+  const contact = contacts.find((c) => String(c.id) === String(contactId));
 
-    const onSuccess = (contactData: number | { id: number }) => {
-        const fieldName = getFieldName("contact");
-        const contactId = typeof contactData === "number"
-            ? contactData
-            : contactData.id;
-        console.log(fieldName, contactId);
-        form.setValue(fieldName, String(contactId));
-    };
+  const onSuccess = (contactData: number | { id: number }) => {
+    const fieldName = getFieldName("contact");
+    const contactId = typeof contactData === "number" ? contactData : contactData.id;
+    console.log(fieldName, contactId);
+    form.setValue(fieldName, String(contactId));
+  };
 
-    return (
-        <div className="flex flex-row items-center gap-2 w-full">
-            <div className="flex-1 min-w-0">
-                <Select
-                    label={label}
-                    name={getFieldName("contact")}
-                    options={getContactOptions()}
-                />
-            </div>
-            <div className="flex shrink-0 gap-2">
-                {contactId && (
-                    <TooltipDialog
-                        icon={<Pencil size={16} />}
-                        tooltipText="Edit Contact"
-                    >
-                        <CompanyContactForm
-                            operation="upsert"
-                            companyId={companyId}
-                            contact={contact}
-                            onSuccess={onSuccess}
-                        />
-                    </TooltipDialog>
-                )}
-                <TooltipDialog
-                    icon={<Plus size={16} />}
-                    tooltipText="Add Contact"
-                >
-                    <CompanyContactForm
-                        operation="insert"
-                        companyId={companyId}
-                        contact={null}
-                        onSuccess={onSuccess}
-                    />
-                </TooltipDialog>
-            </div>
-        </div>
-    );
+  return (
+    <div className="flex flex-row items-center gap-2 w-full">
+      <div className="flex-1 min-w-0">
+        <Select label={label} name={getFieldName("contact")} options={getContactOptions()} />
+      </div>
+      <div className="flex shrink-0 gap-2">
+        {contactId && (
+          <TooltipDialog icon={<Pencil size={16} />} tooltipText="Edit Contact">
+            <CompanyContactForm
+              operation="upsert"
+              companyId={companyId}
+              contact={contact}
+              onSuccess={onSuccess}
+            />
+          </TooltipDialog>
+        )}
+        <TooltipDialog icon={<Plus size={16} />} tooltipText="Add Contact">
+          <CompanyContactForm
+            operation="insert"
+            companyId={companyId}
+            contact={null}
+            onSuccess={onSuccess}
+          />
+        </TooltipDialog>
+      </div>
+    </div>
+  );
 };
 
 export default ContactSelect;

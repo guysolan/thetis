@@ -12,12 +12,10 @@ export default function EmergingTechnologies() {
               <Microscope className="w-6 h-6 text-blue-600" />
             </div>
           </div>
-          <h3 className="mb-2 font-bold text-lg text-center">
-            Shear Wave Elastography
-          </h3>
+          <h3 className="mb-2 font-bold text-lg text-center">Shear Wave Elastography</h3>
           <p className="text-sm text-center">
-            Advanced imaging that measures tendon stiffness to detect early
-            degeneration before symptoms appear.
+            Advanced imaging that measures tendon stiffness to detect early degeneration before
+            symptoms appear.
           </p>
         </div>
 
@@ -28,12 +26,10 @@ export default function EmergingTechnologies() {
               <FlaskConical className="w-6 h-6 text-purple-600" />
             </div>
           </div>
-          <h3 className="mb-2 font-bold text-lg text-center">
-            Exosome Therapy
-          </h3>
+          <h3 className="mb-2 font-bold text-lg text-center">Exosome Therapy</h3>
           <p className="text-sm text-center">
-            Cell-derived vesicles that carry healing factors to accelerate
-            tissue repair and reduce inflammation.
+            Cell-derived vesicles that carry healing factors to accelerate tissue repair and reduce
+            inflammation.
           </p>
         </div>
 
@@ -44,12 +40,10 @@ export default function EmergingTechnologies() {
               <Dna className="w-6 h-6 text-green-600" />
             </div>
           </div>
-          <h3 className="mb-2 font-bold text-lg text-center">
-            Mesenchymal Stem Cells
-          </h3>
+          <h3 className="mb-2 font-bold text-lg text-center">Mesenchymal Stem Cells</h3>
           <p className="text-sm text-center">
-            Multipotent cells that can transform into tendon tissue and enhance
-            the natural healing process.
+            Multipotent cells that can transform into tendon tissue and enhance the natural healing
+            process.
           </p>
         </div>
       </div>

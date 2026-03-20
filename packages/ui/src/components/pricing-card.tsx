@@ -57,10 +57,10 @@ function PricingCard({
   const Card = href ? "a" : "div";
   const cardProps = href
     ? {
-      href,
-      target: external ? "_blank" : undefined,
-      rel: external ? "noopener noreferrer" : undefined,
-    }
+        href,
+        target: external ? "_blank" : undefined,
+        rel: external ? "noopener noreferrer" : undefined,
+      }
     : {};
 
   const variantStyles = {
@@ -154,10 +154,7 @@ function PricingCard({
       {/* Features list */}
       <ul className="flex-grow space-y-3 mb-6">
         {features.map((feature, index) => (
-          <li
-            key={index}
-            className="flex items-start gap-3 text-foreground text-sm"
-          >
+          <li key={index} className="flex items-start gap-3 text-foreground text-sm">
             <div
               className={cn(
                 "flex justify-center items-center mt-0.5 rounded-full w-5 h-5 shrink-0",
@@ -175,11 +172,7 @@ function PricingCard({
       {price && (
         <div className="mb-4">
           <span className="font-bold text-foreground text-3xl">{price}</span>
-          {priceSuffix && (
-            <span className="ml-1 text-muted-foreground text-sm">
-              {priceSuffix}
-            </span>
-          )}
+          {priceSuffix && <span className="ml-1 text-muted-foreground text-sm">{priceSuffix}</span>}
         </div>
       )}
 

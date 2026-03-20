@@ -24,12 +24,7 @@ const ActionPopover = ({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          className="dark:text-neutral-100"
-          type="button"
-          variant="ghost"
-          size="icon"
-        >
+        <Button className="dark:text-neutral-100" type="button" variant="ghost" size="icon">
           <MoreVertical size={20} />
         </Button>
       </PopoverTrigger>

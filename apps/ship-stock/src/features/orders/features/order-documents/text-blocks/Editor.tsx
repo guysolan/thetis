@@ -26,9 +26,7 @@ export function Editor({
   disablePlaceholder = false,
   tabIndex,
 }: Props) {
-  const [content, setContent] = useState<JSONContent | null | undefined>(
-    initialContent,
-  );
+  const [content, setContent] = useState<JSONContent | null | undefined>(initialContent);
 
   const handleUpdate = useCallback(
     (editor: EditorInstance) => {

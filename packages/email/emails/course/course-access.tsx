@@ -27,9 +27,8 @@ export const CourseAccessEmail = ({
   courseType = "Standard",
   claimUrl = "https://course.thetismedical.com/claim?email=customer@example.com&order=1234",
 }: CourseAccessEmailProps) => {
-  const courseName = courseType === "premium" 
-    ? "Premium Recovery Course" 
-    : "Achilles Recovery Course";
+  const courseName =
+    courseType === "premium" ? "Premium Recovery Course" : "Achilles Recovery Course";
 
   return (
     <Html>
@@ -60,12 +59,10 @@ export const CourseAccessEmail = ({
 
             {/* Main Content */}
             <Section className="mt-8">
+              <Text className="text-gray-700 text-[16px] leading-[26px]">Hi there,</Text>
               <Text className="text-gray-700 text-[16px] leading-[26px]">
-                Hi there,
-              </Text>
-              <Text className="text-gray-700 text-[16px] leading-[26px]">
-                Great news! Your order <strong>#{orderNumber}</strong> has been confirmed, 
-                and your <strong>{courseName}</strong> is ready to access.
+                Great news! Your order <strong>#{orderNumber}</strong> has been confirmed, and your{" "}
+                <strong>{courseName}</strong> is ready to access.
               </Text>
               <Text className="text-gray-700 text-[16px] leading-[26px]">
                 Click the button below to set up your account and start your recovery journey:
@@ -116,9 +113,7 @@ export const CourseAccessEmail = ({
               <Text className="text-gray-500 text-[14px] leading-[22px]">
                 If the button doesn't work, copy and paste this link into your browser:
               </Text>
-              <Text className="text-primary-600 text-[12px] break-all">
-                {claimUrl}
-              </Text>
+              <Text className="text-primary-600 text-[12px] break-all">{claimUrl}</Text>
             </Section>
 
             {/* Account Info */}
@@ -132,8 +127,8 @@ export const CourseAccessEmail = ({
 
             {/* Sign off */}
             <Text className="text-gray-700 text-[16px] leading-[26px]">
-              We're here to support you every step of the way. If you have any questions, 
-              just reply to this email.
+              We're here to support you every step of the way. If you have any questions, just reply
+              to this email.
             </Text>
             <Text className="text-gray-700 text-[16px] leading-[26px]">
               Wishing you a speedy recovery,

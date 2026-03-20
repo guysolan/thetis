@@ -5,7 +5,7 @@ description: "Understanding the importance of night-time protection during Achil
 type: "article"
 tags: ["recovery", "equipment"]
 audience: ["patient"]
-heroImage: '/images/night-splint.jpeg'
+heroImage: "/images/night-splint.jpeg"
 ---
 
 - Importance of toe-down 24/7

@@ -1,12 +1,5 @@
 import { Button } from "@thetis/ui/button";
-import {
-  Banknote,
-  Clipboard,
-  ExternalLink,
-  FileText,
-  Receipt,
-  Tag,
-} from "lucide-react";
+import { Banknote, Clipboard, ExternalLink, FileText, Receipt, Tag } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { OrderType } from "../types";
 

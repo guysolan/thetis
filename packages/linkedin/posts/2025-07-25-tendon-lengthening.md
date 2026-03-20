@@ -7,7 +7,7 @@ MRI Follow-Up Study:
 • Elongation at 12 months: 4.8 mm (non-operative) vs 2.5 mm (operative) 🧵  
 • Each extra mm ↗️ led to 2 % ↓ in plantar-flexion strength 🦶  
 • Patients with ≥5 mm elongation were 3× more likely to report fatigue 💤  
-• No correlation with calf circumference 🧐  
+• No correlation with calf circumference 🧐
 
 Do you measure tendon length in your follow-ups?
 

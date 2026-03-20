@@ -10,10 +10,7 @@ const OrdersPage = () => {
 
   return (
     <>
-      <DocumentControls
-        orderNumber={order.order_id}
-        documentType="shippingLabel"
-      />
+      <DocumentControls orderNumber={order.order_id} documentType="shippingLabel" />
       <ShippingLabel
         deliveryCompany={order.to_company as CompanyRow}
         deliveryAddress={order.to_shipping_address as AddressRow}
@@ -25,9 +22,7 @@ const OrdersPage = () => {
     </>
   );
 };
-export const Route = createFileRoute(
-  "/documents/orders/$orderId/shipping-label",
-)({
+export const Route = createFileRoute("/documents/orders/$orderId/shipping-label")({
   component: OrdersPage,
   loader: async ({ context, params }) => {
     const order = await context.queryClient.ensureQueryData(

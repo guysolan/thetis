@@ -3,9 +3,7 @@ import { supabase } from "../../../lib/supabase";
 import { ItemView } from "../types";
 
 export const selectItemsView = async () => {
-  const { data, error } = await supabase.from("items_view").select(
-    "*",
-  ).returns<ItemView[]>();
+  const { data, error } = await supabase.from("items_view").select("*").returns<ItemView[]>();
 
   if (error) {
     throw error;
@@ -22,5 +20,4 @@ export const selectItemsViewQueryOptions = () => {
   });
 };
 
-export const useSelectItemsView = () =>
-  useSuspenseQuery(selectItemsViewQueryOptions());
+export const useSelectItemsView = () => useSuspenseQuery(selectItemsViewQueryOptions());

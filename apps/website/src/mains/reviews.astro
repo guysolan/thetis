@@ -4,13 +4,13 @@ import Layout from "../layouts/Layout.astro";
 import ReviewsMasonry from "@/sections/reviews/ReviewsMasonry";
 import ExperienceIfForYourself from "@/sections/reviews/ExperienceIfForYourself.astro";
 import type { Lang } from "@/config/languages";
-import { getAlternateLanguages } from "@/config/languages";
+import { getAlternateLanguagesForPath } from "@/content/routes";
 
 const { lang = "en" } = Astro.props as { lang?: Lang };
 
-// Language configuration
+// Language configuration - route-aware hreflang URLs
 const currentPath = Astro.url.pathname;
-const alternateLanguages = getAlternateLanguages(currentPath, lang);
+const alternateLanguages = getAlternateLanguagesForPath(currentPath, lang);
 
 // Multilingual content
 const content = {
