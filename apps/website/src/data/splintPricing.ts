@@ -69,7 +69,8 @@ export const retailPrice = 130;
 export const hcpcsCode = "Q4051";
 export const altCptCode = "29425";
 
-// Retail pricing for individual splint by region
+// Retail pricing for individual splint by region — keep in sync with Shopify (Storefront / admin).
+// Splint PDP uses this for GB/US so "Add to cart" matches checkout; Google Sheet feed may differ.
 export const retailPricing = {
   UK: {
     price: 63.99,

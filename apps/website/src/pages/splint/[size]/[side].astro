@@ -32,6 +32,7 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
 import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
 import SplintDownloads from "@/sections/achilles-rupture-splint/SplintDownloads.astro";
 import { Check, Truck, ShieldCheck, RotateCcw } from "lucide-react";
+import { getRetailPriceByCountry } from "../../../data/splintPricing";
 
 export const prerender = false;
 
@@ -90,6 +91,12 @@ const splint = splintData?.find((d) => {
 if (!splint) {
     return Astro.redirect("/404");
 }
+
+/** PDP + CTA price must match Shopify checkout — sheet feed can differ (e.g. GMC). */
+const retailCheckoutPrice = getRetailPriceByCountry(countryForPurchase);
+const shopDisplayPrice = isDirectShipCountry
+    ? retailCheckoutPrice.formatted
+    : splint.price;
 
 const checkoutLink = await getCheckoutLink(
     size as "large" | "small",
@@ -201,7 +208,7 @@ const galleryImages = [
                         <!-- Price -->
                         <div class="flex items-baseline gap-4 mb-2">
                             <span class="font-semibold text-slate-900 text-2xl"
-                                >{splint.price}</span
+                                >{shopDisplayPrice}</span
                             >
                             <span
                                 class:list={[
@@ -244,7 +251,7 @@ const galleryImages = [
                                                     "w-full text-lg py-4 shadow-lg hover:shadow-xl transition-all",
                                             })}
                                         >
-                                            {t.addToCart} - {splint.price}
+                                            {t.addToCart} - {shopDisplayPrice}
                                         </a>
                                     ) : (
                                         <button
@@ -256,7 +263,7 @@ const galleryImages = [
                                             })}
                                             disabled
                                         >
-                                            {t.addToCart} - {splint.price}
+                                            {t.addToCart} - {shopDisplayPrice}
                                         </button>
                                     )
                                 ) : purchaseInfo.type !== "how-to-buy" ? (
@@ -668,7 +675,7 @@ const galleryImages = [
                                 className: "inline-flex text-lg px-8 py-4",
                             })}
                         >
-                            {t.addToCart} - {splint.price}
+                            {t.addToCart} - {shopDisplayPrice}
                         </a>
                     ) : purchaseInfo.type !== "how-to-buy" ? (
                         <a
@@ -713,17 +720,30 @@ const galleryImages = [
 
     <script
         define:vars={{
-            region,
             itemId: splint.id,
             itemName: splint.title,
-            itemPrice: splint.price,
+            itemPrice: isDirectShipCountry
+                ? `${retailCheckoutPrice.price} ${retailCheckoutPrice.currency}`
+                : splint.price,
+            ecommerceCurrency: retailCheckoutPrice.currency,
+            ecommerceValue: retailCheckoutPrice.price,
+            useRetailEcommerce: isDirectShipCountry,
+            region,
         }}
     >
         document.addEventListener("DOMContentLoaded", () => {
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({ ecommerce: null });
-            const currency = region === "uk" ? "GBP" : "USD";
-            const value = region === "uk" ? 56.99 : 89.99;
+            const currency = useRetailEcommerce
+                ? ecommerceCurrency
+                : region === "uk"
+                  ? "GBP"
+                  : "USD";
+            const value = useRetailEcommerce
+                ? ecommerceValue
+                : region === "uk"
+                  ? 63.99
+                  : 93.99;
             window.dataLayer.push({
                 event: "view_item",
                 ecommerce: {

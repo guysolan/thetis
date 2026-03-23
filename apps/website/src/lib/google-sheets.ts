@@ -2,7 +2,8 @@ import type { SplintData } from "../types/splint";
 
 // Mock data based on actual Google Sheets structure
 const getMockSplintData = (region: "us" | "uk"): SplintData[] => {
-  const price = region === "us" ? "89.99 USD" : "56.99 GBP";
+  // Must match Shopify checkout — see `data/splintPricing.ts` retailPricing
+  const price = region === "us" ? "93.99 USD" : "63.99 GBP";
 
   console.log(`getMockSplintData called with region: ${region}`);
   console.log(`Setting price to: ${price}`);
