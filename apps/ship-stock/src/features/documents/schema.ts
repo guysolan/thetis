@@ -39,6 +39,11 @@ export const purchaseOrderOptions = {
       label: "Package Breakdown",
       description: "Physical package details with dimensions and contents",
     },
+    {
+      id: "showGermanEuTaxIds",
+      label: "German VAT & EORI (EU)",
+      description: "DE VAT ID and EORI for European customs",
+    },
   ],
 };
 
@@ -64,6 +69,11 @@ export const invoiceOptions = {
       id: "showPackages",
       label: "Package Breakdown",
       description: "Physical package details with dimensions and contents",
+    },
+    {
+      id: "showGermanEuTaxIds",
+      label: "German VAT & EORI (EU)",
+      description: "DE VAT ID and EORI for European customs",
     },
   ],
 };
@@ -111,6 +121,11 @@ export const commercialInvoiceOptions = {
       label: "Signature",
       description: "Signature line for document authorization",
     },
+    {
+      id: "showGermanEuTaxIds",
+      label: "German VAT & EORI (EU)",
+      description: "DE VAT ID and EORI for European customs",
+    },
   ],
 };
 
@@ -156,6 +171,11 @@ export const packingListOptions = {
       id: "showSignature",
       label: "Signature",
       description: "Signature line for document authorization",
+    },
+    {
+      id: "showGermanEuTaxIds",
+      label: "German VAT & EORI (EU)",
+      description: "DE VAT ID and EORI for European customs",
     },
   ],
 };
@@ -216,6 +236,7 @@ export const documentOptionsSchema = z.object({
   showExporterDetails: z.boolean().default(false),
   showFDADetails: z.boolean().default(false),
   showExchangeRates: z.boolean().default(false),
+  showGermanEuTaxIds: z.boolean().default(false),
 });
 
 export const purchaseOrderOptionsSchema = documentOptionsSchema.extend({

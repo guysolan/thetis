@@ -4,6 +4,7 @@ import OrderDescription from "../components/OrderDescription";
 import OrderTitle from "../components/OrderTitle";
 import FDADetails from "../components/FDADetails";
 import ExporterDetails from "../components/ExporterDetails";
+import GermanEuTaxDetails from "../components/GermanEuTaxDetails";
 import ItemsWithPricing from "../components/ItemsWithPricing";
 import { prepareOrderItems } from "../utils/utils";
 import PackageSummary from "../components/PackageSummary";
@@ -149,6 +150,8 @@ const Document = ({ order, options, title, documentType }: DocumentProps) => {
       )}
 
       {options.showExporterDetails && <ExporterDetails />}
+
+      {options.showGermanEuTaxIds && <GermanEuTaxDetails />}
 
       {options.showFDADetails && <FDADetails />}
 

@@ -830,6 +830,8 @@ export type Database = {
         Row: {
           address_id: number | null
           address_name: string | null
+          delivery_end: string | null
+          delivery_start: string | null
           from_company: string | null
           item_quantities: Json | null
           items: Json | null

@@ -18,6 +18,59 @@ interface ItemInfo {
   type: string;
 }
 
+/** Address for a history line: prefer item.address_id, else row-level address (matches API mapping). */
+export function resolvedItemAddressId(
+  item: { address_id?: number | null },
+  record: Pick<InventoryHistoryRecord, "address_id">,
+): number | null {
+  if (item.address_id != null && String(item.address_id) !== "") {
+    const n = Number(item.address_id);
+    return Number.isNaN(n) ? null : n;
+  }
+  if (record.address_id != null && String(record.address_id) !== "") {
+    const n = Number(record.address_id);
+    return Number.isNaN(n) ? null : n;
+  }
+  return null;
+}
+
+/** Formatted start/end labels for a delivery window; null if no bounds. */
+export function getDeliveryWindowParts(
+  deliveryStart: string | null | undefined,
+  deliveryEnd: string | null | undefined,
+): { start: string | null; end: string | null } | null {
+  if (deliveryStart == null && deliveryEnd == null) return null;
+  const start = deliveryStart ? dayjs(deliveryStart).format("D MMM YYYY") : null;
+  const end = deliveryEnd ? dayjs(deliveryEnd).format("D MMM YYYY") : null;
+  if (start == null && end == null) return null;
+  return { start, end };
+}
+
+/**
+ * Whether this row's effective transaction date aligns with outbound (first) or inbound (second)
+ * delivery bound, matching inventory_history_by_address logic.
+ */
+export function getDeliveryBoundUsedLabel(
+  transactionDate: string,
+  deliveryStart: string | null | undefined,
+  deliveryEnd: string | null | undefined,
+): "outbound" | "inbound" | null {
+  if (deliveryStart == null && deliveryEnd == null) return null;
+  const t = dayjs(transactionDate).startOf("day");
+  const start = deliveryStart ? dayjs(deliveryStart).startOf("day") : null;
+  const end = deliveryEnd ? dayjs(deliveryEnd).startOf("day") : null;
+  if (start && t.isSame(start)) return "outbound";
+  if (end && t.isSame(end)) return "inbound";
+  return null;
+}
+
+/** In/out from line change: negative → first delivery date, positive → second (matches the view). */
+export function getDeliveryBoundFromItemChange(change: number): "outbound" | "inbound" | null {
+  if (change < 0) return "outbound";
+  if (change > 0) return "inbound";
+  return null;
+}
+
 // Helper function to determine badge variant based on order type
 export function getOrderTypeBadgeVariant(orderType: string): string {
   switch (orderType) {
@@ -47,11 +100,13 @@ export const formatStockHistoryRows = (
   // Process each record
   records.forEach((record) => {
     record.items
-      .filter((item) => (addressId ? item.address_id === addressId : true))
+      .filter((item) =>
+        addressId ? resolvedItemAddressId(item, record) === Number(addressId) : true,
+      )
       .forEach((item) => {
-        if (!stockMap.has(item.id)) {
-          stockMap.set(item.id, {
-            item_id: item.id,
+        if (!stockMap.has(Number(item.id))) {
+          stockMap.set(Number(item.id), {
+            item_id: Number(item.id),
             item_name: item.name,
             quantity: Math.round(item.quantity),
             change: Math.round(item.change),
@@ -74,10 +129,10 @@ export const getCurrentStockLevels = (
   // Process history in reverse to get the most recent quantities
   [...history].reverse().forEach((record) => {
     record.items.forEach((item) => {
-      if (addressId ? item.address_id === addressId : true) {
-        if (!stockMap.has(item.id)) {
-          stockMap.set(item.id, {
-            item_id: item.id,
+      if (addressId ? resolvedItemAddressId(item, record) === Number(addressId) : true) {
+        if (!stockMap.has(Number(item.id))) {
+          stockMap.set(Number(item.id), {
+            item_id: Number(item.id),
             item_name: item.name,
             quantity: Math.round(item.quantity),
             change: 0, // Current stock has no change
@@ -110,10 +165,10 @@ export const getUniqueItems = (
   inventoryHistory.forEach((record) => {
     record.items.forEach((item) => {
       // Only consider items that match the current address ID
-      if (v_addressId ? item.address_id === v_addressId : true) {
-        if (!uniqueItems.has(item.id)) {
-          uniqueItems.set(item.id, {
-            id: item.id,
+      if (v_addressId ? resolvedItemAddressId(item, record) === v_addressId : true) {
+        if (!uniqueItems.has(Number(item.id))) {
+          uniqueItems.set(Number(item.id), {
+            id: Number(item.id),
             name: item.name,
             type: item.type,
           });
@@ -158,7 +213,9 @@ export const getCurrentQuantity = (
     if (recordDate.isAfter(cutoff)) continue;
 
     const itemEntry = record.items.find(
-      (item) => item.id === itemId && (v_addressId ? item.address_id === v_addressId : true),
+      (item) =>
+        Number(item.id) === Number(itemId) &&
+        (v_addressId == null || resolvedItemAddressId(item, record) === v_addressId),
     );
 
     if (itemEntry) {
@@ -168,6 +225,23 @@ export const getCurrentQuantity = (
 
   return 0;
 };
+
+/**
+ * Quantity after a slice minus ledger as of end of previous calendar day.
+ * For scheduled rows, use this for +/- so it matches “stock before this movement → after”, using the same
+ * rules as getCurrentQuantity (raw slice `change` alone is easy to misread for future-dated rows).
+ */
+export function sliceDeltaVersusPriorCalendarDay(
+  itemId: number,
+  inventoryHistory: InventoryHistoryRecord[],
+  addressId: number,
+  transactionDate: string,
+  quantityAfterSlice: number,
+): number {
+  const dayBefore = dayjs(transactionDate).startOf("day").subtract(1, "day").format("YYYY-MM-DD");
+  const beforeQty = getCurrentQuantity(itemId, inventoryHistory, addressId, dayBefore);
+  return quantityAfterSlice - beforeQty;
+}
 
 // Create current stock record
 export const createCurrentStockRecord = (
@@ -179,6 +253,8 @@ export const createCurrentStockRecord = (
 
   return {
     ...inventoryHistory[0],
+    delivery_start: null,
+    delivery_end: null,
     items: visibleItems.map((item) => ({
       id: item.id,
       name: item.name,
@@ -215,10 +291,10 @@ export const getAllItemsForAddress = (
   // Collect all items that have ever been in stock for this address
   inventoryHistory.forEach((record) => {
     record.items.forEach((item) => {
-      if (v_addressId ? item.address_id === v_addressId : true) {
-        if (!uniqueItems.has(item.id)) {
-          uniqueItems.set(item.id, {
-            id: item.id,
+      if (v_addressId ? resolvedItemAddressId(item, record) === v_addressId : true) {
+        if (!uniqueItems.has(Number(item.id))) {
+          uniqueItems.set(Number(item.id), {
+            id: Number(item.id),
             name: item.name,
             type: item.type,
           });
@@ -247,7 +323,9 @@ export const getItemQuantityAtTime = (
     const recordDate = dayjs(record.transaction_date);
     if (recordDate.isSameOrBefore(targetDate)) {
       const itemEntry = record.items.find(
-        (item) => item.id === itemId && (v_addressId ? item.address_id === v_addressId : true),
+        (item) =>
+          Number(item.id) === Number(itemId) &&
+          (v_addressId == null || resolvedItemAddressId(item, record) === v_addressId),
       );
 
       if (itemEntry) {
@@ -276,7 +354,9 @@ export const getItemChangeAtTime = (
     const recordDate = dayjs(record.transaction_date);
     if (recordDate.isSame(targetDate)) {
       const itemEntry = record.items.find(
-        (item) => item.id === itemId && (v_addressId ? item.address_id === v_addressId : true),
+        (item) =>
+          Number(item.id) === Number(itemId) &&
+          (v_addressId == null || resolvedItemAddressId(item, record) === v_addressId),
       );
 
       if (itemEntry) {

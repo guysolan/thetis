@@ -80,6 +80,7 @@ const DocumentOptionsSheet = ({
     showExporterDetails: search?.showExporterDetails ?? documentType === "commercialInvoice",
     showFDADetails: search?.showFDADetails ?? documentType === "commercialInvoice",
     showExchangeRates: search?.showExchangeRates ?? documentType === "commercialInvoice",
+    showGermanEuTaxIds: search?.showGermanEuTaxIds ?? false,
     showSignature: search?.showSignature ?? true,
   };
 
@@ -171,6 +172,8 @@ const DocumentOptionsSheet = ({
         } else if (key === "showFDADetails") newOptions.showFDADetails = value;
         else if (key === "showExchangeRates") {
           newOptions.showExchangeRates = value;
+        } else if (key === "showGermanEuTaxIds") {
+          newOptions.showGermanEuTaxIds = value;
         }
       }
 
@@ -448,6 +451,28 @@ const DocumentOptionsSheet = ({
                       )}
                     </div>
                   )}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="german-eu-tax">
+              <AccordionTrigger className="font-medium text-sm">
+                {"Germany — VAT & EORI (EU)"}
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-start gap-3">
+                    <div className="flex-1">
+                      <label className="block font-medium text-sm">Show on document</label>
+                      <p className="mt-0.5 text-muted-foreground text-xs">
+                        German VAT ID and EORI for European shipments. Off by default.
+                      </p>
+                    </div>
+                    <Switch
+                      checked={pendingOptions.showGermanEuTaxIds}
+                      onCheckedChange={(checked) => updateOption("showGermanEuTaxIds", checked)}
+                    />
+                  </div>
                 </div>
               </AccordionContent>
             </AccordionItem>

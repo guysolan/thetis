@@ -8,7 +8,8 @@ const reasonsForExport = [
   },
   {
     name: "Return/Exchange",
-    description: "Goods are sent back to the supplier for an exchange or credit.",
+    description:
+      "Goods are sent back to the supplier for an exchange or credit.",
   },
   {
     name: "Repair/Service",
@@ -22,15 +23,18 @@ const reasonsForExport = [
   },
   {
     name: "Gift",
-    description: "Items are sent as a gift without a commercial transaction involved.",
+    description:
+      "Items are sent as a gift without a commercial transaction involved.",
   },
   {
     name: "Sample",
-    description: "Goods are sent as samples for demonstration purposes to encourage future sales.",
+    description:
+      "Goods are sent as samples for demonstration purposes to encourage future sales.",
   },
   {
     name: "Replacement",
-    description: "Products are sent to replace items that were previously damaged or defective.",
+    description:
+      "Products are sent to replace items that were previously damaged or defective.",
   },
   {
     name: "Donation",
@@ -46,6 +50,10 @@ const reasonsForExport = [
 
 export function ReasonForExportSelect() {
   return (
-    <SelectWithInfo name="reason_for_export" label="Reason for Export" options={reasonsForExport} />
+    <SelectWithInfo
+      name="reason_for_export"
+      label="Reason for Export"
+      options={reasonsForExport}
+    />
   );
 }

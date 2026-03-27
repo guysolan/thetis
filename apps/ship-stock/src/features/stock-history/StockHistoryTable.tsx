@@ -25,6 +25,9 @@ export interface InventoryHistoryRecord {
   transaction_date: string;
   order_id: number;
   order_type: string;
+  /** Planned delivery window on the order (tstzrange lower / upper). */
+  delivery_start?: string | null;
+  delivery_end?: string | null;
   address_id?: number;
   items: {
     id: number;
@@ -33,6 +36,8 @@ export interface InventoryHistoryRecord {
     quantity: number;
     change: number;
     address_id?: number;
+    /** When present, movement date for this line (matches view transaction_date for this slice). */
+    effective_date?: string;
   }[];
 }
 

@@ -218,6 +218,7 @@ export const useDocumentOptions = (documentType: DocumentType) => {
     showExporterDetails: search?.showExporterDetails ?? defaults.showExporterDetails ?? false,
     showFDADetails: search?.showFDADetails ?? defaults.showFDADetails ?? false,
     showExchangeRates: search?.showExchangeRates ?? defaults.showExchangeRates ?? false,
+    showGermanEuTaxIds: search?.showGermanEuTaxIds ?? false,
   };
 
   // Add extended options for purchase orders

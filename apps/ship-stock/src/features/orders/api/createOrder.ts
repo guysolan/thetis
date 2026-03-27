@@ -508,7 +508,7 @@ export const processShipmentFormData = (formData: MultiOrderFormData): FormatOrd
   const result: FormatOrderItemChanges[] = [
     ...fromItems.map((item) => ({
       item_id: item.item_id,
-      quantity_change: item.quantity_change,
+      quantity_change: -Math.abs(item.quantity_change),
       item_price: Number(item.item_price ?? 0),
       item_tax: Number(item.item_tax ?? 0),
       address_id: item.address_id,
@@ -519,7 +519,7 @@ export const processShipmentFormData = (formData: MultiOrderFormData): FormatOrd
     })),
     ...toItems.map((item) => ({
       item_id: item.item_id,
-      quantity_change: item.quantity_change,
+      quantity_change: Math.abs(item.quantity_change),
       item_price: Number(item.item_price ?? 0),
       item_tax: Number(item.item_tax ?? 0),
       address_id: item.address_id,
@@ -530,7 +530,7 @@ export const processShipmentFormData = (formData: MultiOrderFormData): FormatOrd
     })),
     ...orderItemsInternal.map((item) => ({
       item_id: item.item_id,
-      quantity_change: item.quantity_change,
+      quantity_change: Math.abs(item.quantity_change),
       item_price: Number(item.item_price ?? 0),
       item_tax: Number(item.item_tax ?? 0),
       address_id: item.address_id,

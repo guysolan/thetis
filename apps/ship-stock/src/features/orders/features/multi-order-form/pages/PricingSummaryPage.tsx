@@ -19,7 +19,8 @@ const reasonsForExport = [
   },
   {
     name: "Return/Exchange",
-    description: "Goods are sent back to the supplier for an exchange or credit.",
+    description:
+      "Goods are sent back to the supplier for an exchange or credit.",
   },
   {
     name: "Repair/Service",
@@ -33,15 +34,18 @@ const reasonsForExport = [
   },
   {
     name: "Gift",
-    description: "Items are sent as a gift without a commercial transaction involved.",
+    description:
+      "Items are sent as a gift without a commercial transaction involved.",
   },
   {
     name: "Sample",
-    description: "Goods are sent as samples for demonstration purposes to encourage future sales.",
+    description:
+      "Goods are sent as samples for demonstration purposes to encourage future sales.",
   },
   {
     name: "Replacement",
-    description: "Products are sent to replace items that were previously damaged or defective.",
+    description:
+      "Products are sent to replace items that were previously damaged or defective.",
   },
   {
     name: "Donation",
@@ -93,7 +97,8 @@ const incotermsOptions = [
   },
   {
     name: "Free On Board (FOB)",
-    description: "Seller loads goods onto ship. Risk transfers when goods pass ship's rail.",
+    description:
+      "Seller loads goods onto ship. Risk transfers when goods pass ship's rail.",
   },
   {
     name: "Cost and Freight (CFR)",
@@ -123,7 +128,9 @@ export function PricingSummaryPage() {
           {isQuote ? "Complete Quote" : "Pricing & Summary"}
         </h2>
         <p className="text-gray-600 text-sm">
-          {isQuote ? "Add carriage if applicable" : "Review pricing and add shipping details"}
+          {isQuote
+            ? "Add carriage if applicable"
+            : "Review pricing and add shipping details"}
         </p>
       </div>
 
@@ -132,20 +139,32 @@ export function PricingSummaryPage() {
           <Input type="number" name="carriage" label="Carriage" step="0.01" />
           {!isQuote && (
             <>
-              <Input type="text" name="shipment_number" label="Shipment Number" />
+              <Input
+                type="text"
+                name="shipment_number"
+                label="Shipment Number"
+              />
               <Input type="text" name="airwaybill" label="Air Waybill" />
               <Select
                 name="mode_of_transport"
                 label="Mode of Transport"
                 options={modeOfTransportOptions}
               />
-              <SelectWithInfo name="incoterms" label="Incoterms" options={incotermsOptions} />
+              <SelectWithInfo
+                name="incoterms"
+                label="Incoterms"
+                options={incotermsOptions}
+              />
               <SelectWithInfo
                 name="reason_for_export"
                 label="Reason for Export"
                 options={reasonsForExport}
               />
-              <Input type="text" name="reference_number" label="Reference Number" />
+              <Input
+                type="text"
+                name="reference_number"
+                label="Reference Number"
+              />
             </>
           )}
         </div>
