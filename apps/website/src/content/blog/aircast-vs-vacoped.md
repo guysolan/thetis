@@ -1,10 +1,11 @@
 ---
 title: "Aircast vs VACOped: Which Boot for Achilles Rupture?"
 status: "published"
-description: "Comparing the Aircast and VACOped walking boots for Achilles tendon rupture recovery. How they work, what they cost, and which one is right for you."
+description: "Aircast vs VACOped for Achilles tendon rupture: how wedge boots and hinged boots work, costs, and research. Following your protocol matters more than brand."
 publishedAt: "2026-03-13"
+updatedAt: "2026-03-26"
 heroImage: "/images/blog/aircast-vs-vacoped.png"
-heroAlt: "Side-by-side comparison of the Aircast walking boot with heel wedges and the VACOped boot with adjustable hinge"
+heroAlt: "Aircast vs VACOped infographic: Aircast walking boot with wedges under the heel versus VACOped boot with an adjustable ankle hinge"
 tags: ["equipment", "recovery", "treatment"]
 source:
   title: "Early Protected Weightbearing for Acute Ruptures of the Achilles Tendon: Do Commonly Used Orthoses Produce the Required Equinus?"
@@ -29,9 +30,11 @@ faqs:
     answer: "A sudden pop or snap, a feeling of being kicked in the back of the leg, immediate difficulty walking, or the foot going flat when it shouldn't. If you experience any of these, seek medical attention immediately. Re-rupture rates are low (3–5%) but the risk is highest when not following your protocol."
 ---
 
-If you've ruptured your Achilles tendon, you'll almost certainly be given a walking boot. The two most common options are the **Aircast** and the **VACOped**. Both are effective — the research shows that **what matters most is following your protocol**, not which brand you're wearing.
+If you've ruptured your Achilles tendon, you'll almost certainly be given a walking boot. **Aircast vs VACOped** is one of the first questions patients type into search — often after a long clinic day, when the choice already feels overwhelming. The two most common options are the **Aircast** and the **VACOped**. Both can protect the tendon while it heals; large trials show **long-term outcomes are similar when rehabilitation is taken seriously**.
 
-That said, the boots work differently, and understanding those differences can help you feel more confident about your recovery.
+In practice, high-quality recovery depends more on **protocol adherence and rehabilitation progression** than on the logo on the plastic. Most people do well with whichever boot their hospital provides. The "magic" is consistent protection of tendon length through those early weeks — not the boot model itself.
+
+That said, the boots work differently, and understanding those differences can reduce anxiety and help you use whichever one you have correctly.
 
 ## Contents
 
@@ -48,11 +51,12 @@ That said, the boots work differently, and understanding those differences can h
 
 ## Key Takeaways
 
-- **Both boots produce excellent outcomes** when used correctly — long-term results are similar
-- The Aircast uses removable **heel wedges**; the VACOped uses an **adjustable hinge**
-- The VACOped positions the ankle more accurately but costs roughly **twice as much**
-- Most patients use whichever boot their hospital provides — and that's fine
-- **Protocol compliance matters far more than boot choice**
+- **Both boots produce excellent outcomes** when used correctly — long-term results are similar in major trials
+- The Aircast uses removable **heel wedges**; the VACOped uses an **adjustable hinge** with optional controlled movement later on
+- The VACOped may position the true ankle angle more precisely on scans, but it costs roughly **twice as much** and is heavier
+- Most patients use whichever boot their hospital provides — **that is completely reasonable**
+- **Sticking to your schedule (wedges, angles, weight-bearing, and physio) matters far more than the brand**
+- Protecting tendon length early is the priority — see [why early protection matters](/blog/achilles-tendon-healing-early-protection) for the healing timeline
 - Neither boot is comfortable to sleep in — a [night splint](/achilles-rupture-splint) helps
 
 ## Why Your Boot Matters
@@ -128,7 +132,7 @@ The large [UKSTAR trial](https://pubmed.ncbi.nlm.nih.gov/33153987/) — the bigg
 
 A [biomechanical study](https://pmc.ncbi.nlm.nih.gov/articles/PMC9661566/) measured how much force the Achilles tendon experiences while walking in different boots. On average, boots reduced tendon loading by **68% compared to normal walking**. However, there were differences between designs — boots with a rigid posterior strut (like the VACOped) reduced loading by **77%**, while wedge-based boots (like the Aircast) reduced it by **60–68%**.
 
-### Functional Rehabilitation (Mampal et al., 2020)
+### Functional Rehabilitation (Maempel et al., 2020)
 
 A [randomised controlled trial](https://pubmed.ncbi.nlm.nih.gov/32816521/) confirmed that functional rehabilitation with early weightbearing in a walking boot produces **better early outcomes** than traditional plaster cast treatment. This is why modern protocols encourage walking in a boot rather than immobilisation in a cast.
 
@@ -190,6 +194,8 @@ Prices are approximate and vary by retailer and region. Many NHS patients receiv
 
 Here's the honest truth: **most patients will use whatever boot their hospital provides**, and that's completely fine. Both boots protect the tendon effectively, and the UKSTAR trial shows long-term outcomes are similar.
 
+If weeks in a boot feel slow or confusing, a structured patient course can help you understand what each phase is for and what "good compliance" looks like in real life — our [Achilles rupture recovery course](/course) walks through this step by step.
+
 If you're choosing between them:
 
 - **Choose the Aircast** if cost matters, your hospital provides it, or you want something lightweight and straightforward.
@@ -197,10 +203,11 @@ If you're choosing between them:
 
 Either way, focus on the things that actually drive your recovery:
 
-- **Follow your wedge/angle schedule exactly** — never accelerate it
+- **Follow your wedge/angle schedule exactly** — never accelerate it (the bridge tissue in weeks 3–6 is easy to stretch; see [Achilles tendon healing](/blog/achilles-tendon-healing-early-protection))
 - **Wear your boot (or [night splint](/achilles-rupture-splint)) 24/7** until told otherwise
 - **Start physiotherapy** when your clinician advises — typically [weeks 3–6](/FAQs/achilles-rupture-rehabilitation)
 - **Protect the tendon at night** — a [night splint](/achilles-rupture-splint) makes nights far more bearable while keeping the tendon safe
+- **Know clot warning signs** during immobilisation — new one-leg swelling, calf pain unlike your injury, chest pain, or breathlessness need urgent advice ([blood clots after Achilles rupture](/blog/achilles-rupture-blood-clot-risk))
 
 ## Frequently Asked Questions
 
