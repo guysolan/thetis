@@ -16,6 +16,7 @@ const LocationSelect = ({ finalRegion }: { finalRegion: string }) => {
       <SelectContent>
         <SelectItem value="us">United States (USD)</SelectItem>
         <SelectItem value="uk">United Kingdom (GBP)</SelectItem>
+        <SelectItem value="au">Australia (AUD)</SelectItem>
       </SelectContent>
     </Select>
   );

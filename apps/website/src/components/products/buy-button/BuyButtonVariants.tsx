@@ -97,7 +97,7 @@ const BuyButtonVariants: React.FC<BuyButtonVariantsProps> = ({ className = "", l
           <div className="mt-4 font-medium text-neutral-950 text-lg md:text-xl lg:text-left text-center italic">
             {t.checkingAvailability}
           </div>
-        ) : country === "AU" || country === "NZ" ? (
+        ) : country === "NZ" ? (
           <Button asChild className="mt-4 w-full">
             <a href={getAustralianDistributorUrl()} target="_blank" rel="noopener noreferrer">
               {t.buyFromDistributor}

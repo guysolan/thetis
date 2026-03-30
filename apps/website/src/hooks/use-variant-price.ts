@@ -11,15 +11,15 @@ interface UseVariantPriceResult {
 
 // Fallback prices for known products (used when API fails)
 // These should match your Shopify prices - update if prices change
-const FALLBACK_PRICES: Record<string, { GBP: string; USD: string }> = {
+const FALLBACK_PRICES: Record<string, { GBP: string; USD: string; AUD: string }> = {
   // Night Splint variants (all same price)
-  [SPLINT_VARIANTS["large-left"]]: { GBP: "£63.99", USD: "$93.99" },
-  [SPLINT_VARIANTS["large-right"]]: { GBP: "£63.99", USD: "$93.99" },
-  [SPLINT_VARIANTS["small-left"]]: { GBP: "£63.99", USD: "$93.99" },
-  [SPLINT_VARIANTS["small-right"]]: { GBP: "£63.99", USD: "$93.99" },
+  [SPLINT_VARIANTS["large-left"]]: { GBP: "£63.99", USD: "$93.99", AUD: "A$169.99" },
+  [SPLINT_VARIANTS["large-right"]]: { GBP: "£63.99", USD: "$93.99", AUD: "A$169.99" },
+  [SPLINT_VARIANTS["small-left"]]: { GBP: "£63.99", USD: "$93.99", AUD: "A$169.99" },
+  [SPLINT_VARIANTS["small-right"]]: { GBP: "£63.99", USD: "$93.99", AUD: "A$169.99" },
   // Course variants
-  [COURSE_VARIANTS.ESSENTIALS]: { GBP: "£29.99", USD: "$39.99" },
-  [COURSE_VARIANTS.PROFESSIONALS]: { GBP: "£99.99", USD: "$129.99" },
+  [COURSE_VARIANTS.ESSENTIALS]: { GBP: "£29.99", USD: "$39.99", AUD: "A$59.99" },
+  [COURSE_VARIANTS.PROFESSIONALS]: { GBP: "£99.99", USD: "$129.99", AUD: "A$199.99" },
 };
 
 // Detect user's country
@@ -40,7 +40,9 @@ async function detectCountry(): Promise<string> {
 function getFallbackPrice(variantId: string, countryCode: string): string | null {
   const prices = FALLBACK_PRICES[variantId];
   if (!prices) return null;
-  return countryCode === "US" ? prices.USD : prices.GBP;
+  if (countryCode === "US") return prices.USD;
+  if (countryCode === "AU" || countryCode === "NZ") return prices.AUD;
+  return prices.GBP;
 }
 
 export function useVariantPrice(variantId: string, fallbackPrice?: string): UseVariantPriceResult {

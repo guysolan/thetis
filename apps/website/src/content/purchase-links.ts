@@ -60,10 +60,10 @@ const purchaseLinks = {
     SR: "https://www.amazon.es/dp/B09N58H79F",
   },
   AU: {
-    LL: "https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php",
-    LR: "https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php",
-    SL: "https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php",
-    SR: "https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php",
+    LL: "https://www.thetismedical.com/splint/large/left?region=au",
+    LR: "https://www.thetismedical.com/splint/large/right?region=au",
+    SL: "https://www.thetismedical.com/splint/small/left?region=au",
+    SR: "https://www.thetismedical.com/splint/small/right?region=au",
   },
   PT: {
     LL: "https://orthodirect.pt/product/tala-noturna-tendao-de-aquiles/",

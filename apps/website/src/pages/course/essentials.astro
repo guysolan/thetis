@@ -605,12 +605,15 @@ const whatYoullLearn = [
                         const amount = parseFloat(variant.price.amount);
                         const currencyCode = variant.price.currencyCode;
 
+                        const localeMap = {
+                            GBP: "en-GB",
+                            USD: "en-US",
+                            AUD: "en-AU",
+                            NZD: "en-NZ",
+                            CAD: "en-CA",
+                        };
                         const formatter = new Intl.NumberFormat(
-                            currencyCode === "GBP"
-                                ? "en-GB"
-                                : currencyCode === "USD"
-                                  ? "en-US"
-                                  : "en-GB",
+                            localeMap[currencyCode] || "en-GB",
                             {
                                 style: "currency",
                                 currency: currencyCode,

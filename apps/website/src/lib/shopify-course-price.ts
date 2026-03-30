@@ -82,8 +82,15 @@ export async function fetchCoursePrice(
 
       // Format price
       const numAmount = parseFloat(amount);
+      const localeMap: Record<string, string> = {
+        GBP: "en-GB",
+        USD: "en-US",
+        AUD: "en-AU",
+        NZD: "en-NZ",
+        CAD: "en-CA",
+      };
       const formatter = new Intl.NumberFormat(
-        currencyCode === "GBP" ? "en-GB" : currencyCode === "USD" ? "en-US" : "en-GB",
+        localeMap[currencyCode] || "en-GB",
         {
           style: "currency",
           currency: currencyCode,
