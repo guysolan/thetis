@@ -77,29 +77,29 @@ type OrderItemWithTotal = FormOrderItem & {
 type AnyOrderItem =
   | (PricedOrderItem & { item_type: ItemType })
   | {
-      item_type: "package";
-      package_id: string;
-      package_items?: PricedOrderItem[];
-      package_item_change_id: number | null;
-      quantity_change?: number;
-      item_price?: number;
-      item_tax?: number;
-      item_total?: number;
-      lot_number?: string;
-    }
+    item_type: "package";
+    package_id: string;
+    package_items?: PricedOrderItem[];
+    package_item_change_id: number | null;
+    quantity_change?: number;
+    item_price?: number;
+    item_tax?: number;
+    item_total?: number;
+    lot_number?: string;
+  }
   | {
-      item_type: "product" | "part" | "service" | "count";
-      item_id: string;
-      quantity_change: number;
-      lot_number?: string;
-      package_item_change_id: number | null;
-      quantity_before?: number;
-      quantity_after?: number;
-      item_price?: number;
-      item_tax?: number;
-      item_total?: number;
-      package_item_id?: string;
-    };
+    item_type: "product" | "part" | "service" | "count";
+    item_id: string;
+    quantity_change: number;
+    lot_number?: string;
+    package_item_change_id: number | null;
+    quantity_before?: number;
+    quantity_after?: number;
+    item_price?: number;
+    item_tax?: number;
+    item_total?: number;
+    package_item_id?: string;
+  };
 
 // Only map items with a valid item_type
 const isValidOrderItem = (item: { item_type?: string }) =>
@@ -122,7 +122,9 @@ export function extractOrderItems(
   });
 
   if (!orderItems) {
-    console.log("❌ extractOrderItems - No order items provided, returning empty array");
+    console.log(
+      "❌ extractOrderItems - No order items provided, returning empty array",
+    );
     return [];
   }
 
@@ -135,13 +137,22 @@ export function extractOrderItems(
     item_total: item.item_total ?? 0,
   }));
 
-  console.log("📦 extractOrderItems - Result:", result.length, JSON.stringify(result, null, 2));
+  console.log(
+    "📦 extractOrderItems - Result:",
+    result.length,
+    JSON.stringify(result, null, 2),
+  );
   return result;
 }
 
 // Updated function to handle the different item types from the schema
-export const mapToFormOrderItem = (item: Record<string, unknown>): FormOrderItem => {
-  console.log("🔍 mapToFormOrderItem - Input item:", JSON.stringify(item, null, 2));
+export const mapToFormOrderItem = (
+  item: Record<string, unknown>,
+): FormOrderItem => {
+  console.log(
+    "🔍 mapToFormOrderItem - Input item:",
+    JSON.stringify(item, null, 2),
+  );
   console.log("🔍 mapToFormOrderItem - Item type:", item.item_type);
 
   // Handle package items which have a different structure
@@ -156,9 +167,12 @@ export const mapToFormOrderItem = (item: Record<string, unknown>): FormOrderItem
       item_tax: Number(item.item_tax ?? 0),
       item_total: Number(item.item_total ?? 0),
       package_item_id: undefined,
-      package_item_change_id:
-        typeof item.package_item_change_id === "number" ? item.package_item_change_id : null,
-      lot_number: typeof item.lot_number === "string" ? item.lot_number : undefined,
+      package_item_change_id: typeof item.package_item_change_id === "number"
+        ? item.package_item_change_id
+        : null,
+      lot_number: typeof item.lot_number === "string"
+        ? item.lot_number
+        : undefined,
     };
     console.log("📦 Package item mapped:", JSON.stringify(result, null, 2));
     return result;
@@ -172,18 +186,31 @@ export const mapToFormOrderItem = (item: Record<string, unknown>): FormOrderItem
     item_price: Number(item.item_price ?? 0),
     item_tax: Number(item.item_tax ?? 0),
     item_total: Number(item.item_total ?? 0),
-    package_item_id: typeof item.package_item_id === "string" ? item.package_item_id : undefined,
-    package_item_change_id:
-      typeof item.package_item_change_id === "number" ? item.package_item_change_id : null,
-    lot_number: typeof item.lot_number === "string" ? item.lot_number : undefined,
+    package_item_id: typeof item.package_item_id === "string"
+      ? item.package_item_id
+      : undefined,
+    package_item_change_id: typeof item.package_item_change_id === "number"
+      ? item.package_item_change_id
+      : null,
+    lot_number: typeof item.lot_number === "string"
+      ? item.lot_number
+      : undefined,
   };
   console.log("🔍 Regular item mapped:", JSON.stringify(result, null, 2));
   return result;
 };
 
-export const processBuyFormData = (formData: MultiOrderFormData): FormatOrderItemChanges[] => {
-  console.log("🛒 processBuyFormData - START - formData keys:", Object.keys(formData));
-  console.log("🛒 processBuyFormData - formData.item_type:", formData.item_type);
+export const processBuyFormData = (
+  formData: MultiOrderFormData,
+): FormatOrderItemChanges[] => {
+  console.log(
+    "🛒 processBuyFormData - START - formData keys:",
+    Object.keys(formData),
+  );
+  console.log(
+    "🛒 processBuyFormData - formData.item_type:",
+    formData.item_type,
+  );
   console.log(
     "🛒 processBuyFormData - formData.order_items length:",
     formData.order_items?.length ?? 0,
@@ -208,8 +235,12 @@ export const processBuyFormData = (formData: MultiOrderFormData): FormatOrderIte
       .map((item) => ({ ...item, item_type: "product" }))
       .filter(isValidOrderItem)
       .map(mapToFormOrderItem);
-    const consumedAtFrom = consumed.filter((item) => Number(item.quantity_change) < 0);
-    const producedAtTo = consumed.filter((item) => Number(item.quantity_change) > 0);
+    const consumedAtFrom = consumed.filter((item) =>
+      Number(item.quantity_change) < 0
+    );
+    const producedAtTo = consumed.filter((item) =>
+      Number(item.quantity_change) > 0
+    );
     console.log(
       "🛒 Consumed items (at from):",
       consumedAtFrom.length,
@@ -257,7 +288,9 @@ export const processBuyFormData = (formData: MultiOrderFormData): FormatOrderIte
     console.log("🛒 All item changes combined:", item_changes_internal.length);
   }
 
-  const orderItemsResult: FormatOrderItemChanges[] = item_changes_internal.map((ic) => ({
+  const orderItemsResult: FormatOrderItemChanges[] = item_changes_internal.map((
+    ic,
+  ) => ({
     item_id: ic.item_id,
     quantity_change: Number(ic.quantity_change),
     item_price: ic?.item_price ?? 0,
@@ -277,7 +310,9 @@ export const processBuyFormData = (formData: MultiOrderFormData): FormatOrderIte
   return orderItemsResult;
 };
 
-export function processSellFormData(formData: MultiOrderFormData): FormatOrderItemChanges[] {
+export function processSellFormData(
+  formData: MultiOrderFormData,
+): FormatOrderItemChanges[] {
   console.log(
     "💰 processSellFormData - START - order_items length:",
     formData.order_items?.length ?? 0,
@@ -297,24 +332,29 @@ export function processSellFormData(formData: MultiOrderFormData): FormatOrderIt
     JSON.stringify(filteredOrderItems, null, 2),
   );
 
-  const orderItemsForExtraction: OrderItemWithTotal[] = filteredOrderItems.map((item) => {
-    console.log("💰 Processing order item:", JSON.stringify(item, null, 2));
-    const mappedItem = mapToFormOrderItem(item);
-    console.log("💰 Mapped item:", JSON.stringify(mappedItem, null, 2));
+  const orderItemsForExtraction: OrderItemWithTotal[] = filteredOrderItems.map(
+    (item) => {
+      console.log("💰 Processing order item:", JSON.stringify(item, null, 2));
+      const mappedItem = mapToFormOrderItem(item);
+      console.log("💰 Mapped item:", JSON.stringify(mappedItem, null, 2));
 
-    // Calculate total based on quantity, price and tax
-    const quantity = mappedItem.quantity_change || 0;
-    const price = mappedItem.item_price || 0;
-    const tax = mappedItem.item_tax || 0;
-    const total = quantity * price * (1 + tax / 100); // Convert tax percentage to decimal
+      // Calculate total based on quantity, price and tax
+      const quantity = mappedItem.quantity_change || 0;
+      const price = mappedItem.item_price || 0;
+      const tax = mappedItem.item_tax || 0;
+      const total = quantity * price * (1 + tax / 100); // Convert tax percentage to decimal
 
-    const result = {
-      ...mappedItem,
-      item_total: total,
-    };
-    console.log("💰 Item with total calculated:", JSON.stringify(result, null, 2));
-    return result;
-  });
+      const result = {
+        ...mappedItem,
+        item_total: total,
+      };
+      console.log(
+        "💰 Item with total calculated:",
+        JSON.stringify(result, null, 2),
+      );
+      return result;
+    },
+  );
 
   console.log(
     "💰 Order items for extraction:",
@@ -335,7 +375,9 @@ export function processSellFormData(formData: MultiOrderFormData): FormatOrderIt
 
   // For sales, we need to create item changes for both FROM and TO addresses
   // Items leaving the seller's address (negative quantity)
-  const fromItemChanges: FormatOrderItemChanges[] = extractedOrderItems.map((i) => ({
+  const fromItemChanges: FormatOrderItemChanges[] = extractedOrderItems.map((
+    i,
+  ) => ({
     item_id: i.item_id,
     quantity_change: -Math.abs(i.quantity_change), // Make quantity negative for sales (items leaving stock)
     item_price: i.item_price ?? 0,
@@ -348,7 +390,9 @@ export function processSellFormData(formData: MultiOrderFormData): FormatOrderIt
   }));
 
   // Items arriving at the buyer's address (positive quantity)
-  const toItemChanges: FormatOrderItemChanges[] = extractedOrderItems.map((i) => ({
+  const toItemChanges: FormatOrderItemChanges[] = extractedOrderItems.map((
+    i,
+  ) => ({
     item_id: i.item_id,
     quantity_change: Math.abs(i.quantity_change), // Keep quantity positive for items arriving
     item_price: i.item_price ?? 0,
@@ -360,7 +404,10 @@ export function processSellFormData(formData: MultiOrderFormData): FormatOrderIt
     lot_number: i.lot_number,
   }));
 
-  const itemChangesResult: FormatOrderItemChanges[] = [...fromItemChanges, ...toItemChanges];
+  const itemChangesResult: FormatOrderItemChanges[] = [
+    ...fromItemChanges,
+    ...toItemChanges,
+  ];
 
   console.log(
     "💰 processSellFormData - FINAL RESULT:",
@@ -374,7 +421,9 @@ export function processSellFormData(formData: MultiOrderFormData): FormatOrderIt
  * Simple buy: order_items with positive quantity at to_shipping_address_id only.
  * No consumption or production; opposite of sale (stock in at one address).
  */
-export function processSimpleBuyFormData(formData: MultiOrderFormData): FormatOrderItemChanges[] {
+export function processSimpleBuyFormData(
+  formData: MultiOrderFormData,
+): FormatOrderItemChanges[] {
   const orderItems = (formData.order_items || [])
     .map((item) => ({
       ...item,
@@ -396,7 +445,9 @@ export function processSimpleBuyFormData(formData: MultiOrderFormData): FormatOr
   return result;
 }
 
-export const processShipmentFormData = (formData: MultiOrderFormData): FormatOrderItemChanges[] => {
+export const processShipmentFormData = (
+  formData: MultiOrderFormData,
+): FormatOrderItemChanges[] => {
   const debugLog = {
     function: "processShipmentFormData",
     input: {
@@ -405,11 +456,10 @@ export const processShipmentFormData = (formData: MultiOrderFormData): FormatOrd
       to_items_length: formData.to_items?.length ?? 0,
       order_items_length: formData.order_items?.length ?? 0,
       package_items_length: formData.package_items?.length ?? 0,
-      package_items:
-        formData.package_items?.map((pkg) => ({
-          package_id: pkg.package_id,
-          package_item_change_id: pkg.package_item_change_id,
-        })) || [],
+      package_items: formData.package_items?.map((pkg) => ({
+        package_id: pkg.package_id,
+        package_item_change_id: pkg.package_item_change_id,
+      })) || [],
     },
     processing: {
       from_items: [],
@@ -424,7 +474,8 @@ export const processShipmentFormData = (formData: MultiOrderFormData): FormatOrd
     result: null,
   };
 
-  debugLog.processing.filtered_counts.from_items_before = (formData.from_items || []).length;
+  debugLog.processing.filtered_counts.from_items_before =
+    (formData.from_items || []).length;
 
   const fromItems = (formData.from_items || [])
     .filter((item) => {
@@ -458,22 +509,22 @@ export const processShipmentFormData = (formData: MultiOrderFormData): FormatOrd
 
   // For shipments in package mode, order_items are duplicates of to_items
   // For shipments in direct mode, order_items should be processed
-  const orderItemsInternal =
-    formData.mode === "package"
-      ? []
-      : (formData.order_items || []).map((item) => {
-          console.log("🚢 Processing order_item:", JSON.stringify(item, null, 2));
-          const mapped = mapToFormOrderItem(item);
-          const result = {
-            ...mapped,
-            address_id: formData.to_shipping_address_id,
-            quantity_change: Number(mapped.quantity_change ?? 0),
-          };
-          console.log("🚢 Order item processed:", JSON.stringify(result, null, 2));
-          return result;
-        });
+  const orderItemsInternal = formData.mode === "package"
+    ? []
+    : (formData.order_items || []).map((item) => {
+      console.log("🚢 Processing order_item:", JSON.stringify(item, null, 2));
+      const mapped = mapToFormOrderItem(item);
+      const result = {
+        ...mapped,
+        address_id: formData.to_shipping_address_id,
+        quantity_change: Number(mapped.quantity_change ?? 0),
+      };
+      console.log("🚢 Order item processed:", JSON.stringify(result, null, 2));
+      return result;
+    });
 
-  debugLog.processing.filtered_counts.to_items_before = (formData.to_items || []).length;
+  debugLog.processing.filtered_counts.to_items_before =
+    (formData.to_items || []).length;
 
   const toItems = (formData.to_items || [])
     .filter((item) => {
@@ -572,16 +623,24 @@ const formatCreateOrderArgumentsLocal = (
   console.log("🏗️ Order items:", JSON.stringify(orderItems, null, 2));
 
   let validCurrency: Currency = "GBP";
-  if (formData.currency && (currencyKeys as readonly string[]).includes(formData.currency)) {
+  if (
+    formData.currency &&
+    (currencyKeys as readonly string[]).includes(formData.currency)
+  ) {
     validCurrency = formData.currency as Currency;
   }
 
-  const deliveryDates: [string | null, string | null] | null = formData.delivery_dates
-    ? ([
-        formData.delivery_dates[0] ? dayjs(formData.delivery_dates[0]).toISOString() : null,
-        formData.delivery_dates[1] ? dayjs(formData.delivery_dates[1]).toISOString() : null,
+  const deliveryDates: [string | null, string | null] | null =
+    formData.delivery_dates
+      ? ([
+        formData.delivery_dates[0]
+          ? dayjs(formData.delivery_dates[0]).toISOString()
+          : null,
+        formData.delivery_dates[1]
+          ? dayjs(formData.delivery_dates[1]).toISOString()
+          : null,
       ] as [string | null, string | null])
-    : null;
+      : null;
 
   // Helper function to convert empty strings to null
   const toNullIfEmpty = (value: any): any => {
@@ -602,7 +661,8 @@ const formatCreateOrderArgumentsLocal = (
   const result = {
     order_id: toNullIfEmpty(formData.order_id),
     order_type: formData.order_type,
-    order_date: dayjs(formData.order_date)?.toISOString() ?? dayjs().toISOString(),
+    order_date: dayjs(formData.order_date)?.toISOString() ??
+      dayjs().toISOString(),
     order_items: orderItems,
     from_company_id: toNullIfEmpty(formData.from_company_id),
     from_billing_address_id: toNullIfEmpty(formData.from_billing_address_id),
@@ -624,14 +684,20 @@ const formatCreateOrderArgumentsLocal = (
     delivery_dates: deliveryDates,
   };
 
-  console.log("🏗️ formatCreateOrderArgumentsLocal - RESULT:", JSON.stringify(result, null, 2));
+  console.log(
+    "🏗️ formatCreateOrderArgumentsLocal - RESULT:",
+    JSON.stringify(result, null, 2),
+  );
   return result;
 };
 
 const processMultiOrderFormDataLocal = (
   formData: MultiOrderFormData,
 ): CreateOrderType | MultiOrderFormData => {
-  console.log("🔄 processMultiOrderFormDataLocal - START - order_type:", formData.order_type);
+  console.log(
+    "🔄 processMultiOrderFormDataLocal - START - order_type:",
+    formData.order_type,
+  );
 
   let itemChanges: FormatOrderItemChanges[] = [];
   if (formData.order_type === "build") {
@@ -651,9 +717,15 @@ const processMultiOrderFormDataLocal = (
     return formData;
   }
 
-  console.log("🔄 processMultiOrderFormDataLocal - itemChanges count:", itemChanges.length);
+  console.log(
+    "🔄 processMultiOrderFormDataLocal - itemChanges count:",
+    itemChanges.length,
+  );
   const result = formatCreateOrderArgumentsLocal(itemChanges, formData);
-  console.log("🔄 processMultiOrderFormDataLocal - FINAL RESULT:", JSON.stringify(result, null, 2));
+  console.log(
+    "🔄 processMultiOrderFormDataLocal - FINAL RESULT:",
+    JSON.stringify(result, null, 2),
+  );
   return result;
 };
 
@@ -663,7 +735,10 @@ export const useCreateOrder = (orderTypeParam: string) => {
 
   return useMutation({
     mutationFn: async (formData: MultiOrderFormData & { id?: number }) => {
-      console.log("🚀 Form submission data:", JSON.stringify(formData, null, 2));
+      console.log(
+        "🚀 Form submission data:",
+        JSON.stringify(formData, null, 2),
+      );
 
       const processedInputUntyped = processMultiOrderFormDataLocal(formData);
 
@@ -676,26 +751,35 @@ export const useCreateOrder = (orderTypeParam: string) => {
           stocktakeFormData.order_items?.length ?? 0,
         );
 
-        const stocktakeItems: FormatOrderItemChanges[] = (stocktakeFormData.order_items || []).map(
-          (item) => {
-            console.log("📊 Processing stocktake item:", JSON.stringify(item, null, 2));
-            const mappedItem = mapToFormOrderItem(item);
-            const result = {
-              ...mappedItem,
-              item_price: mappedItem.item_price ?? 0,
-              item_tax: mappedItem.item_tax ?? 0,
-              address_id: stocktakeFormData.to_shipping_address_id,
-            };
-            console.log("📊 Stocktake item processed:", JSON.stringify(result, null, 2));
-            return result;
-          },
-        );
+        const stocktakeItems: FormatOrderItemChanges[] =
+          (stocktakeFormData.order_items || []).map(
+            (item) => {
+              console.log(
+                "📊 Processing stocktake item:",
+                JSON.stringify(item, null, 2),
+              );
+              const mappedItem = mapToFormOrderItem(item);
+              const result = {
+                ...mappedItem,
+                item_price: mappedItem.item_price ?? 0,
+                item_tax: mappedItem.item_tax ?? 0,
+                address_id: stocktakeFormData.to_shipping_address_id,
+              };
+              console.log(
+                "📊 Stocktake item processed:",
+                JSON.stringify(result, null, 2),
+              );
+              return result;
+            },
+          );
         console.log("📊 stocktakeItems count:", stocktakeItems.length);
 
         let validCurrencyForStocktake: Currency = "GBP";
         if (
           stocktakeFormData.currency &&
-          (currencyKeys as readonly string[]).includes(stocktakeFormData.currency)
+          (currencyKeys as readonly string[]).includes(
+            stocktakeFormData.currency,
+          )
         ) {
           validCurrencyForStocktake = stocktakeFormData.currency as Currency;
         }
@@ -704,26 +788,31 @@ export const useCreateOrder = (orderTypeParam: string) => {
         const stocktakeDeliveryDates: [string | null, string | null] | null =
           stocktakeFormData.delivery_dates
             ? ([
-                stocktakeFormData.delivery_dates[0]
-                  ? dayjs(stocktakeFormData.delivery_dates[0]).toISOString()
-                  : null,
-                stocktakeFormData.delivery_dates[1]
-                  ? dayjs(stocktakeFormData.delivery_dates[1]).toISOString()
-                  : null,
-              ] as [string | null, string | null])
+              stocktakeFormData.delivery_dates[0]
+                ? dayjs(stocktakeFormData.delivery_dates[0]).toISOString()
+                : null,
+              stocktakeFormData.delivery_dates[1]
+                ? dayjs(stocktakeFormData.delivery_dates[1]).toISOString()
+                : null,
+            ] as [string | null, string | null])
             : null;
 
         processedInput = {
           order_id: null,
           order_type: stocktakeFormData.order_type,
-          order_date: dayjs(stocktakeFormData.order_date)?.toISOString() ?? dayjs().toISOString(),
+          order_date: dayjs(stocktakeFormData.order_date)?.toISOString() ??
+            dayjs().toISOString(),
           order_items: stocktakeItems,
           from_company_id: stocktakeFormData.from_company_id ?? null,
           to_company_id: stocktakeFormData.to_company_id ?? null,
-          from_billing_address_id: stocktakeFormData.from_billing_address_id ?? null,
-          from_shipping_address_id: stocktakeFormData.from_shipping_address_id ?? null,
-          to_billing_address_id: stocktakeFormData.to_billing_address_id ?? null,
-          to_shipping_address_id: stocktakeFormData.to_shipping_address_id ?? null,
+          from_billing_address_id: stocktakeFormData.from_billing_address_id ??
+            null,
+          from_shipping_address_id:
+            stocktakeFormData.from_shipping_address_id ?? null,
+          to_billing_address_id: stocktakeFormData.to_billing_address_id ??
+            null,
+          to_shipping_address_id: stocktakeFormData.to_shipping_address_id ??
+            null,
           to_contact_id: stocktakeFormData.to_contact_id ?? null,
           from_contact_id: stocktakeFormData.from_contact_id ?? null,
           currency: validCurrencyForStocktake,
@@ -747,7 +836,10 @@ export const useCreateOrder = (orderTypeParam: string) => {
       }
 
       console.log("✅ Final processedInput created");
-      console.log("✅ processedInput.order_items length:", processedInput.order_items?.length ?? 0);
+      console.log(
+        "✅ processedInput.order_items length:",
+        processedInput.order_items?.length ?? 0,
+      );
       console.log(
         "✅ processedInput.order_items:",
         JSON.stringify(processedInput.order_items, null, 2),
@@ -874,20 +966,30 @@ export const useCreateOrder = (orderTypeParam: string) => {
       console.log("🎯 ORDER PROCESSING COMPLETE - Starting ITEM PROCESSING");
       console.log("🎯 ===============================");
       console.log("🎯 Final orderId:", orderId);
-      console.log("🎯 processedInput.order_items exists:", !!processedInput.order_items);
-      console.log("🎯 processedInput.order_items length:", processedInput.order_items?.length ?? 0);
+      console.log(
+        "🎯 processedInput.order_items exists:",
+        !!processedInput.order_items,
+      );
+      console.log(
+        "🎯 processedInput.order_items length:",
+        processedInput.order_items?.length ?? 0,
+      );
       console.log(
         "🎯 processedInput.order_items content:",
         JSON.stringify(processedInput.order_items, null, 2),
       );
 
       if (!processedInput.order_items) {
-        console.warn("⚠️ No order_items found in processedInput - skipping item processing");
+        console.warn(
+          "⚠️ No order_items found in processedInput - skipping item processing",
+        );
         return upsertedOrderData;
       }
 
       if (processedInput.order_items.length === 0) {
-        console.warn("⚠️ order_items array is empty - skipping item processing");
+        console.warn(
+          "⚠️ order_items array is empty - skipping item processing",
+        );
         return upsertedOrderData;
       }
 
@@ -908,7 +1010,10 @@ export const useCreateOrder = (orderTypeParam: string) => {
       );
 
       console.log("📦 Package items to process:", packageItems.length);
-      console.log("📋 Regular items to process (after filtering):", regularItems.length);
+      console.log(
+        "📋 Regular items to process (after filtering):",
+        regularItems.length,
+      );
       console.log(
         "📋 Regular items filtered out:",
         processedInput.order_items.length - regularItems.length,
@@ -920,91 +1025,120 @@ export const useCreateOrder = (orderTypeParam: string) => {
       // First, insert package items with their package_item_change_id as the ID
       if (packageItems.length > 0) {
         console.log("📦 Processing package items first...");
-        const packageItemPromises = packageItems.map(async (packageItem, index: number) => {
-          console.log(
-            `📦 ============== Processing package item ${
-              index + 1
-            }/${packageItems.length} ==============`,
-          );
-          console.log(
-            `📦 Package item ${index + 1} details:`,
-            JSON.stringify(packageItem, null, 2),
-          );
-
-          // Store the original package_item_change_id from form data
-          const originalPackageItemChangeId = packageItem.package_item_change_id;
-
-          // Generate a new ID if package_item_change_id is null
-          const itemChangeId =
-            packageItem.package_item_change_id || Math.floor(Math.random() * 1000000);
-          console.log(`📦 Using item_change_id ${itemChangeId} for package item ${index + 1}`);
-
-          console.log(`📦 Upserting package item_change with ID ${itemChangeId}...`);
-          const { data: itemChange, error: itemChangeError } = await supabase
-            .from("item_changes")
-            .upsert(
-              {
-                id: itemChangeId,
-                item_id: String(packageItem.package_id),
-                quantity_change: 1, // Default quantity for packages
-                address_id: String(formData.from_shipping_address_id), // Use form data address
-              },
-              { onConflict: "id" },
-            )
-            .select("id")
-            .single();
-
-          if (itemChangeError) {
-            console.error(
-              `❌ Error upserting package item_change for package item ${index + 1}:`,
-              itemChangeError,
-            );
-            throw itemChangeError;
-          }
-
-          // Map the original package_item_change_id to the actual item_changes.id
-          if (originalPackageItemChangeId !== null) {
-            packageItemChangeIdMap.set(originalPackageItemChangeId, itemChange.id);
+        const packageItemPromises = packageItems.map(
+          async (packageItem, index: number) => {
             console.log(
-              `📦 Mapped package_item_change_id ${originalPackageItemChangeId} -> item_changes.id ${itemChange.id}`,
+              `📦 ============== Processing package item ${
+                index + 1
+              }/${packageItems.length} ==============`,
             );
-          }
-
-          console.log(
-            `✅ Created/Updated package item_change with ID ${itemChange.id} for package item ${
-              index + 1
-            }`,
-          );
-
-          console.log(`📦 Upserting package order_item_change for package item ${index + 1}...`);
-          const { error: orderItemChangeError } = await supabase.from("order_item_changes").upsert(
-            {
-              order_id: orderId,
-              item_change_id: itemChange.id,
-              price: 0, // Packages typically have no price in this context
-              tax: 0,
-              package_item_id: undefined,
-              package_item_change_id: itemChange.id, // Use the actual item_changes.id
-              lot_number: undefined, // Package items don't have lot numbers
-            },
-            { onConflict: "order_id,item_change_id" },
-          );
-
-          if (orderItemChangeError) {
-            console.error(
-              `❌ Error upserting package order_item_change for package item ${index + 1}:`,
-              orderItemChangeError,
+            console.log(
+              `📦 Package item ${index + 1} details:`,
+              JSON.stringify(packageItem, null, 2),
             );
-            throw orderItemChangeError;
-          }
 
-          console.log(`✅ Created/Updated package order_item_change for package item ${index + 1}`);
-          return { item_change_id: itemChange.id };
-        });
+            // Store the original package_item_change_id from form data
+            const originalPackageItemChangeId =
+              packageItem.package_item_change_id;
+
+            // Generate a new ID if package_item_change_id is null
+            const itemChangeId = packageItem.package_item_change_id ||
+              Math.floor(Math.random() * 1000000);
+            console.log(
+              `📦 Using item_change_id ${itemChangeId} for package item ${
+                index + 1
+              }`,
+            );
+
+            console.log(
+              `📦 Upserting package item_change with ID ${itemChangeId}...`,
+            );
+            const { data: itemChange, error: itemChangeError } = await supabase
+              .from("item_changes")
+              .upsert(
+                {
+                  id: itemChangeId,
+                  item_id: String(packageItem.package_id),
+                  quantity_change: 1, // Default quantity for packages
+                  address_id: String(formData.from_shipping_address_id), // Use form data address
+                },
+                { onConflict: "id" },
+              )
+              .select("id")
+              .single();
+
+            if (itemChangeError) {
+              console.error(
+                `❌ Error upserting package item_change for package item ${
+                  index + 1
+                }:`,
+                itemChangeError,
+              );
+              throw itemChangeError;
+            }
+
+            // Map the original package_item_change_id to the actual item_changes.id
+            if (originalPackageItemChangeId !== null) {
+              packageItemChangeIdMap.set(
+                originalPackageItemChangeId,
+                itemChange.id,
+              );
+              console.log(
+                `📦 Mapped package_item_change_id ${originalPackageItemChangeId} -> item_changes.id ${itemChange.id}`,
+              );
+            }
+
+            console.log(
+              `✅ Created/Updated package item_change with ID ${itemChange.id} for package item ${
+                index + 1
+              }`,
+            );
+
+            console.log(
+              `📦 Upserting package order_item_change for package item ${
+                index + 1
+              }...`,
+            );
+            const { error: orderItemChangeError } = await supabase.from(
+              "order_item_changes",
+            ).upsert(
+              {
+                order_id: orderId,
+                item_change_id: itemChange.id,
+                price: 0, // Packages typically have no price in this context
+                tax: 0,
+                package_item_id: undefined,
+                package_item_change_id: itemChange.id, // Use the actual item_changes.id
+                lot_number: undefined, // Package items don't have lot numbers
+              },
+              { onConflict: "order_id,item_change_id" },
+            );
+
+            if (orderItemChangeError) {
+              console.error(
+                `❌ Error upserting package order_item_change for package item ${
+                  index + 1
+                }:`,
+                orderItemChangeError,
+              );
+              throw orderItemChangeError;
+            }
+
+            console.log(
+              `✅ Created/Updated package order_item_change for package item ${
+                index + 1
+              }`,
+            );
+            return { item_change_id: itemChange.id };
+          },
+        );
 
         await Promise.all(packageItemPromises);
         console.log("✅ All package items processed successfully!");
-        console.log(`📦 Package item change ID map:`, Array.from(packageItemChangeIdMap.entries()));
+        console.log(
+          `📦 Package item change ID map:`,
+          Array.from(packageItemChangeIdMap.entries()),
+        );
       }
 
       // Then, insert regular items with auto-generated IDs
@@ -1017,22 +1151,35 @@ export const useCreateOrder = (orderTypeParam: string) => {
                 index + 1
               }/${regularItems.length} ==============`,
             );
-            console.log(`📋 Regular item ${index + 1} details:`, JSON.stringify(item, null, 2));
+            console.log(
+              `📋 Regular item ${index + 1} details:`,
+              JSON.stringify(item, null, 2),
+            );
 
             if (!item.item_id) {
-              console.error(`❌ Regular item ${index + 1} has no item_id:`, item);
+              console.error(
+                `❌ Regular item ${index + 1} has no item_id:`,
+                item,
+              );
               throw new Error(`Regular item ${index + 1} is missing item_id`);
             }
 
             if (!item.address_id) {
-              console.error(`❌ Regular item ${index + 1} has no address_id:`, item);
-              throw new Error(`Regular item ${index + 1} is missing address_id`);
+              console.error(
+                `❌ Regular item ${index + 1} has no address_id:`,
+                item,
+              );
+              throw new Error(
+                `Regular item ${index + 1} is missing address_id`,
+              );
             }
 
             // Generate a unique ID for this item change
             const itemChangeId = Math.floor(Math.random() * 1000000);
 
-            console.log(`📋 Upserting regular item_change for item ${index + 1}...`);
+            console.log(
+              `📋 Upserting regular item_change for item ${index + 1}...`,
+            );
             const { data: itemChange, error: itemChangeError } = await supabase
               .from("item_changes")
               .upsert(
@@ -1055,8 +1202,12 @@ export const useCreateOrder = (orderTypeParam: string) => {
               throw itemChangeError;
             }
             if (!itemChange?.id) {
-              console.error(`❌ No ID returned for regular item_change ${index + 1}`);
-              throw new Error(`regular item_change ID is missing for item ${index + 1}`);
+              console.error(
+                `❌ No ID returned for regular item_change ${index + 1}`,
+              );
+              throw new Error(
+                `regular item_change ID is missing for item ${index + 1}`,
+              );
             }
 
             console.log(
@@ -1067,8 +1218,13 @@ export const useCreateOrder = (orderTypeParam: string) => {
 
             // Resolve package_item_change_id: use mapped value if it exists, otherwise null
             let resolvedPackageItemChangeId: number | null = null;
-            if (item.package_item_change_id !== null && item.package_item_change_id !== undefined) {
-              const mappedId = packageItemChangeIdMap.get(item.package_item_change_id);
+            if (
+              item.package_item_change_id !== null &&
+              item.package_item_change_id !== undefined
+            ) {
+              const mappedId = packageItemChangeIdMap.get(
+                item.package_item_change_id,
+              );
               if (mappedId !== undefined) {
                 resolvedPackageItemChangeId = mappedId;
                 console.log(
@@ -1085,7 +1241,9 @@ export const useCreateOrder = (orderTypeParam: string) => {
               }
             }
 
-            console.log(`📋 Upserting regular order_item_change for item ${index + 1}...`);
+            console.log(
+              `📋 Upserting regular order_item_change for item ${index + 1}...`,
+            );
             const { error: orderItemChangeError } = await supabase
               .from("order_item_changes")
               .upsert(
@@ -1103,13 +1261,19 @@ export const useCreateOrder = (orderTypeParam: string) => {
 
             if (orderItemChangeError) {
               console.error(
-                `❌ Error upserting regular order_item_change for item ${index + 1}:`,
+                `❌ Error upserting regular order_item_change for item ${
+                  index + 1
+                }:`,
                 orderItemChangeError,
               );
               throw orderItemChangeError;
             }
 
-            console.log(`✅ Created/Updated regular order_item_change for item ${index + 1}`);
+            console.log(
+              `✅ Created/Updated regular order_item_change for item ${
+                index + 1
+              }`,
+            );
             return { item_change_id: itemChange.id };
           },
         );
@@ -1130,7 +1294,9 @@ export const useCreateOrder = (orderTypeParam: string) => {
       if (data?.id) {
         openDefaultDocument(data.id, orderTypeParam);
       } else {
-        console.warn("Order data or ID is missing after success, cannot open document.");
+        console.warn(
+          "Order data or ID is missing after success, cannot open document.",
+        );
       }
       navigate({ to: "/home/orders" });
     },

@@ -23,6 +23,8 @@ import {
 
 export interface InventoryHistoryRecord {
   transaction_date: string;
+  /** Order created-at / business date from the orders row (not the movement slice date). */
+  order_date?: string | null;
   order_id: number;
   order_type: string;
   /** Planned delivery window on the order (tstzrange lower / upper). */

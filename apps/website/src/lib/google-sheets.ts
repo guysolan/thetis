@@ -1,9 +1,10 @@
 import type { SplintData } from "../types/splint";
 
 // Mock data based on actual Google Sheets structure
-const getMockSplintData = (region: "us" | "uk"): SplintData[] => {
-  // Must match Shopify checkout — see `data/splintPricing.ts` retailPricing
-  const price = region === "us" ? "93.99 USD" : "63.99 GBP";
+const getMockSplintData = (region: "us" | "uk" | "au"): SplintData[] => {
+  // US/UK: match Shopify; AU: see `data/splintPricing.ts` retailPricing.AU (partner region)
+  const price =
+    region === "us" ? "93.99 USD" : region === "uk" ? "63.99 GBP" : "169.99 AUD";
 
   console.log(`getMockSplintData called with region: ${region}`);
   console.log(`Setting price to: ${price}`);
@@ -176,11 +177,11 @@ const getMockSplintData = (region: "us" | "uk"): SplintData[] => {
   ];
 };
 
-export async function getSplintData(region: "us" | "uk" = "us"): Promise<SplintData[]> {
+export async function getSplintData(region: "us" | "uk" | "au" = "us"): Promise<SplintData[]> {
   const sheetId =
-    region === "us"
-      ? "1vTazj-qdD5S5VWdjB1epNwQ9Y66RQu-gqZWsdrBb2bY" // US sheet ID
-      : "1RmRBaMtftsddPPIbz3mAjBp9RidRlSCZxdSDTwbilTA"; // UK sheet ID
+    region === "uk"
+      ? "1RmRBaMtftsddPPIbz3mAjBp9RidRlSCZxdSDTwbilTA" // UK sheet ID
+      : "1vTazj-qdD5S5VWdjB1epNwQ9Y66RQu-gqZWsdrBb2bY"; // US sheet ID (also used for AU — English catalogue)
 
   console.log(`Attempting to fetch data for region: ${region}`);
   console.log(`Sheet ID: ${sheetId}`);

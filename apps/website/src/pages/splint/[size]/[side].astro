@@ -61,9 +61,12 @@ if (
 }
 
 const url = new URL(Astro.request.url);
-const region = (url.searchParams.get("region") as "us" | "uk" | null) || "us";
+const regionParam = url.searchParams.get("region")?.toLowerCase() ?? "";
+const region: "us" | "uk" | "au" =
+    regionParam === "uk" ? "uk" : regionParam === "au" ? "au" : "us";
 
-const countryForPurchase = region === "uk" ? "GB" : "US";
+const countryForPurchase =
+    region === "uk" ? "GB" : region === "au" ? "AU" : "US";
 const isDirectShipCountry = directShipCountries.includes(countryForPurchase);
 
 const purchaseInfo = getPurchaseUrl(
@@ -92,11 +95,13 @@ if (!splint) {
     return Astro.redirect("/404");
 }
 
-/** PDP + CTA price must match Shopify checkout — sheet feed can differ (e.g. GMC). */
+/** PDP price: GB/US match Shopify; partner regions use `splintPricing` / feed as noted below. */
 const retailCheckoutPrice = getRetailPriceByCountry(countryForPurchase);
 const shopDisplayPrice = isDirectShipCountry
     ? retailCheckoutPrice.formatted
-    : splint.price;
+    : region === "au"
+      ? retailCheckoutPrice.formatted
+      : splint.price;
 
 const checkoutLink = await getCheckoutLink(
     size as "large" | "small",
@@ -724,26 +729,17 @@ const galleryImages = [
             itemName: splint.title,
             itemPrice: isDirectShipCountry
                 ? `${retailCheckoutPrice.price} ${retailCheckoutPrice.currency}`
-                : splint.price,
+                : shopDisplayPrice,
             ecommerceCurrency: retailCheckoutPrice.currency,
             ecommerceValue: retailCheckoutPrice.price,
-            useRetailEcommerce: isDirectShipCountry,
             region,
         }}
     >
         document.addEventListener("DOMContentLoaded", () => {
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({ ecommerce: null });
-            const currency = useRetailEcommerce
-                ? ecommerceCurrency
-                : region === "uk"
-                  ? "GBP"
-                  : "USD";
-            const value = useRetailEcommerce
-                ? ecommerceValue
-                : region === "uk"
-                  ? 63.99
-                  : 93.99;
+            const currency = ecommerceCurrency;
+            const value = ecommerceValue;
             window.dataLayer.push({
                 event: "view_item",
                 ecommerce: {

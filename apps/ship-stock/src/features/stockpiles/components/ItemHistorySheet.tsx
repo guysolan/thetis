@@ -110,8 +110,10 @@ interface ItemHistorySheetProps {
 }
 
 interface TransactionRow {
-  /** Movement date: delivery-bound + sign, or slice dates only — drives sort, Date column, and scheduled deltas. */
+  /** Movement date: delivery-bound + sign, or slice dates only — drives sort, and scheduled deltas. */
   transactionDate: string;
+  /** Fallback for the date column when there is no delivery window. */
+  orderDate: string | null;
   orderId: number;
   orderType: string;
   deliveryStart: string | null;
@@ -217,6 +219,10 @@ export default function ItemHistorySheet({
 
       rows.push({
         transactionDate,
+        orderDate:
+          record.order_date != null && String(record.order_date) !== ""
+            ? String(record.order_date)
+            : null,
         orderId: record.order_id,
         orderType: record.order_type,
         deliveryStart: record.delivery_start ?? null,
@@ -247,6 +253,7 @@ export default function ItemHistorySheet({
 
     return {
       transactionDate: dayjs().format("YYYY-MM-DD"),
+      orderDate: null,
       orderId: 0,
       orderType: "current",
       deliveryStart: null,
@@ -281,8 +288,8 @@ export default function ItemHistorySheet({
           <SheetTitle>{selectedItem.itemName}</SheetTitle>
           <SheetDescription className="text-pretty">
             Rows sort by movement date from the delivery window and the direction of change at tracked
-            locations (negative → first day, positive → second). Order created-at is not used. Scheduled
-            lines reconcile +/- with the ledger when needed so the date and bold match what you see.
+            locations (negative → first day, positive → second). The date column shows the delivery window
+            when set, otherwise the order date. Scheduled lines reconcile +/- with the ledger when needed.
           </SheetDescription>
         </SheetHeader>
         <ScrollArea className="h-[calc(100vh-10rem)] mt-4">
@@ -295,9 +302,9 @@ export default function ItemHistorySheet({
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="whitespace-nowrap">Date</TableHead>
-                    <TableHead className="min-w-[10rem]">Delivery window</TableHead>
+                    <TableHead className="min-w-[12rem] whitespace-nowrap">Date</TableHead>
                     <TableHead className="whitespace-nowrap">Type</TableHead>
+                    <TableHead className="whitespace-nowrap">Order</TableHead>
                     {stockpileColumns.map((col) => (
                       <TableHead key={col.key} className="whitespace-nowrap">
                         {col.label}
@@ -321,82 +328,100 @@ export default function ItemHistorySheet({
                             row.deliveryStart,
                             row.deliveryEnd,
                           );
-                    const deliveryCell =
-                      row.orderType === "current" ||
-                      !windowParts ||
-                      (windowParts.start == null && windowParts.end == null) ? (
-                        <span className="text-muted-foreground">—</span>
-                      ) : windowParts.start &&
-                        windowParts.end &&
-                        windowParts.start === windowParts.end ? (
-                        <span className={boundUsed ? "font-bold" : undefined}>
-                          {windowParts.start}
-                        </span>
-                      ) : windowParts.start && windowParts.end ? (
-                        <>
+                    const hasWindow =
+                      !!windowParts &&
+                      (windowParts.start != null || windowParts.end != null);
+                    const windowContent =
+                      row.orderType === "current" || !hasWindow
+                        ? null
+                        : windowParts.start &&
+                            windowParts.end &&
+                            windowParts.start === windowParts.end ? (
+                          <span className={boundUsed ? "font-bold" : undefined}>
+                            {windowParts.start}
+                          </span>
+                        ) : windowParts.start && windowParts.end ? (
+                          <>
+                            <span
+                              className={boundUsed === "outbound" ? "font-bold" : undefined}
+                            >
+                              {windowParts.start}
+                            </span>
+                            <span> → </span>
+                            <span
+                              className={boundUsed === "inbound" ? "font-bold" : undefined}
+                            >
+                              {windowParts.end}
+                            </span>
+                          </>
+                        ) : windowParts.start ? (
                           <span
                             className={boundUsed === "outbound" ? "font-bold" : undefined}
                           >
                             {windowParts.start}
                           </span>
-                          <span> → </span>
+                        ) : (
                           <span
                             className={boundUsed === "inbound" ? "font-bold" : undefined}
                           >
                             {windowParts.end}
                           </span>
-                        </>
-                      ) : windowParts.start ? (
-                        <span
-                          className={boundUsed === "outbound" ? "font-bold" : undefined}
-                        >
-                          {windowParts.start}
-                        </span>
+                        );
+
+                    const fallbackLabel = (() => {
+                      if (row.orderDate && dayjs(row.orderDate).isValid()) {
+                        return dayjs(row.orderDate).format("D MMM YYYY");
+                      }
+                      if (dayjs(row.transactionDate).isValid()) {
+                        return dayjs(row.transactionDate).format("D MMM YYYY");
+                      }
+                      return "—";
+                    })();
+
+                    const dateCell =
+                      row.orderType === "current" ? (
+                        "Now"
                       ) : (
-                        <span
-                          className={boundUsed === "inbound" ? "font-bold" : undefined}
-                        >
-                          {windowParts.end}
-                        </span>
+                        <div className="flex flex-col gap-0.5 text-sm">
+                          <span>
+                            {windowContent ?? (
+                              <span className="text-foreground">{fallbackLabel}</span>
+                            )}
+                          </span>
+                          {row.isFuture ? (
+                            <span className="text-muted-foreground text-xs font-normal">
+                              (scheduled)
+                            </span>
+                          ) : null}
+                        </div>
                       );
+
                     return (
                       <TableRow
                         key={`${row.orderId}-${row.transactionDate}-${row.orderType}-${index}`}
                         className={row.orderType === "current" ? "bg-muted/50 font-medium" : ""}
                       >
-                        <TableCell className="whitespace-nowrap">
-                          {row.orderType === "current"
-                            ? "Now"
-                            : row.isFuture
-                              ? (
-                                <span className="text-foreground">
-                                  {dayjs(row.transactionDate).format("DD/MM/YYYY")}
-                                  <span className="ml-1.5 text-muted-foreground text-xs font-normal">
-                                    (scheduled)
-                                  </span>
-                                </span>
-                              )
-                              : dayjs(row.transactionDate).format("DD/MM/YYYY")}
+                        <TableCell className="align-top whitespace-nowrap">{dateCell}</TableCell>
+                        <TableCell className="align-top whitespace-nowrap">
+                          <Badge className={getOrderTypeBadgeVariant(row.orderType)}>
+                            {row.orderType}
+                          </Badge>
                         </TableCell>
-                        <TableCell className="text-sm align-top">{deliveryCell}</TableCell>
-                        <TableCell>
-                          <div className="flex flex-col items-start gap-1">
-                            <Badge className={getOrderTypeBadgeVariant(row.orderType)}>
-                              {row.orderType}
-                            </Badge>
-                            {row.orderId !== 0 ? (
-                              <Link
-                                to="/home/orders/$orderId"
-                                params={{
-                                  orderId: row.orderId.toString(),
-                                }}
-                                className="text-primary text-xs underline-offset-4 hover:underline"
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                #{row.orderId}
-                              </Link>
-                            ) : null}
-                          </div>
+                        <TableCell className="align-top whitespace-nowrap">
+                          {row.orderId !== 0 ? (
+                            <Link
+                              to="/home/orders/$orderId"
+                              params={{
+                                orderId: row.orderId.toString(),
+                              }}
+                              className="text-primary text-sm underline-offset-4 hover:underline"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              #{row.orderId}
+                            </Link>
+                          ) : (
+                            <span className="text-muted-foreground">—</span>
+                          )}
                         </TableCell>
                         {stockpileColumns.map((col) => {
                           const loc = row.locations[col.key];
@@ -407,7 +432,7 @@ export default function ItemHistorySheet({
                             <TableCell key={col.key}>
                               <div>
                                 <div className="tabular-nums">
-                                  {loc.quantity}
+                                  {Math.round(loc.quantity)}
                                   {row.isFuture && row.orderType !== "current" && (
                                     <span className="ml-1 text-muted-foreground text-xs font-normal">
                                       (proj.)
@@ -416,15 +441,16 @@ export default function ItemHistorySheet({
                                 </div>
                                 {(() => {
                                   const delta = loc.displayDelta !== undefined ? loc.displayDelta : loc.change;
-                                  if (delta === 0) return null;
+                                  const deltaRounded = Math.round(delta);
+                                  if (deltaRounded === 0) return null;
                                   return (
                                     <div
                                       className={`text-xs ${
-                                        delta > 0 ? "text-green-600" : "text-red-600"
+                                        deltaRounded > 0 ? "text-primary" : "text-red-600"
                                       }`}
                                     >
-                                      {delta > 0 ? "+" : ""}
-                                      {delta}
+                                      {deltaRounded > 0 ? "+" : ""}
+                                      {deltaRounded}
                                     </div>
                                   );
                                 })()}

@@ -84,6 +84,13 @@ export const retailPricing = {
     symbol: "$",
     formatted: "$93.99",
   },
+  /** RRP-style display for AU (partner fulfilment); align with local list price if needed. */
+  AU: {
+    price: 169.99,
+    currency: "AUD",
+    symbol: "$",
+    formatted: "$169.99",
+  },
   // Default for other regions (use USD)
   default: {
     price: 93.99,
@@ -100,6 +107,9 @@ export function getRetailPriceByCountry(countryCode: string | null): typeof reta
   }
   if (countryCode === "US") {
     return retailPricing.US;
+  }
+  if (countryCode === "AU") {
+    return retailPricing.AU;
   }
   // For all other countries, use USD as default
   return retailPricing.default;
