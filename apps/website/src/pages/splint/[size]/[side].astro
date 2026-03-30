@@ -95,13 +95,11 @@ if (!splint) {
     return Astro.redirect("/404");
 }
 
-/** PDP price: GB/US match Shopify; partner regions use `splintPricing` / feed as noted below. */
+/** PDP price: direct-ship regions match Shopify / `splintPricing`; others use feed. */
 const retailCheckoutPrice = getRetailPriceByCountry(countryForPurchase);
 const shopDisplayPrice = isDirectShipCountry
     ? retailCheckoutPrice.formatted
-    : region === "au"
-      ? retailCheckoutPrice.formatted
-      : splint.price;
+    : splint.price;
 
 const checkoutLink = await getCheckoutLink(
     size as "large" | "small",

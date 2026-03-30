@@ -59,17 +59,17 @@ export const buyButtonContent: Record<
   },
 };
 
-// Countries where we use the Shopify direct checkout (UK and US)
-export const shopifyCountries = ["GB", "UK", "US"];
+// Countries where we use the Shopify direct checkout (UK, US, AU)
+export const shopifyCountries = ["GB", "UK", "US", "AU"];
 
 // Countries we ship to directly
-export const directShipCountries = ["GB", "UK", "US"];
+export const directShipCountries = ["GB", "UK", "US", "AU"];
 
 // Countries with Amazon links
 export const amazonCountries = ["DE", "IT", "FR", "BE", "NL", "PL", "ES"];
 
-// Countries with partner distributors
-export const partnerCountries = ["AU", "NZ", "PT", "CA"];
+// Countries with partner distributors (AU: direct Shopify on splint PDP; NZ still partner)
+export const partnerCountries = ["NZ", "PT", "CA"];
 
 // Get the purchase URL for a specific country and variant
 export function getPurchaseUrl(
@@ -81,8 +81,8 @@ export function getPurchaseUrl(
   const sideCode = side === "left" ? "L" : "R";
   const variantCode = `${sizeCode}${sideCode}` as "LL" | "LR" | "SL" | "SR";
 
-  // UK and US use Shopify / direct
-  if (country === "GB" || country === "UK" || country === "US") {
+  // UK, US, AU use Shopify / direct
+  if (country === "GB" || country === "UK" || country === "US" || country === "AU") {
     return { url: "", type: "shopify" };
   }
 
@@ -93,6 +93,12 @@ export function getPurchaseUrl(
       LR: "https://www.thetismedical.com/splint/large/right?region=us",
       SL: "https://www.thetismedical.com/splint/small/left?region=us",
       SR: "https://www.thetismedical.com/splint/small/right?region=us",
+    },
+    AU: {
+      LL: "https://www.thetismedical.com/splint/large/left?region=au",
+      LR: "https://www.thetismedical.com/splint/large/right?region=au",
+      SL: "https://www.thetismedical.com/splint/small/left?region=au",
+      SR: "https://www.thetismedical.com/splint/small/right?region=au",
     },
     CA: {
       LL: "https://swiftbrace.com/products/thetis-achilles-night-splint",
@@ -141,12 +147,6 @@ export function getPurchaseUrl(
       LR: "https://www.amazon.es/dp/B09N5MVY1Q",
       SL: "https://www.amazon.es/dp/B09N5KH4F3",
       SR: "https://www.amazon.es/dp/B09N58H79F",
-    },
-    AU: {
-      LL: "https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php",
-      LR: "https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php",
-      SL: "https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php",
-      SR: "https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php",
     },
     NZ: {
       LL: "https://www.clubwarehouse.com.au/TH_dash_ATRNS_dash_L_dash_L/Thetis-Achilles-Tendon-Rupture-Night-Splint/pd.php",
