@@ -22,9 +22,9 @@ const SIZE_ROWS = [
 /** Minimum stock per region (US, UK, CA, DE) for each size */
 const MIN_STOCK: Record<AmazonRegion, Record<string, number>> = {
   "Amazon US": { "Small Right": 20, "Small Left": 20, "Large Right": 60, "Large Left": 60 },
-  "Amazon UK": { "Small Right": 10, "Small Left": 10, "Large Right": 30, "Large Left": 30 },
+  "Amazon UK": { "Small Right": 15, "Small Left": 15, "Large Right": 45, "Large Left": 45 },
   "Amazon CA": { "Small Right": 10, "Small Left": 10, "Large Right": 30, "Large Left": 30 },
-  "Amazon DE": { "Small Right": 10, "Small Left": 10, "Large Right": 30, "Large Left": 30 },
+  "Amazon DE": { "Small Right": 15, "Small Left": 15, "Large Right": 45, "Large Left": 45 },
 };
 
 /** Maximum stock per region for each size */
