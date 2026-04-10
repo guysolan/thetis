@@ -1,11 +1,13 @@
 import type { FAQItem, SectionContent } from "@/components/course/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 import EvenUp from "@/assets/even-up.jpg";
 import SoftCrutchHandles from "@/assets/soft-crutch-handles.jpg";
 
 export const metadata = {
   slug: "crutches-and-mobility",
   title: "Crutches and Mobility Aids",
-  description: "Crutch comfort, EVENup, leg length difference, and making mobility easier",
+  description:
+    "Crutch comfort, EVENup, leg length difference, and making mobility easier",
   status: "drafting" as const,
 };
 
@@ -13,12 +15,16 @@ export const faqs: FAQItem[] = [
   {
     question: "Do I really need gel covers for my crutches?",
     answer:
-      "You'll probably be on crutches for 6–10 weeks. Gel covers cost £5–15 and prevent painful blisters, calluses, and hand fatigue. Most patients who don't use them wish they had. It's a small investment for weeks of comfort.",
+      `You'll probably be on crutches for 6–10 weeks. Gel covers cost £5–15 and prevent painful blisters, calluses, and hand fatigue. Most patients who don't use them wish they had. It's a small investment for weeks of comfort. Typical options: ${
+        mdShopPair("crutch-handles")
+      }.`,
   },
   {
     question: "Do I need an EVENup?",
     answer:
-      "If you're getting back pain, hip pain, or finding walking exhausting, try an EVENup. Many patients consider it essential. If you're not having issues, you may not need it. It's worth trying if you're experiencing secondary pain.",
+      `If you're getting back pain, hip pain, or finding walking exhausting, try an EVENup (${
+        mdShopPair("evenup-leveler")
+      }). Many patients consider it essential. If you're not having issues, you may not need it. It's worth trying if you're experiencing secondary pain.`,
   },
   {
     question: "How do I know if my crutches are the right height?",
@@ -42,13 +48,20 @@ export const content: SectionContent = {
       title: "Mobility essentials",
       items: [
         {
-          text: "Get gel covers for crutch handles — dramatically reduce palm pain",
+          text:
+            `Get gel covers for crutch handles — dramatically reduce palm pain (${
+              mdShopPair("crutch-handles")
+            })`,
         },
         {
-          text: "Consider an EVENup — prevents back and hip pain from leg length difference",
+          text:
+            `Consider an EVENup — prevents back and hip pain from leg length difference (${
+              mdShopPair("evenup-leveler")
+            })`,
         },
         {
-          text: "Check crutch height — top should be 2–3 finger widths below armpit",
+          text:
+            "Check crutch height — top should be 2–3 finger widths below armpit",
         },
         {
           text: "Use weight through hands, not armpits — prevents nerve damage",
@@ -75,14 +88,17 @@ export const content: SectionContent = {
             {
               type: "product-image",
               src: EvenUp,
-              alt: "EVENup shoe leveler device that clips onto shoes to equalize leg length",
+              alt:
+                "EVENup shoe leveler device that clips onto shoes to equalize leg length",
               caption: "EVENup",
             },
             {
               type: "list",
               style: "bullet",
               items: [
-                "**EVENup shoe leveler** — clips onto any shoe to add 2–4 cm of height. Adjustable and widely used. Cost: £35–40 ($40–50). Universal fit, immediate comfort, prevents secondary injuries.",
+                `**EVENup shoe leveler** — clips onto any shoe to add 2–4 cm of height. Adjustable and widely used. Cost: £35–40 ($40–50). Universal fit, immediate comfort, prevents secondary injuries. Shop: ${
+                  mdShopPair("evenup-leveler")
+                }.`,
                 "**Heel lift insoles** — cheaper option, but may not add enough height. Works for some patients.",
                 "**Thick-soled shoes** — trainers with chunky soles can help, but usually aren't enough on their own.",
               ],
@@ -90,7 +106,9 @@ export const content: SectionContent = {
             {
               type: "text",
               content:
-                "**When to get one:** If you're getting back pain, hip pain, or finding walking exhausting, try an EVENup. Many patients consider it essential. If you're not having issues, you may not need it.",
+                `**When to get one:** If you're getting back pain, hip pain, or finding walking exhausting, try an EVENup (${
+                  mdShopPair("evenup-leveler")
+                }). Many patients consider it essential. If you're not having issues, you may not need it.`,
             },
           ],
         },
@@ -120,7 +138,9 @@ export const content: SectionContent = {
               type: "list",
               style: "bullet",
               items: [
-                "**Gel handle covers** — soft gel pads that slip over the handles. Dramatically reduce palm pain and blisters. Clinical studies show 40% reduction in forearm pain and 35% decrease in paresthesia. Cost: £6–15 ($20–35).",
+                `**Gel handle covers** — soft gel pads that slip over the handles. Dramatically reduce palm pain and blisters. Clinical studies show 40% reduction in forearm pain and 35% decrease in paresthesia. Cost: £6–15 ($20–35). Shop: ${
+                  mdShopPair("crutch-handles")
+                }.`,
                 "**Padded underarm covers** — foam or gel pads for the top of the crutch. Prevent armpit soreness.",
                 "**Correct height** — the top should be 2–3 finger widths below your armpit when standing. Handles should be at wrist level.",
                 "**Weight through hands, not armpits** — push down on the handles, don't lean on the top. Leaning causes nerve damage and armpit pain.",
@@ -143,7 +163,11 @@ export const content: SectionContent = {
         {
           type: "text",
           content:
-            "Crutches aren't the only option. Some patients find **knee scooters** or the **iWalk** easier, especially if they struggle with crutch-related hand, wrist, or armpit pain.",
+            `Crutches aren't the only option. Some patients find **knee scooters** (${
+              mdShopPair("knee-scooter")
+            }) or the **iWalk** (${
+              mdShopPair("iwalk-hands-free-crutch")
+            }) easier, especially if they struggle with crutch-related hand, wrist, or armpit pain.`,
         },
         {
           type: "card",
@@ -158,7 +182,9 @@ export const content: SectionContent = {
                 "**How it works:** You kneel on a padded platform and push with your good leg. Your injured leg stays in the boot, off the ground.",
                 "**Pros:** Hands-free, no arm fatigue, easier for carrying things, good for longer distances",
                 "**Cons:** Heavier, bulkier, not ideal for stairs or tight spaces; may not be suitable for all protocols (check with your clinician)",
-                "**Cost:** £100–220 ($189–330). Available to buy or rent.",
+                `**Cost:** £100–220 ($189–330). Available to buy or rent. Shop: ${
+                  mdShopPair("knee-scooter")
+                }.`,
               ],
             },
           ],
@@ -176,7 +202,9 @@ export const content: SectionContent = {
                 "**How it works:** A device that straps to your lower leg (below the knee) with a platform for your knee. Your injured leg is bent and non-weightbearing; you walk on your good leg while the iWalk supports the injured one.",
                 "**Pros:** Hands completely free, more natural gait, easier for stairs than a knee scooter",
                 "**Cons:** Learning curve, may not suit all body types or protocols; check with your clinician",
-                "**Cost:** Similar to knee scooters. Available to buy or rent.",
+                `**Cost:** Similar to knee scooters. Available to buy or rent. Shop: ${
+                  mdShopPair("iwalk-hands-free-crutch")
+                }.`,
               ],
             },
           ],
@@ -207,17 +235,21 @@ export const content: SectionContent = {
               text: "Comfortable chair/sofa with room to elevate your leg",
             },
             {
-              text: "Pillows or an elevation wedge (more comfortable than stacking pillows)",
+              text: `Pillows or an elevation wedge (${
+                mdShopPair("elevation-wedge")
+              }) — more comfortable than stacking pillows`,
             },
             {
-              text: "Side table within arm's reach (water, meds, snacks, charger)",
+              text:
+                "Side table within arm's reach (water, meds, snacks, charger)",
             },
             { text: "Phone charger + extension lead" },
             {
               text: "Crutches placed where you can reach them from bed/sofa",
             },
             {
-              text: "Top Tip: Lean crutches upside-down against the wall — the rubber **feet** (crutch tips), not the handles, provide friction so they don't slide and fall over.",
+              text:
+                "Top Tip: Lean crutches upside-down against the wall — the rubber **feet** (crutch tips), not the handles, provide friction so they don't slide and fall over.",
             },
             {
               text: "Clear a path to the bathroom (remove trip hazards)",

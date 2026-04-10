@@ -1,4 +1,5 @@
-import type { GuideMetadata, GuideContent } from "@/components/guide/types";
+import type { GuideContent, GuideMetadata } from "@/components/guide/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 
 export const metadata: GuideMetadata = {
   slug: "weeks-7-9",
@@ -67,7 +68,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "Understanding your tendon's approximate strength helps set expectations:",
+      content:
+        "Understanding your tendon's approximate strength helps set expectations:",
     },
     {
       type: "table",
@@ -198,8 +200,9 @@ export const content: GuideContent = {
     },
     {
       type: "tip",
-      content:
-        "**Continue using your EVENup shoe leveler** - the boot still adds height even without wedges.",
+      content: `**Continue using your EVENup shoe leveler** (${
+        mdShopPair("evenup-leveler")
+      }) — the boot still adds height even without wedges.`,
     },
 
     {
@@ -209,7 +212,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "As you approach the end of boot wearing, stay vigilant for any concerning signs.",
+      content:
+        "As you approach the end of boot wearing, stay vigilant for any concerning signs.",
     },
     {
       type: "card",
@@ -262,7 +266,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "Physiotherapy typically begins around weeks 9-12. Here's what to expect:",
+      content:
+        "Physiotherapy typically begins around weeks 9-12. Here's what to expect:",
     },
     {
       type: "text",
@@ -440,7 +445,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "Maintaining the small muscles of your foot helps overall foot health.",
+      content:
+        "Maintaining the small muscles of your foot helps overall foot health.",
     },
     {
       type: "list",
@@ -464,7 +470,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "By weeks 7-9, many people are considering or have already returned to work.",
+      content:
+        "By weeks 7-9, many people are considering or have already returned to work.",
     },
     {
       type: "card",
@@ -634,7 +641,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "The transition out of the boot is both exciting and anxiety-provoking.",
+      content:
+        "The transition out of the boot is both exciting and anxiety-provoking.",
     },
     {
       type: "text",
@@ -682,22 +690,27 @@ export const content: GuideContent = {
             "Absolutely. Your calf muscle has had 8-9 weeks of minimal use. Significant muscle atrophy (shrinkage) is normal and expected. This is exactly what physiotherapy will address.",
         },
         {
-          question: "Should I be worried if my tendon looks thicker than the other side?",
+          question:
+            "Should I be worried if my tendon looks thicker than the other side?",
           answer:
             "No. A healed Achilles tendon is typically thicker than the original tendon - often significantly so. This is normal scar tissue and remodelling. It usually remains thicker permanently but this doesn't affect function.",
         },
         {
           question: "Can I remove the boot for physiotherapy exercises?",
           answer:
-            "Only if specifically instructed by your physiotherapist and with explicit approval from your orthopaedic team. Early physio exercises can often be done with the boot on or with a night splint as protection.",
+            `Only if specifically instructed by your physiotherapist and with explicit approval from your orthopaedic team. Early physio exercises can often be done with the boot on or with a night splint (${
+              mdShopPair("thetis-night-splint")
+            }) as protection.`,
         },
         {
-          question: "What if I can't find a physiotherapist with Achilles experience?",
+          question:
+            "What if I can't find a physiotherapist with Achilles experience?",
           answer:
             "While Achilles-specific experience is ideal, a good general musculoskeletal or sports physiotherapist can treat you effectively by following evidence-based protocols. They may need to do some research, which is perfectly acceptable.",
         },
         {
-          question: "My other ankle/knee/hip/back still hurts - will this improve?",
+          question:
+            "My other ankle/knee/hip/back still hurts - will this improve?",
           answer:
             "Usually, yes. Once you're out of the boot and walking normally, compensatory pain from asymmetrical movement typically resolves. If it persists, your physiotherapist can address these issues.",
         },
@@ -719,11 +732,20 @@ export const content: GuideContent = {
       type: "checklist",
       items: [
         { text: "Remove final wedges according to schedule", checked: false },
-        { text: "Continue wearing boot 24/7 until told otherwise", checked: false },
+        {
+          text: "Continue wearing boot 24/7 until told otherwise",
+          checked: false,
+        },
         { text: "Maintain blood thinners if still prescribed", checked: false },
         { text: "Research and book physiotherapy", checked: false },
-        { text: "Purchase transition supplies (bands, shoes, heel lifts)", checked: false },
-        { text: "Practice gentle ankle exercises (pumps, circles, toe work)", checked: false },
+        {
+          text: "Purchase transition supplies (bands, shoes, heel lifts)",
+          checked: false,
+        },
+        {
+          text: "Practice gentle ankle exercises (pumps, circles, toe work)",
+          checked: false,
+        },
         { text: "Plan return to work if applicable", checked: false },
         { text: "Know driving guidelines for your situation", checked: false },
         { text: "Monitor for warning signs", checked: false },

@@ -20,6 +20,7 @@ const {
 	canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 	author = "Thetis Medical",
 	keywords = [],
+	proseScale = "lg",
 } = Astro.props;
 
 // Create JSON-LD schema for Article
@@ -98,7 +99,12 @@ const articleSchema = {
 							</h1>
 							<hr class="my-8 border-gray-300" />
 						</header>
-						<div class="space-y-8 max-w-none text-gray-900 prose prose-lg">
+						<div
+							class:list={[
+								"space-y-8 max-w-none text-gray-900 prose text-pretty",
+								proseScale === "xl" ? "prose-xl" : "prose-lg",
+							]}
+						>
 							<slot />
 						</div>
 					</div>

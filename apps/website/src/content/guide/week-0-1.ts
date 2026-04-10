@@ -1,4 +1,5 @@
-import type { GuideMetadata, GuideContent } from "@/components/guide/types";
+import type { GuideContent, GuideMetadata } from "@/components/guide/types";
+import { mdGuideItemWithShop, mdShopPair } from "@/lib/catalogue-links";
 
 export const metadata: GuideMetadata = {
   slug: "weeks-0-1",
@@ -499,10 +500,17 @@ export const content: GuideContent = {
       type: "checklist",
       title: "Essential Setup",
       items: [
-        { text: "A comfortable chair or sofa with space to elevate your leg", checked: false },
-        { text: "Pillows or a wedge to elevate your foot above heart level", checked: false },
         {
-          text: "Side table within arm's reach for: water bottle, medications, phone and charger, remote controls, snacks",
+          text: "A comfortable chair or sofa with space to elevate your leg",
+          checked: false,
+        },
+        {
+          text: "Pillows or a wedge to elevate your foot above heart level",
+          checked: false,
+        },
+        {
+          text:
+            "Side table within arm's reach for: water bottle, medications, phone and charger, remote controls, snacks",
           checked: false,
         },
         { text: "Crutches positioned for easy access", checked: false },
@@ -513,7 +521,10 @@ export const content: GuideContent = {
       type: "checklist",
       title: "Bathroom Considerations",
       items: [
-        { text: "Move essential toiletries to an accessible height", checked: false },
+        {
+          text: "Move essential toiletries to an accessible height",
+          checked: false,
+        },
         { text: "Consider a shower stool or chair", checked: false },
         { text: "Non-slip mat inside the shower/bath", checked: false },
         { text: "Handheld shower head if possible", checked: false },
@@ -572,7 +583,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "Ice helps reduce swelling and can provide pain relief in the first few days.",
+      content:
+        "Ice helps reduce swelling and can provide pain relief in the first few days.",
     },
     {
       type: "list",
@@ -637,7 +649,9 @@ export const content: GuideContent = {
       type: "tip",
       title: "For Boot Wearers",
       content:
-        "Many patients find sleeping in a walking boot extremely uncomfortable. Later in your recovery (typically from week 2-4 onwards, with specialist approval), you may be able to use a night splint designed specifically for Achilles rupture. This is lighter and more comfortable than a boot while still protecting your tendon.",
+        `Many patients find sleeping in a walking boot extremely uncomfortable. Later in your recovery (typically from week 2-4 onwards, with specialist approval), you may be able to use a night splint designed specifically for Achilles rupture (${
+          mdShopPair("thetis-night-splint")
+        }). This is lighter and more comfortable than a boot while still protecting your tendon.`,
     },
 
     // Questions to Ask
@@ -648,7 +662,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "If you can, write these down on your phone and bring them to your appointment.",
+      content:
+        "If you can, write these down on your phone and bring them to your appointment.",
     },
     {
       type: "list",
@@ -672,7 +687,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "Here are the items that will make your first week significantly more manageable.",
+      content:
+        "Here are the items that will make your first week significantly more manageable.",
     },
     {
       type: "heading",
@@ -697,10 +713,22 @@ export const content: GuideContent = {
       type: "table",
       headers: ["Item", "Why You Need It"],
       rows: [
-        ["**Waterproof Cast/Boot Cover**", "Essential for showering safely"],
-        ["**Leg Elevation Wedge/Pillow**", "Much better than stacking regular pillows"],
         [
-          "**Ergonomic Crutch Handle Covers**",
+          mdGuideItemWithShop("**Night Splint**", "thetis-night-splint"),
+          "For sleeping without the boot (typically from week 2-4) — order early so you have it when your team says it's OK",
+        ],
+        [
+          mdGuideItemWithShop(
+            "**Leg Elevation Wedge/Pillow**",
+            "elevation-wedge",
+          ),
+          "Much better than stacking regular pillows",
+        ],
+        [
+          mdGuideItemWithShop(
+            "**Ergonomic Crutch Handle Covers**",
+            "crutch-handles",
+          ),
           "Your hands will thank you (not essential in week 1 but helpful)",
         ],
       ],
@@ -714,8 +742,17 @@ export const content: GuideContent = {
       type: "table",
       headers: ["Item", "Why You Need It"],
       rows: [
-        ["**Night Splint**", "For sleeping without the boot (typically from week 2-4)"],
-        ["**Shoe Leveler (EVENup)**", "Prevents back pain when walking in a boot"],
+        [
+          mdGuideItemWithShop(
+            "**Waterproof Cast/Boot Cover**",
+            "waterproof-boot-cover",
+          ),
+          "Essential for showering safely once your protocol allows — worth ordering now so it's ready",
+        ],
+        [
+          mdGuideItemWithShop("**Shoe Leveler (EVENup)**", "evenup-leveler"),
+          "Prevents back pain when walking in a boot",
+        ],
       ],
     },
 
@@ -758,7 +795,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "The big question you'll face in weeks 1-3 is: surgery or no surgery?",
+      content:
+        "The big question you'll face in weeks 1-3 is: surgery or no surgery?",
     },
     {
       type: "alert",
@@ -842,7 +880,9 @@ export const content: GuideContent = {
         {
           question: "When can I use a night splint instead of the boot?",
           answer:
-            "Typically, night splints can be introduced from around week 2-4, but only with your specialist's approval. They're designed to maintain the correct foot position during sleep while being lighter and more comfortable than a boot.",
+            `Typically, night splints can be introduced from around week 2-4, but only with your specialist's approval. They're designed to maintain the correct foot position during sleep while being lighter and more comfortable than a boot. If you're shopping: ${
+              mdShopPair("thetis-night-splint")
+            }.`,
         },
         {
           question: "Is swelling normal?",
@@ -862,16 +902,35 @@ export const content: GuideContent = {
       type: "checklist",
       items: [
         {
-          text: "Keep your foot immobilised 24/7 in the cast/splint/boot provided",
+          text:
+            "Keep your foot immobilised 24/7 in the cast/splint/boot provided",
           checked: false,
         },
-        { text: "Take blood thinning medication as prescribed", checked: false },
-        { text: "Elevate your leg above heart level as much as possible", checked: false },
-        { text: "Use ice for the first 3-4 days to reduce swelling", checked: false },
+        {
+          text: "Take blood thinning medication as prescribed",
+          checked: false,
+        },
+        {
+          text: "Elevate your leg above heart level as much as possible",
+          checked: false,
+        },
+        {
+          text: "Use ice for the first 3-4 days to reduce swelling",
+          checked: false,
+        },
         { text: "Take pain medication as needed", checked: false },
         { text: "Set up a recovery station at home", checked: false },
         { text: "Learn to use your crutches safely", checked: false },
-        { text: "Order a waterproof cover for showering", checked: false },
+        {
+          text:
+            "Order a night splint early (often used from week 2-4 with specialist approval)",
+          checked: false,
+        },
+        {
+          text:
+            "Order a waterproof cover for showering when your protocol allows",
+          checked: false,
+        },
         { text: "Know the warning signs of blood clots", checked: false },
         { text: "Rest - your body is healing", checked: false },
       ],

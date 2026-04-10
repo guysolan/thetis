@@ -1,4 +1,9 @@
-import type { GuideMetadata, GuideContent } from "@/components/guide/types";
+import type { GuideContent, GuideMetadata } from "@/components/guide/types";
+import {
+  mdBootShopInline,
+  mdGuideItemWithShop,
+  mdShopPair,
+} from "@/lib/catalogue-links";
 
 export const metadata: GuideMetadata = {
   slug: "weeks-1-3",
@@ -112,7 +117,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "Not everyone needs imaging, but it's increasingly common and can be very helpful:",
+      content:
+        "Not everyone needs imaging, but it's increasingly common and can be very helpful:",
     },
     {
       type: "card",
@@ -194,7 +200,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "This is the big question. Let's break down what the evidence actually says.",
+      content:
+        "This is the big question. Let's break down what the evidence actually says.",
     },
 
     {
@@ -386,7 +393,8 @@ export const content: GuideContent = {
     },
     {
       type: "quote",
-      text: "Early weight-bearing in a functional brace is a safe and cost-effective alternative to plaster casting",
+      text:
+        "Early weight-bearing in a functional brace is a safe and cost-effective alternative to plaster casting",
       author: "UKSTAR Trial, Lancet 2020",
     },
     {
@@ -415,7 +423,11 @@ export const content: GuideContent = {
       type: "table",
       headers: ["Feature", "Aircast", "VACOped"],
       rows: [
-        ["Mechanism", "Fixed wedges removed over time", "Hinged, adjustable range of motion"],
+        [
+          "Mechanism",
+          "Fixed wedges removed over time",
+          "Hinged, adjustable range of motion",
+        ],
         ["Cost", "£121-150 (+ £20-25 for wedges)", "£300-375"],
         ["Availability", "Widely available", "Limited to some centres"],
         ["Ankle position", "~28° plantarflexion", "~48° plantarflexion"],
@@ -461,7 +473,7 @@ export const content: GuideContent = {
       variant: "info",
       title: "The Bottom Line",
       content:
-        "Both boots can produce excellent outcomes. Use whatever your hospital provides and follow the protocol carefully. The commitment to wearing it properly matters more than which brand you have.",
+        `Both boots can produce excellent outcomes. Use whatever your hospital provides and follow the protocol carefully. The commitment to wearing it properly matters more than which brand you have. If you are buying privately, typical retail starting points: ${mdBootShopInline()}.`,
     },
 
     {
@@ -713,12 +725,15 @@ export const content: GuideContent = {
       items: [
         "Showering (with specialist approval and extreme caution)",
         "**Early strengthening exercises** (when prescribed, typically from week 2-3 onwards) - done OUT of the boot briefly, in a safe position (foot pointed down), boot goes back on immediately after",
-        "Using a night splint (when approved by your specialist)",
+        `Using a night splint (${
+          mdShopPair("thetis-night-splint")
+        }) when approved by your specialist`,
       ],
     },
     {
       type: "quote",
-      text: "Recovery is like Snakes and Ladders: Each week sees you closer to the finish. But one small mistake is like landing on the big snake - taking you right back to the beginning.",
+      text:
+        "Recovery is like Snakes and Ladders: Each week sees you closer to the finish. But one small mistake is like landing on the big snake - taking you right back to the beginning.",
     },
     {
       type: "tip",
@@ -768,7 +783,9 @@ export const content: GuideContent = {
     {
       type: "text",
       content:
-        "A night splint designed specifically for Achilles rupture can be a game-changer for sleep comfort.",
+        `A night splint designed specifically for Achilles rupture can be a game-changer for sleep comfort — ${
+          mdShopPair("thetis-night-splint")
+        }.`,
     },
     {
       type: "card",
@@ -803,7 +820,8 @@ export const content: GuideContent = {
     },
     {
       type: "quote",
-      text: "It is fantastic that Thetis Medical have produced this night-splint. It is certain to improve the recovery experience for patients.",
+      text:
+        "It is fantastic that Thetis Medical have produced this night-splint. It is certain to improve the recovery experience for patients.",
       author: "Mr. James Davis, Past President BOFAS",
     },
     {
@@ -821,7 +839,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "Whether you're in a boot or night splint, here are strategies for better sleep:",
+      content:
+        "Whether you're in a boot or night splint, here are strategies for better sleep:",
     },
     {
       type: "text",
@@ -894,13 +913,25 @@ export const content: GuideContent = {
       type: "table",
       headers: ["Item", "Why You Need It"],
       rows: [
-        ["**Walking Boot** (if not provided)", "Aircast or VACOped with correct wedges"],
         [
-          "**Night Splint**",
+          `**Walking Boot** (if not provided) — ${mdBootShopInline()}`,
+          "Aircast with correct wedges, or VACOped",
+        ],
+        [
+          mdGuideItemWithShop("**Night Splint**", "thetis-night-splint"),
           "For sleeping comfort from week 2-4 - much more comfortable than boot",
         ],
-        ["**Shoe Leveler (EVENup)**", "Prevents back, hip, and knee pain from height difference"],
-        ["**Waterproof Boot Cover**", "For showering safely, keeps boot clean and dry"],
+        [
+          mdGuideItemWithShop("**Shoe Leveler (EVENup)**", "evenup-leveler"),
+          "Prevents back, hip, and knee pain from height difference",
+        ],
+        [
+          mdGuideItemWithShop(
+            "**Waterproof Boot Cover**",
+            "waterproof-boot-cover",
+          ),
+          "For showering safely, keeps boot clean and dry",
+        ],
       ],
     },
     {
@@ -913,15 +944,18 @@ export const content: GuideContent = {
       headers: ["Item", "Why You Need It"],
       rows: [
         [
-          "**Ergonomic Crutch Handle Covers**",
+          mdGuideItemWithShop(
+            "**Ergonomic Crutch Handle Covers**",
+            "crutch-handles",
+          ),
           "Gel or foam padding reduces hand and wrist discomfort",
         ],
         [
-          "**Merino Wool Socks**",
+          mdGuideItemWithShop("**Merino Wool Socks**", "merino-wool-socks"),
           "Moisture-wicking, temperature regulating, more comfortable than cotton",
         ],
         [
-          "**Leg Elevation Wedge**",
+          mdGuideItemWithShop("**Leg Elevation Wedge**", "elevation-wedge"),
           "Better than stacking pillows, consistent comfortable elevation",
         ],
       ],
@@ -940,7 +974,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "Continue to be vigilant for blood clots throughout your recovery:",
+      content:
+        "Continue to be vigilant for blood clots throughout your recovery:",
     },
     {
       type: "card",
@@ -1048,7 +1083,8 @@ export const content: GuideContent = {
             "Not necessarily. Surgery is sometimes recommended for specific reasons: a significant gap between tendon ends, very active lifestyle/professional athlete, previous Achilles problems, or certain tendon characteristics on imaging. If surgery is recommended, ask your surgeon to explain why and discuss the risks and benefits for your specific situation.",
         },
         {
-          question: "My friend had surgery and says I should too - what should I do?",
+          question:
+            "My friend had surgery and says I should too - what should I do?",
           answer:
             "Listen to your medical team, not anecdotes. Every rupture is different, and what was right for your friend may not be right for you. The evidence strongly supports non-surgical treatment for most people.",
         },
@@ -1060,7 +1096,9 @@ export const content: GuideContent = {
         {
           question: "How often should I take the boot off?",
           answer:
-            "In weeks 1-3, the boot should stay on 24/7. The only exceptions are: brief periods for showering (with extreme care), using a night splint (if approved by your specialist), or specific exercises prescribed by your physiotherapist (not usually this early).",
+            `In weeks 1-3, the boot should stay on 24/7. The only exceptions are: brief periods for showering (with extreme care), using a night splint (${
+              mdShopPair("thetis-night-splint")
+            }) if approved by your specialist, or specific exercises prescribed by your physiotherapist (not usually this early).`,
         },
         {
           question: "When can I stop using crutches?",
@@ -1095,15 +1133,29 @@ export const content: GuideContent = {
       type: "checklist",
       items: [
         { text: "Attend your specialist appointment", checked: false },
-        { text: "Understand your treatment decision (surgery vs non-surgical)", checked: false },
+        {
+          text: "Understand your treatment decision (surgery vs non-surgical)",
+          checked: false,
+        },
         { text: "Get properly fitted for your walking boot", checked: false },
         { text: "Learn your wedge removal schedule", checked: false },
-        { text: "Continue blood thinning medication as prescribed", checked: false },
-        { text: "Purchase essential recovery items (night splint, shoe leveler)", checked: false },
+        {
+          text: "Continue blood thinning medication as prescribed",
+          checked: false,
+        },
+        {
+          text: `Purchase essential recovery items (night splint ${
+            mdShopPair("thetis-night-splint")
+          }, shoe leveler ${mdShopPair("evenup-leveler")})`,
+          checked: false,
+        },
         { text: "Practice walking safely in the boot", checked: false },
         { text: "Keep the boot on 24/7", checked: false },
         { text: "Elevate and ice as needed", checked: false },
-        { text: "Know the warning signs for DVT and infection", checked: false },
+        {
+          text: "Know the warning signs for DVT and infection",
+          checked: false,
+        },
       ],
     },
     {

@@ -1,10 +1,12 @@
 import type { SectionContent } from "@/components/course/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 import SeatedCalfRaisePhase1 from "@/assets/seated-protected-heel-raises.png";
 
 export const metadata = {
   slug: "building-strength-in-boot",
   title: "Building Strength While in Boot",
-  description: "Stage 1 exercises, mobilisation progression, and preparing for Stage 2",
+  description:
+    "Stage 1 exercises, mobilisation progression, and preparing for Stage 2",
   status: "drafting" as const,
 };
 
@@ -22,19 +24,25 @@ export const content: SectionContent = {
       title: "Building strength basics",
       items: [
         {
-          text: "Stage 1 exercises only when protected (heel wedge) or supervised — check with clinician",
+          text:
+            "Stage 1 exercises only when protected (heel wedge) or supervised — check with clinician",
         },
         {
-          text: "Follow mobilisation protocol — progress gradually as your clinician allows",
+          text:
+            "Follow mobilisation protocol — progress gradually as your clinician allows",
         },
         {
-          text: "Focus on proper gait — heel-to-toe pattern, use EVENup to prevent back/hip pain",
+          text: `Focus on proper gait — heel-to-toe pattern, use EVENup (${
+            mdShopPair("evenup-leveler")
+          }) to prevent back/hip pain`,
         },
         {
-          text: "Understand Stage 2 goals — but don't skip ahead; follow your protocol",
+          text:
+            "Understand Stage 2 goals — but don't skip ahead; follow your protocol",
         },
         {
-          text: "Be patient — strength builds gradually, consistency matters more than intensity",
+          text:
+            "Be patient — strength builds gradually, consistency matters more than intensity",
         },
       ],
     },
@@ -57,7 +65,8 @@ export const content: SectionContent = {
         {
           type: "card",
           title: "Stage 1 exercises: What to do",
-          description: "Exercises you can begin once your tendon has had time to heal.",
+          description:
+            "Exercises you can begin once your tendon has had time to heal.",
           variant: "highlight",
           content: [
             {
@@ -79,7 +88,8 @@ export const content: SectionContent = {
             {
               type: "image",
               src: SeatedCalfRaisePhase1,
-              alt: "Illustration showing seated calf raise with heel wedge or support under foot to keep it pointed down (protected position), weight on knee",
+              alt:
+                "Illustration showing seated calf raise with heel wedge or support under foot to keep it pointed down (protected position), weight on knee",
               caption:
                 "Seated calf raise — foot must stay in protected position (heel wedge or support)",
             },
@@ -161,7 +171,9 @@ export const content: SectionContent = {
         {
           type: "text",
           content:
-            "Your walking pattern (gait) matters. A good gait protects your tendon, prevents other injuries, and helps you recover faster. A poor gait can cause back pain, hip pain, and slow your recovery. **Important:** Your boot adds 3-5cm of height to one leg, creating uneven hips. Use an **EVENup shoe leveler** on your uninjured foot to maintain proper alignment and prevent back, hip, and knee pain.",
+            `Your walking pattern (gait) matters. A good gait protects your tendon, prevents other injuries, and helps you recover faster. A poor gait can cause back pain, hip pain, and slow your recovery. **Important:** Your boot adds 3-5cm of height to one leg, creating uneven hips. Use an **EVENup shoe leveler** (${
+              mdShopPair("evenup-leveler")
+            }) on your uninjured foot to maintain proper alignment and prevent back, hip, and knee pain.`,
         },
         {
           type: "card",
@@ -301,7 +313,9 @@ export const content: SectionContent = {
             "**Stage 1 exercises only when protected or supervised** — heel wedge, support, or clinician supervision; never boot off with foot unsupported",
             "**Start at Week 6** (or when clinician says) — seated calf raises build strength safely",
             "**Follow mobilisation protocol** — don't rush ahead",
-            "**Focus on good gait** — heel-to-toe pattern, use EVENup to prevent back/hip pain",
+            `**Focus on good gait** — heel-to-toe pattern, use EVENup (${
+              mdShopPair("evenup-leveler")
+            }) to prevent back/hip pain`,
             "**Don't skip ahead** — Stage 2 starts when your clinician says you're ready",
             "**Be patient** — strength builds gradually",
           ],

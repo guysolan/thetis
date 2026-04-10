@@ -1,0 +1,12 @@
+{
+  "name": "@thetis/dub-sync",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "bun run ./generate.ts",
+    "replace": "bun run ./replace.ts"
+  },
+  "dependencies": {
+    "@thetis/catalogue": "workspace:*"
+  }
+}

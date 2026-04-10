@@ -55,6 +55,7 @@
     "@radix-ui/react-toggle": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.1.8",
     "@supabase/supabase-js": "^2.48.1",
+    "@thetis/catalogue": "workspace:*",
     "@thetis/ui": "workspace:*",
     "@types/marked": "^4.0.8",
     "@types/react": "^18.2.15",

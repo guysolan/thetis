@@ -1,4 +1,5 @@
 import type { FAQItem, SectionContent } from "@/components/course/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 import ThetisNightSplint from "@/assets/thetis-splint.jpg";
 import MerinoSocks from "@/assets/merino-socks.webp";
 import Antifungal from "@/assets/antifungal.jpg";
@@ -7,7 +8,8 @@ import BathroomSafetyAchillesCrutches from "@/assets/bathroom-safety-achilles-cr
 export const metadata = {
   slug: "washing-and-hygiene",
   title: "Washing and Foot Hygiene",
-  description: "Washing safely, skin care, preventing infections, and bathroom safety",
+  description:
+    "Washing safely, skin care, preventing infections, and bathroom safety",
   status: "drafting" as const,
 };
 
@@ -15,12 +17,16 @@ export const faqs: FAQItem[] = [
   {
     question: "My foot smells terrible — is this normal?",
     answer:
-      "Yes, unfortunately. Your foot is trapped in a warm, moist environment for weeks. Use antifungal powder daily, wear merino socks, change socks frequently, and air the boot out when resting. If you develop itchy, flaky skin between your toes or around your nails, you may have a fungal infection — treat it early with over-the-counter antifungal cream.",
+      `Yes, unfortunately. Your foot is trapped in a warm, moist environment for weeks. Use antifungal powder daily, wear merino socks (${
+        mdShopPair("merino-wool-socks")
+      }), change socks frequently, and air the boot out when resting. If you develop itchy, flaky skin between your toes or around your nails, you may have a fungal infection — treat it early with over-the-counter antifungal cream.`,
   },
   {
     question: "How often should I wash my foot?",
     answer:
-      "Ideally daily, but this depends on your protocol. If you can use a night splint for washing, sit on a shower stool and shower normally. If not, use seated washing (with a long-handled sponge and basin) or baby wipes between proper washes. Always sit when washing, keep your foot toes-down, and dry thoroughly with a hairdryer on cool. The key is keeping your foot as clean as possible while maintaining protection.",
+      `Ideally daily, but this depends on your protocol. If you can use a night splint (${
+        mdShopPair("thetis-night-splint")
+      }) for washing, sit on a shower stool and shower normally. If not, use seated washing (with a long-handled sponge and basin) or baby wipes between proper washes. Always sit when washing, keep your foot toes-down, and dry thoroughly with a hairdryer on cool. The key is keeping your foot as clean as possible while maintaining protection.`,
   },
 ];
 
@@ -39,28 +45,36 @@ export const content: SectionContent = {
       title: "Hygiene essentials",
       items: [
         {
-          text: "Sit when washing — never stand in the shower; use a shower stool",
+          text:
+            "Sit when washing — never stand in the shower; use a shower stool",
         },
         {
-          text: "Dry your foot thoroughly — hairdryer on cool setting after washing",
+          text:
+            "Dry your foot thoroughly — hairdryer on cool setting after washing",
         },
         {
-          text: "Use antifungal powder daily — sprinkle inside boot liner to prevent infections",
+          text:
+            "Use antifungal powder daily — sprinkle inside boot liner to prevent infections",
         },
         {
           text: "Wear cotton or merino socks (not nylon) — change daily",
         },
         {
-          text: "Set up bathroom safety — non-slip mat, shower stool, OT aids (long-handled sponge, grab bars)",
+          text:
+            "Set up bathroom safety — non-slip mat, shower stool, OT aids (long-handled sponge, grab bars)",
         },
         {
-          text: "Consider a [night splint](/standard/sleeping-with-boot) for washing — allows proper foot washing while seated",
+          text: `Consider a [night splint](/standard/sleeping-with-boot) (${
+            mdShopPair("thetis-night-splint")
+          }) for washing — allows proper foot washing while seated`,
         },
         {
-          text: "Keep foot toes-down when boot is off — never let ankle go flat",
+          text:
+            "Keep foot toes-down when boot is off — never let ankle go flat",
         },
         {
-          text: "Check your skin daily — look for redness, blisters, or fungal patches",
+          text:
+            "Check your skin daily — look for redness, blisters, or fungal patches",
         },
       ],
     },
@@ -76,7 +90,8 @@ export const content: SectionContent = {
         {
           type: "image",
           src: BathroomSafetyAchillesCrutches,
-          alt: "Simple bathroom diagram showing non-slip mat, shower chair, and dry clear floor to reduce falls while on crutches",
+          alt:
+            "Simple bathroom diagram showing non-slip mat, shower chair, and dry clear floor to reduce falls while on crutches",
           caption:
             "Bathroom safety setup: non-slip mat, shower chair, clear dry floor, and crutches stored upside-down",
         },
@@ -114,12 +129,15 @@ export const content: SectionContent = {
             {
               type: "text",
               content:
-                "A **[night splint](/standard/sleeping-with-boot)** (like the Thetis splint) is particularly useful for washing because it keeps your foot protected in the correct angle (toes-down) while allowing water to reach your skin. **Sit** on a shower stool, shower normally, then dry your foot thoroughly (hairdryer on cool) before switching back to the boot.",
+                `A **[night splint](/standard/sleeping-with-boot)** (like the Thetis splint, ${
+                  mdShopPair("thetis-night-splint")
+                }) is particularly useful for washing because it keeps your foot protected in the correct angle (toes-down) while allowing water to reach your skin. **Sit** on a shower stool, shower normally, then dry your foot thoroughly (hairdryer on cool) before switching back to the boot.`,
             },
             {
               type: "product-image",
               src: ThetisNightSplint,
-              alt: "Thetis night splint - a lightweight teal and black medical splint for sleeping",
+              alt:
+                "Thetis night splint - a lightweight teal and black medical splint for sleeping",
               caption: "Thetis Night Splint",
             },
             {
@@ -154,7 +172,9 @@ export const content: SectionContent = {
               type: "list",
               style: "bullet",
               items: [
-                "**Waterproof boot covers** — products like Limbo or dry cast covers let you shower with the boot on, but your foot stays enclosed and still gets sweaty",
+                `**Waterproof boot covers** (${
+                  mdShopPair("waterproof-boot-cover")
+                }) — e.g. Limbo-style or dry cast covers let you shower with the boot on, but your foot stays enclosed and still gets sweaty`,
                 "**Seated washing** — sit on a shower stool, keep your leg out of the water, and wash your foot separately using a basin and cloth. Use a long-handled sponge to reach your foot.",
                 "**Baby wipes** — quick refresher for your foot between proper washes. Not a substitute for actual washing, but better than nothing",
               ],
@@ -192,7 +212,8 @@ export const content: SectionContent = {
             {
               type: "product-image",
               src: Antifungal,
-              alt: "Antifungal powder for preventing foot infections in walking boots",
+              alt:
+                "Antifungal powder for preventing foot infections in walking boots",
               caption: "Antifungal powder",
             },
             {
@@ -205,14 +226,17 @@ export const content: SectionContent = {
             {
               type: "product-image",
               src: MerinoSocks,
-              alt: "Merino wool socks for temperature regulation and moisture wicking",
+              alt:
+                "Merino wool socks for temperature regulation and moisture wicking",
               caption: "Merino wool socks",
             },
             {
               type: "list",
               style: "bullet",
               items: [
-                "**Cotton or merino wool socks** — not nylon (nylon slips and doesn't absorb well). Merino is ideal: naturally antibacterial, regulates temperature, reduces odour. Cost: £10–25 ($20–35).",
+                `**Cotton or merino wool socks** (${
+                  mdShopPair("merino-wool-socks")
+                }) — not nylon (nylon slips and doesn't absorb well). Merino is ideal: naturally antibacterial, regulates temperature, reduces odour. Cost: £10–25 ($20–35).`,
                 "**Change socks daily** — or twice daily if you're sweating heavily. Have several pairs ready.",
                 "**Air the boot out** — when you're resting, loosen the straps and let air circulate. Remove the liner if possible and let it dry.",
                 "**Check your skin** — look for red patches, blisters, or fungal patches (itchy, flaky, white skin between toes). Catch problems early.",
@@ -291,7 +315,9 @@ export const content: SectionContent = {
               type: "list",
               style: "bullet",
               items: [
-                "**What helps:** Elevation, ice (20-30 minutes), remove boot briefly if protocol allows, lighter socks, keep room cooler, night splint for sleeping",
+                `**What helps:** Elevation, ice (20-30 minutes), remove boot briefly if protocol allows, lighter socks, keep room cooler, night splint for sleeping (${
+                  mdShopPair("thetis-night-splint")
+                })`,
               ],
             },
             {

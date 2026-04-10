@@ -3,8 +3,11 @@ import type { SplintData } from "../types/splint";
 // Mock data based on actual Google Sheets structure
 const getMockSplintData = (region: "us" | "uk" | "au"): SplintData[] => {
   // US/UK: match Shopify; AU: see `data/splintPricing.ts` retailPricing.AU (partner region)
-  const price =
-    region === "us" ? "93.99 USD" : region === "uk" ? "63.99 GBP" : "169.99 AUD";
+  const price = region === "us"
+    ? "93.99 USD"
+    : region === "uk"
+    ? "63.99 GBP"
+    : "169.99 AUD";
 
   console.log(`getMockSplintData called with region: ${region}`);
   console.log(`Setting price to: ${price}`);
@@ -18,9 +21,10 @@ const getMockSplintData = (region: "us" | "uk" | "au"): SplintData[] => {
       availability: "in_stock",
       "availability date": "",
       "expiration date": "",
-      link: "https://www.thetismedical.com/splint",
+      link: "https://dub.sh/mmkrz0Z",
       "mobile link": "",
-      "image link": "https://www.thetismedical.com/images/night_splint_bed_top_square.jpg",
+      "image link":
+        "https://www.thetismedical.com/images/night_splint_bed_top_square.jpg",
       price: price,
       "sale price": "",
       "sale price effective date": "",
@@ -59,9 +63,10 @@ const getMockSplintData = (region: "us" | "uk" | "au"): SplintData[] => {
       availability: "in_stock",
       "availability date": "",
       "expiration date": "",
-      link: "https://www.thetismedical.com/splint",
+      link: "https://dub.sh/mmkrz0Z",
       "mobile link": "",
-      "image link": "https://www.thetismedical.com/images/night_splint_bed_top_square.jpg",
+      "image link":
+        "https://www.thetismedical.com/images/night_splint_bed_top_square.jpg",
       price: price,
       "sale price": "",
       "sale price effective date": "",
@@ -100,9 +105,10 @@ const getMockSplintData = (region: "us" | "uk" | "au"): SplintData[] => {
       availability: "in_stock",
       "availability date": "",
       "expiration date": "",
-      link: "https://www.thetismedical.com/splint",
+      link: "https://dub.sh/mmkrz0Z",
       "mobile link": "",
-      "image link": "https://www.thetismedical.com/images/night_splint_bed_top_square.jpg",
+      "image link":
+        "https://www.thetismedical.com/images/night_splint_bed_top_square.jpg",
       price: price,
       "sale price": "",
       "sale price effective date": "",
@@ -141,9 +147,10 @@ const getMockSplintData = (region: "us" | "uk" | "au"): SplintData[] => {
       availability: "in_stock",
       "availability date": "",
       "expiration date": "",
-      link: "https://www.thetismedical.com/splint",
+      link: "https://dub.sh/mmkrz0Z",
       "mobile link": "",
-      "image link": "https://www.thetismedical.com/images/night_splint_bed_top_square.jpg",
+      "image link":
+        "https://www.thetismedical.com/images/night_splint_bed_top_square.jpg",
       price: price,
       "sale price": "",
       "sale price effective date": "",
@@ -177,11 +184,12 @@ const getMockSplintData = (region: "us" | "uk" | "au"): SplintData[] => {
   ];
 };
 
-export async function getSplintData(region: "us" | "uk" | "au" = "us"): Promise<SplintData[]> {
-  const sheetId =
-    region === "uk"
-      ? "1RmRBaMtftsddPPIbz3mAjBp9RidRlSCZxdSDTwbilTA" // UK sheet ID
-      : "1vTazj-qdD5S5VWdjB1epNwQ9Y66RQu-gqZWsdrBb2bY"; // US sheet ID (also used for AU — English catalogue)
+export async function getSplintData(
+  region: "us" | "uk" | "au" = "us",
+): Promise<SplintData[]> {
+  const sheetId = region === "uk"
+    ? "1RmRBaMtftsddPPIbz3mAjBp9RidRlSCZxdSDTwbilTA" // UK sheet ID
+    : "1vTazj-qdD5S5VWdjB1epNwQ9Y66RQu-gqZWsdrBb2bY"; // US sheet ID (also used for AU — English catalogue)
 
   console.log(`Attempting to fetch data for region: ${region}`);
   console.log(`Sheet ID: ${sheetId}`);

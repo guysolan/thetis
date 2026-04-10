@@ -72,7 +72,7 @@ The UKSTAR trial<sup>[1]</sup>, led by [Professor Matthew Costa](https://www.ndo
 - There is potential for reduced healthcare costs.
 - May improve patient satisfaction due to earlier mobility.
 
-Note: Using boots also opens up options for improved patient recovery experience from complimentary products including the [Thetis Medical Night Splint](https://www.thetismedical.com/night-splint/) and [Evenup](https://opedmedical.com/products/evenup/).
+Note: Using boots also opens up options for improved patient recovery experience from complimentary products including the [Thetis Medical Night Splint](https://dub.sh/mmkrz0Z) and [Evenup](https://dub.sh/QF7vvKC).
 
 ### For Patients
 
@@ -135,7 +135,7 @@ Major brands in the functional brace market, such as **DJO Global (Aircast)**, *
 - **Highlighting the research:** Marketing materials should emphasize the UKSTAR trial results, demonstrating the effectiveness and cost-effectiveness of functional braces.
 - **Collaboration with healthcare providers:** Partnering with hospitals and clinics to offer training and resources on functional bracing protocols.
 - **Product Development**: Consider the role of adjunct products in the recovery process.
-  - Night splints, like the [Thetis Medical Night Splint](https://www.thetismedical.com/splint/), can help maintain plantar-flexion during sleep.
+  - Night splints, like the [Thetis Medical Night Splint](https://dub.sh/mmkrz0Z), can help maintain plantar-flexion during sleep.
   - Heel wedges can be gradually reduced to ease the tendon back to its normal length.
   - Shoe balancers, like the Evenup, can help to equalize leg length discrepancy caused by the boot.
 

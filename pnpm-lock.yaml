@@ -72,6 +72,9 @@ importers:
       '@astrojs/tailwind':
         specifier: ^5.1.5
         version: 5.1.5(astro@5.18.1)(tailwindcss@3.4.19)
+      '@thetis/catalogue':
+        specifier: workspace:*
+        version: link:../../packages/catalogue
       '@thetis/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -144,6 +147,9 @@ importers:
       '@tanstack/react-router':
         specifier: ^1.85.0
         version: 1.167.5(react-dom@18.3.1)(react@18.3.1)
+      '@thetis/catalogue':
+        specifier: workspace:*
+        version: link:../../packages/catalogue
       '@thetis/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -630,6 +636,9 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.48.1
         version: 2.99.3
+      '@thetis/catalogue':
+        specifier: workspace:*
+        version: link:../../packages/catalogue
       '@thetis/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -784,6 +793,8 @@ importers:
       '@vercel/functions':
         specifier: ^1.4.1
         version: 1.6.0
+
+  packages/catalogue: {}
 
   packages/email:
     dependencies:
@@ -1014,6 +1025,12 @@ importers:
       '@google-analytics/data':
         specifier: ^4.12.0
         version: 4.12.1
+
+  services/dub:
+    dependencies:
+      '@thetis/catalogue':
+        specifier: workspace:*
+        version: link:../../packages/catalogue
 
   services/knock: {}
 

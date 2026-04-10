@@ -1,4 +1,5 @@
-import type { GuideMetadata, GuideContent } from "@/components/guide/types";
+import type { GuideContent, GuideMetadata } from "@/components/guide/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 
 export const metadata: GuideMetadata = {
   slug: "weeks-10-12",
@@ -78,7 +79,12 @@ export const content: GuideContent = {
         ["Day 2-3", "Increase to 3-4 hours in shoes"],
         ["Day 4-5", "Majority of day in shoes"],
         ["Day 6-7", "Full transition to shoes during day"],
-        ["Night", "May still use night splint for additional protection"],
+        [
+          "Night",
+          `May still use night splint (${
+            mdShopPair("thetis-night-splint")
+          }) for additional protection`,
+        ],
       ],
     },
     {
@@ -95,7 +101,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "Those first steps out of the boot are momentous - and often wobbly.",
+      content:
+        "Those first steps out of the boot are momentous - and often wobbly.",
     },
     {
       type: "text",
@@ -186,7 +193,9 @@ export const content: GuideContent = {
             "**Heel-to-toe drop:** 10mm or more (NOT flat shoes)",
             "**Heel cushioning:** Good shock absorption",
             "**Heel counter:** Firm support at the back",
-            "**Fit:** Snug but not tight, with room for heel lifts",
+            `**Fit:** Snug but not tight, with room for heel lifts (${
+              mdShopPair("adjustable-heel-lifts-b0ctml6gnd")
+            })`,
             "**Closure:** Laces preferred for adjustable fit",
             "**Sole:** Slightly firm, not too flexible",
           ],
@@ -204,7 +213,9 @@ export const content: GuideContent = {
         "Running or walking shoes with 10mm+ heel drop",
         "Shoes with firm heel counter",
         "Lace-up shoes for adjustable fit",
-        "Consider adding 0.5-1cm gel heel lift initially",
+        `Consider adding 0.5-1cm gel heel lift initially — ${
+          mdShopPair("adjustable-heel-lifts-b0ctml6gnd")
+        }`,
       ],
       donts: [
         "Completely flat shoes (ballet flats, Converse)",
@@ -218,8 +229,11 @@ export const content: GuideContent = {
     {
       type: "tip",
       title: "Using Heel Lifts",
-      content:
-        "Consider adding a 0.5-1cm gel heel lift initially. This eases the transition from the boot's heel elevation. Gradually reduce/remove over 2-4 weeks.",
+      content: `Consider adding a 0.5-1cm gel heel lift initially (${
+        mdShopPair(
+          "adjustable-heel-lifts-b0ctml6gnd",
+        )
+      }). This eases the transition from the boot's heel elevation. Gradually reduce/remove over 2-4 weeks.`,
     },
 
     // Starting Physiotherapy
@@ -235,7 +249,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "Your first physiotherapy session sets the foundation for your rehabilitation.",
+      content:
+        "Your first physiotherapy session sets the foundation for your rehabilitation.",
     },
     {
       type: "text",
@@ -277,7 +292,11 @@ export const content: GuideContent = {
       type: "list",
       style: "numbered",
       items: [
-        "**Protected walking** - Use heel wedge, reduced step length. Elongation can still happen in first weeks of walking",
+        `**Protected walking** - Use a heel lift or wedge in your shoe (${
+          mdShopPair(
+            "adjustable-heel-lifts-b0ctml6gnd",
+          )
+        }), reduced step length. Elongation can still happen in first weeks of walking`,
         "**Begin calf activation** - Continue building on early strengthening work. Target: 1.2x body weight seated isotonic",
         "**Improve balance** - Rebuild proprioception (body awareness) in the ankle",
         "**Normalise gait** - Correct any limping or compensatory patterns",
@@ -293,7 +312,11 @@ export const content: GuideContent = {
           type: "list",
           style: "bullet",
           items: [
-            "**Heel wedge:** Use a heel lift initially (0.5-1cm), eases transition, gradually reduce over 2-4 weeks",
+            `**Heel wedge / lift:** Use a heel lift initially (0.5-1cm, ${
+              mdShopPair(
+                "adjustable-heel-lifts-b0ctml6gnd",
+              )
+            }), eases transition, gradually reduce over 2-4 weeks`,
             "**Reduced step length:** Use step-to gait on unaffected side, shorter steps reduce force through tendon",
             "**Partial weightbearing:** If you can't push off properly, you're not ready. Use crutches until gait is normal",
           ],
@@ -348,7 +371,8 @@ export const content: GuideContent = {
     {
       type: "card",
       title: "1. Towel Calf Stretch (Gentle)",
-      description: "Gently improve ankle dorsiflexion - only when physio approves",
+      description:
+        "Gently improve ankle dorsiflexion - only when physio approves",
       variant: "muted",
       content: [
         {
@@ -531,10 +555,15 @@ export const content: GuideContent = {
         {
           question: "Is it normal to limp at first?",
           answer:
-            "Some initial limp is common but should improve quickly over the first week or two. If you're still limping significantly after 2 weeks in shoes, discuss with your physiotherapist. Use protected walking strategies (heel lift, reduced step length) initially.",
+            `Some initial limp is common but should improve quickly over the first week or two. If you're still limping significantly after 2 weeks in shoes, discuss with your physiotherapist. Use protected walking strategies (heel lift ${
+              mdShopPair(
+                "adjustable-heel-lifts-b0ctml6gnd",
+              )
+            }, reduced step length) initially.`,
         },
         {
-          question: "My calf looks much smaller than the other side - is this normal?",
+          question:
+            "My calf looks much smaller than the other side - is this normal?",
           answer:
             "Yes, significant calf muscle atrophy is completely normal after 10+ weeks of immobilisation. This is exactly what rehabilitation addresses. It takes months to rebuild - be patient.",
         },
@@ -573,13 +602,21 @@ export const content: GuideContent = {
         { text: "Get specialist clearance for boot removal", checked: false },
         { text: "Follow graduated boot weaning protocol", checked: false },
         { text: "Purchase appropriate transition footwear", checked: false },
-        { text: "Use heel lifts initially (gradually reduce)", checked: false },
+        {
+          text: `Use heel lifts initially (${
+            mdShopPair("adjustable-heel-lifts-b0ctml6gnd")
+          }) — gradually reduce`,
+          checked: false,
+        },
         { text: "Start physiotherapy", checked: false },
         { text: "Begin home exercise programme", checked: false },
         { text: "Practice protected walking", checked: false },
         { text: "Do exercises DAILY as prescribed", checked: false },
         { text: "Monitor for warning signs", checked: false },
-        { text: "Be patient - this is a marathon, not a sprint", checked: false },
+        {
+          text: "Be patient - this is a marathon, not a sprint",
+          checked: false,
+        },
       ],
     },
     {

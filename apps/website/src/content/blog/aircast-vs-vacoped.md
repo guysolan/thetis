@@ -78,7 +78,7 @@ The Aircast uses **removable foam wedges** stacked under your heel. You start wi
 - Lightweight and widely available — the standard in most NHS hospitals
 - Simple to adjust — just pull out a wedge
 - Costs around **£120–£150** ($150–$190)
-- Not waterproof (you'll need a [waterproof cover](https://limboproducts.co.uk/shop/) for showering)
+- Not waterproof (you'll need a [waterproof cover](https://dub.sh/fZ1Da7j) for showering)
 - Air-filled bladders provide customisable compression and help control swelling
 
 The main concern with the Aircast is that research shows much of the "toes-down" bend happens through the **midfoot** rather than at the ankle joint itself. This means the tendon may not be in quite as protected a position as it appears from the outside.
@@ -92,7 +92,7 @@ The VACOped uses an **adjustable hinge mechanism** on the side of the boot, cont
 - Vacuum-bead liner moulds to your leg shape for a snug fit
 - Can be used in water (with the backup liner — fiddly but possible)
 - Costs around **£300** ($375)
-- Heavier and bulkier than the Aircast — some patients also purchase an [EVENup shoe leveler](https://www.amazon.com/EVENup-Shoe-Balancer-Leveler-Large/dp/B08FX2T2TF) for the opposite foot
+- Heavier and bulkier than the Aircast — some patients also purchase an [EVENup shoe leveler](https://dub.sh/Tce7MYz) for the opposite foot
 
 The VACOped's hinge creates a true ankle bend, meaning the tendon position may be more accurate. Its dynamic range of motion later in recovery may also help reduce muscle wasting, though clinical evidence for this is still limited.
 
@@ -156,7 +156,7 @@ Most patients find sleeping in a heavy walking boot miserable — it's hot, bulk
 
 ### Showering
 
-The **Aircast** is not waterproof — you'll need a [waterproof boot cover](https://limboproducts.co.uk/shop/) like the Limbo, or you can sit on a stool and keep the boot out of the water.
+The **Aircast** is not waterproof — you'll need a [waterproof boot cover](https://dub.sh/fZ1Da7j) like the Limbo, or you can sit on a stool and keep the boot out of the water.
 
 The **VACOped** can technically go in water, but it requires removing the inner lining and using the backup liner. Patients describe this as fiddly but workable. Some find it useful for pool-based physiotherapy later in recovery.
 

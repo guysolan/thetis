@@ -1,4 +1,5 @@
 import type { FAQItem, SectionContent } from "@/components/course/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 import ThetisNightSplint from "@/assets/night-splint-bed-top-square.jpg";
 
 export const metadata = {
@@ -12,7 +13,9 @@ export const faqs: FAQItem[] = [
   {
     question: "Can I take the boot off to sleep if I use a night splint?",
     answer:
-      "Usually yes, but check with your clinician first. Most protocols allow a night splint once you're past the very early stage (usually after week 2–3). The splint must maintain the correct angle — it's not the same as going unprotected. Never remove all protection while sleeping during the boot stage.",
+      `Usually yes, but check with your clinician first. Most protocols allow a night splint once you're past the very early stage (usually after week 2–3). The splint must maintain the correct angle — it's not the same as going unprotected. Never remove all protection while sleeping during the boot stage. Shop: ${
+        mdShopPair("thetis-night-splint")
+      }.`,
   },
   {
     question: "Will I ever sleep normally again?",
@@ -36,16 +39,20 @@ export const content: SectionContent = {
       title: "Sleep essentials",
       items: [
         {
-          text: "Consider a night splint — 80% of patients struggle to sleep in their boot",
+          text: `Consider a night splint (${
+            mdShopPair("thetis-night-splint")
+          }) — 80% of patients struggle to sleep in their boot`,
         },
         {
-          text: "Set up proper positioning — sleep on your back with leg elevated",
+          text:
+            "Set up proper positioning — sleep on your back with leg elevated",
         },
         {
           text: "Control temperature — keep room cool, use light bedding",
         },
         {
-          text: "Keep crutches by your bed — safer for night-time bathroom trips",
+          text:
+            "Keep crutches by your bed — safer for night-time bathroom trips",
         },
         {
           text: "Never remove boot while sleeping — always use protection",
@@ -64,7 +71,8 @@ export const content: SectionContent = {
         {
           type: "card",
           title: "Why sleep matters",
-          description: "Poor sleep isn't just uncomfortable — it affects your daily life.",
+          description:
+            "Poor sleep isn't just uncomfortable — it affects your daily life.",
           variant: "muted",
           content: [
             {
@@ -87,12 +95,15 @@ export const content: SectionContent = {
             {
               type: "text",
               content:
-                "A **night splint** (like the Thetis splint) is a lightweight device that keeps your foot in the correct angle while being much more comfortable than the full boot. It's specifically designed for sleeping and washing.",
+                `A **night splint** (like the Thetis splint) is a lightweight device that keeps your foot in the correct angle while being much more comfortable than the full boot. It's specifically designed for sleeping and washing. Shop: ${
+                  mdShopPair("thetis-night-splint")
+                }.`,
             },
             {
               type: "product-image",
               src: ThetisNightSplint,
-              alt: "Thetis night splint - a lightweight teal and black medical splint for sleeping",
+              alt:
+                "Thetis night splint - a lightweight teal and black medical splint for sleeping",
               caption: "Thetis Night Splint",
             },
             {
@@ -109,7 +120,9 @@ export const content: SectionContent = {
             {
               type: "text",
               content:
-                "**Cost:** £60–70 ($90–120). The only night splint specifically designed for Achilles rupture recovery. Patented in 2024.",
+                `**Cost:** £60–70 ($90–120). The only night splint specifically designed for Achilles rupture recovery. Patented in 2024. Shop: ${
+                  mdShopPair("thetis-night-splint")
+                }.`,
             },
             {
               type: "text",
@@ -129,7 +142,9 @@ export const content: SectionContent = {
               variant: "danger",
               title: "Critical: Never remove your boot while sleeping",
               content:
-                "**Removing your boot while sleeping is NOT safe and can cause serious damage.** During the boot stage, you need protection 24/7 to keep the tendon ends together. Sleeping without protection is one of the most common causes of re-rupture or tendon elongation. If you're struggling with sleep, use a night splint (with specialist approval) or try the strategies below — but never sleep without protection.",
+                `**Removing your boot while sleeping is NOT safe and can cause serious damage.** During the boot stage, you need protection 24/7 to keep the tendon ends together. Sleeping without protection is one of the most common causes of re-rupture or tendon elongation. If you're struggling with sleep, use a night splint (${
+                  mdShopPair("thetis-night-splint")
+                }) with specialist approval, or try the strategies below — but never sleep without protection.`,
             },
             {
               type: "text",
@@ -162,7 +177,9 @@ export const content: SectionContent = {
                 "**Keep room cool** — boots make you hot, cool environment helps",
                 "**Use light bedding** — avoid heavy duvets that trap heat",
                 "**Fan or air conditioning** — helps regulate temperature",
-                "**Merino wool socks** — regulate temperature better than cotton",
+                `**Merino wool socks** (${
+                  mdShopPair("merino-wool-socks")
+                }) — regulate temperature better than cotton`,
               ],
             },
             {

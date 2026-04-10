@@ -1,4 +1,5 @@
-import type { GuideMetadata, GuideContent } from "@/components/guide/types";
+import type { GuideContent, GuideMetadata } from "@/components/guide/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 
 export const metadata: GuideMetadata = {
   slug: "weeks-4-6",
@@ -140,7 +141,8 @@ export const content: GuideContent = {
     },
     {
       type: "quote",
-      text: "Recovery is a game of Snakes and Ladders: Each week sees you climbing closer to the finish. But one mistake - one moment of unprotected dorsiflexion, one premature wedge removal, one slip without your boot - is like landing on the big snake that takes you right back to the beginning.",
+      text:
+        "Recovery is a game of Snakes and Ladders: Each week sees you climbing closer to the finish. But one mistake - one moment of unprotected dorsiflexion, one premature wedge removal, one slip without your boot - is like landing on the big snake that takes you right back to the beginning.",
     },
     {
       type: "text",
@@ -251,7 +253,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "As your foot gradually moves towards neutral, you'll notice changes:",
+      content:
+        "As your foot gradually moves towards neutral, you'll notice changes:",
     },
     {
       type: "text",
@@ -336,8 +339,9 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content:
-        "The EVENup shoe leveler is one of the most important purchases you can make during boot wearing.",
+      content: `The EVENup shoe leveler (${
+        mdShopPair("evenup-leveler")
+      }) is one of the most important purchases you can make during boot wearing.`,
     },
     {
       type: "text",
@@ -350,7 +354,9 @@ export const content: GuideContent = {
         "Your boot adds 3-5cm of height to one leg",
         "This creates uneven hips during walking",
         "Over time, this causes back, hip, and knee pain",
-        "The EVENup equalises your leg length",
+        `The EVENup (${
+          mdShopPair("evenup-leveler")
+        }) equalises your leg length`,
       ],
     },
     {
@@ -373,7 +379,9 @@ export const content: GuideContent = {
     {
       type: "text",
       content:
-        "If you haven't already, weeks 4-6 is typically when you can transition from sleeping in your boot to using a night splint.",
+        `If you haven't already, weeks 4-6 is typically when you can transition from sleeping in your boot to using a night splint — ${
+          mdShopPair("thetis-night-splint")
+        }.`,
     },
     {
       type: "text",
@@ -386,7 +394,9 @@ export const content: GuideContent = {
         "Your specialist has approved its use",
         "Any surgical wounds are fully healed (usually 2-3 weeks post-surgery)",
         "You understand correct application",
-        "You have an Achilles-specific night splint (not a plantar fasciitis splint!)",
+        `You have an Achilles-specific night splint (${
+          mdShopPair("thetis-night-splint")
+        }), not a plantar fasciitis splint`,
       ],
     },
     {
@@ -394,6 +404,12 @@ export const content: GuideContent = {
       title: "The Thetis Night Splint",
       variant: "highlight",
       content: [
+        {
+          type: "text",
+          content: `Typical purchase links: ${
+            mdShopPair("thetis-night-splint")
+          }.`,
+        },
         {
           type: "list",
           style: "bullet",
@@ -437,7 +453,8 @@ export const content: GuideContent = {
     },
     {
       type: "quote",
-      text: "Switching to the night splint was life-changing. I finally got a proper night's sleep after weeks of struggling in the boot.",
+      text:
+        "Switching to the night splint was life-changing. I finally got a proper night's sleep after weeks of struggling in the boot.",
     },
     {
       type: "text",
@@ -507,7 +524,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "After weeks in a boot, skin problems are common but preventable.",
+      content:
+        "After weeks in a boot, skin problems are common but preventable.",
     },
     {
       type: "text",
@@ -538,7 +556,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "One of the most common complaints is that the boot makes your foot hot and sweaty.",
+      content:
+        "One of the most common complaints is that the boot makes your foot hot and sweaty.",
     },
     {
       type: "text",
@@ -548,7 +567,9 @@ export const content: GuideContent = {
       type: "list",
       style: "bullet",
       items: [
-        "**Merino wool socks** are excellent (moisture-wicking and temperature-regulating)",
+        `**Merino wool socks** — ${
+          mdShopPair("merino-wool-socks")
+        } — are excellent (moisture-wicking and temperature-regulating)`,
         "Thin, breathable socks work well",
         "Change socks at least daily",
         "Avoid thick cotton socks (they hold moisture)",
@@ -667,7 +688,8 @@ export const content: GuideContent = {
     },
     {
       type: "text",
-      content: "Don't let the rest of your body decline while your ankle heals.",
+      content:
+        "Don't let the rest of your body decline while your ankle heals.",
     },
     {
       type: "text",
@@ -717,7 +739,9 @@ export const content: GuideContent = {
         {
           question: "My other knee/hip/back is hurting - is this normal?",
           answer:
-            "Unfortunately, yes. Walking asymmetrically in a boot commonly causes compensatory pain. Solutions: use an EVENup shoe leveler, take rest breaks, don't overdo distances, use good walking technique, consider seeing a physiotherapist.",
+            `Unfortunately, yes. Walking asymmetrically in a boot commonly causes compensatory pain. Solutions: use an EVENup shoe leveler (${
+              mdShopPair("evenup-leveler")
+            }), take rest breaks, don't overdo distances, use good walking technique, consider seeing a physiotherapist.`,
         },
         {
           question: "When can I drive?",
@@ -741,16 +765,38 @@ export const content: GuideContent = {
     {
       type: "checklist",
       items: [
-        { text: "Follow wedge removal schedule exactly - don't speed up", checked: false },
-        { text: "Wear boot 24/7 (or night splint for sleeping if approved)", checked: false },
+        {
+          text: "Follow wedge removal schedule exactly - don't speed up",
+          checked: false,
+        },
+        {
+          text: `Wear boot 24/7 (or night splint ${
+            mdShopPair("thetis-night-splint")
+          } for sleeping if approved)`,
+          checked: false,
+        },
         { text: "Continue blood thinners if prescribed", checked: false },
-        { text: "Use EVENup shoe leveler when walking", checked: false },
-        { text: "Manage swelling with elevation and monitoring", checked: false },
+        {
+          text: `Use EVENup shoe leveler when walking (${
+            mdShopPair("evenup-leveler")
+          })`,
+          checked: false,
+        },
+        {
+          text: "Manage swelling with elevation and monitoring",
+          checked: false,
+        },
         { text: "Practice good skin hygiene in the boot", checked: false },
-        { text: "Start gentle in-boot exercises if prescribed", checked: false },
+        {
+          text: "Start gentle in-boot exercises if prescribed",
+          checked: false,
+        },
         { text: "Maintain upper body and core strength", checked: false },
         { text: "Address mental health needs", checked: false },
-        { text: "Prepare for physio (research providers, prepare questions)", checked: false },
+        {
+          text: "Prepare for physio (research providers, prepare questions)",
+          checked: false,
+        },
       ],
     },
     {

@@ -1,3 +1,10 @@
+---
+title: "Webinar transcript (draft): Achilles tendinopathy management"
+description: "Placeholder entry — raw transcript; not published as patient-facing content."
+status: "draft"
+audience: ["patient"]
+---
+
 0:00
 Welcome everyone to today's webinar on advances in tendinopathy management and research. We are thrilled to have
 0:07

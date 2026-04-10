@@ -22,6 +22,8 @@ const PageSchema = z.object({
       ]),
     )
     .optional(),
+  /** Tailwind Typography scale for article body (`lg` default). */
+  proseScale: z.enum(["lg", "xl"]).optional(),
 });
 
 const article = defineCollection({

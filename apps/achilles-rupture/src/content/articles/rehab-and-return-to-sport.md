@@ -139,10 +139,16 @@ _Figure 10: Standing heel rise test for muscular endurance - final assessment of
 
 Based on surgeon and patient feedback we analysed in our [Recovery Equipment Leaderboard](/recovery-equipment-guide), the following products consistently reduced pain and sped up milestones:
 
-- [Thetis Night Splint](https://thetismedical.com/night-splint) – sleep safely without the hot day-boot, reducing accidental dorsiflexion at night
-- [EVENup Shoe Leveler](https://www.amazon.com/dp/B004HY68DO) – balances leg length while you're still in the boot to prevent back & knee pain
-- [Waterproof Boot Cover](https://www.amazon.com/Qinaoco-Waterproof-Non-Slip-Watertight-Protector/dp/B0BZ43M5RD) – keeps the liner dry in the shower, lowering infection risk
-- Progressive [TheraBand resistance bands](https://www.amazon.com/THERABAND-Latex-Yellow-Red-Green/dp/B000LX4KRA) for early isometrics and ROM work
+<p class="not-prose mt-2 flex flex-col gap-2 font-sans text-base leading-snug">
+<a href="https://dub.sh/mmkrz0Z" class="font-bold text-[color:var(--accent,#2337ff)] underline decoration-2 underline-offset-2 hover:opacity-90" target="_blank" rel="noopener noreferrer">🇺🇸 US — Night splint (Thetis Medical)</a>
+<a href="https://dub.sh/QfjDjXQ" class="font-bold text-[color:var(--accent,#2337ff)] underline decoration-2 underline-offset-2 hover:opacity-90" target="_blank" rel="noopener noreferrer">🇬🇧 UK — Night splint (Thetis Medical)</a>
+<a href="https://dub.sh/Tce7MYz" class="font-bold text-[color:var(--accent,#2337ff)] underline decoration-2 underline-offset-2 hover:opacity-90" target="_blank" rel="noopener noreferrer">🇺🇸 US — EVENup shoe leveler (Amazon)</a>
+<a href="https://dub.sh/vCqn9UM" class="font-bold text-[color:var(--accent,#2337ff)] underline decoration-2 underline-offset-2 hover:opacity-90" target="_blank" rel="noopener noreferrer">🇬🇧 UK — EVENup shoe leveler (Amazon)</a>
+<a href="https://dub.sh/AYBbWxm" class="font-bold text-[color:var(--accent,#2337ff)] underline decoration-2 underline-offset-2 hover:opacity-90" target="_blank" rel="noopener noreferrer">🇺🇸 US — Waterproof boot cover (Amazon)</a>
+<a href="https://dub.sh/STvghum" class="font-bold text-[color:var(--accent,#2337ff)] underline decoration-2 underline-offset-2 hover:opacity-90" target="_blank" rel="noopener noreferrer">🇬🇧 UK — LimbO full leg protector</a>
+<a href="https://dub.sh/Y8kOiIX" class="font-bold text-[color:var(--accent,#2337ff)] underline decoration-2 underline-offset-2 hover:opacity-90" target="_blank" rel="noopener noreferrer">🇺🇸 US — TheraBand resistance bands (Amazon)</a>
+<a href="https://dub.sh/q5Q2Wvk" class="font-bold text-[color:var(--accent,#2337ff)] underline decoration-2 underline-offset-2 hover:opacity-90" target="_blank" rel="noopener noreferrer">🇬🇧 UK — TheraBand resistance bands (Amazon)</a>
+</p>
 
 > "Patients who incorporated a purpose-built night splint returned to running **2 weeks sooner** on average." — Sub-analysis, PMC11379499¹
 

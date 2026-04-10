@@ -1,4 +1,5 @@
 import type { FAQItem, SectionContent } from "@/components/course/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 import HeelLifts from "@/assets/heel-lifts.jpg";
 import GradualWeaningComparison from "@/assets/gradual-weaning-process-comparison-v1.png";
 
@@ -29,7 +30,9 @@ export const faqs: FAQItem[] = [
   {
     question: "Can I keep using my night splint?",
     answer:
-      "Yes — some patients like to continue using their [night splint](/standard/sleeping-with-boot) for a few weeks after boot removal. It's optional but can provide reassurance.",
+      `Yes — some patients like to continue using their [night splint](/standard/sleeping-with-boot) (${
+        mdShopPair("thetis-night-splint")
+      }) for a few weeks after boot removal. It's optional but can provide reassurance.`,
   },
 ];
 
@@ -48,16 +51,20 @@ export const content: SectionContent = {
       title: "Post-boot essentials",
       items: [
         {
-          text: "Wait for clearance — don't remove your boot without your clinician's approval",
+          text:
+            "Wait for clearance — don't remove your boot without your clinician's approval",
         },
         {
-          text: "Choose supportive shoes — with heel-to-toe drop, room for heel lifts",
+          text:
+            "Choose supportive shoes — with heel-to-toe drop, room for heel lifts",
         },
         {
-          text: "Use heel lifts initially — 0.5-1cm, gradually reduce over 2-4 weeks",
+          text:
+            "Use heel lifts initially — 0.5-1cm, gradually reduce over 2-4 weeks",
         },
         {
-          text: "Manage stiffness gently — gentle movements and heat, NOT aggressive stretching",
+          text:
+            "Manage stiffness gently — gentle movements and heat, NOT aggressive stretching",
         },
         {
           text: "Control swelling — elevate when resting, ice if needed",
@@ -77,10 +84,16 @@ export const content: SectionContent = {
           type: "table",
           headers: ["Criteria", "What It Means"],
           rows: [
-            ["**Tendon strength**", "Ability to do seated calf raises with ~0.8-1x body weight"],
+            [
+              "**Tendon strength**",
+              "Ability to do seated calf raises with ~0.8-1x body weight",
+            ],
             ["**Neutral position**", "You're at 0 wedges and comfortable"],
             ["**Swelling controlled**", "Swelling is manageable"],
-            ["**No complications**", "No signs of infection or pressure issues"],
+            [
+              "**No complications**",
+              "No signs of infection or pressure issues",
+            ],
           ],
         },
         {
@@ -98,7 +111,8 @@ export const content: SectionContent = {
       content: [
         {
           type: "text",
-          content: "Boot removal is usually **gradual**, not sudden. You wean off over 1-2 weeks:",
+          content:
+            "Boot removal is usually **gradual**, not sudden. You wean off over 1-2 weeks:",
         },
         {
           type: "list",
@@ -113,7 +127,8 @@ export const content: SectionContent = {
         {
           type: "image",
           src: GradualWeaningComparison,
-          alt: "Comparison diagram showing different approaches to gradually weaning out of the boot into shoes over 1-2 weeks",
+          alt:
+            "Comparison diagram showing different approaches to gradually weaning out of the boot into shoes over 1-2 weeks",
           caption:
             "Gradual weaning from boot to shoes: compare typical schedules and choose the approach your clinician recommends.",
         },
@@ -121,7 +136,9 @@ export const content: SectionContent = {
           type: "tip",
           title: "Night splint option",
           content:
-            "Some patients like to continue using their [night splint](/standard/sleeping-with-boot) for a few weeks after boot removal — it provides reassurance and extra protection at night. This is optional but can help with the psychological transition.",
+            `Some patients like to continue using their [night splint](/standard/sleeping-with-boot) (${
+              mdShopPair("thetis-night-splint")
+            }) for a few weeks after boot removal — it provides reassurance and extra protection at night. This is optional but can help with the psychological transition.`,
         },
       ],
     },
@@ -157,7 +174,8 @@ export const content: SectionContent = {
               type: "product-image",
               src: HeelLifts,
               alt: "Heel wedge insoles showing adjustable layered design",
-              caption: "Heel wedge insoles (~£10) — adjustable height for comfortable transition",
+              caption:
+                "Heel wedge insoles (~£10) — adjustable height for comfortable transition",
             },
             {
               type: "list",
@@ -177,13 +195,17 @@ export const content: SectionContent = {
       content: [
         {
           type: "text",
-          content: "Those first steps are momentous — and often wobbly. **This is normal.**",
+          content:
+            "Those first steps are momentous — and often wobbly. **This is normal.**",
         },
         {
           type: "table",
           headers: ["What to Expect", "What to Do"],
           rows: [
-            ["Stiffness, weakness, uncertainty", "Start indoors, have support nearby"],
+            [
+              "Stiffness, weakness, uncertainty",
+              "Start indoors, have support nearby",
+            ],
             ["Limping initially", "Take short steps, go slowly"],
             ["Calf fatigue", "Stop when tired, rest frequently"],
             ["Mild discomfort (not sharp pain)", "Use heel-to-toe pattern"],

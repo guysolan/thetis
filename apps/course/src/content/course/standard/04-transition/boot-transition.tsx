@@ -1,10 +1,12 @@
 import type { FAQItem, SectionContent } from "@/components/course/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 import HeelLifts from "@/assets/heel-lifts.jpg";
 
 export const metadata = {
   slug: "boot-transition",
   title: "Leaving Your Boot Behind",
-  description: "When it's safe, first steps in shoes, and choosing the right footwear",
+  description:
+    "When it's safe, first steps in shoes, and choosing the right footwear",
   status: "drafting" as const,
 };
 
@@ -45,22 +47,27 @@ export const content: SectionContent = {
       title: "Boot transition basics",
       items: [
         {
-          text: "Confirm with your clinician — make sure you're cleared for boot removal",
+          text:
+            "Confirm with your clinician — make sure you're cleared for boot removal",
         },
         {
-          text: "Choose appropriate shoes — supportive, with heel-to-toe drop, room for heel lifts",
+          text:
+            "Choose appropriate shoes — supportive, with heel-to-toe drop, room for heel lifts",
         },
         {
-          text: "Start gradual weaning — if allowed, begin with a few hours a day",
+          text:
+            "Start gradual weaning — if allowed, begin with a few hours a day",
         },
         {
           text: "Use heel lifts initially — 0.5-1cm heel lift in your shoes",
         },
         {
-          text: "Keep your boot nearby — don't throw it away, you may need it initially",
+          text:
+            "Keep your boot nearby — don't throw it away, you may need it initially",
         },
         {
-          text: "Start indoors — first steps should be on flat, familiar surfaces",
+          text:
+            "Start indoors — first steps should be on flat, familiar surfaces",
         },
       ],
     },
@@ -142,7 +149,9 @@ export const content: SectionContent = {
                 "**Day 3-4**: Increase to 3-4 hours in shoes, gradually",
                 "**Day 5-6**: Majority of the day in shoes, boot for longer walks or when tired",
                 "**Day 7+**: Full transition to shoes during the day",
-                "**Night**: May still use night splint for additional protection initially",
+                `**Night**: May still use night splint (${
+                  mdShopPair("thetis-night-splint")
+                }) for additional protection initially`,
               ],
             },
           ],
@@ -239,7 +248,8 @@ export const content: SectionContent = {
             {
               type: "product-image",
               src: HeelLifts,
-              alt: "Heel wedge insoles showing adjustable layered design with brown textured top surface and black foam layers",
+              alt:
+                "Heel wedge insoles showing adjustable layered design with brown textured top surface and black foam layers",
               caption:
                 "Heel wedge insoles - adjustable height inserts for comfortable heel elevation",
             },

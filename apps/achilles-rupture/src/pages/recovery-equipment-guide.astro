@@ -7,6 +7,35 @@ import RecoveryChallenges from "../components/equipment/RecoveryChallenges.astro
 import RecoveryBundles from "../components/equipment/RecoveryBundles.astro";
 import { SITE_TITLE } from "../consts";
 import { equipmentList, priorityLabels } from "../content/equipment/equipment";
+import {
+    SURVIVAL_KIT_PRODUCTS,
+    resolveProductUrl,
+    resolveProductUrlById,
+    type AchillesProduct,
+} from "@thetis/catalogue";
+
+function skUs(id: string) {
+    const row = SURVIVAL_KIT_PRODUCTS.find((p: AchillesProduct) => p.id === id);
+    if (!row) throw new Error(`Unknown product id: ${id}`);
+    return resolveProductUrl(row, "us")!;
+}
+
+/** Award-card CTAs (US) — ids from `@thetis/catalogue` / `achilles-rupture.ts`. */
+const guideShop = {
+    nightSplint: skUs("thetis-night-splint"),
+    evenup: skUs("evenup-leveler"),
+    crutchHandles: resolveProductUrlById("crutch-handles-us-b0716xtj8l", "us")!,
+    merinoBrowse: skUs("merino-wool-socks"),
+    waterproofBootCover: resolveProductUrlById(
+        "waterproof-cover-us-b0bn9xwhjt",
+        "us",
+    )!,
+    walkingBootCompare: resolveProductUrlById(
+        "aircast-vs-vacoped-guide",
+        "us",
+    )!,
+    bootComparisonTool: "/articles/achilles-boot-comparison-tool",
+};
 
 const pageTitle =
     "2025 Best Achilles Rupture Recovery Equipment Guide | Expert-Tested Leaderboard";
@@ -46,7 +75,7 @@ const schemaData = {
                             price: "79.00",
                             priceCurrency: "GBP",
                             availability: "https://schema.org/InStock",
-                            url: "https://thetismedical.com/night-splint",
+                            url: guideShop.nightSplint,
                         },
                         award: [
                             "Best Overall",
@@ -416,7 +445,7 @@ const schemaData = {
                                         </div>
                                         <div class="flex gap-4">
                                             <a
-                                                href="https://thetismedical.com/night-splint"
+                                                href={guideShop.nightSplint}
                                                 class="inline-flex justify-center items-center bg-purple-600 hover:bg-purple-700 px-6 py-3 border border-transparent rounded-md font-medium text-white text-base"
                                             >
                                                 Buy Now
@@ -463,7 +492,7 @@ const schemaData = {
                                 <li>• Universal fit</li>
                             </ul>
                             <a
-                                href="https://www.amazon.com/dp/B004HY68DO"
+                                href={guideShop.evenup}
                                 class="btn btn-secondary btn-sm"
                             >
                                 Buy on Amazon
@@ -495,10 +524,16 @@ const schemaData = {
                                 <li>• Adjustable support</li>
                             </ul>
                             <a
-                                href="/articles/aircast-vs-vacoped-comparison"
+                                href={guideShop.walkingBootCompare}
                                 class="btn btn-secondary btn-sm"
                             >
                                 Compare Options
+                            </a>
+                            <a
+                                href={guideShop.bootComparisonTool}
+                                class="mt-2 btn-outline btn btn-sm"
+                            >
+                                Interactive boot tool
                             </a>
                         </div>
 
@@ -527,7 +562,7 @@ const schemaData = {
                                 <li>• Memory foam comfort</li>
                             </ul>
                             <a
-                                href="https://www.amazon.com/dp/B0716XTJ8L"
+                                href={guideShop.crutchHandles}
                                 class="btn btn-secondary btn-sm"
                             >
                                 Buy on Amazon
@@ -559,7 +594,7 @@ const schemaData = {
                                 <li>• Prevents athlete's foot</li>
                             </ul>
                             <a
-                                href="https://www.amazon.com/s?k=merino+wool+socks"
+                                href={guideShop.merinoBrowse}
                                 class="btn btn-secondary btn-sm"
                             >
                                 Browse on Amazon
@@ -591,7 +626,7 @@ const schemaData = {
                                 <li>• Secure seal</li>
                             </ul>
                             <a
-                                href="https://www.amazon.com/dp/B0BN9XWHJT"
+                                href={guideShop.waterproofBootCover}
                                 class="btn btn-secondary btn-sm"
                             >
                                 Buy on Amazon
@@ -623,7 +658,7 @@ const schemaData = {
                                 "Finally got the restful sleep I needed" - Chad
                             </blockquote>
                             <a
-                                href="https://thetismedical.com/night-splint"
+                                href={guideShop.nightSplint}
                                 class="btn btn-secondary btn-sm"
                             >
                                 Buy Now

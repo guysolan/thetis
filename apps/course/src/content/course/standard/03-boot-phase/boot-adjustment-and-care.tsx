@@ -1,10 +1,16 @@
 import type { FAQItem, SectionContent } from "@/components/course/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 import BootFittingGuide from "@/assets/boot-fitting-guide.png";
+import { resolveProductUrlById } from "@thetis/catalogue";
+
+const indoorBootUk = resolveProductUrlById("indoor-boot-shoe-cover-uk", "gb")!;
+const indoorBootUs = resolveProductUrlById("indoor-boot-shoe-cover-us", "us")!;
 
 export const metadata = {
   slug: "boot-adjustment-and-care",
   title: "Boot Adjustment and Care",
-  description: "Fitting your boot, straps, padding, maintenance, and preventing problems",
+  description:
+    "Fitting your boot, straps, padding, maintenance, and preventing problems",
   status: "drafting" as const,
 };
 
@@ -44,7 +50,8 @@ export const content: SectionContent = {
           text: "Check your boot fit — snug but not tight, heel at the back",
         },
         {
-          text: "Aircast: inflate air cells for snug support — not over-inflated (causes pressure/numbness). VACOped: ensure vacuum seal holds; re-pump if boot feels loose.",
+          text:
+            "Aircast: inflate air cells for snug support — not over-inflated (causes pressure/numbness). VACOped: ensure vacuum seal holds; re-pump if boot feels loose.",
         },
         {
           text: "Adjust straps correctly — tighten from bottom to top",
@@ -72,8 +79,10 @@ export const content: SectionContent = {
         {
           type: "image",
           src: BootFittingGuide,
-          alt: "Side view diagram of a walking boot showing proper fit points: heel positioned at back, one finger space between heel and boot, straps tightened bottom to top, toe wiggle room, and no pressure points",
-          caption: "Proper boot fit: check heel position, strap tightness, and toe room",
+          alt:
+            "Side view diagram of a walking boot showing proper fit points: heel positioned at back, one finger space between heel and boot, straps tightened bottom to top, toe wiggle room, and no pressure points",
+          caption:
+            "Proper boot fit: check heel position, strap tightness, and toe room",
         },
         {
           type: "card",
@@ -326,10 +335,12 @@ export const content: SectionContent = {
           type: "list",
           style: "bullet",
           items: [
-            "**Sleeping:** Most protocols require 24/7 wear. See [Sleeping with Your Boot](/standard/sleeping-with-boot) for solutions including the Thetis night splint.",
+            `**Sleeping:** Most protocols require 24/7 wear. See [Sleeping with Your Boot](/standard/sleeping-with-boot) for solutions including the Thetis night splint (${
+              mdShopPair("thetis-night-splint")
+            }).`,
             "**Showering:** See [Washing & Hygiene](/standard/washing-and-hygiene) for safe showering options.",
             "**Walking:** See [Crutches & Mobility](/standard/crutches-and-mobility) for crutch technique and mobility aids.",
-            "**Indoor cover:** A soft boot cover protects floors and reduces noise when walking indoors — [UK](https://www.amazon.co.uk/Pieces-Walking-Recovery-Reusable-Waterproof/dp/B09PG83J8H) | [US](https://www.amazon.com/MyShoeCovers-Fracture-Walking-Boot-Cover/dp/B075FC3T9B). Optional but many find it helpful.",
+            `**Indoor cover:** A soft boot cover protects floors and reduces noise when walking indoors — [UK](${indoorBootUk}) · [US](${indoorBootUs}). Optional but many find it helpful.`,
             "**Skin care:** Check your skin daily for pressure points, redness, or rubbing. Use padding if needed.",
             "**Cleaning:** Keep the boot clean. Remove the liner if possible and wash it regularly.",
           ],
@@ -353,7 +364,9 @@ export const content: SectionContent = {
                 "Some rubbing or pressure points (as long as they're not severe)",
                 "Difficulty sleeping with the boot on",
                 "Feeling frustrated or claustrophobic about 24/7 wear",
-                "Back or hip pain from leg length difference — **normal**; use an EVENup shoe leveler to balance leg length",
+                `Back or hip pain from leg length difference — **normal**; use an EVENup shoe leveler (${
+                  mdShopPair("evenup-leveler")
+                }) to balance leg length`,
                 "Swelling that varies through the day",
               ],
             },

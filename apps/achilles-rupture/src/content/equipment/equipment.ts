@@ -1,5 +1,13 @@
+import { resolveProductUrlById } from "@thetis/catalogue";
+
+function productUrl(id: string, region: "us" | "gb" = "us") {
+  const u = resolveProductUrlById(id, region);
+  if (!u) throw new Error(`Missing product URL: ${id} (${region})`);
+  return u;
+}
+
 export interface Equipment {
-  priority: "essential" | "recommended" | "comfort" | "none" | "none";
+  priority: "essential" | "recommended" | "comfort" | "none";
   name: string;
   category: string;
   priceRange: string;
@@ -21,15 +29,29 @@ export interface Bundle {
 export const equipmentList: Equipment[] = [
   {
     priority: "essential",
-    name: "Walking Boot",
+    name: "Aircast AirSelect (wedge boot)",
     category: "Essential",
-    priceRange: "$150-300",
-    keyBenefit: "Protect your healing tendon and walk with confidence during recovery",
-    actionUrl: "/articles/aircast-vs-vacoped-comparison",
-    actionText: "Compare Options",
-    isExternal: false,
-    tags: ["mobility", "protection", "recovery"],
+    priceRange: "$120-168",
+    keyBenefit:
+      "Common wedge CAM walker—holds plantarflexion; widely stocked and usually lighter than hinged boots",
+    actionUrl: productUrl("aircast-airselect-boot"),
+    actionText: "Shop",
+    isExternal: true,
+    tags: ["boots", "mobility", "protection"],
     imagePath: "/images/aircast-vs-vacoped.png",
+  },
+  {
+    priority: "essential",
+    name: "VACOped (hinged boot)",
+    category: "Essential",
+    priceRange: "$252+",
+    keyBenefit:
+      "Hinged vacuum-liner boot—fine angle control; heavier and pricier; match what your team prescribed",
+    actionUrl: productUrl("vacoped-achilles-boot"),
+    actionText: "Shop",
+    isExternal: true,
+    tags: ["boots", "mobility", "protection"],
+    imagePath: "/images/vacoped-angle-changing.jpg",
   },
   {
     priority: "essential",
@@ -38,7 +60,7 @@ export const equipmentList: Equipment[] = [
     priceRange: "$90-120",
     keyBenefit:
       "Sleep soundly knowing your Achilles is protected and healing in the optimal position",
-    actionUrl: "https://thetismedical.com/night-splint",
+    actionUrl: productUrl("thetis-night-splint"),
     actionText: "Buy Now",
     isExternal: true,
     tags: ["sleep", "recovery", "protection"],
@@ -49,8 +71,9 @@ export const equipmentList: Equipment[] = [
     name: "EVENup Leveler",
     category: "Mobility",
     priceRange: "$35-40",
-    keyBenefit: "Walk naturally and prevent back pain by keeping your hips level",
-    actionUrl: "https://www.amazon.com/dp/B004HY68DO",
+    keyBenefit:
+      "Walk naturally and prevent back pain by keeping your hips level",
+    actionUrl: productUrl("evenup-leveler"),
     actionText: "Buy",
     isExternal: true,
     tags: ["mobility", "comfort", "posture"],
@@ -62,8 +85,7 @@ export const equipmentList: Equipment[] = [
     category: "Hygiene",
     priceRange: "$25-45",
     keyBenefit: "Shower with confidence and keep your boot dry and fresh",
-    actionUrl:
-      "https://www.amazon.com/Qinaoco-Waterproof-Non-Slip-Watertight-Protector/dp/B0BZ43M5RD?sr=8-6",
+    actionUrl: productUrl("waterproof-boot-cover"),
     actionText: "Buy",
     isExternal: true,
     tags: ["hygiene", "showering", "protection"],
@@ -74,9 +96,9 @@ export const equipmentList: Equipment[] = [
     name: "Crutch Handles",
     category: "Comfort",
     priceRange: "$20-35",
-    keyBenefit: "Reduce hand pain and fatigue by up to 40% while using crutches",
-    actionUrl:
-      "https://www.amazon.com/Crutch-Crutches-Replacement-Medical-Handgrips/dp/B09872TVZL?sr=8-6",
+    keyBenefit:
+      "Reduce hand pain and fatigue by up to 40% while using crutches",
+    actionUrl: productUrl("crutch-handles"),
     actionText: "Buy",
     isExternal: true,
     tags: ["mobility", "comfort", "pain-relief"],
@@ -88,8 +110,7 @@ export const equipmentList: Equipment[] = [
     category: "Recovery",
     priceRange: "$45-75",
     keyBenefit: "Speed up healing and reduce swelling with proper elevation",
-    actionUrl:
-      "https://www.amazon.com/MEGCXIT-Elevation-Circulation-Swelling-23-6%C3%9716-8%C3%978/dp/B0D31CCML3?sr=8-9",
+    actionUrl: productUrl("elevation-wedge"),
     actionText: "Buy",
     isExternal: true,
     tags: ["recovery", "swelling", "comfort"],
@@ -100,8 +121,9 @@ export const equipmentList: Equipment[] = [
     name: "Merino Socks",
     category: "Comfort",
     priceRange: "$20-35",
-    keyBenefit: "Stay comfortable all day with temperature-regulating, moisture-wicking socks",
-    actionUrl: "https://www.amazon.com/s?k=merino+wool+socks",
+    keyBenefit:
+      "Stay comfortable all day with temperature-regulating, moisture-wicking socks",
+    actionUrl: productUrl("merino-wool-socks"),
     actionText: "Browse",
     isExternal: true,
     tags: ["comfort", "temperature", "hygiene"],
@@ -113,8 +135,7 @@ export const equipmentList: Equipment[] = [
     category: "Hygiene",
     priceRange: "$12-20",
     keyBenefit: "Prevent infections and keep your foot fresh during recovery",
-    actionUrl:
-      "https://www.amazon.com/Micro-Guard-Miconazole-Nitrate-Powder-Antifungal/dp/B006HSREVC?sr=8-9",
+    actionUrl: productUrl("antifungal-powder"),
     actionText: "Buy",
     isExternal: true,
     tags: ["hygiene", "prevention", "comfort"],
@@ -126,7 +147,7 @@ export const equipmentList: Equipment[] = [
     category: "Rehab",
     priceRange: "$9-17",
     keyBenefit: "Build strength safely with progressive resistance training",
-    actionUrl: "https://www.amazon.com/THERABAND-Latex-Yellow-Red-Green/dp/B000LX4KRA",
+    actionUrl: productUrl("theraband-resistance-bands"),
     actionText: "Buy",
     isExternal: true,
     tags: ["rehab", "strength", "recovery"],
@@ -138,7 +159,7 @@ export const equipmentList: Equipment[] = [
     category: "Mobility",
     priceRange: "$189-330",
     keyBenefit: "Move freely and independently without crutch fatigue",
-    actionUrl: "https://www.amazon.com/dp/B07DGR98VQ",
+    actionUrl: productUrl("knee-scooter"),
     actionText: "Buy",
     isExternal: true,
     tags: ["mobility", "independence", "comfort"],
@@ -150,7 +171,7 @@ export const equipmentList: Equipment[] = [
     category: "Mobility",
     priceRange: "$75-139",
     keyBenefit: "Walk with less strain on your arms and shoulders",
-    actionUrl: "https://www.amazon.com/Mobilegs-Ultra-Crutches-1-Pair/dp/B01N9OAW75?sr=8-6",
+    actionUrl: productUrl("ergonomic-crutches-mobilegs"),
     actionText: "Buy",
     isExternal: true,
     tags: ["mobility", "comfort", "independence"],
@@ -162,7 +183,7 @@ export const equipmentList: Equipment[] = [
     category: "Rehab",
     priceRange: "$10-15",
     keyBenefit: "Balance your leg length and walk more naturally",
-    actionUrl: "https://www.amazon.com/dp/B0CTML6GND",
+    actionUrl: productUrl("adjustable-heel-lifts-b0ctml6gnd"),
     actionText: "Buy",
     isExternal: true,
     tags: ["rehab", "balance", "recovery"],
@@ -173,9 +194,9 @@ export const equipmentList: Equipment[] = [
     name: "Boot Liner",
     category: "Comfort",
     priceRange: "$40",
-    keyBenefit: "Keep your boot fresh and comfortable with removable, washable liners",
-    actionUrl:
-      "https://www.amazon.com/Liner-Achilles-Fracture-Orthosis-VACOcast/dp/B00PYI93U6?sr=8-6",
+    keyBenefit:
+      "Keep your boot fresh and comfortable with removable, washable liners",
+    actionUrl: productUrl("vacoped-liner-amazon-us-b00pyi93u6"),
     actionText: "Buy",
     isExternal: true,
     tags: ["comfort", "hygiene", "protection"],
@@ -187,14 +208,19 @@ export const bundles: Bundle[] = [
   {
     name: "Essential Starter",
     priceRange: "$300-400",
-    features: ["Walking Boot", "Thetis Night Splint", "EVENup Leveler", "Waterproof Cover"],
+    features: [
+      "Aircast or VACOped boot",
+      "Thetis Night Splint",
+      "EVENup Leveler",
+      "Waterproof Cover",
+    ],
   },
   {
     name: "Comfort Plus",
     priceRange: "$400-550",
     isPopular: true,
     features: [
-      "Walking Boot",
+      "Aircast or VACOped boot",
       "Thetis Night Splint",
       "EVENup Leveler",
       "Waterproof Cover",
@@ -206,7 +232,7 @@ export const bundles: Bundle[] = [
     name: "Ultimate Recovery",
     priceRange: "$600-750",
     features: [
-      "Walking Boot",
+      "Aircast or VACOped boot",
       "Thetis Night Splint",
       "EVENup Leveler",
       "Waterproof Cover",

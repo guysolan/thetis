@@ -3,260 +3,48 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE } from "../consts";
+import {
+    type AchillesProduct,
+    SURVIVAL_KIT_PRODUCTS,
+    defaultProductCta,
+    isOffSiteUrl,
+    resolveProductPrice,
+    resolveProductUrl,
+} from "@thetis/catalogue";
 
-// Comprehensive product list for survival kit
-const survivalKitProducts = [
-    // Essential Items
-    {
-        priority: "essential",
-        name: "Walking Boot",
-        category: "Essential",
-        priceRange: {
-            us: "$150-300",
-            gb: "£120-240"
-        },
-        keyBenefit: "Maintains plantarflexion to protect your healing tendon and prevent re-rupture",
-        actionUrl: {
-            us: "/articles/aircast-vs-vacoped",
-            gb: "/articles/aircast-vs-vacoped"
-        },
-        actionText: "Compare Options",
-        isExternal: false,
-        tags: ["mobility", "protection", "recovery"],
-        imagePath: "/images/aircast-vs-vacoped.png",
-        description: "The ONLY essential item. Clinical research shows early protected weight-bearing with proper plantarflexion leads to better outcomes and prevents re-rupture.",
-        features: ["Maintains plantarflexion (tip-toe position)", "Prevents re-rupture during healing", "Evidence-based protection"]
-    },
-    
-    // Recommended Items
-    {
-        priority: "recommended",
-        name: "Thetis Night Splint",
-        category: "Sleep",
-        priceRange: {
-            us: "$90-120",
-            gb: "£60-70"
-        },
-        keyBenefit: "Sleep soundly knowing your Achilles is protected and healing in the optimal position",
-        actionUrl: {
-            us: "https://thetismedical.com/night-splint",
-            gb: "https://thetismedical.com/night-splint"
-        },
-        actionText: "Buy Now",
-        isExternal: true,
-        tags: ["sleep", "recovery", "protection"],
-        imagePath: "/images/thetis-night-splint-side.jpg",
-        description: "The only night splint specifically designed for Achilles rupture recovery. Patented in 2024.",
-        features: ["Purpose-built for sleep", "Surgeon endorsed", "Safe, comfortable and hygienic"]
-    },
-    {
-        priority: "recommended",
-        name: "EVENup Leveler",
-        category: "Mobility",
-        priceRange: {
-            us: "$40-$50",
-            gb: "£35-£40"
-        },
-        keyBenefit: "Walk naturally and prevent back pain by keeping your hips level",
-        actionUrl: {
-            us: "https://www.amazon.com/EVENup-Shoe-Balancer-Leveler-Large/dp/B08FX2T2TF?sr=8-1",
-            gb: "https://www.amazon.co.uk/EVENup-Shoe-Balancer-Leveler-Large/dp/B08FX3YPWQ?th=1"
-        },
-        actionText: "Buy",
-        isExternal: true,
-        tags: ["mobility", "comfort", "posture"],
-        imagePath: "/images/even-up.jpg",
-        description: "Addresses leg-length discrepancy from wearing a boot. Prevents back, hip, and knee pain.",
-        features: ["Universal fit", "Immediate comfort", "Prevents secondary injuries"]
-    },
-    
-    // Comfort Items
-    {
-        priority: "comfort",
-        name: "Elevation Wedge",
-        category: "Recovery",
-        priceRange: {
-          us: "$25-$70",
-            gb: "£15-£45"
-        },
-        keyBenefit: "Speed up healing and reduce swelling with proper elevation",
-        actionUrl: {
-            us: "https://www.amazon.com/MEGCXIT-Elevation-Circulation-Swelling-23-6%C3%9716-8%C3%978/dp/B0D31CCML3?sr=8-9",
-            gb: "https://www.amazon.co.uk/s?k=leg+elevation+pillow+wedge"
-        },
-        actionText: "Buy",
-        isExternal: true,
-        tags: ["recovery", "swelling", "comfort"],
-        imagePath: "/images/elevation-wedge.webp",
-        description: "Critical for early recovery. UK guidelines recommend 23 hours/day elevation in first week.",
-        features: ["Proper positioning", "Reduces swelling", "Improves circulation"]
-    },
-    {
-        priority: "comfort",
-        name: "Crutch Handles",
-        category: "Comfort",
-        priceRange: {
-            us: "$20-35",
-            gb: "£6-15"
-        },
-        keyBenefit: "Reduce hand pain and fatigue by up to 40% while using crutches",
-        actionUrl: {
-            us: "https://www.amazon.com/Crutch-Crutches-Replacement-Medical-Handgrips/dp/B09872TVZL?sr=8-6",
-            gb: "https://www.amazon.co.uk/s?k=crutch+handles+soft+grips"
-        },
-        actionText: "Buy",
-        isExternal: true,
-        tags: ["mobility", "comfort", "pain-relief"],
-        imagePath: "/images/soft-crutch-handles.jpg",
-        description: "Clinical studies show 40% reduction in forearm pain and 35% decrease in paresthesia.",
-        features: ["Memory foam comfort", "Easy installation", "Prevents nerve damage"]
-    },
-    {
-        priority: "comfort",
-        name: "Merino Wool Socks",
-        category: "Comfort",
-        priceRange: {
-            us: "$20-35",
-            gb: "£10-£25"
-        },
-        keyBenefit: "Stay comfortable all day with temperature-regulating, moisture-wicking socks",
-        actionUrl: {
-            us: "https://www.amazon.com/s?k=merino+wool+socks",
-            gb: "https://www.amazon.co.uk/s?k=merino+wool+socks"
-        },
-        actionText: "Browse",
-        isExternal: true,
-        tags: ["comfort", "temperature", "hygiene"],
-        imagePath: "/images/merino-socks.webp",
-        description: "Naturally moisture-wicking and temperature regulating. Reduces 'hot foot' issues.",
-        features: ["Moisture-wicking", "Temperature regulating", "Antimicrobial"]
-    },
-    
-    // Optional Extras
-    {
-        priority: "optional",
-        name: "Waterproof Boot Cover",
-        category: "Hygiene",
-        priceRange: {
-            us: "$25-$45",
-            gb: "£20-£25"
-        },
-        keyBenefit: "Shower with confidence and keep your boot dry and fresh",
-        actionUrl: {
-            us: "https://www.amazon.com/Qinaoco-Waterproof-Non-Slip-Watertight-Protector/dp/B0BZ43M5RD?sr=8-6",
-            gb: "https://limboproducts.co.uk/product/limbo-full-leg-m100/"
-        },
-        actionText: "Buy",
-        isExternal: true,
-        tags: ["hygiene", "showering", "protection"],
-        imagePath: "/images/boot-bag.jpg",
-        description: "Essential for safe showering. NHS guidelines specifically recommend waterproof covers.",
-        features: ["Prevents infection", "Reusable design", "Secure seal"]
-    },
-    {
-        priority: "optional",
-        name: "Antifungal Powder",
-        category: "Hygiene",
-        priceRange: {
-            us: "$12-20",
-            gb: "£6-12"
-        },
-        keyBenefit: "Prevent infections and keep your foot fresh during recovery",
-        actionUrl: {
-            us: "https://www.amazon.com/Micro-Guard-Miconazole-Nitrate-Powder-Antifungal/dp/B006HSREVC?sr=8-9",
-            gb: "https://www.amazon.co.uk/s?k=antifungal+powder+feet"
-        },
-        actionText: "Buy",
-        isExternal: true,
-        tags: ["hygiene", "prevention", "comfort"],
-        imagePath: "/images/antifungal.jpg",
-        description: "Prevents athlete's foot and other fungal issues in the warm boot environment.",
-        features: ["Prevents infections", "Reduces friction", "Daily protection"]
-    },
-    {
-        priority: "optional",
-        name: "Knee Scooter",
-        category: "Mobility",
-        priceRange: {
-            us: "$189-$330",
-            gb: "£100-£220"
-        },
-        keyBenefit: "Move freely and independently without crutch fatigue",
-        actionUrl: {
-            us: "https://www.amazon.com/KneeRover-Steerable-Scooter-Crutches-Alternative/dp/B006G0M77C?sr=1-18",
-            gb: "https://www.amazon.co.uk/s?k=knee+scooter+walker"
-        },
-        actionText: "Buy",
-        isExternal: true,
-        tags: ["mobility", "independence", "comfort"],
-        imagePath: "/images/knee-scooter.jpg",
-        description: "Alternative to crutches for those who find them difficult or painful to use.",
-        features: ["No upper body strain", "Easy maneuverability", "Basket for items"]
-    },
-    {
-        priority: "optional",
-        name: "TheraBand Resistance Bands",
-        category: "Rehab",
-        priceRange: {
-            us: "$12-20",
-            gb: "£10-15"
-        },
-        keyBenefit: "Build strength safely with progressive resistance training",
-        actionUrl: {
-            us: "https://www.amazon.com/THERABAND-Latex-Yellow-Red-Green/dp/B000LX4KRA",
-            gb: "https://www.amazon.co.uk/THERABAND-Latex-Yellow-Red-Green/dp/B000LX4KRA"
-        },
-        actionText: "Buy",
-        isExternal: true,
-        tags: ["rehab", "strength", "recovery"],
-        imagePath: "/images/theraband.jpg",
-        description: "Essential for later stages of rehabilitation and strength building.",
-        features: ["Progressive resistance", "Safe strength building", "Multiple resistance levels"]
-    },
-    {
-        priority: "optional",
-        name: "Boot Liner (VACOped)",
-        category: "Comfort",
-        priceRange: {
-            us: "$40",
-            gb: "£40"
-        },
-        keyBenefit: "Keep your boot fresh and comfortable with removable, washable liners",
-        actionUrl: {
-            us: "https://opedmedical.com/product/liner-black-grey-for-vacoped-achilles-injury-fracture-and-vacocast-fracture-walking-boot-orthoses/",
-            gb: "https://oped-uk.com/product/vacoped-vacocast-liner/"
-        },
-        actionText: "Buy",
-        isExternal: true,
-        tags: ["comfort", "hygiene", "protection"],
-        imagePath: "/images/boot-liner.jpg",
-        description: "Removable, washable liners to keep your boot fresh and comfortable.",
-        features: ["Removable", "Washable", "Odor control"]
-    },
-    {
-        priority: "optional",
-        name: "Heel Wedge Insoles",
-        category: "Comfort",
-        priceRange: {
-            us: "$15-30",
-            gb: "£10"
-        },
-        keyBenefit: "Provide additional heel elevation and comfort inside your boot",
-        actionUrl: {
-            us: "https://www.amazon.com/s?k=heel+wedge+achilles+shoe+insert+insole",
-            gb: "https://www.amazon.co.uk/Shoe-Heel-Lift-Inserts-Pain/dp/B0C1G9GLGX/ref=sr_1_19_sspa?dib=eyJ2IjoiMSJ9.w8K1Tzh9GOXoZ6DdTNAeb64BGgR3MU1ASEjh4qzWGY6dC_MgqgTAzR-pJDT6oWjO8HhIrmf1_WM5g1g3tG00qVenjUM0KUFsAG4QAJ2SCA4bbt6oMSMMVyzt59aoWDsTnZxi9cwvqGKkxBofcz2IS1vPfvjTmC4_MuhoqhY993CBA4SjMUgGuZQckgSgzWkLWNQFQvntUYbL8ZPvWRQLmjSRXGDX95904et6kl5NJWSqCg6DaVcrinMFbeqnjmH0duUZgn2fp6sgyq4dkLOCGwc0nlaZZji8kz-czy4Jrlw.DyH2dV8enhE6oVYHheWSKalKM-WQyUa_M8hNqP_0MEw&dib_tag=se&keywords=heel+wedge+shoe+insert+insole&qid=1758631152&rnid=184306031&sr=8-19-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGY&th=1"
-        },
-        actionText: "Browse",
-        isExternal: true,
-        tags: ["comfort", "elevation", "support"],
-        imagePath: "/images/heel-lifts.jpg",
-        description: "Additional heel elevation inserts that can be used inside your boot for extra comfort and support.",
-        features: ["Adjustable height", "Easy to insert", "Comfortable padding"]
-    }
-];
+const survivalKitProducts = SURVIVAL_KIT_PRODUCTS;
+
+function priceUS(item: AchillesProduct) {
+    return resolveProductPrice(item, "us") ?? "";
+}
+function priceGB(item: AchillesProduct) {
+    return resolveProductPrice(item, "gb") ?? "";
+}
+function urlUS(item: AchillesProduct) {
+    return resolveProductUrl(item, "us") ?? "";
+}
+function urlGB(item: AchillesProduct) {
+    return resolveProductUrl(item, "gb") ?? "";
+}
+function ctaUS(item: AchillesProduct) {
+    return defaultProductCta(urlUS(item));
+}
+function offSite(item: AchillesProduct) {
+    return isOffSiteUrl(urlUS(item));
+}
 
 // Filter products by priority
 const essentialItems = survivalKitProducts.filter(item => item.priority === "essential");
+const BOOT_PRODUCT_IDS = new Set([
+    "aircast-airselect-boot",
+    "vacoped-achilles-boot",
+]);
+const essentialBootItems = essentialItems.filter((item) =>
+    BOOT_PRODUCT_IDS.has(item.id),
+);
+const essentialNonBootItems = essentialItems.filter(
+    (item) => !BOOT_PRODUCT_IDS.has(item.id),
+);
 const recommendedItems = survivalKitProducts.filter(item => item.priority === "recommended");
 const comfortItems = survivalKitProducts.filter(item => item.priority === "comfort");
 const optionalItems = survivalKitProducts.filter(item => item.priority === "optional");
@@ -287,10 +75,13 @@ const schemaData = {
                     },
                     offers: {
                         "@type": "Offer",
-                        price: item.priceRange.us.replace("$", "").split("-")[0],
+                        price:
+                            String(resolveProductPrice(item, "us") ?? "").match(
+                                /[\d.]+/,
+                            )?.[0] ?? "0",
                         priceCurrency: "USD",
                         availability: "https://schema.org/InStock",
-                        url: item.actionUrl.us
+                        url: resolveProductUrl(item, "us"),
                     },
                     image: item.imagePath,
                     additionalProperty: item.features?.map(feature => ({
@@ -309,7 +100,7 @@ const schemaData = {
                     name: "What are the most essential items for Achilles rupture recovery?",
                     acceptedAnswer: {
                         "@type": "Answer",
-                        text: "The walking boot and night splint are absolutely essential. The walking boot protects your healing tendon during the day, while the night splint provides safe sleep protection. These two items form the foundation of your recovery."
+                        text: "You need one walking boot (either an Aircast-style CAM walker or a VACOped-style hinged boot—not both) plus protection at night, such as the Thetis night splint if your team approves. The boot protects your healing tendon during the day; night protection helps sleep and hygiene."
                     }
                 },
                 {
@@ -431,6 +222,25 @@ const schemaData = {
                     grid-template-columns: 1fr;
                 }
             }
+
+            .boot-choice-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                align-items: stretch;
+            }
+
+            @media (min-width: 768px) {
+                .boot-choice-grid {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+
+            .boot-card .boot-card-body {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+            }
         </style>
     </head>
     <body>
@@ -466,8 +276,113 @@ const schemaData = {
                 <section class="mb-16">
                     <h2 class="mb-8 font-bold text-3xl text-center">🥇 Essential Items</h2>
                     <p class="mb-8 text-gray-600 text-center">The Cornerstone of Achilles Rupture Recovery</p>
+
+                    <div
+                        class="bg-stone-50 mx-auto mb-8 p-5 border border-stone-200 rounded-xl max-w-3xl text-center"
+                        role="note"
+                    >
+                        <p class="font-semibold text-stone-900 text-lg">
+                            One walking boot — not both
+                        </p>
+                        <p class="mt-2 text-stone-600 text-sm md:text-base leading-relaxed">
+                            You only need <strong>one</strong> boot: either a wedge CAM walker
+                            (Aircast-style) <strong>or</strong> a hinged vacuum boot (VACOped),
+                            depending on what your clinic issued or recommended. The two cards
+                            below are alternatives — pick the one that matches your treatment
+                            plan.
+                            <a
+                                href="/articles/aircast-vs-vacoped"
+                                class="block mt-3 font-medium text-stone-900 underline hover:no-underline"
+                            >
+                                Aircast vs VACOped — read the comparison
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="boot-choice-grid mb-10 md:mb-12">
+                        {essentialBootItems.map((item) => (
+                            <div class="flex flex-col p-6 h-full boot-card product-card">
+                                <img
+                                    src={item.imagePath}
+                                    alt={item.name}
+                                    class="mb-4 rounded-lg w-full h-44 object-contain"
+                                />
+                                <div class="space-y-3 boot-card-body">
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        <h3 class="font-bold text-xl">{item.name}</h3>
+                                        <span class="priority-badge essential-badge shrink-0">Pick one</span>
+                                    </div>
+                                    <div class="text-gray-600 text-sm">
+                                        <p class="mb-1 font-semibold text-gray-900">
+                                            Why it’s an option:
+                                        </p>
+                                        <p>{item.keyBenefit}</p>
+                                        {item.description && (
+                                            <p class="mt-2 text-xs leading-relaxed">
+                                                {item.description}
+                                            </p>
+                                        )}
+                                    </div>
+                                    {item.features && (
+                                        <div class="bg-gray-50 p-3 rounded-lg">
+                                            <p class="mb-2 font-semibold text-xs">Key features:</p>
+                                            <ul class="space-y-1 text-xs">
+                                                {item.features.map((feature) => (
+                                                    <li class="flex items-start gap-2">
+                                                        <span class="text-green-500 shrink-0">✓</span>
+                                                        <span>{feature}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                                    <div class="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-3 mt-auto pt-2">
+                                        <div>
+                                            <p
+                                                class="font-bold text-gray-900 text-lg product-price"
+                                                data-us-price={priceUS(item)}
+                                                data-gb-price={priceGB(item)}
+                                            >
+                                                {priceUS(item)}
+                                            </p>
+                                            <p class="text-gray-500 text-xs">Price range</p>
+                                        </div>
+                                        <a
+                                            href={urlUS(item)}
+                                            class="justify-center btn btn-primary product-link shrink-0"
+                                            data-us-url={urlUS(item)}
+                                            data-gb-url={urlGB(item)}
+                                            target={offSite(item) ? "_blank" : undefined}
+                                            rel={offSite(item) ? "noopener noreferrer" : undefined}
+                                        >
+                                            {ctaUS(item)}
+                                            {offSite(item) && (
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="16"
+                                                    height="16"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="ml-1"
+                                                >
+                                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                                    <polyline points="15 3 21 3 21 9" />
+                                                    <line x1="10" y1="14" x2="21" y2="3" />
+                                                </svg>
+                                            )}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
                     <div class="space-y-8">
-                        {essentialItems.map((item) => (
+                        {essentialNonBootItems.map((item) => (
                             <div class="p-6 product-card">
                                 <div class="flex md:flex-row flex-col gap-6">
                                     <!-- Product Image -->
@@ -511,22 +426,22 @@ const schemaData = {
                                         <div class="flex justify-between items-center">
                                             <div>
                                                 <p class="font-bold text-gray-900 text-xl product-price" 
-                                                   data-us-price={item.priceRange.us} 
-                                                   data-gb-price={item.priceRange.gb}>
-                                                    {item.priceRange.us}
+                                                   data-us-price={priceUS(item)} 
+                                                   data-gb-price={priceGB(item)}>
+                                                    {priceUS(item)}
                                                 </p>
                                                 <p class="text-gray-500 text-sm">Price range</p>
                                             </div>
                                             <a
-                                                href={item.actionUrl.us}
+                                                href={urlUS(item)}
                                                 class="btn btn-primary product-link"
-                                                data-us-url={item.actionUrl.us}
-                                                data-gb-url={item.actionUrl.gb}
-                                                target={item.isExternal ? "_blank" : undefined}
-                                                rel={item.isExternal ? "noopener noreferrer" : undefined}
+                                                data-us-url={urlUS(item)}
+                                                data-gb-url={urlGB(item)}
+                                                target={offSite(item) ? "_blank" : undefined}
+                                                rel={offSite(item) ? "noopener noreferrer" : undefined}
                                             >
-                                                {item.actionText}
-                                                {item.isExternal && (
+                                                {ctaUS(item)}
+                                                {offSite(item) && (
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         width="16"
@@ -602,22 +517,22 @@ const schemaData = {
                                         <div class="flex justify-between items-center">
                                             <div>
                                                 <p class="font-bold text-gray-900 text-xl product-price" 
-                                                   data-us-price={item.priceRange.us} 
-                                                   data-gb-price={item.priceRange.gb}>
-                                                    {item.priceRange.us}
+                                                   data-us-price={priceUS(item)} 
+                                                   data-gb-price={priceGB(item)}>
+                                                    {priceUS(item)}
                                                 </p>
                                                 <p class="text-gray-500 text-sm">Price range</p>
                                             </div>
                                             <a
-                                                href={item.actionUrl.us}
+                                                href={urlUS(item)}
                                                 class="btn btn-primary product-link"
-                                                data-us-url={item.actionUrl.us}
-                                                data-gb-url={item.actionUrl.gb}
-                                                target={item.isExternal ? "_blank" : undefined}
-                                                rel={item.isExternal ? "noopener noreferrer" : undefined}
+                                                data-us-url={urlUS(item)}
+                                                data-gb-url={urlGB(item)}
+                                                target={offSite(item) ? "_blank" : undefined}
+                                                rel={offSite(item) ? "noopener noreferrer" : undefined}
                                             >
-                                                {item.actionText}
-                                                {item.isExternal && (
+                                                {ctaUS(item)}
+                                                {offSite(item) && (
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         width="16"
@@ -673,20 +588,20 @@ const schemaData = {
                                 )}
                                 <div class="flex justify-between items-center">
                                     <p class="font-bold text-gray-900 product-price" 
-                                       data-us-price={item.priceRange.us} 
-                                       data-gb-price={item.priceRange.gb}>
-                                        {item.priceRange.us}
+                                       data-us-price={priceUS(item)} 
+                                       data-gb-price={priceGB(item)}>
+                                        {priceUS(item)}
                                     </p>
                                     <a
-                                        href={item.actionUrl.us}
+                                        href={urlUS(item)}
                                         class="btn btn-secondary product-link"
-                                        data-us-url={item.actionUrl.us}
-                                        data-gb-url={item.actionUrl.gb}
-                                        target={item.isExternal ? "_blank" : undefined}
-                                        rel={item.isExternal ? "noopener noreferrer" : undefined}
+                                        data-us-url={urlUS(item)}
+                                        data-gb-url={urlGB(item)}
+                                        target={offSite(item) ? "_blank" : undefined}
+                                        rel={offSite(item) ? "noopener noreferrer" : undefined}
                                     >
-                                        {item.actionText}
-                                        {item.isExternal && (
+                                        {ctaUS(item)}
+                                        {offSite(item) && (
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="16"
@@ -740,20 +655,20 @@ const schemaData = {
                                 )}
                                 <div class="flex justify-between items-center">
                                     <p class="font-bold text-gray-900 product-price" 
-                                       data-us-price={item.priceRange.us} 
-                                       data-gb-price={item.priceRange.gb}>
-                                        {item.priceRange.us}
+                                       data-us-price={priceUS(item)} 
+                                       data-gb-price={priceGB(item)}>
+                                        {priceUS(item)}
                                     </p>
                                     <a
-                                        href={item.actionUrl.us}
+                                        href={urlUS(item)}
                                         class="btn btn-secondary product-link"
-                                        data-us-url={item.actionUrl.us}
-                                        data-gb-url={item.actionUrl.gb}
-                                        target={item.isExternal ? "_blank" : undefined}
-                                        rel={item.isExternal ? "noopener noreferrer" : undefined}
+                                        data-us-url={urlUS(item)}
+                                        data-gb-url={urlGB(item)}
+                                        target={offSite(item) ? "_blank" : undefined}
+                                        rel={offSite(item) ? "noopener noreferrer" : undefined}
                                     >
-                                        {item.actionText}
-                                        {item.isExternal && (
+                                        {ctaUS(item)}
+                                        {offSite(item) && (
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="16"
