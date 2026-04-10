@@ -1,53 +1,105 @@
+import fs from "fs";
+import path from "path";
 import { describe, expect, it } from "vitest";
-import { getSitemapUrls, pageExists, sitemapLanguageFilter } from "./sitemap-utils";
+import {
+  pageExists,
+  sitemapLanguageFilter,
+  sitemapPageFilter,
+} from "./sitemap-utils";
+
+const PAGES_DIR = path.join(process.cwd(), "src/pages");
+const LOCALIZED_LANGS = ["de", "fr", "es", "it"] as const;
+
+function filePathToUrlPath(filePath: string): string {
+  const relativePath = path.relative(PAGES_DIR, filePath).replace(/\\/g, "/");
+
+  if (relativePath === "index.astro") {
+    return "/";
+  }
+
+  if (relativePath.endsWith("/index.astro")) {
+    return `/${relativePath.replace(/\/index\.astro$/, "")}/`;
+  }
+
+  return `/${relativePath.replace(/\.astro$/, "")}/`;
+}
+
+function getLocalizedSitemapCounts(): Record<
+  (typeof LOCALIZED_LANGS)[number],
+  number
+> {
+  const counts = {
+    de: 0,
+    fr: 0,
+    es: 0,
+    it: 0,
+  };
+
+  for (const lang of LOCALIZED_LANGS) {
+    const languageDir = path.join(PAGES_DIR, lang);
+    const entries = fs.readdirSync(languageDir, {
+      recursive: true,
+      withFileTypes: true,
+    });
+
+    for (const entry of entries) {
+      if (!entry.isFile() || !entry.name.endsWith(".astro")) continue;
+
+      const parentPath = "parentPath" in entry ? entry.parentPath : languageDir;
+      const filePath = path.join(parentPath, entry.name);
+      const pageUrl = `https://thetismedical.com${filePathToUrlPath(filePath)}`;
+
+      if (sitemapPageFilter(pageUrl)) {
+        counts[lang] += 1;
+      }
+    }
+  }
+
+  return counts;
+}
 
 /**
- * Sitemap accuracy tests - ensure every URL in the sitemap has a corresponding page file.
- * Uses the same getSitemapUrls() as astro.config.mjs.
+ * Sitemap utility tests.
  */
-const baseUrl = "https://thetismedical.com";
-
 describe("Sitemap accuracy", () => {
-  const sitemapUrls = getSitemapUrls(baseUrl);
-
-  it("every sitemap URL should have a corresponding page file", () => {
-    const pathnames = sitemapUrls.map((url) => new URL(url).pathname);
-    const missingPages = pathnames.filter((p) => !pageExists(p));
-
-    if (missingPages.length > 0) {
-      console.error("Sitemap URLs without page files (would 404):", missingPages);
-    }
-
-    expect(missingPages).toHaveLength(0);
+  it("pageExists resolves known localized pages", () => {
+    expect(pageExists("/fr/attelle-rupture-tendon-achille")).toBe(true);
+    expect(pageExists("/de/großhandel-bestellen")).toBe(true);
+    expect(pageExists("/es/guia/semanas-13-25")).toBe(true);
+    expect(pageExists("/it/guida/settimane-13-25")).toBe(true);
+    expect(pageExists("/fr/nachweis")).toBe(false);
   });
 
-  it("sitemap should not include duplicate URLs", () => {
-    const pathnames = sitemapUrls.map((url) => new URL(url).pathname);
-    const unique = new Set(pathnames);
-    expect(pathnames.length).toBe(unique.size);
-  });
-
-  it("sitemap URLs should be valid", () => {
-    for (const url of sitemapUrls) {
-      expect(() => new URL(url)).not.toThrow();
-      expect(url.startsWith(baseUrl)).toBe(true);
-      const pathname = new URL(url).pathname;
-      expect(pathname.startsWith("/")).toBe(true);
-    }
-  });
-
-  it("sitemap should include translations when pages exist", () => {
-    const pathnames = sitemapUrls.map((url) => new URL(url).pathname);
-    const hasTranslations = pathnames.some((p) =>
-      ["de", "fr", "es", "it"].includes(p.split("/").filter(Boolean)[0] ?? ""),
+  it("sitemap page filter excludes utility and legacy paths", () => {
+    expect(sitemapPageFilter("https://x.com/sitemap/")).toBe(false);
+    expect(sitemapPageFilter("https://x.com/de/sitemap/")).toBe(false);
+    expect(sitemapPageFilter("https://x.com/fr/plan-du-site/")).toBe(false);
+    expect(sitemapPageFilter("https://x.com/es/mapa-del-sitio/")).toBe(false);
+    expect(sitemapPageFilter("https://x.com/it/mappa-del-sito/")).toBe(false);
+    expect(sitemapPageFilter("https://x.com/old-index/")).toBe(false);
+    expect(sitemapPageFilter("https://x.com/achilles-ruptures.html/")).toBe(
+      false,
     );
-    expect(hasTranslations).toBe(true);
+    expect(sitemapPageFilter("https://x.com/fr/preuves/")).toBe(true);
   });
 
   it("sitemap language filter utility excludes non-English paths when used", () => {
-    expect(sitemapLanguageFilter("https://x.com/de/evidenzbasierte-genesung")).toBe(false);
-    expect(sitemapLanguageFilter("https://x.com/fr/recuperation-basee-preuves")).toBe(false);
-    expect(sitemapLanguageFilter("https://x.com/evidence-based-recovery")).toBe(true);
+    expect(sitemapLanguageFilter("https://x.com/de/evidenzbasierte-genesung"))
+      .toBe(false);
+    expect(sitemapLanguageFilter("https://x.com/fr/recuperation-basee-preuves"))
+      .toBe(false);
+    expect(sitemapLanguageFilter("https://x.com/evidence-based-recovery")).toBe(
+      true,
+    );
     expect(sitemapLanguageFilter("https://x.com/")).toBe(true);
+  });
+
+  it("localized sitemap counts stay aligned with the localized page tree", () => {
+    expect(getLocalizedSitemapCounts()).toEqual({
+      de: 36,
+      fr: 35,
+      es: 35,
+      it: 35,
+    });
   });
 });

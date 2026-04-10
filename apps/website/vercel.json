@@ -21,7 +21,37 @@
     { "source": "/es/cursos", "destination": "/es/curso", "permanent": true },
     { "source": "/es/cursos/:path*", "destination": "/es/curso", "permanent": true },
     { "source": "/it/corsi", "destination": "/it/corso", "permanent": true },
-    { "source": "/it/corsi/:path*", "destination": "/it/corso", "permanent": true }
+    { "source": "/it/corsi/:path*", "destination": "/it/corso", "permanent": true },
+    {
+      "source": "/es/rupturas-tendon-aquiles",
+      "destination": "/es/bota-ortopedica-tendon-aquiles/",
+      "permanent": true
+    },
+    {
+      "source": "/es/rupturas-tendon-aquiles/",
+      "destination": "/es/bota-ortopedica-tendon-aquiles/",
+      "permanent": true
+    },
+    {
+      "source": "/es/FAQs/es-mi-tendon-de-aquiles-roto",
+      "destination": "/es/FAQs/esta-roto-mi-aquiles/",
+      "permanent": true
+    },
+    {
+      "source": "/es/FAQs/es-mi-tendon-de-aquiles-roto/",
+      "destination": "/es/FAQs/esta-roto-mi-aquiles/",
+      "permanent": true
+    },
+    {
+      "source": "/es/FAQs/recuperacion-rotura-tendon-aquiles",
+      "destination": "/es/FAQs/recuperacion-aquiles-desgarrado/",
+      "permanent": true
+    },
+    {
+      "source": "/es/FAQs/recuperacion-rotura-tendon-aquiles/",
+      "destination": "/es/FAQs/recuperacion-aquiles-desgarrado/",
+      "permanent": true
+    }
   ],
   "git": {
     "deploymentEnabled": {
