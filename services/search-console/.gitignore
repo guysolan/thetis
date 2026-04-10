@@ -1,0 +1,9 @@
+# Credentials / tokens (never commit)
+search-console-service-account-key.json
+*-credentials.json
+*-oauth-token.json
+service-account*.json
+.env
+.env.local
+output/
+*.jsonl

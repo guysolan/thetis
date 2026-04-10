@@ -1,0 +1,24 @@
+{
+  "name": "@thetis/search-console",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sites": "tsx src/cli.ts sites",
+    "sitemaps": "tsx src/cli.ts sitemaps",
+    "inspect-batch": "tsx src/cli.ts inspect-batch",
+    "pages-performance": "tsx src/cli.ts pages-performance",
+    "cli": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "googleapis": "^144.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.5.4"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,5 +1,12 @@
 import { Button } from "@thetis/ui/button";
-import { Banknote, Clipboard, ExternalLink, FileText, Receipt, Tag } from "lucide-react";
+import {
+  Banknote,
+  Clipboard,
+  ExternalLink,
+  FileText,
+  Receipt,
+  Tag,
+} from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { OrderType } from "../types";
 
@@ -26,7 +33,7 @@ const documents: DocumentConfig[] = [
     path: "packing-list",
     label: "Packing List",
     icon: <Clipboard size={16} />,
-    showFor: ["ship", "sell"],
+    showFor: ["ship", "sell", "build", "buy", "purchase"],
   },
   {
     path: "shipping-label",
@@ -38,7 +45,7 @@ const documents: DocumentConfig[] = [
     path: "purchase-order",
     label: "Purchase Order",
     icon: <FileText size={16} />,
-    showFor: ["build"],
+    showFor: ["build", "buy", "purchase"],
   },
   {
     path: "invoice",
@@ -68,7 +75,7 @@ export const DocumentLinks = ({ orderId, orderType }: DocumentLinksProps) => {
             className="justify-start gap-2 px-3 py-2 w-full font-normal text-sm"
           >
             <Link
-              className="flex items-center gap-2 w-full px-3 py-2"
+              className="flex items-center gap-2 px-3 py-2 w-full"
               to={`/documents/orders/$orderId/${doc.path}`}
               params={{ orderId }}
               target="_blank"

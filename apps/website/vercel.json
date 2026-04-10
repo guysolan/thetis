@@ -4,6 +4,122 @@
   "outputDirectory": ".vercel/output",
   "ignoreCommand": "(git rev-list --count HEAD | grep -q '^1$' || git diff HEAD^ HEAD --quiet -- apps/website/ packages/ui/ package.json pnpm-lock.yaml) && exit 1 || exit 0",
   "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    {
+      "source": "/achilles-ruptures/FAQs/:path*",
+      "destination": "/FAQs/:path*",
+      "permanent": true
+    },
+    { "source": "/returns", "destination": "/request-a-return", "permanent": true },
+    { "source": "/returns/", "destination": "/request-a-return/", "permanent": true },
+    {
+      "source": "/de/returns",
+      "destination": "/de/ruecksendung-anfordern",
+      "permanent": true
+    },
+    {
+      "source": "/de/returns/",
+      "destination": "/de/ruecksendung-anfordern/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/returns",
+      "destination": "/fr/demander-un-retour",
+      "permanent": true
+    },
+    {
+      "source": "/fr/returns/",
+      "destination": "/fr/demander-un-retour/",
+      "permanent": true
+    },
+    {
+      "source": "/es/returns",
+      "destination": "/es/solicitar-una-devolucion",
+      "permanent": true
+    },
+    {
+      "source": "/es/returns/",
+      "destination": "/es/solicitar-una-devolucion/",
+      "permanent": true
+    },
+    {
+      "source": "/it/returns",
+      "destination": "/it/richiedere-un-reso",
+      "permanent": true
+    },
+    {
+      "source": "/it/returns/",
+      "destination": "/it/richiedere-un-reso/",
+      "permanent": true
+    },
+    { "source": "/de/blog", "destination": "/blog", "permanent": true },
+    { "source": "/de/blog/", "destination": "/blog/", "permanent": true },
+    {
+      "source": "/de/blog/:path*",
+      "destination": "/blog/:path*",
+      "permanent": true
+    },
+    { "source": "/es/blog", "destination": "/blog", "permanent": true },
+    { "source": "/es/blog/", "destination": "/blog/", "permanent": true },
+    {
+      "source": "/es/blog/:path*",
+      "destination": "/blog/:path*",
+      "permanent": true
+    },
+    { "source": "/fr/blog", "destination": "/blog", "permanent": true },
+    { "source": "/fr/blog/", "destination": "/blog/", "permanent": true },
+    {
+      "source": "/fr/blog/:path*",
+      "destination": "/blog/:path*",
+      "permanent": true
+    },
+    { "source": "/it/blog", "destination": "/blog", "permanent": true },
+    { "source": "/it/blog/", "destination": "/blog/", "permanent": true },
+    {
+      "source": "/it/blog/:path*",
+      "destination": "/blog/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/de/achilles-ruptures.html",
+      "destination": "/de/achillessehnenrisse",
+      "permanent": true
+    },
+    {
+      "source": "/de/achilles-ruptures.html/",
+      "destination": "/de/achillessehnenrisse/",
+      "permanent": true
+    },
+    {
+      "source": "/es/achilles-ruptures.html",
+      "destination": "/es/rupturas-aquiles",
+      "permanent": true
+    },
+    {
+      "source": "/es/achilles-ruptures.html/",
+      "destination": "/es/rupturas-aquiles/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/achilles-ruptures.html",
+      "destination": "/fr/ruptures-achille",
+      "permanent": true
+    },
+    {
+      "source": "/fr/achilles-ruptures.html/",
+      "destination": "/fr/ruptures-achille/",
+      "permanent": true
+    },
+    {
+      "source": "/it/achilles-ruptures.html",
+      "destination": "/it/rotture-achille",
+      "permanent": true
+    },
+    {
+      "source": "/it/achilles-ruptures.html/",
+      "destination": "/it/rotture-achille/",
+      "permanent": true
+    },
     { "source": "/courses", "destination": "/course", "permanent": true },
     { "source": "/courses/:path*", "destination": "/course", "permanent": true },
     { "source": "/guide/articles", "destination": "/course", "permanent": true },
