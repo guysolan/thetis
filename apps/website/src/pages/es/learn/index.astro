@@ -1,0 +1,62 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import { conditions } from "@/content/conditions/registry";
+import {
+  getLocalizedLearnHubHref,
+  getLocalizedShopHubHref,
+} from "@/lib/condition-nav";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import type { Lang } from "@/config/languages";
+
+const lang: Lang = "es";
+---
+
+<Layout
+  title="Aprender por condición"
+  description="Cursos, preguntas frecuentes y guías para rotura de Aquiles, fascitis plantar y condiciones relacionadas."
+  {lang}
+>
+  <ColorGradient>
+    <main class="pb-16 md:pb-24">
+    <div class="mx-auto mb-12 px-4 max-w-3xl text-center">
+      <h1 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl">
+        Aprender
+      </h1>
+      <p class="text-neutral-600 dark:text-neutral-400 text-lg">
+        Elija una condición para guías y cursos — o abra la tienda para
+        productos y equipo.
+      </p>
+    </div>
+    <ul class="space-y-4 mx-auto max-w-xl">
+      {
+        conditions
+          .slice()
+          .sort((a, b) => a.sortOrder - b.sortOrder)
+          .map((c) => (
+            <li class="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-4 bg-white dark:bg-neutral-900 p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+              <span class="font-medium text-neutral-900 dark:text-neutral-100">
+                {c.label}
+              </span>
+              <div class="flex flex-wrap gap-2">
+                <a
+                  href={getLocalizedLearnHubHref(lang, c.id)}
+                  class={cn(buttonVariants({ variant: "default", size: "sm" }))}
+                >
+                  Aprender
+                </a>
+                <a
+                  href={getLocalizedShopHubHref(lang, c.id)}
+                  class={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+                >
+                  Tienda
+                </a>
+              </div>
+            </li>
+          ))
+      }
+    </ul>
+    </main>
+  </ColorGradient>
+</Layout>

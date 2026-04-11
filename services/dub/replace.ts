@@ -1,6 +1,6 @@
 /**
  * `replace` — copies `achilles-rupture.embedded.ts` over
- * `packages/catalogue/src/achilles-rupture.ts` after you review the diff.
+ * `packages/catalogue/src/catalogue.ts` after you review the diff.
  */
 
 import { copyFileSync, existsSync } from "node:fs";
@@ -12,7 +12,7 @@ const repoRoot = join(__dirname, "..", "..");
 const embeddedPath = join(__dirname, "achilles-rupture.embedded.ts");
 const cataloguePath = join(
   repoRoot,
-  "packages/catalogue/src/achilles-rupture.ts",
+  "packages/catalogue/src/catalogue.ts",
 );
 
 function main() {

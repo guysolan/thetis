@@ -1,4 +1,5 @@
 ---
+conditionId: achilles-rupture
 title: "Heel Height for Achilles Recovery: Lifts, Boot Wedges, and Shoes"
 status: "published"
 description: "Why heel height matters after an Achilles rupture: boot wedges, in-shoe heel lifts, drops for runners, and how poor positioning risks tendon elongation."

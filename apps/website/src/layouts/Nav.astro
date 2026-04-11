@@ -1,8 +1,6 @@
 ---
-import { buttonVariants, Button } from "../components/ui/button";
 import { DesktopNav } from "./DesktopNav.tsx";
 import { MobileNav } from "./MobileNav.tsx";
-import { cn } from "../lib/utils";
 import Thetis from "./Thetis.tsx";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import type { Lang } from "@/config/languages";
@@ -17,13 +15,20 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header
-    class="top-0 z-[40] fixed flex bg-background m-auto my-auto px-2 lg:px-8 py-4 border-gray-300 border-b w-screen item-center"
+    class="top-0 z-[40] fixed flex bg-background m-auto my-auto px-2 lg:px-8 py-4 border-gray-300 border-b w-screen item-center overflow-visible"
 >
-    <div class="hidden lg:flex justify-between items-center gap-x-6 w-full">
-        <Thetis lang={lang} />
-        <div class="flex justify-center items-center gap-x-4 ml-auto text-base">
+    <div class="hidden lg:flex items-center gap-x-4 w-full text-base">
+        <div class="flex shrink-0 justify-start">
+            <Thetis lang={lang} />
+        </div>
+        <div class="flex flex-1 justify-center min-w-0 overflow-visible">
             <DesktopNav client:load lang={lang} />
+        </div>
+        <div class="flex shrink-0 justify-end items-center gap-x-3 min-w-0">
             <LanguageSwitcher />
+            <div class="pr-1 pl-0.5">
+                <CartIcon client:load />
+            </div>
         </div>
     </div>
 

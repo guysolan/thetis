@@ -1,0 +1,663 @@
+---
+import type { ConditionId } from "@/content/conditions/registry";
+import { conditions, getConditionById } from "@/content/conditions/registry";
+import type { Lang } from "@/config/languages";
+import {
+  type AchillesProduct,
+  CATALOGUE_PRODUCTS_BY_ID,
+  getCatalogueProductsForCondition,
+  orderedShopProductsForDisplay,
+  shopMedalTierForPriority,
+  defaultProductCta,
+  isExternalCatalogueProductUrl,
+  resolveProductPrice,
+  resolveProductUrl,
+} from "@thetis/catalogue";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
+import {
+  getCourseRouteForShopCondition,
+  getLocalizedShopHubHref,
+} from "@/lib/condition-nav";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import AddToCartButton from "@/components/cart/AddToCartButton.tsx";
+import { NIGHT_SPLINT_VARIANTS } from "@/lib/shopify/variants";
+import { BookOpen, ExternalLink, ShoppingBag } from "lucide-react";
+
+interface Props {
+  conditionId: ConditionId;
+  lang: Lang;
+}
+
+const { conditionId, lang } = Astro.props;
+const c = getConditionById(conditionId);
+
+function shopConditionHeroTagline(lang: Lang, conditionLabel: string): string {
+  const name = conditionLabel
+    .split(/\s+/)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join(" ");
+  const byLang: Record<Lang, string> = {
+    en: `Shop recovery gear curated by surgeons for ${name}.`,
+    de: `Von Chirurgen kuratiertes Recovery-Equipment für ${name}.`,
+    fr: `Équipement de récupération sélectionné par des chirurgiens pour ${name}.`,
+    es: `Material de recuperación seleccionado por cirujanos para ${name}.`,
+    it: `Equipaggiamento per il recupero selezionato dai chirurghi per ${name}.`,
+  };
+  return byLang[lang];
+}
+
+const copy: Record<
+  Lang,
+  {
+    titleSuffix: string;
+    ourProducts: string;
+    noOurProducts: string;
+    recommended: string;
+    noRecommended: string;
+    partnerNote: string;
+    chooseCondition: string;
+    accessoryToLabel: string;
+    alternativeToLabel: string;
+    priorityMedalEssential: string;
+    priorityMedalRecommended: string;
+    priorityMedalOptional: string;
+    viewCourse: string;
+    viewProduct: string;
+    externalSiteBadge: string;
+    externalLinkAria: string;
+    recommendedExternalHint: string;
+  }
+> = {
+  en: {
+    titleSuffix: "— Shop",
+    chooseCondition: "Choose a condition",
+    accessoryToLabel: "Accessory to:",
+    alternativeToLabel: "Alternative to:",
+    priorityMedalEssential: "Essential",
+    priorityMedalRecommended: "Recommended",
+    priorityMedalOptional: "Optional",
+    viewCourse: "View course →",
+    viewProduct: "View product →",
+    ourProducts: "From Thetis",
+    noOurProducts: "We do not list an on-site product for this condition yet.",
+    recommended: "Recommended gear",
+    noRecommended:
+      "We have not published a curated list for this condition yet — check back soon.",
+    partnerNote:
+      "Some links go to partner retailers (for example Amazon). They may earn us a small commission at no extra cost to you.",
+    externalSiteBadge: "External site",
+    externalLinkAria: "Opens external website in a new tab",
+    recommendedExternalHint:
+      "Partner links are labeled and open in a new tab so you always know when you are leaving Thetis.",
+  },
+  de: {
+    titleSuffix: "— Shop",
+    chooseCondition: "Beschwerde wählen",
+    accessoryToLabel: "Zubehör für:",
+    alternativeToLabel: "Alternative zu:",
+    priorityMedalEssential: "Essenziell",
+    priorityMedalRecommended: "Empfohlen",
+    priorityMedalOptional: "Optional",
+    viewCourse: "Zum Kurs →",
+    viewProduct: "Zum Produkt →",
+    ourProducts: "Thetis",
+    noOurProducts: "Noch kein On-Site-Produkt für diese Beschwerde.",
+    recommended: "Empfohlene Artikel",
+    noRecommended:
+      "Für diese Beschwerde gibt es noch keine Kuratierte Liste — bald mehr.",
+    partnerNote:
+      "Einige Links führen zu Partner-Shops (z. B. Amazon). Dies kann uns eine kleine Provision einbringen.",
+    externalSiteBadge: "Externe Seite",
+    externalLinkAria: "Öffnet externe Website in neuem Tab",
+    recommendedExternalHint:
+      "Partner-Links sind gekennzeichnet und öffnen in einem neuen Tab.",
+  },
+  fr: {
+    titleSuffix: "— Boutique",
+    chooseCondition: "Choisir une pathologie",
+    accessoryToLabel: "Accessoire pour :",
+    alternativeToLabel: "Alternative à :",
+    priorityMedalEssential: "Essentiel",
+    priorityMedalRecommended: "Recommandé",
+    priorityMedalOptional: "Optionnel",
+    viewCourse: "Voir le cours →",
+    viewProduct: "Voir le produit →",
+    ourProducts: "Thetis",
+    noOurProducts: "Pas encore de produit sur le site pour cette pathologie.",
+    recommended: "Équipement recommandé",
+    noRecommended:
+      "Pas encore de liste pour cette pathologie — revenez bientôt.",
+    partnerNote:
+      "Certains liens mènent vers des partenaires (par ex. Amazon) ; commission possible.",
+    externalSiteBadge: "Site externe",
+    externalLinkAria: "Ouvre un site externe dans un nouvel onglet",
+    recommendedExternalHint:
+      "Les liens partenaires sont indiqués et s’ouvrent dans un nouvel onglet.",
+  },
+  es: {
+    titleSuffix: "— Tienda",
+    chooseCondition: "Elegir condición",
+    accessoryToLabel: "Accesorio para:",
+    alternativeToLabel: "Alternativa a:",
+    priorityMedalEssential: "Esencial",
+    priorityMedalRecommended: "Recomendado",
+    priorityMedalOptional: "Opcional",
+    viewCourse: "Ver el curso →",
+    viewProduct: "Ver el producto →",
+    ourProducts: "Thetis",
+    noOurProducts: "Aún no hay producto en el sitio para esta condición.",
+    recommended: "Equipo recomendado",
+    noRecommended:
+      "Aún no hay lista curada para esta condición — vuelve pronto.",
+    partnerNote:
+      "Algunos enlaces son de socios (p. ej. Amazon); posible comisión.",
+    externalSiteBadge: "Sitio externo",
+    externalLinkAria: "Abre un sitio externo en una pestaña nueva",
+    recommendedExternalHint:
+      "Los enlaces de socios están marcados y se abren en una pestaña nueva.",
+  },
+  it: {
+    titleSuffix: "— Shop",
+    chooseCondition: "Scegli la condizione",
+    accessoryToLabel: "Accessorio per:",
+    alternativeToLabel: "Alternativa a:",
+    priorityMedalEssential: "Essenziale",
+    priorityMedalRecommended: "Consigliato",
+    priorityMedalOptional: "Opzionale",
+    viewCourse: "Vai al corso →",
+    viewProduct: "Vai al prodotto →",
+    ourProducts: "Thetis",
+    noOurProducts: "Nessun prodotto on-site ancora per questa condizione.",
+    recommended: "Attrezzatura consigliata",
+    noRecommended:
+      "Nessuna lista curata ancora per questa condizione — torna presto.",
+    partnerNote:
+      "Alcuni link sono verso partner (es. Amazon); possibile commissione.",
+    externalSiteBadge: "Sito esterno",
+    externalLinkAria: "Apre un sito esterno in una nuova scheda",
+    recommendedExternalHint:
+      "I link partner sono contrassegnati e si aprono in una nuova scheda.",
+  },
+};
+
+const t = copy[lang];
+const market = "US";
+const courseRoute = getCourseRouteForShopCondition(lang, conditionId);
+
+let catalogue = getCatalogueProductsForCondition(conditionId);
+const hasSplint =
+  conditionId === "achilles-rupture" &&
+  (c.productRouteSlugs?.includes("achilles-rupture-splint") ?? false);
+if (hasSplint) {
+  catalogue = catalogue.filter((p) => p.id !== "thetis-night-splint");
+}
+
+const shopProducts = orderedShopProductsForDisplay(catalogue);
+
+const productLinks = (c.productRouteSlugs ?? [])
+  .map((slug) => getRouteBySlugAndLanguage(slug, lang))
+  .filter((r): r is NonNullable<typeof r> => r != null);
+
+const fromThetisLinks = [
+  ...(courseRoute ? [courseRoute] : []),
+  ...productLinks,
+];
+
+const splintRoute = getRouteBySlugAndLanguage("achilles-rupture-splint", lang);
+const isAchillesShop = conditionId === "achilles-rupture";
+
+/** Short EN URL; other locales use translated splint PDP. */
+const learnMoreSplintHref =
+  lang === "en" ? "/splint" : (splintRoute?.href ?? "/splint");
+
+const shopAchillesHero: Record<
+  Lang,
+  {
+    kicker: string;
+    sub: string;
+    splintCaption: string;
+    ctaAddToCart: string;
+    ctaLearnMore: string;
+  }
+> = {
+  en: {
+    kicker: "Achilles rupture essentials",
+    sub: "Our night splint is the centrepiece—then explore boots, wedges, and comfort picks we reference in the guides.",
+    splintCaption:
+      "Hold a safe plantarflexed position at night without sleeping in the full boot (when your team agrees).",
+    ctaAddToCart: "Add to cart",
+    ctaLearnMore: "Learn more",
+  },
+  de: {
+    kicker: "Das Wichtigste bei der Ruptur",
+    sub: "Die Nachtschiene steht im Mittelpunkt—dazu Schuhe, Keile und Komfort-Artikel aus unseren Leitfäden.",
+    splintCaption:
+      "Sichere Plantarflexion nachts ohne volles Boot (wenn Ihr Team es erlaubt).",
+    ctaAddToCart: "In den Warenkorb",
+    ctaLearnMore: "Mehr erfahren",
+  },
+  fr: {
+    kicker: "L’essentiel rupture d’Achille",
+    sub: "L’attelle de nuit au centre—puis bottes, cales et confort issus de nos guides.",
+    splintCaption:
+      "Position sécurisée la nuit sans dormir en botte complète (si votre équipe l’accepte).",
+    ctaAddToCart: "Ajouter au panier",
+    ctaLearnMore: "En savoir plus",
+  },
+  es: {
+    kicker: "Lo esencial en la rotura",
+    sub: "La férula nocturna es el eje—luego botas, cuñas y artículos de nuestras guías.",
+    splintCaption:
+      "Plantarflexión segura por la noche sin la bota completa (si su equipo lo aprueba).",
+    ctaAddToCart: "Añadir al carrito",
+    ctaLearnMore: "Más información",
+  },
+  it: {
+    kicker: "Rottura di Achille: il necessario",
+    sub: "Il tutore notturno è al centro—poi stivali, zeppe e comfort dalle nostre guide.",
+    splintCaption:
+      "Plantarflexione sicura di notte senza lo stivale completo (se il team è d’accordo).",
+    ctaAddToCart: "Aggiungi al carrello",
+    ctaLearnMore: "Scopri di più",
+  },
+};
+
+const ah = shopAchillesHero[lang];
+
+const conditionSelectClass =
+  "w-full sm:min-w-[280px] sm:w-auto rounded-xl border-2 border-primary/25 bg-white dark:bg-neutral-900 px-3 py-2.5 text-neutral-900 dark:text-neutral-100 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/35 focus:border-primary/50";
+---
+
+<main class="space-y-0">
+  {
+    isAchillesShop ? (
+      <section class="color-gradient pb-12 md:pb-16 border-neutral-200 dark:border-neutral-800 border-b">
+        <div class="mx-auto px-4 max-w-6xl">
+          <div class="items-center gap-10 lg:gap-14 grid lg:grid-cols-2">
+            <div class="order-2 lg:order-1 lg:text-left text-center">
+              <div class="inline-flex justify-center items-center bg-primary/10 mb-4 p-3 rounded-full">
+                <ShoppingBag className="w-6 h-6 text-primary" />
+              </div>
+              <div class="flex sm:flex-row flex-col lg:justify-start sm:items-center gap-2.5 sm:gap-3 mb-5 w-full max-w-md">
+                <label
+                  for="shop-condition-select"
+                  class="font-semibold text-neutral-800 dark:text-neutral-200 text-sm shrink-0"
+                >
+                  {t.chooseCondition}
+                </label>
+                <select
+                  id="shop-condition-select"
+                  class={conditionSelectClass}
+                  aria-label={t.chooseCondition}
+                  onchange="window.location.href=this.value"
+                >
+                  {conditions.map((cond) => (
+                    <option
+                      value={getLocalizedShopHubHref(lang, cond.id)}
+                      selected={cond.id === conditionId}
+                    >
+                      {cond.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <p class="mb-2 font-semibold text-primary text-xs uppercase tracking-wide">
+                {ah.kicker}
+              </p>
+              <h1 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl leading-tight">
+                {c.label}
+                <span class="text-primary"> {t.titleSuffix}</span>
+              </h1>
+              <p class="mx-auto lg:mx-0 max-w-xl text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed">
+                {ah.sub}
+              </p>
+              <p class="flex flex-wrap justify-center lg:justify-start gap-3 mt-6">
+                <AddToCartButton
+                  client:load
+                  variantId={NIGHT_SPLINT_VARIANTS.largeLeft}
+                  size="lg"
+                >
+                  {ah.ctaAddToCart}
+                </AddToCartButton>
+                <a
+                  href={learnMoreSplintHref}
+                  class={cn(
+                    buttonVariants({ variant: "outline", size: "lg" }),
+                    "font-semibold",
+                  )}
+                >
+                  {ah.ctaLearnMore}
+                </a>
+              </p>
+              <div class="bg-white/80 dark:bg-neutral-900/60 shadow-sm mx-auto lg:mx-0 mt-8 p-4 border border-primary/20 rounded-xl max-w-lg text-left">
+                <p class="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
+                  {ah.splintCaption}
+                </p>
+              </div>
+            </div>
+            <div class="flex justify-center lg:justify-end order-1 lg:order-2">
+              {splintRoute ? (
+                <a
+                  href={learnMoreSplintHref}
+                  class="block hover:opacity-95 shadow-lg border border-primary/25 rounded-2xl ring-1 ring-primary/10 w-full max-w-[340px] overflow-hidden transition-opacity"
+                >
+                  <img
+                    src="/images/night_splint_bed_top_square.jpg"
+                    alt=""
+                    width={680}
+                    height={680}
+                    class="w-full object-cover aspect-square"
+                    loading="eager"
+                  />
+                </a>
+              ) : (
+                <div class="shadow-lg border border-primary/25 rounded-2xl w-full max-w-[340px] overflow-hidden">
+                  <img
+                    src="/images/night_splint_bed_top_square.jpg"
+                    alt=""
+                    width={680}
+                    height={680}
+                    class="w-full object-cover aspect-square"
+                    loading="eager"
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    ) : (
+      <section class="color-gradient pb-12 md:pb-16 border-neutral-200 dark:border-neutral-800 border-b">
+        <div class="mx-auto px-4 max-w-6xl">
+          <div class="items-center gap-10 lg:gap-14 grid lg:grid-cols-2">
+            <div class="order-2 lg:order-1 lg:text-left text-center">
+              <div class="inline-flex justify-center items-center bg-primary/10 mb-4 p-3 rounded-full">
+                <ShoppingBag className="w-6 h-6 text-primary" />
+              </div>
+              <div class="flex sm:flex-row flex-col lg:justify-start sm:items-center gap-2.5 sm:gap-3 mb-5 w-full max-w-md">
+                <label
+                  for="shop-condition-select"
+                  class="font-semibold text-neutral-800 dark:text-neutral-200 text-sm shrink-0"
+                >
+                  {t.chooseCondition}
+                </label>
+                <select
+                  id="shop-condition-select"
+                  class={conditionSelectClass}
+                  aria-label={t.chooseCondition}
+                  onchange="window.location.href=this.value"
+                >
+                  {conditions.map((cond) => (
+                    <option
+                      value={getLocalizedShopHubHref(lang, cond.id)}
+                      selected={cond.id === conditionId}
+                    >
+                      {cond.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <h1 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl leading-tight">
+                {c.label}
+              </h1>
+              <p class="mx-auto lg:mx-0 max-w-xl text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed">
+                {shopConditionHeroTagline(lang, c.label)}
+              </p>
+            </div>
+            <div class="flex justify-center lg:justify-end order-1 lg:order-2">
+              <div
+                class="flex justify-center items-center bg-gradient-to-br from-primary/20 dark:from-primary/28 via-primary/8 dark:via-primary/12 to-transparent shadow-lg border border-primary/25 rounded-2xl ring-1 ring-primary/10 w-full max-w-[340px] aspect-square"
+                aria-hidden="true"
+              >
+                <ShoppingBag
+                  className="w-[28%] max-w-[7rem] h-auto text-primary/35"
+                  strokeWidth={1.25}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="bg-white py-12 border-neutral-200 border-b">
+    <div class="mx-auto px-4 max-w-6xl">
+      <h2 class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-2xl">
+        {t.ourProducts}
+      </h2>
+      {
+        fromThetisLinks.length === 0 ? (
+          <p class="text-neutral-600">{t.noOurProducts}</p>
+        ) : (
+          <ul class="gap-4 grid sm:grid-cols-2">
+            {fromThetisLinks.map((r) => {
+              const isCourse =
+                courseRoute !== null && r.href === courseRoute.href;
+              const showSplintThumb =
+                !isCourse &&
+                isAchillesShop &&
+                (r.href.includes("achilles-rupture-splint") ||
+                  r.href.includes("achillessehnenriss-schiene") ||
+                  r.href.includes("attelle-rupture") ||
+                  r.href.includes("tutore-tendine") ||
+                  r.href.includes("bota-ortopedica"));
+              const rowLayout =
+                isCourse || showSplintThumb ? "sm:flex-row flex-col" : "flex-col";
+              return (
+                <li>
+                  <a
+                    href={r.href}
+                    class={cn(
+                      "flex items-stretch gap-5 bg-primary/5 hover:bg-primary/10 shadow-sm hover:shadow-md p-5 sm:p-6 border border-primary/20 hover:border-primary/40 rounded-xl transition-all",
+                      rowLayout,
+                    )}
+                  >
+                    {isCourse ? (
+                      <div class="flex justify-center items-center bg-primary/10 border border-primary/15 rounded-xl w-[150px] h-[150px] shrink-0">
+                        <BookOpen
+                          className="w-14 h-14 text-primary"
+                          aria-hidden
+                        />
+                      </div>
+                    ) : showSplintThumb ? (
+                      <div class="border border-primary/15 rounded-xl w-[150px] h-[150px] overflow-hidden shrink-0">
+                        <img
+                          src="/images/night_splint_bed_top_square.jpg"
+                          alt=""
+                          class="w-full h-full object-cover"
+                          width={150}
+                          height={150}
+                          loading="lazy"
+                        />
+                      </div>
+                    ) : null}
+                    <div class="flex flex-col flex-1 min-w-0">
+                      <h3 class="mb-2 font-semibold text-primary text-lg leading-snug">
+                        {r.title}
+                      </h3>
+                      <p class="flex-1 text-neutral-600 dark:text-neutral-400 text-sm">
+                        {r.description}
+                      </p>
+                      <span class="inline-block mt-3 font-medium text-primary text-sm">
+                        {isCourse ? t.viewCourse : t.viewProduct}
+                      </span>
+                    </div>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="bg-neutral-50 dark:bg-neutral-950 py-12">
+    <div class="mx-auto px-4 max-w-6xl">
+      <h2 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-2xl">
+        {t.recommended}
+      </h2>
+      <p class="mb-2 max-w-3xl text-neutral-600 dark:text-neutral-400 text-sm">
+        {t.recommendedExternalHint}
+      </p>
+      <p class="mb-6 max-w-3xl text-neutral-600 dark:text-neutral-400 text-sm">
+        {t.partnerNote}
+      </p>
+      {
+        catalogue.length === 0 ? (
+          <p class="text-neutral-600">{t.noRecommended}</p>
+        ) : (
+          <ul class="gap-6 grid sm:grid-cols-2 lg:grid-cols-3">
+            {shopProducts.flatMap((p: AchillesProduct) => {
+              const href = resolveProductUrl(p, market);
+              if (!href) return [];
+              const price = resolveProductPrice(p, market);
+              const cta = defaultProductCta(href);
+              const external = isExternalCatalogueProductUrl(href);
+              const accessoryNames = (p.accessoryTo ?? [])
+                .map((id) => CATALOGUE_PRODUCTS_BY_ID[id]?.name)
+                .filter(Boolean);
+              const alternativeNames = (p.alternativeTo ?? [])
+                .map((id) => CATALOGUE_PRODUCTS_BY_ID[id]?.name)
+                .filter(Boolean);
+              const calloutClass =
+                "bg-neutral-50 dark:bg-neutral-800/80 mt-3 p-2.5 border border-neutral-200 dark:border-neutral-600 rounded-lg";
+              const descriptionOneLine = p.description
+                ? p.description.replace(/\s*\n+\s*/g, " ").trim()
+                : "";
+              const medalTier = shopMedalTierForPriority(p.priority);
+              const medalTitle =
+                medalTier === "gold"
+                  ? t.priorityMedalEssential
+                  : medalTier === "silver"
+                    ? t.priorityMedalRecommended
+                    : medalTier === "bronze"
+                      ? t.priorityMedalOptional
+                      : null;
+              const medalEmoji =
+                medalTier === "gold"
+                  ? "🥇"
+                  : medalTier === "silver"
+                    ? "🥈"
+                    : medalTier === "bronze"
+                      ? "🥉"
+                      : "";
+              const priorityBadgeClass =
+                medalTier === "gold"
+                  ? "border-amber-200/90 dark:border-amber-700/60 bg-amber-50/95 dark:bg-amber-950/50"
+                  : medalTier === "silver"
+                    ? "border-neutral-200 dark:border-neutral-600 bg-neutral-100/95 dark:bg-neutral-800/90"
+                    : medalTier === "bronze"
+                      ? "border-amber-900/15 dark:border-amber-800/40 bg-amber-100/80 dark:bg-amber-950/35"
+                      : "";
+              return [
+                <li class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+                  {p.imagePath ? (
+                    <div class="bg-neutral-100 mb-4 rounded-lg w-[150px] h-[150px] overflow-hidden shrink-0">
+                      <img
+                        src={p.imagePath}
+                        alt=""
+                        class="w-full h-full object-cover"
+                        width={150}
+                        height={150}
+                        loading="lazy"
+                      />
+                    </div>
+                  ) : null}
+                  {medalTier && medalTitle && medalEmoji ? (
+                    <div class="mb-2 w-fit max-w-full">
+                      <span
+                        class={cn(
+                          "inline-flex items-center gap-1 shadow-sm px-1.5 py-0.5 border rounded-md font-medium text-neutral-800 dark:text-neutral-100 text-xs leading-tight",
+                          priorityBadgeClass,
+                        )}
+                        title={medalTitle}
+                      >
+                        <span aria-hidden class="text-[0.95em] shrink-0">
+                          {medalEmoji}
+                        </span>
+                        <span>{medalTitle}</span>
+                      </span>
+                    </div>
+                  ) : null}
+                  {external ? (
+                    <p class="mb-2 flex items-center gap-1.5 font-medium text-neutral-600 dark:text-neutral-400 text-xs">
+                      <ExternalLink
+                        className="w-3.5 h-3.5 shrink-0 text-primary"
+                        aria-hidden
+                      />
+                      <span>{t.externalSiteBadge}</span>
+                    </p>
+                  ) : null}
+                  <h3 class="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-lg leading-snug">
+                    {p.name}
+                  </h3>
+                  {p.keyBenefit ? (
+                    <p class="mb-2 text-neutral-600 dark:text-neutral-400 text-sm line-clamp-3">
+                      {p.keyBenefit}
+                    </p>
+                  ) : null}
+                  {descriptionOneLine ? (
+                    <p class="mb-2 text-neutral-600 dark:text-neutral-400 text-sm line-clamp-4">
+                      {descriptionOneLine}
+                    </p>
+                  ) : null}
+                  {price ? (
+                    <p class="mb-3 text-neutral-500 text-sm">{price}</p>
+                  ) : null}
+                  <div class="mt-auto pt-2">
+                    <a
+                      href={href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener noreferrer" : undefined}
+                      aria-label={
+                        external ? `${cta}. ${t.externalLinkAria}` : undefined
+                      }
+                      class={cn(
+                        buttonVariants({
+                          variant: external ? "outline" : "default",
+                          size: "sm",
+                        }),
+                        "inline-flex justify-center items-center gap-2 w-full sm:w-auto",
+                      )}
+                    >
+                      {cta}
+                      {external ? (
+                        <ExternalLink
+                          className="w-4 h-4 shrink-0 opacity-90"
+                          aria-hidden
+                        />
+                      ) : null}
+                    </a>
+                  </div>
+                  {accessoryNames.length ? (
+                    <div class={calloutClass}>
+                      <p class="text-neutral-600 dark:text-neutral-300 text-xs leading-snug">
+                        <span class="font-semibold text-neutral-700 dark:text-neutral-200">
+                          {t.accessoryToLabel}
+                        </span>{" "}
+                        {accessoryNames.join(", ")}
+                      </p>
+                    </div>
+                  ) : null}
+                  {alternativeNames.length ? (
+                    <div class={calloutClass}>
+                      <p class="text-neutral-600 dark:text-neutral-300 text-xs leading-snug">
+                        <span class="font-semibold text-neutral-700 dark:text-neutral-200">
+                          {t.alternativeToLabel}
+                        </span>{" "}
+                        {alternativeNames.join(", ")}
+                      </p>
+                    </div>
+                  ) : null}
+                </li>,
+              ];
+            })}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+</main>

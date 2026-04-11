@@ -38,7 +38,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Shop",
     isExternal: true,
     tags: ["boots", "mobility", "protection"],
-    imagePath: "/images/aircast-vs-vacoped.png",
+    imagePath: "/images/catalogue-products/aircast-vs-vacoped.png",
   },
   {
     priority: "essential",
@@ -51,7 +51,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Shop",
     isExternal: true,
     tags: ["boots", "mobility", "protection"],
-    imagePath: "/images/vacoped-angle-changing.jpg",
+    imagePath: "/images/catalogue-products/vacoped-angle-changing.jpg",
   },
   {
     priority: "essential",
@@ -64,7 +64,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy Now",
     isExternal: true,
     tags: ["sleep", "recovery", "protection"],
-    imagePath: "/images/thetis-night-splint-side.jpg",
+    imagePath: "/images/catalogue-products/thetis-night-splint-side.jpg",
   },
   {
     priority: "recommended",
@@ -77,7 +77,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["mobility", "comfort", "posture"],
-    imagePath: "/images/even-up.jpg",
+    imagePath: "/images/catalogue-products/even-up.jpg",
   },
   {
     priority: "recommended",
@@ -89,7 +89,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["hygiene", "showering", "protection"],
-    imagePath: "/images/boot-bag.jpg",
+    imagePath: "/images/catalogue-products/boot-bag.jpg",
   },
   {
     priority: "comfort",
@@ -102,7 +102,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["mobility", "comfort", "pain-relief"],
-    imagePath: "/images/crutch-handles.jpg",
+    imagePath: "/images/catalogue-products/soft-crutch-handles.jpg",
   },
   {
     priority: "comfort",
@@ -114,7 +114,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["recovery", "swelling", "comfort"],
-    imagePath: "/images/elevation-wedge.webp",
+    imagePath: "/images/catalogue-products/elevation-wedge.webp",
   },
   {
     priority: "comfort",
@@ -127,7 +127,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Browse",
     isExternal: true,
     tags: ["comfort", "temperature", "hygiene"],
-    imagePath: "/images/merino-socks.webp",
+    imagePath: "/images/catalogue-products/merino-socks.webp",
   },
   {
     priority: "none",
@@ -139,7 +139,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["hygiene", "prevention", "comfort"],
-    imagePath: "/images/antifungal.jpg",
+    imagePath: "/images/catalogue-products/antifungal.jpg",
   },
   {
     priority: "none",
@@ -151,7 +151,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["rehab", "strength", "recovery"],
-    imagePath: "/images/theraband.jpg",
+    imagePath: "/images/catalogue-products/theraband.jpg",
   },
   {
     priority: "none",
@@ -163,7 +163,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["mobility", "independence", "comfort"],
-    imagePath: "/images/knee-scooter.jpg",
+    imagePath: "/images/catalogue-products/knee-scooter.jpg",
   },
   {
     priority: "none",
@@ -175,7 +175,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["mobility", "comfort", "independence"],
-    imagePath: "/images/ergonomic-crutches.jpg",
+    imagePath: "/images/catalogue-products/ergonomic-crutches.jpg",
   },
   {
     priority: "none",
@@ -187,7 +187,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["rehab", "balance", "recovery"],
-    imagePath: "/images/heel-lifts.jpg",
+    imagePath: "/images/catalogue-products/heel-lifts.jpg",
   },
   {
     priority: "none",
@@ -200,7 +200,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["comfort", "hygiene", "protection"],
-    imagePath: "/images/boot-liner.jpg",
+    imagePath: "/images/catalogue-products/boot-liner.jpg",
   },
 ];
 

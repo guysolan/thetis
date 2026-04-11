@@ -1,4 +1,5 @@
 ---
+conditionId: achilles-rupture
 title: "Blood Clot Risk After Achilles Rupture: DVT and PE"
 status: "published"
 description: "Achilles rupture patients face a high blood clot risk. Learn the warning signs of DVT and PE, who needs blood thinners, and how to protect yourself during recovery."

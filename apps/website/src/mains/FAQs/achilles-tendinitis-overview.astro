@@ -1,0 +1,19 @@
+---
+import FAQsLayout from "@/layouts/FAQsLayout.astro";
+import type { Lang } from "@/config/languages";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props;
+const title = "Achilles tendinitis — overview (placeholder)";
+const description =
+  "Placeholder FAQ — content coming soon. Recovery guidance for Achilles tendinitis.";
+---
+
+<FAQsLayout title={title} description={description} lang={lang}>
+  <section class="mx-auto px-4 py-8 max-w-3xl prose prose-neutral">
+    <p>Placeholder — content coming soon.</p>
+  </section>
+</FAQsLayout>

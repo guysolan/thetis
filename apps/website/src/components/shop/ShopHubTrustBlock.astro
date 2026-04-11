@@ -1,0 +1,159 @@
+---
+import { Image as AstroImage } from "astro:assets";
+import Review1Image from "@/assets/review-1.png";
+import Review2Image from "@/assets/review-2.png";
+import Review3Image from "@/assets/review-3.png";
+import TrustClaims from "@/components/TrustClaims";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import type { Lang } from "@/config/languages";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const copy: Record<
+  Lang,
+  {
+    freeShipping: string;
+    moneyBack: string;
+    surgeonApproved: string;
+    socialProof: string;
+    zeroReruptures: string;
+    inPatients: string;
+    viewReviews: string;
+  }
+> = {
+  en: {
+    freeShipping: "Free shipping worldwide",
+    moneyBack: "30-day money-back guarantee",
+    surgeonApproved: "Surgeon approved & recommended",
+    socialProof: "Join 5,000+ patients sleeping better tonight",
+    zeroReruptures: "Zero re-ruptures",
+    inPatients: "in 5,000+ patients",
+    viewReviews: "View all reviews",
+  },
+  de: {
+    freeShipping: "Kostenloser weltweiter Versand",
+    moneyBack: "30-Tage-Geld-zurück-Garantie",
+    surgeonApproved: "Von Chirurgen empfohlen",
+    socialProof:
+      "Schließen Sie sich 5.000+ Patienten an, die heute Nacht besser schlafen",
+    zeroReruptures: "Null Re-Rupturen",
+    inPatients: "bei 5.000+ Patienten",
+    viewReviews: "Alle Bewertungen ansehen",
+  },
+  fr: {
+    freeShipping: "Livraison mondiale gratuite",
+    moneyBack: "Garantie de remboursement de 30 jours",
+    surgeonApproved: "Approuvé et recommandé par les chirurgiens",
+    socialProof: "Rejoignez 5 000+ patients qui dorment mieux ce soir",
+    zeroReruptures: "Zéro re-ruptures",
+    inPatients: "chez 5 000+ patients",
+    viewReviews: "Voir tous les avis",
+  },
+  es: {
+    freeShipping: "Envío mundial gratuito",
+    moneyBack: "Garantía de devolución de 30 días",
+    surgeonApproved: "Aprobado y recomendado por cirujanos",
+    socialProof: "Únete a 5.000+ pacientes que duermen mejor esta noche",
+    zeroReruptures: "Cero re-rupturas",
+    inPatients: "en 5.000+ pacientes",
+    viewReviews: "Ver todas las reseñas",
+  },
+  it: {
+    freeShipping: "Spedizione mondiale gratuita",
+    moneyBack: "Garanzia di rimborso di 30 giorni",
+    surgeonApproved: "Approvato e raccomandato dai chirurghi",
+    socialProof: "Unisciti a 5.000+ pazienti che dormono meglio stanotte",
+    zeroReruptures: "Zero ri-rotture",
+    inPatients: "in 5.000+ pazienti",
+    viewReviews: "Vedi tutte le recensioni",
+  },
+};
+
+const t = copy[lang];
+const reviewsHref =
+  getRouteBySlugAndLanguage("reviews", lang)?.href ?? "/reviews";
+---
+
+<section
+  class="bg-primary/5 dark:bg-primary/10 mb-10 py-8 border-primary/15 dark:border-primary/20 border-y"
+  aria-label="Why shoppers trust Thetis"
+>
+  <div class="mx-auto px-4 max-w-3xl">
+    <TrustClaims lang={lang} variant="expanded" client:load />
+
+    <div
+      class="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-6 text-neutral-600 dark:text-neutral-400 text-sm"
+    >
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-primary text-lg" aria-hidden="true"
+          >&#10003;</span
+        >
+        <span class="font-medium">{t.freeShipping}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-primary text-lg" aria-hidden="true"
+          >&#10003;</span
+        >
+        <span class="font-medium">{t.moneyBack}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-primary text-lg" aria-hidden="true"
+          >&#10003;</span
+        >
+        <span class="font-medium">{t.surgeonApproved}</span>
+      </div>
+    </div>
+
+    <div
+      class="flex flex-col justify-center items-center gap-3 mt-8 text-neutral-500 dark:text-neutral-400 text-sm"
+    >
+      <div class="flex -space-x-2">
+        <AstroImage
+          src={Review1Image}
+          alt=""
+          class="border-2 border-white dark:border-neutral-900 rounded-full w-10 h-10 object-cover"
+          width={40}
+          height={40}
+        />
+        <AstroImage
+          src={Review2Image}
+          alt=""
+          class="border-2 border-white dark:border-neutral-900 rounded-full w-10 h-10 object-cover"
+          width={40}
+          height={40}
+        />
+        <AstroImage
+          src={Review3Image}
+          alt=""
+          class="border-2 border-white dark:border-neutral-900 rounded-full w-10 h-10 object-cover"
+          width={40}
+          height={40}
+        />
+      </div>
+      <span
+        class="font-semibold text-neutral-900 dark:text-neutral-100 text-center"
+      >
+        {t.socialProof}
+      </span>
+      <a
+        href={reviewsHref}
+        class={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+      >
+        {t.viewReviews}
+      </a>
+    </div>
+
+    <div
+      class="bg-white/80 dark:bg-neutral-900/60 shadow-sm mx-auto mt-8 p-4 border border-primary/20 dark:border-primary/25 rounded-xl max-w-md text-center"
+    >
+      <p class="font-bold text-primary text-sm">{t.zeroReruptures}</p>
+      <p class="text-neutral-600 dark:text-neutral-400 text-xs">{t.inPatients}</p>
+    </div>
+  </div>
+</section>

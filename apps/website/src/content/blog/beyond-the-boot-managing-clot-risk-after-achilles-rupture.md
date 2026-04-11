@@ -1,4 +1,5 @@
 ---
+conditionId: achilles-rupture
 title: "Achilles Rupture Clot Risk: Beyond the Boot"
 status: "published"
 description: "Immobilisation after Achilles rupture raises clot risk. Learn DVT and PE red flags, injection vs tablet options, and what to ask your team in week one."

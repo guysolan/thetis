@@ -1,0 +1,122 @@
+---
+export const prerender = true;
+
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import ColorGradient from "../../../components/ColorGradient.astro";
+import CourseCTA from "../../../components/CTA/CourseCTA.astro";
+import dayjs from "dayjs";
+import { ArrowRight } from "lucide-astro";
+import {
+  conditions,
+  type ConditionId,
+  getConditionById,
+} from "../../../content/conditions/registry";
+
+type BlogPost = CollectionEntry<"blog">;
+
+export function getStaticPaths() {
+  return conditions.map((c) => ({
+    params: { conditionId: c.id },
+  }));
+}
+
+const { conditionId } = Astro.params as { conditionId: ConditionId };
+const condition = getConditionById(conditionId);
+
+const posts = (await getCollection("blog"))
+  .filter(
+    (post: BlogPost) =>
+      post.data.status === "published" && post.data.conditionId === conditionId,
+  )
+  .sort((a: BlogPost, b: BlogPost) => {
+    const dateA = a.data.publishedAt?.getTime() ?? 0;
+    const dateB = b.data.publishedAt?.getTime() ?? 0;
+    return dateB - dateA;
+  });
+
+const title = `${condition.label} articles | Thetis Medical`;
+const description = `Evidence-based articles about ${condition.label.toLowerCase()}, written in plain language for patients.`;
+---
+
+<Layout title={title} description={description} lang="en">
+  <ColorGradient>
+    <div class="mx-auto max-w-3xl">
+      <nav class="mb-6 text-gray-500 text-sm">
+        <a href="/blog" class="text-primary hover:underline">Recovery blog</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <span class="text-gray-700">{condition.label}</span>
+      </nav>
+      <h1 class="mb-4 font-bold text-4xl">{condition.label} articles</h1>
+      <p class="mb-4 text-gray-600 text-lg">
+        Evidence-based articles for this condition. Prefer a structured path?
+        Start at the
+        <a
+          href={condition.learnPath}
+          class="font-medium text-primary hover:underline"
+          >{condition.label} learning hub</a
+        >.
+      </p>
+      <p class="mb-12 text-gray-500 text-sm">
+        <a href="/blog" class="text-primary hover:underline"
+          >View all blog articles</a
+        >
+      </p>
+
+      {
+        posts.length === 0 && (
+          <p class="py-8 text-gray-500 text-center">
+            Articles for this condition are coming soon.
+          </p>
+        )
+      }
+
+      <div class="gap-6 grid">
+        {
+          posts.map((post: BlogPost) => (
+            <a
+              href={`/blog/${post.id}`}
+              class="group flex md:flex-row flex-col gap-6 bg-white shadow-sm hover:shadow-md p-4 sm:p-6 border border-gray-100 rounded-xl transition-shadow"
+            >
+              {post.data.heroImage && (
+                <img
+                  src={post.data.heroImage}
+                  alt={post.data.heroAlt ?? post.data.title}
+                  class="rounded-lg w-full md:w-48 h-32 md:h-auto object-cover aspect-[2/1] md:aspect-square shrink-0"
+                />
+              )}
+              <div class="flex-1">
+                <div class="flex flex-wrap items-center gap-2 mb-2">
+                  {post.data.publishedAt && (
+                    <span class="text-gray-500 text-sm">
+                      {dayjs(post.data.publishedAt).format("MMM D, YYYY")}
+                    </span>
+                  )}
+                  {post.data.tags?.map((tag: string) => (
+                    <span class="bg-primary/10 px-2 py-0.5 rounded-full text-primary text-xs capitalize">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h2 class="mb-2 font-semibold group-hover:text-primary text-xl transition-colors">
+                  {post.data.title}
+                </h2>
+                <p class="text-gray-600 text-sm line-clamp-2">
+                  {post.data.description}
+                </p>
+                <div class="flex items-center gap-1 mt-3 text-primary text-sm">
+                  Read article
+                  <ArrowRight class="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="mt-16">
+        <CourseCTA lang="en" variant="full" />
+      </div>
+    </div>
+  </ColorGradient>
+</Layout>

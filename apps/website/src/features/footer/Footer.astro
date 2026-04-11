@@ -6,15 +6,15 @@ import FooterBlock from "./FooterBlock.astro";
 import { ThemeToggle } from "../../components/theme/ThemeToggle";
 import {
   getRoutesByLanguage,
-  getCourseRoutesByLanguage,
-  getArticleRoutesByLanguage,
-  getRecoveryPhaseRoutesByLanguage,
   productRoutes,
   partnerRoutes,
   contactRoutes,
-  guidePageRoutes,
+  getConditionHubNavRoutes,
+  getConditionShopNavRoutes,
+  navigationContent,
 } from "../../content/routes.tsx";
 import type { Lang } from "../../config/languages.ts";
+import { conditions } from "../../content/conditions/registry";
 
 export interface Props {
   lang?: Lang;
@@ -24,17 +24,7 @@ const { lang = "en" } = Astro.props as Props;
 
 const localizedRoutes = getRoutesByLanguage(lang);
 
-// Filter routes by category - use guide page routes
-const guidePageLinks = localizedRoutes.filter((route) => {
-  const baseRoute = guidePageRoutes.find(
-    (gr) =>
-      gr.slugTranslations?.[lang] === route.slug || gr.slug === route.slug,
-  );
-  return !!baseRoute;
-});
-
 const productLinks = localizedRoutes.filter((route) => {
-  // Find the base route that matches this translated route
   const baseRoute = productRoutes.find(
     (pr) =>
       pr.slugTranslations?.[lang] === route.slug || pr.slug === route.slug,
@@ -43,7 +33,6 @@ const productLinks = localizedRoutes.filter((route) => {
 });
 
 const partnerLinks = localizedRoutes.filter((route) => {
-  // Find the base route that matches this translated route
   const baseRoute = partnerRoutes.find(
     (pr) =>
       pr.slugTranslations?.[lang] === route.slug || pr.slug === route.slug,
@@ -52,7 +41,6 @@ const partnerLinks = localizedRoutes.filter((route) => {
 });
 
 const contactLinks = localizedRoutes.filter((route) => {
-  // Find the base route that matches this translated route
   const baseRoute = contactRoutes.find(
     (cr) =>
       cr.slugTranslations?.[lang] === route.slug || cr.slug === route.slug,
@@ -60,29 +48,12 @@ const contactLinks = localizedRoutes.filter((route) => {
   return !!baseRoute;
 });
 
-const faqLinks = localizedRoutes.filter((route) =>
-  route.slug.startsWith("FAQs/"),
-);
-
-// Get section titles from routes.tsx content
 const getSectionTitle = (routes: any[], sectionSlug: string) => {
   const route = routes.find((r) => r.slug === sectionSlug);
   return route?.title?.[lang] || route?.title?.en || sectionSlug;
 };
 
-const guideSectionTitles: Record<Lang, string> = {
-  en: "Recovery Guide",
-  de: "Genesungsleitfaden",
-  fr: "Guide de Récupération",
-  es: "Guía de Recuperación",
-  it: "Guida al Recupero",
-};
-
 const footerLinks = {
-  guide: {
-    title: guideSectionTitles[lang],
-    links: guidePageLinks,
-  },
   company: {
     title: getSectionTitle(contactRoutes, "contact"),
     links: contactLinks,
@@ -91,17 +62,28 @@ const footerLinks = {
     title: getSectionTitle(productRoutes, "achilles-rupture-splint"),
     links: productLinks,
   },
-  patientGuides: {
-    title: "Patient Guides", // This is a generic title, not from a specific route
-    links: faqLinks,
-  },
   professionals: {
     title: getSectionTitle(partnerRoutes, "professionals"),
     links: partnerLinks,
   },
 };
 
-// Get "Stay in Touch" title based on language
+const navT = navigationContent[lang];
+const conditionLearnRoutes = getConditionHubNavRoutes(lang);
+const conditionShopRoutes = getConditionShopNavRoutes(lang);
+
+const learnFooterLinks = conditions.map((c, i) => ({
+  href: conditionLearnRoutes[i]?.href ?? "/learn",
+  title: c.label,
+}));
+const shopFooterLinks = conditions.map((c, i) => ({
+  href: conditionShopRoutes[i]?.href ?? "/shop",
+  title: c.label,
+}));
+
+const learnTitle = navT.learnMenu ?? navT.conditionsMenu ?? "Learn";
+const shopTitle = navT.shopMenu ?? "Shop";
+
 const stayInTouchTitles = {
   en: "Stay in Touch",
   de: "In Kontakt bleiben",
@@ -126,7 +108,13 @@ const socials: Array<{
     <div
       class="gap-8 lg:gap-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:text-left text-center"
     >
-      <!-- Company & Products -->
+      <!-- Learn & Shop — same condition hubs as DesktopNav / MobileNav -->
+      <div class="space-y-8">
+        <FooterBlock title={shopTitle} links={shopFooterLinks} />
+        <FooterBlock title={learnTitle} links={learnFooterLinks} />
+      </div>
+
+      <!-- Contact & products -->
       <div class="space-y-8">
         <FooterBlock
           title={footerLinks.company.title}
@@ -138,77 +126,7 @@ const socials: Array<{
         />
       </div>
 
-      <!-- Patient Guides -->
-      <div class="space-y-8">
-        <!-- Courses -->
-        <div>
-          <h3 class="mb-3 font-semibold text-lg lg:text-left text-center">
-            Courses
-          </h3>
-          <ul class="space-y-3">
-            {
-              getCourseRoutesByLanguage(lang)
-                .filter(
-                  (course) => !course.href.includes("/course/professionals"),
-                )
-                .map((course) => (
-                  <li>
-                    <a
-                      href={course.href}
-                      class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
-                    >
-                      {course.title}
-                    </a>
-                  </li>
-                ))
-            }
-          </ul>
-        </div>
-
-        <!-- FAQs -->
-        <div>
-          <h3 class="mb-3 font-semibold text-lg lg:text-left text-center">
-            FAQs
-          </h3>
-          <ul class="space-y-3">
-            {
-              getArticleRoutesByLanguage(lang).map((article) => (
-                <li>
-                  <a
-                    href={article.href}
-                    class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
-                  >
-                    {article.title}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <!-- Recovery Timeline -->
-        <div>
-          <h3 class="mb-3 font-semibold text-lg lg:text-left text-center">
-            Recovery Timeline
-          </h3>
-          <ul class="space-y-3">
-            {
-              getRecoveryPhaseRoutesByLanguage(lang).map((phase) => (
-                <li>
-                  <a
-                    href={phase.href}
-                    class="text-gray-100 hover:text-gray-300 text-base lg:text-left text-center transition-colors"
-                  >
-                    {phase.title}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-
-      <!-- Partners & Contact -->
+      <!-- Professionals & newsletter -->
       <div class="space-y-8">
         <FooterBlock
           title={footerLinks.professionals.title}

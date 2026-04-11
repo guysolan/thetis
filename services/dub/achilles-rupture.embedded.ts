@@ -18,7 +18,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Holds your ankle in plantarflexion with stacked heel wedges—widely issued, usually lighter, and often less expensive than hinged boots.",
     tags: ["boots", "mobility", "protection", "recovery"],
-    imagePath: "/images/aircast-vs-vacoped.png",
+    imagePath: "/images/catalogue-products/aircast-vs-vacoped.png",
     description:
       "Typical wedge-based fracture boot used for Achilles care. Remove wedges only on your clinician’s schedule. Retailers and hospital suppliers vary by region—links are common purchase starting points, not endorsements.",
     features: [
@@ -30,12 +30,14 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "~$120–168 retail (size-dependent)",
         url: "https://www.amazon.com/dp/B00ZL316FO",
-        dub: "https://dub.sh/cEOCW5B",},
+        dub: "https://dub.sh/cEOCW5B",
+      },
       GB: {
         price: "~£120–165 inc VAT (typical retail)",
         url:
           "https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html",
-        dub: "https://dub.sh/TlwOLyP",},
+        dub: "https://dub.sh/TlwOLyP",
+      },
     },
     notes:
       "Manufacturer / IFU: Enovis Aircast AirSelect Elite. Re-verify price and SKU with your supplier.",
@@ -48,7 +50,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Hinged vacuum-liner boot with dialled plantarflexion—heavier and pricier; some teams prefer it for fine angle control and later ROM options.",
     tags: ["boots", "mobility", "protection", "recovery"],
-    imagePath: "/images/vacoped-angle-changing.jpg",
+    imagePath: "/images/catalogue-products/vacoped-angle-changing.jpg",
     description:
       "Premium hinged orthosis. Buy only what your protocol specifies (catalogue numbers differ). OPED runs regional shops; confirm duty/tax and sizing on the retailer page.",
     features: [
@@ -61,11 +63,13 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
         price: "~$275 (OPED US; size-dependent)",
         url:
           "https://opedmedical.com/product/vacoped-achilles-injury-fracture-orthosis-boot-formerly-vacocast-pro-achilles-boot/",
-        dub: "https://dub.sh/NOaCy2D",},
+        dub: "https://dub.sh/NOaCy2D",
+      },
       GB: {
         price: "~£252 inc VAT (typical UK retail)",
         url: "https://oped-uk.com/product/vacoped/",
-        dub: "https://dub.sh/E7haeDP",},
+        dub: "https://dub.sh/E7haeDP",
+      },
     },
     notes:
       "Alternate US SKU (short boot): see reference product `vacoped-us-short-fracture-boot`.",
@@ -78,7 +82,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Editorial guide on this site—trade-offs, costs, and what matters for compliance.",
     tags: ["boots", "education"],
-    imagePath: "/images/aircast-vs-vacoped.png",
+    imagePath: "/images/catalogue-products/aircast-vs-vacoped.png",
     description:
       "Not a storefront. Use the two boot products above for buy links.",
     features: [],
@@ -95,7 +99,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Sleep soundly knowing your Achilles is protected and healing in the optimal position",
     tags: ["sleep", "recovery", "protection"],
-    imagePath: "/images/thetis-night-splint-side.jpg",
+    imagePath: "/images/catalogue-products/thetis-night-splint-side.jpg",
     description:
       "The only night splint specifically designed for Achilles rupture recovery. Patented in 2024.",
     features: [
@@ -107,11 +111,13 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$90–120",
         url: "https://www.thetismedical.com/achilles-rupture-splint",
-        dub: "https://dub.sh/mmkrz0Z",},
+        dub: "https://dub.sh/mmkrz0Z",
+      },
       GB: {
         price: "£60–70",
         url: "https://www.thetismedical.com/achilles-rupture-splint",
-        dub: "https://dub.sh/QfjDjXQ",},
+        dub: "https://dub.sh/QfjDjXQ",
+      },
     },
   },
   {
@@ -122,7 +128,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Walk naturally and prevent back pain by keeping your hips level",
     tags: ["mobility", "comfort", "posture"],
-    imagePath: "/images/even-up.jpg",
+    imagePath: "/images/catalogue-products/even-up.jpg",
     description:
       "Addresses leg-length discrepancy from wearing a boot. Prevents back, hip, and knee pain.",
     features: [
@@ -134,11 +140,13 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$40–$50",
         url: "https://www.amazon.com/dp/B08FX2T2TF",
-        dub: "https://dub.sh/Tce7MYz",},
+        dub: "https://dub.sh/Tce7MYz",
+      },
       GB: {
         price: "£35–£40",
         url: "https://www.amazon.co.uk/dp/B08FX3YPWQ",
-        dub: "https://dub.sh/vCqn9UM",},
+        dub: "https://dub.sh/vCqn9UM",
+      },
     },
   },
   {
@@ -148,7 +156,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Recovery",
     keyBenefit: "Speed up healing and reduce swelling with proper elevation",
     tags: ["recovery", "swelling", "comfort"],
-    imagePath: "/images/elevation-wedge.webp",
+    imagePath: "/images/catalogue-products/elevation-wedge.webp",
     description:
       "Critical for early recovery. UK guidelines recommend 23 hours/day elevation in first week.",
     features: [
@@ -160,11 +168,13 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$25–$70",
         url: "https://www.amazon.com/dp/B0D31CCML3",
-        dub: "https://dub.sh/dHl0DIs",},
+        dub: "https://dub.sh/dHl0DIs",
+      },
       GB: {
         price: "£15–£45",
         url: "https://www.amazon.co.uk/dp/B09TRGQM1H",
-        dub: "https://dub.sh/mrIhBOY",},
+        dub: "https://dub.sh/mrIhBOY",
+      },
     },
   },
   {
@@ -175,7 +185,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Reduce hand pain and fatigue by up to 40% while using crutches",
     tags: ["mobility", "comfort", "pain-relief"],
-    imagePath: "/images/soft-crutch-handles.jpg",
+    imagePath: "/images/catalogue-products/soft-crutch-handles.jpg",
     description:
       "Clinical studies show 40% reduction in forearm pain and 35% decrease in paresthesia.",
     features: [
@@ -187,11 +197,13 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$20–35",
         url: "https://www.amazon.com/dp/B09872TVZL",
-        dub: "https://dub.sh/lMWs2Gi",},
+        dub: "https://dub.sh/lMWs2Gi",
+      },
       GB: {
         price: "£6–15",
         url: "https://www.amazon.co.uk/dp/B07WWH1HNM",
-        dub: "https://dub.sh/uNbcZQV",},
+        dub: "https://dub.sh/uNbcZQV",
+      },
     },
   },
   {
@@ -202,7 +214,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Stay comfortable all day with temperature-regulating, moisture-wicking socks",
     tags: ["comfort", "temperature", "hygiene"],
-    imagePath: "/images/merino-socks.webp",
+    imagePath: "/images/catalogue-products/merino-socks.webp",
     description:
       "Naturally moisture-wicking and temperature regulating. Reduces 'hot foot' issues.",
     features: ["Moisture-wicking", "Temperature regulating", "Antimicrobial"],
@@ -210,11 +222,13 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$20–35",
         url: "https://www.amazon.com/dp/B077D9B2R5",
-        dub: "https://dub.sh/1sWkX7U",},
+        dub: "https://dub.sh/1sWkX7U",
+      },
       GB: {
         price: "£10–£25",
         url: "https://www.amazon.co.uk/dp/B077D9B2R5",
-        dub: "https://dub.sh/Eg3OhV5",},
+        dub: "https://dub.sh/Eg3OhV5",
+      },
     },
   },
   {
@@ -224,7 +238,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Hygiene",
     keyBenefit: "Shower with confidence and keep your boot dry and fresh",
     tags: ["hygiene", "showering", "protection"],
-    imagePath: "/images/boot-bag.jpg",
+    imagePath: "/images/catalogue-products/boot-bag.jpg",
     description:
       "Essential for safe showering. NHS guidelines specifically recommend waterproof covers.",
     features: ["Prevents infection", "Reusable design", "Secure seal"],
@@ -232,11 +246,13 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$25–$45",
         url: "https://www.amazon.com/dp/B0BZ43M5RD",
-        dub: "https://dub.sh/AYBbWxm",},
+        dub: "https://dub.sh/AYBbWxm",
+      },
       GB: {
         price: "£20–£25",
         url: "https://limboproducts.co.uk/product/limbo-full-leg-m100/",
-        dub: "https://dub.sh/STvghum",},
+        dub: "https://dub.sh/STvghum",
+      },
     },
   },
   {
@@ -246,7 +262,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Hygiene",
     keyBenefit: "Prevent infections and keep your foot fresh during recovery",
     tags: ["hygiene", "prevention", "comfort"],
-    imagePath: "/images/antifungal.jpg",
+    imagePath: "/images/catalogue-products/antifungal.jpg",
     description:
       "Prevents athlete's foot and other fungal issues in the warm boot environment.",
     features: ["Prevents infections", "Reduces friction", "Daily protection"],
@@ -254,11 +270,13 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$12–20",
         url: "https://www.amazon.com/dp/B0885HPBHK",
-        dub: "https://dub.sh/iveqHRR",},
+        dub: "https://dub.sh/iveqHRR",
+      },
       GB: {
         price: "£6–12",
         url: "https://www.amazon.co.uk/dp/B000KUAJCE",
-        dub: "https://dub.sh/Va8uahi",},
+        dub: "https://dub.sh/Va8uahi",
+      },
     },
   },
   {
@@ -268,7 +286,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Mobility",
     keyBenefit: "Move freely and independently without crutch fatigue",
     tags: ["mobility", "independence", "comfort"],
-    imagePath: "/images/knee-scooter.jpg",
+    imagePath: "/images/catalogue-products/knee-scooter.jpg",
     description:
       "Alternative to crutches for those who find them difficult or painful to use.",
     features: [
@@ -280,11 +298,13 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$189–$330",
         url: "https://www.amazon.com/dp/B009VLBPI0",
-        dub: "https://dub.sh/VQFJtCu",},
+        dub: "https://dub.sh/VQFJtCu",
+      },
       GB: {
         price: "£100–£220",
         url: "https://www.amazon.co.uk/dp/B009VLBPI0",
-        dub: "https://dub.sh/ilaYNui",},
+        dub: "https://dub.sh/ilaYNui",
+      },
     },
   },
   {
@@ -295,7 +315,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Hands-free crutch alternative—some patients prefer it to knee scooters; confirm fit and protocol with your team.",
     tags: ["mobility", "independence", "comfort"],
-    imagePath: "/images/knee-scooter.jpg",
+    imagePath: "/images/catalogue-products/knee-scooter.jpg",
     description:
       "A steerable knee scooter isn’t the only option—iWALK-style devices let you keep hands free. Sizing and safety rules apply; not suitable for everyone.",
     features: [
@@ -307,11 +327,13 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$149–199",
         url: "https://www.amazon.com/dp/B08WJRWR57",
-        dub: "https://dub.sh/qXD0w1h",},
+        dub: "https://dub.sh/qXD0w1h",
+      },
       GB: {
         price: "£149–199",
         url: "https://www.amazon.co.uk/dp/B08WJRWR57",
-        dub: "https://dub.sh/soThT7T",},
+        dub: "https://dub.sh/soThT7T",
+      },
     },
   },
   {
@@ -321,7 +343,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Rehab",
     keyBenefit: "Build strength safely with progressive resistance training",
     tags: ["rehab", "strength", "recovery"],
-    imagePath: "/images/theraband.jpg",
+    imagePath: "/images/catalogue-products/theraband.jpg",
     description:
       "Essential for later stages of rehabilitation and strength building.",
     features: [
@@ -334,12 +356,14 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
         price: "$12–20",
         url:
           "https://www.amazon.com/THERABAND-Latex-Yellow-Red-Green/dp/B000LX4KRA",
-        dub: "https://dub.sh/Po1w433",},
+        dub: "https://dub.sh/Po1w433",
+      },
       GB: {
         price: "£10–15",
         url:
           "https://www.amazon.co.uk/THERABAND-Latex-Yellow-Red-Green/dp/B000LX4KRA",
-        dub: "https://dub.sh/q5Q2Wvk",},
+        dub: "https://dub.sh/q5Q2Wvk",
+      },
     },
   },
   {
@@ -350,7 +374,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Keep your boot fresh and comfortable with removable, washable liners",
     tags: ["comfort", "hygiene", "protection"],
-    imagePath: "/images/boot-liner.jpg",
+    imagePath: "/images/catalogue-products/boot-liner.jpg",
     description:
       "Removable, washable liners to keep your boot fresh and comfortable.",
     features: ["Removable", "Washable", "Odor control"],
@@ -359,11 +383,13 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
         price: "$40",
         url:
           "https://opedmedical.com/product/liner-black-grey-for-vacoped-achilles-injury-fracture-and-vacocast-fracture-walking-boot-orthoses/",
-        dub: "https://dub.sh/r9GfzzH",},
+        dub: "https://dub.sh/r9GfzzH",
+      },
       GB: {
         price: "£40",
         url: "https://oped-uk.com/product/vacoped-vacocast-liner/",
-        dub: "https://dub.sh/OrPGhVG",},
+        dub: "https://dub.sh/OrPGhVG",
+      },
     },
   },
   {
@@ -374,7 +400,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Provide additional heel elevation and comfort inside your boot",
     tags: ["comfort", "elevation", "support"],
-    imagePath: "/images/heel-lifts.jpg",
+    imagePath: "/images/catalogue-products/heel-lifts.jpg",
     description:
       "Additional heel elevation inserts that can be used inside your boot for extra comfort and support.",
     features: ["Adjustable height", "Easy to insert", "Comfortable padding"],
@@ -382,11 +408,13 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$15–30",
         url: "https://www.amazon.com/dp/B0CTML6GND",
-        dub: "https://dub.sh/RjpEJUY",},
+        dub: "https://dub.sh/RjpEJUY",
+      },
       GB: {
         price: "£10–18",
         url: "https://www.amazon.co.uk/dp/B0CW5YQQ7P",
-        dub: "https://dub.sh/chBAdO8",},
+        dub: "https://dub.sh/chBAdO8",
+      },
     },
   },
   {
@@ -396,14 +424,15 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Mobility",
     keyBenefit: "Walk with less strain on your arms and shoulders",
     tags: ["mobility", "comfort", "independence"],
-    imagePath: "/images/ergonomic-crutches.jpg",
+    imagePath: "/images/catalogue-products/ergonomic-crutches.jpg",
     features: [],
     locations: {
       US: {
         price: "$75–139",
         url:
           "https://www.amazon.com/Mobilegs-Ultra-Crutches-1-Pair/dp/B01N9OAW75",
-        dub: "https://dub.sh/5fzFIuX",},
+        dub: "https://dub.sh/5fzFIuX",
+      },
     },
   },
   {
@@ -413,13 +442,19 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Rehab",
     keyBenefit: "Balance your leg length and walk more naturally",
     tags: ["rehab", "balance", "recovery"],
-    imagePath: "/images/heel-lifts.jpg",
+    imagePath: "/images/catalogue-products/heel-lifts.jpg",
     features: [],
     locations: {
-      US: { price: "$10–15", url: "https://www.amazon.com/dp/B0CTML6GND",
-        dub: "https://dub.sh/2Ks0ddw" },
-      GB: { price: "£10–18", url: "https://www.amazon.co.uk/dp/B0CW5YQQ7P",
-        dub: "https://dub.sh/QfLkkQB" },
+      US: {
+        price: "$10–15",
+        url: "https://www.amazon.com/dp/B0CTML6GND",
+        dub: "https://dub.sh/2Ks0ddw",
+      },
+      GB: {
+        price: "£10–18",
+        url: "https://www.amazon.co.uk/dp/B0CW5YQQ7P",
+        dub: "https://dub.sh/QfLkkQB",
+      },
     },
   },
   {
@@ -430,7 +465,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Keep your boot fresh and comfortable with removable, washable liners",
     tags: ["comfort", "hygiene", "protection"],
-    imagePath: "/images/boot-liner.jpg",
+    imagePath: "/images/catalogue-products/boot-liner.jpg",
     features: [],
     notes:
       "Amazon listing; survival kit uses OPED direct (`vacoped-boot-liner-op`).",
@@ -439,7 +474,8 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
         price: "$40",
         url:
           "https://www.amazon.com/Liner-Achilles-Fracture-Orthosis-VACOcast/dp/B00PYI93U6",
-        dub: "https://dub.sh/Fnchc4w",},
+        dub: "https://dub.sh/Fnchc4w",
+      },
     },
   },
   {
@@ -454,8 +490,10 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     notes:
       "Older listing; survival kit + course use B08FX ‘Large’ where possible.",
     locations: {
-      US: { url: "https://www.amazon.com/dp/B004HY68DO",
-        dub: "https://dub.sh/d6uYNQd" },
+      US: {
+        url: "https://www.amazon.com/dp/B004HY68DO",
+        dub: "https://dub.sh/d6uYNQd",
+      },
     },
   },
   {
@@ -470,7 +508,8 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     locations: {
       GB: {
         url: "https://www.amazon.co.uk/EvenUp-Evenup-Medium/dp/B089P6BT12",
-        dub: "https://dub.sh/4sXT6Bi",},
+        dub: "https://dub.sh/4sXT6Bi",
+      },
     },
   },
   {
@@ -485,10 +524,12 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         url: "https://opedmedical.com/product/evenup-shoe-lift/",
-        dub: "https://dub.sh/QF7vvKC",},
+        dub: "https://dub.sh/QF7vvKC",
+      },
       GB: {
         url: "https://opedmedical.com/product/evenup-shoe-lift/",
-        dub: "https://dub.sh/SUiRJlB",},
+        dub: "https://dub.sh/SUiRJlB",
+      },
     },
   },
   {
@@ -498,15 +539,17 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Comfort",
     keyBenefit: "Used on recovery-equipment-guide award card (US).",
     tags: ["mobility", "comfort"],
-    imagePath: "/images/soft-crutch-handles.jpg",
+    imagePath: "/images/catalogue-products/soft-crutch-handles.jpg",
     features: [],
     locations: {
       US: {
         url: "https://www.amazon.com/dp/B0716XTJ8L",
-        dub: "https://dub.sh/GO94vjq",},
+        dub: "https://dub.sh/GO94vjq",
+      },
       GB: {
         url: "https://www.amazon.co.uk/dp/B07K4VVN1V",
-        dub: "https://dub.sh/ZbMfJ74",},
+        dub: "https://dub.sh/ZbMfJ74",
+      },
     },
   },
   {
@@ -516,11 +559,13 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Hygiene",
     keyBenefit: "Hygiene award card on recovery-equipment-guide (US).",
     tags: ["hygiene"],
-    imagePath: "/images/boot-bag.jpg",
+    imagePath: "/images/catalogue-products/boot-bag.jpg",
     features: [],
     locations: {
-      US: { url: "https://www.amazon.com/dp/B0BN9XWHJT",
-        dub: "https://dub.sh/k8wdiUM" },
+      US: {
+        url: "https://www.amazon.com/dp/B0BN9XWHJT",
+        dub: "https://dub.sh/k8wdiUM",
+      },
     },
   },
   {
@@ -536,7 +581,8 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       GB: {
         url:
           "https://www.amazon.co.uk/Fasola-Shower-Non-Slip-Protector-Reusable/dp/B0BN9XWHJT",
-        dub: "https://dub.sh/VYqmdmF",},
+        dub: "https://dub.sh/VYqmdmF",
+      },
     },
   },
   {
@@ -552,7 +598,8 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         url:
           "https://www.amazon.com/LimbO-Waterproof-Cast-Wound-Protector/dp/B00O7Z0ORS",
-        dub: "https://dub.sh/c1alY5u",},
+        dub: "https://dub.sh/c1alY5u",
+      },
     },
   },
   {
@@ -565,8 +612,10 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     imagePath: "",
     features: [],
     locations: {
-      GB: { url: "https://limboproducts.co.uk/shop/",
-        dub: "https://dub.sh/fZ1Da7j" },
+      GB: {
+        url: "https://limboproducts.co.uk/shop/",
+        dub: "https://dub.sh/fZ1Da7j",
+      },
     },
   },
   {
@@ -579,8 +628,10 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     imagePath: "",
     features: [],
     locations: {
-      US: { url: "https://www.amazon.com/dp/B07DGR98VQ",
-        dub: "https://dub.sh/E8mkssN" },
+      US: {
+        url: "https://www.amazon.com/dp/B07DGR98VQ",
+        dub: "https://dub.sh/E8mkssN",
+      },
     },
   },
   {
@@ -596,7 +647,8 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         url:
           "https://opedmedical.com/product/vacoped-short-achilles-injury-fracture-walking-boot/",
-        dub: "https://dub.sh/QEDwJOO",},
+        dub: "https://dub.sh/QEDwJOO",
+      },
     },
   },
   {
@@ -611,10 +663,12 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         url: "https://enovis.com/products/aircast/airselect-elite",
-        dub: "https://dub.sh/c10uDlA",},
+        dub: "https://dub.sh/c10uDlA",
+      },
       GB: {
         url: "https://enovis.com/products/aircast/airselect-elite",
-        dub: "https://dub.sh/UoMP6J5",},
+        dub: "https://dub.sh/UoMP6J5",
+      },
     },
   },
   {
@@ -630,7 +684,8 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         url:
           "https://www.amazon.com/Achilles-Orthopaedic-Comfortable-Lightweight-Alternative/dp/B09XLFCJ9F",
-        dub: "https://dub.sh/M7f8Dhu",},
+        dub: "https://dub.sh/M7f8Dhu",
+      },
     },
   },
   {
@@ -646,7 +701,8 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       GB: {
         url:
           "https://www.amazon.co.uk/Pieces-Walking-Recovery-Reusable-Waterproof/dp/B09PG83J8H",
-        dub: "https://dub.sh/4ZuyQgV",},
+        dub: "https://dub.sh/4ZuyQgV",
+      },
     },
   },
   {
@@ -662,7 +718,8 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
       US: {
         url:
           "https://www.amazon.com/MyShoeCovers-Fracture-Walking-Boot-Cover/dp/B075FC3T9B",
-        dub: "https://dub.sh/f1YSQnO",},
+        dub: "https://dub.sh/f1YSQnO",
+      },
     },
   },
   {
@@ -678,7 +735,8 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     locations: {
       GB: {
         url: "https://www.amazon.co.uk/dp/B09TRGQM1H",
-        dub: "https://dub.sh/3OcmPra",},
+        dub: "https://dub.sh/3OcmPra",
+      },
     },
   },
   {
@@ -693,7 +751,8 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     locations: {
       GB: {
         url: "https://www.amazon.co.uk/s?k=Flexivity+crutch+handle+covers",
-        dub: "https://dub.sh/X50YcYW",},
+        dub: "https://dub.sh/X50YcYW",
+      },
     },
   },
   {
@@ -706,8 +765,10 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     imagePath: "",
     features: [],
     locations: {
-      US: { url: "https://www.donjoystore.com/aircast-heel-wedge",
-        dub: "https://dub.sh/8DGUhql" },
+      US: {
+        url: "https://www.donjoystore.com/aircast-heel-wedge",
+        dub: "https://dub.sh/8DGUhql",
+      },
     },
   },
   {
@@ -720,8 +781,10 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     imagePath: "",
     features: [],
     locations: {
-      US: { url: "https://www.amazon.com/dp/B000LX4KRA",
-        dub: "https://dub.sh/Y8kOiIX" },
+      US: {
+        url: "https://www.amazon.com/dp/B000LX4KRA",
+        dub: "https://dub.sh/Y8kOiIX",
+      },
     },
   },
 ];

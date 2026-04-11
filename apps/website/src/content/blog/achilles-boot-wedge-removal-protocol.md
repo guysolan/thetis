@@ -1,4 +1,5 @@
 ---
+conditionId: achilles-rupture
 title: "Achilles Boot Wedge Removal: Why Progression Is Gradual"
 status: "published"
 description: "Achilles boot wedge removal steps your foot from toes-down to neutral. Learn why gradual progression matters, typical timelines, and risks of rushing your protocol."

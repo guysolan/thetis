@@ -1,0 +1,14 @@
+---
+import GuideLayout from "@/layouts/GuideLayout.astro";
+import { metadata, content } from "@/content/guide/insertional-achilles-tendonitis/stage-3";
+import { insertionalAchillesTendonitisGuideNavPhases } from "@/content/guide/insertional-achilles-tendonitis";
+---
+
+<GuideLayout
+ title={metadata.title}
+    description={metadata.description}
+    slug={`guide/insertional-achilles-tendonitis/${metadata.slug}`}
+    lang="en"
+    content={content}
+    navPhases={insertionalAchillesTendonitisGuideNavPhases}
+/>

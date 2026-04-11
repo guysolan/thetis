@@ -1,4 +1,5 @@
 ---
+conditionId: achilles-rupture
 title: "Long-Term Strength After Achilles Rupture"
 status: "published"
 description: "Calf weakness years after Achilles rupture: why tendon length and muscle size change, what trials say about surgery vs non-surgical care, and rehab priorities."

@@ -4,6 +4,13 @@ export type MarketCode = "US" | "GB";
 /** Accept lowercase from older call sites. */
 export type RegionInput = MarketCode | "us" | "gb";
 
+/** Condition slugs aligned with website `ConditionId`. */
+export type CatalogueConditionId =
+  | "achilles-rupture"
+  | "plantar-fasciitis"
+  | "achilles-tendinitis"
+  | "insertional-achilles-tendonitis";
+
 export type AchillesProductPriority =
   | "essential"
   | "recommended"
@@ -29,16 +36,36 @@ export interface AchillesProductLocation {
 
 export interface AchillesProduct {
   id: string;
+  /** Which condition shop/survival-kit lists include this row (when priority matches). */
+  conditions: CatalogueConditionId[];
+  /**
+   * Curation tier. Shop cards: **essential** → gold medal, **recommended** → silver,
+   * **optional** & **comfort** → bronze. (`supplement` / `reference` are not listed on the shop grid.)
+   */
   priority: AchillesProductPriority;
   name: string;
   category: string;
   keyBenefit: string;
   tags: string[];
+  /** Site-relative; product photos under `/images/catalogue-products/` (synced from package assets). */
   imagePath: string;
   description?: string;
   features: string[];
   locations: Partial<Record<MarketCode, AchillesProductLocation>>;
   notes?: string;
+  /**
+   * @deprecated Unused in shop (single-card grid). Kept for legacy tooling.
+   */
+  shopCardGroupId?: string;
+  /**
+   * Other product ids for the same role. The shop shows an “Alternative to”
+   * callout with their names (each product stays its own card).
+   */
+  alternativeTo?: string[];
+  /**
+   * This row is an add-on for these primary product ids (e.g. liner → boot).
+   */
+  accessoryTo?: string[];
 }
 
 export type SplintVariantId = "LL" | "LR" | "SL" | "SR";

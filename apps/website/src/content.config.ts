@@ -1,11 +1,20 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
+const conditionIdSchema = z.enum([
+  "achilles-rupture",
+  "plantar-fasciitis",
+  "achilles-tendinitis",
+  "insertional-achilles-tendonitis",
+]);
+
 const blog = defineCollection({
   loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    /** Recovery condition this article belongs to (Learn → Articles). */
+    conditionId: conditionIdSchema,
     publishedAt: z.coerce.date().optional(),
     updatedAt: z.coerce.date().optional(),
     heroImage: z.string().optional(),

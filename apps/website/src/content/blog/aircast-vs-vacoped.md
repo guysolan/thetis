@@ -1,4 +1,5 @@
 ---
+conditionId: achilles-rupture
 title: "Aircast vs VACOped: Which Boot for Achilles Rupture?"
 status: "published"
 description: "Aircast vs VACOped for Achilles tendon rupture: how wedge boots and hinged boots work, costs, and research. Following your protocol matters more than brand."

@@ -1,7 +1,4 @@
-import {
-  ACHILLES_RUPTURE_PRODUCTS,
-  ACHILLES_RUPTURE_PRODUCTS_BY_ID,
-} from "./achilles-rupture";
+import { CATALOGUE_PRODUCTS, CATALOGUE_PRODUCTS_BY_ID } from "./catalogue";
 import type { AchillesProduct, MarketCode, RegionInput } from "./types";
 
 export function normalizeMarket(region: RegionInput): MarketCode {
@@ -57,7 +54,7 @@ export function resolvedCatalogueOutboundHref(
   const tryMarkets: MarketCode[] = [market, market === "US" ? "GB" : "US"];
 
   for (const mkt of tryMarkets) {
-    for (const p of ACHILLES_RUPTURE_PRODUCTS) {
+    for (const p of CATALOGUE_PRODUCTS) {
       const loc = p.locations[mkt];
       const cu = loc?.url?.trim();
       if (!cu?.startsWith("http")) continue;
@@ -73,7 +70,7 @@ export function resolvedCatalogueOutboundHref(
   const asin = amazonAsinFromPath(url.pathname);
   if (asin && /\.amazon\./i.test(url.hostname)) {
     for (const mkt of tryMarkets) {
-      for (const p of ACHILLES_RUPTURE_PRODUCTS) {
+      for (const p of CATALOGUE_PRODUCTS) {
         const loc = p.locations[mkt];
         const cu = loc?.url?.trim();
         if (!cu?.startsWith("http")) continue;
@@ -118,7 +115,7 @@ export function resolvedCatalogueOutboundHref(
 
   for (const { test, productId } of aliases) {
     if (!test(url)) continue;
-    const p = ACHILLES_RUPTURE_PRODUCTS_BY_ID[productId];
+    const p = CATALOGUE_PRODUCTS_BY_ID[productId];
     if (!p) continue;
     const href = resolveProductUrl(p, market);
     if (href?.startsWith("http")) return href;
@@ -165,7 +162,7 @@ export function resolveProductUrlById(
   id: string,
   region: RegionInput,
 ): string | undefined {
-  const p = ACHILLES_RUPTURE_PRODUCTS_BY_ID[id];
+  const p = CATALOGUE_PRODUCTS_BY_ID[id];
   if (!p) return undefined;
   return resolveProductUrl(p, region);
 }
@@ -173,6 +170,23 @@ export function resolveProductUrlById(
 /** `https:` / `http:` URLs (open in new tab off-site). */
 export function isOffSiteUrl(url: string): boolean {
   return url.startsWith("http://") || url.startsWith("https://");
+}
+
+/** Relative paths and absolute URLs on the Thetis marketing site (same-tab). */
+export function isInternalThetisUrl(url: string): boolean {
+  const t = url.trim();
+  if (!isOffSiteUrl(t)) return true;
+  try {
+    const h = new URL(t).hostname.replace(/^www\./i, "").toLowerCase();
+    return h === "thetismedical.com";
+  } catch {
+    return false;
+  }
+}
+
+/** Partner / retailer links (new tab + mark clearly as not Thetis checkout). */
+export function isExternalCatalogueProductUrl(url: string): boolean {
+  return isOffSiteUrl(url) && !isInternalThetisUrl(url);
 }
 
 /** Default button label from destination URL. */

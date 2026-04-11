@@ -131,4 +131,10 @@ export interface GuideMetadata {
   phase: string;
   weekRange: string;
   highlights: string[];
+  /** Short label for prev/next and phase grid (e.g. "First Week") */
+  phaseSubtitle: string;
+  /** Card heading on the guide hub; defaults to `title` if omitted */
+  hubCardTitle?: string;
+  /** Tailwind background class for timeline dot on guide hub */
+  timelineColor?: string;
 }

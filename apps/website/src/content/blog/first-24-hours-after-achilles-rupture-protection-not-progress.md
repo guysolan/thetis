@@ -1,4 +1,5 @@
 ---
+conditionId: achilles-rupture
 title: "First 24 Hours Achilles Rupture Care"
 status: "published"
 description: "In the first 24 hours after an Achilles rupture, protection comes first. Learn immobilisation, safe weight-bearing, red flags, and what to do next."

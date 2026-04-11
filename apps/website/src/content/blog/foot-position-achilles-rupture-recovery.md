@@ -1,4 +1,5 @@
 ---
+conditionId: achilles-rupture
 title: "Foot Position After Achilles Rupture: Why Toes Down"
 status: "published"
 description: "After an Achilles rupture, holding your foot toes down (plantarflexion) brings torn tendon ends closer; a neutral foot can gap the tear. Boots, sleep, and early protection explained."
