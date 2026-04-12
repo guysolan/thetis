@@ -1,0 +1,243 @@
+---
+import type { ConditionId } from "@/content/conditions/registry";
+import type { Lang } from "@/config/languages";
+import { languages } from "@/config/languages";
+import { achillesRuptureGuideHubPhases } from "@/content/guide";
+import { recoveryPhaseRoutes } from "@/content/routes/achilles-rupture";
+import {
+    getRecoveryPhaseRoutesForCondition,
+    generateRouteForLanguage,
+} from "@/content/routes";
+import { cn } from "@/lib/utils";
+import { BookOpen, ArrowRight } from "lucide-react";
+
+interface Props {
+    conditionId: ConditionId;
+    lang: Lang;
+}
+
+const { conditionId, lang } = Astro.props;
+const language = languages.find((l) => l.code === lang)!;
+
+const copy: Record<
+    Lang,
+    {
+        kicker: string;
+        title: string;
+        blurb: string;
+        readGuide: string;
+        /** Label above the number in timeline bubbles — staged guides */
+        stageLabel: string;
+        /** Label for Achilles week-by-week guides */
+        weekLabel: string;
+    }
+> = {
+    en: {
+        kicker: "Complete timeline",
+        title: "Your recovery journey",
+        blurb: "Open any stage for the full guide for that part of recovery.",
+        readGuide: "Read full guide",
+        stageLabel: "Stage",
+        weekLabel: "Week",
+    },
+    de: {
+        kicker: "Kompletter Zeitplan",
+        title: "Ihr Genesungsweg",
+        blurb: "Öffnen Sie eine Phase für den vollständigen Leitfaden.",
+        readGuide: "Zum vollständigen Leitfaden",
+        stageLabel: "Phase",
+        weekLabel: "Woche",
+    },
+    fr: {
+        kicker: "À suivre dans le temps",
+        title: "Votre parcours",
+        blurb: "Ouvrez une étape pour le guide complet de cette phase.",
+        readGuide: "Lire le guide complet",
+        stageLabel: "Étape",
+        weekLabel: "Sem.",
+    },
+    es: {
+        kicker: "Cronología completa",
+        title: "Tu proceso de recuperación",
+        blurb: "Abre cada etapa para la guía completa.",
+        readGuide: "Ver guía completa",
+        stageLabel: "Etapa",
+        weekLabel: "Sem.",
+    },
+    it: {
+        kicker: "Percorso completo",
+        title: "Il tuo percorso di recupero",
+        blurb: "Apri una fase per la guida completa.",
+        readGuide: "Leggi la guida completa",
+        stageLabel: "Fase",
+        weekLabel: "Sett.",
+    },
+};
+
+const t = copy[lang];
+
+type PhaseCard = {
+    href: string;
+    title: string;
+    description: string;
+    shortLabel: string;
+    highlights: string[];
+    color: string;
+};
+
+const primaryShades = [
+    "bg-primary",
+    "bg-primary/90",
+    "bg-primary/80",
+    "bg-primary/75",
+    "bg-primary/70",
+    "bg-primary/65",
+];
+
+/** Avoid traffic-light greens in hub UI; keep guide metadata unchanged elsewhere. */
+function hubPhaseColor(raw: string, index: number): string {
+    if (/\b(bg-)?(green|lime|emerald)(-\d+)?\b/i.test(raw)) {
+        return primaryShades[index % primaryShades.length] ?? "bg-primary";
+    }
+    return raw;
+}
+
+function achillesCards(): PhaseCard[] {
+    return achillesRuptureGuideHubPhases.map((phase, index) => {
+        const base = recoveryPhaseRoutes.find((r) => r.slug === phase.slug);
+        const href = base
+            ? generateRouteForLanguage(base, language).href
+            : `/${phase.slug}`;
+        return {
+            href,
+            title: phase.title,
+            description: phase.description,
+            shortLabel: phase.week.replace(/^Week(s)?\s+/i, "").trim(),
+            highlights: phase.highlights,
+            color: hubPhaseColor(phase.color, index),
+        };
+    });
+}
+
+function genericCards(condition: ConditionId): PhaseCard[] {
+    const bases = getRecoveryPhaseRoutesForCondition(condition);
+    return bases.map((base, index) => {
+        const r = generateRouteForLanguage(base, language);
+        return {
+            href: r.href,
+            title: r.title,
+            description: r.description,
+            shortLabel: String(index + 1),
+            highlights: [],
+            color: primaryShades[index % primaryShades.length] ?? "bg-primary",
+        };
+    });
+}
+
+const phases: PhaseCard[] =
+    conditionId === "achilles-rupture"
+        ? achillesCards()
+        : genericCards(conditionId);
+
+const bubbleKicker =
+    conditionId === "achilles-rupture" ? t.weekLabel : t.stageLabel;
+---
+
+{
+    phases.length > 0 ? (
+        <section id="phases" class="py-16 md:py-24">
+            <div class="mx-auto px-4 max-w-6xl">
+                <div class="mb-12 text-center">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-1.5 rounded-full font-medium text-primary text-sm uppercase tracking-wide">
+                        <BookOpen className="w-4 h-4" />
+                        {t.kicker}
+                    </div>
+                    <h2 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl">
+                        {t.title}
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg">
+                        {t.blurb}
+                    </p>
+                </div>
+
+                <div class="relative">
+                    <div class="hidden lg:block top-0 bottom-0 left-1/2 absolute bg-gradient-to-b from-primary/50 via-primary to-primary/70 rounded-full w-1 -translate-x-1/2 transform" />
+                    <div class="space-y-8 lg:space-y-12">
+                        {phases.map((phase, index) => (
+                            <div
+                                class={cn(
+                                    "relative lg:flex lg:items-center lg:gap-8",
+                                    index % 2 === 0
+                                        ? "lg:flex-row"
+                                        : "lg:flex-row-reverse",
+                                )}
+                            >
+                                <div class="hidden left-1/2 absolute lg:flex justify-center items-center -translate-x-1/2 transform">
+                                    <div
+                                        class={cn(
+                                            "shadow-md border-4 border-white dark:border-neutral-950 rounded-full w-6 h-6",
+                                            phase.color,
+                                        )}
+                                    />
+                                </div>
+
+                                <a
+                                    href={phase.href}
+                                    class={cn(
+                                        "group block bg-white hover:bg-primary/5 dark:bg-neutral-900 dark:hover:bg-neutral-800/80 shadow-sm hover:shadow-lg p-6 md:p-8 border border-neutral-200 hover:border-primary/50 dark:border-neutral-800 rounded-2xl transition-all",
+                                        "lg:w-[calc(50%-2rem)]",
+                                        index % 2 === 0
+                                            ? "lg:mr-auto"
+                                            : "lg:ml-auto",
+                                    )}
+                                >
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class={cn(
+                                                "flex flex-shrink-0 justify-center items-center rounded-xl w-14 h-14 font-bold text-white text-sm",
+                                                phase.color,
+                                            )}
+                                        >
+                                            <div class="text-center leading-tight">
+                                                <div class="opacity-80 text-xs">
+                                                    {bubbleKicker}
+                                                </div>
+                                                <div>{phase.shortLabel}</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex-1 min-w-0">
+                                            <h3 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-primary text-xl md:text-2xl transition-colors">
+                                                {phase.title}
+                                            </h3>
+                                            <p class="mb-4 text-neutral-600 dark:text-neutral-400">
+                                                {phase.description}
+                                            </p>
+
+                                            {phase.highlights.length > 0 ? (
+                                                <div class="flex flex-wrap gap-2 mb-4">
+                                                    {phase.highlights.map(
+                                                        (highlight) => (
+                                                            <span class="bg-neutral-100 dark:bg-neutral-800 group-hover:bg-primary/10 px-2 py-1 rounded font-medium text-neutral-600 dark:text-neutral-300 text-xs transition-colors">
+                                                                {highlight}
+                                                            </span>
+                                                        ),
+                                                    )}
+                                                </div>
+                                            ) : null}
+
+                                            <div class="flex items-center gap-2 font-semibold text-primary">
+                                                {t.readGuide}
+                                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    ) : null
+}

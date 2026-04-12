@@ -110,6 +110,10 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     },
   },
   {
+    /**
+     * Per-country buy URLs and Shopify vs Amazon live in `THETIS_SPLINT_PURCHASE_LINKS`.
+     * `locations` here supplies US/GB price hints for cards; hrefs use `resolveProductUrlForCountry`.
+     */
     id: "thetis-night-splint",
     conditions: ["achilles-rupture"],
     priority: "recommended",
@@ -1302,6 +1306,13 @@ export function getCatalogueProductsForCondition(
     (p) =>
       p.conditions.includes(conditionId) &&
       SURVIVAL_KIT_PRIORITIES.has(p.priority),
+  );
+}
+
+/** Every survival-kit product in the catalogue (union across conditions). Shop index. */
+export function getAllCatalogueShopProducts(): AchillesProduct[] {
+  return CATALOGUE_PRODUCTS.filter((p) =>
+    SURVIVAL_KIT_PRIORITIES.has(p.priority)
   );
 }
 

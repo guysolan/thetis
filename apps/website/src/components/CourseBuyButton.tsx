@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, type ButtonProps } from "@thetis/ui/button";
 import { addToCart } from "@/lib/shopify/cart-store";
 import { Check, Loader2, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { SHOPIFY_COURSE_PRODUCTS, SHOPIFY_COURSE_VARIANTS } from "@/lib/shopify-course-price";
+import {
+  isCourseShopifyCheckoutAllowed,
+  SHOPIFY_COURSE_PRODUCTS,
+  SHOPIFY_COURSE_VARIANTS,
+} from "@/lib/shopify-course-price";
+import {
+  getCountryCodeForPricing,
+  SHOPPING_COUNTRY_CHANGE_EVENT,
+} from "@/lib/shopping-country";
 
-interface CourseBuyButtonProps extends Omit<ButtonProps, "onClick" | "disabled"> {
+interface CourseBuyButtonProps
+  extends Omit<ButtonProps, "onClick" | "disabled"> {
   productId: string;
   quantity?: number;
   children?: React.ReactNode;
@@ -32,8 +41,32 @@ export function CourseBuyButton({
 }: CourseBuyButtonProps) {
   const [isAdding, setIsAdding] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
+  const [checkoutAllowed, setCheckoutAllowed] = useState<boolean | null>(null);
 
   const variantId = getVariantId(productId);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function syncRegion() {
+      const code = await getCountryCodeForPricing();
+      if (!cancelled) setCheckoutAllowed(isCourseShopifyCheckoutAllowed(code));
+    }
+    syncRegion();
+    function onShoppingCountryChange() {
+      syncRegion();
+    }
+    window.addEventListener(
+      SHOPPING_COUNTRY_CHANGE_EVENT,
+      onShoppingCountryChange,
+    );
+    return () => {
+      cancelled = true;
+      window.removeEventListener(
+        SHOPPING_COUNTRY_CHANGE_EVENT,
+        onShoppingCountryChange,
+      );
+    };
+  }, []);
 
   const handleClick = async () => {
     if (!variantId) {
@@ -61,6 +94,23 @@ export function CourseBuyButton({
     );
   }
 
+  if (checkoutAllowed === false) {
+    return (
+      <Button disabled className={className} size={size} {...buttonProps}>
+        Not available in your region
+      </Button>
+    );
+  }
+
+  if (checkoutAllowed === null) {
+    return (
+      <Button disabled className={className} size={size} {...buttonProps}>
+        <Loader2 className="mr-2 w-5 h-5 animate-spin" />
+        Loading…
+      </Button>
+    );
+  }
+
   return (
     <Button
       onClick={handleClick}
@@ -68,27 +118,31 @@ export function CourseBuyButton({
       size={size}
       className={cn(
         "transition-all duration-200",
-        justAdded && "bg-green-600 hover:bg-green-600",
+        justAdded && "bg-primary hover:bg-primary",
         className,
       )}
       {...buttonProps}
     >
-      {isAdding ? (
-        <>
-          <Loader2 className="mr-2 w-5 h-5 animate-spin" />
-          Adding...
-        </>
-      ) : justAdded ? (
-        <>
-          <Check className="mr-2 w-5 h-5" />
-          Added!
-        </>
-      ) : (
-        <>
-          <ShoppingCart className="mr-2 w-5 h-5" />
-          {children || "Add to Cart"}
-        </>
-      )}
+      {isAdding
+        ? (
+          <>
+            <Loader2 className="mr-2 w-5 h-5 animate-spin" />
+            Adding...
+          </>
+        )
+        : justAdded
+        ? (
+          <>
+            <Check className="mr-2 w-5 h-5" />
+            Added!
+          </>
+        )
+        : (
+          <>
+            <ShoppingCart className="mr-2 w-5 h-5" />
+            {children || "Add to Cart"}
+          </>
+        )}
     </Button>
   );
 }

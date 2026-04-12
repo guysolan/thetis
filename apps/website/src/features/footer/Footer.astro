@@ -7,6 +7,7 @@ import { ThemeToggle } from "../../components/theme/ThemeToggle";
 import {
   getRoutesByLanguage,
   productRoutes,
+  productRouteSlugsExcludedFromFooter,
   partnerRoutes,
   contactRoutes,
   getConditionHubNavRoutes,
@@ -24,12 +25,14 @@ const { lang = "en" } = Astro.props as Props;
 
 const localizedRoutes = getRoutesByLanguage(lang);
 
+const excludedFromFooterProducts = new Set(productRouteSlugsExcludedFromFooter);
+
 const productLinks = localizedRoutes.filter((route) => {
   const baseRoute = productRoutes.find(
     (pr) =>
       pr.slugTranslations?.[lang] === route.slug || pr.slug === route.slug,
   );
-  return !!baseRoute;
+  return !!baseRoute && !excludedFromFooterProducts.has(baseRoute.slug);
 });
 
 const partnerLinks = localizedRoutes.filter((route) => {
@@ -72,12 +75,17 @@ const navT = navigationContent[lang];
 const conditionLearnRoutes = getConditionHubNavRoutes(lang);
 const conditionShopRoutes = getConditionShopNavRoutes(lang);
 
+const learnHrefFallback =
+  conditionLearnRoutes.find((r) => r.href)?.href ?? "#";
+const shopHrefFallback =
+  conditionShopRoutes.find((r) => r.href)?.href ?? "#";
+
 const learnFooterLinks = conditions.map((c, i) => ({
-  href: conditionLearnRoutes[i]?.href ?? "/learn",
+  href: conditionLearnRoutes[i]?.href ?? learnHrefFallback,
   title: c.label,
 }));
 const shopFooterLinks = conditions.map((c, i) => ({
-  href: conditionShopRoutes[i]?.href ?? "/shop",
+  href: conditionShopRoutes[i]?.href ?? shopHrefFallback,
   title: c.label,
 }));
 

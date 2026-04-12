@@ -1,28 +1,34 @@
 ---
 import type { ConditionId } from "@/content/conditions/registry";
-import { conditions, getConditionById } from "@/content/conditions/registry";
+import { getConditionById } from "@/content/conditions/registry";
 import type { Lang } from "@/config/languages";
 import {
-  type AchillesProduct,
-  CATALOGUE_PRODUCTS_BY_ID,
   getCatalogueProductsForCondition,
   orderedShopProductsForDisplay,
-  shopMedalTierForPriority,
-  defaultProductCta,
-  isExternalCatalogueProductUrl,
-  resolveProductPrice,
-  resolveProductUrl,
 } from "@thetis/catalogue";
 import { getRouteBySlugAndLanguage } from "@/content/routes";
-import {
-  getCourseRouteForShopCondition,
-  getLocalizedShopHubHref,
-} from "@/lib/condition-nav";
+import { conditionHubChooseConditionLabel } from "@/content/condition-hub-select-labels";
+import ConditionHubSelect from "@/components/condition/ConditionHubSelect.astro";
+import { getCourseRouteForShopCondition } from "@/lib/condition-nav";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import AddToCartButton from "@/components/cart/AddToCartButton.tsx";
+import CourseBuyButton from "@/components/CourseBuyButton.tsx";
+import SplintShopBuyButton from "@/components/shop/SplintShopBuyButton.tsx";
+import PriceDisplay from "@/components/PriceDisplay.tsx";
+import VariantPriceDisplay from "@/components/shop/VariantPriceDisplay.tsx";
+import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
 import { NIGHT_SPLINT_VARIANTS } from "@/lib/shopify/variants";
-import { BookOpen, ExternalLink, ShoppingBag } from "lucide-react";
+import { COURSE_VARIANTS } from "@/lib/shopify/products";
+import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
+import ShopCatalogueProductGrid from "@/components/shop/ShopCatalogueProductGrid.astro";
+import {
+  BookOpen,
+  Check,
+  RotateCcw,
+  ShieldCheck,
+  ShoppingBag,
+  Truck,
+} from "lucide-react";
 
 interface Props {
   conditionId: ConditionId;
@@ -56,7 +62,6 @@ const copy: Record<
     recommended: string;
     noRecommended: string;
     partnerNote: string;
-    chooseCondition: string;
     accessoryToLabel: string;
     alternativeToLabel: string;
     priorityMedalEssential: string;
@@ -71,7 +76,6 @@ const copy: Record<
 > = {
   en: {
     titleSuffix: "— Shop",
-    chooseCondition: "Choose a condition",
     accessoryToLabel: "Accessory to:",
     alternativeToLabel: "Alternative to:",
     priorityMedalEssential: "Essential",
@@ -93,7 +97,6 @@ const copy: Record<
   },
   de: {
     titleSuffix: "— Shop",
-    chooseCondition: "Beschwerde wählen",
     accessoryToLabel: "Zubehör für:",
     alternativeToLabel: "Alternative zu:",
     priorityMedalEssential: "Essenziell",
@@ -115,7 +118,6 @@ const copy: Record<
   },
   fr: {
     titleSuffix: "— Boutique",
-    chooseCondition: "Choisir une pathologie",
     accessoryToLabel: "Accessoire pour :",
     alternativeToLabel: "Alternative à :",
     priorityMedalEssential: "Essentiel",
@@ -137,7 +139,6 @@ const copy: Record<
   },
   es: {
     titleSuffix: "— Tienda",
-    chooseCondition: "Elegir condición",
     accessoryToLabel: "Accesorio para:",
     alternativeToLabel: "Alternativa a:",
     priorityMedalEssential: "Esencial",
@@ -159,7 +160,6 @@ const copy: Record<
   },
   it: {
     titleSuffix: "— Shop",
-    chooseCondition: "Scegli la condizione",
     accessoryToLabel: "Accessorio per:",
     alternativeToLabel: "Alternativa a:",
     priorityMedalEssential: "Essenziale",
@@ -182,8 +182,96 @@ const copy: Record<
 };
 
 const t = copy[lang];
-const market = "US";
 const courseRoute = getCourseRouteForShopCondition(lang, conditionId);
+
+/** Rich “From Thetis” cards + reviews (Achilles shop only). */
+const achillesFromThetisCopy: Record<
+  Lang,
+  {
+    freeShipping: string;
+    guarantee30Day: string;
+    easyReturns: string;
+    instantAccess: string;
+    readersLine: string;
+    addCourse: string;
+    splintImageAlt: string;
+    reviewsKicker: string;
+    reviewsTitle: string;
+    reviewsSubtitle: string;
+    reviewsViewAll: string;
+  }
+> = {
+  en: {
+    freeShipping: "Free shipping",
+    guarantee30Day: "30-day guarantee",
+    easyReturns: "Easy returns",
+    instantAccess: "Instant access — start today",
+    readersLine: "Join 20,000 readers",
+    addCourse: "Add course to cart",
+    splintImageAlt: "Thetis night splint for Achilles recovery",
+    reviewsKicker: "TRUSTED BY THOUSANDS",
+    reviewsTitle: "Join 5,000+ Patients Who've Found Relief",
+    reviewsSubtitle:
+      "Real reviews from real patients recovering from Achilles rupture",
+    reviewsViewAll: "View all reviews",
+  },
+  de: {
+    freeShipping: "Kostenloser Versand",
+    guarantee30Day: "30-Tage-Garantie",
+    easyReturns: "Einfache Rückgabe",
+    instantAccess: "Sofortiger Zugang — heute starten",
+    readersLine: "Schließen Sie sich 20.000 Lesern an",
+    addCourse: "Kurs in den Warenkorb",
+    splintImageAlt: "Thetis Nachtschiene für die Achilles-Genesung",
+    reviewsKicker: "VON TAUSENDEN VERTRAUT",
+    reviewsTitle: "Schließen Sie sich über 5.000 Patienten an",
+    reviewsSubtitle: "Echte Bewertungen von Patienten nach Achillessehnenriss",
+    reviewsViewAll: "Alle Bewertungen",
+  },
+  fr: {
+    freeShipping: "Livraison gratuite",
+    guarantee30Day: "Garantie 30 jours",
+    easyReturns: "Retours faciles",
+    instantAccess: "Accès instantané — commencez aujourd’hui",
+    readersLine: "Rejoignez 20 000 lecteurs",
+    addCourse: "Ajouter le cours au panier",
+    splintImageAlt: "Attelle de nuit Thetis pour la récupération d’Achille",
+    reviewsKicker: "APPROUVÉ PAR DES MILLIERS",
+    reviewsTitle: "Rejoignez plus de 5 000 patients soulagés",
+    reviewsSubtitle:
+      "De vrais avis de patients en récupération après rupture d’Achille",
+    reviewsViewAll: "Voir tous les avis",
+  },
+  es: {
+    freeShipping: "Envío gratis",
+    guarantee30Day: "Garantía de 30 días",
+    easyReturns: "Devoluciones fáciles",
+    instantAccess: "Acceso instantáneo — empiece hoy",
+    readersLine: "Únete a 20.000 lectores",
+    addCourse: "Añadir curso al carrito",
+    splintImageAlt: "Férula nocturna Thetis para la recuperación de Aquiles",
+    reviewsKicker: "CON LA CONFIANZA DE MILES",
+    reviewsTitle: "Únase a más de 5.000 pacientes aliviados",
+    reviewsSubtitle: "Opiniones reales de pacientes con rotura de Aquiles",
+    reviewsViewAll: "Ver todas las opiniones",
+  },
+  it: {
+    freeShipping: "Spedizione gratuita",
+    guarantee30Day: "Garanzia 30 giorni",
+    easyReturns: "Resi facili",
+    instantAccess: "Accesso immediato — inizia oggi",
+    readersLine: "Unisciti a 20.000 lettori",
+    addCourse: "Aggiungi corso al carrello",
+    splintImageAlt: "Tutore notturno Thetis per il recupero di Achille",
+    reviewsKicker: "SCELTO DA MIGLIAIA DI PERSONE",
+    reviewsTitle: "Unisciti a oltre 5.000 pazienti che hanno trovato sollievo",
+    reviewsSubtitle:
+      "Recensioni vere da pazienti in recupero dopo rottura di Achille",
+    reviewsViewAll: "Vedi tutte le recensioni",
+  },
+};
+
+const at = achillesFromThetisCopy[lang];
 
 let catalogue = getCatalogueProductsForCondition(conditionId);
 const hasSplint =
@@ -205,6 +293,7 @@ const fromThetisLinks = [
 ];
 
 const splintRoute = getRouteBySlugAndLanguage("achilles-rupture-splint", lang);
+const reviewsRoute = getRouteBySlugAndLanguage("reviews", lang);
 const isAchillesShop = conditionId === "achilles-rupture";
 
 /** Short EN URL; other locales use translated splint PDP. */
@@ -218,6 +307,8 @@ const shopAchillesHero: Record<
     sub: string;
     splintCaption: string;
     ctaAddToCart: string;
+    /** Amazon / partner checkout (opens in a new tab). */
+    ctaBuyPartner: string;
     ctaLearnMore: string;
   }
 > = {
@@ -227,6 +318,7 @@ const shopAchillesHero: Record<
     splintCaption:
       "Hold a safe plantarflexed position at night without sleeping in the full boot (when your team agrees).",
     ctaAddToCart: "Add to cart",
+    ctaBuyPartner: "Buy now",
     ctaLearnMore: "Learn more",
   },
   de: {
@@ -235,6 +327,7 @@ const shopAchillesHero: Record<
     splintCaption:
       "Sichere Plantarflexion nachts ohne volles Boot (wenn Ihr Team es erlaubt).",
     ctaAddToCart: "In den Warenkorb",
+    ctaBuyPartner: "Jetzt kaufen",
     ctaLearnMore: "Mehr erfahren",
   },
   fr: {
@@ -243,6 +336,7 @@ const shopAchillesHero: Record<
     splintCaption:
       "Position sécurisée la nuit sans dormir en botte complète (si votre équipe l’accepte).",
     ctaAddToCart: "Ajouter au panier",
+    ctaBuyPartner: "Acheter",
     ctaLearnMore: "En savoir plus",
   },
   es: {
@@ -251,6 +345,7 @@ const shopAchillesHero: Record<
     splintCaption:
       "Plantarflexión segura por la noche sin la bota completa (si su equipo lo aprueba).",
     ctaAddToCart: "Añadir al carrito",
+    ctaBuyPartner: "Comprar",
     ctaLearnMore: "Más información",
   },
   it: {
@@ -259,49 +354,32 @@ const shopAchillesHero: Record<
     splintCaption:
       "Plantarflexione sicura di notte senza lo stivale completo (se il team è d’accordo).",
     ctaAddToCart: "Aggiungi al carrello",
+    ctaBuyPartner: "Acquista",
     ctaLearnMore: "Scopri di più",
   },
 };
 
 const ah = shopAchillesHero[lang];
-
-const conditionSelectClass =
-  "w-full sm:min-w-[280px] sm:w-auto rounded-xl border-2 border-primary/25 bg-white dark:bg-neutral-900 px-3 py-2.5 text-neutral-900 dark:text-neutral-100 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/35 focus:border-primary/50";
+const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
 ---
 
 <main class="space-y-0">
   {
     isAchillesShop ? (
-      <section class="color-gradient pb-12 md:pb-16 border-neutral-200 dark:border-neutral-800 border-b">
+      <section class="pb-12 md:pb-16 border-neutral-200 dark:border-neutral-800 border-b color-gradient">
         <div class="mx-auto px-4 max-w-6xl">
           <div class="items-center gap-10 lg:gap-14 grid lg:grid-cols-2">
             <div class="order-2 lg:order-1 lg:text-left text-center">
               <div class="inline-flex justify-center items-center bg-primary/10 mb-4 p-3 rounded-full">
                 <ShoppingBag className="w-6 h-6 text-primary" />
               </div>
-              <div class="flex sm:flex-row flex-col lg:justify-start sm:items-center gap-2.5 sm:gap-3 mb-5 w-full max-w-md">
-                <label
-                  for="shop-condition-select"
-                  class="font-semibold text-neutral-800 dark:text-neutral-200 text-sm shrink-0"
-                >
-                  {t.chooseCondition}
-                </label>
-                <select
-                  id="shop-condition-select"
-                  class={conditionSelectClass}
-                  aria-label={t.chooseCondition}
-                  onchange="window.location.href=this.value"
-                >
-                  {conditions.map((cond) => (
-                    <option
-                      value={getLocalizedShopHubHref(lang, cond.id)}
-                      selected={cond.id === conditionId}
-                    >
-                      {cond.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <ConditionHubSelect
+                lang={lang}
+                hub="shop"
+                conditionId={conditionId}
+                label={chooseConditionLabel}
+                selectId="shop-condition-select"
+              />
               <p class="mb-2 font-semibold text-primary text-xs uppercase tracking-wide">
                 {ah.kicker}
               </p>
@@ -313,13 +391,13 @@ const conditionSelectClass =
                 {ah.sub}
               </p>
               <p class="flex flex-wrap justify-center lg:justify-start gap-3 mt-6">
-                <AddToCartButton
+                <SplintShopBuyButton
                   client:load
                   variantId={NIGHT_SPLINT_VARIANTS.largeLeft}
                   size="lg"
-                >
-                  {ah.ctaAddToCart}
-                </AddToCartButton>
+                  addToCartLabel={ah.ctaAddToCart}
+                  externalBuyLabel={ah.ctaBuyPartner}
+                />
                 <a
                   href={learnMoreSplintHref}
                   class={cn(
@@ -368,36 +446,20 @@ const conditionSelectClass =
         </div>
       </section>
     ) : (
-      <section class="color-gradient pb-12 md:pb-16 border-neutral-200 dark:border-neutral-800 border-b">
+      <section class="pb-12 md:pb-16 border-neutral-200 dark:border-neutral-800 border-b color-gradient">
         <div class="mx-auto px-4 max-w-6xl">
           <div class="items-center gap-10 lg:gap-14 grid lg:grid-cols-2">
             <div class="order-2 lg:order-1 lg:text-left text-center">
               <div class="inline-flex justify-center items-center bg-primary/10 mb-4 p-3 rounded-full">
                 <ShoppingBag className="w-6 h-6 text-primary" />
               </div>
-              <div class="flex sm:flex-row flex-col lg:justify-start sm:items-center gap-2.5 sm:gap-3 mb-5 w-full max-w-md">
-                <label
-                  for="shop-condition-select"
-                  class="font-semibold text-neutral-800 dark:text-neutral-200 text-sm shrink-0"
-                >
-                  {t.chooseCondition}
-                </label>
-                <select
-                  id="shop-condition-select"
-                  class={conditionSelectClass}
-                  aria-label={t.chooseCondition}
-                  onchange="window.location.href=this.value"
-                >
-                  {conditions.map((cond) => (
-                    <option
-                      value={getLocalizedShopHubHref(lang, cond.id)}
-                      selected={cond.id === conditionId}
-                    >
-                      {cond.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <ConditionHubSelect
+                lang={lang}
+                hub="shop"
+                conditionId={conditionId}
+                label={chooseConditionLabel}
+                selectId="shop-condition-select"
+              />
               <h1 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl leading-tight">
                 {c.label}
               </h1>
@@ -422,14 +484,145 @@ const conditionSelectClass =
     )
   }
 
-  <section class="bg-white py-12 border-neutral-200 border-b">
+  <section
+    class="bg-white dark:bg-neutral-950 py-12 border-neutral-200 dark:border-neutral-800 border-b"
+  >
     <div class="mx-auto px-4 max-w-6xl">
-      <h2 class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-2xl">
+      <h2
+        class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
+      >
         {t.ourProducts}
       </h2>
       {
-        fromThetisLinks.length === 0 ? (
-          <p class="text-neutral-600">{t.noOurProducts}</p>
+        isAchillesShop ? (
+          <div
+            class={cn(
+              "gap-8 grid",
+              courseRoute ? "md:grid-cols-2" : "md:grid-cols-1 max-w-2xl",
+            )}
+          >
+            <article class="flex flex-col bg-neutral-50 dark:bg-neutral-900/50 shadow-sm p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
+              <a
+                href={learnMoreSplintHref}
+                class="block hover:opacity-95 mb-5 border border-primary/20 dark:border-primary/30 rounded-xl max-h-52 overflow-hidden"
+              >
+                <img
+                  src="/images/night_splint_bed_top_square.jpg"
+                  alt={at.splintImageAlt}
+                  width={680}
+                  height={680}
+                  class="w-full max-h-52 object-center object-cover"
+                  loading="lazy"
+                />
+              </a>
+              <h3 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl leading-snug">
+                {splintRoute?.title ?? "Achilles Night Splint"}
+              </h3>
+              <p class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                {splintRoute?.description ?? ""}
+              </p>
+              <PriceDisplay
+                client:load
+                size="lg"
+                showFreeShipping={false}
+                className="mb-4"
+              />
+              <div class="gap-4 grid grid-cols-3 mb-6">
+                <div class="flex flex-col items-center gap-2 text-center">
+                  <div class="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
+                    <Truck className="w-5 h-5 text-primary" aria-hidden />
+                  </div>
+                  <span class="font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-snug">
+                    {at.freeShipping}
+                  </span>
+                </div>
+                <div class="flex flex-col items-center gap-2 text-center">
+                  <div class="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
+                    <ShieldCheck className="w-5 h-5 text-primary" aria-hidden />
+                  </div>
+                  <span class="font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-snug">
+                    {at.guarantee30Day}
+                  </span>
+                </div>
+                <div class="flex flex-col items-center gap-2 text-center">
+                  <div class="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
+                    <RotateCcw className="w-5 h-5 text-primary" aria-hidden />
+                  </div>
+                  <span class="font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-snug">
+                    {at.easyReturns}
+                  </span>
+                </div>
+              </div>
+              <div class="flex sm:flex-row flex-col flex-wrap gap-3 mt-auto">
+                <SplintShopBuyButton
+                  client:load
+                  variantId={NIGHT_SPLINT_VARIANTS.largeLeft}
+                  size="lg"
+                  className="w-full sm:w-auto"
+                  addToCartLabel={ah.ctaAddToCart}
+                  externalBuyLabel={ah.ctaBuyPartner}
+                />
+                <a
+                  href={learnMoreSplintHref}
+                  class={cn(
+                    buttonVariants({ variant: "outline", size: "lg" }),
+                    "w-full sm:w-auto font-semibold",
+                  )}
+                >
+                  {ah.ctaLearnMore}
+                </a>
+              </div>
+            </article>
+            {courseRoute ? (
+              <article class="flex flex-col bg-neutral-50 dark:bg-neutral-900/50 shadow-sm p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
+                <div class="flex justify-center items-center bg-primary/10 mb-5 border border-primary/15 rounded-xl w-full max-h-40 aspect-[2/1]">
+                  <BookOpen className="w-14 h-14 text-primary" aria-hidden />
+                </div>
+                <h3 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl leading-snug">
+                  {courseRoute.title}
+                </h3>
+                <p class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                  {courseRoute.description}
+                </p>
+                <VariantPriceDisplay
+                  client:load
+                  variantId={COURSE_VARIANTS.ESSENTIALS}
+                  size="lg"
+                  className="mb-2"
+                />
+                <p class="flex items-center gap-2 mb-4 text-primary text-sm">
+                  <Check className="w-4 h-4 shrink-0" aria-hidden />
+                  {at.instantAccess}
+                </p>
+                <p class="mb-6 font-semibold text-neutral-800 dark:text-neutral-200 text-sm">
+                  {at.readersLine}
+                </p>
+                <div class="flex sm:flex-row flex-col flex-wrap gap-3 mt-auto">
+                  <CourseBuyButton
+                    client:load
+                    productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                    size="lg"
+                    className="w-full sm:w-auto"
+                  >
+                    {at.addCourse}
+                  </CourseBuyButton>
+                  <a
+                    href={courseRoute.href}
+                    class={cn(
+                      buttonVariants({ variant: "outline", size: "lg" }),
+                      "w-full sm:w-auto font-semibold",
+                    )}
+                  >
+                    {t.viewCourse.replace(/\s*→\s*$/, "")}
+                  </a>
+                </div>
+              </article>
+            ) : null}
+          </div>
+        ) : fromThetisLinks.length === 0 ? (
+          <p class="text-neutral-600 dark:text-neutral-400">
+            {t.noOurProducts}
+          </p>
         ) : (
           <ul class="gap-4 grid sm:grid-cols-2">
             {fromThetisLinks.map((r) => {
@@ -444,7 +637,9 @@ const conditionSelectClass =
                   r.href.includes("tutore-tendine") ||
                   r.href.includes("bota-ortopedica"));
               const rowLayout =
-                isCourse || showSplintThumb ? "sm:flex-row flex-col" : "flex-col";
+                isCourse || showSplintThumb
+                  ? "sm:flex-row flex-col"
+                  : "flex-col";
               return (
                 <li>
                   <a
@@ -494,170 +689,59 @@ const conditionSelectClass =
     </div>
   </section>
 
-  <section class="bg-neutral-50 dark:bg-neutral-950 py-12">
-    <div class="mx-auto px-4 max-w-6xl">
-      <h2 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-2xl">
-        {t.recommended}
-      </h2>
-      <p class="mb-2 max-w-3xl text-neutral-600 dark:text-neutral-400 text-sm">
-        {t.recommendedExternalHint}
-      </p>
-      <p class="mb-6 max-w-3xl text-neutral-600 dark:text-neutral-400 text-sm">
-        {t.partnerNote}
-      </p>
-      {
-        catalogue.length === 0 ? (
-          <p class="text-neutral-600">{t.noRecommended}</p>
-        ) : (
-          <ul class="gap-6 grid sm:grid-cols-2 lg:grid-cols-3">
-            {shopProducts.flatMap((p: AchillesProduct) => {
-              const href = resolveProductUrl(p, market);
-              if (!href) return [];
-              const price = resolveProductPrice(p, market);
-              const cta = defaultProductCta(href);
-              const external = isExternalCatalogueProductUrl(href);
-              const accessoryNames = (p.accessoryTo ?? [])
-                .map((id) => CATALOGUE_PRODUCTS_BY_ID[id]?.name)
-                .filter(Boolean);
-              const alternativeNames = (p.alternativeTo ?? [])
-                .map((id) => CATALOGUE_PRODUCTS_BY_ID[id]?.name)
-                .filter(Boolean);
-              const calloutClass =
-                "bg-neutral-50 dark:bg-neutral-800/80 mt-3 p-2.5 border border-neutral-200 dark:border-neutral-600 rounded-lg";
-              const descriptionOneLine = p.description
-                ? p.description.replace(/\s*\n+\s*/g, " ").trim()
-                : "";
-              const medalTier = shopMedalTierForPriority(p.priority);
-              const medalTitle =
-                medalTier === "gold"
-                  ? t.priorityMedalEssential
-                  : medalTier === "silver"
-                    ? t.priorityMedalRecommended
-                    : medalTier === "bronze"
-                      ? t.priorityMedalOptional
-                      : null;
-              const medalEmoji =
-                medalTier === "gold"
-                  ? "🥇"
-                  : medalTier === "silver"
-                    ? "🥈"
-                    : medalTier === "bronze"
-                      ? "🥉"
-                      : "";
-              const priorityBadgeClass =
-                medalTier === "gold"
-                  ? "border-amber-200/90 dark:border-amber-700/60 bg-amber-50/95 dark:bg-amber-950/50"
-                  : medalTier === "silver"
-                    ? "border-neutral-200 dark:border-neutral-600 bg-neutral-100/95 dark:bg-neutral-800/90"
-                    : medalTier === "bronze"
-                      ? "border-amber-900/15 dark:border-amber-800/40 bg-amber-100/80 dark:bg-amber-950/35"
-                      : "";
-              return [
-                <li class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
-                  {p.imagePath ? (
-                    <div class="bg-neutral-100 mb-4 rounded-lg w-[150px] h-[150px] overflow-hidden shrink-0">
-                      <img
-                        src={p.imagePath}
-                        alt=""
-                        class="w-full h-full object-cover"
-                        width={150}
-                        height={150}
-                        loading="lazy"
-                      />
-                    </div>
-                  ) : null}
-                  {medalTier && medalTitle && medalEmoji ? (
-                    <div class="mb-2 w-fit max-w-full">
-                      <span
-                        class={cn(
-                          "inline-flex items-center gap-1 shadow-sm px-1.5 py-0.5 border rounded-md font-medium text-neutral-800 dark:text-neutral-100 text-xs leading-tight",
-                          priorityBadgeClass,
-                        )}
-                        title={medalTitle}
-                      >
-                        <span aria-hidden class="text-[0.95em] shrink-0">
-                          {medalEmoji}
-                        </span>
-                        <span>{medalTitle}</span>
-                      </span>
-                    </div>
-                  ) : null}
-                  {external ? (
-                    <p class="mb-2 flex items-center gap-1.5 font-medium text-neutral-600 dark:text-neutral-400 text-xs">
-                      <ExternalLink
-                        className="w-3.5 h-3.5 shrink-0 text-primary"
-                        aria-hidden
-                      />
-                      <span>{t.externalSiteBadge}</span>
-                    </p>
-                  ) : null}
-                  <h3 class="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-lg leading-snug">
-                    {p.name}
-                  </h3>
-                  {p.keyBenefit ? (
-                    <p class="mb-2 text-neutral-600 dark:text-neutral-400 text-sm line-clamp-3">
-                      {p.keyBenefit}
-                    </p>
-                  ) : null}
-                  {descriptionOneLine ? (
-                    <p class="mb-2 text-neutral-600 dark:text-neutral-400 text-sm line-clamp-4">
-                      {descriptionOneLine}
-                    </p>
-                  ) : null}
-                  {price ? (
-                    <p class="mb-3 text-neutral-500 text-sm">{price}</p>
-                  ) : null}
-                  <div class="mt-auto pt-2">
-                    <a
-                      href={href}
-                      target={external ? "_blank" : undefined}
-                      rel={external ? "noopener noreferrer" : undefined}
-                      aria-label={
-                        external ? `${cta}. ${t.externalLinkAria}` : undefined
-                      }
-                      class={cn(
-                        buttonVariants({
-                          variant: external ? "outline" : "default",
-                          size: "sm",
-                        }),
-                        "inline-flex justify-center items-center gap-2 w-full sm:w-auto",
-                      )}
-                    >
-                      {cta}
-                      {external ? (
-                        <ExternalLink
-                          className="w-4 h-4 shrink-0 opacity-90"
-                          aria-hidden
-                        />
-                      ) : null}
-                    </a>
-                  </div>
-                  {accessoryNames.length ? (
-                    <div class={calloutClass}>
-                      <p class="text-neutral-600 dark:text-neutral-300 text-xs leading-snug">
-                        <span class="font-semibold text-neutral-700 dark:text-neutral-200">
-                          {t.accessoryToLabel}
-                        </span>{" "}
-                        {accessoryNames.join(", ")}
-                      </p>
-                    </div>
-                  ) : null}
-                  {alternativeNames.length ? (
-                    <div class={calloutClass}>
-                      <p class="text-neutral-600 dark:text-neutral-300 text-xs leading-snug">
-                        <span class="font-semibold text-neutral-700 dark:text-neutral-200">
-                          {t.alternativeToLabel}
-                        </span>{" "}
-                        {alternativeNames.join(", ")}
-                      </p>
-                    </div>
-                  ) : null}
-                </li>,
-              ];
-            })}
-          </ul>
-        )
-      }
-    </div>
-  </section>
+  {
+    isAchillesShop ? (
+      <section class="bg-gradient-to-b from-white dark:from-neutral-950 via-primary/5 dark:via-primary/10 to-white dark:to-neutral-950 py-12 md:py-16 border-neutral-200 dark:border-neutral-800 border-b">
+        <div class="mx-auto px-4 max-w-7xl">
+          <div class="mb-8 md:mb-12 text-center">
+            <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full">
+              <Check className="w-4 md:w-5 h-4 md:h-5 text-primary" />
+              <p class="font-medium text-primary text-xs md:text-sm uppercase tracking-widest">
+                {at.reviewsKicker}
+              </p>
+            </div>
+            <h2 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl lg:text-4xl">
+              {at.reviewsTitle}
+            </h2>
+            <p class="mx-auto mb-6 max-w-3xl text-neutral-600 dark:text-neutral-400 text-base md:text-lg">
+              {at.reviewsSubtitle}
+            </p>
+          </div>
+          <div class="mb-8">
+            <EnhancedReviewCarousel client:load />
+          </div>
+          {reviewsRoute ? (
+            <div class="text-center">
+              <a
+                href={reviewsRoute.href}
+                class="inline-flex items-center gap-2 hover:bg-primary px-6 py-3 border-2 border-primary rounded-lg font-semibold text-primary hover:text-white transition-colors"
+              >
+                {at.reviewsViewAll}
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </a>
+            </div>
+          ) : null}
+        </div>
+      </section>
+    ) : null
+  }
+
+  <ShopCatalogueProductGrid
+    lang={lang}
+    products={shopProducts}
+    sectionTitle={t.recommended}
+  />
 </main>

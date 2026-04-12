@@ -1,62 +1,24 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import ColorGradient from "@/components/ColorGradient.astro";
-import ShopHubTrustBlock from "@/components/shop/ShopHubTrustBlock.astro";
-import { conditions } from "@/content/conditions/registry";
-import {
-  getLocalizedLearnHubHref,
-  getLocalizedShopHubHref,
-} from "@/lib/condition-nav";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import ShopIndexHero from "@/components/shop/ShopIndexHero.astro";
+import ShopFromThetisSection from "@/components/shop/ShopFromThetisSection.astro";
+import ShopRecommendedByCondition from "@/components/shop/ShopRecommendedByCondition.astro";
 import type { Lang } from "@/config/languages";
 
 const lang: Lang = "de";
 ---
 
 <Layout
-  title="Shop nach Thema"
-  description="Thetis-Produkte und ausgewähltes Genesungs-Equipment nach Thema."
+  title="Shop — Genesungsprodukte"
+  description="Thetis-Nachtschiene plus kuratiertes Recovery-Equipment für jede Beschwerde — Stiefel, Einlagen und Partner-Links."
   {lang}
 >
   <ColorGradient>
     <main class="pb-16 md:pb-24">
-    <div class="mx-auto mb-12 px-4 max-w-3xl text-center">
-      <h1 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl">Shop</h1>
-      <p class="text-neutral-600 dark:text-neutral-400 text-lg">
-        Unsere Produkte auf der Website plus kuratierte Artikel (inkl.
-        Partnerlinks).
-      </p>
-    </div>
-    <ShopHubTrustBlock lang={lang} />
-    <ul class="space-y-4 mx-auto max-w-xl">
-      {
-        conditions
-          .slice()
-          .sort((a, b) => a.sortOrder - b.sortOrder)
-          .map((c) => (
-            <li class="flex sm:flex-row flex-col sm:justify-between sm:items-center gap-4 bg-white dark:bg-neutral-900 p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
-              <span class="font-medium text-neutral-900 dark:text-neutral-100">
-                {c.label}
-              </span>
-              <div class="flex flex-wrap gap-2">
-                <a
-                  href={getLocalizedLearnHubHref(lang, c.id)}
-                  class={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-                >
-                  Lernen
-                </a>
-                <a
-                  href={getLocalizedShopHubHref(lang, c.id)}
-                  class={cn(buttonVariants({ variant: "default", size: "sm" }))}
-                >
-                  Shop
-                </a>
-              </div>
-            </li>
-          ))
-      }
-    </ul>
+      <ShopIndexHero {lang} />
+      <ShopFromThetisSection {lang} />
+      <ShopRecommendedByCondition {lang} />
     </main>
   </ColorGradient>
 </Layout>

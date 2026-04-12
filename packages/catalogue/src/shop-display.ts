@@ -19,11 +19,27 @@ export function shopMedalTierForPriority(
   }
 }
 
-/** Shop grid: one card per product, A→Z by display name. */
+/** Lower = earlier in shop lists (essential → recommended → optional-style tiers). */
+const SHOP_PRIORITY_ORDER: Record<AchillesProductPriority, number> = {
+  essential: 0,
+  recommended: 1,
+  comfort: 2,
+  optional: 3,
+  supplement: 4,
+  reference: 5,
+};
+
+function shopPriorityRank(priority: AchillesProductPriority): number {
+  return SHOP_PRIORITY_ORDER[priority] ?? 99;
+}
+
+/** Shop grid: priority (essential → optional) then A→Z by display name. */
 export function orderedShopProductsForDisplay(
   products: AchillesProduct[],
 ): AchillesProduct[] {
-  return [...products].sort((a, b) =>
-    a.name.localeCompare(b.name, "en", { sensitivity: "base" })
-  );
+  return [...products].sort((a, b) => {
+    const byTier = shopPriorityRank(a.priority) - shopPriorityRank(b.priority);
+    if (byTier !== 0) return byTier;
+    return a.name.localeCompare(b.name, "en", { sensitivity: "base" });
+  });
 }

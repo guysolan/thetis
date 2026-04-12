@@ -22,6 +22,22 @@ export const SHOPIFY_COURSE_VARIANTS = {
   PROFESSIONALS_COURSE: "gid://shopify/ProductVariant/52265315828040",
 } as const;
 
+/** ISO 3166-1 alpha-2 — regions where course checkout on Shopify is enabled. */
+export const COURSE_SHOPIFY_CHECKOUT_COUNTRY_CODES: ReadonlySet<string> =
+  new Set([
+    "US",
+    "GB",
+    "AU",
+    "NZ",
+    "CA",
+  ]);
+
+export function isCourseShopifyCheckoutAllowed(countryCode: string): boolean {
+  const u = (countryCode || "").trim().toUpperCase();
+  const normalized = u === "UK" ? "GB" : u;
+  return COURSE_SHOPIFY_CHECKOUT_COUNTRY_CODES.has(normalized);
+}
+
 export interface ShopifyPrice {
   amount: string;
   currencyCode: string;
@@ -52,17 +68,20 @@ export async function fetchCoursePrice(
   `;
 
   try {
-    const response = await fetch(`https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Shopify-Storefront-Access-Token": STOREFRONT_ACCESS_TOKEN,
+    const response = await fetch(
+      `https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Shopify-Storefront-Access-Token": STOREFRONT_ACCESS_TOKEN,
+        },
+        body: JSON.stringify({
+          query,
+          variables: { country: countryCode },
+        }),
       },
-      body: JSON.stringify({
-        query,
-        variables: { country: countryCode },
-      }),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(`Shopify API error: ${response.status}`);

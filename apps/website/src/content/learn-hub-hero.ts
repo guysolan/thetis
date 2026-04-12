@@ -221,7 +221,7 @@ const insertional: Record<Lang, LearnHubHeroCopy> = {
 const achillesRuptureLocalized: Record<Lang, LearnHubHeroCopy> = {
   en: {
     kicker: "Recovery timeline",
-    titleAccent: "recovery guide",
+    titleAccent: "Recovery Guide",
     description:
       "Your complete week-by-week guide from injury to full activity — evidence-based guidance at every stage.",
     bullets: [

@@ -1,0 +1,56 @@
+---
+import type { Lang } from "@/config/languages";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const copy: Record<
+  Lang,
+  { partnerNote: string; recommendedExternalHint: string }
+> = {
+  en: {
+    partnerNote:
+      "Some links go to partner retailers (for example Amazon). They may earn us a small commission at no extra cost to you.",
+    recommendedExternalHint:
+      "Partner links are labeled and open in a new tab so you always know when you are leaving Thetis.",
+  },
+  de: {
+    partnerNote:
+      "Einige Links führen zu Partner-Shops (z. B. Amazon). Dies kann uns eine kleine Provision einbringen.",
+    recommendedExternalHint:
+      "Partner-Links sind gekennzeichnet und öffnen in einem neuen Tab.",
+  },
+  fr: {
+    partnerNote:
+      "Certains liens mènent vers des partenaires (par ex. Amazon) ; commission possible.",
+    recommendedExternalHint:
+      "Les liens partenaires sont indiqués et s’ouvrent dans un nouvel onglet.",
+  },
+  es: {
+    partnerNote:
+      "Algunos enlaces son de socios (p. ej. Amazon); posible comisión.",
+    recommendedExternalHint:
+      "Los enlaces de socios están marcados y se abren en una pestaña nueva.",
+  },
+  it: {
+    partnerNote:
+      "Alcuni link sono verso partner (es. Amazon); possibile commissione.",
+    recommendedExternalHint:
+      "I link partner sono contrassegnati e si aprono in una nuova scheda.",
+  },
+};
+
+const t = copy[lang];
+---
+
+<div>
+  <p class="mb-2 max-w-3xl text-neutral-600 dark:text-neutral-400 text-sm">
+    {t.recommendedExternalHint}
+  </p>
+  <p class="mb-6 max-w-3xl text-neutral-600 dark:text-neutral-400 text-sm">
+    {t.partnerNote}
+  </p>
+</div>

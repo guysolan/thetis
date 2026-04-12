@@ -12,7 +12,6 @@ import {
   navigationContent,
 } from "@/content/routes.tsx";
 import { cn } from "@/lib/utils";
-import { generateLocalizedPath } from "@/utils/language";
 
 import type { Lang } from "../config/languages";
 
@@ -87,8 +86,6 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
   const contactLinks = getContactRoutesByLanguage(lang);
   const conditionLearnLinks = getConditionHubNavRoutes(lang);
   const conditionShopLinks = getConditionShopNavRoutes(lang);
-  const shopIndexHref = generateLocalizedPath("shop", lang);
-  const learnIndexHref = generateLocalizedPath("learn", lang);
 
   return (
     <div className="flex flex-col gap-2 pt-4">
@@ -98,21 +95,14 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
             {(t as Record<string, string>).shopMenu ?? "Shop"}
           </AccordionTrigger>
           <AccordionContent>
-            <a
-              href={shopIndexHref}
-              className="color-gradient block !pt-0 mb-3 p-4 border border-primary/15 rounded-xl text-left no-underline transition-opacity hover:opacity-90"
-            >
+            <div className="color-gradient block !pt-0 mb-3 p-4 border border-primary/15 rounded-xl text-left">
               <p className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
                 {navCopy.shopAsideTitle ?? ""}
               </p>
               <p className="mt-1.5 text-neutral-600 dark:text-neutral-400 text-xs leading-relaxed">
                 {navCopy.shopAsideBody ?? navCopy.shopMenuDescription ?? ""}
               </p>
-              <p className="flex items-center gap-1 mt-2 font-semibold text-primary text-xs">
-                <span>{(t as Record<string, string>).shopMenu ?? "Shop"}</span>
-                <span aria-hidden>→</span>
-              </p>
-            </a>
+            </div>
             <div className="flex flex-col gap-2.5">
               {conditionShopLinks.map((hub) => (
                 <HubMegaLink
@@ -135,10 +125,7 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
               "Learn"}
           </AccordionTrigger>
           <AccordionContent>
-            <a
-              href={learnIndexHref}
-              className="color-gradient block !pt-0 mb-3 p-4 border border-primary/15 rounded-xl text-left no-underline transition-opacity hover:opacity-90"
-            >
+            <div className="color-gradient block !pt-0 mb-3 p-4 border border-primary/15 rounded-xl text-left">
               <p className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
                 {navCopy.learnAsideTitle ?? ""}
               </p>
@@ -147,15 +134,7 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
                   navCopy.learnMenuDescription ??
                   ""}
               </p>
-              <p className="flex items-center gap-2 mt-2 font-semibold text-primary text-xs">
-                <span>
-                  {(t as Record<string, string>).learnMenu ??
-                    t.conditionsMenu ??
-                    "Learn"}
-                </span>
-                <span aria-hidden>→</span>
-              </p>
-            </a>
+            </div>
             <div className="flex flex-col gap-2.5">
               {conditionLearnLinks.map((hub) => (
                 <HubMegaLink

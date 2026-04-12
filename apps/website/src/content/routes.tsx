@@ -582,6 +582,15 @@ export const productRoutes: BaseRoute[] = [
   },
 ];
 
+/** Product pages that stay routable but are omitted from the site footer. */
+export const productRouteSlugsExcludedFromFooter: readonly string[] = [
+  "sleeping-with-torn-achilles",
+  "washing-with-torn-achilles",
+  "swimming-with-torn-achilles",
+  "hygiene-with-torn-achilles",
+  "products-for-torn-achilles",
+];
+
 // Partner routes
 export const partnerRoutes: BaseRoute[] = [
   {

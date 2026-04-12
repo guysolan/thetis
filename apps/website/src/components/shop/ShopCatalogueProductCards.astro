@@ -1,0 +1,266 @@
+---
+import type { AchillesProduct } from "@thetis/catalogue";
+import {
+  CATALOGUE_PRODUCTS_BY_ID,
+  THETIS_NIGHT_SPLINT_PRODUCT_ID,
+  defaultProductCta,
+  isExternalCatalogueProductUrl,
+  resolveProductPrice,
+  resolveProductUrl,
+  resolveProductUrlForCountry,
+  shopMedalTierForPriority,
+  splintMatrixAnchorDataAttrs,
+} from "@thetis/catalogue";
+import type { Lang } from "@/config/languages";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { ExternalLink } from "lucide-react";
+
+interface Props {
+  lang: Lang;
+  products: AchillesProduct[];
+}
+
+const { lang, products } = Astro.props;
+
+const copy: Record<
+  Lang,
+  {
+    noRecommended: string;
+    accessoryToLabel: string;
+    alternativeToLabel: string;
+    priorityMedalEssential: string;
+    priorityMedalRecommended: string;
+    priorityMedalOptional: string;
+    externalSiteBadge: string;
+    externalLinkAria: string;
+  }
+> = {
+  en: {
+    noRecommended:
+      "We have not published a curated list for this view yet — check back soon.",
+    accessoryToLabel: "Accessory to:",
+    alternativeToLabel: "Alternative to:",
+    priorityMedalEssential: "Essential",
+    priorityMedalRecommended: "Recommended",
+    priorityMedalOptional: "Optional",
+    externalSiteBadge: "External site",
+    externalLinkAria: "Opens external website in a new tab",
+  },
+  de: {
+    noRecommended:
+      "Für diese Ansicht gibt es noch keine Kuratierte Liste — bald mehr.",
+    accessoryToLabel: "Zubehör für:",
+    alternativeToLabel: "Alternative zu:",
+    priorityMedalEssential: "Essenziell",
+    priorityMedalRecommended: "Empfohlen",
+    priorityMedalOptional: "Optional",
+    externalSiteBadge: "Externe Seite",
+    externalLinkAria: "Öffnet externe Website in neuem Tab",
+  },
+  fr: {
+    noRecommended: "Pas encore de liste pour cette vue — revenez bientôt.",
+    accessoryToLabel: "Accessoire pour :",
+    alternativeToLabel: "Alternative à :",
+    priorityMedalEssential: "Essentiel",
+    priorityMedalRecommended: "Recommandé",
+    priorityMedalOptional: "Optionnel",
+    externalSiteBadge: "Site externe",
+    externalLinkAria: "Ouvre un site externe dans un nouvel onglet",
+  },
+  es: {
+    noRecommended: "Aún no hay lista curada para esta vista — vuelve pronto.",
+    accessoryToLabel: "Accesorio para:",
+    alternativeToLabel: "Alternativa a:",
+    priorityMedalEssential: "Esencial",
+    priorityMedalRecommended: "Recomendado",
+    priorityMedalOptional: "Opcional",
+    externalSiteBadge: "Sitio externo",
+    externalLinkAria: "Abre un sitio externo en una pestaña nueva",
+  },
+  it: {
+    noRecommended:
+      "Nessuna lista curata ancora per questa vista — torna presto.",
+    accessoryToLabel: "Accessorio per:",
+    alternativeToLabel: "Alternativa a:",
+    priorityMedalEssential: "Essenziale",
+    priorityMedalRecommended: "Consigliato",
+    priorityMedalOptional: "Opzionale",
+    externalSiteBadge: "Sito esterno",
+    externalLinkAria: "Apre un sito esterno in una nuova scheda",
+  },
+};
+
+const t = copy[lang];
+---
+
+{
+  products.length === 0 ? (
+    <p class="text-neutral-600 dark:text-neutral-400">{t.noRecommended}</p>
+  ) : (
+    <ul class="gap-6 grid sm:grid-cols-2 lg:grid-cols-3">
+      {products.flatMap((p: AchillesProduct) => {
+        const hrefUS = resolveProductUrl(p, "US");
+        const hrefGB = resolveProductUrl(p, "GB");
+        const isNightSplint = p.id === THETIS_NIGHT_SPLINT_PRODUCT_ID;
+        const hrefDefault =
+          resolveProductUrlForCountry(p, "US") ?? hrefUS ?? hrefGB;
+        if (!hrefDefault) return [];
+        const priceUS = resolveProductPrice(p, "US");
+        const priceGB = resolveProductPrice(p, "GB");
+        const cta = defaultProductCta(hrefDefault);
+        const external = isExternalCatalogueProductUrl(hrefDefault);
+        const hrefAttrs = isNightSplint
+          ? splintMatrixAnchorDataAttrs("LL")
+          : {
+              "data-href-us": hrefUS ?? "",
+              "data-href-gb": hrefGB ?? "",
+            };
+        const accessoryNames = (p.accessoryTo ?? [])
+          .map((id) => CATALOGUE_PRODUCTS_BY_ID[id]?.name)
+          .filter(Boolean);
+        const alternativeNames = (p.alternativeTo ?? [])
+          .map((id) => CATALOGUE_PRODUCTS_BY_ID[id]?.name)
+          .filter(Boolean);
+        const calloutClass =
+          "bg-neutral-50 dark:bg-neutral-800/80 mt-3 p-2.5 border border-neutral-200 dark:border-neutral-600 rounded-lg";
+        const descriptionOneLine = p.description
+          ? p.description.replace(/\s*\n+\s*/g, " ").trim()
+          : "";
+        const medalTier = shopMedalTierForPriority(p.priority);
+        const medalTitle =
+          medalTier === "gold"
+            ? t.priorityMedalEssential
+            : medalTier === "silver"
+              ? t.priorityMedalRecommended
+              : medalTier === "bronze"
+                ? t.priorityMedalOptional
+                : null;
+        const medalEmoji =
+          medalTier === "gold"
+            ? "🥇"
+            : medalTier === "silver"
+              ? "🥈"
+              : medalTier === "bronze"
+                ? "🥉"
+                : "";
+        const priorityBadgeClass =
+          medalTier === "gold"
+            ? "border-amber-200/90 dark:border-amber-700/60 bg-amber-50/95 dark:bg-amber-950/50"
+            : medalTier === "silver"
+              ? "border-neutral-200 dark:border-neutral-600 bg-neutral-100/95 dark:bg-neutral-800/90"
+              : medalTier === "bronze"
+                ? "border-amber-900/15 dark:border-amber-800/40 bg-amber-100/80 dark:bg-amber-950/35"
+                : "";
+        return [
+          <li class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+            {p.imagePath ? (
+              <div class="bg-neutral-100 mb-4 rounded-lg w-[150px] h-[150px] overflow-hidden shrink-0">
+                <img
+                  src={p.imagePath}
+                  alt=""
+                  class="w-full h-full object-cover"
+                  width={150}
+                  height={150}
+                  loading="lazy"
+                />
+              </div>
+            ) : null}
+            {medalTier && medalTitle && medalEmoji ? (
+              <div class="mb-2 w-fit max-w-full">
+                <span
+                  class={cn(
+                    "inline-flex items-center gap-1 shadow-sm px-1.5 py-0.5 border rounded-md font-medium text-neutral-800 dark:text-neutral-100 text-xs leading-tight",
+                    priorityBadgeClass,
+                  )}
+                  title={medalTitle}
+                >
+                  <span aria-hidden class="text-[0.95em] shrink-0">
+                    {medalEmoji}
+                  </span>
+                  <span>{medalTitle}</span>
+                </span>
+              </div>
+            ) : null}
+            <h3 class="mb-1 font-semibold text-neutral-900 dark:text-neutral-100 text-lg leading-snug">
+              {p.name}
+            </h3>
+            {p.keyBenefit ? (
+              <p class="mb-2 text-neutral-600 dark:text-neutral-400 text-sm line-clamp-3">
+                {p.keyBenefit}
+              </p>
+            ) : null}
+            {descriptionOneLine ? (
+              <p class="mb-2 text-neutral-600 dark:text-neutral-400 text-sm line-clamp-4">
+                {descriptionOneLine}
+              </p>
+            ) : null}
+            {priceUS || priceGB ? (
+              <p
+                class="mb-3 text-neutral-500 text-sm catalogue-price"
+                data-shop-price-us={priceUS ?? ""}
+                data-shop-price-gb={priceGB ?? ""}
+              >
+                {priceUS ?? priceGB}
+              </p>
+            ) : null}
+            <div class="mt-auto pt-2">
+              <a
+                href={hrefDefault}
+                data-night-splint={isNightSplint ? "true" : undefined}
+                {...hrefAttrs}
+                class:list={[
+                  "catalogue-buy-link",
+                  cn(
+                    buttonVariants({
+                      variant: "default",
+                      size: "sm",
+                    }),
+                    "inline-flex justify-center items-center gap-2 w-full sm:w-auto",
+                  ),
+                ]}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noopener noreferrer" : undefined}
+                aria-label={
+                  external ? `${cta}. ${t.externalLinkAria}` : undefined
+                }
+              >
+                {cta}
+                {external ? (
+                  <ExternalLink
+                    className="opacity-90 w-4 h-4 shrink-0"
+                    aria-hidden
+                  />
+                ) : null}
+              </a>
+            </div>
+            {accessoryNames.length ? (
+              <div class={calloutClass}>
+                <p class="text-neutral-600 dark:text-neutral-300 text-xs leading-snug">
+                  <span class="font-semibold text-neutral-700 dark:text-neutral-200">
+                    {t.accessoryToLabel}
+                  </span>{" "}
+                  {accessoryNames.join(", ")}
+                </p>
+              </div>
+            ) : null}
+            {alternativeNames.length ? (
+              <div class={calloutClass}>
+                <p class="text-neutral-600 dark:text-neutral-300 text-xs leading-snug">
+                  <span class="font-semibold text-neutral-700 dark:text-neutral-200">
+                    {t.alternativeToLabel}
+                  </span>{" "}
+                  {alternativeNames.join(", ")}
+                </p>
+              </div>
+            ) : null}
+          </li>,
+        ];
+      })}
+    </ul>
+  )
+}
+
+<script>
+  import "@/lib/shop-catalogue-client";
+</script>

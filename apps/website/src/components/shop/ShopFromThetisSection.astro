@@ -1,0 +1,182 @@
+---
+/**
+ * Main /shop index: two Thetis-owned offers (splint + essentials course).
+ */
+import type { Lang } from "@/config/languages";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
+import AddToCartButton from "@/components/cart/AddToCartButton.tsx";
+import CourseBuyButton from "@/components/CourseBuyButton.tsx";
+import { NIGHT_SPLINT_VARIANTS } from "@/lib/shopify/variants";
+import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
+import { BookOpen } from "lucide-react";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const splintRoute = getRouteBySlugAndLanguage("achilles-rupture-splint", lang);
+const learnMoreSplintHref =
+  lang === "en" ? "/splint" : (splintRoute?.href ?? "/splint");
+const courseRoute = getRouteBySlugAndLanguage("course", lang);
+
+const copy: Record<
+  Lang,
+  {
+    sectionTitle: string;
+    splintTitle: string;
+    splintDescription: string;
+    addSplint: string;
+    readersLine: string;
+    addCourse: string;
+    splintImageAlt: string;
+  }
+> = {
+  en: {
+    sectionTitle: "From Thetis",
+    splintTitle: "Achilles Rupture Splint",
+    splintDescription:
+      "Recovery quicker and more comfortably from achilles tendon rupture.",
+    addSplint: "Add splint to cart",
+    readersLine: "Join 20,000 readers",
+    addCourse: "Add course to cart",
+    splintImageAlt: "Thetis night splint for Achilles recovery",
+  },
+  de: {
+    sectionTitle: "Von Thetis",
+    splintTitle: "Achillessehnenriss-Schiene",
+    splintDescription:
+      "Schnellere und komfortablere Genesung nach Achillessehnenriss.",
+    addSplint: "Schiene in den Warenkorb",
+    readersLine: "Schließen Sie sich 20.000 Lesern an",
+    addCourse: "Kurs in den Warenkorb",
+    splintImageAlt: "Thetis Nachtschiene für die Achilles-Genesung",
+  },
+  fr: {
+    sectionTitle: "Par Thetis",
+    splintTitle: "Attelle de rupture d’Achille",
+    splintDescription:
+      "Récupérez plus vite et plus confortablement après une rupture du tendon d’Achille.",
+    addSplint: "Ajouter l’attelle au panier",
+    readersLine: "Rejoignez 20 000 lecteurs",
+    addCourse: "Ajouter le cours au panier",
+    splintImageAlt: "Attelle de nuit Thetis pour la récupération d’Achille",
+  },
+  es: {
+    sectionTitle: "De Thetis",
+    splintTitle: "Férula para rotura de Aquiles",
+    splintDescription:
+      "Recupere más rápido y con más comodidad tras la rotura del tendón de Aquiles.",
+    addSplint: "Añadir férula al carrito",
+    readersLine: "Únete a 20.000 lectores",
+    addCourse: "Añadir curso al carrito",
+    splintImageAlt: "Férula nocturna Thetis para la recuperación de Aquiles",
+  },
+  it: {
+    sectionTitle: "Da Thetis",
+    splintTitle: "Tutore per rottura di Achille",
+    splintDescription:
+      "Recupero più rapido e confortevole dopo la rottura del tendine di Achille.",
+    addSplint: "Aggiungi tutore al carrello",
+    readersLine: "Unisciti a 20.000 lettori",
+    addCourse: "Aggiungi corso al carrello",
+    splintImageAlt: "Tutore notturno Thetis per il recupero di Achille",
+  },
+};
+
+const t = copy[lang];
+const courseDescription = courseRoute?.description ?? "";
+const courseTitle = courseRoute?.title ?? "Recovery Course";
+---
+
+<section
+  class="bg-white dark:bg-neutral-950 py-10 md:py-14 border-neutral-200 dark:border-neutral-800 border-b"
+  aria-labelledby="shop-from-thetis-heading"
+>
+  <div class="mx-auto px-4 max-w-6xl">
+    <h2
+      id="shop-from-thetis-heading"
+      class="mb-8 md:mb-10 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl text-center"
+    >
+      {t.sectionTitle}
+    </h2>
+
+    <div class="gap-8 md:gap-10 grid md:grid-cols-2">
+      <!-- Splint -->
+      <article
+        class="flex flex-col bg-neutral-50 dark:bg-neutral-900/50 shadow-sm p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl"
+      >
+        <a
+          href={learnMoreSplintHref}
+          class="block hover:opacity-95 mb-5 border border-primary/20 dark:border-primary/30 rounded-xl max-h-52 overflow-hidden"
+        >
+          <img
+            src="/images/night_splint_bed_top_square.jpg"
+            alt={t.splintImageAlt}
+            width={680}
+            height={680}
+            class="w-full max-h-52 object-center object-cover"
+            loading="lazy"
+          />
+        </a>
+        <h3
+          class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl leading-snug"
+        >
+          {t.splintTitle}
+        </h3>
+        <p
+          class="mb-6 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed"
+        >
+          {t.splintDescription}
+        </p>
+        <div class="mt-auto">
+          <AddToCartButton
+            client:load
+            variantId={NIGHT_SPLINT_VARIANTS.largeLeft}
+            size="lg"
+            className="w-full sm:w-auto"
+          >
+            {t.addSplint}
+          </AddToCartButton>
+        </div>
+      </article>
+
+      <!-- Course -->
+      <article
+        class="flex flex-col bg-neutral-50 dark:bg-neutral-900/50 shadow-sm p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl"
+      >
+        <div
+          class="flex justify-center items-center bg-primary/10 mb-5 border border-primary/15 rounded-xl w-full max-h-40 aspect-[2/1]"
+        >
+          <BookOpen className="w-14 h-14 text-primary" aria-hidden="true" />
+        </div>
+        <h3
+          class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl leading-snug"
+        >
+          {courseTitle}
+        </h3>
+        <p
+          class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed"
+        >
+          {courseDescription}
+        </p>
+        <p
+          class="mb-6 font-semibold text-neutral-800 dark:text-neutral-200 text-sm"
+        >
+          {t.readersLine}
+        </p>
+        <div class="mt-auto">
+          <CourseBuyButton
+            client:load
+            productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+            size="lg"
+            className="w-full sm:w-auto"
+          >
+            {t.addCourse} →
+          </CourseBuyButton>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

@@ -14,12 +14,13 @@ import {
 
 import { cn } from "../lib/utils";
 
-("client only");
+"client only";
 
 import NavAccordion from "./NavAccordion";
 import { ArrowRight } from "lucide-react";
 import Thetis from "./Thetis.tsx";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { CurrencySwitcher } from "../components/CurrencySwitcher";
 import { getRouteBySlugAndLanguage } from "@/content/routes.tsx";
 import { useShopifyPrice } from "../hooks/use-shopify-price";
 import type { Lang } from "../config/languages.ts";
@@ -75,7 +76,9 @@ export function MobileNav({ lang = "en", currentPath = "/" }: MobileNavProps) {
         <SheetHeader className="flex flex-row justify-between items-center">
           <Thetis />
           <div className="flex items-center gap-2">
-            <SheetClose className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
+            <SheetClose
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+            >
               {t.close}
             </SheetClose>
           </div>
@@ -84,8 +87,9 @@ export function MobileNav({ lang = "en", currentPath = "/" }: MobileNavProps) {
         <NavAccordion lang={lang} />
 
         <SheetFooter className="flex flex-col gap-y-4 mt-4">
-          <div className="flex flex-row justify-between items-center pt-2">
+          <div className="flex flex-row flex-wrap justify-between items-center gap-2 pt-2">
             <LanguageSwitcher currentPath={currentPath} />
+            <CurrencySwitcher />
           </div>
 
           <SheetClose>

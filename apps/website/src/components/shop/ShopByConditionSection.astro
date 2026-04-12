@@ -1,0 +1,95 @@
+---
+import { conditions } from "@/content/conditions/registry";
+import { getLocalizedShopHubHref } from "@/lib/condition-nav";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import type { Lang } from "@/config/languages";
+import { ArrowRight } from "lucide-react";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const copy: Record<Lang, { title: string; blurb: string; cta: string }> = {
+  en: {
+    title: "Shop by condition",
+    blurb:
+      "Open a curated shop hub for guides, courses, and gear tailored to each injury.",
+    cta: "View shop",
+  },
+  de: {
+    title: "Nach Beschwerde einkaufen",
+    blurb:
+      "Öffnen Sie einen Hub mit Leitfäden, Kursen und passendem Equipment.",
+    cta: "Zum Shop",
+  },
+  fr: {
+    title: "Acheter par pathologie",
+    blurb: "Ouvrez une boutique avec guides, cours et équipement adaptés.",
+    cta: "Voir la boutique",
+  },
+  es: {
+    title: "Comprar por condición",
+    blurb: "Abre un hub con guías, cursos y material para cada lesión.",
+    cta: "Ir a la tienda",
+  },
+  it: {
+    title: "Acquista per condizione",
+    blurb: "Apri un hub con guide, corsi e attrezzatura per ogni condizione.",
+    cta: "Vai allo shop",
+  },
+};
+
+const t = copy[lang];
+---
+
+<section
+  class="bg-white/90 dark:bg-neutral-950/90 shadow-sm py-8 md:py-10 border border-neutral-200/90 dark:border-neutral-700 rounded-2xl"
+  aria-labelledby="shop-by-condition-heading"
+>
+  <div class="mx-auto px-4 max-w-6xl">
+    <h2
+      id="shop-by-condition-heading"
+      class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl text-center"
+    >
+      {t.title}
+    </h2>
+    <p
+      class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-base text-center"
+    >
+      {t.blurb}
+    </p>
+    <ul class="gap-4 grid sm:grid-cols-2">
+      {
+        conditions
+          .slice()
+          .sort((a, b) => a.sortOrder - b.sortOrder)
+          .map((c) => (
+            <li>
+              <a
+                href={getLocalizedShopHubHref(lang, c.id)}
+                class={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "group flex justify-between items-center gap-3 px-5 py-4 border-primary/25 hover:border-primary/45 hover:bg-primary/5 w-full h-auto font-semibold text-neutral-900 dark:text-neutral-100 text-left",
+                )}
+                aria-label={`${c.label} — ${t.cta}`}
+              >
+                <span class="min-w-0">{c.label}</span>
+                <span class="flex items-center gap-2 shrink-0">
+                  <span class="hidden sm:inline font-medium text-primary text-sm">
+                    {t.cta}
+                  </span>
+                  <ArrowRight
+                    className="w-5 h-5 text-primary transition-transform group-hover:translate-x-0.5"
+                    aria-hidden
+                  />
+                </span>
+              </a>
+            </li>
+          ))
+      }
+    </ul>
+  </div>
+</section>

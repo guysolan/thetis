@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getCountryCodeForPricing } from "@/lib/shopping-country";
 
 // Shopify Storefront API credentials
 const SHOPIFY_DOMAIN = "shop.thetismedical.com";
@@ -26,7 +27,9 @@ interface UseShopifyPriceResult {
 }
 
 // Fetch price from Shopify Storefront API
-async function fetchShopifyPrice(countryCode: string = "GB"): Promise<ShopifyPrice | null> {
+async function fetchShopifyPrice(
+  countryCode: string = "GB",
+): Promise<ShopifyPrice | null> {
   const query = `
     query getProductPrice($country: CountryCode) @inContext(country: $country) {
       product(id: "${PRODUCT_ID}") {
@@ -45,17 +48,20 @@ async function fetchShopifyPrice(countryCode: string = "GB"): Promise<ShopifyPri
   `;
 
   try {
-    const response = await fetch(`https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Shopify-Storefront-Access-Token": STOREFRONT_ACCESS_TOKEN,
+    const response = await fetch(
+      `https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Shopify-Storefront-Access-Token": STOREFRONT_ACCESS_TOKEN,
+        },
+        body: JSON.stringify({
+          query,
+          variables: { country: countryCode },
+        }),
       },
-      body: JSON.stringify({
-        query,
-        variables: { country: countryCode },
-      }),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(`Shopify API error: ${response.status}`);
@@ -83,29 +89,16 @@ async function fetchShopifyPrice(countryCode: string = "GB"): Promise<ShopifyPri
   }
 }
 
-// Detect user's country
-async function detectCountry(): Promise<string> {
-  try {
-    // Try multiple geolocation services for reliability
-    const response = await fetch("https://ipapi.co/json/");
-    if (response.ok) {
-      const data = await response.json();
-      return data.country_code || "GB";
-    }
-  } catch (error) {
-    console.error("Failed to detect country:", error);
-  }
-
-  // Fallback to GB
-  return "GB";
-}
-
 // Format price based on currency
 function formatPrice(amount: string, currencyCode: string): string {
   const numAmount = parseFloat(amount);
 
   const formatter = new Intl.NumberFormat(
-    currencyCode === "GBP" ? "en-GB" : currencyCode === "USD" ? "en-US" : "en-GB",
+    currencyCode === "GBP"
+      ? "en-GB"
+      : currencyCode === "USD"
+      ? "en-US"
+      : "en-GB",
     {
       style: "currency",
       currency: currencyCode,
@@ -128,8 +121,7 @@ export function useShopifyPrice(): UseShopifyPriceResult {
 
     async function loadPrice() {
       try {
-        // First detect the user's country
-        const countryCode = await detectCountry();
+        const countryCode = await getCountryCodeForPricing();
 
         // Then fetch the price for that country
         const priceData = await fetchShopifyPrice(countryCode);
@@ -138,7 +130,9 @@ export function useShopifyPrice(): UseShopifyPriceResult {
 
         if (priceData) {
           setPrice(priceData);
-          setFormattedPrice(formatPrice(priceData.amount, priceData.currencyCode));
+          setFormattedPrice(
+            formatPrice(priceData.amount, priceData.currencyCode),
+          );
         } else {
           // Fallback to static prices if API fails
           setFormattedPrice(countryCode === "US" ? "$93.99" : "£63.99");
@@ -171,4 +165,5 @@ export function useShopifyPrice(): UseShopifyPriceResult {
 }
 
 // Export for use in components that need raw price data
-export { detectCountry, fetchShopifyPrice, formatPrice, VARIANT_IDS };
+export { fetchShopifyPrice, formatPrice, VARIANT_IDS };
+export { detectCountryCode as detectCountry } from "@/lib/geo-country";

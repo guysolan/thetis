@@ -42,7 +42,7 @@ export function AddToCartButton({
       size={size}
       className={cn(
         "transition-all duration-200",
-        justAdded && "bg-green-600 hover:bg-green-600",
+        justAdded && "bg-primary hover:bg-primary",
         className,
       )}
     >

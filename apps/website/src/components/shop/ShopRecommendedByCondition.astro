@@ -1,0 +1,85 @@
+---
+import { conditions } from "@/content/conditions/registry";
+import { getLocalizedShopHubHref } from "@/lib/condition-nav";
+import {
+  getCatalogueProductsForCondition,
+  orderedShopProductsForDisplay,
+} from "@thetis/catalogue";
+import ShopCatalogueProductGrid from "@/components/shop/ShopCatalogueProductGrid.astro";
+import ShopCataloguePartnerNotes from "@/components/shop/ShopCataloguePartnerNotes.astro";
+import type { Lang } from "@/config/languages";
+
+interface Props {
+  lang: Lang;
+}
+
+const SPLINT_PRODUCT_ID = "thetis-night-splint";
+
+const { lang } = Astro.props;
+
+const copy: Record<Lang, { sectionTitle: string; hubCta: string }> = {
+  en: {
+    sectionTitle: "Recommended gear",
+    hubCta: "View condition shop",
+  },
+  de: {
+    sectionTitle: "Empfohlene Produkte",
+    hubCta: "Zum Shop",
+  },
+  fr: {
+    sectionTitle: "Produits recommandés",
+    hubCta: "Voir la boutique",
+  },
+  es: {
+    sectionTitle: "Productos recomendados",
+    hubCta: "Ir a la tienda",
+  },
+  it: {
+    sectionTitle: "Prodotti consigliati",
+    hubCta: "Vai allo shop",
+  },
+};
+
+const t = copy[lang];
+
+const sorted = conditions.slice().sort((a, b) => a.sortOrder - b.sortOrder);
+const groups = sorted
+  .map((c) => ({
+    label: c.label,
+    shopHref: getLocalizedShopHubHref(lang, c.id),
+    products: orderedShopProductsForDisplay(
+      getCatalogueProductsForCondition(c.id).filter(
+        (p) => p.id !== SPLINT_PRODUCT_ID,
+      ),
+    ),
+  }))
+  .filter((g) => g.products.length > 0);
+---
+
+<section
+  class="bg-neutral-50 dark:bg-neutral-950 py-12 border-neutral-200 dark:border-neutral-800 border-t"
+  aria-labelledby="shop-recommended-heading"
+>
+  <div class="mx-auto px-4 max-w-6xl">
+    <h2
+      id="shop-recommended-heading"
+      class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
+    >
+      {t.sectionTitle}
+    </h2>
+    <ShopCataloguePartnerNotes lang={lang} />
+    {
+      groups.map((g) => (
+        <ShopCatalogueProductGrid
+          lang={lang}
+          products={g.products}
+          embedded
+          sectionTitle={g.label}
+          conditionHubHref={g.shopHref}
+          conditionHubCta={t.hubCta}
+          showPartnerNotes={false}
+        />
+      ))
+    }
+  </div>
+</section>

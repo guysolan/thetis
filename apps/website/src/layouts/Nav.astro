@@ -3,6 +3,7 @@ import { DesktopNav } from "./DesktopNav.tsx";
 import { MobileNav } from "./MobileNav.tsx";
 import Thetis from "./Thetis.tsx";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
+import { CurrencySwitcher } from "../components/CurrencySwitcher";
 import type { Lang } from "@/config/languages";
 import { CartIcon } from "../components/cart/CartIcon";
 
@@ -15,17 +16,20 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header
-    class="top-0 z-[40] fixed flex bg-background m-auto my-auto px-2 lg:px-8 py-4 border-gray-300 border-b w-screen item-center overflow-visible"
+    class="top-0 z-[40] fixed flex bg-background m-auto my-auto px-2 lg:px-8 py-4 border-gray-300 border-b w-screen overflow-visible item-center"
 >
-    <div class="hidden lg:flex items-center gap-x-4 w-full text-base">
-        <div class="flex shrink-0 justify-start">
+    <div class="hidden lg:flex items-stretch gap-x-4 w-full text-base">
+        <div class="flex justify-start items-center shrink-0">
             <Thetis lang={lang} />
         </div>
-        <div class="flex flex-1 justify-center min-w-0 overflow-visible">
+        <div
+            class="flex flex-1 justify-center items-stretch min-w-0 overflow-visible"
+        >
             <DesktopNav client:load lang={lang} />
         </div>
-        <div class="flex shrink-0 justify-end items-center gap-x-3 min-w-0">
+        <div class="flex justify-end items-center gap-x-3 min-w-0 shrink-0">
             <LanguageSwitcher />
+            <CurrencySwitcher client:load />
             <div class="pr-1 pl-0.5">
                 <CartIcon client:load />
             </div>

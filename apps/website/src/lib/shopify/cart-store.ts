@@ -8,13 +8,50 @@ import {
   createCart,
   getCart,
   removeFromCart as removeFromCartApi,
+  updateCartBuyerCountry,
   updateCartLine,
 } from "./storefront";
 import { trackAddToCart, trackRemoveFromCart } from "../analytics";
+import {
+  ensureShoppingCountryCode,
+  getStoredShoppingCountryCode,
+  SHOPPING_COUNTRY_CHANGE_EVENT,
+  toShopifyCountryCode,
+} from "@/lib/shopping-country";
 
 export type { Cart } from "./storefront";
 
 const CART_ID_KEY = "thetis_cart_id";
+
+/**
+ * Keep the same cart id but move buyerIdentity to the stored market (Shopify-style),
+ * instead of wiping the cart when the shopper changes region.
+ */
+async function reconcileCartBuyerCountryWithStorage(
+  cartId: string,
+): Promise<Cart | null> {
+  const cart = await getCart(cartId);
+  if (!cart) return null;
+
+  const stored = getStoredShoppingCountryCode();
+  if (!stored) {
+    return cart;
+  }
+
+  const want = toShopifyCountryCode(stored);
+  const got = cart.buyerIdentity?.countryCode ?? null;
+  if (got === want) {
+    return cart;
+  }
+
+  try {
+    return await updateCartBuyerCountry(cartId, want);
+  } catch (error) {
+    console.error("Cart buyer country update failed; clearing cart id", error);
+    localStorage.removeItem(CART_ID_KEY);
+    return null;
+  }
+}
 
 // Core state atoms
 export const $cart = atom<Cart | null>(null);
@@ -49,6 +86,22 @@ export const $checkoutUrl = computed($cart, (cart) => {
   return baseUrl;
 });
 
+if (typeof window !== "undefined") {
+  window.addEventListener(SHOPPING_COUNTRY_CHANGE_EVENT, (ev: Event) => {
+    const detail = (ev as CustomEvent<{ prev: string | null; next: string }>)
+      .detail;
+    if (!detail?.next || detail.prev === detail.next) return;
+
+    const cartId = localStorage.getItem(CART_ID_KEY);
+    if (!cartId) return;
+
+    void (async () => {
+      const updated = await reconcileCartBuyerCountryWithStorage(cartId);
+      $cart.set(updated);
+    })();
+  });
+}
+
 // Actions
 export function openCart() {
   $isCartOpen.set(true);
@@ -72,16 +125,15 @@ export async function initializeCart(): Promise<Cart | null> {
   $isLoading.set(true);
   $error.set(null);
 
-  try {
+   try {
     const cartId = localStorage.getItem(CART_ID_KEY);
     if (cartId) {
-      const existingCart = await getCart(cartId);
+      const existingCart = await reconcileCartBuyerCountryWithStorage(cartId);
       if (existingCart) {
         $cart.set(existingCart);
         $isLoading.set(false);
         return existingCart;
       }
-      // Cart expired or invalid, remove from storage
       localStorage.removeItem(CART_ID_KEY);
     }
   } catch (error) {
@@ -102,13 +154,32 @@ export async function addToCart(
   $error.set(null);
 
   try {
-    const currentCart = $cart.get();
+    const countryCode = await ensureShoppingCountryCode();
+    let currentCart = $cart.get();
+
+    if (currentCart?.id) {
+      const cartCountry = currentCart.buyerIdentity?.countryCode;
+      if (!cartCountry || cartCountry !== countryCode) {
+        try {
+          currentCart = await updateCartBuyerCountry(
+            currentCart.id,
+            countryCode,
+          );
+          $cart.set(currentCart);
+        } catch {
+          localStorage.removeItem(CART_ID_KEY);
+          $cart.set(null);
+          currentCart = null;
+        }
+      }
+    }
+
     let updatedCart: Cart;
 
     if (currentCart?.id) {
       updatedCart = await addToCartApi(currentCart.id, variantId, quantity);
     } else {
-      updatedCart = await createCart(variantId, quantity);
+      updatedCart = await createCart(variantId, quantity, countryCode);
       if (typeof window !== "undefined") {
         localStorage.setItem(CART_ID_KEY, updatedCart.id);
       }
@@ -129,7 +200,9 @@ export async function addToCart(
         price: parseFloat(item.merchandise.price.amount),
         quantity,
         currency: item.merchandise.price.currencyCode,
-        variant: item.merchandise.title !== "Default Title" ? item.merchandise.title : undefined,
+        variant: item.merchandise.title !== "Default Title"
+          ? item.merchandise.title
+          : undefined,
       });
     }
 
@@ -140,14 +213,19 @@ export async function addToCart(
 
     return updatedCart;
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Failed to add to cart";
+    const message = error instanceof Error
+      ? error.message
+      : "Failed to add to cart";
     $error.set(message);
     $isLoading.set(false);
     throw error;
   }
 }
 
-export async function updateQuantity(lineId: string, quantity: number): Promise<Cart | null> {
+export async function updateQuantity(
+  lineId: string,
+  quantity: number,
+): Promise<Cart | null> {
   const currentCart = $cart.get();
   if (!currentCart?.id) return null;
 
@@ -160,7 +238,9 @@ export async function updateQuantity(lineId: string, quantity: number): Promise<
     $isLoading.set(false);
     return updatedCart;
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Failed to update quantity";
+    const message = error instanceof Error
+      ? error.message
+      : "Failed to update quantity";
     $error.set(message);
     $isLoading.set(false);
     throw error;
@@ -172,7 +252,9 @@ export async function removeItem(lineId: string): Promise<Cart | null> {
   if (!currentCart?.id) return null;
 
   // Get item info before removing for analytics tracking
-  const removedLine = currentCart.lines.edges.find((edge) => edge.node.id === lineId);
+  const removedLine = currentCart.lines.edges.find((edge) =>
+    edge.node.id === lineId
+  );
 
   $isLoading.set(true);
   $error.set(null);
@@ -191,13 +273,17 @@ export async function removeItem(lineId: string): Promise<Cart | null> {
         price: parseFloat(item.merchandise.price.amount),
         quantity: item.quantity,
         currency: item.merchandise.price.currencyCode,
-        variant: item.merchandise.title !== "Default Title" ? item.merchandise.title : undefined,
+        variant: item.merchandise.title !== "Default Title"
+          ? item.merchandise.title
+          : undefined,
       });
     }
 
     return updatedCart;
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Failed to remove item";
+    const message = error instanceof Error
+      ? error.message
+      : "Failed to remove item";
     $error.set(message);
     $isLoading.set(false);
     throw error;
@@ -213,7 +299,9 @@ export function getCartCache(): Cart | null {
 }
 
 // Subscription helpers for non-React usage
-export function subscribeToCartUpdates(callback: (cart: Cart | null) => void): () => void {
+export function subscribeToCartUpdates(
+  callback: (cart: Cart | null) => void,
+): () => void {
   return $cart.subscribe(callback);
 }
 
