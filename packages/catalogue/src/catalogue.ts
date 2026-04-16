@@ -999,7 +999,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "If your hospital does not loan crutches, adjustable forearm (elbow) crutches are a common buy.",
     tags: ["mobility", "weight-bearing"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/forearm-crutches.png",
     description:
       "Confirm height adjustment range and weight rating. Many patients receive crutches from the hospital—check before purchasing.",
     features: ["Height-adjustable", "Rubber tips wear out—replace as needed"],
