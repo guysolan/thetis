@@ -20,7 +20,7 @@ export const Route = createFileRoute("/claim")({
 
 function ClaimPage() {
   const { email: currentEmail, loading: authLoading, signIn, isAuthenticated } = useSimpleAuth();
-  const { hasAccess, loading: enrollmentLoading } = useEnrollment();
+  const { hasAccess, hasAnyCourseAccess, loading: enrollmentLoading } = useEnrollment();
   const { email: prefillEmail, order } = useSearch({ from: "/claim" });
   const [email, setEmail] = useState(prefillEmail || "");
   const [loading, setLoading] = useState(false);
@@ -56,7 +56,7 @@ function ClaimPage() {
           .select("product_slug, shopify_order_number, status")
           .eq("shopify_customer_email", emailToCheck)
           .eq("status", "active")
-          .in("product_slug", ["standard_course", "premium_course"])
+          .in("product_slug", ["standard_course", "premium_course", "plantar_fasciitis_course"])
           .limit(1);
 
         if (hasOrderParams && order) {
@@ -80,7 +80,12 @@ function ClaimPage() {
         } else {
           setHasPurchase(true);
           setOrderValid(true);
-          const courseType = data.product_slug === "premium_course" ? "premium" : "standard";
+          const courseType =
+            data.product_slug === "premium_course"
+              ? "premium"
+              : data.product_slug === "plantar_fasciitis_course"
+                ? "plantar fasciitis"
+                : "standard";
           setEnrollmentInfo({
             courseType,
             orderNumber: data.shopify_order_number,
@@ -107,10 +112,10 @@ function ClaimPage() {
 
   // If logged in and already has access, redirect to home
   useEffect(() => {
-    if (!authLoading && !enrollmentLoading && isAuthenticated && hasAccess("standard")) {
+    if (!authLoading && !enrollmentLoading && isAuthenticated && hasAnyCourseAccess()) {
       window.location.href = "/";
     }
-  }, [isAuthenticated, authLoading, enrollmentLoading, hasAccess]);
+  }, [isAuthenticated, authLoading, enrollmentLoading, hasAnyCourseAccess]);
 
   // After successful claim, redirect to home
   useEffect(() => {
@@ -143,7 +148,7 @@ function ClaimPage() {
         .select("product_slug, shopify_order_number, status")
         .eq("shopify_customer_email", emailToCheck)
         .eq("status", "active")
-        .in("product_slug", ["standard_course", "premium_course"])
+        .in("product_slug", ["standard_course", "premium_course", "plantar_fasciitis_course"])
         .limit(1);
 
       if (hasOrderParams && order) {

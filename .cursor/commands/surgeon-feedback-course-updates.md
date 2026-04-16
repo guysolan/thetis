@@ -1,6 +1,6 @@
 # Apply surgeon / clinical feedback to course content
 
-Use this when the user provides **feedback from surgeons or clinicians** (bullet points, numbered items, or free text) and wants it applied to **course lesson pages** in `apps/course/src/content/course/standard/`.
+Use this when the user provides **feedback from surgeons or clinicians** (bullet points, numbered items, or free text) and wants it applied to **course lesson pages** in `apps/course/src/content/course/achilles-rupture/`.
 
 ## Steps
 

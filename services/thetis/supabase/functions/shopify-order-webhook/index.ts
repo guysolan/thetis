@@ -4,12 +4,18 @@ import { createHmac } from "node:crypto";
 
 // Shopify product IDs -> product_slug. Keep splint in sync with SHOPIFY_SPLINT_PRODUCT_ID in apps/website/src/lib/shopify-course-price.ts
 const PRODUCT_TO_SLUG: Record<string, string> = {
-    "9846187786568": "standard_course", // Standard / Essentials Course
-    "9846188081480": "premium_course", // Premium / Professionals Course
+    "9846187786568": "standard_course", // Achilles Rupture / Essentials Course
+    "9846188081480": "premium_course", // Achilles Rupture / Professionals Course
     "8572432253256": "splint", // Achilles Rupture Splint (all sizes/sides)
+    // TODO: Add Shopify product ID for Plantar Fasciitis course when created
+    // "XXXXXXXXXXX": "plantar_fasciitis_course",
 };
 
-const COURSE_SLUGS = ["standard_course", "premium_course"];
+const COURSE_SLUGS = [
+    "standard_course",
+    "premium_course",
+    "plantar_fasciitis_course",
+];
 
 // Verify Shopify webhook signature
 function verifyShopifyWebhook(

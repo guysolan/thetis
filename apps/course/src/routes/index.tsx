@@ -15,11 +15,18 @@ import { useEnrollment } from "@/hooks/use-enrollment";
 import { supabase } from "@/lib/supabase";
 import { Card } from "@thetis/ui/card";
 import { Button } from "@thetis/ui/button";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@thetis/ui/chart";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@thetis/ui/chart";
 import { Cell, Pie, PieChart } from "recharts";
-import { sections } from "@/content/course/sections";
+import { sections as achillesSections } from "@/content/course/achilles-rupture/sections";
+import { sections as pfSections } from "@/content/course/plantar-fasciitis/sections";
 import { WEBSITE_URL } from "@/lib/env";
 import { cn } from "@/lib/utils";
+import type { SectionMetadata } from "@/content/course/sections";
+import type { CourseType } from "@/hooks/use-enrollment";
 
 function CourseProgressChart({ percentage }: { percentage: number }) {
   const data = [
@@ -69,57 +76,40 @@ function CourseProgressChart({ percentage }: { percentage: number }) {
 function CourseCard({
   title,
   description,
-  variant,
   badge,
   features,
   link,
   ctaText,
   icon,
-  showRibbon,
-  ribbonText,
   courseType,
+  courseSections,
 }: {
   title: string;
   description: string;
-  variant: "standard" | "premium";
   badge: string;
   features: string[];
   link: string;
   ctaText: string;
   icon: React.ReactNode;
-  showRibbon?: boolean;
-  ribbonText?: string;
-  courseType: "standard" | "premium";
+  courseType: CourseType;
+  courseSections: SectionMetadata[];
 }) {
   const { email } = useSimpleAuth();
   const { hasAccess } = useEnrollment();
   const { getCompletionPercentage, isLessonComplete } = useCourseProgress();
 
-  // Check if user has access to this course
   const unlocked = email ? hasAccess(courseType) : false;
+  const completionPercentage = unlocked
+    ? getCompletionPercentage(courseSections.map((s) => s.slug))
+    : 0;
 
-  // Get sections for this course type
-  const courseSections = sections.filter((s) => s.course_type === courseType);
-  const completionPercentage = unlocked ? getCompletionPercentage(courseSections.length) : 0;
+  const nextLesson = unlocked
+    ? courseSections.find((s) => {
+      if (!s.slug || typeof s.slug !== "string") return false;
+      return !isLessonComplete(s.slug);
+    })
+    : null;
 
-  // Get next incomplete lesson for enrolled users (only for standard course)
-  const nextLesson =
-    unlocked && courseType === "standard"
-      ? courseSections.find((s) => {
-          if (!s.slug || typeof s.slug !== "string") {
-            console.warn("Section missing valid slug:", s);
-            return false;
-          }
-          return !isLessonComplete(s.slug);
-        })
-      : null;
-
-  // Debug: log nextLesson if it exists
-  if (nextLesson && process.env.NODE_ENV === "development") {
-    console.log("Next lesson:", nextLesson);
-  }
-
-  // Determine CTA text based on enrollment status
   let displayCtaText = ctaText;
   if (unlocked) {
     if (nextLesson) {
@@ -127,34 +117,20 @@ function CourseCard({
     } else if (completionPercentage === 100) {
       displayCtaText = "Review Course";
     } else {
-      displayCtaText = `Start ${title} Course`;
+      displayCtaText = `Start Course`;
     }
   }
 
-  const variantStyles = {
-    standard: {
-      border: "border-primary/30 dark:border-primary/40",
-      bg: "bg-white dark:bg-neutral-800",
-      hoverBorder: "hover:border-primary/60 dark:hover:border-primary",
-      iconBg: "bg-primary/10",
-      iconColor: "text-primary",
-      badgeBg: "bg-neutral-100 dark:bg-neutral-700",
-      badgeColor: "text-neutral-600 dark:text-neutral-300",
-      checkColor: "text-primary",
-    },
-    premium: {
-      border: "border-primary/30 dark:border-primary/40",
-      bg: "bg-white dark:bg-neutral-800",
-      hoverBorder: "hover:border-primary/60 dark:hover:border-primary",
-      iconBg: "bg-primary/10",
-      iconColor: "text-primary",
-      badgeBg: "bg-neutral-100 dark:bg-neutral-700",
-      badgeColor: "text-neutral-600 dark:text-neutral-300",
-      checkColor: "text-primary",
-    },
+  const styles = {
+    border: "border-primary/30 dark:border-primary/40",
+    bg: "bg-white dark:bg-neutral-800",
+    hoverBorder: "hover:border-primary/60 dark:hover:border-primary",
+    iconBg: "bg-primary/10",
+    iconColor: "text-primary",
+    badgeBg: "bg-neutral-100 dark:bg-neutral-700",
+    badgeColor: "text-neutral-600 dark:text-neutral-300",
+    checkColor: "text-primary",
   };
-
-  const styles = variantStyles[variant];
 
   return (
     <Card
@@ -165,14 +141,6 @@ function CourseCard({
         unlocked && styles.hoverBorder,
       )}
     >
-      {/* Ribbon for premium tier */}
-      {showRibbon && (
-        <div className="top-0 right-4 absolute bg-primary px-3 py-1 rounded-b-lg font-semibold text-white text-xs">
-          {ribbonText}
-        </div>
-      )}
-
-      {/* Header with icon and badge */}
       <div className="flex items-center gap-4 mb-4">
         {icon && (
           <div
@@ -200,22 +168,23 @@ function CourseCard({
             {title}
           </h3>
         </div>
-        {unlocked ? (
-          <CourseProgressChart percentage={completionPercentage} />
-        ) : (
-          <div className="flex justify-center items-center w-[50px] h-[50px] shrink-0">
-            <Lock className="w-5 h-5 text-muted-foreground" />
-          </div>
-        )}
+        {unlocked
+          ? <CourseProgressChart percentage={completionPercentage} />
+          : (
+            <div className="flex justify-center items-center w-[50px] h-[50px] shrink-0">
+              <Lock className="w-5 h-5 text-muted-foreground" />
+            </div>
+          )}
       </div>
 
-      {/* Description */}
       <p className="mb-6 text-muted-foreground text-sm">{description}</p>
 
-      {/* Features list */}
       <ul className="flex-grow space-y-3 mb-6">
         {features.map((feature, index) => (
-          <li key={index} className="flex items-start gap-3 text-foreground text-sm">
+          <li
+            key={index}
+            className="flex items-start gap-3 text-foreground text-sm"
+          >
             <div
               className={cn(
                 "flex justify-center items-center mt-0.5 rounded-full w-5 h-5 shrink-0",
@@ -229,31 +198,23 @@ function CourseCard({
         ))}
       </ul>
 
-      {/* CTA */}
-      {unlocked ? (
-        nextLesson && nextLesson.slug && typeof nextLesson.slug === "string" ? (
-          // @ts-ignore - Premium route exists but we only use standard here
-          <Link to="/standard/$slug" params={{ slug: nextLesson.slug }}>
+      {unlocked
+        ? (
+          <Link to={link}>
             <Button className="w-full" variant="outline">
               {displayCtaText}
               <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
           </Link>
-        ) : (
-          <Link to={link}>
+        )
+        : (
+          <Link to="/claim" search={{ email: "", order: "" }}>
             <Button className="w-full" variant="outline">
-              {displayCtaText}
+              {email ? "Claim Your Course" : "Sign In to Access"}
+              <Lock className="ml-2 w-4 h-4" />
             </Button>
           </Link>
-        )
-      ) : (
-        <Link to="/claim" search={{ email: "", order: "" }}>
-          <Button className="w-full" variant="outline">
-            {email ? "Claim Your Course" : "Sign In to Access"}
-            <Lock className="ml-2 w-4 h-4" />
-          </Button>
-        </Link>
-      )}
+        )}
     </Card>
   );
 }
@@ -264,13 +225,12 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const { email, loading: authLoading } = useSimpleAuth();
-  const { enrollments, hasAccess, loading: enrollmentLoading } = useEnrollment();
+  const { enrollments, hasAccess, loading: enrollmentLoading } =
+    useEnrollment();
   const { getCompletionPercentage, isLessonComplete } = useCourseProgress();
 
-  // Show landing page for everyone, but customize for enrolled users
   return (
     <div className="min-h-screen">
-      {/* Hero with gradient background */}
       <div className="color-gradient-hero">
         <div className="mx-auto px-4 sm:px-6 py-16 md:py-24 max-w-5xl">
           <div className="mb-16 text-center">
@@ -278,39 +238,38 @@ function HomePage() {
               <BookOpen className="w-4 h-4" />
               Recovery Programs
             </div>
-            {email && enrollments.length > 0 ? (
-              <>
-                <h1 className="mb-6 font-bold text-foreground text-4xl md:text-6xl tracking-tight">
-                  Welcome back
-                  {email
-                    ? `, ${
-                        email.split("@")[0].charAt(0).toUpperCase() + email.split("@")[0].slice(1)
-                      }`
-                    : ""}
-                </h1>
-                <p className="mx-auto max-w-2xl text-muted-foreground text-lg md:text-xl">
-                  Continue your recovery journey
-                </p>
-              </>
-            ) : (
-              <>
-                <h1 className="mb-6 font-bold text-foreground text-4xl md:text-6xl tracking-tight">
-                  Simplify your <span className="text-primary">Recovery</span>
-                </h1>
-                <p className="mx-auto max-w-2xl text-muted-foreground text-lg md:text-xl">
-                  Choose the program that best fits your journey back to life, work, and sport after
-                  an Achilles rupture.
-                </p>
-              </>
-            )}
+            {email && enrollments.length > 0
+              ? (
+                <>
+                  <h1 className="mb-6 font-bold text-foreground text-4xl md:text-6xl tracking-tight">
+                    Welcome back
+                    {`, ${
+                      email.split("@")[0].charAt(0).toUpperCase() +
+                      email.split("@")[0].slice(1)
+                    }`}
+                  </h1>
+                  <p className="mx-auto max-w-2xl text-muted-foreground text-lg md:text-xl">
+                    Continue your recovery journey
+                  </p>
+                </>
+              )
+              : (
+                <>
+                  <h1 className="mb-6 font-bold text-foreground text-4xl md:text-6xl tracking-tight">
+                    Simplify your <span className="text-primary">Recovery</span>
+                  </h1>
+                  <p className="mx-auto max-w-2xl text-muted-foreground text-lg md:text-xl">
+                    Expert-written courses to guide you through recovery — step
+                    by step, at your own pace.
+                  </p>
+                </>
+              )}
           </div>
 
-          {/* Course Card */}
-          <div className="flex justify-center mx-auto max-w-4xl">
+          <div className="gap-8 grid md:grid-cols-2 mx-auto max-w-4xl">
             <CourseCard
-              title="Standard"
-              description="31 easily digestible lessons to guide you through each stage of recovery."
-              variant="standard"
+              title="Achilles Rupture"
+              description={`${achillesSections.length} lessons covering your complete journey from injury to return to sport.`}
               badge="POPULAR"
               features={[
                 "Questions for your surgeon",
@@ -319,15 +278,31 @@ function HomePage() {
                 "Boot comparison guide",
               ]}
               link="/standard"
-              ctaText="Start Standard Course"
+              ctaText="Start Course"
               icon={<BookOpen className="w-full h-full" />}
               courseType="standard"
+              courseSections={achillesSections}
+            />
+            <CourseCard
+              title="Chronic Heel Pain"
+              description={`${pfSections.length} lessons on understanding and managing plantar fasciitis and Achilles tendinitis.`}
+              badge="NEW"
+              features={[
+                "Three-level treatment approach",
+                "Slant board stretching programme",
+                "Evidence-based treatment options",
+                "When to consider surgery",
+              ]}
+              link="/plantar-fasciitis"
+              ctaText="Start Course"
+              icon={<GraduationCap className="w-full h-full" />}
+              courseType="plantar-fasciitis"
+              courseSections={pfSections}
             />
           </div>
         </div>
       </div>
 
-      {/* Free Email Course Section */}
       <div className="bg-muted/30 border-border border-t">
         <div className="mx-auto px-4 sm:px-6 py-16 max-w-5xl">
           <div className="flex md:flex-row flex-col items-center gap-8 bg-card p-8 border border-border rounded-2xl">
@@ -342,11 +317,14 @@ function HomePage() {
                 Not ready to commit? Start with free emails
               </h3>
               <p className="text-muted-foreground">
-                Personalized recovery guidance timed to your injury date. The right information
-                arrives exactly when you need it.
+                Personalized recovery guidance timed to your injury date. The
+                right information arrives exactly when you need it.
               </p>
             </div>
-            <EmailSignupDialog triggerText="Get Free Emails" supabaseClient={supabase} />
+            <EmailSignupDialog
+              triggerText="Get Free Emails"
+              supabaseClient={supabase}
+            />
           </div>
         </div>
       </div>

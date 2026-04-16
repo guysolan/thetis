@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { sections } from "@/content/course/sections";
+import { sections } from "@/content/course/plantar-fasciitis/sections";
 import { CheckCircle2, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@thetis/ui/button";
@@ -13,58 +13,37 @@ import {
   LessonCompletionButton,
 } from "@/components/course";
 
-export const Route = createFileRoute("/standard/")({
+export const Route = createFileRoute("/plantar-fasciitis/")({
   component: () => (
-    <ProtectedRoute requiredCourse="standard">
-      <StandardIndexPage />
+    <ProtectedRoute requiredCourse="plantar-fasciitis">
+      <PlantarFasciitisIndexPage />
     </ProtectedRoute>
   ),
 });
 
-// Chapter display names - map folder names to human-readable titles (chronological order)
 const chapterDisplayNames: Record<
   string,
   { name: string; description: string }
 > = {
-  "00-practical": {
-    name: "Practical Life",
-    description: "Throughout recovery - work, driving, and daily life",
+  "00-understanding": {
+    name: "Understanding",
+    description: "What heel pain is and why it happens",
   },
-  "01-emergency": {
-    name: "Emergency Care",
-    description: "Days 0-3 - Immediate needs after rupture",
+  "01-level-1-foundation": {
+    name: "Level 1: Foundation",
+    description: "Rest, weight management, stretching, and footwear",
   },
-  "02-early-treatment": {
-    name: "Early Treatment",
-    description: "Days 2-14 - Understanding your options and getting your boot",
+  "02-level-2-further-treatment": {
+    name: "Level 2: Further Treatment",
+    description: "Scans, injections, and shockwave therapy",
   },
-  "03-boot-phase": {
-    name: "Boot Phase",
-    description: "Days 14-56 - Living with your boot and managing recovery",
-  },
-  "04-transition": {
-    name: "Boot Transition",
-    description: "Days 74-98 - Moving out of your boot",
-  },
-  "05-physiotherapy": {
-    name: "Physiotherapy",
-    description: "Days 63-105 - Rebuilding strength and function",
-  },
-  "06-recovery": {
-    name: "Recovery & Strengthening",
-    description: "Days 84-160 - Building fitness and returning to activities",
-  },
-  "07-advanced": {
-    name: "Advanced Activities",
-    description: "Days 200-220 - Running, jumping, and return to sport",
-  },
-  "08-long-term": {
-    name: "Long-Term Recovery",
-    description: "Days 180-240 - Life after Achilles rupture",
+  "03-level-3-surgery": {
+    name: "Level 3: Surgery",
+    description: "When surgery is considered — rarely needed",
   },
 };
 
-function StandardIndexPage() {
+function PlantarFasciitisIndexPage() {
   const {
     isLessonComplete,
     markLessonComplete,
@@ -72,10 +51,9 @@ function StandardIndexPage() {
     getCompletionPercentage,
   } = useCourseProgress();
 
-  // Filter sections to only show standard course sections
-  const standardSections = sections.filter((s) => s.course_type === "standard");
+  const courseSections = sections.filter((s) => s.course_type === "standard");
   const completionPercentage = getCompletionPercentage(
-    standardSections.map((s) => s.slug),
+    courseSections.map((s) => s.slug),
   );
 
   return (
@@ -83,11 +61,10 @@ function StandardIndexPage() {
       <CourseBackButton to="/" label="Back to Programs" />
 
       <CourseHeader
-        badge="Standard Course"
-        title="Achilles Recovery Standard"
-        description={`${standardSections.length} lessons covering your complete journey from injury to return to sport.`}
+        badge="Chronic Heel Pain"
+        title="Plantar Fasciitis & Achilles Tendinitis"
+        description={`${courseSections.length} lessons covering understanding, self-management, and treatment options.`}
       >
-        {/* Progress Summary */}
         {completionPercentage > 0 && (
           <div className="bg-primary/10 mb-6 p-4 border border-primary/20 rounded-xl">
             <div className="flex justify-between items-center mb-2">
@@ -100,17 +77,16 @@ function StandardIndexPage() {
             </div>
             <Progress value={completionPercentage} />
             <p className="mt-2 text-muted-foreground text-xs">
-              {standardSections.filter((s) => isLessonComplete(s.slug)).length}
+              {courseSections.filter((s) => isLessonComplete(s.slug)).length} of
               {" "}
-              of {standardSections.length} lessons completed
+              {courseSections.length} lessons completed
             </p>
           </div>
         )}
       </CourseHeader>
 
-      {/* Section List - Chronological Order */}
       <div className="gap-3 grid">
-        {standardSections
+        {courseSections
           .sort((a, b) => a.section_number - b.section_number)
           .map((section) => {
             const isComplete = isLessonComplete(section.slug);
@@ -128,9 +104,7 @@ function StandardIndexPage() {
                     : "bg-card border-border",
                 )}
               >
-                {/* Main Content */}
                 <div className="flex items-center gap-4">
-                  {/* Section Number/Status Icon */}
                   <div
                     className={cn(
                       "flex justify-center items-center rounded-xl w-12 h-12 font-bold transition-colors shrink-0",
@@ -144,7 +118,6 @@ function StandardIndexPage() {
                       : section.section_number}
                   </div>
 
-                  {/* Content */}
                   <div className="flex flex-col flex-1 gap-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <h3
@@ -167,26 +140,21 @@ function StandardIndexPage() {
                   </div>
                 </div>
 
-                {/* Action Buttons */}
                 <div className="flex justify-end items-center gap-2">
                   <LessonCompletionButton
                     isComplete={isComplete}
                     onToggle={() => {
-                      const currentSlug = section.slug;
-                      const currentIsComplete = isLessonComplete(currentSlug);
-                      if (currentIsComplete) {
-                        markLessonIncomplete(currentSlug);
+                      if (isLessonComplete(section.slug)) {
+                        markLessonIncomplete(section.slug);
                       } else {
-                        markLessonComplete(currentSlug);
+                        markLessonComplete(section.slug);
                       }
                     }}
                   />
                   <Button variant="default" size="sm" asChild>
                     <Link
-                      to="/standard/$slug"
-                      params={{
-                        slug: section.slug,
-                      }}
+                      to="/plantar-fasciitis/$slug"
+                      params={{ slug: section.slug }}
                     >
                       Open
                       <ChevronRight className="ml-1 w-4 h-4" />
