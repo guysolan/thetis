@@ -27,18 +27,31 @@ const imageToContextMap: Record<string, string[]> = {
     "achilles-rope-ends-pointed-down.png": ["week-0-day-0-emergency-care.tsx"],
     "how-ruptures-happen.png": ["week-0-day-0-emergency-care.tsx"],
     "seated-calf-raise-week-12.png": ["week-12-day-0-key-exercises.tsx"],
-    "standing-two-foot-calf-raise-week-12.png": ["week-12-day-0-key-exercises.tsx"],
+    "standing-two-foot-calf-raise-week-12.png": [
+        "week-12-day-0-key-exercises.tsx",
+    ],
     "single-leg-heel-raise-week-12.png": ["week-12-day-0-key-exercises.tsx"],
     "towel-stretch-week-12.png": ["week-12-day-0-key-exercises.tsx"],
     "resistance-band-exercise-week-12.png": ["week-12-day-0-key-exercises.tsx"],
     "balance-training-week-12.png": ["week-12-day-0-key-exercises.tsx"],
     "ankle-pumps-circles-week-12.png": ["week-12-day-0-key-exercises.tsx"],
-    "isom-overcoming-seated-calf.png": ["week-15-day-0-progressive-strengthening.tsx"],
-    "isom-yielding-standing-seated.png": ["week-15-day-0-progressive-strengthening.tsx"],
+    "isom-overcoming-seated-calf.png": [
+        "week-15-day-0-progressive-strengthening.tsx",
+    ],
+    "isom-yielding-standing-seated.png": [
+        "week-15-day-0-progressive-strengthening.tsx",
+    ],
     "tendon-strength-timeline.png": ["week-8-day-0-final-boot-phase.tsx"],
     "when-to-remove-boot.png": ["week-8-day-0-final-boot-phase.tsx"],
-    "re-rupture-risk-timeline.png": ["week-8-day-0-final-boot-phase.tsx", "week-4-day-0-healing-process.tsx", "week-26-day-2-preventing-rerupture.tsx"],
-    "protected-walking-after-boot.png": ["week-8-day-0-final-boot-phase.tsx", "week-10-day-4-boot-transition.tsx"],
+    "re-rupture-risk-timeline.png": [
+        "week-8-day-0-final-boot-phase.tsx",
+        "week-4-day-0-healing-process.tsx",
+        "week-26-day-2-preventing-rerupture.tsx",
+    ],
+    "protected-walking-after-boot.png": [
+        "week-8-day-0-final-boot-phase.tsx",
+        "week-10-day-4-boot-transition.tsx",
+    ],
     "rehab-protocol-timeline.png": ["week-9-day-0-pre-physio-prep.tsx"],
     "phase-1-exercises-overview.png": ["week-9-day-0-pre-physio-prep.tsx"],
     "exercise-load-progression.png": ["week-9-day-0-pre-physio-prep.tsx"],
@@ -53,7 +66,9 @@ const imageToContextMap: Record<string, string[]> = {
     "soft-crutch-handles.jpg": ["week-3-day-0-living-with-boot.tsx"],
     "merino-socks.webp": ["week-3-day-0-living-with-boot.tsx"],
     "antifungal.jpg": ["week-3-day-0-living-with-boot.tsx"],
-    "surgery-vs-non-surgical-outcomes.png": ["week-2-day-0-treatment-decision.tsx"],
+    "surgery-vs-non-surgical-outcomes.png": [
+        "week-2-day-0-treatment-decision.tsx",
+    ],
     "practical-life-week-10.png": ["week-10-day-0-practical-life.tsx"],
     "thompson-test.png": ["week-1-day-3-specialist-appointment.tsx"],
     "normal-vs-urgent-symptoms.png": ["week-1-day-0-first-week-checklist.tsx"],
@@ -69,7 +84,7 @@ async function main() {
     );
     const contentDir = path.join(
         process.cwd(),
-        "../../apps/course/src/content/course/standard",
+        "../../apps/course/src/content/course/achilles-rupture",
     );
     const reviewsDir = path.join(process.cwd(), "reviews");
 
@@ -131,7 +146,9 @@ async function main() {
         const contextFiles = imageToContextMap[filename] || [];
 
         console.log(
-            `\x1b[36m[${i + 1}/${v2Files.length}] Comparing:\x1b[0m ${filename}`,
+            `\x1b[36m[${
+                i + 1
+            }/${v2Files.length}] Comparing:\x1b[0m ${filename}`,
         );
 
         // Load context
@@ -178,7 +195,9 @@ async function main() {
             // Save v2 review
             const v2ReviewPath = path.join(
                 reviewsDir,
-                `${path.basename(item.v2Path, path.extname(item.v2Path))}-review.json`,
+                `${
+                    path.basename(item.v2Path, path.extname(item.v2Path))
+                }-review.json`,
             );
             fs.writeFileSync(
                 v2ReviewPath,
@@ -207,7 +226,9 @@ async function main() {
     console.log(`\n\x1b[32mImproved (${improved.length}):\x1b[0m`);
     improved.forEach((c) => {
         console.log(
-            `  • ${c.filename}: ${c.originalScore} → ${c.v2Score} (+${(c.v2Score - c.originalScore).toFixed(1)})`,
+            `  • ${c.filename}: ${c.originalScore} → ${c.v2Score} (+${
+                (c.v2Score - c.originalScore).toFixed(1)
+            })`,
         );
     });
 
@@ -216,7 +237,9 @@ async function main() {
         sameOrWorse.forEach((c) => {
             const diff = c.v2Score - c.originalScore;
             console.log(
-                `  • ${c.filename}: ${c.originalScore} → ${c.v2Score} (${diff >= 0 ? "+" : ""}${diff.toFixed(1)})`,
+                `  • ${c.filename}: ${c.originalScore} → ${c.v2Score} (${
+                    diff >= 0 ? "+" : ""
+                }${diff.toFixed(1)})`,
             );
         });
     }

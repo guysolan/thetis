@@ -13,8 +13,10 @@ import { Route as ClaimRouteImport } from './routes/claim'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StandardIndexRouteImport } from './routes/standard/index'
 import { Route as PremiumIndexRouteImport } from './routes/premium/index'
+import { Route as PlantarFasciitisIndexRouteImport } from './routes/plantar-fasciitis/index'
 import { Route as StandardCertificateRouteImport } from './routes/standard/certificate'
 import { Route as StandardSlugRouteImport } from './routes/standard/$slug'
+import { Route as PlantarFasciitisSlugRouteImport } from './routes/plantar-fasciitis/$slug'
 
 const ClaimRoute = ClaimRouteImport.update({
   id: '/claim',
@@ -36,6 +38,11 @@ const PremiumIndexRoute = PremiumIndexRouteImport.update({
   path: '/premium/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlantarFasciitisIndexRoute = PlantarFasciitisIndexRouteImport.update({
+  id: '/plantar-fasciitis/',
+  path: '/plantar-fasciitis/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StandardCertificateRoute = StandardCertificateRouteImport.update({
   id: '/standard/certificate',
   path: '/standard/certificate',
@@ -46,20 +53,29 @@ const StandardSlugRoute = StandardSlugRouteImport.update({
   path: '/standard/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlantarFasciitisSlugRoute = PlantarFasciitisSlugRouteImport.update({
+  id: '/plantar-fasciitis/$slug',
+  path: '/plantar-fasciitis/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/claim': typeof ClaimRoute
+  '/plantar-fasciitis/$slug': typeof PlantarFasciitisSlugRoute
   '/standard/$slug': typeof StandardSlugRoute
   '/standard/certificate': typeof StandardCertificateRoute
+  '/plantar-fasciitis/': typeof PlantarFasciitisIndexRoute
   '/premium/': typeof PremiumIndexRoute
   '/standard/': typeof StandardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/claim': typeof ClaimRoute
+  '/plantar-fasciitis/$slug': typeof PlantarFasciitisSlugRoute
   '/standard/$slug': typeof StandardSlugRoute
   '/standard/certificate': typeof StandardCertificateRoute
+  '/plantar-fasciitis': typeof PlantarFasciitisIndexRoute
   '/premium': typeof PremiumIndexRoute
   '/standard': typeof StandardIndexRoute
 }
@@ -67,8 +83,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/claim': typeof ClaimRoute
+  '/plantar-fasciitis/$slug': typeof PlantarFasciitisSlugRoute
   '/standard/$slug': typeof StandardSlugRoute
   '/standard/certificate': typeof StandardCertificateRoute
+  '/plantar-fasciitis/': typeof PlantarFasciitisIndexRoute
   '/premium/': typeof PremiumIndexRoute
   '/standard/': typeof StandardIndexRoute
 }
@@ -77,24 +95,30 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/claim'
+    | '/plantar-fasciitis/$slug'
     | '/standard/$slug'
     | '/standard/certificate'
+    | '/plantar-fasciitis/'
     | '/premium/'
     | '/standard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/claim'
+    | '/plantar-fasciitis/$slug'
     | '/standard/$slug'
     | '/standard/certificate'
+    | '/plantar-fasciitis'
     | '/premium'
     | '/standard'
   id:
     | '__root__'
     | '/'
     | '/claim'
+    | '/plantar-fasciitis/$slug'
     | '/standard/$slug'
     | '/standard/certificate'
+    | '/plantar-fasciitis/'
     | '/premium/'
     | '/standard/'
   fileRoutesById: FileRoutesById
@@ -102,8 +126,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ClaimRoute: typeof ClaimRoute
+  PlantarFasciitisSlugRoute: typeof PlantarFasciitisSlugRoute
   StandardSlugRoute: typeof StandardSlugRoute
   StandardCertificateRoute: typeof StandardCertificateRoute
+  PlantarFasciitisIndexRoute: typeof PlantarFasciitisIndexRoute
   PremiumIndexRoute: typeof PremiumIndexRoute
   StandardIndexRoute: typeof StandardIndexRoute
 }
@@ -138,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PremiumIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/plantar-fasciitis/': {
+      id: '/plantar-fasciitis/'
+      path: '/plantar-fasciitis'
+      fullPath: '/plantar-fasciitis/'
+      preLoaderRoute: typeof PlantarFasciitisIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/standard/certificate': {
       id: '/standard/certificate'
       path: '/standard/certificate'
@@ -152,14 +185,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StandardSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/plantar-fasciitis/$slug': {
+      id: '/plantar-fasciitis/$slug'
+      path: '/plantar-fasciitis/$slug'
+      fullPath: '/plantar-fasciitis/$slug'
+      preLoaderRoute: typeof PlantarFasciitisSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ClaimRoute: ClaimRoute,
+  PlantarFasciitisSlugRoute: PlantarFasciitisSlugRoute,
   StandardSlugRoute: StandardSlugRoute,
   StandardCertificateRoute: StandardCertificateRoute,
+  PlantarFasciitisIndexRoute: PlantarFasciitisIndexRoute,
   PremiumIndexRoute: PremiumIndexRoute,
   StandardIndexRoute: StandardIndexRoute,
 }
