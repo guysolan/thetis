@@ -157,7 +157,7 @@ function Header() {
                                 {e.course_type === "standard"
                                   ? "Achilles Rupture"
                                   : e.course_type === "plantar-fasciitis"
-                                  ? "Chronic Heel Pain"
+                                  ? "Plantar Fasciitis"
                                   : e.course_type === "premium"
                                   ? "Achilles (Premium)"
                                   : e.course_type}

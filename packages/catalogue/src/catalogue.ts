@@ -875,7 +875,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Graduated compression stockings often used after injury or surgery—match the type your clinician asked for (knee vs thigh).",
     tags: ["dvt", "circulation", "recovery"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/ted-anti-embolism-stockings.png",
     description:
       "Use the same style and length you were prescribed (e.g. Covidien/Kendall TED). If unsure, ask your team before switching brands.",
     features: [
@@ -902,7 +902,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Cold (or contrast) therapy for swelling and soreness—use only as your protocol allows.",
     tags: ["swelling", "pain-relief", "rehab"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/reusable-ankle-ice-pack-wrap.png",
     description:
       "Gel wraps with straps fit the foot/ankle better than a bag of peas. Check with your clinician for timing after surgery.",
     features: [
@@ -913,7 +913,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         price: "~$25–40",
-        url: "https://www.amazon.com/dp/B0CGWB9R5J",
+        url: "https://www.amazon.com/s?k=Reusable+ankle+ice+pack+wrap",
       },
       GB: {
         price: "~£20–35",
@@ -930,14 +930,14 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Medical silicone gels are commonly used once the wound is closed to support scar maturation.",
     tags: ["surgery", "skin", "hygiene"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/silicone-scar-gel.png",
     description:
       "Only start when your surgical team says the wound is ready. This is a general retail example—not a prescription product.",
     features: ["Typical twice-daily application", "Use on closed skin only"],
     locations: {
       US: {
         price: "~$15–30",
-        url: "https://www.amazon.com/dp/B0F659G9GK",
+        url: "https://www.amazon.com/NanaCare-Silicone-Medical-C-Section-Surgical/dp/B0DV4ZXXK8/ref=sr_1_2_sspa?dib=eyJ2IjoiMSJ9.299C2XCGSkhpINUAu4MOKFJYv6lZFLvHIExoygq7uaxg5kr8jQkx649BeNOU95cvHBlnznUfzTZ2dqpXmcam4xHwA5HqdsIdFLwSlUCNU4_CJnWhHwXkw4jII2QcS_fOyunPOoaSEuwnPid4osSeoWk7X-3nh23VPMLJXZlfuY8wUbnIPKmb4u9y4EKT-NG52YKaPRbOnJTu9SycbkhufZBN2SHQC1_Xv0tOYavDkFEUXML8b3g39kQkz0j0Ub7puHK6uJTxHsmn-1U8Vj2olaQPqH22-puudHm1B__-JAM.jrhXWFP0XEMqA0N7lF6qd1KjBnmTEjRO30jDVfs6v28&dib_tag=se&keywords=Silicone%2Bscar%2Bgel%2B(topical)&qid=1776326563&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
       },
       GB: {
         price: "~£12–25",
@@ -954,7 +954,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Waterproof transparent dressings for showering with a post-op wound—match what your team supplied.",
     tags: ["wound", "showering", "post-op"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/opsite-post-op-style-film-dressing.png",
     features: [
       "Film + absorbent pad variants",
       "Follow sterile technique if instructed",
@@ -979,7 +979,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Alternative transparent film + pad option if your unit uses Mepore rather than Opsite.",
     tags: ["wound", "post-op"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/mepore-film-&-pad-dressing.png",
     features: [],
     locations: {
       GB: {
@@ -1023,7 +1023,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Full-length zips make dressing easier with a cast, boot, or fixator.",
     tags: ["clothing", "adaptive", "hygiene"],
-    imagePath: "",
+    imagePath:
+      "/images/catalogue-products/side-zip-tear-away-trousers-(adaptive).png",
     features: ["Wide-leg / post-surgery styles vary—check size charts"],
     locations: {
       US: {
@@ -1048,7 +1049,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Dorsal-style night stretch for plantar fasciitis / tendinopathy morning pain—not for acute Achilles rupture protection.",
     tags: ["sleep", "stretch", "morning-pain"],
-    imagePath: "",
+    imagePath:
+      "/images/catalogue-products/united-ortho-plantar-fasciitis-night-splint.png",
     description:
       "Retail example (United Ortho). For fasciitis or Achilles tendinopathy-style tightness, not rupture care. Follow your clinician.",
     features: ["Adjustable straps on most models", "Expect a break-in period"],
@@ -1077,7 +1079,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Lightweight dorsal boot for overnight stretch; compare sizing and reviews—not for acute Achilles rupture.",
     tags: ["sleep", "stretch", "morning-pain"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/dorsal-night-splint.png",
     description:
       "Retail example listing. Same role as the United Ortho option above; pick what fits your foot and sleep position.",
     features: ["Adjustable straps on most models", "Expect a break-in period"],
@@ -1105,11 +1107,11 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Light support for daytime symptoms—pairs well with shoes and rehab.",
     tags: ["compression", "sport", "pain-relief"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/plantar-fasciitis-compression-sleeve.png",
     features: [],
     locations: {
       US: {
-        url: "https://www.amazon.com/dp/B07WPTNL11",
+        url: "https://www.amazon.com/Plantar-Fasciitis-Compression-Sleeves-Support/dp/B0C6T94X2H/ref=sr_1_2_sspa?dib=eyJ2IjoiMSJ9.YcMctg2BW3bUUbuzG3wwsKzVLkbkVx264aeW5Xp0NawXXYEWBiHU3QmK20BYn3KGTEtOtvzmzDK-M7OAe7yqFZI68iop0mIiqJovCBYxbNWk4ekyB9uFLxICY57qkhrfrOri2kJlKZajEz0NJ39-_M49WOChWuUhregqr0LNFsGc4ZyWlV8ASl4-Kw6rsZCZwluQJP2xtiLtbjwX1Fv7vQU9DGTZ3Dl_lgPxMMSzHmIV004iQ2ah8DKgh9QbfGI2y_H-eWPqoM5iaLWEjCJAfgOf6frWP1UP8-s19GGxMzc.RUYeWZBpRv5W7YW8OeNcJPV3jEEpx5c5Gy3linAEyd4&dib_tag=se&keywords=Plantar%2Bfasciitis%2Bcompression%2Bsleeve&qid=1776328576&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
       },
       GB: {
         url: "https://www.amazon.co.uk/dp/B07WPTNL11",
@@ -1130,7 +1132,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Controlled calf and Achilles stretch—use only when your protocol allows loading and stretching.",
     tags: ["stretch", "eccentric", "rehab"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/slant-board-calf-stretch-wedge.png",
     description:
       "After rupture, do not start aggressive stretching until your team clears you. For fasciitis / tendinopathy, follow graded loading advice.",
     features: ["Adjustable angle on most boards", "Non-slip surface important"],
@@ -1159,7 +1161,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Vitamin D supports bone/tendon health context—only supplement if appropriate for you.",
     tags: ["nutrition", "bone-health"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/vitamin-d3-supplement.png",
     description:
       "Many adults are supplemented after blood tests. 4000 IU/day is a common retail strength—verify with your clinician or pharmacist.",
     features: ["Easy-swallow tablets in most lines", "Check interactions"],
@@ -1187,12 +1189,12 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Self-massage and plantar fascia / calf trigger-point work between sessions.",
     tags: ["myofascial", "mobility", "pain-relief"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/spiky-massage-ball-set .png",
     features: ["Start with light pressure", "Avoid acute flare areas"],
     locations: {
       US: {
         price: "~$8–15",
-        url: "https://www.amazon.com/dp/B078H8QMCX",
+        url: "https://www.amazon.com/Plantar-Fasciitis-Ball-Foot-Massager-Recovery/dp/B07QT7L1CZ/ref=sr_1_2_sspa?dib=eyJ2IjoiMSJ9.MwFdN-n5ff-wARGjMI2Q8SxVz5Xi-9P6eULwnoMG50y5l69590qXU3ArF98pS5zqE-OgeG0IYfTpuofSz6IG9q2Slp5YJSANarQai1dFYlMX6f-XR__rpNiV9uSlWQxSNfDd5Xuf1e9fE9TJ9ZNmOI-778iFXE9PtJGPA7xz8s-o3R5XAynzrbjCa4bpa9hsr5yHK5GcdL3B08uMjL8QNb5MbMg1SGjaRGyMxT15PnqxIOWGaOYdK9WTpYUSzQPXRfPT6F_UUVSA0Dh-0lEahALtUDoXgENDOmPBkXd_Zsg.f2lzUP4sEBUsCxvgIEwh1DrZPB4Xh5whYxmL3TcdiuI&dib_tag=se&keywords=Spiky+%2F+massage+ball+set+%28foot+release%29&qid=1776328808&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
       },
       GB: {
         price: "~£7–14",
@@ -1213,7 +1215,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Cushioned, shaped footbeds for summer / house wear when trainers are off.",
     tags: ["footwear", "comfort", "arch-support"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/fitflop-iqushion.png",
     description:
       "Example women’s listing—choose the model and size that fits you; men’s variants exist in the same brand line.",
     features: ["APMA-accepted styles in some FitFlop ranges"],
@@ -1239,7 +1241,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Portable massage gun for calf and foot musculature (not over the surgical wound).",
     tags: ["massage", "recovery", "calf"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/theragun-mini.png",
     description:
       "Use lighter heads and low intensity near the Achilles. Cheaper alternatives exist if budget is tight.",
     features: ["QuietForce line (3rd gen Mini)", "Multiple attachments"],
@@ -1267,7 +1269,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "When returning to impact, a cushioned neutral trainer is a common starting point—gait assessment helps.",
     tags: ["running", "footwear", "return-to-run"],
-    imagePath: "",
+    imagePath: "/images/catalogue-products/neutral-running-shoes.png",
     features: [],
     locations: {
       US: {

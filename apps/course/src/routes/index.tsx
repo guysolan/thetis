@@ -1,5 +1,6 @@
 import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
 import {
+  Activity,
   ArrowRight,
   BookOpen,
   CheckCircle2,
@@ -83,6 +84,8 @@ function CourseCard({
   icon,
   courseType,
   courseSections,
+  forceLocked = false,
+  lockedLabel = "Coming Soon",
 }: {
   title: string;
   description: string;
@@ -93,12 +96,14 @@ function CourseCard({
   icon: React.ReactNode;
   courseType: CourseType;
   courseSections: SectionMetadata[];
+  forceLocked?: boolean;
+  lockedLabel?: string;
 }) {
   const { email } = useSimpleAuth();
   const { hasAccess } = useEnrollment();
   const { getCompletionPercentage, isLessonComplete } = useCourseProgress();
 
-  const unlocked = email ? hasAccess(courseType) : false;
+  const unlocked = !forceLocked && (email ? hasAccess(courseType) : false);
   const completionPercentage = unlocked
     ? getCompletionPercentage(courseSections.map((s) => s.slug))
     : 0;
@@ -208,12 +213,21 @@ function CourseCard({
           </Link>
         )
         : (
-          <Link to="/claim" search={{ email: "", order: "" }}>
-            <Button className="w-full" variant="outline">
-              {email ? "Claim Your Course" : "Sign In to Access"}
-              <Lock className="ml-2 w-4 h-4" />
-            </Button>
-          </Link>
+          forceLocked
+            ? (
+              <Button className="w-full" variant="outline" disabled>
+                {lockedLabel}
+                <Lock className="ml-2 w-4 h-4" />
+              </Button>
+            )
+            : (
+              <Link to="/claim" search={{ email: "", order: "" }}>
+                <Button className="w-full" variant="outline">
+                  {email ? "Claim Your Course" : "Sign In to Access"}
+                  <Lock className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+            )
         )}
     </Card>
   );
@@ -284,7 +298,7 @@ function HomePage() {
               courseSections={achillesSections}
             />
             <CourseCard
-              title="Chronic Heel Pain"
+              title="Plantar Fasciitis"
               description={`${pfSections.length} lessons on understanding and managing plantar fasciitis and Achilles tendinitis.`}
               badge="NEW"
               features={[
@@ -298,6 +312,42 @@ function HomePage() {
               icon={<GraduationCap className="w-full h-full" />}
               courseType="plantar-fasciitis"
               courseSections={pfSections}
+            />
+            <CourseCard
+              title="Achilles Tendinitis"
+              description="Targeted course for mid-portion Achilles tendinopathy recovery. Content is being prepared."
+              badge="COMING SOON"
+              features={[
+                "Pain monitoring and load management",
+                "Progressive strengthening roadmap",
+                "Return-to-activity guidance",
+                "Evidence-based treatment options",
+              ]}
+              link="/"
+              ctaText="Coming Soon"
+              icon={<Activity className="w-full h-full" />}
+              courseType="plantar-fasciitis"
+              courseSections={[]}
+              forceLocked
+              lockedLabel="Coming Soon"
+            />
+            <CourseCard
+              title="Insertional Achilles Tendinitis"
+              description="Dedicated insertional protocol with heel-friendly loading progressions. Content is being prepared."
+              badge="COMING SOON"
+              features={[
+                "Insertional-specific exercise adaptations",
+                "Heel compression and footwear guidance",
+                "Staged loading progression",
+                "When to escalate treatment",
+              ]}
+              link="/"
+              ctaText="Coming Soon"
+              icon={<Activity className="w-full h-full" />}
+              courseType="plantar-fasciitis"
+              courseSections={[]}
+              forceLocked
+              lockedLabel="Coming Soon"
             />
           </div>
         </div>

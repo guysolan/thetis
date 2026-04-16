@@ -61,7 +61,7 @@ function PlantarFasciitisIndexPage() {
       <CourseBackButton to="/" label="Back to Programs" />
 
       <CourseHeader
-        badge="Chronic Heel Pain"
+        badge="Plantar Fasciitis"
         title="Plantar Fasciitis & Achilles Tendinitis"
         description={`${courseSections.length} lessons covering understanding, self-management, and treatment options.`}
       >

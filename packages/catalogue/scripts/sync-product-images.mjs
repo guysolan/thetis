@@ -9,6 +9,7 @@ const srcDirs = srcCandidates.filter((candidate) => existsSync(candidate));
 const targets = [
   join(pkgRoot, "../../apps/website/public/images/catalogue-products"),
   join(pkgRoot, "../../apps/achilles-rupture/public/images/catalogue-products"),
+  join(pkgRoot, "../../apps/course/public/images/catalogue-products"),
 ];
 
 if (srcDirs.length === 0) {
