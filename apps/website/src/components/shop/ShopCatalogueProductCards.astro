@@ -155,11 +155,11 @@ const t = copy[lang];
         return [
           <li class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
             {p.imagePath ? (
-              <div class="flex justify-center items-center bg-neutral-100 mx-auto mb-4 p-2 rounded-lg w-full max-w-[180px] h-[160px] overflow-hidden shrink-0">
+              <div class="group flex justify-center items-center bg-neutral-100 mx-auto mb-4 p-2 rounded-lg w-full max-w-[180px] h-[160px] overflow-hidden shrink-0 transition-shadow duration-300 hover:shadow-md dark:hover:shadow-black/25">
                 <img
                   src={p.imagePath}
                   alt=""
-                  class="w-full h-full object-contain object-center"
+                  class="w-full h-full object-contain object-center transition-transform duration-300 ease-out will-change-transform group-hover:scale-[1.14] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                   width={180}
                   height={160}
                   loading="lazy"
