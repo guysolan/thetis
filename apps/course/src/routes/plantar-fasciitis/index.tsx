@@ -62,8 +62,8 @@ function PlantarFasciitisIndexPage() {
 
       <CourseHeader
         badge="Plantar Fasciitis"
-        title="Plantar Fasciitis & Achilles Tendinitis"
-        description={`${courseSections.length} lessons covering understanding, self-management, and treatment options.`}
+        title="Chronic Heel Pain Recovery"
+        description={`A guide to understanding and managing persistent heel pain — plantar fasciitis and Achilles tendinitis at the heel. ${courseSections.length} lessons from first principles through to advanced options (including surgery, which is rarely needed).`}
       >
         {completionPercentage > 0 && (
           <div className="bg-primary/10 mb-6 p-4 border border-primary/20 rounded-xl">
