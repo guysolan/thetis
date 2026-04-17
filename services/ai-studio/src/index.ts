@@ -40,7 +40,10 @@ function getInputImages(inputDir: string): Array<{
     const primaryReference = "mike-and-doc.png";
     const bootReference = "aircast-vs-vacoped-reference.png";
     const tintinReference = "tintin-style-blood-clots.png";
-    const vacopedAngleReference = "vacoped-angle-changing.jpg";
+    const vacopedAngleReferences = [
+        "vacoped-angle-changing.png",
+        "vacoped-angle-changing.jpg",
+    ];
     const wedgeReference = "wedge.jpg";
 
     for (const file of files) {
@@ -65,8 +68,12 @@ function getInputImages(inputDir: string): Array<{
             images.unshift(imageData); // Add mike-and-doc.png first
         } else if (file.toLowerCase() === tintinReference.toLowerCase()) {
             images.push(imageData); // Add tintin reference second
-        } else if (file.toLowerCase() === vacopedAngleReference.toLowerCase() || 
-                   file.toLowerCase() === wedgeReference.toLowerCase()) {
+        } else if (
+            vacopedAngleReferences.some(
+                (n) => file.toLowerCase() === n.toLowerCase(),
+            ) ||
+            file.toLowerCase() === wedgeReference.toLowerCase()
+        ) {
             images.push(imageData); // Add mechanism references
         } else if (file.toLowerCase() === bootReference.toLowerCase()) {
             images.push(imageData); // Add boot reference
@@ -155,7 +162,7 @@ async function main() {
                 img.filename.toLowerCase() === "tintin-style-blood-clots.png"
             );
             const hasVacopedAngle = referenceImages.some((img) =>
-                img.filename.toLowerCase() === "vacoped-angle-changing.jpg"
+                /vacoped-angle-changing\.(png|jpg)$/i.test(img.filename)
             );
             const hasWedgeReference = referenceImages.some((img) =>
                 img.filename.toLowerCase() === "wedge.jpg"
@@ -175,7 +182,8 @@ async function main() {
                 let styleInstruction = "CRITICAL: Use 'tintin-style-blood-clots.png' as the EXACT style reference. Match the illustration style, line work, color palette, and level of detail EXACTLY. This is a simplified, clean medical illustration style with clear lines, minimal shading, and educational clarity.";
                 let mechanismInstruction = "";
                 if (hasVacopedAngle) {
-                    mechanismInstruction += "\n\nCRITICAL: Use 'vacoped-angle-changing.jpg' to understand how VACOped's high heel/rocker sole changes the angle. Show the wedge-shaped sole (thick heel, thin toe) clearly - this is what creates the plantarflexion angle.";
+                    mechanismInstruction +=
+                        "\n\nCRITICAL: Use the 'vacoped-angle-changing' reference image to understand how VACOped's high heel/rocker sole changes the angle. Show the wedge-shaped sole (thick heel, thin toe) clearly - this is what creates the plantarflexion angle.";
                 }
                 if (hasWedgeReference) {
                     mechanismInstruction += "\n\nCRITICAL: Use 'wedge.jpg' to understand how wedges work in Aircast boots. Show the white foam wedges stacked under the heel clearly - these are what create the plantarflexion angle for Aircast.";

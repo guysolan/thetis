@@ -51,7 +51,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Shop",
     isExternal: true,
     tags: ["boots", "mobility", "protection"],
-    imagePath: "/images/catalogue-products/vacoped-angle-changing.jpg",
+    imagePath: "/images/catalogue-products/vacoped-angle-changing.png",
   },
   {
     priority: "essential",
@@ -77,7 +77,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["mobility", "comfort", "posture"],
-    imagePath: "/images/catalogue-products/even-up.jpg",
+    imagePath: "/images/catalogue-products/even-up.png",
   },
   {
     priority: "recommended",
@@ -89,7 +89,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["hygiene", "showering", "protection"],
-    imagePath: "/images/catalogue-products/boot-bag.jpg",
+    imagePath: "/images/catalogue-products/boot-bag.png",
   },
   {
     priority: "comfort",
@@ -102,7 +102,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["mobility", "comfort", "pain-relief"],
-    imagePath: "/images/catalogue-products/soft-crutch-handles.jpg",
+    imagePath: "/images/catalogue-products/soft-crutch-handles.png",
   },
   {
     priority: "comfort",
@@ -114,7 +114,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["recovery", "swelling", "comfort"],
-    imagePath: "/images/catalogue-products/elevation-wedge.webp",
+    imagePath: "/images/catalogue-products/elevation-wedge.png",
   },
   {
     priority: "comfort",
@@ -127,7 +127,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Browse",
     isExternal: true,
     tags: ["comfort", "temperature", "hygiene"],
-    imagePath: "/images/catalogue-products/merino-socks.webp",
+    imagePath: "/images/catalogue-products/merino-socks.png",
   },
   {
     priority: "none",
@@ -139,7 +139,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["hygiene", "prevention", "comfort"],
-    imagePath: "/images/catalogue-products/antifungal.jpg",
+    imagePath: "/images/catalogue-products/antifungal.png",
   },
   {
     priority: "none",
@@ -151,7 +151,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["rehab", "strength", "recovery"],
-    imagePath: "/images/catalogue-products/theraband.jpg",
+    imagePath: "/images/catalogue-products/theraband.png",
   },
   {
     priority: "none",
@@ -163,7 +163,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["mobility", "independence", "comfort"],
-    imagePath: "/images/catalogue-products/knee-scooter.jpg",
+    imagePath: "/images/catalogue-products/knee-scooter.png",
   },
   {
     priority: "none",
@@ -175,7 +175,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["mobility", "comfort", "independence"],
-    imagePath: "/images/catalogue-products/ergonomic-crutches.jpg",
+    imagePath: "/images/catalogue-products/ergonomic-crutches.png",
   },
   {
     priority: "none",
@@ -187,7 +187,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["rehab", "balance", "recovery"],
-    imagePath: "/images/catalogue-products/heel-lifts.jpg",
+    imagePath: "/images/catalogue-products/heel-lifts.png",
   },
   {
     priority: "none",
@@ -200,7 +200,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy",
     isExternal: true,
     tags: ["comfort", "hygiene", "protection"],
-    imagePath: "/images/catalogue-products/boot-liner.jpg",
+    imagePath: "/images/catalogue-products/boot-liner.png",
   },
 ];
 

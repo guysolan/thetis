@@ -50,7 +50,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Hinged vacuum-liner boot with dialled plantarflexion—heavier and pricier; some teams prefer it for fine angle control and later ROM options.",
     tags: ["boots", "mobility", "protection", "recovery"],
-    imagePath: "/images/catalogue-products/vacoped-angle-changing.jpg",
+    imagePath: "/images/catalogue-products/vacoped-angle-changing.png",
     description:
       "Premium hinged orthosis. Buy only what your protocol specifies (catalogue numbers differ). OPED runs regional shops; confirm duty/tax and sizing on the retailer page.",
     features: [
@@ -128,7 +128,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Walk naturally and prevent back pain by keeping your hips level",
     tags: ["mobility", "comfort", "posture"],
-    imagePath: "/images/catalogue-products/even-up.jpg",
+    imagePath: "/images/catalogue-products/even-up.png",
     description:
       "Addresses leg-length discrepancy from wearing a boot. Prevents back, hip, and knee pain.",
     features: [
@@ -156,7 +156,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Recovery",
     keyBenefit: "Speed up healing and reduce swelling with proper elevation",
     tags: ["recovery", "swelling", "comfort"],
-    imagePath: "/images/catalogue-products/elevation-wedge.webp",
+    imagePath: "/images/catalogue-products/elevation-wedge.png",
     description:
       "Critical for early recovery. UK guidelines recommend 23 hours/day elevation in first week.",
     features: [
@@ -185,7 +185,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Reduce hand pain and fatigue by up to 40% while using crutches",
     tags: ["mobility", "comfort", "pain-relief"],
-    imagePath: "/images/catalogue-products/soft-crutch-handles.jpg",
+    imagePath: "/images/catalogue-products/soft-crutch-handles.png",
     description:
       "Clinical studies show 40% reduction in forearm pain and 35% decrease in paresthesia.",
     features: [
@@ -214,7 +214,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Stay comfortable all day with temperature-regulating, moisture-wicking socks",
     tags: ["comfort", "temperature", "hygiene"],
-    imagePath: "/images/catalogue-products/merino-socks.webp",
+    imagePath: "/images/catalogue-products/merino-socks.png",
     description:
       "Naturally moisture-wicking and temperature regulating. Reduces 'hot foot' issues.",
     features: ["Moisture-wicking", "Temperature regulating", "Antimicrobial"],
@@ -238,7 +238,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Hygiene",
     keyBenefit: "Shower with confidence and keep your boot dry and fresh",
     tags: ["hygiene", "showering", "protection"],
-    imagePath: "/images/catalogue-products/boot-bag.jpg",
+    imagePath: "/images/catalogue-products/boot-bag.png",
     description:
       "Essential for safe showering. NHS guidelines specifically recommend waterproof covers.",
     features: ["Prevents infection", "Reusable design", "Secure seal"],
@@ -262,7 +262,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Hygiene",
     keyBenefit: "Prevent infections and keep your foot fresh during recovery",
     tags: ["hygiene", "prevention", "comfort"],
-    imagePath: "/images/catalogue-products/antifungal.jpg",
+    imagePath: "/images/catalogue-products/antifungal.png",
     description:
       "Prevents athlete's foot and other fungal issues in the warm boot environment.",
     features: ["Prevents infections", "Reduces friction", "Daily protection"],
@@ -286,7 +286,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Mobility",
     keyBenefit: "Move freely and independently without crutch fatigue",
     tags: ["mobility", "independence", "comfort"],
-    imagePath: "/images/catalogue-products/knee-scooter.jpg",
+    imagePath: "/images/catalogue-products/knee-scooter.png",
     description:
       "Alternative to crutches for those who find them difficult or painful to use.",
     features: [
@@ -315,7 +315,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Hands-free crutch alternative—some patients prefer it to knee scooters; confirm fit and protocol with your team.",
     tags: ["mobility", "independence", "comfort"],
-    imagePath: "/images/catalogue-products/knee-scooter.jpg",
+    imagePath: "/images/catalogue-products/knee-scooter.png",
     description:
       "A steerable knee scooter isn’t the only option—iWALK-style devices let you keep hands free. Sizing and safety rules apply; not suitable for everyone.",
     features: [
@@ -343,7 +343,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Rehab",
     keyBenefit: "Build strength safely with progressive resistance training",
     tags: ["rehab", "strength", "recovery"],
-    imagePath: "/images/catalogue-products/theraband.jpg",
+    imagePath: "/images/catalogue-products/theraband.png",
     description:
       "Essential for later stages of rehabilitation and strength building.",
     features: [
@@ -374,7 +374,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Keep your boot fresh and comfortable with removable, washable liners",
     tags: ["comfort", "hygiene", "protection"],
-    imagePath: "/images/catalogue-products/boot-liner.jpg",
+    imagePath: "/images/catalogue-products/boot-liner.png",
     description:
       "Removable, washable liners to keep your boot fresh and comfortable.",
     features: ["Removable", "Washable", "Odor control"],
@@ -400,7 +400,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Provide additional heel elevation and comfort inside your boot",
     tags: ["comfort", "elevation", "support"],
-    imagePath: "/images/catalogue-products/heel-lifts.jpg",
+    imagePath: "/images/catalogue-products/heel-lifts.png",
     description:
       "Additional heel elevation inserts that can be used inside your boot for extra comfort and support.",
     features: ["Adjustable height", "Easy to insert", "Comfortable padding"],
@@ -424,7 +424,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Mobility",
     keyBenefit: "Walk with less strain on your arms and shoulders",
     tags: ["mobility", "comfort", "independence"],
-    imagePath: "/images/catalogue-products/ergonomic-crutches.jpg",
+    imagePath: "/images/catalogue-products/ergonomic-crutches.png",
     features: [],
     locations: {
       US: {
@@ -442,7 +442,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Rehab",
     keyBenefit: "Balance your leg length and walk more naturally",
     tags: ["rehab", "balance", "recovery"],
-    imagePath: "/images/catalogue-products/heel-lifts.jpg",
+    imagePath: "/images/catalogue-products/heel-lifts.png",
     features: [],
     locations: {
       US: {
@@ -465,7 +465,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Keep your boot fresh and comfortable with removable, washable liners",
     tags: ["comfort", "hygiene", "protection"],
-    imagePath: "/images/catalogue-products/boot-liner.jpg",
+    imagePath: "/images/catalogue-products/boot-liner.png",
     features: [],
     notes:
       "Amazon listing; survival kit uses OPED direct (`vacoped-boot-liner-op`).",
@@ -539,7 +539,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Comfort",
     keyBenefit: "Used on recovery-equipment-guide award card (US).",
     tags: ["mobility", "comfort"],
-    imagePath: "/images/catalogue-products/soft-crutch-handles.jpg",
+    imagePath: "/images/catalogue-products/soft-crutch-handles.png",
     features: [],
     locations: {
       US: {
@@ -559,7 +559,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
     category: "Hygiene",
     keyBenefit: "Hygiene award card on recovery-equipment-guide (US).",
     tags: ["hygiene"],
-    imagePath: "/images/catalogue-products/boot-bag.jpg",
+    imagePath: "/images/catalogue-products/boot-bag.png",
     features: [],
     locations: {
       US: {
