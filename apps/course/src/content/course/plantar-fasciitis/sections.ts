@@ -86,33 +86,55 @@ function s(
 const raw: Omit<SectionMetadata, "section_number">[] = [
   // Understanding your condition
   s("introduction", introduction.title, introduction.description, {
-    when_useful: "Start here – understand what heel pain is and what to expect",
-    triggers: ["just diagnosed", "new heel pain", "first visit"],
+    when_useful:
+      "Start here – understand what plantar heel pain is and what recovery usually looks like",
+    triggers: [
+      "just diagnosed",
+      "new heel pain",
+      "first clinic visit",
+      "want a clear recovery plan",
+    ],
     approximate_days: 0,
   }, introduction.status || "todo"),
   s("common-myths", commonMyths.title, commonMyths.description, {
-    when_useful: "Early on – dispel anxiety from common misconceptions",
+    when_useful:
+      "Early on – reduce anxiety by correcting common myths and false expectations",
     triggers: [
       "worried it won't get better",
       "considering injection",
       "considering surgery",
+      "heard conflicting advice online",
     ],
     approximate_days: 0,
   }, commonMyths.status || "todo"),
   s("anatomy", anatomy.title, anatomy.description, {
     when_useful:
-      "Early on – understand the structures involved in your heel pain",
-    triggers: ["want to understand anatomy", "what is plantar fascia"],
+      "Early on – understand which tissues are involved and why they hurt",
+    triggers: [
+      "want to understand anatomy",
+      "what is plantar fascia",
+      "where is the pain coming from",
+    ],
     approximate_days: 0,
   }, anatomy.status || "todo"),
   s("what-went-wrong", whatWentWrong.title, whatWentWrong.description, {
-    when_useful: "Early on – understand why daily wear and tear led to injury",
-    triggers: ["why does it hurt", "what caused this"],
+    when_useful:
+      "Early on – understand why the wear-vs-repair balance tipped the wrong way",
+    triggers: [
+      "why does it hurt",
+      "what caused this",
+      "what changed recently",
+    ],
     approximate_days: 0,
   }, whatWentWrong.status || "todo"),
   s("why-it-persists", whyItPersists.title, whyItPersists.description, {
-    when_useful: "Early on – identify which factors are slowing your recovery",
-    triggers: ["why isn't it getting better", "risk factors"],
+    when_useful:
+      "When pain is lingering – identify the key factors blocking recovery",
+    triggers: [
+      "why isn't it getting better",
+      "risk factors",
+      "pain keeps coming back",
+    ],
     approximate_days: 0,
   }, whyItPersists.status || "todo"),
 
@@ -123,8 +145,12 @@ const raw: Omit<SectionMetadata, "section_number">[] = [
     treatmentOverview.description,
     {
       when_useful:
-        "Before starting treatment – understand the three-level approach",
-      triggers: ["starting treatment", "what are my options"],
+        "Before starting treatment – map your recovery using the three-level approach",
+      triggers: [
+        "starting treatment",
+        "what are my options",
+        "where should I begin",
+      ],
       approximate_days: 1,
     },
     treatmentOverview.status || "todo",
@@ -134,8 +160,14 @@ const raw: Omit<SectionMetadata, "section_number">[] = [
     restAndWeightManagement.title,
     restAndWeightManagement.description,
     {
-      when_useful: "Immediately – the first changes to make today",
-      triggers: ["starting Level 1", "weight loss", "activity modification"],
+      when_useful:
+        "Immediately – make the first high-impact changes to reduce daily load",
+      triggers: [
+        "starting Level 1",
+        "weight loss",
+        "activity modification",
+        "pain flares with walking",
+      ],
       approximate_days: 1,
     },
     restAndWeightManagement.status || "todo",
@@ -145,18 +177,25 @@ const raw: Omit<SectionMetadata, "section_number">[] = [
     stretchingProgramme.title,
     stretchingProgramme.description,
     {
-      when_useful: "Immediately – the cornerstone of your treatment",
-      triggers: ["starting stretches", "which exercises"],
+      when_useful:
+        "Immediately – start the core daily stretching routine that drives improvement",
+      triggers: [
+        "starting stretches",
+        "which exercises",
+        "need a simple routine",
+      ],
       approximate_days: 1,
     },
     stretchingProgramme.status || "todo",
   ),
   s("slant-board-guide", slantBoardGuide.title, slantBoardGuide.description, {
-    when_useful: "When you get your slant board – detailed usage instructions",
+    when_useful:
+      "When using a slant board – learn safe setup, progression, and common mistakes",
     triggers: [
       "bought slant board",
       "how to use slant board",
       "slant board progression",
+      "not sure about board angle",
     ],
     approximate_days: 7,
   }, slantBoardGuide.status || "todo"),
@@ -165,8 +204,14 @@ const raw: Omit<SectionMetadata, "section_number">[] = [
     footwearAndInsoles.title,
     footwearAndInsoles.description,
     {
-      when_useful: "Early on – choose the right shoes to support recovery",
-      triggers: ["which shoes", "need insoles", "barefoot"],
+      when_useful:
+        "Early on – optimise footwear and insoles to reduce heel and arch strain",
+      triggers: [
+        "which shoes",
+        "need insoles",
+        "barefoot pain at home",
+        "flat shoes making it worse",
+      ],
       approximate_days: 7,
     },
     footwearAndInsoles.status || "todo",
@@ -177,8 +222,13 @@ const raw: Omit<SectionMetadata, "section_number">[] = [
     toeStretchesAndNightSplints.description,
     {
       when_useful:
-        "During Level 1 – additional techniques to complement slant board work",
-      triggers: ["morning pain", "first steps hurt", "night splint"],
+        "During Level 1 – add toe stretches and trial night splints for stubborn first-step pain",
+      triggers: [
+        "morning pain",
+        "first steps hurt",
+        "night splint",
+        "stiff after rest",
+      ],
       approximate_days: 7,
     },
     toeStretchesAndNightSplints.status || "todo",
