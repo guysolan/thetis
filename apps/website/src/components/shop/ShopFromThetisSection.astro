@@ -8,7 +8,6 @@ import AddToCartButton from "@/components/cart/AddToCartButton.tsx";
 import CourseBuyButton from "@/components/CourseBuyButton.tsx";
 import { NIGHT_SPLINT_VARIANTS } from "@/lib/shopify/variants";
 import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
-import { BookOpen } from "lucide-react";
 
 interface Props {
   lang: Lang;
@@ -31,6 +30,7 @@ const copy: Record<
     readersLine: string;
     addCourse: string;
     splintImageAlt: string;
+    courseImageAlt: string;
   }
 > = {
   en: {
@@ -42,6 +42,7 @@ const copy: Record<
     readersLine: "Join 20,000 readers",
     addCourse: "Add course to cart",
     splintImageAlt: "Thetis night splint for Achilles recovery",
+    courseImageAlt: "Thetis recovery course lesson preview",
   },
   de: {
     sectionTitle: "Von Thetis",
@@ -52,6 +53,7 @@ const copy: Record<
     readersLine: "Schließen Sie sich 20.000 Lesern an",
     addCourse: "Kurs in den Warenkorb",
     splintImageAlt: "Thetis Nachtschiene für die Achilles-Genesung",
+    courseImageAlt: "Vorschau einer Lektion des Thetis-Recovery-Kurses",
   },
   fr: {
     sectionTitle: "Par Thetis",
@@ -62,6 +64,7 @@ const copy: Record<
     readersLine: "Rejoignez 20 000 lecteurs",
     addCourse: "Ajouter le cours au panier",
     splintImageAlt: "Attelle de nuit Thetis pour la récupération d’Achille",
+    courseImageAlt: "Aperçu d’une leçon du cours de récupération Thetis",
   },
   es: {
     sectionTitle: "De Thetis",
@@ -72,6 +75,7 @@ const copy: Record<
     readersLine: "Únete a 20.000 lectores",
     addCourse: "Añadir curso al carrito",
     splintImageAlt: "Férula nocturna Thetis para la recuperación de Aquiles",
+    courseImageAlt: "Vista previa de una lección del curso de recuperación Thetis",
   },
   it: {
     sectionTitle: "Da Thetis",
@@ -82,6 +86,7 @@ const copy: Record<
     readersLine: "Unisciti a 20.000 lettori",
     addCourse: "Aggiungi corso al carrello",
     splintImageAlt: "Tutore notturno Thetis per il recupero di Achille",
+    courseImageAlt: "Anteprima di una lezione del corso di recupero Thetis",
   },
 };
 
@@ -109,14 +114,14 @@ const courseTitle = courseRoute?.title ?? "Recovery Course";
       >
         <a
           href={learnMoreSplintHref}
-          class="block hover:opacity-95 mb-5 border border-primary/20 dark:border-primary/30 rounded-xl max-h-52 overflow-hidden"
+          class="block hover:opacity-95 mx-auto mb-5 border border-primary/20 dark:border-primary/30 rounded-xl w-full max-w-[320px] aspect-square overflow-hidden"
         >
           <img
             src="/images/night_splint_bed_top_square.jpg"
             alt={t.splintImageAlt}
             width={680}
             height={680}
-            class="w-full max-h-52 object-center object-cover"
+            class="w-full h-full object-center object-cover"
             loading="lazy"
           />
         </a>
@@ -146,11 +151,19 @@ const courseTitle = courseRoute?.title ?? "Recovery Course";
       <article
         class="flex flex-col bg-neutral-50 dark:bg-neutral-900/50 shadow-sm p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl"
       >
-        <div
-          class="flex justify-center items-center bg-primary/10 mb-5 border border-primary/15 rounded-xl w-full max-h-40 aspect-[2/1]"
+        <a
+          href={courseRoute?.href ?? "/course"}
+          class="block hover:opacity-95 mx-auto mb-5 border border-primary/20 dark:border-primary/30 rounded-xl w-full max-w-[320px] aspect-square overflow-hidden"
         >
-          <BookOpen className="w-14 h-14 text-primary" aria-hidden="true" />
-        </div>
+          <img
+            src="/images/presentation-thumbnail.avif"
+            alt={t.courseImageAlt}
+            width={800}
+            height={800}
+            class="w-full h-full object-center object-cover"
+            loading="lazy"
+          />
+        </a>
         <h3
           class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl leading-snug"
         >

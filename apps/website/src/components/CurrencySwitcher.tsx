@@ -73,13 +73,13 @@ export function CurrencySwitcher({ className }: CurrencySwitcherProps) {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 px-3 py-2 border border-gray-300 dark:border-neutral-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 font-medium text-gray-700 dark:text-neutral-200 text-sm transition-colors"
+        className="flex items-center gap-2 bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 px-2.5 py-2 border border-gray-300 dark:border-neutral-600 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 font-medium text-gray-700 dark:text-neutral-200 text-sm transition-colors"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         aria-label="Select shop region for product links and checkout"
       >
         <Globe size={16} className="opacity-80 shrink-0" aria-hidden />
-        <span className="max-w-[11rem] sm:max-w-none truncate whitespace-nowrap">
+        <span className="flex-1 min-w-0 truncate whitespace-nowrap text-left">
           {currentLabel}
         </span>
         <ChevronDown

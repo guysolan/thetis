@@ -132,13 +132,13 @@ function AccordionBlockComponent({
   items: { title: string; content: ContentBlock[] }[];
 }) {
   return (
-    <Accordion type="single" collapsible className="my-6 w-full">
+    <Accordion type="single" collapsible className="my-4 w-full">
       {items.map((item, i) => (
-        <AccordionItem key={i} value={`accordion-${i}`}>
-          <AccordionTrigger className="font-semibold text-lg text-left">
+        <AccordionItem key={i} value={`accordion-${i}`} className="border-border/70">
+          <AccordionTrigger className="py-1.5 font-semibold text-base text-left">
             {item.title}
           </AccordionTrigger>
-          <AccordionContent className="prose-course">
+          <AccordionContent className="pt-1 pb-2 prose-course">
             {item.content.map((block, j) => (
               <ContentBlockRenderer key={j} block={block} />
             ))}

@@ -348,7 +348,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Hands-free crutch alternative—some patients prefer it to knee scooters; confirm fit and protocol with your team.",
     tags: ["mobility", "independence", "comfort"],
-    imagePath: "/images/catalogue-products/knee-scooter.png",
+    imagePath: "/images/catalogue-products/iwalk_3.0.png",
     description:
       "A steerable knee scooter isn’t the only option—iWALK-style devices let you keep hands free. Sizing and safety rules apply; not suitable for everyone.",
     features: [

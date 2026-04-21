@@ -26,7 +26,9 @@ export function CartIcon({ className }: CartIconProps) {
       aria-label={`Shopping cart${totalQuantity > 0 ? `, ${totalQuantity} items` : ""}`}
     >
       <ShoppingCart className="w-5 h-5 text-neutral-700 dark:text-neutral-300" />
-      <span className="font-medium text-neutral-700 dark:text-neutral-300 text-sm">Cart</span>
+      <span className="hidden 2xl:inline font-medium text-neutral-700 dark:text-neutral-300 text-sm">
+        Cart
+      </span>
 
       {!isLoading && totalQuantity > 0 && (
         <span className="-top-1 -right-1 absolute flex justify-center items-center bg-primary rounded-full min-w-[18px] h-[18px] font-bold text-[10px] text-white">

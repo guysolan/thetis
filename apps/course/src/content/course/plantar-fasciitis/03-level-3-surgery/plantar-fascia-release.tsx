@@ -82,79 +82,85 @@ export const content: SectionContent = {
     },
     {
       type: "heading",
-      level: 2,
+      level: 3,
       text: "Key references supporting this narrative",
     },
     {
-      type: "section",
-      title: "Natural history and conservative-first principle",
-      content: [
-        {
-          type: "list",
-          style: "bullet",
-          items: [
-            "AAOS OrthoInfo: most patients improve non-surgically; surgery considered after many months of failed conservative care.",
-            "Singh D, Angel J, Bentley G, Trevino SG. *BMJ* 1997;315:172-175.",
-          ],
-        },
+      type: "heading",
+      level: 4,
+      text: "Natural history and conservative-first principle",
+    },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "[AAOS OrthoInfo: Plantar Fasciitis and Bone Spurs](https://orthoinfo.aaos.org/en/diseases--conditions/plantar-fasciitis-and-bone-spurs/).",
+        "[Singh D, Angel J, Bentley G, Trevino SG. *BMJ* 1997;315:172-175](https://pubmed.ncbi.nlm.nih.gov/9274553/).",
       ],
     },
     {
-      type: "section",
-      title: "Early popularity and initial outcome series",
-      content: [
-        {
-          type: "list",
-          style: "bullet",
-          items: [
-            "Schepsis AA, Leach RE, Gorzyca J. *Clin Orthop Relat Res* 1991;266:185-196.",
-            "Sammarco GJ, Helfrey RB. *Foot Ankle Int* 1996;17:520-526.",
-          ],
-        },
+      type: "heading",
+      level: 4,
+      text: "Early popularity and initial outcome series",
+    },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "[Schepsis AA, Leach RE, Gorzyca J. *Clin Orthop Relat Res* 1991;266:185-196](https://pubmed.ncbi.nlm.nih.gov/2023788/).",
+        "[Sammarco GJ, Helfrey RB. *Foot Ankle Int* 1996;17:520-526](https://pubmed.ncbi.nlm.nih.gov/8886781/).",
       ],
     },
     {
-      type: "section",
-      title: "Outcome limitations and satisfaction gap",
-      content: [
-        {
-          type: "list",
-          style: "bullet",
-          items: [
-            "Davies MS, Weiss GA, Saxby TS. *Foot Ankle Int* 1999;20:803-807.",
-            "Reported improvement in many heels, but full patient satisfaction was substantially lower.",
-          ],
-        },
+      type: "heading",
+      level: 4,
+      text: "Outcome limitations and satisfaction gap",
+    },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "[Davies MS, Weiss GA, Saxby TS. *Foot Ankle Int* 1999;20:803-807](https://pubmed.ncbi.nlm.nih.gov/10609707/).",
       ],
     },
     {
-      type: "section",
-      title: "Biomechanical and complication evidence",
-      content: [
-        {
-          type: "list",
-          style: "bullet",
-          items: [
-            "Daly PJ, Kitaoka HB, Chao EY. *Foot Ankle* 1992;13:188-195.",
-            "Brugh AM, Fallat LM, Savoy-Moore RT. *J Foot Ankle Surg* 2002;41:365-371.",
-            "These studies link larger releases to altered mechanics and lateral column symptoms.",
-          ],
-        },
+      type: "text",
+      content:
+        "Reported improvement in many heels, but full patient satisfaction was substantially lower.",
+    },
+    {
+      type: "heading",
+      level: 4,
+      text: "Biomechanical and complication evidence",
+    },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "[Daly PJ, Kitaoka HB, Chao EY. *Foot Ankle* 1992;13:188-195](https://pubmed.ncbi.nlm.nih.gov/1611544/).",
+        "[Brugh AM, Fallat LM, Savoy-Moore RT. *J Foot Ankle Surg* 2002;41:365-371](https://pubmed.ncbi.nlm.nih.gov/12400717/).",
       ],
     },
     {
-      type: "section",
-      title: "Contemporary synthesis",
-      content: [
-        {
-          type: "list",
-          style: "bullet",
-          items: [
-            "Nayar SK et al. Surgical treatment options for plantar fasciitis: systematic review/network meta-analysis. *Arch Orthop Trauma Surg* 2023.",
-            "Modern reviews support restricted indications and careful patient selection.",
-          ],
-        },
+      type: "text",
+      content:
+        "These studies link larger releases to altered mechanics and lateral column symptoms.",
+    },
+    {
+      type: "heading",
+      level: 4,
+      text: "Contemporary synthesis",
+    },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "[Nayar SK et al. Surgical treatment options for plantar fasciitis: systematic review/network meta-analysis. *Arch Orthop Trauma Surg* 2023](https://pubmed.ncbi.nlm.nih.gov/36811543/).",
       ],
+    },
+    {
+      type: "text",
+      content: "Modern reviews support restricted indications and careful patient selection.",
     },
     {
       type: "card",
