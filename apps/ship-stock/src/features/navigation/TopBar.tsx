@@ -17,6 +17,7 @@ import {
 } from "@thetis/ui/dropdown-menu";
 import { Button } from "@thetis/ui/button";
 import { features, getTabLabel } from "./content";
+import TopBarStockNotice from "./TopBarStockNotice";
 
 interface TopBarProps {
   onMenuClick?: () => void;
@@ -40,7 +41,9 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
     activeTab = undefined;
   }
 
-  const currentFeature = Object.values(features).find((f) => f.slug === currentSection);
+  const currentFeature = Object.values(features).find((f) =>
+    f.slug === currentSection
+  );
 
   // Build breadcrumb segments: path segments + optional tab
   const allSegments = [...subSegments];
@@ -51,69 +54,97 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
   }
 
   return (
-    <header className="sticky top-0 z-10 flex items-center h-12 gap-3 px-4 border-b border-border bg-background shrink-0">
-      {/* Mobile menu button */}
-      <Button variant="ghost" size="icon" className="md:hidden h-8 w-8" onClick={onMenuClick}>
-        <Menu size={18} />
-      </Button>
+    <header className="top-0 z-10 sticky flex items-center gap-2 sm:gap-3 bg-background px-3 sm:px-4 border-border border-b min-h-12 shrink-0">
+      <div className="flex flex-1 items-center gap-2 sm:gap-3 min-w-0">
+        {/* Mobile menu button */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden w-8 h-8 shrink-0"
+          onClick={onMenuClick}
+        >
+          <Menu size={18} />
+        </Button>
 
-      <Breadcrumb>
-        <BreadcrumbList>
-          {/* Section selector (dropdown) */}
-          <BreadcrumbItem>
-            <DropdownMenu open={sectionMenuOpen} onOpenChange={setSectionMenuOpen}>
-              <DropdownMenuTrigger className="flex items-center gap-1.5 h-8 text-sm font-medium hover:text-foreground transition-colors">
-                {currentFeature ? (
-                  <>
-                    <span className="[&_svg]:size-4 shrink-0">{currentFeature.icon}</span>
-                    <span>{currentFeature.name}</span>
-                    {sectionMenuOpen ? (
-                      <ChevronUp size={14} className="text-muted-foreground shrink-0" />
-                    ) : (
-                      <ChevronDown size={14} className="text-muted-foreground shrink-0" />
+        <Breadcrumb className="min-w-0 overflow-hidden">
+          <BreadcrumbList>
+            {/* Section selector (dropdown) */}
+            <BreadcrumbItem>
+              <DropdownMenu
+                open={sectionMenuOpen}
+                onOpenChange={setSectionMenuOpen}
+              >
+                <DropdownMenuTrigger className="flex items-center gap-1.5 h-8 font-medium hover:text-foreground text-sm transition-colors">
+                  {currentFeature
+                    ? (
+                      <>
+                        <span className="[&_svg]:size-4 shrink-0">
+                          {currentFeature.icon}
+                        </span>
+                        <span>{currentFeature.name}</span>
+                        {sectionMenuOpen
+                          ? (
+                            <ChevronUp
+                              size={14}
+                              className="text-muted-foreground shrink-0"
+                            />
+                          )
+                          : (
+                            <ChevronDown
+                              size={14}
+                              className="text-muted-foreground shrink-0"
+                            />
+                          )}
+                      </>
+                    )
+                    : <span>Home</span>}
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  {Object.values(features).map((item) => (
+                    <DropdownMenuItem key={item.name} asChild>
+                      <Link to={item.href} className="flex items-center gap-2">
+                        <span className="[&_svg]:size-4 shrink-0">
+                          {item.icon}
+                        </span>
+                        <span>{item.name}</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </BreadcrumbItem>
+
+            {/* Sub-segments (path + tab) */}
+            {allSegments.map((segment, index) => (
+              <React.Fragment key={`${segment}-${index}`}>
+                <BreadcrumbSeparator>
+                  <ChevronRight size={14} className="text-muted-foreground" />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  {index === allSegments.length - 1
+                    ? (
+                      <BreadcrumbPage className="text-sm capitalize">
+                        {formatSegment(segment, currentSection)}
+                      </BreadcrumbPage>
+                    )
+                    : (
+                      <BreadcrumbLink
+                        className="text-sm capitalize"
+                        href={`/home/${currentSection}/${
+                          subSegments.slice(0, index + 1).join("/")
+                        }`}
+                      >
+                        {formatSegment(segment, currentSection)}
+                      </BreadcrumbLink>
                     )}
-                  </>
-                ) : (
-                  <span>Home</span>
-                )}
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                {Object.values(features).map((item) => (
-                  <DropdownMenuItem key={item.name} asChild>
-                    <Link to={item.href} className="flex items-center gap-2">
-                      <span className="[&_svg]:size-4 shrink-0">{item.icon}</span>
-                      <span>{item.name}</span>
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </BreadcrumbItem>
+                </BreadcrumbItem>
+              </React.Fragment>
+            ))}
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
 
-          {/* Sub-segments (path + tab) */}
-          {allSegments.map((segment, index) => (
-            <React.Fragment key={`${segment}-${index}`}>
-              <BreadcrumbSeparator>
-                <ChevronRight size={14} className="text-muted-foreground" />
-              </BreadcrumbSeparator>
-              <BreadcrumbItem>
-                {index === allSegments.length - 1 ? (
-                  <BreadcrumbPage className="capitalize text-sm">
-                    {formatSegment(segment, currentSection)}
-                  </BreadcrumbPage>
-                ) : (
-                  <BreadcrumbLink
-                    className="capitalize text-sm"
-                    href={`/home/${currentSection}/${subSegments.slice(0, index + 1).join("/")}`}
-                  >
-                    {formatSegment(segment, currentSection)}
-                  </BreadcrumbLink>
-                )}
-              </BreadcrumbItem>
-            </React.Fragment>
-          ))}
-        </BreadcrumbList>
-      </Breadcrumb>
+      <TopBarStockNotice />
     </header>
   );
 };

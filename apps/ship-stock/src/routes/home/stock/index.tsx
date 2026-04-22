@@ -14,7 +14,13 @@ import {
 import { Button } from "@thetis/ui/button";
 import { Tabs, TabsContent, TabsTrigger } from "@thetis/ui/tabs";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@thetis/ui/sheet";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@thetis/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@thetis/ui/select";
 import StockTable from "@/features/stockpiles/components/StockTable";
 import { pivotStockData } from "@/features/stockpiles/utils/pivotStockData";
 import StockCheckForm from "@/components/StockCheckForm";
@@ -23,58 +29,7 @@ import TabsHeader from "@/components/TabsHeader";
 import { features } from "@/features/navigation/content";
 import { useMemo, useState } from "react";
 import { Calendar, ClipboardCheck, Package, TrendingUp } from "lucide-react";
-import {
-  computeReorderPlan,
-  getDemandMultiplierForProduct,
-  getMonthName,
-  REORDER_PLAN_PRODUCT_NAMES,
-} from "@/features/stock-history/reorderPlanUtils";
-import type { StockRow } from "@/features/stockpiles/utils/pivotStockData";
-import type { LocationColumn } from "@/features/stockpiles/utils/pivotStockData";
-
-function computeReorderInfo(
-  rows: StockRow[],
-  columns: LocationColumn[],
-  stockpiles: { stockpile_id: number | null; stockpile_name: string | null }[] | undefined,
-): Map<number, { placeOrderBy: string; isDue: boolean; orderQty: number }> {
-  const map = new Map<number, { placeOrderBy: string; isDue: boolean; orderQty: number }>();
-  if (!stockpiles?.length) return map;
-
-  const mpd = stockpiles.find((s) => s.stockpile_name === "MPD");
-  const parkHouse = stockpiles.find((s) => s.stockpile_name === "Park House");
-  if (!mpd?.stockpile_id || !parkHouse?.stockpile_id) return map;
-
-  const mpdKey = columns.find((c) => c.addressId === mpd.stockpile_id)?.key;
-  const parkHouseKey = columns.find((c) => c.addressId === parkHouse.stockpile_id)?.key;
-  if (!mpdKey || !parkHouseKey) return map;
-
-  const now = new Date();
-  const startMonth = now.getMonth();
-  const startYear = now.getFullYear();
-  const productNameSet = new Set(REORDER_PLAN_PRODUCT_NAMES.map((n) => n.toLowerCase()));
-
-  for (const row of rows) {
-    if (!productNameSet.has(row.itemName.toLowerCase())) continue;
-
-    const combinedStock = (row.locations[mpdKey] ?? 0) + (row.locations[parkHouseKey] ?? 0);
-    const plan = computeReorderPlan(combinedStock, startMonth, startYear, {
-      demandMultiplier: getDemandMultiplierForProduct(row.itemName),
-    });
-    const nextOrder = plan.orders.find((o) => o.isNextOrder);
-    if (!nextOrder || nextOrder.quantity <= 0) continue;
-
-    const { month, year } = nextOrder.placeOrderBy;
-    const placeOrderByStr = `${getMonthName(month)} ${year}`;
-    const isDue = year < startYear || (year === startYear && month <= startMonth);
-
-    map.set(row.itemId, {
-      placeOrderBy: placeOrderByStr,
-      isDue,
-      orderQty: nextOrder.quantity,
-    });
-  }
-  return map;
-}
+import { computeReorderInfo } from "@/features/stockpiles/utils/computeReorderInfoForPlan";
 
 const tabConfig = features.stock.tabs;
 type StockTab = (typeof tabConfig)[number]["value"];
@@ -116,7 +71,9 @@ const StockPage = () => {
     if (!stockpiles) return [];
     const seen = new Set<number>();
     return stockpiles
-      .filter((s) => s.stockpile_id && !seen.has(s.stockpile_id) && seen.add(s.stockpile_id))
+      .filter((s) =>
+        s.stockpile_id && !seen.has(s.stockpile_id) && seen.add(s.stockpile_id)
+      )
       .map((s) => ({
         id: String(s.stockpile_id),
         name: s.stockpile_name ?? `Location ${s.stockpile_id}`,
@@ -126,7 +83,11 @@ const StockPage = () => {
   return (
     <>
       <PageHeader title="Stock">
-        <Button variant="default" size="sm" onClick={() => setStockCountOpen(true)}>
+        <Button
+          variant="default"
+          size="sm"
+          onClick={() => setStockCountOpen(true)}
+        >
           <ClipboardCheck size={16} className="mr-1.5" />
           Stock Count
         </Button>
@@ -136,7 +97,10 @@ const StockPage = () => {
               <SheetTitle>Stock Count</SheetTitle>
             </SheetHeader>
             <div className="space-y-4 pt-4">
-              <Select value={stockCountAddressId} onValueChange={setStockCountAddressId}>
+              <Select
+                value={stockCountAddressId}
+                onValueChange={setStockCountAddressId}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select location" />
                 </SelectTrigger>
@@ -185,10 +149,16 @@ const StockPage = () => {
         <TabsHeader tabsList={tabsList} />
 
         {tabConfig.map(({ value }) => (
-          <TabsContent key={value} value={value} className="flex flex-col gap-4 w-full">
+          <TabsContent
+            key={value}
+            value={value}
+            className="flex flex-col gap-4 w-full"
+          >
             <StockTable
               rows={rows}
-              columns={value === "parts" ? columns.filter((c) => !c.isAmazon) : columns}
+              columns={value === "parts"
+                ? columns.filter((c) => !c.isAmazon)
+                : columns}
               inventoryHistory={inventoryHistory ?? []}
               reorderInfo={reorderInfo}
               typeFilter={value}
@@ -203,7 +173,11 @@ const StockPage = () => {
 export const Route = createFileRoute("/home/stock/")({
   component: StockPage,
   validateSearch: (search: Record<string, unknown>): { tab: StockTab } => ({
-    tab: (tabConfig.some((t) => t.value === search.tab) ? search.tab : "all") as StockTab,
+    tab: (tabConfig.some((t) =>
+        t.value === search.tab
+      )
+      ? search.tab
+      : "all") as StockTab,
   }),
   loader: async ({ context }) => {
     // Amazon is optional - prefetch but don't block if it fails
