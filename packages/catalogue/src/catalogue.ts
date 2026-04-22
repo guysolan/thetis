@@ -380,11 +380,12 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     priority: "optional",
     name: "TheraBand Resistance Bands",
     category: "Rehab",
-    keyBenefit: "Build strength safely with progressive resistance training",
+    keyBenefit:
+      "Build strength with progressive resistance once your clinician clears active loading.",
     tags: ["rehab", "strength", "recovery"],
     imagePath: "/images/catalogue-products/theraband.png",
     description:
-      "Essential for later stages of rehabilitation and strength building.",
+      "Best used in later rehabilitation phases, not the immediate post-injury protection phase.",
     features: [
       "Progressive resistance",
       "Safe strength building",
@@ -495,7 +496,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     priority: "supplement",
     name: "Adjustable Heel Lifts",
     category: "Rehab",
-    keyBenefit: "Balance your leg length and walk more naturally",
+    keyBenefit:
+      "Balance leg-length difference during boot-to-shoe transition when advised by your clinician.",
     tags: ["rehab", "balance", "recovery"],
     imagePath: "/images/catalogue-products/heel-lifts.png",
     features: [],
@@ -1121,7 +1123,6 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
   {
     id: "slant-board-calf-stretcher",
     conditions: [
-      "achilles-rupture",
       "plantar-fasciitis",
       "achilles-tendinitis",
       "insertional-achilles-tendonitis",
@@ -1130,11 +1131,11 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     name: "Slant board / calf stretch wedge",
     category: "Rehab",
     keyBenefit:
-      "Controlled calf and Achilles stretch—use only when your protocol allows loading and stretching.",
+      "Controlled calf and Achilles stretch for later rehab; avoid early rupture phase unless your team advises it.",
     tags: ["stretch", "eccentric", "rehab"],
     imagePath: "/images/catalogue-products/slant-board-calf-stretch-wedge.png",
     description:
-      "After rupture, do not start aggressive stretching until your team clears you. For fasciitis / tendinopathy, follow graded loading advice.",
+      "After rupture, avoid aggressive stretching until your team clears tendon loading. For fasciitis / tendinopathy, follow graded loading advice.",
     features: ["Adjustable angle on most boards", "Non-slip surface important"],
     locations: {
       US: {
@@ -1150,7 +1151,6 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
   {
     id: "vitamin-d3-supplement",
     conditions: [
-      "achilles-rupture",
       "plantar-fasciitis",
       "achilles-tendinitis",
       "insertional-achilles-tendonitis",
@@ -1159,11 +1159,11 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     name: "Vitamin D3 Supplement",
     category: "Wellness",
     keyBenefit:
-      "Vitamin D supports bone/tendon health context—only supplement if appropriate for you.",
+      "Vitamin D can support bone/tendon health context, but supplementation should be individualized.",
     tags: ["nutrition", "bone-health"],
     imagePath: "/images/catalogue-products/vitamin-d3-supplement.png",
     description:
-      "Many adults are supplemented after blood tests. 4000 IU/day is a common retail strength—verify with your clinician or pharmacist.",
+      "Not a universal requirement. Many adults are supplemented after blood tests; verify dose and interactions with your clinician or pharmacist.",
     features: ["Easy-swallow tablets in most lines", "Check interactions"],
     locations: {
       GB: {
