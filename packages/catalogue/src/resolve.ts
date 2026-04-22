@@ -192,11 +192,6 @@ export function isExternalCatalogueProductUrl(url: string): boolean {
 /** Default button label from destination URL. */
 export function defaultProductCta(url: string): string {
   if (!isOffSiteUrl(url)) return "Compare Options";
-  if (
-    url.includes("/s?") || url.includes("?k=") || url.includes("&k=")
-  ) {
-    return "Browse";
-  }
   return "Buy";
 }
 

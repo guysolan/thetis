@@ -28,7 +28,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     alternativeTo: ["vacoped-achilles-boot"],
     conditions: ["achilles-rupture"],
     priority: "essential",
-    name: "Aircast AirSelect (wedge CAM walker)",
+    name: "Aircast Boot",
     category: "Essential",
     keyBenefit:
       "Holds your ankle in plantarflexion with stacked heel wedges—widely issued, usually lighter, and often less expensive than hinged boots.",
@@ -62,7 +62,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     alternativeTo: ["aircast-airselect-boot"],
     conditions: ["achilles-rupture"],
     priority: "essential",
-    name: "OPED VACOped (hinged Achilles boot)",
+    name: "VACOped Boot",
     category: "Essential",
     keyBenefit:
       "Hinged vacuum-liner boot with dialled plantarflexion—heavier and pricier; some teams prefer it for fine angle control and later ROM options.",
@@ -343,7 +343,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     alternativeTo: ["knee-scooter"],
     conditions: ["achilles-rupture"],
     priority: "optional",
-    name: "iWALK 3.0 (hands-free crutch)",
+    name: "Hands Free Crutch",
     category: "Mobility",
     keyBenefit:
       "Hands-free crutch alternative—some patients prefer it to knee scooters; confirm fit and protocol with your team.",
@@ -410,7 +410,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     accessoryTo: ["vacoped-achilles-boot"],
     conditions: ["achilles-rupture"],
     priority: "optional",
-    name: "Boot Liner (VACOped)",
+    name: "Boot Liner",
     category: "Comfort",
     keyBenefit:
       "Keep your boot fresh and comfortable with removable, washable liners",
@@ -870,7 +870,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     id: "ted-anti-embolism-stockings",
     conditions: ["achilles-rupture"],
     priority: "recommended",
-    name: "TED anti-embolism stockings (hospital-style)",
+    name: "Anti-embolism stockings",
     category: "Protection",
     keyBenefit:
       "Graduated compression stockings often used after injury or surgery—match the type your clinician asked for (knee vs thigh).",
@@ -885,7 +885,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         price: "varies by size",
-        url: "https://www.amazon.com/s?k=covidien+ted+anti+embolism+stockings",
+        url: "https://www.amazon.com/dp/B0BM5TPP93",
       },
       GB: {
         price: "varies by size",
@@ -913,7 +913,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         price: "~$25–40",
-        url: "https://www.amazon.com/s?k=Reusable+ankle+ice+pack+wrap",
+        url: "https://www.amazon.com/dp/B095RSH5NZ",
       },
       GB: {
         price: "~£20–35",
@@ -925,7 +925,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     id: "silicone-scar-gel",
     conditions: ["achilles-rupture"],
     priority: "optional",
-    name: "Silicone scar gel (topical)",
+    name: "Silicone Scar Gel",
     category: "Recovery",
     keyBenefit:
       "Medical silicone gels are commonly used once the wound is closed to support scar maturation.",
@@ -966,7 +966,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       },
       US: {
         price: "~$12–20 (pack)",
-        url: "https://www.amazon.com/s?k=opsite+post+op+dressing",
+        url: "https://www.amazon.com/dp/B003TT46QI",
       },
     },
   },
@@ -986,7 +986,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
         url: "https://www.amazon.co.uk/dp/B0796P2LRD",
       },
       US: {
-        url: "https://www.amazon.com/s?k=mepore+film+pad+dressing",
+        url: "https://www.amazon.com/dp/B018OS6TSQ",
       },
     },
   },
@@ -994,7 +994,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     id: "forearm-crutches-pair",
     conditions: ["achilles-rupture"],
     priority: "optional",
-    name: "Forearm crutches (pair)",
+    name: "Forearm Crutches",
     category: "Mobility",
     keyBenefit:
       "If your hospital does not loan crutches, adjustable forearm (elbow) crutches are a common buy.",
@@ -1028,7 +1028,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     features: ["Wide-leg / post-surgery styles vary—check size charts"],
     locations: {
       US: {
-        url: "https://www.amazon.com/s?k=tear+away+pants+post+surgery+zipper",
+        url: "https://www.amazon.com/dp/B0DP7NJ6NW",
       },
       GB: {
         url: "https://www.amazon.co.uk/dp/B0BPH9WJHR",
@@ -1139,7 +1139,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         price: "~$35–70",
-        url: "https://www.amazon.com/dp/B06Y5W5ZNT",
+        url: "https://www.amazon.com/dp/B0CG9BHF5X",
       },
       GB: {
         price: "~£30–60",
@@ -1156,7 +1156,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       "insertional-achilles-tendonitis",
     ],
     priority: "optional",
-    name: "Vitamin D3 supplement (high-strength example)",
+    name: "Vitamin D3 Supplement",
     category: "Wellness",
     keyBenefit:
       "Vitamin D supports bone/tendon health context—only supplement if appropriate for you.",
@@ -1172,7 +1172,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       },
       US: {
         price: "~$10–18 (example)",
-        url: "https://www.amazon.com/s?k=vitamin+d3+4000+iu+tablets",
+        url: "https://www.amazon.com/dp/B086V74KKR",
       },
     },
   },

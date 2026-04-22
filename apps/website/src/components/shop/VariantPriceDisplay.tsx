@@ -7,6 +7,7 @@ interface VariantPriceDisplayProps {
   variantId: string;
   size?: "sm" | "md" | "lg";
   className?: string;
+  stripUsPrefix?: boolean;
 }
 
 const sizeClasses = {
@@ -19,8 +20,12 @@ export function VariantPriceDisplay({
   variantId,
   size = "lg",
   className,
+  stripUsPrefix = false,
 }: VariantPriceDisplayProps) {
   const { formattedPrice, isLoading } = useVariantPrice(variantId);
+  const displayPrice = stripUsPrefix
+    ? (formattedPrice?.replace(/^US\$/u, "$") ?? null)
+    : formattedPrice;
 
   if (isLoading) {
     return (
@@ -41,7 +46,7 @@ export function VariantPriceDisplay({
         className,
       )}
     >
-      {formattedPrice ?? "—"}
+      {displayPrice ?? "—"}
     </p>
   );
 }

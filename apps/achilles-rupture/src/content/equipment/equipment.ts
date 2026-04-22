@@ -29,7 +29,7 @@ export interface Bundle {
 export const equipmentList: Equipment[] = [
   {
     priority: "essential",
-    name: "Aircast AirSelect (wedge boot)",
+    name: "Aircast Boot",
     category: "Essential",
     priceRange: "$120-168",
     keyBenefit:
@@ -42,7 +42,7 @@ export const equipmentList: Equipment[] = [
   },
   {
     priority: "essential",
-    name: "VACOped (hinged boot)",
+    name: "VACOped Boot",
     category: "Essential",
     priceRange: "$252+",
     keyBenefit:
@@ -124,7 +124,7 @@ export const equipmentList: Equipment[] = [
     keyBenefit:
       "Stay comfortable all day with temperature-regulating, moisture-wicking socks",
     actionUrl: productUrl("merino-wool-socks"),
-    actionText: "Browse",
+    actionText: "Buy",
     isExternal: true,
     tags: ["comfort", "temperature", "hygiene"],
     imagePath: "/images/catalogue-products/merino-socks.png",

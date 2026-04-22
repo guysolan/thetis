@@ -13,7 +13,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
   {
     id: "aircast-airselect-boot",
     priority: "essential",
-    name: "Aircast AirSelect (wedge CAM walker)",
+    name: "Aircast Boot",
     category: "Essential",
     keyBenefit:
       "Holds your ankle in plantarflexion with stacked heel wedges—widely issued, usually lighter, and often less expensive than hinged boots.",
@@ -45,7 +45,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
   {
     id: "vacoped-achilles-boot",
     priority: "essential",
-    name: "OPED VACOped (hinged Achilles boot)",
+    name: "VACOped Boot",
     category: "Essential",
     keyBenefit:
       "Hinged vacuum-liner boot with dialled plantarflexion—heavier and pricier; some teams prefer it for fine angle control and later ROM options.",
@@ -310,7 +310,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
   {
     id: "iwalk-hands-free-crutch",
     priority: "optional",
-    name: "iWALK 3.0 (hands-free crutch)",
+    name: "Hands Free Crutch",
     category: "Mobility",
     keyBenefit:
       "Hands-free crutch alternative—some patients prefer it to knee scooters; confirm fit and protocol with your team.",
@@ -369,7 +369,7 @@ export const ACHILLES_RUPTURE_PRODUCTS: AchillesProduct[] = [
   {
     id: "vacoped-boot-liner-op",
     priority: "optional",
-    name: "Boot Liner (VACOped)",
+    name: "Boot Liner",
     category: "Comfort",
     keyBenefit:
       "Keep your boot fresh and comfortable with removable, washable liners",

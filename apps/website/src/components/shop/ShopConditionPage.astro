@@ -21,6 +21,8 @@ import { NIGHT_SPLINT_VARIANTS } from "@/lib/shopify/variants";
 import { COURSE_VARIANTS } from "@/lib/shopify/products";
 import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
 import ShopCatalogueProductGrid from "@/components/shop/ShopCatalogueProductGrid.astro";
+import posterImage from "../../../../../packages/catalogue/assets/poster-image.png";
+import achillesCourseImage from "../../../../../packages/catalogue/assets/achilles-rope-ends-pointed-down.png";
 import {
   BookOpen,
   Check,
@@ -418,25 +420,25 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
               {splintRoute ? (
                 <a
                   href={learnMoreSplintHref}
-                  class="block hover:opacity-95 shadow-lg border border-primary/25 rounded-2xl ring-1 ring-primary/10 w-full max-w-[340px] overflow-hidden transition-opacity"
+                  class="block hover:opacity-95 w-full max-w-[560px] transition-opacity"
                 >
                   <img
-                    src="/images/night_splint_bed_top_square.jpg"
-                    alt=""
+                    src={posterImage.src}
+                    alt="Achilles rupture recovery products collage"
                     width={680}
                     height={680}
-                    class="w-full object-cover aspect-square"
+                    class="w-full h-auto object-contain"
                     loading="eager"
                   />
                 </a>
               ) : (
-                <div class="shadow-lg border border-primary/25 rounded-2xl w-full max-w-[340px] overflow-hidden">
+                <div class="w-full max-w-[560px]">
                   <img
-                    src="/images/night_splint_bed_top_square.jpg"
-                    alt=""
+                    src={posterImage.src}
+                    alt="Achilles rupture recovery products collage"
                     width={680}
                     height={680}
-                    class="w-full object-cover aspect-square"
+                    class="w-full h-auto object-contain"
                     loading="eager"
                   />
                 </div>
@@ -504,7 +506,7 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
             <article class="flex flex-col bg-neutral-50 dark:bg-neutral-900/50 shadow-sm p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
               <a
                 href={learnMoreSplintHref}
-                class="block hover:opacity-95 mx-auto mb-5 border border-primary/20 dark:border-primary/30 rounded-xl w-full max-w-[320px] aspect-square overflow-hidden"
+                class="block hover:opacity-95 mb-5 border border-primary/20 dark:border-primary/30 rounded-xl w-full max-w-[320px] aspect-square overflow-hidden mr-auto"
               >
                 <img
                   src="/images/night_splint_bed_top_square.jpg"
@@ -527,31 +529,19 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                 showFreeShipping={false}
                 className="mb-4"
               />
-              <div class="gap-4 grid grid-cols-3 mb-6">
-                <div class="flex flex-col items-center gap-2 text-center">
-                  <div class="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
-                    <Truck className="w-5 h-5 text-primary" aria-hidden />
-                  </div>
-                  <span class="font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-snug">
-                    {at.freeShipping}
-                  </span>
-                </div>
-                <div class="flex flex-col items-center gap-2 text-center">
-                  <div class="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
-                    <ShieldCheck className="w-5 h-5 text-primary" aria-hidden />
-                  </div>
-                  <span class="font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-snug">
-                    {at.guarantee30Day}
-                  </span>
-                </div>
-                <div class="flex flex-col items-center gap-2 text-center">
-                  <div class="flex justify-center items-center bg-primary/10 rounded-full w-10 h-10">
-                    <RotateCcw className="w-5 h-5 text-primary" aria-hidden />
-                  </div>
-                  <span class="font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-snug">
-                    {at.easyReturns}
-                  </span>
-                </div>
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="inline-flex items-center gap-1.5 bg-primary/10 px-2.5 py-1 rounded-full font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-none">
+                  <Truck className="w-3.5 h-3.5 text-primary" aria-hidden />
+                  {at.freeShipping}
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-primary/10 px-2.5 py-1 rounded-full font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-none">
+                  <ShieldCheck className="w-3.5 h-3.5 text-primary" aria-hidden />
+                  {at.guarantee30Day}
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-primary/10 px-2.5 py-1 rounded-full font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-none">
+                  <RotateCcw className="w-3.5 h-3.5 text-primary" aria-hidden />
+                  {at.easyReturns}
+                </span>
               </div>
               <div class="flex sm:flex-row flex-col flex-wrap gap-3 mt-auto">
                 <SplintShopBuyButton
@@ -575,8 +565,15 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
             </article>
             {courseRoute ? (
               <article class="flex flex-col bg-neutral-50 dark:bg-neutral-900/50 shadow-sm p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
-                <div class="flex justify-center items-center bg-primary/10 mb-5 border border-primary/15 rounded-xl w-full max-h-40 aspect-[2/1]">
-                  <BookOpen className="w-14 h-14 text-primary" aria-hidden />
+                <div class="mb-5 border border-primary/15 rounded-xl w-full max-w-[320px] overflow-hidden mr-auto">
+                  <img
+                    src={achillesCourseImage.src}
+                    alt="Achilles tendon healing position comparison"
+                    width={1024}
+                    height={1024}
+                    class="w-full h-auto object-cover"
+                    loading="lazy"
+                  />
                 </div>
                 <h3 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl leading-snug">
                   {courseRoute.title}
@@ -588,6 +585,7 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                   client:load
                   variantId={COURSE_VARIANTS.ESSENTIALS}
                   size="lg"
+                  stripUsPrefix
                   className="mb-2"
                 />
                 <p class="flex items-center gap-2 mb-4 text-primary text-sm">
