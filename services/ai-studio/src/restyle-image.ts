@@ -27,13 +27,19 @@ function loadImagePart(filePath: string): {
 
 /**
  * Parses argv after the style description (index 4+).
- * Supports: optional output basename, and `--ref <path>` (repeatable).
+ * Supports: optional output basename, `--ref <path>` (repeatable, style),
+ * `--product-ref <path>` (repeatable, device / product geometry),
+ * and `--character-ref <path>` (repeatable, patient / character likeness).
  */
 function parseTailArgs(argv: string[]): {
     outputFileName?: string;
     styleRefPaths: string[];
+    productRefPaths: string[];
+    characterRefPaths: string[];
 } {
     const styleRefPaths: string[] = [];
+    const productRefPaths: string[] = [];
+    const characterRefPaths: string[] = [];
     let outputFileName: string | undefined;
     const tail = argv.slice(4);
     let i = 0;
@@ -49,6 +55,26 @@ function parseTailArgs(argv: string[]): {
             i += 1;
             continue;
         }
+        if (a === "--product-ref" && tail[i + 1]) {
+            productRefPaths.push(tail[i + 1]);
+            i += 2;
+            continue;
+        }
+        if (a?.startsWith("--product-ref=")) {
+            productRefPaths.push(a.slice("--product-ref=".length));
+            i += 1;
+            continue;
+        }
+        if (a === "--character-ref" && tail[i + 1]) {
+            characterRefPaths.push(tail[i + 1]);
+            i += 2;
+            continue;
+        }
+        if (a?.startsWith("--character-ref=")) {
+            characterRefPaths.push(a.slice("--character-ref=".length));
+            i += 1;
+            continue;
+        }
         if (a && !a.startsWith("--")) {
             outputFileName = a;
             i += 1;
@@ -56,7 +82,7 @@ function parseTailArgs(argv: string[]): {
         }
         i += 1;
     }
-    return { outputFileName, styleRefPaths };
+    return { outputFileName, styleRefPaths, productRefPaths, characterRefPaths };
 }
 
 /**
@@ -66,7 +92,7 @@ function parseTailArgs(argv: string[]): {
  * while keeping layout, text meaning, and educational intent.
  *
  * Usage:
- * bun src/restyle-image.ts <input-image-path> "style instructions" [output-filename.png] [--ref path/to/style.png ...]
+ * bun src/restyle-image.ts <input-image-path> "style instructions" [output-filename.png] [--character-ref mike.png ...] [--product-ref device.jpg ...] [--ref path/to/style.png ...]
  *
  * Example (match Achilles course Tintin-style diagrams; run from services/ai-studio):
  * bun src/restyle-image.ts ../../apps/course/src/assets/chronic-heel-pain-common-self-limiting.png "Match reference style exactly." out.png --ref ../../apps/course/src/assets/dvt-signs-symptoms-tintin-v6.png
@@ -103,7 +129,7 @@ async function main() {
             "\x1b[31mError: No style instructions provided.\x1b[0m",
         );
         console.log(
-            'Usage: bun src/restyle-image.ts <input-image-path> "style instructions" [output.png] [--ref style-ref.png ...]',
+            'Usage: bun src/restyle-image.ts <input-image-path> "style instructions" [output.png] [--character-ref char.png ...] [--product-ref product.jpg ...] [--ref style-ref.png ...]',
         );
         process.exit(1);
     }
@@ -115,12 +141,29 @@ async function main() {
         process.exit(1);
     }
 
-    const { outputFileName: tailOut, styleRefPaths } = parseTailArgs(
-        process.argv,
-    );
+    const { outputFileName: tailOut, styleRefPaths, productRefPaths, characterRefPaths } =
+        parseTailArgs(
+            process.argv,
+        );
     for (const ref of styleRefPaths) {
         if (!fs.existsSync(ref)) {
             console.error(`\x1b[31mError: Style reference not found: ${ref}\x1b[0m`);
+            process.exit(1);
+        }
+    }
+    for (const ref of productRefPaths) {
+        if (!fs.existsSync(ref)) {
+            console.error(
+                `\x1b[31mError: Product reference not found: ${ref}\x1b[0m`,
+            );
+            process.exit(1);
+        }
+    }
+    for (const ref of characterRefPaths) {
+        if (!fs.existsSync(ref)) {
+            console.error(
+                `\x1b[31mError: Character reference not found: ${ref}\x1b[0m`,
+            );
             process.exit(1);
         }
     }
@@ -158,6 +201,16 @@ async function main() {
 
     console.log(`\x1b[36mRestyling image:\x1b[0m ${inputImagePath}`);
     console.log(`\x1b[36mInstructions:\x1b[0m "${styleDescription}"`);
+    if (characterRefPaths.length > 0) {
+        console.log(
+            `\x1b[36mCharacter reference(s):\x1b[0m ${characterRefPaths.join(", ")}`,
+        );
+    }
+    if (productRefPaths.length > 0) {
+        console.log(
+            `\x1b[36mProduct reference(s):\x1b[0m ${productRefPaths.join(", ")}`,
+        );
+    }
     if (styleRefPaths.length > 0) {
         console.log(
             `\x1b[36mStyle reference(s):\x1b[0m ${styleRefPaths.join(", ")}`,
@@ -169,6 +222,26 @@ async function main() {
             inlineData: { mimeType: string; data: string };
         }
     > = [];
+
+    if (characterRefPaths.length > 0) {
+        parts.push({
+            text:
+                "The following image(s) are CHARACTER REFERENCE for the PATIENT (Mike / Grant) only. Match face, hair, skin tone, body proportions, and casual clothing (e.g. white t-shirt) when drawing the patient performing the scene. Do not copy the doctor, room layout, or medical equipment from the reference unless the instructions explicitly ask for them.",
+        });
+        for (const refPath of characterRefPaths) {
+            parts.push(loadImagePart(refPath));
+        }
+    }
+
+    if (productRefPaths.length > 0) {
+        parts.push({
+            text:
+                "The following image(s) are PRODUCT REFERENCE ONLY. Copy accurate device geometry: silhouette, rigid vs soft parts, strap count and routing, colors, and how much of the foot/heel is left open. Do not substitute a different category of device (for example do not turn a dorsal night splint into a walking boot, posterior shell, or sandal with a full sole unless the product reference clearly shows that). These are not general-purpose style references.",
+        });
+        for (const refPath of productRefPaths) {
+            parts.push(loadImagePart(refPath));
+        }
+    }
 
     if (styleRefPaths.length > 0) {
         parts.push({
@@ -187,12 +260,18 @@ async function main() {
     const refClause = styleRefPaths.length > 0
         ? "\n- Match the TARGET VISUAL STYLE reference image(s) as closely as possible: outlines, fills, shading simplicity, background texture, and title/body font personality.\n"
         : "";
+    const productClause = productRefPaths.length > 0
+        ? "\n- If PRODUCT REFERENCE images appear above, follow them for the specified device even when the content image shows a different or wrong design. Translate the product photo into the target illustration style while keeping mechanical design faithful.\n"
+        : "";
+    const characterClause = characterRefPaths.length > 0
+        ? "\n- If CHARACTER REFERENCE images appear above, the patient in the scene must read unmistakably as the same person (Mike / Grant) from that reference. Keep the pose and action from the content image; only substitute likeness and clothing consistency as instructed.\n"
+        : "";
 
     parts.push({
         text: `Redraw the LAST image above (the content image) in a new visual style.
 
 Style / creative direction: ${styleDescription}
-${refClause}
+${refClause}${productClause}${characterClause}
 Hard requirements:
 - Preserve the same information architecture as the LAST (content) image: section order, relative placement of text vs graphics, hierarchy (title vs body), and any diagrams/charts that carry meaning (e.g. funnel shapes, arrows, color bands).
 - Keep every line of on-image text accurate: same words, punctuation, and numbers unless the style direction above explicitly asks to change copy. Redraw letterforms to match the new visual style.

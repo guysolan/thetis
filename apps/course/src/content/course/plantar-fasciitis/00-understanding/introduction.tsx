@@ -16,9 +16,9 @@ export const content: SectionContent = {
     {
       type: "image",
       src: chronicHeelPainOverview,
-      alt: "Two clinical photos: palpation at the back of the heel for Achilles pain, and thumb pressure on the sole at the typical plantar fascia tender point; centre text notes swelling, stiffness, tenderness, and sore first steps.",
+      alt: "Infographic on parchment-style background: palpation behind the ankle and thumb pressure on the plantar heel for typical plantar fasciitis tenderness; centre text lists swelling, stiffness, and tenderness, with a contrasting line calling out sore first steps.",
       caption:
-        "Very common, usually self-limiting — symptoms often include swelling, stiffness, and tenderness, especially with the first steps after rest.",
+        "Very common, usually self-limiting, signs of plantar fasciitis — swelling, stiffness, and tenderness, especially in the “first steps”.",
     },
     {
       type: "heading",
