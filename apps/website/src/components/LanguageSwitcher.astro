@@ -1,33 +1,33 @@
 ---
+import { Languages } from "lucide-astro";
 import { urlUtils, getCurrentLanguage } from "../utils/language";
 
 const currentPath = Astro.url.pathname;
 const currentLang = getCurrentLanguage(currentPath);
 const languageOptions = urlUtils.getLanguageSwitcherOptions(currentPath);
-
-// Debug logging
-console.log("LanguageSwitcher Debug:");
-console.log("Current path:", currentPath);
-console.log("Current language:", currentLang.code);
-console.log(
-    "Language options:",
-    languageOptions.map((opt) => `${opt.code}: ${opt.href}`),
-);
+const langLabel = `${currentLang.name} (${currentLang.code.toUpperCase()})`;
 ---
 
 <div class="relative language-switcher">
     <button
         id="language-toggle"
-        class="flex justify-between items-center gap-2 bg-white hover:bg-gray-50 px-2.5 py-2 border border-gray-300 rounded-md w-[74px] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 font-medium text-gray-700 text-sm"
+        type="button"
+        class="flex items-center gap-1.5 bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 px-2.5 py-2 border border-gray-300 dark:border-neutral-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 w-full min-w-[5.25rem] text-gray-700 dark:text-neutral-200 text-sm"
         aria-expanded="false"
         aria-haspopup="true"
+        title={currentLang.nativeName}
+        aria-label={`Language: ${langLabel}`}
     >
-        <span class="capitalize">{currentLang.code.toUpperCase()}</span>
+        <Languages class="opacity-80 w-4 h-4 shrink-0" aria-hidden="true" />
+        <span class="font-semibold tabular-nums tracking-tight"
+            >{currentLang.code.toUpperCase()}</span
+        >
         <svg
-            class="w-4 h-4"
+            class="ml-auto w-4 h-4 shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
         >
             <path
                 stroke-linecap="round"
@@ -39,7 +39,7 @@ console.log(
 
     <div
         id="language-dropdown"
-        class="hidden right-0 z-50 absolute bg-white shadow-lg mt-1 border border-gray-300 rounded-md w-48"
+        class="hidden right-0 z-50 absolute bg-white dark:bg-neutral-900 shadow-lg mt-1 border border-gray-300 dark:border-neutral-600 rounded-md w-56"
     >
         <div class="py-1">
             {
@@ -47,14 +47,23 @@ console.log(
                     return (
                         <a
                             href={langOption.href}
-                            class={`flex items-center gap-3 px-4 py-2 text-sm ${
+                            class={`flex items-center gap-2.5 px-4 py-2 text-sm ${
                                 langOption.isActive
                                     ? "bg-primary text-white"
-                                    : "text-gray-700 hover:bg-gray-100"
+                                    : "text-gray-700 hover:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-800"
                             }`}
                         >
-                            <span class="capitalize">
+                            <span class="w-7 font-semibold tabular-nums">
                                 {langOption.code.toUpperCase()}
+                            </span>
+                            <span
+                                class={`min-w-0 flex-1 truncate text-left text-xs ${
+                                    langOption.isActive
+                                        ? "text-white/90"
+                                        : "opacity-90"
+                                }`}
+                            >
+                                {langOption.nativeName}
                             </span>
                             {langOption.isActive && (
                                 <svg
