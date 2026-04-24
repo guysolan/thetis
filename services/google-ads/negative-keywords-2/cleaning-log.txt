@@ -1,0 +1,236 @@
+Negative Keyword Cleaning Log
+Run: 2026-04-23T20:27:23.564Z
+Input:  1607 keywords
+Output: 1458 keywords
+
+═══════════════════════════════════════════════════════
+REMOVED (149 keywords deleted from negative list)
+These were blocking potential buyers of the Achilles rupture splint.
+═══════════════════════════════════════════════════════
+  - "how to tell if you have torn your achilles"  [PHRASE]
+  - "achilles full tear"  [PHRASE]
+  - "how do you know if your achilles is torn"  [PHRASE]
+  - "why are so many nba players tearing achilles"  [PHRASE]
+  - "if you tear your achilles tendon can you walk"  [PHRASE]
+  - "rompimiento del tendon de aquiles"  [PHRASE]
+  - "is my achilles tendon torn"  [PHRASE]
+  - "dame tore achilles"  [PHRASE]
+  - "what does tearing your achilles feel like"  [PHRASE]
+  - "achilles torn test"  [PHRASE]
+  - "how an achilles tendon ruptures"  [PHRASE]
+  - "how does it feel when you tear your achilles"  [PHRASE]
+  - "does tearing your achilles hurt"  [PHRASE]
+  - "achilles torn recovery"  [PHRASE]
+  - "how do you know if you tore your achilles tendon"  [PHRASE]
+  - "how to tear achilles tendon"  [PHRASE]
+  - "desgarro tendon de aquiles"  [PHRASE]
+  - "oped vacotalus"  [PHRASE]
+  - "achilles slight tear"  [PHRASE]
+  - "achilles tendon partial rupture treatment"  [PHRASE]
+  - "vacoped short"  [PHRASE]
+  - "vacopedes boot"  [PHRASE]
+  - "vacboot"  [PHRASE]
+  - "rehabilitacion post cirugia de tendon de aquiles"  [PHRASE]
+  - "how to know if achilles is torn"  [PHRASE]
+  - "berlin protocol achilles"  [PHRASE]
+  - "vacoped boot review"  [PHRASE]
+  - "achilles tendon aircast boot"  [PHRASE]
+  - "oped vacocast"  [PHRASE]
+  - "how do i know i tore my achilles"  [PHRASE]
+  - "what happens when your achilles tears"  [PHRASE]
+  - "achilles torn nba"  [PHRASE]
+  - "full tear of achilles tendon"  [PHRASE]
+  - "how do you know if you have torn your achilles"  [PHRASE]
+  - "aircast achilles tendon boot"  [PHRASE]
+  - "achilles pop recovery"  [PHRASE]
+  - "achilles partial tear"  [PHRASE]
+  - "why do basketball players tear achilles"  [PHRASE]
+  - "vacoped protocol nhs"  [PHRASE]
+  - "dorsum pad vacoped"  [PHRASE]
+  - "vacoboot"  [PHRASE]
+  - "vacoped orthopaedic boot"  [PHRASE]
+  - "vacoped shoe"  [PHRASE]
+  - "desgarro talon de aquiles"  [PHRASE]
+  - "vacoped medium"  [PHRASE]
+  - "how to not tear your achilles"  [PHRASE]
+  - "vacocast com"  [PHRASE]
+  - "re rupture achilles"  [PHRASE]
+  - "how to know if i tore my achilles tendon"  [PHRASE]
+  - "aaron rodgers tears achilles slow motion"  [PHRASE]
+  - "what's worse torn acl or achilles"  [PHRASE]
+  - "vacocast achilles boot"  [PHRASE]
+  - "will a small tear in achilles tendon heal"  [PHRASE]
+  - "achilles vacoped boot"  [PHRASE]
+  - "dame tears achilles"  [PHRASE]
+  - "signs you tore your achilles"  [PHRASE]
+  - "how to walk in a vacoped boot"  [PHRASE]
+  - "how can you tell if achilles is torn"  [PHRASE]
+  - "what to do if you think you tore your achilles"  [PHRASE]
+  - "how to tear your achilles tendon"  [PHRASE]
+  - "how to tell if your achilles tendon is ruptured"  [PHRASE]
+  - "operacion del tendon de aquiles"  [PHRASE]
+  - "tendon de aquiles roto"  [PHRASE]
+  - "vacotalus"  [PHRASE]
+  - "oped medical"  [PHRASE]
+  - "bota ortopedica tendon de aquiles"  [PHRASE]
+  - "how achilles tendon ruptures"  [PHRASE]
+  - "tear achilles tendon treatment"  [PHRASE]
+  - "partial tear achilles tendon treatment"  [PHRASE]
+  - "rotura de tendon aquiles"  [PHRASE]
+  - "achilles heel tear treatment"  [PHRASE]
+  - "achilles micro tear treatment"  [PHRASE]
+  - "vaco ped boot"  [PHRASE]
+  - "high grade tear achilles tendon"  [PHRASE]
+  - "rotura de talon de aquiles recuperacion"  [PHRASE]
+  - "how to know your achilles is torn"  [PHRASE]
+  - "tore achilles"  [PHRASE]
+  - "vacopeds"  [PHRASE]
+  - "tearing achilles tendon recovery time"  [PHRASE]
+  - "splint for achilles"  [PHRASE]
+  - "non surgical achilles tendon recovery"  [PHRASE]
+  - "post operacion tendon de aquiles"  [PHRASE]
+  - "achilles tendon post op recovery"  [PHRASE]
+  - "kobe bryant tearing his achilles"  [PHRASE]
+  - "bledsoe achilles boot"  [PHRASE]
+  - "achillestear"  [PHRASE]
+  - "achilles partial rupture"  [PHRASE]
+  - "vacoped flat sole"  [PHRASE]
+  - "how do you know if you tore achilles tendon"  [PHRASE]
+  - "how bad does tearing your achilles hurt"  [PHRASE]
+  - "how to avoid tearing your achilles tendon"  [PHRASE]
+  - "achilles protocol non surgical"  [PHRASE]
+  - "nba achilles tears"  [PHRASE]
+  - "achilles tendon full rupture"  [PHRASE]
+  - "torn his achilles"  [PHRASE]
+  - "how do i know if i ruptured my achilles"  [PHRASE]
+  - "how to tell if you tore your achilles"  [PHRASE]
+  - "is my achilles about to rupture"  [PHRASE]
+  - "botte de marche tendon achille"  [PHRASE]
+  - "rotura del tendon de aquiles fisioterapia"  [PHRASE]
+  - "vacoped pump"  [PHRASE]
+  - "how to know if you ruptured your achilles"  [PHRASE]
+  - "vacoped alternative"  [PHRASE]
+  - "how to know if u tore your achilles"  [PHRASE]
+  - "vacocast pro achilles boot"  [PHRASE]
+  - "dame tore his achilles"  [PHRASE]
+  - "how to know if achilles is ruptured"  [PHRASE]
+  - "ferula para ruptura de tendon de aquiles"  [PHRASE]
+  - "what does it look like when you tear your achilles"  [PHRASE]
+  - "tear in achilles tendon recovery"  [PHRASE]
+  - "achilles tendon cast or boot"  [PHRASE]
+  - "achilles heel tear"  [PHRASE]
+  - "rehabilitacion cirugia tendon de aquiles"  [PHRASE]
+  - "micro tears achilles tendon treatment"  [PHRASE]
+  - "boot for achilles"  [PHRASE]
+  - "achilles complete tear"  [PHRASE]
+  - "achilles small tear"  [PHRASE]
+  - "tearing your achilles"  [PHRASE]
+  - "does it hurt to tear your achilles"  [PHRASE]
+  - "achilles tendon partial tear recovery"  [PHRASE]
+  - "alternative to walking boot"  [PHRASE]
+  - "achilles wedge insole for boot walker"  [PHRASE]
+  - "rotura tendon de aquiles ruido"  [PHRASE]
+  - "tore my achilles"  [PHRASE]
+  - "tendon rupture achilles"  [PHRASE]
+  - "how do you know if achilles is torn"  [PHRASE]
+  - "how to prevent tearing achilles tendon"  [PHRASE]
+  - "torn calf muscle or achilles tendon"  [PHRASE]
+  - "rotura de tendon de aquiles tratamiento"  [PHRASE]
+  - "vacoped boot uk"  [PHRASE]
+  - "where does it hurt if you tear your achilles tendon"  [PHRASE]
+  - "how to know if your achilles is torn"  [PHRASE]
+  - "terapia para rotura de tendon de aquiles"  [PHRASE]
+  - "kobe bryant ruptured his achilles tendon"  [PHRASE]
+  - "vacoped shower cover"  [PHRASE]
+  - "what happens when an achilles tendon ruptures"  [PHRASE]
+  - "oped vacoped"  [PHRASE]
+  - "ferula para tendon de aquiles"  [PHRASE]
+  - "rupture partielle du tendon d achille"  [PHRASE]
+  - "vacoped nachts"  [PHRASE]
+  - "achilles torn"  [PHRASE]
+  - "achilles re rupture"  [PHRASE]
+  - "rupture of achilles tendon treatment"  [PHRASE]
+  - "tears achilles"  [PHRASE]
+  - "why do achilles tendons rupture"  [PHRASE]
+  - "longitudinal tear achilles tendon"  [PHRASE]
+  - "how do you know you tore your achilles"  [PHRASE]
+  - "have i ruptured my achilles tendon"  [PHRASE]
+  - "slight tear in achilles tendon"  [PHRASE]
+
+═══════════════════════════════════════════════════════
+CONVERTED TO EXACT (71 keywords changed PHRASE → EXACT)
+These are product-category terms. As phrase negatives they blocked all
+searches containing the phrase (e.g. "night splint for achilles rupture").
+Exact match limits the block to the bare phrase only.
+═══════════════════════════════════════════════════════
+  ~ "what are night splints used for"  PHRASE → EXACT
+  ~ "adjustable splints"  PHRASE → EXACT
+  ~ "wearing a night splint"  PHRASE → EXACT
+  ~ "night splint pillow"  PHRASE → EXACT
+  ~ "kafo night splint"  PHRASE → EXACT
+  ~ "nite splint"  PHRASE → EXACT
+  ~ "azmed night splint"  PHRASE → EXACT
+  ~ "l1930 night splint"  PHRASE → EXACT
+  ~ "night splints near me"  PHRASE → EXACT
+  ~ "pfs night splint"  PHRASE → EXACT
+  ~ "night time splints"  PHRASE → EXACT
+  ~ "orthotic"  PHRASE → EXACT
+  ~ "tendons"  PHRASE → EXACT
+  ~ "tendon"  PHRASE → EXACT
+  ~ "resting splint"  PHRASE → EXACT
+  ~ "deroyal night splint"  PHRASE → EXACT
+  ~ "night leg splint"  PHRASE → EXACT
+  ~ "night splint socks"  PHRASE → EXACT
+  ~ "where to buy strassburg sock"  PHRASE → EXACT
+  ~ "equinus"  PHRASE → EXACT
+  ~ "night splinter"  PHRASE → EXACT
+  ~ "adjustable night splint"  PHRASE → EXACT
+  ~ "l4397 night splint"  PHRASE → EXACT
+  ~ "wear night splints"  PHRASE → EXACT
+  ~ "splint worn at night"  PHRASE → EXACT
+  ~ "posterior night splint amazon"  PHRASE → EXACT
+  ~ "strassburg splint"  PHRASE → EXACT
+  ~ "dorsiflexion night sock"  PHRASE → EXACT
+  ~ "resting afo"  PHRASE → EXACT
+  ~ "cvs night splint"  PHRASE → EXACT
+  ~ "dorsal spur treatment"  PHRASE → EXACT
+  ~ "night sock splint"  PHRASE → EXACT
+  ~ "night splint nhs"  PHRASE → EXACT
+  ~ "night splint boots"  PHRASE → EXACT
+  ~ "night fighter splint"  PHRASE → EXACT
+  ~ "pharmacy night splint"  PHRASE → EXACT
+  ~ "quanquer night splint"  PHRASE → EXACT
+  ~ "how does a night splint work"  PHRASE → EXACT
+  ~ "splint"  PHRASE → EXACT
+  ~ "orthosis"  PHRASE → EXACT
+  ~ "foot night splint"  PHRASE → EXACT
+  ~ "strassburg socks"  PHRASE → EXACT
+  ~ "darco night splint"  PHRASE → EXACT
+  ~ "posterior night splint"  PHRASE → EXACT
+  ~ "calcaneus"  PHRASE → EXACT
+  ~ "strassburg sock where to buy"  PHRASE → EXACT
+  ~ "strassburg night sock"  PHRASE → EXACT
+  ~ "strassburg sock regular"  PHRASE → EXACT
+  ~ "powerstep night splint"  PHRASE → EXACT
+  ~ "night splint sock"  PHRASE → EXACT
+  ~ "night resting splint"  PHRASE → EXACT
+  ~ "ovation hybrid night splint instructions"  PHRASE → EXACT
+  ~ "alphabrace night splint"  PHRASE → EXACT
+  ~ "night splint walgreens"  PHRASE → EXACT
+  ~ "where can i buy a night splint"  PHRASE → EXACT
+  ~ "vive hard night splint"  PHRASE → EXACT
+  ~ "night splint uk"  PHRASE → EXACT
+  ~ "how does night splint work"  PHRASE → EXACT
+  ~ "night afo"  PHRASE → EXACT
+  ~ "cascade night splints"  PHRASE → EXACT
+  ~ "coreline posterior adjustable night splint"  PHRASE → EXACT
+  ~ "sleep splint"  PHRASE → EXACT
+  ~ "exoform night splint"  PHRASE → EXACT
+  ~ "a night splint"  PHRASE → EXACT
+  ~ "calf night splint"  PHRASE → EXACT
+  ~ "heel night splint"  PHRASE → EXACT
+  ~ "night splint walmart"  PHRASE → EXACT
+  ~ "dorsiwedge night splint"  PHRASE → EXACT
+  ~ "night heel splints"  PHRASE → EXACT
+  ~ "mars wellness night splint"  PHRASE → EXACT
+  ~ "are night splints effective"  PHRASE → EXACT
