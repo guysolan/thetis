@@ -87,9 +87,9 @@ export function MobileNav({ lang = "en", currentPath = "/" }: MobileNavProps) {
         <NavAccordion lang={lang} />
 
         <SheetFooter className="flex flex-col gap-y-4 mt-4">
-          <div className="flex flex-row flex-wrap justify-between items-center gap-2 pt-2">
-            <LanguageSwitcher currentPath={currentPath} />
-            <CurrencySwitcher />
+          <div className="items-stretch gap-2 grid grid-cols-2 pt-2">
+            <LanguageSwitcher currentPath={currentPath} className="w-full" />
+            <CurrencySwitcher className="w-full" />
           </div>
 
           <SheetClose>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Globe } from "lucide-react";
+import { ChevronDown, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   normalizeStoredShopMarket,
@@ -73,14 +73,15 @@ export function CurrencySwitcher({ className }: CurrencySwitcherProps) {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 px-2.5 py-2 border border-gray-300 dark:border-neutral-600 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 font-medium text-gray-700 dark:text-neutral-200 text-sm transition-colors"
+        className="flex items-center gap-1.5 bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 px-2.5 py-2 border border-gray-300 dark:border-neutral-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 w-full min-w-[5.25rem] text-gray-700 dark:text-neutral-200 text-sm transition-colors"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
-        aria-label="Select shop region for product links and checkout"
+        title={currentLabel}
+        aria-label={`Shop region: ${currentLabel} (${country})`}
       >
-        <Globe size={16} className="opacity-80 shrink-0" aria-hidden />
-        <span className="flex-1 min-w-0 truncate whitespace-nowrap text-left">
-          {currentLabel}
+        <MapPin size={16} className="opacity-80 shrink-0" aria-hidden />
+        <span className="min-w-0 font-semibold tabular-nums text-left tracking-tight">
+          {country}
         </span>
         <ChevronDown
           size={16}
@@ -109,13 +110,18 @@ export function CurrencySwitcher({ className }: CurrencySwitcherProps) {
                   type="button"
                   onClick={() => select(opt.code)}
                   className={cn(
-                    "flex items-center gap-3 px-4 py-2 w-full text-sm text-left transition-colors",
+                    "flex items-center gap-2.5 px-4 py-2 w-full text-sm text-left transition-colors",
                     opt.code === country
                       ? "bg-primary text-white"
                       : "text-gray-700 hover:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-800",
                   )}
                 >
-                  <span>{opt.label}</span>
+                  <span className="w-7 font-semibold tabular-nums shrink-0">
+                    {opt.code}
+                  </span>
+                  <span className="flex-1 min-w-0 text-left truncate">
+                    {opt.label}
+                  </span>
                   {opt.code === country
                     ? (
                       <svg

@@ -19,22 +19,20 @@ const currentPath = Astro.url.pathname;
     class="top-0 z-[40] fixed flex bg-background m-auto my-auto px-2 lg:px-8 py-4 border-gray-300 border-b w-screen overflow-visible item-center"
 >
     <div
-        class="hidden lg:grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-3 w-full text-base"
+        class="hidden items-center gap-x-3 lg:grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] w-full text-base"
     >
         <div class="flex justify-start items-center min-w-0">
             <Thetis lang={lang} />
         </div>
-        <div
-            class="flex justify-center items-stretch min-w-0 overflow-visible"
-        >
+        <div class="flex justify-center items-stretch min-w-0 overflow-visible">
             <DesktopNav client:load lang={lang} />
         </div>
         <div class="flex justify-end items-center gap-x-1.5 min-w-0">
-            <div class="shrink-0">
+            <div class="w-24 shrink-0">
                 <LanguageSwitcher />
             </div>
-            <div class="shrink-0">
-                <CurrencySwitcher client:load className="w-[124px]" />
+            <div class="w-24 shrink-0">
+                <CurrencySwitcher client:load className="w-full" />
             </div>
             <div class="shrink-0">
                 <CartIcon client:load className="justify-center px-2" />
