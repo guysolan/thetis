@@ -58,6 +58,38 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       "Manufacturer / IFU: Enovis Aircast AirSelect Elite. Re-verify price and SKU with your supplier.",
   },
   {
+    id: "aircast-wedges",
+    accessoryTo: ["aircast-airselect-boot"],
+    conditions: ["achilles-rupture"],
+    priority: "essential",
+    name: "Aircast Wedges",
+    category: "Boot accessories",
+    keyBenefit:
+      "Replacement heel wedges help maintain the plantarflexion setup in your Aircast boot as directed by your clinician.",
+    tags: ["boots", "accessory", "wedge", "protection"],
+    imagePath: "/images/catalogue-products/aircast-wedges.png",
+    description:
+      "Replacement heel wedge inserts for Aircast-style CAM boots. Use only the wedge schedule your care team gave you.",
+    features: [
+      "Compatible wedge replacement for Aircast-style walkers",
+      "Supports staged angle reduction protocols",
+      "Useful when original wedges are worn, lost, or need replacing",
+    ],
+    locations: {
+      US: {
+        price: "varies by pack and retailer",
+        url: "https://www.donjoystore.com/aircast-heel-wedge",
+        dub: "https://dub.sh/8DGUhql",
+      },
+      GB: {
+        price: "varies by pack and retailer",
+        url: "https://www.amazon.co.uk/s?k=aircast+heel+wedge",
+      },
+    },
+    notes:
+      "Confirm model compatibility (e.g. AirSelect / compatible CAM boot) before purchase.",
+  },
+  {
     id: "vacoped-achilles-boot",
     alternativeTo: ["aircast-airselect-boot"],
     conditions: ["achilles-rupture"],

@@ -2,6 +2,15 @@ import type { Review } from "../types";
 
 export const patients: Review[] = [
   {
+    date: "2026-04-27",
+    stars: 5,
+    name: "Tietse",
+    country: "AU",
+    is_pinned: true,
+    title: "Excellent service and delivery",
+    body: "Excellent service and delivery. Loved the recovery tips. Love how this company has attention to detail, and looks after you.",
+  },
+  {
     date: "2025-02-10",
     stars: 5,
     name: "Anas Shuk",
