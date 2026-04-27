@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import getUnicodeFlagIcon from "country-flag-icons/unicode";
+import * as FlagIcons from "country-flag-icons/react/3x2";
 import { CheckCircle2, Star } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader } from "@thetis/ui/card";
 import {
@@ -17,6 +17,21 @@ import { Badge } from "@thetis/ui/badge";
 import { patients } from "./content/patients";
 
 const pinnedReviews = patients.filter((review) => review.is_pinned);
+
+function CountryFlag({ code }: { code: string }) {
+  const Flag = FlagIcons[code as keyof typeof FlagIcons] as
+    | React.ComponentType<React.SVGProps<SVGSVGElement>>
+    | undefined;
+
+  if (!Flag) return <span className="font-semibold text-[11px]">{code}</span>;
+
+  return (
+    <Flag
+      className="rounded-[2px] w-4 h-3"
+      aria-label={`${code} flag`}
+    />
+  );
+}
 
 // Star component for full stars
 const FullStar = ({ size = 20 }: { size?: number }) => (
@@ -136,7 +151,7 @@ export default function EnhancedReviewCarousel() {
                       </div>
                       <div className="flex items-center gap-2 mt-0.5">
                         {review.country && (
-                          <span className="text-lg">{getUnicodeFlagIcon(review.country)}</span>
+                          <CountryFlag code={review.country} />
                         )}
                         <span className="text-neutral-500 text-xs">
                           {review.date

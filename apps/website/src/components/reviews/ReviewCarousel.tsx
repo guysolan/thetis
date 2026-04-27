@@ -1,5 +1,5 @@
 import * as React from "react";
-import getUnicodeFlagIcon from "country-flag-icons/unicode";
+import * as FlagIcons from "country-flag-icons/react/3x2";
 import StarIcon from "@thetis/ui/star";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@thetis/ui/card";
 import {
@@ -12,6 +12,21 @@ import {
 } from "@thetis/ui/carousel";
 
 import reviews from "./reviews.json";
+
+function CountryFlag({ code }: { code: string }) {
+  const Flag = FlagIcons[code as keyof typeof FlagIcons] as
+    | React.ComponentType<React.SVGProps<SVGSVGElement>>
+    | undefined;
+
+  if (!Flag) return <span className="font-semibold text-[11px]">{code}</span>;
+
+  return (
+    <Flag
+      className="inline-block rounded-[2px] w-4 h-3 align-middle"
+      aria-label={`${code} flag`}
+    />
+  );
+}
 
 export default function ReviewCarousel() {
   return (
@@ -47,7 +62,7 @@ export default function ReviewCarousel() {
                     <CardFooter className="bottom-0 flex flex-row justify-center items-center mt-auto text-center">
                       <b className="space-x-2 px-12 w-full text-neutral-800 text-center">
                         <span className="pr-1">{review.name}</span>
-                        {getUnicodeFlagIcon(review.country)}
+                        <CountryFlag code={review.country} />
                       </b>
                     </CardFooter>
                   </Card>
