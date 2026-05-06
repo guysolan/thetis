@@ -5,8 +5,8 @@ import pfAnatomyTendonCartoon from "@/assets/pf-anatomy-tendon-cartoon.png";
 import pfAnatomyLigamentCartoon from "@/assets/pf-anatomy-ligament-cartoon.png";
 import pfAnatomyKeyStructures from "@/assets/pf-anatomy-key-structures.png";
 import pfAnatomyCalfAchillesAction from "@/assets/pf-anatomy-calf-achilles-action.png";
+import pfAnatomyAchillesWrapPaintbrushBrickAnalogy from "@/assets/pf-anatomy-achilles-wrap-paintbrush-brick-analogy.png";
 import pfAnatomyHammockAnalogy from "@/assets/pf-anatomy-hammock-analogy.png";
-import pfAnatomyPlantarFasciaRope from "@/assets/pf-anatomy-plantar-fascia-rope.png";
 import pfAnatomyStepladderAnalogy from "@/assets/pf-anatomy-stepladder-analogy.png";
 
 export const metadata = {
@@ -122,21 +122,16 @@ export const content: SectionContent = {
         {
           type: "text",
           content:
-            "To do this job, the Achilles must be fixed very firmly to the heel bone. If it were only attached to the top of the bone, it would not hold.",
-        },
-        {
-          type: "text",
-          content:
-            "Instead, Achilles fibres broaden and wrap around the heel — attached firmly to the back of the bone and continuing to the underside.",
+            "To achieve this the Achilles tendon has to be stuck extremely tightly to the heel bone. If it was \"glued to the top of the bone\" it would not hold. Nature is more clever than that, and so the fibres of the Achilles tendon broaden and it wraps around the whole heel bone, attached firmly to the back of the bone, and then to the underneath surface of the bone too.",
         },
       ],
     },
     {
       type: "image",
-      src: pfAnatomyHammockAnalogy,
-      alt: "Analogy image showing the heel bone supported like a hammock by tendon fibres.",
+      src: pfAnatomyAchillesWrapPaintbrushBrickAnalogy,
+      alt: "Side by side: paintbrush bristles with red lines wrapping around a brick corner, compared with foot bones showing Achilles tendon wrapping the heel.",
       caption:
-        "Hammock analogy: Achilles fibres wrap around the heel and continue under the foot.",
+        "Same idea as the text above: fibres need to wrap around a corner, not just sit on top.",
     },
     {
       type: "section",
@@ -151,10 +146,10 @@ export const content: SectionContent = {
     },
     {
       type: "image",
-      src: pfAnatomyPlantarFasciaRope,
-      alt: "Visual analogy linking plantar fascia function to a rope supporting structure.",
+      src: pfAnatomyHammockAnalogy,
+      alt: "Tintin-style foot skeleton on tiptoe with plantar fascia webbing, Achilles rope, hammock under the heel, and short labels explaining each part.",
       caption:
-        "The plantar fascia functions like a tensioned rope helping support the arch.",
+        "Hammock analogy: Achilles fibres wrap around the heel and continue under the foot.",
     },
     {
       type: "section",
