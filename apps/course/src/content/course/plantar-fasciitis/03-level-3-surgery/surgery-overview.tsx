@@ -1,6 +1,6 @@
 import type { SectionContent } from "@/components/course/types";
 import pfCalfLengtheningLevels from "@/assets/pf-calf-lengthening-levels.png";
-import pfSilfverskioldTestComparison from "@/assets/pf-silfverskiold-test-comparison.png";
+import pfKneeExtendedVsFlexedAnkleMotion from "@/assets/pf-knee-extended-vs-flexed-ankle-motion-tintin-style-v10-two-arrows-each-top-panel.png";
 
 export const metadata = {
   slug: "surgery-overview",
@@ -63,7 +63,7 @@ export const content: SectionContent = {
     },
     {
       type: "image",
-      src: pfSilfverskioldTestComparison,
+      src: pfKneeExtendedVsFlexedAnkleMotion,
       alt: "Silfverskiold-style comparison showing dorsiflexion changes with knee position and calf tightness.",
       caption:
         "Silfverskiold assessment helps identify isolated gastrocnemius tightness.",

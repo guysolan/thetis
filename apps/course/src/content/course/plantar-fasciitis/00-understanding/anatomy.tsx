@@ -2,7 +2,6 @@ import type { SectionContent } from "@/components/course/types";
 import pfAnatomySystemsOverview from "@/assets/pf-anatomy-systems-overview.png";
 import pfAnatomyTendonPlantarFasciaDiagram from "@/assets/pf-anatomy-tendon-plantar-fascia-diagram.png";
 import pfAnatomyTendonCartoon from "@/assets/pf-anatomy-tendon-cartoon.png";
-import pfAnatomyLigamentCartoon from "@/assets/pf-anatomy-ligament-cartoon.png";
 import pfAnatomyKeyStructures from "@/assets/pf-anatomy-key-structures.png";
 import pfAnatomyCalfAchillesAction from "@/assets/pf-anatomy-calf-achilles-action.png";
 import pfAnatomyAchillesWrapPaintbrushBrickAnalogy from "@/assets/pf-anatomy-achilles-wrap-paintbrush-brick-analogy.png";
@@ -60,12 +59,6 @@ export const content: SectionContent = {
       src: pfAnatomyTendonCartoon,
       alt: "Simple diagram comparing a tendon to a rope linking muscle to bone.",
       caption: "Tendon concept: a rope-like link from muscle to bone.",
-    },
-    {
-      type: "image",
-      src: pfAnatomyLigamentCartoon,
-      alt: "Simple diagram showing a ligament joining two bones across a joint.",
-      caption: "Ligament concept: a flexible restraint linking bone to bone.",
     },
     {
       type: "heading",
