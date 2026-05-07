@@ -31,7 +31,7 @@ export const content: SectionContent = {
         {
           type: "image",
           src: pfNightSplintOptions,
-          alt: "Examples of plantar fasciitis night splint options.",
+          alt: "Side-by-side comparison of a plantar sock and a dorsal boot for plantar fasciitis support.",
           caption:
             "Evidence is mixed, but night splints can still be worth a practical trial.",
         },

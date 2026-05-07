@@ -326,6 +326,32 @@ function ImageBlockComponent({
   );
 }
 
+function ImageRowBlockComponent({
+  images,
+  caption,
+}: {
+  images: { src: string; alt: string }[];
+  caption?: string;
+}) {
+  return (
+    <figure className="my-8">
+      <div className="gap-4 grid grid-cols-1 md:grid-cols-2">
+        {images.map((image, i) => (
+          <img
+            key={i}
+            src={image.src}
+            alt={image.alt}
+            className="shadow-md rounded-xl w-full h-auto"
+          />
+        ))}
+      </div>
+      {caption && (
+        <figcaption className="mt-3 text-muted-foreground text-sm text-center">{caption}</figcaption>
+      )}
+    </figure>
+  );
+}
+
 function ProductImageBlockComponent({
   src,
   alt,
@@ -487,6 +513,8 @@ function ContentBlockRenderer({ block }: { block: ContentBlock }) {
       return <SectionBlockComponent title={block.title} content={block.content} />;
     case "image":
       return <ImageBlockComponent src={block.src} alt={block.alt} caption={block.caption} />;
+    case "image-row":
+      return <ImageRowBlockComponent images={block.images} caption={block.caption} />;
     case "illustration-prompt":
       return (
         <IllustrationPromptBlockComponent

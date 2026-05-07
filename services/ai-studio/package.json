@@ -9,6 +9,7 @@
     "review": "bun src/review-image.ts",
     "review-batch": "bun src/review-batch.ts",
     "fix-image": "bun src/fix-image.ts",
+    "split-two-page": "bun src/split-two-page-image.ts",
     "upscale-image": "bun src/upscale-image.ts",
     "restyle-image": "bun src/restyle-image.ts",
     "typecheck": "tsc --noEmit"

@@ -1,5 +1,6 @@
 import type { SectionContent } from "@/components/course/types";
-import pfStretchingExercisesGuide from "@/assets/pf-stretching-exercises-guide.png";
+import pfStretchingExercisesGuidePage1 from "@/assets/pf-stretching-exercises-guide-v26-page-1.png";
+import pfStretchingExercisesGuidePage2 from "@/assets/pf-stretching-exercises-guide-v26-page-2.png";
 
 export const metadata = {
   slug: "stretching-programme",
@@ -24,9 +25,17 @@ export const content: SectionContent = {
         "You may already have tried some stretches. Many patients are given complicated handouts and then stop because they do not feel improvement quickly.",
     },
     {
-      type: "image",
-      src: pfStretchingExercisesGuide,
-      alt: "Two-page plantar fasciitis stretching exercise sheet with step-by-step positions.",
+      type: "image-row",
+      images: [
+        {
+          src: pfStretchingExercisesGuidePage1,
+          alt: "Plantar fasciitis stretching exercise sheet, page 1.",
+        },
+        {
+          src: pfStretchingExercisesGuidePage2,
+          alt: "Plantar fasciitis stretching exercise sheet, page 2.",
+        },
+      ],
       caption:
         "Simple daily stretches are more effective than complicated plans done occasionally.",
     },
