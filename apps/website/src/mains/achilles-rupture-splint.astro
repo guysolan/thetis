@@ -1328,7 +1328,7 @@ const currentContent = content[lang as keyof typeof content] || content.en;
         <!-- Lazy load YouTube iframe -->
         <div class="relative mx-auto mt-8 w-full">
             <div
-                id="youtube-placeholder"
+                id="youtube-lazy-mount"
                 class="flex justify-center items-center bg-gray-200 shadow-lg mx-auto rounded-lg w-full max-w-[300px] md:max-w-[50vw] lg:max-w-[70vw] aspect-video cursor-pointer"
                 data-youtube-id="T09Xnwaqbm0"
             >
@@ -1395,13 +1395,13 @@ const currentContent = content[lang as keyof typeof content] || content.en;
             });
         });
 
-        // Lazy load YouTube iframe when user clicks on placeholder
+        // Lazy load YouTube iframe when user clicks the preview
         document.addEventListener("DOMContentLoaded", () => {
-            const placeholder = document.getElementById("youtube-placeholder");
-            if (placeholder) {
-                placeholder.addEventListener("click", () => {
+            const youtubeLazyMount = document.getElementById("youtube-lazy-mount");
+            if (youtubeLazyMount) {
+                youtubeLazyMount.addEventListener("click", () => {
                     const youtubeId =
-                        placeholder.getAttribute("data-youtube-id");
+                        youtubeLazyMount.getAttribute("data-youtube-id");
                     const iframe = document.createElement("iframe");
                     iframe.className =
                         "shadow-lg mx-auto rounded-lg w-full max-w-[300px] md:hover:max-w-[60vw] md:max-w-[50vw] lg:hover:max-w-[70vw] hover:max-w-[80vw] aspect-video transition-all duration-300 cursor-pointer";
@@ -1411,7 +1411,7 @@ const currentContent = content[lang as keyof typeof content] || content.en;
                         "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
                     iframe.allowFullscreen = true;
 
-                    placeholder.parentNode?.replaceChild(iframe, placeholder);
+                    youtubeLazyMount.parentNode?.replaceChild(iframe, youtubeLazyMount);
                 });
             }
         });

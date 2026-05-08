@@ -16,35 +16,43 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header
-    class="top-0 z-[40] fixed flex bg-background m-auto my-auto px-2 lg:px-8 py-4 border-gray-300 border-b w-screen overflow-visible item-center"
+    class="top-0 z-[40] fixed bg-background/80 supports-[backdrop-filter]:bg-background/65 backdrop-blur-xl backdrop-saturate-150 border-neutral-200/80 dark:border-white/10 border-b w-full"
 >
-    <div
-        class="hidden items-center gap-x-3 lg:grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] w-full text-base"
-    >
-        <div class="flex justify-start items-center min-w-0">
-            <Thetis lang={lang} />
-        </div>
-        <div class="flex justify-center items-stretch min-w-0 overflow-visible">
-            <DesktopNav client:load lang={lang} />
-        </div>
-        <div class="flex justify-end items-center gap-x-1.5 min-w-0">
-            <div class="w-24 shrink-0">
-                <LanguageSwitcher />
+    <div class="flex items-stretch mx-auto px-4 lg:px-6 w-full max-w-7xl">
+        <!-- Desktop -->
+        <div
+            class="hidden items-center gap-x-4 lg:grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] w-full min-w-0 h-14"
+        >
+            <div class="flex justify-start items-center min-w-0">
+                <Thetis lang={lang} />
             </div>
-            <div class="w-24 shrink-0">
-                <CurrencySwitcher client:load className="w-full" />
+            <div
+                class="flex justify-center items-center min-w-0 overflow-visible"
+            >
+                <DesktopNav client:load lang={lang} />
             </div>
-            <div class="shrink-0">
-                <CartIcon client:load className="justify-center px-2" />
+            <div class="flex justify-end items-center gap-x-2 min-w-0">
+                <div class="w-24 shrink-0">
+                    <LanguageSwitcher />
+                </div>
+                <div class="w-24 shrink-0">
+                    <CurrencySwitcher client:load className="w-full" />
+                </div>
+                <div class="shrink-0">
+                    <CartIcon client:load className="justify-center px-2" />
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="lg:hidden flex justify-between items-center w-full">
-        <Thetis lang={lang} />
-        <div class="flex items-center gap-x-2">
-            <CartIcon client:load />
-            <MobileNav client:load lang={lang} currentPath={currentPath} />
+        <!-- Mobile -->
+        <div
+            class="lg:hidden flex justify-between items-center gap-3 w-full h-14"
+        >
+            <Thetis lang={lang} />
+            <div class="flex items-center gap-x-2 shrink-0">
+                <CartIcon client:load />
+                <MobileNav client:load lang={lang} currentPath={currentPath} />
+            </div>
         </div>
     </div>
 </header>

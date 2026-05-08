@@ -17,7 +17,7 @@ const content = {
         contactNameLabel: "Contact Name",
         businessEmailLabel: "Business Email",
         partnershipTypeLabel: "Partnership Type",
-        selectPlaceholder: "Select partnership type",
+        emptyPartnershipOption: "Select partnership type",
         distributorOption: "Distributor",
         clinicOption: "Healthcare Provider/Clinic",
         clinicianOption: "Individual Clinician",
@@ -32,7 +32,7 @@ const content = {
         contactNameLabel: "Kontaktname",
         businessEmailLabel: "Geschäfts-E-Mail",
         partnershipTypeLabel: "Partnerschaftstyp",
-        selectPlaceholder: "Partnerschaftstyp auswählen",
+        emptyPartnershipOption: "Partnerschaftstyp auswählen",
         distributorOption: "Händler",
         clinicOption: "Gesundheitsdienstleister/Klinik",
         clinicianOption: "Einzelner Kliniker",
@@ -47,7 +47,7 @@ const content = {
         contactNameLabel: "Nom du contact",
         businessEmailLabel: "E-mail professionnel",
         partnershipTypeLabel: "Type de partenariat",
-        selectPlaceholder: "Sélectionner le type de partenariat",
+        emptyPartnershipOption: "Sélectionner le type de partenariat",
         distributorOption: "Distributeur",
         clinicOption: "Prestataire de soins/Clinique",
         clinicianOption: "Clinicien individuel",
@@ -62,7 +62,7 @@ const content = {
         contactNameLabel: "Nombre de contacto",
         businessEmailLabel: "Correo electrónico comercial",
         partnershipTypeLabel: "Tipo de asociación",
-        selectPlaceholder: "Seleccionar tipo de asociación",
+        emptyPartnershipOption: "Seleccionar tipo de asociación",
         distributorOption: "Distribuidor",
         clinicOption: "Proveedor de atención médica/Clínica",
         clinicianOption: "Clínico individual",
@@ -77,7 +77,7 @@ const content = {
         contactNameLabel: "Nome del contatto",
         businessEmailLabel: "Email aziendale",
         partnershipTypeLabel: "Tipo di partnership",
-        selectPlaceholder: "Seleziona tipo di partnership",
+        emptyPartnershipOption: "Seleziona tipo di partnership",
         distributorOption: "Distributore",
         clinicOption: "Fornitore di assistenza sanitaria/Clinica",
         clinicianOption: "Clinico individuale",
@@ -128,7 +128,7 @@ const currentContent = content[lang as keyof typeof content];
                     name="partnerType"
                     class={`${inputStyle} w-full rounded-lg bg-white/90`}
                 >
-                    <option value="">{currentContent.selectPlaceholder}</option>
+                    <option value="">{currentContent.emptyPartnershipOption}</option>
                     <option value="distributor"
                         >{currentContent.distributorOption}</option
                     >

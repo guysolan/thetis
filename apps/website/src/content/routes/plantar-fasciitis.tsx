@@ -1,6 +1,10 @@
 import { BookOpen, Calendar, HelpCircle } from "lucide-react";
 import type { BaseRoute } from "./types";
 import { CONDITION_LEARN_HUB_DESCRIPTION } from "../condition-hub-copy";
+import {
+    COMING_SOON_ROUTE_DESCRIPTION,
+    PLANTAR_STAGE_1_ROUTE_DESCRIPTION,
+} from "./coming-soon-copy";
 
 const pfFaq = (
     slug: string,
@@ -9,13 +13,7 @@ const pfFaq = (
     conditionId: "plantar-fasciitis",
     slug: `FAQs/${slug}`,
     title,
-    description: {
-        en: "Placeholder — content coming soon.",
-        de: "Placeholder — content coming soon.",
-        fr: "Placeholder — content coming soon.",
-        es: "Placeholder — content coming soon.",
-        it: "Placeholder — content coming soon.",
-    },
+    description: COMING_SOON_ROUTE_DESCRIPTION,
     slugTranslations: {
         en: `FAQs/${slug}`,
         de: `FAQs/${slug}`,
@@ -50,87 +48,57 @@ export const plantarFasciitisGuideRoutes: BaseRoute[] = [
     ph(
         "stage-1",
         {
-            en: "Plantar fasciitis — Stage 1: Acute phase (placeholder)",
-            de: "Plantar fasciitis — Stage 1: Acute phase (placeholder)",
-            fr: "Plantar fasciitis — Stage 1: Acute phase (placeholder)",
-            es: "Plantar fasciitis — Stage 1: Acute phase (placeholder)",
-            it: "Plantar fasciitis — Stage 1: Acute phase (placeholder)",
+            en: "Plantar fasciitis — Stage 1: Foundation",
+            de: "Plantar fasciitis — Stage 1: Foundation",
+            fr: "Plantar fasciitis — Stage 1: Foundation",
+            es: "Plantar fasciitis — Stage 1: Foundation",
+            it: "Plantar fasciitis — Stage 1: Foundation",
         },
-        {
-            en: "Placeholder — content coming soon.",
-            de: "Placeholder — content coming soon.",
-            fr: "Placeholder — content coming soon.",
-            es: "Placeholder — content coming soon.",
-            it: "Placeholder — content coming soon.",
-        },
+        PLANTAR_STAGE_1_ROUTE_DESCRIPTION,
     ),
     ph(
         "stage-2",
         {
-            en: "Plantar fasciitis — Stage 2: Subacute / loading (placeholder)",
-            de: "Plantar fasciitis — Stage 2: Subacute / loading (placeholder)",
-            fr: "Plantar fasciitis — Stage 2: Subacute / loading (placeholder)",
-            es: "Plantar fasciitis — Stage 2: Subacute / loading (placeholder)",
-            it: "Plantar fasciitis — Stage 2: Subacute / loading (placeholder)",
+            en: "Plantar fasciitis — Stage 2: Subacute / loading",
+            de: "Plantar fasciitis — Stage 2: Subacute / loading",
+            fr: "Plantar fasciitis — Stage 2: Subacute / loading",
+            es: "Plantar fasciitis — Stage 2: Subacute / loading",
+            it: "Plantar fasciitis — Stage 2: Subacute / loading",
         },
-        {
-            en: "Placeholder — content coming soon.",
-            de: "Placeholder — content coming soon.",
-            fr: "Placeholder — content coming soon.",
-            es: "Placeholder — content coming soon.",
-            it: "Placeholder — content coming soon.",
-        },
+        COMING_SOON_ROUTE_DESCRIPTION,
     ),
     ph(
         "stage-3",
         {
-            en: "Plantar fasciitis — Stage 3: Strengthening (placeholder)",
-            de: "Plantar fasciitis — Stage 3: Strengthening (placeholder)",
-            fr: "Plantar fasciitis — Stage 3: Strengthening (placeholder)",
-            es: "Plantar fasciitis — Stage 3: Strengthening (placeholder)",
-            it: "Plantar fasciitis — Stage 3: Strengthening (placeholder)",
+            en: "Plantar fasciitis — Stage 3: Strengthening",
+            de: "Plantar fasciitis — Stage 3: Strengthening",
+            fr: "Plantar fasciitis — Stage 3: Strengthening",
+            es: "Plantar fasciitis — Stage 3: Strengthening",
+            it: "Plantar fasciitis — Stage 3: Strengthening",
         },
-        {
-            en: "Placeholder — content coming soon.",
-            de: "Placeholder — content coming soon.",
-            fr: "Placeholder — content coming soon.",
-            es: "Placeholder — content coming soon.",
-            it: "Placeholder — content coming soon.",
-        },
+        COMING_SOON_ROUTE_DESCRIPTION,
     ),
     ph(
         "stage-4",
         {
-            en: "Plantar fasciitis — Stage 4: Return to activity (placeholder)",
-            de: "Plantar fasciitis — Stage 4: Return to activity (placeholder)",
-            fr: "Plantar fasciitis — Stage 4: Return to activity (placeholder)",
-            es: "Plantar fasciitis — Stage 4: Return to activity (placeholder)",
-            it: "Plantar fasciitis — Stage 4: Return to activity (placeholder)",
+            en: "Plantar fasciitis — Stage 4: Return to activity",
+            de: "Plantar fasciitis — Stage 4: Return to activity",
+            fr: "Plantar fasciitis — Stage 4: Return to activity",
+            es: "Plantar fasciitis — Stage 4: Return to activity",
+            it: "Plantar fasciitis — Stage 4: Return to activity",
         },
-        {
-            en: "Placeholder — content coming soon.",
-            de: "Placeholder — content coming soon.",
-            fr: "Placeholder — content coming soon.",
-            es: "Placeholder — content coming soon.",
-            it: "Placeholder — content coming soon.",
-        },
+        COMING_SOON_ROUTE_DESCRIPTION,
     ),
     ph(
         "stage-5",
         {
-            en: "Plantar fasciitis — Stage 5: Maintenance & long-term (placeholder)",
-            de: "Plantar fasciitis — Stage 5: Maintenance & long-term (placeholder)",
-            fr: "Plantar fasciitis — Stage 5: Maintenance & long-term (placeholder)",
-            es: "Plantar fasciitis — Stage 5: Maintenance & long-term (placeholder)",
-            it: "Plantar fasciitis — Stage 5: Maintenance & long-term (placeholder)",
+            en: "Plantar fasciitis — Stage 5: Maintenance & long-term",
+            de: "Plantar fasciitis — Stage 5: Maintenance & long-term",
+            fr: "Plantar fasciitis — Stage 5: Maintenance & long-term",
+            es: "Plantar fasciitis — Stage 5: Maintenance & long-term",
+            it: "Plantar fasciitis — Stage 5: Maintenance & long-term",
         },
-        {
-            en: "Placeholder — content coming soon.",
-            de: "Placeholder — content coming soon.",
-            fr: "Placeholder — content coming soon.",
-            es: "Placeholder — content coming soon.",
-            it: "Placeholder — content coming soon.",
-        },
+        COMING_SOON_ROUTE_DESCRIPTION,
     ),
 ];
 
@@ -157,35 +125,35 @@ export const plantarFasciitisGuideHubNavRoute: BaseRoute = {
     icon: <BookOpen />,
 };
 
-/** FAQ / article routes — plantar fasciitis (4 placeholders) */
+/** FAQ routes — plantar fasciitis */
 export const plantarFasciitisArticleRoutes: BaseRoute[] = [
     pfFaq("plantar-fasciitis-overview", {
-        en: "Plantar fasciitis — overview (placeholder)",
-        de: "Plantar fasciitis — overview (placeholder)",
-        fr: "Plantar fasciitis — overview (placeholder)",
-        es: "Plantar fasciitis — overview (placeholder)",
-        it: "Plantar fasciitis — overview (placeholder)",
+        en: "Plantar fasciitis — overview",
+        de: "Plantar fasciitis — overview",
+        fr: "Plantar fasciitis — overview",
+        es: "Plantar fasciitis — overview",
+        it: "Plantar fasciitis — overview",
     }),
     pfFaq("plantar-fasciitis-diagnosis-and-symptoms", {
-        en: "Plantar fasciitis — diagnosis & symptoms (placeholder)",
-        de: "Plantar fasciitis — diagnosis & symptoms (placeholder)",
-        fr: "Plantar fasciitis — diagnosis & symptoms (placeholder)",
-        es: "Plantar fasciitis — diagnosis & symptoms (placeholder)",
-        it: "Plantar fasciitis — diagnosis & symptoms (placeholder)",
+        en: "Plantar fasciitis — diagnosis & symptoms",
+        de: "Plantar fasciitis — diagnosis & symptoms",
+        fr: "Plantar fasciitis — diagnosis & symptoms",
+        es: "Plantar fasciitis — diagnosis & symptoms",
+        it: "Plantar fasciitis — diagnosis & symptoms",
     }),
     pfFaq("plantar-fasciitis-treatment-and-footwear", {
-        en: "Plantar fasciitis — treatment & footwear (placeholder)",
-        de: "Plantar fasciitis — treatment & footwear (placeholder)",
-        fr: "Plantar fasciitis — treatment & footwear (placeholder)",
-        es: "Plantar fasciitis — treatment & footwear (placeholder)",
-        it: "Plantar fasciitis — treatment & footwear (placeholder)",
+        en: "Plantar fasciitis — treatment & footwear",
+        de: "Plantar fasciitis — treatment & footwear",
+        fr: "Plantar fasciitis — treatment & footwear",
+        es: "Plantar fasciitis — treatment & footwear",
+        it: "Plantar fasciitis — treatment & footwear",
     }),
     pfFaq("plantar-fasciitis-exercises-and-return", {
-        en: "Plantar fasciitis — exercises & return to activity (placeholder)",
-        de: "Plantar fasciitis — exercises & return to activity (placeholder)",
-        fr: "Plantar fasciitis — exercises & return to activity (placeholder)",
-        es: "Plantar fasciitis — exercises & return to activity (placeholder)",
-        it: "Plantar fasciitis — exercises & return to activity (placeholder)",
+        en: "Plantar fasciitis — exercises & return to activity",
+        de: "Plantar fasciitis — exercises & return to activity",
+        fr: "Plantar fasciitis — exercises & return to activity",
+        es: "Plantar fasciitis — exercises & return to activity",
+        it: "Plantar fasciitis — exercises & return to activity",
     }),
 ];
 

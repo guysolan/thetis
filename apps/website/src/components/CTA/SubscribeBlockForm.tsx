@@ -16,8 +16,8 @@ const translations = {
     subscribed: "You're subscribed! Check your inbox.",
     title: "Get recovery tips by email & SMS",
     subtitle: "Free guidance. Unsubscribe anytime.",
-    emailPlaceholder: "Email",
-    phonePlaceholder: "Phone (optional)",
+    emailHint: "Email",
+    phoneHint: "Phone (optional)",
     subscribe: "Subscribe",
     errorRequired: "Please enter your email address",
     errorGeneric: "Something went wrong. Please try again.",
@@ -26,8 +26,8 @@ const translations = {
     subscribed: "Sie sind angemeldet! Überprüfen Sie Ihren Posteingang.",
     title: "Erhalten Sie Genesungstipps per E-Mail & SMS",
     subtitle: "Kostenlose Anleitung. Jederzeit abmelden.",
-    emailPlaceholder: "E-Mail",
-    phonePlaceholder: "Telefon (optional)",
+    emailHint: "E-Mail",
+    phoneHint: "Telefon (optional)",
     subscribe: "Anmelden",
     errorRequired: "Bitte geben Sie Ihre E-Mail-Adresse ein",
     errorGeneric: "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.",
@@ -36,8 +36,8 @@ const translations = {
     subscribed: "Vous êtes inscrit ! Vérifiez votre boîte de réception.",
     title: "Recevez des conseils de récupération par email & SMS",
     subtitle: "Conseils gratuits. Désabonnez-vous à tout moment.",
-    emailPlaceholder: "Email",
-    phonePlaceholder: "Téléphone (optionnel)",
+    emailHint: "Email",
+    phoneHint: "Téléphone (optionnel)",
     subscribe: "S'inscrire",
     errorRequired: "Veuillez entrer votre adresse email",
     errorGeneric: "Une erreur s'est produite. Veuillez réessayer.",
@@ -46,8 +46,8 @@ const translations = {
     subscribed: "¡Estás suscrito! Revisa tu bandeja de entrada.",
     title: "Recibe consejos de recuperación por email y SMS",
     subtitle: "Orientación gratuita. Cancela cuando quieras.",
-    emailPlaceholder: "Email",
-    phonePlaceholder: "Teléfono (opcional)",
+    emailHint: "Email",
+    phoneHint: "Teléfono (opcional)",
     subscribe: "Suscribirse",
     errorRequired: "Por favor ingresa tu dirección de email",
     errorGeneric: "Algo salió mal. Por favor intenta de nuevo.",
@@ -56,8 +56,8 @@ const translations = {
     subscribed: "Sei iscritto! Controlla la tua casella di posta.",
     title: "Ricevi consigli di recupero via email e SMS",
     subtitle: "Guida gratuita. Annulla l'iscrizione in qualsiasi momento.",
-    emailPlaceholder: "Email",
-    phonePlaceholder: "Telefono (opzionale)",
+    emailHint: "Email",
+    phoneHint: "Telefono (opzionale)",
     subscribe: "Iscriviti",
     errorRequired: "Per favore inserisci il tuo indirizzo email",
     errorGeneric: "Qualcosa è andato storto. Per favore riprova.",
@@ -194,7 +194,7 @@ export function SubscribeBlockForm({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            placeholder={t.emailPlaceholder}
+            placeholder={t.emailHint}
             autoComplete="email"
             disabled={isSubmitting}
             className="flex-1 bg-white dark:bg-neutral-800 disabled:opacity-50 px-3 py-2.5 border border-neutral-200 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary min-w-0 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 text-sm"
@@ -203,7 +203,7 @@ export function SubscribeBlockForm({
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder={t.phonePlaceholder}
+            placeholder={t.phoneHint}
             autoComplete="tel"
             disabled={isSubmitting}
             className="flex-1 bg-white dark:bg-neutral-800 disabled:opacity-50 px-3 py-2.5 border border-neutral-200 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary min-w-0 max-w-[140px] sm:max-w-[200px] text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 text-sm"

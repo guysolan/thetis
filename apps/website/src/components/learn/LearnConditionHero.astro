@@ -5,8 +5,7 @@ import type { Lang } from "@/config/languages";
 import { getLearnHubHeroCopy } from "@/content/learn-hub-hero";
 import ConditionHubSelect from "@/components/condition/ConditionHubSelect.astro";
 import { Activity, CheckCircle, Footprints, Stethoscope } from "lucide-react";
-import { Image } from "astro:assets";
-import AchillesRuptureDrawing from "@/assets/drawings/achilles-drawing.svg";
+import { conditionIconComponents } from "@thetis/ui/condition-icons";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { conditionHubChooseConditionLabel } from "@/content/condition-hub-select-labels";
@@ -59,6 +58,8 @@ const courseSlug =
     conditionId === "plantar-fasciitis"
         ? "plantar_fasciitis_course"
         : "achilles_rupture_course";
+
+const HeroConditionIcon = conditionIconComponents[conditionId];
 ---
 
 <section class="pb-16 md:pb-24 color-gradient">
@@ -157,30 +158,15 @@ const courseSlug =
             <div
                 class="flex flex-shrink-0 justify-center items-center w-full lg:w-2/5"
             >
-                {
-                    conditionId === "achilles-rupture" ? (
-                        <Image
-                            src={AchillesRuptureDrawing}
-                            alt="Achilles tendon illustration"
-                            class="w-full max-w-md max-h-[50vh] object-contain"
-                            width={400}
-                            height={500}
-                        />
-                    ) : (
-                        <div
-                            class="flex justify-center items-center bg-primary/5 dark:bg-primary/10 shadow-sm border border-primary/20 dark:border-primary/30 rounded-2xl w-full max-w-md aspect-square"
-                            aria-hidden="true"
-                        >
-                            {hubHero.icon === "footprints" ? (
-                                <Footprints className="w-[min(40vw,11rem)] h-[min(40vw,11rem)] text-primary/75" />
-                            ) : hubHero.icon === "activity" ? (
-                                <Activity className="w-[min(40vw,11rem)] h-[min(40vw,11rem)] text-primary/75" />
-                            ) : (
-                                <Stethoscope className="w-[min(40vw,11rem)] h-[min(40vw,11rem)] text-primary/75" />
-                            )}
-                        </div>
-                    )
-                }
+                <span
+                    class="flex justify-center items-center w-full max-w-md"
+                    role="img"
+                    aria-label={c.label}
+                >
+                    <HeroConditionIcon
+                        className="w-full max-w-[min(72vw,16rem)] h-auto max-h-[min(40vh,16rem)]"
+                    />
+                </span>
             </div>
         </div>
     </div>

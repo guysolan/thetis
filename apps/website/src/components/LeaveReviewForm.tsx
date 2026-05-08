@@ -42,13 +42,13 @@ const translations = {
     whatReviewing: "What are you reviewing?",
     required: "*",
     name: "Name",
-    namePlaceholder: "Your name",
+    nameHint: "Your name",
     email: "Email",
-    emailPlaceholder: "your@email.com",
+    emailHint: "your@email.com",
     emailHelp: "We'll use this to contact you about your cashback",
     rating: "Rating",
     yourReview: "Your Review",
-    reviewPlaceholder: "Share your experience with the",
+    reviewPromptPrefix: "Share your experience with the",
     photosVideos: "Photos or Videos",
     cashbackLabel: "(cashback for videos with spoken review only)",
     uploadHelp: "You can upload",
@@ -98,13 +98,13 @@ const translations = {
     whatReviewing: "Was bewerten Sie?",
     required: "*",
     name: "Name",
-    namePlaceholder: "Ihr Name",
+    nameHint: "Ihr Name",
     email: "E-Mail",
-    emailPlaceholder: "ihre@email.com",
+    emailHint: "ihre@email.com",
     emailHelp: "Wir verwenden diese, um Sie bezüglich Ihres Cashbacks zu kontaktieren",
     rating: "Bewertung",
     yourReview: "Ihre Bewertung",
-    reviewPlaceholder: "Teilen Sie Ihre Erfahrung mit",
+    reviewPromptPrefix: "Teilen Sie Ihre Erfahrung mit",
     photosVideos: "Fotos oder Videos",
     cashbackLabel: "(Cashback nur für Videos mit gesprochenem Inhalt)",
     uploadHelp: "Sie können",
@@ -157,13 +157,13 @@ const translations = {
     whatReviewing: "Que évaluez-vous ?",
     required: "*",
     name: "Nom",
-    namePlaceholder: "Votre nom",
+    nameHint: "Votre nom",
     email: "Email",
-    emailPlaceholder: "votre@email.com",
+    emailHint: "votre@email.com",
     emailHelp: "Nous utiliserons ceci pour vous contacter concernant votre cashback",
     rating: "Note",
     yourReview: "Votre avis",
-    reviewPlaceholder: "Partagez votre expérience avec",
+    reviewPromptPrefix: "Partagez votre expérience avec",
     photosVideos: "Photos ou vidéos",
     cashbackLabel: "(cashback uniquement pour les vidéos avec contenu parlé)",
     uploadHelp: "Vous pouvez télécharger des",
@@ -215,13 +215,13 @@ const translations = {
     whatReviewing: "¿Qué estás evaluando?",
     required: "*",
     name: "Nombre",
-    namePlaceholder: "Tu nombre",
+    nameHint: "Tu nombre",
     email: "Email",
-    emailPlaceholder: "tu@email.com",
+    emailHint: "tu@email.com",
     emailHelp: "Usaremos esto para contactarte sobre tu cashback",
     rating: "Calificación",
     yourReview: "Tu reseña",
-    reviewPlaceholder: "Comparte tu experiencia con",
+    reviewPromptPrefix: "Comparte tu experiencia con",
     photosVideos: "Fotos o videos",
     cashbackLabel: "(cashback solo para videos con contenido hablado)",
     uploadHelp: "Puedes subir",
@@ -273,13 +273,13 @@ const translations = {
     whatReviewing: "Cosa stai recensendo?",
     required: "*",
     name: "Nome",
-    namePlaceholder: "Il tuo nome",
+    nameHint: "Il tuo nome",
     email: "Email",
-    emailPlaceholder: "tua@email.com",
+    emailHint: "tua@email.com",
     emailHelp: "Useremo questa per contattarti riguardo al tuo cashback",
     rating: "Valutazione",
     yourReview: "La tua recensione",
-    reviewPlaceholder: "Condividi la tua esperienza con",
+    reviewPromptPrefix: "Condividi la tua esperienza con",
     photosVideos: "Foto o video",
     cashbackLabel: "(cashback solo per video con contenuto parlato)",
     uploadHelp: "Puoi caricare",
@@ -515,7 +515,7 @@ export function LeaveReviewForm({ lang = "en" }: LeaveReviewFormProps) {
           onChange={(e) => setName(e.target.value)}
           required
           className="bg-white dark:bg-neutral-800 px-4 py-2 border border-neutral-300 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100"
-          placeholder={t.namePlaceholder}
+          placeholder={t.nameHint}
         />
       </div>
 
@@ -535,7 +535,7 @@ export function LeaveReviewForm({ lang = "en" }: LeaveReviewFormProps) {
           required
           autoComplete="email"
           className="bg-white dark:bg-neutral-800 px-4 py-2 border border-neutral-300 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100"
-          placeholder={t.emailPlaceholder}
+          placeholder={t.emailHint}
         />
         <p className="mt-1 text-neutral-500 dark:text-neutral-400 text-sm">{t.emailHelp}</p>
       </div>
@@ -580,7 +580,7 @@ export function LeaveReviewForm({ lang = "en" }: LeaveReviewFormProps) {
           required
           rows={5}
           className="bg-white dark:bg-neutral-800 px-4 py-2 border border-neutral-300 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100"
-          placeholder={`${t.reviewPlaceholder} ${t.products[product].name}...`}
+          placeholder={`${t.reviewPromptPrefix} ${t.products[product].name}...`}
         />
       </div>
 

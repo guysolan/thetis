@@ -68,7 +68,11 @@ export function MobileNav({ lang = "en", currentPath = "/" }: MobileNavProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size="sm" className="font-light text-base">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="hover:bg-neutral-900/[0.05] dark:hover:bg-white/10 px-3 rounded-lg font-medium text-neutral-700 dark:text-neutral-200"
+        >
           {t.menu}
         </Button>
       </SheetTrigger>

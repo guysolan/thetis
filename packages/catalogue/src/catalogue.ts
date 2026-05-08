@@ -235,7 +235,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Full course rollout in progress — read the syllabus and FAQs on the course page",
     tags: ["course", "education", "tendinopathy"],
-    imagePath: "/images/catalogue-products/theraband.png",
+    imagePath: "/images/catalogue-products/plantar-fasciitis-course-banner.png",
     description:
       "Companion course for clinicians’ rehab plans — landing page reflects current availability.",
     features: [],
@@ -260,7 +260,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Structured course pathway — landing page reflects current availability",
     tags: ["course", "education", "tendinopathy"],
-    imagePath: "/images/catalogue-products/slant-board-calf-stretch-wedge.png",
+    imagePath: "/images/catalogue-products/plantar-fasciitis-course-banner.png",
     description:
       "Companion to load-management and footwear guidance — instant access when available.",
     features: [],
@@ -1457,6 +1457,12 @@ for (const p of CATALOGUE_PRODUCTS) {
 }
 
 export const CATALOGUE_PRODUCTS_BY_ID: Record<string, AchillesProduct> = byId;
+
+/** Catalogue courses that only link to an on-site “coming soon” landing page (no checkout yet). */
+export const COMING_SOON_COURSE_PRODUCT_IDS = new Set<string>([
+  "thetis-course-achilles-tendinitis",
+  "thetis-course-insertional-achilles-tendonitis",
+]);
 
 /** @deprecated Use CATALOGUE_PRODUCTS */
 export const ACHILLES_RUPTURE_PRODUCTS = CATALOGUE_PRODUCTS;

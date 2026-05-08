@@ -18,7 +18,7 @@ const content = {
         traumaSplintQuantityLabel: "Trauma Splint Quantity",
         nightSplintQuantityLabel: "Splint Quantity",
         orderDetailsLabel: "Order Details",
-        orderDetailsPlaceholder:
+        orderDetailsHint:
             "Please include your estimated order quantity and any specific products you're interested in.",
         submitButton: "Send Message",
     },
@@ -31,7 +31,7 @@ const content = {
         traumaSplintQuantityLabel: "Trauma-Schiene Menge",
         nightSplintQuantityLabel: "Schiene Menge",
         orderDetailsLabel: "Bestelldetails",
-        orderDetailsPlaceholder:
+        orderDetailsHint:
             "Bitte geben Sie Ihre geschätzte Bestellmenge und alle spezifischen Produkte an, die Sie interessieren.",
         submitButton: "Nachricht senden",
     },
@@ -44,7 +44,7 @@ const content = {
         traumaSplintQuantityLabel: "Quantité d'attelle de traumatisme",
         nightSplintQuantityLabel: "Quantité d'attelle",
         orderDetailsLabel: "Détails de la commande",
-        orderDetailsPlaceholder:
+        orderDetailsHint:
             "Veuillez inclure votre quantité de commande estimée et tous les produits spécifiques qui vous intéressent.",
         submitButton: "Envoyer le message",
     },
@@ -57,7 +57,7 @@ const content = {
         traumaSplintQuantityLabel: "Cantidad de férula de trauma",
         nightSplintQuantityLabel: "Cantidad de férula",
         orderDetailsLabel: "Detalles del pedido",
-        orderDetailsPlaceholder:
+        orderDetailsHint:
             "Por favor incluya su cantidad de pedido estimada y cualquier producto específico que le interese.",
         submitButton: "Enviar mensaje",
     },
@@ -70,7 +70,7 @@ const content = {
         traumaSplintQuantityLabel: "Quantità stecca trauma",
         nightSplintQuantityLabel: "Quantità stecca",
         orderDetailsLabel: "Dettagli ordine",
-        orderDetailsPlaceholder:
+        orderDetailsHint:
             "Includi la quantità stimata del tuo ordine e tutti i prodotti specifici che ti interessano.",
         submitButton: "Invia messaggio",
     },
@@ -131,7 +131,7 @@ const currentContent = content[lang as keyof typeof content];
                     name="message"
                     rows={4}
                     maxlength={1000}
-                    placeholder={currentContent.orderDetailsPlaceholder}
+                    placeholder={currentContent.orderDetailsHint}
                 />
             </div>
 

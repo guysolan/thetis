@@ -2,6 +2,7 @@
 import type { AchillesProduct } from "@thetis/catalogue";
 import {
   CATALOGUE_PRODUCTS_BY_ID,
+  COMING_SOON_COURSE_PRODUCT_IDS,
   THETIS_NIGHT_SPLINT_PRODUCT_ID,
   defaultProductCta,
   isExternalCatalogueProductUrl,
@@ -36,6 +37,7 @@ const copy: Record<
     externalSiteBadge: string;
     externalLinkAria: string;
     viewCourse: string;
+    comingSoon: string;
   }
 > = {
   en: {
@@ -49,6 +51,7 @@ const copy: Record<
     externalSiteBadge: "External site",
     externalLinkAria: "Opens external website in a new tab",
     viewCourse: "View course →",
+    comingSoon: "Coming soon",
   },
   de: {
     noRecommended:
@@ -61,6 +64,7 @@ const copy: Record<
     externalSiteBadge: "Externe Seite",
     externalLinkAria: "Öffnet externe Website in neuem Tab",
     viewCourse: "Zum Kurs →",
+    comingSoon: "Demnächst",
   },
   fr: {
     noRecommended: "Pas encore de liste pour cette vue — revenez bientôt.",
@@ -72,6 +76,7 @@ const copy: Record<
     externalSiteBadge: "Site externe",
     externalLinkAria: "Ouvre un site externe dans un nouvel onglet",
     viewCourse: "Voir le cours →",
+    comingSoon: "Bientôt disponible",
   },
   es: {
     noRecommended: "Aún no hay lista curada para esta vista — vuelve pronto.",
@@ -83,6 +88,7 @@ const copy: Record<
     externalSiteBadge: "Sitio externo",
     externalLinkAria: "Abre un sitio externo en una pestaña nueva",
     viewCourse: "Ver el curso →",
+    comingSoon: "Próximamente",
   },
   it: {
     noRecommended:
@@ -95,6 +101,7 @@ const copy: Record<
     externalSiteBadge: "Sito esterno",
     externalLinkAria: "Apre un sito esterno in una nuova scheda",
     viewCourse: "Vai al corso →",
+    comingSoon: "In arrivo",
   },
 };
 
@@ -108,6 +115,7 @@ const t = copy[lang];
     <ul class="gap-6 grid sm:grid-cols-2 lg:grid-cols-3">
       {products.flatMap((p: AchillesProduct) => {
         const isNightSplint = p.id === THETIS_NIGHT_SPLINT_PRODUCT_ID;
+        const comingSoonCourse = COMING_SOON_COURSE_PRODUCT_IDS.has(p.id);
         const localizedPath = p.websiteRouteSlug
           ? getRouteBySlugAndLanguage(p.websiteRouteSlug, lang)?.href
           : undefined;
@@ -173,14 +181,26 @@ const t = copy[lang];
                 ? "border-amber-900/15 dark:border-amber-800/40 bg-amber-100/80 dark:bg-amber-950/35"
                 : "";
         return [
-          <li class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+          <li
+            class:list={[
+              "flex flex-col shadow-sm p-4 border rounded-xl",
+              comingSoonCourse
+                ? "border-dashed border-neutral-300 dark:border-neutral-600 bg-neutral-50/90 dark:bg-neutral-950/40"
+                : "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-700",
+            ]}
+          >
             {p.imagePath ? (
               <div
                 class:list={[
-                  "group flex justify-center items-center bg-neutral-100 hover:shadow-md dark:hover:shadow-black/25 mx-auto mb-4 rounded-lg w-full max-w-[180px] h-[160px] overflow-hidden transition-shadow duration-300 shrink-0",
+                  "group relative flex justify-center items-center bg-neutral-100 hover:shadow-md dark:hover:shadow-black/25 mx-auto mb-4 rounded-lg w-full max-w-[180px] h-[160px] overflow-hidden transition-shadow duration-300 shrink-0",
                   p.id === THETIS_NIGHT_SPLINT_PRODUCT_ID ? "p-0" : "p-2",
                 ]}
               >
+                {comingSoonCourse ? (
+                  <span class="top-2 right-2 z-10 absolute bg-neutral-900/92 dark:bg-neutral-950/95 shadow-sm px-2 py-1 rounded font-semibold text-[10px] text-white uppercase tracking-wide">
+                    {t.comingSoon}
+                  </span>
+                ) : null}
                 <img
                   src={p.imagePath}
                   alt=""
@@ -225,7 +245,11 @@ const t = copy[lang];
                 {descriptionOneLine}
               </p>
             ) : null}
-            {priceUS || priceGB ? (
+            {comingSoonCourse ? (
+              <p class="mb-3 font-medium text-neutral-600 dark:text-neutral-400 text-sm">
+                {t.comingSoon}
+              </p>
+            ) : priceUS || priceGB ? (
               <p
                 class="mb-3 text-neutral-500 text-sm catalogue-price"
                 data-shop-price-us={priceUS ?? ""}

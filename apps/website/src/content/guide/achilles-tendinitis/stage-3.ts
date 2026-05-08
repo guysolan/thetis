@@ -2,23 +2,23 @@ import type { GuideContent, GuideMetadata } from "@/components/guide/types";
 
 export const metadata: GuideMetadata = {
   slug: "stage-3",
-  title: "Achilles tendinitis — Stage 3: Strengthening (placeholder)",
+  title: "Achilles tendinitis — Stage 3: Strengthening",
   description:
-    "Placeholder guide — content coming soon. Calf and foot strength progressions.",
+    "Coming soon — Calf and foot strength progressions.",
   phase: "achilles-tendinitis-stage-3",
   weekRange: "Stage 3",
-  highlights: ["Placeholder"],
+  highlights: ["Coming soon"],
   phaseSubtitle: "Strengthening",
   hubCardTitle: "Strengthening",
   timelineColor: "bg-primary",
 };
 
 export const content: GuideContent = {
-  intro: "Placeholder — content coming soon.",
+  intro: "Coming soon.",
   blocks: [
     {
       type: "text",
-      content: "Placeholder — content coming soon.",
+      content: "Coming soon.",
     },
   ],
 };

@@ -8,10 +8,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@thetis/ui/navigation-menu";
-import { cn } from "@/lib/utils";
 import * as React from "react";
-
-import { ArrowRight } from "lucide-react";
 
 import {
   getConditionHubNavRoutes,
@@ -27,76 +24,32 @@ const LinkCard = ({
   description,
   href,
   icon,
-  variant = "default",
-  plainIcon = false,
 }: {
   title: string;
   description: string;
   href: string;
   icon?: React.ReactNode;
-  variant: "default" | "outline";
-  /** No tile behind the icon (e.g. condition SVGs in Shop). */
+  variant?: "default" | "outline";
   plainIcon?: boolean;
 }) => {
   return (
     <NavigationMenuLink
       href={href}
-      className={cn(
-        "group relative flex items-start gap-4 p-4 rounded-xl w-full overflow-hidden transition-all duration-200",
-        "border hover:shadow-lg",
-        variant === "default" &&
-          "bg-gradient-to-br from-primary/8 via-primary/4 to-transparent hover:from-primary/12 hover:via-primary/6 border-primary/20 hover:border-primary/35",
-        variant === "outline" &&
-          "bg-white dark:bg-neutral-800/80 hover:bg-neutral-50 dark:hover:bg-neutral-800 border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600",
-      )}
+      className="group flex items-center gap-3 hover:bg-neutral-100/80 dark:hover:bg-white/[0.06] -mx-1 p-3 rounded-xl w-full max-w-sm transition-colors"
     >
       {icon && (
-        <div
-          className={cn(
-            "flex justify-center items-center w-11 h-11 transition-all duration-200 shrink-0",
-            plainIcon && "group-hover:scale-105",
-            !plainIcon &&
-              cn(
-                "rounded-lg",
-                variant === "default" &&
-                  "bg-primary/12 text-primary group-hover:bg-primary/18 group-hover:scale-105",
-                variant === "outline" &&
-                  "bg-neutral-100 dark:bg-neutral-700/80 text-neutral-600 dark:text-neutral-300 group-hover:bg-neutral-200/80 dark:group-hover:bg-neutral-600/80 group-hover:scale-105",
-              ),
-          )}
-        >
+        <div className="flex justify-center items-center dark:bg-white/[0.08] dark:group-hover:bg-white/[0.12] rounded-lg w-12 h-12 text-neutral-600 dark:group-hover:text-neutral-100 dark:text-neutral-300 group-hover:text-neutral-900 transition-colors shrink-0">
           {icon}
         </div>
       )}
-      <div className="flex-1 min-w-0">
-        <h3
-          className={cn(
-            "mb-1 font-semibold text-[15px] leading-snug transition-colors",
-            variant === "default" &&
-              "text-primary group-hover:text-primary/90",
-            variant === "outline" &&
-              "text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-white",
-          )}
-        >
+      <div className="flex-1 py-0.5 min-w-0">
+        <h3 className="font-semibold dark:text-neutral-100 group-hover:text-primary text-base leading-snug transition-colors neutral-900">
           {title}
         </h3>
-        <p
-          className={cn(
-            "text-sm line-clamp-2 leading-relaxed",
-            variant === "default" && "text-primary/65",
-            variant === "outline" && "text-neutral-500 dark:text-neutral-400",
-          )}
-        >
+        <p className="mt-0.5 text-neutral-500 dark:text-neutral-400 group-hover:text-primary text-text-sm line-clamp-2 leading-snug">
           {description}
         </p>
       </div>
-      <ArrowRight
-        className={cn(
-          "opacity-0 group-hover:opacity-60 mt-1 w-4 h-4 transition-all -translate-x-2 group-hover:translate-x-0 duration-200 shrink-0",
-          variant === "default" && "text-primary",
-          variant === "outline" && "text-neutral-400 dark:text-neutral-500",
-        )}
-      />
     </NavigationMenuLink>
   );
 };
@@ -116,28 +69,26 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
 
   return (
     <NavigationMenu
-      className="z-10 relative flex justify-center w-full min-w-0 max-w-full h-full min-h-0 overflow-visible shrink-0"
+      className="group/nav-menus z-10 relative flex justify-center items-center w-full min-w-0 max-w-full h-full min-h-0 overflow-visible shrink-0"
       closeDelay={200}
       sideOffset={4}
     >
-      <NavigationMenuList className="flex flex-wrap justify-center items-center gap-1">
+      <NavigationMenuList className="flex flex-nowrap justify-center items-center gap-0.5 list-none">
         {/* Shop — our products + curated gear per condition */}
         {conditionShopLinks.length > 0 && (
           <NavigationMenuItem>
             <NavigationMenuTrigger>
               {(navT as Record<string, string>).shopMenu ?? "Shop"}
             </NavigationMenuTrigger>
-            <NavigationMenuContent className="p-5 rounded-2xl">
-              <ul className="flex flex-col gap-3 w-full">
+            <NavigationMenuContent className="p-3">
+              <ul className="flex flex-col gap-0.5 w-full">
                 {conditionShopLinks.map((link) => (
                   <li key={link.href}>
                     <LinkCard
                       title={link.title}
                       description={link.description}
                       href={link.href}
-                      variant={link.variant ?? "outline"}
                       icon={link.icon}
-                      plainIcon
                     />
                   </li>
                 ))}
@@ -154,15 +105,14 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
                 navT.conditionsMenu ??
                 "Learn"}
             </NavigationMenuTrigger>
-            <NavigationMenuContent className="p-5 rounded-2xl">
-              <ul className="flex flex-col gap-3 w-full">
+            <NavigationMenuContent className="p-3">
+              <ul className="flex flex-col gap-0.5 w-full">
                 {conditionLearnLinks.map((link) => (
                   <li key={link.href}>
                     <LinkCard
                       title={link.title}
                       description={link.description}
                       href={link.href}
-                      variant={link.variant ?? "default"}
                       icon={link.icon}
                     />
                   </li>
@@ -175,15 +125,11 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
         {/* Professionals - Dropdown */}
         <NavigationMenuItem>
           <NavigationMenuTrigger>{t.professionals}</NavigationMenuTrigger>
-          <NavigationMenuContent className="p-5 rounded-2xl">
-            <ul className="gap-3 grid grid-cols-1 w-full">
+          <NavigationMenuContent className="p-3">
+            <ul className="flex flex-col gap-0.5 w-full">
               {partnerLinks.map((link) => (
                 <li key={link.href}>
-                  <LinkCard
-                    {...link}
-                    variant={link.variant || "outline"}
-                    icon={link.icon}
-                  />
+                  <LinkCard {...link} />
                 </li>
               ))}
             </ul>
@@ -193,15 +139,11 @@ function DesktopNav({ lang = "en" }: DesktopNavProps) {
         {/* Contact - Dropdown */}
         <NavigationMenuItem>
           <NavigationMenuTrigger>{t.contact}</NavigationMenuTrigger>
-          <NavigationMenuContent className="p-5 rounded-2xl">
-            <ul className="gap-3 grid grid-cols-1 w-full">
+          <NavigationMenuContent className="p-3">
+            <ul className="flex flex-col gap-0.5 w-full">
               {contactLinks.map((link) => (
                 <li key={link.href}>
-                  <LinkCard
-                    {...link}
-                    variant={link.variant || "outline"}
-                    icon={link.icon}
-                  />
+                  <LinkCard {...link} />
                 </li>
               ))}
             </ul>
