@@ -1,11 +1,9 @@
 import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
 import {
-  Activity,
   ArrowRight,
   BookOpen,
   CheckCircle2,
   ExternalLink,
-  GraduationCap,
   Lock,
   Mail,
 } from "lucide-react";
@@ -28,6 +26,12 @@ import { WEBSITE_URL } from "@/lib/env";
 import { cn } from "@/lib/utils";
 import type { SectionMetadata } from "@/content/course/sections";
 import type { CourseType } from "@/hooks/use-enrollment";
+import { conditionIconComponents } from "@thetis/ui/condition-icons";
+
+function CourseConditionIcon({ id }: { id: keyof typeof conditionIconComponents }) {
+  const Icon = conditionIconComponents[id];
+  return <Icon className="w-full h-full" />;
+}
 
 function CourseProgressChart({ percentage }: { percentage: number }) {
   const data = [
@@ -293,7 +297,7 @@ function HomePage() {
               ]}
               link="/standard"
               ctaText="Start Course"
-              icon={<BookOpen className="w-full h-full" />}
+              icon={<CourseConditionIcon id="achilles-rupture" />}
               courseType="standard"
               courseSections={achillesSections}
             />
@@ -309,7 +313,7 @@ function HomePage() {
               ]}
               link="/plantar-fasciitis"
               ctaText="Start Course"
-              icon={<GraduationCap className="w-full h-full" />}
+              icon={<CourseConditionIcon id="plantar-fasciitis" />}
               courseType="plantar-fasciitis"
               courseSections={pfSections}
             />
@@ -325,7 +329,7 @@ function HomePage() {
               ]}
               link="/"
               ctaText="Coming Soon"
-              icon={<Activity className="w-full h-full" />}
+              icon={<CourseConditionIcon id="achilles-tendinitis" />}
               courseType="plantar-fasciitis"
               courseSections={[]}
               forceLocked
@@ -343,7 +347,9 @@ function HomePage() {
               ]}
               link="/"
               ctaText="Coming Soon"
-              icon={<Activity className="w-full h-full" />}
+              icon={
+                <CourseConditionIcon id="insertional-achilles-tendonitis" />
+              }
               courseType="plantar-fasciitis"
               courseSections={[]}
               forceLocked

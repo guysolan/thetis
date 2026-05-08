@@ -13,8 +13,6 @@ interface Props {
   lang: Lang;
 }
 
-const SPLINT_PRODUCT_ID = "thetis-night-splint";
-
 const { lang } = Astro.props;
 
 const copy: Record<Lang, { sectionTitle: string; hubCta: string }> = {
@@ -48,9 +46,7 @@ const groups = sorted
     label: c.label,
     shopHref: getLocalizedShopHubHref(lang, c.id),
     products: orderedShopProductsForDisplay(
-      getCatalogueProductsForCondition(c.id).filter(
-        (p) => p.id !== SPLINT_PRODUCT_ID,
-      ),
+      getCatalogueProductsForCondition(c.id),
     ),
   }))
   .filter((g) => g.products.length > 0);

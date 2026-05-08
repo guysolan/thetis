@@ -112,6 +112,7 @@ const NavAccordion = ({ lang = "en" }: NavAccordionProps) => {
                   title={hub.title}
                   description={hub.description}
                   variant={hub.variant ?? "outline"}
+                  plainIcon
                 />
               ))}
             </div>
@@ -221,12 +222,14 @@ const HubMegaLink = ({
   title,
   description,
   variant = "outline",
+  plainIcon = false,
 }: {
   href: string;
   icon: React.ReactNode;
   title: string;
   description: string;
   variant?: "default" | "outline";
+  plainIcon?: boolean;
 }) => (
   <a
     href={href}
@@ -239,10 +242,15 @@ const HubMegaLink = ({
   >
     <span
       className={cn(
-        "flex justify-center items-center rounded-xl w-12 h-12 shrink-0",
-        variant === "default"
-          ? "bg-primary/15 text-primary"
-          : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300",
+        "flex justify-center items-center w-12 h-12 shrink-0",
+        plainIcon
+          ? ""
+          : cn(
+              "rounded-xl",
+              variant === "default"
+                ? "bg-primary/15 text-primary"
+                : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300",
+            ),
       )}
     >
       {icon}

@@ -15,6 +15,7 @@ import type { Lang } from "@/config/languages";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ExternalLink } from "lucide-react";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
 
 interface Props {
   lang: Lang;
@@ -34,6 +35,7 @@ const copy: Record<
     priorityMedalOptional: string;
     externalSiteBadge: string;
     externalLinkAria: string;
+    viewCourse: string;
   }
 > = {
   en: {
@@ -46,6 +48,7 @@ const copy: Record<
     priorityMedalOptional: "Optional",
     externalSiteBadge: "External site",
     externalLinkAria: "Opens external website in a new tab",
+    viewCourse: "View course →",
   },
   de: {
     noRecommended:
@@ -57,6 +60,7 @@ const copy: Record<
     priorityMedalOptional: "Optional",
     externalSiteBadge: "Externe Seite",
     externalLinkAria: "Öffnet externe Website in neuem Tab",
+    viewCourse: "Zum Kurs →",
   },
   fr: {
     noRecommended: "Pas encore de liste pour cette vue — revenez bientôt.",
@@ -67,6 +71,7 @@ const copy: Record<
     priorityMedalOptional: "Optionnel",
     externalSiteBadge: "Site externe",
     externalLinkAria: "Ouvre un site externe dans un nouvel onglet",
+    viewCourse: "Voir le cours →",
   },
   es: {
     noRecommended: "Aún no hay lista curada para esta vista — vuelve pronto.",
@@ -77,6 +82,7 @@ const copy: Record<
     priorityMedalOptional: "Opcional",
     externalSiteBadge: "Sitio externo",
     externalLinkAria: "Abre un sitio externo en una pestaña nueva",
+    viewCourse: "Ver el curso →",
   },
   it: {
     noRecommended:
@@ -88,6 +94,7 @@ const copy: Record<
     priorityMedalOptional: "Opzionale",
     externalSiteBadge: "Sito esterno",
     externalLinkAria: "Apre un sito esterno in una nuova scheda",
+    viewCourse: "Vai al corso →",
   },
 };
 
@@ -100,22 +107,35 @@ const t = copy[lang];
   ) : (
     <ul class="gap-6 grid sm:grid-cols-2 lg:grid-cols-3">
       {products.flatMap((p: AchillesProduct) => {
+        const isNightSplint = p.id === THETIS_NIGHT_SPLINT_PRODUCT_ID;
+        const localizedPath = p.websiteRouteSlug
+          ? getRouteBySlugAndLanguage(p.websiteRouteSlug, lang)?.href
+          : undefined;
         const hrefUS = resolveProductUrl(p, "US");
         const hrefGB = resolveProductUrl(p, "GB");
-        const isNightSplint = p.id === THETIS_NIGHT_SPLINT_PRODUCT_ID;
         const hrefDefault =
-          resolveProductUrlForCountry(p, "US") ?? hrefUS ?? hrefGB;
+          localizedPath ??
+          resolveProductUrlForCountry(p, "US") ??
+          hrefUS ??
+          hrefGB;
         if (!hrefDefault) return [];
         const priceUS = resolveProductPrice(p, "US");
         const priceGB = resolveProductPrice(p, "GB");
-        const cta = defaultProductCta(hrefDefault);
+        const cta = localizedPath
+          ? t.viewCourse
+          : defaultProductCta(hrefDefault);
         const external = isExternalCatalogueProductUrl(hrefDefault);
         const hrefAttrs = isNightSplint
           ? splintMatrixAnchorDataAttrs("LL")
-          : {
-              "data-href-us": hrefUS ?? "",
-              "data-href-gb": hrefGB ?? "",
-            };
+          : localizedPath
+            ? {
+                "data-href-us": localizedPath,
+                "data-href-gb": localizedPath,
+              }
+            : {
+                "data-href-us": hrefUS ?? "",
+                "data-href-gb": hrefGB ?? "",
+              };
         const accessoryNames = (p.accessoryTo ?? [])
           .map((id) => CATALOGUE_PRODUCTS_BY_ID[id]?.name)
           .filter(Boolean);
@@ -155,11 +175,21 @@ const t = copy[lang];
         return [
           <li class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
             {p.imagePath ? (
-              <div class="group flex justify-center items-center bg-neutral-100 mx-auto mb-4 p-2 rounded-lg w-full max-w-[180px] h-[160px] overflow-hidden shrink-0 transition-shadow duration-300 hover:shadow-md dark:hover:shadow-black/25">
+              <div
+                class:list={[
+                  "group flex justify-center items-center bg-neutral-100 hover:shadow-md dark:hover:shadow-black/25 mx-auto mb-4 rounded-lg w-full max-w-[180px] h-[160px] overflow-hidden transition-shadow duration-300 shrink-0",
+                  p.id === THETIS_NIGHT_SPLINT_PRODUCT_ID ? "p-0" : "p-2",
+                ]}
+              >
                 <img
                   src={p.imagePath}
                   alt=""
-                  class="w-full h-full object-contain object-center transition-transform duration-300 ease-out will-change-transform group-hover:scale-[1.14] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                  class:list={[
+                    "w-full h-full motion-reduce:group-hover:scale-100 group-hover:scale-[1.14] transition-transform motion-reduce:transition-none duration-300 ease-out will-change-transform",
+                    p.id === THETIS_NIGHT_SPLINT_PRODUCT_ID
+                      ? "object-cover object-center"
+                      : "object-contain object-center",
+                  ]}
                   width={180}
                   height={160}
                   loading="lazy"

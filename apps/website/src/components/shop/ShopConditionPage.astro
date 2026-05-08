@@ -9,7 +9,11 @@ import {
 import { getRouteBySlugAndLanguage } from "@/content/routes";
 import { conditionHubChooseConditionLabel } from "@/content/condition-hub-select-labels";
 import ConditionHubSelect from "@/components/condition/ConditionHubSelect.astro";
-import { getCourseRouteForShopCondition } from "@/lib/condition-nav";
+import {
+  getCourseRouteForShopCondition,
+  getLocalizedLearnHubHref,
+} from "@/lib/condition-nav";
+import { CONDITION_SHOP_HUB_DESCRIPTION } from "@/content/condition-hub-copy";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import CourseBuyButton from "@/components/CourseBuyButton.tsx";
@@ -21,7 +25,8 @@ import { NIGHT_SPLINT_VARIANTS } from "@/lib/shopify/variants";
 import { COURSE_VARIANTS } from "@/lib/shopify/products";
 import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
 import ShopCatalogueProductGrid from "@/components/shop/ShopCatalogueProductGrid.astro";
-import posterImage from "../../../../../packages/catalogue/assets/poster-image.png";
+import ProductCollage from "@/components/shop/ProductCollage.tsx";
+import ReviewsLink from "@/components/ReviewsLink.tsx";
 import achillesCourseImage from "../../../../../packages/catalogue/assets/achilles-rope-ends-pointed-down.png";
 import {
   BookOpen,
@@ -56,20 +61,17 @@ const courseImageAlt =
     ? "Plantar fasciitis course lesson preview"
     : "Achilles tendon healing position comparison";
 
-function shopConditionHeroTagline(lang: Lang, conditionLabel: string): string {
-  const name = conditionLabel
-    .split(/\s+/)
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
-    .join(" ");
-  const byLang: Record<Lang, string> = {
-    en: `Shop recovery gear curated by surgeons for ${name}.`,
-    de: `Von Chirurgen kuratiertes Recovery-Equipment für ${name}.`,
-    fr: `Équipement de récupération sélectionné par des chirurgiens pour ${name}.`,
-    es: `Material de recuperación seleccionado por cirujanos para ${name}.`,
-    it: `Equipaggiamento per il recupero selezionato dai chirurghi per ${name}.`,
-  };
-  return byLang[lang];
-}
+const courseComingSoon =
+  conditionId === "achilles-tendinitis" ||
+  conditionId === "insertional-achilles-tendonitis";
+
+const plantarCourseThumbAlt: Record<Lang, string> = {
+  en: "Illustration from the plantar fasciitis course: slant-board stretches",
+  de: "Illustration aus dem Plantarfasziitis-Kurs: Schrägbrett-Dehnübungen",
+  fr: "Illustration du cours fasciite plantaire : étirements sur planche inclinée",
+  es: "Ilustración del curso de fascitis plantar: estiramientos en tabla inclinada",
+  it: "Illustrazione dal corso sulla fascite plantare: stiramenti sul piano inclinato",
+};
 
 const copy: Record<
   Lang,
@@ -99,7 +101,7 @@ const copy: Record<
     priorityMedalEssential: "Essential",
     priorityMedalRecommended: "Recommended",
     priorityMedalOptional: "Optional",
-    viewCourse: "View course →",
+    viewCourse: "See what's included →",
     viewProduct: "View product →",
     ourProducts: "From Thetis",
     noOurProducts: "We do not list an on-site product for this condition yet.",
@@ -120,7 +122,7 @@ const copy: Record<
     priorityMedalEssential: "Essenziell",
     priorityMedalRecommended: "Empfohlen",
     priorityMedalOptional: "Optional",
-    viewCourse: "Zum Kurs →",
+    viewCourse: "Inhalte ansehen →",
     viewProduct: "Zum Produkt →",
     ourProducts: "Thetis",
     noOurProducts: "Noch kein On-Site-Produkt für diese Beschwerde.",
@@ -141,7 +143,7 @@ const copy: Record<
     priorityMedalEssential: "Essentiel",
     priorityMedalRecommended: "Recommandé",
     priorityMedalOptional: "Optionnel",
-    viewCourse: "Voir le cours →",
+    viewCourse: "Voir le programme →",
     viewProduct: "Voir le produit →",
     ourProducts: "Thetis",
     noOurProducts: "Pas encore de produit sur le site pour cette pathologie.",
@@ -162,7 +164,7 @@ const copy: Record<
     priorityMedalEssential: "Esencial",
     priorityMedalRecommended: "Recomendado",
     priorityMedalOptional: "Opcional",
-    viewCourse: "Ver el curso →",
+    viewCourse: "Ver el contenido →",
     viewProduct: "Ver el producto →",
     ourProducts: "Thetis",
     noOurProducts: "Aún no hay producto en el sitio para esta condición.",
@@ -183,7 +185,7 @@ const copy: Record<
     priorityMedalEssential: "Essenziale",
     priorityMedalRecommended: "Consigliato",
     priorityMedalOptional: "Opzionale",
-    viewCourse: "Vai al corso →",
+    viewCourse: "Vedi i contenuti →",
     viewProduct: "Vai al prodotto →",
     ourProducts: "Thetis",
     noOurProducts: "Nessun prodotto on-site ancora per questa condizione.",
@@ -201,6 +203,39 @@ const copy: Record<
 
 const t = copy[lang];
 const courseRoute = getCourseRouteForShopCondition(lang, conditionId);
+const learnHubHref = getLocalizedLearnHubHref(lang, conditionId);
+
+const shopComingSoonCourse: Record<
+  Lang,
+  { badge: string; note: string; browseGuides: string }
+> = {
+  en: {
+    badge: "Coming soon",
+    note: "Paid course access is not available yet for this condition. Free guides and articles are on the learn hub.",
+    browseGuides: "Browse free guides",
+  },
+  de: {
+    badge: "Demnächst",
+    note: "Ein kostenpflichtiger Kurs ist für diese Beschwerde noch nicht verfügbar. Kostenlose Leitfäden finden Sie im Lern-Hub.",
+    browseGuides: "Kostenlose Leitfäden",
+  },
+  fr: {
+    badge: "Bientôt disponible",
+    note: "Le cours payant n’est pas encore disponible pour cette pathologie. Guides et articles gratuits sur l’espace d’apprentissage.",
+    browseGuides: "Voir les guides gratuits",
+  },
+  es: {
+    badge: "Próximamente",
+    note: "El curso de pago aún no está disponible para esta condición. Hay guías y artículos gratuitos en el centro de aprendizaje.",
+    browseGuides: "Ver guías gratuitas",
+  },
+  it: {
+    badge: "In arrivo",
+    note: "Il corso a pagamento non è ancora disponibile per questa condizione. Guide e articoli gratuiti sono nell’area learning.",
+    browseGuides: "Vai alle guide gratuite",
+  },
+};
+const soon = shopComingSoonCourse[lang];
 
 /** Rich “From Thetis” cards + reviews (Achilles shop only). */
 const achillesFromThetisCopy: Record<
@@ -211,6 +246,8 @@ const achillesFromThetisCopy: Record<
     easyReturns: string;
     instantAccess: string;
     readersLine: string;
+    /** Accessible name for the splint card reviews link (ReviewsLink). */
+    reviewsStarsLinkLabel: string;
     addCourse: string;
     splintImageAlt: string;
     reviewsKicker: string;
@@ -225,7 +262,8 @@ const achillesFromThetisCopy: Record<
     easyReturns: "Easy returns",
     instantAccess: "Instant access — start today",
     readersLine: "Join 20,000 readers",
-    addCourse: "Add course to cart",
+    reviewsStarsLinkLabel: "Read patient reviews",
+    addCourse: "Buy course access",
     splintImageAlt: "Thetis night splint for Achilles recovery",
     reviewsKicker: "TRUSTED BY THOUSANDS",
     reviewsTitle: "Join 5,000+ Patients Who've Found Relief",
@@ -239,7 +277,8 @@ const achillesFromThetisCopy: Record<
     easyReturns: "Einfache Rückgabe",
     instantAccess: "Sofortiger Zugang — heute starten",
     readersLine: "Schließen Sie sich 20.000 Lesern an",
-    addCourse: "Kurs in den Warenkorb",
+    reviewsStarsLinkLabel: "Patientenbewertungen lesen",
+    addCourse: "Kurszugang kaufen",
     splintImageAlt: "Thetis Nachtschiene für die Achilles-Genesung",
     reviewsKicker: "VON TAUSENDEN VERTRAUT",
     reviewsTitle: "Schließen Sie sich über 5.000 Patienten an",
@@ -252,7 +291,8 @@ const achillesFromThetisCopy: Record<
     easyReturns: "Retours faciles",
     instantAccess: "Accès instantané — commencez aujourd’hui",
     readersLine: "Rejoignez 20 000 lecteurs",
-    addCourse: "Ajouter le cours au panier",
+    reviewsStarsLinkLabel: "Lire les avis patients",
+    addCourse: "Acheter l'accès au cours",
     splintImageAlt: "Attelle de nuit Thetis pour la récupération d’Achille",
     reviewsKicker: "APPROUVÉ PAR DES MILLIERS",
     reviewsTitle: "Rejoignez plus de 5 000 patients soulagés",
@@ -266,7 +306,8 @@ const achillesFromThetisCopy: Record<
     easyReturns: "Devoluciones fáciles",
     instantAccess: "Acceso instantáneo — empiece hoy",
     readersLine: "Únete a 20.000 lectores",
-    addCourse: "Añadir curso al carrito",
+    reviewsStarsLinkLabel: "Leer opiniones de pacientes",
+    addCourse: "Comprar acceso al curso",
     splintImageAlt: "Férula nocturna Thetis para la recuperación de Aquiles",
     reviewsKicker: "CON LA CONFIANZA DE MILES",
     reviewsTitle: "Únase a más de 5.000 pacientes aliviados",
@@ -279,7 +320,8 @@ const achillesFromThetisCopy: Record<
     easyReturns: "Resi facili",
     instantAccess: "Accesso immediato — inizia oggi",
     readersLine: "Unisciti a 20.000 lettori",
-    addCourse: "Aggiungi corso al carrello",
+    reviewsStarsLinkLabel: "Leggi le recensioni dei pazienti",
+    addCourse: "Acquista accesso al corso",
     splintImageAlt: "Tutore notturno Thetis per il recupero di Achille",
     reviewsKicker: "SCELTO DA MIGLIAIA DI PERSONE",
     reviewsTitle: "Unisciti a oltre 5.000 pazienti che hanno trovato sollievo",
@@ -292,12 +334,6 @@ const achillesFromThetisCopy: Record<
 const at = achillesFromThetisCopy[lang];
 
 let catalogue = getCatalogueProductsForCondition(conditionId);
-const hasSplint =
-  conditionId === "achilles-rupture" &&
-  (c.productRouteSlugs?.includes("achilles-rupture-splint") ?? false);
-if (hasSplint) {
-  catalogue = catalogue.filter((p) => p.id !== "thetis-night-splint");
-}
 
 const shopProducts = orderedShopProductsForDisplay(catalogue);
 
@@ -312,6 +348,7 @@ const fromThetisLinks = [
 
 const splintRoute = getRouteBySlugAndLanguage("achilles-rupture-splint", lang);
 const reviewsRoute = getRouteBySlugAndLanguage("reviews", lang);
+const reviewsPageHref = reviewsRoute?.href ?? "/reviews";
 const isAchillesShop = conditionId === "achilles-rupture";
 
 /** Short EN URL; other locales use translated splint PDP. */
@@ -323,7 +360,6 @@ const shopAchillesHero: Record<
   {
     kicker: string;
     sub: string;
-    splintCaption: string;
     ctaAddToCart: string;
     /** Amazon / partner checkout (opens in a new tab). */
     ctaBuyPartner: string;
@@ -333,47 +369,37 @@ const shopAchillesHero: Record<
   en: {
     kicker: "Achilles rupture essentials",
     sub: "Our night splint is the centrepiece—then explore boots, wedges, and comfort picks we reference in the guides.",
-    splintCaption:
-      "Hold a safe plantarflexed position at night without sleeping in the full boot (when your team agrees).",
-    ctaAddToCart: "Add to cart",
+    ctaAddToCart: "Order night splint",
     ctaBuyPartner: "Buy now",
-    ctaLearnMore: "Learn more",
+    ctaLearnMore: "Full product details",
   },
   de: {
     kicker: "Das Wichtigste bei der Ruptur",
     sub: "Die Nachtschiene steht im Mittelpunkt—dazu Schuhe, Keile und Komfort-Artikel aus unseren Leitfäden.",
-    splintCaption:
-      "Sichere Plantarflexion nachts ohne volles Boot (wenn Ihr Team es erlaubt).",
-    ctaAddToCart: "In den Warenkorb",
+    ctaAddToCart: "Nachtschiene bestellen",
     ctaBuyPartner: "Jetzt kaufen",
-    ctaLearnMore: "Mehr erfahren",
+    ctaLearnMore: "Alle Produktdetails",
   },
   fr: {
     kicker: "L’essentiel rupture d’Achille",
     sub: "L’attelle de nuit au centre—puis bottes, cales et confort issus de nos guides.",
-    splintCaption:
-      "Position sécurisée la nuit sans dormir en botte complète (si votre équipe l’accepte).",
-    ctaAddToCart: "Ajouter au panier",
+    ctaAddToCart: "Commander l'attelle de nuit",
     ctaBuyPartner: "Acheter",
-    ctaLearnMore: "En savoir plus",
+    ctaLearnMore: "Détails du produit",
   },
   es: {
     kicker: "Lo esencial en la rotura",
     sub: "La férula nocturna es el eje—luego botas, cuñas y artículos de nuestras guías.",
-    splintCaption:
-      "Plantarflexión segura por la noche sin la bota completa (si su equipo lo aprueba).",
-    ctaAddToCart: "Añadir al carrito",
+    ctaAddToCart: "Pedir la férula nocturna",
     ctaBuyPartner: "Comprar",
-    ctaLearnMore: "Más información",
+    ctaLearnMore: "Detalles del producto",
   },
   it: {
     kicker: "Rottura di Achille: il necessario",
     sub: "Il tutore notturno è al centro—poi stivali, zeppe e comfort dalle nostre guide.",
-    splintCaption:
-      "Plantarflexione sicura di notte senza lo stivale completo (se il team è d’accordo).",
-    ctaAddToCart: "Aggiungi al carrello",
+    ctaAddToCart: "Ordina il tutore notturno",
     ctaBuyPartner: "Acquista",
-    ctaLearnMore: "Scopri di più",
+    ctaLearnMore: "Dettagli sul prodotto",
   },
 };
 
@@ -426,39 +452,11 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                   {ah.ctaLearnMore}
                 </a>
               </p>
-              <div class="bg-white/80 dark:bg-neutral-900/60 shadow-sm mx-auto lg:mx-0 mt-8 p-4 border border-primary/20 rounded-xl max-w-lg text-left">
-                <p class="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
-                  {ah.splintCaption}
-                </p>
-              </div>
             </div>
             <div class="flex justify-center lg:justify-end order-1 lg:order-2">
-              {splintRoute ? (
-                <a
-                  href={learnMoreSplintHref}
-                  class="block hover:opacity-95 w-full max-w-[560px] transition-opacity"
-                >
-                  <img
-                    src={posterImage.src}
-                    alt="Achilles rupture recovery products collage"
-                    width={680}
-                    height={680}
-                    class="w-full h-auto object-contain"
-                    loading="eager"
-                  />
-                </a>
-              ) : (
-                <div class="w-full max-w-[560px]">
-                  <img
-                    src={posterImage.src}
-                    alt="Achilles rupture recovery products collage"
-                    width={680}
-                    height={680}
-                    class="w-full h-auto object-contain"
-                    loading="eager"
-                  />
-                </div>
-              )}
+              <div class="bg-gradient-to-br from-primary/5 dark:from-primary/10 via-transparent to-primary/5 dark:to-primary/10 rounded-2xl w-full max-w-[560px] aspect-square overflow-hidden">
+                <ProductCollage client:load products={catalogue} />
+              </div>
             </div>
           </div>
         </div>
@@ -482,18 +480,12 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                 {c.label}
               </h1>
               <p class="mx-auto lg:mx-0 max-w-xl text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed">
-                {shopConditionHeroTagline(lang, c.label)}
+                {CONDITION_SHOP_HUB_DESCRIPTION[conditionId][lang]}
               </p>
             </div>
             <div class="flex justify-center lg:justify-end order-1 lg:order-2">
-              <div
-                class="flex justify-center items-center bg-gradient-to-br from-primary/20 dark:from-primary/28 via-primary/8 dark:via-primary/12 to-transparent shadow-lg border border-primary/25 rounded-2xl ring-1 ring-primary/10 w-full max-w-[340px] aspect-square"
-                aria-hidden="true"
-              >
-                <ShoppingBag
-                  className="w-[28%] max-w-[7rem] h-auto text-primary/35"
-                  strokeWidth={1.25}
-                />
+              <div class="bg-gradient-to-br from-primary/5 dark:from-primary/10 via-transparent to-primary/5 dark:to-primary/10 rounded-2xl w-full max-w-[560px] aspect-square overflow-hidden">
+                <ProductCollage client:load products={catalogue} />
               </div>
             </div>
           </div>
@@ -561,6 +553,16 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                   <RotateCcw className="w-3.5 h-3.5 text-primary" aria-hidden />
                   {at.easyReturns}
                 </span>
+              </div>
+              <div class="mb-6">
+                <ReviewsLink
+                  client:load
+                  lang={lang}
+                  href={reviewsPageHref}
+                  ariaLabel={at.reviewsStarsLinkLabel}
+                  size="md"
+                  className="mb-0"
+                />
               </div>
               <div class="flex sm:flex-row flex-col flex-wrap gap-3 mt-auto">
                 <SplintShopBuyButton
@@ -664,10 +666,14 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                 <li>
                   {isBuyableCourse ? (
                     <article class="flex sm:flex-row flex-col items-stretch gap-5 bg-primary/5 shadow-sm p-5 sm:p-6 border border-primary/20 rounded-xl">
-                      <div class="flex justify-center items-center bg-primary/10 border border-primary/15 rounded-xl w-[150px] h-[150px] shrink-0">
-                        <BookOpen
-                          className="w-14 h-14 text-primary"
-                          aria-hidden
+                      <div class="border border-primary/15 rounded-xl w-[150px] h-[150px] overflow-hidden shrink-0">
+                        <img
+                          src="/images/catalogue-products/plantar-fasciitis-course-banner.png"
+                          alt={plantarCourseThumbAlt[lang]}
+                          width={150}
+                          height={150}
+                          class="w-full h-full object-cover"
+                          loading="lazy"
                         />
                       </div>
                       <div class="flex flex-col flex-1 min-w-0">
@@ -698,6 +704,52 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                           >
                             {at.addCourse}
                           </CourseBuyButton>
+                          <a
+                            href={r.href}
+                            class={cn(
+                              buttonVariants({
+                                variant: "outline",
+                                size: "lg",
+                              }),
+                              "w-full sm:w-auto font-semibold",
+                            )}
+                          >
+                            {t.viewCourse.replace(/\s*→\s*$/, "")}
+                          </a>
+                        </div>
+                      </div>
+                    </article>
+                  ) : isCourse && courseComingSoon ? (
+                    <article class="flex sm:flex-row flex-col items-stretch gap-5 bg-neutral-100/80 dark:bg-neutral-900/40 shadow-sm p-5 sm:p-6 border border-neutral-300 dark:border-neutral-600 border-dashed rounded-xl">
+                      <div class="flex justify-center items-center bg-neutral-200/80 dark:bg-neutral-800/80 border border-neutral-300 dark:border-neutral-600 rounded-xl w-[150px] h-[150px] shrink-0">
+                        <BookOpen
+                          className="w-14 h-14 text-neutral-500 dark:text-neutral-400"
+                          aria-hidden
+                        />
+                      </div>
+                      <div class="flex flex-col flex-1 min-w-0">
+                        <p class="inline-flex self-start bg-neutral-200 dark:bg-neutral-800 mb-3 px-2.5 py-1 rounded-md font-semibold text-neutral-700 dark:text-neutral-200 text-xs uppercase tracking-wide">
+                          {soon.badge}
+                        </p>
+                        <h3 class="mb-2 font-semibold text-neutral-800 dark:text-neutral-100 text-lg leading-snug">
+                          {r.title}
+                        </h3>
+                        <p class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm">
+                          {soon.note}
+                        </p>
+                        <div class="flex sm:flex-row flex-col flex-wrap gap-3 mt-auto">
+                          <a
+                            href={learnHubHref}
+                            class={cn(
+                              buttonVariants({
+                                variant: "default",
+                                size: "lg",
+                              }),
+                              "w-full sm:w-auto font-semibold",
+                            )}
+                          >
+                            {soon.browseGuides}
+                          </a>
                           <a
                             href={r.href}
                             class={cn(

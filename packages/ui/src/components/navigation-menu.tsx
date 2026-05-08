@@ -12,8 +12,9 @@ type NavigationMenuPositionerProps = React.ComponentPropsWithoutRef<
   typeof NavigationMenuPrimitive.Positioner
 >;
 
-/** Matches site mega menus (Learn / Shop); popup must not cap below this. */
-const navigationMenuViewportWidth = "md:min-w-[600px] lg:min-w-[800px]";
+/** Desktop mega-menu: one consistent panel width (matches link-card copy). */
+const navigationMenuViewportWidth =
+  "w-[min(28rem,calc(100vw-1.5rem))] md:w-[28rem] md:min-w-[28rem] md:max-w-[28rem]";
 
 const NavigationMenu = React.forwardRef<
   HTMLElement,
@@ -26,7 +27,7 @@ const NavigationMenu = React.forwardRef<
   {
     align = "start",
     side = "bottom",
-    sideOffset = 8,
+    sideOffset = 4,
     alignOffset = 0,
     className,
     children,
@@ -106,7 +107,8 @@ const NavigationMenuTrigger = React.forwardRef<
     >
       {children}{" "}
       <ChevronDownIcon
-        className="top-px relative ml-1 size-3 group-data-open/navigation-menu-trigger:rotate-180 group-data-popup-open/navigation-menu-trigger:rotate-180 transition duration-200"
+        className="top-px relative ml-1 w-4 h-4 text-muted-foreground group-data-open/navigation-menu-trigger:rotate-180 group-data-popup-open/navigation-menu-trigger:rotate-180 transition duration-200 shrink-0"
+        strokeWidth={1.75}
         aria-hidden="true"
       />
     </NavigationMenuPrimitive.Trigger>
@@ -157,7 +159,10 @@ const NavigationMenuPositioner = React.forwardRef<
         align={align}
         alignOffset={alignOffset}
         className={cn(
-          "data-[side=bottom]:before:top-[-10px] z-50 isolate data-[side=bottom]:before:absolute data-[side=bottom]:before:inset-x-0 w-[var(--positioner-width)] max-w-[var(--available-width)] h-[var(--positioner-height)] data-[side=bottom]:before:h-[10px] transition-[top,left,right,bottom] data-instant:transition-none duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)]",
+          "z-50 isolate w-[var(--positioner-width)] max-w-[var(--available-width)] h-[var(--positioner-height)] transition-[top,left,right,bottom] data-instant:transition-none duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)]",
+          // Invisible hover bridge: closes the gap between trigger and popup so the menu
+          // does not dismiss while moving the pointer (requires content + pointer-events).
+          "data-[side=bottom]:before:absolute data-[side=bottom]:before:inset-x-0 data-[side=bottom]:before:top-[-20px] data-[side=bottom]:before:z-10 data-[side=bottom]:before:h-[20px] data-[side=bottom]:before:content-[''] data-[side=bottom]:before:pointer-events-auto",
           className,
         )}
         {...props}

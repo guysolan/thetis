@@ -47,6 +47,7 @@
     "./button-menu": "./src/components/button-menu.tsx",
     "./calendar": "./src/components/calendar.tsx",
     "./checkbox": "./src/components/checkbox.tsx",
+    "./condition-icons": "./src/icons/condition-icons.tsx",
     "./table": "./src/components/table.tsx",
     "./navigation-menu": "./src/components/navigation-menu.tsx",
     "./sheet": "./src/components/sheet.tsx",

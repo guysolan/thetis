@@ -1,5 +1,6 @@
 import { BookOpen, Calendar, HelpCircle } from "lucide-react";
 import type { BaseRoute } from "./types";
+import { CONDITION_LEARN_HUB_DESCRIPTION } from "../condition-hub-copy";
 
 const atFaq = (
     slug: string,
@@ -142,13 +143,7 @@ export const achillesTendinitisGuideHubNavRoute: BaseRoute = {
         es: "Achilles tendinitis — aprender",
         it: "Achilles tendinitis — approfondisci",
     },
-    description: {
-        en: "Course, FAQs, staged patient guides, and shop for Achilles tendinitis.",
-        de: "Kurs, FAQs, gestaffelte Leitfäden und Shop.",
-        fr: "Cours, FAQ, guides par étapes et boutique.",
-        es: "Curso, preguntas frecuentes, guías por fases y tienda.",
-        it: "Corso, FAQ, guide per fasi e shop.",
-    },
+    description: CONDITION_LEARN_HUB_DESCRIPTION["achilles-tendinitis"],
     slugTranslations: {
         en: "learn/achilles-tendinitis",
         de: "learn/achilles-tendinitis",
@@ -196,18 +191,18 @@ export const achillesTendinitisCourseRoutes: BaseRoute[] = [
         conditionId: "achilles-tendinitis",
         slug: "course/achilles-tendinitis",
         title: {
-            en: "Achilles tendinitis course (placeholder)",
-            de: "Achilles tendinitis course (placeholder)",
-            fr: "Achilles tendinitis course (placeholder)",
-            es: "Achilles tendinitis course (placeholder)",
-            it: "Achilles tendinitis course (placeholder)",
+            en: "Achilles tendinitis course",
+            de: "Kurs: Achilles-Tendinitis",
+            fr: "Cours tendinite d’Achille",
+            es: "Curso de tendinitis de Aquiles",
+            it: "Corso tendinite di Achille",
         },
         description: {
-            en: "Placeholder — content coming soon.",
-            de: "Placeholder — content coming soon.",
-            fr: "Placeholder — content coming soon.",
-            es: "Placeholder — content coming soon.",
-            it: "Placeholder — content coming soon.",
+            en: "Full course coming soon — free guides and FAQs are available on the learn hub now.",
+            de: "Vollständiger Kurs folgt — kostenlose Leitfäden und FAQs gibt es jetzt im Lern-Hub.",
+            fr: "Cours complet bientôt — guides et FAQ gratuits dès maintenant dans l’espace d’apprentissage.",
+            es: "Curso completo próximamente — guías y preguntas frecuentes gratuitas ya en el centro de aprendizaje.",
+            it: "Corso completo in arrivo — guide e FAQ gratuite già disponibili nell’area learning.",
         },
         slugTranslations: {
             en: "course/achilles-tendinitis",

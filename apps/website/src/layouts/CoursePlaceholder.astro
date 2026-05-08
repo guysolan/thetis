@@ -6,18 +6,44 @@ export interface Props {
     title: string;
     description: string;
     lang?: Lang;
+    /** e.g. "Coming soon" — shown as a clear badge above the title */
+    kicker?: string;
+    footerHref?: string;
+    footerLabel?: string;
 }
 
-const { title, description, lang = "en" } = Astro.props;
+const {
+    title,
+    description,
+    lang = "en",
+    kicker,
+    footerHref = "/course",
+    footerLabel = "Achilles rupture recovery course →",
+} = Astro.props;
 ---
 
 <Layout title={title} description={description} lang={lang}>
     <main class="mx-auto px-4 py-20 max-w-2xl">
-        <h1 class="mb-4 font-bold text-neutral-900 text-3xl">{title}</h1>
-        <p class="mb-8 text-neutral-600 text-lg">{description}</p>
-        <p class="text-neutral-600">
-            <a href="/course" class="font-medium text-primary hover:underline"
-                >Achilles rupture recovery course →</a
+        {
+            kicker ? (
+                <p class="inline-flex bg-neutral-200 dark:bg-neutral-800 mb-4 px-3 py-1.5 rounded-md font-semibold text-neutral-800 dark:text-neutral-200 text-xs uppercase tracking-wide">
+                    {kicker}
+                </p>
+            ) : null
+        }
+        <h1
+            class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl"
+        >
+            {title}
+        </h1>
+        <p class="mb-8 text-neutral-600 dark:text-neutral-400 text-lg">
+            {description}
+        </p>
+        <p class="text-neutral-600 dark:text-neutral-400">
+            <a
+                href={footerHref}
+                class="font-medium text-primary hover:underline"
+                >{footerLabel}</a
             >
         </p>
     </main>

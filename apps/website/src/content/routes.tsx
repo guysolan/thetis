@@ -1,7 +1,6 @@
 import { type Language, languages } from "../config/languages";
 import { type ConditionId, conditions } from "./conditions/registry";
-import { Activity, Calendar, Heart, HelpCircle, Hourglass } from "lucide-react";
-import type { ImageMetadata } from "astro";
+import { CONDITION_SHOP_HUB_DESCRIPTION } from "./condition-hub-copy";
 import {
   BookOpen,
   Box,
@@ -20,6 +19,8 @@ import {
 
 import type { BaseRoute, Route } from "./routes/types";
 export type { BaseRoute, Route } from "./routes/types";
+import type { ReactNode } from "react";
+import { conditionIconComponents } from "@thetis/ui/condition-icons";
 import {
   achillesRuptureArticleRoutes,
   achillesRuptureGuideHubNavRoute,
@@ -43,6 +44,11 @@ import {
   insertionalAchillesTendonitisGuideHubNavRoute,
   insertionalAchillesTendonitisGuideRoutes,
 } from "./routes/insertional-achilles-tendonitis";
+
+function getConditionIconNode(conditionId: ConditionId): ReactNode {
+  const Icon = conditionIconComponents[conditionId];
+  return <Icon className="w-full h-full" />;
+}
 
 // Navigation content for DesktopNav
 export const navigationContent = {
@@ -1146,17 +1152,7 @@ export const conditionShopHubRoutes: BaseRoute[] = conditions.map((c) => ({
     es: `${c.label} — tienda`,
     it: `${c.label} — shop`,
   },
-  description: {
-    en:
-      "Thetis products and curated recovery gear (including partner links where helpful).",
-    de:
-      "Thetis-Produkte und ausgewählte Genesungsartikel (inkl. Partnerlinks).",
-    fr:
-      "Produits Thetis et sélection d'équipement (liens partenaires le cas échéant).",
-    es:
-      "Productos Thetis y equipo de recuperación seleccionado (enlaces de socios).",
-    it: "Prodotti Thetis e articoli per il recupero (link partner dove utile).",
-  },
+  description: CONDITION_SHOP_HUB_DESCRIPTION[c.id],
   slugTranslations: {
     en: `shop/${c.id}`,
     de: `shop/${c.id}`,
@@ -1245,9 +1241,14 @@ export function getConditionHubNavRoutes(langCode: string): Route[] {
   const language = languages.find((l) => l.code === langCode);
   if (!language) return [];
 
-  return conditions.map((c) =>
-    generateRouteForLanguage(getHubBaseRouteForCondition(c.id), language)
-  );
+  return conditions.map((c) => {
+    const baseRoute = getHubBaseRouteForCondition(c.id);
+    const route = generateRouteForLanguage(baseRoute, language);
+    return {
+      ...route,
+      icon: getConditionIconNode(c.id),
+    };
+  });
 }
 
 export function getShopBaseRouteForCondition(
@@ -1263,9 +1264,14 @@ export function getConditionShopNavRoutes(langCode: string): Route[] {
   const language = languages.find((l) => l.code === langCode);
   if (!language) return [];
 
-  return conditions.map((c) =>
-    generateRouteForLanguage(getShopBaseRouteForCondition(c.id), language)
-  );
+  return conditions.map((c) => {
+    const baseRoute = getShopBaseRouteForCondition(c.id);
+    const route = generateRouteForLanguage(baseRoute, language);
+    return {
+      ...route,
+      icon: getConditionIconNode(c.id),
+    };
+  });
 }
 
 /** One course landing per condition (Achilles rupture + three scaffold conditions). */

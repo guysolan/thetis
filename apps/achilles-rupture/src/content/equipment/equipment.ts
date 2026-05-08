@@ -64,7 +64,7 @@ export const equipmentList: Equipment[] = [
     actionText: "Buy Now",
     isExternal: true,
     tags: ["sleep", "recovery", "protection"],
-    imagePath: "/images/catalogue-products/thetis-night-splint-side.jpg",
+    imagePath: "/images/catalogue-products/night-splint-bed-top-square.jpg",
   },
   {
     priority: "recommended",

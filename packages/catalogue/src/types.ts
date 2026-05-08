@@ -49,6 +49,13 @@ export interface AchillesProduct {
   tags: string[];
   /** Site-relative; product photos under `/images/catalogue-products/` (synced from package assets). */
   imagePath: string;
+  /**
+   * When set, website shop grids resolve the product link with
+   * `getRouteBySlugAndLanguage(this, lang)` instead of purchase URLs in `locations`.
+   * Use the canonical EN route slug from the site `routes` (e.g. `course`,
+   * `course/plantar-fasciitis`).
+   */
+  websiteRouteSlug?: string;
   description?: string;
   features: string[];
   locations: Partial<Record<MarketCode, AchillesProductLocation>>;

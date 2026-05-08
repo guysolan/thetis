@@ -1,5 +1,6 @@
 import { BookOpen, Calendar, HelpCircle } from "lucide-react";
 import type { BaseRoute } from "./types";
+import { CONDITION_LEARN_HUB_DESCRIPTION } from "../condition-hub-copy";
 
 const pfFaq = (
     slug: string,
@@ -144,13 +145,7 @@ export const plantarFasciitisGuideHubNavRoute: BaseRoute = {
         es: "Plantar fasciitis — aprender",
         it: "Plantar fasciitis — approfondisci",
     },
-    description: {
-        en: "Course, FAQs, staged patient guides, and shop for plantar fasciitis.",
-        de: "Kurs, FAQs, gestaffelte Leitfäden und Shop bei Plantarfasziitis.",
-        fr: "Cours, FAQ, guides par étapes et boutique.",
-        es: "Curso, preguntas frecuentes, guías por fases y tienda.",
-        it: "Corso, FAQ, guide per fasi e shop.",
-    },
+    description: CONDITION_LEARN_HUB_DESCRIPTION["plantar-fasciitis"],
     slugTranslations: {
         en: "learn/plantar-fasciitis",
         de: "learn/plantar-fasciitis",
@@ -199,18 +194,18 @@ export const plantarFasciitisCourseRoutes: BaseRoute[] = [
         conditionId: "plantar-fasciitis",
         slug: "course/plantar-fasciitis",
         title: {
-            en: "Plantar fasciitis course (placeholder)",
-            de: "Plantar fasciitis course (placeholder)",
-            fr: "Plantar fasciitis course (placeholder)",
-            es: "Plantar fasciitis course (placeholder)",
-            it: "Plantar fasciitis course (placeholder)",
+            en: "Plantar fasciitis course",
+            de: "Kurs: Plantarfasziitis",
+            fr: "Cours fasciite plantaire",
+            es: "Curso de fascitis plantar",
+            it: "Corso fascite plantare",
         },
         description: {
-            en: "Placeholder — content coming soon.",
-            de: "Placeholder — content coming soon.",
-            fr: "Placeholder — content coming soon.",
-            es: "Placeholder — content coming soon.",
-            it: "Placeholder — content coming soon.",
+            en: "Stretching, loading, footwear, and treatment steps you can follow at home — instant access after checkout.",
+            de: "Dehnung, Belastung, Schuhwerk und Behandlungsschritte für zu Hause — sofortiger Zugang nach dem Kauf.",
+            fr: "Étirements, charge, chaussures et traitement à la maison — accès immédiat après l’achat.",
+            es: "Estiramientos, carga, calzado y tratamiento en casa — acceso inmediato tras el pago.",
+            it: "Stretching, carico, calzature e trattamento a casa — accesso immediato dopo l’acquisto.",
         },
         slugTranslations: {
             en: "course/plantar-fasciitis",

@@ -154,7 +154,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Sleep soundly knowing your Achilles is protected and healing in the optimal position",
     tags: ["sleep", "recovery", "protection"],
-    imagePath: "/images/catalogue-products/thetis-night-splint-side.jpg",
+    imagePath: "/images/catalogue-products/night-splint-bed-top-square.jpg",
     description:
       "The only night splint specifically designed for Achilles rupture recovery. Patented in 2024.",
     features: [
@@ -172,6 +172,106 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
         price: "£60–70",
         url: "https://www.thetismedical.com/achilles-rupture-splint",
         dub: "https://dub.sh/QfjDjXQ",
+      },
+    },
+  },
+  {
+    id: "thetis-course-achilles-rupture",
+    conditions: ["achilles-rupture"],
+    priority: "recommended",
+    websiteRouteSlug: "course",
+    name: "Essentials recovery course",
+    category: "Education",
+    keyBenefit:
+      "Structured lessons covering every stage of Achilles rupture recovery",
+    tags: ["course", "education", "recovery"],
+    imagePath: "/images/catalogue-products/achilles-rope-ends-pointed-down.png",
+    description:
+      "Instant access after checkout — guided lessons you can follow at home.",
+    features: [],
+    locations: {
+      US: {
+        price: "Paid — checkout for local price",
+        url: "/course",
+      },
+      GB: {
+        price: "Paid — checkout for local price",
+        url: "/course",
+      },
+    },
+  },
+  {
+    id: "thetis-course-plantar-fasciitis",
+    conditions: ["plantar-fasciitis"],
+    priority: "recommended",
+    websiteRouteSlug: "course/plantar-fasciitis",
+    name: "Plantar fasciitis course",
+    category: "Education",
+    keyBenefit:
+      "Stretching, loading, footwear, and treatment steps you can follow at home",
+    tags: ["course", "education", "plantar"],
+    imagePath: "/images/catalogue-products/plantar-fasciitis-course-banner.png",
+    description:
+      "Instant access after checkout — a clear path through rehab at home.",
+    features: [],
+    locations: {
+      US: {
+        price: "Paid — checkout for local price",
+        url: "/course/plantar-fasciitis",
+      },
+      GB: {
+        price: "Paid — checkout for local price",
+        url: "/course/plantar-fasciitis",
+      },
+    },
+  },
+  {
+    id: "thetis-course-achilles-tendinitis",
+    conditions: ["achilles-tendinitis"],
+    priority: "recommended",
+    websiteRouteSlug: "course/achilles-tendinitis",
+    name: "Achilles tendinitis course",
+    category: "Education",
+    keyBenefit:
+      "Full course rollout in progress — read the syllabus and FAQs on the course page",
+    tags: ["course", "education", "tendinopathy"],
+    imagePath: "/images/catalogue-products/theraband.png",
+    description:
+      "Companion course for clinicians’ rehab plans — landing page reflects current availability.",
+    features: [],
+    locations: {
+      US: {
+        price: "See course page",
+        url: "/course/achilles-tendinitis",
+      },
+      GB: {
+        price: "See course page",
+        url: "/course/achilles-tendinitis",
+      },
+    },
+  },
+  {
+    id: "thetis-course-insertional-achilles-tendonitis",
+    conditions: ["insertional-achilles-tendonitis"],
+    priority: "recommended",
+    websiteRouteSlug: "course/insertional-achilles-tendonitis",
+    name: "Insertional Achilles tendonitis course",
+    category: "Education",
+    keyBenefit:
+      "Structured course pathway — landing page reflects current availability",
+    tags: ["course", "education", "tendinopathy"],
+    imagePath: "/images/catalogue-products/slant-board-calf-stretch-wedge.png",
+    description:
+      "Companion to load-management and footwear guidance — instant access when available.",
+    features: [],
+    locations: {
+      US: {
+        price: "See course page",
+        url: "/course/insertional-achilles-tendonitis",
+      },
+      GB: {
+        price: "See course page",
+        url: "/course/insertional-achilles-tendonitis",
       },
     },
   },

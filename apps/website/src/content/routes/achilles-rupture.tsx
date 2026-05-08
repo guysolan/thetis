@@ -8,6 +8,7 @@ import {
   Stethoscope,
 } from "lucide-react";
 import type { BaseRoute } from "./types";
+import { CONDITION_LEARN_HUB_DESCRIPTION } from "../condition-hub-copy";
 
 // Recovery phase routes (timeline-based articles) — Achilles rupture
 export const recoveryPhaseRoutes: BaseRoute[] = [
@@ -609,13 +610,7 @@ export const achillesRuptureGuideHubNavRoute: BaseRoute = {
     es: "Rotura de Aquiles — aprender",
     it: "Rottura di Achille — approfondisci",
   },
-  description: {
-    en: "Course, FAQs, week-by-week guides, and links to shop for Achilles rupture.",
-    de: "Kurs, FAQs, wöchentliche Leitfäden und Shop-Links zur Achillessehnenruptur.",
-    fr: "Cours, FAQ, guides semaine par semaine et liens boutique pour la rupture d'Achille.",
-    es: "Curso, preguntas frecuentes, guías semana a semana y enlaces a la tienda.",
-    it: "Corso, FAQ, guide settimana per settimana e link allo shop.",
-  },
+  description: CONDITION_LEARN_HUB_DESCRIPTION["achilles-rupture"],
   slugTranslations: {
     en: "learn/achilles-rupture",
     de: "learn/achilles-rupture",

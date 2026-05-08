@@ -45,12 +45,14 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "~$120–168 retail (size-dependent)",
         url: "https://www.amazon.com/dp/B00ZL316FO",
-        dub: "https://dub.sh/cEOCW5B",},
+        dub: "https://dub.sh/cEOCW5B",
+      },
       GB: {
         price: "~£120–165 inc VAT (typical retail)",
         url:
           "https://www.medicalsupplies.co.uk/aircast-airselect-elite-walker-boot.html",
-        dub: "https://dub.sh/TlwOLyP",},
+        dub: "https://dub.sh/TlwOLyP",
+      },
     },
     notes:
       "Manufacturer / IFU: Enovis Aircast AirSelect Elite. Re-verify price and SKU with your supplier.",
@@ -78,11 +80,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
         price: "~$275 (OPED US; size-dependent)",
         url:
           "https://opedmedical.com/product/vacoped-achilles-injury-fracture-orthosis-boot-formerly-vacocast-pro-achilles-boot/",
-        dub: "https://dub.sh/NOaCy2D",},
+        dub: "https://dub.sh/NOaCy2D",
+      },
       GB: {
         price: "~£252 inc VAT (typical UK retail)",
         url: "https://oped-uk.com/product/vacoped/",
-        dub: "https://dub.sh/E7haeDP",},
+        dub: "https://dub.sh/E7haeDP",
+      },
     },
     notes:
       "Alternate US SKU (short boot): see reference product `vacoped-us-short-fracture-boot`.",
@@ -118,7 +122,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Sleep soundly knowing your Achilles is protected and healing in the optimal position",
     tags: ["sleep", "recovery", "protection"],
-    imagePath: "/images/catalogue-products/thetis-night-splint-side.jpg",
+    imagePath: "/images/catalogue-products/night-splint-bed-top-square.jpg",
     description:
       "The only night splint specifically designed for Achilles rupture recovery. Patented in 2024.",
     features: [
@@ -160,11 +164,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$40–$50",
         url: "https://www.amazon.com/dp/B08FX2T2TF",
-        dub: "https://dub.sh/Tce7MYz",},
+        dub: "https://dub.sh/Tce7MYz",
+      },
       GB: {
         price: "£35–£40",
         url: "https://www.amazon.co.uk/dp/B08FX3YPWQ",
-        dub: "https://dub.sh/vCqn9UM",},
+        dub: "https://dub.sh/vCqn9UM",
+      },
     },
   },
   {
@@ -187,11 +193,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$25–$70",
         url: "https://www.amazon.com/dp/B0D31CCML3",
-        dub: "https://dub.sh/dHl0DIs",},
+        dub: "https://dub.sh/dHl0DIs",
+      },
       GB: {
         price: "£15–£45",
         url: "https://www.amazon.co.uk/dp/B09TRGQM1H",
-        dub: "https://dub.sh/mrIhBOY",},
+        dub: "https://dub.sh/mrIhBOY",
+      },
     },
   },
   {
@@ -215,11 +223,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$20–35",
         url: "https://www.amazon.com/dp/B09872TVZL",
-        dub: "https://dub.sh/lMWs2Gi",},
+        dub: "https://dub.sh/lMWs2Gi",
+      },
       GB: {
         price: "£6–15",
         url: "https://www.amazon.co.uk/dp/B07WWH1HNM",
-        dub: "https://dub.sh/uNbcZQV",},
+        dub: "https://dub.sh/uNbcZQV",
+      },
     },
   },
   {
@@ -239,11 +249,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$20–35",
         url: "https://www.amazon.com/dp/B077D9B2R5",
-        dub: "https://dub.sh/1sWkX7U",},
+        dub: "https://dub.sh/1sWkX7U",
+      },
       GB: {
         price: "£10–£25",
         url: "https://www.amazon.co.uk/dp/B077D9B2R5",
-        dub: "https://dub.sh/Eg3OhV5",},
+        dub: "https://dub.sh/Eg3OhV5",
+      },
     },
   },
   {
@@ -262,11 +274,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$25–$45",
         url: "https://www.amazon.com/dp/B0BZ43M5RD",
-        dub: "https://dub.sh/AYBbWxm",},
+        dub: "https://dub.sh/AYBbWxm",
+      },
       GB: {
         price: "£20–£25",
         url: "https://limboproducts.co.uk/product/limbo-full-leg-m100/",
-        dub: "https://dub.sh/STvghum",},
+        dub: "https://dub.sh/STvghum",
+      },
     },
   },
   {
@@ -285,11 +299,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$12–20",
         url: "https://www.amazon.com/dp/B0885HPBHK",
-        dub: "https://dub.sh/iveqHRR",},
+        dub: "https://dub.sh/iveqHRR",
+      },
       GB: {
         price: "£6–12",
         url: "https://www.amazon.co.uk/dp/B000KUAJCE",
-        dub: "https://dub.sh/Va8uahi",},
+        dub: "https://dub.sh/Va8uahi",
+      },
     },
   },
   {
@@ -313,11 +329,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$189–$330",
         url: "https://www.amazon.com/dp/B009VLBPI0",
-        dub: "https://dub.sh/VQFJtCu",},
+        dub: "https://dub.sh/VQFJtCu",
+      },
       GB: {
         price: "£100–£220",
         url: "https://www.amazon.co.uk/dp/B009VLBPI0",
-        dub: "https://dub.sh/ilaYNui",},
+        dub: "https://dub.sh/ilaYNui",
+      },
     },
   },
   {
@@ -342,11 +360,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$149–199",
         url: "https://www.amazon.com/dp/B08WJRWR57",
-        dub: "https://dub.sh/qXD0w1h",},
+        dub: "https://dub.sh/qXD0w1h",
+      },
       GB: {
         price: "£149–199",
         url: "https://www.amazon.co.uk/dp/B08WJRWR57",
-        dub: "https://dub.sh/soThT7T",},
+        dub: "https://dub.sh/soThT7T",
+      },
     },
   },
   {
@@ -376,12 +396,14 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
         price: "$12–20",
         url:
           "https://www.amazon.com/THERABAND-Latex-Yellow-Red-Green/dp/B000LX4KRA",
-        dub: "https://dub.sh/Po1w433",},
+        dub: "https://dub.sh/Po1w433",
+      },
       GB: {
         price: "£10–15",
         url:
           "https://www.amazon.co.uk/THERABAND-Latex-Yellow-Red-Green/dp/B000LX4KRA",
-        dub: "https://dub.sh/q5Q2Wvk",},
+        dub: "https://dub.sh/q5Q2Wvk",
+      },
     },
   },
   {
@@ -403,11 +425,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
         price: "$40",
         url:
           "https://opedmedical.com/product/liner-black-grey-for-vacoped-achilles-injury-fracture-and-vacocast-fracture-walking-boot-orthoses/",
-        dub: "https://dub.sh/r9GfzzH",},
+        dub: "https://dub.sh/r9GfzzH",
+      },
       GB: {
         price: "£40",
         url: "https://oped-uk.com/product/vacoped-vacocast-liner/",
-        dub: "https://dub.sh/OrPGhVG",},
+        dub: "https://dub.sh/OrPGhVG",
+      },
     },
   },
   {
@@ -433,11 +457,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$15–30",
         url: "https://www.amazon.com/dp/B0CTML6GND",
-        dub: "https://dub.sh/RjpEJUY",},
+        dub: "https://dub.sh/RjpEJUY",
+      },
       GB: {
         price: "£10–18",
         url: "https://www.amazon.co.uk/dp/B0CW5YQQ7P",
-        dub: "https://dub.sh/chBAdO8",},
+        dub: "https://dub.sh/chBAdO8",
+      },
     },
   },
   {
@@ -455,7 +481,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
         price: "$75–139",
         url:
           "https://www.amazon.com/Mobilegs-Ultra-Crutches-1-Pair/dp/B01N9OAW75",
-        dub: "https://dub.sh/5fzFIuX",},
+        dub: "https://dub.sh/5fzFIuX",
+      },
     },
   },
   {
@@ -478,11 +505,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "$10–15",
         url: "https://www.amazon.com/dp/B0CTML6GND",
-        dub: "https://dub.sh/2Ks0ddw",},
+        dub: "https://dub.sh/2Ks0ddw",
+      },
       GB: {
         price: "£10–18",
         url: "https://www.amazon.co.uk/dp/B0CW5YQQ7P",
-        dub: "https://dub.sh/QfLkkQB",},
+        dub: "https://dub.sh/QfLkkQB",
+      },
     },
   },
   {
@@ -503,7 +532,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
         price: "$40",
         url:
           "https://www.amazon.com/Liner-Achilles-Fracture-Orthosis-VACOcast/dp/B00PYI93U6",
-        dub: "https://dub.sh/Fnchc4w",},
+        dub: "https://dub.sh/Fnchc4w",
+      },
     },
   },
   {
@@ -521,7 +551,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         url: "https://www.amazon.com/dp/B004HY68DO",
-        dub: "https://dub.sh/d6uYNQd",},
+        dub: "https://dub.sh/d6uYNQd",
+      },
     },
   },
   {
@@ -537,7 +568,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       GB: {
         url: "https://www.amazon.co.uk/EvenUp-Evenup-Medium/dp/B089P6BT12",
-        dub: "https://dub.sh/4sXT6Bi",},
+        dub: "https://dub.sh/4sXT6Bi",
+      },
     },
   },
   {
@@ -553,10 +585,12 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         url: "https://opedmedical.com/product/evenup-shoe-lift/",
-        dub: "https://dub.sh/QF7vvKC",},
+        dub: "https://dub.sh/QF7vvKC",
+      },
       GB: {
         url: "https://opedmedical.com/product/evenup-shoe-lift/",
-        dub: "https://dub.sh/SUiRJlB",},
+        dub: "https://dub.sh/SUiRJlB",
+      },
     },
   },
   {
@@ -572,10 +606,12 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         url: "https://www.amazon.com/dp/B0716XTJ8L",
-        dub: "https://dub.sh/GO94vjq",},
+        dub: "https://dub.sh/GO94vjq",
+      },
       GB: {
         url: "https://www.amazon.co.uk/dp/B07K4VVN1V",
-        dub: "https://dub.sh/ZbMfJ74",},
+        dub: "https://dub.sh/ZbMfJ74",
+      },
     },
   },
   {
@@ -591,7 +627,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         url: "https://www.amazon.com/dp/B0BN9XWHJT",
-        dub: "https://dub.sh/k8wdiUM",},
+        dub: "https://dub.sh/k8wdiUM",
+      },
     },
   },
   {
@@ -608,7 +645,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       GB: {
         url:
           "https://www.amazon.co.uk/Fasola-Shower-Non-Slip-Protector-Reusable/dp/B0BN9XWHJT",
-        dub: "https://dub.sh/VYqmdmF",},
+        dub: "https://dub.sh/VYqmdmF",
+      },
     },
   },
   {
@@ -625,7 +663,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         url:
           "https://www.amazon.com/LimbO-Waterproof-Cast-Wound-Protector/dp/B00O7Z0ORS",
-        dub: "https://dub.sh/c1alY5u",},
+        dub: "https://dub.sh/c1alY5u",
+      },
     },
   },
   {
@@ -641,7 +680,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       GB: {
         url: "https://limboproducts.co.uk/shop/",
-        dub: "https://dub.sh/fZ1Da7j",},
+        dub: "https://dub.sh/fZ1Da7j",
+      },
     },
   },
   {
@@ -657,7 +697,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         url: "https://www.amazon.com/dp/B07DGR98VQ",
-        dub: "https://dub.sh/E8mkssN",},
+        dub: "https://dub.sh/E8mkssN",
+      },
     },
   },
   {
@@ -674,7 +715,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         url:
           "https://opedmedical.com/product/vacoped-short-achilles-injury-fracture-walking-boot/",
-        dub: "https://dub.sh/QEDwJOO",},
+        dub: "https://dub.sh/QEDwJOO",
+      },
     },
   },
   {
@@ -690,10 +732,12 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         url: "https://enovis.com/products/aircast/airselect-elite",
-        dub: "https://dub.sh/c10uDlA",},
+        dub: "https://dub.sh/c10uDlA",
+      },
       GB: {
         url: "https://enovis.com/products/aircast/airselect-elite",
-        dub: "https://dub.sh/UoMP6J5",},
+        dub: "https://dub.sh/UoMP6J5",
+      },
     },
   },
   {
@@ -710,7 +754,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         url:
           "https://www.amazon.com/Achilles-Orthopaedic-Comfortable-Lightweight-Alternative/dp/B09XLFCJ9F",
-        dub: "https://dub.sh/M7f8Dhu",},
+        dub: "https://dub.sh/M7f8Dhu",
+      },
     },
   },
   {
@@ -727,7 +772,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       GB: {
         url:
           "https://www.amazon.co.uk/Pieces-Walking-Recovery-Reusable-Waterproof/dp/B09PG83J8H",
-        dub: "https://dub.sh/4ZuyQgV",},
+        dub: "https://dub.sh/4ZuyQgV",
+      },
     },
   },
   {
@@ -744,7 +790,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         url:
           "https://www.amazon.com/MyShoeCovers-Fracture-Walking-Boot-Cover/dp/B075FC3T9B",
-        dub: "https://dub.sh/f1YSQnO",},
+        dub: "https://dub.sh/f1YSQnO",
+      },
     },
   },
   {
@@ -761,7 +808,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       GB: {
         url: "https://www.amazon.co.uk/dp/B09TRGQM1H",
-        dub: "https://dub.sh/3OcmPra",},
+        dub: "https://dub.sh/3OcmPra",
+      },
     },
   },
   {
@@ -777,7 +825,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       GB: {
         url: "https://www.amazon.co.uk/s?k=Flexivity+crutch+handle+covers",
-        dub: "https://dub.sh/X50YcYW",},
+        dub: "https://dub.sh/X50YcYW",
+      },
     },
   },
   {
@@ -793,7 +842,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         url: "https://www.donjoystore.com/aircast-heel-wedge",
-        dub: "https://dub.sh/8DGUhql",},
+        dub: "https://dub.sh/8DGUhql",
+      },
     },
   },
   {
@@ -814,7 +864,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         url: "https://www.amazon.com/dp/B000LX4KRA",
-        dub: "https://dub.sh/Y8kOiIX",},
+        dub: "https://dub.sh/Y8kOiIX",
+      },
     },
   },
   {
@@ -837,11 +888,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "varies by size",
         url: "https://www.amazon.com/dp/B0BM5TPP93",
-        dub: "https://dub.sh/yOFQz6P",},
+        dub: "https://dub.sh/yOFQz6P",
+      },
       GB: {
         price: "varies by size",
         url: "https://www.amazon.co.uk/s?k=covidien+ted+anti+embolism",
-        dub: "https://dub.sh/YCHvT21",},
+        dub: "https://dub.sh/YCHvT21",
+      },
     },
   },
   {
@@ -865,11 +918,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "~$25–40",
         url: "https://www.amazon.com/dp/B095RSH5NZ",
-        dub: "https://dub.sh/FxsLcef",},
+        dub: "https://dub.sh/FxsLcef",
+      },
       GB: {
         price: "~£20–35",
         url: "https://www.amazon.co.uk/dp/B0CGWB9R5J",
-        dub: "https://dub.sh/d9Ed99v",},
+        dub: "https://dub.sh/d9Ed99v",
+      },
     },
   },
   {
@@ -888,12 +943,15 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         price: "~$15–30",
-        url: "https://www.amazon.com/NanaCare-Silicone-Medical-C-Section-Surgical/dp/B0DV4ZXXK8/ref=sr_1_2_sspa?dib=eyJ2IjoiMSJ9.299C2XCGSkhpINUAu4MOKFJYv6lZFLvHIExoygq7uaxg5kr8jQkx649BeNOU95cvHBlnznUfzTZ2dqpXmcam4xHwA5HqdsIdFLwSlUCNU4_CJnWhHwXkw4jII2QcS_fOyunPOoaSEuwnPid4osSeoWk7X-3nh23VPMLJXZlfuY8wUbnIPKmb4u9y4EKT-NG52YKaPRbOnJTu9SycbkhufZBN2SHQC1_Xv0tOYavDkFEUXML8b3g39kQkz0j0Ub7puHK6uJTxHsmn-1U8Vj2olaQPqH22-puudHm1B__-JAM.jrhXWFP0XEMqA0N7lF6qd1KjBnmTEjRO30jDVfs6v28&dib_tag=se&keywords=Silicone%2Bscar%2Bgel%2B(topical)&qid=1776326563&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
-        dub: "https://dub.sh/e5Mkb22",},
+        url:
+          "https://www.amazon.com/NanaCare-Silicone-Medical-C-Section-Surgical/dp/B0DV4ZXXK8/ref=sr_1_2_sspa?dib=eyJ2IjoiMSJ9.299C2XCGSkhpINUAu4MOKFJYv6lZFLvHIExoygq7uaxg5kr8jQkx649BeNOU95cvHBlnznUfzTZ2dqpXmcam4xHwA5HqdsIdFLwSlUCNU4_CJnWhHwXkw4jII2QcS_fOyunPOoaSEuwnPid4osSeoWk7X-3nh23VPMLJXZlfuY8wUbnIPKmb4u9y4EKT-NG52YKaPRbOnJTu9SycbkhufZBN2SHQC1_Xv0tOYavDkFEUXML8b3g39kQkz0j0Ub7puHK6uJTxHsmn-1U8Vj2olaQPqH22-puudHm1B__-JAM.jrhXWFP0XEMqA0N7lF6qd1KjBnmTEjRO30jDVfs6v28&dib_tag=se&keywords=Silicone%2Bscar%2Bgel%2B(topical)&qid=1776326563&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
+        dub: "https://dub.sh/e5Mkb22",
+      },
       GB: {
         price: "~£12–25",
         url: "https://www.amazon.co.uk/dp/B0F659G9GK",
-        dub: "https://dub.sh/5t9c1U4",},
+        dub: "https://dub.sh/5t9c1U4",
+      },
     },
   },
   {
@@ -905,7 +963,8 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Waterproof transparent dressings for showering with a post-op wound—match what your team supplied.",
     tags: ["wound", "showering", "post-op"],
-    imagePath: "/images/catalogue-products/opsite-post-op-style-film-dressing.png",
+    imagePath:
+      "/images/catalogue-products/opsite-post-op-style-film-dressing.png",
     features: [
       "Film + absorbent pad variants",
       "Follow sterile technique if instructed",
@@ -914,11 +973,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       GB: {
         price: "~£8–12 (pack)",
         url: "https://www.amazon.co.uk/dp/B07CN65HBW",
-        dub: "https://dub.sh/X5GSlhl",},
+        dub: "https://dub.sh/X5GSlhl",
+      },
       US: {
         price: "~$12–20 (pack)",
         url: "https://www.amazon.com/dp/B003TT46QI",
-        dub: "https://dub.sh/E0GkDRE",},
+        dub: "https://dub.sh/E0GkDRE",
+      },
     },
   },
   {
@@ -935,10 +996,12 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       GB: {
         url: "https://www.amazon.co.uk/dp/B0796P2LRD",
-        dub: "https://dub.sh/boodojp",},
+        dub: "https://dub.sh/boodojp",
+      },
       US: {
         url: "https://www.amazon.com/dp/B018OS6TSQ",
-        dub: "https://dub.sh/JPZ2cCT",},
+        dub: "https://dub.sh/JPZ2cCT",
+      },
     },
   },
   {
@@ -958,11 +1021,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "~$40–90",
         url: "https://www.amazon.com/dp/B07PMKMNB6",
-        dub: "https://dub.sh/hZpZkRX",},
+        dub: "https://dub.sh/hZpZkRX",
+      },
       GB: {
         price: "~£30–70",
         url: "https://www.amazon.co.uk/dp/B07PMKMNB6",
-        dub: "https://dub.sh/ywvTW5a",},
+        dub: "https://dub.sh/ywvTW5a",
+      },
     },
   },
   {
@@ -980,10 +1045,12 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         url: "https://www.amazon.com/dp/B0DP7NJ6NW",
-        dub: "https://dub.sh/A9trlvn",},
+        dub: "https://dub.sh/A9trlvn",
+      },
       GB: {
         url: "https://www.amazon.co.uk/dp/B0BPH9WJHR",
-        dub: "https://dub.sh/CR3faKF",},
+        dub: "https://dub.sh/CR3faKF",
+      },
     },
   },
   {
@@ -1009,11 +1076,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "~$25–45",
         url: "https://www.amazon.com/dp/B07CD185S3",
-        dub: "https://dub.sh/s9BD8v6",},
+        dub: "https://dub.sh/s9BD8v6",
+      },
       GB: {
         price: "~£20–40",
         url: "https://www.amazon.co.uk/dp/B07CD185S3",
-        dub: "https://dub.sh/IHsLyn5",},
+        dub: "https://dub.sh/IHsLyn5",
+      },
     },
   },
   {
@@ -1038,11 +1107,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "~$25–45",
         url: "https://www.amazon.com/dp/B0GWLBCJFM",
-        dub: "https://dub.sh/j9Zsrhy",},
+        dub: "https://dub.sh/j9Zsrhy",
+      },
       GB: {
         price: "~£20–40",
         url: "https://www.amazon.co.uk/dp/B0GWLBCJFM",
-        dub: "https://dub.sh/SBuYjZj",},
+        dub: "https://dub.sh/SBuYjZj",
+      },
     },
   },
   {
@@ -1058,15 +1129,19 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Light support for daytime symptoms—pairs well with shoes and rehab.",
     tags: ["compression", "sport", "pain-relief"],
-    imagePath: "/images/catalogue-products/plantar-fasciitis-compression-sleeve.png",
+    imagePath:
+      "/images/catalogue-products/plantar-fasciitis-compression-sleeve.png",
     features: [],
     locations: {
       US: {
-        url: "https://www.amazon.com/Plantar-Fasciitis-Compression-Sleeves-Support/dp/B0C6T94X2H/ref=sr_1_2_sspa?dib=eyJ2IjoiMSJ9.YcMctg2BW3bUUbuzG3wwsKzVLkbkVx264aeW5Xp0NawXXYEWBiHU3QmK20BYn3KGTEtOtvzmzDK-M7OAe7yqFZI68iop0mIiqJovCBYxbNWk4ekyB9uFLxICY57qkhrfrOri2kJlKZajEz0NJ39-_M49WOChWuUhregqr0LNFsGc4ZyWlV8ASl4-Kw6rsZCZwluQJP2xtiLtbjwX1Fv7vQU9DGTZ3Dl_lgPxMMSzHmIV004iQ2ah8DKgh9QbfGI2y_H-eWPqoM5iaLWEjCJAfgOf6frWP1UP8-s19GGxMzc.RUYeWZBpRv5W7YW8OeNcJPV3jEEpx5c5Gy3linAEyd4&dib_tag=se&keywords=Plantar%2Bfasciitis%2Bcompression%2Bsleeve&qid=1776328576&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
-        dub: "https://dub.sh/THV3P0F",},
+        url:
+          "https://www.amazon.com/Plantar-Fasciitis-Compression-Sleeves-Support/dp/B0C6T94X2H/ref=sr_1_2_sspa?dib=eyJ2IjoiMSJ9.YcMctg2BW3bUUbuzG3wwsKzVLkbkVx264aeW5Xp0NawXXYEWBiHU3QmK20BYn3KGTEtOtvzmzDK-M7OAe7yqFZI68iop0mIiqJovCBYxbNWk4ekyB9uFLxICY57qkhrfrOri2kJlKZajEz0NJ39-_M49WOChWuUhregqr0LNFsGc4ZyWlV8ASl4-Kw6rsZCZwluQJP2xtiLtbjwX1Fv7vQU9DGTZ3Dl_lgPxMMSzHmIV004iQ2ah8DKgh9QbfGI2y_H-eWPqoM5iaLWEjCJAfgOf6frWP1UP8-s19GGxMzc.RUYeWZBpRv5W7YW8OeNcJPV3jEEpx5c5Gy3linAEyd4&dib_tag=se&keywords=Plantar%2Bfasciitis%2Bcompression%2Bsleeve&qid=1776328576&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
+        dub: "https://dub.sh/THV3P0F",
+      },
       GB: {
         url: "https://www.amazon.co.uk/dp/B07WPTNL11",
-        dub: "https://dub.sh/nhcBkZx",},
+        dub: "https://dub.sh/nhcBkZx",
+      },
     },
   },
   {
@@ -1090,11 +1165,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       US: {
         price: "~$35–70",
         url: "https://www.amazon.com/dp/B0CG9BHF5X",
-        dub: "https://dub.sh/Mx08urX",},
+        dub: "https://dub.sh/Mx08urX",
+      },
       GB: {
         price: "~£30–60",
         url: "https://www.amazon.co.uk/dp/B06Y5W5ZNT",
-        dub: "https://dub.sh/IRpyYvX",},
+        dub: "https://dub.sh/IRpyYvX",
+      },
     },
   },
   {
@@ -1118,11 +1195,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       GB: {
         price: "~£7–12 / year supply (example)",
         url: "https://www.amazon.co.uk/dp/B0BQCNJ7WR",
-        dub: "https://dub.sh/YGOZQlt",},
+        dub: "https://dub.sh/YGOZQlt",
+      },
       US: {
         price: "~$10–18 (example)",
         url: "https://www.amazon.com/dp/B086V74KKR",
-        dub: "https://dub.sh/KRJ2OiU",},
+        dub: "https://dub.sh/KRJ2OiU",
+      },
     },
   },
   {
@@ -1143,12 +1222,15 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         price: "~$8–15",
-        url: "https://www.amazon.com/Plantar-Fasciitis-Ball-Foot-Massager-Recovery/dp/B07QT7L1CZ/ref=sr_1_2_sspa?dib=eyJ2IjoiMSJ9.MwFdN-n5ff-wARGjMI2Q8SxVz5Xi-9P6eULwnoMG50y5l69590qXU3ArF98pS5zqE-OgeG0IYfTpuofSz6IG9q2Slp5YJSANarQai1dFYlMX6f-XR__rpNiV9uSlWQxSNfDd5Xuf1e9fE9TJ9ZNmOI-778iFXE9PtJGPA7xz8s-o3R5XAynzrbjCa4bpa9hsr5yHK5GcdL3B08uMjL8QNb5MbMg1SGjaRGyMxT15PnqxIOWGaOYdK9WTpYUSzQPXRfPT6F_UUVSA0Dh-0lEahALtUDoXgENDOmPBkXd_Zsg.f2lzUP4sEBUsCxvgIEwh1DrZPB4Xh5whYxmL3TcdiuI&dib_tag=se&keywords=Spiky+%2F+massage+ball+set+%28foot+release%29&qid=1776328808&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
-        dub: "https://dub.sh/1nuTUZ6",},
+        url:
+          "https://www.amazon.com/Plantar-Fasciitis-Ball-Foot-Massager-Recovery/dp/B07QT7L1CZ/ref=sr_1_2_sspa?dib=eyJ2IjoiMSJ9.MwFdN-n5ff-wARGjMI2Q8SxVz5Xi-9P6eULwnoMG50y5l69590qXU3ArF98pS5zqE-OgeG0IYfTpuofSz6IG9q2Slp5YJSANarQai1dFYlMX6f-XR__rpNiV9uSlWQxSNfDd5Xuf1e9fE9TJ9ZNmOI-778iFXE9PtJGPA7xz8s-o3R5XAynzrbjCa4bpa9hsr5yHK5GcdL3B08uMjL8QNb5MbMg1SGjaRGyMxT15PnqxIOWGaOYdK9WTpYUSzQPXRfPT6F_UUVSA0Dh-0lEahALtUDoXgENDOmPBkXd_Zsg.f2lzUP4sEBUsCxvgIEwh1DrZPB4Xh5whYxmL3TcdiuI&dib_tag=se&keywords=Spiky+%2F+massage+ball+set+%28foot+release%29&qid=1776328808&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
+        dub: "https://dub.sh/1nuTUZ6",
+      },
       GB: {
         price: "~£7–14",
         url: "https://www.amazon.co.uk/dp/B078H8QMCX",
-        dub: "https://dub.sh/ffGcCMw",},
+        dub: "https://dub.sh/ffGcCMw",
+      },
     },
   },
   {
@@ -1171,10 +1253,12 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       GB: {
         url: "https://www.amazon.co.uk/dp/B0CVBFXCGN",
-        dub: "https://dub.sh/vlASGNf",},
+        dub: "https://dub.sh/vlASGNf",
+      },
       US: {
         url: "https://www.amazon.com/s?k=fitflop+iqushion+women",
-        dub: "https://dub.sh/oXklsl8",},
+        dub: "https://dub.sh/oXklsl8",
+      },
     },
   },
   {
@@ -1198,11 +1282,13 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
       GB: {
         price: "~£150–220",
         url: "https://www.amazon.co.uk/dp/B0DX2HDRJS",
-        dub: "https://dub.sh/nBLeTkJ",},
+        dub: "https://dub.sh/nBLeTkJ",
+      },
       US: {
         price: "~$199",
         url: "https://www.amazon.com/dp/B0DX2HDRJS",
-        dub: "https://dub.sh/skqT3fj",},
+        dub: "https://dub.sh/skqT3fj",
+      },
     },
   },
   {
@@ -1223,10 +1309,12 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     locations: {
       US: {
         url: "https://www.amazon.com/s?k=brooks+ghost+neutral+running+shoes",
-        dub: "https://dub.sh/AxocBA4",},
+        dub: "https://dub.sh/AxocBA4",
+      },
       GB: {
         url: "https://www.amazon.co.uk/s?k=brooks+ghost+neutral+running+shoes",
-        dub: "https://dub.sh/oKnGVKz",},
+        dub: "https://dub.sh/oKnGVKz",
+      },
     },
   },
 ];

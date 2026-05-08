@@ -9,6 +9,9 @@ type ReviewsLinkProps = {
   size?: "sm" | "md" | "lg";
   className?: string;
   lang: Lang;
+  /** Defaults to `/reviews` (EN). Pass localized reviews path on translated pages. */
+  href?: string;
+  ariaLabel?: string;
 };
 
 const ReviewsLink = ({
@@ -16,12 +19,18 @@ const ReviewsLink = ({
   size = "sm",
   className,
   lang = "en",
+  href = "/reviews",
+  ariaLabel = "View all reviews",
 }: ReviewsLinkProps) => {
   const iconSize = {
     sm: 16,
     md: 20,
     lg: 24,
   }[size];
+
+  const clipUid = React.useId().replace(/:/g, "");
+  const yellowClipId = `${clipUid}-yellowPart`;
+  const greyClipId = `${clipUid}-greyPart`;
 
   const t = content[lang]?.reviewsLink || content.en.reviewsLink;
 
@@ -34,9 +43,9 @@ const ReviewsLink = ({
           : "hover:bg-transparent",
         className,
       )}
-      href="/reviews"
+      href={href}
       role="button"
-      aria-label="View all reviews"
+      aria-label={ariaLabel}
     >
       <div className="flex mr-2 transition-all duration-200">
         {/* Full Star 1 */}
@@ -115,10 +124,10 @@ const ReviewsLink = ({
           className="group-hover:rotate-12 transition-transform duration-300"
         >
           <defs>
-            <clipPath id="yellowPart">
+            <clipPath id={yellowClipId}>
               <rect x="0" y="0" width="15" height="24" />
             </clipPath>
-            <clipPath id="greyPart">
+            <clipPath id={greyClipId}>
               <rect x="15" y="0" width="9" height="24" />
             </clipPath>
           </defs>
@@ -130,7 +139,7 @@ const ReviewsLink = ({
             strokeWidth="1.5"
             strokeLinejoin="round"
             strokeLinecap="round"
-            clipPath="url(#yellowPart)"
+            clipPath={`url(#${yellowClipId})`}
           />
           {/* Grey part (last 3/8) */}
           <path
@@ -140,7 +149,7 @@ const ReviewsLink = ({
             strokeWidth="1.5"
             strokeLinejoin="round"
             strokeLinecap="round"
-            clipPath="url(#greyPart)"
+            clipPath={`url(#${greyClipId})`}
           />
         </svg>
       </div>

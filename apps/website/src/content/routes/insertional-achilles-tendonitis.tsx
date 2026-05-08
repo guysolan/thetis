@@ -1,5 +1,6 @@
 import { BookOpen, Calendar, HelpCircle } from "lucide-react";
 import type { BaseRoute } from "./types";
+import { CONDITION_LEARN_HUB_DESCRIPTION } from "../condition-hub-copy";
 
 const iatFaq = (
     slug: string,
@@ -142,13 +143,7 @@ export const insertionalAchillesTendonitisGuideHubNavRoute: BaseRoute = {
         es: "Insertional Achilles tendonitis — aprender",
         it: "Insertional Achilles tendonitis — approfondisci",
     },
-    description: {
-        en: "Course, FAQs, staged patient guides, and shop for insertional Achilles tendonitis.",
-        de: "Kurs, FAQs, gestaffelte Leitfäden und Shop.",
-        fr: "Cours, FAQ, guides par étapes et boutique.",
-        es: "Curso, preguntas frecuentes, guías por fases y tienda.",
-        it: "Corso, FAQ, guide per fasi e shop.",
-    },
+    description: CONDITION_LEARN_HUB_DESCRIPTION["insertional-achilles-tendonitis"],
     slugTranslations: {
         en: "learn/insertional-achilles-tendonitis",
         de: "learn/insertional-achilles-tendonitis",
@@ -206,18 +201,18 @@ export const insertionalAchillesTendonitisCourseRoutes: BaseRoute[] = [
         conditionId: "insertional-achilles-tendonitis",
         slug: "course/insertional-achilles-tendonitis",
         title: {
-            en: "Insertional Achilles tendonitis course (placeholder)",
-            de: "Insertional Achilles tendonitis course (placeholder)",
-            fr: "Insertional Achilles tendonitis course (placeholder)",
-            es: "Insertional Achilles tendonitis course (placeholder)",
-            it: "Insertional Achilles tendonitis course (placeholder)",
+            en: "Insertional Achilles tendonitis course",
+            de: "Kurs: insertionelle Achillessehnenentzündung",
+            fr: "Cours tendinite d’Achille insertionnelle",
+            es: "Curso de tendinitis insercional de Aquiles",
+            it: "Corso tendinite achillea inserzionale",
         },
         description: {
-            en: "Placeholder — content coming soon.",
-            de: "Placeholder — content coming soon.",
-            fr: "Placeholder — content coming soon.",
-            es: "Placeholder — content coming soon.",
-            it: "Placeholder — content coming soon.",
+            en: "Full course coming soon — free guides and FAQs are available on the learn hub now.",
+            de: "Vollständiger Kurs folgt — kostenlose Leitfäden und FAQs gibt es jetzt im Lern-Hub.",
+            fr: "Cours complet bientôt — guides et FAQ gratuits dès maintenant dans l’espace d’apprentissage.",
+            es: "Curso completo próximamente — guías y preguntas frecuentes gratuitas ya en el centro de aprendizaje.",
+            it: "Corso completo in arrivo — guide e FAQ gratuite già disponibili nell’area learning.",
         },
         slugTranslations: {
             en: "course/insertional-achilles-tendonitis",
