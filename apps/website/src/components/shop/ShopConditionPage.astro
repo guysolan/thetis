@@ -39,6 +39,22 @@ interface Props {
 
 const { conditionId, lang } = Astro.props;
 const c = getConditionById(conditionId);
+const courseProductId =
+  conditionId === "plantar-fasciitis"
+    ? SHOPIFY_COURSE_PRODUCTS.PLANTAR_FASCIITIS_COURSE
+    : SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE;
+const courseVariantId =
+  conditionId === "plantar-fasciitis"
+    ? COURSE_VARIANTS.PLANTAR_FASCIITIS
+    : COURSE_VARIANTS.ESSENTIALS;
+const courseSlug =
+  conditionId === "plantar-fasciitis"
+    ? "plantar_fasciitis_course"
+    : "achilles_rupture_course";
+const courseImageAlt =
+  conditionId === "plantar-fasciitis"
+    ? "Plantar fasciitis course lesson preview"
+    : "Achilles tendon healing position comparison";
 
 function shopConditionHeroTagline(lang: Lang, conditionLabel: string): string {
   const name = conditionLabel
@@ -506,7 +522,7 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
             <article class="flex flex-col bg-neutral-50 dark:bg-neutral-900/50 shadow-sm p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
               <a
                 href={learnMoreSplintHref}
-                class="block hover:opacity-95 mb-5 border border-primary/20 dark:border-primary/30 rounded-xl w-full max-w-[320px] aspect-square overflow-hidden mr-auto"
+                class="block hover:opacity-95 mr-auto mb-5 border border-primary/20 dark:border-primary/30 rounded-xl w-full max-w-[320px] aspect-square overflow-hidden"
               >
                 <img
                   src="/images/night_splint_bed_top_square.jpg"
@@ -535,7 +551,10 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                   {at.freeShipping}
                 </span>
                 <span class="inline-flex items-center gap-1.5 bg-primary/10 px-2.5 py-1 rounded-full font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-none">
-                  <ShieldCheck className="w-3.5 h-3.5 text-primary" aria-hidden />
+                  <ShieldCheck
+                    className="w-3.5 h-3.5 text-primary"
+                    aria-hidden
+                  />
                   {at.guarantee30Day}
                 </span>
                 <span class="inline-flex items-center gap-1.5 bg-primary/10 px-2.5 py-1 rounded-full font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-none">
@@ -565,10 +584,10 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
             </article>
             {courseRoute ? (
               <article class="flex flex-col bg-neutral-50 dark:bg-neutral-900/50 shadow-sm p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
-                <div class="mb-5 border border-primary/15 rounded-xl w-full max-w-[320px] overflow-hidden mr-auto">
+                <div class="mr-auto mb-5 border border-primary/15 rounded-xl w-full max-w-[320px] overflow-hidden">
                   <img
                     src={achillesCourseImage.src}
-                    alt="Achilles tendon healing position comparison"
+                    alt={courseImageAlt}
                     width={1024}
                     height={1024}
                     class="w-full h-auto object-cover"
@@ -583,7 +602,7 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                 </p>
                 <VariantPriceDisplay
                   client:load
-                  variantId={COURSE_VARIANTS.ESSENTIALS}
+                  variantId={courseVariantId}
                   size="lg"
                   stripUsPrefix
                   className="mb-2"
@@ -598,7 +617,8 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                 <div class="flex sm:flex-row flex-col flex-wrap gap-3 mt-auto">
                   <CourseBuyButton
                     client:load
-                    productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                    productId={courseProductId}
+                    courseSlug={courseSlug}
                     size="lg"
                     className="w-full sm:w-auto"
                   >
@@ -626,6 +646,8 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
             {fromThetisLinks.map((r) => {
               const isCourse =
                 courseRoute !== null && r.href === courseRoute.href;
+              const isBuyableCourse =
+                isCourse && conditionId === "plantar-fasciitis";
               const showSplintThumb =
                 !isCourse &&
                 isAchillesShop &&
@@ -640,44 +662,97 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                   : "flex-col";
               return (
                 <li>
-                  <a
-                    href={r.href}
-                    class={cn(
-                      "flex items-stretch gap-5 bg-primary/5 hover:bg-primary/10 shadow-sm hover:shadow-md p-5 sm:p-6 border border-primary/20 hover:border-primary/40 rounded-xl transition-all",
-                      rowLayout,
-                    )}
-                  >
-                    {isCourse ? (
+                  {isBuyableCourse ? (
+                    <article class="flex sm:flex-row flex-col items-stretch gap-5 bg-primary/5 shadow-sm p-5 sm:p-6 border border-primary/20 rounded-xl">
                       <div class="flex justify-center items-center bg-primary/10 border border-primary/15 rounded-xl w-[150px] h-[150px] shrink-0">
                         <BookOpen
                           className="w-14 h-14 text-primary"
                           aria-hidden
                         />
                       </div>
-                    ) : showSplintThumb ? (
-                      <div class="border border-primary/15 rounded-xl w-[150px] h-[150px] overflow-hidden shrink-0">
-                        <img
-                          src="/images/night_splint_bed_top_square.jpg"
-                          alt=""
-                          class="w-full h-full object-cover"
-                          width={150}
-                          height={150}
-                          loading="lazy"
+                      <div class="flex flex-col flex-1 min-w-0">
+                        <h3 class="mb-2 font-semibold text-primary text-lg leading-snug">
+                          {r.title}
+                        </h3>
+                        <p class="mb-3 text-neutral-600 dark:text-neutral-400 text-sm">
+                          {r.description}
+                        </p>
+                        <VariantPriceDisplay
+                          client:load
+                          variantId={courseVariantId}
+                          size="lg"
+                          stripUsPrefix
+                          className="mb-2"
                         />
+                        <p class="flex items-center gap-2 mb-4 text-primary text-sm">
+                          <Check className="w-4 h-4 shrink-0" aria-hidden />
+                          {at.instantAccess}
+                        </p>
+                        <div class="flex sm:flex-row flex-col flex-wrap gap-3 mt-auto">
+                          <CourseBuyButton
+                            client:load
+                            productId={courseProductId}
+                            courseSlug={courseSlug}
+                            size="lg"
+                            className="w-full sm:w-auto"
+                          >
+                            {at.addCourse}
+                          </CourseBuyButton>
+                          <a
+                            href={r.href}
+                            class={cn(
+                              buttonVariants({
+                                variant: "outline",
+                                size: "lg",
+                              }),
+                              "w-full sm:w-auto font-semibold",
+                            )}
+                          >
+                            {t.viewCourse.replace(/\s*→\s*$/, "")}
+                          </a>
+                        </div>
                       </div>
-                    ) : null}
-                    <div class="flex flex-col flex-1 min-w-0">
-                      <h3 class="mb-2 font-semibold text-primary text-lg leading-snug">
-                        {r.title}
-                      </h3>
-                      <p class="flex-1 text-neutral-600 dark:text-neutral-400 text-sm">
-                        {r.description}
-                      </p>
-                      <span class="inline-block mt-3 font-medium text-primary text-sm">
-                        {isCourse ? t.viewCourse : t.viewProduct}
-                      </span>
-                    </div>
-                  </a>
+                    </article>
+                  ) : (
+                    <a
+                      href={r.href}
+                      class={cn(
+                        "flex items-stretch gap-5 bg-primary/5 hover:bg-primary/10 shadow-sm hover:shadow-md p-5 sm:p-6 border border-primary/20 hover:border-primary/40 rounded-xl transition-all",
+                        rowLayout,
+                      )}
+                    >
+                      {isCourse ? (
+                        <div class="flex justify-center items-center bg-primary/10 border border-primary/15 rounded-xl w-[150px] h-[150px] shrink-0">
+                          <BookOpen
+                            className="w-14 h-14 text-primary"
+                            aria-hidden
+                          />
+                        </div>
+                      ) : showSplintThumb ? (
+                        <div class="border border-primary/15 rounded-xl w-[150px] h-[150px] overflow-hidden shrink-0">
+                          <img
+                            src="/images/night_splint_bed_top_square.jpg"
+                            alt=""
+                            class="w-full h-full object-cover"
+                            width={150}
+                            height={150}
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : null}
+                      <div class="flex flex-col flex-1 min-w-0">
+                        <h3 class="mb-2 font-semibold text-primary text-lg leading-snug">
+                          {r.title}
+                        </h3>
+                        <p class="flex-1 text-neutral-600 dark:text-neutral-400 text-sm">
+                          {r.description}
+                        </p>
+                        <span class="inline-block mt-3 font-medium text-primary text-sm">
+                          {isCourse ? t.viewCourse : t.viewProduct}
+                        </span>
+                      </div>
+                    </a>
+                  )}
                 </li>
               );
             })}

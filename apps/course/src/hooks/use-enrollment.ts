@@ -10,14 +10,21 @@ export type CourseType =
   | "plantar-fasciitis";
 
 const COURSE_SLUGS = [
+  "achilles_rupture_course",
+  "achilles_rupture_professionals_course",
+  "plantar_fasciitis_course",
+  // pre-rename rows until DB migration is applied
   "standard_course",
   "premium_course",
-  "plantar_fasciitis_course",
 ];
 
 function slugToCourseType(slug: string): CourseType {
-  if (slug === "premium_course") return "premium";
+  if (slug === "achilles_rupture_professionals_course") return "premium";
   if (slug === "plantar_fasciitis_course") return "plantar-fasciitis";
+  if (slug === "achilles_rupture_course") return "standard";
+  // legacy rows (before product_slug rename migration)
+  if (slug === "premium_course") return "premium";
+  if (slug === "standard_course") return "standard";
   return "standard";
 }
 

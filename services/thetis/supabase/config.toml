@@ -157,3 +157,7 @@ inspector_port = 8083
 enabled = true
 port = 54327
 backend = "postgres"
+
+# Shopify POSTs without a Supabase JWT; auth is handled in-code via HMAC.
+[functions.shopify-order-webhook]
+verify_jwt = false

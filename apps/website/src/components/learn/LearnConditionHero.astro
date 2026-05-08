@@ -51,6 +51,14 @@ const learnHeroCommerce: Record<
 const commerce = learnHeroCommerce[lang];
 const shopHref = getLocalizedShopHubHref(lang, conditionId);
 const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
+const courseProductId =
+    conditionId === "plantar-fasciitis"
+        ? SHOPIFY_COURSE_PRODUCTS.PLANTAR_FASCIITIS_COURSE
+        : SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE;
+const courseSlug =
+    conditionId === "plantar-fasciitis"
+        ? "plantar_fasciitis_course"
+        : "achilles_rupture_course";
 ---
 
 <section class="pb-16 md:pb-24 color-gradient">
@@ -125,7 +133,8 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                 >
                     <CourseBuyButton
                         client:load
-                        productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
+                        productId={courseProductId}
+                        courseSlug={courseSlug}
                         size="lg"
                         className="shadow-lg font-bold text-lg"
                     >

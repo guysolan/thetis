@@ -24,6 +24,11 @@ interface CartLine {
   };
 }
 
+export interface CartLineAttribute {
+  key: string;
+  value: string;
+}
+
 interface Cart {
   id: string;
   checkoutUrl: string;
@@ -163,6 +168,7 @@ export async function createCart(
   variantId: string,
   quantity: number = 1,
   buyerCountryCode?: string,
+  attributes?: CartLineAttribute[],
 ): Promise<Cart> {
   const query = `
         mutation cartCreate($input: CartInput!) {
@@ -180,13 +186,18 @@ export async function createCart(
     `;
 
   const input: {
-    lines: Array<{ merchandiseId: string; quantity: number }>;
+    lines: Array<{
+      merchandiseId: string;
+      quantity: number;
+      attributes?: CartLineAttribute[];
+    }>;
     buyerIdentity?: { countryCode: string };
   } = {
     lines: [
       {
         merchandiseId: variantId,
         quantity,
+        ...(attributes?.length ? { attributes } : {}),
       },
     ],
   };
@@ -254,6 +265,7 @@ export async function addToCart(
   cartId: string,
   variantId: string,
   quantity: number = 1,
+  attributes?: CartLineAttribute[],
 ): Promise<Cart> {
   const query = `
         mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
@@ -276,6 +288,7 @@ export async function addToCart(
       {
         merchandiseId: variantId,
         quantity,
+        ...(attributes?.length ? { attributes } : {}),
       },
     ],
   };

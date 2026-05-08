@@ -5,6 +5,7 @@ import { atom, computed } from "nanostores";
 import {
   addToCart as addToCartApi,
   type Cart,
+  type CartLineAttribute,
   createCart,
   getCart,
   removeFromCart as removeFromCartApi,
@@ -149,6 +150,7 @@ export async function addToCart(
   variantId: string,
   quantity: number = 1,
   shouldOpenCart: boolean = true,
+  attributes?: CartLineAttribute[],
 ): Promise<Cart> {
   $isLoading.set(true);
   $error.set(null);
@@ -177,9 +179,19 @@ export async function addToCart(
     let updatedCart: Cart;
 
     if (currentCart?.id) {
-      updatedCart = await addToCartApi(currentCart.id, variantId, quantity);
+      updatedCart = await addToCartApi(
+        currentCart.id,
+        variantId,
+        quantity,
+        attributes,
+      );
     } else {
-      updatedCart = await createCart(variantId, quantity, countryCode);
+      updatedCart = await createCart(
+        variantId,
+        quantity,
+        countryCode,
+        attributes,
+      );
       if (typeof window !== "undefined") {
         localStorage.setItem(CART_ID_KEY, updatedCart.id);
       }

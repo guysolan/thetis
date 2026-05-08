@@ -7,6 +7,7 @@ import {
   isCourseShopifyCheckoutAllowed,
   SHOPIFY_COURSE_PRODUCTS,
   SHOPIFY_COURSE_VARIANTS,
+  type ShopifyCourseSlug,
 } from "@/lib/shopify-course-price";
 import {
   getCountryCodeForPricing,
@@ -17,6 +18,7 @@ interface CourseBuyButtonProps
   extends Omit<ButtonProps, "onClick" | "disabled"> {
   productId: string;
   quantity?: number;
+  courseSlug?: ShopifyCourseSlug;
   children?: React.ReactNode;
 }
 
@@ -28,12 +30,16 @@ const getVariantId = (productId: string): string | null => {
   if (productId === SHOPIFY_COURSE_PRODUCTS.PROFESSIONALS_COURSE) {
     return SHOPIFY_COURSE_VARIANTS.PROFESSIONALS_COURSE;
   }
+  if (productId === SHOPIFY_COURSE_PRODUCTS.PLANTAR_FASCIITIS_COURSE) {
+    return SHOPIFY_COURSE_VARIANTS.PLANTAR_FASCIITIS_COURSE;
+  }
   return null;
 };
 
 export function CourseBuyButton({
   productId,
   quantity = 1,
+  courseSlug,
   className,
   size = "lg",
   children,
@@ -76,7 +82,14 @@ export function CourseBuyButton({
 
     setIsAdding(true);
     try {
-      await addToCart(variantId, quantity);
+      await addToCart(
+        variantId,
+        quantity,
+        true,
+        courseSlug
+          ? [{ key: "_thetis_course_slug", value: courseSlug }]
+          : undefined,
+      );
       setJustAdded(true);
       setTimeout(() => setJustAdded(false), 2000);
     } catch (error) {

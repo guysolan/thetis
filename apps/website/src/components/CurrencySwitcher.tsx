@@ -78,12 +78,9 @@ export function CurrencySwitcher({ className }: CurrencySwitcherProps) {
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         title={currentLabel}
-        aria-label={`Shop region: ${currentLabel} (${country})`}
+        aria-label={`Shop region: ${currentLabel}`}
       >
         <MapPin size={16} className="opacity-80 shrink-0" aria-hidden />
-        <span className="font-semibold text-xs" aria-hidden>
-          {currentOption.currencySymbol}
-        </span>
         <span className="min-w-0 font-semibold tabular-nums text-left tracking-tight">
           {country}
         </span>
@@ -120,9 +117,6 @@ export function CurrencySwitcher({ className }: CurrencySwitcherProps) {
                       : "text-gray-700 hover:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-800",
                   )}
                 >
-                  <span className="w-6 font-semibold text-right shrink-0" aria-hidden>
-                    {opt.currencySymbol}
-                  </span>
                   <span className="w-7 font-semibold tabular-nums shrink-0">
                     {opt.code}
                   </span>

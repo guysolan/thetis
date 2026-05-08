@@ -1,9 +1,9 @@
-A few tips to get the most from your course:
+A few tips to get the most from your {{ data.course_name }}:
 
-1. Log in at {{ vars.course_url }}
-2. Start with 'Emergency care' and the 'Week 1 checklist'
+1. Log in at {{ data.course_url }}
+2. Start with {{ data.sms_start_lessons }}
 3. Work through the lessons at your own pace.
 
-Most importantly: keep your foot pointed down (plantarflexion) unless your clinician says otherwise. This keeps the tendon ends together.
+Most importantly: {{ data.sms_key_principle }}
 
 - Thetis

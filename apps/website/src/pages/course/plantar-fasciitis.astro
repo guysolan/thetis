@@ -1,9 +1,59 @@
 ---
-import CoursePlaceholder from "@/layouts/CoursePlaceholder.astro";
+import Layout from "@/layouts/Layout.astro";
+import CourseBuyButton from "@/components/CourseBuyButton";
+import {
+    fetchCoursePrice,
+    SHOPIFY_COURSE_PRODUCTS,
+} from "@/lib/shopify-course-price";
+import { COURSE_URL } from "@/lib/env";
+
+const priceData = await fetchCoursePrice(
+    SHOPIFY_COURSE_PRODUCTS.PLANTAR_FASCIITIS_COURSE,
+    "GB",
+);
+const formattedPrice = priceData?.formattedPrice || "£29.99";
 ---
 
-<CoursePlaceholder
-    title="Plantar fasciitis course (placeholder)"
-    description="Placeholder — content coming soon."
+<Layout
+    title="Plantar fasciitis course"
+    description="A practical, surgeon-led course for plantar fasciitis recovery."
     lang="en"
-/>
+>
+    <main class="bg-gradient-to-b from-primary/10 to-white">
+        <section class="mx-auto px-4 py-20 md:py-28 max-w-5xl">
+            <div class="mx-auto max-w-3xl text-center">
+                <p class="inline-flex bg-primary/10 mb-5 px-4 py-2 rounded-full font-semibold text-primary text-sm uppercase tracking-wider">
+                    Plantar fasciitis course
+                </p>
+                <h1 class="mb-6 font-bold text-neutral-900 text-4xl md:text-6xl leading-tight">
+                    A clear plan for stubborn heel pain
+                </h1>
+                <p class="mx-auto mb-8 max-w-2xl text-neutral-600 text-lg md:text-xl leading-relaxed">
+                    Learn the stretching, loading, footwear, and treatment steps
+                    that matter for plantar fasciitis, with practical guidance you
+                    can follow at home.
+                </p>
+                <div class="flex sm:flex-row flex-col justify-center items-center gap-4 mb-5">
+                    <CourseBuyButton
+                        client:load
+                        productId={SHOPIFY_COURSE_PRODUCTS.PLANTAR_FASCIITIS_COURSE}
+                        courseSlug="plantar_fasciitis_course"
+                        size="lg"
+                        className="shadow-lg font-bold text-lg"
+                    >
+                        Add course to cart
+                    </CourseBuyButton>
+                    <a
+                        href={`${COURSE_URL}/plantar-fasciitis`}
+                        class="font-semibold text-primary hover:underline"
+                    >
+                        Already bought it? Open course &rarr;
+                    </a>
+                </div>
+                <p class="text-neutral-500 text-sm">
+                    {formattedPrice} one-time payment. Instant course access after checkout.
+                </p>
+            </div>
+        </section>
+    </main>
+</Layout>

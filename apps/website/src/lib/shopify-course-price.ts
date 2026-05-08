@@ -6,7 +6,13 @@ const STOREFRONT_ACCESS_TOKEN = "784883c28d6484a8804b44ae00adfb99";
 export const SHOPIFY_COURSE_PRODUCTS = {
   ESSENTIALS_COURSE: "9846187786568",
   PROFESSIONALS_COURSE: "9846188081480",
+  PLANTAR_FASCIITIS_COURSE: "10048943227208",
 } as const;
+
+export type ShopifyCourseSlug =
+  | "achilles_rupture_course"
+  | "achilles_rupture_professionals_course"
+  | "plantar_fasciitis_course";
 
 /**
  * Splint product ID (numeric; order webhook line_items[].product_id).
@@ -20,6 +26,7 @@ export const SHOPIFY_SPLINT_PRODUCT_ID = "8572432253256";
 export const SHOPIFY_COURSE_VARIANTS = {
   ESSENTIALS_COURSE: "gid://shopify/ProductVariant/52265314353480",
   PROFESSIONALS_COURSE: "gid://shopify/ProductVariant/52265315828040",
+  PLANTAR_FASCIITIS_COURSE: "gid://shopify/ProductVariant/53062046056776",
 } as const;
 
 /** ISO 3166-1 alpha-2 — regions where course checkout on Shopify is enabled. */
